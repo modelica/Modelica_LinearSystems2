@@ -1,0 +1,15 @@
+LibraryInfoMenuSeparator(
+  category="libraries",
+  pos=1001)
+
+LibraryInfoMenuCommand(
+  category="libraries",
+  text="Linear Systems",
+  reference="Modelica_LinearSystems2",
+  version="2.0",
+  isModel=true,
+  description="Modelica_LinearSystems2 Library (2.0)",
+  ModelicaVersion="3.1",
+  pos=1001)
+
+// LibraryInfoPreload(reference="Modelica_LinearSystems2")
