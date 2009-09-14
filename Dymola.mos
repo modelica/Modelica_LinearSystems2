@@ -1,2 +1,0 @@
-Advanced.ScriptingWindow.UseNewFeatures = true  // turns on new scripting window with mathematical type setting
-//Advanced.MathML.RenderGreekLetters = false // turns off special rendering of Greek characters
