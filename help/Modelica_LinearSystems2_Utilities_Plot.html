@@ -1,0 +1,144 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.Utilities.Plot</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Functions for generation of 2D-plots&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Plot<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Utilities.Plot"></A><A HREF="Modelica_LinearSystems2_Utilities.html#Modelica_LinearSystems2.Utilities"
+>Modelica_LinearSystems2.Utilities</A>.Plot</H2>
+<B>Functions for generation of 2D-plots</B>
+<P>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This package provides functions to plot curves in two dimensions. Here is a short overview:
+</p>
+
+<p>
+A figure consists of a <u>set of diagrams</u>. Different functions are provided
+to either plot one diagram (Plot.diagram) to plot several diagrams under each other
+(Plot.vectorDiagrams) or to plot several diagrams in matrix layout
+(Plot.matrixDiagrams).
+</p>
+
+<p>
+Every diagram can have a set of <u>curves</u>. Every diagram has the same
+width, defined by <u>diagramWidth</u>. The height of a diagram is defined
+by variable <u>heightRatio</u> 
+(diagram height in row j = diagram[j].heightRatio*diagramWidth). 
+Several curves can be displayed in one diagram.
+</p>
+ 
+<pre></PRE><P>
+
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Utilities.PlotS.png" ALT="Modelica_LinearSystems2.Utilities.Plot.Examples" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Utilities_Plot_Examples.html#Modelica_LinearSystems2.Utilities.Plot.Examples"
+>Examples</A>
+</TD><TD>Demonstrate the usage of the plot functions</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Utilities.Plot.diagramS.png" ALT="Modelica_LinearSystems2.Utilities.Plot.diagram" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot.diagram"
+>diagram</A>
+</TD><TD>Plot one diagram</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Utilities.Plot.diagramS.png" ALT="Modelica_LinearSystems2.Utilities.Plot.diagramVector" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot.diagramVector"
+>diagramVector</A>
+</TD><TD>Plot several diagrams in vector layout</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Utilities.Plot.diagramS.png" ALT="Modelica_LinearSystems2.Utilities.Plot.diagramMatrix" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot.diagramMatrix"
+>diagramMatrix</A>
+</TD><TD>Plot several diagrams in matrix layout</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Utilities.Plot.TypesS.png" ALT="Modelica_LinearSystems2.Utilities.Plot.Types" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types"
+>Types</A>
+</TD><TD>Types used for the plotting functions</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Utilities.Plot.TypesS.png" ALT="Modelica_LinearSystems2.Utilities.Plot.Records" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records"
+>Records</A>
+</TD><TD>Records used to define the function interfaces</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE diagram<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Utilities.Plot.diagram"></A><A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</A>.diagram</H2>
+<B>Plot one diagram</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This function plots a set of 2-dimensional curves in a diagram.
+For an overview, see the documentation of package
+<A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</a>.
+</p>
+ 
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>diagram</TD><TD>Diagram to be shown</TD></TR>
+<TR><TD>device</TD><TD>Properties of device where figure is shown</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE diagramVector<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Utilities.Plot.diagramVector"></A><A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</A>.diagramVector</H2>
+<B>Plot several diagrams in vector layout</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+ 
+<p>
+This function plots a set of 2-dimensional curves in a set of diagrams
+using a vector layout. For an overview, see the documentation of package
+<A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</a>.
+</p>
+ 
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>diagram[:]</TD><TD>Properties of a set of diagrams (vector layout)</TD></TR>
+<TR><TD>device</TD><TD>Properties of device where figure is shown</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE diagramMatrix<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Utilities.Plot.diagramMatrix"></A><A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</A>.diagramMatrix</H2>
+<B>Plot several diagrams in matrix layout</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+ 
+<p>
+This function plots a set of 2-dimensional curves in a set of diagrams
+using a matrix layout. For an overview, see the documentation of package
+<A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</a>.
+</p>
+ 
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>diagram[:, :]</TD><TD>Properties of a set of diagrams (matrix layout)</TD></TR>
+<TR><TD>device</TD><TD>Properties of device where figure is shown</TD></TR>
+</TABLE>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:57 2009.
+</address></BODY>
+</HTML>

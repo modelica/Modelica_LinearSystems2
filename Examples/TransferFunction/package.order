@@ -1,0 +1,10 @@
+plotPolesAndZeros
+importFromFile
+operationsOnTransferFunctions
+plotBode1
+plotBode2
+plotBode3
+plotBodeFilter2
+plotImpulse
+plotInital
+plotStep

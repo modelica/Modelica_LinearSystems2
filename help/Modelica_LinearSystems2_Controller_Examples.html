@@ -1,0 +1,151 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.Controller.Examples</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Demonstrate the usage of package Controller&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Examples<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Controller.Examples"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.Examples</H2>
+<B>Demonstrate the usage of package Controller</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from Modelica.Icons.Library (Icon for library).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Examples.ComponentsS.png" ALT="Modelica_LinearSystems2.Controller.Examples.Components" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples_Components.html#Modelica_LinearSystems2.Controller.Examples.Components"
+>Components</A>
+</TD><TD>Contains components of the systems used in Examples package</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Examples.FirstExampleS.png" ALT="Modelica_LinearSystems2.Controller.Examples.FirstExample" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples.FirstExample"
+>FirstExample</A>
+</TD><TD>First example to demonstrate representative block</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Examples.FirstExampleS.png" ALT="Modelica_LinearSystems2.Controller.Examples.SimpleControlledDrive" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples.SimpleControlledDrive"
+>SimpleControlledDrive</A>
+</TD><TD>Simple P-PI cascade controller to control a flexible drive</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Examples.DoublePendulumS.png" ALT="Modelica_LinearSystems2.Controller.Examples.DoublePendulum" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples.DoublePendulum"
+>DoublePendulum</A>
+</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE FirstExample<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Examples.FirstExampleI.png" ALT="Modelica_LinearSystems2.Controller.Examples.FirstExample" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Examples.FirstExample"></A><A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
+>Modelica_LinearSystems2.Controller.Examples</A>.FirstExample</H2>
+<B>First example to demonstrate representative block</B><p>
+<P><H3>Information</H3></P>
+Extends from Modelica.Icons.Example (Icon for an example model).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>w</TD><TD>&nbsp;</TD></TR>
+<TR><TD>D</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE SimpleControlledDrive<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Examples.FirstExampleI.png" ALT="Modelica_LinearSystems2.Controller.Examples.SimpleControlledDrive" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Examples.SimpleControlledDrive"></A><A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
+>Modelica_LinearSystems2.Controller.Examples</A>.SimpleControlledDrive</H2>
+<B>Simple P-PI cascade controller to control a flexible drive</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This example demonstrates the control of a simple model
+of a flexible drive system with a continuous or discrete
+P-PI cascade controller. Simulate for 3 s and plot
+</p>
+<pre>
+  ramp.y          (reference angle of loadInertia)
+  loadInertia.phi (angle of loadInertia)
+  loadInertia.w   (speed of loadInertia)
+  torque.tau      (motor torque)         
+</pre>
+<p>
+The standard setting in component sampleClock models a continuous controller.
+This means that all 3 samplers are just dummy components containing the
+equation "y=u" and that the PI component in the controller is a continuous
+PI controller.
+</p>
+<p>
+Change sampleClock.blockType to "Discrete" block. By this global setting,
+the 3 sampler blocks and the PI speed controller are transformed into
+a discrete representation. The base sample time is defined in
+component sampleClock (= 0.02 s). Every discrete component samples
+its input and output. The sampling time of every component is a multiple
+of the base sample time (defined via parameter sampleFactor). 
+Here, the sampler and the PI speed controller are sampled with the
+base sample frequency. The sample time of the 2 samplers and
+of the P position controller is a factor of 5 slower.
+</p>
+<p>
+When comparing the simulations of the continuous and the 
+(more realistic) discrete representation, it turns out that the
+discrete control systems works a bit worse. This can be improved
+by reducing the sample time in sampleClock.
+</p>
+<p>
+The Controller library has several blocks to model this system
+even more realistically, e.g, by component AD converter to model
+the quantization errors of the analog measurement signals,
+component DA converter to model the quantization errors and computing
+time to determine the analog actuator (torque) signal, and
+component Noise to add uniformly distributed noise to
+the measurement signals.
+</p>
+<p>
+In the following figure simulation results of the discrete and
+of the continuous controller are shown:
+</p>
+<p align="center">
+<img src="../Extras/Images/SimpleControlledDrive_Plot1.png">
+</p>
+<pre></PRE><P>
+Extends from Modelica.Icons.Example (Icon for an example model).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>kp</TD><TD>Gain of P position controller</TD></TR>
+<TR><TD>kv</TD><TD>Gain of PI speed controller</TD></TR>
+<TR><TD>Tv</TD><TD>Time constant of PI speed controller [s]</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE DoublePendulum<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Examples.DoublePendulumI.png" ALT="Modelica_LinearSystems2.Controller.Examples.DoublePendulum" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Examples.DoublePendulum"></A><A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
+>Modelica_LinearSystems2.Controller.Examples</A>.DoublePendulum</H2>
+<P><H3>Information</H3></P>
+<PRE></pre>
+ 
+This example shows a control system with constant state feedback.
+The system model of a crane trolles system is taken from [1]. The
+feedback matrix and the pre filter can be loaded from MATLAB files. By default, this files 
+are generated by call of Modelica_LinearSystems2.Examples.StateSpace.craneController.<br>
+<p>
+ 
+<A name="References"><B><FONT SIZE="+1">References</FONT></B></A>
+<PRE>
+  [1] Föllinger, O. "Regelungstechnik", Hüthig-Verlag
+</PRE>
+<pre></PRE><P>
+Extends from Modelica.Icons.Example (Icon for an example model), <A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.SimpleStateSpaceControl"
+>Templates.SimpleStateSpaceControl</A> (Template for simple state feedback controllers with an optional pre-filter).
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:57 2009.
+</address></BODY>
+</HTML>

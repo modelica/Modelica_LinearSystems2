@@ -1,0 +1,444 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Modelica_LinearSystems2 - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Modelica_LinearSystems2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2"></A>Modelica_LinearSystems2</H2>
+<B>Modelica_LinearSystems2 - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems</B>
+<P>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p> 
+Library <b>Modelica_LinearSystems2</b> is a Modelica package 
+providing different representations of linear, time invariant differential and 
+difference equation systems. For example, record 
+<A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</a>
+defines a linear time invariant differential
+equation system in state space form:
+</p>
+<pre>    <b>der</b>(x) = A * x + B * u
+        y  = C * x + D * u
+</pre>
+<p>
+Operators are overloaded to work conveniently with these system descriptions in an 
+interactive environment, e.g., to multiply transfer functions or to operate on complex numbers.
+About 180 functions are provided to operate
+on these data structures, e.g., to compute eigen values, zeros, step responses,  
+to design pole-placement and LQG controllers, to plot step responses, frequency responses,
+eigen values, to convert between different description forms, or to
+generate a linear system description by linearization of a Modelica model.
+</p>
+
+<p>
+Furthermore, in sublibrary
+<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Controller</a>
+about 20 input/output blocks of linear systems are provided that are
+based on the different representation forms, e.g., PID, StateSpace, Filter blocks.
+A unique feature of these blocks is that it is very convenient to quickly switch
+between a continuous and a discrete block representation. Also, templates are provide
+to quickly built-up
+</p>
+ 
+<p>
+For an introduction, have especially a look at:
+</p>
+<ul>
+<li> <A HREF="Modelica_LinearSystems2_UsersGuide.html#Modelica_LinearSystems2.UsersGuide.GettingStarted"
+>Getting started</a>
+     provides an overview of the Library
+     inside the Users Guide</a>.</li>
+<li><A HREF="Modelica_LinearSystems2_UsersGuide_ReleaseNotes.html#Modelica_LinearSystems2.UsersGuide.ReleaseNotes"
+>Release Notes</a>
+    summarizes the changes of new versions of this package.</li>
+<li> <A HREF="Modelica_LinearSystems2_UsersGuide.html#Modelica_LinearSystems2.UsersGuide.Contact"
+>Contact</a>
+     gives the contact information for this library.</li>
+<li> In an interactive environment, it is useful to run first the script
+     &quot;_abbreviations.mos&quot; in directory
+     &quot;Modelica_LinearSystems2\Extras\Scripts&quot;
+     in order to set useful abbreviations: ss, tf, zp, poly, Complex, Plot, s, p, j.</li>
+</ul>
+
+<p>
+It is planned to include this library in a future version of the
+Modelica Standard Library. Note, the library is <u>not</u> backwards compatible
+to the previous beta version 0.95, called "Modelica_LinearSystems", which was shipped
+with previous versions of Dymola. Since the differences are too large, no conversion
+scripts are provided, but different library names are used.
+</p>
+
+ 
+<p>
+<b>Licensed by DLR under the Modelica License 2</b><br>
+<img src="../Extras/Images/dlr_logo.png"  width=60 >
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <b>      Copyright &copy; 2005-2009, DLR Institute of Robotics and Mechatronics</b>
+</p>
+ 
+
+<p>
+<i>This Modelica package is <u>free</u> software and
+the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the
+Modelica license 2, see the license conditions (including the
+disclaimer of warranty)
+<A HREF="Modelica_LinearSystems2_UsersGuide.html#Modelica_LinearSystems2.UsersGuide.ModelicaLicense2"
+>here</a></u>
+or at
+<a href="http://www.Modelica.org/licenses/ModelicaLicense2">
+http://www.Modelica.org/licenses/ModelicaLicense2</a>.</i>
+</p>
+<pre></PRE><P>
+
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.UsersGuideS.png" ALT="Modelica_LinearSystems2.UsersGuide" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_UsersGuide.html#Modelica_LinearSystems2.UsersGuide"
+>UsersGuide</A>
+</TD><TD>Users Guide</TD></TR>
+<TR><TD>DataDir=classDirectory() + &quot;Extras/Data/&quot;</TD><TD>Absolute path to directory containing utilitiy files for this package</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.ExamplesS.png" ALT="Modelica_LinearSystems2.Examples" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Examples.html#Modelica_LinearSystems2.Examples"
+>Examples</A>
+</TD><TD>Examples demonstrating the usage of this package</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.StateSpaceS.png" ALT="Modelica_LinearSystems2.StateSpace" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A>
+</TD><TD>Continuous state space description of a linear, time invariant differential equation system (data + operations)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.StateSpaceS.png" ALT="Modelica_LinearSystems2.TransferFunction" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A>
+</TD><TD>Continuous transfer function description of a single input, single output system (data + operations)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.StateSpaceS.png" ALT="Modelica_LinearSystems2.ZerosAndPoles" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A>
+</TD><TD>Continuous zeros and poles description of a single input, single output system (data + operations)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.StateSpaceS.png" ALT="Modelica_LinearSystems2.DiscreteStateSpace" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.DiscreteStateSpace"
+>DiscreteStateSpace</A>
+</TD><TD>Discrete state space description of a linear, time invariant difference equation system (data + operations)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.ControllerS.png" ALT="Modelica_LinearSystems2.Controller" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Controller</A>
+</TD><TD>Continuous and discrete input/output blocks. Easy to switch from continuous to discrete representation.</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.ControllerS.png" ALT="Modelica_LinearSystems2.Math" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math"
+>Math</A>
+</TD><TD>Additional functions for Modelica.Math</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.UtilitiesS.png" ALT="Modelica_LinearSystems2.Utilities" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Utilities.html#Modelica_LinearSystems2.Utilities"
+>Utilities</A>
+</TD><TD>Functions that shall be included in Modelica.Utilities</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TypesS.png" ALT="Modelica_LinearSystems2.Types" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types"
+>Types</A>
+</TD><TD>Constants and types with choices, especially to build menus</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE StateSpace<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.StateSpaceI.png" ALT="Modelica_LinearSystems2.StateSpace" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.StateSpace"></A><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>.StateSpace</H2>
+<B>Continuous state space description of a linear, time invariant differential equation system (data + operations)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This record defines a linear time invariant differential
+equation system in state space form:
+</p>
+<pre>    <b>der</b>(x) = A * x + B * u
+        y  = C * x + D * u
+</pre>
+<p>
+with
+</p>
+<ul>
+<li> u - the input vector</li>
+<li> y - the output vector</li>
+<li> x - the state vector</li>
+<li> A,B,C,D - matrices of appropriate dimensions</li>
+</ul>
+<pre></PRE><P>
+Extends from Modelica.Icons.Record (Icon for a record).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>der(x) = A*x + B*u;  y = C*x + D*u</TD></TR>
+<TR><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>B[size(A, 1), :]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>C[:, size(A, 1)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>D[size(C, 1), size(B, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Signal names</TD></TR>
+<TR><TD>yNames[size(C, 1)]</TD><TD>Names of the output signals</TD></TR>
+<TR><TD>xNames[size(A, 1)]</TD><TD>Names of the states</TD></TR>
+<TR><TD>uNames[size(B, 2)]</TD><TD>Names of the input signals</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE TransferFunction<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.StateSpaceI.png" ALT="Modelica_LinearSystems2.TransferFunction" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.TransferFunction"></A><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>.TransferFunction</H2>
+<B>Continuous transfer function description of a single input, single output system (data + operations)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This record defines the transfer function between the input signal u
+and the output signal y by the coefficients of the numerator and denominator
+polynomials n(s) and d(s) respectively:
+</p>
+<pre>        n(s)
+   y = ------ * u
+        d(s)
+</pre>
+<p>
+The order of the numerator 
+polynomial can be larger as the order of the denominator polynomial
+(in such a case, the transfer function can not be
+transformed to a StateSpace system, but other operations are possible).
+</p>
+<p>
+Example: The transfer function
+</p>
+<pre>             2*s+3
+   y = ----------------- * u
+        4*s^2 + 5*s + 6
+</pre>
+<p>
+is transformed in the following way in a TransferFunction record:
+</p>
+<pre>
+   <b>import</b> Modelica_LinearSystems2.TransferFunction;
+   <b>import</b> Modelica.Utilities.Streams;
+   TransferFunction tf(n={2,3}, d={4,5,6});
+   print("y = " + TransferFunction.'String'(tf) + " * u");
+   // prints the following string to the output window:
+   //   y = (2*s + 3) / (4*s^2 + 5*s + 6) * u
+</pre>
+<pre></PRE><P>
+Extends from Modelica.Icons.Record (Icon for a record).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>y = n*{s^m, ... , s, 1} / (d*{s^r, ... , s, 1}) * u</TD></TR>
+<TR><TD>n[:]</TD><TD>Coefficients of numerator polynomial (in descending order)</TD></TR>
+<TR><TD>d[:]</TD><TD>Coefficients of denominator polynomial (in descending order)</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Signal names</TD></TR>
+<TR><TD>uName</TD><TD>Name of input signal</TD></TR>
+<TR><TD>yName</TD><TD>Name of output signal</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ZerosAndPoles<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.StateSpaceI.png" ALT="Modelica_LinearSystems2.ZerosAndPoles" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.ZerosAndPoles"></A><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>.ZerosAndPoles</H2>
+<B>Continuous zeros and poles description of a single input, single output system (data + operations)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This record defines a transfer function by its zeros, poles and a gain:
+</p>
+<pre>         product(p - z[i])
+  y = k*------------------- * u
+         product(p - n[i])
+</pre>
+<p>
+where z[:] is a Complex vector of zeros, n[:] is a Complex
+vector of poles and k is an additional multiplicative factor.
+The elements of the two Complex vectors must either be real
+numbers or conjugate complex pairs (in order that their product
+results in a polynomial with Real coefficients).
+</p>
+<p>
+In the record, the zeros and poles are transformed
+into a product of first and second order polynomials.
+The data structure is especially useful in applications where first and 
+second order polynomials are naturally occuring, e.g., as 
+for <b>filters</b>. In fact, via function 
+<A HREF="Modelica_LinearSystems2_Design.html#Modelica_LinearSystems2.ZerosAndPoles.Design.filter"
+>ZerosAndPoles.Design.filter</a>, a 
+ZeroAndPole transfer function is generated from
+<b>low</b> and <b>high pass</b> analog filters 
+(<b>CriticalDamping</b>, <b>Bessel</b>, <b>Butterworth</b>, <b>Chebyshev</b>). 
+The filters are available in <b>normalized</b> (default) and non-normalized form.
+In the normalized form, the amplitude of the filter transfer function
+at the cutoff frequency is 1/sqrt(2) (= 3 dB).
+</p>
+<p>
+A ZeroAndPole transfer function is internally stored by the coefficients
+of first and second order polynomials, and by an additional
+multiplicative factor k:
+</p>
+<pre>         product(s + n1[i]) * product(p^2 + n2[i,1]*p + n2[i,2])
+  y = k*---------------------------------------------------------
+         product(p + d1[i]) * product(p^2 + d2[i,1]*p + d2[i,2])
+</pre>
+<p>
+Note, the degrees of the numerator and denominator
+polynomials are given as:
+</p>
+<pre>
+   degree of numerator   = size(n1,1) + 2*size(n2,1);
+   degree of denominator = size(d1,1) + 2*size(d2,1);
+</pre>
+<p>
+Example:
+</p>
+<pre>                          (p+1)
+  zp = 4* -------------------------------------
+           (p - 1)*(p - (2+j*3))*(p - (2-j*3))
+</pre>
+<p>
+with j=sqrt(-1), is defined as
+</p>
+<pre> 
+   <b>import</b> Modelica_LinearSystems2.Math.Complex; 
+   <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
+   
+   zp = ZerosAndPoles(z = {Complex(-1,0)},
+                      p = {Complex(1,0),
+                           Complex(2,3),
+                           Complex(2,-3)}, 
+                           k=4);
+</pre>
+<pre></PRE><P>
+Extends from Modelica.Icons.Record (Icon for a record).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u</TD></TR>
+<TR><TD>k</TD><TD>Multiplicative factor of transfer function</TD></TR>
+<TR><TD>n1[:]</TD><TD>[p^0] coefficients of 1st order numerator polynomials</TD></TR>
+<TR><TD>n2[:, 2]</TD><TD>[p,p^0] coefficients of 2nd order numerator polynomials</TD></TR>
+<TR><TD>d1[:]</TD><TD>[p^0] coefficients of 1st order denominator polynomials</TD></TR>
+<TR><TD>d2[:, 2]</TD><TD>[p,p^0] coefficients of 2nd order denominator polynomials</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Signal names</TD></TR>
+<TR><TD>uName</TD><TD>Name of input signal</TD></TR>
+<TR><TD>yName</TD><TD>Name of output signal</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE DiscreteStateSpace<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.StateSpaceI.png" ALT="Modelica_LinearSystems2.DiscreteStateSpace" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.DiscreteStateSpace"></A><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>.DiscreteStateSpace</H2>
+<B>Discrete state space description of a linear, time invariant difference equation system (data + operations)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This record defines a linear time invariant difference
+equation system in state space form:
+</p>
+<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
+     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
+</pre>
+<p>
+with
+</p>
+<ul>
+<li> <b>Ts</b> - the sample time</li>
+<li> <b>k</b> - the index of the actual sample instance (k=0,1,2,3,...)</li>
+<li> <b>t</b> - the time</li>
+<li> <b>u</b>(t) - the input vector,</li>
+<li> <b>y</b>(t) - the output vector,</li>
+<li> <b>x</b>(t) - the discrete state vector (x(t=Ts*0) is the initial state),</li>
+<li> <b>x</b>_continuous(t) - the state vector of the continuous system
+     from which the discrete block has been derived (details see below),</li>
+<li> <b>A,B,C,D,B2</b> - matrices of appropriate dimensions.</li>
+</ul>
+<p>
+A discrete system is usually derived by discretization from a 
+continuous block, e.g., by function
+LinearSystems.DiscreteStateSpace.fromStateSpace.
+If the discretization method, e.g., the trapezoidal method,
+accesses <b>actual and past</b> values of the input <b>u</b> 
+(e.g. <b>u</b>(Ts*k), <b>u</b>(Ts*(k-1), <b>u</b>(Ts*(k-2))), 
+a state transformation is needed to get the difference equation 
+above where only the actual value <b>u</b>(Ts*k) is accessed. 
+</p>
+<p>
+If the original continuous state vector should be computed
+from the sampled data system above, the matrices of this 
+transformation have to be known. For simplicity and efficiency,
+here only the specific transformation used by function
+LinearSystems.DiscreteStateSpace.fromStateSpace is stored in 
+the data record of the discrete system via matrix <b>B2</b>.
+Therefore, the state vector of the underlying continuous
+system can be calculated by adding the term <b>B2</b>*<b>u</b> to the
+state vector of the discretized system.
+</p>
+<p>
+In Modelica notation, the difference equation above
+can be implemented as:
+</p>
+<pre>
+     <b>when</b> {<b>initial</b>(), <b>sample</b>(Ts,Ts)} <b>then</b>
+        new_x = A * x + B * u;
+            y = C * x + D * u;
+            x = <b>pre</b>(new_x);
+        x_continuous = x + B2 * u;
+     <b>end when</b>;
+</pre>
+<p>
+Since no "next value" operator is available in Modelica, an
+auxiliary variable new_x stores the value of x for the
+next sampling instant. The relationship between new_x and x
+is defined via equation "x = <b>pre</b>(new_x)".
+</p>
+<p>
+The body of the when-clause is active during initialization and at the
+next sample instant t=Ts. Note, the when-equation is not
+active after the initialization at t=0 (due to <b>sample</b>(Ts,Ts)), 
+since the state x of the initialization has to be used also at t=0.
+</p>
+<p>
+In library Blocks.<b>Controller</b> additional equations are
+added for the initialization to uniquely compute the
+initial vector x:
+</p>
+<pre>
+  <b>initial equation</b> 
+     <b>if</b> init == InitialState <b>then</b>
+        x = x_start;
+     <b>elseif</b> init == SteadyState <b>then</b>
+        x = new_x;
+     <b>end if</b>;
+</pre>
+<p>
+Optionally, x is set to a given start vector x_start.
+As <b>default initialization</b>, the equation "x = new_x" is
+added that defines steady state initialization for the
+discrete system. As a consequence, the output y(Ts*k), k=0,1,2,..,
+remains constant after this initialization, 
+provided the input vector u(Ts*k) remains constant.
+</p>
+<pre></PRE><P>
+Extends from Modelica.Icons.Record (Icon for a record).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u</TD></TR>
+<TR><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>B[size(A, 1), :]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>C[:, size(A, 1)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>D[size(C, 1), size(B, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Data used to construct discrete from continuous system</TD></TR>
+<TR><TD>Ts</TD><TD>Sample time [s]</TD></TR>
+<TR><TD>B2[size(B, 1), size(B, 2)]</TD><TD>Reconstruct continuous state</TD></TR>
+<TR><TD>method</TD><TD>Discretization method</TD></TR>
+</TABLE>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:56 2009.
+</address></BODY>
+</HTML>

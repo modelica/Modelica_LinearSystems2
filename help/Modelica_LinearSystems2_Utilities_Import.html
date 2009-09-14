@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.Utilities.Import</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Functions to import data in a Modelica environment&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Import<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Utilities.Import"></A><A HREF="Modelica_LinearSystems2_Utilities.html#Modelica_LinearSystems2.Utilities"
+>Modelica_LinearSystems2.Utilities</A>.Import</H2>
+<B>Functions to import data in a Modelica environment</B>
+<P>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Utilities.Import.ExamplesS.png" ALT="Modelica_LinearSystems2.Utilities.Import.Examples" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Utilities_Import_Examples.html#Modelica_LinearSystems2.Utilities.Import.Examples"
+>Examples</A>
+</TD><TD>Demonstrate the usage of the Import functions</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Utilities.Import.linearizeS.png" ALT="Modelica_LinearSystems2.Utilities.Import.linearize" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Utilities_Import.html#Modelica_LinearSystems2.Utilities.Import.linearize"
+>linearize</A>
+</TD><TD>Linearize a model after simulation up to a given time</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE linearize<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Utilities.Import.linearize"></A><A HREF="Modelica_LinearSystems2_Utilities_Import.html#Modelica_LinearSystems2.Utilities.Import"
+>Modelica_LinearSystems2.Utilities.Import</A>.linearize</H2>
+<B>Linearize a model after simulation up to a given time</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>This function initializes a Modelica model and then simulates the model with its default experiment options until time instant "t_linearize". If t_linearize=0, no simulation takes place (only initialization). At the simulation stop time, the model is linearized in such a form that </p>
+<p><ul>
+<li>all top-level signals with prefix "input" are treated as inputs <b>u</b>(t) of the model ,</li>
+<li>all top-level signals with prefix "output" are treated as outputs <b>y</b>(t) of the model,</li>
+<li>all variables that appear differentiated and that are selected as states at this time instant are treated as states <b>x</b> of the model.</li>
+</ul></p>
+<p>Formally, the non-linear hybrid differential-algebraic equation system is therefore treated as the following ordinary equation system at time instant t_linearize: </p>
+<pre>    der(<b>x</b>) = <b>f</b>(<b>x</b>,<b>u</b>)</pre>
+<pre>         <b>y</b> = <b>g</b>(<b>x</b>,<b>u</b>) </pre>
+<p>Taylor series expansion (linearization) of this model around the simulation stop time t_linearize: </p>
+<pre>   <b>u</b>0 = <b>u</b>(t_linearize)</pre>
+<pre>   <b>y</b>0 = <b>y</b>(t_linearize)</pre>
+<pre>   <b>x</b>0 = <b>x</b>(t_linearize) </pre>
+<p>and neglecting higher order terms results in the following system: </p>
+<pre>   der(<b>x</b>0+d<b>x</b>) = <b>f</b>(<b>x</b>0,<b>u</b>0) + der(<b>f</b>,<b>x</b>)*d<b>x</b> + der(<b>f</b>,<b>u</b>)*d<b>u</b></pre>
+<pre>      <b>y</b>0 + d<b>y</b> = <b>g</b>(<b>x</b>0,<b>u</b>0) + der(<b>g</b>,<b>x</b>)*d<b>x</b> + der(<b>g</b>,<b>u</b>)*d<b>u</b></pre>
+<p>where der(<b>f</b>,<b>x</b>) is the partial derivative of <b>f</b> with respect to <b>x</b>, and the partial derivatives are computed at the linearization point t_linearize. Re-ordering of terms gives (note <b>der</b>(<b>x</b>0) = <b>0</b>): </p>
+<pre>   der(d<b>x</b>) = der(<b>f</b>,<b>x</b>)*d<b>x</b> + der(<b>f</b>,<b>u</b>)*d<b>u</b> + <b>f</b>(<b>x</b>0,<b>u</b>0)</pre>
+<pre>        d<b>y</b> = der(<b>g</b>,<b>x</b>)*d<b>x</b> + der(<b>g</b>,<b>u</b>)*d<b>u</b> + (<b>g</b>(<b>x</b>0,<b>u</b>0) - <b>y</b>0)</pre>
+<p>or </p>
+<pre>   der(d<b>x</b>) = <b>A</b>*d<b>x</b> + <b>B</b>*d<b>u</b> + <b>f</b>0</pre>
+<pre>        d<b>y</b> = <b>C</b>*d<b>x</b> + <b>D</b>*d<b>u</b></pre>
+<p>This function returns the matrices <b>A</b>, <b>B</b>, <b>C</b>, <b>D</b> and assumes that the linearization point is a steady-state point of the simulation (i.e., <b>f</b>(<b>x</b>0,<b>u</b>0) = 0). Additionally, the full Modelica names of all inputs, outputs and states shall be returned if possible (default is to return empty name strings).</p>
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>modelName</TD><TD>Name of the Modelica model</TD></TR>
+<TR><TD>t_linearize</TD><TD>Simulate until T_linearize and then linearize [s]</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>A[nx, nx]</TD><TD>A-matrix</TD></TR>
+<TR><TD>B[nx, nu]</TD><TD>B-matrix</TD></TR>
+<TR><TD>C[ny, nx]</TD><TD>C-matrix</TD></TR>
+<TR><TD>D[ny, nu]</TD><TD>D-matrix</TD></TR>
+<TR><TD>inputNames[nu]</TD><TD>Modelica names of inputs</TD></TR>
+<TR><TD>outputNames[ny]</TD><TD>Modelica names of outputs</TD></TR>
+<TR><TD>stateNames[nx]</TD><TD>Modelica names of states</TD></TR>
+</TABLE>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:57 2009.
+</address></BODY>
+</HTML>

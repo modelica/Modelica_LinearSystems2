@@ -1,0 +1,266 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.Controller.UsersGuide</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Users Guide&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE UsersGuide<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.UsersGuideI.png" ALT="Modelica_LinearSystems2.Controller.UsersGuide" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.UsersGuide"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.UsersGuide</H2>
+<PRE></pre>
+<p>
+Library <b>Controller</b> is a Modelica package 
+providing blocks
+to conveniently model and simulate sampled data systems where it is
+convenient to quickly switch between a continuous and a discrete
+block representation.
+<p>
+This package contains the <b>users guide</b> for 
+the library and has the following content:
+</p>
+<ol>
+<li><A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide.GettingStarted"
+>Getting started</a>
+    contains an introduction to the most important features and how
+    to use them at hand of examples.</li>
+<li><A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide.BlockProperties"
+>Definition of block properties</a>
+    summarizes the options that are available for all blocks.</li>
+<li><A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide.Literature"
+>Literature</a>
+    provides references that have been used to design and implement this 
+    library.</li>
+<li><A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide.Contact"
+>Contact</a> 
+    provides information about the author of the library as well as
+    acknowledgments.</li>
+</ol>
+<pre></PRE><P>
+
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.UsersGuide.GettingStartedS.png" ALT="Modelica_LinearSystems2.Controller.UsersGuide.GettingStarted" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide.GettingStarted"
+>GettingStarted</A>
+</TD><TD>Getting started</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.UsersGuide.GettingStartedS.png" ALT="Modelica_LinearSystems2.Controller.UsersGuide.BlockProperties" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide.BlockProperties"
+>BlockProperties</A>
+</TD><TD>Definition of block properties</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.UsersGuide.GettingStartedS.png" ALT="Modelica_LinearSystems2.Controller.UsersGuide.Literature" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide.Literature"
+>Literature</A>
+</TD><TD>Literature</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.UsersGuide.GettingStartedS.png" ALT="Modelica_LinearSystems2.Controller.UsersGuide.Contact" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide.Contact"
+>Contact</A>
+</TD><TD>Contact</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE GettingStarted<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.UsersGuideI.png" ALT="Modelica_LinearSystems2.Controller.UsersGuide.GettingStarted" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.UsersGuide.GettingStarted"></A><A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide"
+>Modelica_LinearSystems2.Controller.UsersGuide</A>.GettingStarted</H2>
+<PRE></pre>
+<p>
+The <b>Controller</b> package provides input/output blocks where every
+block is available in a <b>continuous</b> and a <b>discrete</b> (sampled) 
+representation. A block is defined via its <b>continuous
+parameterization</b>. By specifying a discretization method and 
+a sample time, the discrete representation is automatically
+derived from the continuous form. 
+</p>
+ 
+<p>
+The advantage is that, e.g.,
+the continuous representation of a controller is used in 
+detailed non-linear models of a plant. Since the controller is
+continuous, the simulation is usually much faster because
+the step size is not constrained by the sample period of the
+controller. For evaluation and fine tuning purposes, a more
+detailed representation can be used by switching to its
+discrete form and adding additional effects such as AD/DA
+converter, noise, computing delay, etc.
+</p>
+ 
+<p>
+The defaults of the most
+important options, such as block type (Continuous/Discrete)
+or base sample time for <b>all blocks</b> are set in the 
+global SampleClock component (via inner/outer). 
+As a result, it is, e.g., easy to switch quickly 
+between a continuous and a discrete representation of all 
+blocks of a controller, by setting the option in the
+sampleClock component.
+</p>
+ 
+<p>
+Examples to demonstrate the technique are given in sublibrary
+<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
+>Examples</a>.
+Especially, the continuous or discrete control of a simple flexible
+drive with a P-PI cascade controller is demonstrated in example
+<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples.SimpleControlledDrive"
+>SimpleControlledDrive</a>.
+</p>
+ 
+<p>
+A screen shot of the diagram layer is shown in the next figure:
+</p>
+ 
+<p align="center">
+<img src="../Extras/Images/UsersGuide/Sampled1.png">
+</p>
+ 
+<p>
+Every block has a continuous input and a continuous output.
+The block might be sampled with the base sampling period defined
+in sampleClock or with an Integer multiple of it. For example,
+the PI controller in the above example has the following
+parameter menus:
+</p>
+ 
+<p align="center">
+<img src="../Extras/Images/UsersGuide/Sampled2.png">
+</p>
+ 
+<p align="center">
+<img src="../Extras/Images/UsersGuide/Sampled3.png">
+</p>
+ 
+<p>
+By setting, e.g., parameters blockType to "Discrete" and
+sampleFactor to 10 in the "Advanced" menu, results
+in a block where the input and the output of the block
+is sampled by a sampling time that is 10 times slower
+as the base sample time of the global sampleClock component.
+</p>
+ 
+<pre>
+</PRE><P>
+
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE BlockProperties<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.UsersGuideI.png" ALT="Modelica_LinearSystems2.Controller.UsersGuide.BlockProperties" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.UsersGuide.BlockProperties"></A><A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide"
+>Modelica_LinearSystems2.Controller.UsersGuide</A>.BlockProperties</H2>
+<PRE></pre>
+<p>
+Block <b>SampleClock</b> defines options for all components of the
+Controller library that are on the same or on a lower level
+as the sampleClock component. In every block, the default defined
+in SampleClock can be changed. The following options are 
+available:
+</p>
+<img src="../Extras/Images/SampleClockMenu.png">
+<p>
+With parameter <b>initTtype</b> the initialization of the blocks
+is defined. Default is steady state initialization (both for continuous
+and for discrete blocks). With parameter <b>blockType</b> the
+default block type is defined (Continuous or Discrete).
+If the Discrete block type is selected, the discretization method
+is defined via parameter <b>methodType</b> and the basic (periodic) sample
+time via parameter <b>sampleTime</b>. In every block, the input
+and output signals are sampled by "sampleTime" or an integer
+multiple of "sampleTime".
+</p>
+<p> 
+In the <b>Advanced Options</b> menu of every block the following
+parameters are present: 
+</p>
+<img src="../Extras/Images/AdvancedOptionsMenu.png">
+<p>
+Parameters <b>blockType</b>, <b>methodType</b> and <b>initType</b>
+can be used to overwrite the default option defined in <b>SampleClock</b>.
+The <b>sampleFactor</b> defines the integer multiple
+of the base sample time of SampleClock that is used for the
+sampling of the input and output signals of this block.
+</p>
+<pre>
+</PRE><P>
+
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Literature<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.UsersGuideI.png" ALT="Modelica_LinearSystems2.Controller.UsersGuide.Literature" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.UsersGuide.Literature"></A><A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide"
+>Modelica_LinearSystems2.Controller.UsersGuide</A>.Literature</H2>
+<PRE></pre>
+<p>
+This library is based on the following references:
+</p>
+<dl>
+<dt>Astr&ouml;m K.J., Wittenmark B. (1997):</dt>
+<dd> <b>Computer Controlled Systems: Theory and Design</b>.
+     Prentice Hall. 3rd edition.<br>&nbsp;</dd>
+ 
+<dt>Walther N. (2002):</dt>
+<dd> <b>Praxisgerechte Modelica-Bibliothek f&uuml;r Abtastregler</b>.
+     Diplomarbeit, HTWK Leipzig, Fachbereich Elektro- und
+     Informationstechnik, supervised by Prof. M&uuml;ller (HTWK) 
+     and Prof. Martin Otter (DLR), 12 Nov. 2002.
+     <br>&nbsp;</dd>
+</dl>
+<pre>
+</PRE><P>
+
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Contact<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.UsersGuideI.png" ALT="Modelica_LinearSystems2.Controller.UsersGuide.Contact" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.UsersGuide.Contact"></A><A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide"
+>Modelica_LinearSystems2.Controller.UsersGuide</A>.Contact</H2>
+<PRE></pre>
+<dl>
+<dt><b>Main Authors:</b></dt>
+<dd>Martin Otter and Marcus Baur<br>
+    Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)<br>
+    Institut f&uuml;r Robotik und Mechatronik<br>
+    Postfach 1116<br>
+    D-82230 Wessling<br>
+    Germany<br>
+    email: <A HREF=mailto:Martin.Otter@dlr.de>Martin.Otter@dlr.de</A><br></dd>
+</dl>
+<p><b>Acknowledgements:</b></p>
+<ul>
+<li> The first version of the Controller library was the library 
+     "Sampled" of Nico Walther as a result of his master thesis 
+     from the electrical engineering at the HTWK-Leipzig
+     (supervised by Prof. M&uuml;ller, HTWK, and Prof. 
+     Martin Otter, DLR).
+     Based on the experience in using the Sampled library, 
+     new features in Modelica as well as in Dymola, 
+     the Sampled library was considerably restructured, and
+     newly implemented. Not all blocks from the previous version are
+     yet included.</li>
+<li> Financial support of DLR for the development of this library within
+     the European Network of Excellence HYCON (Hybrid Control: taming heterogeneity
+     and complexity of networked embedded systems; 
+     contract number: 511368), and within the German BMBF Verbundprojekt
+     PAPAS (Plug-And-Play Antriebs- und Steuerungskonzepte f&uuml;r 
+     die Produktion von Morgen; F&ouml;rderkennzeichen: 02PH2060) is
+     highly appreciated.</li>
+<li> The library development was partially funded by the 
+     <a href="http://www.itea2.org/public/project_leaflets/EUROSYSLIB_profile_oct-07.pdf">ITEA2 EUROSYSLIB</a>
+      project. </li>
+</ul>
+<pre>
+</PRE><P>
+
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:57 2009.
+</address></BODY>
+</HTML>

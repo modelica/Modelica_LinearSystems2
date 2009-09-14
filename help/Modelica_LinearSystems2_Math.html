@@ -1,0 +1,126 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.Math</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Additional functions for Modelica.Math&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Math<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math"></A><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>.Math</H2>
+<B>Additional functions for Modelica.Math</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from Modelica.Icons.Library (Icon for library).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.ComplexS.png" ALT="Modelica_LinearSystems2.Math.Complex" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A>
+</TD><TD>Record defining a Complex number</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.ComplexS.png" ALT="Modelica_LinearSystems2.Math.Polynomial" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Polynomial</A>
+</TD><TD>Record defining the data for a polynomial</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.MatricesS.png" ALT="Modelica_LinearSystems2.Math.Matrices" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Matrices</A>
+</TD><TD>Additional functions for Modelica.Math</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.MatricesS.png" ALT="Modelica_LinearSystems2.Math.Vectors" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Vectors</A>
+</TD><TD>Functions operating on vectors</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Complex<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Math.ComplexI.png" ALT="Modelica_LinearSystems2.Math.Complex" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Math.Complex"></A><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math"
+>Modelica_LinearSystems2.Math</A>.Complex</H2>
+<B>Record defining a Complex number</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This record defines a complex number consisting of a real
+and an imaginary part. Additionally, various utility functions
+are provided in the record to operate on instances of this record.
+Example (note: "j" in the comments is defined as j=sqrt(-1)):
+</p>
+<pre>
+   <b>import</b> Modelica.Utilities.Streams;
+   <b>import</b> Modelica_LinearSystems2.Math.Complex;
+   Complex c1=Complex(re=2, im=3) "= 2 + 3j";
+   Complex c2=Complex(3,4) "= 3 + 4j";
+ <b>algorithm</b>
+   c3 := Complex.'+'(c1, c2) "= c1 + c2";
+   Streams.print("c3 = " + Complex.'String'(c3));
+   Streams.print("c3 = " + Complex.'String'(c3,"i"));
+   // This gives the following print-out:
+   c3 = 5 + 7j
+   c3 = 5 + 7i
+</pre>
+<p>
+The utility functions are written in such a way that it
+is convenient to work with them, once operator overloading
+is provided in Modelica and Modelica tools. Example:
+</p>
+<pre>
+   // Assume operator overloading is available (this is not yet the case):
+   Complex j  = Complex.j();
+   Complex c4 = -2 + 5*j;
+   // A Modelica tool will transform the statement of c4 into
+   Complex c4 = Complex.'+'( Complex.(-2,0), Complex.'*'(Complex(5,0),j)));
+</pre>
+<p>
+The utility functions are implemented so that they can be easily
+inlined by a tool. In such a case, the above statement will
+not lead to any overhead.
+</p>
+<pre></PRE><P>
+Extends from Modelica.Icons.Record (Icon for a record).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>re</TD><TD>Real part of complex number</TD></TR>
+<TR><TD>im</TD><TD>Imaginary part of complex number</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Polynomial<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Math.ComplexI.png" ALT="Modelica_LinearSystems2.Math.Polynomial" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Math.Polynomial"></A><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math"
+>Modelica_LinearSystems2.Math</A>.Polynomial</H2>
+<B>Record defining the data for a polynomial</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This record defines a polynomial, e.g., y = 2*x^2 + 3*x + 1. The general form is:
+</p>
+<pre>
+   y = c[1]*x^n + c[2]*x^(n-1) + ... + c[n]*x + c[n+1];
+</pre>
+<p>
+In the record, the coefficients c[i] are stored. Usually, the record is not directly accessed. Instead, a polynomial is generated with the functions provided in the record such as Polynomial.base(..), 
+Polynomial.fitting(..). 
+Several functions are provided that operate on polynomials.
+</p> 
+<pre></PRE><P>
+Extends from Modelica.Icons.Record (Icon for a record).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>c[:]</TD><TD>Polynomial coefficients (c[1]*x^n + ... c[n]*x + c[n+1])</TD></TR>
+</TABLE>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:57 2009.
+</address></BODY>
+</HTML>

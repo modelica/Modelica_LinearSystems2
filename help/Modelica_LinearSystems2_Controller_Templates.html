@@ -1,0 +1,238 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.Controller.Templates</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Templates of control structures&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Templates<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Controller.Templates"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.Templates</H2>
+<B>Templates of control structures</B>
+<P>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Templates.PartialPlantSISOS.png" ALT="Modelica_LinearSystems2.Controller.Templates.PartialPlantSISO" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.PartialPlantSISO"
+>PartialPlantSISO</A>
+</TD><TD>Template for single-input single-output plants</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Templates.PartialPlantSISOS.png" ALT="Modelica_LinearSystems2.Controller.Templates.PartialPlantMIMO" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.PartialPlantMIMO"
+>PartialPlantMIMO</A>
+</TD><TD>Template for multi-input multi-output plants</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Templates.PartialPlantSISOS.png" ALT="Modelica_LinearSystems2.Controller.Templates.PlantTemplate" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.PlantTemplate"
+>PlantTemplate</A>
+</TD><TD>MIMO plant template</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.SimpleStateSpaceControl"
+>SimpleStateSpaceControl</A>
+</TD><TD>Template for simple state feedback controllers with an optional pre-filter</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Templates.Add2S.png" ALT="Modelica_LinearSystems2.Controller.Templates.Add2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.Add2"
+>Add2</A>
+</TD><TD>Output the sum of the two inputs (inputs are on the left and below)</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.TwoDegreesOfFreedomControlSISO"
+>TwoDegreesOfFreedomControlSISO</A>
+</TD><TD>Template of a controller with two structural degrees of freedom and an inverse plant model in forward path</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Templates.Plant_SISOS.png" ALT="Modelica_LinearSystems2.Controller.Templates.Plant_SISO" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.Plant_SISO"
+>Plant_SISO</A>
+</TD><TD>SISO dummy plant model which can be used in templates</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Templates.Plant_SISOS.png" ALT="Modelica_LinearSystems2.Controller.Templates.PlantTemplate_SISO" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.PlantTemplate_SISO"
+>PlantTemplate_SISO</A>
+</TD><TD>SISO plant template</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PartialPlantSISO<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Templates.PartialPlantSISOI.png" ALT="Modelica_LinearSystems2.Controller.Templates.PartialPlantSISO" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Templates.PartialPlantSISO"></A><A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates"
+>Modelica_LinearSystems2.Controller.Templates</A>.PartialPlantSISO</H2>
+<B>Template for single-input single-output plants</B><p>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u</TD><TD>&nbsp;</TD></TR>
+<TR><TD>ym</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PartialPlantMIMO<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Templates.PartialPlantSISOI.png" ALT="Modelica_LinearSystems2.Controller.Templates.PartialPlantMIMO" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Templates.PartialPlantMIMO"></A><A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates"
+>Modelica_LinearSystems2.Controller.Templates</A>.PartialPlantMIMO</H2>
+<B>Template for multi-input multi-output plants</B><p>
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>n</TD><TD>system order</TD></TR>
+<TR><TD>m</TD><TD>number of inputs</TD></TR>
+<TR><TD>l</TD><TD>number of measurable outputs</TD></TR>
+<TR><TD>additionalMeasurableOutputs</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y[n]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u[m]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>ym[l]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PlantTemplate<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Templates.PartialPlantSISOI.png" ALT="Modelica_LinearSystems2.Controller.Templates.PlantTemplate" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Templates.PlantTemplate"></A><A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates"
+>Modelica_LinearSystems2.Controller.Templates</A>.PlantTemplate</H2>
+<B>MIMO plant template</B><p>
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>n</TD><TD>system order</TD></TR>
+<TR><TD>m</TD><TD>number of inputs</TD></TR>
+<TR><TD>l</TD><TD>number of measurable outputs</TD></TR>
+<TR><TD>additionalMeasurableOutputs</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y[n]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u[m]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>ym[l]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE SimpleStateSpaceControl<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Controller.Templates.SimpleStateSpaceControl"></A><A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates"
+>Modelica_LinearSystems2.Controller.Templates</A>.SimpleStateSpaceControl</H2>
+<B>Template for simple state feedback controllers with an optional pre-filter</B><p>
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>plant</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Add2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Templates.Add2I.png" ALT="Modelica_LinearSystems2.Controller.Templates.Add2" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Templates.Add2"></A><A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates"
+>Modelica_LinearSystems2.Controller.Templates</A>.Add2</H2>
+<B>Output the sum of the two inputs (inputs are on the left and below)</B><p>
+<P><H3>Information</H3></P>
+<PRE>
+</pre>
+<p>
+This blocks computes output <b>y</b> as <i>difference</i> of the
+commanded input <b>u1</b> and the feedback
+input <b>u2</b>:
+</p>
+<pre>
+    <b>y</b> = <b>u1</b> - <b>u2</b>;
+</pre>
+<p>
+Example:
+</p>
+<pre>
+     parameter:   n = 2
+
+  results in the following equations:
+
+     y = u1 - u2
+</pre>
+
+<pre>
+</PRE><P>
+
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u1</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u2</TD><TD>&nbsp;</TD></TR>
+<TR><TD>y</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE TwoDegreesOfFreedomControlSISO<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Controller.Templates.TwoDegreesOfFreedomControlSISO"></A><A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates"
+>Modelica_LinearSystems2.Controller.Templates</A>.TwoDegreesOfFreedomControlSISO</H2>
+<B>Template of a controller with two structural degrees of freedom and an inverse plant model in forward path</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+Template of a controller with two structural degrees of freedom and an inverse plant model in forward path.
+The functionality of such contorl system structures is discribed in [1]
+<p>
+ 
+<A name="References"><B><FONT SIZE="+1">References</FONT></B></A> <PRE>
+  [1] Looye, G. et al, "Nonlinear inverse moldes for control",
+      Proceedings Modelica Conference 2005, pp. 267-279, 2005.
+</PRE>
+ 
+ 
+ 
+<pre></PRE><P>
+
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>l</TD><TD>number of measurable outputs</TD></TR>
+<TR><TD>additionalMeasurableOutputs</TD><TD>&nbsp;</TD></TR>
+<TR><TD>controller</TD><TD>&nbsp;</TD></TR>
+<TR><TD>plant</TD><TD>&nbsp;</TD></TR>
+<TR><TD>plant2</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Plant_SISO<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Templates.Plant_SISOI.png" ALT="Modelica_LinearSystems2.Controller.Templates.Plant_SISO" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Templates.Plant_SISO"></A><A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates"
+>Modelica_LinearSystems2.Controller.Templates</A>.Plant_SISO</H2>
+<B>SISO dummy plant model which can be used in templates</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.PlantTemplate_SISO"
+>PlantTemplate_SISO</A> (SISO plant template).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>l</TD><TD>number of measurable outputs</TD></TR>
+<TR><TD>additionalMeasurableOutputs</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u</TD><TD>&nbsp;</TD></TR>
+<TR><TD>ym[l]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PlantTemplate_SISO<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Templates.Plant_SISOI.png" ALT="Modelica_LinearSystems2.Controller.Templates.PlantTemplate_SISO" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Templates.PlantTemplate_SISO"></A><A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates"
+>Modelica_LinearSystems2.Controller.Templates</A>.PlantTemplate_SISO</H2>
+<B>SISO plant template</B><p>
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>l</TD><TD>number of measurable outputs</TD></TR>
+<TR><TD>additionalMeasurableOutputs</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u</TD><TD>&nbsp;</TD></TR>
+<TR><TD>ym[l]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:57 2009.
+</address></BODY>
+</HTML>

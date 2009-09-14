@@ -1,0 +1,1384 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.Controller</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Continuous and discrete input/output blocks. Easy to switch from continuous to discrete representation.&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Controller<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Controller"></A><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>.Controller</H2>
+<B>Continuous and discrete input/output blocks. Easy to switch from continuous to discrete representation.</B>
+<P>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This library provides input/output blocks where every
+block is available in a <b>continuous</b> and a <b>discrete</b> (sampled) 
+representation. A block is defined via its <b>continuous
+parameterization</b>. By specifying a discretization method and 
+a sample time, the discrete representation is automatically
+derived from the continuous form. The defaults of the most
+important options for <b>all blocks</b> are set in the global SampleClock 
+component (via inner/outer). 
+As a result, it is, e.g., easy to switch quickly 
+between a continuous and a discrete representation of all 
+blocks of a controller. 
+</p>
+ 
+<p>
+Examples to demonstrate the technique are given in sublibrary
+<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
+>Examples</a>.
+Especially, the continuous or discrete control of a simple flexible
+drive with a P-PI cascade controller is demonstrated in example
+<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples.SimpleControlledDrive"
+>SimpleControlledDrive</a>.
+</p>
+ 
+<p align="center">
+<img src="../Extras/Images/SimpleControlledDrive_Plot2.png">
+</p>
+ 
+<pre></PRE><P>
+Extends from Modelica.Icons.Library (Icon for library).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.UsersGuideS.png" ALT="Modelica_LinearSystems2.Controller.UsersGuide" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_UsersGuide.html#Modelica_LinearSystems2.Controller.UsersGuide"
+>UsersGuide</A>
+</TD><TD>Users Guide</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.ExamplesS.png" ALT="Modelica_LinearSystems2.Controller.Examples" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
+>Examples</A>
+</TD><TD>Demonstrate the usage of package Controller</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.SampleClockS.png" ALT="Modelica_LinearSystems2.Controller.SampleClock" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SampleClock"
+>SampleClock</A>
+</TD><TD>Global options for blocks of Controller library (in particular sample clock)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.SamplerS.png" ALT="Modelica_LinearSystems2.Controller.Sampler" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Sampler"
+>Sampler</A>
+</TD><TD>Sample the input signal if discrete block or y=u if continuous block</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.StateSpaceS.png" ALT="Modelica_LinearSystems2.Controller.StateSpace" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.StateSpace"
+>StateSpace</A>
+</TD><TD>Continuous or discrete state space system block</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.TransferFunctionS.png" ALT="Modelica_LinearSystems2.Controller.TransferFunction" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.TransferFunction"
+>TransferFunction</A>
+</TD><TD>Continuous or discrete, single input single output transfer function</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.ZerosAndPolesS.png" ALT="Modelica_LinearSystems2.Controller.ZerosAndPoles" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.ZerosAndPoles"
+>ZerosAndPoles</A>
+</TD><TD>Continuous or discretized, single input single output block described by a ZerosAndPoles object</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.FilterS.png" ALT="Modelica_LinearSystems2.Controller.Filter" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Filter"
+>Filter</A>
+</TD><TD>Continuous or discretized analog low or high pass IIR-filter (CriticalDamping/Bessel/Butterworth/Chebyshev)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.FilterFIRS.png" ALT="Modelica_LinearSystems2.Controller.FilterFIR" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.FilterFIR"
+>FilterFIR</A>
+</TD><TD>Discrete finite impulse response low or high pass filter</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.IntegratorS.png" ALT="Modelica_LinearSystems2.Controller.Integrator" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Integrator"
+>Integrator</A>
+</TD><TD>Output the integral of the input signal (continuous or discrete block)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.DerivativeS.png" ALT="Modelica_LinearSystems2.Controller.Derivative" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Derivative"
+>Derivative</A>
+</TD><TD>Approximate derivative (continuous or discrete block)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.FirstOrderS.png" ALT="Modelica_LinearSystems2.Controller.FirstOrder" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.FirstOrder"
+>FirstOrder</A>
+</TD><TD>First order (continuous or discrete) transfer function block (= 1 pole)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.SecondOrderS.png" ALT="Modelica_LinearSystems2.Controller.SecondOrder" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SecondOrder"
+>SecondOrder</A>
+</TD><TD>Second order (continuous or discrete) transfer function block (= 2 poles)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.PIS.png" ALT="Modelica_LinearSystems2.Controller.PI" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.PI"
+>PI</A>
+</TD><TD>Proportional-Integral controller (continuous or discrete block)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.PIDS.png" ALT="Modelica_LinearSystems2.Controller.PID" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.PID"
+>PID</A>
+</TD><TD>PID-controller in additive description form</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.LimPIDS.png" ALT="Modelica_LinearSystems2.Controller.LimPID" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.LimPID"
+>LimPID</A>
+</TD><TD>P, PI, PD, and PID controller with limited output, anti-windup compensation and setpoint weighting</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.UnitDelayS.png" ALT="Modelica_LinearSystems2.Controller.UnitDelay" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.UnitDelay"
+>UnitDelay</A>
+</TD><TD>Delay the input by a multiple of the base sample time if discrete block or y=u if continuous block</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.ADconverterS.png" ALT="Modelica_LinearSystems2.Controller.ADconverter" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.ADconverter"
+>ADconverter</A>
+</TD><TD>Analog to digital converter (including sampler)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.DAconverterS.png" ALT="Modelica_LinearSystems2.Controller.DAconverter" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.DAconverter"
+>DAconverter</A>
+</TD><TD>Digital to analog converter (including zero order hold)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.MatrixGainS.png" ALT="Modelica_LinearSystems2.Controller.MatrixGain" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.MatrixGain"
+>MatrixGain</A>
+</TD><TD>Output the product of a gain matrix with the input signal vector. The matrix can be loaded from a file optionally</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.NoiseS.png" ALT="Modelica_LinearSystems2.Controller.Noise" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Noise"
+>Noise</A>
+</TD><TD>Block that generates a uniform distributed noise output signal at sample instants if discrete and y=0 if continuous</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.IconsS.png" ALT="Modelica_LinearSystems2.Controller.Icons" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Icons.html#Modelica_LinearSystems2.Controller.Icons"
+>Icons</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.InterfacesS.png" ALT="Modelica_LinearSystems2.Controller.Interfaces" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces"
+>Interfaces</A>
+</TD><TD>Interfaces (partial blocks) of Controller library</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.TemplatesS.png" ALT="Modelica_LinearSystems2.Controller.Templates" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates"
+>Templates</A>
+</TD><TD>Templates of control structures</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.TypesS.png" ALT="Modelica_LinearSystems2.Controller.Types" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types"
+>Types</A>
+</TD><TD>Constants and types with choices, especially to build menus</TD></TR>
+<TR><TD>DataDir=Modelica_LinearSystems2.DataDir</TD><TD>Absolute path to directory containing utilitiy files for this package, such as images</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE SampleClock<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.SampleClockI.png" ALT="Modelica_LinearSystems2.Controller.SampleClock" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.SampleClock"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.SampleClock</H2>
+<B>Global options for blocks of Controller library (in particular sample clock)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+Global block that defines options for all components of the
+Controller library that are on the same or on a lower level
+as the sampleClock component. In particular it is defined whether
+the blocks shall be used by default in a continuous or a
+discrete representation. In the latter case, the default
+discretization method and the base sample time is defined.
+The sample time of a block is an integer multiple of the base sample
+time defined in the SampleClock component.
+</p>
+<pre>
+</PRE><P>
+
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>blockType</TD><TD>Type of Sampled blocks (Continuous or Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Discretization method for discrete blocks</TD></TR>
+<TR><TD>sampleTime</TD><TD>Base sample time for discrete blocks [s]</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization of Sampled blocks</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Sampler<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.SamplerI.png" ALT="Modelica_LinearSystems2.Controller.Sampler" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Sampler"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.Sampler</H2>
+<B>Sample the input signal if discrete block or y=u if continuous block</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+If <b>discrete</b> block, the output y is sampled according to sample time
+sampleClock.sampleTime * sampleFactor, where sampleClock.sampleTime
+is defined globally in the outer component sampleClock and
+sampleFactor is an Integer parameter of component Sampler.
+</p>
+<p>
+If <b>continuous</b> block, the output y is identical to the input u.
+</p>
+<pre></PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"
+>Interfaces.PartialSISO_equality</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE StateSpace<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.StateSpaceI.png" ALT="Modelica_LinearSystems2.Controller.StateSpace" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.StateSpace"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.StateSpace</H2>
+<B>Continuous or discrete state space system block</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<pre></PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock"
+>Interfaces.PartialSampledBlock</A> (Partial block of Sampled library (icon + default parameters)).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>system</TD><TD>Continuous linear time-invariant system</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>x_start[nx]</TD><TD>Initial or guess values of states</TD></TR>
+<TR><TD>y_start[ny]</TD><TD>Initial values of outputs (remaining states are in steady state if possible)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u[size(system.B, 2)]</TD><TD>Continuous or discrete input signals of block</TD></TR>
+<TR><TD>y[size(system.C, 1)]</TD><TD>Continuous or discrete output signals of block</TD></TR>
+<TR><TD>x[nx]</TD><TD>State vector of continuous system</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE TransferFunction<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.TransferFunctionI.png" ALT="Modelica_LinearSystems2.Controller.TransferFunction" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.TransferFunction"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.TransferFunction</H2>
+<B>Continuous or discrete, single input single output transfer function</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<pre>
+</PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
+>Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>system</TD><TD>Transfer function</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>x_start[nx]</TD><TD>Initial or guess values of states</TD></TR>
+<TR><TD>y_start</TD><TD>Initial value of output (derivatives of y are zero upto nx-1-th derivative)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TD>x[nx]</TD><TD>State of continuous transfer function</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ZerosAndPoles<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.ZerosAndPolesI.png" ALT="Modelica_LinearSystems2.Controller.ZerosAndPoles" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.ZerosAndPoles"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.ZerosAndPoles</H2>
+<B>Continuous or discretized, single input single output block described by a ZerosAndPoles object</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This function transforms a zeros-poles-gain system representation into state space representation.
+To achieve well numerical condition the ZerosAndPoles transfer function is transformed into state space
+form by creating first and second order blocks that are connected
+together in series. Every block is represented in controller
+canonical form and scaled such that the gain from the input
+of this block to its output is one (i.e. y(s=0) = u(s=0)),
+if this is possible. Details are given below.
+</p>
+
+<h4>Algorithmic details</h4>
+<p>
+The ZerosAndPoles transfer function is defined as:
+</p>
+<pre>         product(s + n1[i]) * product(s^2 + n2[i,1]*s + n2[i,2])
+  y = k*--------------------------------------------------------- * u
+         product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
+</pre>
+<p>
+This is treated as a series connection of first and second order 
+systems. If size(n1) == size(d1) and size(n2) == size(d2)
+this gives the following sequence of operations:
+</p>
+<pre>        s^2 + n2[1,1]*s + n2[1,2]
+  y_1 = ------------------------- * u
+        s^2 + d2[1,1]*s + d2[1,2]
+&nbsp;
+        s^2 + n2[2,1]*s + n2[2,2]
+  y_2 = ------------------------- * y_1
+        s^2 + d2[2,1]*s + d2[2,2]
+&nbsp;
+     ...
+&nbsp;
+        s + n1[..]
+  y_n = ---------- * y_(n-1)
+        s + d1[..]
+&nbsp;
+    y = k*y_n
+</pre>
+<p>
+Based on this representation, evrey block with transfer function G(s) could be transformed into
+</p>
+<pre>  G(s) = k * F(s)
+</pre>
+<p>
+with F(s) has unit gain. This leads to representations of the forms 
+</p>
+<pre>           a2 + a1*s + s^2       a2      b2 + a1*b2/a2*s + b2/a2*s^2         
+  G(s) = -------------------- = ---- * ------------------------------ = k * F(s),  k = a2/b2  (1)
+           b2 + b1*s + s^2       b2           b2 + b1*s + s^2                 
+&nbsp;
+for second order systems and 
+&nbsp;
+           a + s     a     b + b/a*s       
+  G(s) = -------- = --- * ---------- = k * F(s),   k = a/b
+           b + s     b      b + s           
+</pre>
+<p>
+for first order systems respectively.
+</p>
+<p>
+The complete system is now considered as the series connections of all the single unit gain transfer functions and an overall gain k with
+</p>
+<pre>  k = product(ki).
+</pre>
+<p>
+In the general case, the following system structures
+and the corresponding state space systems can appear
+(note, 'c' is the reciprocal local gain 1/k):
+</p>
+<pre>(1)
+          a2 + a1*s + s^2           der(x1) = x2
+    y = ---------------------  -->  der(x2) = -b2*x1 - b1*x2 + b2*u
+          b2 + b1*s + s^2                 y = c*((a2-b2)*x1 + (a1-b1)*x2 + u),  c = b2/a2
+&nbsp;
+(2)
+             s + a                 der(x1) = x2
+    y = ---------------- * u  -->  der(x2) = -b2*x1 - b1*x2 + b2*u 
+        b2 + b1*s + s^2                  y = k*(a1/b2*x1 +x2/b2),  c = b2/a
+&nbsp;
+(3)
+               1                  der(x1) = x2
+    y = --------------- *u   -->  der(x2) = -b2*x1 - b1*x2 + b2*u
+        b2 + b1*s + s^2                 y = c*x1/b2,  c = b2
+&nbsp;
+(4)
+       a + s                       der(x) = -b*x + b*u
+   y = ----- * u             -->        y = c*((a-b)/b*x + u),  c = b/a
+       b + s
+&nbsp;
+(5)
+         1                 
+   y = ----- * u             -->   der(x) = -b*x + b*u
+       b + s                            y = x,  c = b
+</pre>
+ <p>
+If the sizes of the numerator and denominator polynomials
+do not match, the small systems are built in the
+following way:
+</p>
+<pre>(1) Build systems of form (1) by combining
+    - 1 d2 and 1 n2 
+      (= 1 second order denominator and 1 second order numerator) or
+    - 1 d2 and 2 n1 or
+    - 2 d1 and 1 n2
+(2) Build at most one system of form (2) by combining
+    - 1 d2 and 1 n2
+(3) Build systems of form (3) by
+    - 1 d2
+(4) Build systems of form (4) by combining
+    - 1 d1 and 1 n1
+(5) Build systems of form (5) by 
+    - 1 d1 
+</pre>
+<p>
+The numeric properties of the resulting state space system 
+depends on which first and second order polynomials are 
+combined and connected together. From a numerical point of view, it
+would therefore be useful to combine the polynomials 
+based on the numeric values of the polynomial coefficients,
+(e.g., in a first step the polynomials could be sorted
+according to their cut-off frequency).
+</p>
+<p>
+However, this has the disadvantage that the structure of the
+resulting state space system depends on the numeric
+values of the polynomial coefficients. Since Modelica
+environments perform symbolic pre-processing on equations,
+this would mean that a change of a polynomial coefficient
+requires to newly compile the state space system.
+</p>
+<p>
+If, on the other hand, the structure of the state
+space system depends only on dimension information
+of the n1,n2,d1,d2 arrays, then the polynomial coefficients
+can be changed without a new translation of the model.
+This is the major reason why the structure of the 
+state space system in the implementation of this block
+is based only on dimension information.
+</p>
+<p>
+This is, e.g., not critical for the provided filters:
+The dimension of the n1,n2,d1,d2 arrays depend for 
+filters only on the filter characteristics
+(Bessel, Butterworth etc.), the filter type (low pass,
+high pass etc.) and on the filter order. If any
+of this data is changed, the model has to be
+newly compiled. All the other filter data, such as
+cut-off frequency or ripple amplitude, can be changed
+without re-compilation of the model.
+The ZerosAndPoles transfer function is now constructed
+for the filters in such a way that the filter zeros
+and poles are appropriately sorted to give better
+numerical properties.
+</p>
+<p>
+Another alternative implementation of the state
+space system would be to use the function controller canonical
+form that directly results from the transfer function.
+The severe disadvantage
+of this approach is that the structure of the state
+space system from above is lost for the symbolic preprocessing.
+If, e.g., index reduction has to be applied (e.g. since a
+filter is used to realize a non-linear inverse model),
+then the tool cannot perform the index reduction.
+Example:
+</p>
+<p>
+Assume, a generic first order state space system
+is present
+</p>
+<pre>   <b>der</b>(x) = a*x + b*u
+        y = c*x + d*u
+</pre>
+<p>
+and the values of the scalars a,b,c,d are parameters
+that might be changed before the simulation starts.
+If y has to be differentiated symbolically during code
+generation, then
+</p>
+<pre>      <b>der</b>(y) = c*<b>der</b>(x) + d*<b>der</b>(u)
+      <b>der</b>(x) = a*x + b*u
+</pre>
+<p>
+As a result, u needs to be differentiated too, and this
+might not be possible and therefore translation might fail.
+</p>
+<p>
+On the other hand, if the first order system is
+defined to be a low pass filter and the state space
+system is generated by keeping this structure, we have
+(see form (5) above):
+</p>
+<pre>   <b>der</b>(x) = -b*x + u
+        y = x
+</pre>
+<p>
+Differentiating y symbolically leads to:
+</p>
+<pre>     <b>der</b>(y) = <b>der</b>(x)
+     <b>der</b>(x) = -b*x + u
+</pre>
+<p>
+Therefore, in this case, the derivative of u is not
+needed and the tool can continue with the symbolic
+processing.
+</p> 
+<pre></PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
+>Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>system</TD><TD>Data defining the ZerosAndPoles object</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>x_start[nx]</TD><TD>Initial or guess values of states</TD></TR>
+<TR><TD>y_start</TD><TD>Initial or guess values of output</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TD>x[nx]</TD><TD>State of continuous block</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Filter<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.FilterI.png" ALT="Modelica_LinearSystems2.Controller.Filter" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Filter"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.Filter</H2>
+<B>Continuous or discretized analog low or high pass IIR-filter (CriticalDamping/Bessel/Butterworth/Chebyshev)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This block has to be improved for discrete mode. At present, this function seems not to be reliable.
+Please use "criticalDamping instead
+</p>
+<pre>
+</PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.ZerosAndPoles"
+>ZerosAndPoles</A> (Continuous or discretized, single input single output block described by a ZerosAndPoles object).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>system</TD><TD>Data defining the ZerosAndPoles object</TD></TR>
+<TR><TD>analogFilter</TD><TD>Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)</TD></TR>
+<TR><TD>filterType</TD><TD>Type of filter (LowPass/HighPass)</TD></TR>
+<TR><TD>order</TD><TD>Order of filter</TD></TR>
+<TR><TD>f_cut</TD><TD>Cut-off frequency [Hz]</TD></TR>
+<TR><TD>gain</TD><TD>Gain (= amplitude of frequency response at zero frequency)</TD></TR>
+<TR><TD>normalized</TD><TD>= true, if amplitude of low pass filter at f_cut is 1/sqrt(2) (=3db)</TD></TR>
+<TR><TD>A_ripple</TD><TD>Pass band ripple for Chebyshev filter (otherwise not used) [dB]</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>x_start[nx]</TD><TD>Initial or guess values of states</TD></TR>
+<TR><TD>y_start</TD><TD>Initial or guess values of output</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TD>x[nx]</TD><TD>State of continuous block</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE FilterFIR<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.FilterFIRI.png" ALT="Modelica_LinearSystems2.Controller.FilterFIR" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.FilterFIR"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.FilterFIR</H2>
+<B>Discrete finite impulse response low or high pass filter</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"
+>Interfaces.PartialSISO_equality</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>specType</TD><TD>Specification type of FIR filter</TD></TR>
+<TR><TD>L</TD><TD>Length of mean value filter</TD></TR>
+<TR><TD>filterType</TD><TD>Type of filter</TD></TR>
+<TR><TD>order</TD><TD>Order of filter</TD></TR>
+<TR><TD>f_cut</TD><TD>Cut-off frequency [Hz]</TD></TR>
+<TR><TD>window</TD><TD>Type of window</TD></TR>
+<TR><TD>beta</TD><TD>Beta-Parameter for Kaiser-window</TD></TR>
+<TR><TD>a[:]</TD><TD>FIR filter coefficients</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Integrator<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.IntegratorI.png" ALT="Modelica_LinearSystems2.Controller.Integrator" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Integrator"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.Integrator</H2>
+<B>Output the integral of the input signal (continuous or discrete block)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This blocks defines the transfer function between the input u and
+the output y as <i>integrator</i>:
+</p>
+<pre>
+          k
+     y = --- * u
+          s
+</pre>
+<p>
+The block can be continuous or discrete (with continuous parameterization).
+</p>
+<p>
+It is not possible to initalize a continuous integrator in steady state.
+For this reason, option "initType = SteadyState" is ignored for
+a continuous integrator block and
+interpreted as "initType = InitialState".
+</p>
+<pre>
+</PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
+>Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>k</TD><TD>Integrator gain</TD></TR>
+<TR><TD>withDelay</TD><TD>&nbsp;</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>y_start</TD><TD>Initial or guess value of output (=state)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Derivative<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.DerivativeI.png" ALT="Modelica_LinearSystems2.Controller.Derivative" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Derivative"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.Derivative</H2>
+<B>Approximate derivative (continuous or discrete block)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This blocks defines the transfer function between the input u and
+the output y as <i>approximative derivative (DT1)</i>:
+</p>
+<pre>
+             k * s
+     y = ------------ * u
+            T * s + 1
+</pre>
+<p>
+The block can be continuous or discrete (with continuous parameterization).
+</p>
+<p>
+If k=0, the state space realization of the block is
+specially constructed, in order that
+the D-part of PID controllers can be set to zero without
+introducing numerical problems.
+</p>
+<p>
+If you would like to be able to change easily between different
+transfer functions (FirstOrder, SecondOrder, ... ) by changing
+parameters, use the general model class <b>TransferFunction</b>
+instead and model a DT1 system with parameters<br>
+n = {k,0}, d = {T,1}.
+</p>
+<pre>
+</PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
+>Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>k</TD><TD>Gain</TD></TR>
+<TR><TD>T</TD><TD>Time Constant (T&gt;0 required; T=0 is ideal derivative block) [s]</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>x_start</TD><TD>Initial or guess value of state</TD></TR>
+<TR><TD>y_start</TD><TD>Initial or guess value of output</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TD>x</TD><TD>State of approximative derivative</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE FirstOrder<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.FirstOrderI.png" ALT="Modelica_LinearSystems2.Controller.FirstOrder" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.FirstOrder"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.FirstOrder</H2>
+<B>First order (continuous or discrete) transfer function block (= 1 pole)</B><p>
+<P><H3>Information</H3></P>
+<PRE>
+</pre>
+<p>
+This blocks defines the transfer function between the input u and
+the output y as <i>first order</i> system:
+</p>
+<pre>             k
+     y = --------- * u
+         T * s + 1
+</pre>
+<p>
+The block can be continuous or discrete (with continuous parameterization).
+</p>
+<pre>
+</PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
+>Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>k</TD><TD>Gain</TD></TR>
+<TR><TD>T</TD><TD>Time Constant</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>y_start</TD><TD>Initial y if initType=InitialState (else guess)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE SecondOrder<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.SecondOrderI.png" ALT="Modelica_LinearSystems2.Controller.SecondOrder" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.SecondOrder"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.SecondOrder</H2>
+<B>Second order (continuous or discrete) transfer function block (= 2 poles)</B><p>
+<P><H3>Information</H3></P>
+<PRE>
+</pre>
+<p>
+This blocks defines the transfer function between the input u and
+the output y as <i>second order</i> system:
+</p>
+<pre>
+                         k
+     y = --------------------------------- * u
+          ( s / w )^2 + 2*D*( s / w ) + 1
+</pre>
+<p>
+The block can be continuous or discrete (with continuous parameterization).
+</p>
+<p>
+If you would like to be able to change easily between different
+transfer functions (FirstOrder, SecondOrder, ... ) by changing
+parameters, use the general model class <b>TransferFunction</b>
+instead and model a second order SISO system with parameters<br>
+n = {k}, d = {1/w^2, 2*D/w, 1}.
+</p>
+<pre>
+Example:
+   parameter: k =  0.3,  w = 0.5,  D = 0.4
+   results in:
+                  0.3
+      y = ------------------- * u
+          4.0 s^2 + 1.6 s + 1
+</pre>
+<pre>
+</PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
+>Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>k</TD><TD>Gain</TD></TR>
+<TR><TD>w</TD><TD>Angular frequency</TD></TR>
+<TR><TD>D</TD><TD>Damping</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>y_start</TD><TD>Initial or guess value of output (= state)</TD></TR>
+<TR><TD>yd_start</TD><TD>Initial or guess value of derivative of output (= state)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>yd</TD><TD>First derivative of y</TD></TR>
+<TR><TD>yy[2]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PI<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.PII.png" ALT="Modelica_LinearSystems2.Controller.PI" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.PI"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.PI</H2>
+<B>Proportional-Integral controller (continuous or discrete block)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This blocks defines the transfer function between the input u and
+the output y as <i>integrator</i>:
+</p>
+<pre>                     1
+      y = k * (1 + ------ ) * u
+                    T*s
+               T*s + 1
+        = k * --------- * u
+                 T*s
+</pre>
+<p>
+The block can be continuous or discrete (with continuous parameterization).
+</p>
+<p>
+It is not possible to initalize a continuous integrator in steady state.
+For this reason, option "initType = SteadyState" is ignored for
+a continuous PI block and
+interpreted as "initType = InitialState".
+</p>
+<pre>
+</PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
+>Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>k</TD><TD>Gain</TD></TR>
+<TR><TD>T</TD><TD>Time Constant (T&gt;0 required) [s]</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>x_start</TD><TD>Initial or guess value of state</TD></TR>
+<TR><TD>y_start</TD><TD>Initial value of output</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TD>x</TD><TD>State of block</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PID<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.PIDI.png" ALT="Modelica_LinearSystems2.Controller.PID" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.PID"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.PID</H2>
+<B>PID-controller in additive description form</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This is the text-book version of a PID-controller.
+For a more practically useful PID-controller, use
+block LimPID.
+</p>
+ 
+<p>
+The PID block can be initialized in different
+ways controlled by parameter <b>initType</b>. The possible
+values of initType are defined in 
+Modelica.Blocks.Types.InitPID</a>.
+This type is identical to 
+Types.Init</a>, 
+with the only exception that the additional option
+<b>DoNotUse_InitialIntegratorState</b> is added for
+backward compatibility reasons (= integrator is initialized with
+InitialState whereas differential part is initialized with
+NoInit which was the initialization in version 2.2 of the Modelica
+standard library).
+</p>
+ 
+<p>
+Based on the setting of initType, the integrator (I) and derivative (D)
+blocks inside the PID controller are initialized according to the following table:
+</p>
+ 
+<table border=1 cellspacing=0 cellpadding=2>
+  <tr><td valign="top"><b>initType</b></td>
+      <td valign="top"><b>I.initType</b></td>
+      <td valign="top"><b>D.initType</b></td></tr>
+ 
+  <tr><td valign="top"><b>NoInit</b></td>
+      <td valign="top">NoInit</td>
+      <td valign="top">NoInit</td></tr>
+ 
+  <tr><td valign="top"><b>SteadyState</b></td>
+      <td valign="top">SteadyState</td>
+      <td valign="top">SteadyState</td></tr>
+ 
+  <tr><td valign="top"><b>InitialState</b></td>
+      <td valign="top">InitialState</td>
+      <td valign="top">InitialState</td></tr>
+ 
+  <tr><td valign="top"><b>InitialOutput</b><br>
+          and initial equation: y = y_start</td>
+      <td valign="top">NoInit</td>
+      <td valign="top">SteadyState</td></tr>
+ 
+  <tr><td valign="top"><b>DoNotUse_InitialIntegratorState</b></td>
+      <td valign="top">InitialState</td>
+      <td valign="top">NoInit</td></tr>
+</table>
+ 
+<p>
+In many cases, the most useful initial condition is
+<b>SteadyState</b> because initial transients are then no longer
+present. If initType = InitPID.SteadyState, then in some
+cases difficulties might occur. The reason is the 
+equation of the integrator:
+</p>
+ 
+<pre>
+   <b>der</b>(y) = k*u;
+</pre>
+ 
+<p>
+The steady state equation "der(x)=0" leads to the condition that the input u to the
+integrator is zero. If the input u is already (directly or indirectly) defined
+by another initial condition, then the initialization problem is <b>singular</b>
+(has none or infinitely many solutions). This situation occurs often
+for mechanical systems, where, e.g., u = desiredSpeed - measuredSpeed and
+since speed is both a state and a derivative, it is natural to
+initialize it with zero. As sketched this is, however, not possible.
+The solution is to not initialize u or the variable that is used
+to compute u by an algebraic equation.
+</p>
+ 
+ 
+<pre>
+ 
+</PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock"
+>Interfaces.PartialSampledBlock</A> (Partial block of Sampled library (icon + default parameters)).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>pidRep</TD><TD>type of PID representation: k*(1 + 1/Ti/s + Td*s) or (kp + Ti/s + Td*s)</TD></TR>
+<TR><TD>k</TD><TD>Gain of controller</TD></TR>
+<TR><TD>Ti</TD><TD>Time constant of Integrator block [s]</TD></TR>
+<TR><TD>Td</TD><TD>Time constant of Derivative block [s]</TD></TR>
+<TR><TD>Nd</TD><TD>The higher Nd, the more ideal the derivative block</TD></TR>
+<TR><TD>kp</TD><TD>P part parameter of gain representation</TD></TR>
+<TR><TD>ki</TD><TD>I part parameter of gain representation</TD></TR>
+<TR><TD>kd</TD><TD>D part parameter of gain representation</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Initialization</TD></TR>
+<TR><TD>xi_start</TD><TD>Initial or guess value value for integrator output (= integrator state)</TD></TR>
+<TR><TD>xd_start</TD><TD>Initial or guess value for state of derivative block</TD></TR>
+<TR><TD>y_start</TD><TD>Initial value of output</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE LimPID<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.LimPIDI.png" ALT="Modelica_LinearSystems2.Controller.LimPID" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.LimPID"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.LimPID</H2>
+<B>P, PI, PD, and PID controller with limited output, anti-windup compensation and setpoint weighting</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+Via parameter <b>controllerType</b> either <b>P</b>, <b>PI</b>, <b>PD</b>, 
+or <b>PID</b> can be selected. If, e.g., PI is selected, all components belonging to the
+D-part are removed from the block (via conditional declarations).
+The example model
+Modelica.Blocks.Examples.PID_Controller</a>
+demonstrates the usage of this controller.
+Several practical aspects of PID controller design are incorporated
+according to chapter 3 of the book:
+</p>
+ 
+<dl>
+<dt>Astroem K.J., and Haegglund T.:</dt>
+<dd> <b>PID Controllers: Theory, Design, and Tuning</b>.
+     Instrument Society of America, 2nd edition, 1995.
+     Information from:
+     <a href="http://www.control.lth.se/publications/books/asthagg95.html">http://www.control.lth.se/publications/books/asthagg95.html</a>
+     </dd>
+</dl>
+ 
+<p>
+Besides the additive <b>proportional, integral</b> and <b>derivative</b>
+part of this controller, the following features are present:
+</p>
+<ul>
+<li> The output of this controller is limited. If the controller is
+     in its limits, anti-windup compensation is activated to drive
+     the integrator state to zero. </li>
+<li> The high-frequency gain of the derivative part is limited
+     to avoid excessive amplification of measurement noise.</li>
+<li> Setpoint weighting is present, which allows to weight
+     the setpoint in the proportional and the derivative part
+     independantly from the measurement. The controller will respond
+     to load disturbances and measurement noise independantly of this setting
+     (parameters wp, wd). However, setpoint changes will depend on this
+     setting. For example, it is useful to set the setpoint weight wd
+     for the derivative part to zero, if steps may occur in the
+     setpoint signal.</li>
+</ul>
+ 
+<p>
+The parameters of the controller can be manually adjusted by performing
+simulations of the closed loop system (= controller + plant connected
+together) and using the following strategy:
+</p>
+ 
+<ol>
+<li> Set very large limits, e.g., yMax = Modelica.Constants.inf</li>
+<li> Select a <b>P</b>-controller and manually enlarge parameter <b>k</b>
+     (the total gain of the controller) until the closed-loop response
+     cannot be improved any more.</li>
+<li> Select a <b>PI</b>-controller and manually adjust parameters
+     <b>k</b> and <b>Ti</b> (the time constant of the integrator).
+     The first value of Ti can be selected, such that it is in the
+     order of the time constant of the oscillations occuring with
+     the P-controller. If, e.g., vibrations in the order of T=10 ms
+     occur in the previous step, start with Ti=0.01 s.</li>
+<li> If you want to make the reaction of the control loop faster
+     (but probably less robust against disturbances and measurement noise)
+     select a <b>PID</b>-Controller and manually adjust parameters 
+     <b>k</b>, <b>Ti</b>, <b>Td</b> (time constant of derivative block).</li>
+<li> Set the limits yMax and yMin according to your specification.</li>
+<li> Perform simulations such that the output of the PID controller
+     goes in its limits. Tune <b>Ni</b> (Ni*Ti is the time constant of 
+     the anti-windup compensation) such that the input to the limiter
+     block (= limiter.u) goes quickly enough back to its limits.
+     If Ni is decreased, this happens faster. If Ni=infinity, the
+     anti-windup compensation is switched off and the controller works bad.</li>
+</ol>
+ 
+<p>
+<b>Initialization</b>
+</p>
+ 
+<p>
+This block can be initialized in different
+ways controlled by parameter <b>initType</b>. The possible
+values of initType are defined in 
+Modelica.Blocks.Types.InitPID</a>.
+This type is identical to 
+Types.Init</a>, 
+with the only exception that the additional option
+<b>DoNotUse_InitialIntegratorState</b> is added for
+backward compatibility reasons (= integrator is initialized with
+InitialState whereas differential part is initialized with
+NoInit which was the initialization in version 2.2 of the Modelica
+standard library).
+</p>
+ 
+<p>
+Based on the setting of initType, the integrator (I) and derivative (D)
+blocks inside the PID controller are initialized according to the following table:
+</p>
+ 
+<table border=1 cellspacing=0 cellpadding=2>
+  <tr><td valign="top"><b>initType</b></td>
+      <td valign="top"><b>I.initType</b></td>
+      <td valign="top"><b>D.initType</b></td></tr>
+ 
+  <tr><td valign="top"><b>NoInit</b></td>
+      <td valign="top">NoInit</td>
+      <td valign="top">NoInit</td></tr>
+ 
+  <tr><td valign="top"><b>SteadyState</b></td>
+      <td valign="top">SteadyState</td>
+      <td valign="top">SteadyState</td></tr>
+ 
+  <tr><td valign="top"><b>InitialState</b></td>
+      <td valign="top">InitialState</td>
+      <td valign="top">InitialState</td></tr>
+ 
+  <tr><td valign="top"><b>InitialOutput</b><br>
+          and initial equation: y = y_start</td>
+      <td valign="top">NoInit</td>
+      <td valign="top">SteadyState</td></tr>
+ 
+  <tr><td valign="top"><b>DoNotUse_InitialIntegratorState</b></td>
+      <td valign="top">InitialState</td>
+      <td valign="top">NoInit</td></tr>
+</table>
+ 
+<p>
+In many cases, the most useful initial condition is
+<b>SteadyState</b> because initial transients are then no longer
+present. If initType = InitPID.SteadyState, then in some
+cases difficulties might occur. The reason is the 
+equation of the integrator:
+</p>
+ 
+<pre>
+   <b>der</b>(y) = k*u;
+</pre>
+ 
+<p>
+The steady state equation "der(x)=0" leads to the condition that the input u to the
+integrator is zero. If the input u is already (directly or indirectly) defined
+by another initial condition, then the initialization problem is <b>singular</b>
+(has none or infinitely many solutions). This situation occurs often
+for mechanical systems, where, e.g., u = desiredSpeed - measuredSpeed and
+since speed is both a state and a derivative, it is natural to
+initialize it with zero. As sketched this is, however, not possible.
+The solution is to not initialize u_m or the variable that is used
+to compute u_m by an algebraic equation.
+</p>
+ 
+<p>
+If parameter <b>limitAtInit</b> = <b>false</b>, the limits at the
+output of this controller block are removed from the initialization problem which 
+leads to a much simpler equation system. After initialization has been
+performed, it is checked via an assert whether the output is in the
+defined limits. For backward compatibility reasons 
+<b>limitAtInit</b> = <b>true</b>. In most cases it is best
+to use <b>limitAtInit</b> = <b>false</b>.
+</p>
+<pre>
+</PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock"
+>Interfaces.PartialSampledBlock</A> (Partial block of Sampled library (icon + default parameters)), Modelica.Blocks.Interfaces.SVcontrol (Single-Variable continuous controller), <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon"
+>Interfaces.PartialBlockIcon</A> (Basic graphical layout of discrete/continuous block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>pidRepresentation</TD><TD>type of PID representation: k*(1 + 1/Ti/s + Td*s) or (kp + Ti/s + Td*s)</TD></TR>
+<TR><TD>controllerType</TD><TD>Type of controller</TD></TR>
+<TR><TD>k</TD><TD>Gain of controller</TD></TR>
+<TR><TD>Ti</TD><TD>Time constant of Integrator block [s]</TD></TR>
+<TR><TD>Td</TD><TD>Time constant of Derivative block [s]</TD></TR>
+<TR><TD>kp</TD><TD>P part parameter of gain representation</TD></TR>
+<TR><TD>ki</TD><TD>I part parameter of gain representation</TD></TR>
+<TR><TD>kd</TD><TD>D part parameter of gain representation</TD></TR>
+<TR><TD>yMax</TD><TD>Upper limit of output</TD></TR>
+<TR><TD>yMin</TD><TD>Lower limit of output</TD></TR>
+<TR><TD>wp</TD><TD>Set-point weight for Proportional block (0..1)</TD></TR>
+<TR><TD>wd</TD><TD>Set-point weight for Derivative block (0..1)</TD></TR>
+<TR><TD>Ni</TD><TD>Ni*Ti is time constant of anti-windup compensation</TD></TR>
+<TR><TD>Nd</TD><TD>The higher Nd, the more ideal the derivative block</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Initialization</TD></TR>
+<TR><TD>limitsAtInit</TD><TD>= false, if limits are ignored during initializiation</TD></TR>
+<TR><TD>xi_start</TD><TD>Initial or guess value value for integrator output (= integrator state)</TD></TR>
+<TR><TD>xd_start</TD><TD>Initial or guess value for state of derivative block</TD></TR>
+<TR><TD>y_start</TD><TD>Initial value of output</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u_s</TD><TD>Connector of setpoint input signal</TD></TR>
+<TR><TD>u_m</TD><TD>Connector of measurement input signal</TD></TR>
+<TR><TD>y</TD><TD>Connector of actuator output signal</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE UnitDelay<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.UnitDelayI.png" ALT="Modelica_LinearSystems2.Controller.UnitDelay" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.UnitDelay"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.UnitDelay</H2>
+<B>Delay the input by a multiple of the base sample time if discrete block or y=u if continuous block</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+If <b>discrete</b> block, the output y is sampled and is the value
+of the sampled input signal u at the previous sample instant, where
+sample time = sampleClock.sampleTime * sampleFactor and 
+sampleClock.sampleTime is defined globally in the outer component 
+sampleClock and sampleFactor is an Integer parameter of component UnitDelay.
+</p>
+<p>
+If <b>continuous</b> block, the output y is identical to the input u.
+</p>
+<pre></PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"
+>Interfaces.PartialSISO_equality</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ADconverter<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.ADconverterI.png" ALT="Modelica_LinearSystems2.Controller.ADconverter" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.ADconverter"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.ADconverter</H2>
+<B>Analog to digital converter (including sampler)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+If <b>discrete</b> block, the output y is sampled according to sample time
+sampleClock.sampleTime * sampleFactor, where sampleClock.sampleTime
+is defined globally in the outer component sampleClock and
+sampleFactor is an Integer parameter of component Sampler.
+</p>
+<p>
+The sampled output signal is computed by limiting the input u with the
+provided y_min and y_max borders and by rounding according to the
+provided precision of the AD converter defined via parameter bits
+(e.g. bits = 12 is the precision of simple AD converters).
+</p>
+<p>
+If <b>continuous</b> block, the output y is identical to the input u,
+but is limited by y_min and y_max.
+</p>
+<pre></PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"
+>Interfaces.PartialSISO_equality</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y_max</TD><TD>Upper limit of output signal</TD></TR>
+<TR><TD>y_min</TD><TD>Lower limit of output signal</TD></TR>
+<TR><TD>bits</TD><TD>Number of bits (=0 means no quantization error)</TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE DAconverter<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.DAconverterI.png" ALT="Modelica_LinearSystems2.Controller.DAconverter" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.DAconverter"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.DAconverter</H2>
+<B>Digital to analog converter (including zero order hold)</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"
+>Interfaces.PartialSISO_equality</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y_max</TD><TD>Upper limit of output signal</TD></TR>
+<TR><TD>y_min</TD><TD>Lower limit of output signal</TD></TR>
+<TR><TD>bits</TD><TD>Number of bits (=0 means no quantization error)</TD></TR>
+<TR><TD>unitDelay</TD><TD>= true, if one sample period delay, = false, if computing time not modelled</TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE MatrixGain<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.MatrixGainI.png" ALT="Modelica_LinearSystems2.Controller.MatrixGain" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.MatrixGain"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.MatrixGain</H2>
+<B>Output the product of a gain matrix with the input signal vector. The matrix can be loaded from a file optionally</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This block is similar to Modelica.Blocks.Math.MatrixGain. Additionally
+this block offers to load the matrix from a MATLAB-file. It  
+computes output vector <b>y</b> as <i>product</i> of the
+gain matrix <b>K</b> with the input signal vector <b>u</b>:
+</p>
+<pre>
+    <b>y</b> = <b>K</b> * <b>u</b>;
+</pre>
+<p>
+Example:
+</p>
+<pre>
+   parameter: <b>K</b> = [0.12 2; 3 1.5]
+ 
+   results in the following equations:
+ 
+     | y[1] |     | 0.12  2.00 |   | u[1] |
+     |      |  =  |            | * |      |
+     | y[2] |     | 3.00  1.50 |   | u[2] |
+</pre>
+ 
+ 
+ 
+<pre>
+</PRE><P>
+Extends from Modelica.Blocks.Interfaces.MIMO (Multiple Input Multiple Output continuous control block), <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon"
+>Interfaces.PartialBlockIcon</A> (Basic graphical layout of discrete/continuous block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>nin</TD><TD>Number of inputs</TD></TR>
+<TR><TD>nout</TD><TD>Number of outputs</TD></TR>
+<TR><TD>matrixOnFile</TD><TD>true if matrix should be read from file</TD></TR>
+<TR><TD>fileName</TD><TD>&nbsp;</TD></TR>
+<TR><TD>matrixName</TD><TD>Name of the matrix</TD></TR>
+<TR><TD>K[:, :]</TD><TD>Matrix  gain</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u[nin]</TD><TD>Connector of Real input signals</TD></TR>
+<TR><TD>y[nout]</TD><TD>Connector of Real output signals</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Noise<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.NoiseI.png" ALT="Modelica_LinearSystems2.Controller.Noise" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Noise"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.Noise</H2>
+<B>Block that generates a uniform distributed noise output signal at sample instants if discrete and y=0 if continuous</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+If <b>discrete</b> block, the output y is sampled according to sample time
+sampleClock.sampleTime * sampleFactor, where sampleClock.sampleTime
+is defined globally in the outer component sampleClock and
+sampleFactor is an Integer parameter of component Noise.
+At every sample time, a random output signal y in the range y_min .. y_max
+is generated, where y_min and y_max are parameters. A typical
+noise signal is shown in the next figure:
+</p>
+<p align="center">
+<img src="../Extras/Images/Noise1.png">
+</p>
+<p>
+The Integer[3] parameter vector <b>firstSeed</b> is used to initialize the
+basic random number generator. The 3 elements of firstSeed need
+to be in the range [0, 255]. The use of the same seed vector 
+will lead to the same sequence of numbers when these are computed serially.
+This is usually not desired. Therefore, for every usage of block
+<b>Noise</b> a different firstSeed should be defined.
+</p>
+<p>
+If <b>continuous</b> block, the output y = 0.0, i.e., no noise signal
+is generated. The reason is that the noise can only reasonably be
+used in a simulation if it is a discrete signal, i.e., changes
+its value only at sample instants. Since a continous block is usually
+used to speed up the simulation, the noise should also be turned
+off because it will otherwise significantly limit the
+maximum step size of the integrator.<br>&nbsp;
+</p>
+<p>
+This noise generator is based on a function that generates
+a random real number uniformely in the semi-open range [0.0, 1.0). 
+The function uses the standard Wichmann-Hill generator, 
+combining three pure multiplicative congruential generators of 
+modulus 30269, 30307 and 30323. Its period (how many numbers it 
+generates before repeating the sequence exactly) is 6,953,607,871,644. 
+While of much higher quality than the rand() function supplied by 
+most C libraries, the theoretical properties are much the same 
+as for a single linear congruential generator of large modulus.
+</p>
+<pre></PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon"
+>Interfaces.PartialBlockIcon</A> (Basic graphical layout of discrete/continuous block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y_min</TD><TD>Lower limit of noise band</TD></TR>
+<TR><TD>y_max</TD><TD>Upper limit of noise band</TD></TR>
+<TR><TD>firstSeed[3]</TD><TD>Integer[3] defining random sequence; required element range: 0..255</TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y</TD><TD>Discrete output signal of block</TD></TR>
+</TABLE>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:57 2009.
+</address></BODY>
+</HTML>
