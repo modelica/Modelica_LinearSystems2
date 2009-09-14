@@ -9,7 +9,7 @@ annotation (
    versionBuild=2,
    versionDate="2009-09-02",
    dateModified = "2009-09-02 06:15:59Z",
-   revisionID="$Id:: package.mo 1497 2009-09-02 06:15:59Z #$",
+   revisionID="$Id::                                       $",
   Documentation(info="<html>
 <p> 
 Library <b>Modelica_LinearSystems2</b> is a Modelica package 
