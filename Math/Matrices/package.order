@@ -19,6 +19,7 @@ LU_solve
 LU_solve2
 lyapunov
 norm
+nullspace
 orthogonalQ
 printMatrix
 QR
@@ -27,4 +28,9 @@ solve
 solve2
 toUpperHessenberg
 trace
+C_QR
+C_QR2
+C_rank
+C_singularValues
+C_solve2
 Internal

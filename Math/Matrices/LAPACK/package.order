@@ -19,3 +19,11 @@ dormhr
 dormqr
 dtrevc
 dtrsen
+zungqr
+zgeqrf
+zgesvd
+zgesv
+wrapper_zungqr
+wrapper_zgeqrf
+wrapper_zgesvd
+wrapper_zgesv

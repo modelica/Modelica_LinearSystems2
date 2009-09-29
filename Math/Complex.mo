@@ -362,7 +362,58 @@ algorithm
      gap := div(gap,2);
   end while;
 end sortComplex;
+
+function multiply "multiplication of complex vectors"
+  extends Modelica.Icons.Function;
+  import Modelica_LinearSystems2.Math.Complex;
+  import Modelica;
+
+  input Complex v1[:];
+  input Complex v2[size(v1,1)];
+  output Complex result=Complex(0);
+
+algorithm
+  for i in 1:size(v1,1) loop
+    result := result + v1[i]*v2[i];
+  end for;
+
+end multiply;
+
 end Vectors;
+
+encapsulated package Matrices
+import Modelica;
+encapsulated function matMatMul "Multiply two complex matrices"
+    import Modelica_LinearSystems2.Math.Complex;
+
+  input Complex m1[:,:] "Complex matrix 1";
+  input Complex m2[size(m1, 2),:] "Complex matrix 2";
+  output Complex m3[size(m1, 1),size(m2, 2)] "= m1*m2";
+    protected
+  Complex j=Complex.j();
+algorithm
+  m3 := m1[:, :].re*m2[:, :].re - m1[:, :].im*m2[:, :].im + j*(m1[:,:].re*m2[:,:].im + m1[:,:].im*m2[:,:].re);
+end matMatMul;
+
+encapsulated function matVecMul
+      "Multiply a complex matrices with a complex vector"
+  import Modelica_LinearSystems2.Math.Complex;
+  import Re = Modelica_LinearSystems2.Math.Complex.real;
+  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+
+  input Complex m[:,:] "Complex matrix";
+  input Complex vi[size(m, 2)] "Complex vector";
+  output Complex vo[size(m, 1)] "= m*vi";
+    protected
+  Complex j=Complex.j();
+  Real Rem[size(m,1),size(m,2)]=Re(m);
+  Real Imm[size(m,1),size(m,2)]=Im(m);
+  Real Revi[size(vi,1)]=Re(vi);
+  Real Imvi[size(vi,1)]=Im(vi);
+algorithm
+  vo := Complex(1)*(Rem*Revi - Imm*Imvi) + j*(Rem*Imvi + Imm*Revi);
+end matVecMul;
+end Matrices;
 
   encapsulated operator 'constructor'
     function fromReal
@@ -726,6 +777,7 @@ phase angle phi of the Complex number c in the range
   end frequency;
 
 encapsulated package Internal
+    import Modelica;
  function eigenValues_dhseqr
       "compute eingenvalues of a upper Hessenberg matrix using lapack routine DHSEQR"
 
@@ -755,6 +807,18 @@ encapsulated package Internal
   end for;
 
  end eigenValues_dhseqr;
+
+  function C_transpose "Computes the transposed matrix of a complex matrix"
+    extends Modelica.Icons.Function;
+      import Modelica_LinearSystems2.Math.Complex;
+    input Complex C[:,:];
+    output Complex CT[size(C,2),size(C,1)];
+    protected
+    Complex j=Complex.j();
+  algorithm
+    CT := Complex(1)*transpose(C[:,:].re)-j*transpose(C[:,:].im);
+
+  end C_transpose;
 end Internal;
 
 end Complex;

@@ -15,6 +15,7 @@ conversionToTransferFunctionSISO
 conversionToZerosAndPolesMIMO
 conversionToZerosAndPolesSISO
 designAssignPolesSISO
+designAssignPolesMIMO
 designKalmanFilter
 designLQG
 designLQR

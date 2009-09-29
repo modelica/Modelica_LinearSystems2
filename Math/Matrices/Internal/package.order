@@ -17,3 +17,5 @@ QR2
 readMatrixGain
 reorderRSF
 reorderRSF2
+k_care_u
+conditionNumber
