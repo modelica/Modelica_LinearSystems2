@@ -384,34 +384,64 @@ end Vectors;
 encapsulated package Matrices
 import Modelica;
 encapsulated function matMatMul "Multiply two complex matrices"
-    import Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2.Math.Complex;
+  import Re = Modelica_LinearSystems2.Math.Complex.real;
+  import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
   input Complex m1[:,:] "Complex matrix 1";
   input Complex m2[size(m1, 2),:] "Complex matrix 2";
   output Complex m3[size(m1, 1),size(m2, 2)] "= m1*m2";
+//   Complex j=Complex.j();
+//   Real m1Re[size(m1,1),size(m1,2)]=Re(m1);
+//   Real m1Im[size(m1,1),size(m1,2)]=Im(m1);
+//   Real m2Re[size(m2,1),size(m2,2)]=Re(m2);
+//   Real m2Im[size(m2,1),size(m2,2)]=Im(m2);
     protected
-  Complex j=Complex.j();
+  Integer l1;
+  Integer l2;
 algorithm
-  m3 := m1[:, :].re*m2[:, :].re - m1[:, :].im*m2[:, :].im + j*(m1[:,:].re*m2[:,:].im + m1[:,:].im*m2[:,:].re);
+//  m3 := m1[:, :].re*m2[:, :].re - m1[:, :].im*m2[:, :].im + j*(m1[:, :].re*m2[:,:].im + m1[:, :].im*m2[:, :].re);
+//  m3 :=m1Re*m2Re - m1Im*m2Im + j*(m1Re*m2Im + m1Im*m2Re);
+
+ for l1 in 1:size(m1,1) loop
+   for l2 in 1:size(m2,2) loop
+     m3[l1,l2] := Complex.Vectors.multiply(m1[l1,:],m2[:,l2]);
+   end for;
+   end for;
+
 end matMatMul;
 
 encapsulated function matVecMul
       "Multiply a complex matrices with a complex vector"
   import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+//  import Re = Modelica_LinearSystems2.Math.Complex.real;
+//  import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
   input Complex m[:,:] "Complex matrix";
   input Complex vi[size(m, 2)] "Complex vector";
   output Complex vo[size(m, 1)] "= m*vi";
+//   Complex j=Complex.j();
+//   Real Rem[size(m, 1),size(m, 2)]=Re(m);
+//   Real Imm[size(m, 1),size(m, 2)]=Im(m);
+//   Real Revi[size(vi, 1)]=Re(vi);
+//   Real Imvi[size(vi, 1)]=Im(vi);
     protected
-  Complex j=Complex.j();
-  Real Rem[size(m,1),size(m,2)]=Re(m);
-  Real Imm[size(m,1),size(m,2)]=Im(m);
-  Real Revi[size(vi,1)]=Re(vi);
-  Real Imvi[size(vi,1)]=Im(vi);
+  Integer l1;
+
 algorithm
-  vo := Complex(1)*(Rem*Revi - Imm*Imvi) + j*(Rem*Imvi + Imm*Revi);
+//  vo := Rem*Revi - Imm*Imvi + j*(Rem*Imvi + Imm*Revi);
+
+//    for l1 in 1:size(m, 1) loop
+//      vo[l1] := Complex(0);
+//      for l2 in 1:size(m, 2) loop
+//        vo[l1] := vo[l1] + m[l1, l2]*vi[l2];
+//      end for;//l2
+//    end for;  //l1
+
+for l1 in 1:size(m, 1) loop
+  vo[l1] := Complex.Vectors.multiply(m[l1,:],vi);
+end for;
+
 end matVecMul;
 end Matrices;
 
@@ -810,13 +840,25 @@ encapsulated package Internal
 
   function C_transpose "Computes the transposed matrix of a complex matrix"
     extends Modelica.Icons.Function;
-      import Modelica_LinearSystems2.Math.Complex;
+
+    import Modelica_LinearSystems2.Math.Complex;
+    import Re = Modelica_LinearSystems2.Math.Complex.real;
+    import Im = Modelica_LinearSystems2.Math.Complex.imag;
+
     input Complex C[:,:];
-    output Complex CT[size(C,2),size(C,1)];
+    output Complex CT[size(C, 2),size(C, 1)];
     protected
     Complex j=Complex.j();
+    Integer l1;
+    Integer l2;
   algorithm
-    CT := Complex(1)*transpose(C[:,:].re)-j*transpose(C[:,:].im);
+  //  CT := Complex(1)*transpose(C[:,:].re)-j*transpose(C[:,:].im);// too slow
+    for l1 in 1:size(C, 1) loop
+      for l2 in 1:size(C, 2) loop
+  //      CT[l2, l1] := Re(C[l1, l2]) - j*Im(C[l1, l2]);
+        CT[l2, l1] := Complex.conj(C[l1,l2]);
+      end for;
+    end for;
 
   end C_transpose;
 end Internal;

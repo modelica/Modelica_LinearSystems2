@@ -55,6 +55,6 @@ int c_inter_zgesv_(integer *n, integer *nrhs, doublereal *a_real, doublereal *a_
    free(a);
    free(b);
   return 0;
-}", Library={"zlapack","lapack"});
+}", Library={"zlapack"});
 
 end wrapper_zgesv;

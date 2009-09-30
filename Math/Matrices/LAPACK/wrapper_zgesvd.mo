@@ -70,6 +70,8 @@ int c_inter_zgesvd_(char *jobu, char *jobvt, integer *m, integer *n,
    work = (doublecomplex *) malloc((lwork+1)*sizeof(doublecomplex));
    zgesvd_(jobu, jobvt, m, n, a, lda, s, u, ldu, vt, ldvt, work, &lwork, rwork, info);
   
+ 
+ 
    for(i=0;i<mm*mm;i++)
    {
      u_real[i]=u[i].r;
@@ -86,6 +88,6 @@ int c_inter_zgesvd_(char *jobu, char *jobvt, integer *m, integer *n,
    free(vt);
    free(work);
   return 0;
-}", Library={"zlapack","lapack"});
+}", Library={"zlapack"});
 
 end wrapper_zgesvd;

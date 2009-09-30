@@ -28,6 +28,7 @@ solve
 solve2
 toUpperHessenberg
 trace
+C_nullspace
 C_QR
 C_QR2
 C_rank

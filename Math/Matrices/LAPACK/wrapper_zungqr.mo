@@ -63,6 +63,6 @@ int c_inter_zungqr_(integer *m, integer *n, integer *k, doublereal *qr_real, dou
    free(tau);
    free(work);
   return 0;
-}", Library={"zlapack","lapack"});
+}", Library={"zlapack"});
 
 end wrapper_zungqr;

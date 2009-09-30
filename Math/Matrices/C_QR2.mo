@@ -9,7 +9,7 @@ function C_QR2
   output Complex R[size(A,1),size(A, 2)] "Square upper triangular matrix";
 
 protected
-  Complex A2[size(A, 1),size(A, 1)]=fill(Complex(0), size(A, 1), size(A, 1));
+  Complex A2[size(A, 1),size(A, 1)];
   Complex R2[size(A, 1),size(A, 1)];
   Integer nrow=size(A, 1);
   Integer ncol=size(A, 2);

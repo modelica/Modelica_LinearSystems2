@@ -131,15 +131,23 @@ Modelica_LinearSystems2.Math.Complex pp[:]=array(Complex(-i) for i in 1:30);
 Modelica_LinearSystems2.Math.Complex p[n]=pp[1:n];
 
 algorithm
-//   p[2] := Complex(-1);
-//   p[3] := Complex(-1);
-//   p[4] := Complex(-1);
-//   p[5] := Complex(-1);
+    p[1] := Complex(-1,1);
+    p[2] := Complex(-1,-1);
+    p[3] := Complex(-2,2);
+    p[4] := Complex(-2,-2);
+//    p[5] := Complex(-3,3);
+//    p[6] := Complex(-3,-3);
+//    p[7] := Complex(-4,4);
+//    p[8] := Complex(-4,-4);
+//    p[9] := Complex(-5,5);
+//    p[10] := Complex(-5,-5);
   (K, S, newPoles) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, p);
   Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
   newPoles := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A-ss.B*K);
   Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
 
-  K := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob(ss.A, ss.B, p);
+  K := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob( ss.A, ss.B, p);
+  newPoles := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A-ss.B*K);
+  Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
 
 end designAssignPolesMIMO;

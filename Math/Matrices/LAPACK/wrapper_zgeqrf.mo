@@ -69,6 +69,6 @@ int c_inter_zgeqrf_(integer *m, integer *n, doublereal *a_real, doublereal *a_im
    free(tau);
    free(work);
   return 0;
-}", Library={"zlapack","lapack"});
+}", Library={"zlapack"});
 
 end wrapper_zgeqrf;

@@ -5,23 +5,17 @@ function zgesvd "Determine singular values of a complex matrix"
 
   input Complex A[:,:] "Square or rectangular matrix";
   output Real sigma[min(size(A, 1), size(A, 2))] "singular values";
-  output Complex U[size(A, 1),size(A, 1)]=Complex(1)*identity(size(A, 1))
-    "Left orthogonal matrix";
-  output Complex VT[size(A, 2),size(A, 2)]=Complex(1)*identity(size(A, 2))
-    "Transposed right orthogonal matrix";
+  output Complex U[size(A, 1),size(A, 1)] "Left orthogonal matrix";
+  output Complex VT[size(A, 2),size(A, 2)] "Transposed right orthogonal matrix";
   output Integer info;
 
 protected
   Integer n=min(size(A, 1), size(A, 2)) "Number of singular values";
 
-  Real U_real[size(A, 1),size(A, 1)]=identity(size(A, 1))
-    "Left orthogonal matrix, real part";
-  Real U_imag[size(A, 1),size(A, 1)]=zeros(size(A, 1), size(A, 1))
-    "Left orthogonal matrix, imaginary part";
-  Real VT_real[size(A, 2),size(A, 2)]=identity(size(A, 2))
-    "Left orthogonal matrix, real part";
-  Real VT_imag[size(A, 2),size(A, 2)]=zeros(size(A, 2), size(A, 2))
-    "Left orthogonal matrix, imaginary part";
+  Real U_real[size(A, 1),size(A, 1)] "Left orthogonal matrix, real part";
+  Real U_imag[size(A, 1),size(A, 1)] "Left orthogonal matrix, imaginary part";
+  Real VT_real[size(A, 2),size(A, 2)] "Left orthogonal matrix, real part";
+  Real VT_imag[size(A, 2),size(A, 2)] "Left orthogonal matrix, imaginary part";
   Real A_real[size(A, 1),size(A, 2)]=A[:, :].re "Real part of matrix A";
   Real A_imag[size(A, 1),size(A, 2)]=A[:, :].im "Imaginary part of matrix A";
 
