@@ -11,6 +11,7 @@ protected
   Real C[1,2]=[10, 100];
   Real Qtilde[1,1]=[1];
   Real Q[2,2]=transpose(C)*Qtilde*C;
+  Real h;
 
 public
   output Real X1[2,2];
