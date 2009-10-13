@@ -12,7 +12,8 @@ function carenls
   input Real R[size(B, 2),size(B, 2)]=identity(size(B, 2));
   input Real Q[size(A, 1),size(A, 2)]=identity(size(A, 1));
   input Real X0[size(A, 1),size(A, 2)];
-  input Real eps=Matrices.frobeniusNorm(A)*1e-9;
+  input Real eps=Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm(
+                                        A)*1e-9;
 
   output Real X[size(X0, 1),size(X0, 2)];
   output Real r;
@@ -40,11 +41,14 @@ algorithm
       Rk := transpose(A)*Xk + Xk*A + Q - Xk*G*Xk;
       Nk := Matrices.lyapunov(Ak, -Rk);
       tk := Matrices.Internal.findLocal_tk(Rk, G, Nk);
-      stop := eps > Matrices.frobeniusNorm(tk*Nk)/Matrices.frobeniusNorm(Xk);
+      stop := eps > Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm(
+                                           tk*Nk)/Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm(
+                                                                         Xk);
       Xk := Xk + tk*Nk;
     end while;
     X := Xk;
-    r := Matrices.frobeniusNorm(X*A + transpose(A)*X - X*G*X + Q);
+    r := Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm(
+                                X*A + transpose(A)*X - X*G*X + Q);
 
   elseif n == 1 then
     xc := Polynomial.roots(Polynomial({-G[1, 1],2*A[1, 1],Q[1, 1]}));

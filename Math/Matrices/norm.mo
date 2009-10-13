@@ -46,6 +46,9 @@ algorithm
     // largest singular value
     result := if min(size(A)) > 0 then max(
       Modelica.Math.Matrices.singularValues(A)) else 0;
+  elseif p == 3 then
+    // Frobenius norm
+    result :=   Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm(A);
   elseif p == Modelica.Constants.inf then
     // row sum norm
     for i in 1:size(A, 1) loop

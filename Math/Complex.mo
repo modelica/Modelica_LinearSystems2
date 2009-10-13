@@ -363,7 +363,7 @@ algorithm
   end while;
 end sortComplex;
 
-function multiply "multiplication of complex vectors"
+function multiply "scalar product of two complex vectors"
   extends Modelica.Icons.Function;
   import Modelica_LinearSystems2.Math.Complex;
   import Modelica;
@@ -383,6 +383,130 @@ end Vectors;
 
 encapsulated package Matrices
 import Modelica;
+
+encapsulated function conditionNumber
+      "Calculate the condition number norm(A)*norm(inv(A))"
+  extends Modelica.Icons.Function;
+  import Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2;
+  import Modelica;
+
+  input Complex A[:,:] "Input matrix";
+  input Real p(min=1) = 2
+        "Type of p-norm (only allowed: 1, 2 or Modelica.Constants.inf)";
+  output Real result=0.0 "p-norm of matrix A";
+    protected
+  Real eps=1e-20;
+  Real s[size(A, 1)] "singular values";
+
+algorithm
+  if p == 2 then
+    s := Modelica_LinearSystems2.Math.Matrices.C_singularValues(A);
+    if min(s) < eps then
+      result := -1e100;
+    else
+      result := max(s)/min(s);
+    end if;
+  else
+    result := Complex.Matrices.norm(A, p)*Complex.Matrices.norm(Complex.Matrices.inv(A), p);
+  end if;
+end conditionNumber;
+
+
+
+function norm "Returns the norm of a matrix"
+  extends Modelica.Icons.Function;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math;
+  import Modelica_LinearSystems2.Math.Complex;
+
+  input Complex A[:, :] "Input matrix";
+  input Real p(min=1) = 2
+        "Type of p-norm (only allowed: 1, 2 or Modelica.Constants.inf)";
+  output Real result=0.0 "p-norm of matrix A";
+
+  annotation ( Documentation(info="<HTML>
+<h4>Syntax</h4>
+<blockquote><pre>
+Matrices.<b>norm</b>(A);
+Matrices.<b>norm</b>(A, p=2);
+</pre></blockquote>
+<h4>Description</h4>
+<p>
+The function call \"<code>Matrices.norm(A)</code>\" returns the
+2-norm of matrix A, i.e., the largest singular value of A.<br>
+The function call \"<code>Matrices.norm(A, p)</code>\" returns the
+p-norm of matrix A. The only allowed values for p are</p>
+<ul>
+<li> \"p=1\": the largest column sum of A</li>
+<li> \"p=2\": the largest singular value of A</li>
+<li> \"p=Modelica.Constants.inf\": the largest row sum of A</li>
+</ul>
+<p>
+Note, for any matrices A1, A2 the following inequality holds:
+</p>
+<blockquote><pre>
+Matrices.<b>norm</b>(A1+A2,p) &le; Matrices.<b>norm</b>(A1,p) + Matrices.<b>norm</b>(A2,p)
+</pre></blockquote>
+<p>
+Note, for any matrix A and vector v the following inequality holds:
+</p>
+<blockquote><pre>
+Vectors.<b>norm</b>(A*v,p) &le; Matrices.<b>norm</b>(A,p)*Vectors.<b>norm</b>(A,p)
+</pre></blockquote>
+</HTML>"));
+algorithm
+  if p == 1 then
+    // column sum norm
+    for i in 1:size(A, 2) loop
+      result := max(result, sum(Complex.'abs'(A[:, i])));
+
+    end for;
+  elseif p == 2 then
+    // largest singular value
+    result := max(Math.Matrices.C_singularValues(A));
+  elseif p==3 then
+    // Frobenius norm
+    result := Complex.Internal.frobeniusNorm(A);
+  elseif p == Modelica.Constants.inf then
+    // row sum norm
+    for i in 1:size(A, 1) loop
+      result := max(result, sum(Complex.'abs'(A[i, :])));
+    end for;
+  else
+    assert(false, "Optional argument \"p\" of function \"norm\" must be
+1, 2 or Modelica.Constants.inf");
+  end if;
+end norm;
+
+    function inv
+      "Inverse of a comlex matrix (try to avoid, use function solve(..) instead)"
+      extends Modelica.Icons.Function;
+
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Math.Matrices;
+
+      input Complex A[:,size(A, 1)];
+      output Complex invA[size(A, 1),size(A, 2)] "Inverse of matrix A";
+    protected
+      Integer info;
+      Integer pivots[size(A, 1)] "Pivot vector";
+      Complex LU[size(A, 1),size(A, 2)] "LU factors of A";
+    algorithm
+      (LU,pivots,info) := Matrices.LAPACK.zgetrf(A);
+
+      assert(info == 0,
+                    "Calculating an inverse matrix with function
+\"Matrices.inv\" is not possible, since matrix A is singular.");
+
+      (invA,info) := Matrices.LAPACK.zgetri(LU, pivots);
+
+      annotation (Documentation(info=
+                                 "<html>
+
+</html>"));
+    end inv;
+
 encapsulated function matMatMul "Multiply two complex matrices"
   import Modelica_LinearSystems2.Math.Complex;
   import Re = Modelica_LinearSystems2.Math.Complex.real;
@@ -443,6 +567,7 @@ for l1 in 1:size(m, 1) loop
 end for;
 
 end matVecMul;
+
 end Matrices;
 
   encapsulated operator 'constructor'
@@ -861,6 +986,21 @@ encapsulated package Internal
     end for;
 
   end C_transpose;
+
+function frobeniusNorm "Return the Frobenius norm of a matrix"
+  extends Modelica.Icons.Function;
+  import Modelica_LinearSystems2.Math.Complex;
+  input Complex A[:,:] "Input matrix";
+  output Real result=0.0 "frobenius norm of matrix A";
+algorithm
+  for i1 in 1:size(A, 1) loop
+    for i2 in 1:size(A, 2) loop
+      result := result + Complex.real(A[i1, i2]*Complex.conj(A[i1, i2]));
+    end for;
+  end for;
+  result := sqrt(result);
+end frobeniusNorm;
+
 end Internal;
 
 end Complex;

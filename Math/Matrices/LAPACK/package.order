@@ -1,3 +1,4 @@
+dgees
 dgeev
 dgeevx
 dgegv
@@ -23,7 +24,11 @@ zungqr
 zgeqrf
 zgesvd
 zgesv
+zgetrf
+zgetri
 wrapper_zungqr
 wrapper_zgeqrf
 wrapper_zgesvd
 wrapper_zgesv
+wrapper_zgetrf
+wrapper_zgetri

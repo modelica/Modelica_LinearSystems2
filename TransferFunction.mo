@@ -2527,10 +2527,9 @@ StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conver
     input String numName="n" "Name of the numenator of the transfer function";
     input String denName="d" "Name of the denominator of the transfer function";
 
-    output TransferFunction tf "tranfer function";
     protected
-    Integer numSize[2]=readMatrixSize(fileName, numName);
-    Integer denSize[2]=readMatrixSize(fileName, denName);
+    input Integer numSize[2]=readMatrixSize(fileName, numName);
+    input Integer denSize[2]=readMatrixSize(fileName, denName);
 
     Real num[numSize[1],numSize[2]]=readMatrix(
           fileName,
@@ -2542,6 +2541,10 @@ StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conver
           denName,
           denSize[1],
           denSize[2]) "denominator coefficients";
+    input Integer ns2=numSize[2];
+    input Integer ds2=denSize[2];
+    public
+   output TransferFunction tf(n=fill(0,ns2),d=fill(0,ds2)) "tranfer function";
 
   algorithm
     tf.n := vector(num);

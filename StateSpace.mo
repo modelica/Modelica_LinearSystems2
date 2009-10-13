@@ -3823,6 +3823,8 @@ end Analysis;
         "number of eigenvalues that are not modified with respect to alpha";
       output Integer nap "number of assigned eigenvalues";
       output Integer nup "number of uncontrollable eigenvalues";
+      output Complex X[size(ss.A, 1),size(ss.A, 1)]
+        "eigenvectors of the closed loop system";
 
     protected
       Real A_rsf[size(ss.A, 1),size(ss.A, 2)];
@@ -3869,6 +3871,9 @@ end Analysis;
         "array to mark the poles in gamma to be reordered";
       Boolean select_sys[:] "array to mark the system poles to be reordered";
 
+      Complex SS[:,:];
+      Complex Xj[:,:];
+
     algorithm
       assert(size(gamma, 1) <= size(ss.A, 1),
         "At most n (order of ss) eigenvalues can be assigned");
@@ -3887,7 +3892,7 @@ end Analysis;
       end for;
 
       // put matrix ss.A to real Schur form A <- QAQ' and compute B <- QB
-      (A_rsf,Z,alphaReal,alphaImag) := Matrices.rsf(ss.A);
+      (A_rsf,Z,alphaReal,alphaImag) := Matrices.rsf2(ss.A);
       ZT := transpose(Z);
 
       // reorder real Schur form according to alpha
@@ -4008,6 +4013,20 @@ end Analysis;
 
       S := ss.A - ss.B*K;
       po := Complex.eigenValues(S);
+
+    //   X := fill(Complex(0),n,n);
+    //   for i in 1:n loop
+    //     SS:=Complex(1)*S;
+    //     for ii in 1:n loop
+    //       SS[ii,ii] := SS[ii,ii]-po[i];
+    //     end for;
+    //     Xj := Matrices.C_nullspace(SS);
+    //     // Matrices.printMatrix(Complex.real(Xj),6,"ReXj");
+    //     // Matrices.printMatrix(Complex.imag(Xj),6,"ImXj");
+    //     for ii in 1:n loop
+    //       X[ii,i] := Xj[ii,1];
+    //     end for;
+    //   end for;
 
       annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
@@ -4634,6 +4653,366 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
 
     end lqg;
 
+    encapsulated function assignPolesMI2
+      "Pole assigment design algorithm for multi input systems"
+
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica;
+      import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Math.Matrices;
+
+      input StateSpace ss "state space system";
+
+      input Complex gamma[:]=fill(Complex(0), size(ss.A,1)) "Designed Poles";
+      input Integer np=size(gamma, 1) "number of given eigenvalues to assign";
+      input Real alpha=-1e10
+        "maximum admissible value for real parts(continuous) or for moduli (discrete) of the eigenvalues of A which will not be modified by the eigenvalue assignment algorithm";
+      input Real tolerance=Modelica.Math.Matrices.norm(ss.A, 1)*1e-12
+        "The tolerance to be used in determining the controllability of (A,B)";
+      output Real K[size(ss.B, 2),size(ss.A, 1)]
+        "State feedback matrix assigning the desired poles";
+      output Real S[:,:] "Closed loop System matrix";
+      output Complex po[size(ss.A, 1)] "poles of the closed loop system";
+      output Integer nfp
+        "number of eigenvalues that are not modified with respect to alpha";
+      output Integer nap "number of assigned eigenvalues";
+      output Integer nup "number of uncontrollable eigenvalues";
+      output Complex X[size(ss.A, 1),size(ss.A, 1)]
+        "eigenvectors of the closed loop system";
+
+    protected
+      Real A_rsf[size(ss.A, 1),size(ss.A, 2)];
+      Real B_rsf[size(ss.B, 1),size(ss.B, 2)];
+      Real Q[size(ss.A, 1),size(ss.A, 1)];
+      Real Ks1[:,:];
+      Real Ks2[:,:];
+      Real Q2[:,:];
+      Real A_rsf_1[:,:];
+      Real Q1[:,:];
+      Boolean select[:];
+      Boolean rselectA[:];
+      Real Z[:,:] "orthogonal transformation matrix";
+      Real ZT[:,:] "orthogonal transformation matrix";
+      Complex pf[:];
+      Complex gammaReordered[:]=gamma;
+      Integer info;
+      Real wr[size(gamma, 1)];
+      Real wi[size(gamma, 1)];
+      Boolean imag=false;
+      Integer i;
+      Integer ii;
+      Integer counter;
+      Integer n=size(ss.A, 1);
+      Integer ipf;
+      Integer nccA
+        "number of conjugated complex pole pairs of unmodified system";
+      Integer nccg "number of conjugated complex pole pairs of gamma";
+      Integer rzg "number of real zeros in gamma";
+      Integer ncc;
+
+      Complex h;
+      Integer h2[2];
+      Real alphaReal[size(ss.A, 1)]
+        "Real part of eigenvalue=alphaReal+i*alphaImag";
+      Real alphaImag[size(ss.A, 1)]
+        "Imaginary part of eigenvalue=(alphaReal+i*alphaImag";
+
+      Complex pi[:]=Complex.eigenValues(ss.A);
+
+      Boolean complex_assignedPoles=false
+        "true if there is at least one conjugated comples pole pair in the set of the assigned poles";
+      Boolean complex_originalPoles=false
+        "true if there is at least one conjugated comples pole pair in the set of unmodified system poles";
+      Boolean consistency;
+
+      Complex SS[:,:];
+      Complex Xj[:,:];
+
+      Integer markA[n]=fill(1,n);
+      Integer markg[n]=fill(1,n);
+
+      Complex ev[:];
+
+    algorithm
+      assert(size(gamma, 1) <= size(ss.A, 1),
+        "At most n (order of ss) eigenvalues can be assigned");
+
+     /* Extraction of Poles (Variable conversation) and pole sequence check */
+      for i in 1:size(gamma, 1) loop
+        wr[i] := gamma[i].re;
+        wi[i] := gamma[i].im;
+        if imag then
+          assert(wi[i - 1] == -wi[i] and wr[i - 1] == wr[i],
+            "Poles are in wrong sequence");
+          imag := false;
+        elseif wi[i] <> 0 then
+          imag := true;
+        end if;
+      end for;
+
+      // put matrix ss.A to real Schur form A <- QAQ' and compute B <- QB
+      (A_rsf,Z,alphaReal,alphaImag) := Matrices.rsf2(ss.A);
+      ZT := transpose(Z);
+
+      // determine number of poles not to be assigned according to alpha
+         nfp := 0;
+         nccA := 0;
+         nccg := 0;
+         for i in 1:n loop
+           if alphaReal[i] < alpha then
+             nfp := nfp + 1;
+             markA[i] := 0;
+             markg[i] := 0;
+           end if;
+           if abs(alphaImag[i]) > 0 then
+             markA[i] := 2;
+             nccA := nccA + 1;
+           end if;
+           if abs(gammaReordered[i].im) > 0 then
+             markg[i] := 2;
+             nccg := nccg + 1;
+           end if;
+         end for;
+         nap := n - nfp;
+         nccA := div(nccA, 2);
+         nccg := div(nccg, 2);
+         ncc := max(nccA, nccg);
+
+       // reorder real Schur form according to alpha
+       (A_rsf,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSF2(
+           A_rsf,
+           identity(size(A_rsf, 1)),
+           alphaReal,
+           alphaImag,
+           alpha);
+       ZT := transpose(Z)*ZT;
+       B_rsf := ZT*ss.B;
+
+        Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal,6,"alphaReal");
+        Modelica_LinearSystems2.Math.Vectors.printVector(alphaImag,6,"alphaImag");
+       Modelica_LinearSystems2.Math.Complex.Vectors.print("gammaReordered1",gammaReordered);
+
+      // Reorder gammaReordered according to alpha
+        ii := 1;
+        for i in 1:n loop
+          if markg[i]==0 then
+            h := gammaReordered[ii];
+            gammaReordered[ii] := gammaReordered[i];
+            gammaReordered[i] := h;
+            ii := ii+1;
+          end if;
+        end for;
+
+       // check consistency of poles assignment, i.e. complex pole pairs in gammaReordered and alphaReal and alphaImag may not be separated
+        consistency:=true;
+        i:=1;
+        while i<n loop
+          if markA[i]==2 then
+            consistency :=markA[i + 1] == 2 and ((markg[i] == 2 and markg[i + 1] == 2)
+              or (markg[i] == 1 and markg[i + 1] == 1));
+            i := i+2;
+          elseif markg[i]==2 then
+            consistency :=markg[i + 1] == 2 and (markA[i] == 1 and markA[i + 1] == 1);
+            i := i+2;
+          else
+            i := i+1;
+          end if;
+        end while;
+       assert(consistency,"System poles and assigned poles have to be assigned consistently, i.e. complex pole pairs may not be separated");
+
+      // main algorithm
+      K := zeros(size(ss.B, 2), size(ss.A, 1));
+      counter := nfp + 1;
+       while counter<=n loop
+        if markA[n + nfp + 1 - counter] == 2 or markg[n + nfp + 1 - counter] == 2 then
+
+    //#############################
+    Modelica_LinearSystems2.Math.Complex.Vectors.print("g2",gammaReordered[n + nfp - counter:n + nfp + 1 - counter]);
+    Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal[n + nfp - counter:n + nfp + 1 - counter],6,"ar2");
+    ev:=Modelica_LinearSystems2.Math.Complex.eigenValues( A_rsf[n - 1:n, n - 1:n]);
+    Modelica_LinearSystems2.Math.Complex.Vectors.print("ev2",ev);
+    //#############################
+
+          Ks2 := StateSpace.Internal.assignOneOrTwoPoles(
+            A_rsf[n - 1:n, n - 1:n],
+            matrix(B_rsf[n - 1:n, :]),
+            gammaReordered[n + nfp - counter:n + nfp +
+            1 - counter],
+            tolerance);
+          K := K + [zeros(size(Ks2, 1), size(K, 2) - 2),Ks2]*ZT;
+          A_rsf := A_rsf - B_rsf*[zeros(size(Ks2, 1), size(K, 2) - 2),Ks2];
+          select := fill(false, n - counter + 1);
+          select[n - counter:n - counter + 1] := {true,true};
+
+          (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+            "E",
+            "V",
+            select,
+            A_rsf[counter:n, counter:n],
+            identity(n - counter + 1));  //The Schur vector matrix is identity, since A_rsf already has Schur form
+
+          A_rsf[1:counter - 1, counter:n] := A_rsf[1:counter - 1, counter:n]*Q2;
+          B_rsf[counter:n, :] := transpose(Q2)*B_rsf[counter:n, :];
+          ZT[counter:n, :] := transpose(Q2)*ZT[counter:n, :];
+    //       h2 := markA[counter:counter + 1];
+    //       markA[counter:counter + 1] := markA[n - 1:n];
+    //       markA[n - 1:n] := h2;
+    //       h2 := markg[counter:counter + 1];
+    //       markg[counter:counter + 1] := markg[n - 1:n];
+    //       markg[n - 1:n] := h2;
+    //       h := gammaReordered[n - 1];
+    //       gammaReordered[n - 1] := gammaReordered[counter];
+    //       gammaReordered[counter] := gammaReordered[n - 1];
+    //       h := gammaReordered[n];
+    //       gammaReordered[n] := gammaReordered[counter + 1];
+    //       gammaReordered[counter + 1] := gammaReordered[n];
+          counter := counter + 2;
+        else
+    //#############################
+    print("g1 = "+String(gammaReordered[n + nfp + 1 - counter]));
+    print("ar1 = "+String(alphaReal[n + nfp + 1 - counter]));
+    print("ev1 = "+String(A_rsf[n,n])+"\n");
+    //#############################
+
+          Ks1 := StateSpace.Internal.assignOneOrTwoPoles(
+            matrix(A_rsf[n, n]),
+            transpose(matrix(B_rsf[n, :])),
+            {gammaReordered[n + nfp + 1 - counter]},
+            tolerance);
+
+          K := K + [zeros(size(Ks1, 1), size(K, 2) - 1),Ks1]*ZT;
+          A_rsf := A_rsf - B_rsf*[zeros(size(Ks1, 1), size(K, 2) - 1),Ks1];
+          select := fill(false, n - counter + 1);
+          select[n - counter + 1] := true;
+
+          (A_rsf[counter:n, counter:n],Q1) := Matrices.LAPACK.dtrsen(
+            "E",
+            "V",
+            select,
+            A_rsf[counter:n, counter:n],
+            identity(n - counter + 1)); //The Schur vector matrix is identity, since A_rsf already has Schur form
+
+          A_rsf[1:counter - 1, counter:n] := A_rsf[1:counter - 1, counter:n]*Q1;
+          B_rsf[counter:n, :] := transpose(Q1)*B_rsf[counter:n, :];
+          ZT[counter:n, :] := transpose(Q1)*ZT[counter:n, :];
+    //       h2[1] := markA[counter];
+    //       markA[counter] := markA[n];
+    //       markA[n] := h2[1];
+    //       h2[1] := markg[counter];
+    //       markg[counter] := markg[n];
+    //       markg[n] := h2[1];
+    //       h := gammaReordered[n];
+    //       gammaReordered[n] := gammaReordered[counter];
+    //       gammaReordered[counter] := gammaReordered[n];
+          counter := counter + 1;
+        end if;
+
+        end while;
+
+      S := ss.A - ss.B*K;
+      po := Complex.eigenValues(S);
+
+    //   X := fill(Complex(0),n,n);
+    //   for i in 1:n loop
+    //     SS:=Complex(1)*S;
+    //     for ii in 1:n loop
+    //       SS[ii,ii] := SS[ii,ii]-po[i];
+    //     end for;
+    //     Xj := Matrices.C_nullspace(SS);
+    //     // Matrices.printMatrix(Complex.real(Xj),6,"ReXj");
+    //     // Matrices.printMatrix(Complex.imag(Xj),6,"ImXj");
+    //     for ii in 1:n loop
+    //       X[ii,i] := Xj[ii,1];
+    //     end for;
+    //   end for;
+
+      annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  (K, S, po, nfp, nap, nup) </td><td align=center> =  </td>  <td> StateSpace.Design.<b>assignPolesMI</b>(ss, gamma, np, alpha, tol)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+The purpose of this function is to determine the state feedback matrix <b>K</b> for a
+given time invariant multi input state system (<b>A</b>,<b>B</b>) such that the
+closed-loop state matrix <b>A</b>-<b>B</b>*<b>K</b> has specified eigenvalues. The
+feedback matrix <b>K</b> is calculated by factorization following [1]. The algorithm
+modifies the eigenvalues sequentially and also allows partial eigenvalue assignment.<br>
+<br>
+
+
+ At the beginning of the algorithm, the feedback matrix <b>K</b> is set to zero (<b>K</b> = <b>0</b>) and the matrix <b>A</b> is
+ reduced to an ordered real Schur form by separating its spectrum in two parts
+
+<blockquote><pre>
+              | <b>F</b>1  <b>F</b>3|
+ <b>F</b> = <b>Q</b>*<b>A</b>*<b>Q</b>' = |       |
+              | <b>0</b>   <b>F</b>2|
+ </pre>
+</blockquote> in such a way, that <b>F</b>1 contains the eigenvalues that will be
+retained and <b>F</b>3 contains the eigenvalues going to be modified. On the suggestion
+of [1] the eigenvalues <i>evr</i> to be retained are chosen as
+ <blockquote><pre>
+  evr = {s in C: Re(s) &lt -alpha, alpha &gt =0}
+ </pre> </blockquote>
+but other specification are conceivable of course.<br>
+<br>
+
+Let
+ <blockquote><pre>
+  <b>G</b> = [<b>G</b>1;<b>G</b>2] = <b>Q</b>*<b>B</b>
+ </pre> </blockquote>
+with an appropriate partition according to <b>F</b>2. (<b>F</b>2, <b>G</b>2) has to be
+controllable.<br>
+
+If the feedback matrix <b>K</b> is taken in a form <blockquote><pre> <b>K</b> = [0, <b>K</b>2]
+</pre></blockquote> the special structure of <b>F</b> and <b>K</b> results in a closed loop state
+matrix <blockquote><pre>
+          |<b>F</b>1 <b>F</b>3 - <b>G</b>1*<b>K</b>2|
+<b>F</b> - <b>G</b>*<b>K</b> = |             |
+          |0  <b>F</b>2 - <b>G</b>2*<b>K</b>2|
+</pre></blockquote> with only the eigenvalues of <b>F</b>2 are modified. This approach to modify
+separated eigenvalues is used to sequentially shift one real eigenvalue ore two
+complex conjugated eigenvalues stepwise until all assigned eigenvalues are placed.
+Therefore, at each step i always the (two) lower right eingenvalue(s) are modified by an
+appropriate feedback matrix <b>K</b>i. The matrix <b>F</b> - <b>G</b>*<b>K</b>i remains in real Schur form. The
+assigned eigenvalue(s) is (are) then moved to another diagonal position of the real Schur
+form using reordering techniques <b>F</b> &lt -- <b>Q</b>i*<b>F</b>*<b>Q</b>i'  and a new block is transferred to the
+lower right diagonal position. The transformations are accumulated in <b>Q</b>i and are also
+applicated to the matrices <blockquote><pre> <b>G</b> &lt - <b>Q</b>i*<b>G</b> <b>Q</b> &lt - <b>Q</b>i*<b>Q</b> </pre></blockquote>
+The eigenvalue(s) to be assigned at  each step is (are) chosen such that the norm of each <b>K</b>i is minimized [1].
+<p>
+
+
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+      A=[-1, 1, 1;0, 1, 1;0, 0, 1],
+      B=[0; 0; 1],
+      C=[0, 1, 0],
+      D=[0]);
+
+   Real Q[3,3];
+
+<b>algorithm</b>
+  Q := Modelica_LinearSystems2.StateSpace.Analysis.observabilityMatrix(ss);
+// Q = [0, 1, 0; 0, 1, 1; 1, 1, 2]
+</pre></blockquote>
+
+
+<h4><font color=\"#008000\">References</font></h4>
+<table>
+<tr> <td align=right>  [1] </td><td align=center>  Varga A.  </td>  <td> \"A Schur method for pole assignment\"  </td> <td> IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981 </td></tr>
+</table>
+
+</html> "));
+    end assignPolesMI2;
   end Design;
 
 encapsulated package Plot "Functions to plot state space system responses"
@@ -7442,7 +7821,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
 
   end partialGain;
 
-  encapsulated function assignOneOrTwoPoles
+  encapsulated function assignOneOrTwoPolesX
       "Algorithm to assign p (p = 1 or 2) eigenvalues"
 
       import Modelica;
@@ -7517,16 +7896,12 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
 
         if size(G, 1) == 1 then // U=I, compute V by just one Householder transformation
           U := [1];
-          u1 := cat(1, Vectors.householderVector(Gst[:, 1], cat(
-                1,
-                {1},
-                zeros(size(G, 2) - 1))));
+          u1 := cat(1, Vectors.householderVector(Gst[:, 1], cat(1, {1}, zeros(size(G, 2) - 1))));
                                    // Householder vector
           Gst := Modelica_LinearSystems2.Math.Matrices.householderReflexion(
             Gst, u1);
 
-          V := identity(size(G, 2)) - 2*matrix(u1)*transpose(matrix(u1))/(u1*
-            u1);
+          V := identity(size(G, 2)) - 2*matrix(u1)*transpose(matrix(u1))/(u1*u1);
           Gs := transpose(Gst);
           rankGs := if abs(Gs[1, 1]) > tolerance then 1 else 0;
 
@@ -7543,13 +7918,8 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
             *u1);
 
   // if rank of G of a multi input system is equal to 1
-          if Modelica.Math.Vectors.isEqual(
-                  Gst[:, 2],
-                  zeros(size(G, 2)),
-                  tolerance) or Modelica.Math.Matrices.isEqual(
-                  Gst[2:size(Gst, 1), :],
-                  zeros(size(Gst, 1) - 1, size(Gst, 2)),
-                  tolerance) then
+          if Modelica.Math.Vectors.isEqual(Gst[:, 2], zeros(size(G, 2)), tolerance) or 
+            Modelica.Math.Matrices.isEqual(Gst[2:size(Gst, 1), :], zeros(size(Gst, 1) - 1, size(Gst, 2)), tolerance) then
             V := V1;
             rankGs := if abs(Gs[1, 1]) > tolerance then 1 else 0;
           else
@@ -7587,7 +7957,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
           Gs := U*Gs;
 
         end if;
-      end if;
+            end if;
 
   // check controllability
       assert(not Modelica.Math.Matrices.isEqual(
@@ -7633,7 +8003,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
       K := zeros(size(G, 2), size(F, 1));
     end if;
 
-  end assignOneOrTwoPoles;
+  end assignOneOrTwoPolesX;
 
   encapsulated function readSystemDimension
       "Read the order nx of state matrix and the numbers nu and ny of inputs and outputs"
@@ -8921,12 +9291,12 @@ This condition is however not fulfilled because the number of outputs is ny = "
     end if;
   end reducedCtrSystemX;
 
-
   function assignPolesMI_rob
     extends Modelica.Icons.Function;
 
     import Modelica;
     import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace;
     import Modelica_LinearSystems2.Math.Matrices;
     import Modelica_LinearSystems2.Math.Complex;
     import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
@@ -8936,39 +9306,34 @@ This condition is however not fulfilled because the number of outputs is ny = "
     import Im = Modelica_LinearSystems2.Math.Complex.imag;
     import Modelica.Utilities.Streams.print;
 
-    input Real A[:,size(A, 1)]=[1,2,3,4; 4,5,6,7; 7,8,9,10; 17,18,19,11]
-        "system matrix";
-    input Real B[size(A, 1),:]=[6,3; 1,2; 8,9;10,11] "control input matrix";
+    input Real A[:,size(A, 1)] "system matrix";
+    input Real B[size(A, 1),:] "control input matrix";
   //  input Complex gamma[size(A, 1)]=Complex(1)*{9,5,1};
-    input Complex gamma[size(A, 1)]={Complex(2,-1),Complex(2,1),Complex(-1,1),Complex(-1,-1)};
+    input Complex gamma[size(A, 1)];
+
   //  input Complex gamma[size(A, 1)]={Complex(2),Complex(2),Complex(1)};
 
     output Real K[size(B, 2),size(A, 1)] "feedback matrix";
-
+    output Complex evX[:,:] "eigen vectors of the closed loop system";
     protected
     Complex AC[size(A, 1),size(A, 2)]=Complex(1)*A;
-    Complex BC[size(B, 1),size(B, 2)]=Complex(1)*B;
+  //  Complex BC[size(B, 1),size(B, 2)]=Complex(1)*B;
     Complex Lambda[size(A, 1),size(A, 1)];
-    Real Qr[:,:];
-    Real Rr[:,:];
+    Real Ur[:,:];
+    Real Vr[:,:];
     Complex U0[:,:];
     Complex U1[:,:];
     Complex U1T[:,:];
-    Complex X[size(A, 1),size(A, 2)]=Complex(1)*identity(size(A, 1));
+    Complex X[size(A, 1),size(A, 2)]=fill(Complex(0),size(A, 1),size(A, 2));
     Complex Xj[size(A, 1),size(A, 1)-1];
     Complex XC[size(A, 1),size(A, 2)];
     Complex XC2[size(A, 1),size(A, 2)];
     Complex Z[:,:];
     Complex M[size(A, 1),size(A, 1)];
     Complex KC[:,:];
-    Complex ZM[:,:];
-
+    Complex QX[:,:];
     Complex C[:,:];
-    Complex QC[:,:];
-    Complex RC[:,:];
-    Complex Qu[:,:];
-    Complex Ru[:,:];
-    Complex Sj[:,:];
+    Complex Cc[:,:];
     Complex Sr[:,:];
     Complex ST[:,:];
 
@@ -8977,30 +9342,33 @@ This condition is however not fulfilled because the number of outputs is ny = "
     Real sigmaB[:];
     Complex ev[size(A, 1)];
 
-    Complex QX[:,:];
-
     Complex y[:];
 
     Real condX2;
     Real norm_y;
-    Integer rankC;
     Integer rankB;
-    Integer rank_;
     Integer nx=size(A, 1);
     Integer numberOfRealEigenvalues;
     Integer numberOfComplexPairs;
-    Integer nqr;
     Integer i;
     Integer l1;
     Integer l2;
     Integer k;
     Integer idx;
     Real eps=Modelica.Constants.eps;
-    Integer maxSteps=2;
+    Integer maxSteps=10;
 
     Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob.subSpace subS[size(gamma,1)];
 
+    Complex a;
+    Complex MM[:,:];
+    Integer cnt;
+    StateSpace ss=StateSpace(A=A, B=B, C=zeros(1,nx), D=zeros(1,size(B,2)));
+
   algorithm
+    //check controllability
+    assert(StateSpace.Analysis.isControllable(ss),"Poles cannot be placed since system is not controllable");
+
     // sort eigenvalues to [real ev, complex ev(im>0), conj(complex ev(im>0))]
     (gammaSorted2,numberOfRealEigenvalues) :=
       Modelica_LinearSystems2.Internal.reorderZeros(gamma);
@@ -9026,7 +9394,7 @@ This condition is however not fulfilled because the number of outputs is ny = "
   //     i := i - 1;
   //   end while;
 
-    (sigmaB,Qr,Rr) := Modelica.Math.Matrices.singularValues(B);
+    (sigmaB,Ur,Vr) := Modelica.Math.Matrices.singularValues(B);
     rankB := 0;
     i := size(sigmaB, 1);
     while i > 0 loop
@@ -9049,7 +9417,7 @@ This condition is however not fulfilled because the number of outputs is ny = "
      for l1 in 1:rankB loop
        for l2 in 1:size(B, 2) loop
   //       Z[l1, l2] := Complex.conj(R[l2, l1])/sigmaB[l2];
-         Z[l1, l2] := Complex((Rr[l2, l1])/sigmaB[l2]);
+         Z[l1, l2] := Complex((Vr[l2, l1])/sigmaB[l2]);
        end for;
      end for;
 
@@ -9057,9 +9425,9 @@ This condition is however not fulfilled because the number of outputs is ny = "
   //   U1 := Q[:, rankB + 1:nx];
   //   U1T := C_transpose(U1);
 
-    U0 := Complex(1)*Qr[:, 1:rankB];
-    U1 := Complex(1)*Qr[:, rankB + 1:nx];
-    U1T := Complex(1)*transpose(Qr[:, rankB + 1:nx]);
+    U0 := Complex(1)*Ur[:, 1:rankB];
+    U1 := Complex(1)*Ur[:, rankB + 1:nx];
+    U1T := Complex(1)*transpose(Ur[:, rankB + 1:nx]);
 
     condX2 := eps + 1;
 
@@ -9078,15 +9446,23 @@ This condition is however not fulfilled because the number of outputs is ny = "
   //      Sr := Ru[:,rank_+1:nx];
 
        Sr :=  Matrices.C_nullspace([U1T;  matMul(U1T,Complex(1)*A)]);
-
+  // Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(Sr),6,"ReSr");
+  // Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(Sr),6,"ImSr");
+    else
+      Sr := fill(Complex(0),nx,0);
     end if;
 
     for l1 in 1:nx - numberOfComplexPairs loop
+
       AC := Complex(-1)*A;
+
       for l2 in 1:nx loop
         AC[l2, l2] := AC[l2, l2] + gammaSorted[l1];
       end for;
+
       C := matMul(U1T, AC);
+
+      Cc := Matrices.C_nullspace([C; C_transpose(Sr)]);
 
   //     if numberOfComplexPairs > 0 and l1 > numberOfRealEigenvalues then
   // //       (sigmaC,QC,RC) := Matrices.C_singularValues([C; C_transpose(Sr)]);
@@ -9123,9 +9499,52 @@ This condition is however not fulfilled because the number of outputs is ny = "
 
       subS[l1].S := if l1 > numberOfRealEigenvalues then [Matrices.C_nullspace([C; C_transpose(Sr)]),Sr] else Matrices.C_nullspace(C);
 
+  //    subS[l1].S := Matrices.C_nullspace(C);
+  // Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(subS[l1].S),6,"ResubS[l1].S");
+  // Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(subS[l1].S),6,"ImsubS[l1].S");
+
+  // MM := matMul(C,Complex.conj(Matrices.C_nullspace(Cc)));
+  // Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(MM),6,"ReMM");
+  // Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(MM),6,"ImMM");
+
+  // MM := matMul(C,Sr);
+  // //MM := matMul(C_transpose(Sr),Cc);
+  // Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(MM),6,"ReMM");
+  // Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(MM),6,"ImMM");
+  end for;
+
+  // initialization of X according to Byers
+    for l1 in 1:nx - numberOfComplexPairs loop
+      y := fill(Complex(0), nx);
+      for l2 in 1:size(subS[l1].S, 2) loop
+        y := X[:, l1] + X[:, l1] + subS[l1].S[:, l2];
+      end for;
+      y := y/Complex.Vectors.norm(y);
+      for l2 in 1:nx loop
+        X[l2, l1] := y[l2];
+      end for;
+    end for;
+    for l1 in 1:numberOfComplexPairs loop
+      for l2 in 1:nx loop
+        X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
+          Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+      end for;
     end for;
 
-  // eigenvector modeification
+   // initialization of X according to place.m
+     for l1 in 1:nx - numberOfComplexPairs loop
+       for l2 in 1:nx loop
+         X[l2, l1] := subS[l1].S[l2, 1];
+       end for;
+     end for;
+     for l1 in 1:numberOfComplexPairs loop
+       for l2 in 1:nx loop
+         X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
+           Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+       end for;
+     end for;
+
+  // eigenvector modification
     k := 0;
     while (k < maxSteps) loop
       k := k + 1;
@@ -9154,11 +9573,11 @@ This condition is however not fulfilled because the number of outputs is ny = "
         norm_y := Complex.Vectors.norm(y);
         y := matVecMul(subS[l1].S, y)/norm_y;
 
-        if l1 > numberOfRealEigenvalues then
-          idx := 1 + rem(k, size(subS[l1].S, 2) - size(Sr, 2));
-          print(" k = "+String(k)+", l1 = "+String(l1)+", idx = " + String(idx));
-          y := (y + subS[l1].S[:, idx])/sqrt(2);
-        end if;
+  //        if l1 > numberOfRealEigenvalues and Complex.'abs'(Complex.Vectors.multiply(y,Complex.conj(y)))>0.9 then
+  //          idx := 1 + rem(k, size(subS[l1].S, 2) - size(Sr, 2));
+  //          print(" k = "+String(k)+", l1 = "+String(l1)+", idx = " + String(idx));
+  //          y := (y + subS[l1].S[:, idx])/sqrt(2);
+  //        end if;
 
         for l2 in 1:nx loop
           X[l2, l1] := y[l2];
@@ -9169,7 +9588,11 @@ This condition is however not fulfilled because the number of outputs is ny = "
             X[l2, l1 + numberOfComplexPairs] := Complex.conj(y[l2]);
           end for;
         end if;
-      end for;
+
+          end for;
+  condX2 := Complex.Matrices.conditionNumber(X);
+
+  //print("\ncondX2 = "+String(condX2));
     end while;
 
     XC := C_transpose(X);
@@ -9185,10 +9608,11 @@ This condition is however not fulfilled because the number of outputs is ny = "
 
     KC := matMul(Z, matMul(C_transpose(U0), M));
     K := -Re(KC);
+    evX := X;
 
     ev := Complex.eigenValues(A - B*K);
-    Complex.Vectors.print("gammaSorted", gammaSorted);
-    Complex.Vectors.print("ev", ev);
+  //    Complex.Vectors.print("gammaSorted", gammaSorted);
+  //    Complex.Vectors.print("ev", ev);
 
     annotation (experiment, experimentSetupOutput);
 
@@ -9202,6 +9626,166 @@ This condition is however not fulfilled because the number of outputs is ny = "
 
   end assignPolesMI_rob;
 
+
+  encapsulated function assignOneOrTwoPoles
+      "Algorithm to assign p (p = 1 or 2) eigenvalues"
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Math.Vectors;
+
+    input Real F[:,size(F, 1)] "system matrix of order p=1 or p=2";
+    input Real G[size(F, 1),:] "control input matrix p rows";
+    input Complex gamma[size(F, 1)];
+    input Real tolerance=Modelica.Constants.eps;
+    output Real K[:,size(F, 1)] "feedback matrix p columns";
+
+    protected
+    Real Gamma[:,:];
+    Integer rankGs;
+    Real Fs[size(F, 1),size(F, 2)];
+    Real Gs[size(G, 1),size(G, 2)];
+    Real Gst[:,:]=transpose(G);
+    Real Ks[:,size(F, 1)];
+    Real c;
+    Real s;
+    Real r;
+    Integer p=size(F,1);
+    Real sigmaG[:];
+
+    Real V[size(G, 2),size(G, 2)];
+    Real U[size(F, 1),size(F, 2)];
+
+    Real u1[:];
+    Real u2[:];
+    Integer i;
+    Complex system_ev[:];
+
+  algorithm
+    assert(size(F, 1) >= size(gamma, 1),
+      "\n In function StateSpace.Internal.assignOneOrTwoPoles() matrix F is of size ["
+       + String(size(F, 1)) + "," + String(size(F, 1)) + "] and " + String(
+      size(F, 1)) + " demanded assigned poles are expected. However, " +
+      String(size(gamma, 1)) + " poles are given");
+  //assert(not Modelica.Math.Matrices.isEqual(G,zeros(size(G,1),size(G,2)),tolerance),"A subsystem (F, G) in StateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix ");
+    if size(gamma, 1) == 1 then
+      assert(gamma[1].im == 0, "\n In function StateSpace.Internal.assignOneOrTwoPoles() matrix F has size [" + String(size(F, 1)) + "," + String(size(F, 1)) +
+        "], therefore, the demanded assigned pole must be real. However, the imaginary part is "
+         + String(gamma[1].im));
+    elseif abs(gamma[1].im) > 0 or abs(gamma[2].im) > 0 then
+      assert(gamma[1].re == gamma[2].re and gamma[1].im == -gamma[2].im,
+        "\nThe assigned pole pair given in function StateSpace.Internal.assignOneOrTwoPoles() must be conjungated complex. However, the poles are\npole1 = "
+         + String(gamma[1]) + "\npole2 = " + String(gamma[2]) +
+        ". \nTry\npole1 = " + String(gamma[1]) + "\npole2 = " + String(
+        Complex.conj(gamma[1])) + "\ninstead");
+    end if;
+
+    if not Modelica.Math.Matrices.isEqual(
+        G,
+        zeros(size(G, 1), size(G, 2)),
+        tolerance) then
+      if size(G, 2) == 1 then
+        V := [1];
+        if size(G, 1) == 1 then
+          U := [1];
+        else
+           // Givens
+          r := sqrt(G[1, 1]^2 + G[2, 1]^2);
+          c := G[1, 1]/r;
+          s := G[2, 1]/r;
+          U := [c,s; -s,c];
+        end if;
+        Gs := U*G;
+
+        rankGs := if abs(Gs[1, 1]) > tolerance then 1 else 0;
+      else
+       // size(G, 2)>1
+
+        if size(G, 1) == 1 then // U=I, compute V by just one Householder transformation
+          U := [1];
+          u1 := cat(1, Vectors.householderVector(Gst[:, 1],
+                       cat(1, {1}, zeros(size(G, 2) - 1))));// Householder vector
+          Gst := Modelica_LinearSystems2.Math.Matrices.householderReflexion(Gst, u1);
+
+          V := identity(size(G, 2)) - 2*matrix(u1)*transpose(matrix(u1))/(u1*u1);
+          Gs := transpose(Gst);
+          rankGs := if abs(Gs[1, 1]) > tolerance then 1 else 0;
+
+        else
+  // systems with p==2 and m>1 are transformed by svd
+          (sigmaG,U,V) := Modelica.Math.Matrices.singularValues(G);
+          rankGs := 0;
+          i := size(sigmaG, 1);
+          while i > 0 loop
+            if sigmaG[i] > 1e-10 then
+              rankGs := i;
+              i := 0;
+            end if;
+            i := i - 1;
+          end while;
+          Gs := zeros(p, size(G, 2));
+          for i in 1:rankGs loop
+            Gs[i, i] := sigmaG[i];
+          end for;
+
+        end if;
+        V := transpose(V);
+      end if;
+
+  // check controllability
+      assert(not Modelica.Math.Matrices.isEqual(
+        Gs,
+        zeros(size(Gs, 1), size(Gs, 2)),
+        tolerance), "A subsystem in StateSpace.Internal.assignOneOrTwoPoles() is not controllable");
+
+      Ks := fill(
+        0,
+        rankGs,
+        size(F, 1));
+      Fs := U*F*transpose(U);
+
+      if size(F, 1) == 1 then
+        Ks := matrix((Fs[1, 1] - gamma[1].re)/Gs[1, 1]);
+      else
+        if rankGs == size(F, 1) then
+
+          // Gamma:= if size(F,1)==1 then [gamma[1].re] else [gamma[1].re, -(gamma[1].im)^2;1, gamma[2].re];
+          //  Ks :=  Modelica_LinearSystems2.Math.Matrices.solve2(Gs, Fs - Gamma);
+          Ks := [(Fs[1, 1] - gamma[1].re)/Gs[1, 1] - Gs[1, 2]*(Fs[2, 1] - 1)/Gs[1, 1]/Gs[2,2],
+          (Fs[1, 2] + (gamma[1].im)^2)/Gs[1, 1] - Gs[1, 2]*(Fs[2, 2] - gamma[2].re)/Gs[1, 1]/Gs[2, 2];
+          (Fs[2, 1] - 1)/Gs[2, 2],(Fs[2, 2] - gamma[2].re)/Gs[2, 2]];
+        else
+
+          Ks[1, 1] := (gamma[1].re + gamma[2].re - Fs[1, 1] - Fs[2, 2])/Gs[1, 1];
+          Ks[1, 2] := Ks[1, 1]*Fs[2, 2]/Fs[2, 1] + (Fs[1, 1]*Fs[2, 2] - Fs[1, 2]*
+            Fs[2, 1] - (gamma[1].re*gamma[2].re - gamma[1].im*gamma[2].im))/Fs[2,1]/Gs[1, 1];
+          Ks := -Ks;
+        end if;
+      end if;
+
+      K := V[:, 1:size(Ks, 1)]*Ks*U;
+
+    else
+      if p == 1 then
+        Modelica.Utilities.Streams.print("\n A subsystem (F, G) in StateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
+      That is, "   + String(F[1, 1]) + " remains and " + String(gamma[1].re) + " cannot be realized");
+      else
+        system_ev := Complex.eigenValues(F);
+        Modelica.Utilities.Streams.print("\n A subsystem (F, G) in StateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
+      That is, "   + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then " + " else 
+                " - ") + String(system_ev[1].im) + "j and " + String(system_ev[2].re)
+           + (if abs(system_ev[2].im) > 0 then " + " else " - ") + String(
+          system_ev[2].im) + "j remain and " + String(gamma[1].re) + (if abs(
+          gamma[1].im) > 0 then (if gamma[1].im > 0 then " + " else " - " +
+          String(gamma[1].im) + "j") else "" + " and ") + String(gamma[2].re) + (
+          if abs(gamma[2].im) > 0 then (if gamma[2].im > 0 then " + " else " - " +
+          String(gamma[2].im) + "j") else "") + " cannot be realized");
+      end if;
+      K := zeros(size(G, 2), size(F, 1));
+    end if;
+
+  end assignOneOrTwoPoles;
 end Internal;
 
 end StateSpace;

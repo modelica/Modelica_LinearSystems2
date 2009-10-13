@@ -7,7 +7,6 @@ eigenValues
 equalityLeastSquares
 fliplr
 flipud
-frobeniusNorm
 fromFile
 generalizedEigenvaluesTriangular
 hessenberg
@@ -24,6 +23,7 @@ orthogonalQ
 printMatrix
 QR
 rsf
+rsf2
 solve
 solve2
 toUpperHessenberg

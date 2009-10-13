@@ -69,7 +69,6 @@ i.e., matrix A has the 3 real eigenvalues -0.618, 8, 1.618.
 
 protected
   Integer info;
-  // replace with "isPresent(..)" if supported by Dymola
   Boolean onlyEigenvalues = false;
 algorithm
 if size(A,1) > 0 then
