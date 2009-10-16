@@ -37,4 +37,11 @@ This library provides functions operating on vectors:
 <a href=\"Modelica:Modelica.Math.Matrices\">Matrices</a>
 </HTML>"));
 
+
+
+
+
+
+
+
 end Vectors;

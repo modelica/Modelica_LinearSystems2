@@ -379,6 +379,27 @@ algorithm
 
 end multiply;
 
+    function reverse "Reverse vector elements (e.g. v[1] becomes last element)"
+    extends Modelica.Icons.Function;
+
+    import Modelica;
+    import Modelica_LinearSystems2.Math.Complex;
+
+    input Complex v[:] "Vector";
+    output Complex result[size(v, 1)] "Elements of vector v in reversed order";
+
+    annotation (Inline=true, Documentation(info="<html>
+<p><h4>Syntax</h4></p>
+<blockquote><pre>Vectors.<b>reverse</b>(v);</pre></blockquote>
+<p><h4>Description</h4></p>
+<pre>The function call &QUOT;Vectors.<b>reverse</b>(v)&QUOT; returns the complex vector elements in reverse order. </pre>
+<p><h4>Example</h4></p>
+<blockquote><pre>  <b>reverse</b>({1,2,3,4});  // = {4,3,2,1}</pre></blockquote>
+</html>"));
+    algorithm
+    result := {v[end-i+1] for i in 1:size(v,1)};
+    end reverse;
+
 end Vectors;
 
 encapsulated package Matrices
@@ -411,8 +432,6 @@ algorithm
     result := Complex.Matrices.norm(A, p)*Complex.Matrices.norm(Complex.Matrices.inv(A), p);
   end if;
 end conditionNumber;
-
-
 
 function norm "Returns the norm of a matrix"
   extends Modelica.Icons.Function;

@@ -67,7 +67,7 @@ protected
 
 algorithm
   // Schur method Varga
-  (K,S,newPoles,,,,X) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, assignedPoles);
+  (K,S,newPoles,,,,X) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI( ss, assignedPoles,-1e10,Modelica.Math.Matrices.norm(ss.A, 1)*1e-12,true);
   Modelica_LinearSystems2.Math.Matrices.printMatrix(K,6,"K");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("assignedPoles", assignedPoles);
   Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
@@ -76,9 +76,8 @@ algorithm
   (,evec) := Modelica.Math.Matrices.eigenValues(S);
   Matrices.printMatrix(evec,6,"evec");
   (kappa2X, kappaFroX, kappaFroYT, cInf, norm2K, normFroK, kappa2X_B, JXK) :=  conditionNumbers(K, X);
-
   // extented robust KNV-algortihm according to MATLAB's place-function
-  (K, X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob(ss.A, ss.B, assignedPoles);
+  (K, X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob(ss.A, ss.B, assignedPoles, false, X);
   Matrices.printMatrix(K,6,"K");
   S := ss.A - ss.B*K;
   newPoles := Complex.eigenValues(S);

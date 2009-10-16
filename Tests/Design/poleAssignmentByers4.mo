@@ -65,7 +65,7 @@ protected
 
 algorithm
   // Schur method Varga
-  (K,S,newPoles,,,,X) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, assignedPoles);
+  (K,S,newPoles,,,,X) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI( ss, assignedPoles,-1e10,Modelica.Math.Matrices.norm(ss.A, 1)*1e-12,true);
   Modelica_LinearSystems2.Math.Matrices.printMatrix(K,6,"K");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("assignedPoles", assignedPoles);
   Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);

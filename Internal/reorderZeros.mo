@@ -13,8 +13,8 @@ function reorderZeros
   annotation (Documentation(info="<HTML>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <blockquote><pre>
-               reorderedZero = Matrices.<b>reorderZeros</b>(complexVector);
-(reorderedZeros, nRealZeros) = Matrices.<b>reorderZeros</b>(complexVector, 
+               reorderedZero = Internal.<b>reorderZeros</b>(complexVector);
+(reorderedZeros, nRealZeros) = Internal.<b>reorderZeros</b>(complexVector, 
                                                      name=\"complexVector\");
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
@@ -56,7 +56,7 @@ algorithm
   jr := 1;
   jc := nRealZeros + 1;
   while i <= n loop
-    if complexVector[i].im == 0.0 then
+    if abs(complexVector[i].im) < Modelica.Constants.eps then
       reorderedZeros[jr].re := complexVector[i].re;
       reorderedZeros[jr].im := 0.0;
       i := i + 1;

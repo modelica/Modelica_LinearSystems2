@@ -165,8 +165,25 @@ protected
   Real alpha;
 
 algorithm
+    assignedPoles[5]:=-6+3*j;
+    assignedPoles[6]:=-6-3*j;
+   assignedPoles[1]:=-5+3*j;
+   assignedPoles[2]:=-5-3*j;
+   assignedPoles[3]:=-4+9*j;
+   assignedPoles[4]:=-4-9*j;
+   assignedPoles[7]:=-3+7*j;
+   assignedPoles[8]:=-3-7*j;
+   assignedPoles[9]:=-9+7*j;
+   assignedPoles[10]:=-9-7*j;
+   assignedPoles[11]:=4+7*j;
+   assignedPoles[12]:=4-7*j;
+
   // Schur method Varga
-  (K,S,newPoles,,,,X) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI2(ss, assignedPoles);
+   (,,  alphaReal, alphaImag) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgees(ss.A);
+  Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal,6,"alphaReal");
+  Modelica_LinearSystems2.Math.Vectors.printVector(alphaImag,6,"alphaImag");
+
+  (K,S,newPoles,,,,X) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI( ss, assignedPoles,-1e10,Modelica.Math.Matrices.norm(ss.A, 1)*1e-12,true);
   Modelica_LinearSystems2.Math.Matrices.printMatrix(K,6,"K");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("assignedPoles", assignedPoles);
   Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
