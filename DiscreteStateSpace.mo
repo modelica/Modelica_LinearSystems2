@@ -445,4 +445,44 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
       x := new_x;
     end for;
   end timeResponse;
+
+  encapsulated function initialResponse
+    "Compute initial response of DiscreteStateSpace system"
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+
+    input DiscreteStateSpace sd "Linear system in discrete state space form";
+    input Real x0[size(sd.A, 1)]=zeros(size(sd.A, 1)) "Initial system state";
+    input Integer samples "Number of samples";
+    output Real y[samples,size(sd.C, 1)]
+      "System response (dimension: (input samples) x (number of outputs))";
+    output Real x_continuous[samples,size(sd.A, 1)]
+      "State trajectories (dimension: (input samples) x (number of states)";
+
+    annotation (Documentation(info="<html>
+<p>
+Computes the initial response of a system in discrete state space form:
+</p>
+<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k)
+     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k)
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) 
+</pre>
+<p>
+Note that the system input <b>u</b> is equal to zero.
+</p>
+</html>"));
+  protected
+    Integer i;
+    Real new_x[size(sd.A, 1)];
+    Real x[size(sd.A, 1)]=x0;
+
+  algorithm
+    for i in 1:samples loop
+      new_x := sd.A*x;
+      y[i, :] := sd.C*x;
+      x_continuous[i, :] := x;
+      x := new_x;
+    end for;
+  end initialResponse;
 end DiscreteStateSpace;

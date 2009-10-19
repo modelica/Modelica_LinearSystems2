@@ -2479,9 +2479,10 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Types.TimeResponse;
-
-  extends Modelica_LinearSystems2.Internal.timeResponseMask2;     // Input/Output declarations of time response functions
-  input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+ input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+  extends Modelica_LinearSystems2.Internal.timeResponseMask2(redeclare Real y[:,size(sc.C,1),if response == TimeResponse.Initial then 1 else size(sc.B,2)], redeclare
+          Real x_continuous[
+                         :,size(sc.A,1),if response == TimeResponse.Initial then 1 else size(sc.B,2)]);     // Input/Output declarations of time response functions
 
   input Real x0[size(sc.A, 1)]=zeros(size(sc.A, 1)) "Initial state vector";
 
@@ -2520,14 +2521,17 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
   samples := integer(tSpanVar/dtVar + 1);
   t := 0:dtVar:tSpanVar;
   u := zeros(samples, size(sc.B, 2));
-  y := zeros(
-      samples,
-      size(sc.C, 1),
-      size(sc.B, 2));
-  x_continuous := zeros(
-      samples,
-      size(sc.A, 1),
-      size(sc.B, 2));
+  y := if response == TimeResponse.Initial then zeros(samples, size(sc.C, 1),1) else zeros(samples, size(sc.C, 1),size(sc.B, 2));
+  x_continuous :=  if response == TimeResponse.Initial then zeros(samples, size(sc.A, 1),  1) else zeros(samples, size(sc.A, 1),  size(sc.B, 2));
+
+ if response == TimeResponse.Initial then
+      sd := Modelica_LinearSystems2.DiscreteStateSpace(
+          sc,
+          dtVar,
+          Modelica_LinearSystems2.Types.Method.Trapezoidal);
+    (y[:, :, 1],x_continuous[:, :, 1]) :=
+      Modelica_LinearSystems2.DiscreteStateSpace.initialResponse(sd, x0, samples);
+    else
 
   for i1 in 1:size(sc.B, 2) loop
         // Loop over inputs
@@ -2554,12 +2558,12 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
           sc,
           dtVar,
           Modelica_LinearSystems2.Types.Method.RampExact);
-    elseif response == TimeResponse.Initial then
-      u[:, :] := zeros(samples, size(sc.B, 2));
-      sd := Modelica_LinearSystems2.DiscreteStateSpace(
-          sc,
-          dtVar,
-          Modelica_LinearSystems2.Types.Method.Trapezoidal);
+ //    elseif response == TimeResponse.Initial then
+ //      u[:, :] := zeros(samples, size(sc.B, 2));
+ //      sd := Modelica_LinearSystems2.DiscreteStateSpace(
+ //          sc,
+ //          dtVar,
+ //          Modelica_LinearSystems2.Types.Method.Trapezoidal);
     else
       assert(false, "Argument response (= " + String(response) +
         ") of \"Time response to plot\" is wrong.");
@@ -2571,7 +2575,7 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
         x0);
 
   end for;
-
+ end if;
     annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
@@ -2816,7 +2820,9 @@ encapsulated function initialResponse
   input Real x0[:]=fill(0,0) "Initial state vector";
 
     // Input/Output declarations of time response functions:
-  extends Modelica_LinearSystems2.Internal.timeResponseMask2;
+  extends Modelica_LinearSystems2.Internal.timeResponseMask2(redeclare Real y[:,size(sc.C,1),1], redeclare
+          Real x_continuous[
+                        :,size(sc.A,1),1]);
 
 annotation(interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
@@ -3795,7 +3801,6 @@ end Analysis;
       end for;
 
     end assignPolesSI;
-
 
     encapsulated function assignPolesMI
       "Pole assigment design algorithm for multi input systems"
@@ -5592,13 +5597,14 @@ Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
       Integer i2;
       Plot.Records.Diagram diagram2[size(ss.C, 1)];
 
-      Real y[:,size(ss.C, 1),size(ss.B, 2)]
+      Real y[:,size(ss.C, 1),if response == TimeResponse.Initial then 1 else size(ss.B,2)]
         "Output response: (number of samples) x (number of outputs) x (number of inputs)";
       Real t[:] "Time vector: (number of samples)";
-      Real x[:,size(ss.A, 1),size(ss.B, 2)]
+      Real x[:,size(ss.A, 1),if response == TimeResponse.Initial then 1 else size(ss.B,2)]
         "State trajectories: (number of samples) x (number of states) x (number of inputs)";
       String yNames[size(ss.C, 1)];
       String uNames[size(ss.B, 2)];
+      Integer loops=if response == TimeResponse.Initial then 1 else size(ss.B,2);
 
     algorithm
       (y,t,x) := Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
@@ -5618,7 +5624,7 @@ Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
           i1];
       end for;
 
-      for i2 in 1:size(ss.B, 2) loop
+      for i2 in 1:loops loop
         for i1 in 1:size(ss.C, 1) loop
           curve := Plot.Records.Curve(
             x=t,
@@ -5627,7 +5633,7 @@ Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
 
           diagram2[i1] := defaultDiagram;
           diagram2[i1].curve := {curve};
-          diagram2[i1].heading := defaultDiagram.heading + "  " + uNames[i2] + " -> " + yNames[i1];
+          diagram2[i1].heading := if response == TimeResponse.Initial then defaultDiagram.heading +" "+ yNames[i1] else defaultDiagram.heading + "  " + uNames[i2] + " -> " + yNames[i1];
           diagram2[i1].yLabel := yNames[i1];
 
         end for;
