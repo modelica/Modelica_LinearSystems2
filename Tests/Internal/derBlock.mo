@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Tests.Internal;
 model derBlock
+
   annotation (uses(Modelica(version="3.1"), Modelica_LinearSystems2(version=
             "2.0")), Diagram(coordinateSystem(preserveAspectRatio=true, extent=
             {{-100,-100},{100,100}}), graphics));

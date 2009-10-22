@@ -80,7 +80,7 @@ if size(A,1) > 0 then
   else
       (eigenvalues[:, 1],eigenvalues[:, 2],leftEigenvectors,rightEigenvectors,info) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev(A);
   end if;
-  assert(info == 0, "Calculating the eigen values with function
+  assert(info == 0, "Calculating the eigenvalues with function
 \"Matrices.eigenvalues\" is not possible, since the
 numerical algorithm does not converge.");
 end if;

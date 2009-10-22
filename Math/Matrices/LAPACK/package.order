@@ -20,6 +20,8 @@ dormhr
 dormqr
 dtrevc
 dtrsen
+dtrsyl
+dgemm
 zungqr
 zgeqrf
 zgesvd

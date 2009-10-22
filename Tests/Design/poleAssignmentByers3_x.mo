@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Tests.Design;
-function poleAssignmentByers6 "Example for pole assignment"
+function poleAssignmentByers3_x "Example for pole assignment"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Math.Complex;
@@ -24,12 +24,12 @@ protected
   Modelica_LinearSystems2.Math.Complex newPoles[:];
   Real S[:,:] "closed loop system matrix A-BK";
 
-  Real A[4,4] = [5.8765,  9.3456,  4.5634,  9.3520;
-                 6.6526,  0.5867,  3.5829,  0.6534;
-                 0.0,     9.6738,  7.4876,  4.7654;
-                 0.0,     0.0,     6.6784,  2.5678];
+  Real A[4,4]=[-65.0,  65.0,  -19.5,  19.5;
+                 0.1,  -0.1,    0.0,   0.0;
+                 1.0,   0.0,   -0.5,  -1.0;
+                 0.0,   0.0,    0.4,   0.0];
 
-  Real B[4,2]=[3.9878,  0.5432;  0.0,  2.765;  0.0,  0.0; 0.0,  0.0];
+  Real B[4,2]=[65.0,  0.0; 0.0,  0.0; 0.0,  0.0;0.0, 0.4];
 
   Real C[1,4]=[1,0,0,0];
   Real D[1,2]=[0,0];
@@ -41,7 +41,7 @@ protected
       C=C[:, 1:n],
       D=D);
 
-  Modelica_LinearSystems2.Math.Complex assignedPoles[:]={Complex(-29.4986), Complex(-10.0922), Complex(2.5201,6.89), Complex(2.5201,-6.89)};
+  Modelica_LinearSystems2.Math.Complex assignedPoles[:]=Complex(1)*{-1.0, -2.0, -3.0, -4.0};
   Real K[size(B, 2),size(A, 1)] "Feedback gain matrix";
 
 //  Real c[size(A,1)] "condition number cj";
@@ -65,19 +65,19 @@ protected
   Real alpha;
 
 algorithm
-  // Schur method Varga
-   (K,S,newPoles,,,,X) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI( ss, assignedPoles,-1e10,Modelica.Math.Matrices.norm(ss.A, 1)*1e-12,true);
-   Modelica_LinearSystems2.Math.Matrices.printMatrix(K,6,"K");
-   Modelica_LinearSystems2.Math.Complex.Vectors.print("assignedPoles", assignedPoles);
-   Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
-   Matrices.printMatrix(Re(X),6,"ReX");
-   Matrices.printMatrix(Im(X),6,"ImX");
-   (,evec) := Modelica.Math.Matrices.eigenValues(S);
-   Matrices.printMatrix(evec,6,"evec");
-   (kappa2X, kappaFroX, kappaFroYT, cInf, norm2K, normFroK, kappa2X_B, JXK) :=  conditionNumbers(K, X);
+//   // Schur method Varga
+//   (K,S,newPoles,,,,X) :=Modelica_LinearSystems2.StateSpace.Design.assignPolesMI( ss, assignedPoles,-1e10,Modelica.Math.Matrices.norm(ss.A, 1)*1e-12,true);
+//   Modelica_LinearSystems2.Math.Matrices.printMatrix(K,6,"K");
+//   Modelica_LinearSystems2.Math.Complex.Vectors.print("assignedPoles", assignedPoles);
+//   Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
+//   Matrices.printMatrix(Re(X),6,"ReX");
+//   Matrices.printMatrix(Im(X),6,"ImX");
+//   (,evec) := Modelica.Math.Matrices.eigenValues(S);
+//   Matrices.printMatrix(evec,6,"evec");
+//   (kappa2X, kappaFroX, kappaFroYT, cInf, norm2K, normFroK, kappa2X_B, JXK) :=  conditionNumbers(K, X);
 
   // extented robust KNV-algortihm according to MATLAB's place-function
-  (K, X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob2(ss.A, ss.B, assignedPoles);
+  (K, X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob3(ss.A, ss.B, assignedPoles);
   Matrices.printMatrix(K,6,"K");
   S := ss.A - ss.B*K;
   newPoles := Complex.eigenValues(S);
@@ -85,4 +85,4 @@ algorithm
   Complex.Vectors.print("newPoles", newPoles);
   (kappa2X, kappaFroX, kappaFroYT, cInf, norm2K, normFroK, kappa2X_B, JXK) :=  conditionNumbers(K, X);
 
-end poleAssignmentByers6;
+end poleAssignmentByers3_x;

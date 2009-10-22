@@ -3,8 +3,8 @@ function lyapunov
   "Solution of continuous-time Lyapunov equation X*A + A'*X = C"
   import Modelica_LinearSystems2.Math.Matrices;
 
-  input Real A[:,size(A, 1)]=[0, 2,-1;-3,-2,2;-2,1,-1];
-  input Real C[size(A, 1),size(A, 2)]=[-2,2,-3;-8,-6,-5;11,13,-2];
+  input Real A[:,size(A, 1)];
+  input Real C[size(A, 1),size(A, 2)];
   input Real eps=Modelica.Math.Matrices.norm(A,1)*10*Modelica.Constants.eps;
 
 protected
@@ -24,7 +24,7 @@ protected
   Integer k;
 
 public
-  output Real X[size(A, 1),size(A, 2)] "solution of the Riccati equation";
+  output Real X[size(A, 1),size(A, 2)] "solution of the Lyapunov equation";
 
 algorithm
   if n > 1 then

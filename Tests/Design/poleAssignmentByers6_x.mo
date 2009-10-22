@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Tests.Design;
-function poleAssignmentByers6 "Example for pole assignment"
+function poleAssignmentByers6_x "Example for pole assignment"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Math.Complex;
@@ -64,20 +64,30 @@ protected
 
   Real alpha;
 
+  Real c1;
+  Real c2;
+
 algorithm
-  // Schur method Varga
-   (K,S,newPoles,,,,X) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI( ss, assignedPoles,-1e10,Modelica.Math.Matrices.norm(ss.A, 1)*1e-12,true);
-   Modelica_LinearSystems2.Math.Matrices.printMatrix(K,6,"K");
-   Modelica_LinearSystems2.Math.Complex.Vectors.print("assignedPoles", assignedPoles);
-   Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
-   Matrices.printMatrix(Re(X),6,"ReX");
-   Matrices.printMatrix(Im(X),6,"ImX");
-   (,evec) := Modelica.Math.Matrices.eigenValues(S);
-   Matrices.printMatrix(evec,6,"evec");
-   (kappa2X, kappaFroX, kappaFroYT, cInf, norm2K, normFroK, kappa2X_B, JXK) :=  conditionNumbers(K, X);
+    // extented robust KNV-algortihm according to MATLAB's place-function
+//
+//     c1:=Modelica_LinearSystems2.Tests.Internal.clock2();
+//    print("Start = " +String(c1));
+//    (K, X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob2(ss.A, ss.B, assignedPoles);
+//    c2:=Modelica_LinearSystems2.Tests.Internal.clock2();
+//    print("time = " +String(c2-c1));
+//
+//    Matrices.printMatrix(K,6,"K");
+//    S := ss.A - ss.B*K;
+//    newPoles := Complex.eigenValues(S);
+//    Modelica_LinearSystems2.Math.Complex.Vectors.print("assignedPoles", assignedPoles);
+//    Complex.Vectors.print("newPoles", newPoles);
+//    (kappa2X, kappaFroX, kappaFroYT, cInf, norm2K, normFroK, kappa2X_B, JXK) :=  conditionNumbers(K, X);
 
   // extented robust KNV-algortihm according to MATLAB's place-function
-  (K, X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob2(ss.A, ss.B, assignedPoles);
+  c1:=Modelica_LinearSystems2.Tests.Internal.clock2();
+  (K, X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob4(ss.A, ss.B, assignedPoles);
+  c2:=Modelica_LinearSystems2.Tests.Internal.clock2();
+   print("time2 = " +String(c2-c1));
   Matrices.printMatrix(K,6,"K");
   S := ss.A - ss.B*K;
   newPoles := Complex.eigenValues(S);
@@ -85,4 +95,4 @@ algorithm
   Complex.Vectors.print("newPoles", newPoles);
   (kappa2X, kappaFroX, kappaFroYT, cInf, norm2K, normFroK, kappa2X_B, JXK) :=  conditionNumbers(K, X);
 
-end poleAssignmentByers6;
+end poleAssignmentByers6_x;

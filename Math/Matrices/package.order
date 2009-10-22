@@ -26,6 +26,7 @@ rsf
 rsf2
 solve
 solve2
+sylvester
 toUpperHessenberg
 trace
 C_nullspace

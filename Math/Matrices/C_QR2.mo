@@ -29,7 +29,7 @@ This is not allowed when calling Modelica.Matrices.C_QR(A).");
 
     (Q,R2) := Modelica_LinearSystems2.Math.Matrices.LAPACK.zgeqrf(A2);
     for l1 in 1:size(R, 1) loop
-      for l2 in 1:size(R, 2) loop
+      for l2 in l1:size(R, 2) loop
         R[l1, l2] := R2[l1, l2];
       end for;
     end for;

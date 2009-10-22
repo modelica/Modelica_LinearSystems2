@@ -47,4 +47,7 @@ algorithm
   print("kappa2X_B = " + String(kappa2X_B));
   JXK := array(alpha/2*kappa2X_B + (1 - alpha)/2*normFroK^2 for alpha in 0:0.1:1);
   Math.Vectors.printVector(JXK, 6, "JXK");
+
+  annotation (Documentation(info="<html>
+</html>"));
 end conditionNumbers;
