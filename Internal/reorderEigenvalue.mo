@@ -9,8 +9,8 @@ function reorderEigenvalue
     "Name of complexVector to be used in error message";
   output Eigenvalue reorderedEigenvalues[size(EigenvalueVector, 1)]
     "Reordered zeros";
-  output Integer nRealEigenvectors
-    "Number of real zeros (EigenvalueVector[1:nRealEigenvectors] are the real zeros)";
+  output Integer nRealEigenvalues
+    "Number of real zeros (EigenvalueVector[1:nRealEigenvalues] are the real zeros)";
   annotation (Documentation(info="<HTML>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <blockquote><pre>
@@ -54,11 +54,11 @@ protected
   Integer jc;
   Complex complexVector[size(EigenvalueVector, 1)];
 algorithm
-nRealEigenvectors:=numberOfRealZeros(complexVector);
+nRealEigenvalues:=numberOfRealZeros(complexVector);
 
   i := 1;
   jr := 1;
-  jc := nRealEigenvectors + 1;
+  jc := nRealEigenvalues + 1;
   while i <= n loop
     if EigenvalueVector[i].ev.im == 0.0 then
 

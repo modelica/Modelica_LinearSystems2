@@ -9674,7 +9674,7 @@ This condition is however not fulfilled because the number of outputs is ny = "
     Integer k;
     Integer idx;
     Real eps=Modelica.Constants.eps;
-    Integer maxSteps=5;
+    Integer maxSteps=3;
 
     Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob.subSpace subS[size(gamma,1)];
 
@@ -10755,6 +10755,69 @@ function wrapper_xBase
 external"FORTRAN 77" c_inter_xBase(A, B, n, m, gamma_real, gamma_imag, ncp, U0, Z, S_real, S_imag, rankB);
   annotation (Include="
   #include<f2c.h>
+extern int zgesvd_(char *, char *, integer *, integer *, doublecomplex *, integer *, doublereal *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, integer *, doublereal *, integer *)
+
+int nullSpace_(doublecomplex *a, integer *n, integer *m, doublecomplex *v, integer *nullity)
+{
+  integer nn=*n;
+  integer mm=*m;
+  integer minnm=min(nn,mm);
+  integer lworkzsvd=-1;
+  integer info;
+  integer rank;
+  integer i;
+  integer ii;
+ 
+    
+  doublecomplex *workzsvd;
+  doublecomplex *u;
+  doublecomplex *vt;
+  doublecomplex *sigma;
+  
+  doublereal eps;
+  doublereal rwork;
+   
+  char *all=\"A\";
+    
+
+  sigma=(doublecomplex *) malloc((minnm+1)*sizeof(doublecomplex)); 
+  u=(doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex)); 
+  vt=(doublecomplex *) malloc((mm*mm+1)*sizeof(doublecomplex)); 
+  rwork = (doublereal *) malloc((5*minnm+1)*sizeof(doublereal)); 
+  
+  workzsvd = (doublecomplex *) malloc(max(1,2*minr+max(trowuB2t,nn))*sizeof(doublecomplex));
+  zgesvd_(all, all, n, m, a, n, sigma, u, n, vt, m, workzsvd, &lworkzsvd, rwork, &info);
+  lworkzsvd=(int)(workzsvd[0].re);
+  free(workzsvd);
+  workdzsvd = (doublecomplex *) malloc((lworkzsvd+1)*sizeof(doublecomplex));
+  zgesvd_(all, all, n, m, a, n, sigma, u, n, vt, m, workzsvd, &lworkzsvd, rwork, &info);
+  
+  eps=max(nn,mm)*max(sigma)*1e-12;
+  rank=0;
+  i=nn;
+  while(i>0)
+  {
+     if(sigma[i-1]>eps)
+     {
+        rank=i;
+        i=0;
+     }
+      i=i-1;
+  }
+  *nullity=mm-rank;
+  
+  for(i=0;i<mm;i++)
+    for(ii=0;ii<mm;ii++)
+      v[i*mm+ii] = vt[ii*mm+i];
+
+  free(workzsvd);
+  free(u);
+  free(vt);
+  free(sigma);
+  free(rwork);
+return 0;
+      
+};
 
  #define VOID void
  typedef char CHAR;
@@ -10769,8 +10832,10 @@ external"FORTRAN 77" c_inter_xBase(A, B, n, m, gamma_real, gamma_imag, ncp, U0, 
  #include <windows.h>  
 
 extern int dgesvd_(char *, char *, integer *, integer *, doublereal *, integer *, doublereal *, doublereal *, integer *, doublereal *, integer *, doublereal *, integer *, integer *)
-extern int zgesvd_(char *, char *, integer *, integer *, doublecomplex *, integer *, doublereal *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, integer *, doublereal *, integer *)
+//extern int zgesvd_(char *, char *, integer *, integer *, doublecomplex *, integer *, doublereal *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, integer *, doublereal *, integer *)
 extern int zgemm_(char *, char *, integer *, integer *, integer *, doublecomplex *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, doublecomplex *, integer *)
+extern int nullSpace_(doublecomplex *, integer *, integer *, doublecomplex *, integer *)
+
  
  
 int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doublereal *gamma_real, doublereal *gamma_imag, integer *ncp, doublereal *u0, doublereal *z, doublereal *s_real, doublereal *s_imag) 
@@ -10779,6 +10844,7 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
    
    doublecomplex *gamma;
    doublecomplex *s;
+//   doublecomplex *s2;
    doublecomplex *ac;
    doublecomplex *sr;
    doublecomplex *workdsvd;
@@ -10793,7 +10859,7 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
    doublecomplex *uB2t;
    doublecomplex *uB2tA;
    doublereal *vBt;
-   doublereal *rwork;
+//   doublereal *rwork;
    
    doublecomplex nc={0.0,0.0};
    doublecomplex ic={1.0,0.0};
@@ -10809,6 +10875,8 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
    integer i;
    integer ii;
    integer iii;
+   integer iv;
+   integer rowc2;   
    integer k;
    integer info;
    integer lworkdsvd=-1;
@@ -10816,8 +10884,10 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
    integer rrankB;
    integer rowuB2t;
    integer minr;
-   integer trowuB2;
+//   integer trowuB2;
    integer rank;
+   integer nullity;
+   integer nullitysr;
    
    char *all=\"A\";
    char *conj=\"C\";
@@ -10850,6 +10920,7 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
      ac[i].ri= 0.0;
    }        
 
+//begin decompostion of B   
    workdsvd = (doublereal *) malloc((max(3*nm+max(mm,nn),5*min(mm,nn)-4)+1)*sizeof(doublereal));
    dgesvd_(all, all, n, m, b, n, sigmaB, ub, n, vbt, m, workdsvd,  &lworkdsvd, &info)
    lworkdsvd=(int)(workdsvd[0]);
@@ -10868,12 +10939,13 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
      i = i - 1;
    }//end while;
    *rankB = rrankB;
+   
+   
    rowuB2t=nn-rrankB;
    uB2t = (doublecomplex *) malloc((nn*rowuB2t+1)*sizeof(doublecomplex)); 
+   c = (doublecomplex *) malloc((nn*rowuB2t+1)*sizeof(doublecomplex)); 
    uB2tA = (doublecomplex *) malloc((nn*rowuB2t+1)*sizeof(doublecomplex)); 
    uuB2t = (doublecomplex *) malloc((2*nn*rowuB2t+1)*sizeof(doublecomplex)); 
-   if(2*rrankB-nn)
-     sr = (doublecomplex *) malloc((nn*max(0,2*rrankB-nn)+1)*sizeof(doublecomplex)); 
 
    for(i=0; i<rrankB; i++)
      for(ii=0; ii<rrankB; ii++)
@@ -10889,76 +10961,75 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
        uB2t[ii*rowuB2t+i].r := uB[(i+rrankB)*nn+ii];
        uB2t[ii*rowuB2t+i].i := 0.0;
      }
+//end decompostion of B   
  
+// begin calculation of Sr      
+  if(2*rrankB-nn>0)
+  {
+    zgemm_(no, no, &rowuB2t, n, n, &ic, uB2t, &rowuB2t, ac, n, &nc, uB2tA, n);
+    for(i=0;i<nn;i++)
+    {
+      for(ii=0;ii<rowuB2t;ii++)
+        uuB2t[ii*rowuB2t+i] = u2Bt[ii*rowuB2t+i];
+      for(ii=0;ii<rowuB2t;ii++)
+        uuB2t[rowuB2t*nn+ii*rowuB2t+i] = u2BtA[ii*rowuB2t+i];
+    }  
+    minr=min(nn,2*rowuB2t);
+//    trowuB2t=2*rowuB2t;
+//    sigma=(doublecomplex *) malloc((minr+1)*sizeof(doublecomplex)); 
+    v=(doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));
+  
+    nullSpace_(uuB2t, &rowuB2t, n, v, &nullity);
+    nullitysr=nullity;
+    rank = nn-nullitysr;
    
-if nncb > 0 then
-{
-  zgemm_(no, no, &rowuB2t, n, n, &ic, uB2t, &rowuB2t, ac, n, &nc, uB2tA, n);
-  for(i=0;i<nn;i++)
-  {
-    for(ii=0;ii<rowuB2t;ii++)
-      uuB2t[ii*rowuB2t+i] = u2Bt[ii*rowuB2t+i];
-    for(ii=0;ii<rowuB2t;ii++)
-      uuB2t[rowuB2t*nn+ii*rowuB2t+i] = u2BtA[ii*rowuB2t+i];
-  }  
-  minr=min(nn,2*rowuB2t);
-  trowuB2t=2*rowuB2t;
-  sigma=(doublecomplex *) malloc((minr+1)*sizeof(doublecomplex)); 
-  u=(doublecomplex *) malloc((rowuB2t*rowuB2t*4+1)*sizeof(doublecomplex)); 
-  v=(doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex)); 
-  rwork = (doublereal *) malloc((5*minr+1)*sizeof(doublereal)); 
+    sr = (doublecomplex *) malloc((nn*max(0,nullitysr*nn+1)*sizeof(doublecomplex)); 
   
-  workzsvd = (doublecomplex *) malloc(max(1,2*minr+max(trowuB2t,nn))*sizeof(doublecomplex));
-  zgesvd_(all, all, &trowuB2, n, uuB2t, &trowuB2, sigma, u, &trowuB2, v, n, workzsvd, &lworkzsvd, rwork, &info);
-  lworkzsvd=(int)(workzsvd[0].re);
-  free(workzsvd);
-  workdzsvd = (doublecomplex *) malloc((lworkzsvd+1)*sizeof(doublecomplex));
-  zgesvd_(all, all, &trowuB2, n, uuB2t, &trowuB2, sigma, u, &trowuB2, v, n, workzsvd, &lworkzsvd, rwork, &info);
-  
-  rank = 0;
-  i = minr;
-  while(i > 0)
-  {
-     if(sigma[i-1]>1e-10)
-     {
-        rank = i;
-        i = 0;
-      }//end if;
-      i = i - 1;
-  }//  end while;
-
-  for(i=0;i<nn-rank;i++)
-    for(ii=0;ii<nn;ii++)
-      sr[ii*(nn-rank)+i] := v[(i+rank)*nn+ii];
-  free(sigma);
-  free(u);
+    for(i=0;i<nullitysr;i++)
+      for(ii=0;ii<nn;ii++)
+        sr[i*nn+ii] := v[(i+rank)*nn+ii];
+    
+    c2=(doublecomplex *) malloc((nn*(nullitysr+rowuB2t)+1)*sizeof(doublecomplex));    
+    
+//  free(sigma);
+//  free(u);
   free(v);
-  free(rwork);
-  free(workdzsvd);
-} 
- 
-//  //Computation of the nullspaces, i.e. the bases of the eigenvectors
-//   for l1 in 1:nx - numberOfComplexPairs loop
-// 
-//     AC := Complex(-1)*A;
-// 
-//     for l2 in 1:nx loop
-//       AC[l2, l2] := AC[l2, l2] + gammaSorted[l1];
-//     end for;
-// 
-//     C := matMul(U1T, AC);
-//     Cc := Matrices.C_nullspace([C; C_transpose(Sr)]);
-// 
-//     S2 := if l1 > numberOfRealEigenvalues then [Matrices.C_nullspace([C; C_transpose(Sr)]),Sr] else Matrices.C_nullspace(C);
-//     for l2 in 1:nx loop
-//       for l3 in 1:rankB loop
-//         S[l2,rankB*(l1-1)+l3] := S2[l2,l3];
-//       end for;
-//     end for;
-// end for;
+//  free(rwork);
+//  free(workdzsvd);
+}          
+// end calculation of Sr
 
- 
- 
+
+//begin computation of the nullspaces, i.e. the bases of the eigenvectors
+   v=(doublecomplex *) malloc((nn*(rowuB2t+nullitysr)+1)*sizeof(doublecomplex)); 
+   for(i=0;i<nn - numberOfComplexPairs;i++)
+   {
+
+      for(ii=0;ii<nn;ii++)
+        ac[ii*nn] := ac[ii*nn] + gamma[ii];
+      zgemm_(no, no, &rowuB2t, n, n, &ic, uB2t, &rowuB2t, ac, n, &nc, uB2tA, n);
+
+        if(i>=nre)
+        {
+          for(ii=0;ii<rowuB2t;ii++)
+            for(iii=0;iii<nn;iii++)
+              c2[ii*(rowuB2t+nullitysr)+iii] = uB2tA[ii*rowuB2t+iii];
+          for(ii=0;ii<nullitysr;ii++)
+            for(iii=0;iii<nn;iii++)
+              c2[ii*(nullitysr)+rowuB2t+iii] = sr[iii*nn+ii];
+          rowc2=rowuB2t
+          nullSpace_(c2, &rowc2, n, v, &nullity);
+        }
+        else
+          nullSpace_(uB2tA, &rowuB2t, n, v, &nullity);
+          
+        for(ii=0;ii<rrankB;ii++)
+          for(iii=0;iii<nn;iii++)
+            S[ii*nn+iii+i*nn*rrankB] = v[ii*nn+iii+nn*(nn-nullitysr)];
+   }// end for;
+
+free(v);   
+//end computation of the nullspaces, i.e. the bases of the eigenvectors
  
 //    for(i=0;i<nn*nn;i++)
 //    {
@@ -10966,20 +11037,24 @@ if nncb > 0 then
 //      x_imag[i]=x[i].i;
 //    }
 
-   if(2*rrankB-nn)
+   if(2*rrankB-nn>0)
+   {
      free(sr);
+     free(c2); 
+   }
    free(gamma);
    free(s);
    free(ac);
    free(sigmaB);
    free(uB);
    free(uB2t);
+   free(c);
    free(uuB2t);
    free(uB2tA);
    free(vB);
    free(workdsvd);
    free(workzsvd);
-   free(rwork);
+//   free(rwork);
   return 0;
 }", Library={"zlapack"});
 
@@ -11066,6 +11141,8 @@ end xBase;
     Complex C[:,:];
     Complex Cc[:,:];
     Complex Sr[:,:];
+    Real Srr[:,:];
+    Real U1Tr[:,:];
   //  Complex ST[:,:];
     Complex S[size(A,1),size(A,1)*size(B,2)];
     Complex S2[size(A,1),size(B,2)];
@@ -11136,14 +11213,22 @@ end xBase;
     U0 := Ur[:, 1:rankB];
   //  U1 := Complex(1)*Ur[:, rankB + 1:nx];
     U1T := Complex(1)*transpose(Ur[:, rankB + 1:nx]);
+    U1Tr := transpose(Ur[:, rankB + 1:nx]);
 
     condX2 := eps + 1;
 
+  //    if numberOfComplexPairs > 0 then
+  //      Sr :=  Matrices.C_nullspace([U1T;  matMul(U1T,Complex(1)*A)]);
+  //    else
+  //      Sr := fill(Complex(0),nx,0);
+  //    end if;
+
     if numberOfComplexPairs > 0 then
-      Sr :=  Matrices.C_nullspace([U1T;  matMul(U1T,Complex(1)*A)]);
+      Srr :=  Matrices.nullspace([U1Tr; U1Tr*A]);
     else
-      Sr := fill(Complex(0),nx,0);
+      Srr := fill(0,nx,0);
     end if;
+    Sr:=Complex(1)*Srr;
 
   //Computation of the nullspaces, i.e. the bases of the eigenvectors
     for l1 in 1:nx - numberOfComplexPairs loop
@@ -11155,7 +11240,7 @@ end xBase;
       end for;
 
       C := matMul(U1T, AC);
-      Cc := Matrices.C_nullspace([C; C_transpose(Sr)]);
+  //    Cc := Matrices.C_nullspace([C; C_transpose(Sr)]);
 
   //    subS[l1].S := if l1 > numberOfRealEigenvalues then [Matrices.C_nullspace([C; C_transpose(Sr)]),Sr] else Matrices.C_nullspace(C);
       S2 := if l1 > numberOfRealEigenvalues then [Matrices.C_nullspace([C; C_transpose(Sr)]),Sr] else Matrices.C_nullspace(C);

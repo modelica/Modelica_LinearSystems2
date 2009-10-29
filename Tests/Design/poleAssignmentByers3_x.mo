@@ -77,12 +77,12 @@ algorithm
 //   (kappa2X, kappaFroX, kappaFroYT, cInf, norm2K, normFroK, kappa2X_B, JXK) :=  conditionNumbers(K, X);
 
   // extented robust KNV-algortihm according to MATLAB's place-function
-  (K, X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob3(ss.A, ss.B, assignedPoles);
+  (K, X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob4(ss.A, ss.B, assignedPoles);
   Matrices.printMatrix(K,6,"K");
   S := ss.A - ss.B*K;
   newPoles := Complex.eigenValues(S);
   Modelica_LinearSystems2.Math.Complex.Vectors.print("assignedPoles", assignedPoles);
   Complex.Vectors.print("newPoles", newPoles);
-  (kappa2X, kappaFroX, kappaFroYT, cInf, norm2K, normFroK, kappa2X_B, JXK) :=  conditionNumbers(K, X);
+  (kappa2X, kappaFroX, kappaFroYT, cInf, norm2K, normFroK, kappa2X_B, JXK) :=  conditionNumbers(K, X, assignedPoles, newPoles);
 
 end poleAssignmentByers3_x;
