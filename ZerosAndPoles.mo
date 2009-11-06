@@ -3909,7 +3909,6 @@ processing.
   end Conversion;
 
   encapsulated package Import
-    import SaveLinearSystem;
 
   function fromModel
       "Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model"

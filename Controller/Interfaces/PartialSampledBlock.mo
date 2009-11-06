@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Controller.Interfaces;
 partial block PartialSampledBlock
   "Partial block of Sampled library (icon + default parameters)"
-  import Modelica_LinearSystems2.Controller.Type;
+
   extends Icons.PartialBlockIcon(cont=continuous);
 
   parameter Types.BlockTypeWithGlobalDefault blockType=Types.BlockTypeWithGlobalDefault.UseSampleClockOption

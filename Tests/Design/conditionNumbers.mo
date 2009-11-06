@@ -47,9 +47,8 @@ algorithm
   norm2K := Modelica.Math.Matrices.norm(K);
   normFroK := Matrices.norm(K, 3);
   kappaFroYT := Complex.Matrices.conditionNumber(YT, 3);
-  kappa2X_B := kappaFroX^2 + kappaFroYT^2;
+  kappa2X_B := Complex.Matrices.norm(X)^2 + Complex.Matrices.norm(YT)^2;
   JXK := array(alpha/2*kappa2X_B + (1 - alpha)/2*normFroK^2 for alpha in 0:0.1:1);
-
   annotation (Documentation(info="<html>
 </html>"));
 end conditionNumbers;

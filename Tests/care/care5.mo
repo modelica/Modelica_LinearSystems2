@@ -36,6 +36,10 @@ protected
   Real normX2;
   Real condX3;
   Real normX3;
+  Real Qr1[9,9];
+  Real Qr2[9,9];
+  Real deltaQ1;
+  Real deltaQ2;
 
 public
   output Real X1[9,9]=Matrices.care(A, B, R, Q, false);
@@ -55,6 +59,10 @@ public
   output Real ku2=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X2);
   output Real ku3=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X3);
 algorithm
+  Qr1 := X1*G*X1-transpose(A)*X1-X1*A;
+    Qr2 := X2*G*X2-transpose(A)*X2-X2*A;
+    deltaQ1 := Modelica.Math.Matrices.norm(Q-Qr1)/Modelica.Math.Matrices.norm(Q);
+    deltaQ2 := Modelica.Math.Matrices.norm(Q-Qr2)/Modelica.Math.Matrices.norm(Q);
    Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement");
    Matrices.printMatrix(X1, 16, "X1");
    Modelica.Utilities.Streams.print("Solution X2 with subsequent Newton refinement");
@@ -80,5 +88,7 @@ algorithm
   Modelica.Utilities.Streams.print("\n normX3 = " + String(normX3));
   Modelica.Utilities.Streams.print("\n condX3 = " + String(condX3));
   Modelica.Utilities.Streams.print("\n ku3 = " + String(ku3));
+  Modelica.Utilities.Streams.print("\n deltaQ1 = " + String(deltaQ1));
+  Modelica.Utilities.Streams.print("\n deltaQ2 = " + String(deltaQ2));
 
 end care5;

@@ -190,7 +190,21 @@ Real A[30,30]=[ -4.3280000000000003e+000,  1.7140000000000000e-001,  5.376000000
                 1.538e-05,   1.201e-04,   -2.579e-03,   -1.609e-04,   1.618e-02,   -1.071e-03,   -9.561e-05,   -5.503e-06,   -3.732e-06,   -2.996e-05,   -1.234e-06,   -4.380e-06,   -4.024e-05,   -4.721e-06,   5.324e-06,   -6.103e-06,   8.109e-06,   0.000e+00,   2.328e-02,   0.000e+00,   0.000e+00,   1.178e-04,   0.000e+00,   0.000e+00,   0.000e+00,   0.000e+00,   0.000e+00,   0.000e+00,   0.000e+00,   0.000e+00];
 
   Real R[3,3]=identity(3);
+  Real G[30,30]=B*transpose(B);
   Real Q[30,30]=transpose(C)*C;
+  Real H[60,60]=[A,-G; -Q,-transpose(A)];
+  Real condH=Matrices.Internal.conditionNumber(H);
+  Real normH=Matrices.norm(H, 2);
+  Real condX1;
+  Real normX1;
+  Real condX2;
+  Real normX2;
+  Real condX3;
+  Real normX3;
+  Real Qr1[30,30];
+  Real Qr2[30,30];
+  Real deltaQ1;
+  Real deltaQ2;
 
 public
   output Real X1[30,30]=Matrices.care(A, B, R, Q, false);
@@ -226,13 +240,39 @@ public
   0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000;
   2.4731346392712914e-017,     1.3179862066559472e-017,     3.8422885438084180e-017,     5.7660849811843378e-018,     4.4542517811037866e-015,    -1.0716432158645074e-016,     3.9951908089463261e-017,    -9.3920344523586209e-017,     1.6252774176231897e-017,    -2.4616766378584793e-015,    -1.0197508916769204e-017,    -5.6808449112854693e-018,     1.3627760920868991e-016,     1.1764931107964995e-017,    -3.7395858037309767e-017,    -1.0857823245749045e-018,     3.0048892601270165e-017,     4.9233696788889253e-019,    -4.3557104966212494e-015,    -5.6694198840441077e-017,    -2.6920650566938837e-019,    -3.3079348743294432e-016,    -1.3162833585273572e-017,    -9.5123461457722745e-020,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000;
   3.7509607815033465e-017,     4.7702183721099802e-017,     8.1109719439219436e-018,    -9.9334334076166023e-018,    -2.5567826001282688e-015,     3.8143430366120274e-016,     1.5447036783328321e-016,     8.5685678733633103e-017,     1.0721648367251547e-017,     2.8690626416851757e-016,     3.1404681324394296e-017,     1.2676825063240146e-018,     1.7474147279208624e-016,     1.4201186666442584e-017,     2.7887822922726449e-017,    -1.8919694970494328e-018,     5.2687958070133744e-018,     1.1189639290919407e-019,     2.2389774180420039e-015,     2.1878965010101277e-017,     3.6924816915117691e-020,    -9.2375448564113312e-017,    -4.9958044693886117e-018,    -2.6768544836468317e-020,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000,     0.0000000000000000e+000];
-
+  output Real ku1=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X1);
+  output Real ku2=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X2);
+  output Real ku3=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X3);
 algorithm
+  Qr1 := X1*G*X1-transpose(A)*X1-X1*A;
+    Qr2 := X2*G*X2-transpose(A)*X2-X2*A;
+    deltaQ1 := Modelica.Math.Matrices.norm(Q-Qr1)/Modelica.Math.Matrices.norm(Q);
+    deltaQ2 := Modelica.Math.Matrices.norm(Q-Qr2)/Modelica.Math.Matrices.norm(Q);
    Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement");
    Matrices.printMatrix(X1, 16, "X1");
    Modelica.Utilities.Streams.print("Solution X2 with subsequent Newton refinement");
    Matrices.printMatrix(X2, 16, "X2");
    Modelica.Utilities.Streams.print("MATLAB solution X3");
    Matrices.printMatrix(X3, 16, "X3");
+ condX1 := Matrices.Internal.conditionNumber(X1);
+  normX1 := Matrices.norm(X1, 2);
+  condX2 := Matrices.Internal.conditionNumber(X2);
+  normX2 := Matrices.norm(X2, 2);
+  condX3 := Matrices.Internal.conditionNumber(X3);
+  normX3 := Matrices.norm(X3, 2);
+
+  Modelica.Utilities.Streams.print("\n normH = " + String(normH));
+  Modelica.Utilities.Streams.print("\n condH = " + String(condH));
+  Modelica.Utilities.Streams.print("\n normX1 = " + String(normX1));
+  Modelica.Utilities.Streams.print("\n condX1 = " + String(condX1));
+  Modelica.Utilities.Streams.print("\n ku1 = " + String(ku1));
+  Modelica.Utilities.Streams.print("\n normX2 = " + String(normX2));
+  Modelica.Utilities.Streams.print("\n condX2 = " + String(condX2));
+  Modelica.Utilities.Streams.print("\n ku2 = " + String(ku2));
+  Modelica.Utilities.Streams.print("\n normX3 = " + String(normX3));
+  Modelica.Utilities.Streams.print("\n condX3 = " + String(condX3));
+  Modelica.Utilities.Streams.print("\n ku3 = " + String(ku3));
+  Modelica.Utilities.Streams.print("\n deltaQ1 = " + String(deltaQ1));
+  Modelica.Utilities.Streams.print("\n deltaQ2 = " + String(deltaQ2));
 
 end care6;

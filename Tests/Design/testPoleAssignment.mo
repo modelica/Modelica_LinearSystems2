@@ -22,8 +22,8 @@ poles are placed at
 <pre>p = {-3,-4}.</pre>
 </html>"));
 
-  input DesignData data=Modelica_LinearSystems2.Tests.Design.data_Benner6(12);
-  input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.KNV
+  input DesignData data=Modelica_LinearSystems2.Tests.Design.data_Laub() annotation(Dialog);
+  input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.Schur
     "method for pole assignment";
 
 protected
@@ -52,7 +52,7 @@ public
 algorithm
   if method == Tests.Types.AssignPolesMethod.KNV then
 // extented robust KNV-algortihm according to MATLAB's place-function
-     (K,X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob4(data.A, data.B, data.assignedPoles);
+     (K,X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob5(data.A, data.B, data.assignedPoles);
      S := data.A - data.B*K;
      calcPoles := Complex.eigenValues(S);
      if isKprovided then

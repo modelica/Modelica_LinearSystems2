@@ -10312,6 +10312,7 @@ extern  int zgeqrf_(integer *, integer *, doublecomplex *, integer *, doublecomp
 extern  int zungqr_(integer *, integer *, integer *, doublecomplex *, integer *,doublecomplex *, doublecomplex *, integer *, integer *);
 extern  int zgemv_(char *, integer *, integer *, doublecomplex *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, doublecomplex *, integer *);
 extern doublereal zlange_(char *, integer *, integer *, doublecomplex *, integer *, doublereal *);
+extern void zdotc_(doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, integer *);
 
 
 int c_inter_modifyX_(doublereal *x_real, doublereal *x_imag, integer *n, doublereal *s_real, doublereal *s_imag, integer *m, integer *ncp, integer *steps) 
@@ -10426,14 +10427,14 @@ int c_inter_modifyX_(doublereal *x_real, doublereal *x_imag, integer *n, doubler
 
       normc.r=1/norm;
       normc.i=0.0;
-      zgemv_(no, n, m, &normc, ss, n, y, &c1, &nc, qx, &c1);
+      zgemv_(no, n, m, &normc, ss, n, y, &c1, &nc, qx, &c1);//y=qx
       
-      
-
-//         if l1 > numberOfRealEigenvalues and Complex.'abs'(Complex.Vectors.multiply(y,Complex.conj(y)))>0.9 then
-//           idx = 1 + rem(k, size(subS[l1].S, 2) - size(Sr, 2));
-//           y = (y + subS[l1].S[:, idx])/sqrt(2);
-//         end if;
+//       zdotc_(&normc, m, qx, &c1, qx, &c1);//qx^H*qx
+//       if(i>nncp && normc.r*normc.r+normc.i*normc.i>0.81)
+//       {
+//            idx = 1 + rem(k, mm-nullitySr);
+//            qx = (qx + S[:, i*nn+idx])/sqrt(2);
+//        }
 
      for(ii=0;ii<nn;ii++)
        x[(i-1)*nn+ii] = qx[ii];
@@ -10498,8 +10499,8 @@ function modifyX
    Integer n=size(X,1);
    Real X_real[n,n]=Re(X) "Eigenvector matrix, real part";
    Real X_imag[n,n]=Im(X) "Eigenvector matrix, imaginary part";
-   Real S_real[n,m*n]=Re(S) "Eigenvector bases, real part";
-   Real S_imag[n,m*n]=Im(S) "Eigenvector bases, imaginary part";
+   Real S_real[n,m*(n-ncp)]=Re(S) "Eigenvector bases, real part";
+   Real S_imag[n,m*(n-ncp)]=Im(S) "Eigenvector bases, imaginary part";
 
   Real Xm_real[n,n];
   Real Xm_imag[n,n];
@@ -10516,236 +10517,21 @@ algorithm
   end for;
 end modifyX;
 
-  function assignPolesMI_rob3
-    extends Modelica.Icons.Function;
-
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.Math.Matrices;
-    import Modelica_LinearSystems2.Math.Complex;
-    import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
-    import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
-    import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
-    import Re = Modelica_LinearSystems2.Math.Complex.real;
-    import Im = Modelica_LinearSystems2.Math.Complex.imag;
-    import Modelica.Utilities.Streams.print;
-
-    input Real A[:,size(A, 1)] "system matrix";
-    input Real B[size(A, 1),:] "control input matrix";
-    input Complex gamma[size(A, 1)];
-    input Boolean IniX=false "Initial values of X are provided";
-    input Complex Xini[size(A, 1),size(A, 1)]=fill(Complex(0),size(A, 1),size(A, 1))
-        "Initial values of the eigenvectors X";
-
-    output Real K[size(B, 2),size(A, 1)] "feedback matrix";
-    output Complex evX[:,:] "eigen vectors of the closed loop system";
-    protected
-    Complex AC[size(A, 1),size(A, 2)]=Complex(1)*A;
-    Complex Lambda[size(A, 1),size(A, 1)];
-    Real Ur[:,:];
-    Real Vr[:,:];
-    Complex U0[:,:];
-  //  Complex U1[:,:];
-    Complex U1T[:,:];
-    Complex X[size(A, 1),size(A, 2)]=Xini;
-  //   Complex Xj[size(A, 1),size(A, 1)-1];
-  //   Complex Xjj[size(A, 1),size(A, 1)];
-    Complex XC[size(A, 1),size(A, 2)];
-    Complex XC2[size(A, 1),size(A, 2)];
-    Complex Z[:,:];
-    Complex M[size(A, 1),size(A, 1)];
-    Complex KC[:,:];
-  //  Complex QX[:,:];
-    Complex C[:,:];
-    Complex Cc[:,:];
-    Complex Sr[:,:];
-  //  Complex ST[:,:];
-    Complex S[size(A,1),size(A,1)*size(B,2)];
-    Complex S2[size(A,1),size(B,2)];
-
-    Complex gammaSorted[size(gamma, 1)];
-    Complex gammaSorted2[size(gamma, 1)];
-    Real sigmaB[:];
-    Complex ev[size(A, 1)];
-
-    Complex y[:];
-
-    Real condX2;
-    Real norm_y;
-    Integer rankB;
-    Integer nx=size(A, 1);
-    Integer numberOfRealEigenvalues;
-    Integer numberOfComplexPairs;
-    Integer i;
-    Integer l1;
-    Integer l2;
-    Integer k;
-    Integer idx;
-    Real eps=Modelica.Constants.eps;
-    Integer maxSteps=3;
-
-  //  Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob.subSpace subS[size(gamma,1)];
-
-    Complex a;
-    Complex MM[:,:];
-    Integer cnt;
-    StateSpace ss=StateSpace(A=A, B=B, C=zeros(1,nx), D=zeros(1,size(B,2)));
-
-  algorithm
-    //check controllability
-    assert(StateSpace.Analysis.isControllable(ss),"Poles cannot be placed since system is not controllable");
-
-    // sort eigenvalues to [real ev, complex ev(im>0), conj(complex ev(im>0))]
-    (gammaSorted2,numberOfRealEigenvalues) :=
-      Modelica_LinearSystems2.Internal.reorderZeros(gamma);
-    gammaSorted := gammaSorted2;
-    numberOfComplexPairs := integer((nx - numberOfRealEigenvalues)/2);
-    for i in numberOfRealEigenvalues + 1:numberOfRealEigenvalues + numberOfComplexPairs loop
-      gammaSorted[i] := if Im(gammaSorted2[2*i-numberOfRealEigenvalues-1]) > 0 then gammaSorted2[2*i-numberOfRealEigenvalues-1] else Complex.conj(gammaSorted2[2*i-numberOfRealEigenvalues-1]);
-      gammaSorted[i + numberOfComplexPairs] := Complex.conj(gammaSorted[i]);
-    end for;
-
-    for i in 1:nx loop
-      Lambda[i, i] := gammaSorted[i];
-    end for;
-
-    (sigmaB,Ur,Vr) := Modelica.Math.Matrices.singularValues(B);
-    rankB := 0;
-    i := size(sigmaB, 1);
-    while i > 0 loop
-      if sigmaB[i] > 1e-10 then
-        rankB := i;
-        i := 0;
-      end if;
-      i := i - 1;
-    end while;
-
-     Z := fill(Complex(0), size(B, 2), rankB);
-     for l1 in 1:rankB loop
-       for l2 in 1:size(B, 2) loop
-         Z[l1, l2] := Complex((Vr[l2, l1])/sigmaB[l2]);
-       end for;
-     end for;
-
-    U0 := Complex(1)*Ur[:, 1:rankB];
-  //  U1 := Complex(1)*Ur[:, rankB + 1:nx];
-    U1T := Complex(1)*transpose(Ur[:, rankB + 1:nx]);
-
-    condX2 := eps + 1;
-
-    if numberOfComplexPairs > 0 then
-      Sr :=  Matrices.C_nullspace([U1T;  matMul(U1T,Complex(1)*A)]);
-    else
-      Sr := fill(Complex(0),nx,0);
-    end if;
-
-  //Computation of the nullspaces, i.e. the bases of the eigenvectors
-    for l1 in 1:nx - numberOfComplexPairs loop
-
-      AC := Complex(-1)*A;
-
-      for l2 in 1:nx loop
-        AC[l2, l2] := AC[l2, l2] + gammaSorted[l1];
-      end for;
-
-      C := matMul(U1T, AC);
-      Cc := Matrices.C_nullspace([C; C_transpose(Sr)]);
-
-  //    subS[l1].S := if l1 > numberOfRealEigenvalues then [Matrices.C_nullspace([C; C_transpose(Sr)]),Sr] else Matrices.C_nullspace(C);
-      S2 := if l1 > numberOfRealEigenvalues then [Matrices.C_nullspace([C; C_transpose(Sr)]),Sr] else Matrices.C_nullspace(C);
-      for l2 in 1:nx loop
-        for l3 in 1:rankB loop
-          S[l2,rankB*(l1-1)+l3] := S2[l2,l3];
-        end for;
-      end for;
-  end for;
-
-  if not IniX then
-  // initialization of X according to Byers
-    for l1 in 1:nx - numberOfComplexPairs loop
-      y := fill(Complex(0), nx);
-      for l2 in 1:rankB loop
-  //      y := X[:, l1] + X[:, l1] + subS[l1].S[:, l2];
-        y := X[:, l1] + X[:, l1] + S[:, rankB*(l1-1)+l2];
-      end for;
-      y := y/Complex.Vectors.norm(y);
-      for l2 in 1:nx loop
-        X[l2, l1] := y[l2];
-      end for;
-    end for;
-    for l1 in 1:numberOfComplexPairs loop
-      for l2 in 1:nx loop
-        X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
-          Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
-      end for;
-    end for;
-
-   // initialization of X according to place.m
-     for l1 in 1:nx - numberOfComplexPairs loop
-       for l2 in 1:nx loop
-  //       X[l2, l1] := subS[l1].S[l2, 1];
-         X[l2, l1] := S[l2, rankB*(l1-1)+1];
-       end for;
-     end for;
-     for l1 in 1:numberOfComplexPairs loop
-       for l2 in 1:nx loop
-         X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
-           Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
-       end for;
-     end for;
-       end if;
-
-  // eigenvector modification
-    X := Modelica_LinearSystems2.StateSpace.Internal.modifyX(X,S,rankB,numberOfComplexPairs,maxSteps);
-
-    XC := C_transpose(X);
-    XC2 := C_transpose(matMul(X, Lambda));
-    M := Modelica_LinearSystems2.Math.Matrices.C_solve2(XC, XC2);
-    M := C_transpose(M);
-
-    for l2 in 1:nx loop
-      for l3 in 1:nx loop
-        M[l2, l3] := M[l2, l3] - A[l2, l3];
-      end for;
-      end for;
-
-   Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(M),6,"ReM");
-   Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(M),6,"ImM");
-
-    KC := matMul(Z, matMul(C_transpose(U0), M));
-    K := -Re(KC);
-    evX := X;
-
-    ev := Complex.eigenValues(A - B*K);
-  //    Complex.Vectors.print("gammaSorted", gammaSorted);
-  //    Complex.Vectors.print("ev", ev);
-
-    annotation (experiment, experimentSetupOutput);
-
-  // public
-  //   encapsulated record subSpace
-  //     import Modelica;
-  //     import Modelica_LinearSystems2;
-  //     extends Modelica.Icons.Record;
-  //     Modelica_LinearSystems2.Math.Complex S[:,:];
-  //   end subSpace;
-
-  end assignPolesMI_rob3;
-
 function wrapper_xBase
       "Compute the eigenvector bases according to Kautsky algorithm"
 
   input Real A[:,size(A, 1)] "Real square system matrix";
   input Real B[size(A,1),:] "Real input matrix";
-  input Real gamma_real[n]=Re(gamma) "Eigenvalue vector, real part";
-  input Real gamma_imag[n]=Im(gamma) "Eigenvalue vector, imaginary part";
+  input Real gamma_real[size(A,1)] "Eigenvalue vector, real part";
+  input Real gamma_imag[size(A,1)] "Eigenvalue vector, imaginary part";
   input Integer ncp "Number of complex pairs of eigenvalues";
 
-  output Real U0[n,m] "U0";
-  output Real Z[m,m] "Z";
-  output Real S_real[n,m*n] "Eigenvector bases, real part";
-  output Real S_imag[n,m*n] "Eigenvector bases, imaginary part";
+  output Real U0[size(A,1),size(B,2)] "U0";
+  output Real Z[size(B,2),size(B,2)] "Z";
+  output Real S_real[size(A,1),size(B,2)*(size(A,1)-ncp)]
+        "Eigenvector bases, real part";
+  output Real S_imag[size(A,1),size(B,2)*(size(A,1)-ncp)]
+        "Eigenvector bases, imaginary part";
   output Integer rankB "Rank of matrix B";
 
     protected
@@ -10755,7 +10541,9 @@ function wrapper_xBase
 external"FORTRAN 77" c_inter_xBase(A, B, n, m, gamma_real, gamma_imag, ncp, U0, Z, S_real, S_imag, rankB);
   annotation (Include="
   #include<f2c.h>
-extern int zgesvd_(char *, char *, integer *, integer *, doublecomplex *, integer *, doublereal *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, integer *, doublereal *, integer *)
+  
+extern int zgesvd_(char *, char *, integer *, integer *, doublecomplex *, integer *, doublereal *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, integer *, doublereal *, integer *);
+//extern int nullSpace_(doublecomplex *, integer *, integer *, doublecomplex *, integer *);
 
 int nullSpace_(doublecomplex *a, integer *n, integer *m, doublecomplex *v, integer *nullity)
 {
@@ -10772,27 +10560,38 @@ int nullSpace_(doublecomplex *a, integer *n, integer *m, doublecomplex *v, integ
   doublecomplex *workzsvd;
   doublecomplex *u;
   doublecomplex *vt;
-  doublecomplex *sigma;
+  doublecomplex *aa;
+  doublereal *sigma;
+  doublereal sigmamax;
   
   doublereal eps;
-  doublereal rwork;
+  doublereal *rwork;
    
   char *all=\"A\";
-    
+   
 
-  sigma=(doublecomplex *) malloc((minnm+1)*sizeof(doublecomplex)); 
+  sigma=(doublereal *) malloc((minnm+1)*sizeof(doublereal)); 
+  aa=(doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex)); 
   u=(doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex)); 
   vt=(doublecomplex *) malloc((mm*mm+1)*sizeof(doublecomplex)); 
   rwork = (doublereal *) malloc((5*minnm+1)*sizeof(doublereal)); 
   
-  workzsvd = (doublecomplex *) malloc(max(1,2*minr+max(trowuB2t,nn))*sizeof(doublecomplex));
-  zgesvd_(all, all, n, m, a, n, sigma, u, n, vt, m, workzsvd, &lworkzsvd, rwork, &info);
-  lworkzsvd=(int)(workzsvd[0].re);
+  for(i=0;i<nn*mm;i++)
+    aa[i] = a[i];
+
+  workzsvd = (doublecomplex *) malloc(max(1,2*minnm+max(mm,nn))*sizeof(doublecomplex));
+  zgesvd_(all, all, n, m, aa, n, sigma, u, n, vt, m, workzsvd, &lworkzsvd, rwork, &info);
+  lworkzsvd=(int)(workzsvd[0].r);
   free(workzsvd);
-  workdzsvd = (doublecomplex *) malloc((lworkzsvd+1)*sizeof(doublecomplex));
-  zgesvd_(all, all, n, m, a, n, sigma, u, n, vt, m, workzsvd, &lworkzsvd, rwork, &info);
+  workzsvd = (doublecomplex *) malloc((lworkzsvd+1)*sizeof(doublecomplex));
+  zgesvd_(all, all, n, m, aa, n, sigma, u, n, vt, m, workzsvd, &lworkzsvd, rwork, &info);
   
-  eps=max(nn,mm)*max(sigma)*1e-12;
+  sigmamax=0.0;
+  for(i=0;i<minnm;i++)
+    if(sigma[i]>sigmamax)
+      sigmamax=sigma[i];
+      
+  eps=max(nn,mm)*sigmamax*1e-12;
   rank=0;
   i=nn;
   while(i>0)
@@ -10808,47 +10607,51 @@ int nullSpace_(doublecomplex *a, integer *n, integer *m, doublecomplex *v, integ
   
   for(i=0;i<mm;i++)
     for(ii=0;ii<mm;ii++)
-      v[i*mm+ii] = vt[ii*mm+i];
+    {
+      v[i*mm+ii].r = vt[ii*mm+i].r;
+      v[i*mm+ii].i = -vt[ii*mm+i].i;
+    }
 
   free(workzsvd);
   free(u);
   free(vt);
   free(sigma);
   free(rwork);
+  free(aa);
 return 0;
       
 };
 
- #define VOID void
- typedef char CHAR;
- typedef short SHORT;
- typedef long LONG;
- typedef unsigned char   u_char;
- typedef unsigned short  u_short;
- typedef unsigned int    u_int;
- typedef unsigned long   u_long;
- typedef unsigned __int64 u_int64;
- #include <winsock2.h>
- #include <windows.h>  
+//  #define VOID void
+//  typedef char CHAR;
+//  typedef short SHORT;
+//  typedef long LONG;
+//  typedef unsigned char   u_char;
+//  typedef unsigned short  u_short;
+//  typedef unsigned int    u_int;
+//  typedef unsigned long   u_long;
+//  typedef unsigned __int64 u_int64;
+//  #include <winsock2.h>
+//  #include <windows.h>  
+//  #include <stdio.h> 
+  
+extern int dgesvd_(char *, char *, integer *, integer *, doublereal *, integer *, doublereal *, doublereal *, integer *, doublereal *, integer *, doublereal *, integer *, integer *);
+//extern int zgesvd_(char *, char *, integer *, integer *, doublecomplex *, integer *, doublereal *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, integer *, doublereal *, integer *);
+extern int zgemm_(char *, char *, integer *, integer *, integer *, doublecomplex *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, doublecomplex *, integer *);
+extern int nullSpace_(doublecomplex *, integer *, integer *, doublecomplex *, integer *);
 
-extern int dgesvd_(char *, char *, integer *, integer *, doublereal *, integer *, doublereal *, doublereal *, integer *, doublereal *, integer *, doublereal *, integer *, integer *)
-//extern int zgesvd_(char *, char *, integer *, integer *, doublecomplex *, integer *, doublereal *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, integer *, doublereal *, integer *)
-extern int zgemm_(char *, char *, integer *, integer *, integer *, doublecomplex *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, doublecomplex *, integer *)
-extern int nullSpace_(doublecomplex *, integer *, integer *, doublecomplex *, integer *)
 
  
- 
-int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doublereal *gamma_real, doublereal *gamma_imag, integer *ncp, doublereal *u0, doublereal *z, doublereal *s_real, doublereal *s_imag) 
+int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doublereal *gamma_real, doublereal *gamma_imag, integer *ncp, doublereal *u0, doublereal *z, doublereal *s_real, doublereal *s_imag, integer *rankB) 
 {
    static integer c1 = 1;
    
    doublecomplex *gamma;
    doublecomplex *s;
-//   doublecomplex *s2;
+   doublecomplex *c2;
    doublecomplex *ac;
    doublecomplex *sr;
-   doublecomplex *workdsvd;
-   doublecomplex *workzsvd;
+   doublereal *workdsvd;
    doublecomplex *u;
    doublecomplex *v;
    doublecomplex *sigma;
@@ -10856,10 +10659,10 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
    
    doublereal *sigmaB;
    doublereal *uB;
-   doublecomplex *uB2t;
-   doublecomplex *uB2tA;
+   doublecomplex *u1T;
+   doublecomplex *u1T_mul_A;
+   doublecomplex *u1T_mod;//=[u1T;u1T_mul_A]
    doublereal *vBt;
-//   doublereal *rwork;
    
    doublecomplex nc={0.0,0.0};
    doublecomplex ic={1.0,0.0};
@@ -10882,9 +10685,8 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
    integer lworkdsvd=-1;
    integer lworkzsvd=-1;
    integer rrankB;
-   integer rowuB2t;
+   integer rows_u1T;
    integer minr;
-//   integer trowuB2;
    integer rank;
    integer nullity;
    integer nullitysr;
@@ -10893,11 +10695,15 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
    char *conj=\"C\";
    char *no=\"N\";
    char *fro=\"F\";
-   char mess[200];
-  
+//   char mess[200];
+   
+//   FILE *fileptr;  
+    
+//   fileptr = fopen(\"test.txt\",\"w\"); 
+    
   
    gamma = (doublecomplex *) malloc((nn+1)*sizeof(doublecomplex));      
-   s = (doublecomplex *) malloc((nn*nn*mm+1)*sizeof(doublecomplex));      
+   s = (doublecomplex *) malloc((nn*(nn-nncp)*mm+1)*sizeof(doublecomplex));      
    ac = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));      
    
    sigmaB = (doublereal *) malloc((nm+1)*sizeof(doublereal));      
@@ -10916,17 +10722,17 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
    }        
    for(i=0;i<nn*nn;i++)
    {
-     ac[i].r = a[i];
-     ac[i].ri= 0.0;
+     ac[i].r = -a[i];
+     ac[i].i= 0.0;
    }        
 
 //begin decompostion of B   
    workdsvd = (doublereal *) malloc((max(3*nm+max(mm,nn),5*min(mm,nn)-4)+1)*sizeof(doublereal));
-   dgesvd_(all, all, n, m, b, n, sigmaB, ub, n, vbt, m, workdsvd,  &lworkdsvd, &info)
+   dgesvd_(all, all, n, m, b, n, sigmaB, uB, n, vBt, m, workdsvd,  &lworkdsvd, &info);
    lworkdsvd=(int)(workdsvd[0]);
    free(workdsvd);
    workdsvd = (doublereal *) malloc((lworkdsvd+1)*sizeof(doublereal));
-   dgesvd_(all, all, n, m, b, n, sigmaB, ub, n, vbt, m, workdsvd,  &lworkdsvd, &info);
+   dgesvd_(all, all, n, m, b, n, sigmaB, uB, n, vBt, m, workdsvd,  &lworkdsvd, &info);
    rrankB = 0;
    i = nm;
    while(i>0)
@@ -10941,119 +10747,123 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
    *rankB = rrankB;
    
    
-   rowuB2t=nn-rrankB;
-   uB2t = (doublecomplex *) malloc((nn*rowuB2t+1)*sizeof(doublecomplex)); 
-   c = (doublecomplex *) malloc((nn*rowuB2t+1)*sizeof(doublecomplex)); 
-   uB2tA = (doublecomplex *) malloc((nn*rowuB2t+1)*sizeof(doublecomplex)); 
-   uuB2t = (doublecomplex *) malloc((2*nn*rowuB2t+1)*sizeof(doublecomplex)); 
+   rows_u1T=nn-rrankB;
+   u1T = (doublecomplex *) malloc((nn*rows_u1T+1)*sizeof(doublecomplex)); 
+  //   c = (doublecomplex *) malloc((nn*rows_u1T+1)*sizeof(doublecomplex)); 
+   u1T_mul_A = (doublecomplex *) malloc((nn*rows_u1T+1)*sizeof(doublecomplex)); 
+   u1T_mod = (doublecomplex *) malloc((2*nn*rows_u1T+1)*sizeof(doublecomplex)); 
 
    for(i=0; i<rrankB; i++)
      for(ii=0; ii<rrankB; ii++)
-       z[i*rrankB+ii]. := vbt[ii*rrank+i]/sigmaB[ii];
-     end for;
-   end for;
+       z[i*rrankB+ii] = vBt[ii*rrankB+i]/sigmaB[i];
 
-   for(i=0;i<rrankB*rrankB;i++)
-     u0[i] = ub[i];
-   for(i=0;i<rowuB2t;i++)
+
+   for(i=0;i<nn*rrankB;i++)
+     u0[i] = uB[i];
+   for(i=0;i<rows_u1T;i++)
      for(ii=0;ii<nn;ii++)
      {
-       uB2t[ii*rowuB2t+i].r := uB[(i+rrankB)*nn+ii];
-       uB2t[ii*rowuB2t+i].i := 0.0;
+       u1T[ii*rows_u1T+i].r = uB[(i+rrankB)*nn+ii];
+       u1T[ii*rows_u1T+i].i = 0.0;
      }
 //end decompostion of B   
  
+ 
 // begin calculation of Sr      
-  if(2*rrankB-nn>0)
+  if(2*rrankB-nn>0 && nncp>0)
   {
-    zgemm_(no, no, &rowuB2t, n, n, &ic, uB2t, &rowuB2t, ac, n, &nc, uB2tA, n);
+    zgemm_(no, no, &rows_u1T, n, n, &ic, u1T, &rows_u1T, ac, n, &nc, u1T_mul_A, n);
     for(i=0;i<nn;i++)
     {
-      for(ii=0;ii<rowuB2t;ii++)
-        uuB2t[ii*rowuB2t+i] = u2Bt[ii*rowuB2t+i];
-      for(ii=0;ii<rowuB2t;ii++)
-        uuB2t[rowuB2t*nn+ii*rowuB2t+i] = u2BtA[ii*rowuB2t+i];
+      for(ii=0;ii<rows_u1T;ii++)
+        u1T_mod[ii*rows_u1T+i] = u1T[ii*rows_u1T+i];
+      for(ii=0;ii<rows_u1T;ii++)
+        u1T_mod[rows_u1T*nn+ii*rows_u1T+i] = u1T_mul_A[ii*rows_u1T+i];
     }  
-    minr=min(nn,2*rowuB2t);
-//    trowuB2t=2*rowuB2t;
-//    sigma=(doublecomplex *) malloc((minr+1)*sizeof(doublecomplex)); 
+    minr=min(nn,2*rows_u1T);
     v=(doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));
   
-    nullSpace_(uuB2t, &rowuB2t, n, v, &nullity);
+    nullSpace_(u1T_mod, &rows_u1T, n, v, &nullity);
     nullitysr=nullity;
     rank = nn-nullitysr;
    
-    sr = (doublecomplex *) malloc((nn*max(0,nullitysr*nn+1)*sizeof(doublecomplex)); 
+    sr = (doublecomplex *) malloc((nn*max(0,nullitysr*nn+1))*sizeof(doublecomplex)); 
   
     for(i=0;i<nullitysr;i++)
       for(ii=0;ii<nn;ii++)
-        sr[i*nn+ii] := v[(i+rank)*nn+ii];
+        sr[i*nn+ii] = v[(i+rank)*nn+ii];
     
-    c2=(doublecomplex *) malloc((nn*(nullitysr+rowuB2t)+1)*sizeof(doublecomplex));    
+    c2=(doublecomplex *) malloc((nn*(nullitysr+rows_u1T)+1)*sizeof(doublecomplex));    
     
-//  free(sigma);
-//  free(u);
   free(v);
-//  free(rwork);
-//  free(workdzsvd);
 }          
 // end calculation of Sr
 
 
 //begin computation of the nullspaces, i.e. the bases of the eigenvectors
-   v=(doublecomplex *) malloc((nn*(rowuB2t+nullitysr)+1)*sizeof(doublecomplex)); 
-   for(i=0;i<nn - numberOfComplexPairs;i++)
+//   v=(doublecomplex *) malloc((nn*(rows_u1T+nullitysr)+1)*sizeof(doublecomplex)); 
+   v=(doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex)); 
+   for(i=0;i<nn - nncp;i++)
    {
 
       for(ii=0;ii<nn;ii++)
-        ac[ii*nn] := ac[ii*nn] + gamma[ii];
-      zgemm_(no, no, &rowuB2t, n, n, &ic, uB2t, &rowuB2t, ac, n, &nc, uB2tA, n);
-
-        if(i>=nre)
-        {
-          for(ii=0;ii<rowuB2t;ii++)
-            for(iii=0;iii<nn;iii++)
-              c2[ii*(rowuB2t+nullitysr)+iii] = uB2tA[ii*rowuB2t+iii];
+      {
+        ac[ii*nn+ii].r = -a[ii*nn+ii] + gamma[i].r;
+        ac[ii*nn+ii].i = gamma[i].i;
+      }
+      
+      zgemm_(no, no, &rows_u1T, n, n, &ic, u1T, &rows_u1T, ac, n, &nc, u1T_mul_A, &rows_u1T);
+      
+      if(i>=nre && 2*rrankB-nn>0)
+      {
+        for(ii=0;ii<rows_u1T;ii++)
+          for(iii=0;iii<nn;iii++)
+            c2[ii*(rows_u1T+nullitysr)+iii] = u1T_mul_A[ii*rows_u1T+iii];
           for(ii=0;ii<nullitysr;ii++)
             for(iii=0;iii<nn;iii++)
-              c2[ii*(nullitysr)+rowuB2t+iii] = sr[iii*nn+ii];
-          rowc2=rowuB2t
+            {
+              c2[ii*(nullitysr)+rows_u1T+iii] = sr[iii*nn+ii];
+            }
+          rowc2=rows_u1T;
           nullSpace_(c2, &rowc2, n, v, &nullity);
         }
         else
-          nullSpace_(uB2tA, &rowuB2t, n, v, &nullity);
+          nullSpace_(u1T_mul_A, &rows_u1T, n, v, &nullity);
           
         for(ii=0;ii<rrankB;ii++)
           for(iii=0;iii<nn;iii++)
-            S[ii*nn+iii+i*nn*rrankB] = v[ii*nn+iii+nn*(nn-nullitysr)];
-   }// end for;
-
-free(v);   
+          {
+            s[ii*nn+iii+i*nn*rrankB].r = v[ii*nn+iii+nn*(nn-rrankB)].r;
+            s[ii*nn+iii+i*nn*rrankB].i = v[ii*nn+iii+nn*(nn-rrankB)].i;
+          }
+   }// end for i;
+   
+   free(v);   
 //end computation of the nullspaces, i.e. the bases of the eigenvectors
- 
-//    for(i=0;i<nn*nn;i++)
-//    {
-//      x_real[i]=x[i].r;
-//      x_imag[i]=x[i].i;
-//    }
-
-   if(2*rrankB-nn>0)
+    for(i=0;i<nn*(nn-nncp)*mm;i++)
+    {
+      s_real[i]=s[i].r;
+      s_imag[i]=s[i].i;
+    }
+   if(2*rrankB-nn>0 && nncp>0)
    {
      free(sr);
      free(c2); 
    }
+   
    free(gamma);
    free(s);
    free(ac);
+   
    free(sigmaB);
    free(uB);
-   free(uB2t);
-   free(c);
-   free(uuB2t);
-   free(uB2tA);
-   free(vB);
+   free(u1T);
+//   free(c);
+   free(u1T_mod);
+   free(u1T_mul_A);
+   free(vBt);
    free(workdsvd);
-   free(workzsvd);
+//   free(workzsvd);
 //   free(rwork);
   return 0;
 }", Library={"zlapack"});
@@ -11073,28 +10883,253 @@ function xBase "Compute the eigenvector bases according to Kautsky algorithm"
 
   output Real U0[size(A, 1),size(B, 2)] "U0 and Z are the decompositions of B";
   output Real Z[size(B,2),size(B,2)] "Z and U0 are the decompositions of B";
-  output Complex S[size(A,1),size(A,1)*size(B,2)] "Eigenvector bases";
+  output Complex S[size(A,1),(size(A,1)-ncp)*size(B,2)] "Eigenvector bases";
+  output Integer rankB;
 
     protected
    Complex j=Modelica_LinearSystems2.Math.Complex.j();
    Integer n=size(A,1);
-   Integer m=size(B,1);
+   Integer m=size(B,2);
 
    Real gamma_real[n]=Re(gamma) "Eigenvalue vector, real part";
    Real gamma_imag[n]=Im(gamma) "Eigenvalue vector, imaginary part";
-   Real S_real[n,m*n] "Eigenvector bases, real part";
-   Real S_imag[n,m*n] "Eigenvector bases, imaginary part";
+   Real S_real[n,m*(n-ncp)] "Eigenvector bases, real part";
+   Real S_imag[n,m*(n-ncp)] "Eigenvector bases, imaginary part";
   Integer i;
   Integer ii;
 
 algorithm
-  (U0, Z, S_real, S_imag) :=Modelica_LinearSystems2.StateSpace.Internal.wrapper_xBase(A, B, gamma_real, gamma_imag, ncp);
+  (U0, Z, S_real, S_imag, rankB) :=Modelica_LinearSystems2.StateSpace.Internal.wrapper_xBase(A, B, gamma_real, gamma_imag, ncp);
+  assert(m==rankB,"Input matrix B must have full column rank");
   for i in 1:n loop
-    for ii in 1:n*m loop
+    for ii in 1:(n-ncp)*m loop
       S[i,ii] := Complex(S_real[i,ii],S_imag[i,ii]);
     end for;
   end for;
 end xBase;
+
+function calcK
+      "Computes the feedback matrix from the assigned eigenvalues, closed loop eigenvectors and the B matrix factorization"
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math.Complex;
+  import Re = Modelica_LinearSystems2.Math.Complex.real;
+  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+
+  input Real A[:,size(A, 1)] "Real square system matrix";
+  input Real U0[size(A, 1),:] "U0 and Z are the decompositions of B";
+  input Real Z[size(U0, 2),size(U0, 2)] "Z and U0 are the decompositions of B";
+  input Complex gamma[size(A, 1)] "Assigned complex eigenvalues";
+  input Complex X[size(A, 1),size(A, 1)] "Closed loop eigenvectors";
+
+  output Real K[size(U0, 2),size(A, 1)] "Feedback matrix";
+
+    protected
+  Integer n=size(A, 1);
+  Integer m=size(U0, 2);
+
+  Real gamma_real[n]=Re(gamma) "Eigenvalue vector, real part";
+  Real gamma_imag[n]=Im(gamma) "Eigenvalue vector, imaginary part";
+  Real X_real[n,n]=Re(X) "Eigenvectors, real part";
+  Real X_imag[n,n]=Im(X) "Eigenvectors, imaginary part";
+
+algorithm
+  K := Modelica_LinearSystems2.StateSpace.Internal.wrapper_calcK(A, U0, Z, gamma_real, gamma_imag, X_real,X_imag);
+end calcK;
+
+function wrapper_calcK
+      "Computes the feedback matrix from the assigned eigenvalues, closed loop eigenvectors and the B matrix factorization"
+
+  input Real A[:,size(A, 1)] "Real square system matrix";
+  input Real U0[size(A, 1),:] "U0 and Z are the decompositions of B";
+  input Real Z[size(U0, 2),size(U0, 2)] "Z and U0 are the decompositions of B";
+  input Real gamma_real[size(A,1)] "Eigenvalue vector, real part";
+  input Real gamma_imag[size(A,1)] "Eigenvalue vector, imaginary part";
+  input Real X_real[n,n] "Eigenvectors, real part";
+  input Real X_imag[n,n] "Eigenvectors, imaginary part";
+
+  output Real K[size(U0,2), size(A,1)] "Feedback matrix";
+
+    protected
+  Integer n=size(A,1);
+  Integer m=size(U0,2);
+
+external"FORTRAN 77" c_inter_calcK(n, m, A, U0, Z, gamma_real, gamma_imag, X_real, X_imag, K);
+  annotation (Include="
+  #include<f2c.h>
+  
+  #define VOID void
+  typedef char CHAR;
+  typedef short SHORT;
+  typedef long LONG;
+  typedef unsigned char   u_char;
+  typedef unsigned short  u_short;
+  typedef unsigned int    u_int;
+  typedef unsigned long   u_long;
+  typedef unsigned __int64 u_int64;
+  #include <winsock2.h>
+  #include <windows.h>  
+  #include <stdio.h> 
+  
+extern int dgemm_(char *, char *, integer *, integer *, integer *, doublereal *, doublereal *, integer *, doublereal *, integer *, doublereal *, doublereal *, integer *);
+extern int zgemm_(char *, char *, integer *, integer *, integer *, doublecomplex *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, doublecomplex *, integer *);
+extern  int zgesv_(integer *, integer *, doublecomplex *, integer *, integer *, doublecomplex *, integer *, integer *);
+
+ 
+int c_inter_calcK_(integer *n, integer *m, doublereal *a, doublereal *u0, doublereal *z, doublereal *gamma_real, doublereal *gamma_imag, doublereal *x_real, doublereal *x_imag, doublereal *k) 
+{
+   static integer c1 = 1;
+   
+   doublecomplex *gamma;
+//   doublecomplex *x;
+   doublecomplex *xh;
+   doublecomplex *x2;
+   doublereal *ma;
+   doublereal *mp;
+   
+   doublecomplex nc={0.0,0.0};
+   doublecomplex ic={1.0,0.0};
+   doublereal ndd=0.0;
+   doublereal idd=1.0;
+     
+    
+   integer nn=*n;
+   integer mm=*m;
+   integer i;
+   integer ii;
+   integer info;
+   integer *ipiv;
+   
+   char *all=\"A\";
+   char *conj=\"C\";
+   char *trans=\"T\";
+   char *no=\"N\";
+   char *fro=\"F\";
+//   char mess[200];
+   
+   FILE *fileptr;  
+    
+   fileptr = fopen(\"test.txt\",\"w\"); 
+    
+  
+   gamma = (doublecomplex *) malloc((nn+1)*sizeof(doublecomplex));      
+//   x = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));      
+   xh = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));      
+   x2 = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));      
+   ma = (doublereal *) malloc((nn*nn+1)*sizeof(doublereal));      
+   mp = (doublereal *) malloc((nn*mm+1)*sizeof(doublereal));      
+   ipiv = (integer *) malloc((nn+1)*sizeof(integer));      
+
+fprintf(fileptr,\"allocation \\n\");        
+        
+   for(i=0;i<nn;i++)
+   {
+     gamma[i].r=gamma_real[i];
+     gamma[i].i=gamma_imag[i];
+   }
+   
+//    for(i=0;i<nn*nn;i++)
+//    {
+//      x[i].r = x_real[i];
+//      x[i].i = x_imag[i];
+//    }
+     
+   for(i=0;i<nn;i++)    
+     for(ii=0;ii<nn;ii++)    
+     {
+       x2[ii*nn+i].r = gamma[i].r*x_real[i*nn+ii]-gamma[i].i*x_imag[i*nn+ii];
+       x2[ii*nn+i].i = -gamma[i].r*x_imag[i*nn+ii]-gamma[i].i*x_real[i*nn+ii];
+       xh[i*nn+ii].r = x_real[ii*nn+i];
+       xh[i*nn+ii].i = -x_imag[ii*nn+i];
+     }
+   
+fprintf(fileptr,\"x2= \\n\");
+for(i=0;i<nn;i++)
+{
+  for(ii=0;ii<nn;ii++)
+    fprintf(fileptr,\"%f,  \", x2[ii*nn+i].r);
+  fprintf(fileptr,\"\\n\");
+}
+fprintf(fileptr,\"xh= \\n\");
+for(i=0;i<nn;i++)
+{
+  for(ii=0;ii<nn;ii++)
+    fprintf(fileptr,\"%f,  \", xh[ii*nn+i].r);
+  fprintf(fileptr,\"\\n\");
+}
+
+fprintf(fileptr,\"x2,  xh, nn = %d \\n\",nn);
+   
+    zgesv_(n, n, xh, n, ipiv, x2, n, &info); 
+   
+fprintf(fileptr,\"lsg \\n\");   
+   
+   for(i=0;i<nn;i++)    
+     for(ii=0;ii<nn;ii++)
+       ma[i*nn+ii] = -x2[ii*nn+i].r+a[i*nn+ii];
+   
+   dgemm_(no, trans, m, n, m, &idd, z, m, u0, n, &ndd, mp, m);//mp=z*u0'
+fprintf(fileptr,\"zgemm1 \\n\");   
+   
+   dgemm_(no, no, m, n, n, &idd, mp, m, ma, n, &ndd, k, m);//k=mp*ma'
+   
+// fprintf(fileptr,\"u0= \\n\");
+// for(i=0;i<nn;i++)
+// {
+//   for(ii=0;ii<mm;ii++)
+//     fprintf(fileptr,\"%f,  \", u0[ii*nn+i]);
+//   fprintf(fileptr,\"\\n\");
+// }
+// 
+// fprintf(fileptr,\"z= \\n\");
+// for(i=0;i<mm;i++)
+// {
+//   for(ii=0;ii<mm;ii++)
+//     fprintf(fileptr,\"%f,  \", z[ii*mm+i]);
+//   fprintf(fileptr,\"\\n\");
+// }
+// 
+// fprintf(fileptr,\"ma= \\n\");
+// for(i=0;i<nn;i++)
+// {
+//   for(ii=0;ii<nn;ii++)
+//     fprintf(fileptr,\"%f,  \", ma[ii*nn+i]);
+//   fprintf(fileptr,\"\\n\");
+// }
+// fprintf(fileptr,\"mp= \\n\");
+// for(i=0;i<mm;i++)
+// {
+//   for(ii=0;ii<nn;ii++)
+//     fprintf(fileptr,\"%f,  \", mp[ii*mm+i]);
+//   fprintf(fileptr,\"\\n\");
+// }
+// fprintf(fileptr,\"k= \\n\");
+// for(i=0;i<mm;i++)
+// {
+//   for(ii=0;ii<nn;ii++)
+//     fprintf(fileptr,\"%f,  \", k[ii*mm+i]);
+//   fprintf(fileptr,\"\\n\");
+// }
+   
+
+fprintf(fileptr,\"zgemm2 \\n\");   
+   free(gamma);
+fprintf(fileptr,\"gamma \\n\");   
+//   free(x);
+   free(xh);
+fprintf(fileptr,\"xh \\n\");   
+   free(x2);
+fprintf(fileptr,\"x2 \\n\");   
+   free(ma);
+fprintf(fileptr,\"ma \\n\");   
+   free(mp);
+fprintf(fileptr,\"mp \\n\");   
+   free(ipiv);
+fprintf(fileptr,\"ipiv \\n\");   
+   fclose(fileptr);   
+  return 0;
+}", Library={"zlapack"});
+
+end wrapper_calcK;
 
   function assignPolesMI_rob4
     extends Modelica.Icons.Function;
@@ -11166,7 +11201,7 @@ end xBase;
     Integer k;
     Integer idx;
     Real eps=Modelica.Constants.eps;
-    Integer maxSteps=3;
+    Integer maxSteps=5;
 
   //  Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob.subSpace subS[size(gamma,1)];
 
@@ -11223,7 +11258,8 @@ end xBase;
   //      Sr := fill(Complex(0),nx,0);
   //    end if;
 
-    if numberOfComplexPairs > 0 then
+  //  if numberOfComplexPairs > 0 then
+    if numberOfComplexPairs > 0 and 2*rankB-nx>0 then
       Srr :=  Matrices.nullspace([U1Tr; U1Tr*A]);
     else
       Srr := fill(0,nx,0);
@@ -11231,19 +11267,17 @@ end xBase;
     Sr:=Complex(1)*Srr;
 
   //Computation of the nullspaces, i.e. the bases of the eigenvectors
+     AC := Complex(-1)*A;
     for l1 in 1:nx - numberOfComplexPairs loop
-
-      AC := Complex(-1)*A;
-
       for l2 in 1:nx loop
-        AC[l2, l2] := AC[l2, l2] + gammaSorted[l1];
+        AC[l2, l2] := Complex(-A[l2, l2]) + gammaSorted[l1];
       end for;
 
       C := matMul(U1T, AC);
   //    Cc := Matrices.C_nullspace([C; C_transpose(Sr)]);
 
   //    subS[l1].S := if l1 > numberOfRealEigenvalues then [Matrices.C_nullspace([C; C_transpose(Sr)]),Sr] else Matrices.C_nullspace(C);
-      S2 := if l1 > numberOfRealEigenvalues then [Matrices.C_nullspace([C; C_transpose(Sr)]),Sr] else Matrices.C_nullspace(C);
+      S2 := if l1 > numberOfRealEigenvalues and 2*rankB-nx>0 then [Matrices.C_nullspace([C; C_transpose(Sr)]),Sr] else Matrices.C_nullspace(C);
       for l2 in 1:nx loop
         for l3 in 1:rankB loop
           S[l2,rankB*(l1-1)+l3] := S2[l2,l3];
@@ -11252,24 +11286,24 @@ end xBase;
   end for;
 
   if not IniX then
-  // initialization of X according to Byers
-    for l1 in 1:nx - numberOfComplexPairs loop
-      y := fill(Complex(0), nx);
-      for l2 in 1:rankB loop
-  //      y := X[:, l1] + X[:, l1] + subS[l1].S[:, l2];
-        y := X[:, l1] + X[:, l1] + S[:, rankB*(l1-1)+l2];
-      end for;
-      y := y/Complex.Vectors.norm(y);
-      for l2 in 1:nx loop
-        X[l2, l1] := y[l2];
-      end for;
-    end for;
-    for l1 in 1:numberOfComplexPairs loop
-      for l2 in 1:nx loop
-        X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
-          Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
-      end for;
-    end for;
+  // // initialization of X according to Byers
+  //   for l1 in 1:nx - numberOfComplexPairs loop
+  //     y := fill(Complex(0), nx);
+  //     for l2 in 1:rankB loop
+  // //      y := X[:, l1] + X[:, l1] + subS[l1].S[:, l2];
+  //       y := X[:, l1] + X[:, l1] + S[:, rankB*(l1-1)+l2];
+  //     end for;
+  //     y := y/Complex.Vectors.norm(y);
+  //     for l2 in 1:nx loop
+  //       X[l2, l1] := y[l2];
+  //     end for;
+  //   end for;
+  //   for l1 in 1:numberOfComplexPairs loop
+  //     for l2 in 1:nx loop
+  //       X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
+  //         Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+  //     end for;
+  //   end for;
 
    // initialization of X according to place.m
      for l1 in 1:nx - numberOfComplexPairs loop
@@ -11323,6 +11357,523 @@ end xBase;
   //   end subSpace;
 
   end assignPolesMI_rob4;
+
+  function assignPolesMI_rob5
+    extends Modelica.Icons.Function;
+
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.Math.Matrices;
+    import Modelica_LinearSystems2.Math.Complex;
+    import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
+    import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
+    import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
+    import Re = Modelica_LinearSystems2.Math.Complex.real;
+    import Im = Modelica_LinearSystems2.Math.Complex.imag;
+    import Modelica.Utilities.Streams.print;
+
+    input Real A[:,size(A, 1)] "system matrix";
+    input Real B[size(A, 1),:] "control input matrix";
+    input Complex gamma[size(A, 1)];
+    input Boolean IniX=false "Initial values of X are provided";
+    input Complex Xini[size(A, 1),size(A, 1)]=fill(Complex(0), size(A, 1), size(A, 1))
+        "Initial values of the eigenvectors X";
+
+    output Real K[size(B, 2),size(A, 1)] "feedback matrix";
+    output Complex X[size(A, 1),size(A, 2)]=Xini
+        "eigen vectors of the closed loop system";
+    protected
+    Real U0[:,:];
+    Real Z[:,:];
+    Complex S[:,:];
+    Integer maxSteps=5;
+    Integer numberOfComplexPairs;
+    Integer rankB;
+
+    Complex AC[size(A, 1),size(A, 2)]=Complex(1)*A;
+    Complex Lambda[size(A, 1),size(A, 1)];
+    Real Ur[:,:];
+    Real Vr[:,:];
+
+    Complex U1T[:,:];
+    Complex Xjj[size(A, 1),size(A, 1)];
+    Complex XC[size(A, 1),size(A, 2)];
+    Complex XC2[size(A, 1),size(A, 2)];
+    Complex MM[size(A, 1),size(A, 1)];
+    Real M[size(A, 1),size(A, 1)];
+    Complex KC[:,:];
+    Complex QX[:,:];
+    Complex C[:,:];
+    Complex Cc[:,:];
+    Complex Sr[:,:];
+    Real Srr[:,:];
+    Real U1Tr[:,:];
+    Complex ST[:,:];
+
+    Complex S2[size(A, 1),size(B, 2)];
+
+    Complex gammaSorted[size(gamma, 1)];
+    Complex gammaSorted2[size(gamma, 1)];
+    Real sigmaB[:];
+  //  Complex ev[size(A, 1)];
+
+    Complex y[:];
+    Real condX2;
+    Real norm_y;
+
+    Integer nx=size(A, 1);
+    Integer numberOfRealEigenvalues;
+
+    Integer i;
+    Integer l1;
+    Integer l2;
+    Integer k;
+    Integer idx;
+    Real eps=Modelica.Constants.eps;
+
+  //  Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob.subSpace subS[size(gamma,1)];
+
+  //  Complex a;
+  //  Integer cnt;
+    StateSpace ss=StateSpace(
+        A=A,
+        B=B,
+        C=zeros(1, nx),
+        D=zeros(1, size(B, 2)));
+
+  algorithm
+    //check controllability
+    assert(StateSpace.Analysis.isControllable(ss), "Poles cannot be placed since system is not controllable");
+
+    // sort eigenvalues to [real ev, complex ev(im>0), conj(complex ev(im>0))]
+    (gammaSorted2,numberOfRealEigenvalues) :=
+      Modelica_LinearSystems2.Internal.reorderZeros(gamma);
+    gammaSorted := gammaSorted2;
+    numberOfComplexPairs := integer((nx - numberOfRealEigenvalues)/2);
+    for i in numberOfRealEigenvalues + 1:numberOfRealEigenvalues +
+        numberOfComplexPairs loop
+      gammaSorted[i] := if Im(gammaSorted2[2*i - numberOfRealEigenvalues - 1]) > 0 then 
+              gammaSorted2[2*i - numberOfRealEigenvalues - 1] else Complex.conj(
+        gammaSorted2[2*i - numberOfRealEigenvalues - 1]);
+      gammaSorted[i + numberOfComplexPairs] := Complex.conj(gammaSorted[i]);
+    end for;
+
+    for i in 1:nx loop
+      Lambda[i, i] := gammaSorted[i];
+    end for;
+
+    S := fill(Complex(0), nx, size(B, 2)*(nx - numberOfComplexPairs));
+
+  //   (sigmaB,Ur,Vr) := Modelica.Math.Matrices.singularValues(B);
+  //   rankB := 0;
+  //   i := size(sigmaB, 1);
+  //   while i > 0 loop
+  //     if sigmaB[i] > 1e-10 then
+  //       rankB := i;
+  //       i := 0;
+  //     end if;
+  //     i := i - 1;
+  //   end while;
+  //
+  //  // ############  Calculation of S (bases of X)  begin
+  //   Z := fill(0, size(B, 2), rankB);
+  //   for l1 in 1:rankB loop
+  //     for l2 in 1:size(B, 2) loop
+  //       Z[l1, l2] := Vr[l2, l1]/sigmaB[l2];
+  //     end for;
+  //   end for;
+  //   U0 := Ur[:, 1:rankB];
+  //   U1T := Complex(1)*transpose(Ur[:, rankB + 1:nx]);
+  //   U1Tr := transpose(Ur[:, rankB + 1:nx]);
+  //   condX2 := eps + 1;
+  //
+  //   if numberOfComplexPairs > 0 and 2*rankB - nx > 0 then
+  //     Srr := Matrices.nullspace([U1Tr; U1Tr*A]);
+  //   else
+  //     Srr := fill(0, nx, 0);
+  //   end if;
+  //   Sr := Complex(1)*Srr;
+  //
+  //   //Computation of the nullspaces, i.e. the bases of the eigenvectors
+  //   AC := Complex(-1)*A;
+  //   for l1 in 1:nx - numberOfComplexPairs loop
+  //     for l2 in 1:nx loop
+  //       AC[l2, l2] := Complex(-A[l2, l2]) + gammaSorted[l1];
+  //     end for;
+  //
+  //     C := matMul(U1T, AC);
+  //
+  //     S2 := if l1 > numberOfRealEigenvalues and 2*rankB - nx > 0 then [Matrices.C_nullspace([C; C_transpose(Sr)]),Sr] else Matrices.C_nullspace(C);
+  //     for l2 in 1:nx loop
+  //       for l3 in 1:rankB loop
+  //         S[l2, rankB*(l1 - 1) + l3] := S2[l2, l3];
+  //       end for;
+  //     end for;
+  //   end for;
+  // // ############  Calculation of S (bases of X)  end
+   (U0, Z, S, rankB) := Modelica_LinearSystems2.StateSpace.Internal.xBase(A, B, gammaSorted, numberOfComplexPairs);
+
+    if not IniX then
+  // // initialization of X according to Byers
+  //   for l1 in 1:nx - numberOfComplexPairs loop
+  //     y := fill(Complex(0), nx);
+  //     for l2 in 1:rankB loop
+  // //      y := X[:, l1] + X[:, l1] + subS[l1].S[:, l2];
+  //       y := X[:, l1] + X[:, l1] + S[:, rankB*(l1-1)+l2];
+  //     end for;
+  //     y := y/Complex.Vectors.norm(y);
+  //     for l2 in 1:nx loop
+  //       X[l2, l1] := y[l2];
+  //     end for;
+  //   end for;
+  //   for l1 in 1:numberOfComplexPairs loop
+  //     for l2 in 1:nx loop
+  //       X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
+  //         Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+  //     end for;
+  //   end for;
+
+   // initialization of X according to place.m
+      for l1 in 1:nx - numberOfComplexPairs loop
+        for l2 in 1:nx loop
+          X[l2, l1] := S[l2, rankB*(l1 - 1) + 1];
+        end for;
+      end for;
+      for l1 in 1:numberOfComplexPairs loop
+        for l2 in 1:nx loop
+          X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
+            Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+        end for;
+      end for;
+    end if;
+
+  // eigenvector modification
+    X := Modelica_LinearSystems2.StateSpace.Internal.modifyX(X,S,rankB,numberOfComplexPairs,maxSteps);
+
+  //   k := 0;
+  //   while (k < maxSteps) loop
+  //     k := k + 1;
+  //
+  //     for l1 in 1:nx - numberOfComplexPairs loop
+  //       if l1 == 1 then
+  //         for l2 in 1:nx loop
+  //           for l3 in 1:nx - 1 loop
+  //             Xjj[l2, l3] := X[l2, l3 + 1];
+  //           end for;
+  //         end for;
+  //       else
+  //         for l2 in 1:nx loop
+  //           for l3 in 1:l1 - 1 loop
+  //             Xjj[l2, l3] := X[l2, l3];
+  //           end for;
+  //           for l3 in l1:nx - 1 loop
+  //             Xjj[l2, l3] := X[l2, l3 + 1];
+  //           end for;
+  //         end for;
+  //       end if;
+  //
+  //       QX := Modelica_LinearSystems2.Math.Matrices.C_QR(Xjj);
+  //
+  //       ST := C_transpose(S[:, rankB*(l1 - 1) + 1:rankB*l1]);
+  //       y := matVecMul(ST, QX[:, nx]);
+  //
+  //       norm_y := Complex.Vectors.norm(y);
+  //       y := matVecMul(S[:, rankB*(l1 - 1) + 1:rankB*l1], y)/norm_y;
+  //
+  //       if l1 > numberOfRealEigenvalues and Complex.'abs'(
+  //           Complex.Vectors.multiply(y, Complex.conj(y))) > 0.9 then
+  //         idx := 1 + rem(k, rankB - size(Sr, 2));
+  //         y := (y + S[:, (l1 - 1)*rankB + idx])/sqrt(2);
+  //       end if;
+  //
+  //       for l2 in 1:nx loop
+  //         X[l2, l1] := y[l2];
+  //       end for;
+  //
+  //       if l1 > numberOfRealEigenvalues then
+  //         for l2 in 1:nx loop
+  //           X[l2, l1 + numberOfComplexPairs] := Complex.conj(y[l2]);
+  //         end for;
+  //       end if;
+  //     end for;
+  //     condX2 := Complex.Matrices.conditionNumber(X);
+  //   end while;
+
+  // Computation of the feedback matrix K
+  //   XC := C_transpose(X);
+  //   XC2 := C_transpose(matMul(X, Lambda));
+  //   MM := Modelica_LinearSystems2.Math.Matrices.C_solve2(XC, XC2);
+  //   M := Re(MM);
+  //   M := transpose(M);
+  //
+  //   for l2 in 1:nx loop
+  //     for l3 in 1:nx loop
+  //       M[l2, l3] := M[l2, l3] - A[l2, l3];
+  //     end for;
+  //   end for;
+  //
+  //   K := -Z*transpose(U0)*M;
+  //  evX := X;
+  K:=Modelica_LinearSystems2.StateSpace.Internal.calcK(A,U0,Z,gammaSorted,X);
+
+    annotation (experiment, experimentSetupOutput);
+
+  end assignPolesMI_rob5;
+
+  function assignPolesMI_rob6
+    extends Modelica.Icons.Function;
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica_LinearSystems2.Math.Complex;
+      import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
+      import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
+      import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
+      import Re = Modelica_LinearSystems2.Math.Complex.real;
+      import Im = Modelica_LinearSystems2.Math.Complex.imag;
+      import Modelica.Utilities.Streams.print;
+
+    input Real A[:,size(A, 1)] "system matrix";
+    input Real B[size(A, 1),:] "control input matrix";
+    input Complex gamma[size(A, 1)];
+    input Boolean IniX=false "Initial values of X are provided";
+    input Complex Xini[size(A, 1),size(A, 1)]=fill(Complex(0),size(A, 1),size(A, 1))
+        "Initial values of the eigenvectors X";
+
+    output Real K[size(B, 2),size(A, 1)] "feedback matrix";
+    output Complex evX[:,:] "eigen vectors of the closed loop system";
+    protected
+    Real KK[size(B, 2),size(A, 1)];
+    Complex AC[size(A, 1),size(A, 2)]=Complex(1)*A;
+    Complex Lambda[size(A, 1),size(A, 1)];
+    Real Ur[:,:];
+    Real Vr[:,:];
+    Real U0[:,:];
+  //  Complex U1[:,:];
+    Complex U1T[:,:];
+    Complex X[size(A, 1),size(A, 2)]=Xini;
+  //   Complex Xj[size(A, 1),size(A, 1)-1];
+  //   Complex Xjj[size(A, 1),size(A, 1)];
+    Complex XC[size(A, 1),size(A, 2)];
+    Complex XC2[size(A, 1),size(A, 2)];
+    Real Z[:,:];
+    Complex MM[size(A, 1),size(A, 1)];
+    Real M[size(A, 1),size(A, 1)];
+    Complex KC[:,:];
+  //  Complex QX[:,:];
+    Complex C[:,:];
+    Complex Cc[:,:];
+    Complex Sr[:,:];
+    Real Srr[:,:];
+    Real U1Tr[:,:];
+  //  Complex ST[:,:];
+    Complex S[:,:];//[size(A,1),size(A,1)*size(B,2)];
+    Complex S2[size(A,1),size(B,2)];
+
+    Complex gammaSorted[size(gamma, 1)];
+    Complex gammaSorted2[size(gamma, 1)];
+    Real sigmaB[:];
+    Complex ev[size(A, 1)];
+
+    Complex y[:];
+
+    Real condX2;
+    Real norm_y;
+    Integer rankB;
+    Integer nx=size(A, 1);
+    Integer numberOfRealEigenvalues;
+    Integer numberOfComplexPairs;
+    Integer i;
+    Integer l1;
+    Integer l2;
+    Integer k;
+    Integer idx;
+    Real eps=Modelica.Constants.eps;
+    Integer maxSteps=5;
+
+  //  Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob.subSpace subS[size(gamma,1)];
+
+    Complex a;
+    Integer cnt;
+    StateSpace ss=StateSpace(A=A, B=B, C=zeros(1,nx), D=zeros(1,size(B,2)));
+
+  algorithm
+    //check controllability
+    assert(StateSpace.Analysis.isControllable(ss),"Poles cannot be placed since system is not controllable");
+
+    // sort eigenvalues to [real ev, complex ev(im>0), conj(complex ev(im>0))]
+    (gammaSorted2,numberOfRealEigenvalues) :=
+      Modelica_LinearSystems2.Internal.reorderZeros(gamma);
+    gammaSorted := gammaSorted2;
+    numberOfComplexPairs := integer((nx - numberOfRealEigenvalues)/2);
+    for i in numberOfRealEigenvalues + 1:numberOfRealEigenvalues + numberOfComplexPairs loop
+      gammaSorted[i] := if Im(gammaSorted2[2*i-numberOfRealEigenvalues-1]) > 0 then gammaSorted2[2*i-numberOfRealEigenvalues-1] else Complex.conj(gammaSorted2[2*i-numberOfRealEigenvalues-1]);
+      gammaSorted[i + numberOfComplexPairs] := Complex.conj(gammaSorted[i]);
+    end for;
+
+    for i in 1:nx loop
+      Lambda[i, i] := gammaSorted[i];
+    end for;
+
+     S:=fill(Complex(0), nx, size(B,2)*(nx - numberOfComplexPairs));
+
+  //   (sigmaB,Ur,Vr) := Modelica.Math.Matrices.singularValues(B);
+  //   rankB := 0;
+  //   i := size(sigmaB, 1);
+  //   while i > 0 loop
+  //     if sigmaB[i] > 1e-10 then
+  //       rankB := i;
+  //       i := 0;
+  //     end if;
+  //     i := i - 1;
+  //     end while;
+  //   S:=fill(Complex(0), nx, rankB*(nx - numberOfComplexPairs));
+  //
+  // // ############  Calculation of S (bases of X)  begin
+  //     Z := fill(0, size(B, 2), rankB);
+  //     for l1 in 1:rankB loop
+  //       for l2 in 1:size(B, 2) loop
+  //         Z[l1, l2] := Vr[l2, l1]/sigmaB[l2];
+  //       end for;
+  //     end for;
+  //    U0 := Ur[:, 1:rankB];
+  //  //  U1 := Complex(1)*Ur[:, rankB + 1:nx];
+  //    U1T := Complex(1)*transpose(Ur[:, rankB + 1:nx]);
+  //    U1Tr := transpose(Ur[:, rankB + 1:nx]);
+  //    condX2 := eps + 1;
+  //  //    if numberOfComplexPairs > 0 then
+  //  //      Sr :=  Matrices.C_nullspace([U1T;  matMul(U1T,Complex(1)*A)]);
+  //  //    else
+  //  //      Sr := fill(Complex(0),nx,0);
+  //  //    end if;
+  //
+  //    if numberOfComplexPairs > 0 and 2*rankB-nx>0 then
+  //      Srr :=  Matrices.nullspace([U1Tr; U1Tr*A]);
+  //    else
+  //      Srr := fill(0,nx,0);
+  //    end if;
+  //    Sr:=Complex(1)*Srr;
+  //
+  //    Matrices.printMatrix(Srr,6,"Srr");
+  //
+  //  //Computation of the nullspaces, i.e. the bases of the eigenvectors
+  //  AC := Complex(-1)*A;
+  //    for l1 in 1:nx - numberOfComplexPairs loop
+  //
+  // //     AC := Complex(-1)*A;
+  //
+  //      for l2 in 1:nx loop
+  //        AC[l2, l2] := Complex(-A[l2, l2]) + gammaSorted[l1];
+  //      end for;
+  //
+  //      C := matMul(U1T, AC);
+  //  //    Cc := Matrices.C_nullspace([C; C_transpose(Sr)]);
+  // //Matrices.printMatrix(Re(C),6,"Re(C)");
+  //
+  //  //    subS[l1].S := if l1 > numberOfRealEigenvalues then [Matrices.C_nullspace([C; C_transpose(Sr)]),Sr] else Matrices.C_nullspace(C);
+  //      S2 := if l1 > numberOfRealEigenvalues and 2*rankB-nx>0 then [Matrices.C_nullspace([C; C_transpose(Sr)]),Sr] else Matrices.C_nullspace(C);
+  // Matrices.printMatrix(Re(S2),6,"Re(S2)");
+  // Matrices.printMatrix(Im(S2),6,"Im(S2)");
+  //      for l2 in 1:nx loop
+  //        for l3 in 1:rankB loop
+  //          S[l2,rankB*(l1-1)+l3] := S2[l2,l3];
+  //        end for;
+  //      end for;
+  //  end for;
+  // // ############  Calculation of S (bases of X)  end
+  // Matrices.printMatrix(Ur,6,"Ur");
+  // Matrices.printMatrix(Z,6,"Z_1");
+  // Matrices.printMatrix(U0,6,"U0_1");
+  // Matrices.printMatrix(U1Tr,6,"U1T");
+  // Matrices.printMatrix(Re(S),6,"Re(S)1");
+  // Matrices.printMatrix(Im(S),6,"Im(S)1");
+
+   (U0, Z, S, rankB) := Modelica_LinearSystems2.StateSpace.Internal.xBase(A, B, gammaSorted, numberOfComplexPairs);
+
+  //   Matrices.printMatrix(Re(S), 6, "Re(S)2");
+  //   Matrices.printMatrix(Im(S), 6, "Im(S)2");
+  //   Matrices.printMatrix(Z, 6, "Z_2");
+  //   Matrices.printMatrix(U0, 6, "U0_2");
+
+  if not IniX then
+  // // initialization of X according to Byers
+  //   for l1 in 1:nx - numberOfComplexPairs loop
+  //     y := fill(Complex(0), nx);
+  //     for l2 in 1:rankB loop
+  // //      y := X[:, l1] + X[:, l1] + subS[l1].S[:, l2];
+  //       y := X[:, l1] + X[:, l1] + S[:, rankB*(l1-1)+l2];
+  //     end for;
+  //     y := y/Complex.Vectors.norm(y);
+  //     for l2 in 1:nx loop
+  //       X[l2, l1] := y[l2];
+  //     end for;
+  //   end for;
+  //   for l1 in 1:numberOfComplexPairs loop
+  //     for l2 in 1:nx loop
+  //       X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
+  //         Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+  //     end for;
+  //   end for;
+
+   // initialization of X according to place.m
+     for l1 in 1:nx - numberOfComplexPairs loop
+       for l2 in 1:nx loop
+  //       X[l2, l1] := subS[l1].S[l2, 1];
+         X[l2, l1] := S[l2, rankB*(l1-1)+1];
+       end for;
+     end for;
+     for l1 in 1:numberOfComplexPairs loop
+       for l2 in 1:nx loop
+         X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
+           Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+       end for;
+     end for;
+  end if;
+
+  // eigenvector modification
+    X := Modelica_LinearSystems2.StateSpace.Internal.modifyX(X,S,rankB,numberOfComplexPairs,maxSteps);
+
+  //   XC := C_transpose(X);
+  //   XC2 := C_transpose(matMul(X, Lambda));
+  //   MM := Modelica_LinearSystems2.Math.Matrices.C_solve2(XC, XC2);
+  //   M := Re(MM);
+  //   M := transpose(M);
+  //
+  //   for l2 in 1:nx loop
+  //     for l3 in 1:nx loop
+  //       M[l2, l3] := M[l2, l3] - A[l2, l3];
+  //     end for;
+  //     end for;
+  //
+  // Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M");
+  //
+  // K := -Z*transpose(U0)*M;
+
+    evX := X;
+  // Modelica_LinearSystems2.Math.Matrices.printMatrix(Z*transpose(U0),6,"ZU0");
+  // Modelica_LinearSystems2.Math.Matrices.printMatrix(K,6,"K");
+  K:=Modelica_LinearSystems2.StateSpace.Internal.calcK(A,U0,Z,gammaSorted,X);
+
+  // Modelica_LinearSystems2.Math.Matrices.printMatrix(KK,6,"KK");
+
+  //  ev := Complex.eigenValues(A - B*K);
+  //    Complex.Vectors.print("gammaSorted", gammaSorted);
+  //    Complex.Vectors.print("ev", ev);
+
+    annotation (experiment, experimentSetupOutput);
+
+  // public
+  //   encapsulated record subSpace
+  //     import Modelica;
+  //     import Modelica_LinearSystems2;
+  //     extends Modelica.Icons.Record;
+  //     Modelica_LinearSystems2.Math.Complex S[:,:];
+  //   end subSpace;
+
+  end assignPolesMI_rob6;
 end Internal;
 
 end StateSpace;
