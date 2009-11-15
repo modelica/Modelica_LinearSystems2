@@ -594,10 +594,9 @@ end Matrices;
       import Modelica_LinearSystems2.Math.Complex;
       input Real re "Real part of complex number";
       input Real im=0 "Imaginary part of complex number";
-      output Complex result "Complex number";
+      output Complex result(re=re, im=im) "Complex number";
     algorithm
-      result.re :=re;
-      result.im :=im;
+      annotation(Inline=true);
     end fromReal;
   end 'constructor';
 
@@ -608,6 +607,7 @@ end Matrices;
       output Complex c2 "= -c1";
     algorithm
       c2 := Complex(-c1.re, -c1.im);
+      annotation(Inline=true);
     end negate;
 
     function subtract "Subtract two complex numbers"
@@ -617,6 +617,7 @@ end Matrices;
       output Complex c3 "= c1 - c2";
     algorithm
       c3 := Complex(c1.re - c2.re, c1.im - c2.im);
+      annotation(Inline=true);
     end subtract;
   end '-';
 
@@ -626,10 +627,9 @@ end Matrices;
       input Complex c1 "Complex number 1";
       input Complex c2 "Complex number 2";
       output Complex c3 "= c1 + c2";
-
   algorithm
     c3 := Complex(c1.re + c2.re, c1.im + c2.im);
-    //    end add;
+    annotation(Inline=true);
   end '+';
 
   encapsulated operator function '*' "Multiply two complex numbers"
@@ -640,7 +640,7 @@ end Matrices;
       output Complex c3 "= c1*c2";
   algorithm
       c3 := Complex(c1.re*c2.re - c1.im*c2.im, c1.re*c2.im + c1.im*c2.re);
-    //    end multiply;
+    annotation(Inline=true);
   end '*';
 
   encapsulated operator function '/' "Divide two complex numbers"
@@ -651,7 +651,7 @@ end Matrices;
       output Complex c3 "= c1/c2";
   algorithm
       c3 := Complex((c1.re*c2.re + c1.im*c2.im)/(c2.re^2 + c2.im^2), (-c1.re*c2.im + c1.im*c2.re)/(c2.re^2 + c2.im^2));
-    //    end divide;
+    annotation(Inline=true);
   end '/';
 
   encapsulated operator function '=='
@@ -662,7 +662,7 @@ end Matrices;
       output Boolean result "c1 == c2";
   algorithm
       result := c1.re == c2.re and c1.im == c2.im;
-    //    end equals;
+    annotation(Inline=true);
   end '==';
 
   encapsulated operator function 'String'
@@ -694,6 +694,7 @@ end Matrices;
     output Complex c "= sqrt(-1)";
   algorithm
     c := Complex(0,1);
+    annotation(Inline=true);
   end j;
 
   encapsulated function 'abs' "Absolute value of complex number"
@@ -703,6 +704,7 @@ end Matrices;
     output Real result "= abs(c)";
   algorithm
     result := (c.re^2 + c.im^2)^0.5; //changed from sqrt
+    annotation(Inline=true);
   end 'abs';
 
   encapsulated function 'sqrt' "Square root of complex number"
@@ -714,6 +716,7 @@ end Matrices;
   algorithm
     c2 := Complex(sqrt(Complex.'abs'(c1))*Math.cos(Complex.arg(c1)/2), sqrt(
       Complex.'abs'(c1))*Math.sin(Complex.arg(c1)/2));
+    annotation(Inline=true);
   end 'sqrt';
 
 encapsulated function 'max' "Return maximum element of complex vector"
@@ -753,6 +756,7 @@ end 'max';
     output Complex c2 "= exp(c1)";
   algorithm
      c2 := Complex(Math.exp(c1.re)*Math.cos(c1.im), Math.exp(c1.re)*Math.sin(c1.im));
+    annotation(Inline=true);
   end exp;
 
   encapsulated function log "Logarithm of complex number"
@@ -764,6 +768,7 @@ end 'max';
     output Complex c2 "= log(c1)";
   algorithm
     c2 := Complex(Modelica.Math.log(Complex.'abs'(c1)), Complex.arg(c1));
+    annotation(Inline=true);
   end log;
 
   encapsulated function sin "Sine of complex number"
@@ -777,6 +782,7 @@ end 'max';
      c2 := (Complex.exp(Complex(-c1.im, +c1.re)) - Complex.exp(Complex(+c1.im, -c1.re)))/
       Complex(0, 2);
 
+    annotation(Inline=true);
   end sin;
 
   encapsulated function cos "Cosine of complex number"
@@ -788,6 +794,7 @@ end 'max';
 
   algorithm
    c2 := (exp(Complex(-c1.im, +c1.re)) + exp(Complex(+c1.im, -c1.re)))/2;
+    annotation(Inline=true);
   end cos;
 
   encapsulated function arg "Phase angle of complex number"
@@ -825,6 +832,7 @@ phase angle phi of the Complex number c in the range
         c.im,
         c.re,
         phi0);
+    annotation(Inline=true);
   end arg;
 
   encapsulated function conj "Conjugate of complex number"
@@ -834,6 +842,7 @@ phase angle phi of the Complex number c in the range
     output Complex c2 "= c1.re - j*c1.im";
   algorithm
     c2 := Complex(c1.re, -c1.im);
+    annotation(Inline=true);
   end conj;
 
   encapsulated function real "Real part of complex number"
@@ -843,6 +852,7 @@ phase angle phi of the Complex number c in the range
     output Real r "= c.re ";
   algorithm
     r := c.re;
+    annotation(Inline=true);
   end real;
 
   encapsulated function imag "imaginary part of complex number"
@@ -852,6 +862,7 @@ phase angle phi of the Complex number c in the range
     output Real r "= c.im ";
   algorithm
     r := c.im;
+    annotation(Inline=true);
   end imag;
 
   encapsulated function eigenValues
@@ -948,6 +959,7 @@ phase angle phi of the Complex number c in the range
     f := if abs(c.im) > 10*Modelica.Constants.eps then abs_ev/(2*Modelica.Constants.pi) else 0;
     damping := if abs(c.im) > 10*Modelica.Constants.eps then if abs_ev > Modelica.Constants.eps then -c.re/abs_ev else 0.0 else 
       1.0;
+    annotation(Inline=true);
   end frequency;
 
 encapsulated package Internal
