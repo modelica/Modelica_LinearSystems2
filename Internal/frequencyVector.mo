@@ -28,15 +28,15 @@ algorithm
   // Determine f_min2, f_max2 (auto or manual)
   if autoRange then
     (w_min,w_max) := Internal.frequencyRangeBode(numZeros, denZeros);
-    f_min2 := to_Hz(w_min);
-    f_max2 := to_Hz(w_max);
+    f_min2 := Modelica.SIunits.Conversions.to_Hz(w_min);
+    f_max2 := Modelica.SIunits.Conversions.to_Hz(w_max);
 
   else
     f_min2 := f_min;
     f_max2 := f_max;
   end if;
-  w_min := from_Hz(f_min2);
-  w_max := from_Hz(f_max2);
+  w_min := Modelica.SIunits.Conversions.from_Hz(f_min2);
+  w_max := Modelica.SIunits.Conversions.from_Hz(f_max2);
 
   // Compute logarithmic vector of frequency points
   f_log := linspace(

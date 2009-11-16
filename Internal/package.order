@@ -30,5 +30,3 @@ timeResponseMask2_zp
 timeResponseMask_tf
 timeResponseMask_zp
 timeResponseSamples
-from_Hz
-to_Hz

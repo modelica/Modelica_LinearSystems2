@@ -55,6 +55,6 @@ algorithm
     w_min := min(w_min1, w_min2);
     w_max := max(w_max1, w_max2);
   end if;
-  f_min := to_Hz(w_min);
-  f_max := to_Hz(w_max);
+  f_min := Modelica.SIunits.Conversions.to_Hz(w_min);
+  f_max := Modelica.SIunits.Conversions.to_Hz(w_max);
 end frequencyRangeBode;
