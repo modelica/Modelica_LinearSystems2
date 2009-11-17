@@ -1675,7 +1675,7 @@ Plots the bode-diagram of a transfer function.
       // Compute magnitude/phase at the frequency points
       phi_old := 0.0;
       for i in 1:nPoints loop
-        w[i] := Internal.from_Hz(f[i]);
+        w[i] := Modelica.SIunits.Conversions.from_Hz(f[i]);
         c := TransferFunction.Analysis.evaluate(
               tf,
               Complex(0, w[i]),

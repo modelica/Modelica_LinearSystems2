@@ -2272,7 +2272,7 @@ Plots the bode-diagram of a transfer function.
 
     phi_old := 0.0;
     for i in 1:nPoints loop
-      w[i] := Internal.from_Hz(f[i]);
+      w[i] := Modelica.SIunits.Conversions.from_Hz(f[i]);
       c := ZerosAndPoles.Analysis.evaluate(
         zp,
         Complex(0, w[i]),
