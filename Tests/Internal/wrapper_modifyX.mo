@@ -85,7 +85,9 @@ int c_inter_modifyX_(doublereal *x_real, doublereal *x_imag, integer *n, doubler
    char *fro=\"F\";
    char mess[200];
   
-  
+   sprintf(mess,\"CCC\\n\");
+  MessageBoxA(NULL,mess,\"CCC\",MB_OK);          
+
    x = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));      
    xj = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));      
    s = (doublecomplex *) malloc((nn*nn*mm+1)*sizeof(doublecomplex));      
@@ -221,6 +223,11 @@ int c_inter_modifyX_(doublereal *x_real, doublereal *x_imag, integer *n, doubler
    free(tauqrf);
    free(workgqr);
    free(work);
+   
+  sprintf(mess,\"DDD\\n\");
+  MessageBoxA(NULL,mess,\"DDD\",MB_OK);          
+
+   
   return 0;
 }", Library={"zlapack"});
 

@@ -1,7 +1,5 @@
 conditionNumbers
-poleAssignmentBenner6b
 poleAssignmentByers3_x
-poleAssignmentByers6_x
 data_Kautsky1
 data_Kautsky2
 data_Laub
@@ -10,5 +8,6 @@ data_Byers4
 data_Byers5
 data_Byers6
 data_Benner6
+data_Chow_Kokotovic
 testPoleAssignment
-poleAssignmentKautsky2
+testPoleAssignment2

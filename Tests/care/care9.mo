@@ -44,19 +44,19 @@ algorithm
    X3:=[h/eps, 1; 1, h];
 
    ku1:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(
-    A, 
-    Q, 
-    G, 
+    A,
+    Q,
+    G,
     X1);
    ku2:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(
-    A, 
-    Q, 
-    G, 
+    A,
+    Q,
+    G,
     X2);
    ku3:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(
-    A, 
-    Q, 
-    G, 
+    A,
+    Q,
+    G,
     X3);
 
    Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement");

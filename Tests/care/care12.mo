@@ -49,19 +49,19 @@ algorithm
     X3:=V*D*V;
 
  ku1:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(
-    A, 
-    Q, 
-    G, 
+    A,
+    Q,
+    G,
     X1);
  ku2:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(
-    A, 
-    Q, 
-    G, 
+    A,
+    Q,
+    G,
     X2);
  ku3:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(
-    A, 
-    Q, 
-    G, 
+    A,
+    Q,
+    G,
     X3);
    Qr2 := X3*G*X3-transpose(A)*X3-X3*A;
    Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement");

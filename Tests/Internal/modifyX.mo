@@ -31,7 +31,8 @@ protected
   Integer ii;
 
 algorithm
-  (Xm_real, Xm_imag) :=Modelica_LinearSystems2.StateSpace.Internal.wrapper_modifyX(X_real, X_imag, n, S_real, S_imag, m, ncp, steps);
+  (Xm_real, Xm_imag) :=Modelica_LinearSystems2.StateSpace.Internal.wrapper_modifyX_old(
+                                                                                   X_real, X_imag, n, S_real, S_imag, m, ncp, steps);
   for i in 1:n loop
     for ii in 1:n loop
       Xm[i,ii] := Complex(Xm_real[i,ii],Xm_imag[i,ii]);

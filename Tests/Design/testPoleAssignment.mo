@@ -9,6 +9,7 @@ function testPoleAssignment "Function to assess algorithms for pole assignment"
   import Modelica_LinearSystems2.Tests.Design;
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.Tests.Internal.DesignData;
+  import Modelica_LinearSystems2.StateSpace;
 
   annotation (Documentation(info="<html>
 <p>
@@ -22,16 +23,18 @@ poles are placed at
 <pre>p = {-3,-4}.</pre>
 </html>"));
 
-  input DesignData data=Modelica_LinearSystems2.Tests.Design.data_Laub() annotation(Dialog);
-  input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.Schur
+  input DesignData data=Modelica_LinearSystems2.Tests.Design.data_Chow_Kokotovic() annotation(Dialog);
+  input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.KNV
     "method for pole assignment";
+  input Boolean isSI=false;
 
 protected
   Boolean isKprovided=min(size(data.K))>0;
   Real Ki[:,:]=if isKprovided then data.K else fill(0,0,0);
   Integer n=size(data.A, 1);
   Real S[n,n] "closed loop system matrix A-BK";
-  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(A=data.A, B=data.B, C=zeros(1,n), D=zeros(1,size(data.B,2)));
+  StateSpace ss=Modelica_LinearSystems2.StateSpace(A=data.A, B=data.B, C=zeros(1,n), D=zeros(1,size(data.B,2)));
+  Real Xre[size(data.A, 1),size(data.A, 1)];
 
 public
   output Real K[size(data.B, 2),size(data.A, 1)] "Feedback gain matrix";
@@ -50,23 +53,33 @@ public
   output Complex X[:,:] "right eigenvectors of the closed loop system";
 
 algorithm
+//  use single input method
+  if isSI and size(data.B, 2)==1 then
+    K := StateSpace.Internal.assignPolesSI_rq(ss,data.assignedPoles);
+    ss.A := ss.A-ss.B*K;
+    (Xre,calcPoles) := StateSpace.Analysis.eigenVectors(ss,false);
+    X := Complex(1)*Xre;
+  else//isSI
+
   if method == Tests.Types.AssignPolesMethod.KNV then
 // extented robust KNV-algortihm according to MATLAB's place-function
-     (K,X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob5(data.A, data.B, data.assignedPoles);
+     (K,X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob(data.A, data.B, data.assignedPoles);
      S := data.A - data.B*K;
      calcPoles := Complex.eigenValues(S);
      if isKprovided then
        gap := Modelica.Math.Matrices.norm(K - Ki);
      end if;
-  elseif method == Modelica_LinearSystems2.Tests.Types.AssignPolesMethod.Schur then
+   elseif method == Modelica_LinearSystems2.Tests.Types.AssignPolesMethod.Schur then
+   // Schur method
     (K,S,calcPoles,,,,X) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, data.assignedPoles, -1e10, Modelica.Math.Matrices.norm(ss.A, 1)*1e-12, true);
     if isKprovided then
       gap := Modelica.Math.Matrices.norm(K - Ki);
     end if;
-  else
-    assert(false, "Argument method (= " + String(method) + ") of testPoleAssignment is wrong. It has to be \"KNV\" or \"Schur\"");
+    else
+      assert(false, "Argument method (= " + String(method) + ") of testPoleAssignment is wrong. It has to be \"KNV\" or \"Schur\"");
+    end if;
   end if;
-
+  // calculate condition numbers
   (kappa2,kappaF,,cInf,nu2,nuF,zeta,Jalpha,dlambda) := conditionNumbers(K, X, data.assignedPoles, calcPoles);
 
   Matrices.printMatrix(K, 6, "K");
