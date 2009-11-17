@@ -26,11 +26,17 @@ zungqr
 zgeqrf
 zgesvd
 zgesv
+zgerq2
 zgetrf
 zgetri
+zungrq
+zunmrq
 wrapper_zungqr
 wrapper_zgeqrf
 wrapper_zgesvd
 wrapper_zgesv
 wrapper_zgetrf
 wrapper_zgetri
+wrapper_zgerq2
+wrapper_zungrq
+wrapper_zunmrq

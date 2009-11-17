@@ -16,21 +16,14 @@ protected
 
 algorithm
   assert(nrow >= ncol, "\nInput matrix A[" + String(nrow) + "," + String(ncol)
-     +                                                                     "] has more columns as rows.
-This is not allowed when calling Modelica.Matrices.C_QR(A).");
+     +"] has more columns as rows. This is not allowed when calling Modelica.Matrices.C_QR(A).");
 
   if minrowcol > 0 then
 
     (Q,R) := Modelica_LinearSystems2.Math.Matrices.LAPACK.zgeqrf(A);
 
   else
-    Q := fill(
-      Complex(1),
-      size(A, 1),
-      0);
-    R := fill(
-      Complex(0),
-      0,
-      0);
+    Q := fill(Complex(1), size(A, 1), 0);
+    R := fill(Complex(0), 0,  0);
   end if;
 end C_QR;

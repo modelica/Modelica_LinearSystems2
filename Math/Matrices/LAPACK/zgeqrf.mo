@@ -22,9 +22,9 @@ protected
     "QR factorization in packed format, real part";
   Real Q_imag[size(A, 1),size(A, 2)]
     "QR factorization in packed format, imaginary part";
-  Real tau_real[min(size(A, 1), size(A, 2))]
+  Real tau_real[min(size(A, 1), size(A_real, 2))]
     "The scalar factors of the elementary reflectors of Q, real part";
-  Real tau_imag[min(size(A, 1), size(A, 2))]
+  Real tau_imag[min(size(A, 1), size(A_real, 2))]
     "The scalar factors of the elementary reflectors of Q, imaginary part";
 //  Complex tau[:] "The scalar factors of the elementary reflectors of Q";
 

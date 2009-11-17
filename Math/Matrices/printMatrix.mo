@@ -27,8 +27,7 @@ algorithm
           s := s + " ";
         end if;
         s := s + String(M[i, j], significantDigits=significantDigits) +
-          Strings.repeat(significantDigits + 8 - Strings.length(String(abs(M[i,
-          j]))));
+          Strings.repeat(significantDigits + 8 - Strings.length(String(abs(M[i,j]))));
 
       end for;
       s := s + "\n";

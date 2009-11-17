@@ -4,4 +4,42 @@ package Matrices "Additional functions for Modelica.Math"
 
 extends Modelica.Icons.Library;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 end Matrices;
