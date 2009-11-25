@@ -13,7 +13,7 @@ function wrapper_zungqr
   output Real Q_real[size(QR_real, 1),size(QR_real, 2)]=QR_real;
   output Real Q_imag[size(QR_real, 1),size(QR_real, 2)]=QR_imag;
   output Integer info;
-//  Integer info;
+
   external "FORTRAN 77" c_inter_zungqr(size(QR_real, 1), size(QR_real, 2), size(tau_real,1),Q_real, Q_imag, size(QR_real,1), tau_real, tau_imag, info);
   annotation (Include="
   #include<f2c.h>

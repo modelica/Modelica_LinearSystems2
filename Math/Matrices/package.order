@@ -2,6 +2,7 @@ LAPACK
 Examples
 care
 dare
+conditionNumber
 det
 eigenValues
 equalityLeastSquares
@@ -22,6 +23,7 @@ nullspace
 orthogonalQ
 printMatrix
 QR
+rcond
 rsf
 rsf2
 solve
