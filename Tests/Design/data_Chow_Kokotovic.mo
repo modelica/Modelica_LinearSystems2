@@ -13,6 +13,6 @@ function data_Chow_Kokotovic "Example for pole assignment"
 algorithm
   data.A:=[0, 0.4, 0, 0; 0, 0, 0.345, 0; 0, -0.524/d, -0.465/d, 0.262/d; 0, 0, 0, -1/d];
   data.B:=[0; 0; 0; 1/d];
-  data.assignedPoles:=Complex(1)*{-1.0, -2.0, -3.0, -4.0};
+  data.assignedPoles:=Complex(1)*{-1.0, -1.0, -3.0, -4.0};
   data.K:=fill(0, 0, 0);
 end data_Chow_Kokotovic;

@@ -21,7 +21,7 @@ Computes the feedback gain K for the state space system according to assigned cl
                      caption="state space system data file"),enable = systemOnFile));
   input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.KNV
     "method for pole assignment";
-  input Boolean isSI=false;
+  input Boolean isSI=true;
 
 protected
   Integer nm[2]=readMatrixSize(dataFile, "B")
@@ -89,6 +89,8 @@ algorithm
     end if;
   end if;
   // calculate condition numbers
+    Matrices.printMatrix(Re(X), 6, "ReX");
+  Matrices.printMatrix(Im(X), 6, "ImX");
   (kappa2,kappaF,,cInf,nu2,nuF,zeta,Jalpha,dlambda) := conditionNumbers(K, X, assignedPoles, calcPoles);
 
   Matrices.printMatrix(K, 6, "K");

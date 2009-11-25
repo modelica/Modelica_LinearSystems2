@@ -21,7 +21,8 @@ protected
   Real deltaQ1;
   Real deltaQ2;
   Real H[2*n,2*n]=[A,-G; -Q,-transpose(A)];
-  Real condH=Matrices.Internal.conditionNumber(H);
+  Real condH=Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+                                               H);
   Real normH=Matrices.norm(H, 2);
   Real condX1;
   Real normX1;
@@ -97,11 +98,14 @@ algorithm
 //   Matrices.printMatrix(Q, 6, "Q");
 //   Matrices.printMatrix(A, 6, "A");
 //   Matrices.printMatrix(B, 6, "B");
-  condX1 := Matrices.Internal.conditionNumber(X1);
+  condX1 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+                                              X1);
   normX1 := Matrices.norm(X1, 2);
-  condX2 := Matrices.Internal.conditionNumber(X2);
+  condX2 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+                                              X2);
   normX2 := Matrices.norm(X2, 2);
-  condX3 := Matrices.Internal.conditionNumber(X3);
+  condX3 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+                                              X3);
   normX3 := Matrices.norm(X3, 2);
 
   Modelica.Utilities.Streams.print("\n normH = " + String(normH));

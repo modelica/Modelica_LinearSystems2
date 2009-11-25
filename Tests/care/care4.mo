@@ -33,7 +33,8 @@ protected
                  1.0e-01,   0.0,   0.0,   0.0,   0.0, 0.0,   0.0,   1.0e-01];
   Real G[8,8]=B*transpose(B);
   Real H[16,16]=[A,-G; -Q,-transpose(A)];
-  Real condH=Matrices.Internal.conditionNumber(H);
+  Real condH=Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+                                               H);
   Real normH=Matrices.norm(H, 2);
   Real condX1;
   Real normX1;
@@ -73,11 +74,14 @@ algorithm
    Modelica.Utilities.Streams.print("MATLAB solution X3");
    Matrices.printMatrix(X3, 16, "X3");
 
-  condX1 := Matrices.Internal.conditionNumber(X1);
+  condX1 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+                                              X1);
   normX1 := Matrices.norm(X1, 2);
-  condX2 := Matrices.Internal.conditionNumber(X2);
+  condX2 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+                                              X2);
   normX2 := Matrices.norm(X2, 2);
-  condX3 := Matrices.Internal.conditionNumber(X3);
+  condX3 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+                                              X3);
   normX3 := Matrices.norm(X3, 2);
 
   Modelica.Utilities.Streams.print("\n normH = " + String(normH));

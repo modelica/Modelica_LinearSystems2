@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Tests.Design;
-function testPoleAssignment "Function to assess algorithms for pole assignment"
+function testPoleAssignment3
+  "Function to assess algorithms for pole assignment"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Math.Complex;
@@ -23,7 +24,7 @@ poles are placed at
 <pre>p = {-3,-4}.</pre>
 </html>"));
 
-  input DesignData data=Modelica_LinearSystems2.Tests.Design.data_Chow_Kokotovic() annotation(Dialog);
+  input DesignData data=Modelica_LinearSystems2.Tests.Design.DesignData_Chow_Kokotovic();
   input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.KNV
     "method for pole assignment";
   input Boolean isSI=true;
@@ -78,7 +79,8 @@ algorithm
     else
       assert(false, "Argument method (= " + String(method) + ") of testPoleAssignment is wrong. It has to be \"KNV\" or \"Schur\"");
     end if;
-  end if;
+    end if;
+
   // calculate condition numbers
   (kappa2,kappaF,,cInf,nu2,nuF,zeta,Jalpha,dlambda) := conditionNumbers(K, X, data.assignedPoles, calcPoles);
 
@@ -99,4 +101,4 @@ algorithm
   end if;
   print("Jalpha = "+Modelica_LinearSystems2.Math.Vectors.printVector(Jalpha));
 
-end testPoleAssignment;
+end testPoleAssignment3;
