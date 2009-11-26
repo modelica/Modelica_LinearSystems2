@@ -10299,8 +10299,7 @@ end modifyX_old;
         D=zeros(1, size(B, 2)));
 
   algorithm
-    //check controllability
-  //  assert(StateSpace.Analysis.isControllable(ss), "Poles cannot be placed since system is not controllable");
+    //check controllability. To be omitted, since computationally expensive? It would be better to analyze the dimension of the nullspace of C
     assert(StateSpace.Internal.isControllableMIMO(ss), "Poles cannot be placed since system is not controllable");
 
     // sort eigenvalues to [real ev, complex ev(im>0), conj(complex ev(im>0))]
@@ -10319,12 +10318,8 @@ end modifyX_old;
 
     S := fill(Complex(0), nx, size(B, 2)*(nx - numberOfComplexPairs));// set dimension of S
     (U0, Z, S, rankB) := Modelica_LinearSystems2.StateSpace.Internal.xBase(A, B, gammaSorted, numberOfComplexPairs);// calculation of S, bases of X
-    if size(B,2)<nx then
     X := Modelica_LinearSystems2.StateSpace.Internal.modifyX( X,S,rankB,numberOfComplexPairs,maxSteps,IniX);// X modification, search optimal closed loop eigenvectors
-    else
-      X := Complex(1)*identity(nx);
-    end if;
-    K:=Modelica_LinearSystems2.StateSpace.Internal.calcK(A,U0,Z,gammaSorted,X,numberOfRealEigenvalues);// calcualte feedbackmatrix K
+    K := Modelica_LinearSystems2.StateSpace.Internal.calcK(A,U0,Z,gammaSorted,X,numberOfRealEigenvalues);// calcualte feedbackmatrix K
 
   //    for i in 1:nx loop
   //      Lambda[i, i] := gammaSorted[i];
@@ -10491,22 +10486,25 @@ end modifyX_old;
   //        M[l2, l3] := M[l2, l3] - A[l2, l3];
   //      end for;
   //    end for;
-  //  else
-  //    X := Complex(1)*identity(nx);
+  //  else//nx>rankB
+  //      X:=fill(Complex(0),nx,nx);
   //     for i in 1:numberOfRealEigenvalues loop
   //       M[i,i]:=Re(gammaSorted[i]);
+  //       X[i,i] := Complex(1);
   //     end for;
   //     for i in 1:numberOfComplexPairs loop
-  //           M[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i] := -Im(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
-  //           M[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i-1] := Im(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
+  //           M[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i] := Im(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
+  //           M[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i-1] := -Im(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
   //           M[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i-1] := Re(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
   //           M[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i] := Re(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
   //           Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M");
-  //           M:=M-A;
-  //           Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M");
-  //           Modelica_LinearSystems2.Math.Matrices.printMatrix(-Z*transpose(U0),6,"ZU0");
-  //
+  //           X[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i-1] := Complex(0.5);
+  //           X[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i] := Complex(0,0.5);
+  //           X[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i] := Complex(0,-0.5);
+  //           X[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i-1] := Complex(0.5);
   //     end for;
+  //     M:=M-A;
+
   // end if;//nx>rankB
   //    K := -Z*transpose(U0)*M;
 
@@ -10598,6 +10596,8 @@ end modifyX_old;
         B=B,
         C=zeros(1, nx),
         D=zeros(1, size(B, 2)));
+
+     Complex XX[size(A, 1),size(A, 2)];
 
   algorithm
     //check controllability
@@ -10788,22 +10788,37 @@ end modifyX_old;
          M[l2, l3] := M[l2, l3] - A[l2, l3];
        end for;
        end for;
-     else
 
-     X := Complex(1)*identity(nx);
+     else
+   gammaSorted2 :=  Modelica_LinearSystems2.Internal.reorderZeros(gamma);
+      for i in 1:nx loop
+      Lambda[i, i] := gammaSorted2[i];
+    end for;
+    X:=fill(Complex(0),nx,nx);
+
      for i in 1:numberOfRealEigenvalues loop
        M[i,i]:=Re(gammaSorted[i]);
+       X[i,i] := Complex(1);
      end for;
      for i in 1:numberOfComplexPairs loop
            M[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i] := -Im(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
            M[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i-1] := Im(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
            M[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i-1] := Re(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
            M[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i] := Re(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
-           Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M");
-           M:=M-A;
-           Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M");
-
+           X[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i-1] := Complex(0.5);
+           X[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i] := Complex(0,0.5);
+           X[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i] := Complex(0,-0.5);
+           X[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i-1] := Complex(0.5);
      end for;
+           Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X");
+           Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M");
+           MM := Complex(1)*M;
+           XX := matMul(MM,X);
+           XX := Modelica_LinearSystems2.Math.Matrices.C_solve2(X, XX);
+           Modelica_LinearSystems2.Math.Complex.Matrices.print(XX,6,"XX");
+           M:=M-A;
+           Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M-A");
+
      end if;
 
      K := -Z*transpose(U0)*M;
@@ -11408,10 +11423,19 @@ int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, double
        x_real[i]=0.0;
        x_imag[i]=0.0;
      }
-     for(i=0;i<nn;i++)
+     for(i=0;i<nre;i++)
      {
-       x_real[i*nn]=1.0;
+       x_real[i*nn+i]=1.0;
      }
+     for(i=0;i<nncp;i++)
+     {
+         x_real[nn*(nre+2*i)+nre+2*i] = 0.5;
+         x_real[nn*(nre+2*i)+nre+2*i+1] = 0.5;
+         x_imag[nn*(nre+2*i+1)+nre+2*i+1] = 0.5;
+         x_imag[nn*(nre+2*i+1)+nre+2*i] = -0.5;
+     }
+
+     
    }
    
   return 0;

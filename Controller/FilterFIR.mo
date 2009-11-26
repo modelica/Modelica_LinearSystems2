@@ -18,8 +18,8 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
   parameter Real a[:]={1,1} "FIR filter coefficients" annotation(Dialog(enable=blockType<>BlockType.Continuous and specType==FIRspec.Coefficients));
 
   annotation (defaultComponentName="filter",Icon(coordinateSystem(
-          preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics
-        ={
+          preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics=
+         {
         Polygon(
           points={{-82,88},{-90,66},{-74,66},{-82,86},{-82,88}},
           lineColor={192,192,192},
@@ -43,7 +43,7 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
           fillPattern=FillPattern.Backward),
         Line(points={{-82,30},{-70,30},{-50,28},{-30,20},{-24,16},{-20,12},{-16,
               6},{-12,-4},{-2,-46},{2,-64},{4,-82}}, color={0,0,127}),
-        Line(points={{4,-82},{6,-64},{10,-56},{14,-56},{18,-60},{20,-66},{22,-82}}, 
+        Line(points={{4,-82},{6,-64},{10,-56},{14,-56},{18,-60},{20,-66},{22,-82}},
             color={0,0,127}),
         Line(points={{22,-80},{22,-78},{22,-72},{24,-66},{26,-64},{30,-64},{34,
               -66},{36,-70},{38,-78},{38,-82},{38,-74},{40,-68},{42,-66},{46,-66},
