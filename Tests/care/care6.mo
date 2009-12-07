@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Tests.care;
 function care6 "Example 6 from Benner benchmarks"
   extends Modelica.Icons.Function;
   import Modelica_LinearSystems2.Math.Matrices;
+  input String outputFile = "";
 
 protected
 Real A[30,30]=[ -4.3280000000000003e+000,  1.7140000000000000e-001,  5.3760000000000003e+000,  4.0160000000000002e+002, -7.2460000000000002e+002, -1.9330000000000001e+000,  1.0200000000000000e+000, -9.8199999999999998e-001,  9.9900000000000000e-001,  1.5209999999999999e+000, -4.0620000000000003e+000,  9.5670000000000002e+000,  1.0080000000000000e+001, -6.0170000000000001e-001, -1.3120000000000001e-001,  9.6019999999999994e-002, -4.5699999999999998e-002,  0.0000000000000000e+000, -4.5160000000000002e+002,  0.0000000000000000e+000,  0.0000000000000000e+000, -1.0580000000000000e+002,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
@@ -87,8 +88,10 @@ Real A[30,30]=[ -4.3280000000000003e+000,  1.7140000000000000e-001,  5.376000000
   Real normX3;
   Real Qr1[30,30];
   Real Qr2[30,30];
+  Real Qr3[30,30];
   Real deltaQ1;
   Real deltaQ2;
+  Real deltaQ3;
 
 public
   output Real X1[30,30]=Matrices.care(A, B, R, Q, false);
@@ -129,37 +132,37 @@ public
   output Real ku3=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X3);
 algorithm
   Qr1 := X1*G*X1-transpose(A)*X1-X1*A;
-    Qr2 := X2*G*X2-transpose(A)*X2-X2*A;
-    deltaQ1 := Modelica.Math.Matrices.norm(Q-Qr1)/Modelica.Math.Matrices.norm(Q);
-    deltaQ2 := Modelica.Math.Matrices.norm(Q-Qr2)/Modelica.Math.Matrices.norm(Q);
-   Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement");
-   Matrices.printMatrix(X1, 16, "X1");
-   Modelica.Utilities.Streams.print("Solution X2 with subsequent Newton refinement");
-   Matrices.printMatrix(X2, 16, "X2");
-   Modelica.Utilities.Streams.print("MATLAB solution X3");
-   Matrices.printMatrix(X3, 16, "X3");
- condX1 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
-                                             X1);
+  Qr2 := X2*G*X2-transpose(A)*X2-X2*A;
+  Qr3 := X3*G*X3-transpose(A)*X3-X3*A;
+  deltaQ1 := Modelica.Math.Matrices.norm(Q-Qr1)/Modelica.Math.Matrices.norm(Q);
+  deltaQ2 := Modelica.Math.Matrices.norm(Q-Qr2)/Modelica.Math.Matrices.norm(Q);
+  deltaQ3 := Modelica.Math.Matrices.norm(Q-Qr3)/Modelica.Math.Matrices.norm(Q);
+  condX1 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(X1);
   normX1 := Matrices.norm(X1, 2);
-  condX2 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
-                                              X2);
+  condX2 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(X2);
   normX2 := Matrices.norm(X2, 2);
-  condX3 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
-                                              X3);
+  condX3 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(X3);
   normX3 := Matrices.norm(X3, 2);
 
-  Modelica.Utilities.Streams.print("\n normH = " + String(normH));
-  Modelica.Utilities.Streams.print("\n condH = " + String(condH));
-  Modelica.Utilities.Streams.print("\n normX1 = " + String(normX1));
-  Modelica.Utilities.Streams.print("\n condX1 = " + String(condX1));
-  Modelica.Utilities.Streams.print("\n ku1 = " + String(ku1));
-  Modelica.Utilities.Streams.print("\n normX2 = " + String(normX2));
-  Modelica.Utilities.Streams.print("\n condX2 = " + String(condX2));
-  Modelica.Utilities.Streams.print("\n ku2 = " + String(ku2));
-  Modelica.Utilities.Streams.print("\n normX3 = " + String(normX3));
-  Modelica.Utilities.Streams.print("\n condX3 = " + String(condX3));
-  Modelica.Utilities.Streams.print("\n ku3 = " + String(ku3));
-  Modelica.Utilities.Streams.print("\n deltaQ1 = " + String(deltaQ1));
-  Modelica.Utilities.Streams.print("\n deltaQ2 = " + String(deltaQ2));
+  Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement",outputFile);
+  Modelica.Utilities.Streams.print(Matrices.printMatrix(X1, 16, "X1"),outputFile);
+  Modelica.Utilities.Streams.print("Solution X2 with subsequent Newton refinement",outputFile);
+  Modelica.Utilities.Streams.print(Matrices.printMatrix(X2, 16, "X2"),outputFile);
+  Modelica.Utilities.Streams.print("MATLAB solution X3",outputFile);
+  Modelica.Utilities.Streams.print(Matrices.printMatrix(X3, 16, "X3"),outputFile);
+  Modelica.Utilities.Streams.print("\n normH = " + String(normH),outputFile);
+  Modelica.Utilities.Streams.print("\n condH = " + String(condH),outputFile);
+  Modelica.Utilities.Streams.print("\n normX1 = " + String(normX1),outputFile);
+  Modelica.Utilities.Streams.print("\n condX1 = " + String(condX1),outputFile);
+  Modelica.Utilities.Streams.print("\n ku1 = " + String(ku1),outputFile);
+  Modelica.Utilities.Streams.print("\n normX2 = " + String(normX2),outputFile);
+  Modelica.Utilities.Streams.print("\n condX2 = " + String(condX2),outputFile);
+  Modelica.Utilities.Streams.print("\n ku2 = " + String(ku2),outputFile);
+  Modelica.Utilities.Streams.print("\n normX3 = " + String(normX3),outputFile);
+  Modelica.Utilities.Streams.print("\n condX3 = " + String(condX3),outputFile);
+  Modelica.Utilities.Streams.print("\n ku3 = " + String(ku3),outputFile);
+  Modelica.Utilities.Streams.print("\n deltaQ1 = " + String(deltaQ1),outputFile);
+  Modelica.Utilities.Streams.print("\n deltaQ2 = " + String(deltaQ2),outputFile);
+  Modelica.Utilities.Streams.print("\n deltaQ3 = " + String(deltaQ3),outputFile);
 
 end care6;

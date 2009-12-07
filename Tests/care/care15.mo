@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Tests.care;
 function care15 "Example 15  from Benner benchmarks"
   extends Modelica.Icons.Function;
   import Modelica_LinearSystems2.Math.Matrices;
+  input String outputFile = "";
 
 protected
   Integer N=10;
@@ -18,8 +19,10 @@ protected
   Real G[n,n];
   Real Qr1[n,n];
   Real Qr2[n,n];
+  Real Qr3[n,n];
   Real deltaQ1;
   Real deltaQ2;
+  Real deltaQ3;
   Real H[2*n,2*n]=[A,-G; -Q,-transpose(A)];
   Real condH=Modelica_LinearSystems2.Math.Matrices.conditionNumber(
                                                H);
@@ -60,10 +63,6 @@ algorithm
 
   X1 := Matrices.care(A, B, R, Q, false);
   X2 := Matrices.care(A, B, R, Q, true);
-  Qr1 := X1*G*X1-transpose(A)*X1-X1*A;
-    Qr2 := X2*G*X2-transpose(A)*X2-X2*A;
-    deltaQ1 := Modelica.Math.Matrices.norm(Q-Qr1)/Modelica.Math.Matrices.norm(Q);
-    deltaQ2 := Modelica.Math.Matrices.norm(Q-Qr2)/Modelica.Math.Matrices.norm(Q);
   X3 := [1.4082559065178322e+000,     2.6676190896796159e+000,    -6.5821877192134037e-001,     1.0403124013014682e+000,    -2.4213305071508348e-001,     6.3973908750417130e-001,    -1.3823693339063511e-001,     4.4314597806254619e-001,    -9.4550040089693782e-002,     3.2016958489789538e-001,    -7.2001791061836087e-002,     2.3193432570454367e-001,    -5.9138156142420961e-002,     1.6238522686498319e-001,    -5.1533381176332015e-002,     1.0345269956755773e-001,    -4.7208569311630019e-002,     5.0403617291428171e-002,    -4.5235212708863534e-002;
   2.6676190896796159e+000,     7.6495166131912269e+000,    -1.6273066883781477e+000,     1.5927818788684047e+000,    -4.0057331379729999e-001,     8.5152714962393961e-001,    -1.9659310944162395e-001,     5.5113731416796208e-001,    -1.2297639316465336e-001,     3.8276339101187096e-001,    -8.8235259193352511e-002,     2.7048358127353234e-001,    -6.9549098839561146e-002,     1.8637984242782363e-001,    -5.8932527297422418e-002,     1.1756218375544031e-001,    -5.3049082276130421e-002,     5.6964417726470790e-002,    -5.0403617291430391e-002;
  -6.5821877192134037e-001,    -1.6273066883781477e+000,     1.8243416277240885e+000,     2.2670457758823135e+000,    -5.5432265459688956e-001,     8.4371929185984573e-001,    -1.9844615741414437e-001,     5.1676269433951449e-001,    -1.1568868436277591e-001,     3.5491071886919373e-001,    -8.1686405170275478e-002,     2.5062048605833698e-001,    -6.4397016095746384e-002,     1.7300179840712135e-001,    -5.4813344277716447e-002,     1.0933614458885377e-001,    -4.9560024573569200e-002,     5.3049082276127958e-002,    -4.7208569311627174e-002;
@@ -87,39 +86,39 @@ algorithm
   ku1:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X1);
   ku2:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X2);
   ku3:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X3);
+  Qr1 := X1*G*X1-transpose(A)*X1-X1*A;
+  Qr2 := X2*G*X2-transpose(A)*X2-X2*A;
+  Qr3 := X3*G*X3-transpose(A)*X3-X3*A;
+  deltaQ1 := Modelica.Math.Matrices.norm(Q-Qr1)/Modelica.Math.Matrices.norm(Q);
+  deltaQ2 := Modelica.Math.Matrices.norm(Q-Qr2)/Modelica.Math.Matrices.norm(Q);
+  deltaQ3 := Modelica.Math.Matrices.norm(Q-Qr3)/Modelica.Math.Matrices.norm(Q);
 
-  Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement");
-  Matrices.printMatrix(X1, 16, "X1");
-  Modelica.Utilities.Streams.print("Solution X2 with subsequent Newton refinement");
-  Matrices.printMatrix(X2, 16, "X2");
-  Modelica.Utilities.Streams.print("MATLAB solution X3");
-  Matrices.printMatrix(X3, 16, "X3");
-//   Matrices.printMatrix(G, 6, "G");
-//   Matrices.printMatrix(Q, 6, "Q");
-//   Matrices.printMatrix(A, 6, "A");
-//   Matrices.printMatrix(B, 6, "B");
-  condX1 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
-                                              X1);
+  condX1 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(X1);
   normX1 := Matrices.norm(X1, 2);
-  condX2 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
-                                              X2);
+  condX2 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(X2);
   normX2 := Matrices.norm(X2, 2);
-  condX3 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
-                                              X3);
+  condX3 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(X3);
   normX3 := Matrices.norm(X3, 2);
 
-  Modelica.Utilities.Streams.print("\n normH = " + String(normH));
-  Modelica.Utilities.Streams.print("\n condH = " + String(condH));
-  Modelica.Utilities.Streams.print("\n normX1 = " + String(normX1));
-  Modelica.Utilities.Streams.print("\n condX1 = " + String(condX1));
-  Modelica.Utilities.Streams.print("\n ku1 = " + String(ku1));
-  Modelica.Utilities.Streams.print("\n normX2 = " + String(normX2));
-  Modelica.Utilities.Streams.print("\n condX2 = " + String(condX2));
-  Modelica.Utilities.Streams.print("\n ku2 = " + String(ku2));
-  Modelica.Utilities.Streams.print("\n normX3 = " + String(normX3));
-  Modelica.Utilities.Streams.print("\n condX3 = " + String(condX3));
-  Modelica.Utilities.Streams.print("\n ku3 = " + String(ku3));
-  Modelica.Utilities.Streams.print("\n deltaQ1 = " + String(deltaQ1));
-  Modelica.Utilities.Streams.print("\n deltaQ2 = " + String(deltaQ2));
+  Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement",outputFile);
+  Modelica.Utilities.Streams.print(Matrices.printMatrix(X1, 16, "X1"),outputFile);
+  Modelica.Utilities.Streams.print("Solution X2 with subsequent Newton refinement",outputFile);
+  Modelica.Utilities.Streams.print(Matrices.printMatrix(X2, 16, "X2"),outputFile);
+  Modelica.Utilities.Streams.print("MATLAB solution X3",outputFile);
+  Modelica.Utilities.Streams.print(Matrices.printMatrix(X3, 16, "X3"),outputFile);
+  Modelica.Utilities.Streams.print("\n normH = " + String(normH),outputFile);
+  Modelica.Utilities.Streams.print("\n condH = " + String(condH),outputFile);
+  Modelica.Utilities.Streams.print("\n normX1 = " + String(normX1),outputFile);
+  Modelica.Utilities.Streams.print("\n condX1 = " + String(condX1),outputFile);
+  Modelica.Utilities.Streams.print("\n ku1 = " + String(ku1),outputFile);
+  Modelica.Utilities.Streams.print("\n normX2 = " + String(normX2),outputFile);
+  Modelica.Utilities.Streams.print("\n condX2 = " + String(condX2),outputFile);
+  Modelica.Utilities.Streams.print("\n ku2 = " + String(ku2),outputFile);
+  Modelica.Utilities.Streams.print("\n normX3 = " + String(normX3),outputFile);
+  Modelica.Utilities.Streams.print("\n condX3 = " + String(condX3),outputFile);
+  Modelica.Utilities.Streams.print("\n ku3 = " + String(ku3),outputFile);
+  Modelica.Utilities.Streams.print("\n deltaQ1 = " + String(deltaQ1),outputFile);
+  Modelica.Utilities.Streams.print("\n deltaQ2 = " + String(deltaQ2),outputFile);
+  Modelica.Utilities.Streams.print("\n deltaQ3 = " + String(deltaQ3),outputFile);
 
 end care15;

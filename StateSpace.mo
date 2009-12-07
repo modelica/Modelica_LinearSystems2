@@ -11187,7 +11187,7 @@ int c_inter_calcK_(integer *n, integer *m, doublereal *a, doublereal *u0, double
          ma[nn*(nnre+2*i)+nnre+2*i+1] = ma[nn*(nnre+2*i)+nnre+2*i+1]-gamma_imag[nnre + 2*i];
      }
      
-      dgemm_(no, trans, m, n, m, &idd, z, m, u0, n, &ndd, mp, m);//mp=z*u0'
+      dgemm_(no, trans, m, n, m, &idd, z, m, u0, n, &ndd, mp, m);//mp=z*u0'; z'=inv(z) with z resulting from svd
       dgemm_(no, no, m, n, n, &idd, mp, m, ma, n, &ndd, k, m);//k=mp*ma
    }
    free(mp);
