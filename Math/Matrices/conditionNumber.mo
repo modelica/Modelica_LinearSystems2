@@ -8,14 +8,14 @@ function conditionNumber "Calculate the condition number norm(A)*norm(inv(A))"
   output Real result=0.0 "p-norm of matrix A";
 
 protected
-  Real eps=1e-20;
+  Real eps=1e-25;
   Real s[size(A, 1)] "singular values";
 
 algorithm
   if p == 2 then
     s := Modelica.Math.Matrices.singularValues(A);
     if min(s) < eps then
-result := 0.0;
+result := Modelica.Constants.inf;
     else
 result := max(s)/min(s);
     end if;

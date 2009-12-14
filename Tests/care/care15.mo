@@ -23,10 +23,9 @@ protected
   Real deltaQ1;
   Real deltaQ2;
   Real deltaQ3;
-  Real H[2*n,2*n]=[A,-G; -Q,-transpose(A)];
-  Real condH=Modelica_LinearSystems2.Math.Matrices.conditionNumber(
-                                               H);
-  Real normH=Matrices.norm(H, 2);
+  Real H[2*n,2*n];
+  Real condH;
+  Real normH;
   Real condX1;
   Real normX1;
   Real condX2;
@@ -60,7 +59,9 @@ algorithm
 
   Q := 10*transpose(C)*C;
   G := B*transpose(B);
-
+  H := [A,-G; -Q,-transpose(A)];
+  condH := Modelica_LinearSystems2.Math.Matrices.conditionNumber(H);
+  normH := Matrices.norm(H, 2);
   X1 := Matrices.care(A, B, R, Q, false);
   X2 := Matrices.care(A, B, R, Q, true);
   X3 := [1.4082559065178322e+000,     2.6676190896796159e+000,    -6.5821877192134037e-001,     1.0403124013014682e+000,    -2.4213305071508348e-001,     6.3973908750417130e-001,    -1.3823693339063511e-001,     4.4314597806254619e-001,    -9.4550040089693782e-002,     3.2016958489789538e-001,    -7.2001791061836087e-002,     2.3193432570454367e-001,    -5.9138156142420961e-002,     1.6238522686498319e-001,    -5.1533381176332015e-002,     1.0345269956755773e-001,    -4.7208569311630019e-002,     5.0403617291428171e-002,    -4.5235212708863534e-002;

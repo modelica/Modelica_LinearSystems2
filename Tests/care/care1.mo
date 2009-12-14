@@ -26,6 +26,8 @@ protected
   Real deltaQ1;
   Real deltaQ2;
   Real deltaQ3;
+  Real resX1;
+  Real resX2;
 public
   output Real X1[2,2]=Matrices.care(A, B, R, Q, false);
   output Real X2[2,2]=Matrices.care(A, B, R, Q, true);
@@ -42,6 +44,9 @@ algorithm
   deltaQ2 := Modelica.Math.Matrices.norm(Q-Qr2)/Modelica.Math.Matrices.norm(Q);
   deltaQ3 := Modelica.Math.Matrices.norm(Q-Qr3)/Modelica.Math.Matrices.norm(Q);
 
+  resX1 := Modelica.Math.Matrices.norm(X1-X3)/Modelica.Math.Matrices.norm(X3);
+  resX2 := Modelica.Math.Matrices.norm(X2-X3)/Modelica.Math.Matrices.norm(X3);
+
   condX1 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(X1);
   normX1 := Matrices.norm(X1, 2);
   condX2 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(X2);
@@ -54,6 +59,10 @@ algorithm
   Modelica.Utilities.Streams.print(Matrices.printMatrix(X2, 16, "X2"),outputFile);
   Modelica.Utilities.Streams.print("Exact solution X3",outputFile);
   Modelica.Utilities.Streams.print(Matrices.printMatrix(X3, 16, "X3"),outputFile);
+
+  Modelica.Utilities.Streams.print("Residum of solution X1: resX1 = "+String(resX1),outputFile);
+  Modelica.Utilities.Streams.print("Residum of solution X2: resX2 = "+String(resX2),outputFile);
+
   Modelica.Utilities.Streams.print("\n normH = " + String(normH),outputFile);
   Modelica.Utilities.Streams.print("\n condH = " + String(condH),outputFile);
   Modelica.Utilities.Streams.print("\n normX1 = " + String(normX1),outputFile);
