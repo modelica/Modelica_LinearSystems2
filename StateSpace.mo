@@ -1459,10 +1459,13 @@ listed in the last column might be not the most relevant one.
       print("</table>\n", fileName);
 
       print("<br><br>", fileName);
+
     // print C and D
       print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
          + "cellpadding=\"3\" border=\"0\">", fileName);
       print("<tr><td><br></td><td><br></td><td><br></td>", fileName);
+
+    if ny>0 then//########
       for i1 in 1:nx loop
         print("<td style=\"text-align:center\" valign=\"top\"> " + ss.xNames[i1] + " </td>",
           fileName);
@@ -1473,9 +1476,10 @@ listed in the last column might be not the most relevant one.
       for i1 in 1:nu loop
         print("<td>" + ss.uNames[i1] + "</td>", fileName);
       end for;
-
+    end if;//##########
       print("</tr>", fileName);
 
+    if ny>0 then//########
      //print upper parts of C and D
       for i1 in 1:c2 loop
         print("<tr> <td><br></td><td><br></td><td> " + ss.yNames[i1] + " </td>",
@@ -1496,9 +1500,10 @@ listed in the last column might be not the most relevant one.
 
         print("</tr>", fileName);
       end for;
+    end if;//##########
 
      //print middle part of C and D
-
+    if ny>0 then//########
       print("<tr><td>C</td><td>=</td><td>" + ss.yNames[c2 + 1] + " </td>",
         fileName);
       for i2 in 1:nx loop
@@ -1515,8 +1520,16 @@ listed in the last column might be not the most relevant one.
         print("<td> " + String(ss.D[c2 + 1, i2], format=format) + " </td>",
           fileName);
       end for;
+    else //#################
+      print("<tr><td>C</td><td>=</td><td>[ ]" + " </td>", fileName);
+      for i2 in 1:dist - 3 loop
+        print("<td><br></td>", fileName);
+      end for;
+      print("<td>D</td><td>=</td><td>[ ]" + " </td>", fileName);
+    end if;//##########
 
      //print lower parts of C and D
+    if ny>0 then//########
       for i1 in c2 + 2:ny loop
         print("<tr><td><br></td><td><br></td><td> " + ss.yNames[i1] + " </td>",
           fileName);
@@ -1535,6 +1548,8 @@ listed in the last column might be not the most relevant one.
         end for;
         print("</tr>", fileName);
       end for;
+    end if;//##########
+
       if description == "" then
         print("</table>\n", fileName);
       else
@@ -3297,7 +3312,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
 </html> "));
 
     protected
-    Integer n;
+    Integer n=10;
     Integer m;
     Integer p;
     Real Ar[:,:];
@@ -3323,40 +3338,41 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
     Real normA=max(Modelica.Math.Matrices.norm(ss.A, p=1),beta_small);
 
   algorithm
-    (Ar,Br,Cr,Dr,n,m,p) := StateSpace.Internal.reduceRosenbrock(ss.A, ss.B, ss.C, ss.D);
-
-    if n > 0 then
-      (Ar,Br,Cr,Dr,n,m,p) := StateSpace.Internal.reduceRosenbrock(transpose(Ar), transpose(Cr), transpose(Br), transpose(Dr));
-    end if;
-    if n == 0 then
+    if min(size(ss.B)) == 0 or min(size(ss.B)) == 0 then
       Zeros := fill(Complex(0), 0);
     else
+      (Ar,Br,Cr,Dr,n,m,p) := StateSpace.Internal.reduceRosenbrock(ss.A, ss.B, ss.C, ss.D);
+      if n > 0 then
+        (Ar,Br,Cr,Dr,n,m,p) := StateSpace.Internal.reduceRosenbrock(transpose(Ar), transpose(Cr), transpose(Br), transpose(Dr));
+      end if;
+      if n == 0 then
+        Zeros := fill(Complex(0), 0);
+      else
 
-      (,R,,V2) := Matrices.QR( Matrices.fliplr(transpose([Cr,Dr])));
-      Vf := Matrices.fliplr(V2);
-      AfBf := [Ar,Br]*Vf;
-      Af := AfBf[:, 1:size(Ar, 2)];
-      Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
+        (,R,,V2) := Matrices.QR(Matrices.fliplr(transpose([Cr,Dr])));
+        Vf := Matrices.fliplr(V2);
+        AfBf := [Ar,Br]*Vf;
+        Af := AfBf[:, 1:size(Ar, 2)];
+        Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
 
-      (alphaReal,alphaImag,beta,,,info) := LAPACK.dggev(Af, Bf, n);
-      assert(info == 0,
-        "Failed to compute invariant zeros with function invariantZeros(..)");
+        (alphaReal,alphaImag,beta,,,info) := LAPACK.dggev(Af, Bf, n);
+        assert(info == 0, "Failed to compute invariant zeros with function invariantZeros(..)");
 
-      Zeros := fill(Complex(0), size(beta, 1));
+        Zeros := fill(Complex(0), size(beta, 1));
 
   // If beta[i] is zero, then zero i is infinite.
-      for i in 1:size(beta, 1) loop
-        if beta[i] >= normB*1e-6 then
+        for i in 1:size(beta, 1) loop
+          if beta[i] >= normB*1e-6 then
        // finite eigenvalue
-          Zeros[i].re := if abs(alphaReal[i]) >= normB*1e-12 then alphaReal[i]/
-            beta[i] else 0;
-          Zeros[i].im := if abs(alphaImag[i]) >= normB*1e-12 then alphaImag[i]/
-            beta[i] else 0;
-        end if;
-      end for;
+            Zeros[i].re := if abs(alphaReal[i]) >= normB*1e-12 then alphaReal[i]/
+              beta[i] else 0;
+            Zeros[i].im := if abs(alphaImag[i]) >= normB*1e-12 then alphaImag[i]/
+              beta[i] else 0;
+          end if;
+        end for;
 
+      end if;
     end if;
-
   end invariantZeros;
 
   encapsulated function isControllable
@@ -7585,25 +7601,31 @@ is a lower triangular matrix and has full rank if and only if none of the elemen
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
 
-    input StateSpace ss;
-     input Modelica_LinearSystems2.Types.StaircaseMethod method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+      input StateSpace ss;
+      input Modelica_LinearSystems2.Types.StaircaseMethod method=
+          Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
 
-    annotation (Documentation(info="<html>
+      annotation (Documentation(info="<html>
  
  
  
 </html>"));
 
-    output Boolean controllable;
+      output Boolean controllable;
   algorithm
-    assert(method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD or method == Modelica_LinearSystems2.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore, 
-the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isControllableMIMO\" has to be qr or svd but is method = "        + String(method));
-    if method == Modelica_LinearSystems2.Types.StaircaseMethod.QR then
-      controllable := StateSpace.Internal.staircaseQR(ss);
-    else
-      controllable := StateSpace.Internal.staircaseSVD(ss);
-    end if;
-
+      assert(method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD or 
+        method == Modelica_LinearSystems2.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore, 
+the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isControllableMIMO\" has to be qr or svd but is method = "
+         + String(method));
+      if min(size(ss.B)) == 0 then
+        controllable := false;
+      else
+        if method == Modelica_LinearSystems2.Types.StaircaseMethod.QR then
+          controllable := StateSpace.Internal.staircaseQR(ss);
+        else
+          controllable := StateSpace.Internal.staircaseSVD(ss);
+        end if;
+      end if;
   end isControllableMIMO;
 
   encapsulated function isObservableMIMO
@@ -7867,6 +7889,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
   //   Real evnc[:,2];
 
   algorithm
+    if nu > 0 then
     if nx > 1 then
   //#####  first step of staircase
           // transform b->Q'b = {*,0,...,0} and c->cQ, A->Q'AQ
@@ -7964,6 +7987,17 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
   //   evnc := Modelica.Math.Matrices.eigenValues(A[stairStep + 1:nx, stairStep + 1:nx]);
 
     isControllable := stairStep == nx;
+
+    else // no inputs, nu==0
+    isControllable := false;
+    ssm1 :=  Modelica_LinearSystems2.Internal.StateSpaceR(
+          A=ss.A,
+          B=ss.B,
+          C=ss.C,
+          D=ss.D,
+          r=0);
+    P := identity(nu);
+    end if;
 
   end staircaseSVD;
 
@@ -8947,16 +8981,16 @@ k = ---------- * ----------------------
   encapsulated function controllablePoles
       "Compute the controllable and uncontrollable poles of a state space system"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Internal;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.Internal;
 
     input StateSpace ss=StateSpace(
-            A=[-1],
-            B=[1],
-            C=[0],
-            D=[0]);
+        A=[-1],
+        B=[1],
+        C=[0],
+        D=[0]);
 
     output Real cPoles[:,2] "controllable poles";
     output Real ncPoles[:,2] "uncontrollable poles";
@@ -8971,21 +9005,24 @@ k = ---------- * ----------------------
     Boolean isControllable;
 
   algorithm
+    if size(ss.B, 2) == 0 then
+      poles := Modelica.Math.Matrices.eigenValues(ss.A);
+      ncPoles := poles;
+      cPoles := fill(0, 0, 2);
+    else
   // build upper Hessenberg staircase to decomposite controllable/uncontrollable subspaces
   // The controllable part of A is in A[1:ssch.r, 1:ssch.r]
-    (isControllable,ssch) := StateSpace.Internal.staircaseSVD(ss);
-    if isControllable then
-      poles := Modelica.Math.Matrices.eigenValues(ss.A);
-      cPoles := poles;
-      ncPoles := fill(
-            0,
-            0,
-            2);
-    else
-      cPoles := Modelica.Math.Matrices.eigenValues(ssch.A[1:ssch.r, 1:ssch.r]);
-      ncPoles := Modelica.Math.Matrices.eigenValues(ssch.A[ssch.r + 1:size(ss.A,
-        1), ssch.r + 1:size(ss.A, 1)]);
-      poles := [cPoles; ncPoles];
+      (isControllable,ssch) := StateSpace.Internal.staircaseSVD(ss);
+      if isControllable then
+        poles := Modelica.Math.Matrices.eigenValues(ss.A);
+        cPoles := poles;
+        ncPoles := fill(0, 0, 2);
+      else
+        cPoles := Modelica.Math.Matrices.eigenValues(ssch.A[1:ssch.r, 1:ssch.r]);
+        ncPoles := Modelica.Math.Matrices.eigenValues(ssch.A[ssch.r + 1:size(ss.A,
+          1), ssch.r + 1:size(ss.A, 1)]);
+        poles := [cPoles; ncPoles];
+      end if;
     end if;
 
     annotation (Documentation(info="<html>
@@ -9342,6 +9379,7 @@ This condition is however not fulfilled because the number of outputs is ny = "
             rankR := rankR + 1;
           end if;
         end for;
+
   //rankR:=Modelica.Math.Matrices.rank(R);
 
         DD := R[1:rankR, :];
@@ -10916,8 +10954,7 @@ end modifyX_old;
 
   //       (Ri,Qi) :=  Matrices.C_RQ(Hi);
   //       Hlr := Qi*Ri;
-  // replaced by :
-
+  // replaced by :########
         (RQ,tau) := Matrices.LAPACK.zgerq2(Hi);
         Ri := fill(Complex(0),ni,ni);
         for ii in 1:ni loop
@@ -10927,6 +10964,7 @@ end modifyX_old;
         end for;
         Qi := Matrices.LAPACK.zungrq(RQ,tau);
         Hlr := Matrices.LAPACK.zunmrq(Ri,RQ,tau,true);
+  // ##########
 
         for ii in 1:ni loop
           Hlr[ii, ii] := Hlr[ii, ii] + gamma[i];

@@ -22,6 +22,8 @@ Computes the feedback gain K for the state space system according to assigned cl
   input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.KNV
     "method for pole assignment";
   input Boolean isSI=true;
+  input String outputFile = "";
+  input Boolean deleteExistingOutputfile=false;
 
 protected
   Integer nm[2]=readMatrixSize(dataFile, "B")
@@ -39,10 +41,10 @@ protected
 
   Boolean isKprovided=min(nmk) > 0;
   Real Ki[:,:]=if isKprovided then readMatrix(dataFile, "K", nm[2], nm[1]) else fill(0, 0, 0);
-  Integer n=size(A, 1);
-  Real S[n,n] "closed loop system matrix A-BK";
-  StateSpace ss=Modelica_LinearSystems2.StateSpace(A=A, B=B, C=zeros(1, n), D=zeros(1, size(B, 2)));
-  Real Xre[size(A, 1),size(A, 1)];
+//  Integer n=size(A, 1);
+  Real S[nm[1],nm[1]] "closed loop system matrix A-BK";
+  StateSpace ss=Modelica_LinearSystems2.StateSpace(A=A, B=B, C=zeros(1, nm[1]), D=zeros(1, size(B, 2)));
+  Real Xre[nm[1],nm[1]];
 
 public
   output Real K[size(B, 2),size(A, 1)] "Feedback gain matrix";
@@ -89,25 +91,33 @@ algorithm
     end if;
   end if;
   // calculate condition numbers
-    Matrices.printMatrix(Re(X), 6, "ReX");
-  Matrices.printMatrix(Im(X), 6, "ImX");
   (kappa2,kappaF,,cInf,nu2,nuF,zeta,Jalpha,dlambda) := conditionNumbers(K, X, assignedPoles, calcPoles);
-
-  Matrices.printMatrix(K, 6, "K");
-  Complex.Vectors.print("assignedPoles", assignedPoles);
-  Complex.Vectors.print("calcPoles", calcPoles);
-  Matrices.printMatrix(Re(X), 6, "ReX");
-  Matrices.printMatrix(Im(X), 6, "ImX");
-  print("kappa2 " + String(kappa2));
-  print("kappaF " + String(kappaF));
-  print("zeta " + String(zeta));
-  print("cInf " + String(cInf));
-  print("nu2 " + String(nu2));
-  print("nuF " + String(nuF));
-  print("dlambda " + String(dlambda));
-  if isKprovided then
-    print("gap " + String(gap));
+  if deleteExistingOutputfile then
+    if Modelica.Utilities.Files.exist(outputFile) then
+      Modelica.Utilities.Files.removeFile(outputFile);
+    end if;
+    end if;
+  if isSI and nm[2] == 1 then
+    print("---- Using SI-algorithm ----\n",outputFile);
+  else
+    print("---- Using MI-algorithm ----\n",outputFile);
   end if;
-  print("Jalpha = " + Modelica_LinearSystems2.Math.Vectors.printVector(Jalpha));
+  print("n = "+String(nm[1])+",  m = "+ String(nm[2])+"\n",outputFile);
+  print(Matrices.printMatrix(K, 6, "K"),outputFile);
+  Complex.Vectors.print("assignedPoles", assignedPoles,outputFile);
+  Complex.Vectors.print("calcPoles", calcPoles,outputFile);
+//   Matrices.printMatrix(Re(X), 6, "ReX");
+//   Matrices.printMatrix(Im(X), 6, "ImX");
+  print("kappa2 " + String(kappa2),outputFile);
+  print("kappaF " + String(kappaF),outputFile);
+  print("zeta " + String(zeta),outputFile);
+  print("cInf " + String(cInf),outputFile);
+  print("nu2 " + String(nu2),outputFile);
+  print("nuF " + String(nuF),outputFile);
+  print("dlambda " + String(dlambda),outputFile);
+  if isKprovided then
+    print("gap " + String(gap),outputFile);
+  end if;
+  print("Jalpha = " + Modelica_LinearSystems2.Math.Vectors.printVector(Jalpha),outputFile);
 
 end testPoleAssignment2;

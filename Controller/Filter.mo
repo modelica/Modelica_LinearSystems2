@@ -20,7 +20,7 @@ block Filter
 
 protected
   parameter Modelica_LinearSystems2.ZerosAndPoles.Internal.ZerosAndPoles
-    system2 =                                                                    Modelica_LinearSystems2.ZerosAndPoles.Internal.filter(
+    system2 = Modelica_LinearSystems2.ZerosAndPoles.Internal.filter(
       analogFilter=analogFilter,
       filterType=filterType,
       order=order,
@@ -74,7 +74,8 @@ protected
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="f_cut=%f_cut"),
-        Line(points={{22,10},{14,18},{6,22},{-12,28},{-80,28}}, color={0,0,127}),
+        Line(points={{22,10},{14,18},{6,22},{-12,28},{-80,28}}, color={0,0,127}), 
+
         Rectangle(
           extent={{-80,-78},{22,10}},
           lineColor={160,160,164},
@@ -86,10 +87,7 @@ protected
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics),
     Documentation(info="<HTML>
-<p>
-This block has to be improved for discrete mode. At present, this function seems not to be reliable.
-Please use \"criticalDamping instead
-</p>
+
 </HTML>
 "));
 

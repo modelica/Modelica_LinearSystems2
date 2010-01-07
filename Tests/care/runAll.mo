@@ -35,7 +35,7 @@ algorithm
     Modelica.Utilities.Streams.print("Modelica.Utilities.Streams.print(\"\\n\\n### "+functions2[i]+" ###\\n\",\"" + outputFile+ "\")",careMos);
     functions2[i] := h+functions2[i] +"(\""+outputFile+"\" )";
     Modelica.Utilities.Streams.print(functions2[i],careMos);
-    end for;
+  end for;
     ok := RunScript(careMos);
 
 numberOfFunctions := n;

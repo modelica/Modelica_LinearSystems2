@@ -1,8 +1,7 @@
 within Modelica_LinearSystems2.Tests.Internal;
-function getMatFiles "Returns a vector of files ending with .mat"
+function getCareMoFiles "Returns a vector of files with care*.mo"
   extends Modelica.Icons.Function;
-  input String specifier="data";
-  input String directoryName = classDirectory()+ "../" + specifier annotation(Dialog);
+  input String directoryName = classDirectory()+ "../care" annotation(Dialog);
   output String matFiles[:];
   output Integer nrMat;
 protected
@@ -16,11 +15,11 @@ algorithm
   // count mat-files
   nrMat := 0;
   for i in 1:nrDir loop
-    if Modelica.Utilities.Strings.find(files[i], ".mat", 1, false)<>0 then
+    if Modelica.Utilities.Strings.find(files[i], "care", 1, false)<>0 and Modelica.Utilities.Strings.find(files[i], ".mo", 1, false)<>0 then
       nrMat := nrMat + 1;
       files2[nrMat] := files[i];
     end if;
   end for;
   matFiles := files2[1:nrMat];
 
-end getMatFiles;
+end getCareMoFiles;
