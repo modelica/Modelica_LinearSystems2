@@ -39,7 +39,7 @@ public
     "Initial value of continuous output y, if init=InitialOutput (otherwise guess value)"
     annotation(Evaluate=true,Hide=true);
   parameter Boolean withDelay = false
-    "is true if a unit delay should be considered";
+    "= true, if a unit delay should be considered";
 
   final parameter Modelica.SIunits.Time Ts=sampleClock.sampleTime*sampleFactor
     "Sample time" annotation(Hide=false);
@@ -52,7 +52,7 @@ public
     "Discrete output signals of block" annotation (                        Hide=true,
       Placement(transformation(extent={{100,-10},{120,10}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput x[nx](start=x_start)
-    "State vector of continuous system at sample times"                                                        annotation(Hide=true);
+    "State vector of continuous system at sample times" annotation(Hide=true);
   annotation (
     defaultComponentName="discreteStateSpace",
     Icon(coordinateSystem(
@@ -96,12 +96,13 @@ protected
 
  discrete Real xd[nx](start=x_start)
     "State vector of discrete system (pre(xd) = x - B2*u)";
-  discrete Real new_xd[nx](start=x_start) "Next valued of xd" 
+  discrete Real new_xd[nx](start=x_start) "Next value of xd" 
                         annotation(Hide=true);
 
 // Derived quantities
   discrete Real u_sampled[nu] "Sampled continuous input signal u";
-  discrete Real pre_u_sampled[nu] "Sampled continuous input signal u";
+  discrete Real pre_u_sampled[nu]
+    "Sampled continuous input signal u of previous sample interval";
   discrete Real y_sampled[ny] "Sampled continuous output"        annotation(Hide=true);
   discrete Real x_sampled[nx] "Sampled continuous state"        annotation(Hide=true);
   Integer ticks
@@ -123,15 +124,15 @@ equation
   when {initial(),sampleTrigger} then
     u_sampled = u;
     pre_u_sampled = pre(u_sampled);
-if withDelay then
-    new_xd = discreteSystem.B*pre_u_sampled + discreteSystem.A*xd;
-    y_sampled = discreteSystem.C*xd + discreteSystem.D*pre_u_sampled;
-    x_sampled = xd + discreteSystem.B2*pre_u_sampled;
-else
-    new_xd = discreteSystem.B*u_sampled + discreteSystem.A*xd;
-    y_sampled = discreteSystem.C*xd + discreteSystem.D*u_sampled;
-    x_sampled = xd + discreteSystem.B2*u_sampled;
-end if;
+    if withDelay then
+       new_xd = discreteSystem.B*pre_u_sampled + discreteSystem.A*xd;
+       y_sampled = discreteSystem.C*xd + discreteSystem.D*pre_u_sampled;
+       x_sampled = xd + discreteSystem.B2*pre_u_sampled;
+    else
+       new_xd = discreteSystem.B*u_sampled + discreteSystem.A*xd;
+       y_sampled = discreteSystem.C*xd + discreteSystem.D*u_sampled;
+       x_sampled = xd + discreteSystem.B2*u_sampled;
+    end if;
     xd = pre(new_xd);
   end when;
 
@@ -140,6 +141,8 @@ end if;
 
 initial equation
   pre(ticks) = 0;
+  pre(x) = x_start;
+  pre(u_sampled) = u_sampled;
 
   if init == Types.Init.InitialState then
     x = x_start;
@@ -154,14 +157,11 @@ initial equation
       u = fill(0.0, nu);
       xd[nu + 1:nx] = pre(x[nu + 1:nx]);
     else
-
       xd = discreteSystem.B*u_sampled + discreteSystem.A*xd;//new_xd;
-
     end if;
 
   elseif init == Types.Init.InitialOutput then
-  y=y_start;
-  xd[ny+1:nx]=[zeros(nx-ny,ny),identity(nx-ny)]*Modelica.Math.Matrices.solve(identity(nx)-discreteSystem.A,discreteSystem.B*u);
-
+     y=y_start;
+     xd[ny+1:nx]=[zeros(nx-ny,ny),identity(nx-ny)]*Modelica.Math.Matrices.solve(identity(nx)-discreteSystem.A,discreteSystem.B*u);
   end if;
 end DiscreteStateSpace2;

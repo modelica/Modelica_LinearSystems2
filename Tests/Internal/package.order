@@ -6,13 +6,5 @@ wrapper_modifyX
 modifyX
 wrapper_xBase
 xBase
-complexMatrices
-realMatrices
-multiplyComplexMatrices
-multiplyRealMatrices
-multiplyRealMatrices2
-multiplyRealMatrices3cCall
-multiplyRealMatrices3
 getMatFiles
-getCareMoFiles
 getMoFiles

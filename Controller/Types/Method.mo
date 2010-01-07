@@ -1,12 +1,15 @@
 within Modelica_LinearSystems2.Controller.Types;
 type Method = enumeration(
-    ExplicitEuler "discretize block using explicit Euler integration",
-    ImplicitEuler "discretize block using implicit Euler integration",
+    ExplicitEuler "Discretization with explicit Euler integration",
+    ImplicitEuler "Discretization with implicit Euler integration",
     Trapezoidal
-      "discretize block using trapezoidal integration (Tustins method)",
-    StepExact "discretize block using the zero-order hold equivalent",
-    RampExact "discretize block using first-order hold equivalent",
-    ImpulseExact "Impulse invariant discretization")
+      "Recommended: Discretization with trapezoidal integration (Tustins method)", 
+
+    StepExact
+      "Exact discretization for step inputs (zero-order hold equivalent)",
+    RampExact
+      "Exact discretization for ramp inputs (first-order hold equivalent)",
+    ImpulseExact "Exact discretization for impulse inputs")
   "Enumeration of discretization methods" 
     annotation (Evaluate=true, Documentation(info="<html>
  
