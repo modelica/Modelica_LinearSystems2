@@ -1351,10 +1351,10 @@ listed in the last column might be not the most relevant one.
     public
     encapsulated function printSystem
         "Print the state space system in html format on file"
-        import Modelica;
-        import Modelica.Utilities.Streams.print;
-        import Modelica_LinearSystems2.StateSpace;
-        import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2;
 
       input StateSpace ss "state space system to analyze";
       input String fileName="systemAnalysis.html"
@@ -1403,25 +1403,26 @@ listed in the last column might be not the most relevant one.
         print("<tr> <td><br></td><td><br></td><td> " + ss.xNames[i1] + " </td>",
           fileName);
         for i2 in 1:nx loop
-          print("<td> " + String(ss.A[i1, i2], format=format) + " </td>",
-            fileName);
+          print("<td> " + String(ss.A[i1, i2], format=format) + " </td>", fileName);
         end for;
 
         for i2 in 1:dist - 1 loop
           print("<td><br></td>", fileName);
         end for;
-        print("<td>" + ss.xNames[i1] + " </td>", fileName);
-        for i2 in 1:nu loop
-          print("<td> " + String(ss.B[i1, i2], format=format) + " </td>",
-            fileName);
-        end for;
 
+        if nu > 0 then
+          print("<td>" + ss.xNames[i1] + " </td>", fileName);
+          for i2 in 1:nu loop
+            print("<td> " + String(ss.B[i1, i2], format=format) + " </td>",
+              fileName);
+          end for;
+        end if;
+           //nu>0
         print("</tr>", fileName);
       end for;
 
     //print middle part of A and B
-      print("<tr><td>A</td><td>=</td><td>" + ss.xNames[c1 + 1] + " </td>",
-        fileName);
+      print("<tr><td>A</td><td>=</td><td>" + ss.xNames[c1 + 1] + " </td>", fileName);
       for i2 in 1:nx loop
         print("<td> " + String(ss.A[c1 + 1, i2], format=format) + " </td>",
           fileName);
@@ -1429,30 +1430,39 @@ listed in the last column might be not the most relevant one.
       for i2 in 1:dist - 3 loop
         print("<td><br></td>", fileName);
       end for;
-      print("<td>B</td><td>=</td><td>" + ss.xNames[c1 + 1] + " </td>", fileName);
 
-      for i2 in 1:nu loop
-        print("<td> " + String(ss.B[c1 + 1, i2], format=format) + " </td>",
-          fileName);
-      end for;
+      if nu > 0 then
+        print("<td>B</td><td>=</td><td>" + ss.xNames[c1 + 1] + " </td>", fileName);
+
+        for i2 in 1:nu loop
+          print("<td> " + String(ss.B[c1 + 1, i2], format=format) + " </td>",
+            fileName);
+        end for;
+      else
+        print("<td>B</td><td>=</td><td>[ ],  empty matrix: " +String(nx)+" by "+String(nu) + " </td>", fileName);
+
+      end if;
+           //nu>0
 
     //print lower parts of A and B
       for i1 in c1 + 2:nx loop
         print("<tr><td><br></td><td><br></td><td> " + ss.xNames[i1] + " </td>",
           fileName);
         for i2 in 1:nx loop
-          print("<td> " + String(ss.A[i1, i2], format=format) + " </td>",
-            fileName);
+          print("<td> " + String(ss.A[i1, i2], format=format) + " </td>", fileName);
         end for;
 
         for i2 in 1:dist - 1 loop
           print("<td><br></td>", fileName);
         end for;
-        print("<td>" + ss.xNames[i1] + " </td>", fileName);
-        for i2 in 1:nu loop
-          print("<td> " + String(ss.B[i1, i2], format=format) + " </td>",
-            fileName);
-        end for;
+        if nu > 0 then
+          print("<td>" + ss.xNames[i1] + " </td>", fileName);
+          for i2 in 1:nu loop
+            print("<td> " + String(ss.B[i1, i2], format=format) + " </td>",
+              fileName);
+          end for;
+        end if;
+           //nu>0
         print("</tr>", fileName);
       end for;
 
@@ -1465,90 +1475,94 @@ listed in the last column might be not the most relevant one.
          + "cellpadding=\"3\" border=\"0\">", fileName);
       print("<tr><td><br></td><td><br></td><td><br></td>", fileName);
 
-    if ny>0 then//########
-      for i1 in 1:nx loop
-        print("<td style=\"text-align:center\" valign=\"top\"> " + ss.xNames[i1] + " </td>",
-          fileName);
-      end for;
-      for i1 in 1:dist loop
-        print("<td><br></td>", fileName);
-      end for;
-      for i1 in 1:nu loop
-        print("<td>" + ss.uNames[i1] + "</td>", fileName);
-      end for;
-    end if;//##########
+      if ny > 0 then
+        for i1 in 1:nx loop
+          print("<td style=\"text-align:center\" valign=\"top\"> " + ss.xNames[i1] + " </td>",
+            fileName);
+        end for;
+        for i1 in 1:dist loop
+          print("<td><br></td>", fileName);
+        end for;
+        for i1 in 1:nu loop
+          print("<td>" + ss.uNames[i1] + "</td>", fileName);
+        end for;
+      end if;
+           //ny>0
       print("</tr>", fileName);
 
-    if ny>0 then//########
+      if ny > 0 then
      //print upper parts of C and D
-      for i1 in 1:c2 loop
-        print("<tr> <td><br></td><td><br></td><td> " + ss.yNames[i1] + " </td>",
-          fileName);
-        for i2 in 1:nx loop
-          print("<td> " + String(ss.C[i1, i2], format=format) + " </td>",
+        for i1 in 1:c2 loop
+          print("<tr> <td><br></td><td><br></td><td> " + ss.yNames[i1] + " </td>",
             fileName);
-        end for;
+          for i2 in 1:nx loop
+            print("<td> " + String(ss.C[i1, i2], format=format) + " </td>",
+              fileName);
+          end for;
 
-        for i2 in 1:dist - 1 loop
-          print("<td><br></td>", fileName);
-        end for;
-        print("<td>" + ss.yNames[i1] + " </td>", fileName);
-        for i2 in 1:nu loop
-          print("<td> " + String(ss.D[i1, i2], format=format) + " </td>",
-            fileName);
-        end for;
+          for i2 in 1:dist - 1 loop
+            print("<td><br></td>", fileName);
+          end for;
+          print("<td>" + ss.yNames[i1] + " </td>", fileName);
+          for i2 in 1:nu loop
+            print("<td> " + String(ss.D[i1, i2], format=format) + " </td>",
+              fileName);
+          end for;
 
-        print("</tr>", fileName);
-      end for;
-    end if;//##########
+          print("</tr>", fileName);
+        end for;
+      end if;
+           //ny>0
 
      //print middle part of C and D
-    if ny>0 then//########
-      print("<tr><td>C</td><td>=</td><td>" + ss.yNames[c2 + 1] + " </td>",
-        fileName);
-      for i2 in 1:nx loop
-        print("<td> " + String(ss.C[c2 + 1, i2], format=format) + " </td>",
-          fileName);
-      end for;
-      for i2 in 1:dist - 3 loop
-        print("<td><br></td>", fileName);
-      end for;
-      print("<td>D</td><td>=</td><td>" + ss.yNames[min(c2 + 1, ny)] + " </td>",
-        fileName);
-
-      for i2 in 1:nu loop
-        print("<td> " + String(ss.D[c2 + 1, i2], format=format) + " </td>",
-          fileName);
-      end for;
-    else //#################
-      print("<tr><td>C</td><td>=</td><td>[ ]" + " </td>", fileName);
-      for i2 in 1:dist - 3 loop
-        print("<td><br></td>", fileName);
-      end for;
-      print("<td>D</td><td>=</td><td>[ ]" + " </td>", fileName);
-    end if;//##########
-
-     //print lower parts of C and D
-    if ny>0 then//########
-      for i1 in c2 + 2:ny loop
-        print("<tr><td><br></td><td><br></td><td> " + ss.yNames[i1] + " </td>",
+      if ny > 0 then
+        print("<tr><td>C</td><td>=</td><td>" + ss.yNames[c2 + 1] + " </td>",
           fileName);
         for i2 in 1:nx loop
-          print("<td> " + String(ss.C[i1, i2], format=format) + " </td>",
+          print("<td> " + String(ss.C[c2 + 1, i2], format=format) + " </td>",
             fileName);
         end for;
-
-        for i2 in 1:dist - 1 loop
+        for i2 in 1:dist - 3 loop
           print("<td><br></td>", fileName);
         end for;
-        print("<td>" + ss.yNames[i1] + " </td>", fileName);
+        print("<td>D</td><td>=</td><td>" + (if nu>0 then ss.yNames[min(c2 + 1, ny)] else "[ ],  empty matrix: " +String(ny)+" by "+String(nu)) + " </td>",
+          fileName);
+
         for i2 in 1:nu loop
-          print("<td> " + String(ss.D[i1, i2], format=format) + " </td>",
+          print("<td> " + String(ss.D[c2 + 1, i2], format=format) + " </td>",
             fileName);
         end for;
-        print("</tr>", fileName);
-      end for;
-    end if;//##########
+      else
+        print("<tr><td>C</td><td>=</td><td>[ ],  empty matrix: " +String(ny)+" by "+String(nx) + " </td>", fileName);
+        for i2 in 1:dist - 3 loop
+          print("<td><br></td>", fileName);
+        end for;
+        print("<td>D</td><td>=</td><td>[ ],  empty matrix: " +String(ny)+" by "+String(nu) + " </td>", fileName);
+      end if;
+           //ny>0
+
+     //print lower parts of C and D
+      if ny > 0 then
+        for i1 in c2 + 2:ny loop
+          print("<tr><td><br></td><td><br></td><td> " + ss.yNames[i1] + " </td>",
+            fileName);
+          for i2 in 1:nx loop
+            print("<td> " + String(ss.C[i1, i2], format=format) + " </td>",
+              fileName);
+          end for;
+
+          for i2 in 1:dist - 1 loop
+            print("<td><br></td>", fileName);
+          end for;
+          print("<td>" + ss.yNames[i1] + " </td>", fileName);
+          for i2 in 1:nu loop
+            print("<td> " + String(ss.D[i1, i2], format=format) + " </td>",
+              fileName);
+          end for;
+          print("</tr>", fileName);
+        end for;
+      end if;
+           // ny>0
 
       if description == "" then
         print("</table>\n", fileName);
@@ -1557,6 +1571,15 @@ listed in the last column might be not the most relevant one.
         print("<p>\n<b>Description</b>\n</p>", fileName);
         print(description, fileName);
       end if;
+
+      if ny==0 and nu==0 then
+        print("<p>\n<b>Note</b>, that matrices <b>B</b> and <b>C</b> are empty matrices, i.e. the system has neither inputs nor outputs!\n</p>", fileName);
+      elseif ny==0 then
+         print("<p>\n<b>Note</b>, that atrix <b>C</b> is empty matrix, i.e. the system has no outputs!\n</p>", fileName);
+      elseif nu==0 then
+         print("<p>\n<b>Note</b>, that matrix <b>B</b> is empty matrix, i.e. the system has no inputs!\n</p>", fileName);
+      end if;
+
       print("</body></html>", fileName);
 
     end printSystem;
@@ -1598,7 +1621,7 @@ listed in the last column might be not the most relevant one.
       if analyseOptions.printControllability and analyseOptions.printObservability then
         print((if isStable then " " else "not ") + "stable" + "\n<br>" + (if 
           isStable then if isControllable then "and it is " else "but it is not " else 
-                if isControllable then "but it is " else "and it is not") + "controllable"
+                if isControllable then "but it is " else "and it is not ") + "controllable"
            + (if isStable then "" else "\n<br>" + (if isControllable then " and therefore it is " else 
                 if isStabilizable then " but it is " else "and is not ") + "stabilizable")
            + "\n<br> The system is " + (if isObservable then " " else "not ") + "observable"
@@ -1608,7 +1631,7 @@ listed in the last column might be not the most relevant one.
       elseif not analyseOptions.printObservability and analyseOptions.printControllability then
         print((if isStable then " " else "not ") + "stable" + "\n<br>" + (if 
           isStable then if isControllable then "and it is " else "but it is not " else 
-                if isControllable then "but it is " else "and it is not") + "controllable"
+                if isControllable then "but it is " else "and it is not ") + "controllable"
            + (if isStable then "" else "\n<br>" + (if isControllable then " and therefore it is " else 
                 if isStabilizable then " but it is " else "and is not ") + "stabilizable")
            + "\n<br></br>", fileName);
@@ -2906,9 +2929,10 @@ end initialResponse;
       output Integer result;
 
     protected
-      Modelica_LinearSystems2.TransferFunction tf=StateSpace.Conversion.toTransferFunction(ss);
+      Modelica_LinearSystems2.TransferFunction tf= if StateSpace.Internal.isSISO(ss) then StateSpace.Conversion.toTransferFunction(ss) else TransferFunction(1);
 
   algorithm
+    assert(StateSpace.Internal.isSISO(ss),"System must be SISO but is "+ String(size(ss.B,2)) +"-by-" +String(size(ss.C,1)) +" system");
    result := size(tf.n,1)-1;
 
     annotation (Documentation(info="<html>
@@ -2953,9 +2977,10 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
     input Modelica_LinearSystems2.StateSpace ss;
     output Integer result;
     protected
-    Modelica_LinearSystems2.TransferFunction tf=StateSpace.Conversion.toTransferFunction(ss);
+    Modelica_LinearSystems2.TransferFunction tf= if StateSpace.Internal.isSISO(ss) then StateSpace.Conversion.toTransferFunction(ss) else TransferFunction(1);
 
   algorithm
+    assert(StateSpace.Internal.isSISO(ss),"System must be SISO but is "+ String(size(ss.B,2)) +"-by-" +String(size(ss.C,1)) +" system");
   result := size(tf.d,1)-1;
 
     annotation (Documentation(info="<html>
@@ -3005,11 +3030,13 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
     output Complex result "= tf(s)";
 
     protected
-    TransferFunction tf=StateSpace.Conversion.toTransferFunction(ss);
+    Boolean issiso=StateSpace.Internal.isSISO(ss);
+    TransferFunction tf= if issiso then StateSpace.Conversion.toTransferFunction(ss) else TransferFunction(1);
     Complex j=Modelica_LinearSystems2.Math.Complex.j();
     Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
     Real abs_den=Complex.'abs'(den);
   algorithm
+    assert(issiso,"System must be SISO but is "+ String(size(ss.B,2)) +"-by-" +String(size(ss.C,1)) +" system");
     den := if abs_den >= den_min then den else -abs_den + 0*j;
     result := Polynomial.evaluateComplex(Polynomial(tf.n), s)/den;
 
@@ -3338,7 +3365,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
     Real normA=max(Modelica.Math.Matrices.norm(ss.A, p=1),beta_small);
 
   algorithm
-    if min(size(ss.B)) == 0 or min(size(ss.B)) == 0 then
+    if min(size(ss.B)) == 0 or min(size(ss.C)) == 0 then
       Zeros := fill(Complex(0), 0);
     else
       (Ar,Br,Cr,Dr,n,m,p) := StateSpace.Internal.reduceRosenbrock(ss.A, ss.B, ss.C, ss.D);
@@ -3761,6 +3788,7 @@ end Analysis;
       Real poleError;
       Modelica_LinearSystems2.Math.Complex smaller;
     algorithm
+      assert(StateSpace.Internal.isSISO(ss),"System must be SISO but is "+ String(size(ss.B,2)) +"-by-" +String(size(ss.C,1)) +" system");
       cm := StateSpace.Analysis.controllabilityMatrix(ss);
       assert(Modelica.Math.Matrices.rank(cm) == size(cm, 1) or 
         Modelica.Math.Matrices.rank(cm) == size(cm, 2),
@@ -7479,7 +7507,7 @@ The unobservable poles are checked to be stable.
  
  
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-              -100},{100,100}}),   graphics));
+                -100},{100,100}}), graphics));
   equation
 
   end isDetectableMIMO;
@@ -7634,28 +7662,35 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
 
-     input StateSpace ss;
-     input Modelica_LinearSystems2.Types.StaircaseMethod method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+      input StateSpace ss;
+      input Modelica_LinearSystems2.Types.StaircaseMethod method=
+          Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
 
-    annotation (Documentation(info="<html>
+      annotation (Documentation(info="<html>
  
  
  
 </html>"));
     protected
-    StateSpace ss2=StateSpace.Internal.transposeStateSpace(ss);
+      StateSpace ss2=StateSpace.Internal.transposeStateSpace(ss);
 
     public
-    output Boolean observable;
+      output Boolean observable;
   algorithm
-    assert(method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD or method == Modelica_LinearSystems2.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore, 
+      assert(method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD or
+        method == Modelica_LinearSystems2.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore, 
 the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isControllableMIMO\" has to be qr or svd but is method = "
-       + String(method));
-    if method == Modelica_LinearSystems2.Types.StaircaseMethod.QR then
-      observable := StateSpace.Internal.staircaseQR(ss2);
-    else
-      observable := StateSpace.Internal.staircaseSVD(ss2);
-    end if;
+         + String(method));
+      if min(size(ss.C)) == 0 then
+        observable := false;
+      else
+        if method == Modelica_LinearSystems2.Types.StaircaseMethod.QR then
+          observable := StateSpace.Internal.staircaseQR(ss2);
+        else
+          observable := StateSpace.Internal.staircaseSVD(ss2);
+        end if;
+
+      end if;
 
   end isObservableMIMO;
 
@@ -7756,6 +7791,7 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
     Integer rankR;
 
   algorithm
+    if nu > 0 then
     if nx > 1 then
 
        //#####  first step of staircase
@@ -7834,6 +7870,16 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
           r=stairStep);
 
     isControllable := stairStep == nx;
+    else // no inputs, nu==0
+    isControllable := false;
+    ssm1 :=  Modelica_LinearSystems2.Internal.StateSpaceR(
+          A=ss.A,
+          B=ss.B,
+          C=ss.C,
+          D=ss.D,
+          r=0);
+    P := identity(nu);
+    end if;
 
     annotation (Documentation(info="<html>
 This algorithm usues QR factorization to generate staircase form i.e. block upper Hessenberg form of the pair (A,B). Due to the well known problem to determine 
@@ -9383,6 +9429,7 @@ This condition is however not fulfilled because the number of outputs is ny = "
   //rankR:=Modelica.Math.Matrices.rank(R);
 
         DD := R[1:rankR, :];
+
         CC := transpose(V2)*C2;
 
         sigma := rankR;
