@@ -5,7 +5,8 @@ model Discretization "Demonstrates the discretization methods"
   parameter Real D=0.1;
   Modelica_LinearSystems2.Controller.SecondOrder continuous(w=w, D=D) 
     annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
-  inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(sampleTime=0.01) 
+  inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(sampleTime=
+        0.01) 
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
   Modelica.Blocks.Sources.Step step(
     height=1.2,
@@ -21,7 +22,9 @@ with the supported discretization methods. The step starts with an offset at 0.1
 to demonstrate the steady-state initialization.
 </p>
 
-</html>"));
+</html>"),
+    experiment(Tolerance=1e-006),
+    experimentSetupOutput);
   Modelica_LinearSystems2.Controller.SecondOrder explicitEuler(
     w=w,
     D=D,
