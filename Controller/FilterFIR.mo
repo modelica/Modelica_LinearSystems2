@@ -3,23 +3,23 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
   import Modelica_LinearSystems2.Controller.Types.FIRspec;
   import Modelica_LinearSystems2.Controller.Types.BlockType;
   extends Interfaces.PartialSISO_equality;
-  parameter FIRspec specType=Modelica_LinearSystems2.Controller.Types.FIRspec.MeanValue
-    "Specification type of FIR filter" annotation(Dialog(enable=blockType<>BlockType.Continuous));
-  parameter Integer L(min=2) = 2 "Length of mean value filter" annotation(Dialog(enable=blockType<>BlockType.Continuous and specType==FIRspec.MeanValue));
+  parameter Modelica_LinearSystems2.Controller.Types.FIRspec specType=Modelica_LinearSystems2.Controller.Types.FIRspec.MeanValue
+    "Specification type of FIR filter" annotation(Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous));
+  parameter Integer L(min=2) = 2 "Length of mean value filter" annotation(Dialog(group="Mean value filter",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.MeanValue));
   parameter Modelica_LinearSystems2.Types.FilterType filterType=
       Modelica_LinearSystems2.Types.FilterType.LowPass "Type of filter" 
-                            annotation(Dialog(enable=blockType<>BlockType.Continuous and specType==FIRspec.Window));
-  parameter Integer order(min=1) = 2 "Order of filter" annotation(Dialog(enable=blockType<>BlockType.Continuous and specType==FIRspec.Window));
-  parameter Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency" annotation(Dialog(enable=blockType<>BlockType.Continuous and specType==FIRspec.Window));
+                            annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
+  parameter Integer order(min=1) = 2 "Order of filter" annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
+  parameter Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency" annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
   parameter Types.Window window=Modelica_LinearSystems2.Controller.Types.Window.Rectangle
-    "Type of window" annotation(Dialog(enable=blockType<>BlockType.Continuous and specType==FIRspec.Window));
+    "Type of window" annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
   parameter Real beta=2.12 "Beta-Parameter for Kaiser-window" 
-    annotation(Dialog(enable=blockType<>BlockType.Continuous and specType==FIRspec.Window and window==Modelica_LinearSystems2.Controller.Types.Window.Kaiser));
-  parameter Real a[:]={1,1} "FIR filter coefficients" annotation(Dialog(enable=blockType<>BlockType.Continuous and specType==FIRspec.Coefficients));
+    annotation(Dialog(group="FIR filter design",enable=blockType<>BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window and window==Modelica_LinearSystems2.Controller.Types.Window.Kaiser));
+  parameter Real a[:]={1,1} "FIR filter coefficients" annotation(Dialog(group="FIR filter defined by coefficient vector",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Coefficients));
 
   annotation (defaultComponentName="filter",Icon(coordinateSystem(
-          preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics=
-         {
+          preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics
+        ={
         Polygon(
           points={{-82,88},{-90,66},{-74,66},{-82,86},{-82,88}},
           lineColor={192,192,192},
@@ -43,7 +43,7 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
           fillPattern=FillPattern.Backward),
         Line(points={{-82,30},{-70,30},{-50,28},{-30,20},{-24,16},{-20,12},{-16,
               6},{-12,-4},{-2,-46},{2,-64},{4,-82}}, color={0,0,127}),
-        Line(points={{4,-82},{6,-64},{10,-56},{14,-56},{18,-60},{20,-66},{22,-82}},
+        Line(points={{4,-82},{6,-64},{10,-56},{14,-56},{18,-60},{20,-66},{22,-82}}, 
             color={0,0,127}),
         Line(points={{22,-80},{22,-78},{22,-72},{24,-66},{26,-64},{30,-64},{34,
               -66},{36,-70},{38,-78},{38,-82},{38,-74},{40,-68},{42,-66},{46,-66},
