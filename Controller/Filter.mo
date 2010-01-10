@@ -86,9 +86,12 @@ protected
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics),
-    Documentation(info="<HTML>
-
-</HTML>
+    Documentation(info="<html>
+<p>
+For details of the filter characteristics, see
+<a href=\"Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>.
+</p>
+</html>
 "));
 
 end Filter;
