@@ -29,9 +29,15 @@ block LimPID
         Line(points={{-80,-80},{-80,50},{-73,-20},{30,60},{80,60}}, color={0,0,
               127}),
         Text(
-          extent={{-20,-20},{80,-60}},
+          extent={{-35,-22},{79,-60}},
           lineColor={192,192,192},
-          textString="PID")}),
+          textString="PID"),
+        Text(
+          extent={{-85,93},{91,61}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
     Documentation(info="<HTML>
 <p>
 Via parameter <b>controllerType</b> either <b>P</b>, <b>PI</b>, <b>PD</b>, 

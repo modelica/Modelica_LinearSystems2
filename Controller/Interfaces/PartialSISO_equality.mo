@@ -2,7 +2,9 @@ within Modelica_LinearSystems2.Controller.Interfaces;
 partial block PartialSISO_equality
   "Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block"
   extends Icons.PartialBlockIcon(cont=continuous);
-  parameter Types.BlockTypeWithGlobalDefault blockType=Types.BlockTypeWithGlobalDefault.UseSampleClockOption
+  import Modelica_LinearSystems2.Controller.Types;
+  parameter Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault
+    blockType =                                                                           Types.BlockTypeWithGlobalDefault.UseSampleClockOption
     "Type of block (Continuous/Discrete)" 
     annotation(Evaluate=true, Hide=true);
   final parameter Boolean continuous = blockType == Types.BlockTypeWithGlobalDefault.Continuous or 
@@ -10,7 +12,7 @@ partial block PartialSISO_equality
                                  sampleClock.blockType == Types.BlockType.Continuous
     "= true, if continuous block, otherwise discrete block";
   parameter Integer sampleFactor(min=1)=1 if not continuous
-    "Ts=sampleClock.sampleTime*sampleFactor" 
+    "Sample time = sampleFactor * sampleClock.sampleTime" 
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block" 

@@ -9,6 +9,7 @@ DiscreteSampler
 DiscreteStateSpace
 DiscreteStateSpace2
 DiscreteUnitDelay
+DiscreteInterpolator
 FIR_coefficients
 FIR_window
 random

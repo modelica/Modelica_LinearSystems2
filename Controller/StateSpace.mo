@@ -43,7 +43,13 @@ block StateSpace "Continuous or discrete state space system block"
         Text(
           extent={{0,0},{100,-100}},
           lineColor={0,0,127},
-          textString="D")}),
+          textString="D"),
+        Text(
+          extent={{-96,18},{100,-16}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
     Window(
       x=0.27,
       y=0.13,

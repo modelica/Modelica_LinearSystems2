@@ -9,14 +9,20 @@ block UnitDelay
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={
         Text(
-          extent={{-94,10},{86,90}},
+          extent={{-92,6},{88,72}},
           lineColor={0,0,127},
           textString="1"),
-        Line(points={{-66,0},{72,0}}, color={0,0,127}),
+        Line(points={{-70,2},{68,2}}, color={0,0,127}),
         Text(
-          extent={{-94,-10},{86,-90}},
+          extent={{-86,2},{88,-82}},
           lineColor={0,0,127},
-          textString="z")}),
+          textString="z"),
+        Text(
+          extent={{-90,-108},{86,-140}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
     Window(
       x=0.37,
       y=0.09,

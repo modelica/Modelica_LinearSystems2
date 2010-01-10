@@ -22,9 +22,15 @@ block PID "PID-controller in additive description form"
         Line(points={{-80,-80},{-80,50},{-73,-20},{30,60},{80,60}}, color={0,0,
               127}),
         Text(
-          extent={{-20,-20},{80,-60}},
+          extent={{-46,-21},{80,-60}},
           lineColor={192,192,192},
-          textString="PID")}),
+          textString="PID"),
+        Text(
+          extent={{-102,85},{74,53}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
     Documentation(info="<HTML>
 <p>
 This is the text-book version of a PID-controller.

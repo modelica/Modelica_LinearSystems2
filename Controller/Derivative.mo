@@ -69,12 +69,18 @@ n = {k,0}, d = {T,1}.
           textString="k=%k"),
         Line(points={{-80,-80},{-80,60},{-70,17.95},{-60,-11.46},{-50,-32.05},{
               -40,-46.45},{-30,-56.53},{-20,-63.58},{-10,-68.51},{0,-71.96},{10,
-              -74.37},{20,-76.06},{30,-77.25},{40,-78.07},{50,-78.65},{60,-79.06}},
+              -74.37},{20,-76.06},{30,-77.25},{40,-78.07},{50,-78.65},{60,-79.06}}, 
             color={0,0,127}),
         Text(
-          extent={{0,0},{60,60}},
+          extent={{-58,-18},{94,24}},
           lineColor={192,192,192},
-          textString="DT1")}),
+          textString="DT1"),
+        Text(
+          extent={{-76,86},{98,54}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},

@@ -61,7 +61,13 @@ interpreted as \"initType = InitialState\".
           extent={{-150,-150},{150,-110}},
           lineColor={0,0,0},
           textString="k=%k"),
-        Line(points={{-80,-80},{80,80}}, color={0,0,127})}),
+        Line(points={{-80,-80},{80,80}}, color={0,0,127}),
+        Text(
+          extent={{-94,78},{88,46}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

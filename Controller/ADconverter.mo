@@ -17,21 +17,27 @@ block ADconverter "Analog to digital converter (including sampler)"
           lineColor={0,0,0},
           textString="bits=%bits"),
         Text(
-          extent={{-98,98},{-18,18}},
+          extent={{-94,58},{-30,-4}},
           lineColor={0,0,127},
           textString="A"),
         Text(
-          extent={{18,-18},{98,-98}},
+          extent={{28,-36},{98,-98}},
           lineColor={0,0,127},
           textString="D"),
         Line(
           points={{-28,20},{16,-24}},
-          color={0,0,255},
+          color={0,0,0},
           smooth=Smooth.None),
         Polygon(
           points={{12,-28},{20,-20},{24,-32},{12,-28}},
-          lineColor={0,0,255},
-          smooth=Smooth.None)}),
+          lineColor={0,0,0},
+          smooth=Smooth.None),
+        Text(
+          extent={{-96,90},{76,60}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
     Documentation(info="<html>
 <p>
 If <b>discrete</b> block, the output y is sampled according to sample time

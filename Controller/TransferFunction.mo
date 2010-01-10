@@ -41,7 +41,13 @@ block TransferFunction
         Text(
           extent={{-90,-10},{90,-90}},
           lineColor={0,0,127},
-          textString="d(s)")}),
+          textString="d(s)"),
+        Text(
+          extent={{-96,-106},{100,-140}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

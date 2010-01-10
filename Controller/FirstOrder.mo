@@ -48,7 +48,13 @@ block FirstOrder
         Line(points={{-80,-78},{-70,-43.11},{-60,-17.58},{-50,1.0913},{-40,
               14.75},{-30,24.75},{-20,32.06},{-10,37.41},{0,41.33},{10,44.19},{
               20,46.29},{30,47.82},{40,48.94},{50,49.76},{60,50.36},{70,50.8},{
-              80,51.12}}, color={0,0,127})}),
+              80,51.12}}, color={0,0,127}),
+        Text(
+          extent={{-78,92},{98,60}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

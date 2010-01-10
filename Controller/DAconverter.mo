@@ -25,20 +25,26 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
             -100},{100,100}}), graphics={
         Text(
-          extent={{18,-18},{98,-98}},
+          extent={{30,-34},{96,-94}},
           lineColor={0,0,127},
           textString="A"),
         Line(points={{-100,-100},{100,100}}, color={0,0,127}),
         Text(
-          extent={{-98,98},{-18,18}},
+          extent={{-96,60},{-24,8}},
           lineColor={0,0,127},
           textString="D"),
         Line(
           points={{-26,24},{18,-20}},
-          color={0,0,255},
+          color={0,0,0},
           smooth=Smooth.None),
         Polygon(
           points={{14,-24},{22,-16},{26,-28},{14,-24}},
-          lineColor={0,0,255},
-          smooth=Smooth.None)}));
+          lineColor={0,0,0},
+          smooth=Smooth.None),
+        Text(
+          extent={{-92,92},{84,60}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}));
 end DAconverter;

@@ -33,7 +33,7 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
           fillPattern=FillPattern.Solid),
         Line(points={{-92,-82},{80,-82}}, color={192,192,192}),
         Text(
-          extent={{-20,82},{86,40}},
+          extent={{-14,32},{92,-10}},
           lineColor={192,192,192},
           textString="FIR"),
         Rectangle(
@@ -49,7 +49,13 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
               -66},{36,-70},{38,-78},{38,-82},{38,-74},{40,-68},{42,-66},{46,-66},
               {48,-68},{50,-72},{52,-78},{52,-82},{52,-78},{54,-70},{56,-68},{
               60,-68},{64,-72},{66,-76},{66,-78},{66,-80},{66,-82}}, color={0,0,
-              127})}));
+              127}),
+        Text(
+          extent={{-72,86},{98,52}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}));
 protected
   parameter Real a2[:]=Internal.FIR_coefficients(
       specType,

@@ -5,7 +5,7 @@ block Sampler
 
   annotation (
    Icon(coordinateSystem(
-        preserveAspectRatio=false,
+        preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={
         Ellipse(
@@ -20,7 +20,13 @@ block Sampler
           fillPattern=FillPattern.Solid),
         Line(points={{-100,0},{-45,0}}, color={0,0,127}),
         Line(points={{45,0},{100,0}}, color={0,0,127}),
-        Line(points={{-35,0},{30,35}}, color={0,0,127})}),
+        Line(points={{-35,0},{30,35}}, color={0,0,127}),
+        Text(
+          extent={{-98,-30},{98,-64}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
     Window(
       x=0.37,
       y=0.09,

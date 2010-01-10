@@ -20,19 +20,13 @@ to demonstrate the steady-state initialization.
     experiment(Tolerance=1e-006),
     experimentSetupOutput);
 
-
-
-
-
-
   Modelica_LinearSystems2.Controller.SecondOrder impulseExact(
     D=D,
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete, 
-
-    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ImpulseExact, 
-
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ImpulseExact,
     w=w) 
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
+
   Modelica_LinearSystems2.Controller.SecondOrder continuous(D=D, w=w) 
     annotation (Placement(transformation(extent={{2,0},{22,20}})));
   Derivative derivative(T=1e-8) 
@@ -49,11 +43,11 @@ to demonstrate the steady-state initialization.
       Placement(transformation(extent={{-80,0},{-60,20}})));
   Modelica_LinearSystems2.Controller.SecondOrder stepExact(
     D=D,
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete, 
-
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
     w=w,
-    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact)
+    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact) 
     annotation (Placement(transformation(extent={{0,-80},{20,-60}})));
+
 equation
   connect(pulse.y, impulseExact.u)  annotation (Line(
       points={{-59,-30},{-2,-30}},

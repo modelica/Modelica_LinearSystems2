@@ -48,7 +48,7 @@ protected
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={
         Rectangle(
-          extent={{-96,98},{96,-94}},
+          extent={{-96,96},{96,-96}},
           lineColor={230,230,255},
           fillColor={230,230,255},
           fillPattern=FillPattern.Solid),
@@ -65,11 +65,11 @@ protected
           fillColor={192,192,192},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{-62,88},{90,38}},
+          extent={{-66,60},{88,22}},
           lineColor={192,192,192},
           textString="filter"),
         Text(
-          extent={{-150,-110},{150,-140}},
+          extent={{-136,-104},{164,-134}},
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
@@ -81,7 +81,13 @@ protected
           lineColor={160,160,164},
           fillColor={255,255,255},
           fillPattern=FillPattern.Backward),
-        Line(points={{22,10},{30,-2},{36,-20},{40,-32},{44,-58},{46,-78}})}),
+        Line(points={{22,10},{30,-2},{36,-20},{40,-32},{44,-58},{46,-78}}),
+        Text(
+          extent={{-70,96},{98,66}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

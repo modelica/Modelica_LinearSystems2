@@ -17,6 +17,7 @@ LimPID
 UnitDelay
 ADconverter
 DAconverter
+Interpolator
 MatrixGain
 Noise
 Icons

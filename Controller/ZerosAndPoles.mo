@@ -31,14 +31,20 @@ block ZerosAndPoles
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={
         Text(
-          extent={{-92,10},{88,90}},
+          extent={{-88,-8},{90,52}},
           lineColor={0,0,127},
           textString="k*z(s)"),
-        Line(points={{-82,0},{78,0}}, color={0,0,127}),
+        Line(points={{-82,-20},{78,-20}}, color={0,0,127}),
         Text(
-          extent={{-92,-10},{88,-90}},
+          extent={{-92,-24},{88,-86}},
           lineColor={0,0,127},
-          textString="p(s)")}),
+          textString="p(s)"),
+        Text(
+          extent={{-100,96},{96,62}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
