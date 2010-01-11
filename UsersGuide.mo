@@ -503,7 +503,7 @@ New functions are:
 </p>
 
 <ul>
-<li> A  <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.sylvester\">solver for Syslvester eqautions</a>  using a Schur method.</li>
+<li> A  <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.sylvester\">solver for Syslvester equations</a>  using a Schur method.</li>
 <li> The function  <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a> to calculate the orthogonal nullspace and obligatorily the dimension (nullity) of the nullspace of a matrix.</li> 
 <li>  Functions <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">conditionNumber</a> and <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">rcond</a> to calculate the condition number and the reciprocal condition number of a matrix respectively.</li> 
 </ul>
@@ -514,7 +514,7 @@ Furthermore, several bugs have been fixed:
 
 <ul>
 <li>Redundant results for initial responses of multi input state space systems have been fixed.</li> 
-<li>Several functions have been modified to work (or to terminate correctly) for state space system without in-and/or putputs:
+<li>Several functions have been modified to work (or to terminate correctly) for state space system without in- and/or putputs:
 <ul>
 <li><a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">Analysis.analysis</a></li>
 <li><a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros\">Analysis.invariantZeros</a></li>
