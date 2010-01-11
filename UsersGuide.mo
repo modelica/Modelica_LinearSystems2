@@ -492,6 +492,42 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
+    class Version_2_1 "Version 2.1 (January 15, 2010)"
+
+      annotation (Documentation(info="<html>
+<p>
+This release comprises bug fixes and some few new functions.
+</p>
+<p>
+New functions are:
+</p>
+
+<ul>
+<li> A  <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.sylvester\">solver for Syslvester eqautions</a>  using a Schur method.</li>
+<li> The function  <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a> to calculate the orthogonal nullspace and obligatorily the dimension (nullity) of the nullspace of a matrix.</li> 
+<li>  Functions <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">conditionNumber</a> and <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">rcond</a> to calculate the condition number and the reciprocal condition number of a matrix respectively.</li> 
+</ul>
+  
+<p>
+Furthermore, several bugs have been fixed: 
+</p>
+
+<ul>
+<li>Redundant results for initial responses of multi input state space systems have been fixed.</li> 
+<li>Several functions have been modified to work (or to terminate correctly) for state space system without in-and/or putputs:
+<ul>
+<li><a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">Analysis.analysis</a></li>
+<li><a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros\">Analysis.invariantZeros</a></li>
+<li>Check for controllability and observability</li> 
+<li>Staircase algorithm to reduce a system to controller Hessenberg form</li> 
+<li>Computation of controllable/uncontrollable poles</li> 
+</ul></li> 
+</ul>
+  
+</html>
+"));
+    end Version_2_1;
+
     class Version_2_0 "Version 2.0 (September 2, 2009)"
 
       annotation (Documentation(info="<html>

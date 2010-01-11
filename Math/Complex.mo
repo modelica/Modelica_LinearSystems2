@@ -634,6 +634,7 @@ end Matrices;
       input Real im=0 "Imaginary part of complex number";
       output Complex result(re=re, im=im) "Complex number";
     algorithm
+
       annotation(Inline=true);
     end fromReal;
   end 'constructor';
@@ -961,6 +962,95 @@ inputs and the number of outputs must be identical.
     end for;
 
   end eigenValues;
+
+encapsulated function eigenVectors
+    "Calculate the rigth eigenvectors of a linear state space system and write them columnwise in a matrix."
+  import Modelica;
+  import Modelica.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.Math.Complex;
+  import Re = Modelica_LinearSystems2.Math.Complex.real;
+  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+
+  input Real A[:,size(A, 1)] "real square matrix";
+  output Complex eigvec[size(A, 1),size(A, 2)] "eigen values of the system";
+  output Complex eigval[size(A, 1)]=fill(Complex(0), size(A, 1))
+      "eigen values of the system";
+  protected
+  Integer info;
+  Real eigvecRe[size(A, 1),size(A, 2)];
+  Real eigvalRe[size(A, 1)]=fill(0, size(A, 1));
+  Real eigvalIm[size(A, 1)]=fill(0, size(A, 1));
+  Integer n=size(A, 1);
+  Integer i;
+  Complex j=Complex.j();
+algorithm
+  if size(A, 1) > 0 then
+
+    (eigvalRe,eigvalIm,eigvecRe,info) := LAPACK.dgeev(A);
+    for i in 1:size(A, 1) loop
+      eigval[i].re := eigvalRe[i];
+      eigval[i].im := eigvalIm[i];
+    end for;
+
+    assert(info == 0, "Calculating the eigen values with function
+\"StateSpace.Analysis.eigenVectors\" is not possible, since the
+numerical algorithm does not converge.");
+
+    i := 1;
+    while i < n loop
+      if abs(eigvalIm[i]) > 0 then
+        for ii in 1:n loop
+          eigvec[ii, i] := eigvecRe[ii, i] + j*eigvecRe[ii, i + 1];
+          eigvec[ii, i + 1] := eigvecRe[ii, i] - j*eigvecRe[ii, i + 1];
+        end for;
+        i := i + 2;
+      else
+        for ii in 1:n loop
+          eigvec[ii, i] := Complex(1)*eigvecRe[ii, i];
+        end for;
+        i := i + 1;
+      end if;
+    end while;
+
+  end if;
+
+  annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  (eigenvectors, eigenvalues) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>eigenVectors</b>(ss, onlyEigenvectors)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of a state space system. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <b>ss.A</b>. Just like in <a href=\"Modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
+The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
+
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+      A=[-1,1;-1,-1],
+      B=[1;1],
+      C=[1,1],
+      D=[0]);
+
+   Real eigenvectors[2,2];
+   Complex eigenvalues[2];
+
+<b>algorithm</b>
+  (eigenvectors, eigenvalues) = Modelica_LinearSystems2.StateSpace.Analysis.eigenVectors(ss, true);
+// eigenvectors = [0.707, 0; 0, 0.707]
+// eigenvalues = {-1 + 1j, -1 - 1j}
+
+          |0.707 |         | 0.707 |
+i.e. v1 = |      |,   v2 = |       |
+          |0.707i|         |-0.707i|
+</pre></blockquote>
+
+
+</html> "));
+end eigenVectors;
 
   encapsulated function frequency
     "Frequency and damping of conjugated complex pole pair"
