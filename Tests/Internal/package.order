@@ -8,3 +8,11 @@ wrapper_xBase
 xBase
 getMatFiles
 getMoFiles
+complexMatrices
+getCareMoFiles
+multiplyComplexMatrices
+multiplyRealMatrices
+multiplyRealMatrices2
+multiplyRealMatrices3
+multiplyRealMatrices3cCall
+realMatrices

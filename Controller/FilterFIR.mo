@@ -56,6 +56,7 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="%sampleFactor")}));
+
 protected
   parameter Real a2[:]=Internal.FIR_coefficients(
       specType,
@@ -71,6 +72,7 @@ protected
     sampleFactor=sampleFactor,
     a=a2) if  not continuous "FIR realization";
 equation
+ assert(f_cut<=1/(2*sampleClock.sampleTime*sampleFactor),"The cut-off frequency f_cut may not be greater than half the sample frequency (Nyquist frequency), i.e. f_cut <= " + String(1/2/sampleClock.sampleTime*sampleFactor) + " but is "+String(f_cut));
   if continuous then
     y = u;
   end if;

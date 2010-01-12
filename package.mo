@@ -5,7 +5,7 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 - Analysis, Synthesis a
 annotation (
   preferredView="info",
   uses(Modelica(version="3.1")),
-   version="2.0",
+   version="2.1",
    versionBuild=2,
    versionDate="2009-09-02",
    dateModified = "2009-09-02 06:15:59Z",

@@ -18,7 +18,7 @@ function FIR_coefficients "Calculates the FIR-filter coefficient vector"
     annotation(Dialog(enable=specType==FIRspec.Window and window==Modelica_LinearSystems2.Controller.Types.Window.Kaiser));
   input Real a_desired[:]={1,1} "FIR filter coefficients" annotation(Dialog(enable=specType==FIRspec.Coefficients));
   output Real a[if specType==FIRspec.MeanValue then L else 
-                     (if specType == FIRspec.Window then order+1 else 
+                     (if specType == FIRspec.Window then if mod(order,2)>0 and filterType == FilterType.HighPass then order+2 else order+1 else 
                      size(a_desired,1))] "Filter coefficients";
 
   annotation (
@@ -57,22 +57,21 @@ The beta parameter is only needed by the Kaiser window.
 "));
 protected
   constant Real pi=Modelica.Constants.pi;
+  Boolean isEven=mod(order,2)==0;
+  Integer order2 = if not isEven and filterType == FilterType.HighPass then order+1 else order;
   Real Wc=2*pi*f_cut*Ts;
   Integer i;
-  Real w[order + 1];
+  Real w[order2 + 1];
   Real k;
 algorithm
+assert(f_cut<=1/(2*Ts),"The cut-off frequency f_cut may not be greater than half the sample frequency (Nyquist frequency), i.e. f_cut <= " + String(1/(2*Ts)) + " but is "+String(f_cut));
   if specType == FIRspec.MeanValue then
      a := fill(1/L, L);
   elseif specType == FIRspec.Window then
-     Modelica.Utilities.Streams.error(
-         "  There seems to be a bug when calculating the FIR coefficients for\n"+
-         "  specType = FIRspec.Window. Therefore, the calculation is temporarily\n" +
-         "  switched off");
-     (w) := Internal.FIR_window(order + 1, window, beta);
-     for i in 1:order + 1 loop
-       k := i - 1 - order/2;
-       if i - 1 == order/2 then
+     w := Internal.FIR_window(order2 + 1, window, beta);
+     for i in 1:order2 + 1 loop
+       k := i - 1 - order2/2;
+       if i - 1 == order2/2 then
          a[i] := if filterType == FilterType.LowPass then Wc*w[i]/pi else 
                  w[i] - Wc*w[i]/pi;
        else
@@ -82,5 +81,8 @@ algorithm
      end for;
   else
      a := a_desired;
-  end if;
+       end if;
+       if not isEven and filterType == FilterType.HighPass then
+         Modelica.Utilities.Streams.print("The requested order of the FIR filter in FIR_coefficients is odd and has been increased by one to get an even order filter\n");
+       end if;
 end FIR_coefficients;

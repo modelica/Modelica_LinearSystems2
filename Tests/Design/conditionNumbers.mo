@@ -41,13 +41,18 @@ algorithm
   end for;
   //performance indices
   // condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2
-  kappa2X := Complex.Matrices.conditionNumber(X);
-  kappaFroX := Complex.Matrices.conditionNumber(X, 3);
+  kappa2X := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber(
+                                              X);
+  kappaFroX := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber(
+                                                X, 3);
   cInf := Modelica.Math.Vectors.norm(c, Modelica.Constants.inf);
   norm2K := Modelica.Math.Matrices.norm(K);
   normFroK := Matrices.norm(K, 3);
-  kappaFroYT := Complex.Matrices.conditionNumber(YT, 3);
-  kappa2X_B := Complex.Matrices.norm(X)^2 + Complex.Matrices.norm(YT)^2;
+  kappaFroYT := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber(
+                                                 YT, 3);
+  kappa2X_B := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm(
+                                     X)^2 + Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm(
+                                                                  YT)^2;
   JXK := array(alpha/2*kappa2X_B + (1 - alpha)/2*normFroK^2 for alpha in 0:0.1:1);
   annotation (Documentation(info="<html>
 </html>"));

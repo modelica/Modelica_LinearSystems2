@@ -55,7 +55,8 @@ public
 algorithm
 //  use single input method
   if isSI and size(data.B, 2)==1 then
-    K := StateSpace.Internal.assignPolesSI_rq(ss,data.assignedPoles);
+    K := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesSI_rq(
+                                              ss,data.assignedPoles);
     ss.A := ss.A-ss.B*K;
     (Xre,calcPoles) := StateSpace.Analysis.eigenVectors(ss,false);
     X := Complex(1)*Xre;
@@ -63,7 +64,8 @@ algorithm
 
   if method == Tests.Types.AssignPolesMethod.KNV then
 // extented robust KNV-algortihm according to MATLAB's place-function
-     (K,X) := Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob(data.A, data.B, data.assignedPoles);
+     (K,X) := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob(
+                                                                            data.A, data.B, data.assignedPoles);
      S := data.A - data.B*K;
      calcPoles := Complex.eigenValues(S);
      if isKprovided then

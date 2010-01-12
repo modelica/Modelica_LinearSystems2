@@ -28,7 +28,8 @@ protected
   Integer ii;
 
 algorithm
-  (U0, Z, S_real, S_imag, rankB) :=Modelica_LinearSystems2.StateSpace.Internal.wrapper_xBase(A, B, gamma_real, gamma_imag, ncp);
+  (U0, Z, S_real, S_imag, rankB) :=Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.wrapper_xBase(
+                                                                                             A, B, gamma_real, gamma_imag, ncp);
   assert(m==rankB,"Input matrix B must have full column rank");
   for i in 1:n loop
     for ii in 1:(n-ncp)*m loop
