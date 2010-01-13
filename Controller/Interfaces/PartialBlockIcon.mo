@@ -19,6 +19,4 @@ partial block PartialBlockIcon
       y=0.33,
       width=0.59,
       height=0.43));
-equation
-
 end PartialBlockIcon;

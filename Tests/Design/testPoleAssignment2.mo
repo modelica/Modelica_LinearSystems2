@@ -12,10 +12,6 @@ function testPoleAssignment2
   import Modelica_LinearSystems2.Tests.Internal.DesignData;
   import Modelica_LinearSystems2.StateSpace;
 
-  annotation (Documentation(info="<html>
-<p>
-Computes the feedback gain K for the state space system according to assigned close loop poles
-</html>"));
 
   input String dataFile=TestDataDir + "data_Byers6.mat" annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                      caption="state space system data file"),enable = systemOnFile));
@@ -122,4 +118,8 @@ algorithm
   end if;
   print("Jalpha = " + Modelica_LinearSystems2.Math.Vectors.printVector(Jalpha),outputFile);
 
+  annotation (Documentation(info="<html>
+<p>
+Computes the feedback gain K for the state space system according to assigned close loop poles
+</html>"));
 end testPoleAssignment2;

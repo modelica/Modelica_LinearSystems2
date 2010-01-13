@@ -14,6 +14,32 @@ function toUpperHessenberg
   output Real tau[size(A, 1) - 1];
   output Integer info;
 
+
+protected
+  Integer n=size(A, 1);
+  Real Aout[size(A, 1),size(A, 2)];
+  Integer i;
+
+algorithm
+  (Aout,tau,info) := LAPACK.dgehrd(
+    A,
+    ilo,
+    ihi);
+  H[1:2, 1:ihi] := Aout[1:2, 1:ihi];
+  H[1:2, ihi + 1:n] := A[1:2, ihi + 1:n];
+
+  for i in 3:n loop
+    H[i, i - 1:ihi] := Aout[i, i - 1:ihi];
+    H[i, ihi + 1:n] := A[i, ihi + 1:n];
+  end for;
+
+  for i in 1:min(n - 2, ihi) loop
+    V[i + 1, i] := 1.0;
+    V[i + 2:n, i] := Aout[i + 2:n, i];
+
+  end for;
+  V[n, n - 1] := 1;
+
   annotation (Documentation(info="<html>
 <b>This function uses DGEHRD-LAPACK routine to calculate a real general matrix A to upper Hessenberg form H by an orthogonal similarity transformation:  Q' * A * Q = H.</b>
 <p>
@@ -130,30 +156,4 @@ Outputs are
  
    =====================================================================  
 "));
-
-protected
-  Integer n=size(A, 1);
-  Real Aout[size(A, 1),size(A, 2)];
-  Integer i;
-
-algorithm
-  (Aout,tau,info) := LAPACK.dgehrd(
-    A,
-    ilo,
-    ihi);
-  H[1:2, 1:ihi] := Aout[1:2, 1:ihi];
-  H[1:2, ihi + 1:n] := A[1:2, ihi + 1:n];
-
-  for i in 3:n loop
-    H[i, i - 1:ihi] := Aout[i, i - 1:ihi];
-    H[i, ihi + 1:n] := A[i, ihi + 1:n];
-  end for;
-
-  for i in 1:min(n - 2, ihi) loop
-    V[i + 1, i] := 1.0;
-    V[i + 2:n, i] := Aout[i + 2:n, i];
-
-  end for;
-  V[n, n - 1] := 1;
-
 end toUpperHessenberg;

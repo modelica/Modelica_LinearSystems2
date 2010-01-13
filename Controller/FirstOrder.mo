@@ -12,6 +12,20 @@ block FirstOrder
     "Initial y if initType=InitialState (else guess)" 
     annotation(Dialog(tab="Advanced options"));
 
+
+equation
+  if continuous then
+    der(y) = (k*u - y)/T;
+  end if;
+  connect(y,discretePart.x[1]);
+initial equation
+  if continuous then
+     if init == Types.Init.InitialState or init == Types.Init.InitialOutput then
+        y = y_start;
+     elseif init == Types.Init.SteadyState then
+        der(y) = 0;
+     end if;
+  end if;
   annotation (
   defaultComponentName="firstOrder",
     Window(
@@ -86,18 +100,4 @@ The block can be continuous or discrete (with continuous parameterization).
 </p>
 </HTML>
 "));
-
-equation
-  if continuous then
-    der(y) = (k*u - y)/T;
-  end if;
-  connect(y,discretePart.x[1]);
-initial equation
-  if continuous then
-     if init == Types.Init.InitialState or init == Types.Init.InitialOutput then
-        y = y_start;
-     elseif init == Types.Init.SteadyState then
-        der(y) = 0;
-     end if;
-  end if;
 end FirstOrder;

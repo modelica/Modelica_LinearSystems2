@@ -14,7 +14,6 @@ function plotBode3
   input Real D_den=0.1 "Damping of denominator PT2";
   input Real k=1 "Gain";
   output Boolean ok;
-  annotation (interactive=true);
 protected
   Modelica.SIunits.AngularVelocity w1=2*Modelica.Constants.pi*f_cut_num;
   Modelica.SIunits.AngularVelocity w2=2*Modelica.Constants.pi*f_cut_den;
@@ -54,4 +53,5 @@ algorithm
     f_max=f_max);
    ok := true;
 
+  annotation (interactive=true);
 end plotBode3;

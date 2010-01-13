@@ -22,6 +22,43 @@ block TransferFunction
   Modelica.Blocks.Interfaces.RealOutput x[nx]
     "State of continuous transfer function";
 
+protected
+parameter Boolean withDelay=false;
+  parameter Integer na=size(system.d, 1) 
+                         annotation(Hide=true);
+  parameter Integer nb=size(system.n, 1) 
+                         annotation(Hide=true);
+  Real a[na]=system.d "Reverse element order of system.denominator"                       annotation(Hide=true);
+  Real b[nb]=system.n    annotation(Hide=true);
+  Real bb[:]=vector([zeros(max(0, na - nb), 1); b]);
+  Real d=bb[1]/a[1];
+  Real a_end=if a[end] > 100*Modelica.Constants.eps*sqrt(a*a) then a[end] else 1.0;
+  Real x_scaled[size(x, 1)];//=x*a_end "Scaled vector x";
+equation
+x_scaled =x*a_end;
+  if continuous then
+    if nx == 0 then
+      y = d*u;
+    else
+      der(x_scaled[1]) = (-a[2:na]*x_scaled + a_end*u)/a[1];
+      der(x_scaled[2:nx]) = x_scaled[1:nx - 1];
+      y = ((bb[2:na] - d*a[2:na])*x_scaled)/a_end + d*u;
+    end if;
+  end if;
+  connect(y, discretePart.y[1]);
+  connect(x, discretePart.x);
+initial equation
+  if continuous then
+    if init ==Modelica_LinearSystems2.Controller.Types.Init.SteadyState then
+      der(x_scaled) = zeros(nx);
+    elseif init ==Modelica_LinearSystems2.Controller.Types.Init.InitialState then
+      x_scaled = x_start*a_end;
+    elseif init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput then
+      y = y_start;
+      der(x_scaled[2:nx]) = zeros(nx - 1);
+    end if;
+  end if;
+
   annotation (
     defaultComponentName="transferFunction",
     Window(
@@ -67,41 +104,4 @@ block TransferFunction
     Documentation(info="<HTML>
 </HTML>
 "));
-protected
-parameter Boolean withDelay=false;
-  parameter Integer na=size(system.d, 1) 
-                         annotation(Hide=true);
-  parameter Integer nb=size(system.n, 1) 
-                         annotation(Hide=true);
-  Real a[na]=system.d "Reverse element order of system.denominator"                       annotation(Hide=true);
-  Real b[nb]=system.n    annotation(Hide=true);
-  Real bb[:]=vector([zeros(max(0, na - nb), 1); b]);
-  Real d=bb[1]/a[1];
-  Real a_end=if a[end] > 100*Modelica.Constants.eps*sqrt(a*a) then a[end] else 1.0;
-  Real x_scaled[size(x, 1)];//=x*a_end "Scaled vector x";
-equation
-x_scaled =x*a_end;
-  if continuous then
-    if nx == 0 then
-      y = d*u;
-    else
-      der(x_scaled[1]) = (-a[2:na]*x_scaled + a_end*u)/a[1];
-      der(x_scaled[2:nx]) = x_scaled[1:nx - 1];
-      y = ((bb[2:na] - d*a[2:na])*x_scaled)/a_end + d*u;
-    end if;
-  end if;
-  connect(y, discretePart.y[1]);
-  connect(x, discretePart.x);
-initial equation
-  if continuous then
-    if init ==Modelica_LinearSystems2.Controller.Types.Init.SteadyState then
-      der(x_scaled) = zeros(nx);
-    elseif init ==Modelica_LinearSystems2.Controller.Types.Init.InitialState then
-      x_scaled = x_start*a_end;
-    elseif init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput then
-      y = y_start;
-      der(x_scaled[2:nx]) = zeros(nx - 1);
-    end if;
-  end if;
-
 end TransferFunction;

@@ -31,11 +31,4 @@ solve2
 sylvester
 toUpperHessenberg
 trace
-C_nullspace
-C_QR
-C_QR2
-C_rank
-C_singularValues
-C_RQ
-C_solve2
 Internal

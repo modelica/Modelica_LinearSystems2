@@ -10,6 +10,29 @@ function norm "Returns the norm of a matrix"
     "Type of p-norm (only allowed: 1, 2 or Modelica.Constants.inf)";
   output Real result=0.0 "p-norm of matrix A";
 
+algorithm
+  if p == 1 then
+    // column sum norm
+    for i in 1:size(A, 2) loop
+      result := max(result, sum(Complex.'abs'(A[:, i])));
+
+    end for;
+  elseif p == 2 then
+    // largest singular value
+    result := max(Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues(
+                                                 A));
+  elseif p==3 then
+    // Frobenius norm
+    result := Complex.Internal.frobeniusNorm(A);
+  elseif p == Modelica.Constants.inf then
+    // row sum norm
+    for i in 1:size(A, 1) loop
+      result := max(result, sum(Complex.'abs'(A[i, :])));
+    end for;
+  else
+    assert(false, "Optional argument \"p\" of function \"norm\" must be
+1, 2 or Modelica.Constants.inf");
+  end if;
   annotation ( Documentation(info="<HTML>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -40,27 +63,4 @@ Note, for any matrix A and vector v the following inequality holds:
 Vectors.<b>norm</b>(A*v,p) &le; Matrices.<b>norm</b>(A,p)*Vectors.<b>norm</b>(A,p)
 </pre></blockquote>
 </HTML>"));
-algorithm
-  if p == 1 then
-    // column sum norm
-    for i in 1:size(A, 2) loop
-      result := max(result, sum(Complex.'abs'(A[:, i])));
-
-    end for;
-  elseif p == 2 then
-    // largest singular value
-    result := max(Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues(
-                                                 A));
-  elseif p==3 then
-    // Frobenius norm
-    result := Complex.Internal.frobeniusNorm(A);
-  elseif p == Modelica.Constants.inf then
-    // row sum norm
-    for i in 1:size(A, 1) loop
-      result := max(result, sum(Complex.'abs'(A[i, :])));
-    end for;
-  else
-    assert(false, "Optional argument \"p\" of function \"norm\" must be
-1, 2 or Modelica.Constants.inf");
-  end if;
 end norm;

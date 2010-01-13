@@ -10,7 +10,7 @@ protected
       grid=[2, 2],
       component=[20, 20]),
     Icon(
-      coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
+      coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
         graphics={
         Rectangle(
           visible=not cont,

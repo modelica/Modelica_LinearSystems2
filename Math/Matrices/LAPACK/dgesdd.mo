@@ -15,6 +15,23 @@ protected
   Integer iwork=8*min(size(A, 1),size(A, 2));
   Real work[lwork];
 
+
+external "Fortran 77" dgesdd(
+    "A",
+    size(A, 1),
+    size(A, 2),
+    Awork,
+    lda,
+    sigma,
+    U,
+    ldu,
+    VT,
+    ldvt,
+    work,
+    lwork,
+    iwork,
+    info) 
+    annotation (Library="lapack");
   annotation (Documentation(info="   Purpose  
    =======  
 
@@ -141,21 +158,4 @@ protected
       California at Berkeley, USA  
 
    =====================================================================  "));
-
-external "Fortran 77" dgesdd(
-    "A",
-    size(A, 1),
-    size(A, 2),
-    Awork,
-    lda,
-    sigma,
-    U,
-    ldu,
-    VT,
-    ldvt,
-    work,
-    lwork,
-    iwork,
-    info) 
-    annotation (Library="lapack");
 end dgesdd;

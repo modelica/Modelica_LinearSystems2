@@ -22,6 +22,20 @@ block Noise
   Modelica.Blocks.Interfaces.RealOutput y "Discrete output signal of block" 
     annotation (extent=[100, -10; 120, 10]);
 
+
+protected
+  outer SampleClock sampleClock "Global options";
+  Internal.DiscreteNoise discretePart(
+    y_min=y_min,
+    y_max=y_max,
+    firstSeed=firstSeed,
+    sampleFactor=sampleFactor) if not continuous "Discrete noise";
+equation
+  if continuous then
+    y = 0.0;
+  end if;
+connect(y,discretePart.y);
+
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,
@@ -45,11 +59,10 @@ block Noise
           textString="noise"),
         Line(points={{-35,25},{-35,-35},{-25,-35},{-25,-17},{-15,-17},{-15,-45},
               {-5,-45},{-5,37},{1,37},{1,51},{7,51},{7,-5},{17,-5},{17,7},{23,7},
-              {23,-23},{33,-23},{33,49},{43,49},{43,15},{51,15},{51,-51},{61,-51}}, 
+              {23,-23},{33,-23},{33,49},{43,49},{43,15},{51,15},{51,-51},{61,-51}},
             color={0,0,127}),
         Line(points={{-81,-17},{-67,-17},{-67,-1},{-59,-1},{-59,-49},{-51,-49},
-              {-51,-27},{-43,-27},{-43,57},{-35,57},{-35,25}}, color={0,0,127}), 
-
+              {-51,-27},{-43,-27},{-43,57},{-35,57},{-35,25}}, color={0,0,127}),
         Line(points={{-90,-54},{84,-54}}, color={255,0,0}),
         Line(points={{-89,62},{85,62}}, color={255,0,0}),
         Text(
@@ -82,7 +95,7 @@ is generated, where y_min and y_max are parameters. A typical
 noise signal is shown in the next figure:
 </p>
 <p align=\"center\">
-<img src=\"../Extras/Images/Noise1.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/Noise1.png\">
 </p>
 <p>
 The Integer[3] parameter vector <b>firstSeed</b> is used to initialize the
@@ -113,18 +126,4 @@ most C libraries, the theoretical properties are much the same
 as for a single linear congruential generator of large modulus.
 </p>
 </html>"));
-
-protected
-  outer SampleClock sampleClock "Global options";
-  Internal.DiscreteNoise discretePart(
-    y_min=y_min,
-    y_max=y_max,
-    firstSeed=firstSeed,
-    sampleFactor=sampleFactor) if not continuous "Discrete noise";
-equation
-  if continuous then
-    y = 0.0;
-  end if;
-connect(y,discretePart.y);
-
 end Noise;

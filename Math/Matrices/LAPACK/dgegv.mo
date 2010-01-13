@@ -17,6 +17,24 @@ protected
   Real dummy1[1,1];
   Real dummy2[1,1];
 
+external "Fortran 77" dgegv(
+    "N",
+    "N",
+    n,
+    Awork,
+    n,
+    Bwork,
+    n,
+    alphaReal,
+    alphaImag,
+    beta,
+    dummy1,
+    1,
+    dummy2,
+    1,
+    work,
+    size(work, 1),
+    info)   annotation (Library="lapack");
   annotation (Documentation(info="   Purpose  
    =======  
  
@@ -196,22 +214,4 @@ protected
  
    =====================================================================  
 "));
-external "Fortran 77" dgegv(
-    "N",
-    "N",
-    n,
-    Awork,
-    n,
-    Bwork,
-    n,
-    alphaReal,
-    alphaImag,
-    beta,
-    dummy1,
-    1,
-    dummy2,
-    1,
-    work,
-    size(work, 1),
-    info)   annotation (Library="lapack");
 end dgegv;

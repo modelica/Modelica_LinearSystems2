@@ -18,6 +18,22 @@ protected
   Integer lwork=4*n;
   Real work[lwork];
 
+external "Fortran 77" dgeev(
+    "V",
+    "V",
+    n,
+    A,
+    n,
+    alphaReal,
+    alphaImag,
+    lEigenVectors,
+    n,
+    rEigenVectors,
+    n,
+    work,
+    size(work, 1),
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info="   Purpose  
    =======  
  
@@ -116,20 +132,4 @@ protected
  
    =====================================================================  
 "));
-external "Fortran 77" dgeev(
-    "V",
-    "V",
-    n,
-    A,
-    n,
-    alphaReal,
-    alphaImag,
-    lEigenVectors,
-    n,
-    rEigenVectors,
-    n,
-    work,
-    size(work, 1),
-    info) annotation(Library = {"lapack"});
-
 end dgeev;

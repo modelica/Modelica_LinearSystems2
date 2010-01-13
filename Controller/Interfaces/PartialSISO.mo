@@ -9,6 +9,16 @@ partial block PartialSISO
     "Continuous or discrete output signal of block" 
     annotation (extent=[100, -10; 120, 10]);
 
+
+protected
+  Internal.DiscreteStateSpace discretePart(
+    methodType=methodType,
+    sampleFactor=sampleFactor,
+    init=init) if not continuous "Discretized SISO system";
+
+equation
+ connect(u, discretePart.u[1]);
+
   annotation (
     Coordsys(
       extent=[-100, -100; 100, 100],
@@ -22,14 +32,4 @@ partial block PartialSISO
     Documentation(info="<HTML>
 </HTML>
 "), Diagram);
-
-protected
-  Internal.DiscreteStateSpace discretePart(
-    methodType=methodType,
-    sampleFactor=sampleFactor,
-    init=init) if not continuous "Discretized SISO system";
-
-equation
- connect(u, discretePart.u[1]);
-
 end PartialSISO;

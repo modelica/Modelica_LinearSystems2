@@ -1,182 +1,11 @@
 within Modelica_LinearSystems2;
 package UsersGuide "Users Guide"
 
-  annotation (DocumentationClass=true, Documentation(info="<html>
-<p>
-Library <b>Modelica_LinearSystems2</b> is a Modelica package 
-providing different representations of linear, time invariant differential and 
-difference equation systems, as well as typical operations on these
-system descriptions. Additionally, data structures and operations for
-Complex numbers and for Polynomials are provided. These are utilized
-above, but are, of course, also useful for other purposes.
-</p>
- 
-<p>
-This package contains the <b>users guide</b> for 
-the library and has the following content:
-</p>
-<ol>
-<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted\">Getting started</a>
-    contains an introduction to the most important features and how
-    to use them at hand of examples.</li>
-<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.Literature\">Literature</a>
-    provides references that have been used to design and implement this 
-    library.</li>
-<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.ReleaseNotes\">Release Notes</a>
-    summarizes the differences between different versions of this library.</li>
-<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.ModelicaLicense2\">Modelica License 2</a>
-    is the legal license text und which this library is submitted.</li>
-<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.Requirements\">Requirements</a>
-    scetches the requirements on a Modelica tool, in order that this library 
-    can be utilized.</li>
-<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.Contact\">Contact</a> 
-    provides information about the author of the library as well as
-    acknowledgments.</li>
-</ol>
-
-
-</html>"));
   class GettingStarted "Getting started"
 
-    annotation (Documentation(info="<html>
-<p>
-In this section, a first introduction to the Modelica_LinearSystems2
-library is given at hand of several examples.
-The library consists of four main parts that
-are described in the following sections:
-</p>
-<ol>
-<li> Section <a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">Complex numbers</a>
-     introduces the Modelica_LinearSystems2.Math.Complex record that provides a
-     data struture for Complex numbers and arrays and also the most
-     important (scalar) operations on them. Read this section first,
-     because the structuring of records as well as operator overloading
-     is explained that is also the basis for the other parts of the
-     library.</li>
- 
-<li> Section <a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.Polynomials\">Polynomials</a>
-     describes the Modelica_LinearSystems2.Math.Polynomials record that
-     provides a data structure for Polynomials with real coefficients 
-     and operations such as evaluation, fitting, integration.
-     The Complex and Polynomial data structures are basic
-     building blocks for the other parts of the library.</li>
- 
-<li> <a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.LinearSystemDataStructures\">Linear system data structures</a>
-     are records on the top level of Modelica_LinearSystems2 that define
-     data structures for different representations of
-     linear, time invariant, continuous and discrete systems,
-     e.g., record StateSpace. Furthermore, operations are provided
-     on these data structures, e.g., to connect linear systems together
-     or plot a frequency response.</li>
- 
-</ol>
- 
-</html>
-"));
 
     class ComplexNumbers "Complex numbers"
 
-      annotation (Documentation(info="<html>
-<p>
-<b>Complex</b> numbers are defined via record Modelica_LinearSystems2.Math.Complex.
-Basically, the record consists of the real and imaginary part of a
-complex number and functions stored in the record that operate
-on Complex numbers. A screenshot of the record and its content
-is given in the next figure:
-</p>
-
-<blockquote>
-<img src=\"../Extras/Images/UsersGuide/Complex.png\">
-</blockquote>
-<p>
-Switch to an interactive Modelica environment
-(e.g., Dymola command window)
-and type in the following commands:
-</p>
-
-<pre>
-   import Modelica_LinearSystems2.Math.Complex;
-</pre>
-
-<p>
-This import statement defines a convenient abbreviation, so that
-in the following, we have only to type \"Complex\" and no longer
-\"Modelica_LinearSystems2.Complex\".<br>
-Since the Modelica language has been extended to support the concept of operator overloading,
-the definition of record Complex allows to write the following commands:
-</p>
-<pre>
-  import Modelica_LinearSystems2.Math.Complex;
-
-  j  = Complex.j();    
-  c1 = 1 + 3*j;        
-  c2 = 1 - 5*j;
-  c3 = c1 + c2;
-
-</pre>
-<p>
-The original generation of complex numbers by using the record-constructor and calling operation functions is still possible and described at <a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers.FunctionsAndOperators\">Functions and operators</a>
-</p>
-The overloading concept also includes the build in function 'String', i.e. typing
-</p>
-<pre>
-  import Modelica_LinearSystems2.Math.Complex;
-
-  j  = Complex.j();
-  c1 = 1 + 3*j;
-  Modelica.Utilities.Streams.print(\"c1 = \"+String(c1));  
-
-</pre>
-results in 
-<p><pre>
-  c1 = 1 + 3j
-</pre></p>
-
-
-<p>
-Besides the basic operations, the most important specific
-functions for Complex numbers are also available, e.g.,
-exp(), sin() or conj() to compute 
-<pre>
-
-  exp(z)  = exp(Re(z)*(cos(Im(z)) + j sin(Im(z)))
-  sin(z)  = 1/(2j)*(exp(zj) - exp(-zj))
-  conj(z) = Re(z) - jIm(z)
-
-</pre>
-respectively.
-</p>
-Function arg() returns the phase angle of the Complex number.
-The phase angle is not unique. Via the optional second argument phi0,
-the desired range can be defined, such that
-</p>
-
-<pre>
-
-  -pi &lt; arg(c,phi0) - phi0 &lt; pi.
-
-</pre>
-
-<p>
-For example:
-</p>
-
-<pre>
-
-  Complex.arg( 1+j*0.5, 4*pi );  // = 4*pi+pi/4 = 13.351...
-
-</pre>
-
-Note that the operators 'abs'(), 'sqrt'(), and 'max'() in this version of Modelica_LinearSystems2 are not supported by the overloading operator concept yet. Therefore, the original way of function calling, e.g.
-<pre>
-
-  a = Complex.'abs'(3 + j*4)
-
-</pre>
-has to be applied.
-
-</html>
-"));
       class FunctionsAndOperators "Functions and operators"
         annotation (Documentation(info="<html>
 <p>
@@ -279,6 +108,107 @@ For details see
 </html>
 "));
       end FunctionsAndOperators;
+      annotation (Documentation(info="<html>
+<p>
+<b>Complex</b> numbers are defined via record Modelica_LinearSystems2.Math.Complex.
+Basically, the record consists of the real and imaginary part of a
+complex number and functions stored in the record that operate
+on Complex numbers. A screenshot of the record and its content
+is given in the next figure:
+</p>
+
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Complex.png\">
+</blockquote>
+<p>
+Switch to an interactive Modelica environment
+(e.g., Dymola command window)
+and type in the following commands:
+</p>
+
+<pre>
+   import Modelica_LinearSystems2.Math.Complex;
+</pre>
+
+<p>
+This import statement defines a convenient abbreviation, so that
+in the following, we have only to type \"Complex\" and no longer
+\"Modelica_LinearSystems2.Complex\".<br>
+Since the Modelica language has been extended to support the concept of operator overloading,
+the definition of record Complex allows to write the following commands:
+</p>
+<pre>
+  import Modelica_LinearSystems2.Math.Complex;
+
+  j  = Complex.j();    
+  c1 = 1 + 3*j;        
+  c2 = 1 - 5*j;
+  c3 = c1 + c2;
+
+</pre>
+<p>
+The original generation of complex numbers by using the record-constructor and calling operation functions is still possible and described at <a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers.FunctionsAndOperators\">Functions and operators</a>
+</p>
+The overloading concept also includes the build in function 'String', i.e. typing
+</p>
+<pre>
+  import Modelica_LinearSystems2.Math.Complex;
+
+  j  = Complex.j();
+  c1 = 1 + 3*j;
+  Modelica.Utilities.Streams.print(\"c1 = \"+String(c1));  
+
+</pre>
+results in 
+<p><pre>
+  c1 = 1 + 3j
+</pre></p>
+
+
+<p>
+Besides the basic operations, the most important specific
+functions for Complex numbers are also available, e.g.,
+exp(), sin() or conj() to compute 
+<pre>
+
+  exp(z)  = exp(Re(z)*(cos(Im(z)) + j sin(Im(z)))
+  sin(z)  = 1/(2j)*(exp(zj) - exp(-zj))
+  conj(z) = Re(z) - jIm(z)
+
+</pre>
+respectively.
+</p>
+Function arg() returns the phase angle of the Complex number.
+The phase angle is not unique. Via the optional second argument phi0,
+the desired range can be defined, such that
+</p>
+
+<pre>
+
+  -pi &lt; arg(c,phi0) - phi0 &lt; pi.
+
+</pre>
+
+<p>
+For example:
+</p>
+
+<pre>
+
+  Complex.arg( 1+j*0.5, 4*pi );  // = 4*pi+pi/4 = 13.351...
+
+</pre>
+
+Note that the operators 'abs'(), 'sqrt'(), and 'max'() in this version of Modelica_LinearSystems2 are not supported by the overloading operator concept yet. Therefore, the original way of function calling, e.g.
+<pre>
+
+  a = Complex.'abs'(3 + j*4)
+
+</pre>
+has to be applied.
+
+</html>
+"));
     end ComplexNumbers;
 
     class Polynomials "Polynomials"
@@ -286,20 +216,20 @@ For details see
       annotation (Documentation(info="<html>
 <p>Polynomials with real coefficients are defined via record Modelica_LinearSystems2.Math.Polynomial. Read first the previous section about Complex numbers to understand how records, functions in records and the coming operator overloading technique works. The Polynomial record is equivalent to the Complex record. A screenshot is shown in the next figure: </p>
 <blockquote>
-   <p><img src=\"../Extras/Images/UsersGuide/Polynomial1.png\"/> </p>
+   <p><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Polynomial1.png\"/> </p>
 </blockquote>
 <p>A Polynomial is constructed by the command Polynomial(coefficientVector), where the input argument provides the polynomial coefficients in descending order. In the following figure, a typical session in the command window is shown (try it, e.g., in Dymolas command window): </p>
 <blockquote>
-   <p><img src=\"../Extras/Images/UsersGuide/Polynomial2.png\"/> </p>
+   <p><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Polynomial2.png\"/> </p>
 </blockquote>
 <p>After defining the import statement to get Polynomial as an abbreviation for Modelica_LinearSystems2.Polynomial, the coefficients are given as vector input to \"Polynomial()\". Via the operator-'String' function (called by String(p)) Polynomial p is pretty printed. Besides all elementary operations, such as operator '+', '*', functions to compute the integral or the derivative are provide. With function \"evaluate(..)\" the Polynomial is evaluated for a given value x. With function \"roots\", the roots of the Polynomial are evaluated and are returned as a Vector of Complex numbers. If the optional second input agument printRoots is set to true, the roots are at once also nicely printed. </p>
 <p>With function \"fitting\", a polynomial can be determined that approximates given table values. Finally with function \"plot\", the interesting range of x is automatically determined (via calculating the roots of the polynomial and of its derivative) and plotted. A typical plot is shown in the next figure: </p>
 <blockquote>
-   <p><img src=\"../Extras/Images/UsersGuide/Polynomial3.png\"/> </p>
+   <p><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Polynomial3.png\"/> </p>
 </blockquote>
 <p>Several other examples of Polynomial are available in Polynomial.Examples. In Dymola, select the function with the right mouse button and click \"Ok\" on the resulting menu which provides the possibility to define all the input arguments. Since the Examples function do not have any input arguments, only the \"Ok\" button is present: </p>
 <blockquote>
-   <p><img src=\"../Extras/Images/UsersGuide/Polynomial4.png\"/> </p>
+   <p><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Polynomial4.png\"/> </p>
 </blockquote>
 </html>"));
     end Polynomials;
@@ -389,7 +319,7 @@ Below, a typical session in the command window is shown:
 </p>
  
 <blockquote>
-<img src=\"../Extras/Images/UsersGuide/TransferFunction1.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/TransferFunction1.png\">
 </blockquote>
  
 <p>
@@ -397,7 +327,7 @@ The last command (plotBode) results in the following frequency response:
 </p>
  
 <blockquote>
-<img src=\"../Extras/Images/UsersGuide/TransferFunction2.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/TransferFunction2.png\">
 </blockquote>
  
 <p>
@@ -413,7 +343,7 @@ ss=StateSpace(tf3) and an poles-and-zeros plot and print out is then available v
 </p>
  
 <blockquote>
-<img src=\"../Extras/Images/UsersGuide/TransferFunction4.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/TransferFunction4.png\">
 </blockquote>
  
 <p>
@@ -421,7 +351,7 @@ resulting in:
 </p>
  
 <blockquote>
-<img src=\"../Extras/Images/UsersGuide/TransferFunction3.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/TransferFunction3.png\">
 </blockquote>
  
 <p>
@@ -433,7 +363,7 @@ StateSpace.Import.fromModel(\"xxx\") results in:
 </p>
  
 <blockquote>
-<img src=\"../Extras/Images/UsersGuide/TransferFunction5.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/TransferFunction5.png\">
 </blockquote>
  
 <p>
@@ -444,7 +374,7 @@ are shown in the next figure:
 </p>
  
 <blockquote>
-<img src=\"../Extras/Images/LowPassOrder4Filters.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4Filters.png\">
 </blockquote>
  
 <p>
@@ -453,13 +383,48 @@ starting from a steady state initial filter with initial input = 0.2:
 </p>
  
 <blockquote>
-<img src=\"../Extras/Images/LowPassOrder4FiltersStepResponse.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4FiltersStepResponse.png\">
 </blockquote>
  
 </html>
 "));
     end LinearSystemDataStructures;
 
+    annotation (Documentation(info="<html>
+<p>
+In this section, a first introduction to the Modelica_LinearSystems2
+library is given at hand of several examples.
+The library consists of four main parts that
+are described in the following sections:
+</p>
+<ol>
+<li> Section <a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">Complex numbers</a>
+     introduces the Modelica_LinearSystems2.Math.Complex record that provides a
+     data struture for Complex numbers and arrays and also the most
+     important (scalar) operations on them. Read this section first,
+     because the structuring of records as well as operator overloading
+     is explained that is also the basis for the other parts of the
+     library.</li>
+ 
+<li> Section <a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.Polynomials\">Polynomials</a>
+     describes the Modelica_LinearSystems2.Math.Polynomials record that
+     provides a data structure for Polynomials with real coefficients 
+     and operations such as evaluation, fitting, integration.
+     The Complex and Polynomial data structures are basic
+     building blocks for the other parts of the library.</li>
+ 
+<li> <a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.LinearSystemDataStructures\">Linear system data structures</a>
+     are records on the top level of Modelica_LinearSystems2 that define
+     data structures for different representations of
+     linear, time invariant, continuous and discrete systems,
+     e.g., record StateSpace. Furthermore, operations are provided
+     on these data structures, e.g., to connect linear systems together
+     or plot a frequency response.</li>
+ 
+</ol>
+ 
+</html>
+"));
   end GettingStarted;
 
   class Literature "Literature"
@@ -1388,4 +1353,39 @@ purposes), in order that other Modelica tools can provide the same functionality
 </html>
 "));
   end Contact;
+  annotation (DocumentationClass=true, Documentation(info="<html>
+<p>
+Library <b>Modelica_LinearSystems2</b> is a Modelica package 
+providing different representations of linear, time invariant differential and 
+difference equation systems, as well as typical operations on these
+system descriptions. Additionally, data structures and operations for
+Complex numbers and for Polynomials are provided. These are utilized
+above, but are, of course, also useful for other purposes.
+</p>
+ 
+<p>
+This package contains the <b>users guide</b> for 
+the library and has the following content:
+</p>
+<ol>
+<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted\">Getting started</a>
+    contains an introduction to the most important features and how
+    to use them at hand of examples.</li>
+<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.Literature\">Literature</a>
+    provides references that have been used to design and implement this 
+    library.</li>
+<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.ReleaseNotes\">Release Notes</a>
+    summarizes the differences between different versions of this library.</li>
+<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.ModelicaLicense2\">Modelica License 2</a>
+    is the legal license text und which this library is submitted.</li>
+<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.Requirements\">Requirements</a>
+    scetches the requirements on a Modelica tool, in order that this library 
+    can be utilized.</li>
+<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.Contact\">Contact</a> 
+    provides information about the author of the library as well as
+    acknowledgments.</li>
+</ol>
+
+
+</html>"));
 end UsersGuide;

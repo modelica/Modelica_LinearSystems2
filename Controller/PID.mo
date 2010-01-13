@@ -1,121 +1,6 @@
 within Modelica_LinearSystems2.Controller;
 block PID "PID-controller in additive description form"
   import Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault;
-  annotation (
-    defaultComponentName="pID",
-    Icon(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics={
-        Line(points={{-80,78},{-80,-90}}, color={192,192,192}),
-        Polygon(
-          points={{-80,90},{-88,68},{-72,68},{-80,90}},
-          lineColor={192,192,192},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid),
-        Line(points={{-90,-80},{82,-80}}, color={192,192,192}),
-        Polygon(
-          points={{90,-80},{68,-72},{68,-88},{90,-80}},
-          lineColor={192,192,192},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid),
-        Line(points={{-80,-80},{-80,50},{-73,-20},{30,60},{80,60}}, color={0,0,
-              127}),
-        Text(
-          extent={{-46,-21},{80,-60}},
-          lineColor={192,192,192},
-          textString="PID"),
-        Text(
-          extent={{-102,85},{74,53}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          textString="%sampleFactor")}),
-    Documentation(info="<HTML>
-<p>
-This is the text-book version of a PID-controller.
-For a more practically useful PID-controller, use
-block LimPID.
-</p>
- 
-<p>
-The PID block can be initialized in different
-ways controlled by parameter <b>initType</b>. The possible
-values of initType are defined in 
-<a href=\"Modelica://Modelica.Blocks.Types.InitPID\">Modelica.Blocks.Types.InitPID</a>.
-This type is identical to 
-<a href=\"Modelica://Modelica.Blocks.Types.Init\">Types.Init</a>, 
-with the only exception that the additional option
-<b>DoNotUse_InitialIntegratorState</b> is added for
-backward compatibility reasons (= integrator is initialized with
-InitialState whereas differential part is initialized with
-NoInit which was the initialization in version 2.2 of the Modelica
-standard library).
-</p>
- 
-<p>
-Based on the setting of initType, the integrator (I) and derivative (D)
-blocks inside the PID controller are initialized according to the following table:
-</p>
- 
-<table border=1 cellspacing=0 cellpadding=2>
-  <tr><td valign=\"top\"><b>initType</b></td>
-      <td valign=\"top\"><b>I.initType</b></td>
-      <td valign=\"top\"><b>D.initType</b></td></tr>
- 
-  <tr><td valign=\"top\"><b>NoInit</b></td>
-      <td valign=\"top\">NoInit</td>
-      <td valign=\"top\">NoInit</td></tr>
- 
-  <tr><td valign=\"top\"><b>SteadyState</b></td>
-      <td valign=\"top\">SteadyState</td>
-      <td valign=\"top\">SteadyState</td></tr>
- 
-  <tr><td valign=\"top\"><b>InitialState</b></td>
-      <td valign=\"top\">InitialState</td>
-      <td valign=\"top\">InitialState</td></tr>
- 
-  <tr><td valign=\"top\"><b>InitialOutput</b><br>
-          and initial equation: y = y_start</td>
-      <td valign=\"top\">NoInit</td>
-      <td valign=\"top\">SteadyState</td></tr>
- 
-  <tr><td valign=\"top\"><b>DoNotUse_InitialIntegratorState</b></td>
-      <td valign=\"top\">InitialState</td>
-      <td valign=\"top\">NoInit</td></tr>
-</table>
- 
-<p>
-In many cases, the most useful initial condition is
-<b>SteadyState</b> because initial transients are then no longer
-present. If initType = InitPID.SteadyState, then in some
-cases difficulties might occur. The reason is the 
-equation of the integrator:
-</p>
- 
-<pre>
-   <b>der</b>(y) = k*u;
-</pre>
- 
-<p>
-The steady state equation \"der(x)=0\" leads to the condition that the input u to the
-integrator is zero. If the input u is already (directly or indirectly) defined
-by another initial condition, then the initialization problem is <b>singular</b>
-(has none or infinitely many solutions). This situation occurs often
-for mechanical systems, where, e.g., u = desiredSpeed - measuredSpeed and
-since speed is both a state and a derivative, it is natural to
-initialize it with zero. As sketched this is, however, not possible.
-The solution is to not initialize u or the variable that is used
-to compute u by an algebraic equation.
-</p>
- 
- 
-</HTML>
- 
-"), Diagram(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics));
 
 extends Interfaces.PartialSampledBlock;
   Modelica.Blocks.Interfaces.RealInput u
@@ -242,4 +127,119 @@ equation
       points={{71,0},{110,0}},
       color={0,0,127},
       smooth=Smooth.None));
+  annotation (
+    defaultComponentName="pID",
+    Icon(coordinateSystem(
+        preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}},
+        grid={1,1}), graphics={
+        Line(points={{-80,78},{-80,-90}}, color={192,192,192}),
+        Polygon(
+          points={{-80,90},{-88,68},{-72,68},{-80,90}},
+          lineColor={192,192,192},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-90,-80},{82,-80}}, color={192,192,192}),
+        Polygon(
+          points={{90,-80},{68,-72},{68,-88},{90,-80}},
+          lineColor={192,192,192},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-80,-80},{-80,50},{-73,-20},{30,60},{80,60}}, color={0,0,
+              127}),
+        Text(
+          extent={{-46,-21},{80,-60}},
+          lineColor={192,192,192},
+          textString="PID"),
+        Text(
+          extent={{-102,85},{74,53}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          textString="%sampleFactor")}),
+    Documentation(info="<HTML>
+<p>
+This is the text-book version of a PID-controller.
+For a more practically useful PID-controller, use
+block LimPID.
+</p>
+ 
+<p>
+The PID block can be initialized in different
+ways controlled by parameter <b>initType</b>. The possible
+values of initType are defined in 
+<a href=\"Modelica://Modelica.Blocks.Types.InitPID\">Modelica.Blocks.Types.InitPID</a>.
+This type is identical to 
+<a href=\"Modelica://Modelica.Blocks.Types.Init\">Types.Init</a>, 
+with the only exception that the additional option
+<b>DoNotUse_InitialIntegratorState</b> is added for
+backward compatibility reasons (= integrator is initialized with
+InitialState whereas differential part is initialized with
+NoInit which was the initialization in version 2.2 of the Modelica
+standard library).
+</p>
+ 
+<p>
+Based on the setting of initType, the integrator (I) and derivative (D)
+blocks inside the PID controller are initialized according to the following table:
+</p>
+ 
+<table border=1 cellspacing=0 cellpadding=2>
+  <tr><td valign=\"top\"><b>initType</b></td>
+      <td valign=\"top\"><b>I.initType</b></td>
+      <td valign=\"top\"><b>D.initType</b></td></tr>
+ 
+  <tr><td valign=\"top\"><b>NoInit</b></td>
+      <td valign=\"top\">NoInit</td>
+      <td valign=\"top\">NoInit</td></tr>
+ 
+  <tr><td valign=\"top\"><b>SteadyState</b></td>
+      <td valign=\"top\">SteadyState</td>
+      <td valign=\"top\">SteadyState</td></tr>
+ 
+  <tr><td valign=\"top\"><b>InitialState</b></td>
+      <td valign=\"top\">InitialState</td>
+      <td valign=\"top\">InitialState</td></tr>
+ 
+  <tr><td valign=\"top\"><b>InitialOutput</b><br>
+          and initial equation: y = y_start</td>
+      <td valign=\"top\">NoInit</td>
+      <td valign=\"top\">SteadyState</td></tr>
+ 
+  <tr><td valign=\"top\"><b>DoNotUse_InitialIntegratorState</b></td>
+      <td valign=\"top\">InitialState</td>
+      <td valign=\"top\">NoInit</td></tr>
+</table>
+ 
+<p>
+In many cases, the most useful initial condition is
+<b>SteadyState</b> because initial transients are then no longer
+present. If initType = InitPID.SteadyState, then in some
+cases difficulties might occur. The reason is the 
+equation of the integrator:
+</p>
+ 
+<pre>
+   <b>der</b>(y) = k*u;
+</pre>
+ 
+<p>
+The steady state equation \"der(x)=0\" leads to the condition that the input u to the
+integrator is zero. If the input u is already (directly or indirectly) defined
+by another initial condition, then the initialization problem is <b>singular</b>
+(has none or infinitely many solutions). This situation occurs often
+for mechanical systems, where, e.g., u = desiredSpeed - measuredSpeed and
+since speed is both a state and a derivative, it is natural to
+initialize it with zero. As sketched this is, however, not possible.
+The solution is to not initialize u or the variable that is used
+to compute u by an algebraic equation.
+</p>
+ 
+ 
+</HTML>
+ 
+"), Diagram(coordinateSystem(
+        preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}},
+        grid={1,1}), graphics));
 end PID;

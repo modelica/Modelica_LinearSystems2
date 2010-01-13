@@ -11,7 +11,6 @@ function plotBodeFilter2 "Show low pass filters of all filter types"
   input Modelica.SIunits.Frequency f_min(min=0) = 0.1 "Minimum frequency value";
   input Modelica.SIunits.Frequency f_max(min=0) = 10 "Maximum frequency value";
   output Boolean ok;
-  annotation (interactive=true);
 protected
   ZerosAndPoles tf1=ZerosAndPoles.Design.filter(
       analogFilter=AF.CriticalDamping,
@@ -57,4 +56,5 @@ algorithm
 
   ok := true;
 
+  annotation (interactive=true);
 end plotBodeFilter2;

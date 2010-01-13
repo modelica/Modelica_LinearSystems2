@@ -10,6 +10,28 @@ protected
   Integer i=0;
   constant Real pi=Modelica.Constants.pi;
   Real k;
+algorithm
+  if window <> Window.Rectangle then
+    for i in 1:L loop
+      k := i - 1 - (L - 1)/2;
+      if window == Window.Bartlett then
+        a[i] := 1 - 2*abs(k)/(L - 1);
+      elseif window == Window.Hann then
+        a[i] := 0.5 + 0.5*cos(2*pi*k/(L - 1));
+      elseif window == Window.Hamming then
+        a[i] := 0.54 + 0.46*cos(2*pi*k/(L - 1));
+      elseif window == Window.Blackman then
+        a[i] := 0.42 + 0.5*cos(2*pi*k/(L - 1)) + 0.08*cos(4*pi*k/(L - 1));
+      elseif window == Window.Kaiser then
+        k := 2*beta*sqrt((i - 1)*(L - i))/(L - 1);
+        a[i] := Internal.bessel0(k)/ Internal.bessel0(beta);
+      else
+        Modelica.Utilities.Streams.error("window = " + String(window) + " not known");
+      end if;
+    end for;
+  else
+    a := ones(L);
+  end if;
   annotation (
     Coordsys(
       extent=[-100, -100; 100, 100],
@@ -42,26 +64,4 @@ only needed by the Kaiser window. The types of windows are:
 </OL>
 </HTML>
 "));
-algorithm
-  if window <> Window.Rectangle then
-    for i in 1:L loop
-      k := i - 1 - (L - 1)/2;
-      if window == Window.Bartlett then
-        a[i] := 1 - 2*abs(k)/(L - 1);
-      elseif window == Window.Hann then
-        a[i] := 0.5 + 0.5*cos(2*pi*k/(L - 1));
-      elseif window == Window.Hamming then
-        a[i] := 0.54 + 0.46*cos(2*pi*k/(L - 1));
-      elseif window == Window.Blackman then
-        a[i] := 0.42 + 0.5*cos(2*pi*k/(L - 1)) + 0.08*cos(4*pi*k/(L - 1));
-      elseif window == Window.Kaiser then
-        k := 2*beta*sqrt((i - 1)*(L - i))/(L - 1);
-        a[i] := Internal.bessel0(k)/ Internal.bessel0(beta);
-      else
-        Modelica.Utilities.Streams.error("window = " + String(window) + " not known");
-      end if;
-    end for;
-  else
-    a := ones(L);
-  end if;
 end FIR_window;

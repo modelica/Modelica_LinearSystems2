@@ -8,7 +8,6 @@ function plotBode1
 
   input Modelica.SIunits.Frequency f_cut=100 "PT1 with cut-off frequency f_cut";
   output Boolean ok;
-  annotation (interactive=true);
 protected
   Modelica.SIunits.AngularVelocity w=2*Modelica.Constants.pi*f_cut;
   TransferFunction tf=TransferFunction(n={w}, d={1,w});
@@ -19,4 +18,5 @@ algorithm
 
 equation
 
+  annotation (interactive=true);
 end plotBode1;

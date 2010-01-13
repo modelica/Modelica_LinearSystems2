@@ -4,6 +4,8 @@ function length "Return length of a vector"
   input Real v[:] "Vector";
   output Real result "Length of vector v";
 
+algorithm
+  result := sqrt(v*v);
   annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <blockquote><pre>
@@ -27,6 +29,4 @@ not the case with function norm(..).
 <h4><font color=\"#008000\">See also</font></h4>
 <a href=\"Modelica:Modelica_LinearSystems2.Math.Vectors.norm\">Vectors.norm</a>
 </html>"));
-algorithm
-  result := sqrt(v*v);
 end length;

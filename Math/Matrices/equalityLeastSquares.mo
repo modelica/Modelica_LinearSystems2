@@ -8,6 +8,36 @@ function equalityLeastSquares
   input Real b[size(B, 1)];
   output Real x[size(A, 2)] "solution vector";
 
+
+protected
+  Integer info;
+algorithm
+  if Modelica.Math.Matrices.rank(cat(
+      1,
+      A,
+      B)) == size(A, 2) and min(size(A)) > 0 then
+
+    (x,info) := Modelica.Math.Matrices.LAPACK.dgglse_vec(
+      A,
+      a,
+      B,
+      b);
+
+    assert(info == 0, "Solving a linear equality-constrained least squares problem 
+with function \"Matrices.equalityLeastSquares\" failed.");
+  else
+    if size(A, 2) == 0 then
+      x := fill(0, 0);
+    else
+      x := Modelica_LinearSystems2.Math.Matrices.leastSquares(cat(
+        1,
+        A,
+        B), cat(
+        1,
+        a,
+        b));
+    end if;
+  end if;
   annotation (Documentation(info="<HTML>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -41,34 +71,4 @@ full column rank (= size(A,2)). In this case, the problem
 has a unique solution.
 </p>
 </HTML>"));
-
-protected
-  Integer info;
-algorithm
-  if Modelica.Math.Matrices.rank(cat(
-      1,
-      A,
-      B)) == size(A, 2) and min(size(A)) > 0 then
-
-    (x,info) := Modelica.Math.Matrices.LAPACK.dgglse_vec(
-      A,
-      a,
-      B,
-      b);
-
-    assert(info == 0, "Solving a linear equality-constrained least squares problem 
-with function \"Matrices.equalityLeastSquares\" failed.");
-  else
-    if size(A, 2) == 0 then
-      x := fill(0, 0);
-    else
-      x := Modelica_LinearSystems2.Math.Matrices.leastSquares(cat(
-        1,
-        A,
-        B), cat(
-        1,
-        a,
-        b));
-    end if;
-  end if;
 end equalityLeastSquares;

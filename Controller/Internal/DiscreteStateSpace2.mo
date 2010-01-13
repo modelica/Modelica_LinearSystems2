@@ -53,38 +53,6 @@ public
       Placement(transformation(extent={{100,-10},{120,10}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput x[nx](start=x_start)
     "State vector of continuous system at sample times" annotation(Hide=true);
-  annotation (
-    defaultComponentName="discreteStateSpace",
-    Icon(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
-        Text(extent={{-90,15},{-15,90}}, textString="A"),
-        Text(extent={{15,15},{90,90}}, textString="B"),
-        Text(extent={{-90,-15},{-15,-90}}, textString="C"),
-        Text(extent={{15,-15},{90,-90}}, textString="D")}),
-    Window(
-      x=0.27,
-      y=0.13,
-      width=0.55,
-      height=0.75),
-    Diagram(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
-        Rectangle(extent={{-60,60},{60,-60}}),
-        Text(
-          extent={{-56,40},{60,0}},
-          lineColor={0,0,0},
-          textString="x=Ax+Bu"),
-        Text(
-          extent={{-60,0},{60,-40}},
-          lineColor={0,0,0},
-          textString=" y=Cx+Du"),
-        Line(points={{-100,0},{-60,0}}),
-        Line(points={{60,0},{100,0}})}),
-    Documentation(info="<HTML>
-</HTML>"));
 
 protected
   outer SampleClock sampleClock "Global options"                       annotation(Hide=true);
@@ -164,4 +132,36 @@ initial equation
      y=y_start;
      xd[ny+1:nx]=[zeros(nx-ny,ny),identity(nx-ny)]*Modelica.Math.Matrices.solve(identity(nx)-discreteSystem.A,discreteSystem.B*u);
   end if;
+  annotation (
+    defaultComponentName="discreteStateSpace",
+    Icon(coordinateSystem(
+        preserveAspectRatio=false,
+        extent={{-100,-100},{100,100}},
+        grid={2,2}), graphics={
+        Text(extent={{-90,15},{-15,90}}, textString="A"),
+        Text(extent={{15,15},{90,90}}, textString="B"),
+        Text(extent={{-90,-15},{-15,-90}}, textString="C"),
+        Text(extent={{15,-15},{90,-90}}, textString="D")}),
+    Window(
+      x=0.27,
+      y=0.13,
+      width=0.55,
+      height=0.75),
+    Diagram(coordinateSystem(
+        preserveAspectRatio=false,
+        extent={{-100,-100},{100,100}},
+        grid={2,2}), graphics={
+        Rectangle(extent={{-60,60},{60,-60}}),
+        Text(
+          extent={{-56,40},{60,0}},
+          lineColor={0,0,0},
+          textString="x=Ax+Bu"),
+        Text(
+          extent={{-60,0},{60,-40}},
+          lineColor={0,0,0},
+          textString=" y=Cx+Du"),
+        Line(points={{-100,0},{-60,0}}),
+        Line(points={{60,0},{100,0}})}),
+    Documentation(info="<HTML>
+</HTML>"));
 end DiscreteStateSpace2;

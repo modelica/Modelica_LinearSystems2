@@ -7,6 +7,20 @@ function dgetrs
   input Real B[size(LU, 1),:] "Right hand side matrix B";
   output Real X[size(B, 1),size(B, 2)]=B "Solution matrix X";
 
+
+protected
+  Real work[size(LU, 1),size(LU, 1)]=LU;
+  Integer info;
+external "FORTRAN 77" dgetrs(
+    "N",
+    size(LU, 1),
+    size(B, 2),
+    work,
+    size(LU, 1),
+    pivots,
+    X,
+    size(B, 1),
+    info)                 annotation (Library="lapack");
   annotation (Documentation(info="
 Purpose
 =======
@@ -47,18 +61,4 @@ INFO    (output) INTEGER
       y=0.4,
       width=0.6,
       height=0.6));
-
-protected
-  Real work[size(LU, 1),size(LU, 1)]=LU;
-  Integer info;
-external "FORTRAN 77" dgetrs(
-    "N",
-    size(LU, 1),
-    size(B, 2),
-    work,
-    size(LU, 1),
-    pivots,
-    X,
-    size(B, 1),
-    info)                 annotation (Library="lapack");
 end dgetrs;

@@ -7,6 +7,23 @@ function leastSquares
   output Real x[size(A, 2)]
     "Vector x such that min|A*x-b|^2 if size(A,1) >= size(A,2) or min|x|^2 and A*x=b, if size(A,1) < size(A,2)";
 
+
+protected
+  Integer info;
+  Integer rank;
+  Real xx[max(size(A, 1), size(A, 2))];
+algorithm
+  if min(size(A)) > 0 then
+    (xx,info,rank) := Modelica.Math.Matrices.LAPACK.dgelsx_vec(
+      A,
+      b,
+      100*Modelica.Constants.eps);
+    x := xx[1:size(A, 2)];
+    assert(info == 0, "Solving an overdetermined or underdetermined linear system of 
+equations with function \"Matrices.leastSquares\" failed.");
+  else
+    x := fill(0, size(A, 2));
+  end if;
   annotation (Documentation(info="<HTML>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -32,21 +49,4 @@ the solution is not unique and from the infinitely many solutions
 the one is selected that minimizes both |x|^2 and |A*x - b|^2.
 </p>
 </HTML>"));
-
-protected
-  Integer info;
-  Integer rank;
-  Real xx[max(size(A, 1), size(A, 2))];
-algorithm
-  if min(size(A)) > 0 then
-    (xx,info,rank) := Modelica.Math.Matrices.LAPACK.dgelsx_vec(
-      A,
-      b,
-      100*Modelica.Constants.eps);
-    x := xx[1:size(A, 2)];
-    assert(info == 0, "Solving an overdetermined or underdetermined linear system of 
-equations with function \"Matrices.leastSquares\" failed.");
-  else
-    x := fill(0, size(A, 2));
-  end if;
 end leastSquares;

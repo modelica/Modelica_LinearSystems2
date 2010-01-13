@@ -15,6 +15,17 @@ protected
   Integer lwork=max(1, m);
   Real work[lwork];
 
+external "Fortran 77" dorgqr(
+    m,
+    n,
+    k,
+    Qout,
+    lda,
+    tau,
+    work,
+    lwork,
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info="   Purpose  
    =======  
  
@@ -72,15 +83,4 @@ protected
  
    =====================================================================  
 "));
-external "Fortran 77" dorgqr(
-    m,
-    n,
-    k,
-    Qout,
-    lda,
-    tau,
-    work,
-    lwork,
-    info) annotation(Library = {"lapack"});
-
 end dorgqr;

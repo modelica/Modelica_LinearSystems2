@@ -13,6 +13,13 @@ function orthogonalQ
     "Orthogonal matrix as a result of elementary reflectors";
   output Integer info;
 
+
+algorithm
+  (Q,info) := LAPACK.dorghr(
+    A,
+    ilo,
+    ihi,
+    tau);
   annotation (Documentation(info="   Purpose  
 /*  ======= */
  
@@ -65,11 +72,4 @@ function orthogonalQ
 /*          < 0:  if INFO = -i, the i-th argument had an illegal value */
  
 /*  ===================================================================== */"));
-
-algorithm
-  (Q,info) := LAPACK.dorghr(
-    A,
-    ilo,
-    ihi,
-    tau);
 end orthogonalQ;

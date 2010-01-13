@@ -9,7 +9,7 @@ as the sampleClock component. In every block, the default defined
 in SampleClock can be changed. The following options are 
 available:
 </p>
-<img src=\"../Extras/Images/SampleClockMenu.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/SampleClockMenu.png\">
 <p>
 With parameter <b>initTtype</b> the initialization of the blocks
 is defined. Default is steady state initialization (both for continuous
@@ -25,7 +25,7 @@ multiple of \"sampleTime\".
 In the <b>Advanced Options</b> menu of every block the following
 parameters are present: 
 </p>
-<img src=\"../Extras/Images/AdvancedOptionsMenu.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/AdvancedOptionsMenu.png\">
 <p>
 Parameters <b>blockType</b>, <b>methodType</b> and <b>initType</b>
 can be used to overwrite the default option defined in <b>SampleClock</b>.

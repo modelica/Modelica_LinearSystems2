@@ -6,6 +6,19 @@ block DiscreteADconverter "AD converter as discrete block"
     "Number of bits (=0 means no quantization error)";
   extends Interfaces.PartialDiscreteSISO_equality;
 
+protected
+  parameter Real quantization=if bits > 0 then ((y_max - y_min)/2^bits) else 0;
+  Real y_bound "Bounded output" 
+                               annotation(Hide=true);
+  discrete Real y_sampled "Sampled output" annotation(Hide=true);
+equation
+  when {initial(), sampleTrigger} then
+     u_sampled = u;
+     y_bound = if u > y_max then y_max else if u < y_min then y_min else u;
+     y_sampled = if bits > 0 then quantization*floor(abs(y_bound/quantization) + 0.5)*(
+                if y_bound >= 0 then +1 else -1) else y_bound;
+  end when;
+  y = y_sampled;
   annotation (
     Coordsys(
       extent=[-100, -100; 100, 100],
@@ -30,17 +43,4 @@ block DiscreteADconverter "AD converter as discrete block"
     Documentation(info="<HTML>
 </HTML>
 "));
-protected
-  parameter Real quantization=if bits > 0 then ((y_max - y_min)/2^bits) else 0;
-  Real y_bound "Bounded output" 
-                               annotation(Hide=true);
-  discrete Real y_sampled "Sampled output" annotation(Hide=true);
-equation
-  when {initial(), sampleTrigger} then
-     u_sampled = u;
-     y_bound = if u > y_max then y_max else if u < y_min then y_min else u;
-     y_sampled = if bits > 0 then quantization*floor(abs(y_bound/quantization) + 0.5)*(
-                if y_bound >= 0 then +1 else -1) else y_bound;
-  end when;
-  y = y_sampled;
 end DiscreteADconverter;

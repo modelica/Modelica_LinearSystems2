@@ -20,6 +20,22 @@ protected
   Integer ldvr=max(1, n);
   Real work[3*n];
 
+external "Fortran 77" dtrevc(
+    side,
+    howmny,
+    select,
+    n,
+    T,
+    ldt,
+    lEigenVectors,
+    ldvl,
+    rEigenVectors,
+    ldvr,
+    n,
+    n,
+    work,
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info="    /*  DTREVC computes some or all of the right and/or left eigenvectors of 
  a real upper quasi-triangular matrix T. 
  Matrices of this type are produced by the Schur factorization of 
@@ -144,20 +160,4 @@ protected
  (x,y) is taken to be |x| + |y|. 
  
    =====================================================================  "));
-external "Fortran 77" dtrevc(
-    side,
-    howmny,
-    select,
-    n,
-    T,
-    ldt,
-    lEigenVectors,
-    ldvl,
-    rEigenVectors,
-    ldvr,
-    n,
-    n,
-    work,
-    info) annotation(Library = {"lapack"});
-
 end dtrevc;

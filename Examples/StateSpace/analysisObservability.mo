@@ -5,10 +5,6 @@ function analysisObservability
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Utilities.Streams.print;
-  annotation (interactive=true, Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isObservable</b> which is 
-to check whether a system is observable or not.
-</html>"));
 
    input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
       A=[1,2,3,4,5,6; 5,6,7,8,9,4; 0,2,3,0,78,6; 1,1,2,2,3,3; 10,13,34,0,0,1; 0,
@@ -34,10 +30,6 @@ protected
   Boolean isObservable;
 Modelica_LinearSystems2.Types.StaircaseMethod method;
   Boolean isSISO=StateSpace.Internal.isSISO(ss);
-  annotation (Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is 
-to design pole assigment controllers for state space systems with multiple input.
-</html>"));
 algorithm
   ok := false;
 
@@ -69,4 +61,11 @@ algorithm
   end if;
 
   ok := true;
+  annotation (interactive=true, Documentation(info="<html>
+This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isObservable</b> which is 
+to check whether a system is observable or not.
+</html>"),    Documentation(info="<html>
+This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is 
+to design pole assigment controllers for state space systems with multiple input.
+</html>"));
 end analysisObservability;

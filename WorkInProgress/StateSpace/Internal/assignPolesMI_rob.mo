@@ -298,5 +298,4 @@ algorithm
 //    K := -Z*transpose(U0)*M;
 
   annotation (experiment, experimentSetupOutput);
-
 end assignPolesMI_rob;

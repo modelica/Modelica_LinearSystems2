@@ -17,6 +17,17 @@ protected
   Integer lda=max(1, m);
   Integer lwork2=if lwork1 == -1 then -1 else max(1, lwork1);
 
+external "Fortran 77" dgeqp3(
+    m,
+    n,
+    Aout,
+    lda,
+    jpvt,
+    tau,
+    work,
+    lwork2,
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info="   Purpose  
    =======  
  
@@ -91,15 +102,4 @@ protected
  
    =====================================================================  
 "));
-external "Fortran 77" dgeqp3(
-    m,
-    n,
-    Aout,
-    lda,
-    jpvt,
-    tau,
-    work,
-    lwork2,
-    info) annotation(Library = {"lapack"});
-
 end dgeqp3;

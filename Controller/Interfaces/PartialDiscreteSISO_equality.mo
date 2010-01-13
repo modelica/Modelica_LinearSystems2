@@ -14,21 +14,6 @@ partial block PartialDiscreteSISO_equality
     "Continuous or discrete output signal of block" 
     annotation (extent=[100, -10; 120, 10]);
 
-  annotation (
-    Coordsys(
-      extent=[-100, -100; 100, 100],
-      grid=[2, 2],
-      component=[20, 20]),
-    Icon,
-    Window(
-      x=0.37,
-      y=0.09,
-      width=0.52,
-      height=0.68),
-    Diagram,
-    Documentation(info="<HTML>
-</HTML>
-"));
 protected
   outer SampleClock sampleClock "Global options"                      annotation(Hide=true);
 
@@ -52,4 +37,19 @@ equation
 
 initial equation
   pre(ticks) = 0;
+  annotation (
+    Coordsys(
+      extent=[-100, -100; 100, 100],
+      grid=[2, 2],
+      component=[20, 20]),
+    Icon,
+    Window(
+      x=0.37,
+      y=0.09,
+      width=0.52,
+      height=0.68),
+    Diagram,
+    Documentation(info="<HTML>
+</HTML>
+"));
 end PartialDiscreteSISO_equality;

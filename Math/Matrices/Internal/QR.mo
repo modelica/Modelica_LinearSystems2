@@ -9,6 +9,36 @@ function QR
   output Real R[size(A, 2),size(A, 2)] "Square upper triangular matrix";
   output Integer p[size(A, 2)] "Column permutation vector";
 
+protected
+  Integer nrow=size(A, 1);
+  Integer ncol=size(A, 2);
+  Real tau[ncol];
+algorithm
+  assert(nrow >= ncol, "\nInput matrix A[" + String(nrow) + "," + String(ncol)
+     + "] has more columns as rows.
+This is not allowed when calling Modelica.Matrices.QR(A).");
+  if ncol > 0 then
+    (Q,tau,p) := Modelica.Math.Matrices.LAPACK.dgeqpf(A);
+
+  // determine R
+    R := zeros(ncol, ncol);
+    for i in 1:ncol loop
+      for j in i:ncol loop
+        R[i, j] := Q[i, j];
+      end for;
+    end for;
+
+    Q := Modelica.Math.Matrices.LAPACK.dorgqr(Q, tau);
+  else
+    Q := fill(
+      1,
+      size(A, 1),
+      0);
+    R := fill(
+      0,
+      0,
+      0);
+  end if;
   annotation (Documentation(info="<HTML>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -74,34 +104,4 @@ called as: <code>(,R,p) = QR(A)</code>.
                                     0     ,  0     ,  0.65..];
 </pre></blockquote>
 </HTML>"));
-protected
-  Integer nrow=size(A, 1);
-  Integer ncol=size(A, 2);
-  Real tau[ncol];
-algorithm
-  assert(nrow >= ncol, "\nInput matrix A[" + String(nrow) + "," + String(ncol)
-     + "] has more columns as rows.
-This is not allowed when calling Modelica.Matrices.QR(A).");
-  if ncol > 0 then
-    (Q,tau,p) := Modelica.Math.Matrices.LAPACK.dgeqpf(A);
-
-  // determine R
-    R := zeros(ncol, ncol);
-    for i in 1:ncol loop
-      for j in i:ncol loop
-        R[i, j] := Q[i, j];
-      end for;
-    end for;
-
-    Q := Modelica.Math.Matrices.LAPACK.dorgqr(Q, tau);
-  else
-    Q := fill(
-      1,
-      size(A, 1),
-      0);
-    R := fill(
-      0,
-      0,
-      0);
-  end if;
 end QR;

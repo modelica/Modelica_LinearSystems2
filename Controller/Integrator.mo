@@ -11,6 +11,20 @@ parameter Boolean withDelay=false if not continuous;
 
   parameter Real y_start=0 "Initial or guess value of output (=state)" 
                                                                annotation(Dialog(tab="Advanced options"));
+equation
+  if continuous then
+    der(y) = k*u;
+
+  end if;
+  connect(y, discretePart.y[1]);
+initial equation
+  if continuous then
+    if init == Types.Init.InitialState or init == Types.Init.InitialOutput then
+      y = y_start;
+    elseif init == Types.Init.SteadyState then
+      der(y) = 0;
+    end if;
+  end if;
   annotation (
     Window(
       x=0.29,
@@ -84,18 +98,4 @@ interpreted as \"initType = InitialState\".
           lineColor={0,0,0},
           textString="s"),
         Line(points={{-46,0},{46,0}}, color={0,0,0})}));
-equation
-  if continuous then
-    der(y) = k*u;
-
-  end if;
-  connect(y, discretePart.y[1]);
-initial equation
-  if continuous then
-    if init == Types.Init.InitialState or init == Types.Init.InitialOutput then
-      y = y_start;
-    elseif init == Types.Init.SteadyState then
-      der(y) = 0;
-    end if;
-  end if;
 end Integrator;

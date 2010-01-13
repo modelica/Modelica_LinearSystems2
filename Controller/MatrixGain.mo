@@ -26,6 +26,8 @@ protected
       m,
       n) else K;
 
+equation
+  y = K2*u;
   annotation (
     Documentation(info="<html>
 <p>
@@ -67,6 +69,4 @@ Example:
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics));
-equation
-  y = K2*u;
 end MatrixGain;

@@ -4,6 +4,8 @@ function from_Hz "Convert from Hz to rad/s"
   input Modelica.SIunits.Frequency f "frequency";
   output Modelica.SIunits.AngularVelocity w "angular velocity";
 
+algorithm
+  w := 2*Modelica.Constants.pi*f;
   annotation (Icon(graphics={Text(
           extent={{-20,100},{-100,20}},
           lineColor={0,0,0},
@@ -11,6 +13,4 @@ function from_Hz "Convert from Hz to rad/s"
           extent={{100,-20},{20,-100}},
           lineColor={0,0,0},
           textString="°C")}));
-algorithm
-  w := 2*Modelica.Constants.pi*f;
 end from_Hz;

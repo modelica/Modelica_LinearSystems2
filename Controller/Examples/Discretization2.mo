@@ -7,18 +7,6 @@ model Discretization2
   inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(sampleTime=
         0.01) 
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-            -100},{100,100}}), graphics), Documentation(info="<html>
-<p>
-Demonstrates the different discretization methods by simulating the step
-response of a second order system as continuous system and as discrete system
-with the supported discretization methods. The step starts with an offset at 0.1 s
-to demonstrate the steady-state initialization.
-</p>
-
-</html>"),
-    experiment(Tolerance=1e-006),
-    experimentSetupOutput);
 
   Modelica_LinearSystems2.Controller.SecondOrder impulseExact(
     D=D,
@@ -65,4 +53,16 @@ equation
       points={{-2,-70},{-40,-70},{-40,-30},{-59,-30}},
       color={0,0,127},
       smooth=Smooth.None));
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
+            -100},{100,100}}), graphics), Documentation(info="<html>
+<p>
+Demonstrates the different discretization methods by simulating the step
+response of a second order system as continuous system and as discrete system
+with the supported discretization methods. The step starts with an offset at 0.1 s
+to demonstrate the steady-state initialization.
+</p>
+
+</html>"),
+    experiment(Tolerance=1e-006),
+    experimentSetupOutput);
 end Discretization2;

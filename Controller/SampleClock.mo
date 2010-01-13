@@ -11,6 +11,14 @@ block SampleClock
     "Base sample time for discrete blocks";
   parameter Types.Init initType=Modelica_LinearSystems2.Controller.Types.Init.SteadyState
     "Type of initialization of Sampled blocks" annotation(Evaluate=true);
+  output Boolean sampleTrigger "Trigger that is true at every sampleTime" 
+                                                                         annotation(Hide=true);
+equation
+  if blockType == Types.BlockType.Continuous then
+     sampleTrigger = false;
+  else
+     sampleTrigger = sample(sampleTime, sampleTime);
+  end if;
   annotation (
     defaultComponentName="sampleClock",
     defaultComponentPrefixes="inner",
@@ -56,12 +64,4 @@ time defined in the SampleClock component.
 </p>
 </HTML>
 "));
-  output Boolean sampleTrigger "Trigger that is true at every sampleTime" 
-                                                                         annotation(Hide=true);
-equation
-  if blockType == Types.BlockType.Continuous then
-     sampleTrigger = false;
-  else
-     sampleTrigger = sample(sampleTime, sampleTime);
-  end if;
 end SampleClock;

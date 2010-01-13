@@ -8,6 +8,23 @@ function LU_solve2
   input Real B[size(LU, 1),:] "Right hand side matrix of P*L*U*X=B";
   output Real X[size(B, 1),size(B, 2)] "Solution matrix such that P*L*U*X = B";
 
+algorithm
+  for i in 1:size(LU, 1) loop
+    assert(LU[i, i] <> 0, "Solving a linear system of equations with function
+\"Matrices.LU_solve\" is not possible, since the LU decomposition
+is singular, i.e., no unique solution exists.");
+  end for;
+  if size(LU, 1) > 0 then
+    X := LAPACK.dgetrs(
+      LU,
+      pivots,
+      B);
+  else
+    X := fill(
+      0,
+      size(B, 1),
+      size(B, 2));
+  end if;
   annotation (Documentation(info="<HTML>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <blockquote><pre>
@@ -80,21 +97,4 @@ matrix A was interchanged with row pivots[i].
 <a href=\"Modelica:Modelica.Math.Matrices.LU\">Matrices.LU</a>, 
 <a href=\"Modelica:Modelica.Math.Matrices.solve2\">Matrices.solve2</a>,
 </HTML>"));
-algorithm
-  for i in 1:size(LU, 1) loop
-    assert(LU[i, i] <> 0, "Solving a linear system of equations with function
-\"Matrices.LU_solve\" is not possible, since the LU decomposition
-is singular, i.e., no unique solution exists.");
-  end for;
-  if size(LU, 1) > 0 then
-    X := LAPACK.dgetrs(
-      LU,
-      pivots,
-      B);
-  else
-    X := fill(
-      0,
-      size(B, 1),
-      size(B, 2));
-  end if;
 end LU_solve2;

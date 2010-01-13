@@ -1,79 +1,6 @@
 within Modelica_LinearSystems2.Examples.Utilities;
 model DoublePendulum "double pendulum system"
 
-  annotation (
-    experiment(
-      StartTime=1,
-      StopTime=10,
-      Algorithm="Dassl"),
-    Diagram(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-150,-100},{150,100}},
-        grid={2,2}), graphics),
-    Documentation(info="<html>
- 
-Model of a simple double pendulum system. <br>
-The physical Model is used in Modelica_LinearSystems2.Examples.StateSpace.doublePendulumController where it is being
-linearized an used as a base for linear controller design. The results are used to control the crane system
-in Modelica_LinearSystems2.Controller.Examples.DoublePendulum.mo
- 
-</html>"),
-    experimentSetupOutput,
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{150,
-            100}}), graphics={
-        Rectangle(
-          extent={{-150,122},{150,-120}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-82,22},{82,18}},
-          lineColor={0,0,255},
-          fillPattern=FillPattern.Forward),
-        Rectangle(extent={{-44,54},{0,28}}, lineColor={0,0,0}),
-        Ellipse(
-          extent={{-40,34},{-28,22}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          fillColor={255,255,255},
-          lineThickness=0.5),
-        Ellipse(
-          extent={{-16,34},{-4,22}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          lineThickness=0.5),
-        Line(
-          points={{-18,-16},{10,-62}},
-          color={0,0,0},
-          smooth=Smooth.None),
-        Ellipse(
-          extent={{4,-56},{20,-72}},
-          lineColor={0,0,0},
-          fillColor={0,255,255},
-          fillPattern=FillPattern.Solid),
-        Ellipse(
-          extent={{-25,44},{-19,38}},
-          lineColor={0,0,0},
-          fillColor={95,95,95},
-          fillPattern=FillPattern.Solid),
-        Line(
-          points={{28,46},{4,46}},
-          color={0,0,0},
-          smooth=Smooth.None),
-        Line(
-          points={{34,40},{10,40}},
-          color={0,0,0},
-          smooth=Smooth.None),
-        Line(
-          points={{-22,40},{-18,-16}},
-          color={0,0,0},
-          smooth=Smooth.None),
-        Ellipse(
-          extent={{-20,-15},{-14,-21}},
-          lineColor={0,0,0},
-          fillColor={95,95,95},
-          fillPattern=FillPattern.Solid)}));
   parameter Modelica.SIunits.Mass m_trolley = 5;
   parameter Modelica.SIunits.Mass m_load = 20;
   parameter Modelica.SIunits.Length length = 2;
@@ -338,4 +265,77 @@ equation
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
+  annotation (
+    experiment(
+      StartTime=1,
+      StopTime=10,
+      Algorithm="Dassl"),
+    Diagram(coordinateSystem(
+        preserveAspectRatio=true,
+        extent={{-150,-100},{150,100}},
+        grid={2,2}), graphics),
+    Documentation(info="<html>
+ 
+Model of a simple double pendulum system. <br>
+The physical Model is used in Modelica_LinearSystems2.Examples.StateSpace.doublePendulumController where it is being
+linearized an used as a base for linear controller design. The results are used to control the crane system
+in Modelica_LinearSystems2.Controller.Examples.DoublePendulum.mo
+ 
+</html>"),
+    experimentSetupOutput,
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{150,
+            100}}), graphics={
+        Rectangle(
+          extent={{-150,122},{150,-120}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-82,22},{82,18}},
+          lineColor={0,0,255},
+          fillPattern=FillPattern.Forward),
+        Rectangle(extent={{-44,54},{0,28}}, lineColor={0,0,0}),
+        Ellipse(
+          extent={{-40,34},{-28,22}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          fillColor={255,255,255},
+          lineThickness=0.5),
+        Ellipse(
+          extent={{-16,34},{-4,22}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          lineThickness=0.5),
+        Line(
+          points={{-18,-16},{10,-62}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Ellipse(
+          extent={{4,-56},{20,-72}},
+          lineColor={0,0,0},
+          fillColor={0,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-25,44},{-19,38}},
+          lineColor={0,0,0},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{28,46},{4,46}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Line(
+          points={{34,40},{10,40}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Line(
+          points={{-22,40},{-18,-16}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Ellipse(
+          extent={{-20,-15},{-14,-21}},
+          lineColor={0,0,0},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid)}));
 end DoublePendulum;

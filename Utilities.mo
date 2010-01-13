@@ -6,7 +6,6 @@ package Plot "Functions for generation of 2D-plots"
        input Modelica.SIunits.Frequency freqHz = 2 "Frequency of sine wave";
        input Modelica.SIunits.Damping damping = 0.8
           "Damping coefficient of sine wave";
-        annotation(interactive=true);
       protected
        Integer nX = 500;
        Integer nPeriod = 5;
@@ -24,6 +23,7 @@ package Plot "Functions for generation of 2D-plots"
             heading="Bearing friction torque",
             xLabel="w [rad/s]",
             yLabel="[N.m]"));
+        annotation(interactive=true);
     end plotSine;
 
     function plotTwoSine "Plot two sine functions in one diagram"
@@ -33,7 +33,6 @@ package Plot "Functions for generation of 2D-plots"
           "Damping coefficient of sine wave 12";
        input Modelica.SIunits.Damping damping2 = 0.1
           "Damping coefficient of sine wave 2";
-        annotation(interactive=true);
 
       protected
        Integer nX = 500;
@@ -60,6 +59,7 @@ package Plot "Functions for generation of 2D-plots"
             heading="Bearing friction torques",
             xLabel="w [rad/s]",
             yLabel="[N.m]"));
+        annotation(interactive=true);
     end plotTwoSine;
 
     function showSinesInVectorDiagrams
@@ -70,7 +70,6 @@ package Plot "Functions for generation of 2D-plots"
           "Damping coefficient of sine wave 12";
        input Modelica.SIunits.Damping damping2 = 0.1
           "Damping coefficient of sine wave 2";
-        annotation(interactive=true);
 
       protected
        Integer nX = 500;
@@ -116,13 +115,13 @@ package Plot "Functions for generation of 2D-plots"
               lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.Circle)},
             xLabel="w [rad/s]",
             yLabel="[N.m]")});
+        annotation(interactive=true);
     end showSinesInVectorDiagrams;
 
     function showLegendStyles
         "Show several vector-diagram plots that demonstrate the various legend options"
         import Modelica_LinearSystems2.Utilities.Plot.Records;
         import Modelica_LinearSystems2.Utilities.Plot.Types;
-          annotation(interactive=true);
 
       protected
        Real x[2]={0,1};
@@ -179,13 +178,13 @@ package Plot "Functions for generation of 2D-plots"
             yTopLeft=0,
             diagramWidth=100));
 
+          annotation(interactive=true);
     end showLegendStyles;
 
     function showMatrixDiagrams
         "Demonstrate the layout of diagrams in matrix layout"
         import Modelica_LinearSystems2.Utilities.Plot.Records;
         import Modelica_LinearSystems2.Utilities.Plot.Types;
-      annotation(interactive=true);
 
       protected
        Real x[2]={0,1};
@@ -211,6 +210,7 @@ package Plot "Functions for generation of 2D-plots"
             5,
             3), Records.Device(diagramWidth=80));
 
+      annotation(interactive=true);
     end showMatrixDiagrams;
 
     package Utilities
@@ -606,88 +606,16 @@ package Import "Functions to import data in a Modelica environment"
       output String inputNames[:] "Modelica names of inputs";
       output String outputNames[:] "Modelica names of outputs";
       output String stateNames[:] "Modelica names of states";
-      annotation(interactive=true);
     algorithm
       (A,B,C,D,inputNames,outputNames,stateNames) :=
         Modelica_LinearSystems2.Utilities.Import.linearize("Modelica_LinearSystems2.Utilities.Import.Examples.Utilities.DoublePendulum",
         1.0);
+      annotation(interactive=true);
     end linearizeDoublePendulum;
 
     package Utilities
       model DoublePendulum "double pendulum system"
 
-        annotation (
-          experiment(
-            StartTime=1,
-            StopTime=10,
-            Algorithm="Dassl"),
-          Diagram(coordinateSystem(
-              preserveAspectRatio=true,
-              extent={{-150,-100},{150,100}},
-              grid={2,2}), graphics),
-          Documentation(info="<html>
- 
-<p>
-Model of a simple double pendulum system. 
-It is used to demonstrate linearization
-</p>
- 
-</html>"),experimentSetupOutput,
-          Icon(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{
-                    150,100}}), graphics={
-                Rectangle(
-                  extent={{-150,122},{150,-120}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),
-                Rectangle(
-                  extent={{-82,22},{82,18}},
-                  lineColor={0,0,255},
-                  fillPattern=FillPattern.Forward),
-                Rectangle(extent={{-44,54},{0,28}}, lineColor={0,0,0}),
-                Ellipse(
-                  extent={{-40,34},{-28,22}},
-                  lineColor={0,0,0},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255},
-                  lineThickness=0.5),
-                Ellipse(
-                  extent={{-16,34},{-4,22}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  lineThickness=0.5),
-                Line(
-                  points={{-18,-16},{10,-62}},
-                  color={0,0,0},
-                  smooth=Smooth.None),
-                Ellipse(
-                  extent={{4,-56},{20,-72}},
-                  lineColor={0,0,0},
-                  fillColor={0,255,255},
-                  fillPattern=FillPattern.Solid),
-                Ellipse(
-                  extent={{-25,44},{-19,38}},
-                  lineColor={0,0,0},
-                  fillColor={95,95,95},
-                  fillPattern=FillPattern.Solid),
-                Line(
-                  points={{28,46},{4,46}},
-                  color={0,0,0},
-                  smooth=Smooth.None),
-                Line(
-                  points={{34,40},{10,40}},
-                  color={0,0,0},
-                  smooth=Smooth.None),
-                Line(
-                  points={{-22,40},{-18,-16}},
-                  color={0,0,0},
-                  smooth=Smooth.None),
-                Ellipse(
-                  extent={{-20,-15},{-14,-21}},
-                  lineColor={0,0,0},
-                  fillColor={95,95,95},
-                  fillPattern=FillPattern.Solid)}));
         parameter Modelica.SIunits.Mass m_trolley = 5;
         parameter Modelica.SIunits.Mass m_load = 20;
         parameter Modelica.SIunits.Length length = 2;
@@ -953,6 +881,78 @@ It is used to demonstrate linearization
             color={95,95,95},
             thickness=0.5,
             smooth=Smooth.None));
+        annotation (
+          experiment(
+            StartTime=1,
+            StopTime=10,
+            Algorithm="Dassl"),
+          Diagram(coordinateSystem(
+              preserveAspectRatio=true,
+              extent={{-150,-100},{150,100}},
+              grid={2,2}), graphics),
+          Documentation(info="<html>
+ 
+<p>
+Model of a simple double pendulum system. 
+It is used to demonstrate linearization
+</p>
+ 
+</html>"),experimentSetupOutput,
+          Icon(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{
+                    150,100}}), graphics={
+                Rectangle(
+                  extent={{-150,122},{150,-120}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Rectangle(
+                  extent={{-82,22},{82,18}},
+                  lineColor={0,0,255},
+                  fillPattern=FillPattern.Forward),
+                Rectangle(extent={{-44,54},{0,28}}, lineColor={0,0,0}),
+                Ellipse(
+                  extent={{-40,34},{-28,22}},
+                  lineColor={0,0,0},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255},
+                  lineThickness=0.5),
+                Ellipse(
+                  extent={{-16,34},{-4,22}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  lineThickness=0.5),
+                Line(
+                  points={{-18,-16},{10,-62}},
+                  color={0,0,0},
+                  smooth=Smooth.None),
+                Ellipse(
+                  extent={{4,-56},{20,-72}},
+                  lineColor={0,0,0},
+                  fillColor={0,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-25,44},{-19,38}},
+                  lineColor={0,0,0},
+                  fillColor={95,95,95},
+                  fillPattern=FillPattern.Solid),
+                Line(
+                  points={{28,46},{4,46}},
+                  color={0,0,0},
+                  smooth=Smooth.None),
+                Line(
+                  points={{34,40},{10,40}},
+                  color={0,0,0},
+                  smooth=Smooth.None),
+                Line(
+                  points={{-22,40},{-18,-16}},
+                  color={0,0,0},
+                  smooth=Smooth.None),
+                Ellipse(
+                  extent={{-20,-15},{-14,-21}},
+                  lineColor={0,0,0},
+                  fillColor={95,95,95},
+                  fillPattern=FillPattern.Solid)}));
       end DoublePendulum;
     end Utilities;
   end Examples;
@@ -963,31 +963,6 @@ It is used to demonstrate linearization
         "Simulate until T_linearize and then linearize" 
                                                       annotation(Dialog);
 
-     annotation (interactive=true, Documentation(info="<html>
-<p>This function initializes a Modelica model and then simulates the model with its default experiment options until time instant \"t_linearize\". If t_linearize=0, no simulation takes place (only initialization). At the simulation stop time, the model is linearized in such a form that </p>
-<p><ul>
-<li>all top-level signals with prefix \"input\" are treated as inputs <b>u</b>(t) of the model ,</li>
-<li>all top-level signals with prefix \"output\" are treated as outputs <b>y</b>(t) of the model,</li>
-<li>all variables that appear differentiated and that are selected as states at this time instant are treated as states <b>x</b> of the model.</li>
-</ul></p>
-<p>Formally, the non-linear hybrid differential-algebraic equation system is therefore treated as the following ordinary equation system at time instant t_linearize: </p>
-<pre>    der(<b>x</b>) = <b>f</b>(<b>x</b>,<b>u</b>)</pre>
-<pre>         <b>y</b> = <b>g</b>(<b>x</b>,<b>u</b>) </pre>
-<p>Taylor series expansion (linearization) of this model around the simulation stop time t_linearize: </p>
-<pre>   <b>u</b>0 = <b>u</b>(t_linearize)</pre>
-<pre>   <b>y</b>0 = <b>y</b>(t_linearize)</pre>
-<pre>   <b>x</b>0 = <b>x</b>(t_linearize) </pre>
-<p>and neglecting higher order terms results in the following system: </p>
-<pre>   der(<b>x</b>0+d<b>x</b>) = <b>f</b>(<b>x</b>0,<b>u</b>0) + der(<b>f</b>,<b>x</b>)*d<b>x</b> + der(<b>f</b>,<b>u</b>)*d<b>u</b></pre>
-<pre>      <b>y</b>0 + d<b>y</b> = <b>g</b>(<b>x</b>0,<b>u</b>0) + der(<b>g</b>,<b>x</b>)*d<b>x</b> + der(<b>g</b>,<b>u</b>)*d<b>u</b></pre>
-<p>where der(<b>f</b>,<b>x</b>) is the partial derivative of <b>f</b> with respect to <b>x</b>, and the partial derivatives are computed at the linearization point t_linearize. Re-ordering of terms gives (note <b>der</b>(<b>x</b>0) = <b>0</b>): </p>
-<pre>   der(d<b>x</b>) = der(<b>f</b>,<b>x</b>)*d<b>x</b> + der(<b>f</b>,<b>u</b>)*d<b>u</b> + <b>f</b>(<b>x</b>0,<b>u</b>0)</pre>
-<pre>        d<b>y</b> = der(<b>g</b>,<b>x</b>)*d<b>x</b> + der(<b>g</b>,<b>u</b>)*d<b>u</b> + (<b>g</b>(<b>x</b>0,<b>u</b>0) - <b>y</b>0)</pre>
-<p>or </p>
-<pre>   der(d<b>x</b>) = <b>A</b>*d<b>x</b> + <b>B</b>*d<b>u</b> + <b>f</b>0</pre>
-<pre>        d<b>y</b> = <b>C</b>*d<b>x</b> + <b>D</b>*d<b>u</b></pre>
-<p>This function returns the matrices <b>A</b>, <b>B</b>, <b>C</b>, <b>D</b> and assumes that the linearization point is a steady-state point of the simulation (i.e., <b>f</b>(<b>x</b>0,<b>u</b>0) = 0). Additionally, the full Modelica names of all inputs, outputs and states shall be returned if possible (default is to return empty name strings).</p>
-</html>"));
 
     protected
     String fileName="dslin";
@@ -1018,6 +993,31 @@ It is used to demonstrate linearization
     output String stateNames[nx] =  xuyName[1:nx] "Modelica names of states";
   algorithm
 
+     annotation (interactive=true, Documentation(info="<html>
+<p>This function initializes a Modelica model and then simulates the model with its default experiment options until time instant \"t_linearize\". If t_linearize=0, no simulation takes place (only initialization). At the simulation stop time, the model is linearized in such a form that </p>
+<p><ul>
+<li>all top-level signals with prefix \"input\" are treated as inputs <b>u</b>(t) of the model ,</li>
+<li>all top-level signals with prefix \"output\" are treated as outputs <b>y</b>(t) of the model,</li>
+<li>all variables that appear differentiated and that are selected as states at this time instant are treated as states <b>x</b> of the model.</li>
+</ul></p>
+<p>Formally, the non-linear hybrid differential-algebraic equation system is therefore treated as the following ordinary equation system at time instant t_linearize: </p>
+<pre>    der(<b>x</b>) = <b>f</b>(<b>x</b>,<b>u</b>)</pre>
+<pre>         <b>y</b> = <b>g</b>(<b>x</b>,<b>u</b>) </pre>
+<p>Taylor series expansion (linearization) of this model around the simulation stop time t_linearize: </p>
+<pre>   <b>u</b>0 = <b>u</b>(t_linearize)</pre>
+<pre>   <b>y</b>0 = <b>y</b>(t_linearize)</pre>
+<pre>   <b>x</b>0 = <b>x</b>(t_linearize) </pre>
+<p>and neglecting higher order terms results in the following system: </p>
+<pre>   der(<b>x</b>0+d<b>x</b>) = <b>f</b>(<b>x</b>0,<b>u</b>0) + der(<b>f</b>,<b>x</b>)*d<b>x</b> + der(<b>f</b>,<b>u</b>)*d<b>u</b></pre>
+<pre>      <b>y</b>0 + d<b>y</b> = <b>g</b>(<b>x</b>0,<b>u</b>0) + der(<b>g</b>,<b>x</b>)*d<b>x</b> + der(<b>g</b>,<b>u</b>)*d<b>u</b></pre>
+<p>where der(<b>f</b>,<b>x</b>) is the partial derivative of <b>f</b> with respect to <b>x</b>, and the partial derivatives are computed at the linearization point t_linearize. Re-ordering of terms gives (note <b>der</b>(<b>x</b>0) = <b>0</b>): </p>
+<pre>   der(d<b>x</b>) = der(<b>f</b>,<b>x</b>)*d<b>x</b> + der(<b>f</b>,<b>u</b>)*d<b>u</b> + <b>f</b>(<b>x</b>0,<b>u</b>0)</pre>
+<pre>        d<b>y</b> = der(<b>g</b>,<b>x</b>)*d<b>x</b> + der(<b>g</b>,<b>u</b>)*d<b>u</b> + (<b>g</b>(<b>x</b>0,<b>u</b>0) - <b>y</b>0)</pre>
+<p>or </p>
+<pre>   der(d<b>x</b>) = <b>A</b>*d<b>x</b> + <b>B</b>*d<b>u</b> + <b>f</b>0</pre>
+<pre>        d<b>y</b> = <b>C</b>*d<b>x</b> + <b>D</b>*d<b>u</b></pre>
+<p>This function returns the matrices <b>A</b>, <b>B</b>, <b>C</b>, <b>D</b> and assumes that the linearization point is a steady-state point of the simulation (i.e., <b>f</b>(<b>x</b>0,<b>u</b>0) = 0). Additionally, the full Modelica names of all inputs, outputs and states shall be returned if possible (default is to return empty name strings).</p>
+</html>"));
   end linearize;
 end Import;
 

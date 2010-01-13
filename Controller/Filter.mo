@@ -74,8 +74,7 @@ protected
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="f_cut=%f_cut"),
-        Line(points={{22,10},{14,18},{6,22},{-12,28},{-80,28}}, color={0,0,127}), 
-
+        Line(points={{22,10},{14,18},{6,22},{-12,28},{-80,28}}, color={0,0,127}),
         Rectangle(
           extent={{-80,-78},{22,10}},
           lineColor={160,160,164},

@@ -8,6 +8,14 @@ protected
   Real LU[size(A, 1),size(A, 1)];
   Integer pivots[size(A, 1)];
 
+algorithm
+  if size(LU, 1) > 0 then
+    (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(A);
+    result := product(LU[i, i] for i in 1:size(A, 1))*product(if pivots[i] == i then 
+            1 else -1 for i in 1:size(pivots, 1));
+  else
+    result := -1e100;
+  end if;
   annotation (Documentation(info="<HTML>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -26,12 +34,4 @@ to compute the rank of a matrix.
 <a href=\"Modelica://Modelica.Math.Matrices.rank\">Matrices.rank</a>,
 <a href=\"Modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>
 </HTML>"));
-algorithm
-  if size(LU, 1) > 0 then
-    (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(A);
-    result := product(LU[i, i] for i in 1:size(A, 1))*product(if pivots[i] == i then 
-            1 else -1 for i in 1:size(pivots, 1));
-  else
-    result := -1e100;
-  end if;
 end det;

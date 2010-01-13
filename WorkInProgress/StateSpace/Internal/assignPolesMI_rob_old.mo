@@ -330,7 +330,6 @@ condX2 := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.condition
 //    Complex.Vectors.print("gammaSorted", gammaSorted);
 //    Complex.Vectors.print("ev", ev);
 
-  annotation (experiment, experimentSetupOutput);
 
 public
   encapsulated record subSpace
@@ -340,4 +339,5 @@ public
     Modelica_LinearSystems2.Math.Complex S[:,:];
   end subSpace;
 
+  annotation (experiment, experimentSetupOutput);
 end assignPolesMI_rob_old;

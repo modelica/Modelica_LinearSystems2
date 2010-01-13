@@ -7,7 +7,6 @@ function plotBode3
   import Modelica_LinearSystems2.TransferFunction;
 
   output Boolean ok;
-  annotation (interactive=true);
 protected
   TransferFunction tf=TransferFunction({1}, {1,0,1});
 
@@ -15,4 +14,5 @@ algorithm
   Modelica_LinearSystems2.TransferFunction.Plot.bode(    tf);
   ok := true;
 
+  annotation (interactive=true);
 end plotBode3;

@@ -20,7 +20,6 @@ function plotBodeMIMO
 
   output Boolean ok;
 
-  annotation (interactive=true);
 
 protected
   StateSpace ss=if systemOnFile then 
@@ -34,4 +33,5 @@ algorithm
   Modelica_LinearSystems2.StateSpace.Plot.bodeMIMO(    ss);
   ok := true;
 
+  annotation (interactive=true);
 end plotBodeMIMO;

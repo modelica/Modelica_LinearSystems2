@@ -16,6 +16,20 @@ protected
                                   annotation(Hide=true);
   discrete Real y_delaySampled
     "Sampled output with a delay of one sample period"                            annotation(Hide=true);
+equation
+  when {initial(),sampleTrigger} then
+     u_sampled = u;
+     y_bound = if u > y_max then y_max else if u < y_min then y_min else u;
+     y_sampled = if bits > 0 then quantization*floor(abs(y_bound/quantization) + 0.5)
+                 *(if y_bound >= 0 then +1 else -1) else y_bound;
+     if unitDelay then
+        y_delaySampled = if initial() then y_sampled else pre(y_sampled);
+     else
+        y_delaySampled = y_sampled;
+     end if;
+  end when;
+
+  y = y_delaySampled;
   annotation (
     Coordsys(
       extent=[-100, -100; 100, 100],
@@ -53,18 +67,4 @@ protected
       y=0.01,
       width=0.35,
       height=0.49));
-equation
-  when {initial(),sampleTrigger} then
-     u_sampled = u;
-     y_bound = if u > y_max then y_max else if u < y_min then y_min else u;
-     y_sampled = if bits > 0 then quantization*floor(abs(y_bound/quantization) + 0.5)
-                 *(if y_bound >= 0 then +1 else -1) else y_bound;
-     if unitDelay then
-        y_delaySampled = if initial() then y_sampled else pre(y_sampled);
-     else
-        y_delaySampled = y_sampled;
-     end if;
-  end when;
-
-  y = y_delaySampled;
 end DiscreteDAconverter;

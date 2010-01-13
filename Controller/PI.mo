@@ -11,6 +11,25 @@ block PI "Proportional-Integral controller (continuous or discrete block)"
   parameter Real x_start=0 "Initial or guess value of state"  annotation(Dialog(tab="Advanced options"));
 parameter Real y_start=0 "Initial value of output"  annotation(Dialog(tab="Advanced options"));
   Modelica.Blocks.Interfaces.RealOutput x(start=x_start) "State of block";
+equation
+  connect(y, discretePart.y[1]);
+  connect(x, discretePart.x[1]);
+
+  if continuous then
+    der(x) = u/T;
+    y = k*(x + u);
+  end if;
+
+initial equation
+  if continuous then
+    if init == Types.Init.SteadyState then
+    der(x) = 0;
+  elseif init == Types.Init.InitialState then
+    x = x_start;
+  elseif init == Types.Init.InitialOutput then
+    y = y_start;
+  end if;
+  end if;
    annotation (
     Window(
       x=0.29,
@@ -94,23 +113,4 @@ interpreted as \"initType = InitialState\".
           lineColor={0,0,0},
           textString="T s"),
         Line(points={{-26,0},{52,0}}, color={0,0,0})}));
-equation
-  connect(y, discretePart.y[1]);
-  connect(x, discretePart.x[1]);
-
-  if continuous then
-    der(x) = u/T;
-    y = k*(x + u);
-  end if;
-
-initial equation
-  if continuous then
-    if init == Types.Init.SteadyState then
-    der(x) = 0;
-  elseif init == Types.Init.InitialState then
-    x = x_start;
-  elseif init == Types.Init.InitialOutput then
-    y = y_start;
-  end if;
-  end if;
 end PI;

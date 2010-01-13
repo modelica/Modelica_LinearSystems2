@@ -21,6 +21,36 @@ function FIR_coefficients "Calculates the FIR-filter coefficient vector"
                      (if specType == FIRspec.Window then if mod(order,2)>0 and filterType == FilterType.HighPass then order+2 else order+1 else 
                      size(a_desired,1))] "Filter coefficients";
 
+protected
+  constant Real pi=Modelica.Constants.pi;
+  Boolean isEven=mod(order,2)==0;
+  Integer order2 = if not isEven and filterType == FilterType.HighPass then order+1 else order;
+  Real Wc=2*pi*f_cut*Ts;
+  Integer i;
+  Real w[order2 + 1];
+  Real k;
+algorithm
+assert(f_cut<=1/(2*Ts),"The cut-off frequency f_cut may not be greater than half the sample frequency (Nyquist frequency), i.e. f_cut <= " + String(1/(2*Ts)) + " but is "+String(f_cut));
+  if specType == FIRspec.MeanValue then
+     a := fill(1/L, L);
+  elseif specType == FIRspec.Window then
+     w := Internal.FIR_window(order2 + 1, window, beta);
+     for i in 1:order2 + 1 loop
+       k := i - 1 - order2/2;
+       if i - 1 == order2/2 then
+         a[i] := if filterType == FilterType.LowPass then Wc*w[i]/pi else 
+                 w[i] - Wc*w[i]/pi;
+       else
+         a[i] := if filterType == FilterType.LowPass then sin(k*Wc)*
+           w[i]/(k*pi) else w[i]*(sin(k*pi) - sin(k*Wc))/(k*pi);
+       end if;
+     end for;
+  else
+     a := a_desired;
+       end if;
+       if not isEven and filterType == FilterType.HighPass then
+         Modelica.Utilities.Streams.print("The requested order of the FIR filter in FIR_coefficients is odd and has been increased by one to get an even order filter\n");
+       end if;
   annotation (
     Coordsys(
       extent=[-100, -100; 100, 100],
@@ -55,34 +85,4 @@ The beta parameter is only needed by the Kaiser window.
 </p>
 </HTML>
 "));
-protected
-  constant Real pi=Modelica.Constants.pi;
-  Boolean isEven=mod(order,2)==0;
-  Integer order2 = if not isEven and filterType == FilterType.HighPass then order+1 else order;
-  Real Wc=2*pi*f_cut*Ts;
-  Integer i;
-  Real w[order2 + 1];
-  Real k;
-algorithm
-assert(f_cut<=1/(2*Ts),"The cut-off frequency f_cut may not be greater than half the sample frequency (Nyquist frequency), i.e. f_cut <= " + String(1/(2*Ts)) + " but is "+String(f_cut));
-  if specType == FIRspec.MeanValue then
-     a := fill(1/L, L);
-  elseif specType == FIRspec.Window then
-     w := Internal.FIR_window(order2 + 1, window, beta);
-     for i in 1:order2 + 1 loop
-       k := i - 1 - order2/2;
-       if i - 1 == order2/2 then
-         a[i] := if filterType == FilterType.LowPass then Wc*w[i]/pi else 
-                 w[i] - Wc*w[i]/pi;
-       else
-         a[i] := if filterType == FilterType.LowPass then sin(k*Wc)*
-           w[i]/(k*pi) else w[i]*(sin(k*pi) - sin(k*Wc))/(k*pi);
-       end if;
-     end for;
-  else
-     a := a_desired;
-       end if;
-       if not isEven and filterType == FilterType.HighPass then
-         Modelica.Utilities.Streams.print("The requested order of the FIR filter in FIR_coefficients is odd and has been increased by one to get an even order filter\n");
-       end if;
 end FIR_coefficients;

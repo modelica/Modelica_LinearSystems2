@@ -17,6 +17,17 @@ protected
   Integer lwork=max(1, n);
   Real work[lwork];
 
+external "Fortran 77" dgehrd(
+    n,
+    ilo,
+    ihi,
+    Aout,
+    lda,
+    tau,
+    work,
+    lwork,
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info="
    Purpose  
    =======  
@@ -106,15 +117,4 @@ protected
  
    =====================================================================  
 "));
-external "Fortran 77" dgehrd(
-    n,
-    ilo,
-    ihi,
-    Aout,
-    lda,
-    tau,
-    work,
-    lwork,
-    info) annotation(Library = {"lapack"});
-
 end dgehrd;

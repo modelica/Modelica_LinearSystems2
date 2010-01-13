@@ -37,20 +37,19 @@ function analysis "Example to check controllability of a state space system"
 
   output Boolean ok;
 
-  annotation (interactive=true, Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</b> which is 
-to check whether a system is controllable or not.
-</html>"));
 
 protected
   StateSpace ss=if systemOnFile then Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName) else ssi;
 
-  annotation (Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is 
-to design pole assigment controllers for state space systems with multiple input.
-</html>"));
 algorithm
   ok := false;
   StateSpace.Analysis.analysis(ss, fileName="analysis.html", analyseOptions=analyseOptions, description="Description of the system");
   ok := true;
+  annotation (interactive=true, Documentation(info="<html>
+This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</b> which is 
+to check whether a system is controllable or not.
+</html>"),    Documentation(info="<html>
+This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is 
+to design pole assigment controllers for state space systems with multiple input.
+</html>"));
 end analysis;

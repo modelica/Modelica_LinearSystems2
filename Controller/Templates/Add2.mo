@@ -13,6 +13,9 @@ block Add2
   output Modelica.Blocks.Interfaces.RealOutput y 
                                  annotation (Placement(transformation(
       extent={{80,-10},{100,10}}, rotation=0)));
+
+equation
+  y = u1 + u2;
   annotation (
     Documentation(info="
 <HTML>
@@ -66,7 +69,4 @@ Example:
         Line(points={{-60,0},{-20,0}}, color={0,0,255}),
         Line(points={{20,0},{80,0}}, color={0,0,255}),
         Line(points={{0,-20},{0,-60}}, color={0,0,255})}));
-
-equation
-  y = u1 + u2;
 end Add2;

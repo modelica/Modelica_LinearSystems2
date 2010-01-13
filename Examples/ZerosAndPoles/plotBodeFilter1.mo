@@ -9,8 +9,6 @@ function plotBodeFilter1 "Compute filter and plot frequency response of filter"
   input Integer order=2;
   input Modelica.SIunits.Frequency f_cut=10;
   output Boolean ok;
-  annotation (interactive=true);
-  annotation (interactive=true);
 protected
   ZerosAndPoles tf_filter=ZerosAndPoles.Design.filter(
       order=order,
@@ -23,4 +21,6 @@ algorithm
   ok := true;
 equation
 
+  annotation (interactive=true,
+              interactive=true);
 end plotBodeFilter1;

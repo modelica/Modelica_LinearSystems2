@@ -25,6 +25,30 @@ protected
   Integer lwork=n*(n + 6);
   Real work[lwork];
 
+external "Fortran 77" dgeevx(
+    "B",
+    "V",
+    "V",
+    "E",
+    n,
+    AS,
+    n,
+    alphaReal,
+    alphaImag,
+    lEigenVectors,
+    n,
+    rEigenVectors,
+    n,
+    ilo,
+    ihi,
+    scale,
+    abnrm,
+    rconde,
+    rcondv,
+    work,
+    lwork,
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info="   Purpose  
    =======  
  
@@ -203,28 +227,4 @@ protected
  
    =====================================================================  
 "));
-external "Fortran 77" dgeevx(
-    "B",
-    "V",
-    "V",
-    "E",
-    n,
-    AS,
-    n,
-    alphaReal,
-    alphaImag,
-    lEigenVectors,
-    n,
-    rEigenVectors,
-    n,
-    ilo,
-    ihi,
-    scale,
-    abnrm,
-    rconde,
-    rcondv,
-    work,
-    lwork,
-    info) annotation(Library = {"lapack"});
-
 end dgeevx;

@@ -29,6 +29,36 @@ protected
   Integer iwork[n + 6];
   Integer bwork[n];
 
+external "Fortran 77" dggevx(
+    "B",
+    "V",
+    "V",
+    "B",
+    n,
+    A,
+    n,
+    B,
+    n,
+    alphaReal,
+    alphaImag,
+    beta,
+    lEigenVectors,
+    n,
+    rEigenVectors,
+    n,
+    ilo,
+    ihi,
+    lscale,
+    rscale,
+    abnrm,
+    bbnrm,
+    rconde,
+    rcondv,
+    work,
+    lwork,
+    iwork,
+    bwork,
+    info)  annotation(Library = {"lapack"});
   annotation (Documentation(info="/*  Purpose  
 /*  =======  
  
@@ -268,34 +298,4 @@ protected
  
    =====================================================================  
 "));
-external "Fortran 77" dggevx(
-    "B",
-    "V",
-    "V",
-    "B",
-    n,
-    A,
-    n,
-    B,
-    n,
-    alphaReal,
-    alphaImag,
-    beta,
-    lEigenVectors,
-    n,
-    rEigenVectors,
-    n,
-    ilo,
-    ihi,
-    lscale,
-    rscale,
-    abnrm,
-    bbnrm,
-    rconde,
-    rcondv,
-    work,
-    lwork,
-    iwork,
-    bwork,
-    info)  annotation(Library = {"lapack"});
 end dggevx;

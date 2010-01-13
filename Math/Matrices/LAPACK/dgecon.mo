@@ -15,6 +15,17 @@ protected
   Integer iwork[size(LU_of_A,2)];
   String norm = if inf then "I" else "1";
 
+external "Fortran 77" dgecon(
+    norm,
+    n,
+    LU_of_A,
+    lda,
+    anorm,
+    rcond,
+    work,
+    iwork,
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info=" 
  
   Purpose   
@@ -65,15 +76,4 @@ protected
 
     =====================================================================  
 "));
-external "Fortran 77" dgecon(
-    norm,
-    n,
-    LU_of_A,
-    lda,
-    anorm,
-    rcond,
-    work,
-    iwork,
-    info) annotation(Library = {"lapack"});
-
 end dgecon;

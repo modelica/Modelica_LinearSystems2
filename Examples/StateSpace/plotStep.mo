@@ -3,10 +3,6 @@ function plotStep "Step plot example"
 
   import Modelica_LinearSystems2.StateSpace;
 
-  annotation (interactive=true, Documentation(info="<html>
-<p>
-Computes and plots the step response
-</html>"));
 
   input Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1,1; 0,-2],
@@ -16,4 +12,8 @@ Computes and plots the step response
 
 algorithm
  Modelica_LinearSystems2.StateSpace.Plot.step(    ss=ss);
+  annotation (interactive=true, Documentation(info="<html>
+<p>
+Computes and plots the step response
+</html>"));
 end plotStep;

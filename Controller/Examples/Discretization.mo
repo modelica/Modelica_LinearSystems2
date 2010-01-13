@@ -13,18 +13,6 @@ model Discretization "Demonstrates the discretization methods"
     offset=0.2,
     startTime=0.1)                   annotation (extent=[-80,40; -60,60],
       Placement(transformation(extent={{-80,40},{-60,60}})));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-            -100},{100,100}}), graphics), Documentation(info="<html>
-<p>
-Demonstrates the different discretization methods by simulating the step
-response of a second order system as continuous system and as discrete system
-with the supported discretization methods. The step starts with an offset at 0.1 s
-to demonstrate the steady-state initialization.
-</p>
-
-</html>"),
-    experiment(Tolerance=1e-006),
-    experimentSetupOutput);
   Modelica_LinearSystems2.Controller.SecondOrder explicitEuler(
     w=w,
     D=D,
@@ -96,4 +84,16 @@ equation
       points={{-59,50},{-52,50},{-52,80},{0,80},{0,-50},{18,-50}},
       color={0,0,127},
       smooth=Smooth.None));
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
+            -100},{100,100}}), graphics), Documentation(info="<html>
+<p>
+Demonstrates the different discretization methods by simulating the step
+response of a second order system as continuous system and as discrete system
+with the supported discretization methods. The step starts with an offset at 0.1 s
+to demonstrate the steady-state initialization.
+</p>
+
+</html>"),
+    experiment(Tolerance=1e-006),
+    experimentSetupOutput);
 end Discretization;

@@ -16,6 +16,21 @@ protected
   Integer lwork=max(1, m);
   Real work[lwork];
 
+external "Fortran 77" dormqr(
+    "L",
+    "N",
+    m,
+    n,
+    k,
+    Q,
+    lda,
+    tau,
+    Aout,
+    ldc,
+    work,
+    lwork,
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info="   Purpose  
    =======  
  
@@ -73,19 +88,4 @@ protected
  
    =====================================================================  
 "));
-external "Fortran 77" dormqr(
-    "L",
-    "N",
-    m,
-    n,
-    k,
-    Q,
-    lda,
-    tau,
-    Aout,
-    ldc,
-    work,
-    lwork,
-    info) annotation(Library = {"lapack"});
-
 end dorgqr_x;

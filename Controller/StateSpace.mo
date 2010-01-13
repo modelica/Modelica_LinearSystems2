@@ -22,6 +22,41 @@ block StateSpace "Continuous or discrete state space system block"
   final parameter Integer nx = size(system.A,1) annotation(Hide=true);
   final parameter Integer ny = size(system.C,1) annotation(Hide=true);
 
+protected
+parameter Boolean withDelay=false;
+
+  Internal.DiscreteStateSpace discretePart(
+    system=system,
+    withDelay=withDelay,
+    methodType=methodType,
+    sampleFactor=sampleFactor,
+    init=init,
+    x_start=x_start,
+    y_start=y_start) if not continuous "Discretized state space system";
+
+equation
+  if continuous then
+     der(x) = system.A*x + system.B*u;
+          y = system.C*x + system.D*u;
+
+  end if;
+
+  connect(u, discretePart.u);
+  connect(x, discretePart.x);
+  connect(y, discretePart.y);
+
+initial equation
+  if continuous then
+    if init == Types.Init.InitialState then
+      x = x_start;
+    elseif init == Types.Init.SteadyState then
+      der(x) = zeros(nx);
+    elseif init == Types.Init.InitialOutput then
+//      x = Modelica.Math.Matrices.equalityLeastSquares(system.A, -system.B*u, system.C, y_start - system.D*u);
+y=y_start;
+der(x[ny+1:nx]) = zeros(nx-ny);
+    end if;
+  end if;
   annotation (
     defaultComponentName="stateSpace",
     Icon(coordinateSystem(
@@ -72,39 +107,4 @@ block StateSpace "Continuous or discrete state space system block"
         Line(points={{60,0},{100,0}})}),
     Documentation(info="<HTML>
 </HTML>"));
-protected
-parameter Boolean withDelay=false;
-
-  Internal.DiscreteStateSpace discretePart(
-    system=system,
-    withDelay=withDelay,
-    methodType=methodType,
-    sampleFactor=sampleFactor,
-    init=init,
-    x_start=x_start,
-    y_start=y_start) if not continuous "Discretized state space system";
-
-equation
-  if continuous then
-     der(x) = system.A*x + system.B*u;
-          y = system.C*x + system.D*u;
-
-  end if;
-
-  connect(u, discretePart.u);
-  connect(x, discretePart.x);
-  connect(y, discretePart.y);
-
-initial equation
-  if continuous then
-    if init == Types.Init.InitialState then
-      x = x_start;
-    elseif init == Types.Init.SteadyState then
-      der(x) = zeros(nx);
-    elseif init == Types.Init.InitialOutput then
-//      x = Modelica.Math.Matrices.equalityLeastSquares(system.A, -system.B*u, system.C, y_start - system.D*u);
-y=y_start;
-der(x[ny+1:nx]) = zeros(nx-ny);
-    end if;
-  end if;
 end StateSpace;

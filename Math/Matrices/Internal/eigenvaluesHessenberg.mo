@@ -21,6 +21,14 @@ protected
         n,
         n);
 
+algorithm
+  if size(H, 1) > 0 then
+    (alphaReal,alphaImag,info) := LAPACK.dhseqr(H, lwork);
+  else
+    alphaReal := fill(0, size(H, 1));
+    alphaImag := fill(0, size(H, 1));
+  end if;
+
   annotation (Documentation(info="<html>
 This function uses DHSEQR Lapack-routine to calculate the eigenvalues of an upper Hessenberg form <b>H</b>.
 Therefore, <b>H</b> is reduced to Schur form <b>T</b>. The eigenvalues are obtained from the diagonal of <b>T</b>.
@@ -30,12 +38,4 @@ See Modelica_LinearSystems2.Math.Matrices.LAPACK.dhseqr for details
 </p>
 </html>
 "));
-algorithm
-  if size(H, 1) > 0 then
-    (alphaReal,alphaImag,info) := LAPACK.dhseqr(H, lwork);
-  else
-    alphaReal := fill(0, size(H, 1));
-    alphaImag := fill(0, size(H, 1));
-  end if;
-
 end eigenvaluesHessenberg;

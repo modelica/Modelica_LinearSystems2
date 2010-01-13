@@ -87,5 +87,4 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.rsf\">Math.M
 
 </pre></blockquote>
 </html> "));
-
 end rsf2;

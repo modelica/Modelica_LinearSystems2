@@ -14,6 +14,23 @@ protected
   Integer lwork=max(1, 5*size(A, 1) + 5*size(A, 2));
   Real work[lwork];
 
+
+external "Fortran 77" dgesvd(
+    "A",
+    "A",
+    size(A, 1),
+    size(A, 2),
+    Awork,
+    lda,
+    sigma,
+    U,
+    ldu,
+    VT,
+    ldvt,
+    work,
+    lwork,
+    info) 
+    annotation (Library="lapack");
   annotation (Documentation(info="Lapack documentation:
     Purpose   
     =======   
@@ -110,21 +127,4 @@ protected
                   did not converge to zero. See the description of WORK   
                   above for details.   
 "));
-
-external "Fortran 77" dgesvd(
-    "A",
-    "A",
-    size(A, 1),
-    size(A, 2),
-    Awork,
-    lda,
-    sigma,
-    U,
-    ldu,
-    VT,
-    ldvt,
-    work,
-    lwork,
-    info) 
-    annotation (Library="lapack");
 end dgesvd;

@@ -3,21 +3,6 @@ record Polynomial "Record defining the data for a polynomial"
   extends Modelica.Icons.Record;
   Real c[:] "Polynomial coefficients (c[1]*x^n + ... c[n]*x + c[n+1])" annotation(Dialog);
 
-  annotation (
-    defaultComponentName="polynomial",
-    Documentation(info="<html>
-<p>
-This record defines a polynomial, e.g., y = 2*x^2 + 3*x + 1. The general form is:
-</p>
-<pre>
-   y = c[1]*x^n + c[2]*x^(n-1) + ... + c[n]*x + c[n+1];
-</pre>
-<p>
-In the record, the coefficients c[i] are stored. Usually, the record is not directly accessed. Instead, a polynomial is generated with the functions provided in the record such as Polynomial.base(..), 
-Polynomial.fitting(..). 
-Several functions are provided that operate on polynomials.
-</p> 
-</html>"));
 
   encapsulated package Examples
     "Examples demonstrating the usage of Polynomials"
@@ -122,7 +107,6 @@ Several functions are provided that operate on polynomials.
 
       output Boolean ok;
 
-      annotation (interactive=true);
     protected
       Complex j = Modelica_LinearSystems2.Math.Complex.j();
       Complex c[:]={-2+0*j,Complex(0),2+0*j,7+j,7-j};
@@ -130,6 +114,7 @@ Several functions are provided that operate on polynomials.
     algorithm
       Polynomial.plot(p);
       ok := true;
+      annotation (interactive=true);
     end plotPolynomial;
   end Examples;
 
@@ -151,9 +136,9 @@ Several functions are provided that operate on polynomials.
 
       input Real r "Value of Real variable";
       output Polynomial p(redeclare Real c[1]);
-      annotation (overloadsConstructor=true);
     algorithm
       p.c := {r};
+      annotation (overloadsConstructor=true);
     end fromReal;
 
     function fromZeros "Generate a polynomial from given zeros"
@@ -167,34 +152,6 @@ Several functions are provided that operate on polynomials.
       output Polynomial p(redeclare Real c[size(roots, 1) + 1])
         "Polynomial that corresponds to the zeros";
 
-      annotation (
-        overloadsConstructor=true,
-        Documentation(info="<html>
-<p>
-This function constructs a polynomial from given zeros
-(also called roots). The zeros are defined as a vector
-of Complex numbers. Since only polynomials with real coefficients are supported,
-complex zeros must be defined as conjugate complex pairs.
-It is required that complex conjugate pairs must directly
-follow each other. An error occurs if this is not the case.
-Example:
-</p>
-<p>
-The polynomial
-</p>
-<pre>
- y = (s - 1)*(s - (2+3j))*(s - (2-3j))
-</pre>
-<p>
-with j=sqrt(-1), is defined as
-</p>
-<pre>
-  p = Polynomial.fromZeros( {Complex(1),
-                             Complex(2,  3),
-                             Complex(2, -3)} );
-      // = x^3 - 5*x^2 + 17*x - 13
-</pre>
-</html>"));
     protected
       Integer nr=size(roots, 1) "Number of roots";
       Integer nc=nr + 1 "Length of coefficent vector";
@@ -235,6 +192,34 @@ with j=sqrt(-1), is defined as
           nn := nn + 2;
         end if;
       end while;
+      annotation (
+        overloadsConstructor=true,
+        Documentation(info="<html>
+<p>
+This function constructs a polynomial from given zeros
+(also called roots). The zeros are defined as a vector
+of Complex numbers. Since only polynomials with real coefficients are supported,
+complex zeros must be defined as conjugate complex pairs.
+It is required that complex conjugate pairs must directly
+follow each other. An error occurs if this is not the case.
+Example:
+</p>
+<p>
+The polynomial
+</p>
+<pre>
+ y = (s - 1)*(s - (2+3j))*(s - (2-3j))
+</pre>
+<p>
+with j=sqrt(-1), is defined as
+</p>
+<pre>
+  p = Polynomial.fromZeros( {Complex(1),
+                             Complex(2,  3),
+                             Complex(2, -3)} );
+      // = x^3 - 5*x^2 + 17*x - 13
+</pre>
+</html>"));
     end fromZeros;
 
   end 'constructor';
@@ -455,13 +440,6 @@ with j=sqrt(-1), is defined as
     output Polynomial p(redeclare Real c[order + 1])
       "Polynomial that fits the date points in a least squares sense";
 
-    annotation (Documentation(info="<HTML>
-<p>
-Polynomial.fitting(x,y,order) computes a Polynomial
-y=p(x) of degree \"order\" that fits the data \"p(x[i]) - y[i]\"
-in a least squares sense. 
-</p>
-</HTML>"));
   protected
     Real V[size(x, 1),order + 1] "Vandermonde matrix";
   algorithm
@@ -473,6 +451,13 @@ in a least squares sense.
 
       // Solve least squares problem
     p.c := Modelica.Math.Matrices.leastSquares(V, y);
+    annotation (Documentation(info="<HTML>
+<p>
+Polynomial.fitting(x,y,order) computes a Polynomial
+y=p(x) of degree \"order\" that fits the data \"p(x[i]) - y[i]\"
+in a least squares sense. 
+</p>
+</HTML>"));
   end fitting;
 
   encapsulated function degree "Return degree of polynomial"
@@ -510,7 +495,6 @@ in a least squares sense.
     import Modelica.Utilities.Strings;
     import Modelica_LinearSystems2.Math.Complex;
 
-    annotation (interactive=true);
 
     input Polynomial p "Polynomial to be plotted";
     input Integer nPoints(min=2) = 200 "Number of points";
@@ -594,7 +578,10 @@ in a least squares sense.
         y,
         legend=yLabel2);
 
-    annotation (Documentation(info="<html>
+  equation
+
+    annotation (interactive=true,
+                Documentation(info="<html>
 <p>
 Plots the given polynomial. If default arguments are used, as in:
 </p>
@@ -609,8 +596,6 @@ are in the plotted range. As default legend, the String representation
 of the polynomial is used as generated by Polynomial.'String'(..).
 </p> 
 </html>"));
-  equation
-
   end plot;
 
   encapsulated function derivative "Derivative of Polynomial"
@@ -650,7 +635,6 @@ of the polynomial is used as generated by Polynomial.'String'(..).
     input Real x "Abszissa value";
     output Real y "Value of polynomial at x";
 
-    annotation (derivative(zeroDerivative=p) = Polynomial.evaluate_der);
   protected
     Integer n=size(p.c, 1);
   algorithm
@@ -658,6 +642,7 @@ of the polynomial is used as generated by Polynomial.'String'(..).
     for j in 2:n loop
       y := p.c[j] + x*y;
     end for;
+    annotation (derivative(zeroDerivative=p) = Polynomial.evaluate_der);
   end evaluate;
 
   encapsulated function evaluateMatrix
@@ -668,6 +653,13 @@ of the polynomial is used as generated by Polynomial.'String'(..).
     input Real X[:,size(X, 1)] "Square matrix argument";
     output Real Y[size(X, 1),size(X, 2)] "Value of polynomial at X";
 
+  protected
+    Integer n=size(p.c, 1);
+  algorithm
+    Y := zeros(size(X, 1), size(X, 2));
+    for j in 1:n loop
+      Y := X*Y + diagonal(p.c[j]*ones(size(X, 1)));
+    end for;
     annotation (Documentation(info="<html>
 <p>
 Evaluates the given polynomial <i>p</i> of order <i>n</i> with its coefficients c[i] so that 
@@ -680,13 +672,6 @@ Note that the matrix <b>X</b> must be square.
 Horner's method is used for polynomial evaluation.
 </p> 
 </html>"));
-  protected
-    Integer n=size(p.c, 1);
-  algorithm
-    Y := zeros(size(X, 1), size(X, 2));
-    for j in 1:n loop
-      Y := X*Y + diagonal(p.c[j]*ones(size(X, 1)));
-    end for;
   end evaluateMatrix;
 
   encapsulated function evaluateComplex
@@ -740,7 +725,6 @@ Horner's method is used for polynomial evaluation.
     input Real x_low=0 "Low integrand value, default 0";
     output Real integral=0.0 "Integral of polynomial p from x_low to x_high";
 
-    annotation (derivative(zeroDerivative=p) = Polynomial.integralValue_der);
   protected
     Integer n=size(p.c, 1) "Order of integrated polynomial";
     Real y_low=0 "value at lower integrand";
@@ -750,6 +734,7 @@ Horner's method is used for polynomial evaluation.
       y_low := x_low*(p.c[j]/(n - j + 1) + y_low);
     end for;
     integral := integral - y_low;
+    annotation (derivative(zeroDerivative=p) = Polynomial.integralValue_der);
   end integralValue;
 
   encapsulated function roots
@@ -762,18 +747,18 @@ Horner's method is used for polynomial evaluation.
     output Complex result[:]=fill(Complex(0, 0),
         Polynomial.numberOfRoots(p)) "Roots of polynomial";
 
-    annotation (Documentation(info="<html>
-<p>
-The roots of the given polynomial are determined and are returned as
-a vector of Complex elements.
-</p>
-</html>"));
   algorithm
     result := Polynomial.rootsOfNonZeroHighestCoefficientPolynomial(p,
       Polynomial.numberOfRoots(p));
     if printRoots then
       Complex.Vectors.print("", result);
     end if;
+    annotation (Documentation(info="<html>
+<p>
+The roots of the given polynomial are determined and are returned as
+a vector of Complex elements.
+</p>
+</html>"));
   end roots;
 
     encapsulated function numberOfRoots
@@ -905,4 +890,19 @@ a vector of Complex elements.
   end mult;
   end Internal;
 
+  annotation (
+    defaultComponentName="polynomial",
+    Documentation(info="<html>
+<p>
+This record defines a polynomial, e.g., y = 2*x^2 + 3*x + 1. The general form is:
+</p>
+<pre>
+   y = c[1]*x^n + c[2]*x^(n-1) + ... + c[n]*x + c[n+1];
+</pre>
+<p>
+In the record, the coefficients c[i] are stored. Usually, the record is not directly accessed. Instead, a polynomial is generated with the functions provided in the record such as Polynomial.base(..), 
+Polynomial.fitting(..). 
+Several functions are provided that operate on polynomials.
+</p> 
+</html>"));
 end Polynomial;

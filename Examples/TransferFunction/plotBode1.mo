@@ -8,7 +8,6 @@ function plotBode1
 
   output Boolean ok;
 
-  annotation (interactive=true);
 
 protected
  TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
@@ -22,4 +21,5 @@ algorithm
     tf=tf2);
   ok := true;
 
+  annotation (interactive=true);
 end plotBode1;

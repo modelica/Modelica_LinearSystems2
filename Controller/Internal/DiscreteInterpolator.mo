@@ -108,5 +108,4 @@ initial equation
 </p>
 </html>
 "));
-
 end DiscreteInterpolator;

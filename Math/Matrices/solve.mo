@@ -7,6 +7,18 @@ function solve
   input Real b[size(A, 1)] "Vector b of A*x = b";
   output Real x[size(b, 1)] "Vector x such that A*x = b";
 
+
+protected
+  Integer info;
+algorithm
+  if size(A, 1) > 0 then
+    (x,info) := Modelica.Math.Matrices.LAPACK.dgesv_vec(A, b);
+    assert(info == 0, "Solving a linear system of equations with function
+\"Matrices.solve\" is not possible, because the system has either 
+no or infinitely many solutions (A is singular).");
+  else
+    x := fill(0, 0);
+  end if;
   annotation (Documentation(info="<HTML>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -44,16 +56,4 @@ i.e., by Gaussian elemination with partial pivoting.
 <a href=\"Modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
 <a href=\"Modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>
 </HTML>"));
-
-protected
-  Integer info;
-algorithm
-  if size(A, 1) > 0 then
-    (x,info) := Modelica.Math.Matrices.LAPACK.dgesv_vec(A, b);
-    assert(info == 0, "Solving a linear system of equations with function
-\"Matrices.solve\" is not possible, because the system has either 
-no or infinitely many solutions (A is singular).");
-  else
-    x := fill(0, 0);
-  end if;
 end solve;

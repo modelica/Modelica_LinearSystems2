@@ -7,6 +7,21 @@ function random "Pseudo random number generator"
   output Integer seedOut[3]
     "Modified seed to be used for next call of random()" 
                                  annotation (extent=[15, 15; 85, 85]);
+algorithm
+  seedOut[1] := rem((171*seedIn[1]), 30269);
+  seedOut[2] := rem((172*seedIn[2]), 30307);
+  seedOut[3] := rem((170*seedIn[3]), 30323);
+  // zero is a poor seed, therfore substitute 1;
+  if seedOut[1] == 0 then
+    seedOut[1] := 1;
+  end if;
+  if seedOut[2] == 0 then
+    seedOut[2] := 1;
+  end if;
+  if seedOut[3] == 0 then
+    seedOut[3] := 1;
+  end if;
+  x := rem((seedOut[1]/30269.0 + seedOut[2]/30307.0 + seedOut[3]/30323.0), 1.0);
   annotation (
     Coordsys(
       extent=[-100, -100; 100, 100],
@@ -105,19 +120,4 @@ and the accompanying <b>disclaimer</b>
 </p>
 </HTML>
 "));
-algorithm
-  seedOut[1] := rem((171*seedIn[1]), 30269);
-  seedOut[2] := rem((172*seedIn[2]), 30307);
-  seedOut[3] := rem((170*seedIn[3]), 30323);
-  // zero is a poor seed, therfore substitute 1;
-  if seedOut[1] == 0 then
-    seedOut[1] := 1;
-  end if;
-  if seedOut[2] == 0 then
-    seedOut[2] := 1;
-  end if;
-  if seedOut[3] == 0 then
-    seedOut[3] := 1;
-  end if;
-  x := rem((seedOut[1]/30269.0 + seedOut[2]/30307.0 + seedOut[3]/30323.0), 1.0);
 end random;

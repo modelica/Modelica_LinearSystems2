@@ -3,6 +3,17 @@ block UnitDelay
   "Delay the input by a multiple of the base sample time if discrete block or y=u if continuous block"
   extends Interfaces.PartialSISO_equality;
 
+protected
+  Internal.DiscreteUnitDelay discretePart(sampleFactor=sampleFactor) if 
+          not continuous "Discrete unit delay";
+equation
+  if continuous then
+     y = u;
+
+  end if;
+   connect(u, discretePart.u);
+    connect(y, discretePart.y);
+
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,
@@ -44,15 +55,4 @@ sampleClock and sampleFactor is an Integer parameter of component UnitDelay.
 If <b>continuous</b> block, the output y is identical to the input u.
 </p>
 </html>"));
-protected
-  Internal.DiscreteUnitDelay discretePart(sampleFactor=sampleFactor) if 
-          not continuous "Discrete unit delay";
-equation
-  if continuous then
-     y = u;
-
-  end if;
-   connect(u, discretePart.u);
-    connect(y, discretePart.y);
-
 end UnitDelay;

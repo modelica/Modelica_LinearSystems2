@@ -3,6 +3,7 @@ package Vectors "Functions operating on vectors"
 extends Modelica.Icons.Library;
 
 
+
 annotation (Documentation(info="<HTML>
 <h4><font color=\"#008000\">Library content</font></h4>
 <p>
@@ -36,5 +37,4 @@ This library provides functions operating on vectors:
 <h4><font color=\"#008000\">See also</font></h4>
 <a href=\"Modelica:Modelica.Math.Matrices\">Matrices</a>
 </HTML>"));
-
 end Vectors;

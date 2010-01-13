@@ -13,38 +13,6 @@ function frequencyRangeZeros
   output Modelica.SIunits.AngularVelocity w_min "Minimum frequency";
   output Modelica.SIunits.AngularVelocity w_max "Maximum frequency";
 
-  annotation (Documentation(info="<html>
-<p>
-This function estimates a useful frequency range for the
-Bode plot of a vector of zeros (numerator or denominator zeros).
-This frequency range is estimated such that the phase angle 
-of <b>one</b> zero is in the range:
-<p>
-<pre>
-   phi_min/n_zeros &le; |phase angle| &le; pi/2 - phi_min/n_zeros
-</pre>
-<p>
-where n_zeros is the number of zeros.
-Note, the phase angle of one zero for a frequency of 0 up to infinity
-is in the range:
-</p>
-<pre>
-   0 &le; |phase angle| &le; pi/2
-</pre>
-<p>
-Therefore, the frequency range is estimated
-such that the essential part of the phase angle (defined by phi_min)
-is present.
-</p>
-<p>
-If the real part of a complex zero vanishes 
-(i.e., the zero is located on the imaginary axis), 
-the maximum value of the bode plot magnitude of the zero 
-is infinity. In order to avoid difficulties, zeros close to
-the imaginary axis are shifted by the input argument
-real_min along the real axis.
-</p>
-</html>"));
 protected
   Integer nz=size(z, 1);
   Real tan_min;
@@ -94,4 +62,36 @@ algorithm
       end if;
     end if;
   end for;
+  annotation (Documentation(info="<html>
+<p>
+This function estimates a useful frequency range for the
+Bode plot of a vector of zeros (numerator or denominator zeros).
+This frequency range is estimated such that the phase angle 
+of <b>one</b> zero is in the range:
+<p>
+<pre>
+   phi_min/n_zeros &le; |phase angle| &le; pi/2 - phi_min/n_zeros
+</pre>
+<p>
+where n_zeros is the number of zeros.
+Note, the phase angle of one zero for a frequency of 0 up to infinity
+is in the range:
+</p>
+<pre>
+   0 &le; |phase angle| &le; pi/2
+</pre>
+<p>
+Therefore, the frequency range is estimated
+such that the essential part of the phase angle (defined by phi_min)
+is present.
+</p>
+<p>
+If the real part of a complex zero vanishes 
+(i.e., the zero is located on the imaginary axis), 
+the maximum value of the bode plot magnitude of the zero 
+is infinity. In order to avoid difficulties, zeros close to
+the imaginary axis are shifted by the input argument
+real_min along the real axis.
+</p>
+</html>"));
 end frequencyRangeZeros;

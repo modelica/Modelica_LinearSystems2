@@ -17,6 +17,27 @@ block SecondOrder
     "Initial or guess value of derivative of output (= state)" 
     annotation(Dialog(tab="Advanced options"));
 
+equation
+  if continuous then
+    der(y) = yd;
+    der(yd) = w*(w*(k*u - y) - 2*D*yd);
+  end if;
+
+  connect(yy, discretePart.x);
+
+initial equation
+  if continuous then
+    if init == Types.Init.SteadyState then
+      der(y) = 0;
+      der(yd) = 0;
+    elseif init == Types.Init.InitialState then
+      y = y_start;
+      yd = yd_start;
+    elseif init == Types.Init.InitialOutput then
+      y = y_start;
+      yd = 0;
+    end if;
+  end if;
   annotation (
     defaultComponentName="secondOrder",
     Window(
@@ -135,25 +156,4 @@ Example:
           extent={{30,2},{58,-42}},
           lineColor={0,0,0},
           textString="+1")}));
-equation
-  if continuous then
-    der(y) = yd;
-    der(yd) = w*(w*(k*u - y) - 2*D*yd);
-  end if;
-
-  connect(yy, discretePart.x);
-
-initial equation
-  if continuous then
-    if init == Types.Init.SteadyState then
-      der(y) = 0;
-      der(yd) = 0;
-    elseif init == Types.Init.InitialState then
-      y = y_start;
-      yd = yd_start;
-    elseif init == Types.Init.InitialOutput then
-      y = y_start;
-      yd = 0;
-    end if;
-  end if;
 end SecondOrder;

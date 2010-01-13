@@ -12,6 +12,10 @@ function generalizedEigenvaluesTriangular
 
   output Integer info;
 
+
+algorithm
+  (alphaReal,alphaImag,beta,info) := LAPACK.dhgeqz(A, B);
+  assert(info == 0, "Failed to compute eigenvalues with function dhgeqz(..)");
   annotation (Documentation(info="This function is an interface to LAPACK routine DHGEQZ to calculate invariant
 zeros of systems with generalized system matrices of upper Hessenberg form.
 DHGEQZ is described below:
@@ -208,8 +212,4 @@ DHGEQZ is described below:
  
    =====================================================================  
 "));
-
-algorithm
-  (alphaReal,alphaImag,beta,info) := LAPACK.dhgeqz(A, B);
-  assert(info == 0, "Failed to compute eigenvalues with function dhgeqz(..)");
 end generalizedEigenvaluesTriangular;

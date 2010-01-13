@@ -11,17 +11,6 @@ function testPoleAssignment "Function to assess algorithms for pole assignment"
   import Modelica_LinearSystems2.Tests.Internal.DesignData;
   import Modelica_LinearSystems2.StateSpace;
 
-  annotation (Documentation(info="<html>
-<p>
-Computes the gain vector k for the state space system
-<pre> 
-ss = StateSpace(A=[-1,1;0,-2],B=[0, 1],C=[1,0; 0, 1],D=[0; 0])
-</pre>
-such that for the state feedback 
-<pre>u = -k*y = -k*x</pre> the closed-loop
-poles are placed at 
-<pre>p = {-3,-4}.</pre>
-</html>"));
 
   input DesignData data=Modelica_LinearSystems2.Tests.Design.data_Chow_Kokotovic() annotation(Dialog);
   input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.KNV
@@ -101,4 +90,15 @@ algorithm
   end if;
   print("Jalpha = "+Modelica_LinearSystems2.Math.Vectors.printVector(Jalpha));
 
+  annotation (Documentation(info="<html>
+<p>
+Computes the gain vector k for the state space system
+<pre> 
+ss = StateSpace(A=[-1,1;0,-2],B=[0, 1],C=[1,0; 0, 1],D=[0; 0])
+</pre>
+such that for the state feedback 
+<pre>u = -k*y = -k*x</pre> the closed-loop
+poles are placed at 
+<pre>p = {-3,-4}.</pre>
+</html>"));
 end testPoleAssignment;

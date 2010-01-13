@@ -7,7 +7,6 @@ function plotBode2
   import Modelica_LinearSystems2.TransferFunction;
 
   output Boolean ok;
-  annotation (interactive=true);
 protected
   TransferFunction tf1=TransferFunction({1,2}, {2,3,4});
   TransferFunction tf2=TransferFunction({1,2}, {4,1,4});
@@ -25,4 +24,5 @@ algorithm
     f_max=30);
   ok := true;
 
+  annotation (interactive=true);
 end plotBode2;

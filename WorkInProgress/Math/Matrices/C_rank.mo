@@ -7,9 +7,6 @@ function C_rank "Rank of a complex matrix (computed with singular values)"
     "If eps > 0, the singular values are checked against eps; otherwise eps=max(size(A))*norm(A)*Modelica.Constants.eps is used";
   output Integer result "Rank of matrix A";
 
-  annotation (Documentation(info="<html>
-
-</html>"));
 protected
   Integer n=min(size(A, 1), size(A, 2));
   Integer i=n;
@@ -29,4 +26,7 @@ algorithm
       i := i - 1;
     end while;
   end if;
+  annotation (Documentation(info="<html>
+
+</html>"));
 end C_rank;

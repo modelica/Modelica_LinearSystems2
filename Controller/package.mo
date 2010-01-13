@@ -8,6 +8,7 @@ constant String DataDir=Modelica_LinearSystems2.DataDir
   extends Modelica.Icons.Library;
 
 
+
   annotation (Documentation(info="<html>
 <p>
 This library provides input/output blocks where every
@@ -32,9 +33,8 @@ drive with a P-PI cascade controller is demonstrated in example
 </p>
  
 <p align=\"center\">
-<img src=\"../Extras/Images/SimpleControlledDrive_Plot2.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/SimpleControlledDrive_Plot2.png\">
 </p>
  
 </html>"));
-
 end Controller;

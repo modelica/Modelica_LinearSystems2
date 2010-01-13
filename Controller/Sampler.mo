@@ -3,6 +3,16 @@ block Sampler
   "Sample the input signal if discrete block or y=u if continuous block"
   extends Interfaces.PartialSISO_equality;
 
+protected
+  Internal.DiscreteSampler discretePart(sampleFactor=sampleFactor) if 
+          not continuous "Discrete sampler";
+equation
+  if continuous then
+     y = u;
+else
+connect(u,discretePart.u);
+connect(y,discretePart.y);
+  end if;
   annotation (
    Icon(coordinateSystem(
         preserveAspectRatio=true,
@@ -62,14 +72,4 @@ sampleFactor is an Integer parameter of component Sampler.
 If <b>continuous</b> block, the output y is identical to the input u.
 </p>
 </html>"));
-protected
-  Internal.DiscreteSampler discretePart(sampleFactor=sampleFactor) if 
-          not continuous "Discrete sampler";
-equation
-  if continuous then
-     y = u;
-else
-connect(u,discretePart.u);
-connect(y,discretePart.y);
-  end if;
 end Sampler;

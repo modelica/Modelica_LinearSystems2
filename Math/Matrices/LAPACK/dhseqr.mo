@@ -23,6 +23,22 @@ protected
   Integer ldh=max(n, 1);
   Integer lw=if lwork == -1 then -1 else max(lwork, size(H, 1));
 
+external "Fortran 77" dhseqr(
+    job,
+    compz,
+    n,
+    ilo,
+    ihi,
+    Ho,
+    ldh,
+    alphaReal,
+    alphaImag,
+    Zo,
+    ldh,
+    work,
+    lw,
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info="    DHSEQR computes the eigenvalues of a real upper Hessenberg matrix H  
    and, optionally, the matrices T and Z from the Schur decomposition  
    H = Z T Z**T, where T is an upper quasi-triangular matrix (the Schur  
@@ -118,20 +134,4 @@ protected
                  eigenvalues which have been successfully computed.  
  
    =====================================================================  "));
-external "Fortran 77" dhseqr(
-    job,
-    compz,
-    n,
-    ilo,
-    ihi,
-    Ho,
-    ldh,
-    alphaReal,
-    alphaImag,
-    Zo,
-    ldh,
-    work,
-    lw,
-    info) annotation(Library = {"lapack"});
-
 end dhseqr;

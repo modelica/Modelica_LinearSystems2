@@ -5,6 +5,14 @@ function numberOfRealZeros
 
   input Complex complexVector[:] "Complex vector";
   output Integer result "Number of elements of v with v.im = 0";
+
+algorithm
+  result := 0;
+  for i in 1:size(complexVector, 1) loop
+    if complexVector[i].im == 0 then
+      result := result + 1;
+    end if;
+  end for;
   annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <blockquote><pre>
@@ -23,12 +31,4 @@ i.e., complexVector[i].im = 0.
            -> result = 3;
 </pre></blockquote>
 </html>"));
-
-algorithm
-  result := 0;
-  for i in 1:size(complexVector, 1) loop
-    if complexVector[i].im == 0 then
-      result := result + 1;
-    end if;
-  end for;
 end numberOfRealZeros;

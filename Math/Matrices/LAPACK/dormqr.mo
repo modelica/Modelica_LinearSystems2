@@ -21,6 +21,21 @@ protected
   Integer lwork=if side == "L" then max(1, n) else max(1, m);
   Real work[lwork];
 
+external "Fortran 77" dormhr(
+    side,
+    trans,
+    m,
+    n,
+    k,
+    A,
+    lda,
+    tau,
+    Cout,
+    ldc,
+    work,
+    lwork,
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info="   Purpose  
    =======  
  
@@ -104,19 +119,4 @@ protected
            < 0:  if INFO = -i, the i-th argument had an illegal value  
  
    =====================================================================  "));
-external "Fortran 77" dormhr(
-    side,
-    trans,
-    m,
-    n,
-    k,
-    A,
-    lda,
-    tau,
-    Cout,
-    ldc,
-    work,
-    lwork,
-    info) annotation(Library = {"lapack"});
-
 end dormqr;

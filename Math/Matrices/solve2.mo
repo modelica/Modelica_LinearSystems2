@@ -7,6 +7,21 @@ function solve2
   input Real B[size(A, 1),:] "Matrix B of A*X = B";
   output Real X[size(B, 1),size(B, 2)] "Matrix X such that A*X = B";
 
+
+protected
+  Integer info;
+algorithm
+  if size(A, 1) > 0 then
+    (X,info) := Modelica.Math.Matrices.LAPACK.dgesv(A, B);
+    assert(info == 0, "Solving a linear system of equations with function
+\"Matrices.solve2\" is not possible, because the system has either 
+no or infinitely many solutions (A is singular).");
+  else
+    X := fill(
+      0,
+      size(B, 1),
+      size(B, 2));
+  end if;
   annotation (Documentation(info="<HTML>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -50,19 +65,4 @@ i.e., by Gaussian elemination with partial pivoting.
 <a href=\"Modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
 <a href=\"Modelica://Modelica.Math.Matrices.LU_solve2\">Matrices.LU_solve2</a>
 </HTML>"));
-
-protected
-  Integer info;
-algorithm
-  if size(A, 1) > 0 then
-    (X,info) := Modelica.Math.Matrices.LAPACK.dgesv(A, B);
-    assert(info == 0, "Solving a linear system of equations with function
-\"Matrices.solve2\" is not possible, because the system has either 
-no or infinitely many solutions (A is singular).");
-  else
-    X := fill(
-      0,
-      size(B, 1),
-      size(B, 2));
-  end if;
 end solve2;

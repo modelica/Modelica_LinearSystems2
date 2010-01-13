@@ -19,6 +19,164 @@ block ZerosAndPoles
     annotation(Dialog(tab="Advanced options"));
   Modelica.Blocks.Interfaces.RealOutput x[nx] "State of continuous block";
 
+protected
+parameter Boolean withDelay=false;
+  parameter Integer n_num1 = size(system.n1,1);
+  parameter Integer n_num2 = size(system.n2,1);
+  parameter Integer n_den1 = size(system.d1,1);
+  parameter Integer n_den2 = size(system.d2,1);
+  parameter Integer n_num = n_num1 + 2*n_num2;
+  parameter Integer n_den = n_den1 + 2*n_den2;
+  parameter Integer i_d = if n_num2 > n_den2 then 2*(n_num2 - n_den2) + 1 else 1;
+  parameter Integer i_k = if n_num2 > n_den2 then n_den2 - (n_num2-n_den2) else n_den2;
+  parameter Real num[nx,2] = [system.n2;
+                              [system.n1, zeros(n_num1)];
+                              zeros(nx-n_num2-n_num1,2)]
+    "Numerator matrix, in order that indices are defined in all situations in all if clauses";
+  parameter Real den[nx,2] = [system.d2;
+                              [system.d1, zeros(n_den1)];
+                              zeros(nx-n_den2-n_den1,2)]
+    "Denominator matrix, in order that indices are defined in all situations in all if clauses";
+  Real uu[i_k + n_den1 + 1]
+    "Input signals into the connected first and second order blocks";
+  parameter Real k[size(uu,1)-1](each fixed = false)
+    "Additional factors of the first and second order blocks, in order that the gain of the blocks is 1";
+  parameter Real k_total=system.k/product(k);
+
+initial equation
+  /* Compute scaling factor for every block in order that the gain of the block is 1.
+     The for blocks and the if-blocks have the same structure as in the 
+     equation part below
+  */
+  for i in 1:max(n_den2,n_num2) loop
+     // State space systems of order 2
+     if i <= n_den2 then
+        if i <= n_num2 then
+           // State space system in form (1)
+        k[i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor2(
+          num[i, 1],
+          num[i, 2],
+          den[i, 1],
+          den[i, 2]);
+        elseif i-n_num2+1 <= n_num1 then
+           // State space system in form (1) with 2 first order numerator polynomials
+        k[i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor2(
+          num[i, 1] + num[i + 1, 1],
+          num[i, 1]*num[i + 1, 1],
+          den[i, 1],
+          den[i, 2]);
+        elseif i-n_num2 == n_num1 then
+           // State space system in form (2) with 1 first order numerator polynomial
+        k[i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor2(
+          0,
+          num[i, 1],
+          den[i, 1],
+          den[i, 2]);
+        else
+           // State space system in form (3)
+        k[i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor2(
+          0,
+          0,
+          den[i, 1],
+          den[i, 2]);
+        end if;
+     else
+        // State space system in form (1) with 2 first order denominator polynomials
+      k[i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor2(
+        num[i, 1],
+        num[i, 2],
+        den[i, 1] + den[i + 1, 1],
+        den[i, 1]*den[i + 1, 1]);
+     end if;
+  end for;
+
+  for i in i_d:n_den1 loop
+     // State space systems of order 1
+     if n_num2 <= n_den2 and 2*(n_den2-n_num2)+i <= n_num1 then
+        // State space system in form (4)
+      k[i_k + i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor1(num[
+        max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1], den[n_den2 + i, 1]);
+     elseif n_num2 > n_den2 and i-i_d+1 <= n_num1 then
+        // State space system in form (4)
+      k[i_k + i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor1(num[
+        max(1, n_num2 + i - i_d + 1), 1], den[n_den2 + i, 1]);
+     else
+        // State space system in form (5)
+      k[i_k + i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor1(0,
+        den[n_den2 + i, 1]);
+     end if;
+  end for;
+
+equation
+  assert(n_num <= n_den, "ZerosAndPoles transfer function is not proper as required from StateSpace system:\n"
+                         + "  numerator degree (= " + String(n_num) + ") <= denominator degree (= "
+                         + String(n_den) +") required.");
+  if continuous then
+     for i in 1:max(n_den2,n_num2) loop
+        // Construct state space systems of order 2
+        der(x[2*i-1]) = x[2*i];
+        if i <= n_den2 then
+           der(x[2*i]) = den[i,2]*uu[i] - den[i,2]*x[2*i-1] - den[i,1]*x[2*i];
+           if i <= n_num2 then
+              // State space system in form (1)
+              uu[i+1] = k[i]*(((num[i,2] - den[i,2])*x[2*i-1] +
+                              (num[i,1] - den[i,1])*x[2*i])/den[i,2] + uu[i]);
+           elseif i-n_num2+1 <= n_num1 then
+              // State space system in form (1) with 2 first order numerator polynomials
+              uu[i+1] = k[i]*(((num[i,1]*num[i+1,1] - den[i,2])*x[2*i-1] +
+                              (num[i,1]+num[i+1,1] - den[i,1])*x[2*i])/den[i,2] + uu[i]);
+           elseif i-n_num2 == n_num1 then
+              // State space system in form (2) with 1 first order numerator polynomial
+              uu[i+1] = k[i]*(num[i,1]*x[2*i-1] + x[2*i])/den[i,2];
+           else
+              // State space system in form (3)
+              uu[i+1] = k[i]*x[2*i-1]/den[i,2];
+           end if;
+        else
+           // State space system in form (1) with 2 first order denominator polynomials
+           der(x[2*i]) = den[i,1]*den[i,1]*uu[i] - (den[i,1]*den[i+1,1])*x[2*i-1]
+                               - (den[i,1]+den[i+1,1])*x[2*i];
+           uu[i+1]     = k[i]*(((num[i,2] - (den[i,1]*den[i+1,1]))*x[2*i-1] +
+                               (num[i,1] - (den[i,1]+den[i+1,1]))*x[2*i])/den[i,1]/den[i,1] + uu[i]);
+        end if;
+     end for;
+
+     for i in i_d:n_den1 loop
+        // Construct state space systems of order 1
+        der(x[2*n_den2+i]) = den[n_den2+i,1]*(uu[i_k+i]-x[2*n_den2+i]);
+        if n_num2 <= n_den2 and 2*(n_den2-n_num2)+i <= n_num1 then
+           // State space system in form (4)
+           uu[i_k+i+1] = k[i_k+i]*((num[max(1,n_num2 + 2*(n_den2-n_num2)+i),1]-den[n_den2+i,1])*x[2*n_den2+i]/den[n_den2+i,1] + uu[i_k+i]);
+        elseif n_num2 > n_den2 and i-i_d+1 <= n_num1 then
+           // State space system in form (4)
+           uu[i_k+i+1] = k[i_k+i]*((num[max(1,n_num2 + i-i_d+1),1]-den[n_den2+i,1])*x[2*n_den2+i]/den[n_den2+i,1] + uu[i_k+i]);
+        else
+           // State space system in form (5)
+           uu[i_k+i+1] = k[i_k+i]*x[2*n_den2+i]/den[n_den2+i,1];
+        end if;
+     end for;
+     y = k_total*uu[i_k+n_den1+1];
+ else
+    for i in 1:size(uu, 1) - 1 loop
+      uu[i + 1] = u;
+    end for;
+  end if;
+
+ uu[1] = u;
+  connect(x, discretePart.x);
+  connect(y, discretePart.y[1]);
+
+initial equation
+  if continuous then
+    if init ==Modelica_LinearSystems2.Controller.Types.Init.InitialState then
+        x = x_start;
+    elseif init ==Modelica_LinearSystems2.Controller.Types.Init.SteadyState then
+        der(x) = zeros(nx);
+    elseif init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput then
+        y = y_start;
+        der(x[1:nx-1]) = zeros(nx-1);
+     end if;
+  end if;
   annotation (
   defaultComponentName="zerosAndPoles",
     Window(
@@ -270,162 +428,4 @@ needed and the tool can continue with the symbolic
 processing.
 </p> 
 </html>"));
-protected
-parameter Boolean withDelay=false;
-  parameter Integer n_num1 = size(system.n1,1);
-  parameter Integer n_num2 = size(system.n2,1);
-  parameter Integer n_den1 = size(system.d1,1);
-  parameter Integer n_den2 = size(system.d2,1);
-  parameter Integer n_num = n_num1 + 2*n_num2;
-  parameter Integer n_den = n_den1 + 2*n_den2;
-  parameter Integer i_d = if n_num2 > n_den2 then 2*(n_num2 - n_den2) + 1 else 1;
-  parameter Integer i_k = if n_num2 > n_den2 then n_den2 - (n_num2-n_den2) else n_den2;
-  parameter Real num[nx,2] = [system.n2;
-                              [system.n1, zeros(n_num1)];
-                              zeros(nx-n_num2-n_num1,2)]
-    "Numerator matrix, in order that indices are defined in all situations in all if clauses";
-  parameter Real den[nx,2] = [system.d2;
-                              [system.d1, zeros(n_den1)];
-                              zeros(nx-n_den2-n_den1,2)]
-    "Denominator matrix, in order that indices are defined in all situations in all if clauses";
-  Real uu[i_k + n_den1 + 1]
-    "Input signals into the connected first and second order blocks";
-  parameter Real k[size(uu,1)-1](each fixed = false)
-    "Additional factors of the first and second order blocks, in order that the gain of the blocks is 1";
-  parameter Real k_total=system.k/product(k);
-
-initial equation
-  /* Compute scaling factor for every block in order that the gain of the block is 1.
-     The for blocks and the if-blocks have the same structure as in the 
-     equation part below
-  */
-  for i in 1:max(n_den2,n_num2) loop
-     // State space systems of order 2
-     if i <= n_den2 then
-        if i <= n_num2 then
-           // State space system in form (1)
-        k[i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor2(
-          num[i, 1],
-          num[i, 2],
-          den[i, 1],
-          den[i, 2]);
-        elseif i-n_num2+1 <= n_num1 then
-           // State space system in form (1) with 2 first order numerator polynomials
-        k[i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor2(
-          num[i, 1] + num[i + 1, 1],
-          num[i, 1]*num[i + 1, 1],
-          den[i, 1],
-          den[i, 2]);
-        elseif i-n_num2 == n_num1 then
-           // State space system in form (2) with 1 first order numerator polynomial
-        k[i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor2(
-          0,
-          num[i, 1],
-          den[i, 1],
-          den[i, 2]);
-        else
-           // State space system in form (3)
-        k[i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor2(
-          0,
-          0,
-          den[i, 1],
-          den[i, 2]);
-        end if;
-     else
-        // State space system in form (1) with 2 first order denominator polynomials
-      k[i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor2(
-        num[i, 1],
-        num[i, 2],
-        den[i, 1] + den[i + 1, 1],
-        den[i, 1]*den[i + 1, 1]);
-     end if;
-  end for;
-
-  for i in i_d:n_den1 loop
-     // State space systems of order 1
-     if n_num2 <= n_den2 and 2*(n_den2-n_num2)+i <= n_num1 then
-        // State space system in form (4)
-      k[i_k + i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor1(num[
-        max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1], den[n_den2 + i, 1]);
-     elseif n_num2 > n_den2 and i-i_d+1 <= n_num1 then
-        // State space system in form (4)
-      k[i_k + i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor1(num[
-        max(1, n_num2 + i - i_d + 1), 1], den[n_den2 + i, 1]);
-     else
-        // State space system in form (5)
-      k[i_k + i] = Modelica_LinearSystems2.Controller.Internal.scaleFactor1(0,
-        den[n_den2 + i, 1]);
-     end if;
-  end for;
-
-equation
-  assert(n_num <= n_den, "ZerosAndPoles transfer function is not proper as required from StateSpace system:\n"
-                         + "  numerator degree (= " + String(n_num) + ") <= denominator degree (= "
-                         + String(n_den) +") required.");
-  if continuous then
-     for i in 1:max(n_den2,n_num2) loop
-        // Construct state space systems of order 2
-        der(x[2*i-1]) = x[2*i];
-        if i <= n_den2 then
-           der(x[2*i]) = den[i,2]*uu[i] - den[i,2]*x[2*i-1] - den[i,1]*x[2*i];
-           if i <= n_num2 then
-              // State space system in form (1)
-              uu[i+1] = k[i]*(((num[i,2] - den[i,2])*x[2*i-1] +
-                              (num[i,1] - den[i,1])*x[2*i])/den[i,2] + uu[i]);
-           elseif i-n_num2+1 <= n_num1 then
-              // State space system in form (1) with 2 first order numerator polynomials
-              uu[i+1] = k[i]*(((num[i,1]*num[i+1,1] - den[i,2])*x[2*i-1] +
-                              (num[i,1]+num[i+1,1] - den[i,1])*x[2*i])/den[i,2] + uu[i]);
-           elseif i-n_num2 == n_num1 then
-              // State space system in form (2) with 1 first order numerator polynomial
-              uu[i+1] = k[i]*(num[i,1]*x[2*i-1] + x[2*i])/den[i,2];
-           else
-              // State space system in form (3)
-              uu[i+1] = k[i]*x[2*i-1]/den[i,2];
-           end if;
-        else
-           // State space system in form (1) with 2 first order denominator polynomials
-           der(x[2*i]) = den[i,1]*den[i,1]*uu[i] - (den[i,1]*den[i+1,1])*x[2*i-1]
-                               - (den[i,1]+den[i+1,1])*x[2*i];
-           uu[i+1]     = k[i]*(((num[i,2] - (den[i,1]*den[i+1,1]))*x[2*i-1] +
-                               (num[i,1] - (den[i,1]+den[i+1,1]))*x[2*i])/den[i,1]/den[i,1] + uu[i]);
-        end if;
-     end for;
-
-     for i in i_d:n_den1 loop
-        // Construct state space systems of order 1
-        der(x[2*n_den2+i]) = den[n_den2+i,1]*(uu[i_k+i]-x[2*n_den2+i]);
-        if n_num2 <= n_den2 and 2*(n_den2-n_num2)+i <= n_num1 then
-           // State space system in form (4)
-           uu[i_k+i+1] = k[i_k+i]*((num[max(1,n_num2 + 2*(n_den2-n_num2)+i),1]-den[n_den2+i,1])*x[2*n_den2+i]/den[n_den2+i,1] + uu[i_k+i]);
-        elseif n_num2 > n_den2 and i-i_d+1 <= n_num1 then
-           // State space system in form (4)
-           uu[i_k+i+1] = k[i_k+i]*((num[max(1,n_num2 + i-i_d+1),1]-den[n_den2+i,1])*x[2*n_den2+i]/den[n_den2+i,1] + uu[i_k+i]);
-        else
-           // State space system in form (5)
-           uu[i_k+i+1] = k[i_k+i]*x[2*n_den2+i]/den[n_den2+i,1];
-        end if;
-     end for;
-     y = k_total*uu[i_k+n_den1+1];
- else
-    for i in 1:size(uu, 1) - 1 loop
-      uu[i + 1] = u;
-    end for;
-  end if;
-
- uu[1] = u;
-  connect(x, discretePart.x);
-  connect(y, discretePart.y[1]);
-
-initial equation
-  if continuous then
-    if init ==Modelica_LinearSystems2.Controller.Types.Init.InitialState then
-        x = x_start;
-    elseif init ==Modelica_LinearSystems2.Controller.Types.Init.SteadyState then
-        der(x) = zeros(nx);
-    elseif init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput then
-        y = y_start;
-        der(x[1:nx-1]) = zeros(nx-1);
-     end if;
-  end if;
 end ZerosAndPoles;

@@ -3,10 +3,6 @@ function analysisInitialResponse "Initial response example"
 
   import Modelica_LinearSystems2.StateSpace;
 
-  annotation (interactive=true, Documentation(info="<html>
-<p>
-Computes and plots the step response
-</html>"));
 
 protected
   Modelica_LinearSystems2.StateSpace sc=Modelica_LinearSystems2.StateSpace(
@@ -53,4 +49,8 @@ algorithm
                  xLabel="time [s]",
                  yLabel="y1, y2")});
 
+  annotation (interactive=true, Documentation(info="<html>
+<p>
+Computes and plots the step response
+</html>"));
 end analysisInitialResponse;

@@ -17,6 +17,17 @@ protected
   Integer lwork=max(1, 2*(ihi - ilo));
   Real work[lwork];
 
+external "Fortran 77" dorghr(
+    n,
+    ilo,
+    ihi,
+    Aout,
+    lda,
+    tau,
+    work,
+    lwork,
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info=" 
  
    Purpose  
@@ -107,15 +118,4 @@ protected
  
    =====================================================================  
 "));
-external "Fortran 77" dorghr(
-    n,
-    ilo,
-    ihi,
-    Aout,
-    lda,
-    tau,
-    work,
-    lwork,
-    info) annotation(Library = {"lapack"});
-
 end dorghr;

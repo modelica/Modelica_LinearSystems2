@@ -21,6 +21,8 @@ partial block PartialSISO_equality
     "Continuous or discrete output signal of block" 
     annotation (extent=[100, -10; 120, 10]);
 
+protected
+  outer SampleClock sampleClock "Global options";
   annotation (
     Coordsys(
       extent=[-100, -100; 100, 100],
@@ -44,6 +46,4 @@ sampleFactor is an Integer parameter of component Sampler.
 If <b>continuous</b> block, the output y is identical to the input u.
 </p>
 </html>"));
-protected
-  outer SampleClock sampleClock "Global options";
 end PartialSISO_equality;

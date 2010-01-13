@@ -20,6 +20,30 @@ protected
   Integer ipiv[size(A, 1)];
   Integer iwork[size(A, 1)];
 
+
+external "FORTRAN 77" dgesvx(
+    "N",
+    "T",
+    size(A, 1),
+    size(B, 2),
+    Awork,
+    size(A, 1),
+    AF,
+    size(A, 1),
+    ipiv,
+    "N",
+    R,
+    C,
+    B,
+    size(A, 1),
+    X,
+    size(A, 1),
+    rcond,
+    ferr,
+    berr,
+    work,
+    iwork,
+    info)                 annotation (Library="lapack");
   annotation (Documentation(info="Lapack documentation:
     Purpose   
     =======   
@@ -63,28 +87,4 @@ protected
                   has been completed, but the factor U is exactly   
                   singular, so the solution could not be computed.   
 "));
-
-external "FORTRAN 77" dgesvx(
-    "N",
-    "T",
-    size(A, 1),
-    size(B, 2),
-    Awork,
-    size(A, 1),
-    AF,
-    size(A, 1),
-    ipiv,
-    "N",
-    R,
-    C,
-    B,
-    size(A, 1),
-    X,
-    size(A, 1),
-    rcond,
-    ferr,
-    berr,
-    work,
-    iwork,
-    info)                 annotation (Library="lapack");
 end dgesvx;

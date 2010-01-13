@@ -17,6 +17,36 @@ protected
   Integer liwork=if job == "N" or job == "E" then 1 else n*n;
   Integer iwork[liwork];
 
+public
+  output Real To[:,:]=T;
+  output Real Qo[:,:]=Q;
+  output Real wr[size(T, 2)];
+  output Real wi[size(T, 2)];
+  output Integer m;
+  output Real s;
+  output Real sep;
+  output Integer info;
+
+external "Fortran 77" dtrsen(
+    job,
+    compq,
+    select,
+    n,
+    To,
+    ldt,
+    Qo,
+    ldq,
+    wr,
+    wi,
+    m,
+    s,
+    sep,
+    work,
+    lwork,
+    iwork,
+    liwork,
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info="   
    Purpose  
    =======  
@@ -221,34 +251,4 @@ protected
                        EPS * norm(T) / SEP  
  
    =====================================================================  "));
-public
-  output Real To[:,:]=T;
-  output Real Qo[:,:]=Q;
-  output Real wr[size(T, 2)];
-  output Real wi[size(T, 2)];
-  output Integer m;
-  output Real s;
-  output Real sep;
-  output Integer info;
-
-external "Fortran 77" dtrsen(
-    job,
-    compq,
-    select,
-    n,
-    To,
-    ldt,
-    Qo,
-    ldq,
-    wr,
-    wi,
-    m,
-    s,
-    sep,
-    work,
-    lwork,
-    iwork,
-    liwork,
-    info) annotation(Library = {"lapack"});
-
 end dtrsen;

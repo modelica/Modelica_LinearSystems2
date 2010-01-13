@@ -3,26 +3,6 @@ partial model TwoDegreesOfFreedomControlSISO
   "Template of a controller with two structural degrees of freedom and an inverse plant model in forward path"
   parameter Integer l = 1 "number of measurable outputs";
   parameter Boolean additionalMeasurableOutputs = true;
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,
-            -100},{140,100}}), graphics={Text(
-          extent={{4,10},{36,4}},
-          lineColor={0,0,255},
-          textString="controller")}),     Icon(coordinateSystem(
-          preserveAspectRatio=true, extent={{-140,-100},{140,100}})),
-    Documentation(info="<html>
-<p>
-Template of a controller with two structural degrees of freedom and an inverse plant model in forward path.
-The functionality of such contorl system structures is discribed in [1]
-<p>
- 
-<A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A> <PRE>
-  [1] Looye, G. et al, \"Nonlinear inverse moldes for control\",
-      Proceedings Modelica Conference 2005, pp. 267-279, 2005.
-</PRE>
- 
- 
- 
-</html>"));
   Modelica.Blocks.Math.Feedback feedback[plant.l] 
     annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
   Modelica_LinearSystems2.Controller.Internal.Add2 add 
@@ -79,4 +59,24 @@ equation
       points={{69,-10},{88,-10}},
       color={0,0,127},
       smooth=Smooth.None));
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,
+            -100},{140,100}}), graphics={Text(
+          extent={{4,10},{36,4}},
+          lineColor={0,0,255},
+          textString="controller")}),     Icon(coordinateSystem(
+          preserveAspectRatio=true, extent={{-140,-100},{140,100}})),
+    Documentation(info="<html>
+<p>
+Template of a controller with two structural degrees of freedom and an inverse plant model in forward path.
+The functionality of such contorl system structures is discribed in [1]
+<p>
+ 
+<A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A> <PRE>
+  [1] Looye, G. et al, \"Nonlinear inverse moldes for control\",
+      Proceedings Modelica Conference 2005, pp. 267-279, 2005.
+</PRE>
+ 
+ 
+ 
+</html>"));
 end TwoDegreesOfFreedomControlSISO;

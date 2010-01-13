@@ -22,6 +22,9 @@ protected
   Integer ldb=if transB then max(1,m) else max(1,k);
   Integer ldc=max(1,n);
 
+external "Fortran 77" dgemm(
+    transa, transb, n, m, k, a, A, lda, B, ldb, b, Cout, ldc) annotation(Library = {"lapack"});
+
   annotation (Documentation(info="Purpose   
     =======   
     DGEMM  performs one of the matrix-matrix operations   
@@ -105,7 +108,4 @@ protected
              max( 1, m ).   
              Unchanged on exit.   
     Level 3 Blas routine.    "));
-external "Fortran 77" dgemm(
-    transa, transb, n, m, k, a, A, lda, B, ldb, b, Cout, ldc) annotation(Library = {"lapack"});
-
 end dgemm;

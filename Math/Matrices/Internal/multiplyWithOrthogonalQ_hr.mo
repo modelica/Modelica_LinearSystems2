@@ -23,6 +23,23 @@ protected
   Integer lwork=2*size(A, 2);
   Real work[lwork];
 
+external "Fortran 77" dormhr(
+      side,
+      trans,
+      m,
+      n,
+      ilo,
+      ihi,
+      A,
+      lda,
+      tau,
+      Cout,
+      ldc,
+      work,
+      lwork,
+      info) 
+          annotation(Library = {"lapack"});
+
   annotation (Documentation(info="   Purpose  
     -- LAPACK routine (version 3.0) --  
       Univ. of Tennessee, Univ. of California Berkeley, NAG Ltd.,  
@@ -120,21 +137,4 @@ protected
            < 0:  if INFO = -i, the i-th argument had an illegal value  
  
    =====================================================================  "));
-external "Fortran 77" dormhr(
-      side,
-      trans,
-      m,
-      n,
-      ilo,
-      ihi,
-      A,
-      lda,
-      tau,
-      Cout,
-      ldc,
-      work,
-      lwork,
-      info) 
-          annotation(Library = {"lapack"});
-
 end multiplyWithOrthogonalQ_hr;

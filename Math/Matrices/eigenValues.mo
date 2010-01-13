@@ -12,6 +12,24 @@ function eigenValues
     "Real-valued eigenvector matrix";
  output Real rightEigenvectors[size(A,1), size(A,2)]
     "Real-valued eigenvector matrix";
+
+protected
+  Integer info;
+  Boolean onlyEigenvalues = false;
+algorithm
+if size(A,1) > 0 then
+  if onlyEigenvalues then
+      (eigenvalues[:, 1],eigenvalues[:, 2],info) :=
+        Modelica.Math.Matrices.LAPACK.dgeev_eigenValues(A);
+     rightEigenvectors :=zeros(size(A, 1), size(A, 1));
+     leftEigenvectors :=zeros(size(A, 1), size(A, 1));
+  else
+      (eigenvalues[:, 1],eigenvalues[:, 2],leftEigenvectors,rightEigenvectors,info) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev(A);
+  end if;
+  assert(info == 0, "Calculating the eigenvalues with function
+\"Matrices.eigenvalues\" is not possible, since the
+numerical algorithm does not converge.");
+end if;
   annotation (
     Documentation(info="<HTML>
 <h4>Syntax</h4>
@@ -66,22 +84,4 @@ i.e., matrix A has the 3 real eigenvalues -0.618, 8, 1.618.
 <a href=\"Modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
 </HTML>
 "));
-
-protected
-  Integer info;
-  Boolean onlyEigenvalues = false;
-algorithm
-if size(A,1) > 0 then
-  if onlyEigenvalues then
-      (eigenvalues[:, 1],eigenvalues[:, 2],info) :=
-        Modelica.Math.Matrices.LAPACK.dgeev_eigenValues(A);
-     rightEigenvectors :=zeros(size(A, 1), size(A, 1));
-     leftEigenvectors :=zeros(size(A, 1), size(A, 1));
-  else
-      (eigenvalues[:, 1],eigenvalues[:, 2],leftEigenvectors,rightEigenvectors,info) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev(A);
-  end if;
-  assert(info == 0, "Calculating the eigenvalues with function
-\"Matrices.eigenvalues\" is not possible, since the
-numerical algorithm does not converge.");
-end if;
 end eigenValues;

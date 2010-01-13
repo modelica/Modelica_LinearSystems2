@@ -16,6 +16,16 @@ protected
   Integer lda=max(1, m);
   Integer lwork2=if lwork1 == -1 then -1 else max(1, lwork1);
 
+external "Fortran 77" dgeqrf(
+    m,
+    n,
+    Aout,
+    lda,
+    tau,
+    work,
+    lwork2,
+    info) annotation(Library = {"lapack"});
+
   annotation (Documentation(info="
    Purpose  
    =======  
@@ -81,14 +91,4 @@ protected
    and tau in TAU(i).  
  
    =====================================================================  "));
-external "Fortran 77" dgeqrf(
-    m,
-    n,
-    Aout,
-    lda,
-    tau,
-    work,
-    lwork2,
-    info) annotation(Library = {"lapack"});
-
 end dgeqrf;

@@ -6,6 +6,19 @@ block ADconverter "Analog to digital converter (including sampler)"
     "Number of bits (=0 means no quantization error)";
   extends Interfaces.PartialSISO_equality;
 
+
+protected
+  Internal.DiscreteADconverter discretePart(y_max=y_max, y_min=y_min, bits=bits,
+      sampleFactor=sampleFactor) if 
+          not continuous "AD converter";
+
+equation
+   if continuous then
+      y = if u > y_max then y_max else if u < y_min then y_min else u;
+else
+    connect(u, discretePart.u);
+    connect(y, discretePart.y);
+   end if;
    annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,
@@ -65,17 +78,4 @@ but is limited by y_min and y_max.
       y=0.01,
       width=0.35,
       height=0.49));
-
-protected
-  Internal.DiscreteADconverter discretePart(y_max=y_max, y_min=y_min, bits=bits,
-      sampleFactor=sampleFactor) if 
-          not continuous "AD converter";
-
-equation
-   if continuous then
-      y = if u > y_max then y_max else if u < y_min then y_min else u;
-else
-    connect(u, discretePart.u);
-    connect(y, discretePart.y);
-   end if;
 end ADconverter;

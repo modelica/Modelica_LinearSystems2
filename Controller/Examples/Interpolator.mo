@@ -10,43 +10,6 @@ model Interpolator "Demonstrate usage of Interpolator"
   inner SampleClock sampleClock(sampleTime=0.001, blockType=
         Modelica_LinearSystems2.Controller.Types.BlockType.Discrete) 
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-            -100},{100,100}}), graphics), Documentation(info="<html>
-<p>
-This example demonstrates the usage of the 
-<a href=\"Modelica://Modelica_LinearSystems2.Controller.Interpolator\">Interpolator</a>
-block. This block is used in multi-rate controllers to interpolate between two different
-sample rates. In this example, a sampled sine-signal is interpolated in different ways:
-</p>
-
-<ol>
-<li> A \"sine\" signal (= blue and red curve in the figure below) is sampled with 20*Ts
-     (= green curve in the figure below) where Ts is the sample time of 1 ms.</li>
-
-<li> This \"sine\" signal is interpolated with \"interpolator1\" which has
-     a \"continous\" blockType. In this case, the interpolator just passes the input
-     signal (y = u) and therefore the signal is identical to the sine signal
-     (therefore the blue and the red curve are the same).</li>
-
-<li> The sampled sine signal is interpolated  with \"interpolator2\" to arrive
-     at a sample time of 4*Ts (= violet curve in the figure below).
-     This gives a 20*Ts delay and a sine signal
-     sampled with 4*Ts (instead of 20*Ts).</li>
-     
-<li> In order to remove frequencies introduced by the interpolation, \"interpolator3\"
-     additionally filters the linearly interpolated signal with a mean value filter
-     of the same length (= black curve in the figure below).
-     This gives an additional delay (= a total delay of 24*Ts), but
-     results in a filtered interpolation signal.</li>
-</ol>
-
-<p align=\"center\">
-<IMG SRC=\"../Extras/Images/Controller/Examples/Interpolator.png\">
-</p>
-
-</html>"),
-    experiment(StopTime=0.5),
-    experimentSetupOutput);
   Modelica_LinearSystems2.Controller.Interpolator interpolator1(
     outputSampleFactor=4,
     inputSampleFactor=5,
@@ -87,4 +50,41 @@ equation
       points={{-19,10},{-12,10},{-12,-30},{-2,-30}},
       color={0,0,127},
       smooth=Smooth.None));
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
+            -100},{100,100}}), graphics), Documentation(info="<html>
+<p>
+This example demonstrates the usage of the 
+<a href=\"Modelica://Modelica_LinearSystems2.Controller.Interpolator\">Interpolator</a>
+block. This block is used in multi-rate controllers to interpolate between two different
+sample rates. In this example, a sampled sine-signal is interpolated in different ways:
+</p>
+
+<ol>
+<li> A \"sine\" signal (= blue and red curve in the figure below) is sampled with 20*Ts
+     (= green curve in the figure below) where Ts is the sample time of 1 ms.</li>
+
+<li> This \"sine\" signal is interpolated with \"interpolator1\" which has
+     a \"continous\" blockType. In this case, the interpolator just passes the input
+     signal (y = u) and therefore the signal is identical to the sine signal
+     (therefore the blue and the red curve are the same).</li>
+
+<li> The sampled sine signal is interpolated  with \"interpolator2\" to arrive
+     at a sample time of 4*Ts (= violet curve in the figure below).
+     This gives a 20*Ts delay and a sine signal
+     sampled with 4*Ts (instead of 20*Ts).</li>
+     
+<li> In order to remove frequencies introduced by the interpolation, \"interpolator3\"
+     additionally filters the linearly interpolated signal with a mean value filter
+     of the same length (= black curve in the figure below).
+     This gives an additional delay (= a total delay of 24*Ts), but
+     results in a filtered interpolation signal.</li>
+</ol>
+
+<p align=\"center\">
+<IMG src=\"modelica://Modelica_LinearSystems2/Extras/Images/Controller/Examples/Interpolator.png\">
+</p>
+
+</html>"),
+    experiment(StopTime=0.5),
+    experimentSetupOutput);
 end Interpolator;

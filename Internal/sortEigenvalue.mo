@@ -13,28 +13,6 @@ function sortEigenvalue
   output Eigenvalue sorted_ev[size(ev,1)] = ev "Sorted vector";
   output Integer indices[size(ev,1)] = 1:size(ev,1) "sorted_ev = ev[indices]";
 
-  annotation (Documentation(info="<HTML>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<blockquote><pre>
-           sorted_v = Vectors.<b>sort</b>(v);
-(sorted_v, indices) = Vectors.<b>sort</b>(v, ascending=true);
-</pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function <b>sort</b>(..) sorts a Real vector v
-in ascending order and returns the result in sorted_v.
-If the optional argument \"ascending\" is <b>false</b>, the vector
-is sorted in descending order. In the optional second
-output argument the indices of the sorted vector with respect
-to the original vector are given, such that sorted_v = v[indices].
-</p>
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-  (v2, i2) := Vectors.sort({-1, 8, 3, 6, 2});
-       -> v2 = {-1, 2, 3, 6, 8}
-          i2 = {1, 5, 3, 4, 2}
-</pre></blockquote>
-</HTML>"));
   /* shellsort algorithm; should be improved later */
 protected
   Integer gap;
@@ -117,4 +95,26 @@ algorithm
      end while;
      gap := div(gap,2);
   end while;
+  annotation (Documentation(info="<HTML>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<blockquote><pre>
+           sorted_v = Vectors.<b>sort</b>(v);
+(sorted_v, indices) = Vectors.<b>sort</b>(v, ascending=true);
+</pre></blockquote>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Function <b>sort</b>(..) sorts a Real vector v
+in ascending order and returns the result in sorted_v.
+If the optional argument \"ascending\" is <b>false</b>, the vector
+is sorted in descending order. In the optional second
+output argument the indices of the sorted vector with respect
+to the original vector are given, such that sorted_v = v[indices].
+</p>
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+  (v2, i2) := Vectors.sort({-1, 8, 3, 6, 2});
+       -> v2 = {-1, 2, 3, 6, 8}
+          i2 = {1, 5, 3, 4, 2}
+</pre></blockquote>
+</HTML>"));
 end sortEigenvalue;

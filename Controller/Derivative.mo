@@ -14,6 +14,33 @@ block Derivative "Approximate derivative (continuous or discrete block)"
   parameter Real y_start=0 "Initial or guess value of output"  annotation(Dialog(tab="Advanced options"));
   Modelica.Blocks.Interfaces.RealOutput x(start=x_start)
     "State of approximative derivative";
+protected
+  parameter Boolean zeroGain = abs(k) < Modelica.Constants.eps
+    "= true, if k is considered to be zero";
+equation
+  if continuous then
+     der(x) = if zeroGain then 0 else (u - x)/T;
+          y = if zeroGain then 0 else (k/T)*(u - x);
+else
+
+connect(x,discretePart.x[1]);
+connect(y,discretePart.y[1]);
+  end if;
+
+initial equation
+  if continuous then
+     if init == Types.Init.InitialState or zeroGain then
+        x = x_start;
+     elseif init == Types.Init.SteadyState then
+        der(x) = 0;
+  elseif init == Types.Init.InitialOutput then
+    if zeroGain then
+       x = u;
+    else
+       y = y_start;
+    end if;
+     end if;
+  end if;
    annotation (
     Window(
       x=0.29,
@@ -69,7 +96,7 @@ n = {k,0}, d = {T,1}.
           textString="k=%k"),
         Line(points={{-80,-80},{-80,60},{-70,17.95},{-60,-11.46},{-50,-32.05},{
               -40,-46.45},{-30,-56.53},{-20,-63.58},{-10,-68.51},{0,-71.96},{10,
-              -74.37},{20,-76.06},{30,-77.25},{40,-78.07},{50,-78.65},{60,-79.06}}, 
+              -74.37},{20,-76.06},{30,-77.25},{40,-78.07},{50,-78.65},{60,-79.06}},
             color={0,0,127}),
         Text(
           extent={{-58,-18},{94,24}},
@@ -97,31 +124,4 @@ n = {k,0}, d = {T,1}.
           lineColor={0,0,0},
           textString="T s + 1"),
         Line(points={{-50,0},{50,0}}, color={0,0,0})}));
-protected
-  parameter Boolean zeroGain = abs(k) < Modelica.Constants.eps
-    "= true, if k is considered to be zero";
-equation
-  if continuous then
-     der(x) = if zeroGain then 0 else (u - x)/T;
-          y = if zeroGain then 0 else (k/T)*(u - x);
-else
-
-connect(x,discretePart.x[1]);
-connect(y,discretePart.y[1]);
-  end if;
-
-initial equation
-  if continuous then
-     if init == Types.Init.InitialState or zeroGain then
-        x = x_start;
-     elseif init == Types.Init.SteadyState then
-        der(x) = 0;
-  elseif init == Types.Init.InitialOutput then
-    if zeroGain then
-       x = u;
-    else
-       y = y_start;
-    end if;
-     end if;
-  end if;
 end Derivative;

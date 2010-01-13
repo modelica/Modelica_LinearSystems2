@@ -16,98 +16,6 @@ record DiscreteStateSpace
     "Discretization method" 
         annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
-  annotation (
-    defaultComponentName="stateSpaceDiscrete",
-    Documentation(info="<html>
-<p>
-This record defines a linear time invariant difference
-equation system in state space form:
-</p>
-<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
-     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
-</pre>
-<p>
-with
-</p>
-<ul>
-<li> <b>Ts</b> - the sample time</li>
-<li> <b>k</b> - the index of the actual sample instance (k=0,1,2,3,...)</li>
-<li> <b>t</b> - the time</li>
-<li> <b>u</b>(t) - the input vector,</li>
-<li> <b>y</b>(t) - the output vector,</li>
-<li> <b>x</b>(t) - the discrete state vector (x(t=Ts*0) is the initial state),</li>
-<li> <b>x</b>_continuous(t) - the state vector of the continuous system
-     from which the discrete block has been derived (details see below),</li>
-<li> <b>A,B,C,D,B2</b> - matrices of appropriate dimensions.</li>
-</ul>
-<p>
-A discrete system is usually derived by discretization from a 
-continuous block, e.g., by function
-LinearSystems.DiscreteStateSpace.fromStateSpace.
-If the discretization method, e.g., the trapezoidal method,
-accesses <b>actual and past</b> values of the input <b>u</b> 
-(e.g. <b>u</b>(Ts*k), <b>u</b>(Ts*(k-1), <b>u</b>(Ts*(k-2))), 
-a state transformation is needed to get the difference equation 
-above where only the actual value <b>u</b>(Ts*k) is accessed. 
-</p>
-<p>
-If the original continuous state vector should be computed
-from the sampled data system above, the matrices of this 
-transformation have to be known. For simplicity and efficiency,
-here only the specific transformation used by function
-LinearSystems.DiscreteStateSpace.fromStateSpace is stored in 
-the data record of the discrete system via matrix <b>B2</b>.
-Therefore, the state vector of the underlying continuous
-system can be calculated by adding the term <b>B2</b>*<b>u</b> to the
-state vector of the discretized system.
-</p>
-<p>
-In Modelica notation, the difference equation above
-can be implemented as:
-</p>
-<pre>
-     <b>when</b> {<b>initial</b>(), <b>sample</b>(Ts,Ts)} <b>then</b>
-        new_x = A * x + B * u;
-            y = C * x + D * u;
-            x = <b>pre</b>(new_x);
-        x_continuous = x + B2 * u;
-     <b>end when</b>;
-</pre>
-<p>
-Since no \"next value\" operator is available in Modelica, an
-auxiliary variable new_x stores the value of x for the
-next sampling instant. The relationship between new_x and x
-is defined via equation \"x = <b>pre</b>(new_x)\".
-</p>
-<p>
-The body of the when-clause is active during initialization and at the
-next sample instant t=Ts. Note, the when-equation is not
-active after the initialization at t=0 (due to <b>sample</b>(Ts,Ts)), 
-since the state x of the initialization has to be used also at t=0.
-</p>
-<p>
-In library Blocks.<b>Controller</b> additional equations are
-added for the initialization to uniquely compute the
-initial vector x:
-</p>
-<pre>
-  <b>initial equation</b> 
-     <b>if</b> init == InitialState <b>then</b>
-        x = x_start;
-     <b>elseif</b> init == SteadyState <b>then</b>
-        x = new_x;
-     <b>end if</b>;
-</pre>
-<p>
-Optionally, x is set to a given start vector x_start.
-As <b>default initialization</b>, the equation \"x = new_x\" is
-added that defines steady state initialization for the
-discrete system. As a consequence, the output y(Ts*k), k=0,1,2,..,
-remains constant after this initialization, 
-provided the input vector u(Ts*k) remains constant.
-</p>
-</html>"));
 
   encapsulated operator 'constructor'
     function fromMatrices "Default constructor for a DiscreteStateSpace record"
@@ -167,7 +75,6 @@ provided the input vector u(Ts*k) remains constant.
         redeclare Real B2[size(sc.B, 1),size(sc.B, 2)])
         "Discrete state space system";
 
-      annotation (overloadsConstructor=true);
     protected
       Integer nx=size(sc.A, 1) "Number of states";
       Integer nu=size(sc.B, 2) "Number of input signals";
@@ -272,6 +179,7 @@ provided the input vector u(Ts*k) remains constant.
         assert(false, "Argument method (= " + String(method) +
           ") of makeDiscrete is wrong.");
       end if;
+      annotation (overloadsConstructor=true);
     end fromStateSpace;
 
     encapsulated function fromMatrices2
@@ -296,7 +204,6 @@ provided the input vector u(Ts*k) remains constant.
         redeclare Real D[size(D, 1),size(D, 2)],
         redeclare Real B2[size(B, 1),size(B, 2)]) "Discrete state space system";
 
-      annotation (overloadsConstructor=true);
     protected
       Integer nx=size(A, 1) "Number of states";
       Integer nu=size(B, 2) "Number of input signals";
@@ -401,6 +308,7 @@ provided the input vector u(Ts*k) remains constant.
         assert(false, "Argument method (= " + String(method) +
           ") of makeDiscrete is wrong.");
       end if;
+      annotation (overloadsConstructor=true);
     end fromMatrices2;
   end 'constructor';
 
@@ -419,18 +327,6 @@ provided the input vector u(Ts*k) remains constant.
     output Real x_continuous[size(u, 1),size(sd.A, 1)]
       "State trajectories (dimension: (input samples) x (number of states)";
 
-    annotation (Documentation(info="<html>
-<p>
-Computes the time response of a system in discrete state space form:
-</p>
-<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
-     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
-</pre>
-<p>
-Note that the system input <b>u</b> must be sampled with the discrete system sample time Ts.
-</p>
-</html>"));
   protected
     Integer samples=size(u, 1);
     Integer i;
@@ -444,6 +340,18 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
       x_continuous[i, :] := x + sd.B2*u[i, :];
       x := new_x;
     end for;
+    annotation (Documentation(info="<html>
+<p>
+Computes the time response of a system in discrete state space form:
+</p>
+<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
+     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
+</pre>
+<p>
+Note that the system input <b>u</b> must be sampled with the discrete system sample time Ts.
+</p>
+</html>"));
   end timeResponse;
 
   encapsulated function initialResponse
@@ -460,18 +368,6 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
     output Real x_continuous[samples,size(sd.A, 1)]
       "State trajectories (dimension: (input samples) x (number of states)";
 
-    annotation (Documentation(info="<html>
-<p>
-Computes the initial response of a system in discrete state space form:
-</p>
-<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k)
-     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) 
-</pre>
-<p>
-Note that the system input <b>u</b> is equal to zero.
-</p>
-</html>"));
   protected
     Integer i;
     Real new_x[size(sd.A, 1)];
@@ -484,5 +380,109 @@ Note that the system input <b>u</b> is equal to zero.
       x_continuous[i, :] := x;
       x := new_x;
     end for;
+    annotation (Documentation(info="<html>
+<p>
+Computes the initial response of a system in discrete state space form:
+</p>
+<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k)
+     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k)
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) 
+</pre>
+<p>
+Note that the system input <b>u</b> is equal to zero.
+</p>
+</html>"));
   end initialResponse;
+  annotation (
+    defaultComponentName="stateSpaceDiscrete",
+    Documentation(info="<html>
+<p>
+This record defines a linear time invariant difference
+equation system in state space form:
+</p>
+<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
+     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
+</pre>
+<p>
+with
+</p>
+<ul>
+<li> <b>Ts</b> - the sample time</li>
+<li> <b>k</b> - the index of the actual sample instance (k=0,1,2,3,...)</li>
+<li> <b>t</b> - the time</li>
+<li> <b>u</b>(t) - the input vector,</li>
+<li> <b>y</b>(t) - the output vector,</li>
+<li> <b>x</b>(t) - the discrete state vector (x(t=Ts*0) is the initial state),</li>
+<li> <b>x</b>_continuous(t) - the state vector of the continuous system
+     from which the discrete block has been derived (details see below),</li>
+<li> <b>A,B,C,D,B2</b> - matrices of appropriate dimensions.</li>
+</ul>
+<p>
+A discrete system is usually derived by discretization from a 
+continuous block, e.g., by function
+LinearSystems.DiscreteStateSpace.fromStateSpace.
+If the discretization method, e.g., the trapezoidal method,
+accesses <b>actual and past</b> values of the input <b>u</b> 
+(e.g. <b>u</b>(Ts*k), <b>u</b>(Ts*(k-1), <b>u</b>(Ts*(k-2))), 
+a state transformation is needed to get the difference equation 
+above where only the actual value <b>u</b>(Ts*k) is accessed. 
+</p>
+<p>
+If the original continuous state vector should be computed
+from the sampled data system above, the matrices of this 
+transformation have to be known. For simplicity and efficiency,
+here only the specific transformation used by function
+LinearSystems.DiscreteStateSpace.fromStateSpace is stored in 
+the data record of the discrete system via matrix <b>B2</b>.
+Therefore, the state vector of the underlying continuous
+system can be calculated by adding the term <b>B2</b>*<b>u</b> to the
+state vector of the discretized system.
+</p>
+<p>
+In Modelica notation, the difference equation above
+can be implemented as:
+</p>
+<pre>
+     <b>when</b> {<b>initial</b>(), <b>sample</b>(Ts,Ts)} <b>then</b>
+        new_x = A * x + B * u;
+            y = C * x + D * u;
+            x = <b>pre</b>(new_x);
+        x_continuous = x + B2 * u;
+     <b>end when</b>;
+</pre>
+<p>
+Since no \"next value\" operator is available in Modelica, an
+auxiliary variable new_x stores the value of x for the
+next sampling instant. The relationship between new_x and x
+is defined via equation \"x = <b>pre</b>(new_x)\".
+</p>
+<p>
+The body of the when-clause is active during initialization and at the
+next sample instant t=Ts. Note, the when-equation is not
+active after the initialization at t=0 (due to <b>sample</b>(Ts,Ts)), 
+since the state x of the initialization has to be used also at t=0.
+</p>
+<p>
+In library Blocks.<b>Controller</b> additional equations are
+added for the initialization to uniquely compute the
+initial vector x:
+</p>
+<pre>
+  <b>initial equation</b> 
+     <b>if</b> init == InitialState <b>then</b>
+        x = x_start;
+     <b>elseif</b> init == SteadyState <b>then</b>
+        x = new_x;
+     <b>end if</b>;
+</pre>
+<p>
+Optionally, x is set to a given start vector x_start.
+As <b>default initialization</b>, the equation \"x = new_x\" is
+added that defines steady state initialization for the
+discrete system. As a consequence, the output y(Ts*k), k=0,1,2,..,
+remains constant after this initialization, 
+provided the input vector u(Ts*k) remains constant.
+</p>
+</html>"));
 end DiscreteStateSpace;

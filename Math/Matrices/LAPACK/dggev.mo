@@ -21,6 +21,25 @@ protected
   Real Bwork[n,n]=B;
   Real work[lwork];
 
+
+external "Fortran 77" dggev(
+    "V",
+    "V",
+    nA,
+    Awork,
+    n,
+    Bwork,
+    n,
+    alphaReal,
+    alphaImag,
+    beta,
+    lEigenVectors,
+    n,
+    rEigenVectors,
+    n,
+    work,
+    lwork,
+    info)         annotation(Library = {"lapack"});
   annotation (Documentation(info="   Purpose  
    =======  
  
@@ -145,23 +164,4 @@ protected
  
    =====================================================================  
 "));
-
-external "Fortran 77" dggev(
-    "V",
-    "V",
-    nA,
-    Awork,
-    n,
-    Bwork,
-    n,
-    alphaReal,
-    alphaImag,
-    beta,
-    lEigenVectors,
-    n,
-    rEigenVectors,
-    n,
-    work,
-    lwork,
-    info)         annotation(Library = {"lapack"});
 end dggev;

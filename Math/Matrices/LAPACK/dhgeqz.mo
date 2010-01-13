@@ -23,6 +23,28 @@ protected
       1,
       n);
 
+external "Fortran 77" dhgeqz(
+    "E",
+    "N",
+    "N",
+    n,
+    ilo,
+    ihi,
+    Awork,
+    lda,
+    Bwork,
+    lda,
+    alphaReal,
+    alphaImag,
+    beta,
+    Q,
+    1,
+    Q,
+    1,
+    work,
+    lwork,
+    info)         annotation(Library = {"lapack"});
+
   annotation (Documentation(info="
      Purpose  
    =======  
@@ -214,26 +236,4 @@ protected
  
    =====================================================================  
 "));
-external "Fortran 77" dhgeqz(
-    "E",
-    "N",
-    "N",
-    n,
-    ilo,
-    ihi,
-    Awork,
-    lda,
-    Bwork,
-    lda,
-    alphaReal,
-    alphaImag,
-    beta,
-    Q,
-    1,
-    Q,
-    1,
-    work,
-    lwork,
-    info)         annotation(Library = {"lapack"});
-
 end dhgeqz;

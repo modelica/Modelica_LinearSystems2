@@ -153,10 +153,9 @@ leading to the following result when filtering a sine-signal with \"continous\" 
 </p>
 
 <p align=\"center\">
-<IMG SRC=\"../Extras/Images/Controller/Examples/Interpolator.png\">
+<IMG src=\"modelica://Modelica_LinearSystems2/Extras/Images/Controller/Examples/Interpolator.png\">
 </p>
 
 </html>
 "));
-
 end Interpolator;

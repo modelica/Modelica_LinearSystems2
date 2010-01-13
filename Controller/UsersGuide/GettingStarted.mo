@@ -47,7 +47,7 @@ A screen shot of the diagram layer is shown in the next figure:
 </p>
  
 <p align=\"center\">
-<img src=\"../Extras/Images/UsersGuide/Sampled1.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Sampled1.png\">
 </p>
  
 <p>
@@ -59,11 +59,11 @@ parameter menus:
 </p>
  
 <p align=\"center\">
-<img src=\"../Extras/Images/UsersGuide/Sampled2.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Sampled2.png\">
 </p>
  
 <p align=\"center\">
-<img src=\"../Extras/Images/UsersGuide/Sampled3.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Sampled3.png\">
 </p>
  
 <p>

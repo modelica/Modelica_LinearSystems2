@@ -8,9 +8,6 @@ partial model SimpleStateSpaceControl
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Blocks.Math.Feedback feedback[feedbackMatrix.nout] 
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
-  annotation (defaultComponentName="controller",Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,
-            -100},{140,100}}), graphics), Icon(coordinateSystem(
-          preserveAspectRatio=true, extent={{-140,-100},{140,100}})));
   replaceable Modelica_LinearSystems2.Controller.Templates.PartialPlantMIMO
     plant(n=feedbackMatrix.nin, m=feedbackMatrix.nout) constrainedby
     Modelica_LinearSystems2.Controller.Templates.PartialPlantMIMO 
@@ -52,4 +49,7 @@ equation
       points={{70,-11},{70,-40},{66,-40}},
       color={0,0,127},
       smooth=Smooth.None));
+  annotation (defaultComponentName="controller",Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,
+            -100},{140,100}}), graphics), Icon(coordinateSystem(
+          preserveAspectRatio=true, extent={{-140,-100},{140,100}})));
 end SimpleStateSpaceControl;

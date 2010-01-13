@@ -10,25 +10,6 @@ record StateSpaceR
   Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
   Integer r=0;
 
-  annotation (defaultComponentName="stateSpaceR", Documentation(info="<html>
-<p>
-This record defines a linear time invariant differential
-equation system in state space form:
-</p>
-<pre>    <b>der</b>(x) = A * x + B * u
-        y  = C * x + D * u
-</pre>
-<p>
-with
-</p>
-<ul>
-<li> u - the input vector</li>
-<li> y - the output vector</li>
-<li> x - the state vector</li>
-<li> A,B,C,D - matrices of appropriate dimensions</li>
-</ul>
-Compared to record StateSpace StateSpaceR cantains an additional Integer value r
-</html>"));
 
   encapsulated function constructor
     "Default constructor for a StateSpace record"
@@ -52,4 +33,23 @@ Compared to record StateSpace StateSpaceR cantains an additional Integer value r
     result.D := D;
     result.r := r;
   end constructor;
+  annotation (defaultComponentName="stateSpaceR", Documentation(info="<html>
+<p>
+This record defines a linear time invariant differential
+equation system in state space form:
+</p>
+<pre>    <b>der</b>(x) = A * x + B * u
+        y  = C * x + D * u
+</pre>
+<p>
+with
+</p>
+<ul>
+<li> u - the input vector</li>
+<li> y - the output vector</li>
+<li> x - the state vector</li>
+<li> A,B,C,D - matrices of appropriate dimensions</li>
+</ul>
+Compared to record StateSpace StateSpaceR cantains an additional Integer value r
+</html>"));
 end StateSpaceR;

@@ -13,80 +13,6 @@ model SimpleControlledDrive
     annotation (extent=[60,-80; 80,-60]);
   Modelica.Mechanics.Rotational.Components.SpringDamper spring(c=1e5, d=100) 
     annotation (extent=[20,-80; 42,-60]);
-  annotation (
-    Diagram(
-      coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
-      Rectangle(extent=[-50,60; 96,-18], style(color=1, rgbcolor={255,0,0})),
-      Text(
-        extent=[0,68; 60,62],
-        style(color=1, rgbcolor={255,0,0}),
-        string="controller"),
-      Text(
-        extent=[-111,12; -48,6],
-        style(color=1, rgbcolor={255,0,0}),
-        string="reference"),
-      Text(
-        extent=[-12,-91; 53,-97],
-        style(color=1, rgbcolor={255,0,0}),
-        string="plant (flexible drive)"),
-      graphics),
-    experiment(StopTime=3),
-    experimentSetupOutput,
-    Commands(file="Extras/Scripts/SimpleControlledDriver_Plot1.mos"
-        "Plot most important variables"),
-    Coordsys(grid=[1,1], scale=0),
-    Documentation(info="<html>
-<p>
-This example demonstrates the control of a simple model
-of a flexible drive system with a continuous or discrete
-P-PI cascade controller. Simulate for 3 s and plot
-</p>
-<pre>
-  ramp.y          (reference angle of loadInertia)
-  loadInertia.phi (angle of loadInertia)
-  loadInertia.w   (speed of loadInertia)
-  torque.tau      (motor torque)         
-</pre>
-<p>
-The standard setting in component sampleClock models a continuous controller.
-This means that all 3 samplers are just dummy components containing the
-equation \"y=u\" and that the PI component in the controller is a continuous
-PI controller.
-</p>
-<p>
-Change sampleClock.blockType to \"Discrete\" block. By this global setting,
-the 3 sampler blocks and the PI speed controller are transformed into
-a discrete representation. The base sample time is defined in
-component sampleClock (= 0.02 s). Every discrete component samples
-its input and output. The sampling time of every component is a multiple
-of the base sample time (defined via parameter sampleFactor). 
-Here, the sampler and the PI speed controller are sampled with the
-base sample frequency. The sample time of the 2 samplers and
-of the P position controller is a factor of 5 slower.
-</p>
-<p>
-When comparing the simulations of the continuous and the 
-(more realistic) discrete representation, it turns out that the
-discrete control systems works a bit worse. This can be improved
-by reducing the sample time in sampleClock.
-</p>
-<p>
-The Controller library has several blocks to model this system
-even more realistically, e.g, by component AD converter to model
-the quantization errors of the analog measurement signals,
-component DA converter to model the quantization errors and computing
-time to determine the analog actuator (torque) signal, and
-component Noise to add uniformly distributed noise to
-the measurement signals.
-</p>
-<p>
-In the following figure simulation results of the discrete and
-of the continuous controller are shown:
-</p>
-<p align=\"center\">
-<img src=\"../Extras/Images/SimpleControlledDrive_Plot1.png\">
-</p>
-</html>"));
 
   Modelica.Mechanics.Rotational.Sources.Torque torque 
     annotation (extent=[-60,-80; -40,-60]);
@@ -172,4 +98,78 @@ equation
       points={{-50,30},{-46,30}},
       color={0,0,127},
       smooth=Smooth.None));
+  annotation (
+    Diagram(
+      coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
+      Rectangle(extent=[-50,60; 96,-18], style(color=1, rgbcolor={255,0,0})),
+      Text(
+        extent=[0,68; 60,62],
+        style(color=1, rgbcolor={255,0,0}),
+        string="controller"),
+      Text(
+        extent=[-111,12; -48,6],
+        style(color=1, rgbcolor={255,0,0}),
+        string="reference"),
+      Text(
+        extent=[-12,-91; 53,-97],
+        style(color=1, rgbcolor={255,0,0}),
+        string="plant (flexible drive)"),
+      graphics),
+    experiment(StopTime=3),
+    experimentSetupOutput,
+    Commands(file="Extras/Scripts/SimpleControlledDriver_Plot1.mos"
+        "Plot most important variables"),
+    Coordsys(grid=[1,1], scale=0),
+    Documentation(info="<html>
+<p>
+This example demonstrates the control of a simple model
+of a flexible drive system with a continuous or discrete
+P-PI cascade controller. Simulate for 3 s and plot
+</p>
+<pre>
+  ramp.y          (reference angle of loadInertia)
+  loadInertia.phi (angle of loadInertia)
+  loadInertia.w   (speed of loadInertia)
+  torque.tau      (motor torque)         
+</pre>
+<p>
+The standard setting in component sampleClock models a continuous controller.
+This means that all 3 samplers are just dummy components containing the
+equation \"y=u\" and that the PI component in the controller is a continuous
+PI controller.
+</p>
+<p>
+Change sampleClock.blockType to \"Discrete\" block. By this global setting,
+the 3 sampler blocks and the PI speed controller are transformed into
+a discrete representation. The base sample time is defined in
+component sampleClock (= 0.02 s). Every discrete component samples
+its input and output. The sampling time of every component is a multiple
+of the base sample time (defined via parameter sampleFactor). 
+Here, the sampler and the PI speed controller are sampled with the
+base sample frequency. The sample time of the 2 samplers and
+of the P position controller is a factor of 5 slower.
+</p>
+<p>
+When comparing the simulations of the continuous and the 
+(more realistic) discrete representation, it turns out that the
+discrete control systems works a bit worse. This can be improved
+by reducing the sample time in sampleClock.
+</p>
+<p>
+The Controller library has several blocks to model this system
+even more realistically, e.g, by component AD converter to model
+the quantization errors of the analog measurement signals,
+component DA converter to model the quantization errors and computing
+time to determine the analog actuator (torque) signal, and
+component Noise to add uniformly distributed noise to
+the measurement signals.
+</p>
+<p>
+In the following figure simulation results of the discrete and
+of the continuous controller are shown:
+</p>
+<p align=\"center\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/SimpleControlledDrive_Plot1.png\">
+</p>
+</html>"));
 end SimpleControlledDrive;

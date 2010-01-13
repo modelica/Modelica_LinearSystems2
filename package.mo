@@ -1,6 +1,9 @@
 within ;
 package Modelica_LinearSystems2 "Modelica_LinearSystems2 - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
 
+constant String DataDir=classDirectory() + "Extras/Data/"
+  "Absolute path to directory containing utilitiy files for this package";
+
 
 annotation (
   preferredView="info",
@@ -70,7 +73,7 @@ scripts are provided, but different library names are used.
  
 <p>
 <b>Licensed by DLR under the Modelica License 2</b><br>
-<img src=\"../Extras/Images/dlr_logo.png\"  width=60 >
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/dlr_logo.png\"  width=60 >
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  <b>      Copyright &copy; 2005-2009, DLR Institute of Robotics and Mechatronics</b>
 </p>
@@ -88,7 +91,4 @@ or at
 http://www.Modelica.org/licenses/ModelicaLicense2</a>.</i>
 </p>
 </html>"));
-constant String DataDir=classDirectory() + "Extras/Data/"
-  "Absolute path to directory containing utilitiy files for this package";
-
 end Modelica_LinearSystems2;

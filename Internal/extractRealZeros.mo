@@ -13,43 +13,6 @@ function extractRealZeros
   output Complex complexZeros[:]=fill(Complex(0), integer((size(complexVector, 1) -
       numberOfRealZeros)/2))
     "Complex zeros without the corresponding conjugate complex pair element";
-  annotation (Documentation(info="<HTML>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<blockquote><pre>
-                realZeros = Matrices.<b>extractRealZeros</b>(complexVector, numberOfRealRoots);
-(realZeros, complexZeros) = Matrices.<b>extractRealZeros</b>(complexVector, numberOfRealRoots,
-                                                      name=\"complexVector\");
-</pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function <b>extractRealZeros</b>(..) extracts the real zeros from the
-Complex vector \"complexVector\". It is required that all elements
-of complexVector define either
-a real zero (complexVector[i].im=0) or a conjugate complex zero pair
-(complexVector[i].re == complexVector[i+1].re and
-complexVector[i].im == -complexVector[i+1].im). 
-The second argument \"numberOfRealZeros\" is determined by a function
-call of Internal.numberOfRealZeros().
-The optional input argument
-\"name\" is used as name of \"complexVector\" in error messages.
-</p>
-<p>
-The function returns the real elements of complexVector in
-vector \"realZeros\" and the real and imaginary part of a conjugate
-complex zero pair in matrix complexZeros[:]\".
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-  // c = {0; 1+2j; 1-2j; 2; -3; -1-j; -1+j};
-    Integer n = numberOfRealZeros(c);
-    Real realZeros[n];
-    Real complexZeros[:] = fill(Complex(0), integer((size(c,1)-n)/2));
-  algorithm
-  (realZeros, complexZeros) := extractRealZeros(c, n);
-           -> realZeros    = {0, 2, (-3)};
-              complexZeros = { 1+2j,
-                              -1+j}
-</pre></blockquote>
-</HTML>"));
 
 protected
   Integer n=size(complexVector, 1);
@@ -94,4 +57,41 @@ algorithm
       i := i + 2;
     end if;
   end while;
+  annotation (Documentation(info="<HTML>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<blockquote><pre>
+                realZeros = Matrices.<b>extractRealZeros</b>(complexVector, numberOfRealRoots);
+(realZeros, complexZeros) = Matrices.<b>extractRealZeros</b>(complexVector, numberOfRealRoots,
+                                                      name=\"complexVector\");
+</pre></blockquote>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Function <b>extractRealZeros</b>(..) extracts the real zeros from the
+Complex vector \"complexVector\". It is required that all elements
+of complexVector define either
+a real zero (complexVector[i].im=0) or a conjugate complex zero pair
+(complexVector[i].re == complexVector[i+1].re and
+complexVector[i].im == -complexVector[i+1].im). 
+The second argument \"numberOfRealZeros\" is determined by a function
+call of Internal.numberOfRealZeros().
+The optional input argument
+\"name\" is used as name of \"complexVector\" in error messages.
+</p>
+<p>
+The function returns the real elements of complexVector in
+vector \"realZeros\" and the real and imaginary part of a conjugate
+complex zero pair in matrix complexZeros[:]\".
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+  // c = {0; 1+2j; 1-2j; 2; -3; -1-j; -1+j};
+    Integer n = numberOfRealZeros(c);
+    Real realZeros[n];
+    Real complexZeros[:] = fill(Complex(0), integer((size(c,1)-n)/2));
+  algorithm
+  (realZeros, complexZeros) := extractRealZeros(c, n);
+           -> realZeros    = {0, 2, (-3)};
+              complexZeros = { 1+2j,
+                              -1+j}
+</pre></blockquote>
+</HTML>"));
 end extractRealZeros;

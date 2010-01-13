@@ -11,7 +11,6 @@ function plotBode2 "Bode plot of PT2 transfer function with zero damping"
   input Real k=1 "Gain";
   input Integer nPoints=1000;
   output Boolean ok;
-  annotation (interactive=true);
 protected
   Modelica.SIunits.AngularVelocity w=2*Modelica.Constants.pi*f_cut;
   TransferFunction tf=TransferFunction(n={k*w^2}, d={1,2*D*w,w*w});
@@ -21,4 +20,5 @@ algorithm
                                   zp, nPoints);
   ok := true;
 
+  annotation (interactive=true);
 end plotBode2;

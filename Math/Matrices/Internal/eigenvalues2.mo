@@ -28,10 +28,6 @@ protected
 
   Integer lwork;
 
-  annotation (Documentation(info="<html>
- 
-</html>
-"));
 algorithm
 
   (H,V,tau) := Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg(
@@ -51,4 +47,8 @@ algorithm
 
   (lEigenVectors,rEigenVectors) := LAPACK.dtrevc(Ho, "B", "B", Zo);
 
+  annotation (Documentation(info="<html>
+ 
+</html>
+"));
 end eigenvalues2;

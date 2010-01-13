@@ -319,5 +319,4 @@ algorithm
 //K:=Modelica_LinearSystems2.StateSpace.Internal.calcK(A,U0,Z,gammaSorted,X);
 
   annotation (experiment, experimentSetupOutput);
-
 end assignPolesMI_rob2;
