@@ -26,6 +26,7 @@ algorithm
   else
     result := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm(
                                     A, p)*Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm(
-                                                                Complex.Matrices.inv(A), p);
+                                                                Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.inv(
+                                                                                     A), p);
   end if;
 end conditionNumber;

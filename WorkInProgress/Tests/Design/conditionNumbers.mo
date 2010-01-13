@@ -35,7 +35,8 @@ algorithm
   sortedAssignedPoles := Complex.Vectors.sortComplex(assignedPoles);
   sortedCalcPoles := Complex.Vectors.sortComplex(calcPoles);
   dl := Complex.Vectors.norm(sortedAssignedPoles-sortedCalcPoles)/max(1,Complex.Vectors.norm(sortedAssignedPoles));
-  YT := Complex.Matrices.inv(X);
+  YT := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.inv(
+                             X);
   for l1 in 1:n loop
     c[l1] := Complex.Vectors.norm(YT[l1, :]);
   end for;
