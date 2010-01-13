@@ -330,7 +330,6 @@ condX2 := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.condition
 //    Complex.Vectors.print("gammaSorted", gammaSorted);
 //    Complex.Vectors.print("ev", ev);
 
-
 public
   encapsulated record subSpace
     import Modelica;
