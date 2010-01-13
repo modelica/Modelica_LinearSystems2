@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Icons;
+within Modelica_LinearSystems2.WorkInProgress.Icons;
 partial function DeveloperOnlyFunction
   "Icon for a function which is in an prototype development state, makes only sense to the author and will most probably change/disappear in the near future."
 

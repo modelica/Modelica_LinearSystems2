@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2;
+within Modelica_LinearSystems2.WorkInProgress;
 package Icons "Icons used in the Linear Systems library"
 
 

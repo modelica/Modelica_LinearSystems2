@@ -31,10 +31,3 @@ plotZeros
 transformation
 transformationExtract
 transformationToIrreducibleForm
-analysis2
-designCraneController
-designCraneControllerWithObserver
-designInverseDoublePendulumController
-designInverseDoublePendulumControllerWithObserver
-designInversePendulumController
-designStateSpaceController

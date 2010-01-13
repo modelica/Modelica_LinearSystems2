@@ -1,0 +1,82 @@
+within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
+function designInversePendulumController
+  "Design pole assignment for an inverse pedulum"
+
+  import Modelica.Utilities.Streams.print;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2.Math.Matrices;
+
+  input String modelName="Modelica_Controller.Examples.Components.InversePendulum_small"
+    "name of the model to linearize";
+   input Complex pa[4]={-5+0*j,-5+0*j,-5.0-0.25*j,-5.0+0.25*j} "assigned poles";
+
+  input String fileName=DataDir + "inversePendulumController_small.mat"
+    "file name for results";
+protected
+   input Complex j = Modelica_LinearSystems2.Math.Complex.j();
+public
+  output Real K_pa[:,:] "feedback matrix pole assigment controller";
+  output Real M_pa[:,:] "pre filter LQ controller";
+// Determine linear System from Modelica_Controller.Examples.Pendulum.mo
+protected
+  Modelica_LinearSystems2.StateSpace ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName);
+
+  Complex p[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+
+  Modelica_LinearSystems2.StateSpace ss_pa=ss;
+
+algorithm
+  print("The linearized state space system is determined to:\n" +String(ss));
+
+//####### POLE ASSIGNMENT ##########
+
+// feedback matrix of a pole assignment controller with assigned eigenvalues pa
+  (K_pa,,p) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, pa);
+  ss_pa.A := ss.A - ss.B*K_pa;
+
+  print("The feedback matrix of the pole assignment controller is:\n" +
+    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    K_pa,
+    6,
+    "K_pa"));
+  print("eigenvalues of the closed loop system are:\n");
+  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
+  writeMatrix(
+   fileName,
+    "K_pa",
+    K_pa,
+    true);
+
+// Pre filter calculation
+  M_pa := -Modelica.Math.Matrices.inv([1,0,0,0]*Matrices.solve2(ss_pa.A, ss_pa.B));
+  print("Gain for pre filtering:\n" +
+    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    M_pa,
+    6,
+    "M_pa"));
+  writeMatrix(
+   fileName,
+    "M_pa",
+    M_pa,
+    true);
+
+  print("\nok!");
+annotation (interactive=true, Documentation(info="<html>
+This example demonstrates how to design pole placement controller to balance an inverted pendulum. For controller design a linearized model of a (simple) physical system model is used.
+The controller is applied to the physical model in Moldelica_Controller library.
+<br>
+It is also shown how to linearize a modelica model. The linear model is used as a base for control design
+ 
+</html>"),    Documentation(info="<html>
+This example demonstrates how to design a lq-controller or a pole placement controller respectively. 
+The feedback matrices and a simple pre filter for tracking are save to MATLAB files which can be used in
+ModelicaController library.<br>
+It is also shown how to linearize a model of a crane trolley system [1]. The linear model is used as a base for control design
+ 
+<A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A>
+<PRE>
+  [1] Föllinger, O. \"Regelungstechnik\", Hüthig-Verlag
+</PRE>
+</html>"));
+end designInversePendulumController;

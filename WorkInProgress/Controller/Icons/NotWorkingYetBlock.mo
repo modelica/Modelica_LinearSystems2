@@ -1,6 +1,6 @@
-within Modelica_LinearSystems2.WorkInProgress.Icons;
-partial function NotWorkingYetFunction
-  "Icon for a function which is definitely not working (yet)"
+within Modelica_LinearSystems2.WorkInProgress.Controller.Icons;
+partial block NotWorkingYetBlock
+  "Icon for a block which is definitely not working yet"
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
             -100},{100,100}}), graphics={
@@ -22,10 +22,11 @@ partial function NotWorkingYetFunction
           points={{-100,-100},{100,100}},
           color={255,0,0},
           thickness=0.5,
-          smooth=Smooth.None)}), Documentation(info="<html>
+          smooth=Smooth.None)}),
+                      Documentation(info="<html>
 <p>
-This icon is designed for a <b>function</b>
+This icon is designed for a <b>block</b>
 </p>
 </html>"));
 
-end NotWorkingYetFunction;
+end NotWorkingYetBlock;
