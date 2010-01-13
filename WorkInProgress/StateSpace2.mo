@@ -20,7 +20,7 @@ encapsulated operator 'constructor'
   function fromABCDMatrices "Default constructor for a StateSpace record"
       import Modelica;
       import Modelica_LinearSystems2;
-      import StateSpace = Modelica_LinearSystems2.StateSpace2;
+      import Modelica_LinearSystems2.WorkInProgress.StateSpace2;
 
     input Real A[:,size(A, 1)];
     input Real B[size(A, 1),:];
@@ -31,7 +31,7 @@ encapsulated operator 'constructor'
       //     input String yNames[size(C, 1)]=fill("", size(C, 1));
       //     input String xNames[size(A, 2)]=fill("", size(A, 2));
 
-     output StateSpace result(
+     output StateSpace2 result(
       redeclare Real A[size(A, 1),size(A, 2)],
       redeclare Real B[size(B, 1),size(B, 2)],
       redeclare Real C[size(C, 1),size(C, 2)],
@@ -93,10 +93,10 @@ public
   function fromReal "Generate a StateSpace data record from a Real value"
 
       import Modelica;
-      import StateSpace = Modelica_LinearSystems2.StateSpace2;
+      import Modelica_LinearSystems2.WorkInProgress.StateSpace2;
 
     input Real r "Value of Real variable";
-    output StateSpace ss(
+    output StateSpace2 ss(
       redeclare Real A[0,0],
       redeclare Real B[0,1],
       redeclare Real C[1,0],
@@ -155,11 +155,11 @@ encapsulated operator '-'
       "Subtraction of two state space systems connected in parallel (= inputs are the same, outputs of the two systems are subtracted)"
 
       import Modelica;
-      import StateSpace = Modelica_LinearSystems2.StateSpace2;
+      import Modelica_LinearSystems2.WorkInProgress.StateSpace2;
 
-    input StateSpace ss1 "State space system 1";
-    input StateSpace ss2 "State Space system 2 is subtracted from system 1";
-    output StateSpace result(
+    input StateSpace2 ss1 "State space system 1";
+    input StateSpace2 ss2 "State Space system 2 is subtracted from system 1";
+    output StateSpace2 result(
       redeclare Real A[size(ss1.A, 1) + size(ss2.A, 1),size(ss1.A, 2) + size(
         ss2.A, 2)],
       redeclare Real B[size(ss1.B, 1) + size(ss2.B, 1),size(ss1.B, 2)],
@@ -209,7 +209,7 @@ The operator is used by writing just the following command:
   function negate
       "Unary minus (state space system where the output is multiplied by a gain of -1)"
       import Modelica;
-      import StateSpace = Modelica_LinearSystems2.StateSpace2;
+      import StateSpace = Modelica_LinearSystems2.WorkInProgress.StateSpace2;
 
     input StateSpace ss;
     output StateSpace result(
@@ -233,7 +233,7 @@ end '-';
 
 encapsulated operator function '+'
     "Parallel connection of two state space systems (= inputs are the same, outputs of the two systems are added)"
-    import StateSpace = Modelica_LinearSystems2.StateSpace2;
+    import StateSpace = Modelica_LinearSystems2.WorkInProgress.StateSpace2;
 
     input StateSpace ss1 "System 1";
     input StateSpace ss2 "System 2 is added in parallel to system 1";
@@ -258,7 +258,7 @@ end '+';
 
 encapsulated operator function '*'
     "Series connection of two state space systems"
-    import StateSpace = Modelica_LinearSystems2.StateSpace2;
+    import StateSpace = Modelica_LinearSystems2.WorkInProgress.StateSpace2;
 
     input StateSpace ss1 "System 1";
     input StateSpace ss2 "System 2";
@@ -284,7 +284,7 @@ end '*';
 encapsulated operator function '=='
     "Check whether two linear systems have identical matrices"
     import Modelica.Math.Matrices.isEqual;
-    import StateSpace = Modelica_LinearSystems2.StateSpace2;
+    import StateSpace = Modelica_LinearSystems2.WorkInProgress.StateSpace2;
 
     input StateSpace ss1 "System 1";
     input StateSpace ss2 "System 2";
@@ -314,7 +314,7 @@ encapsulated package Import
 
       import Modelica;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.StateSpace2;
+      import Modelica_LinearSystems2.WorkInProgress.StateSpace2;
       import Modelica_LinearSystems2;
 
     input String fileName="dslin.mat"

@@ -3756,7 +3756,7 @@ end Analysis;
       Real poleError;
       Modelica_LinearSystems2.Math.Complex smaller;
     algorithm
-      assert(StateSpace.Internal.isSISO(ss),"System must be SISO but is "+ String(size(ss.B,2)) +"-by-" +String(size(ss.C,1)) +" system");
+      assert(size(ss.B,2)==1,"System must be SI but has "+ String(size(ss.B,2)) +" inputs");
       cm := StateSpace.Analysis.controllabilityMatrix(ss);
       assert(Modelica.Math.Matrices.rank(cm) == size(cm, 1) or 
         Modelica.Math.Matrices.rank(cm) == size(cm, 2),

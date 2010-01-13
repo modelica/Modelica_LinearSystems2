@@ -20,7 +20,8 @@ model SimpleControlledDrive
         Modelica_LinearSystems2.Controller.Types.BlockType.Discrete) 
     annotation (extent=[-83,55; -63,75], Placement(transformation(extent={{-80,
             60},{-60,80}})));
-  Modelica.Blocks.Sources.Ramp ramp annotation (extent=[-98,20; -78,40]);
+  Modelica.Blocks.Sources.Ramp ramp(duration=2) 
+                                    annotation (extent=[-98,20; -78,40]);
   Filter filter(
     f_cut=5,
     analogFilter=Modelica_LinearSystems2.Types.AnalogFilter.Bessel,

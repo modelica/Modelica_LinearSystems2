@@ -65,7 +65,7 @@ protected
   Real eps=Modelica.Constants.eps;
   Integer maxSteps=3;
 
-  Modelica_LinearSystems2.StateSpace.Internal.assignPolesMI_rob_old.subSpace
+  Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob_old.subSpace
     subS[                                                                         size(gamma,1)];
 
   Complex a;

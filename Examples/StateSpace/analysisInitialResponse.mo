@@ -11,42 +11,60 @@ protected
       D=[0,0; 0,0]);
 
   Real t[:] "Time vector: (number of samples)";
- Real x_continuous[:,2,2]
-    "State trajectories: (number of samples) x (number of states) x (number of inputs)";
+ Real x_continuous[:,2,1]
+    "State trajectories: (number of samples) x (number of states) x 1";
  Real x0[2]=ones(2) "Initial state vector";
 
 public
-output Real y[:,size(sc.C, 1),size(sc.B, 2)]
-    "Output response: (number of samples) x (number of outputs) x (number of inuputs)";
+output Real y[:,size(sc.C, 1),1]
+    "Output response: (number of samples) x (number of outputs) x 1";
+// output Real y[:,size(sc.C, 1),size(sc.B, 2)]
+//     "Output response: (number of samples) x (number of outputs) x (number of inuputs)";
 
 algorithm
  (y,t,x_continuous) := Modelica_LinearSystems2.StateSpace.Analysis.initialResponse(x0=x0,sc=sc,dt=0.1,tSpan=5);
 
- Modelica_LinearSystems2.Utilities.Plot.diagramVector({
-       Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
-                 curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                          x=t,
-                          y=y[:,1,1],
-                          legend="y1"),
-                          Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                          x=t,
-                          y=y[:,1,2],
-                          legend="y2")},
-                 heading="Initial response to u1",
-                 xLabel="time [s]",
-                 yLabel="y1, y2"),
-       Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
-                 curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                          x=t,
-                          y=y[:,2,1],
-                          legend="y1"),
-                          Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                          x=t,
-                          y=y[:,2,2],
-                          legend="y2")},
-                 heading="Initial response to u2",
-                 xLabel="time [s]",
-                 yLabel="y1, y2")});
+//  Modelica_LinearSystems2.Utilities.Plot.diagramVector({
+//        Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
+//                  curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
+//                           x=t,
+//                           y=y[:,1,1],
+//                           legend="y1"),
+//                           Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
+//                           x=t,
+//                           y=y[:,1,2],
+//                           legend="y2")},
+//                  heading="Initial response to u1",
+//                  xLabel="time [s]",
+//                  yLabel="y1, y2"),
+//        Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
+//                  curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
+//                           x=t,
+//                           y=y[:,2,1],
+//                           legend="y1"),
+//                           Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
+//                           x=t,
+//                           y=y[:,2,2],
+//                           legend="y2")},
+//                  heading="Initial response to u2",
+//                  xLabel="time [s]",
+//                  yLabel="y1, y2")});
+
+  Modelica_LinearSystems2.Utilities.Plot.diagramVector({
+        Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
+                  curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
+                           x=t,
+                           y=y[:,1,1],
+                           legend="y1")},
+                  heading="Initial response y1",
+                  xLabel="time [s]"),
+        Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
+                  curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
+                           x=t,
+                           y=y[:,2,1],
+                           legend="y2")},
+                  heading="Initial response y2",
+                  xLabel="time [s]")});
 
   annotation (interactive=true, Documentation(info="<html>
 <p>

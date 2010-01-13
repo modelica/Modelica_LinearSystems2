@@ -33,7 +33,7 @@ algorithm
                           legend="y1"),
                           Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
                           x=t,
-                          y=y[:,1,2],
+                          y=y[:,2,1],
                           legend="y2")},
                  heading="Step response to u1",
                  xLabel="time [s]",
@@ -41,7 +41,7 @@ algorithm
        Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
                  curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
                           x=t,
-                          y=y[:,2,1],
+                          y=y[:,1,2],
                           legend="y1"),
                           Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
                           x=t,

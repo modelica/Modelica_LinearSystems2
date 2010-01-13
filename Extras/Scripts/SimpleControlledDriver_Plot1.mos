@@ -3,7 +3,7 @@
 removePlots();
 createPlot(id = 1,
  position = {9, 3, 540, 556},
- y = {"ramp.y", "filter.y", "loadInertia.phi"},
+ y = {"ramp.y", "filter.y"},
  range = {0, 3.0, 1.5, (-0.5)},
  autoscale = true,
  autoerase = true,
