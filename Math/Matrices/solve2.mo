@@ -7,7 +7,6 @@ function solve2
   input Real B[size(A, 1),:] "Matrix B of A*X = B";
   output Real X[size(B, 1),size(B, 2)] "Matrix X such that A*X = B";
 
-
 protected
   Integer info;
 algorithm

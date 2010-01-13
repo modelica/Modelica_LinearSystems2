@@ -7,7 +7,6 @@ function plotZeros "case studies of systems with zeros"
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Complex;
 
-
 protected
   parameter Real sampleT=0.001;
   TransferFunction tf=TransferFunction({1,-0.1,1.0025}, {1,3,3,1});

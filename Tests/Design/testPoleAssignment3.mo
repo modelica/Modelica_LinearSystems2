@@ -12,8 +12,7 @@ function testPoleAssignment3
   import Modelica_LinearSystems2.Tests.Internal.DesignData;
   import Modelica_LinearSystems2.StateSpace;
 
-
-  input DesignData data=Modelica_LinearSystems2.Tests.Design.DesignData_Chow_Kokotovic();
+  input DesignData data=Design.DesignData_Chow_Kokotovic();
   input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.KNV
     "method for pole assignment";
   input Boolean isSI=true;
@@ -52,7 +51,7 @@ algorithm
     X := Complex(1)*Xre;
   else//isSI
 
-  if method == Tests.Types.AssignPolesMethod.KNV then
+    if method == Tests.Types.AssignPolesMethod.KNV then
 // extented robust KNV-algortihm according to MATLAB's place-function
      (K,X) := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob(
                                                                             data.A, data.B, data.assignedPoles);
@@ -61,7 +60,8 @@ algorithm
      if isKprovided then
        gap := Modelica.Math.Matrices.norm(K - Ki);
      end if;
-   elseif method == Modelica_LinearSystems2.Tests.Types.AssignPolesMethod.Schur then
+   elseif method ==Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod.Schur
+         then
    // Schur method
     (K,S,calcPoles,,,,X) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, data.assignedPoles, -1e10, Modelica.Math.Matrices.norm(ss.A, 1)*1e-12, true);
     if isKprovided then

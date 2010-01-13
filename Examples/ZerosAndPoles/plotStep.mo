@@ -3,7 +3,6 @@ function plotStep "Step plot example"
 
   import Modelica_LinearSystems2.ZerosAndPoles;
 
-
 protected
   ZerosAndPoles zp=ZerosAndPoles(k=1,n1=fill(0,0),d2=[1,1]);
 

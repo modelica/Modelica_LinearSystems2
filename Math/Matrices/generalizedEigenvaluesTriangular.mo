@@ -12,7 +12,6 @@ function generalizedEigenvaluesTriangular
 
   output Integer info;
 
-
 algorithm
   (alphaReal,alphaImag,beta,info) := LAPACK.dhgeqz(A, B);
   assert(info == 0, "Failed to compute eigenvalues with function dhgeqz(..)");

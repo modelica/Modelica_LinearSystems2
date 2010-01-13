@@ -14,7 +14,6 @@ protected
   Integer lwork=max(1, 5*size(A, 1) + 5*size(A, 2));
   Real work[lwork];
 
-
 external "Fortran 77" dgesvd(
     "A",
     "A",

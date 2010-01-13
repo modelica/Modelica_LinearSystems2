@@ -20,7 +20,6 @@ function plotBodeSISO
   input Integer iy=1 "index of output";
   output Boolean ok;
 
-
 protected
   StateSpace ss=if systemOnFile then Modelica_LinearSystems2.StateSpace.Import.fromFile(
                                                           fileName) else 

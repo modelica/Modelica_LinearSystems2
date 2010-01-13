@@ -12,7 +12,6 @@ function testPoleAssignment2
   import Modelica_LinearSystems2.Tests.Internal.DesignData;
   import Modelica_LinearSystems2.StateSpace;
 
-
   input String dataFile=TestDataDir + "data_Byers6.mat" annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                      caption="state space system data file"),enable = systemOnFile));
   input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.KNV
@@ -77,7 +76,8 @@ algorithm
       if isKprovided then
         gap := Modelica.Math.Matrices.norm(K - Ki);
       end if;
-    elseif method == Modelica_LinearSystems2.Tests.Types.AssignPolesMethod.Schur then
+    elseif method ==Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod.Schur
+         then
 // Schur method
       (K,S,calcPoles,,,,X) :=
         Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, assignedPoles, -1e10, Modelica.Math.Matrices.norm(ss.A, 1)*1e-12, true);

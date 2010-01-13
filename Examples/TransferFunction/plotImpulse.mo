@@ -3,7 +3,6 @@ function plotImpulse "Impulse plot example"
 
   import Modelica_LinearSystems2.TransferFunction;
 
-
  input TransferFunction tf=TransferFunction(n={1}, d={1,1,1});
 
 algorithm

@@ -7,7 +7,6 @@ function solve
   input Real b[size(A, 1)] "Vector b of A*x = b";
   output Real x[size(b, 1)] "Vector x such that A*x = b";
 
-
 protected
   Integer info;
 algorithm

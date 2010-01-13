@@ -14,7 +14,6 @@ function toUpperHessenberg
   output Real tau[size(A, 1) - 1];
   output Integer info;
 
-
 protected
   Integer n=size(A, 1);
   Real Aout[size(A, 1),size(A, 2)];

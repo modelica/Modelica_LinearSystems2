@@ -3,7 +3,6 @@ function plotStep "Step plot example"
 
   import Modelica_LinearSystems2.TransferFunction;
 
-
  input TransferFunction tf=TransferFunction({1}, {1,1,1});
 
 algorithm

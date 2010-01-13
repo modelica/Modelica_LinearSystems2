@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function plotRamp "Plot ramp response"
 
-
   input Modelica_LinearSystems2.StateSpace ss=
       Modelica_LinearSystems2.StateSpace(
       A=[-1,1; 0,-2],

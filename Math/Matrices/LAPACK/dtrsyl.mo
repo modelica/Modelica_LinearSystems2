@@ -17,7 +17,6 @@ protected
   String trana = if tranA then "T" else "N";
   String tranb = if tranB then "T" else "N";
 
-
 external "Fortran 77" dtrsyl(trana, tranb, isgn, m, n, A, m, B, n, X, m, scale, info) annotation(Library = {"lapack"});
 
   annotation (Documentation(info="   

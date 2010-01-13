@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function plotInital "Initial condition plot example"
 
-
   input Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1,1; 0,-2],
       B=[1,0; 0,1],

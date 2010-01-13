@@ -13,7 +13,6 @@ function orthogonalQ
     "Orthogonal matrix as a result of elementary reflectors";
   output Integer info;
 
-
 algorithm
   (Q,info) := LAPACK.dorghr(
     A,

@@ -6,7 +6,6 @@ block ADconverter "Analog to digital converter (including sampler)"
     "Number of bits (=0 means no quantization error)";
   extends Interfaces.PartialSISO_equality;
 
-
 protected
   Internal.DiscreteADconverter discretePart(y_max=y_max, y_min=y_min, bits=bits,
       sampleFactor=sampleFactor) if 

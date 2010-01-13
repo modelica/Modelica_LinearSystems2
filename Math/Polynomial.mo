@@ -3,7 +3,6 @@ record Polynomial "Record defining the data for a polynomial"
   extends Modelica.Icons.Record;
   Real c[:] "Polynomial coefficients (c[1]*x^n + ... c[n]*x + c[n+1])" annotation(Dialog);
 
-
   encapsulated package Examples
     "Examples demonstrating the usage of Polynomials"
     import Modelica;
@@ -494,7 +493,6 @@ in a least squares sense.
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica.Utilities.Strings;
     import Modelica_LinearSystems2.Math.Complex;
-
 
     input Polynomial p "Polynomial to be plotted";
     input Integer nPoints(min=2) = 200 "Number of points";

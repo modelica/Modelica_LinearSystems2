@@ -3,7 +3,6 @@ function plotStep "Step plot example"
 
   import Modelica_LinearSystems2.StateSpace;
 
-
   input Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1,1; 0,-2],
       B=[1,0; 0,1],

@@ -20,7 +20,6 @@ protected
   Integer ipiv[size(A, 1)];
   Integer iwork[size(A, 1)];
 
-
 external "FORTRAN 77" dgesvx(
     "N",
     "T",

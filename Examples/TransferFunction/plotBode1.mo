@@ -8,7 +8,6 @@ function plotBode1
 
   output Boolean ok;
 
-
 protected
  TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
 

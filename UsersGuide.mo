@@ -3,7 +3,6 @@ package UsersGuide "Users Guide"
 
   class GettingStarted "Getting started"
 
-
     class ComplexNumbers "Complex numbers"
 
       class FunctionsAndOperators "Functions and operators"

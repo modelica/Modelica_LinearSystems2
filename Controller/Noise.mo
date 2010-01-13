@@ -22,7 +22,6 @@ block Noise
   Modelica.Blocks.Interfaces.RealOutput y "Discrete output signal of block" 
     annotation (extent=[100, -10; 120, 10]);
 
-
 protected
   outer SampleClock sampleClock "Global options";
   Internal.DiscreteNoise discretePart(

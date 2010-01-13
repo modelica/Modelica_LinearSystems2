@@ -784,7 +784,6 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;
 
-
   algorithm
     (y,t,x_continuous) := Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
         zp=zp,
@@ -840,7 +839,6 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
       import Modelica_LinearSystems2.TransferFunction;
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;
-
 
   algorithm
     (y,t,x_continuous) := Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
@@ -898,7 +896,6 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
 
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;
-
 
   algorithm
     (y,t,x_continuous) := Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
@@ -959,7 +956,6 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
 
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;
-
 
   algorithm
     (y,t,x_continuous) := Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
@@ -1367,7 +1363,6 @@ i.e. v1 = |                 |,   v2 = |                   |
 
       output Complex Zeros[:]= ZerosAndPoles.Analysis.zerosAndPoles(zp);
 
-
     algorithm
       annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
@@ -1565,7 +1560,6 @@ Function ZerosAndPoles.Analysis.<b>isObservable</b> checks the observability of 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
 
-
       output Boolean controllable;
     protected
       StateSpace ss=StateSpace(zp);
@@ -1610,7 +1604,6 @@ Function ZerosAndPoles.Analysis.<b>isControllable</b> checks the controllability
       import Modelica_LinearSystems2.ZerosAndPoles;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
-
 
       output Boolean stabilizable;
     protected
@@ -1657,7 +1650,6 @@ The transfer function is stabilizable if all unstable poles are controllable.
       import Modelica_LinearSystems2.ZerosAndPoles;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
-
 
       output Boolean detectable;
 
@@ -2274,7 +2266,6 @@ Plots the bode-diagram of a transfer function.
           Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="time response of  zp = "
            + String(zp)));
 
-
     protected
     Plot.Records.Curve curve;
     Plot.Records.Diagram diagram2;
@@ -2686,7 +2677,6 @@ from a ZerosAndPoles record representated by first and second order numerator an
     input ZerosAndPoles zp[:,:] "ZerosAndPoles transfer function of a system";
 
     output TransferFunction tf[size(zp, 1),size(zp, 2)];
-
 
     protected
     Integer ny=size(zp, 1);

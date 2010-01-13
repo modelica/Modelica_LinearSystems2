@@ -4,7 +4,6 @@ record Complex "Record defining a Complex number"
   Real re "Real part of complex number" annotation(Dialog);
   Real im "Imaginary part of complex number" annotation(Dialog);
 
-
  encapsulated package Examples
     "Library demonstrating the usage of complex numbers"
 

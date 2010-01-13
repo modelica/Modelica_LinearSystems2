@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
 function plotInital "Initial condition plot example"
 
-
   import Modelica_LinearSystems2.TransferFunction;
 
  input TransferFunction tf=TransferFunction({1}, {1,1,1});

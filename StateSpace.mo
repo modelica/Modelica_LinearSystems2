@@ -1947,7 +1947,6 @@ encapsulated package Analysis
 
     end printTab3;
 
-
     encapsulated function printTab4
         import Modelica;
         import Modelica.Utilities.Strings;
@@ -2647,7 +2646,6 @@ encapsulated function impulseResponse
     // Input/Output declarations of time response functions:
   extends Modelica_LinearSystems2.Internal.timeResponseMask2;
 
-
 algorithm
   (y,t,x_continuous) := Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
       sc=sc,
@@ -2712,7 +2710,6 @@ encapsulated function stepResponse
     // Input/Output declarations of time response functions:
   extends Modelica_LinearSystems2.Internal.timeResponseMask2;
 
-
 algorithm
   (y,t,x_continuous) := Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
       sc=sc,
@@ -2774,7 +2771,6 @@ encapsulated function rampResponse
 
     // Input/Output declarations of time response functions:
   extends Modelica_LinearSystems2.Internal.timeResponseMask2;
-
 
 algorithm
   (y,t,x_continuous) := Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
@@ -2840,7 +2836,6 @@ encapsulated function initialResponse
   extends Modelica_LinearSystems2.Internal.timeResponseMask2(redeclare Real y[:,size(sc.C,1),1], redeclare
           Real x_continuous[
                         :,size(sc.A,1),1]);
-
 
 algorithm
   (y,t,x_continuous) := Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
@@ -3263,7 +3258,6 @@ i.e. v1 = |      |,   v2 = |       |
     output Complex Zeros[:]
         "Finite, invariant zeros of ss; size(Zeros,1) <= size(ss.A,1)";
 
-
     protected
     Integer n=10;
     Integer m;
@@ -3390,7 +3384,6 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
     input StateSpace ss;
     input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
 
-
     output Boolean controllable;
   algorithm
 
@@ -3455,7 +3448,6 @@ Since controllability is dual to observability of the dual system (A', C', B', D
     input Modelica_LinearSystems2.Types.StaircaseMethod method=
         Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
 
-
     output Boolean observable;
   algorithm
 
@@ -3504,7 +3496,6 @@ The boolean input <b>method</b> defines for multi output systems the method to g
       import Modelica_LinearSystems2.StateSpace;
 
     input StateSpace ss;
-
 
     output Boolean stabilizable;
 
@@ -3558,7 +3549,6 @@ Then, the uncontrollable poles are checked to be stable, i.e. to have negative r
       import Modelica_LinearSystems2.StateSpace;
 
     input StateSpace ss;
-
 
     output Boolean detectable;
 
@@ -4834,7 +4824,6 @@ encapsulated package Plot "Functions to plot state space system responses"
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
          defaultDiagram = Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
 
-
     protected
       Integer nx=size(ss.A, 1);
       Real eval[nx,2];
@@ -5187,7 +5176,6 @@ StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnit
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
             heading="Time response"));
 
-
     protected
       Plot.Records.Curve curve;
       Integer i1;
@@ -5312,7 +5300,6 @@ Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response"));
 
-
     protected
       input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Impulse
         "type of time response";
@@ -5391,7 +5378,6 @@ Modelica_LinearSystems2.StateSpace.Plot.impulse(ss)
                                                                                          annotation(Dialog,choices(__Dymola_checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Step response"));
-
 
       input Modelica_LinearSystems2.Types.TimeResponse response=
           Modelica_LinearSystems2.Types.TimeResponse.Step
@@ -5475,7 +5461,6 @@ Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
     extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
           heading="Ramp response"));
 
-
     input Modelica_LinearSystems2.Types.TimeResponse response=
         Modelica_LinearSystems2.Types.TimeResponse.Ramp "type of time response";
 
@@ -5553,7 +5538,6 @@ Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
             heading="Initial response"));
-
 
       input Modelica_LinearSystems2.Types.TimeResponse response=
           Modelica_LinearSystems2.Types.TimeResponse.Initial
@@ -5635,7 +5619,6 @@ encapsulated package Conversion
     input Boolean cancel=true "false to hinder cancellation";
     public
     output ZerosAndPoles zp;
-
 
     protected
     StateSpace ssm=StateSpace.Transformation.toIrreducibleForm(ss);
@@ -5821,7 +5804,6 @@ encapsulated function toZerosAndPolesMIMO
   input StateSpace ss "StateSpace object";
 
   output ZerosAndPoles zp[size(ss.C, 1),size(ss.B, 2)];
-
 
     protected
   StateSpace ss_siso(
@@ -7221,7 +7203,6 @@ is a lower triangular matrix and has full rank if and only if none of the elemen
       input StateSpace ss;
       input Modelica_LinearSystems2.Types.StaircaseMethod method=
           Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
-
 
       output Boolean controllable;
   algorithm
@@ -8734,7 +8715,6 @@ to separate the uncontrollable poles from the controllable poles.
     input StateSpace ss "Linear system in state space form";
     output Complex Zeros[:]
         "Finite, invariant zeros of ss; size(Zeros,1) <= size(ss.A,1)";
-
 
     protected
     Integer nx=size(ss.A, 1) "Number of states";

@@ -37,7 +37,6 @@ function analysis "Example to check controllability of a state space system"
 
   output Boolean ok;
 
-
 protected
   StateSpace ss=if systemOnFile then Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName) else ssi;
 

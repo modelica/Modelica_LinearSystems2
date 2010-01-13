@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Controller.Internal;
 model Add
 
-
   Modelica.Blocks.Interfaces.RealInput u1 annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,

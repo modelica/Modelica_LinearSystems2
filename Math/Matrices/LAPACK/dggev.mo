@@ -21,7 +21,6 @@ protected
   Real Bwork[n,n]=B;
   Real work[lwork];
 
-
 external "Fortran 77" dggev(
     "V",
     "V",

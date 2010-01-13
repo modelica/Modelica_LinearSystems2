@@ -3,7 +3,6 @@ function analysisTimeResponse "Compute time response of a state space system"
   import Modelica;
   import Modelica_LinearSystems2;
 
-
  input Real u[:,2]=ones(300, 2);
 protected
   Modelica_LinearSystems2.StateSpace sc=Modelica_LinearSystems2.StateSpace(

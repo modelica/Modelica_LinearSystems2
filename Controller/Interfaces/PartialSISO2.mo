@@ -9,7 +9,6 @@ partial block PartialSISO2
     "Continuous or discrete output signal of block" 
     annotation (extent=[100, -10; 120, 10]);
 
-
 protected
   Internal.DiscreteStateSpace2 discretePart(
     methodType=methodType,

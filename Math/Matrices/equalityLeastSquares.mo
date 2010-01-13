@@ -8,7 +8,6 @@ function equalityLeastSquares
   input Real b[size(B, 1)];
   output Real x[size(A, 2)] "solution vector";
 
-
 protected
   Integer info;
 algorithm

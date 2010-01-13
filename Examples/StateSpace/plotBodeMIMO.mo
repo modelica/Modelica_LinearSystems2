@@ -20,7 +20,6 @@ function plotBodeMIMO
 
   output Boolean ok;
 
-
 protected
   StateSpace ss=if systemOnFile then 
       Modelica_LinearSystems2.StateSpace.Import.fromFile( fileName) else StateSpace(

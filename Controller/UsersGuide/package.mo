@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Controller;
 package UsersGuide "Users Guide"
 
 
-
   annotation (DocumentationClass=true, Documentation(info="<html>
 <p>
 Library <b>Controller</b> is a Modelica package 

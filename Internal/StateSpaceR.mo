@@ -10,7 +10,6 @@ record StateSpaceR
   Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
   Integer r=0;
 
-
   encapsulated function constructor
     "Default constructor for a StateSpace record"
     import Modelica;

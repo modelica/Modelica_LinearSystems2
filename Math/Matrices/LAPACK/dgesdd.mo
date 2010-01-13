@@ -15,7 +15,6 @@ protected
   Integer iwork=8*min(size(A, 1),size(A, 2));
   Real work[lwork];
 
-
 external "Fortran 77" dgesdd(
     "A",
     size(A, 1),

@@ -17,7 +17,6 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
     annotation(Dialog(group="FIR filter design",enable=blockType<>BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window and window==Modelica_LinearSystems2.Controller.Types.Window.Kaiser));
   parameter Real a[:]={1,1} "FIR filter coefficients" annotation(Dialog(group="FIR filter defined by coefficient vector",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Coefficients));
 
-
 protected
   parameter Real a2[:]=Internal.FIR_coefficients(
       specType,
@@ -33,7 +32,7 @@ protected
     sampleFactor=sampleFactor,
     a=a2) if  not continuous "FIR realization";
 equation
- assert(f_cut<=1/(2*sampleClock.sampleTime*sampleFactor),"The cut-off frequency f_cut may not be greater than half the sample frequency (Nyquist frequency), i.e. f_cut <= " + String(1/2/sampleClock.sampleTime*sampleFactor) + " but is "+String(f_cut));
+
   if continuous then
     y = u;
   end if;

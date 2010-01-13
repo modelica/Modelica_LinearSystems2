@@ -16,7 +16,6 @@ record TransferFunction
    least one coefficient, such as {1}
 */
 
-
   encapsulated operator 'constructor'
     "Default constructor for a transfer function"
     import Modelica;
@@ -55,7 +54,6 @@ record TransferFunction
     input String yName="" "output name";
     output TransferFunction tf(redeclare Real n[size(z, 1)+1], redeclare Real d[size(p, 1)+1])
         "TransferFunction built by ZerosAndPoles object";
-
 
     protected
     Polynomial pn=k*Polynomial(z);
@@ -131,7 +129,6 @@ follow each other as above. An error occurs if this is not the case.
       input String uName="" "input name";
       input String yName="" "output name";
       output TransferFunction tf(n=n.c, d=d.c,uName=uName, yName=yName);
-
 
     algorithm
       annotation (overloadsConstructor=true);
@@ -494,7 +491,6 @@ The state space system is transformed to a appropriate discrete state space syst
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
 
-
   algorithm
     (y,t,x_continuous) := Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
         tf=tf,
@@ -552,7 +548,6 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
       import Modelica_LinearSystems2.TransferFunction;
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
-
 
   algorithm
     (y,t,x_continuous) := Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
@@ -612,7 +607,6 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
-
 
   algorithm
     (y,t,x_continuous) := Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
@@ -675,7 +669,6 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
-
 
   algorithm
     (y,t,x_continuous) := Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
@@ -1047,7 +1040,6 @@ i.e. v1 = |                 |,   v2 = |                   |
     protected
       StateSpace ss=StateSpace(tf);
 
-
     algorithm
       Zeros := StateSpace.Analysis.invariantZeros(ss);
 
@@ -1246,7 +1238,6 @@ Function TransferFunction.Analysis.<b>isObservable</b> checks the observability 
         input TransferFunction tf "transfer function of a system";
         input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
 
-
         output Boolean controllable;
     protected
         StateSpace ss=StateSpace(tf);
@@ -1291,7 +1282,6 @@ Function TransferFunction.Analysis.<b>isControllable</b> checks the controllabil
       import Modelica_LinearSystems2.TransferFunction;
 
       input TransferFunction tf "transfer function of a system";
-
 
       output Boolean stabilizable;
     protected
@@ -1338,7 +1328,6 @@ The transfer function is stabilizable if all unstable poles are controllable.
       import Modelica_LinearSystems2.TransferFunction;
 
       input TransferFunction tf "transfer function of a system";
-
 
       output Boolean detectable;
 
@@ -1569,7 +1558,6 @@ and results in
             Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot of  tf = "
              + String(tf)));
 
-
     protected
       SI.AngularVelocity w[nPoints];
       SI.Frequency f[nPoints];
@@ -1715,7 +1703,6 @@ Plots the bode-diagram of a transfer function.
             Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
              "time response of  tf = " + String(tf)));
 
-
     protected
       Plot.Records.Curve curve;
       Plot.Records.Diagram diagram2;
@@ -1789,7 +1776,6 @@ TransferFunction.Plot.<b>timeResponse</b>(tf, dt, tSpan,response, x0, defaultDia
           defaultDiagram=
             Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response of  tf = "
              + String(tf)));
-
 
     protected
       input Modelica_LinearSystems2.Types.TimeResponse response=
@@ -2010,7 +1996,6 @@ Function <b>ramp</b> plots the ramp response of a transfer function. It is based
             Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
              "Initial response of  tf = " + String(tf) + "  with y0 = " + String(
             y0)));
-
 
     protected
       Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
@@ -2254,7 +2239,6 @@ is defined slightly differently.
 
     output ZerosAndPoles zp[size(tf, 1),size(tf, 2)];
 
-
     protected
     Integer ny=size(tf, 1);
     Integer nu=size(tf, 2);
@@ -2401,7 +2385,6 @@ is defined slightly differently.
   end Conversion;
 
   encapsulated package Import
-    import SaveLinearSystem;
 
   function fromModel
       "Generate a TransferFunction record array from a state space representation resulted from linearization of a model"
@@ -2414,7 +2397,6 @@ is defined slightly differently.
     input Real T_linearize=0
         "point in time of simulation to linearize the model";
     input String fileName="dslin" "Name of the result file";
-
 
     protected
     String fileName2=fileName + ".mat";

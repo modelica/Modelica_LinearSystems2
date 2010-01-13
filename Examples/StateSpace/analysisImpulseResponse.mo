@@ -3,7 +3,6 @@ function analysisImpulseResponse "Impulse response example"
 
   import Modelica_LinearSystems2.StateSpace;
 
-
 protected
   Modelica_LinearSystems2.StateSpace sc=Modelica_LinearSystems2.StateSpace(
       A=[-1,1; 0,-2],

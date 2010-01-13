@@ -16,7 +16,6 @@ record DiscreteStateSpace
     "Discretization method" 
         annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
-
   encapsulated operator 'constructor'
     function fromMatrices "Default constructor for a DiscreteStateSpace record"
       import Modelica;

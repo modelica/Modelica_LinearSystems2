@@ -963,7 +963,6 @@ It is used to demonstrate linearization
         "Simulate until T_linearize and then linearize" 
                                                       annotation(Dialog);
 
-
     protected
     String fileName="dslin";
     String fileName2=fileName+".mat";

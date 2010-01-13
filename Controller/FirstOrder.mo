@@ -12,7 +12,6 @@ block FirstOrder
     "Initial y if initType=InitialState (else guess)" 
     annotation(Dialog(tab="Advanced options"));
 
-
 equation
   if continuous then
     der(y) = (k*u - y)/T;

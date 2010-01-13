@@ -7,7 +7,6 @@ function leastSquares
   output Real x[size(A, 2)]
     "Vector x such that min|A*x-b|^2 if size(A,1) >= size(A,2) or min|x|^2 and A*x=b, if size(A,1) < size(A,2)";
 
-
 protected
   Integer info;
   Integer rank;
