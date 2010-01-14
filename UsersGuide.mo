@@ -460,7 +460,7 @@ This library is based on the following references:
 
       annotation (Documentation(info="<html>
 <p>
-This release is backwards compatible to the previous version 2.0.
+This release is <b>backward compatible</b> to the previous version 2.0.
 It contains the following improvements:
 </p>
 
@@ -493,6 +493,14 @@ New functions/blocks:
      (<a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Interpolator</a>).</li>
 </ul>
   
+<p>
+Other improvements:
+</p>
+<ul>
+<li> The instance name is now displayed above the icon of every Controller block.</li>
+<li> The sample factor is now displayed in the icon of every Controller block.<li>
+</ul>
+
 <p>
 Bug fixes: 
 </p>
