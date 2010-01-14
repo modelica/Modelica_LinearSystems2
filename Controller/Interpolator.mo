@@ -11,11 +11,11 @@ block Interpolator
                                  blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and 
                                  sampleClock.blockType == Types.BlockType.Continuous
     "= true, if continuous block, otherwise discrete block";
-  parameter Integer outputSampleFactor(min=1)=1 if not continuous
-    "Output sample time = outputSampleFactor * sampleClock.sampleTime" 
-     annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   parameter Integer inputSampleFactor(min=1)=1 if not continuous
-    "Input sample time = inputSampleFactor * outputSampleFactor * sampleClock.sampleTime"
+    "Input sample time = inputSampleFactor * sampleClock.sampleTime" 
+     annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
+  parameter Integer outputSampleFactor(min=1)=1 if not continuous
+    "<html>Output sample time = outputSampleFactor * sampleClock.sampleTime<br>(inputSampleFactor must be an integer multiple of outputSampleFactor)</html>"
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   parameter Boolean meanValueFilter = true
     "= true and discrete block, linearly interpolated signal is filtered by mean value filter"
@@ -34,8 +34,9 @@ protected
      outputSampleFactor = outputSampleFactor,
      inputSampleFactor = inputSampleFactor) if  not continuous 
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-  Internal.DiscreteFIR discreteFIR(sampleFactor=outputSampleFactor,
-        a=fill(1/inputSampleFactor, inputSampleFactor)) if not continuous and meanValueFilter 
+  Internal.DiscreteFIR discreteFIR(sampleFactor=outputSampleFactor, a=fill(1/
+        div(inputSampleFactor, outputSampleFactor), div(inputSampleFactor,
+        outputSampleFactor))) if                           not continuous and meanValueFilter 
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Modelica.Blocks.Interfaces.RealOutput y_aux if not continuous and not meanValueFilter
     "Dummy port, if no filtering desired" 
@@ -131,25 +132,29 @@ equation
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
-          textString="%inputSampleFactor*%outputSampleFactor")}),
+          textString="%inputSampleFactor | %outputSampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics),
     Documentation(info="<html>
 <p>
-This block increases the sampling frequency by the integer factor <b>inputSampleFactor</b>.
+This block decreases the sampling time from the sampling time of the input signal
+(= inputSampleFactor*sampleClock.sampleTime) to the 
+sampling time of the output signal
+(= outputSampleFactor*sampleClock.sampleTime).
 This is performed by <b>linear interpolation</b> between the current and the last
 sample leading to a delay of one input sampling period.
-Optionally, the resulting signal is filtered with a mean value FIR-filter of length
-inputSampleFactor, in order to remove undesired frequencies introduced by the linear
+Optionally, the resulting signal is filtered with a mean value FIR-filter,
+in order to remove undesired frequencies introduced by the linear
 interpolation. In most cases it is adviceable to utilize this filter.
+Note, the inputSampleFactor must be an integer multiple of the outputSampleFactor.
 </p>
 
 <p>
 This block is demonstrated with example
 <a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Examples.Interpolator</a>
-leading to the following result when filtering a sine-signal with \"continous\" (interpolator1.y), \"discrete, unfiltered\" (interpolator2.y) and \"discrete, filtered\" (interpolator3.y) Interpolator:
+leading to the following result when filtering a sine-signal with \"continuous\" (interpolator1.y), \"discrete, unfiltered\" (interpolator2.y) and \"discrete, filtered\" (interpolator3.y) Interpolator:
 </p>
 
 <p align=\"center\">

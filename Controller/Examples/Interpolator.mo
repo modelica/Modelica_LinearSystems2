@@ -12,22 +12,22 @@ model Interpolator "Demonstrate usage of Interpolator"
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica_LinearSystems2.Controller.Interpolator interpolator1(
     outputSampleFactor=4,
-    inputSampleFactor=5,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous,
-    meanValueFilter=false) 
+    meanValueFilter=false,
+    inputSampleFactor=20) 
     annotation (Placement(transformation(extent={{0,40},{20,60}})));
 
   Modelica_LinearSystems2.Controller.Interpolator interpolator2(
     outputSampleFactor=4,
-    inputSampleFactor=5,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
-    meanValueFilter=false) 
+    meanValueFilter=false,
+    inputSampleFactor=20) 
     annotation (Placement(transformation(extent={{0,0},{20,20}})));
 
   Modelica_LinearSystems2.Controller.Interpolator interpolator3(
     outputSampleFactor=4,
-    inputSampleFactor=5,
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete) 
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+    inputSampleFactor=20) 
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
   Sampler sampler(sampleFactor=20) 
     annotation (Placement(transformation(extent={{-40,0},{-20,20}})));

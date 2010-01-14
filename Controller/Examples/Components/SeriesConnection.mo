@@ -20,27 +20,6 @@ model SeriesConnection "Series connection of two PT1 blocks"
     offset=0.2,
     startTime=0.1)                   annotation (extent=[-80,40; -60,60],
       Placement(transformation(extent={{-80,20},{-60,40}})));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-            -100},{100,100}}), graphics), Documentation(info="<html>
-<p>
-</p>
-
-</html>"),
-    experiment(StopTime=1.5, Tolerance=1e-006),
-    experimentSetupOutput,
-    Icon(graphics={
-        Rectangle(extent={{-66,26},{-20,-10}}, lineColor={0,0,255}),
-        Rectangle(extent={{20,26},{72,-10}}, lineColor={0,0,255}),
-        Line(
-          points={{-20,8},{20,8}},
-          color={0,0,255},
-          smooth=Smooth.None),
-        Polygon(
-          points={{20,8},{6,12},{6,4},{20,8}},
-          lineColor={0,0,255},
-          smooth=Smooth.None,
-          fillColor={0,0,255},
-          fillPattern=FillPattern.Solid)}));
 
   FirstOrder S1(T=T1) 
             annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
@@ -75,4 +54,25 @@ equation
       points={{1,0},{40,0},{40,22}},
       color={0,0,127},
       smooth=Smooth.None));
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
+            -100},{100,100}}), graphics), Documentation(info="<html>
+<p>
+</p>
+
+</html>"),
+    experiment(StopTime=1.5, Tolerance=1e-006),
+    experimentSetupOutput,
+    Icon(graphics={
+        Rectangle(extent={{-66,26},{-20,-10}}, lineColor={0,0,255}),
+        Rectangle(extent={{20,26},{72,-10}}, lineColor={0,0,255}),
+        Line(
+          points={{-20,8},{20,8}},
+          color={0,0,255},
+          smooth=Smooth.None),
+        Polygon(
+          points={{20,8},{6,12},{6,4},{20,8}},
+          lineColor={0,0,255},
+          smooth=Smooth.None,
+          fillColor={0,0,255},
+          fillPattern=FillPattern.Solid)}));
 end SeriesConnection;
