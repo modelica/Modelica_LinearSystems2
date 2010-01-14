@@ -25,16 +25,16 @@ to demonstrate the steady-state initialization.
     experiment(StopTime=1.5, Tolerance=1e-006),
     experimentSetupOutput);
 
-  FirstOrder S1(blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous, 
+  FirstOrder S1(blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous,
       T=T1) annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
-  FirstOrder S2(blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous, 
+  FirstOrder S2(blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous,
       T=T2) annotation (Placement(transformation(extent={{0,20},{20,40}})));
   ZerosAndPoles S12(system=
-        Modelica_LinearSystems2.ZerosAndPoles.'constructor'.fromZerosAndPoles(p
-        ={Modelica_LinearSystems2.Math.Complex(re=-1/T1, im=0),
-        Modelica_LinearSystems2.Math.Complex(re=-1/T2, im=0)}, k=1/(T1*T2)))
+        Modelica_LinearSystems2.ZerosAndPoles.'constructor'.fromZerosAndPoles(p=
+         {Modelica_LinearSystems2.Math.Complex(re=-1/T1, im=0),
+        Modelica_LinearSystems2.Math.Complex(re=-1/T2, im=0)}, k=1/(T1*T2))) 
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
-  Modelica.Blocks.Math.Feedback diff
+  Modelica.Blocks.Math.Feedback diff 
     annotation (Placement(transformation(extent={{30,20},{50,40}})));
 equation
   connect(step.y, S1.u)            annotation (Line(

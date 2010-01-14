@@ -3,5 +3,6 @@ SimpleControlledDrive
 DoublePendulum
 Discretization
 Discretization2
+DiscretizationSeries
 Interpolator
 Components
