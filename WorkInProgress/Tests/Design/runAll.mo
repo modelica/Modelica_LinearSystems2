@@ -30,8 +30,8 @@ algorithm
     Modelica.Utilities.Files.removeFile(outputFile);
   end if;
 
-  Modelica.Utilities.Streams.print("import Modelica_LinearSystems2.Tests",designMos);
-  Modelica.Utilities.Streams.print("import Modelica_LinearSystems2.Tests.Types",designMos);
+  Modelica.Utilities.Streams.print("import Modelica_LinearSystems2.WorkInProgress.Tests",designMos);
+  Modelica.Utilities.Streams.print("import Modelica_LinearSystems2.WorkInProgress.Tests.Types",designMos);
 
    (functions, n) := Tests.Internal.getMatFiles(dataSpecifier,directoryName);
    functions2 := fill("",n);

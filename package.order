@@ -5,9 +5,10 @@ StateSpace
 TransferFunction
 ZerosAndPoles
 DiscreteStateSpace
+DiscreteTransferFunction
 Controller
 Math
 Utilities
 Types
 Internal
-
+WorkInProgress

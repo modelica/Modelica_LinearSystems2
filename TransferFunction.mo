@@ -96,6 +96,7 @@ follow each other as above. An error occurs if this is not the case.
   end fromZerosAndPoles;
 
     encapsulated function fromArrays
+      "Generate a TransferFunction data record from numerator and denominator array"
       import Modelica;
       import Modelica_LinearSystems2.TransferFunction;
 

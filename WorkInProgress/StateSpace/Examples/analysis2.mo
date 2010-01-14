@@ -16,18 +16,18 @@ function analysis2 "Example to check controllability of a state space system"
       yNames={"y1","y2","y3","y4"});
   input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
       Modelica_LinearSystems2.Internal.AnalyseOptions(
-      plotEigenValues=true, 
-      plotInvariantZeros=true, 
-      plotStepResponse=true, 
-      plotFrequencyResponse=false, 
-      printEigenValues=true, 
-      printEigenValueProperties=true, 
-      printInvariantZeros=true, 
-      printControllability=false, 
-      printObservability=false, 
-      headingEigenValues="Eigenvalues", 
-      headingInvariantzeros="Invariant zeros", 
-      headingStepResponse="Step response", 
+      plotEigenValues=true,
+      plotInvariantZeros=true,
+      plotStepResponse=true,
+      plotFrequencyResponse=false,
+      printEigenValues=true,
+      printEigenValueProperties=true,
+      printInvariantZeros=true,
+      printControllability=false,
+      printObservability=false,
+      headingEigenValues="Eigenvalues",
+      headingInvariantzeros="Invariant zeros",
+      headingStepResponse="Step response",
       headingFrequencyResponse="Frequency response");
 
   input Boolean systemOnFile=false

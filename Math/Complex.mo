@@ -325,8 +325,8 @@ end sortComplex;
 
 function multiply "scalar product of two complex vectors"
   extends Modelica.Icons.Function;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
 
   input Complex v1[:];
   input Complex v2[size(v1,1)];
@@ -342,8 +342,8 @@ end multiply;
     function reverse "Reverse vector elements (e.g. v[1] becomes last element)"
     extends Modelica.Icons.Function;
 
-    import Modelica;
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input Complex v[:] "Vector";
     output Complex result[size(v, 1)] "Elements of vector v in reversed order";
@@ -363,13 +363,13 @@ end multiply;
 end Vectors;
 
 encapsulated package Matrices
-import Modelica;
+    import Modelica;
     import Modelica_LinearSystems2;
 
 function print "print matrix"
-  import Modelica_LinearSystems2.StateSpace;
-  import Modelica.Utilities.Strings;
-  import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2.Math.Complex;
 
   input Complex M[:,:];
   input Integer significantDigits=6
@@ -404,11 +404,10 @@ algorithm
   end if;
 end print;
 
-
 encapsulated function matMatMul "Multiply two complex matrices"
-  import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Re = Modelica_LinearSystems2.Math.Complex.real;
+      import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
   input Complex m1[:,:] "Complex matrix 1";
   input Complex m2[size(m1, 2),:] "Complex matrix 2";
@@ -435,7 +434,7 @@ end matMatMul;
 
 encapsulated function matVecMul
       "Multiply a complex matrices with a complex vector"
-  import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Math.Complex;
 //  import Re = Modelica_LinearSystems2.Math.Complex.real;
 //  import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
@@ -465,7 +464,6 @@ for l1 in 1:size(m, 1) loop
 end for;
 
 end matVecMul;
-
 
 end Matrices;
 
@@ -806,11 +804,11 @@ inputs and the number of outputs must be identical.
 
 encapsulated function eigenVectors
     "Calculate the rigth eigenvectors of a linear state space system and write them columnwise in a matrix."
-  import Modelica;
-  import Modelica.Math.Matrices.LAPACK;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+    import Modelica;
+    import Modelica.Math.Matrices.LAPACK;
+    import Modelica_LinearSystems2.Math.Complex;
+    import Re = Modelica_LinearSystems2.Math.Complex.real;
+    import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
   input Real A[:,size(A, 1)] "real square matrix";
   output Complex eigvec[size(A, 1),size(A, 2)] "eigen values of the system";
@@ -966,9 +964,9 @@ encapsulated package Internal
   function C_transpose "Computes the transposed matrix of a complex matrix"
     extends Modelica.Icons.Function;
 
-    import Modelica_LinearSystems2.Math.Complex;
-    import Re = Modelica_LinearSystems2.Math.Complex.real;
-    import Im = Modelica_LinearSystems2.Math.Complex.imag;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Re = Modelica_LinearSystems2.Math.Complex.real;
+      import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
     input Complex C[:,:];
     output Complex CT[size(C, 2),size(C, 1)];
@@ -989,7 +987,7 @@ encapsulated package Internal
 
 function frobeniusNorm "Return the Frobenius norm of a matrix"
   extends Modelica.Icons.Function;
-  import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Math.Complex;
   input Complex A[:,:] "Input matrix";
   output Real result=0.0 "frobenius norm of matrix A";
 algorithm

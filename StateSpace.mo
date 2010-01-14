@@ -949,10 +949,10 @@ encapsulated package Analysis
     public
     encapsulated function printSystem
         "Print the state space system in html format on file"
-      import Modelica;
-      import Modelica.Utilities.Streams.print;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2;
+        import Modelica;
+        import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2.StateSpace;
+        import Modelica_LinearSystems2;
 
       input StateSpace ss "state space system to analyze";
       input String fileName="systemAnalysis.html"
@@ -8597,10 +8597,10 @@ k = ---------- * ----------------------
   encapsulated function controllablePoles
       "Compute the controllable and uncontrollable poles of a state space system"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.Internal;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Internal;
 
     input StateSpace ss=StateSpace(
         A=[-1],
@@ -9273,13 +9273,13 @@ inputs and the number of outputs must be identical.
 encapsulated function assignPolesMI2
       "Pole assigment design algorithm for multi input systems"
 
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.StateSpace;
-  import Modelica;
-  import Modelica.Utilities.Streams.print;
-  import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica;
+      import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Math.Matrices;
 
   input StateSpace ss "state space system";
 

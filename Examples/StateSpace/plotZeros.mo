@@ -130,7 +130,7 @@ StateSpace <i>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 
 
 
 
-This example plts the output y and the states (x1, x2, x3) of a system with the input
+This example plots the output y and the states (x1, x2, x3) of a system with the input
 
 <blockquote><pre>
    u(t) = uk*exp(zk*t)

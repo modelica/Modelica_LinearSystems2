@@ -8,9 +8,10 @@ record DiscreteStateSpace
   Real C[:,size(A, 1)]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
   Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
-  Modelica.SIunits.Time Ts "Sample time" 
+  Modelica.SIunits.Time Ts=1 "Sample time" 
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
-  Real B2[size(B, 1),size(B, 2)] "Reconstruct continuous state" 
+  Real B2[size(B, 1),size(B, 2)]=fill(0,size(B,1),size(B,2))
+    "Reconstruct continuous state" 
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
   Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
     "Discretization method" 
@@ -31,7 +32,7 @@ record DiscreteStateSpace
       input Real D[size(C, 1),size(B, 2)] 
                                       annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
-      input Modelica.SIunits.Time Ts "Sample time" 
+      input Modelica.SIunits.Time Ts=1 "Sample time" 
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
       input Real B2[:,:]=zeros(size(B, 1), size(B, 2));
       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
@@ -54,7 +55,7 @@ record DiscreteStateSpace
       result.method := method;
     end fromMatrices;
 
-    encapsulated function fromStateSpace
+    function fromStateSpace
       "Transform a continuous into a discrete linear state space system"
       import Modelica;
       import Modelica_LinearSystems2;
@@ -392,6 +393,151 @@ Note that the system input <b>u</b> is equal to zero.
 </p>
 </html>"));
   end initialResponse;
+
+encapsulated package Conversion
+    "Conversion functions from DiscreteStateSpace into DiscreteTransferFunction"
+function toDiscreteTransferFunction
+      "Generate a transfer function from a SISO state space representation"
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.TransferFunction;
+  import Modelica_LinearSystems2.StateSpace;
+  import Modelica_LinearSystems2.DiscreteTransferFunction;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+
+  input DiscreteStateSpace dss "DiscreteStateSpace object";
+
+  output DiscreteTransferFunction dtf "DiscreteTransferFunction object";
+
+    protected
+  StateSpace ss = StateSpace(dss.A,dss.B,dss.C,dss.D);
+  TransferFunction tf = StateSpace.Conversion.toTransferFunction(ss);
+
+algorithm
+  dtf := DiscreteTransferFunction(n=tf.n, d=tf.d, Ts=dss.Ts, method=dss.method);
+
+    annotation (Documentation(info="<html>
+
+
+
+
+</html> "));
+end toDiscreteTransferFunction;
+end Conversion;
+
+encapsulated package Plot
+    "Functions to plot discrete state space system responses"
+encapsulated function bodeSISO
+      "Plot bode plot of the corresponding discrete transfer function"
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.DiscreteTransferFunction;
+
+  input DiscreteStateSpace dss "discrete state space system";
+  input Integer iu=1 "index of input";
+  input Integer iy=1 "index of output";
+  input Integer nPoints(min=2) = 200 "Number of points";
+  input Boolean autoRange=true
+        "= true, if abszissa range is automatically determined";
+  input Modelica.SIunits.Frequency f_min=0.1
+        "Minimum frequency value, if autoRange = false";
+  input Modelica.SIunits.Frequency f_max=10
+        "Maximum frequency value, if autoRange = false";
+
+  input Boolean magnitude=true "= true, to plot the magnitude of dtf" 
+                                                                     annotation(choices(__Dymola_checkBox=true));
+  input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
+
+  extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+        Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
+
+    protected
+  DiscreteTransferFunction dtf "Transfer functions to be plotted";
+  DiscreteStateSpace dss_siso(
+    redeclare Real A[size(dss.A, 1),size(dss.A, 2)],
+    redeclare Real B[size(dss.B, 1),1],
+    redeclare Real C[1,size(dss.C, 2)],
+    redeclare Real D[1,1],
+    redeclare Real B2[size(dss.B, 1),1]);
+
+algorithm
+  assert(iu <= size(dss.B, 2) and iu > 0, "index for input is " + String(iu) + " which is not in [1, "
+     + String(size(dss.B, 2)) + "].");
+  assert(iy <= size(dss.C, 1) and iy > 0, "index for output is " + String(iy) + " which is not in [1, "
+     + String(size(dss.C, 1)) + "].");
+  dss_siso := DiscreteStateSpace(
+    A=dss.A,
+    B=matrix(dss.B[:, iu]),
+    C=transpose(matrix(dss.C[iy, :])),
+    D=matrix(dss.D[iy, iu]),
+    B2=matrix(dss.B2[:, iu]),
+    Ts=dss.Ts,
+    method=dss.method);
+  dtf := DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss_siso);
+
+  DiscreteTransferFunction.Plot.bode(
+    dtf,
+    nPoints,
+    autoRange,
+    f_min,
+    f_max,
+    magnitude,
+    phase,
+    defaultDiagram=defaultDiagram,
+    device=device);
+
+  annotation (interactive=true, Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<blockquote><pre>
+StateSpace.Plot.<b>plotBodeSISO</b>(ss)
+   or
+StateSpace.Plot.<b>plotBodeSISO</b>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+</pre></blockquote>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Plots the bode-diagram of a transfer function.
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corresponding to the behavior of the state space system from iu'th element of the input vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
+
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+      A=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0],
+      B=[0.0,1.0; 1.0,1.0; -1.0,0.0],
+      C=[0.0,1.0,1.0; 1.0,1.0,1.0],
+      D=[1.0,0.0; 0.0,1.0])
+   
+   Integer iu=1;
+   Integer iy=1;
+
+
+<b>algorithm</b>
+   Modelica_LinearSystems2.StateSpace.Plot.plotBodeSISO(ss, iu, iy)
+//  gives:
+</pre></blockquote>
+
+</p>
+<p>
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodeMagnitude.png\">
+</p>
+<p>
+</p>
+<p>
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodePhase.png\">
+</p>
+<p>
+
+
+</html> "));
+end bodeSISO;
+
+end Plot;
   annotation (
     defaultComponentName="stateSpaceDiscrete",
     Documentation(info="<html>

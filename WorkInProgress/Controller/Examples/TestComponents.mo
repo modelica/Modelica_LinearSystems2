@@ -21,17 +21,17 @@ model TestComponents "test all Controller blocks"
                                                               annotation (extent=[-40,40;
         -20,60], Placement(transformation(extent={{-20,220},{0,240}})));
 
-  Modelica_LinearSystems2.Controller.TransferFunction transferFunction(system(n
-        ={1,2}, d={1,2,3}), blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption)
+  Modelica_LinearSystems2.Controller.TransferFunction transferFunction(system(n=
+         {1,2}, d={1,2,3}), blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption) 
     annotation (Placement(transformation(extent={{-20,190},{0,210}})));
   Modelica_LinearSystems2.Controller.ZerosAndPoles zerosAndPoles(system(
       n1={1},
       n2=fill(
-          0, 
-          0, 
+          0,
+          0,
           2),
       d1=fill(0, 0),
-      d2=[1,1; 1,1]), blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption)
+      d2=[1,1; 1,1]), blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption) 
     annotation (Placement(transformation(extent={{-20,160},{0,180}})));
   inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(
     sampleTime=0.1,
