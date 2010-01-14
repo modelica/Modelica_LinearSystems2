@@ -460,35 +460,56 @@ This library is based on the following references:
 
       annotation (Documentation(info="<html>
 <p>
-This release comprises bug fixes and some few new functions and blocks.
+This release is backwards compatible to the previous version 2.0.
+It contains the following improvements:
 </p>
+
 <p>
-New functions/blocks are:
+New functions/blocks:
 </p>
 
 <ul>
-<li> A  <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.sylvester\">solver for Syslvester equations</a>  using a Schur method.</li>
-<li> The function  <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a> to calculate the orthogonal nullspace and obligatorily the dimension (nullity) of the nullspace of a matrix.</li> 
-<li>  Functions <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">conditionNumber</a> and <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">rcond</a> to calculate the condition number and the reciprocal condition number of a matrix respectively.</li> 
-<li>The block <a href=\"Modelica://Modelica_LinearSystems2.Controller.Interpolator\">Controller.Interpolator</a> to increase the sampling frequency with linear interpolation between the sample rates. See also <a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Interpolator example</a>.</li>
-<li>Exaples have been added to the package  <a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples\">Controller.Examples</a>.</li>
+<li> Function  <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.sylvester\">sylvester</a>
+     to solve Sylvester equations \"<b>A</b>*<b>X</b> + <b>X</b>*<b>B</b> = <b>C</b>\"
+     using a Schur method.</li>
+
+<li> Function  <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a> 
+     to calculate the orthogonal nullspace and the dimension (nullity) of 
+     the nullspace of a matrix.</li> 
+
+<li> Functions <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">conditionNumber</a>
+     and <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">rcond</a>
+     to calculate the condition number and the reciprocal condition number of a
+     matrix respectively.</li> 
+
+<li> Block <a href=\"Modelica://Modelica_LinearSystems2.Controller.Interpolator\">Controller.Interpolator</a> 
+     to increase the sampling frequency with linear interpolation and optional mean-value filtering.</li>
+
+<li> Blocks have been added to Controller.Examples to demonstrate the discretization methods
+     (<a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples.Discretization1\">Discretization1</a>,
+      <a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples.Discretization2\">Discretization2</a>,
+      <a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples.Discretization1\">DiscretizationSeries</a>)
+     and the new Interpolator block
+     (<a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Interpolator</a>).</li>
 </ul>
   
 <p>
-Furthermore, several bugs have been fixed: 
+Bug fixes: 
 </p>
 
 <ul>
 <li>Redundant results for initial responses of multi input state space systems have been fixed.</li> 
-<li>Several functions have been modified to work (or to terminate correctly) for state space system without in- and/or putputs:
+<li>Several functions have been modified to work (or to terminate correctly) for state space system without in- and/or outputs:
 <ul>
 <li><a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">Analysis.analysis</a></li>
 <li><a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros\">Analysis.invariantZeros.</a></li>
-<li>Check for controllability and observability.</li> 
-<li>Staircase algorithm to reduce a system to controller Hessenberg form.</li> 
-<li>Computation of controllable/uncontrollable poles.</li> 
+<li> Check for controllability and observability.</li> 
+<li> Staircase algorithm to reduce a system to controller Hessenberg form.</li> 
+<li> Computation of controllable/uncontrollable poles.</li> 
 </ul></li> 
-<li>The calculation of the FIR coefficients in block <a href=\"Modelica://Modelica_LinearSystems2.Controller.FilterFIR\">Controller.FilterFIR</a> has been fixed. The calculation for highpass filter with odd order was incorrect. The order is now increased by one in that case.</li>
+<li> The design of FIR filters in block <a href=\"Modelica://Modelica_LinearSystems2.Controller.FilterFIR\">Controller.FilterFIR</a> was 
+disabled. It is now enabled and the previously wrong design of highpass filters with odd order
+was corrected, by increasing the order by one in this case.</li>
 </ul>
   
 </html>

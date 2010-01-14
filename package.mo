@@ -4,26 +4,15 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 - Analysis, Synthesis a
 constant String DataDir=classDirectory() + "Extras/Data/"
   "Absolute path to directory containing utilitiy files for this package";
 
-
-
-
-
-
-
-
-
-
-
-
-
 annotation (
   preferredView="info",
   uses(Modelica(version="3.1")),
    version="2.1",
-   versionBuild=2,
+   versionBuild=1,
    versionDate="2010-01-15",
    dateModified = "2010-01-15 09:27:58Z",
    revisionID="$Id::                                       $",
+   conversion(noneFromVersion="2.0"),
   Documentation(info="<html>
 <p>
 Library <b>Modelica_LinearSystems2</b> is a Modelica package
