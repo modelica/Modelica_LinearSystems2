@@ -499,6 +499,7 @@ Other improvements:
 <ul>
 <li> The instance name is now displayed above the icon of every Controller block.</li>
 <li> The sample factor is now displayed in the icon of every Controller block.<li>
+<li> Access to resources (e.g. image files) has been changed from file names to URIs.</li>
 </ul>
 
 <p>
