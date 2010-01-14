@@ -4941,8 +4941,8 @@ and results in
       import Modelica_LinearSystems2.TransferFunction;
 
       input StateSpace ss "state space system";
-      input Integer iu "index of input";
-      input Integer iy "index of output";
+      input Integer iu=1 "index of input";
+      input Integer iy=1 "index of output";
       input Integer nPoints(min=2) = 200 "Number of points";
       input Boolean autoRange=true
         "= true, if abszissa range is automatically determined";
