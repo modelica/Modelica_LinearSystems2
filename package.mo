@@ -14,10 +14,10 @@ annotation (
    dateModified = "2010-01-15 09:27:58Z",
    revisionID="$Id::                                       $",
   Documentation(info="<html>
-<p> 
-Library <b>Modelica_LinearSystems2</b> is a Modelica package 
-providing different representations of linear, time invariant differential and 
-difference equation systems. For example, record 
+<p>
+Library <b>Modelica_LinearSystems2</b> is a Modelica package
+providing different representations of linear, time invariant differential and
+difference equation systems. For example, record
 <a href=\"Modelica://Modelica_LinearSystems2.StateSpace\">StateSpace</a>
 defines a linear time invariant differential
 equation system in state space form:
@@ -26,10 +26,10 @@ equation system in state space form:
         y  = C * x + D * u
 </pre>
 <p>
-Operators are overloaded to work conveniently with these system descriptions in an 
+Operators are overloaded to work conveniently with these system descriptions in an
 interactive environment, e.g., to multiply transfer functions or to operate on complex numbers.
 About 180 functions are provided to operate
-on these data structures, e.g., to compute eigen values, zeros, step responses,  
+on these data structures, e.g., to compute eigen values, zeros, step responses,
 to design pole-placement and LQG controllers, to plot step responses, frequency responses,
 eigen values, to convert between different description forms, or to
 generate a linear system description by linearization of a Modelica model.
@@ -42,9 +42,9 @@ about 20 input/output blocks of linear systems are provided that are
 based on the different representation forms, e.g., PID, StateSpace, Filter blocks.
 A unique feature of these blocks is that it is very convenient to quickly switch
 between a continuous and a discrete block representation. Also, templates are provide
-to quickly built-up
+to quickly built-up standard controller structures.
 </p>
- 
+
 <p>
 For an introduction, have especially a look at:
 </p>
@@ -70,14 +70,14 @@ with previous versions of Dymola. Since the differences are too large, no conver
 scripts are provided, but different library names are used.
 </p>
 
- 
+
 <p>
 <b>Licensed by DLR under the Modelica License 2</b><br>
 <img src=\"modelica://Modelica_LinearSystems2/Extras/Images/dlr_logo.png\"  width=60 >
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  <b>      Copyright &copy; 2005-2009, DLR Institute of Robotics and Mechatronics</b>
 </p>
- 
+
 
 <p>
 <i>This Modelica package is <u>free</u> software and
