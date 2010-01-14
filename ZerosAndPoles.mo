@@ -1828,7 +1828,7 @@ The transfer function is detectable if all unstable poles are observable.
 
        /* Transformation of filter transfer function with "new(p) = alpha*p"
         in order that the filter transfer function has an amplitude of
-        1/sqrt(2) at the cutoff frequency
+        3 db at the cutoff frequency
      */
       if normalized then
         alpha := Internal.normalizationFactor(den1, den2);
@@ -1939,7 +1939,7 @@ shown in the next figure:
 <p>
 All filters are available in <b>normalized</b> (default) and non-normalized form.
 In the normalized form, the amplitude of the filter transfer function
-at the cutoff frequency is 1/sqrt(2) (= 3 dB). Note, when comparing the filters
+at the cutoff frequency is 3 dB. Note, when comparing the filters
 of this function with other software systems, the setting of \"normalized\"
 has to be selected appropriately. For example, the signal processing
 toolbox of Matlab provides the filters in non-normalized form and
@@ -6243,7 +6243,7 @@ ZeroAndPole transfer function is generated from
 (<b>CriticalDamping</b>, <b>Bessel</b>, <b>Butterworth</b>, <b>Chebyshev</b>). 
 The filters are available in <b>normalized</b> (default) and non-normalized form.
 In the normalized form, the amplitude of the filter transfer function
-at the cutoff frequency is 1/sqrt(2) (= 3 dB).
+at the cutoff frequency is 3 dB.
 </p>
 <p>
 A ZeroAndPole transfer function is internally stored by the coefficients
