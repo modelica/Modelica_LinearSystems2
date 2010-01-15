@@ -27,6 +27,7 @@ table   { solid #000; border-collapse: collapse;}
 >DoublePendulum</A>
 </TD><TD>double pendulum system</TD></TR>
 </TABLE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE DoublePendulum<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -34,6 +35,7 @@ table   { solid #000; border-collapse: collapse;}
 <A NAME="Modelica_LinearSystems2.Utilities.Import.Examples.Utilities.DoublePendulum"></A><A HREF="Modelica_LinearSystems2_Utilities_Import_Examples_Utilities.html#Modelica_LinearSystems2.Utilities.Import.Examples.Utilities"
 >Modelica_LinearSystems2.Utilities.Import.Examples.Utilities</A>.DoublePendulum</H2>
 <B>double pendulum system</B><p>
+<IMG SRC="Modelica_LinearSystems2.Utilities.Import.Examples.Utilities.DoublePendulumD.png" ALT="Modelica_LinearSystems2.Utilities.Import.Examples.Utilities.DoublePendulum">
 <P><H3>Information</H3></P>
 <PRE></pre>
  
@@ -46,26 +48,185 @@ It is used to demonstrate linearization
 
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>m_trolley</TD><TD>[kg]</TD></TR>
-<TR><TD>m_load</TD><TD>[kg]</TD></TR>
-<TR><TD>length</TD><TD>[m]</TD></TR>
-<TR><TD>phi1_start</TD><TD>[rad]</TD></TR>
-<TR><TD>phi2_start</TD><TD>[rad]</TD></TR>
-<TR><TD>w1_start</TD><TD>[rad/s]</TD></TR>
-<TR><TD>w2_start</TD><TD>[rad/s]</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Mass"
+>Mass</A></TD><TD>m_trolley</TD><TD>5</TD><TD>[kg]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Mass"
+>Mass</A></TD><TD>m_load</TD><TD>20</TD><TD>[kg]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Length"
+>Length</A></TD><TD>length</TD><TD>2</TD><TD>[m]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Angle"
+>Angle</A></TD><TD>phi1_start</TD><TD>-80.0/180*pi</TD><TD>[rad]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Angle"
+>Angle</A></TD><TD>phi2_start</TD><TD>10</TD><TD>[rad]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.AngularVelocity"
+>AngularVelocity</A></TD><TD>w1_start</TD><TD>0.0</TD><TD>[rad/s]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.AngularVelocity"
+>AngularVelocity</A></TD><TD>w2_start</TD><TD>0.0</TD><TD>[rad/s]</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>u</TD><TD>&nbsp;</TD></TR>
-<TR><TD>s</TD><TD>&nbsp;</TD></TR>
-<TR><TD>v</TD><TD>&nbsp;</TD></TR>
-<TR><TD>phi</TD><TD>&nbsp;</TD></TR>
-<TR><TD>w</TD><TD>&nbsp;</TD></TR>
-<TR><TD>phi1</TD><TD>&nbsp;</TD></TR>
-<TR><TD>w1</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
+>RealInput</A></TD><TD>u</TD><TD>&nbsp;</TD></TR>
+<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>RealOutput</A></TD><TD>s</TD><TD>&nbsp;</TD></TR>
+<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>RealOutput</A></TD><TD>v</TD><TD>&nbsp;</TD></TR>
+<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>RealOutput</A></TD><TD>phi</TD><TD>&nbsp;</TD></TR>
+<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>RealOutput</A></TD><TD>w</TD><TD>&nbsp;</TD></TR>
+<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>RealOutput</A></TD><TD>phi1</TD><TD>&nbsp;</TD></TR>
+<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>RealOutput</A></TD><TD>w1</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:57 2009.
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> DoublePendulum <font color="darkgreen">&quot;double pendulum system&quot;</font>
+
+  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Mass"
+>Modelica.SIunits.Mass</A> m_trolley = 5;
+  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Mass"
+>Modelica.SIunits.Mass</A> m_load = 20;
+  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Length"
+>Modelica.SIunits.Length</A> length = 2;
+  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Angle"
+>Modelica.SIunits.Angle</A> phi1_start = -80.0/180*pi;
+  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Angle"
+>Modelica.SIunits.Angle</A> phi2_start = 10;
+  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.AngularVelocity"
+>Modelica.SIunits.AngularVelocity</A> w1_start = 0.0;
+  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.AngularVelocity"
+>Modelica.SIunits.AngularVelocity</A> w2_start = 0.0;
+
+  <font color="blue">constant </font>Real pi = Modelica.Constants.pi;
+
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody.html#Modelica.Mechanics.MultiBody.World"
+>Modelica.Mechanics.MultiBody.World</A> world(gravityType=Modelica.Mechanics.MultiBody.Types.GravityTypes.
+        UniformGravity, animateWorld=false);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Joints.html#Modelica.Mechanics.MultiBody.Joints.Prismatic"
+>Modelica.Mechanics.MultiBody.Joints.Prismatic</A> prismatic(useAxisFlange=true);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_Translational_Components.html#Modelica.Mechanics.Translational.Components.Damper"
+>Modelica.Mechanics.Translational.Components.Damper</A> damper1(d=0);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Joints.html#Modelica.Mechanics.MultiBody.Joints.Revolute"
+>Modelica.Mechanics.MultiBody.Joints.Revolute</A> rev(n={0,0,1},useAxisFlange=true,
+    phi(fixed=true, start=phi1_start),
+    w(fixed=true, start=w1_start));
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_Rotational_Components.html#Modelica.Mechanics.Rotational.Components.Damper"
+>Modelica.Mechanics.Rotational.Components.Damper</A> damper(d=0);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Parts.html#Modelica.Mechanics.MultiBody.Parts.Body"
+>Modelica.Mechanics.MultiBody.Parts.Body</A> body(
+    m=m_load,
+    r_CM={0,0,0},
+    specularCoefficient=4*world.defaultSpecularCoefficient,
+    sphereDiameter=1.5*world.defaultBodyDiameter);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Parts.html#Modelica.Mechanics.MultiBody.Parts.BodyShape"
+>Modelica.Mechanics.MultiBody.Parts.BodyShape</A> bodyShape(
+    shapeType=&quot;box&quot;,
+    animateSphere=true,
+    m=m_trolley,
+    sphereDiameter=world.defaultBodyDiameter);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_Translational_Sources.html#Modelica.Mechanics.Translational.Sources.Force"
+>Modelica.Mechanics.Translational.Sources.Force</A> force;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Sensors.html#Modelica.Mechanics.MultiBody.Sensors.RelativeAngles"
+>Modelica.Mechanics.MultiBody.Sensors.RelativeAngles</A> relativeAngles;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Sensors.html#Modelica.Mechanics.MultiBody.Sensors.RelativeVelocity"
+>Modelica.Mechanics.MultiBody.Sensors.RelativeVelocity</A> relativeVelocity;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Sensors.html#Modelica.Mechanics.MultiBody.Sensors.RelativePosition"
+>Modelica.Mechanics.MultiBody.Sensors.RelativePosition</A> relativePosition;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
+>Modelica.Blocks.Interfaces.RealInput</A> u;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>Modelica.Blocks.Interfaces.RealOutput</A> s;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>Modelica.Blocks.Interfaces.RealOutput</A> v;
+ <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>Modelica.Blocks.Interfaces.RealOutput</A> phi;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>Modelica.Blocks.Interfaces.RealOutput</A> w;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Sensors.html#Modelica.Mechanics.MultiBody.Sensors.RelativeAngularVelocity"
+>Modelica.Mechanics.MultiBody.Sensors.RelativeAngularVelocity</A>
+    relativeAngularVelocity;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Modelica.Blocks.Sources.Constant</A> const(k=0.5*Modelica.Constants.pi);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
+>Modelica.Blocks.Math.Add</A> add;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Joints.html#Modelica.Mechanics.MultiBody.Joints.Revolute"
+>Modelica.Mechanics.MultiBody.Joints.Revolute</A> revolute2(
+    phi(fixed=true, start=phi2_start),
+    w(fixed=true, start=w2_start),
+    cylinderDiameter=3*world.defaultJointWidth,
+    cylinderColor={0,0,200});
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Sensors.html#Modelica.Mechanics.MultiBody.Sensors.RelativeAngles"
+>Modelica.Mechanics.MultiBody.Sensors.RelativeAngles</A> relativeAngles1;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Sensors.html#Modelica.Mechanics.MultiBody.Sensors.RelativeAngularVelocity"
+>Modelica.Mechanics.MultiBody.Sensors.RelativeAngularVelocity</A>
+    relativeAngularVelocity1;
+ <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>Modelica.Blocks.Interfaces.RealOutput</A> phi1;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>Modelica.Blocks.Interfaces.RealOutput</A> w1;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
+>Modelica.Blocks.Math.Add</A> add1;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Modelica.Blocks.Sources.Constant</A> const1(k=0);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Parts.html#Modelica.Mechanics.MultiBody.Parts.BodyCylinder"
+>Modelica.Mechanics.MultiBody.Parts.BodyCylinder</A> bodyCylinder(
+    r={length/2,0,0},
+    specularCoefficient=0.7,
+    color={0,0,0},
+    diameter=0.05,
+    density=900);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_MultiBody_Parts.html#Modelica.Mechanics.MultiBody.Parts.BodyCylinder"
+>Modelica.Mechanics.MultiBody.Parts.BodyCylinder</A> bodyCylinder1(
+    r={length/2,0,0},
+    specularCoefficient=0.7,
+    color={0,0,0},
+    diameter=0.05,
+    density=900);</textblock>
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(damper.flange_b, rev.axis);
+  <font color="red">connect</font>(rev.support, damper.flange_a);
+  <font color="red">connect</font>(bodyShape.frame_b, rev.frame_a);
+  <font color="red">connect</font>(prismatic.frame_a, world.frame_b);
+  <font color="red">connect</font>(force.flange, prismatic.axis);
+  <font color="red">connect</font>(damper1.flange_a, prismatic.support);
+  <font color="red">connect</font>(damper1.flange_b, prismatic.axis);
+  <font color="red">connect</font>(prismatic.frame_b, bodyShape.frame_a);
+  <font color="red">connect</font>(relativeVelocity.frame_b, prismatic.frame_b);
+  <font color="red">connect</font>(relativeVelocity.frame_a, prismatic.frame_a);
+  <font color="red">connect</font>(relativePosition.frame_b, relativeVelocity.frame_b);
+  <font color="red">connect</font>(relativePosition.frame_a, relativeVelocity.frame_a);
+  <font color="red">connect</font>(relativeAngles.frame_b, rev.frame_b);
+  <font color="red">connect</font>(relativeAngles.frame_a, rev.frame_a);
+  <font color="red">connect</font>(u, force.f);
+  <font color="red">connect</font>(relativeAngularVelocity.frame_a, relativeAngles.frame_a);
+  <font color="red">connect</font>(relativeAngularVelocity.frame_b, relativeAngles.frame_b);
+  <font color="red">connect</font>(relativeAngularVelocity.w_rel[3], w);
+  <font color="red">connect</font>(relativeVelocity.v_rel[1], v);
+  <font color="red">connect</font>(relativePosition.r_rel[1], s);
+  <font color="red">connect</font>(phi, phi);
+  <font color="red">connect</font>(add.y, phi);
+  <font color="red">connect</font>(const.y, add.u2);
+  <font color="red">connect</font>(add.u1, relativeAngles.angles[3]);
+  <font color="red">connect</font>(relativeAngles1.frame_a, revolute2.frame_a);
+  <font color="red">connect</font>(relativeAngles1.frame_b, revolute2.frame_b);
+  <font color="red">connect</font>(relativeAngles1.frame_a, relativeAngularVelocity1.frame_a);
+  <font color="red">connect</font>(relativeAngularVelocity1.frame_b, relativeAngles1.frame_b);
+  <font color="red">connect</font>(const1.y, add1.u2);
+  <font color="red">connect</font>(add1.u1, relativeAngles1.angles[3]);
+  <font color="red">connect</font>(add1.y, phi1);
+  <font color="red">connect</font>(relativeAngularVelocity1.w_rel[3], w1);
+  <font color="red">connect</font>(bodyCylinder1.frame_b, body.frame_a);
+  <font color="red">connect</font>(bodyCylinder1.frame_a, revolute2.frame_b);
+  <font color="red">connect</font>(bodyCylinder.frame_b, revolute2.frame_a);
+  <font color="red">connect</font>(bodyCylinder.frame_a, rev.frame_b);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>DoublePendulum;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:28:57 2010.
 </address></BODY>
 </HTML>

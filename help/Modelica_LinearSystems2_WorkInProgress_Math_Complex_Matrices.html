@@ -1,0 +1,257 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Matrices<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Complex.html#Modelica_LinearSystems2.WorkInProgress.Math.Complex"
+>Modelica_LinearSystems2.WorkInProgress.Math.Complex</A>.Matrices</H2>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumberS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Complex_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber"
+>conditionNumber</A>
+</TD><TD>Calculate the condition number norm(A)*norm(inv(A))</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumberS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Complex_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm"
+>norm</A>
+</TD><TD>Returns the norm of a matrix</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumberS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.inv" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Complex_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.inv"
+>inv</A>
+</TD><TD>Inverse of a comlex matrix (try to avoid, use function solve(..) instead)</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE conditionNumber<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumberI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Complex_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices"
+>Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices</A>.conditionNumber</H2>
+<B>Calculate the condition number norm(A)*norm(inv(A))</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Input matrix</TD></TR>
+<TR><TD>Real</TD><TD>p</TD><TD>2</TD><TD>Type of p-norm (only allowed: 1, 2 or Modelica.Constants.inf)</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>result</TD><TD>p-norm of matrix A</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> conditionNumber <font color="darkgreen">
+  &quot;Calculate the condition number norm(A)*norm(inv(A))&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> A[:,:] <font color="darkgreen">&quot;Input matrix&quot;</font>;
+  <font color="blue">input </font>Real p(min=1) = 2 <font color="darkgreen">
+    &quot;Type of p-norm (only allowed: 1, 2 or Modelica.Constants.inf)&quot;</font>;
+  <font color="blue">output </font>Real result=0.0 <font color="darkgreen">&quot;p-norm of matrix A&quot;</font>;
+<font color="blue">protected </font>
+  Real eps=1e-20;
+  Real s[<font color="red">size</font>(A, 1)] <font color="darkgreen">&quot;singular values&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="blue">if </font>p == 2<font color="blue"> then</font>
+    s :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues</font>(
+                                                                A);
+    <font color="blue">if </font><font color="red">min</font>(s) &lt; eps<font color="blue"> then</font>
+      result := -1e100;
+    <font color="blue">else</font>
+      result :=<font color="red"> max</font>(s)/<font color="red">min</font>(s);
+    <font color="blue">end if</font>;
+  <font color="blue">else</font>
+    result :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm</font>(
+                                    A, p)*<font color="red">Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm</font>(
+                                                                <font color="red">Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.inv</font>(
+                                                                                     A), p);
+  <font color="blue">end if</font>;
+<font color="blue">end </font>conditionNumber;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE norm<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumberI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Complex_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices"
+>Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices</A>.norm</H2>
+<B>Returns the norm of a matrix</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4>Syntax</h4>
+<blockquote><pre>
+Matrices.<b>norm</b>(A);
+Matrices.<b>norm</b>(A, p=2);
+</pre></blockquote>
+<h4>Description</h4>
+<p>
+The function call "<code>Matrices.norm(A)</code>" returns the
+2-norm of matrix A, i.e., the largest singular value of A.<br>
+The function call "<code>Matrices.norm(A, p)</code>" returns the
+p-norm of matrix A. The only allowed values for p are</p>
+<ul>
+<li> "p=1": the largest column sum of A</li>
+<li> "p=2": the largest singular value of A</li>
+<li> "p=Modelica.Constants.inf": the largest row sum of A</li>
+</ul>
+<p>
+Note, for any matrices A1, A2 the following inequality holds:
+</p>
+<blockquote><pre>
+Matrices.<b>norm</b>(A1+A2,p) &le; Matrices.<b>norm</b>(A1,p) + Matrices.<b>norm</b>(A2,p)
+</pre></blockquote>
+<p>
+Note, for any matrix A and vector v the following inequality holds:
+</p>
+<blockquote><pre>
+Vectors.<b>norm</b>(A*v,p) &le; Matrices.<b>norm</b>(A,p)*Vectors.<b>norm</b>(A,p)
+</pre></blockquote>
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Input matrix</TD></TR>
+<TR><TD>Real</TD><TD>p</TD><TD>2</TD><TD>Type of p-norm (only allowed: 1, 2 or Modelica.Constants.inf)</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>result</TD><TD>p-norm of matrix A</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> norm <font color="darkgreen">&quot;Returns the norm of a matrix&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math"
+>Modelica_LinearSystems2.Math</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> A[:, :] <font color="darkgreen">&quot;Input matrix&quot;</font>;
+  <font color="blue">input </font>Real p(min=1) = 2 <font color="darkgreen">
+    &quot;Type of p-norm (only allowed: 1, 2 or Modelica.Constants.inf)&quot;</font>;
+  <font color="blue">output </font>Real result=0.0 <font color="darkgreen">&quot;p-norm of matrix A&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="blue">if </font>p == 1<font color="blue"> then</font>
+    <font color="darkgreen">// column sum norm</font>
+    <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(A, 2)<font color="blue"> loop</font>
+      result :=<font color="red"> max</font>(result,<font color="red"> sum</font>(<font color="red">Complex.&#39;abs&#39;</font>(A[:, i])));
+
+    <font color="blue">end for</font>;
+  <font color="blue">elseif </font>p == 2<font color="blue"> then</font>
+    <font color="darkgreen">// largest singular value</font>
+    result :=<font color="red"> max</font>(<font color="red">Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues</font>(
+                                                 A));
+  <font color="blue">elseif </font>p==3<font color="blue"> then</font>
+    <font color="darkgreen">// Frobenius norm</font>
+    result :=<font color="red"> Complex.Internal.frobeniusNorm</font>(A);
+  <font color="blue">elseif </font>p == Modelica.Constants.inf<font color="blue"> then</font>
+    <font color="darkgreen">// row sum norm</font>
+    <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(A, 1)<font color="blue"> loop</font>
+      result :=<font color="red"> max</font>(result,<font color="red"> sum</font>(<font color="red">Complex.&#39;abs&#39;</font>(A[i, :])));
+    <font color="blue">end for</font>;
+  <font color="blue">else</font>
+    <font color="red">assert</font>(false, &quot;Optional argument \&quot;p\&quot; of function \&quot;norm\&quot; must be
+1, 2 or Modelica.Constants.inf&quot;);
+  <font color="blue">end if</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>norm;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE inv<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumberI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.inv" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.inv"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Complex_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices"
+>Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices</A>.inv</H2>
+<B>Inverse of a comlex matrix (try to avoid, use function solve(..) instead)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>invA[size(A, 1), size(A, 2)]</TD><TD>Inverse of matrix A</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> inv <font color="darkgreen">
+  &quot;Inverse of a comlex matrix (try to avoid, use function solve(..) instead)&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> A[:,<font color="red">size</font>(A, 1)];
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> invA[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Inverse of matrix A&quot;</font>;
+<font color="blue">protected </font>
+  Integer info;
+  Integer pivots[<font color="red">size</font>(A, 1)] <font color="darkgreen">&quot;Pivot vector&quot;</font>;
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> LU[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;LU factors of A&quot;</font>;
+<font color="blue">algorithm </font>
+  (LU,pivots,info) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.zgetrf</font>(
+                                             A);
+
+  <font color="red">assert</font>(info == 0,
+                &quot;Calculating an inverse matrix with function
+\&quot;Matrices.inv\&quot; is not possible, since matrix A is singular.&quot;);
+
+  (invA,info) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.zgetri</font>(
+                                        LU, pivots);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>inv;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:29:02 2010.
+</address></BODY>
+</HTML>

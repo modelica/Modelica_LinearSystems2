@@ -32,7 +32,8 @@ components define global parameters, like <i>startTime, method, Ts</i> or
 </p>
 
 <pre></PRE><P>
-Extends from Modelica.Icons.Library (Icon for library).
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons_Library.html#Modelica.Icons.Library"
+>Modelica.Icons.Library</A> (Icon for library).
 <P><H3>Package Content</H3><p>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
 <TR><TH >Name</TH><TH>Description</TH></TR>
@@ -55,6 +56,7 @@ Extends from Modelica.Icons.Library (Icon for library).
 >PartialSISO_equality</A>
 </TD><TD>Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block</TD></TR>
 </TABLE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE PartialBlockIcon<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -62,6 +64,14 @@ Extends from Modelica.Icons.Library (Icon for library).
 <A NAME="Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon"></A><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces"
 >Modelica_LinearSystems2.Controller.Interfaces</A>.PartialBlockIcon</H2>
 <B>Basic graphical layout of discrete/continuous block</B><p>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">block</font> PartialBlockIcon <font color="darkgreen">
+  &quot;Basic graphical layout of discrete/continuous block&quot;</font>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialBlockIcon;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE PartialDiscreteSISO_equality<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -69,6 +79,7 @@ Extends from Modelica.Icons.Library (Icon for library).
 <A NAME="Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteSISO_equality"></A><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces"
 >Modelica_LinearSystems2.Controller.Interfaces</A>.PartialDiscreteSISO_equality</H2>
 <B>Common discrete part of blocks extending from PartialSISO_equality</B><p>
+<IMG SRC="Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteSISO_equalityD.png" ALT="Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteSISO_equality">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <pre>
@@ -77,15 +88,63 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Interfaces.PartialBlockIcon</A> (Basic graphical layout of discrete/continuous block).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
+>RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">block</font> PartialDiscreteSISO_equality <font color="darkgreen">
+  &quot;Common discrete part of blocks extending from PartialSISO_equality&quot;</font>
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon"
+>Interfaces.PartialBlockIcon</A>;
+
+  <font color="blue">parameter </font>Integer sampleFactor(min=1)=1 <font color="darkgreen">
+    &quot;Ts=sampleClock.sampleTime*sampleFactor&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Modelica.SIunits.Time</A> Ts = sampleClock.sampleTime*sampleFactor <font color="darkgreen">
+    &quot;Sample time&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
+>Modelica.Blocks.Interfaces.RealInput</A> u <font color="darkgreen">
+    &quot;Continuous or discrete input signal of block&quot;</font>;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>Modelica.Blocks.Interfaces.RealOutput</A> y <font color="darkgreen">
+    &quot;Continuous or discrete output signal of block&quot;</font>;</textblock>
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SampleClock"
+>SampleClock</A> sampleClock <font color="darkgreen">&quot;Global options&quot;</font>;
+
+ <font color="darkgreen">// Derived quantities</font>
+  <font color="blue">discrete </font>Real u_sampled <font color="darkgreen">&quot;Sampled continuous input signal u&quot;</font>;
+  Integer ticks <font color="darkgreen">
+    &quot;Actual number of base samples starting from the last sample time instant&quot;</font>;
+  Boolean sampleTrigger <font color="darkgreen">&quot;Triggers next sample time&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="blue">if </font>sampleClock.blockType == Types.BlockType.Continuous<font color="blue"> then</font>
+    <font color="darkgreen"> // no sampling in sampleClock</font>
+     sampleTrigger =<font color="red"> sample</font>(Ts, Ts);
+     ticks = 0;
+  <font color="blue">else</font>
+     <font color="blue">when </font>sampleClock.sampleTrigger<font color="blue"> then</font>
+        ticks = <font color="blue">if </font><font color="red">pre</font>(ticks) &lt; sampleFactor<font color="blue"> then </font><font color="red">pre</font>(ticks) + 1<font color="blue"> else </font>1;
+     <font color="blue">end when</font>;
+     sampleTrigger = sampleClock.sampleTrigger<font color="blue"> and </font>ticks &gt;= sampleFactor;
+  <font color="blue">end if</font>;
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">pre</font>(ticks) = 0;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialDiscreteSISO_equality;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE PartialSampledBlock<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -98,13 +157,53 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Icons.html#Modelica_Lin
 >Icons.PartialBlockIcon</A> (Basic graphical layout of discrete/continuous block).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
-<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
+>BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
+>MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
+>InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">block</font> PartialSampledBlock <font color="darkgreen">
+  &quot;Partial block of Sampled library (icon + default parameters)&quot;</font>
+
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Icons.html#Modelica_LinearSystems2.Controller.Icons.PartialBlockIcon"
+>Icons.PartialBlockIcon</A>(cont=continuous);
+
+  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
+>Types.BlockTypeWithGlobalDefault</A> blockType=Types.BlockTypeWithGlobalDefault.UseSampleClockOption <font color="darkgreen">
+    &quot;Type of block (Continuous/Discrete)&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Boolean continuous = blockType == Types.BlockTypeWithGlobalDefault.Continuous<font color="blue"> or </font>
+                                 blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption<font color="blue"> and </font>
+                                 sampleClock.blockType == Types.BlockType.Continuous <font color="darkgreen">
+    &quot;= true, if continuous block, otherwise discrete block&quot;</font>;
+  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
+>Types.MethodWithGlobalDefault</A> methodType=Types.MethodWithGlobalDefault.UseSampleClockOption <font color="blue">if </font>
+       <font color="blue">not </font>continuous <font color="darkgreen">&quot;Type of discretization if discrete block&quot;</font>;
+
+  <font color="blue">final </font><font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.Init"
+>Types.Init</A> init=<font color="blue">if </font>initType == Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.UseSampleClockOption<font color="blue"> then </font>
+            sampleClock.initType<font color="blue"> else </font>initType <font color="darkgreen">
+    &quot;Type of initialization (no init/InitialState/SteadyState)&quot;</font>;
+
+  <font color="blue">parameter </font>Integer sampleFactor(min=1)=1 <font color="blue">if </font> <font color="blue">not </font>continuous <font color="darkgreen">
+    &quot;Ts=sampleClock.sampleTime*sampleFactor&quot;</font>;
+
+  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
+>Types.InitWithGlobalDefault</A> initType=Types.InitWithGlobalDefault.UseSampleClockOption <font color="darkgreen">
+    &quot;Type of initialization (no init/initial/steady state/output)&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SampleClock"
+>SampleClock</A> sampleClock <font color="darkgreen">&quot;Global options&quot;</font>;
+<font color="blue">end </font>PartialSampledBlock;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE PartialSISO<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -112,6 +211,7 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Icons.html#Modelica_Lin
 <A NAME="Modelica_LinearSystems2.Controller.Interfaces.PartialSISO"></A><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces"
 >Modelica_LinearSystems2.Controller.Interfaces</A>.PartialSISO</H2>
 <B>Partial Single Input Single Output (continuous or discrete) control block of Controller library</B><p>
+<IMG SRC="Modelica_LinearSystems2.Controller.Interfaces.PartialSISOD.png" ALT="Modelica_LinearSystems2.Controller.Interfaces.PartialSISO">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <pre>
@@ -120,19 +220,50 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >PartialSampledBlock</A> (Partial block of Sampled library (icon + default parameters)).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
-<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
+>BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
+>MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
+>InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
+>RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">block</font> PartialSISO <font color="darkgreen">
+  &quot;Partial Single Input Single Output (continuous or discrete) control block of Controller library&quot;</font>
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock"
+>PartialSampledBlock</A>;
+<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
+>Modelica.Blocks.Interfaces.RealInput</A> u <font color="darkgreen">
+    &quot;Continuous or discrete input signal of block&quot;</font>;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>Modelica.Blocks.Interfaces.RealOutput</A> y <font color="darkgreen">
+    &quot;Continuous or discrete output signal of block&quot;</font>;</textblock>
+
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2_Controller_Internal.html#Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace"
+>Internal.DiscreteStateSpace</A> discretePart(
+    methodType=methodType,
+    sampleFactor=sampleFactor,
+    init=init) <font color="blue">if </font><font color="blue">not </font>continuous <font color="darkgreen">&quot;Discretized SISO system&quot;</font>;
+
+<font color="blue">equation </font>
+ <font color="red">connect</font>(u, discretePart.u[1]);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialSISO;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE PartialSISO2<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -140,6 +271,7 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"></A><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces"
 >Modelica_LinearSystems2.Controller.Interfaces</A>.PartialSISO2</H2>
 <B>Partial Single Input Single Output (continuous or discrete) control block of Controller library</B><p>
+<IMG SRC="Modelica_LinearSystems2.Controller.Interfaces.PartialSISOD.png" ALT="Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <pre>
@@ -148,19 +280,50 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >PartialSampledBlock</A> (Partial block of Sampled library (icon + default parameters)).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
-<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
+>BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
+>MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
+>InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
+>RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">block</font> PartialSISO2 <font color="darkgreen">
+  &quot;Partial Single Input Single Output (continuous or discrete) control block of Controller library&quot;</font>
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock"
+>PartialSampledBlock</A>;
+<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
+>Modelica.Blocks.Interfaces.RealInput</A> u <font color="darkgreen">
+    &quot;Continuous or discrete input signal of block&quot;</font>;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>Modelica.Blocks.Interfaces.RealOutput</A> y <font color="darkgreen">
+    &quot;Continuous or discrete output signal of block&quot;</font>;</textblock>
+
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2_Controller_Internal.html#Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace2"
+>Internal.DiscreteStateSpace2</A> discretePart(
+    methodType=methodType,
+    sampleFactor=sampleFactor,
+    init=init) <font color="blue">if </font><font color="blue">not </font>continuous <font color="darkgreen">&quot;Discretized SISO system&quot;</font>;
+
+<font color="blue">equation </font>
+ <font color="red">connect</font>(u, discretePart.u[1]);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialSISO2;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE PartialSISO_equality<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -168,6 +331,7 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"></A><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces"
 >Modelica_LinearSystems2.Controller.Interfaces</A>.PartialSISO_equality</H2>
 <B>Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block</B><p>
+<IMG SRC="Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equalityD.png" ALT="Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -184,16 +348,50 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Icons.html#Modelica_Lin
 >Icons.PartialBlockIcon</A> (Basic graphical layout of discrete/continuous block).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
+>BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Sample time = sampleFactor * sampleClock.sampleTime</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
+>RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
 </TABLE>
-<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:57 2009.
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">block</font> PartialSISO_equality <font color="darkgreen">
+  &quot;Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block&quot;</font>
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Icons.html#Modelica_LinearSystems2.Controller.Icons.PartialBlockIcon"
+>Icons.PartialBlockIcon</A>(cont=continuous);
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types"
+>Modelica_LinearSystems2.Controller.Types</A>;
+  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
+>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault</A>
+    blockType =                                                                           Types.BlockTypeWithGlobalDefault.UseSampleClockOption <font color="darkgreen">
+    &quot;Type of block (Continuous/Discrete)&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Boolean continuous = blockType == Types.BlockTypeWithGlobalDefault.Continuous<font color="blue"> or </font>
+                                 blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption<font color="blue"> and </font>
+                                 sampleClock.blockType == Types.BlockType.Continuous <font color="darkgreen">
+    &quot;= true, if continuous block, otherwise discrete block&quot;</font>;
+  <font color="blue">parameter </font>Integer sampleFactor(min=1)=1 <font color="blue">if </font><font color="blue">not </font>continuous <font color="darkgreen">
+    &quot;Sample time = sampleFactor * sampleClock.sampleTime&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
+>Modelica.Blocks.Interfaces.RealInput</A> u <font color="darkgreen">
+    &quot;Continuous or discrete input signal of block&quot;</font>;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
+>Modelica.Blocks.Interfaces.RealOutput</A> y <font color="darkgreen">
+    &quot;Continuous or discrete output signal of block&quot;</font>;</textblock>
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SampleClock"
+>SampleClock</A> sampleClock <font color="darkgreen">&quot;Global options&quot;</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialSISO_equality;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:28:49 2010.
 </address></BODY>
 </HTML>

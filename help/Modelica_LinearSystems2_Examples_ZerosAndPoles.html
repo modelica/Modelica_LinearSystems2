@@ -54,6 +54,7 @@ table   { solid #000; border-collapse: collapse;}
 >plotStep</A>
 </TD><TD>Step plot example</TD></TR>
 </TABLE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE analysisZerosAndPoles<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -62,9 +63,68 @@ table   { solid #000; border-collapse: collapse;}
 <B>Compute zeros and poles of a ZerosAndPoles transfer function</B><p>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> analysisZerosAndPoles <font color="darkgreen">
+  &quot;Compute zeros and poles of a ZerosAndPoles transfer function&quot;</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print"
+>Modelica.Utilities.Streams.print</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.printComplexVector"
+>Modelica_LinearSystems2.Internal.printComplexVector</A>;
+
+  <font color="blue">output </font>Boolean ok;
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> j =<font color="red"> Modelica_LinearSystems2.Math.Complex.j</font>();
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> numeratorZeros1[1]={-1+0*j};
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> denominatorZeros1[3]={1+0*j,2+3*j,2-3*j};
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> numeratorZeros3[4]={-1+j,-1-j,1+0*j,1+0*j};
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> denominatorZeros3[6]={1+0*j,2+0*j,2+3*j,2-3*j,3+4*j,3-4*j};
+
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp=<font color="red">ZerosAndPoles</font>(z=numeratorZeros1, p=
+      denominatorZeros1);
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp2=<font color="red">ZerosAndPoles</font>(z=numeratorZeros3, p=
+      denominatorZeros3);
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> numeratorZeros2[:];
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> denominatorZeros2[:];
+  Real k;
+
+<font color="blue">algorithm </font>
+  (numeratorZeros2,denominatorZeros2,k) :=<font color="red"> ZerosAndPoles.Analysis.zerosAndPoles</font>(zp);
+
+  <font color="red">Modelica.Utilities.Streams.print</font>(&quot;ZerosAndPoles-TransferFunction1 = &quot; +
+    <font color="red">String</font>(zp));
+  <font color="red">Modelica.Utilities.Streams.print</font>(&quot;ZerosAndPoles-TransferFunction2 = &quot; +
+    <font color="red">String</font>(zp2));
+  <font color="red">printComplexVector</font>(&quot;numeratorZeros1&quot;, numeratorZeros1);
+  <font color="red">printComplexVector</font>(&quot;\nnumeratorZeros2&quot;, numeratorZeros2);
+
+  <font color="red">printComplexVector</font>(&quot;\ndenominatorZeros1&quot;, denominatorZeros1);
+  <font color="red">printComplexVector</font>(&quot;\ndenominatorZeros2&quot;, denominatorZeros2);
+
+  ok := true;
+<font color="blue">end </font>analysisZerosAndPoles;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE conversionToStateSpace<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -73,20 +133,83 @@ table   { solid #000; border-collapse: collapse;}
 <B>Transform a transfer function from zeros and poles representation into a StateSpace description</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>zpi</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A></TD><TD>zpi</TD><TD>ZerosAndPoles(k=1, n1={1}, n...</TD><TD>&nbsp;</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> conversionToStateSpace <font color="darkgreen">
+  &quot;Transform a transfer function from zeros and poles representation into a StateSpace description&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zpi=<font color="red">ZerosAndPoles</font>(k=1, n1={1}, n2=<font color="red">fill</font>(0,0,2),d1=<font color="red">fill</font>(0,0),d2=[1,1]);
+
+  <font color="blue">output </font>Boolean ok;
+
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss1=<font color="red">ZerosAndPoles.Conversion.toStateSpace</font>(zpi);<font color="darkgreen">      //explicit conversion</font>
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss2=<font color="red">StateSpace</font>(zpi);<font color="darkgreen">                                 //short conversion using overloadig</font>
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zpo1=<font color="red">StateSpace.Conversion.toZerosAndPoles</font>(ss1);<font color="darkgreen">  //explicit conversion</font>
+
+<font color="blue">algorithm </font>
+  <font color="red"> Modelica.Utilities.Streams.print</font>(&quot;zpi = &quot; +<font color="red"> String</font>(zpi));
+  <font color="red"> Modelica.Utilities.Streams.print</font>(&quot;ss1 = &quot; +<font color="red"> String</font>(ss1,6,&quot;ss1&quot;));
+  <font color="red"> Modelica.Utilities.Streams.print</font>(&quot;ss2 = &quot; +<font color="red"> String</font>(ss2,6,&quot;ss2&quot;));
+  <font color="red"> Modelica.Utilities.Streams.print</font>(&quot;zpo1 = &quot; +<font color="red"> String</font>(zpo1));
+
+   ok := true;
+
+<font color="blue">end </font>conversionToStateSpace;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotPolesAndZeros<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
 <H2><A NAME="Modelica_LinearSystems2.Examples.ZerosAndPoles.plotPolesAndZeros"></A><A HREF="Modelica_LinearSystems2_Examples_ZerosAndPoles.html#Modelica_LinearSystems2.Examples.ZerosAndPoles"
 >Modelica_LinearSystems2.Examples.ZerosAndPoles</A>.plotPolesAndZeros</H2>
 <B>Example for plotting poles and zeros of a ZerosAndPoles transfer function</B><p>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> plotPolesAndZeros <font color="darkgreen">
+  &quot;Example for plotting poles and zeros of a ZerosAndPoles transfer function&quot;</font>
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A> s =<font color="red"> TransferFunction.s</font>();
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A> tf = (s^3 + 4*s + 1)/(s^4 + 2*s^3 + 3*s^2 + 4*s);
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp =<font color="red"> ZerosAndPoles</font>(tf);
+<font color="blue">algorithm </font>
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.polesAndZeros</font>(
+    zp=zp,
+ defaultDiagram=<font color="red">Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</font>(
+      heading=&quot;Poles and zeros of &quot; +<font color="red"> String</font>(tf)),
+      device=<font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Device</font>(xTopLeft=50, yTopLeft=30));
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotPolesAndZeros;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotBode1<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -95,14 +218,47 @@ table   { solid #000; border-collapse: collapse;}
 <B>Construct a ZerosAndPoles system and plot the Bode diagram with automatic determination of the frequency range to plot</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>f_cut</TD><TD>PT1 with cut-off frequency f_cut [Hz]</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_cut</TD><TD>100</TD><TD>PT1 with cut-off frequency f_cut [Hz]</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> plotBode1 <font color="darkgreen">
+  &quot;Construct a ZerosAndPoles system and plot the Bode diagram with automatic determination of the frequency range to plot&quot;</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print"
+>Modelica.Utilities.Streams.print</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_cut=100 <font color="darkgreen">&quot;PT1 with cut-off frequency f_cut&quot;</font>;
+  <font color="blue">output </font>Boolean ok;
+<font color="blue">protected </font>
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.AngularVelocity"
+>Modelica.SIunits.AngularVelocity</A> w=2*Modelica.Constants.pi*f_cut;
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A> tf=<font color="red">TransferFunction</font>(n={w}, d={1,w});
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp=<font color="red">ZerosAndPoles</font>(tf);
+<font color="blue">algorithm </font>
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(    zp);
+  ok := true;
+
+<font color="blue">equation </font>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotBode1;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotBode2<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -111,17 +267,53 @@ table   { solid #000; border-collapse: collapse;}
 <B>Bode plot of PT2 transfer function with zero damping</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>f_cut</TD><TD>Cut-off frequency of denominator PT2 [Hz]</TD></TR>
-<TR><TD>D</TD><TD>Damping of denominator PT2</TD></TR>
-<TR><TD>k</TD><TD>Gain</TD></TR>
-<TR><TD>nPoints</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_cut</TD><TD>10</TD><TD>Cut-off frequency of denominator PT2 [Hz]</TD></TR>
+<TR><TD>Real</TD><TD>D</TD><TD>0</TD><TD>Damping of denominator PT2</TD></TR>
+<TR><TD>Real</TD><TD>k</TD><TD>1</TD><TD>Gain</TD></TR>
+<TR><TD>Integer</TD><TD>nPoints</TD><TD>1000</TD><TD>&nbsp;</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> plotBode2 <font color="darkgreen">
+  &quot;Bode plot of PT2 transfer function with zero damping&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print"
+>Modelica.Utilities.Streams.print</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_cut=10 <font color="darkgreen">
+    &quot;Cut-off frequency of denominator PT2&quot;</font>;
+  <font color="blue">input </font>Real D=0 <font color="darkgreen">&quot;Damping of denominator PT2&quot;</font>;
+  <font color="blue">input </font>Real k=1 <font color="darkgreen">&quot;Gain&quot;</font>;
+  <font color="blue">input </font>Integer nPoints=1000;
+  <font color="blue">output </font>Boolean ok;
+<font color="blue">protected </font>
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.AngularVelocity"
+>Modelica.SIunits.AngularVelocity</A> w=2*Modelica.Constants.pi*f_cut;
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A> tf=<font color="red">TransferFunction</font>(n={k*w^2}, d={1,2*D*w,w*w});
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp=<font color="red">ZerosAndPoles</font>(tf);
+<font color="blue">algorithm </font>
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+                                  zp, nPoints);
+  ok := true;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotBode2;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotBode3<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -130,18 +322,101 @@ table   { solid #000; border-collapse: collapse;}
 <B>Construct a ZerosAndPoles system and plot the Bode diagram with automatic determination of the frequency range to plot</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>f_cut_num</TD><TD>Cut-off frequency of numerator PT2 and PT1 [Hz]</TD></TR>
-<TR><TD>D_num</TD><TD>Damping of numerator PT2</TD></TR>
-<TR><TD>f_cut_den</TD><TD>Cut-off frequency of denominator PT2 and PT1 [Hz]</TD></TR>
-<TR><TD>D_den</TD><TD>Damping of denominator PT2</TD></TR>
-<TR><TD>k</TD><TD>Gain</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_cut_num</TD><TD>100</TD><TD>Cut-off frequency of numerator PT2 and PT1 [Hz]</TD></TR>
+<TR><TD>Real</TD><TD>D_num</TD><TD>0.1</TD><TD>Damping of numerator PT2</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_cut_den</TD><TD>10</TD><TD>Cut-off frequency of denominator PT2 and PT1 [Hz]</TD></TR>
+<TR><TD>Real</TD><TD>D_den</TD><TD>0.1</TD><TD>Damping of denominator PT2</TD></TR>
+<TR><TD>Real</TD><TD>k</TD><TD>1</TD><TD>Gain</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> plotBode3 <font color="darkgreen">
+  &quot;Construct a ZerosAndPoles system and plot the Bode diagram with automatic determination of the frequency range to plot&quot;</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print"
+>Modelica.Utilities.Streams.print</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Modelica_LinearSystems2.Math.Polynomial</A>;
+
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_cut_num=100 <font color="darkgreen">
+    &quot;Cut-off frequency of numerator PT2 and PT1&quot;</font>;
+  <font color="blue">input </font>Real D_num=0.1 <font color="darkgreen">&quot;Damping of numerator PT2&quot;</font>;
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_cut_den=10 <font color="darkgreen">
+    &quot;Cut-off frequency of denominator PT2 and PT1&quot;</font>;
+  <font color="blue">input </font>Real D_den=0.1 <font color="darkgreen">&quot;Damping of denominator PT2&quot;</font>;
+  <font color="blue">input </font>Real k=1 <font color="darkgreen">&quot;Gain&quot;</font>;
+  <font color="blue">output </font>Boolean ok;
+<font color="blue">protected </font>
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.AngularVelocity"
+>Modelica.SIunits.AngularVelocity</A> w1=2*Modelica.Constants.pi*f_cut_num;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.AngularVelocity"
+>Modelica.SIunits.AngularVelocity</A> w2=2*Modelica.Constants.pi*f_cut_den;
+
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Polynomial</A> pn1=<font color="red">Polynomial</font>(k/w1^3*{1,w1});
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Polynomial</A> pn2=<font color="red">Polynomial</font>({1,2*D_num*w1,w1*w1});
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Polynomial</A> pn3=pn1*pn2;
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Polynomial</A> pd1=<font color="red">Polynomial</font>({1,w2});
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Polynomial</A> pd2=<font color="red">Polynomial</font>({1,2*D_den*w2,w2*w2});
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Polynomial</A> pd3=pd1*pd2;
+
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A> tf1=<font color="red">TransferFunction</font>(n=pn3, d=<font color="red">Polynomial</font>({1}));
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A> tf2=<font color="red">TransferFunction</font>(n=<font color="red">Polynomial</font>({k*w2^3}), d=pd3);
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A> tf3=tf1*tf2;
+
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp1=<font color="red">ZerosAndPoles</font>(tf1);
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp2=<font color="red">ZerosAndPoles</font>(tf2);
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp3=<font color="red">ZerosAndPoles</font>(tf3);
+
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_min=2;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_max=200;
+<font color="blue">algorithm </font>
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+    zp1,
+    autoRange=false,
+    f_min=f_min,
+    f_max=f_max);
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+    zp2,
+    autoRange=false,
+    f_min=f_min,
+    f_max=f_max);
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+    zp3,
+    autoRange=false,
+    f_min=f_min,
+    f_max=f_max);
+   ok := true;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotBode3;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotBodeFilter1<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -150,16 +425,52 @@ table   { solid #000; border-collapse: collapse;}
 <B>Compute filter and plot frequency response of filter</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>analogFilter</TD><TD>Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)</TD></TR>
-<TR><TD>order</TD><TD>&nbsp;</TD></TR>
-<TR><TD>f_cut</TD><TD>[Hz]</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.AnalogFilter"
+>AnalogFilter</A></TD><TD>analogFilter</TD><TD>Types.AnalogFilter.CriticalD...</TD><TD>Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)</TD></TR>
+<TR><TD>Integer</TD><TD>order</TD><TD>2</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_cut</TD><TD>10</TD><TD>[Hz]</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> plotBodeFilter1 <font color="darkgreen">
+  &quot;Compute filter and plot frequency response of filter&quot;</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types"
+>Modelica_LinearSystems2.Types</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.AnalogFilter"
+>Types.AnalogFilter</A> analogFilter=Types.AnalogFilter.CriticalDamping <font color="darkgreen">
+    &quot;Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)&quot;</font>;
+  <font color="blue">input </font>Integer order=2;
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_cut=10;
+  <font color="blue">output </font>Boolean ok;
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> tf_filter=<font color="red">ZerosAndPoles.Design.filter</font>(
+      order=order,
+      f_cut=f_cut,
+      analogFilter=analogFilter);
+
+<font color="blue">algorithm </font>
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+                                  tf_filter);
+  ok := true;
+<font color="blue">equation </font>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotBodeFilter1;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotBodeFilter2<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -168,18 +479,93 @@ table   { solid #000; border-collapse: collapse;}
 <B>Show low pass filters of all filter types</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>order</TD><TD>Order of filter</TD></TR>
-<TR><TD>f_cut</TD><TD>Cut-off frequency [Hz]</TD></TR>
-<TR><TD>A_ripple</TD><TD>Pass band ripple for Chebyshev filter (otherwise not used) [dB]</TD></TR>
-<TR><TD>f_min</TD><TD>Minimum frequency value [Hz]</TD></TR>
-<TR><TD>f_max</TD><TD>Maximum frequency value [Hz]</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>order</TD><TD>4</TD><TD>Order of filter</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_cut</TD><TD>1</TD><TD>Cut-off frequency [Hz]</TD></TR>
+<TR><TD>Real</TD><TD>A_ripple</TD><TD>3</TD><TD>Pass band ripple for Chebyshev filter (otherwise not used) [dB]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_min</TD><TD>0.1</TD><TD>Minimum frequency value [Hz]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_max</TD><TD>10</TD><TD>Maximum frequency value [Hz]</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> plotBodeFilter2 <font color="darkgreen">&quot;Show low pass filters of all filter types&quot;</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+  <font color="blue">import </font>AF = <A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.AnalogFilter"
+>Modelica_LinearSystems2.Types.AnalogFilter</A>;
+
+  <font color="blue">input </font>Integer order(min=1) = 4 <font color="darkgreen">&quot;Order of filter&quot;</font>;
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_cut=1 <font color="darkgreen">&quot;Cut-off frequency&quot;</font>;
+  <font color="blue">input </font>Real A_ripple(unit=&quot;dB&quot;) = 3 <font color="darkgreen">
+    &quot;Pass band ripple for Chebyshev filter (otherwise not used)&quot;</font>;
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_min(min=0) = 0.1 <font color="darkgreen">&quot;Minimum frequency value&quot;</font>;
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_max(min=0) = 10 <font color="darkgreen">&quot;Maximum frequency value&quot;</font>;
+  <font color="blue">output </font>Boolean ok;
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> tf1=<font color="red">ZerosAndPoles.Design.filter</font>(
+      analogFilter=AF.CriticalDamping,
+      order=order,
+      f_cut=f_cut,
+      A_ripple=A_ripple);
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> tf2=<font color="red">ZerosAndPoles.Design.filter</font>(
+      analogFilter=AF.Bessel,
+      order=order,
+      f_cut=f_cut,
+      A_ripple=A_ripple);
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> tf3=<font color="red">ZerosAndPoles.Design.filter</font>(
+      analogFilter=AF.Butterworth,
+      order=order,
+      f_cut=f_cut,
+      A_ripple=A_ripple);
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> tf4=<font color="red">ZerosAndPoles.Design.filter</font>(
+      analogFilter=AF.Chebyshev,
+      order=order,
+      f_cut=f_cut,
+      A_ripple=A_ripple);
+<font color="blue">algorithm </font>
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+    tf1,
+    autoRange=false,
+    f_min=f_min,
+    f_max=f_max);
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+    tf2,
+    autoRange=false,
+    f_min=f_min,
+    f_max=f_max);
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+    tf3,
+    autoRange=false,
+    f_min=f_min,
+    f_max=f_max);
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+    tf4,
+    autoRange=false,
+    f_min=f_min,
+    f_max=f_max);
+
+  ok := true;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotBodeFilter2;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotBodeFilter3<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -188,18 +574,97 @@ table   { solid #000; border-collapse: collapse;}
 <B>Show high pass filters of all filter types</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>order</TD><TD>Order of filter</TD></TR>
-<TR><TD>f_cut</TD><TD>Cut-off frequency [Hz]</TD></TR>
-<TR><TD>A_ripple</TD><TD>Pass band ripple for Chebyshev filter (otherwise not used) [dB]</TD></TR>
-<TR><TD>f_min</TD><TD>Minimum frequency value [Hz]</TD></TR>
-<TR><TD>f_max</TD><TD>Maximum frequency value [Hz]</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>order</TD><TD>4</TD><TD>Order of filter</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_cut</TD><TD>1</TD><TD>Cut-off frequency [Hz]</TD></TR>
+<TR><TD>Real</TD><TD>A_ripple</TD><TD>3</TD><TD>Pass band ripple for Chebyshev filter (otherwise not used) [dB]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_min</TD><TD>0.1</TD><TD>Minimum frequency value [Hz]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_max</TD><TD>10</TD><TD>Maximum frequency value [Hz]</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> plotBodeFilter3 <font color="darkgreen">&quot;Show high pass filters of all filter types&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+  <font color="blue">import </font>AF = <A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.AnalogFilter"
+>Modelica_LinearSystems2.Types.AnalogFilter</A>;
+  <font color="blue">import </font>FT = <A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.FilterType"
+>Modelica_LinearSystems2.Types.FilterType</A>;
+
+  <font color="blue">input </font>Integer order(min=1) = 4 <font color="darkgreen">&quot;Order of filter&quot;</font>;
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_cut=1 <font color="darkgreen">&quot;Cut-off frequency&quot;</font>;
+  <font color="blue">input </font>Real A_ripple(unit=&quot;dB&quot;) = 3 <font color="darkgreen">
+    &quot;Pass band ripple for Chebyshev filter (otherwise not used)&quot;</font>;
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_min(min=0) = 0.1 <font color="darkgreen">&quot;Minimum frequency value&quot;</font>;
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_max(min=0) = 10 <font color="darkgreen">&quot;Maximum frequency value&quot;</font>;
+  <font color="blue">output </font>Boolean ok;
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> tf1=<font color="red">ZerosAndPoles.Design.filter</font>(
+      analogFilter=AF.CriticalDamping,
+      order=order,
+      f_cut=f_cut,
+      A_ripple=A_ripple,
+      filterType=FT.HighPass);
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> tf2=<font color="red">ZerosAndPoles.Design.filter</font>(
+      analogFilter=AF.Bessel,
+      order=order,
+      f_cut=f_cut,
+      A_ripple=A_ripple,
+      filterType=FT.HighPass);
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> tf3=<font color="red">ZerosAndPoles.Design.filter</font>(
+      analogFilter=AF.Butterworth,
+      order=order,
+      f_cut=f_cut,
+      A_ripple=A_ripple,
+      filterType=FT.HighPass);
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> tf4=<font color="red">ZerosAndPoles.Design.filter</font>(
+      analogFilter=AF.Chebyshev,
+      order=order,
+      f_cut=f_cut,
+      A_ripple=A_ripple,
+      filterType=FT.HighPass);
+<font color="blue">algorithm </font>
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+    tf1,
+    autoRange=false,
+    f_min=f_min,
+    f_max=f_max);
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+    tf2,
+    autoRange=false,
+    f_min=f_min,
+    f_max=f_max);
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+    tf3,
+    autoRange=false,
+    f_min=f_min,
+    f_max=f_max);
+  <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.bode</font>(
+    tf4,
+    autoRange=false,
+    f_min=f_min,
+    f_max=f_max);
+
+  ok := true;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotBodeFilter3;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotStep<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -212,6 +677,23 @@ table   { solid #000; border-collapse: collapse;}
 Computes the impulse response of the system tf =1/s^2 + s + 1.
 <pre></PRE><P>
 
-<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:56 2009.
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> plotStep <font color="darkgreen">&quot;Step plot example&quot;</font>
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp=<font color="red">ZerosAndPoles</font>(k=1,n1=<font color="red">fill</font>(0,0),d2=[1,1]);
+
+<font color="blue">algorithm </font>
+ <font color="red">Modelica_LinearSystems2.ZerosAndPoles.Plot.step</font>(        zp=zp, dt=0.1, tSpan=10);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotStep;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:28:40 2010.
 </address></BODY>
 </HTML>

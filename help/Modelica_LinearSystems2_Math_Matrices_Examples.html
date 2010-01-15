@@ -36,6 +36,7 @@ table   { solid #000; border-collapse: collapse;}
 >care</A>
 </TD><TD>solve a continuous algebraic Riccati equation</TD></TR>
 </TABLE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE exampleHessenberg<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -43,10 +44,74 @@ table   { solid #000; border-collapse: collapse;}
 >Modelica_LinearSystems2.Math.Matrices.Examples</A>.exampleHessenberg</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>fileName</TD><TD>&nbsp;</TD></TR>
-<TR><TD>matrixName</TD><TD>Name of the matrix</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;m.mat&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;A&quot;</TD><TD>Name of the matrix</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> exampleHessenberg
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">input </font>String fileName=DataDir + &quot;m.mat&quot;;
+  <font color="blue">input </font>String matrixName=&quot;A&quot; <font color="darkgreen">&quot;Name of the matrix&quot;</font>;
+<font color="blue">protected </font>
+  Real M[:,:]=<font color="red">Matrices.fromFile</font>(fileName, matrixName);
+  Real tau[<font color="red">size</font>(M, 1) - 1];
+  Real Q[<font color="red">size</font>(M, 1),<font color="red">size</font>(M, 2)];
+
+  Real V[<font color="red">size</font>(M, 1),<font color="red">size</font>(M, 2)];
+  Real H[<font color="red">size</font>(M, 1),<font color="red">size</font>(M, 2)];
+  Integer info;
+<font color="blue">algorithm </font>
+  H :=<font color="red"> Modelica_LinearSystems2.Math.Matrices.Internal.hessenberg2</font>(M);
+  <font color="red">Matrices.printMatrix</font>(
+      M,
+      6,
+      &quot;M&quot;);
+  <font color="red">Math.Matrices.printMatrix</font>(
+      H,
+      6,
+      &quot;Hu&quot;);
+  H :=<font color="red"> Modelica_LinearSystems2.Math.Matrices.Internal.hessenberg2</font>(M, &quot;l&quot;);
+  <font color="red">Math.Matrices.printMatrix</font>(
+      H,
+      6,
+      &quot;Hl&quot;);
+  (H,V,tau) :=<font color="red"> Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg</font>(
+      M,
+      1,
+      <font color="red">size</font>(M, 1));
+  <font color="red">Math.Matrices.printMatrix</font>(
+      H,
+      6,
+      &quot;H_dgehrd&quot;);
+  <font color="red">Math.Matrices.printMatrix</font>(
+      V,
+      6,
+      &quot;V_dgehrd&quot;);
+  <font color="red">Math.Vectors.printVector</font>(
+      tau,
+      6,
+      &quot;tau&quot;);
+  Q :=<font color="red"> Modelica_LinearSystems2.Math.Matrices.orthogonalQ</font>(
+      V,
+      tau,
+      1,
+      <font color="red">size</font>(V, 1));
+  <font color="red">Math.Matrices.printMatrix</font>(
+      Q*H*<font color="red">transpose</font>(Q),
+      6,
+      &quot;Q*H*Q&#39;&quot;);
+  H :=<font color="red"> Modelica_LinearSystems2.Math.Matrices.hessenberg</font>(M);
+  <font color="red">Math.Matrices.printMatrix</font>(
+      H,
+      6,
+      &quot;H_hess_lapack&quot;);
+
+<font color="blue">end </font>exampleHessenberg;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE exampleQR<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -55,10 +120,109 @@ table   { solid #000; border-collapse: collapse;}
 <B>Example for the usage of QR2-function, QR factorization with colomns pivoting</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>fileName</TD><TD>&nbsp;</TD></TR>
-<TR><TD>matrixName</TD><TD>Name of the matrix</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;m.mat&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;A&quot;</TD><TD>Name of the matrix</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> exampleQR <font color="darkgreen">
+  &quot;Example for the usage of QR2-function, QR factorization with colomns pivoting&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">input </font>String fileName=DataDir + &quot;m.mat&quot;;
+  <font color="blue">input </font>String matrixName=&quot;A&quot; <font color="darkgreen">&quot;Name of the matrix&quot;</font>;
+<font color="blue">protected </font>
+  Real M[:,:]=<font color="red">Matrices.fromFile</font>(fileName, matrixName);
+  Real tau[<font color="red">min</font>(<font color="red">size</font>(M, 1),<font color="red"> size</font>(M, 2))];
+  Integer p[<font color="red">min</font>(<font color="red">size</font>(M, 1),<font color="red"> size</font>(M, 2))];
+  Real Q[<font color="red">size</font>(M, 1),<font color="red">size</font>(M, 2)];
+  Real R[<font color="red">size</font>(M, 2),<font color="red">size</font>(M, 2)];
+  Real P[<font color="red">size</font>(M, 2),<font color="red">size</font>(M, 2)]=<font color="red">fill</font>(
+        0,
+        <font color="red">size</font>(M, 2),
+        <font color="red">size</font>(M, 2));
+  Real M2[<font color="red">size</font>(M, 1),<font color="red">size</font>(M, 2)];
+  Real QR[<font color="red">size</font>(M, 1),<font color="red">size</font>(M, 2)];
+  Real QR2[<font color="red">size</font>(M, 1),<font color="red">size</font>(M, 2)];
+
+  Integer info;
+<font color="blue">algorithm </font>
+
+  (Q,R,p,tau) :=<font color="red"> Modelica_LinearSystems2.Math.Matrices.Internal.QR2</font>(
+                              M);
+  QR := Q*R;
+  <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(M, 2)<font color="blue"> loop</font>
+    P[p[i], i] := 1;
+    M2[:, p[i]] := M[:, i];
+    QR2[:, i] := QR[:, p[i]];
+
+  <font color="blue">end for</font>;
+  <font color="red">Modelica.Utilities.Streams.print</font>(
+    &quot;Show results of QR2 - QR factorization with pivoting:\n-----------------------------------------------------&quot;);
+  <font color="red">Matrices.printMatrix</font>(
+      M,
+      6,
+      &quot;M&quot;);
+  <font color="red">Matrices.printMatrix</font>(
+      Q,
+      6,
+      &quot;Q&quot;);
+  <font color="red">Matrices.printMatrix</font>(
+      R,
+      6,
+      &quot;R&quot;);
+  <font color="red">Vectors.printVector</font>(
+      p,
+      6,
+      &quot;p&quot;);
+  <font color="red">Matrices.printMatrix</font>(
+      QR,
+      6,
+      &quot;QR&quot;);
+  <font color="red">Matrices.printMatrix</font>(
+      QR2,
+      6,
+      &quot;QR2&quot;);
+  <font color="red">Matrices.printMatrix</font>(
+      M*P,
+      6,
+      &quot;M*P&quot;);
+  <font color="red">Matrices.printMatrix</font>(
+      M2,
+      6,
+      &quot;M2&quot;);
+  QR2 := QR*<font color="red">transpose</font>(P);
+  <font color="red">Matrices.printMatrix</font>(
+      QR2,
+      6,
+      &quot;QR2&quot;);
+
+  <font color="red">Modelica.Utilities.Streams.print</font>(
+    &quot;Show results of QR factorization without pivoting:\n-----------------------------------------------------&quot;);
+  (Q,R,tau,QR2) :=<font color="red"> Modelica_LinearSystems2.Math.Matrices.QR</font>(
+                            M);
+  QR := Q*R;
+  <font color="red">Matrices.printMatrix</font>(
+      Q,
+      6,
+      &quot;Q&quot;);
+  <font color="red">Matrices.printMatrix</font>(
+      R,
+      6,
+      &quot;R&quot;);
+  <font color="red">Matrices.printMatrix</font>(
+      QR,
+      6,
+      &quot;QR&quot;);
+  <font color="red">Matrices.printMatrix</font>(
+      QR2,
+      6,
+      &quot;QR2&quot;);
+
+<font color="blue">end </font>exampleQR;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE exampleSVD<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -67,9 +231,37 @@ table   { solid #000; border-collapse: collapse;}
 <B>Example for the usage of dgesdd and dgesvd lapack routines</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>fileName</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;m.mat&quot;</TD><TD>&nbsp;</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> exampleSVD <font color="darkgreen">
+  &quot;Example for the usage of dgesdd and dgesvd lapack routines&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>;
+  <font color="blue">input </font>String fileName=DataDir + &quot;m.mat&quot;;
+
+<font color="blue">protected </font>
+  Real M[:,:]=<font color="red">Matrices.fromFile</font>(fileName, &quot;A&quot;);
+  Real U1[<font color="red">size</font>(M,1),<font color="red">size</font>(M,1)];
+  Real VT1[<font color="red">size</font>(M,2),<font color="red">size</font>(M,2)];
+  Real sigma1[<font color="red">size</font>(M,1)];
+
+  Integer info;
+<font color="blue">algorithm </font>
+
+  (sigma1,U1,VT1):=<font color="red">Matrices.LAPACK.dgesvd</font>(M);
+
+  <font color="red">Matrices.printMatrix</font>(U1, 6, &quot;U1&quot;);
+  <font color="red">Matrices.printMatrix</font>(VT1, 6, &quot;VT1&quot;);
+  <font color="red">Vectors.printVector</font>(sigma1, 6, &quot;sigma1&quot;);
+
+<font color="blue">end </font>exampleSVD;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE care<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -78,14 +270,44 @@ table   { solid #000; border-collapse: collapse;}
 >Modelica_LinearSystems2.Math.Matrices.Examples</A>.care</H2>
 <B>solve a continuous algebraic Riccati equation</B><p>
 <P><H3>Information</H3></P>
-Extends from Modelica.Icons.Function (Icon for a function).
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>X1[2, 2]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>X2[2, 2]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>X3[2, 2]</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>X1[2, 2]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>X2[2, 2]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>X3[2, 2]</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:57 2009.
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> care <font color="darkgreen">&quot;solve a continuous algebraic Riccati equation&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+
+<font color="blue">protected </font>
+  Real A[2,2]=[4,3; -9/2,-7/2];
+  Real B[2,1]=[1; -1];
+  Real R[1,1]=[1];
+  Real Q[2,2]=[9,6; 6,4];
+<font color="blue">public </font>
+  <font color="blue">output </font>Real X1[2,2]=<font color="red">Matrices.care</font>(A, B, R, Q, false);
+  <font color="blue">output </font>Real X2[2,2]=<font color="red">Matrices.care</font>(A, B, R, Q, true);
+  <font color="blue">output </font>Real X3[2,2]=[9*(1 +<font color="red"> sqrt</font>(2)),6*(1 +<font color="red"> sqrt</font>(2)); 6*(1 +<font color="red"> sqrt</font>(2)),4*(1 +
+      <font color="red">sqrt</font>(2))];
+
+<font color="blue">algorithm </font>
+  <font color="red"> Modelica.Utilities.Streams.print</font>(&quot;Solution X1 without subsequent Newton refinement&quot;);
+  <font color="red"> Matrices.printMatrix</font>(X1, 16, &quot;X1&quot;);
+  <font color="red"> Modelica.Utilities.Streams.print</font>(&quot;Solution X2 with subsequent Newton refinement&quot;);
+  <font color="red"> Matrices.printMatrix</font>(X2, 16, &quot;X2&quot;);
+  <font color="red"> Modelica.Utilities.Streams.print</font>(&quot;Exact solution X3&quot;);
+  <font color="red"> Matrices.printMatrix</font>(X3, 16, &quot;X3&quot;);
+<font color="blue">end </font>care;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:28:54 2010.
 </address></BODY>
 </HTML>

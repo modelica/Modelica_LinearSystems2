@@ -24,13 +24,11 @@ table   { solid #000; border-collapse: collapse;}
 <B>Demonstrate the usage of package Controller</B>
 <P>
 <P><H3>Information</H3></P>
-Extends from Modelica.Icons.Library (Icon for library).
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons_Library.html#Modelica.Icons.Library"
+>Modelica.Icons.Library</A> (Icon for library).
 <P><H3>Package Content</H3><p>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
 <TR><TH >Name</TH><TH>Description</TH></TR>
-<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Examples.ComponentsS.png" ALT="Modelica_LinearSystems2.Controller.Examples.Components" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples_Components.html#Modelica_LinearSystems2.Controller.Examples.Components"
->Components</A>
-</TD><TD>Contains components of the systems used in Examples package</TD></TR>
 <TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Examples.FirstExampleS.png" ALT="Modelica_LinearSystems2.Controller.Examples.FirstExample" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples.FirstExample"
 >FirstExample</A>
 </TD><TD>First example to demonstrate representative block</TD></TR>
@@ -39,8 +37,24 @@ Extends from Modelica.Icons.Library (Icon for library).
 </TD><TD>Simple P-PI cascade controller to control a flexible drive</TD></TR>
 <TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Examples.DoublePendulumS.png" ALT="Modelica_LinearSystems2.Controller.Examples.DoublePendulum" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples.DoublePendulum"
 >DoublePendulum</A>
-</TD><TD>&nbsp;</TD></TR>
+</TD><TD>Crane trolley controlled by a state feedback controller</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Examples.Discretization1S.png" ALT="Modelica_LinearSystems2.Controller.Examples.Discretization1" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples.Discretization1"
+>Discretization1</A>
+</TD><TD>Demonstrates the discretization methods</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Examples.Discretization1S.png" ALT="Modelica_LinearSystems2.Controller.Examples.Discretization2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples.Discretization2"
+>Discretization2</A>
+</TD><TD>Demonstrates the discretization method for impuls exact discretization</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Examples.Discretization1S.png" ALT="Modelica_LinearSystems2.Controller.Examples.DiscretizationSeries" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples.DiscretizationSeries"
+>DiscretizationSeries</A>
+</TD><TD>Demonstrates the discretization methods for a series connection</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Examples.Discretization1S.png" ALT="Modelica_LinearSystems2.Controller.Examples.Interpolator" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples.Interpolator"
+>Interpolator</A>
+</TD><TD>Demonstrate usage of Interpolator</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.Examples.ComponentsS.png" ALT="Modelica_LinearSystems2.Controller.Examples.Components" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Examples_Components.html#Modelica_LinearSystems2.Controller.Examples.Components"
+>Components</A>
+</TD><TD>Contains components of the systems used in Examples package</TD></TR>
 </TABLE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE FirstExample<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -48,14 +62,64 @@ Extends from Modelica.Icons.Library (Icon for library).
 <A NAME="Modelica_LinearSystems2.Controller.Examples.FirstExample"></A><A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
 >Modelica_LinearSystems2.Controller.Examples</A>.FirstExample</H2>
 <B>First example to demonstrate representative block</B><p>
+<IMG SRC="Modelica_LinearSystems2.Controller.Examples.FirstExampleD.png" ALT="Modelica_LinearSystems2.Controller.Examples.FirstExample">
 <P><H3>Information</H3></P>
-Extends from Modelica.Icons.Example (Icon for an example model).
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for an example model).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>w</TD><TD>&nbsp;</TD></TR>
-<TR><TD>D</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>w</TD><TD>10</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>D</TD><TD>0.1</TD><TD>&nbsp;</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> FirstExample <font color="darkgreen">
+  &quot;First example to demonstrate representative block&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">parameter </font>Real w=10;
+  <font color="blue">parameter </font>Real D=0.1;
+<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Step"
+>Modelica.Blocks.Sources.Step</A> step(
+    startTime=0.5,
+    height=1.2,
+    offset=0.2);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.StateSpace"
+>Modelica_LinearSystems2.Controller.StateSpace</A> stateSpace(
+    x_start={0.1,0},
+    initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState,
+    system(
+      A=[0,1; -w*w,-2*w*D],
+      B=[0; w*w],
+      C=[1,0],
+      D=[0]),
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.TransferFunction"
+>TransferFunction</A> transferFunction(system(n={1,2}, d={1,2,3}), blockType=
+        Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.ZerosAndPoles"
+>ZerosAndPoles</A> zerosAndPoles(system(
+      n1={1},
+      n2=<font color="red">fill</font>(
+          0,
+          0,
+          2),
+      d1=<font color="red">fill</font>(0, 0),
+      d2=[1,1; 1,1]), blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption);
+  <font color="blue">inner </font><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SampleClock"
+>SampleClock</A> sampleClock(
+      sampleTime=0.1, blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous);</textblock>
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(step.y, stateSpace.u[1]);
+  <font color="red">connect</font>(transferFunction.u, step.y);
+  <font color="red">connect</font>(zerosAndPoles.u, step.y);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>FirstExample;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE SimpleControlledDrive<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -63,6 +127,7 @@ Extends from Modelica.Icons.Example (Icon for an example model).
 <A NAME="Modelica_LinearSystems2.Controller.Examples.SimpleControlledDrive"></A><A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
 >Modelica_LinearSystems2.Controller.Examples</A>.SimpleControlledDrive</H2>
 <B>Simple P-PI cascade controller to control a flexible drive</B><p>
+<IMG SRC="Modelica_LinearSystems2.Controller.Examples.SimpleControlledDriveD.png" ALT="Modelica_LinearSystems2.Controller.Examples.SimpleControlledDrive">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -113,23 +178,96 @@ In the following figure simulation results of the discrete and
 of the continuous controller are shown:
 </p>
 <p align="center">
-<img src="../Extras/Images/SimpleControlledDrive_Plot1.png">
+<img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/SimpleControlledDrive_Plot1.png">
 </p>
 <pre></PRE><P>
-Extends from Modelica.Icons.Example (Icon for an example model).
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for an example model).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>kp</TD><TD>Gain of P position controller</TD></TR>
-<TR><TD>kv</TD><TD>Gain of PI speed controller</TD></TR>
-<TR><TD>Tv</TD><TD>Time constant of PI speed controller [s]</TD></TR>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>kp</TD><TD>10</TD><TD>Gain of P position controller</TD></TR>
+<TR><TD>Real</TD><TD>kv</TD><TD>9</TD><TD>Gain of PI speed controller</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Time</A></TD><TD>Tv</TD><TD>0.05</TD><TD>Time constant of PI speed controller [s]</TD></TR>
 </TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> SimpleControlledDrive <font color="darkgreen">
+  &quot;Simple P-PI cascade controller to control a flexible drive&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">parameter </font>Real kp = 10 <font color="darkgreen">&quot;Gain of P position controller&quot;</font>;
+  <font color="blue">parameter </font>Real kv = 9 <font color="darkgreen">&quot;Gain of PI speed controller&quot;</font>;
+  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Modelica.SIunits.Time</A> Tv = 0.05 <font color="darkgreen">
+    &quot;Time constant of PI speed controller&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_Rotational_Components.html#Modelica.Mechanics.Rotational.Components.Inertia"
+>Modelica.Mechanics.Rotational.Components.Inertia</A> motorInertia(J=0.1);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_Rotational_Components.html#Modelica.Mechanics.Rotational.Components.Inertia"
+>Modelica.Mechanics.Rotational.Components.Inertia</A> loadInertia(J=0.3);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_Rotational_Components.html#Modelica.Mechanics.Rotational.Components.SpringDamper"
+>Modelica.Mechanics.Rotational.Components.SpringDamper</A> spring(c=1e5, d=100);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_Rotational_Sources.html#Modelica.Mechanics.Rotational.Sources.Torque"
+>Modelica.Mechanics.Rotational.Sources.Torque</A> torque;
+  <font color="blue">inner </font><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SampleClock"
+>SampleClock</A> sampleClock(sampleTime=0.005, blockType=
+        Modelica_LinearSystems2.Controller.Types.BlockType.Discrete);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp"
+>Modelica.Blocks.Sources.Ramp</A> ramp(duration=2);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Filter"
+>Filter</A> filter(
+    f_cut=5,
+    analogFilter=Modelica_LinearSystems2.Types.AnalogFilter.Bessel,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Sampler"
+>Sampler</A> sampler3(sampleFactor=2);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Feedback"
+>Modelica.Blocks.Math.Feedback</A> feedback;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Gain"
+>Modelica.Blocks.Math.Gain</A> gain(k=kp);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_Rotational_Sensors.html#Modelica.Mechanics.Rotational.Sensors.AngleSensor"
+>Modelica.Mechanics.Rotational.Sensors.AngleSensor</A> angle;
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Feedback"
+>Modelica.Blocks.Math.Feedback</A> feedback2;
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.PI"
+>PI</A> PI1(k=kv, T=Tv,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Mechanics_Rotational_Sensors.html#Modelica.Mechanics.Rotational.Sensors.SpeedSensor"
+>Modelica.Mechanics.Rotational.Sensors.SpeedSensor</A> speed;
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Sampler"
+>Sampler</A> sampler1(sampleFactor=2);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Sampler"
+>Sampler</A> sampler2(sampleFactor=2);</textblock>
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(motorInertia.flange_b, spring.flange_a);
+  <font color="red">connect</font>(spring.flange_b, loadInertia.flange_a);
+  <font color="red">connect</font>(sampler1.y, feedback.u2);
+  <font color="red">connect</font>(sampler2.y, feedback2.u2);
+  <font color="red">connect</font>(speed.w, sampler2.u);
+  <font color="red">connect</font>(angle.phi, sampler1.u);
+  <font color="red">connect</font>(torque.flange, motorInertia.flange_a);
+  <font color="red">connect</font>(motorInertia.flange_a, angle.flange);
+  <font color="red">connect</font>(motorInertia.flange_b, speed.flange);
+  <font color="red">connect</font>(filter.u, ramp.y);
+  <font color="red">connect</font>(sampler3.y, feedback.u1);
+  <font color="red">connect</font>(feedback.y, gain.u);
+  <font color="red">connect</font>(gain.y, feedback2.u1);
+  <font color="red">connect</font>(feedback2.y, PI1.u);
+  <font color="red">connect</font>(torque.tau, PI1.y);
+  <font color="red">connect</font>(filter.y, sampler3.u);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>SimpleControlledDrive;
+</PRE>
+<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE DoublePendulum<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
 <H2><IMG SRC="Modelica_LinearSystems2.Controller.Examples.DoublePendulumI.png" ALT="Modelica_LinearSystems2.Controller.Examples.DoublePendulum" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
 <A NAME="Modelica_LinearSystems2.Controller.Examples.DoublePendulum"></A><A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
 >Modelica_LinearSystems2.Controller.Examples</A>.DoublePendulum</H2>
+<B>Crane trolley controlled by a state feedback controller</B><p>
+<IMG SRC="Modelica_LinearSystems2.Controller.Examples.DoublePendulumD.png" ALT="Modelica_LinearSystems2.Controller.Examples.DoublePendulum">
 <P><H3>Information</H3></P>
 <PRE></pre>
  
@@ -144,8 +282,386 @@ are generated by call of Modelica_LinearSystems2.Examples.StateSpace.craneContro
   [1] Föllinger, O. "Regelungstechnik", Hüthig-Verlag
 </PRE>
 <pre></PRE><P>
-Extends from Modelica.Icons.Example (Icon for an example model), <A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.SimpleStateSpaceControl"
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for an example model), <A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.SimpleStateSpaceControl"
 >Templates.SimpleStateSpaceControl</A> (Template for simple state feedback controllers with an optional pre-filter).
-<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Tue Sep 08 18:52:57 2009.
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> DoublePendulum <font color="darkgreen">
+  &quot;Crane trolley controlled by a state feedback controller&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates.SimpleStateSpaceControl"
+>Templates.SimpleStateSpaceControl</A>(
+    <font color="blue">redeclare </font><A HREF="Modelica_LinearSystems2_Controller_Examples_Components.html#Modelica_LinearSystems2.Controller.Examples.Components.DoublePendulum2"
+>Components.DoublePendulum2</A> plant(
+      additionalMeasurableOutputs=true,
+      m_trolley=5,
+      m_load=20,
+      length=2,
+      n=6,
+      l=6,
+      phi1_start=-0.69813170079773,
+      phi2_start=-0.34906585039887),
+    preFilter(
+      matrixName=&quot;M_pa&quot;,
+      fileName=Modelica_LinearSystems2.DataDir + &quot;doublePendulumController.mat&quot;,
+      matrixOnFile=true),
+    feedbackMatrix(
+      matrixOnFile=true,
+      matrixName=&quot;K_pa&quot;,
+      fileName=Modelica_LinearSystems2.DataDir + &quot;doublePendulumController.mat&quot;),
+    sampleClock(sampleTime=0.01, blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete));
+
+<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Pulse"
+>Modelica.Blocks.Sources.Pulse</A> pulse(
+    offset=0,
+    amplitude=3,
+    width=50,
+    startTime=5,
+    period=10);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.FirstOrder"
+>FirstOrder</A> firstOrder(T=0.25);</textblock>
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(firstOrder.u, pulse.y);
+  <font color="red">connect</font>(firstOrder.y, preFilter.u[1]);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>DoublePendulum;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Discretization1<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Examples.Discretization1I.png" ALT="Modelica_LinearSystems2.Controller.Examples.Discretization1" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Examples.Discretization1"></A><A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
+>Modelica_LinearSystems2.Controller.Examples</A>.Discretization1</H2>
+<B>Demonstrates the discretization methods</B><p>
+<IMG SRC="Modelica_LinearSystems2.Controller.Examples.Discretization1D.png" ALT="Modelica_LinearSystems2.Controller.Examples.Discretization1">
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+Demonstrates the different discretization methods by simulating the step
+response of a second order system as continuous system and as discrete system
+with the supported discretization methods. The step starts with an offset at 0.1 s
+to demonstrate the steady-state initialization.
+</p>
+
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for an example model).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>w</TD><TD>20</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>D</TD><TD>0.1</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Discretization1 <font color="darkgreen">&quot;Demonstrates the discretization methods&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">parameter </font>Real w=20;
+  <font color="blue">parameter </font>Real D=0.1;
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SecondOrder"
+>Modelica_LinearSystems2.Controller.SecondOrder</A> continuous(w=w, D=D);
+  <font color="blue">inner </font><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SampleClock"
+>Modelica_LinearSystems2.Controller.SampleClock</A> sampleClock(sampleTime=
+        0.01);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Step"
+>Modelica.Blocks.Sources.Step</A> step(
+    height=1.2,
+    offset=0.2,
+    startTime=0.1);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SecondOrder"
+>Modelica_LinearSystems2.Controller.SecondOrder</A> explicitEuler(
+    w=w,
+    D=D,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ExplicitEuler);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SecondOrder"
+>Modelica_LinearSystems2.Controller.SecondOrder</A> implicitEuler(
+    w=w,
+    D=D,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ImplicitEuler);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SecondOrder"
+>Modelica_LinearSystems2.Controller.SecondOrder</A> trapezoid(
+    w=w,
+    D=D,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.Trapezoidal);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SecondOrder"
+>Modelica_LinearSystems2.Controller.SecondOrder</A> impulseExact(
+    w=w,
+    D=D,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ImpulseExact);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SecondOrder"
+>Modelica_LinearSystems2.Controller.SecondOrder</A> stepExact(
+    w=w,
+    D=D,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SecondOrder"
+>Modelica_LinearSystems2.Controller.SecondOrder</A> rampExact(
+    w=w,
+    D=D,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.RampExact);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(step.y, continuous.u);
+  <font color="red">connect</font>(step.y, explicitEuler.u);
+  <font color="red">connect</font>(step.y, implicitEuler.u);
+  <font color="red">connect</font>(step.y, trapezoid.u);
+  <font color="red">connect</font>(step.y, impulseExact.u);
+  <font color="red">connect</font>(step.y, stepExact.u);
+  <font color="red">connect</font>(step.y, rampExact.u);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Discretization1;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Discretization2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Examples.Discretization1I.png" ALT="Modelica_LinearSystems2.Controller.Examples.Discretization2" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Examples.Discretization2"></A><A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
+>Modelica_LinearSystems2.Controller.Examples</A>.Discretization2</H2>
+<B>Demonstrates the discretization method for impuls exact discretization</B><p>
+<IMG SRC="Modelica_LinearSystems2.Controller.Examples.Discretization2D.png" ALT="Modelica_LinearSystems2.Controller.Examples.Discretization2">
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+Demonstrates the different discretization methods by simulating the step
+response of a second order system as continuous system and as discrete system
+with the supported discretization methods. The step starts with an offset at 0.1 s
+to demonstrate the steady-state initialization.
+</p>
+
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for an example model).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>w</TD><TD>20</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>D</TD><TD>0.1</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Discretization2 <font color="darkgreen">
+  &quot;Demonstrates the discretization method for impuls exact discretization&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">parameter </font>Real w=20;
+  <font color="blue">parameter </font>Real D=0.1;
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SampleClock"
+>Modelica_LinearSystems2.Controller.SampleClock</A> sampleClock(sampleTime=
+        0.01);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SecondOrder"
+>Modelica_LinearSystems2.Controller.SecondOrder</A> impulseExact(
+    D=D,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ImpulseExact,
+    w=w);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SecondOrder"
+>Modelica_LinearSystems2.Controller.SecondOrder</A> continuous(D=D, w=w);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Derivative"
+>Derivative</A> derivative(T=1e-8);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Pulse"
+>Modelica.Blocks.Sources.Pulse</A> pulse(
+    startTime=0.1,
+    period=1,
+    width=sampleClock.sampleTime*100);
+  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Step"
+>Modelica.Blocks.Sources.Step</A> step1(
+    startTime=0.1,
+    height=1,
+    offset=0);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(pulse.y, impulseExact.u);
+  <font color="red">connect</font>(continuous.u, derivative.y);
+  <font color="red">connect</font>(step1.y, derivative.u);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Discretization2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE DiscretizationSeries<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Examples.Discretization1I.png" ALT="Modelica_LinearSystems2.Controller.Examples.DiscretizationSeries" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Examples.DiscretizationSeries"></A><A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
+>Modelica_LinearSystems2.Controller.Examples</A>.DiscretizationSeries</H2>
+<B>Demonstrates the discretization methods for a series connection</B><p>
+<IMG SRC="Modelica_LinearSystems2.Controller.Examples.DiscretizationSeriesD.png" ALT="Modelica_LinearSystems2.Controller.Examples.DiscretizationSeries">
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+Demonstrates the different discretization methods by simulating the step
+response of a second order system as continuous system and as discrete system
+with the supported discretization methods. The step starts with an offset at 0.1 s
+to demonstrate the steady-state initialization.
+</p>
+
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for an example model).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockType"
+>BlockType</A></TD><TD>blockType</TD><TD>Modelica_LinearSystems2.Cont...</TD><TD>Type of Sampled blocks (Continuous or Discrete)</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Time</A></TD><TD>sampleTime</TD><TD>0.1</TD><TD>Base sample time for discrete blocks [s]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Time</A></TD><TD>T1</TD><TD>0.2</TD><TD>[s]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Time</A></TD><TD>T2</TD><TD>0.15</TD><TD>[s]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> DiscretizationSeries <font color="darkgreen">
+  &quot;Demonstrates the discretization methods for a series connection&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockType"
+>Types.BlockType</A> blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous <font color="darkgreen">
+    &quot;Type of Sampled blocks (Continuous or Discrete)&quot;</font>;
+  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Modelica.SIunits.Time</A> sampleTime=0.1 <font color="darkgreen">
+    &quot;Base sample time for discrete blocks&quot;</font>;
+  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Modelica.SIunits.Time</A> T1=0.2;
+  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Modelica.SIunits.Time</A> T2=0.15;
+
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller_Examples_Components.html#Modelica_LinearSystems2.Controller.Examples.Components.SeriesConnection"
+>Components.SeriesConnection</A> continuous(
+    T1=T1,
+    T2=T2,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous);
+  <A HREF="Modelica_LinearSystems2_Controller_Examples_Components.html#Modelica_LinearSystems2.Controller.Examples.Components.SeriesConnection"
+>Components.SeriesConnection</A> trapezoidal(
+    T1=T1,
+    T2=T2,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
+    methodType=Modelica_LinearSystems2.Types.Method.Trapezoidal,
+    sampleTime=sampleTime);
+  <A HREF="Modelica_LinearSystems2_Controller_Examples_Components.html#Modelica_LinearSystems2.Controller.Examples.Components.SeriesConnection"
+>Components.SeriesConnection</A> rampExact(
+    T1=T1,
+    T2=T2,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
+    methodType=Modelica_LinearSystems2.Types.Method.RampExact,
+    sampleTime=sampleTime);
+  <A HREF="Modelica_LinearSystems2_Controller_Examples_Components.html#Modelica_LinearSystems2.Controller.Examples.Components.SeriesConnection"
+>Components.SeriesConnection</A> stepExact(
+    T1=T1,
+    T2=T2,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
+    methodType=Modelica_LinearSystems2.Types.Method.StepExact,
+    sampleTime=sampleTime);</textblock>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>DiscretizationSeries;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Interpolator<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.Examples.Discretization1I.png" ALT="Modelica_LinearSystems2.Controller.Examples.Interpolator" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.Examples.Interpolator"></A><A HREF="Modelica_LinearSystems2_Controller_Examples.html#Modelica_LinearSystems2.Controller.Examples"
+>Modelica_LinearSystems2.Controller.Examples</A>.Interpolator</H2>
+<B>Demonstrate usage of Interpolator</B><p>
+<IMG SRC="Modelica_LinearSystems2.Controller.Examples.InterpolatorD.png" ALT="Modelica_LinearSystems2.Controller.Examples.Interpolator">
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This example demonstrates the usage of the 
+<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Interpolator"
+>Interpolator</a>
+block. This block is used in multi-rate controllers to interpolate between two different
+sample rates. In this example, a sampled sine-signal is interpolated in different ways:
+</p>
+
+<ol>
+<li> A "sine" signal (= blue and red curve in the figure below) is sampled with 20*Ts
+     (= green curve in the figure below) where Ts is the sample time of 1 ms.</li>
+
+<li> This "sine" signal is interpolated with "interpolator1" which has
+     a "continous" blockType. In this case, the interpolator just passes the input
+     signal (y = u) and therefore the signal is identical to the sine signal
+     (therefore the blue and the red curve are the same).</li>
+
+<li> The sampled sine signal is interpolated  with "interpolator2" to arrive
+     at a sample time of 4*Ts (= violet curve in the figure below).
+     This gives a 20*Ts delay and a sine signal
+     sampled with 4*Ts (instead of 20*Ts).</li>
+     
+<li> In order to remove frequencies introduced by the interpolation, "interpolator3"
+     additionally filters the linearly interpolated signal with a mean value filter
+     of the same length (= black curve in the figure below).
+     This gives an additional delay (= a total delay of 24*Ts), but
+     results in a filtered interpolation signal.</li>
+</ol>
+
+<p align="center">
+<IMG src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/Controller/Examples/Interpolator.png">
+</p>
+
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for an example model).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Interpolator <font color="darkgreen">&quot;Demonstrate usage of Interpolator&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Sine"
+>Modelica.Blocks.Sources.Sine</A> sine(freqHz=2,
+    offset=0.1,
+    startTime=0.1);
+  <font color="blue">inner </font><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SampleClock"
+>SampleClock</A> sampleClock(sampleTime=0.001, blockType=
+        Modelica_LinearSystems2.Controller.Types.BlockType.Discrete);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Interpolator"
+>Modelica_LinearSystems2.Controller.Interpolator</A> interpolator1(
+    outputSampleFactor=4,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous,
+    meanValueFilter=false,
+    inputSampleFactor=20);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Interpolator"
+>Modelica_LinearSystems2.Controller.Interpolator</A> interpolator2(
+    outputSampleFactor=4,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+    meanValueFilter=false,
+    inputSampleFactor=20);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Interpolator"
+>Modelica_LinearSystems2.Controller.Interpolator</A> interpolator3(
+    outputSampleFactor=4,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+    inputSampleFactor=20);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Sampler"
+>Sampler</A> sampler(sampleFactor=20);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(sine.y, sampler.u);
+  <font color="red">connect</font>(sampler.y, interpolator2.u);
+  <font color="red">connect</font>(sine.y, interpolator1.u);
+  <font color="red">connect</font>(sampler.y, interpolator3.u);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Interpolator;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:28:47 2010.
 </address></BODY>
 </HTML>

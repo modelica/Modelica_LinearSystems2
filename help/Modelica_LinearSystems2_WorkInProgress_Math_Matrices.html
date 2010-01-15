@@ -1,0 +1,532 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.WorkInProgress.Math.Matrices</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Matrices<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Math.Matrices"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Math.html#Modelica_LinearSystems2.WorkInProgress.Math"
+>Modelica_LinearSystems2.WorkInProgress.Math</A>.Matrices</H2>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspaceS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace"
+>C_nullspace</A>
+</TD><TD>Orthonormal nullspace of a complex matrix</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_QRS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_QR" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_QR"
+>C_QR</A>
+</TD><TD>QR decomposition of a rectangular complex matrix without column pivoting (A = Q*R)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_QRS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_QR2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_QR2"
+>C_QR2</A>
+</TD><TD>QR decomposition of a rectangular complex matrix without column pivoting (A = Q*R)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_rankS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_rank" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_rank"
+>C_rank</A>
+</TD><TD>Rank of a complex matrix (computed with singular values)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValuesS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues"
+>C_singularValues</A>
+</TD><TD>Compute singular values and left and right singular vectors of a complex matrix</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValuesS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2"
+>C_solve2</A>
+</TD><TD>computes the solution to a complex system of linear equations A*X=B, using LU decomposition with partial pivoting and row interchanges</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValuesS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_RQ" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_RQ"
+>C_RQ</A>
+</TD><TD>RQ decomposition of a rectangular complex matrix without column pivoting (A = R*Q)</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE C_nullspace<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspaceI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices"
+>Modelica_LinearSystems2.WorkInProgress.Math.Matrices</A>.C_nullspace</H2>
+<B>Orthonormal nullspace of a complex matrix</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+  <h4>Syntax</h4>
+<blockquote><pre>
+Z = Matrices.<b>nullspace</b>(A);<br>
+(Z, nullity) = Matrices.<b>nullspace</b>(A);
+</pre></blockquote>
+<h4>Description</h4>
+<p>
+This function calculates a orthonormal basis Z=[z_1, z_2, ...] of the nullspace of a matrix A, i.e. A*z_i=0.
+</p>
+The nullspace is obtained by svd method. That is, matrix A is dcomposed into the matrices S, U, V: 
+<blockquote><pre>
+        H
+ <b>A</b> = <b>U</b><b>S</b><b>V</b>
+</pre></blockquote>
+with the orthonormal matrices U and V and the matrix S with
+<blockquote><pre>
+ <b>S</b> = [<b>S</b>1, <b>0</b>]
+ <b>S</b>1 = [diag(s); <b>0</b>]
+</pre></blockquote>
+with the singular values s={s1, s2, ..., sr} of A and r=rank(A). Note, that S has the same size as A. Since, U and V are orthonormal, we may write
+<blockquote><pre>
+  H
+ <b>U</b>*A*V = [<b>S</b>1, <b>0</b>].
+</pre></blockquote>
+Matrix S1 obviously has full column rank and therefore, the left n-r rows (n is the number of columns of A or S) of matrix V span a nullspace of A.
+</p>
+<p>
+The nullity of matrix A is the dimension of the nullspace of A. In view of the above, it becomes clear that nullity holds
+<blockquote><pre>
+ nullity = n - r
+</pre></blockquote>
+with
+<blockquote><pre>
+ n = number of columns of matrix A
+ r = rank(A)
+</pre></blockquote>
+
+</p>
+<p>
+<h4>Example</h4>
+<blockquote><pre>
+  A = [1, 2,  3, 1;
+       3, 4,  5, 2;
+      -1, 2, -3, 3];
+  (Z, nullity) = nullspace(A);
+  
+  results in:
+  
+  Z=[0.1715;
+    -0.686;
+     0.1715;
+     0.686]
+     
+  nullity = 1
+</pre></blockquote>
+</p>
+<h4>See also</h4>
+<A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Math_Matrices.html#Modelica.Math.Matrices.singularValues"
+>Matrices.singularValues</a>
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>input matrix</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>Z[size(A, 2), :]</TD><TD>orthonormal nullspace of matrix A</TD></TR>
+<TR><TD>Integer</TD><TD>nullity</TD><TD>nullity, i.e. the dimension of the nullspace</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> C_nullspace <font color="darkgreen">&quot;Orthonormal nullspace of a complex matrix&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A> A[:,:] <font color="darkgreen">&quot;input matrix&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A> Z[<font color="red">size</font>(A, 2),:] <font color="darkgreen">
+    &quot;orthonormal nullspace of matrix A&quot;</font>;
+  <font color="blue">output </font>Integer nullity <font color="darkgreen">&quot;nullity, i.e. the dimension of the nullspace&quot;</font>;
+
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A> V[<font color="red">size</font>(A, 2),<font color="red">size</font>(A, 2)] <font color="darkgreen">
+    &quot;Right orthogonal matrix &quot;</font>;
+  Real sigma[<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2))] <font color="darkgreen">&quot;singular values&quot;</font>;
+  Integer rank <font color="darkgreen">&quot;rank of matrix A&quot;</font>;
+  Real eps <font color="darkgreen">&quot;tolerance for rank determination&quot;</font>;
+  Integer n=<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2));
+  Integer i=n;
+
+<font color="blue">algorithm </font>
+  (sigma,,V) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues</font>(
+                                                                       A);
+  V :=<font color="red"> Modelica_LinearSystems2.Math.Complex.Internal.C_transpose</font>(V);
+  <font color="darkgreen">// rank computation</font>
+  eps :=<font color="red"> max</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2))*<font color="red">max</font>(sigma)*Modelica.Constants.eps;
+  rank := 0;
+  <font color="blue">if </font>n &gt; 0<font color="blue"> then</font>
+    <font color="blue">while </font>i &gt; 0<font color="blue"> loop</font>
+      <font color="blue">if </font>sigma[i] &gt; eps<font color="blue"> then</font>
+        rank := i;
+        i := 0;
+      <font color="blue">end if</font>;
+      i := i - 1;
+    <font color="blue">end while</font>;
+  <font color="blue">end if</font>;
+  Z := V[:,rank + 1:<font color="red">size</font>(A,2)];<font color="darkgreen">// nullspace computation</font>
+  nullity :=<font color="red"> size</font>(A,2) - rank;<font color="darkgreen">// nullity</font>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>C_nullspace;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE C_QR<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_QR"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices"
+>Modelica_LinearSystems2.WorkInProgress.Math.Matrices</A>.C_QR</H2>
+<B>QR decomposition of a rectangular complex matrix without column pivoting (A = Q*R)</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Rectangular matrix with size(A,1) &gt;= size(A,2)</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>Q[size(A, 1), size(A, 2)]</TD><TD>Rectangular matrix with orthonormal columns such that Q*R=A[:,p]</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>R[min(size(A, 1), size(A, 2)), size(A, 2)]</TD><TD>Square upper triangular matrix</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> C_QR <font color="darkgreen">
+  &quot;QR decomposition of a rectangular complex matrix without column pivoting (A = Q*R)&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> A[:,:] <font color="darkgreen">&quot;Rectangular matrix with size(A,1) &gt;= size(A,2)&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> Q[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">
+    &quot;Rectangular matrix with orthonormal columns such that Q*R=A[:,p]&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> R[<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2)),<font color="red">size</font>(A, 2)] <font color="darkgreen">
+    &quot;Square upper triangular matrix&quot;</font>;
+
+<font color="blue">protected </font>
+  Integer nrow=<font color="red">size</font>(A, 1);
+  Integer ncol=<font color="red">size</font>(A, 2);
+  Integer minrowcol=<font color="red">min</font>(nrow, ncol);
+
+<font color="blue">algorithm </font>
+  <font color="red">assert</font>(nrow &gt;= ncol, &quot;\nInput matrix A[&quot; +<font color="red"> String</font>(nrow) + &quot;,&quot; +<font color="red"> String</font>(ncol)
+     +&quot;] has more columns as rows. This is not allowed when calling Modelica.Matrices.C_QR(A).&quot;);
+
+  <font color="blue">if </font>minrowcol &gt; 0<font color="blue"> then</font>
+
+    (Q,R) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.zgeqrf</font>(
+                                                                 A);
+
+  <font color="blue">else</font>
+    Q :=<font color="red"> fill</font>(<font color="red">Complex</font>(1),<font color="red"> size</font>(A, 1), 0);
+    R :=<font color="red"> fill</font>(<font color="red">Complex</font>(0), 0,  0);
+  <font color="blue">end if</font>;
+<font color="blue">end </font>C_QR;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE C_QR2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_QR2"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices"
+>Modelica_LinearSystems2.WorkInProgress.Math.Matrices</A>.C_QR2</H2>
+<B>QR decomposition of a rectangular complex matrix without column pivoting (A = Q*R)</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Rectangular matrix with size(A,1) &gt;= size(A,2)</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>Q[size(A, 1), size(A, 1)]</TD><TD>Rectangular matrix with orthonormal columns such that Q*R=A[:,p]</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>R[size(A, 1), size(A, 2)]</TD><TD>Square upper triangular matrix</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> C_QR2 <font color="darkgreen">
+  &quot;QR decomposition of a rectangular complex matrix without column pivoting (A = Q*R)&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> A[:,:] <font color="darkgreen">&quot;Rectangular matrix with size(A,1) &gt;= size(A,2)&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> Q[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)] <font color="darkgreen">
+    &quot;Rectangular matrix with orthonormal columns such that Q*R=A[:,p]&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> R[<font color="red">size</font>(A,1),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Square upper triangular matrix&quot;</font>;
+
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> A2[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)];
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> R2[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)];
+  Integer nrow=<font color="red">size</font>(A, 1);
+  Integer ncol=<font color="red">size</font>(A, 2);
+  Integer minrowcol=<font color="red">min</font>(nrow, ncol);
+
+<font color="blue">algorithm </font>
+  <font color="red">assert</font>(nrow &gt;= ncol, &quot;\nInput matrix A[&quot; +<font color="red"> String</font>(nrow) + &quot;,&quot; +<font color="red"> String</font>(ncol) + &quot;] has more columns as rows.
+This is not allowed when calling Modelica.Matrices.C_QR(A).&quot;);
+
+  <font color="blue">if </font>minrowcol &gt; 0<font color="blue"> then</font>
+
+    <font color="blue">for </font>l1<font color="blue"> in </font>1:<font color="red">size</font>(A, 1)<font color="blue"> loop</font>
+      <font color="blue">for </font>l2<font color="blue"> in </font>1:<font color="red">size</font>(A, 2)<font color="blue"> loop</font>
+        A2[l1, l2] := A[l1, l2];
+      <font color="blue">end for</font>;
+    <font color="blue">end for</font>;
+
+    (Q,R2) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.zgeqrf</font>(
+                                                                  A2);
+    <font color="blue">for </font>l1<font color="blue"> in </font>1:<font color="red">size</font>(R, 1)<font color="blue"> loop</font>
+      <font color="blue">for </font>l2<font color="blue"> in </font>l1:<font color="red">size</font>(R, 2)<font color="blue"> loop</font>
+        R[l1, l2] := R2[l1, l2];
+      <font color="blue">end for</font>;
+    <font color="blue">end for</font>;
+
+  <font color="blue">else</font>
+    Q :=<font color="red"> fill</font>(<font color="red">Complex</font>(1),<font color="red"> size</font>(A, 1), 0);
+    R :=<font color="red"> fill</font>(<font color="red">Complex</font>(0), 0, 0);
+  <font color="blue">end if</font>;
+<font color="blue">end </font>C_QR2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE C_rank<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_rankI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_rank" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_rank"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices"
+>Modelica_LinearSystems2.WorkInProgress.Math.Matrices</A>.C_rank</H2>
+<B>Rank of a complex matrix (computed with singular values)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Matrix</TD></TR>
+<TR><TD>Real</TD><TD>eps</TD><TD>0</TD><TD>If eps &gt; 0, the singular values are checked against eps; otherwise eps=max(size(A))*norm(A)*Modelica.Constants.eps is used</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>result</TD><TD>Rank of matrix A</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> C_rank <font color="darkgreen">
+  &quot;Rank of a complex matrix (computed with singular values)&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A> A[:,:] <font color="darkgreen">&quot;Matrix&quot;</font>;
+  <font color="blue">input </font>Real eps=0 <font color="darkgreen">
+    &quot;If eps &gt; 0, the singular values are checked against eps; otherwise eps=max(size(A))*norm(A)*Modelica.Constants.eps is used&quot;</font>;
+  <font color="blue">output </font>Integer result <font color="darkgreen">&quot;Rank of matrix A&quot;</font>;
+
+<font color="blue">protected </font>
+  Integer n=<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2));
+  Integer i=n;
+  Real sigma[n];
+  Real eps2;
+<font color="blue">algorithm </font>
+  result := 0;
+  <font color="blue">if </font>n &gt; 0<font color="blue"> then</font>
+    sigma :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues</font>(
+                                                                    A);
+    eps2 := <font color="blue">if </font>eps &gt; 0<font color="blue"> then </font>eps<font color="blue"> else </font><font color="red">max</font>(<font color="red">size</font>(A))*sigma[1]*Modelica.Constants.eps;
+    <font color="blue">while </font>i &gt; 0<font color="blue"> loop</font>
+      <font color="blue">if </font>sigma[i] &gt; eps2<font color="blue"> then</font>
+        result := i;
+        i := 0;
+      <font color="blue">end if</font>;
+      i := i - 1;
+    <font color="blue">end while</font>;
+  <font color="blue">end if</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>C_rank;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE C_singularValues<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices"
+>Modelica_LinearSystems2.WorkInProgress.Math.Matrices</A>.C_singularValues</H2>
+<B>Compute singular values and left and right singular vectors of a complex matrix</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>sigma[min(size(A, 1), size(A, 2))]</TD><TD>singular values</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>U[size(A, 1), size(A, 1)]</TD><TD>Left orthogonal matrix</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>VT[size(A, 2), size(A, 2)]</TD><TD>Transposed right orthogonal matrix</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> C_singularValues <font color="darkgreen">
+  &quot;Compute singular values and left and right singular vectors of a complex matrix&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> A[:,:] <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
+  <font color="blue">output </font>Real sigma[<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2))] <font color="darkgreen">&quot;singular values&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> U[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)] <font color="darkgreen">&quot;Left orthogonal matrix&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> VT[<font color="red">size</font>(A, 2),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Transposed right orthogonal matrix&quot;</font>;
+
+<font color="blue">protected </font>
+  Integer info;
+  Integer n=<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2)) <font color="darkgreen">&quot;Number of singular values&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="blue">if </font>n &gt; 0<font color="blue"> then</font>
+    (sigma,U,VT,info) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.zgesvd</font>(
+                                                                             A);
+    <font color="red">assert</font>(info == 0, &quot;The numerical algorithm to compute the singular value decomposition did not converge&quot;);
+  <font color="blue">end if</font>;
+<font color="blue">end </font>C_singularValues;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE C_solve2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices"
+>Modelica_LinearSystems2.WorkInProgress.Math.Matrices</A>.C_solve2</H2>
+<B>computes the solution to a complex system of linear equations A*X=B, using LU decomposition with partial pivoting and row interchanges</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>B[size(A, 1), :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>X[size(A, 1), size(B, 2)]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> C_solve2 <font color="darkgreen">
+  &quot;computes the solution to a complex system of linear equations A*X=B, using LU decomposition with partial pivoting and row interchanges&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> A[:,<font color="red">size</font>(A, 1)];
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> B[<font color="red">size</font>(A, 1),:];
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> X[<font color="red">size</font>(A, 1),<font color="red">size</font>(B, 2)];
+
+<font color="blue">protected </font>
+  Integer info;
+<font color="blue">algorithm </font>
+  (X,info) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.zgesv</font>(
+                                                                 A, B);
+  <font color="red">assert</font>(info == 0, &quot;Solving a linear system of equations with function
+\&quot;Matrices.C_solve2\&quot; is not possible, because the system has either
+no or infinitely many solutions (A is singular).&quot;);
+<font color="blue">end </font>C_solve2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE C_RQ<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_RQ"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Math_Matrices.html#Modelica_LinearSystems2.WorkInProgress.Math.Matrices"
+>Modelica_LinearSystems2.WorkInProgress.Math.Matrices</A>.C_RQ</H2>
+<B>RQ decomposition of a rectangular complex matrix without column pivoting (A = R*Q)</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Rectangular matrix with size(A,1) &gt;= size(A,2)</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>R[size(A, 1), size(A, 1)]</TD><TD>Rectangular matrix with orthonormal columns such that Q*R=A[:,p]</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>Q[size(A, 1), size(A, 2)]</TD><TD>Square upper triangular matrix</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> C_RQ <font color="darkgreen">
+  &quot;RQ decomposition of a rectangular complex matrix without column pivoting (A = R*Q)&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> A[:,:] <font color="darkgreen">&quot;Rectangular matrix with size(A,1) &gt;= size(A,2)&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> R[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)] <font color="darkgreen">
+    &quot;Rectangular matrix with orthonormal columns such that Q*R=A[:,p]&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> Q[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Square upper triangular matrix&quot;</font>;
+
+<font color="blue">protected </font>
+  Integer nrow=<font color="red">size</font>(A, 1);
+  Integer ncol=<font color="red">size</font>(A, 2);
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> RQ[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)];
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> tau[:];
+
+<font color="blue">algorithm </font>
+  <font color="red">assert</font>(nrow &lt;= ncol, &quot;\nInput matrix A[&quot; +<font color="red"> String</font>(nrow) + &quot;,&quot; +<font color="red"> String</font>(ncol)
+     +&quot;] has more rows as columns. This is not allowed when calling Modelica.Matrices.C_RQ(A).&quot;);
+
+  <font color="blue">if </font><font color="red">min</font>(nrow,ncol) &gt; 0<font color="blue"> then</font>
+    (RQ, tau) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.zgerq2</font>(
+                                                                     A);
+
+    <font color="blue">for </font>i<font color="blue"> in </font>1:nrow<font color="blue"> loop</font>
+      <font color="blue">for </font>ii<font color="blue"> in </font>i:nrow<font color="blue"> loop</font>
+        R[i, ii] := RQ[i, ii+ncol-nrow];
+      <font color="blue">end for</font>;
+    <font color="blue">end for</font>;
+    Q :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.zungrq</font>(
+                                                             RQ, tau);
+  <font color="blue">else</font>
+    Q :=<font color="red"> fill</font>(<font color="red">Complex</font>(1),<font color="red"> size</font>(A, 1), 0);
+    R :=<font color="red"> fill</font>(<font color="red">Complex</font>(0), 0,  0);
+  <font color="blue">end if</font>;
+<font color="blue">end </font>C_RQ;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:29:02 2010.
+</address></BODY>
+</HTML>

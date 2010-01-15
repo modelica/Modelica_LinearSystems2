@@ -1,0 +1,145 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.WorkInProgress.Controller.Examples</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Examples<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Controller.Examples"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Controller.html#Modelica_LinearSystems2.WorkInProgress.Controller"
+>Modelica_LinearSystems2.WorkInProgress.Controller</A>.Examples</H2>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Controller.Examples.TestComponentsS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Controller.Examples.TestComponents" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Controller_Examples.html#Modelica_LinearSystems2.WorkInProgress.Controller.Examples.TestComponents"
+>TestComponents</A>
+</TD><TD>test all Controller blocks</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE TestComponents<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Controller.Examples.TestComponentsI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Controller.Examples.TestComponents" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Controller.Examples.TestComponents"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Controller_Examples.html#Modelica_LinearSystems2.WorkInProgress.Controller.Examples"
+>Modelica_LinearSystems2.WorkInProgress.Controller.Examples</A>.TestComponents</H2>
+<B>test all Controller blocks</B><p>
+<IMG SRC="Modelica_LinearSystems2.WorkInProgress.Controller.Examples.TestComponentsD.png" ALT="Modelica_LinearSystems2.WorkInProgress.Controller.Examples.TestComponents">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for an example model).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>w</TD><TD>10</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>D</TD><TD>0.1</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> TestComponents <font color="darkgreen">&quot;test all Controller blocks&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">parameter </font>Real w=10;
+  <font color="blue">parameter </font>Real D=0.1;
+<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Step"
+>Modelica.Blocks.Sources.Step</A> step(
+    startTime=0.5,
+    height=1.2,
+    offset=0.2);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.StateSpace"
+>Modelica_LinearSystems2.Controller.StateSpace</A> stateSpace(
+    x_start={0.1,0},
+    initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState,
+    system(
+      A=[0,1; -w*w,-2*w*D],
+      B=[0; w*w],
+      C=[1,0],
+      D=[0]),
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.TransferFunction"
+>Modelica_LinearSystems2.Controller.TransferFunction</A> transferFunction(system(n=
+         {1,2}, d={1,2,3}), blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.ZerosAndPoles"
+>Modelica_LinearSystems2.Controller.ZerosAndPoles</A> zerosAndPoles(system(
+      n1={1},
+      n2=<font color="red">fill</font>(
+          0,
+          0,
+          2),
+      d1=<font color="red">fill</font>(0, 0),
+      d2=[1,1; 1,1]), blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption);
+  <font color="blue">inner </font><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SampleClock"
+>Modelica_LinearSystems2.Controller.SampleClock</A> sampleClock(
+    sampleTime=0.1,
+    initType=Modelica_LinearSystems2.Controller.Types.Init.InitialState,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Filter"
+>Modelica_LinearSystems2.Controller.Filter</A> filter;
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.FilterFIR"
+>Modelica_LinearSystems2.Controller.FilterFIR</A> filter1;
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Integrator"
+>Modelica_LinearSystems2.Controller.Integrator</A> integrator;
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Derivative"
+>Modelica_LinearSystems2.Controller.Derivative</A> derivative;
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.FirstOrder"
+>Modelica_LinearSystems2.Controller.FirstOrder</A> firstOrder;
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SecondOrder"
+>Modelica_LinearSystems2.Controller.SecondOrder</A> secondOrder;
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.PI"
+>Modelica_LinearSystems2.Controller.PI</A> pI;
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.PID"
+>Modelica_LinearSystems2.Controller.PID</A> pID(initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialOutput);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.LimPID"
+>Modelica_LinearSystems2.Controller.LimPID</A> PID(initType=
+        Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.NoInit);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.UnitDelay"
+>Modelica_LinearSystems2.Controller.UnitDelay</A> unitDelay;
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.ADconverter"
+>Modelica_LinearSystems2.Controller.ADconverter</A> aDconverter(
+    y_max=1000,
+    y_min=-1000,
+    bits=0);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.DAconverter"
+>Modelica_LinearSystems2.Controller.DAconverter</A> dAconverter(
+    y_max=1000,
+    y_min=-1000,
+    bits=0);
+  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Noise"
+>Modelica_LinearSystems2.Controller.Noise</A> noise(y_min=0, y_max=1);</textblock>
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(step.y, stateSpace.u[1]);
+  <font color="red">connect</font>(transferFunction.u, step.y);
+  <font color="red">connect</font>(zerosAndPoles.u, step.y);
+  <font color="red">connect</font>(filter.u, step.y);
+  <font color="red">connect</font>(filter1.u, step.y);
+  <font color="red">connect</font>(integrator.u, step.y);
+  <font color="red">connect</font>(derivative.u, step.y);
+  <font color="red">connect</font>(firstOrder.u, step.y);
+  <font color="red">connect</font>(secondOrder.u, step.y);
+  <font color="red">connect</font>(pI.u, step.y);
+  <font color="red">connect</font>(pID.u, step.y);
+  <font color="red">connect</font>(PID.u_s, step.y);
+  <font color="red">connect</font>(unitDelay.u, step.y);
+  <font color="red">connect</font>(aDconverter.u, step.y);
+  <font color="red">connect</font>(dAconverter.u, step.y);
+  <font color="red">connect</font>(unitDelay.y, PID.u_m);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>TestComponents;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:29:04 2010.
+</address></BODY>
+</HTML>

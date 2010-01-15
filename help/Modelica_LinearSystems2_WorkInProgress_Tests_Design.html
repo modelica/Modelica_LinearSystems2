@@ -1,0 +1,1456 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.WorkInProgress.Tests.Design</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Tests for controller design&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Design<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests.html#Modelica_LinearSystems2.WorkInProgress.Tests"
+>Modelica_LinearSystems2.WorkInProgress.Tests</A>.Design</H2>
+<B>Tests for controller design</B>
+<P>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.care.care1S.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbers" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbers"
+>conditionNumbers</A>
+</TD><TD>Calculate several condition numbers to evaluate a pole assigment method</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.care.care1S.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Chow_Kokotovic" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Chow_Kokotovic"
+>data_Chow_Kokotovic</A>
+</TD><TD>Example for pole assignment</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.care.care1S.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Kautsky1" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Kautsky1"
+>data_Kautsky1</A>
+</TD><TD>Example for pole assignment</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.care.care1S.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Kautsky2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Kautsky2"
+>data_Kautsky2</A>
+</TD><TD>Example for pole assignment</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.care.care1S.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Laub" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Laub"
+>data_Laub</A>
+</TD><TD>Example for pole assignment</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.care.care1S.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers3" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers3"
+>data_Byers3</A>
+</TD><TD>Example for pole assignment</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.care.care1S.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers4" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers4"
+>data_Byers4</A>
+</TD><TD>Example for pole assignment</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.care.care1S.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers5" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers5"
+>data_Byers5</A>
+</TD><TD>Example for pole assignment</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.care.care1S.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers6" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers6"
+>data_Byers6</A>
+</TD><TD>Example for pole assignment</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.care.care1S.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Benner6" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Benner6"
+>data_Benner6</A>
+</TD><TD>Example for pole assignment</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_KokotovicS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic"
+>DesignData_Chow_Kokotovic</A>
+</TD><TD>Contains the system matrix A, the input matrix B, the assigned Poles and optionally the ideal feedback matrix</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_KokotovicS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Benner6" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Benner6"
+>DesignData_Benner6</A>
+</TD><TD>Contains the system matrix A, the input matrix B, the assigned Poles and optionally the ideal feedback matrix</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignmentS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignment" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignment"
+>testPoleAssignment</A>
+</TD><TD>Function to assess algorithms for pole assignment</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignmentS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignment2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignment2"
+>testPoleAssignment2</A>
+</TD><TD>Function to assess algorithms for pole assignment</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignmentS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignment3" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignment3"
+>testPoleAssignment3</A>
+</TD><TD>Function to assess algorithms for pole assignment</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignmentS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.runAll" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.runAll"
+>runAll</A>
+</TD><TD>Executes controller design for the according data in directory Test\data</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE conditionNumbers<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbersI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbers" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbers"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.conditionNumbers</H2>
+<B>Calculate several condition numbers to evaluate a pole assigment method</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>K[:, :]</TD><TD>&nbsp;</TD><TD>state feedback matrix</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>X[:, :]</TD><TD>&nbsp;</TD><TD>right eigenvectors of the closed loop system</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>assignedPoles[size(X, 1)]</TD><TD>fill(Complex(0), size(X, 1))</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>calcPoles[size(X, 1)]</TD><TD>fill(Complex(0), size(X, 1))</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>kappa2X</TD><TD>condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2</TD></TR>
+<TR><TD>Real</TD><TD>kappaFroX</TD><TD>condition number kappa_F(X) = ||X||_F * ||inv(X)||_F</TD></TR>
+<TR><TD>Real</TD><TD>kappaFroYT</TD><TD>condition number kappa_F(YT) = ||YT||_F * ||inv(YT)||_F</TD></TR>
+<TR><TD>Real</TD><TD>cInf</TD><TD>condition number vu1=||c||_inf = max(c_j)</TD></TR>
+<TR><TD>Real</TD><TD>norm2K</TD><TD>Euclidean norm of the feedback matrix</TD></TR>
+<TR><TD>Real</TD><TD>normFroK</TD><TD>Frobenius norm of the feedback matrix</TD></TR>
+<TR><TD>Real</TD><TD>kappa2X_B</TD><TD>condition number by Byers, kappa_2XB(X) = (||X||_F)^2 + (||inv(X)||_F)^2</TD></TR>
+<TR><TD>Real</TD><TD>JXK[11]</TD><TD>condition number by Varga, JKX=alpha*(kappa2X_B)/2 + (1-alpha)*normFroK^/22</TD></TR>
+<TR><TD>Real</TD><TD>dl</TD><TD>gap between the assigned and the calculated poles dl=norm(ap-cp)/max(1,norm(ap))</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> conditionNumbers <font color="darkgreen">
+  &quot;Calculate several condition numbers to evaluate a pole assigment method&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print"
+>Modelica.Utilities.Streams.print</A>;
+
+  <font color="blue">input </font>Real K[:,:] <font color="darkgreen">&quot;state feedback matrix&quot;</font>;
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> X[:,:] <font color="darkgreen">&quot;right eigenvectors of the closed loop system&quot;</font>;
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[<font color="red">size</font>(X,1)]=<font color="red">fill</font>(<font color="red">Complex</font>(0),<font color="red">size</font>(X,1));
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> calcPoles[<font color="red">size</font>(X,1)]=<font color="red">fill</font>(<font color="red">Complex</font>(0),<font color="red">size</font>(X,1));
+  <font color="blue">output </font>Real kappa2X <font color="darkgreen">&quot;condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2&quot;</font>;
+  <font color="blue">output </font>Real kappaFroX <font color="darkgreen">&quot;condition number kappa_F(X) = ||X||_F * ||inv(X)||_F&quot;</font>;
+  <font color="blue">output </font>Real kappaFroYT <font color="darkgreen">
+    &quot;condition number kappa_F(YT) = ||YT||_F * ||inv(YT)||_F&quot;</font>;
+  <font color="blue">output </font>Real cInf <font color="darkgreen">&quot;condition number vu1=||c||_inf = max(c_j)&quot;</font>;
+  <font color="blue">output </font>Real norm2K <font color="darkgreen">&quot;Euclidean norm of the feedback matrix&quot;</font>;
+  <font color="blue">output </font>Real normFroK <font color="darkgreen">&quot;Frobenius norm of the feedback matrix&quot;</font>;
+  <font color="blue">output </font>Real kappa2X_B <font color="darkgreen">
+    &quot;condition number by Byers, kappa_2XB(X) = (||X||_F)^2 + (||inv(X)||_F)^2&quot;</font>;
+  <font color="blue">output </font>Real JXK[11] <font color="darkgreen">
+    &quot;condition number by Varga, JKX=alpha*(kappa2X_B)/2 + (1-alpha)*normFroK^/22&quot;</font>;
+  <font color="blue">output </font>Real dl <font color="darkgreen">
+    &quot;gap between the assigned and the calculated poles dl=norm(ap-cp)/max(1,norm(ap))&quot;</font>;
+<font color="blue">protected </font>
+  Integer n=<font color="red">size</font>(X,1);
+  Real c[<font color="red">size</font>(X, 1)] <font color="darkgreen">&quot;condition number cj&quot;</font>;
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> YT[:,:] <font color="darkgreen">&quot;left eigenvectors of the closed loop system&quot;</font>;
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> sortedAssignedPoles[<font color="red">size</font>(X,1)];
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> sortedCalcPoles[<font color="red">size</font>(X,1)];
+
+<font color="blue">algorithm </font>
+  sortedAssignedPoles :=<font color="red"> Complex.Vectors.sortComplex</font>(assignedPoles);
+  sortedCalcPoles :=<font color="red"> Complex.Vectors.sortComplex</font>(calcPoles);
+  dl :=<font color="red"> Complex.Vectors.norm</font>(sortedAssignedPoles-sortedCalcPoles)/<font color="red">max</font>(1,<font color="red">Complex.Vectors.norm</font>(sortedAssignedPoles));
+  YT :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.inv</font>(
+                             X);
+  <font color="blue">for </font>l1<font color="blue"> in </font>1:n<font color="blue"> loop</font>
+    c[l1] :=<font color="red"> Complex.Vectors.norm</font>(YT[l1, :]);
+  <font color="blue">end for</font>;
+  <font color="darkgreen">//performance indices</font>
+  <font color="darkgreen">// condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2</font>
+  kappa2X :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber</font>(
+                                              X);
+  kappaFroX :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber</font>(
+                                                X, 3);
+  cInf :=<font color="red"> Modelica.Math.Vectors.norm</font>(c, Modelica.Constants.inf);
+  norm2K :=<font color="red"> Modelica.Math.Matrices.norm</font>(K);
+  normFroK :=<font color="red"> Matrices.norm</font>(K, 3);
+  kappaFroYT :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber</font>(
+                                                 YT, 3);
+  kappa2X_B :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm</font>(
+                                     X)^2 +<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm</font>(
+                                                                  YT)^2;
+  JXK :=<font color="red"> array</font>(alpha/2*kappa2X_B + (1 - alpha)/2*normFroK^2 <font color="blue">for </font>alpha<font color="blue"> in </font>0:0.1:1);
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>conditionNumbers;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE data_Chow_Kokotovic<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbersI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Chow_Kokotovic" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Chow_Kokotovic"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.data_Chow_Kokotovic</H2>
+<B>Example for pole assignment</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>d</TD><TD>1e-6</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A></TD><TD>data</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> data_Chow_Kokotovic <font color="darkgreen">&quot;Example for pole assignment&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData</A>;
+  <font color="blue">input </font>Real d=1e-6;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A> data(
+  <font color="blue">redeclare </font>Real A[4,4],
+  <font color="blue">redeclare </font>Real B[4,1],
+  <font color="blue">redeclare </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[4]);
+
+<font color="blue">algorithm </font>
+  data.A:=[0, 0.4, 0, 0; 0, 0, 0.345, 0; 0, -0.524/d, -0.465/d, 0.262/d; 0, 0, 0, -1/d];
+  data.B:=[0; 0; 0; 1/d];
+  data.assignedPoles:=<font color="red">Complex</font>(1)*{-1.0, -1.0, -3.0, -4.0};
+  data.K:=<font color="red">fill</font>(0, 0, 0);
+<font color="blue">end </font>data_Chow_Kokotovic;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE data_Kautsky1<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbersI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Kautsky1" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Kautsky1"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.data_Kautsky1</H2>
+<B>Example for pole assignment</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A></TD><TD>data</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> data_Kautsky1 <font color="darkgreen">&quot;Example for pole assignment&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData</A>;
+
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A> data(
+  <font color="blue">redeclare </font>Real A[4,4],
+  <font color="blue">redeclare </font>Real B[4,2],
+  <font color="blue">redeclare </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[4]);
+
+<font color="blue">algorithm </font>
+  data.A:=[1.38,-0.2077,6.715,-5.676; -0.5814,-4.29,0.0,0.675; 1.067,4.273,-6.654,
+    5.893; 0.048,4.273,1.343,-2.104];
+  data.B:=[0.0,0.0; 5.679,0.0; 1.136,-3.146; 1.136,0.0];
+  data.assignedPoles:=<font color="red">Complex</font>(1)*{-0.2,-0.5,-5.05657,-8.66589};
+  data.K:=<font color="red">fill</font>(0,0,0);
+<font color="blue">end </font>data_Kautsky1;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE data_Kautsky2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbersI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Kautsky2" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Kautsky2"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.data_Kautsky2</H2>
+<B>Example for pole assignment</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A></TD><TD>data</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> data_Kautsky2 <font color="darkgreen">&quot;Example for pole assignment&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData</A>;
+
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A> data(
+  <font color="blue">redeclare </font>Real A[5,5],
+  <font color="blue">redeclare </font>Real B[5,2],
+  <font color="blue">redeclare </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[5]);
+
+<font color="blue">protected </font>
+ <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> j =<font color="red"> Complex.j</font>();
+
+<font color="blue">algorithm </font>
+  data.A:=[-0.1094,  0.0628, 0.0,     0.0,  0.0;
+                1.306,  -2.132,   0.9807,  0.0,  0.0;
+                0.0,  1.595,   -3.149,  1.547,  0.0;
+                0.0,  0.0355,  2.632,  -4.257, 1.855;
+                0.0,  0.00227,  0.0,  0.1636,  -0.1625];
+  data.B:=[0.0,  0.0;  0.0638,  0.0;  0.0838,  -0.1396;  0.1004,  -0.206;  0.0063,  -0.0128];
+  data.assignedPoles:=<font color="red">cat</font>(1,<font color="red">Complex</font>(1)*{-0.2,-0.5,-1.0},{-1.0+j, -1.0-j});
+
+  data.K:=<font color="red">fill</font>(0, 0, 0);
+<font color="blue">end </font>data_Kautsky2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE data_Laub<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbersI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Laub" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Laub"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.data_Laub</H2>
+<B>Example for pole assignment</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>10</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Integer</TD><TD>m</TD><TD>1</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>alpha</TD><TD>0.1</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A></TD><TD>data</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> data_Laub <font color="darkgreen">&quot;Example for pole assignment&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData</A>;
+
+  <font color="blue">input </font>Integer n=10;
+  <font color="blue">input </font>Integer m=1;
+  <font color="blue">input </font>Real alpha=0.1;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A> data(
+  <font color="blue">redeclare </font>Real A[n,n],
+  <font color="blue">redeclare </font>Real B[n,m],
+  <font color="blue">redeclare </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[n]);
+
+<font color="blue">protected </font>
+  Real A[n,n]=<font color="red">diagonal</font>(<font color="red">array</font>(-(n-i) <font color="blue">for </font>i<font color="blue"> in </font>1:n));
+
+  Real B[n,m];
+
+ <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> pp[:]=<font color="red">array</font>(<font color="red">Complex</font>(-i-10) <font color="blue">for </font>i<font color="blue"> in </font>2:2:2*n);
+
+<font color="blue">algorithm </font>
+  <font color="blue">for </font>i<font color="blue"> in </font>1:n-1<font color="blue"> loop</font>
+    A[i+1,i] := alpha;
+  <font color="blue">end for</font>;
+  <font color="blue">for </font>i<font color="blue"> in </font>1:m<font color="blue"> loop</font>
+    B[i,i] := 1;
+  <font color="blue">end for</font>;
+
+  data.A:=A;
+  data.B:=B;
+  data.assignedPoles:=pp;
+  data.K:=<font color="red">fill</font>(0, 0, 0);
+<font color="blue">end </font>data_Laub;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE data_Byers3<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbersI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers3" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers3"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.data_Byers3</H2>
+<B>Example for pole assignment</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A></TD><TD>data</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> data_Byers3 <font color="darkgreen">&quot;Example for pole assignment&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData</A>;
+
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A> data(
+  <font color="blue">redeclare </font>Real A[4,4],
+  <font color="blue">redeclare </font>Real B[4,2],
+  <font color="blue">redeclare </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[4]);
+
+<font color="blue">algorithm </font>
+  data.A:=[-65.0,  65.0,  -19.5,  19.5;
+                 0.1,  -0.1,    0.0,   0.0;
+                 1.0,   0.0,   -0.5,  -1.0;
+                 0.0,   0.0,    0.4,   0.0];
+  data.B:=[65.0,  0.0; 0.0,  0.0; 0.0,  0.0;0.0, 0.4];
+  data.assignedPoles:=<font color="red">Complex</font>(1)*{-1.0, -2.0, -3.0, -4.0};
+  data.K:=<font color="red">fill</font>(0, 0, 0);
+<font color="blue">end </font>data_Byers3;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE data_Byers4<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbersI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers4" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers4"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.data_Byers4</H2>
+<B>Example for pole assignment</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A></TD><TD>data</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> data_Byers4 <font color="darkgreen">&quot;Example for pole assignment&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData</A>;
+
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A> data(
+  <font color="blue">redeclare </font>Real A[3,3],
+  <font color="blue">redeclare </font>Real B[3,2],
+  <font color="blue">redeclare </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[3]);
+
+<font color="blue">algorithm </font>
+  data.A:=[0.0,   1.0,   0.0;
+               0.0,   0.0,   1.0;
+              -6.0, -11.0,  -6.0];
+  data.B:=[1.0,  1.0;  0.0,  1.0; 1.0,  1.0];
+  data.assignedPoles:=<font color="red">Complex</font>(1)*{-1.0, -2.0, -3.0};
+  data.K:=<font color="red">fill</font>(0, 0, 0);
+<font color="blue">end </font>data_Byers4;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE data_Byers5<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbersI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers5" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers5"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.data_Byers5</H2>
+<B>Example for pole assignment</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A></TD><TD>data</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> data_Byers5 <font color="darkgreen">&quot;Example for pole assignment&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData</A>;
+
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A> data(
+  <font color="blue">redeclare </font>Real A[5,5],
+  <font color="blue">redeclare </font>Real B[5,2],
+  <font color="blue">redeclare </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[5]);
+
+<font color="blue">algorithm </font>
+  data.A:=<font color="red">diagonal</font>({1, 10, 0.1, 0.1, 10})*[-1.29e-1,  0.0,  3.96e-2, 2.5e-2,   1.91e-2;
+                                                3.29e-3,  0.0, -7.79e-5, 1.22e-4, -6.21e-1;
+                                                7.18e-2,  0.0, -1.0e-1,  8.87e-4,  -3.85;
+                                                4.11e-2,  0.0,  0.0,    -8.22e-2,   0.0;
+                                                3.51e-4,  0.0,  3.5e-5,  4.26e-5,  -7.43e-2]*<font color="red">diagonal</font>({1, 0.1, 10, 10, 0.1});
+  data.B:=<font color="red">diagonal</font>({1, 10, 0.1, 0.1, 10})*[0.0,  1.39e-3; 0.0,  3.59e-5; 0.0,  -9.89e-3; 2.49e-5,  0.0; 0.0,  -5.34e-6]*<font color="red">diagonal</font>({10000, 100});
+  data.assignedPoles:=<font color="red">Complex</font>(1)*{-0.01,  -0.02,  -0.03,  -0.04,  -0.05};
+  data.K:=<font color="red">fill</font>(0, 0, 0);
+<font color="blue">end </font>data_Byers5;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE data_Byers6<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbersI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers6" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Byers6"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.data_Byers6</H2>
+<B>Example for pole assignment</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A></TD><TD>data</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> data_Byers6 <font color="darkgreen">&quot;Example for pole assignment&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData</A>;
+
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A> data(
+  <font color="blue">redeclare </font>Real A[4,4],
+  <font color="blue">redeclare </font>Real B[4,2],
+  <font color="blue">redeclare </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[4]);
+
+<font color="blue">algorithm </font>
+  data.A:=[5.8765,  9.3456,  4.5634,  9.3520;
+                 6.6526,  0.5867,  3.5829,  0.6534;
+                 0.0,     9.6738,  7.4876,  4.7654;
+                 0.0,     0.0,     6.6784,  2.5678];
+  data.B:=[3.9878,  0.5432;  0.0,  2.765;  0.0,  0.0; 0.0,  0.0];
+
+  data.assignedPoles:={<font color="red">Complex</font>(-29.4986),<font color="red"> Complex</font>(-10.0922),<font color="red"> Complex</font>(2.5201,6.89),<font color="red"> Complex</font>(2.5201,-6.89)};
+  data.K:=<font color="red">fill</font>(0, 0, 0);
+<font color="blue">end </font>data_Byers6;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE data_Benner6<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.conditionNumbersI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Benner6" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.data_Benner6"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.data_Benner6</H2>
+<B>Example for pole assignment</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>nn</TD><TD>24</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A></TD><TD>data</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> data_Benner6 <font color="darkgreen">&quot;Example for pole assignment&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData</A>;
+
+  <font color="blue">input </font>Integer nn=24;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A> data(
+  <font color="blue">redeclare </font>Real A[nn,nn],
+  <font color="blue">redeclare </font>Real B[nn,3],
+  <font color="blue">redeclare </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[nn]);
+
+<font color="blue">protected </font>
+  Real A[30,30]=[ -4.3280000000000003e+000,  1.7140000000000000e-001,  5.3760000000000003e+000,  4.0160000000000002e+002, -7.2460000000000002e+002, -1.9330000000000001e+000,  1.0200000000000000e+000, -9.8199999999999998e-001,  9.9900000000000000e-001,  1.5209999999999999e+000, -4.0620000000000003e+000,  9.5670000000000002e+000,  1.0080000000000000e+001, -6.0170000000000001e-001, -1.3120000000000001e-001,  9.6019999999999994e-002, -4.5699999999999998e-002,  0.0000000000000000e+000, -4.5160000000000002e+002,  0.0000000000000000e+000,  0.0000000000000000e+000, -1.0580000000000000e+002,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -4.4019999999999998e-001, -5.6429999999999998e+000,  1.2750000000000000e+002, -2.3350000000000000e+002, -4.3430000000000001e+002,  2.6590000000000000e+001,  2.0400000000000000e+000, -2.5920000000000001e+000,  1.1320000000000000e+001,  1.0900000000000000e+001, -4.0709999999999997e+000, -5.7389999999999997e-002, -6.0629999999999995e-001, -7.4880000000000002e-002, -5.9360000000000002e-001, -9.6019999999999994e-002,  1.1140000000000000e-001,  0.0000000000000000e+000, -5.4610000000000002e+002,  0.0000000000000000e+000,  0.0000000000000000e+000, -6.5750000000000002e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  1.0380000000000000e+000,  6.0730000000000004e+000, -1.6500000000000000e+002, -4.4829999999999997e+000,  1.0490000000000000e+003, -8.2450000000000003e+001, -5.3140000000000001e+000,  5.0970000000000004e+000, -9.3889999999999998e-003,  1.3519999999999999e-001,  5.6379999999999999e+000,  2.2460000000000001e-002,  1.7970000000000000e-001,  2.4070000000000001e-002,  1.1000000000000001e+000,  2.7430000000000000e-002,  2.1529999999999999e-001,  0.0000000000000000e+000,  1.3620000000000000e+003,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.3460000000000001e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  5.3039999999999998e-001, -1.0860000000000000e-001,  1.3130000000000001e+002, -5.7829999999999995e+002,  1.0200000000000000e+002, -9.2400000000000002e+000, -1.1459999999999999e+000, -2.4079999999999999e+000, -3.0810000000000000e+000, -4.5289999999999999e+000,  5.7069999999999999e+000, -2.3460000000000000e-001, -2.1110000000000002e+000, -2.4600000000000000e-001, -4.6860000000000002e-001, -3.2229999999999998e-001,  3.2619999999999999e-001,  0.0000000000000000e+000,  2.0800000000000000e+002,  0.0000000000000000e+000,  0.0000000000000000e+000, -2.8879999999999999e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  8.4759999999999992e-003, -1.5630000000000002e-002,  5.6020000000000000e-002,  1.5730000000000000e+000, -1.0050000000000001e+001,  1.9520000000000001e-001, -8.8039999999999993e-003, -2.1100000000000001e-002,  2.0899999999999998e-003, -5.2560000000000003e-002, -4.0770000000000001e-002, -9.1819999999999992e-003, -5.1780000000000000e-002,  3.4250000000000003e-002,  4.9950000000000003e-003, -1.2560000000000000e-002,  9.9480000000000002e-003,  0.0000000000000000e+000, -9.8390000000000001e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  5.0690000000000002e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  8.3499999999999996e-001, -1.2489999999999999e-002, -3.5670000000000000e-002, -6.0740000000000005e-001,  3.7649999999999999e+001, -1.9789999999999999e+001, -1.8129999999999999e-001, -2.9520000000000001e-002, -1.9529999999999999e-002, -1.6220000000000001e-001, -6.4390000000000003e-003, -2.3460000000000002e-002, -2.2009999999999999e-001, -2.5139999999999999e-002, -3.7490000000000002e-003, -3.3509999999999998e-002,  2.7279999999999999e-002,  0.0000000000000000e+000,  7.1620000000000005e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  9.6080000000000005e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  6.7679999999999996e-001, -1.2640000000000000e-002, -9.6829999999999999e-002, -3.5670000000000002e-001,  8.0239999999999995e+001, -8.2390000000000005e-002, -2.0469999999999999e+001, -3.9280000000000002e-002,  1.8780000000000002e-002, -2.1290000000000001e-001, -9.3369999999999998e-003, -3.1440000000000003e-002, -2.9189999999999999e-001, -3.3700000000000001e-002,  8.8730000000000003e-002, -4.4580000000000002e-002,  1.7160000000000002e-002,  0.0000000000000000e+000,  7.1709999999999994e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  8.5709999999999997e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -9.6960000000000005e-002,  8.6660000000000004e-001,  1.6870000000000001e+001,  1.0509999999999999e+000, -1.0230000000000000e+002,  2.9660000000000000e+001,  5.9430000000000005e-001, -1.9969999999999999e+001,  2.2530000000000001e-002,  1.7010000000000000e-001,  8.3710000000000000e-003,  2.6450000000000001e-002,  2.5600000000000001e-001,  2.8350000000000000e-002, -3.7490000000000002e-002,  3.6350000000000000e-002, -7.7410000000000007e-002,  0.0000000000000000e+000, -1.4119999999999999e+002,  0.0000000000000000e+000,  0.0000000000000000e+000, -8.2150000000000001e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -8.7849999999999994e-003, -1.6360000000000000e-002,  1.8470000000000000e-001,  2.1690000000000001e-001, -8.4199999999999999e+000,  7.0030000000000003e-001,  5.6660000000000002e-002,  6.6230000000000002e+000, -4.9990000000000002e+001,  6.7599999999999993e-002,  3.9460000000000001e+001,  4.9909999999999998e-003,  8.9829999999999993e-002,  5.3489999999999996e-003,  0.0000000000000000e+000,  1.3720000000000000e-002,  3.8550000000000001e-002,  0.0000000000000000e+000, -7.7100000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -4.3709999999999999e-002,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -1.2980000000000001e-004, -2.4300000000000000e-004,  2.7179999999999999e-003,  3.2139999999999998e-003, -1.2460000000000000e-001,  1.0370000000000001e-002,  8.3949999999999997e-004,  9.8119999999999999e-002, -6.6659999999999997e-001, -6.6569999999999996e-001,  5.8470000000000000e-001,  6.6539999999999997e-005,  1.3470000000000001e-003,  7.1310000000000007e-005,  0.0000000000000000e+000,  2.0570000000000001e-004,  5.7070000000000005e-004,  0.0000000000000000e+000, -1.1440000000000000e-001,  0.0000000000000000e+000,  0.0000000000000000e+000, -6.3590000000000001e-004,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -1.2070000000000001e+000, -6.7169999999999996e+000,  2.6260000000000002e+001,  1.2490000000000000e+001, -1.2690000000000000e+003,  1.0300000000000000e+002,  7.4800000000000004e+000,  3.6840000000000003e+001,  2.8539999999999999e-001,  2.3319999999999999e+000, -4.7649999999999999e+001,  3.4060000000000001e-001,  3.0649999999999999e+000,  3.6240000000000000e-001, -4.3430000000000002e-001,  4.6810000000000002e-001,  5.7270000000000003e+000,  0.0000000000000000e+000, -1.7450000000000000e+003,  0.0000000000000000e+000,  0.0000000000000000e+000, -8.9399999999999995e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -2.7300000000000001e-002, -4.5390000000000003e-001, -5.2719999999999999e+001,  1.9880000000000001e+002, -2.8090000000000000e+001,  2.2429999999999999e+000,  1.7940000000000000e-001,  9.7500000000000000e+000, -9.6270000000000007e+000, -9.5570000000000004e+000,  3.8479999999999997e+001, -5.0009999999999998e+001,  1.0110000000000000e-001,  1.2030000000000001e-002, -4.6859999999999999e-002,  1.7149999999999999e-002,  1.3919999999999999e-001,  0.0000000000000000e+000, -2.4300000000000001e+001,  0.0000000000000000e+000,  0.0000000000000000e+000, -2.7360000000000001e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -1.2060000000000000e-003, -2.0170000000000000e-002, -2.3430000000000000e+000,  8.8350000000000009e+000, -1.2480000000000000e+000,  9.9750000000000005e-002,  8.0590000000000002e-003,  4.3330000000000002e-001, -4.2780000000000001e-001, -4.2449999999999999e-001,  1.7100000000000000e+000, -2.0000000000000000e+000, -1.9960000000000000e+000,  5.3490000000000005e-004, -1.9989999999999999e-003,  7.5440000000000001e-004,  6.1720000000000004e-003,  0.0000000000000000e+000, -1.0820000000000001e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -1.1830000000000000e-002,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -1.6130000000000000e-001, -2.4690000000000001e-001, -2.4050000000000001e+001,  2.3379999999999999e+001,  1.4830000000000001e+002,  1.6379999999999999e+000,  1.3850000000000001e-001,  4.4880000000000004e+000, -4.4139999999999997e+000, -4.3540000000000001e+000,  1.7660000000000000e+001, -3.1130000000000000e+000, -3.0179999999999998e+000, -1.9770000000000000e+001, -4.9990000000000000e-002,  1.5089999999999999e-002,  6.7769999999999997e-002,  0.0000000000000000e+000,  1.6600000000000001e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  3.9800000000000002e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -1.2440000000000000e-002,  3.0200000000000001e-002, -1.1980000000000000e-001, -4.8210000000000003e-002,  5.5750000000000002e+000, -4.5250000000000001e-001,  1.9809999999999999e+001,  1.2490000000000000e-001, -1.1270000000000000e-003, -6.7600000000000004e-003,  1.8350000000000002e-002, -9.9810000000000003e-004, -1.3469999999999999e-002, -1.0700000000000000e-003, -2.0000000000000000e+001, -2.0569999999999998e-003,  1.8799999999999999e-003,  0.0000000000000000e+000,  9.1470000000000002e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -8.2410000000000005e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -1.6530000000000000e+000,  1.8310000000000000e+000, -3.8220000000000001e+000,  1.1340000000000001e+002,  3.4139999999999998e+002, -2.7340000000000000e+001, -2.0400000000000000e+000, -6.1660000000000004e-001,  5.0039999999999996e-001, -1.4369999999999999e-001, -2.4159999999999999e+000, -1.0730000000000001e-001, -1.0780000000000001e+000,  3.0530000000000001e+001,  1.9890000000000001e+001, -5.0159999999999997e+001,  1.6769999999999999e-001,  0.0000000000000000e+000,  4.3580000000000001e+002,  0.0000000000000000e+000,  0.0000000000000000e+000, -5.9939999999999998e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -5.0000000000000000e+002, -6.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -3.6000000000000000e+003, -7.0800000000000000e+002, -1.0672000000000000e+002,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -1.2000000000000000e+004, -5.2400000000000000e+003, -1.5000000000000000e+002,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  3.3299999999999997e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -3.3299999999999997e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  2.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -2.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  2.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -2.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  2.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -2.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  6.4500000000000002e-001,  6.4500000000000002e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -8.9400000000000002e-001, -8.9400000000000002e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -3.0599999999999999e-001, -1.8600000000000001e+000];
+
+   Real B[30,3]=[0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 5.000e+02,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  3.600e+03,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  1.200e+04;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0];
+
+<font color="darkgreen">//   Real B[30,3]=[1.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  1.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  1.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 5.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  3.6,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  1.2;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0;</font>
+<font color="darkgreen">//                 0.0,  0.0,  0.0];</font>
+
+ <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> pp[:]=<font color="red">array</font>(<font color="red">Complex</font>(-i) <font color="blue">for </font>i<font color="blue"> in </font>1:30);
+
+<font color="blue">algorithm </font>
+  data.A:=A[1:nn, 1:nn];
+  data.B:=B[1:nn, :];
+  data.assignedPoles:=pp[1:nn];
+  data.K:=<font color="red">fill</font>(0, 0, 0);
+<font color="blue">end </font>data_Benner6;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE DesignData_Chow_Kokotovic<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_KokotovicI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.DesignData_Chow_Kokotovic</H2>
+<B>Contains the system matrix A, the input matrix B, the assigned Poles and optionally the ideal feedback matrix</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Record"
+>Modelica.Icons.Record</A> (Icon for a record).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">record</font> DesignData_Chow_Kokotovic <font color="darkgreen">
+  &quot;Contains the system matrix A, the input matrix B, the assigned Poles and optionally the ideal feedback matrix&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic</A>;
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Record"
+>Modelica.Icons.Record</A>;
+  Real A[:,<font color="red">size</font>(A,1)] <font color="darkgreen">&quot;System matrix&quot;</font>;
+  Real B[<font color="red">size</font>(A,1),:] <font color="darkgreen">&quot;Input matrix&quot;</font>;
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[:] <font color="darkgreen">&quot;Assigned poles&quot;</font>;
+  Real K[:,:] <font color="darkgreen">&quot;Feedback gain matrix&quot;</font>;
+
+  <textblock type="packagesmall" expanded="false" path="Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic.'constructor'"><font color="blue">encapsulated </font><font color="blue">operator</font> &#39;constructor&#39; <font color="darkgreen">
+    &quot;Default constructors for a DesignData record&quot;</font>
+    <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+
+  <textblock type="model" expanded="false" path="Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic.'constructor'.parameters"><font color="blue">function</font> parameters <font color="darkgreen">&quot;Default constructor for a DesignData record&quot;</font>
+      <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+      <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+      <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+      <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic</A>;
+
+    <font color="blue">input </font>Real d=1e-6;
+    <font color="blue">output </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic"
+>DesignData_Chow_Kokotovic</A> data(
+      <font color="blue">redeclare </font>Real A[4,4],
+      <font color="blue">redeclare </font>Real B[4,1],
+      <font color="blue">redeclare </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[4]);
+
+  <font color="blue">algorithm </font>
+    data.A := [0,0.4,0,0; 0,0,0.345,0; 0,-0.524/d,-0.465/d,0.262/d; 0,0,0,-1/d];
+    data.B := [0; 0; 0; 1/d];
+    data.assignedPoles := <font color="red">Complex</font>(1)*{-1.0,-2.0,-3.0,-4.0};
+    data.K := <font color="red">fill</font>(0, 0, 0);
+
+  <font color="blue">end </font>parameters</textblock>;
+
+  <font color="blue">end </font>&#39;constructor&#39;</textblock>;
+
+<font color="blue">end </font>DesignData_Chow_Kokotovic;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE DesignData_Benner6<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_KokotovicI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Benner6" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Benner6"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.DesignData_Benner6</H2>
+<B>Contains the system matrix A, the input matrix B, the assigned Poles and optionally the ideal feedback matrix</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Record"
+>Modelica.Icons.Record</A> (Icon for a record).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">record</font> DesignData_Benner6 <font color="darkgreen">
+  &quot;Contains the system matrix A, the input matrix B, the assigned Poles and optionally the ideal feedback matrix&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Benner6"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Benner6</A>;
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Record"
+>Modelica.Icons.Record</A>;
+   Real A[30,30]=[ -4.3280000000000003e+000,  1.7140000000000000e-001,  5.3760000000000003e+000,  4.0160000000000002e+002, -7.2460000000000002e+002, -1.9330000000000001e+000,  1.0200000000000000e+000, -9.8199999999999998e-001,  9.9900000000000000e-001,  1.5209999999999999e+000, -4.0620000000000003e+000,  9.5670000000000002e+000,  1.0080000000000000e+001, -6.0170000000000001e-001, -1.3120000000000001e-001,  9.6019999999999994e-002, -4.5699999999999998e-002,  0.0000000000000000e+000, -4.5160000000000002e+002,  0.0000000000000000e+000,  0.0000000000000000e+000, -1.0580000000000000e+002,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -4.4019999999999998e-001, -5.6429999999999998e+000,  1.2750000000000000e+002, -2.3350000000000000e+002, -4.3430000000000001e+002,  2.6590000000000000e+001,  2.0400000000000000e+000, -2.5920000000000001e+000,  1.1320000000000000e+001,  1.0900000000000000e+001, -4.0709999999999997e+000, -5.7389999999999997e-002, -6.0629999999999995e-001, -7.4880000000000002e-002, -5.9360000000000002e-001, -9.6019999999999994e-002,  1.1140000000000000e-001,  0.0000000000000000e+000, -5.4610000000000002e+002,  0.0000000000000000e+000,  0.0000000000000000e+000, -6.5750000000000002e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  1.0380000000000000e+000,  6.0730000000000004e+000, -1.6500000000000000e+002, -4.4829999999999997e+000,  1.0490000000000000e+003, -8.2450000000000003e+001, -5.3140000000000001e+000,  5.0970000000000004e+000, -9.3889999999999998e-003,  1.3519999999999999e-001,  5.6379999999999999e+000,  2.2460000000000001e-002,  1.7970000000000000e-001,  2.4070000000000001e-002,  1.1000000000000001e+000,  2.7430000000000000e-002,  2.1529999999999999e-001,  0.0000000000000000e+000,  1.3620000000000000e+003,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.3460000000000001e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  5.3039999999999998e-001, -1.0860000000000000e-001,  1.3130000000000001e+002, -5.7829999999999995e+002,  1.0200000000000000e+002, -9.2400000000000002e+000, -1.1459999999999999e+000, -2.4079999999999999e+000, -3.0810000000000000e+000, -4.5289999999999999e+000,  5.7069999999999999e+000, -2.3460000000000000e-001, -2.1110000000000002e+000, -2.4600000000000000e-001, -4.6860000000000002e-001, -3.2229999999999998e-001,  3.2619999999999999e-001,  0.0000000000000000e+000,  2.0800000000000000e+002,  0.0000000000000000e+000,  0.0000000000000000e+000, -2.8879999999999999e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  8.4759999999999992e-003, -1.5630000000000002e-002,  5.6020000000000000e-002,  1.5730000000000000e+000, -1.0050000000000001e+001,  1.9520000000000001e-001, -8.8039999999999993e-003, -2.1100000000000001e-002,  2.0899999999999998e-003, -5.2560000000000003e-002, -4.0770000000000001e-002, -9.1819999999999992e-003, -5.1780000000000000e-002,  3.4250000000000003e-002,  4.9950000000000003e-003, -1.2560000000000000e-002,  9.9480000000000002e-003,  0.0000000000000000e+000, -9.8390000000000001e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  5.0690000000000002e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  8.3499999999999996e-001, -1.2489999999999999e-002, -3.5670000000000000e-002, -6.0740000000000005e-001,  3.7649999999999999e+001, -1.9789999999999999e+001, -1.8129999999999999e-001, -2.9520000000000001e-002, -1.9529999999999999e-002, -1.6220000000000001e-001, -6.4390000000000003e-003, -2.3460000000000002e-002, -2.2009999999999999e-001, -2.5139999999999999e-002, -3.7490000000000002e-003, -3.3509999999999998e-002,  2.7279999999999999e-002,  0.0000000000000000e+000,  7.1620000000000005e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  9.6080000000000005e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  6.7679999999999996e-001, -1.2640000000000000e-002, -9.6829999999999999e-002, -3.5670000000000002e-001,  8.0239999999999995e+001, -8.2390000000000005e-002, -2.0469999999999999e+001, -3.9280000000000002e-002,  1.8780000000000002e-002, -2.1290000000000001e-001, -9.3369999999999998e-003, -3.1440000000000003e-002, -2.9189999999999999e-001, -3.3700000000000001e-002,  8.8730000000000003e-002, -4.4580000000000002e-002,  1.7160000000000002e-002,  0.0000000000000000e+000,  7.1709999999999994e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  8.5709999999999997e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -9.6960000000000005e-002,  8.6660000000000004e-001,  1.6870000000000001e+001,  1.0509999999999999e+000, -1.0230000000000000e+002,  2.9660000000000000e+001,  5.9430000000000005e-001, -1.9969999999999999e+001,  2.2530000000000001e-002,  1.7010000000000000e-001,  8.3710000000000000e-003,  2.6450000000000001e-002,  2.5600000000000001e-001,  2.8350000000000000e-002, -3.7490000000000002e-002,  3.6350000000000000e-002, -7.7410000000000007e-002,  0.0000000000000000e+000, -1.4119999999999999e+002,  0.0000000000000000e+000,  0.0000000000000000e+000, -8.2150000000000001e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -8.7849999999999994e-003, -1.6360000000000000e-002,  1.8470000000000000e-001,  2.1690000000000001e-001, -8.4199999999999999e+000,  7.0030000000000003e-001,  5.6660000000000002e-002,  6.6230000000000002e+000, -4.9990000000000002e+001,  6.7599999999999993e-002,  3.9460000000000001e+001,  4.9909999999999998e-003,  8.9829999999999993e-002,  5.3489999999999996e-003,  0.0000000000000000e+000,  1.3720000000000000e-002,  3.8550000000000001e-002,  0.0000000000000000e+000, -7.7100000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -4.3709999999999999e-002,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -1.2980000000000001e-004, -2.4300000000000000e-004,  2.7179999999999999e-003,  3.2139999999999998e-003, -1.2460000000000000e-001,  1.0370000000000001e-002,  8.3949999999999997e-004,  9.8119999999999999e-002, -6.6659999999999997e-001, -6.6569999999999996e-001,  5.8470000000000000e-001,  6.6539999999999997e-005,  1.3470000000000001e-003,  7.1310000000000007e-005,  0.0000000000000000e+000,  2.0570000000000001e-004,  5.7070000000000005e-004,  0.0000000000000000e+000, -1.1440000000000000e-001,  0.0000000000000000e+000,  0.0000000000000000e+000, -6.3590000000000001e-004,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -1.2070000000000001e+000, -6.7169999999999996e+000,  2.6260000000000002e+001,  1.2490000000000000e+001, -1.2690000000000000e+003,  1.0300000000000000e+002,  7.4800000000000004e+000,  3.6840000000000003e+001,  2.8539999999999999e-001,  2.3319999999999999e+000, -4.7649999999999999e+001,  3.4060000000000001e-001,  3.0649999999999999e+000,  3.6240000000000000e-001, -4.3430000000000002e-001,  4.6810000000000002e-001,  5.7270000000000003e+000,  0.0000000000000000e+000, -1.7450000000000000e+003,  0.0000000000000000e+000,  0.0000000000000000e+000, -8.9399999999999995e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -2.7300000000000001e-002, -4.5390000000000003e-001, -5.2719999999999999e+001,  1.9880000000000001e+002, -2.8090000000000000e+001,  2.2429999999999999e+000,  1.7940000000000000e-001,  9.7500000000000000e+000, -9.6270000000000007e+000, -9.5570000000000004e+000,  3.8479999999999997e+001, -5.0009999999999998e+001,  1.0110000000000000e-001,  1.2030000000000001e-002, -4.6859999999999999e-002,  1.7149999999999999e-002,  1.3919999999999999e-001,  0.0000000000000000e+000, -2.4300000000000001e+001,  0.0000000000000000e+000,  0.0000000000000000e+000, -2.7360000000000001e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -1.2060000000000000e-003, -2.0170000000000000e-002, -2.3430000000000000e+000,  8.8350000000000009e+000, -1.2480000000000000e+000,  9.9750000000000005e-002,  8.0590000000000002e-003,  4.3330000000000002e-001, -4.2780000000000001e-001, -4.2449999999999999e-001,  1.7100000000000000e+000, -2.0000000000000000e+000, -1.9960000000000000e+000,  5.3490000000000005e-004, -1.9989999999999999e-003,  7.5440000000000001e-004,  6.1720000000000004e-003,  0.0000000000000000e+000, -1.0820000000000001e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -1.1830000000000000e-002,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -1.6130000000000000e-001, -2.4690000000000001e-001, -2.4050000000000001e+001,  2.3379999999999999e+001,  1.4830000000000001e+002,  1.6379999999999999e+000,  1.3850000000000001e-001,  4.4880000000000004e+000, -4.4139999999999997e+000, -4.3540000000000001e+000,  1.7660000000000000e+001, -3.1130000000000000e+000, -3.0179999999999998e+000, -1.9770000000000000e+001, -4.9990000000000000e-002,  1.5089999999999999e-002,  6.7769999999999997e-002,  0.0000000000000000e+000,  1.6600000000000001e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  3.9800000000000002e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -1.2440000000000000e-002,  3.0200000000000001e-002, -1.1980000000000000e-001, -4.8210000000000003e-002,  5.5750000000000002e+000, -4.5250000000000001e-001,  1.9809999999999999e+001,  1.2490000000000000e-001, -1.1270000000000000e-003, -6.7600000000000004e-003,  1.8350000000000002e-002, -9.9810000000000003e-004, -1.3469999999999999e-002, -1.0700000000000000e-003, -2.0000000000000000e+001, -2.0569999999999998e-003,  1.8799999999999999e-003,  0.0000000000000000e+000,  9.1470000000000002e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -8.2410000000000005e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+ -1.6530000000000000e+000,  1.8310000000000000e+000, -3.8220000000000001e+000,  1.1340000000000001e+002,  3.4139999999999998e+002, -2.7340000000000000e+001, -2.0400000000000000e+000, -6.1660000000000004e-001,  5.0039999999999996e-001, -1.4369999999999999e-001, -2.4159999999999999e+000, -1.0730000000000001e-001, -1.0780000000000001e+000,  3.0530000000000001e+001,  1.9890000000000001e+001, -5.0159999999999997e+001,  1.6769999999999999e-001,  0.0000000000000000e+000,  4.3580000000000001e+002,  0.0000000000000000e+000,  0.0000000000000000e+000, -5.9939999999999998e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -5.0000000000000000e+002, -6.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -3.6000000000000000e+003, -7.0800000000000000e+002, -1.0672000000000000e+002,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -1.2000000000000000e+004, -5.2400000000000000e+003, -1.5000000000000000e+002,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  3.3299999999999997e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -3.3299999999999997e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  2.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -2.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  2.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -2.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  2.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -2.0000000000000000e+001,  0.0000000000000000e+000,  0.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  6.4500000000000002e-001,  6.4500000000000002e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  1.0000000000000000e+000;
+  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -8.9400000000000002e-001, -8.9400000000000002e-001,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000,  0.0000000000000000e+000, -3.0599999999999999e-001, -1.8600000000000001e+000] <font color="darkgreen">
+    &quot;System matrix&quot;</font>;
+
+    Real B[30,3]=[0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 5.000e+02,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  3.600e+03,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  1.200e+04;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0;
+                 0.0,  0.0,  0.0] <font color="darkgreen">&quot;Input matrix&quot;</font>;
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[30]=<font color="red">array</font>(<font color="red">Complex</font>(-i) <font color="blue">for </font>i<font color="blue"> in </font>1:30) <font color="darkgreen">&quot;Assigned poles&quot;</font>;
+  Real K[:,:]=<font color="red">fill</font>(0,0,0) <font color="darkgreen">&quot;Feedback gain matrix&quot;</font>;
+
+<font color="blue">end </font>DesignData_Benner6;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE testPoleAssignment<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignmentI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignment" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignment"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.testPoleAssignment</H2>
+<B>Function to assess algorithms for pole assignment</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+Computes the gain vector k for the state space system
+<pre> 
+ss = StateSpace(A=[-1,1;0,-2],B=[0, 1],C=[1,0; 0, 1],D=[0; 0])
+</pre>
+such that for the state feedback 
+<pre>u = -k*y = -k*x</pre> the closed-loop
+poles are placed at 
+<pre>p = {-3,-4}.</pre>
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A></TD><TD>data</TD><TD>Design.data_Chow_Kokotovic()</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Types.html#Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod"
+>AssignPolesMethod</A></TD><TD>method</TD><TD>Tests.Types.AssignPolesMetho...</TD><TD>method for pole assignment</TD></TR>
+<TR><TD>Boolean</TD><TD>isSI</TD><TD>true</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>K[size(data.B, 2), size(data.A, 1)]</TD><TD>Feedback gain matrix</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>calcPoles[size(data.A, 1)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>kappa2</TD><TD>condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2</TD></TR>
+<TR><TD>Real</TD><TD>kappaF</TD><TD>condition number kappa_F(X) = ||X||_F * ||inv(X)||_F</TD></TR>
+<TR><TD>Real</TD><TD>zeta</TD><TD>condition number by Byers, zeta(X) = (||X||_F)^2 + (||inv(X)||_F)^2</TD></TR>
+<TR><TD>Real</TD><TD>cInf</TD><TD>condition number vu1=||c||_inf = max(c_j)</TD></TR>
+<TR><TD>Real</TD><TD>nu2</TD><TD>Euclidean norm of the feedback matrix</TD></TR>
+<TR><TD>Real</TD><TD>nuF</TD><TD>Frobenius norm of the feedback matrix</TD></TR>
+<TR><TD>Real</TD><TD>dlambda</TD><TD>Distance between the assigned and the calculated poles</TD></TR>
+<TR><TD>Real</TD><TD>gap</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>Jalpha[11]</TD><TD>Combined condition number, JKX=alpha/2*(kappa2X_B) + (1-alpha)/2*normFroK^2</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>X[:, :]</TD><TD>right eigenvectors of the closed loop system</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> testPoleAssignment <font color="darkgreen">
+  &quot;Function to assess algorithms for pole assignment&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font>Re = <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex.real"
+>Modelica_LinearSystems2.Math.Complex.real</A>;
+  <font color="blue">import </font>Im = <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex.imag"
+>Modelica_LinearSystems2.Math.Complex.imag</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>;
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print"
+>Modelica.Utilities.Streams.print</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A> data=<font color="red">Design.data_Chow_Kokotovic</font>();
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Types.html#Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod"
+>Types.AssignPolesMethod</A> method=Tests.Types.AssignPolesMethod.KNV <font color="darkgreen">
+    &quot;method for pole assignment&quot;</font>;
+  <font color="blue">input </font>Boolean isSI=true;
+
+<font color="blue">protected </font>
+  Boolean isKprovided=<font color="red">min</font>(<font color="red">size</font>(data.K))&gt;0;
+  Real Ki[:,:]=<font color="blue">if </font>isKprovided<font color="blue"> then </font>data.K<font color="blue"> else </font><font color="red">fill</font>(0,0,0);
+  Integer n=<font color="red">size</font>(data.A, 1);
+  Real S[n,n] <font color="darkgreen">&quot;closed loop system matrix A-BK&quot;</font>;
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss=<font color="red">Modelica_LinearSystems2.StateSpace</font>(A=data.A, B=data.B, C=<font color="red">zeros</font>(1,n), D=<font color="red">zeros</font>(1,<font color="red">size</font>(data.B,2)));
+  Real Xre[<font color="red">size</font>(data.A, 1),<font color="red">size</font>(data.A, 1)];
+
+<font color="blue">public </font>
+  <font color="blue">output </font>Real K[<font color="red">size</font>(data.B, 2),<font color="red">size</font>(data.A, 1)] <font color="darkgreen">&quot;Feedback gain matrix&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> calcPoles[<font color="red">size</font>(data.A, 1)];
+  <font color="blue">output </font>Real kappa2 <font color="darkgreen">&quot;condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2&quot;</font>;
+  <font color="blue">output </font>Real kappaF <font color="darkgreen">&quot;condition number kappa_F(X) = ||X||_F * ||inv(X)||_F&quot;</font>;
+  <font color="blue">output </font>Real zeta <font color="darkgreen">
+    &quot;condition number by Byers, zeta(X) = (||X||_F)^2 + (||inv(X)||_F)^2&quot;</font>;
+  <font color="blue">output </font>Real cInf <font color="darkgreen">&quot;condition number vu1=||c||_inf = max(c_j)&quot;</font>;
+  <font color="blue">output </font>Real nu2 <font color="darkgreen">&quot;Euclidean norm of the feedback matrix&quot;</font>;
+  <font color="blue">output </font>Real nuF <font color="darkgreen">&quot;Frobenius norm of the feedback matrix&quot;</font>;
+  <font color="blue">output </font>Real dlambda <font color="darkgreen">&quot;Distance between the assigned and the calculated poles&quot;</font>;
+  <font color="blue">output </font>Real gap=0.0;
+  <font color="blue">output </font>Real Jalpha[11] <font color="darkgreen">
+    &quot;Combined condition number, JKX=alpha/2*(kappa2X_B) + (1-alpha)/2*normFroK^2&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> X[:,:] <font color="darkgreen">&quot;right eigenvectors of the closed loop system&quot;</font>;
+
+<font color="blue">algorithm </font>
+<font color="darkgreen">//  use single input method</font>
+  <font color="blue">if </font>isSI<font color="blue"> and </font><font color="red">size</font>(data.B, 2)==1<font color="blue"> then</font>
+    K :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesSI_rq</font>(
+                                              ss,data.assignedPoles);
+    ss.A := ss.A-ss.B*K;
+    (Xre,calcPoles) :=<font color="red"> StateSpace.Analysis.eigenVectors</font>(ss,false);
+    X :=<font color="red"> Complex</font>(1)*Xre;
+  <font color="blue">else</font><font color="darkgreen">//isSI</font>
+
+    <font color="blue">if </font>method == Tests.Types.AssignPolesMethod.KNV<font color="blue"> then</font>
+<font color="darkgreen">// extented robust KNV-algortihm according to MATLAB&#39;s place-function</font>
+     (K,X) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob</font>(
+                                                                            data.A, data.B, data.assignedPoles);
+     S := data.A - data.B*K;
+     calcPoles :=<font color="red"> Complex.eigenValues</font>(S);
+     <font color="blue">if </font>isKprovided<font color="blue"> then</font>
+       gap :=<font color="red"> Modelica.Math.Matrices.norm</font>(K - Ki);
+     <font color="blue">end if</font>;
+   <font color="blue">elseif </font>method ==Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod.Schur<font color="blue"> then</font>
+   <font color="darkgreen">// Schur method</font>
+    (K,S,calcPoles,,,,X) :=<font color="red"> Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</font>(ss, data.assignedPoles, -1e10,<font color="red"> Modelica.Math.Matrices.norm</font>(ss.A, 1)*1e-12, true);
+    <font color="blue">if </font>isKprovided<font color="blue"> then</font>
+      gap :=<font color="red"> Modelica.Math.Matrices.norm</font>(K - Ki);
+    <font color="blue">end if</font>;
+    <font color="blue">else</font>
+      <font color="red">assert</font>(false, &quot;Argument method (= &quot; +<font color="red"> String</font>(method) + &quot;) of testPoleAssignment is wrong. It has to be \&quot;KNV\&quot; or \&quot;Schur\&quot;&quot;);
+    <font color="blue">end if</font>;
+  <font color="blue">end if</font>;
+  <font color="darkgreen">// calculate condition numbers</font>
+  (kappa2,kappaF,,cInf,nu2,nuF,zeta,Jalpha,dlambda) :=<font color="red"> conditionNumbers</font>(K, X, data.assignedPoles, calcPoles);
+
+  <font color="red">Matrices.printMatrix</font>(K, 6, &quot;K&quot;);
+  <font color="red">Complex.Vectors.print</font>(&quot;assignedPoles&quot;, data.assignedPoles);
+  <font color="red">Complex.Vectors.print</font>(&quot;calcPoles&quot;, calcPoles);
+  <font color="red">Matrices.printMatrix</font>(<font color="red">Re</font>(X), 6, &quot;ReX&quot;);
+  <font color="red">Matrices.printMatrix</font>(<font color="red">Im</font>(X), 6, &quot;ImX&quot;);
+  <font color="red">print</font>(&quot;kappa2 &quot; +<font color="red"> String</font>(kappa2));
+  <font color="red">print</font>(&quot;kappaF &quot; +<font color="red"> String</font>(kappaF));
+  <font color="red">print</font>(&quot;zeta &quot; +<font color="red"> String</font>(zeta));
+  <font color="red">print</font>(&quot;cInf &quot; +<font color="red"> String</font>(cInf));
+  <font color="red">print</font>(&quot;nu2 &quot; +<font color="red"> String</font>(nu2));
+  <font color="red">print</font>(&quot;nuF &quot; +<font color="red"> String</font>(nuF));
+  <font color="red">print</font>(&quot;dlambda &quot; +<font color="red"> String</font>(dlambda));
+  <font color="blue">if </font>isKprovided<font color="blue"> then</font>
+    <font color="red">print</font>(&quot;gap &quot; +<font color="red"> String</font>(gap));
+  <font color="blue">end if</font>;
+  <font color="red">print</font>(&quot;Jalpha = &quot;+<font color="red">Modelica_LinearSystems2.Math.Vectors.printVector</font>(Jalpha));
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>testPoleAssignment;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE testPoleAssignment2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignmentI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignment2" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignment2"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.testPoleAssignment2</H2>
+<B>Function to assess algorithms for pole assignment</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+Computes the feedback gain K for the state space system according to assigned close loop poles
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Types.html#Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod"
+>AssignPolesMethod</A></TD><TD>method</TD><TD>Tests.Types.AssignPolesMetho...</TD><TD>method for pole assignment</TD></TR>
+<TR><TD>Boolean</TD><TD>isSI</TD><TD>true</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>outputFile</TD><TD>&quot;&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Boolean</TD><TD>deleteExistingOutputfile</TD><TD>false</TD><TD>&nbsp;</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>system data definition</TD></TR>
+<TR><TD>String</TD><TD>dataFile</TD><TD>TestDataDir + &quot;data_Byers6.m...</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>K[size(B, 2), size(A, 1)]</TD><TD>Feedback gain matrix</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>calcPoles[:]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>kappa2</TD><TD>condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2</TD></TR>
+<TR><TD>Real</TD><TD>kappaF</TD><TD>condition number kappa_F(X) = ||X||_F * ||inv(X)||_F</TD></TR>
+<TR><TD>Real</TD><TD>zeta</TD><TD>condition number by Byers, zeta(X) = (||X||_F)^2 + (||inv(X)||_F)^2</TD></TR>
+<TR><TD>Real</TD><TD>cInf</TD><TD>condition number vu1=||c||_inf = max(c_j)</TD></TR>
+<TR><TD>Real</TD><TD>nu2</TD><TD>Euclidean norm of the feedback matrix</TD></TR>
+<TR><TD>Real</TD><TD>nuF</TD><TD>Frobenius norm of the feedback matrix</TD></TR>
+<TR><TD>Real</TD><TD>dlambda</TD><TD>Distance between the assigned and the calculated poles</TD></TR>
+<TR><TD>Real</TD><TD>gap</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>Jalpha[11]</TD><TD>Combined condition number, JKX=alpha/2*(kappa2X_B) + (1-alpha)/2*normFroK^2</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>X[:, :]</TD><TD>right eigenvectors of the closed loop system</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> testPoleAssignment2 <font color="darkgreen">
+  &quot;Function to assess algorithms for pole assignment&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font>Re = <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex.real"
+>Modelica_LinearSystems2.Math.Complex.real</A>;
+  <font color="blue">import </font>Im = <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex.imag"
+>Modelica_LinearSystems2.Math.Complex.imag</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>;
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print"
+>Modelica.Utilities.Streams.print</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+
+  <font color="blue">input </font>String dataFile=TestDataDir + &quot;data_Byers6.mat&quot;;
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Types.html#Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod"
+>Types.AssignPolesMethod</A> method=Tests.Types.AssignPolesMethod.KNV <font color="darkgreen">
+    &quot;method for pole assignment&quot;</font>;
+  <font color="blue">input </font>Boolean isSI=true;
+  <font color="blue">input </font>String outputFile = &quot;&quot;;
+  <font color="blue">input </font>Boolean deleteExistingOutputfile=false;
+
+<font color="blue">protected </font>
+  Integer nm[2]=<font color="red">readMatrixSize</font>(dataFile, &quot;B&quot;) <font color="darkgreen">
+    &quot;Read system order and number of inputs&quot;</font>;
+  Integer nmk[2]=<font color="red">readMatrixSize</font>(dataFile, &quot;K&quot;) <font color="darkgreen">&quot;Read dimensions of K&quot;</font>;
+  Real A[:,:]=<font color="red">readMatrix</font>(dataFile, &quot;A&quot;, nm[1], nm[1]) <font color="darkgreen">&quot;Read system matrix A&quot;</font>;
+  Real B[:,:]=<font color="red">readMatrix</font>(dataFile, &quot;B&quot;, nm[1], nm[2]) <font color="darkgreen">&quot;Read system matrix B&quot;</font>;
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> j=<font color="red">Modelica_LinearSystems2.Math.Complex.j</font>();
+  Real assignedPolesR[1,:]=<font color="red">readMatrix</font>(dataFile, &quot;assignedPoles&quot;, 1, nm[1]) <font color="darkgreen">
+    &quot;Read real part of assigned poles&quot;</font>;
+  Real assignedPolesI[1,:]=<font color="red">readMatrix</font>(dataFile, &quot;assignedPolesIm&quot;, 1, nm[1]) <font color="darkgreen">
+    &quot;Read imaginary part of assigned poles&quot;</font>;
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> assignedPoles[:]=<font color="red">Complex</font>(1)*assignedPolesR[1, :] + j*assignedPolesI[1, :] <font color="darkgreen">
+    &quot;Complex assigned poles&quot;</font>;
+
+  Boolean isKprovided=<font color="red">min</font>(nmk) &gt; 0;
+  Real Ki[:,:]=<font color="blue">if </font>isKprovided<font color="blue"> then </font><font color="red">readMatrix</font>(dataFile, &quot;K&quot;, nm[2], nm[1])<font color="blue"> else </font><font color="red">fill</font>(0, 0, 0);
+<font color="darkgreen">//  Integer n=size(A, 1);</font>
+  Real S[nm[1],nm[1]] <font color="darkgreen">&quot;closed loop system matrix A-BK&quot;</font>;
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss=<font color="red">Modelica_LinearSystems2.StateSpace</font>(A=A, B=B, C=<font color="red">zeros</font>(1, nm[1]), D=<font color="red">zeros</font>(1,<font color="red"> size</font>(B, 2)));
+  Real Xre[nm[1],nm[1]];
+
+<font color="blue">public </font>
+  <font color="blue">output </font>Real K[<font color="red">size</font>(B, 2),<font color="red">size</font>(A, 1)] <font color="darkgreen">&quot;Feedback gain matrix&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> calcPoles[:];
+  <font color="blue">output </font>Real kappa2 <font color="darkgreen">&quot;condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2&quot;</font>;
+  <font color="blue">output </font>Real kappaF <font color="darkgreen">&quot;condition number kappa_F(X) = ||X||_F * ||inv(X)||_F&quot;</font>;
+  <font color="blue">output </font>Real zeta <font color="darkgreen">
+    &quot;condition number by Byers, zeta(X) = (||X||_F)^2 + (||inv(X)||_F)^2&quot;</font>;
+  <font color="blue">output </font>Real cInf <font color="darkgreen">&quot;condition number vu1=||c||_inf = max(c_j)&quot;</font>;
+  <font color="blue">output </font>Real nu2 <font color="darkgreen">&quot;Euclidean norm of the feedback matrix&quot;</font>;
+  <font color="blue">output </font>Real nuF <font color="darkgreen">&quot;Frobenius norm of the feedback matrix&quot;</font>;
+  <font color="blue">output </font>Real dlambda <font color="darkgreen">&quot;Distance between the assigned and the calculated poles&quot;</font>;
+  <font color="blue">output </font>Real gap=0.0;
+  <font color="blue">output </font>Real Jalpha[11] <font color="darkgreen">
+    &quot;Combined condition number, JKX=alpha/2*(kappa2X_B) + (1-alpha)/2*normFroK^2&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> X[:,:] <font color="darkgreen">&quot;right eigenvectors of the closed loop system&quot;</font>;
+
+<font color="blue">algorithm </font>
+<font color="darkgreen">// use single input algorithm</font>
+  <font color="blue">if </font>isSI<font color="blue"> and </font>nm[2] == 1<font color="blue"> then</font>
+    K :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesSI_rq</font>(
+                                              ss, assignedPoles);
+    ss.A := ss.A - ss.B*K;
+    (Xre,calcPoles) :=<font color="red"> StateSpace.Analysis.eigenVectors</font>(ss, false);
+    X :=<font color="red"> Complex</font>(1)*Xre;
+  <font color="blue">else</font><font color="darkgreen">// end isSI</font>
+
+    <font color="blue">if </font>method == Tests.Types.AssignPolesMethod.KNV<font color="blue"> then</font>
+<font color="darkgreen">// extented robust KNV-algortihm according to MATLAB&#39;s place-function</font>
+      (K,X) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob</font>(
+                                                                             A, B, assignedPoles);
+      S := A - B*K;
+      calcPoles :=<font color="red"> Complex.eigenValues</font>(S);
+      <font color="blue">if </font>isKprovided<font color="blue"> then</font>
+        gap :=<font color="red"> Modelica.Math.Matrices.norm</font>(K - Ki);
+      <font color="blue">end if</font>;
+    <font color="blue">elseif </font>method ==Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod.Schur<font color="blue"> then</font>
+<font color="darkgreen">// Schur method</font>
+      (K,S,calcPoles,,,,X) :=
+        <font color="red">Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</font>(ss, assignedPoles, -1e10,<font color="red"> Modelica.Math.Matrices.norm</font>(ss.A, 1)*1e-12, true);
+      <font color="blue">if </font>isKprovided<font color="blue"> then</font>
+        gap :=<font color="red"> Modelica.Math.Matrices.norm</font>(K - Ki);
+      <font color="blue">end if</font>;
+    <font color="blue">else</font>
+      <font color="red">assert</font>(false, &quot;Argument method (= &quot; +<font color="red"> String</font>(method) + &quot;) of testPoleAssignment is wrong. It has to be \&quot;KNV\&quot; or \&quot;Schur\&quot;&quot;);
+    <font color="blue">end if</font>;
+  <font color="blue">end if</font>;
+  <font color="darkgreen">// calculate condition numbers</font>
+  (kappa2,kappaF,,cInf,nu2,nuF,zeta,Jalpha,dlambda) :=<font color="red"> conditionNumbers</font>(K, X, assignedPoles, calcPoles);
+  <font color="blue">if </font>deleteExistingOutputfile<font color="blue"> then</font>
+    <font color="blue">if </font><font color="red">Modelica.Utilities.Files.exist</font>(outputFile)<font color="blue"> then</font>
+      <font color="red">Modelica.Utilities.Files.removeFile</font>(outputFile);
+    <font color="blue">end if</font>;
+    <font color="blue">end if</font>;
+  <font color="blue">if </font>isSI<font color="blue"> and </font>nm[2] == 1<font color="blue"> then</font>
+    <font color="red">print</font>(&quot;---- Using SI-algorithm ----\n&quot;,outputFile);
+  <font color="blue">else</font>
+    <font color="red">print</font>(&quot;---- Using MI-algorithm ----\n&quot;,outputFile);
+  <font color="blue">end if</font>;
+  <font color="red">print</font>(&quot;n = &quot;+<font color="red">String</font>(nm[1])+&quot;,  m = &quot;+<font color="red"> String</font>(nm[2])+&quot;\n&quot;,outputFile);
+  <font color="red">print</font>(<font color="red">Matrices.printMatrix</font>(K, 6, &quot;K&quot;),outputFile);
+  <font color="red">Complex.Vectors.print</font>(&quot;assignedPoles&quot;, assignedPoles,outputFile);
+  <font color="red">Complex.Vectors.print</font>(&quot;calcPoles&quot;, calcPoles,outputFile);
+<font color="darkgreen">//   Matrices.printMatrix(Re(X), 6, &quot;ReX&quot;);</font>
+<font color="darkgreen">//   Matrices.printMatrix(Im(X), 6, &quot;ImX&quot;);</font>
+  <font color="red">print</font>(&quot;kappa2 &quot; +<font color="red"> String</font>(kappa2),outputFile);
+  <font color="red">print</font>(&quot;kappaF &quot; +<font color="red"> String</font>(kappaF),outputFile);
+  <font color="red">print</font>(&quot;zeta &quot; +<font color="red"> String</font>(zeta),outputFile);
+  <font color="red">print</font>(&quot;cInf &quot; +<font color="red"> String</font>(cInf),outputFile);
+  <font color="red">print</font>(&quot;nu2 &quot; +<font color="red"> String</font>(nu2),outputFile);
+  <font color="red">print</font>(&quot;nuF &quot; +<font color="red"> String</font>(nuF),outputFile);
+  <font color="red">print</font>(&quot;dlambda &quot; +<font color="red"> String</font>(dlambda),outputFile);
+  <font color="blue">if </font>isKprovided<font color="blue"> then</font>
+    <font color="red">print</font>(&quot;gap &quot; +<font color="red"> String</font>(gap),outputFile);
+  <font color="blue">end if</font>;
+  <font color="red">print</font>(&quot;Jalpha = &quot; +<font color="red"> Modelica_LinearSystems2.Math.Vectors.printVector</font>(Jalpha),outputFile);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>testPoleAssignment2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE testPoleAssignment3<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignmentI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignment3" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignment3"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.testPoleAssignment3</H2>
+<B>Function to assess algorithms for pole assignment</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+Computes the gain vector k for the state space system
+<pre> 
+ss = StateSpace(A=[-1,1;0,-2],B=[0, 1],C=[1,0; 0, 1],D=[0; 0])
+</pre>
+such that for the state feedback 
+<pre>u = -k*y = -k*x</pre> the closed-loop
+poles are placed at 
+<pre>p = {-3,-4}.</pre>
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A></TD><TD>data</TD><TD>Design.DesignData_Chow_Kokot...</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Types.html#Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod"
+>AssignPolesMethod</A></TD><TD>method</TD><TD>Tests.Types.AssignPolesMetho...</TD><TD>method for pole assignment</TD></TR>
+<TR><TD>Boolean</TD><TD>isSI</TD><TD>true</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>K[size(data.B, 2), size(data.A, 1)]</TD><TD>Feedback gain matrix</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>calcPoles[size(data.A, 1)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>kappa2</TD><TD>condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2</TD></TR>
+<TR><TD>Real</TD><TD>kappaF</TD><TD>condition number kappa_F(X) = ||X||_F * ||inv(X)||_F</TD></TR>
+<TR><TD>Real</TD><TD>zeta</TD><TD>condition number by Byers, zeta(X) = (||X||_F)^2 + (||inv(X)||_F)^2</TD></TR>
+<TR><TD>Real</TD><TD>cInf</TD><TD>condition number vu1=||c||_inf = max(c_j)</TD></TR>
+<TR><TD>Real</TD><TD>nu2</TD><TD>Euclidean norm of the feedback matrix</TD></TR>
+<TR><TD>Real</TD><TD>nuF</TD><TD>Frobenius norm of the feedback matrix</TD></TR>
+<TR><TD>Real</TD><TD>dlambda</TD><TD>Distance between the assigned and the calculated poles</TD></TR>
+<TR><TD>Real</TD><TD>gap</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>Jalpha[11]</TD><TD>Combined condition number, JKX=alpha/2*(kappa2X_B) + (1-alpha)/2*normFroK^2</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>X[:, :]</TD><TD>right eigenvectors of the closed loop system</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> testPoleAssignment3 <font color="darkgreen">
+  &quot;Function to assess algorithms for pole assignment&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font>Re = <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex.real"
+>Modelica_LinearSystems2.Math.Complex.real</A>;
+  <font color="blue">import </font>Im = <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex.imag"
+>Modelica_LinearSystems2.Math.Complex.imag</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>;
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print"
+>Modelica.Utilities.Streams.print</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Internal.html#Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData"
+>DesignData</A> data=<font color="red">Design.DesignData_Chow_Kokotovic</font>();
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Types.html#Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod"
+>Types.AssignPolesMethod</A> method=Tests.Types.AssignPolesMethod.KNV <font color="darkgreen">
+    &quot;method for pole assignment&quot;</font>;
+  <font color="blue">input </font>Boolean isSI=true;
+
+<font color="blue">protected </font>
+  Boolean isKprovided=<font color="red">min</font>(<font color="red">size</font>(data.K))&gt;0;
+  Real Ki[:,:]=<font color="blue">if </font>isKprovided<font color="blue"> then </font>data.K<font color="blue"> else </font><font color="red">fill</font>(0,0,0);
+  Integer n=<font color="red">size</font>(data.A, 1);
+  Real S[n,n] <font color="darkgreen">&quot;closed loop system matrix A-BK&quot;</font>;
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss=<font color="red">Modelica_LinearSystems2.StateSpace</font>(A=data.A, B=data.B, C=<font color="red">zeros</font>(1,n), D=<font color="red">zeros</font>(1,<font color="red">size</font>(data.B,2)));
+  Real Xre[<font color="red">size</font>(data.A, 1),<font color="red">size</font>(data.A, 1)];
+
+<font color="blue">public </font>
+  <font color="blue">output </font>Real K[<font color="red">size</font>(data.B, 2),<font color="red">size</font>(data.A, 1)] <font color="darkgreen">&quot;Feedback gain matrix&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> calcPoles[<font color="red">size</font>(data.A, 1)];
+  <font color="blue">output </font>Real kappa2 <font color="darkgreen">&quot;condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2&quot;</font>;
+  <font color="blue">output </font>Real kappaF <font color="darkgreen">&quot;condition number kappa_F(X) = ||X||_F * ||inv(X)||_F&quot;</font>;
+  <font color="blue">output </font>Real zeta <font color="darkgreen">
+    &quot;condition number by Byers, zeta(X) = (||X||_F)^2 + (||inv(X)||_F)^2&quot;</font>;
+  <font color="blue">output </font>Real cInf <font color="darkgreen">&quot;condition number vu1=||c||_inf = max(c_j)&quot;</font>;
+  <font color="blue">output </font>Real nu2 <font color="darkgreen">&quot;Euclidean norm of the feedback matrix&quot;</font>;
+  <font color="blue">output </font>Real nuF <font color="darkgreen">&quot;Frobenius norm of the feedback matrix&quot;</font>;
+  <font color="blue">output </font>Real dlambda <font color="darkgreen">&quot;Distance between the assigned and the calculated poles&quot;</font>;
+  <font color="blue">output </font>Real gap=0.0;
+  <font color="blue">output </font>Real Jalpha[11] <font color="darkgreen">
+    &quot;Combined condition number, JKX=alpha/2*(kappa2X_B) + (1-alpha)/2*normFroK^2&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> X[:,:] <font color="darkgreen">&quot;right eigenvectors of the closed loop system&quot;</font>;
+
+<font color="blue">algorithm </font>
+<font color="darkgreen">//  use single input method</font>
+  <font color="blue">if </font>isSI<font color="blue"> and </font><font color="red">size</font>(data.B, 2)==1<font color="blue"> then</font>
+    K :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesSI_rq</font>(
+                                              ss,data.assignedPoles);
+    ss.A := ss.A-ss.B*K;
+    (Xre,calcPoles) :=<font color="red"> StateSpace.Analysis.eigenVectors</font>(ss,false);
+    X :=<font color="red"> Complex</font>(1)*Xre;
+  <font color="blue">else</font><font color="darkgreen">//isSI</font>
+
+    <font color="blue">if </font>method == Tests.Types.AssignPolesMethod.KNV<font color="blue"> then</font>
+<font color="darkgreen">// extented robust KNV-algortihm according to MATLAB&#39;s place-function</font>
+     (K,X) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob</font>(
+                                                                            data.A, data.B, data.assignedPoles);
+     S := data.A - data.B*K;
+     calcPoles :=<font color="red"> Complex.eigenValues</font>(S);
+     <font color="blue">if </font>isKprovided<font color="blue"> then</font>
+       gap :=<font color="red"> Modelica.Math.Matrices.norm</font>(K - Ki);
+     <font color="blue">end if</font>;
+   <font color="blue">elseif </font>method ==Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod.Schur<font color="blue"> then</font>
+   <font color="darkgreen">// Schur method</font>
+    (K,S,calcPoles,,,,X) :=<font color="red"> Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</font>(ss, data.assignedPoles, -1e10,<font color="red"> Modelica.Math.Matrices.norm</font>(ss.A, 1)*1e-12, true);
+    <font color="blue">if </font>isKprovided<font color="blue"> then</font>
+      gap :=<font color="red"> Modelica.Math.Matrices.norm</font>(K - Ki);
+    <font color="blue">end if</font>;
+    <font color="blue">else</font>
+      <font color="red">assert</font>(false, &quot;Argument method (= &quot; +<font color="red"> String</font>(method) + &quot;) of testPoleAssignment is wrong. It has to be \&quot;KNV\&quot; or \&quot;Schur\&quot;&quot;);
+    <font color="blue">end if</font>;
+    <font color="blue">end if</font>;
+
+  <font color="darkgreen">// calculate condition numbers</font>
+  (kappa2,kappaF,,cInf,nu2,nuF,zeta,Jalpha,dlambda) :=<font color="red"> conditionNumbers</font>(K, X, data.assignedPoles, calcPoles);
+
+  <font color="red">Matrices.printMatrix</font>(K, 6, &quot;K&quot;);
+  <font color="red">Complex.Vectors.print</font>(&quot;assignedPoles&quot;, data.assignedPoles);
+  <font color="red">Complex.Vectors.print</font>(&quot;calcPoles&quot;, calcPoles);
+  <font color="red">Matrices.printMatrix</font>(<font color="red">Re</font>(X), 6, &quot;ReX&quot;);
+  <font color="red">Matrices.printMatrix</font>(<font color="red">Im</font>(X), 6, &quot;ImX&quot;);
+  <font color="red">print</font>(&quot;kappa2 &quot; +<font color="red"> String</font>(kappa2));
+  <font color="red">print</font>(&quot;kappaF &quot; +<font color="red"> String</font>(kappaF));
+  <font color="red">print</font>(&quot;zeta &quot; +<font color="red"> String</font>(zeta));
+  <font color="red">print</font>(&quot;cInf &quot; +<font color="red"> String</font>(cInf));
+  <font color="red">print</font>(&quot;nu2 &quot; +<font color="red"> String</font>(nu2));
+  <font color="red">print</font>(&quot;nuF &quot; +<font color="red"> String</font>(nuF));
+  <font color="red">print</font>(&quot;dlambda &quot; +<font color="red"> String</font>(dlambda));
+  <font color="blue">if </font>isKprovided<font color="blue"> then</font>
+    <font color="red">print</font>(&quot;gap &quot; +<font color="red"> String</font>(gap));
+  <font color="blue">end if</font>;
+  <font color="red">print</font>(&quot;Jalpha = &quot;+<font color="red">Modelica_LinearSystems2.Math.Vectors.printVector</font>(Jalpha));
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>testPoleAssignment3;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE runAll<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Design.testPoleAssignmentI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Design.runAll" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Design.runAll"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Design.html#Modelica_LinearSystems2.WorkInProgress.Tests.Design"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Design</A>.runAll</H2>
+<B>Executes controller design for the according data in directory Test\data</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>dataSpecifier</TD><TD>&quot;data_&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>fileSpecifier</TD><TD>&quot;Design&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>directoryName</TD><TD>classDirectory() + &quot;../&quot; + &quot;...</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>outputFile</TD><TD>fileSpecifier + &quot;.txt&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Types.html#Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod"
+>AssignPolesMethod</A></TD><TD>method</TD><TD>Tests.Types.AssignPolesMetho...</TD><TD>method for pole assignment</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>numberOfFunctions</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> runAll <font color="darkgreen">
+  &quot;Executes controller design for the according data in directory Test\\data&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests.html#Modelica_LinearSystems2.WorkInProgress.Tests"
+>Modelica_LinearSystems2.WorkInProgress.Tests</A>;
+
+  <font color="blue">input </font>String dataSpecifier = &quot;data_&quot;;
+  <font color="blue">input </font>String fileSpecifier = &quot;Design&quot;;
+  <font color="blue">input </font>String directoryName=<font color="red"> classDirectory</font>()+ &quot;../&quot; + &quot;Data&quot;;
+  <font color="blue">input </font>String outputFile = fileSpecifier+&quot;.txt&quot;;
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Types.html#Modelica_LinearSystems2.WorkInProgress.Tests.Types.AssignPolesMethod"
+>Types.AssignPolesMethod</A> method=Tests.Types.AssignPolesMethod.KNV <font color="darkgreen">
+    &quot;method for pole assignment&quot;</font>;
+  <font color="blue">output </font>Integer numberOfFunctions;
+  <font color="blue">output </font>Boolean ok;
+
+<font color="blue">protected </font>
+  String functions[:];
+  String functions2[:];
+  String designMos = fileSpecifier + &quot;.mos&quot;;
+  String h=&quot;Design.&quot;;
+  Integer index;
+  Integer n;
+  Integer i;
+
+<font color="blue">algorithm </font>
+  <font color="blue">if </font><font color="red">Modelica.Utilities.Files.exist</font>(designMos)<font color="blue"> then</font>
+    <font color="red">Modelica.Utilities.Files.removeFile</font>(designMos);
+  <font color="blue">end if</font>;
+  <font color="blue">if </font><font color="red">Modelica.Utilities.Files.exist</font>(outputFile)<font color="blue"> then</font>
+    <font color="red">Modelica.Utilities.Files.removeFile</font>(outputFile);
+  <font color="blue">end if</font>;
+
+  <font color="red">Modelica.Utilities.Streams.print</font>(&quot;import Modelica_LinearSystems2.WorkInProgress.Tests&quot;,designMos);
+  <font color="red">Modelica.Utilities.Streams.print</font>(&quot;import Modelica_LinearSystems2.WorkInProgress.Tests.Types&quot;,designMos);
+
+   (functions, n) :=<font color="red"> Tests.Internal.getMatFiles</font>(dataSpecifier,directoryName);
+   functions2 :=<font color="red"> fill</font>(&quot;&quot;,n);
+   <font color="blue">for </font>i<font color="blue"> in </font>1:n<font color="blue"> loop</font>
+    index :=<font color="red"> Modelica.Utilities.Strings.find</font>(functions[i],&quot;.&quot;);
+    functions2[i] :=<font color="red"> Modelica.Utilities.Strings.substring</font>(functions[i],1,index-1);
+    functions[i]:=&quot;/&quot;+functions[i];
+    <font color="blue">if </font>method==Tests.Types.AssignPolesMethod.KNV<font color="blue"> then</font>
+      <font color="red">Modelica.Utilities.Streams.print</font>(&quot;Modelica.Utilities.Streams.print(\&quot;\\n\\n### &quot;+functions2[i]+&quot; KNV-method ###\\n\&quot;,\&quot;&quot; + outputFile+ &quot;\&quot;)&quot;,designMos);
+      <font color="red">Modelica.Utilities.Streams.print</font>(&quot;Tests.Design.testPoleAssignment2(\&quot;&quot;+directoryName+functions[i]+&quot;\&quot;, Types.AssignPolesMethod.KNV, true ,\&quot;&quot;+outputFile+&quot;\&quot;, false);&quot;,designMos);
+    <font color="blue">else</font>
+      <font color="red">Modelica.Utilities.Streams.print</font>(&quot;Modelica.Utilities.Streams.print(\&quot;\\n\\n### &quot;+functions2[i]+&quot; Schur-method ###\\n\&quot;,\&quot;&quot; + outputFile+ &quot;\&quot;)&quot;,designMos);
+      <font color="red">Modelica.Utilities.Streams.print</font>(&quot;Tests.Design.testPoleAssignment2(\&quot;&quot;+directoryName+functions[i]+&quot;\&quot;, Types.AssignPolesMethod.Schur, true,\&quot;&quot;+outputFile+&quot;\&quot;, false);&quot;,designMos);
+    <font color="blue">end if</font>;
+  <font color="blue">end for</font>;
+   ok :=<font color="red"> RunScript</font>(designMos);
+<font color="darkgreen">//ok := true;</font>
+
+numberOfFunctions := n;
+<font color="blue">end </font>runAll;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:29:06 2010.
+</address></BODY>
+</HTML>

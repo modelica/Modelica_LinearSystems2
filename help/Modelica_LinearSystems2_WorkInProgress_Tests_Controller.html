@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.WorkInProgress.Tests.Controller</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Controller<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Controller"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests.html#Modelica_LinearSystems2.WorkInProgress.Tests"
+>Modelica_LinearSystems2.WorkInProgress.Tests</A>.Controller</H2>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationInitialStateS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationInitialState" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Controller.html#Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationInitialState"
+>DiscretizationInitialState</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationInitialStateS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationWithInitialOutputs" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Controller.html#Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationWithInitialOutputs"
+>DiscretizationWithInitialOutputs</A>
+</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE DiscretizationInitialState<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationInitialStateI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationInitialState" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationInitialState"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Controller.html#Modelica_LinearSystems2.WorkInProgress.Tests.Controller"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Controller</A>.DiscretizationInitialState</H2>
+<IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationInitialStateD.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationInitialState">
+<P><H3>Information</H3></P>
+Extends from Modelica_LinearSystems2.Controller.Examples.Discretization.
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> DiscretizationInitialState
+  <font color="blue">extends </font>Modelica_LinearSystems2.Controller.Examples.Discretization(
+      sampleClock(initType=Modelica_LinearSystems2.Controller.Types.Init.InitialState));
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>DiscretizationInitialState;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE DiscretizationWithInitialOutputs<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationInitialStateI.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationWithInitialOutputs" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationWithInitialOutputs"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Controller.html#Modelica_LinearSystems2.WorkInProgress.Tests.Controller"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Controller</A>.DiscretizationWithInitialOutputs</H2>
+<IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationInitialStateD.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Controller.DiscretizationWithInitialOutputs">
+<P><H3>Information</H3></P>
+Extends from Modelica_LinearSystems2.Controller.Examples.Discretization.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>y_start</TD><TD>step.offset</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> DiscretizationWithInitialOutputs
+  <font color="blue">parameter </font>Real y_start = step.offset;
+  <font color="blue">extends </font>Modelica_LinearSystems2.Controller.Examples.Discretization(
+    sampleClock(initType=Modelica_LinearSystems2.Controller.Types.Init.InitialOutput),
+    continuous(y_start=y_start),
+    explicitEuler(y_start=y_start),
+    implicitEuler(y_start=y_start),
+    trapezoid(y_start=y_start),
+    impulseExact(y_start=y_start),
+    stepExact(y_start=y_start),
+    rampExact(y_start=y_start));
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>DiscretizationWithInitialOutputs;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:29:06 2010.
+</address></BODY>
+</HTML>

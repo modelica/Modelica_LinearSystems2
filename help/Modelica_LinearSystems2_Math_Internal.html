@@ -1,0 +1,190 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.Math.Complex.Internal</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Internal<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Complex.Internal"></A><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>.Internal</H2>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.Math.Complex.Internal.eigenValues_dhseqr" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Internal.html#Modelica_LinearSystems2.Math.Complex.Internal.eigenValues_dhseqr"
+>eigenValues_dhseqr</A>
+</TD><TD>compute eingenvalues of a upper Hessenberg matrix using lapack routine DHSEQR</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Complex.Internal.C_transposeS.png" ALT="Modelica_LinearSystems2.Math.Complex.Internal.C_transpose" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Internal.html#Modelica_LinearSystems2.Math.Complex.Internal.C_transpose"
+>C_transpose</A>
+</TD><TD>Computes the transposed matrix of a complex matrix</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Complex.Internal.C_transposeS.png" ALT="Modelica_LinearSystems2.Math.Complex.Internal.frobeniusNorm" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Internal.html#Modelica_LinearSystems2.Math.Complex.Internal.frobeniusNorm"
+>frobeniusNorm</A>
+</TD><TD>Return the Frobenius norm of a matrix</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE eigenValues_dhseqr<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Complex.Internal.eigenValues_dhseqr"></A><A HREF="Modelica_LinearSystems2_Math_Internal.html#Modelica_LinearSystems2.Math.Complex.Internal"
+>Modelica_LinearSystems2.Math.Complex.Internal</A>.eigenValues_dhseqr</H2>
+<B>compute eingenvalues of a upper Hessenberg matrix using lapack routine DHSEQR</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>H[:, size(H, 1)]</TD><TD>&nbsp;</TD><TD>Real upper Hessenberg matrix</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>zeros[size(H, 1)]</TD><TD>Finite, invariant zeros of ss; size(Zeros,1) &lt;= size(ss.A,1)</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> eigenValues_dhseqr <font color="darkgreen">
+  &quot;compute eingenvalues of a upper Hessenberg matrix using lapack routine DHSEQR&quot;</font>
+
+     <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+     <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+     <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg"
+>Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg</A>;
+
+ <font color="blue">input </font>Real H[:,<font color="red">size</font>(H, 1)] <font color="darkgreen">&quot;Real upper Hessenberg matrix&quot;</font>;
+ <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> zeros[<font color="red">size</font>(H, 1)] <font color="darkgreen">
+    &quot;Finite, invariant zeros of ss; size(Zeros,1) &lt;= size(ss.A,1)&quot;</font>;
+
+<font color="blue">protected </font>
+ Integer nx=<font color="red">size</font>(H, 1) <font color="darkgreen">&quot;Number of states&quot;</font>;
+ Real alphaReal[nx];
+ Real alphaImag[nx];
+ Integer info;
+
+<font color="blue">algorithm </font>
+ (alphaReal,alphaImag,info) :=<font color="red"> eigenvaluesHessenberg</font>(H);
+ <font color="red">assert</font>(info == 0,
+   &quot;Failed to compute eigenvalues with function Internal.eigenValues_dhseqr(..)&quot;);
+
+ <font color="blue">for </font>i<font color="blue"> in </font>1:nx<font color="blue"> loop</font>
+   zeros[i].re := alphaReal[i];
+   zeros[i].im := alphaImag[i];
+ <font color="blue">end for</font>;
+
+<font color="blue">end </font>eigenValues_dhseqr;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE C_transpose<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Math.Complex.Internal.C_transposeI.png" ALT="Modelica_LinearSystems2.Math.Complex.Internal.C_transpose" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Math.Complex.Internal.C_transpose"></A><A HREF="Modelica_LinearSystems2_Math_Internal.html#Modelica_LinearSystems2.Math.Complex.Internal"
+>Modelica_LinearSystems2.Math.Complex.Internal</A>.C_transpose</H2>
+<B>Computes the transposed matrix of a complex matrix</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>C[:, :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>CT[size(C, 2), size(C, 1)]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> C_transpose <font color="darkgreen">
+  &quot;Computes the transposed matrix of a complex matrix&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+    <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+    <font color="blue">import </font>Re = <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex.real"
+>Modelica_LinearSystems2.Math.Complex.real</A>;
+    <font color="blue">import </font>Im = <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex.imag"
+>Modelica_LinearSystems2.Math.Complex.imag</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> C[:,:];
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> CT[<font color="red">size</font>(C, 2),<font color="red">size</font>(C, 1)];
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> j=<font color="red">Complex.j</font>();
+  Integer l1;
+  Integer l2;
+<font color="blue">algorithm </font>
+<font color="darkgreen">//  CT := Complex(1)*transpose(C[:,:].re)-j*transpose(C[:,:].im);// too slow</font>
+  <font color="blue">for </font>l1<font color="blue"> in </font>1:<font color="red">size</font>(C, 1)<font color="blue"> loop</font>
+    <font color="blue">for </font>l2<font color="blue"> in </font>1:<font color="red">size</font>(C, 2)<font color="blue"> loop</font>
+<font color="darkgreen">//      CT[l2, l1] := Re(C[l1, l2]) - j*Im(C[l1, l2]);</font>
+      CT[l2, l1] :=<font color="red"> Complex.conj</font>(C[l1,l2]);
+    <font color="blue">end for</font>;
+  <font color="blue">end for</font>;
+
+<font color="blue">end </font>C_transpose;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE frobeniusNorm<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Math.Complex.Internal.C_transposeI.png" ALT="Modelica_LinearSystems2.Math.Complex.Internal.frobeniusNorm" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Math.Complex.Internal.frobeniusNorm"></A><A HREF="Modelica_LinearSystems2_Math_Internal.html#Modelica_LinearSystems2.Math.Complex.Internal"
+>Modelica_LinearSystems2.Math.Complex.Internal</A>.frobeniusNorm</H2>
+<B>Return the Frobenius norm of a matrix</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Input matrix</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>result</TD><TD>frobenius norm of matrix A</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> frobeniusNorm <font color="darkgreen">&quot;Return the Frobenius norm of a matrix&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+      <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> A[:,:] <font color="darkgreen">&quot;Input matrix&quot;</font>;
+  <font color="blue">output </font>Real result=0.0 <font color="darkgreen">&quot;frobenius norm of matrix A&quot;</font>;
+<font color="blue">algorithm </font>
+  <font color="blue">for </font>i1<font color="blue"> in </font>1:<font color="red">size</font>(A, 1)<font color="blue"> loop</font>
+    <font color="blue">for </font>i2<font color="blue"> in </font>1:<font color="red">size</font>(A, 2)<font color="blue"> loop</font>
+      result := result +<font color="red"> Complex.real</font>(A[i1, i2]*<font color="red">Complex.conj</font>(A[i1, i2]));
+    <font color="blue">end for</font>;
+  <font color="blue">end for</font>;
+  result :=<font color="red"> sqrt</font>(result);
+<font color="blue">end </font>frobeniusNorm;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:29:07 2010.
+</address></BODY>
+</HTML>
