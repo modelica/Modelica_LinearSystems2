@@ -500,6 +500,8 @@ Other improvements:
 <li> The instance name is now displayed above the icon of every Controller block.</li>
 <li> The sample factor is now displayed in the icon of every Controller block.<li>
 <li> Access to resources (e.g. image files) has been changed from file names to URIs.</li>
+<li> The sequence of pole shifting in poleAssignmentMI has beeen changed.</li>
+<li> Bode diagrams of state space systems are now based on numerical more reliable zeros and poles representation istead of on transfer functions.</li>
 </ul>
 
 <p>
