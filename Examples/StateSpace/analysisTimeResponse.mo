@@ -12,8 +12,9 @@ protected
       D=[0,0; 0,0]);
   Real Ts=0.01;
 
-  Modelica_LinearSystems2.DiscreteStateSpace sd=
-      Modelica_LinearSystems2.DiscreteStateSpace(sc, Ts);
+  Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace sd=
+      Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace(
+                                                 sc, Ts);
   Integer samples=size(u,1);
   Real x0[2]={0, 0};
 

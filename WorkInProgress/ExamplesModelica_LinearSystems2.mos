@@ -56,6 +56,16 @@ Modelica_LinearSystems2.Examples.ZerosAndPoles.plotBodeFilter3();
 
 Modelica_LinearSystems2.Math.Matrices.Examples.care();
 Modelica_LinearSystems2.Math.Matrices.Examples.exampleSVD();
-Modelica_LinearSystems2.Math.Matrices.Examples.exampleQR();
+
+
+simulateModel("Modelica_LinearSystems2.Controller.Examples.FirstExample", stopTime=5, method="dassl", resultFile="FirstExample");
+simulateModel("Modelica_LinearSystems2.Controller.Examples.SimpleControlledDrive", stopTime=3, method="dassl", resultFile="SimpleControlledDrive");
+simulateModel("Modelica_LinearSystems2.Controller.Examples.DoublePendulum", stopTime=40, numberOfIntervals=2000, method="dassl", tolerance=1e-005, resultFile="DoublePendulum");
+simulateModel("Modelica_LinearSystems2.Controller.Examples.Discretization1", method="dassl", tolerance=1e-006, resultFile="Discretization1");
+simulateModel("Modelica_LinearSystems2.Controller.Examples.Discretization2", method="dassl", tolerance=1e-006, resultFile="Discretization2");
+simulateModel("Modelica_LinearSystems2.Controller.Examples.DiscretizationSeries", stopTime=1.5, method="dassl", resultFile="DiscretizationSeries");
+simulateModel("Modelica_LinearSystems2.Controller.Examples.Interpolator", stopTime=0.5, method="dassl", resultFile="Interpolator");
+
+
 
 print("\nHoo-ray !!!\n");

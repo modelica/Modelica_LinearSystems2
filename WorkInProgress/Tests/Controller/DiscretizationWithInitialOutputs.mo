@@ -10,4 +10,5 @@ model DiscretizationWithInitialOutputs
     impulseExact(y_start=y_start),
     stepExact(y_start=y_start),
     rampExact(y_start=y_start));
+      annotation (interactive=true);
 end DiscretizationWithInitialOutputs;

@@ -5,3 +5,4 @@ designInverseDoublePendulumControllerWithObserver
 designInversePendulumController
 designStateSpaceController
 analysis2
+plotBodeSISODiscrete

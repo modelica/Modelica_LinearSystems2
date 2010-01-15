@@ -1,6 +1,9 @@
 StateSpace2
+DiscreteStateSpace
+DiscreteTransferFunction
 StateSpace
+TransferFunction
 Math
-Tests
 Icons
 Controller
+Tests

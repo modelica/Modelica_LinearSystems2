@@ -13,44 +13,34 @@ model Discretization2
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
     methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ImpulseExact,
     w=w) 
-    annotation (Placement(transformation(extent={{-2,0},{18,20}})));
+    annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
 
   Modelica_LinearSystems2.Controller.SecondOrder continuous(D=D, w=w) 
-    annotation (Placement(transformation(extent={{0,40},{20,60}})));
+    annotation (Placement(transformation(extent={{0,10},{20,30}})));
   Derivative derivative(T=1e-8) 
-    annotation (Placement(transformation(extent={{-42,40},{-22,60}})));
+    annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
   Modelica.Blocks.Sources.Pulse pulse(
     startTime=0.1,
     period=1,
     width=sampleClock.sampleTime*100) 
-             annotation (Placement(transformation(extent={{-82,0},{-62,20}})));
+             annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
   Modelica.Blocks.Sources.Step step1(
     startTime=0.1,
     height=1,
     offset=0)                        annotation (extent=[-80,40; -60,60],
-      Placement(transformation(extent={{-82,40},{-62,60}})));
-  Modelica_LinearSystems2.Controller.SecondOrder rampExact(
-    D=D,
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
-    w=w,
-    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.RampExact)
-    annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
+      Placement(transformation(extent={{-80,10},{-60,30}})));
 
 equation
   connect(pulse.y, impulseExact.u)  annotation (Line(
-      points={{-61,10},{-4,10}},
+      points={{-59,-20},{-2,-20}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(continuous.u, derivative.y) annotation (Line(
-      points={{-2,50},{-21,50}},
+      points={{-2,20},{-19,20}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(step1.y, derivative.u) annotation (Line(
-      points={{-61,50},{-44,50}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(rampExact.u, pulse.y) annotation (Line(
-      points={{-2,-30},{-42,-30},{-42,10},{-61,10}},
+      points={{-59,20},{-42,20}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,

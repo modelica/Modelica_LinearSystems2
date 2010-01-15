@@ -54,8 +54,9 @@ model DiscreteStateSpace
 
 protected
   outer SampleClock sampleClock "Global options"                       annotation(Hide=true);
-  parameter Modelica_LinearSystems2.DiscreteStateSpace discreteSystem=
-      Modelica_LinearSystems2.DiscreteStateSpace(
+  parameter Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace
+    discreteSystem=
+      Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace(
       system,
       Ts,
       method);
