@@ -19,7 +19,7 @@ protected
 
 algorithm
   Modelica_LinearSystems2.TransferFunction.Plot.bode(tf);
-  Modelica_LinearSystems2.DiscreteTransferFunction.Plot.bode(dtf);
+  Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction.Plot.bode(dtf);
   ok := true;
 
   annotation (interactive=true);

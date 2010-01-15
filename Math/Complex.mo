@@ -836,7 +836,7 @@ algorithm
 numerical algorithm does not converge.");
 
     i := 1;
-    while i < n loop
+    while i <= n loop
       if abs(eigvalIm[i]) > 0 then
         for ii in 1:n loop
           eigvec[ii, i] := eigvecRe[ii, i] + j*eigvecRe[ii, i + 1];

@@ -17,8 +17,8 @@ algorithm
                                              A);
 
   assert(info == 0,
-                "Calculating an inverse matrix with function
-\"Matrices.inv\" is not possible, since matrix A is singular.");
+                "Calculating an inverse complex matrix with function
+\"Matrices.inv\" is not possible, since complex matrix A is singular.");
 
   (invA,info) := Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.zgetri(
                                         LU, pivots);

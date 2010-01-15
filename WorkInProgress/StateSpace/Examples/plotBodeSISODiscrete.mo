@@ -43,7 +43,7 @@ algorithm
     ss,
     iu,
     iy);
-  Modelica_LinearSystems2.DiscreteStateSpace.Plot.bodeSISO(
+  Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Plot.bodeSISO(
     dss,
     iu,
     iy);

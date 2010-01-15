@@ -40,6 +40,7 @@ protected
   Real S[nm[1],nm[1]] "closed loop system matrix A-BK";
   StateSpace ss=Modelica_LinearSystems2.StateSpace(A=A, B=B, C=zeros(1, nm[1]), D=zeros(1, size(B, 2)));
   Real Xre[nm[1],nm[1]];
+  Real k[size(A, 1)] "Feedback gain matrix";
 
 public
   output Real K[size(B, 2),size(A, 1)] "Feedback gain matrix";
@@ -60,11 +61,13 @@ public
 algorithm
 // use single input algorithm
   if isSI and nm[2] == 1 then
-    K := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesSI_rq(
-                                              ss, assignedPoles);
+    K := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesSI_rq(ss, assignedPoles);
+//    k := Modelica_LinearSystems2.StateSpace.Design.assignPolesSI(ss, assignedPoles);
+//    K := transpose(matrix(k));
     ss.A := ss.A - ss.B*K;
-    (Xre,calcPoles) := StateSpace.Analysis.eigenVectors(ss, false);
-    X := Complex(1)*Xre;
+    S := ss.A;
+    (X,calcPoles) := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
+//    X := Complex(1)*Xre;
   else// end isSI
 
     if method == Tests.Types.AssignPolesMethod.KNV then
@@ -80,6 +83,12 @@ algorithm
 // Schur method
       (K,S,calcPoles,,,,X) :=
         Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, assignedPoles, -1e10, Modelica.Math.Matrices.norm(ss.A, 1)*1e-12, true);
+
+Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X1");
+
+    (X,calcPoles) := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
+    Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X2");
+
       if isKprovided then
         gap := Modelica.Math.Matrices.norm(K - Ki);
       end if;
