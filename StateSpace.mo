@@ -4938,7 +4938,7 @@ and results in
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.ZerosAndPoles;
 
       input StateSpace ss "state space system";
       input Integer iu=1 "index of input";
@@ -4959,7 +4959,7 @@ and results in
             Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
 
     protected
-      TransferFunction tf "Transfer functions to be plotted";
+      ZerosAndPoles zp "ZP-Transfer functions to be plotted";
       StateSpace ss_siso(
         redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
         redeclare Real B[size(ss.B, 1),1],
@@ -4976,10 +4976,10 @@ and results in
         B=matrix(ss.B[:, iu]),
         C=transpose(matrix(ss.C[iy, :])),
         D=matrix(ss.D[iy, iu]));
-      tf := StateSpace.Conversion.toTransferFunction(ss_siso);
+      zp := StateSpace.Conversion.toZerosAndPoles(ss_siso);
 
-      TransferFunction.Plot.bode(
-        tf,
+      ZerosAndPoles.Plot.bode(
+        zp,
         nPoints,
         autoRange,
         f_min,

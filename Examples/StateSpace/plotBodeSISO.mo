@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function plotBodeSISO
-  "Constructs a transfer function from state space representation and plots the Bode diagram with automatic determination of the frequency range to plot "
+  "Constructs a zeros-and-poles-transfer function from state space representation and plots the Bode diagram with automatic determination of the frequency range to plot "
 
   import Modelica;
   import Modelica_LinearSystems2.StateSpace;
