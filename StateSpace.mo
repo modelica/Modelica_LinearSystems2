@@ -2508,7 +2508,7 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
   Real u[:,size(sc.B, 2)];
   Real new_x[size(sc.A, 1),1];
   Real x[size(sc.A, 1),1]=zeros(size(sc.A, 1), 1);
-  Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace sd(
+  Modelica_LinearSystems2.DiscreteStateSpace sd(
     redeclare Real A[size(sc.A, 1),size(sc.A, 2)],
     redeclare Real B[size(sc.B, 1),size(sc.B, 2)],
     redeclare Real C[size(sc.C, 1),size(sc.C, 2)],
@@ -2540,7 +2540,7 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
   x_continuous :=  if response == TimeResponse.Initial then zeros(samples, size(sc.A, 1),  1) else zeros(samples, size(sc.A, 1),  size(sc.B, 2));
 
  if response == TimeResponse.Initial then
-      sd := Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace(
+      sd := Modelica_LinearSystems2.DiscreteStateSpace(
           sc,
           dtVar,
           Modelica_LinearSystems2.Types.Method.Trapezoidal);
@@ -2555,21 +2555,21 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
     if response == TimeResponse.Impulse then
       u[1, :] := zeros(size(sc.B, 2));
       u[1, i1] := 1;
-      sd := Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace(
+      sd := Modelica_LinearSystems2.DiscreteStateSpace(
           sc,
           dtVar,
           Modelica_LinearSystems2.Types.Method.ImpulseExact);
     elseif response == TimeResponse.Step then
       u[:, :] := zeros(samples, size(sc.B, 2));
       u[:, i1] := ones(samples);
-      sd := Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace(
+      sd := Modelica_LinearSystems2.DiscreteStateSpace(
           sc,
           dtVar,
           Modelica_LinearSystems2.Types.Method.StepExact);
     elseif response == TimeResponse.Ramp then
       u[:, :] := zeros(samples, size(sc.B, 2));
       u[:, i1] := 0:dtVar:tSpanVar;
-      sd := Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace(
+      sd := Modelica_LinearSystems2.DiscreteStateSpace(
           sc,
           dtVar,
           Modelica_LinearSystems2.Types.Method.RampExact);

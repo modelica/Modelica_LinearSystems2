@@ -67,7 +67,7 @@ record DiscreteStateSpace
       input Modelica.SIunits.Time Ts "Sample time";
       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
         "Discretization method";
-      output Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace sd(
+      output Modelica_LinearSystems2.DiscreteStateSpace sd(
         redeclare Real A[size(sc.A, 1),size(sc.A, 2)],
         redeclare Real B[size(sc.B, 1),size(sc.B, 2)],
         redeclare Real C[size(sc.C, 1),size(sc.C, 2)],
@@ -197,7 +197,7 @@ record DiscreteStateSpace
       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
         "Discretization method";
     //  input Modelica_LinearSystems2.Types method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-      output Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace sd(
+      output Modelica_LinearSystems2.DiscreteStateSpace sd(
         redeclare Real A[size(A, 1),size(A, 2)],
         redeclare Real B[size(B, 1),size(B, 2)],
         redeclare Real C[size(C, 1),size(C, 2)],
@@ -393,7 +393,6 @@ Note that the system input <b>u</b> is equal to zero.
 </p>
 </html>"));
   end initialResponse;
-
 
   annotation (
     defaultComponentName="stateSpaceDiscrete",
