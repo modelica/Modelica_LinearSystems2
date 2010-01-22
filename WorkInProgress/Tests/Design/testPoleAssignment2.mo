@@ -61,9 +61,9 @@ public
 algorithm
 // use single input algorithm
   if isSI and nm[2] == 1 then
-    K := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesSI_rq(ss, assignedPoles);
-//    k := Modelica_LinearSystems2.StateSpace.Design.assignPolesSI(ss, assignedPoles);
-//    K := transpose(matrix(k));
+//    K := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesSI_rq(ss, assignedPoles);
+    k := Modelica_LinearSystems2.StateSpace.Design.assignPolesSI(ss, assignedPoles);
+    K := transpose(matrix(k));
     ss.A := ss.A - ss.B*K;
     S := ss.A;
     (X,calcPoles) := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
@@ -83,11 +83,6 @@ algorithm
 // Schur method
       (K,S,calcPoles,,,,X) :=
         Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, assignedPoles, -1e10, Modelica.Math.Matrices.norm(ss.A, 1)*1e-12, true);
-
-Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X1");
-
-    (X,calcPoles) := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
-    Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X2");
 
       if isKprovided then
         gap := Modelica.Math.Matrices.norm(K - Ki);

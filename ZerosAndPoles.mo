@@ -579,7 +579,7 @@ end '==';
       redeclare Real n1[1],
       redeclare Real n2[0,2],
       redeclare Real d1[0],
-      redeclare Real d2[0,2]) "= tf1 * tf2";
+      redeclare Real d2[0,2]);
   algorithm
     zp.n1[1] := 0;
     annotation (Documentation(info="<html>

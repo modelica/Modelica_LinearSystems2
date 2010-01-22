@@ -4,6 +4,7 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 - Analysis, Synthesis a
 constant String DataDir=classDirectory() + "Extras/Data/"
   "Absolute path to directory containing utilitiy files for this package";
 
+
 annotation (
   preferredView="info",
   uses(Modelica(version="3.1")),
@@ -75,7 +76,7 @@ scripts are provided, but different library names are used.
 <b>Licensed by DLR under the Modelica License 2</b><br>
 <img src=\"modelica://Modelica_LinearSystems2/Extras/Images/dlr_logo.png\"  width=60 >
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- <b>      Copyright &copy; 2005-2009, DLR Institute of Robotics and Mechatronics</b>
+ <b>      Copyright &copy; 2005-2010, DLR Institute of Robotics and Mechatronics</b>
 </p>
 
 

@@ -4231,7 +4231,7 @@ matrix <blockquote><pre>
 </pre></blockquote> with only the eigenvalues of <b>F</b>2 are modified. This approach to modify
 separated eigenvalues is used to sequentially shift one real eigenvalue ore two
 complex conjugated eigenvalues stepwise until all assigned eigenvalues are placed.
-Therefore, at each step i always the (two) lower right eingenvalue(s) are modified by an
+Therefore, at each step i always the (two) lower right eigenvalue(s) are modified by an
 appropriate feedback matrix <b>K</b>i. The matrix <b>F</b> - <b>G</b>*<b>K</b>i remains in real Schur form. The
 assigned eigenvalue(s) is (are) then moved to another diagonal position of the real Schur
 form using reordering techniques <b>F</b> &lt -- <b>Q</b>i*<b>F</b>*<b>Q</b>i'  and a new block is transferred to the

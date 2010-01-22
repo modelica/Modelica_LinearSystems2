@@ -8,18 +8,6 @@ model DiscretizationSeries
     "Base sample time for discrete blocks";
   parameter Modelica.SIunits.Time T1=0.2;
   parameter Modelica.SIunits.Time T2=0.15;
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-            -100},{100,100}}), graphics), Documentation(info="<html>
-<p>
-Demonstrates the different discretization methods by simulating the step
-response of a second order system as continuous system and as discrete system
-with the supported discretization methods. The step starts with an offset at 0.1 s
-to demonstrate the steady-state initialization.
-</p>
-
-</html>"),
-    experiment(StopTime=1.5),
-    experimentSetupOutput);
 
   Components.SeriesConnection continuous(
     T1=T1,
@@ -48,4 +36,16 @@ to demonstrate the steady-state initialization.
     sampleTime=sampleTime) 
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
 
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
+            -100},{100,100}}), graphics), Documentation(info="<html>
+<p>
+Demonstrates the different discretization methods by simulating the step
+response of a second order system as continuous system and as discrete system
+with the supported discretization methods. The step starts with an offset at 0.1 s
+to demonstrate the steady-state initialization.
+</p>
+
+</html>"),
+    experiment(StopTime=1.5),
+    experimentSetupOutput);
 end DiscretizationSeries;
