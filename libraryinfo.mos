@@ -1,6 +1,6 @@
 LibraryInfoMenuSeparator(
   category="libraries",
-  pos=1001)
+  pos=100)
 
 LibraryInfoMenuCommand(
   category="libraries",
@@ -10,6 +10,6 @@ LibraryInfoMenuCommand(
   isModel=true,
   description="Modelica_LinearSystems2 Library (2.1)",
   ModelicaVersion="3.1",
-  pos=1001)
+  pos=101)
 
 // LibraryInfoPreload(reference="Modelica_LinearSystems2")
