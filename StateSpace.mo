@@ -5621,7 +5621,7 @@ encapsulated package Conversion
     output ZerosAndPoles zp;
 
     protected
-    StateSpace ssm=StateSpace.Transformation.toIrreducibleForm(ss);
+    StateSpace ssm= if size(ss.A,1)>0 then StateSpace.Transformation.toIrreducibleForm(ss) else StateSpace(ss.D[1,1]);
     Complex poles[:];
     Complex zeros[:];
 
@@ -5677,7 +5677,7 @@ encapsulated package Conversion
       zp := ZerosAndPoles(
           z=fill(Complex(0), 0),
           p=fill(Complex(0), 0),
-          k=0);
+          k=scalar(ss.D));
 
     end if;
     zp.uName := ss.uNames[1];

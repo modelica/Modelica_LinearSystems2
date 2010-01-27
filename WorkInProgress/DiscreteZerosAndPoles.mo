@@ -682,10 +682,10 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Anal
 
   end Analysis;
 
-  encapsulated package Design   
+  encapsulated package Design
   end Design;
 
-  encapsulated package Plot   
+  encapsulated package Plot
   end Plot;
 
   encapsulated package Conversion
@@ -847,14 +847,14 @@ from a ZerosAndPoles record representated by first and second order numerator an
                 den[i, 1],
                 den[i, 2]);
           end if;
-        else
+        else//i <= n_den2 then
            // State space system in form (1) with 2 first order denominator polynomials
           k[i] := Internal.scaleFactor2(
               num[i, 1],
               num[i, 2],
               den[i, 1] + den[i + 1, 1],
               den[i, 1]*den[i + 1, 1]);
-        end if;
+        end if;//i <= n_den2 then
       end for;
 
       for i in i_d:n_den1 loop
@@ -881,7 +881,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
       dss.D := zeros(1, 1);
 
    // Calculation of matrices A, B, C, D
-   //first elements of A, B, C and D
+   //first elements (i=1) of A, B, C and D
 
       if max(n_den2, n_num2) > 0 then
         ili := i_d;
@@ -1073,7 +1073,7 @@ To achieve well numerical condition the DiscreteZerosAndPoles transfer function 
 form by creating first and second order blocks that are connected
 together in series. Every block is represented in controller
 canonical form and scaled such that the gain from the input
-of this block to its output is one (i.e. y(q=0) = u(q=0)),
+of this block to its output is one (i.e. y(q=1) = u(q=1)),
 if this is possible. Details are given below.
 </p>
 <b>Algorithmic details</b>
@@ -1519,6 +1519,32 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
           dtf.d)));
     algorithm
     end numberOfRealPoles;
+
+  encapsulated function scaleFactor1
+      "Return scale factor for first order block"
+      import Modelica;
+    input Real n "(z+n)/(z+d)";
+    input Real d "(z+n)/(z+d)";
+    input Real small=100*Modelica.Constants.eps;
+    output Real k "= (1+d)/(1+n), if d,n are not zero, otherwise special cases";
+  algorithm
+    k := (if abs(d) > small then abs(d) else 1)/(if abs(n) > small then abs(n) else 
+            1);
+  end scaleFactor1;
+
+    function scaleFactor2 "Return scale factor for second order block"
+      import Modelica;
+    input Real n1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
+    input Real n2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
+    input Real d1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
+    input Real d2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
+    input Real small=100*Modelica.Constants.eps;
+    output Real k "= d2/n2, if d2,n2 are not zero, otherwise special cases";
+    algorithm
+    k := (if abs(d2) > small then abs(d2) else (if abs(d1) > small then abs(
+      d1) else 1))/(if abs(n2) > small then abs(n2) else (if abs(n1) > small then 
+            abs(n1) else 1));
+    end scaleFactor2;
 
   end Internal;
 

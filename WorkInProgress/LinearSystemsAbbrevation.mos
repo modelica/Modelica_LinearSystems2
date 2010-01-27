@@ -1,0 +1,24 @@
+import dss=Modelica_LinearSystems2.DiscreteStateSpace;
+import ss=Modelica_LinearSystems2.StateSpace;
+import tf=Modelica_LinearSystems2.TransferFunction;
+import zp=Modelica_LinearSystems2.ZerosAndPoles;
+import ss2zp=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles;
+import ss2zpM=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPolesMIMO;
+import ss2tf=Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction;
+import ss2tfM=Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunctionMIMO;
+import tf2zp=Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles;
+import tf2ss=Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace;
+import zp2tf=Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction;
+import zp2ss=Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace;
+
+import poly    = Modelica_LinearSystems2.Math.Polynomial;
+import Complex = Modelica_LinearSystems2.Math.Complex;
+import Plot    = Modelica_LinearSystems2.Utilities.Plot;
+ 
+import Re = Modelica_LinearSystems2.Math.Complex.real;
+import Im = Modelica_LinearSystems2.Math.Complex.imag;
+import eigss = Modelica_LinearSystems2.StateSpace.Analysis.eigenValues;
+
+s = Modelica_LinearSystems2.TransferFunction.s();
+p = Modelica_LinearSystems2.ZerosAndPoles.p();
+j = Complex.j();
