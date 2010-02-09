@@ -125,9 +125,10 @@ initial equation
 
     end if;
 
-  elseif init == Types.Init.InitialOutput then
-  y=y_start;
- xd[ny+1:nx]=[zeros(nx-ny,ny),identity(nx-ny)]*Modelica.Math.Matrices.solve(identity(nx)-discreteSystem.A,discreteSystem.B*u);
+  elseif init == Types.Init.InitialOutput and nx>0 then
+//  y=y_start;
+//  xd[ny+1:nx]=[zeros(nx-ny,ny),identity(nx-ny)]*Modelica.Math.Matrices.solve(identity(nx)-discreteSystem.A,discreteSystem.B*u);
+      xd = Modelica.Math.Matrices.equalityLeastSquares(identity(nx)-discreteSystem.A, -discreteSystem.B*u, discreteSystem.C, y_start - discreteSystem.D*u);
 
   end if;
   annotation (

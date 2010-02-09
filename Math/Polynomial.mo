@@ -362,6 +362,7 @@ with j=sqrt(-1), is defined as
   encapsulated operator function 'String'
     "Transform Polynomial into a String representation"
     import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica;
 
       input Polynomial p
       "Polynomial to be transformed in a String representation";
@@ -397,7 +398,7 @@ with j=sqrt(-1), is defined as
               end if;
             end if;
 
-            outputCoefficient := power == 0 or ci <> 1;
+            outputCoefficient := power == 0 or abs(ci-1) > Modelica.Constants.eps;
             if outputCoefficient then
               s := s + String(ci, significantDigits=significantDigits);
             end if;

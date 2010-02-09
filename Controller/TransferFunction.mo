@@ -48,14 +48,16 @@ x_scaled =x*a_end;
   connect(y, discretePart.y[1]);
   connect(x, discretePart.x);
 initial equation
-  if continuous then
+  if continuous and nx>0 then
     if init ==Modelica_LinearSystems2.Controller.Types.Init.SteadyState then
       der(x_scaled) = zeros(nx);
     elseif init ==Modelica_LinearSystems2.Controller.Types.Init.InitialState then
       x_scaled = x_start*a_end;
     elseif init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput then
       y = y_start;
-      der(x_scaled[2:nx]) = zeros(nx - 1);
+//      der(x_scaled[1:nx-1]) = zeros(nx -1);
+      der(x_scaled[1:nx-(if nx>1 then 2 else 1)]) = zeros(nx -( if nx>1 then 2 else 1));
+
     end if;
   end if;
 
