@@ -763,7 +763,8 @@ from a ZerosAndPoles record representated by first and second order numerator an
     import Modelica_LinearSystems2.Math.Vectors;
     import Modelica_LinearSystems2.Math.Complex;
     import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.StateSpace.Internal;
+    import
+        Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
 
     input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
     output StateSpace ss(
@@ -1526,10 +1527,10 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
     function scaleFactor2 "Return scale factor for second order block"
       import Modelica;
-    input Real n1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
-    input Real n2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
-    input Real d1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
-    input Real d2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
+    input Real n1 "(z^2 + n1*z + n2)/(z^2 + d1*z + d2)";
+    input Real n2 "(z^2 + n1*z + n2)/(z^2 + d1*z + d2)";
+    input Real d1 "(z^2 + n1*z + n2)/(z^2 + d1*z + d2)";
+    input Real d2 "(z^2 + n1*z + n2)/(z^2 + d1*z + d2)";
     input Real small=100*Modelica.Constants.eps;
     output Real k "= d2/n2, if d2,n2 are not zero, otherwise special cases";
     algorithm

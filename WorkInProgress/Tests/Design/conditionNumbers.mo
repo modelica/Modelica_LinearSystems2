@@ -11,7 +11,7 @@ function conditionNumbers
   input Complex X[:,:] "right eigenvectors of the closed loop system";
   input Complex assignedPoles[size(X,1)]=fill(Complex(0),size(X,1));
   input Complex calcPoles[size(X,1)]=fill(Complex(0),size(X,1));
-  output Real kappa2X "condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2";
+  output Real ka0ppa2X "condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2";
   output Real kappaFroX "condition number kappa_F(X) = ||X||_F * ||inv(X)||_F";
   output Real kappaFroYT
     "condition number kappa_F(YT) = ||YT||_F * ||inv(YT)||_F";
