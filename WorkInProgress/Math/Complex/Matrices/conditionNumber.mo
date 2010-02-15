@@ -16,8 +16,7 @@ protected
 
 algorithm
   if p == 2 then
-    s := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues(
-                                                                A);
+    s := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues(A);
     if min(s) < eps then
       result := -1e100;
     else

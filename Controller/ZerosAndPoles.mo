@@ -70,8 +70,8 @@ initial equation
         elseif  2*(i-n_num2) -1== n_num1 then
             // State space system in form (2) with 1 first order numerator polynomial
           k[i] =  Internal.scaleFactor2(
+              1,
               num[max(1,min(nx,2*i-n_num2-1)), 1],
-              0,
               den[i, 1],
               den[i, 2]);
         else
@@ -89,8 +89,6 @@ initial equation
             num[i, 2],
             den[max(1,2*(i - n_den2)-1), 1] + den[max(1,2*(i - n_den2)), 1],
             den[max(1,2*(i - n_den2)-1), 1]*den[max(1,2*(i - n_den2)), 1]);
-//            den[i, 1] + den[i + 1, 1],
-//            den[i, 1]*den[i + 1, 1]);
       end if;
     end for;
 
@@ -123,7 +121,7 @@ equation
               // State space system in form (1)
              der(x[2*i]) = if abs(den[i, 2])>Modelica.Constants.eps and abs(num[i, 2])>Modelica.Constants.eps then den[i, 2]*uu[i] - den[i,2]*x[2*i-1] - den[i,1]*x[2*i] else uu[i] - den[i,2]*x[2*i-1] - den[i,1]*x[2*i];
               uu[i+1] = if abs(den[i, 2])>Modelica.Constants.eps and abs(num[i, 2])>Modelica.Constants.eps then k[i]*(((num[i,2] - den[i,2])*x[2*i-1] + (num[i,1] - den[i,1])*x[2*i])/den[i,2] + uu[i]) else k[i]*((num[i,2] - den[i,2])*x[2*i-1] + (num[i,1] - den[i,1])*x[2*i] + uu[i]);
-           elseif 2*(i - n_num2) <= n_num1 then//################
+           elseif 2*(i - n_num2) <= n_num1 then
               // State space system in form (1) with 2 first order numerator polynomials
               der(x[2*i]) = if abs(den[i, 2])>Modelica.Constants.eps and abs(num[i, 2])>Modelica.Constants.eps then den[i, 2]*uu[i] - den[i,2]*x[2*i-1] - den[i,1]*x[2*i] else uu[i] - den[i,2]*x[2*i-1] - den[i,1]*x[2*i];
               uu[i+1] = if abs(den[i, 2])>Modelica.Constants.eps and abs(num[2*i-n_num2-1, 2])>Modelica.Constants.eps then k[i]*(((num[2*i-n_num2-1, 1]*num[2*i-n_num2-1 + 1, 1] - den[i, 2])*x[2*i-1] + (num[2*i-n_num2-1, 1] + num[2*i-n_num2-1 + 1, 1] - den[i, 1])*x[2*i])/den[i,2] + uu[i]) else k[i]*((num[2*i-n_num2-1, 1]*num[2*i-n_num2-1 + 1, 1] - den[i, 2])*x[2*i-1] + (num[2*i-n_num2-1, 1] + num[2*i-n_num2-1 + 1, 1] - den[i, 1])*x[2*i] + uu[i]);

@@ -4,6 +4,7 @@ DiscreteTransferFunction
 DiscreteZerosAndPoles
 StateSpace
 TransferFunction
+ZerosAndPoles
 Tests
 Controller
 Math

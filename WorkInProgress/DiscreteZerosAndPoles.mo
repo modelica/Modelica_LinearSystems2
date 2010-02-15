@@ -763,6 +763,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
     import Modelica_LinearSystems2.Math.Vectors;
     import Modelica_LinearSystems2.Math.Complex;
     import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
     import
         Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
 
@@ -783,6 +784,8 @@ from a ZerosAndPoles record representated by first and second order numerator an
     Real b "input 'matrix' of partial 1st order system";
     Real c "output 'matrix' of partial 1st order system";
     Real d "feedthrough 'matrix' of partial 1st order system";
+    Real aa "a2 + a1 +1";
+    Real bb "b2 + b1 +1";
     Integer nx=max(ZerosAndPoles.Analysis.numeratorDegree(zp),ZerosAndPoles.Analysis.denominatorDegree(zp));
     Integer n_num1=size(zp.n1, 1);
     Integer n_num2=size(zp.n2, 1);
@@ -887,11 +890,12 @@ from a ZerosAndPoles record representated by first and second order numerator an
         B[1, 1] := 0;
             // Construct state space systems of order 2
         if 1 <= n_den2 then
+          aa := den[1, 2] + den[1, 1] +1;
           A[2, :] := {-den[1, 2],-den[1, 1]};
-          B[2, 1] := if abs(den[1, 2])>Modelica.Constants.eps and abs(num[1, 2])>Modelica.Constants.eps then den[1, 2] else 1;
+          B[2, 1] := if abs(bb)>Modelica.Constants.eps and abs(aa)>Modelica.Constants.eps then bb else 1;
           if 1 <= n_num2 then
                  // State space system in form (1)
-            C := if abs(den[1, 2])>Modelica.Constants.eps and abs(num[1, 2])>Modelica.Constants.eps then k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]]/den[1, 2] else k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]];
+            C := if abs(bb)>Modelica.Constants.eps and abs(aa)>Modelica.Constants.eps then k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]]/bb else k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]];
             D := [k[1]];
             dZero := false;
 
@@ -1520,9 +1524,10 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
     input Real n "(z+n)/(z+d)";
     input Real d "(z+n)/(z+d)";
     input Real small=100*Modelica.Constants.eps;
-    output Real k "= (1+d)/(1+n), if d,n are not zero, otherwise special cases";
+    output Real k
+        "= (d+1)/(n+1), if d+1, n+1 are not zero, otherwise special cases";
   algorithm
-    k := if abs(d+1) > small and abs(d+1) > small then abs(d+1)/abs(n+1) else 1;
+      k := if abs(d+1) > small  and abs(n+1) > small then abs(d+1)/abs(n+1) else 1;
   end scaleFactor1;
 
     function scaleFactor2 "Return scale factor for second order block"
@@ -1532,11 +1537,10 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
     input Real d1 "(z^2 + n1*z + n2)/(z^2 + d1*z + d2)";
     input Real d2 "(z^2 + n1*z + n2)/(z^2 + d1*z + d2)";
     input Real small=100*Modelica.Constants.eps;
-    output Real k "= d2/n2, if d2,n2 are not zero, otherwise special cases";
+    output Real k
+        "= (d2+d1+1)/(n2+n1+1), if numerator and denominator are not zero, otherwise special cases";
     algorithm
-    k := (if abs(d2) > small then abs(d2) else (if abs(d1) > small then abs(
-      d1) else 1))/(if abs(n2) > small then abs(n2) else (if abs(n1) > small then 
-            abs(n1) else 1));
+      k := if abs(d2+d1+1) > small and abs(n2+n1+1) > small then (d2+d1+1)/(n2+n1+1) else 1;
     end scaleFactor2;
 
   end Internal;

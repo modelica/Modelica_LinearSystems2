@@ -61,9 +61,9 @@ public
 algorithm
 // use single input algorithm
   if isSI and nm[2] == 1 then
-    K := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesSI_rq(ss, assignedPoles);
-//    k := Modelica_LinearSystems2.StateSpace.Design.assignPolesSI(ss, assignedPoles);
-//    K := transpose(matrix(k));
+//    K := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesSI_rq(ss, assignedPoles);
+    k := Modelica_LinearSystems2.StateSpace.Design.assignPolesSI(ss, assignedPoles);
+    K := transpose(matrix(k));
     ss.A := ss.A - ss.B*K;
     S := ss.A;
     (X,calcPoles) := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
@@ -120,6 +120,7 @@ algorithm
     print("gap " + String(gap),outputFile);
   end if;
   print("Jalpha = " + Modelica_LinearSystems2.Math.Vectors.printVector(Jalpha),outputFile);
+  print("\nMLS2 & $"+ String(kappa2)+"$ & $"+ String(zeta)+"$ & $"+ String(cInf)+"$ & $"+ String(nu2)+"$ & $"+ String(dlambda)+"$\\\   \hline",outputFile);
 
   annotation (Documentation(info="<html>
 <p>

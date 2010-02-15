@@ -29,7 +29,7 @@ model ZerosAndPolesBlock
 2.0, 2.0;
 2, 3.0]),
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption,
-    initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.UseSampleClockOption) 
+    initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.NoInit) 
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
 
   Modelica_LinearSystems2.Controller.TransferFunction transferFunction(
@@ -57,7 +57,7 @@ model ZerosAndPolesBlock
     methodType=Modelica_LinearSystems2.Types.Method.Trapezoidal,
     sampleTime=0.01,
     initType=Modelica_LinearSystems2.Controller.Types.Init.InitialOutput,
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous) 
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete) 
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
 
 equation
