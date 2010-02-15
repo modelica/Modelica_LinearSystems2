@@ -143,7 +143,7 @@ public
     annotation (Placement(transformation(extent={{70,-80},{50,-60}})));
 
 initial equation
-  if init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput then
+  if init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput and controllerType<>SimpleController.P then
      y = y_start;
   end if;
 
