@@ -1,4 +1,4 @@
-import dss=Modelica_LinearSystems2.DiscreteStateSpace;
+//import dss=Modelica_LinearSystems2.DiscreteStateSpace;
 import ss=Modelica_LinearSystems2.StateSpace;
 import tf=Modelica_LinearSystems2.TransferFunction;
 import zp=Modelica_LinearSystems2.ZerosAndPoles;
@@ -21,4 +21,18 @@ import eigss = Modelica_LinearSystems2.StateSpace.Analysis.eigenValues;
 
 s = Modelica_LinearSystems2.TransferFunction.s();
 p = Modelica_LinearSystems2.ZerosAndPoles.p();
+
+import dss=Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+import dtf=Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+import dzp=Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+import dss2dzp=Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles;
+import dss2dtf=Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Conversion.toDiscreteTransferFunction;
+import dtf2dzp=Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction.Conversion.toDiscreteZerosAndPoles;
+import dtf2dss=Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction.Conversion.toDiscreteStateSpace;
+import dzp2dtf=Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction;
+import dzp2dss=Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace;
+
+z = Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction.z();
+q = Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.q();
+
 j = Complex.j();

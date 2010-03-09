@@ -2747,6 +2747,7 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
       Real b "input 'matrix' of partial 1st order system";
       Real c "output 'matrix' of partial 1st order system";
       Real d "feedthrough 'matrix' of partial 1st order system";
+      Real eps=1e-6;
       Integer nx=max(ZerosAndPoles.Analysis.numeratorDegree(zp),ZerosAndPoles.Analysis.denominatorDegree(zp));
       Integer n_num1=size(zp.n1, 1);
       Integer n_num2=size(zp.n2, 1);
@@ -2788,28 +2789,28 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
                   num[i, 1],
                   num[i, 2],
                   den[i, 1],
-                  den[i, 2]);
+                  den[i, 2],eps);
             elseif 2*(i - n_num2) <= n_num1 then
                 // State space system in form (1) with 2 first order numerator polynomials
               k[i] := Internal.scaleFactor2(
                   num[max(1,2*(i - n_num2)-1), 1] + num[max(1,2*(i - n_num2)), 1],
                   num[max(1,2*(i - n_num2)-1), 1]*num[max(1,2*(i - n_num2)), 1],
                   den[i, 1],
-                  den[i, 2]);
+                  den[i, 2],eps);
             elseif  2*(i-n_num2) -1== n_num1 then
                 // State space system in form (2) with 1 first order numerator polynomial
               k[i] := Internal.scaleFactor2(
                   1,
                   num[2*i-n_num2-1, 1],
                   den[i, 1],
-                  den[i, 2]);
+                  den[i, 2],eps);
             else
                 // State space system in form (3)
               k[i] := Internal.scaleFactor2(
                   1,
                   1,
                   den[i, 1],
-                  den[i, 2]);
+                  den[i, 2],eps);
             end if;
           else
              // State space system in form (1) with 2 first order denominator polynomials
@@ -2817,7 +2818,7 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
                 num[i, 1],
                 num[i, 2],
                 den[max(1,2*(i - n_den2)-1), 1] + den[max(1,2*(i - n_den2)), 1],
-                den[max(1,2*(i - n_den2)-1), 1]*den[max(1,2*(i - n_den2)), 1]);
+                den[max(1,2*(i - n_den2)-1), 1]*den[max(1,2*(i - n_den2)), 1],eps);
           end if;
         end for;
 
@@ -2826,14 +2827,14 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
           if n_num2 <= n_den2 and 2*(n_den2 - n_num2) + i <= n_num1 then
              // State space system in form (4)
             k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
-              n_num2) + i), 1], den[n_den2 + i, 1]);
+              n_num2) + i), 1], den[n_den2 + i, 1],eps);
           elseif n_num2 > n_den2 and i - i_d + 1 <= n_num1 then
              // State space system in form (4)
             k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
-              1], den[n_den2 + i, 1]);
+              1], den[n_den2 + i, 1],eps);
           else
              // State space system in form (5)
-            k[i_k + i] := Internal.scaleFactor1(1, den[n_den2 + i, 1]);
+            k[i_k + i] := Internal.scaleFactor1(1, den[n_den2 + i, 1],eps);
           end if;
         end for;
 
@@ -2852,37 +2853,37 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
           // Construct state space systems of order 2
           if 1 <= n_den2 then
             A[2, :] := {-den[1, 2],-den[1, 1]};
-            B[2, 1] := if abs(den[1, 2])>Modelica.Constants.eps and abs(num[1, 2])>Modelica.Constants.eps then den[1, 2] else 1;
+            B[2, 1] := if abs(den[1, 2])>eps and abs(num[1, 2])>eps then den[1, 2] else 1;
 
             if 1 <= n_num2 then
               // State space system in form (1)
-              C := if abs(den[1, 2])>Modelica.Constants.eps and abs(num[1, 2])>Modelica.Constants.eps then k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]]/den[1, 2] else k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]];
+              C := if abs(den[1, 2])>eps and abs(num[1, 2])>eps then k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]]/den[1, 2] else k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]];
               D := [k[1]];
               dZero := false;
            elseif 1 - n_num2 + 1 <= n_num1 then
             // State space system in form (1) with 2 first order numerator polynomials
-              B[2, 1] := if abs(den[1, 2])>Modelica.Constants.eps then den[1, 2] else 1;
-              C := if abs(den[1, 2])>Modelica.Constants.eps then   k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]]/den[1, 2] else k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]];
+              B[2, 1] := if abs(den[1, 2])>eps then den[1, 2] else 1;
+              C := if abs(den[1, 2])>eps then   k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]]/den[1, 2] else k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]];
               D := [k[1]];
               dZero := false;
            elseif 1 - n_num2 == n_num1 then
                    // State space system in form (2) with 1 first order numerator polynomial
-              B[2, 1] := if abs(den[1, 2])>Modelica.Constants.eps then den[1, 2] else 1;
-              C := if abs(den[1, 2])>Modelica.Constants.eps then k[1]*[num[1, 1],1]/den[1, 2] else k[1]*[num[1, 1],1];
+              B[2, 1] := if abs(den[1, 2])>eps then den[1, 2] else 1;
+              C := if abs(den[1, 2])>eps then k[1]*[num[1, 1],1]/den[1, 2] else k[1]*[num[1, 1],1];
               D := [0];
               dZero := dZero and true;
             else
                    // State space system in form (3)
-              B[2, 1] := if abs(den[1, 2])>Modelica.Constants.eps then den[1, 2] else 1;
-              C := if abs(den[1, 2])>Modelica.Constants.eps then  k[1]*[1,0]/den[1, 2] else k[1]*[1,0];
+              B[2, 1] := if abs(den[1, 2])>eps then den[1, 2] else 1;
+              C := if abs(den[1, 2])>eps then  k[1]*[1,0]/den[1, 2] else k[1]*[1,0];
               D := [0];
               dZero := dZero and true;
             end if;
           else
             // State space system in form (1) with 2 first order denominator polynomials
             A[2, :] := {-(den[1, 1]*den[2, 1]),-(den[1, 1] + den[2, 1])};
-            B[2, 1] := if abs(den[1, 1]*den[2, 1])>Modelica.Constants.eps then den[1, 1]*den[2, 1] else 1;
-            C := if abs(den[1, 1]*den[2, 1])>Modelica.Constants.eps then  k[1]*[num[1, 2] - (den[1, 1]*den[2, 1]),num[1, 1] - (den[1, 1] + den[2, 1])]/den[1, 1]/den[2, 1] else k[1]*[num[1, 2],num[1, 1] - den[2, 1]];
+            B[2, 1] := if abs(den[1, 1]*den[2, 1])>eps then den[1, 1]*den[2, 1] else 1;
+            C := if abs(den[1, 1]*den[2, 1])>eps then  k[1]*[num[1, 2] - (den[1, 1]*den[2, 1]),num[1, 1] - (den[1, 1] + den[2, 1])]/den[1, 1]/den[2, 1] else k[1]*[num[1, 2],num[1, 1] - den[2, 1]];
             D := [k[1]];
             dZero := false;
           end if;
@@ -2898,14 +2899,14 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
 
           if 1 <= n_num1 then
                 // State space system in form (4)
-            b := if abs(den[1, 1])>Modelica.Constants.eps then den[1,1] else num[1,1];
-            c := if abs(den[1, 1])>Modelica.Constants.eps then k[1]*(num[1, 1] - den[1, 1])/den[1, 1] else k[1];
+            b := if abs(den[1, 1])>eps then den[1,1] else num[1,1];
+            c := if abs(den[1, 1])>eps then k[1]*(num[1, 1] - den[1, 1])/den[1, 1] else k[1];
             d := k[1];
             dZero := false;
           else
                 // State space system in form (5)
-            b := if abs(den[1, 1])>Modelica.Constants.eps then den[1,1] else if n_num1>0 then num[1,1] else 1;
-            c := if abs(den[1, 1])>Modelica.Constants.small then k[1]/den[1, 1] else k[1];
+            b := if abs(den[1, 1])>eps then den[1,1] else if n_num1>0 then num[1,1] else 1;
+            c := if abs(den[1, 1])>eps then k[1]/den[1, 1] else k[1];
             d := 0;
             dZero := dZero and true;
           end if;
@@ -2922,27 +2923,27 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
              // Construct state space systems of order 2
           if i <= n_den2 then
             A[2, :] := {-den[i, 2],-den[i, 1]};
-            B[2, 1] := if abs(den[i, 2])>Modelica.Constants.eps and abs(num[i, 2])>Modelica.Constants.eps then den[i, 2] else 1;
+            B[2, 1] := if abs(den[i, 2])>eps and abs(num[i, 2])>eps then den[i, 2] else 1;
             if i <= n_num2 then
                    // State space system in form (1)
-              C := if abs(den[i, 2])>Modelica.Constants.eps and abs(num[i, 2])>Modelica.Constants.eps then k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]]/den[i, 2] else k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]];
+              C := if abs(den[i, 2])>eps and abs(num[i, 2])>eps then k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]]/den[i, 2] else k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]];
               D := [k[i]];
               dZero := false;
             elseif 2*(i - n_num2) <= n_num1 then
               // State space system in form (1) with 2 first order numerator polynomials
-              C := if abs(den[i, 2])>Modelica.Constants.eps and abs(num[2*i-n_num2-1, 2])>Modelica.Constants.eps then k[i]*[num[2*i-n_num2-1, 1]*num[2*i-n_num2, 1] - den[i, 2],num[2*i-n_num2-1, 1] + num[2*i-n_num2, 1] - den[i, 1]]/den[i, 2] else k[i]*[num[2*i-n_num2-1, 1]*num[2*i-n_num2, 1] - den[i, 2],num[2*i-n_num2-1, 1] + num[2*i-n_num2, 1] - den[i, 1]];
+              C := if abs(den[i, 2])>eps and abs(num[2*i-n_num2-1, 2])>eps then k[i]*[num[2*i-n_num2-1, 1]*num[2*i-n_num2, 1] - den[i, 2],num[2*i-n_num2-1, 1] + num[2*i-n_num2, 1] - den[i, 1]]/den[i, 2] else k[i]*[num[2*i-n_num2-1, 1]*num[2*i-n_num2, 1] - den[i, 2],num[2*i-n_num2-1, 1] + num[2*i-n_num2, 1] - den[i, 1]];
               D := [k[i]];
               dZero := false;
             elseif 2*(i-n_num2) -1== n_num1 then
             // State space system in form (2) with 1 first order numerator polynomial
-            B[2, 1] := if abs(den[i, 2])>Modelica.Constants.eps then den[i, 2] else 1;
-              C := if abs(den[i, 2])>Modelica.Constants.eps then k[i]*[num[2*i-n_num2-1, 1],1]/den[i, 2] else k[i]*[num[2*i-n_num2-1, 1],1];
+            B[2, 1] := if abs(den[i, 2])>eps then den[i, 2] else 1;
+              C := if abs(den[i, 2])>eps then k[i]*[num[2*i-n_num2-1, 1],1]/den[i, 2] else k[i]*[num[2*i-n_num2-1, 1],1];
               D := [0];
               dZero := dZero and true;
             else
               // State space system in form (3)
-              B[2, 1] := if abs(den[i, 2])>Modelica.Constants.eps then den[i, 2] else 1;
-              C := if abs(den[i, 2])>Modelica.Constants.eps then k[i]*[1,0]/den[i, 2] else k[i]*[1,0];
+              B[2, 1] := if abs(den[i, 2])>eps then den[i, 2] else 1;
+              C := if abs(den[i, 2])>eps then k[i]*[1,0]/den[i, 2] else k[i]*[1,0];
               D := [0];
               dZero := dZero and true;
             end if;
@@ -2950,8 +2951,8 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
           else
                 // State space system in form (1) with 2 first order denominator polynomials
             A[2, :] := {-(den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1]),-(den[max(2*(i-n_den2)-1,i), 1] + den[max(2*(i-n_den2),i), 1])};
-            B[2, 1] := if abs(den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1])>Modelica.Constants.eps then den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1] else 1;
-            C := if abs(den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1])>Modelica.Constants.eps then k[i]*[num[max(2*(i-n_num2),i), 2] - (den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1]),num[max(2*(i-n_num2),i), 1] - (den[max(2*(i-n_den2)-1,i), 1] + den[max(2*(i-n_den2),i), 1])]/den[max(2*(i-n_den2)-1,i), 1]/den[max(2*(i-n_den2),i), 1] else k[i]*[num[max(2*(i-n_num2),i), 2],num[max(2*(i-n_num2),i), 1] - den[max(2*(i-n_den2),i), 1]];
+            B[2, 1] := if abs(den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1])>eps then den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1] else 1;
+            C := if abs(den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1])>eps then k[i]*[num[max(2*(i-n_num2),i), 2] - (den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1]),num[max(2*(i-n_num2),i), 1] - (den[max(2*(i-n_den2)-1,i), 1] + den[max(2*(i-n_den2),i), 1])]/den[max(2*(i-n_den2)-1,i), 1]/den[max(2*(i-n_den2),i), 1] else k[i]*[num[max(2*(i-n_num2),i), 2],num[max(2*(i-n_num2),i), 1] - den[max(2*(i-n_den2),i), 1]];
             D := [k[i]];
             dZero := false;
           end if;
@@ -2966,25 +2967,25 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
      //  for i in max(2,i_d):n_den1 loop
         for i in ili:n_den1 loop
              // Construct state space systems of order 1
-          a := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then -den[n_den2 + i, 1] else 0.0;
+          a := if abs(den[n_den2 + i, 1])>eps then -den[n_den2 + i, 1] else 0.0;
 
           if n_num2 <= n_den2 and 2*(n_den2 - n_num2) + i <= n_num1 then
                 // State space system in form (4)
 
-            c := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then k[i_k + i]*(num[max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1] -  den[n_den2 + i, 1])/den[n_den2 + i, 1] else 1.0;
-            b := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then den[n_den2 + i, 1] else num[max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1];
+            c := if abs(den[n_den2 + i, 1])>eps then k[i_k + i]*(num[max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1] -  den[n_den2 + i, 1])/den[n_den2 + i, 1] else 1.0;
+            b := if abs(den[n_den2 + i, 1])>eps then den[n_den2 + i, 1] else num[max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1];
             d := k[i_k + i];
             dZero := false;
           elseif n_num2 > n_den2 and i - i_d + 1 <= n_num1 then
                 // State space system in form (4)
-            c := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then k[i_k + i]*(num[max(1, n_num2 + i - i_d + 1), 1] - den[n_den2 + i, 1])/den[n_den2 + i, 1] else 1.0;
-            b := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then den[n_den2 + i, 1] else num[max(1, n_num2 + i - i_d + 1), 1];
+            c := if abs(den[n_den2 + i, 1])>eps then k[i_k + i]*(num[max(1, n_num2 + i - i_d + 1), 1] - den[n_den2 + i, 1])/den[n_den2 + i, 1] else 1.0;
+            b := if abs(den[n_den2 + i, 1])>eps then den[n_den2 + i, 1] else num[max(1, n_num2 + i - i_d + 1), 1];
             d := k[i_k + i];
             dZero := false;
           else
                 // State space system in form (5)
-            c := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then k[i_k + i]/den[n_den2 + i, 1] else k[i_k + i];
-            b := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then den[n_den2 + i, 1] else 1;
+            c := if abs(den[n_den2 + i, 1])>eps then k[i_k + i]/den[n_den2 + i, 1] else k[i_k + i];
+            b := if abs(den[n_den2 + i, 1])>eps then den[n_den2 + i, 1] else 1;
             d := 0;
             dZero := dZero and true;
           end if;
@@ -3257,7 +3258,6 @@ processing.
 </html> "));
     end toMatrices;
 
-
     function toStateSpace
       "Transform a ZerosAndPoles object into a StateSpace object"
      //encapsulated function fromZerosAndPoles
@@ -3286,6 +3286,7 @@ processing.
       Real b "input 'matrix' of partial 1st order system";
       Real c "output 'matrix' of partial 1st order system";
       Real d "feedthrough 'matrix' of partial 1st order system";
+      Real eps = 1e-6;
       Integer nx=max(ZerosAndPoles.Analysis.numeratorDegree(zp),ZerosAndPoles.Analysis.denominatorDegree(zp));
       Integer n_num1=size(zp.n1, 1);
       Integer n_num2=size(zp.n2, 1);
@@ -3325,28 +3326,28 @@ processing.
                   num[i, 1],
                   num[i, 2],
                   den[i, 1],
-                  den[i, 2]);
+                  den[i, 2],eps);
             elseif 2*(i - n_num2) <= n_num1 then
                 // State space system in form (1) with 2 first order numerator polynomials
               k[i] := Internal.scaleFactor2(
                   num[2*(i - n_num2)-1, 1] + num[2*(i - n_num2), 1],
                   num[2*(i - n_num2)-1, 1]*num[2*(i - n_num2), 1],
                   den[i, 1],
-                  den[i, 2]);
+                  den[i, 2],eps);
             elseif  2*(i-n_num2) -1== n_num1 then
                 // State space system in form (2) with 1 first order numerator polynomial
               k[i] := Internal.scaleFactor2(
                   1,
                   num[2*i-n_num2-1, 1],
                   den[i, 1],
-                  den[i, 2]);
+                  den[i, 2],eps);
              else
                 // State space system in form (3)
               k[i] := Internal.scaleFactor2(
                   1,
                   1,
                   den[i, 1],
-                  den[i, 2]);
+                  den[i, 2],eps);
             end if;
           else
              // State space system in form (1) with 2 first order denominator polynomials
@@ -3354,7 +3355,7 @@ processing.
                 num[i, 1],
                 num[i, 2],
                 den[2*(i - n_den2)-1, 1] + den[2*(i - n_den2), 1],
-                den[2*(i - n_den2)-1, 1]*den[2*(i - n_den2), 1]);
+                den[2*(i - n_den2)-1, 1]*den[2*(i - n_den2), 1],eps);
           end if;
         end for;
 
@@ -3363,14 +3364,14 @@ processing.
           if n_num2 <= n_den2 and 2*(n_den2 - n_num2) + i <= n_num1 then
              // State space system in form (4)
             k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
-              n_num2) + i), 1], den[n_den2 + i, 1]);
+              n_num2) + i), 1], den[n_den2 + i, 1],eps);
           elseif n_num2 > n_den2 and i - i_d + 1 <= n_num1 then
              // State space system in form (4)
             k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
-              1], den[n_den2 + i, 1]);
+              1], den[n_den2 + i, 1],eps);
           else
              // State space system in form (5)
-            k[i_k + i] := Internal.scaleFactor1(1, den[n_den2 + i, 1]);
+            k[i_k + i] := Internal.scaleFactor1(1, den[n_den2 + i, 1],eps);
           end if;
         end for;
 
@@ -3389,37 +3390,37 @@ processing.
           // Construct state space systems of order 2
           if 1 <= n_den2 then
             A[2, :] := {-den[1, 2],-den[1, 1]};
-            B[2, 1] := if abs(den[1, 2])>Modelica.Constants.eps and abs(num[1, 2])>Modelica.Constants.eps then den[1, 2] else 1;
+            B[2, 1] := if abs(den[1, 2])>eps and abs(num[1, 2])>eps then den[1, 2] else 1;
 
             if 1 <= n_num2 then
              // State space system in form (1)
-              C := if abs(den[1, 2])>Modelica.Constants.eps and abs(num[1, 2])>Modelica.Constants.eps then k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]]/den[1, 2] else k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]];
+              C := if abs(den[1, 2])>eps and abs(num[1, 2])>eps then k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]]/den[1, 2] else k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]];
               D := [k[1]];
               dZero := false;
            elseif 1 - n_num2 + 1 <= n_num1 then
             // State space system in form (1) with 2 first order numerator polynomials
-            B[2, 1] := if abs(den[1, 2])>Modelica.Constants.eps then den[1, 2] else 1;
-              C := if abs(den[1, 2])>Modelica.Constants.eps then   k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]]/den[1, 2] else k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]];
+            B[2, 1] := if abs(den[1, 2])>eps then den[1, 2] else 1;
+              C := if abs(den[1, 2])>eps then   k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]]/den[1, 2] else k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]];
               D := [k[1]];
               dZero := false;
            elseif 1 - n_num2 == n_num1 then
             // State space system in form (2) with 1 first order numerator polynomial
-              B[2, 1] := if abs(den[1, 2])>Modelica.Constants.eps then den[1, 2] else 1;
-              C := if abs(den[1, 2])>Modelica.Constants.eps then k[1]*[num[1, 1],1]/den[1, 2] else k[1]*[num[1, 1],1];
+              B[2, 1] := if abs(den[1, 2])>eps then den[1, 2] else 1;
+              C := if abs(den[1, 2])>eps then k[1]*[num[1, 1],1]/den[1, 2] else k[1]*[num[1, 1],1];
               D := [0];
               dZero := dZero and true;
             else
                    // State space system in form (3)
-              B[2, 1] := if abs(den[1, 2])>Modelica.Constants.eps then den[1, 2] else 1;
-              C := if abs(den[1, 2])>Modelica.Constants.eps then  k[1]*[1,0]/den[1, 2] else k[1]*[1,0];
+              B[2, 1] := if abs(den[1, 2])>eps then den[1, 2] else 1;
+              C := if abs(den[1, 2])>eps then  k[1]*[1,0]/den[1, 2] else k[1]*[1,0];
               D := [0];
               dZero := dZero and true;
             end if;
           else
             // State space system in form (1) with 2 first order denominator polynomials
             A[2, :] := {-(den[1, 1]*den[2, 1]),-(den[1, 1] + den[2, 1])};
-            B[2, 1] := if abs(den[1, 1]*den[2, 1])>Modelica.Constants.eps then den[1, 1]*den[2, 1] else 1;
-            C := if abs(den[1, 1]*den[2, 1])>Modelica.Constants.eps then  k[1]*[num[1, 2] - (den[1, 1]*den[2, 1]),num[1, 1] - (den[1, 1] + den[2, 1])]/den[1, 1]/den[2, 1] else k[1]*[num[1, 2],num[1, 1] - den[2, 1]];
+            B[2, 1] := if abs(den[1, 1]*den[2, 1])>eps then den[1, 1]*den[2, 1] else 1;
+            C := if abs(den[1, 1]*den[2, 1])>eps then  k[1]*[num[1, 2] - (den[1, 1]*den[2, 1]),num[1, 1] - (den[1, 1] + den[2, 1])]/den[1, 1]/den[2, 1] else k[1]*[num[1, 2],num[1, 1] - den[2, 1]];
             D := [k[1]];
             dZero := false;
           end if;
@@ -3435,14 +3436,14 @@ processing.
 
           if 1 <= n_num1 then
             // State space system in form (4)
-            b := if abs(den[1, 1])>Modelica.Constants.eps then den[1,1] else num[1,1];
-            c := if abs(den[1, 1])>Modelica.Constants.eps then k[1]*(num[1, 1] - den[1, 1])/den[1, 1] else k[1];
+            b := if abs(den[1, 1])>eps then den[1,1] else num[1,1];
+            c := if abs(den[1, 1])>eps then k[1]*(num[1, 1] - den[1, 1])/den[1, 1] else k[1];
             d := k[1];
             dZero := false;
           else
            // State space system in form (5)
-            b := if abs(den[1, 1])>Modelica.Constants.eps then den[1,1] else if n_num1>0 then num[1,1] else 1;
-            c := if abs(den[1, 1])>Modelica.Constants.small then k[1]/den[1, 1] else k[1];
+            b := if abs(den[1, 1])>eps then den[1,1] else if n_num1>0 then num[1,1] else 1;
+            c := if abs(den[1, 1])>eps then k[1]/den[1, 1] else k[1];
             d := 0;
             dZero := dZero and true;
           end if;
@@ -3459,31 +3460,31 @@ processing.
              // Construct state space systems of order 2
           if i <= n_den2 then
             A[2, :] := {-den[i, 2],-den[i, 1]};
-            B[2, 1] := if abs(den[i, 2])>Modelica.Constants.eps and abs(num[i, 2])>Modelica.Constants.eps then den[i, 2] else 1;
+            B[2, 1] := if abs(den[i, 2])>eps and abs(num[i, 2])>eps then den[i, 2] else 1;
 
             if i <= n_num2 then
                    // State space system in form (1)
 
-              C := if abs(den[i, 2])>Modelica.Constants.eps and abs(num[i, 2])>Modelica.Constants.eps then k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]]/den[i, 2] else k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]];
+              C := if abs(den[i, 2])>eps and abs(num[i, 2])>eps then k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]]/den[i, 2] else k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]];
               D := [k[i]];
               dZero := false;
 
             elseif 2*(i - n_num2) <= n_num1 then
               // State space system in form (1) with 2 first order numerator polynomials
-              C := if abs(den[i, 2])>Modelica.Constants.eps and abs(num[2*i-n_num2-1, 2])>Modelica.Constants.eps then k[i]*[num[2*i-n_num2-1, 1]*num[2*i-n_num2, 1] - den[i, 2],num[2*i-n_num2-1, 1] + num[2*i-n_num2, 1] - den[i, 1]]/den[i, 2] else k[i]*[num[2*i-n_num2-1, 1]*num[2*i-n_num2, 1] - den[i, 2],num[2*i-n_num2-1, 1] + num[2*i-n_num2, 1] - den[i, 1]];
+              C := if abs(den[i, 2])>eps and abs(num[2*i-n_num2-1, 2])>eps then k[i]*[num[2*i-n_num2-1, 1]*num[2*i-n_num2, 1] - den[i, 2],num[2*i-n_num2-1, 1] + num[2*i-n_num2, 1] - den[i, 1]]/den[i, 2] else k[i]*[num[2*i-n_num2-1, 1]*num[2*i-n_num2, 1] - den[i, 2],num[2*i-n_num2-1, 1] + num[2*i-n_num2, 1] - den[i, 1]];
               D := [k[i]];
               dZero := false;
 
             elseif 2*(i-n_num2) -1== n_num1 then
             // State space system in form (2) with 1 first order numerator polynomial
-            B[2, 1] := if abs(den[i, 2])>Modelica.Constants.eps then den[i, 2] else 1;
-              C := if abs(den[i, 2])>Modelica.Constants.eps then k[i]*[num[2*i-n_num2-1, 1],1]/den[i, 2] else k[i]*[num[2*i-n_num2-1, 1],1];
+            B[2, 1] := if abs(den[i, 2])>eps then den[i, 2] else 1;
+              C := if abs(den[i, 2])>eps then k[i]*[num[2*i-n_num2-1, 1],1]/den[i, 2] else k[i]*[num[2*i-n_num2-1, 1],1];
               D := [0];
               dZero := dZero and true;
             else
               // State space system in form (3)
-              B[2, 1] := if abs(den[i, 2])>Modelica.Constants.eps then den[i, 2] else 1;
-              C := if abs(den[i, 2])>Modelica.Constants.eps then k[i]*[1,0]/den[i, 2] else k[i]*[1,0];
+              B[2, 1] := if abs(den[i, 2])>eps then den[i, 2] else 1;
+              C := if abs(den[i, 2])>eps then k[i]*[1,0]/den[i, 2] else k[i]*[1,0];
               D := [0];
               dZero := dZero and true;
             end if;
@@ -3491,8 +3492,8 @@ processing.
           else
                 // State space system in form (1) with 2 first order denominator polynomials
             A[2, :] := {-(den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1]),-(den[max(2*(i-n_den2)-1,i), 1] + den[max(2*(i-n_den2),i), 1])};
-            B[2, 1] := if abs(den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1])>Modelica.Constants.eps then den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1] else 1;
-            C := if abs(den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1])>Modelica.Constants.eps then k[i]*[num[max(2*(i-n_num2),i), 2] - (den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1]),num[max(2*(i-n_num2),i), 1] - (den[max(2*(i-n_den2)-1,i), 1] + den[max(2*(i-n_den2),i), 1])]/den[max(2*(i-n_den2)-1,i), 1]/den[max(2*(i-n_den2),i), 1] else k[i]*[num[max(2*(i-n_num2),i), 2],num[max(2*(i-n_num2),i), 1] - den[max(2*(i-n_den2),i), 1]];
+            B[2, 1] := if abs(den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1])>eps then den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1] else 1;
+            C := if abs(den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1])>eps then k[i]*[num[max(2*(i-n_num2),i), 2] - (den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1]),num[max(2*(i-n_num2),i), 1] - (den[max(2*(i-n_den2)-1,i), 1] + den[max(2*(i-n_den2),i), 1])]/den[max(2*(i-n_den2)-1,i), 1]/den[max(2*(i-n_den2),i), 1] else k[i]*[num[max(2*(i-n_num2),i), 2],num[max(2*(i-n_num2),i), 1] - den[max(2*(i-n_den2),i), 1]];
             D := [k[i]];
             dZero := false;
           end if;
@@ -3507,25 +3508,25 @@ processing.
      //  for i in max(2,i_d):n_den1 loop
         for i in ili:n_den1 loop
              // Construct state space systems of order 1
-          a := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then -den[n_den2 + i, 1] else 0.0;
+          a := if abs(den[n_den2 + i, 1])>eps then -den[n_den2 + i, 1] else 0.0;
 
           if n_num2 <= n_den2 and 2*(n_den2 - n_num2) + i <= n_num1 then
                 // State space system in form (4)
 
-            c := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then k[i_k + i]*(num[max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1] -  den[n_den2 + i, 1])/den[n_den2 + i, 1] else 1.0;
-            b := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then den[n_den2 + i, 1] else num[max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1];
+            c := if abs(den[n_den2 + i, 1])>eps then k[i_k + i]*(num[max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1] -  den[n_den2 + i, 1])/den[n_den2 + i, 1] else 1.0;
+            b := if abs(den[n_den2 + i, 1])>eps then den[n_den2 + i, 1] else num[max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1];
             d := k[i_k + i];
             dZero := false;
           elseif n_num2 > n_den2 and i - i_d + 1 <= n_num1 then
           // State space system in form (4)
-            c := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then k[i_k + i]*(num[max(1, n_num2 + i - i_d + 1), 1] - den[n_den2 + i, 1])/den[n_den2 + i, 1] else 1.0;
-            b := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then den[n_den2 + i, 1] else num[max(1, n_num2 + i - i_d + 1), 1];
+            c := if abs(den[n_den2 + i, 1])>eps then k[i_k + i]*(num[max(1, n_num2 + i - i_d + 1), 1] - den[n_den2 + i, 1])/den[n_den2 + i, 1] else 1.0;
+            b := if abs(den[n_den2 + i, 1])>eps then den[n_den2 + i, 1] else num[max(1, n_num2 + i - i_d + 1), 1];
             d := k[i_k + i];
             dZero := false;
           else
            // State space system in form (5)
-            c := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then k[i_k + i]/den[n_den2 + i, 1] else k[i_k + i];
-            b := if abs(den[n_den2 + i, 1])>Modelica.Constants.eps then den[n_den2 + i, 1] else 1;
+            c := if abs(den[n_den2 + i, 1])>eps then k[i_k + i]/den[n_den2 + i, 1] else k[i_k + i];
+            b := if abs(den[n_den2 + i, 1])>eps then den[n_den2 + i, 1] else 1;
             d := 0;
             dZero := dZero and true;
           end if;

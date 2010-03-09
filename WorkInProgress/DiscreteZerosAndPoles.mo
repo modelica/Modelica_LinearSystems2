@@ -60,7 +60,35 @@ record DiscreteZerosAndPoles
       annotation (overloadsConstructor=true);
     end fromReal;
 
-  encapsulated function fromZerosAndPoles
+  function fromZerosAndPoles
+      "Generate a DiscreteZerosAndPoles data record from a continuous ZerosAndPoles represenation"
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+
+    input ZerosAndPoles zp "continuous zeros and poles transfer function";
+    input Modelica.SIunits.Time Ts "Sample time" 
+         annotation(Dialog(group="Data used to construct discrete from continuous system"));
+
+    input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
+        "Discretization method" 
+          annotation(Dialog(group="Data used to construct discrete from continuous system"));
+
+    output DiscreteZerosAndPoles dzp;
+    protected
+    StateSpace ss = StateSpace(zp);
+    Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace dss=
+                             Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace(ss,Ts,method);
+
+  algorithm
+    dzp := DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(dss);
+    annotation (overloadsConstructor=true);
+  end fromZerosAndPoles;
+
+  encapsulated function fromPolesAndZeros
       "Generate a ZerosAndPoles transfer function from a set of zeros and poles"
 
       import Modelica;
@@ -164,7 +192,7 @@ It is required that complex conjugate pairs must directly
 follow each other as above. An error occurs if this is not the case.
 </p>
 </html>"));
-  end fromZerosAndPoles;
+  end fromPolesAndZeros;
 
     function fromDiscreteTransferFunction = 
         Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction.Conversion.toDiscreteZerosAndPoles;
@@ -326,6 +354,81 @@ encapsulated operator '-'
   end negate;
 end '-';
 
+encapsulated operator '*'
+function 'dzp*dzp'
+      "Multiply two ZerosAndPoles transfer functions (dzp1 * dzp2)"
+
+      import Modelica;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2;
+
+  input DiscreteZerosAndPoles dzp1;
+  input DiscreteZerosAndPoles dzp2;
+  input Modelica.SIunits.Time Ts=dzp1.Ts "Sample time";
+  input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
+        "Discretization method";
+  input String uName=dzp1.uName "input name";
+  input String yName=dzp2.yName "output name";
+
+  output DiscreteZerosAndPoles result "= dzp1 * dzp2";
+algorithm
+  if dzp1 == DiscreteZerosAndPoles(0) or dzp2 == DiscreteZerosAndPoles(0) then
+    result := DiscreteZerosAndPoles(0);
+  else
+    result.n1 := cat(
+      1,
+      dzp1.n1,
+      dzp2.n1);
+    result.n2 := cat(
+      1,
+      dzp1.n2,
+      dzp2.n2);
+    result.d1 := cat(
+      1,
+      dzp1.d1,
+      dzp2.d1);
+    result.d2 := cat(
+      1,
+      dzp1.d2,
+      dzp2.d2);
+    result.k := dzp1.k*dzp2.k;
+  end if;
+    result.Ts := Ts;
+    result.uName := uName;
+    result.yName := yName;
+
+end 'dzp*dzp';
+
+function 'r*dzp'
+      "Multiply a real number with a discrete ZerosAndPoles transfer function  (r * dzp2)"
+
+  import Modelica;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+  import Modelica_LinearSystems2;
+
+  input Real r;
+  input DiscreteZerosAndPoles dzp;
+  input Modelica.SIunits.Time Ts=dzp.Ts "Sample time";
+  input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
+        "Discretization method";
+  input String uName=dzp.uName "input name";
+  input String yName=dzp.yName "output name";
+
+  output DiscreteZerosAndPoles result "= r * dzp1";
+algorithm
+  if r == 0 or dzp == DiscreteZerosAndPoles(0) then
+    result := DiscreteZerosAndPoles(0);
+  else
+    result := dzp;
+    result.k := r*dzp.k;
+  end if;
+    result.Ts := Ts;
+    result.uName := uName;
+    result.yName := yName;
+
+end 'r*dzp';
+end '*';
+
   encapsulated operator function '+'
     "Addition of to tarnsfwer functions zp1 + zp2, i.e. parallel connection of two transfer functions (= inputs are the same, outputs of the two systems are added)"
 
@@ -423,42 +526,6 @@ end '-';
 
   end '+';
 
-  encapsulated operator function '*'
-    "Multiply two ZerosAndPoles transfer functions (zp1 * zp2)"
-
-    import Modelica;
-    import ZerosAndPoles =
-      Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-
-    input ZerosAndPoles zp1;
-    input ZerosAndPoles zp2;
-
-    output ZerosAndPoles result "= zp1 * zp2";
-  algorithm
-    if zp1 == ZerosAndPoles(0) or zp2 == ZerosAndPoles(0) then
-      result := ZerosAndPoles(0);
-    else
-      result.n1 := cat(
-        1,
-        zp1.n1,
-        zp2.n1);
-      result.n2 := cat(
-        1,
-        zp1.n2,
-        zp2.n2);
-      result.d1 := cat(
-        1,
-        zp1.d1,
-        zp2.d1);
-      result.d2 := cat(
-        1,
-        zp1.d2,
-        zp2.d2);
-      result.k := zp1.k*zp2.k;
-    end if;
-
-  end '*';
-
   encapsulated operator function '/'
     "Divide two transfer functions (zp1 / zp2)"
 
@@ -537,28 +604,28 @@ end '==';
   encapsulated operator function 'String'
     "Transform ZerosAndPoles transfer function into a String representation"
     import Modelica;
-    import ZerosAndPoles =
-      Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
     import
       Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
+    import Modelica_LinearSystems2.ZerosAndPoles;
 
-      input ZerosAndPoles zp
+      input DiscreteZerosAndPoles dzp
       "ZerosAndPoles transfer function to be transformed in a String representation";
       input Integer significantDigits=6
       "Number of significant digits that are shown";
-      input String name="p" "Independent variable name used for printing";
+      input String name="q" "Independent variable name used for printing";
       output String s="";
   protected
-      Integer num_order=size(zp.n1, 1) + 2*size(zp.n2, 1);
-      Integer den_order=size(zp.d1, 1) + 2*size(zp.d2, 1);
+      Integer num_order=size(dzp.n1, 1) + 2*size(dzp.n2, 1);
+      Integer den_order=size(dzp.d1, 1) + 2*size(dzp.d2, 1);
   algorithm
       if num_order == 0 and den_order == 0 then
-        s := String(zp.k);
+        s := String(dzp.k);
 
       else
          // construct string for multiplicative factor
-        if zp.k <> 1.0 or zp.k == 1.0 and num_order == 0 then
-          s := String(zp.k);
+        if dzp.k <> 1.0 or dzp.k == 1.0 and num_order == 0 then
+          s := String(dzp.k);
           if num_order <> 0 then
             s := s + "*";
           end if;
@@ -566,17 +633,17 @@ end '==';
 
         if num_order <> 0 then
             // construct numerator string
-          s := s + Internal.firstOrderToString(
-                zp.n1,
+          s := s + ZerosAndPoles.Internal.firstOrderToString(
+                dzp.n1,
                 significantDigits,
                 name);
-          if size(zp.n2, 1) <> 0 then
-            s := if size(zp.n1, 1) > 0 then s + "*" +
-              Internal.secondOrderToString(
-                  zp.n2,
+          if size(dzp.n2, 1) <> 0 then
+            s := if size(dzp.n1, 1) > 0 then s + "*" +
+              ZerosAndPoles.Internal.secondOrderToString(
+                  dzp.n2,
                   significantDigits,
-                  name) else s + Internal.secondOrderToString(
-                  zp.n2,
+                  name) else s + ZerosAndPoles.Internal.secondOrderToString(
+                  dzp.n2,
                   significantDigits,
                   name);
           end if;
@@ -588,16 +655,16 @@ end '==';
           if den_order > 1 then
             s := s + "( ";
           end if;
-          s := s + Internal.firstOrderToString(
-                zp.d1,
+          s := s + ZerosAndPoles.Internal.firstOrderToString(
+                dzp.d1,
                 significantDigits,
                 name);
-          if size(zp.d2, 1) <> 0 then
-            if size(zp.d1, 1) > 0 then
+          if size(dzp.d2, 1) <> 0 then
+            if size(dzp.d1, 1) > 0 then
               s := s + "*";
             end if;
-            s := s + Internal.secondOrderToString(
-                  zp.d2,
+            s := s + ZerosAndPoles.Internal.secondOrderToString(
+                  dzp.d2,
                   significantDigits,
                   name);
           end if;
@@ -680,6 +747,112 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Anal
 </html> "));
   end denominatorDegree;
 
+  encapsulated function numeratorDegree "Return numerator degree"
+    import Modelica;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+
+    input DiscreteZerosAndPoles dzp
+        "DiscreteZerosAndPoles transfer function of a system";
+    output Integer result;
+  algorithm
+    result := size(dzp.n1, 1) + 2*size(dzp.n2, 1);
+    annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  result </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Analysis.<b>numeratorDegree</b>(zp)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial constituted by the first and second order polynomials of the DiscreteZeroAndPoles numerator. 
+See also <a href=\"Modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Analysis.denominatorDegree\">DiscreteZerosAndPoles.Analysis.denominatorDegree</a>.
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   DiscreteZerosAndPoles q = DiscreteZerosAndPoles.q();
+   Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles dzp=(q+1)/(q^2+q+1);
+
+   Real nDegree;
+
+<b>algorithm</b>
+  nDegree := DiscreteZerosAndPoles.Analysis.numeratorDegree(dzp);
+//  nDegree = 1
+</pre></blockquote>
+
+
+</html> "));
+  end numeratorDegree;
+
+  encapsulated function evaluate
+      "Evaluate a ZerosAndPoles transfer function at a given value of p"
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+    import Modelica_LinearSystems2.Math.Complex;
+
+    input DiscreteZerosAndPoles dzp
+        "DiscreteZerosAndPoles transfer function of a system";
+    input Complex q=Complex(0) "Complex value q where dzp is evaluated";
+    input Real den_min=0 "|denominator(p)| is limited by den_min";
+    output Complex y "= zp(p)";
+    protected
+    Complex j = Modelica_LinearSystems2.Math.Complex.j();
+    Complex num;
+    Complex den;
+    Real abs_den;
+  algorithm
+    // Build numerator
+    num := dzp.k+0*j;
+    for i in 1:size(dzp.n1, 1) loop
+       num := num*Internal.'p+a'(q, dzp.n1[i]);
+    end for;
+    for i in 1:size(dzp.n2, 1) loop
+       num := num*Internal.'p^2+k[1]*p+k[2]'(q, dzp.n2[i, :]);
+    end for;
+
+    // Build denominator
+    den := 1+0*j;
+    for i in 1:size(dzp.d1, 1) loop
+      den := den*Internal.'p+a'(q, dzp.d1[i]);
+    end for;
+    for i in 1:size(dzp.d2, 1) loop
+      den := den*Internal.'p^2+k[1]*p+k[2]'(q, dzp.d2[i, :]);
+    end for;
+
+    // Build value of transfer function
+    abs_den := Complex.'abs'(den);
+    den := if abs_den >= den_min then den else -abs_den+0*j;
+    y := num/den;
+    annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  result </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>evaluate</b>(ss)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function at a given (complex) value of p.
+The transfer function G(p)=N(p)/D(p) is evaluated by calculating the numerator polynomial N(p) and the denominator polynomial D(p).
+See also <a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   Complex j = Modelica_LinearSystems2.Math.Complex.j();
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
+   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
+ 
+   Complex result;
+
+<b>algorithm</b>
+  result := Modelica_LinearSystems2.ZerosAndPoles.Analysis.evaluate(zp, j+1);
+//  result = 0.538462 - 0.307692j
+</pre></blockquote>
+
+
+</html> "));
+  end evaluate;
+
   end Analysis;
 
   encapsulated package Design
@@ -689,7 +862,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Anal
   end Plot;
 
   encapsulated package Conversion
-
+    import Modelica_LinearSystems2;
   function toDiscreteTransferFunction
       "Generate a DiscreteTransferFunction object from a DiscreteZerosAndPoles object"
 
@@ -754,25 +927,26 @@ from a ZerosAndPoles record representated by first and second order numerator an
 </html>"));
   end toDiscreteTransferFunction;
 
-  function toStateSpace
-      "Transform a ZerosAndPoles object into a StateSpace object"
+  function toDiscreteStateSpace
+      "Transform a DiscreteZerosAndPoles object into a DiscreteStateSpace object"
    //encapsulated function fromZerosAndPoles
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.Math.Vectors;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-    import
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Vectors;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+      import
         Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
 
-    input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
-    output StateSpace ss(
-      redeclare Real A[ZerosAndPoles.Analysis.denominatorDegree(zp),
-        ZerosAndPoles.Analysis.denominatorDegree(zp)],
-      redeclare Real B[ZerosAndPoles.Analysis.denominatorDegree(zp),1],
-      redeclare Real C[1,ZerosAndPoles.Analysis.denominatorDegree(zp)],
+    input DiscreteZerosAndPoles dzp
+        "ZerosAndPoles transfer function of a system";
+    output DiscreteStateSpace dss(
+      redeclare Real A[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp),
+        DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)],
+      redeclare Real B[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp),1],
+      redeclare Real C[1,DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)],
       redeclare Real D[1,1]) "Transfer function in StateSpace SISO form";
 
     protected
@@ -786,25 +960,26 @@ from a ZerosAndPoles record representated by first and second order numerator an
     Real d "feedthrough 'matrix' of partial 1st order system";
     Real aa "a2 + a1 +1";
     Real bb "b2 + b1 +1";
-    Integer nx=max(ZerosAndPoles.Analysis.numeratorDegree(zp),ZerosAndPoles.Analysis.denominatorDegree(zp));
-    Integer n_num1=size(zp.n1, 1);
-    Integer n_num2=size(zp.n2, 1);
-    Integer n_den1=size(zp.d1, 1);
-    Integer n_den2=size(zp.d2, 1);
+    Integer nx=max(DiscreteZerosAndPoles.Analysis.numeratorDegree(dzp),DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp));
+    Integer n_num1=size(dzp.n1, 1);
+    Integer n_num2=size(dzp.n2, 1);
+    Integer n_den1=size(dzp.d1, 1);
+    Integer n_den2=size(dzp.d2, 1);
     Integer n_num=n_num1 + 2*n_num2;
     Integer n_den=n_den1 + 2*n_den2;
 
     Integer i_d=if n_num2 > n_den2 then 2*(n_num2 - n_den2) + 1 else 1;
     Integer i_k=if n_num2 > n_den2 then n_den2 - (n_num2 - n_den2) else n_den2;
     Integer i;
-    Integer ili;
-    Real num[nx,2]=[zp.n2; [zp.n1,zeros(n_num1)]; zeros(max(0,nx - n_num2 - n_num1), 2)]
+    Integer ili=if max(n_den2, n_num2) > 0 then i_d else  max(2, i_d);
+    Real num[nx,2]=[dzp.n2; [dzp.n1,zeros(n_num1)]; zeros(max(0,nx - n_num2 - n_num1), 2)]
         "Numerator matrix, in order that indices are defined in all situations in all if clauses";
-    Real den[nx,2]=[zp.d2; [zp.d1,zeros(n_den1)]; zeros(max(0,nx - n_den2 - n_den1), 2)]
+    Real den[nx,2]=[dzp.d2; [dzp.d1,zeros(n_den1)]; zeros(max(0,nx - n_den2 - n_den1), 2)]
         "Denominator matrix, in order that indices are defined in all situations in all if clauses";
     Real k[i_k + n_den1](each fixed=false)
         "Additional factors of the first and second order blocks, in order that the gain of the blocks is 1";
     Real k_total;
+    Real eps=1e-5;//100*Modelica.Constants.eps;
 
     Boolean dZero=true;
 
@@ -815,7 +990,6 @@ from a ZerosAndPoles record representated by first and second order numerator an
       ") <= denominator degree (= " + String(n_den) + ") required.");
 
     if n_den > 0 then
-
       for i in 1:max(n_den2, n_num2) loop
         // State space systems of order 2
         if i <= n_den2 then
@@ -825,36 +999,37 @@ from a ZerosAndPoles record representated by first and second order numerator an
                 num[i, 1],
                 num[i, 2],
                 den[i, 1],
-                den[i, 2]);
-          elseif i - n_num2 + 1 <= n_num1 then
+                den[i, 2],eps);
+          elseif 2*(i - n_num2) <= n_num1 then
               // State space system in form (1) with 2 first order numerator polynomials
             k[i] := Internal.scaleFactor2(
-                num[i, 1] + num[i + 1, 1],
-                num[i, 1]*num[i + 1, 1],
+                num[2*(i - n_num2)-1, 1] + num[2*(i - n_num2), 1],
+                num[2*(i - n_num2)-1, 1]*num[2*(i - n_num2), 1],
                 den[i, 1],
-                den[i, 2]);
-          elseif i - n_num2 == n_num1 then
+                den[i, 2],eps);
+          elseif  2*(i-n_num2) -1== n_num1 then
               // State space system in form (2) with 1 first order numerator polynomial
             k[i] := Internal.scaleFactor2(
                 0,
-                num[i, 1],
+                num[2*i-n_num2-1, 1],
                 den[i, 1],
-                den[i, 2]);
-          else
+                den[i, 2],eps);
+           else
               // State space system in form (3)
             k[i] := Internal.scaleFactor2(
                 0,
                 0,
                 den[i, 1],
-                den[i, 2]);
+                den[i, 2],eps);
           end if;
         else
            // State space system in form (1) with 2 first order denominator polynomials
+
           k[i] := Internal.scaleFactor2(
               num[i, 1],
               num[i, 2],
-              den[i, 1] + den[i + 1, 1],
-              den[i, 1]*den[i + 1, 1]);
+              den[2*(i - n_den2)-1, 1] + den[2*(i - n_den2), 1],
+              den[2*(i - n_den2)-1, 1]*den[2*(i - n_den2), 1],eps);
         end if;
       end for;
 
@@ -863,206 +1038,227 @@ from a ZerosAndPoles record representated by first and second order numerator an
         if n_num2 <= n_den2 and 2*(n_den2 - n_num2) + i <= n_num1 then
            // State space system in form (4)
           k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
-            n_num2) + i), 1], den[n_den2 + i, 1]);
+            n_num2) + i), 1], den[n_den2 + i, 1],eps);
         elseif n_num2 > n_den2 and i - i_d + 1 <= n_num1 then
            // State space system in form (4)
           k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
-            1], den[n_den2 + i, 1]);
+            1], den[n_den2 + i, 1],eps);
         else
            // State space system in form (5)
-          k[i_k + i] := Internal.scaleFactor1(0, den[n_den2 + i, 1]);
+          k[i_k + i] := Internal.scaleFactor1(0, den[n_den2 + i, 1],eps);
         end if;
       end for;
 
-      k_total := zp.k/product(k);
+      k_total := dzp.k/product(k);
 
-      ss.A := zeros(nx, nx);
-      ss.B := zeros(nx, 1);
-      ss.C := zeros(1, nx);
-      ss.D := zeros(1, 1);
+      dss.A := zeros(nx, nx);
+      dss.B := zeros(nx, 1);
+      dss.C := zeros(1, nx);
+      dss.D := zeros(1, 1);
 
    // Calculation of matrices A, B, C, D
    //first elements of A, B, C and D
 
       if max(n_den2, n_num2) > 0 then
-        ili := i_d;
+
         A[1, :] := {0,1};
         B[1, 1] := 0;
             // Construct state space systems of order 2
         if 1 <= n_den2 then
-          aa := den[1, 2] + den[1, 1] +1;
+          aa := num[1, 2] + num[1, 1] +1;
+          bb := den[1, 2] + den[1, 1] +1;
           A[2, :] := {-den[1, 2],-den[1, 1]};
-          B[2, 1] := if abs(bb)>Modelica.Constants.eps and abs(aa)>Modelica.Constants.eps then bb else 1;
+          B[2, 1] := if abs(bb)>eps and abs(aa)>eps then bb else 1;
           if 1 <= n_num2 then
                  // State space system in form (1)
-            C := if abs(bb)>Modelica.Constants.eps and abs(aa)>Modelica.Constants.eps then k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]]/bb else k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]];
+            C := if abs(bb)>eps and abs(aa)>eps then k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]]/bb else k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]];
             D := [k[1]];
             dZero := false;
 
           elseif 1 - n_num2 + 1 <= n_num1 then
                  // State space system in form (1) with 2 first order numerator polynomials
-
-            C := if abs(den[1, 2])>Modelica.Constants.eps and abs(num[1, 2])>Modelica.Constants.eps then  k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]]/den[1, 2] else k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]];
+            aa := num[1, 1]*num[2, 1] + num[1, 1] + num[2, 1];
+            B[2, 1] := if abs(bb)>eps  and abs(aa)>eps then bb else 1;
+            C := if abs(bb)>eps and abs(aa)>eps then k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]]/bb else k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]];
             D := [k[1]];
             dZero := false;
           elseif 1 - n_num2 == n_num1 then
                  // State space system in form (2) with 1 first order numerator polynomial
-
-            C := if abs(den[1, 2])>Modelica.Constants.eps and abs(num[1, 2])>Modelica.Constants.eps then k[1]*[num[1, 1],1]/den[1, 2] else k[1]*[num[1, 1],1];
+            aa := num[1, 1] + 1;
+            B[2, 1] := if abs(bb)>eps  and abs(aa)>eps then bb else 1;
+            C := if abs(bb)>eps  and abs(aa)>eps then k[1]*[num[1, 1],1]/bb else k[1]*[num[1, 1],1];
             D := [0];
             dZero := dZero and true;
           else
                  // State space system in form (3)
-
-            C := if abs(den[1, 2])>Modelica.Constants.eps and abs(num[1, 2])>Modelica.Constants.eps then  k[1]*[1,0]/den[1, 2] else k[1]*[1,0];
+            B[2, 1] := if abs(bb)>eps  and abs(aa)>eps then bb else 1;
+            C := if abs(bb)>eps  and abs(aa)>eps then  k[1]*[1,0]/bb else k[1]*[1,0];
             D := [0];
             dZero := dZero and true;
           end if;
-        else
+       else
               // State space system in form (1) with 2 first order denominator polynomials
-
+          bb := den[1, 1] + den[2, 1] + den[1, 1]*den[2, 1] + 1;
           A[2, :] := {-(den[1, 1]*den[2, 1]),-(den[1, 1] + den[2, 1])};
-          B[2, 1] := den[1, 1]*den[1, 1];
-
-          C := k[1]*[num[1, 2] - (den[1, 1]*den[2, 1]),num[1, 1] - (den[1, 1] + den[2, 1])]/den[1, 1]
-            /den[1, 1];
+          B[2, 1] := if abs(bb)>eps then bb else 1;
+          C := if abs(bb)>eps then  k[1]*[num[1, 2] - (den[1, 1]*den[2, 1]),num[1, 1] - (den[1, 1] + den[2, 1])]/bb else k[1]*[num[1, 2] - (den[1, 1]*den[2, 1]),num[1, 1] - (den[1, 1] + den[2, 1])];
           D := [k[1]];
           dZero := false;
         end if;
-        ss.A[1:2, 1:2] := A;
-        ss.B[1:2, 1] := vector(B);
-        ss.C[1, 1:2] := vector(C);
-        ss.D := D;
+
+        dss.A[1:2, 1:2] := A;
+        dss.B[1:2, 1] := vector(B);
+        dss.C[1, 1:2] := vector(C);
+        dss.D := D;
 
       else
-        ili := max(2, i_d);
-     // Construct state space systems of order 1
+        aa := num[1,1]+1;
+        bb := den[1,1]+1;
         a := -den[1, 1];
-        b := if abs(den[1, 1]+1)>Modelica.Constants.eps then den[1,1]+1 else if n_num1>0 then num[1,1] else 1;
-
         if 1 <= n_num1 then
-              // State space system in form (4)
-          c := if abs(den[1, 1]+1)>Modelica.Constants.eps then k[1]*(num[1, 1] - den[1, 1])/(den[1, 1]+1) else k[1];
+          // State space system in form (4)
+          b := if abs(bb)>eps then bb else num[1,1]-den[1,1];
+          c := if abs(bb)>eps then k[1]*(num[1, 1] - den[1, 1])/bb else k[1];
           d := k[1];
           dZero := false;
         else
-              // State space system in form (5)
-          c := if abs(den[1, 1]+1)>Modelica.Constants.small then k[1]/(den[1, 1]+1) else k[1];
+         // State space system in form (5)
+          b := if abs(bb)>eps then bb else if n_num1>0 then num[1,1]-den[1,1] else 1;
+          c := if abs(bb)>eps then k[1]/bb else k[1];
           d := 0;
           dZero := dZero and true;
         end if;
-        ss.A[1, 1] := a;
-        ss.B[1, 1] := b;
-        ss.C[1, 1] := c;
-        ss.D[1, 1] := d;
+        dss.A[1, 1] := a;
+        dss.B[1, 1] := b;
+        dss.C[1, 1] := c;
+        dss.D[1, 1] := d;
 
       end if;
-
-   /// for i=2 to degree(system)
+    /// for i=2 to degree(system)
       A[1, :] := {0,1};
       B[1, 1] := 0;
-
       for i in 2:max(n_den2, n_num2) loop
            // Construct state space systems of order 2
         if i <= n_den2 then
+          aa := num[i, 2] + num[i, 1] +1;
+          bb := den[i, 2] + den[i, 1] +1;
           A[2, :] := {-den[i, 2],-den[i, 1]};
-          B[2, 1] := if abs(den[i, 2])>Modelica.Constants.eps and abs(num[i, 2])>Modelica.Constants.eps then den[i, 2] else 1;
+          B[2, 1] := if abs(bb)>eps and abs(aa)>eps then bb else 1;
 
           if i <= n_num2 then
                  // State space system in form (1)
 
-            C := if abs(den[i, 2])>Modelica.Constants.eps and abs(num[i, 2])>Modelica.Constants.eps then k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]]/den[i, 2] else k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]];
+            C := if abs(bb)>eps and abs(aa)>eps then k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]]/bb else k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]];
             D := [k[i]];
             dZero := false;
 
-          elseif i - n_num2 + 1 <= n_num1 then
-                 // State space system in form (1) with 2 first order numerator polynomials
-            C := if abs(den[i, 2])>Modelica.Constants.eps and abs(num[i, 2])>Modelica.Constants.eps then k[i]*[num[i, 1]*num[i + 1, 1] - den[i, 2],num[i, 1] + num[i + 1, 1] - den[i, 1]]/den[i, 2] else k[i]*[num[i, 1]*num[i + 1, 1] - den[i, 2],num[i, 1] + num[i + 1, 1] - den[i, 1]];
+          elseif 2*(i - n_num2) <= n_num1 then
+
+            // State space system in form (1) with 2 first order numerator polynomials
+            aa := num[2*i-n_num2-1, 1]*num[2*i-n_num2, 1] + num[2*i-n_num2-1, 1] + num[2*i-n_num2, 1] + 1;
+            C := if abs(bb)>eps and abs(aa)>eps then k[i]*[num[2*i-n_num2-1, 1]*num[2*i-n_num2, 1] - den[i, 2],num[2*i-n_num2-1, 1] + num[2*i-n_num2, 1] - den[i, 1]]/bb else k[i]*[num[2*i-n_num2-1, 1]*num[2*i-n_num2, 1] - den[i, 2],num[2*i-n_num2-1, 1] + num[2*i-n_num2, 1] - den[i, 1]];
             D := [k[i]];
             dZero := false;
 
-          elseif i - n_num2 == n_num1 then
-                 // State space system in form (2) with 1 first order numerator polynomial
-            C := if abs(den[i, 2])>Modelica.Constants.eps and abs(num[i, 2])>Modelica.Constants.eps then k[i]*[num[i, 1],1]/den[i, 2] else k[i]*[num[i, 1],1];
+          elseif 2*(i-n_num2) -1== n_num1 then
+          // State space system in form (2) with 1 first order numerator polynomial
+            aa := num[2*i-n_num2-1, 1]+1;
+          B[2, 1] := if abs(bb)>eps and abs(aa)>eps then bb else 1;
+            C := if abs(bb)>eps and abs(aa)>eps then k[i]*[num[2*i-n_num2-1, 1],1]/bb else k[i]*[num[2*i-n_num2-1, 1],1];
             D := [0];
             dZero := dZero and true;
-
           else
-                 // State space system in form (3)
-            C := if abs(den[i, 2])>Modelica.Constants.eps and abs(num[i, 2])>Modelica.Constants.eps then k[i]*[1,0]/den[i, 2] else k[i]*[1,0]/den[i, 2];
+            // State space system in form (3)
+            B[2, 1] := if abs(bb)>eps then bb else 1;
+            C := if abs(bb)>eps then k[i]*[1,0]/bb else k[i]*[1,0];
             D := [0];
             dZero := dZero and true;
-
           end if;
 
         else
               // State space system in form (1) with 2 first order denominator polynomials
-          A[2, :] := {-(den[i, 1]*den[i + 1, 1]),-(den[i, 1] + den[i + 1, 1])};
-          B[2, 1] := den[i, 1]*den[i, 1];
-
-          C := k[i]*[num[i, 2] - (den[i, 1]*den[i + 1, 1]),num[i, 1] - (den[i, 1] + den[i + 1, 1])]/
-            den[i, 1]/den[i, 1];
+          bb := den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1] + den[max(2*(i-n_den2)-1,i), 1] + den[max(2*(i-n_den2),i), 1] + 1;
+          A[2, :] := {-(den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1]),-(den[max(2*(i-n_den2)-1,i), 1] + den[max(2*(i-n_den2),i), 1])};
+          B[2, 1] := if abs(bb)>eps then bb else 1;
+  //        C := if abs(bb)>eps then k[i]*[num[max(2*(i-n_num2),i), 2] - (den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1]),num[max(2*(i-n_num2),i), 1] - (den[max(2*(i-n_den2)-1,i), 1] + den[max(2*(i-n_den2),i), 1])]/den[max(2*(i-n_den2)-1,i), 1]/bb else k[i]*[num[max(2*(i-n_num2),i), 2] - (den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1]),num[max(2*(i-n_num2),i), 1] - (den[max(2*(i-n_den2)-1,i), 1] + den[max(2*(i-n_den2),i), 1])];
+          C := if abs(bb)>eps then k[i]*[num[max(2*(i-n_num2),i), 2] - (den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1]),num[max(2*(i-n_num2),i), 1] - (den[max(2*(i-n_den2)-1,i), 1] + den[max(2*(i-n_den2),i), 1])]/bb else k[i]*[num[max(2*(i-n_num2),i), 2] - (den[max(2*(i-n_den2)-1,i), 1]*den[max(2*(i-n_den2),i), 1]),num[max(2*(i-n_num2),i), 1] - (den[max(2*(i-n_den2)-1,i), 1] + den[max(2*(i-n_den2),i), 1])];
           D := [k[i]];
           dZero := false;
         end if;
-
-        ss.A[2*i, 1:2*i - 2] := B[2, 1]*ss.C[1, 1:2*i - 2];
-        ss.A[2*i - 1:2*i, 2*i - 1:2*i] := A;
-        ss.B[2*i, 1] := if dZero then 0 else B[2, 1]*ss.D[1, 1];
-        ss.C[1, 1:2*i - 2] := if dZero then fill(0, 2*i - 2) else D[1, 1]*ss.C[
+        dss.A[2*i, 1:2*i - 2] := B[2, 1]*dss.C[1, 1:2*i - 2];
+        dss.A[2*i - 1:2*i, 2*i - 1:2*i] := A;
+        dss.B[2*i, 1] := if dZero then 0 else B[2, 1]*dss.D[1, 1];
+        dss.C[1, 1:2*i - 2] := if dZero then fill(0, 2*i - 2) else D[1, 1]*dss.C[
           1, 1:2*i - 2];
-        ss.C[1, 2*i - 1:2*i] := vector(C);
-        ss.D := D*ss.D;
+        dss.C[1, 2*i - 1:2*i] := vector(C);
+        dss.D := D*dss.D;
       end for;
-
    //  for i in max(2,i_d):n_den1 loop
-
       for i in ili:n_den1 loop
            // Construct state space systems of order 1
-        a := -den[n_den2 + i, 1];
-        b := if abs(den[n_den2 + i, 1]+1)>Modelica.Constants.eps then den[n_den2 + i, 1]+1 else 1.0;
+        bb :=  den[n_den2 + i, 1] + 1;
+        a := if abs(den[n_den2 + i, 1])>eps then -den[n_den2 + i, 1] else 0.0;
+
         if n_num2 <= n_den2 and 2*(n_den2 - n_num2) + i <= n_num1 then
               // State space system in form (4)
 
-          c := if abs(den[n_den2 + i, 1]+1)>Modelica.Constants.eps then k[i_k + i]*(num[max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1] -  den[n_den2 + i, 1])/(den[n_den2 + i, 1]+1) else 1.0;
-
+          c := if abs(bb)>eps then k[i_k + i]*(num[max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1] -  den[n_den2 + i, 1])/bb else 1.0;
+  //        b := if abs(bb)>eps then bb else num[max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1];
+          b := if abs(bb)>eps then bb else num[max(1, n_num2 + 2*(n_den2 - n_num2) + i), 1]-  den[n_den2 + i, 1];
           d := k[i_k + i];
-
           dZero := false;
         elseif n_num2 > n_den2 and i - i_d + 1 <= n_num1 then
-              // State space system in form (4)
-
-          c := if abs(den[n_den2 + i, 1]+1)>Modelica.Constants.eps then k[i_k + i]*(num[max(1, n_num2 + i - i_d + 1), 1] - den[n_den2 + i, 1])/(den[n_den2 + i, 1]+1) else 1.0;
+        // State space system in form (4)
+          c := if abs(bb)>eps then k[i_k + i]*(num[max(1, n_num2 + i - i_d + 1), 1] - den[n_den2 + i, 1])/bb else 1.0;
+  //        b := if abs(bb)>eps then bb else num[max(1, n_num2 + i - i_d + 1), 1];
+          b := if abs(bb)>eps then bb else num[max(1, n_num2 + i - i_d + 1), 1] - den[n_den2 + i, 1];
           d := k[i_k + i];
           dZero := false;
         else
-
-              // State space system in form (5)
-
-          c := if abs(den[n_den2 + i, 1]+1)>Modelica.Constants.eps then k[i_k + i]/(den[n_den2 + i, 1]+1) else k[i_k + i];
+         // State space system in form (5)
+          c := if abs(bb)>eps then k[i_k + i]/bb else k[i_k + i];
+         b := if abs(bb)>eps then bb else 1;
+  //        b := if abs(bb)>eps then den[n_den2 + i, 1] else 1;
           d := 0;
           dZero := dZero and true;
         end if;
 
-        ss.A[2*n_den2 + i, 1:2*n_den2 + i - 1] := b*ss.C[1, 1:2*n_den2 + i - 1];
-        ss.A[2*n_den2 + i, 2*n_den2 + i] := a;
-        ss.B[2*n_den2 + i, 1] := if dZero then 0 else b*ss.D[1, 1];
-        ss.C[1, 1:2*n_den2 + i - 1] := if dZero then fill(0, 2*n_den2 + i - 1) else 
-                d*ss.C[1, 1:2*n_den2 + i - 1];
-        ss.C[1, 2*n_den2 + i] := c;
-        ss.D := if dZero then [0] else d*ss.D;
+  //###############################
+  //        c := if abs(bb)>eps then k[1]*(num[1, 1] - den[1, 1])/bb else k[1];
+  //        b := if abs(bb)>eps then bb else num[1,1]-den[1,1];
+  //        d := k[1];
+  //        dZero := false;
+  //      else
+  //       // State space system in form (5)
+  //        c := if abs(bb)>eps then k[1]/bb else k[1];
+  //        b := if abs(bb)>eps then bb else if n_num1>0 then num[1,1]-den[1,1] else 1;
+  //        d := 0;
+  //        dZero := dZero and true;
+  //###############################
 
-      end for;
-      ss.C := k_total*ss.C;
-      ss.D := k_total*ss.D;
+        dss.A[2*n_den2 + i, 1:2*n_den2 + i - 1] := b*dss.C[1, 1:2*n_den2 + i - 1];
+        dss.A[2*n_den2 + i, 2*n_den2 + i] := a;
+        dss.B[2*n_den2 + i, 1] := if dZero then 0 else b*dss.D[1, 1];
+        dss.C[1, 1:2*n_den2 + i - 1] := if dZero then fill(0, 2*n_den2 + i - 1) else 
+                d*dss.C[1, 1:2*n_den2 + i - 1];
+        dss.C[1, 2*n_den2 + i] := c;
+        dss.D := if dZero then [0] else d*dss.D;
+
+        end for;
+
+      dss.C := k_total*dss.C;
+      dss.D := k_total*dss.D;
     else
-      ss := Modelica_LinearSystems2.StateSpace(zp.k);
+      dss := DiscreteStateSpace(dzp.k);
     end if;
+
+    dss.Ts := dzp.Ts;
+    dss.method := dzp.method;
 
     annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
+<tr> <td align=right>  dss </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -1296,18 +1492,18 @@ processing.
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
-   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + p +1);
+   Modelica_LinearSystems2.ZerosAndPoles dzp=(p+1)/(p^2 + p +1);
 
 <b>algorithm</b>
-  ss := Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace(zp);
-// ss.A = [0, 1; -1, -1],
-// ss.B = [0; 1],
-// ss.C = [1, 1],
-// ss.D = [0],
+  dss := Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace(dzp);
+// dss.A = [0, 1; -1, -1],
+// dss.B = [0; 1],
+// dss.C = [1, 1],
+// dss.D = [0],
 </pre></blockquote>
 
 </html> "));
-  end toStateSpace;
+  end toDiscreteStateSpace;
 
   end Conversion;
 
@@ -1423,8 +1619,7 @@ Generate a matrix of ZerosAndPoles data records by linearization of a model defi
 
     encapsulated function fromFile
       "Generate a ZerosAndPoles record by reading the polynomial coefficients or zeros and poles from a file"
-      import ZerosAndPoles =
-        Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica;
@@ -1446,7 +1641,7 @@ Generate a matrix of ZerosAndPoles data records by linearization of a model defi
       input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
       input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
     public
-      output ZerosAndPoles zp(
+      output DiscreteZerosAndPoles zp(
         n1=fill(0, n1),
         n2=fill(
               0,
@@ -1545,6 +1740,49 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
   end Internal;
 
+  encapsulated operator function '*x'
+    "Multiply two ZerosAndPoles transfer functions (dzp1 * dzp2)"
+
+    import Modelica;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2;
+
+    input DiscreteZerosAndPoles dzp1;
+    input DiscreteZerosAndPoles dzp2;
+    input Modelica.SIunits.Time Ts=dzp1.Ts "Sample time";
+    input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
+      "Discretization method";
+    input String uName=dzp1.uName "input name";
+    input String yName=dzp2.yName "output name";
+
+    output DiscreteZerosAndPoles result "= dzp1 * dzp2";
+  algorithm
+    if dzp1 == DiscreteZerosAndPoles(0) or dzp2 == DiscreteZerosAndPoles(0) then
+      result := DiscreteZerosAndPoles(0);
+    else
+      result.n1 := cat(
+        1,
+        dzp1.n1,
+        dzp2.n1);
+      result.n2 := cat(
+        1,
+        dzp1.n2,
+        dzp2.n2);
+      result.d1 := cat(
+        1,
+        dzp1.d1,
+        dzp2.d1);
+      result.d2 := cat(
+        1,
+        dzp1.d2,
+        dzp2.d2);
+      result.k := dzp1.k*dzp2.k;
+    end if;
+      result.Ts := Ts;
+      result.uName := uName;
+      result.yName := yName;
+
+  end '*x';
   annotation (
     defaultComponentName="filter",
     Documentation(info="<html>

@@ -37,7 +37,7 @@ algorithm
   dl := Complex.Vectors.norm(sortedAssignedPoles-sortedCalcPoles)/max(1,Complex.Vectors.norm(sortedAssignedPoles));
   YT := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.inv(X);
   for l1 in 1:n loop
-    c[l1] := Complex.Vectors.norm(YT[l1, :]);
+    c[l1] := Complex.Vectors.norm(YT[l1, :])*Complex.Vectors.norm(X[:,l1])/Complex.'abs'(Complex.Vectors.multiply(YT[l1,:],X[:,l1]));
   end for;
   //performance indices
   // condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2

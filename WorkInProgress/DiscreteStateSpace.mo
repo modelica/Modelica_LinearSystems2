@@ -18,6 +18,13 @@ record DiscreteStateSpace
         annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
   encapsulated operator 'constructor'
+  import Modelica_LinearSystems2;
+  function fromDiscreteTransferFunction = 
+        Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
+                                                                                                      annotation (Documentation(info="<html> </html>"));
+  function fromDiscreteZerosAndPoles = 
+      Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace
+                                                                                                      annotation (Documentation(info="<html> </html>"));
     function fromMatrices "Default constructor for a DiscreteStateSpace record"
       import Modelica;
       import Modelica_LinearSystems2;
@@ -479,14 +486,13 @@ encapsulated function toDiscreteZerosAndPoles
 
   import Modelica;
   import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.StateSpace;
+  import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
   import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
   input DiscreteStateSpace dss "StateSpace object";
-    protected
-  input Boolean cancel=true "false to hinder cancellation";
-    public
   output DiscreteZerosAndPoles dzp;
 
     protected
@@ -494,23 +500,27 @@ encapsulated function toDiscreteZerosAndPoles
   StateSpace ssm=StateSpace.Transformation.toIrreducibleForm(ss);
   Complex poles[:];
   Complex zeros[:];
-
+  Complex cpoles[:];
+  Complex czeros[:];
   Real gain;
   Complex frequency;
-  Complex Gs;
+  Complex cfrequency;
+  Complex Gq;
   Real As[:,:];
   Real pk;
   Integer i;
   Integer k;
   Boolean h;
+  Real v;
 
 algorithm
   if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and 
       Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
     poles := Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
-    zeros := if cancel then StateSpace.Internal.invariantZeros2(ssm) else 
-      StateSpace.Analysis.zerosAndPoles(ss);
+    zeros := StateSpace.Internal.invariantZeros2(ssm);
+    cpoles := fill(Complex(0),size(poles,1));
+    czeros := fill(Complex(0),size(zeros,1));
 
     if size(ss.C, 1) <> 1 or size(ss.B, 2) <> 1 then
       assert(size(ss.B, 2) == 1, " function fromStateSpaceSISO expects a SISO-system as input\n but the number of inputs is "
@@ -519,40 +529,49 @@ algorithm
          + String(size(ss.C, 1)) + " instead of 1");
     end if;
 
-    dzp := ZerosAndPoles(
+    dzp := DiscreteZerosAndPoles(
         z=zeros,
         p=poles,
         k=1,
         Ts=dss.Ts, method=dss.method);
 // set frequency to a complex value which is whether pole nor zero
-    frequency := Complex(2*abs(max(cat(
-        1,
-        zeros[:].re,
-        poles[:].re)) + 1));
-    Gs := ZerosAndPoles.Analysis.evaluate(zp, frequency);
+    for i in 1:size(poles,1) loop
+      cpoles[i] := Complex.log(poles[i])/dss.Ts;
+    end for;
+    for i in 1:size(zeros,1) loop
+      czeros[i] := Complex.log(zeros[i])/dss.Ts;
+    end for;
+
+     v := sum(cat(1, czeros[:].re,  cpoles[:].re))/max(size(czeros,1)+size(cpoles,1),1) + 13/19;
+//     v := sum(cat(1, zeros[:].re,  poles[:].re))/max(size(zeros,1)+size(poles,1),1);
+    frequency := Complex(v)*17/19;
+    cfrequency := Complex.exp(frequency*dss.Ts);
+//    cfrequency := frequency;
+
+    Gq := DiscreteZerosAndPoles.Analysis.evaluate(dzp, cfrequency);
 
     As := -ssm.A;
     for i in 1:size(As, 1) loop
-      As[i, i] := As[i, i] + frequency.re;
+      As[i, i] := As[i, i] + cfrequency.re;
     end for;
 
     pk := StateSpace.Internal.partialGain(As, ssm.B[:, 1]);
-    gain := (ssm.C[1, size(As, 1)]*pk + ss.D[1, 1])/Gs.re;
+    gain := (ssm.C[1, size(As, 1)]*pk + ss.D[1, 1])/Gq.re;
 
-    dzp := ZerosAndPoles(
+    dzp := DiscreteZerosAndPoles(
         z=zeros,
         p=poles,
         k=gain,Ts=dss.Ts, method=dss.method);
 
   else
-    dzp := ZerosAndPoles(
+    dzp := DiscreteZerosAndPoles(
         z=fill(Complex(0), 0),
         p=fill(Complex(0), 0),
-        k=0,Ts=dss.Ts, method=dss.method);
+        k=scalar(dss.D),Ts=dss.Ts, method=dss.method);
 
   end if;
-  dzp.uName := dss.uNames[1];
-  dzp.yName := dss.yNames[1];
+//  dzp.uName := dss.uNames[1];
+//  dzp.yName := dss.yNames[1];
 
   annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>

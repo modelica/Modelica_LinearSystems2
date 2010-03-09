@@ -3979,7 +3979,7 @@ end Analysis;
       counter := nfp + 1;
       counter2 := 1;
 
-        for i in 1:rp loop // 1x1 blocks; real system pole and real assigned poles; take the next eigenvalue in the
+      for i in 1:rp loop // 1x1 blocks; real system pole and real assigned poles; take the next eigenvalue in the
                            // diagonal of the Schur form and search the nearest pole in the set of the real poles to assign
           dist := Modelica.Constants.inf;
           for ii in i:rpg loop // looking for nearest pole and reorder gamma
@@ -4075,12 +4075,12 @@ end Analysis;
           dist := Modelica.Constants.inf;
           for ii in 2*(i - 1)+1:2:rpA - rpg loop
             if abs(A_rsf[n, n] - gammaReordered[ng - rp - ii + 1].re) + abs(gammaReordered[ng - rp - ii + 1].im) + abs(A_rsf[n - 1, n - 1] -
-              gammaReordered[ng - rp - ii + 1].re) + abs(gammaReordered[ng - rp - ii + 1].re) < dist then
+              gammaReordered[ng - rp - ii + 1].re) + abs(gammaReordered[ng - rp - ii + 1].im) < dist then
               iii := ng - rp - ii + 1;
               dist := abs(A_rsf[n, n] - gammaReordered[ng - rp - ii + 1].re)
                  + abs(gammaReordered[ng - rp - ii + 1].im) + abs(A_rsf[
                 n - 1, n - 1] - gammaReordered[ng - rp - ii + 1].re) +
-                abs(gammaReordered[ng - rp - ii + 1].re);
+                abs(gammaReordered[ng - rp - ii + 1].im);
             end if;
           end for;
           h := gammaReordered[ng - rp - 2*(i - 1)];
@@ -4116,7 +4116,6 @@ end Analysis;
           Modelica.Utilities.Streams.print("counter2Case3 = " + String(counter2));
         end for;
       end if;
-    //      else
 
       for i in 1:ncc loop // 2x2 blocks; 2 complex system poles and two complex assigned poles; take the next complex
                           // system pole pair (next Schur bump) in the diagonal of the Schur form and search the complex
@@ -4137,6 +4136,7 @@ end Analysis;
         h := gammaReordered[2*ncc - 2*i + 1];
         gammaReordered[2*ncc - 2*i + 1] := gammaReordered[iii - 1];
         gammaReordered[iii - 1] := h;
+
         Ks2 := StateSpace.Internal.assignOneOrTwoPoles(
           A_rsf[n - 1:n, n - 1:n],
           matrix(B_rsf[n - 1:n, :]),
@@ -5626,6 +5626,7 @@ encapsulated package Conversion
     Complex zeros[:];
 
     Real gain;
+
     Complex frequency;
     Complex Gs;
     Real As[:,:];
@@ -5652,13 +5653,6 @@ encapsulated package Conversion
           z=zeros,
           p=poles,
           k=1);
-
-  // set frequency to a complex value which is whether pole nor zero
-  //    frequency := Complex(abs(max(cat(1, zeros[:].re,  poles[:].re))));
-  //    frequency := frequency*1.5+0.1;
-  //    if frequency.re<=1.0 then
-  //      frequency.re := 1.1;
-  //    end if;
 
       v := sum(cat(1, zeros[:].re,  poles[:].re))/max(size(zeros,1)+size(poles,1),1)+13/19;
       frequency := Complex(v)*19/17;
@@ -7950,8 +7944,13 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
 
           // Gamma:= if size(F,1)==1 then [gamma[1].re] else [gamma[1].re, -(gamma[1].im)^2;1, gamma[2].re];
           //  Ks :=  Modelica_LinearSystems2.Math.Matrices.solve2(Gs, Fs - Gamma);
-          Ks := [(Fs[1, 1] - gamma[1].re)/Gs[1, 1] - Gs[1, 2]*(Fs[2, 1] - 1)/Gs[1, 1]/Gs[2,2],
-          (Fs[1, 2] + (gamma[1].im)^2)/Gs[1, 1] - Gs[1, 2]*(Fs[2, 2] - gamma[2].re)/Gs[1, 1]/Gs[2, 2];
+  //        Ks := [(Fs[1, 1] - gamma[1].re)/Gs[1, 1] - Gs[1, 2]*(Fs[2, 1] - 1)/Gs[1, 1]/Gs[2,2],
+  //        (Fs[1, 2] + (gamma[1].im)^2)/Gs[1, 1] - Gs[1, 2]*(Fs[2, 2] - gamma[2].re)/Gs[1, 1]/Gs[2, 2];
+  //        (Fs[2, 1] - 1)/Gs[2, 2],(Fs[2, 2] - gamma[2].re)/Gs[2, 2]];
+
+  // since G1 is diagonal because of svd, Gs[1, 2] is zero
+
+          Ks := [(Fs[1, 1] - gamma[1].re)/Gs[1, 1],  (Fs[1, 2] + (gamma[1].im)^2)/Gs[1, 1];
           (Fs[2, 1] - 1)/Gs[2, 2],(Fs[2, 2] - gamma[2].re)/Gs[2, 2]];
         else
 
@@ -8985,7 +8984,7 @@ inputs and the number of outputs must be identical.
     Boolean stop2 "system has no zeros";
     Integer rankR;
     Real normA=Modelica.Math.Matrices.norm(A=A, p=1);
-    Real eps=normA*1e-8;
+    Real eps=normA*1e-12;
 
   algorithm
     if nx > 0 then

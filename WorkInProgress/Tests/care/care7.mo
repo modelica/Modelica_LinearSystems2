@@ -64,10 +64,12 @@ algorithm
 //    Matrices.printMatrix(X3, 16, "X3");
    eps := 1e-3;
    B:=[eps; 0.0];
+   G := B*transpose(B);
    h := sqrt(1+eps^2);
    X1:=Matrices.care(A, B, R, Q, false);
    X2:=Matrices.care(A, B, R, Q, true);
    X3:=[(1+h)/(eps^2), 1/(2+h); 1/(2+h), 0.25*(1-(eps^2)/(2+h))];
+
   Qr1 := X1*G*X1-transpose(A)*X1-X1*A;
   Qr2 := X2*G*X2-transpose(A)*X2-X2*A;
   Qr3 := X3*G*X3-transpose(A)*X3-X3*A;
@@ -109,4 +111,5 @@ algorithm
   Modelica.Utilities.Streams.print("\n deltaQ1 = " + String(deltaQ1),outputFile);
   Modelica.Utilities.Streams.print("\n deltaQ2 = " + String(deltaQ2),outputFile);
   Modelica.Utilities.Streams.print("\n deltaQ3 = " + String(deltaQ3),outputFile);
+
 end care7;

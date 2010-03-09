@@ -1,3 +1,7 @@
 conv_zp2ss
 convert_zp_1
 convert_zp_2
+convert_dzp
+conv_dzp2dss
+conversionToZerosAndPoles_bench
+conversioToTransferFunction_bench

@@ -188,8 +188,7 @@ follow each other as above. An error occurs if this is not the case.
     protected
       StateSpace ss = StateSpace(tf);
       Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace dss=
-                               Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace(
-                                                  ss,Ts,method);
+                               Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace(ss,Ts,method);
 
     algorithm
       dtf := DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss);
@@ -249,7 +248,7 @@ follow each other as above. An error occurs if this is not the case.
 
 encapsulated function z "Generate the discrete transfer function z"
   import Modelica_LinearSystems2.Math.Polynomial;
-  import Modelica_LinearSystems2.DiscreteTransferFunction;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
 
   output DiscreteTransferFunction dtf(n={1,0}, d={1}) "z";
 algorithm
