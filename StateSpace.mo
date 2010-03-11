@@ -3306,10 +3306,12 @@ i.e. v1 = |      |,   v2 = |       |
         assert(info == 0, "Failed to compute invariant zeros with function invariantZeros(..)");
 
         Zeros := fill(Complex(0), size(beta, 1));
+        normB:=max(Modelica.Math.Matrices.norm(Bf), beta_small);
+        normA:=max(Modelica.Math.Matrices.norm(Af, p=1), beta_small);
 
   // If beta[i] is zero, then zero i is infinite.
         for i in 1:size(beta, 1) loop
-          if beta[i] >= normB*1e-12 then
+          if beta[i] >= normB*1e-3 then
        // finite eigenvalue
             Zeros[i].re := if abs(alphaReal[i]) >= normB*1e-12 then alphaReal[i]/
               beta[i] else 0;
@@ -6382,6 +6384,70 @@ This function is called to compute transfer functions of state space representat
 </html> "));
       end toIrreducibleForm;
 
+      encapsulated function toStaircaseForm
+      "Transforms a state space system to upper staircase form"
+        import Modelica;
+        import Modelica_LinearSystems2;
+        import Modelica_LinearSystems2.StateSpace;
+
+        input StateSpace ss "state space system";
+        input Modelica_LinearSystems2.Types.StaircaseMethod method=
+            Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+
+        output StateSpace ss_sc(
+          redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
+          redeclare Real B[size(ss.B, 1),size(ss.B, 2)],
+          redeclare Real C[size(ss.C, 1),size(ss.C, 2)],
+          redeclare Real D[size(ss.D, 1),size(ss.D, 2)]);
+
+      algorithm
+      if method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD then
+        (,ss_sc) := StateSpace.Internal.staircaseSVD(ss);
+      else
+        (,ss_sc) := Modelica_LinearSystems2.StateSpace.Internal.staircaseQR(ss);
+        end if;
+
+        annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  ss_sc </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toStaircaseForm</b>(ss, method)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Function <b>toStaircaseForm</b> computes the upper staircase form state space system.
+
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+      A=[17.0,   24.0,    1.0,    8.0,   15.0;
+         23.0,    5.0,    7.0,   14.0,   16.0;
+          4.0,    6.0,   13.0,   20.0,   22.0;
+         10.0,   12.0,   19.0,   21.0,    3.0;
+         11.0,   18.0,   25.0,    2.0,    9.0],
+      B=[-1.0,   -4.0;
+          4.0,    9.0;
+         -9.0,  -16.0;
+         16.0,   25.0;
+        -25.0,  -36.0],
+      C=[1, 0, 1, 0, 0;
+         0, 1, 0, 1, 1],
+      D=[0, 0;
+         0, 0]);
+
+<b>algorithm</b>
+  ss_sc:=Modelica_LinearSystems2.StateSpace.Transformation.toStaircaseForm(ss);
+  ss_sc=StateSpace(
+      A=[-1, 0; 0, -2],
+      B=[1; 0],
+      C=[1, 0],
+      D=[0])
+</pre></blockquote>
+
+
+</html> "));
+      end toStaircaseForm;
+
   encapsulated function extract
       "Extract input/output related subsystems from state space system record"
       import Modelica;
@@ -7477,9 +7543,9 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
     output Real P[:,:];
 
     protected
-    Real A[:,:];
+    Real A[size(ss.A, 1),size(ss.A, 2)];
     Real B[size(ss.B, 1),size(ss.B, 2)];
-    Real C[:,:];
+    Real C[size(ss.C, 1),size(ss.C, 2)];
     Real U[:,:];
     Real VT[:,:];
 
@@ -7521,7 +7587,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
       P := transpose(U);
       Q := transpose(VT);
       A := transpose(U)*ss.A*U;
-      C := ss.C*U;
+  //    C := ss.C*U;
       (sigma,U,VT) := Modelica.Math.Matrices.singularValues(A[rankS + 1:nx, 1:rankS]);
 
       stairStep := rankS;
@@ -7567,8 +7633,8 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
         P := Pi*P;
         A := Pi*A*transpose(Pi);
 
-  //new implenmentation necessary because of many zeros in Pi
-        C := C*transpose(Pi);
+  //new implenmentation advisable because of many zeros in Pi
+  //      C := C*transpose(Pi);
         rankS := 0;
         if size(sigma, 1) > 1 then
           for i in 1:size(sigma, 1) loop
@@ -7582,6 +7648,9 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
         end if;
         stairStep := stairStep + rankS;
       end while;
+
+      B := P*ss.B;
+      C := ss.C*transpose(P);
 
     else
       stairStep := if Modelica.Math.Matrices.isEqual(ss.B, zeros(size(ss.B, 1),
@@ -7598,9 +7667,6 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
           D=ss.D,
           r=stairStep);
 
-  //   evc := Modelica.Math.Matrices.eigenValues(A[1:stairStep, 1:stairStep]);
-  //   evnc := Modelica.Math.Matrices.eigenValues(A[stairStep + 1:nx, stairStep + 1:nx]);
-
     isControllable := stairStep == nx;
 
     else // no inputs, nu==0
@@ -7612,7 +7678,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
           D=ss.D,
           r=0);
     P := identity(nu);
-    end if;
+     end if;
 
   end staircaseSVD;
 

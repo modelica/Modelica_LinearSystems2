@@ -80,7 +80,7 @@ algorithm
     zp[15]:=zp[15]*zp[i];
   end for;
 
-  for i in 1:15 loop
+  for i in 15:15 loop
     conv_zp2ss(zp[i],i);
   end for;
 

@@ -40,7 +40,7 @@ algorithm
       Modelica.Utilities.Streams.print("ZerosAndPoles-TransferFunction = " + String(zp, 18));
 
   zp1 := zp;
-  StateSpace.Analysis.analysis(ss);
+//  StateSpace.Analysis.analysis(ss);
 
   ok := true;
 
