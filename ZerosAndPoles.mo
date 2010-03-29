@@ -1726,7 +1726,7 @@ The transfer function is detectable if all unstable poles are observable.
         mod(order, 2))],
       redeclare Real n2[if filterType == Types.FilterType.LowPass then 0 else (
         if analogFilter == Types.AnalogFilter.CriticalDamping then 0 else
-        integer((order + 1)/2)),2],
+        integer(order/2)),2],
       redeclare Real d1[if analogFilter == Types.AnalogFilter.CriticalDamping then
               order else mod(order, 2)],
       redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then
@@ -1854,6 +1854,7 @@ The transfer function is detectable if all unstable poles are observable.
     filter.k := filter.k/k;
 
     // Compute desired filter characteristics from low pass filter coefficients
+    Streams.print("k_vorher = " + String(filter.k));
     if filterType == Types.FilterType.HighPass then
        /* The high pass filter is derived from the low pass filter by
         the transformation new(p) = 1/p
@@ -1873,6 +1874,7 @@ The transfer function is detectable if all unstable poles are observable.
         filter.d2[i, 1] := filter.d2[i, 1]/filter.d2[i, 2];
         filter.d2[i, 2] := 1/filter.d2[i, 2];
       end for;
+      Streams.print("k_nachher = " + String(filter.k));
     end if;
 
     /* Change filter coefficients according to transformation new(p) = p/w_cut
@@ -4029,7 +4031,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
         mod(order, 2))],
       redeclare Real n2[if filterType == Types.FilterType.LowPass then 0 else (
         if analogFilter == Types.AnalogFilter.CriticalDamping then 0 else
-        integer((order + 1)/2)),2],
+        integer(order/2)),2],
       redeclare Real d1[if analogFilter == Types.AnalogFilter.CriticalDamping then
               order else mod(order, 2)],
       redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then
