@@ -510,64 +510,74 @@ end '==';
       input String name="p" "Independent variable name used for printing";
       output String s="";
   protected
+      Boolean normalized = false;
+      Real gain=1.0;
       Integer num_order=size(zp.n1, 1) + 2*size(zp.n2, 1);
       Integer den_order=size(zp.d1, 1) + 2*size(zp.d2, 1);
+      String sn1;
+      String sn2;
+      String sd1;
+      String sd2;
+      Real kn1;
+      Real kn2;
+      Real kd1;
+      Real kd2;
   algorithm
-      if num_order == 0 and den_order == 0 then
+     if num_order == 0 and den_order == 0 then
         s := String(zp.k);
+        return;
+     end if;
 
-      else
-         // construct string for multiplicative factor
-        if zp.k <> 1.0 or zp.k == 1.0 and num_order == 0 then
-          s := String(zp.k);
-          if num_order <> 0 then
-            s := s + "*";
-          end if;
+     // construct numerator and denominator strings
+     (sn1,kn1) :=Internal.firstOrderToString( zp.n1, significantDigits, name, normalized);
+     (sn2,kn2) :=Internal.secondOrderToString(zp.n2, significantDigits, name, normalized);
+     (sd1,kd1) :=Internal.firstOrderToString( zp.d1, significantDigits, name, normalized);
+     (sd2,kd2) :=Internal.secondOrderToString(zp.d2, significantDigits, name, normalized);
+
+     // compute overall gain
+     if normalized then
+        gain :=kn1*kn2/(kd1*kd2);
+     else
+        gain :=zp.k;
+     end if;
+    // Modelica.Utilities.Streams.print("gain = "+String(gain));
+
+     // construct string for gain
+     if gain <> 1.0 or gain == 1.0 and num_order == 0 then
+        s := String(gain);
+     end if;
+    // Modelica.Utilities.Streams.print("s= "+s);
+
+     // construct string for numerator
+     if sn1 <> "" then
+        s := s + "*" + sn1;
+     end if;
+     if sn2 <> "" then
+        s := s + "*" + sn2;
+     end if;
+
+     // construct string for denominator
+     if den_order <> 0 then
+        s := s + " / ";
+        if den_order > 1 then
+           s := s + " ( ";
         end if;
 
-        if num_order <> 0 then
-            // construct numerator string
-          s := s + Internal.firstOrderToString(
-                zp.n1,
-                significantDigits,
-                name);
-          if size(zp.n2, 1) <> 0 then
-            s := if size(zp.n1, 1) > 0 then s + "*" +
-              Internal.secondOrderToString(
-                  zp.n2,
-                  significantDigits,
-                  name) else s + Internal.secondOrderToString(
-                  zp.n2,
-                  significantDigits,
-                  name);
-          end if;
+        if sd1 <> "" then
+           s := s + sd1;
         end if;
 
-        if den_order <> 0 then
-            // construct denominator string
-          s := s + "/";
-          if den_order > 1 then
-            s := s + "( ";
-          end if;
-          s := s + Internal.firstOrderToString(
-                zp.d1,
-                significantDigits,
-                name);
-          if size(zp.d2, 1) <> 0 then
-            if size(zp.d1, 1) > 0 then
+        if sd2 <> "" then
+           if sd1 <> "" then
               s := s + "*";
-            end if;
-            s := s + Internal.secondOrderToString(
-                  zp.d2,
-                  significantDigits,
-                  name);
-          end if;
-          if den_order > 1 then
-            s := s + " )";
-          end if;
+           end if;
+           s := s + sd2;
         end if;
-      end if;
-    //    end toString;
+
+        if den_order > 1 then
+           s := s + " )";
+        end if;
+     end if;
   end 'String';
 
   encapsulated function p "Generate the transfer function p"
@@ -1717,9 +1727,12 @@ The transfer function is detectable if all unstable poles are observable.
     input Real gain=1.0
         "Gain (= amplitude of frequency response at zero frequency)";
     input Real A_ripple(unit="dB") = 0.5
-        "Pass band ripple for Chebyshev filter (otherwise not used)";
+        "Pass band ripple (only for Chebyshev filter)";
     input Boolean normalized=true
-        "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
+        "= true, if amplitude at f_cut = -3db*gain for low and +3db*gain for high pass filter";
+    input Modelica.SIunits.Frequency bandwidth = 1
+        "Bandwidth of pass band (only for BandPass filter)";
+
     output ZerosAndPoles filter(
       redeclare Real n1[if filterType == Types.FilterType.LowPass then 0 else (
         if analogFilter == Types.AnalogFilter.CriticalDamping then order else
@@ -1744,6 +1757,8 @@ The transfer function is detectable if all unstable poles are observable.
         "= true, if even filter order (otherwise uneven)";
     Modelica.SIunits.AngularVelocity w_cut=2*pi*f_cut
         "Cut-off angular frequency";
+    Modelica.SIunits.AngularVelocity w_band=2*pi*bandwidth
+        "Bandwidth angular frequency";
     Real w_cut2 "= w_cut*w_cut";
     Real alpha=1.0 "Frequency correction factor";
     Real alpha2 "= alpha*alpha";
@@ -1870,6 +1885,59 @@ The transfer function is detectable if all unstable poles are observable.
         filter.d2[i, 1] := filter.d2[i, 1]/filter.d2[i, 2];
         filter.d2[i, 2] := 1/filter.d2[i, 2];
       end for;
+
+    elseif filterType == Types.FilterType.BandPass then
+      /* The band pass filter is derived from the low pass filter by
+       the transformation new(p) = (p + 1/p)/w   (w = w_band)
+       
+       1/(p + a)         -> 1/(p/w + 1/p/w) + a) 
+                            = w*p / (p^2 + a*w*p + 1)
+                            
+       1/(p^2 + a*p + b) -> 1/( (p+1/p)^2/w^2 + a*(p + 1/p)/w + b )
+                            = 1 / ( p^2 + 1/p^2 + 2)/w^2 + (p + 1/p)*a/w + b )
+                            = w^2*p^2 / (p^4 + 2*p^2 + 1 + (p^3 + p)a*w + b*w^2*p^2)
+                            = w^2*p^2 / (p^4 + a*w*p^3 + (2+b*w^2)*p^2 + a*w*p + 1)
+                            
+                            Assume the following description with PT2:
+                            = w^2*p^2 / ( (p*alpha)^2 + c*(p*alpha) + 1) *
+                                          (p/alpha)^2 + c*(p/alpha) + 1)
+                            = w^2*p^2 / ( p^4 + c*(alpha + 1/alpha)*p^3
+                                              + (alpha^2 + 1/alpha^2 + c^2)*p^2
+                                              + c*(alpha + 1/alpha)*p + 1 )
+
+                            and therefore:
+                              c*(alpha + 1/alpha) = a*w           -> c = a*w / (alpha + 1/alpha)
+                                                                       = a*w*alpha/(1+alpha^2)
+                              alpha^2 + 1/alpha^2 + c^2 = 2+b*w^2 -> equation to determine alpha
+                              alpha^4 + 1 + a^2*w^2*alpha^4/(1+alpha^2)^2 = (2+b*w^2)*alpha^2
+                              or z = alpha^2
+                              z^2 + a^2*w^2*z^2/(1+z)^2 - (2+b*w^2)*z + 1 = 0
+                              
+                            Summary:
+                            1. solve 0 = f(z) = z^2 + a^2*w^2*z^2/(1+z)^2 - (2+b*w^2)*z + 1 for z
+                               f(0) = 1  > 0
+                               f(1) = 1 + a^2*w^2/4 - (2+b*w^2) + 1
+                                    = (a^2/4 - b)*w^2  > or < 0
+                            2. alpha = sqrt(z)
+                            3. c = a*w / (alpha + 1/alpha)
+                            4. g(s) = w^2*p^2 / (alpha^2  *(p^2 + p*(c/alpha) + 1/alpha^2)*
+                                                 1/alpha^2*(p^2 + p*(c*alpha) + alpha^2) )
+                                    = w/alpha^2*p / (p^2 + p*(c/alpha) + 1/alpha^2)*
+                                      w*alpha^2*p / (p^2 + p*(c*alpha) + alpha^2)
+    */
+      assert(n_num1 == n_den1 and n_num2 == n_den2,
+        "Internal error 1, should not occur");
+      filter.n1 := zeros(n_num1);
+      filter.n2 := zeros(n_num2, 2);
+      for i in 1:n_num1 loop
+        filter.k := filter.k/filter.d1[i];
+        filter.d1[i] := 1/filter.d1[i];
+      end for;
+      for i in 1:n_num2 loop
+        filter.k := filter.k/filter.d2[i, 2];
+        filter.d2[i, 1] := filter.d2[i, 1]/filter.d2[i, 2];
+        filter.d2[i, 2] := 1/filter.d2[i, 2];
+      end for;
     end if;
 
     /* Change filter coefficients according to transformation new(p) = p/w_cut
@@ -1971,6 +2039,213 @@ is set.
 
 </html> "));
   end filter;
+
+  encapsulated function baseFilter
+      "Generate the data record of a ZerosAndPoles transfer function from a base filter description (= low pass filter with w_cut = 1 rad/s)"
+
+    import Modelica;
+    import Modelica.Math.*;
+    import Modelica.Utilities.Streams;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.Types;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+
+    input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
+        "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+    input Integer order(min=1) = 2 "Order of filter";
+    input Real A_ripple(unit="dB") = 0.5
+        "Pass band ripple (only for Chebyshev filter)";
+    input Boolean normalized=true "= true, if amplitude at f_cut = -3db";
+
+    output ZerosAndPoles filter(
+      redeclare Real n1[0],
+      redeclare Real n2[0,2],
+      redeclare Real d1[if analogFilter == Types.AnalogFilter.CriticalDamping then
+              order else mod(order, 2)],
+      redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then
+              0 else integer(order/2),2]) "Filter transfer function";
+    protected
+    Integer n_den1=size(filter.d1, 1);
+    Integer n_den2=size(filter.d2, 1);
+    Integer n_den=n_den1 + 2*n_den2;
+    Real pi=Modelica.Constants.pi;
+    Boolean evenOrder=mod(order, 2) == 0
+        "= true, if even filter order (otherwise uneven)";
+    Real alpha=1.0 "Frequency correction factor";
+    Real alpha2 "= alpha*alpha";
+    Real epsilon "Ripple size";
+    Real fac "arsinh(epsilon)";
+    Real den1[n_den1]
+        "[p] coefficients of denominator first order polynomials (a*p + 1)";
+    Real den2[n_den2,2]
+        "[p^2, p] coefficients of denominator second order polynomials (b*p^2 + a*p + 1)";
+    Real aux;
+    Real k;
+  algorithm
+    /* Compute filter coefficients of prototype low pass filter. */
+    if analogFilter == Types.AnalogFilter.CriticalDamping then
+      if normalized then
+        alpha := sqrt(2^(1/order) - 1);
+  //alpha := sqrt(10^(3/10/order)-1)
+      else
+        alpha := 1;
+      end if;
+      for i in 1:n_den1 loop
+        den1[i] := alpha;
+      end for;
+
+    elseif analogFilter == Types.AnalogFilter.Bessel then
+      (den1,den2,alpha) := Internal.BesselCoefficients(order);
+      if not normalized then
+        alpha2 := alpha*alpha;
+        for i in 1:n_den2 loop
+          den2[i, 1] := den2[i, 1]*alpha2;
+          den2[i, 2] := den2[i, 2]*alpha;
+        end for;
+        if not evenOrder then
+          den1[1] := den1[1]*alpha;
+        end if;
+      end if;
+
+    elseif analogFilter == Types.AnalogFilter.Butterworth then
+       // Original filter is already normalized
+      for i in 1:n_den2 loop
+        den2[i, 1] := 1.0;
+        den2[i, 2] := -2*cos(pi*(0.5 + (i - 0.5)/order));
+      end for;
+      if not evenOrder then
+        den1[1] := 1.0;
+      end if;
+
+    elseif analogFilter == Types.AnalogFilter.Chebyshev then
+      epsilon := sqrt(10^(A_ripple/10) - 1);
+      fac := asinh(1/epsilon)/order;
+
+      if evenOrder then
+         for i in 1:n_den2 loop
+            den2[i,1] :=1/(cosh(fac)^2 - cos((2*i - 1)*pi/(2*order))^2);
+            den2[i,2] :=2*den2[i, 1]*sinh(fac)*cos((2*i - 1)*pi/(2*order));
+         end for;
+      else
+         den1[1] := 1/sinh(fac);
+         for i in 1:n_den2 loop
+            den2[i,1] :=1/(cosh(fac)^2 - cos(i*pi/order)^2);
+            den2[i,2] :=2*den2[i, 1]*sinh(fac)*cos(i*pi/order);
+         end for;
+      end if;
+
+       /* Transformation of filter transfer function with "new(p) = alpha*p"
+        in order that the filter transfer function has an amplitude of
+        3 db at the cutoff frequency
+     */
+      if normalized then
+        alpha := Internal.normalizationFactor(den1, den2);
+        alpha2 := alpha*alpha;
+        for i in 1:n_den2 loop
+          den2[i, 1] := den2[i, 1]*alpha2;
+          den2[i, 2] := den2[i, 2]*alpha;
+        end for;
+        if not evenOrder then
+          den1[1] := den1[1]*alpha;
+        end if;
+      end if;
+
+    else
+      Streams.error("analogFilter (= " + String(analogFilter) +
+        ") is not supported");
+    end if;
+
+    // Determine normalized denominator polynomials with highest power of p equal to one
+    (filter.d1,filter.d2,k) := Internal.filterToNormalized(den1, den2);
+    filter.k := 1.0/k;
+
+    annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right> filterFunction </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.ZerosAndPoles.Design.<b>filter</b>(analogFilter, filterType, order, f_cut, gain, A_ripple, normalized)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+This function constructs a ZerosAndPoles transfer function
+description of low and high pass filters.
+Typical frequency responses for the 4 supported low pass filter types
+are shown in the next figure (this figure was generated with function
+<a href=\"Modelica://Modelica_LinearSystems2.Examples.ZerosAndPoles.plotBodeFilter2\">Examples.ZerosAndPoles.plotBodeFilter2</a>):
+</p>
+<p align=\"center\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4Filters.png\">
+</p>
+<p>
+The step responses of the same low pass filters are shown in the next figure,
+starting from a steady state initial filter with initial input = 0.2:
+</p>
+<p align=\"center\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4FiltersStepResponse.png\">
+</p>
+<p>
+Obviously, the frequency responses give a somewhat wrong impression
+of the filter characteristics: Although Butterworth and Chebyshev
+filters have a significantly steeper magnitude as the
+CriticalDamping and Bessel filters, the step responses of
+the latter ones are much better. This means for example, that
+a CriticalDamping or a Bessel filter should be selected,
+if a filter is mainly used to make a non-linear inverse model
+realizable.
+</p>
+
+<p>
+Typical frequency responses for the 4 supported high pass filter types
+are shown in the next figure:
+</p>
+<p align=\"center\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/HighPassOrder4Filters.png\">
+</p>
+<p>
+The corresponding step responses of these high pass filters are
+shown in the next figure:
+</p>
+<p align=\"center\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/HighPassOrder4FiltersStepResponse.png\">
+</p>
+<p>
+All filters are available in <b>normalized</b> (default) and non-normalized form.
+In the normalized form, the amplitude of the filter transfer function
+at the cutoff frequency is 3 dB. Note, when comparing the filters
+of this function with other software systems, the setting of \"normalized\"
+has to be selected appropriately. For example, the signal processing
+toolbox of Matlab provides the filters in non-normalized form and
+therefore a comparision makes only sense, if normalized = <b>false</b>
+is set.
+
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping;
+   Integer order=2; 
+   Modelica.SIunits.Frequency f_cut=10;
+   
+   ZerosAndPoles zp_filter;
+
+<b>algorithm</b>
+    zp_filter=Modelica_LinearSystems2.ZerosAndPoles.Design.filter(
+      order=order,
+      f_cut=f_cut,
+      analogFilter=analogFilter);
+
+// zp_filter = 9530.93/( (p + 97.6265)^2 )
+</pre></blockquote>
+
+
+<h4><font color=\"#008000\">References</font></h4>
+<table>
+<tr> <td align=right>  [1] </td><td align=center>  Tietze U., and Schenk Ch.  </td>  <td> \"Halbleiter-Schaltungstechnik\"  </td> <td> Springer Verlag, 12. Auflage, pp. 815-852, 2002. </td></tr>
+</table>
+
+</html> "));
+  end baseFilter;
   end Design;
 
   encapsulated package Plot
@@ -4587,121 +4862,208 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
     end sameMatrixRows;
 
     function firstOrderToString
-      "Transform vector of coefficients of normalized first order polynomials to a string representation"
+      "Transform vector of coefficients of first order polynomials to a string representation"
       import Modelica_LinearSystems2.Math.Vectors;
 
-      input Real c[:] "p^0 coefficients of normalized first order polynomials";
+      input Real c[:] = fill(0.0,0)
+        "Coefficients of first order polynomials: polynom(p) = p + c[i]";
       input Integer significantDigits=6
         "Number of significant digits that are shown";
       input String name="p" "Independent variable name used for printing";
+      input Boolean normalized=false
+        "= true, the polynomials in the string are represented as p/c[i] + 1, provided c[i]<>0";
       output String s="";
+      output Real gain=1.0
+        "If normalized=true, the product(c[i]) (for i, where c[i]<>0), otherwise gain=1.0";
     protected
       Integer nc=size(c, 1);
-      Real cs[nc]=Modelica.Math.Vectors.sort(c);
+      Real cs[nc];
       Real cc[nc];
       Integer i;
       Integer j;
+      Integer j2;
       Integer nj;
       Integer k;
-      Boolean found=false;
+      constant Real smallNumber = 100*Modelica.Constants.small;
     algorithm
-      // Move coefficients with zero to the beginning
-      i := 1;
-      while i <= nc loop
-        if cs[i] == 0 then
-          found := true;
-          k := i;
-          i := nc + 1;
-        else
-          i := i + 1;
-        end if;
-      end while;
+      // Change coefficients, if normalized output, and sort them
+      for i in 1:nc loop
+         if abs(c[i]) <= smallNumber then
+            cs[i] := 0.0;
+         elseif normalized then
+            cs[i] := 1/c[i];
+            gain := gain*c[i];
+         else
+            cs[i] := c[i];
+         end if;
+      end for;
+      cc :=Modelica.Math.Vectors.sort(cs);
 
-      if found then
-        j := sameVectorElements(cs, k);
-        cc := cat(
-              1,
-              cs[k:j],
-              cs[1:k - 1],
-              cs[j + 1:end]);
-      else
-        cc := cs;
-      end if;
+      // Move zeros to the beginning
+      j :=0;
+      k :=nc + 1;
+      for i in nc:-1:1 loop
+         if cc[i] == 0.0 then
+            j := j + 1;
+            cs[j] := 0.0;
+         else
+            k := k - 1;
+            cs[k] := cc[i];
+         end if;
+      end for;
 
       // Transform coefficients to string
-      i := 1;
-      while i <= nc loop
-        if i <> 1 then
-          s := s + "*";
-        end if;
-        if cc[i] == 0 then
-          s := s + name;
-        else
-          if cc[i] > 0 then
-            s := s + "(" + name + " + ";
-          else
-            s := s + "(" + name;
+      if j > 0 then
+         s := name + "^" + String(j);
+      end if;
+
+      i :=j + 1;
+      if normalized then
+        while i <= nc loop
+          if i > 1 then
+            s := s + "*";
           end if;
-          s := s + String(cc[i], significantDigits=significantDigits) + ")";
-        end if;
-        j := sameVectorElements(cc, i);
-        nj := j - i + 1;
-        if nj > 1 then
-          s := s + "^" + String(nj);
-        end if;
-        i := j + 1;
-      end while;
+          s := s + "(" + String(cs[i], significantDigits=significantDigits) +
+                   "*" +  name + " + 1)";
+          j2 := sameVectorElements(cs, i);
+          nj := j2 - i + 1;
+          if nj > 1 then
+            s := s + "^" + String(nj);
+          end if;
+          i := j2 + 1;
+        end while;
+      else
+        while i <= nc loop
+          if i > 1 then
+            s := s + "*";
+          end if;
+          if cs[i] > 0 then
+             s := s + "(" + name + " + ";
+          else
+             s := s + "(" + name + " - ";
+          end if;
+          s  := s + String(abs(cs[i]), significantDigits=significantDigits) + ")";
+          j2 := sameVectorElements(cs, i);
+          nj := j2 - i + 1;
+          if nj > 1 then
+            s := s + "^" + String(nj);
+          end if;
+          i := j2 + 1;
+        end while;
+      end if;
     end firstOrderToString;
 
     function secondOrderToString
-      "Transform vector of coefficients of normalized second order polynomials to a string representation"
+      "Transform vector of coefficients of second order polynomials to a string representation"
       import Modelica_LinearSystems2.Math.Matrices;
 
-      input Real c[:,2]
-        "[p,p^0] coefficients of normalized second order polynomials";
+      input Real c[:,2]=fill(0.0,0,2)
+        "[p,p^0] coefficients osecond order polynomials: polynom(p) = p^2 + c[:,1]*p + c[:,2]";
       input Integer significantDigits=6
         "Number of significant digits that are shown";
       input String name="p" "Independent variable name used for printing";
+      input Boolean normalized=false
+        "= true, the polynomials in the string are represented as p^2/c[:,2] + c[:,1]/c[:,2]*p + 1, provided c[i,2]<>0";
       output String s="";
+      output Real gain=1.0
+        "If normalized=true, the product(c[i,2]) (for i, where c[i,2]<>0), otherwise gain=1.0";
     protected
       Integer nc=size(c, 1);
-      Real cc[nc,2]=Modelica.Math.Matrices.sort(c);
+      Real cs[nc,2];
+      Real cc[nc,2];
       Integer i=1;
       Integer j;
       Integer nj;
+      constant Real smallNumber = 100*Modelica.Constants.small;
     algorithm
+      // Change coefficients, if normalized output, and sort them
+      for i in 1:nc loop
+         if abs(c[i,2]) <= smallNumber then
+            cs[i,1] := c[i,1];
+            cs[i,2] := 0.0;
+         elseif normalized then
+            cs[i,1] := 1/c[i,2];
+            cs[i,2] := c[i,1]/c[i,2];
+            gain := gain*c[i,2];
+         else
+            cs[i,1] := c[i,1];
+            cs[i,2] := c[i,2];
+         end if;
+      end for;
+      cc :=Modelica.Math.Matrices.sort(cs);
+
+    // Generate string
+    if normalized then
       while i <= nc loop
-        if i <> 1 then
+        if i > 1 then
+          s := s + "*";
+        end if;
+        j := sameMatrixRows(cc, i);
+        nj := j - i + 1;
+        if cc[i, 1] == 0.0 and cc[i, 2] == 0.0 then
+          // case p^2
+          s := s + name + "^" + String(2*nj);
+        else
+          // b*p^2 term
+          if cc[i, 1] == 1.0 then
+            s := s + "(" + name + "^2";
+          elseif cc[i, 1] == -1.0 then
+            s := s + "(-" + name + "^2";
+          else
+            s := s + "(" + String(cc[i, 1], significantDigits=significantDigits) +
+              "*" + name + "^2";
+          end if;
+
+          // a*p term
+          if (cc[i, 2]) > 0 then
+            s := s + " + " + String(cc[i, 2], significantDigits=significantDigits)
+                   + "*" + name + " + 1)";
+          elseif (cc[i, 2]) < 0 then
+            s := s + " - " + String(-cc[i, 2], significantDigits=significantDigits)
+                   + "*" + name + " + 1)";
+          else
+            s := s + " + 1)";
+          end if;
+          if nj > 1 then
+            s := s + "^" + String(nj);
+          end if;
+        end if;
+        i := j + 1;
+      end while;
+
+    else
+      while i <= nc loop
+        if i > 1 then
           s := s + "*";
         end if;
         j := sameMatrixRows(cc, i);
         nj := j - i + 1;
         if cc[i, 1] == 0 and cc[i, 2] == 0 then
-            // case p^2
+          // case p^2
           s := s + name + "^" + String(2*nj);
         else
           s := s + "(" + name + "^2";
 
-            // b*p term
-          if cc[i, 1] == 1 then
-            s := s + "+" + name;
-          elseif cc[i, 1] == -1 then
+          // b*p term
+          if cc[i, 1] == 1.0 then
+            s := s + " + " + name;
+          elseif cc[i, 1] == -1.0 then
             s := s + " - " + name;
-          elseif cc[i, 1] <> 0 then
+          elseif cc[i, 1] <> 0.0 then
             if cc[i, 1] > 0 then
               s := s + " + ";
+            else
+              s := s + " - ";
             end if;
-            s := s + String(cc[i, 1], significantDigits=significantDigits) +
+            s := s + String(abs(cc[i, 1]), significantDigits=significantDigits) +
               "*" + name;
           end if;
 
-            // a*p^0 term
-          if (cc[i, 2]) > 0 then
-            s := s + " + " + String(cc[i, 2], significantDigits=
-              significantDigits) + ")";
-          elseif (cc[i, 2]) < 0 then
-            s := s + String(cc[i, 2], significantDigits=
-              significantDigits) + ")";
+          // a*p^0 term
+          if (cc[i, 2]) > 0.0 then
+            s := s + " + " + String(cc[i, 2], significantDigits=significantDigits) + ")";
+          elseif (cc[i, 2]) < 0.0 then
+            s := s + " - " + String(-cc[i, 2], significantDigits=significantDigits) + ")";
           else
             s := s + ")";
           end if;
@@ -4710,7 +5072,8 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
           end if;
         end if;
         i := j + 1;
-      end while;
+       end while;
+    end if;
     end secondOrderToString;
 
     encapsulated function normalizationFactor
@@ -6176,13 +6539,14 @@ results from <blockquote><pre> a = -1/alpha </pre></blockquote> and
     function filterToNormalized
       "Given [p^2,p] and [p] coefficients, transform to normalized form with highest power of p equal 1"
 
-      input Real c1[:] "[p] coefficients of polynomials (a*p + 1)";
+      input Real c1[:] "[p] coefficients of polynomials (c1[i]*p + 1)";
       input Real c2[:,2]
-        "[p^2, p] coefficients of polynomials (b*p^2 + a*p + 1)";
-      output Real n1[size(c1, 1)] "[p^0] coefficients of polynomials a*(p+1/a)";
+        "[p^2, p] coefficients of polynomials (c2[i,1]*p^2 + c2[i,2]*p + 1)";
+      output Real n1[size(c1, 1)]
+        "[p^0] coefficients of polynomials c1[i]*(p+1/c1[i])";
       output Real n2[size(c2, 1),2]
-        "[p, p^0] coefficients of polynomials b*(p^2 + (a/b)*p + (1/b))";
-      output Real k "Gain (product(1/a)*(1/b)";
+        "[p, p^0] coefficients of polynomials c2[i,1]*(p^2 + (c2[i,2]/c2[i,1])*p + (1/c2[i,1]))";
+      output Real k "Gain (product(1/c1[i])*(1/c2[i,1])";
     algorithm
       k := 1.0;
       for i in 1:size(c1, 1) loop
