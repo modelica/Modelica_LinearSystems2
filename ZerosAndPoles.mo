@@ -510,7 +510,7 @@ end '==';
       input String name="p" "Independent variable name used for printing";
       output String s="";
   protected
-      Boolean normalized = false;
+      Boolean normalized = true;
       Real gain=1.0;
       Integer num_order=size(zp.n1, 1) + 2*size(zp.n2, 1);
       Integer den_order=size(zp.d1, 1) + 2*size(zp.d2, 1);
@@ -536,7 +536,7 @@ end '==';
 
      // compute overall gain
      if normalized then
-        gain :=kn1*kn2/(kd1*kd2);
+        gain :=zp.k*kn1*kn2/(kd1*kd2);
      else
         gain :=zp.k;
      end if;
@@ -1395,6 +1395,7 @@ Computes the invariant zeros of the corresponding state space representation of 
 // zeros = {-1}
 
 </pre></blockquote>
+</html>
 "));
     end invariantZeros;
 
@@ -1509,6 +1510,43 @@ of a zeros and poles transfer function.
 </html> "));
     end controllabilityMatrix;
 
+    encapsulated function dcGain
+      "Return steady state gain k (for a stable system: k = value of y at infinite time for a step input)"
+
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+
+      input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
+      output Real k "Steady state gain";
+      output Boolean finite = true
+        "= true, if k is finite; = false, if k is infinite (k=Modelica.Constants.inf returned)";
+    protected
+      StateSpace ss=StateSpace(zp);
+      Real K[1,1];
+    algorithm
+      (K, finite) := StateSpace.Analysis.dcGain(ss=ss);
+      k :=K[1, 1];
+
+        annotation (Documentation(info="<html>
+<p> 
+This function computes the steady state gain <b>k</b> of a 
+ZerosAndPoles transfer function g(s), i.e. k = g(s=0).
+For a stable state space system, y(t->t<sub>&infty</sub>) = k,
+     for a step input u.</li>
+</ul> 
+
+<p>
+If the transfer function has zero poles, <b>k</b> is infinite.
+In this case, the output argument <b>finite</b> = <b>false</b> and 
+<b>k</b> = Modelica.Constants.inf.
+</p>
+</html>
+
+
+"));
+    end dcGain;
+
     encapsulated function isObservable
       "Check observability of a zp-transfer-function"
 
@@ -1550,11 +1588,11 @@ Function ZerosAndPoles.Analysis.<b>isObservable</b> checks the observability of 
 
    Types.Method method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD
 
-   Boolean controllable;
+   Boolean observable;
 
 <b>algorithm</b>
-  controllable := Modelica_LinearSystems2.StateSpace.Analysis.isObservable(zp, method);
-// controllable = false
+  observable := Modelica_LinearSystems2.StateSpace.Analysis.isObservable(zp, method);
+// observable = false
 </pre></blockquote>
 
 </html> "));
@@ -1704,7 +1742,7 @@ The transfer function is detectable if all unstable poles are observable.
   encapsulated package Design
 
   encapsulated function filter
-      "Generate the data record of a ZerosAndPoles transfer function from a filter description"
+      "Generate a ZerosAndPoles transfer function from a filter description"
 
       import Modelica;
       import Modelica.Utilities.Streams;
@@ -1954,11 +1992,15 @@ The transfer function is detectable if all unstable poles are observable.
     filter.d2 := [w_cut*filter.d2[:, 1],w_cut2*filter.d2[:, 2]];
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right> filterFunction </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.ZerosAndPoles.Design.<b>filter</b>(analogFilter, filterType, order, f_cut, gain, A_ripple, normalized)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
+
+<h4>Syntax</h4>
+
+<blockquote><pre>
+zp = <b>filter</b>(analogFilter, filterType, order, f_cut, gain, A_ripple, normalized);
+</pre></blockquote>
+
+<h4>Description</h4>
+
 <p>
 This function constructs a ZerosAndPoles transfer function
 description of low and high pass filters.
@@ -2041,7 +2083,7 @@ is set.
   end filter;
 
   encapsulated function baseFilter
-      "Generate the data record of a ZerosAndPoles transfer function from a base filter description (= low pass filter with w_cut = 1 rad/s)"
+      "Generate a ZerosAndPoles transfer function from a base filter description (= low pass filter with w_cut = 1 rad/s)"
 
     import Modelica;
     import Modelica.Math.*;
@@ -2056,7 +2098,8 @@ is set.
     input Integer order(min=1) = 2 "Order of filter";
     input Real A_ripple(unit="dB") = 0.5
         "Pass band ripple (only for Chebyshev filter)";
-    input Boolean normalized=true "= true, if amplitude at f_cut = -3db";
+    input Boolean normalized=true
+        "= true, if amplitude at f_cut = -3db, otherwise unmodified filter";
 
     output ZerosAndPoles filter(
       redeclare Real n1[0],
@@ -2161,88 +2204,75 @@ is set.
     filter.k := 1.0/k;
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right> filterFunction </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.ZerosAndPoles.Design.<b>filter</b>(analogFilter, filterType, order, f_cut, gain, A_ripple, normalized)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Syntax</h4>
+<blockquote><pre>
+zp = <b>baseFilter</b>(analogFilter, order, A_ripple, normalized);
+</pre></blockquote>
+
+<h4>Description</h4>
+
 <p>
 This function constructs a ZerosAndPoles transfer function
-description of low and high pass filters.
-Typical frequency responses for the 4 supported low pass filter types
-are shown in the next figure (this figure was generated with function
-<a href=\"Modelica://Modelica_LinearSystems2.Examples.ZerosAndPoles.plotBodeFilter2\">Examples.ZerosAndPoles.plotBodeFilter2</a>):
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4Filters.png\">
-</p>
-<p>
-The step responses of the same low pass filters are shown in the next figure,
-starting from a steady state initial filter with initial input = 0.2:
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4FiltersStepResponse.png\">
-</p>
-<p>
-Obviously, the frequency responses give a somewhat wrong impression
-of the filter characteristics: Although Butterworth and Chebyshev
-filters have a significantly steeper magnitude as the
-CriticalDamping and Bessel filters, the step responses of
-the latter ones are much better. This means for example, that
-a CriticalDamping or a Bessel filter should be selected,
-if a filter is mainly used to make a non-linear inverse model
-realizable.
+description of low pass filters with a cut-off angular frequency
+of one rad/s and a gain of one. Filters returned by this function
+are the starting point to construct other filters by transformation
+of the filter transfer function:
 </p>
 
-<p>
-Typical frequency responses for the 4 supported high pass filter types
-are shown in the next figure:
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/HighPassOrder4Filters.png\">
-</p>
-<p>
-The corresponding step responses of these high pass filters are
-shown in the next figure:
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/HighPassOrder4FiltersStepResponse.png\">
-</p>
-<p>
-All filters are available in <b>normalized</b> (default) and non-normalized form.
-In the normalized form, the amplitude of the filter transfer function
-at the cutoff frequency is 3 dB. Note, when comparing the filters
-of this function with other software systems, the setting of \"normalized\"
-has to be selected appropriately. For example, the signal processing
-toolbox of Matlab provides the filters in non-normalized form and
-therefore a comparision makes only sense, if normalized = <b>false</b>
-is set.
+<pre>
+   zp(p) = 1 / ( product( a[i]*p + 1 ) * product( b[i]*p^2 + a[i]*p + 1 ) )
+</pre>
 
-
+<p>
+using the following rules:
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><td><i>Desired filter</i></td>
+    <td><i>Transformation</i></td>
+    </tr>
+
+<tr><td> High pass filter with w_cut = 1 rad/s </td>
+    <td> replace \"p\" by \"1/p\" </td>
+    </tr>
+
+<tr><td> Band pass filter with w_cut = 1 rad/s </td>
+    <td> replace \"p\" by \"(p + 1/p)/w_band\"<br>
+         (w_band: bandwidth of band in rad/s)</td>
+    </tr>
+
+<tr><td> Stop pass filter with w_cut = 1 rad/s </td>
+    <td> replace \"p\" by \"w_band/(p + 1/p)\"<br>
+         (w_band: bandwidth of band in rad/s)</td>
+    </tr>
+
+<tr><td> Filter with cut-off angular frequency w_cut </td>
+    <td> replace \"p\" by \"p/w_cut\" </td>
+    </tr>
+</table>
+
+<h4>Example</h4>
+
 <blockquote><pre>
-   Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping;
-   Integer order=2; 
-   Modelica.SIunits.Frequency f_cut=10;
-   
-   ZerosAndPoles zp_filter;
+ // Generate a Butterworth high pass base filter of order 3
+ <b>import</b> ZP = Modelica_LinearSystems2.ZerosAndPoles;
+ <b>import</b> Modelica_LinearSystems2.Types;
 
+ ZP zp_filter;
 <b>algorithm</b>
-    zp_filter=Modelica_LinearSystems2.ZerosAndPoles.Design.filter(
-      order=order,
-      f_cut=f_cut,
-      analogFilter=analogFilter);
+ zp_filter = ZP.Design.baseFilter(Types.AnalogFilter.Butterworth, order = 3);
 
-// zp_filter = 9530.93/( (p + 97.6265)^2 )
+ // zp_filter = 1 /  ( (p + 1)*(p^2 + p + 1) )
 </pre></blockquote>
 
 
-<h4><font color=\"#008000\">References</font></h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center>  Tietze U., and Schenk Ch.  </td>  <td> \"Halbleiter-Schaltungstechnik\"  </td> <td> Springer Verlag, 12. Auflage, pp. 815-852, 2002. </td></tr>
-</table>
+<h4>References</h4>
+
+<dl>
+<dt>Tietze U., and Schenk C. (2002):</dt>
+<dd> <b>Halbleiter-Schaltungstechnik</b>.
+     Springer Verlag, 12. Auflage, pp. 815-852.</dd>
+</dl>
 
 </html> "));
   end baseFilter;
@@ -4864,6 +4894,7 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
     function firstOrderToString
       "Transform vector of coefficients of first order polynomials to a string representation"
       import Modelica_LinearSystems2.Math.Vectors;
+      import Modelica_LinearSystems2.Math;
 
       input Real c[:] = fill(0.0,0)
         "Coefficients of first order polynomials: polynom(p) = p + c[i]";
@@ -4885,10 +4916,11 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
       Integer nj;
       Integer k;
       constant Real smallNumber = 100*Modelica.Constants.small;
+      constant Real eps = 10*Modelica.Constants.eps;
     algorithm
       // Change coefficients, if normalized output, and sort them
       for i in 1:nc loop
-         if abs(c[i]) <= smallNumber then
+         if Math.isEqual(c[i], 0.0, smallNumber) then
             cs[i] := 0.0;
          elseif normalized then
             cs[i] := 1/c[i];
@@ -4923,8 +4955,14 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
           if i > 1 then
             s := s + "*";
           end if;
-          s := s + "(" + String(cs[i], significantDigits=significantDigits) +
-                   "*" +  name + " + 1)";
+          if Math.isEqual(cs[i], 1.0, eps) then
+             s := s + "(";
+          elseif Math.isEqual(cs[i], -1.0, eps) then
+             s := s + "(-";
+          else
+             s := s + "(" + String(cs[i], significantDigits=significantDigits) + "*";
+          end if;
+          s :=s + name + " + 1)";
           j2 := sameVectorElements(cs, i);
           nj := j2 - i + 1;
           if nj > 1 then
@@ -4956,6 +4994,7 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
     function secondOrderToString
       "Transform vector of coefficients of second order polynomials to a string representation"
       import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica_LinearSystems2.Math;
 
       input Real c[:,2]=fill(0.0,0,2)
         "[p,p^0] coefficients osecond order polynomials: polynom(p) = p^2 + c[:,1]*p + c[:,2]";
@@ -4975,10 +5014,11 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
       Integer j;
       Integer nj;
       constant Real smallNumber = 100*Modelica.Constants.small;
+      constant Real eps = 10*Modelica.Constants.eps;
     algorithm
       // Change coefficients, if normalized output, and sort them
       for i in 1:nc loop
-         if abs(c[i,2]) <= smallNumber then
+         if Math.isEqual(c[i,2], 0.0, smallNumber) then
             cs[i,1] := c[i,1];
             cs[i,2] := 0.0;
          elseif normalized then
@@ -5005,9 +5045,9 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
           s := s + name + "^" + String(2*nj);
         else
           // b*p^2 term
-          if cc[i, 1] == 1.0 then
+          if Math.isEqual(cc[i, 1], 1.0) then
             s := s + "(" + name + "^2";
-          elseif cc[i, 1] == -1.0 then
+          elseif Math.isEqual(cc[i, 1], -1.0) then
             s := s + "(-" + name + "^2";
           else
             s := s + "(" + String(cc[i, 1], significantDigits=significantDigits) +
@@ -5015,14 +5055,19 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
           end if;
 
           // a*p term
-          if (cc[i, 2]) > 0 then
-            s := s + " + " + String(cc[i, 2], significantDigits=significantDigits)
-                   + "*" + name + " + 1)";
-          elseif (cc[i, 2]) < 0 then
-            s := s + " - " + String(-cc[i, 2], significantDigits=significantDigits)
-                   + "*" + name + " + 1)";
+          if cc[i, 2] == 0.0 then
+             s := s + " + 1)";
           else
-            s := s + " + 1)";
+             if Math.isEqual(cc[i, 2], 1.0, eps) then
+                s := s + " + ";
+             elseif Math.isEqual(cc[i, 2], -1.0, eps) then
+                s := s + " - ";
+             elseif cc[i, 2] >= 0.0 then
+                s := s + " + " + String(cc[i, 2], significantDigits=significantDigits) + "*";
+             else
+                s := s + " - " + String(-cc[i, 2], significantDigits=significantDigits) + "*";
+             end if;
+             s := s + name + " + 1)";
           end if;
           if nj > 1 then
             s := s + "^" + String(nj);

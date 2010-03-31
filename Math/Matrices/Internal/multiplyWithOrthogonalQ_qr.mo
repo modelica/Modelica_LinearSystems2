@@ -33,7 +33,7 @@ external "Fortran 77" dormqr(
       ldc,
       work,
       lwork,
-      info) 
+      info)
           annotation(Library = {"lapack"});
 
   annotation (Documentation(info="   Purpose  

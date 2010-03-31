@@ -14,6 +14,7 @@ hessenberg
 householderReflexion
 householderSimilarityTransformation
 leastSquares
+leastSquares2
 LU
 LU_solve
 LU_solve2

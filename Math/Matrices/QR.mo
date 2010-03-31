@@ -9,7 +9,7 @@ function QR
     "Square upper triangular matrix";
 
   output Real tau[min(size(A, 1), size(A, 2))];
-  output Real Q2[:,:] 
+  output Real Q2[:,:]
   annotation ( Documentation(info="<HTML>
 <h4>Syntax</h4>
 <blockquote><pre>

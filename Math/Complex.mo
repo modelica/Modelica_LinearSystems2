@@ -240,14 +240,14 @@ algorithm
            k2 := j + gap + 1;
            if sortFrequency then
               if ascending then
-                 swap := abs(sorted_v[k1].im) >  abs(sorted_v[k2].im) or 
-                         abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and 
-                         (sorted_v[k1].re  > sorted_v[k2].re or 
+                 swap := abs(sorted_v[k1].im) >  abs(sorted_v[k2].im) or
+                         abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and
+                         (sorted_v[k1].re  > sorted_v[k2].re or
                           sorted_v[k1].re  == sorted_v[k2].re and sorted_v[k1].im < sorted_v[k2].im);
               else
-                 swap := abs(sorted_v[k1].im) <  abs(sorted_v[k2].im) or 
-                         abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and 
-                         (sorted_v[k1].re  < sorted_v[k2].re or 
+                 swap := abs(sorted_v[k1].im) <  abs(sorted_v[k2].im) or
+                         abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and
+                         (sorted_v[k1].re  < sorted_v[k2].re or
                           sorted_v[k1].re  == sorted_v[k2].re and sorted_v[k1].im < sorted_v[k2].im);
               end if;
            else
@@ -274,14 +274,14 @@ algorithm
               k2 := j + gap + 1;
               if sortFrequency then
                  if ascending then
-                    swap := abs(sorted_v[k1].im) >  abs(sorted_v[k2].im) or 
-                            abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and 
-                            (sorted_v[k1].re  > sorted_v[k2].re or 
+                    swap := abs(sorted_v[k1].im) >  abs(sorted_v[k2].im) or
+                            abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and
+                            (sorted_v[k1].re  > sorted_v[k2].re or
                              sorted_v[k1].re  == sorted_v[k2].re and sorted_v[k1].im < sorted_v[k2].im);
                  else
-                    swap := abs(sorted_v[k1].im) <  abs(sorted_v[k2].im) or 
-                            abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and 
-                            (sorted_v[k1].re  < sorted_v[k2].re or 
+                    swap := abs(sorted_v[k1].im) <  abs(sorted_v[k2].im) or
+                            abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and
+                            (sorted_v[k1].re  < sorted_v[k2].re or
                              sorted_v[k1].re  == sorted_v[k2].re and sorted_v[k1].im < sorted_v[k2].im);
                  end if;
               else
@@ -898,7 +898,7 @@ end eigenVectors;
     import Modelica_LinearSystems2.Math.Complex;
     input Complex c "Complex number";
     output Modelica.SIunits.Frequency f "Frequency of c (= c.im in Hz)";
-    output Real damping "Damping of c (= c.re/c.im)" 
+    output Real damping "Damping of c (= c.re/c.im)"
     annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <blockquote><pre>
@@ -924,7 +924,7 @@ phase angle phi of the Complex number c in the range
     Real abs_ev=(c.re^2 + c.im^2)^0.5;
   algorithm
     f := if abs(c.im) > 10*Modelica.Constants.eps then abs_ev/(2*Modelica.Constants.pi) else 0;
-    damping := if abs(c.im) > 10*Modelica.Constants.eps then if abs_ev > Modelica.Constants.eps then -c.re/abs_ev else 0.0 else 
+    damping := if abs(c.im) > 10*Modelica.Constants.eps then if abs_ev > Modelica.Constants.eps then -c.re/abs_ev else 0.0 else
       1.0;
     annotation(Inline=true);
   end frequency;

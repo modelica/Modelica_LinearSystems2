@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.Math.Matrices;
 package Examples
   function exampleHessenberg
     import Modelica_LinearSystems2.Math.Matrices;
-    input String fileName=DataDir + "m.mat" 
+    input String fileName=DataDir + "m.mat"
                                 annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="matrix file")));
     input String matrixName="A" "Name of the matrix";
@@ -65,7 +65,7 @@ package Examples
   function exampleQR
     "Example for the usage of QR2-function, QR factorization with colomns pivoting"
     import Modelica_LinearSystems2.Math.Matrices;
-    input String fileName=DataDir + "m.mat" 
+    input String fileName=DataDir + "m.mat"
                                 annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="matrix file")));
     input String matrixName="A" "Name of the matrix";
@@ -163,7 +163,7 @@ package Examples
     "Example for the usage of dgesdd and dgesvd lapack routines"
     import Modelica_LinearSystems2.Math.Matrices;
     import Modelica_LinearSystems2.Math.Vectors;
-    input String fileName=DataDir + "m.mat" 
+    input String fileName=DataDir + "m.mat"
                                 annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="matrix file")));
 

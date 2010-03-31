@@ -1,4 +1,5 @@
 analysisZerosAndPoles
+analysisDcGain
 conversionToStateSpace
 plotPolesAndZeros
 plotBode1
