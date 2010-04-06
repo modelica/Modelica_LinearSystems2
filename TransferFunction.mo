@@ -1073,14 +1073,14 @@ Computes the invariant zeros of the corresponding state space representation of 
 
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.TransferFunction;
 
-      input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
       output Real k "Steady state gain";
       output Boolean finite = true
         "= true, if k is finite; = false, if k is infinite (k=Modelica.Constants.inf returned)";
     protected
-      StateSpace ss=StateSpace(zp);
+      StateSpace ss=StateSpace(tf);
       Real K[1,1];
     algorithm
       (K, finite) := StateSpace.Analysis.dcGain(ss=ss);
@@ -1090,15 +1090,15 @@ Computes the invariant zeros of the corresponding state space representation of 
 <h4>Syntax</h4>
 
 <blockquote><pre>
-          k = <b>dcGain</b>(zp);
-(k, finite) = <b>dcGain</b>(zp);
+          k = <b>dcGain</b>(tf);
+(k, finite) = <b>dcGain</b>(tf);
 </pre></blockquote>
 
 <h4>Description</h4>
 
 <p> 
 This function computes the steady state gain <b>k</b> of a 
-ZerosAndPoles transfer function g(s), i.e. k = g(s=0).
+TransferFunction tf(s), i.e. k = tf(s=0).
 For a stable transfer function, a step input u results
 in the output y(t->t<sub>&infin;</sub>) = k.</li>
 </ul> 
@@ -1113,7 +1113,6 @@ In this case, the output argument <b>finite</b> = <b>false</b> and
 
 "));
     end dcGain;
-
 
     encapsulated function isObservable
       "Check oberservability of a transfer function"

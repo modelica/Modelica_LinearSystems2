@@ -3,7 +3,11 @@ package Filters
   function plotFilter
     import ZP = Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica_LinearSystems2.Types;
-     input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
+    import Modelica.Utilities.Streams.print;
+    import Modelica.Constants.pi;
+    import Modelica_LinearSystems2.Math.Complex;
+
+     input Modelica_LinearSystems2.Types.AnalogFilter analogFilter
       "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
      input Modelica_LinearSystems2.Types.FilterType filterType=Types.FilterType.LowPass
       "Type of filter (LowPass/HighPass)";
@@ -13,17 +17,74 @@ package Filters
      input Boolean normalized=true
       "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   protected
+    function getAmplitude "Compute amplitude at f_cut and return it as string"
+      input ZP zp;
+      input Modelica.SIunits.Frequency f_cut;
+      output String str;
+    protected
+      Complex c;
+      Real A;
+      constant Real machEps = 100*Modelica.Constants.eps;
+    algorithm
+      c := ZP.Analysis.evaluate(zp, Complex(0,2*pi*f_cut));
+      A :=Complex.'abs'(c);
+      str :="amplitude(f_cut=" + String(f_cut) + ") = ";
+      if Modelica_LinearSystems2.Math.isEqual(A, 10^(-3/20), machEps) then
+         str := str + "-3db";
+      elseif Modelica_LinearSystems2.Math.isEqual(A, sqrt(2)/2, machEps) then
+         str := str + "sqrt(2)/2";
+      else
+         str := str + String(A);
+      end if;
+    end getAmplitude;
+
+     function getFilterName "Return the filter name as string"
+        input Modelica_LinearSystems2.Types.AnalogFilter analogFilter;
+        output String str;
+     algorithm
+        if analogFilter == Modelica_LinearSystems2.Types.AnalogFilter.CriticalDamping then
+           str :="CriticalDamping";
+        elseif analogFilter == Modelica_LinearSystems2.Types.AnalogFilter.Bessel then
+           str :="Bessel";
+        elseif analogFilter == Modelica_LinearSystems2.Types.AnalogFilter.Butterworth then
+           str :="Butterworth";
+        elseif analogFilter == Modelica_LinearSystems2.Types.AnalogFilter.Chebyshev then
+           str :="Chebyshev";
+        else
+           str :="unknown";
+        end if;
+     end getFilterName;
+
      ZP filter1 = ZP.Design.filter(analogFilter, filterType, order=1, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized);
      ZP filter2 = ZP.Design.filter(analogFilter, filterType, order=2, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized);
      ZP filter3 = ZP.Design.filter(analogFilter, filterType, order=3, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized);
      ZP filter4 = ZP.Design.filter(analogFilter, filterType, order=4, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized);
      ZP filter5 = ZP.Design.filter(analogFilter, filterType, order=5, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized);
   algorithm
-     //ZP.Plot.bode(filter1);
-     //ZP.Plot.bode(filter2);
-     //ZP.Plot.bode(filter3);
-     //ZP.Plot.bode(filter4);
+     ZP.Plot.bode(filter1);
+     ZP.Plot.bode(filter2);
+     ZP.Plot.bode(filter3);
+     ZP.Plot.bode(filter4);
      ZP.Plot.bode(filter5);
+
+     // Check filter properties
+     if filterType == Types.FilterType.LowPass then
+        print("\nanalogFilter = " + getFilterName(analogFilter) + " (low pass filter)");
+        print("filter1: dcGain = " + String(ZP.Analysis.dcGain(filter1)) + ", " + getAmplitude(filter1,f_cut));
+        print("filter2: dcGain = " + String(ZP.Analysis.dcGain(filter2)) + ", " + getAmplitude(filter2,f_cut));
+        print("filter3: dcGain = " + String(ZP.Analysis.dcGain(filter3)) + ", " + getAmplitude(filter3,f_cut));
+        print("filter4: dcGain = " + String(ZP.Analysis.dcGain(filter4)) + ", " + getAmplitude(filter4,f_cut));
+        print("filter5: dcGain = " + String(ZP.Analysis.dcGain(filter5)) + ", " + getAmplitude(filter5,f_cut));
+
+     elseif filterType == Types.FilterType.HighPass then
+        print("\nanalogFilter = " + getFilterName(analogFilter) + " (high pass filter)");
+        print("filter1: k = " + String(filter1.k) + ", " + getAmplitude(filter1,f_cut));
+        print("filter2: k = " + String(filter2.k) + ", " + getAmplitude(filter2,f_cut));
+        print("filter3: k = " + String(filter3.k) + ", " + getAmplitude(filter3,f_cut));
+        print("filter4: k = " + String(filter4.k) + ", " + getAmplitude(filter4,f_cut));
+        print("filter5: k = " + String(filter5.k) + ", " + getAmplitude(filter5,f_cut));
+
+     end if;
   end plotFilter;
 
   function plotFilter2

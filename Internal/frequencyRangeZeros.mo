@@ -28,14 +28,20 @@ protected
   Boolean first = true;
 algorithm
   /* - Real zero:
-       tan(phi_desired) = w/re -> w = re*tan(phi_desired)
+       tan(phi_desired) = w/|re| -> w = |re|*tan(phi_desired)
   
      - Conjugate complex zero:
-       tan(phi1) = (w + im)/re
-       tan(phi2) = (w - im)/re
-       phi1 + phi2 = phi_desired -> tan(phi1 + phi2) = (tan(phi1) + tan(phi2))/(1-tan(phi1)*tan(phi2))
-       -> after a longer derivation it follows:
-          w = sqrt( re^2/tan(phi_desired)^2 + (re^2 + im^2) ) - re/tan(phi_desired)
+       tan(phi1) = (w + im)/|re|
+       tan(phi2) = (w - im)/|re|
+       phi1 + phi2 = phi_desired -> 
+          tan(phi1 + phi2) = (tan(phi1) + tan(phi2))/(1-tan(phi1)*tan(phi2))
+                           = ((w + im)/re + (w - im)/re) / ( 1 - (w+im)/re*(w-im)/re )
+                           = 2*w/re / (re^2 - (w^2 - im^2))/re^2 
+                           = 2*w*re / (re^2 - w^2 + im^2)
+          tan(phi_desired)*(re^2 + im^2 - w^2) = 2*w*re
+          tan(phi_desired)*w^2 + 2*w*re - tan(phi_desired)*(re^2 + im^2) = 0
+          w^2 + (2*re/tan(phi_desired))*w - (re^2 + im^2) = 0
+          w = -re/tan(phi_desired) + sqrt(re^2/tan(phi_desired)^2 + re^2 + im^2)
   */
   assert(nz > 0, "Vector z of zeros has dimension 0, This is not allowed");
   tan_min1 := Math.tan(phi_min);
@@ -44,13 +50,19 @@ algorithm
   tan_max2 := Math.tan(Modelica.Constants.pi - 2*phi_min);
   for i in 1:size(z, 1) loop
     if z[i].im >= 0.0 and abs(z[i].re) >= real_min then
-      z_re := max(abs(z[i].re), real_min);
+      //z_re := if abs(z[i].re) <= real_min then -real_min else z[i].re;
+      z_re :=max(abs(z[i].re), real_min);
       if z[i].im > 0.0 then
         z_abs2 := z_re^2 + z[i].im^2;
         k1 := z_re/tan_min2;
         w_min1 := sqrt(k1^2 + z_abs2) - k1;
         k2 := z_re/tan_max2;
         w_max1 := sqrt(k2^2 + z_abs2) - k2;
+        /*
+        phi1 :=Modelica.SIunits.Conversions.to_deg(Modelica.Math.atan((w_max1 + z[i].im)/z_re));
+        phi2 :=Modelica.SIunits.Conversions.to_deg(Modelica.Math.atan((w_max1 - z[i].im)/z_re));
+        Modelica.Utilities.Streams.print("phi1, phi2, 180-sum = " + String(phi1) + ", " + String(phi2)+", " +String(180-phi1-phi2));
+        */
       else
         w_min1 := z_re*tan_min1;
         w_max1 := z_re*tan_max1;
@@ -60,11 +72,9 @@ algorithm
         first :=false;
         w_min := w_min1;
         w_max := w_max1;
-        Modelica.Utilities.Streams.print("f_max = " + String(Modelica.SIunits.Conversions.to_Hz(w_max)));
       else
         w_min := min(w_min, w_min1);
         w_max := max(w_max, w_max1);
-        Modelica.Utilities.Streams.print("f_max = " + String(Modelica.SIunits.Conversions.to_Hz(w_max)));
       end if;
     end if;
   end for;
@@ -73,7 +83,6 @@ algorithm
      useFullRange := false;
      w_min :=Modelica.SIunits.Conversions.from_Hz(0.1);
      w_max :=Modelica.SIunits.Conversions.from_Hz(1);
-     Modelica.Utilities.Streams.print("not useful: f_max = " + String(Modelica.SIunits.Conversions.to_Hz(w_max)));
   end if;
 
   annotation (Documentation(info="<html>

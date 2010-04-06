@@ -508,9 +508,10 @@ end '==';
       input Integer significantDigits=6
       "Number of significant digits that are shown";
       input String name="p" "Independent variable name used for printing";
-      input Boolean normalized = true;
+      //input Boolean normalized = true;
       output String s="";
   protected
+      Boolean normalized = false;
       Real gain=1.0;
       Integer num_order=size(zp.n1, 1) + 2*size(zp.n2, 1);
       Integer den_order=size(zp.d1, 1) + 2*size(zp.d2, 1);
@@ -1413,6 +1414,7 @@ Computes the invariant zeros of the corresponding state space representation of 
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica.Utilities.Streams.print;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
       output Real k "Steady state gain";
@@ -1938,6 +1940,7 @@ of a zeros-and-poles transfer function.
                               1/((p/w) + a) = w/(p + w*a)
   */
     w_cut2 := w_cut*w_cut;
+    filter.k  := 1.0;
     filter.n1 := w_cut*filter.n1;
     filter.d1 := w_cut*filter.d1;
     filter.n2 := [w_cut*filter.n2[:, 1],w_cut2*filter.n2[:, 2]];
@@ -1945,7 +1948,21 @@ of a zeros-and-poles transfer function.
 
     /* Add gain */
     if filterType == Types.FilterType.LowPass then
-       filter.k := gain/ZerosAndPoles.Analysis.dcGain(filter);
+       /* A low pass filter does not have numerator polynomials and all coefficients
+        of the denominator polynomial are guaranteed to be non-zero. It is then 
+        easy to compute the gain: 
+           1/(p + a)         ->   1/a*1/(p/a + 1)         -> k = 1/a
+           1/(p^2 + b*p + a) -> 1/a*1/(p^2/a + p*b/a + 1) -> k = 1/a
+     */
+       //filter.k := gain/ZerosAndPoles.Analysis.dcGain(filter);
+       k := 1.0;
+       for i in 1:n_den1 loop
+         k :=k/filter.d1[i];
+       end for;
+       for i in 1:n_den2 loop
+         k :=k/filter.d2[i, 2];
+       end for;
+       filter.k := gain/k;
     elseif filterType == Types.FilterType.HighPass then
        filter.k := gain;
     else
