@@ -508,9 +508,9 @@ end '==';
       input Integer significantDigits=6
       "Number of significant digits that are shown";
       input String name="p" "Independent variable name used for printing";
+      input Boolean normalized = true;
       output String s="";
   protected
-      Boolean normalized = true;
       Real gain=1.0;
       Integer num_order=size(zp.n1, 1) + 2*size(zp.n2, 1);
       Integer den_order=size(zp.d1, 1) + 2*size(zp.d2, 1);
@@ -540,7 +540,7 @@ end '==';
      else
         gain :=zp.k;
      end if;
-    // Modelica.Utilities.Streams.print("gain = "+String(gain));
+     // Modelica.Utilities.Streams.print("gain = "+String(gain));
 
      // construct string for gain
      if gain <> 1.0 or gain == 1.0 and num_order == 0 then
@@ -550,10 +550,18 @@ end '==';
 
      // construct string for numerator
      if sn1 <> "" then
-        s := s + "*" + sn1;
+        if s == "" then
+           s :=sn1;
+        else
+           s := s + "*" + sn1;
+        end if;
      end if;
      if sn2 <> "" then
-        s := s + "*" + sn2;
+        if s == "" then
+           s :=sn2;
+        else
+           s := s + "*" + sn2;
+        end if;
      end if;
 
      // construct string for denominator
@@ -1399,117 +1407,6 @@ Computes the invariant zeros of the corresponding state space representation of 
 "));
     end invariantZeros;
 
-    encapsulated function observabilityMatrix
-      "Calculate the observability matrix of zp-transfer-function"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-
-      input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
-      output Real om[:,:];
-
-    protected
-      StateSpace ss=StateSpace(zp);
-
-    algorithm
-      om := StateSpace.Analysis.observabilityMatrix(ss=ss);
-
-      annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  Q </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>observabilityMatrix</b>(zp, method)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Calculate the observability matrix
-<blockquote><pre>
-  <b>Q</b> = [<b>C</b>; <b>C</b>*<b>A</b>; ...; <b>C</b>*<b>A</b>^(n-1)] 
-</pre>
-</blockquote>
-of the system corresponding state space system
-<blockquote><pre>
-  der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
-      <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
-</pre>
-</blockquote>
-of a zeros-and-poles transfer function.
-
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
-   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
-
-   Real Q[2,2];
-
-<b>algorithm</b>
-  Q := Modelica_LinearSystems2.ZerosAndPoles.Analysis.observabilityMatrix(zp);
-// Q = [1, 1, -1, 0]
-</pre></blockquote>
-
-</html> "));
-    end observabilityMatrix;
-
-    encapsulated function controllabilityMatrix
-      "Calculate the controllability matrix [B, A*B, ..., A^(n-1)*B] of a zp-transfer-function"
-
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-
-      input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
-      output Real om[:,:];
-
-    protected
-      StateSpace ss=StateSpace(zp);
-
-    algorithm
-      om := StateSpace.Analysis.controllabilityMatrix(ss=ss);
-
-      annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  Q </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>controllabilityMatrix</b>(zp, method)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Calculate the controllability matrix
-<blockquote><pre>
-  <b>Q</b> = [<b>B</b>, <b>A</b>*<b>B</b>, ..., <b>A</b>^(n-1)*<b>B</b>]
-</pre>
-</blockquote>
-of the system corresponding state space system
-<blockquote><pre>
-  der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
-      <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
-</pre>
-</blockquote>
-of a zeros and poles transfer function.
-
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
-   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
-
-   Real Q[2,2];
-
-<b>algorithm</b>
-  Q := Modelica_LinearSystems2.ZerosAndPoles.Analysis.controllabilityMatrix(zp);
-// Q = [0, 1, 1, -1]
-</pre></blockquote>
-
-</html> "));
-    end controllabilityMatrix;
-
     encapsulated function dcGain
       "Return steady state gain k (for a stable system: k = value of y at infinite time for a step input)"
 
@@ -1529,15 +1426,24 @@ of a zeros and poles transfer function.
       k :=K[1, 1];
 
         annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+
+<blockquote><pre>
+          k = <b>dcGain</b>(zp);
+(k, finite) = <b>dcGain</b>(zp);
+</pre></blockquote>
+
+<h4>Description</h4>
+
 <p> 
 This function computes the steady state gain <b>k</b> of a 
 ZerosAndPoles transfer function g(s), i.e. k = g(s=0).
-For a stable state space system, y(t->t<sub>&infty</sub>) = k,
-     for a step input u.</li>
+For a stable transfer function, a step input u results
+in the output y(t->t<sub>&infin;</sub>) = k.</li>
 </ul> 
 
 <p>
-If the transfer function has zero poles, <b>k</b> is infinite.
+If the transfer function has one or more zero poles, <b>k</b> is infinite.
 In this case, the output argument <b>finite</b> = <b>false</b> and 
 <b>k</b> = Modelica.Constants.inf.
 </p>
@@ -1737,6 +1643,117 @@ The transfer function is detectable if all unstable poles are observable.
 </html> "));
     end isDetectable;
 
+    encapsulated function controllabilityMatrix
+      "Calculate the controllability matrix [B, A*B, ..., A^(n-1)*B] of a zp-transfer-function"
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+
+      input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
+      output Real om[:,:];
+
+    protected
+      StateSpace ss=StateSpace(zp);
+
+    algorithm
+      om := StateSpace.Analysis.controllabilityMatrix(ss=ss);
+
+      annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  Q </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>controllabilityMatrix</b>(zp, method)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Calculate the controllability matrix
+<blockquote><pre>
+  <b>Q</b> = [<b>B</b>, <b>A</b>*<b>B</b>, ..., <b>A</b>^(n-1)*<b>B</b>]
+</pre>
+</blockquote>
+of the system corresponding state space system
+<blockquote><pre>
+  der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
+      <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
+</pre>
+</blockquote>
+of a zeros and poles transfer function.
+
+
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
+   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
+
+   Real Q[2,2];
+
+<b>algorithm</b>
+  Q := Modelica_LinearSystems2.ZerosAndPoles.Analysis.controllabilityMatrix(zp);
+// Q = [0, 1, 1, -1]
+</pre></blockquote>
+
+</html> "));
+    end controllabilityMatrix;
+
+    encapsulated function observabilityMatrix
+      "Calculate the observability matrix of zp-transfer-function"
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+
+      input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
+      output Real om[:,:];
+
+    protected
+      StateSpace ss=StateSpace(zp);
+
+    algorithm
+      om := StateSpace.Analysis.observabilityMatrix(ss=ss);
+
+      annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  Q </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>observabilityMatrix</b>(zp, method)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Calculate the observability matrix
+<blockquote><pre>
+  <b>Q</b> = [<b>C</b>; <b>C</b>*<b>A</b>; ...; <b>C</b>*<b>A</b>^(n-1)] 
+</pre>
+</blockquote>
+of the system corresponding state space system
+<blockquote><pre>
+  der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
+      <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
+</pre>
+</blockquote>
+of a zeros-and-poles transfer function.
+
+
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
+   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
+
+   Real Q[2,2];
+
+<b>algorithm</b>
+  Q := Modelica_LinearSystems2.ZerosAndPoles.Analysis.observabilityMatrix(zp);
+// Q = [1, 1, -1, 0]
+</pre></blockquote>
+
+</html> "));
+    end observabilityMatrix;
+
   end Analysis;
 
   encapsulated package Design
@@ -1758,7 +1775,7 @@ The transfer function is detectable if all unstable poles are observable.
     input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
         "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
     input Modelica_LinearSystems2.Types.FilterType filterType=Types.FilterType.LowPass
-        "Type of filter (LowPass/HighPass)";
+        "Type of filter (LowPass/HighPass/BandPass)";
     input Integer order(min=1) = 2 "Order of filter";
     input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
         "Cut-off frequency (default is w_cut = 1 rad/s)";
@@ -1771,18 +1788,31 @@ The transfer function is detectable if all unstable poles are observable.
     input Modelica.SIunits.Frequency bandwidth = 1
         "Bandwidth of pass band (only for BandPass filter)";
 
+   /* 
+                               | size(n1,1)   | size(n2,1)       | size(d1,1)   | size(d2,1)
+    ---------------------------+--------------+------------------+--------------+-------------------------------
+    CriticalDamping - LowPass  |      0       |      0           |    order     |     0
+    CriticalDamping - HighPass |    order     |      0           |    order     |     0
+    CriticalDamping - BandPass |    order     |      0           |      0       |   order
+    ---------------------------+--------------+------------------+--------------+-------------------------------
+    LowPass                    |      0       |      0           | mod(order,2) | integer(order/2)
+    HighPass                   | mod(order,2) | integer(order/2) | mod(order,2) | integer(order/2)
+    BandPass                   | mod(order,2) | integer(order/2) |      0       | mod(order,2)+2*integer(order/2)                          
+ */
     output ZerosAndPoles filter(
-      redeclare Real n1[if filterType == Types.FilterType.LowPass then 0 else (
-        if analogFilter == Types.AnalogFilter.CriticalDamping then order else
-        mod(order, 2))],
-      redeclare Real n2[if filterType == Types.FilterType.LowPass then 0 else (
-        if analogFilter == Types.AnalogFilter.CriticalDamping then 0 else
-        integer(order/2)),2],
-      redeclare Real d1[if analogFilter == Types.AnalogFilter.CriticalDamping then
-              order else mod(order, 2)],
+      redeclare Real n1[if filterType == Types.FilterType.LowPass then 0 else
+                        if analogFilter == Types.AnalogFilter.CriticalDamping then order else
+                           mod(order, 2)],
+      redeclare Real n2[if filterType == Types.FilterType.LowPass or
+                           analogFilter == Types.AnalogFilter.CriticalDamping then 0 else
+                           integer(order/2),2],
+      redeclare Real d1[if filterType == Types.FilterType.BandPass then 0 else
+                        if analogFilter == Types.AnalogFilter.CriticalDamping then order else
+                           mod(order, 2)],
       redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then
-              0 else integer(order/2),2]) "Filter transfer function";
-
+                       (if filterType == Types.FilterType.BandPass then order else 0) else
+                        if filterType == Types.FilterType.BandPass then mod(order,2)+2*integer(order/2) else
+                           integer(order/2),2]) "Filter transfer function";
     protected
     Integer n_num1=size(filter.n1, 1);
     Integer n_num2=size(filter.n2, 1);
@@ -1807,121 +1837,39 @@ The transfer function is detectable if all unstable poles are observable.
     Real fac "arsinh(epsilon)";
     Real A2 "poleReal^2 + poleImag^2";
     Real A "Amplitude at w_cut";
-    Real num1[n_num1]
-        "[p] coefficients of numerator first order polynomials (a*p + 1)";
-    Real num2[n_num2,2]
-        "[p^2, p] coefficients of numerator second order polynomials (b*p^2 + a*p + 1I)";
-    Real den1[n_den1]
-        "[p] coefficients of denominator first order polynomials (a*p + 1)";
-    Real den2[n_den2,2]
-        "[p^2, p] coefficients of denominator second order polynomials (b*p^2 + a*p + 1I)";
+
     Real aux;
     Real k;
+    ZerosAndPoles baseFilter;
   algorithm
-    // Set properties that are common for all filters
-    filter.k := gain;
-
     /* Compute filter coefficients of prototype low pass filter. If another filter
      characteristics is desired (e.g. high pass filter), it is derived
      from the low pass filter coefficients below
   */
-    if analogFilter == Types.AnalogFilter.CriticalDamping then
-      if normalized then
-        alpha := sqrt(2^(1/order) - 1);
-  //alpha := sqrt(10^(3/10/order)-1)
-      else
-        alpha := 1;
-      end if;
-      for i in 1:n_den1 loop
-        den1[i] := alpha;
-      end for;
-
-    elseif analogFilter == Types.AnalogFilter.Bessel then
-      (den1,den2,alpha) := Internal.BesselCoefficients(order);
-      if not normalized then
-        alpha2 := alpha*alpha;
-        for i in 1:n_den2 loop
-          den2[i, 1] := den2[i, 1]*alpha2;
-          den2[i, 2] := den2[i, 2]*alpha;
-        end for;
-        if not evenOrder then
-          den1[1] := den1[1]*alpha;
-        end if;
-      end if;
-
-    elseif analogFilter == Types.AnalogFilter.Butterworth then
-       // Original filter is already normalized
-      for i in 1:n_den2 loop
-        den2[i, 1] := 1.0;
-        den2[i, 2] := -2*cos(pi*(0.5 + (i - 0.5)/order));
-      end for;
-      if not evenOrder then
-        den1[1] := 1.0;
-      end if;
-
-    elseif analogFilter == Types.AnalogFilter.Chebyshev then
-      epsilon := sqrt(10^(A_ripple/10) - 1);
-      fac := asinh(1/epsilon)/order;
-
-      if evenOrder then
-         for i in 1:n_den2 loop
-            den2[i,1] :=1/(cosh(fac)^2 - cos((2*i - 1)*pi/(2*order))^2);
-            den2[i,2] :=2*den2[i, 1]*sinh(fac)*cos((2*i - 1)*pi/(2*order));
-         end for;
-      else
-         den1[1] := 1/sinh(fac);
-         for i in 1:n_den2 loop
-            den2[i,1] :=1/(cosh(fac)^2 - cos(i*pi/order)^2);
-            den2[i,2] :=2*den2[i, 1]*sinh(fac)*cos(i*pi/order);
-         end for;
-      end if;
-
-       /* Transformation of filter transfer function with "new(p) = alpha*p"
-        in order that the filter transfer function has an amplitude of
-        3 db at the cutoff frequency
-     */
-      if normalized then
-        alpha := Internal.normalizationFactor(den1, den2);
-        alpha2 := alpha*alpha;
-        for i in 1:n_den2 loop
-          den2[i, 1] := den2[i, 1]*alpha2;
-          den2[i, 2] := den2[i, 2]*alpha;
-        end for;
-        if not evenOrder then
-          den1[1] := den1[1]*alpha;
-        end if;
-      end if;
-
-    else
-      Streams.error("analogFilter (= " + String(analogFilter) +
-        ") is not supported");
-    end if;
-
-    // Determine normalized denominator polynomials with highest power of p equal to one
-    filter.n1 := zeros(n_num1);
-    filter.n2 := zeros(n_num2, 2);
-    (filter.d1,filter.d2,k) := Internal.filterToNormalized(den1, den2);
-    filter.k := filter.k/k;
+    baseFilter :=ZerosAndPoles.Internal.baseFilter(analogFilter,order,A_ripple,normalized);
 
     // Compute desired filter characteristics from low pass filter coefficients
-    if filterType == Types.FilterType.HighPass then
+    if filterType == Types.FilterType.LowPass then
+       filter :=baseFilter;
+
+    elseif filterType == Types.FilterType.HighPass then
        /* The high pass filter is derived from the low pass filter by
         the transformation new(p) = 1/p
-        1/(p^2 + a*p + b) -> 1/((1/p)^2 + a*(1/p) + b) = (1/b)*p^2 / (p^2 + (a/b)*p + 1/b)
         1/(p + a)         -> 1/((1/p) + a) = (1/a)*p / (p + (1/a))
+        1/(p^2 + a*p + b) -> 1/((1/p)^2 + a*(1/p) + b) = (1/b)*p^2 / (p^2 + (a/b)*p + 1/b)
      */
       assert(n_num1 == n_den1 and n_num2 == n_den2,
         "Internal error 1, should not occur");
       filter.n1 := zeros(n_num1);
       filter.n2 := zeros(n_num2, 2);
-      for i in 1:n_num1 loop
-        filter.k := filter.k/filter.d1[i];
-        filter.d1[i] := 1/filter.d1[i];
+
+      for i in 1:n_den1 loop
+        filter.d1[i] := 1/baseFilter.d1[i];
       end for;
-      for i in 1:n_num2 loop
-        filter.k := filter.k/filter.d2[i, 2];
-        filter.d2[i, 1] := filter.d2[i, 1]/filter.d2[i, 2];
-        filter.d2[i, 2] := 1/filter.d2[i, 2];
+
+      for i in 1:n_den2 loop
+        filter.d2[i, 1] := baseFilter.d2[i, 1]/baseFilter.d2[i, 2];
+        filter.d2[i, 2] := 1/baseFilter.d2[i, 2];
       end for;
 
     elseif filterType == Types.FilterType.BandPass then
@@ -1967,29 +1915,42 @@ The transfer function is detectable if all unstable poles are observable.
         "Internal error 1, should not occur");
       filter.n1 := zeros(n_num1);
       filter.n2 := zeros(n_num2, 2);
-      for i in 1:n_num1 loop
-        filter.k := filter.k/filter.d1[i];
-        filter.d1[i] := 1/filter.d1[i];
+
+      for i in 1:n_den1 loop
+        filter.d1[i] := 1/baseFilter.d1[i];
       end for;
-      for i in 1:n_num2 loop
-        filter.k := filter.k/filter.d2[i, 2];
-        filter.d2[i, 1] := filter.d2[i, 1]/filter.d2[i, 2];
-        filter.d2[i, 2] := 1/filter.d2[i, 2];
+
+      for i in 1:n_den2 loop
+        filter.d2[i, 1] := baseFilter.d2[i, 1]/baseFilter.d2[i, 2];
+        filter.d2[i, 2] := 1/baseFilter.d2[i, 2];
       end for;
+
+    else
+      Streams.error("analogFilter (= " + String(analogFilter) + ") is not supported");
     end if;
 
-    /* Change filter coefficients according to transformation new(p) = p/w_cut
+    /* Transform filter to desired cut-off frequency
+  
+     Change filter coefficients according to transformation new(p) = p/w_cut
      Numerator  :     (p/w)^2 + a*(p/w) + b = (1/w^2)*(p^2 + (a*w)*p + b*w^2)
                                   (p/w) + a = (1/w)*(p + w*a)
      Denominator: 1/((p/w)^2 + a*(p/w) + b) = w^2/(p^2 + (a*w)*p + w^2/b)
                               1/((p/w) + a) = w/(p + w*a)
   */
     w_cut2 := w_cut*w_cut;
-    filter.k := filter.k*w_cut^(n_den1 + 2*n_den2 - n_num1 - 2*n_num2);
     filter.n1 := w_cut*filter.n1;
     filter.d1 := w_cut*filter.d1;
     filter.n2 := [w_cut*filter.n2[:, 1],w_cut2*filter.n2[:, 2]];
     filter.d2 := [w_cut*filter.d2[:, 1],w_cut2*filter.d2[:, 2]];
+
+    /* Add gain */
+    if filterType == Types.FilterType.LowPass then
+       filter.k := gain/ZerosAndPoles.Analysis.dcGain(filter);
+    elseif filterType == Types.FilterType.HighPass then
+       filter.k := gain;
+    else
+       Streams.error("analogFilter (= " + String(analogFilter) + ") is not supported");
+    end if;
 
     annotation (Documentation(info="<html>
 
@@ -2082,200 +2043,6 @@ is set.
 </html> "));
   end filter;
 
-  encapsulated function baseFilter
-      "Generate a ZerosAndPoles transfer function from a base filter description (= low pass filter with w_cut = 1 rad/s)"
-
-    import Modelica;
-    import Modelica.Math.*;
-    import Modelica.Utilities.Streams;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Types;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.ZerosAndPoles.Internal;
-
-    input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
-        "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-    input Integer order(min=1) = 2 "Order of filter";
-    input Real A_ripple(unit="dB") = 0.5
-        "Pass band ripple (only for Chebyshev filter)";
-    input Boolean normalized=true
-        "= true, if amplitude at f_cut = -3db, otherwise unmodified filter";
-
-    output ZerosAndPoles filter(
-      redeclare Real n1[0],
-      redeclare Real n2[0,2],
-      redeclare Real d1[if analogFilter == Types.AnalogFilter.CriticalDamping then
-              order else mod(order, 2)],
-      redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then
-              0 else integer(order/2),2]) "Filter transfer function";
-    protected
-    Integer n_den1=size(filter.d1, 1);
-    Integer n_den2=size(filter.d2, 1);
-    Integer n_den=n_den1 + 2*n_den2;
-    Real pi=Modelica.Constants.pi;
-    Boolean evenOrder=mod(order, 2) == 0
-        "= true, if even filter order (otherwise uneven)";
-    Real alpha=1.0 "Frequency correction factor";
-    Real alpha2 "= alpha*alpha";
-    Real epsilon "Ripple size";
-    Real fac "arsinh(epsilon)";
-    Real den1[n_den1]
-        "[p] coefficients of denominator first order polynomials (a*p + 1)";
-    Real den2[n_den2,2]
-        "[p^2, p] coefficients of denominator second order polynomials (b*p^2 + a*p + 1)";
-    Real aux;
-    Real k;
-  algorithm
-    /* Compute filter coefficients of prototype low pass filter. */
-    if analogFilter == Types.AnalogFilter.CriticalDamping then
-      if normalized then
-        alpha := sqrt(2^(1/order) - 1);
-  //alpha := sqrt(10^(3/10/order)-1)
-      else
-        alpha := 1;
-      end if;
-      for i in 1:n_den1 loop
-        den1[i] := alpha;
-      end for;
-
-    elseif analogFilter == Types.AnalogFilter.Bessel then
-      (den1,den2,alpha) := Internal.BesselCoefficients(order);
-      if not normalized then
-        alpha2 := alpha*alpha;
-        for i in 1:n_den2 loop
-          den2[i, 1] := den2[i, 1]*alpha2;
-          den2[i, 2] := den2[i, 2]*alpha;
-        end for;
-        if not evenOrder then
-          den1[1] := den1[1]*alpha;
-        end if;
-      end if;
-
-    elseif analogFilter == Types.AnalogFilter.Butterworth then
-       // Original filter is already normalized
-      for i in 1:n_den2 loop
-        den2[i, 1] := 1.0;
-        den2[i, 2] := -2*cos(pi*(0.5 + (i - 0.5)/order));
-      end for;
-      if not evenOrder then
-        den1[1] := 1.0;
-      end if;
-
-    elseif analogFilter == Types.AnalogFilter.Chebyshev then
-      epsilon := sqrt(10^(A_ripple/10) - 1);
-      fac := asinh(1/epsilon)/order;
-
-      if evenOrder then
-         for i in 1:n_den2 loop
-            den2[i,1] :=1/(cosh(fac)^2 - cos((2*i - 1)*pi/(2*order))^2);
-            den2[i,2] :=2*den2[i, 1]*sinh(fac)*cos((2*i - 1)*pi/(2*order));
-         end for;
-      else
-         den1[1] := 1/sinh(fac);
-         for i in 1:n_den2 loop
-            den2[i,1] :=1/(cosh(fac)^2 - cos(i*pi/order)^2);
-            den2[i,2] :=2*den2[i, 1]*sinh(fac)*cos(i*pi/order);
-         end for;
-      end if;
-
-       /* Transformation of filter transfer function with "new(p) = alpha*p"
-        in order that the filter transfer function has an amplitude of
-        3 db at the cutoff frequency
-     */
-      if normalized then
-        alpha := Internal.normalizationFactor(den1, den2);
-        alpha2 := alpha*alpha;
-        for i in 1:n_den2 loop
-          den2[i, 1] := den2[i, 1]*alpha2;
-          den2[i, 2] := den2[i, 2]*alpha;
-        end for;
-        if not evenOrder then
-          den1[1] := den1[1]*alpha;
-        end if;
-      end if;
-
-    else
-      Streams.error("analogFilter (= " + String(analogFilter) +
-        ") is not supported");
-    end if;
-
-    // Determine normalized denominator polynomials with highest power of p equal to one
-    (filter.d1,filter.d2,k) := Internal.filterToNormalized(den1, den2);
-    filter.k := 1.0/k;
-
-    annotation (Documentation(info="<html>
-<h4>Syntax</h4>
-<blockquote><pre>
-zp = <b>baseFilter</b>(analogFilter, order, A_ripple, normalized);
-</pre></blockquote>
-
-<h4>Description</h4>
-
-<p>
-This function constructs a ZerosAndPoles transfer function
-description of low pass filters with a cut-off angular frequency
-of one rad/s and a gain of one. Filters returned by this function
-are the starting point to construct other filters by transformation
-of the filter transfer function:
-</p>
-
-<pre>
-   zp(p) = 1 / ( product( a[i]*p + 1 ) * product( b[i]*p^2 + a[i]*p + 1 ) )
-</pre>
-
-<p>
-using the following rules:
-</p>
-
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><td><i>Desired filter</i></td>
-    <td><i>Transformation</i></td>
-    </tr>
-
-<tr><td> High pass filter with w_cut = 1 rad/s </td>
-    <td> replace \"p\" by \"1/p\" </td>
-    </tr>
-
-<tr><td> Band pass filter with w_cut = 1 rad/s </td>
-    <td> replace \"p\" by \"(p + 1/p)/w_band\"<br>
-         (w_band: bandwidth of band in rad/s)</td>
-    </tr>
-
-<tr><td> Stop pass filter with w_cut = 1 rad/s </td>
-    <td> replace \"p\" by \"w_band/(p + 1/p)\"<br>
-         (w_band: bandwidth of band in rad/s)</td>
-    </tr>
-
-<tr><td> Filter with cut-off angular frequency w_cut </td>
-    <td> replace \"p\" by \"p/w_cut\" </td>
-    </tr>
-</table>
-
-<h4>Example</h4>
-
-<blockquote><pre>
- // Generate a Butterworth high pass base filter of order 3
- <b>import</b> ZP = Modelica_LinearSystems2.ZerosAndPoles;
- <b>import</b> Modelica_LinearSystems2.Types;
-
- ZP zp_filter;
-<b>algorithm</b>
- zp_filter = ZP.Design.baseFilter(Types.AnalogFilter.Butterworth, order = 3);
-
- // zp_filter = 1 /  ( (p + 1)*(p^2 + p + 1) )
-</pre></blockquote>
-
-
-<h4>References</h4>
-
-<dl>
-<dt>Tietze U., and Schenk C. (2002):</dt>
-<dd> <b>Halbleiter-Schaltungstechnik</b>.
-     Springer Verlag, 12. Auflage, pp. 815-852.</dd>
-</dl>
-
-</html> "));
-  end baseFilter;
   end Design;
 
   encapsulated package Plot
@@ -4298,6 +4065,201 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
   end ZerosAndPoles;
 
+  encapsulated function baseFilter
+      "Generate a ZerosAndPoles transfer function from a base filter description (= low pass filter with w_cut = 1 rad/s)"
+
+      import Modelica;
+      import Modelica.Math.*;
+      import Modelica.Utilities.Streams;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Types;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+
+    input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
+        "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+    input Integer order(min=1) = 2 "Order of filter";
+    input Real A_ripple(unit="dB") = 0.5
+        "Pass band ripple (only for Chebyshev filter)";
+    input Boolean normalized=true
+        "= true, if amplitude at f_cut = -3db, otherwise unmodified filter";
+
+    output ZerosAndPoles filter(
+      redeclare Real n1[0],
+      redeclare Real n2[0,2],
+      redeclare Real d1[if analogFilter == Types.AnalogFilter.CriticalDamping then
+              order else mod(order, 2)],
+      redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then
+              0 else integer(order/2),2]) "Filter transfer function";
+    protected
+    Integer n_den1=size(filter.d1, 1);
+    Integer n_den2=size(filter.d2, 1);
+    Integer n_den=n_den1 + 2*n_den2;
+    Real pi=Modelica.Constants.pi;
+    Boolean evenOrder=mod(order, 2) == 0
+        "= true, if even filter order (otherwise uneven)";
+    Real alpha=1.0 "Frequency correction factor";
+    Real alpha2 "= alpha*alpha";
+    Real epsilon "Ripple size";
+    Real fac "arsinh(epsilon)";
+    Real den1[n_den1]
+        "[p] coefficients of denominator first order polynomials (a*p + 1)";
+    Real den2[n_den2,2]
+        "[p^2, p] coefficients of denominator second order polynomials (b*p^2 + a*p + 1)";
+    Real aux;
+    Real k;
+  algorithm
+    /* Compute filter coefficients of prototype low pass filter. */
+    if analogFilter == Types.AnalogFilter.CriticalDamping then
+      if normalized then
+        alpha := sqrt(2^(1/order) - 1);
+        // alpha := sqrt(10^(3/10/order)-1);
+      else
+        alpha := 1;
+      end if;
+      for i in 1:n_den1 loop
+        den1[i] := alpha;
+      end for;
+
+    elseif analogFilter == Types.AnalogFilter.Bessel then
+      (den1,den2,alpha) := Internal.BesselCoefficients(order);
+      if not normalized then
+        alpha2 := alpha*alpha;
+        for i in 1:n_den2 loop
+          den2[i, 1] := den2[i, 1]*alpha2;
+          den2[i, 2] := den2[i, 2]*alpha;
+        end for;
+        if not evenOrder then
+          den1[1] := den1[1]*alpha;
+        end if;
+      end if;
+
+    elseif analogFilter == Types.AnalogFilter.Butterworth then
+       // Original filter is already normalized
+      for i in 1:n_den2 loop
+        den2[i, 1] := 1.0;
+        den2[i, 2] := -2*cos(pi*(0.5 + (i - 0.5)/order));
+      end for;
+      if not evenOrder then
+        den1[1] := 1.0;
+      end if;
+
+    elseif analogFilter == Types.AnalogFilter.Chebyshev then
+      epsilon := sqrt(10^(A_ripple/10) - 1);
+      fac := asinh(1/epsilon)/order;
+
+      if evenOrder then
+         for i in 1:n_den2 loop
+            den2[i,1] :=1/(cosh(fac)^2 - cos((2*i - 1)*pi/(2*order))^2);
+            den2[i,2] :=2*den2[i, 1]*sinh(fac)*cos((2*i - 1)*pi/(2*order));
+         end for;
+      else
+         den1[1] := 1/sinh(fac);
+         for i in 1:n_den2 loop
+            den2[i,1] :=1/(cosh(fac)^2 - cos(i*pi/order)^2);
+            den2[i,2] :=2*den2[i, 1]*sinh(fac)*cos(i*pi/order);
+         end for;
+      end if;
+
+       /* Transformation of filter transfer function with "new(p) = alpha*p"
+        in order that the filter transfer function has an amplitude of
+        3 db at the cutoff frequency
+     */
+      if normalized then
+        alpha := Internal.normalizationFactor(den1, den2);
+        alpha2 := alpha*alpha;
+        for i in 1:n_den2 loop
+          den2[i, 1] := den2[i, 1]*alpha2;
+          den2[i, 2] := den2[i, 2]*alpha;
+        end for;
+        if not evenOrder then
+          den1[1] := den1[1]*alpha;
+        end if;
+      end if;
+
+    else
+      Streams.error("analogFilter (= " + String(analogFilter) +
+        ") is not supported");
+    end if;
+
+    // Determine normalized denominator polynomials with highest power of p equal to one
+    (filter.d1,filter.d2,k) := Internal.filterToNormalized(den1, den2);
+    filter.k := 1.0/k;
+
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+zp = <b>baseFilter</b>(analogFilter, order, A_ripple, normalized);
+</pre></blockquote>
+
+<h4>Description</h4>
+
+<p>
+This function constructs a ZerosAndPoles transfer function
+description of low pass filters with a cut-off angular frequency
+of one rad/s and a gain of one. Filters returned by this function
+are the starting point to construct other filters by transformation
+of the filter transfer function:
+</p>
+
+<pre>
+   zp(p) = 1 / ( product( p + a[i] ) * product(p^2 + b[i]*p + a[i]) )
+</pre>
+
+<p>
+using the following rules:
+</p>
+
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><td><i>Desired filter</i></td>
+    <td><i>Transformation</i></td>
+    </tr>
+
+<tr><td> High pass filter with w_cut = 1 rad/s </td>
+    <td> replace \"p\" by \"1/p\" </td>
+    </tr>
+
+<tr><td> Band pass filter with w_cut = 1 rad/s </td>
+    <td> replace \"p\" by \"(p + 1/p)/w_band\"<br>
+         (w_band: bandwidth of band in rad/s)</td>
+    </tr>
+
+<tr><td> Stop pass filter with w_cut = 1 rad/s </td>
+    <td> replace \"p\" by \"w_band/(p + 1/p)\"<br>
+         (w_band: bandwidth of band in rad/s)</td>
+    </tr>
+
+<tr><td> Filter with cut-off angular frequency w_cut </td>
+    <td> replace \"p\" by \"p/w_cut\" </td>
+    </tr>
+</table>
+
+<h4>Example</h4>
+
+<blockquote><pre>
+ // Generate a Butterworth high pass base filter of order 3
+ <b>import</b> ZP = Modelica_LinearSystems2.ZerosAndPoles;
+ <b>import</b> Modelica_LinearSystems2.Types;
+
+ ZP zp_filter;
+<b>algorithm</b>
+ zp_filter = ZP.Internal.baseFilter(Types.AnalogFilter.Butterworth, order = 3);
+
+ // zp_filter = 1 /  ( (p + 1)*(p^2 + p + 1) )
+</pre></blockquote>
+
+
+<h4>References</h4>
+
+<dl>
+<dt>Tietze U., and Schenk C. (2002):</dt>
+<dd> <b>Halbleiter-Schaltungstechnik</b>.
+     Springer Verlag, 12. Auflage, pp. 815-852.</dd>
+</dl>
+
+</html> "));
+  end baseFilter;
+
   encapsulated function filter
       "Generate the data record of a ZerosAndPoles transfer function from a filter description"
 
@@ -4945,7 +4907,9 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
       end for;
 
       // Transform coefficients to string
-      if j > 0 then
+      if j == 1 then
+         s := name;
+      elseif j > 1 then
          s := name + "^" + String(j);
       end if;
 

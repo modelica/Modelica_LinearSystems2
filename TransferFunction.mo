@@ -1068,116 +1068,52 @@ Computes the invariant zeros of the corresponding state space representation of 
 "));
     end invariantZeros;
 
-    encapsulated function observabilityMatrix
-      "Calculate the observability matrix of a transfer function"
-      import Modelica;
+    encapsulated function dcGain
+      "Return steady state gain k (for a stable system: k = value of y at infinite time for a step input)"
+
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.ZerosAndPoles;
 
-      input TransferFunction tf "transfer function of a system";
-      output Real om[:,:];
-
+      input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
+      output Real k "Steady state gain";
+      output Boolean finite = true
+        "= true, if k is finite; = false, if k is infinite (k=Modelica.Constants.inf returned)";
     protected
-      StateSpace ss=StateSpace(tf);
-
+      StateSpace ss=StateSpace(zp);
+      Real K[1,1];
     algorithm
-      om := StateSpace.Analysis.observabilityMatrix(ss=ss);
+      (K, finite) := StateSpace.Analysis.dcGain(ss=ss);
+      k :=K[1, 1];
 
-      annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  Q </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>observabilityMatrix</b>(tf, method)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Calculate the observability matrix
+        annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+
 <blockquote><pre>
-  <b>Q</b> = [<b>C</b>; <b>C</b>*<b>A</b>; ...; <b>C</b>*<b>A</b>^(n-1)] 
-</pre>
-</blockquote>
-of the system corresponding state space system
-<blockquote><pre>
-  der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
-      <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
-</pre>
-</blockquote>
-of a transfer function.
-
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
-
-   Real Q[2,2];
-
-<b>algorithm</b>
-  Q := Modelica_LinearSystems2.TransferFunction.Analysis.observabilityMatrix(tf);
-// Q = [1, 1, -1, 0]
+          k = <b>dcGain</b>(zp);
+(k, finite) = <b>dcGain</b>(zp);
 </pre></blockquote>
 
-</html> "));
-    end observabilityMatrix;
+<h4>Description</h4>
 
-    encapsulated function controllabilityMatrix
-      "Calculate the controllability matrix [B, A*B, ..., A^(n-1)*B] of a transfer function"
+<p> 
+This function computes the steady state gain <b>k</b> of a 
+ZerosAndPoles transfer function g(s), i.e. k = g(s=0).
+For a stable transfer function, a step input u results
+in the output y(t->t<sub>&infin;</sub>) = k.</li>
+</ul> 
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.TransferFunction;
-
-      input TransferFunction tf "transfer function of a system";
-      output Real om[:,:];
-
-    protected
-      StateSpace ss=StateSpace(tf);
-
-    algorithm
-      om := StateSpace.Analysis.controllabilityMatrix(ss=ss);
-
-      annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  Q </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>controllabilityMatrix</b>(tf, method)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
 <p>
-Calculate the controllability matrix
-<blockquote><pre>
-  <b>Q</b> = [<b>B</b>, <b>A</b>*<b>B</b>, ..., <b>A</b>^(n-1)*<b>B</b>]
-</pre>
-</blockquote>
-of the system corresponding state space system
-<blockquote><pre>
-  der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
-      <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
-</pre>
-</blockquote>
-of a transfer function.
-
-
-
+If the transfer function has one or more zero poles, <b>k</b> is infinite.
+In this case, the output argument <b>finite</b> = <b>false</b> and 
+<b>k</b> = Modelica.Constants.inf.
 </p>
+</html>
 
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
 
-   Real Q[2,2];
+"));
+    end dcGain;
 
-<b>algorithm</b>
-  Q := Modelica_LinearSystems2.TransferFunction.Analysis.controllabilityMatrix(tf);
-// Q = [0, 1, 1, -1]
-</pre></blockquote>
-
-</html> "));
-    end controllabilityMatrix;
 
     encapsulated function isObservable
       "Check oberservability of a transfer function"
@@ -1368,6 +1304,116 @@ The transfer function is detectable if all unstable poles are observable.
 </html> "));
     end isDetectable;
 
+    encapsulated function controllabilityMatrix
+      "Calculate the controllability matrix [B, A*B, ..., A^(n-1)*B] of a transfer function"
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.TransferFunction;
+
+      input TransferFunction tf "transfer function of a system";
+      output Real om[:,:];
+
+    protected
+      StateSpace ss=StateSpace(tf);
+
+    algorithm
+      om := StateSpace.Analysis.controllabilityMatrix(ss=ss);
+
+      annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  Q </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>controllabilityMatrix</b>(tf, method)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Calculate the controllability matrix
+<blockquote><pre>
+  <b>Q</b> = [<b>B</b>, <b>A</b>*<b>B</b>, ..., <b>A</b>^(n-1)*<b>B</b>]
+</pre>
+</blockquote>
+of the system corresponding state space system
+<blockquote><pre>
+  der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
+      <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
+</pre>
+</blockquote>
+of a transfer function.
+
+
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+   Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
+
+   Real Q[2,2];
+
+<b>algorithm</b>
+  Q := Modelica_LinearSystems2.TransferFunction.Analysis.controllabilityMatrix(tf);
+// Q = [0, 1, 1, -1]
+</pre></blockquote>
+
+</html> "));
+    end controllabilityMatrix;
+
+    encapsulated function observabilityMatrix
+      "Calculate the observability matrix of a transfer function"
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.TransferFunction;
+
+      input TransferFunction tf "transfer function of a system";
+      output Real om[:,:];
+
+    protected
+      StateSpace ss=StateSpace(tf);
+
+    algorithm
+      om := StateSpace.Analysis.observabilityMatrix(ss=ss);
+
+      annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  Q </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>observabilityMatrix</b>(tf, method)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Calculate the observability matrix
+<blockquote><pre>
+  <b>Q</b> = [<b>C</b>; <b>C</b>*<b>A</b>; ...; <b>C</b>*<b>A</b>^(n-1)] 
+</pre>
+</blockquote>
+of the system corresponding state space system
+<blockquote><pre>
+  der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
+      <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
+</pre>
+</blockquote>
+of a transfer function.
+
+
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+   Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
+
+   Real Q[2,2];
+
+<b>algorithm</b>
+  Q := Modelica_LinearSystems2.TransferFunction.Analysis.observabilityMatrix(tf);
+// Q = [1, 1, -1, 0]
+</pre></blockquote>
+
+</html> "));
+    end observabilityMatrix;
   end Analysis;
 
   encapsulated package Design
@@ -1551,7 +1597,7 @@ and results in
       input Modelica.SIunits.Frequency f_max(min=0) = 10
         "Maximum frequency value, if autoRange = false"                                                  annotation(Dialog(enable=not autoRange));
 
-      input Boolean magnitude=true "= true, to plot the magnitude of tf" 
+      input Boolean magnitude=true "= true, to plot the magnitude of tf"
                                                                         annotation(choices(__Dymola_checkBox=true));
       input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
 

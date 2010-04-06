@@ -9,13 +9,14 @@ function frequencyRangeZeros
   input Complex z[:] "Vector of zeros";
   input SI.Angle phi_min(min=10*Modelica.Constants.eps)=
     Modelica.SIunits.Conversions.from_deg(5) "Minimum phase angle";
-  input Real real_min(min=0) = 1.e-4 "[r| < real_min are treated as |real_min|";
+  input Real real_min(min=0) = 1.e-4 "|r| < real_min are treated as |real_min|";
   output Modelica.SIunits.AngularVelocity w_min "Minimum frequency";
   output Modelica.SIunits.AngularVelocity w_max "Maximum frequency";
-
+  output Boolean useFullRange = true;
 protected
   Integer nz=size(z, 1);
-  Real tan_min;
+  Real tan_min1;
+  Real tan_min2;
   Real tan_max1;
   Real tan_max2;
   Real z_re;
@@ -24,6 +25,7 @@ protected
   Real z_abs2;
   Real k1;
   Real k2;
+  Boolean first = true;
 algorithm
   /* - Real zero:
        tan(phi_desired) = w/re -> w = re*tan(phi_desired)
@@ -36,32 +38,44 @@ algorithm
           w = sqrt( re^2/tan(phi_desired)^2 + (re^2 + im^2) ) - re/tan(phi_desired)
   */
   assert(nz > 0, "Vector z of zeros has dimension 0, This is not allowed");
-  tan_min := Math.tan(phi_min);
+  tan_min1 := Math.tan(phi_min);
+  tan_min2 := Math.tan(2*phi_min);
   tan_max1 := Math.tan(Modelica.Constants.pi/2 - phi_min);
-  tan_max2 := Math.tan(Modelica.Constants.pi - phi_min);
+  tan_max2 := Math.tan(Modelica.Constants.pi - 2*phi_min);
   for i in 1:size(z, 1) loop
-    if z[i].im >= 0.0 then
+    if z[i].im >= 0.0 and abs(z[i].re) >= real_min then
       z_re := max(abs(z[i].re), real_min);
       if z[i].im > 0.0 then
         z_abs2 := z_re^2 + z[i].im^2;
-        k1 := z_re/tan_min;
+        k1 := z_re/tan_min2;
         w_min1 := sqrt(k1^2 + z_abs2) - k1;
         k2 := z_re/tan_max2;
         w_max1 := sqrt(k2^2 + z_abs2) - k2;
       else
-        w_min1 := z_re*tan_min;
+        w_min1 := z_re*tan_min1;
         w_max1 := z_re*tan_max1;
       end if;
 
-      if i == 1 then
+      if first then
+        first :=false;
         w_min := w_min1;
         w_max := w_max1;
+        Modelica.Utilities.Streams.print("f_max = " + String(Modelica.SIunits.Conversions.to_Hz(w_max)));
       else
         w_min := min(w_min, w_min1);
         w_max := max(w_max, w_max1);
+        Modelica.Utilities.Streams.print("f_max = " + String(Modelica.SIunits.Conversions.to_Hz(w_max)));
       end if;
     end if;
   end for;
+
+  if first then
+     useFullRange := false;
+     w_min :=Modelica.SIunits.Conversions.from_Hz(0.1);
+     w_max :=Modelica.SIunits.Conversions.from_Hz(1);
+     Modelica.Utilities.Streams.print("not useful: f_max = " + String(Modelica.SIunits.Conversions.to_Hz(w_max)));
+  end if;
+
   annotation (Documentation(info="<html>
 <p>
 This function estimates a useful frequency range for the

@@ -3390,7 +3390,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
 
     output Real K[size(ss.C,1), size(ss.B,2)]
         "DC gain matrix K (= G(s=0) = D - C*inv(A)*B)";
-    output Boolean finite = true
+    output Boolean finite
         "= true, if K is finite; = false, if K is infinite (K=fill(Modelica.Constants.inf,..) returned)";
 
     protected
@@ -3400,23 +3400,37 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
     Real X[nx,nu];
     Integer rank;
   algorithm
+    finite :=true;
     if nu == 0 or ny == 0 then
       K := fill(0.0, ny, nu);
     else
       (X, rank) := Modelica_LinearSystems2.Math.Matrices.leastSquares2(ss.A, ss.B);
-      if rank == nx then
-         // Unique solution X computed
+      // Determine whether A*X-B=0 is not fulfilled (since no unique solution)
+      if rank < nx then
+         if Modelica.Math.Matrices.norm(ss.A*X-ss.B, p=Modelica.Constants.inf)
+            >= 1000*Modelica.Constants.eps then
+            finite :=false;
+         end if;
+      end if;
+
+      if finite then
+         // A*X - B = 0:
          K :=ss.D - ss.C*X;
       else
-         // No unique solution exists
-         K :=fill(
-          Modelica.Constants.inf,
-          ny,
-          nu);
-         finite :=false;
+         // The least squares solution does not fulfill A*X - B = 0
+         K :=fill(Modelica.Constants.inf, ny, nu);
       end if;
     end if;
     annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+
+<blockquote><pre>
+          K = <b>dcGain</b>(ss);
+(K, finite) = <b>dcGain</b>(ss);
+</pre></blockquote>
+
+<h4>Description</h4>
+
 <p> 
 This function computes the steady state gain <b>K</b> of a state space system.
 <b>K</b> is defined in the following way:
@@ -3454,15 +3468,19 @@ Interpretations of matrix <b>K</b>:
 
 <ul>
 <li> <b>K</b> is the value of the transfer function G(s) at s=0</li>
-<li> For a stable state space system, y[i](t->t<sub>&infty</sub>) = K[i,j],
-     for a step input u[j].</li>
+<li> For a stable state space system, a step input u[j] results in
+     the output y[i](t->t<sub>&infin;</sub>) = K[i,j].</li>
 </ul> 
 
 <p>
-If <b>A</b> is singular (e.g. due to a zero eigenvalue), then  its
-inverse does not exist, and <b>K</b> cannot be computed. In this case,
-output argument <b>finite</b> = <b>false</b> and all elements of
-<b>K</b> are set to Modelica.Constants.inf.
+If <b>A</b> is singular (e.g. due to a zero eigenvalue), then a unique inverse
+of <b>A</b> does not exist. If there are non-unique solutions of the 
+equation \"<b>A</b>*<b>X</b>=<b>B</b>\", the one with the smallest norm
+in <b>X</b> is used to compute <b>K</b>. If no solution of this equation exists,
+<b>K</b> cannot be computed. In this case, output argument 
+<b>finite</b> = <b>false</b> and all elements of
+<b>K</b> are set to Modelica.Constants.inf (when <b>K</b> could be computed,
+<b>finite</b> = <b>true</b>).
 </p>
 
 

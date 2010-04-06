@@ -13,9 +13,9 @@ function frequencyVector "Determine frequency vector for Bode plot"
     "Minimum frequency value, if autoRange = false"                                                 annotation(Dialog(enable=not autoRange));
   input Modelica.SIunits.Frequency f_max(min=0) = 10
     "Maximum frequency value, if autoRange = false"                                                annotation(Dialog(enable=not autoRange));
-  input Complex numZeros[:]=fill(Complex(0), 0) "Zeros of numerator" 
+  input Complex numZeros[:]=fill(Complex(0), 0) "Zeros of numerator"
                                                                     annotation(Dialog(enable=autoRange));
-  input Complex denZeros[:]=fill(Complex(0), 0) "Zeros of denominator" 
+  input Complex denZeros[:]=fill(Complex(0), 0) "Zeros of denominator"
                                                                       annotation(Dialog(enable=autoRange));
   output SI.Frequency f[nPoints] "Frequency vector (automatic or manual)";
 protected
@@ -30,13 +30,10 @@ algorithm
     (w_min,w_max) := Internal.frequencyRangeBode(numZeros, denZeros);
     f_min2 := Internal.to_Hz(w_min);
     f_max2 := Internal.to_Hz(w_max);
-
   else
     f_min2 := f_min;
     f_max2 := f_max;
   end if;
-  w_min := Internal.from_Hz(f_min2);
-  w_max := Internal.from_Hz(f_max2);
 
   // Compute logarithmic vector of frequency points
   f_log := linspace(
