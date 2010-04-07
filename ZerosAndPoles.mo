@@ -1850,7 +1850,9 @@ of a zeros-and-poles transfer function.
   */
     baseFilter :=ZerosAndPoles.Internal.baseFilter(analogFilter,order,A_ripple,normalized);
 
-    // Compute desired filter characteristics from low pass filter coefficients
+    /* ==============================================================================
+     Compute desired filter characteristics by transformation of low pass filter
+  */
     if filterType == Types.FilterType.LowPass then
        filter :=baseFilter;
 
@@ -1862,6 +1864,7 @@ of a zeros-and-poles transfer function.
      */
       assert(n_num1 == n_den1 and n_num2 == n_den2,
         "Internal error 1, should not occur");
+      filter.k  := 1;
       filter.n1 := zeros(n_num1);
       filter.n2 := zeros(n_num2, 2);
 
@@ -1903,9 +1906,9 @@ of a zeros-and-poles transfer function.
                               
                             Summary:
                             1. solve 0 = f(z) = z^2 + a^2*w^2*z^2/(1+z)^2 - (2+b*w^2)*z + 1 for z
-                               f(0) = 1  > 0
-                               f(1) = 1 + a^2*w^2/4 - (2+b*w^2) + 1
-                                    = (a^2/4 - b)*w^2  > or < 0
+                                  f(0) = 1  > 0
+                                  f(1) = 1 + a^2*w^2/4 - (2+b*w^2) + 1
+                                       = (a^2/4 - b)*w^2  > or < 0
                             2. alpha = sqrt(z)
                             3. c = a*w / (alpha + 1/alpha)
                             4. g(s) = w^2*p^2 / (alpha^2  *(p^2 + p*(c/alpha) + 1/alpha^2)*
@@ -1913,8 +1916,6 @@ of a zeros-and-poles transfer function.
                                     = w/alpha^2*p / (p^2 + p*(c/alpha) + 1/alpha^2)*
                                       w*alpha^2*p / (p^2 + p*(c*alpha) + alpha^2)
     */
-      assert(n_num1 == n_den1 and n_num2 == n_den2,
-        "Internal error 1, should not occur");
       filter.n1 := zeros(n_num1);
       filter.n2 := zeros(n_num2, 2);
 
@@ -1931,7 +1932,7 @@ of a zeros-and-poles transfer function.
       Streams.error("analogFilter (= " + String(analogFilter) + ") is not supported");
     end if;
 
-    /* Transform filter to desired cut-off frequency
+    /* Transform filter to desired cut-off frequency ===================================
   
      Change filter coefficients according to transformation new(p) = p/w_cut
      Numerator  :     (p/w)^2 + a*(p/w) + b = (1/w^2)*(p^2 + (a*w)*p + b*w^2)
@@ -1946,7 +1947,7 @@ of a zeros-and-poles transfer function.
     filter.n2 := [w_cut*filter.n2[:, 1],w_cut2*filter.n2[:, 2]];
     filter.d2 := [w_cut*filter.d2[:, 1],w_cut2*filter.d2[:, 2]];
 
-    /* Add gain */
+    /* Add gain ======================================================================= */
     if filterType == Types.FilterType.LowPass then
        /* A low pass filter does not have numerator polynomials and all coefficients
         of the denominator polynomial are guaranteed to be non-zero. It is then 
@@ -1954,7 +1955,6 @@ of a zeros-and-poles transfer function.
            1/(p + a)         ->   1/a*1/(p/a + 1)         -> k = 1/a
            1/(p^2 + b*p + a) -> 1/a*1/(p^2/a + p*b/a + 1) -> k = 1/a
      */
-       //filter.k := gain/ZerosAndPoles.Analysis.dcGain(filter);
        k := 1.0;
        for i in 1:n_den1 loop
          k :=k/filter.d1[i];
@@ -1963,7 +1963,11 @@ of a zeros-and-poles transfer function.
          k :=k/filter.d2[i, 2];
        end for;
        filter.k := gain/k;
+
     elseif filterType == Types.FilterType.HighPass then
+       /* A high pass filter has g(s->infinity) = 1 and therefore filter.k = 1 is required, 
+        in ZerosAndPoles formulation
+     */
        filter.k := gain;
     else
        Streams.error("analogFilter (= " + String(analogFilter) + ") is not supported");
