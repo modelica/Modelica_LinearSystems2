@@ -1785,35 +1785,38 @@ of a zeros-and-poles transfer function.
         "Gain (= amplitude of frequency response at zero frequency)";
     input Real A_ripple(unit="dB") = 0.5
         "Pass band ripple (only for Chebyshev filter)";
-    input Boolean normalized=true
-        "= true, if amplitude at f_cut = -3db*gain for low and +3db*gain for high pass filter";
-    input Modelica.SIunits.Frequency bandwidth = 1
-        "Bandwidth of pass band (only for BandPass filter)";
+    input Boolean normalized=true "= true, if amplitude at f_cut = -3db*gain";
+    input Modelica.SIunits.Frequency f_min=0
+        "Band of normalized band pass/stop filter is f_min (-3db*gain) .. f_cut (-3db*gain)";
 
    /* 
                                | size(n1,1)   | size(n2,1)       | size(d1,1)   | size(d2,1)
-    ---------------------------+--------------+------------------+--------------+-------------------------------
+    ---------------------------+--------------+------------------+--------------+-------------------
     CriticalDamping - LowPass  |      0       |      0           |    order     |     0
     CriticalDamping - HighPass |    order     |      0           |    order     |     0
     CriticalDamping - BandPass |    order     |      0           |      0       |   order
-    ---------------------------+--------------+------------------+--------------+-------------------------------
+    CriticalDamping - BandStop |      0       |    order         |      0       |   order 
+    ---------------------------+--------------+------------------+--------------+-------------------
     LowPass                    |      0       |      0           | mod(order,2) | integer(order/2)
     HighPass                   | mod(order,2) | integer(order/2) | mod(order,2) | integer(order/2)
-    BandPass                   | mod(order,2) | integer(order/2) |      0       | mod(order,2)+2*integer(order/2)                          
+    BandPass                   |     order    |      0           |      0       |   order 
+    BandStop                   |      0       |    order         |      0       |   order
  */
     output ZerosAndPoles filter(
-      redeclare Real n1[if filterType == Types.FilterType.LowPass then 0 else
+      redeclare Real n1[if filterType == Types.FilterType.BandPass then order else
+                        if filterType == Types.FilterType.HighPass then
+                           (if analogFilter == Types.AnalogFilter.CriticalDamping then order else
+                               mod(order, 2)) else 0],
+      redeclare Real n2[if filterType == Types.FilterType.BandStop then order else
+                        if filterType == Types.FilterType.HighPass and
+                           analogFilter <> Types.AnalogFilter.CriticalDamping then integer(order/2) else 0,2],
+      redeclare Real d1[if filterType == Types.FilterType.BandPass or
+                           filterType == Types.FilterType.BandStop then 0 else
                         if analogFilter == Types.AnalogFilter.CriticalDamping then order else
                            mod(order, 2)],
-      redeclare Real n2[if filterType == Types.FilterType.LowPass or
-                           analogFilter == Types.AnalogFilter.CriticalDamping then 0 else
-                           integer(order/2),2],
-      redeclare Real d1[if filterType == Types.FilterType.BandPass then 0 else
-                        if analogFilter == Types.AnalogFilter.CriticalDamping then order else
-                           mod(order, 2)],
-      redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then
-                       (if filterType == Types.FilterType.BandPass then order else 0) else
-                        if filterType == Types.FilterType.BandPass then mod(order,2)+2*integer(order/2) else
+      redeclare Real d2[if filterType == Types.FilterType.BandPass or
+                           filterType == Types.FilterType.BandStop then order else
+                        if analogFilter == Types.AnalogFilter.CriticalDamping then 0 else
                            integer(order/2),2]) "Filter transfer function";
     protected
     Integer n_num1=size(filter.n1, 1);
@@ -1825,10 +1828,12 @@ of a zeros-and-poles transfer function.
     Real pi=Modelica.Constants.pi;
     Boolean evenOrder=mod(order, 2) == 0
         "= true, if even filter order (otherwise uneven)";
-    Modelica.SIunits.AngularVelocity w_cut=2*pi*f_cut
-        "Cut-off angular frequency";
-    Modelica.SIunits.AngularVelocity w_band=2*pi*bandwidth
-        "Bandwidth angular frequency";
+
+    Modelica.SIunits.Frequency f0 = if filterType == Types.FilterType.BandPass or
+                                       filterType == Types.FilterType.BandStop then
+                                                     sqrt(f_min*f_cut) else f_cut;
+    Modelica.SIunits.AngularVelocity w_cut=2*pi*f0 "Cut-off angular frequency";
+    Modelica.SIunits.AngularVelocity w_band = (f_cut - f_min) / f0;
     Real w_cut2 "= w_cut*w_cut";
     Real alpha=1.0 "Frequency correction factor";
     Real alpha2 "= alpha*alpha";
@@ -1842,12 +1847,16 @@ of a zeros-and-poles transfer function.
 
     Real aux;
     Real k;
+    Integer j;
+    Real c;
+    Real ww;
     ZerosAndPoles baseFilter;
   algorithm
     /* Compute filter coefficients of prototype low pass filter. If another filter
      characteristics is desired (e.g. high pass filter), it is derived
      from the low pass filter coefficients below
   */
+    assert(f_cut > 0, "Cut-off frequency f_cut must be positive");
     baseFilter :=ZerosAndPoles.Internal.baseFilter(analogFilter,order,A_ripple,normalized);
 
     /* ==============================================================================
@@ -1862,9 +1871,8 @@ of a zeros-and-poles transfer function.
         1/(p + a)         -> 1/((1/p) + a) = (1/a)*p / (p + (1/a))
         1/(p^2 + a*p + b) -> 1/((1/p)^2 + a*(1/p) + b) = (1/b)*p^2 / (p^2 + (a/b)*p + 1/b)
      */
-      assert(n_num1 == n_den1 and n_num2 == n_den2,
-        "Internal error 1, should not occur");
-      filter.k  := 1;
+      assert(n_num1 == n_den1 and n_num2 == n_den2, "Internal error 1, should not occur");
+      filter.k  := baseFilter.k;
       filter.n1 := zeros(n_num1);
       filter.n2 := zeros(n_num2, 2);
 
@@ -1879,8 +1887,8 @@ of a zeros-and-poles transfer function.
 
     elseif filterType == Types.FilterType.BandPass then
       /* The band pass filter is derived from the low pass filter by
-       the transformation new(p) = (p + 1/p)/w   (w = w_band)
-       
+       the transformation new(p) = (p + 1/p)/w   (w = w_band = (f_max - f_min)/sqrt(f_max*f_min) )
+        
        1/(p + a)         -> 1/(p/w + 1/p/w) + a) 
                             = w*p / (p^2 + a*w*p + 1)
                             
@@ -1890,8 +1898,8 @@ of a zeros-and-poles transfer function.
                             = w^2*p^2 / (p^4 + a*w*p^3 + (2+b*w^2)*p^2 + a*w*p + 1)
                             
                             Assume the following description with PT2:
-                            = w^2*p^2 / ( (p*alpha)^2 + c*(p*alpha) + 1) *
-                                          (p/alpha)^2 + c*(p/alpha) + 1)
+                            = w^2*p^2 /( (p^2 + p*(c/alpha) + 1/alpha^2)*
+                                         (p^2 + p*(c*alpha) + alpha^2) )
                             = w^2*p^2 / ( p^4 + c*(alpha + 1/alpha)*p^3
                                               + (alpha^2 + 1/alpha^2 + c^2)*p^2
                                               + c*(alpha + 1/alpha)*p + 1 )
@@ -1902,30 +1910,84 @@ of a zeros-and-poles transfer function.
                               alpha^2 + 1/alpha^2 + c^2 = 2+b*w^2 -> equation to determine alpha
                               alpha^4 + 1 + a^2*w^2*alpha^4/(1+alpha^2)^2 = (2+b*w^2)*alpha^2
                               or z = alpha^2
-                              z^2 + a^2*w^2*z^2/(1+z)^2 - (2+b*w^2)*z + 1 = 0
-                              
-                            Summary:
-                            1. solve 0 = f(z) = z^2 + a^2*w^2*z^2/(1+z)^2 - (2+b*w^2)*z + 1 for z
-                                  f(0) = 1  > 0
-                                  f(1) = 1 + a^2*w^2/4 - (2+b*w^2) + 1
-                                       = (a^2/4 - b)*w^2  > or < 0
-                            2. alpha = sqrt(z)
-                            3. c = a*w / (alpha + 1/alpha)
-                            4. g(s) = w^2*p^2 / (alpha^2  *(p^2 + p*(c/alpha) + 1/alpha^2)*
-                                                 1/alpha^2*(p^2 + p*(c*alpha) + alpha^2) )
-                                    = w/alpha^2*p / (p^2 + p*(c/alpha) + 1/alpha^2)*
-                                      w*alpha^2*p / (p^2 + p*(c*alpha) + alpha^2)
+                              z^2 + a^2*w^2*z^2/(1+z)^2 - (2+b*w^2)*z + 1 = 0                                     
     */
-      filter.n1 := zeros(n_num1);
-      filter.n2 := zeros(n_num2, 2);
+      assert(n_num2 == 0 and n_den1 == 0, "Internal error 2, should not occur");
+      assert(n_num1 == order and n_den2 == order, "Internal error 3, should not occur:");
+      assert(f_min > 0 and f_min < f_cut, "Lower band pass frequency f_min must be > 0 and < f_cut");
 
-      for i in 1:n_den1 loop
-        filter.d1[i] := 1/baseFilter.d1[i];
+      filter.n1 := zeros(n_num1);
+      filter.k  := baseFilter.k;
+
+      for i in 1:size(baseFilter.d1,1) loop
+         filter.k := filter.k*w_band;
+         filter.d2[i,1] := baseFilter.d1[i]*w_band;
+         filter.d2[i,2] := 1.0;
       end for;
 
-      for i in 1:n_den2 loop
-        filter.d2[i, 1] := baseFilter.d2[i, 1]/baseFilter.d2[i, 2];
-        filter.d2[i, 2] := 1/baseFilter.d2[i, 2];
+      for i in 1:size(baseFilter.d2,1) loop
+         filter.k := filter.k*w_band*w_band;
+         alpha := ZerosAndPoles.Internal.bandPassAlpha(baseFilter.d2[i,1], baseFilter.d2[i,2], w_band);
+         c     := baseFilter.d2[i,1]*w_band / (alpha + 1/alpha);
+         j     := size(baseFilter.d1,1) + 2*i - 1;
+         filter.d2[j,   1] := c/alpha;
+         filter.d2[j,   2] := 1/alpha^2;
+         filter.d2[j+1, 1] := c*alpha;
+         filter.d2[j+1, 2] := alpha^2;
+      end for;
+
+    elseif filterType == Types.FilterType.BandStop then
+      /* The band stop filter is derived from the low pass filter by
+       the transformation new(p) = w/( (p + 1/p) )   (w = w_band = (f_max - f_min)/sqrt(f_max*f_min) )
+       
+       1/(p + a)         -> 1/( w/(p + 1/p) ) + a) 
+                            = 1/a*(p^2 + 1) / (p^2 + (w/a)*p + 1)
+                                                        
+       1/(p^2 + a*p + b) -> 1/( w^2/(p + 1/p)^2 + a*w/(p + 1/p) + b )
+                            = 1/b*(p^2 + 1)^2 / (p^4 + a*w*p^3/b + (2+w^2/b)*p^2 + a*w*p/b + 1)
+                                 
+                            Assume the following description with PT2:
+                            = 1/b*(p^2 + 1)^2 / ( (p^2 + p*(c/alpha) + 1/alpha^2)*
+                                                  (p^2 + p*(c*alpha) + alpha^2) ) 
+                            = 1/b*(p^2 + 1)^2 / (  p^4 + c*(alpha + 1/alpha)*p^3
+                                                   + (alpha^2 + 1/alpha^2 + c^2)*p^2
+                                                   + c*(alpha + 1/alpha)*p + 1 )
+
+                            and therefore:
+                              c*(alpha + 1/alpha) = a*w/b         -> c = a*w/(b*(alpha + 1/alpha))
+                              alpha^2 + 1/alpha^2 + c^2 = 2+w^2/b -> equation to determine alpha
+                              alpha^4 + 1 + (a*w/b*alpha^2)^2/(1+alpha^2)^2 = (2+w^2/b)*alpha^2
+                              or z = alpha^2
+                              z^2 + (a*w/b*z)^2/(1+z)^2 - (2+w^2/b)*z + 1 = 0  
+                            
+                            same as:  ww = w/b
+                              z^2 + (a*ww*z)^2/(1+z)^2 - (2+b*ww)*z + 1 = 0  -> same equation as for BandPass
+                                                      
+    */
+      assert(n_num1 == 0 and n_den1 == 0, "Internal error 4, should not occur");
+      assert(n_num2 == order and n_den2 == order, "Internal error 5, should not occur:");
+      assert(f_min > 0 and f_min < f_cut, "Lower band pass frequency f_min must be > 0 and < f_cut");
+
+      filter.k :=baseFilter.k;
+      for i in 1:order loop
+        filter.n2[i,1] := 0.0;
+        filter.n2[i,2] := 1.0;
+      end for;
+
+      for i in 1:size(baseFilter.d1,1) loop
+        filter.d2[i,1] := w_band/baseFilter.d1[i];
+        filter.d2[i,2] := 1.0;
+      end for;
+
+      for i in 1:size(baseFilter.d2,1) loop
+         ww    := w_band/baseFilter.d2[i,2];
+         alpha := ZerosAndPoles.Internal.bandPassAlpha(baseFilter.d2[i,1], baseFilter.d2[i,2], ww);
+         c     := baseFilter.d2[i,1]*ww / (alpha + 1/alpha);
+         j     := size(baseFilter.d1,1) + 2*i - 1;
+         filter.d2[j,   1] := c/alpha;
+         filter.d2[j,   2] := 1/alpha^2;
+         filter.d2[j+1, 1] := c*alpha;
+         filter.d2[j+1, 2] := alpha^2;
       end for;
 
     else
@@ -1937,11 +1999,10 @@ of a zeros-and-poles transfer function.
      Change filter coefficients according to transformation new(p) = p/w_cut
      Numerator  :     (p/w)^2 + a*(p/w) + b = (1/w^2)*(p^2 + (a*w)*p + b*w^2)
                                   (p/w) + a = (1/w)*(p + w*a)
-     Denominator: 1/((p/w)^2 + a*(p/w) + b) = w^2/(p^2 + (a*w)*p + w^2/b)
+     Denominator: 1/((p/w)^2 + a*(p/w) + b) = w^2/(p^2 + (a*w)*p + b*w^2)
                               1/((p/w) + a) = w/(p + w*a)
   */
     w_cut2 := w_cut*w_cut;
-    filter.k  := 1.0;
     filter.n1 := w_cut*filter.n1;
     filter.d1 := w_cut*filter.d1;
     filter.n2 := [w_cut*filter.n2[:, 1],w_cut2*filter.n2[:, 2]];
@@ -1952,23 +2013,29 @@ of a zeros-and-poles transfer function.
        /* A low pass filter does not have numerator polynomials and all coefficients
         of the denominator polynomial are guaranteed to be non-zero. It is then 
         easy to compute the gain: 
-           1/(p + a)         ->   1/a*1/(p/a + 1)         -> k = 1/a
-           1/(p^2 + b*p + a) -> 1/a*1/(p^2/a + p*b/a + 1) -> k = 1/a
+           1/(p + a)         -> a/(p + a)        , since g(0) = 1; k = a
+           1/(p^2 + a*p + b) -> b/(p^2 + a*p + b), since g(0) = 1; k = b
      */
        k := 1.0;
        for i in 1:n_den1 loop
-         k :=k/filter.d1[i];
+         k :=k*filter.d1[i];
        end for;
        for i in 1:n_den2 loop
-         k :=k/filter.d2[i, 2];
+         k :=k*filter.d2[i, 2];
        end for;
-       filter.k := gain/k;
+       filter.k := gain*k;
 
-    elseif filterType == Types.FilterType.HighPass then
-       /* A high pass filter has g(s->infinity) = 1 and therefore filter.k = 1 is required, 
-        in ZerosAndPoles formulation
+     elseif filterType == Types.FilterType.HighPass or
+            filterType == Types.FilterType.BandStop then
+       /* A high pass filter and a band stop filter have g(s->infinity) = 1 
+        and therefore filter.k = 1 is required, in ZerosAndPoles formulation
      */
        filter.k := gain;
+
+    elseif filterType == Types.FilterType.BandPass then
+       /* The gain due to the w-trasnformation must be added */
+       filter.k := filter.k*gain*w_cut^(2*n_den2-n_num1);
+
     else
        Streams.error("analogFilter (= " + String(analogFilter) + ") is not supported");
     end if;
@@ -4165,6 +4232,24 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
         den1[1] := 1.0;
       end if;
 
+      /* Transformation of filter transfer function with "new(p) = alpha*p"
+       in order that the filter transfer function has an amplitude of
+       -3 db at the cutoff frequency
+    */
+      /*
+    if normalized then
+      alpha := Internal.normalizationFactor(den1, den2);
+      alpha2 := alpha*alpha;
+      for i in 1:n_den2 loop
+        den2[i, 1] := den2[i, 1]*alpha2;
+        den2[i, 2] := den2[i, 2]*alpha;
+      end for;
+      if not evenOrder then
+        den1[1] := den1[1]*alpha;
+      end if;
+    end if;
+    */
+
     elseif analogFilter == Types.AnalogFilter.Chebyshev then
       epsilon := sqrt(10^(A_ripple/10) - 1);
       fac := asinh(1/epsilon)/order;
@@ -4184,7 +4269,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
        /* Transformation of filter transfer function with "new(p) = alpha*p"
         in order that the filter transfer function has an amplitude of
-        3 db at the cutoff frequency
+        -3 db at the cutoff frequency
      */
       if normalized then
         alpha := Internal.normalizationFactor(den1, den2);
@@ -4236,18 +4321,18 @@ using the following rules:
     <td><i>Transformation</i></td>
     </tr>
 
-<tr><td> High pass filter with w_cut = 1 rad/s </td>
+<tr><td> High pass filter </td>
     <td> replace \"p\" by \"1/p\" </td>
     </tr>
 
-<tr><td> Band pass filter with w_cut = 1 rad/s </td>
+<tr><td> Band pass filter </td>
     <td> replace \"p\" by \"(p + 1/p)/w_band\"<br>
-         (w_band: bandwidth of band in rad/s)</td>
+         (w_band = (f_max - f_min)/sqrt(f_min*f_max))</td>
     </tr>
 
-<tr><td> Stop pass filter with w_cut = 1 rad/s </td>
+<tr><td> Stop pass filter  </td>
     <td> replace \"p\" by \"w_band/(p + 1/p)\"<br>
-         (w_band: bandwidth of band in rad/s)</td>
+         (w_band = (f_max - f_min)/sqrt(f_min*f_max))</td>
     </tr>
 
 <tr><td> Filter with cut-off angular frequency w_cut </td>
@@ -4280,1064 +4365,6 @@ using the following rules:
 
 </html> "));
   end baseFilter;
-
-  encapsulated function filter
-      "Generate the data record of a ZerosAndPoles transfer function from a filter description"
-
-      import Modelica;
-      import Modelica.Utilities.Streams;
-      import Modelica.Utilities.Streams.print;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Types;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
-      import Modelica.Math.*;
-      import Modelica_LinearSystems2.Math.*;
-
-    input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
-        "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-    input Modelica_LinearSystems2.Types.FilterType filterType=Types.FilterType.LowPass
-        "Type of filter (LowPass/HighPass)";
-    input Integer order(min=1) = 2 "Order of filter";
-    input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
-        "Cut-off frequency (default is w_cut = 1 rad/s)";
-    input Real gain=1.0
-        "Gain (= amplitude of frequency response at zero frequency)";
-    input Real A_ripple(unit="dB") = 0.5
-        "Pass band ripple for Chebyshev filter (otherwise not used)";
-    input Boolean normalized=true
-        "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
-    output Internal.ZerosAndPoles filter(
-      redeclare Real n1[if filterType == Types.FilterType.LowPass then 0 else (
-        if analogFilter == Types.AnalogFilter.CriticalDamping then order else
-        mod(order, 2))],
-      redeclare Real n2[if filterType == Types.FilterType.LowPass then 0 else (
-        if analogFilter == Types.AnalogFilter.CriticalDamping then 0 else
-        integer(order/2)),2],
-      redeclare Real d1[if analogFilter == Types.AnalogFilter.CriticalDamping then
-              order else mod(order, 2)],
-      redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then
-              0 else integer(order/2),2]) "Filter transfer function";
-
-    protected
-    Integer n_num1=size(filter.n1, 1);
-    Integer n_num2=size(filter.n2, 1);
-    Integer n_den1=size(filter.d1, 1);
-    Integer n_den2=size(filter.d2, 1);
-    Integer n_num=n_num1 + 2*n_num2;
-    Integer n_den=n_den1 + 2*n_den2;
-    Real pi=Modelica.Constants.pi;
-    Boolean evenOrder=mod(order, 2) == 0
-        "= true, if even filter order (otherwise uneven)";
-    Modelica.SIunits.AngularVelocity w_cut=2*pi*f_cut
-        "Cut-off angular frequency";
-    Real w_cut2 "= w_cut*w_cut";
-    Real alpha=1.0 "Frequency correction factor";
-    Real alpha2 "= alpha*alpha";
-
-    Real alphax;
-
-    Real epsilon "Ripple size";
-    Real fac "arsinh(epsilon)";
-    Real A2 "poleReal^2 + poleImag^2";
-    Real A "Amplitude at w_cut";
-    Real num1[n_num1]
-        "[p] coefficients of numerator first order polynomials (a*p + 1)";
-    Real num2[n_num2,2]
-        "[p^2, p] coefficients of numerator second order polynomials (b*p^2 + a*p + 1I)";
-    Real den1[n_den1]
-        "[p] coefficients of denominator first order polynomials (a*p + 1)";
-    Real den2[n_den2,2]
-        "[p^2, p] coefficients of denominator second order polynomials (b*p^2 + a*p + 1I)";
-    Real aux;
-    Real k;
-  algorithm
-    // Set properties that are common for all filters
-    filter.k := gain;
-
-    /* Compute filter coefficients of prototype low pass filter. If another filter
-     characteristics is desired (e.g. high pass filter), it is derived
-     from the low pass filter coefficients below
-  */
-    if analogFilter == Types.AnalogFilter.CriticalDamping then
-      if normalized then
-        alpha := sqrt(2^(1/order) - 1);
-  //alpha := sqrt(10^(3/10/order)-1)
-      else
-        alpha := 1;
-      end if;
-      for i in 1:n_den1 loop
-        den1[i] := alpha;
-      end for;
-
-    elseif analogFilter == Types.AnalogFilter.Bessel then
-      (den1,den2,alpha) := Internal.BesselCoefficients(order);
-      if not normalized then
-        alpha2 := alpha*alpha;
-        for i in 1:n_den2 loop
-          den2[i, 1] := den2[i, 1]*alpha2;
-          den2[i, 2] := den2[i, 2]*alpha;
-        end for;
-        if not evenOrder then
-          den1[1] := den1[1]*alpha;
-        end if;
-      end if;
-
-    elseif analogFilter == Types.AnalogFilter.Butterworth then
-       // Original filter is already normalized
-      for i in 1:n_den2 loop
-        den2[i, 1] := 1.0;
-        den2[i, 2] := -2*cos(pi*(0.5 + (i - 0.5)/order));
-      end for;
-      if not evenOrder then
-        den1[1] := 1.0;
-      end if;
-
-    elseif analogFilter == Types.AnalogFilter.Chebyshev then
-      epsilon := sqrt(10^(A_ripple/10) - 1);
-      fac := asinh(1/epsilon)/order;
-
-      if evenOrder then
-         for i in 1:n_den2 loop
-            den2[i,1] :=1/(cosh(fac)^2 - cos((2*i - 1)*pi/(2*order))^2);
-            den2[i,2] :=2*den2[i, 1]*sinh(fac)*cos((2*i - 1)*pi/(2*order));
-         end for;
-      else
-         den1[1] := 1/sinh(fac);
-         for i in 1:n_den2 loop
-            den2[i,1] :=1/(cosh(fac)^2 - cos(i*pi/order)^2);
-            den2[i,2] :=2*den2[i, 1]*sinh(fac)*cos(i*pi/order);
-         end for;
-      end if;
-
-       /* Transformation of filter transfer function with "new(p) = alpha*p"
-        in order that the filter transfer function has an amplitude of
-        1/sqrt(2) at the cutoff frequency
-     */
-      if normalized then
-        alpha := Internal.normalizationFactor(den1, den2);
-        alpha2 := alpha*alpha;
-        for i in 1:n_den2 loop
-          den2[i, 1] := den2[i, 1]*alpha2;
-          den2[i, 2] := den2[i, 2]*alpha;
-        end for;
-        if not evenOrder then
-          den1[1] := den1[1]*alpha;
-        end if;
-      end if;
-
-    else
-      Streams.error("analogFilter (= " + String(analogFilter) +
-        ") is not supported");
-    end if;
-
-    // Compute amplitude at w=1
-  /*
-  A := 1.0;
-  for i in 1:n_den2 loop
-     A := A*(1 + den2[i,2]^2 - 2*den2[i,1]
-               + den2[i,1]^2);
-  end for;
-  for i in 1:n_den1 loop
-     A := A*(1 + den1[i]^2);
-  end for;
-  A := 1/sqrt(A);
-  print("A = " + String(A));
-*/
-
-    // Determine normalized denominator polynomials with highest power of p equal to one
-    filter.n1 := zeros(n_num1);
-    filter.n2 := zeros(n_num2, 2);
-    (filter.d1,filter.d2,k) := Internal.filterToNormalized(den1, den2);
-    filter.k := filter.k/k;
-
-    // Compute desired filter characteristics from low pass filter coefficients
-    if filterType == Types.FilterType.HighPass then
-       /* The high pass filter is derived from the low pass filter by
-        the transformation new(p) = 1/p
-        1/(p^2 + a*p + b) -> 1/((1/p)^2 + a*(1/p) + b) = (1/b)*p^2 / (p^2 + (a/b)*p + 1/b)
-        1/(p + a)         -> 1/((1/p) + a) = (1/a)*p / (p + (1/a))
-     */
-      assert(n_num1 == n_den1 and n_num2 == n_den2,
-        "Internal error 1, should not occur");
-      filter.n1 := zeros(n_num1);
-      filter.n2 := zeros(n_num2, 2);
-      for i in 1:n_num1 loop
-        filter.k := filter.k/filter.d1[i];
-        filter.d1[i] := 1/filter.d1[i];
-      end for;
-      for i in 1:n_num2 loop
-        filter.k := filter.k/filter.d2[i, 2];
-        filter.d2[i, 1] := filter.d2[i, 1]/filter.d2[i, 2];
-        filter.d2[i, 2] := 1/filter.d2[i, 2];
-      end for;
-    end if;
-
-    /* Change filter coefficients according to transformation new(p) = p/w_cut
-     Numerator  :     (p/w)^2 + a*(p/w) + b = (1/w^2)*(p^2 + (a*w)*p + b*w^2)
-                                  (p/w) + a = (1/w)*(p + w*a)
-     Denominator: 1/((p/w)^2 + a*(p/w) + b) = w^2/(p^2 + (a*w)*p + w^2/b)
-                              1/((p/w) + a) = w/(p + w*a)
-  */
-    w_cut2 := w_cut*w_cut;
-    filter.k := filter.k*w_cut^(n_den1 + 2*n_den2 - n_num1 - 2*n_num2);
-    filter.n1 := w_cut*filter.n1;
-    filter.d1 := w_cut*filter.d1;
-    filter.n2 := [w_cut*filter.n2[:, 1],w_cut2*filter.n2[:, 2]];
-    filter.d2 := [w_cut*filter.d2[:, 1],w_cut2*filter.d2[:, 2]];
-
-    annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right> filterFunction </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.ZerosAndPoles.Design.<b>filter</b>(analogFilter, filterType, order, f_cut, gain, A_ripple, normalized)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-This function constructs a ZerosAndPoles transfer function
-description of low and high pass filters.
-Typical frequency responses for the 4 supported low pass filter types
-are shown in the next figure (this figure was generated with function
-<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Examples.bodePlot_filter2\">ZerosAndPoles.Examples.bodePlot_filter2</a>):
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4Filters.png\">
-</p>
-<p>
-The step responses of the same low pass filters are shown in the next figure,
-starting from a steady state initial filter with initial input = 0.2:
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4FiltersStepResponse.png\">
-</p>
-<p>
-Obviously, the frequency responses give a somewhat wrong impression
-of the filter characteristics: Although Butterworth and Chebyshev
-filters have a significantly steeper magnitude as the
-CriticalDamping and Bessel filters, the step responses of
-the latter ones are much better. This means for example, that
-a CriticalDamping or a Bessel filter should be selected,
-if a filter is mainly used to make a non-linear inverse model
-realizable.
-</p>
-
-<p>
-Typical frequency responses for the 4 supported high pass filter types
-are shown in the next figure:
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/HighPassOrder4Filters.png\">
-</p>
-<p>
-The corresponding step responses of these high pass filters are
-shown in the next figure:
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/HighPassOrder4FiltersStepResponse.png\">
-</p>
-<p>
-All filters are available in <b>normalized</b> (default) and non-normalized form.
-In the normalized form, the amplitude of the filter transfer function
-at the cutoff frequency is 1/sqrt(2) (= 3 dB). Note, when comparing the filters
-of this function with other software systems, the setting of \"normalized\"
-has to be selected appropriately. For example, the signal processing
-toolbox of Matlab provides the filters in non-normalized form and
-therefore a comparision makes only sense, if normalized = <b>false</b>
-is set.
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping;
-   Integer order=2; 
-   Modelica.SIunits.Frequency f_cut=10;
-   
-   ZerosAndPoles zp_filter;
-
-<b>algorithm</b>
-    zp_filter=Modelica_LinearSystems2.ZerosAndPoles.Design.filter(
-      order=order,
-      f_cut=f_cut,
-      analogFilter=analogFilter);
-
-// zp_filter = 9530.93/( (p + 97.6265)^2 )
-</pre></blockquote>
-
-
-<h4><font color=\"#008000\">References</font></h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center>  Tietze U., and Schenk Ch.  </td>  <td> \"Halbleiter-Schaltungstechnik\"  </td> <td> Springer Verlag, 12. Auflage, pp. 815-852, 2002. </td></tr>
-</table>
-
-</html> "));
-  end filter;
-
-    function findMatrixName
-      input String filename;
-      input String matName="z";
-
-      output Integer m;
-
-    external "C" m = findMatrixName(
-            filename,
-            matName,
-            "NoClass");
-
-      annotation (Include="#include <matrixop.h> 
-#include <matrixop.c> 
- 
- 
-#if !defined(DYMOLA_DSPACE) && !defined(NO_FILE)
-#include <amat.h>
-#include <sprwat.h>
-#endif
- 
-extern int findMatrixName(const char* fil,const char* matname, char *noClass) {
-int found=0;
- 
- 
-#if !defined(DYMOLA_DSPACE) && !defined(NO_FILE)
-{
-        AmatGetFile afile;
-        Amatrix amatrix;
- 
-        int ret=amatGetOpen((char*)fil,noClass,(char*)0,&afile);
- 
-        Assert(ret==0,amatError);
-        for(;ret==0 && !found;)  
-{
-                amatInit(&amatrix);
-                ret=amatGetMatrix(&afile, &amatrix);
-                if (ret<=1 && strcmp(matname,amatrix.name)==0)
-                  found=1;
-                else
-                  found=0;
- 
-                amatDel(&amatrix);
-        }
-        amatGetClose(&afile);
-}
-#else
-        Assert(false, 'nn');
-#endif
-        return found;
-}");
-    end findMatrixName;
-
-  encapsulated function scaleFactor1
-      "Return scale factor for first order block"
-      import Modelica;
-    input Real n "(s+n)/(s+d)";
-    input Real d "(s+n)/(s+d)";
-    input Real small=100*Modelica.Constants.eps;
-    output Real k "= n/d, if d,n are not zero, otherwise special cases";
-  algorithm
-    k := if abs(d) > small  and abs(n) > small then abs(n)/abs(d) else 1;
-
-  end scaleFactor1;
-
-  function scaleFactor2 "Return scale factor for second order block"
-    import Modelica;
-    input Real n1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
-    input Real n2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
-    input Real d1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
-    input Real d2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
-    input Real small=100*Modelica.Constants.eps;
-    output Real k "= n2/d2, if d2,n2 are not zero, otherwise special cases";
-  algorithm
-
-    k := if abs(n2) > small and abs(d2) > small then d2/n2 else 1;
-
-  end scaleFactor2;
-
-  encapsulated function fromFile_pc
-      "Generate a zeros and poles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica;
-
-    input String fileName="pc.mat" "Name of the zeros and poles data file"
-                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="state space system data file")));
-
-    protected
-    input Integer n1n2d1d2[4]=
-        ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(fileName);
-    input Integer n1=n1n2d1d2[1];
-    input Integer n2=n1n2d1d2[2];
-    input Integer d1=n1n2d1d2[3];
-    input Integer d2=n1n2d1d2[4];
-    input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
-    input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
-    public
-    output ZerosAndPoles zp(
-      n1=fill(0, n1),
-      n2=fill(
-            0,
-            n2,
-            2),
-      d1=fill(0, d1),
-      d2=fill(
-            0,
-            d2,
-            2));
-
-    protected
-    Integer n1_2=if n1 > 0 then 1 else 0 "second dimension of n1-matrix";
-    Integer n2_2=if n2 > 0 then 2 else 0 "second dimension of n2-matrix";
-    Integer d1_2=if d1 > 0 then 1 else 0 "second dimension of d1-matrix";
-    Integer d2_2=if d2 > 0 then 2 else 0 "second dimension of d2-matrix";
-
-    Real k=scalar(readMatrix(
-          fileName,
-          "k",
-          1,
-          1));
-    Real n1Vector[n1]=vector(readMatrix(
-          fileName,
-          "n1",
-          n1,
-          n1_2)) "coefficients of first order numenator polynomials";
-    Real n2Matrix[n2,n2_2]=readMatrix(
-          fileName,
-          "n2",
-          n2,
-          n2_2) "coefficients of second order denominator polynomials";
-    Real d1Vector[d1]=vector(readMatrix(
-          fileName,
-          "d1",
-          d2,
-          d1_2)) "coefficients of first order denominator polynomials";
-    Real d2Matrix[d2,d2_2]=readMatrix(
-          fileName,
-          "d2",
-          d2,
-          d2_2) "coefficients of second order numenator polynomials";
-
-  algorithm
-    zp.k := k;
-    zp.n1 := if n1 > 0 then n1Vector else fill(0, 0);
-    zp.n2 := if n2 > 0 then n2Matrix else fill(
-        0,
-        0,
-        2);
-    zp.d1 := if d1 > 0 then d1Vector else fill(0, 0);
-    zp.d2 := if d2 > 0 then d2Matrix else fill(
-        0,
-        0,
-        2);
-
-  end fromFile_pc;
-
-  encapsulated function fromFile_zp
-      "Generate a zeros and poles data record by reading poles and zeros from a file (default file name is zp.mat)"
-
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
-
-    input String fileName="zp.mat" "Name of the zeros and poles data file"
-                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="state space system data file")));
-    protected
-    input Integer n1n2d1d2[4]=
-        ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(fileName);
-    input Integer n1=n1n2d1d2[1];
-    input Integer n2=n1n2d1d2[2];
-    input Integer d1=n1n2d1d2[3];
-    input Integer d2=n1n2d1d2[4];
-    input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
-    input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
-    public
-    output ZerosAndPoles zp(
-      n1=fill(0, n1),
-      n2=fill(
-            0,
-            n2,
-            2),
-      d1=fill(0, d1),
-      d2=fill(
-            0,
-            d2,
-            2));
-
-    protected
-    Integer z_2=if zSize > 0 then 2 else 0 "second dimension of zeros-matrix";
-    Integer p_2=if pSize > 0 then 2 else 0 "second dimension of poles-matrix";
-
-    Real k=scalar(readMatrix(
-          fileName,
-          "k",
-          1,
-          1));
-    Real zerosMatrix[zSize,z_2]=readMatrix(
-          fileName,
-          "z",
-          zSize,
-          z_2) "zeros in rows of real parts and imaginary parts";
-    Real polesMatrix[pSize,p_2]=readMatrix(
-          fileName,
-          "p",
-          pSize,
-          p_2) "poles in rows of real parts and imaginary parts";
-    Complex zeros[:]=if zSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
-        zerosMatrix[:, 1], zerosMatrix[:, z_2]) else fill(Complex(0), 0);
-    Complex poles[:]=if pSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
-        polesMatrix[:, 1], polesMatrix[:, p_2]) else fill(Complex(0), 0);
-
-  algorithm
-    zp := ZerosAndPoles(
-        k=k,
-        z=zeros,
-        p=poles);
-  end fromFile_zp;
-
-    function checkRepresentation
-      "checks whether the system on file is represented by zeros and poles (z, p) or first and second order polynomials (n1, n2, d1, d2)"
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
-      import Modelica_LinearSystems2;
-      input String fileName="zp.mat" "Name of the zeros and poles data file"
-                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="state space system data file")));
-      output Boolean iszp=true;
-    protected
-      Integer m=0;
-
-    algorithm
-      m := Internal.findMatrixName(fileName, "z");
-      m := m + Internal.findMatrixName(fileName, "p");
-      iszp := m == 2;
-
-      annotation (Documentation(info="<html>
-The function output is true if the system is given in zeros and poles representation.
-Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1, n2, d1\" and \"d2\" respectively.
-</html>"));
-    end checkRepresentation;
-
-    function sameVectorElements "Determine identical elements of a vector"
-
-      input Real v[:] "Vector";
-      input Integer startIndex=1 "Start index";
-      output Integer endIndex=startIndex
-        "startIndex:endIndex are identical elements in v";
-    protected
-      Integer nv=size(v, 1);
-      Integer i=startIndex + 1;
-      Real v0=v[startIndex];
-    algorithm
-      while i <= nv loop
-        if v[i] == v0 then
-          endIndex := i;
-          i := i + 1;
-        else
-          i := nv + 1;
-        end if;
-      end while;
-    end sameVectorElements;
-
-    function fromRealAndImag
-      "Generate a complex vector from a real part vector and imaginary part vector "
-
-      import Modelica_LinearSystems2.Math.Complex;
-
-      input Real real[:];
-      input Real imag[size(real, 1)];
-      output Complex result[size(real, 1)] "Number of real zeros";
-    algorithm
-      for i in 1:size(real, 1) loop
-        result[i].re := real[i];
-        result[i].im := imag[i];
-      end for;
-    end fromRealAndImag;
-
-    function sameMatrixRows "Determine identical rows of a [:,2] matrix"
-
-      input Real M[:,2] "Matrix";
-      input Integer startIndex=1 "Start index";
-      output Integer endIndex=startIndex
-        "startIndex:endIndex are identical rows in M";
-    protected
-      Integer n=size(M, 1);
-      Integer i=startIndex + 1;
-      Real v0[size(M, 2)]=M[startIndex, :];
-    algorithm
-      while i <= n loop
-        if M[i, 1] == v0[1] and M[i, 2] == v0[2] then
-          endIndex := i;
-          i := i + 1;
-        else
-          i := n + 1;
-        end if;
-      end while;
-    end sameMatrixRows;
-
-    function firstOrderToString
-      "Transform vector of coefficients of first order polynomials to a string representation"
-      import Modelica_LinearSystems2.Math.Vectors;
-      import Modelica_LinearSystems2.Math;
-
-      input Real c[:] = fill(0.0,0)
-        "Coefficients of first order polynomials: polynom(p) = p + c[i]";
-      input Integer significantDigits=6
-        "Number of significant digits that are shown";
-      input String name="p" "Independent variable name used for printing";
-      input Boolean normalized=false
-        "= true, the polynomials in the string are represented as p/c[i] + 1, provided c[i]<>0";
-      output String s="";
-      output Real gain=1.0
-        "If normalized=true, the product(c[i]) (for i, where c[i]<>0), otherwise gain=1.0";
-    protected
-      Integer nc=size(c, 1);
-      Real cs[nc];
-      Real cc[nc];
-      Integer i;
-      Integer j;
-      Integer j2;
-      Integer nj;
-      Integer k;
-      constant Real smallNumber = 100*Modelica.Constants.small;
-      constant Real eps = 10*Modelica.Constants.eps;
-    algorithm
-      // Change coefficients, if normalized output, and sort them
-      for i in 1:nc loop
-         if Math.isEqual(c[i], 0.0, smallNumber) then
-            cs[i] := 0.0;
-         elseif normalized then
-            cs[i] := 1/c[i];
-            gain := gain*c[i];
-         else
-            cs[i] := c[i];
-         end if;
-      end for;
-      cc :=Modelica.Math.Vectors.sort(cs);
-
-      // Move zeros to the beginning
-      j :=0;
-      k :=nc + 1;
-      for i in nc:-1:1 loop
-         if cc[i] == 0.0 then
-            j := j + 1;
-            cs[j] := 0.0;
-         else
-            k := k - 1;
-            cs[k] := cc[i];
-         end if;
-      end for;
-
-      // Transform coefficients to string
-      if j == 1 then
-         s := name;
-      elseif j > 1 then
-         s := name + "^" + String(j);
-      end if;
-
-      i :=j + 1;
-      if normalized then
-        while i <= nc loop
-          if i > 1 then
-            s := s + "*";
-          end if;
-          if Math.isEqual(cs[i], 1.0, eps) then
-             s := s + "(";
-          elseif Math.isEqual(cs[i], -1.0, eps) then
-             s := s + "(-";
-          else
-             s := s + "(" + String(cs[i], significantDigits=significantDigits) + "*";
-          end if;
-          s :=s + name + " + 1)";
-          j2 := sameVectorElements(cs, i);
-          nj := j2 - i + 1;
-          if nj > 1 then
-            s := s + "^" + String(nj);
-          end if;
-          i := j2 + 1;
-        end while;
-      else
-        while i <= nc loop
-          if i > 1 then
-            s := s + "*";
-          end if;
-          if cs[i] > 0 then
-             s := s + "(" + name + " + ";
-          else
-             s := s + "(" + name + " - ";
-          end if;
-          s  := s + String(abs(cs[i]), significantDigits=significantDigits) + ")";
-          j2 := sameVectorElements(cs, i);
-          nj := j2 - i + 1;
-          if nj > 1 then
-            s := s + "^" + String(nj);
-          end if;
-          i := j2 + 1;
-        end while;
-      end if;
-    end firstOrderToString;
-
-    function secondOrderToString
-      "Transform vector of coefficients of second order polynomials to a string representation"
-      import Modelica_LinearSystems2.Math.Matrices;
-      import Modelica_LinearSystems2.Math;
-
-      input Real c[:,2]=fill(0.0,0,2)
-        "[p,p^0] coefficients osecond order polynomials: polynom(p) = p^2 + c[:,1]*p + c[:,2]";
-      input Integer significantDigits=6
-        "Number of significant digits that are shown";
-      input String name="p" "Independent variable name used for printing";
-      input Boolean normalized=false
-        "= true, the polynomials in the string are represented as p^2/c[:,2] + c[:,1]/c[:,2]*p + 1, provided c[i,2]<>0";
-      output String s="";
-      output Real gain=1.0
-        "If normalized=true, the product(c[i,2]) (for i, where c[i,2]<>0), otherwise gain=1.0";
-    protected
-      Integer nc=size(c, 1);
-      Real cs[nc,2];
-      Real cc[nc,2];
-      Integer i=1;
-      Integer j;
-      Integer nj;
-      constant Real smallNumber = 100*Modelica.Constants.small;
-      constant Real eps = 10*Modelica.Constants.eps;
-    algorithm
-      // Change coefficients, if normalized output, and sort them
-      for i in 1:nc loop
-         if Math.isEqual(c[i,2], 0.0, smallNumber) then
-            cs[i,1] := c[i,1];
-            cs[i,2] := 0.0;
-         elseif normalized then
-            cs[i,1] := 1/c[i,2];
-            cs[i,2] := c[i,1]/c[i,2];
-            gain := gain*c[i,2];
-         else
-            cs[i,1] := c[i,1];
-            cs[i,2] := c[i,2];
-         end if;
-      end for;
-      cc :=Modelica.Math.Matrices.sort(cs);
-
-    // Generate string
-    if normalized then
-      while i <= nc loop
-        if i > 1 then
-          s := s + "*";
-        end if;
-        j := sameMatrixRows(cc, i);
-        nj := j - i + 1;
-        if cc[i, 1] == 0.0 and cc[i, 2] == 0.0 then
-          // case p^2
-          s := s + name + "^" + String(2*nj);
-        else
-          // b*p^2 term
-          if Math.isEqual(cc[i, 1], 1.0) then
-            s := s + "(" + name + "^2";
-          elseif Math.isEqual(cc[i, 1], -1.0) then
-            s := s + "(-" + name + "^2";
-          else
-            s := s + "(" + String(cc[i, 1], significantDigits=significantDigits) +
-              "*" + name + "^2";
-          end if;
-
-          // a*p term
-          if cc[i, 2] == 0.0 then
-             s := s + " + 1)";
-          else
-             if Math.isEqual(cc[i, 2], 1.0, eps) then
-                s := s + " + ";
-             elseif Math.isEqual(cc[i, 2], -1.0, eps) then
-                s := s + " - ";
-             elseif cc[i, 2] >= 0.0 then
-                s := s + " + " + String(cc[i, 2], significantDigits=significantDigits) + "*";
-             else
-                s := s + " - " + String(-cc[i, 2], significantDigits=significantDigits) + "*";
-             end if;
-             s := s + name + " + 1)";
-          end if;
-          if nj > 1 then
-            s := s + "^" + String(nj);
-          end if;
-        end if;
-        i := j + 1;
-      end while;
-
-    else
-      while i <= nc loop
-        if i > 1 then
-          s := s + "*";
-        end if;
-        j := sameMatrixRows(cc, i);
-        nj := j - i + 1;
-        if cc[i, 1] == 0 and cc[i, 2] == 0 then
-          // case p^2
-          s := s + name + "^" + String(2*nj);
-        else
-          s := s + "(" + name + "^2";
-
-          // b*p term
-          if cc[i, 1] == 1.0 then
-            s := s + " + " + name;
-          elseif cc[i, 1] == -1.0 then
-            s := s + " - " + name;
-          elseif cc[i, 1] <> 0.0 then
-            if cc[i, 1] > 0 then
-              s := s + " + ";
-            else
-              s := s + " - ";
-            end if;
-            s := s + String(abs(cc[i, 1]), significantDigits=significantDigits) +
-              "*" + name;
-          end if;
-
-          // a*p^0 term
-          if (cc[i, 2]) > 0.0 then
-            s := s + " + " + String(cc[i, 2], significantDigits=significantDigits) + ")";
-          elseif (cc[i, 2]) < 0.0 then
-            s := s + " - " + String(-cc[i, 2], significantDigits=significantDigits) + ")";
-          else
-            s := s + ")";
-          end if;
-          if nj > 1 then
-            s := s + "^" + String(nj);
-          end if;
-        end if;
-        i := j + 1;
-       end while;
-    end if;
-    end secondOrderToString;
-
-    encapsulated function normalizationFactor
-      "Compute correction factor of low pass filter such that amplitude at cut-off frequency is -3db (=10^(-3/20) = 0.70794...)"
-      import Modelica;
-      import Modelica.Utilities.Streams;
-
-      input Real c1[:]
-        "[p] coefficients of denominator polynomials (c1[i}*p + 1)";
-      input Real c2[:,2]
-        "[p^2, p] coefficients of denominator polynomials (c2[i,1]*p^2 + c2[i,2]*p + 1)";
-      output Real alpha "Correction factor (replace p by alpha*p)";
-    protected
-      Real alpha_min;
-      Real alpha_max;
-
-      function normalizationResidue "Residue of correction factor computation"
-        input Real c1[:]
-          "[p] coefficients of denominator polynomials (c1[i]*p + 1)";
-        input Real c2[:,2]
-          "[p^2, p] coefficients of denominator polynomials (c2[i,1]*p^2 + c2[i,2]*p + 1)";
-        input Real alpha;
-        output Real residue;
-      protected
-        constant Real beta= 10^(-3/20)
-          "Amplitude of -3db required, i.e. -3db = 20*log(beta)";
-        Real cc1;
-        Real cc2;
-        Real p;
-        Real alpha2=alpha*alpha;
-        Real alpha4=alpha2*alpha2;
-        Real A2=1.0;
-      algorithm
-        assert(size(c1,1) <= 1, "Internal error 2 (should not occur)");
-        if size(c1, 1) == 1 then
-          cc1 := c1[1]*c1[1];
-          p := 1 + cc1*alpha2;
-          A2 := A2*p;
-        end if;
-        for i in 1:size(c2, 1) loop
-          cc1 := c2[i, 2]*c2[i, 2] - 2*c2[i, 1];
-          cc2 := c2[i, 1]*c2[i, 1];
-          p := 1 + cc1*alpha2 + cc2*alpha4;
-          A2 := A2*p;
-        end for;
-        residue := 1/sqrt(A2) - beta;
-      end normalizationResidue;
-
-      function findInterval "Find interval for the root"
-        input Real c1[:]
-          "[p] coefficients of denominator polynomials (a*p + 1)";
-        input Real c2[:,2]
-          "[p^2, p] coefficients of denominator polynomials (b*p^2 + a*p + 1)";
-        output Real alpha_min;
-        output Real alpha_max;
-      protected
-        Real alpha = 1.0;
-        Real residue;
-      algorithm
-        alpha_min :=0;
-        residue := normalizationResidue(c1, c2, alpha);
-        if residue < 0 then
-           alpha_max :=alpha;
-        else
-           while residue >= 0 loop
-              alpha := 1.1*alpha;
-              residue := normalizationResidue(c1, c2, alpha);
-           end while;
-           alpha_max :=alpha;
-        end if;
-      end findInterval;
-
-    function solveOneNonlinearEquation
-        "Solve f(u) = 0; f(u_min) and f(u_max) must have different signs"
-      import Modelica.Utilities.Streams.error;
-
-      input Real c1[:]
-          "[p] coefficients of denominator polynomials (c1[i]*p + 1)";
-      input Real c2[:,2]
-          "[p^2, p] coefficients of denominator polynomials (c2[i,1]*p^2 + c2[i,2]*p + 1)";
-      input Real u_min "Lower bound of search intervall";
-      input Real u_max "Upper bound of search intervall";
-      input Real tolerance=100*Modelica.Constants.eps
-          "Relative tolerance of solution u";
-      output Real u "Value of independent variable so that f(u) = 0";
-
-      protected
-      constant Real eps=Modelica.Constants.eps "machine epsilon";
-      Real a=u_min "Current best minimum interval value";
-      Real b=u_max "Current best maximum interval value";
-      Real c "Intermediate point a <= c <= b";
-      Real d;
-      Real e "b - a";
-      Real m;
-      Real s;
-      Real p;
-      Real q;
-      Real r;
-      Real tol;
-      Real fa "= f(a)";
-      Real fb "= f(b)";
-      Real fc;
-      Boolean found=false;
-    algorithm
-      // Check that f(u_min) and f(u_max) have different sign
-      fa := normalizationResidue(c1,c2,u_min);
-      fb := normalizationResidue(c1,c2,u_max);
-      fc := fb;
-      if fa > 0.0 and fb > 0.0 or fa < 0.0 and fb < 0.0 then
-        error(
-          "The arguments u_min and u_max to solveOneNonlinearEquation(..)\n" +
-          "do not bracket the root of the single non-linear equation:\n" +
-          "  u_min  = " + String(u_min) + "\n" + "  u_max  = " + String(u_max)
-           + "\n" + "  fa = f(u_min) = " + String(fa) + "\n" +
-          "  fb = f(u_max) = " + String(fb) + "\n" +
-          "fa and fb must have opposite sign which is not the case");
-      end if;
-
-      // Initialize variables
-      c := a;
-      fc := fa;
-      e := b - a;
-      d := e;
-
-      // Search loop
-      while not found loop
-        if abs(fc) < abs(fb) then
-          a := b;
-          b := c;
-          c := a;
-          fa := fb;
-          fb := fc;
-          fc := fa;
-        end if;
-
-        tol := 2*eps*abs(b) + tolerance;
-        m := (c - b)/2;
-
-        if abs(m) <= tol or fb == 0.0 then
-          // root found (interval is small enough)
-          found := true;
-          u := b;
-        else
-          // Determine if a bisection is needed
-          if abs(e) < tol or abs(fa) <= abs(fb) then
-            e := m;
-            d := e;
-          else
-            s := fb/fa;
-            if a == c then
-              // linear interpolation
-              p := 2*m*s;
-              q := 1 - s;
-            else
-              // inverse quadratic interpolation
-              q := fa/fc;
-              r := fb/fc;
-              p := s*(2*m*q*(q - r) - (b - a)*(r - 1));
-              q := (q - 1)*(r - 1)*(s - 1);
-            end if;
-
-            if p > 0 then
-              q := -q;
-            else
-              p := -p;
-            end if;
-
-            s := e;
-            e := d;
-            if 2*p < 3*m*q - abs(tol*q) and p < abs(0.5*s*q) then
-              // interpolation successful
-              d := p/q;
-            else
-              // use bi-section
-              e := m;
-              d := e;
-            end if;
-          end if;
-
-          // Best guess value is defined as "a"
-          a := b;
-          fa := fb;
-          b := b + (if abs(d) > tol then d else if m > 0 then tol else -tol);
-          fb := normalizationResidue(c1,c2,b);
-
-          if fb > 0 and fc > 0 or fb < 0 and fc < 0 then
-            // initialize variables
-            c := a;
-            fc := fa;
-            e := b - a;
-            d := e;
-          end if;
-        end if;
-      end while;
-
-      annotation (Documentation(info="<html>
-
-<p>
-This function determines the solution of <b>one non-linear algebraic equation</b> \"y=f(u)\"
-in <b>one unknown</b> \"u\" in a reliable way. It is one of the best numerical
-algorithms for this purpose. As input, the nonlinear function f(u)
-has to be given, as well as an interval u_min, u_max that
-contains the solution, i.e., \"f(u_min)\" and \"f(u_max)\" must
-have a different sign. If possible, a smaller interval is computed by
-inverse quadratic interpolation (interpolating with a quadratic polynomial
-through the last 3 points and computing the zero). If this fails,
-bisection is used, which always reduces the interval by a factor of 2.
-The inverse quadratic interpolation method has superlinear convergence.
-This is roughly the same convergence rate as a globally convergent Newton
-method, but without the need to compute derivatives of the non-linear
-function. The solver function is a direct mapping of the Algol 60 procedure
-\"zero\" to Modelica, from:
-</p>
-
-<dl>
-<dt> Brent R.P.:</dt>
-<dd> <b>Algorithms for Minimization without derivatives</b>.
-     Prentice Hall, 1973, pp. 58-59.</dd>
-</dl>
-
-</html>"));
-    end solveOneNonlinearEquation;
-
-    algorithm
-       // Find interval for alpha
-       (alpha_min, alpha_max) :=findInterval(c1, c2);
-
-       // Compute alpha, so that abs(G(p)) = -3db
-       alpha :=solveOneNonlinearEquation(
-        c1,
-        c2,
-        alpha_min,
-        alpha_max);
-    end normalizationFactor;
 
     function BesselCoefficients
       "Return coefficients of normalized low pass Bessel filter (= gain at cut-off frequency 1 rad/s is decreased 3dB"
@@ -6386,6 +5413,1340 @@ results from <blockquote><pre> a = -1/alpha </pre></blockquote> and
 "));
     end BesselCoefficients;
 
+    encapsulated function normalizationFactor
+      "Compute correction factor of low pass filter such that amplitude at cut-off frequency is -3db (=10^(-3/20) = 0.70794...)"
+      import Modelica;
+      import Modelica.Utilities.Streams;
+
+      input Real c1[:]
+        "[p] coefficients of denominator polynomials (c1[i}*p + 1)";
+      input Real c2[:,2]
+        "[p^2, p] coefficients of denominator polynomials (c2[i,1]*p^2 + c2[i,2]*p + 1)";
+      output Real alpha "Correction factor (replace p by alpha*p)";
+    protected
+      Real alpha_min;
+      Real alpha_max;
+
+      function normalizationResidue "Residue of correction factor computation"
+        input Real c1[:]
+          "[p] coefficients of denominator polynomials (c1[i]*p + 1)";
+        input Real c2[:,2]
+          "[p^2, p] coefficients of denominator polynomials (c2[i,1]*p^2 + c2[i,2]*p + 1)";
+        input Real alpha;
+        output Real residue;
+      protected
+        constant Real beta= 10^(-3/20)
+          "Amplitude of -3db required, i.e. -3db = 20*log(beta)";
+        Real cc1;
+        Real cc2;
+        Real p;
+        Real alpha2=alpha*alpha;
+        Real alpha4=alpha2*alpha2;
+        Real A2=1.0;
+      algorithm
+        assert(size(c1,1) <= 1, "Internal error 2 (should not occur)");
+        if size(c1, 1) == 1 then
+          cc1 := c1[1]*c1[1];
+          p := 1 + cc1*alpha2;
+          A2 := A2*p;
+        end if;
+        for i in 1:size(c2, 1) loop
+          cc1 := c2[i, 2]*c2[i, 2] - 2*c2[i, 1];
+          cc2 := c2[i, 1]*c2[i, 1];
+          p := 1 + cc1*alpha2 + cc2*alpha4;
+          A2 := A2*p;
+        end for;
+        residue := 1/sqrt(A2) - beta;
+      end normalizationResidue;
+
+      function findInterval "Find interval for the root"
+        input Real c1[:]
+          "[p] coefficients of denominator polynomials (a*p + 1)";
+        input Real c2[:,2]
+          "[p^2, p] coefficients of denominator polynomials (b*p^2 + a*p + 1)";
+        output Real alpha_min;
+        output Real alpha_max;
+      protected
+        Real alpha = 1.0;
+        Real residue;
+      algorithm
+        alpha_min :=0;
+        residue := normalizationResidue(c1, c2, alpha);
+        if residue < 0 then
+           alpha_max :=alpha;
+        else
+           while residue >= 0 loop
+              alpha := 1.1*alpha;
+              residue := normalizationResidue(c1, c2, alpha);
+           end while;
+           alpha_max :=alpha;
+        end if;
+      end findInterval;
+
+    function solveOneNonlinearEquation
+        "Solve f(u) = 0; f(u_min) and f(u_max) must have different signs"
+      import Modelica.Utilities.Streams.error;
+
+      input Real c1[:]
+          "[p] coefficients of denominator polynomials (c1[i]*p + 1)";
+      input Real c2[:,2]
+          "[p^2, p] coefficients of denominator polynomials (c2[i,1]*p^2 + c2[i,2]*p + 1)";
+      input Real u_min "Lower bound of search intervall";
+      input Real u_max "Upper bound of search intervall";
+      input Real tolerance=100*Modelica.Constants.eps
+          "Relative tolerance of solution u";
+      output Real u "Value of independent variable so that f(u) = 0";
+
+      protected
+      constant Real eps=Modelica.Constants.eps "machine epsilon";
+      Real a=u_min "Current best minimum interval value";
+      Real b=u_max "Current best maximum interval value";
+      Real c "Intermediate point a <= c <= b";
+      Real d;
+      Real e "b - a";
+      Real m;
+      Real s;
+      Real p;
+      Real q;
+      Real r;
+      Real tol;
+      Real fa "= f(a)";
+      Real fb "= f(b)";
+      Real fc;
+      Boolean found=false;
+    algorithm
+      // Check that f(u_min) and f(u_max) have different sign
+      fa := normalizationResidue(c1,c2,u_min);
+      fb := normalizationResidue(c1,c2,u_max);
+      fc := fb;
+      if fa > 0.0 and fb > 0.0 or fa < 0.0 and fb < 0.0 then
+        error(
+          "The arguments u_min and u_max to solveOneNonlinearEquation(..)\n" +
+          "do not bracket the root of the single non-linear equation:\n" +
+          "  u_min  = " + String(u_min) + "\n" + "  u_max  = " + String(u_max)
+           + "\n" + "  fa = f(u_min) = " + String(fa) + "\n" +
+          "  fb = f(u_max) = " + String(fb) + "\n" +
+          "fa and fb must have opposite sign which is not the case");
+      end if;
+
+      // Initialize variables
+      c := a;
+      fc := fa;
+      e := b - a;
+      d := e;
+
+      // Search loop
+      while not found loop
+        if abs(fc) < abs(fb) then
+          a := b;
+          b := c;
+          c := a;
+          fa := fb;
+          fb := fc;
+          fc := fa;
+        end if;
+
+        tol := 2*eps*abs(b) + tolerance;
+        m := (c - b)/2;
+
+        if abs(m) <= tol or fb == 0.0 then
+          // root found (interval is small enough)
+          found := true;
+          u := b;
+        else
+          // Determine if a bisection is needed
+          if abs(e) < tol or abs(fa) <= abs(fb) then
+            e := m;
+            d := e;
+          else
+            s := fb/fa;
+            if a == c then
+              // linear interpolation
+              p := 2*m*s;
+              q := 1 - s;
+            else
+              // inverse quadratic interpolation
+              q := fa/fc;
+              r := fb/fc;
+              p := s*(2*m*q*(q - r) - (b - a)*(r - 1));
+              q := (q - 1)*(r - 1)*(s - 1);
+            end if;
+
+            if p > 0 then
+              q := -q;
+            else
+              p := -p;
+            end if;
+
+            s := e;
+            e := d;
+            if 2*p < 3*m*q - abs(tol*q) and p < abs(0.5*s*q) then
+              // interpolation successful
+              d := p/q;
+            else
+              // use bi-section
+              e := m;
+              d := e;
+            end if;
+          end if;
+
+          // Best guess value is defined as "a"
+          a := b;
+          fa := fb;
+          b := b + (if abs(d) > tol then d else if m > 0 then tol else -tol);
+          fb := normalizationResidue(c1,c2,b);
+
+          if fb > 0 and fc > 0 or fb < 0 and fc < 0 then
+            // initialize variables
+            c := a;
+            fc := fa;
+            e := b - a;
+            d := e;
+          end if;
+        end if;
+      end while;
+
+      annotation (Documentation(info="<html>
+
+<p>
+This function determines the solution of <b>one non-linear algebraic equation</b> \"y=f(u)\"
+in <b>one unknown</b> \"u\" in a reliable way. It is one of the best numerical
+algorithms for this purpose. As input, the nonlinear function f(u)
+has to be given, as well as an interval u_min, u_max that
+contains the solution, i.e., \"f(u_min)\" and \"f(u_max)\" must
+have a different sign. If possible, a smaller interval is computed by
+inverse quadratic interpolation (interpolating with a quadratic polynomial
+through the last 3 points and computing the zero). If this fails,
+bisection is used, which always reduces the interval by a factor of 2.
+The inverse quadratic interpolation method has superlinear convergence.
+This is roughly the same convergence rate as a globally convergent Newton
+method, but without the need to compute derivatives of the non-linear
+function. The solver function is a direct mapping of the Algol 60 procedure
+\"zero\" to Modelica, from:
+</p>
+
+<dl>
+<dt> Brent R.P.:</dt>
+<dd> <b>Algorithms for Minimization without derivatives</b>.
+     Prentice Hall, 1973, pp. 58-59.</dd>
+</dl>
+
+</html>"));
+    end solveOneNonlinearEquation;
+
+    algorithm
+       // Find interval for alpha
+       (alpha_min, alpha_max) :=findInterval(c1, c2);
+
+       // Compute alpha, so that abs(G(p)) = -3db
+       alpha :=solveOneNonlinearEquation(
+        c1,
+        c2,
+        alpha_min,
+        alpha_max);
+    end normalizationFactor;
+
+    function filterToNormalized
+      "Given [p^2,p] and [p] coefficients, transform to normalized form with highest power of p equal 1"
+
+      input Real c1[:] "[p] coefficients of polynomials (c1[i]*p + 1)";
+      input Real c2[:,2]
+        "[p^2, p] coefficients of polynomials (c2[i,1]*p^2 + c2[i,2]*p + 1)";
+      output Real n1[size(c1, 1)]
+        "[p^0] coefficients of polynomials c1[i]*(p+1/c1[i])";
+      output Real n2[size(c2, 1),2]
+        "[p, p^0] coefficients of polynomials c2[i,1]*(p^2 + (c2[i,2]/c2[i,1])*p + (1/c2[i,1]))";
+      output Real k "Gain (product(1/c1[i])*(1/c2[i,1])";
+    algorithm
+      k := 1.0;
+      for i in 1:size(c1, 1) loop
+        k := k*c1[i];
+        n1[i] := 1/c1[i];
+      end for;
+
+      for i in 1:size(c2, 1) loop
+        k := k*c2[i, 1];
+        n2[i, 1] := c2[i, 2]/c2[i, 1];
+        n2[i, 2] := 1/c2[i, 1];
+      end for;
+    end filterToNormalized;
+
+    encapsulated function bandPassAlpha "Return alpha for band pass"
+       import Modelica;
+       input Real a "Coefficient of p^1";
+       input Real b "Coefficient of p^0";
+       input Modelica.SIunits.AngularVelocity w "Bandwidth angular frequency";
+       output Real alpha "Alpha factor to build up band pass";
+
+    protected
+      Real alpha_min;
+      Real alpha_max;
+      Real z_min;
+      Real z_max;
+      Real z;
+
+      function residue "Residue of non-linear equation"
+        input Real a;
+        input Real b;
+        input Real w;
+        input Real z;
+        output Real res;
+      algorithm
+        res := z^2 + (a*w*z/(1+z))^2 - (2+b*w^2)*z + 1;
+      end residue;
+
+    function solveOneNonlinearEquation
+        "Solve f(u) = 0; f(u_min) and f(u_max) must have different signs"
+      import Modelica.Utilities.Streams.error;
+
+      input Real aa;
+      input Real bb;
+      input Real ww;
+      input Real u_min "Lower bound of search intervall";
+      input Real u_max "Upper bound of search intervall";
+      input Real tolerance=100*Modelica.Constants.eps
+          "Relative tolerance of solution u";
+      output Real u "Value of independent variable so that f(u) = 0";
+
+      protected
+      constant Real eps=Modelica.Constants.eps "machine epsilon";
+      Real a=u_min "Current best minimum interval value";
+      Real b=u_max "Current best maximum interval value";
+      Real c "Intermediate point a <= c <= b";
+      Real d;
+      Real e "b - a";
+      Real m;
+      Real s;
+      Real p;
+      Real q;
+      Real r;
+      Real tol;
+      Real fa "= f(a)";
+      Real fb "= f(b)";
+      Real fc;
+      Boolean found=false;
+    algorithm
+      // Check that f(u_min) and f(u_max) have different sign
+      fa := residue(aa,bb,ww,u_min);
+      fb := residue(aa,bb,ww,u_max);
+      fc := fb;
+      if fa > 0.0 and fb > 0.0 or fa < 0.0 and fb < 0.0 then
+        error(
+          "The arguments u_min and u_max to solveOneNonlinearEquation(..)\n" +
+          "do not bracket the root of the single non-linear equation:\n" +
+          "  u_min  = " + String(u_min) + "\n" + "  u_max  = " + String(u_max)
+           + "\n" + "  fa = f(u_min) = " + String(fa) + "\n" +
+          "  fb = f(u_max) = " + String(fb) + "\n" +
+          "fa and fb must have opposite sign which is not the case");
+      end if;
+
+      // Initialize variables
+      c := a;
+      fc := fa;
+      e := b - a;
+      d := e;
+
+      // Search loop
+      while not found loop
+        if abs(fc) < abs(fb) then
+          a := b;
+          b := c;
+          c := a;
+          fa := fb;
+          fb := fc;
+          fc := fa;
+        end if;
+
+        tol := 2*eps*abs(b) + tolerance;
+        m := (c - b)/2;
+
+        if abs(m) <= tol or fb == 0.0 then
+          // root found (interval is small enough)
+          found := true;
+          u := b;
+        else
+          // Determine if a bisection is needed
+          if abs(e) < tol or abs(fa) <= abs(fb) then
+            e := m;
+            d := e;
+          else
+            s := fb/fa;
+            if a == c then
+              // linear interpolation
+              p := 2*m*s;
+              q := 1 - s;
+            else
+              // inverse quadratic interpolation
+              q := fa/fc;
+              r := fb/fc;
+              p := s*(2*m*q*(q - r) - (b - a)*(r - 1));
+              q := (q - 1)*(r - 1)*(s - 1);
+            end if;
+
+            if p > 0 then
+              q := -q;
+            else
+              p := -p;
+            end if;
+
+            s := e;
+            e := d;
+            if 2*p < 3*m*q - abs(tol*q) and p < abs(0.5*s*q) then
+              // interpolation successful
+              d := p/q;
+            else
+              // use bi-section
+              e := m;
+              d := e;
+            end if;
+          end if;
+
+          // Best guess value is defined as "a"
+          a := b;
+          fa := fb;
+          b := b + (if abs(d) > tol then d else if m > 0 then tol else -tol);
+          fb := residue(aa,bb,ww,b);
+
+          if fb > 0 and fc > 0 or fb < 0 and fc < 0 then
+            // initialize variables
+            c := a;
+            fc := fa;
+            e := b - a;
+            d := e;
+          end if;
+        end if;
+      end while;
+
+      annotation (Documentation(info="<html>
+
+<p>
+This function determines the solution of <b>one non-linear algebraic equation</b> \"y=f(u)\"
+in <b>one unknown</b> \"u\" in a reliable way. It is one of the best numerical
+algorithms for this purpose. As input, the nonlinear function f(u)
+has to be given, as well as an interval u_min, u_max that
+contains the solution, i.e., \"f(u_min)\" and \"f(u_max)\" must
+have a different sign. If possible, a smaller interval is computed by
+inverse quadratic interpolation (interpolating with a quadratic polynomial
+through the last 3 points and computing the zero). If this fails,
+bisection is used, which always reduces the interval by a factor of 2.
+The inverse quadratic interpolation method has superlinear convergence.
+This is roughly the same convergence rate as a globally convergent Newton
+method, but without the need to compute derivatives of the non-linear
+function. The solver function is a direct mapping of the Algol 60 procedure
+\"zero\" to Modelica, from:
+</p>
+
+<dl>
+<dt> Brent R.P.:</dt>
+<dd> <b>Algorithms for Minimization without derivatives</b>.
+     Prentice Hall, 1973, pp. 58-59.</dd>
+</dl>
+
+</html>"));
+    end solveOneNonlinearEquation;
+
+    algorithm
+      assert( a^2/4 - b <= 0,  "Band pass transformation cannot be computed");
+      z :=solveOneNonlinearEquation(a, b, w, 0, 1);
+      alpha := sqrt(z);
+
+      annotation (Documentation(info="<html>
+<p>
+A band pass with bandwidth \"w\" is determined from a low pass 
+</p>
+
+<pre>
+  1/(p^2 + a*p + b) 
+</pre>
+
+<p>
+with the transformation
+</p>
+
+<pre>
+  new(p) = (p + 1/p)/w 
+</pre>
+
+<p>
+This results in the following derivation:
+</p>
+
+<pre>
+  1/(p^2 + a*p + b) -> 1/( (p+1/p)^2/w^2 + a*(p + 1/p)/w + b )
+                     = 1 / ( p^2 + 1/p^2 + 2)/w^2 + (p + 1/p)*a/w + b )
+                     = w^2*p^2 / (p^4 + 2*p^2 + 1 + (p^3 + p)a*w + b*w^2*p^2)
+                     = w^2*p^2 / (p^4 + a*w*p^3 + (2+b*w^2)*p^2 + a*w*p + 1)
+</pre>
+
+<p>
+This 4th order transfer function shall be split in to two transfer functions of order 2 each
+for numerical reasons. With the following formulation, the fourth order 
+polynomial can be represented (with the unknowns \"c\" and \"alpha\"):
+</p>
+
+<pre>
+  g(p) = w^2*p^2 / ( (p*alpha)^2 + c*(p*alpha) + 1) * (p/alpha)^2 + c*(p/alpha) + 1)
+       = w^2*p^2 / ( p^4 + c*(alpha + 1/alpha)*p^3 + (alpha^2 + 1/alpha^2 + c^2)*p^2
+                                                   + c*(alpha + 1/alpha)*p + 1 )
+</pre>
+
+<p>
+Comparison of coefficients:
+</p>
+
+<pre>
+  c*(alpha + 1/alpha) = a*w           -> c = a*w / (alpha + 1/alpha)
+  alpha^2 + 1/alpha^2 + c^2 = 2+b*w^2 -> equation to determine alpha
+
+  alpha^4 + 1 + a^2*w^2*alpha^4/(1+alpha^2)^2 = (2+b*w^2)*alpha^2
+    or z = alpha^2
+  z^2 + a^2*w^2*z^2/(1+z)^2 - (2+b*w^2)*z + 1 = 0
+</pre>
+
+<p>
+Therefore the last equation has to be solved for \"z\" (basically, this means to compute
+a real zero of a fourth order polynomal):
+</p>
+
+<pre>
+   solve: 0 = f(z)  = z^2 + a^2*w^2*z^2/(1+z)^2 - (2+b*w^2)*z + 1  for \"z\"
+              f(0)  = 1  &gt; 0
+              f(1)  = 1 + a^2*w^2/4 - (2+b*w^2) + 1
+                    = (a^2/4 - b)*w^2  // must be &lt; 0
+</pre>
+
+<p>
+This function computes the solution of this equation and returns \"alpha = z^2\" and \"c\";
+</p>
+
+</html>"));
+    end bandPassAlpha;
+
+  encapsulated function filter
+      "Generate the data record of a ZerosAndPoles transfer function from a filter description"
+
+      import Modelica;
+      import Modelica.Utilities.Streams;
+      import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Types;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+
+      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+      import Modelica.Math.*;
+      import Modelica_LinearSystems2.Math.*;
+
+    input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
+        "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+    input Modelica_LinearSystems2.Types.FilterType filterType=Types.FilterType.LowPass
+        "Type of filter (LowPass/HighPass)";
+    input Integer order(min=1) = 2 "Order of filter";
+    input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
+        "Cut-off frequency (default is w_cut = 1 rad/s)";
+    input Real gain=1.0
+        "Gain (= amplitude of frequency response at zero frequency)";
+    input Real A_ripple(unit="dB") = 0.5
+        "Pass band ripple for Chebyshev filter (otherwise not used)";
+    input Boolean normalized=true
+        "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
+    output Internal.ZerosAndPoles filter(
+      redeclare Real n1[if filterType == Types.FilterType.LowPass then 0 else (
+        if analogFilter == Types.AnalogFilter.CriticalDamping then order else
+        mod(order, 2))],
+      redeclare Real n2[if filterType == Types.FilterType.LowPass then 0 else (
+        if analogFilter == Types.AnalogFilter.CriticalDamping then 0 else
+        integer(order/2)),2],
+      redeclare Real d1[if analogFilter == Types.AnalogFilter.CriticalDamping then
+              order else mod(order, 2)],
+      redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then
+              0 else integer(order/2),2]) "Filter transfer function";
+
+    protected
+    Integer n_num1=size(filter.n1, 1);
+    Integer n_num2=size(filter.n2, 1);
+    Integer n_den1=size(filter.d1, 1);
+    Integer n_den2=size(filter.d2, 1);
+    Integer n_num=n_num1 + 2*n_num2;
+    Integer n_den=n_den1 + 2*n_den2;
+    Real pi=Modelica.Constants.pi;
+    Boolean evenOrder=mod(order, 2) == 0
+        "= true, if even filter order (otherwise uneven)";
+    Modelica.SIunits.AngularVelocity w_cut=2*pi*f_cut
+        "Cut-off angular frequency";
+    Real w_cut2 "= w_cut*w_cut";
+    Real alpha=1.0 "Frequency correction factor";
+    Real alpha2 "= alpha*alpha";
+
+    Real alphax;
+
+    Real epsilon "Ripple size";
+    Real fac "arsinh(epsilon)";
+    Real A2 "poleReal^2 + poleImag^2";
+    Real A "Amplitude at w_cut";
+    Real num1[n_num1]
+        "[p] coefficients of numerator first order polynomials (a*p + 1)";
+    Real num2[n_num2,2]
+        "[p^2, p] coefficients of numerator second order polynomials (b*p^2 + a*p + 1I)";
+    Real den1[n_den1]
+        "[p] coefficients of denominator first order polynomials (a*p + 1)";
+    Real den2[n_den2,2]
+        "[p^2, p] coefficients of denominator second order polynomials (b*p^2 + a*p + 1I)";
+    Real aux;
+    Real k;
+  algorithm
+    // Set properties that are common for all filters
+    filter.k := gain;
+
+    /* Compute filter coefficients of prototype low pass filter. If another filter
+     characteristics is desired (e.g. high pass filter), it is derived
+     from the low pass filter coefficients below
+  */
+    if analogFilter == Types.AnalogFilter.CriticalDamping then
+      if normalized then
+        alpha := sqrt(2^(1/order) - 1);
+  //alpha := sqrt(10^(3/10/order)-1)
+      else
+        alpha := 1;
+      end if;
+      for i in 1:n_den1 loop
+        den1[i] := alpha;
+      end for;
+
+    elseif analogFilter == Types.AnalogFilter.Bessel then
+      (den1,den2,alpha) := Internal.BesselCoefficients(order);
+      if not normalized then
+        alpha2 := alpha*alpha;
+        for i in 1:n_den2 loop
+          den2[i, 1] := den2[i, 1]*alpha2;
+          den2[i, 2] := den2[i, 2]*alpha;
+        end for;
+        if not evenOrder then
+          den1[1] := den1[1]*alpha;
+        end if;
+      end if;
+
+    elseif analogFilter == Types.AnalogFilter.Butterworth then
+       // Original filter is already normalized
+      for i in 1:n_den2 loop
+        den2[i, 1] := 1.0;
+        den2[i, 2] := -2*cos(pi*(0.5 + (i - 0.5)/order));
+      end for;
+      if not evenOrder then
+        den1[1] := 1.0;
+      end if;
+
+    elseif analogFilter == Types.AnalogFilter.Chebyshev then
+      epsilon := sqrt(10^(A_ripple/10) - 1);
+      fac := asinh(1/epsilon)/order;
+
+      if evenOrder then
+         for i in 1:n_den2 loop
+            den2[i,1] :=1/(cosh(fac)^2 - cos((2*i - 1)*pi/(2*order))^2);
+            den2[i,2] :=2*den2[i, 1]*sinh(fac)*cos((2*i - 1)*pi/(2*order));
+         end for;
+      else
+         den1[1] := 1/sinh(fac);
+         for i in 1:n_den2 loop
+            den2[i,1] :=1/(cosh(fac)^2 - cos(i*pi/order)^2);
+            den2[i,2] :=2*den2[i, 1]*sinh(fac)*cos(i*pi/order);
+         end for;
+      end if;
+
+       /* Transformation of filter transfer function with "new(p) = alpha*p"
+        in order that the filter transfer function has an amplitude of
+        1/sqrt(2) at the cutoff frequency
+     */
+      if normalized then
+        alpha := Internal.normalizationFactor(den1, den2);
+        alpha2 := alpha*alpha;
+        for i in 1:n_den2 loop
+          den2[i, 1] := den2[i, 1]*alpha2;
+          den2[i, 2] := den2[i, 2]*alpha;
+        end for;
+        if not evenOrder then
+          den1[1] := den1[1]*alpha;
+        end if;
+      end if;
+
+    else
+      Streams.error("analogFilter (= " + String(analogFilter) +
+        ") is not supported");
+    end if;
+
+    // Compute amplitude at w=1
+  /*
+  A := 1.0;
+  for i in 1:n_den2 loop
+     A := A*(1 + den2[i,2]^2 - 2*den2[i,1]
+               + den2[i,1]^2);
+  end for;
+  for i in 1:n_den1 loop
+     A := A*(1 + den1[i]^2);
+  end for;
+  A := 1/sqrt(A);
+  print("A = " + String(A));
+*/
+
+    // Determine normalized denominator polynomials with highest power of p equal to one
+    filter.n1 := zeros(n_num1);
+    filter.n2 := zeros(n_num2, 2);
+    (filter.d1,filter.d2,k) := Internal.filterToNormalized(den1, den2);
+    filter.k := filter.k/k;
+
+    // Compute desired filter characteristics from low pass filter coefficients
+    if filterType == Types.FilterType.HighPass then
+       /* The high pass filter is derived from the low pass filter by
+        the transformation new(p) = 1/p
+        1/(p^2 + a*p + b) -> 1/((1/p)^2 + a*(1/p) + b) = (1/b)*p^2 / (p^2 + (a/b)*p + 1/b)
+        1/(p + a)         -> 1/((1/p) + a) = (1/a)*p / (p + (1/a))
+     */
+      assert(n_num1 == n_den1 and n_num2 == n_den2,
+        "Internal error 1, should not occur");
+      filter.n1 := zeros(n_num1);
+      filter.n2 := zeros(n_num2, 2);
+      for i in 1:n_num1 loop
+        filter.k := filter.k/filter.d1[i];
+        filter.d1[i] := 1/filter.d1[i];
+      end for;
+      for i in 1:n_num2 loop
+        filter.k := filter.k/filter.d2[i, 2];
+        filter.d2[i, 1] := filter.d2[i, 1]/filter.d2[i, 2];
+        filter.d2[i, 2] := 1/filter.d2[i, 2];
+      end for;
+    end if;
+
+    /* Change filter coefficients according to transformation new(p) = p/w_cut
+     Numerator  :     (p/w)^2 + a*(p/w) + b = (1/w^2)*(p^2 + (a*w)*p + b*w^2)
+                                  (p/w) + a = (1/w)*(p + w*a)
+     Denominator: 1/((p/w)^2 + a*(p/w) + b) = w^2/(p^2 + (a*w)*p + w^2/b)
+                              1/((p/w) + a) = w/(p + w*a)
+  */
+    w_cut2 := w_cut*w_cut;
+    filter.k := filter.k*w_cut^(n_den1 + 2*n_den2 - n_num1 - 2*n_num2);
+    filter.n1 := w_cut*filter.n1;
+    filter.d1 := w_cut*filter.d1;
+    filter.n2 := [w_cut*filter.n2[:, 1],w_cut2*filter.n2[:, 2]];
+    filter.d2 := [w_cut*filter.d2[:, 1],w_cut2*filter.d2[:, 2]];
+
+    annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right> filterFunction </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.ZerosAndPoles.Design.<b>filter</b>(analogFilter, filterType, order, f_cut, gain, A_ripple, normalized)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+This function constructs a ZerosAndPoles transfer function
+description of low and high pass filters.
+Typical frequency responses for the 4 supported low pass filter types
+are shown in the next figure (this figure was generated with function
+<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Examples.bodePlot_filter2\">ZerosAndPoles.Examples.bodePlot_filter2</a>):
+</p>
+<p align=\"center\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4Filters.png\">
+</p>
+<p>
+The step responses of the same low pass filters are shown in the next figure,
+starting from a steady state initial filter with initial input = 0.2:
+</p>
+<p align=\"center\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4FiltersStepResponse.png\">
+</p>
+<p>
+Obviously, the frequency responses give a somewhat wrong impression
+of the filter characteristics: Although Butterworth and Chebyshev
+filters have a significantly steeper magnitude as the
+CriticalDamping and Bessel filters, the step responses of
+the latter ones are much better. This means for example, that
+a CriticalDamping or a Bessel filter should be selected,
+if a filter is mainly used to make a non-linear inverse model
+realizable.
+</p>
+
+<p>
+Typical frequency responses for the 4 supported high pass filter types
+are shown in the next figure:
+</p>
+<p align=\"center\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/HighPassOrder4Filters.png\">
+</p>
+<p>
+The corresponding step responses of these high pass filters are
+shown in the next figure:
+</p>
+<p align=\"center\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/HighPassOrder4FiltersStepResponse.png\">
+</p>
+<p>
+All filters are available in <b>normalized</b> (default) and non-normalized form.
+In the normalized form, the amplitude of the filter transfer function
+at the cutoff frequency is 1/sqrt(2) (= 3 dB). Note, when comparing the filters
+of this function with other software systems, the setting of \"normalized\"
+has to be selected appropriately. For example, the signal processing
+toolbox of Matlab provides the filters in non-normalized form and
+therefore a comparision makes only sense, if normalized = <b>false</b>
+is set.
+
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping;
+   Integer order=2; 
+   Modelica.SIunits.Frequency f_cut=10;
+   
+   ZerosAndPoles zp_filter;
+
+<b>algorithm</b>
+    zp_filter=Modelica_LinearSystems2.ZerosAndPoles.Design.filter(
+      order=order,
+      f_cut=f_cut,
+      analogFilter=analogFilter);
+
+// zp_filter = 9530.93/( (p + 97.6265)^2 )
+</pre></blockquote>
+
+
+<h4><font color=\"#008000\">References</font></h4>
+<table>
+<tr> <td align=right>  [1] </td><td align=center>  Tietze U., and Schenk Ch.  </td>  <td> \"Halbleiter-Schaltungstechnik\"  </td> <td> Springer Verlag, 12. Auflage, pp. 815-852, 2002. </td></tr>
+</table>
+
+</html> "));
+  end filter;
+
+    function findMatrixName
+      input String filename;
+      input String matName="z";
+
+      output Integer m;
+
+    external "C" m = findMatrixName(
+            filename,
+            matName,
+            "NoClass");
+
+      annotation (Include="#include <matrixop.h> 
+#include <matrixop.c> 
+ 
+ 
+#if !defined(DYMOLA_DSPACE) && !defined(NO_FILE)
+#include <amat.h>
+#include <sprwat.h>
+#endif
+ 
+extern int findMatrixName(const char* fil,const char* matname, char *noClass) {
+int found=0;
+ 
+ 
+#if !defined(DYMOLA_DSPACE) && !defined(NO_FILE)
+{
+        AmatGetFile afile;
+        Amatrix amatrix;
+ 
+        int ret=amatGetOpen((char*)fil,noClass,(char*)0,&afile);
+ 
+        Assert(ret==0,amatError);
+        for(;ret==0 && !found;)  
+{
+                amatInit(&amatrix);
+                ret=amatGetMatrix(&afile, &amatrix);
+                if (ret<=1 && strcmp(matname,amatrix.name)==0)
+                  found=1;
+                else
+                  found=0;
+ 
+                amatDel(&amatrix);
+        }
+        amatGetClose(&afile);
+}
+#else
+        Assert(false, 'nn');
+#endif
+        return found;
+}");
+    end findMatrixName;
+
+  encapsulated function scaleFactor1
+      "Return scale factor for first order block"
+      import Modelica;
+    input Real n "(s+n)/(s+d)";
+    input Real d "(s+n)/(s+d)";
+    input Real small=100*Modelica.Constants.eps;
+    output Real k "= n/d, if d,n are not zero, otherwise special cases";
+  algorithm
+    k := if abs(d) > small  and abs(n) > small then abs(n)/abs(d) else 1;
+
+  end scaleFactor1;
+
+  function scaleFactor2 "Return scale factor for second order block"
+    import Modelica;
+    input Real n1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
+    input Real n2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
+    input Real d1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
+    input Real d2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
+    input Real small=100*Modelica.Constants.eps;
+    output Real k "= n2/d2, if d2,n2 are not zero, otherwise special cases";
+  algorithm
+
+    k := if abs(n2) > small and abs(d2) > small then d2/n2 else 1;
+
+  end scaleFactor2;
+
+  encapsulated function fromFile_pc
+      "Generate a zeros and poles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+
+    input String fileName="pc.mat" "Name of the zeros and poles data file"
+                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+                      caption="state space system data file")));
+
+    protected
+    input Integer n1n2d1d2[4]=
+        ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(fileName);
+    input Integer n1=n1n2d1d2[1];
+    input Integer n2=n1n2d1d2[2];
+    input Integer d1=n1n2d1d2[3];
+    input Integer d2=n1n2d1d2[4];
+    input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
+    input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
+    public
+    output ZerosAndPoles zp(
+      n1=fill(0, n1),
+      n2=fill(
+            0,
+            n2,
+            2),
+      d1=fill(0, d1),
+      d2=fill(
+            0,
+            d2,
+            2));
+
+    protected
+    Integer n1_2=if n1 > 0 then 1 else 0 "second dimension of n1-matrix";
+    Integer n2_2=if n2 > 0 then 2 else 0 "second dimension of n2-matrix";
+    Integer d1_2=if d1 > 0 then 1 else 0 "second dimension of d1-matrix";
+    Integer d2_2=if d2 > 0 then 2 else 0 "second dimension of d2-matrix";
+
+    Real k=scalar(readMatrix(
+          fileName,
+          "k",
+          1,
+          1));
+    Real n1Vector[n1]=vector(readMatrix(
+          fileName,
+          "n1",
+          n1,
+          n1_2)) "coefficients of first order numenator polynomials";
+    Real n2Matrix[n2,n2_2]=readMatrix(
+          fileName,
+          "n2",
+          n2,
+          n2_2) "coefficients of second order denominator polynomials";
+    Real d1Vector[d1]=vector(readMatrix(
+          fileName,
+          "d1",
+          d2,
+          d1_2)) "coefficients of first order denominator polynomials";
+    Real d2Matrix[d2,d2_2]=readMatrix(
+          fileName,
+          "d2",
+          d2,
+          d2_2) "coefficients of second order numenator polynomials";
+
+  algorithm
+    zp.k := k;
+    zp.n1 := if n1 > 0 then n1Vector else fill(0, 0);
+    zp.n2 := if n2 > 0 then n2Matrix else fill(
+        0,
+        0,
+        2);
+    zp.d1 := if d1 > 0 then d1Vector else fill(0, 0);
+    zp.d2 := if d2 > 0 then d2Matrix else fill(
+        0,
+        0,
+        2);
+
+  end fromFile_pc;
+
+  encapsulated function fromFile_zp
+      "Generate a zeros and poles data record by reading poles and zeros from a file (default file name is zp.mat)"
+
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
+
+    input String fileName="zp.mat" "Name of the zeros and poles data file"
+                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+                      caption="state space system data file")));
+    protected
+    input Integer n1n2d1d2[4]=
+        ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(fileName);
+    input Integer n1=n1n2d1d2[1];
+    input Integer n2=n1n2d1d2[2];
+    input Integer d1=n1n2d1d2[3];
+    input Integer d2=n1n2d1d2[4];
+    input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
+    input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
+    public
+    output ZerosAndPoles zp(
+      n1=fill(0, n1),
+      n2=fill(
+            0,
+            n2,
+            2),
+      d1=fill(0, d1),
+      d2=fill(
+            0,
+            d2,
+            2));
+
+    protected
+    Integer z_2=if zSize > 0 then 2 else 0 "second dimension of zeros-matrix";
+    Integer p_2=if pSize > 0 then 2 else 0 "second dimension of poles-matrix";
+
+    Real k=scalar(readMatrix(
+          fileName,
+          "k",
+          1,
+          1));
+    Real zerosMatrix[zSize,z_2]=readMatrix(
+          fileName,
+          "z",
+          zSize,
+          z_2) "zeros in rows of real parts and imaginary parts";
+    Real polesMatrix[pSize,p_2]=readMatrix(
+          fileName,
+          "p",
+          pSize,
+          p_2) "poles in rows of real parts and imaginary parts";
+    Complex zeros[:]=if zSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
+        zerosMatrix[:, 1], zerosMatrix[:, z_2]) else fill(Complex(0), 0);
+    Complex poles[:]=if pSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
+        polesMatrix[:, 1], polesMatrix[:, p_2]) else fill(Complex(0), 0);
+
+  algorithm
+    zp := ZerosAndPoles(
+        k=k,
+        z=zeros,
+        p=poles);
+  end fromFile_zp;
+
+    function checkRepresentation
+      "checks whether the system on file is represented by zeros and poles (z, p) or first and second order polynomials (n1, n2, d1, d2)"
+      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+      import Modelica_LinearSystems2;
+      input String fileName="zp.mat" "Name of the zeros and poles data file"
+                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+                      caption="state space system data file")));
+      output Boolean iszp=true;
+    protected
+      Integer m=0;
+
+    algorithm
+      m := Internal.findMatrixName(fileName, "z");
+      m := m + Internal.findMatrixName(fileName, "p");
+      iszp := m == 2;
+
+      annotation (Documentation(info="<html>
+The function output is true if the system is given in zeros and poles representation.
+Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1, n2, d1\" and \"d2\" respectively.
+</html>"));
+    end checkRepresentation;
+
+    function sameVectorElements "Determine identical elements of a vector"
+
+      input Real v[:] "Vector";
+      input Integer startIndex=1 "Start index";
+      output Integer endIndex=startIndex
+        "startIndex:endIndex are identical elements in v";
+    protected
+      Integer nv=size(v, 1);
+      Integer i=startIndex + 1;
+      Real v0=v[startIndex];
+    algorithm
+      while i <= nv loop
+        if v[i] == v0 then
+          endIndex := i;
+          i := i + 1;
+        else
+          i := nv + 1;
+        end if;
+      end while;
+    end sameVectorElements;
+
+    function fromRealAndImag
+      "Generate a complex vector from a real part vector and imaginary part vector "
+
+      import Modelica_LinearSystems2.Math.Complex;
+
+      input Real real[:];
+      input Real imag[size(real, 1)];
+      output Complex result[size(real, 1)] "Number of real zeros";
+    algorithm
+      for i in 1:size(real, 1) loop
+        result[i].re := real[i];
+        result[i].im := imag[i];
+      end for;
+    end fromRealAndImag;
+
+    function sameMatrixRows "Determine identical rows of a [:,2] matrix"
+
+      input Real M[:,2] "Matrix";
+      input Integer startIndex=1 "Start index";
+      output Integer endIndex=startIndex
+        "startIndex:endIndex are identical rows in M";
+    protected
+      Integer n=size(M, 1);
+      Integer i=startIndex + 1;
+      Real v0[size(M, 2)]=M[startIndex, :];
+    algorithm
+      while i <= n loop
+        if M[i, 1] == v0[1] and M[i, 2] == v0[2] then
+          endIndex := i;
+          i := i + 1;
+        else
+          i := n + 1;
+        end if;
+      end while;
+    end sameMatrixRows;
+
+    function firstOrderToString
+      "Transform vector of coefficients of first order polynomials to a string representation"
+      import Modelica_LinearSystems2.Math.Vectors;
+      import Modelica_LinearSystems2.Math;
+
+      input Real c[:] = fill(0.0,0)
+        "Coefficients of first order polynomials: polynom(p) = p + c[i]";
+      input Integer significantDigits=6
+        "Number of significant digits that are shown";
+      input String name="p" "Independent variable name used for printing";
+      input Boolean normalized=false
+        "= true, the polynomials in the string are represented as p/c[i] + 1, provided c[i]<>0";
+      output String s="";
+      output Real gain=1.0
+        "If normalized=true, the product(c[i]) (for i, where c[i]<>0), otherwise gain=1.0";
+    protected
+      Integer nc=size(c, 1);
+      Real cs[nc];
+      Real cc[nc];
+      Integer i;
+      Integer j;
+      Integer j2;
+      Integer nj;
+      Integer k;
+      constant Real smallNumber = 100*Modelica.Constants.small;
+      constant Real eps = 10*Modelica.Constants.eps;
+    algorithm
+      // Change coefficients, if normalized output, and sort them
+      for i in 1:nc loop
+         if Math.isEqual(c[i], 0.0, smallNumber) then
+            cs[i] := 0.0;
+         elseif normalized then
+            cs[i] := 1/c[i];
+            gain := gain*c[i];
+         else
+            cs[i] := c[i];
+         end if;
+      end for;
+      cc :=Modelica.Math.Vectors.sort(cs);
+
+      // Move zeros to the beginning
+      j :=0;
+      k :=nc + 1;
+      for i in nc:-1:1 loop
+         if cc[i] == 0.0 then
+            j := j + 1;
+            cs[j] := 0.0;
+         else
+            k := k - 1;
+            cs[k] := cc[i];
+         end if;
+      end for;
+
+      // Transform coefficients to string
+      if j == 1 then
+         s := name;
+      elseif j > 1 then
+         s := name + "^" + String(j);
+      end if;
+
+      i :=j + 1;
+      if normalized then
+        while i <= nc loop
+          if i > 1 then
+            s := s + "*";
+          end if;
+          if Math.isEqual(cs[i], 1.0, eps) then
+             s := s + "(";
+          elseif Math.isEqual(cs[i], -1.0, eps) then
+             s := s + "(-";
+          else
+             s := s + "(" + String(cs[i], significantDigits=significantDigits) + "*";
+          end if;
+          s :=s + name + " + 1)";
+          j2 := sameVectorElements(cs, i);
+          nj := j2 - i + 1;
+          if nj > 1 then
+            s := s + "^" + String(nj);
+          end if;
+          i := j2 + 1;
+        end while;
+      else
+        while i <= nc loop
+          if i > 1 then
+            s := s + "*";
+          end if;
+          if cs[i] > 0 then
+             s := s + "(" + name + " + ";
+          else
+             s := s + "(" + name + " - ";
+          end if;
+          s  := s + String(abs(cs[i]), significantDigits=significantDigits) + ")";
+          j2 := sameVectorElements(cs, i);
+          nj := j2 - i + 1;
+          if nj > 1 then
+            s := s + "^" + String(nj);
+          end if;
+          i := j2 + 1;
+        end while;
+      end if;
+    end firstOrderToString;
+
+    function secondOrderToString
+      "Transform vector of coefficients of second order polynomials to a string representation"
+      import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica_LinearSystems2.Math;
+
+      input Real c[:,2]=fill(0.0,0,2)
+        "[p,p^0] coefficients osecond order polynomials: polynom(p) = p^2 + c[:,1]*p + c[:,2]";
+      input Integer significantDigits=6
+        "Number of significant digits that are shown";
+      input String name="p" "Independent variable name used for printing";
+      input Boolean normalized=false
+        "= true, the polynomials in the string are represented as p^2/c[:,2] + c[:,1]/c[:,2]*p + 1, provided c[i,2]<>0";
+      output String s="";
+      output Real gain=1.0
+        "If normalized=true, the product(c[i,2]) (for i, where c[i,2]<>0), otherwise gain=1.0";
+    protected
+      Integer nc=size(c, 1);
+      Real cs[nc,2];
+      Real cc[nc,2];
+      Integer i=1;
+      Integer j;
+      Integer nj;
+      constant Real smallNumber = 100*Modelica.Constants.small;
+      constant Real eps = 10*Modelica.Constants.eps;
+    algorithm
+      // Change coefficients, if normalized output, and sort them
+      for i in 1:nc loop
+         if Math.isEqual(c[i,2], 0.0, smallNumber) then
+            cs[i,1] := c[i,1];
+            cs[i,2] := 0.0;
+         elseif normalized then
+            cs[i,1] := 1/c[i,2];
+            cs[i,2] := c[i,1]/c[i,2];
+            gain := gain*c[i,2];
+         else
+            cs[i,1] := c[i,1];
+            cs[i,2] := c[i,2];
+         end if;
+      end for;
+      cc :=Modelica.Math.Matrices.sort(cs);
+
+    // Generate string
+    if normalized then
+      while i <= nc loop
+        if i > 1 then
+          s := s + "*";
+        end if;
+        j := sameMatrixRows(cc, i);
+        nj := j - i + 1;
+        if cc[i, 1] == 0.0 and cc[i, 2] == 0.0 then
+          // case p^2
+          s := s + name + "^" + String(2*nj);
+        else
+          // b*p^2 term
+          if Math.isEqual(cc[i, 1], 1.0) then
+            s := s + "(" + name + "^2";
+          elseif Math.isEqual(cc[i, 1], -1.0) then
+            s := s + "(-" + name + "^2";
+          else
+            s := s + "(" + String(cc[i, 1], significantDigits=significantDigits) +
+              "*" + name + "^2";
+          end if;
+
+          // a*p term
+          if cc[i, 2] == 0.0 then
+             s := s + " + 1)";
+          else
+             if Math.isEqual(cc[i, 2], 1.0, eps) then
+                s := s + " + ";
+             elseif Math.isEqual(cc[i, 2], -1.0, eps) then
+                s := s + " - ";
+             elseif cc[i, 2] >= 0.0 then
+                s := s + " + " + String(cc[i, 2], significantDigits=significantDigits) + "*";
+             else
+                s := s + " - " + String(-cc[i, 2], significantDigits=significantDigits) + "*";
+             end if;
+             s := s + name + " + 1)";
+          end if;
+          if nj > 1 then
+            s := s + "^" + String(nj);
+          end if;
+        end if;
+        i := j + 1;
+      end while;
+
+    else
+      while i <= nc loop
+        if i > 1 then
+          s := s + "*";
+        end if;
+        j := sameMatrixRows(cc, i);
+        nj := j - i + 1;
+        if cc[i, 1] == 0 and cc[i, 2] == 0 then
+          // case p^2
+          s := s + name + "^" + String(2*nj);
+        else
+          s := s + "(" + name + "^2";
+
+          // b*p term
+          if cc[i, 1] == 1.0 then
+            s := s + " + " + name;
+          elseif cc[i, 1] == -1.0 then
+            s := s + " - " + name;
+          elseif cc[i, 1] <> 0.0 then
+            if cc[i, 1] > 0 then
+              s := s + " + ";
+            else
+              s := s + " - ";
+            end if;
+            s := s + String(abs(cc[i, 1]), significantDigits=significantDigits) +
+              "*" + name;
+          end if;
+
+          // a*p^0 term
+          if (cc[i, 2]) > 0.0 then
+            s := s + " + " + String(cc[i, 2], significantDigits=significantDigits) + ")";
+          elseif (cc[i, 2]) < 0.0 then
+            s := s + " - " + String(-cc[i, 2], significantDigits=significantDigits) + ")";
+          else
+            s := s + ")";
+          end if;
+          if nj > 1 then
+            s := s + "^" + String(nj);
+          end if;
+        end if;
+        i := j + 1;
+       end while;
+    end if;
+    end secondOrderToString;
+
     function 'p+a'
       import Modelica;
       import Modelica_LinearSystems2.Math.Complex;
@@ -6565,31 +6926,6 @@ results from <blockquote><pre> a = -1/alpha </pre></blockquote> and
         w_max := max(w_max1, w_max2);
       end if;
     end frequencyRangeBode;
-
-    function filterToNormalized
-      "Given [p^2,p] and [p] coefficients, transform to normalized form with highest power of p equal 1"
-
-      input Real c1[:] "[p] coefficients of polynomials (c1[i]*p + 1)";
-      input Real c2[:,2]
-        "[p^2, p] coefficients of polynomials (c2[i,1]*p^2 + c2[i,2]*p + 1)";
-      output Real n1[size(c1, 1)]
-        "[p^0] coefficients of polynomials c1[i]*(p+1/c1[i])";
-      output Real n2[size(c2, 1),2]
-        "[p, p^0] coefficients of polynomials c2[i,1]*(p^2 + (c2[i,2]/c2[i,1])*p + (1/c2[i,1]))";
-      output Real k "Gain (product(1/c1[i])*(1/c2[i,1])";
-    algorithm
-      k := 1.0;
-      for i in 1:size(c1, 1) loop
-        k := k*c1[i];
-        n1[i] := 1/c1[i];
-      end for;
-
-      for i in 1:size(c2, 1) loop
-        k := k*c2[i, 1];
-        n2[i, 1] := c2[i, 2]/c2[i, 1];
-        n2[i, 2] := 1/c2[i, 1];
-      end for;
-    end filterToNormalized;
 
     encapsulated function numberOfRealZeros "Calculate number of real zeros"
       import Modelica;

@@ -11,9 +11,12 @@ package Filters
       "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
      input Modelica_LinearSystems2.Types.FilterType filterType=Types.FilterType.LowPass
       "Type of filter (LowPass/HighPass)";
-     input Modelica.SIunits.Frequency f_cut=3 "Cut-off frequency";
+     input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
+      "Cut-off frequency";
      input Real A_ripple(unit="dB") = 0.5
       "Pass band ripple for Chebyshev filter (otherwise not used)";
+     input Modelica.SIunits.Frequency f_min=0
+      "Band of pass band filter is f_min (-3db) .. f_cut (-3db)";
      input Boolean normalized=true
       "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   protected
@@ -28,7 +31,7 @@ package Filters
     algorithm
       c := ZP.Analysis.evaluate(zp, Complex(0,2*pi*f_cut));
       A :=Complex.'abs'(c);
-      str :="amplitude(f_cut=" + String(f_cut) + ") = ";
+      str :="amplitude(f=" + String(f_cut) + ") = ";
       if Modelica_LinearSystems2.Math.isEqual(A, 10^(-3/20), machEps) then
          str := str + "-3db";
       elseif Modelica_LinearSystems2.Math.isEqual(A, sqrt(2)/2, machEps) then
@@ -55,11 +58,13 @@ package Filters
         end if;
      end getFilterName;
 
-     ZP filter1 = ZP.Design.filter(analogFilter, filterType, order=1, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized);
-     ZP filter2 = ZP.Design.filter(analogFilter, filterType, order=2, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized);
-     ZP filter3 = ZP.Design.filter(analogFilter, filterType, order=3, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized);
-     ZP filter4 = ZP.Design.filter(analogFilter, filterType, order=4, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized);
-     ZP filter5 = ZP.Design.filter(analogFilter, filterType, order=5, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized);
+     Real f_0;
+
+     ZP filter1 = ZP.Design.filter(analogFilter, filterType, order=1, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
+     ZP filter2 = ZP.Design.filter(analogFilter, filterType, order=2, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
+     ZP filter3 = ZP.Design.filter(analogFilter, filterType, order=3, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
+     ZP filter4 = ZP.Design.filter(analogFilter, filterType, order=4, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
+     ZP filter5 = ZP.Design.filter(analogFilter, filterType, order=5, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
   algorithm
      ZP.Plot.bode(filter1);
      ZP.Plot.bode(filter2);
@@ -69,7 +74,7 @@ package Filters
 
      // Check filter properties
      if filterType == Types.FilterType.LowPass then
-        print("\nanalogFilter = " + getFilterName(analogFilter) + " (low pass filter)");
+        print("\nLow pass filter: analogFilter = " + getFilterName(analogFilter));
         print("filter1: dcGain = " + String(ZP.Analysis.dcGain(filter1)) + ", " + getAmplitude(filter1,f_cut));
         print("filter2: dcGain = " + String(ZP.Analysis.dcGain(filter2)) + ", " + getAmplitude(filter2,f_cut));
         print("filter3: dcGain = " + String(ZP.Analysis.dcGain(filter3)) + ", " + getAmplitude(filter3,f_cut));
@@ -77,13 +82,53 @@ package Filters
         print("filter5: dcGain = " + String(ZP.Analysis.dcGain(filter5)) + ", " + getAmplitude(filter5,f_cut));
 
      elseif filterType == Types.FilterType.HighPass then
-        print("\nanalogFilter = " + getFilterName(analogFilter) + " (high pass filter)");
+        print("\nHigh pass filter: analogFilter = " + getFilterName(analogFilter));
         print("filter1: k = " + String(filter1.k) + ", " + getAmplitude(filter1,f_cut));
         print("filter2: k = " + String(filter2.k) + ", " + getAmplitude(filter2,f_cut));
         print("filter3: k = " + String(filter3.k) + ", " + getAmplitude(filter3,f_cut));
         print("filter4: k = " + String(filter4.k) + ", " + getAmplitude(filter4,f_cut));
         print("filter5: k = " + String(filter5.k) + ", " + getAmplitude(filter5,f_cut));
 
+     elseif filterType == Types.FilterType.BandPass then
+        print("\nBand pass filter: analogFilter = " + getFilterName(analogFilter));
+        print("filter1: " + getAmplitude(filter1, sqrt(f_min*f_cut)) + ", " +
+                            getAmplitude(filter1, f_min) + ", " +
+                            getAmplitude(filter1, f_cut));
+        print("filter2: " + getAmplitude(filter2, sqrt(f_min*f_cut)) + ", " +
+                            getAmplitude(filter2, f_min) + ", " +
+                            getAmplitude(filter2, f_cut));
+        print("filter3: " + getAmplitude(filter3, sqrt(f_min*f_cut)) + ", " +
+                            getAmplitude(filter3, f_min) + ", " +
+                            getAmplitude(filter3, f_cut));
+        print("filter4: " + getAmplitude(filter4, sqrt(f_min*f_cut)) + ", " +
+                            getAmplitude(filter4, f_min) + ", " +
+                            getAmplitude(filter4, f_cut));
+        print("filter5: " + getAmplitude(filter5, sqrt(f_min*f_cut)) + ", " +
+                            getAmplitude(filter5, f_min) + ", " +
+                            getAmplitude(filter5, f_cut));
+
+     elseif filterType == Types.FilterType.BandStop then
+        print("\nBand stop filter: analogFilter = " + getFilterName(analogFilter));
+        print("filter1: " + "dcGain = " + String(ZP.Analysis.dcGain(filter1)) + ", " +
+                            getAmplitude(filter1, sqrt(f_min*f_cut)) + ", " +
+                            getAmplitude(filter1, f_min) + ", " +
+                            getAmplitude(filter1, f_cut));
+        print("filter2: " + "dcGain = " + String(ZP.Analysis.dcGain(filter2)) + ", " +
+                            getAmplitude(filter2, sqrt(f_min*f_cut)) + ", " +
+                            getAmplitude(filter2, f_min) + ", " +
+                            getAmplitude(filter2, f_cut));
+        print("filter3: " + "dcGain = " + String(ZP.Analysis.dcGain(filter3)) + ", " +
+                            getAmplitude(filter3, sqrt(f_min*f_cut)) + ", " +
+                            getAmplitude(filter3, f_min) + ", " +
+                            getAmplitude(filter3, f_cut));
+        print("filter4: " + "dcGain = " + String(ZP.Analysis.dcGain(filter4)) + ", " +
+                            getAmplitude(filter4, sqrt(f_min*f_cut)) + ", " +
+                            getAmplitude(filter4, f_min) + ", " +
+                            getAmplitude(filter4, f_cut));
+        print("filter5: " + "dcGain = " + String(ZP.Analysis.dcGain(filter5)) + ", " +
+                            getAmplitude(filter5, sqrt(f_min*f_cut)) + ", " +
+                            getAmplitude(filter5, f_min) + ", " +
+                            getAmplitude(filter5, f_cut));
      end if;
   end plotFilter;
 
@@ -95,13 +140,15 @@ package Filters
      input Modelica.SIunits.Frequency f_cut=3 "Cut-off frequency";
      input Real A_ripple(unit="dB") = 0.5
       "Pass band ripple for Chebyshev filter (otherwise not used)";
+     input Modelica.SIunits.Frequency f_min=0
+      "Band of pass band filter is f_min (-3db) .. f_cut (-3db)";
      input Boolean normalized=true
       "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   algorithm
-     plotFilter(Types.AnalogFilter.CriticalDamping, filterType, f_cut, A_ripple, normalized);
-     plotFilter(Types.AnalogFilter.Bessel,          filterType, f_cut, A_ripple, normalized);
-     plotFilter(Types.AnalogFilter.Butterworth,     filterType, f_cut, A_ripple, normalized);
-     plotFilter(Types.AnalogFilter.Chebyshev,       filterType, f_cut, A_ripple, normalized);
+     plotFilter(Types.AnalogFilter.CriticalDamping, filterType, f_cut, A_ripple, f_min, normalized);
+     plotFilter(Types.AnalogFilter.Bessel,          filterType, f_cut, A_ripple, f_min, normalized);
+     plotFilter(Types.AnalogFilter.Butterworth,     filterType, f_cut, A_ripple, f_min, normalized);
+     plotFilter(Types.AnalogFilter.Chebyshev,       filterType, f_cut, A_ripple, f_min, normalized);
 
   end plotFilter2;
 
@@ -111,11 +158,15 @@ package Filters
      input Modelica.SIunits.Frequency f_cut=3 "Cut-off frequency";
      input Real A_ripple(unit="dB") = 0.5
       "Pass band ripple for Chebyshev filter (otherwise not used)";
+     input Modelica.SIunits.Frequency f_min=2
+      "Band of pass band filter is f_min (-3db) .. f_cut (-3db)";
      input Boolean normalized=true
       "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   algorithm
-     plotFilter2(Types.FilterType.LowPass,  f_cut, A_ripple, normalized);
-     plotFilter2(Types.FilterType.HighPass, f_cut, A_ripple, normalized);
+     //plotFilter2(Types.FilterType.LowPass,  f_cut, A_ripple, f_min, normalized);
+     //plotFilter2(Types.FilterType.HighPass, f_cut, A_ripple, f_min, normalized);
+     // plotFilter2(Types.FilterType.BandPass, f_cut, A_ripple, f_min, normalized);
+     plotFilter2(Types.FilterType.BandStop, f_cut, A_ripple, f_min, normalized);
   end plotFilter3;
 
   function compareBaseFiltersWithTietzeSchenk
@@ -287,4 +338,26 @@ function the comparison is performed up to 3 significant digits.
 
 </html>"));
   end compareBaseFiltersWithTietzeSchenk;
+
+  function plotAlphaForPassBand
+     input Real a = 0.1;
+     input Real b = 0.2;
+     input Real w = 1;
+  protected
+     Real z[:]=  0:0.01:2;
+     Real res[size(z,1)];
+  algorithm
+    for i in 1:size(z,1) loop
+      res[i] :=z[i]^2 + a^2*w^2*z[i]^2/(1 + z[i])^2 - (2 + b*w^2)*z[i] + 1;
+    end for;
+
+    Modelica_LinearSystems2.Utilities.Plot.diagram(
+      Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
+          curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
+            x=z,
+            y=res,
+            legend="residue")}));
+
+      annotation(interactive=true);
+  end plotAlphaForPassBand;
 end Filters;
