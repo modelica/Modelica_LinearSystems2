@@ -1455,6 +1455,52 @@ In this case, the output argument <b>finite</b> = <b>false</b> and
 "));
     end dcGain;
 
+    encapsulated function isControllable
+      "Check controllability of a zp-transfer-function"
+
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+
+      input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
+      input Modelica_LinearSystems2.Types.StaircaseMethod method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+
+      output Boolean controllable;
+    protected
+      StateSpace ss=StateSpace(zp);
+
+    algorithm
+      controllable := StateSpace.Analysis.isControllable(ss=ss, method=method);
+
+      annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  controllable </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>isControllable</b>(zp, method)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Function ZerosAndPoles.Analysis.<b>isControllable</b> checks the controllability of a zeros-and-poles transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.isControllable\">StateSpace.Analysis.isControllable</a> <br>
+
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
+   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + 2*p +1);
+
+   Types.Method method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD
+
+   Boolean controllable;
+
+<b>algorithm</b>
+  controllable := Modelica_LinearSystems2.StateSpace.Analysis.isControllable(zp, method);
+// controllable = true
+</pre></blockquote>
+
+</html> "));
+    end isControllable;
+
     encapsulated function isObservable
       "Check observability of a zp-transfer-function"
 
@@ -1506,51 +1552,6 @@ Function ZerosAndPoles.Analysis.<b>isObservable</b> checks the observability of 
 </html> "));
     end isObservable;
 
-    encapsulated function isControllable
-      "Check controllability of a zp-transfer-function"
-
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-
-      input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
-
-      output Boolean controllable;
-    protected
-      StateSpace ss=StateSpace(zp);
-
-    algorithm
-      controllable := StateSpace.Analysis.isControllable(ss=ss, method=method);
-
-      annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  controllable </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>isControllable</b>(zp, method)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function ZerosAndPoles.Analysis.<b>isControllable</b> checks the controllability of a zeros-and-poles transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.isControllable\">StateSpace.Analysis.isControllable</a> <br>
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
-   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + 2*p +1);
-
-   Types.Method method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD
-
-   Boolean controllable;
-
-<b>algorithm</b>
-  controllable := Modelica_LinearSystems2.StateSpace.Analysis.isControllable(zp, method);
-// controllable = true
-</pre></blockquote>
-
-</html> "));
-    end isControllable;
 
     encapsulated function isStabilizable
       "Check stabilizability of a zp-transfer-function"

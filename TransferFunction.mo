@@ -1114,6 +1114,52 @@ In this case, the output argument <b>finite</b> = <b>false</b> and
 "));
     end dcGain;
 
+    encapsulated function isControllable
+      "Check controllability of a transfer function"
+
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.TransferFunction;
+
+        input TransferFunction tf "transfer function of a system";
+        input Modelica_LinearSystems2.Types.StaircaseMethod method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+
+        output Boolean controllable;
+    protected
+        StateSpace ss=StateSpace(tf);
+
+    algorithm
+        controllable := StateSpace.Analysis.isControllable(ss=ss, method=method);
+
+        annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  controllable </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>isControllable</b>(tf, method)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Function TransferFunction.Analysis.<b>isControllable</b> checks the controllability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.isControllable\">StateSpace.Analysis.isControllable</a> <br>
+
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+   Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2 + 2*s +1);
+
+   Types.Method method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD
+
+   Boolean controllable;
+
+<b>algorithm</b>
+  controllable := Modelica_LinearSystems2.StateSpace.Analysis.isControllable(tf, method);
+// controllable = true
+</pre></blockquote>
+
+</html> "));
+    end isControllable;
+
     encapsulated function isObservable
       "Check oberservability of a transfer function"
 
@@ -1164,51 +1210,6 @@ Function TransferFunction.Analysis.<b>isObservable</b> checks the observability 
 </html> "));
     end isObservable;
 
-    encapsulated function isControllable
-      "Check controllability of a transfer function"
-
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.TransferFunction;
-
-        input TransferFunction tf "transfer function of a system";
-        input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
-
-        output Boolean controllable;
-    protected
-        StateSpace ss=StateSpace(tf);
-
-    algorithm
-        controllable := StateSpace.Analysis.isControllable(ss=ss, method=method);
-
-        annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  controllable </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>isControllable</b>(tf, method)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function TransferFunction.Analysis.<b>isControllable</b> checks the controllability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.isControllable\">StateSpace.Analysis.isControllable</a> <br>
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2 + 2*s +1);
-
-   Types.Method method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD
-
-   Boolean controllable;
-
-<b>algorithm</b>
-  controllable := Modelica_LinearSystems2.StateSpace.Analysis.isControllable(tf, method);
-// controllable = true
-</pre></blockquote>
-
-</html> "));
-    end isControllable;
 
     encapsulated function isStabilizable
       "Check stabilizability of a transfer function"

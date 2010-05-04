@@ -1,7 +1,10 @@
 within Modelica_LinearSystems2;
 package Utilities "Functions that shall be included in Modelica.Utilities"
+    extends Modelica.Icons.Library;
 package Plot "Functions for generation of 2D-plots"
+    extends Modelica.Icons.Library;
   package Examples "Demonstrate the usage of the plot functions"
+      extends Modelica.Icons.Library;
     function plotSine "Plot a sine function in one diagram"
        input Modelica.SIunits.Frequency freqHz = 2 "Frequency of sine wave";
        input Modelica.SIunits.Damping damping = 0.8
@@ -120,8 +123,8 @@ package Plot "Functions for generation of 2D-plots"
 
     function showLegendStyles
         "Show several vector-diagram plots that demonstrate the various legend options"
-        import Modelica_LinearSystems2.Utilities.Plot.Records;
-        import Modelica_LinearSystems2.Utilities.Plot.Types;
+      import Modelica_LinearSystems2.Utilities.Plot.Records;
+      import Modelica_LinearSystems2.Utilities.Plot.Types;
 
       protected
        Real x[2]={0,1};
@@ -183,8 +186,8 @@ package Plot "Functions for generation of 2D-plots"
 
     function showMatrixDiagrams
         "Demonstrate the layout of diagrams in matrix layout"
-        import Modelica_LinearSystems2.Utilities.Plot.Records;
-        import Modelica_LinearSystems2.Utilities.Plot.Types;
+      import Modelica_LinearSystems2.Utilities.Plot.Records;
+      import Modelica_LinearSystems2.Utilities.Plot.Types;
 
       protected
        Real x[2]={0,1};
@@ -215,6 +218,7 @@ package Plot "Functions for generation of 2D-plots"
 
     package Utilities
         "Utility functions (usually not of interest for the user)"
+        extends Modelica.Icons.Library;
       function dampedSine "Return a damped sine chracteristic"
          input Modelica.SIunits.Frequency freqHz "Frequency of sine wave";
          input Modelica.SIunits.Damping damping
@@ -236,8 +240,8 @@ package Plot "Functions for generation of 2D-plots"
   end Examples;
 
   function diagram "Plot one diagram"
-      import Modelica_LinearSystems2.Utilities.Plot.Types;
-      import Modelica.Utilities.Streams.*;
+    import Modelica_LinearSystems2.Utilities.Plot.Types;
+    import Modelica.Utilities.Streams.*;
      input Modelica_LinearSystems2.Utilities.Plot.Records.Diagram diagram
         "Diagram to be shown"
                             annotation(Dialog);
@@ -423,7 +427,7 @@ using a matrix layout. For an overview, see the documentation of package
   end diagramMatrix;
 
   package Types "Types used for the plotting functions"
-
+    extends Modelica.Icons.Library;
     type DrawingUnit_mm "Drawing unit specifing the nominal size in [mm]"
        extends Modelica.Icons.TypeReal(final quantity="Length", final unit="mm");
       annotation (Documentation(info="<html>
@@ -476,7 +480,7 @@ then the width of the diagram in the document is 120 mm.
   end Types;
 
   package Records "Records used to define the function interfaces"
-
+    extends Modelica.Icons.Library;
     record Diagram
         "Properties of a diagram in a figure containing one or more curves"
       extends Modelica.Icons.Record;
@@ -596,8 +600,9 @@ Several curves can be displayed in one diagram.
 end Plot;
 
 package Import "Functions to import data in a Modelica environment"
-
+  extends Modelica.Icons.Library;
   package Examples "Demonstrate the usage of the Import functions"
+      extends Modelica.Icons.Library;
     function linearizeDoublePendulum "Linearize double pendulum"
       output Real A[:,:] "A-matrix";
       output Real B[:,:] "B-matrix";
@@ -614,6 +619,7 @@ package Import "Functions to import data in a Modelica environment"
     end linearizeDoublePendulum;
 
     package Utilities
+        extends Modelica.Icons.Library;
       model DoublePendulum "double pendulum system"
 
         parameter Modelica.SIunits.Mass m_trolley = 5;

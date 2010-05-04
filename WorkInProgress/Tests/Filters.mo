@@ -65,12 +65,14 @@ package Filters
      ZP filter3 = ZP.Design.filter(analogFilter, filterType, order=3, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
      ZP filter4 = ZP.Design.filter(analogFilter, filterType, order=4, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
      ZP filter5 = ZP.Design.filter(analogFilter, filterType, order=5, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
+     ZP filter6 = ZP.Design.filter(analogFilter, filterType, order=6, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
   algorithm
      ZP.Plot.bode(filter1);
      ZP.Plot.bode(filter2);
      ZP.Plot.bode(filter3);
      ZP.Plot.bode(filter4);
      ZP.Plot.bode(filter5);
+     ZP.Plot.bode(filter6);
 
      // Check filter properties
      if filterType == Types.FilterType.LowPass then
@@ -80,6 +82,7 @@ package Filters
         print("filter3: dcGain = " + String(ZP.Analysis.dcGain(filter3)) + ", " + getAmplitude(filter3,f_cut));
         print("filter4: dcGain = " + String(ZP.Analysis.dcGain(filter4)) + ", " + getAmplitude(filter4,f_cut));
         print("filter5: dcGain = " + String(ZP.Analysis.dcGain(filter5)) + ", " + getAmplitude(filter5,f_cut));
+        print("filter6: dcGain = " + String(ZP.Analysis.dcGain(filter6)) + ", " + getAmplitude(filter6,f_cut));
 
      elseif filterType == Types.FilterType.HighPass then
         print("\nHigh pass filter: analogFilter = " + getFilterName(analogFilter));
@@ -88,6 +91,7 @@ package Filters
         print("filter3: k = " + String(filter3.k) + ", " + getAmplitude(filter3,f_cut));
         print("filter4: k = " + String(filter4.k) + ", " + getAmplitude(filter4,f_cut));
         print("filter5: k = " + String(filter5.k) + ", " + getAmplitude(filter5,f_cut));
+        print("filter6: k = " + String(filter6.k) + ", " + getAmplitude(filter6,f_cut));
 
      elseif filterType == Types.FilterType.BandPass then
         print("\nBand pass filter: analogFilter = " + getFilterName(analogFilter));
@@ -106,6 +110,9 @@ package Filters
         print("filter5: " + getAmplitude(filter5, sqrt(f_min*f_cut)) + ", " +
                             getAmplitude(filter5, f_min) + ", " +
                             getAmplitude(filter5, f_cut));
+        print("filter6: " + getAmplitude(filter6, sqrt(f_min*f_cut)) + ", " +
+                            getAmplitude(filter6, f_min) + ", " +
+                            getAmplitude(filter6, f_cut));
 
      elseif filterType == Types.FilterType.BandStop then
         print("\nBand stop filter: analogFilter = " + getFilterName(analogFilter));
@@ -129,6 +136,10 @@ package Filters
                             getAmplitude(filter5, sqrt(f_min*f_cut)) + ", " +
                             getAmplitude(filter5, f_min) + ", " +
                             getAmplitude(filter5, f_cut));
+        print("filter6: " + "dcGain = " + String(ZP.Analysis.dcGain(filter6)) + ", " +
+                            getAmplitude(filter6, sqrt(f_min*f_cut)) + ", " +
+                            getAmplitude(filter6, f_min) + ", " +
+                            getAmplitude(filter6, f_cut));
      end if;
   end plotFilter;
 

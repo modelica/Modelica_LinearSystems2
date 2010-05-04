@@ -3496,7 +3496,7 @@ in <b>X</b> is used to compute <b>K</b>. If no solution of this equation exists,
       import Modelica_LinearSystems2.StateSpace.Internal;
 
     input StateSpace ss;
-    input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+    input Modelica_LinearSystems2.Types.StaircaseMethod method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
 
     output Boolean controllable;
   algorithm
