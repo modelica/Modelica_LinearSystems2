@@ -19,7 +19,7 @@ protected
 
 algorithm
   (LU_real,LU_imag,pivots,info) := Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.wrapper_zgetrf(
-                                                                                               A_real, A_imag);
+                                                                                            A_real, A_imag);
   for l1 in 1:m loop
     for l2 in 1:n loop
       LU[l1, l2] := Complex(LU_real[l1, l2], LU_imag[l1, l2]);

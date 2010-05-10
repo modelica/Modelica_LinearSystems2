@@ -25,6 +25,7 @@ algorithm
   <h4>Syntax</h4>
 <blockquote><pre>
 r = Matrices.<b>rcond</b>(A);
+(r, info) = Matrices.<b>rcond</b>(A, false);
 </pre></blockquote>
 <h4>Description</h4>
 <p>

@@ -1,7 +1,9 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.care;
 function care6 "Example 6 from Benner benchmarks"
   extends Modelica.Icons.Function;
-  import Modelica_LinearSystems2.Math.Matrices;
+   import Modelica_LinearSystems2.Math.Matrices;
+  import Matrices2 = Modelica_LinearSystems2.Math.Matrices;
+//  import Modelica.Math.Matrices;
   input String outputFile = "";
 
 protected
@@ -145,11 +147,11 @@ algorithm
   normX3 := Matrices.norm(X3, 2);
 
   Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement",outputFile);
-  Modelica.Utilities.Streams.print(Matrices.printMatrix(X1, 16, "X1"),outputFile);
+  Modelica.Utilities.Streams.print(Matrices2.printMatrix(X1, 16, "X1"),outputFile);
   Modelica.Utilities.Streams.print("Solution X2 with subsequent Newton refinement",outputFile);
-  Modelica.Utilities.Streams.print(Matrices.printMatrix(X2, 16, "X2"),outputFile);
+  Modelica.Utilities.Streams.print(Matrices2.printMatrix(X2, 16, "X2"),outputFile);
   Modelica.Utilities.Streams.print("MATLAB solution X3",outputFile);
-  Modelica.Utilities.Streams.print(Matrices.printMatrix(X3, 16, "X3"),outputFile);
+  Modelica.Utilities.Streams.print(Matrices2.printMatrix(X3, 16, "X3"),outputFile);
   Modelica.Utilities.Streams.print("\n normH = " + String(normH),outputFile);
   Modelica.Utilities.Streams.print("\n condH = " + String(condH),outputFile);
   Modelica.Utilities.Streams.print("\n normX1 = " + String(normX1),outputFile);

@@ -7,12 +7,22 @@ function dare "Solution of discrete-time algebraic Riccati equations"
   input Real B[size(A, 1),:];
   input Real R[size(B, 2),size(B, 2)]=identity(size(B, 2));
   input Real Q[size(A, 1),size(A, 1)]=identity(size(A, 1));
+  input Boolean refine = false;
+
 protected
   Integer n=size(A, 1);
   Real G[size(A, 1),size(A, 1)]=B*Modelica.Math.Matrices.solve2(R, transpose(B));
-  Real invAT[:,:]=transpose(Modelica.Math.Matrices.inv(A));
-  Real H[:,:]=[A + G*invAT*Q,-G*invAT; -invAT*Q,invAT];
-  Real H_RSF[:,:]=H;
+  Real AT[:,:]=transpose(A);
+  Real LU[n,n];
+  Integer p[n];
+  Real H[2*n,2*n];
+  Real H11[n,n];
+  Real H12[n,n];
+  Real H21[n,n];
+  Real H22[n,n];
+//  Real invAT[:,:]=transpose(Modelica.Math.Matrices.inv(A));
+//  Real H[:,:]=[A + G*invAT*Q,-G*invAT; -invAT*Q,invAT];
+  Real H_RSF[2*n,2*n];
   Real Z[size(H, 1),size(H, 2)];
   Real Z11[size(A, 1),size(A, 2)];
   Real Z21[size(A, 1),size(A, 2)];
@@ -23,12 +33,21 @@ protected
   Integer info;
   Integer evSize;
   Complex j = Modelica_LinearSystems2.Math.Complex.j();
+
 public
-  output Real S[size(A, 1),size(A, 2)]
+  output Real X[size(A, 1),size(A, 2)]
     "orthogonal matrix of the Schur vectors associated to ordered rsf";
   output Complex ev[size(A, 1)] "eigenvalues of the closed loop system";
 
 algorithm
+  (LU,p) := Modelica.Math.Matrices.LU(AT);
+  H21 := Modelica.Math.Matrices.LU_solve2(LU,p,-Q);
+  H22 := Modelica.Math.Matrices.LU_solve2(LU,p,identity(n));
+  (LU,p) := Modelica.Math.Matrices.LU(A);
+  H12 := Modelica.Math.Matrices.LU_solve2(LU,p,-G);
+  H12 := transpose(H12);
+  H11 := A - H12*Q;
+  H := [H11, H12; H21, H22];
   (H_RSF,Z,alphaReal,alphaImag) := Matrices.rsf(H);// put H to Schur form
   (H_RSF,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSF(
     false,
@@ -36,6 +55,7 @@ algorithm
     Z,
     alphaReal,
     alphaImag);// ordered Schur form
+
     evSize := size(ev, 1);
   for i in 1:evSize loop
     ev[i] := alphaReal[i] + j*alphaImag[i];
@@ -44,14 +64,18 @@ algorithm
   Z11 := Z[1:n, 1:n];
   Z21 := Z[n + 1:2*n, 1:n];
   if size(Z11, 1) > 0 then
-//  S := transpose(Matrices.solve2(transpose(Z11), transpose(Z21)));
-    (S,info) := Matrices.LAPACK.dgesvx(Z11, transpose(Z21));//function does not need to transpose Z11 as solve2 does
-    S := transpose(S);
+//  X := transpose(Matrices.solve2(transpose(Z11), transpose(Z21)));
+    (X,info) := Matrices.LAPACK.dgesvx(Z11, transpose(Z21));//function does not need to transpose Z11 as solve2 does
+    X := transpose(X);
     assert(info == 0, "Solving a linear system of equations with function
 \"Matrices.LAPACK.dgesvx\" is not possible, because the system has either 
 no or infinitely many solutions (input A is singular).");
+
+      if refine then
+        X := Matrices.Internal.darenls(A, B, R, Q, X);
+      end if;
   else
-    S := fill(
+    X := fill(
       0,
       size(Z21, 1),
       size(Z11, 1));
@@ -87,9 +111,9 @@ with
 has no eigenvalue on the unit circle and can be put
 to an ordered real Schur form 
 <blockquote><pre>
-<b>U</b>'*<b>H</b>*<b>U</b> = <b>S</b> = [<b>S11</b>, <b>S12</b>; <b>0</b>, <b>S22</b>]
+<b>U</b>'*<b>H</b>*<b>U</b> = <b>X</b> = [<b>S11</b>, <b>S12</b>; <b>0</b>, <b>S22</b>]
 </pre></blockquote>
-with orthogonal similarity transformation <b>U</b>. <b>S</b> is ordered in such a way,
+with orthogonal similarity transformation <b>U</b>. <b>X</b> is ordered in such a way,
 that <b>S11</b> contains the n stable eigenvalues of the closed loop system with system matrix
 <blockquote><pre>
                   -1
@@ -100,7 +124,7 @@ If <b>U</b> is partitioned to
 <blockquote><pre>
 <b>U</b> = [<b>U11</b>, <b>U12</b>; <b>U21</b>, <b>U22</b>]
 </pre></blockquote>
-according to <b>S</b>, the solution <b>X</b> can be calculated by
+according to <b>X</b>, the solution <b>X</b> can be calculated by
 <blockquote><pre>
 <b>X</b>*<b>U11</b> = <b>U21</b>.
 </pre></blockquote>

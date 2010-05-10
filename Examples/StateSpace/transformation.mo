@@ -15,7 +15,7 @@ function transformation
 protected
   Boolean systemOnFile=fileName <> "NoName";
   StateSpace ss=if systemOnFile then Modelica_LinearSystems2.StateSpace.Import.fromFile(
-                                                          fileName, matrixName) else
+                                                          fileName, matrixName) else 
             StateSpace(
       A=A,
       B=B,

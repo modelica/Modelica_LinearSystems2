@@ -503,20 +503,19 @@ The state space system is transformed to a appropriate discrete state space syst
   annotation(interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>impulseResponse</b>(tf, dt, tSpan, x0)  </td> </tr>
+<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>timeResponse</b>(tf, dt, tSpan, responseType, x0)  </td> </tr>
+ 
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>impulseResponse</b> calculates the time response of a transfer function for impulse imput. 
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+First, the transfer function representation is transformed into state space representation which is given to StateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. 
 <blockquote><pre>
-TransferFunction.Analysis.impulseResponse(tf, dt, tSpan)
+    Impulse \"Impulse response\",
+    Step \"Step response\",
+    Ramp \"Ramp response\",
+    Initial \"Initial condition response\"
 </pre></blockquote>
-gives the same result as
-<blockquote><pre>
-TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,TransferFunction.Analysis.denominatorDegree(tf))).
-</pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
+The state space system is transformed to a appropriate discrete state space system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt.
 </p>
  
 <h4><font color=\"#008000\">Example</font></h4>
@@ -526,16 +525,18 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 
   Real Ts=0.1;
   Real tSpan= 0.4;
+  Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+  Real x0[1]={0,0};
  
   Real y[5,1,1];
   Real t[5];
   Real x[5,1,1] 
  
 <b>algorithm</b>
-  (y,t,x):=TransferFunction.Analysis.impulseResponse(tf,Ts,tSpan);
-//  y[:,1,1]={0, 0.095, 0.18, 0.2553, 0.321}
+  (y,t,x):=Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(tf,Ts,tSpan,response,x0);
+//  y[:,1,1]={0, 0.0048, 0.0187, 0.04, 0.0694}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
-//  x[:,1,1]={0, 0.095, 0.18, 0.2553, 0.321}
+//  x[:,1,1]={0, 0.0048, 0.0187, 0.04, 0.0694}
 </pre></blockquote>
  
  
@@ -597,6 +598,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 </pre></blockquote>
  
  
+ 
 </html> "));
   end stepResponse;
 
@@ -654,6 +656,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0002, 0.0012, 0.0042, 0.0096}
 </pre></blockquote>
+ 
  
  
 </html> "));
@@ -1597,7 +1600,7 @@ and results in
       input Modelica.SIunits.Frequency f_max(min=0) = 10
         "Maximum frequency value, if autoRange = false"                                                  annotation(Dialog(enable=not autoRange));
 
-      input Boolean magnitude=true "= true, to plot the magnitude of tf"
+      input Boolean magnitude=true "= true, to plot the magnitude of tf" 
                                                                         annotation(choices(__Dymola_checkBox=true));
       input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
 
@@ -2538,7 +2541,7 @@ StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conver
     input Integer ns2=numSize[2];
     input Integer ds2=denSize[2];
     public
-   output TransferFunction tf(n=fill(0,ns2),d=fill(0,ds2)) "tranfer function";
+   output TransferFunction tf(n=fill(0,ns2),d=fill(0,ds2)) "transfer function";
 
   algorithm
     tf.n := vector(num);

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dgeev
-  "Compute the eigenvalues and the (real) left and right eigenvectors of matrix A, using lapack routine dgeev "
+  "Compute the eigenvalues and the (real) left and right eigenvectors of matrix A"
 
   input Real A[:,size(A, 1)];
 

@@ -36,7 +36,7 @@ algorithm
       (T,V) := Matrices.rsf2(B);
     end if;
 
-    Chat := if aIsSchur and bIsSchur then C else if aIsSchur then C*V else if
+    Chat := if aIsSchur and bIsSchur then C else if aIsSchur then C*V else if 
       bIsSchur then transpose(U)*C else transpose(U)*C*V;
     (X,scale,info) := Matrices.LAPACK.dtrsyl(S, T, Chat);
     assert(info == 0, "Solving of Sylvester equation with Matrices.sylvester was not sucessfull.\n

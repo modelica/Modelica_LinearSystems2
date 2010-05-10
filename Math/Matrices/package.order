@@ -19,6 +19,7 @@ LU
 LU_solve
 LU_solve2
 lyapunov
+dlyapunov
 norm
 nullspace
 orthogonalQ
@@ -33,3 +34,5 @@ sylvester
 toUpperHessenberg
 trace
 Internal
+discreteSylvesterEquation_1stVersion
+discreteSylvesterEquation

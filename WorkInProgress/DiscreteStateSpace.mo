@@ -458,12 +458,12 @@ function toDiscreteTransferFunction
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
   input DiscreteStateSpace dss "DiscreteStateSpace object";
 
-  output Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction dtf
+  output Modelica_LinearSystems2.DiscreteTransferFunction dtf
         "DiscreteTransferFunction object";
 
     protected
@@ -489,11 +489,11 @@ encapsulated function toDiscreteZerosAndPoles
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+  import Modelica_LinearSystems2.DiscreteZerosAndPoles;
   import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
   input DiscreteStateSpace dss "StateSpace object";
-  output DiscreteZerosAndPoles dzp;
+  output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
 
     protected
   StateSpace ss=StateSpace(A=dss.A, B=dss.B, C=dss.C, D=dss.D);
@@ -628,7 +628,7 @@ encapsulated function bodeSISO
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
 
   input DiscreteStateSpace dss "discrete state space system";
   input Integer iu=1 "index of input";
@@ -649,7 +649,7 @@ encapsulated function bodeSISO
         Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
 
     protected
-  Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction dtf
+  Modelica_LinearSystems2.DiscreteTransferFunction dtf
         "Transfer functions to be plotted";
   DiscreteStateSpace dss_siso(
     redeclare Real A[size(dss.A, 1),size(dss.A, 2)],
@@ -734,6 +734,516 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
 end bodeSISO;
 
 end Plot;
+
+encapsulated package Internal
+function kfStepMatrices
+      "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
+extends Modelica.Icons.Function;
+
+import Modelica;
+import Modelica_LinearSystems2;
+import Modelica_LinearSystems2.Math;
+import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+
+input Real A[:,size(A, 1)] "Transition matrix of the discrete system";
+input Real B[size(A, 1),:] "Input matrix of the discrete system";
+input Real C[:,size(A, 1)] "Output matrix of the discrete system";
+input Real P[size(A, 1),size(A, 1)]
+        "State covariance matrix of the previous instant";
+input Real Q[size(B, 2),size(B, 2)]
+        "Input or process noise covariance matrix of the previous instant";
+input Real R[size(C, 1),size(C, 1)]
+        "Output or measurement noise covariance matrix of the previous instant";
+
+output Real K[size(A, 1),size(C, 1)]=P*transpose(C) "Kalman filter gain matrix";
+output Real P_new[size(A, 1),size(A, 1)] "Updated state covariance matrix";
+output Real UMutri[size(C, 1),size(C, 1)]
+        "Square root (left Cholesky factor) of the covariance matrix M";
+output Real M[size(C, 1),size(C, 1)]=DiscreteStateSpace.Internal.symMatMul(C, P, R, true)
+        "Upper triangle of measurement prediction covariance C*P*C' + R";
+
+output Real PCT[size(A, 1),size(C, 1)]=P*transpose(C) "Matrix P*C'";
+    protected
+Integer nx=size(A, 1) "Number of states, order of the system";
+Integer nu=size(B, 2) "Number of inputs";
+Integer ny=size(C, 1) "number of outputs";
+Integer l1;
+Integer l2;
+Real alpha=1.0;
+
+// Real P[size(A, 1),size(A, 1)]=P_in    "State covariance matrix of the previous instant";
+
+Integer info;
+
+algorithm
+//PCT:=P*transpose(C) "Matrix P*C'";
+//M:=DiscreteStateSpace.Internal.symMatMul(C, P, R, true)     "Upper triangle of measurement prediction covariance C*P*C' + R";
+(UMutri,info) := LAPACK.dpotrf(M, true);// Calculate the Cholesky factorization U*U' of M
+assert(info == 0, "Calculating a Cholesky decomposition with function \"Lapack.dpotrf\" failed in function \"kfStep\".");
+for l1 in 2:ny loop
+  for l2 in 1:l1 - 1 loop
+    UMutri[l1, l2] := 0.0;
+  end for;
+end for;
+
+      //K from K*M = P*C' with K*U'*U = P*C', U is Cholesky factor
+K := LAPACK.dtrsm(UMutri, K, alpha, true, true, false, false);
+K := LAPACK.dtrsm(UMutri, K, alpha, true, true, true, false);
+
+// Calculate upper triangle of symmetric P-K*C*P
+for l1 in 1:nx loop
+  for l2 in l1:nx loop
+    P_new[l1, l2] := P[l1, l2] - K[l1, :]*PCT[l2, :];
+  end for;
+end for;
+//Calculate upper triangle of A*(P-K*C*P)*A'
+P_new := DiscreteStateSpace.Internal.symMatMul(A, P_new, P_new, false);
+//Calculate upper triangle of A*(P-K*C*P)*A' + B*Q*B'
+P_new := DiscreteStateSpace.Internal.symMatMul(B, Q, P_new, true);
+
+      // Note that P_new contains the upper triangle of the symmetric covariance matrix.
+      // To complete the matrix, the strict lower triangle could be calculated by
+for l1 in 2:nx loop
+  for l2 in 1:l1-1 loop
+    P_new[l1,l2] := P_new[l2,l1];
+  end for;
+end for;
+
+end kfStepMatrices;
+
+  function symMatMul
+      "Calculate the upper triangle of A*B*A'+a*C with B and C symmetric"
+    extends Modelica.Icons.Function;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+    input Real A[:,:];
+    input Real B[size(A, 2),size(A, 2)];
+    input Real C[size(A, 1),size(A, 1)];
+    input Boolean add=true "true if a==1, false if a==0";
+    output Real M[size(A, 1),size(A, 1)];
+
+    protected
+    Integer a1=size(A, 1);
+    Integer a2=size(A, 2);
+    Integer i;
+    Integer j;
+
+    Real alpha=1.0;
+    Real beta=if add then 1 else 0;
+
+    Real Butri[a2,a2]=B;
+    Real Cutri[a1,a1]=C;
+    Real Ah[a1,a2];
+
+  algorithm
+    for i in 1:a2 loop
+      Butri[i, i] := B[i, i]/2;
+    end for;
+    if add then
+      for i in 1:a1 loop
+        Cutri[i, i] := C[i, i]/2;
+      end for;
+      for i in 2:a1 loop
+        for j in 1:i - 1 loop
+          Cutri[i, j] := 0.0;
+        end for;
+      end for;
+    end if;
+
+    Ah := LAPACK.dtrmm(Butri, A, alpha, true, true, false, false);
+    M := LAPACK.dgemm(Ah, A, Cutri, alpha, beta, false, true);
+  // M:= Ah*transpose(A)+Cutri;
+    for i in 1:a1 loop
+      for j in i:a1 loop
+        M[i,j] := M[i,j]+M[j,i];
+      end for;
+    end for;
+
+  end symMatMul;
+
+function kfStepState
+      "One step, i.e.estimation of the state vector using a kalman filter iteration for discrete systems"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+
+  input DiscreteStateSpace dss;
+  input Real P[size(dss.A, 1),size(dss.A, 1)]
+        "State covariance matrix of the previous instant";
+  input Real Q[size(dss.B, 2),size(dss.B, 2)]
+        "Input or process noise covariance matrix of the previous instant";
+  input Real R[size(dss.C, 1),size(dss.C, 1)]
+        "Output or measurement noise covariance matrix of the previous instant";
+  input Real x[size(dss.A, 1)] "Estimated state vector of previous instant";
+  input Real u[size(dss.B, 2)] "input vector";
+  input Real y[size(dss.C, 1)] "Measured output vector";
+
+  output Real x_new[size(dss.A, 1)];
+  output Real K[size(dss.A, 1),size(dss.C, 1)] "Kalman filter gain matrix";
+  output Real P_new[size(dss.A, 1),size(dss.A, 1)]
+        "Updated state covariance matrix";
+
+    protected
+  Real UMutri[size(dss.C, 1),size(dss.C, 1)]
+        "Square root (left Cholesky factor) of the covariance matrix M=R + C*P*C'";
+   Real z[size(dss.A, 1)];
+
+algorithm
+  (K,P_new,UMutri) := DiscreteStateSpace.Internal.kfStepMatrices(
+    dss.A,
+    dss.B,
+    dss.C,
+    P,
+    Q,
+    R);
+  z := dss.A*x + dss.B*u;
+  x_new := z - K*(dss.C*z - y);
+
+end kfStepState;
+
+function kfStepMatrices2
+      "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
+extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+
+input Real A[:,size(A, 1)] "Transition matrix of the discrete system";
+input Real B[size(A, 1),:] "Input matrix of the discrete system";
+input Real C[:,size(A, 1)] "Output matrix of the discrete system";
+input Real P[size(A, 1),size(A, 1)]
+        "State covariance matrix of the previous instant";
+input Real Q[size(B, 2),size(B, 2)]
+        "Input or process noise covariance matrix of the previous instant";
+input Real R[size(C, 1),size(C, 1)]
+        "Output or measurement noise covariance matrix of the previous instant";
+
+output Real K[size(A, 1),size(C, 1)]=P*transpose(C) "Kalman filter gain matrix";
+output Real P_new[size(A, 1),size(A, 1)] "Updated state covariance matrix";
+output Real UMutri[size(C, 1),size(C, 1)]
+        "Square root (left Cholesky factor) of the covariance matrix M";
+output Real M[size(C, 1),size(C, 1)]=DiscreteStateSpace.Internal.symMatMul(C, P, R, true)
+        "Upper triangle of measurement prediction covariance C*P*C' + R";
+
+output Real PCT[size(A, 1),size(C, 1)]=P*transpose(C) "Matrix P*C'";
+output Real R_new[ny,ny];
+    protected
+Integer nx=size(A, 1) "Number of states, order of the system";
+Integer nu=size(B, 2) "Number of inputs";
+Integer ny=size(C, 1) "number of outputs";
+Integer l1;
+Integer l2;
+Real alpha=1.0;
+
+// Real P[size(A, 1),size(A, 1)]=P_in    "State covariance matrix of the previous instant";
+
+Real ICK[ny,ny];
+Real Iy[ny,ny]=identity(ny);
+
+Integer info;
+
+algorithm
+//PCT:=P*transpose(C) "Matrix P*C'";
+//M:=DiscreteStateSpace.Internal.symMatMul(C, P, R, true)     "Upper triangle of measurement prediction covariance C*P*C' + R";
+(UMutri,info) := LAPACK.dpotrf(M, true);// Calculate the Cholesky factorization U*U' of M
+assert(info == 0, "Calculating a Cholesky decomposition with function \"Lapack.dpotrf\" failed in function \"kfStep\".");
+for l1 in 2:ny loop
+  for l2 in 1:l1 - 1 loop
+    UMutri[l1, l2] := 0.0;
+  end for;
+end for;
+
+      //K from K*M = P*C' with K*U'*U = P*C', U is Cholesky factor
+K := LAPACK.dtrsm(UMutri, K, alpha, true, true, false, false);
+K := LAPACK.dtrsm(UMutri, K, alpha, true, true, true, false);
+
+ICK:= (Iy-C*K)*transpose(Iy-C*K);
+R_new := Modelica.Math.Matrices.solve2(ICK*R,Iy-ICK);
+M:=DiscreteStateSpace.Internal.symMatMul(
+        C,
+        P,
+        R,
+        true);
+(UMutri,info) := LAPACK.dpotrf(M, true);
+K := LAPACK.dtrsm(UMutri, K, alpha, true, true, false, false);
+K := LAPACK.dtrsm(UMutri, K, alpha, true, true, true, false);
+
+// Calculate upper triangle of symmetric P-K*C*P
+for l1 in 1:nx loop
+  for l2 in l1:nx loop
+    P_new[l1, l2] := P[l1, l2] - K[l1, :]*PCT[l2, :];
+  end for;
+end for;
+//Calculate upper triangle of A*(P-K*C*P)*A'
+P_new := DiscreteStateSpace.Internal.symMatMul(A, P_new, P_new, false);
+//Calculate upper triangle of A*(P-K*C*P)*A' + B*Q*B'
+P_new := DiscreteStateSpace.Internal.symMatMul(B, Q, P_new, true);
+
+      // Note that P_new contains the upper triangle of the symmetric covariance matrix.
+      // To complete the matrix, the strict lower triangle could be calculated by
+for l1 in 2:nx loop
+  for l2 in 1:l1-1 loop
+    P_new[l1,l2] := P_new[l2,l1];
+  end for;
+end for;
+
+end kfStepMatrices2;
+
+
+function ukf_h_of_Sigma
+      "Compute the function values corresponding to the sigma points of a uscented Kalman filter"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+
+  input Real sigmas[:,2*size(sigmas,1)+1]
+        "Estimated state vector of previous instant";
+  input Real uk[:] "Input at instant k";
+
+  output Real hSigmas[2,size(sigmas,2)] "Y-Sigma points";
+
+    protected
+  Integer n=size(sigmas, 2);
+  Real C[:,size(sigmas,1)]=[1,0,1;0,1,0] "Function matrix C, y = Cx + Du";
+  Real D[size(C,1),size(uk,1)]=[0;0] "Function matrix D, y = Cx + Du";
+  Real duk[size(D,1)];
+algorithm
+  duk := D*uk;
+  for i in 1:n loop
+    hSigmas[:,i] := C*sigmas[:,i] + duk;
+  end for;
+end ukf_h_of_Sigma;
+
+function ukf_f_of_Sigma
+      "Compute the function values corresponding to the sigma points of a uscented Kalman filter"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+
+  input Real sigmas[:,2*size(sigmas,1)+1]
+        "Estimated state vector of previous instant";
+  input Real uk[:] "Input at instant k";
+
+  output Real fSigmas[size(sigmas,1),size(sigmas,2)] "X-Sigma points";
+
+    protected
+  Integer n=size(sigmas, 2);
+  Real A[size(sigmas,1),size(sigmas,1)]= [1,2,3;0,-2,0;1,0,3]
+        "Function matrix A, x_k+1 = A*x_k + B*u_k";
+  Real B[size(A,1),size(uk,1)]=[1;1;1]
+        "Function matrix B, x_k+1 = A*x_k + B*u_k";
+  Real buk[size(B,1)];
+algorithm
+  buk := B*uk;
+  for i in 1:n loop
+    fSigmas[:,i] := A*sigmas[:,i] + buk;
+  end for;
+end ukf_f_of_Sigma;
+
+
+function ukfPredict "Prediction step in ukf"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+  input Real x[:] "Estimated vector of previous instant";
+  input Real P[size(x, 1),size(x, 1)]
+        "State covariance matrix of the previous instant";
+  input Real Q[size(P, 1),:] "Covariance matrix of the process noise";
+  input Real uk[:] "Input at instant k";
+  input Real alpha;
+  input Real beta;
+  input Real kappa "Scaling parameter";
+
+  output Real mu[size(x, 1)] "Predicted mean";
+  output Real Pk[size(x, 1),size(x, 1)] "Transformed covariance matrix";
+//  output Real xp[size(x, 1)];
+
+    protected
+  Integer n=size(x, 1);
+  Real sigmas[size(x, 1),2*size(x, 1) + 1] "Sigma points";
+  Real fSigmas[size(Q, 2),2*size(x, 1) + 1] "Mapped sigma points";
+  Real CFP[n,n] "Square root (left Cholesky factor) of the covariance matrix P";
+  Integer info;
+
+  Real lambda = alpha^2*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+
+algorithm
+  (CFP,info) := LAPACK.dpotrf(a*P, false);// declare P as lower trangular instead of additional transposing -> P has to be full
+  assert(info == 0, "Cholesky factor was not computed successfully in ukfSigmaPoints");
+
+// Compute sigma points
+  sigmas[:, 1] := x;
+  for i in 1:n loop
+    sigmas[:, i + 1] := x;
+    sigmas[:, i + n + 1] := x;
+    for j in i:n loop
+      sigmas[j, i + 1] := sigmas[j, i + 1] + CFP[j, i];
+      sigmas[j, i + n + 1] := sigmas[j, i + n + 1] - CFP[j, i];
+    end for;
+  end for;
+
+// Compute update of sigma points from x_k+1 = f(x_k,u_k)
+  fSigmas := DiscreteStateSpace.Internal.ukf_f_of_Sigma(sigmas, uk);
+  mu := wm0*fSigmas[:, 1];
+  for i in 1:n loop
+    mu[i] := mu[i] + wmi*sum(fSigmas[i, 2:2*n + 1]);
+  end for;
+
+//Compute predicted covariace Pk = sum(w_i*(hSigma_i-mu_i)*(hSigma_i-mu_i)'), i=0,...,2n+1
+// Sinc Pk will be symmetric, only the upper traiangle is calculated
+// i=2,..,2n+1 with constant weight wci first
+  for j in 1:n loop
+    for i in 2:2*n + 1 loop
+      Pk[1:j, j] := Pk[1:j, j] + (fSigmas[j, i] - mu[j])*(fSigmas[1:j, i] - mu[1:j]);
+    end for;
+  end for;
+  Pk := wci*Pk;
+
+// first element with weight wc0
+  for j in 1:n loop
+    Pk[1:j, j] := Pk[1:j, j] + wc0*(fSigmas[j, 1] - mu[j])*(fSigmas[1:j, 1] - mu[1:j]);
+  end for;
+  Pk := symmetric(Pk);
+
+  Pk := Pk+Q;
+
+end ukfPredict;
+
+
+function ukfUpdate "Update step in ukf"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+  input Real x[:] "Estimated vector of previous instant";
+  input Real P[size(x, 1),size(x, 1)]
+        "State covariance matrix of the previous instant";
+  input Real R[:,size(R, 1)] "Covariance matrix of the process noise";
+  input Real uk[:] "Input at instant k";
+  input Real alpha;
+  input Real beta;
+  input Real kappa "Scaling parameter";
+
+  output Real mu[size(R, 1)] "Predicted mean";
+  output Real Sk[size(R, 1),size(R, 1)] "Transformed covariance matrix";
+  output Real Ck[size(x, 1),size(R, 1)] "Transformed cross covariance matrix";
+
+    protected
+  Integer n=size(x, 1);
+  Integer m=size(R, 1);
+  Real xSigmas[size(x, 1),2*n + 1] "Sigma points";
+  Real ySigmas[size(R, 2),2*n + 1] "Mapped sigma points";
+  Real CFP[n,n] "Square root (left Cholesky factor) of the covariance matrix P";
+  Integer info;
+
+  Real lambda = alpha^2*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+
+algorithm
+  (CFP,info) := LAPACK.dpotrf(a*P, false);// declare P as lower trangular instead of additional transposing -> P has to be full
+  assert(info == 0, "Cholesky factor was not computed successfully in ukfSigmaPoints");
+
+// Compute sigma points
+  xSigmas[:, 1] := x;
+  for i in 1:n loop
+    xSigmas[:, i + 1] := x;
+    xSigmas[:, i + n + 1] := x;
+    for j in i:n loop
+      xSigmas[j, i + 1] := xSigmas[j, i + 1] + CFP[j, i];
+      xSigmas[j, i + n + 1] := xSigmas[j, i + n + 1] - CFP[j, i];
+    end for;
+  end for;
+
+// Compute update of sigma points from x_k+1 = f(x_k,u_k)
+  ySigmas := DiscreteStateSpace.Internal.ukf_h_of_Sigma(xSigmas, uk);
+  mu := wm0*ySigmas[:, 1];
+  for i in 1:m loop
+    mu[i] := mu[i] + wmi*sum(ySigmas[i, 2:2*n + 1]);
+  end for;
+
+//Compute predicted covariace Sk = sum(w_i*(hSigma_i-mu_i)*(hSigma_i-mu_i)'), i=0,...,2n+1
+// Sinc Sk will be symmetric, only the upper traiangle is calculated
+// i=2,..,2n+1 with constant weight wci first
+  for j in 1:m loop
+    for i in 2:2*n + 1 loop
+      Sk[1:j, j] := Sk[1:j, j] + (ySigmas[j, i] - mu[j])*(ySigmas[1:j, i] - mu[1:j]);
+      Ck[:, j] := Ck[:, j] + (ySigmas[j, i] - mu[j])*(xSigmas[:, i] - x);
+    end for;
+  end for;
+  Sk := wci*Sk;
+  Ck := wci*Ck;
+
+// first element with weight wc0
+  for j in 1:m loop
+    Sk[1:j, j] := Sk[1:j, j] + wc0*(ySigmas[j, 1] - mu[j])*(ySigmas[1:j, 1] - mu[1:j]);
+    Ck[:, j] := Ck[:, j] + wc0*(ySigmas[j, 1] - mu[j])*(xSigmas[:, 1] - x);
+  end for;
+  Sk := symmetric(Sk);
+  Sk := Sk+R;
+
+end ukfUpdate;
+
+  function testUKF
+    extends Modelica.Icons.Function;
+
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+    import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+    protected
+    Real x[:]={1,2,3} "Estimated vector of previous instant";
+    Real P[size(x, 1),size(x, 1)]= [1,3,0;5,-1,2;3,1,0]*transpose([1,3,0;5,-1,2;3,1,0])
+        "State covariance matrix of the previous instant";
+    Real Q[size(P, 1),:]= P/3 "Covariance matrix of the process noise";
+    Real R[:,:]= [2,3;4,3]*transpose([2,3;4,3])
+        "Covariance matrix of the process noise";
+    Real uk[:]={1} "Input at instant k";
+    Real alpha=0.5;
+    Real beta=0.6;
+    Real kappa=0.8 "Scaling parameter";
+
+    public
+    output Real mu[size(x, 1)] "Predicted mean";
+    output Real Pp[size(x, 1),size(x, 1)] "Transformed covariance matrix";
+    output Real y[size(R, 1)] "Predicted mean";
+    output Real Rp[size(R, 1),size(R, 1)] "Transformed covariance matrix";
+    output Real Cp[size(x, 1),size(R, 1)] "Transformed covariance matrix";
+
+  algorithm
+    (mu,Pp) := DiscreteStateSpace.Internal.ukfPredict(x, P,Q, uk, alpha, beta, kappa);
+    (y,Rp, Cp) := DiscreteStateSpace.Internal.ukfUpdate(mu, Pp,R, uk, alpha, beta, kappa);
+  end testUKF;
+end Internal;
+
   annotation (
     defaultComponentName="stateSpaceDiscrete",
     Documentation(info="<html>

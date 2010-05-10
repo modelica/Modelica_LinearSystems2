@@ -30,8 +30,8 @@ function transformationToIrreducibleForm
 
 protected
   Boolean systemOnFile=fileName <> "NoName";
-  StateSpace ss=if systemOnFile then
-      Modelica_LinearSystems2.StateSpace.Import.fromFile(  fileName) else
+  StateSpace ss=if systemOnFile then 
+      Modelica_LinearSystems2.StateSpace.Import.fromFile(  fileName) else 
       Modelica_LinearSystems2.StateSpace(
       A=A,
       B=B,

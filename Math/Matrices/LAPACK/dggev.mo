@@ -16,26 +16,27 @@ function dggev "Compute generalized eigenvalues for a (A,B) system"
   output Integer info;
 protected
   Integer n=size(A, 1);
-  Integer lwork=8*n;
+  Integer lwork=max(1,8*n);
   Real Awork[n,n]=A;
   Real Bwork[n,n]=B;
   Real work[lwork];
+  Integer lda=max(1,n);
 
 external "Fortran 77" dggev(
     "V",
     "V",
     nA,
     Awork,
-    n,
+    lda,
     Bwork,
-    n,
+    lda,
     alphaReal,
     alphaImag,
     beta,
     lEigenVectors,
-    n,
+    lda,
     rEigenVectors,
-    n,
+    lda,
     work,
     lwork,
     info)         annotation(Library = {"lapack"});

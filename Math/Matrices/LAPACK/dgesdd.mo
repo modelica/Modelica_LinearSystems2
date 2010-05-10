@@ -11,8 +11,8 @@ protected
   Integer lda=max(1, size(A, 1));
   Integer ldu=max(1, size(A, 1));
   Integer ldvt=max(1, size(A, 2));
-  Integer lwork=1*(3*min(size(A, 1),size(A, 2))*min(size(A, 1),size(A, 2)) + max(max(size(A, 1),size(A, 2)),4*min(size(A, 1),size(A, 2))*min(size(A, 1),size(A, 2))+4*min(size(A, 1),size(A, 2))));
-  Integer iwork=8*min(size(A, 1),size(A, 2));
+  Integer lwork=max(1,3*(3*min(size(A, 1),size(A, 2))*min(size(A, 1),size(A, 2)) + max(max(size(A, 1),size(A, 2)),4*min(size(A, 1),size(A, 2))*min(size(A, 1),size(A, 2))+4*min(size(A, 1),size(A, 2)))));
+  Integer iwork=max(1,8*min(size(A, 1),size(A, 2)));
   Real work[lwork];
 
 external "Fortran 77" dgesdd(
@@ -29,7 +29,7 @@ external "Fortran 77" dgesdd(
     work,
     lwork,
     iwork,
-    info)
+    info) 
     annotation (Library="lapack");
   annotation (Documentation(info="   Purpose  
    =======  

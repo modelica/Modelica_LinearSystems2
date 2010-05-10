@@ -15,7 +15,7 @@ protected
   Integer sdim=0;
   Boolean bwork[n];
 
-  external "FORTRAN 77" c_inter_dgees("V", "N", n, T, lda, sdim, eval_real, eval_imag, Z, lda, bwork, info)
+  external "FORTRAN 77" c_inter_dgees("V", "N", n, T, lda, sdim, eval_real, eval_imag, Z, lda, bwork, info) 
   annotation (Include=" 
 #include<f2c.h>
 logical select_(doublereal *par1, doublereal *par2)

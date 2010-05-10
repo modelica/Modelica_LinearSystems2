@@ -5,7 +5,7 @@ function plotBodeDiscrete
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+  import Modelica_LinearSystems2.DiscreteTransferFunction;
 
   output Boolean ok;
 protected
@@ -13,8 +13,8 @@ protected
   Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact
     "Discretization method";
   TransferFunction tf=TransferFunction({1}, {1,0,1});
-  Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction dtf=
-                               Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction(
+  Modelica_LinearSystems2.DiscreteTransferFunction dtf=
+                               Modelica_LinearSystems2.DiscreteTransferFunction(
                                                         tf,Ts,method);
 
 algorithm

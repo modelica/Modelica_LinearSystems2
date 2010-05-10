@@ -247,8 +247,8 @@ follow each other as above. An error occurs if this is not the case.
     end 'String';
 
 encapsulated function z "Generate the discrete transfer function z"
-  import Modelica_LinearSystems2.Math.Polynomial;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
 
   output DiscreteTransferFunction dtf(n={1,0}, d={1}) "z";
 algorithm
@@ -448,9 +448,9 @@ end Plot;
 encapsulated package Analysis
 
 encapsulated function denominatorDegree "Return denominator degree"
-  import Modelica;
-  import Modelica_LinearSystems2.Math.Polynomial;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
 
   input DiscreteTransferFunction dtf "discrete transfer function of a system";
   output Integer result;
@@ -490,16 +490,17 @@ encapsulated package Conversion
 
 encapsulated function toDiscreteZerosAndPoles
       "Generate a DiscreteZerosAndPoles object from a DiscreteTransferFunction object"
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-  import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import
+        Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Math.Complex;
 
   input DiscreteTransferFunction dtf "transfer function of a system";
-  output DiscreteZerosAndPoles dzp(
+  output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp(
     redeclare Real n1[Internal.numberOfRealZeros2(dtf)],
     redeclare Real n2[integer((size(dtf.n, 1) - 1 -
       Internal.numberOfRealZeros2(dtf))/2),2],
@@ -533,7 +534,7 @@ Computes a DiscreteZerosAndPoles record
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();  
-   Modelica_LinearSystems2.TransferFunction tf = 1/(z^2 + 3*z +2)
+   Modelica_LinearSystems2.DiscreteTransferFunction dtf = 1/(z^2 + 3*z +2)
 
 
 <b>algorithm</b>
@@ -548,12 +549,12 @@ end toDiscreteZerosAndPoles;
 
 function toDiscreteStateSpace
       "Convert a DiscreteTransferFunction into a DiscreteStateSpace representation"
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-  import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
-  import Modelica.Math.Vectors;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+      import Modelica.Math.Vectors;
 
  input DiscreteTransferFunction dtf "discrete transfer function of a system";
       output DiscreteStateSpace dss(

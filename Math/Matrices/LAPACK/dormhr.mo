@@ -4,12 +4,12 @@ function dormhr
 
   input Real C[:,:];
   input Real A[:,:];
-  input Real tau[size(A, 2) - 1];
+  input Real tau[ if side=="L" then size(C, 2) - 1 else size(C,1)-1];
   input String side="L";
   input String trans="N";
   input Integer ilo=1
     "lowest index where the original matrix had been Hessenbergform";
-  input Integer ihi=size(A, 2)
+  input Integer ihi=if side=="L" then size(C,1) else size(C,2)
     "highest index where the original matrix had been Hessenbergform";
   output Real Cout[size(C, 1),size(C, 2)]=C
     "contains the Hessenberg form in the upper triangle and the first subdiagonal and below the first subdiagonal it contains the elementary reflectors which represents (with array tau) as a product the orthogonal matrix Q";
@@ -20,7 +20,7 @@ protected
   Integer n=size(C, 2);
   Integer lda=max(1, size(A, 2));
   Integer ldc=max(1, m);
-  Integer lwork=2*size(A, 2);
+  Integer lwork=max(1,2*size(A, 2));
   Real work[lwork];
 
 external "Fortran 77" dormhr(

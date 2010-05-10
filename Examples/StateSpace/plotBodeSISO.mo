@@ -7,7 +7,7 @@ function plotBodeSISO
   import Modelica_LinearSystems2.TransferFunction;
 
   input Boolean systemOnFile=false
-    "true, if state space system is defined on file"
+    "true, if state space system is defined on file" 
   annotation (interactive=true);
   input String fileName="NoName" "file where matrix [A, B; C, D] is stored";
 
@@ -22,7 +22,7 @@ function plotBodeSISO
 
 protected
   StateSpace ss=if systemOnFile then Modelica_LinearSystems2.StateSpace.Import.fromFile(
-                                                          fileName) else
+                                                          fileName) else 
       StateSpace(
       A=A,
       B=B,

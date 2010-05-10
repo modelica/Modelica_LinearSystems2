@@ -24,7 +24,7 @@ protected
 
 algorithm
   (RQ_real,RQ_imag,tau_real,tau_imag,info) := Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.wrapper_zgerq2(
-                                                                                                    A_real, A_imag);
+                                                                                            A_real, A_imag);
   for l1 in 1:n loop
     for l2 in 1:m loop
       RQ[l1, l2] := Complex(RQ_real[l1, l2], RQ_imag[l1, l2]);

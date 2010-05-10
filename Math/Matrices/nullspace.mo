@@ -40,34 +40,34 @@ Z = Matrices.<b>nullspace</b>(A);<br>
 </pre></blockquote>
 <h4>Description</h4>
 <p>
-This function calculates a orthonormal basis Z=[z_1, z_2, ...] of the nullspace of a matrix A, i.e. A*z_i=0.
+This function calculates a orthonormal basis <b>Z</b>=[<b>z</b>_1, <b>z</b>_2, ...] of the nullspace of a matrix <b>A</b>, i.e. <b>A</b>*<b>z</b>_i=0.
 </p>
-The nullspace is obtained by svd method. That is, matrix A is dcomposed into the matrices S, U, V: 
+The nullspace is obtained by svd method. That is, matrix <b>A</b> is decomposed into the matrices <b>S</b>, <b>U</b>, <b>V</b>: 
 <blockquote><pre>
         T
  <b>A</b> = <b>U</b><b>S</b><b>V</b>
 </pre></blockquote>
-with the orthonormal matrices U and V and the matrix S with
+with the orthonormal matrices <b>U</b> and <b>V</b> and the matrix <b>S</b> with
 <blockquote><pre>
  <b>S</b> = [<b>S</b>1, <b>0</b>]
  <b>S</b>1 = [diag(s); <b>0</b>]
 </pre></blockquote>
-with the singular values s={s1, s2, ..., sr} of A and r=rank(A). Note, that S has the same size as A. Since, U and V are orthonormal, we may write
+with the singular values <b>s</b>={s1, s2, ..., sr} of <b>A</b> and r=rank(<b>A</b>). Note, that <b>S</b> has the same size as <b>A</b>. Since, <b>U</b> and <b>V</b> are orthonormal, we may write
 <blockquote><pre>
   T
- <b>U</b>*A*V = [<b>S</b>1, <b>0</b>].
+ <b>U</b>*<b>A</b>*<b>V</b> = [<b>S</b>1, <b>0</b>].
 </pre></blockquote>
-Matrix S1 obviously has full column rank and therefore, the left n-r rows (n is the number of columns of A or S) of matrix V span a nullspace of A.
+Matrix <b>S</b>1 obviously has full column rank and therefore, the left n-r rows (n is the number of columns of <b>A</b> or <b>S</b>) of matrix <b>V</b> span a nullspace of <b>A</b>.
 </p>
 <p>
-The nullity of matrix A is the dimension of the nullspace of A. In view of the above, it becomes clear that nullity holds
+The nullity of matrix <b>A</b> is the dimension of the nullspace of <b>A</b>. In view of the above, it becomes clear that nullity holds
 <blockquote><pre>
  nullity = n - r
 </pre></blockquote>
 with
 <blockquote><pre>
- n = number of columns of matrix A
- r = rank(A)
+ n = number of columns of matrix <b>A</b>
+ r = rank(<b>A</b>)
 </pre></blockquote>
 
 </p>

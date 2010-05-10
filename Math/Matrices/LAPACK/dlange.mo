@@ -10,7 +10,7 @@ protected
   Integer lda=max(1,m);
   Real work[2*m];
 
-external "Fortran 77" dlange2(norm, m, n, A, lda, work, anorm);
+external "Fortran 77" dlange2(norm, m, n, A, lda, work, anorm) 
   annotation (Include="
   #include<f2c.h>
    #include <stdio.h> 
@@ -31,8 +31,8 @@ fprintf(fileptr,\"anorm=%f \\n\",*anorm);
   fclose(fileptr);
   
   return 0;
-}", Library={"lapack"},
-    Documentation(info="<html>
+}", Library={"lapack"});
+annotation ( Documentation(info="<html>
     Purpose   
     =======   
 

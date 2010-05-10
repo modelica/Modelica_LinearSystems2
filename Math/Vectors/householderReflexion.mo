@@ -21,4 +21,7 @@ algorithm
     ra[i] := if abs(ra[i]) >= norm_a*1e-12 then ra[i] else 0;
   end for;
 
+  annotation (Documentation(info="<html>
+
+</html>"));
 end householderReflexion;

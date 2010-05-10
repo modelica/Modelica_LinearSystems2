@@ -257,8 +257,8 @@ package Filters
        print("\n  order = " + String(i) + ", " + getAmplitude(zp), outputFile);
 
        // Check that all coefficients are identical
-       assert(size(zp.n1,1) == 0 and
-              size(zp.n2,1) == 0 and
+       assert(size(zp.n1,1) == 0 and 
+              size(zp.n2,1) == 0 and 
               size(zp.d2,1) == 0, "CriticalDamping base filter is wrong (1)");
        c :=zp.d1[1];
        for j in 2:i loop

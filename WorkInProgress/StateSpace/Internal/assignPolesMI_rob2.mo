@@ -153,7 +153,7 @@ algorithm
 
      S2 := if l1 > numberOfRealEigenvalues and 2*rankB - nx > 0 then [Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace(
                                                                                            [C; C_transpose(Sr)]),Sr] else Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace(
-                                                                                                    C);
+                                                                                            C);
      for l2 in 1:nx loop
        for l3 in 1:rankB loop
          S[l2, rankB*(l1 - 1) + l3] := S2[l2, l3];

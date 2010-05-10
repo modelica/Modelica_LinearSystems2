@@ -1,10 +1,11 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Conversion;
 function convert_dzp
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+  import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 protected
   ZerosAndPoles zp[15];
-  DiscreteZerosAndPoles dzp[15];
+  Modelica_LinearSystems2.DiscreteZerosAndPoles dzp[
+                            15];
 
 algorithm
   zp[1] := ZerosAndPoles(

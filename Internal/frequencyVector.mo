@@ -13,9 +13,9 @@ function frequencyVector "Determine frequency vector for Bode plot"
     "Minimum frequency value, if autoRange = false"                                                 annotation(Dialog(enable=not autoRange));
   input Modelica.SIunits.Frequency f_max(min=0) = 10
     "Maximum frequency value, if autoRange = false"                                                annotation(Dialog(enable=not autoRange));
-  input Complex numZeros[:]=fill(Complex(0), 0) "Zeros of numerator"
+  input Complex numZeros[:]=fill(Complex(0), 0) "Zeros of numerator" 
                                                                     annotation(Dialog(enable=autoRange));
-  input Complex denZeros[:]=fill(Complex(0), 0) "Zeros of denominator"
+  input Complex denZeros[:]=fill(Complex(0), 0) "Zeros of denominator" 
                                                                       annotation(Dialog(enable=autoRange));
   output SI.Frequency f[nPoints] "Frequency vector (automatic or manual)";
 protected

@@ -60,7 +60,7 @@ A = Z*T*Z
 </pre></blockquote>
 with the real nxn matrices <b>T</b> and <b>Z</b>. <b>Z</b> is an orthogonal matrix.  <b>T</b> is an block upper triangular matrix with 1x1 and 2x2 blocks in the diagonal.The 1x1 blocks contains the real eigenvalues of a. The 2x2 blocks are matrices with the conjugated complex pairs of eigenvalues, whereas the real parts of the eigenvalues are the elements of the diagonal.
 <p>
-The calculation is performed stepwise using lapack.dgees, i.e. usng the internal mehtods of balacing and scaling of dgees.
+The calculation is performed stepwise using lapack.dgees, i.e. using the internal mehtods of balacing and scaling of dgees.
 <p>
 See also <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.rsf\">Math.Matrices.rsf</a>
 </p>

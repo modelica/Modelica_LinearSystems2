@@ -3,15 +3,15 @@ record ZerosAndPoles
   "Continuous zeros and poles description of a single input, single output system (data + operations)"
   extends Modelica.Icons.Record;
 
-  Real k=1.0 "Multiplicative factor of transfer function"
+  Real k=1.0 "Multiplicative factor of transfer function" 
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-  Real n1[:] "[p^0] coefficients of 1st order numerator polynomials"
+  Real n1[:] "[p^0] coefficients of 1st order numerator polynomials" 
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-  Real n2[:,2] "[p,p^0] coefficients of 2nd order numerator polynomials"
+  Real n2[:,2] "[p,p^0] coefficients of 2nd order numerator polynomials" 
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-  Real d1[:] "[p^0] coefficients of 1st order denominator polynomials"
+  Real d1[:] "[p^0] coefficients of 1st order denominator polynomials" 
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-  Real d2[:,2] "[p,p^0] coefficients of 2nd order denominator polynomials"
+  Real d2[:,2] "[p,p^0] coefficients of 2nd order denominator polynomials" 
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
   String uName="u" "Name of input signal"    annotation(Dialog(group="Signal names"));
   String yName="y" "Name of output signal"  annotation(Dialog(group="Signal names"));
@@ -142,7 +142,7 @@ follow each other as above. An error occurs if this is not the case.
 </html>"));
   end fromZerosAndPoles;
 
-    function fromTransferFunction =
+    function fromTransferFunction = 
         Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles annotation (Documentation(info="<html> </html>"));
     encapsulated function fromFactorization
       "Generate a ZerosAndPoles object from first and second order polynomials"
@@ -150,22 +150,22 @@ follow each other as above. An error occurs if this is not the case.
       import Modelica_LinearSystems2.ZerosAndPoles;
 
       input Real n1[:]=fill(0, 0)
-        "[p^0] coefficients of 1st order numerator polynomials"
+        "[p^0] coefficients of 1st order numerator polynomials" 
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real n2[:,2]=fill(
               0,
               0,
-              2) "[p,p^0] coefficients of 2nd order numerator polynomials"
+              2) "[p,p^0] coefficients of 2nd order numerator polynomials" 
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real d1[:]=fill(0, 0)
-        "[p^0] coefficients of 1st order denominator polynomials"
+        "[p^0] coefficients of 1st order denominator polynomials" 
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real d2[:,2]=fill(
               0,
               0,
-              2) "[p,p^0] coefficients of 2nd order denominator polynomials"
+              2) "[p,p^0] coefficients of 2nd order denominator polynomials" 
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-      input Real k=1.0 "Multiplicative factor of transfer function"
+      input Real k=1.0 "Multiplicative factor of transfer function" 
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input String uName="" "input name";
       input String yName="" "output name";
@@ -1804,20 +1804,20 @@ of a zeros-and-poles transfer function.
     BandStop                   |      0       |    order         |      0       |   order
  */
     output ZerosAndPoles filter(
-      redeclare Real n1[if filterType == Types.FilterType.BandPass then order else
-                        if filterType == Types.FilterType.HighPass then
-                           (if analogFilter == Types.AnalogFilter.CriticalDamping then order else
+      redeclare Real n1[if filterType == Types.FilterType.BandPass then order else 
+                        if filterType == Types.FilterType.HighPass then 
+                           (if analogFilter == Types.AnalogFilter.CriticalDamping then order else 
                                mod(order, 2)) else 0],
-      redeclare Real n2[if filterType == Types.FilterType.BandStop then order else
-                        if filterType == Types.FilterType.HighPass and
+      redeclare Real n2[if filterType == Types.FilterType.BandStop then order else 
+                        if filterType == Types.FilterType.HighPass and 
                            analogFilter <> Types.AnalogFilter.CriticalDamping then integer(order/2) else 0,2],
-      redeclare Real d1[if filterType == Types.FilterType.BandPass or
-                           filterType == Types.FilterType.BandStop then 0 else
-                        if analogFilter == Types.AnalogFilter.CriticalDamping then order else
+      redeclare Real d1[if filterType == Types.FilterType.BandPass or 
+                           filterType == Types.FilterType.BandStop then 0 else 
+                        if analogFilter == Types.AnalogFilter.CriticalDamping then order else 
                            mod(order, 2)],
-      redeclare Real d2[if filterType == Types.FilterType.BandPass or
-                           filterType == Types.FilterType.BandStop then order else
-                        if analogFilter == Types.AnalogFilter.CriticalDamping then 0 else
+      redeclare Real d2[if filterType == Types.FilterType.BandPass or 
+                           filterType == Types.FilterType.BandStop then order else 
+                        if analogFilter == Types.AnalogFilter.CriticalDamping then 0 else 
                            integer(order/2),2]) "Filter transfer function";
     protected
     Integer n_num1=size(filter.n1, 1);
@@ -1830,8 +1830,8 @@ of a zeros-and-poles transfer function.
     Boolean evenOrder=mod(order, 2) == 0
         "= true, if even filter order (otherwise uneven)";
 
-    Modelica.SIunits.Frequency f0 = if filterType == Types.FilterType.BandPass or
-                                       filterType == Types.FilterType.BandStop then
+    Modelica.SIunits.Frequency f0 = if filterType == Types.FilterType.BandPass or 
+                                       filterType == Types.FilterType.BandStop then 
                                                      sqrt(f_min*f_cut) else f_cut;
     Modelica.SIunits.AngularVelocity w_cut=2*pi*f0 "Cut-off angular frequency";
     Modelica.SIunits.AngularVelocity w_band = (f_cut - f_min) / f0;
@@ -2026,7 +2026,7 @@ of a zeros-and-poles transfer function.
        end for;
        filter.k := gain*k;
 
-     elseif filterType == Types.FilterType.HighPass or
+     elseif filterType == Types.FilterType.HighPass or 
             filterType == Types.FilterType.BandStop then
        /* A high pass filter and a band stop filter have g(s->infinity) = 1 
         and therefore filter.k = 1 is required, in ZerosAndPoles formulation
@@ -2274,7 +2274,7 @@ and results in
     input Modelica.SIunits.Frequency f_max(min=0) = 10
         "Maximum frequency value, if autoRange = false"                                                annotation(Dialog(enable=not autoRange));
 
-    input Boolean magnitude=true "= true, to plot the magnitude of tf"
+    input Boolean magnitude=true "= true, to plot the magnitude of tf" 
                                                                       annotation(choices(__Dymola_checkBox=true));
     input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
 
@@ -2405,7 +2405,7 @@ Plots the bode-diagram of a transfer function.
       "Plot the time response of a system represented by a transfer function. The response type is selectable"
       import Modelica;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
+  //    import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Types.TimeResponse;
 
@@ -3150,7 +3150,7 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
           ssA[2*n_den2 + i, 1:2*n_den2 + i - 1] := b*ssC[1, 1:2*n_den2 + i - 1];
           ssA[2*n_den2 + i, 2*n_den2 + i] := a;
           ssB[2*n_den2 + i, 1] := if dZero then 0 else b*ssD[1, 1];
-          ssC[1, 1:2*n_den2 + i - 1] := if dZero then fill(0, 2*n_den2 + i - 1) else
+          ssC[1, 1:2*n_den2 + i - 1] := if dZero then fill(0, 2*n_den2 + i - 1) else 
                   d*ssC[1, 1:2*n_den2 + i - 1];
           ssC[1, 2*n_den2 + i] := c;
           ssD := if dZero then [0] else d*ssD;
@@ -3691,7 +3691,7 @@ processing.
           ss.A[2*n_den2 + i, 1:2*n_den2 + i - 1] := b*ss.C[1, 1:2*n_den2 + i - 1];
           ss.A[2*n_den2 + i, 2*n_den2 + i] := a;
           ss.B[2*n_den2 + i, 1] := if dZero then 0 else b*ss.D[1, 1];
-          ss.C[1, 1:2*n_den2 + i - 1] := if dZero then fill(0, 2*n_den2 + i - 1) else
+          ss.C[1, 1:2*n_den2 + i - 1] := if dZero then fill(0, 2*n_den2 + i - 1) else 
                   d*ss.C[1, 1:2*n_den2 + i - 1];
           ss.C[1, 2*n_den2 + i] := c;
           ss.D := if dZero then [0] else d*ss.D;
@@ -4141,15 +4141,15 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
       "Continuous zeros and poles description of a single input, single output system (data + operations)"
     extends Modelica.Icons.Record;
 
-    Real k=1.0 "Multiplicative factor of transfer function"
+    Real k=1.0 "Multiplicative factor of transfer function" 
         annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-    Real n1[:] "[p^0] coefficients of 1st order numerator polynomials"
+    Real n1[:] "[p^0] coefficients of 1st order numerator polynomials" 
         annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-    Real n2[:,2] "[p,p^0] coefficients of 2nd order numerator polynomials"
+    Real n2[:,2] "[p,p^0] coefficients of 2nd order numerator polynomials" 
         annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-    Real d1[:] "[p^0] coefficients of 1st order denominator polynomials"
+    Real d1[:] "[p^0] coefficients of 1st order denominator polynomials" 
         annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-    Real d2[:,2] "[p,p^0] coefficients of 2nd order denominator polynomials"
+    Real d2[:,2] "[p,p^0] coefficients of 2nd order denominator polynomials" 
         annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
 
   end ZerosAndPoles;
@@ -4176,9 +4176,9 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
     output ZerosAndPoles filter(
       redeclare Real n1[0],
       redeclare Real n2[0,2],
-      redeclare Real d1[if analogFilter == Types.AnalogFilter.CriticalDamping then
+      redeclare Real d1[if analogFilter == Types.AnalogFilter.CriticalDamping then 
               order else mod(order, 2)],
-      redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then
+      redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then 
               0 else integer(order/2),2]) "Filter transfer function";
     protected
     Integer n_den1=size(filter.d1, 1);
@@ -5952,14 +5952,14 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
         "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
     output Internal.ZerosAndPoles filter(
       redeclare Real n1[if filterType == Types.FilterType.LowPass then 0 else (
-        if analogFilter == Types.AnalogFilter.CriticalDamping then order else
+        if analogFilter == Types.AnalogFilter.CriticalDamping then order else 
         mod(order, 2))],
       redeclare Real n2[if filterType == Types.FilterType.LowPass then 0 else (
-        if analogFilter == Types.AnalogFilter.CriticalDamping then 0 else
+        if analogFilter == Types.AnalogFilter.CriticalDamping then 0 else 
         integer(order/2)),2],
-      redeclare Real d1[if analogFilter == Types.AnalogFilter.CriticalDamping then
+      redeclare Real d1[if analogFilter == Types.AnalogFilter.CriticalDamping then 
               order else mod(order, 2)],
-      redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then
+      redeclare Real d2[if analogFilter == Types.AnalogFilter.CriticalDamping then 
               0 else integer(order/2),2]) "Filter transfer function";
 
     protected
@@ -6301,7 +6301,7 @@ int found=0;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica;
 
-    input String fileName="pc.mat" "Name of the zeros and poles data file"
+    input String fileName="pc.mat" "Name of the zeros and poles data file" 
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
 
@@ -6381,7 +6381,7 @@ int found=0;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Math.Complex;
 
-    input String fileName="zp.mat" "Name of the zeros and poles data file"
+    input String fileName="zp.mat" "Name of the zeros and poles data file" 
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
     protected
@@ -6441,7 +6441,7 @@ int found=0;
       "checks whether the system on file is represented by zeros and poles (z, p) or first and second order polynomials (n1, n2, d1, d2)"
       import Modelica_LinearSystems2.ZerosAndPoles.Internal;
       import Modelica_LinearSystems2;
-      input String fileName="zp.mat" "Name of the zeros and poles data file"
+      input String fileName="zp.mat" "Name of the zeros and poles data file" 
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
       output Boolean iszp=true;
@@ -7051,11 +7051,10 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
 
     function numberOfRealZerosAndPoles_pc
       "Generate a zeros and poles data record by reading the polynomial coefficients from a file (default file name is zp.mat)"
-      import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica;
 
-      input String fileName="pc.mat" "Name of the zeros and poles data file"
+      input String fileName="pc.mat" "Name of the zeros and poles data file" 
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
       output Integer n1n2d1d2[4];

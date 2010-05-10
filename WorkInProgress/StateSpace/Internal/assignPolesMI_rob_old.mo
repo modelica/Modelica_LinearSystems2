@@ -209,7 +209,7 @@ algorithm
 
     subS[l1].S := if l1 > numberOfRealEigenvalues then [Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace(
                                                                              [C; C_transpose(Sr)]),Sr] else Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace(
-                                                                                                    C);
+                                                                                            C);
 
 //    subS[l1].S := Matrices.C_nullspace(C);
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(subS[l1].S),6,"ResubS[l1].S");

@@ -789,7 +789,7 @@ a vector of Complex elements.
 
     encapsulated function rootsOfNonZeroHighestCoefficientPolynomial
     "Determine zeros of polynomial where highest coefficient of polynomial is not zero"
-    import Modelica.Math.Matrices;
+    import Modelica_LinearSystems2.Math.Matrices;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.Math.Complex;
@@ -819,7 +819,8 @@ a vector of Complex elements.
         A[2:n, :] := [identity(n - 1),zeros(n - 1)];
 
         // roots are eigenvalues of companion matrix
-        ev := Matrices.eigenValues(A);
+    //    ev := Matrices.eigenValues(A);
+        (ev[:,1],ev[:,2]) := Matrices.Internal.eigenvaluesHessenberg(A);
         for i in 1:n loop
           result[i] := ev[i, 1]+ j*ev[i, 2];
         end for;

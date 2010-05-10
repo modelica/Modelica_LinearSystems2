@@ -2,12 +2,14 @@ UsersGuide
 DataDir
 Examples
 StateSpace
-TransferFunction
 ZerosAndPoles
+TransferFunction
 DiscreteStateSpace
+DiscreteZerosAndPoles
+DiscreteTransferFunction
 Controller
 Math
 Utilities
-Types
 Internal
+Types
 WorkInProgress

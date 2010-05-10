@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dhseqr
-  "compute eingenvalues of a matrix A using lapack routine DHSEQR for Hessenberg form matrix"
+  "Compute eingenvalues of a matrix A using lapack routine DHSEQR for Hessenberg form matrix"
   input Real H[:,size(H, 1)];
   input Integer lwork=max(1, size(H, 1));
   input Boolean eigenValuesOnly=true;

@@ -10,7 +10,7 @@ parameter Real k=1 "Integrator gain";
 parameter Boolean withDelay=false
     "= true, if the output is delayed by one sample period (only if discrete)";
 
-  parameter Real y_start=0 "Initial or guess value of output (=state)"
+  parameter Real y_start=0 "Initial or guess value of output (=state)" 
                                                                annotation(Dialog(tab="Advanced options"));
 equation
   if continuous then

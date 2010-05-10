@@ -12,6 +12,7 @@ protected
   Real s[size(A, 1)] "singular values";
 
 algorithm
+  if min(size(A)) > 0 then
   if p == 2 then
     s := Modelica.Math.Matrices.singularValues(A);
     if min(s) < eps then
@@ -22,7 +23,8 @@ result := max(s)/min(s);
   else
     result := Modelica.Math.Matrices.norm(A, p)*Modelica.Math.Matrices.norm(
       Modelica.Math.Matrices.inv(A), p);
-  end if;
+    end if;
+    end if;
 
   annotation (Documentation(info="<html>
   <h4>Syntax</h4>

@@ -30,7 +30,7 @@ parameter Types.PID_representation pidRep=Types.PID_representation.timeConstants
                                                                annotation(Dialog(enable=pidRep==Types.PID_representation.gains));
   parameter Real ki= 1 "I part parameter of gain representation" 
                                                               annotation(Dialog(enable=pidRep==Types.PID_representation.gains and 
-                                                                                                  (controllerType==SimpleController.PI or 
+                                                                                                (controllerType==SimpleController.PI or 
                               controllerType==SimpleController.PID)));
   parameter Real kd = 1 "D part parameter of gain representation" 
                                                               annotation(Dialog(enable=pidRep==Types.PID_representation.gains and (controllerType==SimpleController.PD or 

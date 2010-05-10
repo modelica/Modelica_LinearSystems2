@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function fromFile "Read matrix from a matlab file"
-  input String fileName=DataDir + "m.mat"
+  input String fileName=DataDir + "m.mat" 
                               annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="matrix file")));
   input String matrixName="m" "Name of the matrix";

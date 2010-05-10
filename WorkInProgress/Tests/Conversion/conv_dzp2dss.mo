@@ -2,18 +2,23 @@ within Modelica_LinearSystems2.WorkInProgress.Tests.Conversion;
 function conv_dzp2dss
 
   import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+  import Modelica_LinearSystems2.DiscreteTransferFunction;
+  import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
-  input DiscreteZerosAndPoles dzp;
+  input Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
   input Integer n=0;
 protected
   DiscreteStateSpace dss1=DiscreteStateSpace(dzp);
-  DiscreteTransferFunction dtf1=DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss1);
-  DiscreteTransferFunction dtf2=DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction(dzp);
-  DiscreteZerosAndPoles dzp2=DiscreteZerosAndPoles(dtf2);
+  Modelica_LinearSystems2.DiscreteTransferFunction dtf1=
+                                DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss1);
+  Modelica_LinearSystems2.DiscreteTransferFunction dtf2=
+                                DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction(dzp);
+  Modelica_LinearSystems2.DiscreteZerosAndPoles dzp2=
+                             Modelica_LinearSystems2.DiscreteZerosAndPoles(
+                                                   dtf2);
   DiscreteStateSpace dss2=DiscreteStateSpace(dzp2);
-  DiscreteTransferFunction dtf3=DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss2);
+  Modelica_LinearSystems2.DiscreteTransferFunction dtf3=
+                                DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss2);
 
 algorithm
   if n>0 then

@@ -13,7 +13,7 @@ protected
   Integer n=size(A, 1);
   Integer ilo=1;
   Integer ihi=n;
-  Integer lwork=n;
+  Integer lwork=max(1,3*n);
   Real work[lwork];
   Real Awork[n,n]=A;
   Real Bwork[n,n]=B;

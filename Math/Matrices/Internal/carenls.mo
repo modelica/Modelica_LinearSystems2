@@ -25,6 +25,7 @@ protected
   Real Ak[size(A, 1),size(A, 2)];
   Real Rk[size(A, 1),size(A, 2)];
   Real Nk[size(A, 1),size(A, 2)];
+  Real Vk[size(A, 1),size(A, 2)];
   Real tk;
   Integer k;
   Complex xc[2];
@@ -40,7 +41,9 @@ algorithm
       Ak := A - G*Xk;
       Rk := transpose(A)*Xk + Xk*A + Q - Xk*G*Xk;
       Nk := Matrices.lyapunov(Ak, -Rk);
-      tk := Matrices.Internal.findLocal_tk(Rk, G, Nk);
+      Vk := Nk*G*Nk;
+      tk := Modelica_LinearSystems2.Math.Matrices.Internal.findLocal_tk(
+                                           Rk, Vk);
       stop := eps > Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm(
                                            tk*Nk)/Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm(
                                                                          Xk);

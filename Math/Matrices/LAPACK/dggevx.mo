@@ -16,6 +16,7 @@ function dggevx
   output Integer info;
 protected
   Integer n=size(A, 1);
+  Integer lda=max(1,size(A, 1));
   Integer ilo;
   Integer ihi;
   Real lscale[n];
@@ -36,16 +37,16 @@ external "Fortran 77" dggevx(
     "B",
     n,
     A,
-    n,
+    lda,
     B,
-    n,
+    lda,
     alphaReal,
     alphaImag,
     beta,
     lEigenVectors,
-    n,
+    lda,
     rEigenVectors,
-    n,
+    lda,
     ilo,
     ihi,
     lscale,

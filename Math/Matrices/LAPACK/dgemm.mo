@@ -11,7 +11,6 @@ function dgemm
   input Boolean transB=false "True if transformed B is used";
 
   output Real Cout[size(C,1),size(C,2)]=C "Matrix Cout";
-  output Integer info;
 protected
   String transa=if transA then "T" else "N";
   String transb=if transB then "T" else "N";

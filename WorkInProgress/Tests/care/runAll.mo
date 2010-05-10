@@ -25,7 +25,7 @@ algorithm
   if Modelica.Utilities.Files.exist(outputFile) then
     Modelica.Utilities.Files.removeFile(outputFile);
   end if;
-  Modelica.Utilities.Streams.print("import Modelica_LinearSystems2.Tests.care",careMos);
+  Modelica.Utilities.Streams.print("import Modelica_LinearSystems2.WorkInProgress.Tests.care",careMos);
 
   (functions, n) := Tests.Internal.getMoFiles(specifier);
   functions2 := fill("",n);

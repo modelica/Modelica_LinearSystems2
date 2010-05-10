@@ -9,7 +9,8 @@ function dgehrd
     "highest index where the original matrix had been Hessenbergform";
   output Real Aout[size(A, 1),size(A, 2)]=A
     "contains the Hessenberg form in the upper triangle and the first subdiagonal and below the first subdiagonal it contains the elementary reflectors which represents (with array tau) as a product the orthogonal matrix Q";
-  output Real tau[size(A, 1) - 1] "scalar factors of the elementary reflectors";
+  output Real tau[max(size(A, 1),1) - 1]
+    "scalar factors of the elementary reflectors";
   output Integer info;
 protected
   Integer n=size(A, 1);

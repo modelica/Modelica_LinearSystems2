@@ -7,7 +7,7 @@ function conversionToTransferFunctionMIMO
   import Modelica_LinearSystems2.StateSpace;
 
   input Boolean systemOnFile=false
-    "true, if state space system is defined on file"
+    "true, if state space system is defined on file" 
     annotation(Dialog(group="system data definition"),choices(checkBox=true));
 
   input String fileName="NoName" "file where matrix [A, B; C, D] is stored" annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
@@ -22,8 +22,8 @@ function conversionToTransferFunctionMIMO
   output Boolean ok;
 
 protected
-  Modelica_LinearSystems2.StateSpace ss=if systemOnFile then
-      Modelica_LinearSystems2.StateSpace.Import.fromFile(  fileName, matrixName) else
+  Modelica_LinearSystems2.StateSpace ss=if systemOnFile then 
+      Modelica_LinearSystems2.StateSpace.Import.fromFile(  fileName, matrixName) else 
       Modelica_LinearSystems2.StateSpace(
       A=A,
       B=B,

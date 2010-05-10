@@ -23,5 +23,8 @@ dormqr
 dtrevc
 dtrsen
 dtrsyl
-dgemm
 dgelsx
+dgemm
+dtrmm
+dpotrf
+dtrsm

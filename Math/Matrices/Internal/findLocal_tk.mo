@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function findLocal_tk
-  "Find a local minimizer tk to define the length of the step tk*Nk in carenls"
+  "Find a local minimizer tk to define the length of the step tk*Nk in carenls or darenls"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Math.Matrices;
@@ -8,13 +8,14 @@ function findLocal_tk
   import Modelica_LinearSystems2.Math.Complex;
 
   input Real Rk[:,size(Rk, 2)];
-  input Real G[size(Rk, 1),size(Rk, 2)];
-  input Real Nk[size(Rk, 1),size(Rk, 2)];
+  input Real Vk[size(Rk, 1),size(Rk, 2)];
+//   input Real G[size(Rk, 1),size(Rk, 2)];
+//   input Real Nk[size(Rk, 1),size(Rk, 2)];
 
   output Real tk;
 
+//  Real Vk[size(Rk, 1),size(Rk, 2)];
 protected
-  Real Vk[size(Rk, 1),size(Rk, 2)];
   Real alpha_k;
   Real beta_k;
   Real gamma_k;
@@ -22,7 +23,7 @@ protected
   Boolean h;
 
 algorithm
-  Vk := Nk*G*Nk;
+//  Vk := Nk*G*Nk;
   alpha_k := Matrices.trace(Rk*Rk);
   beta_k := Matrices.trace(Rk*Vk);
   gamma_k := Matrices.trace(Vk*Vk);

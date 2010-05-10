@@ -1,14 +1,16 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dgesvx
-  "Solve real system of linear equations A**T*X=B with a B matrix with LAPACK routine DGESVX"
+  "Solve real system of linear equations op(A)*X=B, op(A) is A or A' according to the boolean input transposed"
   extends Modelica.Icons.Function;
   input Real A[:,size(A, 1)];
   input Real B[size(A, 1),:];
+  input Boolean transposed=true;
   output Real X[size(A, 1),size(B, 2)];
   output Integer info;
   output Real rcond;
 
 protected
+  String transA= if transposed then "T" else "N";
   Real Awork[size(A, 1),size(A, 2)]=A;
   Real Bwork[size(B, 1),size(B, 2)]=B;
   Real AF[size(A, 1),size(A, 2)];
@@ -22,7 +24,7 @@ protected
 
 external "FORTRAN 77" dgesvx(
     "N",
-    "T",
+    transA,
     size(A, 1),
     size(B, 2),
     Awork,

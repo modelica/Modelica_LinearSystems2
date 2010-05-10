@@ -18,8 +18,8 @@ function analysisPolesAndZeros_SISO
 protected
   Boolean systemOnFile=fileName <> "NoName";
 
-  Modelica_LinearSystems2.StateSpace ss=if systemOnFile then
-      Modelica_LinearSystems2.StateSpace.Import.fromFile(  fileName, matrixName) else
+  Modelica_LinearSystems2.StateSpace ss=if systemOnFile then 
+      Modelica_LinearSystems2.StateSpace.Import.fromFile(  fileName, matrixName) else 
       Modelica_LinearSystems2.StateSpace(
       A=A,
       B=B,

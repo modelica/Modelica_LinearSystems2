@@ -6,6 +6,7 @@ package UsersGuide "Users Guide"
     class ComplexNumbers "Complex numbers"
 
       class FunctionsAndOperators "Functions and operators"
+
         annotation (Documentation(info="<html>
 <p>
 The definition of a <b>Complex</b> number represented by the record Modelica_LinearSystems2.Math.Complex was originally defined by calling constructor function

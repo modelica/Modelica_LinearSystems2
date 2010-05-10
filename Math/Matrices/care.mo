@@ -28,7 +28,7 @@ public
 
 algorithm
   if n > 1 then
-    (H_RSF,Z,alphaReal,alphaImag) := Matrices.rsf(H);
+    (H_RSF,Z,alphaReal,alphaImag) := Matrices.rsf2(H);
     (H_RSF,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSF(
       true,
       H_RSF,
@@ -61,8 +61,13 @@ algorithm
     end if;
 
   elseif n == 1 then
-    xc := Polynomial.roots(Polynomial({-G[1, 1],2*A[1, 1],Q[1, 1]}));
-    X := matrix(-abs(xc[1].re));
+//    xc := Polynomial.roots(Polynomial({-G[1, 1],2*A[1, 1],Q[1, 1]}));
+//    X := matrix(-abs(xc[1].re));
+
+    X := matrix((A[1,1]-sqrt(A[1,1]*A[1,1]+G[1,1]*Q[1,1]))/G[1,1]);
+    if X[1,1]*G[1,1]<A[1,1] then
+      X:=matrix((A[1, 1] + sqrt(A[1, 1]*A[1, 1] + G[1, 1]*Q[1, 1]))/G[1, 1]);
+    end if;
   else
     X := fill(0, 0, 0);
   end if;

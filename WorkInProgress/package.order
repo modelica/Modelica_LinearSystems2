@@ -1,7 +1,5 @@
 StateSpace2
 DiscreteStateSpace
-DiscreteTransferFunction
-DiscreteZerosAndPoles
 StateSpace
 TransferFunction
 ZerosAndPoles
@@ -9,3 +7,7 @@ Tests
 Controller
 Math
 Icons
+Optimizer
+MPC
+DiscreteTransferFunction
+DiscreteZerosAndPoles
