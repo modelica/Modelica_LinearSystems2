@@ -23,34 +23,34 @@ encapsulated operator 'constructor'
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
 
-    input Real A[:,size(A, 1)];
-    input Real B[size(A, 1),:];
-    input Real C[:,size(A, 1)];
-    input Real D[size(C, 1),size(B, 2)];
+      input Real A[:,size(A, 1)];
+      input Real B[size(A, 1),:];
+      input Real C[:,size(A, 1)];
+      input Real D[size(C, 1),size(B, 2)];
 
-    input String uNames[size(B, 2)]=fill("", size(B, 2));
-    input String yNames[size(C, 1)]=fill("", size(C, 1));
-    input String xNames[size(A, 2)]=fill("", size(A, 2));
+      input String uNames[size(B, 2)]=fill("", size(B, 2));
+      input String yNames[size(C, 1)]=fill("", size(C, 1));
+      input String xNames[size(A, 2)]=fill("", size(A, 2));
 
-     output StateSpace result(
-      redeclare Real A[size(A, 1),size(A, 2)],
-      redeclare Real B[size(B, 1),size(B, 2)],
-      redeclare Real C[size(C, 1),size(C, 2)],
-      redeclare Real D[size(D, 1),size(D, 2)],
-      redeclare String uNames[size(B, 2)],
-      redeclare String yNames[size(C, 1)],
-      redeclare String xNames[size(A, 2)]);
+      output StateSpace result(
+        redeclare Real A[size(A, 1),size(A, 2)],
+        redeclare Real B[size(B, 1),size(B, 2)],
+        redeclare Real C[size(C, 1),size(C, 2)],
+        redeclare Real D[size(D, 1),size(D, 2)],
+        redeclare String uNames[size(B, 2)],
+        redeclare String yNames[size(C, 1)],
+        redeclare String xNames[size(A, 2)]);
 
   algorithm
-    result.A := A;
-    result.B := B;
-    result.C := C;
-    result.D := D;
-     result.uNames := uNames;
-     result.yNames := yNames;
-     result.xNames := xNames;
+      result.A := A;
+      result.B := B;
+      result.C := C;
+      result.D := D;
+      result.uNames := uNames;
+      result.yNames := yNames;
+      result.xNames := xNames;
 
-    annotation (Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center>=</td>  <td> 'constructor'.<b>fromABCDMatrices</b>(A, B, C, D)  </td> </tr>

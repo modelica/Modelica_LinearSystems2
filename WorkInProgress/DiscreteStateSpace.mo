@@ -997,7 +997,6 @@ end for;
 
 end kfStepMatrices2;
 
-
 function ukf_h_of_Sigma
       "Compute the function values corresponding to the sigma points of a uscented Kalman filter"
   extends Modelica.Icons.Function;
@@ -1051,7 +1050,6 @@ algorithm
     fSigmas[:,i] := A*sigmas[:,i] + buk;
   end for;
 end ukf_f_of_Sigma;
-
 
 function ukfPredict "Prediction step in ukf"
   extends Modelica.Icons.Function;
@@ -1129,7 +1127,6 @@ algorithm
   Pk := Pk+Q;
 
 end ukfPredict;
-
 
 function ukfUpdate "Update step in ukf"
   extends Modelica.Icons.Function;

@@ -196,6 +196,36 @@ follow each other as above. An error occurs if this is not the case.
     end fromTransferFunction;
   end 'constructor';
 
+  encapsulated operator '*'
+  function 'dft*dft' "Multiply two DiscreteTransferFunctions (dtf1 * dtf2)"
+    import Modelica;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.DiscreteTransferFunction;
+
+    input DiscreteTransferFunction dtf1 "Transfer function system 1";
+    input DiscreteTransferFunction dtf2 "Transfer function system 1";
+    output DiscreteTransferFunction result;
+
+  algorithm
+    assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"+\".");
+    result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.n),Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
+  end 'dft*dft';
+
+  function 'r*dft'
+      "Multiply a real number with a DiscreteTransferFunctions (r * dtf2)"
+    import Modelica;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.DiscreteTransferFunction;
+
+    input Real r "Real number";
+    input DiscreteTransferFunction dtf "Transfer function system 1";
+    output DiscreteTransferFunction result=dtf;
+
+  algorithm
+    result.n := r*dtf.n;
+  end 'r*dft';
+  end '*';
+
  encapsulated operator '-'
     function subtract "Subtract two discrete transfer functions (dtf1 - dtf2)"
       import Modelica;
@@ -209,12 +239,12 @@ follow each other as above. An error occurs if this is not the case.
       output DiscreteTransferFunction result;
 
     protected
-      TransferFunction tf=(Polynomial(dtf1.n)*Polynomial(dtf2.d) - Polynomial(dtf2.n)
-          *Polynomial(dtf1.d))/(Polynomial(dtf1.d)*Polynomial(dtf2.d));
+      Polynomial n=Polynomial(dtf1.n)*Polynomial(dtf2.d) - Polynomial(dtf2.n)*Polynomial(dtf1.d);
+      Polynomial d=Polynomial(dtf1.d)*Polynomial(dtf2.d);
 
     algorithm
       assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"-.subtract\".");
-      result := DiscreteTransferFunction(tf, dtf1.Ts, dtf1.method);
+      result := DiscreteTransferFunction(n=n.c, d=d.c, Ts=dtf1.Ts, method=dtf1.method);
     end subtract;
 
     function negate "Unary minus (multiply transfer function by -1)"
@@ -226,64 +256,52 @@ follow each other as above. An error occurs if this is not the case.
     end negate;
  end '-';
 
+  encapsulated operator '/'
+  function 'dft/dft' "Divide two transfer functions (dtf1 / dtf2)"
+     import Modelica;
+     import Modelica_LinearSystems2.Math.Polynomial;
+     import Modelica_LinearSystems2.DiscreteTransferFunction;
+
+     input DiscreteTransferFunction dtf1 "Transfer function system 1";
+     input DiscreteTransferFunction dtf2 "Transfer function system 2";
+     output DiscreteTransferFunction result;
+
+  algorithm
+    assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"/\".");
+    result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.d),Polynomial(dtf1.d)*
+      Polynomial(dtf2.n),Ts=dtf1.Ts, method=dtf1.method);
+  end 'dft/dft';
+
+  function 'r/dft' "Divide two transfer functions (dtf1 / dtf2)"
+     import Modelica;
+     import Modelica_LinearSystems2.Math.Polynomial;
+     import Modelica_LinearSystems2.DiscreteTransferFunction;
+
+     input Real r "Real number";
+     input DiscreteTransferFunction dtf "Transfer function system";
+     output DiscreteTransferFunction result;
+
+  algorithm
+    result := DiscreteTransferFunction(r*dtf.d,dtf.n,Ts=dtf.Ts, method=dtf.method);
+  end 'r/dft';
+  end '/';
+
   encapsulated operator function '+'
     "Parallel connection of two discrete transfer functions (= inputs are the same, outputs of the two systems are added)"
     import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
-    import Modelica_LinearSystems2.TransferFunction;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
 
     input DiscreteTransferFunction dtf1 "Transfer function system 1";
     input DiscreteTransferFunction dtf2 "Transfer function system 2";
     output DiscreteTransferFunction result;
 
-  protected
-    TransferFunction tf=(Polynomial(dtf1.n)*Polynomial(dtf2.d) + Polynomial(
-        dtf2.n)*Polynomial(dtf1.d))/(Polynomial(dtf1.d)*Polynomial(dtf2.d));
   algorithm
     assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps,
       "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"+\".");
-    result := DiscreteTransferFunction(tf, Ts=dtf1.Ts, method=dtf1.method);
+    result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.d) + Polynomial(dtf2.n)*Polynomial(dtf1.d), Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
   end '+';
 
-  encapsulated operator function '*'
-    "Multiply two DiscreteTransferFunctions (dtf1 * dtf2)"
-    import Modelica;
-    import Modelica_LinearSystems2.Math.Polynomial;
-    import Modelica_LinearSystems2.TransferFunction;
-    import Modelica_LinearSystems2.DiscreteTransferFunction;
-
-    input DiscreteTransferFunction dtf1 "Transfer function system 1";
-    input DiscreteTransferFunction dtf2 "Transfer function system 1";
-    output DiscreteTransferFunction result;
-
-  protected
-    TransferFunction tf=(Polynomial(dtf1.n)*Polynomial(dtf2.n))/(Polynomial(dtf1.d)
-        *Polynomial(dtf2.d));
-  algorithm
-    assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"+\".");
-    result := DiscreteTransferFunction(tf, Ts=dtf1.Ts, method=dtf1.method);
-  end '*';
-
-  encapsulated operator function '/'
-    "Divide two transfer functions (dtf1 / dtf2)"
-     import Modelica;
-     import Modelica_LinearSystems2.Math.Polynomial;
-     import Modelica_LinearSystems2.TransferFunction;
-     import Modelica_LinearSystems2.DiscreteTransferFunction;
-
-     input DiscreteTransferFunction dtf1 "Transfer function system 1";
-     input DiscreteTransferFunction dtf2 "Transfer function system 1";
-     output DiscreteTransferFunction result;
-  protected
-    TransferFunction tf=(Polynomial(dtf1.n)*Polynomial(dtf2.d))/(Polynomial(dtf1.d)*
-      Polynomial(dtf2.n));
-
-  algorithm
-    assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"/\".");
-    result := DiscreteTransferFunction(tf,Ts=dtf1.Ts, method=dtf1.method);
-
-  end '/';
 
   encapsulated operator function '^'
     "Integer power of DiscreteTransferFunction (dtf1^k)"
@@ -483,10 +501,20 @@ encapsulated function impulseResponse "Calculate the impulse time response"
     // Input/Output declarations of time response functions:
   extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
 
+    protected
+      Real tSpanVar;
 algorithm
+
+// set simulation time span
+      if tSpan == 0 then
+        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
+          DiscreteStateSpace(dtf));
+      else
+        tSpanVar := tSpan;
+      end if;
   (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.timeResponse(
       dtf=dtf,
-      tSpan=0,
+      tSpan=tSpanVar,
       response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
       x0=zeros(Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
@@ -535,21 +563,31 @@ end impulseResponse;
 
 encapsulated function stepResponse "Calculate the step time response"
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
-    // Input/Output declarations of time response functions:
-  extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
-
+      extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
+    protected
+      Real tSpanVar;
 algorithm
-  (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.timeResponse(
-      dtf=dtf,
-      tSpan=0,
-      response=Modelica_LinearSystems2.Types.TimeResponse.Step,
-      x0=zeros(Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
-annotation(interactive=true, Documentation(info="<html>
+// set simulation time span
+      if tSpan == 0 then
+        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
+          DiscreteStateSpace(dtf));
+      else
+        tSpanVar := tSpan;
+      end if;
+
+      (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
+        dtf=dtf,
+        tSpan=tSpanVar,
+        response=Modelica_LinearSystems2.Types.TimeResponse.Step,
+        x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
+
+      annotation (interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>stepResponse</b>(tf, dt, tSpan, x0)  </td> </tr>
@@ -599,10 +637,20 @@ encapsulated function rampResponse "Calculate the ramp time response"
     // Input/Output declarations of time response functions:
   extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
 
+    protected
+      Real tSpanVar;
 algorithm
+
+// set simulation time span
+      if tSpan == 0 then
+        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
+          DiscreteStateSpace(dtf));
+      else
+        tSpanVar := tSpan;
+      end if;
   (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.timeResponse(
       dtf=dtf,
-      tSpan=0,
+      tSpan=tSpanVar,
       response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
       x0=zeros(Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
@@ -660,10 +708,20 @@ encapsulated function initialResponse "Calculate the initial time response"
     // Input/Output declarations of time response functions:
   extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
 
+    protected
+      Real tSpanVar;
 algorithm
+
+// set simulation time span
+      if tSpan == 0 then
+        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
+          DiscreteStateSpace(dtf));
+      else
+        tSpanVar := tSpan;
+      end if;
   (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.timeResponse(
       dtf=dtf,
-      tSpan=0,
+      tSpan=tSpanVar,
       response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
       x0=x0);
 
@@ -1184,10 +1242,6 @@ encapsulated function impulse "Impulse response plot"
     input DiscreteTransferFunction dtf "zeros-and-poles transfer function";
     input Real tSpan=0 "Simulation time span [s]";
 
-    input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
-        DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
-        "Initial state vector";
-
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
          Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response of  zp = "
            + String(dtf)));
@@ -1197,6 +1251,9 @@ encapsulated function impulse "Impulse response plot"
         Modelica_LinearSystems2.Types.TimeResponse.Impulse
         "type of time response";
 
+   Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
+        DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
+        "Initial state vector";
 algorithm
 // set sample time
     Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
@@ -1257,15 +1314,16 @@ encapsulated function step "Step response plot"
   input DiscreteTransferFunction dtf;
   input Real tSpan=0 "Simulation time span [s]";
 
+  extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+        Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Step response of  dtf = "
+         + String(dtf)));
+
+    protected
   input Modelica_LinearSystems2.Types.TimeResponse response=
       Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
   input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
       DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
         "Initial state vector";
-
-  extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-        Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Step response of  dtf = "
-         + String(dtf)));
 
 algorithm
  DiscreteTransferFunction.Plot.timeResponse(
@@ -1328,16 +1386,16 @@ encapsulated function ramp "Ramp response plot"
   input DiscreteTransferFunction dtf;
   input Real tSpan=0 "Simulation time span [s]";
 
+  extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+        Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Ramp response of  dtf = "
+         + String(dtf)));
+
+    protected
   input Modelica_LinearSystems2.Types.TimeResponse response=
       Modelica_LinearSystems2.Types.TimeResponse.Ramp "type of time response";
   input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
       DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
         "Initial state vector";
-
-  extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-        Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Ramp response of  dtf = "
-         + String(dtf)));
-
 algorithm
  Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
     dtf=dtf,
@@ -1413,7 +1471,6 @@ encapsulated function initialResponse "Initial condition response plot"
       dss.C,
       vector(y0)) "Initial state vector (for initial condition plot)";
 algorithm
-
   Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
         dtf=dtf,
         tSpan=tSpan,
@@ -1474,7 +1531,7 @@ function fromModel
   import Modelica;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.TransferFunction;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
 
   input String modelName "Name of the Modelica model" annotation(Dialog(translatedModel));
@@ -1497,32 +1554,52 @@ function fromModel
   Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
   String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
-  StateSpace result(
-    redeclare Real A[nx,nx],
-    redeclare Real B[nx,nu],
-    redeclare Real C[ny,nx],
-    redeclare Real D[ny,nu]) "= model linearized at initial point";
-  TransferFunction tf[:,:];
+    StateSpace ss(
+      redeclare Real A[nx,nx],
+      redeclare Real B[nx,nu],
+      redeclare Real C[ny,nx],
+      redeclare Real D[ny,nu]) "= model linearized at initial point";
+    DiscreteStateSpace dss(
+      redeclare Real A[nx,nx],
+      redeclare Real B[nx,nu],
+      redeclare Real C[ny,nx],
+      redeclare Real D[ny,nu],
+      redeclare Real B2[nx,nu]) "= model linearized at initial point";
+    DiscreteStateSpace dss_siso(
+      redeclare Real A[nx,nx],
+      redeclare Real B[nx,1],
+      redeclare Real C[1,nx],
+      redeclare Real D[1,1],
+      redeclare Real B2[nx,1]) "= model linearized at initial point";
+
     public
   output DiscreteTransferFunction dtf[:,:];
 
 algorithm
-  result.A := ABCD[1:nx, 1:nx];
-  result.B := ABCD[1:nx, nx + 1:nx + nu];
-  result.C := ABCD[nx + 1:nx + ny, 1:nx];
-  result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-  result.uNames := xuyName[nx + 1:nx + nu];
-  result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
-  result.xNames := xuyName[1:nx];
+  ss.A := ABCD[1:nx, 1:nx];
+  ss.B := ABCD[1:nx, nx + 1:nx + nu];
+  ss.C := ABCD[nx + 1:nx + ny, 1:nx];
+  ss.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+  ss.uNames := xuyName[nx + 1:nx + nu];
+  ss.yNames := xuyName[nx + nu + 1:nx + nu + ny];
+  ss.xNames := xuyName[1:nx];
 
-  tf := Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunctionMIMO(
-    result);
+  dss := DiscreteStateSpace(ss, Ts=Ts, method=method);
+  dtf := DiscreteStateSpace.Conversion.toDiscreteTransferFunctionMIMO(dss);
 
-    for i in 1:ny loop
-      for j in 1:nu loop
-        dtf[i,j] := DiscreteTransferFunction(tf=tf[i,j], Ts=Ts, method=method);
-      end for;
-    end for;
+//   for ic in 1:ny loop
+//     for ib in 1:nu loop
+//       dss_siso := DiscreteStateSpace(
+//         A=dss.A,
+//         B=matrix(dss.B[:, ib]),
+//         C=transpose(matrix(dss.C[ic, :])),
+//         D=matrix(dss.D[ic, ib]),
+//         B2=matrix(dss.B2[:, ib]),
+//         Ts=dss.Ts,
+//         method=dss.method);
+//         dtf[ic, ib] := DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss_siso);
+//     end for;
+//   end for;
 
   annotation (interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>

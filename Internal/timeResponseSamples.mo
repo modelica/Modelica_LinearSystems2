@@ -21,7 +21,7 @@ algorithm
 
   // Estimate simulation time span
   if sorted[end] < 0 then
-    tSpan := -5*sorted[end];
+    tSpan := -5/sorted[end];
   elseif sorted[end] > 0 then
     tSpan := 15/sorted[end];
   elseif sorted[end] == 0 then

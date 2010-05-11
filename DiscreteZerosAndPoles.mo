@@ -503,8 +503,8 @@ end '*';
 
   end '+';
 
-  encapsulated operator function '/'
-    "Divide two transfer functions (dzp1 / dzp2)"
+  encapsulated operator '/' "Divide two transfer functions (dzp1 / dzp2)"
+    function 'dzp/dzp'
 
     import Modelica;
     import Modelica_LinearSystems2.DiscreteZerosAndPoles;
@@ -514,7 +514,7 @@ end '*';
 
     output DiscreteZerosAndPoles result "= dzp1/dzp2";
 
-  algorithm
+    algorithm
     assert(abs(dzp2.k)>100*Modelica.Constants.small,"dzp2 in operator \"Modelica_LinearSystems2.TransferFunction.'/'()\" may not be zero");
     assert(abs(dzp1.Ts-dzp2.Ts)<=Modelica.Constants.eps,"Two discrete zeros-and-poles systems must have the same sample time Ts for division with \"/\".");
     result.Ts := dzp1.Ts;
@@ -528,8 +528,33 @@ end '*';
       result.d1 := cat(1,dzp1.d1, dzp2.n1);
       result.d2 := cat(1,dzp1.d2, dzp2.n2);
       result.k := dzp1.k/dzp2.k;
-  end if;
+      end if;
+    end 'dzp/dzp';
 
+  function 'r/dzp'
+
+    import Modelica;
+    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+
+    input Real r;
+    input DiscreteZerosAndPoles dzp;
+
+    output DiscreteZerosAndPoles result "= dzp1/dzp2";
+
+  algorithm
+    result.Ts := dzp.Ts;
+    result.method := dzp.method;
+
+    if r==0 then
+      result := DiscreteZerosAndPoles(0);
+    else
+      result.n1 := dzp.d1;
+      result.n2 := dzp.d2;
+      result.d1 := dzp.n1;
+      result.d2 := dzp.n2;
+      result.k := r/dzp.k;
+      end if;
+  end 'r/dzp';
   end '/';
 
   encapsulated operator function '^'
@@ -772,10 +797,20 @@ Generate the complex Laplace variable q=rxp(s*T) as a DiscreteZerosAndPoles tran
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask_zp_discrete;
 
+    protected
+    Real tSpanVar;
   algorithm
+
+  // set simulation time span
+    if tSpan == 0 then
+      tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(DiscreteStateSpace(dzp));
+    else
+      tSpanVar := tSpan;
+    end if;
+
     (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse(
         dzp=dzp,
-        tSpan=0,
+        tSpan=tSpanVar,
         response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
         x0=zeros(Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)));
 
@@ -824,18 +859,29 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
 
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask_zp_discrete;
 
+    protected
+    Real tSpanVar;
   algorithm
-    (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse(
-        dzp=dzp,
-        tSpan=0,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Step,
-        x0=zeros(Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)));
 
-  annotation(interactive=true, Documentation(info="<html>
+  // set simulation time span
+    if tSpan == 0 then
+      tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(DiscreteStateSpace(dzp));
+    else
+      tSpanVar := tSpan;
+    end if;
+
+    (y,t,x_discrete) := DiscreteZerosAndPoles.Analysis.timeResponse(
+      dzp=dzp,
+      tSpan=tSpanVar,
+      response=Modelica_LinearSystems2.Types.TimeResponse.Step,
+      x0=zeros(DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)));
+
+    annotation (interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>stepResponse</b>(zp, dt, tSpan, x0)  </td> </tr>
@@ -884,10 +930,20 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask_zp_discrete;
 
+    protected
+    Real tSpanVar;
   algorithm
+
+  // set simulation time span
+    if tSpan == 0 then
+      tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(DiscreteStateSpace(dzp));
+    else
+      tSpanVar := tSpan;
+    end if;
+
     (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse(
         dzp=dzp,
-        tSpan=0,
+        tSpan=tSpanVar,
         response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
         x0=zeros(Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)));
 
@@ -941,10 +997,20 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask_zp_discrete;
 
+    protected
+    Real tSpanVar;
   algorithm
+
+  // set simulation time span
+    if tSpan == 0 then
+      tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(DiscreteStateSpace(dzp));
+    else
+      tSpanVar := tSpan;
+    end if;
+
     (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse(
         dzp=dzp,
-        tSpan=0,
+        tSpan=tSpanVar,
         response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
         x0=x0);
 
@@ -1410,10 +1476,6 @@ ZerosAndPoles.Plot.step\">step</a>, <a href=\"Modelica://Modelica_LinearSystems2
       input DiscreteZerosAndPoles dzp "zeros-and-poles transfer function";
       input Real tSpan=0 "Simulation time span [s]";
 
-      input Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
-          DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
-        "Initial state vector";
-
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response of  zp = "
              + String(dzp)));
@@ -1422,6 +1484,9 @@ ZerosAndPoles.Plot.step\">step</a>, <a href=\"Modelica://Modelica_LinearSystems2
       input Modelica_LinearSystems2.Types.TimeResponse response=
           Modelica_LinearSystems2.Types.TimeResponse.Impulse
         "type of time response";
+      Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
+          DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
+        "Initial state vector";
 
   algorithm
   // set sample time
@@ -1485,16 +1550,16 @@ Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer
     input DiscreteZerosAndPoles dzp;
     input Real tSpan=0 "Simulation time span [s]";
 
-    input Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
-    input Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
-        DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
-        "Initial state vector";
-
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
           Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Step response of  dzp = "
            + String(dzp)));
 
+    protected
+    input Modelica_LinearSystems2.Types.TimeResponse response=
+        Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
+    Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
+        DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
+        "Initial state vector";
   algorithm
    DiscreteZerosAndPoles.Plot.timeResponse(
       dzp=dzp,
@@ -1534,16 +1599,17 @@ Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer
     input DiscreteZerosAndPoles dzp;
     input Real tSpan=0 "Simulation time span [s]";
 
-    input Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Ramp "type of time response";
-    input Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
-        DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
-        "Initial state vector";
-
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
           Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Ramp response of  dzp = "
            + String(dzp)));
 
+    protected
+    input Modelica_LinearSystems2.Types.TimeResponse response=
+        Modelica_LinearSystems2.Types.TimeResponse.Ramp "type of time response";
+
+    Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
+        DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
+        "Initial state vector";
   algorithm
    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.timeResponse(
       dzp=dzp,
@@ -1621,7 +1687,6 @@ Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer funct
         dss.C,
         vector(y0)) "Initial state vector (for initial condition plot)";
   algorithm
-
     Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.timeResponse(
           dzp=dzp,
           tSpan=tSpan,
@@ -2327,8 +2392,8 @@ processing.
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles;
 
       input String modelName "Name of the Modelica model";
       input Real T_linearize=0
@@ -2351,30 +2416,63 @@ processing.
       Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
       String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
-      StateSpace result(
+      StateSpace ss(
         redeclare Real A[nx,nx],
         redeclare Real B[nx,nu],
         redeclare Real C[ny,nx],
         redeclare Real D[ny,nu]) "= model linearized at initial point";
+      DiscreteStateSpace dss(
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,nu],
+        redeclare Real C[ny,nx],
+        redeclare Real D[ny,nu],
+        redeclare Real B2[nx,nu]) "= model linearized at initial point";
+      DiscreteStateSpace dss_siso(
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,1],
+        redeclare Real C[1,nx],
+        redeclare Real D[1,1],
+        redeclare Real B2[nx,1]) "= model linearized at initial point";
 
-      ZerosAndPoles zp[:,:];
+        DiscreteZerosAndPoles dummy;
+
     public
-      output DiscreteZerosAndPoles dzp[:,:];
+      output DiscreteZerosAndPoles dzp[:,:];//=fill(dummy,ny,nu);
   algorithm
-      result.A := ABCD[1:nx, 1:nx];
-      result.B := ABCD[1:nx, nx + 1:nx + nu];
-      result.C := ABCD[nx + 1:nx + ny, 1:nx];
-      result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-      result.uNames := xuyName[nx + 1:nx + nu];
-      result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
-      result.xNames := xuyName[1:nx];
+    ss.A := ABCD[1:nx, 1:nx];
+    ss.B := ABCD[1:nx, nx + 1:nx + nu];
+    ss.C := ABCD[nx + 1:nx + ny, 1:nx];
+    ss.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+    ss.uNames := xuyName[nx + 1:nx + nu];
+    ss.yNames := xuyName[nx + nu + 1:nx + nu + ny];
+    ss.xNames := xuyName[1:nx];
 
-      zp := StateSpace.Conversion.toZerosAndPolesMIMO(result);
-      for i in 1:ny loop
-        for j in 1:nu loop
-          dzp[i,j] := DiscreteZerosAndPoles(zp=zp[i,j], Ts=Ts, method=method);
-        end for;
-      end for;
+    dss := DiscreteStateSpace(ss, Ts=Ts, method=method);
+
+    dzp := DiscreteStateSpace.Conversion.toDiscreteZerosAndPolesMIMO(dss);
+
+  //   for ic in 1:ny loop
+  //     for ib in 1:nu loop
+  //       dss_siso := DiscreteStateSpace(
+  //         A=dss.A,
+  //         B=matrix(dss.B[:, ib]),
+  //         C=transpose(matrix(dss.C[ic, :])),
+  //         D=matrix(dss.D[ic, ib]),
+  //         B2=matrix(dss.B2[:, ib]),
+  //         Ts=dss.Ts,
+  //         method=dss.method);
+  //       dzp[ic, ib] := DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(
+  //         dss_siso);
+  //     end for;
+  //   end for;
+
+  //
+  // //    zp := StateSpace.Conversion.toZerosAndPolesMIMO(result);
+  //     for i in 1:ny loop
+  //       for j in 1:nu loop
+  //         dzp[i,j] := DiscreteZerosAndPoles(zp=zp[i,j], Ts=Ts, method=method);
+  //       end for;
+  //     end for;
 
       annotation (interactive=true, Documentation(info="function fromModel 
   \"Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model\"
