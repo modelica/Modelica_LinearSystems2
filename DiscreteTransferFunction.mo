@@ -25,7 +25,7 @@ record DiscreteTransferFunction
 */
 
   encapsulated operator 'constructor'
-    "Default constructor for a transfer function"
+    "Default constructor for a discrete transfer function"
     import Modelica;
     import Modelica_LinearSystems2.TransferFunction;
 
@@ -87,32 +87,7 @@ record DiscreteTransferFunction
       dtf.yName := yName;
 
       annotation (Documentation(info="<html>
-<p>
-This function constructs a transfer function from numerator zeros.
-Example:
-</p>
 
-<p> The transfer function</p>
-<pre>
-   zp = (s+(2+3*j))*(s+(2-3*j))
-</pre>
-<p>
-can be expressed as 
-</p>
-<pre>
-   <b>import</b> Modelica_LinearSystems2.Math.Complex; 
-   <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
-   
-   j = Complex.j();
-   zp = ZerosAndPoles({2+3*j}, {2-3*j});
-</pre>
-
-<p>
-Since only transfer functions with real coefficients are supported,
-complex zeros must be defined as conjugate complex pairs.
-It is required that complex conjugate pairs must directly
-follow each other as above. An error occurs if this is not the case.
-</p>
 </html>"));
     end fromZerosAndPoles;
 
@@ -247,7 +222,7 @@ follow each other as above. An error occurs if this is not the case.
       result := DiscreteTransferFunction(n=n.c, d=d.c, Ts=dtf1.Ts, method=dtf1.method);
     end subtract;
 
-    function negate "Unary minus (multiply transfer function by -1)"
+    function negate "Unary minus (multiply discrete transfer function by -1)"
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
       input DiscreteTransferFunction dtf;
@@ -257,7 +232,7 @@ follow each other as above. An error occurs if this is not the case.
  end '-';
 
   encapsulated operator '/'
-  function 'dft/dft' "Divide two transfer functions (dtf1 / dtf2)"
+  function 'dft/dft' "Divide two discrete transfer functions (dtf1 / dtf2)"
      import Modelica;
      import Modelica_LinearSystems2.Math.Polynomial;
      import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -272,7 +247,8 @@ follow each other as above. An error occurs if this is not the case.
       Polynomial(dtf2.n),Ts=dtf1.Ts, method=dtf1.method);
   end 'dft/dft';
 
-  function 'r/dft' "Divide two transfer functions (dtf1 / dtf2)"
+  function 'r/dft'
+      "Divide a real number by  discrete transfer functions (r / dtf2)"
      import Modelica;
      import Modelica_LinearSystems2.Math.Polynomial;
      import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -302,7 +278,6 @@ follow each other as above. An error occurs if this is not the case.
     result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.d) + Polynomial(dtf2.n)*Polynomial(dtf1.d), Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
   end '+';
 
-
   encapsulated operator function '^'
     "Integer power of DiscreteTransferFunction (dtf1^k)"
      import Modelica_LinearSystems2.Math.Polynomial;
@@ -321,7 +296,7 @@ follow each other as above. An error occurs if this is not the case.
   end '^';
 
   encapsulated operator function '=='
-    "Check whether two transfer functions are identical"
+    "Check whether two discrete transfer functions are identical"
 
      import Modelica;
      import Modelica_LinearSystems2.Math.Polynomial;
@@ -338,7 +313,7 @@ follow each other as above. An error occurs if this is not the case.
   end '==';
 
     encapsulated operator function 'String'
-    "Transform TransferFunction into a String representation"
+    "Transform DiscreteTransferFunction into a String representation"
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -401,7 +376,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right> z </td><td align=center> =  </td>  <td> DiscreteTransferFunction.<b>s</b>()  </td> </tr>
+<tr> <td align=right> z </td><td align=center> =  </td>  <td> DiscreteTransferFunction.<b>z</b>()  </td> </tr>
  
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
@@ -422,81 +397,49 @@ end z;
 encapsulated package Analysis
 
 encapsulated function timeResponse
-      "Calculate the time response of a zeros-and-poles transfer function"
+      "Calculate the time response of a discrete transfer function"
 
-   import Modelica;
-   import Modelica_LinearSystems2;
-   import Modelica_LinearSystems2.DiscreteStateSpace;
-   import Modelica_LinearSystems2.DiscreteTransferFunction;
-   import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Types.TimeResponse;
 
- extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;     // Input/Output declarations of discrete time response functions
- input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
-
- input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
+      extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;// Input/Output declarations of discrete time response functions
+      input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+      input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
         "Initial state vector";
 
     protected
-  DiscreteStateSpace dss=DiscreteStateSpace(dtf);
-  Real tSpanVar;
+      DiscreteStateSpace dss=DiscreteStateSpace(dtf);
+      Real tSpanVar;
 
 algorithm
   // set sample time
-if tSpan == 0 then
-   tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
- else
-   tSpanVar := tSpan;
-end if;
+      if tSpan == 0 then
+        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
+      else
+        tSpanVar := tSpan;
+      end if;
 
-  (y,t,x_discrete) := DiscreteStateSpace.Analysis.timeResponse(dss=dss, tSpan=tSpanVar, response=response, x0=x0);
+      (y,t,x_discrete) := DiscreteStateSpace.Analysis.timeResponse(
+        dss=dss,
+        tSpan=tSpanVar,
+        response=response,
+        x0=x0);
 
-   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>timeResponse</b>(tf, dt, tSpan, responseType, x0)  </td> </tr>
- 
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-First, the transfer function representation is transformed into state space representation which is given to StateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. 
-<blockquote><pre>
-    Impulse \"Impulse response\",
-    Step \"Step response\",
-    Ramp \"Ramp response\",
-    Initial \"Initial condition response\"
-</pre></blockquote>
-The state space system is transformed to a appropriate discrete state space system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt.
-</p>
- 
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
+      annotation (Documentation(info="<html>
 
-  Real Ts=0.1;
-  Real tSpan= 0.4;
-  Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
-  Real x0[1]={0,0};
- 
-  Real y[5,1,1];
-  Real t[5];
-  Real x[5,1,1] 
- 
-<b>algorithm</b>
-  (y,t,x):=Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(tf,Ts,tSpan,response,x0);
-//  y[:,1,1]={0, 0.0048, 0.0187, 0.04, 0.0694}
-//         t={0, 0.1, 0.2, 0.3, 0.4}
-//  x[:,1,1]={0, 0.0048, 0.0187, 0.04, 0.0694}
-</pre></blockquote>
- 
 </html>"));
 end timeResponse;
 
-encapsulated function impulseResponse "Calculate the impulse time response"
+encapsulated function impulseResponse
+      "Calculate the impulse time response of a discrete transfer function"
 
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
 
     // Input/Output declarations of time response functions:
   extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
@@ -512,11 +455,11 @@ algorithm
       else
         tSpanVar := tSpan;
       end if;
-  (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.timeResponse(
+  (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
       dtf=dtf,
       tSpan=tSpanVar,
       response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
-      x0=zeros(Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
+      x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
 annotation(interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
@@ -561,7 +504,8 @@ The state space system is transformed to a appropriate discrete state space syst
 </html> "));
 end impulseResponse;
 
-encapsulated function stepResponse "Calculate the step time response"
+encapsulated function stepResponse
+      "Calculate the step time response of a discrete transfer function"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -588,54 +532,21 @@ algorithm
         x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
       annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>stepResponse</b>(tf, dt, tSpan, x0)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function <b>stepResponse</b> calculates the step response of a transfer function. 
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
-<blockquote><pre>
-TransferFunction.Analysis.stepResponse(tf, dt, tSpan)
-</pre></blockquote>
-gives the same result as
-<blockquote><pre>
-TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Step, x0=fill(0,TransferFunction.Analysis.denominatorDegree(tf))).
-</pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
-</p>
- 
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
 
-  Real Ts=0.1;
-  Real tSpan= 0.4;
- 
-  Real y[5,1,1];
-  Real t[5];
-  Real x[5,1,1] 
- 
-<b>algorithm</b>
-  (y,t,x):=TransferFunction.Analysis.stepResponse(tf,Ts,tSpan);
-//  y[:,1,1]={0, 0.0048, 0.01867, 0.04, 0.0694}
-//         t={0, 0.1, 0.2, 0.3, 0.4}
-//  x[:,1,1]={0, 0.0048, 0.01867, 0.04, 0.0694}
-</pre></blockquote>
   
 </html> "));
 end stepResponse;
 
-encapsulated function rampResponse "Calculate the ramp time response"
+encapsulated function rampResponse
+      "Calculate the ramp time response of a discrete transfer function"
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
     // Input/Output declarations of time response functions:
-  extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
+      extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
 
     protected
       Real tSpanVar;
@@ -648,60 +559,25 @@ algorithm
       else
         tSpanVar := tSpan;
       end if;
-  (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.timeResponse(
-      dtf=dtf,
-      tSpan=tSpanVar,
-      response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
-      x0=zeros(Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
+      (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
+        dtf=dtf,
+        tSpan=tSpanVar,
+        response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
+        x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
-annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>rampResponse</b>(ss, dt, tSpan, x0)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function <b>rampResponse</b> calculates the time response of a transfer function for ramp imput u = t. 
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
-<blockquote><pre>
-TransferFunction.Analysis.rampResponse(ss, dt, tSpan)
-</pre></blockquote>
-gives the same result as
-<blockquote><pre>
-TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Ramp, x0=fill(0,TransferFunction.Analysis.denominatorDegree(tf))).
-</pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
-</p>
- 
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
+      annotation (interactive=true, Documentation(info="<html>
 
-  Real Ts=0.1;
-  Real tSpan= 0.4;
- 
-  Real y[5,1,1];
-  Real t[5];
-  Real x[5,1,1] 
- 
-<b>algorithm</b>
-  (y,t,x):=TransferFunction.Analysis.rampResponse(tf,Ts,tSpan);
-//  y[:,1,1]={0, 0.0002, 0.0012, 0.0042, 0.0096}
-//         t={0, 0.1, 0.2, 0.3, 0.4}
-//  x[:,1,1]={0, 0.0002, 0.0012, 0.0042, 0.0096}
-</pre></blockquote>
- 
- 
  
 </html> "));
 end rampResponse;
 
-encapsulated function initialResponse "Calculate the initial time response"
+encapsulated function initialResponse
+      "Calculate the initial time response of a discrete transfer function"
 
   import Modelica;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
 
   input Real x0[:]=fill(0,0) "Initial state vector";
 
@@ -726,50 +602,13 @@ algorithm
       x0=x0);
 
 annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>initialResponse</b>(tf, dt, tSpan, x0)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function <b>initialResponse</b> calculates the time response of a state space system for given initial condition and zero inputs. 
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
-<blockquote><pre>
-TransferFunction.Analysis.initialResponse(x0,tf, dt, tSpan)
-</pre></blockquote>
-gives the same result as
-<blockquote><pre>
-TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Initial, x0=x0).
-</pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
-</p>
- 
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
-
-  Real Ts=0.1;
-  Real tSpan= 0.4;
-  Real x0[2] = {1,1};
- 
-  Real y[5,1,1];
-  Real t[5];
-  Real x[5,1,1] 
- 
-<b>algorithm</b>
-  (y,t,x):=TransferFunction.Analysis.initialResponse(x0,tf,Ts,tSpan);
-//  y[:,1,1]={1, 1.0903, 1.1616, 1.2151, 1.252}
-//         t={0, 0.1, 0.2, 0.3, 0.4}
-//  x[:,1,1]={1, 1.0903, 1.1616, 1.2151, 1.252}
-</pre></blockquote>
- 
  
  
 </html> "));
 end initialResponse;
 
-encapsulated function denominatorDegree "Return denominator degree"
+encapsulated function denominatorDegree
+      "Return denominator degree of a discrete transfer function"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -780,28 +619,6 @@ encapsulated function denominatorDegree "Return denominator degree"
 algorithm
   result := size(dtf.d,1)-1;
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  result </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>denominatorDegree</b>(dtf)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of a discrete transfer function. 
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   TransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
-   Modelica_LinearSystems2.DiscreteTransferFunction dtf=(z+1)/(z^2+z+1);
- 
-   Real dDegree;
-
-<b>algorithm</b>
-  dDegree := TransferFunction.Analysis.denominatorDegree(dtf);
-//  dDegree = 2
-</pre></blockquote>
-
 
 </html> "));
 end denominatorDegree;
@@ -837,34 +654,7 @@ algorithm
   (z,p,k) := TransferFunction.Analysis.zerosAndPoles(tf);
   dzp := DiscreteZerosAndPoles(z, p, k, dtf.Ts, dtf.method, uName=dtf.uName, yName=dtf.yName);
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.<b>toDiscreteZerosAndPoles</b>(tf)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Computes a DiscreteZerosAndPoles record
- <blockquote><pre>
-                 product(z + n1[i]) * product(z^2 + n2[i,1]*z + n2[i,2])
-        zp = k*---------------------------------------------------------
-                product(z + d1[i]) * product(z^2 + d2[i,1]*z + d2[i,2])
-</pre></blockquote>of a discrete transfer function representated by numerator and denominator polynomial. The poles and zeros and the gain <tt>k</tt> are computed by
-(<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs the DiscreteZerosAndPoles constructor.
 
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();  
-   Modelica_LinearSystems2.DiscreteTransferFunction dtf = 1/(z^2 + 3*z +2)
-
-
-<b>algorithm</b>
-  dzp:=Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles(dtf);
-//  zp = 1/( (z + 1)*(z + 2) )
-</pre></blockquote>
-
-
- 
 </html>"));
 end toDiscreteZerosAndPoles;
 
@@ -912,62 +702,7 @@ end if;
   dss.method := dtf.method;
 
  annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.toStateSpace<b>toDiscreteStateSpace</b>(dtf)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Transforms a discrete transfer function into discrete state space representation.
-There are an infinite number of possible realizations.
-Here, the transfer function is transformed into
-controller canonical form, i.e. the transfer function
-<blockquote><pre>
-       b4*z^4 + b3*z^3 + b2*z^2 + b1*z + b0
-  y = -------------------------------------- *u
-       a4*z^4 + a3*z^3 + a2*z^2 + a1*z + a0
-</pre></blockquote>
-is transformed into:
-</p>
-<blockquote><pre>
-  <b>der</b>(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
-      <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
-     with
-             <b>A</b> = [   0  ,    1  ,    0  ,    0;
-                     0  ,    0  ,    1  ,    0:
-                     0  ,    0  ,    0  ,    1;
-                  -a0/a4, -a1/a4, -a2/a4, -a3/a4];
 
-             <b>B</b> = [  0;
-                    0;
-                    0;
-                   1/a4];
-             <b>C</b> = [b0-b4*a0/a4, b1-b4*a1/a4, b2-b4*a2/a4, b3-b4*a3/a4];
-             <b>D</b> = [b4/a4];
-</pre></blockquote>
-If the numerator polynomial is 1, then the state vector
-<b>x</b> is built up of the y(k) (the privious y) and of all the nx-1 predecessor
-(nx is the dimension of the state vector):
-<blockquote><pre>
-   <b>x</b>(k+1) = {y(k-n+1), y(k-n+2), ..., y(k)};
-</pre></blockquote>
-Note, the state vector <b>x</b> of Modelica.Blocks.Continuous.TransferFunction
-is defined slightly differently.
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   TransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
-   Modelica_LinearSystems2.DiscreteTransferFunction dtf=(z+1)/(z^3 + z^2 + z +1);
-
-<b>algorithm</b>
-  dss := Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace(dtf);
-// dss.A = [0, 1, 0; 0, 0, 1; -1, -1, -1],
-// dss.B = [0; 0; 1],
-// dss.C = [1, 1, 0],
-// dss.D = [0],
-</pre></blockquote>
 
 </html> "));
 end toDiscreteStateSpace;
@@ -976,7 +711,7 @@ end Conversion;
 
 encapsulated package Plot "Functions to plot state space system responses"
 
-encapsulated function bode "Plot transfer function as bode plot"
+encapsulated function bode "Plot discrete transfer function as bode plot"
       import Modelica;
       import Modelica.Utilities.Strings;
       import Modelica_LinearSystems2;
@@ -1106,45 +841,12 @@ algorithm
     end if;
 
   annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<blockquote><pre>
-TransferFunction.Plot.<b>plotBode</b>(tf)
-   or
-TransferFunction.Plot.<b>plotBode</b>(tf, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
-</pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Plots the bode-diagram of a transfer function.
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
-   Modelica_LinearSystems2.TransferFunction tf =(s^2 + 5*s + 7)/(s^2 + 5*s + 6);
-   
-<b>algorithm</b>
-   Modelica_LinearSystems2.TransferFunction.Plot.plotBode(tf)
-//  gives:
-</pre></blockquote>
-
-</p>
- 
-<blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodeMagnitude.png\">
-<br>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodePhase.png\">
- 
-</blockquote>
-<p>
-
 
 </html> "));
 end bode;
 
 encapsulated function timeResponse
-      "Plot the time response of a system represented by a transfer function. The response type is selectable"
+      "Plot the time response of a system represented by a discrete transfer function. The response type is selectable"
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -1204,35 +906,12 @@ algorithm
 
   Plot.diagram(diagram2, device);
   annotation (interactive=true, Documentation(info="<html>
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
-<blockquote><pre>
-TransferFunction.Plot.<b>timeResponse</b>(tf);
-   or
-TransferFunction.Plot.<b>timeResponse</b>(tf, dt, tSpan,response, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-                   device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
-</pre></blockquote>
 
-
-<p><b><font style=\"color: #008000; \">Description</font></b></p>
-<p>Function <b>timeResponse</b> plots the time response of a transfer function. The character of the time response if defined by the input 
-<a href=\"Modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>. </p>
-
-<p><b><font style=\"color: #008000; \">Example</font></b></p>
-<pre>   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  </pre>
-<pre>   Modelica_LinearSystems2.TransferFunction tf =(s + 1)/(s^2 + 5*s + 12);</pre>
-<pre><br/>   Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;</pre>
-<pre><br/><b>algorithm</b></pre>
-<pre>   Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(tf, dt=0.02, tSpan=3, response=response)</pre>
-<pre>//  gives: </pre>
-<p><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/timeResponse.png\"/> </p>
 </html>"));
 end timeResponse;
 
-encapsulated function impulse "Impulse response plot"
+encapsulated function impulse
+      "Impulse response plot of a discrete transfer function"
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -1265,45 +944,12 @@ algorithm
       device=device);
 
     annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<blockquote><pre>
-TransferFunction.Plot.<b>impulse</b>(tf)  
-   or
-TransferFunction.Plot.<b>impulse</b>(tf, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
-</pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function <b>impulse</b> plots the impulse response of a transfer function. It is based on <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
 
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
-   Modelica_LinearSystems2.TransferFunction tf =(s + 1)/(s^2 + 5*s + 12);
-
-<b>algorithm</b>
-   Modelica_LinearSystems2.TransferFunction.Plot.impulse(tf, dt=0.02, tSpan=3)
-//  gives:
-</pre></blockquote>
-
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/impulseResponse.png\">
-</p>
-<p>
-</p>
 
 </html> "));
 end impulse;
 
-encapsulated function step "Step response plot"
+encapsulated function step "Step response plot of a discrete transfer function"
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -1337,45 +983,10 @@ algorithm
 equation
 
   annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<blockquote><pre>
-TransferFunction.Plot.<b>step</b>(tf)  
-   or
-TransferFunction.Plot.<b>step</b>(tf, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
-</pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function <b>step</b> plots the step response of a transfer function. It is based on <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
-
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
-   Modelica_LinearSystems2.TransferFunction tf =(s + 1)/(s^2 + 5*s + 12);
-
-<b>algorithm</b>
-   Modelica_LinearSystems2.TransferFunction.Plot.step(tf, dt=0.02, tSpan=3)
-//  gives:
-</pre></blockquote>
-
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/stepResponse.png\">
-</p>
-<p>
-</p>
-
 </html>"));
 end step;
 
-encapsulated function ramp "Ramp response plot"
+encapsulated function ramp "Ramp response plot of a discrete transfer function"
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -1406,43 +1017,12 @@ algorithm
     device=device);
 
   annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<blockquote><pre>
-TransferFunction.Plot.<b>ramp</b>(tf)  
-   or
-TransferFunction.Plot.<b>ramp</b>(tf, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
-</pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function <b>ramp</b> plots the ramp response of a transfer function. It is based on <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
-   Modelica_LinearSystems2.TransferFunction tf =(2*s^2 + 7*s + 13)/(s^3 + 6*s^2 + 17*s + 12);
-
-<b>algorithm</b>
-   Modelica_LinearSystems2.TransferFunction.Plot.ramp(tf)
-//  gives:
-</pre></blockquote>
-
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/rampResponse.png\">
-</p>
-<p>
-</p>
 
 </html> "));
 end ramp;
 
-encapsulated function initialResponse "Initial condition response plot"
+encapsulated function initialResponse
+      "Initial condition response plot of a discrete transfer function"
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -1480,43 +1060,7 @@ algorithm
         device=device);
 
   annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<blockquote><pre>
-TransferFunction.Plot.<b>initialResponse</b>(tf)  
-   or
-TransferFunction.Plot.<b>initialResponse</b>(tf, dt, tSpan, y0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
-</pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function <b>initialResponse</b> plots the initial response, i.e. the zeros input response of a transfer function. It is based on <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">initialResponse</a>.
 
-
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
-   Modelica_LinearSystems2.TransferFunction tf = (s + 1)/(s^2 + 5*s + 12);
-   Real y0=1; 
-
-
-
-<b>algorithm</b>
-   Modelica_LinearSystems2.TransferFunction.Plot.initialResponse(tf,y0=y0, dt=0.02, tSpan=3)
-//  gives:
-</pre></blockquote>
-
-</p>
-<p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/initialResponseTF.png\">
-</p>
-<p>
-</p>
 
 </html> "));
 end initialResponse;
@@ -1526,7 +1070,7 @@ end Plot;
 encapsulated package Import
 
 function fromModel
-      "Generate a TransferFunction record array from a state space representation resulted from linearization of a model"
+      "Generate a DiscreteTransferFunction record array from a state space representation resulted from linearization of a model"
 
   import Modelica;
   import Modelica_LinearSystems2;
@@ -1602,45 +1146,18 @@ algorithm
 //   end for;
 
   annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> TransferFunction.Import.<b>fromModel</b>(modelName, T_linearize, fileName)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Generate a matrix of TransferFunction data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"Modelica://Modelica_LinearSystems2.
-StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conversion from sate space to transfer function representation.
- 
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   String modelName = \"Modelica_LinearSystems2.Examples.DoublePendulum\"; 
-   Real T_linearize = 5;; 
-   
- 
-<b>algorithm</b>
-  tf = Modelica_LinearSystems2.TransferFunction.Import.fromModel(modelName, T_linearize);
- 
-//  tf = [(0.13*s^4 + 0.05558*s^3 + 1.12241*s^2 - 5.16971*s + 9.04744)/(s^6 + 0.09*s^5 + 9.13717*s^4 - 32.0637*s^3 + 58.78*s^2 + 6.3659e-014*s - 1.1703e-014);
-          (0.13*s^4 + 0.05558*s^3 + 1.12241*s^2 - 5.16971*s + 9.04744)/(s^5 + 0.09*s^4 + 9.13717*s^3 - 32.0637*s^2 + 58.78*s - 2.7929e-015);
-          (-0.014*s^2 + 0.31906*s - 0.8106)/(s^4 + 0.09*s^3 + 9.13717*s^2 - 32.0637*s + 58.78);
-          (-0.014*s^3 + 0.31906*s^2 - 0.8106*s)/(s^4 + 0.09*s^3 + 9.13717*s^2 - 32.0637*s + 58.78);
-          (-0.1*s^2 - 0.160918*s - 0.21842)/(s^4 + 0.09*s^3 + 9.13717*s^2 - 32.0637*s + 58.78);
-          (-0.1*s^3 - 0.160918*s^2 - 0.21842*s)/(s^4 + 0.09*s^3 + 9.13717*s^2 - 32.0637*s + 58.78)]
-                      
-</pre></blockquote>
- 
- 
+
  
  
 </html> "));
 end fromModel;
 
 encapsulated function fromFile
-      "Generate a transfer function data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
+      "Generate a discrete transfer function data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
 
     import Modelica_LinearSystems2.DiscreteTransferFunction;
     import Modelica_LinearSystems2.Math.Polynomial;
-  input String fileName="tf.mat" "Name of the transfer function data file"   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+  input String fileName="dtf.mat" "Name of the transfer function data file"   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="transfer function data file")));
   input String numName="n" "Name of the numenator of the transfer function";
   input String denName="d" "Name of the denominator of the transfer function";
@@ -1675,23 +1192,6 @@ algorithm
   dtf.Ts := scalar(Ts);
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> TransferFunction.Import.<b>fromFile</b>(fileName, numName, denName)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file must contain the names of the vector with the polynomial coefficients of numerator and denominator
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-     
-
-<b>algorithm</b>
-  tf:=Modelica_LinearSystems2.TransferFunction.Import.fromFile(\"tf.mat\", \"n\", \"d\");
-//  tf = (s^2 + 2*s + 3)/(4*s^2 + 5*s + 6)
-</pre></blockquote>
-
 
 </html> "));
 end fromFile;

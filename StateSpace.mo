@@ -2657,7 +2657,7 @@ algorithm
 annotation(interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>impulseResponse</b>(ss, dt, tSpan, x0)  </td> </tr>
+<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>impulseResponse</b>(ss, dt, tSpan)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -2721,7 +2721,7 @@ algorithm
 annotation(interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>stepResponse</b>(ss, dt, tSpan, x0)  </td> </tr>
+<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>stepResponse</b>(ss, dt, tSpan)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -2783,7 +2783,7 @@ algorithm
 annotation(interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>rampResponse</b>(ss, dt, tSpan, x0)  </td> </tr>
+<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>rampResponse</b>(ss, dt, tSpan)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -6029,6 +6029,22 @@ algorithm
       annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
+<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunctionMIMO</b>(ss)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Computes a matrix of TransferFunction records
+<blockquote><pre>
+           n_i(s)     b0_i + b1_i*s + ... + bn_i*s^n
+   tf_i = -------- = -------------------------------- 
+           d_i(s)     a0_i + a1_i*s + ... + an_i*s^n
+ </pre></blockquote>
+with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
+
+
+<h4><font color=\"#008000\">Example</font></h4>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunctionMIMO</b>(ss)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
@@ -6074,10 +6090,6 @@ i.e.
            | (s + 2)*(s + 3)            (s + 1)*(s + 2)        |
            |                                                   |
 </pre></blockquote>
-
-
-
-
 </html> "));
 end toTransferFunctionMIMO;
 

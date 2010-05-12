@@ -1213,7 +1213,6 @@ Function TransferFunction.Analysis.<b>isObservable</b> checks the observability 
 </html> "));
     end isObservable;
 
-
     encapsulated function isStabilizable
       "Check stabilizability of a transfer function"
 

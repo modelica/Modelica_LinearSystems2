@@ -38,7 +38,10 @@ record ZerosAndPoles
       zp.uName := uName;
       zp.yName := yName;
 
-      annotation (overloadsConstructor=true);
+      annotation (overloadsConstructor=true, Documentation(info="<html>
+
+
+</html>"));
     end fromReal;
 
   encapsulated function fromZerosAndPoles
@@ -1551,7 +1554,6 @@ Function ZerosAndPoles.Analysis.<b>isObservable</b> checks the observability of 
 
 </html> "));
     end isObservable;
-
 
     encapsulated function isStabilizable
       "Check stabilizability of a zp-transfer-function"

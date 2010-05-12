@@ -16,13 +16,13 @@ record DiscreteStateSpace
   Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
     "Discretization method" 
         annotation(Dialog(group="Data used to construct discrete from continuous system"));
-     String yNames[size(C, 1)]=fill("", size(C, 1))
-    "Names of the output signals"                                                    annotation(Dialog(group="Signal names"));
-     String xNames[size(A, 1)]=fill("", size(A, 1)) "Names of the states"  annotation(Dialog(group="Signal names"));
-     String uNames[size(B, 2)]=fill("", size(B, 2))
-    "Names of the input signals"                                                       annotation(Dialog(group="Signal names"));
+
+//      String yNames[size(C, 1)]=fill("", size(C, 1)) "Names of the output signals" annotation(Dialog(group="Signal names"));
+//      String xNames[size(A, 1)]=fill("", size(A, 1)) "Names of the states"  annotation(Dialog(group="Signal names"));
+//      String uNames[size(B, 2)]=fill("", size(B, 2)) "Names of the input signals" annotation(Dialog(group="Signal names"));
 
   encapsulated operator 'constructor'
+    "Default constructors for a DiscreteStateSpace record"
   import Modelica_LinearSystems2;
   function fromDiscreteTransferFunction = 
       Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
@@ -56,21 +56,22 @@ record DiscreteStateSpace
                                                               "<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  ss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
+<tr> <td align=right>  dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
  
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-This function constructs a StateSpace record ss from a Real value, i.e. a state space system without a state and an output without dynamics:
+This function constructs a DiscreteStateSpace record dss from a Real value, i.e. a discrete state space system without a state and an output without dynamics:
 <blockquote><pre>
 y = r*u
 </pre></blockquote>
 Therefore, the matrices are defined by
 <blockquote><pre>
-  ss.A = fill(0,0,0);
-  ss.B = fill(0,0,1);
-  ss.C = fill(0,1,0);
+  dss.A = fill(0,0,0);
+  dss.B = fill(0,0,1);
+  dss.C = fill(0,1,0);
   ss.D = [r];
+  dss.B2 = fill(0,0,1);
 </pre></blockquote>
  
 </p>
@@ -114,6 +115,53 @@ Therefore, the matrices are defined by
       result.B2 := B2;
       result.Ts := Ts;
       result.method := method;
+
+      annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right> dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromMatrices</b>(A, B, C, D)  </td> </tr>
+<tr> <td align=right> dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromMatrices</b>(A, B, C, D, Ts, B2, method)  </td> </tr>
+
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+This function constructs a DiscreteStateSpace record dss with<br>
+<blockquote><pre>
+  dss.A = A;
+  dss.B = B;
+  dss.C = C;
+  dss.D = D;
+  dss.B2 = B2;
+  dss.Ts = Ts;
+  dss.method = method;
+</pre></blockquote>
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+  Real A[1,1] = [1];
+  Real B[1,1] = [1];
+  Real C[1,1] = [1];
+  Real D[1,1] = [0];
+
+public
+  StateSpace ss;
+
+<b>algorithm</b>
+  dss := 'constructor'.fromMatrices(A, B, C, D);
+  // dss.A = [1]
+  // dss.B = [1]
+  // dss.C = [1]
+  // dss.D = [0]
+  // dss.B2 = [0]
+  // dss.Ts = 1
+  // dss.method = Modelica_LinearSystems2.Types.Method.Trapezoidal 
+  
+  
+
+</pre></blockquote>
+</html>"));
     end fromMatrices;
 
     function fromStateSpace
@@ -411,7 +459,7 @@ encapsulated operator '-'
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-This operator function computes the subtraction of two state space systems connected in parallel, i.e. the inputs are the same and the outputs of the two systems are subtracted. Therefore, The systems must have the same number of inputs and outputs but not the same number of states. The resulting system has an order of system_order1 + system_order2.<br>
+This operator function computes the subtraction of two discrete state space systems connected in parallel, i.e. the inputs are the same and the outputs of the two systems are subtracted. Therefore, The systems must have the same number of inputs and outputs but not the same number of states. The resulting system has an order of system_order1 + system_order2.<br>
 The operator is used by writing just the following command:
 <blockquote><pre>
     dss3 := dss1 - dss2;
@@ -432,13 +480,14 @@ The operator is used by writing just the following command:
 // dss.B = [1; 2; 3; 4],
 // dss.C = [0, 1, 0, -2],
 // dss.D = [0],
+// dss.B2 = [0; 0; 0; 0],
 </pre></blockquote>
 
 </html> "));
   end subtract;
 
   function negate
-      "Unary minus (state space system where the output is multiplied by a gain of -1)"
+      "Unary minus (discrete state space system where the output is multiplied by a gain of -1)"
       import Modelica;
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
@@ -543,290 +592,350 @@ algorithm
     same := isEqual(dss1.A, dss2.A, eps) and isEqual(dss1.B, dss2.B, eps)  and isEqual(dss1.B2, dss2.B2, eps) and isEqual(dss1.C, dss2.C, eps) and isEqual(dss1.D, dss2.D, eps) and abs(dss1.Ts - dss2.Ts) <= Modelica.Constants.eps;
 end '==';
 
-encapsulated operator function 'String'
-    "Transform discrete state space into a String representation"
-   import Modelica;
-   import Modelica_LinearSystems2;
-   import Modelica_LinearSystems2.DiscreteStateSpace;
-   import Modelica.Utilities.Strings;
-
-   input DiscreteStateSpace dss
-      "State space system to be transformed in a String representation";
-   input Integer significantDigits=12
-      "Number of significant digits that are shown";
-   input String name="dss" "Independent variable name used for printing";
-   output String s="";
-
-  protected
-    String space=Strings.repeat(5);
-    String space2=Strings.repeat(3);
-    String space3=Strings.repeat(8);
-    Integer nx=size(dss.A, 1);
-    Integer nu=size(dss.B, 2);
-    Integer ny=size(dss.C, 1);
-    Integer sizeD=size(dss.D, 2);
-    Integer stringMaxLength;
-    Boolean xNamesExist=false;
-    Boolean uNamesExist=false;
-    Boolean yNamesExist=false;
-
-algorithm
-  //Checking if name arrays are empty
-    for i in 1:nx loop
-      xNamesExist := xNamesExist or (dss.xNames[i] <> "");
-    end for;
-
-    for i in 1:ny loop
-      yNamesExist := yNamesExist or (dss.yNames[i] <> "");
-    end for;
-
-    for i in 1:nu loop
-      uNamesExist := uNamesExist or (dss.uNames[i] <> "");
-    end for;
-
-    if xNamesExist then
-      Modelica.Utilities.Streams.print("xNamesExist == true");
-    else
-      Modelica.Utilities.Streams.print("xNamesExist == false");
-    end if;
-
-    stringMaxLength := max(size(dss.xNames, 1), min(size(dss.yNames, 1),
-      11));
-
-    if nx == 0 and sizeD == 0 then
-      s := name + ".A = []\n  " + name + ".B = []\n   " + name + ".C = [] \n   " + name + ".D = []";
-    else
-      s := "\n" + name + ".A = \n";
-
-  //Horizontal
-  // Two alternatives when printing state names
-      if xNamesExist == false then
-        s := s + Strings.repeat(stringMaxLength + significantDigits - 1) +
-          "x1 ";
-      else
-        s := s + Strings.repeat(11 + significantDigits - min(Strings.length(
-          dss.xNames[1]), 11)) + Strings.repeat(min(Strings.length(dss.xNames[
-          1]), 11)) + " " + Strings.substring(
-              dss.xNames[1],
-              1,
-              min(Strings.length(dss.xNames[1]), 11));
-      end if;
-
-      for i in 2:nx loop
-
-  //Two alternatives when printing state names
-
-        if xNamesExist == false then
-          s := s + Strings.repeat(significantDigits + 11 - Strings.length("x"
-             + String(i - 1))) + "x" + String(i) + " ";
-        else
-          s := s + " " + Strings.repeat(significantDigits + 11 - min(
-            Strings.length(dss.xNames[i - 1]), 11)) + Strings.substring(
-                dss.xNames[i],
-                1,
-                min(Strings.length(dss.xNames[i]), 11));
-
-        end if;
-
-  //s := s + Strings.repeat(6) + "x" + String(i);
-      end for;
-      s := s + "\n";
-
-      for i in 1:nx loop
-  //Vertical
-  //Two alternatives when printing state names
-        if xNamesExist == false then
-          s := s + space + "x" + String(i) + " ";
-        else
-          s := s + Strings.repeat(significantDigits + 11 - min(Strings.length(
-            dss.xNames[i]), 11)) + Strings.substring(
-                dss.xNames[i],
-                1,
-                min(Strings.length(dss.xNames[i]), 11)) + " ";
-        end if;
-
-        for j in 1:nx loop
-          if dss.A[i, j] >= 0 then
-            s := s + " ";
-          end if;
-          s := s + String(dss.A[i, j], significantDigits=significantDigits) +
-            Strings.repeat(significantDigits + 11 - Strings.length(String(abs(
-            dss.A[i, j]), significantDigits=significantDigits)));
-       end for;
-        s := s + "\n";
-      end for;
-  //--------------------------------------------------------------------------------------------------------------------------------------------------
-      s := s + "\n" + name + ".B = \n";
-   //Horizontal
-  // Two alternatives when printing state names
-      if uNamesExist == false then
-        s := s + Strings.repeat(stringMaxLength + significantDigits - 1) +
-          "u1 ";
-      else
-        s := s + Strings.repeat(11 + significantDigits - min(Strings.length(
-          dss.uNames[1]), 11)) + Strings.repeat(min(Strings.length(dss.uNames[
-          1]), 11)) + " " + Strings.substring(
-              dss.uNames[1],
-              1,
-              min(Strings.length(dss.uNames[1]), 11));
-      end if;
-
-      for i in 2:nu loop
-  //Two alternatives when printing state names
-        if uNamesExist == false then
-          s := s + Strings.repeat(significantDigits + 11 - Strings.length("u"
-             + String(i - 1))) + "u" + String(i) + " ";
-        else
-          s := s + " " + Strings.repeat(significantDigits + 11 - min(
-            Strings.length(dss.uNames[i - 1]), 11)) + Strings.substring(
-                dss.uNames[i],
-                1,
-                min(Strings.length(dss.uNames[i]), 11));
-        end if;
-      end for;
-      s := s + "\n";
-  //s := s + Strings.repeat(6) + "x" + String(i);
-      for i in 1:nx loop
-
-  //Vertical
-  //Two alternatives when printing state names
-        if xNamesExist == false then
-          s := s + space + "x" + String(i) + " ";
-        else
-
-          s := s + Strings.repeat(significantDigits + 11 - min(Strings.length(
-            dss.xNames[i]), 11)) + Strings.substring(
-                dss.xNames[i],
-                1,
-                min(Strings.length(dss.xNames[i]), 11)) + " ";
-        end if;
-
-        for j in 1:nu loop
-          if dss.B[i, j] >= 0 then
-            s := s + " ";
-          end if;
-          s := s + String(dss.B[i, j], significantDigits=significantDigits) +
-            Strings.repeat(significantDigits + 11 - Strings.length(String(abs(
-            dss.B[i, j]), significantDigits=significantDigits)));
-        end for;
-        s := s + "\n";
-      end for;
-
-  //--------------------------------------------------------------------------------------------------------------------------------------------------
-      s := s + "\n" + name + ".C = \n";
-   //Horizontal
-  // Two alternatives when printing state names
-      if xNamesExist == false then
-        s := s + Strings.repeat(stringMaxLength + significantDigits - 1) +
-          "x1 ";
-      else
-        s := s + Strings.repeat(11 + significantDigits - min(Strings.length(
-          dss.xNames[1]), 11)) + Strings.repeat(min(Strings.length(dss.xNames[
-          1]), 11)) + " " + Strings.substring(
-              dss.xNames[1],
-              1,
-              min(Strings.length(dss.xNames[1]), 11));
-      end if;
-
-      for i in 2:nx loop
-  //Two alternatives when printing state names
-        if xNamesExist == false then
-          s := s + Strings.repeat(significantDigits + 11 - Strings.length("x"
-             + String(i - 1))) + "x" + String(i) + " ";
-        else
-          s := s + " " + Strings.repeat(significantDigits + 11 - min(
-            Strings.length(dss.xNames[i - 1]), 11)) + Strings.substring(
-                dss.xNames[i],
-                1,
-                min(Strings.length(dss.xNames[i]), 11));
-        end if;
-      end for;
-      s := s + "\n";
-  //s := s + Strings.repeat(6) + "x" + String(i);
-
-      for i in 1:ny loop
-  //Vertical
-  //Two alternatives when printing state names
-        if yNamesExist == false then
-          s := s + space + "y" + String(i) + " ";
-        else
-          s := s + Strings.repeat(significantDigits + 11 - min(Strings.length(
-            dss.yNames[i]), 11)) + Strings.substring(
-                dss.yNames[i],
-                1,
-                min(Strings.length(dss.yNames[i]), 11)) + " ";
-
-        end if;
-
-        for j in 1:nx loop
-          if dss.C[i, j] >= 0 then
-            s := s + " ";
-          end if;
-          s := s + String(dss.C[i, j], significantDigits=significantDigits) +
-            Strings.repeat(significantDigits + 11 - Strings.length(String(abs(
-            dss.C[i, j]), significantDigits=significantDigits)));
-        end for;
-        s := s + "\n";
-      end for;
-  //--------------------------------------------------------------------------------------------------------------------------------------------------
-      s := s + "\n" + name + ".D = \n";
-   //Horizontal
-  // Two alternatives when printing state names
-      if uNamesExist == false then
-        s := s + Strings.repeat(stringMaxLength + significantDigits - 1) +
-          "u1 ";
-      else
-        s := s + Strings.repeat(11 + significantDigits - min(Strings.length(
-          dss.uNames[1]), 11)) + Strings.repeat(min(Strings.length(dss.uNames[
-          1]), 11)) + " " + Strings.substring(
-              dss.uNames[1],
-              1,
-              min(Strings.length(dss.uNames[1]), 11));
-      end if;
-
-      for i in 2:nu loop
-  //Two alternatives when printing state names
-        if uNamesExist == false then
-          s := s + Strings.repeat(significantDigits + 11 - Strings.length("u"
-             + String(i - 1))) + "u" + String(i) + " ";
-        else
-          s := s + " " + Strings.repeat(significantDigits + 11 - min(
-            Strings.length(dss.uNames[i - 1]), 11)) + Strings.substring(
-                dss.uNames[i],
-                1,
-                min(Strings.length(dss.uNames[i]), 11));
-        end if;
-      end for;
-      s := s + "\n";
-      for i in 1:ny loop
-  //Vertical
-  //Two alternatives when printing state names
-        if yNamesExist == false then
-          s := s + space + "y" + String(i) + " ";
-        else
-          s := s + Strings.repeat(significantDigits + 11 - min(Strings.length(
-            dss.yNames[i]), 11)) + Strings.substring(
-                dss.yNames[i],
-                1,
-                min(Strings.length(dss.yNames[i]), 11)) + " ";
-        end if;
-
-        for j in 1:nu loop
-          if dss.D[i, j] >= 0 then
-            s := s + " ";
-          end if;
-          s := s + String(dss.D[i, j], significantDigits=significantDigits) +
-            Strings.repeat(significantDigits + 11 - Strings.length(String(abs(
-            dss.D[i, j]), significantDigits=significantDigits)));
-        end for;
-        s := s + "\n";
-      end for;
-
-    end if;
-
-    s := s +"\n\n Ts = " + String(dss.Ts) + "\n method = "+ Modelica_LinearSystems2.Internal.methodString(dss.method);
-
-end 'String';
+// encapsulated operator function 'String'
+//     "Transform discrete state space into a String representation"
+//    import Modelica;
+//    import Modelica_LinearSystems2;
+//    import Modelica_LinearSystems2.DiscreteStateSpace;
+//    import Modelica.Utilities.Strings;
+//
+//    input DiscreteStateSpace dss
+//       "State space system to be transformed in a String representation";
+//    input Integer significantDigits=12
+//       "Number of significant digits that are shown";
+//    input String name="dss" "Independent variable name used for printing";
+//    output String s="";
+//
+//   protected
+//     String space=Strings.repeat(5);
+//     String space2=Strings.repeat(3);
+//     String space3=Strings.repeat(8);
+//     Integer nx=size(dss.A, 1);
+//     Integer nu=size(dss.B, 2);
+//     Integer ny=size(dss.C, 1);
+//     Integer sizeD=size(dss.D, 2);
+//     Integer stringMaxLength;
+//     Boolean xNamesExist=false;
+//     Boolean uNamesExist=false;
+//     Boolean yNamesExist=false;
+//
+// algorithm
+//   //Checking if name arrays are empty
+//     for i in 1:nx loop
+//       xNamesExist := xNamesExist or (dss.xNames[i] <> "");
+//     end for;
+//
+//     for i in 1:ny loop
+//       yNamesExist := yNamesExist or (dss.yNames[i] <> "");
+//     end for;
+//
+//     for i in 1:nu loop
+//       uNamesExist := uNamesExist or (dss.uNames[i] <> "");
+//     end for;
+//
+//     if xNamesExist then
+//       Modelica.Utilities.Streams.print("xNamesExist == true");
+//     else
+//       Modelica.Utilities.Streams.print("xNamesExist == false");
+//     end if;
+//
+//     stringMaxLength := max(size(dss.xNames, 1), min(size(dss.yNames, 1),
+//       11));
+//
+//     if nx == 0 and sizeD == 0 then
+//       s := name + ".A = []\n  " + name + ".B = []\n   " + name + ".C = [] \n   " + name + ".D = []"+ name + ".B2 = []";
+//     else
+//       s := "\n" + name + ".A = \n";
+//
+//   //Horizontal
+//   // Two alternatives when printing state names
+//       if xNamesExist == false then
+//         s := s + Strings.repeat(stringMaxLength + significantDigits - 1) +
+//           "x1 ";
+//       else
+//         s := s + Strings.repeat(11 + significantDigits - min(Strings.length(
+//           dss.xNames[1]), 11)) + Strings.repeat(min(Strings.length(dss.xNames[
+//           1]), 11)) + " " + Strings.substring(
+//               dss.xNames[1],
+//               1,
+//               min(Strings.length(dss.xNames[1]), 11));
+//       end if;
+//
+//       for i in 2:nx loop
+//
+//   //Two alternatives when printing state names
+//
+//         if xNamesExist == false then
+//           s := s + Strings.repeat(significantDigits + 11 - Strings.length("x"
+//              + String(i - 1))) + "x" + String(i) + " ";
+//         else
+//           s := s + " " + Strings.repeat(significantDigits + 11 - min(
+//             Strings.length(dss.xNames[i - 1]), 11)) + Strings.substring(
+//                 dss.xNames[i],
+//                 1,
+//                 min(Strings.length(dss.xNames[i]), 11));
+//
+//         end if;
+//
+//   //s := s + Strings.repeat(6) + "x" + String(i);
+//       end for;
+//       s := s + "\n";
+//
+//       for i in 1:nx loop
+//   //Vertical
+//   //Two alternatives when printing state names
+//         if xNamesExist == false then
+//           s := s + space + "x" + String(i) + " ";
+//         else
+//           s := s + Strings.repeat(significantDigits + 11 - min(Strings.length(
+//             dss.xNames[i]), 11)) + Strings.substring(
+//                 dss.xNames[i],
+//                 1,
+//                 min(Strings.length(dss.xNames[i]), 11)) + " ";
+//         end if;
+//
+//         for j in 1:nx loop
+//           if dss.A[i, j] >= 0 then
+//             s := s + " ";
+//           end if;
+//           s := s + String(dss.A[i, j], significantDigits=significantDigits) +
+//             Strings.repeat(significantDigits + 11 - Strings.length(String(abs(
+//             dss.A[i, j]), significantDigits=significantDigits)));
+//        end for;
+//         s := s + "\n";
+//       end for;
+//   //--------------------------------------------------------------------------------------------------------------------------------------------------
+//       s := s + "\n" + name + ".B = \n";
+//    //Horizontal
+//   // Two alternatives when printing state names
+//       if uNamesExist == false then
+//         s := s + Strings.repeat(stringMaxLength + significantDigits - 1) +
+//           "u1 ";
+//       else
+//         s := s + Strings.repeat(11 + significantDigits - min(Strings.length(
+//           dss.uNames[1]), 11)) + Strings.repeat(min(Strings.length(dss.uNames[
+//           1]), 11)) + " " + Strings.substring(
+//               dss.uNames[1],
+//               1,
+//               min(Strings.length(dss.uNames[1]), 11));
+//       end if;
+//
+//       for i in 2:nu loop
+//   //Two alternatives when printing state names
+//         if uNamesExist == false then
+//           s := s + Strings.repeat(significantDigits + 11 - Strings.length("u"
+//              + String(i - 1))) + "u" + String(i) + " ";
+//         else
+//           s := s + " " + Strings.repeat(significantDigits + 11 - min(
+//             Strings.length(dss.uNames[i - 1]), 11)) + Strings.substring(
+//                 dss.uNames[i],
+//                 1,
+//                 min(Strings.length(dss.uNames[i]), 11));
+//         end if;
+//       end for;
+//       s := s + "\n";
+//   //s := s + Strings.repeat(6) + "x" + String(i);
+//       for i in 1:nx loop
+//
+//   //Vertical
+//   //Two alternatives when printing state names
+//         if xNamesExist == false then
+//           s := s + space + "x" + String(i) + " ";
+//         else
+//
+//           s := s + Strings.repeat(significantDigits + 11 - min(Strings.length(
+//             dss.xNames[i]), 11)) + Strings.substring(
+//                 dss.xNames[i],
+//                 1,
+//                 min(Strings.length(dss.xNames[i]), 11)) + " ";
+//         end if;
+//
+//         for j in 1:nu loop
+//           if dss.B[i, j] >= 0 then
+//             s := s + " ";
+//           end if;
+//           s := s + String(dss.B[i, j], significantDigits=significantDigits) +
+//             Strings.repeat(significantDigits + 11 - Strings.length(String(abs(
+//             dss.B[i, j]), significantDigits=significantDigits)));
+//         end for;
+//         s := s + "\n";
+//           end for;
+//   //--------------------------------------------------------------------------------------------------------------------------------------------------
+//       s := s + "\n" + name + ".C = \n";
+//    //Horizontal
+//   // Two alternatives when printing state names
+//       if xNamesExist == false then
+//         s := s + Strings.repeat(stringMaxLength + significantDigits - 1) +
+//           "x1 ";
+//       else
+//         s := s + Strings.repeat(11 + significantDigits - min(Strings.length(
+//           dss.xNames[1]), 11)) + Strings.repeat(min(Strings.length(dss.xNames[
+//           1]), 11)) + " " + Strings.substring(
+//               dss.xNames[1],
+//               1,
+//               min(Strings.length(dss.xNames[1]), 11));
+//       end if;
+//
+//       for i in 2:nx loop
+//   //Two alternatives when printing state names
+//         if xNamesExist == false then
+//           s := s + Strings.repeat(significantDigits + 11 - Strings.length("x"
+//              + String(i - 1))) + "x" + String(i) + " ";
+//         else
+//           s := s + " " + Strings.repeat(significantDigits + 11 - min(
+//             Strings.length(dss.xNames[i - 1]), 11)) + Strings.substring(
+//                 dss.xNames[i],
+//                 1,
+//                 min(Strings.length(dss.xNames[i]), 11));
+//         end if;
+//       end for;
+//       s := s + "\n";
+//   //s := s + Strings.repeat(6) + "x" + String(i);
+//
+//       for i in 1:ny loop
+//   //Vertical
+//   //Two alternatives when printing state names
+//         if yNamesExist == false then
+//           s := s + space + "y" + String(i) + " ";
+//         else
+//           s := s + Strings.repeat(significantDigits + 11 - min(Strings.length(
+//             dss.yNames[i]), 11)) + Strings.substring(
+//                 dss.yNames[i],
+//                 1,
+//                 min(Strings.length(dss.yNames[i]), 11)) + " ";
+//
+//         end if;
+//
+//         for j in 1:nx loop
+//           if dss.C[i, j] >= 0 then
+//             s := s + " ";
+//           end if;
+//           s := s + String(dss.C[i, j], significantDigits=significantDigits) +
+//             Strings.repeat(significantDigits + 11 - Strings.length(String(abs(
+//             dss.C[i, j]), significantDigits=significantDigits)));
+//         end for;
+//         s := s + "\n";
+//       end for;
+//   //--------------------------------------------------------------------------------------------------------------------------------------------------
+//       s := s + "\n" + name + ".D = \n";
+//    //Horizontal
+//   // Two alternatives when printing state names
+//       if uNamesExist == false then
+//         s := s + Strings.repeat(stringMaxLength + significantDigits - 1) +
+//           "u1 ";
+//       else
+//         s := s + Strings.repeat(11 + significantDigits - min(Strings.length(
+//           dss.uNames[1]), 11)) + Strings.repeat(min(Strings.length(dss.uNames[
+//           1]), 11)) + " " + Strings.substring(
+//               dss.uNames[1],
+//               1,
+//               min(Strings.length(dss.uNames[1]), 11));
+//       end if;
+//
+//       for i in 2:nu loop
+//   //Two alternatives when printing state names
+//         if uNamesExist == false then
+//           s := s + Strings.repeat(significantDigits + 11 - Strings.length("u"
+//              + String(i - 1))) + "u" + String(i) + " ";
+//         else
+//           s := s + " " + Strings.repeat(significantDigits + 11 - min(
+//             Strings.length(dss.uNames[i - 1]), 11)) + Strings.substring(
+//                 dss.uNames[i],
+//                 1,
+//                 min(Strings.length(dss.uNames[i]), 11));
+//         end if;
+//       end for;
+//       s := s + "\n";
+//       for i in 1:ny loop
+//   //Vertical
+//   //Two alternatives when printing state names
+//         if yNamesExist == false then
+//           s := s + space + "y" + String(i) + " ";
+//         else
+//           s := s + Strings.repeat(significantDigits + 11 - min(Strings.length(
+//             dss.yNames[i]), 11)) + Strings.substring(
+//                 dss.yNames[i],
+//                 1,
+//                 min(Strings.length(dss.yNames[i]), 11)) + " ";
+//         end if;
+//
+//         for j in 1:nu loop
+//           if dss.D[i, j] >= 0 then
+//             s := s + " ";
+//           end if;
+//           s := s + String(dss.D[i, j], significantDigits=significantDigits) +
+//             Strings.repeat(significantDigits + 11 - Strings.length(String(abs(
+//             dss.D[i, j]), significantDigits=significantDigits)));
+//         end for;
+//         s := s + "\n";
+//           end for;
+//
+// //##################
+//
+// //--------------------------------------------------------------------------------------------------------------------------------------------------
+//       s := s + "\n" + name + ".B2 = \n";
+//    //Horizontal
+//   // Two alternatives when printing state names
+//       if uNamesExist == false then
+//         s := s + Strings.repeat(stringMaxLength + significantDigits - 1) +
+//           "u1 ";
+//       else
+//         s := s + Strings.repeat(11 + significantDigits - min(Strings.length(
+//           dss.uNames[1]), 11)) + Strings.repeat(min(Strings.length(dss.uNames[
+//           1]), 11)) + " " + Strings.substring(
+//               dss.uNames[1],
+//               1,
+//               min(Strings.length(dss.uNames[1]), 11));
+//       end if;
+//
+//       for i in 2:nu loop
+//   //Two alternatives when printing state names
+//         if uNamesExist == false then
+//           s := s + Strings.repeat(significantDigits + 11 - Strings.length("u"
+//              + String(i - 1))) + "u" + String(i) + " ";
+//         else
+//           s := s + " " + Strings.repeat(significantDigits + 11 - min(
+//             Strings.length(dss.uNames[i - 1]), 11)) + Strings.substring(
+//                 dss.uNames[i],
+//                 1,
+//                 min(Strings.length(dss.uNames[i]), 11));
+//         end if;
+//       end for;
+//       s := s + "\n";
+//   //s := s + Strings.repeat(6) + "x" + String(i);
+//       for i in 1:nx loop
+//
+//   //Vertical
+//   //Two alternatives when printing state names
+//         if xNamesExist == false then
+//           s := s + space + "x" + String(i) + " ";
+//         else
+//
+//           s := s + Strings.repeat(significantDigits + 11 - min(Strings.length(
+//             dss.xNames[i]), 11)) + Strings.substring(
+//                 dss.xNames[i],
+//                 1,
+//                 min(Strings.length(dss.xNames[i]), 11)) + " ";
+//         end if;
+//
+//         for j in 1:nu loop
+//           if dss.B2[i, j] >= 0 then
+//             s := s + " ";
+//           end if;
+//           s := s + String(dss.B2[i, j], significantDigits=significantDigits) +
+//             Strings.repeat(significantDigits + 11 - Strings.length(String(abs(
+//             dss.B2[i, j]), significantDigits=significantDigits)));
+//         end for;
+//         s := s + "\n";
+//       end for;
+//
+// //#################
+//
+//     end if;
+//
+//     s := s +"\n\n Ts = " + String(dss.Ts) + "\n method = "+ Modelica_LinearSystems2.Internal.methodString(dss.method);
+//
+// end 'String';
 
   encapsulated function timeResponse
     "Compute time response of DiscreteStateSpace system"
@@ -932,26 +1041,39 @@ algorithm
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Calculate the eigenvalues of a discrete state space system, i.e. the eigenvalues of the system matrix <b>A</b> of a state space system. The output is a complex vector containing the eigenvalues.
+Calculate the eigenvalues of a discrete state space system, i.e. the eigenvalues of the system matrix <b>A</b> of a discrete state space system.
+The output is a complex vector containing the eigenvalues.<br>
+The eigenvalues <b>ev</b>_d of the discrete system are related to the eigenvalues of the corresponding continuous system <b>ev</b>_c by
+</p>
+<blockquote>
+<p>
+<b>ev</b>_d = exp(Ts*<b>ev</b>_c)
+</p>
+</blockquote>
+<p>
 
 
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+   StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1,1;-1,-1],
       B=[1;1],
       C=[1,1],
       D=[0],
       B2=[0;0],
       Ts=0.1);
-  
+
+   DiscreteStateSpace dss=DiscreteStateSpace(ss, Ts=0.1);
+ 
    Complex eigenvalues[2];
    
 <b>algorithm</b>
   eigenvalues = Modelica_LinearSystems2.DiscreteStateSpace.Analysis.eigenValues(dss);
-// eigenvalues = {-1 + 1j, -1 - 1j}  
+// eigenvalues = {0.900452 + 0.0904977*j, 0.900452 - 0.0904977*j}
+//
+
 </pre></blockquote>
 
 
@@ -967,11 +1089,11 @@ encapsulated function timeResponse
   import Modelica_LinearSystems2.Types.TimeResponse;
 
   input TimeResponse response=TimeResponse.Step;
-
-   extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(redeclare
+  extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(redeclare
           Real y[
-             :,size(dss.C, 1),if response == TimeResponse.Initial then 1 else size(dss.B, 2)],
-      redeclare Real x_discrete[:,size(dss.A, 1),if response == TimeResponse.Initial then 1 else size(dss.B, 2)]);  // Input/Output declarations of time response functions
+             :,size(dss.C, 1),if response == TimeResponse.Initial then 1 else 
+      size(dss.B, 2)], redeclare Real x_discrete[:,size(dss.A, 1),if response ==
+      TimeResponse.Initial then 1 else size(dss.B, 2)]);// Input/Output declarations of time response functions
 
   input Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
 
@@ -988,23 +1110,36 @@ encapsulated function timeResponse
 
 algorithm
 // set sample time
-if tSpan == 0 then
-   tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
- else
-   tSpanVar := tSpan;
- end if;
+  if tSpan == 0 then
+    tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
+  else
+    tSpanVar := tSpan;
+  end if;
 
- samples := integer(tSpanVar/dss.Ts +dss.Ts/100+ 1);
+  samples := integer(tSpanVar/dss.Ts + dss.Ts/100 + 1);
 // Modelica.Utilities.Streams.print("\nsamples = "+String(samples));
 
- t := 0:dss.Ts:tSpanVar;
- u := zeros(samples, size(dss.B, 2));
+  t := 0:dss.Ts:tSpanVar;
+  u := zeros(samples, size(dss.B, 2));
 
- y := if response == TimeResponse.Initial then zeros(samples, size(dss.C, 1),1) else zeros(samples, size(dss.C, 1),size(dss.B, 2));
- x_discrete :=  if response == TimeResponse.Initial then zeros(samples, size(dss.A, 1),  1) else zeros(samples, size(dss.A, 1),  size(dss.B, 2));
+  y := if response == TimeResponse.Initial then zeros(
+    samples,
+    size(dss.C, 1),
+    1) else zeros(
+    samples,
+    size(dss.C, 1),
+    size(dss.B, 2));
+  x_discrete := if response == TimeResponse.Initial then zeros(
+    samples,
+    size(dss.A, 1),
+    1) else zeros(
+    samples,
+    size(dss.A, 1),
+    size(dss.B, 2));
 
   if response == TimeResponse.Initial then
-    (y[:, :, 1],x_discrete[:, :, 1]) := Modelica_LinearSystems2.DiscreteStateSpace.Internal.initialResponse1(
+    (y[:, :, 1],x_discrete[:, :, 1]) :=
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.initialResponse1(
       dss,
       x0,
       samples);
@@ -1022,43 +1157,52 @@ if tSpan == 0 then
         u[:, i1] := ones(samples);
       elseif response == TimeResponse.Ramp then
         u[:, :] := zeros(samples, size(dss.B, 2));
-        u[:, i1] := 0:dss.Ts:tSpanVar+dss.Ts/100;
+        u[:, i1] := 0:dss.Ts:tSpanVar + dss.Ts/100;
       else
         assert(false, "Argument response (= " + String(response) + ") of \"Time response to plot\" is wrong.");
       end if;
-      (y[:, :, i1],x_discrete[:, :, i1]) := DiscreteStateSpace.Internal.timeResponse1(dss, u, x0);
+      (y[:, :, i1],x_discrete[:, :, i1]) :=
+        DiscreteStateSpace.Internal.timeResponse1(
+        dss,
+        u,
+        x0);
 
     end for;
   end if;
 
-   annotation (Documentation(info="<html>
+  annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>timeResponse</b>(ss, dt, tSpan, responseType, x0)  </td> </tr>
+<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td>DiscreteStateSpace.Analysis.<b>timeResponse</b>(responseType, dss)  </td> </tr>
+<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td>DiscreteStateSpace.Analysis.<b>timeResponse</b>(responseType, dss, tSpan, x0)  </td> </tr>
 
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function timeResponse calculates the time responses of a state space system. The type of the time response is defined by the input <b>responseType</b>, i.e. 
+Function timeResponse calculates the time responses of a discrete state space system. The type of the time response is defined by the input <b>responseType</b>, i.e. 
 <blockquote><pre>
     Impulse \"Impulse response\",
     Step \"Step response\",
     Ramp \"Ramp response\",
     Initial \"Initial condition response\"
 </pre></blockquote>
-The state space system is transformed to a appropriate discrete state space system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt.
+Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x are calculated for each time step t=k*dss.Ts.
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1],
-      B=[1],
-      C=[2],
-      D=[0]);
-  Real Ts=0.1;
+   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+     A = [0.904837418036],
+     B = [0.095162581964],
+     C = [2],
+     D = [0],
+     B2 = [0],
+     Ts = 0.1);
+  
   Real tSpan= 0.4;
+  
   Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+  
   Real x0[1]={0};
 
   Real y[5,1,1];
@@ -1066,8 +1210,8 @@ The state space system is transformed to a appropriate discrete state space syst
   Real x[5,1,1] 
 
 <b>algorithm</b>
-  (y,t,x):=Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(ss,Ts,tSpan,response,x0);
-//  y[:,1,1]={0, 0.19, 0.3625, 0.518, 0.659}
+  (y,t,x):=Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(dss,tSpan,response,x0);
+//  y[:,1,1] = {0, 0.1903, 0.3625, 0.5184, 0.6594}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0952, 0.1813, 0.2592, 0.33}
 </pre></blockquote>
@@ -1105,22 +1249,25 @@ algorithm
       annotation (interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>impulseResponse</b>(ss, dt, tSpan, x0)  </td> </tr>
+<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss)  </td> </tr>
+<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss, tSpan)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>impulseResponse</b> calculates the time response of a state space system for impulse imput. 
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and states <b>x</b> are calculated for each time step t=k*dss.Ts.
 <blockquote><pre>
-StateSpace.Analysis.impulseResponse(ss, dt, tSpan)
+DiscreteStateSpace.Analysis.impulseResponse(dss, tSpan)
+
 </pre></blockquote>
 gives the same result as
 <blockquote><pre>
-StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,size(ss.A,1))).
+DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
-
-
+Note that an appropriate impulse response of a discrete system that is comparable to the impulse response of the corresponding continuous system 
+requires the \"ImpulseExact\" conversion from continuous system to discrete system.<br>
+See also<br>
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.impulseResponse\">StateSpace.Analysis.impulseResponse</a>
 
 </p>
 
@@ -1140,9 +1287,9 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
 
 <b>algorithm</b>
   (y,t,x):=StateSpace.Analysis.impulseResponse(ss,Ts,tSpan);
-//  y[:,1,1]={2, 1.8097, 1.6375, 1.4816, 1.3406}
-//         t={0, 0.1, 0.2, 0.3, 0.4}
-//  x[:,1,1]={1, 0.9048, 0.8187, 0.7408, 0.6703}
+//  y[:,1,1] = {2, 1.8097, 1.6375, 1.4816, 1.3406}
+//         t = {0, 0.1, 0.2, 0.3, 0.4}
+//  x[:,1,1] = {1, 0.9048, 0.8187, 0.7408, 0.6703}
 </pre></blockquote>
 
 
@@ -1178,31 +1325,41 @@ algorithm
       annotation (interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>stepResponse</b>(ss, dt, tSpan, x0)  </td> </tr>
+<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss)  </td> </tr>
+<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss, tSpan)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>stepResponse</b> calculates the step response of a state space system. 
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+Function <b>stepResponse</b> calculates the step response of a discrete state space system. 
+Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and the states <b>x</b> are calculated for each time step t=k*dss.Ts.
 <blockquote><pre>
-StateSpace.Analysis.stepResponse(ss, dt, tSpan)
+DiscreteStateSpace.Analysis.stepResponse(dss, tSpan)
 </pre></blockquote>
 gives the same result as
 <blockquote><pre>
-StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Step, x0=fill(0,size(ss.A,1))).
+DiscreteStateSpace.Analysis.timeResponse(response=Types.TimeResponse.Step, dss, tSpan, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
+Note that an appropriate step response of a discrete system that is comparable to the step response of the corresponding continuous system 
+requires the \"StepExact\" conversion from continuous system to discrete system.<br>
+See also <br>
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.stepResponse\">StateSpace.Analysis.stepResponse</a>
 </p>
 
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1],
-      B=[1],
+   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+      A=[0.904837418036 ],
+      B=[0.095162581964],
       C=[2],
-      D=[0]);
-  Real Ts=0.1;
+      D=[0],
+      B2=[0],
+      Ts=0.1;
+      method = Types.Method.StepExact);
+      
+      
+
   Real tSpan= 0.4;
  
   Real y[5,1,1];
@@ -1210,7 +1367,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
   Real x[5,1,1] 
 
 <b>algorithm</b>
-  (y,t,x):=StateSpace.Analysis.stepResponse(ss,Ts,tSpan);
+  (y,t,x) := DiscreteStateSpace.Analysis.stepResponse(dss,tSpan);
 //  y[:,1,1]={0, 0.19, 0.3625, 0.518, 0.659}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0952, 0.1813, 0.2592, 0.33}
@@ -1223,7 +1380,7 @@ end stepResponse;
 encapsulated function rampResponse
       "Calculate the ramp time response of a state space system"
 
- import Modelica;
+  import Modelica;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.DiscreteStateSpace;
     // Input/Output declarations of time response functions:
@@ -1246,33 +1403,42 @@ algorithm
     response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
     x0=zeros(size(dss.A, 1)));
 
-annotation(interactive=true, Documentation(info="<html>
+  annotation (interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>rampResponse</b>(ss, dt, tSpan, x0)  </td> </tr>
+<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>rampResponse</b>(dss)  </td> </tr>
+<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>rampResponse</b>(dss, tSpan, x0)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>rampResponse</b> calculates the time response of a state space system for ramp imput u = t. 
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+Function <b>rampResponse</b> calculates the time response of a discrete state space system for ramp imput u = t. 
+Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts.
 <blockquote><pre>
-StateSpace.Analysis.rampResponse(ss, dt, tSpan)
+DiscreteStateSpace.Analysis.rampResponse(dss, tSpan)
 </pre></blockquote>
 gives the same result as
 <blockquote><pre>
-StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Ramp, x0=fill(0,size(ss.A,1))).
+DiscreteStateSpace.Analysis.timeResponse(response=Types.TimeResponse.Ramp, dss, tSpan, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
+Note that an appropriate ramp response of a discrete system that is comparable to the ramp response of the corresponding continuous system 
+requires the \"RampExact\" conversion from continuous system to discrete system.<br>
+
+See also<br>
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a>
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.rampResponse\">StateSpace.Analysis.rampResponse</a>
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1],
-      B=[1],
+   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+      A=[0.904837418036 ],
+      B=[0.095162581964],
       C=[2],
-      D=[0]);
-  Real Ts=0.1;
+      D=[0.0967483607192],
+      B2=[0.0483741803596],
+      Ts=0.1;
+      method = Types.Method.RampExact);
+      
   Real tSpan= 0.4;
  
   Real y[5,1,1];
@@ -1280,12 +1446,11 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
   Real x[5,1,1] 
 
 <b>algorithm</b>
-  (y,t,x):=StateSpace.Analysis.rampResponse(ss,Ts,tSpan);
-//  y[:,1,1]={0, 0.00967, 0.03746, 0.08164, 0.14064}
+  (y,t,x) := DiscreteStateSpace.Analysis.rampResponse(dss,tSpan);
+//  y[:,1,1] = {0, 0.00967, 0.03746, 0.08164, 0.14064}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
-//  x[:,1,1]={0, 0.00484, 0.018734, 0.04082, 0.07032}
+//  x[:,1,1] = {0, 0.00484, 0.01873, 0.04082, 0.07032}
 </pre></blockquote>
-
 
 </html> "));
 end rampResponse;
@@ -1323,39 +1488,46 @@ algorithm
   annotation (interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>initialResponse</b>(ss, dt, tSpan, x0)  </td> </tr>
+<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss)  </td> </tr>
+<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss, tSpan)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>initialResponse</b> calculates the time response of a state space system for given initial condition and zero inputs. 
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+Function <b>initialResponse</b> calculates the time response of a discrete state space system for given initial condition and zero inputs. 
+tarting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts.
 <blockquote><pre>
-StateSpace.Analysis.initialResponse(x0,ss, dt, tSpan)
+DiscreteStateSpace.Analysis.initialResponse(x0,dss, dt, tSpan)
 </pre></blockquote>
 gives the same result as
 <blockquote><pre>
-StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Initial, x0=x0).
+DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse.Initial, x0=x0).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
+See also <br>
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.initialResponse\">StateSpace.Analysis.initialResponse</a><br>
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1],
-      B=[1],
+   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+      A=[0.904837418036 ],
+      B=[0.095162581964],
       C=[2],
-      D=[0]);
-  Real Ts=0.1;
+      D=[0],
+      B2=[0],
+      Ts=0.1;
+      method = Types.Method.StepExact);
+      
   Real tSpan= 0.4;
-  Real x0[2] = {1};
+  Real x0[1] = {1};
  
   Real y[5,1,1];
   Real t[5];
   Real x[5,1,1] 
 
+
 <b>algorithm</b>
-  (y,t,x):=StateSpace.Analysis.initialResponse(x0,ss,Ts,tSpan);
+  (y,t,x):=DiscreteStateSpace.Analysis.initialResponse(x0,dss,tSpan);
 //  y[:,1,1]={2, 1.809, 1.637, 1.4812, 1.3402}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={1, 0.9048, 0.8186, 0.7406, 0.6701}
@@ -1424,10 +1596,10 @@ algorithm
         Ts=dss.Ts, method=dss.method);
 // set frequency to a complex value which is whether pole nor zero
     for i in 1:size(poles,1) loop
-      cpoles[i] := if Complex.'abs'(poles[i])>0 then Complex.log(poles[i])/dss.Ts else Complex(0);
+      cpoles[i] := if Complex.'abs'(poles[i])>0 then Complex.log(poles[i])/dss.Ts else Complex(-100);
     end for;
     for i in 1:size(zeros,1) loop
-      czeros[i] := if Complex.'abs'(zeros[i])>0 then Complex.log(zeros[i])/dss.Ts else Complex(0);
+      czeros[i] := if Complex.'abs'(zeros[i])>0 then Complex.log(zeros[i])/dss.Ts else Complex(-100);
     end for;
 
      v := sum(cat(1, czeros[:].re,  cpoles[:].re))/max(size(czeros,1)+size(cpoles,1),1) + 13/19;
@@ -1464,37 +1636,40 @@ algorithm
   annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toZerosAndPoles</b>(ss)  </td> </tr>
+<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPoles</b>(dss)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Computes a ZerosAndPoles record
+Computes a DiscreteZerosAndPoles record
  <blockquote><pre>
-                 product(s + n1[i]) * product(s^2 + n2[i,1]*s + n2[i,2])
-        zp = k*---------------------------------------------------------
-                product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
-</pre></blockquote>of a system from state space representation using the transformation algorithm described in [1].
+                 product(q + n1[i]) * product(q^2 + n2[i,1]*q + n2[i,2])
+        dzp = k*---------------------------------------------------------
+                product(q + d1[i]) * product(q^2 + d2[i,1]*q + d2[i,2])
+
+</pre></blockquote>of a system from discrete state space representation using the transformation algorithm described in [1].
 <br>
 The uncontrollable and unobservable parts are isolated and the eigenvalues and invariant zeros of the controllable and observable sub system are calculated.
 
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A = [-1.0, 0.0, 0.0;
-            0.0,-2.0, 0.0;
-            0.0, 0.0,-3.0],
-      B = [1.0;
-           1.0;
+   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+      A = [0.9048, 0.0,    0.0;
+            0.0,   0.8187, 0.0;
+            0.0,   0.0,    0.7408],
+      B = [0.09516;         
+           0.09063;
            0.0],
       C = [1.0,1.0,1.0],
-      D = [0.0]);
-
-<b>algorithm</b>
-  zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
-//                s + 1.5  
-//   zp = 2 -----------------
-             (s + 1)*(s + 2)
+      D = [0.0],
+      Ts = 0.1);
+      
+ <b>algorithm</b>
+  dzp:=Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(dss);
+  
+//                         q - 0.860735
+//   dzp = 0.1858 -------------------------------
+//                 (q - 0.904837)*(q - 0.818731)
 </pre></blockquote>
 
 
@@ -1541,9 +1716,9 @@ algorithm
         Ts=dss.Ts,
         B2=matrix(dss.B2[:, ib]),
         method=dss.method);
-      dss_siso.uNames := {dss.uNames[ib]};
-      dss_siso.yNames := {dss.yNames[ic]};
-      dss_siso.xNames := dss.xNames;
+//       dss_siso.uNames := {dss.uNames[ib]};
+//       dss_siso.yNames := {dss.yNames[ic]};
+//       dss_siso.xNames := dss.xNames;
       dzp[ic, ib] := DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(
         dss_siso);
     end for;
@@ -1551,53 +1726,58 @@ algorithm
   annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toZerosAndPolesMIMO</b>(ss)  </td> </tr>
+<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPolesMIMO</b>(dss)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Computes a matrix of ZerosAndPoles records
+Computes a matrix of DiscreteZerosAndPoles records
  <blockquote><pre>
-                 product(s + n1[i]) * product(s^2 + n2[i,1]*s + n2[i,2])
-        zp = k*---------------------------------------------------------
-                product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
+                 product(q + n1[i]) * product(q^2 + n2[i,1]*q + n2[i,2])
+       dzp = k*---------------------------------------------------------
+                product(q + d1[i]) * product(q^2 + d2[i,1]*q + d2[i,2])
 </pre></blockquote>
-of a system from state space representation, i.e. isolating the uncontrollable and unobservable parts and the eigenvalues and invariant zeros of the controllable and observable sub systems are calculated. The algorithm applies the method described in [1] for each input-output pair.
+of a system from discrete state space representation, i.e. isolating the uncontrollable and unobservable parts and the eigenvalues and invariant zeros of the controllable and observable sub systems are calculated. The algorithm applies the method described in [1] for each single-input-output pair.
 
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-    A = [-1.0, 0.0, 0.0;
-          0.0,-2.0, 0.0;
-          0.0, 0.0,-3.0],
-      B = [0.0, 1.0;
-           1.0, 1.0;
-          -1.0, 0.0],
-      C = [0.0, 1.0, 1.0;
-           1.0, 1.0, 1.0],
-      D = [1.0, 0.0;
-           0.0, 1.0]);
+   Modelica_LinearSystems2.DiscreteStateSpace ss=Modelica_LinearSystems2.DiscreteStateSpace(
+    A = [0.9048, 0.0,    0.0;
+          0.0,   0.8187, 0.0;
+          0.0,   0.0,    0.7408] 
+      
+   B = [0.0,      0.09516;         
+        0.0906,   0.09063;         
+       -0.0864,   0.0],
+      
+   C = [0.0, 1.0, 1.0;
+        1.0, 1.0, 1.0],
+      
+   D = [1.0, 0.0;
+        0.0, 1.0],
+        
+   B2 = [0.0,  0.0;
+         0.0,  0.0;
+         0.0,  0.0],
+   Ts = 0.1);
 
 <b>algorithm</b>
-  zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
+  dzp:=Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPolesMIMO(dss);
 
-// zp = [(s^2 + 5*s + 7)/( (s + 2)*(s + 3) ), 1/(s + 2);
-         1/( (s + 2)*(s + 3) ), 1*(s + 1.38197)*(s + 3.61803)/( (s + 1)*(s + 2) )]
+// dzp = [1*(q^2 - 1.55531*q + 0.61012)/( (q - 0.818731)*(q - 0.740818) )
+    Ts = 0.1
+    method =StepExact,
+ 0.0906346/(q - 0.818731)
+    Ts = 0.1
+    method =StepExact;
+0.0042407*(q + 0.846461)/( (q - 0.818731)*(q - 0.740818) )
+    Ts = 0.1
+    method =StepExact,
+ 1*(q - 0.870319)*(q - 0.667452)/( (q - 0.904837)*(q - 0.818731) )
+    Ts = 0.1
+    method =StepExact]
+    
 </pre></blockquote>
-i.e.
- <blockquote><pre>
-           |                                                   |
-           |    (s^2+5*s+7)                    1               |
-           | -----------------               -----             |
-           |  (s + 2)*(s + 3)                (s+2)             |
-    tf  =  |                                                   |
-           |        1             (s + 1.38197)*(s + 3.61803)  |
-           | -------------       ----------------------------- |
-           | (s + 2)*(s + 3)            (s + 1)*(s + 2)        |
-           |                                                   |
-</pre></blockquote>
-
-
 
 <h4><font color=\"#008000\">References</font></h4>
 <table>
@@ -1628,7 +1808,47 @@ algorithm
   dtf := DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction(dzp);
 
   annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  dtf </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<b>toDiscreteTransferFunction</b>(dss)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Computes a DiscreteTransferFunction record
+<blockquote><pre>
+           n(z)     b0 + b1*z + ... + bn*z^n
+  dtf = -------- = -------------------------- 
+           d(z)     a0 + a1*z + ... + an*z^n
+ </pre></blockquote>
 
+The algorithm uses <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles\">toDiscreteZerosAndPoles</a> to convert the
+discrete state space system into a discrete zeros and poles representation first and after that <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction\">ZerosAndPoles.Conversion.toTransferFunction</a> to generate the transfer function.
+
+
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+  Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+      A = [0.9048, 0.0,    0.0;
+            0.0,   0.8187, 0.0;
+            0.0,   0.0,    0.7408],
+      B = [0.09516;         
+           0.09063;
+           0.0],
+      C = [1.0,1.0,1.0],
+      D = [0.0],
+      B2 = [0, 0;
+            0, 0;
+            0, 0],
+      Ts = 0.1);
+      
+ <b>algorithm</b>
+  dtf:=Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss);
+  
+//             0.185797*z - 0.159922
+//   dtf = -------------------------------
+//           z^2 - 1.72357*z + 0.740818
+</pre></blockquote>
 
 
 
@@ -1665,54 +1885,61 @@ algorithm
       annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunctionMIMO</b>(ss)  </td> </tr>
+<tr> <td align=right>  dtf </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<b>toDiscreteTransferFunctionMIMO</b>(dss)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Computes a matrix of TransferFunction records
+Computes a matrix of DiscreteTransferFunction records
 <blockquote><pre>
-           n(s)     b0 + b1*s + ... + bn*s^n
-   tf = -------- = -------------------------- 
-           d(s)     a0 + a1*s + ... + an*s^n
+           n(z)     b0 + b1*z + ... + bn*z^n
+  dtf = -------- = -------------------------- 
+           d(z)     a0 + a1*z + ... + an*z^n
  </pre></blockquote>
-with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
+with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteTransferFunction\">Conversion.toDiscreteTransferFunction</a>
 
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-    A = [-1.0, 0.0, 0.0;
-          0.0,-2.0, 0.0;
-          0.0, 0.0,-3.0],
-      B = [0.0, 1.0;
-           1.0, 1.0;
-          -1.0, 0.0],
-      C = [0.0, 1.0, 1.0;
-           1.0, 1.0, 1.0],
-      D = [1.0, 0.0;
-           0.0, 1.0]);
+   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+   A = [0.9048, 0.0,    0.0;
+          0.0,   0.8187, 0.0;
+          0.0,   0.0,    0.7408] 
+      
+   B = [0.0,      0.09516;         
+        0.0906,   0.09063;         
+       -0.0864,   0.0],
+      
+   C = [0.0, 1.0, 1.0;
+        1.0, 1.0, 1.0],
+      
+   D = [1.0, 0.0;
+        0.0, 1.0],
+        
+   B2 = [0.0,  0.0;
+         0.0,  0.0;
+         0.0,  0.0],
+   Ts = 0.1);
 
 <b>algorithm</b>
-  zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
+  dtf:=Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(dss);
 
-// zp = [(s^2 + 5*s + 7)/(s^2 + 5*s + 6), 1/(s + 2);
-         1/(s^2 + 5*s + 6), (1*s^2 + 5*s + 5)/(s^2 + 3*s + 2)]
+// dtf = [(1*z^2 - 1.55531*z + 0.61012)/(z^2 - 1.55955*z + 0.606531)
+ 
+ Ts = 0.1
+ method =StepExact,
+ 0.0906346/(z - 0.818731)
+ 
+ Ts = 0.1
+ method =StepExact;
+(0.0042407*z + 0.00358958)/(z^2 - 1.55955*z + 0.606531)
+ 
+ Ts = 0.1
+ method =StepExact,
+ (1*z^2 - 1.53777*z + 0.580896)/(z^2 - 1.72357*z + 0.740818)
+ 
+ Ts = 0.1
+ method =StepExact]
 </pre></blockquote>
-i.e.
- <blockquote><pre>
-           |                                                   |
-           |    (s^2+5*s+7)                    1               |
-           | -----------------               -----             |
-           |  (s + 2)*(s + 3)                (s+2)             |
-    tf  =  |                                                   |
-           |        1             (s + 1.38197)*(s + 3.61803)  |
-           | -------------       ----------------------------- |
-           | (s + 2)*(s + 3)            (s + 1)*(s + 2)        |
-           |                                                   |
-</pre></blockquote>
-
-
-
 
 </html> "));
 end toDiscreteTransferFunctionMIMO;
@@ -1890,7 +2117,7 @@ algorithm
     B2=matrix(dss.B2[:, iu]),
     Ts=dss.Ts,
     method=dss.method);
-  dtf := DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(dss_siso);
+  dzp := DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(dss_siso);
 
   DiscreteZerosAndPoles.Plot.bode(
     dzp,
@@ -1906,9 +2133,9 @@ algorithm
   annotation (interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <blockquote><pre>
-StateSpace.Plot.<b>plotBodeSISO</b>(ss)
+DiscreteStateSpace.Plot.<b>plotBodeSISO</b>(dss)
    or
-StateSpace.Plot.<b>plotBodeSISO</b>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+DiscreteStateSpace.Plot.<b>plotBodeSISO</b>(dss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -1922,29 +2149,42 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0],
-      B=[0.0,1.0; 1.0,1.0; -1.0,0.0],
-      C=[0.0,1.0,1.0; 1.0,1.0,1.0],
-      D=[1.0,0.0; 0.0,1.0])
+   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+   A = [0.9048, 0.0,    0.0;
+          0.0,   0.8187, 0.0;
+          0.0,   0.0,    0.7408] 
+      
+   B = [0.0;         
+        0.0906;         
+       -0.0864],
+      
+   C = [0.0, 1.0, 1.0],
+      
+   D = [1.0],
+        
+   B2 = [0.0;
+         0.0;
+         0.0],         
+   Ts = 0.1);
+
    
    Integer iu=1;
    Integer iy=1;
 
 
 <b>algorithm</b>
-   Modelica_LinearSystems2.StateSpace.Plot.plotBodeSISO(ss, iu, iy)
+   Modelica_LinearSystems2.DiscreteStateSpace.Plot.plotBodeSISO(dss, iu, iy)
 //  gives:
 </pre></blockquote>
 
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodeMagnitude.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodeMagDis.png\">
 </p>
 <p>
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodePhase.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodePhaseDis.png\">
 </p>
 <p>
 
@@ -2015,13 +2255,20 @@ algorithm
 
 // generate headings
   for i1 in 1:size(dss.B, 2) loop
-    uNames[i1] := if dss.uNames[i1] == "" then "u" + String(i1) else dss.uNames[
-      i1];
+    uNames[i1] := "u" + String(i1);
   end for;
   for i1 in 1:size(dss.C, 1) loop
-    yNames[i1] := if dss.yNames[i1] == "" then "y" + String(i1) else dss.yNames[
-      i1];
+    yNames[i1] := "y" + String(i1);
   end for;
+
+  // for i1 in 1:size(dss.B, 2) loop
+  //   uNames[i1] := if dss.uNames[i1] == "" then "u" + String(i1) else dss.uNames[
+  //     i1];
+  // end for;
+  // for i1 in 1:size(dss.C, 1) loop
+  //   yNames[i1] := if dss.yNames[i1] == "" then "y" + String(i1) else dss.yNames[
+  //     i1];
+  // end for;
 
   for i2 in 1:loops loop
     for i1 in 1:size(dss.C, 1) loop
@@ -2049,20 +2296,20 @@ algorithm
   annotation (interactive=true, Documentation(info="<html> 
 <p><b><font style=\"color: #008000; \">Syntax</font></b></p>
 <blockquote><pre>
-StateSpace.Plot.<b>timeResponse</b>(dss);
+DiscreteStateSpace.Plot.<b>timeResponse</b>(dss);
 or
-StateSpace.Plot.<b>timeResponse</b>(dss, dt, tSpan,response, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+DiscreteStateSpace.Plot.<b>timeResponse</b>(dss, tSpan,response, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>timeResponse</b> plots the time response of a state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.plotImpulse\">plotImpulse</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
+Function <b>timeResponse</b> plots the time response of a discrete state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.plotImpulse\">plotImpulse</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
 
 
 
@@ -2070,27 +2317,21 @@ Function <b>timeResponse</b> plots the time response of a state space system. Th
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-Modelica_LinearSystems2.StateSpace dss=Modelica_LinearSystems2.StateSpace(
+Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
 A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
 B=[1.0; 1.0; 0.0],
 C=[0.0,1.0,1.0],
 D=[0.0])
 
+Real Ts = 0.1;
+Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
+DiscreteStateSpace dss=DiscreteStateSpace(ss,Ts,method);
 Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
 
 <b>algorithm</b>
-Modelica_LinearSystems2.StateSpace.Plot.timeResponse(dss, response=response)
-// gives:
+Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse(dss, response=response);
+
 </pre></blockquote>
-
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/timeResponseSS.png\">
-</p>
-<p>
-</p>
-
-
 </html> "));
 end timeResponse;
 
@@ -2139,17 +2380,17 @@ algorithm
     annotation (interactive=true, Documentation(info="<html> 
 <p><b><font style=\"color: #008000; \">Syntax</font></b></p>
 <blockquote><pre>
-StateSpace.Plot.<b>impulse</b>(ss);
+DiscreteStateSpace.Plot.<b>impulse</b>(dss);
 or
-StateSpace.Plot.<b>impulse</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+DiscreteStateSpace.Plot.<b>impulse</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
+Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
 
 
 
@@ -2163,20 +2404,15 @@ B=[1.0; 1.0; 0.0],
 C=[0.0,1.0,1.0],
 D=[0.0])
 
-
+Real Ts = 0.1;
+Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.ImpulseExact;
+DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
 
 <b>algorithm</b>
-Modelica_LinearSystems2.StateSpace.Plot.impulse(ss)
-// gives:
+Modelica_LinearSystems2.StateSpace.Plot.impulse(dss)
+
+</p>
 </pre></blockquote>
-
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/impulseResponseSS.png\">
-</p>
-<p>
-</p>
-
 
 </html> "));
 end impulse;
@@ -2227,17 +2463,17 @@ algorithm
     annotation (interactive=true, Documentation(info="<html> 
 <p><b><font style=\"color: #008000; \">Syntax</font></b></p>
 <blockquote><pre>
-StateSpace.Plot.<b>step</b>(ss);
+DiscreteStateSpace.Plot.<b>step</b>(dss);
 or
-StateSpace.Plot.<b>step</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+DiscreteStateSpace.Plot.<b>step</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>step</b> plots the step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
+Function <b>step</b> plots the discrete step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
 
 
 
@@ -2253,20 +2489,13 @@ B=[1.0; 1.0; 0.0],
 C=[0.0,1.0,1.0],
 D=[0.0])
 
-
+Real Ts = 0.1;
+Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
+DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
 
 <b>algorithm</b>
-Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
-// gives:
+Modelica_LinearSystems2.StateSpace.Plot.step(dss, tSpan=3)
 </pre></blockquote>
-
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/stepResponseSS.png\">
-</p>
-<p>
-</p>
-
 
 </html> "));
 end step;
@@ -2316,17 +2545,17 @@ algorithm
     annotation (interactive=true, Documentation(info="<html> 
 <p><b><font style=\"color: #008000; \">Syntax</font></b></p>
 <blockquote><pre>
-StateSpace.Plot.<b>ramp</b>(ss);
+DiscreteStateSpace.Plot.<b>ramp</b>(ss);
 or
-StateSpace.Plot.<b>ramp</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+DiscreteStateSpace.Plot.<b>ramp</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>ramp</b> plots the ramp responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
+Function <b>ramp</b> plots the ramp responses of a discrete state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
 
 
 
@@ -2340,19 +2569,13 @@ B=[1.0; 1.0; 0.0],
 C=[1.0,1.0,1.0],
 D=[0.0])
 
-
+Real Ts = 0.1;
+Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.RampExact;
+DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
 
 <b>algorithm</b>
-Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
-// gives:
+Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp(dss)
 </pre></blockquote>
-
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/rampResponseSS.png\">
-</p>
-<p>
-</p>
 
 
 </html> "));
@@ -2401,17 +2624,17 @@ algorithm
   annotation (interactive=true, Documentation(info="<html> 
 <p><b><font style=\"color: #008000; \">Syntax</font></b></p>
 <blockquote><pre>
-StateSpace.Plot.<b>initial</b>(ss);
+DiscreteStateSpace.Plot.<b>initial</b>(ss);
 or
-StateSpace.Plot.<b>initial</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+DiscreteStateSpace.Plot.<b>initial</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>initial</b> plots the initial responses of a state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>.
+Function <b>initial</b> plots the initial responses of a discrete state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>.
 
 
 
@@ -2427,21 +2650,14 @@ D=[0.0])
 
 Real x0={1,0.5,0.5}; 
 
+Real Ts = 0.1;
+Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
+DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
 
 
 <b>algorithm</b>
-Modelica_LinearSystems2.StateSpace.Plot.initial(ss, x0=x0)
-// gives:
+Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial(dss, x0=x0)
 </pre></blockquote>
-
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/initialResponseSS.png\">
-</p>
-<p>
-</p>
-
-
 </html> "));
 end initialResponse;
 
@@ -2526,11 +2742,12 @@ algorithm
   annotation (interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)  </td> </tr>
+<tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteStateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Generate a StateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record.
+Generate a DiscreteStateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation.
+The result of linearization is transformed into a StateSpace record and then converted into a DiscreteStateSpace record
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
@@ -2538,18 +2755,36 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
    Real T_linearize = 5;
 
 <b>algorithm</b>
-  ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName, T_linearize);
+  dss = Modelica_LinearSystems2.DiscreteStateSpace.Import.fromModel(modelName, T_linearize);
 
-// ss.A = [ 0.0,   1.0,    0.0,            0.0,      0.0,     0.0;
-            0.0,   0.0,          -2.26,    0.08,     1.95,   -0.45;
-            0.0,   0.0,           0.0,            1.0,      0.0,     0.0;
-            0.0,   0.0,          -3.09,   -1.38,     7.70,   -3.01;
-            0.0,   0.0,           0.0,            0.0,      0.0,     1.0;
-            0.0,   0.0,          -6.47,    1.637,   -2.90,    1.29],
+// ss.A  = [1, 0.1, 0.0338415578929376, 0.00169207789464688, -0.010114371760331, -0.000505718588016548;
+            0, 1, 0.676831157858752, 0.0338415578929376, -0.202287435206619,   -0.010114371760331;
+            0, 0, 0.892698457060726, 0.0946349228530364, -0.0895698633812754,  -0.00447849316906376;
+            0, 0, -2.14603085878547, 0.892698457060726, -1.79139726762551, -0.0895698633812755;
+            0, 0, 0.0738077919657481, 0.0036903895982874, 1.0110083777752, 0.10055041888876;
+            0, 0, 1.47615583931496, 0.0738077919657481, 0.220167555503916, 1.0110083777752];
 
-// ss.B=[0.0; 0.13; 0.0; -0.014; 0.0; -0.1],
+// ss.B= [0.00170323086692055;
+          0.0165800882263292;
+         -0.00215003506298196;
+         -0.02103518146498;
+          0.00152042385523347;
+          0.0144812915324601];
+          
 // ss.C=identity(6),
-// ss.D=[0; 0; 0; 0; 0; 0]
+// ss.D= [0.000437113227802044;
+          0.00874226455604088;
+         -0.000549137994799829;
+         -0.0109827598973295;
+          0.000398179639293453;
+          0.00796359278610463];
+          
+ss.B2  = [0.000437113227802044;
+          0.00874226455604088;
+         -0.000549137994866478;
+         -0.0109827598973295;
+          0.000398179639305232;
+          0.00796359278610463];
       
 
                 
@@ -2616,23 +2851,26 @@ end fromModel;
     annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> StateSpace.Import.<b>fromFile</b>(fileName, matrixName)  </td> </tr>
+<tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteStateSpace.Import.<b>fromFile</b>(fileName, matrixName)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file must contain the matrix [A, B; C, D] named matrixName and the integer nx representing the order of the system, i.e. the number of rows of the square matrix A.
+Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>. The file must contain the matrix [A, B; C, D] named matrixName, the matris B2 and the integer nx representing the order of the system, i.e. the number of rows of the square matrix A.
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
      
 
 <b>algorithm</b>
-  ss:=Modelica_LinearSystems2.StateSpace.Import.fromFile(\"stateSpace.mat\", \"ABCD\");
-//  ss=StateSpace(
-      A=[-1, 0, 0; 0, -2, 0; 0, 0, -3],
-      B=[1; 1; 0],
-      C=[1, 1, 1],
-      D=[0])
+  dss:=Modelica_LinearSystems2.DiscreteStateSpace.Import.fromFile(\"dss.mat\");
+//  dss=StateSpace(
+      A=[-4.5, 1.5, 4.0; -4.0, 1.0, 4.0; -1.5, -0.5, 1],
+      B=[2; 1; 2],
+      C=[1, 0, 0],
+      D=[0],
+      B2=[0;0;0],
+      Ts=0.2,
+      method=Trapezoidal);
 
 
 </pre></blockquote>
@@ -2711,8 +2949,12 @@ function timeResponseSamples
   Real indices[size(dss.A, 1)];
   Integer i;
 algorithm
-  eig := Modelica_LinearSystems2.StateSpace.Analysis.eigenValues(dss);
-  eig := Complex.log(eig)/dss.Ts;
+  eig := Modelica_LinearSystems2.DiscreteStateSpace.Analysis.eigenValues(dss);
+  for i in 1:size(dss.A, 1) loop
+    eig[i] := if Complex.'abs'(eig[i])>1e-10 then Complex.log(eig[i])/dss.Ts else Complex(-100);
+  end for;
+
+  //eig := Complex.log(eig)/dss.Ts;
   for i in 1:size(eig, 1) loop
     realp[i] := eig[i].re;
   end for;

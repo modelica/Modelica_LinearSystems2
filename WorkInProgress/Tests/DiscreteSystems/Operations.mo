@@ -50,16 +50,13 @@ protected
   Boolean ok=true;
 
 algorithm
-  Modelica.Utilities.Streams.print("dzp4 = "+String(dzp4));
-  Modelica.Utilities.Streams.print("dtf4 = "+String(dtf4));
-
   if doPlot then
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss2);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp2);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.step(dtf2);
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss3);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp3);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.step(dtf3);
+    Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss2, tSpan=tSpan);
+    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp2, tSpan=tSpan);
+    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.step(dtf2, tSpan=tSpan);
+    Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss3, tSpan=tSpan);
+    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp3, tSpan=tSpan);
+    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.step(dtf3, tSpan=tSpan);
   end if;
 
 // ###############  '+'  #################
