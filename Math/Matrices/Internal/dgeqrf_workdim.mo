@@ -9,7 +9,7 @@ function dgeqrf_workdim
   output Integer info;
 
 protected
-  Real work[:];
+  Real work[max(1,size(A,1))];
 
 algorithm
   (,,info,work) := LAPACK.dgeqrf(A, -1);

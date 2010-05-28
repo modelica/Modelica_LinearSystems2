@@ -34,3 +34,8 @@ sylvester
 toUpperHessenberg
 trace
 Internal
+cholesky
+choleskyUpDate
+choleskyDownDate
+solve2r
+triangle

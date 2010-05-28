@@ -1949,77 +1949,85 @@ end Conversion;
 encapsulated package Design
 function kfStepMatrices
       "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
-extends Modelica.Icons.Function;
+  extends Modelica.Icons.Function;
 
-import Modelica;
-import Modelica_LinearSystems2;
-import Modelica_LinearSystems2.Math;
-import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
 
-input Real A[:,size(A, 1)] "Transition matrix of the discrete system";
-input Real B[size(A, 1),:] "Input matrix of the discrete system";
-input Real C[:,size(A, 1)] "Output matrix of the discrete system";
-input Real P[size(A, 1),size(A, 1)]
+  input Real A[:,size(A, 1)] "Transition matrix of the discrete system";
+  input Real B[size(A, 1),:] "Input matrix of the discrete system";
+  input Real C[:,size(A, 1)] "Output matrix of the discrete system";
+  input Real P[size(A, 1),size(A, 1)]
         "State covariance matrix of the previous instant";
-input Real Q[size(B, 2),size(B, 2)]
+  input Real Q[size(B, 2),size(B, 2)]
         "Input or process noise covariance matrix of the previous instant";
-input Real R[size(C, 1),size(C, 1)]
+  input Real R[size(C, 1),size(C, 1)]
         "Output or measurement noise covariance matrix of the previous instant";
 
-output Real K[size(A, 1),size(C, 1)]=P*transpose(C) "Kalman filter gain matrix";
-output Real P_new[size(A, 1),size(A, 1)] "Updated state covariance matrix";
-output Real UMutri[size(C, 1),size(C, 1)]
-        "Square root (left Cholesky factor) of the covariance matrix M";
-output Real M[size(C, 1),size(C, 1)]=DiscreteStateSpace.Internal.symMatMul(C, P, R, true)
-        "Upper triangle of measurement prediction covariance C*P*C' + R";
+  output Real K[size(A, 1),size(C, 1)]=P*transpose(C)
+        "Kalman filter gain matrix";
+  output Real P_new[size(A, 1),size(A, 1)] "Updated state covariance matrix";
 
-output Real PCT[size(A, 1),size(C, 1)]=P*transpose(C) "Matrix P*C'";
+   output Real UMutri[size(C, 1),size(C, 1)]
+        "Square root (left Cholesky factor) of the covariance matrix M";
+  output Real M[size(C, 1),size(C, 1)];//=DiscreteStateSpace.Internal.symMatMul(C, P, R, true) "Upper triangle of measurement prediction covariance C*P*C' + R";
+
+  output Real PCT[size(A, 1),size(C, 1)];//=P*transpose(C) "Matrix P*C'";
+
     protected
-Integer nx=size(A, 1) "Number of states, order of the system";
-Integer nu=size(B, 2) "Number of inputs";
-Integer ny=size(C, 1) "number of outputs";
-Integer l1;
-Integer l2;
-Real alpha=1.0;
+  Integer nx=size(A, 1) "Number of states, order of the system";
+  Integer nu=size(B, 2) "Number of inputs";
+  Integer ny=size(C, 1) "number of outputs";
+  Integer l1;
+  Integer l2;
+  Real alpha=1.0;
+  Real mnorm;
+  Real mrcond;
+
+  Real eps=1e-5;
 
 // Real P[size(A, 1),size(A, 1)]=P_in    "State covariance matrix of the previous instant";
 
-Integer info;
+  Integer info;
 
 algorithm
-//PCT:=P*transpose(C) "Matrix P*C'";
-//M:=DiscreteStateSpace.Internal.symMatMul(C, P, R, true)     "Upper triangle of measurement prediction covariance C*P*C' + R";
-(UMutri,info) := LAPACK.dpotrf(M, true);// Calculate the Cholesky factorization U*U' of M
-assert(info == 0, "Calculating a Cholesky decomposition with function \"Lapack.dpotrf\" failed in function \"kfStep\".");
-for l1 in 2:ny loop
-  for l2 in 1:l1 - 1 loop
-    UMutri[l1, l2] := 0.0;
-  end for;
-end for;
+PCT:=P*transpose(C) "Matrix P*C'";
+M:=Math.Matrices.Internal.symMatMul(     C, P, R, true)
+        "Upper triangle of measurement prediction covariance C*P*C' + R";
+  mnorm := LAPACK.dlansy(M, "1", true);
+  (UMutri,info) := LAPACK.dpotrf(M, true);// Calculate the Cholesky factorization U*U' of M
+  assert(info == 0, "Calculating a Cholesky decomposition with function \"Lapack.dpotrf\" failed in function \"kfMatrices\".");
+  (mrcond,info) := LAPACK.dpocon(UMutri, mnorm, true);
+  assert(info == 0, "Calculating the reciprocal condition number with function \"Lapack.dpocon\" failed in function \"kfMatrices\".");
+//  assert(mrcond > eps, "Matrix C*P*C' + R in function \"kfMatrices\" is (numerically) singular");
 
-      //K from K*M = P*C' with K*U'*U = P*C', U is Cholesky factor
-K := LAPACK.dtrsm(UMutri, K, alpha, true, true, false, false);
-K := LAPACK.dtrsm(UMutri, K, alpha, true, true, true, false);
+  for l1 in 2:ny loop
+    for l2 in 1:l1 - 1 loop
+      UMutri[l1, l2] := 0.0;
+    end for;
+  end for;
+
+  //K from K*M = P*C' with K*U'*U = P*C', U is Cholesky factor
+  K := LAPACK.dtrsm(UMutri, K, alpha, true, true, false, false);
+  K := LAPACK.dtrsm(UMutri, K, alpha, true, true, true, false);
 
 // Calculate upper triangle of symmetric P-K*C*P
-for l1 in 1:nx loop
-  for l2 in l1:nx loop
-    P_new[l1, l2] := P[l1, l2] - K[l1, :]*PCT[l2, :];
+  for l1 in 1:nx loop
+    for l2 in l1:nx loop
+      P_new[l1, l2] := P[l1, l2] - K[l1, :]*PCT[l2, :];
+    end for;
   end for;
-end for;
 //Calculate upper triangle of A*(P-K*C*P)*A'
-P_new := DiscreteStateSpace.Internal.symMatMul(A, P_new, P_new, false);
+  P_new := Math.Matrices.Internal.symMatMul(     A, P_new, P_new, false);
 //Calculate upper triangle of A*(P-K*C*P)*A' + B*Q*B'
-P_new := DiscreteStateSpace.Internal.symMatMul(B, Q, P_new, true);
+  P_new := Math.Matrices.Internal.symMatMul(     B, Q, P_new, true);
 
-      // Note that P_new contains the upper triangle of the symmetric covariance matrix.
-      // To complete the matrix, the strict lower triangle could be calculated by
-for l1 in 2:nx loop
-  for l2 in 1:l1-1 loop
-    P_new[l1,l2] := P_new[l2,l1];
-  end for;
-end for;
+  // Note that P_new contains the upper triangle of the symmetric covariance matrix.
+  // To complete the matrix, the strict lower triangle could be calculated by
+  P_new := symmetric(P_new);
 
 end kfStepMatrices;
 
@@ -2053,18 +2061,949 @@ function kfStepState
    Real z[size(dss.A, 1)];
 
 algorithm
-  (K,P_new,UMutri) := DiscreteStateSpace.Design.kfStepMatrices(
-    dss.A,
-    dss.B,
-    dss.C,
-    P,
-    Q,
-    R);
+  (K,P_new,UMutri) := DiscreteStateSpace.Design.kfStepMatrices(dss.A, dss.B, dss.C, P, Q, R);
   z := dss.A*x + dss.B*u;
-  x_new := z - K*(dss.C*z - y);
+  x_new := z - K*(dss.C*z + dss.D*u - y);
 
 end kfStepState;
 
+function ukfPredict "Prediction step in ukf"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+  input Real x[:] "Estimated vector of previous instant";
+  input Real P[size(x, 1),size(x, 1)]
+        "State covariance matrix of the previous instant";
+  input Real Q[size(P, 1),:] "Covariance matrix of the process noise";
+  input Real uk[:] "Input at instant k";
+  input Real Sol[size(x, 1)] "Solution of tustin approximation";
+  input Real alpha;
+  input Real beta;
+  input Real kappa "Scaling parameter";
+
+  output Real mu[size(x, 1)] "Predicted mean";
+  output Real Pk[size(x, 1),size(x, 1)] "Transformed covariance matrix";
+
+    protected
+  Integer n=size(x, 1);
+  Real sigmas[size(x, 1),2*size(x, 1) + 1] "Sigma points";
+  Real fSigmas[size(Q, 2),2*size(x, 1) + 1] "Mapped sigma points";
+  Real CFP[n,n] "Square root (left Cholesky factor) of the covariance matrix P";
+  Integer info;
+
+  Real lambda = (alpha^2)*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+
+algorithm
+  (CFP,info) := LAPACK.dpotrf(a*P, false);// declare CFP as lower trangular instead of additional transposing -> P has to be full
+  assert(info == 0, "Cholesky factor was not computed successfully in ukfSigmaPoints");
+
+// Compute sigma points
+  sigmas[:, 1] := x;
+  for i in 1:n loop
+    sigmas[:, i + 1] := x;
+    sigmas[:, i + n + 1] := x;
+    for j in i:n loop
+      sigmas[j, i + 1] := sigmas[j, i + 1] + CFP[j, i];
+      sigmas[j, i + n + 1] := sigmas[j, i + n + 1] - CFP[j, i];
+    end for;
+  end for;
+
+// Compute update of sigma points from x_k+1 = f(x_k,u_k)
+  for i in 1:2*n+1 loop
+     fSigmas[:,i] := sigmas[:, i] + Sol;
+  end for;
+
+  mu := wm0*fSigmas[:, 1];
+  for i in 1:n loop
+    mu[i] := mu[i] + wmi*sum(fSigmas[i, 2:2*n + 1]);
+  end for;
+
+//Compute predicted covariace Pk = sum(w_i*(hSigma_i-mu_i)*(hSigma_i-mu_i)'), i=0,...,2n+1
+// Since Pk will be symmetric, only the upper traiangle is calculated
+// i=2,..,2n+1 with constant weight wci first
+  for j in 1:n loop
+    for i in 2:2*n + 1 loop
+      Pk[1:j, j] := Pk[1:j, j] + (fSigmas[j, i] - mu[j])*(fSigmas[1:j, i] - mu[1:j]);
+    end for;
+  end for;
+  Pk := wci*Pk;
+// first element with weight wc0
+  for j in 1:n loop
+    Pk[1:j, j] := Pk[1:j, j] + wc0*(fSigmas[j, 1] - mu[j])*(fSigmas[1:j, 1] - mu[1:j]);
+  end for;
+  Pk := symmetric(Pk);
+
+  // Pk := wc0*(matrix(fSigmas[:, 1] - mu))*transpose(matrix(fSigmas[:, 1] - mu));
+  //  for i in 2:2*n + 1 loop
+  //     Pk := Pk + wci*(matrix(fSigmas[:, i] - mu))*transpose(matrix(fSigmas[:, i] - mu));
+  //   end for;
+
+  Pk := Pk+Q;
+
+end ukfPredict;
+
+function ukfUpdate "Update step in ukf"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.Math.Matrices;
+
+  input Real x[:] "Estimated vector of previous instant";
+  input Real P[size(x, 1),size(x, 1)]
+        "State covariance matrix of the previous instant";
+  input Real R[:,size(R, 1)] "Covariance matrix of the measurement noise";
+  input Real uk[:] "Input at instant k";
+  input Real alpha;
+  input Real beta;
+  input Real kappa "Scaling parameter";
+
+  output Real mu[size(R, 1)] "Predicted mean";
+  output Real Ryy[size(R, 1),size(R, 1)] "Transformed covariance matrix";
+  output Real Rxy[size(x, 1),size(R, 1)] "Transformed cross covariance matrix";
+
+    protected
+  Real CFP[n,n] "Square root (left Cholesky factor) of the covariance matrix P";
+  Integer n=size(x, 1);
+  Integer m=size(R, 1);
+  Real xSigmas[size(x, 1),2*n + 1] "Sigma points";
+  Real ySigmas[size(R, 2),2*n + 1] "Mapped sigma points";
+
+  Integer info;
+
+  Real lambda = (alpha^2)*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+
+algorithm
+  (CFP,info) := LAPACK.dpotrf(a*P, false);// declare P as lower trangular instead of additional transposing -> P has to be full
+  assert(info == 0, "Cholesky factor was not computed successfully in ukfSigmaPoints");
+//CFP := Matrices.cholesky(a*P,false);
+// Compute sigma points
+  xSigmas[:, 1] := x;
+  for i in 1:n loop
+    xSigmas[:, i + 1] := x;
+    xSigmas[:, i + n + 1] := x;
+    for j in i:n loop
+      xSigmas[j, i + 1] := xSigmas[j, i + 1] + CFP[j, i];
+      xSigmas[j, i + n + 1] := xSigmas[j, i + n + 1] - CFP[j, i];
+    end for;
+  end for;
+
+// Compute update of sigma points from x_k+1 = f(x_k,u_k)
+//  ySigmas := DiscreteStateSpace.Internal.ukf_h_of_Sigma(xSigmas, uk);
+
+  for i in 1:2*n+1 loop
+    ySigmas[1,i] := xSigmas[3, i] + 10*sin(xSigmas[1, i]);
+    ySigmas[2,i] := xSigmas[1, i];
+  end for;
+
+  mu := wm0*ySigmas[:, 1];
+  for i in 1:m loop
+    mu[i] := mu[i] + wmi*sum(ySigmas[i, 2:2*n + 1]);
+  end for;
+
+//Compute predicted covariace Ryy = sum(w_i*(hSigma_i-mu_i)*(hSigma_i-mu_i)'), i=0,...,2n+1
+// Sinc Ryy will be symmetric, only the upper triangle is calculated
+// i=2,..,2n+1 with constant weight wci first
+  for j in 1:m loop
+    for i in 2:2*n + 1 loop
+      Ryy[1:j, j] := Ryy[1:j, j] + (ySigmas[j, i] - mu[j])*(ySigmas[1:j, i] - mu[1:j]);
+      Rxy[:, j] := Rxy[:, j] + (ySigmas[j, i] - mu[j])*(xSigmas[:, i] - x);
+    end for;
+  end for;
+  Ryy := wci*Ryy;
+  Rxy := wci*Rxy;
+
+// first element with weight wc0
+  for j in 1:m loop
+    Ryy[1:j, j] := Ryy[1:j, j] + wc0*(ySigmas[j, 1] - mu[j])*(ySigmas[1:j, 1] - mu[1:j]);
+    Rxy[:, j] := Rxy[:, j] + wc0*(ySigmas[j, 1] - mu[j])*(xSigmas[:, 1] - x);
+  end for;
+  Ryy := symmetric(Ryy);
+
+//   Rxy := wc0*matrix(xSigmas[:, 1] - x)*transpose(matrix(ySigmas[:, 1] - mu));
+//    for i in 2:2*n + 1 loop
+//        Rxy := Rxy + wci*matrix(xSigmas[:, i] - x)*transpose(matrix(ySigmas[:, i] - mu));
+//    end for;
+
+  Ryy := Ryy+R;
+
+end ukfUpdate;
+
+function ukfEstimate
+      "Calculate filter gain and the updated mean of the state and covariance P"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+//  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+  input Real y[:] "Measured output vector";
+  input Real xm[:] "Predicted state mean";
+  input Real ym[size(y,1)] "Predicted mean";
+  input Real P[size(xm,1),size(xm, 1)] "Covariance matrix";
+  input Real Ryy[size(y,1),size(Ryy, 1)] "Transformed covariance matrix";
+  input Real Rxy[size(xm, 1),size(y, 1)] "Transformed cross covariance matrix";
+
+  output Real K[size(xm,1),size(y,1)] "Filter gain";
+  output Real Pu[size(xm, 1),size(xm, 1)] "Updated State covariance matrix";
+  output Real xmu[size(xm, 1)] "Updated state mean";
+
+    protected
+  Integer info=0;
+
+algorithm
+  K := Modelica_LinearSystems2.Math.Matrices.Internal.solve2rSym_C(
+                                                          Ryy, Rxy);
+
+  Pu := -Modelica_LinearSystems2.Math.Matrices.Internal.symMatMul_C(
+                                                 K,Ryy,-P,true);
+  Pu := symmetric(Pu);
+
+//  Pu := P - K*Ryy*transpose(K);
+//  K[2,:]:={0.01,0.01};
+  xmu := xm + K*(y-ym);
+
+end ukfEstimate;
+
+function kfStepMatrices2
+      "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+
+  input Real A[:,size(A, 1)] "Transition matrix of the discrete system";
+//  input Real B[size(A, 1),:] "Input matrix of the discrete system";
+  input Real C[:,size(A, 1)] "Output matrix of the discrete system";
+  input Real P[size(A, 1),size(A, 1)]
+        "State covariance matrix of the previous instant";
+  input Real Q[size(A, 1),size(A, 1)]
+        "Input or process noise covariance matrix of the previous instant";
+  input Real R[size(C, 1),size(C, 1)]
+        "Output or measurement noise covariance matrix of the previous instant";
+
+  output Real K[size(A, 1),size(C, 1)] "Kalman filter gain matrix";
+  output Real P_new[size(A, 1),size(A, 1)] "Updated state covariance matrix";
+
+    protected
+  Real M[size(C, 1),size(C, 1)];//=DiscreteStateSpace.Internal.symMatMul(C, P, R, true) "Upper triangle of measurement prediction covariance C*P*C' + R";
+
+  Real PCT[size(A, 1),size(C, 1)];//=P*transpose(C) "Matrix P*C'";
+
+  Integer nx=size(A, 1) "Number of states, order of the system";
+//  Integer nu=size(B, 2) "Number of inputs";
+  Integer ny=size(C, 1) "number of outputs";
+  Integer l1;
+  Integer l2;
+  Real alpha=1.0;
+//   Real mrcond;
+//   Real mnorm;
+//   Real UMutri[size(C, 1),size(C, 1)]  "Square root (left Cholesky factor) of the covariance matrix M";
+//   Real eps=1e-5;
+
+// Real P[size(A, 1),size(A, 1)]=P_in    "State covariance matrix of the previous instant";
+
+  Integer info;
+
+algorithm
+  PCT:=P*transpose(C) "Matrix P*C'";
+  M:=Math.Matrices.Internal.symMatMul_C(     C, P, R, true);
+//  M:=C*PCT+R;
+
+//   mnorm := LAPACK.dlansy(M, "1", true);
+//   (UMutri,info) := LAPACK.dpotrf(M, true);// Calculate the Cholesky factorization U*U' of M
+//   assert(info == 0, "Calculating a Cholesky decomposition with function \"Lapack.dpotrf\" failed in function \"kfMatrices\".");
+//   (mrcond,info) := LAPACK.dpocon(UMutri, mnorm, true);
+//   assert(info == 0, "Calculating the reciprocal condition number with function \"Lapack.dpocon\" failed in function \"kfMatrices\".");
+//   assert(mrcond > eps, "Matrix C*P*C' + R in function \"kfMatrices\" is (numerically) singular");
+
+  K := Math.Matrices.Internal.solve2rSym_C(
+                                  M, PCT,false, true);
+//  K := Math.Matrices.solve2rSym(M, PCT,false, true);
+
+// Calculate upper triangle of symmetric P-K*C*P
+  for l1 in 1:nx loop
+    for l2 in l1:nx loop
+      P_new[l1, l2] := P[l1, l2] - K[l1, :]*PCT[l2, :];
+    end for;
+  end for;
+
+////Calculate upper triangle of A*(P-K*C*P)*A'
+//  P_new := DiscreteStateSpace.Internal.symMatMul_C(A, P_new, P_new, false);
+//  P_new := P_new + Q;
+//Calculate upper triangle of A*(P-K*C*P)*A' + Q
+//   P_new := symmetric(P_new);
+//   P_new := A*P_new*transpose(A)+Q;
+  P_new := Math.Matrices.Internal.symMatMul_C(     A, P_new, Q, true);
+
+  // Note that P_new contains the upper triangle of the symmetric covariance matrix.
+  // To complete the matrix, the strict lower triangle could be calculated by
+  P_new := symmetric(P_new);
+
+end kfStepMatrices2;
+
+function sr_ukfPredict "Prediction step in square root ukf"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.Math.Matrices;
+
+  input Real x[:] "Estimated vector of previous instant";
+  input Real S[size(x, 1),size(x, 1)]
+        "Upper triangle Cholesky factor of the state covariance matrix P of the previous instant";
+  input Real CfQ[:,:]
+        "Upper triangle Cholesky factor of the process noise covariance matrix";
+  input Real uk[:] "Input at instant k";
+  input Real Sol[size(x, 1)] "Solution of tustin approximation";
+  input Real alpha;
+  input Real beta;
+  input Real kappa "Scaling parameter";
+
+  output Real mu[size(x, 1)] "Predicted mean";
+  output Real Sk[size(x, 1),size(x, 1)] "Transformed covariance matrix";
+//  output Real xp[size(x, 1)];
+
+    protected
+  Integer n=size(x, 1);
+  Real sigmas[size(x, 1),2*size(x, 1) + 1] "Sigma points";
+  Real fSigmas[size(CfQ, 1),2*size(x, 1) + 1] "Mapped sigma points";
+//  Real CFP[n,n] "Square root (left Cholesky factor) of the covariance matrix P";
+  Integer info;
+
+  Real lambda = (alpha^2)*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+  Real gamma=alpha*sqrt(n);//=sqrt(lambda+n)
+  Real M[size(CfQ, 1),2*size(x, 1)+size(CfQ, 2)];
+
+algorithm
+// Compute sigma points
+  sigmas[:, 1] := x;
+  for i in 1:n loop
+    sigmas[:, i + 1] := x;
+    sigmas[:, i + n + 1] := x;
+    for j in i:n loop   // only lower triangle of S has elements unequal to zero
+      sigmas[j, i + 1] := sigmas[j, i + 1] + gamma*S[j, i];
+      sigmas[j, i + n + 1] := sigmas[j, i + n + 1] - gamma*S[j, i];
+    end for;
+  end for;
+
+// Compute update of sigma points from x_k+1 = f(x_k,u_k)
+  for i in 1:2*n+1 loop
+     fSigmas[:,i] :=sigmas[:, i] + Sol;
+  end for;
+  mu := wm0*fSigmas[:, 1];
+  for i in 1:n loop
+    mu[i] := mu[i] + wmi*sum(fSigmas[i, 2:2*n + 1]);
+  end for;
+
+//Compute predicted Sk
+  for i in 2:2*n + 1 loop
+    M[:, i-1] := fSigmas[:,i]-mu;
+  end for;
+  M := sqrt(wci)*M;
+  M[:,2*n+1:2*size(x, 1)+size(CfQ, 2)] := CfQ;
+
+  (,Sk) := Matrices.QR(transpose(M));
+   for i in 1:n loop
+     if Sk[i,i]<0 then
+       Sk[i,:] := -Sk[i,:];
+     end if;
+   end for;
+
+  if abs(wc0)>0 then
+    if wc0<0 then
+      Sk := Matrices.choleskyDownDate(Sk,sqrt(-wc0)*(fSigmas[:,1]-mu),true);
+    else
+      Sk := Matrices.choleskyUpDate(Sk,sqrt(wc0)*(fSigmas[:,1]-mu),true);
+    end if;
+  end if;
+end sr_ukfPredict;
+
+function sr_ukfUpdate "Update step in square root ukf"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.Math.Matrices;
+
+  input Real x[:] "Estimated vector of previous instant";
+  input Real Sk[size(x, 1),size(x, 1)]
+        "Cholesky factro of the state covariance matrix of the previous instant";
+  input Real CfR[:,size(CfR, 1)]
+        "Cholesky factor of the measurement noise covariance matrix";
+  input Real uk[:] "Input at instant k";
+  input Real alpha;
+  input Real beta;
+  input Real kappa "Scaling parameter";
+
+  output Real mu[size(CfR, 1)] "Predicted mean";
+  output Real Syy[size(CfR, 1),size(CfR, 1)]
+        "Cholesky factor of the transformed covariance matrix";
+  output Real Pxy[size(x, 1),size(CfR, 1)]
+        "Transformed cross covariance matrix";
+
+    protected
+  Integer n=size(x, 1);
+  Integer m=size(CfR, 1);
+  Real xSigmas[size(x, 1),2*n + 1] "Sigma points";
+  Real ySigmas[size(CfR, 2),2*n + 1] "Mapped sigma points";
+
+  Real lambda = (alpha^2)*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+  Real M[size(CfR, 1),2*size(x, 1)+size(CfR, 2)];
+  Real gamma=alpha*sqrt(n);//=sqrt(lambda+n)
+
+algorithm
+// Compute sigma points
+      xSigmas[:, 1] := x;
+      for i in 1:n loop
+        xSigmas[:, i + 1] := x;
+        xSigmas[:, i + n + 1] := x;
+        for j in i:n loop
+// only lower triangle of S has elements unequal to zero
+          xSigmas[j, i + 1] := xSigmas[j, i + 1] + gamma*Sk[j, i];
+          xSigmas[j, i + n + 1] := xSigmas[j, i + n + 1] - gamma*Sk[j, i];
+        end for;
+      end for;
+
+// Compute update of sigma points from x_k+1 = f(x_k,u_k)
+  for i in 1:2*n+1 loop
+    ySigmas[1,i] := xSigmas[3, i] + 10*sin(xSigmas[1, i]);
+    ySigmas[2,i] := xSigmas[1, i];
+  end for;
+  mu := wm0*ySigmas[:, 1];
+  for i in 1:m loop
+    mu[i] := mu[i] + wmi*sum(ySigmas[i, 2:2*n + 1]);
+  end for;
+
+//Compute predicted Sk
+  for i in 2:2*n + 1 loop
+    M[:, i-1] := ySigmas[:,i]-mu;
+  end for;
+  M := sqrt(wci)*M;
+  M[:,2*n+1:2*size(x, 1)+size(CfR, 2)] := CfR;
+
+ (,Syy) := Matrices.QR(transpose(M));
+  for i in 1:m loop
+    if Syy[i,i]<0 then
+      Syy[i,:] := -Syy[i,:];
+    end if;
+  end for;
+
+  if abs(wc0)>0 then
+    if wc0<0 then
+      Syy := Matrices.choleskyDownDate(Syy,sqrt(-wc0)*(ySigmas[:,1]-mu),true);
+    else
+      Syy := Matrices.choleskyUpDate(Syy,sqrt(wc0)*(ySigmas[:,1]-mu),true);
+    end if;
+  end if;
+
+//Compute predicted cross covariace Pxy = sum(w_i*(hSigma_i-mu_i)*(hSigma_i-mu_i)'), i=0,...,2n+1
+// Since Ryy will be symmetric, only the upper traiangle is calculated
+// i=2,..,2n+1 with constant weight wci first
+  for j in 1:m loop
+    for i in 2:2*n + 1 loop
+      Pxy[:, j] := Pxy[:, j] + (ySigmas[j, i] - mu[j])*(xSigmas[:, i] - x);
+    end for;
+  end for;
+  Pxy := wci*Pxy;
+
+// first element with weight wc0
+  for j in 1:m loop
+    Pxy[:, j] := Pxy[:, j] + wc0*(ySigmas[j, 1] - mu[j])*(xSigmas[:, 1] - x);
+  end for;
+
+end sr_ukfUpdate;
+
+function sr_ukfEstimate
+      "Calculate filter gain and the updated mean of the state and Cholesky factor S of covariance P of a UKF"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+//  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+  input Real y[:] "Measured output vector";
+  input Real xm[:] "Predicted state mean";
+  input Real ym[size(y,1)] "Predicted mean";
+  input Real S[size(xm,1),size(xm, 1)] "Cholesky factor of covariance matrix";
+  input Real Syy[size(y,1),size(y, 1)]
+        "Cholesky factor of transformed covariance matrix";
+  input Real Pxy[size(xm, 1),size(y, 1)] "Transformed cross covariance matrix";
+
+  output Real K[size(xm,1),size(y,1)] "Filter gain";
+  output Real Su[size(xm, 1),size(xm, 1)]
+        "Updated Cholesky factor state covariance matrix";
+  output Real xmu[size(xm, 1)] "Updated state mean";
+
+    protected
+  Real U[size(xm,1),size(y,1)];
+algorithm
+  K := LAPACK.dtrsm(Syy, Pxy, 1, true, true, false, false);
+  K := LAPACK.dtrsm(Syy, K, 1, true, true, true, false);
+
+  U := K*transpose(Syy);
+  Su := Matrices.choleskyDownDate(S,U[:,1],true);
+   for i in 2:size(y,1) loop
+     Su := Matrices.choleskyDownDate(Su,U[:,i],true);
+   end for;
+
+//  K[2,:]:={0.01,0.01};
+  xmu := xm + K*(y-ym);
+
+end sr_ukfEstimate;
+
+function ukfPredict2 "Prediction step in ukf"
+  extends Modelica.Icons.Function;
+  import Modelica.Math.Matrices.LU_solve;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+  input Real x[:] "Estimated vector of previous instant";
+  input Real P[size(x, 1),size(x, 1)]
+        "State covariance matrix of the previous instant";
+  input Real Q[size(P, 1),:] "Covariance matrix of the process noise";
+  input Real uk[:] "Input at instant k";
+  input Real F_x[size(x, 1),size(x, 1)] "Solution of tustin approximation";
+  input Real alpha;
+  input Real beta;
+  input Real kappa "Scaling parameter";
+  input Real Ts;
+
+  output Real mu[size(x, 1)] "Predicted mean";
+  output Real Pk[size(x, 1),size(x, 1)] "Transformed covariance matrix";
+
+    protected
+  Integer n=size(x, 1);
+  Real sigmas[size(x, 1),2*size(x, 1) + 1] "Sigma points";
+  Real fSigmas[size(Q, 2),2*size(x, 1) + 1] "Mapped sigma points";
+  Real CFP[n,n] "Square root (left Cholesky factor) of the covariance matrix P";
+  Integer info;
+
+  Real lambda = (alpha^2)*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+  Real F_x_h[n,1] "FOS system function RHS";
+  Real Sol[n] "Solution of tustin approximation";
+  Real LU[n,n] "LU decomposition";
+  Integer pivots[n] "Pivots of LU decomposition";
+
+algorithm
+  (CFP,info) := LAPACK.dpotrf(a*P, false);// declare CFP as lower trangular instead of additional transposing -> P has to be full
+  assert(info == 0, "Cholesky factor was not computed successfully in ukfSigmaPoints");
+
+// Compute sigma points
+  sigmas[:, 1] := x;
+  for i in 1:n loop
+    sigmas[:, i + 1] := x;
+    sigmas[:, i + n + 1] := x;
+    for j in i:n loop
+      sigmas[j, i + 1] := sigmas[j, i + 1] + CFP[j, i];
+      sigmas[j, i + n + 1] := sigmas[j, i + n + 1] - CFP[j, i];
+    end for;
+  end for;
+
+// Compute update of sigma points from x_k+1 = f(x_k,u_k)
+  (LU,pivots) :=Modelica.Math.Matrices.LU(identity(n) - (Ts/2)*F_x);
+  for i in 1:2*n+1 loop
+   F_x_h :=[sigmas[2,i]; -(4000*cos(sigmas[1,i])*sin(sigmas[1,i])*sigmas[2,i]^2 + 4905*sin(sigmas[1,i]) + (uk[1]
+      *cos(sigmas[1,i]))/10)/(1000*(4*sin(sigmas[1,i]) + 1)); sigmas[4,i]; (uk[1]/1000 - 10*sigmas[2,i]^2
+       + (981*sin(2*sigmas[1,i]))/50)/(4*sin(sigmas[1,i]) + 1) + 10*sigmas[2,i]^2];
+    Sol :=LU_solve(LU, pivots, Ts*vector(F_x_h));
+
+     fSigmas[:,i] := sigmas[:, i] + Sol;
+  end for;
+
+  mu := wm0*fSigmas[:, 1];
+  for i in 1:n loop
+    mu[i] := mu[i] + wmi*sum(fSigmas[i, 2:2*n + 1]);
+  end for;
+
+//Compute predicted covariace Pk = sum(w_i*(hSigma_i-mu_i)*(hSigma_i-mu_i)'), i=0,...,2n+1
+// Since Pk will be symmetric, only the upper traiangle is calculated
+// i=2,..,2n+1 with constant weight wci first
+  for j in 1:n loop
+    for i in 2:2*n + 1 loop
+      Pk[1:j, j] := Pk[1:j, j] + (fSigmas[j, i] - mu[j])*(fSigmas[1:j, i] - mu[1:j]);
+    end for;
+  end for;
+  Pk := wci*Pk;
+// first element with weight wc0
+  for j in 1:n loop
+    Pk[1:j, j] := Pk[1:j, j] + wc0*(fSigmas[j, 1] - mu[j])*(fSigmas[1:j, 1] - mu[1:j]);
+  end for;
+  Pk := symmetric(Pk);
+
+  // Pk := wc0*(matrix(fSigmas[:, 1] - mu))*transpose(matrix(fSigmas[:, 1] - mu));
+  //  for i in 2:2*n + 1 loop
+  //     Pk := Pk + wci*(matrix(fSigmas[:, i] - mu))*transpose(matrix(fSigmas[:, i] - mu));
+  //   end for;
+
+  Pk := Pk+Q;
+
+end ukfPredict2;
+
+function ukfPredict3 "Prediction step in ukf"
+  extends Modelica.Icons.Function;
+  import Modelica.Math.Matrices.LU_solve;
+  import Modelica.Math.Matrices.solve;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+  input Real x[:] "Estimated vector of previous instant";
+  input Real P[size(x, 1),size(x, 1)]
+        "State covariance matrix of the previous instant";
+  input Real Q[size(P, 1),:] "Covariance matrix of the process noise";
+  input Real uk[:] "Input at instant k";
+
+  input Real alpha;
+  input Real beta;
+  input Real kappa "Scaling parameter";
+  input Real Ts;
+
+  output Real mu[size(x, 1)] "Predicted mean";
+  output Real Pk[size(x, 1),size(x, 1)] "Transformed covariance matrix";
+
+    protected
+  Integer n=size(x, 1);
+  Real sigmas[size(x, 1),2*size(x, 1) + 1] "Sigma points";
+  Real fSigmas[size(Q, 2),2*size(x, 1) + 1] "Mapped sigma points";
+  Real CFP[n,n] "Square root (left Cholesky factor) of the covariance matrix P";
+  Integer info;
+
+  Real lambda = (alpha^2)*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+  Real F_x_h[n,1] "FOS system function RHS";
+  Real Sol[n] "Solution of tustin approximation";
+//  Real LU[n,n] "LU decomposition";
+//  Integer pivots[n] "Pivots of LU decomposition";
+  Real dFdx_1[n,1];
+  Real dFdx_2[n,1];
+  Real dFdx_3[n,1]=[0; 0; 0; 0];
+  Real dFdx_4[n,1]=[0; 0; 1; 0];
+  Real F_x[size(x, 1),size(x, 1)] "Solution of tustin approximation";
+
+algorithm
+  (CFP,info) := LAPACK.dpotrf(a*P, false);// declare CFP as lower trangular instead of additional transposing -> P has to be full
+  assert(info == 0, "Cholesky factor was not computed successfully in ukfSigmaPoints");
+
+// Compute sigma points
+  sigmas[:, 1] := x;
+  for i in 1:n loop
+    sigmas[:, i + 1] := x;
+    sigmas[:, i + n + 1] := x;
+    for j in i:n loop
+      sigmas[j, i + 1] := sigmas[j, i + 1] + CFP[j, i];
+      sigmas[j, i + n + 1] := sigmas[j, i + n + 1] - CFP[j, i];
+    end for;
+  end for;
+
+// Compute update of sigma points from x_k+1 = f(x_k,u_k)
+
+  for i in 1:2*n+1 loop
+   F_x_h :=[sigmas[2,i]; -(4000*cos(sigmas[1,i])*sin(sigmas[1,i])*sigmas[2,i]^2 + 4905*sin(sigmas[1,i]) + (uk[1]
+      *cos(sigmas[1,i]))/10)/(1000*(4*sin(sigmas[1,i]) + 1)); sigmas[4,i]; (uk[1]/1000 - 10*sigmas[2,i]^2
+       + (981*sin(2*sigmas[1,i]))/50)/(4*sin(sigmas[1,i]) + 1) + 10*sigmas[2,i]^2];
+
+      dFdx_1 :=[0; -((981*cos(sigmas[1, i]))/200 - uk[1]/2500 + 4*sigmas[2, i]^2
+      *cos(2*sigmas[1, i]) + 4*sigmas[2, i]^2*sin(3*sigmas[1, i]) - sin(sigmas[1,
+      i])*(12*sigmas[2, i]^2 + uk[1]/10000))/(4*sin(sigmas[1, i]) + 1)^2; 0; (40
+      *cos(sigmas[1, i])*sigmas[2, i]^2 + (981*sin(3*sigmas[1, i]))/25 - (1962*
+      sin(sigmas[1, i]))/25 - (uk[1]*cos(sigmas[1, i]))/250 + 8829/200)/(4*sin(
+      sigmas[1, i]) + 1)^2 - 981/200];
+
+     dFdx_2 :=[1; -(4*sigmas[2, i]*sin(2*sigmas[1, i]))/(4*sin(sigmas[1, i]) + 1);
+       0; 20*sigmas[2, i] - (20*sigmas[2, i])/(4*sin(sigmas[1, i]) + 1)];
+    F_x :=[dFdx_1,dFdx_2,dFdx_3,dFdx_4];
+//   (LU,pivots) :=Modelica.Math.Matrices.LU(identity(n) - (Ts/2)*F_x);
+    Sol :=solve(identity(n) - (Ts/2)*F_x, Ts*vector(F_x_h));
+
+     fSigmas[:,i] := sigmas[:, i] + Sol;
+  end for;
+
+  mu := wm0*fSigmas[:, 1];
+  for i in 1:n loop
+    mu[i] := mu[i] + wmi*sum(fSigmas[i, 2:2*n + 1]);
+  end for;
+
+//Compute predicted covariace Pk = sum(w_i*(hSigma_i-mu_i)*(hSigma_i-mu_i)'), i=0,...,2n+1
+// Since Pk will be symmetric, only the upper traiangle is calculated
+// i=2,..,2n+1 with constant weight wci first
+  for j in 1:n loop
+    for i in 2:2*n + 1 loop
+      Pk[1:j, j] := Pk[1:j, j] + (fSigmas[j, i] - mu[j])*(fSigmas[1:j, i] - mu[1:j]);
+    end for;
+  end for;
+  Pk := wci*Pk;
+// first element with weight wc0
+  for j in 1:n loop
+    Pk[1:j, j] := Pk[1:j, j] + wc0*(fSigmas[j, 1] - mu[j])*(fSigmas[1:j, 1] - mu[1:j]);
+  end for;
+  Pk := symmetric(Pk);
+
+  // Pk := wc0*(matrix(fSigmas[:, 1] - mu))*transpose(matrix(fSigmas[:, 1] - mu));
+  //  for i in 2:2*n + 1 loop
+  //     Pk := Pk + wci*(matrix(fSigmas[:, i] - mu))*transpose(matrix(fSigmas[:, i] - mu));
+  //   end for;
+
+  Pk := Pk+Q;
+
+end ukfPredict3;
+
+function sr_ukfPredict2 "Prediction step in square root ukf"
+  extends Modelica.Icons.Function;
+  import Modelica.Math.Matrices.LU_solve;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.Math.Matrices;
+
+  input Real x[:] "Estimated vector of previous instant";
+  input Real S[size(x, 1),size(x, 1)]
+        "Upper triangle Cholesky factor of the state covariance matrix P of the previous instant";
+  input Real CfQ[:,:]
+        "Upper triangle Cholesky factor of the process noise covariance matrix";
+  input Real uk[:] "Input at instant k";
+  input Real F_x[size(x, 1),size(x, 1)] "Solution of tustin approximation";
+  input Real alpha;
+  input Real beta;
+  input Real kappa "Scaling parameter";
+  input Real Ts;
+
+  output Real mu[size(x, 1)] "Predicted mean";
+  output Real Sk[size(x, 1),size(x, 1)] "Transformed covariance matrix";
+//  output Real xp[size(x, 1)];
+
+    protected
+  Integer n=size(x, 1);
+  Real sigmas[size(x, 1),2*size(x, 1) + 1] "Sigma points";
+  Real fSigmas[size(CfQ, 1),2*size(x, 1) + 1] "Mapped sigma points";
+//  Real CFP[n,n] "Square root (left Cholesky factor) of the covariance matrix P";
+  Integer info;
+
+  Real lambda = (alpha^2)*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+  Real gamma=alpha*sqrt(n);//=sqrt(lambda+n)
+  Real M[size(CfQ, 1),2*size(x, 1)+size(CfQ, 2)];
+  Real F_x_h[n,1] "FOS system function RHS";
+  Real Sol[n] "Solution of tustin approximation";
+  Real LU[n,n] "LU decomposition";
+  Integer pivots[n] "Pivots of LU decomposition";
+
+algorithm
+// Compute sigma points
+  sigmas[:, 1] := x;
+  for i in 1:n loop
+    sigmas[:, i + 1] := x;
+    sigmas[:, i + n + 1] := x;
+    for j in i:n loop   // only lower triangle of S has elements unequal to zero
+      sigmas[j, i + 1] := sigmas[j, i + 1] + gamma*S[j, i];
+      sigmas[j, i + n + 1] := sigmas[j, i + n + 1] - gamma*S[j, i];
+    end for;
+  end for;
+
+// Compute update of sigma points from x_k+1 = f(x_k,u_k)
+   (LU,pivots) :=Modelica.Math.Matrices.LU(identity(n) - (Ts/2)*F_x);
+
+    for i in 1:2*n+1 loop
+   F_x_h :=[sigmas[2,i]; -(4000*cos(sigmas[1,i])*sin(sigmas[1,i])*sigmas[2,i]^2 + 4905*sin(sigmas[1,i]) + (uk[1]
+      *cos(sigmas[1,i]))/10)/(1000*(4*sin(sigmas[1,i]) + 1)); sigmas[4,i]; (uk[1]/1000 - 10*sigmas[2,i]^2
+       + (981*sin(2*sigmas[1,i]))/50)/(4*sin(sigmas[1,i]) + 1) + 10*sigmas[2,i]^2];
+    Sol :=LU_solve(LU, pivots, Ts*vector(F_x_h));
+
+     fSigmas[:,i] :=sigmas[:, i] + Sol;
+  end for;
+
+  mu := wm0*fSigmas[:, 1];
+  for i in 1:n loop
+    mu[i] := mu[i] + wmi*sum(fSigmas[i, 2:2*n + 1]);
+  end for;
+
+//Compute predicted Sk
+  for i in 2:2*n + 1 loop
+    M[:, i-1] := fSigmas[:,i]-mu;
+  end for;
+  M := sqrt(wci)*M;
+  M[:,2*n+1:2*size(x, 1)+size(CfQ, 2)] := CfQ;
+
+  (,Sk) := Matrices.QR(transpose(M));
+   for i in 1:n loop
+     if Sk[i,i]<0 then
+       Sk[i,:] := -Sk[i,:];
+     end if;
+   end for;
+
+  if abs(wc0)>0 then
+    if wc0<0 then
+      Sk := Matrices.choleskyDownDate(Sk,sqrt(-wc0)*(fSigmas[:,1]-mu),true);
+    else
+      Sk := Matrices.choleskyUpDate(Sk,sqrt(wc0)*(fSigmas[:,1]-mu),true);
+    end if;
+  end if;
+end sr_ukfPredict2;
+
+function sr_ukfPredict3 "Prediction step in square root ukf"
+  extends Modelica.Icons.Function;
+  import Modelica.Math.Matrices.solve;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.Math.Matrices;
+
+  input Real x[:] "Estimated vector of previous instant";
+  input Real S[size(x, 1),size(x, 1)]
+        "Upper triangle Cholesky factor of the state covariance matrix P of the previous instant";
+  input Real CfQ[:,:]
+        "Upper triangle Cholesky factor of the process noise covariance matrix";
+  input Real uk[:] "Input at instant k";
+  input Real alpha;
+  input Real beta;
+  input Real kappa "Scaling parameter";
+  input Real Ts;
+
+  output Real mu[size(x, 1)] "Predicted mean";
+  output Real Sk[size(x, 1),size(x, 1)] "Transformed covariance matrix";
+//  output Real xp[size(x, 1)];
+
+    protected
+  Integer n=size(x, 1);
+  Real sigmas[size(x, 1),2*size(x, 1) + 1] "Sigma points";
+  Real fSigmas[size(CfQ, 1),2*size(x, 1) + 1] "Mapped sigma points";
+//  Real CFP[n,n] "Square root (left Cholesky factor) of the covariance matrix P";
+  Integer info;
+
+  Real lambda = (alpha^2)*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+  Real gamma=alpha*sqrt(n);//=sqrt(lambda+n)
+  Real M[size(CfQ, 1),2*size(x, 1)+size(CfQ, 2)];
+  Real F_x_h[n,1] "FOS system function RHS";
+  Real Sol[n] "Solution of tustin approximation";
+//  Real LU[n,n] "LU decomposition";
+//  Integer pivots[n] "Pivots of LU decomposition";
+  Real dFdx_1[n,1];
+  Real dFdx_2[n,1];
+  Real dFdx_3[n,1]=[0; 0; 0; 0];
+  Real dFdx_4[n,1]=[0; 0; 1; 0];
+  Real F_x[size(x, 1),size(x, 1)] "Solution of tustin approximation";
+
+algorithm
+// Compute sigma points
+  sigmas[:, 1] := x;
+  for i in 1:n loop
+    sigmas[:, i + 1] := x;
+    sigmas[:, i + n + 1] := x;
+    for j in i:n loop   // only lower triangle of S has elements unequal to zero
+      sigmas[j, i + 1] := sigmas[j, i + 1] + gamma*S[j, i];
+      sigmas[j, i + n + 1] := sigmas[j, i + n + 1] - gamma*S[j, i];
+    end for;
+  end for;
+
+// Compute update of sigma points from x_k+1 = f(x_k,u_k)
+    for i in 1:2*n+1 loop
+     F_x_h :=[sigmas[2,i]; -(4000*cos(sigmas[1,i])*sin(sigmas[1,i])*sigmas[2,i]^2 + 4905*sin(sigmas[1,i]) + (uk[1]
+      *cos(sigmas[1,i]))/10)/(1000*(4*sin(sigmas[1,i]) + 1)); sigmas[4,i]; (uk[1]/1000 - 10*sigmas[2,i]^2
+       + (981*sin(2*sigmas[1,i]))/50)/(4*sin(sigmas[1,i]) + 1) + 10*sigmas[2,i]^2];
+
+      dFdx_1 :=[0; -((981*cos(sigmas[1, i]))/200 - uk[1]/2500 + 4*sigmas[2, i]^2
+      *cos(2*sigmas[1, i]) + 4*sigmas[2, i]^2*sin(3*sigmas[1, i]) - sin(sigmas[1,
+      i])*(12*sigmas[2, i]^2 + uk[1]/10000))/(4*sin(sigmas[1, i]) + 1)^2; 0; (40
+      *cos(sigmas[1, i])*sigmas[2, i]^2 + (981*sin(3*sigmas[1, i]))/25 - (1962*
+      sin(sigmas[1, i]))/25 - (uk[1]*cos(sigmas[1, i]))/250 + 8829/200)/(4*sin(
+      sigmas[1, i]) + 1)^2 - 981/200];
+
+     dFdx_2 :=[1; -(4*sigmas[2, i]*sin(2*sigmas[1, i]))/(4*sin(sigmas[1, i]) + 1);
+       0; 20*sigmas[2, i] - (20*sigmas[2, i])/(4*sin(sigmas[1, i]) + 1)];
+    F_x :=[dFdx_1,dFdx_2,dFdx_3,dFdx_4];
+//   (LU,pivots) :=Modelica.Math.Matrices.LU(identity(n) - (Ts/2)*F_x);
+    Sol :=solve(identity(n) - (Ts/2)*F_x, Ts*vector(F_x_h));
+     fSigmas[:,i] :=sigmas[:, i] + Sol;
+  end for;
+
+  mu := wm0*fSigmas[:, 1];
+  for i in 1:n loop
+    mu[i] := mu[i] + wmi*sum(fSigmas[i, 2:2*n + 1]);
+  end for;
+
+//Compute predicted Sk
+  for i in 2:2*n + 1 loop
+    M[:, i-1] := fSigmas[:,i]-mu;
+  end for;
+  M := sqrt(wci)*M;
+  M[:,2*n+1:2*size(x, 1)+size(CfQ, 2)] := CfQ;
+
+  (,Sk) := Matrices.QR(transpose(M));
+   for i in 1:n loop
+     if Sk[i,i]<0 then
+       Sk[i,:] := -Sk[i,:];
+     end if;
+   end for;
+
+  if abs(wc0)>0 then
+    if wc0<0 then
+      Sk := Matrices.choleskyDownDate(Sk,sqrt(-wc0)*(fSigmas[:,1]-mu),true);
+    else
+      Sk := Matrices.choleskyUpDate(Sk,sqrt(wc0)*(fSigmas[:,1]-mu),true);
+    end if;
+  end if;
+end sr_ukfPredict3;
 end Design;
 
 encapsulated package Plot
@@ -2882,57 +3821,6 @@ Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>.
 end Import;
 
 encapsulated package Internal
-function symMatMul
-      "Calculate the upper triangle of A*B*A'+a*C with B and C symmetric"
-  extends Modelica.Icons.Function;
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-
-  input Real A[:,:];
-  input Real B[size(A, 2),size(A, 2)];
-  input Real C[size(A, 1),size(A, 1)];
-  input Boolean add=true "true if a==1, false if a==0";
-  output Real M[size(A, 1),size(A, 1)];
-
-    protected
-  Integer a1=size(A, 1);
-  Integer a2=size(A, 2);
-  Integer i;
-  Integer j;
-
-  Real alpha=1.0;
-  Real beta=if add then 1 else 0;
-
-  Real Butri[a2,a2]=B;
-  Real Cutri[a1,a1]=C;
-  Real Ah[a1,a2];
-
-algorithm
-  for i in 1:a2 loop
-    Butri[i, i] := B[i, i]/2;
-  end for;
-  if add then
-    for i in 1:a1 loop
-      Cutri[i, i] := C[i, i]/2;
-    end for;
-    for i in 2:a1 loop
-      for j in 1:i - 1 loop
-        Cutri[i, j] := 0.0;
-      end for;
-    end for;
-  end if;
-
-  Ah := LAPACK.dtrmm(Butri, A, alpha, true, true, false, false);
-  M := LAPACK.dgemm(Ah, A, Cutri, alpha, beta, false, true);
-// M:= Ah*transpose(A)+Cutri;
-  for i in 1:a1 loop
-    for j in i:a1 loop
-      M[i,j] := M[i,j]+M[j,i];
-    end for;
-  end for;
-
-end symMatMul;
 
 function timeResponseSamples
       "Estimate reasonable discretisation sample time and simulation time span for time response plot"
@@ -3056,6 +3944,9 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
 </p>
 </html>"));
 end timeResponse1;
+
+
+
 end Internal;
 
   annotation (

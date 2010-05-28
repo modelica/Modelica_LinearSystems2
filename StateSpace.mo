@@ -6713,11 +6713,12 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
     input Real T_linearize=0
         "point in time of simulation to linearize the model";
     input String fileName="dslin" "Name of the result file";
+    input String method="Dassl";
     protected
     String fileName2=fileName + ".mat";
-    Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
+    Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize, method=method);
     Boolean OK2 = importInitial("dsfinal.txt");
-    Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize+1);
+    Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize+1, method=method);
 
     Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
     Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
@@ -9477,6 +9478,81 @@ inputs and the number of outputs must be identical.
       ssm1.r := r;
     end if;
   end reducedCtrSystemX;
+
+function read_dslin
+      "Generate a StateSpace data record by linearization of a model"
+
+  import Modelica;
+  import Modelica_LinearSystems2.StateSpace;
+
+  input String fileName="dslin" "Name of the result file";
+
+    protected
+  String fileName2=fileName + ".mat";
+//   Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize, method=method);
+//   Boolean OK2 = importInitial("dsfinal.txt");
+//   Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize+1, method=method);
+
+  Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
+  Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+  Integer nx=integer(nxMat[1, 1]);
+  Integer nu=ABCDsizes[2] - nx;
+  Integer ny=ABCDsizes[1] - nx;
+  Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+  String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
+    public
+  output StateSpace result(
+    redeclare Real A[nx,nx],
+    redeclare Real B[nx,nu],
+    redeclare Real C[ny,nx],
+    redeclare Real D[ny,nu]) "= model linearized at initial point";
+
+algorithm
+  result.A := ABCD[1:nx, 1:nx];
+  result.B := ABCD[1:nx, nx + 1:nx + nu];
+  result.C := ABCD[nx + 1:nx + ny, 1:nx];
+  result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+  result.uNames := xuyName[nx + 1:nx + nu];
+  result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
+  result.xNames := xuyName[1:nx];
+
+        annotation (interactive=true, Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Generate a StateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record.
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   String modelName = \"Modelica_LinearSystems2.Examples.Utilities.DoublePendulum\"; 
+   Real T_linearize = 5;
+
+<b>algorithm</b>
+  ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName, T_linearize);
+
+// ss.A = [ 0.0,   1.0,    0.0,            0.0,      0.0,     0.0;
+            0.0,   0.0,          -2.26,    0.08,     1.95,   -0.45;
+            0.0,   0.0,           0.0,            1.0,      0.0,     0.0;
+            0.0,   0.0,          -3.09,   -1.38,     7.70,   -3.01;
+            0.0,   0.0,           0.0,            0.0,      0.0,     1.0;
+            0.0,   0.0,          -6.47,    1.637,   -2.90,    1.29],
+
+// ss.B=[0.0; 0.13; 0.0; -0.014; 0.0; -0.1],
+// ss.C=identity(6),
+// ss.D=[0; 0; 0; 0; 0; 0]
+      
+
+                
+</pre></blockquote>
+
+
+
+</html> 
+"));
+end read_dslin;
 
 end Internal;
 

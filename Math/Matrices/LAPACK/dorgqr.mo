@@ -9,10 +9,10 @@ function dorgqr
   output Integer info;
 protected
   Integer m=size(Q, 1);
-  Integer n=size(Q, 1);
+  Integer n=size(Q, 2);
   Integer k=size(tau, 1);
   Integer lda=max(1, m);
-  Integer lwork=max(1, m);
+  Integer lwork=3*max(1, m);
   Real work[lwork];
 
 external "Fortran 77" dorgqr(

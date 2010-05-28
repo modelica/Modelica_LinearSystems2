@@ -1,15 +1,15 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function QR
-  "QR decomposition of a square matrix without column pivoting (A = Q*R)"
+  "QR decomposition of a rectangular matrix without column pivoting (A = Q*R). Return the full square Q-matrix"
 
   input Real A[:,:] "Rectangular matrix with size(A,1) >= size(A,2)";
   output Real Q[size(A, 1),size(A, 2)]
     "Rectangular matrix with orthonormal columns such that Q*R=A[:,p]";
-  output Real R[min(size(A,1),size(A, 2)),size(A, 2)]
+  output Real R[min(size(A, 1), size(A, 2)),size(A, 2)]
     "Square upper triangular matrix";
 
   output Real tau[min(size(A, 1), size(A, 2))];
-  output Real Q2[:,:] 
+  output Real Q2[size(A,1),size(A, 1)] 
   annotation ( Documentation(info="<HTML>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -79,8 +79,8 @@ called as: <code>(,R,p) = QR(A)</code>.
 protected
   Integer nrow=size(A, 1);
   Integer ncol=size(A, 2);
-  Integer minrowcol=min(nrow,ncol);
-  Integer lwork=Internal.dgeqrf_workdim(A);
+  Integer minrowcol=min(nrow, ncol);
+  Integer lwork=3*max(1,max(nrow,ncol));//Internal.dgeqrf_workdim(A);
 
 algorithm
   if minrowcol > 0 then
@@ -95,11 +95,13 @@ algorithm
       end for;
     end for;
 
-//  Q2 := Modelica.Math.Matrices.LAPACK.dorgqr(Q, tau);
-//  Q2 := Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr(Q, tau);
-    Q2 := Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr_x(Q, tau);
+    //Q2 := Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr(Q, tau);// would return the economic size Q matrix
+    //Q2 := Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr_x(Q, tau);// bad name
+
+    Q2 := Modelica_LinearSystems2.Math.Matrices.Internal.multiplyWithOrthogonalQ_qr(identity(size(A, 1)), Q, tau, "L", "N");
+
   else
     Q := fill(1, size(A, 1), size(A, 2));
-    R := fill(0, min(size(A,1),size(A, 2)),size(A, 2));
+    R := fill(0, min(size(A, 1), size(A, 2)), size(A, 2));
   end if;
 end QR;

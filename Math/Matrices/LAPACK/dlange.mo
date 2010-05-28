@@ -19,20 +19,12 @@ extern  doublereal dlange_(char *, integer *, integer *, doublereal *, integer *
 
 int dlange2_(char *norm, integer *m, integer *n, doublereal *a, integer *lda, doublereal *work, doublereal *anorm) 
 {
-   FILE *fileptr;  
-   
-   fileptr = fopen(\"test.txt\",\"w\");   
-   
   *anorm=dlange_(norm, m, n, a, lda, work);
-  
-fprintf(fileptr,\"anorm=%f \\n\",*anorm);  
-  
-  
-  fclose(fileptr);
-  
   return 0;
 }", Library={"lapack"});
 annotation ( Documentation(info="<html>
+
+
     Purpose   
     =======   
 
@@ -84,6 +76,8 @@ annotation ( Documentation(info="<html>
             referenced.   
 
    =====================================================================   
+
+
 </html>"));
 
 end dlange;

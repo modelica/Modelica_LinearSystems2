@@ -15,6 +15,7 @@ dggevx
 dhgeqz
 dhseqr
 dlange
+dlansy
 dorghr
 dorgqr
 dorgqr_x
@@ -28,3 +29,8 @@ dgemm
 dtrmm
 dpotrf
 dtrsm
+drot
+drotg
+dtrsv
+dposv
+dpocon

@@ -11,8 +11,7 @@ function dtrsm
   input Boolean unitTriangular=false
     "True if A is unit triangular, i.e. all diagonal elements of A are equal to 1";
 
-  output Real X[size(B,1),size(B,2)]=B
-    "Matrix Bout=alpha*op( A )*B,   or   B := alpha*B*op( A )";
+  output Real X[size(B,1),size(B,2)]=B "Solution X";
 protected
   String side=if right then "R" else "L";
   String uplo=if upper then "U" else "L";

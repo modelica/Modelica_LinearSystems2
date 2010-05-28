@@ -14,10 +14,10 @@ function multiplyWithOrthogonalQ_qr
 protected
   Integer m=size(C, 1);
   Integer n=size(C, 2);
-  Integer k=if side == "L" then m else n;
+  Integer k=size(tau, 1);
   Integer lda=if side == "L" then max(1, m) else max(1, n);
   Integer ldc=max(1, m);
-  Integer lwork=if side == "L" then max(1, n) else max(1, m);
+  Integer lwork=if side == "L" then 3*max(1, n) else 3*max(1, m);
   Real work[lwork];
 
 external "Fortran 77" dormqr(

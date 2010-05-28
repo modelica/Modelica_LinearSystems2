@@ -20,3 +20,7 @@ reorderRSF
 reorderRSF2
 k_care_u
 frobeniusNorm
+symMatMul
+symMatMul_C
+solve2rSym
+solve2rSym_C
