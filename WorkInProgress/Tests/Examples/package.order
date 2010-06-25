@@ -7,7 +7,7 @@ ExtendedKalman2
 ExtendedKalman3
 Pendular_Testbench_MBD_UKF
 Pendular_Testbench_MBD_SR_UKF
-Pendular_Testbench_MBD_EKF2_2
+Pendular_Testbench_MBD_EKF
 SR_EKF
 fSigma
 fSigma_2
