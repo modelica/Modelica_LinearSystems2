@@ -1,8 +1,5 @@
-PartialPlantSISO
-PartialPlantMIMO
-PlantTemplate
 SimpleStateSpaceControl
-Add2
 TwoDegreesOfFreedomControlSISO
-Plant_SISO
-PlantTemplate_SISO
+SimpleObserverStateSpaceControl
+TwoDOFinverseModelController
+Internal

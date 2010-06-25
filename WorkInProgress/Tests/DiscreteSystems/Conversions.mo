@@ -89,7 +89,7 @@ algorithm
     y2 := y[:, 1, 1];
     delta := Vectors.norm(y1 - y2)/size(y1,1);
     Modelica.Utilities.Streams.print("delta_2 = "+String(delta));
-    ok := delta<1e-10;
+    ok := delta<1e-9;
     assert(ok,"dzp1 or dzp3 failed");
 
     y := DiscreteStateSpace.Analysis.stepResponse(dss=dss1, tSpan=tSpan);
@@ -197,4 +197,5 @@ algorithm
 
 Modelica.Utilities.Streams.print("ok = "+String(ok));
 
+annotation(interactive=true);
 end Conversions;

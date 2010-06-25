@@ -380,6 +380,49 @@ algorithm
 end 'r*dzp';
 end '*';
 
+
+  encapsulated operator function '/'
+    "Divide two discrete transfer functions in zeros and poles representation (dzp1 / dzp2)"
+    import Modelica;
+    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+
+    input DiscreteZerosAndPoles dzp1;
+    input DiscreteZerosAndPoles dzp2;
+
+    output DiscreteZerosAndPoles result "= dzp1/dzp2";
+
+  algorithm
+    assert(abs(dzp2.k) > 100*Modelica.Constants.small, "dzp2 in operator \"Modelica_LinearSystems2.TransferFunction.'/'()\" may not be zero");
+    if max({size(dzp1.n1, 1),size(dzp1.n2, 1),size(dzp1.d1, 1),size(dzp1.d2, 1)}) >0 and 
+      max({size(dzp2.n1, 1),size(dzp2.n2, 1),size(dzp2.d1, 1),size(dzp2.d2, 1)}) > 0 then
+        assert(abs(dzp1.Ts - dzp2.Ts) <= Modelica.Constants.eps, "Two discrete zeros-and-poles systems must have the same sample time Ts for division with \"/\".");
+    end if;
+     result.Ts := dzp1.Ts;
+    result.method := dzp1.method;
+
+    if dzp1 == DiscreteZerosAndPoles(0) then
+      result := DiscreteZerosAndPoles(0);
+    else
+      result.n1 := cat(
+        1,
+        dzp1.n1,
+        dzp2.d1);
+      result.n2 := cat(
+        1,
+        dzp1.n2,
+        dzp2.d2);
+      result.d1 := cat(
+        1,
+        dzp1.d1,
+        dzp2.n1);
+      result.d2 := cat(
+        1,
+        dzp1.d2,
+        dzp2.n2);
+      result.k := dzp1.k/dzp2.k;
+    end if;
+  end '/';
+
   encapsulated operator function '+'
     "Addition of to discrete transfer functions dzp1 + dzp2, i.e. parallel connection of two transfer functions (= inputs are the same, outputs of the two systems are added)"
 
@@ -411,7 +454,9 @@ end '*';
     output DiscreteZerosAndPoles result "= dzp1+dzp2";
 
   algorithm
-    assert(abs(dzp1.Ts-dzp2.Ts)<=Modelica.Constants.eps,"Two discrete zeros-and-poles systems must have the same sample time Ts for addition with \"+\".");
+    if max({size(dzp1.n1,1),size(dzp1.n2,1),size(dzp1.d1,1),size(dzp1.d2,1)})>0 and max({size(dzp2.n1,1),size(dzp2.n2,1),size(dzp2.d1,1),size(dzp2.d2,1)})>0 then
+      assert(abs(dzp1.Ts-dzp2.Ts)<=Modelica.Constants.eps,"Two discrete zeros-and-poles systems must have the same sample time Ts for addition with \"+\".");
+    end if;
     result.Ts := dzp1.Ts;
 
     if dzp1 == -dzp2 then
@@ -475,60 +520,6 @@ end '*';
     end if;
 
   end '+';
-
-  encapsulated operator '/' "Divide two transfer functions (dzp1 / dzp2)"
-    function 'dzp/dzp'
-      "Divide two discrete transfer functions in zeros and poles representation (dzp1 / dzp2)"
-    import Modelica;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-
-    input DiscreteZerosAndPoles dzp1;
-    input DiscreteZerosAndPoles dzp2;
-
-    output DiscreteZerosAndPoles result "= dzp1/dzp2";
-
-    algorithm
-    assert(abs(dzp2.k)>100*Modelica.Constants.small,"dzp2 in operator \"Modelica_LinearSystems2.TransferFunction.'/'()\" may not be zero");
-    assert(abs(dzp1.Ts-dzp2.Ts)<=Modelica.Constants.eps,"Two discrete zeros-and-poles systems must have the same sample time Ts for division with \"/\".");
-    result.Ts := dzp1.Ts;
-    result.method := dzp1.method;
-
-    if dzp1==DiscreteZerosAndPoles(0) then
-      result := DiscreteZerosAndPoles(0);
-    else
-      result.n1 := cat(1,dzp1.n1, dzp2.d1);
-      result.n2 := cat(1,dzp1.n2, dzp2.d2);
-      result.d1 := cat(1,dzp1.d1, dzp2.n1);
-      result.d2 := cat(1,dzp1.d2, dzp2.n2);
-      result.k := dzp1.k/dzp2.k;
-      end if;
-    end 'dzp/dzp';
-
-  function 'r/dzp'
-      "Divide a real number by a discrete transfer functions in zeros and poles representation (r / dzp)"
-    import Modelica;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-
-    input Real r;
-    input DiscreteZerosAndPoles dzp;
-
-    output DiscreteZerosAndPoles result "= dzp1/dzp2";
-
-  algorithm
-    result.Ts := dzp.Ts;
-    result.method := dzp.method;
-
-    if r==0 then
-      result := DiscreteZerosAndPoles(0);
-    else
-      result.n1 := dzp.d1;
-      result.n2 := dzp.d2;
-      result.d1 := dzp.n1;
-      result.d2 := dzp.n2;
-      result.k := r/dzp.k;
-      end if;
-  end 'r/dzp';
-  end '/';
 
   encapsulated operator function '^'
     "Integer power of DiscreteZerosAndPoles (dzp^k)"
@@ -767,10 +758,10 @@ Generate the complex Laplace variable q=exp(s*T) as a DiscreteZerosAndPoles tran
   encapsulated function stepResponse
       "Calculate the step time response of a discrete zeros-and-poles transfer function"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask_zp_discrete;
@@ -956,17 +947,17 @@ Generate the complex Laplace variable q=exp(s*T) as a DiscreteZerosAndPoles tran
 
   encapsulated function bode
       "Plot discrete zeros a-and-poles transfer function as bode plot"
-        import Modelica;
-        import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
-        import Modelica_LinearSystems2.Internal;
-        import Modelica_LinearSystems2.ZerosAndPoles;
-        import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-        import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Internal;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
 
-        import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
-        import SI = Modelica.SIunits;
+      import SI = Modelica.SIunits;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles function to be plotted";
@@ -1409,7 +1400,7 @@ Generate the complex Laplace variable q=exp(s*T) as a DiscreteZerosAndPoles tran
 
   algorithm
     assert(n_num <= n_den,
-      "ZerosAndPoles transfer function is not proper as required from StateSpace system:\n"
+      "DiscreteZerosAndPoles transfer function is not proper as required from StateSpace system:\n"
        + "  numerator degree (= " + String(n_num) +
       ") <= denominator degree (= " + String(n_den) + ") required.");
 
@@ -1680,7 +1671,253 @@ Generate the complex Laplace variable q=exp(s*T) as a DiscreteZerosAndPoles tran
     dss.method := dzp.method;
 
     annotation (overloadsConstructor=true, Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+This function transforms a zeros-poles-gain system representation into state space representation.
+To achieve well numerical condition the DiscreteZerosAndPoles transfer function is transformed into state space
+form by creating first and second order blocks that are connected
+together in series. Every block is represented in controller
+canonical form and scaled such that the gain from the input
+of this block to its output is one (i.e. y(p=0) = u(p=0)),
+if this is possible. Details are given below.
+</p>
+<b>Algorithmic details</b>
+<p>
+The DiscreteZerosAndPoles transfer function is defined as:
+<blockquote><pre>
+         product(p + n1[i]) * product(p^2 + n2[i,1]*p + n2[i,2])
+  y = k*--------------------------------------------------------- * u
+         product(p + d1[i]) * product(p^2 + d2[i,1]*p + d2[i,2])
+</pre></blockquote>
+<p>
+This is treated as a series connection of first and second order
+systems. If size(n1) == size(d1) and size(n2) == size(d2)
+this gives the following sequence of operations:
+</p>
+<blockquote><pre>
 
+        p^2 + n2[1,1]*p + n2[1,2]
+  y_1 = ------------------------- * u
+        p^2 + d2[1,1]*p + d2[1,2]
+&nbsp;
+        p^2 + n2[2,1]*p + n2[2,2]
+  y_2 = ------------------------- * y_1
+        p^2 + d2[2,1]*p + d2[2,2]
+&nbsp;
+     ...
+&nbsp;
+        p + n1[..]
+  y_n = ---------- * y_(n-1)
+        p + d1[..]
+&nbsp;
+    y = k*y_n
+
+</pre></blockquote>
+
+Based on this representation, evrey block with transfer function G(p) could be transformed into
+<blockquote><pre>
+  G(p) = k * F(p)
+
+</pre>
+with F(p) has unit gain. This leads to representations of the forms
+</pre></blockquote>
+<p>
+<blockquote><pre>
+
+           a2 + a1*p + p^2       a2      b2 + a1*b2/a2*p + b2/a2*p^2
+  G(p) = -------------------- = ---- * ------------------------------ = k * F(p),  k = a2/b2  (1)
+
+           b2 + b1*p + p^2       b2           b2 + b1*p + p^2
+&nbsp;
+for second order systems and
+&nbsp;
+           a + p     a     b + b/a*p
+  G(p) = -------- = --- * ---------- = k * F(p),   k = a/b
+
+           b + p     b      b + p
+</p>
+</pre></blockquote>
+for first order systems respectively.
+
+<p>
+The complete system is now considered as the series connections of all the single unit gain transfer functions and an overall gain k with
+<blockquote><pre>
+  k = product(ki).
+
+</pre></blockquote>
+</p>
+
+
+In the general case, the following system structures
+and the corresponding state space systems can appear
+(note, 'c' is the reciprocal local gain 1/k):
+</p>
+<blockquote><pre>
+(1)
+          a2 + a1*p + p^2           der(x1) = x2
+    y = ---------------------  -->  der(x2) = -b2*x1 - b1*x2 + b2*u
+          b2 + b1*p + p^2                 y = c*((a2-b2)/b2*x1 + (a1-b1)/b2*x2 + u),  c = b2/a2
+&nbsp;
+(2)
+             p + a                 der(x1) = x2
+    y = ---------------- * u  -->  der(x2) = -b2*x1 - b1*x2 + b2*u
+        b2 + b1*p + p^2                  y = k*(a/b2*x1 +x2/b2),  c = b2/a
+&nbsp;
+(3)
+               1                  der(x1) = x2
+    y = --------------- *u   -->  der(x2) = -b2*x1 - b1*x2 + b2*u
+        b2 + b1*p + p^2                 y = c*x1/b2,  c = b2
+&nbsp;
+(4)
+       a + p                       der(x) = -b*x + b*u
+   y = ----- * u             -->        y = c*((a-b)/b*x + u),  c = b/a
+       b + p
+&nbsp;
+(5)
+         1
+   y = ----- * u             -->   der(x) = -b*x + b*u
+       b + p                            y = x,  c = b
+
+</pre></blockquote>
+
+If the sizes of the numerator and denominator polynomials
+do not match, the small systems are built in the
+following way:
+</p>
+<blockquote><pre>
+(1) Build systems of form (1) by combining
+    - 1 d2 and 1 n2
+      (= 1 second order denominator and 1 second order numerator) or
+    - 1 d2 and 2 n1 or
+    - 2 d1 and 1 n2
+(2) Build at most one system of form (2) by combining
+    - 1 d2 and 1 n2
+(3) Build systems of form (3) by
+    - 1 d2
+(4) Build systems of form (4) by combining
+    - 1 d1 and 1 n1
+(5) Build systems of form (5) by
+    - 1 d1
+</pre></blockquote>
+<p>
+The numeric properties of the resulting state space system
+depends on which first and second order polynomials are
+combined and connected together. From a numerical point of view, it
+would therefore be useful to combine the polynomials
+based on the numeric values of the polynomial coefficients,
+(e.g., in a first step the polynomials could be sorted
+according to their cut-off frequency).
+</p>
+<p>
+However, this has the disadvantage that the structure of the
+resulting state space system depends on the numeric
+values of the polynomial coefficients. Since Modelica
+environments perform symbolic pre-processing on equations,
+this would mean that a change of a polynomial coefficient
+requires to newly compile the state space system.
+</p>
+<p>
+If, on the other hand, the structure of the state
+space system depends only on dimension information
+of the n1,n2,d1,d2 arrays, then the polynomial coefficients
+can be changed without a new translation of the model.
+This is the major reason why the structure of the
+state space system in the implementation of this block
+is based only on dimension information.
+</p>
+<p>
+This is, e.g., not critical for the provided filters:
+The dimension of the n1,n2,d1,d2 arrays depend for
+filters only on the filter characteristics
+(Bessel, Butterworth etc.), the filter type (low pass,
+high pass etc.) and on the filter order. If any
+of this data is changed, the model has to be
+newly compiled. All the other filter data, such as
+cut-off frequency or ripple amplitude, can be changed
+without re-compilation of the model.
+The DiscreteZerosAndPoles transfer function is now constructed
+for the filters in such a way that the filter zeros
+and poles are appropriately sorted to give better
+numerical properties.
+</p>
+<p>
+Another alternative implementation of the state
+space system would be to use the function controller canonical
+form that directly results from the transfer function.
+The severe disadvantage
+of this approach is that the structure of the state
+space system from above is lost for the symbolic preprocessing.
+If, e.g., index reduction has to be applied (e.g. since a
+filter is used to realize a non-linear inverse model),
+then the tool cannot perform the index reduction.
+Example:
+</p>
+<p>
+Assume, a generic first order state space system
+is present
+</p>
+<blockquote><pre>
+   <b>der</b>(x) = a*x + b*u
+        y = c*x + d*u
+</pre></blockquote>
+<p>
+and the values of the scalars a,b,c,d are parameters
+that might be changed before the simulation starts.
+If y has to be differentiated symbolically during code
+generation, then
+</p>
+<blockquote><pre>
+      <b>der</b>(y) = c*<b>der</b>(x) + d*<b>der</b>(u)
+      <b>der</b>(x) = a*x + b*u
+</pre></blockquote>
+<p>
+As a result, u needs to be differentiated too, and this
+might not be possible and therefore translation might fail.
+</p>
+<p>
+On the other hand, if the first order system is
+defined to be a low pass filter and the state space
+system is generated by keeping this structure, we have
+(see form (5) above):
+</p>
+<blockquote><pre>
+  <b>der</b>(x) = -b*x + u
+        y = x
+</pre></blockquote>
+<p>
+Differentiating y symbolically leads to:
+</p>
+<blockquote><pre>
+     <b>der</b>(y) = <b>der</b>(x)
+     <b>der</b>(x) = -b*x + u
+</pre></blockquote>
+<p>
+Therefore, in this case, the derivative of u is not
+needed and the tool can continue with the symbolic
+processing.
+</p>
+ 
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   DiscreteZerosAndPoles q = Modelica_LinearSystems2.DiscreteZerosAndPoles.q();
+   Modelica_LinearSystems2.DiscreteZerosAndPoles dzp=(q+1)/(q^2 + q + 1);
+
+<b>algorithm</b>
+  dss := Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace(dzp);
+// dss.A = [0, 1; -1, -1],
+// dss.B = [0; 3],
+// dss.C = [0.333, 0.333],
+// dss.D = [0],
+// dss.B2 = [0; 0],
+
+</pre></blockquote>
 
 </html> "));
   end toDiscreteStateSpace;
@@ -1947,7 +2184,7 @@ int found=0;
   function fromRealAndImag
       "Generate a complex vector from a real part vector and imaginary part vector "
 
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input Real real[:];
     input Real imag[size(real, 1)];

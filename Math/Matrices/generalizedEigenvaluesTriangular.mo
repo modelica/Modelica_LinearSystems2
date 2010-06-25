@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function generalizedEigenvaluesTriangular
-  "Compute invariant zeros of linear state space system with a genralized system matrix [A, B, C, D] which is of upper Hessenberg form"
+  "Compute invariant zeros of linear state space system with a generalized system matrix [A, B, C, D] which is of upper Hessenberg form"
 
   import Modelica_LinearSystems2.Math.Matrices.LAPACK;
   input Real A[:,size(A, 1)];

@@ -1,4 +1,3 @@
-StateSpace2
 DiscreteStateSpace
 Controller
 Icons
@@ -9,5 +8,4 @@ ZerosAndPoles
 Tests
 Math
 MPC
-DiscreteTransferFunction
-DiscreteZerosAndPoles
+Junk

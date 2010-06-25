@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.care;
 function care6 "Example 6 from Benner benchmarks"
   extends Modelica.Icons.Function;
-   import Modelica_LinearSystems2.Math.Matrices;
+  import Modelica_LinearSystems2.Math.Matrices;
   import Matrices2 = Modelica_LinearSystems2.Math.Matrices;
 //  import Modelica.Math.Matrices;
   input String outputFile = "";

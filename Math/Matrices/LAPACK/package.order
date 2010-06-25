@@ -34,3 +34,5 @@ drotg
 dtrsv
 dposv
 dpocon
+dgelqf
+dorglq

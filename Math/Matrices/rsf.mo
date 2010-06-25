@@ -87,7 +87,7 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>()
+<h4><font color=\"#008000\">Syntax</font></h4>
 <table>
 <tr> <td align=right>  (T, Z, alphaReal, alphaImag) </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.Math.Matrices.<b<rsf</b>(A)  </td> </tr>
 </table>

@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Examples;
 model Pendular_Testbench_MBD
 
-  ExtendedKalman3 extendedKalman(Ts=0.005, xm_start={0.1,0.1,1,0.2}) 
+  SR_EKF extendedKalman(Ts=0.001) 
     annotation (Placement(transformation(extent={{60,0},{80,20}})));
   CraneMultibody craneWithEquations3_1(     J=0, d=100) 
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
@@ -9,9 +9,9 @@ model Pendular_Testbench_MBD
     offset=-50) "Force on grap" 
     annotation (Placement(transformation(extent={{-98,0},{-78,20}})));
   Modelica_LinearSystems2.Controller.Noise noise(y_min=-0.05, y_max=0.05) 
-    annotation (Placement(transformation(extent={{-92,-70},{-72,-50}})));
+    annotation (Placement(transformation(extent={{-80,-86},{-60,-66}})));
   Modelica.Blocks.Routing.Multiplex2 multiplex2_1 
-    annotation (Placement(transformation(extent={{20,-50},{40,-30}})));
+    annotation (Placement(transformation(extent={{20,-30},{40,-50}})));
   Modelica.Blocks.Math.Add add 
     annotation (Placement(transformation(extent={{-18,-40},{2,-20}})));
   Modelica.Blocks.Math.Add add1 
@@ -21,7 +21,7 @@ model Pendular_Testbench_MBD
        0.005) 
              annotation (Placement(transformation(extent={{80,78},{100,98}})));
   Modelica_LinearSystems2.Controller.Noise noise1(y_min=-0.0001, y_max=0.0001) 
-    annotation (Placement(transformation(extent={{-90,-34},{-70,-14}})));
+    annotation (Placement(transformation(extent={{-80,-46},{-60,-26}})));
 equation
   connect(sine.y, craneWithEquations3_1.force) annotation (Line(
       points={{-77,10},{-62,10}},
@@ -32,7 +32,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(add1.u2, noise.y) annotation (Line(
-      points={{-22,-76},{-58,-76},{-58,-60},{-71,-60}},
+      points={{-22,-76},{-59,-76}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(craneWithEquations3_1.y1, add1.u1) annotation (Line(
@@ -40,7 +40,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.u2, noise1.y) annotation (Line(
-      points={{-20,-36},{-50,-36},{-50,-24},{-69,-24}},
+      points={{-20,-36},{-59,-36}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.u1, craneWithEquations3_1.x1) annotation (Line(
@@ -48,11 +48,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(multiplex2_1.u2[1], add.y) annotation (Line(
-      points={{18,-46},{12,-46},{12,-30},{3,-30}},
+      points={{18,-34},{12,-34},{12,-30},{3,-30}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(multiplex2_1.u1[1], add1.y) annotation (Line(
-      points={{18,-34},{10,-34},{10,-70},{1,-70}},
+      points={{18,-46},{10,-46},{10,-70},{1,-70}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(multiplex2_1.y, extendedKalman.y) annotation (Line(

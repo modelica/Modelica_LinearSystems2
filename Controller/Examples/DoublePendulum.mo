@@ -20,7 +20,7 @@ model DoublePendulum "Crane trolley controlled by a state feedback controller"
       matrixOnFile=true,
       matrixName="K_pa",
       fileName=Modelica_LinearSystems2.DataDir + "doublePendulumController.mat"),
-    sampleClock(sampleTime=0.01, blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete));
+    sampleClock(sampleTime=0.01, blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous));
 
   Modelica.Blocks.Sources.Pulse pulse(
     offset=0,

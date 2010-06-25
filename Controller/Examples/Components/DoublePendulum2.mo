@@ -1,7 +1,8 @@
 within Modelica_LinearSystems2.Controller.Examples.Components;
 model DoublePendulum2 "crane trolley system"
 
-  extends Templates.PlantTemplate(n=6, l=6);
+  extends Modelica_LinearSystems2.Controller.Templates.Internal.PlantTemplate(
+                                  n=6, l=6);
   constant Real pi=Modelica.Constants.pi;
   parameter Modelica.SIunits.Mass m_trolley=1000;
   parameter Modelica.SIunits.Mass m_load=4000;

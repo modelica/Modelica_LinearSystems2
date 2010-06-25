@@ -2490,10 +2490,10 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
  encapsulated function timeResponse
       "Calculate the time response of a state space system"
 
-   import Modelica;
-   import Modelica_LinearSystems2;
-   import Modelica_LinearSystems2.StateSpace;
-   import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Types.TimeResponse;
 
    input TimeResponse response=TimeResponse.Step;
    extends Modelica_LinearSystems2.Internal.timeResponseMask2(redeclare Real y[:,size(sc.C, 1),if response == TimeResponse.Initial then 1 else size(sc.B, 2)],
@@ -3378,12 +3378,12 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
   encapsulated function dcGain
       "Return steady state gain matrix K (for a stable system: K[i,j] = value of y[i] at infinite time for a step input of u[j])"
 
-    import Modelica;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.Math.Matrices;
-    import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Modelica;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
     input StateSpace ss "Linear system in state space form";
 
@@ -5721,11 +5721,11 @@ encapsulated package Conversion
   encapsulated function toZerosAndPoles
       "Generate a zeros-and-poles representation from a SISO state space representation"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.StateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.StateSpace;
 
     input StateSpace ss "StateSpace object";
   //protected
@@ -6510,9 +6510,9 @@ This function is called to compute transfer functions of state space representat
 
       encapsulated function toStaircaseForm
       "Transforms a state space system to upper staircase form"
-        import Modelica;
-        import Modelica_LinearSystems2;
-        import Modelica_LinearSystems2.StateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
 
         input StateSpace ss "state space system";
         input Modelica_LinearSystems2.Types.StaircaseMethod method=
@@ -8890,7 +8890,7 @@ to separate the uncontrollable poles from the controllable poles.
   end scaleFactor1;
 
   function scaleFactor2 "Return scale factor for second order block"
-    import Modelica;
+      import Modelica;
     input Real n1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
     input Real n2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
     input Real d1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
@@ -9482,8 +9482,8 @@ inputs and the number of outputs must be identical.
 function read_dslin
       "Generate a StateSpace data record by linearization of a model"
 
-  import Modelica;
-  import Modelica_LinearSystems2.StateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2.StateSpace;
 
   input String fileName="dslin" "Name of the result file";
 

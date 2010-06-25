@@ -141,6 +141,8 @@ package Filters
                             getAmplitude(filter6, f_min) + ", " +
                             getAmplitude(filter6, f_cut));
      end if;
+
+   annotation(interactive=true);
   end plotFilter;
 
   function plotFilter2
@@ -160,7 +162,7 @@ package Filters
      plotFilter(Types.AnalogFilter.Bessel,          filterType, f_cut, A_ripple, f_min, normalized);
      plotFilter(Types.AnalogFilter.Butterworth,     filterType, f_cut, A_ripple, f_min, normalized);
      plotFilter(Types.AnalogFilter.Chebyshev,       filterType, f_cut, A_ripple, f_min, normalized);
-
+   annotation(interactive=true);
   end plotFilter2;
 
   function plotFilter3
@@ -178,6 +180,7 @@ package Filters
      //plotFilter2(Types.FilterType.HighPass, f_cut, A_ripple, f_min, normalized);
      // plotFilter2(Types.FilterType.BandPass, f_cut, A_ripple, f_min, normalized);
      plotFilter2(Types.FilterType.BandStop, f_cut, A_ripple, f_min, normalized);
+   annotation(interactive=true);
   end plotFilter3;
 
   function compareBaseFiltersWithTietzeSchenk

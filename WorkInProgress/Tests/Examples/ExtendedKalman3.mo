@@ -35,6 +35,7 @@ model ExtendedKalman3 "Extended Kalman"
   Real Sol[nx,1] "Solution of tustin approximation";
   Real K[nx,ny] "Kalman gain";
   Real y_h[ny];
+
   Real P_det;
 
 // Matrix operation stuff
@@ -82,10 +83,8 @@ equation
   Phi = LU_solve2(LU, pivots, identity(nx) + (Ts/2)*(F_x));
   Sol = LU_solve2(LU, pivots, Ts*F_x_h);
   xm = pre(xp) + pre(Sol[:,1]);
-
-  (K, Pp) = DiscreteStateSpace.Design.kfStepMatrices2(A=Phi, C=H, P=pre(Pp), Q=Q, R=R);
-
   y_h = {xm[3] + 10*sin(xm[1]), xm[1]};
+  (K, Pp) = Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Design.kfStepMatrices2(A=pre(Phi), C=pre(H), P=pre(Pp), Q=Q, R=R);
   xp = xm + K*(y - y_h);
 
   P_det = Modelica.Math.Matrices.det(Pp);

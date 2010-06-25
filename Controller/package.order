@@ -20,6 +20,9 @@ DAconverter
 Interpolator
 MatrixGain
 Noise
+EKF
+UKF
+UKF_SR
 Icons
 Interfaces
 Internal

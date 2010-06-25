@@ -96,7 +96,6 @@ algorithm
     end for;
 
     //Q2 := Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr(Q, tau);// would return the economic size Q matrix
-    //Q2 := Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr_x(Q, tau);// bad name
 
     Q2 := Modelica_LinearSystems2.Math.Matrices.Internal.multiplyWithOrthogonalQ_qr(identity(size(A, 1)), Q, tau, "L", "N");
 

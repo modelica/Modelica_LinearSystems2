@@ -127,4 +127,5 @@ algorithm
           y=y1,
           legend="y1")}));
 
+annotation(interactive=true);
 end Operations;

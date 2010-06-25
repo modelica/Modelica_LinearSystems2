@@ -2194,18 +2194,9 @@ Computes a ZerosAndPoles record
      Real d=b[na]/a[na];
     algorithm
      if nx == 0 then
-       ss.A := fill(
-           0,
-           0,
-           nx);
-       ss.B := fill(
-           0,
-           0,
-           1);
-       ss.C := fill(
-           0,
-           1,
-           0);
+       ss.A := fill(0, 0, nx);
+       ss.B := fill(0, 0, 1);
+       ss.C := fill(0, 1, 0);
      else
        ss.A[1:nx - 1, 1:nx] := [zeros(nx - 1, 1),identity(nx - 1)];
        ss.A[nx, 1:nx] := -a[1:na - 1]/a[na];

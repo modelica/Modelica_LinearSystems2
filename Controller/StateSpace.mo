@@ -26,9 +26,8 @@ block StateSpace "Continuous or discrete state space system block"
   final parameter Integer nx=size(system.A, 1)  annotation(Hide=true);
   final parameter Integer ny=size(system.C, 1)  annotation(Hide=true);
 
+  parameter Boolean withDelay=false  annotation(Evaluate=true, Hide=true,Dialog(tab="Advanced options"));
 protected
-  parameter Boolean withDelay=false;
-
   Internal.DiscreteStateSpace discretePart(
     system=system,
     withDelay=withDelay,

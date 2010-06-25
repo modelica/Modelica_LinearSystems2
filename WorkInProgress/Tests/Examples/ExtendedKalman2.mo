@@ -88,18 +88,17 @@ equation
   xm = pre(xp) + pre(Sol[:,1]);
 
 //   //a priori covariance estimation (Law of error propagation)
-  Pm =  symmetric(Modelica_LinearSystems2.Math.Matrices.Internal.symMatMul_C(     Phi, pre(Pp), Q, true));
+  Pm =  symmetric(Matrices.Internal.symMatMul_C(pre(Phi), pre(Pp), Q, true));
 
 //   //Calculate Kalman gain
-  PmHT = Pm*transpose(H);
+  PmHT = Pm*transpose(pre(H));
 //  K = Matrices.solve2rSym(H*PmHT+R,PmHT);
-  K =  Modelica_LinearSystems2.Math.Matrices.Internal.solve2rSym_C(
-                             H*PmHT+R,PmHT);
+  K =  Matrices.Internal.solve2rSym_C(pre(H)*PmHT+R,PmHT);
 
   y_h = {xm[3] + 10*sin(xm[1]), xm[1]};
   xp = xm + K*(y - y_h);
 
-  Pp = Pm - K*H*Pm;
+  Pp = Pm - K*pre(H)*Pm;
 
   P_det = Modelica.Math.Matrices.det(Pp);
 end when;

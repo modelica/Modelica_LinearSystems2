@@ -3709,7 +3709,7 @@ processing.
       annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
+<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.<b>toStateSpace</b>(tf)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -5488,7 +5488,7 @@ results from <blockquote><pre> a = -1/alpha </pre></blockquote> and
 
     function solveOneNonlinearEquation
         "Solve f(u) = 0; f(u_min) and f(u_max) must have different signs"
-      import Modelica.Utilities.Streams.error;
+        import Modelica.Utilities.Streams.error;
 
       input Real c1[:]
           "[p] coefficients of denominator polynomials (c1[i]*p + 1)";
@@ -5675,7 +5675,7 @@ function. The solver function is a direct mapping of the Algol 60 procedure
     end filterToNormalized;
 
     encapsulated function bandPassAlpha "Return alpha for band pass"
-       import Modelica;
+      import Modelica;
        input Real a "Coefficient of p^1";
        input Real b "Coefficient of p^0";
        input Modelica.SIunits.AngularVelocity w "Bandwidth angular frequency";
@@ -5700,7 +5700,7 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
     function solveOneNonlinearEquation
         "Solve f(u) = 0; f(u_min) and f(u_max) must have different signs"
-      import Modelica.Utilities.Streams.error;
+        import Modelica.Utilities.Streams.error;
 
       input Real aa;
       input Real bb;
@@ -6283,7 +6283,7 @@ int found=0;
   end scaleFactor1;
 
   function scaleFactor2 "Return scale factor for second order block"
-    import Modelica;
+      import Modelica;
     input Real n1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
     input Real n2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
     input Real d1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";

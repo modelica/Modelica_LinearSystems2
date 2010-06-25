@@ -36,7 +36,7 @@ model TestComponents "test all Controller blocks"
   inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(
     sampleTime=0.1,
     initType=Modelica_LinearSystems2.Controller.Types.Init.InitialState,
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous) 
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete) 
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
   Modelica_LinearSystems2.Controller.Filter filter 
     annotation (Placement(transformation(extent={{-20,130},{0,150}})));

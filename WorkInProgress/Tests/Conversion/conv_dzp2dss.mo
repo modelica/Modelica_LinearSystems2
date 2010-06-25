@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Conversion;
 function conv_dzp2dss
 
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
   import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 

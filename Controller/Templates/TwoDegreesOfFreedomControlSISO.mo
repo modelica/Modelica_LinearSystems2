@@ -12,14 +12,17 @@ partial model TwoDegreesOfFreedomControlSISO
   replaceable Modelica_LinearSystems2.Controller.Interfaces.PartialSISO
     controller constrainedby Interfaces.PartialSISO 
     annotation (Placement(transformation(extent={{10,-20},{30,0}})));
-  replaceable Plant_SISO plant(l=l,
+  replaceable Modelica_LinearSystems2.Controller.Templates.Internal.Plant_SISO
+    plant(                     l=l,
       additionalMeasurableOutputs=additionalMeasurableOutputs) constrainedby
-    PlantTemplate_SISO 
+    Modelica_LinearSystems2.Controller.Templates.Internal.PlantTemplate_SISO 
     annotation (Placement(transformation(extent={{90,-20},{110,0}})));
   Modelica.Blocks.Math.InverseBlockConstraints forwardControlModel 
     annotation (Placement(transformation(extent={{-68,6},{-14,34}})));
-  replaceable Plant_SISO plant2(l=l, additionalMeasurableOutputs=
-        additionalMeasurableOutputs) constrainedby PlantTemplate_SISO 
+  replaceable Modelica_LinearSystems2.Controller.Templates.Internal.Plant_SISO
+    plant2(                     l=l, additionalMeasurableOutputs=
+        additionalMeasurableOutputs) constrainedby
+    Modelica_LinearSystems2.Controller.Templates.Internal.PlantTemplate_SISO 
     annotation (Placement(transformation(extent={{-30,9},{-50,30}})));
 equation
   connect(controller.u, feedback[1].y)  annotation (Line(

@@ -50,7 +50,7 @@ model DiscreteStateSpace
     "Discrete output signals of block" annotation (                        Hide=true,
       Placement(transformation(extent={{100,-10},{120,10}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput x[nx](start=x_start)
-    "State vector of continuous system at sample times"                                                        annotation(Hide=true);
+    "State vector of continuous system at sample times"   annotation(Hide=true);
 
 protected
   outer SampleClock sampleClock "Global options"                       annotation(Hide=true);
