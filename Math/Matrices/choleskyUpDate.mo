@@ -89,5 +89,10 @@ If \"upper==true\", the output <b>Lud</b> is also upper triangular. Default is \
 <blockquote><pre>
  
 
-</HTML>"));
+</HTML>", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end choleskyUpDate;

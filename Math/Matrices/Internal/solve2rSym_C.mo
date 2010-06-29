@@ -93,6 +93,12 @@ int c_solve2rSym_(doublereal *a, doublereal *b, char *trian, char *uplo, integer
    free(aa);
 //   fclose(fileptr);
   return 0;
-}", Library={"lapack"});
+}", Library={"lapack"},
+    Documentation(revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 
 end solve2rSym_C;

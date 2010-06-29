@@ -2406,7 +2406,12 @@ listed in the last column might be not the most relevant one.
 </table>
 </body>
 </html>
-"),             Documentation(info="<html>
+", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"),      Documentation(info="<html>
  
 Function <b>Modelica_LinearSystems2.StateSpace.Analysis.analysis</b> analyzes a state space system <br>
 <pre>    der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
@@ -2640,7 +2645,12 @@ The state space system is transformed to a appropriate discrete state space syst
 </pre></blockquote>
 
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
  end timeResponse;
 
 encapsulated function impulseResponse
@@ -2704,7 +2714,12 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
 </pre></blockquote>
 
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end impulseResponse;
 
 encapsulated function stepResponse
@@ -2766,7 +2781,12 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
 </pre></blockquote>
 
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end stepResponse;
 
 encapsulated function rampResponse
@@ -2827,7 +2847,12 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
 </pre></blockquote>
 
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end rampResponse;
 
 encapsulated function initialResponse
@@ -2893,7 +2918,12 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
 </pre></blockquote>
 
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end initialResponse;
 
   encapsulated function numeratorDegree
@@ -3048,7 +3078,12 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
 </pre></blockquote>
 
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
   end evaluate;
 
   encapsulated function zerosAndPoles
@@ -3378,7 +3413,12 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
 <table>
 <tr> <td align=right>  [1] </td><td align=center>  Emami-Naeini, A. and Van Dooren, P. </td>  <td> \"Computation of Zeros of Linear Multivariable Systems\"  </td> <td> Automatica, 18, pp. 415-430, 1982. </td></tr>
 </table>
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
   end invariantZeros;
 
   encapsulated function dcGain
@@ -3554,7 +3594,12 @@ Since controllability is dual to observability of the dual system (A', C', B', D
 // controllable = true
 </pre></blockquote>
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
   end isControllable;
 
   encapsulated function isObservable
@@ -3604,7 +3649,12 @@ The boolean input <b>method</b> defines for multi output systems the method to g
 // observable = false
 
 </pre></blockquote>
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
   end isObservable;
 
   encapsulated function isStabilizable
@@ -3657,7 +3707,12 @@ Then, the uncontrollable poles are checked to be stable, i.e. to have negative r
 // stabilizable = true
 </pre></blockquote>
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
   end isStabilizable;
 
   encapsulated function isDetectable
@@ -3713,7 +3768,12 @@ Then, the unobservable poles are checked to be stable, i.e. to have negative rea
 // detectable = true
 </pre></blockquote>
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
   end isDetectable;
 
   encapsulated function controllabilityMatrix
@@ -3931,6 +3991,12 @@ end Analysis;
         end if;
       end for;
 
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
     end assignPolesSI;
 
     encapsulated function assignPolesMI
@@ -4384,7 +4450,12 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 <tr> <td align=right>  [1] </td><td align=center>  Varga A.  </td>  <td> \"A Schur method for pole assignment\"  </td> <td> IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981 </td></tr>
 </table>
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
     end assignPolesMI;
 
   function kalmanFilter "Design of a Kalman estimator matrix"
@@ -4552,6 +4623,11 @@ The algebraic Riccati equation is solved by using the Schur algorithm
  
  
  
+</html>", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
 </html>"),   DymolaStoredErrors);
   end kalmanFilter;
 
@@ -4694,7 +4770,12 @@ The eigenvalues of the closed loop system <b>A</b> - <b>B</b>*<b>K</b> are compu
 // K = [-1, -3.63271, 108.763, 18.3815]
 </pre></blockquote>
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
     end lqr;
 
     encapsulated function lqg "LQG design algorithm"
@@ -4920,7 +5001,12 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
         -0.003,      0.08934]             
 </pre></blockquote>
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
     end lqg;
 
   end Design;
@@ -5845,7 +5931,12 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
 </table>
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
   end toZerosAndPoles;
 
   function toTransferFunction
@@ -5908,7 +5999,12 @@ The algorithm uses <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conve
 
 
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
   end toTransferFunction;
 
 encapsulated function toZerosAndPolesMIMO
@@ -6002,7 +6098,12 @@ i.e.
 vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
 </table>
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end toZerosAndPolesMIMO;
 
 function toTransferFunctionMIMO
@@ -6096,7 +6197,12 @@ i.e.
            | (s + 2)*(s + 3)            (s + 1)*(s + 2)        |
            |                                                   |
 </pre></blockquote>
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end toTransferFunctionMIMO;
 
 end Conversion;
@@ -6274,7 +6380,12 @@ Matrix T has to be invertible, i.e. the system has to be observable. The transfo
 </pre></blockquote>
 
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
       end toObservabilityForm;
 
       encapsulated function toControllabilityForm
@@ -6375,7 +6486,12 @@ Matrix T has to be invertible, i.e. the system has to be controllable. The trans
 </pre></blockquote>
 
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
       end toControllabilityForm;
 
       encapsulated function toDiagonalForm
@@ -6511,7 +6627,12 @@ This function is called to compute transfer functions of state space representat
 <table>
 <tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V. </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control, vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
 </table>
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
       end toIrreducibleForm;
 
       encapsulated function toStaircaseForm
@@ -6575,7 +6696,12 @@ Function <b>toStaircaseForm</b> computes the upper staircase form state space sy
 </pre></blockquote>
 
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
       end toStaircaseForm;
 
   encapsulated function extract
@@ -6784,7 +6910,12 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
 
 
 </html> 
-"));
+", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
   end fromModel;
 
     annotation (Documentation(info="<html>

@@ -11,10 +11,10 @@ model Pendular_Testbench_MBD_SR_UKF
     redeclare function F_function = 
         Modelica_LinearSystems2.WorkInProgress.Tests.Examples.fSigma,
     alpha=0.1,
-    redeclare function H_function = 
-        Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma,
     P_init=0.5*identity(size(UKF_SR.x_est_init, 1)),
-    kappa=0) 
+    kappa=0,
+    redeclare function H_function = 
+        Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma) 
     annotation (Placement(transformation(extent={{60,0},{80,20}})));
   CraneMultibody craneWithEquations3_1(d=100, J=0) 
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
@@ -30,7 +30,7 @@ model Pendular_Testbench_MBD_SR_UKF
   Modelica.Blocks.Routing.Multiplex2 multiplex2_1 
     annotation (Placement(transformation(extent={{20,-50},{40,-30}})));
   Modelica.Blocks.Math.Add add 
-    annotation (Placement(transformation(extent={{-18,-40},{2,-20}})));
+    annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
   Modelica.Blocks.Math.Add add1 
     annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
   inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(blockType=
@@ -60,15 +60,15 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.u2, noise1.y) annotation (Line(
-      points={{-20,-36},{-69,-36}},
+      points={{-22,-36},{-69,-36}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.u1, craneWithEquations3_1.x1) annotation (Line(
-      points={{-20,-24},{-26,-24},{-26,19},{-39,19}},
+      points={{-22,-24},{-26,-24},{-26,19},{-39,19}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(multiplex2_1.u2[1], add.y) annotation (Line(
-      points={{18,-46},{12,-46},{12,-30},{3,-30}},
+      points={{18,-46},{12,-46},{12,-30},{1,-30}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(multiplex2_1.u1[1], add1.y) annotation (Line(

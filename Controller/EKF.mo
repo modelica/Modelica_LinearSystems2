@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Controller;
 model EKF "Extended Kalman filter"
+
   import Modelica;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.DiscreteStateSpace.Design;

@@ -2157,7 +2157,7 @@ Computes a ZerosAndPoles record
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
-   Modelica_LinearSystems2.TransferFunction tf = 1/(s^2 + 3*s +2)
+   Modelica_LinearSystems2.TransferFunction dtf = 1/(s^2 + 3*s +2)
 
 
 <b>algorithm</b>
@@ -2482,8 +2482,8 @@ StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conver
  
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-   String modelName = \"Modelica_LinearSystems2.Examples.DoublePendulum\"; 
-   Real T_linearize = 5;; 
+   String modelName = \"Modelica_LinearSystems2.Examples.Utilities.DoublePendulum\"; 
+   Real T_linearize = 5; 
    
  
 <b>algorithm</b>

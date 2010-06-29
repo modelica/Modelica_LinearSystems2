@@ -130,5 +130,11 @@ of the closed loop system) and dtrsen (to compute the ordered real Schur form an
       A Schur Method for Solving Algebraic Riccati equations.
       IEEE Trans. Auto. Contr., AC-24, pp. 913-921, 1979.
 </PRE>
+</html>",
+        revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
 </html>"));
 end care;

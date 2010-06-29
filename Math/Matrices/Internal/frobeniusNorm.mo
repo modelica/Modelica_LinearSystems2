@@ -6,4 +6,10 @@ function frobeniusNorm "Return the Frobenius norm of a matrix"
     "frobenius norm of matrix A";
 
 algorithm
+  annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end frobeniusNorm;

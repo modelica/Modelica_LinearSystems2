@@ -56,7 +56,7 @@ model UKF_SR "Unscented Kalman filter"
 
 protected
   replaceable function ukf_sr=Design.UKF_SR (predict(redeclare function fSigma=F_function),
-                                       update(redeclare function hsigma=H_function),
+                                       update(redeclare function hSigma=H_function),
                                        estimate(redeclare function yOut=H_function));
 
   outer Modelica_LinearSystems2.Controller.SampleClock sampleClock

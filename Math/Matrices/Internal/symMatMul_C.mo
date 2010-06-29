@@ -120,6 +120,12 @@ int c_symMatMul_(doublereal *a, doublereal *b, doublereal *c, char *addi, intege
    free(cutri);
 //   fclose(fileptr);
   return 0;
-}", Library={"lapack"});
+}", Library={"lapack"},
+    Documentation(revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 
 end symMatMul_C;

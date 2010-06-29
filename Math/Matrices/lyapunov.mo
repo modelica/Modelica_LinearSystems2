@@ -125,5 +125,10 @@ using the Schur method for Lyapunov equations proposed by Bartels and Stewart [1
       Algorithm 432: Solution of the matrix equation AX + XB = C.
       Comm. ACM., Vol. 15, pp. 820-826, 1972.
 </PRE>
+</html>", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
 </html>"));
 end lyapunov;

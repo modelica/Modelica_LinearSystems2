@@ -16,3 +16,6 @@ hSigma_2
 ekfSystem_pendular
 Pendular_Testbench_MBD_EKF2
 Pendular_Testbench_MBD_EKF1
+fSigmaDummy
+hSigmaDummy
+disturbedSine

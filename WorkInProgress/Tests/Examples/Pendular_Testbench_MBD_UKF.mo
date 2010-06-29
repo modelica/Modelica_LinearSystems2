@@ -9,12 +9,12 @@ model Pendular_Testbench_MBD_UKF
     Q=1e-5*identity(size(UKF.x_est_init, 1)),
     G=identity(size(UKF.x_est_init, 1)),
     kappa=1,
-    redeclare function F_function = 
-        Modelica_LinearSystems2.WorkInProgress.Tests.Examples.fSigma,
     alpha=0.1,
+    P_init=0.5*identity(size(UKF.x_est_init, 1)),
     redeclare function H_function = 
         Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma,
-    P_init=0.5*identity(size(UKF.x_est_init, 1))) 
+    redeclare function F_function = 
+        Modelica_LinearSystems2.WorkInProgress.Tests.Examples.fSigma) 
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   CraneMultibody craneWithEquations3_1(d=100, J=0) 
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));

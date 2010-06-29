@@ -91,5 +91,10 @@ with
 </p>
 <h4>See also</h4>
 <a href=\"Modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
+</html>", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
 </html>"));
 end nullspace;

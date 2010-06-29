@@ -40,5 +40,10 @@ algorithm
   end if;
   annotation (Documentation(info="<html>
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end cholesky;

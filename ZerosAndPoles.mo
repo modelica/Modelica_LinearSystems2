@@ -115,7 +115,7 @@ record ZerosAndPoles
 
     annotation (Documentation(info="<html>
 <p>
-This function constructs a transfer function from denominator
+This function constructs a ZerosAndPoles transfer function from denominator
 and numerator zeros, as well as a gain.
 Example:
 </p>
@@ -732,7 +732,12 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
        end if;
 
      end printSystem;
-      annotation (interactive=true);
+      annotation (interactive=true, Documentation(revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
     end analysis;
 
    encapsulated function timeResponse
@@ -821,8 +826,8 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>impulseResponse</b> calculates the time response of a transfer function with impulse imput. 
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+Function <b>impulseResponse</b> calculates the time response of a ZerosAndPoles transfer function with impulse imput. 
+The system is first transformed zo a state space system, wich is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
 <blockquote><pre>
 ZerosAndPoles.Analysis.impulseResponse(zp, dt, tSpan)
 </pre></blockquote>
@@ -937,7 +942,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
 Function <b>rampResponse</b> calculates the time response of a transfer function for ramp imput u = t. 
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
 <blockquote><pre>
-ZerosAndPoles.Analysis.rampResponse(ss, dt, tSpan)
+ZerosAndPoles.Analysis.rampResponse(zp, dt, tSpan)
 </pre></blockquote>
 gives the same result as
 <blockquote><pre>
@@ -1141,7 +1146,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.num
       annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
-<tr> <td align=right>  result </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>evaluate</b>(ss)  </td> </tr>
+<tr> <td align=right>  result </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>evaluate</b>(zp,p)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -1164,7 +1169,12 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
 </pre></blockquote>
 
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
     end evaluate;
 
     encapsulated function zerosAndPoles
@@ -1408,7 +1418,12 @@ Computes the invariant zeros of the corresponding state space representation of 
 
 </pre></blockquote>
 </html>
-"));
+", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
     end invariantZeros;
 
     encapsulated function dcGain
@@ -2370,7 +2385,7 @@ and results in
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>plotBode</b>(zp)
    or
-ZerosAndPoles.Plot.<b>plotBode</b>(zp, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+ZerosAndPoles.Plot.<b>bode</b>(zp, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -2385,7 +2400,7 @@ Plots the bode-diagram of a transfer function.
    Modelica_LinearSystems2.ZerosAndPoles zp =(p^2 + 5*p + 7)/(p + 2)/(p + 3);
    
 <b>algorithm</b>
-   Modelica_LinearSystems2.ZerosAndPoles.Plot.plotBode(zp)
+   Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(zp)
 //  gives:
 </pre></blockquote>
 
@@ -2452,13 +2467,13 @@ Plots the bode-diagram of a transfer function.
     annotation (interactive=true, Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Syntax</font></b></p>
 <blockquote><pre>
-ZerosAndPoles.Plot.<b>plotTimeResponse</b>(zp);
+ZerosAndPoles.Plot.<b>timeResponse</b>(zp);
    or
-ZerosAndPoles.Plot.<b>plotTimeResponse</b>(zp, dt, tSpan,response, x0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+ZerosAndPoles.Plot.<b>timeResponse</b>(zp, dt, tSpan,response, x0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
                    device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <p><b><font style=\"color: #008000; \">Description</font></b></p>
-<p>Function <b>plotTimeResponse</b> plots the time response of a transfer function. The character of the time response if defined by the input 
+<p>Function <b>timeResponse</b> plots the time response of a transfer function. The character of the time response if defined by the input 
 <a href=\"Modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>, <a href=\"Modelica://Modelica_LinearSystems2.
 ZerosAndPoles.Plot.step\">step</a>, <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>, and <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>. </p>
 
@@ -2472,7 +2487,7 @@ ZerosAndPoles.Plot.step\">step</a>, <a href=\"Modelica://Modelica_LinearSystems2
    Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
 
 <b>algorithm</b>
-   Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse(zp, dt=0.02, tSpan=3, response=response)
+   Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse(zp, dt=0.02, tSpan=3, response=response)
 //  gives:
 </pre></blockquote>
 
@@ -2530,7 +2545,8 @@ ZerosAndPoles.Plot.<b>impulse</b>(zp, dt, tSpan, x0, columnLabels, defaultDiagra
 
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer function. It is based on <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also
+Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer function. It is based on
+<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also
 <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>, 
 <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>, and
 <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
@@ -2554,8 +2570,7 @@ Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer
 <p align=\"center\">
 <img src=\"modelica://Modelica_LinearSystems2/Extras/Images/impulseResponseZP.png\">
 </p>
-<p>
-</p>
+
 
 
 </html> "));
@@ -2674,8 +2689,6 @@ Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer funct
 <p>
 <img src=\"modelica://Modelica_LinearSystems2/Extras/Images/rampResponseZP.png\">
 </p>
-<p>
-</p>
 
 
 </html> "));
@@ -2754,9 +2767,7 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
 
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/initialResponseTF.png\">
-</p>
-<p>
+<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/initialResponseZP.png\">
 </p>
 
 
@@ -2814,12 +2825,12 @@ from a ZerosAndPoles record representated by first and second order numerator an
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
-   Modelica_LinearSystems2.ZerosAndPoles tf = 1/(p + 3)/(p + 1)
+   Modelica_LinearSystems2.ZerosAndPoles zp = 1/(p + 3)/(p + 1)
 
 
 <b>algorithm</b>
-  zp:=Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction(tf);
-//  zp = 1/( (p + 1)*(p + 2) )
+  tf:=Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction(zp);
+//  tf = 1/( s^2 + 4*s + 3 )
 </pre></blockquote>
 
 
@@ -4020,29 +4031,18 @@ processing.
 
       zp := StateSpace.Conversion.toZerosAndPolesMIMO(result);
 
-      annotation (interactive=true, Documentation(info="function fromModel 
-  \"Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model\"
-
-  import Modelica;
-  import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.ZerosAndPoles;
-
-  input String modelName \"Name of the Modelica model\" annotation(Dialog(translatedModel));
-  input Real T_linearize=0 \"point in time of simulation to linearize the model\";
-  input String fileName=\"dslin\" \"Name of the result file\";
-
-  annotation (interactive=true, Documentation(info=\"<html>
+    annotation (interactive=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> ZerosAndPoles.Import.<b>fromModel</b>(modelName, T_linearize, fileName)  </td> </tr>
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Generate a matrix of ZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conversion from sate space to transfer function representation.
+Generate a matrix of ZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromModel</a> followed by a conversion from sate space to transfer function representation.
  
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-   String modelName = \"Modelica_LinearSystems2.Examples.DoublePendulum\"; 
+   String modelName = \"Modelica_LinearSystems2.Examples.Utilities.DoublePendulum\"; 
    Real T_linearize = 5; 
    
  
@@ -4061,9 +4061,7 @@ Generate a matrix of ZerosAndPoles data records by linearization of a model defi
  
  
  
-</html> \"));
-
-"));
+</html>"));
   end fromModel;
 
     encapsulated function fromFile

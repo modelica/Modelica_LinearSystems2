@@ -65,6 +65,7 @@ record DiscreteStateSpace
 This function constructs a DiscreteStateSpace record dss from a Real value, i.e. a discrete state space system without a state and an output without dynamics:
 <blockquote><pre>
 y = r*u
+
 </pre></blockquote>
 Therefore, the matrices are defined by
 <blockquote><pre>
@@ -135,8 +136,10 @@ This function constructs a DiscreteStateSpace record dss with<br>
   dss.B2 = B2;
   dss.Ts = Ts;
   dss.method = method;
+  
 </pre></blockquote>
-
+i.e. the input-matrices are the system matrices of the discrete system. See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>
+where the inputs are the matrices of a continuous system which is to convert to discrete state space.
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -289,7 +292,46 @@ public
         assert(false, "Argument method (= " + String(method) +
           ") of makeDiscrete is wrong.");
       end if;
-      annotation (overloadsConstructor=true);
+      annotation (overloadsConstructor=true,
+        Documentation(info="<html>
+<p>
+This function dereives a linear time invariant difference
+equation system in state space form from continuous state space form:
+</p>
+<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
+     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
+</pre>
+<p>
+with
+</p>
+<ul>
+<li> <b>Ts</b> - the sample time</li>
+<li> <b>k</b> - the index of the actual sample instance (k=0,1,2,3,...)</li>
+<li> <b>t</b> - the time</li>
+<li> <b>u</b>(t) - the input vector,</li>
+<li> <b>y</b>(t) - the output vector,</li>
+<li> <b>x</b>(t) - the discrete state vector (x(t=Ts*0) is the initial state),</li>
+<li> <b>x</b>_continuous(t) - the state vector of the continuous system
+     from which the discrete block has been derived (details see below),</li>
+<li> <b>A,B,C,D,B2</b> - matrices of appropriate dimensions.</li>
+</ul>
+<p>
+The discretization methodis selected by the user from
+<ul>
+<li> <b>ExplicitEuler</b> - Discretization with explicit Euler integration</li>
+<li> <b>ImplicitEuler</b> - Discretization with implicit Euler integration</li>
+<li> <b>Trapezoidal</b> - Discretization with trapezoidal integration (Tustins method, recommended)</li>
+<li> <b>ImpulseExact</b> - Exact discretization for impulse inputs</li>
+<li> <b>StepExact</b> - Exact discretization for step inputs (zero-order hold equivalent)</li>
+<li> <b>RampExact</b> - Exact discretization for ramp inputs (first-order hold equivalent)</li>
+</ul>
+
+</p>
+<p>
+
+</p>
+</html>"));
     end fromStateSpace;
 
     encapsulated function fromMatrices2
@@ -418,7 +460,23 @@ public
         assert(false, "Argument method (= " + String(method) +
           ") of makeDiscrete is wrong.");
       end if;
-      annotation (overloadsConstructor=true);
+      annotation (overloadsConstructor=true,
+         Documentation(info="<html>
+<p>
+This function dereives a linear time invariant difference
+equation system in state space form from the matrices of the corresponding continuous system:
+</p>
+<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
+     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
+</pre>
+<p>
+The function is similar to  <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">fromStateSpace</a> but the inputs are restricted
+to the matrices, the sample time and the discretization method.
+
+
+</p>
+</html>"));
     end fromMatrices2;
   end 'constructor';
 
@@ -1543,9 +1601,12 @@ end Analysis;
 encapsulated package Design
 
   function UKF "Unscented Kalman filter design function"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+
+    extends Modelica.Icons.Function;
+
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
 
     input Real xpre[:] "State at instant k-1";
     input Real upre[:] "Input at instant k-1";
@@ -1567,13 +1628,33 @@ encapsulated package Design
     output Real K[size(xpre,1),size(y,1)] "Kalman filter gain matrix";
 
     replaceable function predict=DiscreteStateSpace.Internal.ukfPredict(redeclare
-            Modelica_LinearSystems2.WorkInProgress.Tests.Examples.fSigma fSigma);
+            Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy
+            fSigma) annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+
+</html>"));
 
     replaceable function update=DiscreteStateSpace.Internal.ukfUpdate(redeclare
-            Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma hSigma);
+            Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy
+            hSigma) annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+
+</html>"));
 
     replaceable function estimate=DiscreteStateSpace.Internal.ukfEstimate(redeclare
-            Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma yOut);
+            Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy
+            yOut) annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 
     protected
     Integer nx = size(xpre,1) "Number of system states";
@@ -1589,6 +1670,32 @@ encapsulated package Design
       (mux,Rxx) := predict(xpre, upre, Ppre, Q, alpha, beta, kappa, Ts);
       (muy,Ryy,Rxy) := update(mux, upre, Rxx, R,  alpha, beta, kappa, Ts);
       (K,P,x_est, y_est) := estimate(y, mux, muy, upre, Rxx, Ryy, Rxy, Ts);
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+
+</html>",   info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+         (x_est, y_est, P, K) = DiscreteStateSpace.Design.<b>UKF</b>(x_pre, u_pre, y, P_pre, Q, R, alpha, beta, kappa, Ts)
+</pre></blockquote>
+<h4>Description</h4>
+<p>
+Function <b>UKF</b> computes one recursion of the Unscented Kalman filter. Unscented Kalman filters are similar to Extended Kalman filters
+but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation 
+linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
+</p>
+See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to
+solve the mathematically identical problem.
+
+
+<h4>References</h4>
+<table>
+<tr> <td align=right>  [1] </td><td align=center> http://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter </td></tr>
+</table>
+</html>"));
   end UKF;
 
   function UKF_SR
@@ -1618,13 +1725,31 @@ encapsulated package Design
     output Real K[size(xpre,1),size(y,1)] "Kalman filter gain matrix";
 
     replaceable function predict=DiscreteStateSpace.Internal.ukfPredict_sr(redeclare
-            Modelica_LinearSystems2.WorkInProgress.Tests.Examples.fSigma fSigma);
+            Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy
+            fSigma) annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 
     replaceable function update=DiscreteStateSpace.Internal.ukfUpdate_sr(redeclare
-            Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma hSigma);
+            Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy
+            hSigma) annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 
     replaceable function estimate=DiscreteStateSpace.Internal.ukfEstimate_sr(redeclare
-            Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma yOut);
+            Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy
+            yOut) annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 
     protected
     Integer nx = size(xpre,1) "Number of system states";
@@ -1642,6 +1767,33 @@ encapsulated package Design
       (mux,Sxx) := predict(xpre, upre, CfPpre, CfQ, alpha, beta, kappa, Ts);
       (muy,Syy,Rxy) := update(mux, upre, Sxx, CfR,  alpha, beta, kappa, Ts);
       (K,CfP,x_est, y_est) := estimate(y, mux, muy, upre, Sxx, Syy, Rxy, Ts);
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+
+</html>",   info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+         (x_est, y_est, CfP, K) = DiscreteStateSpace.Design.<b>UKF_SR</b>(x_pre, u_pre, y, CfP_pre, QCf, CfR, alpha, beta, kappa, Ts)
+</pre></blockquote>
+<h4>Description</h4>
+<p>
+Function <b>UKF_SR</b> computes one recursion of the Square Root Unscented Kalman filter (SR-UKF). SR-UKF follow the same princible as UKF but using Cholesky factors (square roots)
+of the positive definite matrices. This means less computational effort and higher reliablitiy.<br>
+Unscented Kalman filters are similar to Extended Kalman filters but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation 
+linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
+</p>
+See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF\">UKF</a>, where the standard method (without Cholesky factorization)
+to calculate UKF is applied.
+
+
+<h4>References</h4>
+<table>
+<tr> <td align=right>  [1] </td><td align=center> http://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter </td></tr>
+</table>
+</html>"));
   end UKF_SR;
 
   function EKF "Extended Kalman filter design function"
@@ -1667,7 +1819,13 @@ encapsulated package Design
     output Real K[size(xpre,1),size(y,1)] "Kalman filter gain matrix";
 
     replaceable function ekfFunction = 
-        Modelica_LinearSystems2.WorkInProgress.Tests.Examples.ekfSystem_pendular;
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy 
+        annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 
     protected
     Integer nx = size(xpre,1) "Number of system states";
@@ -1680,6 +1838,32 @@ encapsulated package Design
     (xmu, y_est, Ak, Ck) := ekfFunction(xpre, upre, Ts, ny);
     (K, M) := DiscreteStateSpace.Internal.kfEstimate(Ak, Ck, Mpre, Q, R);
     x_est :=xmu + K*(y - y_est);
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>",   info="<html>
+
+<h4>Syntax</h4>
+<blockquote><pre>
+         (x_est, y_est, M, K) = DiscreteStateSpace.Design.<b>EKF</b>(x_pre, u_pre, y, M_pre, Q, R, Ts)
+</pre></blockquote>
+<h4>Description</h4>
+<p>
+Function <b>EKF</b> computes one recursion of the Kalman filter or the extended Kalman filter equations respectively, i.e updating
+the Riccati difference equation and the Kalman filter gain and correction of the predicted state.<br>
+The system functions are defined in function ekfFunction(), which is to provide by the user. Matrices <b>A</b>_k and <b>C</b>_k are the
+Jacobians F_x and H_x of the system equations <b>f</b> and <b>h</b>
+<blockquote><pre>
+ 
+ x_k = f(x_k-1, u_k-1)
+ y_k = h(x_k, u_k)
+  
+</pre></blockquote>
+i.e., in the case of linear systems the system matrix <b>A</b> and the output matrix <b>C</b>.
+
+</html>"));
   end EKF;
 end Design;
 
@@ -2419,7 +2603,12 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
 </table>
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end toDiscreteZerosAndPoles;
 
 encapsulated function toDiscreteZerosAndPolesMIMO
@@ -2525,7 +2714,12 @@ of a system from discrete state space representation, i.e. isolating the uncontr
 vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
 </table>
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end toDiscreteZerosAndPolesMIMO;
 
 function toDiscreteTransferFunction
@@ -2562,7 +2756,7 @@ Computes a DiscreteTransferFunction record
  </pre></blockquote>
 
 The algorithm uses <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles\">toDiscreteZerosAndPoles</a> to convert the
-discrete state space system into a discrete zeros and poles representation first and after that <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction\">ZerosAndPoles.Conversion.toTransferFunction</a> to generate the transfer function.
+discrete state space system into a discrete zeros and poles representation first and after that <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction\">DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction</a> to generate the transfer function.
 
 
 
@@ -2592,7 +2786,12 @@ discrete state space system into a discrete zeros and poles representation first
 
 
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end toDiscreteTransferFunction;
 
 function toDiscreteTransferFunctionMIMO
@@ -2681,7 +2880,12 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
  method =StepExact]
 </pre></blockquote>
 
-</html> "));
+</html> ", revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end toDiscreteTransferFunctionMIMO;
 
 end Conversion;
@@ -3079,16 +3283,22 @@ algorithm
   Pk := symmetric(Pk);
   Pk := Pk+Q;
 
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end ukfPredict;
 
 function ukfUpdate "Update step in ukf"
   extends Modelica.Icons.Function;
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-      import Modelica_LinearSystems2.Math.Matrices;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.Math.Matrices;
 
   extends Modelica_LinearSystems2.DiscreteStateSpace.Internal.updateBase;
 
@@ -3119,7 +3329,7 @@ algorithm
   end for;
 
 //Compute predicted covariace Ryy = sum(w_i*(hSigma_i-mu_i)*(hSigma_i-mu_i)'), i=0,...,2n+1
-// Sinc Ryy will be symmetric, only the upper triangle is calculated
+// Since Ryy will be symmetric, only the upper triangle is calculated
 // i=2,..,2n+1 with constant weight wci first
   for j in 1:m loop
     for i in 2:2*n + 1 loop
@@ -3139,6 +3349,12 @@ algorithm
 
   Ryy := Ryy+R;
 
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end ukfUpdate;
 
 function ukfEstimate
@@ -3153,6 +3369,12 @@ algorithm
   Pu := symmetric(Pu);
   xmu := xm + K*(y - ym);
   ymu := yOut(xmu, u, Ts, ny);
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end ukfEstimate;
 
 function ukfPredict_sr "Prediction step in square root ukf"
@@ -3216,6 +3438,12 @@ algorithm
         false);
     end if;
   end if;
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end ukfPredict_sr;
 
 function ukfUpdate_sr "Update step in square root ukf"
@@ -3290,6 +3518,12 @@ algorithm
     Rxy[:, j] := Rxy[:, j] + wc0*(ySigmas[j, 1] - mu[j])*(xSigmas[:, 1] - xpre);
   end for;
 
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end ukfUpdate_sr;
 
 function ukfEstimate_sr
@@ -3318,6 +3552,12 @@ algorithm
   xmu := xm + K*(y-ym);
   ymu := yOut(xmu, u, Ts, ny);
 
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end ukfEstimate_sr;
 
 function kfEstimate
@@ -3348,7 +3588,7 @@ function kfEstimate
     protected
   Real UT[size(Ck, 1),size(Ck, 1)]
         "Upper triangle of measurement prediction covariance Ck*M*Ck' + R";
-  Real PCT[size(Ak, 1),size(Ck, 1)] "Matrix product M*Ck'";
+  Real MCT[size(Ak, 1),size(Ck, 1)] "Matrix product M*Ck'";
 
   Integer nx=size(Ak, 1) "Number of states, order of the system";
   Integer ny=size(Ck, 1) "number of outputs";
@@ -3359,17 +3599,17 @@ function kfEstimate
   Integer info;
 
 algorithm
-  PCT:=M*transpose(Ck) "Matrix M*Ck'";
+  MCT:=M*transpose(Ck) "Matrix M*Ck'";
   UT:=Math.Matrices.Internal.symMatMul(Ck, M, R, true);
 //  UT:=Math.Matrices.Internal.symMatMul_C(Ck, M, R, true);
 
-  K := Math.Matrices.Internal.solve2rSym_C(UT, PCT, false, true);
-//  K := Math.Matrices.solve2rSym(UT, PCT,false, true);
+  K := Math.Matrices.Internal.solve2rSym_C(UT, MCT, false, true);
+//  K := Math.Matrices.solve2rSym(UT, MCT,false, true);
 
 // Calculate upper triangle of symmetric M-K*Ck*M
   for l1 in 1:nx loop
     for l2 in l1:nx loop
-      M_new[l1, l2] := M[l1, l2] - K[l1, :]*PCT[l2, :];
+      M_new[l1, l2] := M[l1, l2] - K[l1, :]*MCT[l2, :];
     end for;
   end for;
 
@@ -3379,6 +3619,43 @@ algorithm
   // To complete the matrix, the strict lower triangle could be produced by
   M_new := symmetric(M_new);
 
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>", info="<html>
+
+<h4>Syntax</h4>
+<blockquote><pre>
+         (K, M_update) = DiscreteStateSpace.Internal.<b>kfEstimate</b>(A, C, M, Q, R);
+</pre></blockquote>
+<h4>Description</h4>
+<p>
+Function <b>kfEstimate</b> computes the matrix gain <b>K</b> of a Kalman filter
+<blockquote><pre>
+         T      T    -1
+  <b>K</b> = <b>M</b>*<b>C</b>*(<b>C</b>*<b>M</b>*<b>C</b> + <b>R</b>)
+
+</pre></blockquote>
+ and the updated solution <b>M</b> of the Riccati equation
+ <blockquote><pre>
+                      T       T      T    -1     T
+  <b>M</b>_update = <b>Q</b> + <b>A</b>*<b>M</b>*<b>A</b> - <b>A</b>*<b>M</b>*<b>C</b>*(<b>C</b>*<b>M</b>*<b>C</b> + <b>R</b>) *<b>C</b>*<b>M</b>*<b>A</b>.
+  
+</pre></blockquote>
+
+In context with the covariance matrix <b>P</b> of the estimation error matrix <b>M</b> holds
+<blockquote><pre>
+                      
+  <b>P</b> = (<b>I</b> - <b>K</b>*<b>C</b>)*<b>M</b>.
+                      
+</pre></blockquote>
+Since several matrices in the equation above are positve definite, special routines for multiplication and solving are applied. Furthermore, computation
+is restricted to the upper triangle of those matrices.<br>
+Function <b>kfEstimate</b> is called in <b>DiscreteStateSpace.Design.EKF</b> to compute one recursion of the Kalman filter or Extended Kalman filter
+equations respectively.
+</html>"));
 end kfEstimate;
 
 function estimateBase "Base class of estimation function"
@@ -3388,7 +3665,7 @@ function estimateBase "Base class of estimation function"
       import Modelica_LinearSystems2;
 
   replaceable function yOut = 
-      Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma constrainedby
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy constrainedby
         Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase 
                                                                 annotation(choicesAllMatching);
 
@@ -3413,11 +3690,11 @@ end estimateBase;
 partial function updateBase "Bass class of update-function"
   extends Modelica.Icons.Function;
 
-      import Modelica;
-      import Modelica_LinearSystems2;
+  import Modelica;
+  import Modelica_LinearSystems2;
 
   replaceable function hSigma = 
-      Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma constrainedby
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy constrainedby
         Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase 
                                                                 annotation(choicesAllMatching);
 
@@ -3463,7 +3740,7 @@ partial function predictBase "Base class of prediction-function"
       import Modelica_LinearSystems2;
 
   replaceable function fSigma = 
-      Modelica_LinearSystems2.WorkInProgress.Tests.Examples.fSigma constrainedby
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy constrainedby
         Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase 
                                                                 annotation(choicesAllMatching);
 
@@ -3505,7 +3782,7 @@ partial function predictBase_sr "Base class of prediction function"
       import Modelica_LinearSystems2;
 
   replaceable function fSigma = 
-      Modelica_LinearSystems2.WorkInProgress.Tests.Examples.fSigma constrainedby
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy constrainedby
         Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase 
                                                                 annotation(choicesAllMatching);
 
@@ -3546,9 +3823,8 @@ partial function updateBase_sr "Bass class of update_sr-function"
 
       import Modelica;
       import Modelica_LinearSystems2;
-
   replaceable function hSigma = 
-      Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma constrainedby
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy constrainedby
         Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase 
                                                                 annotation(choicesAllMatching);
 
@@ -3595,7 +3871,7 @@ function estimateBase_sr "Base class of estimation function"
       import Modelica_LinearSystems2;
 
   replaceable function yOut = 
-      Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma constrainedby
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy constrainedby
         Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase 
                                                                 annotation(choicesAllMatching);
 
@@ -3644,7 +3920,7 @@ partial function ekfSystemBase "Base class of ekf-system functions"
 
 end ekfSystemBase;
 
-  function fBase "Base class of the state function"
+  partial function fBase "Base class of the state function"
     extends Modelica.Icons.Function;
 
     input Real x[:] "State at instant k";
@@ -3655,7 +3931,7 @@ end ekfSystemBase;
 
   end fBase;
 
-  partial function hBase "\"Base class of output function\""
+  partial function hBase "Base class of output function"
     extends Modelica.Icons.Function;
 
     input Real x[:] "State at instant k";
@@ -3668,9 +3944,11 @@ end ekfSystemBase;
   end hBase;
 
   function fSigmaDummy "Dummy function for the discretetized state function"
+
+    import Modelica_LinearSystems2.DiscreteStateSpace.Internal;
     extends Modelica.Icons.Function;
 
-    extends fBase;
+    extends Internal.fBase;
 
   algorithm
     x_new := x;

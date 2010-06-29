@@ -36,7 +36,7 @@ record DiscreteTransferFunction
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
       input Real r "Value of Real variable";
-      input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.SIunits.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
         "Discretization method";
       input String uName="" "input name";
@@ -671,6 +671,33 @@ algorithm
   (z,p,k) := TransferFunction.Analysis.zerosAndPoles(tf);
   dzp := DiscreteZerosAndPoles(z, p, k, dtf.Ts, dtf.method, uName=dtf.uName, yName=dtf.yName);
   annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right> dzp </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.<b>toDiscreteZerosAndPoles</b>(tf)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Computes a DiscreteZerosAndPoles record
+ <blockquote><pre>
+                 product(q + n1[i]) * product(q^2 + n2[i,1]*q + n2[i,2])
+        dzp = k*---------------------------------------------------------
+                 product(q + d1[i]) * product(q^2 + d2[i,1]*q + d2[i,2])
+                 
+</pre></blockquote>
+of a discrete transfer function representated by numerator and denominator polynomial. The poles and zeros and the gain <tt>k</tt> are computed 
+from the DiscreteTransferFunctio-input and are used as inputs the DiscreteZerosAndPoles constructor.
+
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();  
+   Modelica_LinearSystems2.DiscreteTransferFunction dtf = 1/(z^2 + 3*z + 2)
+
+
+<b>algorithm</b>
+  dzp = Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteZerosAndPoles(dtf);
+//  dzp = 1/( (z + 1)*(z + 2) )
+</pre></blockquote>
 
 </html>"));
 end toDiscreteZerosAndPoles;
