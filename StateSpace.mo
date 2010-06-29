@@ -1567,7 +1567,10 @@ encapsulated package Analysis
         if analyseOptions.printEigenValueProperties then
           print("<tr>\n <td style=\"text-align:center\"> " + number + " </td> <td style=\"text-align:left\"> &nbsp; "
              + String(evSorted[i].ev.re, format="14.4e") + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + String(evSorted[i].timeConstant, format="9.4f") + " </td> <td style=\"text-align:left\"> &nbsp; "
+             + (if evSorted[i].timeConstant < 1e6 then 
+                 String(evSorted[i].timeConstant, format="9.4f") else 
+                     "---")
+             + " </td> <td style=\"text-align:left\"> &nbsp; "
              + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if 
             evSorted[i].isStable then (if evSorted[i].isControllable then "" else 
                   "not ") + "controllable, " else (if evSorted[i].isStabilizable then 
@@ -1584,7 +1587,10 @@ encapsulated package Analysis
         else
           print("<tr>\n <td style=\"text-align:center\"> " + number + " </td> <td style=\"text-align:left\"> &nbsp; "
              + String(evSorted[i].ev.re, format="14.4e") + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + String(evSorted[i].timeConstant, format="9.4f") + " </td> <td style=\"text-align:left\"> &nbsp; "
+             + (if evSorted[i].timeConstant < 1e6 then 
+                 String(evSorted[i].timeConstant, format="9.4f") else 
+                     "---")
+             + " </td> <td style=\"text-align:left\"> &nbsp; "
              + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if 
             evSorted[i].isStable then (if evSorted[i].isControllable then "" else 
                   "not ") + "controllable, " else (if evSorted[i].isStabilizable then 
