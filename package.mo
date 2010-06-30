@@ -10,8 +10,8 @@ annotation (
   uses(Modelica(version="3.1")),
    version="2.2 Beta 1",
    versionBuild=1,
-   versionDate="2010-05-14",
-   dateModified = "2010-05-14 09:27:58Z",
+   versionDate="2010-06-30",
+   dateModified = "2010-06-30 09:27:58Z",
    revisionID="$Id::                                       $",
    conversion(noneFromVersion="2.0"),
   Documentation(info="<html>
