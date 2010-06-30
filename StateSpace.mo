@@ -130,9 +130,9 @@ Therefore, the matrices are defined by
 </html>"));
   end fromReal;
 
-  function fromTransferFunction = 
+  function fromTransferFunction =
       Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace annotation (Documentation(info="<html> </html>"));
-  function fromZerosAndPoles = 
+  function fromZerosAndPoles =
       Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace annotation (Documentation(info="<html> </html>"));
 
     annotation (Documentation(info="<html>
@@ -1217,26 +1217,26 @@ encapsulated package Analysis
       print("<html>\n<body>\n<p>\n<b>Characteristics</b>\n</p>The system\n<p>" + "</p> is ",
         fileName);
       if analyseOptions.printControllability and analyseOptions.printObservability then
-        print((if isStable then " " else "not ") + "stable" + "\n<br>" + (if 
-          isStable then if isControllable then "and it is " else "but it is not " else 
+        print((if isStable then " " else "not ") + "stable" + "\n<br>" + (if
+          isStable then if isControllable then "and it is " else "but it is not " else
                 if isControllable then "but it is " else "and it is not ") + "controllable"
-           + (if isStable then "" else "\n<br>" + (if isControllable then " and therefore it is " else 
+           + (if isStable then "" else "\n<br>" + (if isControllable then " and therefore it is " else
                 if isStabilizable then " but it is " else "and is not ") + "stabilizable")
            + "\n<br> The system is " + (if isObservable then " " else "not ") + "observable"
-           + (if isStable then "" else "\n<br>" + (if isObservable then " and therefore it is " else 
+           + (if isStable then "" else "\n<br>" + (if isObservable then " and therefore it is " else
                 if isDetectable then " but it is " else "and is not ") + "detectable")
            + "\n<br></br>", fileName);
       elseif not analyseOptions.printObservability and analyseOptions.printControllability then
-        print((if isStable then " " else "not ") + "stable" + "\n<br>" + (if 
-          isStable then if isControllable then "and it is " else "but it is not " else 
+        print((if isStable then " " else "not ") + "stable" + "\n<br>" + (if
+          isStable then if isControllable then "and it is " else "but it is not " else
                 if isControllable then "but it is " else "and it is not ") + "controllable"
-           + (if isStable then "" else "\n<br>" + (if isControllable then " and therefore it is " else 
+           + (if isStable then "" else "\n<br>" + (if isControllable then " and therefore it is " else
                 if isStabilizable then " but it is " else "and is not ") + "stabilizable")
            + "\n<br></br>", fileName);
       elseif not analyseOptions.printControllability and analyseOptions.printObservability then
         print((if isStable then " " else "not ") + "stable" + "\n<br> The system is "
-           + (if isObservable then " " else "not ") + "observable" + (if isStable then 
-                "" else "\n<br>" + (if isObservable then " and therefore it is " else 
+           + (if isObservable then " " else "not ") + "observable" + (if isStable then
+                "" else "\n<br>" + (if isObservable then " and therefore it is " else
                 if isDetectable then " but it is " else "and is not ") + "detectable")
            + "\n<br></br>", fileName);
       else
@@ -1567,15 +1567,15 @@ encapsulated package Analysis
         if analyseOptions.printEigenValueProperties then
           print("<tr>\n <td style=\"text-align:center\"> " + number + " </td> <td style=\"text-align:left\"> &nbsp; "
              + String(evSorted[i].ev.re, format="14.4e") + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + (if evSorted[i].timeConstant < 1e6 then 
-                 String(evSorted[i].timeConstant, format="9.4f") else 
+             + (if evSorted[i].timeConstant < 1e6 then
+                 String(evSorted[i].timeConstant, format="9.4f") else
                      "---")
              + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if 
-            evSorted[i].isStable then (if evSorted[i].isControllable then "" else 
-                  "not ") + "controllable, " else (if evSorted[i].isStabilizable then 
-                  "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then 
-                  (if evSorted[i].isObservable then "" else "not ") + "observable " else 
+             + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if
+            evSorted[i].isStable then (if evSorted[i].isControllable then "" else
+                  "not ") + "controllable, " else (if evSorted[i].isStabilizable then
+                  "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then
+                  (if evSorted[i].isObservable then "" else "not ") + "observable " else
                   (if evSorted[i].isDetectable then "" else "not ") + "detectable ")
              + " </td> <td style=\"text-align:left\"> &nbsp; " + " z[" + String(i)
              + "]" + " contributes to " + xNames2[r_maxIndex1] + " with " +
@@ -1587,15 +1587,15 @@ encapsulated package Analysis
         else
           print("<tr>\n <td style=\"text-align:center\"> " + number + " </td> <td style=\"text-align:left\"> &nbsp; "
              + String(evSorted[i].ev.re, format="14.4e") + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + (if evSorted[i].timeConstant < 1e6 then 
-                 String(evSorted[i].timeConstant, format="9.4f") else 
+             + (if evSorted[i].timeConstant < 1e6 then
+                 String(evSorted[i].timeConstant, format="9.4f") else
                      "---")
              + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if 
-            evSorted[i].isStable then (if evSorted[i].isControllable then "" else 
-                  "not ") + "controllable, " else (if evSorted[i].isStabilizable then 
-                  "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then 
-                  (if evSorted[i].isObservable then "" else "not ") + "observable " else 
+             + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if
+            evSorted[i].isStable then (if evSorted[i].isControllable then "" else
+                  "not ") + "controllable, " else (if evSorted[i].isStabilizable then
+                  "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then
+                  (if evSorted[i].isObservable then "" else "not ") + "observable " else
                   (if evSorted[i].isDetectable then "" else "not ") + "detectable ")
              + " </td> </tr> ", fileName);
         end if;
@@ -1769,11 +1769,11 @@ encapsulated package Analysis
             evSorted[i].ev.im, format="12.4e") + "j" + " </td> <td style=\"text-align:left\"> &nbsp; "
              + String(evSorted[i].frequency, format="9.4f") + " </td> <td style=\"text-align:left\"> &nbsp; "
              + String(evSorted[i].damping, format="9.4f") + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if 
-            evSorted[i].isStable then (if evSorted[i].isControllable then "" else 
-                  "not ") + "controllable, " else (if evSorted[i].isStabilizable then 
-                  "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then 
-                  (if evSorted[i].isObservable then "" else "not ") + "observable " else 
+             + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if
+            evSorted[i].isStable then (if evSorted[i].isControllable then "" else
+                  "not ") + "controllable, " else (if evSorted[i].isStabilizable then
+                  "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then
+                  (if evSorted[i].isObservable then "" else "not ") + "observable " else
                   (if evSorted[i].isDetectable then "" else "not ") + "detectable ")
              + " </td> <td style=\"text-align:left\"> &nbsp; " + " z[" + number + "]"
              + " contribute to " + xNames2[r_maxIndex1] + " with " + String(
@@ -1787,11 +1787,11 @@ encapsulated package Analysis
             evSorted[i].ev.im, format="12.4e") + "j" + " </td> <td style=\"text-align:left\"> &nbsp; "
              + String(evSorted[i].frequency, format="9.4f") + " </td> <td style=\"text-align:left\"> &nbsp; "
              + String(evSorted[i].damping, format="9.4f") + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if 
-            evSorted[i].isStable then (if evSorted[i].isControllable then "" else 
-                  "not ") + "controllable, " else (if evSorted[i].isStabilizable then 
-                  "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then 
-                  (if evSorted[i].isObservable then "" else "not ") + "observable " else 
+             + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if
+            evSorted[i].isStable then (if evSorted[i].isControllable then "" else
+                  "not ") + "controllable, " else (if evSorted[i].isStabilizable then
+                  "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then
+                  (if evSorted[i].isObservable then "" else "not ") + "observable " else
                   (if evSorted[i].isDetectable then "" else "not ") + "detectable ")
              + " </td> </tr> ", fileName);
         end if;
@@ -1936,14 +1936,14 @@ encapsulated package Analysis
           number1 + "]" + (if two then " <br>" + " &nbsp; " + " is composed of " +
           String(100*absMax2, format="5.1f") + "% by z[" + number2 + "]" else "") + " </td> <td style=\"text-align:center\"> &nbsp; "
            + number1 + (if two then "<br> &nbsp; " + number2 else Strings.repeat(9))
-           + " </td> <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then 
+           + " </td> <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then
                 "---" else String(w1, format="9.4f")) + (if two then "<br> &nbsp; "
-           + (if iw2 <= nReal then "---" else String(w2, format="9.4f")) else 
+           + (if iw2 <= nReal then "---" else String(w2, format="9.4f")) else
           Strings.repeat(9)) + " </td> <td style=\"text-align:center\"> &nbsp; " +
-          (if iw1 <= nReal then "---" else String(d1, format="9.4f")) + (if two then 
+          (if iw1 <= nReal then "---" else String(d1, format="9.4f")) + (if two then
                 "<br> &nbsp; " + (if iw2 <= nReal then "---" else String(d2,
           format="9.4f")) else "") + " </td> <td style=\"text-align:center\"> &nbsp; "
-           + (if (iw1 <= nReal) then String(evSorted[i].timeConstant, format="9.4f") else 
+           + (if (iw1 <= nReal) then String(evSorted[i].timeConstant, format="9.4f") else
                 "---") + (if two then "<br> &nbsp; " + (if (iw2 <= nReal and abs(
           cev[maxIndex2].re) > 1e-10) then String(1/abs(cev[maxIndex2].re),
           format="9.4f") else "---") else "") + " </td> </tr> ", fileName);
@@ -1997,7 +1997,7 @@ encapsulated package Analysis
             i,
             minimumLength=7,
             leftJustified=false);
-        timeConstant := if abs(systemZeros[i].re) > 10*Modelica.Constants.eps then 
+        timeConstant := if abs(systemZeros[i].re) > 10*Modelica.Constants.eps then
                 1/abs(systemZeros[i].re) else 1/(10*Modelica.Constants.eps);
 
         print("<tr>\n <td style=\"text-align:left\"> &nbsp; " + number + " </td> <td> &nbsp; "
@@ -3546,7 +3546,7 @@ in <b>X</b> is used to compute <b>K</b>. If no solution of this equation exists,
     output Boolean controllable;
   algorithm
 
-    controllable := if StateSpace.Internal.isSISO(ss) then 
+    controllable := if StateSpace.Internal.isSISO(ss) then
       StateSpace.Internal.isControllableSISO(ss) else StateSpace.Internal.isControllableMIMO(ss,method);
 
     annotation (Documentation(info="<html>
@@ -3615,8 +3615,8 @@ Since controllability is dual to observability of the dual system (A', C', B', D
     output Boolean observable;
   algorithm
 
-    observable := if StateSpace.Internal.isSISO(ss) then 
-      StateSpace.Internal.isObservableSISO(ss) else 
+    observable := if StateSpace.Internal.isSISO(ss) then
+      StateSpace.Internal.isObservableSISO(ss) else
       StateSpace.Internal.isObservableMIMO(ss, method);
 
     annotation (Documentation(info="<html>
@@ -3937,7 +3937,7 @@ end Analysis;
     algorithm
       assert(size(ss.B,2)==1,"System must be SI but has "+ String(size(ss.B,2)) +" inputs");
       cm := StateSpace.Analysis.controllabilityMatrix(ss);
-      assert(Modelica.Math.Matrices.rank(cm) == size(cm, 1) or 
+      assert(Modelica.Math.Matrices.rank(cm) == size(cm, 1) or
         Modelica.Math.Matrices.rank(cm) == size(cm, 2),
         "Controllability matrix has not full rank. System is not controllable!");
       poly := Modelica_LinearSystems2.Math.Polynomial(p);
@@ -5156,7 +5156,7 @@ and results in
       input Modelica.SIunits.Frequency f_max=10
         "Maximum frequency value, if autoRange = false";
 
-      input Boolean magnitude=true "= true, to plot the magnitude of tf" 
+      input Boolean magnitude=true "= true, to plot the magnitude of tf"
                                                                         annotation(choices(__Dymola_checkBox=true));
       input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
 
@@ -5267,7 +5267,7 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
           10,
           size(ss.C, 1),
           size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
-      input Boolean magnitude=true "= true, to plot the magnitude of tf" 
+      input Boolean magnitude=true "= true, to plot the magnitude of tf"
                                                                         annotation(choices(__Dymola_checkBox=true));
       input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
 
@@ -5842,7 +5842,7 @@ encapsulated package Conversion
   Real v;
 
   algorithm
-    if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and 
+    if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
         Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
       poles := Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
@@ -6843,9 +6843,9 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
 
     input String modelName "Name of the Modelica model" annotation(Dialog(translatedModel));
     input Real T_linearize=0
-        "point in time of simulation to linearize the model";
+        "Simulate until T_linearize and then linearize the model";
     input String fileName="dslin" "Name of the result file";
-    input String method="Dassl";
+    input String method="Dassl" "Integration method";
     protected
     String fileName2=fileName + ".mat";
     Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize, method=method);
@@ -6992,9 +6992,9 @@ This condition is however not fulfilled");
 
    if beta[i] >= normB*1e-10 then
      // finite eigenvalue
-      z[j].re := if abs(alphaReal[i]) >= normB*1e-12 then alphaReal[i]/beta[i] else 
+      z[j].re := if abs(alphaReal[i]) >= normB*1e-12 then alphaReal[i]/beta[i] else
               0;
-      z[j].im := if abs(alphaImag[i]) >= normB*1e-12 then alphaImag[i]/beta[i] else 
+      z[j].im := if abs(alphaImag[i]) >= normB*1e-12 then alphaImag[i]/beta[i] else
               0;
       j := j + 1;
     end if;
@@ -7533,7 +7533,7 @@ is a lower triangular matrix and has full rank if and only if none of the elemen
 
       output Boolean controllable;
   algorithm
-      assert(method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD or 
+      assert(method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD or
         method == Modelica_LinearSystems2.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore, 
 the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isControllableMIMO\" has to be qr or svd but is method = "
          + String(method));
@@ -7569,7 +7569,7 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
     public
       output Boolean observable;
   algorithm
-      assert(method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD or 
+      assert(method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD or
         method == Modelica_LinearSystems2.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore, 
 the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isControllableMIMO\" has to be qr or svd but is method = "
          + String(method));
@@ -7752,7 +7752,7 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
 
       end while;
     else
-      stairStep := if Modelica.Math.Matrices.isEqual(ss.B, zeros(size(ss.B, 1), size(ss.B, 2))) then 0 else 
+      stairStep := if Modelica.Math.Matrices.isEqual(ss.B, zeros(size(ss.B, 1), size(ss.B, 2))) then 0 else
               1;
       A := ss.A;
       B := ss.B;
@@ -7879,7 +7879,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
 
      // should be made better because of many zeros in B
 
-      while stairStep < nx and rankS > 0 and not 
+      while stairStep < nx and rankS > 0 and not
           Modelica.Math.Matrices.isEqual(
               A[stairStep + 1:nx, stairStep - rankS + 1:stairStep],
               zeros(stairStep - rankS, rankS),
@@ -7905,7 +7905,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
             end if;
           end for;
         else
-          rankS := if size(sigma, 1) > 0 then if sigma[1] > maxA*Modelica.Constants.eps then 
+          rankS := if size(sigma, 1) > 0 then if sigma[1] > maxA*Modelica.Constants.eps then
                   1 else 0 else 0;
         end if;
         stairStep := stairStep + rankS;
@@ -8060,7 +8060,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
             *u1);
 
   // if rank of G of a multi input system is equal to 1
-          if Modelica.Math.Vectors.isEqual(Gst[:, 2], zeros(size(G, 2)), tolerance) or 
+          if Modelica.Math.Vectors.isEqual(Gst[:, 2], zeros(size(G, 2)), tolerance) or
             Modelica.Math.Matrices.isEqual(Gst[2:size(Gst, 1), :], zeros(size(Gst, 1) - 1, size(Gst, 2)), tolerance) then
             V := V1;
             rankGs := if abs(Gs[1, 1]) > tolerance then 1 else 0;
@@ -8298,7 +8298,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
       else
         system_ev := Complex.eigenValues(F);
         Modelica.Utilities.Streams.print("\n A subsystem (F, G) in StateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
-      That is, "   + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then " + " else 
+      That is, "   + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then " + " else
                 " - ") + String(system_ev[1].im) + "j and " + String(system_ev[2].re)
            + (if abs(system_ev[2].im) > 0 then " + " else " - ") + String(
           system_ev[2].im) + "j remain and " + String(gamma[1].re) + (if abs(
@@ -8315,7 +8315,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
   encapsulated function readSystemDimension
       "Read the order nx of state matrix and the numbers nu and ny of inputs and outputs"
       import Modelica_LinearSystems2;
-    input String fileName="stateSpace.mat" 
+    input String fileName="stateSpace.mat"
                                 annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="state space system data file")));
     input String matrixName="ABCD"
