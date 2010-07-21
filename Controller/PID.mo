@@ -168,9 +168,9 @@ block LimPID.
 The PID block can be initialized in different
 ways controlled by parameter <b>initType</b>. The possible
 values of initType are defined in 
-<a href=\"Modelica://Modelica.Blocks.Types.InitPID\">Modelica.Blocks.Types.InitPID</a>.
+<a href=\"modelica://Modelica.Blocks.Types.InitPID\">Modelica.Blocks.Types.InitPID</a>.
 This type is identical to 
-<a href=\"Modelica://Modelica.Blocks.Types.Init\">Types.Init</a>, 
+<a href=\"modelica://Modelica.Blocks.Types.Init\">Types.Init</a>, 
 with the only exception that the additional option
 <b>DoNotUse_InitialIntegratorState</b> is added for
 backward compatibility reasons (= integrator is initialized with

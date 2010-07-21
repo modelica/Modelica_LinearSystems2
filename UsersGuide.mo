@@ -147,7 +147,7 @@ the definition of record Complex allows to write the following commands:
 
 </pre>
 <p>
-The original generation of complex numbers by using the record-constructor and calling operation functions is still possible and described at <a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers.FunctionsAndOperators\">Functions and operators</a>
+The original generation of complex numbers by using the record-constructor and calling operation functions is still possible and described at <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers.FunctionsAndOperators\">Functions and operators</a>
 </p>
 The overloading concept also includes the build in function 'String', i.e. typing
 </p>
@@ -248,7 +248,7 @@ corresponding data structure. Currently, the following
 linear system representations are available:
 </p>
 <table border=1 cellspacing=0 cellpadding=2>
-  <tr><td>record&nbsp;<a href=\"Modelica://Modelica_LinearSystems2.StateSpace\">StateSpace</a></td>
+  <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.StateSpace\">StateSpace</a></td>
       <td>Multi input, multi output, linear differential equation systems in state space form:
 <pre>    <b>der</b>(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
         <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>
@@ -256,7 +256,7 @@ linear system representations are available:
 </pre>
       </td>
   </tr>
-  <tr><td>record&nbsp;<a href=\"Modelica://Modelica_Control.LinearSystems.TransferFunction\">TransferFunction</a></td>
+  <tr><td>record&nbsp;<a href=\"modelica://Modelica_Control.LinearSystems.TransferFunction\">TransferFunction</a></td>
       <td>Single input, single output, transfer functions defined via a numerator 
           and a denominator polynomial n(s) and d(s) respectively:
 <pre>        n(s)                                2*s+3
@@ -266,7 +266,7 @@ linear system representations are available:
 </pre>
       </td>
   </tr>
-  <tr><td>record&nbsp;<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles\">ZerosAndPoles</a></td>
+  <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles\">ZerosAndPoles</a></td>
       <td> Single input, single output, transfer function defined via the products of
            its zeros z and poles p, respectively; 
 <pre>
@@ -290,7 +290,7 @@ polynomials with real coefficients:
  
 </pre></td>
   </tr>
-  <tr><td>record&nbsp;<a href=\"Modelica://Modelica_Control.LinearSystems.DiscreteStateSpace\">DiscreteStateSpace</a></td>
+  <tr><td>record&nbsp;<a href=\"modelica://Modelica_Control.LinearSystems.DiscreteStateSpace\">DiscreteStateSpace</a></td>
       <td> Multi input, multi output, linear difference equation system 
           in state space form:
 <pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
@@ -368,7 +368,7 @@ StateSpace.Import.fromModel(\"xxx\") results in:
  
 <p>
 Also several 
-<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">filters</a>
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">filters</a>
 are provided in. Typical frequency responses 
 are shown in the next figure:
 </p>
@@ -398,7 +398,7 @@ The library consists of four main parts that
 are described in the following sections:
 </p>
 <ol>
-<li> Section <a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">Complex numbers</a>
+<li> Section <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">Complex numbers</a>
      introduces the Modelica_LinearSystems2.Math.Complex record that provides a
      data struture for Complex numbers and arrays and also the most
      important (scalar) operations on them. Read this section first,
@@ -406,14 +406,14 @@ are described in the following sections:
      is explained that is also the basis for the other parts of the
      library.</li>
  
-<li> Section <a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.Polynomials\">Polynomials</a>
+<li> Section <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.Polynomials\">Polynomials</a>
      describes the Modelica_LinearSystems2.Math.Polynomials record that
      provides a data structure for Polynomials with real coefficients 
      and operations such as evaluation, fitting, integration.
      The Complex and Polynomial data structures are basic
      building blocks for the other parts of the library.</li>
  
-<li> <a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.LinearSystemDataStructures\">Linear system data structures</a>
+<li> <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.LinearSystemDataStructures\">Linear system data structures</a>
      are records on the top level of Modelica_LinearSystems2 that define
      data structures for different representations of
      linear, time invariant, continuous and discrete systems,
@@ -470,28 +470,28 @@ New functions/blocks:
 </p>
 
 <ul>
-<li> Function  <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.sylvester\">sylvester</a>
+<li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.sylvester\">sylvester</a>
      to solve Sylvester equations \"<b>A</b>*<b>X</b> + <b>X</b>*<b>B</b> = <b>C</b>\"
      using a Schur method.</li>
 
-<li> Function  <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a> 
+<li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a> 
      to calculate the orthogonal nullspace and the dimension (nullity) of 
      the nullspace of a matrix.</li> 
 
-<li> Functions <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">conditionNumber</a>
-     and <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">rcond</a>
+<li> Functions <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">conditionNumber</a>
+     and <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">rcond</a>
      to calculate the condition number and the reciprocal condition number of a
      matrix respectively.</li> 
 
-<li> Block <a href=\"Modelica://Modelica_LinearSystems2.Controller.Interpolator\">Controller.Interpolator</a> 
+<li> Block <a href=\"modelica://Modelica_LinearSystems2.Controller.Interpolator\">Controller.Interpolator</a> 
      to increase the sampling frequency with linear interpolation and optional mean-value filtering.</li>
 
 <li> Blocks have been added to Controller.Examples to demonstrate the discretization methods
-     (<a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples.Discretization1\">Discretization1</a>,
-      <a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples.Discretization2\">Discretization2</a>,
-      <a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples.Discretization1\">DiscretizationSeries</a>)
+     (<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Discretization1\">Discretization1</a>,
+      <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Discretization2\">Discretization2</a>,
+      <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Discretization1\">DiscretizationSeries</a>)
      and the new Interpolator block
-     (<a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Interpolator</a>).</li>
+     (<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Interpolator</a>).</li>
 </ul>
   
 <p>
@@ -513,13 +513,13 @@ Bug fixes:
 <li>Redundant results for initial responses of multi input state space systems have been fixed.</li> 
 <li>Several functions have been modified to work (or to terminate correctly) for state space system without in- and/or outputs:
 <ul>
-<li><a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">Analysis.analysis</a></li>
-<li><a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros\">Analysis.invariantZeros.</a></li>
+<li><a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">Analysis.analysis</a></li>
+<li><a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros\">Analysis.invariantZeros.</a></li>
 <li> Check for controllability and observability.</li> 
 <li> Staircase algorithm to reduce a system to controller Hessenberg form.</li> 
 <li> Computation of controllable/uncontrollable poles.</li> 
 </ul></li> 
-<li> The design of FIR filters in block <a href=\"Modelica://Modelica_LinearSystems2.Controller.FilterFIR\">Controller.FilterFIR</a> was 
+<li> The design of FIR filters in block <a href=\"modelica://Modelica_LinearSystems2.Controller.FilterFIR\">Controller.FilterFIR</a> was 
 disabled. It is now enabled and the previously wrong design of highpass filters with odd order
 was corrected, by increasing the order by one in this case.</li>
 </ul>
@@ -709,14 +709,14 @@ performed:
      (n = number of poles - number of zeros) without introducing derivatives
      in the inputs. A detailed explanation is given at the end of the info
      layer of component
-     <a href=\"Modelica://Modelica_LinearSystems2.Controller.ZerosAndPoles\">ZerosAndPoles</a>.
+     <a href=\"modelica://Modelica_LinearSystems2.Controller.ZerosAndPoles\">ZerosAndPoles</a>.
      Previously, transfer functions and especially filters did not have this
      feature. Therefore, it was not possible to use the filters of the previous
      Sampled library as pre-filters in an inverse model. This is now
      possible. In such a case, a Bessel filter is most appropriate, because
      it does not introduce osciallations as the Butterworth and Chebyhev
      filter do and it is faster as the critical damping filter, see the
-     description of the <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">filter</a> 
+     description of the <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">filter</a> 
      function. Previously, a Bessel filter was not supported.
      </li>
 <li> Previously, blocks have been implement with a large if-clause in which
@@ -1327,7 +1327,7 @@ operator overloading features are utilized) and requires the
 <a href=\"http://www.netlib.org/clapack/CLAPACK-3.1.1-VisualStudio.zip\">LAPACK 3.1.1</a> object library.
 Furthermore, linearization and plotting is implemented
 with Dymola API calls. It is planned to move these tool specific calls to the 
-<a href=\"Modelica://ModelicaServices\">ModelicaServices</a> package
+<a href=\"modelica://ModelicaServices\">ModelicaServices</a> package
 (introduced for the Modelica Standard Library 3.1 for these
 purposes), in order that other Modelica tools can provide the same functionality in a clean way.
 </p>
@@ -1400,20 +1400,20 @@ This package contains the <b>users guide</b> for
 the library and has the following content:
 </p>
 <ol>
-<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted\">Getting started</a>
+<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted\">Getting started</a>
     contains an introduction to the most important features and how
     to use them at hand of examples.</li>
-<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.Literature\">Literature</a>
+<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Literature\">Literature</a>
     provides references that have been used to design and implement this 
     library.</li>
-<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.ReleaseNotes\">Release Notes</a>
+<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ReleaseNotes\">Release Notes</a>
     summarizes the differences between different versions of this library.</li>
-<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.ModelicaLicense2\">Modelica License 2</a>
+<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ModelicaLicense2\">Modelica License 2</a>
     is the legal license text und which this library is submitted.</li>
-<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.Requirements\">Requirements</a>
+<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Requirements\">Requirements</a>
     scetches the requirements on a Modelica tool, in order that this library 
     can be utilized.</li>
-<li><a href=\"Modelica://Modelica_LinearSystems2.UsersGuide.Contact\">Contact</a> 
+<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Contact\">Contact</a> 
     provides information about the author of the library as well as
     acknowledgments.</li>
 </ol>

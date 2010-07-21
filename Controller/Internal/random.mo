@@ -116,7 +116,7 @@ Copyright &copy; Hubertus Tummescheit and Department of Automatic Control, Lund 
 <i>This Modelica function is <b>free</b> software; it can be redistributed and/or modified
 under the terms of the <b>Modelica license</b>, see the license conditions
 and the accompanying <b>disclaimer</b> 
-<a href=\"Modelica://Modelica.UsersGuide.ModelicaLicense\">here</a>.</i>
+<a href=\"modelica://Modelica.UsersGuide.ModelicaLicense\">here</a>.</i>
 </p>
 </HTML>
 "));

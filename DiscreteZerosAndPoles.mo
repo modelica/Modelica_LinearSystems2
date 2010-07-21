@@ -101,10 +101,10 @@ Computes a DiscreteZerosAndPoles record
 
 </pre></blockquote>
 from a continuous zeros-and-poles transfer function. The functions applies the discretization methods of
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">DiscreteStateSpace.'constructor'.fromStateSpace</a>, i.e,
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">DiscreteStateSpace.'constructor'.fromStateSpace</a>, i.e,
 the continuous zeros-and-poles representation is transformed to continuous state space first and then converted to a discrete state space system. Finally the
 discrete zeros-and-poles transfer function is derived from DiscreteStateSpace by 
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles\">DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles\">DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles</a>
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
@@ -872,7 +872,7 @@ gives the same result as
 <blockquote><pre>
 DiscreteZerosAndPoles.Analysis.timeResponse(dzp, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse\">DiscreteZerosAndPoles.Analysis.timeResponse</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse\">DiscreteZerosAndPoles.Analysis.timeResponse</a>
 </p>
  
 <h4><font color=\"#008000\">Example</font></h4>
@@ -944,7 +944,7 @@ gives the same result as
 DiscreteZerosAndPoles.Analysis.timeResponse(dzp, tSpan, response=Types.TimeResponse.Step, x0=fill(0,DiscreteZerosAndPoles.Analysis.denominatorDegree(zp))).
 
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse\">DiscreteZerosAndPoles.Analysis.timeResponse</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse\">DiscreteZerosAndPoles.Analysis.timeResponse</a>
 </p>
  
 <h4><font color=\"#008000\">Example</font></h4>
@@ -1016,7 +1016,7 @@ gives the same result as
 DiscreteZerosAndPoles.Analysis.timeResponse(dzp, tSpan, response=Types.TimeResponse.Ramp, x0=fill(0,DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))).
 
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse\">DiscreteZerosAndPoles.Analysis.timeResponse</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse\">DiscreteZerosAndPoles.Analysis.timeResponse</a>
 </p>
  
 <h4><font color=\"#008000\">Example</font></h4>
@@ -1088,7 +1088,7 @@ gives the same result as
 <blockquote><pre>
 DiscreteZerosAndPoles.Analysis.timeResponse(dzp, tSpan, response=Types.TimeResponse.Initial, x0=x0).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse\">DiscreteZerosAndPoles.Analysis.timeResponse</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse\">DiscreteZerosAndPoles.Analysis.timeResponse</a>
 </p>
  
 <h4><font color=\"#008000\">Example</font></h4>
@@ -1194,7 +1194,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Anal
 <p>
 Function Analysis.<b>evaluate</b> evaluates the DiscreteZerosAndPoles transfer function at a given (complex) value of q.
 The transfer function G(z)=N(q)/D(q) is evaluated by calculating the numerator polynomial N(z) and the denominator polynomial D(q).
-See also <a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -1352,7 +1352,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
 <blockquote><pre>
 DiscreteZerosAndPoles.Plot.<b>plotBode</b>(dzp)
    or
-DiscreteZerosAndPoles.Plot.<b>plotBode</b>(dzp, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+DiscreteZerosAndPoles.Plot.<b>plotBode</b>(dzp, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -1452,13 +1452,13 @@ Plots the bode-diagram of a DiscreteZerosAndPoles transfer function.
 <blockquote><pre>
 DiscreteZerosAndPoles.Plot.<b>plotTimeResponse</b>(dzp);
    or
-DiscreteZerosAndPoles.Plot.<b>plotTimeResponse</b>(dzp, tSpan,response, x0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-                   device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteZerosAndPoles.Plot.<b>plotTimeResponse</b>(dzp, tSpan,response, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+                   device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <p><b><font style=\"color: #008000; \">Description</font></b></p>
 <p>Function <b>plotTimeResponse</b> plots the time response of a DiscreteZerosAndPoles transfer function. The character of the time response if defined by the input 
-<a href=\"Modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPolesZerosAndPoles.Plot.impulse\">impulse</a>, <a href=\"Modelica://Modelica_LinearSystems2.
-DiscreteZerosAndPolesZerosAndPoles.Plot.step\">step</a>, <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp\">ramp</a>, and <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.initialResponse\">initialResponse</a>. </p>
+<a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPolesZerosAndPoles.Plot.impulse\">impulse</a>, <a href=\"Modelica://Modelica_LinearSystems2.
+DiscreteZerosAndPolesZerosAndPoles.Plot.step\">step</a>, <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp\">ramp</a>, and <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.initialResponse\">initialResponse</a>. </p>
 
 </p>
 
@@ -1520,15 +1520,15 @@ DiscreteZerosAndPolesZerosAndPoles.Plot.step\">step</a>, <a href=\"Modelica://Mo
 <blockquote><pre>
 DiscreteZerosAndPoles.Plot.<b>impulse</b>(dzp)  
    or
-DiscreteZerosAndPoles.Plot.<b>impulse</b>(dzp, tSpan, x0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteZerosAndPoles.Plot.<b>impulse</b>(dzp, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>impulse</b> plots the impulse response of a discrete zeros-and-poles transfer function. It is based on <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
+Function <b>impulse</b> plots the impulse response of a discrete zeros-and-poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp\">ramp</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
 
 
 
@@ -1593,9 +1593,9 @@ Function <b>impulse</b> plots the impulse response of a discrete zeros-and-poles
 <p><b><font style=\"color: #008000; \">Syntax</font></b></p>
 <pre>DiscreteZerosAndPoles.Plot.<b>step</b>(dzp)  </pre>
 <pre>   or</pre>
-<pre>DiscreteZerosAndPoles.Plot.<b>step</b>(dzp, tSpan, x0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())</pre>
+<pre>DiscreteZerosAndPoles.Plot.<b>step</b>(dzp, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())</pre>
 <p><b><font style=\"color: #008000; \">Description</font></b></p>
-<p>Function <b>step</b> plots the step response of a transfer function. It is based on <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">timeResponse</a> . See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.impulse\">step</a>, <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp\">ramp</a>, and <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.initialResponse\">initialResponse</a>. </p>
+<p>Function <b>step</b> plots the step response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">timeResponse</a> . See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.impulse\">step</a>, <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp\">ramp</a>, and <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.initialResponse\">initialResponse</a>. </p>
 <p><b><font style=\"color: #008000; \">Example</font></b></p>
 <pre>   DiscreteZerosAndPoles q = Modelica_LinearSystems2.DiscreteZerosAndPoles.q();  </pre>
 <pre>   Modelica_LinearSystems2.DiscreteZerosAndPoles dzp=(q^2 - 1.5*q + 0.6)/((q - 0.8)*(q - 0.75));</pre>
@@ -1643,15 +1643,15 @@ Function <b>impulse</b> plots the impulse response of a discrete zeros-and-poles
 <blockquote><pre>
 DiscreteZerosAndPoles.Plot.<b>ramp</b>(dzp)  
    or
-DiscreteZerosAndPoles.Plot.<b>ramp</b>(dzp, tSpan, x0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteZerosAndPoles.Plot.<b>ramp</b>(dzp, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
 Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer function. It is based on
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.impulse\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.impulse\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step\">ramp</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
 
 </p>
 
@@ -1719,14 +1719,14 @@ Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer funct
 <blockquote><pre>
 DiscreteZerosAndPoles.Plot.<b>initialResponse</b>(zp)  
    or
-DiscreteZerosAndPoles.Plot.<b>initialResponse</b>(zp, tSpan, y0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteZerosAndPoles.Plot.<b>initialResponse</b>(zp, tSpan, y0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>initialResponse</b> plots the initial response, i.e. the zeros input response of a zeros and poles transfer function. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.impulse\">initialResponse</a>.
+Function <b>initialResponse</b> plots the initial response, i.e. the zeros input response of a zeros and poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp\">ramp</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.impulse\">initialResponse</a>.
 
 </p>
 
@@ -1799,7 +1799,7 @@ Computes a DiscreteTransferFunction record
    dtf = -------- = -------------------------- 
            d(z)     a0 + a1*z + ... + an*z^n
  </pre></blockquote>
-from a DiscreteZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the DiscreteTransferFunction constructor.
+from a DiscreteZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the DiscreteTransferFunction constructor.
 
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -2159,7 +2159,7 @@ canonical form and scaled such that the gain from the input
 of this block to its output is one (i.e. y(p=0) = u(p=0)),
 if this is possible.<br>
 
-The construction of the state space blocks is the same as of the corresponding continuous transformation ( <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace\">ZerosAndPoles.Conversion.toStateSpace()</a>),
+The construction of the state space blocks is the same as of the corresponding continuous transformation ( <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace\">ZerosAndPoles.Conversion.toStateSpace()</a>),
 except for that the first order and second order systems are scaled by 
 <blockquote><pre>
          1 + n1
@@ -2175,7 +2175,7 @@ and
 </pre></blockquote>
 respectiively. 
 <p>
-See <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace\">ZerosAndPoles.Conversion.toStateSpace()</a> for more information.
+See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace\">ZerosAndPoles.Conversion.toStateSpace()</a> for more information.
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -2296,7 +2296,7 @@ See <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
 Generate a matrix of DiscreteZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation.
-The system is genrated by using <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromModel</a> followed by a conversion from state
+The system is genrated by using <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromModel</a> followed by a conversion from state
 space to discrete zeros-and-poles transfer function representation.
  
 <h4><font color=\"#008000\">Example</font></h4>

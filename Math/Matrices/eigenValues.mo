@@ -49,7 +49,7 @@ has an imaginary part, then eigenvalues[i+1,:] is the conjugate complex
 eigenvalue and eigenvectors[:,i] is the real and eigenvectors[:,i+1] is the
 imaginary part of the eigenvector of the i-th eigenvalue.
 With function 
-<a href=\"Modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a>,
+<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a>,
 a real block diagonal matrix is constructed from the eigenvalues 
 such that 
 </p>
@@ -80,8 +80,8 @@ i.e., matrix A has the 3 real eigenvalues -0.618, 8, 1.618.
 </p>
 </pre></blockquote>
 <h4>See also</h4>
-<a href=\"Modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a>,
-<a href=\"Modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
+<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a>,
+<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
 </HTML>
 "));
 end eigenValues;

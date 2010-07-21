@@ -54,7 +54,7 @@ equation
             -100},{100,100}}), graphics), Documentation(info="<html>
 <p>
 This example demonstrates the usage of the 
-<a href=\"Modelica://Modelica_LinearSystems2.Controller.Interpolator\">Interpolator</a>
+<a href=\"modelica://Modelica_LinearSystems2.Controller.Interpolator\">Interpolator</a>
 block. This block is used in multi-rate controllers to interpolate between two different
 sample rates. In this example, a sampled sine-signal is interpolated in different ways:
 </p>

@@ -153,7 +153,7 @@ Note, the inputSampleFactor must be an integer multiple of the outputSampleFacto
 
 <p>
 This block is demonstrated with example
-<a href=\"Modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Examples.Interpolator</a>
+<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Examples.Interpolator</a>
 leading to the following result when filtering a sine-signal with \"continuous\" (interpolator1.y), \"discrete, unfiltered\" (interpolator2.y) and \"discrete, filtered\" (interpolator3.y) Interpolator:
 </p>
 

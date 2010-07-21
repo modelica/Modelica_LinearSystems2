@@ -301,7 +301,7 @@ package Plot "Functions for generation of 2D-plots"
 <p>
 This function plots a set of 2-dimensional curves in a diagram.
 For an overview, see the documentation of package
-<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot\">Modelica_LinearSystems2.Utilities.Plot</a>.
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot\">Modelica_LinearSystems2.Utilities.Plot</a>.
 </p>
  
 </html>"));
@@ -393,7 +393,7 @@ For an overview, see the documentation of package
 <p>
 This function plots a set of 2-dimensional curves in a set of diagrams
 using a vector layout. For an overview, see the documentation of package
-<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot\">Modelica_LinearSystems2.Utilities.Plot</a>.
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot\">Modelica_LinearSystems2.Utilities.Plot</a>.
 </p>
  
 </html>"));
@@ -420,7 +420,7 @@ using a vector layout. For an overview, see the documentation of package
 <p>
 This function plots a set of 2-dimensional curves in a set of diagrams
 using a matrix layout. For an overview, see the documentation of package
-<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot\">Modelica_LinearSystems2.Utilities.Plot</a>.
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot\">Modelica_LinearSystems2.Utilities.Plot</a>.
 </p>
  
 </html>"));

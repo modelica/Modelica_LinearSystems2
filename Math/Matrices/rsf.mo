@@ -104,7 +104,7 @@ with the real nxn matrices <b>T</b> and <b>Z</b>. <b>Z</b> is an orthogonal matr
 The calculation is performed stepwise using several lapack routines. First, lapack.dgehrd reduces matrix <b>A</b> is to upper Hessenberg form <b>H</b>=<b>Q'AQ</b>, whereas <b>Q</b> is computed by lapack.dodrghr.Finally, lapack.dhseqr transforms <b>H</b> to <b>T</b>. The eigenvalues of <b>A</b> are calculated straightforward from <b>T</b>.
 <p>
 Function <b>rsf</b> does not apply lapack.dgees, a routine to directly compute the real Schur from. See also
-<a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.rsf2\">Math.Matrices.rsf2</a>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rsf2\">Math.Matrices.rsf2</a>
 </p>
 
 

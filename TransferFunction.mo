@@ -575,7 +575,7 @@ gives the same result as
 <blockquote><pre>
 TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Step, x0=fill(0,TransferFunction.Analysis.denominatorDegree(tf))).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
 </p>
  
 <h4><font color=\"#008000\">Example</font></h4>
@@ -635,7 +635,7 @@ gives the same result as
 <blockquote><pre>
 TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Ramp, x0=fill(0,TransferFunction.Analysis.denominatorDegree(tf))).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
 </p>
  
 <h4><font color=\"#008000\">Example</font></h4>
@@ -698,7 +698,7 @@ gives the same result as
 <blockquote><pre>
 TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Initial, x0=x0).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
 </p>
  
 <h4><font color=\"#008000\">Example</font></h4>
@@ -743,7 +743,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
 Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial of a transfer function. 
-See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree\">TransferFunction.Analysis.denominatorDegree</a>.
+See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree\">TransferFunction.Analysis.denominatorDegree</a>.
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -780,7 +780,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of a transfer function. 
-See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.numeratorDegree\">TransferFunction.Analysis.numeratorDegree</a>.
+See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.numeratorDegree\">TransferFunction.Analysis.numeratorDegree</a>.
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -829,7 +829,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 <p>
 Function Analysis.<b>evaluate</b> evaluates a transfer function at a given (complex) value of s.
 The transfer function G(s)=N(s)/D(s) is evaluated by calculating the numerator polynomial N(s) and the denominator polynomial D(s).
-See also <a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -895,7 +895,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
 This function calculates the zeros, poles and gain of transfer function.
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.evaluate\">Analysis.evaluate</a> is used to calculate gain <tt>k</tt>.
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.evaluate\">Analysis.evaluate</a> is used to calculate gain <tt>k</tt>.
  
 </p>
  
@@ -999,7 +999,7 @@ Calculate the eigenvalues of the corresponding state space representation of a t
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of the corresponding state space system of a transfer function. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <b>ss.A</b>. Just like in <a href=\"Modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
+Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of the corresponding state space system of a transfer function. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <b>ss.A</b>. Just like in <a href=\"modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
 The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
 
 
@@ -1141,7 +1141,7 @@ In this case, the output argument <b>finite</b> = <b>false</b> and
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function TransferFunction.Analysis.<b>isControllable</b> checks the controllability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.isControllable\">StateSpace.Analysis.isControllable</a> <br>
+Function TransferFunction.Analysis.<b>isControllable</b> checks the controllability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isControllable\">StateSpace.Analysis.isControllable</a> <br>
 
 
 </p>
@@ -1189,7 +1189,7 @@ Function TransferFunction.Analysis.<b>isControllable</b> checks the controllabil
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function TransferFunction.Analysis.<b>isObservable</b> checks the observability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.isObservable\">StateSpace.Analysis.isObservable</a> <br>
+Function TransferFunction.Analysis.<b>isObservable</b> checks the observability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isObservable\">StateSpace.Analysis.isObservable</a> <br>
 
 
 
@@ -1236,7 +1236,7 @@ Function TransferFunction.Analysis.<b>isObservable</b> checks the observability 
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function TransferFunction.Analysis.<b>isStabilizable</b> checks the Stabilizability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.isStabilizable\">StateSpace.Analysis.isStabilizable</a>. <br>
+Function TransferFunction.Analysis.<b>isStabilizable</b> checks the Stabilizability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isStabilizable\">StateSpace.Analysis.isStabilizable</a>. <br>
 The transfer function is stabilizable if all unstable poles are controllable.
 
 
@@ -1283,7 +1283,7 @@ The transfer function is stabilizable if all unstable poles are controllable.
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function TransferFunction.Analysis.<b>isDetectable</b> checks the Detectability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.isDetectable\">StateSpace.Analysis.isDetectable</a>. <br>
+Function TransferFunction.Analysis.<b>isDetectable</b> checks the Detectability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isDetectable\">StateSpace.Analysis.isDetectable</a>. <br>
 The transfer function is detectable if all unstable poles are observable.
 
 
@@ -1464,7 +1464,7 @@ of a transfer function.
 </tr>
 </table>
 <p><br/><h4>Description</h4></p>
-<p>This function constructs a TransferFunction transfer function description of low and high pass filters. Typical frequency responses for the 4 supported low pass filter types are shown in the next figure (this figure was generated with function <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Examples.bodePlot_filter2\">TransferFunction.Examples.bodePlot_filter2</a>): </p>
+<p>This function constructs a TransferFunction transfer function description of low and high pass filters. Typical frequency responses for the 4 supported low pass filter types are shown in the next figure (this figure was generated with function <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Examples.bodePlot_filter2\">TransferFunction.Examples.bodePlot_filter2</a>): </p>
 <p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4Filters.png\"/> </p>
 <p>The step responses of the same low pass filters are shown in the next figure, starting from a steady state initial filter with initial input = 0.2: </p>
 <p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4FiltersStepResponse.png\"/> </p>
@@ -1538,8 +1538,8 @@ of a transfer function.
 TransferFunction.Plot.<b>polesAndZeros</b>(tf);
    or
 TransferFunction.Plot.<b>polesAndZeros</b>(tf, poles=true, zeros=true, plot=true,
-                     defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</a>(),
-                     device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>()); 
+                     defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</a>(),
+                     device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>()); 
 </pre></blockquote>
 
 <h4><font style=\"color: #008000; \">Description</font></h4>
@@ -1555,7 +1555,7 @@ size and location of the diagram on the screen.
 <h4><font style=\"color: #008000; \">Example</font></h4>
 
 <p>
-The example <a href=\"Modelica://Modelica_LinearSystems2.Examples.TransferFunction.plotPolesAndZeros\">
+The example <a href=\"modelica://Modelica_LinearSystems2.Examples.TransferFunction.plotPolesAndZeros\">
 Modelica_LinearSystems2.Examples.TransferFunction.plotPolesAndZeros</a>
 defines two transfer functions. The second one is defined as:
 </p>
@@ -1693,7 +1693,7 @@ and results in
 <blockquote><pre>
 TransferFunction.Plot.<b>plotBode</b>(tf)
    or
-TransferFunction.Plot.<b>plotBode</b>(tf, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+TransferFunction.Plot.<b>plotBode</b>(tf, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -1781,18 +1781,18 @@ Plots the bode-diagram of a transfer function.
 <blockquote><pre>
 TransferFunction.Plot.<b>timeResponse</b>(tf);
    or
-TransferFunction.Plot.<b>timeResponse</b>(tf, dt, tSpan,response, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-                   device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+TransferFunction.Plot.<b>timeResponse</b>(tf, dt, tSpan,response, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+                   device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 
 <p><b><font style=\"color: #008000; \">Description</font></b></p>
 <p>Function <b>timeResponse</b> plots the time response of a transfer function. The character of the time response if defined by the input 
-<a href=\"Modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>. </p>
+<a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also 
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and 
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>. </p>
 
 <p><b><font style=\"color: #008000; \">Example</font></b></p>
 <pre>   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  </pre>
@@ -1845,14 +1845,14 @@ TransferFunction.Plot.<b>timeResponse</b>(tf, dt, tSpan,response, x0, defaultDia
 <blockquote><pre>
 TransferFunction.Plot.<b>impulse</b>(tf)  
    or
-TransferFunction.Plot.<b>impulse</b>(tf, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+TransferFunction.Plot.<b>impulse</b>(tf, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>impulse</b> plots the impulse response of a transfer function. It is based on <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
+Function <b>impulse</b> plots the impulse response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
 
 
 
@@ -1916,14 +1916,14 @@ Function <b>impulse</b> plots the impulse response of a transfer function. It is
 <blockquote><pre>
 TransferFunction.Plot.<b>step</b>(tf)  
    or
-TransferFunction.Plot.<b>step</b>(tf, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+TransferFunction.Plot.<b>step</b>(tf, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>step</b> plots the step response of a transfer function. It is based on <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
+Function <b>step</b> plots the step response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
 
 
 
@@ -1990,14 +1990,14 @@ Function <b>step</b> plots the step response of a transfer function. It is based
 <blockquote><pre>
 TransferFunction.Plot.<b>ramp</b>(tf)  
    or
-TransferFunction.Plot.<b>ramp</b>(tf, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+TransferFunction.Plot.<b>ramp</b>(tf, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>ramp</b> plots the ramp response of a transfer function. It is based on <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
+Function <b>ramp</b> plots the ramp response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">ramp</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
 
 
 </p>
@@ -2071,14 +2071,14 @@ Function <b>ramp</b> plots the ramp response of a transfer function. It is based
 <blockquote><pre>
 TransferFunction.Plot.<b>initialResponse</b>(tf)  
    or
-TransferFunction.Plot.<b>initialResponse</b>(tf, dt, tSpan, y0, columnLabels, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+TransferFunction.Plot.<b>initialResponse</b>(tf, dt, tSpan, y0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>initialResponse</b> plots the initial response, i.e. the zeros input response of a transfer function. It is based on <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">initialResponse</a>.
+Function <b>initialResponse</b> plots the initial response, i.e. the zeros input response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">initialResponse</a>.
 
 
 
@@ -2151,7 +2151,7 @@ Computes a ZerosAndPoles record
         zp = k*---------------------------------------------------------
                 product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
 </pre></blockquote>of a transfer function representated by numerator and denominator polynomial. The poles and zeros and the gain <tt>k</tt> are computed 
-(<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs the ZerosAndPoles constructor.
+(<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs the ZerosAndPoles constructor.
 
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -2297,7 +2297,7 @@ is defined slightly differently.
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
 Converts a matrix of transfer functions denoted as rational polynomial function into a matrix of transfer functions in zeros-and-poles representation. The function repetitively uses
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles\">toZerosAndPoles</a>.
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles\">toZerosAndPoles</a>.
 
 </p>
 
@@ -2477,7 +2477,7 @@ is defined slightly differently.
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Generate a matrix of TransferFunction data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"Modelica://Modelica_LinearSystems2.
+Generate a matrix of TransferFunction data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"modelica://Modelica_LinearSystems2.
 StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conversion from sate space to transfer function representation.
  
 <h4><font color=\"#008000\">Example</font></h4>

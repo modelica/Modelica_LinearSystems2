@@ -46,13 +46,13 @@ diagonal elements (lower trapezoidal if m &gt; n), and
 Matrices <b>L</b> and <b>U</b> are stored in the returned
 matrix <code>LU</code> (the diagonal of <b>L</b> is not stored).
 With the companion function 
-<a href=\"Modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>,
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>,
 this decomposition can be used to solve
 linear systems (<b>P</b>*<b>L</b>*<b>U</b>)*<b>x</b> = <b>b</b> with different right
 hand side vectors <b>b</b>. If a linear system of equations with
 just one right hand side vector <b>b</b> shall be solved, it is
 more convenient to just use the function
-<a href=\"Modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>.
+<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>.
 </p>
 <p>
 The optional third (Integer) output argument has the following meaning:
@@ -92,7 +92,7 @@ matrix A was interchanged with row pivots[i].
   x2 := Matrices.LU_solve(LU, pivots, b2);  // x2 = {1,0,2}
 </pre></blockquote>
 <h4>See also</h4>
-<a href=\"Modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>, 
-<a href=\"Modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>,
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>, 
+<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>,
 </HTML>"));
 end LU;

@@ -62,7 +62,7 @@ with the real nxn matrices <b>T</b> and <b>Z</b>. <b>Z</b> is an orthogonal matr
 <p>
 The calculation is performed stepwise using lapack.dgees, i.e. using the internal mehtods of balacing and scaling of dgees.
 <p>
-See also <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.rsf\">Math.Matrices.rsf</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rsf\">Math.Matrices.rsf</a>
 </p>
 
 

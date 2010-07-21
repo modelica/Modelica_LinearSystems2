@@ -52,7 +52,7 @@ i.e., by Gaussian elemination with partial pivoting.
   x := Matrices.solve(A,b);  // x = {3,2,1}
 </pre></blockquote>
 <h4>See also</h4>
-<a href=\"Modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
-<a href=\"Modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>
 </HTML>"));
 end solve;

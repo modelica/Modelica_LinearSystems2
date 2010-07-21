@@ -104,7 +104,7 @@ i.e., by Gaussian elemination with partial pivoting.
 </pre></blockquote>
 
 <h4>See also</h4>
-<a href=\"Modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
-<a href=\"Modelica://Modelica.Math.Matrices.LU_solve2\">Matrices.LU_solve2</a>
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve2\">Matrices.LU_solve2</a>
 </HTML>"));
 end solve2r;

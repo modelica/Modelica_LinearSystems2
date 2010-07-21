@@ -44,7 +44,7 @@ This function estimates the reciprocal of the condition number (norm(A) * norm(i
 </pre></blockquote>
 </p>
 <h4>See also</h4>
-<a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">Matrices.conditionNumber</a>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">Matrices.conditionNumber</a>
 </HTML>", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>

@@ -49,7 +49,7 @@ In the case of 2-norm the result is he ratio of the largest to the smallest sing
 </pre></blockquote>
 </p>
 <h4>See also</h4>
-<a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">Matrices.rcond</a>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">Matrices.rcond</a>
 </html>", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>

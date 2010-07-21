@@ -90,7 +90,7 @@ with
 </pre></blockquote>
 </p>
 <h4>See also</h4>
-<a href=\"Modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
+<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
 </html>", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>

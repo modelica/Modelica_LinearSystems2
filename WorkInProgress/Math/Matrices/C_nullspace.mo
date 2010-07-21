@@ -94,6 +94,6 @@ with
 </pre></blockquote>
 </p>
 <h4>See also</h4>
-<a href=\"Modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
+<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
 </html>"));
 end C_nullspace;

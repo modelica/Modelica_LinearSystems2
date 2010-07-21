@@ -218,7 +218,7 @@ The operator is used by writing just the following command:
     annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-This package contains the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.subtract\">'subtract'</a> and the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.subtract\">'-'</a> operator for StateSpace records. 
+This package contains the <a href=\"modelica://Modelica_LinearSystems2.StateSpace.'-'.subtract\">'subtract'</a> and the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.subtract\">'-'</a> operator for StateSpace records. 
 
 </html>"));
 end '-';
@@ -2032,7 +2032,7 @@ encapsulated package Analysis
 <blockquote><pre>
 Modelica_LinearSystems2.StateSpace.Analysis.<b>analysis</b>(ss);
    or
-Modelica_LinearSystems2.StateSpace.Analysis.<b>analysis</b>(ss, analyseOptions=<a href=\"Modelica://Modelica_LinearSystems2.Internal.AnalyseOptions\">analyseOptions</a>, fileName, systemName, description);
+Modelica_LinearSystems2.StateSpace.Analysis.<b>analysis</b>(ss, analyseOptions=<a href=\"modelica://Modelica_LinearSystems2.Internal.AnalyseOptions\">analyseOptions</a>, fileName, systemName, description);
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -2687,7 +2687,7 @@ gives the same result as
 <blockquote><pre>
 StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
 
 
 
@@ -2756,7 +2756,7 @@ gives the same result as
 <blockquote><pre>
 StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Step, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
 </p>
 
 
@@ -2823,7 +2823,7 @@ gives the same result as
 <blockquote><pre>
 StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Ramp, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -2893,7 +2893,7 @@ gives the same result as
 <blockquote><pre>
 StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Initial, x0=x0).
 </pre></blockquote>
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -2954,7 +2954,7 @@ end initialResponse;
 <p>
 Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial of the corresponding transfer function. 
 The state space system is converted to the transfer function G(s)=N(s)/D(s) with the polynomial N(s) as numerator.
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.denominatorDegree\">StateSpace.Analysis.denominatorDegree</a>.
+See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.denominatorDegree\">StateSpace.Analysis.denominatorDegree</a>.
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -3002,7 +3002,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of the corresponding transfer function. 
 The state space system is converted to the transfer function G(s)=N(s)/D(s) with the polynomial D(s) as denominator.
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.numeratorDegree\">StateSpace.Analysis.numeratorDegree</a>.
+See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.numeratorDegree\">StateSpace.Analysis.numeratorDegree</a>.
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -3059,7 +3059,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
 <p>
 Function Analysis.<b>evaluate</b> evaluates the corresponding transfer function of the state space system at a given (complex) value of s.
 The state space system is converted to the transfer function G(s)=N(s)/D(s), which is evaluated by calculating the numerator polynomial N(s) and the denominator polynomial D(s).
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -3141,7 +3141,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
 This function calculates the zeros, poles and gain of the corresponding transfer function of a state space system.
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">TransferFunction.Analysis.zerosAndPoles</a>
+See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">TransferFunction.Analysis.zerosAndPoles</a>
 
 </p>
 
@@ -3254,7 +3254,7 @@ numerical algorithm does not converge.");
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of a state space system. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <b>ss.A</b>. Just like in <a href=\"Modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
+Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of a state space system. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <b>ss.A</b>. Just like in <a href=\"modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
 The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
 
 
@@ -3572,7 +3572,7 @@ where, if <b>H</b>k,k-1 has full rank, indicating whether the system is controll
 For single input systems the staircase form is a usual upper Hessenberg form, i.e. th blocks are of dimension one.<br>
 The boolean input <b>method</b> defines for multi output systems the method to generate the staircase form of the system, whereas Types.StaircaseMethod.QR and Types.StaircaseMethod.SVD denotes QR-factorization and singular value decomposition respectively. Since staircase algorithm contains rank decisions QR-factorization should be restricted to well conditioned systems of lower order (<5). Default is SVD.<br>
 
-Since controllability is dual to observability of the dual system (A', C', B', D'), proof of <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.isObservable\">observability</a> is referred to proof of controllability of the dual system.<br>
+Since controllability is dual to observability of the dual system (A', C', B', D'), proof of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isObservable\">observability</a> is referred to proof of controllability of the dual system.<br>
 
 
 
@@ -3627,7 +3627,7 @@ Since controllability is dual to observability of the dual system (A', C', B', D
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function StateSpace.Analysis.<b>isObservable</b> checks the observability of a state space system. Since observability is dual to controllability of the dual system (A', C', B', D'), proof of observability is referred to proof of <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.isControllable\">controllability</a> of the dual system.<br>
+Function StateSpace.Analysis.<b>isObservable</b> checks the observability of a state space system. Since observability is dual to controllability of the dual system (A', C', B', D'), proof of observability is referred to proof of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isControllable\">controllability</a> of the dual system.<br>
 The boolean input <b>method</b> defines for multi output systems the method to generate the staircase form of the system, whereas Types.StaircaseMethod.QR and Types.StaircaseMethod.SVD denotes QR-factorization and singular value decomposition respectively. Since staircase algorithm contains rank decisions QR-factorization should be restricted to  well conditioned systems of lower order (<5). Default is SVD.<br>
 
 
@@ -4576,10 +4576,10 @@ i.e.
 
 <p>
 Since the calculation of a Kalman filter is the dual problem of lqr calculation function
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Design.lqr\">Modelica_LinearSystems2.StateSpace.Design.lqr</a>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Design.lqr\">Modelica_LinearSystems2.StateSpace.Design.lqr</a>
 is used to solve the Riccati euation.<br>
 The algebraic Riccati equation is solved by using the Schur algorithm 
-<a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.care\">care</a>.
+<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.care\">care</a>.
 </p>
  
 <h4><font color=\"#008000\">Example</font></h4>
@@ -4725,7 +4725,7 @@ or the discrete-time algebraic Riccati equation (DARE)
 </pre>
 </blockquote>
 <p>
-for <b>X</b> using the Schur vector approach. See <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.care\">care</a> and <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.dare\">dare</a> respectively for more details.
+for <b>X</b> using the Schur vector approach. See <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.care\">care</a> and <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.dare\">dare</a> respectively for more details.
 <p>
 The gain matrix <b>K</b> of the continuous-time case is calculated from
 <p>
@@ -4907,7 +4907,7 @@ E[<b>v</b>(t)*<b>v</b>'(tau)] = <b>V</b>*delta(t-tau).
 <p>
 E[s] denotes the expected value of a signal s.
 <p>
-The LQG approach combines the deterministic <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Design.lqr\">LQR</a> approach and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Design.kalmanFilter\">Kalman filter</a> principle to estimate stochastically disturbed systems, such that input <b>u</b>(t) is given by
+The LQG approach combines the deterministic <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Design.lqr\">LQR</a> approach and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Design.kalmanFilter\">Kalman filter</a> principle to estimate stochastically disturbed systems, such that input <b>u</b>(t) is given by
 <p>
 <blockquote>
 <b>u</b>(t) = -<b>K</b>c<b>x</b>^(t)
@@ -4931,7 +4931,7 @@ The feedback matrix Kc is calculated by
 <b>K</b>c = <b>R</b> *<b>B</b>'*<b>X</b>c,
 </pre></blockquote>
 <p>
-where <b>X</b>c satisfying the continuous-time algebraic Riccati equation (<a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.care\">care</a>)
+where <b>X</b>c satisfying the continuous-time algebraic Riccati equation (<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.care\">care</a>)
 <blockquote><pre>
                           -1
  <b>Q</b> + <b>A</b>'*<b>X</b>c + <b>X</b>c*<b>A</b> - <b>X</b>c*<b>B</b>*<b>R </b>*<b>B</b>'*<b>X</b>c = <b>0</b>.
@@ -5088,8 +5088,8 @@ encapsulated package Plot "Functions to plot state space system responses"
 StateSpace.Plot.<b>polesAndZeros</b>(ss);
    or
 diagram = StateSpace.Plot.<b>polesAndZeros</b>(ss, poles=true, zeros=true, plot=true,
-                     defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</a>(),
-                     device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>()); 
+                     defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</a>(),
+                     device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>()); 
 </pre></blockquote>
 
 <h4><font style=\"color: #008000; \">Description</font></h4>
@@ -5105,7 +5105,7 @@ size and location of the diagram on the screen.
 <h4><font style=\"color: #008000; \">Example</font></h4>
 
 <p>
-The example <a href=\"Modelica://Modelica_LinearSystems2.Examples.StateSpace.plotPolesAndZeros\">
+The example <a href=\"modelica://Modelica_LinearSystems2.Examples.StateSpace.plotPolesAndZeros\">
 Modelica_LinearSystems2.Examples.StateSpace.plotPolesAndZeros</a>
 is defined as
 </p>
@@ -5200,7 +5200,7 @@ and results in
 <blockquote><pre>
 StateSpace.Plot.<b>plotBodeSISO</b>(ss)
    or
-StateSpace.Plot.<b>plotBodeSISO</b>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+StateSpace.Plot.<b>plotBodeSISO</b>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -5314,7 +5314,7 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
 <blockquote><pre>
 StateSpace.Plot.<b>plotBodeMIMO</b>(ss)
    or
-StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 </p>
 
@@ -5443,18 +5443,18 @@ StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnit
 <blockquote><pre>
 StateSpace.Plot.<b>timeResponse</b>(ss);
 or
-StateSpace.Plot.<b>timeResponse</b>(ss, dt, tSpan,response, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+StateSpace.Plot.<b>timeResponse</b>(ss, dt, tSpan,response, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
 Function <b>timeResponse</b> plots the time response of a state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.plotImpulse\">plotImpulse</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.plotImpulse\">plotImpulse</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
 
 
 
@@ -5525,15 +5525,15 @@ Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
 <blockquote><pre>
 StateSpace.Plot.<b>impulse</b>(ss);
 or
-StateSpace.Plot.<b>impulse</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+StateSpace.Plot.<b>impulse</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
+Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
 
 
 
@@ -5604,15 +5604,15 @@ Modelica_LinearSystems2.StateSpace.Plot.impulse(ss)
 <blockquote><pre>
 StateSpace.Plot.<b>step</b>(ss);
 or
-StateSpace.Plot.<b>step</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+StateSpace.Plot.<b>step</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>step</b> plots the step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
+Function <b>step</b> plots the step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
 
 
 
@@ -5685,15 +5685,15 @@ Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
 <blockquote><pre>
 StateSpace.Plot.<b>ramp</b>(ss);
 or
-StateSpace.Plot.<b>ramp</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+StateSpace.Plot.<b>ramp</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>ramp</b> plots the ramp responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
+Function <b>ramp</b> plots the ramp responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
 
 
 
@@ -5764,15 +5764,15 @@ Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
 <blockquote><pre>
 StateSpace.Plot.<b>initial</b>(ss);
 or
-StateSpace.Plot.<b>initial</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+StateSpace.Plot.<b>initial</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>initial</b> plots the initial responses of a state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>.
+Function <b>initial</b> plots the initial responses of a state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>.
 
 
 
@@ -5974,7 +5974,7 @@ Computes a TransferFunction record
            d(s)     a0 + a1*s + ... + an*s^n
  </pre></blockquote>
 
-The algorithm uses <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles\">toZerosAndPoles</a> to convert the state space system into a zeros and poles representation first and after that href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction\">ZerosAndPoles.Conversion.toTransferFunction</a> to generate the transfer function.
+The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles\">toZerosAndPoles</a> to convert the state space system into a zeros and poles representation first and after that href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction\">ZerosAndPoles.Conversion.toTransferFunction</a> to generate the transfer function.
 
 
 
@@ -6147,7 +6147,7 @@ Computes a matrix of TransferFunction records
    tf_i = -------- = -------------------------------- 
            d_i(s)     a0_i + a1_i*s + ... + an_i*s^n
  </pre></blockquote>
-with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
+with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
 
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -6163,7 +6163,7 @@ Computes a matrix of TransferFunction records
    tf = -------- = -------------------------- 
            d(s)     a0 + a1*s + ... + an*s^n
  </pre></blockquote>
-with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
+with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
 
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -6259,7 +6259,7 @@ if inverted==false and
    der(z) = inv(T)*A*T*z + inv(T)*B*u
         y = C*inv(T)*z + D*u
 </pre></blockquote> 
-if inverted=true. Matrix T has to be invertible. The transformed system has the same eigenvalues. See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">analysis</a>
+if inverted=true. Matrix T has to be invertible. The transformed system has the same eigenvalues. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">analysis</a>
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
@@ -6361,7 +6361,7 @@ the canonical observability form is
 
 
 
-Matrix T has to be invertible, i.e. the system has to be observable. The transformed system has the same eigenvalues. See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>, <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toControllabilityForm\">toControllabilityForm</a>
+Matrix T has to be invertible, i.e. the system has to be observable. The transformed system has the same eigenvalues. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>, <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toControllabilityForm\">toControllabilityForm</a>
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
@@ -6467,7 +6467,7 @@ the canonical observability form is
 
 
 
-Matrix T has to be invertible, i.e. the system has to be controllable. The transformed system has the same eigenvalues. See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>, <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toObservabilityForm\">toObservabilityForm</a>
+Matrix T has to be invertible, i.e. the system has to be controllable. The transformed system has the same eigenvalues. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>, <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toObservabilityForm\">toObservabilityForm</a>
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
@@ -6533,7 +6533,7 @@ Function <b>toDiagonalForm</b> computes the diagonal form of a SISO state space 
 </pre></blockquote>
 
 
-Matrix T has to be diagonalizable, i.e. the algebraic and geometric multiplicities of an eigenvalue must coincide. The diagonal entries of the new system matrix tss.<b>A</b> are the eigenvalues off the systemmatrix ss.<b>A</b>. See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>.
+Matrix T has to be diagonalizable, i.e. the algebraic and geometric multiplicities of an eigenvalue must coincide. The diagonal entries of the new system matrix tss.<b>A</b> are the eigenvalues off the systemmatrix ss.<b>A</b>. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>.
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
