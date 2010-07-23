@@ -64,8 +64,5 @@ algorithm
   annotation (interactive=true, Documentation(info="<html>
 This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isObservable</b> which is 
 to check whether a system is observable or not.
-</html>"),    Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is 
-to design pole assigment controllers for state space systems with multiple input.
 </html>"));
 end analysisObservability;

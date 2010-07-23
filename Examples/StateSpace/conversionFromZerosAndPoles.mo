@@ -20,5 +20,7 @@ algorithm
    Modelica.Utilities.Streams.print("zp = " + String(zp));
    Modelica.Utilities.Streams.print("ss = " + String(ss));
    ok := true;
-
+  annotation (interactive=true, Documentation(info="<html>
+This example demonstrates the conversion of a zeros-and-poles system into a state space system.
+</html>"));
 end conversionFromZerosAndPoles;

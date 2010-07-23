@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
-function analysisPolesAndZeros_SISO
+function analysisPolesAndZerosSISO
   "Compute poles and invariant zeros of a SISO state space system by transformation to a minmal system"
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Complex;
@@ -18,33 +18,53 @@ function analysisPolesAndZeros_SISO
 protected
   Boolean systemOnFile=fileName <> "NoName";
 
-  Modelica_LinearSystems2.StateSpace ss=if systemOnFile then 
-      Modelica_LinearSystems2.StateSpace.Import.fromFile(  fileName, matrixName) else 
-      Modelica_LinearSystems2.StateSpace(
+  StateSpace ss=if systemOnFile then 
+      StateSpace.Import.fromFile(  fileName, matrixName) else 
+      StateSpace(
       A=A,
       B=B,
       C=C,
       D=D);
-  StateSpace ssm=Modelica_LinearSystems2.StateSpace.Transformation.toIrreducibleForm(
-                                                                 ss);
+  StateSpace ssm=StateSpace.Transformation.toIrreducibleForm(ss);
   Complex poles[:];
   Complex zeros[:];
 
 algorithm
-  poles := Complex.eigenValues(ssm.A);
+  poles := Complex.eigenValues(ss.A);
+
+  Modelica.Utilities.Streams.print("\nThe poles of the unreduced system are\n");
 
   for i in 1:size(poles, 1) loop
-
     Modelica.Utilities.Streams.print("pole_" + String(i) + " = " + String(poles[i]));
   end for;
 
-  zeros := Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros(
-                                      ssm);
+  zeros := StateSpace.Analysis.invariantZeros(ss);
 
+  Modelica.Utilities.Streams.print("\n\nThe zeros of the unreduced system are\n");
+
+  for i in 1:size(zeros, 1) loop
+     Modelica.Utilities.Streams.print("zero_" + String(i) + " = " + String(zeros[i]));
+  end for;
+
+  poles := Complex.eigenValues(ssm.A);
+
+  Modelica.Utilities.Streams.print("\n\nThe poles of the reduced system are\n");
+  for i in 1:size(poles, 1) loop
+    Modelica.Utilities.Streams.print("pole_" + String(i) + " = " + String(poles[i]));
+  end for;
+
+  zeros := StateSpace.Analysis.invariantZeros(ssm);
+
+  Modelica.Utilities.Streams.print("\n\nThe zeros of the reduced system are\n");
   for i in 1:size(zeros, 1) loop
      Modelica.Utilities.Streams.print("zero_" + String(i) + " = " + String(zeros[i]));
   end for;
 
   ok := true;
 
-end analysisPolesAndZeros_SISO;
+  annotation (Documentation(info="<html>
+<p>
+This example shows the computation of the poles and zeros of a SISO system and of its irreducible representation.
+</p>
+</html>"));
+end analysisPolesAndZerosSISO;

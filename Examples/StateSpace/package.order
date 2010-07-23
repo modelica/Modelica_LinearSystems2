@@ -7,9 +7,9 @@ analysisTimeResponse
 analysisInitialResponse
 analysisImpulseResponse
 analysisStepResponse
-analysisPolesAndZeros_SISO
-analysisStairCase
+analysisPolesAndZerosSISO
 analysisInvariantZeros
+analysisStairCase
 conversionFromZerosAndPoles
 conversionToTransferFunctionMIMO
 conversionToTransferFunctionSISO

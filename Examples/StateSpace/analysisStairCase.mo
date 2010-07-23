@@ -63,7 +63,6 @@ algorithm
   ok := true;
   annotation (interactive=true,
               Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is 
-to design pole assigment controllers for state space systems with multiple input.
+This example shows the usage of the staircase algorithm to transform a state space system in staircase form to analyze controllability.
 </html>"));
 end analysisStairCase;

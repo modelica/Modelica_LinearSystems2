@@ -43,8 +43,5 @@ ok := true;
   annotation (interactive=true, Documentation(info="<html>
 This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</b> which is 
 to check whether a system is controllable or not.
-</html>"),    Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is 
-to design pole assigment controllers for state space systems with multiple input.
 </html>"));
 end analysisControllablePoles;

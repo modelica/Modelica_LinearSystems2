@@ -24,4 +24,7 @@ algorithm
    Q,
    R);
 
+  annotation (interactive=true, Documentation(info="<html>
+This example demonstrates the computatrion of a  Kalman filter.
+</html>"));
 end designKalmanFilter;

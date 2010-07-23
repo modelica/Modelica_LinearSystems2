@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
-function analysisInvariantZeros "Compute invariant zeros of transfer function"
+function analysisInvariantZeros
+  "Example to compute the invariant zeros of a state space system"
   import Modelica;
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.Math.Complex;
@@ -36,4 +37,10 @@ algorithm
     end for;
   end if;
   ok := true;
+
+ annotation (Documentation(info="<html>
+<p>
+This example shows the computation of the poles and zeros of state space system.
+</p>
+</html>"));
 end analysisInvariantZeros;
