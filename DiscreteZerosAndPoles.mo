@@ -57,7 +57,28 @@ record DiscreteZerosAndPoles
       dzp.uName := uName;
       dzp.yName := yName;
 
-      annotation (overloadsConstructor=true);
+      annotation (overloadsConstructor=true, Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  dzp </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
+ 
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+This function constructs a DiscreteZerosAndPoles record zp from a Real value, i.e. a without dynamics:
+<blockquote><pre>
+y = r*u
+</pre></blockquote>
+Therefore, the record is defined by
+<blockquote><pre>
+  dzp.k = r;
+  dzp.n1 = fill(0,1);
+  dzp.n2 = fill(0,1,2);
+  dzp.d1 = fill(0,1);
+  dzp.d2 = fill(0,1,2);
+</pre></blockquote>
+</p>
+</html>"));
     end fromReal;
 
   function fromZerosAndPoles
