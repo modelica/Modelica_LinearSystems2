@@ -58,6 +58,7 @@ record DiscreteStateSpace
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
 <tr> <td align=right>  dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
+<tr> <td align=right>  dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r, Ts, method)  </td> </tr>
  
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
@@ -74,7 +75,15 @@ Therefore, the matrices are defined by
   dss.C = fill(0,1,0);
   ss.D = [r];
   dss.B2 = fill(0,0,1);
+  
 </pre></blockquote>
+The default values of sample time <b>Ts</b> and discretization method <b>method</b> are
+<blockquote><pre>
+    Ts = 1
+method = Modelica_LinearSystems2.Types.Method.Trapezoidal 
+
+</pre></blockquote>
+respectively.
  
 </p>
  
@@ -138,22 +147,29 @@ This function constructs a DiscreteStateSpace record dss with<br>
   dss.method = method;
   
 </pre></blockquote>
-i.e. the input-matrices are the system matrices of the discrete system. See also <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>
+i.e. the input-matrices are the system matrices of the discrete system. The default values of sample time <b>Ts</b> and discretization method <b>method</b> are
+<blockquote><pre>
+    Ts = 1
+method = Modelica_LinearSystems2.Types.Method.Trapezoidal 
+
+</pre></blockquote>
+respectively. See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>
 where the inputs are the matrices of a continuous system which is to convert to discrete state space.
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
+  import dss=Modelica_LinearSystems2.DiscreteStateSpace;
   Real A[1,1] = [1];
   Real B[1,1] = [1];
   Real C[1,1] = [1];
   Real D[1,1] = [0];
 
 public
-  StateSpace ss;
+  DiscreteStateSpace dss;
 
 <b>algorithm</b>
-  dss := 'constructor'.fromMatrices(A, B, C, D);
+  dss := dss.'constructor'.fromMatrices(A, B, C, D)  // or just: dss := dss(A, B, C, D, Ts=1, B2=[0], method=Modelica_LinearSystems2.Types.Method.Trapezoidal);
   // dss.A = [1]
   // dss.B = [1]
   // dss.C = [1]
@@ -169,91 +185,91 @@ public
     end fromMatrices;
 
     function fromStateSpace
-      "Transform a continuous into a discrete linear state space system"
+      "Transform a continuous state space system into a discrete linear state space system"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Types.Method;
       import Modelica_LinearSystems2.Math.Matrices.LU_solve2;
 
-      input Modelica_LinearSystems2.StateSpace sc
+      input Modelica_LinearSystems2.StateSpace ss
         "Continuous linear state space system";
       input Modelica.SIunits.Time Ts "Sample time";
       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
         "Discretization method";
-      output Modelica_LinearSystems2.DiscreteStateSpace sd(
-        redeclare Real A[size(sc.A, 1),size(sc.A, 2)],
-        redeclare Real B[size(sc.B, 1),size(sc.B, 2)],
-        redeclare Real C[size(sc.C, 1),size(sc.C, 2)],
-        redeclare Real D[size(sc.D, 1),size(sc.D, 2)],
-        redeclare Real B2[size(sc.B, 1),size(sc.B, 2)])
+      output Modelica_LinearSystems2.DiscreteStateSpace dss(
+        redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
+        redeclare Real B[size(ss.B, 1),size(ss.B, 2)],
+        redeclare Real C[size(ss.C, 1),size(ss.C, 2)],
+        redeclare Real D[size(ss.D, 1),size(ss.D, 2)],
+        redeclare Real B2[size(ss.B, 1),size(ss.B, 2)])
         "Discrete state space system";
 
     protected
-      Integer nx=size(sc.A, 1) "Number of states";
-      Integer nu=size(sc.B, 2) "Number of input signals";
+      Integer nx=size(ss.A, 1) "Number of states";
+      Integer nu=size(ss.B, 2) "Number of input signals";
       Real LU[nx,nx] "LU decomposition";
       Integer pivots[nx] "Pivots of LU decomposition";
     algorithm
-      sd.Ts := Ts;
-      sd.method := method;
+      dss.Ts := Ts;
+      dss.method := method;
 
       if method == Method.ExplicitEuler then
             /*  der_x = A*x + B*u
              x = pre(x) + Ts*pre(der_x)
      */
-        sd.A := identity(nx) + Ts*sc.A;
-        sd.B := Ts*sc.B;
-        sd.C := sc.C;
-        sd.D := sc.D;
-        sd.B2 := zeros(nx, nu);
+        dss.A := identity(nx) + Ts*ss.A;
+        dss.B := Ts*ss.B;
+        dss.C := ss.C;
+        dss.D := ss.D;
+        dss.B2 := zeros(nx, nu);
 
       elseif method == Method.ImplicitEuler then
             /*  der_x = A*x + B*u
              x = pre(x) + Ts*der_x 
      */
         (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
-          Ts*sc.A);
-        sd.B2 := LU_solve2(
+          Ts*ss.A);
+        dss.B2 := LU_solve2(
               LU,
               pivots,
-              Ts*sc.B);
-        sd.A := LU_solve2(
+              Ts*ss.B);
+        dss.A := LU_solve2(
               LU,
               pivots,
               identity(nx));
-        sd.B := sd.A*sd.B2;
-        sd.C := sc.C;
-        sd.D := sd.C*sd.B2 + sc.D;
+        dss.B := dss.A*dss.B2;
+        dss.C := ss.C;
+        dss.D := dss.C*dss.B2 + ss.D;
 
       elseif method == Method.Trapezoidal then
             /*  der_x = A*x + B*u
              x = pre_x + (Ts/2)*(pre_der_x + der_x); 
      */
         (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
-          (Ts/2)*sc.A);
-        sd.B2 := LU_solve2(
+          (Ts/2)*ss.A);
+        dss.B2 := LU_solve2(
               LU,
               pivots,
-              (Ts/2)*sc.B);
-        sd.A := LU_solve2(
+              (Ts/2)*ss.B);
+        dss.A := LU_solve2(
               LU,
               pivots,
-              identity(nx) + (Ts/2)*sc.A);
-        sd.B := sd.A*sd.B2 + sd.B2;
-        sd.C := sc.C;
-        sd.D := sd.C*sd.B2 + sc.D;
+              identity(nx) + (Ts/2)*ss.A);
+        dss.B := dss.A*dss.B2 + dss.B2;
+        dss.C := ss.C;
+        dss.D := dss.C*dss.B2 + ss.D;
 
       elseif method == Method.StepExact then
            /* x = phi*pre(x) + gamma*pre(u);
        y = C*x + D*u
     */
-        (sd.A,sd.B) := Modelica.Math.Matrices.integralExp(
-              sc.A,
-              sc.B,
+        (dss.A,dss.B) := Modelica.Math.Matrices.integralExp(
+              ss.A,
+              ss.B,
               Ts);
-        sd.C := sc.C;
-        sd.D := sc.D;
-        sd.B2 := zeros(nx, nu);
+        dss.C := ss.C;
+        dss.D := ss.D;
+        dss.B2 := zeros(nx, nu);
 
       elseif method == Method.RampExact then
            /* x = phi*pre(x) + gamma*pre(u) + gamma1/Ts*(u - pre_u);
@@ -266,14 +282,14 @@ public
       x = z + gamma1/Ts*u
     
     */
-        (sd.A,sd.B,sd.B2) := Modelica.Math.Matrices.integralExpT(
-              sc.A,
-              sc.B,
+        (dss.A,dss.B,dss.B2) := Modelica.Math.Matrices.integralExpT(
+              ss.A,
+              ss.B,
               Ts);
-        sd.B2 := sd.B2/Ts;
-        sd.B := sd.A*sd.B2 + sd.B - sd.B2;
-        sd.C := sc.C;
-        sd.D := sd.C*sd.B2 + sc.D;
+        dss.B2 := dss.B2/Ts;
+        dss.B := dss.A*dss.B2 + dss.B - dss.B2;
+        dss.C := ss.C;
+        dss.D := dss.C*dss.B2 + ss.D;
 
       elseif method == Method.ImpulseExact then
            /* x = phi*pre(x) + phi*B*u;
@@ -282,11 +298,11 @@ public
       Limitations: The infinit impulses at t = kT is ignored in the mapping
     */
 
-        sd.A := Modelica.Math.Matrices.exp(sc.A, Ts);
-        sd.B := sd.A*sc.B;
-        sd.C := sc.C;
-        sd.D := sc.C*sc.B;
-        sd.B2 := sc.B;
+        dss.A := Modelica.Math.Matrices.exp(ss.A, Ts);
+        dss.B := dss.A*ss.B;
+        dss.C := ss.C;
+        dss.D := ss.C*ss.B;
+        dss.B2 := ss.B;
 
       else
         assert(false, "Argument method (= " + String(method) +
@@ -294,17 +310,27 @@ public
       end if;
       annotation (overloadsConstructor=true,
         Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right> dss </td><td align=center>=</td>  <td> <b>fromStateSpace</b>(ss, Ts)  </td> </tr>
+<tr> <td align=right> dss </td><td align=center>=</td>  <td> <b>fromStateSpace</b>(ss, Ts, method)  </td> </tr>
+
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+    
 <p>
-This function dereives a linear time invariant difference
-equation system in state space form from continuous state space form:
+This function derives a linear time invariant difference
+equation system in state space form
 </p>
-<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
+<p>
+<blockquote><pre>    <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
      <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
      <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
-</pre>
+</pre></blockquote>
+</p>
 <p>
 with
-</p>
+</p><p>
 <ul>
 <li> <b>Ts</b> - the sample time</li>
 <li> <b>k</b> - the index of the actual sample instance (k=0,1,2,3,...)</li>
@@ -314,10 +340,17 @@ with
 <li> <b>x</b>(t) - the discrete state vector (x(t=Ts*0) is the initial state),</li>
 <li> <b>x</b>_continuous(t) - the state vector of the continuous system
      from which the discrete block has been derived (details see below),</li>
-<li> <b>A,B,C,D,B2</b> - matrices of appropriate dimensions.</li>
+<li> <b>A, B, C, D, B2</b> - matrices of appropriate dimensions.</li>
 </ul>
+</p>
 <p>
-The discretization methodis selected by the user from
+from continuous state space form
+<blockquote><pre>
+    der(<b>xc</b>(t)) = <b>ss.A</b> * <b>xc</b>(t) + <b>ss.B</b> * <b>us</b>(t)
+    <b>yc</b>(t) = <b>ss.C</b> * <b>xc</b>(t) + <b>ss.D</b> * <b>uc</b>(t)
+</pre></blockquote>
+<p>
+The applied discretization method is selected by the user from
 <ul>
 <li> <b>ExplicitEuler</b> - Discretization with explicit Euler integration</li>
 <li> <b>ImplicitEuler</b> - Discretization with implicit Euler integration</li>
@@ -326,30 +359,56 @@ The discretization methodis selected by the user from
 <li> <b>StepExact</b> - Exact discretization for step inputs (zero-order hold equivalent)</li>
 <li> <b>RampExact</b> - Exact discretization for ramp inputs (first-order hold equivalent)</li>
 </ul>
-
 </p>
 <p>
+See also  <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>.
+</p>
+<p>
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+  import dss=Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.StateSpace;
+  
+  StateSpace ss=StateSpace(A = [1], B = [1], C = [1], D = [0]);
+  Modelica.SIunits.Time Ts=0.1;
+  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal;
 
+public
+  DiscreteStateSpace dss;
+
+<b>algorithm</b>
+  dss := dss.'constructor'.fromStateSpace(ss, Ts);
+  
+  //or just:
+  //dss := dss(ss=ss, Ts=Ts, method=method);
+  
+  //  dss.A = [1.1053], 
+  //  dss.B = [0.11080], 
+  //  dss.C = [1], 
+  //  dss.D = [0.0526], 
+  //  dss.Ts = 0.1, 
+  //  dss.B2 = [0.0526], 
+  //  dss.method = Modelica_LinearSystems2.Types.Method.Trapezoidal
 </p>
 </html>"));
     end fromStateSpace;
 
     encapsulated function fromMatrices2
-      "Transform a continuous into a discrete linear state space system"
+      "Constructs a discrete linear state space system from the matrices of a continuous state space system"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Types.Method;
       import Modelica_LinearSystems2.Math.Matrices.LU_solve2;
 
-      input Real A[:,size(A, 1)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Real B[size(A, 1),:] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Real C[:,size(A, 1)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+      input Real A[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+      input Real B[size(A, 1),:] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+      input Real C[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+      input Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
       input Modelica.SIunits.Time Ts "Sample time";
       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
         "Discretization method";
     //  input Modelica_LinearSystems2.Types method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-      output Modelica_LinearSystems2.DiscreteStateSpace sd(
+      output Modelica_LinearSystems2.DiscreteStateSpace dss(
         redeclare Real A[size(A, 1),size(A, 2)],
         redeclare Real B[size(B, 1),size(B, 2)],
         redeclare Real C[size(C, 1),size(C, 2)],
@@ -362,18 +421,18 @@ The discretization methodis selected by the user from
       Real LU[nx,nx] "LU decomposition";
       Integer pivots[nx] "Pivots of LU decomposition";
     algorithm
-      sd.Ts := Ts;
-      sd.method := method;
+      dss.Ts := Ts;
+      dss.method := method;
 
       if method == Method.ExplicitEuler then
             /*  der_x = A*x + B*u
              x = pre(x) + Ts*pre(der_x)
      */
-        sd.A := identity(nx) + Ts*A;
-        sd.B := Ts*B;
-        sd.C := C;
-        sd.D := D;
-        sd.B2 := zeros(nx, nu);
+        dss.A := identity(nx) + Ts*A;
+        dss.B := Ts*B;
+        dss.C := C;
+        dss.D := D;
+        dss.B2 := zeros(nx, nu);
 
       elseif method == Method.ImplicitEuler then
             /*  der_x = A*x + B*u
@@ -381,17 +440,17 @@ The discretization methodis selected by the user from
      */
         (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
           Ts*A);
-        sd.B2 := LU_solve2(
+        dss.B2 := LU_solve2(
               LU,
               pivots,
               Ts*B);
-        sd.A := LU_solve2(
+        dss.A := LU_solve2(
               LU,
               pivots,
               identity(nx));
-        sd.B := sd.A*sd.B2;
-        sd.C := C;
-        sd.D := sd.C*sd.B2 + D;
+        dss.B := dss.A*dss.B2;
+        dss.C := C;
+        dss.D := dss.C*dss.B2 + D;
 
       elseif method == Method.Trapezoidal then
             /*  der_x = A*x + B*u
@@ -399,29 +458,29 @@ The discretization methodis selected by the user from
      */
         (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
           (Ts/2)*A);
-        sd.B2 := LU_solve2(
+        dss.B2 := LU_solve2(
               LU,
               pivots,
               (Ts/2)*B);
-        sd.A := LU_solve2(
+        dss.A := LU_solve2(
               LU,
               pivots,
               identity(nx) + (Ts/2)*A);
-        sd.B := sd.A*sd.B2 + sd.B2;
-        sd.C := C;
-        sd.D := sd.C*sd.B2 + D;
+        dss.B := dss.A*dss.B2 + dss.B2;
+        dss.C := C;
+        dss.D := dss.C*dss.B2 + D;
 
       elseif method == Method.StepExact then
            /* x = phi*pre(x) + gamma*pre(u);
        y = C*x + D*u
     */
-        (sd.A,sd.B) := Modelica.Math.Matrices.integralExp(
+        (dss.A,dss.B) := Modelica.Math.Matrices.integralExp(
               A,
               B,
               Ts);
-        sd.C := C;
-        sd.D := D;
-        sd.B2 := zeros(nx, nu);
+        dss.C := C;
+        dss.D := D;
+        dss.B2 := zeros(nx, nu);
 
       elseif method == Method.RampExact then
            /* x = phi*pre(x) + gamma*pre(u) + gamma1/Ts*(u - pre_u);
@@ -434,14 +493,14 @@ The discretization methodis selected by the user from
       x = z + gamma1/Ts*u
     
     */
-        (sd.A,sd.B,sd.B2) := Modelica.Math.Matrices.integralExpT(
+        (dss.A,dss.B,dss.B2) := Modelica.Math.Matrices.integralExpT(
               A,
               B,
               Ts);
-        sd.B2 := sd.B2/Ts;
-        sd.B := sd.A*sd.B2 + sd.B - sd.B2;
-        sd.C := C;
-        sd.D := sd.C*sd.B2 + D;
+        dss.B2 := dss.B2/Ts;
+        dss.B := dss.A*dss.B2 + dss.B - dss.B2;
+        dss.C := C;
+        dss.D := dss.C*dss.B2 + D;
 
       elseif method == Method.ImpulseExact then
            /* x = phi*pre(x) + phi*B*u;
@@ -450,11 +509,11 @@ The discretization methodis selected by the user from
       Limitations: The infinit impulses at t = kT is ignored in the mapping
     */
 
-        sd.A := Modelica.Math.Matrices.exp(A, Ts);
-        sd.B := sd.A*B;
-        sd.C := C;
-        sd.D := C*B;
-        sd.B2 := B;
+        dss.A := Modelica.Math.Matrices.exp(A, Ts);
+        dss.B := dss.A*B;
+        dss.C := C;
+        dss.D := C*B;
+        dss.B2 := B;
 
       else
         assert(false, "Argument method (= " + String(method) +
@@ -463,19 +522,50 @@ The discretization methodis selected by the user from
       annotation (overloadsConstructor=true,
          Documentation(info="<html>
 <p>
-This function dereives a linear time invariant difference
-equation system in state space form from the matrices of the corresponding continuous system:
+This function derives a linear time invariant difference
+equation system in state space form:
 </p>
-<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
-     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
-</pre>
+<blockquote><pre>
+     <b>xd</b>(Ts*(k+1)) = <b>Ad</b> * <b>xd</b>(Ts*k) + <b>Bd</b> * <b>ud</b>(Ts*k)
+     <b>yd</b>(Ts*k)     = <b>Cd</b> * <b>xd</b>(Ts*k) + <b>Dd</b> * <b>ud</b>(Ts*k)
+     <b>x</b>_continuous(Ts*k) = <b>xd</b>(Ts*k) + <b>B2</b> * <b>ud</b>(Ts*k) 
+</pre></blockquote>
+from the matrices <b>A</b>, <b>B</b>, <b>C</b>, <b>D</b> of the corresponding continuous system
+<blockquote><pre>
+     der(<b>x</b>(t)) = <b>A</b> * <b>x</b>(t) + <b>B</b> * <b>u</b>(t)
+     <b>y</b>(t)      = <b>C</b> * <b>x</b>(t) + <b>D</b> * <b>u</b>(t)
+</pre></blockquote>
 <p>
-The function is similar to  <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">fromStateSpace</a> but the inputs are restricted
+The function is similar to  <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">fromStateSpace</a> but the inputs are restricted
 to the matrices, the sample time and the discretization method.
-
-
 </p>
+
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+  import dss=Modelica_LinearSystems2.DiscreteStateSpace;
+  Real A[1,1] = [1];
+  Real B[1,1] = [1];
+  Real C[1,1] = [1];
+  Real D[1,1] = [0];
+
+public
+  DiscreteStateSpace dss;
+
+<b>algorithm</b>
+  dss := dss.'constructor'.fromMatrices2(A, B, C, D);
+  
+  //or just:
+  //dss := dss(A, B, C, D, Ts=0.1, method=Modelica_LinearSystems2.Types.Method.Trapezoidal);
+  
+  //  dss.A = [1.1053], 
+  //  dss.B = [0.11080], 
+  //  dss.C = [1], 
+  //  dss.D = [0.0526], 
+  //  dss.Ts = 0.1, 
+  //  dss.B2 = [0.0526], 
+  //  dss.method = Modelica_LinearSystems2.Types.Method.Trapezoidal
+ 
 </html>"));
     end fromMatrices2;
   end 'constructor';
@@ -569,7 +659,7 @@ The operator is used by writing just the following command:
     annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-This package contains the <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'subtract'</a> and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'-'</a> operator for DiscreteStateSpace records. 
+This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'subtract'</a> and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'-'</a> operator for DiscreteStateSpace records. 
 
 </html>"));
 end '-';
@@ -1025,16 +1115,43 @@ end '==';
       x := new_x;
     end for;
     annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.<b>timeResponse</b>(dss, u)  </td> </tr>
+<tr> <td align=right>  (y, xc) </td><td align=center> =  </td>  <td> DiscreteStateSpace.<b>timeResponse</b>(dss, u, x0)  </td> </tr>
+
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
 <p>
-Computes the time response of a system in discrete state space form:
-</p>
-<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
-     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
-</pre>
-<p>
-Note that the system input <b>u</b> must be sampled with the discrete system sample time Ts.
-</p>
+Function DiscreteStateSpace.timeResponse calculates the time responses to input u of a discrete state space system.
+Default of initial state <b>x0</b> is <b>x0</b>=<b>0</b>.
+
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   import dss=Modelica_LinearSystems2.DiscreteStateSpace; 
+   import Modelica_LinearSystems2.StateSpace; 
+   StateSpace ss=Modelica_LinearSystems2.StateSpace(
+      A=[-1],
+      B=[1],
+      C=[2],
+      D=[0]);
+  Real Ts=0.1;
+  dss=dss(ss,Ts);
+  Real x0[1]={0};
+
+  Real y[:,:]=dss.timeResponse(dss,ones(51,1));
+
+//  y=[0.09524, 0.2766, 0.4408,..., 1.9844, 1.9859, 1.9872]
+</pre></blockquote>
+
+
+</html> ",  revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>  
+ 
 </html>"));
   end timeResponse;
 
@@ -1044,44 +1161,71 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.DiscreteStateSpace;
 
-    input DiscreteStateSpace sd "Linear system in discrete state space form";
-    input Real x0[size(sd.A, 1)]=zeros(size(sd.A, 1)) "Initial system state";
+    input DiscreteStateSpace dss "Linear system in discrete state space form";
+    input Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial system state";
     input Integer samples "Number of samples";
-    output Real y[samples,size(sd.C, 1)]
+    output Real y[samples,size(dss.C, 1)]
       "System response (dimension: (input samples) x (number of outputs))";
-    output Real x_continuous[samples,size(sd.A, 1)]
+    output Real x_continuous[samples,size(dss.A, 1)]
       "State trajectories (dimension: (input samples) x (number of states)";
 
   protected
     Integer i;
-    Real new_x[size(sd.A, 1)];
-    Real x[size(sd.A, 1)]=x0;
+    Real new_x[size(dss.A, 1)];
+    Real x[size(dss.A, 1)]=x0;
 
   algorithm
     for i in 1:samples loop
-      new_x := sd.A*x;
-      y[i, :] := sd.C*x;
+      new_x := dss.A*x;
+      y[i, :] := dss.C*x;
       x_continuous[i, :] := x;
       x := new_x;
     end for;
     annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.<b>timeResponse</b>(dss, x0, samples)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
 <p>
-Computes the initial response of a system in discrete state space form:
-</p>
-<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k)
-     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) 
-</pre>
-<p>
-Note that the system input <b>u</b> is equal to zero.
-</p>
+Function DiscreteStateSpace.initialResponse calculates the initial response to Default of initial state <b>x0</b> of a discrete state space system.
+Input <b>sample</b> is the number of samples. Sample time is the sample time of the discrete state space system.
+
+
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   import dss=Modelica_LinearSystems2.DiscreteStateSpace; 
+   import Modelica_LinearSystems2.StateSpace; 
+   StateSpace ss=Modelica_LinearSystems2.StateSpace(
+      A=[-1],
+      B=[1],
+      C=[2],
+      D=[0]);
+  Real Ts=0.1;
+  dss=dss(ss,Ts);
+  Real x0[1]={1};
+
+  Real y[:,:]=dss.initialResponse(dss,x0,50);
+
+//  y=[2, 1.8095, 1.6372,..., 0.01812, 0.01639, 0.01483]
+</pre></blockquote>
+
+
+</html> ",  revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>  
+ 
+
 </html>"));
   end initialResponse;
 
 encapsulated package Analysis
     "Functions to analyse discrete state space systems represented by a DiscreteStateSpace record"
 encapsulated function eigenValues
-      "Calculate the eigenvalues of a linear state space system and write them in a complex vector"
+      "Calculate the eigenvalues of a linear discrete state space system and write them in a complex vector"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -1140,7 +1284,7 @@ The eigenvalues <b>ev</b>_d of the discrete system are related to the eigenvalue
 end eigenValues;
 
 encapsulated function timeResponse
-      "Calculate the time response of a state space system"
+      "Calculate the time response of a discrete state space system"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -1244,6 +1388,7 @@ Function timeResponse calculates the time responses of a discrete state space sy
     Step \"Step response\",
     Ramp \"Ramp response\",
     Initial \"Initial condition response\"
+    
 </pre></blockquote>
 Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x are calculated for each time step t=k*dss.Ts.
 </p>
@@ -1258,11 +1403,11 @@ Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x are cal
      B2 = [0],
      Ts = 0.1);
   
-  Real tSpan= 0.4;
+  Real tSpan = 0.4;
   
   Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
   
-  Real x0[1]={0};
+  Real x0[1] = {0};
 
   Real y[5,1,1];
   Real t[5];
@@ -1271,8 +1416,8 @@ Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x are cal
 <b>algorithm</b>
   (y,t,x):=Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(dss,tSpan,response,x0);
 //  y[:,1,1] = {0, 0.1903, 0.3625, 0.5184, 0.6594}
-//         t={0, 0.1, 0.2, 0.3, 0.4}
-//  x[:,1,1]={0, 0.0952, 0.1813, 0.2592, 0.33}
+//         t = {0, 0.1, 0.2, 0.3, 0.4}
+//  x[:,1,1] = {0, 0.0952, 0.1813, 0.2592, 0.33}
 </pre></blockquote>
 
 
@@ -1280,7 +1425,7 @@ Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x are cal
 end timeResponse;
 
 encapsulated function impulseResponse
-      "Calculate the impulse time response of a state space system"
+      "Calculate the impulse time response of a discrete state space system"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -1325,19 +1470,23 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
 Note that an appropriate impulse response of a discrete system that is comparable to the impulse response of the corresponding continuous system 
 requires the \"ImpulseExact\" conversion from continuous system to discrete system.<br>
 See also<br>
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.impulseResponse\">StateSpace.Analysis.impulseResponse</a>
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.impulseResponse\">StateSpace.Analysis.impulseResponse</a>
 
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1],
-      B=[1],
+    Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+      A=[0.904837418036 ],
+      B=[0.095162581964],
       C=[2],
-      D=[0]);
-  Real Ts=0.1;
+      D=[0],
+      B2=[0],
+      Ts=0.1,
+      method = Modelica_LinearSystems2.Types.Method.StepExact);
+ 
+
   Real tSpan= 0.4;
  
   Real y[5,1,1];
@@ -1345,10 +1494,10 @@ See also<br>
   Real x[5,1,1] 
 
 <b>algorithm</b>
-  (y,t,x):=StateSpace.Analysis.impulseResponse(ss,Ts,tSpan);
-//  y[:,1,1] = {2, 1.8097, 1.6375, 1.4816, 1.3406}
+  (y,t,x):=Modelica_LinearSystems2.DiscreteStateSpace.Analysis.impulseResponse(dss,tSpan);
+//  y[:,1,1]  = {0, 0.190, 0.1722, 0.1558, 0.1410}
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
-//  x[:,1,1] = {1, 0.9048, 0.8187, 0.7408, 0.6703}
+//  x[:,1,1] = = {0, 0.0952, 0.08611, 0.0779, 0.07050}
 </pre></blockquote>
 
 
@@ -1356,7 +1505,7 @@ See also<br>
 end impulseResponse;
 
 encapsulated function stepResponse
-      "Calculate the step time response of a state space system"
+      "Calculate the step time response of a discrete state space system"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -1401,8 +1550,8 @@ DiscreteStateSpace.Analysis.timeResponse(response=Types.TimeResponse.Step, dss, 
 Note that an appropriate step response of a discrete system that is comparable to the step response of the corresponding continuous system 
 requires the \"StepExact\" conversion from continuous system to discrete system.<br>
 See also <br>
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.stepResponse\">StateSpace.Analysis.stepResponse</a>
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.stepResponse\">StateSpace.Analysis.stepResponse</a>
 </p>
 
 
@@ -1414,8 +1563,8 @@ See also <br>
       C=[2],
       D=[0],
       B2=[0],
-      Ts=0.1;
-      method = Types.Method.StepExact);
+      Ts=0.1,
+      method = Modelica_LinearSystems2Types.Method.StepExact);
       
       
 
@@ -1426,7 +1575,7 @@ See also <br>
   Real x[5,1,1] 
 
 <b>algorithm</b>
-  (y,t,x) := DiscreteStateSpace.Analysis.stepResponse(dss,tSpan);
+  (y,t,x) := Modelica_LinearSystems2.DiscreteStateSpace.Analysis.stepResponse(dss,tSpan);
 //  y[:,1,1]={0, 0.19, 0.3625, 0.518, 0.659}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0952, 0.1813, 0.2592, 0.33}
@@ -1437,7 +1586,7 @@ See also <br>
 end stepResponse;
 
 encapsulated function rampResponse
-      "Calculate the ramp time response of a state space system"
+      "Calculate the ramp time response of a discrete state space system"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -1483,8 +1632,8 @@ Note that an appropriate ramp response of a discrete system that is comparable t
 requires the \"RampExact\" conversion from continuous system to discrete system.<br>
 
 See also<br>
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a>
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.rampResponse\">StateSpace.Analysis.rampResponse</a>
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a>
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.rampResponse\">StateSpace.Analysis.rampResponse</a>
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -1495,8 +1644,8 @@ See also<br>
       C=[2],
       D=[0.0967483607192],
       B2=[0.0483741803596],
-      Ts=0.1;
-      method = Types.Method.RampExact);
+      Ts=0.1,
+      method = Modelica_LinearSystems2.Types.Method.RampExact);
       
   Real tSpan= 0.4;
  
@@ -1505,7 +1654,7 @@ See also<br>
   Real x[5,1,1] 
 
 <b>algorithm</b>
-  (y,t,x) := DiscreteStateSpace.Analysis.rampResponse(dss,tSpan);
+  (y,t,x) := Modelica_LinearSystems2.DiscreteStateSpace.Analysis.rampResponse(dss,tSpan);
 //  y[:,1,1] = {0, 0.00967, 0.03746, 0.08164, 0.14064}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = {0, 0.00484, 0.01873, 0.04082, 0.07032}
@@ -1515,7 +1664,7 @@ See also<br>
 end rampResponse;
 
 encapsulated function initialResponse
-      "Calculate the time response of a state space system for given initial condition and zero inputs"
+      "Calculate the time response of a discrete state space system for given initial condition and zero inputs"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -1562,8 +1711,8 @@ gives the same result as
 DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse.Initial, x0=x0).
 </pre></blockquote>
 See also <br>
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.initialResponse\">StateSpace.Analysis.initialResponse</a><br>
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.initialResponse\">StateSpace.Analysis.initialResponse</a><br>
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -1574,8 +1723,8 @@ See also <br>
       C=[2],
       D=[0],
       B2=[0],
-      Ts=0.1;
-      method = Types.Method.StepExact);
+      Ts=0.1,
+      method = Modelica_LinearSystems2.Types.Method.StepExact);
       
   Real tSpan= 0.4;
   Real x0[1] = {1};
@@ -1586,7 +1735,7 @@ See also <br>
 
 
 <b>algorithm</b>
-  (y,t,x):=DiscreteStateSpace.Analysis.initialResponse(x0,dss,tSpan);
+  (y,t,x):=Modelica_LinearSystems2.DiscreteStateSpace.Analysis.initialResponse(x0,dss,tSpan);
 //  y[:,1,1]={2, 1.809, 1.637, 1.4812, 1.3402}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={1, 0.9048, 0.8186, 0.7406, 0.6701}
@@ -1599,6 +1748,467 @@ end initialResponse;
 end Analysis;
 
 encapsulated package Design
+    "Functions to design discrete state space controllers and observers"
+
+  encapsulated function assignPolesMI
+      "Pole assigment design algorithm for multi input systems"
+
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.Math.Complex;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica;
+  //  import Modelica.Utilities.Streams.print;
+    import Modelica_LinearSystems2.TransferFunction;
+    import Modelica_LinearSystems2.Math.Matrices;
+
+    input DiscreteStateSpace dss "state space system";
+
+    input Complex gamma[:]=fill(Complex(0), 0) "Designed Poles";
+  //  input Integer np=size(gamma, 1) "number of given eigenvalues to assign";
+    input Real alpha=exp(-1e10)
+        "maximum admissible value for the moduli of the eigenvalues of A which will not be modified by the eigenvalue assignment algorithm";
+    input Real tolerance=Modelica.Math.Matrices.norm(dss.A, 1)*1e-12
+        "The tolerance to be used in determining the controllability of (A,B)";
+    input Boolean calculateEigenvectors=false
+        "Calculate the eigenvectors X of the closed loop system when true";
+
+    output Real K[size(dss.B, 2),size(dss.A, 1)]
+        "State feedback matrix assigning the desired poles";
+    output Real S[:,:] "Closed loop System matrix";
+    output Complex po[size(dss.A, 1)] "poles of the closed loop system";
+    output Integer nfp
+        "number of eigenvalues that are not modified with respect to alpha";
+    output Integer nap "number of assigned eigenvalues";
+    output Integer nup "number of uncontrollable eigenvalues";
+    output Complex X[size(dss.A, 1),size(dss.A, 1)]
+        "eigenvectors of the closed loop system";
+
+    protected
+    Real A_rsf[size(dss.A, 1),size(dss.A, 2)];
+    Real B_rsf[size(dss.B, 1),size(dss.B, 2)];
+    Real Q[size(dss.A, 1),size(dss.A, 1)];
+    Real Ks1[:,:];
+    Real Ks2[:,:];
+    Real Q2[:,:];
+    Real A_rsf_1[:,:];
+    Real Q1[:,:];
+    Boolean select[:];
+    Boolean rselectA[:];
+    Real Z[:,:] "orthogonal transformation matrix";
+    Real ZT[:,:] "orthogonal transformation matrix";
+    Complex pf[:];
+    Complex gammaReordered[:]=gamma;
+    Integer info;
+    Real wr[size(gamma, 1)];
+    Real wi[size(gamma, 1)];
+    Boolean imag=false;
+    Integer i;
+    Integer ii;
+    Integer iii;
+    Integer counter;
+    Integer counter2;
+    Integer n=size(dss.A, 1);
+    Integer nccA "number of conjugated complex pole pairs of openloop system";
+    Integer nccg "number of conjugated complex pole pairs of gamma";
+    Integer rpg "number of real poles in gamma";
+    Integer rpA "number of real poles of open loop system";
+    Integer ncc "Min(nccA, nccg)";
+    Integer rp "Min(rpg, rpA)";
+    Integer ng=size(gamma,1);
+    Integer nr "Differenz between rpA and rpg; Sign(rpA-rpg)*(rpA-rpg)";
+
+    Real alphaReal[size(dss.A, 1)]
+        "Real part of eigenvalue=alphaReal+i*alphaImag";
+    Real alphaImag[size(dss.A, 1)]
+        "Imaginary part of eigenvalue=(alphaReal+i*alphaImag";
+
+    Complex SS[:,:];
+    Complex Xj[:,:];
+    Complex h;
+
+    Real dist;
+    Real evImag;
+
+  algorithm
+    assert(size(gamma, 1) <= size(dss.A, 1),
+      "At most n (order of dss) eigenvalues can be assigned");
+
+   /* Extraction of Poles (Variable conversation) and pole sequence check */
+    for i in 1:size(gamma, 1) loop
+      wr[i] := gamma[i].re;
+      wi[i] := gamma[i].im;
+      if imag then
+        assert(wi[i - 1] == -wi[i] and wr[i - 1] == wr[i],
+          "Poles are in wrong sequence");
+        imag := false;
+      elseif wi[i] <> 0 then
+        imag := true;
+      end if;
+    end for;
+
+    // put matrix dss.A to real Schur form A <- QAQ' and compute B <- QB
+    (A_rsf,Z,alphaReal,alphaImag) := Matrices.rsf2(dss.A);
+    ZT := transpose(Z);
+
+    // reorder real Schur form according to alpha
+    (A_rsf,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSFd(
+        A_rsf,
+        identity(size(A_rsf, 1)),
+        alphaReal,
+        alphaImag,
+        alpha);
+    ZT := transpose(Z)*ZT;
+    B_rsf := ZT*dss.B;
+
+    // determine number of poles not to be assigned according to alpha
+    nfp := 0;
+    for i in 1:n loop
+      if alphaReal[i]^2+alphaImag[i]^2 < alpha^2 then
+        nfp := nfp + 1;
+      end if;
+    end for;
+    nap := n - nfp;
+
+    assert(size(gamma, 1) >= nap, String(nap) +
+      " poles should be modified, therefore gamma should contain at at least "
+       + String(nap) + " assigned eigenvalues");
+
+    // second reorder (reorderRSF3) according to conjugated complex pairs in A and p
+    // count numbre of conjugated complex pole pairs = max(number_ccpp(eig(A), number_ccpp(gamma))
+    nccA := 0;
+    //mark the real poles of original system
+    rselectA := fill(true, nap);
+    ii := 1;
+    for i in nfp + 1:n loop
+      if abs(alphaImag[i]) > 0 then
+        nccA := nccA + 1;
+      else
+        rselectA[ii] := false;
+
+      end if;
+      ii := ii + 1;
+      end for;
+      rpA := n-nccA;
+      nccA := div(nccA, 2);
+
+    // reorder gamma and A_rsf
+    (gammaReordered,rpg) := Modelica_LinearSystems2.Internal.reorderZeros(gamma);
+    gammaReordered := Complex.Vectors.reverse(gammaReordered);
+    nccg := div(size(gammaReordered, 1) - rpg, 2);
+    ncc := min(nccA, nccg);
+    rp := min(rpA, rpg);
+    if nccA > 0 then
+      (A_rsf[nfp + 1:n, nfp + 1:n],Q2) := Matrices.LAPACK.dtrsen(
+          "E",
+          "V",
+          rselectA,
+          A_rsf[nfp + 1:n, nfp + 1:n],
+          identity(n - nfp));//The Schur vector matrix is identity, since A_rsf already has Schur form
+
+      A_rsf[1:nfp, nfp + 1:n] := A_rsf[1:nfp, nfp + 1:n]*Q2;
+      B_rsf[nfp + 1:n, :] := transpose(Q2)*B_rsf[nfp + 1:n, :];
+      ZT[nfp + 1:n, :] := transpose(Q2)*ZT[nfp + 1:n, :];
+    end if;
+
+    // main algorithm
+    K := zeros(size(dss.B, 2), size(dss.A, 1));
+    counter := nfp + 1;
+    counter2 := 1;
+
+    for i in 1:rp loop // 1x1 blocks; real system pole and real assigned poles; take the next eigenvalue in the
+                         // diagonal of the Schur form and search the nearest pole in the set of the real poles to assign
+        dist := Modelica.Constants.inf;
+        for ii in i:rpg loop // looking for nearest pole and reorder gamma
+          if abs(A_rsf[n, n] - gammaReordered[ng - ii + 1].re) < dist then
+            iii := ng - ii + 1;
+            dist := abs(A_rsf[n, n] - gammaReordered[ng - ii + 1].re);
+          end if;
+        end for;
+        h := gammaReordered[ng - i + 1];
+        gammaReordered[ng - i + 1] := gammaReordered[iii];
+        gammaReordered[iii] := h;
+
+        Ks1 := DiscreteStateSpace.Internal.assignOneOrTwoPoles(
+          matrix(A_rsf[n, n]),
+          transpose(matrix(B_rsf[n, :])),
+          {gammaReordered[ng - i + 1]},
+          tolerance);
+        K := K + [zeros(size(Ks1, 1), size(K, 2) - 1),Ks1]*ZT;
+        A_rsf := A_rsf - B_rsf*[zeros(size(Ks1, 1), size(K, 2) - 1),Ks1];
+        select := fill(false, n - counter + 1);
+        select[n - counter + 1] := true;
+
+        (A_rsf[counter:n, counter:n],Q1) := Matrices.LAPACK.dtrsen(
+          "E",
+          "V",
+          select,
+          A_rsf[counter:n, counter:n],
+          identity(n - counter + 1));//The Schur vector matrix is identity, since A_rsf already has Schur form
+
+        A_rsf[1:counter - 1, counter:n] := A_rsf[1:counter - 1, counter:n]*Q1;
+        B_rsf[counter:n, :] := transpose(Q1)*B_rsf[counter:n, :];
+        ZT[counter:n, :] := transpose(Q1)*ZT[counter:n, :];
+        counter := counter + 1;
+        counter2 := counter2 + 1;
+      end for;
+
+      if counter2<rpg and counter2>rpA then //System has less real eigenvalues than real assigned poles
+      for i in 1:div(rpg - rpA, 2) loop // 2x2 blocks; complex pair of system poles and 2 real assigned poles; take the next complex pair
+                                        // (Schur bump) in the diagonal of the Schur form and search the two nearest poles in the set of the
+                                        // remaining real assigned poles
+        dist := Modelica.Constants.inf;
+        evImag := sqrt(-A_rsf[n - 1, n]*A_rsf[n, n - 1]);//positive imaginary part of the complex system pole pair
+        for ii in 2*(i - 1) + 1:2:rpg - rpA loop
+          if abs(A_rsf[n, n] - gammaReordered[ng - rp - ii + 1].re) + evImag < dist then
+            iii := ng - rp - ii + 1;
+            dist := abs(A_rsf[n, n] - gammaReordered[ng - rp - ii + 1].re) + evImag;
+          end if;
+        end for;
+        h := gammaReordered[ng - rp - 2*(i - 1)];
+        gammaReordered[ng - rp - 2*(i - 1)] := gammaReordered[iii];
+        gammaReordered[iii] := h;
+        dist := Modelica.Constants.inf;
+        for ii in 2*(i - 1) + 1:2:rpg - rpA loop
+          if abs(A_rsf[n, n] - gammaReordered[ng - rp - ii + 1].re) + evImag < dist then
+            iii := ng - rp - ii + 1;
+            dist := abs(A_rsf[n, n] - gammaReordered[ng - rp - ii + 1].re) + evImag;
+          end if;
+        end for;
+        h := gammaReordered[ng - rp - 2*i + 1];
+        gammaReordered[ng - rp - 2*i + 1] := gammaReordered[iii];
+        gammaReordered[iii] := h;
+
+        Ks2 := DiscreteStateSpace.Internal.assignOneOrTwoPoles(
+          A_rsf[n - 1:n, n - 1:n],
+          matrix(B_rsf[n - 1:n, :]),
+          gammaReordered[ng - rp - 2*i + 1:ng - rp - 2*(i - 1)],
+          tolerance);
+
+        K := K + [zeros(size(Ks2, 1), size(K, 2) - 2),Ks2]*ZT;
+        A_rsf := A_rsf - B_rsf*[zeros(size(Ks2, 1), size(K, 2) - 2),Ks2];
+        select := fill(false, n - counter + 1);
+        select[n - counter:n - counter + 1] := {true,true};
+
+        (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+          "E",
+          "V",
+          select,
+          A_rsf[counter:n, counter:n],
+          identity(n - counter + 1)); //The Schur vector matrix is identity, since A_rsf already has Schur form
+
+        A_rsf[1:counter - 1, counter:n] := A_rsf[1:counter - 1, counter:n]*Q2;
+        B_rsf[counter:n, :] := transpose(Q2)*B_rsf[counter:n, :];
+        ZT[counter:n, :] := transpose(Q2)*ZT[counter:n, :];
+        counter := counter + 2;
+        counter2 := counter2 + 2;
+      end for;
+    end if;
+
+    if counter2>rpg and counter2<rpA then//System has more real eigenvalues than real assigned poles
+      for i in 1:div(rpA - rpg, 2) loop// 2x2 blocks; 2 real system poles and a pair of complex assigned poles; take the next two real
+                                        // eigenvalues in the diagonal of the Schur form and search the complex pole pair of the assigned poles
+                                        // which is nearest to the two real poles
+        dist := Modelica.Constants.inf;
+        for ii in 2*(i - 1)+1:2:rpA - rpg loop
+          if abs(A_rsf[n, n] - gammaReordered[ng - rp - ii + 1].re) + abs(gammaReordered[ng - rp - ii + 1].im) + abs(A_rsf[n - 1, n - 1] -
+            gammaReordered[ng - rp - ii + 1].re) + abs(gammaReordered[ng - rp - ii + 1].im) < dist then
+            iii := ng - rp - ii + 1;
+            dist := abs(A_rsf[n, n] - gammaReordered[ng - rp - ii + 1].re)
+               + abs(gammaReordered[ng - rp - ii + 1].im) + abs(A_rsf[
+              n - 1, n - 1] - gammaReordered[ng - rp - ii + 1].re) +
+              abs(gammaReordered[ng - rp - ii + 1].im);
+          end if;
+        end for;
+        h := gammaReordered[ng - rp - 2*(i - 1)];
+        gammaReordered[ng - rp - 2*(i - 1)] := gammaReordered[iii];
+        gammaReordered[iii] := h;
+        h := gammaReordered[ng - rp - 2*i + 1];
+        gammaReordered[ng - rp - 2*i + 1] := gammaReordered[iii - 1];
+        gammaReordered[iii - 1] := h;
+
+        Ks2 := DiscreteStateSpace.Internal.assignOneOrTwoPoles(
+          A_rsf[n - 1:n, n - 1:n],
+          matrix(B_rsf[n - 1:n, :]),
+          gammaReordered[ng - rp - 2*i + 1:ng - rp - 2*(i - 1)],
+          tolerance);
+
+        K := K + [zeros(size(Ks2, 1), size(K, 2) - 2),Ks2]*ZT;
+        A_rsf := A_rsf - B_rsf*[zeros(size(Ks2, 1), size(K, 2) - 2),Ks2];
+        select := fill(false, n - counter + 1);
+        select[n - counter:n - counter + 1] := {true,true};
+
+        (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+          "E",
+          "V",
+          select,
+          A_rsf[counter:n, counter:n],
+          identity(n - counter + 1)); //The Schur vector matrix is identity, since A_rsf already has Schur form
+
+        A_rsf[1:counter - 1, counter:n] := A_rsf[1:counter - 1, counter:n]*Q2;
+        B_rsf[counter:n, :] := transpose(Q2)*B_rsf[counter:n, :];
+        ZT[counter:n, :] := transpose(Q2)*ZT[counter:n, :];
+        counter := counter + 2;
+        counter2 := counter2 + 2;
+  //      Modelica.Utilities.Streams.print("counter2Case3 = " + String(counter2));
+      end for;
+    end if;
+
+    for i in 1:ncc loop // 2x2 blocks; 2 complex system poles and two complex assigned poles; take the next complex
+                        // system pole pair (next Schur bump) in the diagonal of the Schur form and search the complex
+                        //  assigned pole pair which is nearest
+      dist := Modelica.Constants.inf;
+      evImag := sqrt(-A_rsf[n - 1, n]*A_rsf[n, n - 1]);//positive imaginary part of the complex system pole pair
+      for ii in 2*(i - 1) + 1:2:2*ncc loop
+        if abs(A_rsf[n, n] - gammaReordered[2*ncc - ii + 1].re) + abs(evImag -
+            abs(gammaReordered[2*ncc - ii + 1].im)) < dist then
+          iii := 2*ncc - ii + 1;
+          dist := abs(A_rsf[n, n] - gammaReordered[2*ncc - ii + 1].re) + abs(
+            evImag - abs(gammaReordered[2*ncc - ii + 1].im));
+        end if;
+      end for;
+      h := gammaReordered[2*ncc - 2*(i - 1)];
+      gammaReordered[2*ncc - 2*(i - 1)] := gammaReordered[iii];
+      gammaReordered[iii] := h;
+      h := gammaReordered[2*ncc - 2*i + 1];
+      gammaReordered[2*ncc - 2*i + 1] := gammaReordered[iii - 1];
+      gammaReordered[iii - 1] := h;
+
+      Ks2 := DiscreteStateSpace.Internal.assignOneOrTwoPoles(
+        A_rsf[n - 1:n, n - 1:n],
+        matrix(B_rsf[n - 1:n, :]),
+        gammaReordered[2*ncc - 2*i + 1:2*ncc - 2*(i - 1)],
+        tolerance);
+      K := K + [zeros(size(Ks2, 1), size(K, 2) - 2),Ks2]*ZT;
+      A_rsf := A_rsf - B_rsf*[zeros(size(Ks2, 1), size(K, 2) - 2),Ks2];
+      select := fill(false, n - counter + 1);
+      select[n - counter:n - counter + 1] := {true,true};
+
+      (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+        "E",
+        "V",
+        select,
+        A_rsf[counter:n, counter:n],
+        identity(n - counter + 1));   //The Schur vector matrix is identity, since A_rsf already has Schur form
+
+      A_rsf[1:counter - 1, counter:n] := A_rsf[1:counter - 1, counter:n]*Q2;
+      B_rsf[counter:n, :] := transpose(Q2)*B_rsf[counter:n, :];
+      ZT[counter:n, :] := transpose(Q2)*ZT[counter:n, :];
+      counter := counter + 2;
+      counter2 := counter2 + 2;
+    end for;
+
+    S := dss.A - dss.B*K;
+    po := Complex.eigenValues(S);
+
+    if calculateEigenvectors then
+  //     X := fill(Complex(0), n, n);
+  //     for i in 1:n loop
+  //       SS := Complex(1)*S;
+  //       for ii in 1:n loop
+  //         SS[ii, ii] := SS[ii, ii] - po[i];
+  //       end for;
+  //       Xj := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace(
+  //                                  SS);
+  //       for ii in 1:n loop
+  //         X[ii, i] := Xj[ii, 1];
+  //       end for;
+  //     end for;
+  //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X1");
+      X := Complex.eigenVectors(S);
+  //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X2");
+
+    end if;
+
+    annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  (K, S, po, nfp, nap, nup) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Design.<b>assignPolesMI</b>(dss, gamma, np, tol, calculateEigenvectors)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+The purpose of this function is to determine the state feedback matrix <b>K</b> for a
+given time invariant multi input state system (<b>A</b>,<b>B</b>) such that the
+closed-loop state matrix <b>A</b>-<b>B</b>*<b>K</b> has specified eigenvalues. The
+feedback matrix <b>K</b> is calculated by factorization following [1]. The algorithm
+modifies the eigenvalues sequentially and also allows partial eigenvalue assignment.<br>
+<br>
+
+
+ At the beginning of the algorithm, the feedback matrix <b>K</b> is set to zero (<b>K</b> = <b>0</b>) and the matrix <b>A</b> is
+ reduced to an ordered real Schur form by separating its spectrum in two parts
+
+<blockquote><pre>
+              | <b>F</b>1  <b>F</b>3|
+ <b>F</b> = <b>Q</b>*<b>A</b>*<b>Q</b>' = |       |
+              | <b>0</b>   <b>F</b>2|
+ </pre>
+</blockquote> in such a way, that <b>F</b>1 contains the eigenvalues that will be
+retained and <b>F</b>3 contains the eigenvalues going to be modified. On the suggestion
+of [1] the eigenvalues <i>evr</i> to be retained are chosen as
+ <blockquote><pre>
+  evr = {s in C: Re(s) &lt -alpha, alpha &gt =0}
+ </pre> </blockquote>
+but other specification are conceivable of course.<br>
+<br>
+
+Let
+ <blockquote><pre>
+  <b>G</b> = [<b>G</b>1;<b>G</b>2] = <b>Q</b>*<b>B</b>
+ </pre> </blockquote>
+with an appropriate partition according to <b>F</b>2. (<b>F</b>2, <b>G</b>2) has to be
+controllable.<br>
+
+If the feedback matrix <b>K</b> is taken in a form <blockquote><pre> <b>K</b> = [0, <b>K</b>2]
+</pre></blockquote> the special structure of <b>F</b> and <b>K</b> results in a closed loop state
+matrix <blockquote><pre>
+          |<b>F</b>1 <b>F</b>3 - <b>G</b>1*<b>K</b>2|
+<b>F</b> - <b>G</b>*<b>K</b> = |             |
+          |0  <b>F</b>2 - <b>G</b>2*<b>K</b>2|
+</pre></blockquote> with only the eigenvalues of <b>F</b>2 are modified. This approach to modify
+separated eigenvalues is used to sequentially shift one real eigenvalue ore two
+complex conjugated eigenvalues stepwise until all assigned eigenvalues are placed.
+Therefore, at each step i always the (two) lower right eigenvalue(s) are modified by an
+appropriate feedback matrix <b>K</b>i. The matrix <b>F</b> - <b>G</b>*<b>K</b>i remains in real Schur form. The
+assigned eigenvalue(s) is (are) then moved to another diagonal position of the real Schur
+form using reordering techniques <b>F</b> &lt -- <b>Q</b>i*<b>F</b>*<b>Q</b>i'  and a new block is transferred to the
+lower right diagonal position. The transformations are accumulated in <b>Q</b>i and are also
+applicated to the matrices <blockquote><pre> <b>G</b> &lt - <b>Q</b>i*<b>G</b> <b>Q</b> &lt - <b>Q</b>i*<b>Q</b> </pre></blockquote>
+The eigenvalue(s) to be assigned at  each step is (are) chosen such that the norm of each <b>K</b>i is minimized [1].
+<p>
+
+
+
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+      A=[-1, 1, 1;0, 1, 1;0, 0, 1],
+      B=[0; 0; 1],
+      C=[0, 1, 0],
+      D=[0]);
+
+   Real Q[3,3];
+
+<b>algorithm</b>
+  Q := Modelica_LinearSystems2.DiscreteStateSpace.Analysis.observabilityMatrix(dss);
+// Q = [0, 1, 0; 0, 1, 1; 1, 1, 2]
+</pre></blockquote>
+
+
+<h4><font color=\"#008000\">References</font></h4>
+<table>
+<tr> <td align=right>  [1] </td><td align=center>  Varga A.  </td>  <td> \"A Schur method for pole assignment\"  </td> <td> IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981 </td></tr>
+</table>
+
+</html> ",
+         revisions="<html>
+<ul>
+<li><i>2010/05/31 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
+  end assignPolesMI;
 
   function UKF "Unscented Kalman filter design function"
 
@@ -1687,7 +2297,7 @@ Function <b>UKF</b> computes one recursion of the Unscented Kalman filter. Unsce
 but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation 
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
-See also <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to
+See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to
 solve the mathematically identical problem.
 
 
@@ -1785,7 +2395,7 @@ of the positive definite matrices. This means less computational effort and high
 Unscented Kalman filters are similar to Extended Kalman filters but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation 
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
-See also <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF\">UKF</a>, where the standard method (without Cholesky factorization)
+See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF\">UKF</a>, where the standard method (without Cholesky factorization)
 to calculate UKF is applied.
 
 
@@ -1800,8 +2410,9 @@ to calculate UKF is applied.
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Internal.StateSpace2;
 
-    input Real xpre[:] "State at instant k-1";
+      input Real xpre[:] "State at instant k-1";
     input Real upre[:] "Input at instant k-1";
     input Real y[:] "Output at instant k";
     input Real Mpre[size(xpre,1),size(xpre,1)]
@@ -1817,6 +2428,8 @@ to calculate UKF is applied.
     output Real M[size(Mpre,1),size(Mpre,1)]
         "Solution of the discrete Riccati equation";
     output Real K[size(xpre,1),size(y,1)] "Kalman filter gain matrix";
+        output Real x_cont[size(xpre,1)] "Value of continuous state";
+        output Real y_cont[size(y,1)] "Value of continuous output";
 
     replaceable function ekfFunction = 
         Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy 
@@ -1935,7 +2548,7 @@ algorithm
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>plotBodeSISO</b>(dss)
    or
-DiscreteStateSpace.Plot.<b>plotBodeSISO</b>(dss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+DiscreteStateSpace.Plot.<b>plotBodeSISO</b>(dss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -1993,7 +2606,7 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
 end bodeSISO;
 
 encapsulated function timeResponse
-      "Plot the time response of the system. The response type is selectable"
+      "Plot the time response of a discrete state space system. The response type is selectable"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -2098,18 +2711,18 @@ algorithm
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>timeResponse</b>(dss);
 or
-DiscreteStateSpace.Plot.<b>timeResponse</b>(dss, tSpan,response, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteStateSpace.Plot.<b>timeResponse</b>(dss, tSpan,response, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
 Function <b>timeResponse</b> plots the time response of a discrete state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.plotImpulse\">plotImpulse</a>, 
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, 
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.plotImpulse\">plotImpulse</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
 
 
 
@@ -2117,6 +2730,8 @@ Function <b>timeResponse</b> plots the time response of a discrete state space s
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
+import Modelica_LinearSystems2.DiscreteStateSpace;
+      
 Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
 A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
 B=[1.0; 1.0; 0.0],
@@ -2129,13 +2744,14 @@ DiscreteStateSpace dss=DiscreteStateSpace(ss,Ts,method);
 Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
 
 <b>algorithm</b>
-Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse(dss, response=response);
+DiscreteStateSpace.Plot.timeResponse(dss, response=response);
 
 </pre></blockquote>
 </html> "));
 end timeResponse;
 
-encapsulated function impulse "Impulse response plot"
+encapsulated function impulse
+      "Impulse response plot of a discrete state space system"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -2182,15 +2798,15 @@ algorithm
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>impulse</b>(dss);
 or
-DiscreteStateSpace.Plot.<b>impulse</b>(dss, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteStateSpace.Plot.<b>impulse</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, 
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
+Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
 
 
 
@@ -2209,7 +2825,7 @@ Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method
 DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
 
 <b>algorithm</b>
-Modelica_LinearSystems2.StateSpace.Plot.impulse(dss)
+Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse(dss)
 
 </p>
 </pre></blockquote>
@@ -2217,7 +2833,8 @@ Modelica_LinearSystems2.StateSpace.Plot.impulse(dss)
 </html> "));
 end impulse;
 
-encapsulated function step "Step response plot"
+encapsulated function step
+      "Step response plot of a discrete state space system"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -2265,15 +2882,15 @@ algorithm
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>step</b>(dss);
 or
-DiscreteStateSpace.Plot.<b>step</b>(dss, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteStateSpace.Plot.<b>step</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>step</b> plots the discrete step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
+Function <b>step</b> plots the discrete step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
 
 
 
@@ -2294,13 +2911,14 @@ Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method
 DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
 
 <b>algorithm</b>
-Modelica_LinearSystems2.StateSpace.Plot.step(dss, tSpan=3)
+Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss, tSpan=3)
 </pre></blockquote>
 
 </html> "));
 end step;
 
-encapsulated function ramp "Ramp response plot"
+encapsulated function ramp
+      "Ramp response plot of a discrete state space system"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -2347,15 +2965,15 @@ algorithm
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>ramp</b>(ss);
 or
-DiscreteStateSpace.Plot.<b>ramp</b>(dss, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteStateSpace.Plot.<b>ramp</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>ramp</b> plots the ramp responses of a discrete state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
+Function <b>ramp</b> plots the ramp responses of a discrete state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
 
 
 
@@ -2381,7 +2999,8 @@ Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp(dss)
 </html> "));
 end ramp;
 
-encapsulated function initialResponse "Initial condition response plot"
+encapsulated function initialResponse
+      "Initial condition response plot of a discrete state space system"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
@@ -2426,15 +3045,15 @@ algorithm
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>initial</b>(ss);
 or
-DiscreteStateSpace.Plot.<b>initial</b>(dss, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteStateSpace.Plot.<b>initial</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Function <b>initial</b> plots the initial responses of a discrete state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>.
+Function <b>initial</b> plots the initial responses of a discrete state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>.
 
 
 
@@ -2664,6 +3283,7 @@ Computes a matrix of DiscreteZerosAndPoles records
                  product(q + n1[i]) * product(q^2 + n2[i,1]*q + n2[i,2])
        dzp = k*---------------------------------------------------------
                 product(q + d1[i]) * product(q^2 + d2[i,1]*q + d2[i,2])
+
 </pre></blockquote>
 of a system from discrete state space representation, i.e. isolating the uncontrollable and unobservable parts and the eigenvalues and invariant zeros of the controllable and observable sub systems are calculated. The algorithm applies the method described in [1] for each single-input-output pair.
 
@@ -2755,8 +3375,8 @@ Computes a DiscreteTransferFunction record
            d(z)     a0 + a1*z + ... + an*z^n
  </pre></blockquote>
 
-The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles\">toDiscreteZerosAndPoles</a> to convert the
-discrete state space system into a discrete zeros and poles representation first and after that <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction\">DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction</a> to generate the transfer function.
+The algorithm uses <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles\">toDiscreteZerosAndPoles</a> to convert the
+discrete state space system into a discrete zeros and poles representation first and after that <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction\">DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction</a> to generate the transfer function.
 
 
 
@@ -2777,6 +3397,7 @@ discrete state space system into a discrete zeros and poles representation first
       Ts = 0.1);
       
  <b>algorithm</b>
+
   dtf:=Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss);
   
 //             0.185797*z - 0.159922
@@ -2834,7 +3455,7 @@ Computes a matrix of DiscreteTransferFunction records
   dtf = -------- = -------------------------- 
            d(z)     a0 + a1*z + ... + an*z^n
  </pre></blockquote>
-with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteTransferFunction\">Conversion.toDiscreteTransferFunction</a>
+with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteTransferFunction\">Conversion.toDiscreteTransferFunction</a>
 
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -2893,7 +3514,7 @@ end Conversion;
 encapsulated package Import
 
 function fromModel
-      "Generate a StateSpace data record by linearization of a model"
+      "Generate a DiscreteStateSpace record by linearization of a modelica model"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -3023,7 +3644,8 @@ ss.B2  = [0.000437113227802044;
 "));
 end fromModel;
 
-  encapsulated function fromFile "Read a StateSpace data record from mat-file"
+  encapsulated function fromFile
+      "Read a DiscreteStateSpace record from mat-file"
 
       import Modelica;
       import Modelica_LinearSystems2.DiscreteStateSpace;
@@ -3082,7 +3704,7 @@ end fromModel;
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>. The file must contain the matrix [A, B; C, D] named matrixName, the matris B2 and the integer nx representing the order of the system, i.e. the number of rows of the square matrix A.
+Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>. The file must contain the matrix [A, B; C, D] named matrixName, the matrix B2 and the integer nx representing the order of the system, i.e. the number of rows of the square matrix A.
 
 <h4><font color=\"#008000\">Example</font></h4>
 <blockquote><pre>
@@ -3897,26 +4519,26 @@ function estimateBase_sr "Base class of estimation function"
 end estimateBase_sr;
 
 partial function ekfSystemBase "Base class of ekf-system functions"
-  extends Modelica.Icons.Function;
+      extends Modelica.Icons.Function;
 
       import Modelica;
       import Modelica_LinearSystems2;
 
-  input Real x[:] "Estimated vector at instant k";
-  input Real u[:] "Input at instant k";
-  input Modelica.SIunits.Time Ts "Sample time";
-  input Integer ny "Number of outputs";
+      input Real x[:] "Estimated vector at instant k";
+      input Real u[:] "Input at instant k";
+      input Modelica.SIunits.Time Ts "Sample time";
+      input Integer ny "Number of outputs";
 
-  output Real x_new[size(x, 1)] "Modeled mean";
-  output Real y[ny] "Modeled output";
-  output Real Ak[size(x, 1),size(x, 1)]
+      output Real x_new[size(x, 1)] "Modeled mean";
+      output Real y[ny] "Modeled output";
+      output Real Ak[size(x, 1),size(x, 1)]
         "System matrix of the discrete linearized system at instant k";
-  output Real Ck[ny,size(x, 1)]
+      output Real Ck[ny,size(x, 1)]
         "Output matrix of the discrete linearized system at instant k";
 
     protected
-  Integer nx=size(x, 1);
-  Integer nu=size(u, 1);
+      Integer nx=size(x, 1);
+      Integer nu=size(u, 1);
 
 end ekfSystemBase;
 
@@ -3977,6 +4599,212 @@ end ekfSystemBase;
     Ck := fill(0,ny,nx);// Discretized Jacobi of y
 
   end ekfSystemDummy;
+
+partial function ekfStateBase "Base class of ekf state space function"
+      extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+
+      input Real x[:] "Estimated vector at instant k";
+      input Real u[:] "Input at instant k";
+      input Modelica.SIunits.Time Ts "Sample time";
+
+      output Real x_new[size(x, 1)] "Modeled mean";
+      output Real Ak[size(x, 1),size(x, 1)]
+        "System matrix of the discrete linearized system at instant k";
+
+    protected
+      Integer nx=size(x, 1);
+      Integer nu=size(u, 1);
+
+end ekfStateBase;
+
+partial function ekfOutputBase "Base class of ekf output function"
+      extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+
+      input Real x[:] "Estimated vector at instant k";
+      input Real u[:] "Input at instant k";
+      input Modelica.SIunits.Time Ts "Sample time";
+      input Integer ny "Number of outputs";
+
+      output Real y[ny] "Modeled output";
+      output Real Ck[ny,size(x, 1)]
+        "Output matrix of the discrete linearized system at instant k";
+
+    protected
+      Integer nx=size(x, 1);
+      Integer nu=size(u, 1);
+
+end ekfOutputBase;
+
+  encapsulated function assignOneOrTwoPoles
+      "Algorithm to assign p (p = 1 or 2) eigenvalues"
+
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.Math.Complex;
+    import Modelica_LinearSystems2.Math.Vectors;
+
+    input Real F[:,size(F, 1)] "system matrix of order p=1 or p=2";
+    input Real G[size(F, 1),:] "control input matrix p rows";
+    input Complex gamma[size(F, 1)];
+    input Real tolerance=Modelica.Constants.eps;
+    output Real K[:,size(F, 1)] "feedback matrix p columns";
+
+    protected
+    Real Gamma[:,:];
+    Integer rankGs;
+    Real Fs[size(F, 1),size(F, 2)];
+    Real Gs[size(G, 1),size(G, 2)];
+    Real Gst[:,:]=transpose(G);
+    Real Ks[:,size(F, 1)];
+    Real c;
+    Real s;
+    Real r;
+    Integer p=size(F,1);
+    Real sigmaG[:];
+
+    Real V[size(G, 2),size(G, 2)];
+    Real U[size(F, 1),size(F, 2)];
+
+    Real u1[:];
+    Real u2[:];
+    Integer i;
+    Complex system_ev[:];
+
+  algorithm
+    assert(size(F, 1) >= size(gamma, 1),
+      "\n In function DiscreteStateSpace.Internal.assignOneOrTwoPoles() matrix F is of size ["
+       + String(size(F, 1)) + "," + String(size(F, 1)) + "] and " + String(
+      size(F, 1)) + " demanded assigned poles are expected. However, " +
+      String(size(gamma, 1)) + " poles are given");
+  //assert(not Modelica.Math.Matrices.isEqual(G,zeros(size(G,1),size(G,2)),tolerance),"A subsystem (F, G) in DiscreteStateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix ");
+    if size(gamma, 1) == 1 then
+      assert(gamma[1].im == 0, "\n In function DiscreteStateSpace.Internal.assignOneOrTwoPoles() matrix F has size [" + String(size(F, 1)) + "," + String(size(F, 1)) +
+        "], therefore, the demanded assigned pole must be real. However, the imaginary part is "
+         + String(gamma[1].im));
+    elseif abs(gamma[1].im) > 0 or abs(gamma[2].im) > 0 then
+      assert(gamma[1].re == gamma[2].re and gamma[1].im == -gamma[2].im,
+        "\nThe assigned pole pair given in function DiscreteStateSpace.Internal.assignOneOrTwoPoles() must be conjungated complex. However, the poles are\npole1 = "
+         + String(gamma[1]) + "\npole2 = " + String(gamma[2]) +
+        ". \nTry\npole1 = " + String(gamma[1]) + "\npole2 = " + String(
+        Complex.conj(gamma[1])) + "\ninstead");
+    end if;
+
+    if not Modelica.Math.Matrices.isEqual(
+        G,
+        zeros(size(G, 1), size(G, 2)),
+        tolerance) then
+      if size(G, 2) == 1 then
+        V := [1];
+        if size(G, 1) == 1 then
+          U := [1];
+        else
+           // Givens
+          r := sqrt(G[1, 1]^2 + G[2, 1]^2);
+          c := G[1, 1]/r;
+          s := G[2, 1]/r;
+          U := [c,s; -s,c];
+        end if;
+        Gs := U*G;
+
+        rankGs := if abs(Gs[1, 1]) > tolerance then 1 else 0;
+      else
+       // size(G, 2)>1
+
+        if size(G, 1) == 1 then // U=I, compute V by just one Householder transformation
+          U := [1];
+          u1 := cat(1, Vectors.householderVector(Gst[:, 1],
+                       cat(1, {1}, zeros(size(G, 2) - 1))));// Householder vector
+          Gst := Modelica_LinearSystems2.Math.Matrices.householderReflexion(Gst, u1);
+
+          V := identity(size(G, 2)) - 2*matrix(u1)*transpose(matrix(u1))/(u1*u1);
+          Gs := transpose(Gst);
+          rankGs := if abs(Gs[1, 1]) > tolerance then 1 else 0;
+
+        else
+  // systems with p==2 and m>1 are transformed by svd
+          (sigmaG,U,V) := Modelica.Math.Matrices.singularValues(G);
+          rankGs := 0;
+          i := size(sigmaG, 1);
+          while i > 0 loop
+            if sigmaG[i] > 1e-10 then
+              rankGs := i;
+              i := 0;
+            end if;
+            i := i - 1;
+          end while;
+          Gs := zeros(p, size(G, 2));
+          for i in 1:rankGs loop
+            Gs[i, i] := sigmaG[i];
+          end for;
+
+        end if;
+        V := transpose(V);
+      end if;
+
+  // check controllability
+      assert(not Modelica.Math.Matrices.isEqual(
+        Gs,
+        zeros(size(Gs, 1), size(Gs, 2)),
+        tolerance), "A subsystem in DiscreteStateSpace.Internal.assignOneOrTwoPoles() is not controllable");
+
+      Ks := fill(
+        0,
+        rankGs,
+        size(F, 1));
+      Fs := U*F*transpose(U);
+
+      if size(F, 1) == 1 then
+        Ks := matrix((Fs[1, 1] - gamma[1].re)/Gs[1, 1]);
+      else
+        if rankGs == size(F, 1) then
+
+          // Gamma:= if size(F,1)==1 then [gamma[1].re] else [gamma[1].re, -(gamma[1].im)^2;1, gamma[2].re];
+          //  Ks :=  Modelica_LinearSystems2.Math.Matrices.solve2(Gs, Fs - Gamma);
+  //        Ks := [(Fs[1, 1] - gamma[1].re)/Gs[1, 1] - Gs[1, 2]*(Fs[2, 1] - 1)/Gs[1, 1]/Gs[2,2],
+  //        (Fs[1, 2] + (gamma[1].im)^2)/Gs[1, 1] - Gs[1, 2]*(Fs[2, 2] - gamma[2].re)/Gs[1, 1]/Gs[2, 2];
+  //        (Fs[2, 1] - 1)/Gs[2, 2],(Fs[2, 2] - gamma[2].re)/Gs[2, 2]];
+
+  // since G1 is diagonal because of svd, Gs[1, 2] is zero
+
+          Ks := [(Fs[1, 1] - gamma[1].re)/Gs[1, 1],  (Fs[1, 2] + (gamma[1].im)^2)/Gs[1, 1];
+          (Fs[2, 1] - 1)/Gs[2, 2],(Fs[2, 2] - gamma[2].re)/Gs[2, 2]];
+        else
+
+          Ks[1, 1] := (gamma[1].re + gamma[2].re - Fs[1, 1] - Fs[2, 2])/Gs[1, 1];
+          Ks[1, 2] := Ks[1, 1]*Fs[2, 2]/Fs[2, 1] + (Fs[1, 1]*Fs[2, 2] - Fs[1, 2]*
+            Fs[2, 1] - (gamma[1].re*gamma[2].re - gamma[1].im*gamma[2].im))/Fs[2,1]/Gs[1, 1];
+          Ks := -Ks;
+        end if;
+      end if;
+
+      K := V[:, 1:size(Ks, 1)]*Ks*U;
+
+    else
+      if p == 1 then
+        Modelica.Utilities.Streams.print("\n A subsystem (F, G) in DiscreteStateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
+      That is, "   + String(F[1, 1]) + " remains and " + String(gamma[1].re) + " cannot be realized");
+      else
+        system_ev := Complex.eigenValues(F);
+        Modelica.Utilities.Streams.print("\n A subsystem (F, G) in DiscreteStateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
+      That is, "   + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then " + " else 
+                " - ") + String(system_ev[1].im) + "j and " + String(system_ev[2].re)
+           + (if abs(system_ev[2].im) > 0 then " + " else " - ") + String(
+          system_ev[2].im) + "j remain and " + String(gamma[1].re) + (if abs(
+          gamma[1].im) > 0 then (if gamma[1].im > 0 then " + " else " - " +
+          String(gamma[1].im) + "j") else "" + " and ") + String(gamma[2].re) + (
+          if abs(gamma[2].im) > 0 then (if gamma[2].im > 0 then " + " else " - " +
+          String(gamma[2].im) + "j") else "") + " cannot be realized");
+      end if;
+      K := zeros(size(G, 2), size(F, 1));
+    end if;
+
+  end assignOneOrTwoPoles;
 end Internal;
 
   annotation (
