@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Examples.StateSpace;
 function designAssignPolesMIMO "Example for pole placing"
   extends Modelica.Icons.Function;
   output Real K[:,:] "Gain vector";
+  output Real S[:,:];
 
   input Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1,1; 0,-2],
@@ -14,7 +15,6 @@ function designAssignPolesMIMO "Example for pole placing"
 
 protected
       Modelica_LinearSystems2.Math.Complex newPoles[:];
-      Real S[:,:];
 
 algorithm
   (K, S, newPoles) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, p);

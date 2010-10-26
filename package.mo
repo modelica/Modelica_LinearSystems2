@@ -7,13 +7,14 @@ constant String DataDir=classDirectory() + "Extras/Data/"
 
 annotation (
   preferredView="info",
-  uses(Modelica(version="3.1")),
-   version="2.2 Beta 1",
-   versionBuild=1,
-   versionDate="2010-06-30",
-   dateModified = "2010-06-30 09:27:58Z",
-   revisionID="$Id::                                       $",
-   conversion(noneFromVersion="2.0"),
+ uses(Modelica(version="3.2")),
+    version="2.2",
+    versionBuild=2,
+    versionDate="2010-10-26",
+    dateModified = "2010-10-26 09:27:58Z",
+    revisionID="$Id::                                       $",
+    conversion(noneFromVersion="2.0",
+               noneFromVersion="2.1"),
   Documentation(info="<html>
 <p>
 Library <b>Modelica_LinearSystems2</b> is a Modelica package

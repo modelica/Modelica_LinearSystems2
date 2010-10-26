@@ -71,7 +71,7 @@ algorithm
       Modelica_LinearSystems2.DiscreteTransferFunction.Plot.ramp(dtf2);
       Modelica_LinearSystems2.DiscreteTransferFunction.Plot.ramp(dtf3);
 
-      Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss4);
+//      Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss4);
       Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp4[1,1]);
       Modelica_LinearSystems2.DiscreteTransferFunction.Plot.step(dtf4[1,1]);
    end if;

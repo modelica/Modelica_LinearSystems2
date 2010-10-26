@@ -8,13 +8,13 @@ record DiscreteStateSpace
   Real C[:,size(A, 1)]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
   Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
-  Modelica.SIunits.Time Ts=1 "Sample time" 
+  Modelica.SIunits.Time Ts=1 "Sample time"
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
   Real B2[size(B, 1),size(B, 2)]=fill(0,size(B,1),size(B,2))
-    "Reconstruct continuous state" 
+    "Reconstruct continuous state"
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
   Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-    "Discretization method" 
+    "Discretization method"
         annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
 //      String yNames[size(C, 1)]=fill("", size(C, 1)) "Names of the output signals" annotation(Dialog(group="Signal names"));
@@ -24,10 +24,10 @@ record DiscreteStateSpace
   encapsulated operator 'constructor'
     "Default constructors for a DiscreteStateSpace record"
     import Modelica_LinearSystems2;
-  function fromDiscreteTransferFunction = 
+  function fromDiscreteTransferFunction =
       Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
                                                                                              annotation (Documentation(info="<html> </html>"));
-  function fromDiscreteZerosAndPoles = 
+  function fromDiscreteZerosAndPoles =
         Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace
                                                                                                           annotation (Documentation(info="<html> </html>"));
 
@@ -96,20 +96,20 @@ respectively.
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
-      input Real A[:,size(A, 1)] 
+      input Real A[:,size(A, 1)]
                               annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Real B[size(A, 1),:] 
+      input Real B[size(A, 1),:]
                               annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Real C[:,size(A, 1)] 
+      input Real C[:,size(A, 1)]
                               annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Real D[size(C, 1),size(B, 2)] 
+      input Real D[size(C, 1),size(B, 2)]
                                       annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
-      input Modelica.SIunits.Time Ts=1 "Sample time" 
+      input Modelica.SIunits.Time Ts=1 "Sample time"
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
       input Real B2[:,:]=zeros(size(B, 1), size(B, 2));
       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization methodDiscretization method" 
+        "Discretization methodDiscretization method"
         annotation(Dialog(group="Data used to construct discrete from continuous system"));
       output DiscreteStateSpace result(
         redeclare Real A[size(A, 1),size(A, 2)],
@@ -1292,9 +1292,9 @@ encapsulated function timeResponse
       import Modelica_LinearSystems2.Types.TimeResponse;
 
   input TimeResponse response=TimeResponse.Step;
-  extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(redeclare
-          Real y[
-             :,size(dss.C, 1),if response == TimeResponse.Initial then 1 else 
+  extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(redeclare Real
+               y[
+             :,size(dss.C, 1),if response == TimeResponse.Initial then 1 else
       size(dss.B, 2)], redeclare Real x_discrete[:,size(dss.A, 1),if response ==
       TimeResponse.Initial then 1 else size(dss.B, 2)]);// Input/Output declarations of time response functions
 
@@ -1673,8 +1673,8 @@ encapsulated function initialResponse
   input Real x0[:]=fill(0, 0) "Initial state vector";
 
     // Input/Output declarations of time response functions:
-  extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(redeclare
-          Real y[
+  extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(redeclare Real
+               y[
              :,size(dss.C, 1),1], redeclare Real x_discrete[:,size(dss.A, 1),1]);
     protected
   Real tSpanVar;
@@ -2431,8 +2431,8 @@ to calculate UKF is applied.
         output Real x_cont[size(xpre,1)] "Value of continuous state";
         output Real y_cont[size(y,1)] "Value of continuous output";
 
-    replaceable function ekfFunction = 
-        Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy 
+    replaceable function ekfFunction =
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy
         annotation (Documentation(revisions="<html>
 <ul>
 <li><i>2010/06/11 </i>
@@ -2500,7 +2500,7 @@ encapsulated function bodeSISO
   input Modelica.SIunits.Frequency f_max=10
         "Maximum frequency value, if autoRange = false";
 
-  input Boolean magnitude=true "= true, to plot the magnitude of dtf" 
+  input Boolean magnitude=true "= true, to plot the magnitude of dtf"
                                                                      annotation(choices(__Dymola_checkBox=true));
   input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
 
@@ -3118,7 +3118,7 @@ encapsulated function toDiscreteZerosAndPoles
   Real v;
 
 algorithm
-  if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and 
+  if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
       Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
     poles := Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
@@ -3522,7 +3522,8 @@ function fromModel
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
   input String modelName "Name of the Modelica model" annotation(Dialog(translatedModel));
-  input Real T_linearize=0 "point in time of simulation to linearize the model";
+  input Modelica.SIunits.Time T_linearize=0
+        "point in time of simulation to linearize the model";
   input String fileName="dslin" "Name of the result file";
   input Modelica.SIunits.Time Ts=1 "Sample time";
   input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
@@ -3583,7 +3584,7 @@ algorithm
   ss.xNames := xuyName[1:nx];
 
   result := DiscreteStateSpace(
-    sc=ss,
+    ss=ss,
     Ts=Ts,
     method=method);
 
@@ -4286,9 +4287,9 @@ function estimateBase "Base class of estimation function"
       import Modelica;
       import Modelica_LinearSystems2;
 
-  replaceable function yOut = 
+  replaceable function yOut =
       Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy constrainedby
-        Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase 
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase
                                                                 annotation(choicesAllMatching);
 
   input Real y[:] "Measured output vector";
@@ -4315,9 +4316,9 @@ partial function updateBase "Bass class of update-function"
   import Modelica;
   import Modelica_LinearSystems2;
 
-  replaceable function hSigma = 
+  replaceable function hSigma =
       Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy constrainedby
-        Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase 
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase
                                                                 annotation(choicesAllMatching);
 
   input Real xpre[:] "Estimated vector of previous instant";
@@ -4361,9 +4362,9 @@ partial function predictBase "Base class of prediction-function"
       import Modelica;
       import Modelica_LinearSystems2;
 
-  replaceable function fSigma = 
+  replaceable function fSigma =
       Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy constrainedby
-        Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase 
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase
                                                                 annotation(choicesAllMatching);
 
   input Real xpre[:] "Estimated vector of previous instant";
@@ -4403,9 +4404,9 @@ partial function predictBase_sr "Base class of prediction function"
       import Modelica;
       import Modelica_LinearSystems2;
 
-  replaceable function fSigma = 
+  replaceable function fSigma =
       Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy constrainedby
-        Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase 
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase
                                                                 annotation(choicesAllMatching);
 
   input Real xpre[:] "Estimated vector of previous instant";
@@ -4445,9 +4446,9 @@ partial function updateBase_sr "Bass class of update_sr-function"
 
       import Modelica;
       import Modelica_LinearSystems2;
-  replaceable function hSigma = 
+  replaceable function hSigma =
       Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy constrainedby
-        Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase 
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase
                                                                 annotation(choicesAllMatching);
 
   input Real xpre[:] "Estimated vector of previous instant";
@@ -4492,9 +4493,9 @@ function estimateBase_sr "Base class of estimation function"
       import Modelica;
       import Modelica_LinearSystems2;
 
-  replaceable function yOut = 
+  replaceable function yOut =
       Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy constrainedby
-        Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase 
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase
                                                                 annotation(choicesAllMatching);
 
   input Real y[:] "Measured output vector";
@@ -4792,7 +4793,7 @@ end ekfOutputBase;
       else
         system_ev := Complex.eigenValues(F);
         Modelica.Utilities.Streams.print("\n A subsystem (F, G) in DiscreteStateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
-      That is, "   + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then " + " else 
+      That is, "   + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then " + " else
                 " - ") + String(system_ev[1].im) + "j and " + String(system_ev[2].re)
            + (if abs(system_ev[2].im) > 0 then " + " else " - ") + String(
           system_ev[2].im) + "j remain and " + String(gamma[1].re) + (if abs(

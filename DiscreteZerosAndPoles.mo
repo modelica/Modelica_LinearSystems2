@@ -3,22 +3,22 @@ record DiscreteZerosAndPoles
   "Discrete zeros and poles description of a single input, single output system (data + operations)"
   extends Modelica.Icons.Record;
 
-  Real k=1.0 "Multiplicative factor of transfer function" 
+  Real k=1.0 "Multiplicative factor of transfer function"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-  Real n1[:] "[p^0] coefficients of 1st order numerator polynomials" 
+  Real n1[:] "[p^0] coefficients of 1st order numerator polynomials"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-  Real n2[:,2] "[p,p^0] coefficients of 2nd order numerator polynomials" 
+  Real n2[:,2] "[p,p^0] coefficients of 2nd order numerator polynomials"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-  Real d1[:] "[p^0] coefficients of 1st order denominator polynomials" 
+  Real d1[:] "[p^0] coefficients of 1st order denominator polynomials"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-  Real d2[:,2] "[p,p^0] coefficients of 2nd order denominator polynomials" 
+  Real d2[:,2] "[p,p^0] coefficients of 2nd order denominator polynomials"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
 
-    Modelica.SIunits.Time Ts "Sample time" 
+    Modelica.SIunits.Time Ts "Sample time"
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
   Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-    "Discretization method" 
+    "Discretization method"
         annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
 /* If the numerator polynomial has no coefficients, the transfer function
@@ -91,11 +91,11 @@ Therefore, the record is defined by
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
     input ZerosAndPoles zp "continuous zeros and poles transfer function";
-    input Modelica.SIunits.Time Ts "Sample time" 
+    input Modelica.SIunits.Time Ts "Sample time"
          annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
     input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method" 
+        "Discretization method"
           annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
     output DiscreteZerosAndPoles dzp;
@@ -219,15 +219,28 @@ discrete zeros-and-poles transfer function is derived from DiscreteStateSpace by
 
     annotation (Documentation(info="<html>
 <p>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> <b>fromPolesAndZeros</b>(z, p, k, Ts, method)  </td> </tr>
+<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> <b>fromPolesAndZeros</b>(z, p, k, Ts, method, uName, yName)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
 This function constructs a DiscreteZerosAndPoles transfer function from denominator
 and numerator zeros, as well as a gain.
-Example:
+<p>
+Since only transfer functions with real coefficients are supported,
+complex roots must be defined as conjugate complex pairs.
+It is required that complex conjugate pairs must directly
+follow each other as above. An error occurs if this is not the case.
 </p>
-<pre>         
-               (q + 1)
-  zp = 4* -----------------
-           (q + 2)*(q + 3)
-</pre>
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+         
+               (q + 0.1)
+  dzp = 4* -----------------
+           (q + 1)*(q - 0.1)
+</pre></blockquote>
 <p>
 is defined as
 </p>
@@ -235,21 +248,16 @@ is defined as
    <b>import</b> Modelica_LinearSystems2.Math.Complex; 
    <b>import</b> Modelica_LinearSystems2.DiscreteZerosAndPoles;
    
-   zp = ZerosAndPoles(z = {Complex(-1,0)},
-                      p = {Complex(-2,0),
-                           Complex(-3)}, 
+   dzp = DiscreteZerosAndPoles(z = {Complex(-0.1,0)},
+                      p = {Complex(-1,0),
+                           Complex(0.1)}, 
                            k=4);
 </pre>
-<p>
-Since only transfer functions with real coefficients are supported,
-complex roots must be defined as conjugate complex pairs.
-It is required that complex conjugate pairs must directly
-follow each other as above. An error occurs if this is not the case.
-</p>
+
 </html>"));
   end fromPolesAndZeros;
 
-    function fromDiscreteTransferFunction = 
+    function fromDiscreteTransferFunction =
         Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteZerosAndPoles
                                                                                              annotation (Documentation(info="<html> </html>"));
     encapsulated function fromFactorization
@@ -259,22 +267,22 @@ follow each other as above. An error occurs if this is not the case.
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
       input Real n1[:]=fill(0, 0)
-        "[p^0] coefficients of 1st order numerator polynomials" 
+        "[p^0] coefficients of 1st order numerator polynomials"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real n2[:,2]=fill(
               0,
               0,
-              2) "[p,p^0] coefficients of 2nd order numerator polynomials" 
+              2) "[p,p^0] coefficients of 2nd order numerator polynomials"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real d1[:]=fill(0, 0)
-        "[p^0] coefficients of 1st order denominator polynomials" 
+        "[p^0] coefficients of 1st order denominator polynomials"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real d2[:,2]=fill(
               0,
               0,
-              2) "[p,p^0] coefficients of 2nd order denominator polynomials" 
+              2) "[p,p^0] coefficients of 2nd order denominator polynomials"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-      input Real k=1.0 "Multiplicative factor of transfer function" 
+      input Real k=1.0 "Multiplicative factor of transfer function"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Modelica.SIunits.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
@@ -296,6 +304,40 @@ follow each other as above. An error occurs if this is not the case.
       dzp.method := method;
       dzp.uName := uName;
       dzp.yName := yName;
+
+      annotation (Documentation(info="<html>
+<p>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> <b>fromFactorization</b>(n1, n2, d1, d2, k, Ts, method)  </td> </tr>
+<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> <b>fromFactorization</b>(n1, n2, d1, d2, k, Ts, method, uName, yName)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+This function constructs a DiscreteZerosAndPoles transfer function from the real first and scond order polynomials of the numerator and the denominator, repectively.
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+         
+               (q + 0.1)
+  dzp = 4* -----------------
+           (q + 1)*(q - 0.1)
+</pre></blockquote>
+<p>
+is defined as
+</p>
+<pre> 
+   <b>import</b> Modelica_LinearSystems2.Math.Complex; 
+   <b>import</b> Modelica_LinearSystems2.DiscreteZerosAndPoles;
+   
+   dzp = DiscreteZerosAndPoles(n1={0.1},n2=fill(0,0,2), d1={1,-0.1}, d2=fill(0,0,2), k=4);
+   
+which is equal to
+
+   dzp = DiscreteZerosAndPoles(n1={0.1},n2=fill(0,0,2), d1=fill(0,0), d2=[0.9, -0.1], k=4);
+   
+</pre>
+
+</html>"));
     end fromFactorization;
 
   end 'constructor';
@@ -805,20 +847,12 @@ Generate the complex Laplace variable q=exp(s*T) as a DiscreteZerosAndPoles tran
           x0=x0);
 
       annotation (Documentation(info="<html>
-<p><h4>Syntax</h4></p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
-<td>
-<p>(y, t, x) </p>
-</td>
-<td>
-<p align=\"center\">= </p>
-</td>
-<td>
-<p>DiscreteZerosAndPoles.Analysis.<b>timeResponse</b>(dzp, tSpan, responseType, x0) </p>
-</td>
-</tr>
-</table>
-<p><br/><h4>Description</h4></p>
+<h4>Syntax</h4>
+<blockquote><pre>
+<p>(y, t, x)=DiscreteZerosAndPoles.Analysis.<b>timeResponse</b>(dzp, tSpan, responseType, x0) </p>
+</pre></blockquote>
+<h4>Description</h4>
+<p>
 <p>First, the DiscreteZerosAndPoles record is transformed into discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse to calculate
 the time response of the state space system. The type of the time response is defined by the input <b>responseType</b>, i.e. </p>
 <pre>    Impulse \"Impulse response\",</pre>
@@ -840,7 +874,7 @@ the time response of the state space system. The type of the time response is de
 <pre>  Real x[5,1,1] </pre>
 <pre> </pre>
 <pre><b>algorithm</b></pre>
-<pre>  (y,t,x):=Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse(dzp,tSpanresponse,x0);</pre>
+<pre>  (y,t,x):=Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.timeResponse(dzp,tSpan, response,x0);</pre>
 <pre>//  y[:,1,1]={0, 0, 1, 0, 0} </pre>
 <pre>//         t={0, 0.1, 0.2, 0.3, 0.4}</pre>
 <pre>//  x[:,1,1]={0, 0, 3.0, 0, 0}</pre>
@@ -1144,8 +1178,27 @@ See also <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Anal
   algorithm
     result := size(dzp.d1, 1) + 2*size(dzp.d2, 1);
     annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  result </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Analysis.<b>denominatorDegree</b>(zp)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial constituted by the first and second order polynomials of the
+DiscreteZeroAndPoles denominator. 
+See also <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.numeratorDegree\">DiscreteZerosAndPoles.Analysis.numeratorDegree</a>.
+</p>
 
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   DiscreteZerosAndPoles p = Modelica_LinearSystems2.DiscreteZerosAndPoles.p();
+   Modelica_LinearSystems2.DiscreteZerosAndPoles dzp=(q+0.1)/(p^2 + 0.8*p+ 0.2);
+ 
+   Real dDegree;
 
+<b>algorithm</b>
+  dDegree := DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp);
+//  dDegree = 2
 </html> "));
   end denominatorDegree;
 
@@ -1160,6 +1213,28 @@ See also <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Anal
   algorithm
     result := size(dzp.n1, 1) + 2*size(dzp.n2, 1);
     annotation (Documentation(info="<html>
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  result </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Analysis.<b>numeratorDegree</b>(zp)  </td> </tr>
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial constituted by the first and second order polynomials of the DiscreteZeroAndPoles numerator. 
+See also <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.denominatorDegree\">DiscreteZerosAndPoles.Analysis.denominatorDegree</a>.
+</p>
+
+<h4><font color=\"#008000\">Example</font></h4>
+<blockquote><pre>
+   DiscreteZerosAndPoles q = Modelica_LinearSystems2.DiscreteZerosAndPoles.q();
+   Modelica_LinearSystems2.DiscreteZerosAndPoles dzp=(q+0.1)/(p^2 + 0.8*p - 0.2);
+
+   Real nDegree;
+
+<b>algorithm</b>
+  nDegree := DiscreteZerosAndPoles.Analysis.numeratorDegree(dzp);
+//  nDegree = 1
+</pre></blockquote>
+
 
 
 </html> "));
@@ -1262,12 +1337,12 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
     input Boolean autoRange=true
         "= true, if abszissa range is automatically determined";
     input Modelica.SIunits.Frequency f_min(min=0) = 0.1
-        "Minimum frequency value, if autoRange = false" 
+        "Minimum frequency value, if autoRange = false"
                                                       annotation(Dialog(enable=not autoRange));
     input Modelica.SIunits.Frequency f_max(min=0) = 10
         "Maximum frequency value, if autoRange = false"                                                annotation(Dialog(enable=not autoRange));
 
-    input Boolean magnitude=true "= true, to plot the magnitude of dzp" 
+    input Boolean magnitude=true "= true, to plot the magnitude of dzp"
                                                                        annotation(choices(__Dymola_checkBox=true));
     input Boolean phase=true "= true, to plot the pase of dzp" annotation(choices(__Dymola_checkBox=true));
 
@@ -2149,7 +2224,7 @@ from a DiscreteZerosAndPoles record representated by first and second order nume
         dss.A[2*n_den2 + i, 1:2*n_den2 + i - 1] := b*dss.C[1, 1:2*n_den2 + i - 1];
         dss.A[2*n_den2 + i, 2*n_den2 + i] := a;
         dss.B[2*n_den2 + i, 1] := if dZero then 0 else b*dss.D[1, 1];
-        dss.C[1, 1:2*n_den2 + i - 1] := if dZero then fill(0, 2*n_den2 + i - 1) else 
+        dss.C[1, 1:2*n_den2 + i - 1] := if dZero then fill(0, 2*n_den2 + i - 1) else
                 d*dss.C[1, 1:2*n_den2 + i - 1];
         dss.C[1, 2*n_den2 + i] := c;
         dss.D := if dZero then [0] else d*dss.D;
@@ -2550,7 +2625,7 @@ int found=0;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica;
 
-    input String fileName="pc.mat" "Name of the zeros and poles data file" 
+    input String fileName="pc.mat" "Name of the zeros and poles data file"
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
 
@@ -2626,7 +2701,7 @@ int found=0;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.Math.Complex;
 
-    input String fileName="dzp.mat" "Name of the zeros and poles data file" 
+    input String fileName="dzp.mat" "Name of the zeros and poles data file"
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
     protected

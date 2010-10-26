@@ -105,8 +105,8 @@ follow each other as above. An error occurs if this is not the case.
            input String uName = "" "input name";
            input String yName = "" "output name";
 
-           output TransferFunction tf(redeclare Real n[size(n, 1)], redeclare
-          Real d[                                                                    size(d, 1)])
+           output TransferFunction tf(redeclare Real n[size(n, 1)], redeclare Real
+               d[                                                                    size(d, 1)])
         "Transfer function";
 
     algorithm
@@ -1599,7 +1599,7 @@ and results in
       input Modelica.SIunits.Frequency f_max(min=0) = 10
         "Maximum frequency value, if autoRange = false"                                                  annotation(Dialog(enable=not autoRange));
 
-      input Boolean magnitude=true "= true, to plot the magnitude of tf" 
+      input Boolean magnitude=true "= true, to plot the magnitude of tf"
                                                                         annotation(choices(__Dymola_checkBox=true));
       input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
 
