@@ -41,5 +41,7 @@ algorithm
     iy);
   ok := true;
 
-  annotation (interactive=true);
+  annotation (interactive=true, Documentation(info="<html>
+This example demonstrates the construnction of a zeros-and-poles-transfer-function from a SISO state space representation and üplots the Bode diagrams with automatic determination of the frequency range to plot
+</html>"));
 end plotBodeSISO;

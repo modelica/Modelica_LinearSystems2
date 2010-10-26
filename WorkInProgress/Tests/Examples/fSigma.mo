@@ -7,7 +7,7 @@ function fSigma "Pendular state function"
 protected
 Integer nx=size(x,1);
   Real F[nx] "System state function";
-  Real F_x[nx,nx] "Jacobian matrix of system";
+  Real F_x[nx,nx] "Jacobian matrix of F";
   Real dFdx_1[nx];
   Real dFdx_2[nx];
   Real dFdx_3[nx]={0, 0, 0, 0};

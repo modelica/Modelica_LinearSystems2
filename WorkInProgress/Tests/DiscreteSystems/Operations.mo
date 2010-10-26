@@ -117,15 +117,16 @@ algorithm
 //  assert(ok, "dzp4 or dtf4 failed");
 
   Modelica_LinearSystems2.Utilities.Plot.diagram(
-    Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
-        curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-          x=t,
-          y=y0,
-          legend="y0"),
-      Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-          x=t,
-          y=y1,
-          legend="y1")}));
+    Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(curve={
+    Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
+    x=t,
+    y=y0,
+    legend="y0"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
+    x=t,
+    y=y1,
+    legend="y1")}));
+
+  Modelica.Utilities.Streams.print("\n OK !!!! ");
 
 annotation(interactive=true);
 end Operations;

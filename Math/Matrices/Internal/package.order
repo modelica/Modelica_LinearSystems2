@@ -17,7 +17,8 @@ QR
 QR2
 readMatrixGain
 reorderRSF
-reorderRSF2
+reorderRSFc
+reorderRSFd
 k_care_u
 frobeniusNorm
 symMatMul

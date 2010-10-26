@@ -8,6 +8,8 @@ ExtendedKalman3
 Pendular_Testbench_MBD_UKF
 Pendular_Testbench_MBD_SR_UKF
 Pendular_Testbench_MBD_EKF
+Example_EKF
+Example_UKF
 SR_EKF
 fSigma
 fSigma_2
@@ -19,3 +21,6 @@ Pendular_Testbench_MBD_EKF1
 fSigmaDummy
 hSigmaDummy
 disturbedSine
+ekf_LinearSystem
+hSigmaLinear
+fSigmaLinear

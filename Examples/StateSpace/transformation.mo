@@ -81,4 +81,7 @@ algorithm
 
   ok := true;
 
+  annotation (Documentation(info="<html>
+Example to demonstrate the transformation of a state space representation to Jordan- observabilitiy- and controllability canonical form
+</html>"));
 end transformation;

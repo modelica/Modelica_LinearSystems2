@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
-function plotZeros "case studies of systems with zeros"
+function plotZeros "Case studies of systems with zeros"
 
   import Modelica;
   import Modelica_LinearSystems2.TransferFunction;

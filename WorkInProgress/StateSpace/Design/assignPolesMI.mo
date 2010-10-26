@@ -100,7 +100,7 @@ algorithm
   ZT := transpose(Z);
 
   // reorder real Schur form according to alpha
-  (A_rsf,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSF2(
+  (A_rsf,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSFc(
       A_rsf,
       identity(size(A_rsf, 1)),
       alphaReal,

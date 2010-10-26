@@ -1,6 +1,5 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
-function designLQR "Description"
-
+function designLQR "Example for LQR controller design"
   import Modelica_LinearSystems2.StateSpace;
 
  extends Modelica.Icons.Function;
@@ -35,4 +34,7 @@ algorithm
 
   ok := true;
 
+  annotation (Documentation(info="<html>
+This example demonstrates the computatrion of a LQR controller by calling function <b>StateSpace.Design.lqr()</b> 
+</html>"));
 end designLQR;

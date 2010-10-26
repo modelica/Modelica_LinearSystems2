@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
-function designLQG "Description"
+function designLQG "Example for LQG controller design"
 
   import Modelica_LinearSystems2.StateSpace;
 
@@ -44,4 +44,7 @@ algorithm
  Modelica.Utilities.Streams.print(String(sslgq));
  ok := true;
 
+  annotation (Documentation(info="<html>
+This example demonstrates the computatrion of a LQG controllerr by calling function <b>StateSpace.Design.lqg()</b> 
+</html>"));
 end designLQG;

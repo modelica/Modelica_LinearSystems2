@@ -14,6 +14,6 @@ algorithm
   annotation (interactive=true, Documentation(info="<html>
 <p>
 Computes the ramp response of the system
-StateSpace <i>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>.
+StateSpace <i>ss = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>.
 </html>"));
 end plotRamp;

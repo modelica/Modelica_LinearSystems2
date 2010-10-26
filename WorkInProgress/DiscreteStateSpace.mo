@@ -1059,7 +1059,7 @@ function sr_kfStepMatrices2
   input Real S[size(A, 1),size(A, 1)]
         "Cholesky factor of the state covariance matrix of the previous instant";
 //  input Real Cq[size(A,1),size(A,1)] "Cholesky factor of input or process noise covariance matrix of the previous instant";
-  input Real Cq[size(A,1),:]
+  input Real Cq[size(A, 1),size(A, 1)]
         "Cholesky factor of input or process noise covariance matrix of the previous instant";
   input Real Cr[size(C, 1),size(C, 1)]
         "Cholesky factor or measurement noise covariance matrix of the previous instant";

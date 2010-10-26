@@ -52,6 +52,6 @@ algorithm
                  yLabel="y1, y2")});
   annotation (interactive=true, Documentation(info="<html>
 <p>
-Computes and plots the step response
+Computes and plots the step response of a state space system.
 </html>"));
 end analysisStepResponse;

@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
-function designKalmanFilter "Description"
+function designKalmanFilter "Example for Kalman filter design"
   import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.TransferFunction;
@@ -25,6 +25,6 @@ algorithm
    R);
 
   annotation (interactive=true, Documentation(info="<html>
-This example demonstrates the computatrion of a  Kalman filter.
+This example demonstrates the computatrion of a  Kalman filter by calling function <b>StateSpace.Design.kalmanFilter()</b> 
 </html>"));
 end designKalmanFilter;

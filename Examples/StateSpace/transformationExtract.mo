@@ -22,4 +22,8 @@ subSys :=  Modelica_LinearSystems2.StateSpace.Transformation.extract(
     i1,
     i2);
  Modelica.Utilities.Streams.print("Subsystem is " +String(subSys));
+
+  annotation (Documentation(info="<html>
+This example shows how to extract input/output related subsystems from state space system record.
+</html>"));
 end transformationExtract;

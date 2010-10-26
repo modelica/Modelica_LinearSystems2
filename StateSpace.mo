@@ -4007,7 +4007,7 @@ end Analysis;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica;
-      import Modelica.Utilities.Streams.print;
+    //  import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Matrices;
 
@@ -4016,7 +4016,7 @@ end Analysis;
       input Complex gamma[:]=fill(Complex(0), 0) "Designed Poles";
     //  input Integer np=size(gamma, 1) "number of given eigenvalues to assign";
       input Real alpha=-1e10
-        "maximum admissible value for real parts(continuous) or for moduli (discrete) of the eigenvalues of A which will not be modified by the eigenvalue assignment algorithm";
+        "maximum admissible value for real parts of the eigenvalues of A which will not be modified by the eigenvalue assignment algorithm";
       input Real tolerance=Modelica.Math.Matrices.norm(ss.A, 1)*1e-12
         "The tolerance to be used in determining the controllability of (A,B)";
       input Boolean calculateEigenvectors=false
@@ -4101,7 +4101,7 @@ end Analysis;
       ZT := transpose(Z);
 
       // reorder real Schur form according to alpha
-      (A_rsf,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSF2(
+      (A_rsf,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSFc(
           A_rsf,
           identity(size(A_rsf, 1)),
           alphaReal,
@@ -4299,7 +4299,7 @@ end Analysis;
           ZT[counter:n, :] := transpose(Q2)*ZT[counter:n, :];
           counter := counter + 2;
           counter2 := counter2 + 2;
-          Modelica.Utilities.Streams.print("counter2Case3 = " + String(counter2));
+    //      Modelica.Utilities.Streams.print("counter2Case3 = " + String(counter2));
         end for;
       end if;
 

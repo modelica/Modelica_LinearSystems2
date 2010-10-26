@@ -1,5 +1,5 @@
-DoublePendulum
 DoublePendulum2
+DoublePendulum
 SeriesConnection
 InverseDoublePendulum2
 InverseDoublePendulum
@@ -7,3 +7,4 @@ InverseDoublePendulum3
 AccelerationLimiter
 MixingUnit
 MixingUnit1
+TwoPoint

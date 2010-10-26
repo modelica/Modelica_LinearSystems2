@@ -18,37 +18,9 @@ protected
 public
 output Real y[:,size(sc.C, 1),1]
     "Output response: (number of samples) x (number of outputs) x 1";
-// output Real y[:,size(sc.C, 1),size(sc.B, 2)]
-//     "Output response: (number of samples) x (number of outputs) x (number of inuputs)";
 
 algorithm
  (y,t,x_continuous) := Modelica_LinearSystems2.StateSpace.Analysis.initialResponse(x0=x0,sc=sc,dt=0.1,tSpan=5);
-
-//  Modelica_LinearSystems2.Utilities.Plot.diagramVector({
-//        Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
-//                  curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-//                           x=t,
-//                           y=y[:,1,1],
-//                           legend="y1"),
-//                           Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-//                           x=t,
-//                           y=y[:,1,2],
-//                           legend="y2")},
-//                  heading="Initial response to u1",
-//                  xLabel="time [s]",
-//                  yLabel="y1, y2"),
-//        Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
-//                  curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-//                           x=t,
-//                           y=y[:,2,1],
-//                           legend="y1"),
-//                           Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-//                           x=t,
-//                           y=y[:,2,2],
-//                           legend="y2")},
-//                  heading="Initial response to u2",
-//                  xLabel="time [s]",
-//                  yLabel="y1, y2")});
 
   Modelica_LinearSystems2.Utilities.Plot.diagramVector({
         Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
@@ -67,7 +39,6 @@ algorithm
                   xLabel="time [s]")});
 
   annotation (interactive=true, Documentation(info="<html>
-<p>
-Computes and plots the step response
+Computes and plots the initial response of a state space system by given initial values.
 </html>"));
 end analysisInitialResponse;

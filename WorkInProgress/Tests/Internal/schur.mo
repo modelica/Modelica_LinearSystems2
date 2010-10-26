@@ -23,7 +23,7 @@ algorithm
   Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal,6,"ar1");
 
 // reorder real Schur form according to alpha
-   (T,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSF2(
+   (T,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSFc(
        T,
        identity(size(A, 1)),
        alphaReal,

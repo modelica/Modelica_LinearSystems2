@@ -39,8 +39,26 @@ record ZerosAndPoles
       zp.yName := yName;
 
       annotation (overloadsConstructor=true, Documentation(info="<html>
-
-
+<h4><font color=\"#008000\">Syntax</font></h4>
+<table>
+<tr> <td align=right>  zp </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
+ 
+</table>
+<h4><font color=\"#008000\">Description</font></h4>
+<p>
+This function constructs a ZerosAndPoles record zp from a Real value, i.e. a without dynamics:
+<blockquote><pre>
+y = r*u
+</pre></blockquote>
+Therefore, the record is defined by
+<blockquote><pre>
+  zp.k = r;
+  zp.n1 = fill(0,1);
+  zp.n2 = fill(0,1,2);
+  zp.d1 = fill(0,1);
+  zp.d2 = fill(0,1,2);
+</pre></blockquote>
+</p>
 </html>"));
     end fromReal;
 
@@ -52,7 +70,6 @@ record ZerosAndPoles
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.Math.Complex;
-      import Modelica.Utilities.Streams.print;
 
     input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";

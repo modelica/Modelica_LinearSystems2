@@ -6,7 +6,7 @@ function ekfSystem_pendular "Pendular state function"
   extends Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemBase;
 
 protected
-Integer nx=size(x,1);
+  Integer nx=size(x,1);
   Real F[nx] "System state function";
   Real F_x[nx,nx] "Jacobian matrix of system";
   Real dFdx_1[nx];
