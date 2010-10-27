@@ -10,9 +10,9 @@ block DiscreteDAconverter
   extends Interfaces.PartialDiscreteSISO_equality;
 protected
   parameter Real quantization=if bits > 0 then ((y_max - y_min)/2^bits) else 0;
-  discrete Real y_bound "Bounded output" 
+  discrete Real y_bound "Bounded output"
                                 annotation(Hide=true);
-  discrete Real y_sampled "Sampled output" 
+  discrete Real y_sampled "Sampled output"
                                   annotation(Hide=true);
   discrete Real y_delaySampled
     "Sampled output with a delay of one sample period"                            annotation(Hide=true);

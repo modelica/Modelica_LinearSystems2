@@ -4,20 +4,20 @@ record AnalyseOptions2
   extends Modelica.Icons.Record;
   Boolean plotEigenValues=true "plot eigenvalues"     annotation(Dialog(group="analyse options"),choices(checkBox=true));
   Boolean plotInvariantZeros=true "plot invariant zeros"    annotation(Dialog(group="analyse options"),choices(checkBox=true));
-  Boolean plotStepResponse=true "plot step respones. Only for SISO system" 
+  Boolean plotStepResponse=true "plot step respones. Only for SISO system"
                                                             annotation(Dialog(group="analyse options"),choices(checkBox=true));
-  Boolean plotFrequencyResponse=true "plot bode diagram. Only for SISO system" 
+  Boolean plotFrequencyResponse=true "plot bode diagram. Only for SISO system"
                                                               annotation(Dialog(group="analyse options"),choices(checkBox=true));
-  Boolean printEigenValues=true "write eigenvalues into the report" 
+  Boolean printEigenValues=true "write eigenvalues into the report"
                                     annotation(Dialog(group="analyse options"),choices(checkBox=true));
 
-  Boolean printInvariantZeros=true "write invariant zreos into the report" 
+  Boolean printInvariantZeros=true "write invariant zreos into the report"
                                        annotation(Dialog(group="analyse options"),choices(checkBox=true));
   Boolean printControllability=false
-    "indicates controllability of every single pole" 
+    "indicates controllability of every single pole"
                                         annotation(Dialog(group="analyse options"),choices(checkBox=true));
   Boolean printObservability=false
-    "indicates observability of every single pole" 
+    "indicates observability of every single pole"
                                       annotation(Dialog(group="analyse options"),choices(checkBox=true));
   String headingEigenValues="Eigenvalues";
   String headingInvariantzeros="Invariant zeros";
@@ -25,7 +25,7 @@ record AnalyseOptions2
   String headingFrequencyResponse="Frequency response";
 
 final Boolean printEigenValueProperties = false
-    "write eigenvalues with properties" 
+    "write eigenvalues with properties"
                                     annotation(Dialog(group="analyse options"),choices(checkBox=true));
 
 end AnalyseOptions2;

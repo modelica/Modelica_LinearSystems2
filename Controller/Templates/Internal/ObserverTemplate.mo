@@ -15,7 +15,7 @@ block ObserverTemplate
 
   parameter Modelica_LinearSystems2.Internal.StateSpace2 plantModelSystem=
                                                                  Modelica_LinearSystems2.Internal.StateSpace2(
-                                                                                                    A=[0],B=[1],C=[1],D=[0])
+                                                                                                  A=[0],B=[1],C=[1],D=[0])
     "plant state space system" annotation(Dialog(enable = not matrixOnFile));
   parameter Real L[:,:]=[1] "observer feedback matrix" annotation(Dialog(enable = not matrixOnFile));
 
@@ -24,14 +24,14 @@ protected
   parameter Integer m=mn[1];
   parameter Integer n=mn[2];
 
- parameter Real L2[:,:]=if matrixOnFile then 
+ parameter Real L2[:,:]=if matrixOnFile then
       Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain(
       fileName,
       observerMatrixName,
       m,
       n) else L;
  parameter Modelica_LinearSystems2.Internal.StateSpace2 plantModelSystem2=
-                                                                   if matrixOnFile then 
+                                                                   if matrixOnFile then
       Modelica_LinearSystems2.Internal.StateSpace2.Import.fromFile(    fileName, systemName) else plantModelSystem;
 parameter Real C[:,:]=plantModelSystem2.C;
 public
@@ -41,14 +41,14 @@ public
    parameter Real x_start[size(plantModelSystem2.A,1)]=zeros(size(plantModelSystem2.A,1))
     "Initial or guess values of states" annotation(Dialog(tab="Advanced options"));
 //  parameter Real y_start[size(plantModelSystem2.C,1)]=zeros(size(plantModelSystem2.C,1)) "Initial values of outputs (remaining states are in steady state if possible)"    annotation 6;
-  Modelica.Blocks.Interfaces.RealInput u[size(plantModelSystem2.B, 2)] 
+  Modelica.Blocks.Interfaces.RealInput u[size(plantModelSystem2.B, 2)]
     annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.RealInput y[nout]           annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-  Modelica.Blocks.Interfaces.RealOutput x_estimated[size(observerStateSpace.system.A,1)] 
+  Modelica.Blocks.Interfaces.RealOutput x_estimated[size(observerStateSpace.system.A,1)]
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
  //    initType= if init==Types.Init.InitialState then Types.Init.InitialState else  Types.Init.NoInit
 // y_start-plantModelSystem2.C*L2*observerStateSpace.y_start
-  Modelica.Blocks.Routing.Multiplex2 multiplex2_1(n1=size(plantModelSystem2.B,2), n2=nout) 
+  Modelica.Blocks.Routing.Multiplex2 multiplex2_1(n1=size(plantModelSystem2.B,2), n2=nout)
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
 Controller.StateSpace observerStateSpace(
  x_start= x_start,
@@ -58,7 +58,7 @@ Controller.StateSpace observerStateSpace(
       B=[plantModelSystem2.B,L2],
       C=identity(size(plantModelSystem2.A, 1)),
       D=zeros(size(plantModelSystem2.A, 1), size(plantModelSystem2.B, 2)+nout)),
-    withDelay=withDelay) 
+    withDelay=withDelay)
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
 initial equation
                 //  if continuous then

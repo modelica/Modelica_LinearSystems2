@@ -3,43 +3,43 @@ model Pendular_Testbench_MBD_EKF
   import Modelica_LinearSystems2;
 
   Modelica_LinearSystems2.Controller.EKF EKF(
-    redeclare function ekfFunction = 
+    redeclare function ekfFunction =
         Modelica_LinearSystems2.WorkInProgress.Tests.Examples.ekfSystem_pendular,
     nu=1,
     Q=1e-5*identity(size(EKF.x_est_init, 1)),
     G=identity(size(EKF.x_est_init, 1)),
     x_est_init={0.1,0.1,1,0.2},
     R=diagonal({0.1,2.13*1e-1}),
-    M_init=0.5*identity(size(EKF.x_est_init, 1))) 
+    M_init=0.5*identity(size(EKF.x_est_init, 1)))
     annotation (Placement(transformation(extent={{60,-20},{80,0}})));
 
-  CraneMultibody craneWithEquations3_1(     J=0, d=100) 
+  CraneMultibody craneWithEquations3_1(     J=0, d=100)
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=2000,
     freqHz=0.5,
     offset=-20,
-    startTime=1) "Force on grap" 
+    startTime=1) "Force on grap"
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   Modelica_LinearSystems2.Controller.Noise noise(
     y_min=-0.1,
     y_max=0.1,
-    sampleFactor=3) 
+    sampleFactor=3)
     annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
-  Modelica.Blocks.Routing.Multiplex2 multiplex2_1 
+  Modelica.Blocks.Routing.Multiplex2 multiplex2_1
     annotation (Placement(transformation(extent={{20,-40},{40,-60}})));
-  Modelica.Blocks.Math.Add add 
+  Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
-  Modelica.Blocks.Math.Add add1 
+  Modelica.Blocks.Math.Add add1
     annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
   inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(blockType=
         Modelica_LinearSystems2.Controller.Types.BlockType.Discrete, sampleTime=
-       0.005) 
+       0.005)
              annotation (Placement(transformation(extent={{60,60},{80,80}})));
   Modelica_LinearSystems2.Controller.Noise noise1(
     y_min=-0.03,
     y_max=0.03,
-    sampleFactor=8) 
+    sampleFactor=8)
     annotation (Placement(transformation(extent={{-90,-50},{-70,-30}})));
 equation
   connect(sine.y, craneWithEquations3_1.force) annotation (Line(

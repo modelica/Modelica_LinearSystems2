@@ -13,7 +13,7 @@ block TransferFunction
       ABCD=TransferFunction.Conversion.toMatrices(system)));
 
   parameter Modelica_LinearSystems2.TransferFunction system "Transfer function";
-  parameter Real x_start[nx]=zeros(nx) "Initial or guess values of states" 
+  parameter Real x_start[nx]=zeros(nx) "Initial or guess values of states"
     annotation(Dialog(tab="Advanced options"));
   parameter Real y_start=0
     "Initial value of output (derivatives of y are zero upto nx-1-th derivative)"
@@ -24,9 +24,9 @@ block TransferFunction
 
 protected
 parameter Boolean withDelay=false;
-  parameter Integer na=size(system.d, 1) 
+  parameter Integer na=size(system.d, 1)
                          annotation(Hide=true);
-  parameter Integer nb=size(system.n, 1) 
+  parameter Integer nb=size(system.n, 1)
                          annotation(Hide=true);
   Real a[na]=system.d "Reverse element order of system.denominator"                       annotation(Hide=true);
   Real b[nb]=system.n    annotation(Hide=true);

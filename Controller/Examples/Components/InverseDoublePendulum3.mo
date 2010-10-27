@@ -28,9 +28,9 @@ model InverseDoublePendulum3 "Inverted double pendulum"
     m_load=m_load,
     length=length,
     cartDisturbance=cartDisturbance,
-    bodyDisturbance=bodyDisturbance) 
+    bodyDisturbance=bodyDisturbance)
     annotation (Placement(transformation(extent={{-30,-10},{0,10}})));
-  Modelica.Blocks.Routing.Multiplex6 multiplex6_1 
+  Modelica.Blocks.Routing.Multiplex6 multiplex6_1
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
 Real dist1_s;
 Real dist2_v=0;
@@ -39,57 +39,57 @@ Real dist4_w1=0;
 Real dist5_phi2=0;
 Real dist6_w2=0;
 
-  Modelica.Blocks.Routing.Multiplex3 multiplex3_1 if secondAngle 
+  Modelica.Blocks.Routing.Multiplex3 multiplex3_1 if secondAngle
     annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
-  Modelica.Blocks.Interfaces.RealInput dist if cartDisturbance 
+  Modelica.Blocks.Interfaces.RealInput dist if cartDisturbance
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-60,80}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-48,56})));
-  Modelica.Blocks.Interfaces.RealInput dist2 if bodyDisturbance 
+  Modelica.Blocks.Interfaces.RealInput dist2 if bodyDisturbance
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={60,80}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={54,56})));
-  Modelica.Blocks.Routing.Multiplex2 multiplex2_1 if not secondAngle 
+  Modelica.Blocks.Routing.Multiplex2 multiplex2_1 if not secondAngle
     annotation (Placement(transformation(extent={{10,-66},{30,-46}})));
 equation
 dist1_s=0.02*Modelica.Math.sin(20*time);
-  connect(multiplex6_1.u1[1], inverseDoublePendulum.s) 
+  connect(multiplex6_1.u1[1], inverseDoublePendulum.s)
                                                 annotation (Line(
       points={{38.8,8.5},{19.4,8.5},{19.4,10},{1,10}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(multiplex6_1.u2[1], inverseDoublePendulum.v) 
+  connect(multiplex6_1.u2[1], inverseDoublePendulum.v)
                                                 annotation (Line(
       points={{38.8,5.1},{19.4,5.1},{19.4,6},{1,6}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(multiplex6_1.u3[1], inverseDoublePendulum.phi) 
+  connect(multiplex6_1.u3[1], inverseDoublePendulum.phi)
                                                   annotation (Line(
       points={{38.8,1.7},{20.4,1.7},{20.4,2},{1,2}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(multiplex6_1.u4[1], inverseDoublePendulum.w) 
+  connect(multiplex6_1.u4[1], inverseDoublePendulum.w)
                                                 annotation (Line(
       points={{38.8,-1.7},{20.4,-1.7},{20.4,-2},{1,-2}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(multiplex6_1.u5[1], inverseDoublePendulum.phi1) 
+  connect(multiplex6_1.u5[1], inverseDoublePendulum.phi1)
                                                    annotation (Line(
       points={{38.8,-5.1},{19.4,-5.1},{19.4,-6},{1,-6}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(multiplex6_1.u6[1], inverseDoublePendulum.w1) 
+  connect(multiplex6_1.u6[1], inverseDoublePendulum.w1)
                                                  annotation (Line(
       points={{38.8,-8.5},{20.4,-8.5},{20.4,-10},{1,-10}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(inverseDoublePendulum.u, u[1]) 
+  connect(inverseDoublePendulum.u, u[1])
                                   annotation (Line(
       points={{-32,0},{-120,0}},
       color={0,0,127},

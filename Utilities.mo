@@ -1,10 +1,10 @@
 within Modelica_LinearSystems2;
 package Utilities "Functions that shall be included in Modelica.Utilities"
-    extends Modelica.Icons.Library;
+    extends Modelica.Icons.Package;
 package Plot "Functions for generation of 2D-plots"
-    extends Modelica.Icons.Library;
+    extends Modelica.Icons.Package;
   package Examples "Demonstrate the usage of the plot functions"
-      extends Modelica.Icons.Library;
+     extends Modelica.Icons.ExamplesPackage;
     function plotSine "Plot a sine function in one diagram"
        input Modelica.SIunits.Frequency freqHz = 2 "Frequency of sine wave";
        input Modelica.SIunits.Damping damping = 0.8
@@ -123,8 +123,8 @@ package Plot "Functions for generation of 2D-plots"
 
     function showLegendStyles
         "Show several vector-diagram plots that demonstrate the various legend options"
-        import Modelica_LinearSystems2.Utilities.Plot.Records;
-        import Modelica_LinearSystems2.Utilities.Plot.Types;
+      import Modelica_LinearSystems2.Utilities.Plot.Records;
+      import Modelica_LinearSystems2.Utilities.Plot.Types;
 
       protected
        Real x[2]={0,1};
@@ -186,8 +186,8 @@ package Plot "Functions for generation of 2D-plots"
 
     function showMatrixDiagrams
         "Demonstrate the layout of diagrams in matrix layout"
-        import Modelica_LinearSystems2.Utilities.Plot.Records;
-        import Modelica_LinearSystems2.Utilities.Plot.Types;
+      import Modelica_LinearSystems2.Utilities.Plot.Records;
+      import Modelica_LinearSystems2.Utilities.Plot.Types;
 
       protected
        Real x[2]={0,1};
@@ -218,7 +218,7 @@ package Plot "Functions for generation of 2D-plots"
 
     package Utilities
         "Utility functions (usually not of interest for the user)"
-        extends Modelica.Icons.Library;
+        extends Modelica.Icons.Package;
       function dampedSine "Return a damped sine chracteristic"
          input Modelica.SIunits.Frequency freqHz "Frequency of sine wave";
          input Modelica.SIunits.Damping damping
@@ -240,14 +240,14 @@ package Plot "Functions for generation of 2D-plots"
   end Examples;
 
   function diagram "Plot one diagram"
-      import Modelica_LinearSystems2.Utilities.Plot.Types;
-      import Modelica.Utilities.Streams.*;
+    import Modelica_LinearSystems2.Utilities.Plot.Types;
+    import Modelica.Utilities.Streams.*;
      input Modelica_LinearSystems2.Utilities.Plot.Records.Diagram diagram
-        "Diagram to be shown" 
+        "Diagram to be shown"
                             annotation(Dialog);
      input Modelica_LinearSystems2.Utilities.Plot.Records.Device device=
         Modelica_LinearSystems2.Utilities.Plot.Records.Device()
-        "Properties of device where figure is shown" 
+        "Properties of device where figure is shown"
                                                    annotation(Dialog);
     protected
     Real mmToPixel= device.windowResolution/25.4;
@@ -281,7 +281,7 @@ package Plot "Functions for generation of 2D-plots"
                      legendLocation=diagram.legendLocation);
 
      for i in 1:nCurves loop
-         if diagram.curve[i].autoLine or 
+         if diagram.curve[i].autoLine or
             diagram.curve[i].lineSymbol==Types.PointSymbol.None then
             style :=0;
          elseif diagram.curve[i].linePattern==Types.LinePattern.None then
@@ -312,7 +312,7 @@ For an overview, see the documentation of package
         "Properties of a set of diagrams (vector layout)"                                                     annotation(Dialog);
      input Modelica_LinearSystems2.Utilities.Plot.Records.Device device=
         Modelica_LinearSystems2.Utilities.Plot.Records.Device()
-        "Properties of device where figure is shown" 
+        "Properties of device where figure is shown"
                                                    annotation(Dialog);
 
     protected
@@ -371,7 +371,7 @@ For an overview, see the documentation of package
                      legendLocation=diagram[i].legendLocation);
 
          for j in 1:size(diagram[i].curve,1) loop
-            if diagram[i].curve[j].autoLine or 
+            if diagram[i].curve[j].autoLine or
                diagram[i].curve[j].lineSymbol==Types.PointSymbol.None then
                style :=0;
             elseif diagram[i].curve[j].linePattern==Types.LinePattern.None then
@@ -404,7 +404,7 @@ using a vector layout. For an overview, see the documentation of package
         "Properties of a set of diagrams (matrix layout)"                                                     annotation(Dialog);
      input Modelica_LinearSystems2.Utilities.Plot.Records.Device device=
         Modelica_LinearSystems2.Utilities.Plot.Records.Device()
-        "Properties of device where figure is shown" 
+        "Properties of device where figure is shown"
                                                    annotation(Dialog);
     protected
     Modelica_LinearSystems2.Utilities.Plot.Records.Device device2=device;
@@ -427,7 +427,7 @@ using a matrix layout. For an overview, see the documentation of package
   end diagramMatrix;
 
   package Types "Types used for the plotting functions"
-    extends Modelica.Icons.Library;
+    extends Modelica.Icons.Package;
     type DrawingUnit_mm "Drawing unit specifing the nominal size in [mm]"
        extends Modelica.Icons.TypeReal(final quantity="Length", final unit="mm");
       annotation (Documentation(info="<html>
@@ -480,7 +480,7 @@ then the width of the diagram in the document is 120 mm.
   end Types;
 
   package Records "Records used to define the function interfaces"
-    extends Modelica.Icons.Library;
+   extends Modelica.Icons.Package;
     record Diagram
         "Properties of a diagram in a figure containing one or more curves"
       extends Modelica.Icons.Record;
@@ -498,20 +498,20 @@ then the width of the diagram in the document is 120 mm.
       Boolean logX = false "= true, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
       Boolean logY = false "= true, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
       Boolean uniformScaling = false
-          "= true, if same vertical and horizontal axis increment" 
+          "= true, if same vertical and horizontal axis increment"
           annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
 
       /* group "Legend" (Legend properties) */
       Boolean legend = true "= true, if legend is shown" annotation(Dialog(group="Legend"),choices(__Dymola_checkBox=true));
-      Boolean legendFrame=false "= true, if frame around legend" 
+      Boolean legendFrame=false "= true, if frame around legend"
             annotation(Dialog(group="Legend"),   choices(__Dymola_checkBox=true));
       Boolean legendHorizontal=true
-          "= true, if horizontal legend (provided it is meaningful)" 
+          "= true, if horizontal legend (provided it is meaningful)"
             annotation(Dialog(group="Legend"),choices(__Dymola_checkBox=true));
       Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation
           legendLocation=
                        Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation.Above
-          "Legend placement" 
+          "Legend placement"
                            annotation(Dialog(group="Legend"));
 
     end Diagram;
@@ -523,19 +523,19 @@ then the width of the diagram in the document is 120 mm.
        Real y[:] "y-values of curve" annotation(Dialog);
        String legend="" "Legend text of curve" annotation(Dialog);
 
-       Boolean autoLine = true "= true, if automatic line properties of curve" 
+       Boolean autoLine = true "= true, if automatic line properties of curve"
          annotation(Dialog,  choices(__Dymola_checkBox=true));
 
-       Integer lineColor[3]={0,0,255} "Color of curve as rgb values" 
+       Integer lineColor[3]={0,0,255} "Color of curve as rgb values"
          annotation(Dialog(group="If autoLine = false (otherwise ignored)",__Dymola_colorSelector, __Dymola_treeView=false));
 
        Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern linePattern=
           Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.Solid
-          "Line pattern of curve" 
+          "Line pattern of curve"
                                 annotation(Dialog(group="If autoLine = false (otherwise ignored)"));
        Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol lineSymbol=
           Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.None
-          "Symbol for points on curve" 
+          "Symbol for points on curve"
                                      annotation(Dialog(group="If autoLine = false (otherwise ignored)"));
 
     /*
@@ -557,7 +557,7 @@ then the width of the diagram in the document is 120 mm.
           "Vertical position of top left figure corner if applicable (e.g. window)"
         annotation(Dialog);
       Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm diagramWidth=140
-          "Width of diagram" 
+          "Width of diagram"
                            annotation(Dialog);
       Modelica_LinearSystems2.Utilities.Plot.Types.ImageResolution_dpi
           windowResolution=
@@ -600,9 +600,9 @@ Several curves can be displayed in one diagram.
 end Plot;
 
 package Import "Functions to import data in a Modelica environment"
-  extends Modelica.Icons.Library;
+ extends Modelica.Icons.Package;
   package Examples "Demonstrate the usage of the Import functions"
-      extends Modelica.Icons.Library;
+      extends Modelica.Icons.ExamplesPackage;
     function linearizeDoublePendulum "Linearize double pendulum"
       output Real A[:,:] "A-matrix";
       output Real B[:,:] "B-matrix";
@@ -633,58 +633,58 @@ package Import "Functions to import data in a Modelica environment"
         constant Real pi = Modelica.Constants.pi;
 
         inner Modelica.Mechanics.MultiBody.World world(gravityType=Modelica.Mechanics.MultiBody.Types.GravityTypes.
-              UniformGravity, animateWorld=false) 
+              UniformGravity, animateWorld=false)
                               annotation (Placement(transformation(extent={{-140,-80},
                   {-120,-60}},
                             rotation=0)));
-        Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(useAxisFlange=true) 
+        Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(useAxisFlange=true)
           annotation (Placement(transformation(extent={{-96,0},{-76,20}})));
-        Modelica.Mechanics.Translational.Components.Damper damper1(d=0) 
+        Modelica.Mechanics.Translational.Components.Damper damper1(d=0)
           annotation (Placement(transformation(extent={{-96,14},{-76,34}})));
         Modelica.Mechanics.MultiBody.Joints.Revolute rev(n={0,0,1},useAxisFlange=true,
           phi(fixed=true, start=phi1_start),
-          w(fixed=true, start=w1_start)) 
+          w(fixed=true, start=w1_start))
                                      annotation (Placement(transformation(extent={{-30,0},
                   {-10,20}},      rotation=0)));
-        Modelica.Mechanics.Rotational.Components.Damper damper(d=0) 
+        Modelica.Mechanics.Rotational.Components.Damper damper(d=0)
           annotation (Placement(transformation(extent={{-22,40},{-2,60}},rotation=0)));
         Modelica.Mechanics.MultiBody.Parts.Body body(
           m=m_load,
           r_CM={0,0,0},
           specularCoefficient=4*world.defaultSpecularCoefficient,
-          sphereDiameter=1.5*world.defaultBodyDiameter) 
+          sphereDiameter=1.5*world.defaultBodyDiameter)
           annotation (Placement(transformation(extent={{78,0},{98,20}}, rotation=0)));
         Modelica.Mechanics.MultiBody.Parts.BodyShape bodyShape(
           shapeType="box",
           animateSphere=true,
           m=m_trolley,
-          sphereDiameter=world.defaultBodyDiameter) 
+          sphereDiameter=world.defaultBodyDiameter)
           annotation (Placement(transformation(extent={{-58,0},{-38,20}})));
-        Modelica.Mechanics.Translational.Sources.Force force 
+        Modelica.Mechanics.Translational.Sources.Force force
           annotation (Placement(transformation(extent={{-98,34},{-78,54}})));
-        Modelica.Mechanics.MultiBody.Sensors.RelativeAngles relativeAngles 
+        Modelica.Mechanics.MultiBody.Sensors.RelativeAngles relativeAngles
           annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
-        Modelica.Mechanics.MultiBody.Sensors.RelativeVelocity relativeVelocity 
+        Modelica.Mechanics.MultiBody.Sensors.RelativeVelocity relativeVelocity
           annotation (Placement(transformation(extent={{-96,-30},{-76,-10}})));
-        Modelica.Mechanics.MultiBody.Sensors.RelativePosition relativePosition 
+        Modelica.Mechanics.MultiBody.Sensors.RelativePosition relativePosition
           annotation (Placement(transformation(extent={{-96,-60},{-76,-40}})));
-        Modelica.Blocks.Interfaces.RealInput u 
+        Modelica.Blocks.Interfaces.RealInput u
           annotation (Placement(transformation(extent={{-190,-20},{-150,20}})));
-        Modelica.Blocks.Interfaces.RealOutput s 
+        Modelica.Blocks.Interfaces.RealOutput s
           annotation (Placement(transformation(extent={{150,90},{170,110}})));
-        Modelica.Blocks.Interfaces.RealOutput v 
+        Modelica.Blocks.Interfaces.RealOutput v
           annotation (Placement(transformation(extent={{150,50},{170,70}})));
-       Modelica.Blocks.Interfaces.RealOutput phi 
+       Modelica.Blocks.Interfaces.RealOutput phi
           annotation (Placement(transformation(extent={{150,10},{170,30}})));
-        Modelica.Blocks.Interfaces.RealOutput w 
+        Modelica.Blocks.Interfaces.RealOutput w
           annotation (Placement(transformation(extent={{150,-30},{170,-10}})));
         Modelica.Mechanics.MultiBody.Sensors.RelativeAngularVelocity
-            relativeAngularVelocity 
+            relativeAngularVelocity
           annotation (Placement(transformation(extent={{-30,-60},{-10,-40}})));
 
-        Modelica.Blocks.Sources.Constant const(k=0.5*Modelica.Constants.pi) 
+        Modelica.Blocks.Sources.Constant const(k=0.5*Modelica.Constants.pi)
           annotation (Placement(transformation(extent={{94,-22},{106,-10}})));
-        Modelica.Blocks.Math.Add add 
+        Modelica.Blocks.Math.Add add
           annotation (Placement(transformation(extent={{116,-10},{136,10}})));
         Modelica.Mechanics.MultiBody.Joints.Revolute revolute2(
           phi(fixed=true, start=phi2_start),
@@ -692,32 +692,32 @@ package Import "Functions to import data in a Modelica environment"
           cylinderDiameter=3*world.defaultJointWidth,
           cylinderColor={0,0,200})                             annotation (Placement(transformation(extent={{24,0},{
                   44,20}}, rotation=0)));
-        Modelica.Mechanics.MultiBody.Sensors.RelativeAngles relativeAngles1 
+        Modelica.Mechanics.MultiBody.Sensors.RelativeAngles relativeAngles1
           annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
         Modelica.Mechanics.MultiBody.Sensors.RelativeAngularVelocity
-            relativeAngularVelocity1 
+            relativeAngularVelocity1
           annotation (Placement(transformation(extent={{24,-60},{44,-40}})));
-       Modelica.Blocks.Interfaces.RealOutput phi1 
+       Modelica.Blocks.Interfaces.RealOutput phi1
           annotation (Placement(transformation(extent={{150,-70},{170,-50}})));
-        Modelica.Blocks.Interfaces.RealOutput w1 
+        Modelica.Blocks.Interfaces.RealOutput w1
           annotation (Placement(transformation(extent={{150,-110},{170,-90}})));
-        Modelica.Blocks.Math.Add add1 
+        Modelica.Blocks.Math.Add add1
           annotation (Placement(transformation(extent={{88,-50},{108,-30}})));
-        Modelica.Blocks.Sources.Constant const1(k=0) 
+        Modelica.Blocks.Sources.Constant const1(k=0)
           annotation (Placement(transformation(extent={{66,-62},{78,-50}})));
         Modelica.Mechanics.MultiBody.Parts.BodyCylinder bodyCylinder(
           r={length/2,0,0},
           specularCoefficient=0.7,
           color={0,0,0},
           diameter=0.05,
-          density=900) 
+          density=900)
           annotation (Placement(transformation(extent={{-4,0},{16,20}})));
         Modelica.Mechanics.MultiBody.Parts.BodyCylinder bodyCylinder1(
           r={length/2,0,0},
           specularCoefficient=0.7,
           color={0,0,0},
           diameter=0.05,
-          density=900) 
+          density=900)
           annotation (Placement(transformation(extent={{52,0},{72,20}})));
       equation
         connect(damper.flange_b, rev.axis) annotation (Line(points={{-2,50},{0,50},{0,
@@ -838,19 +838,19 @@ package Import "Functions to import data in a Modelica environment"
             color={95,95,95},
             thickness=0.5,
             smooth=Smooth.None));
-        connect(relativeAngles1.frame_a, relativeAngularVelocity1.frame_a) 
+        connect(relativeAngles1.frame_a, relativeAngularVelocity1.frame_a)
           annotation (Line(
             points={{24,-20},{24,-50}},
             color={95,95,95},
             thickness=0.5,
             smooth=Smooth.None));
-        connect(relativeAngularVelocity1.frame_b, relativeAngles1.frame_b) 
+        connect(relativeAngularVelocity1.frame_b, relativeAngles1.frame_b)
           annotation (Line(
             points={{44,-50},{44,-20}},
             color={95,95,95},
             thickness=0.5,
             smooth=Smooth.None));
-        connect(const1.y, add1.u2) 
+        connect(const1.y, add1.u2)
                                  annotation (Line(
             points={{78.6,-56},{82,-56},{82,-46},{86,-46}},
             color={0,0,127},
@@ -966,7 +966,7 @@ It is used to demonstrate linearization
   function linearize "Linearize a model after simulation up to a given time"
     input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
     input Modelica.SIunits.Time t_linearize= 0
-        "Simulate until T_linearize and then linearize" 
+        "Simulate until T_linearize and then linearize"
                                                       annotation(Dialog);
 
     protected

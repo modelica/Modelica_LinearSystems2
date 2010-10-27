@@ -138,9 +138,9 @@ Therefore, the matrices are defined by
 //   result.D := D;
 //   //end constructor;
 
-  function fromTransferFunction = 
+  function fromTransferFunction =
       Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace;
-  function fromZerosAndPoles = 
+  function fromZerosAndPoles =
       Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace;
 
     annotation (Documentation(info="<html>

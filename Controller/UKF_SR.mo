@@ -9,11 +9,11 @@ model UKF_SR "Unscented Kalman filter"
   extends Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock(final
       initType = Modelica_LinearSystems2.Controller.Types.Init.InitialState);
 
- replaceable function F_function = 
+ replaceable function F_function =
       Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy constrainedby
     Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase
     "Function F() in x_k+1 = F(x_k, u_k, Ts)"                      annotation(choicesAllMatching);
-  replaceable function H_function = 
+  replaceable function H_function =
       Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy constrainedby
     Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase
     "Function H() in y_k = H(x_k, u_k, Ts)"                     annotation(choicesAllMatching);
@@ -43,13 +43,13 @@ model UKF_SR "Unscented Kalman filter"
   Real CfP[nx,nx] "Left Cholesky factor of the error covariance matrix P";
   Real K[nx,ny] "Kalman filter gain matrix";
 
-  Modelica.Blocks.Interfaces.RealInput u[nu] "System input vector" 
+  Modelica.Blocks.Interfaces.RealInput u[nu] "System input vector"
     annotation (Placement(transformation(extent={{-140,30},{-100,70}})));
-  Modelica.Blocks.Interfaces.RealOutput x_est[nx] "Estimated state vector" 
+  Modelica.Blocks.Interfaces.RealOutput x_est[nx] "Estimated state vector"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealInput y_measure[ny] "Measured outputs" 
+  Modelica.Blocks.Interfaces.RealInput y_measure[ny] "Measured outputs"
     annotation (Placement(transformation(extent={{-140,-70},{-100,-30}})));
-  Modelica.Blocks.Interfaces.RealOutput y_est[ny] "Estimated system outputs" 
+  Modelica.Blocks.Interfaces.RealOutput y_est[ny] "Estimated system outputs"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,-110})));

@@ -3,24 +3,24 @@ partial model TwoDOFinverseModelController
   "Template of a controller with two structural degrees of freedom and an inverse plant model in forward path"
   parameter Integer l = 1 "number of measurable outputs";
   parameter Boolean additionalMeasurableOutputs = true;
-  Modelica.Blocks.Math.Feedback feedback[plant.l] 
+  Modelica.Blocks.Math.Feedback feedback[plant.l]
     annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
-  Controller.Internal.Add2 add 
+  Controller.Internal.Add2 add
     annotation (Placement(transformation(extent={{50,-20},{70,0}})));
-  Controller.Filter filter 
+  Controller.Filter filter
     annotation (Placement(transformation(extent={{-100,10},{-80,30}})));
-  replaceable Controller.Interfaces.PartialSISO controller 
-    constrainedby Controller.Interfaces.PartialSISO 
+  replaceable Controller.Interfaces.PartialSISO controller
+    constrainedby Controller.Interfaces.PartialSISO
     annotation (Placement(transformation(extent={{10,-20},{30,0}})));
   replaceable Controller.Templates.Internal.Plant_SISO plant(l=l,
       additionalMeasurableOutputs=additionalMeasurableOutputs) constrainedby
-    Templates.Internal.PlantTemplate_SISO 
+    Templates.Internal.PlantTemplate_SISO
     annotation (Placement(transformation(extent={{90,-20},{110,0}})));
-  Modelica.Blocks.Math.InverseBlockConstraints inverseModel 
+  Modelica.Blocks.Math.InverseBlockConstraints inverseModel
     annotation (Placement(transformation(extent={{-70,10},{-30,30}})));
   replaceable Internal.Plant_SISO plant_inv(l=l,
       additionalMeasurableOutputs=additionalMeasurableOutputs) constrainedby
-    Templates.Internal.PlantTemplate_SISO 
+    Templates.Internal.PlantTemplate_SISO
     annotation (Placement(transformation(extent={{-45,15},
             {-55,25}})));
 equation

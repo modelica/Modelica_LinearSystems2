@@ -31,6 +31,8 @@ record DiscreteZerosAndPoles
 
   encapsulated operator 'constructor' "Generate a ZerosAndPoles object"
     import Modelica_LinearSystems2;
+    import Modelica;
+    extends Modelica.Icons.Package;
 
     encapsulated function fromReal
       "Generate a DiscreteZerosAndPoles transfer function from a Real value"
@@ -343,6 +345,8 @@ which is equal to
   end 'constructor';
 
 encapsulated operator '-'
+  import Modelica;
+  extends Modelica.Icons.Package;
   function subtract "Subtract two DiscreteZerosAndPoles (dzp1 - dzp2)"
       import Modelica;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
@@ -431,6 +435,8 @@ encapsulated operator '-'
 end '-';
 
 encapsulated operator '*'
+  import Modelica;
+  extends Modelica.Icons.Package;
 function 'dzp*dzp'
       "Multiply two DiscreteZerosAndPoles transfer functions (dzp1 * dzp2)"
 
@@ -813,6 +819,8 @@ Generate the complex Laplace variable q=exp(s*T) as a DiscreteZerosAndPoles tran
   end q;
 
   encapsulated package Analysis
+    import Modelica;
+    extends Modelica.Icons.Package;
 
   encapsulated function timeResponse
       "Calculate the time response of a discrete zeros-and-poles transfer function"
@@ -1313,9 +1321,14 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
   end Analysis;
 
   encapsulated package Design
+    import Modelica;
+    extends Modelica.Icons.Package;
+
   end Design;
 
   encapsulated package Plot
+    import Modelica;
+    extends Modelica.Icons.Package;
 
   encapsulated function bode
       "Plot discrete zeros a-and-poles transfer function as bode plot"
@@ -1850,6 +1863,8 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
 
   encapsulated package Conversion
     import Modelica_LinearSystems2;
+    import Modelica;
+    extends Modelica.Icons.Package;
   function toDiscreteTransferFunction
       "Generate a DiscreteTransferFunction object from a DiscreteZerosAndPoles object"
 
@@ -2295,6 +2310,8 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
   end Conversion;
 
   encapsulated package Import
+    import Modelica;
+    extends Modelica.Icons.Package;
 
   function fromModel
       "Generate a DiscreteZerosAndPoles record array from a state space representation resulted from linearization of a model"

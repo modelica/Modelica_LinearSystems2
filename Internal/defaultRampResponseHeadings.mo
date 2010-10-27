@@ -6,6 +6,6 @@ function defaultRampResponseHeadings
   input Integer sizeC1;
   output String heading[sizeC1,sizeB2];
 algorithm
-  heading[:, :] := {{"Ramp response[" + String(i) + "," + String(j) + "]" for j in 
+  heading[:, :] := {{"Ramp response[" + String(i) + "," + String(j) + "]" for j in
         1:sizeB2} for i in 1:sizeC1};
 end defaultRampResponseHeadings;

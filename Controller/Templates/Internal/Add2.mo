@@ -2,15 +2,15 @@ within Modelica_LinearSystems2.Controller.Templates.Internal;
 block Add2
   "Output the sum of the two inputs (inputs are on the left and below)"
 
-  input Modelica.Blocks.Interfaces.RealInput u1 
+  input Modelica.Blocks.Interfaces.RealInput u1
                                 annotation (Placement(transformation(
       extent={{-100,-20},{-60,20}}, rotation=0)));
-  input Modelica.Blocks.Interfaces.RealInput u2 
+  input Modelica.Blocks.Interfaces.RealInput u2
     annotation (Placement(transformation(
     origin={0,-80},
     extent={{-20,-20},{20,20}},
     rotation=90)));
-  output Modelica.Blocks.Interfaces.RealOutput y 
+  output Modelica.Blocks.Interfaces.RealOutput y
                                  annotation (Placement(transformation(
       extent={{80,-10},{100,10}}, rotation=0)));
 

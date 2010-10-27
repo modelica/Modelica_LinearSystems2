@@ -7,7 +7,7 @@ model DiscreteStateSpace2
 
   extends Interfaces.PartialBlockIcon;
 
-  parameter Real ABCD[:,:] "Continuous linear time-invariant system" 
+  parameter Real ABCD[:,:] "Continuous linear time-invariant system"
                                               annotation(Hide=true);
 
 protected
@@ -21,16 +21,16 @@ public
   final parameter Integer ny=size(C, 1) "Number of outputs"  annotation(Hide=true);
   parameter Types.MethodWithGlobalDefault methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.UseSampleClockOption
     "Type of discretization" annotation(Evaluate=true, Hide=true);
-  final parameter Types.Method method=if methodType == Types.MethodWithGlobalDefault.UseSampleClockOption then 
+  final parameter Types.Method method=if methodType == Types.MethodWithGlobalDefault.UseSampleClockOption then
             sampleClock.methodType else methodType
     "Discretization method (explicitEuler/implicitEuler/trapezoidal/stepExact/rampExact)"
      annotation(Evaluate=true, Hide=false);
 
   parameter Integer sampleFactor(min=1) = 1
-    "sample time=sampleClock.sampleTime*sampleFactor" 
+    "sample time=sampleClock.sampleTime*sampleFactor"
      annotation(Hide=true);
   parameter Types.Init init=Types.InitWithGlobalDefault.UseSampleClockOption
-    "Type of initialization (No init/InitialState/SteadyState/Output)" 
+    "Type of initialization (No init/InitialState/SteadyState/Output)"
     annotation(Evaluate=true, Hide=true);
   parameter Real x_start[nx]=zeros(nx)
     "Initial value of continuous state x, if init=InitialState (otherwise guess value)"
@@ -45,7 +45,7 @@ public
     "Sample time" annotation(Hide=false);
 
   Modelica.Blocks.Interfaces.RealInput u[nu]
-    "Continuous or discrete input signals of block" 
+    "Continuous or discrete input signals of block"
     annotation (                          Hide=true, Placement(transformation(
           extent={{-140,-20},{-100,20}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput y[ny](start=y_start)
@@ -64,7 +64,7 @@ protected
 
  discrete Real xd[nx](start=x_start)
     "State vector of discrete system (pre(xd) = x - B2*u)";
-  discrete Real new_xd[nx](start=x_start) "Next value of xd" 
+  discrete Real new_xd[nx](start=x_start) "Next value of xd"
                         annotation(Hide=true);
 
 // Derived quantities

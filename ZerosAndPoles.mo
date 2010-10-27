@@ -18,6 +18,8 @@ record ZerosAndPoles
 
   encapsulated operator 'constructor' "Generate a ZerosAndPoles object"
     import Modelica_LinearSystems2;
+    import Modelica;
+    extends Modelica.Icons.Package;
 
     encapsulated function fromReal
       "Generate a ZerosAndPoles transfer function from a Real value"
@@ -214,6 +216,8 @@ with j=sqrt(-1), is defined as
   end 'constructor';
 
 encapsulated operator '-'
+  import Modelica;
+  extends Modelica.Icons.Package;
   function subtract "Subtract two TransferFunctions (zp1 - zp2)"
       import Modelica;
       import Modelica_LinearSystems2.ZerosAndPoles;
@@ -650,6 +654,8 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
   end p;
 
   encapsulated package Analysis
+    import Modelica;
+    extends Modelica.Icons.Package;
     function analysis
       "Make a system analysis based on the poles and zeros of the system"
 
@@ -1444,7 +1450,8 @@ Computes the invariant zeros of the corresponding state space representation of 
 
 </pre></blockquote>
 </html>
-", revisions="<html>
+",   revisions=
+             "<html>
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
@@ -1803,6 +1810,8 @@ of a zeros-and-poles transfer function.
   end Analysis;
 
   encapsulated package Design
+    import Modelica;
+    extends Modelica.Icons.Package;
 
   encapsulated function filter
       "Generate a ZerosAndPoles transfer function from a filter description"
@@ -2178,6 +2187,8 @@ is set.
   end Design;
 
   encapsulated package Plot
+    import Modelica;
+    extends Modelica.Icons.Package;
 
   encapsulated function polesAndZeros
       "Plot eigenvalues and or the zeros of a zeros-and-poles transfer function"
@@ -2803,6 +2814,8 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
   end Plot;
 
   encapsulated package Conversion
+    import Modelica;
+    extends Modelica.Icons.Package;
 
     function toTransferFunction
       "Generate a TransferFunction object from a ZerosAndPoles object"
@@ -3995,6 +4008,8 @@ processing.
   end Conversion;
 
   encapsulated package Import
+    import Modelica;
+    extends Modelica.Icons.Package;
 
   function fromModel
       "Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model"

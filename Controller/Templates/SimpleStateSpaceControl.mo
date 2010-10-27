@@ -2,24 +2,24 @@ within Modelica_LinearSystems2.Controller.Templates;
 partial model SimpleStateSpaceControl
   "Template for simple state feedback controllers with an optional pre-filter"
 
-  MatrixGain feedbackMatrix 
+  MatrixGain feedbackMatrix
     annotation (Placement(transformation(extent={{40,-50},{20,-30}})));
-  MatrixGain preFilter(K=[0]) 
+  MatrixGain preFilter(K=[0])
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
-  Modelica.Blocks.Math.Feedback feedback[feedbackMatrix.nout] 
+  Modelica.Blocks.Math.Feedback feedback[feedbackMatrix.nout]
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   replaceable
     Modelica_LinearSystems2.Controller.Templates.Internal.PartialPlantMIMO
     plant(n=feedbackMatrix.nin, m=feedbackMatrix.nout) constrainedby
-    Modelica_LinearSystems2.Controller.Templates.Internal.PartialPlantMIMO 
+    Modelica_LinearSystems2.Controller.Templates.Internal.PartialPlantMIMO
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
-  Sampler samplerPreFilter[feedbackMatrix.nout] 
+  Sampler samplerPreFilter[feedbackMatrix.nout]
     annotation (Placement(transformation(extent={{-35,-5},{-25,5}})));
-  Sampler samplerFeedback[feedbackMatrix.nout] 
+  Sampler samplerFeedback[feedbackMatrix.nout]
     annotation (Placement(transformation(extent={{5,-45},{-5,-35}})));
-  Sampler samplerOut[feedbackMatrix.nin] 
+  Sampler samplerOut[feedbackMatrix.nin]
     annotation (Placement(transformation(extent={{65,-45},{55,-35}})));
-  inner SampleClock sampleClock 
+  inner SampleClock sampleClock
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
 equation
   connect(feedback.y, plant.u) annotation (Line(

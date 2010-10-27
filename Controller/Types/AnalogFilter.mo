@@ -4,7 +4,7 @@ type AnalogFilter = enumeration(
     Bessel "Bessel filter",
     Butterworth "Butterworth filter",
     Chebyshev "Chebyshev filter")
-  "Enumeration defining the method of filtering" 
+  "Enumeration defining the method of filtering"
     annotation (Evaluate=true, Documentation(info="<html>
  
 </html>"));

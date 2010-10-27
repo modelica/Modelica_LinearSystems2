@@ -29,7 +29,7 @@ external "Fortran 77" dgesdd(
     work,
     lwork,
     iwork,
-    info) 
+    info)
     annotation (Library="lapack");
   annotation (Documentation(info="   Purpose  
    =======  

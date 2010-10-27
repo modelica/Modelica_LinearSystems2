@@ -24,6 +24,8 @@ record DiscreteStateSpace
   encapsulated operator 'constructor'
     "Default constructors for a DiscreteStateSpace record"
     import Modelica_LinearSystems2;
+    import Modelica;
+    extends Modelica.Icons.Package;
   function fromDiscreteTransferFunction =
       Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
                                                                                              annotation (Documentation(info="<html> </html>"));
@@ -572,6 +574,8 @@ public
 
 encapsulated operator '-'
     "Contains operators for subtraction of discrete state space systems"
+  import Modelica;
+  extends Modelica.Icons.Package;
 
   function subtract
       "Subtraction of two state space systems connected in parallel (= inputs are the same, outputs of the two systems are subtracted)"
@@ -1224,6 +1228,8 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
 
 encapsulated package Analysis
     "Functions to analyse discrete state space systems represented by a DiscreteStateSpace record"
+  import Modelica;
+  extends Modelica.Icons.Package;
 encapsulated function eigenValues
       "Calculate the eigenvalues of a linear discrete state space system and write them in a complex vector"
 
@@ -1749,6 +1755,8 @@ end Analysis;
 
 encapsulated package Design
     "Functions to design discrete state space controllers and observers"
+  import Modelica;
+  extends Modelica.Icons.Package;
 
   encapsulated function assignPolesMI
       "Pole assigment design algorithm for multi input systems"
@@ -2482,6 +2490,8 @@ end Design;
 
 encapsulated package Plot
     "Functions to plot discrete state space system responses"
+  import Modelica;
+  extends Modelica.Icons.Package;
 encapsulated function bodeSISO
       "Plot bode plot of the corresponding discrete transfer function"
       import Modelica;
@@ -3084,6 +3094,8 @@ end Plot;
 
 encapsulated package Conversion
     "Conversion functions from DiscreteStateSpace into DiscreteTransferFunction"
+  import Modelica;
+  extends Modelica.Icons.Package;
 
 encapsulated function toDiscreteZerosAndPoles
       "Generate a discrete zeros-and-poles representation from a discrete SISO state space representation"
@@ -3512,6 +3524,8 @@ end toDiscreteTransferFunctionMIMO;
 end Conversion;
 
 encapsulated package Import
+  import Modelica;
+  extends Modelica.Icons.Package;
 
 function fromModel
       "Generate a DiscreteStateSpace record by linearization of a modelica model"
@@ -3732,7 +3746,8 @@ Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>.
 end Import;
 
 encapsulated package Internal
-    import Modelica;
+  import Modelica;
+  extends Modelica.Icons.Package;
 
 function timeResponseSamples
       "Estimate reasonable discretisation sample time and simulation time span for time response plot"

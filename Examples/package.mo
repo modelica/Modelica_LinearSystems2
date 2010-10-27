@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2;
 package Examples "Examples demonstrating the usage of this package"
+  extends Modelica.Icons.ExamplesPackage;
 
 
 annotation (Documentation(info="<html>

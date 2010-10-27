@@ -5,16 +5,16 @@ model Add2
                                                                                  annotation(Dialog(choices(checkBox=true)));
   parameter Integer n(min=1)=1 "number of inputs = number of outputs";
 
-  Modelica.Blocks.Interfaces.RealInput u1[n] 
+  Modelica.Blocks.Interfaces.RealInput u1[n]
                                           annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={0,80})));
-  Modelica.Blocks.Interfaces.RealInput u2[n] if fromLeft 
+  Modelica.Blocks.Interfaces.RealInput u2[n] if fromLeft
     annotation (Placement(transformation(extent={{-100,-20},{-60,20}})));
-  Modelica.Blocks.Interfaces.RealOutput y[n] 
+  Modelica.Blocks.Interfaces.RealOutput y[n]
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
-  Modelica.Blocks.Interfaces.RealInput u2b[n] if not fromLeft 
+  Modelica.Blocks.Interfaces.RealInput u2b[n] if not fromLeft
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-80})));

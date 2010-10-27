@@ -27,9 +27,9 @@ model DoublePendulum "Crane trolley controlled by a state feedback controller"
     amplitude=3,
     width=50,
     startTime=5,
-    period=10) 
+    period=10)
               annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
-  FirstOrder firstOrder(T=0.25) 
+  FirstOrder firstOrder(T=0.25)
     annotation (Placement(transformation(extent={{-90,-5},{-80,5}})));
 equation
   connect(firstOrder.u, pulse.y) annotation (Line(

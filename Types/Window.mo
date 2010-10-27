@@ -5,7 +5,7 @@ type Window = enumeration(
     Hann "Hann",
     Hamming "Hamming",
     Blackman "Blackman",
-    Kaiser "Kaiser") "Enumeration of window type" 
+    Kaiser "Kaiser") "Enumeration of window type"
     annotation (Evaluate=true, Documentation(info="<html>
  
 </html>"));

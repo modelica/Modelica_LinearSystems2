@@ -11,7 +11,7 @@ extends Templates.Internal.PlantTemplate_SISO;
     a22=a22,
     b=b,
     k0=k0,
-    eps=eps) 
+    eps=eps)
     annotation (Placement(transformation(extent={{-40,-40},{40,40}})));
 
   parameter Real a1 = 0.2674;

@@ -16,7 +16,10 @@ record StateSpace
 
 encapsulated operator 'constructor'
     "Default constructors for a StateSpace record"
+
     import Modelica_LinearSystems2;
+      import Modelica;
+  extends Modelica.Icons.Package;
 
   function fromABCDMatrices "Default constructor for a StateSpace record"
       import Modelica;
@@ -142,6 +145,8 @@ end 'constructor';
 
 encapsulated operator '-'
     "Contains operators for subtraction of state space systems"
+  import Modelica;
+  extends Modelica.Icons.Package;
 
   function subtract
       "Subtraction of two state space systems connected in parallel (= inputs are the same, outputs of the two systems are subtracted)"
@@ -580,7 +585,8 @@ end 'String';
 
 encapsulated package Analysis
     "Functions to analyse state space systems represented by a StateSpace record"
-    import Modelica;
+  import Modelica;
+  extends Modelica.Icons.Package;
 
   function analysis
       "Perform a system analysis based on the poles and zeros of the system"
@@ -3914,6 +3920,8 @@ of the system
 end Analysis;
 
   encapsulated package Design "Functions for state space controller design"
+    import Modelica;
+    extends Modelica.Icons.Package;
     encapsulated function assignPolesSI
       "Pole placement for single input systems using Ackermann's formula."
 
@@ -5016,6 +5024,8 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
   end Design;
 
 encapsulated package Plot "Functions to plot state space system responses"
+  import Modelica;
+  extends Modelica.Icons.Package;
 
     encapsulated function polesAndZeros
       "Plot poles (i.e. eigenvalues) and/or invariant zeros of a state space system"
@@ -5813,6 +5823,8 @@ end Plot;
 
 encapsulated package Conversion
     "Conversion functions from StateSpace into TransferFunction or ZerosAndPoles representations"
+  import Modelica;
+  extends Modelica.Icons.Package;
 
   encapsulated function toZerosAndPoles
       "Generate a zeros-and-poles representation from a SISO state space representation"
@@ -6212,6 +6224,8 @@ end toTransferFunctionMIMO;
 end Conversion;
 
   encapsulated package Transformation "State Space similarity transformations"
+    import Modelica;
+    extends Modelica.Icons.Package;
 
       encapsulated function toSimilarForm
       "Perform the similarity transformation z = Tx (or x = inv(T)z) which leads to Az=T*A*inv(T), Bz=T*B, Cz=C*inv(T), Dz=D (or Az=inv(T)*A*T, Bz=inv(T)B, Cz=C*T, Dz=D)"
@@ -6772,6 +6786,8 @@ Function <b>extract</b> computes the subsystem of a state space system correspon
 
 encapsulated package Import
     "Utilitiy functions to import StaeSpace representations"
+  import Modelica;
+  extends Modelica.Icons.Package;
 
   encapsulated function fromFile "Read a StateSpace data record from mat-file"
 
@@ -6930,7 +6946,7 @@ encapsulated package Internal
     "Internal library of record StateSpace (should not be directly used by user)"
     import Modelica;
     import Modelica_LinearSystems2;
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
   encapsulated function isSISO
       "To check a state space system to be SISO (or not)"

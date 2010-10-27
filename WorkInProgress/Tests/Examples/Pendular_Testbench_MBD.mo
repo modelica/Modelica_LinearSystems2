@@ -1,26 +1,26 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Examples;
 model Pendular_Testbench_MBD
 
-  SR_EKF extendedKalman(Ts=0.001) 
+  SR_EKF extendedKalman(Ts=0.001)
     annotation (Placement(transformation(extent={{60,0},{80,20}})));
-  CraneMultibody craneWithEquations3_1(     J=0, d=100) 
+  CraneMultibody craneWithEquations3_1(     J=0, d=100)
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
   Modelica.Blocks.Sources.Sine sine(                freqHz=0.1, amplitude=1000,
-    offset=-50) "Force on grap" 
+    offset=-50) "Force on grap"
     annotation (Placement(transformation(extent={{-98,0},{-78,20}})));
-  Modelica_LinearSystems2.Controller.Noise noise(y_min=-0.05, y_max=0.05) 
+  Modelica_LinearSystems2.Controller.Noise noise(y_min=-0.05, y_max=0.05)
     annotation (Placement(transformation(extent={{-80,-86},{-60,-66}})));
-  Modelica.Blocks.Routing.Multiplex2 multiplex2_1 
+  Modelica.Blocks.Routing.Multiplex2 multiplex2_1
     annotation (Placement(transformation(extent={{20,-30},{40,-50}})));
-  Modelica.Blocks.Math.Add add 
+  Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-18,-40},{2,-20}})));
-  Modelica.Blocks.Math.Add add1 
+  Modelica.Blocks.Math.Add add1
     annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
   inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(blockType=
         Modelica_LinearSystems2.Controller.Types.BlockType.Discrete, sampleTime=
-       0.005) 
+       0.005)
              annotation (Placement(transformation(extent={{80,78},{100,98}})));
-  Modelica_LinearSystems2.Controller.Noise noise1(y_min=-0.0001, y_max=0.0001) 
+  Modelica_LinearSystems2.Controller.Noise noise1(y_min=-0.0001, y_max=0.0001)
     annotation (Placement(transformation(extent={{-80,-46},{-60,-26}})));
 equation
   connect(sine.y, craneWithEquations3_1.force) annotation (Line(

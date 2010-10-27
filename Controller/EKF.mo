@@ -8,8 +8,8 @@ model EKF "Extended Kalman filter"
   extends Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock(final
       initType = Modelica_LinearSystems2.Controller.Types.Init.InitialState);
 
- replaceable function ekfFunction = 
-      Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy 
+ replaceable function ekfFunction =
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy
       constrainedby
     Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemBase
     "Function to calculate xk, yk, Ak, Ck" annotation(choicesAllMatching);
@@ -31,20 +31,20 @@ model EKF "Extended Kalman filter"
   Real M[nx,nx] "Solution of the discrete Riccati equation";
   Real K[nx,ny] "Kalman filter gain matrix";
 
-  Modelica.Blocks.Interfaces.RealInput u[nu] "System input vector" 
+  Modelica.Blocks.Interfaces.RealInput u[nu] "System input vector"
     annotation (Placement(transformation(extent={{-140,30},{-100,70}})));
-  Modelica.Blocks.Interfaces.RealOutput x_est[nx] "Estimated state vector" 
+  Modelica.Blocks.Interfaces.RealOutput x_est[nx] "Estimated state vector"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealInput y_measure[ny] "Measured outputs" 
+  Modelica.Blocks.Interfaces.RealInput y_measure[ny] "Measured outputs"
     annotation (Placement(transformation(extent={{-140,-70},{-100,-30}})));
 
-  Modelica.Blocks.Interfaces.RealOutput y_est[ny] "Estimated system outputs" 
+  Modelica.Blocks.Interfaces.RealOutput y_est[ny] "Estimated system outputs"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,-110})));
 
 protected
-  replaceable function ekf=Design.EKF (redeclare function ekfFunction = 
+  replaceable function ekf=Design.EKF (redeclare function ekfFunction =
           ekfFunction);
 
   outer Modelica_LinearSystems2.Controller.SampleClock sampleClock

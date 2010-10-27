@@ -5,7 +5,7 @@ function importFromFile
   import Modelica_LinearSystems2.Math.Polynomial;
 
   input Boolean systemOnFile=true
-    "true, if state space system is defined on file" 
+    "true, if state space system is defined on file"
     annotation(Dialog(group="system data definition"),choices(checkBox=true));
 
   input String fileName=DataDir + "tf_siso_1.mat"

@@ -15,13 +15,13 @@ block LimPID
     "Type of controller";
   parameter Real k(min=0) = 1 "Gain of controller" annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants));
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small, start=0.5)
-    "Time constant of Integrator block" 
-      annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants and 
-                                      (controllerType==SimpleController.PI or 
+    "Time constant of Integrator block"
+      annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants and
+                                      (controllerType==SimpleController.PI or
                               controllerType==SimpleController.PID)));
   parameter Modelica.SIunits.Time Td(min=0, start=0.1)
-    "Time constant of Derivative block" 
-      annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants and (controllerType==SimpleController.PD or 
+    "Time constant of Derivative block"
+      annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants and (controllerType==SimpleController.PD or
                                 controllerType==SimpleController.PID)));
   parameter Real kp=1 "P part parameter of gain representation" annotation(Dialog(enable=pidRep==Types.PID_representation.gains));
   parameter Real ki=1 "I part parameter of gain representation" annotation(Dialog(enable=pidRep==Types.PID_representation.gains and   (controllerType==SimpleController.PI or  controllerType==SimpleController.PID)));
@@ -29,117 +29,117 @@ block LimPID
   parameter Real yMax(start=1) "Upper limit of output";
   parameter Real yMin=-yMax "Lower limit of output";
   parameter Real wp(min=0) = 1 "Set-point weight for Proportional block (0..1)";
-  parameter Real wd(min=0) = 0 "Set-point weight for Derivative block (0..1)" 
-       annotation(Dialog(enable=controllerType==SimpleController.PD or 
+  parameter Real wd(min=0) = 0 "Set-point weight for Derivative block (0..1)"
+       annotation(Dialog(enable=controllerType==SimpleController.PD or
                                 controllerType==SimpleController.PID));
   parameter Real Ni(min=100*Modelica.Constants.eps) = 0.9
-    "Ni*Ti is time constant of anti-windup compensation" 
-     annotation(Dialog(enable=controllerType==SimpleController.PI or 
+    "Ni*Ti is time constant of anti-windup compensation"
+     annotation(Dialog(enable=controllerType==SimpleController.PI or
                               controllerType==SimpleController.PID));
   parameter Real Nd(min=100*Modelica.Constants.eps) = 10
-    "The higher Nd, the more ideal the derivative block" 
-       annotation(Dialog(enable=controllerType==SimpleController.PD or 
+    "The higher Nd, the more ideal the derivative block"
+       annotation(Dialog(enable=controllerType==SimpleController.PD or
                                 controllerType==SimpleController.PID));
   parameter Boolean limitsAtInit=true
-    "= false, if limits are ignored during initializiation" 
+    "= false, if limits are ignored during initializiation"
     annotation(Evaluate=true, Dialog(group="Initialization",
-                       enable=controllerType==SimpleController.PI or 
+                       enable=controllerType==SimpleController.PI or
                               controllerType==SimpleController.PID));
   parameter Real xi_start=0
-    "Initial or guess value value for integrator output (= integrator state)" 
+    "Initial or guess value value for integrator output (= integrator state)"
     annotation (Dialog(group="Initialization",
-                enable=controllerType==SimpleController.PI or 
+                enable=controllerType==SimpleController.PI or
                        controllerType==SimpleController.PID));
   parameter Real xd_start=0
-    "Initial or guess value for state of derivative block" 
+    "Initial or guess value for state of derivative block"
     annotation (Dialog(group="Initialization",
-                         enable=controllerType==SimpleController.PD or 
+                         enable=controllerType==SimpleController.PD or
                                 controllerType==SimpleController.PID));
-  parameter Real y_start=0 "Initial value of output" 
+  parameter Real y_start=0 "Initial value of output"
     annotation(Dialog(enable=initType == InitPID.InitialOutput, group=
           "Initialization"));
 
-  Sampler sampler_s(blockType=blockType) 
+  Sampler sampler_s(blockType=blockType)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
-  Sampler sampler_m(blockType=blockType) 
+  Sampler sampler_m(blockType=blockType)
                     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,-90})));
-  Modelica.Blocks.Math.Add addP(k1=wp, k2=-1) 
+  Modelica.Blocks.Math.Add addP(k1=wp, k2=-1)
     annotation (Placement(transformation(extent={{-60,40},{-40,60}}, rotation=
            0)));
-  Modelica.Blocks.Math.Add addD(k1=wd, k2=-1) if 
-                                        with_D 
+  Modelica.Blocks.Math.Add addD(k1=wd, k2=-1) if
+                                        with_D
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}},
           rotation=0)));
-  Modelica.Blocks.Math.Add3 addI(k2=-1) if 
+  Modelica.Blocks.Math.Add3 addI(k2=-1) if
                                   with_I annotation (Evaluate=true, Placement(
         transformation(extent={{-60,-60},{-40,-40}}, rotation=0)));
-  Modelica.Blocks.Math.Gain P(k=1) 
+  Modelica.Blocks.Math.Gain P(k=1)
                      annotation (Placement(transformation(extent={{-30,40},{-10,
             60}},     rotation=0)));
   Derivative D(k=if pidRepresentation==Types.PID_representation.timeConstants then Td else kd/kp, T=max([Td/Nd,1.e-14]),
     blockType=blockType,
-    initType=if init==Types.Init.SteadyState or 
-                init==Types.Init.InitialOutput then InitWithGlobalDefault.SteadyState else 
-             if init==Types.Init.InitialState then InitWithGlobalDefault.InitialState else 
+    initType=if init==Types.Init.SteadyState or
+                init==Types.Init.InitialOutput then InitWithGlobalDefault.SteadyState else
+             if init==Types.Init.InitialState then InitWithGlobalDefault.InitialState else
                 InitWithGlobalDefault.NoInit,
     x_start=xd_start,
     y_start=y_start,
-    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact) if 
-                          with_D 
+    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact) if
+                          with_D
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   Integrator I(k=if pidRepresentation==Types.PID_representation.timeConstants then 1/Ti else kp/ki, y_start=xi_start,
     blockType=blockType,
-     initType=if init==Types.Init.SteadyState then 
-                InitWithGlobalDefault.SteadyState else 
-             if init==Types.Init.InitialState then 
+     initType=if init==Types.Init.SteadyState then
+                InitWithGlobalDefault.SteadyState else
+             if init==Types.Init.InitialState then
                 InitWithGlobalDefault.InitialState else InitWithGlobalDefault.NoInit,
-    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact) if 
-                                                                                           with_I 
+    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact) if
+                                                                                           with_I
     annotation (Placement(transformation(extent={{-30,-60},{-10,-40}})));
 
-  Modelica.Blocks.Sources.Constant Izero(k=0) if 
-                                 not with_I 
+  Modelica.Blocks.Sources.Constant Izero(k=0) if
+                                 not with_I
     annotation (Placement(transformation(extent={{20,-54.5},{10,-44.5}},
                                                                     rotation=
             0)));
 protected
-  parameter Boolean with_I = controllerType==SimpleController.PI or 
+  parameter Boolean with_I = controllerType==SimpleController.PI or
                              controllerType==SimpleController.PID annotation(Evaluate=true, HideResult=true);
-  parameter Boolean with_D = controllerType==SimpleController.PD or 
+  parameter Boolean with_D = controllerType==SimpleController.PD or
                              controllerType==SimpleController.PID annotation(Evaluate=true, HideResult=true);
 public
-  Modelica.Blocks.Sources.Constant Dzero(k=0) if 
-                                 not with_D 
+  Modelica.Blocks.Sources.Constant Dzero(k=0) if
+                                 not with_D
     annotation (Placement(transformation(extent={{-20,19.5},{-10,29.5}},
                                                                      rotation=
            0)));
-  Modelica.Blocks.Math.Add3 addPID 
+  Modelica.Blocks.Math.Add3 addPID
                           annotation (Evaluate=true, Placement(transformation(
           extent={{10,-10},{30,10}},rotation=0)));
-  Modelica.Blocks.Math.Gain gainPID(k=if pidRepresentation==Types.PID_representation.timeConstants then k else kp) 
+  Modelica.Blocks.Math.Gain gainPID(k=if pidRepresentation==Types.PID_representation.timeConstants then k else kp)
                                 annotation (Placement(transformation(extent={{40,-10},
             {60,10}},          rotation=0)));
 
-  Modelica.Blocks.Math.Add addSat(k1=+1, k2=-1) if 
-                                   with_I 
+  Modelica.Blocks.Math.Add addSat(k1=+1, k2=-1) if
+                                   with_I
     annotation (Evaluate=true, Placement(transformation(
         origin={80,-40},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Blocks.Math.Gain gainTrack(k=1/(k*Ni)) if 
-                                            with_I 
+  Modelica.Blocks.Math.Gain gainTrack(k=1/(k*Ni)) if
+                                            with_I
     annotation (Placement(transformation(extent={{40,-80},{20,-60}}, rotation=
            0)));
   Modelica.Blocks.Nonlinear.Limiter limiter(
     uMax=yMax,
     uMin=yMin,
-    limitsAtInit=limitsAtInit) 
+    limitsAtInit=limitsAtInit)
     annotation (Placement(transformation(extent={{70,-10},{90,10}}, rotation=
             0)));
-  UnitDelay unitDelay(blockType=blockType) if with_I 
+  UnitDelay unitDelay(blockType=blockType) if with_I
     annotation (Placement(transformation(extent={{70,-80},{50,-60}})));
 
 initial equation
@@ -219,7 +219,7 @@ equation
       smooth=Smooth.None));
   connect(gainPID.y, addSat.u2) annotation (Line(points={{61,0},{65,0},{65,-20},
           {74,-20},{74,-28}},      color={0,0,127}));
-  connect(gainPID.y, limiter.u) 
+  connect(gainPID.y, limiter.u)
     annotation (Line(points={{61,0},{72,0},{68,0}},
                                              color={0,0,127}));
   connect(gainPID.u, addPID.y) annotation (Line(

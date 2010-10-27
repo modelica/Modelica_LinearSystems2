@@ -8,10 +8,10 @@ partial block PartialDiscreteSISO_equality
   final parameter Modelica.SIunits.Time Ts = sampleClock.sampleTime*sampleFactor
     "Sample time" annotation(Hide=false);
   Modelica.Blocks.Interfaces.RealInput u
-    "Continuous or discrete input signal of block" 
+    "Continuous or discrete input signal of block"
     annotation (extent=[-140, -20; -100, 20]);
   Modelica.Blocks.Interfaces.RealOutput y
-    "Continuous or discrete output signal of block" 
+    "Continuous or discrete output signal of block"
     annotation (extent=[100, -10; 120, 10]);
 
 protected

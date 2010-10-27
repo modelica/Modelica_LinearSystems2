@@ -5,31 +5,31 @@ model Interpolator "Demonstrate usage of Interpolator"
 
   Modelica.Blocks.Sources.Sine sine(freqHz=2,
     offset=0.1,
-    startTime=0.1) 
+    startTime=0.1)
     annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
   inner SampleClock sampleClock(sampleTime=0.001, blockType=
-        Modelica_LinearSystems2.Controller.Types.BlockType.Discrete) 
+        Modelica_LinearSystems2.Controller.Types.BlockType.Discrete)
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica_LinearSystems2.Controller.Interpolator interpolator1(
     outputSampleFactor=4,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous,
     meanValueFilter=false,
-    inputSampleFactor=20) 
+    inputSampleFactor=20)
     annotation (Placement(transformation(extent={{0,40},{20,60}})));
 
   Modelica_LinearSystems2.Controller.Interpolator interpolator2(
     outputSampleFactor=4,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
     meanValueFilter=false,
-    inputSampleFactor=20) 
+    inputSampleFactor=20)
     annotation (Placement(transformation(extent={{0,0},{20,20}})));
 
   Modelica_LinearSystems2.Controller.Interpolator interpolator3(
     outputSampleFactor=4,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
-    inputSampleFactor=20) 
+    inputSampleFactor=20)
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
-  Sampler sampler(sampleFactor=20) 
+  Sampler sampler(sampleFactor=20)
     annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
 
 equation
@@ -37,7 +37,7 @@ equation
       points={{-59,10},{-42,10}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(sampler.y, interpolator2.u) 
+  connect(sampler.y, interpolator2.u)
                                      annotation (Line(
       points={{-19,10},{-2,10}},
       color={0,0,127},

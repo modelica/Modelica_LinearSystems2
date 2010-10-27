@@ -18,8 +18,8 @@ function analysisPolesAndZerosSISO
 protected
   Boolean systemOnFile=fileName <> "NoName";
 
-  StateSpace ss=if systemOnFile then 
-      StateSpace.Import.fromFile(  fileName, matrixName) else 
+  StateSpace ss=if systemOnFile then
+      StateSpace.Import.fromFile(  fileName, matrixName) else
       StateSpace(
       A=A,
       B=B,

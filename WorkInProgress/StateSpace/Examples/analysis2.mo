@@ -31,9 +31,9 @@ function analysis2 "Example to check controllability of a state space system"
       headingFrequencyResponse="Frequency response");
 
   input Boolean systemOnFile=false
-    "true, if state space system is defined on file" 
+    "true, if state space system is defined on file"
    annotation(Dialog(group="system data definition"),choices(checkBox=true));
-  input String fileName="NoName" "file where matrix [A, B; C, D] is stored" 
+  input String fileName="NoName" "file where matrix [A, B; C, D] is stored"
                                                                            annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                      caption="state space system data file"),enable = systemOnFile));
   input String matrixName="ABCD" "Name of the state space system matrix"  annotation(Dialog(group="system data definition",enable = systemOnFile));
@@ -52,7 +52,7 @@ protected
   Real eigvec[4,4] "eigen values of the system";
   Real eigvecRe[4,4]=fill(0, 4, 4) "eigen values of the system";
   Real eigvecIm[4,4]=fill(0, 4, 4) "eigen values of the system";
-  Complex eigval[4]=fill(Complex(0), 4) 
+  Complex eigval[4]=fill(Complex(0), 4)
   annotation (Documentation(info="<html>
 This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is 
 to design pole assigment controllers for state space systems with multiple input.

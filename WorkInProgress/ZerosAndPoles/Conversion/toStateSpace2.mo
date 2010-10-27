@@ -278,7 +278,7 @@ algorithm
       ss.A[2*n_den2 + i, 1:2*n_den2 + i - 1] := b*ss.C[1, 1:2*n_den2 + i - 1];
       ss.A[2*n_den2 + i, 2*n_den2 + i] := a;
       ss.B[2*n_den2 + i, 1] := if dZero then 0 else b*ss.D[1, 1];
-      ss.C[1, 1:2*n_den2 + i - 1] := if dZero then fill(0, 2*n_den2 + i - 1) else 
+      ss.C[1, 1:2*n_den2 + i - 1] := if dZero then fill(0, 2*n_den2 + i - 1) else
               d*ss.C[1, 1:2*n_den2 + i - 1];
       ss.C[1, 2*n_den2 + i] := c;
       ss.D := if dZero then [0] else d*ss.D;

@@ -2,26 +2,26 @@ within Modelica_LinearSystems2.Controller.Templates;
 partial model SimpleObserverStateSpaceControl
   "Represents the structure of a simple state feedback controller with observer and optional pre filter"
 
-  MatrixGain feedbackMatrix 
+  MatrixGain feedbackMatrix
     annotation (Placement(transformation(extent={{20,-50},{0,-30}})));
-  MatrixGain preFilter(K=[0]) 
+  MatrixGain preFilter(K=[0])
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  Modelica.Blocks.Math.Feedback feedback[feedbackMatrix.nout] 
+  Modelica.Blocks.Math.Feedback feedback[feedbackMatrix.nout]
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   replaceable Internal.PlantTemplate plant(n=
         feedbackMatrix.nin, m=feedbackMatrix.nout) constrainedby
-    Internal.PlantTemplate 
+    Internal.PlantTemplate
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
-  Sampler samplerPreFilter[feedbackMatrix.nout] 
+  Sampler samplerPreFilter[feedbackMatrix.nout]
     annotation (Placement(transformation(extent={{-53,-5},{-43,5}})));
-  Sampler samplerFeedback[feedbackMatrix.nout] 
+  Sampler samplerFeedback[feedbackMatrix.nout]
     annotation (Placement(transformation(extent={{-15,-45},{-25,-35}})));
-  Sampler samplerOut[observer.nout] 
+  Sampler samplerOut[observer.nout]
     annotation (Placement(transformation(extent={{85,-51},{75,-41}})));
-  inner SampleClock sampleClock 
+  inner SampleClock sampleClock
     annotation (Placement(transformation(extent={{120,80},{140,100}})));
   Modelica_LinearSystems2.Controller.Templates.Internal.ObserverTemplate
-    observer 
+    observer
     annotation (Placement(transformation(extent={{60,-50},{40,-30}})));
 equation
   connect(feedback.y, plant.u) annotation (Line(

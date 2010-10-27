@@ -9,7 +9,7 @@ block FirstOrder
   parameter Real k = 1 "Gain";
   parameter Real T = 1 "Time Constant";
   parameter Real y_start = 0.0
-    "Initial y if initType=InitialState (else guess)" 
+    "Initial y if initType=InitialState (else guess)"
     annotation(Dialog(tab="Advanced options"));
 
 equation

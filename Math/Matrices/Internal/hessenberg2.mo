@@ -35,11 +35,11 @@ algorithm
         {1}))),
       zeros(ll));
 
-    Ht := if s == "u" then 
+    Ht := if s == "u" then
       Modelica_LinearSystems2.Math.Matrices.Internal.hohoTrafoUpperHess(
       Ht,
       u,
-      ll) else 
+      ll) else
       Modelica_LinearSystems2.Math.Matrices.Internal.hohoTrafoLowerHess(
       Ht,
       u,

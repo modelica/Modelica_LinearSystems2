@@ -96,7 +96,7 @@ algorithm
   numberOfComplexPairs := integer((nx - numberOfRealEigenvalues)/2);
   for i in numberOfRealEigenvalues + 1:numberOfRealEigenvalues +
       numberOfComplexPairs loop
-    gammaSorted[i] := if Im(gammaSorted2[2*i - numberOfRealEigenvalues - 1]) > 0 then 
+    gammaSorted[i] := if Im(gammaSorted2[2*i - numberOfRealEigenvalues - 1]) > 0 then
             gammaSorted2[2*i - numberOfRealEigenvalues - 1] else Complex.conj(
       gammaSorted2[2*i - numberOfRealEigenvalues - 1]);
     gammaSorted[i + numberOfComplexPairs] := Complex.conj(gammaSorted[i]);

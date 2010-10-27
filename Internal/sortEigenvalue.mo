@@ -36,14 +36,14 @@ algorithm
            k2 := j + gap + 1;
            if sortFrequency then
               if ascending then
-                 swap := abs(sorted_ev[k1].ev.im) >  abs(sorted_ev[k2].ev.im) or 
-                         abs(sorted_ev[k1].ev.im) == abs(sorted_ev[k2].ev.im) and 
-                         (sorted_ev[k1].ev.re  > sorted_ev[k2].ev.re or 
+                 swap := abs(sorted_ev[k1].ev.im) >  abs(sorted_ev[k2].ev.im) or
+                         abs(sorted_ev[k1].ev.im) == abs(sorted_ev[k2].ev.im) and
+                         (sorted_ev[k1].ev.re  > sorted_ev[k2].ev.re or
                           sorted_ev[k1].ev.re  == sorted_ev[k2].ev.re and sorted_ev[k1].ev.im < sorted_ev[k2].ev.im);
               else
-                 swap := abs(sorted_ev[k1].ev.im) <  abs(sorted_ev[k2].ev.im) or 
-                         abs(sorted_ev[k1].ev.im) == abs(sorted_ev[k2].ev.im) and 
-                         (sorted_ev[k1].ev.re  < sorted_ev[k2].ev.re or 
+                 swap := abs(sorted_ev[k1].ev.im) <  abs(sorted_ev[k2].ev.im) or
+                         abs(sorted_ev[k1].ev.im) == abs(sorted_ev[k2].ev.im) and
+                         (sorted_ev[k1].ev.re  < sorted_ev[k2].ev.re or
                           sorted_ev[k1].ev.re  == sorted_ev[k2].ev.re and sorted_ev[k1].ev.im < sorted_ev[k2].ev.im);
               end if;
            else
@@ -70,14 +70,14 @@ algorithm
               k2 := j + gap + 1;
               if sortFrequency then
                  if ascending then
-                    swap := abs(sorted_ev[k1].ev.im) >  abs(sorted_ev[k2].ev.im) or 
-                            abs(sorted_ev[k1].ev.im) == abs(sorted_ev[k2].ev.im) and 
-                            (sorted_ev[k1].ev.re  > sorted_ev[k2].ev.re or 
+                    swap := abs(sorted_ev[k1].ev.im) >  abs(sorted_ev[k2].ev.im) or
+                            abs(sorted_ev[k1].ev.im) == abs(sorted_ev[k2].ev.im) and
+                            (sorted_ev[k1].ev.re  > sorted_ev[k2].ev.re or
                              sorted_ev[k1].ev.re  == sorted_ev[k2].ev.re and sorted_ev[k1].ev.im < sorted_ev[k2].ev.im);
                  else
-                    swap := abs(sorted_ev[k1].ev.im) <  abs(sorted_ev[k2].ev.im) or 
-                            abs(sorted_ev[k1].ev.im) == abs(sorted_ev[k2].ev.im) and 
-                            (sorted_ev[k1].ev.re  < sorted_ev[k2].ev.re or 
+                    swap := abs(sorted_ev[k1].ev.im) <  abs(sorted_ev[k2].ev.im) or
+                            abs(sorted_ev[k1].ev.im) == abs(sorted_ev[k2].ev.im) and
+                            (sorted_ev[k1].ev.re  < sorted_ev[k2].ev.re or
                              sorted_ev[k1].ev.re  == sorted_ev[k2].ev.re and sorted_ev[k1].ev.im < sorted_ev[k2].ev.im);
                  end if;
               else

@@ -3,7 +3,7 @@ function ReadSystemDimension2
   "Read the order nx of state matrix and the numbers nu and ny of inputs and outputs"
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Internal.Streams;
-  input String fileName=DataDir + "ss_siso.mat" 
+  input String fileName=DataDir + "ss_siso.mat"
                               annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
   input String matrixName="ABCD"

@@ -25,15 +25,15 @@ model InverseDoublePendulum2 "inverted double pendulum"
     m_load=m_load,
     length=length,
     cartDisturbance=cartDisturbance,
-    bodyDisturbance=bodyDisturbance) 
+    bodyDisturbance=bodyDisturbance)
     annotation (Placement(transformation(extent={{-30,-10},{0,10}})));
-  Modelica.Blocks.Routing.Multiplex6 multiplex6_1 
+  Modelica.Blocks.Routing.Multiplex6 multiplex6_1
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
-  Modelica.Blocks.Interfaces.RealInput dist if cartDisturbance 
+  Modelica.Blocks.Interfaces.RealInput dist if cartDisturbance
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-60,120})));
-  Modelica.Blocks.Interfaces.RealInput dist2 if bodyDisturbance 
+  Modelica.Blocks.Interfaces.RealInput dist2 if bodyDisturbance
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={60,120})));
@@ -42,7 +42,7 @@ model InverseDoublePendulum2 "inverted double pendulum"
         rotation=-90,
         origin={40,-50})));
   Modelica.Blocks.Sources.RealExpression measureDisturbance[6](y={dist1_s,
-        dist2_v,dist3_phi1,dist4_w1,dist5_phi2,dist6_w2}) 
+        dist2_v,dist3_phi1,dist4_w1,dist5_phi2,dist6_w2})
     annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
 Real dist1_s;
 Real dist2_v=0;

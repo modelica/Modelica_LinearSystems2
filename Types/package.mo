@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2;
 package Types "Constants and types with choices, especially to build menus"
-extends Modelica.Icons.Library;
+extends Modelica.Icons.Package;
+
 
 
 annotation (Documentation(info="<HTML>

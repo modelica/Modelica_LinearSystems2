@@ -19,9 +19,9 @@ model DoublePendulum2 "crane trolley system"
     w2_start=w2_start,
     m_trolley=m_trolley,
     m_load=m_load,
-    length=length) 
+    length=length)
     annotation (Placement(transformation(extent={{-30,-10},{0,10}})));
-  Modelica.Blocks.Routing.Multiplex6 multiplex6_1 
+  Modelica.Blocks.Routing.Multiplex6 multiplex6_1
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
 equation
   connect(multiplex6_1.u1[1], doublePendulum.s) annotation (Line(

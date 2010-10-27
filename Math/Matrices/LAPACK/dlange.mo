@@ -10,7 +10,7 @@ protected
   Integer lda=max(1,m);
   Real work[2*m];
 
-external "Fortran 77" dlange2(norm, m, n, A, lda, work, anorm) 
+external "Fortran 77" dlange2(norm, m, n, A, lda, work, anorm)
   annotation (Include="
   #include<f2c.h>
    #include <stdio.h> 

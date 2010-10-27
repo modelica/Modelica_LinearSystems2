@@ -5,7 +5,7 @@ function random "Pseudo random number generator"
     "Integer vector defining random number sequence, e.g., {23,87,187}"                                 annotation (extent=[-85, 15; -15, 85]);
   output Real x "Random number between 0 and 1";
   output Integer seedOut[3]
-    "Modified seed to be used for next call of random()" 
+    "Modified seed to be used for next call of random()"
                                  annotation (extent=[15, 15; 85, 85]);
 algorithm
   seedOut[1] := rem((171*seedIn[1]), 30269);

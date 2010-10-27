@@ -28,6 +28,7 @@ record DiscreteTransferFunction
     "Default constructor for a discrete transfer function"
     import Modelica;
     import Modelica_LinearSystems2.TransferFunction;
+    extends Modelica.Icons.Package;
 
     encapsulated function fromReal
       "Generate a DiscreteTransferFunction data record from a Real value"
@@ -171,6 +172,8 @@ record DiscreteTransferFunction
   end 'constructor';
 
   encapsulated operator '*'
+    import Modelica;
+    extends Modelica.Icons.Package;
   function 'dft*dft' "Multiply two DiscreteTransferFunctions (dtf1 * dtf2)"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
@@ -201,6 +204,8 @@ record DiscreteTransferFunction
   end '*';
 
  encapsulated operator '-'
+   import Modelica;
+   extends Modelica.Icons.Package;
     function subtract "Subtract two discrete transfer functions (dtf1 - dtf2)"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
@@ -217,7 +222,9 @@ record DiscreteTransferFunction
       Polynomial d=Polynomial(dtf1.d)*Polynomial(dtf2.d);
 
     algorithm
-      assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"-.subtract\".");
+      if size(dtf1.n,1)>1 and size(dtf2.n,1)>1 then
+        assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"-.subtract\".");
+      end if;
       result := DiscreteTransferFunction(n=n.c, d=d.c, Ts=dtf1.Ts, method=dtf1.method);
     end subtract;
 
@@ -231,6 +238,8 @@ record DiscreteTransferFunction
  end '-';
 
   encapsulated operator '/'
+    import Modelica;
+    extends Modelica.Icons.Package;
   encapsulated operator function 'dft/dft'
       "Divide two discrete transfer functions (dtf1 / dtf2)"
       import Modelica;
@@ -263,6 +272,8 @@ record DiscreteTransferFunction
   end '/';
 
   encapsulated operator '+'
+    import Modelica;
+    extends Modelica.Icons.Package;
   function 'dtf+dtf'
       "Parallel connection of two discrete transfer functions (= inputs are the same, outputs of the two systems are added)"
       import Modelica;
@@ -384,10 +395,11 @@ record DiscreteTransferFunction
     end 'String';
 
 encapsulated function z "Generate the discrete transfer function z"
+    import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
-
-  output DiscreteTransferFunction dtf(n={1,0}, d={1}) "z";
+  input Modelica.SIunits.Time Ts=0;
+  output DiscreteTransferFunction dtf(n={1,0}, d={1},Ts=Ts) "z";
 algorithm
 
   annotation (Documentation(info="<html>
@@ -412,6 +424,8 @@ Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can b
 end z;
 
 encapsulated package Analysis
+  import Modelica;
+  extends Modelica.Icons.Package;
 
 encapsulated function timeResponse
       "Calculate the time response of a discrete transfer function"
@@ -798,6 +812,8 @@ end denominatorDegree;
 end Analysis;
 
 encapsulated package Conversion
+  import Modelica;
+  extends Modelica.Icons.Package;
 
 encapsulated function toDiscreteZerosAndPoles
       "Generate a DiscreteZerosAndPoles object from a DiscreteTransferFunction object"
@@ -964,6 +980,8 @@ end toDiscreteStateSpace;
 end Conversion;
 
 encapsulated package Plot "Functions to plot state space system responses"
+  import Modelica;
+  extends Modelica.Icons.Package;
 
 encapsulated function bode "Plot discrete transfer function as bode plot"
       import Modelica;
@@ -1322,6 +1340,8 @@ end initialResponse;
 end Plot;
 
 encapsulated package Import
+  import Modelica;
+  extends Modelica.Icons.Package;
 
 function fromModel
       "Generate a DiscreteTransferFunction record array from a state space representation resulted from linearization of a model"

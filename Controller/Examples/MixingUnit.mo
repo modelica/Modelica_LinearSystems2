@@ -34,10 +34,10 @@ model MixingUnit
 
   Modelica.Blocks.Sources.Step Step1(height=c_high_start - c_start, offset=
         c_start,
-    startTime=25) 
+    startTime=25)
     annotation (Placement(transformation(extent={{-134,10},{-114,30}},
           rotation=0)));
-  inner Controller.SampleClock sampleClock 
+  inner Controller.SampleClock sampleClock
     annotation (Placement(transformation(extent={{80,60},{100,80}})));
 equation
   connect(Step1.y, filter.u) annotation (Line(

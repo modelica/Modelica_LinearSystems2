@@ -1,2 +1,4 @@
 analysisEigenvalues
 analysisTimeResponse
+importFromModel
+plotBodeSISO

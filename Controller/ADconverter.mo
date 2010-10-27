@@ -8,7 +8,7 @@ block ADconverter "Analog to digital converter (including sampler)"
 
 protected
   Internal.DiscreteADconverter discretePart(y_max=y_max, y_min=y_min, bits=bits,
-      sampleFactor=sampleFactor) if 
+      sampleFactor=sampleFactor) if
           not continuous "AD converter";
 
 equation

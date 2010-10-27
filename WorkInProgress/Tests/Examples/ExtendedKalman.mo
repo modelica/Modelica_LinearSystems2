@@ -40,16 +40,16 @@ model ExtendedKalman
 // Matrix operation stuff
   Real LU[no_x,no_x] "LU decomposition";
   Integer pivots[no_x] "Pivots of LU decomposition";
-  Modelica.Blocks.Interfaces.RealInput u[no_u] "system inputs" 
+  Modelica.Blocks.Interfaces.RealInput u[no_u] "system inputs"
     annotation (Placement(transformation(extent={{-140,20},{-100,60}})));
   Modelica.Blocks.Interfaces.RealOutput x[no_x] = vector(xm)
-    "corrected system states" 
+    "corrected system states"
     annotation (Placement(transformation(extent={{100,30},{120,50}})));
-  Modelica.Blocks.Interfaces.RealInput y[no_y,1] "system measurements" 
+  Modelica.Blocks.Interfaces.RealInput y[no_y,1] "system measurements"
     annotation (Placement(transformation(extent={{-140,-60},{-100,-20}})));
 
   Modelica.Blocks.Interfaces.RealOutput y_out[no_y]=vector(y_h)
-    "corrected system outputs" 
+    "corrected system outputs"
     annotation (Placement(transformation(extent={{100,-50},{120,-30}})));
 initial equation
   xp = [0;0;0;0];

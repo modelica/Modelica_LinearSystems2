@@ -15,9 +15,9 @@ block ZerosAndPoles
   parameter ZerosAndPoles system "Data defining the ZerosAndPoles object";
   final parameter Integer nx=size(system.d1,1) + 2*size(system.d2,1)
     "Number of states";
-  parameter Real x_start[nx] = zeros(nx) "Initial or guess values of states" 
+  parameter Real x_start[nx] = zeros(nx) "Initial or guess values of states"
     annotation(Dialog(tab="Advanced options"));
-  parameter Real y_start = 0 "Initial or guess values of output" 
+  parameter Real y_start = 0 "Initial or guess values of output"
     annotation(Dialog(tab="Advanced options"));
   Modelica.Blocks.Interfaces.RealOutput x[nx] "State of continuous block";
 

@@ -2,15 +2,15 @@ within Modelica_LinearSystems2.Controller.Examples.Components;
 model MixingUnit1
   "Mixing unit demo from Foellinger, Nichtlineare Regelungen II, p. 280"
   import SI = Modelica.SIunits;
-  Modelica.Blocks.Interfaces.RealInput T_c(unit="K") "Cooling temperature" 
+  Modelica.Blocks.Interfaces.RealInput T_c(unit="K") "Cooling temperature"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
           rotation=0)));
-  Modelica.Blocks.Interfaces.RealOutput c(unit="mol/l") "Concentration" 
+  Modelica.Blocks.Interfaces.RealOutput c(unit="mol/l") "Concentration"
     annotation (Placement(transformation(extent={{100,-20},{140,20}},
           rotation=0)));
 
   Modelica.Blocks.Interfaces.RealOutput T(unit="K")
-    "Temperature in mixing unit" 
+    "Temperature in mixing unit"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
           rotation=-90,
         origin={0,-120})));

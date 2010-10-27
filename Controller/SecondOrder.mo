@@ -11,10 +11,10 @@ block SecondOrder
   parameter Real k=1 "Gain";
   parameter Real w=1 "Angular frequency";
   parameter Real D=1 "Damping";
-  parameter Real y_start=0.0 "Initial or guess value of output (= state)" 
+  parameter Real y_start=0.0 "Initial or guess value of output (= state)"
     annotation(Dialog(tab="Advanced options"));
   parameter Real yd_start=0.0
-    "Initial or guess value of derivative of output (= state)" 
+    "Initial or guess value of derivative of output (= state)"
     annotation(Dialog(tab="Advanced options"));
 
 equation

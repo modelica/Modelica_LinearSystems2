@@ -8,39 +8,39 @@ model Pendular_Testbench_MBD_SR_UKF
     R=diagonal({0.1,2.13e-1}),
     Q=1e-5*identity(size(UKF_SR.x_est_init, 1)),
     G=identity(size(UKF_SR.x_est_init, 1)),
-    redeclare function F_function = 
+    redeclare function F_function =
         Modelica_LinearSystems2.WorkInProgress.Tests.Examples.fSigma,
     alpha=0.1,
     P_init=0.5*identity(size(UKF_SR.x_est_init, 1)),
     kappa=0,
-    redeclare function H_function = 
-        Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma) 
+    redeclare function H_function =
+        Modelica_LinearSystems2.WorkInProgress.Tests.Examples.hSigma)
     annotation (Placement(transformation(extent={{60,0},{80,20}})));
-  CraneMultibody craneWithEquations3_1(d=100, J=0) 
+  CraneMultibody craneWithEquations3_1(d=100, J=0)
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
   Modelica.Blocks.Sources.Sine sine(
     freqHz=0.5,
     amplitude=2000,
     offset=-20,
-    startTime=1) "Force on grap" 
+    startTime=1) "Force on grap"
     annotation (Placement(transformation(extent={{-98,0},{-78,20}})));
   Modelica_LinearSystems2.Controller.Noise noise(y_min=-0.1, y_max=0.1,
-    sampleFactor=3) 
+    sampleFactor=3)
     annotation (Placement(transformation(extent={{-90,-86},{-70,-66}})));
-  Modelica.Blocks.Routing.Multiplex2 multiplex2_1 
+  Modelica.Blocks.Routing.Multiplex2 multiplex2_1
     annotation (Placement(transformation(extent={{20,-50},{40,-30}})));
-  Modelica.Blocks.Math.Add add 
+  Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
-  Modelica.Blocks.Math.Add add1 
+  Modelica.Blocks.Math.Add add1
     annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
   inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(blockType=
         Modelica_LinearSystems2.Controller.Types.BlockType.Discrete, sampleTime=
-       0.005) 
+       0.005)
              annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Modelica_LinearSystems2.Controller.Noise noise1(
     y_min=-0.03,
     y_max=0.03,
-    sampleFactor=8) 
+    sampleFactor=8)
     annotation (Placement(transformation(extent={{-90,-46},{-70,-26}})));
 equation
   connect(sine.y, craneWithEquations3_1.force) annotation (Line(

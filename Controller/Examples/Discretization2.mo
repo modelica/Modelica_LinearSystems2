@@ -5,24 +5,24 @@ model Discretization2
   parameter Real w=20;
   parameter Real D=0.1;
   inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(sampleTime=
-        0.01) 
+        0.01)
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
 
   Modelica_LinearSystems2.Controller.SecondOrder impulseExact(
     D=D,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
     methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ImpulseExact,
-    w=w) 
+    w=w)
     annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
 
-  Modelica_LinearSystems2.Controller.SecondOrder continuous(D=D, w=w) 
+  Modelica_LinearSystems2.Controller.SecondOrder continuous(D=D, w=w)
     annotation (Placement(transformation(extent={{0,10},{20,30}})));
-  Derivative derivative(T=1e-8) 
+  Derivative derivative(T=1e-8)
     annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
   Modelica.Blocks.Sources.Pulse pulse(
     startTime=0.1,
     period=1,
-    width=sampleClock.sampleTime*100) 
+    width=sampleClock.sampleTime*100)
              annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
   Modelica.Blocks.Sources.Step step1(
     startTime=0.1,

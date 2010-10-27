@@ -7,18 +7,18 @@ function FIR_coefficients "Calculates the FIR-filter coefficient vector"
     "Specification type of FIR filter";
   input Integer L(min=2) = 2 "Length of mean value filter" annotation(Dialog(enable=specType==FIRspec.MeanValue));
   input Modelica_LinearSystems2.Types.FilterType filterType=
-      Modelica_LinearSystems2.Types.FilterType.LowPass "Type of filter" 
+      Modelica_LinearSystems2.Types.FilterType.LowPass "Type of filter"
                             annotation(Dialog(enable=specType==FIRspec.Window));
   input Integer order(min=1) = 2 "Order of filter" annotation(Dialog(enable=specType==FIRspec.Window));
   input Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency" annotation(Dialog(enable=specType==FIRspec.Window));
   input Modelica.SIunits.Time Ts(min=0) "Sampling time";
   input Types.Window window=Modelica_LinearSystems2.Controller.Types.Window.Rectangle
     "Type of window" annotation(Dialog(enable=specType==FIRspec.Window));
-  input Real beta=2.12 "Beta-Parameter for Kaiser-window" 
+  input Real beta=2.12 "Beta-Parameter for Kaiser-window"
     annotation(Dialog(enable=specType==FIRspec.Window and window==Modelica_LinearSystems2.Controller.Types.Window.Kaiser));
   input Real a_desired[:]={1,1} "FIR filter coefficients" annotation(Dialog(enable=specType==FIRspec.Coefficients));
-  output Real a[if specType==FIRspec.MeanValue then L else 
-                     (if specType == FIRspec.Window then if mod(order,2)>0 and filterType == FilterType.HighPass then order+2 else order+1 else 
+  output Real a[if specType==FIRspec.MeanValue then L else
+                     (if specType == FIRspec.Window then if mod(order,2)>0 and filterType == FilterType.HighPass then order+2 else order+1 else
                      size(a_desired,1))] "Filter coefficients";
 
 protected
@@ -38,7 +38,7 @@ assert(f_cut<=1/(2*Ts),"The cut-off frequency f_cut may not be greater than half
      for i in 1:order2 + 1 loop
        k := i - 1 - order2/2;
        if i - 1 == order2/2 then
-         a[i] := if filterType == FilterType.LowPass then Wc*w[i]/pi else 
+         a[i] := if filterType == FilterType.LowPass then Wc*w[i]/pi else
                  w[i] - Wc*w[i]/pi;
        else
          a[i] := if filterType == FilterType.LowPass then sin(k*Wc)*

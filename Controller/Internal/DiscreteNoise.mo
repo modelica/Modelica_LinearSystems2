@@ -11,17 +11,17 @@ block DiscreteNoise "Uniform distributed noise for discrete blocks"
   final parameter Modelica.SIunits.Time Ts = sampleClock.sampleTime*sampleFactor
     "Sample time" annotation(Hide=false);
   Modelica.Blocks.Interfaces.RealOutput y
-    "Noise output signal in the range [y_min .. y_max]" 
+    "Noise output signal in the range [y_min .. y_max]"
     annotation (extent=[100, -10; 120, 10]);
 
 protected
   outer SampleClock sampleClock "Global options";
   Integer ticks
     "Actual number of base samples starting from the last sample time instant" annotation(Hide=true);
-  Integer seedState[3] "State of seed" 
+  Integer seedState[3] "State of seed"
                        annotation(Hide=true);
   Boolean sampleTrigger "Triggers next sample time" annotation(Hide=true);
-  discrete Real noise "Noise in the range 0..1" 
+  discrete Real noise "Noise in the range 0..1"
                                        annotation(Hide=true);
   discrete Real y_sampled "Sampled output" annotation(Hide=true);
 equation

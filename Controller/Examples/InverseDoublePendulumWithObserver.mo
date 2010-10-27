@@ -41,26 +41,26 @@ model InverseDoublePendulumWithObserver
     startTime=1,
     width=50,
     period=30,
-    amplitude=5) 
+    amplitude=5)
               annotation (Placement(transformation(extent={{-152,-10},{-132,10}})));
   Components.AccelerationLimiter accelerationLimiter(
     v_limit=20,
     velocityLimitation=false,
     withDelay2=false,
-    a_limit=1) 
+    a_limit=1)
     annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
   Noise noise(
     firstSeed={43,123,162},
     blockType=Types.BlockTypeWithGlobalDefault.Discrete,
     y_min=-0.005,
     y_max=0.005,
-    sampleFactor=200) 
+    sampleFactor=200)
              annotation (Placement(transformation(extent={{14,70},{34,90}})));
   Noise noise1(
     sampleFactor=100,
     blockType=Types.BlockTypeWithGlobalDefault.Discrete,
     y_min=-0.025,
-    y_max=0.025) 
+    y_max=0.025)
     annotation (Placement(transformation(extent={{14,40},{34,60}})));
 
 initial equation

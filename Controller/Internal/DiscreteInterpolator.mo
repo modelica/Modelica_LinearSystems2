@@ -3,16 +3,16 @@ block DiscreteInterpolator
   "Increasing the sampling frequency with linear interpolation"
   extends Interfaces.PartialBlockIcon;
   parameter Integer inputSampleFactor(min=1)=1
-    "Input sample time = inputSampleFactor * sampleClock.sampleTime" 
+    "Input sample time = inputSampleFactor * sampleClock.sampleTime"
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   parameter Integer outputSampleFactor(min=1)=1
     "<html>Output sample time = outputSampleFactor * sampleClock.sampleTime<br>(inputSampleFactor must be an integer multiple of outputSampleFactor)</html>"
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   Modelica.Blocks.Interfaces.RealInput u
-    "Continuous or discrete input signal of block" 
+    "Continuous or discrete input signal of block"
     annotation (extent=[-140, -20; -100, 20]);
   Modelica.Blocks.Interfaces.RealOutput y
-    "Continuous or discrete output signal of block" 
+    "Continuous or discrete output signal of block"
     annotation (extent=[100, -10; 120, 10]);
 protected
   Integer inputOutputSampleFactor = div(inputSampleFactor,outputSampleFactor);
@@ -37,7 +37,7 @@ equation
   when outputSampleTrigger then
      ticks = if pre(ticks) < inputOutputSampleFactor then pre(ticks) + 1 else 1;
      sampleIn = ticks == 1;
-     y = if ticks == 1 then (u - pre(u))/inputOutputSampleFactor + pre(u) else 
+     y = if ticks == 1 then (u - pre(u))/inputOutputSampleFactor + pre(u) else
                              pre(pre_u) + ticks/inputOutputSampleFactor*(pre(u) - pre(pre_u));
   end when;
 

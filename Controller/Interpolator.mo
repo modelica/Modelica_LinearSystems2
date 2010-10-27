@@ -5,14 +5,14 @@ block Interpolator
   import Modelica_LinearSystems2.Controller.Types;
   parameter Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault
     blockType = Types.BlockTypeWithGlobalDefault.UseSampleClockOption
-    "Type of block (Continuous/Discrete)" 
+    "Type of block (Continuous/Discrete)"
     annotation(Evaluate=true, Hide=true);
-  final parameter Boolean continuous = blockType == Types.BlockTypeWithGlobalDefault.Continuous or 
-                                 blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and 
+  final parameter Boolean continuous = blockType == Types.BlockTypeWithGlobalDefault.Continuous or
+                                 blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Continuous
     "= true, if continuous block, otherwise discrete block";
   parameter Integer inputSampleFactor(min=1)=1 if not continuous
-    "Input sample time = inputSampleFactor * sampleClock.sampleTime" 
+    "Input sample time = inputSampleFactor * sampleClock.sampleTime"
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   parameter Integer outputSampleFactor(min=1)=1 if not continuous
     "<html>Output sample time = outputSampleFactor * sampleClock.sampleTime<br>(inputSampleFactor must be an integer multiple of outputSampleFactor)</html>"
@@ -21,10 +21,10 @@ block Interpolator
     "= true and discrete block, linearly interpolated signal is filtered by mean value filter"
     annotation(choices(__Dymola_checkBox=true));
   Modelica.Blocks.Interfaces.RealInput u
-    "Continuous or discrete input signal of block" 
+    "Continuous or discrete input signal of block"
     annotation (extent=[-140, -20; -100, 20]);
   Modelica.Blocks.Interfaces.RealOutput y
-    "Continuous or discrete output signal of block" 
+    "Continuous or discrete output signal of block"
     annotation (extent=[100, -10; 120, 10]);
 
 protected
@@ -32,14 +32,14 @@ protected
 
   Internal.DiscreteInterpolator discreteInterpolator(
      outputSampleFactor = outputSampleFactor,
-     inputSampleFactor = inputSampleFactor) if  not continuous 
+     inputSampleFactor = inputSampleFactor) if  not continuous
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Internal.DiscreteFIR discreteFIR(sampleFactor=outputSampleFactor, a=fill(1/
         div(inputSampleFactor, outputSampleFactor), div(inputSampleFactor,
-        outputSampleFactor))) if                           not continuous and meanValueFilter 
+        outputSampleFactor))) if                           not continuous and meanValueFilter
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Modelica.Blocks.Interfaces.RealOutput y_aux if not continuous and not meanValueFilter
-    "Dummy port, if no filtering desired" 
+    "Dummy port, if no filtering desired"
     annotation (Placement(transformation(extent={{26,20},{46,40}})));
 equation
    if continuous then

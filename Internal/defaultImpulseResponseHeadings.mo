@@ -6,6 +6,6 @@ function defaultImpulseResponseHeadings
   input Integer sizeC1;
   output String heading[sizeC1,sizeB2];
 algorithm
-  heading[:, :] := {{"Impulse response[" + String(i) + "," + String(j) + "]" 
+  heading[:, :] := {{"Impulse response[" + String(i) + "," + String(j) + "]"
     for j in 1:sizeB2} for i in 1:sizeC1};
 end defaultImpulseResponseHeadings;

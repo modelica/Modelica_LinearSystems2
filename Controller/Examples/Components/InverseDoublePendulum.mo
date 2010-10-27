@@ -19,16 +19,16 @@ model InverseDoublePendulum "inverse double pendulum"
   inner Modelica.Mechanics.MultiBody.World world(gravityType=Modelica.Mechanics.MultiBody.Types.GravityTypes.
         UniformGravity,
     animateWorld=false,
-    animateGravity=false) 
+    animateGravity=false)
                         annotation (Placement(transformation(extent={{-140,-80},
             {-120,-60}},
                       rotation=0)));
   Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(useAxisFlange=true,
     s(start=s_start, fixed=true),
     v(fixed=false),
-    animation=false) 
+    animation=false)
     annotation (Placement(transformation(extent={{-96,0},{-76,20}})));
-  Modelica.Mechanics.Translational.Components.Damper damper1(d=0) 
+  Modelica.Mechanics.Translational.Components.Damper damper1(d=0)
     annotation (Placement(transformation(extent={{-96,14},{-76,34}})));
   Modelica.Mechanics.MultiBody.Joints.Revolute revolute1(
     n={0,0,1},
@@ -36,10 +36,10 @@ model InverseDoublePendulum "inverse double pendulum"
     phi(fixed=true, start=phi1_start),
     w(fixed=true, start=w1_start),
     cylinderColor=bodyShape.color,
-    cylinderDiameter=2*bodyCylinder.diameter) 
+    cylinderDiameter=2*bodyCylinder.diameter)
                                annotation (Placement(transformation(extent={{-30,0},
             {-10,20}},      rotation=0)));
-  Modelica.Mechanics.Rotational.Components.Damper damper(d=0) 
+  Modelica.Mechanics.Rotational.Components.Damper damper(d=0)
     annotation (Placement(transformation(extent={{-30,22},{-10,42}},
                                                                    rotation=0)));
   Modelica.Mechanics.MultiBody.Parts.Body body(
@@ -47,7 +47,7 @@ model InverseDoublePendulum "inverse double pendulum"
     r_CM={0,0,0},
     specularCoefficient=4*world.defaultSpecularCoefficient,
     sphereDiameter=1.5*world.defaultBodyDiameter,
-    sphereColor=bodyCylinder1.color) 
+    sphereColor=bodyCylinder1.color)
     annotation (Placement(transformation(extent={{80,0},{100,20}},rotation=0)));
   Modelica.Mechanics.MultiBody.Parts.BodyShape bodyShape(
     m=m_trolley,
@@ -60,23 +60,23 @@ model InverseDoublePendulum "inverse double pendulum"
     r_shape=0.3*revolute1.cylinderDiameter*{0,-1,0},
     width=0.3,
     height=0.5*bodyShape.width,
-    color={0,0,0}) 
+    color={0,0,0})
     annotation (Placement(transformation(extent={{-58,0},{-38,20}})));
-  Modelica.Mechanics.Translational.Sources.Force force 
+  Modelica.Mechanics.Translational.Sources.Force force
     annotation (Placement(transformation(extent={{-98,34},{-78,54}})));
-  Modelica.Mechanics.MultiBody.Sensors.RelativeAngles relativeAngles 
+  Modelica.Mechanics.MultiBody.Sensors.RelativeAngles relativeAngles
     annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
-  Modelica.Mechanics.MultiBody.Sensors.RelativeVelocity relativeVelocity 
+  Modelica.Mechanics.MultiBody.Sensors.RelativeVelocity relativeVelocity
     annotation (Placement(transformation(extent={{-96,-30},{-76,-10}})));
-  Modelica.Mechanics.MultiBody.Sensors.RelativePosition relativePosition 
+  Modelica.Mechanics.MultiBody.Sensors.RelativePosition relativePosition
     annotation (Placement(transformation(extent={{-96,-60},{-76,-40}})));
   Modelica.Mechanics.MultiBody.Sensors.RelativeAngularVelocity
-    relativeAngularVelocity 
+    relativeAngularVelocity
     annotation (Placement(transformation(extent={{-30,-60},{-10,-40}})));
 
-  Modelica.Blocks.Sources.Constant const(k=-0.5*Modelica.Constants.pi) 
+  Modelica.Blocks.Sources.Constant const(k=-0.5*Modelica.Constants.pi)
     annotation (Placement(transformation(extent={{94,-22},{106,-10}})));
-  Modelica.Blocks.Math.Add add 
+  Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{116,-10},{136,10}})));
   Modelica.Mechanics.MultiBody.Joints.Revolute revolute2(
     phi(fixed=true, start=phi2_start),
@@ -85,58 +85,58 @@ model InverseDoublePendulum "inverse double pendulum"
     cylinderDiameter=2*bodyCylinder.diameter,
     cylinderColor=bodyCylinder.color)                    annotation (Placement(transformation(extent={{24,0},{
             44,20}}, rotation=0)));
-  Modelica.Mechanics.MultiBody.Sensors.RelativeAngles relativeAngles1 
+  Modelica.Mechanics.MultiBody.Sensors.RelativeAngles relativeAngles1
     annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
   Modelica.Mechanics.MultiBody.Sensors.RelativeAngularVelocity
-    relativeAngularVelocity1 
+    relativeAngularVelocity1
     annotation (Placement(transformation(extent={{24,-60},{44,-40}})));
-  Modelica.Blocks.Sources.Constant const1(k=0) 
+  Modelica.Blocks.Sources.Constant const1(k=0)
     annotation (Placement(transformation(extent={{66,-62},{78,-50}})));
-  Modelica.Blocks.Math.Add add1 
+  Modelica.Blocks.Math.Add add1
     annotation (Placement(transformation(extent={{88,-50},{108,-30}})));
-  Modelica.Blocks.Interfaces.RealInput u 
+  Modelica.Blocks.Interfaces.RealInput u
     annotation (Placement(transformation(extent={{-190,-20},{-150,20}})));
-  Modelica.Blocks.Interfaces.RealOutput s 
+  Modelica.Blocks.Interfaces.RealOutput s
     annotation (Placement(transformation(extent={{150,90},{170,110}})));
-  Modelica.Blocks.Interfaces.RealOutput v 
+  Modelica.Blocks.Interfaces.RealOutput v
     annotation (Placement(transformation(extent={{150,50},{170,70}})));
- Modelica.Blocks.Interfaces.RealOutput phi 
+ Modelica.Blocks.Interfaces.RealOutput phi
     annotation (Placement(transformation(extent={{150,10},{170,30}})));
-  Modelica.Blocks.Interfaces.RealOutput w 
+  Modelica.Blocks.Interfaces.RealOutput w
     annotation (Placement(transformation(extent={{150,-30},{170,-10}})));
- Modelica.Blocks.Interfaces.RealOutput phi1 
+ Modelica.Blocks.Interfaces.RealOutput phi1
     annotation (Placement(transformation(extent={{150,-70},{170,-50}})));
-  Modelica.Blocks.Interfaces.RealOutput w1 
+  Modelica.Blocks.Interfaces.RealOutput w1
     annotation (Placement(transformation(extent={{150,-110},{170,-90}})));
   Modelica.Mechanics.MultiBody.Parts.BodyCylinder bodyCylinder(
     r={length/2,0,0},
     specularCoefficient=0.7,
     diameter=0.03,
     density=1000,
-    color={0,128,0}) 
+    color={0,128,0})
     annotation (Placement(transformation(extent={{-2,0},{18,20}})));
   Modelica.Mechanics.MultiBody.Parts.BodyCylinder bodyCylinder1(
     r={length/2,0,0},
     specularCoefficient=0.7,
     diameter=0.03,
     density=1000,
-    color={0,0,255}) 
+    color={0,0,255})
     annotation (Placement(transformation(extent={{52,0},{72,20}})));
-  Modelica.Blocks.Interfaces.RealInput dist if cartDisturbance 
+  Modelica.Blocks.Interfaces.RealInput dist if cartDisturbance
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-80,120})));
-  Modelica.Mechanics.Translational.Sources.Force distrubanceForceCart if cartDisturbance 
+  Modelica.Mechanics.Translational.Sources.Force distrubanceForceCart if cartDisturbance
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-80,74})));
-  Modelica.Blocks.Interfaces.RealInput dist2 if bodyDisturbance 
+  Modelica.Blocks.Interfaces.RealInput dist2 if bodyDisturbance
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={80,120})));
-  Modelica.Mechanics.MultiBody.Forces.Torque torque if bodyDisturbance 
+  Modelica.Mechanics.MultiBody.Forces.Torque torque if bodyDisturbance
     annotation (Placement(transformation(extent={{42,64},{62,84}})));
-  Modelica.Blocks.Sources.Constant const2[2](k={0,0}) if bodyDisturbance 
+  Modelica.Blocks.Sources.Constant const2[2](k={0,0}) if bodyDisturbance
     annotation (Placement(transformation(extent={{-4,75},{16,95}})));
   Modelica.Mechanics.MultiBody.Visualizers.FixedShape fixedShape1(
     shapeType="cylinder",
@@ -146,7 +146,7 @@ model InverseDoublePendulum "inverse double pendulum"
     width=bodyCylinder1.diameter,
     height=bodyCylinder1.diameter,
     color=bodyCylinder1.color,
-    r_shape=-0.5*fixedShape1.length*fixedShape1.lengthDirection) 
+    r_shape=-0.5*fixedShape1.length*fixedShape1.lengthDirection)
     annotation (Placement(transformation(extent={{52,20},{72,40}})));
   Modelica.Mechanics.MultiBody.Visualizers.FixedShape fixedShape(
     shapeType="cylinder",
@@ -156,7 +156,7 @@ model InverseDoublePendulum "inverse double pendulum"
     width=bodyCylinder.diameter,
     height=bodyCylinder.diameter,
     color=bodyCylinder.color,
-    r_shape=-0.5*fixedShape.length*fixedShape.lengthDirection) 
+    r_shape=-0.5*fixedShape.length*fixedShape.lengthDirection)
     annotation (Placement(transformation(extent={{0,20},{20,40}})));
   Modelica.Mechanics.MultiBody.Visualizers.FixedShape fixedShape2(
     lengthDirection={0,-1,0},
@@ -166,17 +166,17 @@ model InverseDoublePendulum "inverse double pendulum"
     length=0.5*bodyShape.length,
     width=50*bodyShape.width,
     r_shape=bodyShape.r_shape + 0.5*(bodyShape.length - fixedShape2.length)*{200,
-        -1,0}) 
+        -1,0})
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
 equation
-  connect(damper.flange_b, revolute1.axis) 
+  connect(damper.flange_b, revolute1.axis)
                                      annotation (Line(points={{-10,32},{-8,32},
           {-8,22},{-8,20},{-20,20}},
                                   color={0,0,0}));
-  connect(revolute1.support, damper.flange_a) 
+  connect(revolute1.support, damper.flange_a)
                                         annotation (Line(points={{-26,20},{-26,
           20},{-34,20},{-34,32},{-30,32}}, color={0,0,0}));
-  connect(bodyShape.frame_b, revolute1.frame_a) 
+  connect(bodyShape.frame_b, revolute1.frame_a)
                                           annotation (Line(
       points={{-38,10},{-30,10}},
       color={95,95,95},
@@ -224,13 +224,13 @@ equation
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
-  connect(relativeAngles.frame_b, revolute1.frame_b) 
+  connect(relativeAngles.frame_b, revolute1.frame_b)
                                                annotation (Line(
       points={{-10,-20},{-10,10}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
-  connect(relativeAngles.frame_a, revolute1.frame_a) 
+  connect(relativeAngles.frame_a, revolute1.frame_a)
                                                annotation (Line(
       points={{-30,-20},{-30,10}},
       color={95,95,95},
@@ -292,19 +292,19 @@ equation
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
-  connect(relativeAngles1.frame_a, relativeAngularVelocity1.frame_a) 
+  connect(relativeAngles1.frame_a, relativeAngularVelocity1.frame_a)
     annotation (Line(
       points={{24,-20},{24,-50}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
-  connect(relativeAngularVelocity1.frame_b, relativeAngles1.frame_b) 
+  connect(relativeAngularVelocity1.frame_b, relativeAngles1.frame_b)
     annotation (Line(
       points={{44,-50},{44,-20}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
-  connect(const1.y, add1.u2) 
+  connect(const1.y, add1.u2)
                            annotation (Line(
       points={{78.6,-56},{82,-56},{82,-46},{86,-46}},
       color={0,0,127},
@@ -326,7 +326,7 @@ equation
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
-  connect(bodyCylinder.frame_a, revolute1.frame_b) 
+  connect(bodyCylinder.frame_a, revolute1.frame_b)
                                              annotation (Line(
       points={{-2,10},{-10,10}},
       color={95,95,95},

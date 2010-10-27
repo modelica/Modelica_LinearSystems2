@@ -29,27 +29,27 @@ model InverseDoublePendulum "Controlled inverse double pendulum"
     startTime=1,
     period=20,
     width=50,
-    amplitude=10) 
+    amplitude=10)
               annotation (Placement(transformation(extent={{-130,-10},{-110,10}})));
   Components.AccelerationLimiter accelerationLimiter(
     v_limit=20,
     velocityLimitation=false,
     withDelay2=false,
-    a_limit=4) 
+    a_limit=4)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   Noise noise(
     firstSeed={43,123,162},
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
     y_min=-0.05,
     y_max=0.05,
-    sampleFactor=50) 
+    sampleFactor=50)
              annotation (Placement(transformation(extent={{-2,60},{18,80}})));
 
   Noise noise1(
     y_min=-0.5,
     y_max=0.5,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
-    sampleFactor=50) 
+    sampleFactor=50)
     annotation (Placement(transformation(extent={{0,30},{20,50}})));
 
 equation

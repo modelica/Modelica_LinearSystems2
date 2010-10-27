@@ -5,9 +5,9 @@ model Add
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={0,80})));
-  Modelica.Blocks.Interfaces.RealInput u2 
+  Modelica.Blocks.Interfaces.RealInput u2
     annotation (Placement(transformation(extent={{-100,-20},{-60,20}})));
-  Modelica.Blocks.Interfaces.RealOutput y 
+  Modelica.Blocks.Interfaces.RealOutput y
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
 equation
 y = u1+u2;

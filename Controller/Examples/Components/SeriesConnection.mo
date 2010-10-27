@@ -13,7 +13,7 @@ model SeriesConnection "Series connection of two PT1 blocks"
   inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(
       blockType=blockType,
     methodType=methodType,
-    sampleTime=sampleTime) 
+    sampleTime=sampleTime)
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
   Modelica.Blocks.Sources.Step step(
     height=1.2,
@@ -21,16 +21,16 @@ model SeriesConnection "Series connection of two PT1 blocks"
     startTime=0.1)                   annotation (extent=[-80,40; -60,60],
       Placement(transformation(extent={{-80,20},{-60,40}})));
 
-  FirstOrder S1(T=T1) 
+  FirstOrder S1(T=T1)
             annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
-  FirstOrder S2(T=T2) 
+  FirstOrder S2(T=T2)
             annotation (Placement(transformation(extent={{0,20},{20,40}})));
   ZerosAndPoles S12(system=
         Modelica_LinearSystems2.ZerosAndPoles.'constructor'.fromZerosAndPoles(p=
         {Modelica_LinearSystems2.Math.Complex(re=-1/T1, im=0),
-        Modelica_LinearSystems2.Math.Complex(re=-1/T2, im=0)}, k=1/(T1*T2))) 
+        Modelica_LinearSystems2.Math.Complex(re=-1/T2, im=0)}, k=1/(T1*T2)))
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
-  Modelica.Blocks.Math.Feedback diff 
+  Modelica.Blocks.Math.Feedback diff
     annotation (Placement(transformation(extent={{30,20},{50,40}})));
 
 equation

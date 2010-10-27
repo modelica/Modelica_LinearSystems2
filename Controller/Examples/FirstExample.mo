@@ -17,12 +17,12 @@ model FirstExample "First example to demonstrate representative block"
       B=[0; w*w],
       C=[1,0],
       D=[0]),
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption) 
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption)
                                                               annotation (extent=[-40,40;
         -20,60], Placement(transformation(extent={{-20,40},{0,60}})));
 
   TransferFunction transferFunction(system(n={1,2}, d={1,2,3}), blockType=
-        Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption) 
+        Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption)
     annotation (Placement(transformation(extent={{-20,0},{0,20}})));
   ZerosAndPoles zerosAndPoles(system(
       n1={1},
@@ -31,10 +31,10 @@ model FirstExample "First example to demonstrate representative block"
           0,
           2),
       d1=fill(0, 0),
-      d2=[1,1; 1,1]), blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption) 
+      d2=[1,1; 1,1]), blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption)
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
   inner SampleClock sampleClock(
-      sampleTime=0.1, blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous) 
+      sampleTime=0.1, blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous)
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
 equation
   connect(step.y, stateSpace.u[1])      annotation (Line(

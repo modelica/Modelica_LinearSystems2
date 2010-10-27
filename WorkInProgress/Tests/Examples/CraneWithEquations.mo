@@ -12,13 +12,13 @@ model CraneWithEquations
   SI.Position s1;
   SI.Velocity v1 "horizontal velocity of crane";
 
-  Modelica.Blocks.Interfaces.RealInput force 
+  Modelica.Blocks.Interfaces.RealInput force
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
           rotation=0)));
-  Modelica.Blocks.Interfaces.RealOutput y1 "Horziontal position of crab" 
+  Modelica.Blocks.Interfaces.RealOutput y1 "Horziontal position of crab"
     annotation (Placement(transformation(extent={{100,50},{120,70}},
           rotation=0)));
-  Modelica.Blocks.Interfaces.RealOutput y2 "horizontal position of load" 
+  Modelica.Blocks.Interfaces.RealOutput y2 "horizontal position of load"
     annotation (Placement(transformation(extent={{100,-70},{120,-50}},
           rotation=0)));
 equation

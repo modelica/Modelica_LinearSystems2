@@ -9,17 +9,17 @@ block Noise
     each max=255) = {23,87,187} if                                          not continuous
     "Integer[3] defining random sequence; required element range: 0..255";
   parameter Types.BlockTypeWithGlobalDefault blockType=Types.BlockTypeWithGlobalDefault.UseSampleClockOption
-    "Type of block (Continuous/Discrete)" 
+    "Type of block (Continuous/Discrete)"
     annotation(Evaluate=true, Hide=true);
   final parameter Boolean continuous=blockType == Types.BlockTypeWithGlobalDefault.Continuous
        or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption
        and sampleClock.blockType == Types.BlockType.Continuous
     "= true, if continuous block, otherwise discrete block";
-  parameter Integer sampleFactor(min=1) = 1 if 
+  parameter Integer sampleFactor(min=1) = 1 if
                                              not continuous
-    "Ts=sampleClock.sampleTime*sampleFactor" 
+    "Ts=sampleClock.sampleTime*sampleFactor"
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
-  Modelica.Blocks.Interfaces.RealOutput y "Discrete output signal of block" 
+  Modelica.Blocks.Interfaces.RealOutput y "Discrete output signal of block"
     annotation (extent=[100, -10; 120, 10]);
 
 protected

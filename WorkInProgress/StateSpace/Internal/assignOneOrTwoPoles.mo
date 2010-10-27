@@ -186,7 +186,7 @@ algorithm
     else
       system_ev := Complex.eigenValues(F);
       Modelica.Utilities.Streams.print("\n A subsystem (F, G) in StateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
-      That is, " + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then " + " else 
+      That is, " + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then " + " else
               " - ") + String(system_ev[1].im) + "j and " + String(system_ev[2].re)
          + (if abs(system_ev[2].im) > 0 then " + " else " - ") + String(
         system_ev[2].im) + "j remain and " + String(gamma[1].re) + (if abs(

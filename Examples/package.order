@@ -1,5 +1,7 @@
 StateSpace
 TransferFunction
 ZerosAndPoles
-Utilities
 DiscreteStateSpace
+DiscreteZerosAndPoles
+DiscreteTransferFunction
+Utilities

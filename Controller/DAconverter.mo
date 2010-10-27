@@ -13,7 +13,7 @@ protected
     y_min=y_min,
     bits=bits,
     unitDelay=unitDelay,
-    sampleFactor=sampleFactor) if 
+    sampleFactor=sampleFactor) if
           not continuous "AD converter";
 equation
   if continuous then

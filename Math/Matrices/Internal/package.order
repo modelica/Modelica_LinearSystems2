@@ -25,3 +25,4 @@ symMatMul
 symMatMul_C
 solve2rSym
 solve2rSym_C
+reorderRSF2

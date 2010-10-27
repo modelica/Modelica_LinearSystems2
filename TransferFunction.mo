@@ -20,6 +20,7 @@ record TransferFunction
     "Default constructor for a transfer function"
     import Modelica;
     import Modelica_LinearSystems2.TransferFunction;
+    extends Modelica.Icons.Package;
 
     function fromReal
       "Generate a TransferFunction data record from a Real value"
@@ -138,6 +139,8 @@ follow each other as above. An error occurs if this is not the case.
   end 'constructor';
 
   encapsulated operator '-'
+    import Modelica;
+    extends Modelica.Icons.Package;
     function subtract "Subtract two TransferFunctions (tf1 - tf2)"
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
@@ -302,6 +305,12 @@ Generate the complex Laplace variable as a TransferFunction. It can be used for 
   end s;
 
   encapsulated package Analysis
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.TransferFunction;
+    import Modelica_LinearSystems2.Types.TimeResponse;
+    extends Modelica.Icons.Package;
     function analysis
       "Make a system analysis based on the poles and zeros of the system"
 
@@ -414,11 +423,6 @@ Generate the complex Laplace variable as a TransferFunction. It can be used for 
 
       annotation (interactive=true);
     end analysis;
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.TransferFunction;
-    import Modelica_LinearSystems2.Types.TimeResponse;
 
    encapsulated function timeResponse
       "Calculate the time response of a transfer function"
@@ -1419,6 +1423,8 @@ of a transfer function.
   end Analysis;
 
   encapsulated package Design
+    import Modelica;
+    extends Modelica.Icons.Package;
     encapsulated function filter
       "Generate the data record of a ZerosAndPoles transfer function from a filter description"
 
@@ -1512,6 +1518,7 @@ of a transfer function.
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.TransferFunction;
     import Modelica_LinearSystems2.ZerosAndPoles;
+    extends Modelica.Icons.Package;
 
   encapsulated function polesAndZeros
       "Plot poles and/or the zeros of a transfer function"
@@ -2112,6 +2119,8 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
   end Plot;
 
   encapsulated package Conversion
+    import Modelica;
+    extends Modelica.Icons.Package;
     encapsulated function toZerosAndPoles
       "Generate a ZerosAndPoles object from a TransferFunction object"
       import Modelica;
@@ -2425,6 +2434,8 @@ is defined slightly differently.
   end Conversion;
 
   encapsulated package Import
+    import Modelica;
+    extends Modelica.Icons.Package;
 
   function fromModel
       "Generate a TransferFunction record array from a state space representation resulted from linearization of a model"

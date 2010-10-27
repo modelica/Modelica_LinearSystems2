@@ -5,20 +5,20 @@ block StateSpace "Continuous or discrete state space system block"
     A=fill(0, 0, 0),
     B=fill(0, 0, 1),
     C=fill(0, 1, 0),
-    D=fill(0, 1, 1)) "Continuous linear time-invariant system" 
+    D=fill(0, 1, 1)) "Continuous linear time-invariant system"
                                               annotation(Dialog(enable=continuous));
   extends Interfaces.PartialSampledBlock;
-  parameter Real x_start[nx]=zeros(nx) "Initial or guess values of states" 
+  parameter Real x_start[nx]=zeros(nx) "Initial or guess values of states"
     annotation(Dialog(tab="Advanced options"));
   parameter Real y_start[ny]=zeros(ny)
     "Initial values of outputs (remaining states are in steady state if possible)"
                                                                                      annotation(Dialog(tab="Advanced options"));
   Modelica.Blocks.Interfaces.RealInput u[size(system.B, 2)]
-    "Continuous or discrete input signals of block" 
+    "Continuous or discrete input signals of block"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
           rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput y[size(system.C, 1)]
-    "Continuous or discrete output signals of block" 
+    "Continuous or discrete output signals of block"
     annotation (Placement(transformation(extent={{100,-10},{120,10}}, rotation=
             0)));
   Modelica.Blocks.Interfaces.RealOutput x[nx](start=x_start)

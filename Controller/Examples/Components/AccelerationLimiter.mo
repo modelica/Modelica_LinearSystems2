@@ -9,53 +9,53 @@ block AccelerationLimiter
     "maximal absolute acceleration";
 
   parameter Real y1_start=0 "start value of integrtor1" annotation(Evaluate=true,Dialog(tab="Advanced options",group = "integrator1"));
-  parameter Boolean withDelay1=blockType==Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and 
+  parameter Boolean withDelay1=blockType==Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Discrete
     "delays the input of integrator1" annotation(Evaluate=true,Dialog(tab="Advanced options",group = "integrator1",
-                enable=blockType==Modelica_Controller.Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and 
+                enable=blockType==Modelica_Controller.Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Discrete));
   parameter Real y2_start=0 "start value of integrtor2" annotation(Evaluate=true,Dialog(tab="Advanced options",group = "integrator2"));
-  parameter Boolean withDelay2=blockType==Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and 
+  parameter Boolean withDelay2=blockType==Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Discrete
     "delays the input of integrator2"  annotation(Dialog(tab="Advanced options",group = "integrator2",
-                enable=blockType==Modelica_Controller.Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and 
+                enable=blockType==Modelica_Controller.Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Discrete));
 
-  Modelica.Blocks.Math.Feedback feedback 
+  Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(extent={{-85,5},{-75,-5}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=v_limit) if velocityLimitation 
+  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=v_limit) if velocityLimitation
     annotation (Placement(transformation(extent={{-44,5},{-34,15}})));
-  Modelica.Blocks.Math.Gain gain(k=1) if not velocityLimitation 
+  Modelica.Blocks.Math.Gain gain(k=1) if not velocityLimitation
     annotation (Placement(transformation(extent={{-44,-16},{-34,-6}})));
   Integrator integrator1(
     k=1,
     withDelay=withDelay1,
-    y_start=y1_start) 
+    y_start=y1_start)
     annotation (Placement(transformation(extent={{34,-6},{46,6}})));
-  Modelica.Blocks.Math.Feedback feedback1 
+  Modelica.Blocks.Math.Feedback feedback1
     annotation (Placement(transformation(extent={{-25,5},{-15,-5}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter2(uMax=a_limit) 
+  Modelica.Blocks.Nonlinear.Limiter limiter2(uMax=a_limit)
     annotation (Placement(transformation(extent={{-6,-5},{4,5}})));
-  Modelica.Blocks.Interfaces.RealInput u 
+  Modelica.Blocks.Interfaces.RealInput u
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Interfaces.RealOutput s 
+  Modelica.Blocks.Interfaces.RealOutput s
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
-  Modelica.Blocks.Interfaces.RealOutput v 
+  Modelica.Blocks.Interfaces.RealOutput v
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealOutput a 
+  Modelica.Blocks.Interfaces.RealOutput a
     annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
-  Modelica.Blocks.Math.Abs abs1 
+  Modelica.Blocks.Math.Abs abs1
     annotation (Placement(transformation(extent={{25,35},{15,45}})));
-  Modelica.Blocks.Math.Product product 
+  Modelica.Blocks.Math.Product product
     annotation (Placement(transformation(extent={{5,55},{-5,65}})));
-  Modelica.Blocks.Math.Gain gain1(k=1/(2*a_limit)) 
+  Modelica.Blocks.Math.Gain gain1(k=1/(2*a_limit))
     annotation (Placement(transformation(extent={{-16,55},{-26,65}})));
-  Internal.Add add 
+  Internal.Add add
     annotation (Placement(transformation(extent={{-55,55},{-65,65}})));
   Integrator integrator2(
     k=1,
     withDelay=withDelay2,
-    y_start=y2_start) 
+    y_start=y2_start)
     annotation (Placement(transformation(extent={{74,-6},{86,6}})));
 equation
   connect(feedback.y, limiter1.u) annotation (Line(

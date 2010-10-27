@@ -4,7 +4,7 @@ block Sampler
   extends Interfaces.PartialSISO_equality;
 
 protected
-  Internal.DiscreteSampler discretePart(sampleFactor=sampleFactor) if 
+  Internal.DiscreteSampler discretePart(sampleFactor=sampleFactor) if
           not continuous "Discrete sampler";
 equation
   if continuous then

@@ -5,20 +5,20 @@ partial block PartialSISO_equality
   import Modelica_LinearSystems2.Controller.Types;
   parameter Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault
     blockType =                                                                           Types.BlockTypeWithGlobalDefault.UseSampleClockOption
-    "Type of block (Continuous/Discrete)" 
+    "Type of block (Continuous/Discrete)"
     annotation(Evaluate=true, Hide=true);
-  final parameter Boolean continuous = blockType == Types.BlockTypeWithGlobalDefault.Continuous or 
-                                 blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and 
+  final parameter Boolean continuous = blockType == Types.BlockTypeWithGlobalDefault.Continuous or
+                                 blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Continuous
     "= true, if continuous block, otherwise discrete block";
   parameter Integer sampleFactor(min=1)=1 if not continuous
-    "Sample time = sampleFactor * sampleClock.sampleTime" 
+    "Sample time = sampleFactor * sampleClock.sampleTime"
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   Modelica.Blocks.Interfaces.RealInput u
-    "Continuous or discrete input signal of block" 
+    "Continuous or discrete input signal of block"
     annotation (extent=[-140, -20; -100, 20]);
   Modelica.Blocks.Interfaces.RealOutput y
-    "Continuous or discrete output signal of block" 
+    "Continuous or discrete output signal of block"
     annotation (extent=[100, -10; 120, 10]);
 
 protected

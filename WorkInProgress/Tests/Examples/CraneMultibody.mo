@@ -8,23 +8,23 @@ model CraneMultibody
   parameter SI.Acceleration g = 9.81 "Gravity acceleration";
   parameter Real d=1e6 "damping";
   parameter Real J=100;
-  Modelica.Blocks.Interfaces.RealInput force 
+  Modelica.Blocks.Interfaces.RealInput force
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
           rotation=0)));
-      Modelica.Blocks.Interfaces.RealOutput x1 "Angle of pendulum" 
+      Modelica.Blocks.Interfaces.RealOutput x1 "Angle of pendulum"
     annotation (Placement(transformation(extent={{100,42},{120,62}},
           rotation=0), iconTransformation(extent={{100,80},{120,100}})));
-    Modelica.Blocks.Interfaces.RealOutput x2 "Angular velocity of pendulum" 
+    Modelica.Blocks.Interfaces.RealOutput x2 "Angular velocity of pendulum"
     annotation (Placement(transformation(extent={{100,12},{120,32}},
           rotation=0), iconTransformation(extent={{100,32},{120,52}})));
-    Modelica.Blocks.Interfaces.RealOutput x3 "Horziontal position of crab" 
+    Modelica.Blocks.Interfaces.RealOutput x3 "Horziontal position of crab"
     annotation (Placement(transformation(extent={{100,-12},{120,8}},
           rotation=0), iconTransformation(extent={{100,-12},{120,8}})));
-    Modelica.Blocks.Interfaces.RealOutput x4 "Horziontal velocity of crab" 
+    Modelica.Blocks.Interfaces.RealOutput x4 "Horziontal velocity of crab"
     annotation (Placement(transformation(extent={{100,60},{120,80}},
           rotation=0), iconTransformation(extent={{100,-56},{120,-36}})));
 
-    Modelica.Blocks.Interfaces.RealOutput y1 "horizontal position of load" 
+    Modelica.Blocks.Interfaces.RealOutput y1 "horizontal position of load"
     annotation (Placement(transformation(extent={{100,-100},{120,-80}},
           rotation=0), iconTransformation(extent={{100,-100},{120,-80}})));
 
@@ -34,18 +34,18 @@ model CraneMultibody
     animateGravity=false) annotation (Placement(transformation(extent={{-72,
             -40},{-52,-20}}, rotation=0)));
   Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(        animation=
-       false, useAxisFlange=true) 
+       false, useAxisFlange=true)
               annotation (Placement(transformation(extent={{-32,-40},{-12,
             -20}}, rotation=0)));
-  Modelica.Mechanics.MultiBody.Joints.Revolute revolute(useAxisFlange=true) 
+  Modelica.Mechanics.MultiBody.Joints.Revolute revolute(useAxisFlange=true)
     annotation (Placement(transformation(extent={{8,-40},{28,-20}},
           rotation=0)));
   Modelica.Mechanics.Rotational.Components.Damper damper(
-                                              d=d) 
+                                              d=d)
     annotation (Placement(transformation(extent={{6,-20},{26,0}},  rotation=
            0)));
   Modelica.Mechanics.Translational.Components.Mass mass(
-                                                    m=m_crab) 
+                                                    m=m_crab)
     annotation (Placement(transformation(extent={{-38,-10},{-18,10}},
           rotation=0)));
   Modelica.Mechanics.MultiBody.Parts.Body body(
@@ -54,14 +54,14 @@ model CraneMultibody
     I_22=0,
     I_33=J) annotation (Placement(transformation(extent={{72,-40},{92,-20}},
           rotation=0)));
-  Modelica.Mechanics.Translational.Sources.Force Force1 
+  Modelica.Mechanics.Translational.Sources.Force Force1
     annotation (Placement(transformation(extent={{-78,-10},{-58,10}},
           rotation=0)));
-  Modelica.Mechanics.Translational.Sensors.PositionSensor crabPosition 
+  Modelica.Mechanics.Translational.Sensors.PositionSensor crabPosition
     annotation (Placement(transformation(extent={{10,82},{30,102}},
                                                                   rotation=
             0)));
-  Modelica.Mechanics.MultiBody.Parts.FixedTranslation translation(r={0,-l,0}) 
+  Modelica.Mechanics.MultiBody.Parts.FixedTranslation translation(r={0,-l,0})
     annotation (Placement(transformation(extent={{40,-40},{60,-20}},
           rotation=0)));
   Modelica.Mechanics.MultiBody.Visualizers.FixedShape box2(
@@ -78,15 +78,15 @@ model CraneMultibody
     width=0.05,
     height=0.05) annotation (Placement(transformation(extent={{-12,-98},{8,-78}},
                    rotation=0)));
-  Modelica.Mechanics.Rotational.Sensors.RelAngleSensor relAngleSensor 
+  Modelica.Mechanics.Rotational.Sensors.RelAngleSensor relAngleSensor
     annotation (Placement(transformation(extent={{6,50},{26,30}})));
 
-  Modelica.Mechanics.Rotational.Sensors.RelSpeedSensor relSpeedSensor 
+  Modelica.Mechanics.Rotational.Sensors.RelSpeedSensor relSpeedSensor
     annotation (Placement(transformation(extent={{6,20},{26,0}})));
-  Modelica.Mechanics.Translational.Sensors.SpeedSensor speedSensor 
+  Modelica.Mechanics.Translational.Sensors.SpeedSensor speedSensor
     annotation (Placement(transformation(extent={{10,60},{30,80}})));
 
-  Modelica.Mechanics.MultiBody.Sensors.RelativePosition relativePosition 
+  Modelica.Mechanics.MultiBody.Sensors.RelativePosition relativePosition
     annotation (Placement(transformation(extent={{36,-84},{56,-64}})));
 equation
   connect(world.frame_b, prismatic.frame_a) annotation (Line(

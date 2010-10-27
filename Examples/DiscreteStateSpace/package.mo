@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Examples;
 package DiscreteStateSpace "Package with examples to demonstrate the usage of the DiscreteStateSpace record"
+    extends Modelica.Icons.ExamplesPackage;
 
 
 annotation (Documentation(info="<html>

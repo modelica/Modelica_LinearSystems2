@@ -7,13 +7,13 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
     "Specification type of FIR filter" annotation(Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous));
   parameter Integer L(min=2) = 2 "Length of mean value filter" annotation(Dialog(group="Mean value filter",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.MeanValue));
   parameter Modelica_LinearSystems2.Types.FilterType filterType=
-      Modelica_LinearSystems2.Types.FilterType.LowPass "Type of filter" 
+      Modelica_LinearSystems2.Types.FilterType.LowPass "Type of filter"
                             annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
   parameter Integer order(min=1) = 2 "Order of filter" annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
   parameter Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency" annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
   parameter Types.Window window=Modelica_LinearSystems2.Controller.Types.Window.Rectangle
     "Type of window" annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
-  parameter Real beta=2.12 "Beta-Parameter for Kaiser-window" 
+  parameter Real beta=2.12 "Beta-Parameter for Kaiser-window"
     annotation(Dialog(group="FIR filter design",enable=blockType<>BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window and window==Modelica_LinearSystems2.Controller.Types.Window.Kaiser));
   parameter Real a[:]={1,1} "FIR filter coefficients" annotation(Dialog(group="FIR filter defined by coefficient vector",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Coefficients));
 

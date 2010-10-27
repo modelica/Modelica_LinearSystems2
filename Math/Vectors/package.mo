@@ -1,6 +1,13 @@
 within Modelica_LinearSystems2.Math;
 package Vectors "Functions operating on vectors"
-extends Modelica.Icons.Library;
+extends Modelica.Icons.Package;
+
+
+
+
+
+
+
 
 
 annotation (Documentation(info="<HTML>

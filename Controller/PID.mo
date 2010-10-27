@@ -4,10 +4,10 @@ block PID "PID-controller in additive description form"
 
 extends Interfaces.PartialSampledBlock;
   Modelica.Blocks.Interfaces.RealInput u
-    "Continuous or discrete input signal of block" 
+    "Continuous or discrete input signal of block"
     annotation (extent=[-140, -20; -100, 20]);
   Modelica.Blocks.Interfaces.RealOutput y
-    "Continuous or discrete output signal of block" 
+    "Continuous or discrete output signal of block"
     annotation (extent=[100, -10; 120, 10]);
 
 parameter Types.PID_representation pidRep=Types.PID_representation.timeConstants
@@ -15,72 +15,72 @@ parameter Types.PID_representation pidRep=Types.PID_representation.timeConstants
 
   parameter Real k(min=0) = 1 "Gain of controller" annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants));
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small, start=0.5)
-    "Time constant of Integrator block" 
-      annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants and 
-                                      (controllerType==SimpleController.PI or 
+    "Time constant of Integrator block"
+      annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants and
+                                      (controllerType==SimpleController.PI or
                               controllerType==SimpleController.PID)));
   parameter Modelica.SIunits.Time Td(min=0, start=0.1)
-    "Time constant of Derivative block" 
-     annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants and (controllerType==SimpleController.PD or 
+    "Time constant of Derivative block"
+     annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants and (controllerType==SimpleController.PD or
                                 controllerType==SimpleController.PID)));
   parameter Real Nd(min=Modelica.Constants.small) = 10
     "The higher Nd, the more ideal the derivative block";
 
-  parameter Real kp = 1 "P part parameter of gain representation" 
+  parameter Real kp = 1 "P part parameter of gain representation"
                                                                annotation(Dialog(enable=pidRep==Types.PID_representation.gains));
-  parameter Real ki= 1 "I part parameter of gain representation" 
-                                                              annotation(Dialog(enable=pidRep==Types.PID_representation.gains and 
-                                                                                                (controllerType==SimpleController.PI or 
+  parameter Real ki= 1 "I part parameter of gain representation"
+                                                              annotation(Dialog(enable=pidRep==Types.PID_representation.gains and
+                                                                                                (controllerType==SimpleController.PI or
                               controllerType==SimpleController.PID)));
-  parameter Real kd = 1 "D part parameter of gain representation" 
-                                                              annotation(Dialog(enable=pidRep==Types.PID_representation.gains and (controllerType==SimpleController.PD or 
+  parameter Real kd = 1 "D part parameter of gain representation"
+                                                              annotation(Dialog(enable=pidRep==Types.PID_representation.gains and (controllerType==SimpleController.PD or
                                 controllerType==SimpleController.PID)));
 
   parameter Real xi_start=0
-    "Initial or guess value value for integrator output (= integrator state)" 
+    "Initial or guess value value for integrator output (= integrator state)"
     annotation (Dialog(group="Initialization",
-                enable=controllerType==SimpleController.PI or 
+                enable=controllerType==SimpleController.PI or
                        controllerType==SimpleController.PID));
   parameter Real xd_start=0
-    "Initial or guess value for state of derivative block" 
+    "Initial or guess value for state of derivative block"
     annotation (Dialog(group="Initialization",
-                         enable=controllerType==SimpleController.PD or 
+                         enable=controllerType==SimpleController.PD or
                                 controllerType==SimpleController.PID));
-  parameter Real y_start=0 "Initial value of output" 
+  parameter Real y_start=0 "Initial value of output"
     annotation(Dialog(enable=initType == InitPID.InitialOutput, group=
           "Initialization"));
 
-  Sampler sampler(blockType=blockType) 
+  Sampler sampler(blockType=blockType)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
-  Modelica.Blocks.Math.Gain P(k=1) 
+  Modelica.Blocks.Math.Gain P(k=1)
                      annotation (Placement(transformation(extent={{-30,30},{-10,
             50}},     rotation=0)));
   Derivative D(
     k= if pidRep==Types.PID_representation.timeConstants then Td else kd/kp,
     blockType=blockType,
-    initType=if init == Types.Init.SteadyState or init == Types.Init.InitialOutput then 
-              InitWithGlobalDefault.SteadyState else if init == Types.Init.InitialState then 
+    initType=if init == Types.Init.SteadyState or init == Types.Init.InitialOutput then
+              InitWithGlobalDefault.SteadyState else if init == Types.Init.InitialState then
               InitWithGlobalDefault.InitialState else InitWithGlobalDefault.NoInit,
     x_start=xd_start,
     y_start=y_start,
     methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact,
-    T=max([if pidRep==Types.PID_representation.timeConstants then Td/Nd else kd/kp/Nd,100*Modelica.Constants.eps])) 
+    T=max([if pidRep==Types.PID_representation.timeConstants then Td/Nd else kd/kp/Nd,100*Modelica.Constants.eps]))
     annotation (Placement(transformation(extent={{-30,-60},{-10,-40}})));
 
   Integrator I(
     k=if pidRep==Types.PID_representation.timeConstants then 1/Ti else kp/ki,
     y_start=xi_start,
     blockType=blockType,
-    initType=if init == Types.Init.SteadyState then InitWithGlobalDefault.SteadyState else 
-              if init == Types.Init.InitialState then InitWithGlobalDefault.InitialState else 
+    initType=if init == Types.Init.SteadyState then InitWithGlobalDefault.SteadyState else
+              if init == Types.Init.InitialState then InitWithGlobalDefault.InitialState else
               InitWithGlobalDefault.NoInit,
-    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact) 
+    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact)
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
-  Modelica.Blocks.Math.Add3 addPID 
+  Modelica.Blocks.Math.Add3 addPID
                           annotation (Evaluate=true, Placement(transformation(
           extent={{10,-10},{30,10}},rotation=0)));
-  Modelica.Blocks.Math.Gain gainPID(k=if pidRep==Types.PID_representation.timeConstants then k else kp) 
+  Modelica.Blocks.Math.Gain gainPID(k=if pidRep==Types.PID_representation.timeConstants then k else kp)
                                 annotation (Placement(transformation(extent={{50,-10},
             {70,10}},          rotation=0)));
 

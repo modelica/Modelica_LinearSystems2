@@ -4,7 +4,7 @@ block UnitDelay
   extends Interfaces.PartialSISO_equality;
 
 protected
-  Internal.DiscreteUnitDelay discretePart(sampleFactor=sampleFactor) if 
+  Internal.DiscreteUnitDelay discretePart(sampleFactor=sampleFactor) if
           not continuous "Discrete unit delay";
 equation
   if continuous then

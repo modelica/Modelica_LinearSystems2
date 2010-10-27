@@ -12,28 +12,28 @@ model DiscretizationSeries
   Components.SeriesConnection continuous(
     T1=T1,
     T2=T2,
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous) 
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous)
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
   Components.SeriesConnection trapezoidal(
     T1=T1,
     T2=T2,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
     methodType=Modelica_LinearSystems2.Types.Method.Trapezoidal,
-    sampleTime=sampleTime) 
+    sampleTime=sampleTime)
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   Components.SeriesConnection rampExact(
     T1=T1,
     T2=T2,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
     methodType=Modelica_LinearSystems2.Types.Method.RampExact,
-    sampleTime=sampleTime) 
+    sampleTime=sampleTime)
     annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
   Components.SeriesConnection stepExact(
     T1=T1,
     T2=T2,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
     methodType=Modelica_LinearSystems2.Types.Method.StepExact,
-    sampleTime=sampleTime) 
+    sampleTime=sampleTime)
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
