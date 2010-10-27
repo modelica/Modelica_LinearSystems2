@@ -1,0 +1,126 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.WorkInProgress.MPC.Utilities</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Utilities<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.MPC.Utilities"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_MPC.html#Modelica_LinearSystems2.WorkInProgress.MPC"
+>Modelica_LinearSystems2.WorkInProgress.MPC</A>.Utilities</H2>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.MPC.Utilities.TimeTableS.png" ALT="Modelica_LinearSystems2.WorkInProgress.MPC.Utilities.TimeTable" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_MPC_Utilities.html#Modelica_LinearSystems2.WorkInProgress.MPC.Utilities.TimeTable"
+>TimeTable</A>
+</TD><TD>Generate a (possibly discontinuous) signal by linear interpolation in a table</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.MPC.Utilities.referencePrediction2S.png" ALT="Modelica_LinearSystems2.WorkInProgress.MPC.Utilities.referencePrediction2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_MPC_Utilities.html#Modelica_LinearSystems2.WorkInProgress.MPC.Utilities.referencePrediction2"
+>referencePrediction2</A>
+</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE TimeTable<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.MPC.Utilities.TimeTableI.png" ALT="Modelica_LinearSystems2.WorkInProgress.MPC.Utilities.TimeTable" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.MPC.Utilities.TimeTable"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_MPC_Utilities.html#Modelica_LinearSystems2.WorkInProgress.MPC.Utilities"
+>Modelica_LinearSystems2.WorkInProgress.MPC.Utilities</A>.TimeTable</H2>
+<B>Generate a (possibly discontinuous) signal by linear interpolation in a table</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This block generates an output signal by <b>linear interpolation</b> in
+a table. The time points and function values are stored in a matrix
+<b>table[i,j]</b>, where the first column table[:,1] contains the
+time points and the second column contains the data to be interpolated.
+The table interpolation has the following proporties:
+</p>
+<ul>
+<li>The time points need to be <b>monotonically increasing</b>. </li>
+<li><b>Discontinuities</b> are allowed, by providing the same
+    time point twice in the table. </li>
+<li>Values <b>outside</b> of the table range, are computed by
+    <b>extrapolation</b> through the last or first two points of the
+    table.</li>
+<li>If the table has only <b>one row</b>, no interpolation is performed and
+    the function value is just returned independantly of the
+    actual time instant.</li>
+<li>Via parameters <b>startTime</b> and <b>offset</b> the curve defined
+    by the table can be shifted both in time and in the ordinate value.
+<li>The table is implemented in a numerically sound way by
+    generating <b>time events</b> at interval boundaries,
+    in order to not integrate over a discontinuous or not differentiable
+    points.
+</li>
+</ul>
+<p>
+Example:
+</p>
+<pre>
+   table = [0  0
+            1  0
+            1  1
+            2  4
+            3  9
+            4 16]
+If, e.g., time = 1.0, the output y =  0.0 (before event), 1.0 (after event)
+    e.g., time = 1.5, the output y =  2.5,
+    e.g., time = 2.0, the output y =  4.0,
+    e.g., time = 5.0, the output y = 23.0 (i.e. extrapolation).
+</pre>
+
+
+<p>
+<img src="../Images/Blocks/Sources/TimeTable.png">
+</p>
+
+<pre>
+</PRE><P>
+Extends from Modelica.Blocks.Interfaces.SO (Single Output continuous control block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>table[:, 2]</TD><TD>Table matrix (time = first column; e.g. table=[0, 0; 1, 1; 2, 4])</TD></TR>
+<TR><TD>offset</TD><TD>Offset of output signal</TD></TR>
+<TR><TD>startTime</TD><TD>Output = offset for time &lt; startTime [s]</TD></TR>
+<TR><TD>hp</TD><TD>Prediction horizon</TD></TR>
+<TR><TD>sampleTime</TD><TD>Base sample time for discrete blocks [s]</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y</TD><TD>Connector of Real output signal</TD></TR>
+<TR><TD>y_pred[hp]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE referencePrediction2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.WorkInProgress.MPC.Utilities.referencePrediction2I.png" ALT="Modelica_LinearSystems2.WorkInProgress.MPC.Utilities.referencePrediction2" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.WorkInProgress.MPC.Utilities.referencePrediction2"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_MPC_Utilities.html#Modelica_LinearSystems2.WorkInProgress.MPC.Utilities"
+>Modelica_LinearSystems2.WorkInProgress.MPC.Utilities</A>.referencePrediction2</H2>
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>hp</TD><TD>Prediction horizon</TD></TR>
+<TR><TD>ny</TD><TD>Number of outputs</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y[ny*hp]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u[ny*hp]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Wed Oct 27 10:53:56 2010.
+</address></BODY>
+</HTML>

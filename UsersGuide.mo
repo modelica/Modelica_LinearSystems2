@@ -457,6 +457,40 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
+    class Version_2_2 "Version 2.2 (October 27, 2010)"
+
+      annotation (Documentation(info="<html>
+<p>
+This release is <b>backward compatible</b> to the previous version 2.1.
+It contains the following improvements:
+</p>
+
+<p>
+New functions/records:
+</p>
+
+<ul>
+<li> Records  <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles\">DiscreteZerosAndPole</a>
+     and  <a href=\"modelica://Modelica_LinearSystems2.DiscreteTransferFunction\">DiscreteTransferFunction</a>
+     to operate with discrete zeros-and-poles-transfer-functions and transfer functions.</li>
+
+<li> Constructors and basic operators for  <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace\">DiscreteStateSpace</a>,
+     <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles\">DiscreteZerosAndPole</a> and
+     <a href=\"modelica://Modelica_LinearSystems2.DiscreteTransferFunction\">DiscreteTransferFunction</a>.</li> 
+
+<li> Functions to construct, to convert, to analyze, and to plot for records DiscreteStateSpace, DiscreteTransferFunction and DiscreteZerosAndPoles are provided.</li> 
+
+<li> Examples for DiscreteStateSpace, DiscreteTransferFunction and DiscreteZerosAndPoles demonstarate the discrete system records
+     ( <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteStateSpace\">Examples_DiscreteStateSpace</a>,
+       <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteZerosAndPoles\">Examples_DiscreteZerosAndPoles</a>,
+       <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteTransferFunction\">Examples_DiscreteTransferFunction</a>,).</li>
+</ul>
+
+  
+</html>
+"));
+    end Version_2_2;
+
     class Version_2_1 "Version 2.1 (January 15, 2010)"
 
       annotation (Documentation(info="<html>

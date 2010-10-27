@@ -1,0 +1,136 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.WorkInProgress.Tests.Filters</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Filters<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Filters"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests.html#Modelica_LinearSystems2.WorkInProgress.Tests"
+>Modelica_LinearSystems2.WorkInProgress.Tests</A>.Filters</H2>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilterS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilter" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Filters.html#Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilter"
+>plotFilter</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilterS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilter2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Filters.html#Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilter2"
+>plotFilter2</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilterS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilter3" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Filters.html#Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilter3"
+>plotFilter3</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilterS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.compareBaseFiltersWithTietzeSchenk" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Filters.html#Modelica_LinearSystems2.WorkInProgress.Tests.Filters.compareBaseFiltersWithTietzeSchenk"
+>compareBaseFiltersWithTietzeSchenk</A>
+</TD><TD>Compare normalized base filters with the table of Tietze/Schenk Halbleiterschaltungstechnik</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilterS.png" ALT="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotAlphaForPassBand" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Filters.html#Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotAlphaForPassBand"
+>plotAlphaForPassBand</A>
+</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE plotFilter<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilter"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Filters.html#Modelica_LinearSystems2.WorkInProgress.Tests.Filters"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Filters</A>.plotFilter</H2>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>analogFilter</TD><TD>Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)</TD></TR>
+<TR><TD>filterType</TD><TD>Type of filter (LowPass/HighPass)</TD></TR>
+<TR><TD>f_cut</TD><TD>Cut-off frequency [Hz]</TD></TR>
+<TR><TD>A_ripple</TD><TD>Pass band ripple for Chebyshev filter (otherwise not used) [dB]</TD></TR>
+<TR><TD>f_min</TD><TD>Band of pass band filter is f_min (-3db) .. f_cut (-3db) [Hz]</TD></TR>
+<TR><TD>normalized</TD><TD>= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE plotFilter2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilter2"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Filters.html#Modelica_LinearSystems2.WorkInProgress.Tests.Filters"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Filters</A>.plotFilter2</H2>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>filterType</TD><TD>Type of filter (LowPass/HighPass)</TD></TR>
+<TR><TD>f_cut</TD><TD>Cut-off frequency [Hz]</TD></TR>
+<TR><TD>A_ripple</TD><TD>Pass band ripple for Chebyshev filter (otherwise not used) [dB]</TD></TR>
+<TR><TD>f_min</TD><TD>Band of pass band filter is f_min (-3db) .. f_cut (-3db) [Hz]</TD></TR>
+<TR><TD>normalized</TD><TD>= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE plotFilter3<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotFilter3"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Filters.html#Modelica_LinearSystems2.WorkInProgress.Tests.Filters"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Filters</A>.plotFilter3</H2>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>f_cut</TD><TD>Cut-off frequency [Hz]</TD></TR>
+<TR><TD>A_ripple</TD><TD>Pass band ripple for Chebyshev filter (otherwise not used) [dB]</TD></TR>
+<TR><TD>f_min</TD><TD>Band of pass band filter is f_min (-3db) .. f_cut (-3db) [Hz]</TD></TR>
+<TR><TD>normalized</TD><TD>= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE compareBaseFiltersWithTietzeSchenk<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.compareBaseFiltersWithTietzeSchenk"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Filters.html#Modelica_LinearSystems2.WorkInProgress.Tests.Filters"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Filters</A>.compareBaseFiltersWithTietzeSchenk</H2>
+<B>Compare normalized base filters with the table of Tietze/Schenk Halbleiterschaltungstechnik</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This function compares the filters with the ones from
+</p>
+
+<dl>
+<dt>Tietze U., and Schenk C. (2002):</dt>
+<dd> <b>Halbleiter-Schaltungstechnik</b>.
+     Springer Verlag, 12. Auflage, pp. 815-852.</dd>
+</dl>
+
+<p>
+In tables Abb. 13.14 on pages 828-834 of (Tietze/Schenk 2002), the filter coefficients are
+given with respect to normalized filters for a cut-off angular frequency
+of 1 rad/s. The normalization is performed in such a way that at the cut-off
+frequency the transfer function has an amplitude of -3db (= 10^(-3/20) = 0.7079457..).
+In the tables, not the exact -3db value is used but the approximation 
+sqrt(2)/2 (= 0.707106...). Due to "historical" reasons, function baseFilter
+from the Modelica_LinearSystems library uses -3db for Bessel and Chebyshev filters
+and sqrt(2)/2 for CriticalDamping and Butterworth filters. Furthermore, the table 
+gives the values only up to 4 significant digits. For these reasons, in this test
+function the comparison is performed up to 3 significant digits.
+</p>
+
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>outputFile</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE plotAlphaForPassBand<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.WorkInProgress.Tests.Filters.plotAlphaForPassBand"></A><A HREF="Modelica_LinearSystems2_WorkInProgress_Tests_Filters.html#Modelica_LinearSystems2.WorkInProgress.Tests.Filters"
+>Modelica_LinearSystems2.WorkInProgress.Tests.Filters</A>.plotAlphaForPassBand</H2>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>a</TD><TD>&nbsp;</TD></TR>
+<TR><TD>b</TD><TD>&nbsp;</TD></TR>
+<TR><TD>w</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Wed Oct 27 10:53:53 2010.
+</address></BODY>
+</HTML>
