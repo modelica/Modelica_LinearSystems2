@@ -45,11 +45,11 @@ Several curves can be displayed in one diagram.
 </p>
  
 <pre></PRE><P>
-
+Extends from Modelica.Icons.Package (Icon for standard packages).
 <P><H3>Package Content</H3><p>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
 <TR><TH >Name</TH><TH>Description</TH></TR>
-<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Vectors.InternalS.png" ALT="Modelica_LinearSystems2.Utilities.Plot.Examples" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Utilities_Plot_Examples.html#Modelica_LinearSystems2.Utilities.Plot.Examples"
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Utilities.Plot.ExamplesS.png" ALT="Modelica_LinearSystems2.Utilities.Plot.Examples" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Utilities_Plot_Examples.html#Modelica_LinearSystems2.Utilities.Plot.Examples"
 >Examples</A>
 </TD><TD>Demonstrate the usage of the plot functions</TD></TR>
 <TR><TD><IMG SRC="Modelica_LinearSystems2.Utilities.Plot.diagramS.png" ALT="Modelica_LinearSystems2.Utilities.Plot.diagram" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot.diagram"
@@ -68,7 +68,6 @@ Several curves can be displayed in one diagram.
 >Records</A>
 </TD><TD>Records used to define the function interfaces</TD></TR>
 </TABLE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE diagram<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -88,77 +87,10 @@ For an overview, see the documentation of package
 
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
->Diagram</A></TD><TD>diagram</TD><TD>&nbsp;</TD><TD>Diagram to be shown</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
->Device</A></TD><TD>device</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Properties of device where figure is shown</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>diagram</TD><TD>Diagram to be shown</TD></TR>
+<TR><TD>device</TD><TD>Properties of device where figure is shown</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> diagram <font color="darkgreen">&quot;Plot one diagram&quot;</font>
-    <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types"
->Modelica_LinearSystems2.Utilities.Plot.Types</A>;
-    <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams"
->Modelica.Utilities.Streams</A>.*;
-   <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
->Modelica_LinearSystems2.Utilities.Plot.Records.Diagram</A> diagram <font color="darkgreen">
-    &quot;Diagram to be shown&quot;</font>;
-   <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
->Modelica_LinearSystems2.Utilities.Plot.Records.Device</A> device=
-      <font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Device</font>() <font color="darkgreen">
-    &quot;Properties of device where figure is shown&quot;</font>;
-<font color="blue">protected </font>
-  Real mmToPixel= device.windowResolution/25.4;
-  Real position[4];
-  Integer style;
-  Integer nCurves=<font color="red">size</font>(diagram.curve,1);
-  Boolean OK;
-  Integer id;
-<font color="blue">algorithm </font>
-   position := {device.xTopLeft,
-                device.yTopLeft,
-                device.diagramWidth,
-                diagram.heightRatio*device.diagramWidth}*mmToPixel;
-
-   id:=<font color="red"> createPlot</font>(id=-1,
-                   position=<font color="red">integer</font>(position),
-                   erase=true,
-                   autoscale=true,
-                   autoerase=false,
-                   subPlot=1,
-                   heading=diagram.heading,
-                   grid=diagram.grid,
-                   logX=diagram.logX,
-                   logY=diagram.logY,
-                   bottomTitle=diagram.xLabel,
-                   leftTitle=diagram.yLabel,
-                   color=device.autoLineColor,
-                   legend=diagram.legend,
-                   legendHorizontal=diagram.legendHorizontal,
-                   legendFrame=diagram.legendFrame,
-                   legendLocation=diagram.legendLocation);
-
-   <font color="blue">for </font>i<font color="blue"> in </font>1:nCurves<font color="blue"> loop</font>
-       <font color="blue">if </font>diagram.curve[i].autoLine<font color="blue"> or </font>
-          diagram.curve[i].lineSymbol==Types.PointSymbol.None<font color="blue"> then</font>
-          style :=0;
-       <font color="blue">elseif </font>diagram.curve[i].linePattern==Types.LinePattern.None<font color="blue"> then</font>
-          style :=-(diagram.curve[i].lineSymbol - 1);
-       <font color="blue">else</font>
-          style :=diagram.curve[i].lineSymbol - 1;
-       <font color="blue">end if</font>;
-
-       OK :=<font color="red">plotArray</font>(diagram.curve[i].x,
-                      diagram.curve[i].y,
-                      legend=diagram.curve[i].legend,
-                      style=style,
-                      id=id);
-    <font color="blue">end for</font>;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>diagram;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE diagramVector<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -179,99 +111,10 @@ using a vector layout. For an overview, see the documentation of package
 
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
->Diagram</A></TD><TD>diagram[:]</TD><TD>&nbsp;</TD><TD>Properties of a set of diagrams (vector layout)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
->Device</A></TD><TD>device</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Properties of device where figure is shown</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>diagram[:]</TD><TD>Properties of a set of diagrams (vector layout)</TD></TR>
+<TR><TD>device</TD><TD>Properties of device where figure is shown</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> diagramVector <font color="darkgreen">&quot;Plot several diagrams in vector layout&quot;</font>
-   <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
->Modelica_LinearSystems2.Utilities.Plot.Records.Diagram</A> diagram[:] <font color="darkgreen">
-    &quot;Properties of a set of diagrams (vector layout)&quot;</font>;
-   <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
->Modelica_LinearSystems2.Utilities.Plot.Records.Device</A> device=
-      <font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Device</font>() <font color="darkgreen">
-    &quot;Properties of device where figure is shown&quot;</font>;
-
-<font color="blue">protected </font>
-  Real mmToPixel= device.windowResolution/25.4;
-  Integer position[4];
-  Integer style;
-  Integer nDiagrams=<font color="red">size</font>(diagram,1);
-  Integer figureHeight;
-  Integer height[nDiagrams];
-  Boolean OK;
-  Integer id;
-
-  <textblock type="model" expanded="false" path="Modelica_LinearSystems2.Utilities.Plot.diagramVector.round"><font color="blue">function</font> round <font color="darkgreen">&quot;Round to nearest Integer&quot;</font>
-     <font color="blue">input </font>Real r;
-     <font color="blue">output </font>Integer i;
-  <font color="blue">algorithm </font>
-     i :=<font color="blue">if </font>r &gt; 0<font color="blue"> then </font><font color="red">integer</font>(<font color="red">floor</font>(r + 0.5))<font color="blue"> else </font><font color="red">integer</font>(<font color="red">ceil</font>(r - 0.5));
-  <font color="blue">end </font>round</textblock>;
-<font color="blue">algorithm </font>
-    id := -1;
-
-  <font color="darkgreen">  // Determine total size of window</font>
-    figureHeight := 0;
-    <font color="blue">for </font>i<font color="blue"> in </font>1:nDiagrams<font color="blue"> loop</font>
-       height[i]    :=<font color="red"> round</font>(diagram[i].heightRatio*device.diagramWidth*mmToPixel);
-       figureHeight := figureHeight + height[i];
-    <font color="blue">end for</font>;
-
-    position := {<font color="red">round</font>(device.xTopLeft*mmToPixel),
-                 <font color="red">round</font>(device.yTopLeft*mmToPixel),
-                 <font color="red">round</font>(device.diagramWidth*mmToPixel),
-                 figureHeight};
-
-  <font color="darkgreen">  // Determine position and size of sub-figures</font>
-    <font color="blue">for </font>i<font color="blue"> in </font>1:nDiagrams<font color="blue"> loop</font>
-       <font color="blue">if </font>i &gt; 1<font color="blue"> then</font>
-          position[4] := height[i];
-       <font color="blue">end if</font>;
-
-       id:=<font color="red"> createPlot</font>(id=id,
-                   position=position,
-                   erase=true,
-                   autoscale=true,
-                   autoerase=false,
-                   subPlot=i,
-                   heading=diagram[i].heading,
-                   grid=diagram[i].grid,
-                   logX=diagram[i].logX,
-                   logY=diagram[i].logY,
-                   bottomTitle=diagram[i].xLabel,
-                   leftTitle=diagram[i].yLabel,
-                   color=device.autoLineColor,
-                   legend=diagram[i].legend,
-                   legendHorizontal=diagram[i].legendHorizontal,
-                   legendFrame=diagram[i].legendFrame,
-                   legendLocation=diagram[i].legendLocation);
-
-       <font color="blue">for </font>j<font color="blue"> in </font>1:<font color="red">size</font>(diagram[i].curve,1)<font color="blue"> loop</font>
-          <font color="blue">if </font>diagram[i].curve[j].autoLine<font color="blue"> or </font>
-             diagram[i].curve[j].lineSymbol==Types.PointSymbol.None<font color="blue"> then</font>
-             style :=0;
-          <font color="blue">elseif </font>diagram[i].curve[j].linePattern==Types.LinePattern.None<font color="blue"> then</font>
-             style :=-(diagram[i].curve[j].lineSymbol - 1);
-          <font color="blue">else</font>
-             style :=diagram[i].curve[j].lineSymbol - 1;
-          <font color="blue">end if</font>;
-
-          OK :=<font color="red">plotArray</font>(diagram[i].curve[j].x,
-                         diagram[i].curve[j].y,
-                         legend=diagram[i].curve[j].legend,
-                         style=style,
-                         id=id);
-       <font color="blue">end for</font>;
-    <font color="blue">end for</font>;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>diagramVector;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE diagramMatrix<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -292,35 +135,10 @@ using a matrix layout. For an overview, see the documentation of package
 
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
->Diagram</A></TD><TD>diagram[:, :]</TD><TD>&nbsp;</TD><TD>Properties of a set of diagrams (matrix layout)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
->Device</A></TD><TD>device</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Properties of device where figure is shown</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>diagram[:, :]</TD><TD>Properties of a set of diagrams (matrix layout)</TD></TR>
+<TR><TD>device</TD><TD>Properties of device where figure is shown</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> diagramMatrix <font color="darkgreen">&quot;Plot several diagrams in matrix layout&quot;</font>
-   <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
->Modelica_LinearSystems2.Utilities.Plot.Records.Diagram</A> diagram[:,:] <font color="darkgreen">
-    &quot;Properties of a set of diagrams (matrix layout)&quot;</font>;
-   <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
->Modelica_LinearSystems2.Utilities.Plot.Records.Device</A> device=
-      <font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Device</font>() <font color="darkgreen">
-    &quot;Properties of device where figure is shown&quot;</font>;
-<font color="blue">protected </font>
-  <A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
->Modelica_LinearSystems2.Utilities.Plot.Records.Device</A> device2=device;
-
-<font color="blue">algorithm </font>
-   <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(diagram,2)<font color="blue"> loop</font>
-      device2.xTopLeft :=device.xTopLeft + (i - 1)*device.diagramWidth;
-    <font color="red">Modelica_LinearSystems2.Utilities.Plot.diagramVector</font>(diagram[:, i], device2);
-   <font color="blue">end for</font>;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>diagramMatrix;
-</PRE>
-<HR>
-<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:28:55 2010.
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Wed Oct 27 10:04:49 2010.
 </address></BODY>
 </HTML>

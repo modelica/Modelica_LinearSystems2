@@ -23,6 +23,8 @@ table   { solid #000; border-collapse: collapse;}
 >Modelica_LinearSystems2.Utilities.Plot</A>.Examples</H2>
 <B>Demonstrate the usage of the plot functions</B>
 <P>
+<P><H3>Information</H3></P>
+Extends from Modelica.Icons.ExamplesPackage (Icon for packages containing runnable examples).
 <P><H3>Package Content</H3><p>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
 <TR><TH >Name</TH><TH>Description</TH></TR>
@@ -45,7 +47,6 @@ table   { solid #000; border-collapse: collapse;}
 >Utilities</A>
 </TD><TD>Utility functions (usually not of interest for the user)</TD></TR>
 </TABLE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotSine<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -54,40 +55,10 @@ table   { solid #000; border-collapse: collapse;}
 <B>Plot a sine function in one diagram</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Frequency</A></TD><TD>freqHz</TD><TD>2</TD><TD>Frequency of sine wave [Hz]</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Damping"
->Damping</A></TD><TD>damping</TD><TD>0.8</TD><TD>Damping coefficient of sine wave [s-1]</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>freqHz</TD><TD>Frequency of sine wave [Hz]</TD></TR>
+<TR><TD>damping</TD><TD>Damping coefficient of sine wave [s-1]</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> plotSine <font color="darkgreen">&quot;Plot a sine function in one diagram&quot;</font>
-   <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Modelica.SIunits.Frequency</A> freqHz = 2 <font color="darkgreen">&quot;Frequency of sine wave&quot;</font>;
-   <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Damping"
->Modelica.SIunits.Damping</A> damping = 0.8 <font color="darkgreen">
-    &quot;Damping coefficient of sine wave&quot;</font>;
-<font color="blue">protected </font>
-   Integer nX = 500;
-   Integer nPeriod = 5;
-   Real x[nX];
-   Real y[nX];
-<font color="blue">algorithm </font>
-   (x,y) :=<font color="red">Utilities.dampedSine</font>(freqHz, damping, nPeriod, nX);
-
-  <font color="red">Modelica_LinearSystems2.Utilities.Plot.diagram</font>(
-    <font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Diagram</font>(
-        curve={<font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Curve</font>(
-          x=x,
-          y=y,
-          legend=&quot;torque1&quot;)},
-        heading=&quot;Bearing friction torque&quot;,
-        xLabel=&quot;w [rad/s]&quot;,
-        yLabel=&quot;[N.m]&quot;));
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotSine;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotTwoSine<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -96,58 +67,12 @@ table   { solid #000; border-collapse: collapse;}
 <B>Plot two sine functions in one diagram</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Frequency</A></TD><TD>freqHz1</TD><TD>2</TD><TD>Frequency of sine wave 1 [Hz]</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Frequency</A></TD><TD>freqHz2</TD><TD>3</TD><TD>Frequency of sine wave 2 [Hz]</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Damping"
->Damping</A></TD><TD>damping1</TD><TD>0.8</TD><TD>Damping coefficient of sine wave 12 [s-1]</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Damping"
->Damping</A></TD><TD>damping2</TD><TD>0.1</TD><TD>Damping coefficient of sine wave 2 [s-1]</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>freqHz1</TD><TD>Frequency of sine wave 1 [Hz]</TD></TR>
+<TR><TD>freqHz2</TD><TD>Frequency of sine wave 2 [Hz]</TD></TR>
+<TR><TD>damping1</TD><TD>Damping coefficient of sine wave 12 [s-1]</TD></TR>
+<TR><TD>damping2</TD><TD>Damping coefficient of sine wave 2 [s-1]</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> plotTwoSine <font color="darkgreen">&quot;Plot two sine functions in one diagram&quot;</font>
-   <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Modelica.SIunits.Frequency</A> freqHz1 = 2 <font color="darkgreen">&quot;Frequency of sine wave 1&quot;</font>;
-   <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Modelica.SIunits.Frequency</A> freqHz2 = 3 <font color="darkgreen">&quot;Frequency of sine wave 2&quot;</font>;
-   <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Damping"
->Modelica.SIunits.Damping</A> damping1 = 0.8 <font color="darkgreen">
-    &quot;Damping coefficient of sine wave 12&quot;</font>;
-   <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Damping"
->Modelica.SIunits.Damping</A> damping2 = 0.1 <font color="darkgreen">
-    &quot;Damping coefficient of sine wave 2&quot;</font>;
-
-<font color="blue">protected </font>
-   Integer nX = 500;
-   Integer nSymbol = 20;
-   Integer nPeriod = 5;
-   Real x1[nX];
-   Real y1[nX];
-   Real x2[nX];
-   Real y2[nX];
-<font color="blue">algorithm </font>
-   (x1,y1) :=<font color="red">Utilities.dampedSine</font>(freqHz1, damping1, nPeriod, nX);
-   (x2,y2) :=<font color="red">Utilities.dampedSine</font>(freqHz2, damping2, nPeriod, nX);
-
-  <font color="red">Modelica_LinearSystems2.Utilities.Plot.diagram</font>(
-    <font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Diagram</font>(
-        curve={<font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Curve</font>(
-          x=x1,
-          y=y1,
-          legend=&quot;torque1&quot;),
-      <font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Curve</font>(
-          x=x2,
-          y=y2,
-          legend=&quot;torque2&quot;)},
-        heading=&quot;Bearing friction torques&quot;,
-        xLabel=&quot;w [rad/s]&quot;,
-        yLabel=&quot;[N.m]&quot;));
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotTwoSine;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE showSinesInVectorDiagrams<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -156,195 +81,24 @@ table   { solid #000; border-collapse: collapse;}
 <B>Plot sine functions in several diagrams in vector layout</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Frequency</A></TD><TD>freqHz1</TD><TD>2</TD><TD>Frequency of sine wave 1 [Hz]</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Frequency</A></TD><TD>freqHz2</TD><TD>3</TD><TD>Frequency of sine wave 2 [Hz]</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Damping"
->Damping</A></TD><TD>damping1</TD><TD>0.8</TD><TD>Damping coefficient of sine wave 12 [s-1]</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Damping"
->Damping</A></TD><TD>damping2</TD><TD>0.1</TD><TD>Damping coefficient of sine wave 2 [s-1]</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>freqHz1</TD><TD>Frequency of sine wave 1 [Hz]</TD></TR>
+<TR><TD>freqHz2</TD><TD>Frequency of sine wave 2 [Hz]</TD></TR>
+<TR><TD>damping1</TD><TD>Damping coefficient of sine wave 12 [s-1]</TD></TR>
+<TR><TD>damping2</TD><TD>Damping coefficient of sine wave 2 [s-1]</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> showSinesInVectorDiagrams <font color="darkgreen">
-  &quot;Plot sine functions in several diagrams in vector layout&quot;</font>
-   <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Modelica.SIunits.Frequency</A> freqHz1 = 2 <font color="darkgreen">&quot;Frequency of sine wave 1&quot;</font>;
-   <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Modelica.SIunits.Frequency</A> freqHz2 = 3 <font color="darkgreen">&quot;Frequency of sine wave 2&quot;</font>;
-   <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Damping"
->Modelica.SIunits.Damping</A> damping1 = 0.8 <font color="darkgreen">
-    &quot;Damping coefficient of sine wave 12&quot;</font>;
-   <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Damping"
->Modelica.SIunits.Damping</A> damping2 = 0.1 <font color="darkgreen">
-    &quot;Damping coefficient of sine wave 2&quot;</font>;
-
-<font color="blue">protected </font>
-   Integer nX = 500;
-   Integer nSymbol = 50;
-   Integer nPeriod = 5;
-   Real x1[nX];
-   Real y1[nX];
-   Real x2[nX];
-   Real y2[nX];
-   Real x3[nSymbol];
-   Real y3[nSymbol];
-<font color="blue">algorithm </font>
-   (x1,y1) :=<font color="red">Utilities.dampedSine</font>(freqHz1, damping1, nPeriod, nX);
-   (x2,y2) :=<font color="red">Utilities.dampedSine</font>(freqHz2, damping2, nPeriod, nX);
-   (x3,y3) :=<font color="red">Utilities.dampedSine</font>(freqHz1, damping1, nPeriod, nSymbol);
-
-  <font color="red">Modelica_LinearSystems2.Utilities.Plot.diagramVector</font>({
-    <font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Diagram</font>(
-        curve={<font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Curve</font>(
-          x=x1,
-          y=y1,
-          legend=&quot;torque1&quot;),
-      <font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Curve</font>(
-          x=x2,
-          y=y2,
-          legend=&quot;torque2&quot;)},
-        heading=&quot;Bearing friction torques&quot;,
-        yLabel=&quot;[N.m]&quot;),
-    <font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Diagram</font>(
-        curve={<font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Curve</font>(
-          x=x1,
-          y=1.1*y1,
-          legend=&quot;torque3&quot;),
-      <font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Curve</font>(
-          x=x2,
-          y=1.2*y2,
-          legend=&quot;torque4&quot;),
-      <font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Curve</font>(
-          x=x3,
-          y=y3,
-          autoLine=false,
-          linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.None,
-          lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.Circle)},
-        xLabel=&quot;w [rad/s]&quot;,
-        yLabel=&quot;[N.m]&quot;)});
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>showSinesInVectorDiagrams;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE showLegendStyles<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
 <H2><A NAME="Modelica_LinearSystems2.Utilities.Plot.Examples.showLegendStyles"></A><A HREF="Modelica_LinearSystems2_Utilities_Plot_Examples.html#Modelica_LinearSystems2.Utilities.Plot.Examples"
 >Modelica_LinearSystems2.Utilities.Plot.Examples</A>.showLegendStyles</H2>
 <B>Show several vector-diagram plots that demonstrate the various legend options</B><p>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> showLegendStyles <font color="darkgreen">
-  &quot;Show several vector-diagram plots that demonstrate the various legend options&quot;</font>
-    <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records"
->Modelica_LinearSystems2.Utilities.Plot.Records</A>;
-    <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types"
->Modelica_LinearSystems2.Utilities.Plot.Types</A>;
-
-<font color="blue">protected </font>
-   Real x[2]={0,1};
-   Real y1[2]={0,0.5};
-   Real y2[2]={0.2,0.7};
-   Real y3[2]={0.4,0.9};
-   <A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Curve"
->Records.Curve</A> curves[3]=
-                       {<font color="red">Records.Curve</font>(
-                          x=x,
-                          y=y1,
-                          legend=&quot;curve 1&quot;),
-                        <font color="red">Records.Curve</font>(
-                          x=x,
-                          y=y2,
-                          legend=&quot;curve 2&quot;),
-                        <font color="red">Records.Curve</font>(
-                          x=x,
-                          y=y3,
-                          legend=&quot;curve 3&quot;)};
-<font color="blue">algorithm </font>
-  <font color="red">Modelica_LinearSystems2.Utilities.Plot.diagramVector</font>({<font color="red">Records.Diagram</font>(
-        curve=curves,
-        heading=&quot;LegendLocation.Above&quot;,
-        legendLocation=Types.LegendLocation.Above),<font color="red">Records.Diagram</font>(
-        curve=curves,
-        heading=&quot;LegendLocation.Above, legendHorizontal=false&quot;,
-        legendHorizontal=false,
-        legendLocation=Types.LegendLocation.Above),<font color="red">Records.Diagram</font>(
-        curve=curves,
-        heading=&quot;LegendLocation.Right&quot;,
-        legendLocation=Types.LegendLocation.Right),<font color="red">Records.Diagram</font>(
-        curve=curves,
-        heading=&quot;LegendLocation.Below&quot;,
-        legendLocation=Types.LegendLocation.Below)},<font color="red"> Records.Device</font>(
-        xTopLeft=0,
-        yTopLeft=0,
-        diagramWidth=100));
-
-  <font color="red">Modelica_LinearSystems2.Utilities.Plot.diagramVector</font>({<font color="red">Records.Diagram</font>(
-        curve=curves,
-        heading=&quot;LegendLocation.TopLeft&quot;,
-        legendLocation=Types.LegendLocation.TopLeft),<font color="red">Records.Diagram</font>(
-        curve=curves,
-        heading=&quot;LegendLocation.TopRight, legendHorizontal=false&quot;,
-        legendHorizontal=false,
-        legendLocation=Types.LegendLocation.TopRight),<font color="red">Records.Diagram</font>(
-        curve=curves,
-        heading=&quot;LegendLocation.BottomLeft&quot;,
-        legendLocation=Types.LegendLocation.BottomLeft),<font color="red">Records.Diagram</font>(
-        curve=curves,
-        heading=&quot;LegendLocation.BottomRight&quot;,
-        legendLocation=Types.LegendLocation.BottomRight)},<font color="red"> Records.Device</font>(
-        xTopLeft=105,
-        yTopLeft=0,
-        diagramWidth=100));
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>showLegendStyles;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE showMatrixDiagrams<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
 <H2><A NAME="Modelica_LinearSystems2.Utilities.Plot.Examples.showMatrixDiagrams"></A><A HREF="Modelica_LinearSystems2_Utilities_Plot_Examples.html#Modelica_LinearSystems2.Utilities.Plot.Examples"
 >Modelica_LinearSystems2.Utilities.Plot.Examples</A>.showMatrixDiagrams</H2>
 <B>Demonstrate the layout of diagrams in matrix layout</B><p>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> showMatrixDiagrams <font color="darkgreen">
-  &quot;Demonstrate the layout of diagrams in matrix layout&quot;</font>
-    <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records"
->Modelica_LinearSystems2.Utilities.Plot.Records</A>;
-    <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types"
->Modelica_LinearSystems2.Utilities.Plot.Types</A>;
-
-<font color="blue">protected </font>
-   Real x[2]={0,1};
-   Real y1[2]={0,0.5};
-   Real y2[2]={0.2,0.7};
-   Real y3[2]={0.4,0.9};
-   <A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Curve"
->Records.Curve</A> curves[3]=
-                       {<font color="red">Records.Curve</font>(
-                          x=x,
-                          y=y1,
-                          legend=&quot;curve 1&quot;),
-                        <font color="red">Records.Curve</font>(
-                          x=x,
-                          y=y2,
-                          legend=&quot;curve 2&quot;),
-                        <font color="red">Records.Curve</font>(
-                          x=x,
-                          y=y3,
-                          legend=&quot;curve 3&quot;)};
-<font color="blue">algorithm </font>
-  <font color="red">Modelica_LinearSystems2.Utilities.Plot.diagramMatrix</font>(<font color="red">fill</font>(
-        <font color="red">Records.Diagram</font>(curve=curves),
-        5,
-        3),<font color="red"> Records.Device</font>(diagramWidth=80));
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>showMatrixDiagrams;
-</PRE>
-<HR>
-<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:28:55 2010.
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Wed Oct 27 10:04:49 2010.
 </address></BODY>
 </HTML>

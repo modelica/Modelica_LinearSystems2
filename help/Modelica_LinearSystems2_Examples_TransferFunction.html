@@ -2,6 +2,7 @@
 <HEAD>
 <TITLE>Modelica_LinearSystems2.Examples.TransferFunction</TITLE>
 <META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Package with examples to demonstrate the usage of the TransferFunction record&quot;">
 <style type="text/css">
 *       { font-size: 10pt; font-family: Arial,sans-serif; }
 pre     { font-size:  9pt; font-family: Courier,monospace;}
@@ -20,6 +21,16 @@ table   { solid #000; border-collapse: collapse;}
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
 <H2><A NAME="Modelica_LinearSystems2.Examples.TransferFunction"></A><A HREF="Modelica_LinearSystems2_Examples.html#Modelica_LinearSystems2.Examples"
 >Modelica_LinearSystems2.Examples</A>.TransferFunction</H2>
+<B>Package with examples to demonstrate the usage of the TransferFunction record</B>
+<P>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This package contains example function calls to demonstrate the
+usage of the functions of the TransferFunction record.
+</p>
+<pre></PRE><P>
+Extends from Modelica.Icons.ExamplesPackage (Icon for packages containing runnable examples).
 <P><H3>Package Content</H3><p>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
 <TR><TH >Name</TH><TH>Description</TH></TR>
@@ -54,50 +65,12 @@ table   { solid #000; border-collapse: collapse;}
 >plotStep</A>
 </TD><TD>Step plot example</TD></TR>
 </TABLE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotPolesAndZeros<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
 <H2><A NAME="Modelica_LinearSystems2.Examples.TransferFunction.plotPolesAndZeros"></A><A HREF="Modelica_LinearSystems2_Examples_TransferFunction.html#Modelica_LinearSystems2.Examples.TransferFunction"
 >Modelica_LinearSystems2.Examples.TransferFunction</A>.plotPolesAndZeros</H2>
 <B>Example for plotting poles and zeros of two transfer functions</B><p>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> plotPolesAndZeros <font color="darkgreen">
-  &quot;Example for plotting poles and zeros of two transfer functions&quot;</font>
-
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
->Modelica_LinearSystems2</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->Modelica_LinearSystems2.TransferFunction</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
->Modelica_LinearSystems2.ZerosAndPoles</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-<font color="blue">protected </font>
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> s =<font color="red"> TransferFunction.s</font>();
-  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> j =<font color="red"> Complex.j</font>();
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf1 = (s-2)*(s+4)/( (s+1)*(s+3)*<font color="red">TransferFunction</font>({-0.5+2*j, -0.5-2*j}));
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf2 = (s^3 + 4*s + 1)/(s^4 + 2*s^3 + 3*s^2 + 4*s);
-
-<font color="blue">algorithm </font>
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.polesAndZeros</font>(tf=tf1,
-    defaultDiagram=<font color="red">Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</font>(
-                       heading=&quot;Poles and zeros of &quot; +<font color="red"> String</font>(tf1)));
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.polesAndZeros</font>(
-    tf=tf2,
-    defaultDiagram=<font color="red">Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</font>(
-      heading=&quot;Poles and zeros of &quot; +<font color="red"> String</font>(tf2)),
-    device=<font color="red">Modelica_LinearSystems2.Utilities.Plot.Records.Device</font>(xTopLeft=50, yTopLeft=30));
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotPolesAndZeros;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE importFromFile<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -106,53 +79,19 @@ table   { solid #000; border-collapse: collapse;}
 <B>Example how to read a transfer function from a matlab file</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR bgcolor="#e0e0e0"><TD colspan=4>system data definition</TD></TR>
-<TR><TD>Boolean</TD><TD>systemOnFile</TD><TD>true</TD><TD>true, if state space system is defined on file</TD></TR>
-<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;tf_siso_1.mat&quot;</TD><TD>file where numenator n and denominator d are stored</TD></TR>
-<TR bgcolor="#e0e0e0"><TD colspan=4>coefficients</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
->Polynomial</A></TD><TD>n</TD><TD>Polynomial({1,2,3})</TD><TD>&nbsp;</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
->Polynomial</A></TD><TD>d</TD><TD>Polynomial({4,5,6})</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>system data definition</TD></TR>
+<TR><TD>systemOnFile</TD><TD>true, if state space system is defined on file</TD></TR>
+<TR><TD>fileName</TD><TD>file where numenator n and denominator d are stored</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>coefficients</TD></TR>
+<TR><TD>n</TD><TD>&nbsp;</TD></TR>
+<TR><TD>d</TD><TD>&nbsp;</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> importFromFile <font color="darkgreen">
-  &quot;Example how to read a transfer function from a matlab file&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->Modelica_LinearSystems2.TransferFunction</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
->Modelica_LinearSystems2.Math.Polynomial</A>;
-
-  <font color="blue">input </font>Boolean systemOnFile=true <font color="darkgreen">
-    &quot;true, if state space system is defined on file&quot;</font>;
-
-  <font color="blue">input </font>String fileName=DataDir + &quot;tf_siso_1.mat&quot; <font color="darkgreen">
-    &quot;file where numenator n and denominator d are stored&quot;</font>;
-
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
->Polynomial</A> n=<font color="red">Polynomial</font>({1,2,3});
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
->Polynomial</A> d=<font color="red">Polynomial</font>({4,5,6});
-  <font color="blue">output </font>Boolean ok;
-
-<font color="blue">protected </font>
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf=<font color="blue">if </font>systemOnFile<font color="blue"> then </font><font color="red">TransferFunction.Import.fromFile</font>(fileName)<font color="blue"> else </font><font color="red">TransferFunction</font>(n=n, d=d);
-
-<font color="blue">algorithm </font>
-  <font color="red">Modelica.Utilities.Streams.print</font>(&quot;TransferFunction = &quot; +<font color="red"> String</font>(tf));
-  ok := true;
-
-<font color="blue">end </font>importFromFile;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE operationsOnTransferFunctions<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -161,100 +100,9 @@ table   { solid #000; border-collapse: collapse;}
 <B>Demonstrate the usage of the functions of Modelica_LinearSystems2.TransferFunction</B><p>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> operationsOnTransferFunctions <font color="darkgreen">
-  &quot;Demonstrate the usage of the functions of Modelica_LinearSystems2.TransferFunction&quot;</font>
-  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print"
->Modelica.Utilities.Streams.print</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->Modelica_LinearSystems2.TransferFunction</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
->Modelica_LinearSystems2.ZerosAndPoles</A>;
-
-  <font color="blue">output </font>Boolean ok;
-
-<font color="blue">protected </font>
-  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> j =<font color="red"> Modelica_LinearSystems2.Math.Complex.j</font>();
-<A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf1=<font color="red">TransferFunction</font>(n={1,2}, d={2,3,4});
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf2=<font color="red">TransferFunction</font>(3.4);
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
->ZerosAndPoles</A> zp1=<font color="red">ZerosAndPoles</font>({-1+0*j},{1+0*j,2+3*j,2-3*j},  k=4);
-
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
->ZerosAndPoles</A> zp2=<font color="red">ZerosAndPoles</font>(
-      <font color="red">fill</font>(<font color="red">Complex</font>(0), 0),{0.1+0*j}, k=5);
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf4=<font color="red">ZerosAndPoles.Conversion.toTransferFunction</font>(zp1);
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf5=<font color="red">ZerosAndPoles.Conversion.toTransferFunction</font>(zp2);
-
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf5a=<font color="red">TransferFunction</font>({1}, {1,1});
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf6=<font color="red">Modelica_LinearSystems2.TransferFunction.s</font>();
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf7=-tf1;
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf8=tf1 + tf4;
-
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf9=tf1 - tf4;
-
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf10=tf1*tf4;
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf11=tf1/tf4;
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf12=tf1^2;
-  Boolean same1=tf1 == tf1;
-  Boolean same2=tf1 == tf4;
-  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> y1=<font color="red">TransferFunction.Analysis.evaluate</font>(tf1, 2+3*j);
-  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> numZeros[:];
-  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> denZeros[:];
-  Real k;
-  Real k5;
-<font color="blue">algorithm </font>
-  (numZeros,denZeros,k) :=<font color="red"> TransferFunction.Analysis.zerosAndPoles</font>(tf4);
-  <font color="red">print</font>(&quot;      tf1 = &quot; +<font color="red"> String</font>(tf1));
-  <font color="red">print</font>(&quot;      tf2 = &quot; +<font color="red"> String</font>(tf2));
-  <font color="red">print</font>(&quot;      tf4 = &quot; +<font color="red"> String</font>(tf4));
-  (numZeros,denZeros,k5) :=<font color="red"> TransferFunction.Analysis.zerosAndPoles</font>(tf5);
-  tf5a :=<font color="red"> ZerosAndPoles.Conversion.toTransferFunction</font>(<font color="red">ZerosAndPoles</font>(
-    numZeros,
-    denZeros,
-    k));
-  <font color="red">print</font>(&quot;      tf5 = &quot; +<font color="red"> String</font>(tf5a));
-  <font color="red">print</font>(&quot;      tf6 = &quot; +<font color="red"> String</font>(tf6));
-  <font color="red">print</font>(&quot;     -tf1 = &quot; +<font color="red"> String</font>(tf7));
-  <font color="red">print</font>(&quot;  tf1+tf4 = &quot; +<font color="red"> String</font>(tf8));
-  <font color="red">print</font>(&quot;  tf1-tf4 = &quot; +<font color="red"> String</font>(tf9));
-  <font color="red">print</font>(&quot;  tf1*tf4 = &quot; +<font color="red"> String</font>(tf10));
-  <font color="red">print</font>(&quot;  tf1/tf4 = &quot; +<font color="red"> String</font>(tf11));
-  <font color="red">print</font>(&quot;  tf1^2   = &quot; +<font color="red"> String</font>(tf12));
-  <font color="red">print</font>(&quot; tf1==tf1 = &quot; +<font color="red"> String</font>(same1));
-  <font color="red">print</font>(&quot; tf1==tf4 = &quot; +<font color="red"> String</font>(same2));
-  <font color="red">print</font>(&quot;tf1(2+3j) = &quot; +<font color="red"> String</font>(y1));
-  <font color="red">print</font>(&quot;        k = &quot; +<font color="red"> String</font>(k) + &quot; // (zeros,poles,k) = zerosAndPoles(tf4)&quot;);
-  <font color="red">print</font>(&quot;numerator   degree of tf1 = &quot; +<font color="red"> String</font>(
-    <font color="red">TransferFunction.Analysis.numeratorDegree</font>(tf1)));
-  <font color="red">print</font>(&quot;denominator degree of tf1 = &quot; +<font color="red"> String</font>(
-    <font color="red">TransferFunction.Analysis.denominatorDegree</font>(tf1)));
-  ok := true;
-<font color="blue">end </font>operationsOnTransferFunctions;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotBode1<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -263,41 +111,9 @@ table   { solid #000; border-collapse: collapse;}
 <B>Construct a transfer function and plot the Bode diagram with automatic determination of the frequency range to plot</B><p>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> plotBode1 <font color="darkgreen">
-  &quot;Construct a transfer function and plot the Bode diagram with automatic determination of the frequency range to plot&quot;</font>
-
-  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print"
->Modelica.Utilities.Streams.print</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->Modelica_LinearSystems2.TransferFunction</A>;
-
-  <font color="blue">output </font>Boolean ok;
-
-<font color="blue">protected </font>
- <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> s =<font color="red"> Modelica_LinearSystems2.TransferFunction.s</font>();
-
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf1= 1/(10*s+1)^3;
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf2=(s + 2)/(2*s^2 + 3*s +4);
-<font color="blue">algorithm </font>
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.bode</font>(
-    tf=tf1);
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.bode</font>(
-    tf=tf2);
-  ok := true;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotBode1;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotBode2<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -306,44 +122,9 @@ table   { solid #000; border-collapse: collapse;}
 <B>Construct 2 transfer functions and plot the Bode diagram with automatic determination of the frequency range to plot</B><p>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> plotBode2 <font color="darkgreen">
-  &quot;Construct 2 transfer functions and plot the Bode diagram with automatic determination of the frequency range to plot&quot;</font>
-
-  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print"
->Modelica.Utilities.Streams.print</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->Modelica_LinearSystems2.TransferFunction</A>;
-
-  <font color="blue">output </font>Boolean ok;
-<font color="blue">protected </font>
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf1=<font color="red">TransferFunction</font>({1,2}, {2,3,4});
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf2=<font color="red">TransferFunction</font>({1,2}, {4,1,4});
-
-<font color="blue">algorithm </font>
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.bode</font>(
-    tf1,
-    autoRange=false,
-    f_min=0.01,
-    f_max=30);
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.bode</font>(
-    tf2,
-    autoRange=false,
-    f_min=0.01,
-    f_max=30);
-  ok := true;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotBode2;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotBode3<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -352,33 +133,9 @@ table   { solid #000; border-collapse: collapse;}
 <B>Construct 2 transfer functions and plot the Bode diagram with automatic determination of the frequency range to plot</B><p>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> plotBode3 <font color="darkgreen">
-  &quot;Construct 2 transfer functions and plot the Bode diagram with automatic determination of the frequency range to plot&quot;</font>
-
-  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Streams.html#Modelica.Utilities.Streams.print"
->Modelica.Utilities.Streams.print</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->Modelica_LinearSystems2.TransferFunction</A>;
-
-  <font color="blue">output </font>Boolean ok;
-<font color="blue">protected </font>
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf=<font color="red">TransferFunction</font>({1}, {1,0,1});
-
-<font color="blue">algorithm </font>
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.bode</font>(    tf);
-  ok := true;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotBode3;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotBodeFilter2<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -387,94 +144,18 @@ table   { solid #000; border-collapse: collapse;}
 <B>Show low pass filters of all filter types in one diagram</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Integer</TD><TD>order</TD><TD>4</TD><TD>Order of filter</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Frequency</A></TD><TD>f_cut</TD><TD>1</TD><TD>Cut-off frequency [Hz]</TD></TR>
-<TR><TD>Real</TD><TD>A_ripple</TD><TD>3</TD><TD>Pass band ripple for Chebyshev filter (otherwise not used) [dB]</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Frequency</A></TD><TD>f_min</TD><TD>0.1</TD><TD>Minimum frequency value [Hz]</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Frequency</A></TD><TD>f_max</TD><TD>10</TD><TD>Maximum frequency value [Hz]</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>order</TD><TD>Order of filter</TD></TR>
+<TR><TD>f_cut</TD><TD>Cut-off frequency [Hz]</TD></TR>
+<TR><TD>A_ripple</TD><TD>Pass band ripple for Chebyshev filter (otherwise not used) [dB]</TD></TR>
+<TR><TD>f_min</TD><TD>Minimum frequency value [Hz]</TD></TR>
+<TR><TD>f_max</TD><TD>Maximum frequency value [Hz]</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Boolean</TD><TD>ok</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>ok</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> plotBodeFilter2 <font color="darkgreen">
-  &quot;Show low pass filters of all filter types in one diagram&quot;</font>
-  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
->Modelica</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->Modelica_LinearSystems2.TransferFunction</A>;
-  <font color="blue">import </font>AF = <A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.AnalogFilter"
->Modelica_LinearSystems2.Types.AnalogFilter</A>;
-
-  <font color="blue">input </font>Integer order(min=1) = 4 <font color="darkgreen">&quot;Order of filter&quot;</font>;
-  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Modelica.SIunits.Frequency</A> f_cut=1 <font color="darkgreen">&quot;Cut-off frequency&quot;</font>;
-  <font color="blue">input </font>Real A_ripple(unit=&quot;dB&quot;) = 3 <font color="darkgreen">
-    &quot;Pass band ripple for Chebyshev filter (otherwise not used)&quot;</font>;
-  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Modelica.SIunits.Frequency</A> f_min(min=0) = 0.1 <font color="darkgreen">&quot;Minimum frequency value&quot;</font>;
-  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Modelica.SIunits.Frequency</A> f_max(min=0) = 10 <font color="darkgreen">&quot;Maximum frequency value&quot;</font>;
-  <font color="blue">output </font>Boolean ok;
-<font color="blue">protected </font>
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf1=<font color="red">TransferFunction.Design.filter</font>(
-      analogFilter=AF.CriticalDamping,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple);
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf2=<font color="red">TransferFunction.Design.filter</font>(
-      analogFilter=AF.Bessel,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple);
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf3=<font color="red">TransferFunction.Design.filter</font>(
-      analogFilter=AF.Butterworth,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple);
-  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf4=<font color="red">TransferFunction.Design.filter</font>(
-      analogFilter=AF.Chebyshev,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple);
-<font color="blue">algorithm </font>
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.bode</font>(
-    tf1,
-    autoRange=false,
-    f_min=f_min,
-    f_max=f_max);
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.bode</font>(
-    tf2,
-    autoRange=false,
-    f_min=f_min,
-    f_max=f_max);
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.bode</font>(
-    tf3,
-    autoRange=false,
-    f_min=f_min,
-    f_max=f_max);
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.bode</font>(
-    tf4,
-    autoRange=false,
-    f_min=f_min,
-    f_max=f_max);
-
-  ok := true;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotBodeFilter2;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotImpulse<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -489,29 +170,9 @@ Computes the impulse response of the system tf =1/s^2 + s + 1.
 
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A></TD><TD>tf</TD><TD>TransferFunction(n={1}, d={1...</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>tf</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> plotImpulse <font color="darkgreen">&quot;Impulse plot example&quot;</font>
-
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->Modelica_LinearSystems2.TransferFunction</A>;
-
- <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf=<font color="red">TransferFunction</font>(n={1}, d={1,1,1});
-
-<font color="blue">algorithm </font>
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.impulse</font>(
-    tf=tf,
-    dt=0.1,
-    tSpan=10);
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotImpulse;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotInital<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -525,28 +186,9 @@ Computes the impulse response of the system tf =1/s^2 + s + 1.
 
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A></TD><TD>tf</TD><TD>TransferFunction({1}, {1,1,1})</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>tf</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> plotInital <font color="darkgreen">&quot;Initial condition plot example&quot;</font>
-
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->Modelica_LinearSystems2.TransferFunction</A>;
-
- <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf=<font color="red">TransferFunction</font>({1}, {1,1,1});
-
-<font color="blue">protected </font>
-  Real y0=1 <font color="darkgreen">&quot;Initial state vector&quot;</font>;
-<font color="blue">algorithm </font>
-  <font color="red">Modelica_LinearSystems2.TransferFunction.Plot.initialResponse</font>(tf=tf, y0=y0, dt=0.1, tSpan=10);
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotInital;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE plotStep<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -561,28 +203,9 @@ Computes the impulse response of the system tf =1/s^2 + s + 1.
 
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A></TD><TD>tf</TD><TD>TransferFunction({1}, {1,1,1})</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>tf</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> plotStep <font color="darkgreen">&quot;Step plot example&quot;</font>
-
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->Modelica_LinearSystems2.TransferFunction</A>;
-
- <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A> tf=<font color="red">TransferFunction</font>({1}, {1,1,1});
-
-<font color="blue">algorithm </font>
-<font color="red">Modelica_LinearSystems2.TransferFunction.Plot.step</font>(
-    tf=tf,
-    dt=0.1,
-    tSpan=10);
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>plotStep;
-</PRE>
-<HR>
-<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:28:39 2010.
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Wed Oct 27 10:04:43 2010.
 </address></BODY>
 </HTML>

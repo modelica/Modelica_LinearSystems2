@@ -23,6 +23,8 @@ table   { solid #000; border-collapse: collapse;}
 >Modelica_LinearSystems2.Utilities.Plot</A>.Records</H2>
 <B>Records used to define the function interfaces</B>
 <P>
+<P><H3>Information</H3></P>
+Extends from Modelica.Icons.Package (Icon for standard packages).
 <P><H3>Package Content</H3><p>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
 <TR><TH >Name</TH><TH>Description</TH></TR>
@@ -39,7 +41,6 @@ table   { solid #000; border-collapse: collapse;}
 >DefaultDiagram</A>
 </TD><TD>Diagram with no curves (might be used as default diagram)</TD></TR>
 </TABLE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE Diagram<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -48,65 +49,26 @@ table   { solid #000; border-collapse: collapse;}
 >Modelica_LinearSystems2.Utilities.Plot.Records</A>.Diagram</H2>
 <B>Properties of a diagram in a figure containing one or more curves</B><p>
 <P><H3>Information</H3></P>
-Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Record"
->Modelica.Icons.Record</A> (Icon for a record).
+Extends from Modelica.Icons.Record (Icon for records).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Curve"
->Curve</A></TD><TD>curve[:]</TD><TD>&nbsp;</TD><TD>Properties of the curves in one diagram of the figure</TD></TR>
-<TR><TD>String</TD><TD>heading</TD><TD>&quot;&quot;</TD><TD>Heading displayed above diagram</TD></TR>
-<TR><TD>Real</TD><TD>heightRatio</TD><TD>0.45</TD><TD>Height of diagram = heightRatio*diagramWidth</TD></TR>
-<TR><TD>Boolean</TD><TD>grid</TD><TD>true</TD><TD>= true, if grid is shown</TD></TR>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes</TD></TR>
-<TR><TD>String</TD><TD>xLabel</TD><TD>&quot;&quot;</TD><TD>String displayed at horizontal axis</TD></TR>
-<TR><TD>String</TD><TD>yLabel</TD><TD>&quot;&quot;</TD><TD>String displayed at vertical axis</TD></TR>
-<TR><TD>Boolean</TD><TD>logX</TD><TD>false</TD><TD>= true, if logarithmic scale of x-axis</TD></TR>
-<TR><TD>Boolean</TD><TD>logY</TD><TD>false</TD><TD>= true, if logarithmic scale of y-axis</TD></TR>
-<TR><TD>Boolean</TD><TD>uniformScaling</TD><TD>false</TD><TD>= true, if same vertical and horizontal axis increment</TD></TR>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Legend</TD></TR>
-<TR><TD>Boolean</TD><TD>legend</TD><TD>true</TD><TD>= true, if legend is shown</TD></TR>
-<TR><TD>Boolean</TD><TD>legendFrame</TD><TD>false</TD><TD>= true, if frame around legend</TD></TR>
-<TR><TD>Boolean</TD><TD>legendHorizontal</TD><TD>true</TD><TD>= true, if horizontal legend (provided it is meaningful)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation"
->LegendLocation</A></TD><TD>legendLocation</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Legend placement</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>curve[:]</TD><TD>Properties of the curves in one diagram of the figure</TD></TR>
+<TR><TD>heading</TD><TD>Heading displayed above diagram</TD></TR>
+<TR><TD>heightRatio</TD><TD>Height of diagram = heightRatio*diagramWidth</TD></TR>
+<TR><TD>grid</TD><TD>= true, if grid is shown</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Axes</TD></TR>
+<TR><TD>xLabel</TD><TD>String displayed at horizontal axis</TD></TR>
+<TR><TD>yLabel</TD><TD>String displayed at vertical axis</TD></TR>
+<TR><TD>logX</TD><TD>= true, if logarithmic scale of x-axis</TD></TR>
+<TR><TD>logY</TD><TD>= true, if logarithmic scale of y-axis</TD></TR>
+<TR><TD>uniformScaling</TD><TD>= true, if same vertical and horizontal axis increment</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Legend</TD></TR>
+<TR><TD>legend</TD><TD>= true, if legend is shown</TD></TR>
+<TR><TD>legendFrame</TD><TD>= true, if frame around legend</TD></TR>
+<TR><TD>legendHorizontal</TD><TD>= true, if horizontal legend (provided it is meaningful)</TD></TR>
+<TR><TD>legendLocation</TD><TD>Legend placement</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">record</font> Diagram <font color="darkgreen">
-  &quot;Properties of a diagram in a figure containing one or more curves&quot;</font>
-  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Record"
->Modelica.Icons.Record</A>;
-
-  <A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Curve"
->Modelica_LinearSystems2.Utilities.Plot.Records.Curve</A> curve[:] <font color="darkgreen">
-    &quot;Properties of the curves in one diagram of the figure&quot;</font>;
-
-  String heading=&quot;&quot; <font color="darkgreen">&quot;Heading displayed above diagram&quot;</font>;
-  Real heightRatio = 0.45 <font color="darkgreen">&quot;Height of diagram = heightRatio*diagramWidth&quot;</font>;
-  Boolean grid=true <font color="darkgreen">&quot;= true, if grid is shown&quot;</font>;
-
-  <font color="darkgreen">/* group &quot;Axes&quot; (Axes properties) */</font>
-  String xLabel=&quot;&quot; <font color="darkgreen">&quot;String displayed at horizontal axis&quot;</font>;
-  String yLabel=&quot;&quot; <font color="darkgreen">&quot;String displayed at vertical axis&quot;</font>;
-  Boolean logX = false <font color="darkgreen">&quot;= true, if logarithmic scale of x-axis&quot;</font>;
-  Boolean logY = false <font color="darkgreen">&quot;= true, if logarithmic scale of y-axis&quot;</font>;
-  Boolean uniformScaling = false <font color="darkgreen">
-    &quot;= true, if same vertical and horizontal axis increment&quot;</font>;
-
-  <font color="darkgreen">/* group &quot;Legend&quot; (Legend properties) */</font>
-  Boolean legend = true <font color="darkgreen">&quot;= true, if legend is shown&quot;</font>;
-  Boolean legendFrame=false <font color="darkgreen">&quot;= true, if frame around legend&quot;</font>;
-  Boolean legendHorizontal=true <font color="darkgreen">
-    &quot;= true, if horizontal legend (provided it is meaningful)&quot;</font>;
-  <A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation"
->Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation</A> legendLocation=
-                   Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation.Above <font color="darkgreen">
-    &quot;Legend placement&quot;</font>;
-
-<font color="blue">end </font>Diagram;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE Curve<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -115,55 +77,19 @@ Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Mod
 >Modelica_LinearSystems2.Utilities.Plot.Records</A>.Curve</H2>
 <B>Properties of a curve (displayed in a diagram)</B><p>
 <P><H3>Information</H3></P>
-Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Record"
->Modelica.Icons.Record</A> (Icon for a record).
+Extends from Modelica.Icons.Record (Icon for records).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>x[:]</TD><TD>&nbsp;</TD><TD>x-values of curve</TD></TR>
-<TR><TD>Real</TD><TD>y[:]</TD><TD>&nbsp;</TD><TD>y-values of curve</TD></TR>
-<TR><TD>String</TD><TD>legend</TD><TD>&quot;&quot;</TD><TD>Legend text of curve</TD></TR>
-<TR><TD>Boolean</TD><TD>autoLine</TD><TD>true</TD><TD>= true, if automatic line properties of curve</TD></TR>
-<TR bgcolor="#e0e0e0"><TD colspan=4>If autoLine = false (otherwise ignored)</TD></TR>
-<TR><TD>Integer</TD><TD>lineColor[3]</TD><TD>{0,0,255}</TD><TD>Color of curve as rgb values</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern"
->LinePattern</A></TD><TD>linePattern</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Line pattern of curve</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol"
->PointSymbol</A></TD><TD>lineSymbol</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Symbol for points on curve</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>x[:]</TD><TD>x-values of curve</TD></TR>
+<TR><TD>y[:]</TD><TD>y-values of curve</TD></TR>
+<TR><TD>legend</TD><TD>Legend text of curve</TD></TR>
+<TR><TD>autoLine</TD><TD>= true, if automatic line properties of curve</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>If autoLine = false (otherwise ignored)</TD></TR>
+<TR><TD>lineColor[3]</TD><TD>Color of curve as rgb values</TD></TR>
+<TR><TD>linePattern</TD><TD>Line pattern of curve</TD></TR>
+<TR><TD>lineSymbol</TD><TD>Symbol for points on curve</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">record</font> Curve <font color="darkgreen">&quot;Properties of a curve (displayed in a diagram)&quot;</font>
-  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Record"
->Modelica.Icons.Record</A>;
-
-   Real x[:] <font color="darkgreen">&quot;x-values of curve&quot;</font>;
-   Real y[:] <font color="darkgreen">&quot;y-values of curve&quot;</font>;
-   String legend=&quot;&quot; <font color="darkgreen">&quot;Legend text of curve&quot;</font>;
-
-   Boolean autoLine = true <font color="darkgreen">&quot;= true, if automatic line properties of curve&quot;</font>;
-
-   Integer lineColor[3]={0,0,255} <font color="darkgreen">&quot;Color of curve as rgb values&quot;</font>;
-
-   <A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern"
->Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern</A> linePattern=
-      Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.Solid <font color="darkgreen">
-    &quot;Line pattern of curve&quot;</font>;
-   <A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol"
->Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol</A> lineSymbol=
-      Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.None <font color="darkgreen">
-    &quot;Symbol for points on curve&quot;</font>;
-
-<font color="darkgreen">/*
-   Modelica_LinearSystems2.Utilities.Plot.Types.LineThickness_mm lineThickness=0.25 
-    &quot;Line thickness of curve&quot; annotation(Dialog(group=&quot;If autoLine = false (otherwise ignored)&quot;));
-   Modelica_LinearSystems2.Utilities.Plot.Types.LineThickness_mm lineSymbolSize=3 
-    &quot;Symbol size&quot; annotation(Dialog(group=&quot;If autoLine = false (otherwise ignored)&quot;));
-*/</font>
-
-<font color="blue">end </font>Curve;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE Device<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -172,46 +98,16 @@ Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Mod
 >Modelica_LinearSystems2.Utilities.Plot.Records</A>.Device</H2>
 <B>Properties of a device</B><p>
 <P><H3>Information</H3></P>
-Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Record"
->Modelica.Icons.Record</A> (Icon for a record).
+Extends from Modelica.Icons.Record (Icon for records).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm"
->DrawingUnit_mm</A></TD><TD>xTopLeft</TD><TD>0</TD><TD>Horizontal position of top left figure corner if applicable (e.g. window) [mm]</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm"
->DrawingUnit_mm</A></TD><TD>yTopLeft</TD><TD>0</TD><TD>Vertical position of top left figure corner if applicable (e.g. window) [mm]</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm"
->DrawingUnit_mm</A></TD><TD>diagramWidth</TD><TD>140</TD><TD>Width of diagram [mm]</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.ImageResolution_dpi"
->ImageResolution_dpi</A></TD><TD>windowResolution</TD><TD>96</TD><TD>[dpi] Image resolution in window if applicable (e.g. unscaled window)</TD></TR>
-<TR><TD>Boolean</TD><TD>autoLineColor</TD><TD>true</TD><TD>if automatic line properties: distinguish curves by color otherwise by line style</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>xTopLeft</TD><TD>Horizontal position of top left figure corner if applicable (e.g. window) [mm]</TD></TR>
+<TR><TD>yTopLeft</TD><TD>Vertical position of top left figure corner if applicable (e.g. window) [mm]</TD></TR>
+<TR><TD>diagramWidth</TD><TD>Width of diagram [mm]</TD></TR>
+<TR><TD>windowResolution</TD><TD>[dpi] Image resolution in window if applicable (e.g. unscaled window)</TD></TR>
+<TR><TD>autoLineColor</TD><TD>if automatic line properties: distinguish curves by color otherwise by line style</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">record</font> Device <font color="darkgreen">&quot;Properties of a device&quot;</font>
-  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Record"
->Modelica.Icons.Record</A>;
-
-  <A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm"
->Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm</A> xTopLeft=0 <font color="darkgreen">
-    &quot;Horizontal position of top left figure corner if applicable (e.g. window)&quot;</font>;
-  <A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm"
->Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm</A> yTopLeft=0 <font color="darkgreen">
-    &quot;Vertical position of top left figure corner if applicable (e.g. window)&quot;</font>;
-  <A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm"
->Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm</A> diagramWidth=140 <font color="darkgreen">
-    &quot;Width of diagram&quot;</font>;
-  <A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.ImageResolution_dpi"
->Modelica_LinearSystems2.Utilities.Plot.Types.ImageResolution_dpi</A>
-    windowResolution=96 <font color="darkgreen">
-    &quot;[dpi] Image resolution in window if applicable (e.g. unscaled window)&quot;</font>;
-
-  Boolean autoLineColor = true <font color="darkgreen">
-    &quot;if automatic line properties: distinguish curves by color otherwise by line style&quot;</font>;
-<font color="blue">end </font>Device;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE DefaultDiagram<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -224,35 +120,23 @@ Extends from <A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modeli
 >Diagram</A> (Properties of a diagram in a figure containing one or more curves).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Curve"
->Curve</A></TD><TD>curve[:]</TD><TD>fill(Curve(x=fill(0.0, 0), y...</TD><TD>Properties of the curves in one diagram of the figure</TD></TR>
-<TR><TD>String</TD><TD>heading</TD><TD>&quot;&quot;</TD><TD>Heading displayed above diagram</TD></TR>
-<TR><TD>Real</TD><TD>heightRatio</TD><TD>0.45</TD><TD>Height of diagram = heightRatio*diagramWidth</TD></TR>
-<TR><TD>Boolean</TD><TD>grid</TD><TD>true</TD><TD>= true, if grid is shown</TD></TR>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes</TD></TR>
-<TR><TD>String</TD><TD>xLabel</TD><TD>&quot;&quot;</TD><TD>String displayed at horizontal axis</TD></TR>
-<TR><TD>String</TD><TD>yLabel</TD><TD>&quot;&quot;</TD><TD>String displayed at vertical axis</TD></TR>
-<TR><TD>Boolean</TD><TD>logX</TD><TD>false</TD><TD>= true, if logarithmic scale of x-axis</TD></TR>
-<TR><TD>Boolean</TD><TD>logY</TD><TD>false</TD><TD>= true, if logarithmic scale of y-axis</TD></TR>
-<TR><TD>Boolean</TD><TD>uniformScaling</TD><TD>false</TD><TD>= true, if same vertical and horizontal axis increment</TD></TR>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Legend</TD></TR>
-<TR><TD>Boolean</TD><TD>legend</TD><TD>true</TD><TD>= true, if legend is shown</TD></TR>
-<TR><TD>Boolean</TD><TD>legendFrame</TD><TD>false</TD><TD>= true, if frame around legend</TD></TR>
-<TR><TD>Boolean</TD><TD>legendHorizontal</TD><TD>true</TD><TD>= true, if horizontal legend (provided it is meaningful)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation"
->LegendLocation</A></TD><TD>legendLocation</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Legend placement</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>curve[:]</TD><TD>Properties of the curves in one diagram of the figure</TD></TR>
+<TR><TD>heading</TD><TD>Heading displayed above diagram</TD></TR>
+<TR><TD>heightRatio</TD><TD>Height of diagram = heightRatio*diagramWidth</TD></TR>
+<TR><TD>grid</TD><TD>= true, if grid is shown</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Axes</TD></TR>
+<TR><TD>xLabel</TD><TD>String displayed at horizontal axis</TD></TR>
+<TR><TD>yLabel</TD><TD>String displayed at vertical axis</TD></TR>
+<TR><TD>logX</TD><TD>= true, if logarithmic scale of x-axis</TD></TR>
+<TR><TD>logY</TD><TD>= true, if logarithmic scale of y-axis</TD></TR>
+<TR><TD>uniformScaling</TD><TD>= true, if same vertical and horizontal axis increment</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Legend</TD></TR>
+<TR><TD>legend</TD><TD>= true, if legend is shown</TD></TR>
+<TR><TD>legendFrame</TD><TD>= true, if frame around legend</TD></TR>
+<TR><TD>legendHorizontal</TD><TD>= true, if horizontal legend (provided it is meaningful)</TD></TR>
+<TR><TD>legendLocation</TD><TD>Legend placement</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">record</font> DefaultDiagram <font color="darkgreen">
-  &quot;Diagram with no curves (might be used as default diagram)&quot;</font>
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
->Diagram</A>(curve=<font color="red">fill</font>(<font color="red">Curve</font>(
-                             x=<font color="red">fill</font>(0.0,0),y=<font color="red">fill</font>(0.0,0)),0));
-<font color="blue">end </font>DefaultDiagram;
-</PRE>
-<HR>
-<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:28:56 2010.
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Wed Oct 27 10:04:49 2010.
 </address></BODY>
 </HTML>

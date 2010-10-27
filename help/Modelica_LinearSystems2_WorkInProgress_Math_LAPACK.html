@@ -78,7 +78,6 @@ table   { solid #000; border-collapse: collapse;}
 >wrapper_zunmrq</A>
 </TD><TD>Wrapper for lapack function zunmrq</TD></TR>
 </TABLE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE zungqr<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -86,60 +85,15 @@ table   { solid #000; border-collapse: collapse;}
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.zungqr</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>QR[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>tau[:]</TD><TD>&nbsp;</TD><TD>elementary reflectors</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>QR[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>tau[:]</TD><TD>elementary reflectors</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>Q[size(QR, 1), size(QR, 2)]</TD><TD>matrix Q</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Q[size(QR, 1), size(QR, 2)]</TD><TD>matrix Q</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> zungqr
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A> QR[:,:] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> tau[:] <font color="darkgreen">&quot;elementary reflectors&quot;</font>;
-  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> Q[<font color="red">size</font>(QR, 1),<font color="red">size</font>(QR, 2)] <font color="darkgreen">&quot;matrix Q&quot;</font>;
-<font color="blue">protected </font>
-  Integer m=<font color="red">size</font>(QR, 1);
-  Integer n=<font color="red">size</font>(QR, 2);
-
-  Real QR_real[<font color="red">size</font>(QR, 1),<font color="red">size</font>(QR, 2)]=QR[:,:].re <font color="darkgreen">
-    &quot;QR factorization in packed format, real part&quot;</font>;
-  Real QR_imag[<font color="red">size</font>(QR, 1),<font color="red">size</font>(QR, 2)]=QR[:,:].im <font color="darkgreen">
-    &quot;QR factorization in packed format, imaginary part&quot;</font>;
-  Real tau_real[<font color="red">min</font>(<font color="red">size</font>(QR, 1),<font color="red"> size</font>(QR, 2))]=tau[:].re <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, real part&quot;</font>;
-  Real tau_imag[<font color="red">min</font>(<font color="red">size</font>(QR, 1),<font color="red"> size</font>(QR, 2))]=tau[:].im <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, imaginary part&quot;</font>;
-  Real Q_real[<font color="red">size</font>(QR, 1),<font color="red">size</font>(QR, 2)] <font color="darkgreen">
-    &quot;matrix Q from QR factorization in packed format, real part&quot;</font>;
-  Real Q_imag[<font color="red">size</font>(QR, 1),<font color="red">size</font>(QR, 2)] <font color="darkgreen">
-    &quot;matrix Q from QR factorization in packed format, imaginary part&quot;</font>;
-
-<font color="blue">algorithm </font>
-  (Q_real,Q_imag) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.wrapper_zungqr</font>(
-                                  QR_real, QR_imag, tau_real, tau_imag);
-  <font color="blue">for </font>l1<font color="blue"> in </font>1:m<font color="blue"> loop</font>
-    <font color="blue">for </font>l2<font color="blue"> in </font>1:n<font color="blue"> loop</font>
-      Q[l1, l2] :=<font color="red"> Complex</font>(Q_real[l1, l2],Q_imag[l1, l2]);
-    <font color="blue">end for</font>;
-  <font color="blue">end for</font>;
-
-<font color="blue">end </font>zungqr;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE zgeqrf<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -147,92 +101,15 @@ table   { solid #000; border-collapse: collapse;}
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.zgeqrf</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>A[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>Q[size(A, 1), size(A, 2)]</TD><TD>Square upper triangular matrix</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>R[size(A, 2), size(A, 2)]</TD><TD>Square upper triangular matrix</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Q[size(A, 1), size(A, 2)]</TD><TD>Square upper triangular matrix</TD></TR>
+<TR><TD>R[size(A, 2), size(A, 2)]</TD><TD>Square upper triangular matrix</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> zgeqrf
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A> A[:,:] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> Q[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Square upper triangular matrix&quot;</font>;
-  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> R[<font color="red">size</font>(A, 2),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Square upper triangular matrix&quot;</font>;
-
-<font color="blue">protected </font>
-  Integer m=<font color="red">size</font>(A, 1);
-  Integer n=<font color="red">size</font>(A, 2);
-  Integer info;
-  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> QR[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;QR factorization in packed format&quot;</font>;
-  Real A_real[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=A[:, :].re <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  Real A_imag[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=A[:, :].im <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  Real QR_real[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">
-    &quot;QR factorization in packed format, real part&quot;</font>;
-  Real QR_imag[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">
-    &quot;QR factorization in packed format, imaginary part&quot;</font>;
-  Real Q_real[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">
-    &quot;QR factorization in packed format, real part&quot;</font>;
-  Real Q_imag[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">
-    &quot;QR factorization in packed format, imaginary part&quot;</font>;
-  Real tau_real[<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A_real, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, real part&quot;</font>;
-  Real tau_imag[<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A_real, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, imaginary part&quot;</font>;
-<font color="darkgreen">//  Complex tau[:] &quot;The scalar factors of the elementary reflectors of Q&quot;;</font>
-
-<font color="blue">algorithm </font>
-<font color="red">assert</font>(m &gt;= n, &quot;\nInput matrix A[&quot; +<font color="red"> String</font>(m) + &quot;,&quot; +<font color="red"> String</font>(n) + &quot;] has more columns as rows.
-This is not allowed when calling Modelica.Matrices.C_QR(A).&quot;);
-  (QR_real,QR_imag,tau_real,tau_imag,info) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.wrapper_zgeqrf</font>(
-                                                           A_real, A_imag);
-  <font color="blue">for </font>l1<font color="blue"> in </font>1:m<font color="blue"> loop</font>
-    <font color="blue">for </font>l2<font color="blue"> in </font>1:n<font color="blue"> loop</font>
-      QR[l1, l2] :=<font color="red"> Complex</font>(QR_real[l1, l2], QR_imag[l1, l2]);
-    <font color="blue">end for</font>;
-  <font color="blue">end for</font>;
-
-<font color="darkgreen">//  tau := fill(Complex(0), size(tau_real, 1));</font>
-<font color="darkgreen">//   for i in 1:min(m, n) loop</font>
-<font color="darkgreen">//     tau[i] := Complex(tau_real[i], tau_imag[i]);</font>
-<font color="darkgreen">//   end for;</font>
-
-<font color="darkgreen">// determine R</font>
-  R :=<font color="red"> fill</font>(
-    <font color="red">Complex</font>(0),
-    n,
-    n);
-  <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">min</font>(m, n)<font color="blue"> loop</font>
-    <font color="blue">for </font>j<font color="blue"> in </font>i:n<font color="blue"> loop</font>
-      R[i, j] := QR[i, j];
-    <font color="blue">end for</font>;
-  <font color="blue">end for</font>;
-
-  (Q_real,Q_imag, info) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.wrapper_zungqr</font>(
-                                        QR_real, QR_imag, tau_real, tau_imag);
-  <font color="blue">for </font>l1<font color="blue"> in </font>1:m<font color="blue"> loop</font>
-    <font color="blue">for </font>l2<font color="blue"> in </font>1:n<font color="blue"> loop</font>
-      Q[l1, l2] :=<font color="red"> Complex</font>(Q_real[l1, l2], Q_imag[l1, l2]);
-    <font color="blue">end for</font>;
-  <font color="blue">end for</font>;
-
-<font color="blue">end </font>zgeqrf;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE zgesvd<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -241,69 +118,17 @@ This is not allowed when calling Modelica.Matrices.C_QR(A).&quot;);
 <B>Determine singular values of a complex matrix</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>A[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>sigma[min(size(A, 1), size(A, 2))]</TD><TD>singular values</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>U[size(A, 1), size(A, 1)]</TD><TD>Left orthogonal matrix</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>VT[size(A, 2), size(A, 2)]</TD><TD>Transposed right orthogonal matrix</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>sigma[min(size(A, 1), size(A, 2))]</TD><TD>singular values</TD></TR>
+<TR><TD>U[size(A, 1), size(A, 1)]</TD><TD>Left orthogonal matrix</TD></TR>
+<TR><TD>VT[size(A, 2), size(A, 2)]</TD><TD>Transposed right orthogonal matrix</TD></TR>
+<TR><TD>info</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> zgesvd <font color="darkgreen">&quot;Determine singular values of a complex matrix&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
->Modelica_LinearSystems2.Math.Matrices</A>;
-
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> A[:,:] <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">output </font>Real sigma[<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2))] <font color="darkgreen">&quot;singular values&quot;</font>;
-  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> U[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)] <font color="darkgreen">&quot;Left orthogonal matrix&quot;</font>;
-  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> VT[<font color="red">size</font>(A, 2),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Transposed right orthogonal matrix&quot;</font>;
-  <font color="blue">output </font>Integer info;
-
-<font color="blue">protected </font>
-  Integer n=<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2)) <font color="darkgreen">&quot;Number of singular values&quot;</font>;
-
-  Real U_real[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)] <font color="darkgreen">&quot;Left orthogonal matrix, real part&quot;</font>;
-  Real U_imag[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)] <font color="darkgreen">&quot;Left orthogonal matrix, imaginary part&quot;</font>;
-  Real VT_real[<font color="red">size</font>(A, 2),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Left orthogonal matrix, real part&quot;</font>;
-  Real VT_imag[<font color="red">size</font>(A, 2),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Left orthogonal matrix, imaginary part&quot;</font>;
-  Real A_real[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=A[:, :].re <font color="darkgreen">&quot;Real part of matrix A&quot;</font>;
-  Real A_imag[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=A[:, :].im <font color="darkgreen">&quot;Imaginary part of matrix A&quot;</font>;
-
-<font color="blue">algorithm </font>
-  <font color="blue">if </font>n &gt; 0<font color="blue"> then</font>
-
-    (sigma,U_real,U_imag,VT_real,VT_imag,info) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.wrapper_zgesvd</font>(
-                                                                                 A_real, A_imag);
-    <font color="red">assert</font>(info == 0, &quot;The numerical algorithm to compute the singular value decomposition did not converge&quot;);
-
-    <font color="blue">for </font>l1<font color="blue"> in </font>1:<font color="red">size</font>(A, 1)<font color="blue"> loop</font>
-      <font color="blue">for </font>l2<font color="blue"> in </font>1:<font color="red">size</font>(A, 1)<font color="blue"> loop</font>
-        U[l1, l2] :=<font color="red"> Complex</font>(U_real[l1, l2], U_imag[l1, l2]);
-      <font color="blue">end for</font>;
-    <font color="blue">end for</font>;
-    <font color="blue">for </font>l1<font color="blue"> in </font>1:<font color="red">size</font>(A, 2)<font color="blue"> loop</font>
-      <font color="blue">for </font>l2<font color="blue"> in </font>1:<font color="red">size</font>(A, 2)<font color="blue"> loop</font>
-        VT[l1, l2] :=<font color="red"> Complex</font>(VT_real[l1, l2], VT_imag[l1, l2]);
-      <font color="blue">end for</font>;
-    <font color="blue">end for</font>;
-
-  <font color="blue">end if</font>;
-<font color="blue">end </font>zgesvd;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE zgesv<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -312,61 +137,16 @@ This is not allowed when calling Modelica.Matrices.C_QR(A).&quot;);
 <B>Solve complex system of linear equations A*X=B</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>B[size(A, 1), :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>B[size(A, 1), :]</TD><TD>&nbsp;</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>X[size(A, 1), size(B, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>X[size(A, 1), size(B, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>info</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> zgesv <font color="darkgreen">&quot;Solve complex system of linear equations A*X=B&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
->Modelica_LinearSystems2.Math.Matrices</A>;
-
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> A[:,<font color="red">size</font>(A, 1)];
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> B[<font color="red">size</font>(A, 1),:];
-  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> X[<font color="red">size</font>(A, 1),<font color="red">size</font>(B, 2)]=B;
-  <font color="blue">output </font>Integer info;
-
-<font color="blue">protected </font>
-  Integer n=<font color="red">size</font>(A, 1) <font color="darkgreen">&quot;Number of equations&quot;</font>;
-
-  Real A_real[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=A[:, :].re <font color="darkgreen">&quot;Real part of matrix A&quot;</font>;
-  Real A_imag[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=A[:, :].im <font color="darkgreen">&quot;Imaginary part of matrix A&quot;</font>;
-  Real B_real[<font color="red">size</font>(B, 1),<font color="red">size</font>(B, 2)]=B[:, :].re <font color="darkgreen">&quot;Real part of matrix B&quot;</font>;
-  Real B_imag[<font color="red">size</font>(B, 1),<font color="red">size</font>(B, 2)]=B[:, :].im <font color="darkgreen">&quot;Imaginary part of matrix B&quot;</font>;
-  Real X_real[<font color="red">size</font>(X, 1),<font color="red">size</font>(X, 2)] <font color="darkgreen">&quot;Real part of matrix X&quot;</font>;
-  Real X_imag[<font color="red">size</font>(X, 1),<font color="red">size</font>(X, 2)] <font color="darkgreen">&quot;Imaginary part of matrix X&quot;</font>;
-
-<font color="blue">algorithm </font>
-  <font color="blue">if </font>n &gt; 0<font color="blue"> then</font>
-    (X_real,X_imag,info) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.wrapper_zgesv</font>(
-                                                          A_real, A_imag, B_real, B_imag);
-    <font color="red">assert</font>(info == 0, &quot;Solving a linear system of equations with function
-\&quot;Matrices.C_solve2\&quot; is not possible, because the system has either
-no or infinitely many solutions (A is singular).&quot;);
-    <font color="blue">for </font>l1<font color="blue"> in </font>1:<font color="red">size</font>(A, 1)<font color="blue"> loop</font>
-      <font color="blue">for </font>l2<font color="blue"> in </font>1:<font color="red">size</font>(B, 2)<font color="blue"> loop</font>
-        X[l1, l2] :=<font color="red"> Complex</font>(X_real[l1, l2], X_imag[l1, l2]);
-      <font color="blue">end for</font>;
-    <font color="blue">end for</font>;
-  <font color="blue">end if</font>;
-<font color="blue">end </font>zgesv;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE zgerq2<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -374,63 +154,15 @@ no or infinitely many solutions (A is singular).&quot;);
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.zgerq2</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>A[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>RQ[size(A, 1), size(A, 2)]</TD><TD>RQ factorization in packed format</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>tau[:]</TD><TD>elementory reflectors</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>RQ[size(A, 1), size(A, 2)]</TD><TD>RQ factorization in packed format</TD></TR>
+<TR><TD>tau[:]</TD><TD>elementory reflectors</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> zgerq2
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A> A[:,:] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> RQ[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;RQ factorization in packed format&quot;</font>;
-  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> tau[:] <font color="darkgreen">&quot;elementory reflectors&quot;</font>;
-
-<font color="blue">protected </font>
-  Integer n=<font color="red">size</font>(A, 1);
-  Integer m=<font color="red">size</font>(A, 2);
-  Integer info;
-  Real A_real[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=A[:, :].re <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  Real A_imag[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=A[:, :].im <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  Real RQ_real[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">
-    &quot;RQ factorization in packed format, real part&quot;</font>;
-  Real RQ_imag[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">
-    &quot;RQ factorization in packed format, imag part&quot;</font>;
-  Real tau_real[<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, real part&quot;</font>;
-  Real tau_imag[<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, imaginary part&quot;</font>;
-
-<font color="blue">algorithm </font>
-  (RQ_real,RQ_imag,tau_real,tau_imag,info) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.wrapper_zgerq2</font>(
-                                                                                                    A_real, A_imag);
-  <font color="blue">for </font>l1<font color="blue"> in </font>1:n<font color="blue"> loop</font>
-    <font color="blue">for </font>l2<font color="blue"> in </font>1:m<font color="blue"> loop</font>
-      RQ[l1, l2] :=<font color="red"> Complex</font>(RQ_real[l1, l2], RQ_imag[l1, l2]);
-    <font color="blue">end for</font>;
-    <font color="blue">end for</font>;
-
-   tau :=<font color="red"> fill</font>(<font color="red">Complex</font>(0),<font color="red"> size</font>(tau_real,1));
-   <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">min</font>(m, n)<font color="blue"> loop</font>
-     tau[i] :=<font color="red"> Complex</font>(tau_real[i], tau_imag[i]);
-   <font color="blue">end for</font>;
-<font color="blue">end </font>zgerq2;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE zgetrf<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -438,53 +170,16 @@ no or infinitely many solutions (A is singular).&quot;);
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.zgetrf</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>A[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>LU[size(A, 1), size(A, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Integer</TD><TD>pivots[min(size(A, 1), size(A, 2))]</TD><TD>Pivot vector</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>Information</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>LU[size(A, 1), size(A, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>pivots[min(size(A, 1), size(A, 2))]</TD><TD>Pivot vector</TD></TR>
+<TR><TD>info</TD><TD>Information</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> zgetrf
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> A[:,:] <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> LU[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)];
-  <font color="blue">output </font>Integer pivots[<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2))] <font color="darkgreen">&quot;Pivot vector&quot;</font>;
-  <font color="blue">output </font>Integer info <font color="darkgreen">&quot;Information&quot;</font>;
-
-<font color="blue">protected </font>
-  Integer m=<font color="red">size</font>(A, 1);
-  Integer n=<font color="red">size</font>(A, 2);
-  Real A_real[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=A[:, :].re <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  Real A_imag[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=A[:, :].im <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  Real LU_real[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">
-    &quot;LU factorization in packed format, real part&quot;</font>;
-  Real LU_imag[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">
-    &quot;LU factorization in packed format, imaginary part&quot;</font>;
-
-<font color="blue">algorithm </font>
-  (LU_real,LU_imag,pivots,info) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.wrapper_zgetrf</font>(
-                                                                                               A_real, A_imag);
-  <font color="blue">for </font>l1<font color="blue"> in </font>1:m<font color="blue"> loop</font>
-    <font color="blue">for </font>l2<font color="blue"> in </font>1:n<font color="blue"> loop</font>
-      LU[l1, l2] :=<font color="red"> Complex</font>(LU_real[l1, l2], LU_imag[l1, l2]);
-    <font color="blue">end for</font>;
-  <font color="blue">end for</font>;
-
-<font color="blue">end </font>zgetrf;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE zgetri<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -492,56 +187,16 @@ no or infinitely many solutions (A is singular).&quot;);
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.zgetri</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>LU[:, size(LU, 1)]</TD><TD>&nbsp;</TD><TD>LU factorization of zgetrf of a complex square matrix</TD></TR>
-<TR><TD>Integer</TD><TD>pivots[size(LU, 1)]</TD><TD>&nbsp;</TD><TD>Pivot vector of zgetrf</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>LU[:, size(LU, 1)]</TD><TD>LU factorization of zgetrf of a complex square matrix</TD></TR>
+<TR><TD>pivots[size(LU, 1)]</TD><TD>Pivot vector of zgetrf</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>inv[size(LU, 1), size(LU, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>inv[size(LU, 1), size(LU, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>info</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> zgetri
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> LU[:,<font color="red"> size</font>(LU, 1)] <font color="darkgreen">
-    &quot;LU factorization of zgetrf of a complex square matrix&quot;</font>;
-  <font color="blue">input </font>Integer pivots[<font color="red">size</font>(LU, 1)] <font color="darkgreen">&quot;Pivot vector of zgetrf&quot;</font>;
-  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> inv[<font color="red">size</font>(LU, 1),<font color="red">size</font>(LU, 2)];
-  <font color="blue">output </font>Integer info;
-
-<font color="blue">protected </font>
-  Integer m=<font color="red">size</font>(LU, 1);
-  Integer n=<font color="red">size</font>(LU, 2);
-  Real LU_real[<font color="red">size</font>(LU, 1),<font color="red">size</font>(LU, 2)]=LU[:, :].re <font color="darkgreen">
-    &quot;LU factorization of zgetrf of a complex square matrix, real part&quot;</font>;
-  Real LU_imag[<font color="red">size</font>(LU, 1),<font color="red">size</font>(LU, 2)]=LU[:, :].im <font color="darkgreen">
-    &quot;LU factorization of zgetrf of a complex square matrix, imaginary part&quot;</font>;
-  Real inv_real[<font color="red">size</font>(LU, 1),<font color="red">size</font>(LU, 2)] <font color="darkgreen">&quot;Inverse of matrix P*L*U, real part&quot;</font>;
-  Real inv_imag[<font color="red">size</font>(LU, 1),<font color="red">size</font>(LU, 2)] <font color="darkgreen">
-    &quot;Inverse of matrix P*L*U, imaginary part&quot;</font>;
-
-<font color="blue">algorithm </font>
-  (inv_real,inv_imag,info) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.wrapper_zgetri</font>(
-                                                                                          LU_real, LU_imag, pivots);
-
-  <font color="blue">for </font>l1<font color="blue"> in </font>1:m<font color="blue"> loop</font>
-    <font color="blue">for </font>l2<font color="blue"> in </font>1:n<font color="blue"> loop</font>
-      inv[l1, l2] :=<font color="red"> Complex</font>(inv_real[l1, l2], inv_imag[l1, l2]);
-    <font color="blue">end for</font>;
-  <font color="blue">end for</font>;
-
-<font color="blue">end </font>zgetri;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE zungrq<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -549,63 +204,15 @@ no or infinitely many solutions (A is singular).&quot;);
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.zungrq</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>RQ[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>tau[:]</TD><TD>&nbsp;</TD><TD>elementary reflectors</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>RQ[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>tau[:]</TD><TD>elementary reflectors</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>Q[size(RQ, 1), size(RQ, 2)]</TD><TD>matrix Q</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Q[size(RQ, 1), size(RQ, 2)]</TD><TD>matrix Q</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> zungrq
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A> RQ[:,:] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> tau[:] <font color="darkgreen">&quot;elementary reflectors&quot;</font>;
-  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> Q[<font color="red">size</font>(RQ, 1),<font color="red">size</font>(RQ, 2)] <font color="darkgreen">&quot;matrix Q&quot;</font>;
-<font color="blue">protected </font>
-  Integer m=<font color="red">size</font>(RQ, 1);
-  Integer n=<font color="red">size</font>(RQ, 2);
-
-  Real RQ_real[<font color="red">size</font>(RQ, 1),<font color="red">size</font>(RQ, 2)]=RQ[:,:].re <font color="darkgreen">
-    &quot;RQ factorization in packed format, real part&quot;</font>;
-  Real RQ_imag[<font color="red">size</font>(RQ, 1),<font color="red">size</font>(RQ, 2)]=RQ[:,:].im <font color="darkgreen">
-    &quot;RQ factorization in packed format, imaginary part&quot;</font>;
-  Real tau_real[<font color="red">min</font>(<font color="red">size</font>(RQ, 1),<font color="red"> size</font>(RQ, 2))]=tau[:].re <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, real part&quot;</font>;
-  Real tau_imag[<font color="red">min</font>(<font color="red">size</font>(RQ, 1),<font color="red"> size</font>(RQ, 2))]=tau[:].im <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, imaginary part&quot;</font>;
-  Real Q_real[<font color="red">size</font>(RQ, 1),<font color="red">size</font>(RQ, 2)] <font color="darkgreen">
-    &quot;matrix Q from RQ factorization in packed format, real part&quot;</font>;
-  Real Q_imag[<font color="red">size</font>(RQ, 1),<font color="red">size</font>(RQ, 2)] <font color="darkgreen">
-    &quot;matrix Q from RQ factorization in packed format, imaginary part&quot;</font>;
-
-<font color="blue">algorithm </font>
-  <font color="red">assert</font>(m &lt;= n, &quot;\nInput matrix A[&quot; +<font color="red"> String</font>(m) + &quot;,&quot; +<font color="red"> String</font>(n)
-     +&quot;] has more rows as columns. This is not allowed when calling Modelica.Matrices.C_RQ(A).&quot;);
-
-  (Q_real,Q_imag) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.wrapper_zungrq</font>(
-                                                                                 RQ_real, RQ_imag, tau_real, tau_imag);
-  <font color="blue">for </font>l1<font color="blue"> in </font>1:m<font color="blue"> loop</font>
-    <font color="blue">for </font>l2<font color="blue"> in </font>1:n<font color="blue"> loop</font>
-      Q[l1, l2] :=<font color="red"> Complex</font>(Q_real[l1, l2],Q_imag[l1, l2]);
-    <font color="blue">end for</font>;
-  <font color="blue">end for</font>;
-
-<font color="blue">end </font>zungrq;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE zunmrq<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -613,71 +220,18 @@ no or infinitely many solutions (A is singular).&quot;);
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.zunmrq</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>C[:, :]</TD><TD>&nbsp;</TD><TD>Matrix to multiply with Q</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>RQ[:, :]</TD><TD>&nbsp;</TD><TD>Matrix as a result of zgerq2</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>tau[:]</TD><TD>&nbsp;</TD><TD>elementary reflectors</TD></TR>
-<TR><TD>Boolean</TD><TD>left</TD><TD>true</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Boolean</TD><TD>trans</TD><TD>false</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>C[:, :]</TD><TD>Matrix to multiply with Q</TD></TR>
+<TR><TD>RQ[:, :]</TD><TD>Matrix as a result of zgerq2</TD></TR>
+<TR><TD>tau[:]</TD><TD>elementary reflectors</TD></TR>
+<TR><TD>left</TD><TD>&nbsp;</TD></TR>
+<TR><TD>trans</TD><TD>&nbsp;</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A></TD><TD>CQ[size(C, 1), size(C, 2)]</TD><TD>Matrix product C*Q, Q*C, C*Q**H, Q**H*C</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>CQ[size(C, 1), size(C, 2)]</TD><TD>Matrix product C*Q, Q*C, C*Q**H, Q**H*C</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> zunmrq
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A> C[:,:] <font color="darkgreen">&quot;Matrix to multiply with Q&quot;</font>;
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A> RQ[:,:] <font color="darkgreen">
-    &quot;Matrix as a result of zgerq2&quot;</font>;
-  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> tau[:] <font color="darkgreen">&quot;elementary reflectors&quot;</font>;
-  <font color="blue">input </font>Boolean left=true;
-  <font color="blue">input </font>Boolean trans=false;
-  <font color="blue">output </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Complex</A> CQ[<font color="red">size</font>(C, 1),<font color="red">size</font>(C, 2)] <font color="darkgreen">
-    &quot;Matrix product C*Q, Q*C, C*Q**H, Q**H*C&quot;</font>;
-<font color="blue">protected </font>
-  Integer m=<font color="red">size</font>(C, 1);
-  Integer n=<font color="red">size</font>(C, 2);
-
-  Real C_real[<font color="red">size</font>(C, 1),<font color="red">size</font>(C, 2)]=C[:,:].re <font color="darkgreen">
-    &quot;Real part of matrix to multiply with Q&quot;</font>;
-  Real C_imag[<font color="red">size</font>(C, 1),<font color="red">size</font>(C, 2)]=C[:,:].im <font color="darkgreen">
-    &quot;Imag part of matrix to multiply with Q&quot;</font>;
-  Real RQ_real[<font color="red">size</font>(RQ, 1),<font color="red">size</font>(RQ, 2)]=RQ[:,:].re <font color="darkgreen">
-    &quot;RQ factorization in packed format, real part&quot;</font>;
-  Real RQ_imag[<font color="red">size</font>(RQ, 1),<font color="red">size</font>(RQ, 2)]=RQ[:,:].im <font color="darkgreen">
-    &quot;RQ factorization in packed format, imaginary part&quot;</font>;
-  Real tau_real[<font color="red">min</font>(<font color="red">size</font>(RQ, 1),<font color="red"> size</font>(RQ, 2))]=tau[:].re <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, real part&quot;</font>;
-  Real tau_imag[<font color="red">min</font>(<font color="red">size</font>(RQ, 1),<font color="red"> size</font>(RQ, 2))]=tau[:].im <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, imaginary part&quot;</font>;
-  Real CQ_real[<font color="red">size</font>(CQ, 1),<font color="red">size</font>(CQ, 2)] <font color="darkgreen">&quot;Matrix product, real part&quot;</font>;
-  Real CQ_imag[<font color="red">size</font>(CQ, 1),<font color="red">size</font>(CQ, 2)] <font color="darkgreen">&quot;Matrix product, imaginary part&quot;</font>;
-
-<font color="blue">algorithm </font>
-  (CQ_real,CQ_imag) :=<font color="red"> Modelica_LinearSystems2.WorkInProgress.Math.LAPACK.wrapper_zunmrq</font>(
-                                                                                   RQ_real, RQ_imag, tau_real, tau_imag, C_real, C_imag, left, trans);
-  <font color="blue">for </font>l1<font color="blue"> in </font>1:m<font color="blue"> loop</font>
-    <font color="blue">for </font>l2<font color="blue"> in </font>1:n<font color="blue"> loop</font>
-      CQ[l1, l2] :=<font color="red"> Complex</font>(CQ_real[l1, l2],CQ_imag[l1, l2]);
-    <font color="blue">end for</font>;
-  <font color="blue">end for</font>;
-
-<font color="blue">end </font>zunmrq;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE wrapper_zungqr<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -685,42 +239,19 @@ no or infinitely many solutions (A is singular).&quot;);
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.wrapper_zungqr</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>QR_real[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>QR_imag[size(QR_real, 1), size(QR_real, 2)]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>tau_real[min(size(QR_real, 1), size(QR_real, 2))]</TD><TD>&nbsp;</TD><TD>The scalar factors of the elementary reflectors of Q, real part</TD></TR>
-<TR><TD>Real</TD><TD>tau_imag[min(size(QR_real, 1), size(QR_real, 2))]</TD><TD>&nbsp;</TD><TD>The scalar factors of the elementary reflectors of Q, imaginary part</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>QR_real[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>QR_imag[size(QR_real, 1), size(QR_real, 2)]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>tau_real[min(size(QR_real, 1), size(QR_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, real part</TD></TR>
+<TR><TD>tau_imag[min(size(QR_real, 1), size(QR_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, imaginary part</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>Q_real[size(QR_real, 1), size(QR_real, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Real</TD><TD>Q_imag[size(QR_real, 1), size(QR_real, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Q_real[size(QR_real, 1), size(QR_real, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Q_imag[size(QR_real, 1), size(QR_real, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>info</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> wrapper_zungqr
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-<font color="darkgreen">//  input Modelica_LinearSystems2.Math.Complex A[ :, :] &quot;Square or rectangular matrix&quot;;</font>
-  <font color="blue">input </font>Real QR_real[ :, :] <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real QR_imag[<font color="red">size</font>(QR_real,1),<font color="red"> size</font>(QR_real,2)] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real tau_real[<font color="red">min</font>(<font color="red">size</font>(QR_real, 1),<font color="red"> size</font>(QR_real, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, real part&quot;</font>;
-  <font color="blue">input </font>Real tau_imag[<font color="red">min</font>(<font color="red">size</font>(QR_real, 1),<font color="red"> size</font>(QR_real, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, imaginary part&quot;</font>;
-  <font color="blue">output </font>Real Q_real[<font color="red">size</font>(QR_real, 1),<font color="red">size</font>(QR_real, 2)]=QR_real;
-  <font color="blue">output </font>Real Q_imag[<font color="red">size</font>(QR_real, 1),<font color="red">size</font>(QR_real, 2)]=QR_imag;
-  <font color="blue">output </font>Integer info;
-
-  <font color="blue">external</font> &quot;FORTRAN 77&quot; <font color="red">c_inter_zungqr</font>(<font color="red">size</font>(QR_real, 1),<font color="red"> size</font>(QR_real, 2),<font color="red"> size</font>(tau_real,1),Q_real, Q_imag,<font color="red"> size</font>(QR_real,1), tau_real, tau_imag, info);
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>wrapper_zungqr;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE wrapper_zgeqrf<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -728,49 +259,19 @@ no or infinitely many solutions (A is singular).&quot;);
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.wrapper_zgeqrf</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>A_real[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>A_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>A_real[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>A_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>Square or rectangular matrix</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>QR_real[size(A_real, 1), size(A_real, 2)]</TD><TD>QR factorization in packed format, real part</TD></TR>
-<TR><TD>Real</TD><TD>QR_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>QR factorization in packed format, imaginary part</TD></TR>
-<TR><TD>Real</TD><TD>tau_real[min(size(A_real, 1), size(A_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, real part</TD></TR>
-<TR><TD>Real</TD><TD>tau_imag[min(size(A_real, 1), size(A_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, imaginary part</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>QR_real[size(A_real, 1), size(A_real, 2)]</TD><TD>QR factorization in packed format, real part</TD></TR>
+<TR><TD>QR_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>QR factorization in packed format, imaginary part</TD></TR>
+<TR><TD>tau_real[min(size(A_real, 1), size(A_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, real part</TD></TR>
+<TR><TD>tau_imag[min(size(A_real, 1), size(A_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, imaginary part</TD></TR>
+<TR><TD>info</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> wrapper_zgeqrf
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-<font color="darkgreen">//  input Modelica_LinearSystems2.Math.Complex A[ :, :] &quot;Square or rectangular matrix&quot;;</font>
-  <font color="blue">input </font>Real A_real[ :, :] <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real A_imag[<font color="red">size</font>(A_real,1),<font color="red"> size</font>(A_real,2)] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">output </font>Real QR_real[<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2)]=A_real <font color="darkgreen">
-    &quot;QR factorization in packed format, real part&quot;</font>;
-  <font color="blue">output </font>Real QR_imag[<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2)]=A_imag <font color="darkgreen">
-    &quot;QR factorization in packed format, imaginary part&quot;</font>;
-  <font color="blue">output </font>Real tau_real[<font color="red">min</font>(<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, real part&quot;</font>;
-  <font color="blue">output </font>Real tau_imag[<font color="red">min</font>(<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, imaginary part&quot;</font>;
-  <font color="blue">output </font>Integer info;
-
-<font color="blue">protected </font>
-  Integer ncol=<font color="red">size</font>(A_real, 2) <font color="darkgreen">&quot;Column dimension of A&quot;</font>;
-  Integer lwork[2*ncol];
-  Real work_real[ncol] <font color="darkgreen">&quot;work array real&quot;</font>;
-  Real work_imag[ncol] <font color="darkgreen">&quot;work array imaginary&quot;</font>;
-  <font color="blue">external</font> &quot;FORTRAN 77&quot; <font color="red">c_inter_zgeqrf</font>(<font color="red">size</font>(A_real, 1), ncol, QR_real, QR_imag,<font color="red"> size</font>(A_real,1), tau_real, tau_imag, info);
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>wrapper_zgeqrf;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE wrapper_zgesvd<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -778,59 +279,20 @@ no or infinitely many solutions (A is singular).&quot;);
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.wrapper_zgesvd</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>A_real[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>A_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>A_real[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>A_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>Square or rectangular matrix</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>sigma[min(size(A_real, 1), size(A_real, 2))]</TD><TD>singular values</TD></TR>
-<TR><TD>Real</TD><TD>U_real[size(A_real, 1), size(A_real, 1)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Real</TD><TD>U_imag[size(A_real, 1), size(A_real, 1)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Real</TD><TD>VT_real[size(A_real, 2), size(A_real, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Real</TD><TD>VT_imag[size(A_real, 2), size(A_real, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>sigma[min(size(A_real, 1), size(A_real, 2))]</TD><TD>singular values</TD></TR>
+<TR><TD>U_real[size(A_real, 1), size(A_real, 1)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>U_imag[size(A_real, 1), size(A_real, 1)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>VT_real[size(A_real, 2), size(A_real, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>VT_imag[size(A_real, 2), size(A_real, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>info</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> wrapper_zgesvd
-
-  <font color="blue">input </font>Real A_real[:,:] <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real A_imag[<font color="red">size</font>(A_real, 1),<font color="red">size</font>(A_real, 2)] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">output </font>Real sigma[<font color="red">min</font>(<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2))] <font color="darkgreen">&quot;singular values&quot;</font>;
-  <font color="blue">output </font>Real U_real[<font color="red">size</font>(A_real, 1),<font color="red">size</font>(A_real, 1)];<font color="darkgreen">//=identity(size(A_real, 1)) &quot;Left orthogonal matrix, real part&quot;;</font>
-  <font color="blue">output </font>Real U_imag[<font color="red">size</font>(A_real, 1),<font color="red">size</font>(A_real, 1)];<font color="darkgreen">//=zeros(size(A_real, 1), size(A_real, 1)) &quot;Left orthogonal matrix, imaginary part&quot;;</font>
-  <font color="blue">output </font>Real VT_real[<font color="red">size</font>(A_real, 2),<font color="red">size</font>(A_real, 2)];<font color="darkgreen">//=identity(size(A_real, 2)) &quot;Left orthogonal matrix, real part&quot;;</font>
-  <font color="blue">output </font>Real VT_imag[<font color="red">size</font>(A_real, 2),<font color="red">size</font>(A_real, 2)];<font color="darkgreen">//=zeros(size(A_real, 2),  size(A_real, 2)) &quot;Left orthogonal matrix, imaginary part&quot;;</font>
-  <font color="blue">output </font>Integer info;
-
-<font color="blue">protected </font>
-  Integer nrow=<font color="red">size</font>(A_real, 1) <font color="darkgreen">&quot;Column dimension of A&quot;</font>;
-  Integer ncol=<font color="red">size</font>(A_real, 2) <font color="darkgreen">&quot;Column dimension of A&quot;</font>;
-  Real rwork[5*<font color="red">min</font>(nrow, ncol)];
-<font color="blue">external</font>&quot;FORTRAN 77&quot; <font color="red">c_inter_zgesvd</font>(
-    &quot;A&quot;,
-    &quot;A&quot;,
-    <font color="red">size</font>(A_real, 1),
-    <font color="red">size</font>(A_real, 2),
-    A_real,
-    A_imag,
-    <font color="red">size</font>(A_real, 1),
-    sigma,
-    U_real,
-    U_imag,
-    <font color="red">size</font>(A_real, 1),
-    VT_real,
-    VT_imag,
-    <font color="red">size</font>(A_real, 2),
-    rwork,
-    info);
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>wrapper_zgesvd;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE wrapper_zgesv<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -838,43 +300,19 @@ no or infinitely many solutions (A is singular).&quot;);
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.wrapper_zgesv</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>A_real[:, size(A_real, 1)]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>A_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>B_real[size(A_real, 1), :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>B_imag[size(B_real, 1), size(B_real, 2)]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>A_real[:, size(A_real, 1)]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>A_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>B_real[size(A_real, 1), :]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>B_imag[size(B_real, 1), size(B_real, 2)]</TD><TD>Square or rectangular matrix</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>X_real[size(A_real, 1), size(B_real, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Real</TD><TD>X_imag[size(A_real, 1), size(B_real, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>X_real[size(A_real, 1), size(B_real, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>X_imag[size(A_real, 1), size(B_real, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>info</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> wrapper_zgesv
-
-  <font color="blue">input </font>Real A_real[:,<font color="red">size</font>(A_real,1)] <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real A_imag[<font color="red">size</font>(A_real, 1),<font color="red">size</font>(A_real, 2)] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real B_real[<font color="red">size</font>(A_real,1),:] <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real B_imag[<font color="red">size</font>(B_real, 1),<font color="red">size</font>(B_real, 2)] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">output </font>Real X_real[<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(B_real, 2)]=B_real;
-  <font color="blue">output </font>Real X_imag[<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(B_real, 2)]=B_imag;
-  <font color="blue">output </font>Integer info;
-
-<font color="blue">protected </font>
-  Real Awork_real[<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 1)]=A_real;
-  Real Awork_imag[<font color="red">size</font>(A_imag, 1),<font color="red"> size</font>(A_imag, 1)]=A_imag;
-  Integer ipiv[<font color="red">size</font>(A_real, 1)];
-
-<font color="blue">external</font>&quot;FORTRAN 77&quot; <font color="red">c_inter_zgesv</font>(<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(B_real, 2), Awork_real, Awork_imag,<font color="red"> size</font>(A_real, 1), ipiv,  X_real,  X_imag,<font color="red"> size</font>(A_real, 1), info);
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>wrapper_zgesv;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE wrapper_zgetrf<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -882,43 +320,18 @@ no or infinitely many solutions (A is singular).&quot;);
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.wrapper_zgetrf</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>A_real[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>A_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>A_real[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>A_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>Square or rectangular matrix</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>LU_real[size(A_real, 1), size(A_real, 2)]</TD><TD>LU factorization in packed format, real part</TD></TR>
-<TR><TD>Real</TD><TD>LU_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>LU factorization in packed format, imaginary part</TD></TR>
-<TR><TD>Integer</TD><TD>pivots[min(size(A_real, 1), size(A_real, 2))]</TD><TD>Pivot vector</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>LU_real[size(A_real, 1), size(A_real, 2)]</TD><TD>LU factorization in packed format, real part</TD></TR>
+<TR><TD>LU_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>LU factorization in packed format, imaginary part</TD></TR>
+<TR><TD>pivots[min(size(A_real, 1), size(A_real, 2))]</TD><TD>Pivot vector</TD></TR>
+<TR><TD>info</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> wrapper_zgetrf
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-<font color="darkgreen">//  input Modelica_LinearSystems2.Math.Complex A[ :, :] &quot;Square or rectangular matrix&quot;;</font>
-  <font color="blue">input </font>Real A_real[ :, :] <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real A_imag[<font color="red">size</font>(A_real,1),<font color="red"> size</font>(A_real,2)] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">output </font>Real LU_real[<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2)]=A_real <font color="darkgreen">
-    &quot;LU factorization in packed format, real part&quot;</font>;
-  <font color="blue">output </font>Real LU_imag[<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2)]=A_imag <font color="darkgreen">
-    &quot;LU factorization in packed format, imaginary part&quot;</font>;
-  <font color="blue">output </font>Integer pivots[<font color="red">min</font>(<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2))] <font color="darkgreen">&quot;Pivot vector&quot;</font>;
-<font color="darkgreen">//  output Real inv_real[size(LU_real, 1), size(LU_real, 2)]=LU_real &quot;Real part of inverse of matrix P*L*U&quot;;</font>
-<font color="darkgreen">//  output Real inv_imag[size(LU_imag, 1), size(LU_imag, 2)]=LU_imag &quot;Real part of inverse of matrix P*L*U&quot;;</font>
-
-  <font color="blue">output </font>Integer info;
-
-  <font color="blue">external</font> &quot;FORTRAN 77&quot; <font color="red">c_inter_zgetrf</font>(<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2), LU_real, LU_imag,<font color="red"> size</font>(A_real,1), pivots, info);
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>wrapper_zgetrf;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE wrapper_zgetri<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -926,40 +339,18 @@ no or infinitely many solutions (A is singular).&quot;);
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.wrapper_zgetri</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>LU_real[:, :]</TD><TD>&nbsp;</TD><TD>LU factorization of zgetrf of a square matrix, real part</TD></TR>
-<TR><TD>Real</TD><TD>LU_imag[size(LU_real, 1), size(LU_real, 2)]</TD><TD>&nbsp;</TD><TD>LU factorization of zgetrf of a square matrix, imaginary part</TD></TR>
-<TR><TD>Integer</TD><TD>pivots[size(LU_real, 1)]</TD><TD>&nbsp;</TD><TD>Pivot vector of zgetrf</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>LU_real[:, :]</TD><TD>LU factorization of zgetrf of a square matrix, real part</TD></TR>
+<TR><TD>LU_imag[size(LU_real, 1), size(LU_real, 2)]</TD><TD>LU factorization of zgetrf of a square matrix, imaginary part</TD></TR>
+<TR><TD>pivots[size(LU_real, 1)]</TD><TD>Pivot vector of zgetrf</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>inv_real[size(LU_real, 1), size(LU_real, 2)]</TD><TD>Inverse of matrix P*L*U, real part</TD></TR>
-<TR><TD>Real</TD><TD>inv_imag[size(LU_real, 1), size(LU_real, 2)]</TD><TD>Inverse of matrix P*L*U, imaginary part</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>inv_real[size(LU_real, 1), size(LU_real, 2)]</TD><TD>Inverse of matrix P*L*U, real part</TD></TR>
+<TR><TD>inv_imag[size(LU_real, 1), size(LU_real, 2)]</TD><TD>Inverse of matrix P*L*U, imaginary part</TD></TR>
+<TR><TD>info</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> wrapper_zgetri
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-  <font color="blue">input </font>Real LU_real[ :, :] <font color="darkgreen">
-    &quot;LU factorization of zgetrf of a square matrix, real part&quot;</font>;
-  <font color="blue">input </font>Real LU_imag[<font color="red">size</font>(LU_real,1),<font color="red"> size</font>(LU_real,2)] <font color="darkgreen">
-    &quot;LU factorization of zgetrf of a square matrix, imaginary part&quot;</font>;
-  <font color="blue">input </font>Integer pivots[<font color="red">size</font>(LU_real, 1)] <font color="darkgreen">&quot;Pivot vector of zgetrf&quot;</font>;
-  <font color="blue">output </font>Real inv_real[<font color="red">size</font>(LU_real, 1),<font color="red"> size</font>(LU_real, 2)]=LU_real <font color="darkgreen">
-    &quot;Inverse of matrix P*L*U, real part&quot;</font>;
-  <font color="blue">output </font>Real inv_imag[<font color="red">size</font>(LU_real, 1),<font color="red"> size</font>(LU_real, 2)]=LU_imag <font color="darkgreen">
-    &quot;Inverse of matrix P*L*U, imaginary part&quot;</font>;
-  <font color="blue">output </font>Integer info;
-
-  <font color="blue">external</font> &quot;FORTRAN 77&quot; <font color="red">c_inter_zgetri</font>(<font color="red">size</font>(LU_real, 1), inv_real, inv_imag,<font color="red"> size</font>(LU_real,1), pivots, info);
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>wrapper_zgetri;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE wrapper_zgerq2<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -968,47 +359,19 @@ no or infinitely many solutions (A is singular).&quot;);
 <B>Wrapper for lapack function zgerq2</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>A_real[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>A_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>A_real[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>A_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>Square or rectangular matrix</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>RQ_real[size(A_real, 1), size(A_real, 2)]</TD><TD>RQ factorization in packed format, real part</TD></TR>
-<TR><TD>Real</TD><TD>RQ_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>RQ factorization in packed format, imaginary part</TD></TR>
-<TR><TD>Real</TD><TD>tau_real[min(size(A_real, 1), size(A_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, real part</TD></TR>
-<TR><TD>Real</TD><TD>tau_imag[min(size(A_real, 1), size(A_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, imaginary part</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>RQ_real[size(A_real, 1), size(A_real, 2)]</TD><TD>RQ factorization in packed format, real part</TD></TR>
+<TR><TD>RQ_imag[size(A_real, 1), size(A_real, 2)]</TD><TD>RQ factorization in packed format, imaginary part</TD></TR>
+<TR><TD>tau_real[min(size(A_real, 1), size(A_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, real part</TD></TR>
+<TR><TD>tau_imag[min(size(A_real, 1), size(A_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, imaginary part</TD></TR>
+<TR><TD>info</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> wrapper_zgerq2 <font color="darkgreen">&quot;Wrapper for lapack function zgerq2&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-<font color="darkgreen">//  input Modelica_LinearSystems2.Math.Complex A[ :, :] &quot;Square or rectangular matrix&quot;;</font>
-  <font color="blue">input </font>Real A_real[ :, :] <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real A_imag[<font color="red">size</font>(A_real,1),<font color="red"> size</font>(A_real,2)] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">output </font>Real RQ_real[<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2)]=A_real <font color="darkgreen">
-    &quot;RQ factorization in packed format, real part&quot;</font>;
-  <font color="blue">output </font>Real RQ_imag[<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2)]=A_imag <font color="darkgreen">
-    &quot;RQ factorization in packed format, imaginary part&quot;</font>;
-  <font color="blue">output </font>Real tau_real[<font color="red">min</font>(<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, real part&quot;</font>;
-  <font color="blue">output </font>Real tau_imag[<font color="red">min</font>(<font color="red">size</font>(A_real, 1),<font color="red"> size</font>(A_real, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, imaginary part&quot;</font>;
-  <font color="blue">output </font>Integer info;
-
-<font color="blue">protected </font>
-  Integer n=<font color="red">size</font>(A_real, 1) <font color="darkgreen">&quot;Row dimension of A&quot;</font>;
-  Integer m=<font color="red">size</font>(A_real, 2) <font color="darkgreen">&quot;Column dimension of A&quot;</font>;
-  <font color="blue">external</font> &quot;FORTRAN 77&quot; <font color="red">c_inter_zgerq2</font>(n, m, RQ_real, RQ_imag, n, tau_real, tau_imag, info);
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>wrapper_zgerq2;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE wrapper_zungrq<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -1016,41 +379,19 @@ no or infinitely many solutions (A is singular).&quot;);
 >Modelica_LinearSystems2.WorkInProgress.Math.LAPACK</A>.wrapper_zungrq</H2>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>RQ_real[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>RQ_imag[size(RQ_real, 1), size(RQ_real, 2)]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>tau_real[min(size(RQ_real, 1), size(RQ_real, 2))]</TD><TD>&nbsp;</TD><TD>The scalar factors of the elementary reflectors of Q, real part</TD></TR>
-<TR><TD>Real</TD><TD>tau_imag[min(size(RQ_real, 1), size(RQ_real, 2))]</TD><TD>&nbsp;</TD><TD>The scalar factors of the elementary reflectors of Q, imaginary part</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>RQ_real[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>RQ_imag[size(RQ_real, 1), size(RQ_real, 2)]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>tau_real[min(size(RQ_real, 1), size(RQ_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, real part</TD></TR>
+<TR><TD>tau_imag[min(size(RQ_real, 1), size(RQ_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, imaginary part</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>Q_real[size(RQ_real, 1), size(RQ_real, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Real</TD><TD>Q_imag[size(RQ_real, 1), size(RQ_real, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Q_real[size(RQ_real, 1), size(RQ_real, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Q_imag[size(RQ_real, 1), size(RQ_real, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>info</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> wrapper_zungrq
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-  <font color="blue">input </font>Real RQ_real[ :, :] <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real RQ_imag[<font color="red">size</font>(RQ_real,1),<font color="red"> size</font>(RQ_real,2)] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real tau_real[<font color="red">min</font>(<font color="red">size</font>(RQ_real, 1),<font color="red"> size</font>(RQ_real, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, real part&quot;</font>;
-  <font color="blue">input </font>Real tau_imag[<font color="red">min</font>(<font color="red">size</font>(RQ_real, 1),<font color="red"> size</font>(RQ_real, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, imaginary part&quot;</font>;
-  <font color="blue">output </font>Real Q_real[<font color="red">size</font>(RQ_real, 1),<font color="red">size</font>(RQ_real, 2)]=RQ_real;
-  <font color="blue">output </font>Real Q_imag[<font color="red">size</font>(RQ_real, 1),<font color="red">size</font>(RQ_real, 2)]=RQ_imag;
-  <font color="blue">output </font>Integer info;
-<font color="darkgreen">//  Integer info;</font>
-  <font color="blue">external</font> &quot;FORTRAN 77&quot; <font color="red">c_inter_zungrq</font>(<font color="red">size</font>(RQ_real, 1),<font color="red"> size</font>(RQ_real, 2),<font color="red"> size</font>(tau_real,1),Q_real, Q_imag,<font color="red"> size</font>(RQ_real,1), tau_real, tau_imag, info);
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>wrapper_zungrq;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE wrapper_zunmrq<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -1059,56 +400,23 @@ no or infinitely many solutions (A is singular).&quot;);
 <B>Wrapper for lapack function zunmrq</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>RQ_real[:, :]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>RQ_imag[size(RQ_real, 1), size(RQ_real, 2)]</TD><TD>&nbsp;</TD><TD>Square or rectangular matrix</TD></TR>
-<TR><TD>Real</TD><TD>tau_real[min(size(RQ_real, 1), size(RQ_real, 2))]</TD><TD>&nbsp;</TD><TD>The scalar factors of the elementary reflectors of Q, real part</TD></TR>
-<TR><TD>Real</TD><TD>tau_imag[min(size(RQ_real, 1), size(RQ_real, 2))]</TD><TD>&nbsp;</TD><TD>The scalar factors of the elementary reflectors of Q, imaginary part</TD></TR>
-<TR><TD>Real</TD><TD>C_real[:, :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Real</TD><TD>C_imag[size(C_real, 1), size(C_real, 2)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Boolean</TD><TD>left</TD><TD>true</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Boolean</TD><TD>trans</TD><TD>false</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>RQ_real[:, :]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>RQ_imag[size(RQ_real, 1), size(RQ_real, 2)]</TD><TD>Square or rectangular matrix</TD></TR>
+<TR><TD>tau_real[min(size(RQ_real, 1), size(RQ_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, real part</TD></TR>
+<TR><TD>tau_imag[min(size(RQ_real, 1), size(RQ_real, 2))]</TD><TD>The scalar factors of the elementary reflectors of Q, imaginary part</TD></TR>
+<TR><TD>C_real[:, :]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>C_imag[size(C_real, 1), size(C_real, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>left</TD><TD>&nbsp;</TD></TR>
+<TR><TD>trans</TD><TD>&nbsp;</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>QC_real[size(C_real, 1), size(C_real, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Real</TD><TD>QC_imag[size(C_real, 1), size(C_real, 2)]</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>QC_real[size(C_real, 1), size(C_real, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>QC_imag[size(C_real, 1), size(C_real, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>info</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> wrapper_zunmrq <font color="darkgreen">&quot;Wrapper for lapack function zunmrq&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-
-  <font color="blue">input </font>Real RQ_real[ :, :] <font color="darkgreen">&quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real RQ_imag[<font color="red">size</font>(RQ_real,1),<font color="red"> size</font>(RQ_real,2)] <font color="darkgreen">
-    &quot;Square or rectangular matrix&quot;</font>;
-  <font color="blue">input </font>Real tau_real[<font color="red">min</font>(<font color="red">size</font>(RQ_real, 1),<font color="red"> size</font>(RQ_real, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, real part&quot;</font>;
-  <font color="blue">input </font>Real tau_imag[<font color="red">min</font>(<font color="red">size</font>(RQ_real, 1),<font color="red"> size</font>(RQ_real, 2))] <font color="darkgreen">
-    &quot;The scalar factors of the elementary reflectors of Q, imaginary part&quot;</font>;
-  <font color="blue">input </font>Real C_real[:,:];
-  <font color="blue">input </font>Real C_imag[<font color="red">size</font>(C_real,1),<font color="red"> size</font>(C_real,2)];
-  <font color="blue">input </font>Boolean left=true;
-  <font color="blue">input </font>Boolean trans=false;
-
-  <font color="blue">output </font>Real QC_real[<font color="red">size</font>(C_real, 1),<font color="red">size</font>(C_real, 2)]=C_real;
-  <font color="blue">output </font>Real QC_imag[<font color="red">size</font>(C_real, 1),<font color="red">size</font>(C_real, 2)]=C_imag;
-  <font color="blue">output </font>Integer info;
-
-<font color="blue">protected </font>
-  Integer lwork = <font color="blue">if </font>left<font color="blue"> then </font>2*<font color="red">size</font>(C_real,2)<font color="blue"> else </font>2*<font color="red">size</font>(C_real,1);
-  Integer dim2=<font color="blue">if </font>left<font color="blue"> then </font><font color="red">size</font>(C_real,1)<font color="blue"> else </font><font color="red">size</font>(C_real,2);
-  String side = <font color="blue">if </font>left<font color="blue"> then </font>&quot;L&quot;<font color="blue"> else </font>&quot;R&quot;;
-  String herm = <font color="blue">if </font>trans<font color="blue"> then </font>&quot;C&quot;<font color="blue"> else </font>&quot;N&quot;;
-
-  <font color="blue">external</font> &quot;FORTRAN 77&quot; <font color="red">c_inter_zunmrq</font>(side, herm,<font color="red">  size</font>(QC_real,1),<font color="red">size</font>(QC_real,2),<font color="red"> size</font>(tau_real,1), dim2, RQ_real, RQ_imag,<font color="red">  size</font>(tau_real,1), tau_real, tau_imag, QC_real, QC_imag,<font color="red"> size</font>(C_real,1), lwork, info);
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>wrapper_zunmrq;
-</PRE>
-<HR>
-<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:29:03 2010.
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Wed Oct 27 10:04:54 2010.
 </address></BODY>
 </HTML>

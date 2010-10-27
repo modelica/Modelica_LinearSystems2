@@ -56,15 +56,13 @@ This library provides functions operating on vectors:
   </tr>
 </table>
 <h4><font color="#008000">See also</font></h4>
-<A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Math_Matrices.html#Modelica.Math.Matrices"
->Matrices</a>
+Matrices</a>
 <pre></PRE><P>
-Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons_Library.html#Modelica.Icons.Library"
->Modelica.Icons.Library</A> (Icon for library).
+Extends from Modelica.Icons.Package (Icon for standard packages).
 <P><H3>Package Content</H3><p>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
 <TR><TH >Name</TH><TH>Description</TH></TR>
-<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.k_care_uS.png" ALT="Modelica_LinearSystems2.Math.Vectors.find" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.find"
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Examples.careS.png" ALT="Modelica_LinearSystems2.Math.Vectors.find" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.find"
 >find</A>
 </TD><TD>find element in vector</TD></TR>
 <TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Vectors.householderReflexionS.png" ALT="Modelica_LinearSystems2.Math.Vectors.householderReflexion" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.householderReflexion"
@@ -78,18 +76,14 @@ Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Mod
 </TD><TD>reflect vector a to the unity vector e_n={0, ..., 0, 1}</TD></TR>
 <TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Vectors.householderReflexionS.png" ALT="Modelica_LinearSystems2.Math.Vectors.householderVector" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.householderVector"
 >householderVector</A>
-</TD><TD>calculate a normalized householder vector for the reflexion of vector a onto vector b </TD></TR>
+</TD><TD>Calculate a normalized householder vector to reflect vector a onto vector b</TD></TR>
 <TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Vectors.householderReflexionS.png" ALT="Modelica_LinearSystems2.Math.Vectors.length" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.length"
 >length</A>
 </TD><TD>Return length of a vector</TD></TR>
 <TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Vectors.householderReflexionS.png" ALT="Modelica_LinearSystems2.Math.Vectors.printVector" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.printVector"
 >printVector</A>
 </TD><TD>print vector</TD></TR>
-<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Vectors.InternalS.png" ALT="Modelica_LinearSystems2.Math.Vectors.Internal" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors_Internal.html#Modelica_LinearSystems2.Math.Vectors.Internal"
->Internal</A>
-</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE find<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -98,93 +92,40 @@ Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Mod
 >Modelica_LinearSystems2.Math.Vectors</A>.find</H2>
 <B>find element in vector</B><p>
 <P><H3>Information</H3></P>
-Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
->Modelica.Icons.Function</A> (Icon for a function).
+Extends from Modelica.Icons.Function (Icon for functions).
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Integer</TD><TD>s</TD><TD>&nbsp;</TD><TD>Search for s</TD></TR>
-<TR><TD>Integer</TD><TD>v[:]</TD><TD>&nbsp;</TD><TD>Vector</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>s</TD><TD>Search for s</TD></TR>
+<TR><TD>v[:]</TD><TD>Vector</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Integer</TD><TD>result</TD><TD>v[result] = s (first occurrence of s); result=0, if not found</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>result</TD><TD>v[result] = s (first occurrence of s); result=0, if not found</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">encapsulated </font><font color="blue">function</font> find <font color="darkgreen">&quot;find element in vector&quot;</font>
-  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
->Modelica</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math"
->Modelica_LinearSystems2.Math</A>;
-  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
->Modelica.Icons.Function</A>;
-  <font color="blue">input </font>Integer s <font color="darkgreen">&quot;Search for s&quot;</font>;
-  <font color="blue">input </font>Integer v[:] <font color="darkgreen">&quot;Vector&quot;</font>;
-  <font color="blue">output </font>Integer result <font color="darkgreen">
-    &quot;v[result] = s (first occurrence of s); result=0, if not found&quot;</font>;
-<font color="blue">protected </font>
-  Integer i;
-<font color="blue">algorithm </font>
-  result :=0;
-  i :=1;
-  <font color="blue">while </font>i &lt;=<font color="red"> size</font>(v,1)<font color="blue"> loop</font>
-     <font color="blue">if </font>v[i] == s<font color="blue"> then</font>
-        result :=i;
-        i :=<font color="red">size</font>(v, 1) + 1;
-     <font color="blue">else</font>
-        i :=i + 1;
-     <font color="blue">end if</font>;
-  <font color="blue">end while</font>;
-<font color="blue">end </font>find;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE householderReflexion<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
 <H2><A NAME="Modelica_LinearSystems2.Math.Vectors.householderReflexion"></A><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
 >Modelica_LinearSystems2.Math.Vectors</A>.householderReflexion</H2>
 <B>reflect vector a on a plane with orthogonal vector u</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+
+<pre></PRE><P>
+
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>a[:]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Real</TD><TD>u[size(a, 1)]</TD><TD>&nbsp;</TD><TD>householder vector</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>a[:]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u[size(a, 1)]</TD><TD>householder vector</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>ra[size(u, 1)]</TD><TD>reflexion of a</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>ra[size(u, 1)]</TD><TD>reflexion of a</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> householderReflexion <font color="darkgreen">
-  &quot;reflect vector a on a plane with orthogonal vector u&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
->Modelica_LinearSystems2.Math.Vectors</A>;
-
-  <font color="blue">input </font>Real a[:];
-  <font color="blue">input </font>Real u[<font color="red">size</font>(a, 1)] <font color="darkgreen">&quot;householder vector&quot;</font>;
-  <font color="blue">output </font>Real ra[<font color="red">size</font>(u, 1)] <font color="darkgreen">&quot;reflexion of a&quot;</font>;
-
-<font color="blue">protected </font>
-  Real norm_a=<font color="red">Modelica.Math.Vectors.length</font>(a);
-  Real h=2*u*a;
-
-<font color="blue">algorithm </font>
-  ra := a - h*u;
-
-<font color="darkgreen">// this function is mainly used in the fromStateSpace transformations.</font>
-<font color="darkgreen">// In this context the calculation of invariant zeros is very susceptible with subject to</font>
-<font color="darkgreen">// elements of the output vector are zero or not. Therefore, values close to zero are set to zero.</font>
-  <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(ra, 1)<font color="blue"> loop</font>
-    ra[i] := <font color="blue">if </font><font color="red">abs</font>(ra[i]) &gt;= norm_a*1e-12<font color="blue"> then </font>ra[i]<font color="blue"> else </font>0;
-  <font color="blue">end for</font>;
-
-<font color="blue">end </font>householderReflexion;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE householderReflexion_e1<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -193,38 +134,15 @@ Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Mod
 <B>reflect vector a to the unity vector e_1={1,0,...,0}</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>a[:]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Real</TD><TD>u[size(a, 1)]</TD><TD>&nbsp;</TD><TD>householder vector</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>a[:]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u[size(a, 1)]</TD><TD>householder vector</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>ra[size(u, 1)]</TD><TD>reflexion of a</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>ra[size(u, 1)]</TD><TD>reflexion of a</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> householderReflexion_e1 <font color="darkgreen">
-  &quot;reflect vector a to the unity vector e_1={1,0,...,0}&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
->Modelica_LinearSystems2.Math.Vectors</A>;
-
-  <font color="blue">input </font>Real a[:];
-  <font color="blue">input </font>Real u[<font color="red">size</font>(a, 1)] <font color="darkgreen">&quot;householder vector&quot;</font>;
-  <font color="blue">output </font>Real ra[<font color="red">size</font>(u, 1)] <font color="darkgreen">&quot;reflexion of a&quot;</font>;
-
-<font color="blue">protected </font>
-  Integer n=<font color="red">size</font>(u, 1);
-
-<font color="blue">algorithm </font>
-  ra :=<font color="red"> cat</font>(
-    1,
-    {a[1] - 2*u[1]*(u*a)},
-    <font color="red">fill</font>(0, n - 1));
-
-<font color="blue">end </font>householderReflexion_e1;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE householderReflexion_en<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -233,99 +151,74 @@ Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Mod
 <B>reflect vector a to the unity vector e_n={0, ..., 0, 1}</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>a[:]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Real</TD><TD>u[size(a, 1)]</TD><TD>&nbsp;</TD><TD>householder vector</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>a[:]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u[size(a, 1)]</TD><TD>householder vector</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>ra[size(u, 1)]</TD><TD>reflexion of a</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>ra[size(u, 1)]</TD><TD>reflexion of a</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> householderReflexion_en <font color="darkgreen">
-  &quot;reflect vector a to the unity vector e_n={0, ..., 0, 1}&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
->Modelica_LinearSystems2.Math.Vectors</A>;
-
-  <font color="blue">input </font>Real a[:];
-  <font color="blue">input </font>Real u[<font color="red">size</font>(a, 1)] <font color="darkgreen">&quot;householder vector&quot;</font>;
-  <font color="blue">output </font>Real ra[<font color="red">size</font>(u, 1)] <font color="darkgreen">&quot;reflexion of a&quot;</font>;
-
-<font color="blue">protected </font>
-  Integer n=<font color="red">size</font>(u, 1);
-
-<font color="blue">algorithm </font>
-  ra :=<font color="red"> cat</font>(
-    1,
-    <font color="red">fill</font>(0, n - 1),
-    {a[n] - 2*u[n]*(u*a)});
-
-<font color="blue">end </font>householderReflexion_en;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE householderVector<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
 <H2><A NAME="Modelica_LinearSystems2.Math.Vectors.householderVector"></A><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
 >Modelica_LinearSystems2.Math.Vectors</A>.householderVector</H2>
-<B>calculate a normalized householder vector for the reflexion of vector a onto vector b </B><p>
+<B>Calculate a normalized householder vector to reflect vector a onto vector b</B><p>
 <P><H3>Information</H3></P>
 <PRE></pre>
-<h4><font color="#008000">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
-Vectors.<b>householderVector</b>(a, b);
+Vectors.Utilities.<b>householderVector</b>(a,b);
 </pre></blockquote>
-<h4><font color="#008000">Description</font></h4>
+<h4>Description</h4>
 <p>
-The function call "<code>householderVector(a, b)</code>" returns vector
-<b>u</b>, which is the normalized Householder vector for a Householder
-reflexion with matrix Q
+The function call "<code>householderVector(a, b)</code>" returns the normalized Householder vector
+<b>u</b> for Householder reflection of input vector <b>a</b> onto vector <b>b</b>, i.e. Householder vector <b>u</b> is the normal
+vector of the reflection plane. Algebraically, the reflection is performed by transformation matrix <b>Q</b>
+</p>
+<blockquote>
 <p>
-Q = I - 2*u*u'
+<b>Q</b> = <b>I</b> - 2*<b>u</b>*<b>u</b>',
+</p>
+</blockquote>
+i.e., vector <b>a</b> is mapped to
+<blockquote>
 <p>
-with
+<b>a</b> -> <b>Q</b>*<b>a</b>=c*<b>b</b>
+</p>
+</blockquote>
+with scalar c, |c| = ||<b>a</b>|| / ||<b>b</b>||. <b>Q</b>*<b>a</b> is the reflection of <b>a</b> about the hyperplane orthogonal to <b>u</b>.
+<b>Q</b> is an orthogonal matrix, i.e.
+<blockquote>
 <p>
-Q*a = c*b
+    <b>Q</b> = inv(<b>Q</b>) = <b>Q</b>'
+</p>
+</blockquote>
+<h4>Example</h4>
+<blockquote><pre>
+  a = {2, -4, -2, -1};
+  b = {1, 0, 0, 0};
+
+  u = <b>householderVector</b>(a,b);    // {0.837, -0.478, -0.239, -0.119}
+                               // Computation (identity(4) - 2*matrix(u)*transpose(matrix(u)))*a results in
+                               // {-5, 0, 0, 0} = -5*b
+
+
 <pre></PRE><P>
 
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>a[:]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Real</TD><TD>b[size(a, 1)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>a[:]</TD><TD>Real vector to be reflected</TD></TR>
+<TR><TD>b[size(a, 1)]</TD><TD>Real vector b vector a is mapped onto</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>u[size(a, 1)]</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u[size(a, 1)]</TD><TD>Housholder vector to map a onto b</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> householderVector <font color="darkgreen">
-  &quot;calculate a normalized householder vector for the reflexion of vector a onto vector b &quot;</font>
-
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.length"
->Modelica_LinearSystems2.Math.Vectors.length</A>;
-
-  <font color="blue">input </font>Real a[:];
-  <font color="blue">input </font>Real b[<font color="red">size</font>(a, 1)];
-  <font color="blue">output </font>Real u[<font color="red">size</font>(a, 1)];
-<font color="blue">protected </font>
-  Real la=<font color="red">length</font>(a);
-  Real alpha=<font color="blue">if </font><font color="red">length</font>(a + la*b) &gt; 0<font color="blue"> then </font>la<font color="blue"> else </font>-la;
-
-<font color="blue">algorithm </font>
-  <font color="red">assert</font>(<font color="red">length</font>(b) &gt; 0,
-    &quot;vector b in function housholderVector is zero vector, but al least one element should be different to zero &quot;);
-  <font color="red">assert</font>(<font color="red">length</font>(a) &gt; 0,
-    &quot;vector a in function housholderVector is zero vector, but al least one element should be different to zero&quot;);
-  u := (a + alpha*b)/<font color="red">length</font>(a + alpha*b);
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>householderVector;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE length<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -359,26 +252,14 @@ not the case with function norm(..).
 
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>v[:]</TD><TD>&nbsp;</TD><TD>Vector</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>v[:]</TD><TD>Vector</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>result</TD><TD>Length of vector v</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>result</TD><TD>Length of vector v</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> length <font color="darkgreen">&quot;Return length of a vector&quot;</font>
-
-  <font color="blue">input </font>Real v[:] <font color="darkgreen">&quot;Vector&quot;</font>;
-  <font color="blue">output </font>Real result <font color="darkgreen">&quot;Length of vector v&quot;</font>;
-
-<font color="blue">algorithm </font>
-  result :=<font color="red"> sqrt</font>(v*v);
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>length;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE printVector<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -387,56 +268,16 @@ not the case with function norm(..).
 <B>print vector</B><p>
 <P><H3>Inputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>v[:]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
-<TR><TD>Integer</TD><TD>significantDigits</TD><TD>6</TD><TD>Number of significant digits that are shown</TD></TR>
-<TR><TD>String</TD><TD>name</TD><TD>&quot;v&quot;</TD><TD>Independent variable name used for printing</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>v[:]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>significantDigits</TD><TD>Number of significant digits that are shown</TD></TR>
+<TR><TD>name</TD><TD>Independent variable name used for printing</TD></TR>
 </TABLE>
 <P><H3>Outputs</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>String</TD><TD>s</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>s</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">function</font> printVector <font color="darkgreen">&quot;print vector&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
->Modelica_LinearSystems2.StateSpace</A>;
-  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Strings.html#Modelica.Utilities.Strings"
->Modelica.Utilities.Strings</A>;
-
-  <font color="blue">input </font>Real v[:];
-  <font color="blue">input </font>Integer significantDigits=6 <font color="darkgreen">
-    &quot;Number of significant digits that are shown&quot;</font>;
-  <font color="blue">input </font>String name=&quot;v&quot; <font color="darkgreen">&quot;Independent variable name used for printing&quot;</font>;
-  <font color="blue">output </font>String s=&quot;&quot;;
-<font color="blue">protected </font>
-  String blanks=<font color="red">Strings.repeat</font>(significantDigits);
-  String space=<font color="red">Strings.repeat</font>(8);
-  String space2=<font color="red">Strings.repeat</font>(3);
-  Integer r=<font color="red">size</font>(v, 1);
-
-<font color="blue">algorithm </font>
-  <font color="blue">if </font>r == 0<font color="blue"> then</font>
-    s := name + &quot; = []&quot;;
-  <font color="blue">else</font>
-    s := &quot;\n&quot; + name + &quot; = \n&quot;;
-    <font color="blue">for </font>i<font color="blue"> in </font>1:r<font color="blue"> loop</font>
-      s := s + space;
-
-      <font color="blue">if </font>v[i] &gt;= 0<font color="blue"> then</font>
-        s := s + &quot; &quot;;
-      <font color="blue">end if</font>;
-      s := s +<font color="red"> String</font>(v[i], significantDigits=significantDigits) +
-        <font color="red">Strings.repeat</font>(significantDigits + 8 -<font color="red"> Strings.length</font>(<font color="red">String</font>(<font color="red">abs</font>(v[i]))));
-
-      s := s + &quot;\n&quot;;
-    <font color="blue">end for</font>;
-
-  <font color="blue">end if</font>;
-<font color="blue">end </font>printVector;
-</PRE>
-<HR>
-<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:28:55 2010.
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Wed Oct 27 10:04:49 2010.
 </address></BODY>
 </HTML>

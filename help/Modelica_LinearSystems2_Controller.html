@@ -54,8 +54,7 @@ drive with a P-PI cascade controller is demonstrated in example
 </p>
  
 <pre></PRE><P>
-Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons_Library.html#Modelica.Icons.Library"
->Modelica.Icons.Library</A> (Icon for library).
+Extends from Modelica.Icons.Package (Icon for standard packages), Modelica.Icons.Library (This icon will be removed in future Modelica versions, use Package instead).
 <P><H3>Package Content</H3><p>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
 <TR><TH >Name</TH><TH>Description</TH></TR>
@@ -125,27 +124,29 @@ Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Mod
 <TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.NoiseS.png" ALT="Modelica_LinearSystems2.Controller.Noise" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Noise"
 >Noise</A>
 </TD><TD>Block that generates a uniform distributed noise output signal at sample instants if discrete and y=0 if continuous</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.EKFS.png" ALT="Modelica_LinearSystems2.Controller.EKF" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.EKF"
+>EKF</A>
+</TD><TD>Extended Kalman filter</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.EKFS.png" ALT="Modelica_LinearSystems2.Controller.UKF" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.UKF"
+>UKF</A>
+</TD><TD>Unscented Kalman filter</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.EKFS.png" ALT="Modelica_LinearSystems2.Controller.UKF_SR" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.UKF_SR"
+>UKF_SR</A>
+</TD><TD>Unscented Kalman filter</TD></TR>
 <TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.IconsS.png" ALT="Modelica_LinearSystems2.Controller.Icons" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Icons.html#Modelica_LinearSystems2.Controller.Icons"
 >Icons</A>
 </TD><TD>&nbsp;</TD></TR>
-<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.InterfacesS.png" ALT="Modelica_LinearSystems2.Controller.Interfaces" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces"
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.IconsS.png" ALT="Modelica_LinearSystems2.Controller.Interfaces" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces"
 >Interfaces</A>
 </TD><TD>Interfaces (partial blocks) of Controller library</TD></TR>
-<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.InterfacesS.png" ALT="Modelica_LinearSystems2.Controller.Internal" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Internal.html#Modelica_LinearSystems2.Controller.Internal"
->Internal</A>
-</TD><TD>Internal blocks that are usually of no interest for the user</TD></TR>
-<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.TemplatesS.png" ALT="Modelica_LinearSystems2.Controller.Templates" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates"
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.IconsS.png" ALT="Modelica_LinearSystems2.Controller.Templates" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Templates.html#Modelica_LinearSystems2.Controller.Templates"
 >Templates</A>
 </TD><TD>Templates of control structures</TD></TR>
-<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.TypesS.png" ALT="Modelica_LinearSystems2.Controller.Types" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types"
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Controller.IconsS.png" ALT="Modelica_LinearSystems2.Controller.Types" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types"
 >Types</A>
 </TD><TD>Constants and types with choices, especially to build menus</TD></TR>
 <TR><TD>DataDir=Modelica_LinearSystems2.DataDir</TD><TD>Absolute path to directory containing utilitiy files for this package, such as images</TD></TR>
 </TABLE>
-<P><H3>Types and constants</H3>
-<PRE><font color="blue">constant </font>String DataDir=Modelica_LinearSystems2.DataDir <font color="darkgreen">
-  &quot;Absolute path to directory containing utilitiy files for this package, such as images&quot;</font>;</PRE><p>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE SampleClock<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -170,44 +171,12 @@ time defined in the SampleClock component.
 
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockType"
->BlockType</A></TD><TD>blockType</TD><TD>Modelica_LinearSystems2.Cont...</TD><TD>Type of Sampled blocks (Continuous or Discrete)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.Method"
->Method</A></TD><TD>methodType</TD><TD>Modelica_LinearSystems2.Type...</TD><TD>Discretization method for discrete blocks</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Time</A></TD><TD>sampleTime</TD><TD>1</TD><TD>Base sample time for discrete blocks [s]</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.Init"
->Init</A></TD><TD>initType</TD><TD>Modelica_LinearSystems2.Cont...</TD><TD>Type of initialization of Sampled blocks</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>blockType</TD><TD>Type of Sampled blocks (Continuous or Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Discretization method for discrete blocks</TD></TR>
+<TR><TD>sampleTime</TD><TD>Base sample time for discrete blocks [s]</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization of Sampled blocks</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> SampleClock <font color="darkgreen">
-  &quot;Global options for blocks of Controller library (in particular sample clock)&quot;</font>
-
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockType"
->Types.BlockType</A> blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous <font color="darkgreen">
-    &quot;Type of Sampled blocks (Continuous or Discrete)&quot;</font>;
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.Method"
->Modelica_LinearSystems2.Types.Method</A> methodType=
-      Modelica_LinearSystems2.Types.Method.Trapezoidal <font color="darkgreen">
-    &quot;Discretization method for discrete blocks&quot;</font>;
-  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Modelica.SIunits.Time</A> sampleTime = 1 <font color="darkgreen">
-    &quot;Base sample time for discrete blocks&quot;</font>;
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.Init"
->Types.Init</A> initType=Modelica_LinearSystems2.Controller.Types.Init.SteadyState <font color="darkgreen">
-    &quot;Type of initialization of Sampled blocks&quot;</font>;
-  <font color="blue">output </font>Boolean sampleTrigger <font color="darkgreen">&quot;Trigger that is true at every sampleTime&quot;</font>;
-<font color="blue">equation </font>
-  <font color="blue">if </font>blockType == Types.BlockType.Continuous<font color="blue"> then</font>
-     sampleTrigger = false;
-  <font color="blue">else</font>
-     sampleTrigger =<font color="red"> sample</font>(sampleTime, sampleTime);
-  <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>SampleClock;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE Sampler<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -215,7 +184,6 @@ time defined in the SampleClock component.
 <A NAME="Modelica_LinearSystems2.Controller.Sampler"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.Sampler</H2>
 <B>Sample the input signal if discrete block or y=u if continuous block</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.SamplerD.png" ALT="Modelica_LinearSystems2.Controller.Sampler">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -232,40 +200,16 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Interfaces.PartialSISO_equality</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Sample time = sampleFactor * sampleClock.sampleTime</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Sample time = sampleFactor * sampleClock.sampleTime</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> Sampler <font color="darkgreen">
-  &quot;Sample the input signal if discrete block or y=u if continuous block&quot;</font>
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"
->Interfaces.PartialSISO_equality</A>;
-
-<font color="blue">protected </font>
-  <A HREF="Modelica_LinearSystems2_Controller_Internal.html#Modelica_LinearSystems2.Controller.Internal.DiscreteSampler"
->Internal.DiscreteSampler</A> discretePart(sampleFactor=sampleFactor) <font color="blue">if </font>
-          <font color="blue">not </font>continuous <font color="darkgreen">&quot;Discrete sampler&quot;</font>;
-<font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-     y = u;
-<font color="blue">else</font>
-<font color="red">connect</font>(u,discretePart.u);
-<font color="red">connect</font>(y,discretePart.y);
-  <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Sampler;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE StateSpace<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -273,7 +217,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.StateSpace"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.StateSpace</H2>
 <B>Continuous or discrete state space system block</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.StateSpaceD.png" ALT="Modelica_LinearSystems2.Controller.StateSpace">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <pre></PRE><P>
@@ -281,93 +224,24 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Interfaces.PartialSampledBlock</A> (Partial block of Sampled library (icon + default parameters)).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
->StateSpace</A></TD><TD>system</TD><TD>&nbsp;</TD><TD>Continuous linear time-invariant system</TD></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
->MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
-<TR><TD>Real</TD><TD>x_start[nx]</TD><TD>zeros(nx)</TD><TD>Initial or guess values of states</TD></TR>
-<TR><TD>Real</TD><TD>y_start[ny]</TD><TD>zeros(ny)</TD><TD>Initial values of outputs (remaining states are in steady state if possible)</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>system</TD><TD>Continuous linear time-invariant system</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>x_start[nx]</TD><TD>Initial or guess values of states</TD></TR>
+<TR><TD>y_start[ny]</TD><TD>Initial values of outputs (remaining states are in steady state if possible)</TD></TR>
+<TR><TD>withDelay</TD><TD>&nbsp;</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u[size(system.B, 2)]</TD><TD>Continuous or discrete input signals of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y[size(system.C, 1)]</TD><TD>Continuous or discrete output signals of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>x[nx]</TD><TD>State vector of continuous system</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u[size(system.B, 2)]</TD><TD>Continuous or discrete input signals of block</TD></TR>
+<TR><TD>y[size(system.C, 1)]</TD><TD>Continuous or discrete output signals of block</TD></TR>
+<TR><TD>x[nx]</TD><TD>State vector of continuous system</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> StateSpace <font color="darkgreen">&quot;Continuous or discrete state space system block&quot;</font>
-
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
->Modelica_LinearSystems2.StateSpace</A> system(A=<font color="red">fill</font>(0,0,0),B=<font color="red">fill</font>(0,0,1),C=<font color="red">fill</font>(0,1,0),D=<font color="red">fill</font>(0,1,1)) <font color="darkgreen">
-    &quot;Continuous linear time-invariant system&quot;</font>;
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock"
->Interfaces.PartialSampledBlock</A>;
-   <font color="blue">parameter </font>Real x_start[nx]=<font color="red">zeros</font>(nx) <font color="darkgreen">&quot;Initial or guess values of states&quot;</font>;
-  <font color="blue">parameter </font>Real y_start[ny]=<font color="red">zeros</font>(ny) <font color="darkgreen">
-    &quot;Initial values of outputs (remaining states are in steady state if possible)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->Modelica.Blocks.Interfaces.RealInput</A> u[<font color="red">size</font>(system.B,2)] <font color="darkgreen">
-    &quot;Continuous or discrete input signals of block&quot;</font>;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->Modelica.Blocks.Interfaces.RealOutput</A> y[<font color="red">size</font>(system.C,1)] <font color="darkgreen">
-    &quot;Continuous or discrete output signals of block&quot;</font>;</textblock>
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->Modelica.Blocks.Interfaces.RealOutput</A> x[nx](start=x_start) <font color="darkgreen">
-    &quot;State vector of continuous system&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font>Integer nx =<font color="red"> size</font>(system.A,1);
-  <font color="blue">final </font><font color="blue">parameter </font>Integer ny =<font color="red"> size</font>(system.C,1);
-
-<font color="blue">protected </font>
-<font color="blue">parameter </font>Boolean withDelay=false;
-
-  <A HREF="Modelica_LinearSystems2_Controller_Internal.html#Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace"
->Internal.DiscreteStateSpace</A> discretePart(
-    system=system,
-    withDelay=withDelay,
-    methodType=methodType,
-    sampleFactor=sampleFactor,
-    init=init,
-    x_start=x_start,
-    y_start=y_start) <font color="blue">if </font><font color="blue">not </font>continuous <font color="darkgreen">&quot;Discretized state space system&quot;</font>;
-
-<font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="red"> der</font>(x) = system.A*x + system.B*u;
-          y = system.C*x + system.D*u;
-
-  <font color="blue">end if</font>;
-
-  <font color="red">connect</font>(u, discretePart.u);
-  <font color="red">connect</font>(x, discretePart.x);
-  <font color="red">connect</font>(y, discretePart.y);
-
-<font color="blue">initial </font><font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="blue">if </font>init == Types.Init.InitialState<font color="blue"> then</font>
-      x = x_start;
-    <font color="blue">elseif </font>init == Types.Init.SteadyState<font color="blue"> then</font>
-      <font color="red">der</font>(x) =<font color="red"> zeros</font>(nx);
-    <font color="blue">elseif </font>init == Types.Init.InitialOutput<font color="blue"> then</font>
-<font color="darkgreen">//      x = Modelica.Math.Matrices.equalityLeastSquares(system.A, -system.B*u, system.C, y_start - system.D*u);</font>
-y=y_start;
-<font color="red">der</font>(x[ny+1:nx]) =<font color="red"> zeros</font>(nx-ny);
-    <font color="blue">end if</font>;
-  <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>StateSpace;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE TransferFunction<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -375,7 +249,6 @@ y=y_start;
 <A NAME="Modelica_LinearSystems2.Controller.TransferFunction"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.TransferFunction</H2>
 <B>Continuous or discrete, single input single output transfer function</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.TransferFunctionD.png" ALT="Modelica_LinearSystems2.Controller.TransferFunction">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <pre>
@@ -384,98 +257,23 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->TransferFunction</A></TD><TD>system</TD><TD>&nbsp;</TD><TD>Transfer function</TD></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
->MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
-<TR><TD>Real</TD><TD>x_start[nx]</TD><TD>zeros(nx)</TD><TD>Initial or guess values of states</TD></TR>
-<TR><TD>Real</TD><TD>y_start</TD><TD>0</TD><TD>Initial value of output (derivatives of y are zero upto nx-1-th derivative)</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>system</TD><TD>Transfer function</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>x_start[nx]</TD><TD>Initial or guess values of states</TD></TR>
+<TR><TD>y_start</TD><TD>Initial value of output (derivatives of y are zero upto nx-1-th derivative)</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>x[nx]</TD><TD>State of continuous transfer function</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TD>x[nx]</TD><TD>State of continuous transfer function</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> TransferFunction <font color="darkgreen">
-  &quot;Continuous or discrete, single input single output transfer function&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
->Modelica_LinearSystems2.Math.Polynomial</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
->Modelica_LinearSystems2.StateSpace</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->Modelica_LinearSystems2.TransferFunction</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
->Modelica_LinearSystems2</A>;
-
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
->Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2</A>(
-      discretePart(
-      x_start=x_start,
-      y_start={y_start},
-      ABCD=<font color="red">TransferFunction.Conversion.toMatrices</font>(system)));
-
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
->Modelica_LinearSystems2.TransferFunction</A> system <font color="darkgreen">&quot;Transfer function&quot;</font>;
-  <font color="blue">parameter </font>Real x_start[nx]=<font color="red">zeros</font>(nx) <font color="darkgreen">&quot;Initial or guess values of states&quot;</font>;
-  <font color="blue">parameter </font>Real y_start=0 <font color="darkgreen">
-    &quot;Initial value of output (derivatives of y are zero upto nx-1-th derivative)&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font>Integer nx=<font color="red">size</font>(system.d, 1) - 1;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->Modelica.Blocks.Interfaces.RealOutput</A> x[nx] <font color="darkgreen">
-    &quot;State of continuous transfer function&quot;</font>;
-
-<font color="blue">protected </font>
-<font color="blue">parameter </font>Boolean withDelay=false;
-  <font color="blue">parameter </font>Integer na=<font color="red">size</font>(system.d, 1);
-  <font color="blue">parameter </font>Integer nb=<font color="red">size</font>(system.n, 1);
-  Real a[na]=system.d <font color="darkgreen">&quot;Reverse element order of system.denominator&quot;</font>;
-  Real b[nb]=system.n;
-  Real bb[:]=<font color="red">vector</font>([<font color="red">zeros</font>(<font color="red">max</font>(0, na - nb), 1); b]);
-  Real d=bb[1]/a[1];
-  Real a_end=<font color="blue">if </font>a[<font color="blue">end</font>] &gt; 100*Modelica.Constants.eps*<font color="red">sqrt</font>(a*a)<font color="blue"> then </font>a[<font color="blue">end</font>]<font color="blue"> else </font>1.0;
-  Real x_scaled[<font color="red">size</font>(x, 1)];<font color="darkgreen">//=x*a_end &quot;Scaled vector x&quot;;</font>
-<font color="blue">equation </font>
-x_scaled =x*a_end;
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="blue">if </font>nx == 0<font color="blue"> then</font>
-      y = d*u;
-    <font color="blue">else</font>
-      <font color="red">der</font>(x_scaled[1]) = (-a[2:na]*x_scaled + a_end*u)/a[1];
-      <font color="red">der</font>(x_scaled[2:nx]) = x_scaled[1:nx - 1];
-      y = ((bb[2:na] - d*a[2:na])*x_scaled)/a_end + d*u;
-    <font color="blue">end if</font>;
-  <font color="blue">end if</font>;
-  <font color="red">connect</font>(y, discretePart.y[1]);
-  <font color="red">connect</font>(x, discretePart.x);
-<font color="blue">initial </font><font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="blue">if </font>init ==Modelica_LinearSystems2.Controller.Types.Init.SteadyState<font color="blue"> then</font>
-      <font color="red">der</font>(x_scaled) =<font color="red"> zeros</font>(nx);
-    <font color="blue">elseif </font>init ==Modelica_LinearSystems2.Controller.Types.Init.InitialState<font color="blue"> then</font>
-      x_scaled = x_start*a_end;
-    <font color="blue">elseif </font>init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput<font color="blue"> then</font>
-      y = y_start;
-      <font color="red">der</font>(x_scaled[2:nx]) =<font color="red"> zeros</font>(nx - 1);
-    <font color="blue">end if</font>;
-  <font color="blue">end if</font>;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>TransferFunction;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE ZerosAndPoles<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -483,7 +281,6 @@ x_scaled =x*a_end;
 <A NAME="Modelica_LinearSystems2.Controller.ZerosAndPoles"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.ZerosAndPoles</H2>
 <B>Continuous or discretized, single input single output block described by a ZerosAndPoles object</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.ZerosAndPolesD.png" ALT="Modelica_LinearSystems2.Controller.ZerosAndPoles">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -698,218 +495,23 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
->ZerosAndPoles</A></TD><TD>system</TD><TD>&nbsp;</TD><TD>Data defining the ZerosAndPoles object</TD></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
->MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
-<TR><TD>Real</TD><TD>x_start[nx]</TD><TD>zeros(nx)</TD><TD>Initial or guess values of states</TD></TR>
-<TR><TD>Real</TD><TD>y_start</TD><TD>0</TD><TD>Initial or guess values of output</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>system</TD><TD>Data defining the ZerosAndPoles object</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>x_start[nx]</TD><TD>Initial or guess values of states</TD></TR>
+<TR><TD>y_start</TD><TD>Initial or guess values of output</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>x[nx]</TD><TD>State of continuous block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TD>x[nx]</TD><TD>State of continuous block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> ZerosAndPoles <font color="darkgreen">
-  &quot;Continuous or discretized, single input single output block described by a ZerosAndPoles object&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
->Modelica_LinearSystems2</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types"
->Modelica_LinearSystems2.Types</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
->Modelica_LinearSystems2.ZerosAndPoles</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
->Modelica_LinearSystems2.Math.Complex</A>;
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
->Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2</A>(
-      discretePart(
-      x_start=x_start,
-      y_start={y_start},
-      ABCD=<font color="red">ZerosAndPoles.Conversion.toMatrices</font>(system)));
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
->ZerosAndPoles</A> system <font color="darkgreen">&quot;Data defining the ZerosAndPoles object&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font>Integer nx=<font color="red">size</font>(system.d1,1) + 2*<font color="red">size</font>(system.d2,1) <font color="darkgreen">
-    &quot;Number of states&quot;</font>;
-  <font color="blue">parameter </font>Real x_start[nx] =<font color="red"> zeros</font>(nx) <font color="darkgreen">&quot;Initial or guess values of states&quot;</font>;
-  <font color="blue">parameter </font>Real y_start = 0 <font color="darkgreen">&quot;Initial or guess values of output&quot;</font>;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->Modelica.Blocks.Interfaces.RealOutput</A> x[nx] <font color="darkgreen">&quot;State of continuous block&quot;</font>;
-
-<font color="blue">protected </font>
-<font color="blue">parameter </font>Boolean withDelay=false;
-  <font color="blue">parameter </font>Integer n_num1 =<font color="red"> size</font>(system.n1,1);
-  <font color="blue">parameter </font>Integer n_num2 =<font color="red"> size</font>(system.n2,1);
-  <font color="blue">parameter </font>Integer n_den1 =<font color="red"> size</font>(system.d1,1);
-  <font color="blue">parameter </font>Integer n_den2 =<font color="red"> size</font>(system.d2,1);
-  <font color="blue">parameter </font>Integer n_num = n_num1 + 2*n_num2;
-  <font color="blue">parameter </font>Integer n_den = n_den1 + 2*n_den2;
-  <font color="blue">parameter </font>Integer i_d = <font color="blue">if </font>n_num2 &gt; n_den2<font color="blue"> then </font>2*(n_num2 - n_den2) + 1<font color="blue"> else </font>1;
-  <font color="blue">parameter </font>Integer i_k = <font color="blue">if </font>n_num2 &gt; n_den2<font color="blue"> then </font>n_den2 - (n_num2-n_den2)<font color="blue"> else </font>n_den2;
-  <font color="blue">parameter </font>Real num[nx,2] = [system.n2;
-                              [system.n1,<font color="red"> zeros</font>(n_num1)];
-                              <font color="red">zeros</font>(nx-n_num2-n_num1,2)] <font color="darkgreen">
-    &quot;Numerator matrix, in order that indices are defined in all situations in all if clauses&quot;</font>;
-  <font color="blue">parameter </font>Real den[nx,2] = [system.d2;
-                              [system.d1,<font color="red"> zeros</font>(n_den1)];
-                              <font color="red">zeros</font>(nx-n_den2-n_den1,2)] <font color="darkgreen">
-    &quot;Denominator matrix, in order that indices are defined in all situations in all if clauses&quot;</font>;
-  Real uu[i_k + n_den1 + 1] <font color="darkgreen">
-    &quot;Input signals into the connected first and second order blocks&quot;</font>;
-  <font color="blue">parameter </font>Real k[<font color="red">size</font>(uu,1)-1](<font color="blue">each </font>fixed = false) <font color="darkgreen">
-    &quot;Additional factors of the first and second order blocks, in order that the gain of the blocks is 1&quot;</font>;
-  <font color="blue">parameter </font>Real k_total=system.k/<font color="red">product</font>(k);
-
-<font color="blue">initial </font><font color="blue">equation </font>
-  <font color="darkgreen">/* Compute scaling factor for every block in order that the gain of the block is 1.
-     The for blocks and the if-blocks have the same structure as in the 
-     equation part below
-  */</font>
-  <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">max</font>(n_den2,n_num2)<font color="blue"> loop</font>
-    <font color="darkgreen"> // State space systems of order 2</font>
-     <font color="blue">if </font>i &lt;= n_den2<font color="blue"> then</font>
-        <font color="blue">if </font>i &lt;= n_num2<font color="blue"> then</font>
-        <font color="darkgreen">   // State space system in form (1)</font>
-        k[i] =<font color="red"> Modelica_LinearSystems2.Controller.Internal.scaleFactor2</font>(
-          num[i, 1],
-          num[i, 2],
-          den[i, 1],
-          den[i, 2]);
-        <font color="blue">elseif </font>i-n_num2+1 &lt;= n_num1<font color="blue"> then</font>
-        <font color="darkgreen">   // State space system in form (1) with 2 first order numerator polynomials</font>
-        k[i] =<font color="red"> Modelica_LinearSystems2.Controller.Internal.scaleFactor2</font>(
-          num[i, 1] + num[i + 1, 1],
-          num[i, 1]*num[i + 1, 1],
-          den[i, 1],
-          den[i, 2]);
-        <font color="blue">elseif </font>i-n_num2 == n_num1<font color="blue"> then</font>
-        <font color="darkgreen">   // State space system in form (2) with 1 first order numerator polynomial</font>
-        k[i] =<font color="red"> Modelica_LinearSystems2.Controller.Internal.scaleFactor2</font>(
-          0,
-          num[i, 1],
-          den[i, 1],
-          den[i, 2]);
-        <font color="blue">else</font>
-        <font color="darkgreen">   // State space system in form (3)</font>
-        k[i] =<font color="red"> Modelica_LinearSystems2.Controller.Internal.scaleFactor2</font>(
-          0,
-          0,
-          den[i, 1],
-          den[i, 2]);
-        <font color="blue">end if</font>;
-     <font color="blue">else</font>
-      <font color="darkgreen">  // State space system in form (1) with 2 first order denominator polynomials</font>
-      k[i] =<font color="red"> Modelica_LinearSystems2.Controller.Internal.scaleFactor2</font>(
-        num[i, 1],
-        num[i, 2],
-        den[i, 1] + den[i + 1, 1],
-        den[i, 1]*den[i + 1, 1]);
-     <font color="blue">end if</font>;
-  <font color="blue">end for</font>;
-
-  <font color="blue">for </font>i<font color="blue"> in </font>i_d:n_den1<font color="blue"> loop</font>
-    <font color="darkgreen"> // State space systems of order 1</font>
-     <font color="blue">if </font>n_num2 &lt;= n_den2<font color="blue"> and </font>2*(n_den2-n_num2)+i &lt;= n_num1<font color="blue"> then</font>
-      <font color="darkgreen">  // State space system in form (4)</font>
-      k[i_k + i] =<font color="red"> Modelica_LinearSystems2.Controller.Internal.scaleFactor1</font>(num[
-        <font color="red">max</font>(1, n_num2 + 2*(n_den2 - n_num2) + i), 1], den[n_den2 + i, 1]);
-     <font color="blue">elseif </font>n_num2 &gt; n_den2<font color="blue"> and </font>i-i_d+1 &lt;= n_num1<font color="blue"> then</font>
-      <font color="darkgreen">  // State space system in form (4)</font>
-      k[i_k + i] =<font color="red"> Modelica_LinearSystems2.Controller.Internal.scaleFactor1</font>(num[
-        <font color="red">max</font>(1, n_num2 + i - i_d + 1), 1], den[n_den2 + i, 1]);
-     <font color="blue">else</font>
-      <font color="darkgreen">  // State space system in form (5)</font>
-      k[i_k + i] =<font color="red"> Modelica_LinearSystems2.Controller.Internal.scaleFactor1</font>(0,
-        den[n_den2 + i, 1]);
-     <font color="blue">end if</font>;
-  <font color="blue">end for</font>;
-
-<font color="blue">equation </font>
-  <font color="red">assert</font>(n_num &lt;= n_den, &quot;ZerosAndPoles transfer function is not proper as required from StateSpace system:\n&quot;
-                         + &quot;  numerator degree (= &quot; +<font color="red"> String</font>(n_num) + &quot;) &lt;= denominator degree (= &quot;
-                         +<font color="red"> String</font>(n_den) +&quot;) required.&quot;);
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-     <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">max</font>(n_den2,n_num2)<font color="blue"> loop</font>
-      <font color="darkgreen">  // Construct state space systems of order 2</font>
-      <font color="red">  der</font>(x[2*i-1]) = x[2*i];
-        <font color="blue">if </font>i &lt;= n_den2<font color="blue"> then</font>
-        <font color="red">   der</font>(x[2*i]) = den[i,2]*uu[i] - den[i,2]*x[2*i-1] - den[i,1]*x[2*i];
-           <font color="blue">if </font>i &lt;= n_num2<font color="blue"> then</font>
-          <font color="darkgreen">    // State space system in form (1)</font>
-              uu[i+1] = k[i]*(((num[i,2] - den[i,2])*x[2*i-1] +
-                              (num[i,1] - den[i,1])*x[2*i])/den[i,2] + uu[i]);
-           <font color="blue">elseif </font>i-n_num2+1 &lt;= n_num1<font color="blue"> then</font>
-          <font color="darkgreen">    // State space system in form (1) with 2 first order numerator polynomials</font>
-              uu[i+1] = k[i]*(((num[i,1]*num[i+1,1] - den[i,2])*x[2*i-1] +
-                              (num[i,1]+num[i+1,1] - den[i,1])*x[2*i])/den[i,2] + uu[i]);
-           <font color="blue">elseif </font>i-n_num2 == n_num1<font color="blue"> then</font>
-          <font color="darkgreen">    // State space system in form (2) with 1 first order numerator polynomial</font>
-              uu[i+1] = k[i]*(num[i,1]*x[2*i-1] + x[2*i])/den[i,2];
-           <font color="blue">else</font>
-          <font color="darkgreen">    // State space system in form (3)</font>
-              uu[i+1] = k[i]*x[2*i-1]/den[i,2];
-           <font color="blue">end if</font>;
-        <font color="blue">else</font>
-        <font color="darkgreen">   // State space system in form (1) with 2 first order denominator polynomials</font>
-        <font color="red">   der</font>(x[2*i]) = den[i,1]*den[i,1]*uu[i] - (den[i,1]*den[i+1,1])*x[2*i-1]
-                               - (den[i,1]+den[i+1,1])*x[2*i];
-           uu[i+1]     = k[i]*(((num[i,2] - (den[i,1]*den[i+1,1]))*x[2*i-1] +
-                               (num[i,1] - (den[i,1]+den[i+1,1]))*x[2*i])/den[i,1]/den[i,1] + uu[i]);
-        <font color="blue">end if</font>;
-     <font color="blue">end for</font>;
-
-     <font color="blue">for </font>i<font color="blue"> in </font>i_d:n_den1<font color="blue"> loop</font>
-      <font color="darkgreen">  // Construct state space systems of order 1</font>
-      <font color="red">  der</font>(x[2*n_den2+i]) = den[n_den2+i,1]*(uu[i_k+i]-x[2*n_den2+i]);
-        <font color="blue">if </font>n_num2 &lt;= n_den2<font color="blue"> and </font>2*(n_den2-n_num2)+i &lt;= n_num1<font color="blue"> then</font>
-        <font color="darkgreen">   // State space system in form (4)</font>
-           uu[i_k+i+1] = k[i_k+i]*((num[<font color="red">max</font>(1,n_num2 + 2*(n_den2-n_num2)+i),1]-den[n_den2+i,1])*x[2*n_den2+i]/den[n_den2+i,1] + uu[i_k+i]);
-        <font color="blue">elseif </font>n_num2 &gt; n_den2<font color="blue"> and </font>i-i_d+1 &lt;= n_num1<font color="blue"> then</font>
-        <font color="darkgreen">   // State space system in form (4)</font>
-           uu[i_k+i+1] = k[i_k+i]*((num[<font color="red">max</font>(1,n_num2 + i-i_d+1),1]-den[n_den2+i,1])*x[2*n_den2+i]/den[n_den2+i,1] + uu[i_k+i]);
-        <font color="blue">else</font>
-        <font color="darkgreen">   // State space system in form (5)</font>
-           uu[i_k+i+1] = k[i_k+i]*x[2*n_den2+i]/den[n_den2+i,1];
-        <font color="blue">end if</font>;
-     <font color="blue">end for</font>;
-     y = k_total*uu[i_k+n_den1+1];
- <font color="blue">else</font>
-    <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(uu, 1) - 1<font color="blue"> loop</font>
-      uu[i + 1] = u;
-    <font color="blue">end for</font>;
-  <font color="blue">end if</font>;
-
- uu[1] = u;
-  <font color="red">connect</font>(x, discretePart.x);
-  <font color="red">connect</font>(y, discretePart.y[1]);
-
-<font color="blue">initial </font><font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="blue">if </font>init ==Modelica_LinearSystems2.Controller.Types.Init.InitialState<font color="blue"> then</font>
-        x = x_start;
-    <font color="blue">elseif </font>init ==Modelica_LinearSystems2.Controller.Types.Init.SteadyState<font color="blue"> then</font>
-      <font color="red">  der</font>(x) =<font color="red"> zeros</font>(nx);
-    <font color="blue">elseif </font>init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput<font color="blue"> then</font>
-        y = y_start;
-      <font color="red">  der</font>(x[1:nx-1]) =<font color="red"> zeros</font>(nx-1);
-     <font color="blue">end if</font>;
-  <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>ZerosAndPoles;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE Filter<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -917,7 +519,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.Filter"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.Filter</H2>
 <B>Continuous or discretized analog low or high pass IIR-filter (CriticalDamping/Bessel/Butterworth/Chebyshev)</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.FilterD.png" ALT="Modelica_LinearSystems2.Controller.Filter">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -931,90 +532,30 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSys
 >ZerosAndPoles</A> (Continuous or discretized, single input single output block described by a ZerosAndPoles object).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
->ZerosAndPoles</A></TD><TD>system</TD><TD>system3</TD><TD>Data defining the ZerosAndPoles object</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.AnalogFilter"
->AnalogFilter</A></TD><TD>analogFilter</TD><TD>Modelica_LinearSystems2.Type...</TD><TD>Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.FilterType"
->FilterType</A></TD><TD>filterType</TD><TD>Modelica_LinearSystems2.Type...</TD><TD>Type of filter (LowPass/HighPass)</TD></TR>
-<TR><TD>Integer</TD><TD>order</TD><TD>2</TD><TD>Order of filter</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Frequency</A></TD><TD>f_cut</TD><TD>1</TD><TD>Cut-off frequency [Hz]</TD></TR>
-<TR><TD>Real</TD><TD>gain</TD><TD>1.0</TD><TD>Gain (= amplitude of frequency response at zero frequency)</TD></TR>
-<TR><TD>Boolean</TD><TD>normalized</TD><TD>true</TD><TD>= true, if amplitude of low pass filter at f_cut is 1/sqrt(2) (=3db)</TD></TR>
-<TR><TD>Real</TD><TD>A_ripple</TD><TD>0.5</TD><TD>Pass band ripple for Chebyshev filter (otherwise not used) [dB]</TD></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
->MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
-<TR><TD>Real</TD><TD>x_start[nx]</TD><TD>zeros(nx)</TD><TD>Initial or guess values of states</TD></TR>
-<TR><TD>Real</TD><TD>y_start</TD><TD>0</TD><TD>Initial or guess values of output</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>system</TD><TD>Data defining the ZerosAndPoles object</TD></TR>
+<TR><TD>analogFilter</TD><TD>Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)</TD></TR>
+<TR><TD>filterType</TD><TD>Type of filter (LowPass/HighPass)</TD></TR>
+<TR><TD>order</TD><TD>Order of filter</TD></TR>
+<TR><TD>f_cut</TD><TD>Cut-off frequency [Hz]</TD></TR>
+<TR><TD>gain</TD><TD>Gain (= amplitude of frequency response at zero frequency)</TD></TR>
+<TR><TD>normalized</TD><TD>= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter</TD></TR>
+<TR><TD>A_ripple</TD><TD>Pass band ripple for Chebyshev filter (otherwise not used) [dB]</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>x_start[nx]</TD><TD>Initial or guess values of states</TD></TR>
+<TR><TD>y_start</TD><TD>Initial or guess values of output</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>x[nx]</TD><TD>State of continuous block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TD>x[nx]</TD><TD>State of continuous block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> Filter <font color="darkgreen">
-  &quot;Continuous or discretized analog low or high pass IIR-filter (CriticalDamping/Bessel/Butterworth/Chebyshev)&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types"
->Modelica_LinearSystems2.Types</A>;
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.ZerosAndPoles"
->ZerosAndPoles</A>(<font color="blue">final </font>system=system3);
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.AnalogFilter"
->Modelica_LinearSystems2.Types.AnalogFilter</A> analogFilter=
-      Modelica_LinearSystems2.Types.AnalogFilter.CriticalDamping <font color="darkgreen">
-    &quot;Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)&quot;</font>;
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.FilterType"
->Modelica_LinearSystems2.Types.FilterType</A> filterType=
-      Modelica_LinearSystems2.Types.FilterType.LowPass <font color="darkgreen">
-    &quot;Type of filter (LowPass/HighPass)&quot;</font>;
-  <font color="blue">parameter </font>Integer order(min=1) = 2 <font color="darkgreen">&quot;Order of filter&quot;</font>;
-  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Modelica.SIunits.Frequency</A> f_cut=1 <font color="darkgreen">&quot;Cut-off frequency&quot;</font>;
-  <font color="blue">parameter </font>Real gain=1.0 <font color="darkgreen">
-    &quot;Gain (= amplitude of frequency response at zero frequency)&quot;</font>;
-  <font color="blue">parameter </font>Boolean normalized=true <font color="darkgreen">
-    &quot;= true, if amplitude of low pass filter at f_cut is 1/sqrt(2) (=3db)&quot;</font>;
-  <font color="blue">parameter </font>Real A_ripple(unit=&quot;dB&quot;) = 0.5 <font color="darkgreen">
-    &quot;Pass band ripple for Chebyshev filter (otherwise not used)&quot;</font>;
-
-<font color="blue">protected </font>
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.ZerosAndPoles.Internal.ZerosAndPoles"
->Modelica_LinearSystems2.ZerosAndPoles.Internal.ZerosAndPoles</A>
-    system2 =<font color="red"> Modelica_LinearSystems2.ZerosAndPoles.Internal.filter</font>(
-      analogFilter=analogFilter,
-      filterType=filterType,
-      order=order,
-      f_cut=f_cut,
-      gain=gain,
-      A_ripple=A_ripple,
-      normalized=normalized) <font color="darkgreen">&quot;Filter&quot;</font>;
-
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
->Modelica_LinearSystems2.ZerosAndPoles</A> system3(
-    k=system2.k,
-    n1=system2.n1,
-    n2=system2.n2,
-    d1=system2.d1,
-    d2=system2.d2);
-
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>Filter;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE FilterFIR<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -1022,92 +563,32 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSys
 <A NAME="Modelica_LinearSystems2.Controller.FilterFIR"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.FilterFIR</H2>
 <B>Discrete finite impulse response low or high pass filter</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.FilterFIRD.png" ALT="Modelica_LinearSystems2.Controller.FilterFIR">
 <P><H3>Information</H3></P>
 Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"
 >Interfaces.PartialSISO_equality</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Sample time = sampleFactor * sampleClock.sampleTime</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.FIRspec"
->FIRspec</A></TD><TD>specType</TD><TD>Modelica_LinearSystems2.Cont...</TD><TD>Specification type of FIR filter</TD></TR>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Mean value filter</TD></TR>
-<TR><TD>Integer</TD><TD>L</TD><TD>2</TD><TD>Length of mean value filter</TD></TR>
-<TR bgcolor="#e0e0e0"><TD colspan=4>FIR filter design</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.FilterType"
->FilterType</A></TD><TD>filterType</TD><TD>Modelica_LinearSystems2.Type...</TD><TD>Type of filter</TD></TR>
-<TR><TD>Integer</TD><TD>order</TD><TD>2</TD><TD>Order of filter</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Frequency</A></TD><TD>f_cut</TD><TD>1</TD><TD>Cut-off frequency [Hz]</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.Window"
->Window</A></TD><TD>window</TD><TD>Modelica_LinearSystems2.Cont...</TD><TD>Type of window</TD></TR>
-<TR><TD>Real</TD><TD>beta</TD><TD>2.12</TD><TD>Beta-Parameter for Kaiser-window</TD></TR>
-<TR bgcolor="#e0e0e0"><TD colspan=4>FIR filter defined by coefficient vector</TD></TR>
-<TR><TD>Real</TD><TD>a[:]</TD><TD>{1,1}</TD><TD>FIR filter coefficients</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Sample time = sampleFactor * sampleClock.sampleTime</TD></TR>
+<TR><TD>specType</TD><TD>Specification type of FIR filter</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Mean value filter</TD></TR>
+<TR><TD>L</TD><TD>Length of mean value filter</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>FIR filter design</TD></TR>
+<TR><TD>filterType</TD><TD>Type of filter</TD></TR>
+<TR><TD>order</TD><TD>Order of filter</TD></TR>
+<TR><TD>f_cut</TD><TD>Cut-off frequency [Hz]</TD></TR>
+<TR><TD>window</TD><TD>Type of window</TD></TR>
+<TR><TD>beta</TD><TD>Beta-Parameter for Kaiser-window</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>FIR filter defined by coefficient vector</TD></TR>
+<TR><TD>a[:]</TD><TD>FIR filter coefficients</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> FilterFIR <font color="darkgreen">
-  &quot;Discrete finite impulse response low or high pass filter&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.FIRspec"
->Modelica_LinearSystems2.Controller.Types.FIRspec</A>;
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockType"
->Modelica_LinearSystems2.Controller.Types.BlockType</A>;
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"
->Interfaces.PartialSISO_equality</A>;
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.FIRspec"
->Modelica_LinearSystems2.Controller.Types.FIRspec</A> specType=Modelica_LinearSystems2.Controller.Types.FIRspec.MeanValue <font color="darkgreen">
-    &quot;Specification type of FIR filter&quot;</font>;
-  <font color="blue">parameter </font>Integer L(min=2) = 2 <font color="darkgreen">&quot;Length of mean value filter&quot;</font>;
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.FilterType"
->Modelica_LinearSystems2.Types.FilterType</A> filterType=
-      Modelica_LinearSystems2.Types.FilterType.LowPass <font color="darkgreen">&quot;Type of filter&quot;</font>;
-  <font color="blue">parameter </font>Integer order(min=1) = 2 <font color="darkgreen">&quot;Order of filter&quot;</font>;
-  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
->Modelica.SIunits.Frequency</A> f_cut=1 <font color="darkgreen">&quot;Cut-off frequency&quot;</font>;
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.Window"
->Types.Window</A> window=Modelica_LinearSystems2.Controller.Types.Window.Rectangle <font color="darkgreen">
-    &quot;Type of window&quot;</font>;
-  <font color="blue">parameter </font>Real beta=2.12 <font color="darkgreen">&quot;Beta-Parameter for Kaiser-window&quot;</font>;
-  <font color="blue">parameter </font>Real a[:]={1,1} <font color="darkgreen">&quot;FIR filter coefficients&quot;</font>;
-
-<font color="blue">protected </font>
-  <font color="blue">parameter </font>Real a2[:]=<font color="red">Internal.FIR_coefficients</font>(
-      specType,
-      L,
-      filterType,
-      order,
-      f_cut,
-      sampleClock.sampleTime*sampleFactor,
-      window,
-      beta,
-      a) <font color="blue">if </font> <font color="blue">not </font>continuous;
-  <A HREF="Modelica_LinearSystems2_Controller_Internal.html#Modelica_LinearSystems2.Controller.Internal.DiscreteFIR"
->Internal.DiscreteFIR</A> discretePart(
-    sampleFactor=sampleFactor,
-    a=a2) <font color="blue">if </font> <font color="blue">not </font>continuous <font color="darkgreen">&quot;FIR realization&quot;</font>;
-<font color="blue">equation </font>
-
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    y = u;
-  <font color="blue">end if</font>;
-<font color="red">connect</font>(u,discretePart.u);
-<font color="red">connect</font>(y,discretePart.y);
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>FilterFIR;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE Integrator<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -1115,7 +596,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.Integrator"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.Integrator</H2>
 <B>Output the integral of the input signal (continuous or discrete block)</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.IntegratorD.png" ALT="Modelica_LinearSystems2.Controller.Integrator">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -1142,56 +622,21 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>k</TD><TD>1</TD><TD>Integrator gain</TD></TR>
-<TR><TD>Boolean</TD><TD>withDelay</TD><TD>false</TD><TD>&nbsp;</TD></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
->MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
-<TR><TD>Real</TD><TD>y_start</TD><TD>0</TD><TD>Initial or guess value of output (=state)</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>k</TD><TD>Integrator gain</TD></TR>
+<TR><TD>withDelay</TD><TD>= true, if the output is delayed by one sample period (only if discrete)</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>y_start</TD><TD>Initial or guess value of output (=state)</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> Integrator <font color="darkgreen">
-  &quot;Output the integral of the input signal (continuous or discrete block)&quot;</font>
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
->Interfaces.PartialSISO2</A>(y(start=y_start), discretePart(
-      withDelay=withDelay,
-      x_start={y_start},
-      y_start={y_start},
-      ABCD=[0,k; 1,0]));
-<font color="blue">parameter </font>Real k=1 <font color="darkgreen">&quot;Integrator gain&quot;</font>;
-<font color="blue">parameter </font>Boolean withDelay=false <font color="blue">if </font><font color="blue">not </font>continuous;
-
-  <font color="blue">parameter </font>Real y_start=0 <font color="darkgreen">&quot;Initial or guess value of output (=state)&quot;</font>;
-<font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="red">der</font>(y) = k*u;
-
-  <font color="blue">end if</font>;
-  <font color="red">connect</font>(y, discretePart.y[1]);
-<font color="blue">initial </font><font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="blue">if </font>init == Types.Init.InitialState<font color="blue"> or </font>init == Types.Init.InitialOutput<font color="blue"> then</font>
-      y = y_start;
-    <font color="blue">elseif </font>init == Types.Init.SteadyState<font color="blue"> then</font>
-      <font color="red">der</font>(y) = 0;
-    <font color="blue">end if</font>;
-  <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Integrator;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE Derivative<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -1199,7 +644,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.Derivative"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.Derivative</H2>
 <B>Approximate derivative (continuous or discrete block)</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.DerivativeD.png" ALT="Modelica_LinearSystems2.Controller.Derivative">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -1233,82 +677,24 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>k</TD><TD>1</TD><TD>Gain</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Time</A></TD><TD>T</TD><TD>0.01</TD><TD>Time Constant (T&gt;0 required; T=0 is ideal derivative block) [s]</TD></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
->MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
-<TR><TD>Real</TD><TD>x_start</TD><TD>0</TD><TD>Initial or guess value of state</TD></TR>
-<TR><TD>Real</TD><TD>y_start</TD><TD>0</TD><TD>Initial or guess value of output</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>k</TD><TD>Gain</TD></TR>
+<TR><TD>T</TD><TD>Time Constant (T&gt;0 required; T=0 is ideal derivative block) [s]</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>x_start</TD><TD>Initial or guess value of state</TD></TR>
+<TR><TD>y_start</TD><TD>Initial or guess value of output</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>x</TD><TD>State of approximative derivative</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TD>x</TD><TD>State of approximative derivative</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> Derivative <font color="darkgreen">
-  &quot;Approximate derivative (continuous or discrete block)&quot;</font>
-
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
->Interfaces.PartialSISO2</A>(discretePart(
-      y(start={y_start}),
-      x_start={x_start},
-      y_start={y_start},
-      ABCD=[-1/T,1/T; -k/T,k/T]));
-
-  <font color="blue">parameter </font>Real k=1 <font color="darkgreen">&quot;Gain&quot;</font>;
-  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Modelica.SIunits.Time</A> T(min=Modelica.Constants.eps) = 0.01 <font color="darkgreen">
-    &quot;Time Constant (T&gt;0 required; T=0 is ideal derivative block)&quot;</font>;
-  <font color="blue">parameter </font>Real x_start=0 <font color="darkgreen">&quot;Initial or guess value of state&quot;</font>;
-  <font color="blue">parameter </font>Real y_start=0 <font color="darkgreen">&quot;Initial or guess value of output&quot;</font>;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->Modelica.Blocks.Interfaces.RealOutput</A> x(start=x_start) <font color="darkgreen">
-    &quot;State of approximative derivative&quot;</font>;
-<font color="blue">protected </font>
-  <font color="blue">parameter </font>Boolean zeroGain =<font color="red"> abs</font>(k) &lt; Modelica.Constants.eps <font color="darkgreen">
-    &quot;= true, if k is considered to be zero&quot;</font>;
-<font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="red"> der</font>(x) = <font color="blue">if </font>zeroGain<font color="blue"> then </font>0<font color="blue"> else </font>(u - x)/T;
-          y = <font color="blue">if </font>zeroGain<font color="blue"> then </font>0<font color="blue"> else </font>(k/T)*(u - x);
-<font color="blue">else</font>
-
-<font color="red">connect</font>(x,discretePart.x[1]);
-<font color="red">connect</font>(y,discretePart.y[1]);
-  <font color="blue">end if</font>;
-
-<font color="blue">initial </font><font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-     <font color="blue">if </font>init == Types.Init.InitialState<font color="blue"> or </font>zeroGain<font color="blue"> then</font>
-        x = x_start;
-     <font color="blue">elseif </font>init == Types.Init.SteadyState<font color="blue"> then</font>
-      <font color="red">  der</font>(x) = 0;
-  <font color="blue">elseif </font>init == Types.Init.InitialOutput<font color="blue"> then</font>
-    <font color="blue">if </font>zeroGain<font color="blue"> then</font>
-       x = u;
-    <font color="blue">else</font>
-       y = y_start;
-    <font color="blue">end if</font>;
-     <font color="blue">end if</font>;
-  <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Derivative;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE FirstOrder<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -1316,7 +702,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.FirstOrder"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.FirstOrder</H2>
 <B>First order (continuous or discrete) transfer function block (= 1 pole)</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.FirstOrderD.png" ALT="Modelica_LinearSystems2.Controller.FirstOrder">
 <P><H3>Information</H3></P>
 <PRE>
 </pre>
@@ -1337,56 +722,21 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>k</TD><TD>1</TD><TD>Gain</TD></TR>
-<TR><TD>Real</TD><TD>T</TD><TD>1</TD><TD>Time Constant</TD></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
->MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
-<TR><TD>Real</TD><TD>y_start</TD><TD>0.0</TD><TD>Initial y if initType=InitialState (else guess)</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>k</TD><TD>Gain</TD></TR>
+<TR><TD>T</TD><TD>Time Constant</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>y_start</TD><TD>Initial y if initType=InitialState (else guess)</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> FirstOrder <font color="darkgreen">
-  &quot;First order (continuous or discrete) transfer function block (= 1 pole)&quot;</font>
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
->Interfaces.PartialSISO2</A>(y(start=y_start), discretePart(
-      x_start={y_start},
-      y_start={y_start},
-      ABCD=[-1/T,k/T; 1,0]));
-
-  <font color="blue">parameter </font>Real k = 1 <font color="darkgreen">&quot;Gain&quot;</font>;
-  <font color="blue">parameter </font>Real T = 1 <font color="darkgreen">&quot;Time Constant&quot;</font>;
-  <font color="blue">parameter </font>Real y_start = 0.0 <font color="darkgreen">
-    &quot;Initial y if initType=InitialState (else guess)&quot;</font>;
-
-<font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="red">der</font>(y) = (k*u - y)/T;
-  <font color="blue">end if</font>;
-  <font color="red">connect</font>(y,discretePart.x[1]);
-<font color="blue">initial </font><font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-     <font color="blue">if </font>init == Types.Init.InitialState<font color="blue"> or </font>init == Types.Init.InitialOutput<font color="blue"> then</font>
-        y = y_start;
-     <font color="blue">elseif </font>init == Types.Init.SteadyState<font color="blue"> then</font>
-      <font color="red">  der</font>(y) = 0;
-     <font color="blue">end if</font>;
-  <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>FirstOrder;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE SecondOrder<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -1394,7 +744,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.SecondOrder"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.SecondOrder</H2>
 <B>Second order (continuous or discrete) transfer function block (= 2 poles)</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.SecondOrderD.png" ALT="Modelica_LinearSystems2.Controller.SecondOrder">
 <P><H3>Information</H3></P>
 <PRE>
 </pre>
@@ -1431,76 +780,25 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>k</TD><TD>1</TD><TD>Gain</TD></TR>
-<TR><TD>Real</TD><TD>w</TD><TD>1</TD><TD>Angular frequency</TD></TR>
-<TR><TD>Real</TD><TD>D</TD><TD>1</TD><TD>Damping</TD></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
->MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
-<TR><TD>Real</TD><TD>y_start</TD><TD>0.0</TD><TD>Initial or guess value of output (= state)</TD></TR>
-<TR><TD>Real</TD><TD>yd_start</TD><TD>0.0</TD><TD>Initial or guess value of derivative of output (= state)</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>k</TD><TD>Gain</TD></TR>
+<TR><TD>w</TD><TD>Angular frequency</TD></TR>
+<TR><TD>D</TD><TD>Damping</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>y_start</TD><TD>Initial or guess value of output (= state)</TD></TR>
+<TR><TD>yd_start</TD><TD>Initial or guess value of derivative of output (= state)</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>yd</TD><TD>First derivative of y</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>yy[2]</TD><TD>&nbsp;</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>yd</TD><TD>First derivative of y</TD></TR>
+<TR><TD>yy[2]</TD><TD>&nbsp;</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> SecondOrder <font color="darkgreen">
-  &quot;Second order (continuous or discrete) transfer function block (= 2 poles)&quot;</font>
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
->Interfaces.PartialSISO2</A>(y(start=y_start), discretePart(
-      x_start={y_start,yd_start},
-      y_start={y_start},
-      ABCD=[[0,1; -w*w,-2*D*w],[0; w*w*k]; [1,0],[0]]));
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->Modelica.Blocks.Interfaces.RealOutput</A> yd(start=yd_start) <font color="darkgreen">
-    &quot;First derivative of y&quot;</font>;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->Modelica.Blocks.Interfaces.RealOutput</A> yy[2]={y,yd};
-  <font color="blue">parameter </font>Real k=1 <font color="darkgreen">&quot;Gain&quot;</font>;
-  <font color="blue">parameter </font>Real w=1 <font color="darkgreen">&quot;Angular frequency&quot;</font>;
-  <font color="blue">parameter </font>Real D=1 <font color="darkgreen">&quot;Damping&quot;</font>;
-  <font color="blue">parameter </font>Real y_start=0.0 <font color="darkgreen">&quot;Initial or guess value of output (= state)&quot;</font>;
-  <font color="blue">parameter </font>Real yd_start=0.0 <font color="darkgreen">
-    &quot;Initial or guess value of derivative of output (= state)&quot;</font>;
-
-<font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="red">der</font>(y) = yd;
-    <font color="red">der</font>(yd) = w*(w*(k*u - y) - 2*D*yd);
-  <font color="blue">end if</font>;
-
-  <font color="red">connect</font>(yy, discretePart.x);
-
-<font color="blue">initial </font><font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="blue">if </font>init == Types.Init.SteadyState<font color="blue"> then</font>
-      <font color="red">der</font>(y) = 0;
-      <font color="red">der</font>(yd) = 0;
-    <font color="blue">elseif </font>init == Types.Init.InitialState<font color="blue"> then</font>
-      y = y_start;
-      yd = yd_start;
-    <font color="blue">elseif </font>init == Types.Init.InitialOutput<font color="blue"> then</font>
-      y = y_start;
-      yd = 0;
-    <font color="blue">end if</font>;
-  <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>SecondOrder;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE PI<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -1508,7 +806,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.PI"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.PI</H2>
 <B>Proportional-Integral controller (continuous or discrete block)</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.PID.png" ALT="Modelica_LinearSystems2.Controller.PI">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -1537,71 +834,24 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Interfaces.PartialSISO2</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>k</TD><TD>1</TD><TD>Gain</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Time</A></TD><TD>T</TD><TD>1</TD><TD>Time Constant (T&gt;0 required) [s]</TD></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
->MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
-<TR><TD>Real</TD><TD>x_start</TD><TD>0</TD><TD>Initial or guess value of state</TD></TR>
-<TR><TD>Real</TD><TD>y_start</TD><TD>0</TD><TD>Initial value of output</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>k</TD><TD>Gain</TD></TR>
+<TR><TD>T</TD><TD>Time Constant (T&gt;0 required) [s]</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TD>x_start</TD><TD>Initial or guess value of state</TD></TR>
+<TR><TD>y_start</TD><TD>Initial value of output</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>x</TD><TD>State of block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TD>x</TD><TD>State of block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> PI <font color="darkgreen">
-  &quot;Proportional-Integral controller (continuous or discrete block)&quot;</font>
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2"
->Interfaces.PartialSISO2</A>(discretePart(
-      x_start={x_start},
-      y_start={y_start},
-      ABCD=[0,1/T; k,k]));
-
-  <font color="blue">parameter </font>Real k=1 <font color="darkgreen">&quot;Gain&quot;</font>;
-  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Modelica.SIunits.Time</A> T(min=Modelica.Constants.eps)=1 <font color="darkgreen">
-    &quot;Time Constant (T&gt;0 required)&quot;</font>;
-  <font color="blue">parameter </font>Real x_start=0 <font color="darkgreen">&quot;Initial or guess value of state&quot;</font>;
-<font color="blue">parameter </font>Real y_start=0 <font color="darkgreen">&quot;Initial value of output&quot;</font>;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->Modelica.Blocks.Interfaces.RealOutput</A> x(start=x_start) <font color="darkgreen">&quot;State of block&quot;</font>;
-<font color="blue">equation </font>
-  <font color="red">connect</font>(y, discretePart.y[1]);
-  <font color="red">connect</font>(x, discretePart.x[1]);
-
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="red">der</font>(x) = u/T;
-    y = k*(x + u);
-  <font color="blue">end if</font>;
-
-<font color="blue">initial </font><font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    <font color="blue">if </font>init == Types.Init.SteadyState<font color="blue"> then</font>
-    <font color="red">der</font>(x) = 0;
-  <font color="blue">elseif </font>init == Types.Init.InitialState<font color="blue"> then</font>
-    x = x_start;
-  <font color="blue">elseif </font>init == Types.Init.InitialOutput<font color="blue"> then</font>
-    y = y_start;
-  <font color="blue">end if</font>;
-  <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PI;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE PID<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -1609,7 +859,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.PID"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.PID</H2>
 <B>PID-controller in additive description form</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.PIDD.png" ALT="Modelica_LinearSystems2.Controller.PID">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -1622,11 +871,9 @@ block LimPID.
 The PID block can be initialized in different
 ways controlled by parameter <b>initType</b>. The possible
 values of initType are defined in 
-<A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.InitPID"
->Modelica.Blocks.Types.InitPID</a>.
+Modelica.Blocks.Types.InitPID</a>.
 This type is identical to 
-<A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Init"
->Types.Init</a>, 
+Types.Init</a>, 
 with the only exception that the additional option
 <b>DoNotUse_InitialIntegratorState</b> is added for
 backward compatibility reasons (= integrator is initialized with
@@ -1699,128 +946,31 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Interfaces.PartialSampledBlock</A> (Partial block of Sampled library (icon + default parameters)).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.PID_representation"
->PID_representation</A></TD><TD>pidRep</TD><TD>Types.PID_representation.tim...</TD><TD>type of PID representation: k*(1 + 1/Ti/s + Td*s) or (kp + Ti/s + Td*s)</TD></TR>
-<TR><TD>Real</TD><TD>k</TD><TD>1</TD><TD>Gain of controller</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Time</A></TD><TD>Ti</TD><TD>&nbsp;</TD><TD>Time constant of Integrator block [s]</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Time</A></TD><TD>Td</TD><TD>&nbsp;</TD><TD>Time constant of Derivative block [s]</TD></TR>
-<TR><TD>Real</TD><TD>Nd</TD><TD>10</TD><TD>The higher Nd, the more ideal the derivative block</TD></TR>
-<TR><TD>Real</TD><TD>kp</TD><TD>1</TD><TD>P part parameter of gain representation</TD></TR>
-<TR><TD>Real</TD><TD>ki</TD><TD>1</TD><TD>I part parameter of gain representation</TD></TR>
-<TR><TD>Real</TD><TD>kd</TD><TD>1</TD><TD>D part parameter of gain representation</TD></TR>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Initialization</TD></TR>
-<TR><TD>Real</TD><TD>xi_start</TD><TD>0</TD><TD>Initial or guess value value for integrator output (= integrator state)</TD></TR>
-<TR><TD>Real</TD><TD>xd_start</TD><TD>0</TD><TD>Initial or guess value for state of derivative block</TD></TR>
-<TR><TD>Real</TD><TD>y_start</TD><TD>0</TD><TD>Initial value of output</TD></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
->MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>pidRep</TD><TD>type of PID representation: k*(1 + 1/Ti/s + Td*s) or (kp + Ti/s + Td*s)</TD></TR>
+<TR><TD>k</TD><TD>Gain of controller</TD></TR>
+<TR><TD>Ti</TD><TD>Time constant of Integrator block [s]</TD></TR>
+<TR><TD>Td</TD><TD>Time constant of Derivative block [s]</TD></TR>
+<TR><TD>Nd</TD><TD>The higher Nd, the more ideal the derivative block</TD></TR>
+<TR><TD>kp</TD><TD>P part parameter of gain representation</TD></TR>
+<TR><TD>ki</TD><TD>I part parameter of gain representation</TD></TR>
+<TR><TD>kd</TD><TD>D part parameter of gain representation</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Initialization</TD></TR>
+<TR><TD>xi_start</TD><TD>Initial or guess value value for integrator output (= integrator state)</TD></TR>
+<TR><TD>xd_start</TD><TD>Initial or guess value for state of derivative block</TD></TR>
+<TR><TD>y_start</TD><TD>Initial value of output</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> PID <font color="darkgreen">&quot;PID-controller in additive description form&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault</A>;
-
-<font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock"
->Interfaces.PartialSampledBlock</A>;
-<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->Modelica.Blocks.Interfaces.RealInput</A> u <font color="darkgreen">
-    &quot;Continuous or discrete input signal of block&quot;</font>;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->Modelica.Blocks.Interfaces.RealOutput</A> y <font color="darkgreen">
-    &quot;Continuous or discrete output signal of block&quot;</font>;</textblock>
-
-<font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.PID_representation"
->Types.PID_representation</A> pidRep=Types.PID_representation.timeConstants <font color="darkgreen">
-    &quot;type of PID representation: k*(1 + 1/Ti/s + Td*s) or (kp + Ti/s + Td*s)&quot;</font>;
-
-  <font color="blue">parameter </font>Real k(min=0) = 1 <font color="darkgreen">&quot;Gain of controller&quot;</font>;
-  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Modelica.SIunits.Time</A> Ti(min=Modelica.Constants.small, start=0.5) <font color="darkgreen">
-    &quot;Time constant of Integrator block&quot;</font>;
-  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Modelica.SIunits.Time</A> Td(min=0, start=0.1) <font color="darkgreen">
-    &quot;Time constant of Derivative block&quot;</font>;
-  <font color="blue">parameter </font>Real Nd(min=Modelica.Constants.small) = 10 <font color="darkgreen">
-    &quot;The higher Nd, the more ideal the derivative block&quot;</font>;
-
-  <font color="blue">parameter </font>Real kp = 1 <font color="darkgreen">&quot;P part parameter of gain representation&quot;</font>;
-  <font color="blue">parameter </font>Real ki= 1 <font color="darkgreen">&quot;I part parameter of gain representation&quot;</font>;
-  <font color="blue">parameter </font>Real kd = 1 <font color="darkgreen">&quot;D part parameter of gain representation&quot;</font>;
-
-  <font color="blue">parameter </font>Real xi_start=0 <font color="darkgreen">
-    &quot;Initial or guess value value for integrator output (= integrator state)&quot;</font>;
-  <font color="blue">parameter </font>Real xd_start=0 <font color="darkgreen">
-    &quot;Initial or guess value for state of derivative block&quot;</font>;
-  <font color="blue">parameter </font>Real y_start=0 <font color="darkgreen">&quot;Initial value of output&quot;</font>;
-
-<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Sampler"
->Sampler</A> sampler(blockType=blockType);
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Gain"
->Modelica.Blocks.Math.Gain</A> P(k=1);
-  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Derivative"
->Derivative</A> D(
-    k= <font color="blue">if </font>pidRep==Types.PID_representation.timeConstants<font color="blue"> then </font>Td<font color="blue"> else </font>kd/kp,
-    blockType=blockType,
-    initType=<font color="blue">if </font>init == Types.Init.SteadyState<font color="blue"> or </font>init == Types.Init.InitialOutput<font color="blue"> then </font>
-              InitWithGlobalDefault.SteadyState<font color="blue"> else </font><font color="blue">if </font>init == Types.Init.InitialState<font color="blue"> then </font>
-              InitWithGlobalDefault.InitialState<font color="blue"> else </font>InitWithGlobalDefault.NoInit,
-    x_start=xd_start,
-    y_start=y_start,
-    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact,
-    T=<font color="red">max</font>([<font color="blue">if </font>pidRep==Types.PID_representation.timeConstants<font color="blue"> then </font>Td/Nd<font color="blue"> else </font>kd/kp/Nd,100*Modelica.Constants.eps]));</textblock>
-
-<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Integrator"
->Integrator</A> I(
-    k=<font color="blue">if </font>pidRep==Types.PID_representation.timeConstants<font color="blue"> then </font>1/Ti<font color="blue"> else </font>kp/ki,
-    y_start=xi_start,
-    blockType=blockType,
-    initType=<font color="blue">if </font>init == Types.Init.SteadyState<font color="blue"> then </font>InitWithGlobalDefault.SteadyState<font color="blue"> else </font>
-              <font color="blue">if </font>init == Types.Init.InitialState<font color="blue"> then </font>InitWithGlobalDefault.InitialState<font color="blue"> else </font>
-              InitWithGlobalDefault.NoInit,
-    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact);</textblock>
-
-<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add3"
->Modelica.Blocks.Math.Add3</A> addPID;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Gain"
->Modelica.Blocks.Math.Gain</A> gainPID(k=<font color="blue">if </font>pidRep==Types.PID_representation.timeConstants<font color="blue"> then </font>k<font color="blue"> else </font>kp);</textblock>
-
-<font color="blue">initial </font><font color="blue">equation </font>
-  <font color="blue">if </font>init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput<font color="blue"> then</font>
-    y = y_start;
-  <font color="blue">end if</font>;
-
-<font color="blue">equation </font>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(P.y, addPID.u1);
-  <font color="red">connect</font>(gainPID.u, addPID.y);
-  <font color="red">connect</font>(sampler.u, u);
-  <font color="red">connect</font>(I.y, addPID.u2);
-  <font color="red">connect</font>(D.y, addPID.u3);
-  <font color="red">connect</font>(sampler.y, I.u);
-  <font color="red">connect</font>(P.u, sampler.y);
-  <font color="red">connect</font>(D.u, sampler.y);
-  <font color="red">connect</font>(gainPID.y, y);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PID;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE LimPID<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -1828,7 +978,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.LimPID"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.LimPID</H2>
 <B>P, PI, PD, and PID controller with limited output, anti-windup compensation and setpoint weighting</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.LimPIDD.png" ALT="Modelica_LinearSystems2.Controller.LimPID">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -1836,8 +985,7 @@ Via parameter <b>controllerType</b> either <b>P</b>, <b>PI</b>, <b>PD</b>,
 or <b>PID</b> can be selected. If, e.g., PI is selected, all components belonging to the
 D-part are removed from the block (via conditional declarations).
 The example model
-<A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Examples.html#Modelica.Blocks.Examples.PID_Controller"
->Modelica.Blocks.Examples.PID_Controller</a>
+Modelica.Blocks.Examples.PID_Controller</a>
 demonstrates the usage of this controller.
 Several practical aspects of PID controller design are incorporated
 according to chapter 3 of the book:
@@ -1910,11 +1058,9 @@ together) and using the following strategy:
 This block can be initialized in different
 ways controlled by parameter <b>initType</b>. The possible
 values of initType are defined in 
-<A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.InitPID"
->Modelica.Blocks.Types.InitPID</a>.
+Modelica.Blocks.Types.InitPID</a>.
 This type is identical to 
-<A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Init"
->Types.Init</a>, 
+Types.Init</a>, 
 with the only exception that the additional option
 <b>DoNotUse_InitialIntegratorState</b> is added for
 backward compatibility reasons (= integrator is initialized with
@@ -1991,204 +1137,43 @@ to use <b>limitAtInit</b> = <b>false</b>.
 <pre>
 </PRE><P>
 Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock"
->Interfaces.PartialSampledBlock</A> (Partial block of Sampled library (icon + default parameters)), <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.SVcontrol"
->Modelica.Blocks.Interfaces.SVcontrol</A> (Single-Variable continuous controller), <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon"
+>Interfaces.PartialSampledBlock</A> (Partial block of Sampled library (icon + default parameters)), Modelica.Blocks.Interfaces.SVcontrol (Single-Variable continuous controller), <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon"
 >Interfaces.PartialBlockIcon</A> (Basic graphical layout of discrete/continuous block).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.PID_representation"
->PID_representation</A></TD><TD>pidRepresentation</TD><TD>Types.PID_representation.tim...</TD><TD>type of PID representation: k*(1 + 1/Ti/s + Td*s) or (kp + Ti/s + Td*s)</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.SimpleController"
->SimpleController</A></TD><TD>controllerType</TD><TD>Modelica.Blocks.Types.Simple...</TD><TD>Type of controller</TD></TR>
-<TR><TD>Real</TD><TD>k</TD><TD>1</TD><TD>Gain of controller</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Time</A></TD><TD>Ti</TD><TD>&nbsp;</TD><TD>Time constant of Integrator block [s]</TD></TR>
-<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Time</A></TD><TD>Td</TD><TD>&nbsp;</TD><TD>Time constant of Derivative block [s]</TD></TR>
-<TR><TD>Real</TD><TD>kp</TD><TD>1</TD><TD>P part parameter of gain representation</TD></TR>
-<TR><TD>Real</TD><TD>ki</TD><TD>1</TD><TD>I part parameter of gain representation</TD></TR>
-<TR><TD>Real</TD><TD>kd</TD><TD>1</TD><TD>D part parameter of gain representation</TD></TR>
-<TR><TD>Real</TD><TD>yMax</TD><TD>&nbsp;</TD><TD>Upper limit of output</TD></TR>
-<TR><TD>Real</TD><TD>yMin</TD><TD>-yMax</TD><TD>Lower limit of output</TD></TR>
-<TR><TD>Real</TD><TD>wp</TD><TD>1</TD><TD>Set-point weight for Proportional block (0..1)</TD></TR>
-<TR><TD>Real</TD><TD>wd</TD><TD>0</TD><TD>Set-point weight for Derivative block (0..1)</TD></TR>
-<TR><TD>Real</TD><TD>Ni</TD><TD>0.9</TD><TD>Ni*Ti is time constant of anti-windup compensation</TD></TR>
-<TR><TD>Real</TD><TD>Nd</TD><TD>10</TD><TD>The higher Nd, the more ideal the derivative block</TD></TR>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Initialization</TD></TR>
-<TR><TD>Boolean</TD><TD>limitsAtInit</TD><TD>true</TD><TD>= false, if limits are ignored during initializiation</TD></TR>
-<TR><TD>Real</TD><TD>xi_start</TD><TD>0</TD><TD>Initial or guess value value for integrator output (= integrator state)</TD></TR>
-<TR><TD>Real</TD><TD>xd_start</TD><TD>0</TD><TD>Initial or guess value for state of derivative block</TD></TR>
-<TR><TD>Real</TD><TD>y_start</TD><TD>0</TD><TD>Initial value of output</TD></TR>
-<TR bgcolor="#c0c0c0"><TD colspan=4><B>Advanced options</B></TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault"
->MethodWithGlobalDefault</A></TD><TD>methodType</TD><TD>Types.MethodWithGlobalDefaul...</TD><TD>Type of discretization if discrete block</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->InitWithGlobalDefault</A></TD><TD>initType</TD><TD>Types.InitWithGlobalDefault....</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>pidRepresentation</TD><TD>type of PID representation: k*(1 + 1/Ti/s + Td*s) or (kp + Ti/s + Td*s)</TD></TR>
+<TR><TD>controllerType</TD><TD>Type of controller</TD></TR>
+<TR><TD>k</TD><TD>Gain of controller</TD></TR>
+<TR><TD>Ti</TD><TD>Time constant of Integrator block [s]</TD></TR>
+<TR><TD>Td</TD><TD>Time constant of Derivative block [s]</TD></TR>
+<TR><TD>kp</TD><TD>P part parameter of gain representation</TD></TR>
+<TR><TD>ki</TD><TD>I part parameter of gain representation</TD></TR>
+<TR><TD>kd</TD><TD>D part parameter of gain representation</TD></TR>
+<TR><TD>yMax</TD><TD>Upper limit of output</TD></TR>
+<TR><TD>yMin</TD><TD>Lower limit of output</TD></TR>
+<TR><TD>wp</TD><TD>Set-point weight for Proportional block (0..1)</TD></TR>
+<TR><TD>wd</TD><TD>Set-point weight for Derivative block (0..1)</TD></TR>
+<TR><TD>Ni</TD><TD>Ni*Ti is time constant of anti-windup compensation</TD></TR>
+<TR><TD>Nd</TD><TD>The higher Nd, the more ideal the derivative block</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=2>Initialization</TD></TR>
+<TR><TD>limitsAtInit</TD><TD>= false, if limits are ignored during initializiation</TD></TR>
+<TR><TD>xi_start</TD><TD>Initial or guess value value for integrator output (= integrator state)</TD></TR>
+<TR><TD>xd_start</TD><TD>Initial or guess value for state of derivative block</TD></TR>
+<TR><TD>y_start</TD><TD>Initial value of output</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>methodType</TD><TD>Type of discretization if discrete block</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u_s</TD><TD>Connector of setpoint input signal</TD></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u_m</TD><TD>Connector of measurement input signal</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Connector of actuator output signal</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u_s</TD><TD>Connector of setpoint input signal</TD></TR>
+<TR><TD>u_m</TD><TD>Connector of measurement input signal</TD></TR>
+<TR><TD>y</TD><TD>Connector of actuator output signal</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> LimPID <font color="darkgreen">
-  &quot;P, PI, PD, and PID controller with limited output, anti-windup compensation and setpoint weighting&quot;</font>
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault"
->Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault</A>;
-  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.SimpleController"
->Modelica.Blocks.Types.SimpleController</A>;
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock"
->Interfaces.PartialSampledBlock</A>;
-
-  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.SVcontrol"
->Modelica.Blocks.Interfaces.SVcontrol</A>;
- <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon"
->Interfaces.PartialBlockIcon</A>;
-  <font color="blue">output </font>Real controlError=u_s - u_m <font color="darkgreen">&quot;Control error (set point - measurement)&quot;</font>;
-
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.PID_representation"
->Types.PID_representation</A> pidRepresentation=Types.PID_representation.timeConstants <font color="darkgreen">
-    &quot;type of PID representation: k*(1 + 1/Ti/s + Td*s) or (kp + Ti/s + Td*s)&quot;</font>;
-  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.SimpleController"
->Modelica.Blocks.Types.SimpleController</A> controllerType=Modelica.Blocks.Types.SimpleController.PID <font color="darkgreen">
-    &quot;Type of controller&quot;</font>;
-  <font color="blue">parameter </font>Real k(min=0) = 1 <font color="darkgreen">&quot;Gain of controller&quot;</font>;
-  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Modelica.SIunits.Time</A> Ti(min=Modelica.Constants.small, start=0.5) <font color="darkgreen">
-    &quot;Time constant of Integrator block&quot;</font>;
-  <font color="blue">parameter </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Time"
->Modelica.SIunits.Time</A> Td(min=0, start=0.1) <font color="darkgreen">
-    &quot;Time constant of Derivative block&quot;</font>;
-  <font color="blue">parameter </font>Real kp=1 <font color="darkgreen">&quot;P part parameter of gain representation&quot;</font>;
-  <font color="blue">parameter </font>Real ki=1 <font color="darkgreen">&quot;I part parameter of gain representation&quot;</font>;
-  <font color="blue">parameter </font>Real kd=1 <font color="darkgreen">&quot;D part parameter of gain representation&quot;</font>;
-  <font color="blue">parameter </font>Real yMax(start=1) <font color="darkgreen">&quot;Upper limit of output&quot;</font>;
-  <font color="blue">parameter </font>Real yMin=-yMax <font color="darkgreen">&quot;Lower limit of output&quot;</font>;
-  <font color="blue">parameter </font>Real wp(min=0) = 1 <font color="darkgreen">&quot;Set-point weight for Proportional block (0..1)&quot;</font>;
-  <font color="blue">parameter </font>Real wd(min=0) = 0 <font color="darkgreen">&quot;Set-point weight for Derivative block (0..1)&quot;</font>;
-  <font color="blue">parameter </font>Real Ni(min=100*Modelica.Constants.eps) = 0.9 <font color="darkgreen">
-    &quot;Ni*Ti is time constant of anti-windup compensation&quot;</font>;
-  <font color="blue">parameter </font>Real Nd(min=100*Modelica.Constants.eps) = 10 <font color="darkgreen">
-    &quot;The higher Nd, the more ideal the derivative block&quot;</font>;
-  <font color="blue">parameter </font>Boolean limitsAtInit=true <font color="darkgreen">
-    &quot;= false, if limits are ignored during initializiation&quot;</font>;
-  <font color="blue">parameter </font>Real xi_start=0 <font color="darkgreen">
-    &quot;Initial or guess value value for integrator output (= integrator state)&quot;</font>;
-  <font color="blue">parameter </font>Real xd_start=0 <font color="darkgreen">
-    &quot;Initial or guess value for state of derivative block&quot;</font>;
-  <font color="blue">parameter </font>Real y_start=0 <font color="darkgreen">&quot;Initial value of output&quot;</font>;
-
-<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Sampler"
->Sampler</A> sampler_s(blockType=blockType);
-  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Sampler"
->Sampler</A> sampler_m(blockType=blockType);
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
->Modelica.Blocks.Math.Add</A> addP(k1=wp, k2=-1);
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
->Modelica.Blocks.Math.Add</A> addD(k1=wd, k2=-1) <font color="blue">if </font>
-                                        with_D;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add3"
->Modelica.Blocks.Math.Add3</A> addI(k2=-1) <font color="blue">if </font>
-                                  with_I;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Gain"
->Modelica.Blocks.Math.Gain</A> P(k=1);
-  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Derivative"
->Derivative</A> D(k=<font color="blue">if </font>pidRepresentation==Types.PID_representation.timeConstants<font color="blue"> then </font>Td<font color="blue"> else </font>kd/kp, T=<font color="red">max</font>([Td/Nd,1.e-14]),
-    blockType=blockType,
-    initType=<font color="blue">if </font>init==Types.Init.SteadyState<font color="blue"> or </font>
-                init==Types.Init.InitialOutput<font color="blue"> then </font>InitWithGlobalDefault.SteadyState<font color="blue"> else </font>
-             <font color="blue">if </font>init==Types.Init.InitialState<font color="blue"> then </font>InitWithGlobalDefault.InitialState<font color="blue"> else </font>
-                InitWithGlobalDefault.NoInit,
-    x_start=xd_start,
-    y_start=y_start,
-    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact) <font color="blue">if </font>
-                          with_D;
-  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.Integrator"
->Integrator</A> I(k=<font color="blue">if </font>pidRepresentation==Types.PID_representation.timeConstants<font color="blue"> then </font>1/Ti<font color="blue"> else </font>kp/ki, y_start=xi_start,
-    blockType=blockType,
-     initType=<font color="blue">if </font>init==Types.Init.SteadyState<font color="blue"> then </font>
-                InitWithGlobalDefault.SteadyState<font color="blue"> else </font>
-             <font color="blue">if </font>init==Types.Init.InitialState<font color="blue"> then </font>
-                InitWithGlobalDefault.InitialState<font color="blue"> else </font>InitWithGlobalDefault.NoInit,
-    methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact) <font color="blue">if </font>
-                                                                                           with_I;</textblock>
-
-<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
->Modelica.Blocks.Sources.Constant</A> Izero(k=0) <font color="blue">if </font>
-                                 <font color="blue">not </font>with_I;</textblock>
-<font color="blue">protected </font>
-  <font color="blue">parameter </font>Boolean with_I = controllerType==SimpleController.PI<font color="blue"> or </font>
-                             controllerType==SimpleController.PID;
-  <font color="blue">parameter </font>Boolean with_D = controllerType==SimpleController.PD<font color="blue"> or </font>
-                             controllerType==SimpleController.PID;
-<textblock type="annotcomp" expanded="false"><font color="blue">public </font>
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
->Modelica.Blocks.Sources.Constant</A> Dzero(k=0) <font color="blue">if </font>
-                                 <font color="blue">not </font>with_D;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add3"
->Modelica.Blocks.Math.Add3</A> addPID;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Gain"
->Modelica.Blocks.Math.Gain</A> gainPID(k=<font color="blue">if </font>pidRepresentation==Types.PID_representation.timeConstants<font color="blue"> then </font>k<font color="blue"> else </font>kp);</textblock>
-
-<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Add"
->Modelica.Blocks.Math.Add</A> addSat(k1=+1, k2=-1) <font color="blue">if </font>
-                                   with_I;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.Gain"
->Modelica.Blocks.Math.Gain</A> gainTrack(k=1/(k*Ni)) <font color="blue">if </font>
-                                            with_I;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Nonlinear.html#Modelica.Blocks.Nonlinear.Limiter"
->Modelica.Blocks.Nonlinear.Limiter</A> limiter(
-    uMax=yMax,
-    uMin=yMin,
-    limitsAtInit=limitsAtInit);
-  <A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.UnitDelay"
->UnitDelay</A> unitDelay(blockType=blockType) <font color="blue">if </font>with_I;</textblock>
-
-<font color="blue">initial </font><font color="blue">equation </font>
-  <font color="blue">if </font>init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput<font color="blue"> then</font>
-     y = y_start;
-  <font color="blue">end if</font>;
-
-
-<font color="blue">equation </font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(addP.u1, sampler_s.y);
-  <font color="red">connect</font>(addI.u1, sampler_s.y);
-  <font color="red">connect</font>(addD.u1, sampler_s.y);
-  <font color="red">connect</font>(sampler_m.y, addI.u2);
-  <font color="red">connect</font>(sampler_m.y, addD.u2);
-  <font color="red">connect</font>(sampler_m.y, addP.u2);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(sampler_s.u, u_s);
-  <font color="red">connect</font>(sampler_m.u, u_m);
-  <font color="red">connect</font>(P.u, addP.y);
-  <font color="red">connect</font>(D.u, addD.y);
-  <font color="red">connect</font>(I.u, addI.y);
-  <font color="red">connect</font>(P.y, addPID.u1);
-  <font color="red">connect</font>(D.y, addPID.u2);
-  <font color="red">connect</font>(Dzero.y, addPID.u2);
-  <font color="red">connect</font>(I.y, addPID.u3);
-  <font color="red">connect</font>(Izero.y, addPID.u3);
-  <font color="red">connect</font>(gainPID.y, addSat.u2);
-  <font color="red">connect</font>(gainPID.y, limiter.u);
-  <font color="red">connect</font>(gainPID.u, addPID.y);
-  <font color="red">connect</font>(limiter.y, y);
-  <font color="red">connect</font>(addSat.u1, limiter.y);
-  <font color="red">connect</font>(unitDelay.u, addSat.y);
-  <font color="red">connect</font>(gainTrack.y, addI.u3);
-  <font color="red">connect</font>(unitDelay.y, gainTrack.u);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>LimPID;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE UnitDelay<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -2196,7 +1181,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.UnitDelay"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.UnitDelay</H2>
 <B>Delay the input by a multiple of the base sample time if discrete block or y=u if continuous block</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.UnitDelayD.png" ALT="Modelica_LinearSystems2.Controller.UnitDelay">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -2214,41 +1198,16 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Interfaces.PartialSISO_equality</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Sample time = sampleFactor * sampleClock.sampleTime</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Sample time = sampleFactor * sampleClock.sampleTime</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> UnitDelay <font color="darkgreen">
-  &quot;Delay the input by a multiple of the base sample time if discrete block or y=u if continuous block&quot;</font>
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"
->Interfaces.PartialSISO_equality</A>;
-
-<font color="blue">protected </font>
-  <A HREF="Modelica_LinearSystems2_Controller_Internal.html#Modelica_LinearSystems2.Controller.Internal.DiscreteUnitDelay"
->Internal.DiscreteUnitDelay</A> discretePart(sampleFactor=sampleFactor) <font color="blue">if </font>
-          <font color="blue">not </font>continuous <font color="darkgreen">&quot;Discrete unit delay&quot;</font>;
-<font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-     y = u;
-
-  <font color="blue">end if</font>;
-  <font color="red"> connect</font>(u, discretePart.u);
-  <font color="red">  connect</font>(y, discretePart.y);
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>UnitDelay;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE ADconverter<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -2256,7 +1215,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.ADconverter"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.ADconverter</H2>
 <B>Analog to digital converter (including sampler)</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.UnitDelayD.png" ALT="Modelica_LinearSystems2.Controller.ADconverter">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -2280,48 +1238,19 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Interfaces.PartialSISO_equality</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>y_max</TD><TD>&nbsp;</TD><TD>Upper limit of output signal</TD></TR>
-<TR><TD>Real</TD><TD>y_min</TD><TD>&nbsp;</TD><TD>Lower limit of output signal</TD></TR>
-<TR><TD>Integer</TD><TD>bits</TD><TD>&nbsp;</TD><TD>Number of bits (=0 means no quantization error)</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Sample time = sampleFactor * sampleClock.sampleTime</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y_max</TD><TD>Upper limit of output signal</TD></TR>
+<TR><TD>y_min</TD><TD>Lower limit of output signal</TD></TR>
+<TR><TD>bits</TD><TD>Number of bits (=0 means no quantization error)</TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Sample time = sampleFactor * sampleClock.sampleTime</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> ADconverter <font color="darkgreen">&quot;Analog to digital converter (including sampler)&quot;</font>
-  <font color="blue">parameter </font>Real y_max <font color="darkgreen">&quot;Upper limit of output signal&quot;</font>;
-  <font color="blue">parameter </font>Real y_min <font color="darkgreen">&quot;Lower limit of output signal&quot;</font>;
-  <font color="blue">parameter </font>Integer bits(min=0) <font color="darkgreen">
-    &quot;Number of bits (=0 means no quantization error)&quot;</font>;
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"
->Interfaces.PartialSISO_equality</A>;
-
-<font color="blue">protected </font>
-  <A HREF="Modelica_LinearSystems2_Controller_Internal.html#Modelica_LinearSystems2.Controller.Internal.DiscreteADconverter"
->Internal.DiscreteADconverter</A> discretePart(y_max=y_max, y_min=y_min, bits=bits,
-      sampleFactor=sampleFactor) <font color="blue">if </font>
-          <font color="blue">not </font>continuous <font color="darkgreen">&quot;AD converter&quot;</font>;
-
-<font color="blue">equation </font>
-   <font color="blue">if </font>continuous<font color="blue"> then</font>
-      y = <font color="blue">if </font>u &gt; y_max<font color="blue"> then </font>y_max<font color="blue"> else </font><font color="blue">if </font>u &lt; y_min<font color="blue"> then </font>y_min<font color="blue"> else </font>u;
-<font color="blue">else</font>
-    <font color="red">connect</font>(u, discretePart.u);
-    <font color="red">connect</font>(y, discretePart.y);
-   <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>ADconverter;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE DAconverter<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -2329,60 +1258,25 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.DAconverter"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.DAconverter</H2>
 <B>Digital to analog converter (including zero order hold)</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.UnitDelayD.png" ALT="Modelica_LinearSystems2.Controller.DAconverter">
 <P><H3>Information</H3></P>
 Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"
 >Interfaces.PartialSISO_equality</A> (Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>y_max</TD><TD>&nbsp;</TD><TD>Upper limit of output signal</TD></TR>
-<TR><TD>Real</TD><TD>y_min</TD><TD>&nbsp;</TD><TD>Lower limit of output signal</TD></TR>
-<TR><TD>Integer</TD><TD>bits</TD><TD>&nbsp;</TD><TD>Number of bits (=0 means no quantization error)</TD></TR>
-<TR><TD>Boolean</TD><TD>unitDelay</TD><TD>true</TD><TD>= true, if one sample period delay, = false, if computing time not modelled</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Sample time = sampleFactor * sampleClock.sampleTime</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y_max</TD><TD>Upper limit of output signal</TD></TR>
+<TR><TD>y_min</TD><TD>Lower limit of output signal</TD></TR>
+<TR><TD>bits</TD><TD>Number of bits (=0 means no quantization error)</TD></TR>
+<TR><TD>unitDelay</TD><TD>= true, if one sample period delay, = false, if computing time not modelled</TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Sample time = sampleFactor * sampleClock.sampleTime</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> DAconverter <font color="darkgreen">
-  &quot;Digital to analog converter (including zero order hold)&quot;</font>
-  <font color="blue">parameter </font>Real y_max <font color="darkgreen">&quot;Upper limit of output signal&quot;</font>;
-  <font color="blue">parameter </font>Real y_min <font color="darkgreen">&quot;Lower limit of output signal&quot;</font>;
-  <font color="blue">parameter </font>Integer bits(min=0) <font color="darkgreen">
-    &quot;Number of bits (=0 means no quantization error)&quot;</font>;
-  <font color="blue">parameter </font>Boolean unitDelay=true <font color="darkgreen">
-    &quot;= true, if one sample period delay, = false, if computing time not modelled&quot;</font>;
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality"
->Interfaces.PartialSISO_equality</A>;
-<font color="blue">protected </font>
-  <A HREF="Modelica_LinearSystems2_Controller_Internal.html#Modelica_LinearSystems2.Controller.Internal.DiscreteDAconverter"
->Internal.DiscreteDAconverter</A> discretePart(
-    y_max=y_max,
-    y_min=y_min,
-    bits=bits,
-    unitDelay=unitDelay,
-    sampleFactor=sampleFactor) <font color="blue">if </font>
-          <font color="blue">not </font>continuous <font color="darkgreen">&quot;AD converter&quot;</font>;
-<font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    y = <font color="blue">if </font>u &gt; y_max<font color="blue"> then </font>y_max<font color="blue"> else </font><font color="blue">if </font>u &lt; y_min<font color="blue"> then </font>y_min<font color="blue"> else </font>u;
-  <font color="blue">else</font>
-    <font color="red">connect</font>(u, discretePart.u);
-    <font color="red">connect</font>(y, discretePart.y);
-  <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>DAconverter;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE Interpolator<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -2390,7 +1284,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 <A NAME="Modelica_LinearSystems2.Controller.Interpolator"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.Interpolator</H2>
 <B>Increasing the sampling frequency with linear interpolation and optional mean value filtering</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.InterpolatorD.png" ALT="Modelica_LinearSystems2.Controller.Interpolator">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -2423,78 +1316,18 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Icons.html#Modelica_Lin
 >Icons.PartialBlockIcon</A> (Basic graphical layout of discrete/continuous block).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD>Integer</TD><TD>inputSampleFactor</TD><TD>1</TD><TD>Input sample time = inputSampleFactor * sampleClock.sampleTime</TD></TR>
-<TR><TD>Integer</TD><TD>outputSampleFactor</TD><TD>1</TD><TD>Output sample time = outputSampleFactor * sampleClock.sampleTime<br>(inputSampleFactor must be an integer multiple of outputSampleFactor)</TD></TR>
-<TR><TD>Boolean</TD><TD>meanValueFilter</TD><TD>true</TD><TD>= true and discrete block, linearly interpolated signal is filtered by mean value filter</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>inputSampleFactor</TD><TD>Input sample time = inputSampleFactor * sampleClock.sampleTime</TD></TR>
+<TR><TD>outputSampleFactor</TD><TD>Output sample time = outputSampleFactor * sampleClock.sampleTime<br>(inputSampleFactor must be an integer multiple of outputSampleFactor)</TD></TR>
+<TR><TD>meanValueFilter</TD><TD>= true and discrete block, linearly interpolated signal is filtered by mean value filter</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u</TD><TD>Continuous or discrete input signal of block</TD></TR>
+<TR><TD>y</TD><TD>Continuous or discrete output signal of block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> Interpolator <font color="darkgreen">
-  &quot;Increasing the sampling frequency with linear interpolation and optional mean value filtering&quot;</font>
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Icons.html#Modelica_LinearSystems2.Controller.Icons.PartialBlockIcon"
->Icons.PartialBlockIcon</A>(cont=continuous);
-  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types"
->Modelica_LinearSystems2.Controller.Types</A>;
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault</A>
-    blockType = Types.BlockTypeWithGlobalDefault.UseSampleClockOption <font color="darkgreen">
-    &quot;Type of block (Continuous/Discrete)&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font>Boolean continuous = blockType == Types.BlockTypeWithGlobalDefault.Continuous<font color="blue"> or </font>
-                                 blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption<font color="blue"> and </font>
-                                 sampleClock.blockType == Types.BlockType.Continuous <font color="darkgreen">
-    &quot;= true, if continuous block, otherwise discrete block&quot;</font>;
-  <font color="blue">parameter </font>Integer inputSampleFactor(min=1)=1 <font color="blue">if </font><font color="blue">not </font>continuous <font color="darkgreen">
-    &quot;Input sample time = inputSampleFactor * sampleClock.sampleTime&quot;</font>;
-  <font color="blue">parameter </font>Integer outputSampleFactor(min=1)=1 <font color="blue">if </font><font color="blue">not </font>continuous <font color="darkgreen">
-    &quot;</pre>Output sample time = outputSampleFactor * sampleClock.sampleTime<br>(inputSampleFactor must be an integer multiple of outputSampleFactor)<pre>&quot;</font>;
-  <font color="blue">parameter </font>Boolean meanValueFilter = true <font color="darkgreen">
-    &quot;= true and discrete block, linearly interpolated signal is filtered by mean value filter&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->Modelica.Blocks.Interfaces.RealInput</A> u <font color="darkgreen">
-    &quot;Continuous or discrete input signal of block&quot;</font>;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->Modelica.Blocks.Interfaces.RealOutput</A> y <font color="darkgreen">
-    &quot;Continuous or discrete output signal of block&quot;</font>;</textblock>
-
-<font color="blue">protected </font>
-  <font color="blue">outer </font><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SampleClock"
->SampleClock</A> sampleClock <font color="darkgreen">&quot;Global options&quot;</font>;
-
-<textblock type="annotcomp" expanded="false">  <A HREF="Modelica_LinearSystems2_Controller_Internal.html#Modelica_LinearSystems2.Controller.Internal.DiscreteInterpolator"
->Internal.DiscreteInterpolator</A> discreteInterpolator(
-     outputSampleFactor = outputSampleFactor,
-     inputSampleFactor = inputSampleFactor) <font color="blue">if </font> <font color="blue">not </font>continuous;
-  <A HREF="Modelica_LinearSystems2_Controller_Internal.html#Modelica_LinearSystems2.Controller.Internal.DiscreteFIR"
->Internal.DiscreteFIR</A> discreteFIR(sampleFactor=outputSampleFactor, a=<font color="red">fill</font>(1/
-        <font color="red">div</font>(inputSampleFactor, outputSampleFactor),<font color="red"> div</font>(inputSampleFactor,
-        outputSampleFactor))) <font color="blue">if </font>                          <font color="blue">not </font>continuous<font color="blue"> and </font>meanValueFilter;
-  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->Modelica.Blocks.Interfaces.RealOutput</A> y_aux <font color="blue">if </font><font color="blue">not </font>continuous<font color="blue"> and </font><font color="blue">not </font>meanValueFilter <font color="darkgreen">
-    &quot;Dummy port, if no filtering desired&quot;</font>;</textblock>
-<font color="blue">equation </font>
-   <font color="blue">if </font>continuous<font color="blue"> then</font>
-      y = u;
-   <font color="blue">end if</font>;
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(discreteInterpolator.u, u);
-  <font color="red">connect</font>(discreteInterpolator.y, discreteFIR.u);
-  <font color="red">connect</font>(discreteFIR.y, y);
-  <font color="red">connect</font>(discreteInterpolator.y, y_aux);
-  <font color="red">connect</font>(y_aux, y);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Interpolator;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE MatrixGain<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -2502,7 +1335,6 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Icons.html#Modelica_Lin
 <A NAME="Modelica_LinearSystems2.Controller.MatrixGain"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.MatrixGain</H2>
 <B>Output the product of a gain matrix with the input signal vector. The matrix can be loaded from a file optionally</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.MatrixGainD.png" ALT="Modelica_LinearSystems2.Controller.MatrixGain">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -2531,61 +1363,24 @@ Example:
  
 <pre>
 </PRE><P>
-Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.MIMO"
->Modelica.Blocks.Interfaces.MIMO</A> (Multiple Input Multiple Output continuous control block), <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon"
+Extends from Modelica.Blocks.Interfaces.MIMO (Multiple Input Multiple Output continuous control block), <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon"
 >Interfaces.PartialBlockIcon</A> (Basic graphical layout of discrete/continuous block).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Integer</TD><TD>nin</TD><TD>size(K2, 2)</TD><TD>Number of inputs</TD></TR>
-<TR><TD>Integer</TD><TD>nout</TD><TD>size(K2, 1)</TD><TD>Number of outputs</TD></TR>
-<TR><TD>Boolean</TD><TD>matrixOnFile</TD><TD>false</TD><TD>true if matrix should be read from file</TD></TR>
-<TR><TD>String</TD><TD>fileName</TD><TD>Modelica_LinearSystems2.Data...</TD><TD>&nbsp;</TD></TR>
-<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;K&quot;</TD><TD>Name of the matrix</TD></TR>
-<TR><TD>Real</TD><TD>K[:, :]</TD><TD>[1]</TD><TD>Matrix  gain</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>nin</TD><TD>Number of inputs</TD></TR>
+<TR><TD>nout</TD><TD>Number of outputs</TD></TR>
+<TR><TD>matrixOnFile</TD><TD>true if matrix should be read from file</TD></TR>
+<TR><TD>fileName</TD><TD>&nbsp;</TD></TR>
+<TR><TD>matrixName</TD><TD>Name of the matrix</TD></TR>
+<TR><TD>K[:, :]</TD><TD>Matrix  gain</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>input <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealInput"
->RealInput</A></TD><TD>u[nin]</TD><TD>Connector of Real input signals</TD></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y[nout]</TD><TD>Connector of Real output signals</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u[nin]</TD><TD>Connector of Real input signals</TD></TR>
+<TR><TD>y[nout]</TD><TD>Connector of Real output signals</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> MatrixGain <font color="darkgreen">
-  &quot;Output the product of a gain matrix with the input signal vector. The matrix can be loaded from a file optionally&quot;</font>
-
-  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.MIMO"
->Modelica.Blocks.Interfaces.MIMO</A>(<font color="blue">final </font>nin=<font color="red">size</font>(K2, 2), <font color="blue">final </font>nout=
-        <font color="red">size</font>(K2, 1));
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon"
->Interfaces.PartialBlockIcon</A>;
-
-  <font color="blue">parameter </font>Boolean matrixOnFile=false <font color="darkgreen">
-    &quot;true if matrix should be read from file&quot;</font>;
-  <font color="blue">parameter </font>String fileName=Modelica_LinearSystems2.DataDir + &quot;k.mat&quot;;
-  <font color="blue">parameter </font>String matrixName=&quot;K&quot; <font color="darkgreen">&quot;Name of the matrix&quot;</font>;
-
-  <font color="blue">parameter </font>Real K[:,:]=[1] <font color="darkgreen">&quot;Matrix  gain&quot;</font>;
-
-<font color="blue">protected </font>
-  <font color="blue">parameter </font>Integer mn[2]=<font color="blue">if </font>matrixOnFile<font color="blue"> then </font><font color="red">readMatrixSize</font>(fileName, matrixName)<font color="blue"> else </font><font color="red">size</font>(K);
-  <font color="blue">parameter </font>Integer m=mn[1];
-  <font color="blue">parameter </font>Integer n=mn[2];
-  <font color="blue">parameter </font>Real K2[:,:]=<font color="blue">if </font>matrixOnFile<font color="blue"> then </font>
-      <font color="red">Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain</font>(
-      fileName,
-      matrixName,
-      m,
-      n)<font color="blue"> else </font>K;
-
-<font color="blue">equation </font>
-  y = K2*u;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>MatrixGain;
-</PRE>
-<HR>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE Noise<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
@@ -2593,7 +1388,6 @@ Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Mod
 <A NAME="Modelica_LinearSystems2.Controller.Noise"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
 >Modelica_LinearSystems2.Controller</A>.Noise</H2>
 <B>Block that generates a uniform distributed noise output signal at sample instants if discrete and y=0 if continuous</B><p>
-<IMG SRC="Modelica_LinearSystems2.Controller.NoiseD.png" ALT="Modelica_LinearSystems2.Controller.Noise">
 <P><H3>Information</H3></P>
 <PRE></pre>
 <p>
@@ -2641,63 +1435,117 @@ Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelic
 >Interfaces.PartialBlockIcon</A> (Basic graphical layout of discrete/continuous block).
 <P><H3>Parameters</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
-<TR><TD>Real</TD><TD>y_min</TD><TD>&nbsp;</TD><TD>Lower limit of noise band</TD></TR>
-<TR><TD>Real</TD><TD>y_max</TD><TD>&nbsp;</TD><TD>Upper limit of noise band</TD></TR>
-<TR><TD>Integer</TD><TD>firstSeed[3]</TD><TD>{23,87,187}</TD><TD>Integer[3] defining random sequence; required element range: 0..255</TD></TR>
-<TR><TD><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->BlockTypeWithGlobalDefault</A></TD><TD>blockType</TD><TD>Types.BlockTypeWithGlobalDef...</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
-<TR><TD>Integer</TD><TD>sampleFactor</TD><TD>1</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y_min</TD><TD>Lower limit of noise band</TD></TR>
+<TR><TD>y_max</TD><TD>Upper limit of noise band</TD></TR>
+<TR><TD>firstSeed[3]</TD><TD>Integer[3] defining random sequence; required element range: 0..255</TD></TR>
+<TR><TD>blockType</TD><TD>Type of block (Continuous/Discrete)</TD></TR>
+<TR><TD>sampleFactor</TD><TD>Ts=sampleClock.sampleTime*sampleFactor</TD></TR>
 </TABLE>
 <P><H3>Connectors</H3><P>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
-<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
-<TR><TD>output <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->RealOutput</A></TD><TD>y</TD><TD>Discrete output signal of block</TD></TR>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>y</TD><TD>Discrete output signal of block</TD></TR>
 </TABLE>
-<P><H3>Modelica definition</H3>
-<PRE>
-<font color="blue">block</font> Noise <font color="darkgreen">
-  &quot;Block that generates a uniform distributed noise output signal at sample instants if discrete and y=0 if continuous&quot;</font>
-  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon"
->Interfaces.PartialBlockIcon</A>;
-  <font color="blue">parameter </font>Real y_min <font color="blue">if </font><font color="blue">not </font>continuous <font color="darkgreen">&quot;Lower limit of noise band&quot;</font>;
-  <font color="blue">parameter </font>Real y_max <font color="blue">if </font><font color="blue">not </font>continuous <font color="darkgreen">&quot;Upper limit of noise band&quot;</font>;
-  <font color="blue">parameter </font>Integer firstSeed[3](
-    <font color="blue">each </font>min=0,
-    <font color="blue">each </font>max=255) = {23,87,187} <font color="blue">if </font>                                         <font color="blue">not </font>continuous <font color="darkgreen">
-    &quot;Integer[3] defining random sequence; required element range: 0..255&quot;</font>;
-  <font color="blue">parameter </font><A HREF="Modelica_LinearSystems2_Controller_Types.html#Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault"
->Types.BlockTypeWithGlobalDefault</A> blockType=Types.BlockTypeWithGlobalDefault.UseSampleClockOption <font color="darkgreen">
-    &quot;Type of block (Continuous/Discrete)&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font>Boolean continuous=blockType == Types.BlockTypeWithGlobalDefault.Continuous<font color="blue">
-       or </font>blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption<font color="blue">
-       and </font>sampleClock.blockType == Types.BlockType.Continuous <font color="darkgreen">
-    &quot;= true, if continuous block, otherwise discrete block&quot;</font>;
-  <font color="blue">parameter </font>Integer sampleFactor(min=1) = 1 <font color="blue">if </font>
-                                             <font color="blue">not </font>continuous <font color="darkgreen">
-    &quot;Ts=sampleClock.sampleTime*sampleFactor&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Blocks_Interfaces.html#Modelica.Blocks.Interfaces.RealOutput"
->Modelica.Blocks.Interfaces.RealOutput</A> y <font color="darkgreen">&quot;Discrete output signal of block&quot;</font>;</textblock>
-
-<font color="blue">protected </font>
-  <font color="blue">outer </font><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller.SampleClock"
->SampleClock</A> sampleClock <font color="darkgreen">&quot;Global options&quot;</font>;
-  <A HREF="Modelica_LinearSystems2_Controller_Internal.html#Modelica_LinearSystems2.Controller.Internal.DiscreteNoise"
->Internal.DiscreteNoise</A> discretePart(
-    y_min=y_min,
-    y_max=y_max,
-    firstSeed=firstSeed,
-    sampleFactor=sampleFactor) <font color="blue">if </font><font color="blue">not </font>continuous <font color="darkgreen">&quot;Discrete noise&quot;</font>;
-<font color="blue">equation </font>
-  <font color="blue">if </font>continuous<font color="blue"> then</font>
-    y = 0.0;
-  <font color="blue">end if</font>;
-<font color="red">connect</font>(y,discretePart.y);
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Noise;
-</PRE>
-<HR>
-<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:28:45 2010.
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE EKF<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.EKFI.png" ALT="Modelica_LinearSystems2.Controller.EKF" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.EKF"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.EKF</H2>
+<B>Extended Kalman filter</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock"
+>Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock</A> (Partial discrete block, i.e. no continuous alternative).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>sampleFactor</TD><TD>Sample time=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>x_est_init[:]</TD><TD>Initial value for state estimation</TD></TR>
+<TR><TD>Q[:, size(Q, 1)]</TD><TD>Covariance matrix of the associated process noise</TD></TR>
+<TR><TD>G[size(x_est_init, 1), size(Q, 1)]</TD><TD>Process noise weight matrix (usually identity or input matrix)</TD></TR>
+<TR><TD>R[:, size(R, 1)]</TD><TD>Covariance matrix of the measurement noise</TD></TR>
+<TR><TD>M_init[:, :]</TD><TD>Initial value of the Riccati matrix M</TD></TR>
+<TR><TD>nu</TD><TD>Number of system inputs</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u[nu]</TD><TD>System input vector</TD></TR>
+<TR><TD>x_est[nx]</TD><TD>Estimated state vector</TD></TR>
+<TR><TD>y_measure[ny]</TD><TD>Measured outputs</TD></TR>
+<TR><TD>y_est[ny]</TD><TD>Estimated system outputs</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE UKF<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.UKFI.png" ALT="Modelica_LinearSystems2.Controller.UKF" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.UKF"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.UKF</H2>
+<B>Unscented Kalman filter</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock"
+>Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock</A> (Partial discrete block, i.e. no continuous alternative).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>sampleFactor</TD><TD>Sample time=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>x_est_init[:]</TD><TD>Initial value for state estimation</TD></TR>
+<TR><TD>Q[:, size(Q, 1)]</TD><TD>Covariance matrix of the associated process noise</TD></TR>
+<TR><TD>G[size(x_est_init, 1), size(Q, 1)]</TD><TD>Process noise weight matrix (usually identity or input matrix)</TD></TR>
+<TR><TD>R[:, size(R, 1)]</TD><TD>Covariance matrix of the measurement noise</TD></TR>
+<TR><TD>P_init[:, :]</TD><TD>Initial value of the error covariance matrix</TD></TR>
+<TR><TD>nu</TD><TD>Number of system inputs</TD></TR>
+<TR><TD>alpha</TD><TD>Spread of sigma points</TD></TR>
+<TR><TD>beta</TD><TD>Characteristic of the distribution of x</TD></TR>
+<TR><TD>kappa</TD><TD>Scaling kurtosis of sigma point distribution</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u[nu]</TD><TD>System input vector</TD></TR>
+<TR><TD>x_est[nx]</TD><TD>Estimated state vector</TD></TR>
+<TR><TD>y_measure[ny]</TD><TD>Measured outputs</TD></TR>
+<TR><TD>y_est[ny]</TD><TD>Estimated system outputs</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE UKF_SR<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Controller.UKF_SRI.png" ALT="Modelica_LinearSystems2.Controller.UKF_SR" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Controller.UKF_SR"></A><A HREF="Modelica_LinearSystems2_Controller.html#Modelica_LinearSystems2.Controller"
+>Modelica_LinearSystems2.Controller</A>.UKF_SR</H2>
+<B>Unscented Kalman filter</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="Modelica_LinearSystems2_Controller_Interfaces.html#Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock"
+>Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock</A> (Partial discrete block, i.e. no continuous alternative).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>sampleFactor</TD><TD>Sample time=sampleClock.sampleTime*sampleFactor</TD></TR>
+<TR><TD>x_est_init[:]</TD><TD>Initial value for state estimation</TD></TR>
+<TR><TD>Q[:, size(Q, 1)]</TD><TD>Covariance matrix of the associated process noise</TD></TR>
+<TR><TD>G[size(x_est_init, 1), size(Q, 1)]</TD><TD>Process noise weight matrix (usually identity or input matrix)</TD></TR>
+<TR><TD>R[:, size(R, 1)]</TD><TD>Covariance matrix of the measurement noise</TD></TR>
+<TR><TD>P_init[:, :]</TD><TD>Initial value of the error covariance matrix</TD></TR>
+<TR><TD>nu</TD><TD>Number of system inputs</TD></TR>
+<TR><TD>alpha</TD><TD>Spread of sigma points</TD></TR>
+<TR><TD>beta</TD><TD>Characteristic of the distribution of x</TD></TR>
+<TR><TD>kappa</TD><TD>Scaling kurtosis of sigma point distribution</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=2><B>Advanced options</B></TD></TR>
+<TR><TD>initType</TD><TD>Type of initialization (no init/initial/steady state/output)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u[nu]</TD><TD>System input vector</TD></TR>
+<TR><TD>x_est[nx]</TD><TD>Estimated state vector</TD></TR>
+<TR><TD>y_measure[ny]</TD><TD>Measured outputs</TD></TR>
+<TR><TD>y_est[ny]</TD><TD>Estimated system outputs</TD></TR>
+</TABLE>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Wed Oct 27 10:04:44 2010.
 </address></BODY>
 </HTML>
