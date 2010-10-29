@@ -110,5 +110,11 @@ equation
           lineColor={0,0,0},
           fillColor={0,255,0},
           fillPattern=FillPattern.Solid,
-          textString="(SR)")}));
+          textString="(SR)")}),
+    Documentation(revisions="<html>
+<ul>
+<li><i>2010/10/25 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end UKF_SR;

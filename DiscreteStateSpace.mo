@@ -574,7 +574,7 @@ public
 
 encapsulated operator '-'
     "Contains operators for subtraction of discrete state space systems"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
   function subtract
@@ -1228,7 +1228,7 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
 
 encapsulated package Analysis
     "Functions to analyse discrete state space systems represented by a DiscreteStateSpace record"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 encapsulated function eigenValues
       "Calculate the eigenvalues of a linear discrete state space system and write them in a complex vector"
@@ -1755,19 +1755,19 @@ end Analysis;
 
 encapsulated package Design
     "Functions to design discrete state space controllers and observers"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
   encapsulated function assignPolesMI
       "Pole assigment design algorithm for multi input systems"
 
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
-    import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
   //  import Modelica.Utilities.Streams.print;
-    import Modelica_LinearSystems2.TransferFunction;
-    import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Math.Matrices;
 
     input DiscreteStateSpace dss "state space system";
 
@@ -2222,9 +2222,9 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 
     extends Modelica.Icons.Function;
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
     input Real xpre[:] "State at instant k-1";
     input Real upre[:] "Input at instant k-1";
@@ -2490,7 +2490,7 @@ end Design;
 
 encapsulated package Plot
     "Functions to plot discrete state space system responses"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 encapsulated function bodeSISO
       "Plot bode plot of the corresponding discrete transfer function"
@@ -3094,7 +3094,7 @@ end Plot;
 
 encapsulated package Conversion
     "Conversion functions from DiscreteStateSpace into DiscreteTransferFunction"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
 encapsulated function toDiscreteZerosAndPoles
@@ -3524,7 +3524,7 @@ end toDiscreteTransferFunctionMIMO;
 end Conversion;
 
 encapsulated package Import
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
 function fromModel
@@ -3746,7 +3746,7 @@ Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>.
 end Import;
 
 encapsulated package Internal
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
 function timeResponseSamples
@@ -3932,11 +3932,11 @@ end ukfPredict;
 function ukfUpdate "Update step in ukf"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.DiscreteStateSpace;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-  import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Modelica_LinearSystems2.Math.Matrices;
 
   extends Modelica_LinearSystems2.DiscreteStateSpace.Internal.updateBase;
 
@@ -4328,8 +4328,8 @@ end estimateBase;
 partial function updateBase "Bass class of update-function"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2;
 
   replaceable function hSigma =
       Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy constrainedby
@@ -4583,7 +4583,7 @@ end ekfSystemBase;
 
   function fSigmaDummy "Dummy function for the discretetized state function"
 
-    import Modelica_LinearSystems2.DiscreteStateSpace.Internal;
+      import Modelica_LinearSystems2.DiscreteStateSpace.Internal;
     extends Modelica.Icons.Function;
 
     extends Internal.fBase;
@@ -4619,8 +4619,8 @@ end ekfSystemBase;
 partial function ekfStateBase "Base class of ekf state space function"
       extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2;
 
       input Real x[:] "Estimated vector at instant k";
       input Real u[:] "Input at instant k";
@@ -4639,8 +4639,8 @@ end ekfStateBase;
 partial function ekfOutputBase "Base class of ekf output function"
       extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2;
 
       input Real x[:] "Estimated vector at instant k";
       input Real u[:] "Input at instant k";
@@ -4660,10 +4660,10 @@ end ekfOutputBase;
   encapsulated function assignOneOrTwoPoles
       "Algorithm to assign p (p = 1 or 2) eigenvalues"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.Math.Vectors;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Math.Vectors;
 
     input Real F[:,size(F, 1)] "system matrix of order p=1 or p=2";
     input Real G[size(F, 1),:] "control input matrix p rows";

@@ -123,8 +123,8 @@ package Plot "Functions for generation of 2D-plots"
 
     function showLegendStyles
         "Show several vector-diagram plots that demonstrate the various legend options"
-      import Modelica_LinearSystems2.Utilities.Plot.Records;
-      import Modelica_LinearSystems2.Utilities.Plot.Types;
+        import Modelica_LinearSystems2.Utilities.Plot.Records;
+        import Modelica_LinearSystems2.Utilities.Plot.Types;
 
       protected
        Real x[2]={0,1};
@@ -186,8 +186,8 @@ package Plot "Functions for generation of 2D-plots"
 
     function showMatrixDiagrams
         "Demonstrate the layout of diagrams in matrix layout"
-      import Modelica_LinearSystems2.Utilities.Plot.Records;
-      import Modelica_LinearSystems2.Utilities.Plot.Types;
+        import Modelica_LinearSystems2.Utilities.Plot.Records;
+        import Modelica_LinearSystems2.Utilities.Plot.Types;
 
       protected
        Real x[2]={0,1};
@@ -240,8 +240,8 @@ package Plot "Functions for generation of 2D-plots"
   end Examples;
 
   function diagram "Plot one diagram"
-    import Modelica_LinearSystems2.Utilities.Plot.Types;
-    import Modelica.Utilities.Streams.*;
+      import Modelica_LinearSystems2.Utilities.Plot.Types;
+      import Modelica.Utilities.Streams.*;
      input Modelica_LinearSystems2.Utilities.Plot.Records.Diagram diagram
         "Diagram to be shown"
                             annotation(Dialog);

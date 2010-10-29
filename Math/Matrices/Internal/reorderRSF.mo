@@ -19,7 +19,7 @@ function reorderRSF
 
 protected
   Integer n=size(T, 2);
-  Boolean select[:]=fill(false, size(T, 2));
+  Boolean select[size(T, 2)]=fill(false, size(T, 2));
   Integer i;
 algorithm
   if iscontinuous then

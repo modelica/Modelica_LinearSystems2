@@ -12,7 +12,13 @@ model EKF "Extended Kalman filter"
       Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy
       constrainedby
     Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemBase
-    "Function to calculate xk, yk, Ak, Ck" annotation(choicesAllMatching);
+    "Function to calculate xk, yk, Ak, Ck" annotation(choicesAllMatching,
+      Documentation(revisions="<html>
+<ul>
+<li><i>2010/10/25 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 
   parameter Real x_est_init[:]={0,0,0,0} "Initial value for state estimation";
   parameter Real Q[:,size(Q,1)]=identity(size(x_est_init,1))
@@ -91,5 +97,11 @@ equation
         Text(
           extent={{-106,-54},{-20,-84}},
           lineColor={0,0,255},
-          textString="m")}));
+          textString="m")}),
+    Documentation(revisions="<html>
+<ul>
+<li><i>2010/10/25 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end EKF;

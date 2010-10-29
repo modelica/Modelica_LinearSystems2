@@ -18,7 +18,7 @@ encapsulated operator 'constructor'
     "Default constructors for a StateSpace record"
 
     import Modelica_LinearSystems2;
-      import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
   function fromABCDMatrices "Default constructor for a StateSpace record"
@@ -145,7 +145,7 @@ end 'constructor';
 
 encapsulated operator '-'
     "Contains operators for subtraction of state space systems"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
   function subtract
@@ -585,7 +585,7 @@ end 'String';
 
 encapsulated package Analysis
     "Functions to analyse state space systems represented by a StateSpace record"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
   function analysis
@@ -5024,7 +5024,7 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
   end Design;
 
 encapsulated package Plot "Functions to plot state space system responses"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
     encapsulated function polesAndZeros
@@ -5823,7 +5823,7 @@ end Plot;
 
 encapsulated package Conversion
     "Conversion functions from StateSpace into TransferFunction or ZerosAndPoles representations"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
   encapsulated function toZerosAndPoles
@@ -6786,7 +6786,7 @@ Function <b>extract</b> computes the subsystem of a state space system correspon
 
 encapsulated package Import
     "Utilitiy functions to import StaeSpace representations"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
   encapsulated function fromFile "Read a StateSpace data record from mat-file"
@@ -9714,9 +9714,9 @@ end read_dslin;
   function damping
     extends Modelica.Icons.Function;
 
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input StateSpace ss;
     output Complex eigenvalues[size(ss.A,1)];

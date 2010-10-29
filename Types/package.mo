@@ -3,7 +3,6 @@ package Types "Constants and types with choices, especially to build menus"
 extends Modelica.Icons.Package;
 
 
-
 annotation (Documentation(info="<HTML>
 <p>
 In this package <b>types</b> and <b>constants</b> are defined that are used in the

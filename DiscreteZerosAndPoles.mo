@@ -345,7 +345,7 @@ which is equal to
   end 'constructor';
 
 encapsulated operator '-'
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
   function subtract "Subtract two DiscreteZerosAndPoles (dzp1 - dzp2)"
       import Modelica;
@@ -435,7 +435,7 @@ encapsulated operator '-'
 end '-';
 
 encapsulated operator '*'
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 function 'dzp*dzp'
       "Multiply two DiscreteZerosAndPoles transfer functions (dzp1 * dzp2)"
@@ -1332,17 +1332,17 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
 
   encapsulated function bode
       "Plot discrete zeros a-and-poles transfer function as bode plot"
-    import Modelica;
-    import Modelica.Utilities.Strings;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Internal;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Internal;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
 
-    import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
-    import SI = Modelica.SIunits;
+      import SI = Modelica.SIunits;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles function to be plotted";

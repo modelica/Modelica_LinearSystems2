@@ -14,3 +14,4 @@ type InitWithGlobalDefault = enumeration(
     annotation (Evaluate=true, Documentation(info="<html>
  
 </html>"));
+

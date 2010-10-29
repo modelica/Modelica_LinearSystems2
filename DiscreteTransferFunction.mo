@@ -204,7 +204,7 @@ record DiscreteTransferFunction
   end '*';
 
  encapsulated operator '-'
-   import Modelica;
+    import Modelica;
    extends Modelica.Icons.Package;
     function subtract "Subtract two discrete transfer functions (dtf1 - dtf2)"
       import Modelica;
@@ -424,7 +424,7 @@ Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can b
 end z;
 
 encapsulated package Analysis
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
 encapsulated function timeResponse
@@ -812,7 +812,7 @@ end denominatorDegree;
 end Analysis;
 
 encapsulated package Conversion
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
 encapsulated function toDiscreteZerosAndPoles
@@ -875,12 +875,12 @@ end toDiscreteZerosAndPoles;
 
 function toDiscreteStateSpace
       "Convert a DiscreteTransferFunction into a DiscreteStateSpace representation"
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.DiscreteTransferFunction;
-  import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.DiscreteStateSpace;
-  import Modelica.Math.Vectors;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica.Math.Vectors;
 
  input DiscreteTransferFunction dtf "discrete transfer function of a system";
       output DiscreteStateSpace dss(
@@ -980,7 +980,7 @@ end toDiscreteStateSpace;
 end Conversion;
 
 encapsulated package Plot "Functions to plot state space system responses"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
 encapsulated function bode "Plot discrete transfer function as bode plot"
@@ -1340,7 +1340,7 @@ end initialResponse;
 end Plot;
 
 encapsulated package Import
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
 function fromModel

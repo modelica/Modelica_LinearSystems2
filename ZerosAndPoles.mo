@@ -216,7 +216,7 @@ with j=sqrt(-1), is defined as
   end 'constructor';
 
 encapsulated operator '-'
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
   function subtract "Subtract two TransferFunctions (zp1 - zp2)"
       import Modelica;

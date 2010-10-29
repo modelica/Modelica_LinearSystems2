@@ -3,13 +3,6 @@ package Vectors "Functions operating on vectors"
 extends Modelica.Icons.Package;
 
 
-
-
-
-
-
-
-
 annotation (Documentation(info="<HTML>
 <h4><font color=\"#008000\">Library content</font></h4>
 <p>

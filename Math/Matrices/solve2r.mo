@@ -11,6 +11,7 @@ function solve2r
   input Boolean transA=false "True if op(A)=A', false if op(A)=A";
   input Boolean isTriangular=false "True if the A is already lower triangular";
   output Real X[size(B, 1),size(B, 2)]=B "Matrix X such that X*op(A) = B";
+  output Integer info;
 
 protected
   Integer n=size(A, 1);
@@ -20,7 +21,7 @@ protected
   Real LU[size(A, 1),size(A, 2)]=A;
   Integer k[size(A, 1)]= 1:n "Pivot vector";
   Real h[size(B, 1)];
-  Integer info;
+//  Integer info;
 
 algorithm
   if not isTriangular then

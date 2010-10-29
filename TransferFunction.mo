@@ -179,8 +179,8 @@ follow each other as above. An error occurs if this is not the case.
      import Modelica_LinearSystems2.Math.Polynomial;
      import Modelica_LinearSystems2.TransferFunction;
 
-     input TransferFunction tf1 "Transfer function system 1";
-     input TransferFunction tf2 "Transfer function system 1";
+     input TransferFunction tf1 "Transfer function 1";
+     input TransferFunction tf2 "Transfer function 2";
      output TransferFunction result;
   algorithm
      result := (Polynomial(tf1.n)*Polynomial(tf2.n))/(Polynomial(tf1.d)*Polynomial(tf2.d));
@@ -2441,6 +2441,7 @@ is defined slightly differently.
       "Generate a TransferFunction record array from a state space representation resulted from linearization of a model"
 
       import Modelica;
+      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 

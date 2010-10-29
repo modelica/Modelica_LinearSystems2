@@ -3,12 +3,6 @@ package Interfaces "Interfaces (partial blocks) of Controller library"
     extends Modelica.Icons.Package;
 
 
-
-
-
-
-
-
     annotation (
       Documentation(info="<HTML>
 <p>

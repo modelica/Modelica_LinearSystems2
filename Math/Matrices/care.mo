@@ -11,8 +11,8 @@ function care "Solution of continuous-time algebraic Riccati equations"
 protected
   Integer n=size(A, 1);
   Real G[size(A, 1),size(A, 1)]=B*Modelica.Math.Matrices.solve2(R, transpose(B));
-  Real H[:,:]=[A,-G; -Q,-transpose(A)];
-  Real H_RSF[:,:]=H;
+  Real H[2*size(A, 1),2*size(A, 1)]=[A,-G; -Q,-transpose(A)];
+  Real H_RSF[2*size(A, 1),2*size(A, 1)]=H;
   Real Z[size(H, 1),size(H, 2)];
   Real Z11[size(A, 1),size(A, 2)];
   Real Z21[size(A, 1),size(A, 2)];

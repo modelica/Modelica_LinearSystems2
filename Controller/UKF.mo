@@ -97,5 +97,11 @@ equation
         Text(
           extent={{-106,-54},{-20,-84}},
           lineColor={0,0,255},
-          textString="m")}));
+          textString="m")}),
+    Documentation(revisions="<html>
+<ul>
+<li><i>2010/10/25 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
 end UKF;
