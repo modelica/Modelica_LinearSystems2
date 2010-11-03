@@ -27,7 +27,8 @@ public
   output Complex ev[size(A, 1)] "eigenvalues of the closed loop system";
 
 algorithm
-  if n > 1 then
+  Modelica.Utilities.Streams.print("\nStrart");
+    if n > 1 then
     (H_RSF,Z,alphaReal,alphaImag) := Matrices.rsf2(H);
     (H_RSF,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSF(
       true,
@@ -35,7 +36,6 @@ algorithm
       Z,
       alphaReal,
       alphaImag);
-
     evSize := size(ev, 1);
     for i in 1:evSize loop
       ev[i] := Complex(alphaReal[i], alphaImag[i]);

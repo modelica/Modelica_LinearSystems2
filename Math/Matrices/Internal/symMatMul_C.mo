@@ -24,9 +24,9 @@ protected
   annotation (Include="
 #include<f2c.h>
 #include <stdio.h>
-extern  void dgemm_(char *, char *, integer *, integer *, integer *, doublereal *, doublereal *, integer *, doublereal *, integer *, doublereal *, doublereal *, integer *);
+extern  int dgemm_(const char* , const char* , int  *, int  *, int  *,  double  const *, double  const *, int  *, double  const *, int  *,  double  const *, double  *, int  *);
 extern logical lsame_(char *, char *);
-extern void dtrmm_(char *, char *, char *, char *, integer *, integer *, doublereal *, doublereal *, integer *, doublereal *, integer *);
+extern int dtrmm_(const char* , const char* , const char* , const char* , int  *, int  *, double  const *, double  const *, int  *, double  *,  int  *);
 extern int dlacpy_(char *, integer *, integer *, doublereal *, integer *, doublereal *, integer *);
 
 

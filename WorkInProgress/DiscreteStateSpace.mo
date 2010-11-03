@@ -736,6 +736,7 @@ end bodeSISO;
 end Plot;
 
 encapsulated package Internal
+    import Modelica_LinearSystems2;
 function kfStepMatrices
       "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
 extends Modelica.Icons.Function;
@@ -1001,9 +1002,65 @@ end for;
 
 end kfStepMatrices2;
 
+partial function ekfSystemBase "Base class of ekf-system functions"
+     extends Modelica.Icons.Function;
+
+     import Modelica;
+     import Modelica_LinearSystems2;
+
+     input Real x[4] "Estimated vector at instant k";
+     input Real u[:] "Input at instant k";
+     input Modelica.SIunits.Time Ts "Sample time";
+     input Integer ny "Number of outputs";
+
+     output Real x_new[size(x, 1)] "Modeled mean";
+     output Real y[ny] "Modeled output";
+     output Real Ak[size(x, 1),size(x, 1)]
+        "System matrix of the discrete linearized system at instant k";
+     output Real Ck[ny,size(x, 1)]
+        "Output matrix of the discrete linearized system at instant k";
+
+    protected
+     Integer nx=size(x, 1);
+     Integer nu=size(u, 1);
+
+end ekfSystemBase;
+
+  function ekfSystemDummy "Dummy function for ekfSystem"
+
+      import Modelica.Math.Matrices;
+
+    extends Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemBase;
+
+    protected
+  Integer nx=size(x,1);
+
+  algorithm
+    x_new := x;
+    y := fill(1,ny);
+    Ak := identity(nx);// Discretized Jacobi of F
+    Ck := fill(0,ny,nx);// Discretized Jacobi of y
+
+  end ekfSystemDummy;
+
+partial function ekfSystemBase2 "Base class of ekf-system functions"
+      extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+
+      input Real x[:] "Estimated vector at instant k";
+
+      output Real x_new[size(x, 1)] "Modeled mean";
+
+    protected
+      Integer nx=size(x, 1);
+
+end ekfSystemBase2;
 end Internal;
 
 encapsulated package Design "Design functions for DiscreteStateSpace"
+    import Modelica_LinearSystems2;
 
 function sr_kfStepMatrices
       "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
@@ -1329,6 +1386,178 @@ algorithm
   xmu := xm + K*(y-ym);
 
 end sr_ukfEstimate_2;
+
+  function ekfSystem_pendular "Pendular state function"
+
+    import Modelica.Math.Matrices;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+
+    extends DiscreteStateSpace.Internal.ekfSystemBase;
+
+    protected
+    Integer nx=size(x,1);
+    Real F[nx] "System state function";
+    Real F_x[nx,nx] "Jacobian matrix of system";
+    Real dFdx_1[nx];
+    Real dFdx_2[nx];
+    Real dFdx_3[nx]={0, 0, 0, 0};
+    Real dFdx_4[nx]={0, 0, 1, 0};
+
+    Real delta_x[nx] "Solution of tustin approximation";
+
+    Real LU[nx,nx] "LU decomposition";
+    Integer pivots[nx] "Pivots of LU decomposition";
+
+  algorithm
+    F := {x[2], -(4000*cos(x[1])*sin(x[1])*x[2]^2 + 4905*sin(x[1]) + (u[1]
+      *cos(x[1]))/10)/(1000*(4*sin(x[1]) + 1)), x[4], (u[1]/1000 - 10*x[2]^2 +
+      (981*sin(2*x[1]))/50)/(4*sin(x[1]) + 1) + 10*x[2]^2};
+
+    dFdx_1 := {0, -((981*cos(x[1]))/200 - u[1]/2500 + 4*x[2]^2*cos(2*x[1]) + 4*
+      x[2]^2*sin(3*x[1]) - sin(x[1])*(12*x[2]^2 + u[1]/10000))/(4*sin(x[1]) +
+      1)^2, 0, (40*cos(x[1])*x[2]^2 + (981*sin(3*x[1]))/25 - (1962*sin(x[1]))/
+      25 - (u[1]*cos(x[1]))/250 + 8829/200)/(4*sin(x[1]) + 1)^2 - 981/200};
+    dFdx_2 := {1, -(4*x[2]*sin(2*x[1]))/(4*sin(x[1]) + 1), 0, 20*x[2] - (20*x[2])/(4*sin(x[1]) + 1)};
+
+    F_x := [dFdx_1,dFdx_2,dFdx_3,dFdx_4];
+
+    (LU,pivots) := Matrices.LU(identity(nx) - (Ts/2)*F_x);
+
+    delta_x := Matrices.LU_solve(LU, pivots, Ts*F);
+    x_new := x + delta_x;
+    y := {x_new[3] + 10*sin(x_new[1]),x_new[1]};
+    Ak := Matrices.LU_solve2(LU, pivots, identity(nx) + (Ts/2)*(F_x));// Discretized Jacobi of F
+    Ck := [10*cos(x[1]),0,1,0; 1,0,0,0];// Discretized Jacobi of y
+
+  end ekfSystem_pendular;
+
+  function EKF "Extended Kalman filter design function"
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+    import Modelica_LinearSystems2.Internal.StateSpace2;
+
+    input DiscreteStateSpace.Internal.ekfSystemBase ekfFunction
+        "Integrand function";
+    input Real xpre[:] "State at instant k-1";
+    input Real upre[:] "Input at instant k-1";
+    input Real y[:] "Output at instant k";
+    input Real Mpre[size(xpre,1),size(xpre,1)]
+        "Solution of the discrete Riccati equation at instant k-1";
+    input Real Q[size(xpre,1),size(xpre,1)] = identity(size(xpre,1))
+        "Weighted covariance matrix of the associated process noise (F*Q*F')";
+    input Real R[size(y,1),size(y,1)] = identity(size(y,1))
+        "Covariance matrix of the measurement noise";
+    input Modelica.SIunits.Time Ts "Sample time";
+
+    output Real x_est[size(xpre,1)] "Estimated state vector";
+    output Real y_est[size(y,1)] "Estimated output";
+    output Real M[size(Mpre,1),size(Mpre,1)]
+        "Solution of the discrete Riccati equation";
+    output Real K[size(xpre,1),size(y,1)] "Kalman filter gain matrix";
+        output Real x_cont[size(xpre,1)] "Value of continuous state";
+        output Real y_cont[size(y,1)] "Value of continuous output";
+
+    protected
+    Integer nx = size(xpre,1) "Number of system states";
+    Integer ny = size(y,1) "Number of observed measurements";
+    Real xmu[nx] "A priori state estimation";
+    Real Ak[nx,nx] "Discretized Jacobian of the system function";
+    Real Ck[ny,nx] "Discretized Jacobian of the output function";
+
+  algorithm
+    (xmu, y_est, Ak, Ck) := ekfFunction(x=xpre, u=upre, Ts=Ts, ny=ny);
+    (K, M) := Modelica_LinearSystems2.DiscreteStateSpace.Internal.kfEstimate(Ak, Ck, Mpre, Q, R);
+    x_est :=xmu + K*(y - y_est);
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>",   info="<html>
+
+<h4>Syntax</h4>
+<blockquote><pre>
+         (x_est, y_est, M, K) = DiscreteStateSpace.Design.<b>EKF</b>(x_pre, u_pre, y, M_pre, Q, R, Ts)
+</pre></blockquote>
+<h4>Description</h4>
+<p>
+Function <b>EKF</b> computes one recursion of the Kalman filter or the extended Kalman filter equations respectively, i.e updating
+the Riccati difference equation and the Kalman filter gain and correction of the predicted state.<br>
+The system functions are defined in function ekfFunction(), which is to provide by the user. Matrices <b>A</b>_k and <b>C</b>_k are the
+Jacobians F_x and H_x of the system equations <b>f</b> and <b>h</b>
+<blockquote><pre>
+ 
+ x_k = f(x_k-1, u_k-1)
+ y_k = h(x_k, u_k)
+  
+</pre></blockquote>
+i.e., in the case of linear systems the system matrix <b>A</b> and the output matrix <b>C</b>.
+
+</html>"));
+  end EKF;
+
+  function EKF_Bsp "Extended Kalman filter design function"
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+    import Modelica_LinearSystems2.Internal.StateSpace2;
+
+      input Real xpre[:] "State at instant k-1";
+    input Real upre[:] "Input at instant k-1";
+    input Real y[:] "Output at instant k";
+    input Real Mpre[size(xpre,1),size(xpre,1)]
+        "Solution of the discrete Riccati equation at instant k-1";
+    input Real Q[size(xpre,1),size(xpre,1)] = identity(size(xpre,1))
+        "Weighted covariance matrix of the associated process noise (F*Q*F')";
+    input Real R[size(y,1),size(y,1)] = identity(size(y,1))
+        "Covariance matrix of the measurement noise";
+    input Modelica.SIunits.Time Ts "Sample time";
+
+    output Real x_est[size(xpre,1)] "Estimated state vector";
+    output Real y_est[size(y,1)] "Estimated output";
+    output Real M[size(Mpre,1),size(Mpre,1)]
+        "Solution of the discrete Riccati equation";
+    output Real K[size(xpre,1),size(y,1)] "Kalman filter gain matrix";
+        output Real x_cont[size(xpre,1)] "Value of continuous state";
+        output Real y_cont[size(y,1)] "Value of continuous output";
+
+    protected
+    Integer nx = size(xpre,1) "Number of system states";
+    Integer ny = size(y,1) "Number of observed measurements";
+    Real xmu[nx] "A priori state estimation";
+    Real Ak[nx,nx] "Discretized Jacobian of the system function";
+    Real Ck[ny,nx] "Discretized Jacobian of the output function";
+
+  algorithm
+    (x_est, y_est, M, K) := DiscreteStateSpace.Design.EKF(function   DiscreteStateSpace.Design.ekfSystem_pendular(), xpre, upre,y,Mpre,Q,R,Ts);
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>",   info="<html>
+
+<h4>Syntax</h4>
+<blockquote><pre>
+         (x_est, y_est, M, K) = DiscreteStateSpace.Design.<b>EKF</b>(x_pre, u_pre, y, M_pre, Q, R, Ts)
+</pre></blockquote>
+<h4>Description</h4>
+<p>
+Function <b>EKF</b> computes one recursion of the Kalman filter or the extended Kalman filter equations respectively, i.e updating
+the Riccati difference equation and the Kalman filter gain and correction of the predicted state.<br>
+The system functions are defined in function ekfFunction(), which is to provide by the user. Matrices <b>A</b>_k and <b>C</b>_k are the
+Jacobians F_x and H_x of the system equations <b>f</b> and <b>h</b>
+<blockquote><pre>
+ 
+ x_k = f(x_k-1, u_k-1)
+ y_k = h(x_k, u_k)
+  
+</pre></blockquote>
+i.e., in the case of linear systems the system matrix <b>A</b> and the output matrix <b>C</b>.
+
+</html>"));
+  end EKF_Bsp;
 end Design;
   annotation (
     defaultComponentName="stateSpaceDiscrete",

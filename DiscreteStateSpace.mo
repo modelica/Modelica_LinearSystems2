@@ -4238,10 +4238,10 @@ function kfEstimate
 
 algorithm
   MCT:=M*transpose(Ck) "Matrix M*Ck'";
-  UT:=Math.Matrices.Internal.symMatMul(Ck, M, R, true);
+  UT:=Math.Matrices.Internal.symMatMul_C(Ck, M, R, true);
 //  UT:=Math.Matrices.Internal.symMatMul_C(Ck, M, R, true);
 
-  K := Math.Matrices.Internal.solve2rSym_C(UT, MCT, false, true);
+  K := Math.Matrices.Internal.solve2rSym(UT, MCT, false, true);
 //  K := Math.Matrices.solve2rSym(UT, MCT,false, true);
 
 // Calculate upper triangle of symmetric M-K*Ck*M
@@ -4251,7 +4251,7 @@ algorithm
     end for;
   end for;
 
-  M_new := Math.Matrices.Internal.symMatMul_C(Ak, M_new, Q, true);
+  M_new := Math.Matrices.Internal.symMatMul(Ak, M_new, Q, true);
 
   // Note that M_new contains only the upper triangle of the Riccati matrix.
   // To complete the matrix, the strict lower triangle could be produced by
