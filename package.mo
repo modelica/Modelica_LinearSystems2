@@ -6,24 +6,12 @@ constant String DataDir=classDirectory() + "Extras/Data/"
   "Absolute path to directory containing utilitiy files for this package";
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 annotation (
   preferredView="info",
  uses(Modelica(version="3.2")),
     version="2.2",
-    versionBuild=2,
-    versionDate="2010-10-26",
+    versionBuild=3,
+    versionDate="2010-11-03",
     dateModified = "2010-10-26 09:27:58Z",
     revisionID="$Id::                                       $",
     conversion(noneFromVersion="2.0",

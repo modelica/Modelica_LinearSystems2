@@ -35,12 +35,11 @@ model DoublePendulum "crane trolley system"
     annotation (Placement(transformation(extent={{78,0},{98,20}}, rotation=0)));
   Modelica.Mechanics.MultiBody.Parts.BodyShape bodyShape(
     shapeType="box",
-    animateSphere=true,
     m=m_trolley,
     sphereDiameter=world.defaultBodyDiameter,
     r={0,0,0},
     r_CM={0,0,0})
-    annotation (Placement(transformation(extent={{-58,0},{-38,20}})));
+    annotation (Placement(transformation(extent={{-58,-2},{-38,18}})));
   Modelica.Mechanics.Translational.Sources.Force force
     annotation (Placement(transformation(extent={{-98,34},{-78,54}})));
   Modelica.Mechanics.MultiBody.Sensors.RelativeAngles relativeAngles
@@ -106,7 +105,7 @@ equation
   connect(rev.support, damper.flange_a) annotation (Line(points={{-26,20},{-26,
           26},{-36,26},{-36,50},{-22,50}}, color={0,0,0}));
   connect(bodyShape.frame_b, rev.frame_a) annotation (Line(
-      points={{-38,10},{-30,10}},
+      points={{-38,8},{-34,8},{-34,10},{-30,10}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
@@ -128,7 +127,7 @@ equation
       color={0,127,0},
       smooth=Smooth.None));
   connect(prismatic.frame_b, bodyShape.frame_a) annotation (Line(
-      points={{-76,10},{-58,10}},
+      points={{-76,10},{-68,10},{-68,8},{-58,8}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));

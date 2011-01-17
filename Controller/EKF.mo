@@ -60,7 +60,7 @@ initial equation
   M = M_init;
 equation
   when {sampleTrigger} then
-    (x_est, y_est, M, K) = ekf(pre(x_est), pre(u), y_measure, pre(M), Q2, R, Ts);
+    (x_est, y_est, M, K) = ekf(pre(x_est), pre(u), u, y_measure, pre(M), Q2, R, Ts);
   end when;
 
   annotation (Diagram(graphics), Icon(graphics={

@@ -1,0 +1,1851 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.TransferFunction.Conversion</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Conversion<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.TransferFunction.Conversion"></A><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A>.Conversion</H2>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles"
+>toZerosAndPoles</A>
+</TD><TD>Generate a ZerosAndPoles object from a TransferFunction object</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace"
+>toStateSpace</A>
+</TD><TD>Convert a TransferFunction into a StateSpace representation</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesMIMO" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesMIMO"
+>toZerosAndPolesMIMO</A>
+</TD><TD>Generate a zeros-and-poles transfer function matrix from a numerator-denominator-polynomial transfer function matrix representation</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.TransferFunction.Conversion.toMatrices" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.TransferFunction.Conversion.toMatrices"
+>toMatrices</A>
+</TD><TD>Convert a TransferFunction into the matrices A, B, C of a StateSpace</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE toZerosAndPoles<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles"></A><A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.TransferFunction.Conversion"
+>Modelica_LinearSystems2.TransferFunction.Conversion</A>.toZerosAndPoles</H2>
+<B>Generate a ZerosAndPoles object from a TransferFunction object</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4><font color="#008000">Syntax</font></h4>
+<table>
+<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> TransferFunction.Conversion.<b>toZerosAndPoles</b>(tf)  </td> </tr>
+</table>
+<h4><font color="#008000">Description</font></h4>
+<p>
+Computes a ZerosAndPoles record
+ <blockquote><pre>
+                 product(s + n1[i]) * product(s^2 + n2[i,1]*s + n2[i,2])
+        zp = k*---------------------------------------------------------
+                product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
+</pre></blockquote>of a transfer function representated by numerator and denominator polynomial. The poles and zeros and the gain <tt>k</tt> are computed 
+(<A HREF="Modelica_LinearSystems2_Analysis.html#Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles"
+>zerosAndPoles</a>) and are used as inputs the ZerosAndPoles constructor.
+
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
+   Modelica_LinearSystems2.TransferFunction tf = 1/(s^2 + 3*s +2)
+
+
+<b>algorithm</b>
+  zp:=Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles(tf);
+//  zp = 1/( (s + 1)*(s + 2) )
+</pre></blockquote>
+
+
+ 
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A></TD><TD>tf</TD><TD>&nbsp;</TD><TD>transfer function of a system</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A></TD><TD>zp</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> toZerosAndPoles <font color="darkgreen">
+  &quot;Generate a ZerosAndPoles object from a TransferFunction object&quot;</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.ZerosAndPoles.Internal"
+>Modelica_LinearSystems2.ZerosAndPoles.Internal</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A> tf <font color="darkgreen">&quot;transfer function of a system&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp(
+    <font color="blue">redeclare </font>Real n1[<font color="red">Internal.numberOfRealZeros2</font>(tf)],
+    <font color="blue">redeclare </font>Real n2[<font color="red">integer</font>((<font color="red">size</font>(tf.n, 1) - 1 -
+      <font color="red">Internal.numberOfRealZeros2</font>(tf))/2),2],
+    <font color="blue">redeclare </font>Real d1[<font color="red">Internal.numberOfRealPoles</font>(tf)],
+    <font color="blue">redeclare </font>Real d2[<font color="red">integer</font>((<font color="red">size</font>(tf.d, 1) - 1 -
+      <font color="red">Internal.numberOfRealPoles</font>(tf))/2),2]);
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> z[:];
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> p[:];
+  Real k;
+<font color="blue">algorithm </font>
+  (z,p,k) :=<font color="red"> TransferFunction.Analysis.zerosAndPoles</font>(tf);
+  zp :=<font color="red"> ZerosAndPoles</font>(
+      z,
+      p,
+      k);
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>toZerosAndPoles;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE toStateSpace<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace"></A><A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.TransferFunction.Conversion"
+>Modelica_LinearSystems2.TransferFunction.Conversion</A>.toStateSpace</H2>
+<B>Convert a TransferFunction into a StateSpace representation</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4><font color="#008000">Syntax</font></h4>
+<table>
+<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> TransferFunction.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
+</table>
+<h4><font color="#008000">Description</font></h4>
+<p>
+Transforms a transfer function into state space representation.
+There are an infinite number of possible realizations.
+Here, the transfer function is transformed into
+controller canonical form, i.e. the transfer function
+<blockquote><pre>
+       b4*s^4 + b3*s^3 + b2*s^2 + b1*s + b0
+  y = -------------------------------------- *u
+       a4*s^4 + a3*s^3 + a2*s^2 + a1*s + a0
+</pre></blockquote>
+is transformed into:
+</p>
+<blockquote><pre>
+  <b>der</b>(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
+      <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
+     with
+             <b>A</b> = [   0  ,    1  ,    0  ,    0;
+                     0  ,    0  ,    1  ,    0:
+                     0  ,    0  ,    0  ,    1;
+                  -a0/a4, -a1/a4, -a2/a4, -a3/a4];
+
+             <b>B</b> = [  0;
+                    0;
+                    0;
+                   1/a4];
+             <b>C</b> = [b0-b4*a0/a4, b1-b4*a1/a4, b2-b4*a2/a4, b3-b4*a3/a4];
+             <b>D</b> = [b4/a4];
+</pre></blockquote>
+If the numerator polynomial is 1, then the state vector
+<b>x</b> is built up of y and of all derivatives of y upto nx-1
+(nx is the dimension of the state vector):
+<blockquote><pre>
+   <b>x</b> = {y, dy/dt, d^2y/dt^2, ..., d^(n-1)y/dt^(n-1)};
+</pre></blockquote>
+Note, the state vector <b>x</b> of Modelica.Blocks.Continuous.TransferFunction
+is defined slightly differently.
+
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+   Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^3 + s^2 + s +1);
+
+<b>algorithm</b>
+  ss := Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace(tf);
+// ss.A = [0, 1, 0; 0, 0, 1; -1, -1, -1],
+// ss.B = [0; 0; 1],
+// ss.C = [1, 1, 0],
+// ss.D = [0],
+</pre></blockquote>
+
+<pre> </PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A></TD><TD>tf</TD><TD>&nbsp;</TD><TD>transfer function of a system</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A></TD><TD>ss</TD><TD>Transfer function in StateSpace form</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> toStateSpace <font color="darkgreen">
+  &quot;Convert a TransferFunction into a StateSpace representation&quot;</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A>;
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Math_Vectors.html#Modelica.Math.Vectors"
+>Modelica.Math.Vectors</A>;
+
+ <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A> tf <font color="darkgreen">
+    &quot;transfer function of a system&quot;</font>;
+      <font color="blue">output </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A> ss(
+        <font color="blue">redeclare </font>Real A[<font color="red">TransferFunction.Analysis.denominatorDegree</font>(tf),<font color="red">TransferFunction.Analysis.denominatorDegree</font>(tf)],
+        <font color="blue">redeclare </font>Real B[<font color="red">TransferFunction.Analysis.denominatorDegree</font>(tf),1],
+        <font color="blue">redeclare </font>Real C[1,<font color="red">TransferFunction.Analysis.denominatorDegree</font>(tf)],
+        <font color="blue">redeclare </font>Real D[1,1]) <font color="darkgreen">&quot;Transfer function in StateSpace form&quot;</font>;
+
+<font color="blue">protected </font>
+ Integer na=<font color="red">TransferFunction.Analysis.denominatorDegree</font>(tf) + 1;
+ Integer nb=<font color="red">TransferFunction.Analysis.numeratorDegree</font>(tf) + 1;
+ Integer nx=na - 1;
+ Real a[na]=<font color="red">Vectors.reverse</font>(tf.d) <font color="darkgreen">&quot;Reverse element order of tf.a&quot;</font>;
+ Real b[na]=<font color="red">vector</font>([<font color="red">Vectors.reverse</font>(tf.n);<font color="red"> zeros</font>(na - nb, 1)]);
+ Real d=b[na]/a[na];
+<font color="blue">algorithm </font>
+ <font color="blue">if </font>nx == 0<font color="blue"> then</font>
+   ss.A :=<font color="red"> fill</font>(
+       0,
+       0,
+       nx);
+   ss.B :=<font color="red"> fill</font>(
+       0,
+       0,
+       1);
+   ss.C :=<font color="red"> fill</font>(
+       0,
+       1,
+       0);
+ <font color="blue">else</font>
+   ss.A[1:nx - 1, 1:nx] := [<font color="red">zeros</font>(nx - 1, 1),<font color="red">identity</font>(nx - 1)];
+   ss.A[nx, 1:nx] := -a[1:na - 1]/a[na];
+   ss.B := [<font color="red">zeros</font>(nx - 1, 1); 1/a[na]];
+   ss.C := {b[1:nx] - d*a[1:nx]};
+
+<font color="blue">end if</font>;
+
+  ss.D := [d];
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>toStateSpace;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE toZerosAndPolesMIMO<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesMIMO"></A><A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.TransferFunction.Conversion"
+>Modelica_LinearSystems2.TransferFunction.Conversion</A>.toZerosAndPolesMIMO</H2>
+<B>Generate a zeros-and-poles transfer function matrix from a numerator-denominator-polynomial transfer function matrix representation</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4><font color="#008000">Syntax</font></h4>
+<table>
+<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> TransferFunction.Conversion.<b>toZerosAndPolesMIMO</b>(tf)  </td> </tr>
+</table>
+<h4><font color="#008000">Description</font></h4>
+<p>
+Converts a matrix of transfer functions denoted as rational polynomial function into a matrix of transfer functions in zeros-and-poles representation. The function repetitively uses
+<A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles"
+>toZerosAndPoles</a>.
+
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
+   Modelica_LinearSystems2.TransferFunction tf = [1/(s^2 + 3*s +2);s/(s^2 + 2*s +1)]
+
+
+<b>algorithm</b>
+  zp:=Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles(tf);
+//  zp = [1/( (s + 1)*(s + 2) ); s/( (s + 1)^2 )]
+</pre></blockquote>
+
+
+<pre> </PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A></TD><TD>tf[:, :]</TD><TD>&nbsp;</TD><TD>transfer function of a system</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A></TD><TD>zp[size(tf, 1), size(tf, 2)]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> toZerosAndPolesMIMO <font color="darkgreen">
+  &quot;Generate a zeros-and-poles transfer function matrix from a numerator-denominator-polynomial transfer function matrix representation&quot;</font>
+
+    <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+    <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+    <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+    <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A> tf[:,:] <font color="darkgreen">&quot;transfer function of a system&quot;</font>;
+
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp[<font color="red">size</font>(tf, 1),<font color="red">size</font>(tf, 2)];
+
+<font color="blue">protected </font>
+  Integer ny=<font color="red">size</font>(tf, 1);
+  Integer nu=<font color="red">size</font>(tf, 2);
+
+<font color="blue">algorithm </font>
+  <font color="blue">for </font>iy<font color="blue"> in </font>1:ny<font color="blue"> loop</font>
+    <font color="blue">for </font>iu<font color="blue"> in </font>1:nu<font color="blue"> loop</font>
+      zp[iy, iu] :=<font color="red"> ZerosAndPoles</font>(tf[iy, iu]);
+    <font color="blue">end for</font>;
+  <font color="blue">end for</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>toZerosAndPolesMIMO;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE toMatrices<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.TransferFunction.Conversion.toMatrices"></A><A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.TransferFunction.Conversion"
+>Modelica_LinearSystems2.TransferFunction.Conversion</A>.toMatrices</H2>
+<B>Convert a TransferFunction into the matrices A, B, C of a StateSpace</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4><font color="#008000">Syntax</font></h4>
+<table>
+<tr> <td align=right>  (A, B, C, D) </td><td align=center> =  </td>  <td> TransferFunction.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
+</table>
+<h4><font color="#008000">Description</font></h4>
+<p>
+Transforms a transfer function into state space representation. The outputs are the system functions A, B, C, D.
+There are an infinite number of possible realizations.
+Here, the transfer function is transformed into
+controller canonical form, i.e. the transfer function
+<blockquote><pre>
+       b4*s^4 + b3*s^3 + b2*s^2 + b1*s + b0
+  y = -------------------------------------- *u
+       a4*s^4 + a3*s^3 + a2*s^2 + a1*s + a0
+</pre></blockquote>
+is transformed into:
+</p>
+<blockquote><pre>
+  <b>der</b>(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
+      <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
+     with
+             <b>A</b> = [   0  ,    1  ,    0  ,    0;
+                     0  ,    0  ,    1  ,    0:
+                     0  ,    0  ,    0  ,    1;
+                  -a0/a4, -a1/a4, -a2/a4, -a3/a4];
+
+             <b>B</b> = [  0;
+                    0;
+                    0;
+                   1/a4];
+             <b>C</b> = [b0-b4*a0/a4, b1-b4*a1/a4, b2-b4*a2/a4, b3-b4*a3/a4];
+             <b>D</b> = [b4/a4];
+</pre></blockquote>
+If the numerator polynomial is 1, then the state vector
+<b>x</b> is built up of y and of all derivatives of y upto nx-1
+(nx is the dimension of the state vector):
+<blockquote><pre>
+   <b>x</b> = {y, dy/dt, d^2y/dt^2, ..., d^(n-1)y/dt^(n-1)};
+</pre></blockquote>
+Note, the state vector <b>x</b> of Modelica.Blocks.Continuous.TransferFunction
+is defined slightly differently.
+
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+   Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^3 + s^2 + s +1);
+
+<b>algorithm</b>
+  (A, B, C, D) := Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace(tf);
+// A = [0, 1, 0; 0, 0, 1; -1, -1, -1],
+// B = [0; 0; 1],
+// C = [1, 1, 0],
+// D = [0],
+</pre></blockquote>
+
+<pre> </PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A></TD><TD>tf</TD><TD>&nbsp;</TD><TD>transfer function of a system</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>ABCD[size(tf.d, 1), size(tf.d, 1)]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> toMatrices <font color="darkgreen">
+  &quot;Convert a TransferFunction into the matrices A, B, C of a StateSpace&quot;</font>
+
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A>;
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Math_Vectors.html#Modelica.Math.Vectors"
+>Modelica.Math.Vectors</A>;
+
+ <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A> tf <font color="darkgreen">
+    &quot;transfer function of a system&quot;</font>;
+
+      <font color="blue">output </font>Real ABCD[<font color="red">size</font>(tf.d,1),<font color="red">size</font>(tf.d,1)];
+
+<font color="blue">protected </font>
+ Integer na=<font color="red">TransferFunction.Analysis.denominatorDegree</font>(tf) + 1;
+ Integer nb=<font color="red">TransferFunction.Analysis.numeratorDegree</font>(tf) + 1;
+ Integer nx=na - 1;
+ <font color="blue">output </font>Real A[nx,nx];
+ <font color="blue">output </font>Real B[nx,1];
+ <font color="blue">output </font>Real C[1,nx];
+ <font color="blue">output </font>Real D[1,1];
+ Real a[na]=<font color="red">Vectors.reverse</font>(tf.d) <font color="darkgreen">&quot;Reverse element order of tf.a&quot;</font>;
+ Real b[na]=<font color="red">vector</font>([<font color="red">Vectors.reverse</font>(tf.n);<font color="red"> zeros</font>(na - nb, 1)]);
+ Real d=b[na]/a[na];
+<font color="blue">algorithm </font>
+ <font color="blue">if </font>nx == 0<font color="blue"> then</font>
+   A :=<font color="red"> fill</font>(
+       0,
+       0,
+       nx);
+   B :=<font color="red"> fill</font>(
+       0,
+       0,
+       1);
+   C :=<font color="red"> fill</font>(
+       0,
+       1,
+       0);
+ <font color="blue">else</font>
+   A[1:nx - 1, 1:nx] := [<font color="red">zeros</font>(nx - 1, 1),<font color="red">identity</font>(nx - 1)];
+   A[nx, 1:nx] := -a[1:na - 1]/a[na];
+   B := [<font color="red">zeros</font>(nx - 1, 1); 1/a[na]];
+   C := {b[1:nx] - d*a[1:nx]};
+<font color="blue">end if</font>;
+  D := [d];
+  ABCD := [A,B;C,D];
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>toMatrices;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Conversion<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.ZerosAndPoles.Conversion"></A><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>.Conversion</H2>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction"
+>toTransferFunction</A>
+</TD><TD>Generate a TransferFunction object from a ZerosAndPoles object</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunctionMIMO" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunctionMIMO"
+>toTransferFunctionMIMO</A>
+</TD><TD>Generate a transfer function matrix  from zeros-and-poles transfer function matrix</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace"
+>toStateSpace</A>
+</TD><TD>Transform a ZerosAndPoles object into a StateSpace object</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.ZerosAndPoles.Conversion.toMatrices" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.ZerosAndPoles.Conversion.toMatrices"
+>toMatrices</A>
+</TD><TD>Convert a ZerosAndPoles object into the matrices A, B, C of a StateSpace</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE toTransferFunction<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction"></A><A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.ZerosAndPoles.Conversion"
+>Modelica_LinearSystems2.ZerosAndPoles.Conversion</A>.toTransferFunction</H2>
+<B>Generate a TransferFunction object from a ZerosAndPoles object</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4><font color="#008000">Syntax</font></h4>
+<table>
+<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.<b>toTransferFunction</b>(zp)  </td> </tr>
+</table>
+<h4><font color="#008000">Description</font></h4>
+<p>
+Computes a TransferFunction record
+ <blockquote><pre>
+           n(s)     b0 + b1*s + ... + bn*s^n
+   tf = -------- = -------------------------- 
+           d(s)     a0 + a1*s + ... + an*s^n
+ </pre></blockquote>
+from a ZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<A HREF="Modelica_LinearSystems2_Analysis.html#Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles"
+>zerosAndPoles</a>) and are used as inputs in the TransferFunction constructor.
+
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
+   Modelica_LinearSystems2.ZerosAndPoles tf = 1/(p + 3)/(p + 1)
+
+
+<b>algorithm</b>
+  zp:=Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction(tf);
+//  zp = 1/( (p + 1)*(p + 2) )
+</pre></blockquote>
+
+
+ 
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A></TD><TD>zp</TD><TD>&nbsp;</TD><TD>ZerosAndPoles transfer function of a system</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A></TD><TD>tf</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> toTransferFunction <font color="darkgreen">
+  &quot;Generate a TransferFunction object from a ZerosAndPoles object&quot;</font>
+  <font color="darkgreen">//encapsulated function fromZerosAndPoles</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Modelica_LinearSystems2.Math.Polynomial</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal"
+>Modelica_LinearSystems2.Internal</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp <font color="darkgreen">&quot;ZerosAndPoles transfer function of a system&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A> tf;
+
+<font color="blue">protected </font>
+  Real k;
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> z[:];
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> p[:];
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Polynomial</A> pn;
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Polynomial</A> pd;
+<font color="blue">algorithm </font>
+  (z,p,k) :=<font color="red"> ZerosAndPoles.Analysis.zerosAndPoles</font>(zp);
+  pn :=<font color="red"> Polynomial</font>(z)*<font color="red">Polynomial</font>(k);
+  pd :=<font color="red"> Polynomial</font>(p);
+  tf.n := pn.c;
+  tf.d := pd.c;
+  tf.uName := zp.uName;
+  tf.yName := zp.yName;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>toTransferFunction;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE toTransferFunctionMIMO<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunctionMIMO"></A><A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.ZerosAndPoles.Conversion"
+>Modelica_LinearSystems2.ZerosAndPoles.Conversion</A>.toTransferFunctionMIMO</H2>
+<B>Generate a transfer function matrix  from zeros-and-poles transfer function matrix</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4><font color="#008000">Syntax</font></h4>
+<table>
+<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> TransferFunction.Conversion.<b>toTransferFunctionMIMO</b>(tf)  </td> </tr>
+</table>
+<h4><font color="#008000">Description</font></h4>
+<p>
+Converts a matrix of ZerosAndPoles transfer functions denoted by the product of first and second order numerator and denominator polynomials into a matrix of transfer functions represented by (usual) numerator and denominator polynomial. The function repetitively uses <A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction"
+>toTransferFunction</a>.
+
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
+   Modelica_LinearSystems2.ZerosAndPoles zp = [1/(p + 2)/(p + 1);p/(p + 1)/(p + 1)]
+
+
+<b>algorithm</b>
+  tf := Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction(zp);
+//  tf = [1/( (p + 1)*(p + 2) ); p/( (p + 1)^2 )]
+</pre></blockquote>
+
+
+<pre> </PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A></TD><TD>zp[:, :]</TD><TD>&nbsp;</TD><TD>ZerosAndPoles transfer function of a system</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A></TD><TD>tf[size(zp, 1), size(zp, 2)]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> toTransferFunctionMIMO <font color="darkgreen">
+  &quot;Generate a transfer function matrix  from zeros-and-poles transfer function matrix&quot;</font>
+
+    <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+    <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+    <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+    <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp[:,:] <font color="darkgreen">&quot;ZerosAndPoles transfer function of a system&quot;</font>;
+
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A> tf[<font color="red">size</font>(zp, 1),<font color="red">size</font>(zp, 2)];
+
+<font color="blue">protected </font>
+  Integer ny=<font color="red">size</font>(zp, 1);
+  Integer nu=<font color="red">size</font>(zp, 2);
+
+<font color="blue">algorithm </font>
+  <font color="blue">for </font>iy<font color="blue"> in </font>1:ny<font color="blue"> loop</font>
+    <font color="blue">for </font>iu<font color="blue"> in </font>1:nu<font color="blue"> loop</font>
+      tf[iy, iu] :=<font color="red"> ZerosAndPoles.Conversion.toTransferFunction</font>(zp[iy, iu]);
+    <font color="blue">end for</font>;
+  <font color="blue">end for</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>toTransferFunctionMIMO;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE toStateSpace<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace"></A><A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.ZerosAndPoles.Conversion"
+>Modelica_LinearSystems2.ZerosAndPoles.Conversion</A>.toStateSpace</H2>
+<B>Transform a ZerosAndPoles object into a StateSpace object</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4><font color="#008000">Syntax</font></h4>
+<table>
+<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
+</table>
+<h4><font color="#008000">Description</font></h4>
+<p>
+This function transforms a zeros-poles-gain system representation into state space representation.
+To achieve well numerical condition the ZerosAndPoles transfer function is transformed into state space
+form by creating first and second order blocks that are connected
+together in series. Every block is represented in controller
+canonical form and scaled such that the gain from the input
+of this block to its output is one (i.e. y(p=0) = u(p=0)),
+if this is possible. Details are given below.
+</p>
+<b>Algorithmic details</b>
+<p>
+The ZerosAndPoles transfer function is defined as:
+<blockquote><pre>
+         product(p + n1[i]) * product(p^2 + n2[i,1]*p + n2[i,2])
+  y = k*--------------------------------------------------------- * u
+         product(p + d1[i]) * product(p^2 + d2[i,1]*p + d2[i,2])
+</pre></blockquote>
+<p>
+This is treated as a series connection of first and second order
+systems. If size(n1) == size(d1) and size(n2) == size(d2)
+this gives the following sequence of operations:
+</p>
+<blockquote><pre>
+
+        p^2 + n2[1,1]*p + n2[1,2]
+  y_1 = ------------------------- * u
+        p^2 + d2[1,1]*p + d2[1,2]
+&nbsp;
+        p^2 + n2[2,1]*p + n2[2,2]
+  y_2 = ------------------------- * y_1
+        p^2 + d2[2,1]*p + d2[2,2]
+&nbsp;
+     ...
+&nbsp;
+        p + n1[..]
+  y_n = ---------- * y_(n-1)
+        p + d1[..]
+&nbsp;
+    y = k*y_n
+
+</pre></blockquote>
+
+Based on this representation, evrey block with transfer function G(p) could be transformed into
+<blockquote><pre>
+  G(p) = k * F(p)
+
+</pre>
+with F(p) has unit gain. This leads to representations of the forms
+</pre></blockquote>
+<p>
+<blockquote><pre>
+
+           a2 + a1*p + p^2       a2      b2 + a1*b2/a2*p + b2/a2*p^2
+  G(p) = -------------------- = ---- * ------------------------------ = k * F(p),  k = a2/b2  (1)
+
+           b2 + b1*p + p^2       b2           b2 + b1*p + p^2
+&nbsp;
+for second order systems and
+&nbsp;
+           a + p     a     b + b/a*p
+  G(p) = -------- = --- * ---------- = k * F(p),   k = a/b
+
+           b + p     b      b + p
+</p>
+</pre></blockquote>
+for first order systems respectively.
+
+<p>
+The complete system is now considered as the series connections of all the single unit gain transfer functions and an overall gain k with
+<blockquote><pre>
+  k = product(ki).
+
+</pre></blockquote>
+</p>
+
+
+In the general case, the following system structures
+and the corresponding state space systems can appear
+(note, 'c' is the reciprocal local gain 1/k):
+</p>
+<blockquote><pre>
+(1)
+          a2 + a1*p + p^2           der(x1) = x2
+    y = ---------------------  -->  der(x2) = -b2*x1 - b1*x2 + b2*u
+          b2 + b1*p + p^2                 y = c*((a2-b2)*x1 + (a1-b1)*x2 + u),  c = b2/a2
+&nbsp;
+(2)
+             p + a                 der(x1) = x2
+    y = ---------------- * u  -->  der(x2) = -b2*x1 - b1*x2 + b2*u
+        b2 + b1*p + p^2                  y = k*(a1/b2*x1 +x2/b2),  c = b2/a
+&nbsp;
+(3)
+               1                  der(x1) = x2
+    y = --------------- *u   -->  der(x2) = -b2*x1 - b1*x2 + b2*u
+        b2 + b1*p + p^2                 y = c*x1/b2,  c = b2
+&nbsp;
+(4)
+       a + p                       der(x) = -b*x + b*u
+   y = ----- * u             -->        y = c*((a-b)/b*x + u),  c = b/a
+       b + p
+&nbsp;
+(5)
+         1
+   y = ----- * u             -->   der(x) = -b*x + b*u
+       b + p                            y = x,  c = b
+
+</pre></blockquote>
+
+If the sizes of the numerator and denominator polynomials
+do not match, the small systems are built in the
+following way:
+</p>
+<blockquote><pre>
+(1) Build systems of form (1) by combining
+    - 1 d2 and 1 n2
+      (= 1 second order denominator and 1 second order numerator) or
+    - 1 d2 and 2 n1 or
+    - 2 d1 and 1 n2
+(2) Build at most one system of form (2) by combining
+    - 1 d2 and 1 n2
+(3) Build systems of form (3) by
+    - 1 d2
+(4) Build systems of form (4) by combining
+    - 1 d1 and 1 n1
+(5) Build systems of form (5) by
+    - 1 d1
+</pre></blockquote>
+<p>
+The numeric properties of the resulting state space system
+depends on which first and second order polynomials are
+combined and connected together. From a numerical point of view, it
+would therefore be useful to combine the polynomials
+based on the numeric values of the polynomial coefficients,
+(e.g., in a first step the polynomials could be sorted
+according to their cut-off frequency).
+</p>
+<p>
+However, this has the disadvantage that the structure of the
+resulting state space system depends on the numeric
+values of the polynomial coefficients. Since Modelica
+environments perform symbolic pre-processing on equations,
+this would mean that a change of a polynomial coefficient
+requires to newly compile the state space system.
+</p>
+<p>
+If, on the other hand, the structure of the state
+space system depends only on dimension information
+of the n1,n2,d1,d2 arrays, then the polynomial coefficients
+can be changed without a new translation of the model.
+This is the major reason why the structure of the
+state space system in the implementation of this block
+is based only on dimension information.
+</p>
+<p>
+This is, e.g., not critical for the provided filters:
+The dimension of the n1,n2,d1,d2 arrays depend for
+filters only on the filter characteristics
+(Bessel, Butterworth etc.), the filter type (low pass,
+high pass etc.) and on the filter order. If any
+of this data is changed, the model has to be
+newly compiled. All the other filter data, such as
+cut-off frequency or ripple amplitude, can be changed
+without re-compilation of the model.
+The ZerosAndPoles transfer function is now constructed
+for the filters in such a way that the filter zeros
+and poles are appropriately sorted to give better
+numerical properties.
+</p>
+<p>
+Another alternative implementation of the state
+space system would be to use the function controller canonical
+form that directly results from the transfer function.
+The severe disadvantage
+of this approach is that the structure of the state
+space system from above is lost for the symbolic preprocessing.
+If, e.g., index reduction has to be applied (e.g. since a
+filter is used to realize a non-linear inverse model),
+then the tool cannot perform the index reduction.
+Example:
+</p>
+<p>
+Assume, a generic first order state space system
+is present
+</p>
+<blockquote><pre>
+   <b>der</b>(x) = a*x + b*u
+        y = c*x + d*u
+</pre></blockquote>
+<p>
+and the values of the scalars a,b,c,d are parameters
+that might be changed before the simulation starts.
+If y has to be differentiated symbolically during code
+generation, then
+</p>
+<blockquote><pre>
+      <b>der</b>(y) = c*<b>der</b>(x) + d*<b>der</b>(u)
+      <b>der</b>(x) = a*x + b*u
+</pre></blockquote>
+<p>
+As a result, u needs to be differentiated too, and this
+might not be possible and therefore translation might fail.
+</p>
+<p>
+On the other hand, if the first order system is
+defined to be a low pass filter and the state space
+system is generated by keeping this structure, we have
+(see form (5) above):
+</p>
+<blockquote><pre>
+  <b>der</b>(x) = -b*x + u
+        y = x
+</pre></blockquote>
+<p>
+Differentiating y symbolically leads to:
+</p>
+<blockquote><pre>
+     <b>der</b>(y) = <b>der</b>(x)
+     <b>der</b>(x) = -b*x + u
+</pre></blockquote>
+<p>
+Therefore, in this case, the derivative of u is not
+needed and the tool can continue with the symbolic
+processing.
+</p>
+ 
+
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
+   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + p +1);
+
+<b>algorithm</b>
+  ss := Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace(zp);
+// ss.A = [0, 1; -1, -1],
+// ss.B = [0; 1],
+// ss.C = [1, 1],
+// ss.D = [0],
+</pre></blockquote>
+
+<pre> </PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A></TD><TD>zp</TD><TD>&nbsp;</TD><TD>ZerosAndPoles transfer function of a system</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A></TD><TD>ss</TD><TD>Transfer function in StateSpace SISO form</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> toStateSpace <font color="darkgreen">
+  &quot;Transform a ZerosAndPoles object into a StateSpace object&quot;</font>
+ <font color="darkgreen">//encapsulated function fromZerosAndPoles</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.StateSpace.Internal"
+>Modelica_LinearSystems2.StateSpace.Internal</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp <font color="darkgreen">&quot;ZerosAndPoles transfer function of a system&quot;</font>;
+  <font color="blue">output </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss(
+    <font color="blue">redeclare </font>Real A[<font color="red">ZerosAndPoles.Analysis.denominatorDegree</font>(zp),
+      <font color="red">ZerosAndPoles.Analysis.denominatorDegree</font>(zp)],
+    <font color="blue">redeclare </font>Real B[<font color="red">ZerosAndPoles.Analysis.denominatorDegree</font>(zp),1],
+    <font color="blue">redeclare </font>Real C[1,<font color="red">ZerosAndPoles.Analysis.denominatorDegree</font>(zp)],
+    <font color="blue">redeclare </font>Real D[1,1]) <font color="darkgreen">&quot;Transfer function in StateSpace SISO form&quot;</font>;
+
+<font color="blue">protected </font>
+  Real A[2,2] <font color="darkgreen">&quot;system matrix of partial 2nd order system&quot;</font>;
+  Real B[2,1] <font color="darkgreen">&quot;input matrix of partial 2nd order system&quot;</font>;
+  Real C[1,2] <font color="darkgreen">&quot;output matrix of partial 2nd order system&quot;</font>;
+  Real D[1,1] <font color="darkgreen">&quot;feedthrough matrix of partial 2nd order system&quot;</font>;
+  Real a <font color="darkgreen">&quot;system &#39;matrix&#39; of partial 1st order system&quot;</font>;
+  Real b <font color="darkgreen">&quot;input &#39;matrix&#39; of partial 1st order system&quot;</font>;
+  Real c <font color="darkgreen">&quot;output &#39;matrix&#39; of partial 1st order system&quot;</font>;
+  Real d <font color="darkgreen">&quot;feedthrough &#39;matrix&#39; of partial 1st order system&quot;</font>;
+  Integer nx=<font color="red">ZerosAndPoles.Analysis.denominatorDegree</font>(zp);
+  Integer n_num1=<font color="red">size</font>(zp.n1, 1);
+  Integer n_num2=<font color="red">size</font>(zp.n2, 1);
+  Integer n_den1=<font color="red">size</font>(zp.d1, 1);
+  Integer n_den2=<font color="red">size</font>(zp.d2, 1);
+  Integer n_num=n_num1 + 2*n_num2;
+  Integer n_den=n_den1 + 2*n_den2;
+
+  Integer i_d=<font color="blue">if </font>n_num2 &gt; n_den2<font color="blue"> then </font>2*(n_num2 - n_den2) + 1<font color="blue"> else </font>1;
+  Integer i_k=<font color="blue">if </font>n_num2 &gt; n_den2<font color="blue"> then </font>n_den2 - (n_num2 - n_den2)<font color="blue"> else </font>n_den2;
+  Integer i;
+  Integer ili;
+  Real num[nx,2]=[zp.n2; [zp.n1,<font color="red">zeros</font>(n_num1)];<font color="red"> zeros</font>(nx - n_num2 - n_num1, 2)] <font color="darkgreen">
+    &quot;Numerator matrix, in order that indices are defined in all situations in all if clauses&quot;</font>;
+  Real den[nx,2]=[zp.d2; [zp.d1,<font color="red">zeros</font>(n_den1)];<font color="red"> zeros</font>(nx - n_den2 - n_den1, 2)] <font color="darkgreen">
+    &quot;Denominator matrix, in order that indices are defined in all situations in all if clauses&quot;</font>;
+  Real k[i_k + n_den1](<font color="blue">each </font>fixed=false) <font color="darkgreen">
+    &quot;Additional factors of the first and second order blocks, in order that the gain of the blocks is 1&quot;</font>;
+  Real k_total;
+
+  Boolean dZero=true;
+
+ <font color="darkgreen">//ZerosAndPoles zp2;</font>
+
+<font color="blue">algorithm </font>
+  <font color="red">assert</font>(n_num &lt;= n_den,
+    &quot;ZerosAndPoles transfer function is not proper as required from StateSpace system:\n&quot;
+     + &quot;  numerator degree (= &quot; +<font color="red"> String</font>(n_num) +
+    &quot;) &lt;= denominator degree (= &quot; +<font color="red"> String</font>(n_den) + &quot;) required.&quot;);
+
+  <font color="blue">if </font>n_den &gt; 0<font color="blue"> then</font>
+
+    <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">max</font>(n_den2, n_num2)<font color="blue"> loop</font>
+      <font color="darkgreen">// State space systems of order 2</font>
+      <font color="blue">if </font>i &lt;= n_den2<font color="blue"> then</font>
+        <font color="blue">if </font>i &lt;= n_num2<font color="blue"> then</font>
+          <font color="darkgreen">  // State space system in form (1)</font>
+          k[i] :=<font color="red"> Internal.scaleFactor2</font>(
+              num[i, 1],
+              num[i, 2],
+              den[i, 1],
+              den[i, 2]);
+        <font color="blue">elseif </font>i - n_num2 + 1 &lt;= n_num1<font color="blue"> then</font>
+          <font color="darkgreen">  // State space system in form (1) with 2 first order numerator polynomials</font>
+          k[i] :=<font color="red"> Internal.scaleFactor2</font>(
+              num[i, 1] + num[i + 1, 1],
+              num[i, 1]*num[i + 1, 1],
+              den[i, 1],
+              den[i, 2]);
+        <font color="blue">elseif </font>i - n_num2 == n_num1<font color="blue"> then</font>
+          <font color="darkgreen">  // State space system in form (2) with 1 first order numerator polynomial</font>
+          k[i] :=<font color="red"> Internal.scaleFactor2</font>(
+              0,
+              num[i, 1],
+              den[i, 1],
+              den[i, 2]);
+        <font color="blue">else</font>
+          <font color="darkgreen">  // State space system in form (3)</font>
+          k[i] :=<font color="red"> Internal.scaleFactor2</font>(
+              0,
+              0,
+              den[i, 1],
+              den[i, 2]);
+        <font color="blue">end if</font>;
+      <font color="blue">else</font>
+        <font color="darkgreen"> // State space system in form (1) with 2 first order denominator polynomials</font>
+        k[i] :=<font color="red"> Internal.scaleFactor2</font>(
+            num[i, 1],
+            num[i, 2],
+            den[i, 1] + den[i + 1, 1],
+            den[i, 1]*den[i + 1, 1]);
+      <font color="blue">end if</font>;
+    <font color="blue">end for</font>;
+
+    <font color="blue">for </font>i<font color="blue"> in </font>i_d:n_den1<font color="blue"> loop</font>
+      <font color="darkgreen">// State space systems of order 1</font>
+      <font color="blue">if </font>n_num2 &lt;= n_den2<font color="blue"> and </font>2*(n_den2 - n_num2) + i &lt;= n_num1<font color="blue"> then</font>
+        <font color="darkgreen"> // State space system in form (4)</font>
+        k[i_k + i] :=<font color="red"> Internal.scaleFactor1</font>(num[<font color="red">max</font>(1, n_num2 + 2*(n_den2 -
+          n_num2) + i), 1], den[n_den2 + i, 1]);
+      <font color="blue">elseif </font>n_num2 &gt; n_den2<font color="blue"> and </font>i - i_d + 1 &lt;= n_num1<font color="blue"> then</font>
+        <font color="darkgreen"> // State space system in form (4)</font>
+        k[i_k + i] :=<font color="red"> Internal.scaleFactor1</font>(num[<font color="red">max</font>(1, n_num2 + i - i_d + 1),
+          1], den[n_den2 + i, 1]);
+      <font color="blue">else</font>
+        <font color="darkgreen"> // State space system in form (5)</font>
+        k[i_k + i] :=<font color="red"> Internal.scaleFactor1</font>(0, den[n_den2 + i, 1]);
+      <font color="blue">end if</font>;
+    <font color="blue">end for</font>;
+
+    k_total := zp.k/<font color="red">product</font>(k);
+
+    ss.A :=<font color="red"> zeros</font>(nx, nx);
+    ss.B :=<font color="red"> zeros</font>(nx, 1);
+    ss.C :=<font color="red"> zeros</font>(1, nx);
+    ss.D :=<font color="red"> zeros</font>(1, 1);
+
+ <font color="darkgreen">// Calculation of matrices A, B, C, D</font>
+ <font color="darkgreen">//first elements of A, B, C and D</font>
+
+    <font color="blue">if </font><font color="red">max</font>(n_den2, n_num2) &gt; 0<font color="blue"> then</font>
+      ili := i_d;
+      A[1, :] := {0,1};
+      B[1, 1] := 0;
+      <font color="darkgreen">    // Construct state space systems of order 2</font>
+      <font color="blue">if </font>1 &lt;= n_den2<font color="blue"> then</font>
+        A[2, :] := {-den[1, 2],-den[1, 1]};
+        B[2, 1] := den[1, 2];
+        <font color="blue">if </font>1 &lt;= n_num2<font color="blue"> then</font>
+          <font color="darkgreen">     // State space system in form (1)</font>
+          C := k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]]/den[1, 2];
+          D := [k[1]];
+          dZero := false;
+
+        <font color="blue">elseif </font>1 - n_num2 + 1 &lt;= n_num1<font color="blue"> then</font>
+          <font color="darkgreen">     // State space system in form (1) with 2 first order numerator polynomials</font>
+
+          C := k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]]/den[1, 2];
+          D := [k[1]];
+          dZero := false;
+        <font color="blue">elseif </font>1 - n_num2 == n_num1<font color="blue"> then</font>
+          <font color="darkgreen">     // State space system in form (2) with 1 first order numerator polynomial</font>
+
+          C := k[1]*[num[1, 1],1]/den[1, 2];
+          D := [0];
+          dZero := dZero<font color="blue"> and </font>true;
+        <font color="blue">else</font>
+          <font color="darkgreen">     // State space system in form (3)</font>
+
+          C := k[1]*[1,0]/den[1, 2];
+          D := [0];
+          dZero := dZero<font color="blue"> and </font>true;
+        <font color="blue">end if</font>;
+      <font color="blue">else</font>
+        <font color="darkgreen">    // State space system in form (1) with 2 first order denominator polynomials</font>
+
+        A[2, :] := {-(den[1, 1]*den[2, 1]),-(den[1, 1] + den[2, 1])};
+        B[2, 1] := den[1, 1]*den[1, 1];
+
+        C := k[1]*[num[1, 2] - (den[1, 1]*den[2, 1]),num[1, 1] - (den[1, 1] + den[2, 1])]/den[1, 1]
+          /den[1, 1];
+        D := [k[1]];
+        dZero := false;
+      <font color="blue">end if</font>;
+      ss.A[1:2, 1:2] := A;
+      ss.B[1:2, 1] :=<font color="red"> vector</font>(B);
+      ss.C[1, 1:2] :=<font color="red"> vector</font>(C);
+      ss.D := D;
+
+    <font color="blue">else</font>
+      ili :=<font color="red"> max</font>(2, i_d);
+   <font color="darkgreen">// Construct state space systems of order 1</font>
+      a := -den[1, 1];
+      b := den[1, 1];
+
+      <font color="blue">if </font>1 &lt;= n_num1<font color="blue"> then</font>
+        <font color="darkgreen">    // State space system in form (4)</font>
+        c := k[1]*(num[1, 1] - den[1, 1])/den[1, 1];
+        d := k[1];
+        dZero := false;
+      <font color="blue">else</font>
+        <font color="darkgreen">    // State space system in form (5)</font>
+        c := k[1]/den[1, 1];
+        d := 0;
+        dZero := dZero<font color="blue"> and </font>true;
+      <font color="blue">end if</font>;
+      ss.A[1, 1] := a;
+      ss.B[1, 1] := b;
+      ss.C[1, 1] := c;
+      ss.D[1, 1] := d;
+
+    <font color="blue">end if</font>;
+
+ <font color="darkgreen">/// for i=2 to degree(system)</font>
+    A[1, :] := {0,1};
+    B[1, 1] := 0;
+
+    <font color="blue">for </font>i<font color="blue"> in </font>2:<font color="red">max</font>(n_den2, n_num2)<font color="blue"> loop</font>
+      <font color="darkgreen">   // Construct state space systems of order 2</font>
+      <font color="blue">if </font>i &lt;= n_den2<font color="blue"> then</font>
+        A[2, :] := {-den[i, 2],-den[i, 1]};
+        B[2, 1] := den[i, 2];
+
+        <font color="blue">if </font>i &lt;= n_num2<font color="blue"> then</font>
+          <font color="darkgreen">     // State space system in form (1)</font>
+
+          C := k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]]/den[i, 2];
+          D := [k[i]];
+          dZero := false;
+
+        <font color="blue">elseif </font>i - n_num2 + 1 &lt;= n_num1<font color="blue"> then</font>
+          <font color="darkgreen">     // State space system in form (1) with 2 first order numerator polynomials</font>
+          C := k[i]*[num[i, 1]*num[i + 1, 1] - den[i, 2],num[i, 1] + num[i + 1, 1] - den[i, 1]]/den[
+            i, 2];
+          D := [k[i]];
+          dZero := false;
+
+        <font color="blue">elseif </font>i - n_num2 == n_num1<font color="blue"> then</font>
+          <font color="darkgreen">     // State space system in form (2) with 1 first order numerator polynomial</font>
+          C := k[i]*[num[i, 1],1]/den[i, 2];
+          D := [0];
+          dZero := dZero<font color="blue"> and </font>true;
+
+        <font color="blue">else</font>
+          <font color="darkgreen">     // State space system in form (3)</font>
+          C := k[i]*[1,0]/den[i, 2];
+          D := [0];
+          dZero := dZero<font color="blue"> and </font>true;
+
+        <font color="blue">end if</font>;
+
+      <font color="blue">else</font>
+        <font color="darkgreen">    // State space system in form (1) with 2 first order denominator polynomials</font>
+        A[2, :] := {-(den[i, 1]*den[i + 1, 1]),-(den[i, 1] + den[i + 1, 1])};
+        B[2, 1] := den[i, 1]*den[i, 1];
+
+        C := k[i]*[num[i, 2] - (den[i, 1]*den[i + 1, 1]),num[i, 1] - (den[i, 1] + den[i + 1, 1])]/
+          den[i, 1]/den[i, 1];
+        D := [k[i]];
+        dZero := false;
+      <font color="blue">end if</font>;
+
+      ss.A[2*i, 1:2*i - 2] := B[2, 1]*ss.C[1, 1:2*i - 2];
+      ss.A[2*i - 1:2*i, 2*i - 1:2*i] := A;
+      ss.B[2*i, 1] := <font color="blue">if </font>dZero<font color="blue"> then </font>0<font color="blue"> else </font>B[2, 1]*ss.D[1, 1];
+      ss.C[1, 1:2*i - 2] := <font color="blue">if </font>dZero<font color="blue"> then </font><font color="red">fill</font>(0, 2*i - 2)<font color="blue"> else </font>D[1, 1]*ss.C[
+        1, 1:2*i - 2];
+      ss.C[1, 2*i - 1:2*i] :=<font color="red"> vector</font>(C);
+      ss.D := D*ss.D;
+    <font color="blue">end for</font>;
+
+ <font color="darkgreen">//  for i in max(2,i_d):n_den1 loop</font>
+
+    <font color="blue">for </font>i<font color="blue"> in </font>ili:n_den1<font color="blue"> loop</font>
+      <font color="darkgreen">   // Construct state space systems of order 1</font>
+      a := <font color="blue">if </font><font color="red">abs</font>(den[n_den2 + i, 1])&gt;Modelica.Constants.eps<font color="blue"> then </font>-den[n_den2 + i, 1]<font color="blue"> else </font>0.0;
+      b := <font color="blue">if </font><font color="red">abs</font>(den[n_den2 + i, 1])&gt;Modelica.Constants.eps<font color="blue"> then </font>den[n_den2 + i, 1]<font color="blue"> else </font>1.0;
+      <font color="blue">if </font>n_num2 &lt;= n_den2<font color="blue"> and </font>2*(n_den2 - n_num2) + i &lt;= n_num1<font color="blue"> then</font>
+        <font color="darkgreen">    // State space system in form (4)</font>
+
+        c := <font color="blue">if </font><font color="red">abs</font>(den[n_den2 + i, 1])&gt;Modelica.Constants.eps<font color="blue"> then </font>k[i_k + i]*(num[<font color="red">max</font>(1, n_num2 + 2*(n_den2 - n_num2) + i), 1] -  den[n_den2 + i, 1])/den[n_den2 + i, 1]<font color="blue"> else </font>1.0;
+
+        d := k[i_k + i];
+
+        dZero := false;
+      <font color="blue">elseif </font>n_num2 &gt; n_den2<font color="blue"> and </font>i - i_d + 1 &lt;= n_num1<font color="blue"> then</font>
+        <font color="darkgreen">    // State space system in form (4)</font>
+
+        c := <font color="blue">if </font><font color="red">abs</font>(den[n_den2 + i, 1])&gt;Modelica.Constants.eps<font color="blue"> then </font>k[i_k + i]*(num[<font color="red">max</font>(1, n_num2 + i - i_d + 1), 1] - den[n_den2 + i, 1])/den[n_den2 + i, 1]<font color="blue"> else </font>1.0;
+        d := k[i_k + i];
+        dZero := false;
+      <font color="blue">else</font>
+
+        <font color="darkgreen">    // State space system in form (5)</font>
+
+        c := k[i_k + i]/den[n_den2 + i, 1];
+        d := 0;
+        dZero := dZero<font color="blue"> and </font>true;
+      <font color="blue">end if</font>;
+
+      ss.A[2*n_den2 + i, 1:2*n_den2 + i - 1] := b*ss.C[1, 1:2*n_den2 + i - 1];
+      ss.A[2*n_den2 + i, 2*n_den2 + i] := a;
+      ss.B[2*n_den2 + i, 1] := <font color="blue">if </font>dZero<font color="blue"> then </font>0<font color="blue"> else </font>b*ss.D[1, 1];
+      ss.C[1, 1:2*n_den2 + i - 1] := <font color="blue">if </font>dZero<font color="blue"> then </font><font color="red">fill</font>(0, 2*n_den2 + i - 1)<font color="blue"> else </font>
+              d*ss.C[1, 1:2*n_den2 + i - 1];
+      ss.C[1, 2*n_den2 + i] := c;
+      ss.D := <font color="blue">if </font>dZero<font color="blue"> then </font>[0]<font color="blue"> else </font>d*ss.D;
+
+    <font color="blue">end for</font>;
+    ss.C := k_total*ss.C;
+    ss.D := k_total*ss.D;
+  <font color="blue">else</font>
+    ss :=<font color="red"> Modelica_LinearSystems2.StateSpace</font>(zp.k);
+  <font color="blue">end if</font>;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>toStateSpace;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE toMatrices<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.ZerosAndPoles.Conversion.toMatrices"></A><A HREF="Modelica_LinearSystems2_Conversion.html#Modelica_LinearSystems2.ZerosAndPoles.Conversion"
+>Modelica_LinearSystems2.ZerosAndPoles.Conversion</A>.toMatrices</H2>
+<B>Convert a ZerosAndPoles object into the matrices A, B, C of a StateSpace</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4><font color="#008000">Syntax</font></h4>
+<table>
+<tr> <td align=right>  ABCD </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
+</table>
+<h4><font color="#008000">Description</font></h4>
+<p>
+This function transforms a zeros-poles-gain system representation into state space representation.
+To achieve well numerical condition the ZerosAndPoles transfer function is transformed into state space
+form by creating first and second order blocks that are connected
+together in series. Every block is represented in controller
+canonical form and scaled such that the gain from the input
+of this block to its output is one (i.e. y(p=0) = u(p=0)),
+if this is possible. Details are given below.
+</p>
+<b>Algorithmic details</b>
+<p>
+The ZerosAndPoles transfer function is defined as:
+<blockquote><pre>
+         product(p + n1[i]) * product(p^2 + n2[i,1]*p + n2[i,2])
+  y = k*--------------------------------------------------------- * u
+         product(p + d1[i]) * product(p^2 + d2[i,1]*p + d2[i,2])
+</pre></blockquote>
+<p>
+This is treated as a series connection of first and second order
+systems. If size(n1) == size(d1) and size(n2) == size(d2)
+this gives the following sequence of operations:
+</p>
+<blockquote><pre>
+
+        p^2 + n2[1,1]*p + n2[1,2]
+  y_1 = ------------------------- * u
+        p^2 + d2[1,1]*p + d2[1,2]
+&nbsp;
+        p^2 + n2[2,1]*p + n2[2,2]
+  y_2 = ------------------------- * y_1
+        p^2 + d2[2,1]*p + d2[2,2]
+&nbsp;
+     ...
+&nbsp;
+        p + n1[..]
+  y_n = ---------- * y_(n-1)
+        p + d1[..]
+&nbsp;
+    y = k*y_n
+
+</pre></blockquote>
+
+Based on this representation, evrey block with transfer function G(p) could be transformed into
+<blockquote><pre>
+  G(p) = k * F(p)
+
+</pre>
+with F(p) has unit gain. This leads to representations of the forms
+</pre></blockquote>
+<p>
+<blockquote><pre>
+
+           a2 + a1*p + p^2       a2      b2 + a1*b2/a2*p + b2/a2*p^2
+  G(p) = -------------------- = ---- * ------------------------------ = k * F(p),  k = a2/b2  (1)
+
+           b2 + b1*p + p^2       b2           b2 + b1*p + p^2
+&nbsp;
+for second order systems and
+&nbsp;
+           a + p     a     b + b/a*p
+  G(p) = -------- = --- * ---------- = k * F(p),   k = a/b
+
+           b + p     b      b + p
+</p>
+</pre></blockquote>
+for first order systems respectively.
+
+<p>
+The complete system is now considered as the series connections of all the single unit gain transfer functions and an overall gain k with
+<blockquote><pre>
+  k = product(ki).
+
+</pre></blockquote>
+</p>
+
+
+In the general case, the following system structures
+and the corresponding state space systems can appear
+(note, 'c' is the reciprocal local gain 1/k):
+</p>
+<blockquote><pre>
+(1)
+          a2 + a1*p + p^2           der(x1) = x2
+    y = ---------------------  -->  der(x2) = -b2*x1 - b1*x2 + b2*u
+          b2 + b1*p + p^2                 y = c*((a2-b2)*x1 + (a1-b1)*x2 + u),  c = b2/a2
+&nbsp;
+(2)
+             p + a                 der(x1) = x2
+    y = ---------------- * u  -->  der(x2) = -b2*x1 - b1*x2 + b2*u
+        b2 + b1*p + p^2                  y = k*(a1/b2*x1 +x2/b2),  c = b2/a
+&nbsp;
+(3)
+               1                  der(x1) = x2
+    y = --------------- *u   -->  der(x2) = -b2*x1 - b1*x2 + b2*u
+        b2 + b1*p + p^2                 y = c*x1/b2,  c = b2
+&nbsp;
+(4)
+       a + p                       der(x) = -b*x + b*u
+   y = ----- * u             -->        y = c*((a-b)/b*x + u),  c = b/a
+       b + p
+&nbsp;
+(5)
+         1
+   y = ----- * u             -->   der(x) = -b*x + b*u
+       b + p                            y = x,  c = b
+
+</pre></blockquote>
+
+If the sizes of the numerator and denominator polynomials
+do not match, the small systems are built in the
+following way:
+</p>
+<blockquote><pre>
+(1) Build systems of form (1) by combining
+    - 1 d2 and 1 n2
+      (= 1 second order denominator and 1 second order numerator) or
+    - 1 d2 and 2 n1 or
+    - 2 d1 and 1 n2
+(2) Build at most one system of form (2) by combining
+    - 1 d2 and 1 n2
+(3) Build systems of form (3) by
+    - 1 d2
+(4) Build systems of form (4) by combining
+    - 1 d1 and 1 n1
+(5) Build systems of form (5) by
+    - 1 d1
+</pre></blockquote>
+<p>
+The numeric properties of the resulting state space system
+depends on which first and second order polynomials are
+combined and connected together. From a numerical point of view, it
+would therefore be useful to combine the polynomials
+based on the numeric values of the polynomial coefficients,
+(e.g., in a first step the polynomials could be sorted
+according to their cut-off frequency).
+</p>
+<p>
+However, this has the disadvantage that the structure of the
+resulting state space system depends on the numeric
+values of the polynomial coefficients. Since Modelica
+environments perform symbolic pre-processing on equations,
+this would mean that a change of a polynomial coefficient
+requires to newly compile the state space system.
+</p>
+<p>
+If, on the other hand, the structure of the state
+space system depends only on dimension information
+of the n1,n2,d1,d2 arrays, then the polynomial coefficients
+can be changed without a new translation of the model.
+This is the major reason why the structure of the
+state space system in the implementation of this block
+is based only on dimension information.
+</p>
+<p>
+This is, e.g., not critical for the provided filters:
+The dimension of the n1,n2,d1,d2 arrays depend for
+filters only on the filter characteristics
+(Bessel, Butterworth etc.), the filter type (low pass,
+high pass etc.) and on the filter order. If any
+of this data is changed, the model has to be
+newly compiled. All the other filter data, such as
+cut-off frequency or ripple amplitude, can be changed
+without re-compilation of the model.
+The ZerosAndPoles transfer function is now constructed
+for the filters in such a way that the filter zeros
+and poles are appropriately sorted to give better
+numerical properties.
+</p>
+<p>
+Another alternative implementation of the state
+space system would be to use the function controller canonical
+form that directly results from the transfer function.
+The severe disadvantage
+of this approach is that the structure of the state
+space system from above is lost for the symbolic preprocessing.
+If, e.g., index reduction has to be applied (e.g. since a
+filter is used to realize a non-linear inverse model),
+then the tool cannot perform the index reduction.
+Example:
+</p>
+<p>
+Assume, a generic first order state space system
+is present
+</p>
+<blockquote><pre>
+   <b>der</b>(x) = a*x + b*u
+        y = c*x + d*u
+</pre></blockquote>
+<p>
+and the values of the scalars a,b,c,d are parameters
+that might be changed before the simulation starts.
+If y has to be differentiated symbolically during code
+generation, then
+</p>
+<blockquote><pre>
+      <b>der</b>(y) = c*<b>der</b>(x) + d*<b>der</b>(u)
+      <b>der</b>(x) = a*x + b*u
+</pre></blockquote>
+<p>
+As a result, u needs to be differentiated too, and this
+might not be possible and therefore translation might fail.
+</p>
+<p>
+On the other hand, if the first order system is
+defined to be a low pass filter and the state space
+system is generated by keeping this structure, we have
+(see form (5) above):
+</p>
+<blockquote><pre>
+  <b>der</b>(x) = -b*x + u
+        y = x
+</pre></blockquote>
+<p>
+Differentiating y symbolically leads to:
+</p>
+<blockquote><pre>
+     <b>der</b>(y) = <b>der</b>(x)
+     <b>der</b>(x) = -b*x + u
+</pre></blockquote>
+<p>
+Therefore, in this case, the derivative of u is not
+needed and the tool can continue with the symbolic
+processing.
+</p>
+ 
+
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
+   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + p +1);
+
+<b>algorithm</b>
+  ABCD := Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace(zp);
+// ssA = [0, 1; -1, -1],
+// ssB = [0; 1],
+// ssC = [1, 1],
+// ssD = [0],
+
+</pre></blockquote>
+
+<pre> </PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A></TD><TD>zp</TD><TD>&nbsp;</TD><TD>ZerosAndPoles transfer function of a system</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>ABCD[ZerosAndPoles.Analysis.denominatorDegree(zp) + 1, ZerosAndPoles.Analysis.denominatorDegree(zp) + 1]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> toMatrices <font color="darkgreen">
+  &quot;Convert a ZerosAndPoles object into the matrices A, B, C of a StateSpace&quot;</font>
+ <font color="darkgreen">//encapsulated function fromZerosAndPoles</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.StateSpace.Internal"
+>Modelica_LinearSystems2.StateSpace.Internal</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp <font color="darkgreen">&quot;ZerosAndPoles transfer function of a system&quot;</font>;
+  <font color="blue">output </font>Real ABCD[<font color="red">ZerosAndPoles.Analysis.denominatorDegree</font>(zp)+1,
+      <font color="red">ZerosAndPoles.Analysis.denominatorDegree</font>(zp)+1];
+
+<font color="blue">protected </font>
+  Real ssA[<font color="red">ZerosAndPoles.Analysis.denominatorDegree</font>(zp),<font color="red">ZerosAndPoles.Analysis.denominatorDegree</font>(zp)] <font color="darkgreen">
+    &quot;system matrix of partial 2nd order system&quot;</font>;
+  Real ssB[<font color="red">ZerosAndPoles.Analysis.denominatorDegree</font>(zp),1] <font color="darkgreen">
+    &quot;input matrix of partial 2nd order system&quot;</font>;
+  Real ssC[1,<font color="red">ZerosAndPoles.Analysis.denominatorDegree</font>(zp)] <font color="darkgreen">
+    &quot;output matrix of partial 2nd order system&quot;</font>;
+  Real ssD[1,1] <font color="darkgreen">&quot;feedthrough matrix of partial 2nd order system&quot;</font>;
+
+  Real A[2,2] <font color="darkgreen">&quot;system matrix of partial 2nd order system&quot;</font>;
+  Real B[2,1] <font color="darkgreen">&quot;input matrix of partial 2nd order system&quot;</font>;
+  Real C[1,2] <font color="darkgreen">&quot;output matrix of partial 2nd order system&quot;</font>;
+  Real D[1,1] <font color="darkgreen">&quot;feedthrough matrix of partial 2nd order system&quot;</font>;
+  Real a <font color="darkgreen">&quot;system &#39;matrix&#39; of partial 1st order system&quot;</font>;
+  Real b <font color="darkgreen">&quot;input &#39;matrix&#39; of partial 1st order system&quot;</font>;
+  Real c <font color="darkgreen">&quot;output &#39;matrix&#39; of partial 1st order system&quot;</font>;
+  Real d <font color="darkgreen">&quot;feedthrough &#39;matrix&#39; of partial 1st order system&quot;</font>;
+  Integer nx=<font color="red">ZerosAndPoles.Analysis.denominatorDegree</font>(zp);
+  Integer n_num1=<font color="red">size</font>(zp.n1, 1);
+  Integer n_num2=<font color="red">size</font>(zp.n2, 1);
+  Integer n_den1=<font color="red">size</font>(zp.d1, 1);
+  Integer n_den2=<font color="red">size</font>(zp.d2, 1);
+  Integer n_num=n_num1 + 2*n_num2;
+  Integer n_den=n_den1 + 2*n_den2;
+
+  Integer i_d=<font color="blue">if </font>n_num2 &gt; n_den2<font color="blue"> then </font>2*(n_num2 - n_den2) + 1<font color="blue"> else </font>1;
+  Integer i_k=<font color="blue">if </font>n_num2 &gt; n_den2<font color="blue"> then </font>n_den2 - (n_num2 - n_den2)<font color="blue"> else </font>n_den2;
+  Integer i;
+  Integer ili;
+  Real num[nx,2]=[zp.n2; [zp.n1,<font color="red">zeros</font>(n_num1)];<font color="red"> zeros</font>(nx - n_num2 - n_num1, 2)] <font color="darkgreen">
+    &quot;Numerator matrix, in order that indices are defined in all situations in all if clauses&quot;</font>;
+  Real den[nx,2]=[zp.d2; [zp.d1,<font color="red">zeros</font>(n_den1)];<font color="red"> zeros</font>(nx - n_den2 - n_den1, 2)] <font color="darkgreen">
+    &quot;Denominator matrix, in order that indices are defined in all situations in all if clauses&quot;</font>;
+  Real k[i_k + n_den1](<font color="blue">each </font>fixed=false) <font color="darkgreen">
+    &quot;Additional factors of the first and second order blocks, in order that the gain of the blocks is 1&quot;</font>;
+  Real k_total;
+
+  Boolean dZero=true;
+
+ <font color="darkgreen">//ZerosAndPoles zp2;</font>
+
+<font color="blue">algorithm </font>
+  <font color="red">assert</font>(n_num &lt;= n_den,
+    &quot;ZerosAndPoles transfer function is not proper as required from StateSpace system:\n&quot;
+     + &quot;  numerator degree (= &quot; +<font color="red"> String</font>(n_num) +
+    &quot;) &lt;= denominator degree (= &quot; +<font color="red"> String</font>(n_den) + &quot;) required.&quot;);
+
+  <font color="blue">if </font>n_den &gt; 0<font color="blue"> then</font>
+
+    <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">max</font>(n_den2, n_num2)<font color="blue"> loop</font>
+      <font color="darkgreen">// State space systems of order 2</font>
+      <font color="blue">if </font>i &lt;= n_den2<font color="blue"> then</font>
+        <font color="blue">if </font>i &lt;= n_num2<font color="blue"> then</font>
+          <font color="darkgreen">  // State space system in form (1)</font>
+          k[i] :=<font color="red"> Internal.scaleFactor2</font>(
+              num[i, 1],
+              num[i, 2],
+              den[i, 1],
+              den[i, 2]);
+        <font color="blue">elseif </font>i - n_num2 + 1 &lt;= n_num1<font color="blue"> then</font>
+          <font color="darkgreen">  // State space system in form (1) with 2 first order numerator polynomials</font>
+          k[i] :=<font color="red"> Internal.scaleFactor2</font>(
+              num[i, 1] + num[i + 1, 1],
+              num[i, 1]*num[i + 1, 1],
+              den[i, 1],
+              den[i, 2]);
+        <font color="blue">elseif </font>i - n_num2 == n_num1<font color="blue"> then</font>
+          <font color="darkgreen">  // State space system in form (2) with 1 first order numerator polynomial</font>
+          k[i] :=<font color="red"> Internal.scaleFactor2</font>(
+              0,
+              num[i, 1],
+              den[i, 1],
+              den[i, 2]);
+        <font color="blue">else</font>
+          <font color="darkgreen">  // State space system in form (3)</font>
+          k[i] :=<font color="red"> Internal.scaleFactor2</font>(
+              0,
+              0,
+              den[i, 1],
+              den[i, 2]);
+        <font color="blue">end if</font>;
+      <font color="blue">else</font>
+        <font color="darkgreen"> // State space system in form (1) with 2 first order denominator polynomials</font>
+        k[i] :=<font color="red"> Internal.scaleFactor2</font>(
+            num[i, 1],
+            num[i, 2],
+            den[i, 1] + den[i + 1, 1],
+            den[i, 1]*den[i + 1, 1]);
+      <font color="blue">end if</font>;
+    <font color="blue">end for</font>;
+
+    <font color="blue">for </font>i<font color="blue"> in </font>i_d:n_den1<font color="blue"> loop</font>
+      <font color="darkgreen">// State space systems of order 1</font>
+      <font color="blue">if </font>n_num2 &lt;= n_den2<font color="blue"> and </font>2*(n_den2 - n_num2) + i &lt;= n_num1<font color="blue"> then</font>
+        <font color="darkgreen"> // State space system in form (4)</font>
+        k[i_k + i] :=<font color="red"> Internal.scaleFactor1</font>(num[<font color="red">max</font>(1, n_num2 + 2*(n_den2 -
+          n_num2) + i), 1], den[n_den2 + i, 1]);
+      <font color="blue">elseif </font>n_num2 &gt; n_den2<font color="blue"> and </font>i - i_d + 1 &lt;= n_num1<font color="blue"> then</font>
+        <font color="darkgreen"> // State space system in form (4)</font>
+        k[i_k + i] :=<font color="red"> Internal.scaleFactor1</font>(num[<font color="red">max</font>(1, n_num2 + i - i_d + 1),
+          1], den[n_den2 + i, 1]);
+      <font color="blue">else</font>
+        <font color="darkgreen"> // State space system in form (5)</font>
+        k[i_k + i] :=<font color="red"> Internal.scaleFactor1</font>(0, den[n_den2 + i, 1]);
+      <font color="blue">end if</font>;
+    <font color="blue">end for</font>;
+
+    k_total := zp.k/<font color="red">product</font>(k);
+
+    ssA :=<font color="red"> zeros</font>(nx, nx);
+    ssB :=<font color="red"> zeros</font>(nx, 1);
+    ssC :=<font color="red"> zeros</font>(1, nx);
+    ssD :=<font color="red"> zeros</font>(1, 1);
+
+ <font color="darkgreen">// Calculation of matrices A, B, C, D</font>
+ <font color="darkgreen">//first elements of A, B, C and D</font>
+
+    <font color="blue">if </font><font color="red">max</font>(n_den2, n_num2) &gt; 0<font color="blue"> then</font>
+      ili := i_d;
+      A[1, :] := {0,1};
+      B[1, 1] := 0;
+      <font color="darkgreen">    // Construct state space systems of order 2</font>
+      <font color="blue">if </font>1 &lt;= n_den2<font color="blue"> then</font>
+        A[2, :] := {-den[1, 2],-den[1, 1]};
+        B[2, 1] := den[1, 2];
+        <font color="blue">if </font>1 &lt;= n_num2<font color="blue"> then</font>
+          <font color="darkgreen">     // State space system in form (1)</font>
+          C := k[1]*[num[1, 2] - den[1, 2],num[1, 1] - den[1, 1]]/den[1, 2];
+          D := [k[1]];
+          dZero := false;
+
+        <font color="blue">elseif </font>1 - n_num2 + 1 &lt;= n_num1<font color="blue"> then</font>
+          <font color="darkgreen">     // State space system in form (1) with 2 first order numerator polynomials</font>
+
+          C := k[1]*[num[1, 1]*num[2, 1] - den[1, 2],num[1, 1] + num[2, 1] - den[1, 1]]/den[1, 2];
+          D := [k[1]];
+          dZero := false;
+        <font color="blue">elseif </font>1 - n_num2 == n_num1<font color="blue"> then</font>
+          <font color="darkgreen">     // State space system in form (2) with 1 first order numerator polynomial</font>
+
+          C := k[1]*[num[1, 1],1]/den[1, 2];
+          D := [0];
+          dZero := dZero<font color="blue"> and </font>true;
+        <font color="blue">else</font>
+          <font color="darkgreen">     // State space system in form (3)</font>
+
+          C := k[1]*[1,0]/den[1, 2];
+          D := [0];
+          dZero := dZero<font color="blue"> and </font>true;
+        <font color="blue">end if</font>;
+      <font color="blue">else</font>
+        <font color="darkgreen">    // State space system in form (1) with 2 first order denominator polynomials</font>
+
+        A[2, :] := {-(den[1, 1]*den[2, 1]),-(den[1, 1] + den[2, 1])};
+        B[2, 1] := den[1, 1]*den[1, 1];
+
+        C := k[1]*[num[1, 2] - (den[1, 1]*den[2, 1]),num[1, 1] - (den[1, 1] + den[2, 1])]/den[1, 1]
+          /den[1, 1];
+        D := [k[1]];
+        dZero := false;
+      <font color="blue">end if</font>;
+      ssA[1:2, 1:2] := A;
+      ssB[1:2, 1] :=<font color="red"> vector</font>(B);
+      ssC[1, 1:2] :=<font color="red"> vector</font>(C);
+      ssD := D;
+
+    <font color="blue">else</font>
+      ili :=<font color="red"> max</font>(2, i_d);
+   <font color="darkgreen">// Construct state space systems of order 1</font>
+      a := -den[1, 1];
+      b := den[1, 1];
+
+      <font color="blue">if </font>1 &lt;= n_num1<font color="blue"> then</font>
+        <font color="darkgreen">    // State space system in form (4)</font>
+        c := k[1]*(num[1, 1] - den[1, 1])/den[1, 1];
+        d := k[1];
+        dZero := false;
+      <font color="blue">else</font>
+        <font color="darkgreen">    // State space system in form (5)</font>
+        c := k[1]/den[1, 1];
+        d := 0;
+        dZero := dZero<font color="blue"> and </font>true;
+      <font color="blue">end if</font>;
+      ssA[1, 1] := a;
+      ssB[1, 1] := b;
+      ssC[1, 1] := c;
+      ssD[1, 1] := d;
+
+    <font color="blue">end if</font>;
+
+ <font color="darkgreen">/// for i=2 to degree(system)</font>
+    A[1, :] := {0,1};
+    B[1, 1] := 0;
+
+    <font color="blue">for </font>i<font color="blue"> in </font>2:<font color="red">max</font>(n_den2, n_num2)<font color="blue"> loop</font>
+      <font color="darkgreen">   // Construct state space systems of order 2</font>
+      <font color="blue">if </font>i &lt;= n_den2<font color="blue"> then</font>
+        A[2, :] := {-den[i, 2],-den[i, 1]};
+        B[2, 1] := den[i, 2];
+
+        <font color="blue">if </font>i &lt;= n_num2<font color="blue"> then</font>
+          <font color="darkgreen">     // State space system in form (1)</font>
+
+          C := k[i]*[num[i, 2] - den[i, 2],num[i, 1] - den[i, 1]]/den[i, 2];
+          D := [k[i]];
+          dZero := false;
+
+        <font color="blue">elseif </font>i - n_num2 + 1 &lt;= n_num1<font color="blue"> then</font>
+          <font color="darkgreen">     // State space system in form (1) with 2 first order numerator polynomials</font>
+          C := k[i]*[num[i, 1]*num[i + 1, 1] - den[i, 2],num[i, 1] + num[i + 1, 1] - den[i, 1]]/den[
+            i, 2];
+          D := [k[i]];
+          dZero := false;
+
+        <font color="blue">elseif </font>i - n_num2 == n_num1<font color="blue"> then</font>
+          <font color="darkgreen">     // State space system in form (2) with 1 first order numerator polynomial</font>
+          C := k[i]*[num[i, 1],1]/den[i, 2];
+          D := [0];
+          dZero := dZero<font color="blue"> and </font>true;
+
+        <font color="blue">else</font>
+          <font color="darkgreen">     // State space system in form (3)</font>
+          C := k[i]*[1,0]/den[i, 2];
+          D := [0];
+          dZero := dZero<font color="blue"> and </font>true;
+
+        <font color="blue">end if</font>;
+
+      <font color="blue">else</font>
+        <font color="darkgreen">    // State space system in form (1) with 2 first order denominator polynomials</font>
+        A[2, :] := {-(den[i, 1]*den[i + 1, 1]),-(den[i, 1] + den[i + 1, 1])};
+        B[2, 1] := den[i, 1]*den[i, 1];
+
+        C := k[i]*[num[i, 2] - (den[i, 1]*den[i + 1, 1]),num[i, 1] - (den[i, 1] + den[i + 1, 1])]/
+          den[i, 1]/den[i, 1];
+        D := [k[i]];
+        dZero := false;
+      <font color="blue">end if</font>;
+
+      ssA[2*i, 1:2*i - 2] := B[2, 1]*ssC[1, 1:2*i - 2];
+      ssA[2*i - 1:2*i, 2*i - 1:2*i] := A;
+      ssB[2*i, 1] := <font color="blue">if </font>dZero<font color="blue"> then </font>0<font color="blue"> else </font>B[2, 1]*ssD[1, 1];
+      ssC[1, 1:2*i - 2] := <font color="blue">if </font>dZero<font color="blue"> then </font><font color="red">fill</font>(0, 2*i - 2)<font color="blue"> else </font>D[1, 1]*ssC[
+        1, 1:2*i - 2];
+      ssC[1, 2*i - 1:2*i] :=<font color="red"> vector</font>(C);
+      ssD := D*ssD;
+    <font color="blue">end for</font>;
+
+ <font color="darkgreen">//  for i in max(2,i_d):n_den1 loop</font>
+
+    <font color="blue">for </font>i<font color="blue"> in </font>ili:n_den1<font color="blue"> loop</font>
+      <font color="darkgreen">   // Construct state space systems of order 1</font>
+      a := <font color="blue">if </font><font color="red">abs</font>(den[n_den2 + i, 1])&gt;Modelica.Constants.eps<font color="blue"> then </font>-den[n_den2 + i, 1]<font color="blue"> else </font>0.0;
+      b := <font color="blue">if </font><font color="red">abs</font>(den[n_den2 + i, 1])&gt;Modelica.Constants.eps<font color="blue"> then </font>den[n_den2 + i, 1]<font color="blue"> else </font>1.0;
+      <font color="blue">if </font>n_num2 &lt;= n_den2<font color="blue"> and </font>2*(n_den2 - n_num2) + i &lt;= n_num1<font color="blue"> then</font>
+        <font color="darkgreen">    // State space system in form (4)</font>
+
+        c := <font color="blue">if </font><font color="red">abs</font>(den[n_den2 + i, 1])&gt;Modelica.Constants.eps<font color="blue"> then </font>k[i_k + i]*(num[<font color="red">max</font>(1, n_num2 + 2*(n_den2 - n_num2) + i), 1] -  den[n_den2 + i, 1])/den[n_den2 + i, 1]<font color="blue"> else </font>1.0;
+
+        d := k[i_k + i];
+
+        dZero := false;
+      <font color="blue">elseif </font>n_num2 &gt; n_den2<font color="blue"> and </font>i - i_d + 1 &lt;= n_num1<font color="blue"> then</font>
+        <font color="darkgreen">    // State space system in form (4)</font>
+
+        c := <font color="blue">if </font><font color="red">abs</font>(den[n_den2 + i, 1])&gt;Modelica.Constants.eps<font color="blue"> then </font>k[i_k + i]*(num[<font color="red">max</font>(1, n_num2 + i - i_d + 1), 1] - den[n_den2 + i, 1])/den[n_den2 + i, 1]<font color="blue"> else </font>1.0;
+        d := k[i_k + i];
+        dZero := false;
+      <font color="blue">else</font>
+
+        <font color="darkgreen">    // State space system in form (5)</font>
+
+        c := k[i_k + i]/den[n_den2 + i, 1];
+        d := 0;
+        dZero := dZero<font color="blue"> and </font>true;
+      <font color="blue">end if</font>;
+
+      ssA[2*n_den2 + i, 1:2*n_den2 + i - 1] := b*ssC[1, 1:2*n_den2 + i - 1];
+      ssA[2*n_den2 + i, 2*n_den2 + i] := a;
+      ssB[2*n_den2 + i, 1] := <font color="blue">if </font>dZero<font color="blue"> then </font>0<font color="blue"> else </font>b*ssD[1, 1];
+      ssC[1, 1:2*n_den2 + i - 1] := <font color="blue">if </font>dZero<font color="blue"> then </font><font color="red">fill</font>(0, 2*n_den2 + i - 1)<font color="blue"> else </font>
+              d*ssC[1, 1:2*n_den2 + i - 1];
+      ssC[1, 2*n_den2 + i] := c;
+      ssD := <font color="blue">if </font>dZero<font color="blue"> then </font>[0]<font color="blue"> else </font>d*ssD;
+
+    <font color="blue">end for</font>;
+    ssC := k_total*ssC;
+    ssD := k_total*ssD;
+  <font color="blue">else</font>
+    ABCD := [zp.k];
+  <font color="blue">end if</font>;
+
+  ABCD := [ssA,ssB; ssC,ssD];
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>toMatrices;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:29:06 2010.
+</address></BODY>
+</HTML>

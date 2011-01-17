@@ -16,7 +16,7 @@ model UKF "Unscented Kalman filter"
     Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase
     "Function H() in y_k = H(x_k, u_k, Ts)"                     annotation(choicesAllMatching);
 
-   parameter Real x_est_init[:]={0,0,0,0} "Initial value for state estimation";
+  parameter Real x_est_init[:] "Initial value for state estimation";
   parameter Real Q[:,size(Q,1)]=identity(size(x_est_init,1))
     "Covariance matrix of the associated process noise";
   parameter Real G[size(x_est_init,1),size(Q,1)]
@@ -49,10 +49,9 @@ model UKF "Unscented Kalman filter"
         origin={0,-110})));
 
 protected
-   function ukf=Design.UKF (predict(redeclare function fSigma=F_function),
+  function ukf=Design.UKF (predict(redeclare function fSigma=F_function),
                                         update(redeclare function hSigma=H_function),
                                         estimate(redeclare function yOut=H_function));
-
   outer Modelica_LinearSystems2.Controller.SampleClock sampleClock
     "Global options";
 initial equation

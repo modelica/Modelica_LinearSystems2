@@ -29,8 +29,8 @@ protected
   #include<f2c.h>
 extern  int dtrsm_(char *, char *, char *, char *, integer *, integer *, doublereal *, doublereal *, integer *, doublereal *, integer *);
 extern logical lsame_(char *, char *);
-extern int dpotrf_(char *, integer *, doublereal *, integer *, integer *);
-
+//extern int dpotrf_(char *, integer *, doublereal *, integer *, integer *);
+extern int dpotrf_(const char* , int  *, double  *, int  *, int  *);
 
  #include <stdio.h> 
 

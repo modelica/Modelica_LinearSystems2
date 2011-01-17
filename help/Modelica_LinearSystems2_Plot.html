@@ -1,0 +1,1170 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.StateSpace.Plot</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Functions to plot state space system responses&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Plot<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.StateSpace.Plot"></A><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>.Plot</H2>
+<B>Functions to plot state space system responses</B>
+<P>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.StateSpace.Plot.polesAndZeros" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.polesAndZeros"
+>polesAndZeros</A>
+</TD><TD>Plot poles (i.e. eigenvalues) and/or invariant zeros of a state space system</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.StateSpace.Plot.bodeSISO" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.bodeSISO"
+>bodeSISO</A>
+</TD><TD>Plot bode plot of the corresponding transfer function</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.StateSpace.Plot.bodeMIMO" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.bodeMIMO"
+>bodeMIMO</A>
+</TD><TD>Plot bode plot of all transfer functions, corresponding to the state space system</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.StateSpace.Plot.timeResponse" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.timeResponse"
+>timeResponse</A>
+</TD><TD>Plot the time response of the system. The response type is selectable</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.StateSpace.Plot.impulse" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.impulse"
+>impulse</A>
+</TD><TD>Impulse response plot</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.StateSpace.Plot.step" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.step"
+>step</A>
+</TD><TD>Step response plot</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.StateSpace.Plot.ramp" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.ramp"
+>ramp</A>
+</TD><TD>Ramp response plot</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPolesS.png" ALT="Modelica_LinearSystems2.StateSpace.Plot.initialResponse" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.initialResponse"
+>initialResponse</A>
+</TD><TD>Initial condition response plot</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE polesAndZeros<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.StateSpace.Plot.polesAndZeros"></A><A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot"
+>Modelica_LinearSystems2.StateSpace.Plot</A>.polesAndZeros</H2>
+<B>Plot poles (i.e. eigenvalues) and/or invariant zeros of a state space system</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4><font style="color: #008000; ">Syntax</font></h4>
+<blockquote><pre>
+StateSpace.Plot.<b>polesAndZeros</b>(ss);
+   or
+diagram = StateSpace.Plot.<b>polesAndZeros</b>(ss, poles=true, zeros=true, plot=true,
+                     defaultDiagram=<A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros"
+>Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</a>(),
+                     device=<A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>()); 
+</pre></blockquote>
+
+<h4><font style="color: #008000; ">Description</font></h4>
+<p>
+This function plots a pole-zero-map of the poles and transmission zeros of a state space system.
+The poles are the eigenvalues of the system matrix (eigenvalues(ss.A)). The Boolean inputs
+"poles" and "zeros" define what to plot. If Boolean input "plot = true", the pole-zero-map
+is plotted. If false, only the diagram is generated and returned as output argument.
+The records "defaultDiagram" and "device" allow to set various layout options and the
+size and location of the diagram on the screen.
+</p>
+
+<h4><font style="color: #008000; ">Example</font></h4>
+
+<p>
+The example <A HREF="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.plotPolesAndZeros"
+>
+Modelica_LinearSystems2.Examples.StateSpace.plotPolesAndZeros</a>
+is defined as
+</p>
+
+<pre>
+  Plot.polesAndZeros(ss = Modelica_LinearSystems2.StateSpace(
+      A=[-3, 2,-3,  4, 5,6; 
+          0, 6, 7,  8, 9,4; 
+          0, 2, 3,  0,78,6; 
+          0, 1, 2,  2, 3,3; 
+          0,13,34,  0, 0,1; 
+          0, 0, 0,-17, 0,0],
+      B=[1,0;
+         0,1; 
+         1,0; 
+         0,1; 
+         1,0; 
+         0,1],
+      C=[0,0,1,0,1,0; 
+         0,1,0,0,1,1],
+      D=[0,0; 
+         0,0]));
+</pre>
+   
+<p>
+and results in 
+</p>
+ 
+<blockquote><img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/PolesAndZeros.png"/> </blockquote>
+
+<pre></PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunction"
+>Modelica_LinearSystems2.Internal.PartialPlotFunction</A> (Interface of a plot function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A></TD><TD>ss</TD><TD>&nbsp;</TD><TD>Linear system in state space form</TD></TR>
+<TR><TD>Boolean</TD><TD>poles</TD><TD>true</TD><TD>= true, to plot the poles (i.e. the eigenvalues) of ss</TD></TR>
+<TR><TD>Boolean</TD><TD>zeros</TD><TD>true</TD><TD>= true, to plot the (invariant) zeros of ss </TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
+>Diagram</A></TD><TD>defaultDiagram</TD><TD>Modelica_LinearSystems2.Inte...</TD><TD>Default diagram layout</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Device</A></TD><TD>device</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Properties of device where figure is shown</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> polesAndZeros <font color="darkgreen">
+  &quot;Plot poles (i.e. eigenvalues) and/or invariant zeros of a state space system&quot;</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss <font color="darkgreen">&quot;Linear system in state space form&quot;</font>;
+  <font color="blue">input </font>Boolean poles=true <font color="darkgreen">
+    &quot;= true, to plot the poles (i.e. the eigenvalues) of ss&quot;</font>;
+  <font color="blue">input </font>Boolean zeros=true <font color="darkgreen">&quot;= true, to plot the (invariant) zeros of ss &quot;</font>;
+
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunction"
+>Modelica_LinearSystems2.Internal.PartialPlotFunction</A>(
+     defaultDiagram =<font color="red"> Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</font>());
+
+<font color="blue">protected </font>
+  Integer nx=<font color="red">size</font>(ss.A, 1);
+  Real eval[nx,2];
+  Real invZerosRe[:];
+  Real invZerosIm[:];
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> invZeros[:];
+  <A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Curve"
+>Plot.Records.Curve</A> curves[2];
+  Integer i;
+  <A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
+>Plot.Records.Diagram</A> diagram2;
+<font color="blue">algorithm </font>
+  <font color="darkgreen">// Determine eigen values</font>
+  <font color="blue">if </font>poles<font color="blue"> then</font>
+    eval :=<font color="red"> Modelica.Math.Matrices.eigenValues</font>(ss.A);
+  <font color="blue">end if</font>;
+
+  <font color="blue">if </font>zeros<font color="blue"> then</font>
+    invZeros :=<font color="red"> StateSpace.Analysis.invariantZeros</font>(ss);
+    invZerosRe :=<font color="red"> fill</font>(0,<font color="red">size</font>(invZeros,1));
+    invZerosIm :=<font color="red"> fill</font>(0,<font color="red">size</font>(invZeros,1));
+    <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(invZeros, 1)<font color="blue"> loop</font>
+      invZerosRe[i] := invZeros[i].re;
+      invZerosIm[i] := invZeros[i].im;
+    <font color="blue">end for</font>;
+  <font color="blue">end if</font>;
+
+  i :=0;
+  <font color="blue">if </font>poles<font color="blue"> then</font>
+     i :=i + 1;
+     curves[i] :=<font color="red">Plot.Records.Curve</font>(
+                        x=eval[:, 1],
+                        y=eval[:, 2],
+                        legend=&quot;poles&quot;,
+                        autoLine=false,
+                        linePattern=Plot.Types.LinePattern.None,
+                        lineSymbol=Plot.Types.PointSymbol.Cross);
+  <font color="blue">end if</font>;
+
+  <font color="blue">if </font>zeros<font color="blue"> then</font>
+     i :=i + 1;
+     curves[i] :=<font color="red">Plot.Records.Curve</font>(
+                        x=invZerosRe,
+                        y=invZerosIm,
+                        legend=&quot;zeros&quot;,
+                        autoLine=false,
+                        linePattern=Plot.Types.LinePattern.None,
+                        lineSymbol=Plot.Types.PointSymbol.Circle);
+  <font color="blue">end if</font>;
+
+     diagram2 :=defaultDiagram;
+     diagram2.curve :=curves[1:i];
+  <font color="red">   Plot.diagram</font>(diagram2,device);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>polesAndZeros;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE bodeSISO<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.StateSpace.Plot.bodeSISO"></A><A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot"
+>Modelica_LinearSystems2.StateSpace.Plot</A>.bodeSISO</H2>
+<B>Plot bode plot of the corresponding transfer function</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4><font color="#008000">Syntax</font></h4>
+<blockquote><pre>
+StateSpace.Plot.<b>plotBodeSISO</b>(ss)
+   or
+StateSpace.Plot.<b>plotBodeSISO</b>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot"
+>Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+</pre></blockquote>
+<h4><font color="#008000">Description</font></h4>
+<p>
+Plots the bode-diagram of a transfer function.
+<h4><font color="#008000">Description</font></h4>
+<p>
+Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corresponding to the behavior of the state space system from iu'th element of the input vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
+
+
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+      A=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0],
+      B=[0.0,1.0; 1.0,1.0; -1.0,0.0],
+      C=[0.0,1.0,1.0; 1.0,1.0,1.0],
+      D=[1.0,0.0; 0.0,1.0])
+   
+   Integer iu=1;
+   Integer iy=1;
+
+
+<b>algorithm</b>
+   Modelica_LinearSystems2.StateSpace.Plot.plotBodeSISO(ss, iu, iy)
+//  gives:
+</pre></blockquote>
+
+</p>
+<p>
+<img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/bodeMagnitude.png">
+</p>
+<p>
+</p>
+<p>
+<img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/bodePhase.png">
+</p>
+<p>
+
+
+<pre> </PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunction"
+>Modelica_LinearSystems2.Internal.PartialPlotFunction</A> (Interface of a plot function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A></TD><TD>ss</TD><TD>&nbsp;</TD><TD>state space system</TD></TR>
+<TR><TD>Integer</TD><TD>iu</TD><TD>1</TD><TD>index of input</TD></TR>
+<TR><TD>Integer</TD><TD>iy</TD><TD>1</TD><TD>index of output</TD></TR>
+<TR><TD>Integer</TD><TD>nPoints</TD><TD>200</TD><TD>Number of points</TD></TR>
+<TR><TD>Boolean</TD><TD>autoRange</TD><TD>true</TD><TD>= true, if abszissa range is automatically determined</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_min</TD><TD>0.1</TD><TD>Minimum frequency value, if autoRange = false [Hz]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_max</TD><TD>10</TD><TD>Maximum frequency value, if autoRange = false [Hz]</TD></TR>
+<TR><TD>Boolean</TD><TD>magnitude</TD><TD>true</TD><TD>= true, to plot the magnitude of tf</TD></TR>
+<TR><TD>Boolean</TD><TD>phase</TD><TD>true</TD><TD>= true, to plot the pase of tf</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
+>Diagram</A></TD><TD>defaultDiagram</TD><TD>Modelica_LinearSystems2.Inte...</TD><TD>Default diagram layout</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Device</A></TD><TD>device</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Properties of device where figure is shown</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> bodeSISO <font color="darkgreen">
+  &quot;Plot bode plot of the corresponding transfer function&quot;</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>Modelica_LinearSystems2.ZerosAndPoles</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss <font color="darkgreen">&quot;state space system&quot;</font>;
+  <font color="blue">input </font>Integer iu=1 <font color="darkgreen">&quot;index of input&quot;</font>;
+  <font color="blue">input </font>Integer iy=1 <font color="darkgreen">&quot;index of output&quot;</font>;
+  <font color="blue">input </font>Integer nPoints(min=2) = 200 <font color="darkgreen">&quot;Number of points&quot;</font>;
+  <font color="blue">input </font>Boolean autoRange=true <font color="darkgreen">
+    &quot;= true, if abszissa range is automatically determined&quot;</font>;
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_min=0.1 <font color="darkgreen">
+    &quot;Minimum frequency value, if autoRange = false&quot;</font>;
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_max=10 <font color="darkgreen">
+    &quot;Maximum frequency value, if autoRange = false&quot;</font>;
+
+  <font color="blue">input </font>Boolean magnitude=true <font color="darkgreen">&quot;= true, to plot the magnitude of tf&quot;</font>;
+  <font color="blue">input </font>Boolean phase=true <font color="darkgreen">&quot;= true, to plot the pase of tf&quot;</font>;
+
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunction"
+>Modelica_LinearSystems2.Internal.PartialPlotFunction</A>(defaultDiagram=
+        <font color="red">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</font>());
+
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.ZerosAndPoles"
+>ZerosAndPoles</A> zp <font color="darkgreen">&quot;ZP-Transfer functions to be plotted&quot;</font>;
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss_siso(
+    <font color="blue">redeclare </font>Real A[<font color="red">size</font>(ss.A, 1),<font color="red">size</font>(ss.A, 2)],
+    <font color="blue">redeclare </font>Real B[<font color="red">size</font>(ss.B, 1),1],
+    <font color="blue">redeclare </font>Real C[1,<font color="red">size</font>(ss.C, 2)],
+    <font color="blue">redeclare </font>Real D[1,1]);
+
+<font color="blue">algorithm </font>
+  <font color="red">assert</font>(iu &lt;=<font color="red"> size</font>(ss.B, 2)<font color="blue"> and </font>iu &gt; 0, &quot;index for input is &quot; +<font color="red"> String</font>(iu) + &quot; which is not in [1, &quot;
+     +<font color="red"> String</font>(<font color="red">size</font>(ss.B, 2)) + &quot;].&quot;);
+  <font color="red">assert</font>(iy &lt;=<font color="red"> size</font>(ss.C, 1)<font color="blue"> and </font>iy &gt; 0, &quot;index for output is &quot; +<font color="red"> String</font>(iy) + &quot; which is not in [1, &quot;
+     +<font color="red"> String</font>(<font color="red">size</font>(ss.C, 1)) + &quot;].&quot;);
+  ss_siso :=<font color="red"> StateSpace</font>(
+    A=ss.A,
+    B=<font color="red">matrix</font>(ss.B[:, iu]),
+    C=<font color="red">transpose</font>(<font color="red">matrix</font>(ss.C[iy, :])),
+    D=<font color="red">matrix</font>(ss.D[iy, iu]));
+  zp :=<font color="red"> StateSpace.Conversion.toZerosAndPoles</font>(ss_siso);
+
+  <font color="red">ZerosAndPoles.Plot.bode</font>(
+    zp,
+    nPoints,
+    autoRange,
+    f_min,
+    f_max,
+    magnitude,
+    phase,
+    defaultDiagram=defaultDiagram,
+    device=device);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>bodeSISO;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE bodeMIMO<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.StateSpace.Plot.bodeMIMO"></A><A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot"
+>Modelica_LinearSystems2.StateSpace.Plot</A>.bodeMIMO</H2>
+<B>Plot bode plot of all transfer functions, corresponding to the state space system</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4><font color="#008000">Syntax</font></h4>
+<blockquote><pre>
+StateSpace.Plot.<b>plotBodeMIMO</b>(ss)
+   or
+StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot"
+>Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+</pre></blockquote>
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+      A=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0],
+      B=[0.0,1.0; 1.0,1.0; -1.0,0.0],
+      C=[0.0,1.0,1.0],
+      D=[1.0,0.0])
+   
+
+
+<b>algorithm</b>
+   Modelica_LinearSystems2.StateSpace.Plot.plotBodeMIMO(ss)
+//  gives:
+</pre></blockquote>
+
+</p>
+<p>
+<img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/bodeMagnitude.png">
+</p>
+<p>
+</p>
+<p>
+<img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/bodePhase.png">
+</p>
+</p>
+<p>
+<img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/bodeMagnitude2.png">
+</p>
+<p>
+</p>
+<p>
+<img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/bodePhase2.png">
+</p>
+
+
+<pre> </PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunction"
+>Modelica_LinearSystems2.Internal.PartialPlotFunction</A> (Interface of a plot function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A></TD><TD>ss</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Integer</TD><TD>nPoints</TD><TD>200</TD><TD>Number of points</TD></TR>
+<TR><TD>Boolean</TD><TD>autoRange[:, :]</TD><TD>fill(true, size(ss.C, 1), si...</TD><TD>= true, if abszissa range is automatically determined</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_min[:, :]</TD><TD>fill(0.1, size(ss.C, 1), siz...</TD><TD>Minimum frequency value, if autoRange = false [Hz]</TD></TR>
+<TR><TD><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Frequency</A></TD><TD>f_max[:, :]</TD><TD>fill(10, size(ss.C, 1), size...</TD><TD>Maximum frequency value, if autoRange = false [Hz]</TD></TR>
+<TR><TD>Boolean</TD><TD>magnitude</TD><TD>true</TD><TD>= true, to plot the magnitude of tf</TD></TR>
+<TR><TD>Boolean</TD><TD>phase</TD><TD>true</TD><TD>= true, to plot the pase of tf</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
+>Diagram</A></TD><TD>defaultDiagram</TD><TD>Modelica_LinearSystems2.Inte...</TD><TD>Default diagram layout</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Device</A></TD><TD>device</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Properties of device where figure is shown</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> bodeMIMO <font color="darkgreen">
+  &quot;Plot bode plot of all transfer functions, corresponding to the state space system&quot;</font>
+
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>Modelica_LinearSystems2.TransferFunction</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss;
+  <font color="blue">input </font>Integer nPoints(min=2) = 200 <font color="darkgreen">&quot;Number of points&quot;</font>;
+  <font color="blue">input </font>Boolean autoRange[:,:]=<font color="red">fill</font>(
+      true,
+      <font color="red">size</font>(ss.C, 1),
+      <font color="red">size</font>(ss.B, 2)) <font color="darkgreen">&quot;= true, if abszissa range is automatically determined&quot;</font>;
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_min[:,:]=<font color="red">fill</font>(
+      0.1,
+      <font color="red">size</font>(ss.C, 1),
+      <font color="red">size</font>(ss.B, 2)) <font color="darkgreen">&quot;Minimum frequency value, if autoRange = false&quot;</font>;
+  <font color="blue">input </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_SIunits.html#Modelica.SIunits.Frequency"
+>Modelica.SIunits.Frequency</A> f_max[:,:]=<font color="red">fill</font>(
+      10,
+      <font color="red">size</font>(ss.C, 1),
+      <font color="red">size</font>(ss.B, 2)) <font color="darkgreen">&quot;Maximum frequency value, if autoRange = false&quot;</font>;
+  <font color="blue">input </font>Boolean magnitude=true <font color="darkgreen">&quot;= true, to plot the magnitude of tf&quot;</font>;
+  <font color="blue">input </font>Boolean phase=true <font color="darkgreen">&quot;= true, to plot the pase of tf&quot;</font>;
+
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunction"
+>Modelica_LinearSystems2.Internal.PartialPlotFunction</A>(defaultDiagram=
+        <font color="red">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</font>());
+
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.TransferFunction"
+>TransferFunction</A> tf[<font color="red">size</font>(ss.C, 1),<font color="red">size</font>(ss.B, 2)] <font color="darkgreen">
+    &quot;Transfer functions to be plotted&quot;</font>;
+  <A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
+>Plot.Records.Diagram</A> diagram2=defaultDiagram;
+  String yNames[<font color="red">size</font>(ss.C, 1)];
+  String uNames[<font color="red">size</font>(ss.B, 2)];
+
+<font color="blue">algorithm </font>
+ <font color="darkgreen">// generate headings</font>
+  <font color="blue">for </font>i1<font color="blue"> in </font>1:<font color="red">size</font>(ss.B, 2)<font color="blue"> loop</font>
+    uNames[i1] := <font color="blue">if </font>ss.uNames[i1] == &quot;&quot;<font color="blue"> then </font>&quot;u&quot; +<font color="red"> String</font>(i1)<font color="blue"> else </font>ss.uNames[i1];
+  <font color="blue">end for</font>;
+  <font color="blue">for </font>i1<font color="blue"> in </font>1:<font color="red">size</font>(ss.C, 1)<font color="blue"> loop</font>
+    yNames[i1] := <font color="blue">if </font>ss.yNames[i1] == &quot;&quot;<font color="blue"> then </font>&quot;y&quot; +<font color="red"> String</font>(i1)<font color="blue"> else </font>ss.yNames[i1];
+  <font color="blue">end for</font>;
+
+  tf :=<font color="red"> StateSpace.Conversion.toTransferFunctionMIMO</font>(ss);
+
+  <font color="blue">for </font>i1<font color="blue"> in </font>1:<font color="red">size</font>(ss.C, 1)<font color="blue"> loop</font>
+    <font color="blue">for </font>i2<font color="blue"> in </font>1:<font color="red">size</font>(ss.B, 2)<font color="blue"> loop</font>
+      diagram2.heading := defaultDiagram.heading +&quot;  &quot;+ uNames[i2] + &quot; -&gt; &quot; + yNames[i1];
+      <font color="red">TransferFunction.Plot.bode</font>(
+        tf[i1, i2],
+        nPoints,
+        autoRange[i1, i2],
+        f_min[i1, i2],
+        f_max[i1, i2],
+        magnitude,
+        phase,
+        defaultDiagram=diagram2,
+        device=device);
+    <font color="blue">end for</font>;
+  <font color="blue">end for</font>;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>bodeMIMO;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE timeResponse<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.StateSpace.Plot.timeResponse"></A><A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot"
+>Modelica_LinearSystems2.StateSpace.Plot</A>.timeResponse</H2>
+<B>Plot the time response of the system. The response type is selectable</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre> 
+<p><b><font style="color: #008000; ">Syntax</font></b></p>
+<blockquote><pre>
+StateSpace.Plot.<b>timeResponse</b>(ss);
+or
+StateSpace.Plot.<b>timeResponse</b>(ss, dt, tSpan,response, x0, defaultDiagram=<A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros"
+>Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+</pre></blockquote>
+
+
+<h4><font color="#008000">Description</font></h4>
+<p>
+Function <b>timeResponse</b> plots the time response of a state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
+<a href="Modelica://Modelica_LinearSystems2.StateSpace.Plot.plotImpulse">plotImpulse</a>, 
+<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.step"
+>step</a>, 
+<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.ramp"
+>ramp</a>, and
+<a href="Modelica://Modelica_LinearSystems2.StateSpace.Plot.initial">initial</a>.
+
+
+
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+B=[1.0; 1.0; 0.0],
+C=[0.0,1.0,1.0],
+D=[0.0])
+
+Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+
+<b>algorithm</b>
+Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
+// gives:
+</pre></blockquote>
+
+</p>
+<p align="center">
+<img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/timeResponseSS.png">
+</p>
+<p>
+</p>
+
+
+<pre> </PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO"
+>Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO</A> (Interface of a plot function for MIMO systems).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A></TD><TD>ss</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>dt</TD><TD>0</TD><TD>Sample time [s]</TD></TR>
+<TR><TD>Real</TD><TD>tSpan</TD><TD>0</TD><TD>Simulation time span [s]</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>TimeResponse</A></TD><TD>response</TD><TD>Modelica_LinearSystems2.Type...</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>x0[size(ss.A, 1)]</TD><TD>zeros(size(ss.A, 1))</TD><TD>Initial state vector</TD></TR>
+<TR><TD>Boolean</TD><TD>subPlots</TD><TD>true</TD><TD>true if all subsystem time responses are plotted in one window with subplots</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
+>Diagram</A></TD><TD>defaultDiagram</TD><TD>Modelica_LinearSystems2.Inte...</TD><TD>Default diagram layout</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Device</A></TD><TD>device</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Properties of device where figure is shown</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> timeResponse <font color="darkgreen">
+  &quot;Plot the time response of the system. The response type is selectable&quot;</font>
+
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>Modelica_LinearSystems2.Types.TimeResponse</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss;
+  <font color="blue">input </font>Real dt=0 <font color="darkgreen">&quot;Sample time [s]&quot;</font>;
+  <font color="blue">input </font>Real tSpan=0 <font color="darkgreen">&quot;Simulation time span [s]&quot;</font>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>Modelica_LinearSystems2.Types.TimeResponse</A> response=
+      Modelica_LinearSystems2.Types.TimeResponse.Step;
+
+  <font color="blue">input </font>Real x0[<font color="red">size</font>(ss.A, 1)]=<font color="red">zeros</font>(<font color="red">size</font>(ss.A, 1)) <font color="darkgreen">&quot;Initial state vector&quot;</font>;
+
+  <font color="blue">input </font>Boolean subPlots=true <font color="darkgreen">
+    &quot;true if all subsystem time responses are plotted in one window with subplots&quot;</font>;
+
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO"
+>Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO</A>(defaultDiagram=<font color="red">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</font>(
+        heading=&quot;Time response&quot;));
+
+<font color="blue">protected </font>
+  <A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Curve"
+>Plot.Records.Curve</A> curve;
+  Integer i1;
+  Integer i2;
+  <A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
+>Plot.Records.Diagram</A> diagram2[<font color="red">size</font>(ss.C, 1)];
+
+  Real y[:,<font color="red">size</font>(ss.C, 1),<font color="blue">if </font>response == TimeResponse.Initial<font color="blue"> then </font>1<font color="blue"> else </font><font color="red">size</font>(ss.B,2)] <font color="darkgreen">
+    &quot;Output response: (number of samples) x (number of outputs) x (number of inputs)&quot;</font>;
+  Real t[:] <font color="darkgreen">&quot;Time vector: (number of samples)&quot;</font>;
+  Real x[:,<font color="red">size</font>(ss.A, 1),<font color="blue">if </font>response == TimeResponse.Initial<font color="blue"> then </font>1<font color="blue"> else </font><font color="red">size</font>(ss.B,2)] <font color="darkgreen">
+    &quot;State trajectories: (number of samples) x (number of states) x (number of inputs)&quot;</font>;
+  String yNames[<font color="red">size</font>(ss.C, 1)];
+  String uNames[<font color="red">size</font>(ss.B, 2)];
+  Integer loops=<font color="blue">if </font>response == TimeResponse.Initial<font color="blue"> then </font>1<font color="blue"> else </font><font color="red">size</font>(ss.B,2);
+
+<font color="blue">algorithm </font>
+  (y,t,x) :=<font color="red"> Modelica_LinearSystems2.StateSpace.Analysis.timeResponse</font>(
+    sc=ss,
+    dt=dt,
+    tSpan=tSpan,
+    response=response,
+    x0=x0);
+
+<font color="darkgreen">// generate headings</font>
+  <font color="blue">for </font>i1<font color="blue"> in </font>1:<font color="red">size</font>(ss.B, 2)<font color="blue"> loop</font>
+    uNames[i1] := <font color="blue">if </font>ss.uNames[i1] == &quot;&quot;<font color="blue"> then </font>&quot;u&quot; +<font color="red"> String</font>(i1)<font color="blue"> else </font>ss.uNames[
+      i1];
+  <font color="blue">end for</font>;
+  <font color="blue">for </font>i1<font color="blue"> in </font>1:<font color="red">size</font>(ss.C, 1)<font color="blue"> loop</font>
+    yNames[i1] := <font color="blue">if </font>ss.yNames[i1] == &quot;&quot;<font color="blue"> then </font>&quot;y&quot; +<font color="red"> String</font>(i1)<font color="blue"> else </font>ss.yNames[
+      i1];
+  <font color="blue">end for</font>;
+
+  <font color="blue">for </font>i2<font color="blue"> in </font>1:loops<font color="blue"> loop</font>
+    <font color="blue">for </font>i1<font color="blue"> in </font>1:<font color="red">size</font>(ss.C, 1)<font color="blue"> loop</font>
+      curve :=<font color="red"> Plot.Records.Curve</font>(
+        x=t,
+        y=y[:, i1, i2],
+        autoLine=true);
+
+      diagram2[i1] := defaultDiagram;
+      diagram2[i1].curve := {curve};
+      diagram2[i1].heading := <font color="blue">if </font>response == TimeResponse.Initial<font color="blue"> then </font>defaultDiagram.heading +&quot; &quot;+ yNames[i1]<font color="blue"> else </font>defaultDiagram.heading + &quot;  &quot; + uNames[i2] + &quot; -&gt; &quot; + yNames[i1];
+      diagram2[i1].yLabel := yNames[i1];
+
+    <font color="blue">end for</font>;
+
+    <font color="blue">if </font>subPlots<font color="blue"> then</font>
+      <font color="red">Plot.diagramVector</font>(diagram2, device);
+    <font color="blue">else</font>
+      <font color="blue">for </font>i1<font color="blue"> in </font>1:<font color="red">size</font>(ss.C, 1)<font color="blue"> loop</font>
+        <font color="red">Plot.diagram</font>(diagram2[i1], device);
+      <font color="blue">end for</font>;
+    <font color="blue">end if</font>;
+  <font color="blue">end for</font>;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>timeResponse;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE impulse<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.StateSpace.Plot.impulse"></A><A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot"
+>Modelica_LinearSystems2.StateSpace.Plot</A>.impulse</H2>
+<B>Impulse response plot</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre> 
+<p><b><font style="color: #008000; ">Syntax</font></b></p>
+<blockquote><pre>
+StateSpace.Plot.<b>impulse</b>(ss);
+or
+StateSpace.Plot.<b>impulse</b>(ss, dt, tSpan, x0, defaultDiagram=<A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros"
+>Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+</pre></blockquote>
+<h4><font color="#008000">Description</font></h4>
+<p>
+Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.timeResponse"
+>timeResponse</a>. See also
+<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.step"
+>step</a>, 
+<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.ramp"
+>ramp</a>, and
+<a href="Modelica://Modelica_LinearSystems2.StateSpace.Plot.initial">initial</a>.
+
+
+
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+B=[1.0; 1.0; 0.0],
+C=[0.0,1.0,1.0],
+D=[0.0])
+
+
+
+<b>algorithm</b>
+Modelica_LinearSystems2.StateSpace.Plot.impulse(ss)
+// gives:
+</pre></blockquote>
+
+</p>
+<p align="center">
+<img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/impulseResponseSS.png">
+</p>
+<p>
+</p>
+
+
+<pre> </PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO"
+>Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO</A> (Interface of a plot function for MIMO systems).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A></TD><TD>ss</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>dt</TD><TD>0</TD><TD>Sample time [s]</TD></TR>
+<TR><TD>Real</TD><TD>tSpan</TD><TD>0</TD><TD>Simulation time span [s]</TD></TR>
+<TR><TD>Real</TD><TD>x0[size(ss.A, 1)]</TD><TD>zeros(size(ss.A, 1))</TD><TD>Initial state vector</TD></TR>
+<TR><TD>Boolean</TD><TD>subPlots</TD><TD>true</TD><TD>true if all subsystem time responses are plotted in one window with subplots</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
+>Diagram</A></TD><TD>defaultDiagram</TD><TD>Modelica_LinearSystems2.Inte...</TD><TD>Default diagram layout</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Device</A></TD><TD>device</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Properties of device where figure is shown</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> impulse <font color="darkgreen">&quot;Impulse response plot&quot;</font>
+
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>Modelica_LinearSystems2.Types.TimeResponse</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss;
+  <font color="blue">input </font>Real dt=0 <font color="darkgreen">&quot;Sample time [s]&quot;</font>;
+  <font color="blue">input </font>Real tSpan=0 <font color="darkgreen">&quot;Simulation time span [s]&quot;</font>;
+  <font color="blue">input </font>Real x0[<font color="red">size</font>(ss.A, 1)]=<font color="red">zeros</font>(<font color="red">size</font>(ss.A, 1)) <font color="darkgreen">&quot;Initial state vector&quot;</font>;
+
+  <font color="blue">input </font>Boolean subPlots=true <font color="darkgreen">
+    &quot;true if all subsystem time responses are plotted in one window with subplots&quot;</font>;
+
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO"
+>Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO</A>(defaultDiagram=<font color="red">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</font>(heading=&quot;Impulse response&quot;));
+
+<font color="blue">protected </font>
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>Modelica_LinearSystems2.Types.TimeResponse</A> response=Modelica_LinearSystems2.Types.TimeResponse.Impulse <font color="darkgreen">
+    &quot;type of time response&quot;</font>;
+<font color="blue">algorithm </font>
+
+  <font color="red">Modelica_LinearSystems2.StateSpace.Plot.timeResponse</font>(
+    ss=ss,
+    dt=dt,
+    tSpan=tSpan,
+    response=response,
+    x0=x0,
+    defaultDiagram=defaultDiagram,
+    device=device);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>impulse;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE step<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.StateSpace.Plot.step"></A><A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot"
+>Modelica_LinearSystems2.StateSpace.Plot</A>.step</H2>
+<B>Step response plot</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre> 
+<p><b><font style="color: #008000; ">Syntax</font></b></p>
+<blockquote><pre>
+StateSpace.Plot.<b>step</b>(ss);
+or
+StateSpace.Plot.<b>step</b>(ss, dt, tSpan, x0, defaultDiagram=<A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros"
+>Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+</pre></blockquote>
+<h4><font color="#008000">Description</font></h4>
+<p>
+Function <b>step</b> plots the step responses of a state space system for each system corresponding to the transition matrix. It is based on <A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.timeResponse"
+>timeResponse</a>. See also
+<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.impulse"
+>impulse</a>, 
+<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.ramp"
+>ramp</a>, and
+<a href="Modelica://Modelica_LinearSystems2.StateSpace.Plot.initial">initial</a>.
+
+
+
+
+
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+B=[1.0; 1.0; 0.0],
+C=[0.0,1.0,1.0],
+D=[0.0])
+
+
+
+<b>algorithm</b>
+Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
+// gives:
+</pre></blockquote>
+
+</p>
+<p align="center">
+<img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/stepResponseSS.png">
+</p>
+<p>
+</p>
+
+
+<pre> </PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO"
+>Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO</A> (Interface of a plot function for MIMO systems).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A></TD><TD>ss</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>dt</TD><TD>0</TD><TD>Sample time [s]</TD></TR>
+<TR><TD>Real</TD><TD>tSpan</TD><TD>0</TD><TD>Simulation time span [s]</TD></TR>
+<TR><TD>Real</TD><TD>x0[size(ss.A, 1)]</TD><TD>zeros(size(ss.A, 1))</TD><TD>Initial state vector</TD></TR>
+<TR><TD>Boolean</TD><TD>subPlots</TD><TD>true</TD><TD>true if all subsystem time responses are plotted in one window with subplots</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
+>Diagram</A></TD><TD>defaultDiagram</TD><TD>Modelica_LinearSystems2.Inte...</TD><TD>Default diagram layout</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Device</A></TD><TD>device</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Properties of device where figure is shown</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>TimeResponse</A></TD><TD>response</TD><TD>Modelica_LinearSystems2.Type...</TD><TD>type of time response</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> step <font color="darkgreen">&quot;Step response plot&quot;</font>
+
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>Modelica_LinearSystems2.Types.TimeResponse</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss;
+  <font color="blue">input </font>Real dt=0 <font color="darkgreen">&quot;Sample time [s]&quot;</font>;
+  <font color="blue">input </font>Real tSpan=0 <font color="darkgreen">&quot;Simulation time span [s]&quot;</font>;
+  <font color="blue">input </font>Real x0[<font color="red">size</font>(ss.A, 1)]=<font color="red">zeros</font>(<font color="red">size</font>(ss.A, 1)) <font color="darkgreen">&quot;Initial state vector&quot;</font>;
+
+  <font color="blue">input </font>Boolean subPlots=true <font color="darkgreen">
+    &quot;true if all subsystem time responses are plotted in one window with subplots&quot;</font>;
+
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO"
+>Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO</A>(defaultDiagram=<font color="red">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</font>(heading=&quot;Step response&quot;));
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>Modelica_LinearSystems2.Types.TimeResponse</A> response=
+      Modelica_LinearSystems2.Types.TimeResponse.Step <font color="darkgreen">&quot;type of time response&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="red">Modelica_LinearSystems2.StateSpace.Plot.timeResponse</font>(
+    ss=ss,
+    dt=dt,
+    tSpan=tSpan,
+    response=response,
+    x0=x0,
+    defaultDiagram=defaultDiagram,
+    device=device);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>step;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ramp<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.StateSpace.Plot.ramp"></A><A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot"
+>Modelica_LinearSystems2.StateSpace.Plot</A>.ramp</H2>
+<B>Ramp response plot</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre> 
+<p><b><font style="color: #008000; ">Syntax</font></b></p>
+<blockquote><pre>
+StateSpace.Plot.<b>ramp</b>(ss);
+or
+StateSpace.Plot.<b>ramp</b>(ss, dt, tSpan, x0, defaultDiagram=<A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros"
+>Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+</pre></blockquote>
+<h4><font color="#008000">Description</font></h4>
+<p>
+Function <b>ramp</b> plots the ramp responses of a state space system for each system corresponding to the transition matrix. It is based on <A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.timeResponse"
+>timeResponse</a>. See also
+<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.impulse"
+>impulse</a>, 
+<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.step"
+>step</a>, and
+<a href="Modelica://Modelica_LinearSystems2.StateSpace.Plot.initial">initial</a>.
+
+
+
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+B=[1.0; 1.0; 0.0],
+C=[1.0,1.0,1.0],
+D=[0.0])
+
+
+
+<b>algorithm</b>
+Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
+// gives:
+</pre></blockquote>
+
+</p>
+<p align="center">
+<img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/rampResponseSS.png">
+</p>
+<p>
+</p>
+
+
+<pre> </PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO"
+>Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO</A> (Interface of a plot function for MIMO systems).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A></TD><TD>ss</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>dt</TD><TD>0</TD><TD>Sample time [s]</TD></TR>
+<TR><TD>Real</TD><TD>tSpan</TD><TD>0</TD><TD>Simulation time span [s]</TD></TR>
+<TR><TD>Real</TD><TD>x0[size(ss.A, 1)]</TD><TD>zeros(size(ss.A, 1))</TD><TD>Initial state vector</TD></TR>
+<TR><TD>Boolean</TD><TD>subPlots</TD><TD>true</TD><TD>true if all subsystem time responses are plotted in one window with subplots</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
+>Diagram</A></TD><TD>defaultDiagram</TD><TD>Modelica_LinearSystems2.Inte...</TD><TD>Default diagram layout</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Device</A></TD><TD>device</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Properties of device where figure is shown</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>TimeResponse</A></TD><TD>response</TD><TD>Modelica_LinearSystems2.Type...</TD><TD>type of time response</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> ramp <font color="darkgreen">&quot;Ramp response plot&quot;</font>
+
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>Modelica_LinearSystems2.Types.TimeResponse</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</A>;
+
+<font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss;
+<font color="blue">input </font>Real dt=0 <font color="darkgreen">&quot;Sample time [s]&quot;</font>;
+<font color="blue">input </font>Real tSpan=0 <font color="darkgreen">&quot;Simulation time span [s]&quot;</font>;
+<font color="blue">input </font>Real x0[<font color="red">size</font>(ss.A, 1)]=<font color="red">zeros</font>(<font color="red">size</font>(ss.A, 1)) <font color="darkgreen">&quot;Initial state vector&quot;</font>;
+
+<font color="blue">input </font>Boolean subPlots=true <font color="darkgreen">
+    &quot;true if all subsystem time responses are plotted in one window with subplots&quot;</font>;
+
+<font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO"
+>Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO</A>(defaultDiagram=<font color="red">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</font>(
+      heading=&quot;Ramp response&quot;));
+
+<font color="blue">input </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>Modelica_LinearSystems2.Types.TimeResponse</A> response=
+    Modelica_LinearSystems2.Types.TimeResponse.Ramp <font color="darkgreen">&quot;type of time response&quot;</font>;
+
+<font color="blue">algorithm </font>
+<font color="red">Modelica_LinearSystems2.StateSpace.Plot.timeResponse</font>(
+      ss=ss,
+      dt=dt,
+      tSpan=tSpan,
+      response=response,
+      x0=x0,
+      defaultDiagram=defaultDiagram,
+      device=device);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>ramp;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE initialResponse<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.StateSpace.Plot.initialResponse"></A><A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot"
+>Modelica_LinearSystems2.StateSpace.Plot</A>.initialResponse</H2>
+<B>Initial condition response plot</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre> 
+<p><b><font style="color: #008000; ">Syntax</font></b></p>
+<blockquote><pre>
+StateSpace.Plot.<b>initial</b>(ss);
+or
+StateSpace.Plot.<b>initial</b>(ss, dt, tSpan, x0, defaultDiagram=<A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros"
+>Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+device=<A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+</pre></blockquote>
+<h4><font color="#008000">Description</font></h4>
+<p>
+Function <b>initial</b> plots the initial responses of a state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.timeResponse"
+>timeResponse</a>. See also
+<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.impulse"
+>impulse</a>, 
+<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.step"
+>step</a>, and
+<A HREF="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.ramp"
+>ramp</a>.
+
+
+
+</p>
+
+<h4><font color="#008000">Example</font></h4>
+<blockquote><pre>
+Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+B=[1.0; 1.0; 0.0],
+C=[0.0,1.0,1.0],
+D=[0.0])
+
+Real x0={1,0.5,0.5}; 
+
+
+
+<b>algorithm</b>
+Modelica_LinearSystems2.StateSpace.Plot.initial(ss, x0=x0)
+// gives:
+</pre></blockquote>
+
+</p>
+<p align="center">
+<img src="H:/mb/Eurosyslib/WP6/Modelica_LinearSystems2/Extras/Images/initialResponseSS.png">
+</p>
+<p>
+</p>
+
+
+<pre> </PRE><P>
+Extends from <A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO"
+>Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO</A> (Interface of a plot function for MIMO systems).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A></TD><TD>ss</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>dt</TD><TD>0</TD><TD>Sample time [s]</TD></TR>
+<TR><TD>Real</TD><TD>tSpan</TD><TD>0</TD><TD>Simulation time span [s]</TD></TR>
+<TR><TD>Real</TD><TD>x0[size(ss.A, 1)]</TD><TD>zeros(size(ss.A, 1))</TD><TD>Initial state vector</TD></TR>
+<TR><TD>Boolean</TD><TD>subPlots</TD><TD>true</TD><TD>true if all subsystem time responses are plotted in one window with subplots</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Diagram"
+>Diagram</A></TD><TD>defaultDiagram</TD><TD>Modelica_LinearSystems2.Inte...</TD><TD>Default diagram layout</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records.Device"
+>Device</A></TD><TD>device</TD><TD>Modelica_LinearSystems2.Util...</TD><TD>Properties of device where figure is shown</TD></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>TimeResponse</A></TD><TD>response</TD><TD>Modelica_LinearSystems2.Type...</TD><TD>type of time response</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> initialResponse <font color="darkgreen">
+  &quot;Initial condition response plot&quot;</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>Modelica_LinearSystems2.Types.TimeResponse</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss;
+  <font color="blue">input </font>Real dt=0 <font color="darkgreen">&quot;Sample time [s]&quot;</font>;
+  <font color="blue">input </font>Real tSpan=0 <font color="darkgreen">&quot;Simulation time span [s]&quot;</font>;
+  <font color="blue">input </font>Real x0[<font color="red">size</font>(ss.A, 1)]=<font color="red">zeros</font>(<font color="red">size</font>(ss.A, 1)) <font color="darkgreen">&quot;Initial state vector&quot;</font>;
+
+  <font color="blue">input </font>Boolean subPlots=true <font color="darkgreen">
+    &quot;true if all subsystem time responses are plotted in one window with subplots&quot;</font>;
+
+  <font color="blue">extends </font><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO"
+>Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO</A>(defaultDiagram=<font color="red">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</font>(
+        heading=&quot;Initial response&quot;));
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2_Types.html#Modelica_LinearSystems2.Types.TimeResponse"
+>Modelica_LinearSystems2.Types.TimeResponse</A> response=
+      Modelica_LinearSystems2.Types.TimeResponse.Initial <font color="darkgreen">
+    &quot;type of time response&quot;</font>;
+<font color="blue">algorithm </font>
+
+  <font color="red">Modelica_LinearSystems2.StateSpace.Plot.timeResponse</font>(
+    ss=ss,
+    dt=dt,
+    tSpan=tSpan,
+    response=response,
+    x0=x0,
+    defaultDiagram=defaultDiagram,
+    device=device);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>initialResponse;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:29:07 2010.
+</address></BODY>
+</HTML>

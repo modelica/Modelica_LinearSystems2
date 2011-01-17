@@ -1,0 +1,955 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.Internal.Streams</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Streams<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams"></A><A HREF="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal"
+>Modelica_LinearSystems2.Internal</A>.Streams</H2>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.AnalyseOptionsS.png" ALT="Modelica_LinearSystems2.Internal.Streams.AnalyseOptions" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.AnalyseOptions"
+>AnalyseOptions</A>
+</TD><TD>Defines the characteristics of the eigenvalues to be print or to be plot</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.ReadMatrixA" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.ReadMatrixA"
+>ReadMatrixA</A>
+</TD><TD>Read the state matrix of a state space system</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.ReadMatrixA2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.ReadMatrixA2"
+>ReadMatrixA2</A>
+</TD><TD>Read the state matrix of a state space system</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.ReadMatrixB" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.ReadMatrixB"
+>ReadMatrixB</A>
+</TD><TD>Read the input matrix of a state space system</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.ReadMatrixB2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.ReadMatrixB2"
+>ReadMatrixB2</A>
+</TD><TD>Read the input matrix of a state space system</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.ReadMatrixC" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.ReadMatrixC"
+>ReadMatrixC</A>
+</TD><TD>Read the output matrix of a state space system</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.ReadMatrixC2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.ReadMatrixC2"
+>ReadMatrixC2</A>
+</TD><TD>Read the output matrix of a state space system</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.ReadMatrixD" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.ReadMatrixD"
+>ReadMatrixD</A>
+</TD><TD>Read the feed forward matrix of a state space system</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.ReadMatrixD2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.ReadMatrixD2"
+>ReadMatrixD2</A>
+</TD><TD>Read the feed forward matrix of a state space system</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.readMatrixInternal" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.readMatrixInternal"
+>readMatrixInternal</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize"
+>readMatrixOnFileSize</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension"
+>ReadSystemDimension</A>
+</TD><TD>Read the order nx of state matrix and the numbers nu and ny of inputs and outputs</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2"
+>ReadSystemDimension2</A>
+</TD><TD>Read the order nx of state matrix and the numbers nu and ny of inputs and outputs</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Internal.Streams.ReadMatrixAS.png" ALT="Modelica_LinearSystems2.Internal.Streams.stateSpaceString_html" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams.stateSpaceString_html"
+>stateSpaceString_html</A>
+</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE AnalyseOptions<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Internal.Streams.AnalyseOptionsI.png" ALT="Modelica_LinearSystems2.Internal.Streams.AnalyseOptions" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Internal.Streams.AnalyseOptions"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.AnalyseOptions</H2>
+<B>Defines the characteristics of the eigenvalues to be print or to be plot</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Record"
+>Modelica.Icons.Record</A> (Icon for a record).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">record</font> AnalyseOptions <font color="darkgreen">
+  &quot;Defines the characteristics of the eigenvalues to be print or to be plot&quot;</font>
+   <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Record"
+>Modelica.Icons.Record</A>;
+   Boolean plotEigenValues = true;
+   Boolean plotInvariantZeros = true;
+   String headingEigenValues = &quot;Eigen values and invariant zeros&quot;;
+   Boolean printEigenValues = true;
+   Boolean printInvariantZeros = true;
+   Boolean printControllability = true;
+   Boolean printObservability = true;
+   Boolean plotStepResponse = true <font color="darkgreen">&quot;only for SISO system&quot;</font>;
+   String headingStepResponse = &quot;Step response&quot;;
+   Boolean plotFrequencyResponse = true <font color="darkgreen">&quot;only for SISO system&quot;</font>;
+   String headingFrequencyResponse = &quot;Frequency response&quot;;
+
+<font color="blue">end </font>AnalyseOptions;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ReadMatrixA<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.ReadMatrixA"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.ReadMatrixA</H2>
+<B>Read the state matrix of a state space system</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;abcd.mat&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;ABCD&quot;</TD><TD>Name of the generalized state space system matrix</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[nx, nx]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> ReadMatrixA <font color="darkgreen">&quot;Read the state matrix of a state space system&quot;</font>
+  <font color="blue">input </font>String fileName=DataDir + &quot;abcd.mat&quot;;
+  <font color="blue">input </font>String matrixName=&quot;ABCD&quot; <font color="darkgreen">
+    &quot;Name of the generalized state space system matrix&quot;</font>;
+
+<font color="blue">protected </font>
+  Real sizeA[1,1]=<font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      &quot;nx&quot;,
+      1,
+      1);
+  Integer ABCDsizes[2]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</font>(fileName,
+      matrixName);
+  Integer nx=<font color="red">integer</font>(sizeA[1, 1]);
+
+  Integer nu=ABCDsizes[2] - nx;
+  Integer ny=ABCDsizes[1] - nx;
+  Real ABCD[nx + ny,nx + nu]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      matrixName,
+      nx + ny,
+      nx + nu);
+
+<font color="blue">public </font>
+  <font color="blue">output </font>Real A[nx,nx]=ABCD[1:nx, 1:nx];
+<font color="blue">algorithm </font>
+
+<font color="blue">end </font>ReadMatrixA;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ReadMatrixA2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.ReadMatrixA2"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.ReadMatrixA2</H2>
+<B>Read the state matrix of a state space system</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;abcd.mat&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;ABCD&quot;</TD><TD>Name of the generalized state space system matrix</TD></TR>
+<TR><TD>Integer</TD><TD>nx</TD><TD>&nbsp;</TD><TD>System order</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[nx, nx]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> ReadMatrixA2 <font color="darkgreen">&quot;Read the state matrix of a state space system&quot;</font>
+  <font color="blue">input </font>String fileName=DataDir + &quot;abcd.mat&quot;;
+  <font color="blue">input </font>String matrixName=&quot;ABCD&quot; <font color="darkgreen">
+    &quot;Name of the generalized state space system matrix&quot;</font>;
+  <font color="blue">input </font>Integer nx <font color="darkgreen">&quot;System order&quot;</font>;
+
+<font color="blue">protected </font>
+  Integer ABCDsizes[2]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</font>(fileName,
+      matrixName);
+
+  Integer nu=ABCDsizes[2] - nx;
+  Integer ny=ABCDsizes[1] - nx;
+  Real ABCD[nx + ny,nx + nu]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      matrixName,
+      nx + ny,
+      nx + nu);
+
+<font color="blue">public </font>
+  <font color="blue">output </font>Real A[nx,nx]=ABCD[1:nx, 1:nx];
+<font color="blue">algorithm </font>
+
+<font color="blue">end </font>ReadMatrixA2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ReadMatrixB<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.ReadMatrixB"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.ReadMatrixB</H2>
+<B>Read the input matrix of a state space system</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;abcd.mat&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;ABCD&quot;</TD><TD>Name of the generalized state space system matrix</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>B[nx, nu]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> ReadMatrixB <font color="darkgreen">&quot;Read the input matrix of a state space system&quot;</font>
+  <font color="blue">input </font>String fileName=DataDir + &quot;abcd.mat&quot;;
+  <font color="blue">input </font>String matrixName=&quot;ABCD&quot; <font color="darkgreen">
+    &quot;Name of the generalized state space system matrix&quot;</font>;
+
+<font color="blue">protected </font>
+  Real sizeA[1,1]=<font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      &quot;nx&quot;,
+      1,
+      1);
+  Integer ABCDsizes[2]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</font>(fileName,
+      matrixName);
+  Integer nx=<font color="red">integer</font>(sizeA[1, 1]);
+  Integer nu=ABCDsizes[2] - nx;
+  Integer ny=ABCDsizes[1] - nx;
+  Real ABCD[nx + ny,nx + nu]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      matrixName,
+      nx + ny,
+      nx + nu);
+<font color="blue">public </font>
+  <font color="blue">output </font>Real B[nx,nu]=ABCD[1:nx, nx + 1:nx + nu];
+<font color="blue">algorithm </font>
+
+<font color="blue">end </font>ReadMatrixB;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ReadMatrixB2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.ReadMatrixB2"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.ReadMatrixB2</H2>
+<B>Read the input matrix of a state space system</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;abcd.mat&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;ABCD&quot;</TD><TD>Name of the generalized state space system matrix</TD></TR>
+<TR><TD>Integer</TD><TD>nx</TD><TD>&nbsp;</TD><TD>System order</TD></TR>
+<TR><TD>Integer</TD><TD>nu</TD><TD>&nbsp;</TD><TD>number of inputs</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>B[nx, nu]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> ReadMatrixB2 <font color="darkgreen">&quot;Read the input matrix of a state space system&quot;</font>
+  <font color="blue">input </font>String fileName=DataDir + &quot;abcd.mat&quot;;
+  <font color="blue">input </font>String matrixName=&quot;ABCD&quot; <font color="darkgreen">
+    &quot;Name of the generalized state space system matrix&quot;</font>;
+  <font color="blue">input </font>Integer nx <font color="darkgreen">&quot;System order&quot;</font>;
+  <font color="blue">input </font>Integer nu <font color="darkgreen">&quot;number of inputs&quot;</font>;
+
+<font color="blue">protected </font>
+  Integer ABCDsizes[2]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</font>(fileName,
+      matrixName);
+
+  Real ABCD[ABCDsizes[1],nx + nu]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      matrixName,
+      ABCDsizes[1],
+      nx + nu);
+
+<font color="blue">public </font>
+  <font color="blue">output </font>Real B[nx,nu]=ABCD[1:nx, nx + 1:nx + nu];
+<font color="blue">algorithm </font>
+
+<font color="blue">end </font>ReadMatrixB2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ReadMatrixC<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.ReadMatrixC"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.ReadMatrixC</H2>
+<B>Read the output matrix of a state space system</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;abcd.mat&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;ABCD&quot;</TD><TD>Name of the generalized state space system matrix</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>C[ny, nx]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> ReadMatrixC <font color="darkgreen">&quot;Read the output matrix of a state space system&quot;</font>
+  <font color="blue">input </font>String fileName=DataDir + &quot;abcd.mat&quot;;
+  <font color="blue">input </font>String matrixName=&quot;ABCD&quot; <font color="darkgreen">
+    &quot;Name of the generalized state space system matrix&quot;</font>;
+
+<font color="blue">protected </font>
+  Real sizeA[1,1]=<font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      &quot;nx&quot;,
+      1,
+      1);
+  Integer ABCDsizes[2]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</font>(fileName,
+      matrixName);
+  Integer nx=<font color="red">integer</font>(sizeA[1, 1]);
+  Integer nu=ABCDsizes[2] - nx;
+  Integer ny=ABCDsizes[1] - nx;
+  Real ABCD[nx + ny,nx + nu]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      matrixName,
+      nx + ny,
+      nx + nu);
+<font color="blue">public </font>
+  <font color="blue">output </font>Real C[ny,nx]=ABCD[nx + 1:nx + ny, 1:nx];
+<font color="blue">algorithm </font>
+
+<font color="blue">end </font>ReadMatrixC;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ReadMatrixC2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.ReadMatrixC2"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.ReadMatrixC2</H2>
+<B>Read the output matrix of a state space system</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;abcd.mat&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;ABCD&quot;</TD><TD>Name of the generalized state space system matrix</TD></TR>
+<TR><TD>Integer</TD><TD>nx</TD><TD>&nbsp;</TD><TD>System order</TD></TR>
+<TR><TD>Integer</TD><TD>ny</TD><TD>&nbsp;</TD><TD>number of outputs</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>C[ny, nx]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> ReadMatrixC2 <font color="darkgreen">
+  &quot;Read the output matrix of a state space system&quot;</font>
+  <font color="blue">input </font>String fileName=DataDir + &quot;abcd.mat&quot;;
+  <font color="blue">input </font>String matrixName=&quot;ABCD&quot; <font color="darkgreen">
+    &quot;Name of the generalized state space system matrix&quot;</font>;
+  <font color="blue">input </font>Integer nx <font color="darkgreen">&quot;System order&quot;</font>;
+  <font color="blue">input </font>Integer ny <font color="darkgreen">&quot;number of outputs&quot;</font>;
+<font color="blue">protected </font>
+  Integer ABCDsizes[2]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</font>(fileName,
+      matrixName);
+
+  Real ABCD[nx + ny,ABCDsizes[2]]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      matrixName,
+      nx + ny,
+      ABCDsizes[2]);
+
+<font color="blue">public </font>
+  <font color="blue">output </font>Real C[ny,nx]=ABCD[nx + 1:nx + ny, 1:nx];
+<font color="blue">algorithm </font>
+
+<font color="blue">end </font>ReadMatrixC2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ReadMatrixD<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.ReadMatrixD"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.ReadMatrixD</H2>
+<B>Read the feed forward matrix of a state space system</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;abcd.mat&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;ABCD&quot;</TD><TD>Name of the generalized state space system matrix</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>D[ny, nu]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> ReadMatrixD <font color="darkgreen">
+  &quot;Read the feed forward matrix of a state space system&quot;</font>
+  <font color="blue">input </font>String fileName=DataDir + &quot;abcd.mat&quot;;
+  <font color="blue">input </font>String matrixName=&quot;ABCD&quot; <font color="darkgreen">
+    &quot;Name of the generalized state space system matrix&quot;</font>;
+
+<font color="blue">protected </font>
+  Real sizeA[1,1]=<font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      &quot;nx&quot;,
+      1,
+      1);
+  Integer ABCDsizes[2]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</font>(fileName,
+      matrixName);
+  Integer nx=<font color="red">integer</font>(sizeA[1, 1]);
+  Integer nu=ABCDsizes[2] - nx;
+  Integer ny=ABCDsizes[1] - nx;
+  Real ABCD[nx + ny,nx + nu]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      matrixName,
+      nx + ny,
+      nx + nu);
+<font color="blue">public </font>
+  <font color="blue">output </font>Real D[ny,nu]=ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+<font color="blue">algorithm </font>
+
+<font color="blue">end </font>ReadMatrixD;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ReadMatrixD2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.ReadMatrixD2"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.ReadMatrixD2</H2>
+<B>Read the feed forward matrix of a state space system</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;abcd.mat&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;ABCD&quot;</TD><TD>Name of the generalized state space system matrix</TD></TR>
+<TR><TD>Integer</TD><TD>nx</TD><TD>&nbsp;</TD><TD>System order</TD></TR>
+<TR><TD>Integer</TD><TD>nu</TD><TD>&nbsp;</TD><TD>number of inputs</TD></TR>
+<TR><TD>Integer</TD><TD>ny</TD><TD>&nbsp;</TD><TD>number of outputs</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>D[ny, nu]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> ReadMatrixD2 <font color="darkgreen">
+  &quot;Read the feed forward matrix of a state space system&quot;</font>
+  <font color="blue">input </font>String fileName=DataDir + &quot;abcd.mat&quot;;
+  <font color="blue">input </font>String matrixName=&quot;ABCD&quot; <font color="darkgreen">
+    &quot;Name of the generalized state space system matrix&quot;</font>;
+  <font color="blue">input </font>Integer nx <font color="darkgreen">&quot;System order&quot;</font>;
+  <font color="blue">input </font>Integer nu <font color="darkgreen">&quot;number of inputs&quot;</font>;
+  <font color="blue">input </font>Integer ny <font color="darkgreen">&quot;number of outputs&quot;</font>;
+
+<font color="blue">protected </font>
+  Real ABCD[nx + ny,nx + nu]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      matrixName,
+      nx + ny,
+      nx + nu);
+
+<font color="blue">public </font>
+  <font color="blue">output </font>Real D[ny,nu]=ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+<font color="blue">algorithm </font>
+
+<font color="blue">end </font>ReadMatrixD2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE readMatrixInternal<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.readMatrixInternal"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.readMatrixInternal</H2>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>&nbsp;</TD><TD>file name</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&nbsp;</TD><TD>matrix name</TD></TR>
+<TR><TD>Integer</TD><TD>m</TD><TD>&nbsp;</TD><TD>number of rows</TD></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>&nbsp;</TD><TD>numbre of coloumns</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[m, n]</TD><TD>matrix to read</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> readMatrixInternal
+  <font color="blue">input </font>String fileName <font color="darkgreen">&quot;file name&quot;</font>;
+  <font color="blue">input </font>String matrixName <font color="darkgreen">&quot;matrix name&quot;</font>;
+  <font color="blue">input </font>Integer m <font color="darkgreen">&quot;number of rows&quot;</font>;
+  <font color="blue">input </font>Integer n <font color="darkgreen">&quot;numbre of coloumns&quot;</font>;
+  <font color="blue">output </font>Real A[m,n] <font color="darkgreen">&quot;matrix to read&quot;</font>;
+<font color="blue">external</font> &quot;C&quot; <font color="red">Modelica_LinearSystem2_readMatrixInternal</font>(
+    fileName,
+    matrixName,
+    A,
+    m,
+    n);
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>readMatrixInternal;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE readMatrixOnFileSize<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.readMatrixOnFileSize</H2>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>&nbsp;</TD><TD>file name</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&nbsp;</TD><TD>matrix name</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>dim[2]</TD><TD>matrix to read</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> readMatrixOnFileSize
+  <font color="blue">input </font>String fileName <font color="darkgreen">&quot;file name&quot;</font>;
+  <font color="blue">input </font>String matrixName <font color="darkgreen">&quot;matrix name&quot;</font>;
+  <font color="blue">output </font>Integer dim[2] <font color="darkgreen">&quot;matrix to read&quot;</font>;
+<font color="blue">external</font> &quot;C&quot; <font color="red">readMatrixSizeEx</font>(
+    fileName,
+    matrixName,
+    dim);
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>readMatrixOnFileSize;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ReadSystemDimension<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.ReadSystemDimension</H2>
+<B>Read the order nx of state matrix and the numbers nu and ny of inputs and outputs</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;ss_siso.mat&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;ABCD&quot;</TD><TD>Name of the generalized state space system matrix</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>xuy[3]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> ReadSystemDimension <font color="darkgreen">
+  &quot;Read the order nx of state matrix and the numbers nu and ny of inputs and outputs&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">input </font>String fileName=DataDir + &quot;ss_siso.mat&quot;;
+  <font color="blue">input </font>String matrixName=&quot;ABCD&quot; <font color="darkgreen">
+    &quot;Name of the generalized state space system matrix&quot;</font>;
+  <font color="blue">output </font>Integer xuy[3];
+
+<font color="blue">protected </font>
+  Real sizeA[1,1]=<font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      &quot;nx&quot;,
+      1,
+      1);
+
+  Integer ABCDsizes[2]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</font>(fileName,
+      matrixName);
+
+<font color="blue">algorithm </font>
+  xuy[1] :=<font color="red"> integer</font>(sizeA[1, 1]);
+  xuy[2] := ABCDsizes[2] - xuy[1];
+  xuy[3] := ABCDsizes[1] - xuy[1];
+
+<font color="blue">end </font>ReadSystemDimension;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ReadSystemDimension2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.ReadSystemDimension2</H2>
+<B>Read the order nx of state matrix and the numbers nu and ny of inputs and outputs</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>DataDir + &quot;ss_siso.mat&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;ABCD&quot;</TD><TD>Name of the generalized state space system matrix</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>xuy[3]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> ReadSystemDimension2 <font color="darkgreen">
+  &quot;Read the order nx of state matrix and the numbers nu and ny of inputs and outputs&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>;
+  <font color="blue">input </font>String fileName=DataDir + &quot;ss_siso.mat&quot;;
+  <font color="blue">input </font>String matrixName=&quot;ABCD&quot; <font color="darkgreen">
+    &quot;Name of the generalized state space system matrix&quot;</font>;
+  <font color="blue">output </font>Integer xuy[3];
+
+<font color="blue">protected </font>
+  Real sizeA[1,1]=<font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(
+      fileName,
+      &quot;nx&quot;,
+      1,
+      1);
+
+  Integer ABCDsizes[2]=
+      <font color="red">Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</font>(fileName,
+      matrixName);
+
+<font color="blue">algorithm </font>
+  xuy[1] :=<font color="red"> integer</font>(sizeA[1, 1]);
+  xuy[2] := ABCDsizes[2] - xuy[1];
+  xuy[3] := ABCDsizes[1] - xuy[1];
+
+<font color="blue">end </font>ReadSystemDimension2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE stateSpaceString_html<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Internal.Streams.stateSpaceString_html"></A><A HREF="Modelica_LinearSystems2_Internal_Streams.html#Modelica_LinearSystems2.Internal.Streams"
+>Modelica_LinearSystems2.Internal.Streams</A>.stateSpaceString_html</H2>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A></TD><TD>ss</TD><TD>&nbsp;</TD><TD>State space system to be transformed in a String representation</TD></TR>
+<TR><TD>Integer</TD><TD>significantDigits</TD><TD>12</TD><TD>Number of significant digits that are shown</TD></TR>
+<TR><TD>String</TD><TD>name</TD><TD>&quot;ss&quot;</TD><TD>Independent variable name used for printing</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>s</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> stateSpaceString_html
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>Modelica_LinearSystems2.StateSpace</A>;
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Utilities_Strings.html#Modelica.Utilities.Strings"
+>Modelica.Utilities.Strings</A>;
+
+  <font color="blue">input </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2.StateSpace"
+>StateSpace</A> ss <font color="darkgreen">
+    &quot;State space system to be transformed in a String representation&quot;</font>;
+  <font color="blue">input </font>Integer significantDigits=12 <font color="darkgreen">
+    &quot;Number of significant digits that are shown&quot;</font>;
+  <font color="blue">input </font>String name=&quot;ss&quot; <font color="darkgreen">&quot;Independent variable name used for printing&quot;</font>;
+  <font color="blue">output </font>String s=&quot;&quot;;
+<font color="blue">protected </font>
+  String space=<font color="red">Strings.repeat</font>(5);
+  String space2=<font color="red">Strings.repeat</font>(3);
+  String space3=<font color="red">Strings.repeat</font>(8);
+  Integer nx=<font color="red">size</font>(ss.A, 1);
+  Integer nu=<font color="red">size</font>(ss.B, 2);
+  Integer ny=<font color="red">size</font>(ss.C, 1);
+  Integer sizeD=<font color="red">size</font>(ss.D, 2);
+  Integer stringMaxLength;
+  Boolean namesExist=false;
+
+<font color="blue">algorithm </font>
+<font color="darkgreen">//Checking if name arrays are empty</font>
+  <font color="blue">for </font>i<font color="blue"> in </font>1:nx<font color="blue"> loop</font>
+    namesExist := namesExist<font color="blue"> or </font>(ss.xNames[i] &lt;&gt; &quot;&quot;);
+  <font color="blue">end for</font>;
+
+  <font color="blue">for </font>i<font color="blue"> in </font>1:ny<font color="blue"> loop</font>
+    namesExist := namesExist<font color="blue"> or </font>(ss.yNames[i] &lt;&gt; &quot;&quot;);
+  <font color="blue">end for</font>;
+
+  <font color="blue">for </font>i<font color="blue"> in </font>1:nu<font color="blue"> loop</font>
+    namesExist := namesExist<font color="blue"> or </font>(ss.uNames[i] &lt;&gt; &quot;&quot;);
+  <font color="blue">end for</font>;
+
+  <font color="blue">if </font>namesExist<font color="blue"> then</font>
+    <font color="red">Modelica.Utilities.Streams.print</font>(&quot;namesExist == true&quot;);
+  <font color="blue">else</font>
+    <font color="red">Modelica.Utilities.Streams.print</font>(&quot;namesExist == false&quot;);
+  <font color="blue">end if</font>;
+
+  stringMaxLength :=<font color="red"> max</font>(<font color="red">size</font>(ss.xNames, 1),<font color="red"> min</font>(<font color="red">size</font>(ss.yNames, 1),
+    11));
+<font color="darkgreen">//, size(ss.uNames,1)));</font>
+  <font color="darkgreen">                                                             //, max(size(ss.yNames), size(ss.uNames))</font>
+
+  <font color="blue">if </font>nx == 0<font color="blue"> and </font>sizeD == 0<font color="blue"> then</font>
+    s := name + &quot;.A = []&lt;br&gt;  &quot; + name + &quot;.B = []&lt;br&gt;   &quot; + name + &quot;.C = [] &lt;br&gt;   &quot; + name + &quot;.D = []&quot;;
+  <font color="blue">else</font>
+    s := &quot;&lt;br&gt;&quot; + name + &quot;.A = &lt;br&gt;&quot;;
+
+<font color="darkgreen">//Horizontal</font>
+<font color="darkgreen">// Two alternatives when printing state names</font>
+    <font color="blue">if </font>namesExist == false<font color="blue"> then</font>
+<font color="darkgreen">//    if ss.xNames == fill(&quot; &quot;, size(A, 2)) then</font>
+
+      s := s +<font color="red"> Strings.repeat</font>(stringMaxLength + significantDigits - 1) +
+        &quot;x1 &quot;;
+    <font color="blue">else</font>
+      s := s +<font color="red"> Strings.repeat</font>(11 + significantDigits -<font color="red"> min</font>(<font color="red">Strings.length</font>(
+        ss.xNames[1]), 11)) +<font color="red"> Strings.repeat</font>(<font color="red">min</font>(<font color="red">Strings.length</font>(ss.xNames[
+        1]), 11)) + &quot; &quot; +<font color="red"> Strings.substring</font>(
+            ss.xNames[1],
+            1,
+            <font color="red">min</font>(<font color="red">Strings.length</font>(ss.xNames[1]), 11));
+    <font color="blue">end if</font>;
+
+    <font color="blue">for </font>i<font color="blue"> in </font>2:nx<font color="blue"> loop</font>
+
+<font color="darkgreen">//Two alternatives when printing state names</font>
+
+      <font color="blue">if </font>namesExist == false<font color="blue"> then</font>
+        s := s +<font color="red"> Strings.repeat</font>(significantDigits + 11 -<font color="red"> Strings.length</font>(&quot;x&quot;
+           +<font color="red"> String</font>(i - 1))) + &quot;x&quot; +<font color="red"> String</font>(i) + &quot; &quot;;
+      <font color="blue">else</font>
+        s := s + &quot; &quot; +<font color="red"> Strings.repeat</font>(significantDigits + 11 -<font color="red"> min</font>(
+          <font color="red">Strings.length</font>(ss.xNames[i - 1]), 11)) +<font color="red"> Strings.substring</font>(
+              ss.xNames[i],
+              1,
+              <font color="red">min</font>(<font color="red">Strings.length</font>(ss.xNames[i]), 11));
+
+      <font color="blue">end if</font>;
+
+    <font color="blue">end for</font>;
+    s := s + &quot;&lt;br&gt;&quot;;
+
+    <font color="blue">for </font>i<font color="blue"> in </font>1:nx<font color="blue"> loop</font>
+<font color="darkgreen">//Vertical</font>
+<font color="darkgreen">//Two alternatives when printing state names</font>
+      <font color="blue">if </font>namesExist == false<font color="blue"> then</font>
+        s := s + space + &quot;x&quot; +<font color="red"> String</font>(i) + &quot; &quot;;
+      <font color="blue">else</font>
+        s := s +<font color="red"> Strings.repeat</font>(significantDigits + 11 -<font color="red"> min</font>(<font color="red">Strings.length</font>(
+          ss.xNames[i]), 11)) +<font color="red"> Strings.substring</font>(
+              ss.xNames[i],
+              1,
+              <font color="red">min</font>(<font color="red">Strings.length</font>(ss.xNames[i]), 11)) + &quot; &quot;;
+
+      <font color="blue">end if</font>;
+
+      <font color="blue">for </font>j<font color="blue"> in </font>1:nx<font color="blue"> loop</font>
+        <font color="blue">if </font>ss.A[i, j] &gt;= 0<font color="blue"> then</font>
+          s := s + &quot; &quot;;
+        <font color="blue">end if</font>;
+        s := s +<font color="red"> String</font>(ss.A[i, j], significantDigits=significantDigits) +
+          <font color="red">Strings.repeat</font>(significantDigits + 11 -<font color="red"> Strings.length</font>(<font color="red">String</font>(<font color="red">abs</font>(
+          ss.A[i, j]), significantDigits=significantDigits)));
+      <font color="blue">end for</font>;
+      s := s + &quot;&lt;br&gt;&quot;;
+    <font color="blue">end for</font>;
+<font color="darkgreen">//--------------------------------------------------------------------------------------------------------------------------------------------------</font>
+    s := s + &quot;&lt;br&gt;&quot; + name + &quot;.B = &lt;br&gt;&quot;;
+ <font color="darkgreen">//Horizontal</font>
+<font color="darkgreen">// Two alternatives when printing state names</font>
+    <font color="blue">if </font>namesExist == false<font color="blue"> then</font>
+      s := s +<font color="red"> Strings.repeat</font>(stringMaxLength + significantDigits - 1) +
+        &quot;u1 &quot;;
+    <font color="blue">else</font>
+      s := s +<font color="red"> Strings.repeat</font>(11 + significantDigits -<font color="red"> min</font>(<font color="red">Strings.length</font>(
+        ss.uNames[1]), 11)) +<font color="red"> Strings.repeat</font>(<font color="red">min</font>(<font color="red">Strings.length</font>(ss.uNames[
+        1]), 11)) + &quot; &quot; +<font color="red"> Strings.substring</font>(
+            ss.uNames[1],
+            1,
+            <font color="red">min</font>(<font color="red">Strings.length</font>(ss.uNames[1]), 11));
+    <font color="blue">end if</font>;
+
+    <font color="blue">for </font>i<font color="blue"> in </font>2:nu<font color="blue"> loop</font>
+<font color="darkgreen">//Two alternatives when printing state names</font>
+      <font color="blue">if </font>namesExist == false<font color="blue"> then</font>
+        s := s +<font color="red"> Strings.repeat</font>(significantDigits + 11 -<font color="red"> Strings.length</font>(&quot;u&quot;
+           +<font color="red"> String</font>(i - 1))) + &quot;u&quot; +<font color="red"> String</font>(i) + &quot; &quot;;
+      <font color="blue">else</font>
+        s := s + &quot; &quot; +<font color="red"> Strings.repeat</font>(significantDigits + 11 -<font color="red"> min</font>(
+          <font color="red">Strings.length</font>(ss.uNames[i - 1]), 11)) +<font color="red"> Strings.substring</font>(
+              ss.uNames[i],
+              1,
+              <font color="red">min</font>(<font color="red">Strings.length</font>(ss.uNames[i]), 11));
+      <font color="blue">end if</font>;
+    <font color="blue">end for</font>;
+    s := s + &quot;&lt;br&gt;&quot;;
+    <font color="blue">for </font>i<font color="blue"> in </font>1:nx<font color="blue"> loop</font>
+
+<font color="darkgreen">//Vertical</font>
+<font color="darkgreen">//Two alternatives when printing state names</font>
+      <font color="blue">if </font>namesExist == false<font color="blue"> then</font>
+        s := s + space + &quot;x&quot; +<font color="red"> String</font>(i) + &quot; &quot;;
+      <font color="blue">else</font>
+        s := s +<font color="red"> Strings.repeat</font>(significantDigits + 11 -<font color="red"> min</font>(<font color="red">Strings.length</font>(
+          ss.xNames[i]), 11)) +<font color="red"> Strings.substring</font>(
+              ss.xNames[i],
+              1,
+              <font color="red">min</font>(<font color="red">Strings.length</font>(ss.xNames[i]), 11)) + &quot; &quot;;
+
+      <font color="blue">end if</font>;
+
+      <font color="blue">for </font>j<font color="blue"> in </font>1:nu<font color="blue"> loop</font>
+        <font color="blue">if </font>ss.B[i, j] &gt;= 0<font color="blue"> then</font>
+          s := s + &quot; &quot;;
+        <font color="blue">end if</font>;
+        s := s +<font color="red"> String</font>(ss.B[i, j], significantDigits=significantDigits) +
+          <font color="red">Strings.repeat</font>(significantDigits + 11 -<font color="red"> Strings.length</font>(<font color="red">String</font>(<font color="red">abs</font>(
+          ss.B[i, j]), significantDigits=significantDigits)));
+      <font color="blue">end for</font>;
+      s := s + &quot;&lt;br&gt;&quot;;
+    <font color="blue">end for</font>;
+
+<font color="darkgreen">//--------------------------------------------------------------------------------------------------------------------------------------------------</font>
+    s := s + &quot;&lt;br&gt;&quot; + name + &quot;.C = &lt;br&gt;&quot;;
+ <font color="darkgreen">//Horizontal</font>
+<font color="darkgreen">// Two alternatives when printing state names</font>
+    <font color="blue">if </font>namesExist == false<font color="blue"> then</font>
+      s := s +<font color="red"> Strings.repeat</font>(stringMaxLength + significantDigits - 1) +
+        &quot;x1 &quot;;
+    <font color="blue">else</font>
+      s := s +<font color="red"> Strings.repeat</font>(11 + significantDigits -<font color="red"> min</font>(<font color="red">Strings.length</font>(
+        ss.xNames[1]), 11)) +<font color="red"> Strings.repeat</font>(<font color="red">min</font>(<font color="red">Strings.length</font>(ss.xNames[
+        1]), 11)) + &quot; &quot; +<font color="red"> Strings.substring</font>(
+            ss.xNames[1],
+            1,
+            <font color="red">min</font>(<font color="red">Strings.length</font>(ss.xNames[1]), 11));
+    <font color="blue">end if</font>;
+
+    <font color="blue">for </font>i<font color="blue"> in </font>2:nx<font color="blue"> loop</font>
+<font color="darkgreen">//Two alternatives when printing state names</font>
+      <font color="blue">if </font>namesExist == false<font color="blue"> then</font>
+        s := s +<font color="red"> Strings.repeat</font>(significantDigits + 11 -<font color="red"> Strings.length</font>(&quot;x&quot;
+           +<font color="red"> String</font>(i - 1))) + &quot;x&quot; +<font color="red"> String</font>(i) + &quot; &quot;;
+      <font color="blue">else</font>
+        s := s + &quot; &quot; +<font color="red"> Strings.repeat</font>(significantDigits + 11 -<font color="red"> min</font>(
+          <font color="red">Strings.length</font>(ss.xNames[i - 1]), 11)) +<font color="red"> Strings.substring</font>(
+              ss.xNames[i],
+              1,
+              <font color="red">min</font>(<font color="red">Strings.length</font>(ss.xNames[i]), 11));
+      <font color="blue">end if</font>;
+    <font color="blue">end for</font>;
+    s := s + &quot;&lt;br&gt;&quot;;
+
+    <font color="blue">for </font>i<font color="blue"> in </font>1:nu<font color="blue"> loop</font>
+<font color="darkgreen">//Vertical</font>
+<font color="darkgreen">//Two alternatives when printing state names</font>
+      <font color="blue">if </font>namesExist == false<font color="blue"> then</font>
+        s := s + space + &quot;y&quot; +<font color="red"> String</font>(i) + &quot; &quot;;
+      <font color="blue">else</font>
+        s := s +<font color="red"> Strings.repeat</font>(significantDigits + 11 -<font color="red"> min</font>(<font color="red">Strings.length</font>(
+          ss.yNames[i]), 11)) +<font color="red"> Strings.substring</font>(
+              ss.yNames[i],
+              1,
+              <font color="red">min</font>(<font color="red">Strings.length</font>(ss.yNames[i]), 11)) + &quot; &quot;;
+
+      <font color="blue">end if</font>;
+
+      <font color="blue">for </font>j<font color="blue"> in </font>1:nx<font color="blue"> loop</font>
+        <font color="blue">if </font>ss.C[i, j] &gt;= 0<font color="blue"> then</font>
+          s := s + &quot; &quot;;
+        <font color="blue">end if</font>;
+        s := s +<font color="red"> String</font>(ss.C[i, j], significantDigits=significantDigits) +
+          <font color="red">Strings.repeat</font>(significantDigits + 11 -<font color="red"> Strings.length</font>(<font color="red">String</font>(<font color="red">abs</font>(
+          ss.C[i, j]), significantDigits=significantDigits)));
+      <font color="blue">end for</font>;
+      s := s + &quot;&lt;br&gt;&quot;;
+    <font color="blue">end for</font>;
+<font color="darkgreen">//--------------------------------------------------------------------------------------------------------------------------------------------------</font>
+    s := s + &quot;&lt;br&gt;&quot; + name + &quot;.D = &lt;br&gt;&quot;;
+ <font color="darkgreen">//Horizontal</font>
+<font color="darkgreen">// Two alternatives when printing state names</font>
+    <font color="blue">if </font>namesExist == false<font color="blue"> then</font>
+      s := s +<font color="red"> Strings.repeat</font>(stringMaxLength + significantDigits - 1) +
+        &quot;u1 &quot;;
+    <font color="blue">else</font>
+      s := s +<font color="red"> Strings.repeat</font>(11 + significantDigits -<font color="red"> min</font>(<font color="red">Strings.length</font>(
+        ss.uNames[1]), 11)) +<font color="red"> Strings.repeat</font>(<font color="red">min</font>(<font color="red">Strings.length</font>(ss.uNames[
+        1]), 11)) + &quot; &quot; +<font color="red"> Strings.substring</font>(
+            ss.uNames[1],
+            1,
+            <font color="red">min</font>(<font color="red">Strings.length</font>(ss.uNames[1]), 11));
+    <font color="blue">end if</font>;
+
+    <font color="blue">for </font>i<font color="blue"> in </font>2:nu<font color="blue"> loop</font>
+<font color="darkgreen">//Two alternatives when printing state names</font>
+      <font color="blue">if </font>namesExist == false<font color="blue"> then</font>
+        s := s +<font color="red"> Strings.repeat</font>(significantDigits + 11 -<font color="red"> Strings.length</font>(&quot;u&quot;
+           +<font color="red"> String</font>(i - 1))) + &quot;u&quot; +<font color="red"> String</font>(i) + &quot; &quot;;
+      <font color="blue">else</font>
+        s := s + &quot; &quot; +<font color="red"> Strings.repeat</font>(significantDigits + 11 -<font color="red"> min</font>(
+          <font color="red">Strings.length</font>(ss.uNames[i - 1]), 11)) +<font color="red"> Strings.substring</font>(
+              ss.uNames[i],
+              1,
+              <font color="red">min</font>(<font color="red">Strings.length</font>(ss.uNames[i]), 11));
+      <font color="blue">end if</font>;
+    <font color="blue">end for</font>;
+    s := s + &quot;&lt;br&gt;&quot;;
+    <font color="blue">for </font>i<font color="blue"> in </font>1:ny<font color="blue"> loop</font>
+<font color="darkgreen">//Vertical</font>
+<font color="darkgreen">//Two alternatives when printing state names</font>
+      <font color="blue">if </font>namesExist == false<font color="blue"> then</font>
+        s := s + space + &quot;y&quot; +<font color="red"> String</font>(i) + &quot; &quot;;
+      <font color="blue">else</font>
+        s := s +<font color="red"> Strings.repeat</font>(significantDigits + 11 -<font color="red"> min</font>(<font color="red">Strings.length</font>(
+          ss.yNames[i]), 11)) +<font color="red"> Strings.substring</font>(
+              ss.yNames[i],
+              1,
+              <font color="red">min</font>(<font color="red">Strings.length</font>(ss.yNames[i]), 11)) + &quot; &quot;;
+
+      <font color="blue">end if</font>;
+
+      <font color="blue">for </font>j<font color="blue"> in </font>1:nu<font color="blue"> loop</font>
+        <font color="blue">if </font>ss.D[i, j] &gt;= 0<font color="blue"> then</font>
+          s := s + &quot; &quot;;
+        <font color="blue">end if</font>;
+        s := s +<font color="red"> String</font>(ss.D[i, j], significantDigits=significantDigits) +
+          <font color="red">Strings.repeat</font>(significantDigits + 11 -<font color="red"> Strings.length</font>(<font color="red">String</font>(<font color="red">abs</font>(
+          ss.D[i, j]), significantDigits=significantDigits)));
+      <font color="blue">end for</font>;
+      s := s + &quot;&lt;br&gt;&quot;;
+    <font color="blue">end for</font>;
+
+  <font color="blue">end if</font>;
+
+<font color="blue">end </font>stateSpaceString_html;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:29:01 2010.
+</address></BODY>
+</HTML>

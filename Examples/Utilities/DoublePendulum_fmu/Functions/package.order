@@ -1,0 +1,14 @@
+FmiInstance
+fmiSetTime
+fmiSetContinuousStates
+fmiGetContinuousStates
+fmiCompletedStep
+fmiEventUpdate
+fmiInitialize
+fmiSetReal
+fmiGetReal
+fmiGetInteger
+fmiGetBoolean
+fmiSetBoolean
+fmiGetDerivatives
+fmiSetInteger

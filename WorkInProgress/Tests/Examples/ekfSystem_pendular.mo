@@ -6,7 +6,6 @@ function ekfSystem_pendular "Pendular state function"
   extends Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemBase;
 
 protected
-  Integer nx=size(x,1);
   Real F[nx] "System state function";
   Real F_x[nx,nx] "Jacobian matrix of system";
   Real dFdx_1[nx];
@@ -15,7 +14,6 @@ protected
   Real dFdx_4[nx]={0, 0, 1, 0};
 
   Real delta_x[nx] "Solution of tustin approximation";
-
   Real LU[nx,nx] "LU decomposition";
   Integer pivots[nx] "Pivots of LU decomposition";
 
@@ -38,6 +36,6 @@ algorithm
   x_new := x + delta_x;
   y := {x_new[3] + 10*sin(x_new[1]),x_new[1]};
   Ak := Matrices.LU_solve2(LU, pivots, identity(nx) + (Ts/2)*(F_x));// Discretized Jacobi of F
-  Ck := [10*cos(x[1]),0,1,0; 1,0,0,0];// Discretized Jacobi of y
+  Ck := [10*cos(x_new[1]),0,1,0; 1,0,0,0];// Discretized Jacobi of y
 
 end ekfSystem_pendular;

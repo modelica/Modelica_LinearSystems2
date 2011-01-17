@@ -1,0 +1,1736 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.Math.Matrices.Internal</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Internal<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal"></A><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>.Internal</H2>
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Examples.careS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.carenls" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.carenls"
+>carenls</A>
+</TD><TD>Newton&#39;s method with exact line search for solving continuous algebraic riccati equation</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.dgeqp3_workdimS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.dgeqp3_workdim" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.dgeqp3_workdim"
+>dgeqp3_workdim</A>
+</TD><TD>Calculate the optimal size of the WORK array in dgeqp3</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.dgeqp3_workdimS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.dgeqrf_workdim" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.dgeqrf_workdim"
+>dgeqrf_workdim</A>
+</TD><TD>Calculate the optimal size of the WORK array in dgeqrf</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.dgeqp3_workdimS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.dhseqr_workdim" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.dhseqr_workdim"
+>dhseqr_workdim</A>
+</TD><TD>Calculate the optimal size of the WORK array in dhseqr</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.dgeqp3_workdimS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.eigenvalues2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.eigenvalues2"
+>eigenvalues2</A>
+</TD><TD>Compute eigenvalues and unnormalized eigenvectors</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.dgeqp3_workdimS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg"
+>eigenvaluesHessenberg</A>
+</TD><TD>Compute eigenvalues of an upper Hessenberg form matrix</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.findLocal_tkS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.findLocal_tk" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.findLocal_tk"
+>findLocal_tk</A>
+</TD><TD>Find a local minimizer tk to define the length of the step tk*Nk in carenls</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRowS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRow" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRow"
+>haveZeroRow</A>
+</TD><TD>Boolean output is true if at least one matrix row is zero vector</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRowS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.hessenberg2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.hessenberg2"
+>hessenberg2</A>
+</TD><TD>Compute an upper Hessenberg matrix by repeatedly applicated householder similarity transformation</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRowS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.hohoTrafoLowerHess" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.hohoTrafoLowerHess"
+>hohoTrafoLowerHess</A>
+</TD><TD>Compute the similarity transformation S*A*S of matrix A with householder matrix S = I - 2u*u&#39; to compute a lower Hessenberg form</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRowS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.hohoTrafoUpperHess" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.hohoTrafoUpperHess"
+>hohoTrafoUpperHess</A>
+</TD><TD>Compute the similarity (Householder-) transformation S*A*S of matrix A with householder matrix S = I - 2u*u&#39; to compute an upper Hessenberg form</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRowS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.householderSimilarityTransformation2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.householderSimilarityTransformation2"
+>householderSimilarityTransformation2</A>
+</TD><TD>Calculate the similarity transformation SAS of matrix A with householder matrix S = I - 2u*u&#39;/(u&#39;*u) to compute a lower Hessenberg form</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRowS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.multiplyWithOrthogonalQ_hr" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.multiplyWithOrthogonalQ_hr"
+>multiplyWithOrthogonalQ_hr</A>
+</TD><TD>overwrites the general real M-by-N matrix C with Q * C or C * Q or Q&#39; * C or C * Q&#39;, depending on inputs trans and side</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRowS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.multiplyWithOrthogonalQ_qr" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.multiplyWithOrthogonalQ_qr"
+>multiplyWithOrthogonalQ_qr</A>
+</TD><TD>overwrites the general real M-by-N matrix C with Q * C or C * Q or Q&#39; * C or C * Q&#39;, where Q is an orthogonal matrix of a QR factorization as returned by dgeqrf</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.QRS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.QR" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.QR"
+>QR</A>
+</TD><TD>QR decomposition of a square matrix with column pivoting (A(:,p) = Q*R)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.QR2S.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.QR2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.QR2"
+>QR2</A>
+</TD><TD>QR decomposition of a square matrix with column pivoting (A(:,p) = Q*R). Uses dgeqpf instead of dgeqp3</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.QR2S.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain"
+>readMatrixGain</A>
+</TD><TD>Read a matrix from mat-file</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.QR2S.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.reorderRSF" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.reorderRSF"
+>reorderRSF</A>
+</TD><TD>Reorders a real Schur factorization according to a given pattern of the eigenvalues</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.QR2S.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.reorderRSF2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.reorderRSF2"
+>reorderRSF2</A>
+</TD><TD>Reorders a real Schur factorization for poleAssigmentMI design</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.k_care_uS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u"
+>k_care_u</A>
+</TD><TD>calculate the upper bound of the CARE, i.e. Q + A&#39;*X + X*A - X*G*X = 0  condition number using Lyapunov equations</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.k_care_uS.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm"
+>frobeniusNorm</A>
+</TD><TD>Return the Frobenius norm of a matrix</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE carenls<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.carenlsI.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.carenls" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.carenls"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.carenls</H2>
+<B>Newton&#39;s method with exact line search for solving continuous algebraic riccati equation</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>B[size(A, 1), :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>R[size(B, 2), size(B, 2)]</TD><TD>identity(size(B, 2))</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>Q[size(A, 1), size(A, 2)]</TD><TD>identity(size(A, 1))</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>X0[size(A, 1), size(A, 2)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>eps</TD><TD>Modelica_LinearSystems2.Math...</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>X[size(X0, 1), size(X0, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>r</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> carenls <font color="darkgreen">
+  &quot;Newton&#39;s method with exact line search for solving continuous algebraic riccati equation&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Modelica_LinearSystems2.Math.Polynomial</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+
+  <font color="blue">input </font>Real A[:,<font color="red">size</font>(A, 1)];
+  <font color="blue">input </font>Real B[<font color="red">size</font>(A, 1),:];
+  <font color="blue">input </font>Real R[<font color="red">size</font>(B, 2),<font color="red">size</font>(B, 2)]=<font color="red">identity</font>(<font color="red">size</font>(B, 2));
+  <font color="blue">input </font>Real Q[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=<font color="red">identity</font>(<font color="red">size</font>(A, 1));
+  <font color="blue">input </font>Real X0[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)];
+  <font color="blue">input </font>Real eps=<font color="red">Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm</font>(
+                                        A)*1e-9;
+
+  <font color="blue">output </font>Real X[<font color="red">size</font>(X0, 1),<font color="red">size</font>(X0, 2)];
+  <font color="blue">output </font>Real r;
+
+<font color="blue">protected </font>
+  Integer n=<font color="red">size</font>(A, 1);
+  Real G[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=B*<font color="red">Modelica.Math.Matrices.solve2</font>(R,<font color="red"> transpose</font>(B));
+  Real Xk[<font color="red">size</font>(X, 1),<font color="red">size</font>(X, 2)];
+  Real Ak[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)];
+  Real Rk[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)];
+  Real Nk[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)];
+  Real tk;
+  Integer k;
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> xc[2];
+  Boolean stop;
+
+<font color="blue">algorithm </font>
+  <font color="blue">if </font>n &gt; 1<font color="blue"> then</font>
+    k := 0;
+    stop := false;
+    Xk := X0;
+    <font color="blue">while </font>(<font color="blue">not </font>stop<font color="blue"> and </font>k&lt;10)<font color="blue"> loop</font>
+      k := k + 1;
+      Ak := A - G*Xk;
+      Rk :=<font color="red"> transpose</font>(A)*Xk + Xk*A + Q - Xk*G*Xk;
+      Nk :=<font color="red"> Matrices.lyapunov</font>(Ak, -Rk);
+      tk :=<font color="red"> Matrices.Internal.findLocal_tk</font>(Rk, G, Nk);
+      stop := eps &gt;<font color="red"> Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm</font>(
+                                           tk*Nk)/<font color="red">Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm</font>(
+                                                                         Xk);
+      Xk := Xk + tk*Nk;
+    <font color="blue">end while</font>;
+    X := Xk;
+    r :=<font color="red"> Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm</font>(
+                                X*A +<font color="red"> transpose</font>(A)*X - X*G*X + Q);
+
+  <font color="blue">elseif </font>n == 1<font color="blue"> then</font>
+    xc :=<font color="red"> Polynomial.roots</font>(<font color="red">Polynomial</font>({-G[1, 1],2*A[1, 1],Q[1, 1]}));
+    X :=<font color="red"> matrix</font>(-<font color="red">abs</font>(xc[1].re));
+    r := 0;
+  <font color="blue">else</font>
+    X :=<font color="red"> fill</font>(0, 0, 0);
+    r := 0;
+  <font color="blue">end if</font>;
+
+<font color="blue">end </font>carenls;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE dgeqp3_workdim<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.dgeqp3_workdim"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.dgeqp3_workdim</H2>
+<B>Calculate the optimal size of the WORK array in dgeqp3</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>lwork</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> dgeqp3_workdim <font color="darkgreen">
+  &quot;Calculate the optimal size of the WORK array in dgeqp3&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices_LAPACK.html#Modelica_LinearSystems2.Math.Matrices.LAPACK"
+>Modelica_LinearSystems2.Math.Matrices.LAPACK</A>;
+
+  <font color="blue">input </font>Real A[:,:];
+
+  <font color="blue">output </font>Integer lwork;
+  <font color="blue">output </font>Integer info;
+
+<font color="blue">protected </font>
+  Real work[:];
+
+<font color="blue">algorithm </font>
+  (,,,info,work) :=<font color="red"> LAPACK.dgeqp3</font>(A, -1);
+  lwork :=<font color="red"> integer</font>(work[1]);
+
+<font color="blue">end </font>dgeqp3_workdim;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE dgeqrf_workdim<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.dgeqrf_workdim"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.dgeqrf_workdim</H2>
+<B>Calculate the optimal size of the WORK array in dgeqrf</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>lwork</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> dgeqrf_workdim <font color="darkgreen">
+  &quot;Calculate the optimal size of the WORK array in dgeqrf&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices_LAPACK.html#Modelica_LinearSystems2.Math.Matrices.LAPACK"
+>Modelica_LinearSystems2.Math.Matrices.LAPACK</A>;
+
+  <font color="blue">input </font>Real A[:,:];
+
+  <font color="blue">output </font>Integer lwork;
+  <font color="blue">output </font>Integer info;
+
+<font color="blue">protected </font>
+  Real work[:];
+
+<font color="blue">algorithm </font>
+  (,,info,work) :=<font color="red"> LAPACK.dgeqrf</font>(A, -1);
+  lwork :=<font color="red"> integer</font>(work[1]);
+
+<font color="blue">end </font>dgeqrf_workdim;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE dhseqr_workdim<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.dhseqr_workdim"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.dhseqr_workdim</H2>
+<B>Calculate the optimal size of the WORK array in dhseqr</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>H[:, :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>lwork</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> dhseqr_workdim <font color="darkgreen">
+  &quot;Calculate the optimal size of the WORK array in dhseqr&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices_LAPACK.html#Modelica_LinearSystems2.Math.Matrices.LAPACK"
+>Modelica_LinearSystems2.Math.Matrices.LAPACK</A>;
+
+  <font color="blue">input </font>Real H[:,:];
+
+  <font color="blue">output </font>Integer lwork;
+  <font color="blue">output </font>Integer info;
+
+<font color="blue">protected </font>
+  Real work[:];
+
+<font color="blue">algorithm </font>
+  <font color="blue">if </font><font color="red">min</font>(<font color="red">size</font>(H, 1),<font color="red"> size</font>(H, 2)) &gt; 0<font color="blue"> then</font>
+    (,,info,,,work) :=<font color="red"> LAPACK.dhseqr</font>(H, -1);
+    lwork :=<font color="red"> integer</font>(work[1]);
+  <font color="blue">else</font>
+    lwork := 1;
+  <font color="blue">end if</font>;
+
+<font color="blue">end </font>dhseqr_workdim;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE eigenvalues2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.eigenvalues2"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.eigenvalues2</H2>
+<B>Compute eigenvalues and unnormalized eigenvectors</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+ 
+<pre>
+</PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>alphaReal[size(A, 1)]</TD><TD>Real part of alpha (eigenvalue=(alphaReal+i*alphaImag))</TD></TR>
+<TR><TD>Real</TD><TD>alphaImag[size(A, 1)]</TD><TD>Imaginary part of alpha (eigenvalue=(alphaReal+i*alphaImag))</TD></TR>
+<TR><TD>Real</TD><TD>lEigenVectors[size(A, 1), size(A, 1)]</TD><TD>left eigenvectors of matrix A</TD></TR>
+<TR><TD>Real</TD><TD>rEigenVectors[size(A, 1), size(A, 1)]</TD><TD>right eigenvectors of matrix A</TD></TR>
+<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> eigenvalues2 <font color="darkgreen">
+  &quot;Compute eigenvalues and unnormalized eigenvectors&quot;</font>
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices_LAPACK.html#Modelica_LinearSystems2.Math.Matrices.LAPACK"
+>Modelica_LinearSystems2.Math.Matrices.LAPACK</A>;
+
+  <font color="blue">input </font>Real A[:,<font color="red">size</font>(A, 1)];
+
+  <font color="blue">output </font>Real alphaReal[<font color="red">size</font>(A, 1)] <font color="darkgreen">
+    &quot;Real part of alpha (eigenvalue=(alphaReal+i*alphaImag))&quot;</font>;
+  <font color="blue">output </font>Real alphaImag[<font color="red">size</font>(A, 1)] <font color="darkgreen">
+    &quot;Imaginary part of alpha (eigenvalue=(alphaReal+i*alphaImag))&quot;</font>;
+  <font color="blue">output </font>Real lEigenVectors[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)] <font color="darkgreen">
+    &quot;left eigenvectors of matrix A&quot;</font>;
+  <font color="blue">output </font>Real rEigenVectors[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)] <font color="darkgreen">
+    &quot;right eigenvectors of matrix A&quot;</font>;
+  <font color="blue">output </font>Integer info=0;
+<font color="blue">protected </font>
+  Integer n=<font color="red">size</font>(A, 1);
+  Real H[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Upper Hessenberg form&quot;</font>;
+  Real V[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">
+    &quot;V=[v1,v2,..vn-1,0] with vi are vectors which define the elementary reflectors&quot;</font>;
+  Real tau[<font color="red">size</font>(A, 1) - 1];
+  Real Q[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)];
+  Real Zo[:,:];
+  Real Ho[:,:];
+
+  Integer lwork;
+
+<font color="blue">algorithm </font>
+  (H,V,tau) :=<font color="red"> Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg</font>(
+                                        A,1,n);
+  Q :=<font color="red"> LAPACK.dorghr</font>(V, 1, n, tau);
+
+ lwork :=<font color="red"> Internal.dhseqr_workdim</font>(H);
+
+  <font color="blue">if </font><font color="red">size</font>(H, 1) &gt; 0<font color="blue"> then</font>
+   (alphaReal,alphaImag,info,Ho,Zo) :=<font color="red"> LAPACK.dhseqr</font>(H, lwork, false, &quot;V&quot;, Q);
+  <font color="blue">else</font>
+    alphaReal :=<font color="red"> fill</font>(0,<font color="red"> size</font>(H, 1));
+    alphaImag :=<font color="red"> fill</font>(0,<font color="red"> size</font>(H, 1));
+    Zo :=<font color="red"> fill</font>(0,<font color="red"> size</font>(H, 1),<font color="red"> size</font>(H, 2));
+    Ho :=<font color="red"> fill</font>(0,<font color="red"> size</font>(H, 1),<font color="red"> size</font>(H, 2));
+  <font color="blue">end if</font>;
+
+  (lEigenVectors,rEigenVectors) :=<font color="red"> LAPACK.dtrevc</font>(Ho, &quot;B&quot;, &quot;B&quot;, Zo);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>eigenvalues2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE eigenvaluesHessenberg<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.eigenvaluesHessenberg</H2>
+<B>Compute eigenvalues of an upper Hessenberg form matrix</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+This function uses DHSEQR Lapack-routine to calculate the eigenvalues of an upper Hessenberg form <b>H</b>.
+Therefore, <b>H</b> is reduced to Schur form <b>T</b>. The eigenvalues are obtained from the diagonal of <b>T</b>.
+ 
+<p>
+See Modelica_LinearSystems2.Math.Matrices.LAPACK.dhseqr for details
+</p>
+<pre>
+</PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>H[:, size(H, 1)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>alphaReal[size(H, 1)]</TD><TD>Real part of alpha (eigenvalue=(alphaReal+i*alphaImag))</TD></TR>
+<TR><TD>Real</TD><TD>alphaImag[size(H, 1)]</TD><TD>Imaginary part of alpha (eigenvalue=(alphaReal+i*alphaImag))</TD></TR>
+<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> eigenvaluesHessenberg <font color="darkgreen">
+  &quot;Compute eigenvalues of an upper Hessenberg form matrix&quot;</font>
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices_LAPACK.html#Modelica_LinearSystems2.Math.Matrices.LAPACK"
+>Modelica_LinearSystems2.Math.Matrices.LAPACK</A>;
+  <font color="blue">input </font>Real H[:,<font color="red">size</font>(H, 1)];
+
+  <font color="blue">output </font>Real alphaReal[<font color="red">size</font>(H, 1)] <font color="darkgreen">
+    &quot;Real part of alpha (eigenvalue=(alphaReal+i*alphaImag))&quot;</font>;
+  <font color="blue">output </font>Real alphaImag[<font color="red">size</font>(H, 1)] <font color="darkgreen">
+    &quot;Imaginary part of alpha (eigenvalue=(alphaReal+i*alphaImag))&quot;</font>;
+  <font color="blue">output </font>Integer info=0;
+<font color="blue">protected </font>
+  Integer n=<font color="red">size</font>(H, 1);
+  Integer ilo=1;
+  Integer ihi=n;
+  Integer lwork=<font color="red">Internal.dhseqr_workdim</font>(H);
+  Real work[lwork];
+  Real Z[n,n]=<font color="red">fill</font>(
+        0,
+        n,
+        n);
+
+<font color="blue">algorithm </font>
+  <font color="blue">if </font><font color="red">size</font>(H, 1) &gt; 0<font color="blue"> then</font>
+    (alphaReal,alphaImag,info) :=<font color="red"> LAPACK.dhseqr</font>(H, lwork);
+  <font color="blue">else</font>
+    alphaReal :=<font color="red"> fill</font>(0,<font color="red"> size</font>(H, 1));
+    alphaImag :=<font color="red"> fill</font>(0,<font color="red"> size</font>(H, 1));
+  <font color="blue">end if</font>;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>eigenvaluesHessenberg;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE findLocal_tk<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.findLocal_tkI.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.findLocal_tk" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.findLocal_tk"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.findLocal_tk</H2>
+<B>Find a local minimizer tk to define the length of the step tk*Nk in carenls</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>Rk[:, size(Rk, 2)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>G[size(Rk, 1), size(Rk, 2)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>Nk[size(Rk, 1), size(Rk, 2)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>tk</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> findLocal_tk <font color="darkgreen">
+  &quot;Find a local minimizer tk to define the length of the step tk*Nk in carenls&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Modelica_LinearSystems2.Math.Polynomial</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Modelica_LinearSystems2.Math.Complex</A>;
+
+  <font color="blue">input </font>Real Rk[:,<font color="red">size</font>(Rk, 2)];
+  <font color="blue">input </font>Real G[<font color="red">size</font>(Rk, 1),<font color="red">size</font>(Rk, 2)];
+  <font color="blue">input </font>Real Nk[<font color="red">size</font>(Rk, 1),<font color="red">size</font>(Rk, 2)];
+
+  <font color="blue">output </font>Real tk;
+
+<font color="blue">protected </font>
+  Real Vk[<font color="red">size</font>(Rk, 1),<font color="red">size</font>(Rk, 2)];
+  Real alpha_k;
+  Real beta_k;
+  Real gamma_k;
+  <A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</A> p[3];
+  Boolean h;
+
+<font color="blue">algorithm </font>
+  Vk := Nk*G*Nk;
+  alpha_k :=<font color="red"> Matrices.trace</font>(Rk*Rk);
+  beta_k :=<font color="red"> Matrices.trace</font>(Rk*Vk);
+  gamma_k :=<font color="red"> Matrices.trace</font>(Vk*Vk);
+
+  <font color="blue">if </font>gamma_k &gt; Modelica.Constants.eps<font color="blue"> then</font>
+    p :=<font color="red"> Polynomial.roots</font>(<font color="red">Polynomial</font>({4*gamma_k,6*beta_k,2*(alpha_k - 2*beta_k),
+      -2*alpha_k}));
+    h := false;
+    <font color="blue">for </font>i1<font color="blue"> in </font>1:3<font color="blue"> loop</font>
+      <font color="blue">if </font>(<font color="red">abs</font>(<font color="red">Complex.imag</font>(p[i1])) &lt; Modelica.Constants.eps)<font color="blue"> then</font>
+        <font color="blue">if </font>(<font color="red">abs</font>(<font color="red">Complex.real</font>(p[i1]) - 1) &lt;= 1)<font color="blue"> then</font>
+          tk :=<font color="red"> Complex.real</font>(p[i1]);
+          h := true;
+        <font color="blue">end if</font>;
+      <font color="blue">end if</font>;
+    <font color="blue">end for</font>;
+    <font color="blue">if </font><font color="blue">not </font>h<font color="blue"> then</font>
+      tk := 1;
+    <font color="blue">end if</font>;
+
+  <font color="blue">else</font>
+    tk := 1;
+  <font color="blue">end if</font>;
+
+<font color="blue">end </font>findLocal_tk;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE haveZeroRow<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRow"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.haveZeroRow</H2>
+<B>Boolean output is true if at least one matrix row is zero vector</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, :]</TD><TD>fill(0, 0, 0)</TD><TD>input matrix</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>result</TD><TD>is true if A has at least one zero row</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> haveZeroRow <font color="darkgreen">
+  &quot;Boolean output is true if at least one matrix row is zero vector&quot;</font>
+
+  <font color="blue">input </font>Real A[:,:]=<font color="red">fill</font>(
+        0,
+        0,
+        0) <font color="darkgreen">&quot;input matrix&quot;</font>;
+  <font color="blue">output </font>Boolean result <font color="darkgreen">&quot;is true if A has at least one zero row&quot;</font>;
+
+<font color="blue">protected </font>
+  Boolean h;
+  Integer i;
+<font color="blue">algorithm </font>
+
+  i := 1;
+  h := false;
+  <font color="blue">while </font>i &lt;<font color="red"> size</font>(A, 1) + 1<font color="blue"> and </font><font color="blue">not </font>h<font color="blue"> loop</font>
+    h :=<font color="red"> Modelica.Math.Vectors.isEqual</font>(
+        <font color="red">zeros</font>(<font color="red">size</font>(A, 2)),
+        A[i, :],
+        100*Modelica.Constants.eps);
+    i := i + 1;
+  <font color="blue">end while</font>;
+  result := h;
+
+<font color="blue">end </font>haveZeroRow;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE hessenberg2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.hessenberg2"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.hessenberg2</H2>
+<B>Compute an upper Hessenberg matrix by repeatedly applicated householder similarity transformation</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+ 
+This function computes the Hessenberg matrix of matrix <b>A</b> by repetitive application of Householder similarity transformation 
+ <pre>
+    <b>A</b>i+1 = (<b>I</b>-2*<b>u</b>_i*<b>u</b>_i')*<b>A</b>i*(<b>I</b>-2*<b>u</b>_i*<b>u</b>_i')
+</pre>
+with Householder vector <b>u</b>_i.
+<p>
+The elementary transformations can be subsumed under
+ <pre> <b>A</b> -> <b>Q</b>*<b>A</b>*<b>Q</b>
+</pre>
+and <b>Q</b>*<b>A</b>*<b>Q</b> is Hessenberg matrix.
+<p>
+In contrast to function <b>Modelica_LinearSystems2.Math.Matrices.hess</b>, function <b>Modelica_LinearSystems2.Math.Matrices.hess3</b> does not use any LAPACK routine.
+ 
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>H[:, :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>s</TD><TD>&quot;u&quot;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>Ht[size(H, 1), size(H, 2)]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> hessenberg2 <font color="darkgreen">
+  &quot;Compute an upper Hessenberg matrix by repeatedly applicated householder similarity transformation&quot;</font>
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>;
+
+  <font color="blue">input </font>Real H[:,:];
+  <font color="blue">input </font>String s=&quot;u&quot;;
+  <font color="blue">output </font>Real Ht[<font color="red">size</font>(H, 1),<font color="red">size</font>(H, 2)];
+
+<font color="blue">protected </font>
+  Integer q=<font color="red">size</font>(H, 1);
+  Real u[:] <font color="darkgreen">&quot;householder vector&quot;</font>;
+  Integer ll;
+
+<font color="blue">algorithm </font>
+  <font color="red">assert</font>(s == &quot;u&quot;<font color="blue"> or </font>s == &quot;l&quot;,
+    &quot;parameter s should be equal to &#39;u&#39; or &#39;l&#39; to indicate upper or lower Hessenberg form&quot;);
+
+  Ht := H;
+
+  <font color="blue">for </font>ll<font color="blue"> in </font>1:q - 2<font color="blue"> loop</font>
+    u := <font color="blue">if </font>s == &quot;u&quot;<font color="blue"> then </font><font color="red">cat</font>(
+      1,
+      <font color="red">zeros</font>(ll),
+      <font color="red">cat</font>(1,<font color="red"> Vectors.householderVector</font>(<font color="red">vector</font>(Ht[ll + 1:q, ll]),<font color="red"> cat</font>(
+        1,
+        {1},
+        <font color="red">zeros</font>(q - ll - 1)))))<font color="blue"> else </font><font color="red">cat</font>(
+      1,
+      <font color="red">cat</font>(1,<font color="red"> Vectors.householderVector</font>(<font color="red">vector</font>(Ht[1:q - ll, q - ll + 1]),<font color="red"> cat</font>(
+        1,
+        <font color="red">zeros</font>(q - ll - 1),
+        {1}))),
+      <font color="red">zeros</font>(ll));
+
+    Ht := <font color="blue">if </font>s == &quot;u&quot;<font color="blue"> then </font>
+      <font color="red">Modelica_LinearSystems2.Math.Matrices.Internal.hohoTrafoUpperHess</font>(
+      Ht,
+      u,
+      ll)<font color="blue"> else </font>
+      <font color="red">Modelica_LinearSystems2.Math.Matrices.Internal.hohoTrafoLowerHess</font>(
+      Ht,
+      u,
+      ll);
+
+  <font color="blue">end for</font>;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>hessenberg2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE hohoTrafoLowerHess<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.hohoTrafoLowerHess"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.hohoTrafoLowerHess</H2>
+<B>Compute the similarity transformation S*A*S of matrix A with householder matrix S = I - 2u*u&#39; to compute a lower Hessenberg form</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+This function calculates one step in the calculation of lower Hessenberg form. Therein it calculates the (n-r+1)'th column of the Hessenberg matrix which is of shape {fill(1,n-r-1),x,x}.
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>u[size(A, 1)]</TD><TD>&nbsp;</TD><TD>householder vector</TD></TR>
+<TR><TD>Integer</TD><TD>r</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>SAS[size(A, 1), size(A, 1)]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> hohoTrafoLowerHess <font color="darkgreen">
+  &quot;Compute the similarity transformation S*A*S of matrix A with householder matrix S = I - 2u*u&#39; to compute a lower Hessenberg form&quot;</font>
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>;
+
+  <font color="blue">input </font>Real A[:,<font color="red">size</font>(A, 1)];
+  <font color="blue">input </font>Real u[<font color="red">size</font>(A, 1)] <font color="darkgreen">&quot;householder vector&quot;</font>;
+  <font color="blue">input </font>Integer r;
+  <font color="blue">output </font>Real SAS[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)];
+
+<font color="blue">protected </font>
+  Integer na=<font color="red">size</font>(A, 1);
+  Real S[:,:]=-2*<font color="red">matrix</font>(u)*<font color="red">transpose</font>(<font color="red">matrix</font>(u))/(<font color="red">Vectors.length</font>(u)*
+      <font color="red">Vectors.length</font>(u));<font color="darkgreen">   //S=u*u&#39;/u&#39;*u</font>
+  Integer i;
+
+  Real P[na - r,na - r];
+  Real A11[na - r,na - r]=A[1:na - r, 1:na - r];
+  Real A21[r,na - r]=A[na - r + 1:na, 1:na - r];
+  Real A22[r,r]=A[na - r + 1:na, na - r + 1:na];
+  Real alpha;
+
+<font color="blue">algorithm </font>
+  <font color="blue">for </font>i<font color="blue"> in </font>1:na<font color="blue"> loop</font>
+    S[i, i] := 1.0 + S[i, i];<font color="darkgreen">   //S=I-2u*u&#39;</font>
+  <font color="blue">end for</font>;
+
+  P := S[1:na - r, 1:na - r];
+  alpha := P[na - r, :]*A[1:na - r, na - r + 1];
+
+  SAS := [P*A11*P,[<font color="red">zeros</font>(na - r - 1, r);<font color="red"> matrix</font>(alpha),<font color="red">zeros</font>(1, r - 1)]; A21*P,
+    A22];
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>hohoTrafoLowerHess;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE hohoTrafoUpperHess<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.hohoTrafoUpperHess"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.hohoTrafoUpperHess</H2>
+<B>Compute the similarity (Householder-) transformation S*A*S of matrix A with householder matrix S = I - 2u*u&#39; to compute an upper Hessenberg form</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<html>
+This function calculates one step in the calculation of upper Hessenberg form. Therein it calculates the r'th column of the Hessenberg matrix which is of shape {x,x,fill(1,n-r-1)}.
+<pre>
+&lt;/html&gt;</PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>u[size(A, 1)]</TD><TD>&nbsp;</TD><TD>householder vector</TD></TR>
+<TR><TD>Integer</TD><TD>r</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>SAS[size(A, 1), size(A, 1)]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> hohoTrafoUpperHess <font color="darkgreen">
+  &quot;Compute the similarity (Householder-) transformation S*A*S of matrix A with householder matrix S = I - 2u*u&#39; to compute an upper Hessenberg form&quot;</font>
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>;
+
+  <font color="blue">input </font>Real A[:,<font color="red">size</font>(A, 1)];
+  <font color="blue">input </font>Real u[<font color="red">size</font>(A, 1)] <font color="darkgreen">&quot;householder vector&quot;</font>;
+  <font color="blue">input </font>Integer r;
+  <font color="blue">output </font>Real SAS[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)];
+
+<font color="blue">protected </font>
+  Integer na=<font color="red">size</font>(A, 1);
+  Real S[:,:]=-2*<font color="red">matrix</font>(u)*<font color="red">transpose</font>(<font color="red">matrix</font>(u))/(<font color="red">Vectors.length</font>(u)*
+      <font color="red">Vectors.length</font>(u));<font color="darkgreen">                                                             //S=u*u&#39;/u&#39;*u</font>
+  Integer i;
+
+  Real P[na - r,na - r];
+  Real A11[r,r]=A[1:r, 1:r];
+  Real A12[r,na - r]=A[1:r, r + 1:na];
+  Real A22[na - r,na - r]=A[r + 1:na, r + 1:na];
+
+  Real alpha;
+
+<font color="blue">algorithm </font>
+  <font color="blue">for </font>i<font color="blue"> in </font>1:na<font color="blue"> loop</font>
+    S[i, i] := 1.0 + S[i, i];
+    <font color="darkgreen">                        //S=I-2u*u&#39;</font>
+  <font color="blue">end for</font>;
+
+  P := S[r + 1:na, r + 1:na];
+  alpha := P[1, :]*A[r + 1:na, r];
+
+  SAS := [A11,A12*P; [<font color="red">zeros</font>(1, r - 1),<font color="red">matrix</font>(alpha);<font color="red"> zeros</font>(na - r - 1, r)],P*
+    A22*P];
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>hohoTrafoUpperHess;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE householderSimilarityTransformation2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.householderSimilarityTransformation2"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.householderSimilarityTransformation2</H2>
+<B>Calculate the similarity transformation SAS of matrix A with householder matrix S = I - 2u*u&#39;/(u&#39;*u) to compute a lower Hessenberg form</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+It is assumed, that the input vector <b>u</b> is a Housholder vector of the shape
+<blockquote><pre>
+<b>u</b> = (u1, u2, ..., ur,0, ..., 0)
+</pre></blockquote>
+where r is an integer input. From
+<blockquote><pre>
+<b>S</b> = <b>I</b> - 2*<b>u</b>*<b>u</b>'/<b>u</b>'*<b>u</b> = [<b>P</b>, <b>0</b>; <b>0</b>, <b>I</b>]
+</pre></blockquote>
+with
+<blockquote><pre>
+dim(<b>P</b>) = r x r,   dim(<b>I</b>) = n-r x n-r
+</pre></blockquote>
+results
+<blockquote><pre>
+<b>S</b>*<b>A</b>*<b>S</b> = [<b>P</b>*<b>A</b>11*<b>P</b>, <b>P</b>*<b>A</b>12; <b>A</b>21*<b>P</b>, <b>A</b>22]
+</pre></blockquote>
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>u[size(A, 1)]</TD><TD>&nbsp;</TD><TD>householder vector</TD></TR>
+<TR><TD>Integer</TD><TD>r</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>SAS[size(A, 1), size(A, 1)]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> householderSimilarityTransformation2 <font color="darkgreen">
+  &quot;Calculate the similarity transformation SAS of matrix A with householder matrix S = I - 2u*u&#39;/(u&#39;*u) to compute a lower Hessenberg form&quot;</font>
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>;
+
+  <font color="blue">input </font>Real A[:,<font color="red">size</font>(A, 1)];
+  <font color="blue">input </font>Real u[<font color="red">size</font>(A, 1)] <font color="darkgreen">&quot;householder vector&quot;</font>;
+  <font color="blue">input </font>Integer r;
+  <font color="blue">output </font>Real SAS[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 1)];
+
+<font color="blue">protected </font>
+  Integer na=<font color="red">size</font>(A, 1);
+  Real S[:,:]=-2*<font color="red">matrix</font>(u)*<font color="red">transpose</font>(<font color="red">matrix</font>(u))/(<font color="red">Vectors.length</font>(u)*
+      <font color="red">Vectors.length</font>(u));<font color="darkgreen">                                                             //S=u*u&#39;/u&#39;*u</font>
+  Integer i;
+
+<font color="blue">algorithm </font>
+  <font color="red">assert</font>(r &lt;= na,
+    &quot;Input r in function \&quot;Matrices.Internal.householderSimilarityTransformation2\&quot; must fulfill r&lt;=size(A,1)&quot;);
+  <font color="blue">for </font>i<font color="blue"> in </font>1:na<font color="blue"> loop</font>
+    S[i, i] := 1.0 + S[i, i];<font color="darkgreen">   //S=I-2u*u&#39;</font>
+  <font color="blue">end for</font>;
+
+  SAS := <font color="blue">if </font>r &lt;<font color="red"> size</font>(A, 1)<font color="blue"> then </font>[S[1:r, 1:r]*A[1:r, 1:r]*S[1:r, 1:r],[
+    <font color="red">zeros</font>(r - 1, 1),A[1:r - 1, r + 2:na];<font color="red"> matrix</font>(S[r, 1:r]*A[1:r, r + 1]),
+    <font color="red">transpose</font>(<font color="red">matrix</font>(A[r, r + 2:na]))]; A[r + 1:na, 1:r]*S[1:r, 1:r],A[
+    r + 1:na, r + 1:na]]<font color="blue"> else </font>S*A*S;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>householderSimilarityTransformation2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE multiplyWithOrthogonalQ_hr<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.multiplyWithOrthogonalQ_hr"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.multiplyWithOrthogonalQ_hr</H2>
+<B>overwrites the general real M-by-N matrix C with Q * C or C * Q or Q&#39; * C or C * Q&#39;, depending on inputs trans and side</B><p>
+<P><H3>Information</H3></P>
+<PRE>   Purpose  
+    -- LAPACK routine (version 3.0) --  
+      Univ. of Tennessee, Univ. of California Berkeley, NAG Ltd.,  
+      Courant Institute, Argonne National Lab, and Rice University  
+      June 30, 1999  
+ 
+      .. Scalar Arguments ..  
+      ..  
+      .. Array Arguments ..  
+      ..  
+ 
+   Purpose  
+   =======  
+ 
+     DORMHR overwrites the general real M-by-N matrix C with  
+ 
+                   SIDE = &#39;L&#39;     SIDE = &#39;R&#39;  
+   TRANS = &#39;N&#39;:      Q * C          C * Q  
+   TRANS = &#39;T&#39;:      Q**T * C       C * Q**T  
+ 
+   where Q is a real orthogonal matrix of order nq, with nq = m if  
+   SIDE = &#39;L&#39; and nq = n if SIDE = &#39;R&#39;. Q is defined as the product of  
+   IHI-ILO elementary reflectors, as returned by DGEHRD:  
+ 
+   Q = H(ilo) H(ilo+1) . . . H(ihi-1).  
+ 
+   Arguments  
+   =========  
+ 
+   SIDE    (input) CHARACTER*1  
+           = &#39;L&#39;: apply Q or Q**T from the Left;  
+           = &#39;R&#39;: apply Q or Q**T from the Right.  
+ 
+   TRANS   (input) CHARACTER*1  
+           = &#39;N&#39;:  No transpose, apply Q;  
+           = &#39;T&#39;:  Transpose, apply Q**T.  
+ 
+   M       (input) INTEGER  
+           The number of rows of the matrix C. M &gt;= 0.  
+ 
+   N       (input) INTEGER  
+           The number of columns of the matrix C. N &gt;= 0.  
+ 
+   ILO     (input) INTEGER  
+   IHI     (input) INTEGER  
+           ILO and IHI must have the same values as in the previous call  
+           of DGEHRD. Q is equal to the unit matrix except in the  
+           submatrix Q(ilo+1:ihi,ilo+1:ihi).  
+           If SIDE = &#39;L&#39;, then 1 &lt;= ILO &lt;= IHI &lt;= M, if M &gt; 0, and  
+           ILO = 1 and IHI = 0, if M = 0;  
+           if SIDE = &#39;R&#39;, then 1 &lt;= ILO &lt;= IHI &lt;= N, if N &gt; 0, and  
+           ILO = 1 and IHI = 0, if N = 0.  
+ 
+   A       (input) DOUBLE PRECISION array, dimension  
+                                (LDA,M) if SIDE = &#39;L&#39;  
+                                (LDA,N) if SIDE = &#39;R&#39;  
+           The vectors which define the elementary reflectors, as  
+           returned by DGEHRD.  
+ 
+   LDA     (input) INTEGER  
+           The leading dimension of the array A.  
+           LDA &gt;= max(1,M) if SIDE = &#39;L&#39;; LDA &gt;= max(1,N) if SIDE = &#39;R&#39;.  
+ 
+   TAU     (input) DOUBLE PRECISION array, dimension  
+                                (M-1) if SIDE = &#39;L&#39;  
+                                (N-1) if SIDE = &#39;R&#39;  
+           TAU(i) must contain the scalar factor of the elementary  
+           reflector H(i), as returned by DGEHRD.  
+ 
+   C       (input/output) DOUBLE PRECISION array, dimension (LDC,N)  
+           On entry, the M-by-N matrix C.  
+           On exit, C is overwritten by Q*C or Q**T*C or C*Q**T or C*Q.  
+ 
+   LDC     (input) INTEGER  
+           The leading dimension of the array C. LDC &gt;= max(1,M).  
+ 
+   WORK    (workspace/output) DOUBLE PRECISION array, dimension (LWORK)  
+           On exit, if INFO = 0, WORK(1) returns the optimal LWORK.  
+ 
+   LWORK   (input) INTEGER  
+           The dimension of the array WORK.  
+           If SIDE = &#39;L&#39;, LWORK &gt;= max(1,N);  
+           if SIDE = &#39;R&#39;, LWORK &gt;= max(1,M).  
+           For optimum performance LWORK &gt;= N*NB if SIDE = &#39;L&#39;, and  
+           LWORK &gt;= M*NB if SIDE = &#39;R&#39;, where NB is the optimal  
+           blocksize.  
+ 
+           If LWORK = -1, then a workspace query is assumed; the routine  
+           only calculates the optimal size of the WORK array, returns  
+           this value as the first entry of the WORK array, and no error  
+           message related to LWORK is issued by XERBLA.  
+ 
+   INFO    (output) INTEGER  
+           = 0:  successful exit  
+           &lt; 0:  if INFO = -i, the i-th argument had an illegal value  
+ 
+   =====================================================================  </PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>C[:, :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>tau[size(A, 2) - 1]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>side</TD><TD>&quot;L&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>trans</TD><TD>&quot;N&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Integer</TD><TD>ilo</TD><TD>1</TD><TD>lowest index where the original matrix had been Hessenbergform</TD></TR>
+<TR><TD>Integer</TD><TD>ihi</TD><TD>size(A, 2)</TD><TD>highest index where the original matrix had been Hessenbergform</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>Cout[size(C, 1), size(C, 2)]</TD><TD>contains the Hessenberg form in the upper triangle and the first subdiagonal and below the first subdiagonal it contains the elementary reflectors which represents (with array tau) as a product the orthogonal matrix Q</TD></TR>
+<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> multiplyWithOrthogonalQ_hr <font color="darkgreen">
+  &quot;overwrites the general real M-by-N matrix C with Q * C or C * Q or Q&#39; * C or C * Q&#39;, depending on inputs trans and side&quot;</font>
+
+  <font color="blue">input </font>Real C[:,:];
+  <font color="blue">input </font>Real A[:,:];
+  <font color="blue">input </font>Real tau[<font color="red">size</font>(A, 2) - 1];
+  <font color="blue">input </font>String side=&quot;L&quot;;
+  <font color="blue">input </font>String trans=&quot;N&quot;;
+  <font color="blue">input </font>Integer ilo=1 <font color="darkgreen">
+    &quot;lowest index where the original matrix had been Hessenbergform&quot;</font>;
+  <font color="blue">input </font>Integer ihi=<font color="red">size</font>(A, 2) <font color="darkgreen">
+    &quot;highest index where the original matrix had been Hessenbergform&quot;</font>;
+  <font color="blue">output </font>Real Cout[<font color="red">size</font>(C, 1),<font color="red">size</font>(C, 2)]=C <font color="darkgreen">
+    &quot;contains the Hessenberg form in the upper triangle and the first subdiagonal and below the first subdiagonal it contains the elementary reflectors which represents (with array tau) as a product the orthogonal matrix Q&quot;</font>;
+
+  <font color="blue">output </font>Integer info;
+<font color="blue">protected </font>
+  Integer m=<font color="red">size</font>(C, 1);
+  Integer n=<font color="red">size</font>(C, 2);
+  Integer lda=<font color="red">max</font>(1,<font color="red"> size</font>(A, 2));
+  Integer ldc=<font color="red">max</font>(1, m);
+  Integer lwork=2*<font color="red">size</font>(A, 2);
+  Real work[lwork];
+
+<font color="blue">external</font> &quot;Fortran 77&quot; <font color="red">dormhr</font>(
+      side,
+      trans,
+      m,
+      n,
+      ilo,
+      ihi,
+      A,
+      lda,
+      tau,
+      Cout,
+      ldc,
+      work,
+      lwork,
+      info);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>multiplyWithOrthogonalQ_hr;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE multiplyWithOrthogonalQ_qr<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.multiplyWithOrthogonalQ_qr"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.multiplyWithOrthogonalQ_qr</H2>
+<B>overwrites the general real M-by-N matrix C with Q * C or C * Q or Q&#39; * C or C * Q&#39;, where Q is an orthogonal matrix of a QR factorization as returned by dgeqrf</B><p>
+<P><H3>Information</H3></P>
+<PRE>   Purpose  
+   =======  
+ 
+   DORMQR overwrites the general real M-by-N matrix C with  
+ 
+                   SIDE = &#39;L&#39;     SIDE = &#39;R&#39;  
+   TRANS = &#39;N&#39;:      Q * C          C * Q  
+   TRANS = &#39;T&#39;:      Q**T * C       C * Q**T  
+ 
+   where Q is a real orthogonal matrix defined as the product of k  
+   elementary reflectors  
+ 
+         Q = H(1) H(2) . . . H(k)  
+ 
+   as returned by DGEQRF. Q is of order M if SIDE = &#39;L&#39; and of order N  
+   if SIDE = &#39;R&#39;.  
+ 
+   Arguments  
+   =========  
+ 
+   SIDE    (input) CHARACTER*1  
+           = &#39;L&#39;: apply Q or Q**T from the Left;  
+           = &#39;R&#39;: apply Q or Q**T from the Right.  
+ 
+   TRANS   (input) CHARACTER*1  
+           = &#39;N&#39;:  No transpose, apply Q;  
+           = &#39;T&#39;:  Transpose, apply Q**T.  
+ 
+   M       (input) INTEGER  
+           The number of rows of the matrix C. M &gt;= 0.  
+ 
+   N       (input) INTEGER  
+           The number of columns of the matrix C. N &gt;= 0.  
+ 
+   K       (input) INTEGER  
+           The number of elementary reflectors whose product defines  
+           the matrix Q.  
+           If SIDE = &#39;L&#39;, M &gt;= K &gt;= 0;  
+           if SIDE = &#39;R&#39;, N &gt;= K &gt;= 0.  
+ 
+   A       (input) DOUBLE PRECISION array, dimension (LDA,K)  
+           The i-th column must contain the vector which defines the  
+           elementary reflector H(i), for i = 1,2,...,k, as returned by  
+           DGEQRF in the first k columns of its array argument A.  
+           A is modified by the routine but restored on exit.  
+ 
+   LDA     (input) INTEGER  
+           The leading dimension of the array A.  
+           If SIDE = &#39;L&#39;, LDA &gt;= max(1,M);  
+           if SIDE = &#39;R&#39;, LDA &gt;= max(1,N).  
+ 
+   TAU     (input) DOUBLE PRECISION array, dimension (K)  
+           TAU(i) must contain the scalar factor of the elementary  
+           reflector H(i), as returned by DGEQRF.  
+ 
+   C       (input/output) DOUBLE PRECISION array, dimension (LDC,N)  
+           On entry, the M-by-N matrix C.  
+           On exit, C is overwritten by Q*C or Q**T*C or C*Q**T or C*Q.  
+ 
+   LDC     (input) INTEGER  
+           The leading dimension of the array C. LDC &gt;= max(1,M).  
+ 
+   WORK    (workspace/output) DOUBLE PRECISION array, dimension (LWORK)  
+           On exit, if INFO = 0, WORK(1) returns the optimal LWORK.  
+ 
+   LWORK   (input) INTEGER  
+           The dimension of the array WORK.  
+           If SIDE = &#39;L&#39;, LWORK &gt;= max(1,N);  
+           if SIDE = &#39;R&#39;, LWORK &gt;= max(1,M).  
+           For optimum performance LWORK &gt;= N*NB if SIDE = &#39;L&#39;, and  
+           LWORK &gt;= M*NB if SIDE = &#39;R&#39;, where NB is the optimal  
+           blocksize.  
+ 
+           If LWORK = -1, then a workspace query is assumed; the routine  
+           only calculates the optimal size of the WORK array, returns  
+           this value as the first entry of the WORK array, and no error  
+           message related to LWORK is issued by XERBLA.  
+ 
+   INFO    (output) INTEGER  
+           = 0:  successful exit  
+           &lt; 0:  if INFO = -i, the i-th argument had an illegal value  
+ 
+   =====================================================================  </PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>C[:, :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>Q[:, :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>tau[:]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>side</TD><TD>&quot;L&quot;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>trans</TD><TD>&quot;N&quot;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>Cout[size(C, 1), size(C, 2)]</TD><TD>contains Q*C or Q**T*C or C*Q**T or C*Q</TD></TR>
+<TR><TD>Integer</TD><TD>info</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> multiplyWithOrthogonalQ_qr <font color="darkgreen">
+  &quot;overwrites the general real M-by-N matrix C with Q * C or C * Q or Q&#39; * C or C * Q&#39;, where Q is an orthogonal matrix of a QR factorization as returned by dgeqrf&quot;</font>
+
+  <font color="blue">input </font>Real C[:,:];
+  <font color="blue">input </font>Real Q[:,:];
+  <font color="blue">input </font>Real tau[:];
+  <font color="blue">input </font>String side=&quot;L&quot;;
+  <font color="blue">input </font>String trans=&quot;N&quot;;
+
+  <font color="blue">output </font>Real Cout[<font color="red">size</font>(C, 1),<font color="red">size</font>(C, 2)]=C <font color="darkgreen">
+    &quot;contains Q*C or Q**T*C or C*Q**T or C*Q&quot;</font>;
+  <font color="blue">output </font>Integer info;
+<font color="blue">protected </font>
+  Integer m=<font color="red">size</font>(C, 1);
+  Integer n=<font color="red">size</font>(C, 2);
+  Integer k=<font color="blue">if </font>side == &quot;L&quot;<font color="blue"> then </font>m<font color="blue"> else </font>n;
+  Integer lda=<font color="blue">if </font>side == &quot;L&quot;<font color="blue"> then </font><font color="red">max</font>(1, m)<font color="blue"> else </font><font color="red">max</font>(1, n);
+  Integer ldc=<font color="red">max</font>(1, m);
+  Integer lwork=<font color="blue">if </font>side == &quot;L&quot;<font color="blue"> then </font><font color="red">max</font>(1, n)<font color="blue"> else </font><font color="red">max</font>(1, m);
+  Real work[lwork];
+
+<font color="blue">external</font> &quot;Fortran 77&quot; <font color="red">dormqr</font>(
+      side,
+      trans,
+      m,
+      n,
+      k,
+      Q,
+      lda,
+      tau,
+      Cout,
+      ldc,
+      work,
+      lwork,
+      info);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>multiplyWithOrthogonalQ_qr;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE QR<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.QRI.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.QR" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.QR"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.QR</H2>
+<B>QR decomposition of a square matrix with column pivoting (A(:,p) = Q*R)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4>Syntax</h4>
+<blockquote><pre>
+(Q,R,p) = Matrices.<b>QR</b>(A);
+</pre></blockquote>
+<h4>Description</h4>
+<p>
+This function returns the QR decomposition of
+a rectangular matrix <b>A</b> (the number of columns of <b>A</b>
+must be less than or equal to the number of rows):
+</p>
+<blockquote>
+<p>
+<b>Q</b>*<b>R</b> = <b>A</b>[:,<b>p</b>]
+</p>
+</blockquote>
+<p>
+where <b>Q</b> is a rectangular matrix that has orthonormal columns and
+has the same size as A (<b>Q</b><sup>T</sup><b>Q</b>=<b>I</b>),
+<b>R</b> is a square, upper triangular matrix and <b>p</b> is a permutation
+vector. Matrix <b>R</b> has the following important properties:
+</p>
+<ul>
+<li> The absolute value of a diagonal element of <b>R</b> is the largest
+     value in this row, i.e.,
+     abs(R[i,i]) &ge; abs(R[i,j]).</li>
+<li> The diagonal elements of <b>R</b> are sorted according to size, such that
+     the largest absolute value is abs(R[1,1]) and
+     abs(R[i,i]) &ge; abs(R[j,j]) with i &lt; j. </li>
+</ul>
+<p>
+This means that if abs(R[i,i]) &le; &epsilon; then abs(R[j,k]) &le; &epsilon;
+for j &ge; i, i.e., the i-th row up to the last row of <b>R</b> have
+small elements and can be treated as being zero. 
+This allows to, e.g., estimate the row-rank
+of <b>R</b> (which is the same row-rank as <b>A</b>). Furthermore,
+<b>R</b> can be partitioned in two parts
+</p>
+<blockquote>
+<pre>
+   <b>A</b>[:,<b>p</b>] = <b>Q</b> * [<b>R</b><sub>1</sub>, <b>R</b><sub>2</sub>;
+                 <b>0</b>,  <b>0</b>]
+</pre>
+</blockquote>
+<p>
+where <b>R</b><sub>1</sub> is a regular, upper triangular matrix. 
+</p>
+<p>
+Note, the solution is computed with the LAPACK functions "dgeqpf"
+and "dorgqr", i.e., by Housholder transformations with
+column pivoting. If <b>Q</b> is not needed, the function may be
+called as: <code>(,R,p) = QR(A)</code>.
+</p>
+<h4>Example</h4>
+<blockquote><pre>
+  Real A[3,3] = [1,2,3; 
+                 3,4,5;
+                 2,1,4];
+  Real R[3,3];
+<b>algorithm</b>
+  (,R) := Matrices.QR(A);  // R = [-7.07.., -4.24.., -3.67..;
+                                    0     , -1.73.., -0.23..;
+                                    0     ,  0     ,  0.65..];
+</pre></blockquote>
+<pre></PRE><P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Rectangular matrix with size(A,1) &gt;= size(A,2)</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>Q[size(A, 1), size(A, 2)]</TD><TD>Rectangular matrix with orthonormal columns such that Q*R=A[:,p]</TD></TR>
+<TR><TD>Real</TD><TD>R[size(A, 2), size(A, 2)]</TD><TD>Square upper triangular matrix</TD></TR>
+<TR><TD>Integer</TD><TD>p[size(A, 2)]</TD><TD>Column permutation vector</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> QR <font color="darkgreen">
+  &quot;QR decomposition of a square matrix with column pivoting (A(:,p) = Q*R)&quot;</font>
+
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+  <font color="blue">input </font>Real A[:,:] <font color="darkgreen">&quot;Rectangular matrix with size(A,1) &gt;= size(A,2)&quot;</font>;
+  <font color="blue">output </font>Real Q[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">
+    &quot;Rectangular matrix with orthonormal columns such that Q*R=A[:,p]&quot;</font>;
+  <font color="blue">output </font>Real R[<font color="red">size</font>(A, 2),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Square upper triangular matrix&quot;</font>;
+  <font color="blue">output </font>Integer p[<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Column permutation vector&quot;</font>;
+
+<font color="blue">protected </font>
+  Integer nrow=<font color="red">size</font>(A, 1);
+  Integer ncol=<font color="red">size</font>(A, 2);
+  Real tau[ncol];
+<font color="blue">algorithm </font>
+  <font color="red">assert</font>(nrow &gt;= ncol, &quot;\nInput matrix A[&quot; +<font color="red"> String</font>(nrow) + &quot;,&quot; +<font color="red"> String</font>(ncol)
+     + &quot;] has more columns as rows.
+This is not allowed when calling Modelica.Matrices.QR(A).&quot;);
+  <font color="blue">if </font>ncol &gt; 0<font color="blue"> then</font>
+    (Q,tau,p) :=<font color="red"> Modelica.Math.Matrices.LAPACK.dgeqpf</font>(A);
+
+  <font color="darkgreen">// determine R</font>
+    R :=<font color="red"> zeros</font>(ncol, ncol);
+    <font color="blue">for </font>i<font color="blue"> in </font>1:ncol<font color="blue"> loop</font>
+      <font color="blue">for </font>j<font color="blue"> in </font>i:ncol<font color="blue"> loop</font>
+        R[i, j] := Q[i, j];
+      <font color="blue">end for</font>;
+    <font color="blue">end for</font>;
+
+    Q :=<font color="red"> Modelica.Math.Matrices.LAPACK.dorgqr</font>(Q, tau);
+  <font color="blue">else</font>
+    Q :=<font color="red"> fill</font>(
+      1,
+      <font color="red">size</font>(A, 1),
+      0);
+    R :=<font color="red"> fill</font>(
+      0,
+      0,
+      0);
+  <font color="blue">end if</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>QR;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE QR2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.QR2"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.QR2</H2>
+<B>QR decomposition of a square matrix with column pivoting (A(:,p) = Q*R). Uses dgeqpf instead of dgeqp3</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4>Syntax</h4>
+<blockquote><pre>
+(Q,R,p) = Matrices.<b>QR</b>(A);
+</pre></blockquote>
+<h4>Description</h4>
+<p>
+This function returns the QR decomposition of
+a rectangular matrix <b>A</b> (the number of columns of <b>A</b>
+must be less than or equal to the number of rows):
+</p>
+<blockquote>
+<p>
+<b>Q</b>*<b>R</b> = <b>A</b>[:,<b>p</b>]
+</p>
+</blockquote>
+<p>
+where <b>Q</b> is a rectangular matrix that has orthonormal columns and
+has the same size as A (<b>Q</b><sup>T</sup><b>Q</b>=<b>I</b>),
+<b>R</b> is a square, upper triangular matrix and <b>p</b> is a permutation
+vector. Matrix <b>R</b> has the following important properties:
+</p>
+<ul>
+<li> The absolute value of a diagonal element of <b>R</b> is the largest
+     value in this row, i.e.,
+     abs(R[i,i]) &ge; abs(R[i,j]).</li>
+<li> The diagonal elements of <b>R</b> are sorted according to size, such that
+     the largest absolute value is abs(R[1,1]) and
+     abs(R[i,i]) &ge; abs(R[j,j]) with i &lt; j. </li>
+</ul>
+<p>
+This means that if abs(R[i,i]) &le; &epsilon; then abs(R[j,k]) &le; &epsilon;
+for j &ge; i, i.e., the i-th row up to the last row of <b>R</b> have
+small elements and can be treated as being zero. 
+This allows to, e.g., estimate the row-rank
+of <b>R</b> (which is the same row-rank as <b>A</b>). Furthermore,
+<b>R</b> can be partitioned in two parts
+</p>
+<blockquote>
+<pre>
+   <b>A</b>[:,<b>p</b>] = <b>Q</b> * [<b>R</b><sub>1</sub>, <b>R</b><sub>2</sub>;
+                 <b>0</b>,  <b>0</b>]
+</pre>
+</blockquote>
+<p>
+where <b>R</b><sub>1</sub> is a regular, upper triangular matrix. 
+</p>
+<p>
+Note, the solution is computed with the LAPACK functions "dgeqp3"
+and "dorgqr", i.e., by Housholder transformations with
+column pivoting. If <b>Q</b> is not needed, the function may be
+called as: <code>(,R,p) = QR(A)</code>.
+</p>
+<h4>Example</h4>
+<blockquote><pre>
+  Real A[3,3] = [1,2,3; 
+                 3,4,5;
+                 2,1,4];
+  Real R[3,3];
+<b>algorithm</b>
+  (,R) := Matrices.QR(A);  // R = [-7.07.., -4.24.., -3.67..;
+                                    0     , -1.73.., -0.23..;
+                                    0     ,  0     ,  0.65..];
+</pre></blockquote>
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Rectangular matrix with size(A,1) &gt;= size(A,2)</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>Q[size(A, 1), size(A, 2)]</TD><TD>Rectangular matrix with orthonormal columns such that Q*R=A[:,p]</TD></TR>
+<TR><TD>Real</TD><TD>R[size(A, 2), size(A, 2)]</TD><TD>Square upper triangular matrix</TD></TR>
+<TR><TD>Integer</TD><TD>p[size(A, 2)]</TD><TD>Column permutation vector</TD></TR>
+<TR><TD>Real</TD><TD>tau[min(size(A, 1), size(A, 2))]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> QR2 <font color="darkgreen">
+  &quot;QR decomposition of a square matrix with column pivoting (A(:,p) = Q*R). Uses dgeqpf instead of dgeqp3&quot;</font>
+
+  <font color="blue">input </font>Real A[:,:] <font color="darkgreen">&quot;Rectangular matrix with size(A,1) &gt;= size(A,2)&quot;</font>;
+  <font color="blue">output </font>Real Q[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">
+    &quot;Rectangular matrix with orthonormal columns such that Q*R=A[:,p]&quot;</font>;
+  <font color="blue">output </font>Real R[<font color="red">size</font>(A, 2),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Square upper triangular matrix&quot;</font>;
+  <font color="blue">output </font>Integer p[<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;Column permutation vector&quot;</font>;
+  <font color="blue">output </font>Real tau[<font color="red">min</font>(<font color="red">size</font>(A, 1),<font color="red"> size</font>(A, 2))];
+
+<font color="blue">protected </font>
+  Integer nrow=<font color="red">size</font>(A, 1);
+  Integer ncol=<font color="red">size</font>(A, 2);
+  Integer lwork=<font color="red">Internal.dgeqp3_workdim</font>(A);
+
+<font color="blue">algorithm </font>
+  <font color="red">assert</font>(nrow &gt;= ncol, &quot;\nInput matrix A[&quot; +<font color="red"> String</font>(nrow) + &quot;,&quot; +<font color="red"> String</font>(ncol)
+     + &quot;] has more columns as rows.
+This is not allowed when calling Modelica.Matrices.QR(A).&quot;);
+  <font color="blue">if </font>ncol &gt; 0<font color="blue"> then</font>
+
+    (Q,p,tau) :=<font color="red"> Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqp3</font>(A, lwork);
+
+  <font color="darkgreen">// determine R</font>
+    R :=<font color="red"> zeros</font>(ncol, ncol);
+    <font color="blue">for </font>i<font color="blue"> in </font>1:ncol<font color="blue"> loop</font>
+      <font color="blue">for </font>j<font color="blue"> in </font>i:ncol<font color="blue"> loop</font>
+        R[i, j] := Q[i, j];
+      <font color="blue">end for</font>;
+    <font color="blue">end for</font>;
+
+    Q :=<font color="red"> Modelica.Math.Matrices.LAPACK.dorgqr</font>(Q, tau);
+  <font color="blue">else</font>
+    Q :=<font color="red"> fill</font>(
+      1,
+      <font color="red">size</font>(A, 1),
+      0);
+    R :=<font color="red"> fill</font>(
+      0,
+      0,
+      0);
+  <font color="blue">end if</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>QR2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE readMatrixGain<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.readMatrixGain</H2>
+<B>Read a matrix from mat-file</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>&quot;matrixGain.mat&quot;</TD><TD>Name of the matrix data file</TD></TR>
+<TR><TD>String</TD><TD>matrixName</TD><TD>&quot;K&quot;</TD><TD>Name of the matrix</TD></TR>
+<TR><TD>Integer</TD><TD>m</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>K[m, n]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">encapsulated </font><font color="blue">function</font> readMatrixGain <font color="darkgreen">&quot;Read a matrix from mat-file&quot;</font>
+
+  <font color="blue">import </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica.html#Modelica"
+>Modelica</A>;
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</A>;
+
+ <font color="blue">input </font>String fileName=&quot;matrixGain.mat&quot; <font color="darkgreen">&quot;Name of the matrix data file&quot;</font>;
+ <font color="blue">input </font>String matrixName=&quot;K&quot; <font color="darkgreen">&quot;Name of the matrix&quot;</font>;
+ <font color="blue">input </font>Integer m;
+ <font color="blue">input </font>Integer n;
+
+<font color="blue">public </font>
+   <font color="blue">output </font>Real K[m,n];
+
+<font color="blue">algorithm </font>
+ K :=<font color="red"> Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</font>(fileName, matrixName, m, n);
+
+<font color="blue">end </font>readMatrixGain;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE reorderRSF<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.reorderRSF"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.reorderRSF</H2>
+<B>Reorders a real Schur factorization according to a given pattern of the eigenvalues</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>iscontinuous</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>T[:, :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>Q[:, size(T, 2)]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>alphaReal[size(T, 1)]</TD><TD>&nbsp;</TD><TD>Real part of eigenvalue=alphaReal+i*alphaImag</TD></TR>
+<TR><TD>Real</TD><TD>alphaImag[size(T, 1)]</TD><TD>&nbsp;</TD><TD>Imaginary part of eigenvalue=(alphaReal+i*alphaImag</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>To[size(T, 1), size(T, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>Qo[size(T, 1), size(T, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>wr[size(T, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>wi[size(T, 2)]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> reorderRSF <font color="darkgreen">
+  &quot;Reorders a real Schur factorization according to a given pattern of the eigenvalues&quot;</font>
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices_LAPACK.html#Modelica_LinearSystems2.Math.Matrices.LAPACK"
+>Modelica_LinearSystems2.Math.Matrices.LAPACK</A>;
+
+  <font color="blue">input </font>Boolean iscontinuous;
+  <font color="blue">input </font>Real T[:,:];
+  <font color="blue">input </font>Real Q[:,<font color="red">size</font>(T, 2)];
+  <font color="blue">input </font>Real alphaReal[<font color="red">size</font>(T, 1)] <font color="darkgreen">
+    &quot;Real part of eigenvalue=alphaReal+i*alphaImag&quot;</font>;
+  <font color="blue">input </font>Real alphaImag[<font color="red">size</font>(T, 1)] <font color="darkgreen">
+    &quot;Imaginary part of eigenvalue=(alphaReal+i*alphaImag&quot;</font>;
+
+  <font color="blue">output </font>Real To[<font color="red">size</font>(T, 1),<font color="red">size</font>(T, 2)];
+  <font color="blue">output </font>Real Qo[<font color="red">size</font>(T, 1),<font color="red">size</font>(T, 2)];
+  <font color="blue">output </font>Real wr[<font color="red">size</font>(T, 2)];
+  <font color="blue">output </font>Real wi[<font color="red">size</font>(T, 2)];
+
+<font color="blue">protected </font>
+  Integer n=<font color="red">size</font>(T, 2);
+  Boolean select[:]=<font color="red">fill</font>(false,<font color="red"> size</font>(T, 2));
+  Integer i;
+<font color="blue">algorithm </font>
+  <font color="blue">if </font>iscontinuous<font color="blue"> then</font>
+    <font color="blue">for </font>i<font color="blue"> in </font>1:n<font color="blue"> loop</font>
+      <font color="blue">if </font>alphaReal[i] &lt; 0<font color="blue"> then</font>
+        select[i] := true;
+      <font color="blue">end if</font>;
+    <font color="blue">end for</font>;
+  <font color="blue">else</font>
+    <font color="blue">for </font>i<font color="blue"> in </font>1:n<font color="blue"> loop</font>
+      <font color="blue">if </font>alphaReal[i]^2 + alphaImag[i]^2 &lt; 1<font color="blue"> then</font>
+        select[i] := true;
+      <font color="blue">end if</font>;
+    <font color="blue">end for</font>;
+  <font color="blue">end if</font>;
+
+  (To,Qo,wr,wi) :=<font color="red"> LAPACK.dtrsen</font>(
+      &quot;E&quot;,
+      &quot;V&quot;,
+      select,
+      T,
+      Q);
+
+<font color="blue">end </font>reorderRSF;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE reorderRSF2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.reorderRSF2"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.reorderRSF2</H2>
+<B>Reorders a real Schur factorization for poleAssigmentMI design</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>T[:, :]</TD><TD>&nbsp;</TD><TD>upper quasi-triangular matrix in Schur canonical form</TD></TR>
+<TR><TD>Real</TD><TD>Q[:, size(T, 2)]</TD><TD>&nbsp;</TD><TD>matrix of Schur vectors</TD></TR>
+<TR><TD>Real</TD><TD>alphaReal[size(T, 1)]</TD><TD>&nbsp;</TD><TD>Real part of eigenvalue=alphaReal+i*alphaImag</TD></TR>
+<TR><TD>Real</TD><TD>alphaImag[size(T, 1)]</TD><TD>&nbsp;</TD><TD>Imaginary part of eigenvalue=(alphaReal+i*alphaImag</TD></TR>
+<TR><TD>Real</TD><TD>alpha</TD><TD>&nbsp;</TD><TD>maximum admissible value for real parts(continuous) or for moduli (discrete) of the eigenvalues of A which will not be modified by the eigenvalue assignment algorithm</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>To[size(T, 1), size(T, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>Qo[size(T, 1), size(T, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>wr[size(T, 2)]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>wi[size(T, 2)]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> reorderRSF2 <font color="darkgreen">
+  &quot;Reorders a real Schur factorization for poleAssigmentMI design&quot;</font>
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices_LAPACK.html#Modelica_LinearSystems2.Math.Matrices.LAPACK"
+>Modelica_LinearSystems2.Math.Matrices.LAPACK</A>;
+
+  <font color="blue">input </font>Real T[:,:] <font color="darkgreen">&quot;upper quasi-triangular matrix in Schur canonical form&quot;</font>;
+  <font color="blue">input </font>Real Q[:,<font color="red">size</font>(T, 2)] <font color="darkgreen">&quot;matrix of Schur vectors&quot;</font>;
+  <font color="blue">input </font>Real alphaReal[<font color="red">size</font>(T, 1)] <font color="darkgreen">
+    &quot;Real part of eigenvalue=alphaReal+i*alphaImag&quot;</font>;
+  <font color="blue">input </font>Real alphaImag[<font color="red">size</font>(T, 1)] <font color="darkgreen">
+    &quot;Imaginary part of eigenvalue=(alphaReal+i*alphaImag&quot;</font>;
+  <font color="blue">input </font>Real alpha <font color="darkgreen">
+    &quot;maximum admissible value for real parts(continuous) or for moduli (discrete) of the eigenvalues of A which will not be modified by the eigenvalue assignment algorithm&quot;</font>;
+
+  <font color="blue">output </font>Real To[<font color="red">size</font>(T, 1),<font color="red">size</font>(T, 2)];
+  <font color="blue">output </font>Real Qo[<font color="red">size</font>(T, 1),<font color="red">size</font>(T, 2)];
+  <font color="blue">output </font>Real wr[<font color="red">size</font>(T, 2)];
+  <font color="blue">output </font>Real wi[<font color="red">size</font>(T, 2)];
+
+<font color="blue">protected </font>
+  Integer n=<font color="red">size</font>(T, 2);
+  Boolean select[n]=<font color="red">fill</font>(false, n);
+  Integer i;
+<font color="blue">algorithm </font>
+  <font color="blue">for </font>i<font color="blue"> in </font>1:n<font color="blue"> loop</font>
+    <font color="blue">if </font>alphaReal[i] &lt; alpha<font color="blue"> then</font>
+      select[i] := true;
+    <font color="blue">end if</font>;
+  <font color="blue">end for</font>;
+
+  (To,Qo,wr,wi) :=<font color="red"> LAPACK.dtrsen</font>(
+      &quot;E&quot;,
+      &quot;V&quot;,
+      select,
+      T,
+      Q);
+
+<font color="blue">end </font>reorderRSF2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE k_care_u<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.k_care_uI.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.k_care_u</H2>
+<B>calculate the upper bound of the CARE, i.e. Q + A&#39;*X + X*A - X*G*X = 0  condition number using Lyapunov equations</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD><TD>care-matrix A</TD></TR>
+<TR><TD>Real</TD><TD>Q[:, size(Q, 1)]</TD><TD>&nbsp;</TD><TD>care-matrix Q</TD></TR>
+<TR><TD>Real</TD><TD>G[size(A, 1), size(A, 2)]</TD><TD>&nbsp;</TD><TD>care-matrix G</TD></TR>
+<TR><TD>Real</TD><TD>X[size(A, 1), size(A, 2)]</TD><TD>&nbsp;</TD><TD>solution of care</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>ku</TD><TD>upper bound of the care condition number</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> k_care_u <font color="darkgreen">
+  &quot;calculate the upper bound of the CARE, i.e. Q + A&#39;*X + X*A - X*G*X = 0  condition number using Lyapunov equations&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">import </font><A HREF="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Modelica_LinearSystems2.Math.Matrices</A>;
+
+  <font color="blue">input </font>Real A[:,<font color="red">size</font>(A, 1)] <font color="darkgreen">&quot;care-matrix A&quot;</font>;
+  <font color="blue">input </font>Real Q[:,<font color="red">size</font>(Q, 1)] <font color="darkgreen">&quot;care-matrix Q&quot;</font>;
+  <font color="blue">input </font>Real G[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;care-matrix G&quot;</font>;
+  <font color="blue">input </font>Real X[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)] <font color="darkgreen">&quot;solution of care&quot;</font>;
+
+  <font color="blue">output </font>Real ku <font color="darkgreen">&quot;upper bound of the care condition number&quot;</font>;
+
+<font color="blue">protected </font>
+  Real Z0[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=<font color="red">Matrices.lyapunov</font>(A - G*X, -<font color="red">identity</font>(<font color="red">size</font>(A, 1))) <font color="darkgreen">
+    &quot;solution of lyapunov equation H&#39;*Z0+Z0*H=-I, H=A-G*X&quot;</font>;
+  Real Z2[<font color="red">size</font>(A, 1),<font color="red">size</font>(A, 2)]=<font color="red">Matrices.lyapunov</font>(A - G*X, -X*X) <font color="darkgreen">
+    &quot;solution of lyapunov equation H&#39;*Z2+Z2*H=-X*X, H=A-G*X&quot;</font>;
+  Real normA=<font color="red">Matrices.norm</font>(A, 2) <font color="darkgreen">&quot;spectral norm of matrix A (largest sv)&quot;</font>;
+  Real normQ=<font color="red">Matrices.norm</font>(Q, 2) <font color="darkgreen">&quot;spectral norm of matrix Q (largest sv)&quot;</font>;
+  Real normG=<font color="red">Matrices.norm</font>(G, 2) <font color="darkgreen">&quot;spectral norm of matrix G (largest sv)&quot;</font>;
+  Real normX=<font color="red">Matrices.norm</font>(X, 2) <font color="darkgreen">&quot;spectral norm of matrix X (largest sv)&quot;</font>;
+  Real normZ0=<font color="red">Matrices.norm</font>(Z0, 2) <font color="darkgreen">&quot;spectral norm of matrix Z0 (largest sv)&quot;</font>;
+  Real normZ2=<font color="red">Matrices.norm</font>(Z2, 2) <font color="darkgreen">&quot;spectral norm of matrix Z2 (largest sv)&quot;</font>;
+<font color="blue">algorithm </font>
+  ku := (normZ0*normQ + 2*<font color="red">sqrt</font>(normZ0*normZ2)*normA + normZ2*normG)/normX;
+<font color="blue">end </font>k_care_u;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE frobeniusNorm<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.Math.Matrices.Internal.k_care_uI.png" ALT="Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm"></A><A HREF="Modelica_LinearSystems2_Math_Matrices_Internal.html#Modelica_LinearSystems2.Math.Matrices.Internal"
+>Modelica_LinearSystems2.Math.Matrices.Internal</A>.frobeniusNorm</H2>
+<B>Return the Frobenius norm of a matrix</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for a function).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, :]</TD><TD>&nbsp;</TD><TD>Input matrix</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>result</TD><TD>frobenius norm of matrix A</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> frobeniusNorm <font color="darkgreen">&quot;Return the Frobenius norm of a matrix&quot;</font>
+  <font color="blue">extends </font><A HREF="file:///C:/Programme/Dymola 7.4 Alpha/Modelica/Library/Modelica 3.1/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+  <font color="blue">input </font>Real A[:,:] <font color="darkgreen">&quot;Input matrix&quot;</font>;
+  <font color="blue">output </font>Real result=0.0 <font color="darkgreen">&quot;frobenius norm of matrix A&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="blue">for </font>i1<font color="blue"> in </font>1:<font color="red">size</font>(A, 1)<font color="blue"> loop</font>
+    <font color="blue">for </font>i2<font color="blue"> in </font>1:<font color="red">size</font>(A, 2)<font color="blue"> loop</font>
+      result := result + A[i1, i2]*A[i1, i2];
+    <font color="blue">end for</font>;
+  <font color="blue">end for</font>;
+  result :=<font color="red"> sqrt</font>(result);
+<font color="blue">end </font>frobeniusNorm;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Jan 15 12:28:55 2010.
+</address></BODY>
+</HTML>
