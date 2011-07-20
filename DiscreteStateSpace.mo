@@ -2261,7 +2261,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
     Real Ck[ny,nx] "Discretized Jacobian of the output function";
 
   algorithm
-    (xmu, y_est, Ak, Ck) := ekfFunction(xpre, upre, u, Ts, ny);
+    (xmu, y_est, Ak, Ck) := ekfFunction(xpre, upre, Ts, ny);
     (K, M) := DiscreteStateSpace.Internal.ekfUpdate( Ak, Ck, Mpre, Q, R);
     x_est :=xmu + K*(y - y_est);
       annotation (Documentation(revisions="<html>
@@ -3874,26 +3874,148 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
 </html>"));
 end timeResponse1;
 
+function ukfPredict "Prediction step in ukf"
+      import Modelica_LinearSystems2;
+      import Modelica.Math.Matrices.LU_solve;
+      import Modelica.Math.Matrices.solve;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  extends Modelica_LinearSystems2.DiscreteStateSpace.Internal.predictBase;
 
+algorithm
+   (CFP,info) := LAPACK.dpotrf(a*Ppre, false);// declare CFP as lower trangular instead of additional transposing -> P has to be full
+   assert(info == 0, "Cholesky factor was not computed successfully in ukfSigmaPoints");
 
+ // Compute sigma points
+   sigmas[:, 1] := xpre;
+   for i in 1:n loop
+     sigmas[:, i + 1] := xpre;
+     sigmas[:, i + n + 1] := xpre;
+     for j in i:n loop
+       sigmas[j, i + 1] := sigmas[j, i + 1] + CFP[j, i];
+       sigmas[j, i + n + 1] := sigmas[j, i + n + 1] - CFP[j, i];
+     end for;
+   end for;
 
+// Compute update of sigma points from x_k+1 = f(x_k,u_k)
 
+  for i in 1:2*n + 1 loop
+    fSigmas[:, i] := fSigma(sigmas[:,i], upre, Ts);
+  end for;
 
+  mu := wm0*fSigmas[:, 1];
+  for i in 1:n loop
+    mu[i] := mu[i] + wmi*sum(fSigmas[i, 2:2*n + 1]);
+  end for;
 
+//Compute predicted covariace Pk = sum(w_i*(hSigma_i-mu_i)*(hSigma_i-mu_i)'), i=0,...,2n+1
+// Since Pk will be symmetric, only the upper traiangle is calculated
+// i=2,..,2n+1 with constant weight wci first
+  for j in 1:n loop
+    for i in 2:2*n + 1 loop
+      Pk[1:j, j] := Pk[1:j, j] + (fSigmas[j, i] - mu[j])*(fSigmas[1:j, i] - mu[1:j]);
+    end for;
+  end for;
+  Pk := wci*Pk;
+// first element with weight wc0
+  for j in 1:n loop
+    Pk[1:j, j] := Pk[1:j, j] + wc0*(fSigmas[j, 1] - mu[j])*(fSigmas[1:j, 1] - mu[1:j]);
+  end for;
+  Pk := symmetric(Pk);
+  Pk := Pk+Q;
 
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
+end ukfPredict;
 
+function ukfUpdate "Update step in ukf"
+  extends Modelica.Icons.Function;
 
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Modelica_LinearSystems2.Math.Matrices;
 
+  extends Modelica_LinearSystems2.DiscreteStateSpace.Internal.updateBase;
 
+algorithm
+  (CFP,info) := LAPACK.dpotrf(a*Ppre, false);// declare P as lower trangular instead of additional transposing -> P has to be full
+  assert(info == 0, "Cholesky factor was not computed successfully in ukfSigmaPoints");
+//CFP := Matrices.cholesky(a*P,false);
+// Compute sigma points
+  xSigmas[:, 1] := xpre;
+  for i in 1:n loop
+    xSigmas[:, i + 1] := xpre;
+    xSigmas[:, i + n + 1] := xpre;
+    for j in i:n loop
+      xSigmas[j, i + 1] := xSigmas[j, i + 1] + CFP[j, i];
+      xSigmas[j, i + n + 1] := xSigmas[j, i + n + 1] - CFP[j, i];
+    end for;
+  end for;
 
+// Compute update of sigma points from xpre_k+1 = f(x_k,u_k)
 
+  for i in 1:2*n+1 loop
+    ySigmas[:,i] := hSigma(xSigmas[:,i], upre, Ts,m);
+  end for;
 
+  mu := wm0*ySigmas[:, 1];
+  for i in 1:m loop
+    mu[i] := mu[i] + wmi*sum(ySigmas[i, 2:2*n + 1]);
+  end for;
 
+//Compute predicted covariace Ryy = sum(w_i*(hSigma_i-mu_i)*(hSigma_i-mu_i)'), i=0,...,2n+1
+// Since Ryy will be symmetric, only the upper triangle is calculated
+// i=2,..,2n+1 with constant weight wci first
+  for j in 1:m loop
+    for i in 2:2*n + 1 loop
+      Ryy[1:j, j] := Ryy[1:j, j] + (ySigmas[j, i] - mu[j])*(ySigmas[1:j, i] - mu[1:j]);
+      Rxy[:, j] := Rxy[:, j] + (ySigmas[j, i] - mu[j])*(xSigmas[:, i] - xpre);
+    end for;
+  end for;
+  Ryy := wci*Ryy;
+  Rxy := wci*Rxy;
 
+// first element with weight wc0
+  for j in 1:m loop
+    Ryy[1:j, j] := Ryy[1:j, j] + wc0*(ySigmas[j, 1] - mu[j])*(ySigmas[1:j, 1] - mu[1:j]);
+    Rxy[:, j] := Rxy[:, j] + wc0*(ySigmas[j, 1] - mu[j])*(xSigmas[:, 1] - xpre);
+  end for;
+  Ryy := symmetric(Ryy);
 
+  Ryy := Ryy+R;
 
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
+end ukfUpdate;
 
+function ukfEstimate
+      "Calculate filter gain and the updated mean of the state and covariance P"
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Matrices.Internal;
+  extends Modelica_LinearSystems2.DiscreteStateSpace.Internal.estimateBase;
 
+algorithm
+  K := Internal.solve2rSym_C(Ryy, Rxy);
+  Pu := -Internal.symMatMul_C(K, Ryy, -P, true);
+  Pu := symmetric(Pu);
+  xmu := xm + K*(y - ym);
+  ymu := yOut(xmu, u, Ts, ny);
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
+end ukfEstimate;
 
 function ukfPredict_sr "Prediction step in square root ukf"
   extends Modelica.Icons.Function;
@@ -4459,7 +4581,7 @@ partial function ekfSystemBase "Base class of ekf-system functions"
 
       input Real x[:] "Estimated vector at instant k";
       input Real u[:] "Input at instant k";
-      input Real u2[:] "Input at instant k+delta";
+//      input Real u2[:] "Input at instant k+delta";
       input Modelica.SIunits.Time Ts "Sample time";
       input Integer ny "Number of outputs";
 
