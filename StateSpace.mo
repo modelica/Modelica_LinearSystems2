@@ -5173,6 +5173,8 @@ and results in
       input Boolean magnitude=true "= true, to plot the magnitude of tf"
                                                                         annotation(choices(__Dymola_checkBox=true));
       input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
+      input Real tol=1e-10
+        "Tolerance of reduction procedure, default tol = 1e-10";
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
             Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
@@ -5195,7 +5197,7 @@ and results in
         B=matrix(ss.B[:, iu]),
         C=transpose(matrix(ss.C[iy, :])),
         D=matrix(ss.D[iy, iu]));
-      zp := StateSpace.Conversion.toZerosAndPoles(ss_siso);
+      zp := StateSpace.Conversion.toZerosAndPoles(ss_siso, tol);
 
       ZerosAndPoles.Plot.bode(
         zp,
@@ -5284,6 +5286,8 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
       input Boolean magnitude=true "= true, to plot the magnitude of tf"
                                                                         annotation(choices(__Dymola_checkBox=true));
       input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
+      input Real tol=1e-10
+        "Tolerance of reduction procedure, default tol = 1e-10";
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
             Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
@@ -5304,7 +5308,7 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
         yNames[i1] := if ss.yNames[i1] == "" then "y" + String(i1) else ss.yNames[i1];
       end for;
 
-      tf := StateSpace.Conversion.toTransferFunctionMIMO(ss);
+      tf := StateSpace.Conversion.toTransferFunctionMIMO(ss, tol);
 
       for i1 in 1:size(ss.C, 1) loop
         for i2 in 1:size(ss.B, 2) loop
@@ -5836,13 +5840,16 @@ encapsulated package Conversion
       import Modelica_LinearSystems2.StateSpace;
 
     input StateSpace ss "StateSpace object";
+    input Real tol=1e-10
+        "Tolerance of reduction procedure, default tol = 1e-10";
+
   //protected
   //  input Boolean cancel=true "false to hinder cancellation";// is not fully realized
     public
     output ZerosAndPoles zp;
 
     protected
-    StateSpace ssm= if size(ss.A,1)>0 then StateSpace.Transformation.toIrreducibleForm(ss) else StateSpace(ss.D[1,1]);
+    StateSpace ssm= if size(ss.A,1)>0 then StateSpace.Transformation.toIrreducibleForm(ss, tol) else StateSpace(ss.D[1,1]);
     Complex poles[:];
     Complex zeros[:];
 
@@ -5855,7 +5862,7 @@ encapsulated package Conversion
     Integer i;
     Integer k;
     Boolean h;
-  Real v;
+    Real v;
 
   algorithm
     if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
@@ -5876,7 +5883,7 @@ encapsulated package Conversion
           p=poles,
           k=1);
 
-      v := sum(cat(1, zeros[:].re,  poles[:].re))/max(size(zeros,1)+size(poles,1),1)+13/19;
+      v := sum(cat(1, zeros[:].re,  -poles[:].re))/max(size(poles,1),1)+13/23;
       frequency := Complex(v)*19/17;
 
       Gs := ZerosAndPoles.Analysis.evaluate(zp, frequency);
@@ -5951,6 +5958,8 @@ vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
+<li><i>2011/07/31 </i>
+       improved frequency calculation by Marcus Baur, DLR-RM</li>
 </ul>
 </html>"));
   end toZerosAndPoles;
@@ -5965,6 +5974,8 @@ vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
       import Modelica_LinearSystems2.ZerosAndPoles;
 
     input StateSpace ss "StateSpace object";
+    input Real tol=1e-10
+        "Tolerance of reduction procedure, default tol = 1e-10";
 
     output TransferFunction tf;
 
@@ -5972,7 +5983,7 @@ vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
     ZerosAndPoles zp;
 
   algorithm
-    zp := toZerosAndPoles(ss);
+    zp := toZerosAndPoles(ss, tol);
     tf := ZerosAndPoles.Conversion.toTransferFunction(zp);
 
       annotation (Documentation(info="<html>
@@ -6033,6 +6044,7 @@ encapsulated function toZerosAndPolesMIMO
       import Modelica_LinearSystems2.StateSpace;
 
   input StateSpace ss "StateSpace object";
+  input Real tol=1e-10 "Tolerance of reduction procedure, default tol = 1e-10";
 
   output ZerosAndPoles zp[size(ss.C, 1),size(ss.B, 2)];
 
@@ -6054,7 +6066,7 @@ algorithm
           B=matrix(ss.B[:, ib]),
           C=transpose(matrix(ss.C[ic, :])),
           D=matrix(ss.D[ic, ib]));
-          zp[ic, ib] := StateSpace.Conversion.toZerosAndPoles(ss_siso);
+          zp[ic, ib] := StateSpace.Conversion.toZerosAndPoles(ss_siso, tol);
      end for;
   end for;
   annotation (overloadsConstructor=true, Documentation(info="<html>
@@ -6132,6 +6144,7 @@ function toTransferFunctionMIMO
       import Modelica_LinearSystems2.ZerosAndPoles;
 
   input StateSpace ss "StateSpace object";
+  input Real tol=1e-10 "Tolerance of reduction procedure, default tol = 1e-10";
 
   output TransferFunction tf[size(ss.C, 1),size(ss.B, 2)]
         "Matrix of transfer function objects";
@@ -6142,7 +6155,7 @@ function toTransferFunctionMIMO
   parameter Integer p=size(ss.C, 1);
 
 algorithm
-  zp := Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPolesMIMO(ss);
+  zp := Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPolesMIMO(ss, tol);
   for i1 in 1:m loop
     for i2 in 1:p loop
       tf[i2, i1] := ZerosAndPoles.Conversion.toTransferFunction(zp[i2, i1]);
@@ -6583,10 +6596,12 @@ Matrix T has to be diagonalizable, i.e. the algebraic and geometric multipliciti
       import Modelica;
 
         input StateSpace ss "State space system";
+        input Real tol=1e-10
+        "Tolerance of reduction procedure, default tol = 1e-10";
 
     protected
         Modelica_LinearSystems2.Internal.StateSpaceR ssm1=
-            StateSpace.Internal.reducedCtrSystem(ss);
+            StateSpace.Internal.reducedCtrSystem(ss, tol);
         Integer nx=size(ss.A, 1);
         Integer rankQ=ssm1.r;
         StateSpace ss2=StateSpace(
@@ -6596,7 +6611,7 @@ Matrix T has to be diagonalizable, i.e. the algebraic and geometric multipliciti
               D=ssm1.D);
         Integer nx2=ssm1.r;
         Modelica_LinearSystems2.Internal.StateSpaceR ssm2=
-            StateSpace.Internal.reducedCtrSystem(ss2);
+            StateSpace.Internal.reducedCtrSystem(ss2, tol);
         Integer rankQ2=ssm2.r;
     public
         output StateSpace ssm3(
@@ -7813,154 +7828,159 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
       import Modelica_LinearSystems2.Math.Vectors;
       import Modelica_LinearSystems2.Math.Complex;
 
-    input StateSpace ss;
+      input StateSpace ss;
 
-    output Boolean isControllable;
-    output Modelica_LinearSystems2.Internal.StateSpaceR ssm1(
-      redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
-      redeclare Real B[size(ss.B, 1),size(ss.B, 2)],
-      redeclare Real C[size(ss.C, 1),size(ss.C, 2)],
-      redeclare Real D[size(ss.D, 1),size(ss.D, 2)])
+      output Boolean isControllable;
+      output Modelica_LinearSystems2.Internal.StateSpaceR ssm1(
+        redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
+        redeclare Real B[size(ss.B, 1),size(ss.B, 2)],
+        redeclare Real C[size(ss.C, 1),size(ss.C, 2)],
+        redeclare Real D[size(ss.D, 1),size(ss.D, 2)])
         "upper block Hessenberg form state space system";
-    output Real P[:,:];
+      output Real P[:,:];
 
     protected
-    Real A[size(ss.A, 1),size(ss.A, 2)];
-    Real B[size(ss.B, 1),size(ss.B, 2)];
-    Real C[size(ss.C, 1),size(ss.C, 2)];
-    Real U[:,:];
-    Real VT[:,:];
+      Real A[size(ss.A, 1),size(ss.A, 2)];
+      Real B[size(ss.B, 1),size(ss.B, 2)];
+      Real C[size(ss.C, 1),size(ss.C, 2)];
+      Real U[:,:];
+      Real VT[:,:];
 
-    Real Q[:,:];
-    Real Pi[:,:];
-    Real tau[:];
-    Real sigma[:];
+      Real Q[:,:];
+      Real Pi[:,:];
+      Real tau[:];
+      Real sigma[:];
 
-    Integer nx=size(ss.A, 1);
-    Integer nu=size(ss.B, 2);
-    Integer ni;
-    Boolean stop;
-    Real normA=Modelica.Math.Matrices.norm(A=ss.A, p=1);
-    Real eps=normA*1e-10;
-    Integer stairStepinSys;
-    Integer info;
-    Integer nn;
-    Integer stairStep;
-    Integer rankS;
-    Integer maxA=max(size(ss.A));
+      Integer nx=size(ss.A, 1);
+      Integer nu=size(ss.B, 2);
+      Integer ni;
+      Boolean stop;
+      Real normA=Modelica.Math.Matrices.norm(A=ss.A, p=1);
+      Real eps=normA*1e-10;
+      Integer stairStepinSys;
+      Integer info;
+      Integer nn;
+      Integer stairStep;
+      Integer rankS;
+      Integer maxA=max(size(ss.A));
   //   Real evc[:,2];
   //   Real evnc[:,2];
 
   algorithm
-    if nu > 0 then
-    if nx > 1 then
+      if nu > 0 then
+        if nx > 1 then
   //#####  first step of staircase
           // transform b->Q'b = {*,0,...,0} and c->cQ, A->Q'AQ
-      (sigma,U,VT) := Modelica.Math.Matrices.singularValues(ss.B);
+          (sigma,U,VT) := Modelica.Math.Matrices.singularValues(ss.B);
 
-      rankS := 0;
-      for i in 1:size(sigma, 1) loop
-        if sigma[i] > maxA*sigma[1]*Modelica.Constants.eps then
-          rankS := rankS + 1;
-        end if;
-      end for;
-
-      B := [diagonal(sigma[1:rankS]),zeros(rankS, nu - rankS); zeros(nx - rankS, nu)];
-      P := transpose(U);
-      Q := transpose(VT);
-      A := transpose(U)*ss.A*U;
-  //    C := ss.C*U;
-      (sigma,U,VT) := Modelica.Math.Matrices.singularValues(A[rankS + 1:nx, 1:rankS]);
-
-      stairStep := rankS;
-      rankS := 0;
-      if size(sigma, 1) > 1 then
-        for i in 1:size(sigma, 1) loop
-          if sigma[i] > maxA*sigma[1]*Modelica.Constants.eps then
-            rankS := rankS + 1;
-          end if;
-        end for;
-      else
-        rankS := if size(sigma, 1) > 0 then if sigma[1] > maxA*Modelica.Constants.eps then 1 else 0 else 0;
-      end if;
-
-      stairStep := stairStep + rankS;
-      Pi := [VT,zeros(size(VT, 1), size(U, 1)); zeros(size(U, 2), size(VT, 2)),transpose(U)];
-      B := Pi*B;
-      P := Pi*P;
-
-   // P could be ambigious according to the sign
-      if transpose(P)*B[:,1]*ss.B[:,1]<0 then
-        Pi:=-Pi;
-        P:=-P;
-      end if;
-
-      A := Pi*A*transpose(Pi);
-
-     // should be made better because of many zeros in B
-
-      while stairStep < nx and rankS > 0 and not
-          Modelica.Math.Matrices.isEqual(
-              A[stairStep + 1:nx, stairStep - rankS + 1:stairStep],
-              zeros(stairStep - rankS, rankS),
-              eps) loop
-
-        (sigma,U,VT) := Modelica.Math.Matrices.singularValues(A[stairStep + 1:nx, stairStep
-           - rankS + 1:stairStep]);
-
-        Pi := [identity(stairStep - rankS),zeros(stairStep - rankS, nx -
-          stairStep + rankS); zeros(nx - stairStep + rankS, stairStep - rankS),
-          [VT,zeros(rankS, nx - stairStep); zeros(nx - stairStep, rankS),
-          transpose(U)]];
-        P := Pi*P;
-        A := Pi*A*transpose(Pi);
-
-  //new implenmentation advisable because of many zeros in Pi
-  //      C := C*transpose(Pi);
-        rankS := 0;
-        if size(sigma, 1) > 1 then
+          rankS := 0;
           for i in 1:size(sigma, 1) loop
             if sigma[i] > maxA*sigma[1]*Modelica.Constants.eps then
               rankS := rankS + 1;
             end if;
           end for;
+
+          B := [diagonal(sigma[1:rankS]),zeros(rankS, nu - rankS); zeros(nx -
+            rankS, nu)];
+          P := transpose(U);
+          Q := transpose(VT);
+          A := transpose(U)*ss.A*U;
+  //    C := ss.C*U;
+          (sigma,U,VT) := Modelica.Math.Matrices.singularValues(A[rankS + 1:nx,
+            1:rankS]);
+
+          stairStep := rankS;
+          rankS := 0;
+          if size(sigma, 1) > 1 then
+            for i in 1:size(sigma, 1) loop
+              if sigma[i] > maxA*sigma[1]*Modelica.Constants.eps then
+                rankS := rankS + 1;
+              end if;
+            end for;
+          else
+            rankS := if size(sigma, 1) > 0 then if sigma[1] > maxA*Modelica.Constants.eps
+               then 1 else 0 else 0;
+          end if;
+
+          stairStep := stairStep + rankS;
+          Pi := [VT,zeros(size(VT, 1), size(U, 1)); zeros(size(U, 2), size(VT,
+            2)),transpose(U)];
+          B := Pi*B;
+          P := Pi*P;
+
+   // P could be ambigious according to the sign
+          if transpose(P)*B[:, 1]*ss.B[:, 1] < 0 then
+            Pi := -Pi;
+            P := -P;
+          end if;
+
+          A := Pi*A*transpose(Pi);
+
+     // should be made better because of many zeros in B
+
+          while stairStep < nx and rankS > 0 and not
+              Modelica.Math.Matrices.isEqual(
+                A[stairStep + 1:nx, stairStep - rankS + 1:stairStep],
+                zeros(stairStep - rankS, rankS),
+                eps) loop
+
+            (sigma,U,VT) := Modelica.Math.Matrices.singularValues(A[stairStep
+               + 1:nx, stairStep - rankS + 1:stairStep]);
+
+            Pi := [identity(stairStep - rankS),zeros(stairStep - rankS, nx -
+              stairStep + rankS); zeros(nx - stairStep + rankS, stairStep -
+              rankS),[VT,zeros(rankS, nx - stairStep); zeros(nx - stairStep,
+              rankS),transpose(U)]];
+            P := Pi*P;
+            A := Pi*A*transpose(Pi);
+
+  //new implenmentation advisable because of many zeros in Pi
+  //      C := C*transpose(Pi);
+            rankS := 0;
+            if size(sigma, 1) > 1 then
+              for i in 1:size(sigma, 1) loop
+                if sigma[i] > maxA*sigma[1]*Modelica.Constants.eps then
+                  rankS := rankS + 1;
+                end if;
+              end for;
+            else
+              rankS := if size(sigma, 1) > 0 then if sigma[1] > maxA*Modelica.Constants.eps
+                 then 1 else 0 else 0;
+            end if;
+            stairStep := stairStep + rankS;
+          end while;
+
+          B := P*ss.B;
+          C := ss.C*transpose(P);
+
         else
-          rankS := if size(sigma, 1) > 0 then if sigma[1] > maxA*Modelica.Constants.eps then
-                  1 else 0 else 0;
+          stairStep := if Modelica.Math.Matrices.isEqual(ss.B, zeros(size(ss.B,
+            1), size(ss.B, 2))) then 0 else 1;
+          A := ss.A;
+          B := ss.B;
+          C := ss.C;
         end if;
-        stairStep := stairStep + rankS;
-      end while;
 
-      B := P*ss.B;
-      C := ss.C*transpose(P);
+        ssm1 := Modelica_LinearSystems2.Internal.StateSpaceR(
+            A=A,
+            B=B,
+            C=C,
+            D=ss.D,
+            r=stairStep);
 
-    else
-      stairStep := if Modelica.Math.Matrices.isEqual(ss.B, zeros(size(ss.B, 1),
-        size(ss.B, 2))) then 0 else 1;
-      A := ss.A;
-      B := ss.B;
-      C := ss.C;
-    end if;
+        isControllable := stairStep == nx;
 
-    ssm1 := Modelica_LinearSystems2.Internal.StateSpaceR(
-          A=A,
-          B=B,
-          C=C,
-          D=ss.D,
-          r=stairStep);
-
-    isControllable := stairStep == nx;
-
-    else // no inputs, nu==0
-    isControllable := false;
-    ssm1 :=  Modelica_LinearSystems2.Internal.StateSpaceR(
-          A=ss.A,
-          B=ss.B,
-          C=ss.C,
-          D=ss.D,
-          r=0);
-    P := identity(nu);
-     end if;
+      else
+         // no inputs, nu==0
+        isControllable := false;
+        ssm1 := Modelica_LinearSystems2.Internal.StateSpaceR(
+            A=ss.A,
+            B=ss.B,
+            C=ss.C,
+            D=ss.D,
+            r=0);
+        P := identity(nu);
+      end if;
 
   end staircaseSVD;
 
@@ -9458,13 +9478,15 @@ inputs and the number of outputs must be identical.
       import Modelica_LinearSystems2.Math.Vectors;
       import Modelica_LinearSystems2.Math.Complex;
 
-    input StateSpace ss;
+      input StateSpace ss "State space system";
+      input Real tol=1e-10
+        "Tolerance of reduction procedure, default tol = 1e-10";
 
-    output Modelica_LinearSystems2.Internal.StateSpaceR ssm1(
-      redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
-      redeclare Real B[size(ss.B, 1),1],
-      redeclare Real C[1,size(ss.C, 2)],
-      redeclare Real D[size(ss.D, 1),size(ss.D, 2)])
+      output Modelica_LinearSystems2.Internal.StateSpaceR ssm1(
+        redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
+        redeclare Real B[size(ss.B, 1),1],
+        redeclare Real C[1,size(ss.C, 2)],
+        redeclare Real D[size(ss.D, 1),size(ss.D, 2)])
         "controllable state space system";
 
     protected
@@ -9509,7 +9531,7 @@ inputs and the number of outputs must be identical.
         ll := nx;
         maxa := max(abs(Ah1[1:ll - 1, ll]));
 
-        while r <= nx - 1 and maxa > nx*normA*1e-10 loop
+        while r <= nx - 1 and maxa > normA*tol loop
           u := cat(
                 1,
                 Vectors.householderVector(Ah1[1:ll - 1, ll], cat(

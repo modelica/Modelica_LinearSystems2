@@ -3,22 +3,22 @@ record DiscreteZerosAndPoles
   "Discrete zeros and poles description of a single input, single output system (data + operations)"
   extends Modelica.Icons.Record;
 
-  Real k=1.0 "Multiplicative factor of transfer function" 
+  Real k=1.0 "Multiplicative factor of transfer function"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-  Real n1[:] "[p^0] coefficients of 1st order numerator polynomials" 
+  Real n1[:] "[p^0] coefficients of 1st order numerator polynomials"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-  Real n2[:,2] "[p,p^0] coefficients of 2nd order numerator polynomials" 
+  Real n2[:,2] "[p,p^0] coefficients of 2nd order numerator polynomials"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-  Real d1[:] "[p^0] coefficients of 1st order denominator polynomials" 
+  Real d1[:] "[p^0] coefficients of 1st order denominator polynomials"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-  Real d2[:,2] "[p,p^0] coefficients of 2nd order denominator polynomials" 
+  Real d2[:,2] "[p,p^0] coefficients of 2nd order denominator polynomials"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
 
-    Modelica.SIunits.Time Ts "Sample time" 
+    Modelica.SIunits.Time Ts "Sample time"
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
   Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-    "Discretization method" 
+    "Discretization method"
         annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
 /* If the numerator polynomial has no coefficients, the transfer function
@@ -166,7 +166,7 @@ follow each other as above. An error occurs if this is not the case.
 </html>"));
   end fromZerosAndPoles;
 
-    function fromDiscreteTransferFunction = 
+    function fromDiscreteTransferFunction =
         Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction.Conversion.toDiscreteZerosAndPoles;
     encapsulated function fromFactorization
       "Generate a ZerosAndPoles object from first and second order polynomials"
@@ -175,22 +175,22 @@ follow each other as above. An error occurs if this is not the case.
       import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
 
       input Real n1[:]=fill(0, 0)
-        "[p^0] coefficients of 1st order numerator polynomials" 
+        "[p^0] coefficients of 1st order numerator polynomials"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real n2[:,2]=fill(
               0,
               0,
-              2) "[p,p^0] coefficients of 2nd order numerator polynomials" 
+              2) "[p,p^0] coefficients of 2nd order numerator polynomials"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real d1[:]=fill(0, 0)
-        "[p^0] coefficients of 1st order denominator polynomials" 
+        "[p^0] coefficients of 1st order denominator polynomials"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real d2[:,2]=fill(
               0,
               0,
-              2) "[p,p^0] coefficients of 2nd order denominator polynomials" 
+              2) "[p,p^0] coefficients of 2nd order denominator polynomials"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-      input Real k=1.0 "Multiplicative factor of transfer function" 
+      input Real k=1.0 "Multiplicative factor of transfer function"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Modelica.SIunits.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
@@ -1043,7 +1043,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
         ss.A[2*n_den2 + i, 1:2*n_den2 + i - 1] := b*ss.C[1, 1:2*n_den2 + i - 1];
         ss.A[2*n_den2 + i, 2*n_den2 + i] := a;
         ss.B[2*n_den2 + i, 1] := if dZero then 0 else b*ss.D[1, 1];
-        ss.C[1, 1:2*n_den2 + i - 1] := if dZero then fill(0, 2*n_den2 + i - 1) else 
+        ss.C[1, 1:2*n_den2 + i - 1] := if dZero then fill(0, 2*n_den2 + i - 1) else
                 d*ss.C[1, 1:2*n_den2 + i - 1];
         ss.C[1, 2*n_den2 + i] := c;
         ss.D := if dZero then [0] else d*ss.D;
@@ -1535,7 +1535,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
     output Real k "= d2/n2, if d2,n2 are not zero, otherwise special cases";
     algorithm
     k := (if abs(d2) > small then abs(d2) else (if abs(d1) > small then abs(
-      d1) else 1))/(if abs(n2) > small then abs(n2) else (if abs(n1) > small then 
+      d1) else 1))/(if abs(n2) > small then abs(n2) else (if abs(n1) > small then
             abs(n1) else 1));
     end scaleFactor2;
 

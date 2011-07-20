@@ -21,7 +21,7 @@ protected
   Integer info=0;
 
 algorithm
-  if q > 0 then
+  if q >= 0 then
     if n > 1 then
       q:=sqrt(q);
       for i in n:-1:1 loop
@@ -44,7 +44,7 @@ algorithm
           Ldd[i:n, i] := -Ldd[i:n, i];
         end if;
         if abs(Ldd[i, i]) < 1e-16 then
-          info := -1;
+          info := -2;
         end if;
         i := i-1;
       end while;
@@ -52,10 +52,11 @@ algorithm
       Ldd[1, 1] := sqrt(L[1, 1]*L[1, 1] - v[1]*v[1]);
     end if;
   else
-    info := -1;
+    info := -3;
+//    Modelica.Utilities.Streams.print("q = "+String(q));
   end if;
 
-  assert(info==0,"Cholesky downdate failed in choleskyDownDate since the downdating would not result in a positive definite matrix");
+  assert(info==0,"Cholesky downdate failed in choleskyDownDate since downdating would not result in a positive definite matrix. info = "+String(info));
 
   if upper then
     for i in 2:n loop
@@ -92,9 +93,10 @@ Matrix <b>Ldd</b> is calculated by
           T           T    
   [<b>v</b>, <b>Ldd</b>] = <b>H</b> *[<b>0</b>, <b>L</b>]
 </blockquote></pre>
+with orthogonal Matrix <b>H</b> such that
 <blockquote><pre>
-                      T          T         T               T     T
-   [<b>v</b>, <b>Ldd</b>] * [<b>v</b>, <b>Ldd</b>] = [<b>0</b>, <b>L</b>]*<b>H</b> *<b>H</b>*[<b>0</b>, <b>L</b>] = [<b>0</b>, <b>L</b>]*[<b>0</b>, <b>L</b>] = <b>L</b>*<b>L</b> + <b>A</b>,
+     T          T                     T          T         T               T     T
+   <b>v</b>*<b>v</b> + <b>Ldd</b>*<b>Ldd</b> = [<b>v</b>, <b>Ldd</b>] * [<b>v</b>, <b>Ldd</b>] = [<b>0</b>, <b>L</b>]*<b>H</b> *<b>H</b>*[<b>0</b>, <b>L</b>] = [<b>0</b>, <b>L</b>]*[<b>0</b>, <b>L</b>] = <b>L</b>*<b>L</b> = <b>A</b>,
 </blockquote></pre>
 i.e., by orthogonal transformation 
 <blockquote><pre>
@@ -107,7 +109,7 @@ The matrices <b>H</b>_i are Givens matrices computed such, that
 </blockquote></pre>
 with <b>a</b> is the solution of
 <blockquote><pre>
-<b>L</b>*<b>a</b> = <b>x</b>
+<b>L</b>*<b>a</b> = <b>v</b>
 </blockquote></pre>
 and 
 <blockquote><pre>

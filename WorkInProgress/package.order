@@ -11,3 +11,5 @@ MPC
 Junk
 StateSpace2
 ukfs
+DiscreteTransferFunction
+DiscreteZerosAndPoles

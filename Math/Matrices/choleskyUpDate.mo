@@ -39,7 +39,7 @@ algorithm
     Lud[1,1] := L[1,1]+v[1];
   end if;
 
-  assert(info==0,"Cholesky update failed in choleskyUpDate since the downdating would not result in a positive definite matrix");
+  assert(info==0,"Cholesky update failed in choleskyUpDate since updating would not result in a positive definite matrix");
 
   if upper then //return upper triangle
     for i in 2:n loop

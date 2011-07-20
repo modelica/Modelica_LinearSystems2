@@ -2262,7 +2262,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 
   algorithm
     (xmu, y_est, Ak, Ck) := ekfFunction(xpre, upre, u, Ts, ny);
-    (K, M) := DiscreteStateSpace.Internal.kfEstimate(Ak, Ck, Mpre, Q, R);
+    (K, M) := DiscreteStateSpace.Internal.ekfUpdate( Ak, Ck, Mpre, Q, R);
     x_est :=xmu + K*(y - y_est);
       annotation (Documentation(revisions="<html>
 <ul>
@@ -3894,6 +3894,683 @@ end timeResponse1;
 
 
 
+
+function ukfPredict_sr "Prediction step in square root ukf"
+  extends Modelica.Icons.Function;
+      import Modelica.Math.Matrices.solve;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Modelica_LinearSystems2.Math.Matrices;
+
+  extends Modelica_LinearSystems2.DiscreteStateSpace.Internal.predictBase_sr;
+
+algorithm
+// Compute sigma points
+  sigmas[:, 1] := xpre;
+  for i in 1:n loop
+    sigmas[:, i + 1] := xpre;
+    sigmas[:, i + n + 1] := xpre;
+    for j in i:n loop   // only lower triangle of CfPpre has elements unequal to zero
+      sigmas[j, i + 1] := sigmas[j, i + 1] + gamma*CfPpre[j, i];
+      sigmas[j, i + n + 1] := sigmas[j, i + n + 1] - gamma*CfPpre[j, i];
+    end for;
+  end for;
+
+// Compute update of sigma points from xpre_k+1 = f(xpre,upre)
+  for i in 1:2*n + 1 loop
+    fSigmas[:, i] := fSigma(sigmas[:,i], upre, Ts);
+  end for;
+
+  mu := wm0*fSigmas[:, 1];
+  for i in 1:n loop
+    mu[i] := mu[i] + wmi*sum(fSigmas[i, 2:2*n + 1]);
+  end for;
+
+//Compute predicted CfP
+  for i in 2:2*n + 1 loop
+    M[:, i - 1] := fSigmas[:, i] - mu;
+  end for;
+  M := sqrt(wci)*M;
+  M[:, 2*n + 1:2*size(xpre, 1) + size(CfQ, 2)] := CfQ;
+
+  LQ := Matrices.LAPACK.dgelqf(M);
+  CfP := Matrices.triangle(LQ[:, 1:n], false);
+  for i in 1:n loop
+    if CfP[i, i] < 0 then
+      CfP[:, i] := -CfP[:, i];
+    end if;
+  end for;
+
+  if abs(wc0) > 0 then
+    if wc0 < 0 then
+      CfP := Matrices.choleskyDownDate(
+        CfP,
+        sqrt(-wc0)*(fSigmas[:, 1] - mu),
+        false);
+    else
+      CfP := Matrices.choleskyUpDate(
+        CfP,
+        sqrt(wc0)*(fSigmas[:, 1] - mu),
+        false);
+    end if;
+  end if;
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
+end ukfPredict_sr;
+
+function ukfUpdate_sr "Update step in square root ukf"
+  extends Modelica.Icons.Function;
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Modelica_LinearSystems2.Math.Matrices;
+
+  extends Modelica_LinearSystems2.DiscreteStateSpace.Internal.updateBase_sr;
+
+algorithm
+// Compute sigma points
+      xSigmas[:, 1] := xpre;
+      for i in 1:n loop
+        xSigmas[:, i + 1] := xpre;
+        xSigmas[:, i + n + 1] := xpre;
+        for j in i:n loop
+// only lower triangle of S has elements unequal to zero
+          xSigmas[j, i + 1] := xSigmas[j, i + 1] + gamma*CfPpre[j, i];
+          xSigmas[j, i + n + 1] := xSigmas[j, i + n + 1] - gamma*CfPpre[j, i];
+        end for;
+      end for;
+
+// Compute update of sigma points from xpre_k+1 = f(xpre_k,u_k)
+  for i in 1:2*n+1 loop
+    ySigmas[:,i] := hSigma(xSigmas[:,i], upre, Ts, m);
+  end for;
+  mu := wm0*ySigmas[:, 1];
+  for i in 1:m loop
+    mu[i] := mu[i] + wmi*sum(ySigmas[i, 2:2*n + 1]);
+  end for;
+
+//Compute predicted CfPpre
+  for i in 2:2*n + 1 loop
+    M[:, i-1] := ySigmas[:,i]-mu;
+  end for;
+  M := sqrt(wci)*M;
+  M[:,2*n+1:2*size(xpre, 1)+size(CfR, 2)] := CfR;
+
+// (,Syy) := Matrices.QR(transpose(M));
+  LQ :=  Matrices.LAPACK.dgelqf(M);
+   Syy := Matrices.triangle(LQ[:,1:m],false);
+  for i in 1:m loop
+    if Syy[i,i]<0 then
+      Syy[:,i] := -Syy[:,i];
+    end if;
+  end for;
+
+  if abs(wc0)>0 then
+    if wc0<0 then
+      Syy := Matrices.choleskyDownDate(Syy,sqrt(-wc0)*(ySigmas[:,1]-mu),false);
+    else
+      Syy := Matrices.choleskyUpDate(Syy,sqrt(wc0)*(ySigmas[:,1]-mu),false);
+    end if;
+  end if;
+
+//Compute predicted cross covariace Rxy = sum(w_i*(hSigma_i-mu_i)*(hSigma_i-mu_i)'), i=0,...,2n+1
+// Since Ryy will be symmetric, only the upper traiangle is calculated
+// i=2,..,2n+1 with constant weight wci first
+  for j in 1:m loop
+    for i in 2:2*n + 1 loop
+      Rxy[:, j] := Rxy[:, j] + (ySigmas[j, i] - mu[j])*(xSigmas[:, i] - xpre);
+    end for;
+  end for;
+  Rxy := wci*Rxy;
+
+// first element with weight wc0
+  for j in 1:m loop
+    Rxy[:, j] := Rxy[:, j] + wc0*(ySigmas[j, 1] - mu[j])*(xSigmas[:, 1] - xpre);
+  end for;
+
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
+end ukfUpdate_sr;
+
+function ukfEstimate_sr
+      "Calculate filter gain and the updated mean of the state and Cholesky factor S of covariance P of a UKF"
+  extends Modelica_LinearSystems2.DiscreteStateSpace.Internal.estimateBase_sr;
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+  output Real xmu[size(xm, 1)] "Updated state mean";
+
+    protected
+  Real U[size(xm,1),size(y,1)];
+algorithm
+  K := LAPACK.dtrsm(Syy, Rxy, 1, true, false, true, false);
+  K := LAPACK.dtrsm(Syy, K, 1, true, false, false, false);
+
+  U := K*Syy;
+  CfPu := Matrices.choleskyDownDate(CfP,U[:,1],false);
+   for i in 2:size(y,1) loop
+     CfPu := Matrices.choleskyDownDate(CfPu,U[:,i],false);
+   end for;
+
+  xmu := xm + K*(y-ym);
+  ymu := yOut(xmu, u, Ts, ny);
+
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       by Marcus Baur, DLR-RM</li>
+</ul>
+</html>"));
+end ukfEstimate_sr;
+
+function ekfUpdate
+      "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
+  extends Modelica.Icons.Function;
+
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+
+  input Real Ak[:,size(Ak, 1)]
+        "Transition matrix of the discrete system at instant k";
+  input Real Ck[:,size(Ak, 1)]
+        "Output matrix of the discrete system at instant k";
+  input Real M[size(Ak, 1),size(Ak, 1)]
+        "Solution of the discrete Riccati equation at instant k";
+  input Real Q[size(Ak, 1),size(Ak, 1)]
+        "Input or process noise covariance matrix at instant k";
+  input Real R[size(Ck, 1),size(Ck, 1)]
+        "Output or measurement noise covariance matrix at instant k";
+
+  output Real K[size(Ak, 1),size(Ck, 1)] "Kalman filter gain matrix";
+  output Real M_new[size(Ak, 1),size(Ak, 1)]
+        "Updated solution of the discrete Riccati equation";
+
+    protected
+  Real UT[size(Ck, 1),size(Ck, 1)]
+        "Upper triangle of measurement prediction covariance Ck*M*Ck' + R";
+  Real MCT[size(Ak, 1),size(Ck, 1)] "Matrix product M*Ck'";
+
+  Integer nx=size(Ak, 1) "Number of states, order of the system";
+  Integer ny=size(Ck, 1) "number of outputs";
+  Integer l1;
+  Integer l2;
+  Real alpha=1.0;
+
+  Integer info;
+
+algorithm
+  MCT:=M*transpose(Ck) "Matrix M*Ck'";
+  UT:=Math.Matrices.Internal.symMatMul(Ck, M, R, true);
+
+// K = M*C'*inv(C*M*C' + R)
+  K := Math.Matrices.Internal.solve2rSym(UT, MCT, false, true);
+
+// Calculate upper triangle of symmetric M-K*Ck*M
+  for l1 in 1:nx loop
+    for l2 in l1:nx loop
+      M_new[l1, l2] := M[l1, l2] - K[l1, :]*MCT[l2, :];
+    end for;
+  end for;
+
+  M_new := Math.Matrices.Internal.symMatMul(Ak, M_new, Q, true);
+
+  // Note that M_new contains only the upper triangle of the Riccati matrix.
+  // To complete the matrix, the strict lower triangle is added by
+  M_new := symmetric(M_new);
+
+      annotation (Documentation(revisions="<html>
+<ul>
+<li><i>2010/06/11 </i>
+       implemented by Marcus Baur, DLR-RM</li>
+<li><i>2011/07/18 </i>
+       documentation improved by Marcus Baur, DLR-RM</li>
+</ul>
+</html>", info="<html>
+
+<h4>Syntax</h4>
+<blockquote><pre>
+         (K, M_update) = DiscreteStateSpace.Internal.<b>kfUpdate</b>(A, C, M, Q, R);
+</pre></blockquote>
+<h4>Description</h4>
+<p>
+Function <b>kfUpdate</b> computes the matrix gain <b>K</b> of a Kalman filter
+<blockquote><pre>
+         T      T    -1
+  <b>K</b> = <b>M</b>*<b>C</b>*(<b>C</b>*<b>M</b>*<b>C</b> + <b>R</b>)
+
+</pre></blockquote>
+ and the updated solution <b>M</b> of the Riccati equation
+ <blockquote><pre>
+                      T       T      T    -1     T
+  <b>M</b>_update = <b>Q</b> + <b>A</b>*<b>M</b>*<b>A</b> - <b>A</b>*<b>M</b>*<b>C</b>*(<b>C</b>*<b>M</b>*<b>C</b> + <b>R</b>) *<b>C</b>*<b>M</b>*<b>A</b>.
+  
+</pre></blockquote>
+
+In context with the covariance matrix <b>P</b> of the estimation error matrix <b>M</b> holds
+<blockquote><pre>
+                      
+  <b>P</b> = (<b>I</b> - <b>K</b>*<b>C</b>)*<b>M</b>.
+                      
+</pre></blockquote>
+Since several matrices in the equation above are symmetric, special routines for multiplication and solving are applied. Furthermore, computation
+is restricted to the upper triangle of those matrices.<br>
+Particularly, a matrix calculation like
+<blockquote><pre>
+           T
+  <b>D</b> = <b>A</b>*<b>B</b>*<b>A</b> + <b>C</b>.
+                      
+</pre></blockquote>
+with <b>B</b> and <b>C</b> are symmetric equals
+<blockquote><pre>
+                 T                   T         T                 T              T     T        T
+  <b>D</b> = <b>A</b>*(<b>B</b>u+<b>B</b>l)*<b>A</b> + (<b>C</b>u+<b>C</b>l) =  <b>A</b>*<b>B</b>u*<b>A</b> + <b>A</b>*<b>B</b>l*<b>A</b> + (<b>C</b>u+<b>C</b>l) = <b>A</b>*<b>B</b>u*<b>A</b> + <b>C</b>u + (<b>A</b>*<b>B</b>u*<b>A</b> + <b>C</b>u) =  <b>E</b> + <b>E</b>
+                      
+</pre></blockquote>
+where <b>B</b>u and <b>C</b>u with
+<blockquote><pre>
+         T               T
+  <b>B</b>u = <b>B</b>l   and   <b>C</b>u = <b>C</b>l
+                      
+</pre></blockquote>
+are upper triangular matrices. Furthermore, the matrices hold
+<blockquote><pre>
+                       
+  <b>B</b>u + <b>B</b>l = <b>B</b>   and   <b>C</b>u + <b>C</b>l = <b>C</b>,
+                      
+</pre></blockquote>
+i.e., 
+<blockquote><pre>
+          | bij/2  for i = j      
+  bu,ij = |
+          | bij   else          
+
+</pre></blockquote>
+Since, <b>D</b> is symmetric, only the upper triangle of <b>D</b> is computed by calculatiing the upper triangle of matrix <b>E</b> and adding the upper trinagle of <b>E</b>'.<br>
+These procedures are assembled in function Matrices.Internal.symMatMul.<br><br>
+For completion <b>D</b> = symmetric(<b>D</b>) could be applied.<br><br>
+
+Function <b>kfUpdate</b> is called in <b>DiscreteStateSpace.Design.EKF</b> to compute one recursion of the Kalman filter or Extended Kalman filter
+equations respectively.
+</html>"));
+end ekfUpdate;
+
+partial function predictBase "Base class of prediction-function"
+  extends Modelica.Icons.Function;
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+
+  replaceable function fSigma =
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy constrainedby
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase
+                                                                annotation(choicesAllMatching);
+
+  input Real xpre[:] "Estimated vector of previous instant";
+  input Real upre[:] "Input at instant k";
+  input Real Ppre[size(xpre, 1),size(xpre, 1)]
+        "Error covariance matrix of the previous instant";
+  input Real Q[size(Ppre, 1),size(Ppre, 1)]
+        "Covariance matrix of the process noise";
+
+  input Real alpha=1 "Spread of sigma points";
+  input Real beta=2 "Characteristic of the distribution of x";
+  input Real kappa=0 "Kurtosis scaling of sigma point distribution";
+  input Modelica.SIunits.Time Ts "Sample time";
+
+  output Real mu[size(xpre, 1)] "Predicted mean";
+  output Real Pk[size(xpre, 1),size(xpre, 1)] "Transformed covariance matrix";
+
+    protected
+  Integer n=size(xpre, 1);
+  Real sigmas[size(xpre, 1),2*size(xpre, 1) + 1] "Sigma points";
+  Real fSigmas[size(Q, 2),2*size(xpre, 1) + 1] "Mapped sigma points";
+  Real CFP[n,n]
+        "Square root (left Cholesky factor) of the covariance matrix Ppre";
+  Integer info;
+
+  Real lambda = (alpha^2)*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+
+end predictBase;
+
+partial function updateBase "Bass class of update-function"
+  extends Modelica.Icons.Function;
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+
+  replaceable function hSigma =
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy constrainedby
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase
+                                                                annotation(choicesAllMatching);
+
+  input Real xpre[:] "Estimated vector of previous instant";
+  input Real upre[:] "Input at instant k";
+  input Real Ppre[size(xpre, 1),size(xpre, 1)]
+        "Error covariance matrix of the previous instant";
+  input Real R[:,size(R, 1)] "Covariance matrix of the measurement noise";
+
+  input Real alpha=1 "Spread of sigma points";
+  input Real beta=2 "Characteristic of the distribution of x";
+  input Real kappa=0 "Kurtosis scaling of sigma point distribution";
+  input Modelica.SIunits.Time Ts "Sample time";
+
+  output Real mu[size(R, 1)] "Predicted mean";
+  output Real Ryy[size(R, 1),size(R, 1)] "Transformed covariance matrix";
+  output Real Rxy[size(xpre, 1),size(R, 1)]
+        "Transformed cross covariance matrix";
+
+    protected
+  Real CFP[n,n]
+        "Square root (left Cholesky factor) of the covariance matrix Ppre";
+  Integer n=size(xpre, 1);
+  Integer m=size(R, 1);
+  Real xSigmas[size(xpre, 1),2*n + 1] "Sigma points";
+  Real ySigmas[size(R, 2),2*n + 1] "Mapped sigma points";
+
+  Integer info;
+
+  Real lambda = (alpha^2)*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+
+end updateBase;
+
+function estimateBase "Base class of estimation function"
+  extends Modelica.Icons.Function;
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+
+  replaceable function yOut =
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy constrainedby
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase
+                                                                annotation(choicesAllMatching);
+
+  input Real y[:] "Measured output vector";
+  input Real xm[:] "Predicted state mean";
+  input Real ym[size(y, 1)] "Predicted output mean";
+  input Real u[:] "Input";
+  input Real P[size(xm, 1),size(xm, 1)] "Covariance matrix";
+  input Real Ryy[size(y, 1),size(Ryy, 1)] "Transformed covariance matrix";
+  input Real Rxy[size(xm, 1),size(y, 1)] "Transformed cross covariance matrix";
+  input Modelica.SIunits.Time Ts "Sample time";
+
+  output Real K[size(xm, 1),size(y, 1)] "Filter gain";
+  output Real Pu[size(xm, 1),size(xm, 1)] "Updated State covariance matrix";
+  output Real xmu[size(xm, 1)] "Updated state mean";
+  output Real ymu[size(y, 1)] "Updated output mean";
+    protected
+  Integer ny=size(y,1);
+
+end estimateBase;
+
+partial function predictBase_sr "Base class of prediction function"
+  extends Modelica.Icons.Function;
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+
+  replaceable function fSigma =
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy constrainedby
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase
+                                                                annotation(choicesAllMatching);
+
+  input Real xpre[:] "Estimated vector of previous instant";
+  input Real upre[:] "Input at instant k";
+  input Real CfPpre[size(xpre, 1),size(xpre, 1)]
+        "Error covariance matrix of the previous instant";
+  input Real CfQ[size(CfPpre, 1),:] "Covariance matrix of the process noise";
+
+  input Real alpha=1 "Spread of sigma points";
+  input Real beta=2 "Characteristic of the distribution of x";
+  input Real kappa=0 "Kurtosis scaling of sigma point distribution";
+  input Modelica.SIunits.Time Ts "Sample time";
+
+  output Real mu[size(xpre, 1)] "Predicted mean";
+  output Real CfP[size(xpre, 1),size(xpre, 1)] "Transformed covariance matrix";
+
+    protected
+  Integer n=size(xpre, 1);
+  Real sigmas[size(xpre, 1),2*size(xpre, 1) + 1] "Sigma points";
+  Real fSigmas[size(CfQ, 2),2*size(xpre, 1) + 1] "Mapped sigma points";
+  Integer info;
+
+  Real lambda = (alpha^2)*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+  Real gamma=alpha*sqrt(n);//=sqrt(lambda+n)
+  Real M[n,3*n];
+  Real LQ[n,3*n];
+
+end predictBase_sr;
+
+partial function updateBase_sr "Bass class of update_sr-function"
+  extends Modelica.Icons.Function;
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+  replaceable function hSigma =
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy constrainedby
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase
+                                                                annotation(choicesAllMatching);
+
+  input Real xpre[:] "Estimated vector of previous instant";
+  input Real upre[:] "Input at instant k";
+  input Real CfPpre[size(xpre, 1),size(xpre, 1)]
+        "Error covariance matrix of the previous instant";
+  input Real CfR[:,size(CfR, 1)] "Covariance matrix of the measurement noise";
+
+  input Real alpha=1 "Spread of sigma points";
+  input Real beta=2 "Characteristic of the distribution of x";
+  input Real kappa=0 "Kurtosis scaling of sigma point distribution";
+  input Modelica.SIunits.Time Ts "Sample time";
+
+  output Real mu[size(CfR, 1)] "Predicted mean";
+  output Real Syy[size(CfR, 1),size(CfR, 1)] "Transformed covariance matrix";
+  output Real Rxy[size(xpre, 1),size(CfR, 1)]
+        "Transformed cross covariance matrix";
+
+    protected
+  Integer n=size(xpre, 1);
+  Integer m=size(CfR, 1);
+  Real xSigmas[size(xpre, 1),2*n + 1] "Sigma points";
+  Real ySigmas[size(CfR, 2),2*n + 1] "Mapped sigma points";
+
+  Integer info;
+
+  Real lambda = (alpha^2)*(n+kappa)-n;
+  Real a=alpha^2*(n+kappa);//*lambda+n
+  Real wm0=lambda/a;
+  Real wmi=1/2/a;
+  Real wc0=lambda/a+1-alpha^2+beta;
+  Real wci=1/2/a;
+  Real M[size(CfR, 1),2*size(xpre, 1)+size(CfR, 2)];
+  Real gamma=alpha*sqrt(n);//=sqrt(lambda+n)
+  Real LQ[m,2*n+m];
+
+end updateBase_sr;
+
+function estimateBase_sr "Base class of estimation function"
+  extends Modelica.Icons.Function;
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+
+  replaceable function yOut =
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy constrainedby
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase
+                                                                annotation(choicesAllMatching);
+
+  input Real y[:] "Measured output vector";
+  input Real xm[:] "Predicted state mean";
+  input Real ym[size(y, 1)] "Predicted output mean";
+  input Real u[:] "Input";
+  input Real CfP[size(xm, 1),size(xm, 1)]
+        "Cholesky factor of covariance matrix";
+  input Real Syy[size(y, 1),size(Syy, 1)] "Transformed covariance matrix";
+  input Real Rxy[size(xm, 1),size(y, 1)] "Transformed cross covariance matrix";
+  input Modelica.SIunits.Time Ts "Sample time";
+
+  output Real K[size(xm, 1),size(y, 1)] "Filter gain";
+  output Real CfPu[size(xm, 1),size(xm, 1)]
+        "Updated Cholesky factor state covariance matrix";
+  output Real xmu[size(xm, 1)] "Updated state mean";
+  output Real ymu[size(y, 1)] "Updated output mean";
+
+    protected
+  Integer ny=size(y,1);
+
+end estimateBase_sr;
+
+partial function ekfSystemBase "Base class of ekf-system functions"
+      extends Modelica.Icons.Function;
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+
+      input Real x[:] "Estimated vector at instant k";
+      input Real u[:] "Input at instant k";
+      input Real u2[:] "Input at instant k+delta";
+      input Modelica.SIunits.Time Ts "Sample time";
+      input Integer ny "Number of outputs";
+
+      output Real x_new[size(x,1)] "Modeled mean";
+      output Real y[ny] "Modeled output";
+      output Real Ak[size(x,1),size(x,1)]
+        "System matrix of the discrete linearized system at instant k";
+      output Real Ck[ny,size(x,1)]
+        "Output matrix of the discrete linearized system at instant k";
+
+    protected
+      Integer nx=size(x,1);
+      Integer nu=size(u, 1);
+
+end ekfSystemBase;
+
+  partial function fBase "Base class of the state function"
+    extends Modelica.Icons.Function;
+
+    input Real x[:] "State at instant k";
+    input Real u[:] "Input at instant k";
+    input Modelica.SIunits.Time Ts "Sample time";
+    output Real x_new[size(x, 1)] "Predicted state at instant k+1";
+
+  end fBase;
+
+  partial function hBase "Base class of output function"
+    extends Modelica.Icons.Function;
+
+    input Real x[:] "State at instant k";
+    input Real u[:] "Input at instant k";
+    input Modelica.SIunits.Time Ts "Sample time";
+    input Integer ny "number of outputs";
+
+    output Real y[ny] "Output at instant k";
+
+  end hBase;
+
+  function fSigmaDummy "Dummy function for the discretetized state function"
+
+      import Modelica_LinearSystems2.DiscreteStateSpace.Internal;
+    extends Modelica.Icons.Function;
+
+    extends Internal.fBase;
+
+  algorithm
+    x_new := x;
+  end fSigmaDummy;
+
+  function hSigmaDummy "Dummy function for the discretetized output function"
+
+    extends hBase;
+
+  algorithm
+      y := fill(1,ny);
+  end hSigmaDummy;
+
+  function ekfSystemDummy "Dummy function for ekfSystem"
+
+      import Modelica.Math.Matrices;
+
+    extends ekfSystemBase;
+
+  algorithm
+    x_new := x;
+    y := fill(1,ny);
+    Ak := identity(nx);// Discretized Jacobi of F
+    Ck := fill(0,ny,nx);// Discretized Jacobi of y
+
+  end ekfSystemDummy;
+
+partial function ekfStateBase "Base class of ekf state space function"
+      extends Modelica.Icons.Function;
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+
+      input Real x[:] "Estimated vector at instant k";
+      input Real u[:] "Input at instant k";
+      input Modelica.SIunits.Time Ts "Sample time";
+
+      output Real x_new[size(x, 1)] "Modeled mean";
+      output Real Ak[size(x, 1),size(x, 1)]
+        "System matrix of the discrete linearized system at instant k";
+
+    protected
+      Integer nx=size(x, 1);
+      Integer nu=size(u, 1);
+
+end ekfStateBase;
+
+partial function ekfOutputBase "Base class of ekf output function"
+      extends Modelica.Icons.Function;
+
+      import Modelica;
+      import Modelica_LinearSystems2;
+
+      input Real x[:] "Estimated vector at instant k";
+      input Real u[:] "Input at instant k";
+      input Modelica.SIunits.Time Ts "Sample time";
+      input Integer ny "Number of outputs";
+
+      output Real y[ny] "Modeled output";
+      output Real Ck[ny,size(x, 1)]
+        "Output matrix of the discrete linearized system at instant k";
+
+    protected
+      Integer nx=size(x, 1);
+      Integer nu=size(u, 1);
+
+end ekfOutputBase;
 
   encapsulated function assignOneOrTwoPoles
       "Algorithm to assign p (p = 1 or 2) eigenvalues"

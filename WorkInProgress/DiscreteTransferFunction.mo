@@ -9,11 +9,11 @@ record DiscreteTransferFunction
   Real n[:] "Coefficients of numerator polynomial (in descending order)" annotation(Dialog(group="y = n*{s^m, ... , s, 1} / (d*{s^r, ... , s, 1}) * u"));
   Real d[:] "Coefficients of denominator polynomial (in descending order)" annotation(Dialog(group="y = n*{s^m, ... , s, 1} / (d*{s^r, ... , s, 1}) * u"));
 
-  Modelica.SIunits.Time Ts "Sample time" 
+  Modelica.SIunits.Time Ts "Sample time"
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
   Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-    "Discretization method" 
+    "Discretization method"
         annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
   String uName="u" "Name of input signal"    annotation(Dialog(group="Signal names"));
@@ -70,8 +70,8 @@ record DiscreteTransferFunction
         "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
-      output DiscreteTransferFunction dtf(redeclare Real n[size(z, 1)+1], redeclare
-          Real d[                                                                          size(p, 1)+1])
+      output DiscreteTransferFunction dtf(redeclare Real n[size(z, 1)+1], redeclare Real
+               d[                                                                          size(p, 1)+1])
         "TransferFunction built by ZerosAndPoles object";
 
     protected
@@ -131,8 +131,8 @@ follow each other as above. An error occurs if this is not the case.
            input String uName = "" "input name";
            input String yName = "" "output name";
 
-           output DiscreteTransferFunction dtf(redeclare Real n[size(n, 1)], redeclare
-          Real d[                                                                             size(d, 1)])
+           output DiscreteTransferFunction dtf(redeclare Real n[size(n, 1)], redeclare Real
+               d[                                                                             size(d, 1)])
         "Transfer function";
 
       algorithm
@@ -177,11 +177,11 @@ follow each other as above. An error occurs if this is not the case.
       import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
       input TransferFunction tf "continuous transfer function";
-      input Modelica.SIunits.Time Ts "Sample time" 
+      input Modelica.SIunits.Time Ts "Sample time"
            annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method" 
+        "Discretization method"
             annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
       output DiscreteTransferFunction dtf;
@@ -295,12 +295,12 @@ encapsulated function bode "Plot transfer function as bode plot"
   input Boolean autoRange=true
         "= true, if abszissa range is automatically determined";
   input Modelica.SIunits.Frequency f_min(min=0) = 0.1
-        "Minimum frequency value, if autoRange = false" 
+        "Minimum frequency value, if autoRange = false"
                                                     annotation(Dialog(enable=not autoRange));
   input Modelica.SIunits.Frequency f_max(min=0) = 10
         "Maximum frequency value, if autoRange = false"                                              annotation(Dialog(enable=not autoRange));
 
-  input Boolean magnitude=true "= true, to plot the magnitude of tf" 
+  input Boolean magnitude=true "= true, to plot the magnitude of tf"
                                                                     annotation(choices(__Dymola_checkBox=true));
   input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
 

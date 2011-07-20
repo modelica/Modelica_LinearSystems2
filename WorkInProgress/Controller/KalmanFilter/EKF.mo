@@ -61,7 +61,8 @@ initial equation
 
 equation
   when {sampleTrigger} then
-    (x_est, y_est, M, K) = Design.EKF(function ekfFunction(), pre(x_est), pre(u), u, y_measure, pre(M), Q2, R, Ts);
+    (x_est, y_est, M, K) = Design.EKF(function ekfFunction(), pre(x_est), pre(u), u,
+    y_measure, pre(M), Q2, R, Ts);
   end when;
 
   annotation (Diagram(graphics), Icon(graphics={

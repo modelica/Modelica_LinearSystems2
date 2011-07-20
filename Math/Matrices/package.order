@@ -41,3 +41,4 @@ generalizedEigenvaluesTriangular
 printMatrix
 fromFile
 Internal
+choleskyDownDate2

@@ -2022,7 +2022,7 @@ end sr_ukfEstimate_2;
 
   algorithm
     (xmu, y_est, Ak, Ck) := ekfFunction(x=xpre, u=upre, u2=u,Ts=Ts, ny=ny);
-    (K, M) := Modelica_LinearSystems2.DiscreteStateSpace.Internal.kfEstimate(Ak, Ck, Mpre, Q, R);
+    (K, M) := Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfUpdate( Ak, Ck, Mpre, Q, R);
     x_est := xmu + K*(y - y_est);
       annotation (Documentation(revisions="<html>
 <ul>
