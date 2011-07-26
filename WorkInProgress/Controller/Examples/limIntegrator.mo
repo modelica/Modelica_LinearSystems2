@@ -24,11 +24,10 @@ model limIntegrator "linIntegrator"
     blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous,
     sampleTime=0.02)
              annotation (Placement(transformation(extent={{54,50},{74,70}})));
+    yMax=1) annotation (Placement(transformation(extent={{28,-42},{48,-22}})));
 
-  Modelica_LinearSystems2.WorkInProgress.Controller.IntegratorXX integratorXX(
-      blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
-      y_start=1.5)
-    annotation (Placement(transformation(extent={{24,-48},{44,-28}})));
+  Modelica.Blocks.Sources.Constant const(k=0)
+    annotation (Placement(transformation(extent={{-8,-74},{12,-54}})));
 equation
   connect(sine.y, limIntegrator.u) annotation (Line(
       points={{-59,10},{-2,10}},
