@@ -56,5 +56,48 @@ algorithm
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
 </ul>
+</html>", info="<html>
+This function is used to efficiently calculate the matrix <b>X</b> from equation
+<blockquote><pre>
+           T
+  <b>X</b> = <b>A</b>*<b>B</b>*<b>A</b> + <b>C</b>.
+                      
+</pre></blockquote>
+with <b>B</b> and <b>C</b> are symmetric matrices. They hold<blockquote><pre>
+                       
+   <b>B</b> = <b>B</b>u + <b>B</b>l   and    <b>C</b> = <b>C</b>u + <b>C</b>l,
+                      
+</pre></blockquote>
+
+where <b>B</b>u and <b>C</b>u with
+<blockquote><pre>
+         T               T
+  <b>B</b>u = <b>B</b>l   and   <b>C</b>u = <b>C</b>l
+                      
+</pre></blockquote>
+are upper triangular matrices. Furthermore, the matrices are defined such that
+
+i.e., 
+<blockquote><pre>
+          | bij/2  for i = j      
+  bu,ij = |
+          | bij   else          
+
+</pre></blockquote>
+and cu,ij respectively.<br>
+Finally, <b>X</b> is given by the sum of a upper triangular matrix and its transposes
+<blockquote><pre>
+                 T                   T         T                 T              T     T        T
+  <b>X</b> = <b>A</b>*(<b>B</b>u+<b>B</b>l)*<b>A</b> + (<b>C</b>u+<b>C</b>l) =  <b>A</b>*<b>B</b>u*<b>A</b> + <b>A</b>*<b>B</b>l*<b>A</b> + (<b>C</b>u+<b>C</b>l) = <b>A</b>*<b>B</b>u*<b>A</b> + <b>C</b>u + (<b>A</b>*<b>B</b>u*<b>A</b> + <b>C</b>u) =  <b>E</b> + <b>E</b>
+                      
+</pre></blockquote>
+
+Since, <b>X</b> also has to be symmetric, only the upper triangle of <b>X</b> is computed by calculatiing the upper triangle of matrix <b>E</b> and adding the upper trinagle of <b>E</b>'.<br>
+The calculation employs the BLAS functions <b>dtrmm</b> and <b>dgemm</b>.<br><br>
+Note, that only the upper trinagle is calculated. The complete solution could be achieved by the command
+<blockquote><pre>
+<b>X</b> := symmetric(<b>X</b>)
+</pre></blockquote>
+
 </html>"));
 end symMatMul;

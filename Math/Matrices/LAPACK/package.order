@@ -26,8 +26,8 @@ dtrsen
 dtrsyl
 dgelsx
 dgemm
-dtrmm
 dpotrf
+dtrmm
 dtrsm
 drot
 drotg

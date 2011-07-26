@@ -23,6 +23,8 @@ k_care_u
 frobeniusNorm
 symMatMul
 symMatMul_C
+solveSymRight
+solveSymRight_C
+reorderRSF2
 solve2rSym
 solve2rSym_C
-reorderRSF2

@@ -1275,7 +1275,8 @@ function ukfEstimate
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.estimateBase;
 
 algorithm
-  K := Internal.solve2rSym_C(Ryy, Rxy);
+  K := Internal.solveSymRight_C(
+                             Ryy, Rxy);
   Pu := -Internal.symMatMul_C(K, Ryy, -P, true);
   Pu := symmetric(Pu);
   xmu := xm + K*(y - ym);
@@ -1654,7 +1655,8 @@ algorithm
   assert(info == 0, "Computation of LQ factorization with \"Lapack.dgelqf\" failed in function \"sr_kfStepMatrices\".");
   S_new := Matrices.triangle(M[ny+1:ny+nx,ny+1:nx+ny],false);
   Cr_new := Matrices.triangle(M[1:ny,1:ny],false);
-  K := Matrices.Internal.solve2rSym(Cr_new,M[ny+1:ny+nx,1:ny],true,false);
+  K := Matrices.Internal.solveSymRight(
+                                    Cr_new,M[ny+1:ny+nx,1:ny],true,false);
 end sr_kfStepMatrices;
 
 function sr_kfStepMatrices2
@@ -1703,7 +1705,8 @@ algorithm
 
   S_new := Matrices.triangle(M[ny+1:ny+nx,ny+1:nx+ny],false);
   Cr_new := Matrices.triangle(M[1:ny,1:ny],false);
-  K := Matrices.Internal.solve2rSym(Cr_new,M[ny+1:ny+nx,1:ny],true,false);
+  K := Matrices.Internal.solveSymRight(
+                                    Cr_new,M[ny+1:ny+nx,1:ny],true,false);
 //  K := M[ny+1:ny+nx,1:ny];
 end sr_kfStepMatrices2;
 
@@ -1877,7 +1880,8 @@ algorithm
 //   assert(info == 0, "Calculating the reciprocal condition number with function \"Lapack.dpocon\" failed in function \"kfMatrices\".");
 //   assert(mrcond > eps, "Matrix C*P*C' + R in function \"kfMatrices\" is (numerically) singular");
 
-  K := Math.Matrices.Internal.solve2rSym_C(M, PCT,false, true);
+  K := Math.Matrices.Internal.solveSymRight_C(
+                                           M, PCT,false, true);
 //  K := Math.Matrices.solve2rSym(M, PCT,false, true);
 
 // Calculate upper triangle of symmetric P-K*C*P
