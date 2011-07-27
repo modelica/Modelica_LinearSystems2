@@ -8,3 +8,5 @@ hSigmaDummy
 disturbedSine
 hSigmaLinear
 fSigmaLinear
+ExtendedKalman2
+SR_EKF

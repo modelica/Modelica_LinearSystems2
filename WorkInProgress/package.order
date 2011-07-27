@@ -1,4 +1,7 @@
+DiscreteZerosAndPoles
+DiscreteTransferFunction
 DiscreteStateSpace
+StateSpace2
 Controller
 Icons
 Optimizer
@@ -9,7 +12,4 @@ Tests
 Math
 MPC
 Junk
-StateSpace2
 ukfs
-DiscreteTransferFunction
-DiscreteZerosAndPoles

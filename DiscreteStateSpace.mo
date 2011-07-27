@@ -2280,18 +2280,13 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 Function <b>EKF</b> computes one recursion of the Kalman filter or the extended Kalman filter equations respectively, i.e updating
 the Riccati difference equation and the Kalman filter gain and correction of the predicted state.<br>
 The system functions are defined in function <b>ekfFunction()</b>. The outputs of this funktions are
-
-
-
-   which is to provide by the user. Matrices <b>A</b>_k and <b>C</b>_k are the
-Jacobians F_x and H_x of the system equations <b>f</b> and <b>h</b>
-<blockquote><pre>
- 
- x_k = f(x_k-1, u_k-1)
- y_k = h(x_k, u_k)
-  
-</pre></blockquote>
-i.e., in the case of linear systems the system matrix <b>A</b> and the output matrix <b>C</b>.
+<ul>
+<li>x_k - the state predicted from the continuous model d x/dt = f(x, u) or the discrete model x_k = f(x_k-1, u_k-1)</li>
+<li>y_k - the output y_k = h(x_k, u_k)</li>
+<li>A_k - the respective system matrix, i.e. the Jacobian of f(x) at instant k</li>
+<li>C_k - the output matrix of the system, i.e. the Jacobian of h(x) at instant k</li>
+</ul> 
+Function <b>ekfFunction()</b> has to be specified by the user, such that the outputs are provided respectively.
 
 </html>"));
   end EKF;

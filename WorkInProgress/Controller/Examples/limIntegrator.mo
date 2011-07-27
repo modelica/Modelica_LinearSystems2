@@ -24,7 +24,6 @@ model limIntegrator "linIntegrator"
     blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous,
     sampleTime=0.02)
              annotation (Placement(transformation(extent={{54,50},{74,70}})));
-    yMax=1) annotation (Placement(transformation(extent={{28,-42},{48,-22}})));
 
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{-8,-74},{12,-54}})));
