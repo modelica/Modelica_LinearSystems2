@@ -2279,14 +2279,25 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 <p>
 Function <b>EKF</b> computes one recursion of the Kalman filter or the extended Kalman filter equations respectively, i.e updating
 the Riccati difference equation and the Kalman filter gain and correction of the predicted state.<br>
-The system functions are defined in function <b>ekfFunction()</b>. The outputs of this funktions are
+The system functions are defined in function <b>ekfFunction</b>(). The outputs of funktions <b>ekfFunction</b>() are
 <ul>
 <li>x_k - the state predicted from the continuous model d x/dt = f(x, u) or the discrete model x_k = f(x_k-1, u_k-1)</li>
 <li>y_k - the output y_k = h(x_k, u_k)</li>
-<li>A_k - the respective system matrix, i.e. the Jacobian of f(x) at instant k</li>
-<li>C_k - the output matrix of the system, i.e. the Jacobian of h(x) at instant k</li>
+<li>A_k - the respective system matrix, i.e. the discretized Jacobian of f(x) at instant k-1</li>
+<li>C_k - the output matrix of the system, i.e. the discretized Jacobian of h(x) at instant k-1</li>
 </ul> 
+<br>
 Function <b>ekfFunction()</b> has to be specified by the user, such that the outputs are provided respectively.
+<p>
+Function <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfUpdate\">ekfUpdate()</a> computes the matrix gain <b>K</b> of a Kalman filter and the updated solution <b>M</b> of the according Riccati equation.
+</p>
+The implemented algorithm is outlined in [1]
+
+
+<h4><font color=\"#008000\">References</font></h4>
+<table>
+<tr> <td align=right>  [1] </td><td align=center>  M. Verhaegen and P. Van Dooren.  </td>  <td> \"Numerical aspects of different kalman filter implementations\"  </td> <td> IEEE Transactions on Automatic Control, 31(10), pp. 907-917, 1986 </td></tr>
+</table>
 
 </html>"));
   end EKF;
@@ -2375,12 +2386,18 @@ Function <b>ekfFunction()</b> has to be specified by the user, such that the out
 <h4>Description</h4>
 <p>
 Function <b>UKF</b> computes one recursion of the Unscented Kalman filter. Unscented Kalman filters are similar to Extended Kalman filters
-but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation 
-linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
+but using statistical linearization where extended Kalman filters apply explicit derivation of the system equation. Statistical linearization is performed by linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
+<p>
+The algorithm primarily exits of the three steps:
+<ul>
+<li><a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ukfPredict\">ukfPredict</a>,</li>
+<li><a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ukfUpdate\">ukfUpdate</a>,</li>
+<li><a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ukfEstimate\">ukfEstimate</a></li>
+</ul><br>
+which are implemented and described in separate sub algorithms.
+<p>
+See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to solve the mathematically identical problem.
 </p>
-See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to
-solve the mathematically identical problem.
-
 
 <h4>References</h4>
 <table>
@@ -3927,6 +3944,23 @@ algorithm
 <li><i>2010/06/11 </i>
        by Marcus Baur, DLR-RM</li>
 </ul>
+</html>", info="<html>
+This function predicts the state x_k|k-1 at instant k based on the estimated state and information at instant k-1. Furthermore, the covariance matrix P_xk|k-1 according to the predicted state x_k|k-1 is calculated. For this, sigma points associated to the mean value x_k-1|k-1 are defined according to the covariance P_x-k|x-k.<br>
+The prediction of x_k|k-1 is computed as the weighted mean value of these sigma points. The associated covariance matrix is calculated as the weighted sum of the variances of the sigma points to the mean value plus the covariance matrix of the noise process.
+<br>
+The algorithm is implemeted such that the symmetry of the matrices is fully exploited, i.e. only triangular matrices are utilized.
+<p>
+See also  <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ukfUpdate\">ukfUpdate()</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ukfEstimate\">ukfEstimate()</a>
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ukfPredict_sr\">ukfPredict_sr()</a>
+
+<p>
+The complete algorithm is explained in detail in [1].
+
+<h4><font color=\"#008000\">References</font></h4>
+<table>
+<tr> <td align=right>  [1] </td><td align=center> Van der Merwe, Rudolph</td>  <td> Sigma-Point Kalman Filters for Probabilistic Inference in Dynamic State-Space Models\"  </td> <td> Dissertation submitted to the faculty of the OGI School of Science & Engineering at Oregon Health & Science University, 2004 </td></tr>
+</table>
 </html>"));
 end ukfPredict;
 
@@ -3993,6 +4027,20 @@ algorithm
 <li><i>2010/06/11 </i>
        by Marcus Baur, DLR-RM</li>
 </ul>
+</html>", info="<html>
+This function updates the state x_k|k-1 at instant k based on the sigma points and the covariance matrix with incorporated process noise. Furthermore, based on the updated sigma points associated system outputs are calculated with the model equation y=h(x,u). Finally, the modelled output is calculated as the weighted sum of these values.<br>
+The algorithm is implemeted such that the symmetry of the matrices is fully exploited, i.e. only triangular matrices are utilized.
+<p>
+See also  <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ukfPredict\">ukfPredict()</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ukfEstimate\">ukfEstimate()</a>
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ukfUpdate_sr\">ukfUpdate_sr()</a>
+<p>
+The complete algorithm is explained in detail in [1].
+
+<h4><font color=\"#008000\">References</font></h4>
+<table>
+<tr> <td align=right>  [1] </td><td align=center> Van der Merwe, Rudolph</td>  <td> Sigma-Point Kalman Filters for Probabilistic Inference in Dynamic State-Space Models\"  </td> <td> Dissertation submitted to the faculty of the OGI School of Science & Engineering at Oregon Health & Science University, 2004 </td></tr>
+</table>
 </html>"));
 end ukfUpdate;
 
@@ -4014,6 +4062,20 @@ algorithm
 <li><i>2010/06/11 </i>
        by Marcus Baur, DLR-RM</li>
 </ul>
+</html>", info="<html>
+This function updates the state x_k|k-1 at instant k based on the sigma points and the covariance matrix with incorporated process noise. Furthermore, based on the updated sigma points associated system outputs are calculated with the model equation y=h(x,u). Finally, the modelled output is calculated as the weighted sum of these values.<br>
+The algorithm is implemeted such that the symmetry of the matrices is fully exploited, i.e. only triangular matrices are utilized.
+<p>
+See also  <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ukfPredict\">ukfPredict()</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ukfUpdate\">ukfUpdate()</a>
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Internal.ukfEstimate_sr\">ukfEstimate_sr()</a>
+<p>
+The complete algorithm is explained in detail in [1].
+
+<h4><font color=\"#008000\">References</font></h4>
+<table>
+<tr> <td align=right>  [1] </td><td align=center> Van der Merwe, Rudolph</td>  <td> Sigma-Point Kalman Filters for Probabilistic Inference in Dynamic State-Space Models\"  </td> <td> Dissertation submitted to the faculty of the OGI School of Science & Engineering at Oregon Health & Science University, 2004 </td></tr>
+</table>
 </html>"));
 end ukfEstimate;
 
