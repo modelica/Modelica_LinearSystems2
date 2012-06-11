@@ -6479,7 +6479,7 @@ int found=0;
   end fromFile_zp;
 
     function checkRepresentation
-      "checks whether the system on file is represented by zeros and poles (z, p) or first and second order polynomials (n1, n2, d1, d2)"
+      "Check whether the system on file is represented by zeros and poles (z, p) or first and second order polynomials (n1, n2, d1, d2)"
       import Modelica_LinearSystems2.ZerosAndPoles.Internal;
       import Modelica_LinearSystems2;
       input String fileName="zp.mat" "Name of the zeros and poles data file"

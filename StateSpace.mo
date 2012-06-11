@@ -8824,7 +8824,7 @@ k = ---------- * ----------------------
   end trianUpperHess;
 
   encapsulated function reducedCtrSystem2
-      "calculate the controllable part of a SISO system"
+      "Calculate the controllable part of a SISO system"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -9182,7 +9182,7 @@ inputs and the number of outputs must be identical.
   end invariantZerosHessenberg;
 
   encapsulated function cntrHessenberg
-      "calculate the controllable part of a SISO system"
+      "Calculate the controllable part of a SISO system"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -9469,7 +9469,7 @@ inputs and the number of outputs must be identical.
   end reduceRosenbrock;
 
   encapsulated function reducedCtrSystem
-      "calculate the controllable part of a SISO system"
+      "Calculate the controllable part of a SISO system"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -9565,7 +9565,7 @@ inputs and the number of outputs must be identical.
   end reducedCtrSystem;
 
   encapsulated function reducedCtrSystemX
-      "calculate the controllable part of a SISO system"
+      "Calculate the controllable part of a SISO system"
 
       import Modelica;
       import Modelica_LinearSystems2;
