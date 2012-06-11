@@ -1,13 +1,18 @@
 within Modelica_LinearSystems2.Examples.Utilities;
-model DoublePendulum "double pendulum system"
+model DoublePendulum "Double pendulum system"
 
-  parameter Modelica.SIunits.Mass m_trolley = 5;
-  parameter Modelica.SIunits.Mass m_load = 20;
-  parameter Modelica.SIunits.Length length = 2;
-  parameter Modelica.SIunits.Angle phi1_start = -80.0/180*pi;
-  parameter Modelica.SIunits.Angle phi2_start = 10;
-  parameter Modelica.SIunits.AngularVelocity w1_start = 0.0;
-  parameter Modelica.SIunits.AngularVelocity w2_start = 0.0;
+  parameter Modelica.SIunits.Mass m_trolley = 5 "Mass of trolley";
+  parameter Modelica.SIunits.Mass m_load = 20 "Mass of load on 2nd arm";
+  parameter Modelica.SIunits.Length length = 2
+    "Total length of double pendulum (i.e. length of each arm = length/2)";
+  parameter Modelica.SIunits.Angle phi1_start = -80.0/180*pi
+    "Initial rotation angle of 1st arm relative to trolley";
+  parameter Modelica.SIunits.Angle phi2_start = 10
+    "Initial rotation angle of 2nd arm relative to 1st arm";
+  parameter Modelica.SIunits.AngularVelocity w1_start = 0.0
+    "Initial angular velocity of 1st arm";
+  parameter Modelica.SIunits.AngularVelocity w2_start = 0.0
+    "Initial angular velocity of 2nd arm";
 
   constant Real pi = Modelica.Constants.pi;
 
@@ -275,12 +280,7 @@ equation
         extent={{-150,-100},{150,100}},
         grid={2,2}), graphics),
     Documentation(info="<html>
- 
-Model of a simple double pendulum system. <br>
-The physical Model is used in Modelica_LinearSystems2.Examples.StateSpace.doublePendulumController where it is being
-linearized an used as a base for linear controller design. The results are used to control the crane system
-in Modelica_LinearSystems2.Controller.Examples.DoublePendulum.mo
- 
+<p>Multibody model of a simple double pendulum system. The physical model is used in Modelica_LinearSystems2.Examples.StateSpace.doublePendulumController where it is being linearized and used as a base for linear controller design. The results are used to control the crane system in Modelica_LinearSystems2.Controller.Examples.DoublePendulum. </p>
 </html>"),
     experimentSetupOutput,
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{150,

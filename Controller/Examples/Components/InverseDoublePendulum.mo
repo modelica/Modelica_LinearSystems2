@@ -1,18 +1,28 @@
 within Modelica_LinearSystems2.Controller.Examples.Components;
-model InverseDoublePendulum "inverse double pendulum"
+model InverseDoublePendulum "Inverse double pendulum"
 
-  parameter Modelica.SIunits.Mass m_trolley = 1;
-  parameter Modelica.SIunits.Mass m_load = 1;
-  parameter Modelica.SIunits.Length length = 1;
-  parameter Modelica.SIunits.Angle phi1_start = 90.0/180*pi;
-  parameter Modelica.SIunits.Angle phi2_start = 0;
-  parameter Modelica.SIunits.AngularVelocity w1_start = 0.0;
-  parameter Modelica.SIunits.AngularVelocity w2_start = 0.0;
-  parameter Modelica.SIunits.Position s_start = 0.0;
-  parameter Modelica.SIunits.Velocity v_start = 0.0;
+  parameter Modelica.SIunits.Mass m_trolley = 1 "Mass of trolley";
+  parameter Modelica.SIunits.Mass m_load = 1 "Mass of load on 2nd arm";
+  parameter Modelica.SIunits.Length length = 1
+    "Total length of double pendulum (i.e. length of each arm = length/2)";
+  parameter Modelica.SIunits.Angle phi1_start=90.0/180*pi
+    "Initial rotation angle of 1st arm relative to trolley";
+  parameter Modelica.SIunits.Angle phi2_start = 0
+    "Initial rotation angle of 2nd arm relative to 1st arm";
+  parameter Modelica.SIunits.AngularVelocity w1_start = 0.0
+    "Initial angular velocity of 1st arm relative to trolley";
+  parameter Modelica.SIunits.AngularVelocity w2_start = 0.0
+    "Initial angular velocity of 2nd arm relative to 1st arm";
 
-  parameter Boolean cartDisturbance=false;
-  parameter Boolean bodyDisturbance=false;
+  parameter Modelica.SIunits.Position s_start = 0.0
+    "Initial position of trolley relative to world";
+  parameter Modelica.SIunits.Velocity v_start = 0.0
+    "Initial velocity of trolley relative to world";
+
+  parameter Boolean cartDisturbance=false
+    "True, if cart disturbance should be enabled";
+  parameter Boolean bodyDisturbance=false
+    "True, if body disturbance should be enabled";
 
   constant Real pi = Modelica.Constants.pi;
 
@@ -25,11 +35,11 @@ model InverseDoublePendulum "inverse double pendulum"
                       rotation=0)));
   Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(useAxisFlange=true,
     s(start=s_start, fixed=true),
-    v(fixed=false),
-    animation=false)
-    annotation (Placement(transformation(extent={{-96,0},{-76,20}})));
+    animation=false,
+    v(start=v_start))
+    annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   Modelica.Mechanics.Translational.Components.Damper damper1(d=0)
-    annotation (Placement(transformation(extent={{-96,14},{-76,34}})));
+    annotation (Placement(transformation(extent={{-100,18},{-80,38}})));
   Modelica.Mechanics.MultiBody.Joints.Revolute revolute1(
     n={0,0,1},
     useAxisFlange=true,
@@ -63,21 +73,21 @@ model InverseDoublePendulum "inverse double pendulum"
     color={0,0,0})
     annotation (Placement(transformation(extent={{-58,0},{-38,20}})));
   Modelica.Mechanics.Translational.Sources.Force force
-    annotation (Placement(transformation(extent={{-98,34},{-78,54}})));
+    annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
   Modelica.Mechanics.MultiBody.Sensors.RelativeAngles relativeAngles
     annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
   Modelica.Mechanics.MultiBody.Sensors.RelativeVelocity relativeVelocity
-    annotation (Placement(transformation(extent={{-96,-30},{-76,-10}})));
+    annotation (Placement(transformation(extent={{-100,-30},{-80,-10}})));
   Modelica.Mechanics.MultiBody.Sensors.RelativePosition relativePosition
-    annotation (Placement(transformation(extent={{-96,-60},{-76,-40}})));
+    annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
   Modelica.Mechanics.MultiBody.Sensors.RelativeAngularVelocity
     relativeAngularVelocity
     annotation (Placement(transformation(extent={{-30,-60},{-10,-40}})));
 
   Modelica.Blocks.Sources.Constant const(k=-0.5*Modelica.Constants.pi)
-    annotation (Placement(transformation(extent={{94,-22},{106,-10}})));
+    annotation (Placement(transformation(extent={{98,34},{110,46}})));
   Modelica.Blocks.Math.Add add
-    annotation (Placement(transformation(extent={{116,-10},{136,10}})));
+    annotation (Placement(transformation(extent={{120,30},{140,10}})));
   Modelica.Mechanics.MultiBody.Joints.Revolute revolute2(
     phi(fixed=true, start=phi2_start),
     w(fixed=true, start=w2_start),
@@ -89,25 +99,32 @@ model InverseDoublePendulum "inverse double pendulum"
     annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
   Modelica.Mechanics.MultiBody.Sensors.RelativeAngularVelocity
     relativeAngularVelocity1
-    annotation (Placement(transformation(extent={{24,-60},{44,-40}})));
+    annotation (Placement(transformation(extent={{24,-64},{44,-44}})));
   Modelica.Blocks.Sources.Constant const1(k=0)
-    annotation (Placement(transformation(extent={{66,-62},{78,-50}})));
+    annotation (Placement(transformation(extent={{98,-82},{110,-70}})));
   Modelica.Blocks.Math.Add add1
-    annotation (Placement(transformation(extent={{88,-50},{108,-30}})));
+    annotation (Placement(transformation(extent={{120,-70},{140,-50}})));
   Modelica.Blocks.Interfaces.RealInput u
-    annotation (Placement(transformation(extent={{-190,-20},{-150,20}})));
+    annotation (Placement(transformation(extent={{-190,-20},{-150,20}}),
+        iconTransformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput s
-    annotation (Placement(transformation(extent={{150,90},{170,110}})));
+    annotation (Placement(transformation(extent={{150,90},{170,110}}),
+        iconTransformation(extent={{100,90},{120,110}})));
   Modelica.Blocks.Interfaces.RealOutput v
-    annotation (Placement(transformation(extent={{150,50},{170,70}})));
+    annotation (Placement(transformation(extent={{150,50},{170,70}}),
+        iconTransformation(extent={{100,50},{120,70}})));
  Modelica.Blocks.Interfaces.RealOutput phi
-    annotation (Placement(transformation(extent={{150,10},{170,30}})));
+    annotation (Placement(transformation(extent={{150,10},{170,30}}),
+        iconTransformation(extent={{100,10},{120,30}})));
   Modelica.Blocks.Interfaces.RealOutput w
-    annotation (Placement(transformation(extent={{150,-30},{170,-10}})));
+    annotation (Placement(transformation(extent={{150,-30},{170,-10}}),
+        iconTransformation(extent={{100,-30},{120,-10}})));
  Modelica.Blocks.Interfaces.RealOutput phi1
-    annotation (Placement(transformation(extent={{150,-70},{170,-50}})));
+    annotation (Placement(transformation(extent={{150,-70},{170,-50}}),
+        iconTransformation(extent={{100,-70},{120,-50}})));
   Modelica.Blocks.Interfaces.RealOutput w1
-    annotation (Placement(transformation(extent={{150,-110},{170,-90}})));
+    annotation (Placement(transformation(extent={{150,-110},{170,-90}}),
+        iconTransformation(extent={{100,-110},{120,-90}})));
   Modelica.Mechanics.MultiBody.Parts.BodyCylinder bodyCylinder(
     r={length/2,0,0},
     specularCoefficient=0.7,
@@ -125,19 +142,25 @@ model InverseDoublePendulum "inverse double pendulum"
   Modelica.Blocks.Interfaces.RealInput dist if cartDisturbance
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
-        origin={-80,120})));
+        origin={-80,120}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=-90,
+        origin={-60,122})));
   Modelica.Mechanics.Translational.Sources.Force distrubanceForceCart if cartDisturbance
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={-80,74})));
+        origin={-80,80})));
   Modelica.Blocks.Interfaces.RealInput dist2 if bodyDisturbance
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
-        origin={80,120})));
+        origin={80,120}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=-90,
+        origin={60,122})));
   Modelica.Mechanics.MultiBody.Forces.Torque torque if bodyDisturbance
-    annotation (Placement(transformation(extent={{42,64},{62,84}})));
+    annotation (Placement(transformation(extent={{40,60},{60,80}})));
   Modelica.Blocks.Sources.Constant const2[2](k={0,0}) if bodyDisturbance
-    annotation (Placement(transformation(extent={{-4,75},{16,95}})));
+    annotation (Placement(transformation(extent={{0,70},{20,90}})));
   Modelica.Mechanics.MultiBody.Visualizers.FixedShape fixedShape1(
     shapeType="cylinder",
     lengthDirection=revolute2.n,
@@ -183,44 +206,44 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   connect(prismatic.frame_a, world.frame_b) annotation (Line(
-      points={{-96,10},{-110,10},{-110,-70},{-120,-70}},
+      points={{-100,10},{-110,10},{-110,-70},{-120,-70}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(force.flange, prismatic.axis) annotation (Line(
-      points={{-78,44},{-78,16}},
+      points={{-80,50},{-70,50},{-70,16},{-82,16}},
       color={0,127,0},
       smooth=Smooth.None));
   connect(damper1.flange_a, prismatic.support) annotation (Line(
-      points={{-96,24},{-96,16},{-90,16}},
+      points={{-100,28},{-100,16},{-94,16}},
       color={0,127,0},
       smooth=Smooth.None));
   connect(damper1.flange_b, prismatic.axis) annotation (Line(
-      points={{-76,24},{-78,24},{-78,16}},
+      points={{-80,28},{-80,16},{-82,16}},
       color={0,127,0},
       smooth=Smooth.None));
   connect(prismatic.frame_b, bodyShape.frame_a) annotation (Line(
-      points={{-76,10},{-58,10}},
+      points={{-80,10},{-58,10}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(relativeVelocity.frame_b, prismatic.frame_b) annotation (Line(
-      points={{-76,-20},{-76,10}},
+      points={{-80,-20},{-80,10}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(relativeVelocity.frame_a, prismatic.frame_a) annotation (Line(
-      points={{-96,-20},{-96,10}},
+      points={{-100,-20},{-100,10}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(relativePosition.frame_b, relativeVelocity.frame_b) annotation (Line(
-      points={{-76,-50},{-76,-20}},
+      points={{-80,-50},{-80,-20}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(relativePosition.frame_a, relativeVelocity.frame_a) annotation (Line(
-      points={{-96,-50},{-96,-20}},
+      points={{-100,-50},{-100,-20}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
@@ -237,7 +260,7 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   connect(u, force.f) annotation (Line(
-      points={{-170,0},{-136,0},{-136,44},{-100,44}},
+      points={{-170,0},{-136,0},{-136,50},{-102,50}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(relativeAngularVelocity.frame_a, relativeAngles.frame_a) annotation (
@@ -253,16 +276,17 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   connect(relativeAngularVelocity.w_rel[3], w) annotation (Line(
-      points={{-20,-60.3333},{-20,-66},{120,-66},{120,-20},{160,-20}},
+      points={{-20,-60.3333},{-20,-72},{80,-72},{80,-30},{140,-30},{140,-20},{
+          160,-20}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(relativeVelocity.v_rel[1], v) annotation (Line(
-      points={{-86,-31.6667},{-104,-31.6667},{-104,-34},{-118,-34},{-118,60},{
+      points={{-90,-31.6667},{-108,-31.6667},{-108,-34},{-122,-34},{-122,60},{
           160,60}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(relativePosition.r_rel[1], s) annotation (Line(
-      points={{-86,-61.6667},{-104,-61.6667},{-104,-58},{-120,-58},{-120,100},{
+      points={{-90,-61.6667},{-108,-61.6667},{-108,-58},{-124,-58},{-124,100},{
           160,100}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -271,15 +295,16 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.y, phi) annotation (Line(
-      points={{137,0},{148,0},{148,20},{160,20}},
+      points={{141,20},{160,20}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(const.y, add.u2) annotation (Line(
-      points={{106.6,-16},{110,-16},{110,-6},{114,-6}},
+      points={{110.6,40},{114,40},{114,26},{118,26}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.u1, relativeAngles.angles[3]) annotation (Line(
-      points={{114,6},{108,6},{108,-4},{58,-4},{58,-36},{-20,-36},{-20,-30.3333}},
+      points={{118,14},{114,14},{114,-20},{60,-20},{60,-36},{-20,-36},{-20,
+          -30.3333}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(relativeAngles1.frame_a, revolute2.frame_a) annotation (Line(
@@ -294,31 +319,31 @@ equation
       smooth=Smooth.None));
   connect(relativeAngles1.frame_a, relativeAngularVelocity1.frame_a)
     annotation (Line(
-      points={{24,-20},{24,-50}},
+      points={{24,-20},{24,-54}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(relativeAngularVelocity1.frame_b, relativeAngles1.frame_b)
     annotation (Line(
-      points={{44,-50},{44,-20}},
+      points={{44,-54},{44,-20}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(const1.y, add1.u2)
                            annotation (Line(
-      points={{78.6,-56},{82,-56},{82,-46},{86,-46}},
+      points={{110.6,-76},{114,-76},{114,-66},{118,-66}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(add1.u1, relativeAngles1.angles[3]) annotation (Line(
-      points={{86,-34},{60,-34},{60,-30.3333},{34,-30.3333}},
+      points={{118,-54},{70,-54},{70,-34},{34,-34},{34,-30.3333}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(add1.y, phi1) annotation (Line(
-      points={{109,-40},{136,-40},{136,-60},{160,-60}},
+      points={{141,-60},{160,-60}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(relativeAngularVelocity1.w_rel[3], w1) annotation (Line(
-      points={{34,-60.3333},{36,-60.3333},{36,-100},{160,-100}},
+      points={{34,-64.3333},{34,-100},{160,-100}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(bodyCylinder.frame_b, revolute2.frame_a) annotation (Line(
@@ -343,28 +368,28 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   connect(distrubanceForceCart.f, dist) annotation (Line(
-      points={{-80,86},{-80,120}},
+      points={{-80,92},{-80,120}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(distrubanceForceCart.flange, prismatic.axis) annotation (Line(
-      points={{-80,64},{-80,54},{-62,54},{-62,18},{-78,18},{-78,16}},
+      points={{-80,70},{-70,70},{-70,16},{-82,16}},
       color={0,127,0},
       smooth=Smooth.None));
   connect(dist2, torque.torque[3]) annotation (Line(
-      points={{80,120},{80,94},{46,94},{46,87.3333}},
+      points={{80,120},{80,90},{44,90},{44,83.3333}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(const2.y, torque.torque[1:2]) annotation (Line(
-      points={{17,85},{16,85},{16,84},{32,84},{32,84.6667},{46,84.6667}},
+      points={{21,80},{34,80},{34,86},{44,86},{44,80.6667}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(torque.frame_a, revolute2.frame_a) annotation (Line(
-      points={{42,74},{42,44},{24,44},{24,10}},
+      points={{40,70},{40,70},{24,70},{24,10}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(torque.frame_b, bodyCylinder1.frame_b) annotation (Line(
-      points={{62,74},{62,44},{72,44},{72,10}},
+      points={{60,70},{74,70},{74,10},{72,10}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
@@ -399,10 +424,10 @@ in Modelica_Controller.Examples.InverseDoublePendulum.mo
 </html>"),
     uses(Modelica(version="3.0")),
     experimentSetupOutput,
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{150,
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Rectangle(
-          extent={{-150,100},{150,-100}},
+          extent={{-100,102},{100,-100}},
           lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),

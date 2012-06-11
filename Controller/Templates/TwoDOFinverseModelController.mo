@@ -1,8 +1,11 @@
 within Modelica_LinearSystems2.Controller.Templates;
 partial model TwoDOFinverseModelController
   "Template of a controller with two structural degrees of freedom and an inverse plant model in forward path"
-  parameter Integer l = 1 "number of measurable outputs";
-  parameter Boolean additionalMeasurableOutputs = true;
+  parameter Boolean additionalMeasurableOutputs = true
+    "Enable additional output vector of dimension l";
+  parameter Integer l=1 "Number of measurable outputs"
+    annotation (Dialog(enable=additionalMeasurableOutputs));
+
   Modelica.Blocks.Math.Feedback feedback[plant.l]
     annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
   Controller.Internal.Add2 add

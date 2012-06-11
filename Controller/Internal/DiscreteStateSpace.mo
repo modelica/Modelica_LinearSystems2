@@ -22,7 +22,7 @@ model DiscreteStateSpace
      annotation(Evaluate=true, Hide=false);
 
   parameter Integer sampleFactor(min=1) = 1
-    "sample time=sampleClock.sampleTime*sampleFactor"
+    "Factor so that sample time = sampleClock.sampleTime * sampleFactor"
      annotation(Hide=true);
   parameter Types.Init init=Types.InitWithGlobalDefault.UseSampleClockOption
     "Type of initialization (No init/InitialState/SteadyState/Output)"
@@ -34,7 +34,7 @@ model DiscreteStateSpace
     "Initial value of continuous output y, if init=InitialOutput (otherwise guess value)"
     annotation(Evaluate=true,Hide=true);
   parameter Boolean withDelay = false
-    "is true if a unit delay should be considered";
+    "True, if a unit delay should be considered";
 
   final parameter Modelica.SIunits.Time Ts=sampleClock.sampleTime*sampleFactor
     "Sample time" annotation(Hide=false);

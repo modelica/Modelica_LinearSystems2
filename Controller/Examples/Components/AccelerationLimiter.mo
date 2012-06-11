@@ -1,23 +1,24 @@
 within Modelica_LinearSystems2.Controller.Examples.Components;
 block AccelerationLimiter
-  "output follows input with limited acceleration and optionally limited velocity"
+  "Output follows input with limited acceleration and optionally limited velocity"
  extends Interfaces.PartialSampledBlock;
-  parameter Boolean velocityLimitation = true "true if velocity to be limited"   annotation(Evaluate=true,choices(checkBox=true));
+  parameter Boolean velocityLimitation = true "True, if velocity to be limited"
+                                                                                  annotation(Evaluate=true,choices(checkBox=true));
   parameter Real v_limit(min=Modelica.Constants.eps)=1
-    "maximal absolute velocity" annotation(Dialog(enable=velocityLimitation));
+    "Maximum absolute velocity" annotation(Dialog(enable=velocityLimitation));
   parameter Real a_limit(min=Modelica.Constants.eps)=1
-    "maximal absolute acceleration";
+    "Maximum absolute acceleration";
 
-  parameter Real y1_start=0 "start value of integrtor1" annotation(Evaluate=true,Dialog(tab="Advanced options",group = "integrator1"));
+  parameter Real y1_start=0 "Start value of integrator1" annotation(Evaluate=true,Dialog(tab="Advanced options",group = "integrator1"));
   parameter Boolean withDelay1=blockType==Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Discrete
-    "delays the input of integrator1" annotation(Evaluate=true,Dialog(tab="Advanced options",group = "integrator1",
+    "Delays the input of integrator1" annotation(Evaluate=true,Dialog(tab="Advanced options",group = "integrator1",
                 enable=blockType==Modelica_Controller.Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Discrete));
-  parameter Real y2_start=0 "start value of integrtor2" annotation(Evaluate=true,Dialog(tab="Advanced options",group = "integrator2"));
+  parameter Real y2_start=0 "Start value of integrator2" annotation(Evaluate=true,Dialog(tab="Advanced options",group = "integrator2"));
   parameter Boolean withDelay2=blockType==Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Discrete
-    "delays the input of integrator2"  annotation(Dialog(tab="Advanced options",group = "integrator2",
+    "Delays the input of integrator2"  annotation(Dialog(tab="Advanced options",group = "integrator2",
                 enable=blockType==Modelica_Controller.Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Discrete));
 
@@ -138,20 +139,20 @@ equation
             -100},{100,100}}), graphics), Icon(graphics={
         Text(
           extent={{-38,-36},{92,-80}},
-          lineColor={0,0,255},
+          lineColor={0,0,0},
           textString="acceleration"),
         Text(
           visible=velocityLimitation,
           extent={{8,18},{90,-10}},
-          lineColor={0,0,255},
+          lineColor={0,0,0},
           textString="velocity"),
         Text(
           extent={{-88,86},{82,26}},
-          lineColor={0,0,255},
+          lineColor={0,0,0},
           textString="input with limited"),
         Text(
           visible=velocityLimitation,
           extent={{-106,-14},{-28,-38}},
-          lineColor={0,0,255},
+          lineColor={0,0,0},
           textString="and")}));
 end AccelerationLimiter;

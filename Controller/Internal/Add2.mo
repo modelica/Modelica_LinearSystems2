@@ -1,9 +1,10 @@
 within Modelica_LinearSystems2.Controller.Internal;
 model Add2
 
-  parameter Boolean fromLeft = true "true if second input is left (else below)"
-                                                                                 annotation(Dialog(choices(checkBox=true)));
-  parameter Integer n(min=1)=1 "number of inputs = number of outputs";
+  parameter Boolean fromLeft = true
+    "True, if second input is left (else below)"
+    annotation(Dialog(choices(checkBox=true)));
+  parameter Integer n(min=1)=1 "Number of inputs = number of outputs";
 
   Modelica.Blocks.Interfaces.RealInput u1[n]
                                           annotation (Placement(transformation(

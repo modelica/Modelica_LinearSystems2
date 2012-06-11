@@ -7,13 +7,14 @@ block MatrixGain
   extends Interfaces.PartialBlockIcon;
 
   parameter Boolean matrixOnFile=false
-    "true if matrix should be read from file";
+    "True, if matrix should be read from file";
   parameter String fileName=Modelica_LinearSystems2.DataDir + "k.mat"
-                              annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+    "Name of the matrix data file"
+    annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="matrix data file"),enable = matrixOnFile));
   parameter String matrixName="K" "Name of the matrix" annotation(Dialog(enable = matrixOnFile));
 
-  parameter Real K[:,:]=[1] "Matrix  gain"          annotation(Dialog(enable = not matrixOnFile));
+  parameter Real K[:,:]=[1] "Matrix  gain" annotation(Dialog(enable = not matrixOnFile));
 
 protected
   parameter Integer mn[2]=if matrixOnFile then readMatrixSize(fileName, matrixName) else size(K);

@@ -1,8 +1,10 @@
 within Modelica_LinearSystems2.Controller.Templates;
 partial model TwoDegreesOfFreedomControlSISO
   "Template of a controller with two structural degrees of freedom and an inverse plant model in forward path"
-  parameter Integer l = 1 "number of measurable outputs";
-  parameter Boolean additionalMeasurableOutputs = true;
+  parameter Boolean additionalMeasurableOutputs = true
+    "Enable additional output vector of dimension l";
+  parameter Integer l=1 "Number of measurable outputs"
+    annotation (Dialog(enable=additionalMeasurableOutputs));
   Modelica.Blocks.Math.Feedback feedback[plant.l]
     annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
   Modelica_LinearSystems2.Controller.Internal.Add2 add
@@ -13,15 +15,17 @@ partial model TwoDegreesOfFreedomControlSISO
     controller constrainedby Interfaces.PartialSISO
     annotation (Placement(transformation(extent={{10,-20},{30,0}})));
   replaceable Modelica_LinearSystems2.Controller.Templates.Internal.Plant_SISO
-    plant(                     l=l,
-      additionalMeasurableOutputs=additionalMeasurableOutputs) constrainedby
+    plant(
+    l=l,
+    additionalMeasurableOutputs=additionalMeasurableOutputs) constrainedby
     Modelica_LinearSystems2.Controller.Templates.Internal.PlantTemplate_SISO
     annotation (Placement(transformation(extent={{90,-20},{110,0}})));
   Modelica.Blocks.Math.InverseBlockConstraints forwardControlModel
     annotation (Placement(transformation(extent={{-68,6},{-14,34}})));
   replaceable Modelica_LinearSystems2.Controller.Templates.Internal.Plant_SISO
-    plant2(                     l=l, additionalMeasurableOutputs=
-        additionalMeasurableOutputs) constrainedby
+    plant2(
+    l=l,
+    additionalMeasurableOutputs=additionalMeasurableOutputs) constrainedby
     Modelica_LinearSystems2.Controller.Templates.Internal.PlantTemplate_SISO
     annotation (Placement(transformation(extent={{-30,9},{-50,30}})));
 equation

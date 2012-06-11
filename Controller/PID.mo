@@ -11,7 +11,7 @@ extends Interfaces.PartialSampledBlock;
     annotation (extent=[100, -10; 120, 10]);
 
 parameter Types.PID_representation pidRep=Types.PID_representation.timeConstants
-    "type of PID representation: k*(1 + 1/Ti/s + Td*s) or (kp + Ti/s + Td*s)";
+    "Type of PID representation";
 
   parameter Real k(min=0) = 1 "Gain of controller" annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants));
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small, start=0.5)
