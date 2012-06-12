@@ -17,7 +17,8 @@ model DoublePendulum2 "Crane trolley system"
   parameter Modelica.SIunits.AngularVelocity w2_start = 0.0
     "Initial angular velocity of 2nd arm";
 
-  DoublePendulum doublePendulum(
+  Modelica_LinearSystems2.Utilities.Plants.DoublePendulum
+    doublePendulum(
     phi1_start=phi1_start,
     phi2_start=phi2_start,
     w1_start=w1_start,
