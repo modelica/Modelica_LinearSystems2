@@ -1,5 +1,5 @@
-within Modelica_LinearSystems2.Controller.Examples.Components;
-model DoublePendulum "Crane trolley system"
+within Modelica_LinearSystems2.Utilities.Plants;
+model DoublePendulum "Multibody model of crane trolley"
 
   parameter Modelica.SIunits.Mass m_trolley = 5 "Mass of trolley";
   parameter Modelica.SIunits.Mass m_load = 20 "Mass of load on 2nd arm";
