@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Vectors;
 function householderReflexion_e1
-  "reflect vector a to the unity vector e_1={1,0,...,0}"
+  "Reflect vector a to the unity vector e_1={1,0,...,0}"
   import Modelica_LinearSystems2.Math.Vectors;
 
   input Real a[:];

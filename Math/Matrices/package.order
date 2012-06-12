@@ -40,5 +40,5 @@ trace
 generalizedEigenvaluesTriangular
 printMatrix
 fromFile
-Internal
 choleskyDownDate2
+Internal

@@ -1,57 +1,60 @@
 within Modelica_LinearSystems2.Controller.Templates.Internal;
 block ObserverTemplate
   "Template of a Luenberger observer for state space systems"
+  extends Interfaces.PartialSampledBlock;
 
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Internal.StateSpace2;
 
- extends Interfaces.PartialSampledBlock;
   parameter Boolean matrixOnFile=false
-    "true if matrix should be read from file";
-  parameter String fileName=Modelica_LinearSystems2.DataDir + "observer.mat" annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+    "True, if matrix should be read from file";
+  parameter String fileName=Modelica_LinearSystems2.DataDir + "observer.mat"
+    "Name of the state space system data file"                                                                          annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="observer data file"),enable = matrixOnFile));
   parameter String systemName="stateSpace" "Name of state space system" annotation(Dialog(enable = matrixOnFile));
   parameter String observerMatrixName="L" "Name of matrix" annotation(Dialog(enable = matrixOnFile));
 
   parameter Modelica_LinearSystems2.Internal.StateSpace2 plantModelSystem=
-                                                                 Modelica_LinearSystems2.Internal.StateSpace2(
-                                                                                                  A=[0],B=[1],C=[1],D=[0])
-    "plant state space system" annotation(Dialog(enable = not matrixOnFile));
-  parameter Real L[:,:]=[1] "observer feedback matrix" annotation(Dialog(enable = not matrixOnFile));
+    Modelica_LinearSystems2.Internal.StateSpace2(A=[0],B=[1],C=[1],D=[0])
+    "Plant state space system" annotation(Dialog(enable = not matrixOnFile));
+  parameter Real L[:,:]=[1] "Observer feedback matrix" annotation(Dialog(enable = not matrixOnFile));
 
 protected
- parameter Integer mn[2]=if  matrixOnFile then readMatrixSize(fileName, observerMatrixName) else size(L);
+  parameter Integer mn[2]=if  matrixOnFile then readMatrixSize(fileName, observerMatrixName) else size(L);
   parameter Integer m=mn[1];
   parameter Integer n=mn[2];
 
- parameter Real L2[:,:]=if matrixOnFile then
+  parameter Real L2[:,:]=if matrixOnFile then
       Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain(
       fileName,
       observerMatrixName,
       m,
       n) else L;
- parameter Modelica_LinearSystems2.Internal.StateSpace2 plantModelSystem2=
-                                                                   if matrixOnFile then
-      Modelica_LinearSystems2.Internal.StateSpace2.Import.fromFile(    fileName, systemName) else plantModelSystem;
-parameter Real C[:,:]=plantModelSystem2.C;
+  parameter Modelica_LinearSystems2.Internal.StateSpace2 plantModelSystem2=
+    if matrixOnFile then Modelica_LinearSystems2.Internal.StateSpace2.Import.fromFile(
+    fileName, systemName) else plantModelSystem;
+  parameter Real C[:,:]=plantModelSystem2.C;
 public
-    parameter Boolean withDelay = Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRow(observerStateSpace.system.A);
+  parameter Boolean withDelay = Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRow(observerStateSpace.system.A)
+    "True, if a unit delay should be considered";
 
-   final parameter Integer nout=size(L2,2);
-   parameter Real x_start[size(plantModelSystem2.A,1)]=zeros(size(plantModelSystem2.A,1))
+  final parameter Integer nout=size(L2,2)
+    "Dimension of vector of measured output (y)";
+  parameter Real x_start[size(plantModelSystem2.A,1)]=zeros(size(plantModelSystem2.A,1))
     "Initial or guess values of states" annotation(Dialog(tab="Advanced options"));
 //  parameter Real y_start[size(plantModelSystem2.C,1)]=zeros(size(plantModelSystem2.C,1)) "Initial values of outputs (remaining states are in steady state if possible)"    annotation 6;
+ //    initType= if init==Types.Init.InitialState then Types.Init.InitialState else  Types.Init.NoInit
+// y_start-plantModelSystem2.C*L2*observerStateSpace.y_start
+
   Modelica.Blocks.Interfaces.RealInput u[size(plantModelSystem2.B, 2)]
     annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.RealInput y[nout]           annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
   Modelica.Blocks.Interfaces.RealOutput x_estimated[size(observerStateSpace.system.A,1)]
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
- //    initType= if init==Types.Init.InitialState then Types.Init.InitialState else  Types.Init.NoInit
-// y_start-plantModelSystem2.C*L2*observerStateSpace.y_start
   Modelica.Blocks.Routing.Multiplex2 multiplex2_1(n1=size(plantModelSystem2.B,2), n2=nout)
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
-Controller.StateSpace observerStateSpace(
- x_start= x_start,
+  Controller.StateSpace observerStateSpace(
+    x_start= x_start,
     initType=Types.InitWithGlobalDefault.NoInit,
     system(
       A=plantModelSystem2.A - L2*plantModelSystem2.C,
@@ -61,14 +64,14 @@ Controller.StateSpace observerStateSpace(
     withDelay=withDelay)
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
 initial equation
-                //  if continuous then
+  //  if continuous then
     if init == Types.Init.InitialState then
       x_estimated = x_start-L2*plantModelSystem2.C*x_start;
     elseif init == Types.Init.SteadyState then
       der(x_estimated) = zeros(size(plantModelSystem2.A,1));
     elseif init == Types.Init.InitialOutput then
-x_estimated=Modelica.Math.Matrices.inv(transpose(C)*C)*transpose(C)*x_start-L2*plantModelSystem2.C*x_start;
-der(x_estimated[size(plantModelSystem2.B,2)+1:size(plantModelSystem2.A,1)]) = zeros(size(plantModelSystem2.A,1)-size(plantModelSystem2.B,2));
+      x_estimated=Modelica.Math.Matrices.inv(transpose(C)*C)*transpose(C)*x_start-L2*plantModelSystem2.C*x_start;
+      der(x_estimated[size(plantModelSystem2.B,2)+1:size(plantModelSystem2.A,1)]) = zeros(size(plantModelSystem2.A,1)-size(plantModelSystem2.B,2));
     end if;
 //  end if;
 

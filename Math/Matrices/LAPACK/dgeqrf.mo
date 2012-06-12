@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
-function dgeqrf "computes a QR factorization without pivoting"
+function dgeqrf "Computes a QR factorization without pivoting"
 
   input Real A[:,:];
   input Integer lwork1=size(A, 2)

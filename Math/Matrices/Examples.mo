@@ -185,7 +185,7 @@ package Examples
 
   end exampleSVD;
 
-  function care "solve a continuous algebraic Riccati equation"
+  function care "Solve a continuous algebraic Riccati equation"
     extends Modelica.Icons.Function;
     import Modelica_LinearSystems2.Math.Matrices;
 

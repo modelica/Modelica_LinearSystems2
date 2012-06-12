@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
-function dgeqp3 "computes a QR factorization with column pivoting"
+function dgeqp3 "Computes a QR factorization with column pivoting"
 
   input Real A[:,:];
   input Integer lwork1=3*size(A, 2) + 1

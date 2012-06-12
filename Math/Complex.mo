@@ -33,25 +33,25 @@ record Complex "Record defining a Complex number"
  end Examples;
 
 encapsulated package Vectors
- function print
-      import Modelica.Utilities.Streams.print;
-      import Modelica_LinearSystems2.Math.Complex;
+  function print "Print vector"
+    import Modelica.Utilities.Streams.print;
+    import Modelica_LinearSystems2.Math.Complex;
 
-  input String name="" "Name of complex vector";
-  input Complex c[:] "Complex vector to be printed";
+    input String name="" "Name of complex vector";
+    input Complex c[:] "Complex vector to be printed";
 
-  input String fileName=""
+    input String fileName=""
         "Print to fileName; empty fileName prints to the log window";
 
- algorithm
-  print(name + " =", fileName);
-  for i in 1:size(c, 1) loop
-     print("   " + String(c[i]), fileName);
-  end for;
- end print;
+  algorithm
+    print(name + " =", fileName);
+    for i in 1:size(c, 1) loop
+      print("   " + String(c[i]), fileName);
+    end for;
+  end print;
 
 function length "Return length of a complex vector"
-      import Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2.Math.Complex;
   input Complex v[:] "Vector";
   output Real result "Length of vector v";
 
@@ -83,8 +83,8 @@ not the case with function norm(..).
 end length;
 
 function norm "Returns the norm of a complex vector"
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Complex;
+  import Modelica;
+  import Modelica_LinearSystems2.Math.Complex;
   input Complex v[:] "Vector";
   input Real p(min=1) = 2
         "Type of p-norm (often used: 1, 2, or Modelica.Constants.inf)";
@@ -156,8 +156,8 @@ end norm;
 
 function normalize
       "Return normalized complex vector such that length = 1 and prevent zero-division for zero vector"
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Complex;
+  import Modelica;
+  import Modelica_LinearSystems2.Math.Complex;
 
   input Complex v[:] "Vector";
   input Real eps = 100*Modelica.Constants.eps "if |v| < eps then result = v";
@@ -169,7 +169,7 @@ function normalize
 algorithm
   if length_v >= eps then
      for i in 1:size(v,1) loop
-         result[i] :=v[i].re/length_v + (v[i].im/length_v)*j;
+        result[i] :=v[i].re/length_v + (v[i].im/length_v)*j;
      end for;
   else
      result :=v;
@@ -208,7 +208,7 @@ possible.
 end normalize;
 
 function sortComplex "Sort elements of complex vector"
-      import Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2.Math.Complex;
   input Complex v[:] "Vector to be sorted";
   input Boolean ascending = true
         "= true if ascending order, otherwise descending order";
@@ -323,10 +323,10 @@ to the original vector are given, such that sorted_v = v[indices].
 </HTML>"));
 end sortComplex;
 
-function multiply "scalar product of two complex vectors"
+function multiply "Scalar product of two complex vectors"
   extends Modelica.Icons.Function;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica;
+  import Modelica_LinearSystems2.Math.Complex;
+  import Modelica;
 
   input Complex v1[:];
   input Complex v2[size(v1,1)];
@@ -340,16 +340,17 @@ algorithm
 end multiply;
 
     function reverse "Reverse vector elements (e.g. v[1] becomes last element)"
-    extends Modelica.Icons.Function;
+      extends Modelica.Icons.Function;
 
       import Modelica;
       import Modelica_LinearSystems2.Math.Complex;
 
-    input Complex v[:] "Vector";
-    output Complex result[size(v, 1)] "Elements of vector v in reversed order";
+      input Complex v[:] "Vector";
+      output Complex result[size(v, 1)]
+        "Elements of vector v in reversed order";
 
     algorithm
-    result := {v[end-i+1] for i in 1:size(v,1)};
+      result := {v[end-i+1] for i in 1:size(v,1)};
     annotation (Inline=true, Documentation(info="<html>
 <p><h4>Syntax</h4></p>
 <blockquote><pre>Vectors.<b>reverse</b>(v);</pre></blockquote>
@@ -366,7 +367,7 @@ encapsulated package Matrices
     import Modelica;
     import Modelica_LinearSystems2;
 
-function print "print matrix"
+function print "Print matrix"
       import Modelica_LinearSystems2.StateSpace;
       import Modelica.Utilities.Strings;
       import Modelica_LinearSystems2.Math.Complex;
@@ -733,7 +734,7 @@ phase angle phi of the Complex number c in the range
     annotation(Inline=true);
   end real;
 
-  encapsulated function imag "imaginary part of complex number"
+  encapsulated function imag "Imaginary part of complex number"
     import Modelica_LinearSystems2.Math.Complex;
 
     input Complex c "Complex number";
@@ -744,7 +745,7 @@ phase angle phi of the Complex number c in the range
   end imag;
 
   encapsulated function eigenValues
-    "compute eingenvalues of a matrix A, using lapack routine dgeevx"
+    "Compute eingenvalues of a matrix A, using lapack routine dgeevx"
 
     import Modelica_LinearSystems2.Math.Complex;
     import Modelica_LinearSystems2.Math.Matrices.LAPACK;
@@ -931,42 +932,41 @@ phase angle phi of the Complex number c in the range
 
 encapsulated package Internal
     import Modelica;
- function eigenValues_dhseqr
-      "compute eingenvalues of a upper Hessenberg matrix using lapack routine DHSEQR"
+  function eigenValues_dhseqr
+      "Compute eingenvalues of a upper Hessenberg matrix using lapack routine DHSEQR"
 
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Complex;
-      import
-        Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg;
+    import Modelica;
+    import Modelica_LinearSystems2.Math.Complex;
+    import Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg;
 
-  input Real H[:,size(H, 1)] "Real upper Hessenberg matrix";
-  output Complex zeros[size(H, 1)]
+    input Real H[:,size(H, 1)] "Real upper Hessenberg matrix";
+    output Complex zeros[size(H, 1)]
         "Finite, invariant zeros of ss; size(Zeros,1) <= size(ss.A,1)";
 
     protected
-  Integer nx=size(H, 1) "Number of states";
-  Real alphaReal[nx];
-  Real alphaImag[nx];
-  Integer info;
+    Integer nx=size(H, 1) "Number of states";
+    Real alphaReal[nx];
+    Real alphaImag[nx];
+    Integer info;
 
- algorithm
-  (alphaReal,alphaImag,info) := eigenvaluesHessenberg(H);
-  assert(info == 0,
-    "Failed to compute eigenvalues with function Internal.eigenValues_dhseqr(..)");
+  algorithm
+    (alphaReal,alphaImag,info) := eigenvaluesHessenberg(H);
+    assert(info == 0,
+      "Failed to compute eigenvalues with function Internal.eigenValues_dhseqr(..)");
 
-  for i in 1:nx loop
-    zeros[i].re := alphaReal[i];
-    zeros[i].im := alphaImag[i];
-  end for;
+    for i in 1:nx loop
+      zeros[i].re := alphaReal[i];
+      zeros[i].im := alphaImag[i];
+    end for;
 
- end eigenValues_dhseqr;
+  end eigenValues_dhseqr;
 
   function C_transpose "Computes the transposed matrix of a complex matrix"
     extends Modelica.Icons.Function;
 
-      import Modelica_LinearSystems2.Math.Complex;
-      import Re = Modelica_LinearSystems2.Math.Complex.real;
-      import Im = Modelica_LinearSystems2.Math.Complex.imag;
+    import Modelica_LinearSystems2.Math.Complex;
+    import Re = Modelica_LinearSystems2.Math.Complex.real;
+    import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
     input Complex C[:,:];
     output Complex CT[size(C, 2),size(C, 1)];
@@ -985,19 +985,19 @@ encapsulated package Internal
 
   end C_transpose;
 
-function frobeniusNorm "Return the Frobenius norm of a matrix"
-  extends Modelica.Icons.Function;
-      import Modelica_LinearSystems2.Math.Complex;
-  input Complex A[:,:] "Input matrix";
-  output Real result=0.0 "frobenius norm of matrix A";
-algorithm
-  for i1 in 1:size(A, 1) loop
-    for i2 in 1:size(A, 2) loop
-      result := result + Complex.real(A[i1, i2]*Complex.conj(A[i1, i2]));
+  function frobeniusNorm "Return the Frobenius norm of a matrix"
+    extends Modelica.Icons.Function;
+    import Modelica_LinearSystems2.Math.Complex;
+    input Complex A[:,:] "Input matrix";
+    output Real result=0.0 "frobenius norm of matrix A";
+  algorithm
+    for i1 in 1:size(A, 1) loop
+      for i2 in 1:size(A, 2) loop
+        result := result + Complex.real(A[i1, i2]*Complex.conj(A[i1, i2]));
+      end for;
     end for;
-  end for;
-  result := sqrt(result);
-end frobeniusNorm;
+    result := sqrt(result);
+  end frobeniusNorm;
 
 end Internal;
 

@@ -5,6 +5,7 @@ partial model TwoDegreesOfFreedomControlSISO
     "Enable additional output vector of dimension l";
   parameter Integer l=1 "Number of measurable outputs"
     annotation (Dialog(enable=additionalMeasurableOutputs));
+
   Modelica.Blocks.Math.Feedback feedback[plant.l]
     annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
   Modelica_LinearSystems2.Controller.Internal.Add2 add

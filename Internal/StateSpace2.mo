@@ -312,10 +312,10 @@ encapsulated package Import
 
   encapsulated function fromFile "Read a StateSpace data record from mat-file"
 
-      import Modelica;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Internal.StateSpace2;
-      import Modelica_LinearSystems2;
+    import Modelica;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.Internal.StateSpace2;
+    import Modelica_LinearSystems2;
 
     input String fileName="dslin.mat"
         "Name of the state space system data file"     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function multiplyWithOrthogonalQ_qr
-  "overwrites the general real M-by-N matrix C with Q * C or C * Q or Q' * C or C * Q', where Q is an orthogonal matrix of a QR factorization as returned by dgeqrf"
+  "Overwrites the general real M-by-N matrix C with Q * C or C * Q or Q' * C or C * Q', where Q is an orthogonal matrix of a QR factorization as returned by dgeqrf"
 
   input Real C[:,:];
   input Real Q[:,:];

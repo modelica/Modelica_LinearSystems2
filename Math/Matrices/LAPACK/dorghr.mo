@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dorghr
-  "generates a real orthogonal matrix Q which is defined as the product of IHI-ILO elementary reflectors of order N, as returned by DGEHRD"
+  "Generates a real orthogonal matrix Q which is defined as the product of IHI-ILO elementary reflectors of order N, as returned by DGEHRD"
 
   input Real A[:,size(A, 1)] "Square matrix A";
   input Integer ilo=1

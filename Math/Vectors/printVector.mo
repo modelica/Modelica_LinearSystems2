@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Math.Vectors;
-function printVector "print vector"
+function printVector "Print vector"
   import Modelica_LinearSystems2.StateSpace;
   import Modelica.Utilities.Strings;
 

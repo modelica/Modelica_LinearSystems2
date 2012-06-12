@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function k_care_u
-  "calculate the upper bound of the CARE, i.e. Q + A'*X + X*A - X*G*X = 0  condition number using Lyapunov equations"
+  "Calculate the upper bound of the CARE, i.e. Q + A'*X + X*A - X*G*X = 0  condition number using Lyapunov equations"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Math.Matrices;

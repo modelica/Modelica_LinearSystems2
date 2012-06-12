@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Math.Matrices;
-function fliplr "flip the columns of a matrix in left/right direction"
+function fliplr "Flip the columns of a matrix in left/right direction"
   import Modelica_LinearSystems2.Math.Matrices;
 
   input Real A[:,:] "Matrix to be fliped";

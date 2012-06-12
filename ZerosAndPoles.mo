@@ -7007,7 +7007,7 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
     end numberOfRealPoles;
 
     function isRoot
-      "check if frequency is an element of the complex vector zeros"
+      "Check if frequency is an element of the complex vector zeros"
 
       import Modelica_LinearSystems2.Math.Complex;
       //import Modelica_LinearSystems2;

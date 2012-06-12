@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function orthogonalQ
-  "generates a real orthogonal matrix Q which is defined as the product of IHI-ILO elementary reflectors of order N, as returned by DGEHRD"
+  "Generates a real orthogonal matrix Q which is defined as the product of IHI-ILO elementary reflectors of order N, as returned by DGEHRD"
   import Modelica_LinearSystems2.Math.Matrices.LAPACK;
   input Real A[:,size(A, 1)];
   input Real tau[size(A, 1) - 1] "scalar factors of the elementary reflectors";

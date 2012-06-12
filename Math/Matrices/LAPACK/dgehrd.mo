@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dgehrd
-  "reduces a real general matrix A to upper Hessenberg form H by an orthogonal similarity transformation:  Q' * A * Q = H"
+  "Reduces a real general matrix A to upper Hessenberg form H by an orthogonal similarity transformation:  Q' * A * Q = H"
 
   input Real A[:,size(A, 2)];
   input Integer ilo=1

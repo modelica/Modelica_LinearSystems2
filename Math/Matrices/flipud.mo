@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Math.Matrices;
-function flipud "flip the columns of a matrix in up/down direction"
+function flipud "Flip the columns of a matrix in up/down direction"
   import Modelica_LinearSystems2.Math.Matrices;
 
   input Real A[:,:] "Matrix to be flipped";

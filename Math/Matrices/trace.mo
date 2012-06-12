@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Math.Matrices;
-function trace "tarce(A) is the sum of the diagonal elements of A"
+function trace "Sum of the diagonal elements of A"
   extends Modelica.Icons.Function;
 
   input Real A[:,size(A, 1)];

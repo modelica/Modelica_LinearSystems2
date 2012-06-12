@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function toUpperHessenberg
-  "transform a real general matrix A to upper Hessenberg form H by an orthogonal similarity transformation:  Q' * A * Q = H"
+  "Transform a real general matrix A to upper Hessenberg form H by an orthogonal similarity transformation:  Q' * A * Q = H"
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 

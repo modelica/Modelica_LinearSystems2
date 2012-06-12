@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Math.Vectors;
-encapsulated function find "find element in vector"
+encapsulated function find "Find element in vector"
   import Modelica;
   import Modelica_LinearSystems2.Math;
   extends Modelica.Icons.Function;

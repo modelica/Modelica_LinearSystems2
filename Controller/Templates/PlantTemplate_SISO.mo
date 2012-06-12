@@ -1,7 +1,9 @@
 within Modelica_LinearSystems2.Controller.Templates;
 partial model PlantTemplate_SISO "SISO plant template"
-  parameter Integer l = 1 "number of measurable outputs";
-  parameter Boolean additionalMeasurableOutputs = true;
+  parameter Boolean additionalMeasurableOutputs = true
+    "Enable additional output vector of dimension l";
+  parameter Integer l=1 "Number of measurable outputs"
+    annotation (Dialog(enable=additionalMeasurableOutputs));
 
   Modelica.Blocks.Interfaces.RealOutput y
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dormhr
-  "overwrites the general real M-by-N matrix C with Q * C or C * Q or Q' * C or C * Q', where Q is an orthogonal matrix as returne by dgehrd"
+  "Overwrites the general real M-by-N matrix C with Q * C or C * Q or Q' * C or C * Q', where Q is an orthogonal matrix as returne by dgehrd"
 
   input Real C[:,:];
   input Real A[:,:];

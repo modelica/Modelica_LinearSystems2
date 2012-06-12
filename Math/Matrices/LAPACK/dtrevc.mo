@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dtrevc
-  "compute the right and/or left eigenvectors of a real upper quasi-triangular matrix T"
+  "Compute the right and/or left eigenvectors of a real upper quasi-triangular matrix T"
   input Real T[:,size(T, 1)];
   input String side="R";
   input String howmny="B";
