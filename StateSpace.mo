@@ -6911,17 +6911,17 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
     result.xNames := xuyName[1:nx];
 
           annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)  </td> </tr>
+<p><h4>Syntax</h4></p>
+<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+<td><p align=\"right\">ss </p></td>
+<td><p align=\"center\">= </p></td>
+<td><p>StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName) </p></td>
+</tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Generate a StateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record.
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   String modelName = \"Modelica_LinearSystems2.Examples.Utilities.DoublePendulum\"; 
+<p><h4>Description</h4></p>
+<p>Generate a StateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record. </p>
+<p><h4>Example</h4></p>
+<blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
    Real T_linearize = 5;
 
 <b>algorithm</b>
@@ -6936,16 +6936,9 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
 
 // ss.B=[0.0; 0.13; 0.0; -0.014; 0.0; -0.1],
 // ss.C=identity(6),
-// ss.D=[0; 0; 0; 0; 0; 0]
-      
-
-                
-</pre></blockquote>
-
-
-
-</html> 
-", revisions="<html>
+// ss.D=[0; 0; 0; 0; 0; 0]</pre></blockquote>
+</html>",
+   revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
@@ -9684,7 +9677,7 @@ function read_dslin
     redeclare Real A[nx,nx],
     redeclare Real B[nx,nu],
     redeclare Real C[ny,nx],
-    redeclare Real D[ny,nu]) "= model linearized at initial point";
+    redeclare Real D[ny,nu]) "Outputs model linearized at initial point";
 
 algorithm
   result.A := ABCD[1:nx, 1:nx];
@@ -9696,18 +9689,13 @@ algorithm
   result.xNames := xuyName[1:nx];
 
         annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Generate a StateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record.
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   String modelName = \"Modelica_LinearSystems2.Examples.Utilities.DoublePendulum\"; 
-   Real T_linearize = 5;
+<p><h4>Syntax</h4></p>
+<blockquote><code>ss = StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)</code></blockquote>
+<p><h4>Description</h4></p>
+<p>Generate a StateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record. </p>
+<p><h4>Example</h4></p>
+<blockquote><pre>  String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
+  Real T_linearize = 5;
 
 <b>algorithm</b>
   ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName, T_linearize);
@@ -9723,14 +9711,8 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
 // ss.C=identity(6),
 // ss.D=[0; 0; 0; 0; 0; 0]
       
-
-                
-</pre></blockquote>
-
-
-
-</html> 
-"));
+<blockquote><br/><code>                </code> </blockquote>
+</html>"));
 end read_dslin;
 
   function damping

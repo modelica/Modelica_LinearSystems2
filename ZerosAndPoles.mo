@@ -4073,17 +4073,17 @@ processing.
       zp := StateSpace.Conversion.toZerosAndPolesMIMO(result);
 
     annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> ZerosAndPoles.Import.<b>fromModel</b>(modelName, T_linearize, fileName)  </td> </tr>
+<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+<td><p align=\"right\">zp </p></td>
+<td><p align=\"center\">= </p></td>
+<td><p>ZerosAndPoles.Import.<b>fromModel</b>(modelName, T_linearize, fileName) </p></td>
+</tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Generate a matrix of ZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromModel</a> followed by a conversion from sate space to transfer function representation.
- 
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   String modelName = \"Modelica_LinearSystems2.Examples.Utilities.DoublePendulum\"; 
+<p><br/><h4><font color=\"#008000\">Description</font></h4></p>
+<p>Generate a matrix of ZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromModel</a> followed by a conversion from sate space to transfer function representation. </p>
+<p><h4><font color=\"#008000\">Example</font></h4></p>
+<blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
    Real T_linearize = 5; 
    
  
@@ -4096,12 +4096,7 @@ Generate a matrix of ZerosAndPoles data records by linearization of a model defi
         -0.166305*p*(p^2-1.20297*p + 3.48327)/( (p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572) );
          0.283325*(p-5.23615)*(p + 0.551929)/( (p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572) );
          0.283325*p*(p-5.23615)*(p + 0.551929)/( (p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572) )]
-                      
-</pre></blockquote>
- 
- 
- 
- 
+<blockquote><code>                      </code> </blockquote>
 </html>"));
   end fromModel;
 

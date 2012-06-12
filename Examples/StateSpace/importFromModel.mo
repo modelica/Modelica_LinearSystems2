@@ -6,7 +6,7 @@ function importFromModel
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
 
-  input String modelName="Modelica_LinearSystems2.Controller.Examples.Components.DoublePendulum";
+  input String modelName="Modelica_LinearSystems2.Utilities.Plants.DoublePendulum";
   input Real T_linearize=0
     "Simulate until T_linearize and then linearize the model";
 

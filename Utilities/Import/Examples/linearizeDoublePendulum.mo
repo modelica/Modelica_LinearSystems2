@@ -10,7 +10,7 @@ function linearizeDoublePendulum "Linearize double pendulum"
 algorithm
   (A,B,C,D,inputNames,outputNames,stateNames) :=
     Modelica_LinearSystems2.Utilities.Import.linearize(
-    "Modelica_LinearSystems2.Utilities.Import.Examples.Utilities.DoublePendulum",
+    "Modelica_LinearSystems2.Utilities.Plants.DoublePendulum",
     1.0);
   annotation(interactive=true);
 end linearizeDoublePendulum;

@@ -2483,18 +2483,18 @@ is defined slightly differently.
     tf := Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunctionMIMO(result);
 
     annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> TransferFunction.Import.<b>fromModel</b>(modelName, T_linearize, fileName)  </td> </tr>
+<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+<td><p align=\"right\">tf </p></td>
+<td><p align=\"center\">= </p></td>
+<td><p>TransferFunction.Import.<b>fromModel</b>(modelName, T_linearize, fileName) </p></td>
+</tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Generate a matrix of TransferFunction data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"modelica://Modelica_LinearSystems2.
-StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conversion from sate space to transfer function representation.
- 
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   String modelName = \"Modelica_LinearSystems2.Examples.Utilities.DoublePendulum\"; 
+<p><br/><h4><font color=\"#008000\">Description</font></h4></p>
+<p>Generate a matrix of TransferFunction data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"modelica://Modelica_LinearSystems2.
+StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conversion from sate space to transfer function representation. </p>
+<p><h4><font color=\"#008000\">Example</font></h4></p>
+<blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
    Real T_linearize = 5; 
    
  
@@ -2507,13 +2507,8 @@ StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conver
           (-0.014*s^3 + 0.31906*s^2 - 0.8106*s)/(s^4 + 0.09*s^3 + 9.13717*s^2 - 32.0637*s + 58.78);
           (-0.1*s^2 - 0.160918*s - 0.21842)/(s^4 + 0.09*s^3 + 9.13717*s^2 - 32.0637*s + 58.78);
           (-0.1*s^3 - 0.160918*s^2 - 0.21842*s)/(s^4 + 0.09*s^3 + 9.13717*s^2 - 32.0637*s + 58.78)]
-                      
-</pre></blockquote>
- 
- 
- 
- 
-</html> "));
+<blockquote><code>                      </code> </blockquote>
+</html>"));
   end fromModel;
 
   encapsulated function fromFile

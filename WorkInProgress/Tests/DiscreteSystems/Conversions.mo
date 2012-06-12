@@ -13,7 +13,7 @@ function Conversions
   import Modelica_LinearSystems2.Math.Complex;
 
   input Boolean doPlot=true;
-  input String modelName="Modelica_LinearSystems2.Controller.Examples.Components.DoublePendulum";
+  input String modelName="Modelica_LinearSystems2.Utilities.Plants.DoublePendulum";
   input Modelica.SIunits.Time Ts=0.1;
 
 protected

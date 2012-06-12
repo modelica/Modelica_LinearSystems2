@@ -6,7 +6,7 @@ function importFromModel
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.DiscreteStateSpace;
 
-  input String modelName="Modelica_LinearSystems2.Controller.Examples.Components.DoublePendulum";
+  input String modelName="Modelica_LinearSystems2.Utilities.Plants.DoublePendulum";
   input Modelica.SIunits.Time Ts=0.01;
   input Modelica.SIunits.Time T_linearize=0
     "point in time of simulation to linearize the model";

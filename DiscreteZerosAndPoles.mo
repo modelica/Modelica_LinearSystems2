@@ -2402,19 +2402,17 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
   //     end for;
 
    annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method)  </td> </tr>
+<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+<td><p align=\"right\">dzp </p></td>
+<td><p align=\"center\">= </p></td>
+<td><p>DiscreteZerosAndPoles.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method) </p></td>
+</tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Generate a matrix of DiscreteZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation.
-The system is genrated by using <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromModel</a> followed by a conversion from state
-space to discrete zeros-and-poles transfer function representation.
- 
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   String modelName = \"Modelica_LinearSystems2.Examples.Utilities.DoublePendulum\"; 
+<p><br/><h4><font color=\"#008000\">Description</font></h4></p>
+<p>Generate a matrix of DiscreteZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromModel</a> followed by a conversion from state space to discrete zeros-and-poles transfer function representation. </p>
+<p><h4><font color=\"#008000\">Example</font></h4></p>
+<blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
    Real T_linearize = 5; 
    Modelica.SIunits.Time Ts=0.01;
    
@@ -2445,10 +2443,7 @@ space to discrete zeros-and-poles transfer function representation.
  //    0.000832773*(q - 1)*(q + 1)*(q^2 - 1.99989*q + 1)/( (q^2 - 2.03237*q + 1.03391)*(q^2 - 1.96572*q + 0.967206) )
  //    Ts = 0.01
  //    method =Trapezoidal]
-                      
-</pre></blockquote>
- 
- 
+<blockquote><code>                      </code> </blockquote>
 </html>"));
   end fromModel;
 

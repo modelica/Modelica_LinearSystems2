@@ -3335,30 +3335,29 @@ algorithm
     method=method);
 
   annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteStateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method)  </td> </tr>
+<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+<td><p align=\"right\">dss </p></td>
+<td><p align=\"center\">= </p></td>
+<td><p>DiscreteStateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method) </p></td>
+</tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Generate a DiscreteStateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation.
-The result of linearization is transformed into a StateSpace record and then converted into a DiscreteStateSpace record
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   String modelName = \"Modelica_LinearSystems2.Examples.Utilities.DoublePendulum\"; 
+<p><br/><h4><font color=\"#008000\">Description</font></h4></p>
+<p>Generate a DiscreteStateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record and then converted into a DiscreteStateSpace record </p>
+<p><h4><font color=\"#008000\">Example</font></h4></p>
+<blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
    Real T_linearize = 5;
-
+
 <b>algorithm</b>
   dss = Modelica_LinearSystems2.DiscreteStateSpace.Import.fromModel(modelName, T_linearize);
-
+
 // ss.A  = [1, 0.1, 0.0338415578929376, 0.00169207789464688, -0.010114371760331, -0.000505718588016548;
             0, 1, 0.676831157858752, 0.0338415578929376, -0.202287435206619,   -0.010114371760331;
             0, 0, 0.892698457060726, 0.0946349228530364, -0.0895698633812754,  -0.00447849316906376;
             0, 0, -2.14603085878547, 0.892698457060726, -1.79139726762551, -0.0895698633812755;
             0, 0, 0.0738077919657481, 0.0036903895982874, 1.0110083777752, 0.10055041888876;
             0, 0, 1.47615583931496, 0.0738077919657481, 0.220167555503916, 1.0110083777752];
-
+
 // ss.B= [0.00170323086692055;
           0.0165800882263292;
          -0.00215003506298196;
@@ -3381,14 +3380,8 @@ ss.B2  = [0.000437113227802044;
           0.000398179639305232;
           0.00796359278610463];
       
-
-                
-</pre></blockquote>
-
-
-
-</html> 
-"));
+<blockquote><br/><code>                </code> </blockquote>
+</html>"));
 end fromModel;
 
   encapsulated function fromFile
