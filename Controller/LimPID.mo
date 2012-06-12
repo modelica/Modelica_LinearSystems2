@@ -274,18 +274,7 @@ equation
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
-          textString="%sampleFactor"),
-        Rectangle(
-          extent={{-150,140},{150,102}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-150,140},{150,100}},
-          lineColor={0,0,255},
-          fillColor={169,199,255},
-          fillPattern=FillPattern.Solid,
-          textString="%name")}),
+          textString="%sampleFactor")}),
     Documentation(info="<HTML>
 <p>
 Via parameter <b>controllerType</b> either <b>P</b>, <b>PI</b>, <b>PD</b>, 

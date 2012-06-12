@@ -84,11 +84,11 @@ interpreted as \"initType = InitialState\".
           lineColor={192,192,192},
           textString="PI"),
         Text(
-          extent={{-148,-188},{152,-148}},
+          extent={{-150,-188},{150,-148}},
           lineColor={0,0,0},
           textString="T=%T"),
         Text(
-          extent={{-96,88},{80,56}},
+          extent={{-90,90},{86,58}},
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,

@@ -5,6 +5,11 @@ model DoublePendulum "Multibody model of crane trolley"
   parameter Modelica.SIunits.Mass m_load = 20 "Mass of load on 2nd arm";
   parameter Modelica.SIunits.Length length = 2
     "Total length of double pendulum (i.e. length of each arm = length/2)";
+
+  parameter Modelica.SIunits.Position s_start = 0.0
+    "Initial position of trolley relative to world";
+  parameter Modelica.SIunits.Velocity v_start = 0.0
+    "Initial velocity of trolley relative to world";
   parameter Modelica.SIunits.Angle phi1_start = -80.0/180*pi
     "Initial rotation angle of 1st arm relative to trolley";
   parameter Modelica.SIunits.Angle phi2_start = 10
@@ -14,23 +19,27 @@ model DoublePendulum "Multibody model of crane trolley"
   parameter Modelica.SIunits.AngularVelocity w2_start = 0.0
     "Initial angular velocity of 2nd arm relative to 1st arm";
 
+  parameter Modelica.SIunits.RotationalDampingConstant d=0
+    "Damping constant for revolute joint of 1st arm ";
+
   constant Real pi = Modelica.Constants.pi;
 
   inner Modelica.Mechanics.MultiBody.World world(animateWorld=false,
       animateGravity=false)
-                        annotation (Placement(transformation(extent={{-140,-80},
-            {-120,-60}},
-                      rotation=0)));
-  Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(useAxisFlange=true)
-    annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
+                        annotation (Placement(transformation(extent={{-130,0},{-110,
+            20}},     rotation=0)));
+  Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(useAxisFlange=true,
+    s(fixed=true, start=s_start),
+    v(fixed=true, start=v_start))
+    annotation (Placement(transformation(extent={{-100,20},{-80,0}})));
   Modelica.Mechanics.Translational.Components.Damper damper1(d=0)
-    annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
+    annotation (Placement(transformation(extent={{-100,-30},{-80,-10}})));
   Modelica.Mechanics.MultiBody.Joints.Revolute rev(n={0,0,1},useAxisFlange=true,
     phi(fixed=true, start=phi1_start),
     w(fixed=true, start=w1_start))
                                annotation (Placement(transformation(extent={{-40,0},
             {-20,20}},      rotation=0)));
-  Modelica.Mechanics.Rotational.Components.Damper damper(d=0)
+  Modelica.Mechanics.Rotational.Components.Damper damper(d=d)
     annotation (Placement(transformation(extent={{-40,20},{-20,40}},
                                                                    rotation=0)));
   Modelica.Mechanics.MultiBody.Parts.Body body(
@@ -44,10 +53,11 @@ model DoublePendulum "Multibody model of crane trolley"
     m=m_trolley,
     sphereDiameter=world.defaultBodyDiameter,
     r={0,0,0},
-    r_CM={0,0,0})
+    r_CM={0,0,0},
+    useQuaternions=false)
     annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
   Modelica.Mechanics.Translational.Sources.Force force
-    annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
+    annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
   Modelica.Blocks.Interfaces.RealInput u
     annotation (Placement(transformation(extent={{-190,-20},{-150,20}}),
         iconTransformation(extent={{-140,-20},{-100,20}})));
@@ -89,14 +99,16 @@ model DoublePendulum "Multibody model of crane trolley"
     specularCoefficient=0.7,
     color={0,0,0},
     diameter=0.05,
-    density=900)
+    density=900,
+    useQuaternions=false)
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
   Modelica.Mechanics.MultiBody.Parts.BodyCylinder bodyCylinder1(
     r={length/2,0,0},
     specularCoefficient=0.7,
     color={0,0,0},
     diameter=0.05,
-    density=900)
+    density=900,
+    useQuaternions=false)
     annotation (Placement(transformation(extent={{50,0},{70,20}})));
   Modelica.Mechanics.MultiBody.Sensors.RelativeSensor relativeSensorAng1(
     get_w_rel=true,
@@ -112,7 +124,7 @@ model DoublePendulum "Multibody model of crane trolley"
     animation=false,
     get_r_rel=true,
     get_v_rel=true)
-    annotation (Placement(transformation(extent={{-100,-30},{-80,-10}})));
+    annotation (Placement(transformation(extent={{-100,50},{-80,30}})));
 equation
   connect(damper.flange_b, rev.axis) annotation (Line(points={{-20,30},{-20,30},
           {-20,22},{-20,20},{-30,20}},
@@ -124,21 +136,16 @@ equation
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
-  connect(prismatic.frame_a, world.frame_b) annotation (Line(
-      points={{-100,10},{-110,10},{-110,-70},{-120,-70}},
-      color={95,95,95},
-      thickness=0.5,
-      smooth=Smooth.None));
   connect(force.flange, prismatic.axis) annotation (Line(
-      points={{-80,50},{-80,16},{-82,16}},
+      points={{-80,-40},{-80,4},{-82,4}},
       color={0,127,0},
       smooth=Smooth.None));
   connect(damper1.flange_a, prismatic.support) annotation (Line(
-      points={{-100,30},{-100,16},{-94,16}},
+      points={{-100,-20},{-100,4},{-94,4}},
       color={0,127,0},
       smooth=Smooth.None));
   connect(damper1.flange_b, prismatic.axis) annotation (Line(
-      points={{-80,30},{-80,16},{-82,16}},
+      points={{-80,-20},{-80,4},{-82,4}},
       color={0,127,0},
       smooth=Smooth.None));
   connect(prismatic.frame_b, bodyShape.frame_a) annotation (Line(
@@ -147,19 +154,19 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   connect(u, force.f) annotation (Line(
-      points={{-170,0},{-140,0},{-140,50},{-102,50}},
+      points={{-170,0},{-140,0},{-140,-40},{-102,-40}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(relativeSensorAng1.w_rel[3], w) annotation (Line(
-      points={{-24,-30.3333},{-24,-46},{80,-46},{80,-20},{160,-20}},
+      points={{-24,-30.3333},{-24,-40},{140,-40},{140,-20},{160,-20}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(relativeSensorPrismatic.v_rel[1], v) annotation (Line(
-      points={{-96,-31.6667},{-96,-40},{-46,-40},{-46,60},{160,60}},
+      points={{-96,51.6667},{-96,60},{160,60}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(relativeSensorPrismatic.r_rel[1], s) annotation (Line(
-      points={{-100,-31.6667},{-100,-36},{-74,-36},{-74,100},{160,100}},
+      points={{-100,51.6667},{-100,64},{140,64},{140,100},{160,100}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(phi, phi) annotation (Line(
@@ -175,8 +182,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.u1, relativeSensorAng1.angles[3]) annotation (Line(
-      points={{118,14},{112,14},{112,-10},{60,-10},{60,-40},{-28,-40},{-28,
-          -30.3333}},
+      points={{118,14},{112,14},{112,-36},{-28,-36},{-28,-30.3333}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(const1.y, add1.u2)
@@ -217,32 +223,37 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   connect(relativeSensorAng1.frame_a, rev.frame_a) annotation (Line(
-      points={{-40,-20},{-40,10}},
+      points={{-40,-20},{-44,-20},{-44,10},{-40,10}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(relativeSensorAng1.frame_b, rev.frame_b) annotation (Line(
-      points={{-20,-20},{-20,10}},
+      points={{-20,-20},{-16,-20},{-16,10},{-20,10}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(revolute2.frame_a, relativeSensorAng2.frame_a) annotation (Line(
-      points={{20,10},{20,-20}},
+      points={{20,10},{16,10},{16,-20},{20,-20}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(revolute2.frame_b, relativeSensorAng2.frame_b) annotation (Line(
-      points={{40,10},{40,-20}},
-      color={95,95,95},
-      thickness=0.5,
-      smooth=Smooth.None));
-  connect(prismatic.frame_a, relativeSensorPrismatic.frame_a) annotation (Line(
-      points={{-100,10},{-100,-20}},
+      points={{40,10},{44,10},{44,-20},{40,-20}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(prismatic.frame_b, relativeSensorPrismatic.frame_b) annotation (Line(
-      points={{-80,10},{-80,-20}},
+      points={{-80,10},{-76,10},{-76,40},{-80,40}},
+      color={95,95,95},
+      thickness=0.5,
+      smooth=Smooth.None));
+  connect(world.frame_b, prismatic.frame_a) annotation (Line(
+      points={{-110,10},{-100,10}},
+      color={95,95,95},
+      thickness=0.5,
+      smooth=Smooth.None));
+  connect(relativeSensorPrismatic.frame_a, prismatic.frame_a) annotation (Line(
+      points={{-100,40},{-104,40},{-104,10},{-100,10}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
@@ -256,12 +267,7 @@ equation
         extent={{-150,-100},{150,100}},
         grid={2,2}), graphics),
     Documentation(info="<html>
- 
-Model of a simple double pendulum system. <br>
-The physical Model is used in Modelica_LinearSystems2.Examples.StateSpace.doublePendulumController where it is being
-linearized an used as a base for linear controller design. The results are used to control the crane system
-in Modelica_LinearSystems2.Controller.Examples.DoublePendulum.mo
- 
+<p>Multibody model of a simple double pendulum system. This physical model is used in various models and functions of the library e.g. for linearization or as a base for linear controller design. </p>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={

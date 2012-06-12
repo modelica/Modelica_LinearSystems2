@@ -43,7 +43,7 @@ model InverseDoublePendulum "Controlled inverse double pendulum"
     y_min=-0.05,
     y_max=0.05,
     sampleFactor=50)
-             annotation (Placement(transformation(extent={{-2,60},{18,80}})));
+             annotation (Placement(transformation(extent={{0,60},{20,80}})));
 
   Noise noise1(
     y_min=-0.5,
@@ -66,7 +66,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(noise.y, plant.dist2) annotation (Line(
-      points={{19,70},{74,70},{74,12}},
+      points={{21,70},{74,70},{74,12}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (

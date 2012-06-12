@@ -55,13 +55,13 @@ model InverseDoublePendulumWithObserver
     y_min=-0.005,
     y_max=0.005,
     sampleFactor=200)
-             annotation (Placement(transformation(extent={{14,70},{34,90}})));
+    annotation (Placement(transformation(extent={{20,70},{40,90}})));
   Noise noise1(
     sampleFactor=100,
     blockType=Types.BlockTypeWithGlobalDefault.Discrete,
     y_min=-0.025,
     y_max=0.025)
-    annotation (Placement(transformation(extent={{14,40},{34,60}})));
+    annotation (Placement(transformation(extent={{20,40},{40,60}})));
 
 initial equation
 //feedback.y = {0.0};
@@ -73,11 +73,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(noise1.y, plant.dist) annotation (Line(
-      points={{35,50},{86.8,50},{86.8,5.6}},
+      points={{41,50},{86.8,50},{86.8,5.6}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(noise.y, plant.dist2) annotation (Line(
-      points={{35,80},{93.6,80},{93.6,5.6}},
+      points={{41,80},{93.6,80},{93.6,5.6}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(preFilter.u[1], accelerationLimiter.s) annotation (Line(
@@ -87,7 +87,7 @@ equation
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-160,-100},{160,
             100}}),     graphics={Text(
-          extent={{-44,78},{8,54}},
+          extent={{-76,72},{14,60}},
           lineColor={0,0,0},
           textString="disturbance"), Rectangle(extent={{-86,28},{108,-60}},
             lineColor={255,0,0})}),
