@@ -1,21 +1,17 @@
 within Modelica_LinearSystems2.Controller.Icons;
-partial block PartialBlockIcon
-  "Basic graphical layout of discrete/continuous block"
+partial block PartialBlockIcon "Icon for a discrete/continuous block"
 
 protected
-                   Boolean cont=true;
+  Boolean cont=true;
+
   annotation (
-    Coordsys(
-      extent=[-100, -100; 100, 100],
-      grid=[2, 2],
-      component=[20, 20]),
     Icon(
       coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
         graphics={
         Rectangle(
           visible=not cont,
           extent={{-100,100},{100,-100}},
-          fillColor={213,255,170},
+          fillColor={213,255,190},
           fillPattern=FillPattern.Solid,
           borderPattern=BorderPattern.Raised,
           pattern=LinePattern.None),
@@ -28,13 +24,12 @@ protected
           pattern=LinePattern.None,
           lineColor={0,0,0}),
         Text(
-          extent={{-150,110},{150,150}},
+          extent={{-150,140},{150,100}},
           lineColor={0,0,255},
-          textString="%name")}),
-    Window(
-      x=0.33,
-      y=0.33,
-      width=0.59,
-      height=0.43));
+          fillColor={169,199,255},
+          fillPattern=FillPattern.Solid,
+          textString="%name")}), Documentation(info="<html>
+<p>This partial class is intended to design a <i>default icon for a discrete or continuous block</i>. The background color of this icon depends on the boolean parameter <code>cont</code>.</p>
+</html>"));
 
 end PartialBlockIcon;

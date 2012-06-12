@@ -2,8 +2,7 @@ within Modelica_LinearSystems2.Controller;
 block DAconverter "Digital to analog converter (including zero order hold)"
   parameter Real y_max "Upper limit of output signal";
   parameter Real y_min "Lower limit of output signal";
-  parameter Integer bits(min=0)
-    "Number of bits (=0 means no quantization error)";
+  parameter Integer bits(min=0) "Number of bits (=0 : no quantization error)";
   parameter Boolean unitDelay=true
     "= true, if one sample period delay, = false, if computing time not modelled";
   extends Interfaces.PartialSISO_equality;
@@ -24,25 +23,25 @@ equation
   end if;
   annotation (Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
             -100},{100,100}}), graphics={
-        Text(
-          extent={{30,-34},{96,-94}},
-          lineColor={0,0,127},
-          textString="A"),
         Line(points={{-100,-100},{100,100}}, color={0,0,127}),
         Text(
-          extent={{-96,60},{-24,8}},
+          extent={{-94,60},{-30,20}},
           lineColor={0,0,127},
           textString="D"),
+        Text(
+          extent={{26,-10},{90,-50}},
+          lineColor={0,0,127},
+          textString="A"),
         Line(
-          points={{-26,24},{18,-20}},
+          points={{-28,28},{24,-24}},
           color={0,0,0},
           smooth=Smooth.None),
         Polygon(
-          points={{14,-24},{22,-16},{26,-28},{14,-24}},
+          points={{12,-20},{20,-12},{24,-24},{12,-20}},
           lineColor={0,0,0},
           smooth=Smooth.None),
         Text(
-          extent={{-92,92},{84,60}},
+          extent={{-100,90},{80,60}},
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,

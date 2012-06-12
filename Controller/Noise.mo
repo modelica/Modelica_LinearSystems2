@@ -1,23 +1,33 @@
 within Modelica_LinearSystems2.Controller;
 block Noise
   "Block that generates a uniform distributed noise output signal at sample instants if discrete and y=0 if continuous"
-  extends Interfaces.PartialBlockIcon;
+  extends Icons.PartialBlockIcon(cont=continuous);
   parameter Real y_min if not continuous "Lower limit of noise band";
   parameter Real y_max if not continuous "Upper limit of noise band";
   parameter Integer firstSeed[3](
     each min=0,
     each max=255) = {23,87,187} if                                          not continuous
     "Integer[3] defining random sequence; required element range: 0..255";
-  parameter Types.BlockTypeWithGlobalDefault blockType=Types.BlockTypeWithGlobalDefault.UseSampleClockOption
-    "Type of block (Continuous/Discrete)"
-    annotation(Evaluate=true, Hide=true);
+  parameter Types.BlockTypeWithGlobalDefault blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption
+    "Type of block"
+    annotation (
+      Evaluate=true,
+      Hide=true,
+      Dialog(
+        __Dymola_compact=true,
+        __Dymola_descriptionLabel=true),
+      choices(__Dymola_radioButtons=true, choice=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous
+        "Continuous",
+        choice=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete
+        "Discrete",
+        choice=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption
+        "Dependent on sampleClock"));
   final parameter Boolean continuous=blockType == Types.BlockTypeWithGlobalDefault.Continuous
        or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption
        and sampleClock.blockType == Types.BlockType.Continuous
-    "= true, if continuous block, otherwise discrete block";
-  parameter Integer sampleFactor(min=1) = 1 if
-                                             not continuous
-    "Ts=sampleClock.sampleTime*sampleFactor"
+    "True, if continuous block, otherwise discrete block";
+  parameter Integer sampleFactor(min=1) = 1 if not continuous
+    "Sample factor for sample time (Ts = sampleFactor * sampleClock.sampleTime)"
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   Modelica.Blocks.Interfaces.RealOutput y "Discrete output signal of block"
     annotation (extent=[100, -10; 120, 10]);
@@ -52,10 +62,6 @@ connect(y,discretePart.y);
           lineColor={192,192,192},
           fillColor={192,192,192},
           fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-72,99},{74,64}},
-          lineColor={192,192,192},
-          textString="noise"),
         Line(points={{-35,25},{-35,-35},{-25,-35},{-25,-17},{-15,-17},{-15,-45},
               {-5,-45},{-5,37},{1,37},{1,51},{7,51},{7,-5},{17,-5},{17,7},{23,7},
               {23,-23},{33,-23},{33,49},{43,49},{43,15},{51,15},{51,-51},{61,-51}},
@@ -65,9 +71,13 @@ connect(y,discretePart.y);
         Line(points={{-90,-54},{84,-54}}, color={255,0,0}),
         Line(points={{-89,62},{85,62}}, color={255,0,0}),
         Text(
-          extent={{-145,-105},{144,-133}},
+          extent={{-195,76},{-78,50}},
           lineColor={0,0,0},
-          textString="[%y_min .. %y_max]"),
+          textString="%y_max"),
+        Text(
+          extent={{-195,-38},{-78,-64}},
+          lineColor={0,0,0},
+          textString="%y_min"),
         Text(
           extent={{-88,-62},{88,-94}},
           lineColor={0,0,0},

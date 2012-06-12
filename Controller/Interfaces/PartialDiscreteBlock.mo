@@ -8,10 +8,10 @@ partial block PartialDiscreteBlock
     annotation(Evaluate=true, Hide=true,  Dialog(tab="Advanced options"));
   final parameter Types.Init init=if initType == Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.UseSampleClockOption then
             sampleClock.initType else initType
-    "Type of initialization (no init/InitialState/SteadyState)"    annotation(Evaluate=true);
+    "Type of initialization (no init/InitialState/SteadyState)" annotation(Evaluate=true);
 
   parameter Integer sampleFactor(min=1) = 1
-    "Sample time=sampleClock.sampleTime*sampleFactor"
+    "Sample factor (Ts = sampleFactor * sampleClock.sampleTime)"
      annotation(Hide=true);
   final parameter Modelica.SIunits.Time Ts=sampleClock.sampleTime*sampleFactor
     "Sample time" annotation(Hide=false);
@@ -23,8 +23,8 @@ protected
 initial equation
   pre(ticks) = 0;
 equation
-   when sampleClock.sampleTrigger then
-     ticks = if pre(ticks) < sampleFactor then pre(ticks) + 1 else 1;
-   end when;
-   sampleTrigger = sampleClock.sampleTrigger and ticks >= sampleFactor;
+  when sampleClock.sampleTrigger then
+    ticks = if pre(ticks) < sampleFactor then pre(ticks) + 1 else 1;
+  end when;
+  sampleTrigger = sampleClock.sampleTrigger and ticks >= sampleFactor;
 end PartialDiscreteBlock;

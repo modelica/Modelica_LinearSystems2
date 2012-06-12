@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Controller.Internal;
 block DiscreteInterpolator
   "Increasing the sampling frequency with linear interpolation"
-  extends Interfaces.PartialBlockIcon;
+  extends Modelica_LinearSystems2.Controller.Icons.PartialBlockDiscrete;
   parameter Integer inputSampleFactor(min=1)=1
     "Input sample time = inputSampleFactor * sampleClock.sampleTime"
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));

@@ -4,7 +4,7 @@ block MatrixGain
 
   extends Modelica.Blocks.Interfaces.MIMO(final nin=size(K2, 2), final nout=
         size(K2, 1));
-  extends Interfaces.PartialBlockIcon;
+  extends Modelica_LinearSystems2.Controller.Icons.PartialBlockDiscrete;
 
   parameter Boolean matrixOnFile=false
     "True, if matrix should be read from file";
@@ -62,10 +62,18 @@ Example:
         grid={2,2}), graphics={Text(
           extent={{-88,-62},{92,58}},
           lineColor={160,160,164},
-          textString="*[kij]"), Text(
-          extent={{-150,150},{150,110}},
-          textString="%name",
-          lineColor={0,0,255})}),
+          textString="*[kij]"),
+        Rectangle(
+          extent={{-150,140},{150,102}},
+          lineColor={255,255,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-150,140},{150,100}},
+          lineColor={0,0,255},
+          fillColor={169,199,255},
+          fillPattern=FillPattern.Solid,
+          textString="%name")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},

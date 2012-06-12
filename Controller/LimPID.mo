@@ -1,12 +1,12 @@
 within Modelica_LinearSystems2.Controller;
 block LimPID
   "P, PI, PD, and PID controller with limited output, anti-windup compensation and setpoint weighting"
-  import Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault;
-  import Modelica.Blocks.Types.SimpleController;
+  extends Modelica.Blocks.Interfaces.SVcontrol;
   extends Interfaces.PartialSampledBlock;
 
-  extends Modelica.Blocks.Interfaces.SVcontrol;
- extends Interfaces.PartialBlockIcon;
+  import Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault;
+  import Modelica.Blocks.Types.SimpleController;
+
   output Real controlError=u_s - u_m "Control error (set point - measurement)";
 
   parameter Types.PID_representation pidRepresentation=Types.PID_representation.timeConstants
@@ -250,8 +250,7 @@ equation
     defaultComponentName="PID",
     Icon(coordinateSystem(
         preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics={
+        extent={{-100,-100},{100,100}}), graphics={
         Line(points={{-80,78},{-80,-90}}, color={192,192,192}),
         Polygon(
           points={{-80,90},{-88,68},{-72,68},{-80,90}},
@@ -275,7 +274,18 @@ equation
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
-          textString="%sampleFactor")}),
+          textString="%sampleFactor"),
+        Rectangle(
+          extent={{-150,140},{150,102}},
+          lineColor={255,255,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-150,140},{150,100}},
+          lineColor={0,0,255},
+          fillColor={169,199,255},
+          fillPattern=FillPattern.Solid,
+          textString="%name")}),
     Documentation(info="<HTML>
 <p>
 Via parameter <b>controllerType</b> either <b>P</b>, <b>PI</b>, <b>PD</b>, 

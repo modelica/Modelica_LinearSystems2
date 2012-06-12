@@ -16,19 +16,6 @@ protected
     init=init) if not continuous "Discretized SISO system";
 
 equation
- connect(u, discretePart.u[1]);
+  connect(u, discretePart.u[1]);
 
-  annotation (
-    Coordsys(
-      extent=[-100, -100; 100, 100],
-      grid=[2, 2],
-      component=[20, 20]),
-    Window(
-      x=0.01,
-      y=0.24,
-      width=0.7,
-      height=0.72),
-    Documentation(info="<HTML>
-</HTML>
-"), Diagram);
 end PartialSISO;

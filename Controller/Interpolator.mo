@@ -3,10 +3,21 @@ block Interpolator
   "Increasing the sampling frequency with linear interpolation and optional mean value filtering"
   extends Icons.PartialBlockIcon(cont=continuous);
   import Modelica_LinearSystems2.Controller.Types;
-  parameter Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault
-    blockType = Types.BlockTypeWithGlobalDefault.UseSampleClockOption
-    "Type of block (Continuous/Discrete)"
-    annotation(Evaluate=true, Hide=true);
+
+  parameter Types.BlockTypeWithGlobalDefault blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption
+    "Type of block"
+    annotation (
+      Evaluate=true,
+      Hide=true,
+      Dialog(
+        __Dymola_compact=true,
+        __Dymola_descriptionLabel=true),
+      choices(__Dymola_radioButtons=true, choice=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous
+        "Continuous",
+        choice=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete
+        "Discrete",
+        choice=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption
+        "Dependent on sampleClock"));
   final parameter Boolean continuous = blockType == Types.BlockTypeWithGlobalDefault.Continuous or
                                  blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Continuous
@@ -67,11 +78,6 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    Window(
-      x=0.27,
-      y=0.1,
-      width=0.57,
-      height=0.75),
     Icon(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},

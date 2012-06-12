@@ -72,7 +72,7 @@ connect(y,discretePart.y);
               60,-68},{64,-72},{66,-76},{66,-78},{66,-80},{66,-82}}, color={0,0,
               127}),
         Text(
-          extent={{-72,86},{98,52}},
+          extent={{-80,90},{100,60}},
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,

@@ -5,7 +5,7 @@ model DiscreteStateSpace2
   import Modelica_LinearSystems2.Controller.Types;
   import Modelica.Math.Matrices;
 
-  extends Interfaces.PartialBlockIcon;
+  extends Modelica_LinearSystems2.Controller.Icons.PartialBlockDiscrete;
 
   parameter Real ABCD[:,:] "Continuous linear time-invariant system"
                                               annotation(Hide=true);

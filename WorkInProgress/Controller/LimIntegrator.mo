@@ -1,14 +1,11 @@
 within Modelica_LinearSystems2.WorkInProgress.Controller;
 block LimIntegrator
   "Output is the integral limited to upper or lower limit (continiuous or discrete)"
-  import Modelica_LinearSystems2;
-
-  import Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault;
-  import Modelica_LinearSystems2.Controller.Interfaces;
-
   extends Interfaces.PartialSampledBlock;
 
-  extends Interfaces.PartialBlockIcon;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault;
+  import Modelica_LinearSystems2.Controller.Interfaces;
 
   parameter Real k=1 "Integrator gain";
   parameter Boolean withDelay=false

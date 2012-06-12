@@ -4,25 +4,20 @@ block Sampler
   extends Interfaces.PartialSISO_equality;
 
 protected
-  Internal.DiscreteSampler discretePart(sampleFactor=sampleFactor) if
-          not continuous "Discrete sampler";
+  Internal.DiscreteSampler discretePart(sampleFactor=sampleFactor) if not continuous
+    "Discrete sampler";
 equation
   if continuous then
      y = u;
-else
-connect(u,discretePart.u);
-connect(y,discretePart.y);
+  else
+    connect(u,discretePart.u);
+    connect(y,discretePart.y);
   end if;
   annotation (
    Icon(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={
-        Ellipse(
-          extent={{-25,-10},{-45,10}},
-          lineColor={0,0,127},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
         Ellipse(
           extent={{45,-10},{25,10}},
           lineColor={0,0,127},
@@ -31,8 +26,13 @@ connect(y,discretePart.y);
         Line(points={{-100,0},{-45,0}}, color={0,0,127}),
         Line(points={{45,0},{100,0}}, color={0,0,127}),
         Line(points={{-35,0},{30,35}}, color={0,0,127}),
+        Ellipse(
+          extent={{-25,-10},{-45,10}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-98,-30},{98,-64}},
+          extent={{-90,-60},{90,-90}},
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
@@ -49,18 +49,18 @@ connect(y,discretePart.y);
         Line(points={{-100,0},{-60,0}}),
         Line(points={{60,0},{100,0}}),
         Ellipse(
-          extent={{-25,-10},{-45,10}},
-          lineColor={0,0,127},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Ellipse(
           extent={{45,-10},{25,10}},
           lineColor={0,0,127},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Line(points={{-100,0},{-45,0}}, color={0,0,127}),
         Line(points={{45,0},{100,0}}, color={0,0,127}),
-        Line(points={{-35,0},{30,35}}, color={0,0,127})}),
+        Line(points={{-35,0},{30,35}}, color={0,0,127}),
+        Ellipse(
+          extent={{-25,-10},{-45,10}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
 <p>
 If <b>discrete</b> block, the output y is sampled according to sample time

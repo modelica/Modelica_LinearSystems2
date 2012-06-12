@@ -8,7 +8,7 @@ block Integrator
       ABCD=[0,k; 1,0]));
   parameter Real k=1 "Integrator gain";
   parameter Boolean withDelay=false
-    "= true, if the output is delayed by one sample period (only if discrete)";
+    "True, if the output is delayed by one sample period (only if discrete)";
 
   parameter Real y_start=0 "Initial or guess value of output (=state)"
                                                                annotation(Dialog(tab="Advanced options"));
@@ -27,11 +27,6 @@ initial equation
     end if;
   end if;
   annotation (
-    Window(
-      x=0.29,
-      y=0.05,
-      width=0.53,
-      height=0.54),
     Documentation(info="<html>
 <p>
 This blocks defines the transfer function between the input u and

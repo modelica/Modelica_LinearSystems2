@@ -2,8 +2,7 @@ within Modelica_LinearSystems2.Controller;
 block ADconverter "Analog to digital converter (including sampler)"
   parameter Real y_max "Upper limit of output signal";
   parameter Real y_min "Lower limit of output signal";
-  parameter Integer bits(min=0)
-    "Number of bits (=0 means no quantization error)";
+  parameter Integer bits(min=0) "Number of bits (=0 : no quantization error)";
   extends Interfaces.PartialSISO_equality;
 
 protected
@@ -25,27 +24,23 @@ else
         grid={2,2}), graphics={
         Line(points={{-100,-100},{100,100}}, color={0,0,127}),
         Text(
-          extent={{-150,-150},{150,-110}},
-          lineColor={0,0,0},
-          textString="bits=%bits"),
-        Text(
-          extent={{-94,58},{-30,-4}},
+          extent={{-94,60},{-30,20}},
           lineColor={0,0,127},
           textString="A"),
-        Text(
-          extent={{28,-36},{98,-98}},
-          lineColor={0,0,127},
-          textString="D"),
         Line(
-          points={{-28,20},{16,-24}},
+          points={{-28,28},{24,-24}},
           color={0,0,0},
           smooth=Smooth.None),
         Polygon(
-          points={{12,-28},{20,-20},{24,-32},{12,-28}},
+          points={{12,-20},{20,-12},{24,-24},{12,-20}},
           lineColor={0,0,0},
           smooth=Smooth.None),
         Text(
-          extent={{-96,90},{76,60}},
+          extent={{26,-10},{90,-50}},
+          lineColor={0,0,127},
+          textString="D"),
+        Text(
+          extent={{-100,-60},{80,-90}},
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,

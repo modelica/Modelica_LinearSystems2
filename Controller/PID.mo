@@ -1,8 +1,8 @@
 within Modelica_LinearSystems2.Controller;
 block PID "PID-controller in additive description form"
+  extends Interfaces.PartialSampledBlock;
   import Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault;
 
-extends Interfaces.PartialSampledBlock;
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block"
     annotation (extent=[-140, -20; -100, 20]);
@@ -131,8 +131,7 @@ equation
     defaultComponentName="pID",
     Icon(coordinateSystem(
         preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics={
+        extent={{-100,-100},{100,100}}), graphics={
         Line(points={{-80,78},{-80,-90}}, color={192,192,192}),
         Polygon(
           points={{-80,90},{-88,68},{-72,68},{-80,90}},

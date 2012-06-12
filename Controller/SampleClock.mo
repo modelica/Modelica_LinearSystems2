@@ -3,7 +3,13 @@ block SampleClock
   "Global options for blocks of Controller library (in particular sample clock)"
 
   parameter Types.BlockType blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous
-    "Type of Sampled blocks (Continuous or Discrete)" annotation(Evaluate=true);
+    "Type of Sampled blocks"
+    annotation (
+      Evaluate=true,
+      choices(__Dymola_radioButtons=true, choice=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous
+        "Continuous",
+        choice=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete
+        "Discrete"));
   parameter Modelica_LinearSystems2.Types.Method methodType=
       Modelica_LinearSystems2.Types.Method.Trapezoidal
     "Discretization method for discrete blocks";
@@ -33,11 +39,6 @@ drag Modelica_LinearSystems2.Controller.SampleClock into the top level of your m
           fillPattern=FillPattern.Sphere,
           fillColor={255,255,255}),
         Ellipse(
-          extent={{-25,-10},{-45,10}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Ellipse(
           extent={{45,-10},{25,10}},
           lineColor={0,0,0},
           fillColor={255,255,255},
@@ -46,10 +47,30 @@ drag Modelica_LinearSystems2.Controller.SampleClock into the top level of your m
         Line(points={{45,0},{100,0}}, color={0,0,0}),
         Line(points={{-35,0},{30,35}}, color={0,0,0}),
         Text(
-          extent={{-150,-115},{150,-145}},
+          extent={{-150,-110},{150,-140}},
           lineColor={0,0,0},
           textString="%sampleTime s"),
-        Text(extent={{-140,160},{160,120}}, textString="%name")}),
+        Ellipse(
+          extent={{-25,-10},{-45,10}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-150,-20},{150,-50}},
+          lineColor={0,0,0},
+          textString="Continuous",
+          visible=blockType==Modelica_LinearSystems2.Controller.Types.BlockType.Continuous),
+        Text(
+          extent={{-150,-20},{150,-50}},
+          lineColor={0,0,0},
+          textString="Discrete",
+          visible=blockType==Modelica_LinearSystems2.Controller.Types.BlockType.Discrete),
+        Text(
+          extent={{-150,140},{150,100}},
+          lineColor={0,0,255},
+          fillColor={169,199,255},
+          fillPattern=FillPattern.Solid,
+          textString="%name")}),
     Diagram,
     Documentation(info="<HTML>
 <p>

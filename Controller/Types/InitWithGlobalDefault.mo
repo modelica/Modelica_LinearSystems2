@@ -9,7 +9,7 @@ type InitWithGlobalDefault = enumeration(
     InitialOutput
       "Initialization with initial outputs (and steady state of the states if possibles)",
 
-    UseSampleClockOption "use initialization defined in sampleClock component")
+    UseSampleClockOption "Use initialization defined in sampleClock component")
   "Enumeration defining initialization of a block"
     annotation (Evaluate=true, Documentation(info="<html>
  

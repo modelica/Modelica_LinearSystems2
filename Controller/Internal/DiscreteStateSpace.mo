@@ -5,7 +5,7 @@ model DiscreteStateSpace
   import Modelica_LinearSystems2.Controller.Types;
   import Modelica.Math.Matrices;
 
-  extends Interfaces.PartialBlockIcon;
+  extends Modelica_LinearSystems2.Controller.Icons.PartialBlockDiscrete;
 
   parameter Modelica_LinearSystems2.StateSpace system(
     A=fill(0, 0, 0),
