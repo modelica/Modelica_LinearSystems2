@@ -25,26 +25,26 @@ difference equation systems. For example, record
 defines a linear time invariant differential
 equation system in state space form:
 </p>
-<pre>    <b>der</b>(x) = A * x + B * u
-        y  = C * x + D * u
+<pre>   <b>der</b>(x) = A * x + B * u
+       y  = C * x + D * u
 </pre>
 <p>
 Operators are overloaded to work conveniently with these system descriptions in an
-interactive environment, e.g., to multiply transfer functions or to operate on complex numbers.
+interactive environment, e.g. to multiply transfer functions or to operate on complex numbers.
 About 180 functions are provided to operate
-on these data structures, e.g., to compute eigen values, zeros, step responses,
+on these data structures, e.g. to compute eigenvalues, zeros, step responses,
 to design pole-placement and LQG controllers, to plot step responses, frequency responses,
-eigen values, to convert between different description forms, or to
+eigenvalues, to convert between different description forms, or to
 generate a linear system description by linearization of a Modelica model.
 </p>
 
 <p>
-Furthermore, in sublibrary
+Furthermore, in subpackage
 <a href=\"modelica://Modelica_LinearSystems2.Controller\">Controller</a>
 about 20 input/output blocks of linear systems are provided that are
-based on the different representation forms, e.g., PID, StateSpace, Filter blocks.
+based on the different representation forms, e.g. PID, StateSpace, Filter blocks.
 A unique feature of these blocks is that it is very convenient to quickly switch
-between a continuous and a discrete block representation. Also, templates are provide
+between a continuous and a discrete block representation. Also, templates are provided
 to quickly built-up standard controller structures.
 </p>
 
@@ -78,7 +78,7 @@ scripts are provided, but different library names are used.
 <b>Licensed by DLR under the Modelica License 2</b><br>
 <img src=\"modelica://Modelica_LinearSystems2/Extras/Images/dlr_logo.png\"  width=60 >
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- <b>      Copyright &copy; 2005-2011, DLR Institute of Robotics and Mechatronics</b>
+ <b>      Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</b>
 </p>
 
 

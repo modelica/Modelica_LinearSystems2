@@ -14,7 +14,7 @@ block Filter
   parameter Real gain=1.0
     "Gain (= amplitude of frequency response at zero frequency)";
   parameter Boolean normalized=true
-    "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
+    "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   parameter Real A_ripple(unit="dB") = 0.5
     "Pass band ripple for Chebyshev filter (otherwise not used)" annotation(Dialog(enable=analogFilter==Modelica_LinearSystems2.Types.AnalogFilter.Chebyshev));
 

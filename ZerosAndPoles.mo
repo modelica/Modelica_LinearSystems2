@@ -1470,7 +1470,7 @@ Computes the invariant zeros of the corresponding state space representation of 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
       output Real k "Steady state gain";
       output Boolean finite = true
-        "= true, if k is finite; = false, if k is infinite (k=Modelica.Constants.inf returned)";
+        "True, if k is finite, otherwise if k is infinite (k=Modelica.Constants.inf returned)";
     protected
       StateSpace ss=StateSpace(zp);
       Real K[1,1];
@@ -1838,7 +1838,7 @@ of a zeros-and-poles transfer function.
         "Gain (= amplitude of frequency response at zero frequency)";
     input Real A_ripple(unit="dB") = 0.5
         "Pass band ripple (only for Chebyshev filter)";
-    input Boolean normalized=true "= true, if amplitude at f_cut = -3db*gain";
+    input Boolean normalized=true "True, if amplitude at f_cut = -3db*gain";
     input Modelica.SIunits.Frequency f_min=0
         "Band of normalized band pass/stop filter is f_min (-3db*gain) .. f_cut (-3db*gain)";
 
@@ -1880,7 +1880,7 @@ of a zeros-and-poles transfer function.
     Integer n_den=n_den1 + 2*n_den2;
     Real pi=Modelica.Constants.pi;
     Boolean evenOrder=mod(order, 2) == 0
-        "= true, if even filter order (otherwise uneven)";
+        "True, if even filter order, otherwise uneven";
 
     Modelica.SIunits.Frequency f0 = if filterType == Types.FilterType.BandPass or
                                        filterType == Types.FilterType.BandStop then
@@ -2322,7 +2322,7 @@ and results in
     input ZerosAndPoles zp "ZerosAndPoles transfer function to be plotted";
     input Integer nPoints(min=2) = 200 "Number of points";
     input Boolean autoRange=true
-        "= true, if abszissa range is automatically determined";
+        "True, if abszissa range is automatically determined";
     input Modelica.SIunits.Frequency f_min(min=0) = 0.1
         "Minimum frequency value, if autoRange = false"                                                  annotation(Dialog(enable=not autoRange));
     input Modelica.SIunits.Frequency f_max(min=0) = 10
@@ -4193,13 +4193,13 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
   encapsulated function baseFilter
       "Generate a ZerosAndPoles transfer function from a base filter description (= low pass filter with w_cut = 1 rad/s)"
 
-      import Modelica;
-      import Modelica.Math.*;
-      import Modelica.Utilities.Streams;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Types;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+    import Modelica;
+    import Modelica.Math;
+    import Modelica.Utilities.Streams;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.Types;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.ZerosAndPoles.Internal;
 
     input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
         "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
@@ -4207,7 +4207,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
     input Real A_ripple(unit="dB") = 0.5
         "Pass band ripple (only for Chebyshev filter)";
     input Boolean normalized=true
-        "= true, if amplitude at f_cut = -3db, otherwise unmodified filter";
+        "True, if amplitude at f_cut = -3db, otherwise unmodified filter";
 
     output ZerosAndPoles filter(
       redeclare Real n1[0],
@@ -4222,7 +4222,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
     Integer n_den=n_den1 + 2*n_den2;
     Real pi=Modelica.Constants.pi;
     Boolean evenOrder=mod(order, 2) == 0
-        "= true, if even filter order (otherwise uneven)";
+        "True, if even filter order (otherwise uneven)";
     Real alpha=1.0 "Frequency correction factor";
     Real alpha2 "= alpha*alpha";
     Real epsilon "Ripple size";
@@ -4289,7 +4289,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
     elseif analogFilter == Types.AnalogFilter.Chebyshev then
       epsilon := sqrt(10^(A_ripple/10) - 1);
-      fac := asinh(1/epsilon)/order;
+      fac := Math.asinh(1/epsilon)/order;
 
       if evenOrder then
          for i in 1:n_den2 loop
@@ -5985,7 +5985,7 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
     input Real A_ripple(unit="dB") = 0.5
         "Pass band ripple for Chebyshev filter (otherwise not used)";
     input Boolean normalized=true
-        "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
+        "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
     output Internal.ZerosAndPoles filter(
       redeclare Real n1[if filterType == Types.FilterType.LowPass then 0 else (
         if analogFilter == Types.AnalogFilter.CriticalDamping then order else
@@ -6007,7 +6007,7 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
     Integer n_den=n_den1 + 2*n_den2;
     Real pi=Modelica.Constants.pi;
     Boolean evenOrder=mod(order, 2) == 0
-        "= true, if even filter order (otherwise uneven)";
+        "True, if even filter order, otherwise uneven";
     Modelica.SIunits.AngularVelocity w_cut=2*pi*f_cut
         "Cut-off angular frequency";
     Real w_cut2 "= w_cut*w_cut";

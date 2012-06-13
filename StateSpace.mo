@@ -5,14 +5,13 @@ record StateSpace
   extends Modelica.Icons.Record;
 
   Real A[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real B[size(A, 1),:]  annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real C[:,size(A, 1)]  annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+  Real B[size(A, 1),:] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+  Real C[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
   Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
 
-   String yNames[size(C, 1)]=fill("", size(C, 1)) "Names of the output signals"
-                                                                                annotation(Dialog(group="Signal names"));
-   String xNames[size(A, 1)]=fill("", size(A, 1)) "Names of the states"  annotation(Dialog(group="Signal names"));
-   String uNames[size(B, 2)]=fill("", size(B, 2)) "Names of the input signals"  annotation(Dialog(group="Signal names"));
+  String yNames[size(C, 1)]=fill("", size(C, 1)) "Names of the output signals"  annotation(Dialog(group="Signal names"));
+  String xNames[size(A, 1)]=fill("", size(A, 1)) "Names of the states"  annotation(Dialog(group="Signal names"));
+  String uNames[size(B, 2)]=fill("", size(B, 2)) "Names of the input signals"  annotation(Dialog(group="Signal names"));
 
 encapsulated operator 'constructor'
     "Default constructors for a StateSpace record"
@@ -21,57 +20,62 @@ encapsulated operator 'constructor'
     import Modelica;
   extends Modelica.Icons.Package;
 
-  function fromABCDMatrices "Default constructor for a StateSpace record"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
+  function fromABCDMatrices
+      "Generate a StateSpace data record from a A, B, C and D matrices"
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace;
 
-      input Real A[:,size(A, 1)];
-      input Real B[size(A, 1),:];
-      input Real C[:,size(A, 1)];
-      input Real D[size(C, 1),size(B, 2)];
+    input Real A[:,size(A, 1)];
+    input Real B[size(A, 1),:];
+    input Real C[:,size(A, 1)];
+    input Real D[size(C, 1),size(B, 2)];
 
-      input String uNames[size(B, 2)]=fill("", size(B, 2));
-      input String yNames[size(C, 1)]=fill("", size(C, 1));
-      input String xNames[size(A, 2)]=fill("", size(A, 2));
+    input String uNames[size(B, 2)]=fill("", size(B, 2));
+    input String yNames[size(C, 1)]=fill("", size(C, 1));
+    input String xNames[size(A, 2)]=fill("", size(A, 2));
 
-      output StateSpace result(
-        redeclare Real A[size(A, 1),size(A, 2)],
-        redeclare Real B[size(B, 1),size(B, 2)],
-        redeclare Real C[size(C, 1),size(C, 2)],
-        redeclare Real D[size(D, 1),size(D, 2)],
-        redeclare String uNames[size(B, 2)],
-        redeclare String yNames[size(C, 1)],
-        redeclare String xNames[size(A, 2)]);
+    output StateSpace result(
+      redeclare Real A[size(A, 1),size(A, 2)],
+      redeclare Real B[size(B, 1),size(B, 2)],
+      redeclare Real C[size(C, 1),size(C, 2)],
+      redeclare Real D[size(D, 1),size(D, 2)],
+      redeclare String uNames[size(B, 2)],
+      redeclare String yNames[size(C, 1)],
+      redeclare String xNames[size(A, 2)]);
 
   algorithm
-      result.A := A;
-      result.B := B;
-      result.C := C;
-      result.D := D;
-      result.uNames := uNames;
-      result.yNames := yNames;
-      result.xNames := xNames;
+    result.A := A;
+    result.B := B;
+    result.C := C;
+    result.D := D;
+    result.uNames := uNames;
+    result.yNames := yNames;
+    result.xNames := xNames;
 
       annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  ss </td><td align=center>=</td>  <td> 'constructor'.<b>fromABCDMatrices</b>(A, B, C, D)  </td> </tr>
+<blockquote>
+<pre>
+ss = 'constructor'.<b>fromABCDMatrices</b>(A, B, C, D)
+</pre>
+</blockquote>
 
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-This function constructs a StateSpace record ss with<br>
+This function constructs a StateSpace record ss with
 <blockquote><pre>
-  ss.A = A;
-  ss.B = B;
-  ss.C = C;
-  ss.D = D;
+ss.A = A;
+ss.B = B;
+ss.C = C;
+ss.D = D;
 </pre></blockquote>
 
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
+<p>
 <blockquote><pre>
   Real A[1,1] = [1];
   Real B[1,1] = [1];
@@ -87,16 +91,16 @@ public
   // ss.B = [1]
   // ss.C = [1]
   // ss.D = [0]
-
 </pre></blockquote>
+</p>
 
 </html>"));
   end fromABCDMatrices;
 
   function fromReal "Generate a StateSpace data record from a Real value"
 
-      import Modelica;
-      import Modelica_LinearSystems2.StateSpace;
+    import Modelica;
+    import Modelica_LinearSystems2.StateSpace;
 
     input Real r "Value of Real variable";
     output StateSpace ss(
@@ -109,9 +113,12 @@ public
     ss.D[1, 1] := r;
     annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  ss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
- 
+<blockquote>
+<pre>
+ss = 'constructor'.<b>fromReal</b>(r)
+</pre>
+</blockquote>
+
 </table>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -121,25 +128,24 @@ y = r*u
 </pre></blockquote>
 Therefore, the matrices are defined by
 <blockquote><pre>
-  ss.A = fill(0,0,0);
-  ss.B = fill(0,0,1);
-  ss.C = fill(0,1,0);
-  ss.D = [r];
+ss.A = fill(0,0,0);
+ss.B = fill(0,0,1);
+ss.C = fill(0,1,0);
+ss.D = [r];
 </pre></blockquote>
- 
 </p>
- 
- 
 </html>"));
   end fromReal;
 
   function fromTransferFunction =
-      Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace annotation (Documentation(info="<html> </html>"));
+      Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace
+      "Generate a StateSpace data record from a transfer function"                                                                  annotation (Documentation(info="<html> </html>"));
   function fromZerosAndPoles =
-      Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace annotation (Documentation(info="<html> </html>"));
+      Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace
+      "Generate a StateSpace data record from a zeros-and-poles system"                                                               annotation (Documentation(info="<html> </html>"));
 
     annotation (Documentation(info="<html>
-This package contains the default constructors for StateSpace record.
+<p>This package contains the default constructors for a StateSpace record. </p>
 </html>"));
 end 'constructor';
 
@@ -171,36 +177,26 @@ encapsulated operator '-'
     result.C := [ss1.C,-ss2.C];
     result.D := ss1.D - ss2.D;
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.StateSpace.'-'.<b>subtract</b>(ss1, ss2)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-This operator function computes the subtraction of two state space systems connected in parallel, i.e. the inputs are the same and the outputs of the two systems are subtracted. Therefore, The systems must have the same number of inputs and outputs but not the same number of states. The resulting system has an order of system_order1 + system_order2.<br>
-The operator is used by writing just the following command:
-<blockquote><pre>
-    ss3 := ss1 - ss2;
-</pre></blockquote>
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
-   StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
+<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<blockquote><code>ss = Modelica_LinearSystems2.StateSpace.&apos;-&apos;.<b>subtract</b>(ss1, ss2) </code></blockquote>
+<p><h4><font color=\"#008000\">Description</font></h4></p>
+<p>This operator function computes the subtraction of two state space systems connected in parallel, i.e. the inputs are the same and the outputs of the two systems are subtracted. Therefore, the systems must have the same number of inputs and outputs but not the same number of states. The resulting system has an order of system_order1 + system_order2.</p>
+<p>The operator is used by writing just the following command: </p>
+<blockquote><code>ss3 := ss1 - ss2;</code> </blockquote>
+<p><h4><font color=\"#008000\">Example</font></h4></p>
+<blockquote><pre>  StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
+  StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
    
-   StateSpace ss3;
+  StateSpace ss3;
 
 <b>algorithm</b>
   ss3 := ss1 - ss2;
 // ss.A = [-1, 0, 0, 0; 0, -2, 0, 0; 0, 0, -3, 0; 0, 0, 0, -4],
 // ss.B = [1; 2; 3; 4],
 // ss.C = [0, 1, 0, -2],
-// ss.D = [0],
-</pre></blockquote>
 
-</html> "));
+// ss.D = [0], </pre></blockquote>
+</html>"));
   end subtract;
 
   function negate
@@ -2508,10 +2504,10 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
  encapsulated function timeResponse
       "Calculate the time response of a state space system"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+   import Modelica;
+   import Modelica_LinearSystems2;
+   import Modelica_LinearSystems2.StateSpace;
+   import Modelica_LinearSystems2.Types.TimeResponse;
 
    input TimeResponse response=TimeResponse.Step;
    extends Modelica_LinearSystems2.Internal.timeResponseMask2(redeclare Real y[:,size(sc.C, 1),if response == TimeResponse.Initial then 1 else size(sc.B, 2)],
@@ -2537,122 +2533,107 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
 
  algorithm
       // set sample time and simulation time span
-  if (dt == 0 and tSpan == 0) then
-    (dtVar,tSpanVar) := Modelica_LinearSystems2.Internal.timeResponseSamples(
-      sc);
-  elseif (dt == 0 and tSpan <> 0) then
-    dtVar := Modelica_LinearSystems2.Internal.timeResponseSamples(sc);
-    tSpanVar := tSpan;
-  elseif (dt <> 0 and tSpan == 0) then
-    (,tSpanVar) := Modelica_LinearSystems2.Internal.timeResponseSamples(sc);
-    dtVar := dt;
-  else
-    dtVar := dt;
-    tSpanVar := tSpan;
-  end if;
+   if (dt == 0 and tSpan == 0) then
+     (dtVar,tSpanVar) := Modelica_LinearSystems2.Internal.timeResponseSamples(
+     sc);
+   elseif (dt == 0 and tSpan <> 0) then
+     dtVar := Modelica_LinearSystems2.Internal.timeResponseSamples(sc);
+     tSpanVar := tSpan;
+   elseif (dt <> 0 and tSpan == 0) then
+     (,tSpanVar) := Modelica_LinearSystems2.Internal.timeResponseSamples(sc);
+     dtVar := dt;
+   else
+     dtVar := dt;
+     tSpanVar := tSpan;
+   end if;
 
-  samples := integer(tSpanVar/dtVar + 1);
-  t := 0:dtVar:tSpanVar;
-  u := zeros(samples, size(sc.B, 2));
-  y := if response == TimeResponse.Initial then zeros(samples, size(sc.C, 1),1) else zeros(samples, size(sc.C, 1),size(sc.B, 2));
-  x_continuous :=  if response == TimeResponse.Initial then zeros(samples, size(sc.A, 1),  1) else zeros(samples, size(sc.A, 1),  size(sc.B, 2));
+   samples := integer(tSpanVar/dtVar + 1);
+   t := 0:dtVar:tSpanVar;
+   u := zeros(samples, size(sc.B, 2));
+   y := if response == TimeResponse.Initial then zeros(samples, size(sc.C, 1),1) else zeros(samples, size(sc.C, 1),size(sc.B, 2));
+   x_continuous :=  if response == TimeResponse.Initial then zeros(samples, size(sc.A, 1),  1) else zeros(samples, size(sc.A, 1),  size(sc.B, 2));
 
- if response == TimeResponse.Initial then
-      sd := Modelica_LinearSystems2.DiscreteStateSpace(
-          sc,
-          dtVar,
-          Modelica_LinearSystems2.Types.Method.Trapezoidal);
-    (y[:, :, 1],x_continuous[:, :, 1]) :=
-      Modelica_LinearSystems2.DiscreteStateSpace.initialResponse(sd, x0, samples);
-    else
+   if response == TimeResponse.Initial then
+     sd := Modelica_LinearSystems2.DiscreteStateSpace(
+       sc,
+       dtVar,
+       Modelica_LinearSystems2.Types.Method.Trapezoidal);
+     (y[:, :, 1],x_continuous[:, :, 1]) :=
+       Modelica_LinearSystems2.DiscreteStateSpace.initialResponse(sd, x0, samples);
+   else
 
-  for i1 in 1:size(sc.B, 2) loop
-        // Loop over inputs
+     for i1 in 1:size(sc.B, 2) loop
+     // Loop over inputs
 
-        // time response to plot
-    if response == TimeResponse.Impulse then
-      u[1, :] := zeros(size(sc.B, 2));
-      u[1, i1] := 1;
-      sd := Modelica_LinearSystems2.DiscreteStateSpace(
-          sc,
-          dtVar,
-          Modelica_LinearSystems2.Types.Method.ImpulseExact);
-    elseif response == TimeResponse.Step then
-      u[:, :] := zeros(samples, size(sc.B, 2));
-      u[:, i1] := ones(samples);
-      sd := Modelica_LinearSystems2.DiscreteStateSpace(
-          sc,
-          dtVar,
-          Modelica_LinearSystems2.Types.Method.StepExact);
-    elseif response == TimeResponse.Ramp then
-      u[:, :] := zeros(samples, size(sc.B, 2));
-      u[:, i1] := 0:dtVar:tSpanVar;
-      sd := Modelica_LinearSystems2.DiscreteStateSpace(
-          sc,
-          dtVar,
-          Modelica_LinearSystems2.Types.Method.RampExact);
+     // time response to plot
+     if response == TimeResponse.Impulse then
+       u[1, :] := zeros(size(sc.B, 2));
+       u[1, i1] := 1;
+       sd := Modelica_LinearSystems2.DiscreteStateSpace(
+         sc,
+         dtVar,
+         Modelica_LinearSystems2.Types.Method.ImpulseExact);
+     elseif response == TimeResponse.Step then
+       u[:, :] := zeros(samples, size(sc.B, 2));
+       u[:, i1] := ones(samples);
+       sd := Modelica_LinearSystems2.DiscreteStateSpace(
+         sc,
+         dtVar,
+         Modelica_LinearSystems2.Types.Method.StepExact);
+     elseif response == TimeResponse.Ramp then
+       u[:, :] := zeros(samples, size(sc.B, 2));
+       u[:, i1] := 0:dtVar:tSpanVar;
+       sd := Modelica_LinearSystems2.DiscreteStateSpace(
+         sc,
+         dtVar,
+         Modelica_LinearSystems2.Types.Method.RampExact);
  //    elseif response == TimeResponse.Initial then
  //      u[:, :] := zeros(samples, size(sc.B, 2));
  //      sd := Modelica_LinearSystems2.DiscreteStateSpace(
  //          sc,
  //          dtVar,
  //          Modelica_LinearSystems2.Types.Method.Trapezoidal);
-    else
-      assert(false, "Argument response (= " + String(response) +
-        ") of \"Time response to plot\" is wrong.");
-    end if;
-    (y[:, :, i1],x_continuous[:, :, i1]) :=
-      Modelica_LinearSystems2.DiscreteStateSpace.timeResponse(
-        sd,
-        u,
-        x0);
+     else
+       assert(false, "Argument response (= " + String(response) +
+         ") of \"Time response to plot\" is wrong.");
+     end if;
 
-  end for;
- end if;
+     (y[:, :, i1],x_continuous[:, :, i1]) :=
+       Modelica_LinearSystems2.DiscreteStateSpace.timeResponse(sd,u,x0);
+     end for;
+   end if;
 
-    annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>timeResponse</b>(ss, dt, tSpan, responseType, x0)  </td> </tr>
-
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function timeResponse calculates the time responses of a state space system. The type of the time response is defined by the input <b>responseType</b>, i.e. 
-<blockquote><pre>
-    Impulse \"Impulse response\",
-    Step \"Step response\",
-    Ramp \"Ramp response\",
-    Initial \"Initial condition response\"
-</pre></blockquote>
-The state space system is transformed to a appropriate discrete state space system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt.
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1],
-      B=[1],
-      C=[2],
-      D=[0]);
-  Real Ts=0.1;
-  Real tSpan= 0.4;
-  Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
-  Real x0[1]={0};
+   annotation (Documentation(info="<html>
+<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<blockquote><code>(y, t, x) = StateSpace.Analysis.<b>timeResponse</b>(ss, dt, tSpan, responseType, x0)</code> </blockquote>
+<p><h4><font color=\"#008000\">Description</font></h4></p>
+<p>This function calculates the time responses of a state space system. The type of the time response is defined by the input <code>responseType</code>, i.e. </p>
+<blockquote><pre>Impulse &QUOT;Impulse response&QUOT;,
+Step &QUOT;Step response&QUOT;,
+Ramp &QUOT;Ramp response&QUOT;,
+Initial &QUOT;Initial condition response&QUOT;</pre></blockquote>
+<p>The state space system is transformed to a appropriate discrete state space system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt. </p>
+<p><h4><font color=\"#008000\">Example</font></h4></p>
+<blockquote><pre>  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1],
+    B=[1],
+    C=[2],
+    D=[0]);
+  Real Ts = 0.1;
+  Real tSpan = 0.4;
+  Modelica_LinearSystems2.Types.TimeResponse response = Modelica_LinearSystems2.Types.TimeResponse.Step;
+  Real x0[1] = {0};
 
   Real y[5,1,1];
   Real t[5];
   Real x[5,1,1] 
 
 <b>algorithm</b>
-  (y,t,x):=Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(ss,Ts,tSpan,response,x0);
-//  y[:,1,1]={0, 0.19, 0.3625, 0.518, 0.659}
-//         t={0, 0.1, 0.2, 0.3, 0.4}
-//  x[:,1,1]={0, 0.0952, 0.1813, 0.2592, 0.33}
-</pre></blockquote>
-
-
-</html> ", revisions="<html>
+  (y,t,x) := Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(ss,Ts,tSpan,response,x0);
+  // y[:,1,1] = {0, 0.19, 0.3625, 0.518, 0.659}
+  //        t = {0, 0.1, 0.2, 0.3, 0.4}
+  // x[:,1,1] = {0, 0.0952, 0.1813, 0.2592, 0.33} </pre></blockquote>
+</html>",  revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
@@ -2678,34 +2659,20 @@ algorithm
       x0=zeros(size(sc.A, 1)));
 
 annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>impulseResponse</b>(ss, dt, tSpan)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function <b>impulseResponse</b> calculates the time response of a state space system for impulse imput. 
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
-<blockquote><pre>
-StateSpace.Analysis.impulseResponse(ss, dt, tSpan)
-</pre></blockquote>
-gives the same result as
-<blockquote><pre>
-StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,size(ss.A,1))).
-</pre></blockquote>
-See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
-
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1],
-      B=[1],
-      C=[2],
-      D=[0]);
+<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<blockquote><code>(y, t, x) = StateSpace.Analysis.<b>impulseResponse</b>(ss, dt, tSpan) </code></blockquote>
+<p><h4><font color=\"#008000\">Description</font></h4></p>
+<p>This function calculates the time response of a state space system for impulse imput. The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt. </p>
+<blockquote><pre>StateSpace.Analysis.impulseResponse(ss, dt, tSpan)</pre></blockquote>
+<p>gives the same result as </p>
+<blockquote><pre>StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,size(ss.A,1))).</pre></blockquote>
+<p>See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a> </p>
+<p><h4><font color=\"#008000\">Example</font></h4></p>
+<blockquote><pre>  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1],
+    B=[1],
+    C=[2],
+    D=[0]);
   Real Ts=0.1;
   Real tSpan= 0.4;
  
@@ -2714,14 +2681,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
   Real x[5,1,1] 
 
 <b>algorithm</b>
-  (y,t,x):=StateSpace.Analysis.impulseResponse(ss,Ts,tSpan);
-//  y[:,1,1]={2, 1.8097, 1.6375, 1.4816, 1.3406}
-//         t={0, 0.1, 0.2, 0.3, 0.4}
-//  x[:,1,1]={1, 0.9048, 0.8187, 0.7408, 0.6703}
-</pre></blockquote>
-
-
-</html> ", revisions="<html>
+  (y,t,x) := StateSpace.Analysis.impulseResponse(ss,Ts,tSpan);
+  // y[:,1,1] = {2, 1.8097, 1.6375, 1.4816, 1.3406}
+  //        t = {0, 0.1, 0.2, 0.3, 0.4}
+  // x[:,1,1] = {1, 0.9048, 0.8187, 0.7408, 0.6703} </pre></blockquote>
+</html>",  revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
@@ -3443,7 +3407,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
     output Real K[size(ss.C,1), size(ss.B,2)]
         "DC gain matrix K (= G(s=0) = D - C*inv(A)*B)";
     output Boolean finite
-        "= true, if K is finite; = false, if K is infinite (K=fill(Modelica.Constants.inf,..) returned)";
+        "True, if K is finite, otherwise K is infinite (K=fill(Modelica.Constants.inf,..) returned)";
 
     protected
     Integer nx = size(ss.A,1);
@@ -5164,7 +5128,7 @@ and results in
       input Integer iy=1 "index of output";
       input Integer nPoints(min=2) = 200 "Number of points";
       input Boolean autoRange=true
-        "= true, if abszissa range is automatically determined";
+        "True, if abszissa range is automatically determined";
       input Modelica.SIunits.Frequency f_min=0.1
         "Minimum frequency value, if autoRange = false";
       input Modelica.SIunits.Frequency f_max=10
@@ -5273,8 +5237,7 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
       input Boolean autoRange[:,:]=fill(
           true,
           size(ss.C, 1),
-          size(ss.B, 2))
-        "= true, if abszissa range is automatically determined";
+          size(ss.B, 2)) "True, if abszissa range is automatically determined";
       input Modelica.SIunits.Frequency f_min[:,:]=fill(
           0.1,
           size(ss.C, 1),
@@ -5393,7 +5356,7 @@ StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnit
       input Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
 
       input Boolean subPlots=true
-        "true if all subsystem time responses are plotted in one window with subplots"
+        "True, if all subsystem time responses are plotted in one window with subplots"
                                                                                          annotation(Dialog,choices(__Dymola_checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
@@ -5518,7 +5481,7 @@ Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
       input Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
 
       input Boolean subPlots=true
-        "true if all subsystem time responses are plotted in one window with subplots"
+        "True, if all subsystem time responses are plotted in one window with subplots"
                                                                                          annotation(Dialog,choices(__Dymola_checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response"));
@@ -5597,7 +5560,7 @@ Modelica_LinearSystems2.StateSpace.Plot.impulse(ss)
       input Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
 
       input Boolean subPlots=true
-        "true if all subsystem time responses are plotted in one window with subplots"
+        "True, if all subsystem time responses are plotted in one window with subplots"
                                                                                          annotation(Dialog,choices(__Dymola_checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Step response"));
@@ -5678,7 +5641,7 @@ Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
     input Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
 
     input Boolean subPlots=true
-        "true if all subsystem time responses are plotted in one window with subplots"
+        "True, if all subsystem time responses are plotted in one window with subplots"
                                                                                          annotation(Dialog,choices(__Dymola_checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
@@ -5756,7 +5719,7 @@ Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
       input Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
 
       input Boolean subPlots=true
-        "true if all subsystem time responses are plotted in one window with subplots"
+        "True, if all subsystem time responses are plotted in one window with subplots"
                                                                                          annotation(Dialog,choices(__Dymola_checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
@@ -6800,20 +6763,22 @@ Function <b>extract</b> computes the subsystem of a state space system correspon
   end Transformation;
 
 encapsulated package Import
-    "Utilitiy functions to import StaeSpace representations"
-    import Modelica;
+    "Collection of utilitiy functions to import StaeSpace representations"
   extends Modelica.Icons.Package;
+  import Modelica;
 
   encapsulated function fromFile "Read a StateSpace data record from mat-file"
 
-      import Modelica;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace.Internal;
+    import Modelica;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace.Internal;
+
     input String fileName="dslin.mat"
-        "Name of the state space system data file"     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+        "Name of the state space system data file"
+      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="state space system data file")));
-    input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
+    input String matrixName="ABCD" "Name of the state space system matrix" annotation(Dialog);
     protected
     input Integer xuy[3]=Internal.readSystemDimension(fileName, matrixName);
     input Integer nx=xuy[1];
@@ -6873,14 +6838,15 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
   function fromModel
       "Generate a StateSpace data record by linearization of a model"
 
-      import Modelica;
-      import Modelica_LinearSystems2.StateSpace;
+    import Modelica;
+    import Modelica_LinearSystems2.StateSpace;
 
     input String modelName "Name of the Modelica model" annotation(Dialog(translatedModel));
     input Real T_linearize=0
         "Simulate until T_linearize and then linearize the model";
     input String fileName="dslin" "Name of the result file";
     input String method="Dassl" "Integration method";
+
     protected
     String fileName2=fileName + ".mat";
     Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize, method=method);
@@ -9654,8 +9620,8 @@ inputs and the number of outputs must be identical.
 function read_dslin
       "Generate a StateSpace data record by linearization of a model"
 
-      import Modelica;
-      import Modelica_LinearSystems2.StateSpace;
+  import Modelica;
+  import Modelica_LinearSystems2.StateSpace;
 
   input String fileName="dslin" "Name of the result file";
 
@@ -9748,17 +9714,18 @@ end Internal;
 This record defines a linear time invariant differential
 equation system in state space form:
 </p>
-<pre>    <b>der</b>(x) = A * x + B * u
-        y  = C * x + D * u
+<pre>
+   <b>der</b>(x) = A * x + B * u
+       y  = C * x + D * u
 </pre>
 <p>
 with
 </p>
 <ul>
-<li> u - the input vector</li>
-<li> y - the output vector</li>
-<li> x - the state vector</li>
-<li> A,B,C,D - matrices of appropriate dimensions</li>
+<li> u ... the input vector,</li>
+<li> y ... the output vector,</li>
+<li> x ... the state vector,</li>
+<li> A, B, C, D - matrices of appropriate dimensions.</li>
 </ul>
 </html>"),
     DymolaStoredErrors);

@@ -12,7 +12,7 @@ partial function timeResponseMask
   input Boolean clearWindow[:,:]=fill(
       false,
       size(sc.C, 1),
-      size(sc.B, 2)) "= true, if previous window content is removed" annotation(Dialog(enable=max(toWindow)>=0));
+      size(sc.B, 2)) "True, if previous window content is removed" annotation(Dialog(enable=max(toWindow)>=0));
   input String heading[:,:]=fill(
       "Time response",
       size(sc.C, 1),

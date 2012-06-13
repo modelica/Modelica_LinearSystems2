@@ -497,11 +497,11 @@ in a least squares sense.
 
     input Polynomial p "Polynomial to be plotted";
     input Integer nPoints(min=2) = 200 "Number of points";
-    input Boolean autoLabel=true "= true, if automatically selected labels";
+    input Boolean autoLabel=true "True, if automatically selected labels";
     input String xLabel="" "Abszissa description, if autoLabel = false";
     input String yLabel="" "Ordinate description, if autoLabel = false";
     input Boolean autoRange=true
-      "= true, if abszissa range is automatically determined";
+      "True, if abszissa range is automatically determined";
     input Real x_min=-1.0 "Minimum abszissa value, if autoRange = false";
     input Real x_max=1.0 "Maximum abszissa value, if autoRange = false";
   protected
@@ -742,7 +742,7 @@ Horner's method is used for polynomial evaluation.
     import Modelica_LinearSystems2.Math.Complex;
 
     input Polynomial p "Polynomial";
-    input Boolean printRoots=false "= true, if roots shall be pretty printed";
+    input Boolean printRoots=false "True, if roots shall be pretty printed";
     output Complex result[:]=fill(Complex(0, 0),
         Polynomial.numberOfRoots(p)) "Roots of polynomial";
 

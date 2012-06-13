@@ -16,7 +16,7 @@ block Derivative "Approximate derivative (continuous or discrete block)"
     "State of approximative derivative";
 protected
   parameter Boolean zeroGain = abs(k) < Modelica.Constants.eps
-    "= true, if k is considered to be zero";
+    "True, if k is considered to be zero";
 equation
   if continuous then
      der(x) = if zeroGain then 0 else (u - x)/T;

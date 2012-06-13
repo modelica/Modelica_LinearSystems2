@@ -17,7 +17,7 @@ block DiscreteInterpolator
 protected
   Integer inputOutputSampleFactor = div(inputSampleFactor,outputSampleFactor);
   outer SampleClock sampleClock "Global options";
-  Boolean outputSampleTrigger "= true, if output sample time";
+  Boolean outputSampleTrigger "True, if output sample time";
   Integer outputTicks(start=0, fixed=true);
   Integer ticks(start=1, fixed=true);
   Real pre_u;

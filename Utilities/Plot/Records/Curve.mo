@@ -6,7 +6,7 @@ record Curve "Properties of a curve (displayed in a diagram)"
    Real y[:] "y-values of curve" annotation(Dialog);
    String legend="" "Legend text of curve" annotation(Dialog);
 
-   Boolean autoLine = true "= true, if automatic line properties of curve"
+   Boolean autoLine = true "True, if automatic line properties of curve"
      annotation(Dialog,  choices(__Dymola_checkBox=true));
 
    Integer lineColor[3]={0,0,255} "Color of curve as rgb values"

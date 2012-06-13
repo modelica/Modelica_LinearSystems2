@@ -635,7 +635,7 @@ encapsulated function bodeSISO
   input Integer iy=1 "index of output";
   input Integer nPoints(min=2) = 200 "Number of points";
   input Boolean autoRange=true
-        "= true, if abszissa range is automatically determined";
+        "True, if abszissa range is automatically determined";
   input Modelica.SIunits.Frequency f_min=0.1
         "Minimum frequency value, if autoRange = false";
   input Modelica.SIunits.Frequency f_max=10
@@ -827,7 +827,7 @@ end kfStepMatrices;
     input Real A[:,:];
     input Real B[size(A, 2),size(A, 2)];
     input Real C[size(A, 1),size(A, 1)];
-    input Boolean add=true "true if a==1, false if a==0";
+    input Boolean add=true "Value is true if a==1, false if a==0";
     output Real M[size(A, 1),size(A, 1)];
 
     protected

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function importFromModel
-  "This example demonstrates how to generate a linear state space system from a (nonlinear) Modelica moodel"
+  "Generate a linear state space system from a (nonlinear) Modelica model"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2;
@@ -13,5 +13,7 @@ function importFromModel
   output StateSpace ss=StateSpace.Import.fromModel(modelName=modelName, T_linearize=T_linearize);
 algorithm
 
-annotation (interactive=true);
+annotation (interactive=true, Documentation(info="<html>
+<p>This example demonstrates how to generate a linear state space system from a (nonlinear) Modelica model.</p>
+</html>"));
 end importFromModel;

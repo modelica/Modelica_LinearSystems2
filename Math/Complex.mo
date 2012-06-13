@@ -213,7 +213,7 @@ function sortComplex "Sort elements of complex vector"
   input Boolean ascending = true
         "= true if ascending order, otherwise descending order";
   input Boolean sortFrequency=true
-        "= true, if sorting is first for imaginary then for real value; = false, if sorting is for absolute value";
+        "True, if sorting is first for imaginary then for real value, otherwise sorting is for absolute value";
   output Complex sorted_v[size(v,1)] = v "Sorted vector";
   output Integer indices[size(v,1)] = 1:size(v,1) "sorted_v = v[indices]";
 

@@ -7,13 +7,12 @@ function conversionFromZerosAndPoles
 
   input ZerosAndPoles zp= Modelica_LinearSystems2.ZerosAndPoles({2+0*j}, {1+0*j,2+3*j,2-3*j}, 4);
 protected
- input Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j = Modelica_LinearSystems2.Math.Complex.j();
 public
   output Boolean ok;
 
 protected
   StateSpace ss=StateSpace(zp);
-
   ZerosAndPoles zp2;
 
 algorithm

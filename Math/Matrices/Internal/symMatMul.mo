@@ -9,7 +9,7 @@ function symMatMul
   input Real A[:,:];
   input Real B[size(A, 2),size(A, 2)];
   input Real C[size(A, 1),size(A, 1)];
-  input Boolean add=true "true if a==1, false if a==0";
+  input Boolean add=true "Value is true if a==1, false if a==0";
   output Real M[size(A, 1),size(A, 1)];
 
 protected

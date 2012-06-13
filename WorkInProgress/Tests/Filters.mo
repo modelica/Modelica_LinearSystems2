@@ -18,7 +18,7 @@ package Filters
      input Modelica.SIunits.Frequency f_min=0
       "Band of pass band filter is f_min (-3db) .. f_cut (-3db)";
      input Boolean normalized=true
-      "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
+      "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   protected
     function getAmplitude "Compute amplitude at f_cut and return it as string"
       input ZP zp;
@@ -156,7 +156,7 @@ package Filters
      input Modelica.SIunits.Frequency f_min=0
       "Band of pass band filter is f_min (-3db) .. f_cut (-3db)";
      input Boolean normalized=true
-      "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
+      "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   algorithm
      plotFilter(Types.AnalogFilter.CriticalDamping, filterType, f_cut, A_ripple, f_min, normalized);
      plotFilter(Types.AnalogFilter.Bessel,          filterType, f_cut, A_ripple, f_min, normalized);
@@ -174,7 +174,7 @@ package Filters
      input Modelica.SIunits.Frequency f_min=2
       "Band of pass band filter is f_min (-3db) .. f_cut (-3db)";
      input Boolean normalized=true
-      "= true, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
+      "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   algorithm
      //plotFilter2(Types.FilterType.LowPass,  f_cut, A_ripple, f_min, normalized);
      //plotFilter2(Types.FilterType.HighPass, f_cut, A_ripple, f_min, normalized);
@@ -195,7 +195,7 @@ package Filters
     constant Real eps = 0.001;
     ZP zp;
     Integer maxOrder = 5;
-    Boolean evenOrder "= true, if even filter order (otherwise uneven)";
+    Boolean evenOrder "True, if even filter order, otherwise uneven";
     Real c;
     Real k;
     Boolean gainIsOne;

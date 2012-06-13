@@ -1,16 +1,16 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function conversionToTransferFunctionMIMO
-  "Example to compute a transfer function matrix of a MIMO system from state space representation"
+  "Compute a transfer function matrix of a MIMO system from state space representation"
   import Modelica;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.StateSpace;
 
   input Boolean systemOnFile=false
-    "true, if state space system is defined on file"
+    "True, if state space system is defined on file"
     annotation(Dialog(group="system data definition"),choices(checkBox=true));
 
-  input String fileName="NoName" "file where matrix [A, B; C, D] is stored" annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+  input String fileName="NoName" "File where matrix [A, B; C, D] is stored" annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file"),enable = systemOnFile));
   input String matrixName="ABCD" "Name of the state space system matrix"   annotation(Dialog(group="system data definition",enable = systemOnFile));
 
@@ -43,6 +43,6 @@ algorithm
   end for;
   ok := true;
   annotation (interactive=true, Documentation(info="<html>
-This example demonstrates the conversion of a MIMO transfer function into a state space system.
+<p>This example demonstrates the conversion from a state space representation of a system into a MIMO transfer function. </p>
 </html>"));
 end conversionToTransferFunctionMIMO;

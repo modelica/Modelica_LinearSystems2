@@ -15,7 +15,7 @@ function analysisControllability
      D=[0,0; 0,0; 0,0]);
 
   input Boolean systemOnFile=false
-    "true, if state space system is defined on file"
+    "True, if state space system is defined on file"
    annotation(Dialog(group="system data definition"),choices(checkBox=true));
   input String fileName="NoName" "file where matrix [A, B; C, D] is stored"
                                                                            annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",

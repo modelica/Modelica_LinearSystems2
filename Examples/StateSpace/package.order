@@ -9,6 +9,7 @@ analysisImpulseResponse
 analysisStepResponse
 analysisPolesAndZerosSISO
 analysisInvariantZeros
+analysisPolesAndZeros_SISO
 analysisStairCase
 conversionFromZerosAndPoles
 conversionToTransferFunctionMIMO
@@ -24,13 +25,13 @@ importFromModel
 plotPolesAndZeros
 plotBodeMIMO
 plotBodeSISO
-plotTimeResponse
+plotEigenvalues
 plotImpulse
 plotInital
 plotRamp
 plotStep
+plotTimeResponse
 plotZeros
 transformation
 transformationExtract
 transformationToIrreducibleForm
-analysisPolesAndZeros_SISO

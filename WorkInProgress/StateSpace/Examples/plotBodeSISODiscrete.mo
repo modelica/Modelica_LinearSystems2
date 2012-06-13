@@ -8,7 +8,7 @@ function plotBodeSISODiscrete
   import Modelica_LinearSystems2.TransferFunction;
 
   input Boolean systemOnFile=false
-    "true, if state space system is defined on file"
+    "True, if state space system is defined on file"
   annotation (interactive=true);
   input String fileName="NoName" "file where matrix [A, B; C, D] is stored";
 

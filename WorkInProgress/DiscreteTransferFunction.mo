@@ -293,7 +293,7 @@ encapsulated function bode "Plot transfer function as bode plot"
   input DiscreteTransferFunction dtf "DiscreteTransfer function to be plotted";
   input Integer nPoints(min=2) = 200 "Number of points";
   input Boolean autoRange=true
-        "= true, if abszissa range is automatically determined";
+        "True, if abszissa range is automatically determined";
   input Modelica.SIunits.Frequency f_min(min=0) = 0.1
         "Minimum frequency value, if autoRange = false"
                                                     annotation(Dialog(enable=not autoRange));

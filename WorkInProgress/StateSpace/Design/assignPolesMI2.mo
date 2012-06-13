@@ -68,9 +68,9 @@ protected
   Complex pi[:]=Complex.eigenValues(ss.A);
 
   Boolean complex_assignedPoles=false
-    "true if there is at least one conjugated comples pole pair in the set of the assigned poles";
+    "True, if there is at least one conjugated comples pole pair in the set of the assigned poles";
   Boolean complex_originalPoles=false
-    "true if there is at least one conjugated comples pole pair in the set of unmodified system poles";
+    "True, if there is at least one conjugated comples pole pair in the set of unmodified system poles";
   Boolean consistency;
 
   Complex SS[:,:];

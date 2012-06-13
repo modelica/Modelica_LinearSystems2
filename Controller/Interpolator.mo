@@ -21,7 +21,7 @@ block Interpolator
   final parameter Boolean continuous = blockType == Types.BlockTypeWithGlobalDefault.Continuous or
                                  blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Continuous
-    "= true, if continuous block, otherwise discrete block";
+    "True, if continuous block, otherwise discrete block";
   parameter Integer inputSampleFactor(min=1)=1 if not continuous
     "Input sample time = inputSampleFactor * sampleClock.sampleTime"
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));

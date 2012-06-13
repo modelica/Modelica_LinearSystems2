@@ -6,7 +6,7 @@ block DiscreteDAconverter
   parameter Integer bits(min=0)
     "Number of bits (=0 means no quantization error)";
   parameter Boolean unitDelay = true
-    "= true, if one sample period delay, = false, if computing time not modelled";
+    "True, if one sample period delay, = false, if computing time not modelled";
   extends Interfaces.PartialDiscreteSISO_equality;
 protected
   parameter Real quantization=if bits > 0 then ((y_max - y_min)/2^bits) else 0;

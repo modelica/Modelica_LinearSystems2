@@ -12,7 +12,7 @@ partial function timeResponseMask_zp
   input Boolean clearWindow[:,:]=fill(
       false,
       1,
-      1) "= true, if previous window content is removed"             annotation(Dialog(enable=max(toWindow)>=0));
+      1) "True, if previous window content is removed"             annotation(Dialog(enable=max(toWindow)>=0));
   input String heading[:,:]=fill(
       "Time response",
       1,

@@ -1085,7 +1085,7 @@ Computes the invariant zeros of the corresponding state space representation of 
       input TransferFunction tf "Transfer function of a system";
       output Real k "Steady state gain";
       output Boolean finite = true
-        "= true, if k is finite; = false, if k is infinite (k=Modelica.Constants.inf returned)";
+        "True, if k is finite, otherwise k is infinite (k=Modelica.Constants.inf returned)";
     protected
       StateSpace ss=StateSpace(tf);
       Real K[1,1];
@@ -1445,7 +1445,7 @@ of a transfer function.
       input Real A_ripple(unit="dB") = 0.5
         "Pass band ripple for Chebyshev filter (otherwise not used)";
       input Boolean normalized=true
-        "= true, if amplitude of low pass filter at f_cut where the magnitude of the filter sagged for 3dB, otherwise unmodified filter";
+        "True, if amplitude of low pass filter at f_cut where the magnitude of the filter sagged for 3dB, otherwise unmodified filter";
 
       output TransferFunction filter "Filter transfer function";
 
@@ -1600,7 +1600,7 @@ and results in
       input TransferFunction tf "Transfer function to be plotted";
       input Integer nPoints(min=2) = 200 "Number of points";
       input Boolean autoRange=true
-        "= true, if abszissa range is automatically determined";
+        "True, if abszissa range is automatically determined";
       input Modelica.SIunits.Frequency f_min(min=0) = 0.1
         "Minimum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
       input Modelica.SIunits.Frequency f_max(min=0) = 10

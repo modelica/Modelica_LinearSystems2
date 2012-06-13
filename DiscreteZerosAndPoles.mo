@@ -1348,7 +1348,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
         "DiscreteZerosAndPoles function to be plotted";
     input Integer nPoints(min=2) = 200 "Number of points";
     input Boolean autoRange=true
-        "= true, if abszissa range is automatically determined";
+        "True, if abszissa range is automatically determined";
     input Modelica.SIunits.Frequency f_min(min=0) = 0.1
         "Minimum frequency value, if autoRange = false"
                                                       annotation(Dialog(enable=not autoRange));

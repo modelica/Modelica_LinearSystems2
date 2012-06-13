@@ -6,7 +6,7 @@ function isEqual
   input Real u2 "Second scalar";
   input Real eps(min=0) = 0.0
     "The two scalars are identical if abs(u1-u2) <= eps";
-  output Boolean result "= true, if abs(u1-u2) <= eps";
+  output Boolean result "True, if abs(u1-u2) <= eps";
 algorithm
   result :=abs(u1 - u2) <= eps;
 

@@ -12,7 +12,7 @@ block IntegratorXX
 
   parameter Real k=1 "Integrator gain";
   parameter Boolean withDelay=false
-    "= true, if the output is delayed by one sample period (only if discrete)";
+    "True, if the output is delayed by one sample period (only if discrete)";
   parameter Boolean limitsAtInit=true
     "= false, if limits are ignored during initializiation (i.e., y=u)";
 

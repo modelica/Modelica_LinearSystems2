@@ -2236,7 +2236,7 @@ encapsulated function bodeSISO
   input Integer iy=1 "index of output";
   input Integer nPoints(min=2) = 200 "Number of points";
   input Boolean autoRange=true
-        "= true, if abszissa range is automatically determined";
+        "True, if abszissa range is automatically determined";
   input Modelica.SIunits.Frequency f_min=0.1
         "Minimum frequency value, if autoRange = false";
   input Modelica.SIunits.Frequency f_max=10
@@ -2364,7 +2364,7 @@ encapsulated function timeResponse
   input Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
 
   input Boolean subPlots=true
-        "true if all subsystem time responses are plotted in one window with subplots"
+        "True, if all subsystem time responses are plotted in one window with subplots"
                                                                                      annotation(Dialog,choices(__Dymola_checkBox=true));
 
   extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
@@ -2507,7 +2507,7 @@ encapsulated function impulse
     input Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
 
     input Boolean subPlots=true
-        "true if all subsystem time responses are plotted in one window with subplots"
+        "True, if all subsystem time responses are plotted in one window with subplots"
                                                                                      annotation(Dialog,choices(__Dymola_checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
@@ -2589,7 +2589,7 @@ encapsulated function step
     input Real tSpan=0 "Simulation time span [s]";
 
     input Boolean subPlots=true
-        "true if all subsystem time responses are plotted in one window with subplots"
+        "True, if all subsystem time responses are plotted in one window with subplots"
                                                                                      annotation(Dialog,choices(__Dymola_checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
@@ -2673,7 +2673,7 @@ encapsulated function ramp
     input Real tSpan=0 "Simulation time span [s]";
 
     input Boolean subPlots=true
-        "true if all subsystem time responses are plotted in one window with subplots"
+        "True, if all subsystem time responses are plotted in one window with subplots"
                                                                                      annotation(Dialog,choices(__Dymola_checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
@@ -2755,7 +2755,7 @@ encapsulated function initialResponse
   input Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
 
   input Boolean subPlots=true
-        "true if all subsystem time responses are plotted in one window with subplots"
+        "True, if all subsystem time responses are plotted in one window with subplots"
                                                                                      annotation(Dialog,choices(__Dymola_checkBox=true));
 
   extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(

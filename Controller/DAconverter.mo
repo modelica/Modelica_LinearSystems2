@@ -4,7 +4,7 @@ block DAconverter "Digital to analog converter (including zero order hold)"
   parameter Real y_min "Lower limit of output signal";
   parameter Integer bits(min=0) "Number of bits (=0 : no quantization error)";
   parameter Boolean unitDelay=true
-    "= true, if one sample period delay, = false, if computing time not modelled";
+    "True, if one sample period delay, otherwise computing time not modelled";
   extends Interfaces.PartialSISO_equality;
 protected
   Internal.DiscreteDAconverter discretePart(

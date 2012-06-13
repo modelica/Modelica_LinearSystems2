@@ -9,7 +9,7 @@ function sortEigenvalue
   input Boolean ascending = true
     "= true if ascending order, otherwise descending order";
   input Boolean sortFrequency=true
-    "= true, if sorting is first for imaginary then for real value; = false, if sorting is for absolute value";
+    "True, if sorting is first for imaginary then for real value, otherwise sorting is for absolute value";
   output Eigenvalue sorted_ev[size(ev,1)] = ev "Sorted vector";
   output Integer indices[size(ev,1)] = 1:size(ev,1) "sorted_ev = ev[indices]";
 
