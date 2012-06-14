@@ -1,23 +1,26 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function plotEigenvalues
-  "Calculate eigenvalues of matrix A and plot root locii"
+  "Calculate eigenvalues of matrix A and plot root locus"
+  import Modelica_LinearSystems2.Utilities.Types.MarkerStyles;
 
   input Real A[:,size(A, 1)] = [2,1,1;1,1,1;1,2,2] "Square matrix";
   input Boolean removePrevious=true
-    "True, if all previous plots should be deleted";
-  input String heading="Root locii" "Heading of plot";
-  input String legend="Eigenvalues" "Legend of plot";
-  input Integer markerStyle=1 "Style of marker"
-    annotation (Dialog(group="Plot settings"),
-      choices(
-        choice=1 "Cross",
-        choice=2 "Circle",
-        choice=3 "Square",
-        choice=4 "FilledSquare",
-        choice=5 "TriangleDown",
-        choice=6 "TriangleUp",
-        choice=7 "Diamond"));
-  input Integer markerColor[3]={0,0,255} "Color of marker";
+    "True, if all previous plots should be deleted"
+    annotation (Dialog(group="Plot settings"));
+  input Integer position[4]={5, 5, 600, 450} "Window Position"
+    annotation (Dialog(group="Plot settings"));
+  input String heading="Root locii" "Heading of plot"
+    annotation (Dialog(group="Plot settings"));
+  input Boolean useLegend = true "Use legend"
+    annotation (Dialog(group="Plot settings"));
+  input String legend="Eigenvalues" "Legend of plot"
+    annotation (Dialog(group="Plot settings", enable=useLegend));
+  input Boolean grid = false "Add grid"
+    annotation (Dialog(group="Plot settings"));
+  input MarkerStyles markerStyle=MarkerStyles.Cross "Style of marker"
+    annotation (Dialog(group="Plot settings"));
+  input Integer markerColor[3]={0,0,255} "Color of marker"
+    annotation(Dialog(group="Plot settings", colorSelector=true));
 
   output Real eigenvalues[size(A, 1), 2]
     "Eigenvalues of matrix A (Re: first column, Im: second column)";
@@ -25,13 +28,14 @@ function plotEigenvalues
 //  output Real evIm[size(A, 1)];
 protected
   Integer markerStyle2=
-    if markerStyle==1 then MarkerStyle.Cross else
-    if markerStyle==2 then MarkerStyle.Circle else
-    if markerStyle==3 then MarkerStyle.Square else
-    if markerStyle==4 then MarkerStyle.FilledSquare else
-    if markerStyle==5 then MarkerStyle.TriangleDown else
-    if markerStyle==6 then MarkerStyle.TriangleUp else
-    if markerStyle==7 then MarkerStyle.Diamond else MarkerStyle.Circle;
+    if markerStyle==MarkerStyles.Cross then MarkerStyle.Cross else
+    if markerStyle==MarkerStyles.Circle then MarkerStyle.Circle else
+    if markerStyle==MarkerStyles.Square then MarkerStyle.Square else
+    if markerStyle==MarkerStyles.FilledSquare then MarkerStyle.FilledSquare else
+    if markerStyle==MarkerStyles.TriangleDown then MarkerStyle.TriangleDown else
+    if markerStyle==MarkerStyles.TriangleUp then MarkerStyle.TriangleUp else
+    if markerStyle==MarkerStyles.Diamond then MarkerStyle.Diamond else MarkerStyle.Circle;
+//    if markerStyle==MarkerStyles.FilledCircle then MarkerStyle.FilledCircle else
   Boolean ok "True, if all calls are ok";
 
 algorithm
@@ -44,21 +48,24 @@ algorithm
   if removePrevious then
     ok := removePlots();
     createPlot(id= 1,
+      position=position,
       leftTitleType=  2,
       leftTitle=  "Im",
       bottomTitleType=  2,
       bottomTitle=  "Re",
       autoerase= false,
+      grid=grid,
       heading=heading,
+      legend=useLegend,
       erase= false,
       legendLocation=  2,
-      legendHorizontal=  false,
-      position=  {35, 30, 665, 488});
+      legendHorizontal=  false);
   end if;
   plotArray(
     x= eigenvalues[:, 1],
     y= eigenvalues[:, 2],
     legend=legend,
+    color=markerColor,
     pattern=  LinePattern.None,
     marker=  markerStyle2);
 
