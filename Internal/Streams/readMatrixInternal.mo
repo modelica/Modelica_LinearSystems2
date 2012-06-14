@@ -1,10 +1,10 @@
 within Modelica_LinearSystems2.Internal.Streams;
-function readMatrixInternal
-  input String fileName "file name";
-  input String matrixName "matrix name";
-  input Integer m "number of rows";
-  input Integer n "numbre of coloumns";
-  output Real A[m,n] "matrix to read";
+function readMatrixInternal "Read matrix matrixName[m,n] from file"
+  input String fileName "File name";
+  input String matrixName "Matrix name";
+  input Integer m "Number of rows";
+  input Integer n "Number of coloumns";
+  output Real A[m,n] "Matrix to read";
 external "C" Modelica_LinearSystem2_readMatrixInternal(
     fileName,
     matrixName,
@@ -32,5 +32,10 @@ void Modelica_LinearSystem2_readMatrixInternal(const char *filename, const char 
  
 //ModelicaFormatMessage(filename);
   return;
-}");
+}", Documentation(info="<html>
+<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<blockquote><pre>readMatrixInternal(fileName, matrixName, m, n)</pre></blockquote>
+<p><h4><font color=\"#008000\">Description </font></h4></p>
+<p>Read matrix <code>matrixName</code> from file <code>fileName</code>. The matrix saved in file must be of dimension [m,n].</p>
+</html>"));
 end readMatrixInternal;

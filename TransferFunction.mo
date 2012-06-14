@@ -188,12 +188,13 @@ follow each other as above. An error occurs if this is not the case.
 
   encapsulated operator function '/'
     "Divide two transfer functions (tf1 / tf2)"
-     import Modelica_LinearSystems2.Math.Polynomial;
-     import Modelica_LinearSystems2.TransferFunction;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.TransferFunction;
 
-     input TransferFunction tf1 "Transfer function system 1";
-     input TransferFunction tf2 "Transfer function system 1";
-     output TransferFunction result;
+    input TransferFunction tf1 "Transfer function system 1";
+    input TransferFunction tf2 "Transfer function system 2";
+    output TransferFunction result "Result = tf1/tf2";
+
   algorithm
     result := (Polynomial(tf1.n)*Polynomial(tf2.d))/(Polynomial(tf1.d)*
       Polynomial(tf2.n));
@@ -2573,7 +2574,7 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
   encapsulated package Internal
     "Internal library of record transferFunction (should not be directly used by user)"
     import Modelica;
-    extends Modelica.Icons.Library;
+    extends Modelica.Icons.Package;
 
     encapsulated function readLength
       "Read the number n of coefficients written in a [n,1]-matrix"

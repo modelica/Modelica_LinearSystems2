@@ -1489,7 +1489,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
     import Modelica;
     import Modelica_LinearSystems2;
-    extends Modelica.Icons.Library;
+    extends Modelica.Icons.Package;
 
     function numberOfRealZeros2 "Calculate number of real zeros"
     import Modelica;

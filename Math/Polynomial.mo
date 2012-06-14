@@ -863,7 +863,7 @@ a vector of Complex elements.
     "Internal library of record Polynomial (should not be directly used by user)"
     import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
-    extends Modelica.Icons.Library;
+    extends Modelica.Icons.Package;
 
   function mult "Multiply two polynomials (polynomials are defined by vectors)"
       import Modelica.Utilities.Streams.print;

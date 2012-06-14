@@ -6770,8 +6770,8 @@ encapsulated package Import
   encapsulated function fromFile "Read a StateSpace data record from mat-file"
 
     import Modelica;
-    import Modelica_LinearSystems2.StateSpace;
     import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace;
     import Modelica_LinearSystems2.StateSpace.Internal;
 
     input String fileName="dslin.mat"
@@ -6790,7 +6790,7 @@ encapsulated package Import
       redeclare Real A[nx,nx],
       redeclare Real B[nx,nu],
       redeclare Real C[ny,nx],
-      redeclare Real D[ny,nu]) "= model read from file";
+      redeclare Real D[ny,nu]) "Outputs model read from file";
 
     protected
     Real ABCD[nx + ny,nx + nu]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
@@ -6848,7 +6848,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
     input String method="Dassl" "Integration method";
 
     protected
-    String fileName2=fileName + ".mat";
+    String fileName2=fileName + ".mat" "Name of the result file with extension";
     Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize, method=method);
     Boolean OK2 = importInitial("dsfinal.txt");
     Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize+1, method=method);
@@ -9617,8 +9617,7 @@ inputs and the number of outputs must be identical.
     end if;
   end reducedCtrSystemX;
 
-function read_dslin
-      "Generate a StateSpace data record by linearization of a model"
+function read_dslin "Read a StateSpace data record from mat-file"
 
   import Modelica;
   import Modelica_LinearSystems2.StateSpace;
@@ -9626,11 +9625,7 @@ function read_dslin
   input String fileName="dslin" "Name of the result file";
 
     protected
-  String fileName2=fileName + ".mat";
-//   Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize, method=method);
-//   Boolean OK2 = importInitial("dsfinal.txt");
-//   Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize+1, method=method);
-
+  String fileName2=fileName + ".mat" "Name of the result file with extension";
   Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
   Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
   Integer nx=integer(nxMat[1, 1]);

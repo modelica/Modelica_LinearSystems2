@@ -2510,7 +2510,7 @@ second column respectively. The variable k is the real gain in both cases.
 
     import Modelica;
     import Modelica_LinearSystems2;
-    extends Modelica.Icons.Library;
+    extends Modelica.Icons.Package;
 
     function numberOfRealZeros2 "Calculate number of real zeros"
       import Modelica;

@@ -29,6 +29,7 @@ plotEigenvalues
 plotImpulse
 plotInital
 plotRamp
+plotRootLociiParVar
 plotStep
 plotTimeResponse
 plotZeros

@@ -457,18 +457,16 @@ end '-';
   end '*';
 
   encapsulated operator function '/'
-    "Divide two transfer functions (zp1 / zp2)"
-
+    "Divide two ZerosAndPoles records (zp1 / zp2)"
     import Modelica;
     import Modelica_LinearSystems2.ZerosAndPoles;
 
-    input ZerosAndPoles zp1;
-    input ZerosAndPoles zp2;
-
-    output ZerosAndPoles result "= zp1/zp2";
+    input ZerosAndPoles zp1 "Zeros-and-poles record 1";
+    input ZerosAndPoles zp2 "Zeros-and-poles record 1";
+    output ZerosAndPoles result "Result = zp1/zp2";
 
   algorithm
-    assert(abs(zp2.k)>100*Modelica.Constants.small,"zp2 in operator \"Modelica_LinearSystems2.TransferFunction.'/'()\" may not be zero");
+    assert(abs(zp2.k)>100*Modelica.Constants.small,"Record zp2 in operator \"Modelica_LinearSystems2.TransferFunction.'/'()\" may not be zero");
     if zp1==ZerosAndPoles(0) then
       result := ZerosAndPoles(0);
     else
@@ -4171,7 +4169,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
     import Modelica;
     import Modelica_LinearSystems2;
-    extends Modelica.Icons.Library;
+    extends Modelica.Icons.Package;
 
   record ZerosAndPoles
       "Continuous zeros and poles description of a single input, single output system (data + operations)"

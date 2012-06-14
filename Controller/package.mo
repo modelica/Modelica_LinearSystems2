@@ -6,7 +6,7 @@ constant String DataDir=Modelica_LinearSystems2.DataDir
   "Absolute path to directory containing utilitiy files for this package, such as images";
 
 
-  extends Modelica.Icons.Library;
+  extends Modelica.Icons.Package;
 
 
   annotation (Documentation(info="<html>

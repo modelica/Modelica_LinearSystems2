@@ -8,7 +8,7 @@ record Complex "Record defining a Complex number"
     "Library demonstrating the usage of complex numbers"
 
     import Modelica;
-    extends Modelica.Icons.Library;
+    extends Modelica.Icons.Package;
 
     function addTwoComplexNumbers "Show how to add 2 complex number"
       import Modelica_LinearSystems2.Math.Complex;
