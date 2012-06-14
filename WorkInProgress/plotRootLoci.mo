@@ -1,17 +1,17 @@
-within Modelica_LinearSystems2.Examples.StateSpace;
-function plotRootLociiParVar
-  "Plot root locii of Modelica model with variations of one model parameter"
+within Modelica_LinearSystems2.WorkInProgress;
+function plotRootLoci
+  "Plot root loci of nonlinear Modelica model by linearizing the model for variations of one model parameter"
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
 
-  input String modelName="Modelica_LinearSystems2.Utilities.Plants.DoublePendulum"
+  input String modelName="Modelica.Mechanics.Rotational.Examples.First"
     "Name of the Modelica model"
     annotation(Dialog(translatedModel));
-  input String modelParameter="length" "Parameter to be varied"
+  input String modelParameter="Jload" "Parameter to be varied"
     annotation(Dialog(__Dymola_importDsin(onlyStart=true,fields(name=initialName))));
-  input Integer nVariations(min=1) = 1 "Number of variations modelParameter";
+  input Integer nVariations(min=1) = 10 "Number of variations modelParameter";
   input Real minP = 1 "Minimum value of modelParameter";
-  input Real maxP = 2 "Maximum value of modelParameter";
+  input Real maxP = 6 "Maximum value of modelParameter";
 
   input Real T_linearize=0
     "Simulate until T_linearize and then linearize the model"
@@ -48,4 +48,4 @@ algorithm
       i,
       {0,0,255});
   end for;
-end plotRootLociiParVar;
+end plotRootLoci;

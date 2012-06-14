@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2;
+within Modelica_LinearSystems2.WorkInProgress;
 function LinearSystems2Tests
 
   import Modelica.Utilities.Streams.print;
