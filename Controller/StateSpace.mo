@@ -27,7 +27,7 @@ block StateSpace "Continuous or discrete state space system block"
   final parameter Integer ny=size(system.C, 1)  annotation(Hide=true);
 
   parameter Boolean withDelay=false
-    "True, if a unit delay should be considered" 
+    "True, if a unit delay should be considered"
     annotation(Evaluate=true, Hide=true,Dialog(tab="Advanced options"));
 protected
   Internal.DiscreteStateSpace discretePart(

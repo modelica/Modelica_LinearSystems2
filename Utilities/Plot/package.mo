@@ -3,10 +3,6 @@ package Plot "Functions for generation of 2D-plots"
     extends Modelica.Icons.Package;
 
 
-
-
-
-
   annotation (Documentation(info="<html>
 <p>
 This package provides functions to plot curves in two dimensions. Here is a short overview:
