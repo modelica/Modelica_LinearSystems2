@@ -18,33 +18,23 @@ function plotRootLociiParVar
     annotation (Dialog(group="Simulation setup"));
   input String method="Dassl" "Integration method"
     annotation (Dialog(group="Simulation setup"));
-  output String modelName2 "Name of the model with parameter and its value";
-  //input Modelica_LinearSystems2.StateSpace resultX;
 protected
   String fileName="dslin" "Name of the result file";
   String fileName2=fileName+".mat" "Name of the result file with extension";
+  String modelName2 "Name of the model with parameter and its value";
   Boolean ok "True, if all calls are ok";
   // StateSpace resultX;
-  StateSpace resultX=StateSpace.Import.fromModel(modelName, 0, fileName, method);
-
-//   Real nxMat[1,1];
-//   Integer nx;
-// //  Integer ABCDsizes[2]=readMatrixSize(fileName, "ABCD");
-//   Real Amat[nx,nx];
-//   String xuyName[nx];
-//  Real eigenvalues[size(A, 1), 2]
   Real dp "Step of parameter equidistand grid";
   Real parValue "Value of parameter at a loop";
+  StateSpace resultX=StateSpace.Import.fromModel(modelName, 0, fileName, method);
 algorithm
   dp := (maxP-minP)/max(nVariations-1,1);
-  Modelica.Utilities.Streams.print("------------ Step 1");
   for i in 1:nVariations loop
     parValue := minP+(i-1)*dp;
     modelName2 := modelName+"("+modelParameter+"="+String(parValue)+")";
     ok := simulateModel(problem=modelName2, startTime=0, stopTime=T_linearize, method=method);
     ok := importInitial("dsfinal.txt");
     ok := linearizeModel(problem=modelName2, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize+1, method=method);
-  Modelica.Utilities.Streams.print("------------ Step 2:");
 
     // Read matrix Amat from result file after linearization
     resultX:=Modelica_LinearSystems2.StateSpace.Internal.read_dslin(fileName);
@@ -57,6 +47,5 @@ algorithm
        String(parValue),
       i,
       {0,0,255});
-    Modelica.Utilities.Streams.print("------------ Step 3");
   end for;
 end plotRootLociiParVar;
