@@ -151,7 +151,7 @@ end 'constructor';
 
 encapsulated operator '-'
     "Contains operators for subtraction of state space systems"
-    import Modelica;
+  import Modelica;
   extends Modelica.Icons.Package;
 
   function subtract
@@ -581,7 +581,7 @@ end 'String';
 
 encapsulated package Analysis
     "Functions to analyse state space systems represented by a StateSpace record"
-    import Modelica;
+  import Modelica;
   extends Modelica.Icons.Package;
 
   function analysis

@@ -435,7 +435,7 @@ encapsulated operator '-'
 end '-';
 
 encapsulated operator '*'
-    import Modelica;
+  import Modelica;
   extends Modelica.Icons.Package;
 function 'dzp*dzp'
       "Multiply two DiscreteZerosAndPoles transfer functions (dzp1 * dzp2)"

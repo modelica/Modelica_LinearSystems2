@@ -8,7 +8,7 @@ record Complex "Record defining a Complex number"
     "Library demonstrating the usage of complex numbers"
 
     import Modelica;
-    extends Modelica.Icons.Package;
+    extends Modelica.Icons.ExamplesPackage;
 
     function addTwoComplexNumbers "Show how to add 2 complex number"
       import Modelica_LinearSystems2.Math.Complex;
@@ -33,6 +33,9 @@ record Complex "Record defining a Complex number"
  end Examples;
 
 encapsulated package Vectors
+  extends Modelica.Icons.Package;
+  import Modelica;
+
   function print "Print vector"
     import Modelica.Utilities.Streams.print;
     import Modelica_LinearSystems2.Math.Complex;
@@ -364,8 +367,9 @@ end multiply;
 end Vectors;
 
 encapsulated package Matrices
-    import Modelica;
-    import Modelica_LinearSystems2;
+  extends Modelica.Icons.Package;
+  import Modelica;
+  import Modelica_LinearSystems2;
 
 function print "Print matrix"
       import Modelica_LinearSystems2.StateSpace;
@@ -469,6 +473,9 @@ end matVecMul;
 end Matrices;
 
   encapsulated operator 'constructor'
+    extends Modelica.Icons.Package;
+    import Modelica;
+
     function fromReal
       import Modelica_LinearSystems2.Math.Complex;
       input Real re "Real part of complex number";
@@ -481,6 +488,9 @@ end Matrices;
   end 'constructor';
 
   encapsulated operator '-' "Unary and binary minus"
+    extends Modelica.Icons.Package;
+    import Modelica;
+
     function negate "Unary minus (multiply complex number by -1)"
       import Modelica_LinearSystems2.Math.Complex; // changed to Modelica_LinearSystems2
       input Complex c1 "Complex number";
@@ -931,7 +941,9 @@ phase angle phi of the Complex number c in the range
   end frequency;
 
 encapsulated package Internal
-    import Modelica;
+  extends Modelica.Icons.Package;
+  import Modelica;
+
   function eigenValues_dhseqr
       "Compute eingenvalues of a upper Hessenberg matrix using lapack routine DHSEQR"
 

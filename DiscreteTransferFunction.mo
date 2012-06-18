@@ -424,7 +424,7 @@ Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can b
 end z;
 
 encapsulated package Analysis
-    import Modelica;
+  import Modelica;
   extends Modelica.Icons.Package;
 
 encapsulated function timeResponse

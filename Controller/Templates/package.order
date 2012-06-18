@@ -2,10 +2,10 @@ SimpleStateSpaceControl
 TwoDegreesOfFreedomControlSISO
 SimpleObserverStateSpaceControl
 TwoDOFinverseModelController
-Internal
 Add2
 PartialPlantMIMO
 PartialPlantSISO
 Plant_SISO
 PlantTemplate
 PlantTemplate_SISO
+Internal

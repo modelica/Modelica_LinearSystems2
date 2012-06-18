@@ -5,6 +5,7 @@ record Polynomial "Record defining the data for a polynomial"
 
   encapsulated package Examples
     "Examples demonstrating the usage of Polynomials"
+    extends Modelica.Icons.ExamplesPackage;
     import Modelica;
 
     function polynomialOperations1
@@ -118,6 +119,9 @@ record Polynomial "Record defining the data for a polynomial"
   end Examples;
 
   encapsulated operator 'constructor'
+    extends Modelica.Icons.Package;
+    import Modelica;
+
     function fromVector
       "Constructor for a polynomial by providing a vector of coefficients"
       import Modelica;
@@ -224,6 +228,9 @@ with j=sqrt(-1), is defined as
   end 'constructor';
 
   encapsulated operator '-'
+    import Modelica;
+    extends Modelica.Icons.Package;
+
     encapsulated function negate "Unary minus (multiply polynomial by -1)"
 
       import Modelica_LinearSystems2.Math.Polynomial;

@@ -574,7 +574,7 @@ public
 
 encapsulated operator '-'
     "Contains operators for subtraction of discrete state space systems"
-    import Modelica;
+  import Modelica;
   extends Modelica.Icons.Package;
 
   function subtract
@@ -1228,7 +1228,7 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
 
 encapsulated package Analysis
     "Functions to analyse discrete state space systems represented by a DiscreteStateSpace record"
-    import Modelica;
+  import Modelica;
   extends Modelica.Icons.Package;
 encapsulated function eigenValues
       "Calculate the eigenvalues of a linear discrete state space system and write them in a complex vector"
