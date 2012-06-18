@@ -72,6 +72,6 @@ algorithm
 <blockquote><pre>plotRootLoci(modelName, modelParameter, nVariations, p_min, p_max, T_linearize, method, position, useLegend, grid, markerStyle, markerColorMin, markerColorMax)</pre></blockquote>
 <p><h4><font color=\"#008000\">Description</font></h4></p>
 <p>Calling this function with default setup the following root loci plot will be generated.</p>
-<p><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/rootLociiDefaultSetup.png\"/></p>
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rootLociiDefaultSetup.png\"/></p>
 </html>"));
 end plotRootLoci;

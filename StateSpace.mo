@@ -5111,7 +5111,7 @@ is defined as
 and results in 
 </p>
  
-<blockquote><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/PolesAndZeros.png\"/> </blockquote>
+<blockquote><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/PolesAndZeros.png\"/> </blockquote>
 
 </html>"));
     end polesAndZeros;
@@ -5210,12 +5210,12 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
 
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodeMagnitude.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 </p>
 <p>
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodePhase.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
 </p>
 <p>
 
@@ -5315,21 +5315,21 @@ StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnit
 
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodeMagnitude.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 </p>
 <p>
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodePhase.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
 </p>
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodeMagnitude2.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude2.png\">
 </p>
 <p>
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodePhase2.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase2.png\">
 </p>
 
 
@@ -5457,7 +5457,7 @@ Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
 
 </p>
 <p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/timeResponseSS.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/timeResponseSS.png\">
 </p>
 <p>
 </p>
@@ -5536,7 +5536,7 @@ Modelica_LinearSystems2.StateSpace.Plot.impulse(ss)
 
 </p>
 <p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/impulseResponseSS.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/impulseResponseSS.png\">
 </p>
 <p>
 </p>
@@ -5617,7 +5617,7 @@ Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
 
 </p>
 <p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/stepResponseSS.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/stepResponseSS.png\">
 </p>
 <p>
 </p>
@@ -5696,7 +5696,7 @@ Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
 
 </p>
 <p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/rampResponseSS.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rampResponseSS.png\">
 </p>
 <p>
 </p>
@@ -5777,7 +5777,7 @@ Modelica_LinearSystems2.StateSpace.Plot.initial(ss, x0=x0)
 
 </p>
 <p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/initialResponseSS.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/initialResponseSS.png\">
 </p>
 <p>
 </p>

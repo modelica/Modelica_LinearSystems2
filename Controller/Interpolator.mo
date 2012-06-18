@@ -164,7 +164,7 @@ leading to the following result when filtering a sine-signal with \"continuous\"
 </p>
 
 <p align=\"center\">
-<IMG src=\"modelica://Modelica_LinearSystems2/Extras/Images/Controller/Examples/Interpolator.png\">
+<IMG src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controller/Examples/Interpolator.png\">
 </p>
 
 </html>

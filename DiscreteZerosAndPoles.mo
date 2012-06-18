@@ -1483,9 +1483,9 @@ Plots the bode-diagram of a DiscreteZerosAndPoles transfer function.
 </p>
  
 <blockquote> 
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/dBbodeMagnitude.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dBbodeMagnitude.png\">
 <br>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/dBodePhase.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dBodePhase.png\">
  
 </blockquote>
 
@@ -1586,7 +1586,7 @@ DiscreteZerosAndPolesZerosAndPoles.Plot.step\">step</a>, <a href=\"modelica://Mo
 
 </p>
 <p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/timeResponseDZP.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/timeResponseDZP.png\">
 </p>
 </html> "));
   end timeResponse;
@@ -1657,7 +1657,7 @@ Function <b>impulse</b> plots the impulse response of a discrete zeros-and-poles
 
 </p>
 <p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/impulseResponsedZP.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/impulseResponsedZP.png\">
 </p>
 
 
@@ -1712,7 +1712,7 @@ Function <b>impulse</b> plots the impulse response of a discrete zeros-and-poles
 <pre><br/><b>algorithm</b></pre>
 <pre>   Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp, tSpan=3)</pre>
 <pre>//  gives: </pre>
-<p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/stepResponseDZP.png\"/> </p>
+<p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/stepResponseDZP.png\"/> </p>
 </html>"));
   end step;
 
@@ -1778,7 +1778,7 @@ Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer funct
 
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/rampResponseDZP.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rampResponseDZP.png\">
 </p>
 
 
@@ -1852,7 +1852,7 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
 
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/initialResponseDZP.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/initialResponseDZP.png\">
 </p>
 
 

@@ -81,7 +81,7 @@ sample rates. In this example, a sampled sine-signal is interpolated in differen
 </ol>
 
 <p align=\"center\">
-<IMG src=\"modelica://Modelica_LinearSystems2/Extras/Images/Controller/Examples/Interpolator.png\">
+<IMG src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controller/Examples/Interpolator.png\">
 </p>
 
 </html>"),

@@ -63,10 +63,6 @@ The controlled system is a mixing unit described in [1].
   [1] Föllinger O., \"Nichtlineare Regelungen I\",
       Oldenbourg Verlag, 8. Auflage.
 </PRE>
- 
- 
- 
- 
 </html>"),
-    Commands(file="Extras/Scripts/plotResultsMixingUnit.mos" "plotResults"));
+    Commands(file="modelica://Modelica_LinearSystems2/Resources/Scripts/plotResultsMixingUnit.mos" "plotResults"));
 end MixingUnit;

@@ -433,9 +433,9 @@ Plots the bode-diagram of a transfer function.
 </p>
  
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodeMagnitude.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodePhase.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
  
 </blockquote>
 <p>

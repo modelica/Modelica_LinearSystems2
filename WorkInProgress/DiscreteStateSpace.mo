@@ -720,12 +720,12 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
 
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodeMagnitude.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 </p>
 <p>
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodePhase.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
 </p>
 <p>
 

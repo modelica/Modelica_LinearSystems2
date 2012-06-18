@@ -1472,14 +1472,14 @@ of a transfer function.
 </table>
 <p><br/><h4>Description</h4></p>
 <p>This function constructs a TransferFunction transfer function description of low and high pass filters. Typical frequency responses for the 4 supported low pass filter types are shown in the next figure (this figure was generated with function <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Examples.bodePlot_filter2\">TransferFunction.Examples.bodePlot_filter2</a>): </p>
-<p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4Filters.png\"/> </p>
+<p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4Filters.png\"/> </p>
 <p>The step responses of the same low pass filters are shown in the next figure, starting from a steady state initial filter with initial input = 0.2: </p>
-<p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4FiltersStepResponse.png\"/> </p>
+<p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4FiltersStepResponse.png\"/> </p>
 <p>Obviously, the frequency responses give a somewhat wrong impression of the filter characteristics: Although Butterworth and Chebyshev filters have a significantly steeper magnitude as the CriticalDamping and Bessel filters, the step responses of the latter ones are much better. This means for example, that a CriticalDamping or a Bessel filter should be selected, if a filter is mainly used to make a non-linear inverse model realizable. </p>
 <p>Typical frequency responses for the 4 supported high pass filter types are shown in the next figure: </p>
-<p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/HighPassOrder4Filters.png\"/> </p>
+<p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4Filters.png\"/> </p>
 <p>The corresponding step responses of these high pass filters are shown in the next figure: </p>
-<p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/HighPassOrder4FiltersStepResponse.png\"/> </p>
+<p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4FiltersStepResponse.png\"/> </p>
 <p>All filters are available in <b>normalized</b> (default) and non-normalized form. In the normalized form, the amplitude of the filter transfer function at the cutoff frequency is 1/sqrt(2) (= 3 dB). Note, when comparing the filters of this function with other software systems, the setting of \"normalized\" has to be selected appropriately. For example, the signal processing toolbox of Matlab provides the filters in non-normalized form and therefore a comparision makes only sense, if normalized = <b>false</b> is set. </p>
 <p><h4>Example</h4></p>
 <pre>   Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Types.AnalogFilter.CriticalDamping;</pre>
@@ -1581,7 +1581,7 @@ defines two transfer functions. The second one is defined as:
 and results in 
 </p>
  
-<blockquote><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/PolesAndZerosTF.png\"/> </blockquote>
+<blockquote><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/PolesAndZerosTF.png\"/> </blockquote>
 
 </html> "));
   end polesAndZeros;
@@ -1723,9 +1723,9 @@ Plots the bode-diagram of a transfer function.
 </p>
  
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodeMagnitude.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodePhase.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
  
 </blockquote>
 <p>
@@ -1809,7 +1809,7 @@ TransferFunction.Plot.<b>timeResponse</b>(tf, dt, tSpan,response, x0, defaultDia
 <pre><br/><b>algorithm</b></pre>
 <pre>   Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(tf, dt=0.02, tSpan=3, response=response)</pre>
 <pre>//  gives: </pre>
-<p><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/timeResponse.png\"/> </p>
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/timeResponse.png\"/> </p>
 </html>"));
   end timeResponse;
 
@@ -1879,7 +1879,7 @@ Function <b>impulse</b> plots the impulse response of a transfer function. It is
 
 </p>
 <p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/impulseResponse.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/impulseResponse.png\">
 </p>
 <p>
 </p>
@@ -1950,7 +1950,7 @@ Function <b>step</b> plots the step response of a transfer function. It is based
 
 </p>
 <p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/stepResponse.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/stepResponse.png\">
 </p>
 <p>
 </p>
@@ -2022,7 +2022,7 @@ Function <b>ramp</b> plots the ramp response of a transfer function. It is based
 
 </p>
 <p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/rampResponse.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rampResponse.png\">
 </p>
 <p>
 </p>
@@ -2108,7 +2108,7 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
 
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/initialResponseTF.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/initialResponseTF.png\">
 </p>
 <p>
 </p>

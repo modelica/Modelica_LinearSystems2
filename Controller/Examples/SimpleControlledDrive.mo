@@ -118,7 +118,7 @@ equation
       graphics),
     experiment(StopTime=3),
     experimentSetupOutput,
-    Commands(file="Extras/Scripts/SimpleControlledDriver_Plot1.mos"
+    Commands(file="modelica://Modelica_LinearSystems2/Resources/Scripts/SimpleControlledDriver_Plot1.mos"
         "Plot most important variables"),
     Coordsys(grid=[1,1], scale=0),
     Documentation(info="<html>
@@ -170,7 +170,7 @@ In the following figure simulation results of the discrete and
 of the continuous controller are shown:
 </p>
 <p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/SimpleControlledDrive_Plot1.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/SimpleControlledDrive_Plot1.png\">
 </p>
 </html>"));
 end SimpleControlledDrive;

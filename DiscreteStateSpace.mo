@@ -2334,12 +2334,12 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
 
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodeMagDis.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagDis.png\">
 </p>
 <p>
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/bodePhaseDis.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhaseDis.png\">
 </p>
 <p>
 

@@ -2,8 +2,8 @@ within ;
 package Modelica_LinearSystems2 "Modelica_LinearSystems2 (2.2 Beta 1) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
   extends Modelica.Icons.Package;
 
-constant String DataDir=classDirectory() + "Extras/Data/"
-  "Absolute path to directory containing utilitiy files for this package";
+  constant String DataDir=classDirectory() + "Resources/Data/"
+    "Absolute path to directory containing utilitiy files for this package";
 
 
 annotation (
@@ -61,7 +61,7 @@ For an introduction, have especially a look at:
      gives the contact information for this library.</li>
 <li> In an interactive environment, it is useful to run first the script
      &quot;_abbreviations.mos&quot; in directory
-     &quot;Modelica_LinearSystems2\\Extras\\Scripts&quot;
+     &quot;Modelica_LinearSystems2/Resources/Scripts&quot;
      in order to set useful abbreviations: ss, tf, zp, poly, Complex, Plot, s, p, j.</li>
 </ul>
 
@@ -76,7 +76,7 @@ scripts are provided, but different library names are used.
 
 <p>
 <b>Licensed by DLR under the Modelica License 2</b><br>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/dlr_logo.png\"  width=60 >
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dlr_logo.png\"  width=60 >
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  <b>      Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</b>
 </p>

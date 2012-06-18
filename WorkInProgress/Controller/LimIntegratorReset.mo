@@ -61,11 +61,6 @@ equation
 <p>This block extends <a href=\"Modelica://Modelica.Blocks.Continuous.LimIntegrator\">Modelica.Blocks.Continuous.LimIntegrator</a> and adds an external reset trigger.  When the boolean input <b>reset</b> becomes true the integrator start is reset to <b>y_start</b>.</p>
 </HTML>
 ", revisions="<html>
-<table border=0 cellspacing=0 cellpadding=0>
-  <tr><td valign=\"center\"> <img src=\"../Extras/Images/dlr_logo.png\" ></td>
-      <td valign=\"center\"> <b>Copyright &copy; 1999-2010, DLR Institute of Robotics and Mechatronics<b> </td>
-  </tr>
- </table>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={

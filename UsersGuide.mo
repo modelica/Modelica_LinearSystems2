@@ -118,7 +118,7 @@ is given in the next figure:
 </p>
 
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Complex.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Complex.png\">
 </blockquote>
 <p>
 Switch to an interactive Modelica environment
@@ -216,20 +216,20 @@ has to be applied.
       annotation (Documentation(info="<html>
 <p>Polynomials with real coefficients are defined via record Modelica_LinearSystems2.Math.Polynomial. Read first the previous section about Complex numbers to understand how records, functions in records and the coming operator overloading technique works. The Polynomial record is equivalent to the Complex record. A screenshot is shown in the next figure: </p>
 <blockquote>
-   <p><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Polynomial1.png\"/> </p>
+   <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial1.png\"/> </p>
 </blockquote>
 <p>A Polynomial is constructed by the command Polynomial(coefficientVector), where the input argument provides the polynomial coefficients in descending order. In the following figure, a typical session in the command window is shown (try it, e.g., in Dymolas command window): </p>
 <blockquote>
-   <p><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Polynomial2.png\"/> </p>
+   <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial2.png\"/> </p>
 </blockquote>
 <p>After defining the import statement to get Polynomial as an abbreviation for Modelica_LinearSystems2.Polynomial, the coefficients are given as vector input to \"Polynomial()\". Via the operator-'String' function (called by String(p)) Polynomial p is pretty printed. Besides all elementary operations, such as operator '+', '*', functions to compute the integral or the derivative are provide. With function \"evaluate(..)\" the Polynomial is evaluated for a given value x. With function \"roots\", the roots of the Polynomial are evaluated and are returned as a Vector of Complex numbers. If the optional second input agument printRoots is set to true, the roots are at once also nicely printed. </p>
 <p>With function \"fitting\", a polynomial can be determined that approximates given table values. Finally with function \"plot\", the interesting range of x is automatically determined (via calculating the roots of the polynomial and of its derivative) and plotted. A typical plot is shown in the next figure: </p>
 <blockquote>
-   <p><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Polynomial3.png\"/> </p>
+   <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial3.png\"/> </p>
 </blockquote>
 <p>Several other examples of Polynomial are available in Polynomial.Examples. In Dymola, select the function with the right mouse button and click \"Ok\" on the resulting menu which provides the possibility to define all the input arguments. Since the Examples function do not have any input arguments, only the \"Ok\" button is present: </p>
 <blockquote>
-   <p><img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/Polynomial4.png\"/> </p>
+   <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial4.png\"/> </p>
 </blockquote>
 </html>"));
     end Polynomials;
@@ -319,7 +319,7 @@ Below, a typical session in the command window is shown:
 </p>
  
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/TransferFunction1.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction1.png\">
 </blockquote>
  
 <p>
@@ -327,7 +327,7 @@ The last command (plotBode) results in the following frequency response:
 </p>
  
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/TransferFunction2.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction2.png\">
 </blockquote>
  
 <p>
@@ -343,7 +343,7 @@ ss=StateSpace(tf3) and an poles-and-zeros plot and print out is then available v
 </p>
  
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/TransferFunction4.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction4.png\">
 </blockquote>
  
 <p>
@@ -351,7 +351,7 @@ resulting in:
 </p>
  
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/TransferFunction3.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction3.png\">
 </blockquote>
  
 <p>
@@ -363,7 +363,7 @@ StateSpace.Import.fromModel(\"xxx\") results in:
 </p>
  
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/UsersGuide/TransferFunction5.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction5.png\">
 </blockquote>
  
 <p>
@@ -374,7 +374,7 @@ are shown in the next figure:
 </p>
  
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4Filters.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4Filters.png\">
 </blockquote>
  
 <p>
@@ -383,7 +383,7 @@ starting from a steady state initial filter with initial input = 0.2:
 </p>
  
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Extras/Images/LowPassOrder4FiltersStepResponse.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4FiltersStepResponse.png\">
 </blockquote>
  
 </html>
