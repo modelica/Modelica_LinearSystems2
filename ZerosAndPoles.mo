@@ -17,9 +17,10 @@ record ZerosAndPoles
   String yName="y" "Name of output signal"  annotation(Dialog(group="Signal names"));
 
   encapsulated operator 'constructor' "Generate a ZerosAndPoles object"
-    import Modelica_LinearSystems2;
-    import Modelica;
     extends Modelica.Icons.Package;
+
+    import Modelica;
+    import Modelica_LinearSystems2;
 
     encapsulated function fromReal
       "Generate a ZerosAndPoles transfer function from a Real value"
@@ -64,7 +65,7 @@ Therefore, the record is defined by
 </html>"));
     end fromReal;
 
-  encapsulated function fromZerosAndPoles
+    encapsulated function fromZerosAndPoles
       "Generate a ZerosAndPoles transfer function from a set of zeros and poles"
 
       import Modelica;
@@ -73,64 +74,64 @@ Therefore, the record is defined by
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.Math.Complex;
 
-    input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
-    input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
-    input Real k=1.0 "Constant multiplied with transfer function";
-    input String uName="" "input name";
-    input String yName="" "output name";
-    output ZerosAndPoles zp(
-      redeclare Real n1[Internal.numberOfRealZeros(z)],
-      redeclare Real n2[integer((size(z, 1) - Internal.numberOfRealZeros(z))/2),
+      input Real k=1.0 "Constant multiplied with transfer function";
+      input String uName="" "input name";
+      input String yName="" "output name";
+      output ZerosAndPoles zp(
+        redeclare Real n1[Internal.numberOfRealZeros(z)],
+        redeclare Real n2[integer((size(z, 1) - Internal.numberOfRealZeros(z))/2),
         2],
-      redeclare Real d1[Internal.numberOfRealZeros(p)],
-      redeclare Real d2[integer((size(p, 1) - Internal.numberOfRealZeros(p))/2),
+        redeclare Real d1[Internal.numberOfRealZeros(p)],
+        redeclare Real d2[integer((size(p, 1) - Internal.numberOfRealZeros(p))/2),
         2]) "ZerosAndPoles transfer functions of the zeros, poles and k";
 
     protected
-    Integer n_n1=size(zp.n1, 1);
-    Integer n_d1=size(zp.d1, 1);
-    Integer n_n2=size(zp.n2, 1);
-    Integer n_d2=size(zp.d2, 1);
-    Integer i;
-    Integer j;
-    Complex z_reordered[size(z, 1)] "Reordered zeros";
-    Complex p_reordered[size(p, 1)] "Reordered poles";
-    Integer nz_real "Number of real zeros";
-    Integer np_real "Number of real poles";
-  algorithm
-    //Extra input (string) added
-    (z_reordered,nz_real) := Internal.reorderZeros(z, "");
-    (p_reordered,np_real) := Internal.reorderZeros(p, "");
+      Integer n_n1=size(zp.n1, 1);
+      Integer n_d1=size(zp.d1, 1);
+      Integer n_n2=size(zp.n2, 1);
+      Integer n_d2=size(zp.d2, 1);
+      Integer i;
+      Integer j;
+      Complex z_reordered[size(z, 1)] "Reordered zeros";
+      Complex p_reordered[size(p, 1)] "Reordered poles";
+      Integer nz_real "Number of real zeros";
+      Integer np_real "Number of real poles";
+    algorithm
+      //Extra input (string) added
+      (z_reordered,nz_real) := Internal.reorderZeros(z, "");
+      (p_reordered,np_real) := Internal.reorderZeros(p, "");
 
-    // Numerator
-    for i in 1:n_n1 loop
-      zp.n1[i] := -z_reordered[i].re;
-    end for;
+      // Numerator
+      for i in 1:n_n1 loop
+        zp.n1[i] := -z_reordered[i].re;
+      end for;
 
-    j := 1;
-    for i in n_n1 + 1:2:size(z, 1) loop
-      zp.n2[j, :] := {-2*z_reordered[i].re,z_reordered[i].re^2 + z_reordered[i].im
-        ^2};
-      j := j + 1;
-    end for;
+      j := 1;
+      for i in n_n1 + 1:2:size(z, 1) loop
+        zp.n2[j, :] := {-2*z_reordered[i].re,z_reordered[i].re^2 + z_reordered[i].im
+          ^2};
+        j := j + 1;
+      end for;
 
-    // Denominator
-    for i in 1:n_d1 loop
-      zp.d1[i] := -p_reordered[i].re;
-    end for;
+      // Denominator
+      for i in 1:n_d1 loop
+        zp.d1[i] := -p_reordered[i].re;
+      end for;
 
-    j := 1;
-    for i in n_d1 + 1:2:size(p, 1) loop
-      zp.d2[j, :] := {-2*p_reordered[i].re,p_reordered[i].re^2 + p_reordered[i].im
-        ^2};
-      j := j + 1;
-    end for;
+      j := 1;
+      for i in n_d1 + 1:2:size(p, 1) loop
+        zp.d2[j, :] := {-2*p_reordered[i].re,p_reordered[i].re^2 + p_reordered[i].im
+          ^2};
+        j := j + 1;
+      end for;
 
-    zp.k := k;
-    zp.uName := uName;
-    zp.yName := yName;
+      zp.k := k;
+      zp.uName := uName;
+      zp.yName := yName;
 
     annotation (Documentation(info="<html>
 <p>
@@ -169,7 +170,7 @@ with j=sqrt(-1), is defined as
                            k=4);
 </pre></blockquote>
 </html>"));
-  end fromZerosAndPoles;
+    end fromZerosAndPoles;
 
     function fromTransferFunction =
         Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles annotation (Documentation(info="<html> </html>"));
@@ -216,13 +217,14 @@ with j=sqrt(-1), is defined as
   end 'constructor';
 
 encapsulated operator '-'
-    import Modelica;
   extends Modelica.Icons.Package;
+  import Modelica;
+
   function subtract "Subtract two TransferFunctions (zp1 - zp2)"
-      import Modelica;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.Math.Complex;
 
     input ZerosAndPoles zp1;
     input ZerosAndPoles zp2;
@@ -317,10 +319,10 @@ encapsulated operator '-'
   end subtract;
 
   function negate "Unary minus (multiply transfer function by -1)"
-      import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.ZerosAndPoles;
 
-     input ZerosAndPoles zp;
-     output ZerosAndPoles result(n1=zp.n1, n2=zp.n2, d1=zp.d1, d2=zp.d2, k=-zp.k) "= -zp";
+    input ZerosAndPoles zp;
+    output ZerosAndPoles result(n1=zp.n1, n2=zp.n2, d1=zp.d1, d2=zp.d2, k=-zp.k) "= -zp";
   algorithm
   end negate;
 end '-';
@@ -475,7 +477,7 @@ end '-';
       result.d1 := cat(1,zp1.d1, zp2.n1);
       result.d2 := cat(1,zp1.d2, zp2.n2);
       result.k := zp1.k/zp2.k;
-  end if;
+    end if;
 
   end '/';
 
@@ -510,19 +512,19 @@ end '-';
 
 encapsulated operator function '=='
     "Check whether two transfer functions are identical"
-        import Modelica;
-        import Modelica.Math;
-        import Modelica_LinearSystems2.Math.Polynomial;
-        import Modelica_LinearSystems2.ZerosAndPoles;
+  import Modelica;
+  import Modelica.Math;
+  import Modelica_LinearSystems2.Math.Polynomial;
+  import Modelica_LinearSystems2.ZerosAndPoles;
 
-    input ZerosAndPoles zp1;
-    input ZerosAndPoles zp2;
-    input Real eps(min=0) = 0
+  input ZerosAndPoles zp1;
+  input ZerosAndPoles zp2;
+  input Real eps(min=0) = 0
       "Two numbers n1 and n2 are identical if abs(n1-n2) <= eps";
+  output Boolean result "= zp1 == zp2";
 
-    output Boolean result "= zp1 == zp2";
 algorithm
-    result := Math.Vectors.isEqual(zp1.n1,zp2.n1,eps) and Math.Vectors.isEqual(zp1.d1,zp2.d1,eps) and Math.Matrices.isEqual(zp1.n2,zp2.n2,eps) and Math.Matrices.isEqual(zp1.d2,zp2.d2,eps) and (zp1.k==zp2.k);
+  result := Math.Vectors.isEqual(zp1.n1,zp2.n1,eps) and Math.Vectors.isEqual(zp1.d1,zp2.d1,eps) and Math.Matrices.isEqual(zp1.n2,zp2.n2,eps) and Math.Matrices.isEqual(zp1.d2,zp2.d2,eps) and (zp1.k==zp2.k);
 
 end '==';
 
@@ -652,8 +654,10 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
   end p;
 
   encapsulated package Analysis
-    import Modelica;
+    "Collection of functions to analyse zeros-and-poles description"
     extends Modelica.Icons.Package;
+    import Modelica;
+
     function analysis
       "Make a system analysis based on the poles and zeros of the system"
 
@@ -666,7 +670,7 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
       import Modelica_LinearSystems2.Internal.Eigenvalue;
 
       input ZerosAndPoles zp(uName="u", yName="y")
-        "transfer function of a system";
+        "Transfer function of a system";
 
       input AnalyseOptions2 analyseOptions2 = Modelica_LinearSystems2.Internal.AnalyseOptions2(
                printControllability=false,
@@ -680,11 +684,11 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
       input String description = "" "Description of system (used in html file)";
 
     protected
-    input Boolean printStateSpaceSystem=true annotation(Dialog(enable=false));
+      input Boolean printStateSpaceSystem=true annotation(Dialog(enable=false));
       String dummyFileName = "dummy" + fileName;
       input StateSpace ss=StateSpace(zp);
 
-    AnalyseOptions analyseOptions=AnalyseOptions(
+      AnalyseOptions analyseOptions=AnalyseOptions(
                plotEigenValues=analyseOptions2.plotEigenValues,
                plotInvariantZeros=analyseOptions2.plotInvariantZeros,
                plotStepResponse=analyseOptions2.plotStepResponse,
@@ -700,63 +704,62 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
                headingFrequencyResponse=analyseOptions2.headingFrequencyResponse);
 
     algorithm
-      assert(ZerosAndPoles.Analysis.denominatorDegree(zp) >
-        ZerosAndPoles.Analysis.numeratorDegree(zp),
+      assert(ZerosAndPoles.Analysis.denominatorDegree(zp) > ZerosAndPoles.Analysis.numeratorDegree(zp),
         " Denominator polynominal of transfer function in function\"TransferFunction.Analysis.analysis\"has to be of higher order than numerator polynomial");
-    Modelica.Utilities.Files.removeFile(fileName);
-     Modelica.Utilities.Files.removeFile(dummyFileName);
-    if printStateSpaceSystem then
-    printSystem(
-            zp,
-            fileName,
-            systemName,
-            description);
-    printSystem(
-            zp,
-            dummyFileName,
-            systemName,
-            description);
-    end if;
+      Modelica.Utilities.Files.removeFile(fileName);
+      Modelica.Utilities.Files.removeFile(dummyFileName);
+      if printStateSpaceSystem then
+        printSystem(
+          zp,
+          fileName,
+          systemName,
+          description);
+        printSystem(
+          zp,
+          dummyFileName,
+          systemName,
+          description);
+      end if;
       Modelica.Utilities.Streams.readFile(dummyFileName);
       StateSpace.Analysis.analysis(
-            ss=ss,
-            analyseOptions=analyseOptions,
-            fileName=fileName,
-            systemName=systemName,
-            description=description,
-            printStateSpaceSystem=false);
-    equation
+        ss=ss,
+        analyseOptions=analyseOptions,
+        fileName=fileName,
+        systemName=systemName,
+        description=description,
+        printStateSpaceSystem=false);
 
     public
      encapsulated function printSystem
         "Print the state space system in html format on file"
-        import Modelica;
-        import Modelica.Utilities.Streams.print;
-        import Modelica_LinearSystems2.ZerosAndPoles;
-        import Modelica_LinearSystems2;
+       import Modelica;
+       import Modelica.Utilities.Streams.print;
+       import Modelica_LinearSystems2.ZerosAndPoles;
+       import Modelica_LinearSystems2;
 
-      input ZerosAndPoles zp "transfer function to analyze";
-      input String fileName="systemAnalysis.html"
+       input ZerosAndPoles zp "transfer function to analyze";
+       input String fileName="systemAnalysis.html"
           "File on which the zeros-and-poles transfer function is written in html format";
-      input String systemName="ZerosAndPoles Transfer Function"
+       input String systemName="ZerosAndPoles Transfer Function"
           "name of the system";
-      input String description = "" "Description of system (used in html file)";
-      input String format=".3g" "Format of numbers (e.g. \"20.8e\")";
+       input String description = ""
+          "Description of system (used in html file)";
+       input String format=".3g" "Format of numbers (e.g. \"20.8e\")";
       protected
-      String st=String(zp);
+       String st=String(zp);
 
      algorithm
-      Modelica.Utilities.Files.removeFile(fileName);
-      print("<html><body><br><br><p>\n<b>System report</b>\n</p>",fileName);
-      print("<body><p><br> The system <b>" + systemName + "</b> is defined by</p>",fileName);
+       Modelica.Utilities.Files.removeFile(fileName);
+       print("<html><body><br><br><p>\n<b>System report</b>\n</p>",fileName);
+       print("<body><p><br> The system <b>" + systemName + "</b> is defined by</p>",fileName);
        print("G(p) = "+st, fileName);
 
-         if description=="" then
-       print("</table>", fileName);
-      else
-       print("</table>", fileName);
-       print("<body><p><b>Description</b></p>",fileName);
-       print(description, fileName);
+       if description=="" then
+         print("</table>", fileName);
+       else
+         print("</table>", fileName);
+         print("<body><p><b>Description</b></p>",fileName);
+         print(description, fileName);
        end if;
 
      end printSystem;
@@ -771,16 +774,16 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
    encapsulated function timeResponse
       "Calculate the time response of a zeros-and-poles transfer function"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+     import Modelica;
+     import Modelica_LinearSystems2;
+     import Modelica_LinearSystems2.StateSpace;
+     import Modelica_LinearSystems2.ZerosAndPoles;
+     import Modelica_LinearSystems2.Types.TimeResponse;
 
-    extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;     // Input/Output declarations of time response functions
-    input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+     extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;     // Input/Output declarations of time response functions
+     input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
 
-    input Real x0[Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)]=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp))
+     input Real x0[Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)]=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp))
         "Initial state vector";
 
     protected
@@ -1808,26 +1811,22 @@ of a zeros-and-poles transfer function.
   end Analysis;
 
   encapsulated package Design
-    import Modelica;
+    "Collection of functions to design zeros-and-poles description"
     extends Modelica.Icons.Package;
+    import Modelica;
 
   encapsulated function filter
       "Generate a ZerosAndPoles transfer function from a filter description"
 
-      import Modelica;
-      import Modelica.Utilities.Streams;
-      import Modelica.Utilities.Streams.print;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Types;
-      import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica;
+    import Modelica.Utilities.Streams;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.Types;
+    import Modelica_LinearSystems2.ZerosAndPoles;
 
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
-      import Modelica.Math.*;
-      import Modelica_LinearSystems2.Math.*;
-
-    input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
+    input Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
         "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-    input Modelica_LinearSystems2.Types.FilterType filterType=Types.FilterType.LowPass
+    input Types.FilterType filterType=Types.FilterType.LowPass
         "Type of filter (LowPass/HighPass/BandPass)";
     input Integer order(min=1) = 2 "Order of filter";
     input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
@@ -2185,8 +2184,9 @@ is set.
   end Design;
 
   encapsulated package Plot
-    import Modelica;
+    "Collection of functions to plot zeros-and-poles description"
     extends Modelica.Icons.Package;
+    import Modelica;
 
   encapsulated function polesAndZeros
       "Plot eigenvalues and or the zeros of a zeros-and-poles transfer function"
@@ -2306,25 +2306,27 @@ and results in
 
   encapsulated function bode
       "Plot ZerosAndPoles transfer function as bode plot"
-      import Modelica;
-      import Modelica.Utilities.Streams.print;
-      import Modelica.Utilities.Strings;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica_LinearSystems2.Internal;
-      import SI = Modelica.SIunits;
+    import Modelica;
+    import Modelica.Utilities.Streams.print;
+    import Modelica.Utilities.Strings;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.Math.Complex;
+    import Modelica_LinearSystems2.Internal;
+    import SI = Modelica.SIunits;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
+    import Modelica_LinearSystems2.Utilities.Plot;
 
     input ZerosAndPoles zp "ZerosAndPoles transfer function to be plotted";
     input Integer nPoints(min=2) = 200 "Number of points";
     input Boolean autoRange=true
         "True, if abszissa range is automatically determined";
     input Modelica.SIunits.Frequency f_min(min=0) = 0.1
-        "Minimum frequency value, if autoRange = false"                                                  annotation(Dialog(enable=not autoRange));
+        "Minimum frequency value, if autoRange = false"
+                                                      annotation(Dialog(enable=not autoRange));
     input Modelica.SIunits.Frequency f_max(min=0) = 10
-        "Maximum frequency value, if autoRange = false"                                                annotation(Dialog(enable=not autoRange));
+        "Maximum frequency value, if autoRange = false"
+                                                      annotation(Dialog(enable=not autoRange));
 
     input Boolean magnitude=true "= true, to plot the magnitude of tf"
                                                                       annotation(choices(__Dymola_checkBox=true));
@@ -2812,8 +2814,9 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
   end Plot;
 
   encapsulated package Conversion
-    import Modelica;
+    "Collection of functions for conversion of zeros-and-poles description"
     extends Modelica.Icons.Package;
+    import Modelica;
 
     function toTransferFunction
       "Generate a TransferFunction object from a ZerosAndPoles object"
@@ -2875,7 +2878,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
 </html>"));
     end toTransferFunction;
 
-  encapsulated function toTransferFunctionMIMO
+    encapsulated function toTransferFunctionMIMO
       "Generate a transfer function matrix  from zeros-and-poles transfer function matrix"
 
       import Modelica;
@@ -2883,20 +2886,20 @@ from a ZerosAndPoles record representated by first and second order numerator an
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.TransferFunction;
 
-    input ZerosAndPoles zp[:,:] "ZerosAndPoles transfer function of a system";
+      input ZerosAndPoles zp[:,:] "ZerosAndPoles transfer function of a system";
 
-    output TransferFunction tf[size(zp, 1),size(zp, 2)];
+      output TransferFunction tf[size(zp, 1),size(zp, 2)];
 
     protected
-    Integer ny=size(zp, 1);
-    Integer nu=size(zp, 2);
+      Integer ny=size(zp, 1);
+      Integer nu=size(zp, 2);
 
-  algorithm
-    for iy in 1:ny loop
-      for iu in 1:nu loop
-        tf[iy, iu] := ZerosAndPoles.Conversion.toTransferFunction(zp[iy, iu]);
+    algorithm
+      for iy in 1:ny loop
+        for iu in 1:nu loop
+          tf[iy, iu] := ZerosAndPoles.Conversion.toTransferFunction(zp[iy, iu]);
+        end for;
       end for;
-    end for;
     annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
 <table>
@@ -2921,7 +2924,7 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
 
 
 </html> "));
-  end toTransferFunctionMIMO;
+    end toTransferFunctionMIMO;
 
     function toMatrices
       "Convert a ZerosAndPoles object into the matrices A, B, C of a StateSpace"
@@ -4006,10 +4009,11 @@ processing.
   end Conversion;
 
   encapsulated package Import
-    import Modelica;
+    "Collection of functions to import zeros-and-poles description"
     extends Modelica.Icons.Package;
+    import Modelica;
 
-  function fromModel
+    function fromModel
       "Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model"
 
       import Modelica;
@@ -4059,7 +4063,7 @@ processing.
         redeclare Real D[ny,nu]) "= model linearized at initial point";
     public
       output ZerosAndPoles zp[:,:];
-  algorithm
+    algorithm
       result.A := ABCD[1:nx, 1:nx];
       result.B := ABCD[1:nx, nx + 1:nx + nu];
       result.C := ABCD[nx + 1:nx + ny, 1:nx];
@@ -4096,7 +4100,7 @@ processing.
          0.283325*p*(p-5.23615)*(p + 0.551929)/( (p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572) )]
 <blockquote><code>                      </code> </blockquote>
 </html>"));
-  end fromModel;
+    end fromModel;
 
     encapsulated function fromFile
       "Generate a ZerosAndPoles record by reading the polynomial coefficients or zeros and poles from a file"
@@ -4165,11 +4169,11 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
   end Import;
 
   encapsulated package Internal
-    "Internal library of record Filter (should not be directly used by user)"
+    "Collection of internal material of record Filter (should not be directly used by user)"
+    extends Modelica.Icons.Package;
 
     import Modelica;
     import Modelica_LinearSystems2;
-    extends Modelica.Icons.Package;
 
   record ZerosAndPoles
       "Continuous zeros and poles description of a single input, single output system (data + operations)"
@@ -5708,10 +5712,11 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
     encapsulated function bandPassAlpha "Return alpha for band pass"
       import Modelica;
-       input Real a "Coefficient of p^1";
-       input Real b "Coefficient of p^0";
-       input Modelica.SIunits.AngularVelocity w "Bandwidth angular frequency";
-       output Real alpha "Alpha factor to build up band pass";
+
+      input Real a "Coefficient of p^1";
+      input Real b "Coefficient of p^0";
+      input Modelica.SIunits.AngularVelocity w "Bandwidth angular frequency";
+      output Real alpha "Alpha factor to build up band pass";
 
     protected
       Real alpha_min;
@@ -5960,20 +5965,17 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
   encapsulated function filter
       "Generate the data record of a ZerosAndPoles transfer function from a filter description"
 
-      import Modelica;
-      import Modelica.Utilities.Streams;
-      import Modelica.Utilities.Streams.print;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Types;
-      import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica;
+    import Modelica.Utilities.Streams;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.Types;
+    import Modelica_LinearSystems2.ZerosAndPoles;
 
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
-      import Modelica.Math.*;
-      import Modelica_LinearSystems2.Math.*;
+    import MMath = Modelica.Math;
 
-    input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
+    input Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
         "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-    input Modelica_LinearSystems2.Types.FilterType filterType=Types.FilterType.LowPass
+    input Types.FilterType filterType=Types.FilterType.LowPass
         "Type of filter (LowPass/HighPass)";
     input Integer order(min=1) = 2 "Order of filter";
     input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
@@ -5984,7 +5986,7 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
         "Pass band ripple for Chebyshev filter (otherwise not used)";
     input Boolean normalized=true
         "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
-    output Internal.ZerosAndPoles filter(
+    output ZerosAndPoles.Internal.ZerosAndPoles filter(
       redeclare Real n1[if filterType == Types.FilterType.LowPass then 0 else (
         if analogFilter == Types.AnalogFilter.CriticalDamping then order else
         mod(order, 2))],
@@ -6048,7 +6050,7 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
       end for;
 
     elseif analogFilter == Types.AnalogFilter.Bessel then
-      (den1,den2,alpha) := Internal.BesselCoefficients(order);
+      (den1,den2,alpha) := ZerosAndPoles.Internal.BesselCoefficients(order);
       if not normalized then
         alpha2 := alpha*alpha;
         for i in 1:n_den2 loop
@@ -6072,7 +6074,7 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
 
     elseif analogFilter == Types.AnalogFilter.Chebyshev then
       epsilon := sqrt(10^(A_ripple/10) - 1);
-      fac := asinh(1/epsilon)/order;
+      fac := MMath.asinh(1/epsilon)/order;
 
       if evenOrder then
          for i in 1:n_den2 loop
@@ -6092,7 +6094,7 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
         1/sqrt(2) at the cutoff frequency
      */
       if normalized then
-        alpha := Internal.normalizationFactor(den1, den2);
+        alpha := ZerosAndPoles.Internal.normalizationFactor(den1, den2);
         alpha2 := alpha*alpha;
         for i in 1:n_den2 loop
           den2[i, 1] := den2[i, 1]*alpha2;
@@ -6119,13 +6121,13 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
      A := A*(1 + den1[i]^2);
   end for;
   A := 1/sqrt(A);
-  print("A = " + String(A));
+  Streams.print("A = " + String(A));
 */
 
     // Determine normalized denominator polynomials with highest power of p equal to one
     filter.n1 := zeros(n_num1);
     filter.n2 := zeros(n_num2, 2);
-    (filter.d1,filter.d2,k) := Internal.filterToNormalized(den1, den2);
+    (filter.d1,filter.d2,k) := ZerosAndPoles.Internal.filterToNormalized(den1, den2);
     filter.k := filter.k/k;
 
     // Compute desired filter characteristics from low pass filter coefficients

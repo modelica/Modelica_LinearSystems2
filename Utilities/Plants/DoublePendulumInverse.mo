@@ -16,10 +16,6 @@ model DoublePendulumInverse "Multibody model of inverse crane trolley"
   parameter Boolean bodyDisturbance=false
     "True, if body disturbance should be enabled";
 
-  Modelica.Mechanics.Translational.Sources.Force distrubanceForceCart if cartDisturbance
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={-80,80})));
   Modelica.Blocks.Interfaces.RealInput dist if cartDisturbance
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
@@ -27,10 +23,6 @@ model DoublePendulumInverse "Multibody model of inverse crane trolley"
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-60,122})));
-  Modelica.Mechanics.MultiBody.Forces.Torque torque if bodyDisturbance
-    annotation (Placement(transformation(extent={{20,64},{40,84}})));
-  Modelica.Blocks.Sources.Constant constZero(k=0) if bodyDisturbance
-    annotation (Placement(transformation(extent={{-20,80},{0,100}})));
   Modelica.Blocks.Interfaces.RealInput dist2 if bodyDisturbance
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
@@ -38,16 +30,14 @@ model DoublePendulumInverse "Multibody model of inverse crane trolley"
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={60,122})));
-  Modelica.Mechanics.MultiBody.Visualizers.FixedShape fixedShape2(
-    lengthDirection={0,-1,0},
-    widthDirection={1,0,0},
-    height=0.5*bodyShape.height,
-    color={100,100,100},
-    length=0.5*bodyShape.length,
-    width=50*bodyShape.width,
-    r_shape=bodyShape.r_shape + 0.5*(bodyShape.length - fixedShape2.length)*{200,
-        -1,0})
-    annotation (Placement(transformation(extent={{-110,30},{-130,50}})));
+  Modelica.Mechanics.Translational.Sources.Force distrubanceForceCart if cartDisturbance
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={-80,80})));
+  Modelica.Mechanics.MultiBody.Forces.Torque torque if bodyDisturbance
+    annotation (Placement(transformation(extent={{20,64},{40,84}})));
+  Modelica.Blocks.Sources.Constant constZero(k=0) if bodyDisturbance
+    annotation (Placement(transformation(extent={{-20,80},{0,100}})));
   Modelica.Mechanics.MultiBody.Visualizers.FixedShape fixedShape(
     shapeType="cylinder",
     lengthDirection=revolute1.n,
@@ -68,6 +58,16 @@ model DoublePendulumInverse "Multibody model of inverse crane trolley"
     color=bodyCylinder1.color,
     r_shape=-0.5*fixedShape1.length*fixedShape1.lengthDirection)
     annotation (Placement(transformation(extent={{50,30},{70,50}})));
+  Modelica.Mechanics.MultiBody.Visualizers.FixedShape fixedShape2(
+    lengthDirection={0,-1,0},
+    widthDirection={1,0,0},
+    height=0.5*bodyShape.height,
+    color={100,100,100},
+    length=0.5*bodyShape.length,
+    width=50*bodyShape.width,
+    r_shape=bodyShape.r_shape + 0.5*(bodyShape.length - fixedShape2.length)*{200,
+        -1,0})
+    annotation (Placement(transformation(extent={{-110,30},{-130,50}})));
 equation
   connect(distrubanceForceCart.f,dist)  annotation (Line(
       points={{-80,92},{-80,120}},
@@ -99,11 +99,6 @@ equation
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
-  connect(fixedShape.frame_a, rev.frame_b) annotation (Line(
-      points={{-10,40},{-16,40},{-16,10},{-20,10}},
-      color={95,95,95},
-      thickness=0.5,
-      smooth=Smooth.None));
   connect(fixedShape1.frame_a, revolute2.frame_b) annotation (Line(
       points={{50,40},{44,40},{44,10},{40,10}},
       color={95,95,95},
@@ -114,8 +109,14 @@ equation
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},
-            {150,100}}), graphics), Documentation(info="<html>
+  connect(fixedShape.frame_a, revolute1.frame_b) annotation (Line(
+      points={{-10,40},{-16,40},{-16,10},{-20,10}},
+      color={95,95,95},
+      thickness=0.5,
+      smooth=Smooth.None));
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-150,
+            -100},{150,100}}),
+                         graphics), Documentation(info="<html>
 <p>Multibody model of a simple inverted double pendulum system. This physical model is used in various models and functions of the library e.g. for linearization or as a base for linear controller design. The mdel is the same as in Modelica_Controller.Examples.Components.DoublePendulum but with different initial values because the initial values are used as a working point for linearization.</p>
 </html>"));
 end DoublePendulumInverse;

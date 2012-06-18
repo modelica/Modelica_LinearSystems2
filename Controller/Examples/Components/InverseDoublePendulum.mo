@@ -290,10 +290,6 @@ equation
           160,100}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(phi, phi) annotation (Line(
-      points={{160,20},{160,20}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(add.y, phi) annotation (Line(
       points={{141,20},{160,20}},
       color={0,0,127},

@@ -219,7 +219,7 @@ encapsulated operator '-'
     annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
-This package contains the <a href=\"modelica://Modelica_LinearSystems2.StateSpace.'-'.subtract\">'subtract'</a> and the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.subtract\">'-'</a> operator for StateSpace records. 
+This package contains the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.negate\">negate</a> operator for StateSpace records. 
 
 </html>"));
 end '-';
@@ -2972,7 +2972,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of the corresponding transfer function. 
 The state space system is converted to the transfer function G(s)=N(s)/D(s) with the polynomial D(s) as denominator.
-See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.numeratorDegree\">StateSpace.Analysis.numeratorDegree</a>.
+See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.numeratorDegree\">StateSpace.Analysis.numeratorDegree</a>.
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -5179,7 +5179,7 @@ and results in
 <blockquote><pre>
 StateSpace.Plot.<b>plotBodeSISO</b>(ss)
    or
-StateSpace.Plot.<b>plotBodeSISO</b>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+StateSpace.Plot.<b>plotBodeSISO</b>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
@@ -5294,7 +5294,7 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
 <blockquote><pre>
 StateSpace.Plot.<b>plotBodeMIMO</b>(ss)
    or
-StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 </p>
 
@@ -6876,7 +6876,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
     result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
     result.xNames := xuyName[1:nx];
 
-          annotation (interactive=true, Documentation(info="<html>
+    annotation (interactive=true, Documentation(info="<html>
 <p><h4>Syntax</h4></p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
 <td><p align=\"right\">ss </p></td>

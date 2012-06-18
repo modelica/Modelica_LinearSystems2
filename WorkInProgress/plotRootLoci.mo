@@ -14,11 +14,15 @@ function plotRootLoci
   input Real p_min = 1 "Minimum value of modelParameter";
   input Real p_max = 6 "Maximum value of modelParameter";
 
-  input Real T_linearize=0
+  input Modelica.SIunits.Time T_linearize=0
     "Simulate until T_linearize and then linearize the model"
     annotation (Dialog(group="Simulation setup"));
   input String method="Dassl" "Integration method"
-    annotation (Dialog(group="Simulation setup"));
+    annotation (Dialog(group="Simulation setup"),
+    choices(choice="Dassl" "Dassl",
+    choice="Rkfix2" "Rkfix2",
+    choice="Rkfix3" "Rkfix3",
+    choice="Rkfix4" "Rkfix4"));
 
   input Integer position[4]={5, 5, 600, 450} "Window Position"
     annotation (Dialog(group="Plot settings"));
@@ -63,7 +67,7 @@ algorithm
     // Plot root loci
     Modelica_LinearSystems2.Examples.StateSpace.plotEigenvalues(sSpace.A, if i == 1 then true else false, position, "Root loci of " + modelName + "; parVar: " + modelParameter, useLegend, String(parValue), grid, markerStyle, integer(color[i, :]));
   end for;
-  annotation (Documentation(info="<html>
+  annotation (interactive=true, Documentation(info="<html>
 <p><h4><font color=\"#008000\">Syntax</font></h4></p>
 <blockquote><pre>plotRootLoci(modelName, modelParameter, nVariations, p_min, p_max, T_linearize, method, position, useLegend, grid, markerStyle, markerColorMin, markerColorMax)</pre></blockquote>
 <p><h4><font color=\"#008000\">Description</font></h4></p>

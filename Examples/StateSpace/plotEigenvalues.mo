@@ -107,5 +107,5 @@ algorithm
 //   input Real thicknesses[size(y, 1)] "Line thicknesses";
 //   output Integer _window;
 
-  annotation ();
+  annotation (interactive=true);
 end plotEigenvalues;
