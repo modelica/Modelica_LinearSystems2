@@ -163,8 +163,8 @@ This block is demonstrated with example
 leading to the following result when filtering a sine-signal with \"continuous\" (interpolator1.y), \"discrete, unfiltered\" (interpolator2.y) and \"discrete, filtered\" (interpolator3.y) Interpolator:
 </p>
 
-<p align=\"center\">
-<IMG src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controller/Examples/Interpolator.png\">
+<p>
+<IMG src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controllers/Examples/Interpolator.png\">
 </p>
 
 </html>

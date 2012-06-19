@@ -184,7 +184,7 @@ In the following figure the simulation results of the discrete and
 of the continuous controller are compared.
 </p>
 <p>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controller/Examples/SimpleControlledDrive_Plot1.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controllers/Examples/SimpleControlledDrive_Plot1.png\">
 </p>
 </html>"));
 end SimpleControlledDrive;
