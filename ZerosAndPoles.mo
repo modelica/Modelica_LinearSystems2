@@ -2192,7 +2192,6 @@ is set.
       "Plot eigenvalues and or the zeros of a zeros-and-poles transfer function"
 
       import Modelica;
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Math.Complex;
@@ -4104,10 +4103,10 @@ processing.
 
     encapsulated function fromFile
       "Generate a ZerosAndPoles record by reading the polynomial coefficients or zeros and poles from a file"
+      import Modelica;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Complex;
-      import Modelica;
       import Modelica_LinearSystems2.DataDir;
 
       input String fileName=DataDir + "/zp.mat"
@@ -6305,8 +6304,8 @@ int found=0;
     end findMatrixName;
 
   encapsulated function scaleFactor1
-      "Return scale factor for first order block"
-      import Modelica;
+    "Return scale factor for first order block"
+    import Modelica;
     input Real n "(s+n)/(s+d)";
     input Real d "(s+n)/(s+d)";
     input Real small=100*Modelica.Constants.eps;
@@ -6317,7 +6316,7 @@ int found=0;
   end scaleFactor1;
 
   function scaleFactor2 "Return scale factor for second order block"
-      import Modelica;
+    import Modelica;
     input Real n1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
     input Real n2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
     input Real d1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
@@ -6331,11 +6330,11 @@ int found=0;
   end scaleFactor2;
 
   encapsulated function fromFile_pc
-      "Generate a zeros and poles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica;
+    "Generate a zeros and poles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.Math.Complex;
 
     input String fileName="pc.mat" "Name of the zeros and poles data file"
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
