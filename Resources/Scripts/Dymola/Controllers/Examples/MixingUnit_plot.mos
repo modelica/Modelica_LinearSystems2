@@ -2,7 +2,7 @@
 // Plot commands
 removePlots();
 createPlot(id = 1,
- position = {15, 10, 524, 768},
+ position = {15, 10, 550, 660},
  y = {"plant.mixingUnit.T_c"},
  range = {0, 500.0, 308.0, 300.0},
  autoscale = true,
@@ -16,7 +16,7 @@ createPlot(id = 1,
  leftTitleType = 1,
  bottomTitleType = 1);
 createPlot(id = 1,
- position = {15, 10, 524, 253},
+ position = {15, 10, 550, 220},
  y = {"plant.mixingUnit.T"},
  range = {0, 500.0, 324.0, 310.0},
  autoscale = true,
@@ -30,8 +30,8 @@ createPlot(id = 1,
  leftTitleType = 1,
  bottomTitleType = 1);
 createPlot(id = 1,
- position = {15, 10, 524, 254},
- y = {"plant.mixingUnit.c", "Step1.y"},
+ position = {15, 10, 550, 220},
+ y = {"plant.mixingUnit.c", "step1.y"},
  range = {0, 500.0, 0.5, 0.2},
  autoscale = true,
  autoerase = true,

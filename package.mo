@@ -54,7 +54,7 @@ For an introduction, have especially a look at:
 <ul>
 <li> <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted\">Getting started</a>
      provides an overview of the Library
-     inside the <a href=\"modelica://Modelica.UsersGuide\">Users Guide</a>.</li>
+     inside the <a href=\"modelica://Modelica_LinearSystems2.UsersGuide\">Users Guide</a>.</li>
 <li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ReleaseNotes\">Release Notes</a>
     summarizes the changes of new versions of this package.</li>
 <li> <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Contact\">Contact</a>

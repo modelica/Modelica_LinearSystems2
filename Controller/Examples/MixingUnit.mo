@@ -32,7 +32,7 @@ model MixingUnit
   final parameter Real c_high_start(unit="mol/l") = c0*(1-0.72);
   final parameter Real T_c_start = T0*(1+u0);
 
-  Modelica.Blocks.Sources.Step Step1(height=c_high_start - c_start, offset=
+  Modelica.Blocks.Sources.Step step1(height=c_high_start - c_start, offset=
         c_start,
     startTime=25)
     annotation (Placement(transformation(extent={{-134,10},{-114,30}},
@@ -40,29 +40,29 @@ model MixingUnit
   inner Controller.SampleClock sampleClock
     annotation (Placement(transformation(extent={{80,60},{100,80}})));
 equation
-  connect(Step1.y, filter.u) annotation (Line(
+  connect(step1.y, filter.u) annotation (Line(
       points={{-113,20},{-102,20}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
+    experiment(StopTime=500),
+    Commands(
+      file="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/MixingUnit_plot.mos"
+        "Plot Results",
+      file(
+        ensureSimulated=true,
+        partOfCheck=true)=
+        "modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/MixingUnit_plot.mos"
+        "Simulate and Plot Results"),
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,-100},{140,
             100}}), graphics),
-    experiment(StopTime=500),
-    experimentSetupOutput,
     Documentation(info="<html>
-<p>
-This example demonstrates the usage of the control structure template
-<i>Modelica_Controller.Templates.TwoDOFinverseModelController2</i>
-to control a system by using of a inverse system model in the forward path.<br>
-The controlled system is a mixing unit described in [1].
- 
- 
-<p>
- 
-<A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A> <PRE>
-  [1] Föllinger O., \"Nichtlineare Regelungen I\",
-      Oldenbourg Verlag, 8. Auflage.
-</PRE>
-</html>"),
-    Commands(file="modelica://Modelica_LinearSystems2/Resources/Scripts/plotResultsMixingUnit.mos" "plotResults"));
+<p>This example demonstrates the usage of the control structure template <i>Modelica_Controller.Templates.TwoDOFinverseModelController2</i> to control a system by using of a inverse system model in the forward path. The controlled system is a mixing unit described in [1]. </p>
+<p>Within Dymola simulation tool the &QUOT;Commands / Simulate and Plot Results&QUOT; selection yields the following simulation result. </p>
+<h4>Simulation results </h4>
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controller/Examples/MixingUnit_results.png\"/> </p>
+<h4><a name=\"References\">R</a>eferences</h4>
+<pre>  [1] F&ouml;llinger O., &QUOT;Nichtlineare Regelungen I&QUOT;,
+      Oldenbourg Verlag, 8. Auflage.</pre>
+</html>"));
 end MixingUnit;

@@ -80,7 +80,7 @@ sample rates. In this example, a sampled sine-signal is interpolated in differen
      results in a filtered interpolation signal.</li>
 </ol>
 
-<p align=\"center\">
+<p>
 <IMG src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controller/Examples/Interpolator.png\">
 </p>
 

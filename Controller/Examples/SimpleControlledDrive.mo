@@ -7,17 +7,20 @@ model SimpleControlledDrive
   parameter Modelica.SIunits.Time Tv = 0.05
     "Time constant of PI speed controller";
   Modelica.Mechanics.Rotational.Components.Inertia motorInertia(J=0.1)
-    annotation (extent=[-20,-80; 0,-60], Placement(transformation(extent={{-20,
-            -80},{0,-60}})));
+    annotation (extent=[-20,-80; 0,-60], Placement(transformation(extent={{-10,-80},
+            {10,-60}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=0.3)
-    annotation (extent=[60,-80; 80,-60]);
+    annotation (extent=[60,-80; 80,-60], Placement(transformation(extent={{60,-80},
+            {80,-60}})));
   Modelica.Mechanics.Rotational.Components.SpringDamper spring(c=1e5, d=100)
-    annotation (extent=[20,-80; 42,-60]);
+    annotation (extent=[20,-80; 42,-60], Placement(transformation(extent={{30,-80},
+            {50,-60}})));
 
   Modelica.Mechanics.Rotational.Sources.Torque torque
-    annotation (extent=[-60,-80; -40,-60]);
+    annotation (extent=[-60,-80; -40,-60], Placement(transformation(extent={{-50,
+            -80},{-30,-60}})));
   inner SampleClock sampleClock(sampleTime=0.005, blockType=
-        Modelica_LinearSystems2.Controller.Types.BlockType.Discrete)
+        Modelica_LinearSystems2.Controller.Types.BlockType.Continuous)
     annotation (extent=[-83,55; -63,75], Placement(transformation(extent={{-80,
             60},{-60,80}})));
   Modelica.Blocks.Sources.Ramp ramp(duration=2)
@@ -47,10 +50,6 @@ model SimpleControlledDrive
   Sampler sampler2(sampleFactor=2)
                    annotation (extent=[36,-10; 56,10], rotation=90);
 equation
-  connect(motorInertia.flange_b, spring.flange_a)
-    annotation (points=[0,-70; 20,-70], style(color=0, rgbcolor={0,0,0}));
-  connect(spring.flange_b, loadInertia.flange_a)
-    annotation (points=[42,-70; 60,-70], style(color=0, rgbcolor={0,0,0}));
   connect(sampler1.y, feedback.u2) annotation (points=[-10,9; -10,22],
       style(color=74, rgbcolor={0,0,127}));
   connect(sampler2.y, feedback2.u2) annotation (points=[46,11; 46,22],
@@ -60,15 +59,15 @@ equation
   connect(angle.phi, sampler1.u) annotation (points=[-10,-25; -10,-14],
       style(color=74, rgbcolor={0,0,127}));
   connect(torque.flange, motorInertia.flange_a) annotation (Line(
-      points={{-40,-70},{-20,-70}},
+      points={{-30,-70},{-10,-70}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(motorInertia.flange_a, angle.flange) annotation (Line(
-      points={{-20,-70},{-26,-70},{-26,-52},{-10,-52},{-10,-46}},
+      points={{-10,-70},{-20,-70},{-20,-52},{-10,-52},{-10,-46}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(motorInertia.flange_b, speed.flange) annotation (Line(
-      points={{0,-70},{16,-70},{16,-50},{46,-50},{46,-44}},
+      points={{10,-70},{20,-70},{20,-50},{46,-50},{46,-44}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(filter.u, ramp.y) annotation (Line(
@@ -92,14 +91,31 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(torque.tau, PI1.y) annotation (Line(
-      points={{-62,-70},{-82,-70},{-82,-84},{92,-84},{92,30},{85,30}},
+      points={{-52,-70},{-60,-70},{-60,-90},{92,-90},{92,30},{85,30}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(filter.y, sampler3.u) annotation (Line(
       points={{-50,30},{-46,30}},
       color={0,0,127},
       smooth=Smooth.None));
+  connect(spring.flange_a, motorInertia.flange_b) annotation (Line(
+      points={{30,-70},{10,-70}},
+      color={0,0,0},
+      smooth=Smooth.None));
+  connect(spring.flange_b, loadInertia.flange_a) annotation (Line(
+      points={{50,-70},{60,-70}},
+      color={0,0,0},
+      smooth=Smooth.None));
   annotation (
+    experiment(StopTime=3),
+    Commands(
+      file="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/SimpleControlledDriver_plot.mos"
+        "Plot Results",
+      file(
+        ensureSimulated=true,
+        partOfCheck=true)=
+        "modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/SimpleControlledDriver_plot.mos"
+        "Simulate and Plot Results"),
     Diagram(
       coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
       Rectangle(extent=[-50,60; 96,-18], style(color=1, rgbcolor={255,0,0})),
@@ -116,11 +132,6 @@ equation
         style(color=1, rgbcolor={255,0,0}),
         string="plant (flexible drive)"),
       graphics),
-    experiment(StopTime=3),
-    experimentSetupOutput,
-    Commands(file="modelica://Modelica_LinearSystems2/Resources/Scripts/SimpleControlledDriver_Plot1.mos"
-        "Plot most important variables"),
-    Coordsys(grid=[1,1], scale=0),
     Documentation(info="<html>
 <p>
 This example demonstrates the control of a simple model
@@ -165,12 +176,15 @@ time to determine the analog actuator (torque) signal, and
 component Noise to add uniformly distributed noise to
 the measurement signals.
 </p>
+<p>Within Dymola simulation tool the &QUOT;Commands / Simulate and Plot Results&QUOT; 
+selection plots the simulation result of either continuous or discrete controller.</p>
+<h4>Simulation results </h4>
 <p>
-In the following figure simulation results of the discrete and
-of the continuous controller are shown:
+In the following figure the simulation results of the discrete and
+of the continuous controller are compared.
 </p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/SimpleControlledDrive_Plot1.png\">
+<p>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controller/Examples/SimpleControlledDrive_Plot1.png\">
 </p>
 </html>"));
 end SimpleControlledDrive;

@@ -48,7 +48,6 @@ equation
       NumberOfIntervals=2000,
       Tolerance=1e-005),
     experimentSetupOutput,
-    Commands,
     Documentation(info="<html>
  
 This example shows a control system with constant state feedback.

@@ -25,16 +25,15 @@ blocks of a controller.
 </p>
  
 <p>
-Examples to demonstrate the technique are given in sublibrary
+Examples to demonstrate the technique are given in the package
 <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples\">Examples</a>.
 Especially, the continuous or discrete control of a simple flexible
 drive with a P-PI cascade controller is demonstrated in example
 <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.SimpleControlledDrive\">SimpleControlledDrive</a>.
 </p>
  
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/SimpleControlledDrive_Plot2.png\">
+<p>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controller/Examples/SimpleControlledDrive_Layout.png\">
 </p>
- 
 </html>"));
 end Controller;
