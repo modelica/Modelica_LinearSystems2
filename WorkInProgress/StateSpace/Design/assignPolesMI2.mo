@@ -295,11 +295,11 @@ print("ev1 = "+String(A_rsf[n,n])+"\n");
 end if;
 
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (K, S, po, nfp, nap, nup) </td><td align=center> =  </td>  <td> StateSpace.Design.<b>assignPolesMI</b>(ss, gamma, np, alpha, tol)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 The purpose of this function is to determine the state feedback matrix <b>K</b> for a
 given time invariant multi input state system (<b>A</b>,<b>B</b>) such that the
@@ -355,7 +355,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1, 1, 1;0, 1, 1;0, 0, 1],
@@ -371,7 +371,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 </pre></blockquote>
 
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center>  Varga A.  </td>  <td> \"A Schur method for pole assignment\"  </td> <td> IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981 </td></tr>
 </table>

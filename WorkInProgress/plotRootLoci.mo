@@ -68,9 +68,9 @@ algorithm
     Modelica_LinearSystems2.Examples.StateSpace.plotEigenvalues(sSpace.A, if i == 1 then true else false, position, "Root loci of " + modelName + "; parVar: " + modelParameter, useLegend, String(parValue), grid, markerStyle, integer(color[i, :]));
   end for;
   annotation (interactive=true, Documentation(info="<html>
-<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<p><h4>Syntax</h4></p>
 <blockquote><pre>plotRootLoci(modelName, modelParameter, nVariations, p_min, p_max, T_linearize, method, position, useLegend, grid, markerStyle, markerColorMin, markerColorMax)</pre></blockquote>
-<p><h4><font color=\"#008000\">Description</font></h4></p>
+<p><h4>Description</h4></p>
 <p>Calling this function with default setup the following root loci plot will be generated.</p>
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rootLociiDefaultSetup.png\"/></p>
 </html>"));

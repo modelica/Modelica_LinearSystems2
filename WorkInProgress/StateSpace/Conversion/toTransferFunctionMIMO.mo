@@ -27,11 +27,11 @@ algorithm
   end for;
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tf </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunctionMIMO</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a matrix of TransferFunction records
 <blockquote><pre>
@@ -42,12 +42,12 @@ Computes a matrix of TransferFunction records
 with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
 
 
-<h4><font color=\"#008000\">Example</font></h4>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Example</h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunctionMIMO</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a matrix of TransferFunction records
 <blockquote><pre>
@@ -58,7 +58,7 @@ Computes a matrix of TransferFunction records
 with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
     A = [-1.0, 0.0, 0.0;

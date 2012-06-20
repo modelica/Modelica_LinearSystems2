@@ -28,11 +28,11 @@ algorithm
   tf.uName := zp.uName;
   tf.yName := zp.yName;
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tf </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.<b>toTransferFunction</b>(zp)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a TransferFunction record
  <blockquote><pre>
@@ -43,7 +43,7 @@ Computes a TransferFunction record
 from a ZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the TransferFunction constructor.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
    Modelica_LinearSystems2.ZerosAndPoles zp = 1/(p + 3)/(p + 1)

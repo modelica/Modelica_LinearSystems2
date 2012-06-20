@@ -54,7 +54,7 @@ encapsulated operator 'constructor'
     result.xNames := xNames;
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote>
 <pre>
 ss = 'constructor'.<b>fromABCDMatrices</b>(A, B, C, D)
@@ -62,7 +62,7 @@ ss = 'constructor'.<b>fromABCDMatrices</b>(A, B, C, D)
 </blockquote>
 
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function constructs a StateSpace record ss with
 <blockquote><pre>
@@ -74,7 +74,7 @@ ss.D = D;
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <p>
 <blockquote><pre>
   Real A[1,1] = [1];
@@ -112,7 +112,7 @@ public
   algorithm
     ss.D[1, 1] := r;
     annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote>
 <pre>
 ss = 'constructor'.<b>fromReal</b>(r)
@@ -120,7 +120,7 @@ ss = 'constructor'.<b>fromReal</b>(r)
 </blockquote>
 
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function constructs a StateSpace record ss from a Real value, i.e. a state space system without a state and an output without dynamics:
 <blockquote><pre>
@@ -177,13 +177,13 @@ encapsulated operator '-'
     result.C := [ss1.C,-ss2.C];
     result.D := ss1.D - ss2.D;
       annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<p><h4>Syntax</h4></p>
 <blockquote><code>ss = Modelica_LinearSystems2.StateSpace.&apos;-&apos;.<b>subtract</b>(ss1, ss2) </code></blockquote>
-<p><h4><font color=\"#008000\">Description</font></h4></p>
+<p><h4>Description</h4></p>
 <p>This operator function computes the subtraction of two state space systems connected in parallel, i.e. the inputs are the same and the outputs of the two systems are subtracted. Therefore, the systems must have the same number of inputs and outputs but not the same number of states. The resulting system has an order of system_order1 + system_order2.</p>
 <p>The operator is used by writing just the following command: </p>
 <blockquote><code>ss3 := ss1 - ss2;</code> </blockquote>
-<p><h4><font color=\"#008000\">Example</font></h4></p>
+<p><h4>Example</h4></p>
 <blockquote><pre>  StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
   StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
    
@@ -217,7 +217,7 @@ encapsulated operator '-'
     result.D := -ss.D;
   end negate;
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This package contains the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.negate\">negate</a> operator for StateSpace records. 
 
@@ -952,12 +952,12 @@ encapsulated package Analysis
     public
     encapsulated function printSystem
         "Print the state space system in html format on file"
-        import Modelica;
-        import Modelica.Utilities.Streams.print;
-        import Modelica_LinearSystems2.StateSpace;
-        import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2;
 
-      input StateSpace ss "state space system to analyze";
+      input StateSpace ss "State space system to analyze";
       input String fileName="systemAnalysis.html"
           "File on which the state space is written in html format";
       input String systemName="State Space System"
@@ -970,19 +970,20 @@ encapsulated package Analysis
       Integer ny=size(ss.C, 1);
       Integer c1=integer(ceil(nx/2) - 1);
       Integer c2=integer(ceil(ny/2) - 1);
-      Integer dist=8;
+      Integer dist=1;
 
     algorithm
       Modelica.Utilities.Files.removeFile(fileName);
-      print("<html><body><p><br><br><b>System report</b></p>", fileName);
-      print("<p><br> The system <b>" + systemName + "</b><br></p>", fileName);
+      print("<html>\n<body><h1>System report</h1>", fileName);
+      print("<h2>Matrices</h2>", fileName);
+      print("<p>The system <b>" + systemName + "</b></p>", fileName);
       print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
          + "cellpadding=\"3\" border=\"0\"> ", fileName);
       print("<tr><td>der(x) </td> <td>=</td> <td> Ax</td> <td> +</td><td> Bu</td></tr>
          <tr><td> y </td>     <td>=</td> <td> Cx</td> <td> + </td><td>Du</td></tr></table> <br><br>is defined by<br>",
         fileName);
 
-    // print A and B
+      // Print A and B
       print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
          + "cellpadding=\"3\" border=\"0\"> ", fileName);
       print("<tr><td><br></td><td><br></td><td><br></td>", fileName);
@@ -999,7 +1000,7 @@ encapsulated package Analysis
 
       print("</tr>", fileName);
 
-    //print upper parts of A and B
+      // Print upper parts of A and B
       for i1 in 1:c1 loop
         print("<tr> <td><br></td><td><br></td><td> " + ss.xNames[i1] + " </td>",
           fileName);
@@ -1022,15 +1023,14 @@ encapsulated package Analysis
         print("</tr>", fileName);
       end for;
 
-    //print middle part of A and B
+      // Print middle part of A and B
       print("<tr><td>A</td><td>=</td><td>" + ss.xNames[c1 + 1] + " </td>", fileName);
       for i2 in 1:nx loop
         print("<td> " + String(ss.A[c1 + 1, i2], format=format) + " </td>",
           fileName);
       end for;
-      for i2 in 1:dist - 3 loop
-        print("<td><br></td>", fileName);
-      end for;
+      // Print space between matrix A and B
+      print("<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>", fileName);
 
       if nu > 0 then
         print("<td>B</td><td>=</td><td>" + ss.xNames[c1 + 1] + " </td>", fileName);
@@ -1045,7 +1045,7 @@ encapsulated package Analysis
       end if;
            //nu>0
 
-    //print lower parts of A and B
+      // Print lower parts of A and B
       for i1 in c1 + 2:nx loop
         print("<tr><td><br></td><td><br></td><td> " + ss.xNames[i1] + " </td>",
           fileName);
@@ -1071,7 +1071,7 @@ encapsulated package Analysis
 
       print("<br><br>", fileName);
 
-    // print C and D
+      // Print C and D
       print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
          + "cellpadding=\"3\" border=\"0\">", fileName);
       print("<tr><td><br></td><td><br></td><td><br></td>", fileName);
@@ -1092,7 +1092,7 @@ encapsulated package Analysis
       print("</tr>", fileName);
 
       if ny > 0 then
-     //print upper parts of C and D
+        // Print upper parts of C and D
         for i1 in 1:c2 loop
           print("<tr> <td><br></td><td><br></td><td> " + ss.yNames[i1] + " </td>",
             fileName);
@@ -1112,20 +1112,17 @@ encapsulated package Analysis
 
           print("</tr>", fileName);
         end for;
-      end if;
-           //ny>0
 
-     //print middle part of C and D
-      if ny > 0 then
+        // Print middle part of C and D
         print("<tr><td>C</td><td>=</td><td>" + ss.yNames[c2 + 1] + " </td>",
           fileName);
         for i2 in 1:nx loop
           print("<td> " + String(ss.C[c2 + 1, i2], format=format) + " </td>",
             fileName);
         end for;
-        for i2 in 1:dist - 3 loop
-          print("<td><br></td>", fileName);
-        end for;
+        // Print space between matrix A and B
+        print("<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>", fileName);
+
         print("<td>D</td><td>=</td><td>" + (if nu>0 then ss.yNames[min(c2 + 1, ny)] else "[ ],  empty matrix: " +String(ny)+" by "+String(nu)) + " </td>",
           fileName);
 
@@ -1133,17 +1130,8 @@ encapsulated package Analysis
           print("<td> " + String(ss.D[c2 + 1, i2], format=format) + " </td>",
             fileName);
         end for;
-      else
-        print("<tr><td>C</td><td>=</td><td>[ ],  empty matrix: " +String(ny)+" by "+String(nx) + " </td>", fileName);
-        for i2 in 1:dist - 3 loop
-          print("<td><br></td>", fileName);
-        end for;
-        print("<td>D</td><td>=</td><td>[ ],  empty matrix: " +String(ny)+" by "+String(nu) + " </td>", fileName);
-      end if;
-           //ny>0
 
-     //print lower parts of C and D
-      if ny > 0 then
+        // Print lower parts of C and D
         for i1 in c2 + 2:ny loop
           print("<tr><td><br></td><td><br></td><td> " + ss.yNames[i1] + " </td>",
             fileName);
@@ -1162,35 +1150,42 @@ encapsulated package Analysis
           end for;
           print("</tr>", fileName);
         end for;
-      end if;
-           // ny>0
-
-      if description == "" then
-        print("</table>\n", fileName);
       else
-        print("</table>", fileName);
-        print("<p>\n<b>Description</b>\n</p>", fileName);
-        print(description, fileName);
+        // Matrices C and D are empty
+        print("<tr><td>C</td><td>=</td><td>[ ],  empty matrix: " +String(ny)+" by "+String(nx) + " </td>", fileName);
+        // Print space between matrix A and B
+        print("<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>", fileName);
+
+        print("<td>D</td><td>=</td><td>[ ],  empty matrix: " +String(ny)+" by "+String(nu) + " </td>", fileName);
       end if;
+
+      print("</table>\n", fileName);
 
       if ny==0 and nu==0 then
         print("<p>\n<b>Note</b>, that matrices <b>B</b> and <b>C</b> are empty matrices, i.e. the system has neither inputs nor outputs!\n</p>", fileName);
       elseif ny==0 then
-         print("<p>\n<b>Note</b>, that atrix <b>C</b> is empty matrix, i.e. the system has no outputs!\n</p>", fileName);
+        print("<p>\n<b>Note</b>, that matrix <b>C</b> is empty matrix, i.e. the system has no outputs!\n</p>", fileName);
       elseif nu==0 then
-         print("<p>\n<b>Note</b>, that matrix <b>B</b> is empty matrix, i.e. the system has no inputs!\n</p>", fileName);
+        print("<p>\n<b>Note</b>, that matrix <b>B</b> is empty matrix, i.e. the system has no inputs!\n</p>", fileName);
       end if;
 
-      print("</body></html>", fileName);
+      if description == "" then
+      else
+        print("</table>\n", fileName);
+        print("<h2>Description</h2>", fileName);
+        print(description, fileName);
+      end if;
+
+      print("</body>\n</html>", fileName);
 
     end printSystem;
 
     encapsulated function printHead1
-        import Modelica;
-        import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
-        import Modelica.Utilities.Streams.print;
-        import Modelica_LinearSystems2.StateSpace;
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.StateSpace;
 
       input StateSpace ss;
       input Boolean isStable;
@@ -1198,7 +1193,10 @@ encapsulated package Analysis
       input Boolean isStabilizable;
       input Boolean isObservable;
       input Boolean isDetectable;
-      input String fileName;
+      input String fileName="systemHead1.html"
+          "File on which the information is written in html format";
+      input Integer hSize(min=1, max=5)=2
+          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)";
 
       input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
           Modelica_LinearSystems2.Internal.AnalyseOptions(
@@ -1215,49 +1213,55 @@ encapsulated package Analysis
             headingInvariantzeros="Invariant zeros",
             headingStepResponse="Step response",
             headingFrequencyResponse="Frequency response");
+      protected
+      Integer hSizeOK= if hSize<1 then 1 else if hSize > 5 then 5 else hSize;
+      String heading= "h"+String(hSizeOK);
 
     algorithm
-      print("<html>\n<body>\n<p>\n<b>Characteristics</b>\n</p>The system\n<p>" + "</p> is ",
+      print("<html>\n<body>\n<"+heading+">Characteristics</"+heading+">\n<p>The system\n<p>\n</p> is ",
         fileName);
       if analyseOptions.printControllability and analyseOptions.printObservability then
         print((if isStable then " " else "not ") + "stable" + "\n<br>" + (if
           isStable then if isControllable then "and it is " else "but it is not " else
                 if isControllable then "but it is " else "and it is not ") + "controllable"
            + (if isStable then "" else "\n<br>" + (if isControllable then " and therefore it is " else
-                if isStabilizable then " but it is " else "and is not ") + "stabilizable")
+                if isStabilizable then " but it is " else "and is not ") + "stabilizable.")
            + "\n<br> The system is " + (if isObservable then " " else "not ") + "observable"
            + (if isStable then "" else "\n<br>" + (if isObservable then " and therefore it is " else
-                if isDetectable then " but it is " else "and is not ") + "detectable")
+                if isDetectable then " but it is " else "and is not ") + "detectable.")
            + "\n<br></br>", fileName);
       elseif not analyseOptions.printObservability and analyseOptions.printControllability then
         print((if isStable then " " else "not ") + "stable" + "\n<br>" + (if
           isStable then if isControllable then "and it is " else "but it is not " else
                 if isControllable then "but it is " else "and it is not ") + "controllable"
            + (if isStable then "" else "\n<br>" + (if isControllable then " and therefore it is " else
-                if isStabilizable then " but it is " else "and is not ") + "stabilizable")
+                if isStabilizable then " but it is " else "and is not ") + "stabilizable.")
            + "\n<br></br>", fileName);
       elseif not analyseOptions.printControllability and analyseOptions.printObservability then
-        print((if isStable then " " else "not ") + "stable" + "\n<br> The system is "
+        print((if isStable then " " else "not ") + "stable." + "\n<br> The system is "
            + (if isObservable then " " else "not ") + "observable" + (if isStable then
                 "" else "\n<br>" + (if isObservable then " and therefore it is " else
-                if isDetectable then " but it is " else "and is not ") + "detectable")
+                if isDetectable then " but it is " else "and is not ") + "detectable.")
            + "\n<br></br>", fileName);
       else
-        print((if isStable then " " else "not ") + "stable" + "\n<br></br>",
+        print((if isStable then " " else "not ") + "stable." + "\n<br></br>",
           fileName);
       end if;
-      print("</body></html>", fileName);
+      print("</body>\n</html>", fileName);
 
     end printHead1;
 
     public
     encapsulated function printHead2a
-        import Modelica;
-        import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
-        import Modelica.Utilities.Streams.print;
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica.Utilities.Streams.print;
 
-      input String fileName;
+      input String fileName="systemHead2a.html"
+          "File on which the information is written in html format";
+      input Integer hSize(min=1, max=5)=3
+          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)";
       input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
           Modelica_LinearSystems2.Internal.AnalyseOptions(
             plotEigenValues=true,
@@ -1273,17 +1277,20 @@ encapsulated package Analysis
             headingInvariantzeros="Invariant zeros",
             headingStepResponse="Step response",
             headingFrequencyResponse="Frequency response");
+      protected
+      Integer hSizeOK= if hSize<1 then 1 else if hSize > 5 then 5 else hSize;
+      String heading= "h"+String(hSizeOK);
 
     algorithm
+      print("<html>\n<body>\n<"+heading+">Eigenvalues analysis</"+heading+">\n<p><b>Real eigenvalues</b></p>",
+        fileName);
       if analyseOptions.printEigenValueProperties then
-        print("<html>\n<body>\n<b><big>Eigenvalues analysis</big></b><br><br><b>Real eigenvalues</b>\n<br>"
-           + "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+        print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
            + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
            + "<td> number </td><td> eigenvalue </td> <td> T [s] </td>  <td> characteristics </td><td> contribution to states</td></tr>",
           fileName);
       else
-        print("<html>\n<body>\n<b><big>Eigenvalues analysis</big></b><br><br><b>Real eigenvalues</b>\n<br>"
-           + "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+        print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
            + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
            + "<td> number </td><td> eigenvalue </td> <td> T [s] </td>  <td> characteristics </td></tr>",
           fileName);
@@ -1297,7 +1304,52 @@ encapsulated package Analysis
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
 
-      input String fileName;
+      input String fileName="systemHead2b.html"
+          "File on which the information is written in html format";
+      input Integer hSize(min=1, max=5)=3
+          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)";
+      input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
+          Modelica_LinearSystems2.Internal.AnalyseOptions(
+            plotEigenValues=true,
+            plotInvariantZeros=true,
+            plotStepResponse=true,
+            plotFrequencyResponse=true,
+            printEigenValues=true,
+            printEigenValueProperties=true,
+            printInvariantZeros=true,
+            printControllability=true,
+            printObservability=true,
+            headingEigenValues="Eigenvalues",
+            headingInvariantzeros="Invariant zeros",
+            headingStepResponse="Step response",
+            headingFrequencyResponse="Frequency response");
+      protected
+      Integer hSizeOK= if hSize<1 then 1 else if hSize > 5 then 5 else hSize;
+      String heading= "h"+String(hSizeOK);
+
+    algorithm
+      print("<html>\n<body>\n<"+heading+">Conjugated complex pairs of eigenvalues</"+heading+">", fileName);
+      if analyseOptions.printEigenValueProperties then
+        print("<br>" + "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+           + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+           + "<td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td>  <td> contribution to states</td></tr>",
+          fileName);
+      else
+        print("<br>" + "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+           + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+           + "<td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td> </tr>",
+          fileName);
+      end if;
+    end printHead2b;
+
+    encapsulated function printHead3
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica.Utilities.Streams.print;
+
+      input String fileName="systemHead3.html"
+          "File on which the information is written in html format";
       input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
           Modelica_LinearSystems2.Internal.AnalyseOptions(
             plotEigenValues=true,
@@ -1316,44 +1368,6 @@ encapsulated package Analysis
 
     algorithm
       print("<html>\n<body>", fileName);
-      if analyseOptions.printEigenValueProperties then
-        print("<b>Conjugated complex pairs of eigenvalues</b>\n<br>" + "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-           + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
-           + "<td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td>  <td> contribution to states</td></tr>",
-          fileName);
-      else
-        print("<b>Conjugated complex pairs of eigenvalues</b>\n<br>" + "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-           + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
-           + "<td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td> </tr>",
-          fileName);
-      end if;
-    end printHead2b;
-
-    encapsulated function printHead3
-        import Modelica;
-        import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
-        import Modelica.Utilities.Streams.print;
-
-      input String fileName;
-      input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
-          Modelica_LinearSystems2.Internal.AnalyseOptions(
-            plotEigenValues=true,
-            plotInvariantZeros=true,
-            plotStepResponse=true,
-            plotFrequencyResponse=true,
-            printEigenValues=true,
-            printEigenValueProperties=true,
-            printInvariantZeros=true,
-            printControllability=true,
-            printObservability=true,
-            headingEigenValues="Eigenvalues",
-            headingInvariantzeros="Invariant zeros",
-            headingStepResponse="Step response",
-            headingFrequencyResponse="Frequency response");
-
-    algorithm
-      print("<html><body>", fileName);
       print("<p> In the tables above, the column <b>contribution to states</b> lists for each eigenvalue the states to which the"
          + "corresponding modal state contributes most. This information is based on the "
          + "two largest absolute values of the corresponding right eigenvector (if the second large value "
@@ -1378,7 +1392,10 @@ encapsulated package Analysis
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
 
-      input String fileName;
+      input String fileName="systemHead4.html"
+          "File on which the information is written in html format";
+      input Integer hSize(min=1, max=5)=3
+          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)";
       input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
           Modelica_LinearSystems2.Internal.AnalyseOptions(
             plotEigenValues=true,
@@ -1394,22 +1411,27 @@ encapsulated package Analysis
             headingInvariantzeros="Invariant zeros",
             headingStepResponse="Step response",
             headingFrequencyResponse="Frequency response");
+      protected
+      Integer hSizeOK= if hSize<1 then 1 else if hSize > 5 then 5 else hSize;
+      String heading= "h"+String(hSizeOK);
 
     algorithm
-      print("<html><body>", fileName);
-      print("<p><br><br><b>Invariant zeros</b><br>" + "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+      print("<html>\n<body>\n<"+heading+">Invariant zeros</"+heading+">",
+        fileName);
+
+      print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
          + "cellpadding=\"3\" border=\"1\">" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
          + "<td> number </td> <td> invariant zero </td><td> Time constant [s] </td> <td> freq. [Hz] </td> <td> damping </td></tr>",
         fileName);
     end printHead4;
 
     encapsulated function printTab1
-        import Modelica;
-        import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
-        import Modelica.Utilities.Streams.print;
-        import Modelica_LinearSystems2.Internal.Eigenvalue;
-        import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.Internal.Eigenvalue;
+      import Modelica_LinearSystems2.Math.Complex;
 
       input Eigenvalue evSorted[:];
       input Integer evIndex[size(evSorted, 1)];
@@ -1605,16 +1627,16 @@ encapsulated package Analysis
         i := j;
       end while;
 
-      print("</table><br><br>\n\n</body></html>", fileName);
+      print("</table>\n\n</body>\n</html>", fileName);
     end printTab1;
 
     encapsulated function printTab2
-        import Modelica;
-        import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
-        import Modelica.Utilities.Streams.print;
-        import Modelica_LinearSystems2.Internal.Eigenvalue;
-        import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.Internal.Eigenvalue;
+      import Modelica_LinearSystems2.Math.Complex;
 
       input Eigenvalue evSorted[:];
       input Integer evIndex[size(evSorted, 1)];
@@ -1802,16 +1824,16 @@ encapsulated package Analysis
       end while;
 
       print("</table>", fileName);
-      print("</table><br><br>\n\n</body></html>", fileName);
+      print("</table>\n\n</body>\n</html>", fileName);
     end printTab2;
 
     encapsulated function printTab3
-        import Modelica;
-        import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
-        import Modelica.Utilities.Streams.print;
-        import Modelica_LinearSystems2.Internal.Eigenvalue;
-        import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.Internal.Eigenvalue;
+      import Modelica_LinearSystems2.Math.Complex;
 
       input Eigenvalue evSorted[:];
       input Complex evecComplex[:,:];
@@ -1952,17 +1974,17 @@ encapsulated package Analysis
           format="9.4f") else "---") else "") + " </td> </tr> ", fileName);
 
       end for;
-      print("</table></body></html>", fileName);
+      print("</table>\n\n</body>\n</html>", fileName);
 
     end printTab3;
 
     encapsulated function printTab4
-        import Modelica;
-        import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
-        import Modelica.Utilities.Streams.print;
-        import Modelica_LinearSystems2.Internal.Eigenvalue;
-        import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.Internal.Eigenvalue;
+      import Modelica_LinearSystems2.Math.Complex;
 
       input Complex systemZeros[:];
       input Integer evIndex[size(systemZeros, 1)];
@@ -2027,16 +2049,16 @@ encapsulated package Analysis
 
       end for;
 
-      print("</table><br><br><br>", fileName);
+      print("</table>\n", fileName);
     end printTab4;
     annotation (interactive=true, Documentation(info="<html>
-<h4><font style=\"color: #008000; \">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 Modelica_LinearSystems2.StateSpace.Analysis.<b>analysis</b>(ss);
    or
 Modelica_LinearSystems2.StateSpace.Analysis.<b>analysis</b>(ss, analyseOptions=<a href=\"modelica://Modelica_LinearSystems2.Internal.AnalyseOptions\">analyseOptions</a>, fileName, systemName, description);
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 
 This function analyzes a state space system <br>
@@ -2115,7 +2137,7 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
 
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ss=StateSpace(
       A=[-3,2,-3,4,5,6; 0,6,7,8,9,4; 0,2,3,0,78,6; 0,1,2,2,3,3; 0,13,34,0,0,1; 0,
@@ -2604,16 +2626,16 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
    end if;
 
    annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<p><h4>Syntax</h4></p>
 <blockquote><code>(y, t, x) = StateSpace.Analysis.<b>timeResponse</b>(ss, dt, tSpan, responseType, x0)</code> </blockquote>
-<p><h4><font color=\"#008000\">Description</font></h4></p>
+<p><h4>Description</h4></p>
 <p>This function calculates the time responses of a state space system. The type of the time response is defined by the input <code>responseType</code>, i.e. </p>
 <blockquote><pre>Impulse &QUOT;Impulse response&QUOT;,
 Step &QUOT;Step response&QUOT;,
 Ramp &QUOT;Ramp response&QUOT;,
 Initial &QUOT;Initial condition response&QUOT;</pre></blockquote>
 <p>The state space system is transformed to a appropriate discrete state space system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt. </p>
-<p><h4><font color=\"#008000\">Example</font></h4></p>
+<p><h4>Example</h4></p>
 <blockquote><pre>  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
     A=[-1],
     B=[1],
@@ -2659,15 +2681,15 @@ algorithm
       x0=zeros(size(sc.A, 1)));
 
 annotation(interactive=true, Documentation(info="<html>
-<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<p><h4>Syntax</h4></p>
 <blockquote><code>(y, t, x) = StateSpace.Analysis.<b>impulseResponse</b>(ss, dt, tSpan) </code></blockquote>
-<p><h4><font color=\"#008000\">Description</font></h4></p>
+<p><h4>Description</h4></p>
 <p>This function calculates the time response of a state space system for impulse imput. The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt. </p>
 <blockquote><pre>StateSpace.Analysis.impulseResponse(ss, dt, tSpan)</pre></blockquote>
 <p>gives the same result as </p>
 <blockquote><pre>StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,size(ss.A,1))).</pre></blockquote>
 <p>See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a> </p>
-<p><h4><font color=\"#008000\">Example</font></h4></p>
+<p><h4>Example</h4></p>
 <blockquote><pre>  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
     A=[-1],
     B=[1],
@@ -2711,11 +2733,11 @@ algorithm
       x0=zeros(size(sc.A, 1)));
 
 annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>stepResponse</b>(ss, dt, tSpan)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>stepResponse</b> calculates the step response of a state space system. 
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
@@ -2730,7 +2752,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
 </p>
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1],
@@ -2778,11 +2800,11 @@ algorithm
       x0=zeros(size(sc.A, 1)));
 
 annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>rampResponse</b>(ss, dt, tSpan)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>rampResponse</b> calculates the time response of a state space system for ramp imput u = t. 
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
@@ -2796,7 +2818,7 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Ramp
 See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1],
@@ -2848,11 +2870,11 @@ algorithm
       x0=x0);
 
 annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>initialResponse</b>(ss, dt, tSpan, x0)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>initialResponse</b> calculates the time response of a state space system for given initial condition and zero inputs. 
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
@@ -2866,7 +2888,7 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Init
 See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1],
@@ -2916,18 +2938,18 @@ end initialResponse;
    result := size(tf.n,1)-1;
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  result </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>numeratorDegree</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial of the corresponding transfer function. 
 The state space system is converted to the transfer function G(s)=N(s)/D(s) with the polynomial N(s) as numerator.
 See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.denominatorDegree\">StateSpace.Analysis.denominatorDegree</a>.
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1],
@@ -2964,18 +2986,18 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
   result := size(tf.d,1)-1;
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  result </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>denominatorDegree</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of the corresponding transfer function. 
 The state space system is converted to the transfer function G(s)=N(s)/D(s) with the polynomial D(s) as denominator.
 See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.numeratorDegree\">StateSpace.Analysis.numeratorDegree</a>.
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1],
@@ -3021,18 +3043,18 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
     result := Polynomial.evaluateComplex(Polynomial(tf.n), s)/den;
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  result </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>evaluate</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function Analysis.<b>evaluate</b> evaluates the corresponding transfer function of the state space system at a given (complex) value of s.
 The state space system is converted to the transfer function G(s)=N(s)/D(s), which is evaluated by calculating the numerator polynomial N(s) and the denominator polynomial D(s).
 See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1],
@@ -3104,18 +3126,18 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
     y2 := TransferFunction.Analysis.evaluate(tf2, s);
     k := y1.re/y2.re;
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (z,p,k) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>zerosAndPoles</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function calculates the zeros, poles and gain of the corresponding transfer function of a state space system.
 See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">TransferFunction.Analysis.zerosAndPoles</a>
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1],
@@ -3152,18 +3174,18 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
   algorithm
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  eigenvalues </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>eigenValues</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Calculate the eigenvalues of a state space system, i.e. the eigenvalues of the system matrix <b>A</b> of a state space system. The output is a complex vector containing the eigenvalues.
 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1,1;-1,-1],
@@ -3218,11 +3240,11 @@ numerical algorithm does not converge.");
     end if;
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (eigenvectors, eigenvalues) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>eigenVectors</b>(ss, onlyEigenvectors)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of a state space system. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <b>ss.A</b>. Just like in <a href=\"modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
 The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
@@ -3230,7 +3252,7 @@ The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1,1;-1,-1],
@@ -3334,11 +3356,11 @@ i.e. v1 = |      |,   v2 = |       |
       end if;
     end if;
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zeros </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>invariantZeros</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes the invariant zeros of a system in state space form:
 </p>
@@ -3364,7 +3386,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[1, 1, 1;0, 1, 1;0,0,1],
@@ -3380,7 +3402,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
 
 </pre></blockquote>
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center>  Emami-Naeini, A. and Van Dooren, P. </td>  <td> \"Computation of Zeros of Linear Multivariable Systems\"  </td> <td> Automatica, 18, pp. 415-430, 1982. </td></tr>
 </table>
@@ -3521,11 +3543,11 @@ in <b>X</b> is used to compute <b>K</b>. If no solution of this equation exists,
       StateSpace.Internal.isControllableSISO(ss) else StateSpace.Internal.isControllableMIMO(ss,method);
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  controllable </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>isControllable</b>(ss, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function StateSpace.Analysis.<b>isControllable</b> checks the observability of a state space system. Therefore, the system is transformed into staircase form, i.e. the system matrix <b>H</b> of the transformed system has block upper Hessenberg form:
 <blockquote><pre>
@@ -3548,7 +3570,7 @@ Since controllability is dual to observability of the dual system (A', C', B', D
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1, 1, 1;0, -1, 1;0,0,-1],
@@ -3591,11 +3613,11 @@ Since controllability is dual to observability of the dual system (A', C', B', D
       StateSpace.Internal.isObservableMIMO(ss, method);
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  observable </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>isObservable</b>(ss, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function StateSpace.Analysis.<b>isObservable</b> checks the observability of a state space system. Since observability is dual to controllability of the dual system (A', C', B', D'), proof of observability is referred to proof of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isControllable\">controllability</a> of the dual system.<br>
 The boolean input <b>method</b> defines for multi output systems the method to generate the staircase form of the system, whereas Types.StaircaseMethod.QR and Types.StaircaseMethod.SVD denotes QR-factorization and singular value decomposition respectively. Since staircase algorithm contains rank decisions QR-factorization should be restricted to  well conditioned systems of lower order (<5). Default is SVD.<br>
@@ -3603,7 +3625,7 @@ The boolean input <b>method</b> defines for multi output systems the method to g
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1, 1, 1;0, -1, 1;0,0,-1],
@@ -3647,11 +3669,11 @@ The boolean input <b>method</b> defines for multi output systems the method to g
     end if;
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  stabilizable </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>isStabilizable</b>(ss, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function checks whether a state space system is stabilizable or not.<br>
 A system is stabilizable for the continuous-time case if all of the uncontrollable eigenvalues have negative real part.
@@ -3662,7 +3684,7 @@ Then, the uncontrollable poles are checked to be stable, i.e. to have negative r
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[1, 1, 1;0, 1, 1;0, 0, 1],
@@ -3705,11 +3727,11 @@ Then, the uncontrollable poles are checked to be stable, i.e. to have negative r
      end if;
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  detectable </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>isDetectable</b>(ss, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function checks whether a state space system is detectable or not.<br>
 A system is detectable for the continuous-time case if all of the unobservable eigenvalues have negative real part.
@@ -3723,7 +3745,7 @@ Then, the unobservable poles are checked to be stable, i.e. to have negative rea
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1, 1, 1;0, 1, 1;0,0,1],
@@ -3771,11 +3793,11 @@ Then, the unobservable poles are checked to be stable, i.e. to have negative rea
     end if;
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  Q </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>controllabilityMatrix</b>(ss, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function calculates the controllability matrix
 <blockquote><pre>
@@ -3795,7 +3817,7 @@ of the system
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[1, 1, 1;0, 1, 1;0, 0, 1],
@@ -3839,11 +3861,11 @@ of the system
     end if;
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  Q </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>observabilityMatrix</b>(ss, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function calculates the observability matrix
 <blockquote><pre>
@@ -3863,7 +3885,7 @@ of the system
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1, 1, 1;0, 1, 1;0, 0, 1],
@@ -4342,11 +4364,11 @@ end Analysis;
       end if;
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (K, S, po, nfp, nap, nup) </td><td align=center> =  </td>  <td> StateSpace.Design.<b>assignPolesMI</b>(ss, gamma, np, tol, calculateEigenvectors)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 The purpose of this function is to determine the state feedback matrix <b>K</b> for a
 given time invariant multi input state system (<b>A</b>,<b>B</b>) such that the
@@ -4402,7 +4424,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
      A=[-1,1; 0,-2],
@@ -4421,7 +4443,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 </pre></blockquote>
 
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center>  Varga A.  </td>  <td> \"A Schur method for pole assignment\"  </td> <td> IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981 </td></tr>
 </table>
@@ -4479,12 +4501,12 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
     kss := StateSpace(AK, BK, CK, DK);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (L, kss) </td><td align=center> =  </td>  <td> StateSpace.Design.<b>kalmanFilter</b>(ss, Q, R)  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This functions designs the kalman-bucy filter, that reconstructs
 plant states and system output without noise.
@@ -4557,7 +4579,7 @@ The algebraic Riccati equation is solved by using the Schur algorithm
 <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.care\">care</a>.
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.TransferFunction;
@@ -4668,12 +4690,12 @@ The algebraic Riccati equation is solved by using the Schur algorithm
       end if;
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (K, sslqr, X, ev) </td><td align=center> =  </td>  <td> StateSpace.<b>lqr</b>(ss, Q, R, true)  </td> </tr>
 
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 The optimal and stabilizing gain matrix <b>K</b> for a state-feedback law <b>u</b> = -<b>K</b>*<b>x</b>
 is designed such that the cost function
 <p>
@@ -4729,7 +4751,7 @@ The output S is the solution of the Riccati equation
 <p>
 The eigenvalues of the closed loop system <b>A</b> - <b>B</b>*<b>K</b> are computed as complex output ev.
 </p>
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   StateSpace ss=StateSpace(
       A=[0, 1, 0, 0; 0, 0, 39.2, 0; 0, 0, 0, 1; 0, 0, 49, 0],
@@ -4854,12 +4876,12 @@ The eigenvalues of the closed loop system <b>A</b> - <b>B</b>*<b>K</b> are compu
       sslqg.D := zeros(size(ss.C,1),size(ss.C,1));
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (Kc, Kf, sslqg) </td><td align=center> =  </td>  <td> StateSpace.<b>lqg</b>(ss, Q, R, V, W)  </td> </tr>
 </table>
 
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function calculates matrices <b>K</b>c and <b>K</b>f for linear quadratic gaussian problem (LQG), i.e. the minimization of the expected value of a cost function in consideration of stochastically disturbed states and outputs of the system
 </p>
@@ -4950,7 +4972,7 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
 </pre></blockquote>
 
 </p>
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   StateSpace ss=StateSpace(
       A=[-0.02, 0.005, 2.4,  -32; -0.14,  0.44,  -1.3,  -30; 0,  0.018,  -1.6,  1.2; 0, 0, 1, 0],
@@ -5060,7 +5082,7 @@ encapsulated package Plot "Functions to plot state space system responses"
          Plot.diagram(diagram2,device);
 
            annotation (interactive=true, Documentation(info="<html>
-<h4><font style=\"color: #008000; \">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>polesAndZeros</b>(ss);
    or
@@ -5069,7 +5091,7 @@ diagram = StateSpace.Plot.<b>polesAndZeros</b>(ss, poles=true, zeros=true, plot=
                      device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>()); 
 </pre></blockquote>
 
-<h4><font style=\"color: #008000; \">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function plots a pole-zero-map of the poles and transmission zeros of a state space system.
 The poles are the eigenvalues of the system matrix (eigenvalues(ss.A)). The Boolean inputs
@@ -5079,7 +5101,7 @@ The records \"defaultDiagram\" and \"device\" allow to set various layout option
 size and location of the diagram on the screen.
 </p>
 
-<h4><font style=\"color: #008000; \">Example</font></h4>
+<h4>Example</h4>
 
 <p>
 The example <a href=\"modelica://Modelica_LinearSystems2.Examples.StateSpace.plotPolesAndZeros\">
@@ -5175,23 +5197,23 @@ and results in
         device=device);
 
       annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>plotBodeSISO</b>(ss)
    or
 StateSpace.Plot.<b>plotBodeSISO</b>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Plots the bode-diagram of a transfer function.
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corresponding to the behavior of the state space system from iu'th element of the input vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0],
@@ -5290,7 +5312,7 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
       end for;
 
       annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>plotBodeMIMO</b>(ss)
    or
@@ -5298,7 +5320,7 @@ StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnit
 </pre></blockquote>
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0],
@@ -5419,7 +5441,7 @@ StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnit
       end for;
 
       annotation (interactive=true, Documentation(info="<html> 
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>timeResponse</b>(ss);
 or
@@ -5428,7 +5450,7 @@ device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Devic
 </pre></blockquote>
 
 
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>timeResponse</b> plots the time response of a state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.plotImpulse\">plotImpulse</a>, 
@@ -5440,7 +5462,7 @@ Function <b>timeResponse</b> plots the time response of a state space system. Th
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
 A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
@@ -5495,14 +5517,14 @@ Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
         device=device);
 
       annotation (interactive=true, Documentation(info="<html> 
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>impulse</b>(ss);
 or
 StateSpace.Plot.<b>impulse</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, 
@@ -5513,7 +5535,7 @@ Function <b>plotImpulse</b> plots the impulse responses of a state space system 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
 A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
@@ -5570,14 +5592,14 @@ Modelica_LinearSystems2.StateSpace.Plot.impulse(ss)
         device=device);
 
       annotation (interactive=true, Documentation(info="<html> 
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>step</b>(ss);
 or
 StateSpace.Plot.<b>step</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>step</b> plots the step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
@@ -5590,7 +5612,7 @@ Function <b>step</b> plots the step responses of a state space system for each s
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
 A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
@@ -5645,14 +5667,14 @@ Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
           device=device);
 
     annotation (interactive=true, Documentation(info="<html> 
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>ramp</b>(ss);
 or
 StateSpace.Plot.<b>ramp</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>ramp</b> plots the ramp responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
@@ -5663,7 +5685,7 @@ Function <b>ramp</b> plots the ramp responses of a state space system for each s
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
 A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
@@ -5718,14 +5740,14 @@ Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
         device=device);
 
       annotation (interactive=true, Documentation(info="<html> 
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>initial</b>(ss);
 or
 StateSpace.Plot.<b>initial</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>initial</b> plots the initial responses of a state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
@@ -5736,7 +5758,7 @@ Function <b>initial</b> plots the initial responses of a state space system for 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
 A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
@@ -5848,11 +5870,11 @@ encapsulated package Conversion
     zp.yName := ss.yNames[1];
 
     annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toZerosAndPoles</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a ZerosAndPoles record
  <blockquote><pre>
@@ -5864,7 +5886,7 @@ Computes a ZerosAndPoles record
 The uncontrollable and unobservable parts are isolated and the eigenvalues and invariant zeros of the controllable and observable sub system are calculated.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A = [-1.0, 0.0, 0.0;
@@ -5884,7 +5906,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 </pre></blockquote>
 
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
 vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
@@ -5923,11 +5945,11 @@ vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
     tf := ZerosAndPoles.Conversion.toTransferFunction(zp);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tf </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunction</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a TransferFunction record
 <blockquote><pre>
@@ -5940,7 +5962,7 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
 
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A = [-1.0, 0.0, 0.0;
@@ -6006,11 +6028,11 @@ algorithm
      end for;
   end for;
   annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toZerosAndPolesMIMO</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a matrix of ZerosAndPoles records
  <blockquote><pre>
@@ -6021,7 +6043,7 @@ Computes a matrix of ZerosAndPoles records
 of a system from state space representation, i.e. isolating the uncontrollable and unobservable parts and the eigenvalues and invariant zeros of the controllable and observable sub systems are calculated. The algorithm applies the method described in [1] for each input-output pair.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
     A = [-1.0, 0.0, 0.0;
@@ -6056,7 +6078,7 @@ i.e.
 
 
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
 vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
@@ -6099,11 +6121,11 @@ algorithm
   end for;
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tf </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunctionMIMO</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a matrix of TransferFunction records
 <blockquote><pre>
@@ -6114,12 +6136,12 @@ Computes a matrix of TransferFunction records
 with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
 
 
-<h4><font color=\"#008000\">Example</font></h4>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Example</h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunctionMIMO</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a matrix of TransferFunction records
 <blockquote><pre>
@@ -6130,7 +6152,7 @@ Computes a matrix of TransferFunction records
 with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
     A = [-1.0, 0.0, 0.0;
@@ -6178,11 +6200,11 @@ end Conversion;
 
       encapsulated function toSimilarForm
       "Perform the similarity transformation z = Tx (or x = inv(T)z) which leads to Az=T*A*inv(T), Bz=T*B, Cz=C*inv(T), Dz=D (or Az=inv(T)*A*T, Bz=inv(T)B, Cz=C*T, Dz=D)"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica.Math.Matrices;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+        import Modelica;
+        import Modelica_LinearSystems2;
+        import Modelica_LinearSystems2.StateSpace;
+        import Modelica.Math.Matrices;
+        import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
         input StateSpace ss "state space system";
         input Real T[size(ss.A, 2),size(ss.A, 1)] = identity(size(ss.A,1))
@@ -6209,11 +6231,11 @@ end Conversion;
           tss.D := ss.D;
         end if;
         annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tss </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toSimilarForm</b>(ss, T, inverted)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>toSimilarForm</b> calculates a similar state space system, i.e.
 <blockquote><pre>
@@ -6227,7 +6249,7 @@ if inverted==false and
 </pre></blockquote> 
 if inverted=true. Matrix T has to be invertible. The transformed system has the same eigenvalues. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">analysis</a>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1, 1; 0, -2],
@@ -6290,11 +6312,11 @@ if inverted=true. Matrix T has to be invertible. The transformed system has the 
         tss := StateSpace.Transformation.toSimilarForm(ss, V,inverted=true);
 
         annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tss </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toObservabilityForm</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>toObservabilityForm</b> computes the observability form of a SISO state space system, i.e.
 <blockquote><pre>
@@ -6329,7 +6351,7 @@ the canonical observability form is
 
 Matrix T has to be invertible, i.e. the system has to be observable. The transformed system has the same eigenvalues. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>, <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toControllabilityForm\">toControllabilityForm</a>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1, 1; 1, -2],
@@ -6396,11 +6418,11 @@ Matrix T has to be invertible, i.e. the system has to be observable. The transfo
                                 ss, V);
 
         annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tss </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toControllabilityForm</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>toControllabilityForm</b> computes the controllability form of a SISO state space system, i.e.
 <blockquote><pre>
@@ -6435,7 +6457,7 @@ the canonical observability form is
 
 Matrix T has to be invertible, i.e. the system has to be controllable. The transformed system has the same eigenvalues. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>, <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toObservabilityForm\">toObservabilityForm</a>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1, 1; 1, -2],
@@ -6485,11 +6507,11 @@ Matrix T has to be invertible, i.e. the system has to be controllable. The trans
         tss := StateSpace.Transformation.toSimilarForm(ss, V, inverted=true);
 
         annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tss </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toDiagonalForm</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>toDiagonalForm</b> computes the diagonal form of a SISO state space system, i.e.
 <blockquote><pre>
@@ -6501,7 +6523,7 @@ Function <b>toDiagonalForm</b> computes the diagonal form of a SISO state space 
 
 Matrix T has to be diagonalizable, i.e. the algebraic and geometric multiplicities of an eigenvalue must coincide. The diagonal entries of the new system matrix tss.<b>A</b> are the eigenvalues off the systemmatrix ss.<b>A</b>. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>.
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1, 1; 0, -2],
@@ -6563,17 +6585,17 @@ Matrix T has to be diagonalizable, i.e. the algebraic and geometric multipliciti
             D=(ssm2.D));
 
         annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tss </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toIrreducibleForm</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function calculates a minimal controllable and observable block Hessenberg realization for a given state-space representation.
 Therefore, all uncontrollable and unobservable modes are removed by performing orthogonal similarity transformations as described in [1].
 <p>
 This function is called to compute transfer functions of state space representations as described in [1]. Look at [1] for further details
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A = [-4.5,  1.5,   4.0;
@@ -6592,7 +6614,7 @@ This function is called to compute transfer functions of state space representat
       D=[0]
 )
 </pre></blockquote>
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V. </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control, vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
 </table>
@@ -6628,16 +6650,16 @@ This function is called to compute transfer functions of state space representat
         end if;
 
         annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss_sc </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toStaircaseForm</b>(ss, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>toStaircaseForm</b> computes the upper staircase form state space system.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[17.0,   24.0,    1.0,    8.0,   15.0;
@@ -6696,11 +6718,11 @@ Function <b>toStaircaseForm</b> computes the upper staircase form state space sy
     subSc.D := ss.D[outputIndex, inputIndex];
 
         annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  subsystem </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>extract</b>(ss, outputIndex, inputIndex)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>extract</b> computes the subsystem of a state space system corresponding to the indices in outputIndex and inputIndex, i.e.
 <blockquote><pre>
@@ -6709,7 +6731,7 @@ Function <b>extract</b> computes the subsystem of a state space system correspon
   subsystem.C = ss.C[outputIndex, :];
   subsystem.D = ss.D[outputIndex, inputIndex];</pre></blockquote>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1, 1, 2; 0, -2, 3;-3, 2, 1],
@@ -6781,15 +6803,15 @@ encapsulated package Import
        + fileName + "\"");
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center> =  </td>  <td> StateSpace.Import.<b>fromFile</b>(fileName, matrixName)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file must contain the matrix [A, B; C, D] named matrixName and the integer nx representing the order of the system, i.e. the number of rows of the square matrix A.
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
      
 

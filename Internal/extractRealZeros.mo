@@ -58,13 +58,13 @@ algorithm
     end if;
   end while;
   annotation (Documentation(info="<HTML>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
                 realZeros = Matrices.<b>extractRealZeros</b>(complexVector, numberOfRealRoots);
 (realZeros, complexZeros) = Matrices.<b>extractRealZeros</b>(complexVector, numberOfRealRoots,
                                                       name=\"complexVector\");
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>extractRealZeros</b>(..) extracts the real zeros from the
 Complex vector \"complexVector\". It is required that all elements
@@ -81,7 +81,7 @@ The optional input argument
 The function returns the real elements of complexVector in
 vector \"realZeros\" and the real and imaginary part of a conjugate
 complex zero pair in matrix complexZeros[:]\".
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   // c = {0; 1+2j; 1-2j; 2; -3; -1-j; -1+j};
     Integer n = numberOfRealZeros(c);

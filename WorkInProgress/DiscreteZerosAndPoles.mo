@@ -622,12 +622,12 @@ end '==';
   algorithm
     dzp.n1[1] := 0;
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  q </td><td align=center> =  </td>  <td>DiscreteZerosAndPoles.<b>q</b>()  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Generate the complex Laplace variable q=rxp(s*T) as a DiscreteZerosAndPoles transfer function. It can be used for generating like 
 <blockquote><pre>
@@ -654,17 +654,17 @@ Generate the complex Laplace variable q=rxp(s*T) as a DiscreteZerosAndPoles tran
   algorithm
     result := size(dzp.d1, 1) + 2*size(dzp.d2, 1);
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  result </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Analysis.<b>denominatorDegree</b>(dzp)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial constituted by the first and second order polynomials of the DiscreteZeroAndPoles numerator. 
 See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.numeratorDegree\">DiscreteZerosAndPoles.Analysis.numeratorDegree</a>.
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    DiscreteZerosAndPoles q = Modelica_LinearSystems2.DiscreteZerosAndPoles.q();
    Modelica_LinearSystems2.DiscreteZerosAndPoles zp=(p+1)/(p^2+p+1);
@@ -723,11 +723,11 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Anal
     dtf.uName := dzp.uName;
     dtf.yName := dzp.yName;
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tf </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.<b>toTransferFunction</b>(zp)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a TransferFunction record
  <blockquote><pre>
@@ -738,7 +738,7 @@ Computes a TransferFunction record
 from a ZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the TransferFunction constructor.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
    Modelica_LinearSystems2.ZerosAndPoles tf = 1/(p + 3)/(p + 1)
@@ -1056,11 +1056,11 @@ from a ZerosAndPoles record representated by first and second order numerator an
     end if;
 
     annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function transforms a zeros-poles-gain system representation into state space representation.
 To achieve well numerical condition the ZerosAndPoles transfer function is transformed into state space
@@ -1289,7 +1289,7 @@ processing.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + p +1);
@@ -1383,15 +1383,15 @@ processing.
   input String fileName=\"dslin\" \"Name of the result file\";
 
   annotation (interactive=true, Documentation(info=\"<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> ZerosAndPoles.Import.<b>fromModel</b>(modelName, T_linearize, fileName)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Generate a matrix of ZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conversion from sate space to transfer function representation.
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    String modelName = \"Modelica_LinearSystems2.Examples.DoublePendulum\"; 
    Real T_linearize = 5; 
@@ -1460,16 +1460,16 @@ Generate a matrix of ZerosAndPoles data records by linearization of a model defi
         fileName);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> ZerosAndPoles.Import.<b>fromFile</b>(fileName)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName</tt>. The file must contain either the set of variables n1, n2, d1, d2, and k with the associated first and second order polynomials or the variables p, z, and k with the poles and zeros, written in two column arrays with real and imaginary in the first and second column respectively. The variable k is the real gail in both cases.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
      
 

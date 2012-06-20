@@ -81,11 +81,11 @@ algorithm
   zp.yName := ss.yNames[1];
 
   annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toZerosAndPoles</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a ZerosAndPoles record
  <blockquote><pre>
@@ -97,7 +97,7 @@ Computes a ZerosAndPoles record
 The uncontrollable and unobservable parts are isolated and the eigenvalues and invariant zeros of the controllable and observable sub system are calculated.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A = [-1.0, 0.0, 0.0;
@@ -117,7 +117,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 </pre></blockquote>
 
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
 vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>

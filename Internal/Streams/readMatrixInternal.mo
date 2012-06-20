@@ -33,9 +33,10 @@ void Modelica_LinearSystem2_readMatrixInternal(const char *filename, const char 
 //ModelicaFormatMessage(filename);
   return;
 }", Documentation(info="<html>
-<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<h4>Syntax</h4>
 <blockquote><pre>readMatrixInternal(fileName, matrixName, m, n)</pre></blockquote>
-<p><h4><font color=\"#008000\">Description </font></h4></p>
+
+<h4>Description</h4>
 <p>Read matrix <code>matrixName</code> from file <code>fileName</code>. The matrix saved in file must be of dimension [m,n].</p>
 </html>"));
 end readMatrixInternal;

@@ -20,11 +20,11 @@ algorithm
   tf := Modelica_LinearSystems2.WorkInProgress.ZerosAndPoles.Conversion.toTransferFunction(zp);
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tf </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunction</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a TransferFunction record
 <blockquote><pre>
@@ -35,9 +35,7 @@ Computes a TransferFunction record
 
 The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles\">toZerosAndPoles</a> to convert the state space system into a zeros and poles representation first and after that href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction\">ZerosAndPoles.Conversion.toTransferFunction</a> to generate the transfer function.
 
-
-
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A = [-1.0, 0.0, 0.0;

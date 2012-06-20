@@ -5,6 +5,7 @@ function sortEigenvalue
 
   import Modelica_LinearSystems2.Internal.Eigenvalue;
   import Modelica_LinearSystems2.Math.Complex;
+
   input Eigenvalue ev[:] "Vector to be sorted";
   input Boolean ascending = true
     "= true if ascending order, otherwise descending order";
@@ -96,12 +97,12 @@ algorithm
      gap := div(gap,2);
   end while;
   annotation (Documentation(info="<HTML>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
            sorted_v = Vectors.<b>sort</b>(v);
 (sorted_v, indices) = Vectors.<b>sort</b>(v, ascending=true);
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>sort</b>(..) sorts a Real vector v
 in ascending order and returns the result in sorted_v.
@@ -110,7 +111,7 @@ is sorted in descending order. In the optional second
 output argument the indices of the sorted vector with respect
 to the original vector are given, such that sorted_v = v[indices].
 </p>
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   (v2, i2) := Vectors.sort({-1, 8, 3, 6, 2});
        -> v2 = {-1, 2, 3, 6, 8}

@@ -292,11 +292,11 @@ algorithm
   end if;
 
   annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function transforms a zeros-poles-gain system representation into state space representation.
 To achieve well numerical condition the ZerosAndPoles transfer function is transformed into state space
@@ -525,7 +525,7 @@ processing.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + p +1);

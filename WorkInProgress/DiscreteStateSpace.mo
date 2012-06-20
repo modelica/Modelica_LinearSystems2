@@ -212,12 +212,12 @@ record DiscreteStateSpace
         dss.method := method;
         annotation (overloadsConstructor=true, Documentation(info=
                                                               "<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function constructs a StateSpace record ss from a Real value, i.e. a state space system without a state and an output without dynamics:
 <blockquote><pre>
@@ -574,11 +574,11 @@ algorithm
 //  dzp.yName := dss.yNames[1];
 
   annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toZerosAndPoles</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a ZerosAndPoles record
  <blockquote><pre>
@@ -590,7 +590,7 @@ Computes a ZerosAndPoles record
 The uncontrollable and unobservable parts are isolated and the eigenvalues and invariant zeros of the controllable and observable sub system are calculated.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A = [-1.0, 0.0, 0.0;
@@ -610,7 +610,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 </pre></blockquote>
 
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
 vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
@@ -685,23 +685,23 @@ algorithm
     device=device);
 
   annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>plotBodeSISO</b>(ss)
    or
 StateSpace.Plot.<b>plotBodeSISO</b>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Plots the bode-diagram of a transfer function.
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corresponding to the behavior of the state space system from iu'th element of the input vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0],

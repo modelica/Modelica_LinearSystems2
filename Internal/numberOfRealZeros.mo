@@ -14,17 +14,17 @@ algorithm
     end if;
   end for;
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
      Matrices.<b>numberOfRealZeros</b>(complexVector);
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>numberOfRealZeros</b>(..) determines the number of
 elements of vector \"complexVector\" with vanishing imaginary part,
 i.e., complexVector[i].im = 0.
 </p>
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   // c = {0; 1+2*j; 1-2*j; 2; -3; -1-j; -1+j};
   result = Matrices.numberOfRealZeros(c);

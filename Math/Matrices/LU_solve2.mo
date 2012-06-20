@@ -26,11 +26,11 @@ is singular, i.e., no unique solution exists.");
       size(B, 2));
   end if;
   annotation (Documentation(info="<HTML>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 Matrices.<b>LU_solve</b>(LU, pivots, B);
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function call returns the
 solution <b>x</b> of the linear systems of equations
@@ -69,7 +69,11 @@ with row interchanges. Vector \"pivots\" are the
 pivot indices, i.e., for 1 &le; i &le; min(m,n), row i of 
 matrix A was interchanged with row pivots[i].
 </p>
-<h4><font color=\"#008000\">Example</font></h4>
+<p>See also
+<a href=\"Modelica:Modelica.Math.Matrices.LU\">Matrices.LU</a>, 
+<a href=\"Modelica:Modelica.Math.Matrices.solve2\">Matrices.solve2</a>.</p>
+
+<h4>Example</h4>
 <blockquote><pre>
   Real A[3,3] = [1,2,3; 
                  3,4,5;
@@ -93,8 +97,5 @@ matrix A was interchanged with row pivots[i].
                                                       0, 0;
                                                       2, 4] */
 </pre></blockquote>
-<h4><font color=\"#008000\">See also</font></h4>
-<a href=\"Modelica:Modelica.Math.Matrices.LU\">Matrices.LU</a>, 
-<a href=\"Modelica:Modelica.Math.Matrices.solve2\">Matrices.solve2</a>,
 </HTML>"));
 end LU_solve2;

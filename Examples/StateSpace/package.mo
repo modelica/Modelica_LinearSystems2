@@ -1,6 +1,42 @@
 within Modelica_LinearSystems2.Examples;
-package StateSpace "Package with examples to demonstrate the usage of the StateSpace record"
+package StateSpace "Collection of examples to demonstrate the usage of the StateSpace record"
   extends Modelica.Icons.ExamplesPackage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 annotation (Documentation(info="<html>

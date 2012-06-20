@@ -35,11 +35,11 @@ algorithm
      end for;
   end for;
   annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toZerosAndPolesMIMO</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a matrix of ZerosAndPoles records
  <blockquote><pre>
@@ -50,7 +50,7 @@ Computes a matrix of ZerosAndPoles records
 of a system from state space representation, i.e. isolating the uncontrollable and unobservable parts and the eigenvalues and invariant zeros of the controllable and observable sub systems are calculated. The algorithm applies the method described in [1] for each input-output pair.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
     A = [-1.0, 0.0, 0.0;
@@ -85,7 +85,7 @@ i.e.
 
 
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
 vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>

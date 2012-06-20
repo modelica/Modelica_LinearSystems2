@@ -51,12 +51,12 @@ encapsulated operator 'constructor'
       //      result.xNames := xNames;
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center>=</td>  <td> 'constructor'.<b>fromABCDMatrices</b>(A, B, C, D)  </td> </tr>
 
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function constructs a StateSpace record ss with<br>
 <blockquote><pre>
@@ -68,7 +68,7 @@ This function constructs a StateSpace record ss with<br>
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   Real A[1,1] = [1];
   Real B[1,1] = [1];
@@ -105,12 +105,12 @@ public
   algorithm
     ss.D[1, 1] := r;
     annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function constructs a StateSpace record ss from a Real value, i.e. a state space system without a state and an output without dynamics:
 <blockquote><pre>
@@ -174,11 +174,11 @@ encapsulated operator '-'
     result.C := [ss1.C,-ss2.C];
     result.D := ss1.D - ss2.D;
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.StateSpace.'-'.<b>subtract</b>(ss1, ss2)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This operator function computes the subtraction of two state space systems connected in parallel, i.e. the inputs are the same and the outputs of the two systems are subtracted. Therefore, The systems must have the same number of inputs and outputs but not the same number of states. The resulting system has an order of system_order1 + system_order2.<br>
 The operator is used by writing just the following command:
@@ -188,7 +188,7 @@ The operator is used by writing just the following command:
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
    StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
@@ -224,7 +224,7 @@ The operator is used by writing just the following command:
     result.D := -ss.D;
   end negate;
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This package contains the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.subtract#info\">'subtract'</a> and the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.subtract#info\">'-'</a> operator for StateSpace records. 
 
@@ -350,15 +350,15 @@ encapsulated package Import
        + fileName + "\"");
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center> =  </td>  <td> StateSpace.Import.<b>fromFile</b>(fileName, matrixName)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file must contain the matrix [A, B; C, D] named matrixName and the integer nx representing the order of the system, i.e. the number of rows of the square matrix A.
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
      
 

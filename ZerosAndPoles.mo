@@ -42,12 +42,12 @@ record ZerosAndPoles
       zp.yName := yName;
 
       annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function constructs a ZerosAndPoles record zp from a Real value, i.e. a without dynamics:
 <blockquote><pre>
@@ -135,12 +135,12 @@ Therefore, the record is defined by
 
     annotation (Documentation(info="<html>
 <p>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> <b>fromPolesAndZeros</b>(z, p, k)  </td> </tr>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> <b>fromPolesAndZeros</b>(z, p, k, uName, yName)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function constructs a ZerosAndPoles transfer function from denominator
 and numerator zeros, as well as a gain.
@@ -150,7 +150,7 @@ complex roots must be defined as conjugate complex pairs.
 It is required that complex conjugate pairs must directly
 follow each other as above. An error occurs if this is not the case.
 </p>
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
                       (s+1)
   zp = 4* -------------------------------------
@@ -633,12 +633,12 @@ end '==';
   algorithm
     zp.n1[1] := 0;
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  p </td><td align=center> =  </td>  <td> ZerosAndPoles.<b>p</b>()  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It can be used for generating like 
 <blockquote><pre>
@@ -813,7 +813,7 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
 <pre>    Ramp \"Ramp response\",</pre>
 <pre>    Initial \"Initial condition response\"</pre>
 <p>The state space system is transformed to a appropriate discrete state space system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt. </p>
-<p><h4>Example</h4></p>
+<h4>Example</h4>
 <pre>   p=Modelica_LinearSystems2.ZerosAndPoles.p();</pre>
 <pre>   Modelica_LinearSystems2.ZerosAndPoles zp=1/(p^2 + p + 1)</pre>
 <pre><br/>  Real Ts=0.1;</pre>
@@ -851,11 +851,11 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
         x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
   annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>impulseResponse</b>(zp, dt, tSpan, x0)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>impulseResponse</b> calculates the time response of a ZerosAndPoles transfer function with impulse imput. 
 The system is first transformed zo a state space system, wich is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
@@ -869,7 +869,7 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.I
 See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   Modelica_LinearSystems2.ZerosAndPoles zp=zp=1/(p^2 + p + 1)
   Real Ts=0.1;
@@ -907,11 +907,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
         x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
   annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>stepResponse</b>(zp, dt, tSpan, x0)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>stepResponse</b> calculates the step response of a transfer function. 
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
@@ -925,7 +925,7 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.S
 See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   Modelica_LinearSystems2.ZerosAndPoles zp=zp=1/(p^2 + p + 1)
   Real Ts=0.1;
@@ -964,11 +964,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
         x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
   annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>rampResponse</b>(ss, dt, tSpan, x0)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>rampResponse</b> calculates the time response of a transfer function for ramp imput u = t. 
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
@@ -982,7 +982,7 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.R
 See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   Modelica_LinearSystems2.ZerosAndPoles zp=zp=1/(p^2 + p + 1)
   Real Ts=0.1;
@@ -1024,11 +1024,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
         x0=x0);
 
   annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>initialResponse</b>(zp, dt, tSpan, x0)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>initialResponse</b> calculates the time response of a state space system for given initial condition and zero inputs. 
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
@@ -1042,7 +1042,7 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.I
 See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   Modelica_LinearSystems2.ZerosAndPoles zp=zp=1/(p^2 + p + 1)
   Real Ts=0.1;
@@ -1074,17 +1074,17 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
     algorithm
       result := size(zp.n1, 1) + 2*size(zp.n2, 1);
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  result </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>numeratorDegree</b>(zp)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial constituted by the first and second order polynomials of the ZeroAndPoles numerator. 
 See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree\">ZerosAndPoles.Analysis.denominatorDegree</a>.
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
@@ -1110,17 +1110,17 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.den
     algorithm
       result := size(zp.d1, 1) + 2*size(zp.d2, 1);
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  result </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>denominatorDegree</b>(zp)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial constituted by the first and second order polynomials of the ZeroAndPoles denominator. 
 See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.numeratorDegree\">ZerosAndPoles.Analysis.numeratorDegree</a>.
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
@@ -1177,18 +1177,18 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.num
       den := if abs_den >= den_min then den else -abs_den+0*j;
       y := num/den;
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  result </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>evaluate</b>(zp,p)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function at a given (complex) value of p.
 The transfer function G(p)=N(p)/D(p) is evaluated by calculating the numerator polynomial N(p) and the denominator polynomial D(p).
 See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Complex j = Modelica_LinearSystems2.Math.Complex.j();
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
@@ -1282,18 +1282,18 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
 
       k := zp.k;
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (z,p,k) </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>zerosAndPoles</b>(zp)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function calculates the zeros, poles and gain of a ZerosAndPoels transfer function.
 
  
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
@@ -1332,18 +1332,18 @@ public
         " Denominator polynominal of transfer function in function\"ZerosAndPoles.Analysis.eigenValues\"has to be of higher order than numerator polynomial");
       eigval := Complex.eigenValues(ss.A);
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  eigenvalues </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>eigenValues</b>(zp)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Calculate the eigenvalues of the corresponding state space representation of a zeros-and-poles transfer function. The output is a complex vector containing the eigenvalues. Note, that the conversion of the transfer function does not result in a minimal state space system. Therefore also unobservable and uncontrollable eigenvalues will be calculated.
 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
@@ -1381,11 +1381,11 @@ Calculate the eigenvalues of the corresponding state space representation of a z
         onlyEigenvectors=onlyEigenvectors);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (eigenvectors, eigenvalues) </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>eigenVectors</b>(zp, onlyEigenvectors)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of the corresponding state space system of a zeros-and-poles-transfer function. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <b>ss.A</b>. Just like in <a href=\"modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
 The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
@@ -1393,7 +1393,7 @@ The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(2*p+2)/(p^2+2*p+2);
@@ -1430,15 +1430,15 @@ i.e. v1 = |                 |,   v2 = |                   |
 
     algorithm
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zeros </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>invariantZeros</b>(zp)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes the invariant zeros of the corresponding state space representation of a zeros-and-poles transfer function. The output is a complex vector containing the eigenvalues. Note, that the conversion of the transfer function does not result in a minimal state space system. Therefore, also zeros equal to unobservable or uncontrollable eigenvalues will be computed.
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
@@ -1525,18 +1525,18 @@ In this case, the output argument <b>finite</b> = <b>false</b> and
       controllable := StateSpace.Analysis.isControllable(ss=ss, method=method);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  controllable </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>isControllable</b>(zp, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function ZerosAndPoles.Analysis.<b>isControllable</b> checks the controllability of a zeros-and-poles transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isControllable\">StateSpace.Analysis.isControllable</a> <br>
 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + 2*p +1);
@@ -1574,11 +1574,11 @@ Function ZerosAndPoles.Analysis.<b>isControllable</b> checks the controllability
         annotation (Documentation(info="<html>
  
 </html><html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  observable </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>isObservable</b>(zp, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function ZerosAndPoles.Analysis.<b>isObservable</b> checks the observability of a zeros-and-poles transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isObservable\">StateSpace.Analysis.isObservable</a> <br>
 
@@ -1587,7 +1587,7 @@ Function ZerosAndPoles.Analysis.<b>isObservable</b> checks the observability of 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + 2*p +1);
@@ -1621,11 +1621,11 @@ Function ZerosAndPoles.Analysis.<b>isObservable</b> checks the observability of 
       stabilizable := StateSpace.Analysis.isStabilizable(ss=ss);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  stabilizable </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>isStabilizable</b>(zp, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function ZerosAndPoles.Analysis.<b>isStabilizable</b> checks the Stabilizability of a zeros-and-poles transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isStabilizable\">StateSpace.Analysis.isStabilizable</a>. <br>
 The transfer function is stabilizable if all unstable poles are controllable.
@@ -1634,7 +1634,7 @@ The transfer function is stabilizable if all unstable poles are controllable.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p-1)/(p^2 - 2*p +1);
@@ -1668,11 +1668,11 @@ The transfer function is stabilizable if all unstable poles are controllable.
       detectable := StateSpace.Analysis.isDetectable(ss=ss);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  detectable </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>isDetectable</b>(zp, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function ZerosAndPoles.Analysis.<b>isDetectable</b> checks the Detectability of a zeros-and-poles transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isDetectable\">StateSpace.Analysis.isDetectable</a>. <br>
 The transfer function is detectable if all unstable poles are observable.
@@ -1681,7 +1681,7 @@ The transfer function is detectable if all unstable poles are observable.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p-1)/(p^2 - 2*p +1);
@@ -1715,11 +1715,11 @@ The transfer function is detectable if all unstable poles are observable.
       om := StateSpace.Analysis.controllabilityMatrix(ss=ss);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  Q </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>controllabilityMatrix</b>(zp, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Calculate the controllability matrix
 <blockquote><pre>
@@ -1738,7 +1738,7 @@ of a zeros and poles transfer function.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
@@ -1770,11 +1770,11 @@ of a zeros and poles transfer function.
       om := StateSpace.Analysis.observabilityMatrix(ss=ss);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  Q </td><td align=center> =  </td>  <td> ZerosAndPoles.Analysis.<b>observabilityMatrix</b>(zp, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Calculate the observability matrix
 <blockquote><pre>
@@ -1793,7 +1793,7 @@ of a zeros-and-poles transfer function.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
@@ -2155,7 +2155,7 @@ is set.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping;
    Integer order=2; 
@@ -2173,7 +2173,7 @@ is set.
 </pre></blockquote>
 
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center>  Tietze U., and Schenk Ch.  </td>  <td> \"Halbleiter-Schaltungstechnik\"  </td> <td> Springer Verlag, 12. Auflage, pp. 815-852, 2002. </td></tr>
 </table>
@@ -2257,7 +2257,7 @@ is set.
        Plot.diagram(diagram2,device);
 
      annotation (interactive=true, Documentation(info="<html>
-<h4><font style=\"color: #008000; \">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>polesAndZeros</b>(zp);
    or
@@ -2266,7 +2266,7 @@ ZerosAndPoles.Plot.<b>polesAndZeros</b>(zp, poles=true, zeros=true, plot=true,
                      device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>()); 
 </pre></blockquote>
 
-<h4><font style=\"color: #008000; \">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function plots a pole-zero-map of the poles and zeros of a transfer function
 in ZerosAndPoles format. The Boolean inputs
@@ -2276,7 +2276,7 @@ The records \"defaultDiagram\" and \"device\" allow to set various layout option
 size and location of the diagram on the screen.
 </p>
 
-<h4><font style=\"color: #008000; \">Example</font></h4>
+<h4>Example</h4>
 
 <p>
 The example <a href=\"modelica://Modelica_LinearSystems2.Examples.ZerosAndPoles.plotPolesAndZeros\">
@@ -2418,20 +2418,20 @@ and results in
     end if;
 
     annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>plotBode</b>(zp)
    or
 ZerosAndPoles.Plot.<b>bode</b>(zp, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Plots the bode-diagram of a transfer function.
 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
    Modelica_LinearSystems2.ZerosAndPoles zp =(p^2 + 5*p + 7)/(p + 2)/(p + 3);
@@ -2502,21 +2502,21 @@ Plots the bode-diagram of a transfer function.
 
     Plot.diagram(diagram2, device);
     annotation (interactive=true, Documentation(info="<html>
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>timeResponse</b>(zp);
    or
 ZerosAndPoles.Plot.<b>timeResponse</b>(zp, dt, tSpan,response, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
                    device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<p><b><font style=\"color: #008000; \">Description</font></b></p>
+<h4>Description</h4>
 <p>Function <b>timeResponse</b> plots the time response of a transfer function. The character of the time response if defined by the input 
 <a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>, <a href=\"Modelica://Modelica_LinearSystems2.
 ZerosAndPoles.Plot.step\">step</a>, <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>, and <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>. </p>
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
    Modelica_LinearSystems2.ZerosAndPoles zp =(p + 1)/(p^2 + 5*p + 12);
@@ -2568,14 +2568,14 @@ ZerosAndPoles.Plot.step\">step</a>, <a href=\"modelica://Modelica_LinearSystems2
       device=device);
 
     annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>impulse</b>(zp)  
    or
 ZerosAndPoles.Plot.<b>impulse</b>(zp, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer function. It is based on
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also
@@ -2587,7 +2587,7 @@ Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
@@ -2638,13 +2638,13 @@ Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer
   equation
 
     annotation (interactive=true, Documentation(info="<html>
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <pre>ZerosAndPoles.Plot.<b>step</b>(zp)  </pre>
 <pre>   or</pre>
 <pre>ZerosAndPoles.Plot.<b>step</b>(zp, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())</pre>
-<p><b><font style=\"color: #008000; \">Description</font></b></p>
+<h4>Description</h4>
 <p>Function <b>step</b> plots the step response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">step</a>, <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>, and <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>. </p>
-<p><b><font style=\"color: #008000; \">Example</font></b></p>
+<h4>Example</h4>
 <pre>   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  </pre>
 <pre>   Modelica_LinearSystems2.ZerosAndPoles zp =(p + 1)/(p^2 + 5*p + 12);</pre>
 <pre><br/><b>algorithm</b></pre>
@@ -2689,13 +2689,13 @@ Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer
       device=device);
 
     annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>ramp</b>(zp)  
    or
 ZerosAndPoles.Plot.<b>ramp</b>(zp, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">step</a>, 
@@ -2706,7 +2706,7 @@ Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer funct
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
    Modelica_LinearSystems2.ZerosAndPoles zp =(2*p^2 + 7*p + 13)/(p + 1)/(p^2 + 5*p + 12);
@@ -2763,13 +2763,13 @@ Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer funct
           device=device);
 
     annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>initialResponse</b>(zp)  
    or
 ZerosAndPoles.Plot.<b>initialResponse</b>(zp, dt, tSpan, y0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>initialResponse</b> plots the initial response, i.e. the zeros input response of a zeros and poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>, 
@@ -2780,7 +2780,7 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
    Modelica_LinearSystems2.ZerosAndPoles zp = (p + 1)/(p^2 + 5*p + 12);
@@ -2835,11 +2835,11 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
       tf.uName := zp.uName;
       tf.yName := zp.yName;
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tf </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.<b>toTransferFunction</b>(zp)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a TransferFunction record
  <blockquote><pre>
@@ -2850,7 +2850,7 @@ Computes a TransferFunction record
 from a ZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the TransferFunction constructor.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
    Modelica_LinearSystems2.ZerosAndPoles zp = 1/(p + 3)/(p + 1)
@@ -2889,17 +2889,17 @@ from a ZerosAndPoles record representated by first and second order numerator an
         end for;
       end for;
     annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tf </td><td align=center> =  </td>  <td> TransferFunction.Conversion.<b>toTransferFunctionMIMO</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Converts a matrix of ZerosAndPoles transfer functions denoted by the product of first and second order numerator and denominator polynomials into a matrix of transfer functions represented by (usual) numerator and denominator polynomial. The function repetitively uses <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction\">toTransferFunction</a>.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
    Modelica_LinearSystems2.ZerosAndPoles zp = [1/(p + 2)/(p + 1);p/(p + 1)/(p + 1)]
@@ -3207,11 +3207,11 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
       ABCD := [ssA,ssB; ssC,ssD];
 
       annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ABCD </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function transforms a zeros-poles-gain system representation into state space representation.
 To achieve well numerical condition the ZerosAndPoles transfer function is transformed into state space
@@ -3440,7 +3440,7 @@ processing.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + p +1);
@@ -3746,11 +3746,11 @@ processing.
       end if;
 
       annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.<b>toStateSpace</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function transforms a zeros-poles-gain system representation into state space representation.
 To achieve well numerical condition the ZerosAndPoles transfer function is transformed into state space
@@ -3979,7 +3979,7 @@ processing.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + p +1);
@@ -4063,16 +4063,16 @@ processing.
       zp := StateSpace.Conversion.toZerosAndPolesMIMO(result);
 
     annotation (interactive=true, Documentation(info="<html>
-<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<p><h4>Syntax</h4></p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
 <td><p align=\"right\">zp </p></td>
 <td><p align=\"center\">= </p></td>
 <td><p>ZerosAndPoles.Import.<b>fromModel</b>(modelName, T_linearize, fileName) </p></td>
 </tr>
 </table>
-<p><br/><h4><font color=\"#008000\">Description</font></h4></p>
+<p><br/><h4>Description</h4></p>
 <p>Generate a matrix of ZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromModel</a> followed by a conversion from sate space to transfer function representation. </p>
-<p><h4><font color=\"#008000\">Example</font></h4></p>
+<p><h4>Example</h4></p>
 <blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
    Real T_linearize = 5; 
    
@@ -4132,16 +4132,16 @@ processing.
         fileName);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> ZerosAndPoles.Import.<b>fromFile</b>(fileName)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName</tt>. The file must contain either the set of variables n1, n2, d1, d2, and k with the associated first and second order polynomials or the variables p, z, and k with the poles and zeros, written in two column arrays with real and imaginary in the first and second column respectively. The variable k is the real gail in both cases.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
      
 
@@ -6154,12 +6154,12 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
     filter.d2 := [w_cut*filter.d2[:, 1],w_cut2*filter.d2[:, 2]];
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 filterFunction = <b>filter</b>(analogFilter, filterType, order, f_cut, gain, A_ripple, normalized)
 </pre></blockquote>
 
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function constructs a ZerosAndPoles transfer function
 description of low and high pass filters.
@@ -6215,7 +6215,7 @@ is set.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping;
    Integer order=2; 
@@ -6233,7 +6233,7 @@ is set.
 </pre></blockquote>
 
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center>  Tietze U., and Schenk Ch.  </td>  <td> \"Halbleiter-Schaltungstechnik\"  </td> <td> Springer Verlag, 12. Auflage, pp. 815-852, 2002. </td></tr>
 </table>

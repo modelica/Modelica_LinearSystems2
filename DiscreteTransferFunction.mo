@@ -403,12 +403,12 @@ encapsulated function z "Generate the discrete transfer function z"
 algorithm
 
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right> z </td><td align=center> =  </td>  <td> DiscreteTransferFunction.<b>z</b>()  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can be used for generating like 
 <blockquote><pre>
@@ -460,12 +460,12 @@ algorithm
         x0=x0);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>timeResponse</b>(tf, dt, tSpan, responseType, x0)  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 First, the discrete transfer function representation is transformed into a discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. 
 <blockquote><pre>
@@ -477,7 +477,7 @@ First, the discrete transfer function representation is transformed into a discr
 The outputs y and x are calculated from the system equations of the discrete state space system for each time step t=k*dt.
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.DiscreteTransferFunction dtf=(0.0023753*z^2 + 0.00475059*z + 0.0023753)/(z^2 - 1.89549*z + 0.904988);
@@ -531,12 +531,12 @@ algorithm
       x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
 annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>impulseResponse</b>(dtf, tSpan, x0)  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 First, the discrete transfer function representation is transformed into discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse
 and the impulse response of the discrete state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
@@ -546,7 +546,7 @@ and the impulse response of the discrete state space system is calculated. The t
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.DiscreteTransferFunction dtf=(0.0023753*z^2 + 0.00475059*z + 0.0023753)/(z^2 - 1.89549*z + 0.904988);
@@ -598,12 +598,12 @@ algorithm
         x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
       annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>stepResponse</b>(tf, tSpan, x0)  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 First, the discrete transfer function representation is transformed into discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse
 and the step response of the discrete state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
@@ -613,7 +613,7 @@ and the step response of the discrete state space system is calculated. The type
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.DiscreteTransferFunction dtf=(0.0023753*z^2 + 0.00475059*z + 0.0023753)/(z^2 - 1.89549*z + 0.904988);
@@ -666,12 +666,12 @@ algorithm
         x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
       annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>rampResponse</b>(tf, tSpan, x0)  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 First, the discrete transfer function representation is transformed into discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse
 and the ramp response of the discrete state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
@@ -681,7 +681,7 @@ and the ramp response of the discrete state space system is calculated. The type
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.DiscreteTransferFunction dtf=(0.0023753*z^2 + 0.00475059*z + 0.0023753)/(z^2 - 1.89549*z + 0.904988);
@@ -735,12 +735,12 @@ algorithm
       x0=x0);
 
 annotation(interactive=true, Documentation(info="<html>
- <h4><font color=\"#008000\">Syntax</font></h4>
+ <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>initialResponse</b>(x0, tf, tSpan)  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 First, the discrete transfer function representation is transformed into discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse
 and the initial response of the discrete state space system for initial state x0 is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
@@ -750,7 +750,7 @@ and the initial response of the discrete state space system for initial state x0
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.DiscreteTransferFunction dtf=(0.0023753*z^2 + 0.00475059*z + 0.0023753)/(z^2 - 1.89549*z + 0.904988);
@@ -785,16 +785,16 @@ encapsulated function denominatorDegree
 algorithm
   result := size(dtf.d,1)-1;
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  result </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>denominatorDegree</b>(dtf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of a discrete transfer function. 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.DiscreteTransferFunction  dtf=(0.0023753*z^2 + 0.00475059*z + 0.0023753)/(z^2 - 1.89549*z + 0.904988);
@@ -842,11 +842,11 @@ algorithm
   (z,p,k) := TransferFunction.Analysis.zerosAndPoles(tf);
   dzp := DiscreteZerosAndPoles(z, p, k, dtf.Ts, dtf.method, uName=dtf.uName, yName=dtf.yName);
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right> dzp </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.<b>toDiscreteZerosAndPoles</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a DiscreteZerosAndPoles record
  <blockquote><pre>
@@ -859,7 +859,7 @@ of a discrete transfer function representated by numerator and denominator polyn
 from the DiscreteTransferFunctio-input and are used as inputs the DiscreteZerosAndPoles constructor.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();  
    Modelica_LinearSystems2.DiscreteTransferFunction dtf = 1/(z^2 + 3*z + 2)
@@ -920,11 +920,11 @@ end if;
   dss.method := dtf.method;
 
  annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion<b>toDiscreteStateSpace</b>(dtf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Transforms a discrete transfer function into discrete state space representation.
 There are an infinite number of possible realizations.
@@ -960,7 +960,7 @@ is transformed into:
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.DiscreteTransferFunction dtf=(z+1)/(z^3 + z^2 + z + 1);

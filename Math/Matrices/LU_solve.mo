@@ -67,6 +67,11 @@ with row interchanges. Vector \"pivots\" are the
 pivot indices, i.e., for 1 &le; i &le; min(m,n), row i of 
 matrix A was interchanged with row pivots[i].
 </p>
+<p>See also
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>, 
+<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>.
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
   Real A[3,3] = [1,2,3; 
@@ -83,8 +88,6 @@ matrix A was interchanged with row pivots[i].
   x1 := Matrices.LU_solve(LU, pivots, b1);  // x1 = {3,2,1}
   x2 := Matrices.LU_solve(LU, pivots, b2);  // x2 = {1,0,2}
 </pre></blockquote>
-<h4>See also</h4>
-<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>, 
-<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>,
+
 </HTML>"));
 end LU_solve;

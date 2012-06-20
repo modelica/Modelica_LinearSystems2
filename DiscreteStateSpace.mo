@@ -57,13 +57,13 @@ record DiscreteStateSpace
         dss.method := method;
         annotation (overloadsConstructor=true, Documentation(info=
                                                               "<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
 <tr> <td align=right>  dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r, Ts, method)  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function constructs a DiscreteStateSpace record dss from a Real value, i.e. a discrete state space system without a state and an output without dynamics:
 <blockquote><pre>
@@ -130,13 +130,13 @@ respectively.
       result.method := method;
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right> dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromMatrices</b>(A, B, C, D)  </td> </tr>
 <tr> <td align=right> dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromMatrices</b>(A, B, C, D, Ts, B2, method)  </td> </tr>
 
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function constructs a DiscreteStateSpace record dss with<br>
 <blockquote><pre>
@@ -159,7 +159,7 @@ respectively. See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStat
 where the inputs are the matrices of a continuous system which is to convert to discrete state space.
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   import dss=Modelica_LinearSystems2.DiscreteStateSpace;
   Real A[1,1] = [1];
@@ -312,13 +312,13 @@ public
       end if;
       annotation (overloadsConstructor=true,
         Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right> dss </td><td align=center>=</td>  <td> <b>fromStateSpace</b>(ss, Ts)  </td> </tr>
 <tr> <td align=right> dss </td><td align=center>=</td>  <td> <b>fromStateSpace</b>(ss, Ts, method)  </td> </tr>
 
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
     
 <p>
 This function derives a linear time invariant difference
@@ -366,7 +366,7 @@ The applied discretization method is selected by the user from
 See also  <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>.
 </p>
 <p>
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   import dss=Modelica_LinearSystems2.DiscreteStateSpace;
   import Modelica_LinearSystems2.StateSpace;
@@ -543,7 +543,7 @@ to the matrices, the sample time and the discretization method.
 </p>
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   import dss=Modelica_LinearSystems2.DiscreteStateSpace;
   Real A[1,1] = [1];
@@ -606,11 +606,11 @@ encapsulated operator '-'
     result.Ts := dss1.Ts;
     result.method := dss1.method;
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  dss </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.DiscreteStateSpace.'-'.<b>subtract</b>(dss1, dss2)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This operator function computes the subtraction of two discrete state space systems connected in parallel, i.e. the inputs are the same and the outputs of the two systems are subtracted. Therefore, The systems must have the same number of inputs and outputs but not the same number of states. The resulting system has an order of system_order1 + system_order2.<br>
 The operator is used by writing just the following command:
@@ -620,7 +620,7 @@ The operator is used by writing just the following command:
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    DiscreteStateSpace dss1 = DiscreteStateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
    DiscreteStateSpace dss2 = DiscreteStateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
@@ -661,7 +661,7 @@ The operator is used by writing just the following command:
 
   end negate;
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'subtract'</a> and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'-'</a> operator for DiscreteStateSpace records. 
 
@@ -1119,19 +1119,19 @@ end '==';
       x := new_x;
     end for;
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.<b>timeResponse</b>(dss, u)  </td> </tr>
 <tr> <td align=right>  (y, xc) </td><td align=center> =  </td>  <td> DiscreteStateSpace.<b>timeResponse</b>(dss, u, x0)  </td> </tr>
 
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function DiscreteStateSpace.timeResponse calculates the time responses to input u of a discrete state space system.
 Default of initial state <b>x0</b> is <b>x0</b>=<b>0</b>.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    import dss=Modelica_LinearSystems2.DiscreteStateSpace; 
    import Modelica_LinearSystems2.StateSpace; 
@@ -1186,18 +1186,18 @@ Default of initial state <b>x0</b> is <b>x0</b>=<b>0</b>.
       x := new_x;
     end for;
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.<b>timeResponse</b>(dss, x0, samples)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function DiscreteStateSpace.initialResponse calculates the initial response to Default of initial state <b>x0</b> of a discrete state space system.
 Input <b>sample</b> is the number of samples. Sample time is the sample time of the discrete state space system.
 
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    import dss=Modelica_LinearSystems2.DiscreteStateSpace; 
    import Modelica_LinearSystems2.StateSpace; 
@@ -1244,11 +1244,11 @@ encapsulated function eigenValues
 algorithm
 
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  eigenvalues </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>eigenValues</b>(dss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Calculate the eigenvalues of a discrete state space system, i.e. the eigenvalues of the system matrix <b>A</b> of a discrete state space system.
 The output is a complex vector containing the eigenvalues.<br>
@@ -1264,7 +1264,7 @@ The eigenvalues <b>ev</b>_d of the discrete system are related to the eigenvalue
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1,1;-1,-1],
@@ -1380,13 +1380,13 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y) </td><td align=center> =  </td>  <td>DiscreteStateSpace.Analysis.<b>timeResponse</b>(responseType, dss)  </td> </tr>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td>DiscreteStateSpace.Analysis.<b>timeResponse</b>(responseType, dss, tSpan, x0)  </td> </tr>
 
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function timeResponse calculates the time responses of a discrete state space system. The type of the time response is defined by the input <b>responseType</b>, i.e. 
 <blockquote><pre>
@@ -1399,7 +1399,7 @@ Function timeResponse calculates the time responses of a discrete state space sy
 Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x are calculated for each time step t=k*dss.Ts.
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
      A = [0.904837418036],
@@ -1457,12 +1457,12 @@ algorithm
         x0=zeros(size(dss.A, 1)));
 
       annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss)  </td> </tr>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss, tSpan)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and states <b>x</b> are calculated for each time step t=k*dss.Ts.
 <blockquote><pre>
@@ -1481,7 +1481,7 @@ See also<br>
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
     Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
       A=[0.904837418036 ],
@@ -1537,12 +1537,12 @@ algorithm
         x0=zeros(size(dss.A, 1)));
 
       annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss)  </td> </tr>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss, tSpan)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>stepResponse</b> calculates the step response of a discrete state space system. 
 Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and the states <b>x</b> are calculated for each time step t=k*dss.Ts.
@@ -1561,7 +1561,7 @@ See also <br>
 </p>
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
       A=[0.904837418036 ],
@@ -1618,12 +1618,12 @@ algorithm
     x0=zeros(size(dss.A, 1)));
 
   annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>rampResponse</b>(dss)  </td> </tr>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>rampResponse</b>(dss, tSpan, x0)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>rampResponse</b> calculates the time response of a discrete state space system for ramp imput u = t. 
 Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts.
@@ -1642,7 +1642,7 @@ See also<br>
 <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.rampResponse\">StateSpace.Analysis.rampResponse</a>
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
       A=[0.904837418036 ],
@@ -1700,12 +1700,12 @@ algorithm
     x0=x0);
 
   annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss)  </td> </tr>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss, tSpan)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>initialResponse</b> calculates the time response of a discrete state space system for given initial condition and zero inputs. 
 tarting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts.
@@ -1721,7 +1721,7 @@ See also <br>
 <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.initialResponse\">StateSpace.Analysis.initialResponse</a><br>
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
       A=[0.904837418036 ],
@@ -2128,11 +2128,11 @@ encapsulated package Design
     end if;
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (K, S, po, nfp, nap, nup) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Design.<b>assignPolesMI</b>(dss, gamma, np, tol, calculateEigenvectors)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 The purpose of this function is to determine the state feedback matrix <b>K</b> for a
 given time invariant multi input state system (<b>A</b>,<b>B</b>) such that the
@@ -2188,7 +2188,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
       A=[-1, 1, 1;0, 1, 1;0, 0, 1],
@@ -2204,7 +2204,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 </pre></blockquote>
 
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center>  Varga A.  </td>  <td> \"A Schur method for pole assignment\"  </td> <td> IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981 </td></tr>
 </table>
@@ -2286,23 +2286,23 @@ algorithm
     device=device);
 
   annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>plotBodeSISO</b>(dss)
    or
 DiscreteStateSpace.Plot.<b>plotBodeSISO</b>(dss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Plots the bode-diagram of a transfer function.
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corresponding to the behavior of the state space system from iu'th element of the input vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
    A = [0.9048, 0.0,    0.0;
@@ -2449,7 +2449,7 @@ algorithm
   end for;
 
   annotation (interactive=true, Documentation(info="<html> 
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>timeResponse</b>(dss);
 or
@@ -2458,7 +2458,7 @@ device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Devic
 </pre></blockquote>
 
 
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>timeResponse</b> plots the time response of a discrete state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.plotImpulse\">plotImpulse</a>, 
@@ -2470,7 +2470,7 @@ Function <b>timeResponse</b> plots the time response of a discrete state space s
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 import Modelica_LinearSystems2.DiscreteStateSpace;
       
@@ -2536,14 +2536,14 @@ algorithm
       device=device);
 
     annotation (interactive=true, Documentation(info="<html> 
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>impulse</b>(dss);
 or
 DiscreteStateSpace.Plot.<b>impulse</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, 
@@ -2554,7 +2554,7 @@ Function <b>plotImpulse</b> plots the impulse responses of a state space system 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
 A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
@@ -2620,14 +2620,14 @@ algorithm
       device=device);
 
     annotation (interactive=true, Documentation(info="<html> 
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>step</b>(dss);
 or
 DiscreteStateSpace.Plot.<b>step</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>step</b> plots the discrete step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
@@ -2640,7 +2640,7 @@ Function <b>step</b> plots the discrete step responses of a state space system f
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
 A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
@@ -2703,14 +2703,14 @@ algorithm
       device=device);
 
     annotation (interactive=true, Documentation(info="<html> 
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>ramp</b>(ss);
 or
 DiscreteStateSpace.Plot.<b>ramp</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>ramp</b> plots the ramp responses of a discrete state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
@@ -2721,7 +2721,7 @@ Function <b>ramp</b> plots the ramp responses of a discrete state space system f
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
 A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
@@ -2783,14 +2783,14 @@ algorithm
     device=device);
 
   annotation (interactive=true, Documentation(info="<html> 
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>initial</b>(ss);
 or
 DiscreteStateSpace.Plot.<b>initial</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
 device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>initial</b> plots the initial responses of a discrete state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
@@ -2801,7 +2801,7 @@ Function <b>initial</b> plots the initial responses of a discrete state space sy
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
 A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
@@ -2921,11 +2921,11 @@ algorithm
 //  dzp.yName := dss.yNames[1];
 
   annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPoles</b>(dss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a DiscreteZerosAndPoles record
  <blockquote><pre>
@@ -2938,7 +2938,7 @@ Computes a DiscreteZerosAndPoles record
 The uncontrollable and unobservable parts are isolated and the eigenvalues and invariant zeros of the controllable and observable sub system are calculated.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
       A = [0.9048, 0.0,    0.0;
@@ -2960,7 +2960,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 </pre></blockquote>
 
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
 vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
@@ -3016,11 +3016,11 @@ algorithm
     end for;
   end for;
   annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPolesMIMO</b>(dss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a matrix of DiscreteZerosAndPoles records
  <blockquote><pre>
@@ -3032,7 +3032,7 @@ Computes a matrix of DiscreteZerosAndPoles records
 of a system from discrete state space representation, i.e. isolating the uncontrollable and unobservable parts and the eigenvalues and invariant zeros of the controllable and observable sub systems are calculated. The algorithm applies the method described in [1] for each single-input-output pair.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.DiscreteStateSpace ss=Modelica_LinearSystems2.DiscreteStateSpace(
     A = [0.9048, 0.0,    0.0;
@@ -3072,7 +3072,7 @@ of a system from discrete state space representation, i.e. isolating the uncontr
     
 </pre></blockquote>
 
-<h4><font color=\"#008000\">References</font></h4>
+<h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
 vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
@@ -3106,11 +3106,11 @@ algorithm
   dtf := DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction(dzp);
 
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  dtf </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<b>toDiscreteTransferFunction</b>(dss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a DiscreteTransferFunction record
 <blockquote><pre>
@@ -3124,7 +3124,7 @@ discrete state space system into a discrete zeros and poles representation first
 
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
       A = [0.9048, 0.0,    0.0;
@@ -3187,11 +3187,11 @@ algorithm
   end for;
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  dtf </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<b>toDiscreteTransferFunctionMIMO</b>(dss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a matrix of DiscreteTransferFunction records
 <blockquote><pre>
@@ -3202,7 +3202,7 @@ Computes a matrix of DiscreteTransferFunction records
 with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteTransferFunction\">Conversion.toDiscreteTransferFunction</a>
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
    A = [0.9048, 0.0,    0.0;
@@ -3335,16 +3335,16 @@ algorithm
     method=method);
 
   annotation (interactive=true, Documentation(info="<html>
-<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<p><h4>Syntax</h4></p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
 <td><p align=\"right\">dss </p></td>
 <td><p align=\"center\">= </p></td>
 <td><p>DiscreteStateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method) </p></td>
 </tr>
 </table>
-<p><br/><h4><font color=\"#008000\">Description</font></h4></p>
+<p><br/><h4>Description</h4></p>
 <p>Generate a DiscreteStateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record and then converted into a DiscreteStateSpace record </p>
-<p><h4><font color=\"#008000\">Example</font></h4></p>
+<p><h4>Example</h4></p>
 <blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
    Real T_linearize = 5;
 
@@ -3438,15 +3438,15 @@ end fromModel;
       fileName + "\"");
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteStateSpace.Import.<b>fromFile</b>(fileName, matrixName)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>. The file must contain the matrix [A, B; C, D] named matrixName, the matrix B2 and the integer nx representing the order of the system, i.e. the number of rows of the square matrix A.
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
      
 

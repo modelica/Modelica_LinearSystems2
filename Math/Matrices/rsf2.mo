@@ -46,11 +46,11 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (T, Z, alphaReal, alphaImag) </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.Math.Matrices.<b<rsf2</b>(A)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>rsf2</b> (real Schur form) calculates the real Schur form af a real square matrix <b>A</b>, i.e.
 <blockquote><pre>
@@ -66,7 +66,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rsf\">Math.M
 </p>
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Real A[3,3] = [1, 2, 3; 4, 5, 6; 7, 8, 9];
    Real T[3,3];

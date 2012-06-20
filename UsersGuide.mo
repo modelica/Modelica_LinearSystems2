@@ -1115,9 +1115,9 @@ license shall prevail.</p>
 <p><br>
 </p>
 
-<p><FONT COLOR=\"#008000\"><FONT SIZE=3><b>Using
-or Distributing a Modelica </b></FONT></FONT><FONT COLOR=\"#008000\"><FONT SIZE=3><u><b>Package</b></u></FONT></FONT><FONT COLOR=\"#008000\"><FONT SIZE=3><b>
-under the Modelica License 2</b></FONT></FONT></p>
+<p><font color=\"#008000\"><font size=3><b>Using
+or Distributing a Modelica </b></font></font><font color=\"#008000\"><font size=3><u><b>Package</b></u></font></font><font color=\"#008000\"><font size=3><b>
+under the Modelica License 2</b></font></font></p>
 
 <p><b>What are the main
 differences to the previous version of the Modelica License?</b></p>
@@ -1288,9 +1288,9 @@ version for such purposes.
 
 <p><br>
 </p>
-<p><FONT COLOR=\"#008000\"><FONT SIZE=3><b>Using
-or Distributing a Modelica </b></FONT></FONT><FONT COLOR=\"#008000\"><FONT SIZE=3><u><b>Document</b></u></FONT></FONT><FONT COLOR=\"#008000\"><FONT SIZE=3><b>
-under the Modelica License 2</b></FONT></FONT></p>
+<p><font color=\"#008000\"><font size=3><b>Using
+or Distributing a Modelica </b></font></font><font color=\"#008000\"><font size=3><u><b>Document</b></u></font></font><font color=\"#008000\"><font size=3><b>
+under the Modelica License 2</b></font></font></p>
 
 <p>This
 section is devoted especially for the following applications:</p>

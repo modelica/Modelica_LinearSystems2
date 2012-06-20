@@ -285,12 +285,12 @@ follow each other as above. An error occurs if this is not the case.
   algorithm
 
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  s </td><td align=center> =  </td>  <td> TransferFunction.<b>s</b>()  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Generate the complex Laplace variable as a TransferFunction. It can be used for generating like 
 <blockquote><pre>
@@ -446,12 +446,12 @@ Generate the complex Laplace variable as a TransferFunction. It can be used for 
      (y,t,x_continuous) := StateSpace.Analysis.timeResponse(sc=ss, dt=dt, tSpan=tSpan, response=response, x0=x0);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>timeResponse</b>(tf, dt, tSpan, responseType, x0)  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 First, the transfer function representation is transformed into state space representation which is given to StateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. 
 <blockquote><pre>
@@ -463,7 +463,7 @@ First, the transfer function representation is transformed into state space repr
 The state space system is transformed to a appropriate discrete state space system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt.
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
@@ -506,12 +506,12 @@ The state space system is transformed to a appropriate discrete state space syst
         x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
 
   annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>timeResponse</b>(tf, dt, tSpan, responseType, x0)  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 First, the transfer function representation is transformed into state space representation which is given to StateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. 
 <blockquote><pre>
@@ -523,7 +523,7 @@ First, the transfer function representation is transformed into state space repr
 The state space system is transformed to a appropriate discrete state space system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt.
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
@@ -565,11 +565,11 @@ The state space system is transformed to a appropriate discrete state space syst
         x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
 
   annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>stepResponse</b>(tf, dt, tSpan, x0)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>stepResponse</b> calculates the step response of a transfer function. 
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
@@ -583,7 +583,7 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
 See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
@@ -625,11 +625,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
         x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
 
   annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>rampResponse</b>(ss, dt, tSpan, x0)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>rampResponse</b> calculates the time response of a transfer function for ramp imput u = t. 
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
@@ -643,7 +643,7 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
 See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
@@ -688,11 +688,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
         x0=x0);
 
   annotation(interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>initialResponse</b>(tf, dt, tSpan, x0)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>initialResponse</b> calculates the time response of a state space system for given initial condition and zero inputs. 
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
@@ -706,7 +706,7 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
 See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
@@ -741,17 +741,17 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
     algorithm
       result := size(tf.n,1)-1;
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  result </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>numeratorDegree</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial of a transfer function. 
 See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree\">TransferFunction.Analysis.denominatorDegree</a>.
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
@@ -778,17 +778,17 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
     algorithm
       result := size(tf.d,1)-1;
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  result </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>denominatorDegree</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of a transfer function. 
 See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.numeratorDegree\">TransferFunction.Analysis.numeratorDegree</a>.
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
@@ -826,18 +826,18 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
       den := if abs_den >= den_min then den else -abs_den+0*j;
       result := Polynomial.evaluateComplex(Polynomial(tf.n), s)/den;
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  result </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>evaluate</b>(ss)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function Analysis.<b>evaluate</b> evaluates a transfer function at a given (complex) value of s.
 The transfer function G(s)=N(s)/D(s) is evaluated by calculating the numerator polynomial N(s) and the denominator polynomial D(s).
 See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    Complex j = Modelica_LinearSystems2.Math.Complex.j();
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
@@ -893,18 +893,18 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
       y2 := TransferFunction.Analysis.evaluate(tf2, s);
       k := y1.re/y2.re;
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (z,p,k) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>zerosAndPoles</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 This function calculates the zeros, poles and gain of transfer function.
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.evaluate\">Analysis.evaluate</a> is used to calculate gain <tt>k</tt>.
  
 </p>
  
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
@@ -948,18 +948,18 @@ public
       eigval := StateSpace.Analysis.eigenValues(ss);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  eigenvalues </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>eigenValues</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Calculate the eigenvalues of the corresponding state space representation of a transfer function. The output is a complex vector containing the eigenvalues. Note, that the conversion of the transfer function does not result in a minimal state space system. Therefore also unobservable and uncontrollable eigenvalues will be calculated.
 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
@@ -998,11 +998,11 @@ Calculate the eigenvalues of the corresponding state space representation of a t
         onlyEigenvectors=onlyEigenvectors);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (eigenvectors, eigenvalues) </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>eigenVectors</b>(tf, onlyEigenvectors)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of the corresponding state space system of a transfer function. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <b>ss.A</b>. Just like in <a href=\"modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
 The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
@@ -1010,7 +1010,7 @@ The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(2*s+2)/(s^2+2*s+2);
@@ -1053,15 +1053,15 @@ i.e. v1 = |                 |,   v2 = |                   |
       Zeros := StateSpace.Analysis.invariantZeros(ss);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zeros </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>invariantZeros</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes the invariant zeros of the corresponding state space representation of a transfer function. The output is a complex vector containing the eigenvalues. Note, that the conversion of the transfer function does not result in a minimal state space system. Therefore, also zeros equal to unobservable or uncontrollable eigenvalues will be computed.
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
   Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
@@ -1140,18 +1140,18 @@ In this case, the output argument <b>finite</b> = <b>false</b> and
         controllable := StateSpace.Analysis.isControllable(ss=ss, method=method);
 
         annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  controllable </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>isControllable</b>(tf, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function TransferFunction.Analysis.<b>isControllable</b> checks the controllability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isControllable\">StateSpace.Analysis.isControllable</a> <br>
 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2 + 2*s +1);
@@ -1188,11 +1188,11 @@ Function TransferFunction.Analysis.<b>isControllable</b> checks the controllabil
         annotation (Documentation(info="<html>
  
 </html><html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  observable </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>isObservable</b>(tf, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function TransferFunction.Analysis.<b>isObservable</b> checks the observability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isObservable\">StateSpace.Analysis.isObservable</a> <br>
 
@@ -1201,7 +1201,7 @@ Function TransferFunction.Analysis.<b>isObservable</b> checks the observability 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2 + 2*s +1);
@@ -1235,11 +1235,11 @@ Function TransferFunction.Analysis.<b>isObservable</b> checks the observability 
       stabilizable := StateSpace.Analysis.isStabilizable(ss=ss);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  stabilizable </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>isStabilizable</b>(tf, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function TransferFunction.Analysis.<b>isStabilizable</b> checks the Stabilizability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isStabilizable\">StateSpace.Analysis.isStabilizable</a>. <br>
 The transfer function is stabilizable if all unstable poles are controllable.
@@ -1248,7 +1248,7 @@ The transfer function is stabilizable if all unstable poles are controllable.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(s-1)/(s^2 - 2*s +1);
@@ -1282,11 +1282,11 @@ The transfer function is stabilizable if all unstable poles are controllable.
       detectable := StateSpace.Analysis.isDetectable(ss=ss);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  detectable </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>isDetectable</b>(tf, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function TransferFunction.Analysis.<b>isDetectable</b> checks the Detectability of a transfer function. Therefore, the transfer function is converted into a state space representation which is applied to <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.isDetectable\">StateSpace.Analysis.isDetectable</a>. <br>
 The transfer function is detectable if all unstable poles are observable.
@@ -1295,7 +1295,7 @@ The transfer function is detectable if all unstable poles are observable.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(s-1)/(s^2 - 2*s +1);
@@ -1329,11 +1329,11 @@ The transfer function is detectable if all unstable poles are observable.
       om := StateSpace.Analysis.controllabilityMatrix(ss=ss);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  Q </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>controllabilityMatrix</b>(tf, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Calculate the controllability matrix
 <blockquote><pre>
@@ -1352,7 +1352,7 @@ of a transfer function.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
@@ -1384,11 +1384,11 @@ of a transfer function.
       om := StateSpace.Analysis.observabilityMatrix(ss=ss);
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  Q </td><td align=center> =  </td>  <td> TransferFunction.Analysis.<b>observabilityMatrix</b>(tf, method)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Calculate the observability matrix
 <blockquote><pre>
@@ -1407,7 +1407,7 @@ of a transfer function.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
@@ -1541,7 +1541,7 @@ of a transfer function.
   algorithm
      StateSpace.Plot.polesAndZeros(StateSpace(tf), poles, zeros, defaultDiagram, device);
          annotation (interactive=true, Documentation(info="<html>
-<h4><font style=\"color: #008000; \">Syntax</font></h4>
+<h4>Syntax</font></h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>polesAndZeros</b>(tf);
    or
@@ -1550,7 +1550,7 @@ TransferFunction.Plot.<b>polesAndZeros</b>(tf, poles=true, zeros=true, plot=true
                      device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>()); 
 </pre></blockquote>
 
-<h4><font style=\"color: #008000; \">Description</font></h4>
+<h4>Description</font></h4>
 <p>
 This function plots a pole-zero-map of the poles and zeros of a transfer function.
 The Boolean inputs
@@ -1560,7 +1560,7 @@ The records \"defaultDiagram\" and \"device\" allow to set various layout option
 size and location of the diagram on the screen.
 </p>
 
-<h4><font style=\"color: #008000; \">Example</font></h4>
+<h4>Example</font></h4>
 
 <p>
 The example <a href=\"modelica://Modelica_LinearSystems2.Examples.TransferFunction.plotPolesAndZeros\">
@@ -1697,18 +1697,18 @@ and results in
         end if;
 
       annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>plotBode</b>(tf)
    or
 TransferFunction.Plot.<b>plotBode</b>(tf, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Plots the bode-diagram of a transfer function.
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
    Modelica_LinearSystems2.TransferFunction tf =(s^2 + 5*s + 7)/(s^2 + 5*s + 6);
@@ -1777,7 +1777,7 @@ Plots the bode-diagram of a transfer function.
       Plot.diagram(diagram2, device);
 
       annotation (interactive=true, Documentation(info="<html>
-<p><b><font style=\"color: #008000; \">Syntax</font></b></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>timeResponse</b>(tf);
    or
@@ -1786,7 +1786,7 @@ TransferFunction.Plot.<b>timeResponse</b>(tf, dt, tSpan,response, x0, defaultDia
 </pre></blockquote>
 
 
-<p><b><font style=\"color: #008000; \">Description</font></b></p>
+<h4>Description</h4>
 <p>Function <b>timeResponse</b> plots the time response of a transfer function. The character of the time response if defined by the input 
 <a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also 
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>, 
@@ -1794,7 +1794,7 @@ TransferFunction.Plot.<b>timeResponse</b>(tf, dt, tSpan,response, x0, defaultDia
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and 
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>. </p>
 
-<p><b><font style=\"color: #008000; \">Example</font></b></p>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf =(s + 1)/(s^2 + 5*s + 12);
@@ -1848,13 +1848,13 @@ TransferFunction.Plot.<b>timeResponse</b>(tf, dt, tSpan,response, x0, defaultDia
           device=device);
 
       annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>impulse</b>(tf)  
    or
 TransferFunction.Plot.<b>impulse</b>(tf, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>impulse</b> plots the impulse response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, 
@@ -1865,7 +1865,7 @@ Function <b>impulse</b> plots the impulse response of a transfer function. It is
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
@@ -1914,13 +1914,13 @@ Function <b>impulse</b> plots the impulse response of a transfer function. It is
       device=device);
 
     annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>step</b>(tf)  
    or
 TransferFunction.Plot.<b>step</b>(tf, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>step</b> plots the step response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">step</a>, 
@@ -1931,7 +1931,7 @@ Function <b>step</b> plots the step response of a transfer function. It is based
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
 
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
@@ -1982,13 +1982,13 @@ Function <b>step</b> plots the step response of a transfer function. It is based
   equation
 
          annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>ramp</b>(tf)  
    or
 TransferFunction.Plot.<b>ramp</b>(tf, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>ramp</b> plots the ramp response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">step</a>, 
@@ -1998,7 +1998,7 @@ Function <b>ramp</b> plots the ramp response of a transfer function. It is based
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
    Modelica_LinearSystems2.TransferFunction tf =(2*s^2 + 7*s + 13)/(s^3 + 6*s^2 + 17*s + 12);
@@ -2058,13 +2058,13 @@ Function <b>ramp</b> plots the ramp response of a transfer function. It is based
           device=device);
 
       annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>initialResponse</b>(tf)  
    or
 TransferFunction.Plot.<b>initialResponse</b>(tf, dt, tSpan, y0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>initialResponse</b> plots the initial response, i.e. the zeros input response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, 
@@ -2076,7 +2076,7 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
    Modelica_LinearSystems2.TransferFunction tf = (s + 1)/(s^2 + 5*s + 12);
@@ -2127,11 +2127,11 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
           p,
           k);
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> TransferFunction.Conversion.<b>toZerosAndPoles</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a ZerosAndPoles record
  <blockquote><pre>
@@ -2142,7 +2142,7 @@ Computes a ZerosAndPoles record
 (<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs the ZerosAndPoles constructor.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
    Modelica_LinearSystems2.TransferFunction dtf = 1/(s^2 + 3*s +2)
@@ -2195,11 +2195,11 @@ Computes a ZerosAndPoles record
 
       ss.D := [d];
      annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center> =  </td>  <td> TransferFunction.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Transforms a transfer function into state space representation.
 There are an infinite number of possible realizations.
@@ -2239,7 +2239,7 @@ is defined slightly differently.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^3 + s^2 + s +1);
@@ -2278,18 +2278,18 @@ is defined slightly differently.
       end for;
     end for;
     annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> TransferFunction.Conversion.<b>toZerosAndPolesMIMO</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Converts a matrix of transfer functions denoted as rational polynomial function into a matrix of transfer functions in zeros-and-poles representation. The function repetitively uses
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles\">toZerosAndPoles</a>.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
    Modelica_LinearSystems2.TransferFunction tf = [1/(s^2 + 3*s +2);s/(s^2 + 2*s +1)]
@@ -2351,11 +2351,11 @@ Converts a matrix of transfer functions denoted as rational polynomial function 
       D := [d];
       ABCD := [A,B;C,D];
      annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (A, B, C, D) </td><td align=center> =  </td>  <td> TransferFunction.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Transforms a transfer function into state space representation. The outputs are the system functions A, B, C, D.
 There are an infinite number of possible realizations.
@@ -2395,7 +2395,7 @@ is defined slightly differently.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^3 + s^2 + s +1);
@@ -2462,17 +2462,17 @@ is defined slightly differently.
     tf := Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunctionMIMO(result);
 
     annotation (interactive=true, Documentation(info="<html>
-<p><h4><font color=\"#008000\">Syntax</font></h4></p>
+<h4>Syntax</h4>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
 <td><p align=\"right\">tf </p></td>
 <td><p align=\"center\">= </p></td>
 <td><p>TransferFunction.Import.<b>fromModel</b>(modelName, T_linearize, fileName) </p></td>
 </tr>
 </table>
-<p><br/><h4><font color=\"#008000\">Description</font></h4></p>
+<h4>Description</h4>
 <p>Generate a matrix of TransferFunction data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"modelica://Modelica_LinearSystems2.
 StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conversion from sate space to transfer function representation. </p>
-<p><h4><font color=\"#008000\">Example</font></h4></p>
+<h4>Example</h4>
 <blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
    Real T_linearize = 5; 
    
@@ -2526,15 +2526,15 @@ StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conver
     tf.yName := denName;
 
       annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  tf </td><td align=center> =  </td>  <td> TransferFunction.Import.<b>fromFile</b>(fileName, numName, denName)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file must contain the names of the vector with the polynomial coefficients of numerator and denominator
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
      
 

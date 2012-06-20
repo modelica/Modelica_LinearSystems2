@@ -255,12 +255,12 @@ encapsulated function z "Generate the discrete transfer function z"
 algorithm
 
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right> z </td><td align=center> =  </td>  <td> DiscreteTransferFunction.<b>s</b>()  </td> </tr>
  
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can be used for generating like 
 <blockquote><pre>
@@ -407,20 +407,20 @@ algorithm
     end if;
 
   annotation (interactive=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>plotBode</b>(tf)
    or
 TransferFunction.Plot.<b>plotBode</b>(tf, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Plots the bode-diagram of a transfer function.
 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
    Modelica_LinearSystems2.TransferFunction tf =(s^2 + 5*s + 7)/(s^2 + 5*s + 6);
@@ -459,17 +459,17 @@ encapsulated function denominatorDegree "Return denominator degree"
 algorithm
   result := size(dtf.d,1)-1;
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  result </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>denominatorDegree</b>(dtf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of a discrete transfer function. 
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.DiscreteTransferFunction dtf=(z+1)/(z^2+z+1);
@@ -516,11 +516,11 @@ algorithm
   (z,p,k) := TransferFunction.Analysis.zerosAndPoles(tf);
   dzp := DiscreteZerosAndPoles(z, p, k, dtf.Ts, dtf.method, uName=dtf.uName, yName=dtf.yName);
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.<b>toDiscreteZerosAndPoles</b>(tf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Computes a DiscreteZerosAndPoles record
  <blockquote><pre>
@@ -531,7 +531,7 @@ Computes a DiscreteZerosAndPoles record
 (<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs the DiscreteZerosAndPoles constructor.
 
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();  
    Modelica_LinearSystems2.TransferFunction tf = 1/(z^2 + 3*z +2)
@@ -591,11 +591,11 @@ end if;
   dss.method := dtf.method;
 
  annotation (overloadsConstructor=true, Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <table>
 <tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.toStateSpace<b>toDiscreteStateSpace</b>(dtf)  </td> </tr>
 </table>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Transforms a discrete transfer function into discrete state space representation.
 There are an infinite number of possible realizations.
@@ -635,7 +635,7 @@ is defined slightly differently.
 
 </p>
 
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
    TransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.DiscreteTransferFunction dtf=(z+1)/(z^3 + z^2 + z +1);

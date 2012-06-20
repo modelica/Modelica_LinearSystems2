@@ -4,7 +4,7 @@ record Complex "Record defining a Complex number"
   Real re "Real part of complex number" annotation(Dialog);
   Real im "Imaginary part of complex number" annotation(Dialog);
 
- encapsulated package Examples
+  encapsulated package Examples
     "Library demonstrating the usage of complex numbers"
 
     import Modelica;
@@ -29,43 +29,43 @@ record Complex "Record defining a Complex number"
       Streams.print("c3 = c1 + c2 = " + String(c3));
       ok := true;
     end addTwoComplexNumbers;
+  end Examples;
 
- end Examples;
+  encapsulated package Vectors
+    extends Modelica.Icons.Package;
+    import Modelica;
 
-encapsulated package Vectors
-  extends Modelica.Icons.Package;
-  import Modelica;
+    function print "Print vector"
+      import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.Math.Complex;
 
-  function print "Print vector"
-    import Modelica.Utilities.Streams.print;
-    import Modelica_LinearSystems2.Math.Complex;
+      input String name="" "Name of complex vector";
+      input Complex c[:] "Complex vector to be printed";
 
-    input String name="" "Name of complex vector";
-    input Complex c[:] "Complex vector to be printed";
-
-    input String fileName=""
+      input String fileName=""
         "Print to fileName; empty fileName prints to the log window";
 
+    algorithm
+      print(name + " =", fileName);
+      for i in 1:size(c, 1) loop
+        print("   " + String(c[i]), fileName);
+      end for;
+    end print;
+
+  function length "Return length of a complex vector"
+    import Modelica_LinearSystems2.Math.Complex;
+    input Complex v[:] "Vector";
+    output Real result "Length of vector v";
+
   algorithm
-    print(name + " =", fileName);
-    for i in 1:size(c, 1) loop
-      print("   " + String(c[i]), fileName);
-    end for;
-  end print;
-
-function length "Return length of a complex vector"
-  import Modelica_LinearSystems2.Math.Complex;
-  input Complex v[:] "Vector";
-  output Real result "Length of vector v";
-
-algorithm
-  result := sqrt(sum(v[i].re^2 + v[i].im^2 for i in 1:size(v,1)));
-  annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+    result := sqrt(sum(v[i].re^2 + v[i].im^2 for i in 1:size(v,1)));
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
 <blockquote><pre>
 Vectors.<b>length</b>(v);
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+
+<h4>Description</h4>
 <p>
 The function call \"<code>Vectors.<b>length</b>(v)</code>\" returns the
 <b>Euclidean length</b> \"<code>sqrt(v*v)</code>\" of vector v. 
@@ -75,41 +75,43 @@ in one statement and therefore the function is usually automatically
 inlined. Further symbolic processing is therefore possible, which is
 not the case with function norm(..).
 </p>
-<h4><font color=\"#008000\">Example</font></h4>
+<p>See also
+<a href=\"Modelica://Modelica.Math.Vectors.length\">Vectors.length</a>.</p>
+
+<h4>Example</h4>
 <blockquote><pre>
-  v = {2, -4, -2, -1};
-  <b>length</b>(v);  // = 5
+v = {2, -4, -2, -1};
+<b>length</b>(v);  // = 5
 </pre></blockquote>
-<h4><font color=\"#008000\">See also</font></h4>
-<a href=\"Modelica:Modelica_LinearSystems2.Math.Vectors.norm\">Vectors.norm</a>
 </html>"));
-end length;
+  end length;
 
-function norm "Returns the norm of a complex vector"
-  import Modelica;
-  import Modelica_LinearSystems2.Math.Complex;
-  input Complex v[:] "Vector";
-  input Real p(min=1) = 2
+  function norm "Returns the norm of a complex vector"
+    import Modelica;
+    import Modelica_LinearSystems2.Math.Complex;
+    input Complex v[:] "Vector";
+    input Real p(min=1) = 2
         "Type of p-norm (often used: 1, 2, or Modelica.Constants.inf)";
-  output Real result "p-norm of vector v";
+    output Real result "p-norm of vector v";
 
-algorithm
-  if p == 2 then
-    result:= sqrt(sum(v[i].re^2 + v[i].im^2 for i in 1:size(v,1)));
-  elseif p == Modelica.Constants.inf then
-    result:= Complex.'max'(v);
-  elseif p == 1 then
-    result:= sum(Complex.'abs'(v[i]) for i in 1:size(v,1));
-  else
-    result:=(sum(Complex.'abs'(v[i])^p for i in 1:size(v, 1)))^(1/p);
-  end if;
-  annotation (Documentation(info="<HTML>
-<h4><font color=\"#008000\">Syntax</font></h4>
+  algorithm
+    if p == 2 then
+      result:= sqrt(sum(v[i].re^2 + v[i].im^2 for i in 1:size(v,1)));
+    elseif p == Modelica.Constants.inf then
+      result:= Complex.'max'(v);
+    elseif p == 1 then
+      result:= sum(Complex.'abs'(v[i]) for i in 1:size(v,1));
+    else
+      result:=(sum(Complex.'abs'(v[i])^p for i in 1:size(v, 1)))^(1/p);
+    end if;
+    annotation (Documentation(info="<HTML>
+<h4>Syntax</h4>
 <blockquote><pre>
 Vectors.<b>norm</b>(v);
 Vectors.<b>norm</b>(v,p=2);   // 1 &le; p &le; &#8734;
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+
+<h4>Description</h4>
 <p>
 The function call \"<code>Vectors.<b>norm</b>(v)</code>\" returns the
 <b>Euclidean norm</b> \"<code>sqrt(v*v)</code>\" of vector v. 
@@ -143,7 +145,10 @@ Note, for any vector norm the following inequality holds:
 <blockquote><pre>
 <b>norm</b>(v1+v2,p) &le; <b>norm</b>(v1,p) + <b>norm</b>(v2,p)
 </pre></blockquote>
-<h4><font color=\"#008000\">Example</font></h4>
+<p>See also
+<a href=\"Modelica://Modelica.Math.Matrices.norm\">Matrices.norm</a>.</p>
+
+<h4>Example</h4>
 <blockquote><pre>
   v = {2, -4, -2, -1};
   <b>norm</b>(v,1);    // = 9
@@ -152,325 +157,326 @@ Note, for any vector norm the following inequality holds:
   <b>norm</b>(v,10.5); // = 4.00052597412635
   <b>norm</b>(v,Modelica.Constants.inf);  // = 4
 </pre></blockquote>
-<h4><font color=\"#008000\">See also</font></h4>
-<a href=\"Modelica:Modelica.Math.Matrices.norm\">Matrices.norm</a>
 </HTML>"));
-end norm;
+  end norm;
 
-function normalize
+  function normalize
       "Return normalized complex vector such that length = 1 and prevent zero-division for zero vector"
-  import Modelica;
-  import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    import Modelica_LinearSystems2.Math.Complex;
 
-  input Complex v[:] "Vector";
-  input Real eps = 100*Modelica.Constants.eps "if |v| < eps then result = v";
-  output Complex result[size(v, 1)] "Input vector v normalized to length=1";
+    input Complex v[:] "Vector";
+    input Real eps = 100*Modelica.Constants.eps "if |v| < eps then result = v";
+    output Complex result[size(v, 1)] "Input vector v normalized to length=1";
 
     protected
-  Real length_v = Complex.Vectors.length(v);
-  Complex j = Complex.j();
-algorithm
-  if length_v >= eps then
-     for i in 1:size(v,1) loop
-        result[i] :=v[i].re/length_v + (v[i].im/length_v)*j;
-     end for;
-  else
-     result :=v;
-  end if;
-  annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<blockquote><pre>
-Vectors.<b>normalize</b>(v);
-Vectors.<b>normalize</b>(v,eps=100*Modelica.Constants.eps);
-</pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-The function call \"<code>Vectors.<b>normalize</b>(v)</code>\" returns the
-<b>unit vector</b> \"<code>v/length(v)</code>\" of vector v. 
-If length(v) is close to zero (more precisely, if length(v) &lt; eps), 
-v is returned in order to avoid
-a division by zero. For many applications this is useful, because
-often the unit vector <b>e</b> = <b>v</b>/length(<b>v</b>) is used to compute
-a vector x*<b>e</b>, where the scalar x is in the order of length(<b>v</b>), 
-i.e., x*<b>e</b> is small, when length(<b>v</b>) is small and then 
-it is fine to replace <b>e</b> by <b>v</b> to avoid a division by zero.
-</p>
-<p>
-Since the function is implemented in one statement,
-it is usually inlined and therefore symbolic processing is
-possible.
-</p>
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-  <b>normalize</b>({1,2,3});  // = {0.267, 0.534, 0.802}
-  <b>normalize</b>({0,0,0});  // = {0,0,0}
-</pre></blockquote>
-<h4><font color=\"#008000\">See also</font></h4>
-<a href=\"Modelica:Modelica_LinearSystems2.Math.Vectors.length\">Vectors.length</a>
-</html>"));
-end normalize;
+    Real length_v = Complex.Vectors.length(v);
+    Complex j = Complex.j();
+  algorithm
+    if length_v >= eps then
+       for i in 1:size(v,1) loop
+          result[i] :=v[i].re/length_v + (v[i].im/length_v)*j;
+       end for;
+    else
+       result :=v;
+    end if;
+    annotation (Documentation(info="<html>
+  <h4>Syntax</h4>
+  <blockquote><pre>
+  Vectors.<b>normalize</b>(v);
+  Vectors.<b>normalize</b>(v,eps=100*Modelica.Constants.eps);
+  </pre></blockquote>
+  <h4>Description</h4>
+  <p>
+  The function call \"<code>Vectors.<b>normalize</b>(v)</code>\" returns the
+  <b>unit vector</b> \"<code>v/length(v)</code>\" of vector v. 
+  If length(v) is close to zero (more precisely, if length(v) &lt; eps), 
+  v is returned in order to avoid
+  a division by zero. For many applications this is useful, because
+  often the unit vector <b>e</b> = <b>v</b>/length(<b>v</b>) is used to compute
+  a vector x*<b>e</b>, where the scalar x is in the order of length(<b>v</b>), 
+  i.e., x*<b>e</b> is small, when length(<b>v</b>) is small and then 
+  it is fine to replace <b>e</b> by <b>v</b> to avoid a division by zero.
+  </p>
+  <p>
+  Since the function is implemented in one statement,
+  it is usually inlined and therefore symbolic processing is
+  possible.
+  </p>
+  <p>
+  See also
+  <a href=\"Modelica:Modelica_LinearSystems2.Math.Vectors.length\">Vectors.length</a>.
+  </p>
+  <h4>Example</h4>
+  <blockquote><pre>
+    <b>normalize</b>({1,2,3});  // = {0.267, 0.534, 0.802}
+    <b>normalize</b>({0,0,0});  // = {0,0,0}
+  </pre></blockquote>
+  </html>"));
+  end normalize;
 
-function sortComplex "Sort elements of complex vector"
-  import Modelica_LinearSystems2.Math.Complex;
-  input Complex v[:] "Vector to be sorted";
-  input Boolean ascending = true
+  function sortComplex "Sort elements of complex vector"
+    import Modelica_LinearSystems2.Math.Complex;
+    input Complex v[:] "Vector to be sorted";
+    input Boolean ascending = true
         "= true if ascending order, otherwise descending order";
-  input Boolean sortFrequency=true
+    input Boolean sortFrequency=true
         "True, if sorting is first for imaginary then for real value, otherwise sorting is for absolute value";
-  output Complex sorted_v[size(v,1)] = v "Sorted vector";
-  output Integer indices[size(v,1)] = 1:size(v,1) "sorted_v = v[indices]";
+    output Complex sorted_v[size(v,1)] = v "Sorted vector";
+    output Integer indices[size(v,1)] = 1:size(v,1) "sorted_v = v[indices]";
 
-  /* shellsort algorithm; should be improved later */
+    /* shellsort algorithm; should be improved later */
     protected
-  Integer gap;
-  Integer i;
-  Integer j;
-  Complex wv;
-  Integer wi;
-  Integer nv = size(v,1);
-  Boolean swap;
-  Integer k1;
-  Integer k2;
-algorithm
-  gap := div(nv,2);
+    Integer gap;
+    Integer i;
+    Integer j;
+    Complex wv;
+    Integer wi;
+    Integer nv = size(v,1);
+    Boolean swap;
+    Integer k1;
+    Integer k2;
+  algorithm
+    gap := div(nv,2);
 
-  while gap > 0 loop
-     i := gap;
-     while i < nv loop
-        j := i-gap;
-        if j>=0 then
-           k1 := j+1;
-           k2 := j + gap + 1;
-           if sortFrequency then
-              if ascending then
-                 swap := abs(sorted_v[k1].im) >  abs(sorted_v[k2].im) or
-                         abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and
-                         (sorted_v[k1].re  > sorted_v[k2].re or
-                          sorted_v[k1].re  == sorted_v[k2].re and sorted_v[k1].im < sorted_v[k2].im);
-              else
-                 swap := abs(sorted_v[k1].im) <  abs(sorted_v[k2].im) or
-                         abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and
-                         (sorted_v[k1].re  < sorted_v[k2].re or
-                          sorted_v[k1].re  == sorted_v[k2].re and sorted_v[k1].im < sorted_v[k2].im);
-              end if;
-           else
-              if ascending then
-                 swap := Complex.'abs'(sorted_v[k1]) > Complex.'abs'(sorted_v[k2]);
-              else
-                 swap := Complex.'abs'(sorted_v[k1]) < Complex.'abs'(sorted_v[k2]);
-              end if;
-           end if;
-        else
-           swap := false;
-        end if;
+    while gap > 0 loop
+       i := gap;
+       while i < nv loop
+          j := i-gap;
+          if j>=0 then
+             k1 := j+1;
+             k2 := j + gap + 1;
+             if sortFrequency then
+                if ascending then
+                   swap := abs(sorted_v[k1].im) >  abs(sorted_v[k2].im) or
+                           abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and
+                           (sorted_v[k1].re  > sorted_v[k2].re or
+                            sorted_v[k1].re  == sorted_v[k2].re and sorted_v[k1].im < sorted_v[k2].im);
+                else
+                   swap := abs(sorted_v[k1].im) <  abs(sorted_v[k2].im) or
+                           abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and
+                           (sorted_v[k1].re  < sorted_v[k2].re or
+                            sorted_v[k1].re  == sorted_v[k2].re and sorted_v[k1].im < sorted_v[k2].im);
+                end if;
+             else
+                if ascending then
+                   swap := Complex.'abs'(sorted_v[k1]) > Complex.'abs'(sorted_v[k2]);
+                else
+                   swap := Complex.'abs'(sorted_v[k1]) < Complex.'abs'(sorted_v[k2]);
+                end if;
+             end if;
+          else
+             swap := false;
+          end if;
 
-        while swap loop
-           wv := sorted_v[j+1];
-           wi := indices[j+1];
-           sorted_v[j+1] := sorted_v[j+gap+1];
-           sorted_v[j+gap+1] := wv;
-           indices[j+1] := indices[j+gap+1];
-           indices[j+gap+1] := wi;
-           j := j - gap;
-           if j >= 0 then
-              k1 := j+1;
-              k2 := j + gap + 1;
-              if sortFrequency then
-                 if ascending then
-                    swap := abs(sorted_v[k1].im) >  abs(sorted_v[k2].im) or
-                            abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and
-                            (sorted_v[k1].re  > sorted_v[k2].re or
-                             sorted_v[k1].re  == sorted_v[k2].re and sorted_v[k1].im < sorted_v[k2].im);
-                 else
-                    swap := abs(sorted_v[k1].im) <  abs(sorted_v[k2].im) or
-                            abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and
-                            (sorted_v[k1].re  < sorted_v[k2].re or
-                             sorted_v[k1].re  == sorted_v[k2].re and sorted_v[k1].im < sorted_v[k2].im);
-                 end if;
-              else
-                 if ascending then
-                    swap := Complex.'abs'(sorted_v[k1]) > Complex.'abs'(sorted_v[k2]);
-                 else
-                    swap := Complex.'abs'(sorted_v[k1]) < Complex.'abs'(sorted_v[k2]);
-                 end if;
-              end if;
-           else
-              swap := false;
-           end if;
-        end while;
-        i := i + 1;
-     end while;
-     gap := div(gap,2);
-  end while;
-  annotation (Documentation(info="<HTML>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<blockquote><pre>
-           sorted_v = Vectors.<b>sort</b>(v);
-(sorted_v, indices) = Vectors.<b>sort</b>(v, ascending=true);
-</pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Function <b>sort</b>(..) sorts a Real vector v
-in ascending order and returns the result in sorted_v.
-If the optional argument \"ascending\" is <b>false</b>, the vector
-is sorted in descending order. In the optional second
-output argument the indices of the sorted vector with respect
-to the original vector are given, such that sorted_v = v[indices].
-</p>
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-  (v2, i2) := Vectors.sort({-1, 8, 3, 6, 2});
-       -> v2 = {-1, 2, 3, 6, 8}
-          i2 = {1, 5, 3, 4, 2}
-</pre></blockquote>
-</HTML>"));
-end sortComplex;
+          while swap loop
+             wv := sorted_v[j+1];
+             wi := indices[j+1];
+             sorted_v[j+1] := sorted_v[j+gap+1];
+             sorted_v[j+gap+1] := wv;
+             indices[j+1] := indices[j+gap+1];
+             indices[j+gap+1] := wi;
+             j := j - gap;
+             if j >= 0 then
+                k1 := j+1;
+                k2 := j + gap + 1;
+                if sortFrequency then
+                   if ascending then
+                      swap := abs(sorted_v[k1].im) >  abs(sorted_v[k2].im) or
+                              abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and
+                              (sorted_v[k1].re  > sorted_v[k2].re or
+                               sorted_v[k1].re  == sorted_v[k2].re and sorted_v[k1].im < sorted_v[k2].im);
+                   else
+                      swap := abs(sorted_v[k1].im) <  abs(sorted_v[k2].im) or
+                              abs(sorted_v[k1].im) == abs(sorted_v[k2].im) and
+                              (sorted_v[k1].re  < sorted_v[k2].re or
+                               sorted_v[k1].re  == sorted_v[k2].re and sorted_v[k1].im < sorted_v[k2].im);
+                   end if;
+                else
+                   if ascending then
+                      swap := Complex.'abs'(sorted_v[k1]) > Complex.'abs'(sorted_v[k2]);
+                   else
+                      swap := Complex.'abs'(sorted_v[k1]) < Complex.'abs'(sorted_v[k2]);
+                   end if;
+                end if;
+             else
+                swap := false;
+             end if;
+          end while;
+          i := i + 1;
+       end while;
+       gap := div(gap,2);
+    end while;
+    annotation (Documentation(info="<HTML>
+  <h4>Syntax</h4>
+  <blockquote><pre>
+             sorted_v = Vectors.<b>sort</b>(v);
+  (sorted_v, indices) = Vectors.<b>sort</b>(v, ascending=true);
+  </pre></blockquote>
+  <h4>Description</h4>
+  <p>
+  Function <b>sort</b>(..) sorts a Real vector v
+  in ascending order and returns the result in sorted_v.
+  If the optional argument \"ascending\" is <b>false</b>, the vector
+  is sorted in descending order. In the optional second
+  output argument the indices of the sorted vector with respect
+  to the original vector are given, such that sorted_v = v[indices].
+  </p>
+  <h4>Example</h4>
+  <blockquote><pre>
+    (v2, i2) := Vectors.sort({-1, 8, 3, 6, 2});
+         -> v2 = {-1, 2, 3, 6, 8}
+            i2 = {1, 5, 3, 4, 2}
+  </pre></blockquote>
+  </HTML>"));
+  end sortComplex;
 
-function multiply "Scalar product of two complex vectors"
-  extends Modelica.Icons.Function;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica;
+  function multiply "Scalar product of two complex vectors"
+    extends Modelica.Icons.Function;
+    import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
 
-  input Complex v1[:];
-  input Complex v2[size(v1,1)];
-  output Complex result=Complex(0);
+    input Complex v1[:];
+    input Complex v2[size(v1,1)];
+    output Complex result=Complex(0);
 
-algorithm
-  for i in 1:size(v1,1) loop
-    result := result + v1[i]*v2[i];
-  end for;
-
-end multiply;
-
-    function reverse "Reverse vector elements (e.g. v[1] becomes last element)"
-      extends Modelica.Icons.Function;
-
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Complex;
-
-      input Complex v[:] "Vector";
-      output Complex result[size(v, 1)]
-        "Elements of vector v in reversed order";
-
-    algorithm
-      result := {v[end-i+1] for i in 1:size(v,1)};
-    annotation (Inline=true, Documentation(info="<html>
-<p><h4>Syntax</h4></p>
-<blockquote><pre>Vectors.<b>reverse</b>(v);</pre></blockquote>
-<p><h4>Description</h4></p>
-<pre>The function call &QUOT;Vectors.<b>reverse</b>(v)&QUOT; returns the complex vector elements in reverse order. </pre>
-<p><h4>Example</h4></p>
-<blockquote><pre>  <b>reverse</b>({1,2,3,4});  // = {4,3,2,1}</pre></blockquote>
-</html>"));
-    end reverse;
-
-end Vectors;
-
-encapsulated package Matrices
-  extends Modelica.Icons.Package;
-  import Modelica;
-  import Modelica_LinearSystems2;
-
-function print "Print matrix"
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica.Utilities.Strings;
-      import Modelica_LinearSystems2.Math.Complex;
-
-  input Complex M[:,:];
-  input Integer significantDigits=6
-        "Number of significant digits that are shown";
-  input String name="M" "Independent variable name used for printing";
-  output String s="";
-    protected
-  String blanks=Strings.repeat(significantDigits);
-  String space=Strings.repeat(8);
-  String space2=Strings.repeat(3);
-  Integer r=size(M, 1);
-  Integer c=size(M, 2);
-
-algorithm
-  if r == 0 or c == 0 then
-    s := name + " = []";
-  else
-    s := "\n" + name + " = \n";
-    for i in 1:r loop
-      s := s + space;
-      for j in 1:c loop
-        if Complex.'abs'(M[i, j]) >= 0 then
-          s := s + " ";
-        end if;
-        s := s + String(M[i, j], significantDigits=significantDigits) +
-          Strings.repeat(significantDigits + 8 - Strings.length(String(Complex.'abs'(M[i,j]))));
-
-      end for;
-      s := s + "\n";
+  algorithm
+    for i in 1:size(v1,1) loop
+      result := result + v1[i]*v2[i];
     end for;
 
-  end if;
-end print;
+  end multiply;
 
-encapsulated function matMatMul "Multiply two complex matrices"
-      import Modelica_LinearSystems2.Math.Complex;
-      import Re = Modelica_LinearSystems2.Math.Complex.real;
-      import Im = Modelica_LinearSystems2.Math.Complex.imag;
+      function reverse
+      "Reverse vector elements (e.g. v[1] becomes last element)"
+        extends Modelica.Icons.Function;
 
-  input Complex m1[:,:] "Complex matrix 1";
-  input Complex m2[size(m1, 2),:] "Complex matrix 2";
-  output Complex m3[size(m1, 1),size(m2, 2)] "= m1*m2";
-//   Complex j=Complex.j();
-//   Real m1Re[size(m1,1),size(m1,2)]=Re(m1);
-//   Real m1Im[size(m1,1),size(m1,2)]=Im(m1);
-//   Real m2Re[size(m2,1),size(m2,2)]=Re(m2);
-//   Real m2Im[size(m2,1),size(m2,2)]=Im(m2);
+        import Modelica;
+        import Modelica_LinearSystems2.Math.Complex;
+
+        input Complex v[:] "Vector";
+        output Complex result[size(v, 1)]
+        "Elements of vector v in reversed order";
+
+      algorithm
+        result := {v[end-i+1] for i in 1:size(v,1)};
+      annotation (Inline=true, Documentation(info="<html>
+  <p><h4>Syntax</h4></p>
+  <blockquote><pre>Vectors.<b>reverse</b>(v);</pre></blockquote>
+  <p><h4>Description</h4></p>
+  <pre>The function call &QUOT;Vectors.<b>reverse</b>(v)&QUOT; returns the complex vector elements in reverse order. </pre>
+  <p><h4>Example</h4></p>
+  <blockquote><pre>  <b>reverse</b>({1,2,3,4});  // = {4,3,2,1}</pre></blockquote>
+  </html>"));
+      end reverse;
+
+  end Vectors;
+
+  encapsulated package Matrices
+    extends Modelica.Icons.Package;
+    import Modelica;
+    import Modelica_LinearSystems2;
+
+    function print "Print matrix"
+          import Modelica_LinearSystems2.StateSpace;
+          import Modelica.Utilities.Strings;
+          import Modelica_LinearSystems2.Math.Complex;
+
+      input Complex M[:,:];
+      input Integer significantDigits=6
+        "Number of significant digits that are shown";
+      input String name="M" "Independent variable name used for printing";
+      output String s="";
     protected
-  Integer l1;
-  Integer l2;
-algorithm
-//  m3 := m1[:, :].re*m2[:, :].re - m1[:, :].im*m2[:, :].im + j*(m1[:, :].re*m2[:,:].im + m1[:, :].im*m2[:, :].re);
-//  m3 :=m1Re*m2Re - m1Im*m2Im + j*(m1Re*m2Im + m1Im*m2Re);
+      String blanks=Strings.repeat(significantDigits);
+      String space=Strings.repeat(8);
+      String space2=Strings.repeat(3);
+      Integer r=size(M, 1);
+      Integer c=size(M, 2);
 
- for l1 in 1:size(m1,1) loop
-   for l2 in 1:size(m2,2) loop
-     m3[l1,l2] := Complex.Vectors.multiply(m1[l1,:],m2[:,l2]);
-   end for;
-   end for;
+    algorithm
+      if r == 0 or c == 0 then
+        s := name + " = []";
+      else
+        s := "\n" + name + " = \n";
+        for i in 1:r loop
+          s := s + space;
+          for j in 1:c loop
+            if Complex.'abs'(M[i, j]) >= 0 then
+              s := s + " ";
+            end if;
+            s := s + String(M[i, j], significantDigits=significantDigits) +
+              Strings.repeat(significantDigits + 8 - Strings.length(String(Complex.'abs'(M[i,j]))));
 
-end matMatMul;
+          end for;
+          s := s + "\n";
+        end for;
 
-encapsulated function matVecMul
+      end if;
+    end print;
+
+    encapsulated function matMatMul "Multiply two complex matrices"
+          import Modelica_LinearSystems2.Math.Complex;
+          import Re = Modelica_LinearSystems2.Math.Complex.real;
+          import Im = Modelica_LinearSystems2.Math.Complex.imag;
+
+      input Complex m1[:,:] "Complex matrix 1";
+      input Complex m2[size(m1, 2),:] "Complex matrix 2";
+      output Complex m3[size(m1, 1),size(m2, 2)] "= m1*m2";
+    //   Complex j=Complex.j();
+    //   Real m1Re[size(m1,1),size(m1,2)]=Re(m1);
+    //   Real m1Im[size(m1,1),size(m1,2)]=Im(m1);
+    //   Real m2Re[size(m2,1),size(m2,2)]=Re(m2);
+    //   Real m2Im[size(m2,1),size(m2,2)]=Im(m2);
+    protected
+      Integer l1;
+      Integer l2;
+    algorithm
+    //  m3 := m1[:, :].re*m2[:, :].re - m1[:, :].im*m2[:, :].im + j*(m1[:, :].re*m2[:,:].im + m1[:, :].im*m2[:, :].re);
+    //  m3 :=m1Re*m2Re - m1Im*m2Im + j*(m1Re*m2Im + m1Im*m2Re);
+
+     for l1 in 1:size(m1,1) loop
+       for l2 in 1:size(m2,2) loop
+         m3[l1,l2] := Complex.Vectors.multiply(m1[l1,:],m2[:,l2]);
+       end for;
+       end for;
+
+    end matMatMul;
+
+    encapsulated function matVecMul
       "Multiply a complex matrices with a complex vector"
-      import Modelica_LinearSystems2.Math.Complex;
-//  import Re = Modelica_LinearSystems2.Math.Complex.real;
-//  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+          import Modelica_LinearSystems2.Math.Complex;
+    //  import Re = Modelica_LinearSystems2.Math.Complex.real;
+    //  import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
-  input Complex m[:,:] "Complex matrix";
-  input Complex vi[size(m, 2)] "Complex vector";
-  output Complex vo[size(m, 1)] "= m*vi";
-//   Complex j=Complex.j();
-//   Real Rem[size(m, 1),size(m, 2)]=Re(m);
-//   Real Imm[size(m, 1),size(m, 2)]=Im(m);
-//   Real Revi[size(vi, 1)]=Re(vi);
-//   Real Imvi[size(vi, 1)]=Im(vi);
+      input Complex m[:,:] "Complex matrix";
+      input Complex vi[size(m, 2)] "Complex vector";
+      output Complex vo[size(m, 1)] "= m*vi";
+    //   Complex j=Complex.j();
+    //   Real Rem[size(m, 1),size(m, 2)]=Re(m);
+    //   Real Imm[size(m, 1),size(m, 2)]=Im(m);
+    //   Real Revi[size(vi, 1)]=Re(vi);
+    //   Real Imvi[size(vi, 1)]=Im(vi);
     protected
-  Integer l1;
+      Integer l1;
 
-algorithm
-//  vo := Rem*Revi - Imm*Imvi + j*(Rem*Imvi + Imm*Revi);
+    algorithm
+    //  vo := Rem*Revi - Imm*Imvi + j*(Rem*Imvi + Imm*Revi);
 
-//    for l1 in 1:size(m, 1) loop
-//      vo[l1] := Complex(0);
-//      for l2 in 1:size(m, 2) loop
-//        vo[l1] := vo[l1] + m[l1, l2]*vi[l2];
-//      end for;//l2
-//    end for;  //l1
+    //    for l1 in 1:size(m, 1) loop
+    //      vo[l1] := Complex(0);
+    //      for l2 in 1:size(m, 2) loop
+    //        vo[l1] := vo[l1] + m[l1, l2]*vi[l2];
+    //      end for;//l2
+    //    end for;  //l1
 
-for l1 in 1:size(m, 1) loop
-  vo[l1] := Complex.Vectors.multiply(m[l1,:],vi);
-end for;
+    for l1 in 1:size(m, 1) loop
+      vo[l1] := Complex.Vectors.multiply(m[l1,:],vi);
+    end for;
 
-end matVecMul;
+    end matVecMul;
 
-end Matrices;
+  end Matrices;
 
   encapsulated operator 'constructor'
     extends Modelica.Icons.Package;
@@ -703,12 +709,12 @@ end 'max';
         c.re,
         phi0);
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
    Complex.<b>arg</b>(c);
    Complex.<b>arg</b>(c, phi0=0);
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 The function call \"<code>Complex.<b>arg</b>(c)</code>\" returns the
 phase angle phi of the Complex number c in the range
@@ -717,7 +723,7 @@ The function call \"<code>Complex.<b>arg</b>(c,phi0)</code>\" returns the
 phase angle phi of the Complex number c in the range
 -pi &lt; phi - phi0 &lt; pi.
 </p>
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   Complex.<b>arg</b>( Complex(1,0.5), 4*pi );  // = 4*pi+pi/4 = 13.351...
 </pre></blockquote>
@@ -813,94 +819,94 @@ inputs and the number of outputs must be identical.
 </html>"));
   end eigenValues;
 
-encapsulated function eigenVectors
+  encapsulated function eigenVectors
     "Calculate the rigth eigenvectors of a linear state space system and write them columnwise in a matrix."
-    import Modelica;
-    import Modelica.Math.Matrices.LAPACK;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Re = Modelica_LinearSystems2.Math.Complex.real;
-    import Im = Modelica_LinearSystems2.Math.Complex.imag;
+      import Modelica;
+      import Modelica.Math.Matrices.LAPACK;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Re = Modelica_LinearSystems2.Math.Complex.real;
+      import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
-  input Real A[:,size(A, 1)] "real square matrix";
-  output Complex eigvec[size(A, 1),size(A, 2)] "eigen values of the system";
-  output Complex eigval[size(A, 1)]=fill(Complex(0), size(A, 1))
+    input Real A[:,size(A, 1)] "real square matrix";
+    output Complex eigvec[size(A, 1),size(A, 2)] "eigen values of the system";
+    output Complex eigval[size(A, 1)]=fill(Complex(0), size(A, 1))
       "eigen values of the system";
   protected
-  Integer info;
-  Real eigvecRe[size(A, 1),size(A, 2)];
-  Real eigvalRe[size(A, 1)]=fill(0, size(A, 1));
-  Real eigvalIm[size(A, 1)]=fill(0, size(A, 1));
-  Integer n=size(A, 1);
-  Integer i;
-  Complex j=Complex.j();
-algorithm
-  if size(A, 1) > 0 then
+    Integer info;
+    Real eigvecRe[size(A, 1),size(A, 2)];
+    Real eigvalRe[size(A, 1)]=fill(0, size(A, 1));
+    Real eigvalIm[size(A, 1)]=fill(0, size(A, 1));
+    Integer n=size(A, 1);
+    Integer i;
+    Complex j=Complex.j();
+  algorithm
+    if size(A, 1) > 0 then
 
-    (eigvalRe,eigvalIm,eigvecRe,info) := LAPACK.dgeev(A);
-    for i in 1:size(A, 1) loop
-      eigval[i].re := eigvalRe[i];
-      eigval[i].im := eigvalIm[i];
-    end for;
+      (eigvalRe,eigvalIm,eigvecRe,info) := LAPACK.dgeev(A);
+      for i in 1:size(A, 1) loop
+        eigval[i].re := eigvalRe[i];
+        eigval[i].im := eigvalIm[i];
+      end for;
 
-    assert(info == 0, "Calculating the eigen values with function
-\"StateSpace.Analysis.eigenVectors\" is not possible, since the
-numerical algorithm does not converge.");
+      assert(info == 0, "Calculating the eigen values with function
+  \"StateSpace.Analysis.eigenVectors\" is not possible, since the
+  numerical algorithm does not converge.");
 
-    i := 1;
-    while i <= n loop
-      if abs(eigvalIm[i]) > 0 then
-        for ii in 1:n loop
-          eigvec[ii, i] := eigvecRe[ii, i] + j*eigvecRe[ii, i + 1];
-          eigvec[ii, i + 1] := eigvecRe[ii, i] - j*eigvecRe[ii, i + 1];
-        end for;
-        i := i + 2;
-      else
-        for ii in 1:n loop
-          eigvec[ii, i] := Complex(1)*eigvecRe[ii, i];
-        end for;
-        i := i + 1;
-      end if;
-    end while;
+      i := 1;
+      while i <= n loop
+        if abs(eigvalIm[i]) > 0 then
+          for ii in 1:n loop
+            eigvec[ii, i] := eigvecRe[ii, i] + j*eigvecRe[ii, i + 1];
+            eigvec[ii, i + 1] := eigvecRe[ii, i] - j*eigvecRe[ii, i + 1];
+          end for;
+          i := i + 2;
+        else
+          for ii in 1:n loop
+            eigvec[ii, i] := Complex(1)*eigvecRe[ii, i];
+          end for;
+          i := i + 1;
+        end if;
+      end while;
 
-  end if;
+    end if;
 
-  annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right>  (eigenvectors, eigenvalues) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>eigenVectors</b>(ss, onlyEigenvectors)  </td> </tr>
-</table>
-<h4><font color=\"#008000\">Description</font></h4>
-<p>
-Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of a state space system. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <b>ss.A</b>. Just like in <a href=\"modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
-The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
-
-
-</p>
-
-<h4><font color=\"#008000\">Example</font></h4>
-<blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1,1;-1,-1],
-      B=[1;1],
-      C=[1,1],
-      D=[0]);
-
-   Real eigenvectors[2,2];
-   Complex eigenvalues[2];
-
-<b>algorithm</b>
-  (eigenvectors, eigenvalues) = Modelica_LinearSystems2.StateSpace.Analysis.eigenVectors(ss, true);
-// eigenvectors = [0.707, 0; 0, 0.707]
-// eigenvalues = {-1 + 1j, -1 - 1j}
-
-          |0.707 |         | 0.707 |
-i.e. v1 = |      |,   v2 = |       |
-          |0.707i|         |-0.707i|
-</pre></blockquote>
-
-
-</html> "));
-end eigenVectors;
+    annotation (Documentation(info="<html>
+  <h4>Syntax</h4>
+  <table>
+  <tr> <td align=right>  (eigenvectors, eigenvalues) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>eigenVectors</b>(ss, onlyEigenvectors)  </td> </tr>
+  </table>
+  <h4>Description</h4>
+  <p>
+  Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of a state space system. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <b>ss.A</b>. Just like in <a href=\"modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
+  The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
+  
+  
+  </p>
+  
+  <h4>Example</h4>
+  <blockquote><pre>
+     Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+        A=[-1,1;-1,-1],
+        B=[1;1],
+        C=[1,1],
+        D=[0]);
+  
+     Real eigenvectors[2,2];
+     Complex eigenvalues[2];
+  
+  <b>algorithm</b>
+    (eigenvectors, eigenvalues) = Modelica_LinearSystems2.StateSpace.Analysis.eigenVectors(ss, true);
+  // eigenvectors = [0.707, 0; 0, 0.707]
+  // eigenvalues = {-1 + 1j, -1 - 1j}
+  
+            |0.707 |         | 0.707 |
+  i.e. v1 = |      |,   v2 = |       |
+            |0.707i|         |-0.707i|
+  </pre></blockquote>
+  
+  
+  </html> "));
+  end eigenVectors;
 
   encapsulated function frequency
     "Frequency and damping of conjugated complex pole pair"
@@ -911,12 +917,12 @@ end eigenVectors;
     output Modelica.SIunits.Frequency f "Frequency of c (= c.im in Hz)";
     output Real damping "Damping of c (= c.re/c.im)"
     annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
    Complex.<b>arg</b>(c);
    Complex.<b>arg</b>(c, phi0=0);
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 The function call \"<code>Complex.<b>arg</b>(c)</code>\" returns the
 phase angle phi of the Complex number c in the range
@@ -925,7 +931,7 @@ The function call \"<code>Complex.<b>arg</b>(c,phi0)</code>\" returns the
 phase angle phi of the Complex number c in the range
 -pi &lt; phi - phi0 &lt; pi.
 </p>
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
   Complex.<b>arg</b>( Complex(1,0.5), 4*pi );  // = 4*pi+pi/4 = 13.351...
 </pre></blockquote>
@@ -940,78 +946,79 @@ phase angle phi of the Complex number c in the range
     annotation(Inline=true);
   end frequency;
 
-encapsulated package Internal
-  extends Modelica.Icons.Package;
-  import Modelica;
+  encapsulated package Internal
+    extends Modelica.Icons.Package;
+    import Modelica;
 
-  function eigenValues_dhseqr
+    function eigenValues_dhseqr
       "Compute eingenvalues of a upper Hessenberg matrix using lapack routine DHSEQR"
 
-    import Modelica;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg;
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Complex;
+      import
+        Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg;
 
-    input Real H[:,size(H, 1)] "Real upper Hessenberg matrix";
-    output Complex zeros[size(H, 1)]
+      input Real H[:,size(H, 1)] "Real upper Hessenberg matrix";
+      output Complex zeros[size(H, 1)]
         "Finite, invariant zeros of ss; size(Zeros,1) <= size(ss.A,1)";
 
     protected
-    Integer nx=size(H, 1) "Number of states";
-    Real alphaReal[nx];
-    Real alphaImag[nx];
-    Integer info;
+      Integer nx=size(H, 1) "Number of states";
+      Real alphaReal[nx];
+      Real alphaImag[nx];
+      Integer info;
 
-  algorithm
-    (alphaReal,alphaImag,info) := eigenvaluesHessenberg(H);
-    assert(info == 0,
-      "Failed to compute eigenvalues with function Internal.eigenValues_dhseqr(..)");
+    algorithm
+      (alphaReal,alphaImag,info) := eigenvaluesHessenberg(H);
+      assert(info == 0,
+        "Failed to compute eigenvalues with function Internal.eigenValues_dhseqr(..)");
 
-    for i in 1:nx loop
-      zeros[i].re := alphaReal[i];
-      zeros[i].im := alphaImag[i];
-    end for;
+      for i in 1:nx loop
+        zeros[i].re := alphaReal[i];
+        zeros[i].im := alphaImag[i];
+      end for;
 
-  end eigenValues_dhseqr;
+    end eigenValues_dhseqr;
 
-  function C_transpose "Computes the transposed matrix of a complex matrix"
-    extends Modelica.Icons.Function;
+    function C_transpose "Computes the transposed matrix of a complex matrix"
+      extends Modelica.Icons.Function;
 
-    import Modelica_LinearSystems2.Math.Complex;
-    import Re = Modelica_LinearSystems2.Math.Complex.real;
-    import Im = Modelica_LinearSystems2.Math.Complex.imag;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Re = Modelica_LinearSystems2.Math.Complex.real;
+      import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
-    input Complex C[:,:];
-    output Complex CT[size(C, 2),size(C, 1)];
+      input Complex C[:,:];
+      output Complex CT[size(C, 2),size(C, 1)];
     protected
-    Complex j=Complex.j();
-    Integer l1;
-    Integer l2;
-  algorithm
-  //  CT := Complex(1)*transpose(C[:,:].re)-j*transpose(C[:,:].im);// too slow
-    for l1 in 1:size(C, 1) loop
-      for l2 in 1:size(C, 2) loop
-  //      CT[l2, l1] := Re(C[l1, l2]) - j*Im(C[l1, l2]);
-        CT[l2, l1] := Complex.conj(C[l1,l2]);
+      Complex j=Complex.j();
+      Integer l1;
+      Integer l2;
+    algorithm
+    //  CT := Complex(1)*transpose(C[:,:].re)-j*transpose(C[:,:].im);// too slow
+      for l1 in 1:size(C, 1) loop
+        for l2 in 1:size(C, 2) loop
+    //      CT[l2, l1] := Re(C[l1, l2]) - j*Im(C[l1, l2]);
+          CT[l2, l1] := Complex.conj(C[l1,l2]);
+        end for;
       end for;
-    end for;
 
-  end C_transpose;
+    end C_transpose;
 
-  function frobeniusNorm "Return the Frobenius norm of a matrix"
-    extends Modelica.Icons.Function;
-    import Modelica_LinearSystems2.Math.Complex;
-    input Complex A[:,:] "Input matrix";
-    output Real result=0.0 "frobenius norm of matrix A";
-  algorithm
-    for i1 in 1:size(A, 1) loop
-      for i2 in 1:size(A, 2) loop
-        result := result + Complex.real(A[i1, i2]*Complex.conj(A[i1, i2]));
+    function frobeniusNorm "Return the Frobenius norm of a matrix"
+      extends Modelica.Icons.Function;
+      import Modelica_LinearSystems2.Math.Complex;
+      input Complex A[:,:] "Input matrix";
+      output Real result=0.0 "frobenius norm of matrix A";
+    algorithm
+      for i1 in 1:size(A, 1) loop
+        for i2 in 1:size(A, 2) loop
+          result := result + Complex.real(A[i1, i2]*Complex.conj(A[i1, i2]));
+        end for;
       end for;
-    end for;
-    result := sqrt(result);
-  end frobeniusNorm;
+      result := sqrt(result);
+    end frobeniusNorm;
 
-end Internal;
+  end Internal;
 
   annotation (
     Documentation(info="<html>

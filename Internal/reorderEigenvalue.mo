@@ -67,13 +67,13 @@ nRealEigenvalues:=numberOfRealZeros(complexVector);
     end if;
   end while;
   annotation (Documentation(info="<HTML>
-<h4><font color=\"#008000\">Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
                reorderedZero = Matrices.<b>reorderZeros</b>(complexVector);
 (reorderedZeros, nRealZeros) = Matrices.<b>reorderZeros</b>(complexVector, 
                                                      name=\"complexVector\");
 </pre></blockquote>
-<h4><font color=\"#008000\">Description</font></h4>
+<h4>Description</h4>
 <p>
 Function <b>reorderZeros</b>(..) reorders the zeros from the
 Complex vector \"complexVector\" such that the returned Complex vector
@@ -89,7 +89,7 @@ The optional input argument
 <p>
 The function returns the vector element reordered, as well as
 the number of real zeros (nRealZeros).
-<h4><font color=\"#008000\">Example</font></h4>
+<h4>Example</h4>
 <blockquote><pre>
     
   // c = {0; 1+2j; 1-2j; 2; -3; -1-j; -1+j};
