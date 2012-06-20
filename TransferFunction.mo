@@ -1581,7 +1581,7 @@ defines two transfer functions. The second one is defined as:
 and results in 
 </p>
  
-<blockquote><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/PolesAndZerosTF.png\"/> </blockquote>
+<blockquote><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/PolesAndZerosTF.png\"> </blockquote>
 
 </html> "));
   end polesAndZeros;
@@ -1706,8 +1706,6 @@ TransferFunction.Plot.<b>plotBode</b>(tf, nPoints, autoRange, f_min, f_max, magn
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
 Plots the bode-diagram of a transfer function.
-
-
 </p>
 
 <h4><font color=\"#008000\">Example</font></h4>
@@ -1720,17 +1718,11 @@ Plots the bode-diagram of a transfer function.
 //  gives:
 </pre></blockquote>
 
-</p>
- 
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
- 
 </blockquote>
-<p>
-
-
 </html> "));
     end bode;
 
@@ -1803,13 +1795,20 @@ TransferFunction.Plot.<b>timeResponse</b>(tf, dt, tSpan,response, x0, defaultDia
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>. </p>
 
 <p><b><font style=\"color: #008000; \">Example</font></b></p>
-<pre>   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  </pre>
-<pre>   Modelica_LinearSystems2.TransferFunction tf =(s + 1)/(s^2 + 5*s + 12);</pre>
-<pre><br/>   Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;</pre>
-<pre><br/><b>algorithm</b></pre>
-<pre>   Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(tf, dt=0.02, tSpan=3, response=response)</pre>
-<pre>//  gives: </pre>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/timeResponse.png\"/> </p>
+<blockquote><pre>
+   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+   Modelica_LinearSystems2.TransferFunction tf =(s + 1)/(s^2 + 5*s + 12);
+
+   Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+
+<b>algorithm</b>
+   Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(tf, dt=0.02, tSpan=3, response=response)
+//  gives:
+</pre></blockquote>
+
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/timeResponseTF.png\">
+</blockquote>
 </html>"));
   end timeResponse;
 
@@ -1877,14 +1876,9 @@ Function <b>impulse</b> plots the impulse response of a transfer function. It is
 //  gives:
 </pre></blockquote>
 
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/impulseResponse.png\">
-</p>
-<p>
-</p>
-
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/impulseResponseTF.png\">
+</blockquote>
 </html> "));
   end impulse;
 
@@ -1948,15 +1942,9 @@ Function <b>step</b> plots the step response of a transfer function. It is based
 //  gives:
 </pre></blockquote>
 
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/stepResponse.png\">
-</p>
-<p>
-</p>
-
-
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/stepResponseTF.png\">
+</blockquote>
 </html> "));
   end step;
 
@@ -2020,14 +2008,9 @@ Function <b>ramp</b> plots the ramp response of a transfer function. It is based
 //  gives:
 </pre></blockquote>
 
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rampResponse.png\">
-</p>
-<p>
-</p>
-
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/rampResponseTF.png\">
+</blockquote>
 </html> "));
   end ramp;
 
@@ -2106,14 +2089,9 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
 //  gives:
 </pre></blockquote>
 
-</p>
-<p>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/initialResponseTF.png\">
-</p>
-<p>
-</p>
-
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/initialResponseTF.png\">
+</blockquote>
 </html> "));
   end initialResponse;
 

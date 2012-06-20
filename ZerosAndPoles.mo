@@ -2297,9 +2297,10 @@ defines a transfer functions as:
 <p>
 and results in 
 </p>
- 
-<blockquote><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/PolesAndZerosTF.png\"/> </blockquote>
- 
+
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/polesAndZerosZP.png\">
+</blockquote>
 </html> "));
   end polesAndZeros;
 
@@ -2527,14 +2528,9 @@ ZerosAndPoles.Plot.step\">step</a>, <a href=\"modelica://Modelica_LinearSystems2
 //  gives:
 </pre></blockquote>
 
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/timeResponseZP.png\">
-</p>
-<p>
-</p>
-
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/timeResponseZP.png\">
+</blockquote>
 </html> "));
   end timeResponse;
 
@@ -2602,13 +2598,9 @@ Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer
 //  gives:
 </pre></blockquote>
 
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/impulseResponseZP.png\">
-</p>
-
-
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/impulseResponseZP.png\">
+</blockquote>
 </html> "));
   end impulse;
 
@@ -2658,7 +2650,10 @@ Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer
 <pre><br/><b>algorithm</b></pre>
 <pre>   Modelica_LinearSystems2.ZerosAndPoles.Plot.step(zp, dt=0.02, tSpan=3)</pre>
 <pre>//  gives: </pre>
-<p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/stepResponseZP.png\"/> </p>
+
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/stepResponseZP.png\">
+</blockquote>
 </html>"));
   end step;
 
@@ -2721,12 +2716,9 @@ Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer funct
 //  gives:
 </pre></blockquote>
 
-</p>
-<p>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rampResponseZP.png\">
-</p>
-
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/rampResponseZP.png\">
+</blockquote>
 </html> "));
   end ramp;
 
@@ -2801,12 +2793,9 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
 //  gives:
 </pre></blockquote>
 
-</p>
-<p>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/initialResponseZP.png\">
-</p>
-
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/initialResponseZP.png\">
+</blockquote>
 </html> "));
   end initialResponse;
 
@@ -6166,9 +6155,10 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
 
     annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Syntax</font></h4>
-<table>
-<tr> <td align=right> filterFunction </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.ZerosAndPoles.Design.<b>filter</b>(analogFilter, filterType, order, f_cut, gain, A_ripple, normalized)  </td> </tr>
-</table>
+<blockquote><pre>
+filterFunction = <b>filter</b>(analogFilter, filterType, order, f_cut, gain, A_ripple, normalized)
+</pre></blockquote>
+
 <h4><font color=\"#008000\">Description</font></h4>
 <p>
 This function constructs a ZerosAndPoles transfer function
@@ -6304,7 +6294,7 @@ int found=0;
     end findMatrixName;
 
   encapsulated function scaleFactor1
-    "Return scale factor for first order block"
+      "Return scale factor for first order block"
     import Modelica;
     input Real n "(s+n)/(s+d)";
     input Real d "(s+n)/(s+d)";
@@ -6330,7 +6320,7 @@ int found=0;
   end scaleFactor2;
 
   encapsulated function fromFile_pc
-    "Generate a zeros and poles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
+      "Generate a zeros and poles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.ZerosAndPoles;

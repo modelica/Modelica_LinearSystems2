@@ -5111,7 +5111,7 @@ is defined as
 and results in 
 </p>
  
-<blockquote><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/PolesAndZeros.png\"/> </blockquote>
+<blockquote><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/polesAndZerosSS.png\"/> </blockquote>
 
 </html>"));
     end polesAndZeros;
@@ -5454,15 +5454,9 @@ Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
 Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
 // gives:
 </pre></blockquote>
-
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/timeResponseSS.png\">
-</p>
-<p>
-</p>
-
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/timeResponseSS.png\">
+</blockquote>
 </html> "));
     end timeResponse;
 
@@ -5533,15 +5527,11 @@ D=[0.0])
 Modelica_LinearSystems2.StateSpace.Plot.impulse(ss)
 // gives:
 </pre></blockquote>
-
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/impulseResponseSS.png\">
-</p>
-<p>
 </p>
 
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/impulseResponseSS.png\">
+</blockquote>
 </html> "));
     end impulse;
 
@@ -5614,15 +5604,9 @@ D=[0.0])
 Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
 // gives:
 </pre></blockquote>
-
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/stepResponseSS.png\">
-</p>
-<p>
-</p>
-
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/stepResponseSS.png\">
+</blockquote>
 </html> "));
     end step;
 
@@ -5693,15 +5677,9 @@ D=[0.0])
 Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
 // gives:
 </pre></blockquote>
-
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rampResponseSS.png\">
-</p>
-<p>
-</p>
-
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/rampResponseSS.png\">
+</blockquote>
 </html> "));
     end ramp;
 
@@ -5775,14 +5753,9 @@ Modelica_LinearSystems2.StateSpace.Plot.initial(ss, x0=x0)
 // gives:
 </pre></blockquote>
 
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/initialResponseSS.png\">
-</p>
-<p>
-</p>
-
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/initialResponseSS.png\">
+</blockquote>
 </html> "));
     end initialResponse;
 

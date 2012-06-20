@@ -116,9 +116,9 @@ The function call \"<code>Vectors.<b>norm</b>(v)</code>\" returns the
 With the optional 
 second argument \"p\", any other p-norm can be computed:
 </p>
-<center>
-<IMG src=\"modelica://Modelica_LinearSystems2/Resources/Images/vectorNorm.png\" ALT=\"function Vectors.norm\">
-</center>
+<blockquote>
+<IMG src=\"modelica://Modelica_LinearSystems2/Resources/Images/Math/vectorNorm.png\" ALT=\"function Vectors.norm\">
+</blockquote>
 <p>
 Besides the Euclidean norm (p=2), also the 1-norm and the
 infinity-norm are sometimes used:

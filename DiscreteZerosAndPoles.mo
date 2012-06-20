@@ -1584,11 +1584,11 @@ DiscreteZerosAndPolesZerosAndPoles.Plot.step\">step</a>, <a href=\"modelica://Mo
 //  gives:
 </pre></blockquote>
 
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/timeResponseDZP.png\">
-</p>
-</html> "));
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/DiscreteZerosAndPoles/timeResponseDZP.png\">
+</blockquote>
+</html> 
+"));
   end timeResponse;
 
   encapsulated function impulse
@@ -1655,14 +1655,11 @@ Function <b>impulse</b> plots the impulse response of a discrete zeros-and-poles
 //  gives:
 </pre></blockquote>
 
-</p>
-<p align=\"center\">
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/impulseResponsedZP.png\">
-</p>
-
-
-
-</html> "));
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/DiscreteZerosAndPoles/impulseResponseDZP.png\">
+</blockquote>
+</html> 
+"));
   end impulse;
 
   encapsulated function step
@@ -1712,8 +1709,12 @@ Function <b>impulse</b> plots the impulse response of a discrete zeros-and-poles
 <pre><br/><b>algorithm</b></pre>
 <pre>   Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp, tSpan=3)</pre>
 <pre>//  gives: </pre>
-<p align=\"center\"><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/stepResponseDZP.png\"/> </p>
-</html>"));
+
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/DiscreteZerosAndPoles/stepResponseDZP.png\">
+</blockquote>
+</html> 
+"));
   end step;
 
   encapsulated function ramp
@@ -1776,13 +1777,11 @@ Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer funct
 //  gives:
 </pre></blockquote>
 
-</p>
-<p>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rampResponseDZP.png\">
-</p>
-
-
-</html> "));
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/DiscreteZerosAndPoles/rampResponseDZP.png\">
+</blockquote>
+</html> 
+"));
   end ramp;
 
   encapsulated function initialResponse
@@ -1850,13 +1849,11 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
 //  gives:
 </pre></blockquote>
 
-</p>
-<p>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/initialResponseDZP.png\">
-</p>
-
-
-</html> "));
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/DiscreteZerosAndPoles/initialResponseDZP.png\">
+</blockquote>
+</html> 
+"));
   end initialResponse;
 
   end Plot;
