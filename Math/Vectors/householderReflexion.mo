@@ -4,8 +4,8 @@ function householderReflexion
   import Modelica_LinearSystems2.Math.Vectors;
 
   input Real a[:];
-  input Real u[size(a, 1)] "householder vector";
-  output Real ra[size(u, 1)] "reflexion of a";
+  input Real u[size(a, 1)] "Householder vector";
+  output Real ra[size(u, 1)] "Reflexion of a";
 
 protected
   Real norm_a=Modelica.Math.Vectors.length(a);

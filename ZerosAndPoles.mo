@@ -16,14 +16,15 @@ record ZerosAndPoles
   String uName="u" "Name of input signal"    annotation(Dialog(group="Signal names"));
   String yName="y" "Name of output signal"  annotation(Dialog(group="Signal names"));
 
-  encapsulated operator 'constructor' "Generate a ZerosAndPoles object"
+  encapsulated operator 'constructor'
+    "Collection of functions to generate a zeros-and-poles data record"
     extends Modelica.Icons.Package;
 
     import Modelica;
     import Modelica_LinearSystems2;
 
     encapsulated function fromReal
-      "Generate a ZerosAndPoles transfer function from a Real value"
+      "Generate a zeros-and-poles data record from a Real value"
       import Modelica;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -66,7 +67,7 @@ Therefore, the record is defined by
     end fromReal;
 
     encapsulated function fromZerosAndPoles
-      "Generate a ZerosAndPoles transfer function from a set of zeros and poles"
+      "Generate a zeros-and-poles data record from a set of zeros and poles"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -173,9 +174,11 @@ with j=sqrt(-1), is defined as
     end fromZerosAndPoles;
 
     function fromTransferFunction =
-        Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles annotation (Documentation(info="<html> </html>"));
+        Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles
+      "Generate a zeros-and-poles data record from a transfer function"
+      annotation (Documentation(info="<html> </html>"));
     encapsulated function fromFactorization
-      "Generate a ZerosAndPoles object from first and second order polynomials"
+      "Generate a zeros-and-poles data record from first and second order polynomials"
       import Modelica;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -214,20 +217,25 @@ with j=sqrt(-1), is defined as
       zp.yName := yName;
     end fromFactorization;
 
+    annotation (Documentation(info="<html>
+<p>This package contains the default constructors for a data record of zeros-and-poles transfer function.</p>
+</html>"));
   end 'constructor';
 
 encapsulated operator '-'
+    "Collection of operators for subtraction of zeros-and-poles functions"
   extends Modelica.Icons.Package;
   import Modelica;
 
-  function subtract "Subtract two TransferFunctions (zp1 - zp2)"
+  function subtract
+      "Subtract two zeros-and-poles transfer functions (zp1 - zp2)"
     import Modelica;
     import Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.Math.Complex;
 
-    input ZerosAndPoles zp1;
-    input ZerosAndPoles zp2;
+    input ZerosAndPoles zp1 "Zeros-and-poles data record 1";
+    input ZerosAndPoles zp2 "Zeros-and-poles data record 2";
 
     protected
     Integer size_z1n1=size(zp1.n1, 1);
@@ -318,25 +326,29 @@ encapsulated operator '-'
     end if;
   end subtract;
 
-  function negate "Unary minus (multiply transfer function by -1)"
+  function negate
+      "Unary minus (multiply zeros-and-poles transfer function by -1)"
     import Modelica_LinearSystems2.ZerosAndPoles;
 
-    input ZerosAndPoles zp;
+    input ZerosAndPoles zp "Zeros-and-poles data record";
     output ZerosAndPoles result(n1=zp.n1, n2=zp.n2, d1=zp.d1, d2=zp.d2, k=-zp.k) "= -zp";
   algorithm
   end negate;
+    annotation (Documentation(info="<html>
+<p>This package contains the <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.'-'.negate\">negate</a> operator for state space records. </p>
+</html>"));
 end '-';
 
   encapsulated operator function '+'
-    "Addition of to tarnsfwer functions zp1 + zp2, i.e. parallel connection of two transfer functions (= inputs are the same, outputs of the two systems are added)"
+    "Addition of two transfer functions zp1 + zp2, i.e. parallel connection of two transfer functions (= inputs are the same, outputs of the two systems are added)"
 
     import Modelica;
     import Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.Math.Complex;
 
-    input ZerosAndPoles zp1;
-    input ZerosAndPoles zp2;
+    input ZerosAndPoles zp1 "Zeros-and-poles data record 1";
+    input ZerosAndPoles zp2 "Zeros-and-poles data record 2";
 
   protected
     Integer size_z1n1=size(zp1.n1, 1);
@@ -429,8 +441,8 @@ end '-';
     import Modelica;
     import Modelica_LinearSystems2.ZerosAndPoles;
 
-    input ZerosAndPoles zp1;
-    input ZerosAndPoles zp2;
+    input ZerosAndPoles zp1 "Zeros-and-poles data record 1";
+    input ZerosAndPoles zp2 "Zeros-and-poles data record 2";
 
     output ZerosAndPoles result "= zp1 * zp2";
   algorithm
@@ -463,8 +475,8 @@ end '-';
     import Modelica;
     import Modelica_LinearSystems2.ZerosAndPoles;
 
-    input ZerosAndPoles zp1 "Zeros-and-poles record 1";
-    input ZerosAndPoles zp2 "Zeros-and-poles record 1";
+    input ZerosAndPoles zp1 "Zeros-and-poles data record 1";
+    input ZerosAndPoles zp2 "Zeros-and-poles data record 2";
     output ZerosAndPoles result "Result = zp1/zp2";
 
   algorithm
@@ -486,7 +498,7 @@ end '-';
     import Modelica;
     import Modelica_LinearSystems2.ZerosAndPoles;
 
-    input ZerosAndPoles zp;
+    input ZerosAndPoles zp "Zeros-and-poles data record";
     input Integer k;
 
     output ZerosAndPoles result(
@@ -517,8 +529,8 @@ encapsulated operator function '=='
   import Modelica_LinearSystems2.Math.Polynomial;
   import Modelica_LinearSystems2.ZerosAndPoles;
 
-  input ZerosAndPoles zp1;
-  input ZerosAndPoles zp2;
+  input ZerosAndPoles zp1 "Zeros-and-poles data record 1";
+  input ZerosAndPoles zp2 "Zeros-and-poles data record 2";
   input Real eps(min=0) = 0
       "Two numbers n1 and n2 are identical if abs(n1-n2) <= eps";
   output Boolean result "= zp1 == zp2";
@@ -530,94 +542,94 @@ end '==';
 
   encapsulated operator function 'String'
     "Transform ZerosAndPoles transfer function into a String representation"
-          import Modelica;
-          import Modelica_LinearSystems2.ZerosAndPoles;
-          import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+    import Modelica;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.ZerosAndPoles.Internal;
 
-      input ZerosAndPoles zp
-      "ZerosAndPoles transfer function to be transformed in a String representation";
-      input Integer significantDigits=6
+    input ZerosAndPoles zp
+      "Zeros-and-poles data record to be transformed in a String representation";
+    input Integer significantDigits=6
       "Number of significant digits that are shown";
-      input String name="p" "Independent variable name used for printing";
+    input String name="p" "Independent variable name used for printing";
       //input Boolean normalized = true;
-      output String s="";
+    output String s="";
   protected
-      Boolean normalized = false;
-      Real gain=1.0;
-      Integer num_order=size(zp.n1, 1) + 2*size(zp.n2, 1);
-      Integer den_order=size(zp.d1, 1) + 2*size(zp.d2, 1);
-      String sn1;
-      String sn2;
-      String sd1;
-      String sd2;
-      Real kn1;
-      Real kn2;
-      Real kd1;
-      Real kd2;
+    Boolean normalized = false;
+    Real gain=1.0;
+    Integer num_order=size(zp.n1, 1) + 2*size(zp.n2, 1);
+    Integer den_order=size(zp.d1, 1) + 2*size(zp.d2, 1);
+    String sn1;
+    String sn2;
+    String sd1;
+    String sd2;
+    Real kn1;
+    Real kn2;
+    Real kd1;
+    Real kd2;
   algorithm
-     if num_order == 0 and den_order == 0 then
-        s := String(zp.k);
-        return;
-     end if;
+    if num_order == 0 and den_order == 0 then
+      s := String(zp.k);
+      return;
+    end if;
 
-     // construct numerator and denominator strings
-     (sn1,kn1) :=Internal.firstOrderToString( zp.n1, significantDigits, name, normalized);
-     (sn2,kn2) :=Internal.secondOrderToString(zp.n2, significantDigits, name, normalized);
-     (sd1,kd1) :=Internal.firstOrderToString( zp.d1, significantDigits, name, normalized);
-     (sd2,kd2) :=Internal.secondOrderToString(zp.d2, significantDigits, name, normalized);
+    // construct numerator and denominator strings
+    (sn1,kn1) :=Internal.firstOrderToString( zp.n1, significantDigits, name, normalized);
+    (sn2,kn2) :=Internal.secondOrderToString(zp.n2, significantDigits, name, normalized);
+    (sd1,kd1) :=Internal.firstOrderToString( zp.d1, significantDigits, name, normalized);
+    (sd2,kd2) :=Internal.secondOrderToString(zp.d2, significantDigits, name, normalized);
 
-     // compute overall gain
-     if normalized then
-        gain :=zp.k*kn1*kn2/(kd1*kd2);
-     else
-        gain :=zp.k;
-     end if;
-     // Modelica.Utilities.Streams.print("gain = "+String(gain));
+    // compute overall gain
+    if normalized then
+      gain :=zp.k*kn1*kn2/(kd1*kd2);
+    else
+      gain :=zp.k;
+    end if;
+    // Modelica.Utilities.Streams.print("gain = "+String(gain));
 
-     // construct string for gain
-     if gain <> 1.0 or gain == 1.0 and num_order == 0 then
-        s := String(gain);
-     end if;
+    // construct string for gain
+    if gain <> 1.0 or gain == 1.0 and num_order == 0 then
+      s := String(gain);
+    end if;
     // Modelica.Utilities.Streams.print("s= "+s);
 
-     // construct string for numerator
-     if sn1 <> "" then
-        if s == "" then
-           s :=sn1;
-        else
-           s := s + "*" + sn1;
-        end if;
-     end if;
-     if sn2 <> "" then
-        if s == "" then
-           s :=sn2;
-        else
-           s := s + "*" + sn2;
-        end if;
-     end if;
+    // construct string for numerator
+    if sn1 <> "" then
+      if s == "" then
+        s :=sn1;
+      else
+        s := s + "*" + sn1;
+      end if;
+    end if;
+    if sn2 <> "" then
+      if s == "" then
+        s :=sn2;
+      else
+        s := s + "*" + sn2;
+      end if;
+    end if;
 
-     // construct string for denominator
-     if den_order <> 0 then
-        s := s + " / ";
-        if den_order > 1 then
-           s := s + " ( ";
-        end if;
+    // construct string for denominator
+    if den_order <> 0 then
+      s := s + " / ";
+      if den_order > 1 then
+        s := s + " ( ";
+      end if;
 
+      if sd1 <> "" then
+        s := s + sd1;
+      end if;
+
+      if sd2 <> "" then
         if sd1 <> "" then
-           s := s + sd1;
+          s := s + "*";
         end if;
+        s := s + sd2;
+      end if;
 
-        if sd2 <> "" then
-           if sd1 <> "" then
-              s := s + "*";
-           end if;
-           s := s + sd2;
-        end if;
-
-        if den_order > 1 then
-           s := s + " )";
-        end if;
-     end if;
+      if den_order > 1 then
+        s := s + " )";
+      end if;
+    end if;
   end 'String';
 
   encapsulated function p "Generate the transfer function p"

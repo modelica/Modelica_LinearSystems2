@@ -141,7 +141,7 @@ follow each other as above. An error occurs if this is not the case.
   encapsulated operator '-'
     import Modelica;
     extends Modelica.Icons.Package;
-    function subtract "Subtract two TransferFunctions (tf1 - tf2)"
+    function subtract "Subtract two transfer functions (tf1 - tf2)"
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
 
