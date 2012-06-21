@@ -6771,7 +6771,7 @@ encapsulated package Import
   extends Modelica.Icons.Package;
   import Modelica;
 
-  encapsulated function fromFile "Read a StateSpace data record from mat-file"
+  encapsulated function fromFile "Read a state space data record from mat-file"
 
     import Modelica;
     import Modelica_LinearSystems2;
@@ -6781,8 +6781,10 @@ encapsulated package Import
     input String fileName="dslin.mat"
         "Name of the state space system data file"
       annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                        caption="state space system data file")));
-    input String matrixName="ABCD" "Name of the state space system matrix" annotation(Dialog);
+                        caption="State space system data file")));
+    input String matrixName="ABCD"
+        "Name of the state space system matrix (default is \"ABCD\") in the fileName"
+      annotation(Dialog);
     protected
     input Integer xuy[3]=Internal.readSystemDimension(fileName, matrixName);
     input Integer nx=xuy[1];
@@ -6808,7 +6810,7 @@ encapsulated package Import
     result.B := ABCD[1:nx, nx + 1:nx + nu];
     result.C := ABCD[nx + 1:nx + ny, 1:nx];
     result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-    Modelica.Utilities.Streams.print("StateSpace record loaded from file: \""
+    Modelica.Utilities.Streams.print("State space record loaded from file: \""
        + fileName + "\"");
 
       annotation (Documentation(info="<html>
