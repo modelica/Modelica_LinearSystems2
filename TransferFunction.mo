@@ -1593,18 +1593,16 @@ and results in
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Complex;
-
       import Modelica_LinearSystems2.Utilities.Plot;
-
       import SI = Modelica.SIunits;
 
       input TransferFunction tf "Transfer function to be plotted";
       input Integer nPoints(min=2) = 200 "Number of points";
       input Boolean autoRange=true
         "True, if abszissa range is automatically determined";
-      input Modelica.SIunits.Frequency f_min(min=0) = 0.1
+      input SI.Frequency f_min(min=0) = 0.1
         "Minimum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
-      input Modelica.SIunits.Frequency f_max(min=0) = 10
+      input SI.Frequency f_max(min=0) = 10
         "Maximum frequency value, if autoRange = false"                                                  annotation(Dialog(enable=not autoRange));
 
       input Boolean magnitude=true "= true, to plot the magnitude of tf"
@@ -1618,11 +1616,11 @@ and results in
     protected
       SI.AngularVelocity w[nPoints];
       SI.Frequency f[nPoints];
-      Modelica.SIunits.Conversions.NonSIunits.Angle_deg phi[nPoints];
+      SI.Conversions.NonSIunits.Angle_deg phi[nPoints];
       Real A[nPoints];
       Boolean OK;
       Complex c;
-      Modelica.SIunits.Angle phi_old;
+      SI.Angle phi_old;
       Complex numZeros[:];
       Complex denZeros[:];
 
@@ -1649,14 +1647,14 @@ and results in
       // Compute magnitude/phase at the frequency points
       phi_old := 0.0;
       for i in 1:nPoints loop
-        w[i] := Modelica.SIunits.Conversions.from_Hz(f[i]);
+        w[i] := SI.Conversions.from_Hz(f[i]);
         c := TransferFunction.Analysis.evaluate(
               tf,
               Complex(0, w[i]),
               1e-10);
         A[i] := Complex.'abs'(c);
         phi_old := Complex.arg(c, phi_old);
-        phi[i] := Modelica.SIunits.Conversions.to_deg(phi_old);
+        phi[i] := SI.Conversions.to_deg(phi_old);
 
       end for;
 

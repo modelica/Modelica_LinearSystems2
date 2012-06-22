@@ -984,27 +984,26 @@ encapsulated package Plot "Functions to plot state space system responses"
   extends Modelica.Icons.Package;
 
 encapsulated function bode "Plot discrete transfer function as bode plot"
-      import Modelica;
-      import Modelica.Utilities.Strings;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.Math.Complex;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
-
-      import SI = Modelica.SIunits;
+  import Modelica;
+  import Modelica.Utilities.Strings;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Internal;
+  import Modelica_LinearSystems2.TransferFunction;
+  import Modelica_LinearSystems2.DiscreteTransferFunction;
+  import Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2.Utilities.Plot;
+  import SI = Modelica.SIunits;
 
   input DiscreteTransferFunction dtf "DiscreteTransfer function to be plotted";
   input Integer nPoints(min=2) = 200 "Number of points";
   input Boolean autoRange=true
         "True, if abszissa range is automatically determined";
-  input Modelica.SIunits.Frequency f_min(min=0) = 0.1
+  input SI.Frequency f_min(min=0) = 0.1
         "Minimum frequency value, if autoRange = false"
                                                     annotation(Dialog(enable=not autoRange));
-  input Modelica.SIunits.Frequency f_max(min=0) = 10
-        "Maximum frequency value, if autoRange = false"                                              annotation(Dialog(enable=not autoRange));
+  input SI.Frequency f_max(min=0) = 10
+        "Maximum frequency value, if autoRange = false"
+                                                    annotation(Dialog(enable=not autoRange));
 
   input Boolean magnitude=true "= true, to plot the magnitude of tf"
                                                                     annotation(choices(__Dymola_checkBox=true));
@@ -1018,11 +1017,11 @@ encapsulated function bode "Plot discrete transfer function as bode plot"
   SI.AngularVelocity w[nPoints];
   Complex z[nPoints];
   SI.Frequency f[nPoints];
-  Modelica.SIunits.Conversions.NonSIunits.Angle_deg phi[nPoints];
+  SI.Conversions.NonSIunits.Angle_deg phi[nPoints];
   Real A[nPoints];
   Boolean OK;
   Complex c;
-  Modelica.SIunits.Angle phi_old;
+  SI.Angle phi_old;
   Complex numZeros[:];
   Complex denZeros[:];
   Complex numZerosZ[:];
@@ -1064,7 +1063,7 @@ algorithm
   // Compute magnitude/phase at the frequency points
   phi_old := 0.0;
   for i in 1:nPoints loop
-    w[i] := Modelica.SIunits.Conversions.from_Hz(f[i]);
+    w[i] := SI.Conversions.from_Hz(f[i]);
     z[i] := Complex.exp(Complex(0,w[i]*dtf.Ts));
     c := TransferFunction.Analysis.evaluate(
           tf,
@@ -1072,7 +1071,7 @@ algorithm
           1e-10);
     A[i] := Complex.'abs'(c);
     phi_old := Complex.arg(c, phi_old);
-    phi[i] := Modelica.SIunits.Conversions.to_deg(phi_old);
+    phi[i] := SI.Conversions.to_deg(phi_old);
 
   end for;
 
