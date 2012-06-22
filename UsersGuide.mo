@@ -1,11 +1,15 @@
 within Modelica_LinearSystems2;
 package UsersGuide "Users Guide"
+  extends Modelica.Icons.Information;
 
   class GettingStarted "Getting started"
+    extends Modelica.Icons.Information;
 
     class ComplexNumbers "Complex numbers"
+      extends Modelica.Icons.Information;
 
       class FunctionsAndOperators "Functions and operators"
+        extends Modelica.Icons.Information;
 
         annotation (Documentation(info="<html>
 <p>
@@ -212,6 +216,7 @@ has to be applied.
     end ComplexNumbers;
 
     class Polynomials "Polynomials"
+      extends Modelica.Icons.Information;
 
       annotation (Documentation(info="<html>
 <p>Polynomials with real coefficients are defined via record Modelica_LinearSystems2.Math.Polynomial. Read first the previous section about Complex numbers to understand how records, functions in records and the coming operator overloading technique works. The Polynomial record is equivalent to the Complex record. A screenshot is shown in the next figure: </p>
@@ -235,6 +240,7 @@ has to be applied.
     end Polynomials;
 
     class LinearSystemDataStructures "Linear system data structures"
+      extends Modelica.Icons.Information;
 
       annotation (Documentation(info="<html>
 <p>
@@ -427,373 +433,29 @@ are described in the following sections:
 "));
   end GettingStarted;
 
-  class Literature "Literature"
+  class Requirements "Requirements"
+    extends Modelica.Icons.Information;
 
     annotation (Documentation(info="<html>
 <p>
-This library is based on the following references:
-</p>
-<dl>
-<dt>Astr&ouml;m K.J., Wittenmark B. (1997):</dt>
-<dd> <b>Computer Controlled Systems: Theory and Design</b>.
-     Prentice Hall. 3rd edition.<br>&nbsp;</dd>
-
-<dt>Datta B. N. (2004):</dt>
-<dd> <b>Numerical Methods for linear control systems</b>.
-     Elsevier Academic Press<br>&nbsp;</dd>
-
-<dt>Goloub G.H., Van Loan C.F. (1996):</dt>
-<dd> <b>Matrix Computations</b>.
-     Johns Hopkins University Press 3rd edition.<br>&nbsp;</dd>
-
-<dt>Tietze U., and Schenk C. (2002):</dt>
-<dd> <b>Halbleiter-Schaltungstechnik</b>.
-     Springer Verlag, 12. Auflage, S. 815-852.<br>&nbsp;</dd>
-</dl>
-
- 
-</html>
-"));
-  end Literature;
-
-  package ReleaseNotes "Release notes"
-    class Version_2_2 "Version 2.2 (October 27, 2010)"
-
-      annotation (Documentation(info="<html>
-<p>
-This release is <b>backward compatible</b> to the previous version 2.1.
-It contains the following improvements:
-</p>
-
-<p>
-New functions/records:
-</p>
-
-<ul>
-<li> Records  <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles\">DiscreteZerosAndPole</a>
-     and  <a href=\"modelica://Modelica_LinearSystems2.DiscreteTransferFunction\">DiscreteTransferFunction</a>
-     to operate with discrete zeros-and-poles-transfer-functions and transfer functions.</li>
-
-<li> Constructors and basic operators for  <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace\">DiscreteStateSpace</a>,
-     <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles\">DiscreteZerosAndPole</a> and
-     <a href=\"modelica://Modelica_LinearSystems2.DiscreteTransferFunction\">DiscreteTransferFunction</a>.</li> 
-
-<li> Functions to construct, to convert, to analyze, and to plot for records DiscreteStateSpace, DiscreteTransferFunction and DiscreteZerosAndPoles are provided.</li> 
-
-<li> Examples for DiscreteStateSpace, DiscreteTransferFunction and DiscreteZerosAndPoles demonstarate the discrete system records
-     ( <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteStateSpace\">Examples_DiscreteStateSpace</a>,
-       <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteZerosAndPoles\">Examples_DiscreteZerosAndPoles</a>,
-       <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteTransferFunction\">Examples_DiscreteTransferFunction</a>,).</li>
-</ul>
-
-  
-</html>
-"));
-    end Version_2_2;
-
-    class Version_2_1 "Version 2.1 (January 15, 2010)"
-
-      annotation (Documentation(info="<html>
-<p>
-This release is <b>backward compatible</b> to the previous version 2.0.
-It contains the following improvements:
-</p>
-
-<p>
-New functions/blocks:
-</p>
-
-<ul>
-<li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.sylvester\">sylvester</a>
-     to solve Sylvester equations \"<b>A</b>*<b>X</b> + <b>X</b>*<b>B</b> = <b>C</b>\"
-     using a Schur method.</li>
-
-<li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a> 
-     to calculate the orthogonal nullspace and the dimension (nullity) of 
-     the nullspace of a matrix.</li> 
-
-<li> Functions <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">conditionNumber</a>
-     and <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">rcond</a>
-     to calculate the condition number and the reciprocal condition number of a
-     matrix respectively.</li> 
-
-<li> Block <a href=\"modelica://Modelica_LinearSystems2.Controller.Interpolator\">Controller.Interpolator</a> 
-     to increase the sampling frequency with linear interpolation and optional mean-value filtering.</li>
-
-<li> Blocks have been added to Controller.Examples to demonstrate the discretization methods
-     (<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Discretization1\">Discretization1</a>,
-      <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Discretization2\">Discretization2</a>,
-      <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Discretization1\">DiscretizationSeries</a>)
-     and the new Interpolator block
-     (<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Interpolator</a>).</li>
-</ul>
-  
-<p>
-Other improvements:
-</p>
-<ul>
-<li> The instance name is now displayed above the icon of every Controller block.</li>
-<li> The sample factor is now displayed in the icon of every Controller block.<li>
-<li> Access to resources (e.g. image files) has been changed from file names to URIs.</li>
-<li> The sequence of pole shifting in poleAssignmentMI has beeen changed.</li>
-<li> Bode diagrams of state space systems are now based on numerical more reliable zeros and poles representation istead of on transfer functions.</li>
-</ul>
-
-<p>
-Bug fixes: 
-</p>
-
-<ul>
-<li>Redundant results for initial responses of multi input state space systems have been fixed.</li> 
-<li>Several functions have been modified to work (or to terminate correctly) for state space system without in- and/or outputs:
-<ul>
-<li><a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">Analysis.analysis</a></li>
-<li><a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros\">Analysis.invariantZeros.</a></li>
-<li> Check for controllability and observability.</li> 
-<li> Staircase algorithm to reduce a system to controller Hessenberg form.</li> 
-<li> Computation of controllable/uncontrollable poles.</li> 
-</ul></li> 
-<li> The design of FIR filters in block <a href=\"modelica://Modelica_LinearSystems2.Controller.FilterFIR\">Controller.FilterFIR</a> was 
-disabled. It is now enabled and the previously wrong design of highpass filters with odd order
-was corrected, by increasing the order by one in this case.</li>
-</ul>
-  
-</html>
-"));
-    end Version_2_1;
-
-    class Version_2_0 "Version 2.0 (September 2, 2009)"
-
-      annotation (Documentation(info="<html>
-<p>
-This is a new library. It is based on library Modelica_LinearSystems2 (version 0.95)
-but is not backwards compatible to this library due to many changes (e.g. the system
-data structures include strings for signals names whereas the 0.95 version does not
-have these names in the records). Most important improvements with respect to version 0.95:
-</p>
- 
-<ul>
-<li> The library has been extended and contains now about 180 functions and a lot of examples for the analysis and design of linear control systems in different description forms.</li>
-<li> The library has been restructured and the functions are now organized in sub packages.</li> 
-<li>  Documentation has been upgraded and improved.</li> 
-<li>  Operator overloading concept has been fully utilized.</li> 
-<li>  Analysis functions like tests for controllability, observability, stabilizability, and detectability have been added.</li> 
-<li>      The analyse-function to determine the characteristic of a system and to analyse the relation of the system states to the dynamics of the uncoupled modal states is provided.</li>
-<li>      Calculation of invariant zeros for arbitrary systems (i.e. systems with different numbers of inputs and outputs) is now provided.</li> 
-<li>      The Design package contains functions for controller design, i.e. pole assignment, LQ controller, Kalman Filter, and LQG controller.</li> 
-<li>      Since the design of optimal controllers is based on the solution of algebraic Riccati equation, a solver for those equations is provided in Math.Matrices. Also an algorithm to solve Lyapunov equations has been added.</li> 
-<li>      The package Sampled was renamed to Controller. All blocks are now available in a discrete representation,
-          especially also the \"Filter\" block (was only available in a continuous representation in 0.95)</li> 
-<li>      The Controller package contains a sub package Template which provides standard controller structures (e.g. a state-feedback-control-structure and a two degree of freedom controller template with an inverse system model in the feed forward loop) with replaceable components.</li> 
-<li>      The besselFilter coefficients have been recalculated with high precision calculation up to order 41.</li>
-<li>      LimPID, comprising P, PI, PD, and PID controller with limited output, anti-windup compensation and input weighting (setpoint and measured value) added.</li> 
-<li>      Improved new generic plot functions are used for time and frequency plots.</li> 
-<li> New system transformations (similarity transformation, canonical forms).</li>
-<li> New transformations between system descriptions added, especially from
-     ZerosAndPoles to StateSpace and from TransferFunction to StateSpace.</li>
-<li> Generate condensed forms like Hessenberg description </li>
-<li> Controllability/Observability forms</li>
-<li> Time response with plot (step, ramp, impulse)</li>
-<li> Bode plots improved, since the transformation from StateSpace to ZerosAndPoles
-     uses a better algorithm from the newest LAPACK version.</li>
-<li> Based on a newer LAPACK version 3.1.1.</li>
-</ul>
-  
-</html>
-"));
-    end Version_2_0;
-
-    class Version_0_95 "Version 0.95 (Feb. 11, 2008)"
-
-      annotation (Documentation(info="<html>
- 
-<p>
-Adapted the library to the Modelica Standard Library 3.0 and 
-to the new restrictions of the Modelica Language Version 3.0.
+This library is implemented with Modelica 3.1 (especially the
+operator overloading features are utilized) and requires the
+<a href=\"http://www.netlib.org/clapack/CLAPACK-3.1.1-VisualStudio.zip\">LAPACK 3.1.1</a> object library.
+Furthermore, linearization and plotting is implemented
+with Dymola API calls. It is planned to move these tool specific calls to the 
+<a href=\"modelica://ModelicaServices\">ModelicaServices</a> package
+(introduced for the Modelica Standard Library 3.1 for these
+purposes), in order that other Modelica tools can provide the same functionality in a clean way.
 </p>
  
 </html>
 "));
-    end Version_0_95;
+  end Requirements;
 
-    class Version_0_93 "Version 0.93 (Feb. 11, 2008)"
+  class ModelicaLicense2 "Modelica License 2"
+    extends Modelica.Icons.Information;
 
-      annotation (Documentation(info="<html>
- 
-<p>
-The following new components have been added:
-</p>
- 
-<table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.StateSpace.</b></td></tr>
-  <tr><td valign=\"top\"> plotBodeMIMO </td>
-      <td valign=\"top\"> Plot bode plot of all transfer functions of a state space system.</td>
-  </tr>
- 
-  <tr><td valign=\"top\"> plotBodeSISO </td>
-      <td valign=\"top\"> Plot bode plot of transfer function from input iu to output iy
-                        of a state space system.</td>
-  </tr>
- 
-  <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.StateSpace.Examples.</b></td></tr>
-  <tr><td valign=\"top\"> bodePlotMIMO<br>
-                        bodePlotSISO </td>
-      <td valign=\"top\"> Demonstrate the new Bode plot possibilities.</td>
-  </tr> 
- 
-  <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.TransferFunction.</b></td></tr>
-  <tr><td valign=\"top\"> fromStateSpaceSISO<br>
-                        fromStateSpaceMIMO </td>
-      <td valign=\"top\"> Generate transfer functions of a state space system.</td>
-  </tr>
- 
-  <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.ZerosAndPoles.</b></td></tr>
-  <tr><td valign=\"top\"> fromStateSpaceSISO<br>
-                        fromStateSpaceMIMO </td>
-      <td valign=\"top\"> Generate ZerosAndPoles from a state space system.</td>
-  </tr>
- 
-</table>
- 
-</html>
-"));
-    end Version_0_93;
-
-    class Version_0_9 "Version 0.9 (Oct. 17, 2005)"
-
-      annotation (Documentation(info="<html>
-<p>
-First Beta-Version of the library. 
-</p>
-<p>
-The Modelica_LinearSystems2.Controller library (previously called Modelica_LinearSystems.Sampled) is based on the
-Sampled library from Nico Walther (master thesis 
-from the electrical engineering at the HTWK-Leipzig,
-supervised by Prof. M&uuml;ller, HTWK, and Prof. Martin Otter, DLR).
-Based on the experience in using the Sampled library, 
-new features in Modelica as well as in Dymola, 
-the Sampled library was considerably restructured, and
-newly implemented. The following main changes have been 
-performed:
-</p>
-<ul>
-<li> The library is based on the input/output signal connectors
-     of the Modelica standard library 2.1 (and higher). Previously,
-     it was based on version 1.6. Similar as in 2.1, all blocks
-     have been de-vectorized (more convenient for the user in the
-     standard case. Modelica allows now easy vectorization of 
-     blocks).</li>
-<li> The previous parameter \"method\" was split into \"blockType\" (continuous/discrete)
-     and \"methodType\" (discretization method). It is therefore
-     easier to switch between a continuous and a discrete representation because
-     one does not have to remember which discretization method was used 
-     previously when switching from a continuous to a discrete representation.</li> 
-<li> The main options (blockType, methodType, sampleTime, initType) are set
-     globally in component SampleClock via inner/outer and no longer in every
-     component. The default defined in SampleClock can be changed in every
-     component. Since in many cases just the defaults are used, it is now
-     much more convenient to define the sampling setting and
-     switch between different representations.</li>
-<li> In every component, the Integer parameter sampleFactor is present that
-     defines the sampling time of this component as a \"sampleFactor\" 
-     multiple of the base sample time defined in sampleClock.
-     This allows a more easier definition of standard multi-rate
-     systems (in the previous version, in every component the actual
-     sample time had to be defined). In the future, more advanced
-     sampling options might be added, e.g., via user definable
-     trigger signals.</li>
-<li> The previous Filter sublibrary was replaced by two components
-     <b>Filter</b> and <b>FilterFIR</b> that model IIR and FIR filter.
-     There are now more options for IIR filters (additional Bessel
-     filter + normalized/non-normalized filters).</li>
-<li> The previous NoiseGenerators sublibrary was replaced by
-     component <b>Noise</b>. In most applications only this Noise
-     component is needed in sampled data systems and not the other
-     variants in the previous NoiseGenerator library. It is then
-     easier for a user to just select this component and not
-     be forced to first figure out what component to use.</li>
-<li> The discrete representations of the blocks are changed such that
-     no past values of the input signals u are accessed. For linear systems
-     this is always possible via a state transformation. The benefit is
-     that it is easier to initialize the block. Previously,
-     it was necessary to define somehow the initial values of pre(u).
-     This was not always made in a consistent way. Since in the new version
-     no pre(u) is present, it need not be initialized.</li>
-<li> The sampling definition was changed. Previously, some when clauses have been
-     evaluated during initialization and via the sample() operator at the
-     initial time again (i.e., the when block was evaluated twice at
-     the start time). Some blocks have not been evaluated during initialization and
-     therefore in some cases the discrete variables have been not properly
-     initialized. In the new version, all when-clauses are active during
-     initialization and they are evaluated again at the next sample time:
-     <pre>
-     <b>when</b> {<b>initial</b>(), <b>sample</b>(Ts,Ts)} <b>then</b>
-         // active during initialization and at time = Ts, 2*Ts, 3*Ts, ...
-       ...
-     <b>end when</b>;
-     </pre>
-     Furthermore, parameter startTime was removed (= first sample time of
-     when-clause after the initialization) since this is nearly never needed
-     in a practical application and therefore this parameter could be 
-     removed (and no longer confuses users).</li> 
-<li> The continuous representations of all blocks are implemented such that
-     as much struture as possible is preserved in order that index reduction
-     is possible. For example, if a transfer function has more poles as
-     zeros, then the output of the block might be differentiated n times
-     (n = number of poles - number of zeros) without introducing derivatives
-     in the inputs. A detailed explanation is given at the end of the info
-     layer of component
-     <a href=\"modelica://Modelica_LinearSystems2.Controller.ZerosAndPoles\">ZerosAndPoles</a>.
-     Previously, transfer functions and especially filters did not have this
-     feature. Therefore, it was not possible to use the filters of the previous
-     Sampled library as pre-filters in an inverse model. This is now
-     possible. In such a case, a Bessel filter is most appropriate, because
-     it does not introduce osciallations as the Butterworth and Chebyhev
-     filter do and it is faster as the critical damping filter, see the
-     description of the <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">filter</a> 
-     function. Previously, a Bessel filter was not supported.
-     </li>
-<li> Previously, blocks have been implement with a large if-clause in which
-     the different representations have been defined. In the new version, 
-     the discrete representations are defined in a separate block that
-     are activated via a conditional declaration, if the block is discrete.
-     (conditional declarations have been only recently introduced into
-     the Modelica language version 2.2). The benefit is that the implementation
-     is simpler and that there is no longer any overhead for the continuous
-     block (all equations and variables from the discrete representation
-     are removed during translation).</li>
-<li> Previously, for all simple blocks (such as FirstOrder) the different
-     discrete representations have been specifially derived and implemented.
-     In the new version, all blocks are first transformed to
-     state space form with a function call and then the 
-     discrete state space system block is used for the discrete
-     representation. This approach is less error prone and
-     the implementation is much simpler.</li>
-<li> Special data structures for linear systems have been introduced
-     in form of records and accompanying functions operating on these
-     records. As a result, also the input parameters of some blocks,
-     such as StateSpace or TransferFunction are now records instead
-     of arrays. It is then possible to generate such system representations
-     by appropriate function calls and supply the result as record
-     instance to the corresponding block.</li> 
-</ul>
- 
- 
-</html>
-"));
-    end Version_0_9;
     annotation (Documentation(info="<html>
-<p>
-This section summarizes the changes that have been performed
-on the Modelica LinearSystems library.
-</p>
- 
-</html>"));
-  end ReleaseNotes;
-
-class ModelicaLicense2 "Modelica License 2"
-
-  annotation (Documentation(info="<html>
 <p>All files in this directory (Modelica_LinearSystems2) and in all
 subdirectories, especially all files that build package \"Modelica_LinearSystems2\" 
 are licensed by <b><u>DLR</u></b> under the
@@ -1350,27 +1012,380 @@ printing and shipping costs may be recovered.</p>
 </html>
 "));
 
-end ModelicaLicense2;
+  end ModelicaLicense2;
 
-  class Requirements "Requirements"
+  class Literature "References"
+    extends Modelica.Icons.References;
 
     annotation (Documentation(info="<html>
 <p>
-This library is implemented with Modelica 3.1 (especially the
-operator overloading features are utilized) and requires the
-<a href=\"http://www.netlib.org/clapack/CLAPACK-3.1.1-VisualStudio.zip\">LAPACK 3.1.1</a> object library.
-Furthermore, linearization and plotting is implemented
-with Dymola API calls. It is planned to move these tool specific calls to the 
-<a href=\"modelica://ModelicaServices\">ModelicaServices</a> package
-(introduced for the Modelica Standard Library 3.1 for these
-purposes), in order that other Modelica tools can provide the same functionality in a clean way.
+This library is based on the following references:
+</p>
+<dl>
+<dt>Astr&ouml;m K.J., Wittenmark B. (1997):</dt>
+<dd> <b>Computer Controlled Systems: Theory and Design</b>.
+     Prentice Hall. 3rd edition.<br>&nbsp;</dd>
+
+<dt>Datta B. N. (2004):</dt>
+<dd> <b>Numerical Methods for linear control systems</b>.
+     Elsevier Academic Press<br>&nbsp;</dd>
+
+<dt>Goloub G.H., Van Loan C.F. (1996):</dt>
+<dd> <b>Matrix Computations</b>.
+     Johns Hopkins University Press 3rd edition.<br>&nbsp;</dd>
+
+<dt>Tietze U., and Schenk C. (2002):</dt>
+<dd> <b>Halbleiter-Schaltungstechnik</b>.
+     Springer Verlag, 12. Auflage, S. 815-852.<br>&nbsp;</dd>
+</dl>
+</html>
+"));
+  end Literature;
+
+  package ReleaseNotes "Release notes"
+    extends Modelica.Icons.ReleaseNotes;
+
+    class Version_2_2 "Version 2.2 (October 27, 2010)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>
+This release is <b>backward compatible</b> to the previous version 2.1.
+It contains the following improvements:
+</p>
+
+<p>
+New functions/records:
+</p>
+
+<ul>
+<li> Records  <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles\">DiscreteZerosAndPole</a>
+     and  <a href=\"modelica://Modelica_LinearSystems2.DiscreteTransferFunction\">DiscreteTransferFunction</a>
+     to operate with discrete zeros-and-poles-transfer-functions and transfer functions.</li>
+
+<li> Constructors and basic operators for  <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace\">DiscreteStateSpace</a>,
+     <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles\">DiscreteZerosAndPole</a> and
+     <a href=\"modelica://Modelica_LinearSystems2.DiscreteTransferFunction\">DiscreteTransferFunction</a>.</li> 
+
+<li> Functions to construct, to convert, to analyze, and to plot for records DiscreteStateSpace, DiscreteTransferFunction and DiscreteZerosAndPoles are provided.</li> 
+
+<li> Examples for DiscreteStateSpace, DiscreteTransferFunction and DiscreteZerosAndPoles demonstarate the discrete system records
+     ( <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteStateSpace\">Examples_DiscreteStateSpace</a>,
+       <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteZerosAndPoles\">Examples_DiscreteZerosAndPoles</a>,
+       <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteTransferFunction\">Examples_DiscreteTransferFunction</a>,).</li>
+</ul>
+
+  
+</html>
+"));
+    end Version_2_2;
+
+    class Version_2_1 "Version 2.1 (January 15, 2010)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>
+This release is <b>backward compatible</b> to the previous version 2.0.
+It contains the following improvements:
+</p>
+
+<p>
+New functions/blocks:
+</p>
+
+<ul>
+<li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.sylvester\">sylvester</a>
+     to solve Sylvester equations \"<b>A</b>*<b>X</b> + <b>X</b>*<b>B</b> = <b>C</b>\"
+     using a Schur method.</li>
+
+<li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a> 
+     to calculate the orthogonal nullspace and the dimension (nullity) of 
+     the nullspace of a matrix.</li> 
+
+<li> Functions <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">conditionNumber</a>
+     and <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">rcond</a>
+     to calculate the condition number and the reciprocal condition number of a
+     matrix respectively.</li> 
+
+<li> Block <a href=\"modelica://Modelica_LinearSystems2.Controller.Interpolator\">Controller.Interpolator</a> 
+     to increase the sampling frequency with linear interpolation and optional mean-value filtering.</li>
+
+<li> Blocks have been added to Controller.Examples to demonstrate the discretization methods
+     (<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Discretization1\">Discretization1</a>,
+      <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Discretization2\">Discretization2</a>,
+      <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Discretization1\">DiscretizationSeries</a>)
+     and the new Interpolator block
+     (<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Interpolator</a>).</li>
+</ul>
+  
+<p>
+Other improvements:
+</p>
+<ul>
+<li> The instance name is now displayed above the icon of every Controller block.</li>
+<li> The sample factor is now displayed in the icon of every Controller block.<li>
+<li> Access to resources (e.g. image files) has been changed from file names to URIs.</li>
+<li> The sequence of pole shifting in poleAssignmentMI has beeen changed.</li>
+<li> Bode diagrams of state space systems are now based on numerical more reliable zeros and poles representation istead of on transfer functions.</li>
+</ul>
+
+<p>
+Bug fixes: 
+</p>
+
+<ul>
+<li>Redundant results for initial responses of multi input state space systems have been fixed.</li> 
+<li>Several functions have been modified to work (or to terminate correctly) for state space system without in- and/or outputs:
+<ul>
+<li><a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">Analysis.analysis</a></li>
+<li><a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros\">Analysis.invariantZeros.</a></li>
+<li> Check for controllability and observability.</li> 
+<li> Staircase algorithm to reduce a system to controller Hessenberg form.</li> 
+<li> Computation of controllable/uncontrollable poles.</li> 
+</ul></li> 
+<li> The design of FIR filters in block <a href=\"modelica://Modelica_LinearSystems2.Controller.FilterFIR\">Controller.FilterFIR</a> was 
+disabled. It is now enabled and the previously wrong design of highpass filters with odd order
+was corrected, by increasing the order by one in this case.</li>
+</ul>
+  
+</html>
+"));
+    end Version_2_1;
+
+    class Version_2_0 "Version 2.0 (September 2, 2009)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>
+This is a new library. It is based on library Modelica_LinearSystems2 (version 0.95)
+but is not backwards compatible to this library due to many changes (e.g. the system
+data structures include strings for signals names whereas the 0.95 version does not
+have these names in the records). Most important improvements with respect to version 0.95:
+</p>
+ 
+<ul>
+<li> The library has been extended and contains now about 180 functions and a lot of examples for the analysis and design of linear control systems in different description forms.</li>
+<li> The library has been restructured and the functions are now organized in sub packages.</li> 
+<li>  Documentation has been upgraded and improved.</li> 
+<li>  Operator overloading concept has been fully utilized.</li> 
+<li>  Analysis functions like tests for controllability, observability, stabilizability, and detectability have been added.</li> 
+<li>      The analyse-function to determine the characteristic of a system and to analyse the relation of the system states to the dynamics of the uncoupled modal states is provided.</li>
+<li>      Calculation of invariant zeros for arbitrary systems (i.e. systems with different numbers of inputs and outputs) is now provided.</li> 
+<li>      The Design package contains functions for controller design, i.e. pole assignment, LQ controller, Kalman Filter, and LQG controller.</li> 
+<li>      Since the design of optimal controllers is based on the solution of algebraic Riccati equation, a solver for those equations is provided in Math.Matrices. Also an algorithm to solve Lyapunov equations has been added.</li> 
+<li>      The package Sampled was renamed to Controller. All blocks are now available in a discrete representation,
+          especially also the \"Filter\" block (was only available in a continuous representation in 0.95)</li> 
+<li>      The Controller package contains a sub package Template which provides standard controller structures (e.g. a state-feedback-control-structure and a two degree of freedom controller template with an inverse system model in the feed forward loop) with replaceable components.</li> 
+<li>      The besselFilter coefficients have been recalculated with high precision calculation up to order 41.</li>
+<li>      LimPID, comprising P, PI, PD, and PID controller with limited output, anti-windup compensation and input weighting (setpoint and measured value) added.</li> 
+<li>      Improved new generic plot functions are used for time and frequency plots.</li> 
+<li> New system transformations (similarity transformation, canonical forms).</li>
+<li> New transformations between system descriptions added, especially from
+     ZerosAndPoles to StateSpace and from TransferFunction to StateSpace.</li>
+<li> Generate condensed forms like Hessenberg description </li>
+<li> Controllability/Observability forms</li>
+<li> Time response with plot (step, ramp, impulse)</li>
+<li> Bode plots improved, since the transformation from StateSpace to ZerosAndPoles
+     uses a better algorithm from the newest LAPACK version.</li>
+<li> Based on a newer LAPACK version 3.1.1.</li>
+</ul>
+  
+</html>
+"));
+    end Version_2_0;
+
+    class Version_0_95 "Version 0.95 (Feb. 11, 2008)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+ 
+<p>
+Adapted the library to the Modelica Standard Library 3.0 and 
+to the new restrictions of the Modelica Language Version 3.0.
 </p>
  
 </html>
 "));
-  end Requirements;
+    end Version_0_95;
+
+    class Version_0_93 "Version 0.93 (Feb. 11, 2008)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+ 
+<p>
+The following new components have been added:
+</p>
+ 
+<table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
+  <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.StateSpace.</b></td></tr>
+  <tr><td valign=\"top\"> plotBodeMIMO </td>
+      <td valign=\"top\"> Plot bode plot of all transfer functions of a state space system.</td>
+  </tr>
+ 
+  <tr><td valign=\"top\"> plotBodeSISO </td>
+      <td valign=\"top\"> Plot bode plot of transfer function from input iu to output iy
+                        of a state space system.</td>
+  </tr>
+ 
+  <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.StateSpace.Examples.</b></td></tr>
+  <tr><td valign=\"top\"> bodePlotMIMO<br>
+                        bodePlotSISO </td>
+      <td valign=\"top\"> Demonstrate the new Bode plot possibilities.</td>
+  </tr> 
+ 
+  <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.TransferFunction.</b></td></tr>
+  <tr><td valign=\"top\"> fromStateSpaceSISO<br>
+                        fromStateSpaceMIMO </td>
+      <td valign=\"top\"> Generate transfer functions of a state space system.</td>
+  </tr>
+ 
+  <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.ZerosAndPoles.</b></td></tr>
+  <tr><td valign=\"top\"> fromStateSpaceSISO<br>
+                        fromStateSpaceMIMO </td>
+      <td valign=\"top\"> Generate ZerosAndPoles from a state space system.</td>
+  </tr>
+ 
+</table>
+ 
+</html>
+"));
+    end Version_0_93;
+
+    class Version_0_9 "Version 0.9 (Oct. 17, 2005)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>
+First Beta-Version of the library. 
+</p>
+<p>
+The Modelica_LinearSystems2.Controller library (previously called Modelica_LinearSystems.Sampled) is based on the
+Sampled library from Nico Walther (master thesis 
+from the electrical engineering at the HTWK-Leipzig,
+supervised by Prof. M&uuml;ller, HTWK, and Prof. Martin Otter, DLR).
+Based on the experience in using the Sampled library, 
+new features in Modelica as well as in Dymola, 
+the Sampled library was considerably restructured, and
+newly implemented. The following main changes have been 
+performed:
+</p>
+<ul>
+<li> The library is based on the input/output signal connectors
+     of the Modelica standard library 2.1 (and higher). Previously,
+     it was based on version 1.6. Similar as in 2.1, all blocks
+     have been de-vectorized (more convenient for the user in the
+     standard case. Modelica allows now easy vectorization of 
+     blocks).</li>
+<li> The previous parameter \"method\" was split into \"blockType\" (continuous/discrete)
+     and \"methodType\" (discretization method). It is therefore
+     easier to switch between a continuous and a discrete representation because
+     one does not have to remember which discretization method was used 
+     previously when switching from a continuous to a discrete representation.</li> 
+<li> The main options (blockType, methodType, sampleTime, initType) are set
+     globally in component SampleClock via inner/outer and no longer in every
+     component. The default defined in SampleClock can be changed in every
+     component. Since in many cases just the defaults are used, it is now
+     much more convenient to define the sampling setting and
+     switch between different representations.</li>
+<li> In every component, the Integer parameter sampleFactor is present that
+     defines the sampling time of this component as a \"sampleFactor\" 
+     multiple of the base sample time defined in sampleClock.
+     This allows a more easier definition of standard multi-rate
+     systems (in the previous version, in every component the actual
+     sample time had to be defined). In the future, more advanced
+     sampling options might be added, e.g., via user definable
+     trigger signals.</li>
+<li> The previous Filter sublibrary was replaced by two components
+     <b>Filter</b> and <b>FilterFIR</b> that model IIR and FIR filter.
+     There are now more options for IIR filters (additional Bessel
+     filter + normalized/non-normalized filters).</li>
+<li> The previous NoiseGenerators sublibrary was replaced by
+     component <b>Noise</b>. In most applications only this Noise
+     component is needed in sampled data systems and not the other
+     variants in the previous NoiseGenerator library. It is then
+     easier for a user to just select this component and not
+     be forced to first figure out what component to use.</li>
+<li> The discrete representations of the blocks are changed such that
+     no past values of the input signals u are accessed. For linear systems
+     this is always possible via a state transformation. The benefit is
+     that it is easier to initialize the block. Previously,
+     it was necessary to define somehow the initial values of pre(u).
+     This was not always made in a consistent way. Since in the new version
+     no pre(u) is present, it need not be initialized.</li>
+<li> The sampling definition was changed. Previously, some when clauses have been
+     evaluated during initialization and via the sample() operator at the
+     initial time again (i.e., the when block was evaluated twice at
+     the start time). Some blocks have not been evaluated during initialization and
+     therefore in some cases the discrete variables have been not properly
+     initialized. In the new version, all when-clauses are active during
+     initialization and they are evaluated again at the next sample time:
+     <pre>
+     <b>when</b> {<b>initial</b>(), <b>sample</b>(Ts,Ts)} <b>then</b>
+         // active during initialization and at time = Ts, 2*Ts, 3*Ts, ...
+       ...
+     <b>end when</b>;
+     </pre>
+     Furthermore, parameter startTime was removed (= first sample time of
+     when-clause after the initialization) since this is nearly never needed
+     in a practical application and therefore this parameter could be 
+     removed (and no longer confuses users).</li> 
+<li> The continuous representations of all blocks are implemented such that
+     as much struture as possible is preserved in order that index reduction
+     is possible. For example, if a transfer function has more poles as
+     zeros, then the output of the block might be differentiated n times
+     (n = number of poles - number of zeros) without introducing derivatives
+     in the inputs. A detailed explanation is given at the end of the info
+     layer of component
+     <a href=\"modelica://Modelica_LinearSystems2.Controller.ZerosAndPoles\">ZerosAndPoles</a>.
+     Previously, transfer functions and especially filters did not have this
+     feature. Therefore, it was not possible to use the filters of the previous
+     Sampled library as pre-filters in an inverse model. This is now
+     possible. In such a case, a Bessel filter is most appropriate, because
+     it does not introduce osciallations as the Butterworth and Chebyhev
+     filter do and it is faster as the critical damping filter, see the
+     description of the <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">filter</a> 
+     function. Previously, a Bessel filter was not supported.
+     </li>
+<li> Previously, blocks have been implement with a large if-clause in which
+     the different representations have been defined. In the new version, 
+     the discrete representations are defined in a separate block that
+     are activated via a conditional declaration, if the block is discrete.
+     (conditional declarations have been only recently introduced into
+     the Modelica language version 2.2). The benefit is that the implementation
+     is simpler and that there is no longer any overhead for the continuous
+     block (all equations and variables from the discrete representation
+     are removed during translation).</li>
+<li> Previously, for all simple blocks (such as FirstOrder) the different
+     discrete representations have been specifially derived and implemented.
+     In the new version, all blocks are first transformed to
+     state space form with a function call and then the 
+     discrete state space system block is used for the discrete
+     representation. This approach is less error prone and
+     the implementation is much simpler.</li>
+<li> Special data structures for linear systems have been introduced
+     in form of records and accompanying functions operating on these
+     records. As a result, also the input parameters of some blocks,
+     such as StateSpace or TransferFunction are now records instead
+     of arrays. It is then possible to generate such system representations
+     by appropriate function calls and supply the result as record
+     instance to the corresponding block.</li> 
+</ul>
+ 
+ 
+</html>
+"));
+    end Version_0_9;
+    annotation (Documentation(info="<html>
+<p>
+This section summarizes the changes that have been performed
+on the Modelica LinearSystems library.
+</p>
+</html>"));
+  end ReleaseNotes;
 
   class Contact "Contact"
+    extends Modelica.Icons.Contact;
 
     annotation (Documentation(info="<html>
 <dl>
