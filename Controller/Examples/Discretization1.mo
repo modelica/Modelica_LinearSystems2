@@ -1,8 +1,10 @@
 within Modelica_LinearSystems2.Controller.Examples;
 model Discretization1 "Demonstrates the discretization methods"
   extends Modelica.Icons.Example;
-  parameter Real w=20;
-  parameter Real D=0.1;
+
+  parameter Real w=20 "Angular frequency";
+  parameter Real D=0.1 "Damping";
+
   Modelica_LinearSystems2.Controller.SecondOrder continuous(w=w, D=D)
     annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
   inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(sampleTime=

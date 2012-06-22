@@ -1,10 +1,8 @@
 within Modelica_LinearSystems2.WorkInProgress.Controller.Examples;
 model ZerosAndPolesBlock
+  extends Modelica.Icons.Example;
+
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.Math.Polynomial;
 
   parameter ZerosAndPoles zp=ZerosAndPoles(n1=fill(0,0), d1={0,0}, n2=fill(0,0,2), d2=fill(0,0,2));
 

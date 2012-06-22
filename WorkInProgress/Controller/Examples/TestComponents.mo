@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Controller.Examples;
 model TestComponents "test all Controller blocks"
-  import Modelica_LinearSystems2;
   extends Modelica.Icons.Example;
+
   parameter Real w=10;
   parameter Real D=0.1;
   Modelica.Blocks.Sources.Step step(
@@ -140,6 +140,5 @@ equation
             -260},{100,260}}), graphics),
     experiment(StopTime=5),
     experimentSetupOutput,
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-260},{100,
-            260}})));
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}})));
 end TestComponents;

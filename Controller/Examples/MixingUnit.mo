@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Controller.Examples;
 model MixingUnit
   "Example of system control with inverse model in a controller with two degrees of freedom"
-  import Modelica_LinearSystems2;
   extends Modelica.Icons.Example;
   extends Templates.TwoDOFinverseModelController(
     redeclare Examples.Components.MixingUnit plant_inv(

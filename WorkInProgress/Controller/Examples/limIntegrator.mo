@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Controller.Examples;
 model limIntegrator "linIntegrator"
+  extends Modelica.Icons.Example;
+
   import Modelica_LinearSystems2;
   Modelica_LinearSystems2.WorkInProgress.Controller.LimIntegrator limIntegrator(
     y_start=1.5,

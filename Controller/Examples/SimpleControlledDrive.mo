@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Controller.Examples;
 model SimpleControlledDrive
   "Simple P-PI cascade controller to control a flexible drive"
   extends Modelica.Icons.Example;
+
   parameter Real kp = 10 "Gain of P position controller";
   parameter Real kv = 9 "Gain of PI speed controller";
   parameter Modelica.SIunits.Time Tv = 0.05

@@ -2,10 +2,12 @@ within Modelica_LinearSystems2.Controller.Examples;
 model Discretization2
   "Demonstrates the discretization method for impuls exact discretization"
   extends Modelica.Icons.Example;
-  parameter Real w=20;
-  parameter Real D=0.1;
-  inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(sampleTime=
-        0.01)
+
+  parameter Real w=20 "Angular frequency";
+  parameter Real D=0.1 "Damping";
+
+  inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(
+    sampleTime=0.01)
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
 
   Modelica_LinearSystems2.Controller.SecondOrder impulseExact(

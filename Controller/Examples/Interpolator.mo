@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Controller.Examples;
 model Interpolator "Demonstrate usage of Interpolator"
-  import Modelica_LinearSystems2;
   extends Modelica.Icons.Example;
+  import Modelica_LinearSystems2;
 
   Modelica.Blocks.Sources.Sine sine(freqHz=2,
     offset=0.1,

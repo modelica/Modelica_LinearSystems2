@@ -1,7 +1,8 @@
 within Modelica_LinearSystems2.Controller.Examples;
 model FirstExample "First example to demonstrate representative block"
-  import Modelica_LinearSystems2;
   extends Modelica.Icons.Example;
+  import Modelica_LinearSystems2;
+
   parameter Real w=10;
   parameter Real D=0.1;
   Modelica.Blocks.Sources.Step step(

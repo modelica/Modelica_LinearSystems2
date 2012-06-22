@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Controller.Examples;
 model DiscretizationSeries
   "Demonstrates the discretization methods for a series connection"
   extends Modelica.Icons.Example;
+
   parameter Types.BlockType blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous
     "Type of Sampled blocks (Continuous or Discrete)";
   parameter Modelica.SIunits.Time sampleTime=0.1
