@@ -14,8 +14,8 @@ record DiscreteZerosAndPoles
   Real d2[:,2] "[p,p^0] coefficients of 2nd order denominator polynomials"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
 
-    Modelica.SIunits.Time Ts "Sample time"
-       annotation(Dialog(group="Data used to construct discrete from continuous system"));
+  Modelica.SIunits.Time Ts "Sample time"
+    annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
   Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
     "Discretization method"

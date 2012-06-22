@@ -1,15 +1,15 @@
 within Modelica_LinearSystems2;
 record TransferFunction
   "Continuous transfer function description of a single input, single output system (data + operations)"
-
   extends Modelica.Icons.Record;
+
   import Modelica_LinearSystems2.Math.Polynomial;
 
   Real n[:] "Coefficients of numerator polynomial (in descending order)" annotation(Dialog(group="y = n*{s^m, ... , s, 1} / (d*{s^r, ... , s, 1}) * u"));
   Real d[:] "Coefficients of denominator polynomial (in descending order)" annotation(Dialog(group="y = n*{s^m, ... , s, 1} / (d*{s^r, ... , s, 1}) * u"));
 
-  String uName="u" "Name of input signal"    annotation(Dialog(group="Signal names"));
-  String yName="y" "Name of output signal"  annotation(Dialog(group="Signal names"));
+  String uName="u" "Name of input signal" annotation(Dialog(group="Signal names"));
+  String yName="y" "Name of output signal" annotation(Dialog(group="Signal names"));
 
 /* If the numerator polynomial has no coefficients, the transfer function
    is zero. The denominator polynomial must always have at
