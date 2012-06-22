@@ -85,7 +85,7 @@ characterized:
 </pre>
 
 
-<p><b>Copyright &copy; 2004-2005, DLR Institute of Robotics and Mechatronics </b></p>
+<p><b>Copyright &copy; 2004-2012, DLR Institute of Robotics and Mechatronics </b></p>
 
 <p>
 The Fortran interface of DLSEI is defined as:
