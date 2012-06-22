@@ -1,47 +1,47 @@
 within Modelica_LinearSystems2.Controller.Templates;
 partial model SimpleObserverStateSpaceControl
-  "Represents the structure of a simple state feedback controller with observer and optional pre filter"
+  "Template for a simple state feedback controller with observer and optional pre-filter"
 
   MatrixGain feedbackMatrix
-    annotation (Placement(transformation(extent={{20,-50},{0,-30}})));
+    annotation (Placement(transformation(extent={{30,-50},{10,-30}})));
   MatrixGain preFilter(K=[0])
-    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+    annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
   Modelica.Blocks.Math.Feedback feedback[feedbackMatrix.nout]
-    annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+    annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   replaceable Internal.PlantTemplate plant(n=
         feedbackMatrix.nin, m=feedbackMatrix.nout) constrainedby
     Internal.PlantTemplate
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
   Sampler samplerPreFilter[feedbackMatrix.nout]
-    annotation (Placement(transformation(extent={{-53,-5},{-43,5}})));
+    annotation (Placement(transformation(extent={{-43,-5},{-33,5}})));
   Sampler samplerFeedback[feedbackMatrix.nout]
-    annotation (Placement(transformation(extent={{-15,-45},{-25,-35}})));
+    annotation (Placement(transformation(extent={{-5,-45},{-15,-35}})));
   Sampler samplerOut[observer.nout]
     annotation (Placement(transformation(extent={{85,-51},{75,-41}})));
   inner SampleClock sampleClock
-    annotation (Placement(transformation(extent={{120,80},{140,100}})));
+    annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Modelica_LinearSystems2.Controller.Templates.Internal.ObserverTemplate
     observer
     annotation (Placement(transformation(extent={{60,-50},{40,-30}})));
 equation
   connect(feedback.y, plant.u) annotation (Line(
-      points={{-21,0},{82,0}},
+      points={{-11,0},{78,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(samplerFeedback.u, feedbackMatrix.y) annotation (Line(
-      points={{-14,-40},{-1,-40}},
+      points={{-4,-40},{9,-40}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(samplerFeedback.y, feedback.u2) annotation (Line(
-      points={{-25.5,-40},{-30,-40},{-30,-8}},
+      points={{-15.5,-40},{-20,-40},{-20,-8}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(preFilter.y, samplerPreFilter.u) annotation (Line(
-      points={{-59,0},{-54,0}},
+      points={{-49,0},{-44,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(samplerPreFilter.y, feedback.u1) annotation (Line(
-      points={{-42.5,0},{-38,0}},
+      points={{-32.5,0},{-28,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(samplerOut.y, observer.y)         annotation (Line(
@@ -53,14 +53,17 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(observer.x_estimated, feedbackMatrix.u) annotation (Line(
-      points={{39,-40},{22,-40}},
+      points={{39,-40},{32,-40}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(observer.u, feedback.y) annotation (Line(
-      points={{62,-34},{68,-34},{68,0},{-21,0}},
+      points={{62,-34},{68,-34},{68,0},{-11,0}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,
-            -100},{140,100}}), graphics), Icon(coordinateSystem(
-          preserveAspectRatio=true, extent={{-140,-100},{140,100}})));
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+            {100,100}}),       graphics), Icon(coordinateSystem(
+          preserveAspectRatio=true, extent={{-100,-100},{100,100}})),
+    Documentation(info="<html>
+<p>This template represents the structure of a simple state feedback controller with observer and optional pre-filter. In the application it must be extended with an input signal.</p>
+</html>"));
 end SimpleObserverStateSpaceControl;

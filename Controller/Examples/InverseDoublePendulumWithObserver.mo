@@ -42,26 +42,26 @@ model InverseDoublePendulumWithObserver
     width=50,
     period=30,
     amplitude=5)
-              annotation (Placement(transformation(extent={{-152,-10},{-132,10}})));
+              annotation (Placement(transformation(extent={{-140,-10},{-120,10}})));
   Components.AccelerationLimiter accelerationLimiter(
     v_limit=20,
     velocityLimitation=false,
     withDelay2=false,
     a_limit=1)
-    annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
+    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
   Noise noise(
     firstSeed={43,123,162},
     blockType=Types.BlockTypeWithGlobalDefault.Discrete,
     y_min=-0.005,
     y_max=0.005,
     sampleFactor=200)
-    annotation (Placement(transformation(extent={{20,70},{40,90}})));
+    annotation (Placement(transformation(extent={{130,40},{110,60}})));
   Noise noise1(
     sampleFactor=100,
     blockType=Types.BlockTypeWithGlobalDefault.Discrete,
     y_min=-0.025,
     y_max=0.025)
-    annotation (Placement(transformation(extent={{20,40},{40,60}})));
+    annotation (Placement(transformation(extent={{50,40},{70,60}})));
 
 initial equation
 //feedback.y = {0.0};
@@ -69,27 +69,27 @@ plant.u = {0.0};
 
 equation
   connect(pulse.y, accelerationLimiter.u) annotation (Line(
-      points={{-131,0},{-122,0}},
+      points={{-119,0},{-112,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(noise1.y, plant.dist) annotation (Line(
-      points={{41,50},{86.8,50},{86.8,5.6}},
+      points={{71,50},{86.8,50},{86.8,5.6}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(noise.y, plant.dist2) annotation (Line(
-      points={{41,80},{93.6,80},{93.6,5.6}},
+      points={{109,50},{93.6,50},{93.6,5.6}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(preFilter.u[1], accelerationLimiter.s) annotation (Line(
-      points={{-82,0},{-88,0},{-88,6},{-99,6}},
+      points={{-72,0},{-80,0},{-80,6},{-89,6}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-160,-100},{160,
+    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,-100},{140,
             100}}),     graphics={Text(
-          extent={{-76,72},{14,60}},
+          extent={{44,76},{134,64}},
           lineColor={0,0,0},
-          textString="disturbance"), Rectangle(extent={{-86,28},{108,-60}},
+          textString="disturbance"), Rectangle(extent={{-76,28},{108,-60}},
             lineColor={255,0,0})}),
     experiment(
       StopTime=60,

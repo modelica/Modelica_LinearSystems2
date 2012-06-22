@@ -1,6 +1,5 @@
 within Modelica_LinearSystems2.Controller.Templates;
-block Add2
-  "Output the sum of the two inputs (inputs are on the left and below)"
+block Add2 "Output the sum of the two inputs"
 
   input Modelica.Blocks.Interfaces.RealInput u1
                                 annotation (Placement(transformation(
@@ -17,28 +16,15 @@ block Add2
 equation
   y = u1 + u2;
   annotation (
-    Documentation(info="
-<HTML>
+    Documentation(info="<html>
 <p>
-This blocks computes output <b>y</b> as <i>difference</i> of the
-commanded input <b>u1</b> and the feedback
-input <b>u2</b>:
+This block computes output <b>y</b> as <i>sum</i> of the
+inputs <b>u1</b> and <b>u2</b>:
 </p>
 <pre>
-    <b>y</b> = <b>u1</b> - <b>u2</b>;
+    <b>y</b> = <b>u1</b> + <b>u2</b>;
 </pre>
-<p>
-Example:
-</p>
-<pre>
-     parameter:   n = 2
-
-  results in the following equations:
-
-     y = u1 - u2
-</pre>
-
-</HTML>
+</html>
 "), Icon(coordinateSystem(
     preserveAspectRatio=true,
     extent={{-100,-100},{100,100}},
@@ -65,8 +51,8 @@ Example:
           lineThickness=0.25,
           fillColor={235,235,235},
           fillPattern=FillPattern.Solid,
-          lineColor={0,0,255}),
-        Line(points={{-60,0},{-20,0}}, color={0,0,255}),
-        Line(points={{20,0},{80,0}}, color={0,0,255}),
-        Line(points={{0,-20},{0,-60}}, color={0,0,255})}));
+          lineColor={0,0,127}),
+        Line(points={{-60,0},{-20,0}}, color={0,0,127}),
+        Line(points={{20,0},{80,0}}, color={0,0,127}),
+        Line(points={{0,-20},{0,-60}}, color={0,0,127})}));
 end Add2;

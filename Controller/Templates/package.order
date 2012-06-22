@@ -1,6 +1,6 @@
 SimpleStateSpaceControl
-TwoDegreesOfFreedomControlSISO
 SimpleObserverStateSpaceControl
+TwoDegreesOfFreedomControlSISO
 TwoDOFinverseModelController
 Add2
 PartialPlantMIMO

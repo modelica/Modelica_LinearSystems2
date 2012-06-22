@@ -6,79 +6,79 @@ model SimpleControlledDrive
   parameter Real kv = 9 "Gain of PI speed controller";
   parameter Modelica.SIunits.Time Tv = 0.05
     "Time constant of PI speed controller";
-  Modelica.Mechanics.Rotational.Components.Inertia motorInertia(J=0.1)
-    annotation (extent=[-20,-80; 0,-60], Placement(transformation(extent={{-10,-80},
-            {10,-60}})));
-  Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=0.3)
-    annotation (extent=[60,-80; 80,-60], Placement(transformation(extent={{60,-80},
-            {80,-60}})));
-  Modelica.Mechanics.Rotational.Components.SpringDamper spring(c=1e5, d=100)
-    annotation (extent=[20,-80; 42,-60], Placement(transformation(extent={{30,-80},
-            {50,-60}})));
+  parameter Types.BlockTypeWithGlobalDefault blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption
+    "Type of block";
 
-  Modelica.Mechanics.Rotational.Sources.Torque torque
-    annotation (extent=[-60,-80; -40,-60], Placement(transformation(extent={{-50,
-            -80},{-30,-60}})));
   inner SampleClock sampleClock(sampleTime=0.005, blockType=
-        Modelica_LinearSystems2.Controller.Types.BlockType.Continuous)
-    annotation (extent=[-83,55; -63,75], Placement(transformation(extent={{-80,
-            60},{-60,80}})));
+    Modelica_LinearSystems2.Controller.Types.BlockType.Continuous)
+    annotation (Placement(transformation(extent={{80,80},{100,100}})));
+  Modelica.Mechanics.Rotational.Components.Inertia motorInertia(J=0.1)
+    annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
+  Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=0.3)
+    annotation (Placement(transformation(extent={{60,-80},{80,-60}})));
+  Modelica.Mechanics.Rotational.Components.SpringDamper spring(c=1e5, d=100)
+    annotation (Placement(transformation(extent={{30,-80},{50,-60}})));
+  Modelica.Mechanics.Rotational.Sources.Torque torque
+    annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
   Modelica.Blocks.Sources.Ramp ramp(duration=2)
-                                    annotation (extent=[-98,20; -78,40]);
+    annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
   Filter filter(
     f_cut=5,
     analogFilter=Modelica_LinearSystems2.Types.AnalogFilter.Bessel,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete)
-             annotation (extent=[-72,20; -52,40], Placement(transformation(
-          extent={{-71,20},{-51,40}})));
-  Sampler sampler3(sampleFactor=2) annotation (extent=[-44,20; -24,40],
+    annotation (Placement(transformation(extent={{-71,20},{-51,40}})));
+  Sampler sampler1(sampleFactor=2)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-10,0})));
+  Sampler sampler2(sampleFactor=2)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={46,0})));
+  Sampler sampler3(sampleFactor=2)
+    annotation (
       Placement(transformation(extent={{-44,20},{-24,40}})));
-  Modelica.Blocks.Math.Feedback feedback annotation (extent=[-20,20; 0,40]);
-  Modelica.Blocks.Math.Gain gain(k=kp) annotation (extent=[8,20; 28,40],
+  Modelica.Blocks.Math.Feedback feedback1
+                                         annotation (Placement(transformation(extent={{-20,20},
+            {0,40}})));
+  Modelica.Blocks.Math.Feedback feedback2 annotation (Placement(transformation(extent={{36,20},
+            {56,40}})));
+  Modelica.Blocks.Math.Gain gain(k=kp) annotation (
       Placement(transformation(extent={{10,20},{30,40}})));
   Modelica.Mechanics.Rotational.Sensors.AngleSensor angle
-    annotation (extent=[-20,-46; 0,-26], rotation=90);
-  Modelica.Blocks.Math.Feedback feedback2 annotation (extent=[36,20; 56,40]);
-  PI PI1(k=kv, T=Tv,
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-10,-30})));
+  PI PI1(
+    k=kv,
+    T=Tv,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous)
-                     annotation (extent=[66,20; 86,40], Placement(
+    annotation (Placement(
         transformation(extent={{64,20},{84,40}})));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speed
-    annotation (extent=[36,-44; 56,-24], rotation=90);
-  Sampler sampler1(sampleFactor=2)
-    annotation (extent=[-20,-12; 0,8], rotation=90);
-  Sampler sampler2(sampleFactor=2)
-                   annotation (extent=[36,-10; 56,10], rotation=90);
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={46,-30})));
 equation
-  connect(sampler1.y, feedback.u2) annotation (points=[-10,9; -10,22],
-      style(color=74, rgbcolor={0,0,127}));
-  connect(sampler2.y, feedback2.u2) annotation (points=[46,11; 46,22],
-      style(color=74, rgbcolor={0,0,127}));
-  connect(speed.w, sampler2.u) annotation (points=[46,-23; 46,-12], style(
-        color=74, rgbcolor={0,0,127}));
-  connect(angle.phi, sampler1.u) annotation (points=[-10,-25; -10,-14],
-      style(color=74, rgbcolor={0,0,127}));
   connect(torque.flange, motorInertia.flange_a) annotation (Line(
-      points={{-30,-70},{-10,-70}},
-      color={0,0,0},
-      smooth=Smooth.None));
-  connect(motorInertia.flange_a, angle.flange) annotation (Line(
-      points={{-10,-70},{-20,-70},{-20,-52},{-10,-52},{-10,-46}},
+      points={{-20,-70},{-10,-70}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(motorInertia.flange_b, speed.flange) annotation (Line(
-      points={{10,-70},{20,-70},{20,-50},{46,-50},{46,-44}},
+      points={{10,-70},{20,-70},{20,-50},{46,-50},{46,-40}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(filter.u, ramp.y) annotation (Line(
-      points={{-73,30},{-77,30}},
+      points={{-73,30},{-79,30}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(sampler3.y, feedback.u1) annotation (Line(
+  connect(sampler3.y, feedback1.u1)
+                                   annotation (Line(
       points={{-23,30},{-18,30}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(feedback.y, gain.u) annotation (Line(
+  connect(feedback1.y, gain.u)
+                              annotation (Line(
       points={{-1,30},{8,30}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -91,7 +91,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(torque.tau, PI1.y) annotation (Line(
-      points={{-52,-70},{-60,-70},{-60,-90},{92,-90},{92,30},{85,30}},
+      points={{-42,-70},{-50,-70},{-50,-90},{92,-90},{92,30},{85,30}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(filter.y, sampler3.u) annotation (Line(
@@ -104,6 +104,27 @@ equation
       smooth=Smooth.None));
   connect(spring.flange_b, loadInertia.flange_a) annotation (Line(
       points={{50,-70},{60,-70}},
+      color={0,0,0},
+      smooth=Smooth.None));
+  connect(sampler1.y, feedback1.u2)
+                                   annotation (Line(
+      points={{-10,11},{-10,22}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(sampler1.u, angle.phi) annotation (Line(
+      points={{-10,-12},{-10,-19}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(sampler2.y, feedback2.u2) annotation (Line(
+      points={{46,11},{46,22}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(sampler2.u, speed.w) annotation (Line(
+      points={{46,-12},{46,-19}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(angle.flange, motorInertia.flange_b) annotation (Line(
+      points={{-10,-40},{-10,-50},{20,-50},{20,-70},{10,-70}},
       color={0,0,0},
       smooth=Smooth.None));
   annotation (

@@ -35,13 +35,13 @@ model MixingUnit
   Modelica.Blocks.Sources.Step step1(height=c_high_start - c_start, offset=
         c_start,
     startTime=25)
-    annotation (Placement(transformation(extent={{-134,10},{-114,30}},
+    annotation (Placement(transformation(extent={{-120,10},{-100,30}},
           rotation=0)));
   inner Controller.SampleClock sampleClock
-    annotation (Placement(transformation(extent={{80,60},{100,80}})));
+    annotation (Placement(transformation(extent={{80,80},{100,100}})));
 equation
   connect(step1.y, filter.u) annotation (Line(
-      points={{-113,20},{-102,20}},
+      points={{-99,20},{-92,20}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
@@ -54,7 +54,7 @@ equation
         partOfCheck=true)=
         "modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/MixingUnit_plot.mos"
         "Simulate and Plot Results"),
-    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,-100},{140,
+    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{120,
             100}}), graphics),
     Documentation(info="<html>
 <p>This example demonstrates the usage of the control structure template <i>Modelica_Controller.Templates.TwoDOFinverseModelController2</i> to control a system by using of a inverse system model in the forward path. The controlled system is a mixing unit described in [1]. </p>
@@ -64,5 +64,7 @@ equation
 <h4><a name=\"References\">R</a>eferences</h4>
 <pre>  [1] F&ouml;llinger O., &QUOT;Nichtlineare Regelungen I&QUOT;,
       Oldenbourg Verlag, 8. Auflage.</pre>
-</html>"));
+</html>"),
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{120,
+            100}})));
 end MixingUnit;
