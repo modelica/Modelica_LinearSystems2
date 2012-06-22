@@ -65,6 +65,6 @@ equation
 <pre>  [1] F&ouml;llinger O., &QUOT;Nichtlineare Regelungen I&QUOT;,
       Oldenbourg Verlag, 8. Auflage.</pre>
 </html>"),
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{120,
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}})));
 end MixingUnit;

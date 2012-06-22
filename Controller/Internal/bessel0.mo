@@ -7,8 +7,8 @@ function bessel0
 protected
   Real ax;
   Real a;
-algorithm
 
+algorithm
   ax := abs(x);
   if ax < 3.75 then
     a := (x/3.75)^2;

@@ -1426,7 +1426,7 @@ Generate a matrix of ZerosAndPoles data records by linearization of a model defi
       import Modelica;
       import Modelica_LinearSystems2.DataDir;
 
-      input String fileName=DataDir + "/zp.mat"
+      input String fileName=DataDir + "zp.mat"
         "Name of the zeros and poles data file"        annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="state space system data file")));
 

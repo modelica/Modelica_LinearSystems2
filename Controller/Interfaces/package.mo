@@ -1,6 +1,12 @@
 within Modelica_LinearSystems2.Controller;
 package Interfaces "Interfaces (partial blocks) of Controller library"
-    extends Modelica.Icons.Package;
+  extends Modelica.Icons.BasesPackage;
+
+
+
+
+
+
 
 
     annotation (

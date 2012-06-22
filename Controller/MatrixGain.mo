@@ -2,8 +2,9 @@ within Modelica_LinearSystems2.Controller;
 block MatrixGain
   "Output the product of a gain matrix with the input signal vector. The matrix can be loaded from a file optionally"
 
-  extends Modelica.Blocks.Interfaces.MIMO(final nin=size(K2, 2), final nout=
-        size(K2, 1));
+  extends Modelica.Blocks.Interfaces.MIMO(
+    final nin=size(K2, 2),
+    final nout=size(K2, 1));
   extends Modelica_LinearSystems2.Controller.Icons.PartialBlockDiscrete;
 
   parameter Boolean matrixOnFile=false

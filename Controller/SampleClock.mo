@@ -38,13 +38,8 @@ drag Modelica_LinearSystems2.Controller.SampleClock into the top level of your m
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
           fillColor={255,255,255}),
-        Ellipse(
-          extent={{45,-10},{25,10}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Line(points={{-100,0},{-45,0}}, color={0,0,0}),
-        Line(points={{45,0},{100,0}}, color={0,0,0}),
+        Line(points={{-100,0},{-36,0}}, color={0,0,0}),
+        Line(points={{36,0},{100,0}}, color={0,0,0}),
         Line(points={{-35,0},{30,35}}, color={0,0,0}),
         Text(
           extent={{-150,-110},{150,-140}},
@@ -70,7 +65,12 @@ drag Modelica_LinearSystems2.Controller.SampleClock into the top level of your m
           lineColor={0,0,255},
           fillColor={169,199,255},
           fillPattern=FillPattern.Solid,
-          textString="%name")}),
+          textString="%name"),
+        Ellipse(
+          extent={{45,-10},{25,10}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}),
     Diagram,
     Documentation(info="<HTML>
 <p>

@@ -10,7 +10,7 @@ model Add
   Modelica.Blocks.Interfaces.RealOutput y
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
 equation
-y = u1+u2;
+  y = u1+u2;
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
             -100},{100,100}}), graphics), Icon(coordinateSystem(
           preserveAspectRatio=true, extent={{-100,-100},{100,100}}), graphics={

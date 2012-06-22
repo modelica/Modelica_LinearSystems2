@@ -23,7 +23,7 @@ partial model SimpleStateSpaceControl
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
 equation
   connect(feedback.y, plant.u) annotation (Line(
-      points={{19,0},{82,0}},
+      points={{19,0},{78,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(feedbackMatrix.u, samplerOut.y) annotation (Line(
