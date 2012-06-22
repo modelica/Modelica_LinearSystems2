@@ -42,7 +42,7 @@ initial equation
       extent=[-100, -100; 100, 100],
       grid=[2, 2],
       component=[20, 20]),
-    Icon,
+    Icon(graphics),
     Window(
       x=0.37,
       y=0.09,

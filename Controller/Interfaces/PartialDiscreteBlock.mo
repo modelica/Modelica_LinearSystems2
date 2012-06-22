@@ -20,6 +20,7 @@ protected
     "Actual number of base samples starting from the last sample time instant" annotation(Hide=true);
     Boolean sampleTrigger "Triggers next sample time" annotation(Hide=true);
   outer SampleClock sampleClock "Global options";
+
 initial equation
   pre(ticks) = 0;
 equation
@@ -27,4 +28,5 @@ equation
     ticks = if pre(ticks) < sampleFactor then pre(ticks) + 1 else 1;
   end when;
   sampleTrigger = sampleClock.sampleTrigger and ticks >= sampleFactor;
+  annotation (Icon(graphics));
 end PartialDiscreteBlock;
