@@ -1,0 +1,21 @@
+// Convert from Modelica_LinearSystems2 2.2 to Modelica_LinearSystems2 XXX
+
+// clear
+convertClear();
+
+
+// Change references to classes that are removed from Modelica_LinearSystems2 or are obsolete
+convertClass("Modelica_LinearSystems2.DiscreteTransferFunction.'*'.'dft*dft'",
+             "Modelica_LinearSystems2.DiscreteTransferFunction.'*'.'dtf*dtf'")
+convertClass("Modelica_LinearSystems2.DiscreteTransferFunction.'*'.'r*dft'",
+             "Modelica_LinearSystems2.DiscreteTransferFunction.'*'.'r*dtf'")
+convertClass("Modelica_LinearSystems2.DiscreteTransferFunction.'/'.'dft/dft'",
+             "Modelica_LinearSystems2.DiscreteTransferFunction.'/'.'dtf/dtf'")
+convertClass("Modelica_LinearSystems2.DiscreteTransferFunction.'/'.'r/dft'",
+             "Modelica_LinearSystems2.DiscreteTransferFunction.'/'.'r/dtf'")
+convertClass("Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon",
+             "Modelica_LinearSystems2.Controller.Icons.PartialBlockIcon")
+convertClass("Modelica_LinearSystems2.Internal.from_Hz",
+             "Modelica.SIunits.Conversions.from_Hz")
+convertClass("Modelica_LinearSystems2.Internal.to_Hz",
+             "Modelica.SIunits.Conversions.to_Hz")

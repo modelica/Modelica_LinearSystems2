@@ -31,7 +31,7 @@ record DiscreteTransferFunction
     extends Modelica.Icons.Package;
 
     encapsulated function fromReal
-      "Generate a DiscreteTransferFunction data record from a Real value"
+      "Generate a discrete transfer function data record from a Real value"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -53,7 +53,7 @@ record DiscreteTransferFunction
     end fromReal;
 
     encapsulated function fromZerosAndPoles
-      "Generate a discrete transfer function from a set of zeros and poles"
+      "Generate a discrete transfer function data record from a set of zeros and poles"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -92,39 +92,37 @@ record DiscreteTransferFunction
 </html>"));
     end fromZerosAndPoles;
 
-      encapsulated function fromArrays
-      "Generate a DiscreteTransferFunction data record from numerator and denominator array"
+    encapsulated function fromArrays
+      "Generate a discrete transfer function data record from numerator and denominator array"
       import Modelica;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2;
 
-           input Real n[:] "Coefficients of numerator polynomial";
-           input Real d[:] "Coefficients of denominator polynomial";
-           input Modelica.SIunits.Time Ts "Sample time";
-           input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
+      input Real n[:] "Coefficients of numerator polynomial";
+      input Real d[:] "Coefficients of denominator polynomial";
+      input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
         "Discretization method";
 
-           input String uName = "" "input name";
-           input String yName = "" "output name";
-
-           output DiscreteTransferFunction dtf(redeclare Real n[size(n, 1)], redeclare Real
-               d[                                                                             size(d, 1)])
+      input String uName = "" "Input name";
+      input String yName = "" "Output name";
+      output DiscreteTransferFunction dtf(redeclare Real n[size(n, 1)], redeclare Real d[size(d, 1)])
         "Transfer function";
 
-      algorithm
-                 //this is the constructor algorithm
-           assert(size(d, 1) > 0, "Input denominator d must have at least one element, however\n"
-              + "d is an empty vector");
-           dtf.n := n;
-           dtf.d := d;
-           dtf.Ts := Ts;
-           dtf.method := method;
-           dtf.uName := uName;
-           dtf.yName := yName;
-      end fromArrays;
+    algorithm
+      // This is the constructor algorithm
+      assert(size(d, 1) > 0, "Input denominator d must have at least one element, however\n"
+        + "d is an empty vector");
+      dtf.n := n;
+      dtf.d := d;
+      dtf.Ts := Ts;
+      dtf.method := method;
+      dtf.uName := uName;
+      dtf.yName := yName;
+    end fromArrays;
 
     function fromPolynomials
-      "Generate a DiscreteTransferFunction data record from a numerator and denominator polynomial"
+      "Generate a discrete transfer function data record from a numerator and denominator polynomial"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -144,7 +142,7 @@ record DiscreteTransferFunction
     end fromPolynomials;
 
     function fromTransferFunction
-      "Generate a DiscreteTransferFunction data record from a continuous Transfer function"
+      "Generate a discrete transfer function data record from a continuous Transfer function"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -174,38 +172,81 @@ record DiscreteTransferFunction
   encapsulated operator '*'
     import Modelica;
     extends Modelica.Icons.Package;
-  function 'dft*dft' "Multiply two DiscreteTransferFunctions (dtf1 * dtf2)"
+
+    function 'dtf*dtf' "Multiply two discrete transfer functions (dtf1 * dtf2)"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-    input DiscreteTransferFunction dtf1 "Transfer function system 1";
-    input DiscreteTransferFunction dtf2 "Transfer function system 1";
-    output DiscreteTransferFunction result;
+      input DiscreteTransferFunction dtf1 "Transfer function system 1";
+      input DiscreteTransferFunction dtf2 "Transfer function system 1";
+      output DiscreteTransferFunction result;
 
-  algorithm
-    assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"+\".");
-    result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.n),Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
-  end 'dft*dft';
+    algorithm
+      assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"+\".");
+      result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.n),Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
+    end 'dtf*dtf';
 
-  function 'r*dft'
+    function 'r*dtf'
       "Multiply a real number with a DiscreteTransferFunctions (r * dtf2)"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-    input Real r "Real number";
-    input DiscreteTransferFunction dtf "Transfer function system 1";
-    output DiscreteTransferFunction result=dtf;
+      input Real r "Real number";
+      input DiscreteTransferFunction dtf "Transfer function system 1";
+      output DiscreteTransferFunction result=dtf;
 
-  algorithm
-    result.n := r*dtf.n;
-  end 'r*dft';
+    algorithm
+      result.n := r*dtf.n;
+    end 'r*dtf';
+
+    function 'dft*dft'
+      "Obsolete function: Multiply two discrete transfer functions (dtf1 * dtf2)"
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      extends Modelica.Icons.Function;
+      extends Modelica.Icons.ObsoleteModel;
+
+      input DiscreteTransferFunction dtf1 "Transfer function system 1";
+      input DiscreteTransferFunction dtf2 "Transfer function system 1";
+      output DiscreteTransferFunction result;
+
+    algorithm
+      assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"+\".");
+      result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.n),Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
+
+      annotation (Documentation(info="<html>
+<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'*'.'dtf*dtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;*&apos;.&apos;dtf*dtf&apos;</a> instead.</p>
+</html>"));
+    end 'dft*dft';
+
+    function 'r*dft'
+      "Obsolete function: Multiply a real number with a DiscreteTransferFunctions (r * dtf2)"
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      extends Modelica.Icons.Function;
+      extends Modelica.Icons.ObsoleteModel;
+
+      input Real r "Real number";
+      input DiscreteTransferFunction dtf "Transfer function system 1";
+      output DiscreteTransferFunction result=dtf;
+
+    algorithm
+      result.n := r*dtf.n;
+
+      annotation (Documentation(info="<html>
+<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'*'.'r*dtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;*&apos;.&apos;r*dtf&apos;</a> instead.</p>
+</html>"));
+    end 'r*dft';
   end '*';
 
- encapsulated operator '-'
+  encapsulated operator '-'
     import Modelica;
-   extends Modelica.Icons.Package;
+    extends Modelica.Icons.Package;
+
     function subtract "Subtract two discrete transfer functions (dtf1 - dtf2)"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
@@ -235,40 +276,81 @@ record DiscreteTransferFunction
       output DiscreteTransferFunction result(n=-dtf.n, d=dtf.d, Ts=dtf.Ts, method=dtf.method) "= -dtf";
     algorithm
     end negate;
- end '-';
+  end '-';
 
   encapsulated operator '/'
     import Modelica;
     extends Modelica.Icons.Package;
-  encapsulated operator function 'dft/dft'
+
+    encapsulated operator function 'dtf/dtf'
       "Divide two discrete transfer functions (dtf1 / dtf2)"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-     input DiscreteTransferFunction dtf1 "Transfer function system 1";
-     input DiscreteTransferFunction dtf2 "Transfer function system 2";
-     output DiscreteTransferFunction result;
+      input DiscreteTransferFunction dtf1 "Transfer function system 1";
+      input DiscreteTransferFunction dtf2 "Transfer function system 2";
+      output DiscreteTransferFunction result;
 
-  algorithm
-    assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"/\".");
-    result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.d),Polynomial(dtf1.d)*
-      Polynomial(dtf2.n),Ts=dtf1.Ts, method=dtf1.method);
-  end 'dft/dft';
+    algorithm
+      assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"/\".");
+      result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.d),Polynomial(dtf1.d)*
+        Polynomial(dtf2.n),Ts=dtf1.Ts, method=dtf1.method);
+    end 'dtf/dtf';
 
-  function 'r/dft'
+    function 'r/dtf'
       "Divide a real number by  discrete transfer functions (r / dtf2)"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-     input Real r "Real number";
-     input DiscreteTransferFunction dtf "Transfer function system";
-     output DiscreteTransferFunction result;
+      input Real r "Real number";
+      input DiscreteTransferFunction dtf "Transfer function system";
+      output DiscreteTransferFunction result;
 
-  algorithm
-    result := DiscreteTransferFunction(r*dtf.d,dtf.n,Ts=dtf.Ts, method=dtf.method);
-  end 'r/dft';
+    algorithm
+      result := DiscreteTransferFunction(r*dtf.d,dtf.n,Ts=dtf.Ts, method=dtf.method);
+    end 'r/dtf';
+
+    encapsulated operator function 'dft/dft'
+      "Obsolete function: Divide two discrete transfer functions (dtf1 / dtf2)"
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      extends Modelica.Icons.Function;
+      extends Modelica.Icons.ObsoleteModel;
+
+      input DiscreteTransferFunction dtf1 "Transfer function system 1";
+      input DiscreteTransferFunction dtf2 "Transfer function system 2";
+      output DiscreteTransferFunction result;
+
+    algorithm
+      assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"/\".");
+      result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.d),Polynomial(dtf1.d)*
+        Polynomial(dtf2.n),Ts=dtf1.Ts, method=dtf1.method);
+      annotation (Documentation(info="<html>
+<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'/'.'dtf/dtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;/&apos;.&apos;dtf/dtf&apos;</a> instead.</p>
+</html>"));
+    end 'dft/dft';
+
+    function 'r/dft'
+      "Obsolete function: Divide a real number by  discrete transfer functions (r / dtf2)"
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      extends Modelica.Icons.Function;
+      extends Modelica.Icons.ObsoleteModel;
+
+      input Real r "Real number";
+      input DiscreteTransferFunction dtf "Transfer function system";
+      output DiscreteTransferFunction result;
+
+    algorithm
+      result := DiscreteTransferFunction(r*dtf.d,dtf.n,Ts=dtf.Ts, method=dtf.method);
+      annotation (Documentation(info="<html>
+<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'/'.'r/dtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;/&apos;.&apos;r/dtf&apos;</a> instead.</p>
+</html>"));
+    end 'r/dft';
   end '/';
 
   encapsulated operator '+'

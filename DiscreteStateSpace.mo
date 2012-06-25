@@ -26,36 +26,40 @@ record DiscreteStateSpace
     import Modelica_LinearSystems2;
     import Modelica;
     extends Modelica.Icons.Package;
-  function fromDiscreteTransferFunction =
-      Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
-                                                                                             annotation (Documentation(info="<html> </html>"));
-  function fromDiscreteZerosAndPoles =
-        Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace
-                                                                                                          annotation (Documentation(info="<html> </html>"));
 
-     encapsulated function fromReal
-      "Generate a StateSpace data record from a Real value"
+    function fromDiscreteTransferFunction =
+      Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
+      "Generate a discrete state space system data record from a discrete transfer function"
+    annotation (Documentation(info="<html> </html>"));
+
+    function fromDiscreteZerosAndPoles =
+      Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace
+      "Generate a discrete state space system data record from a discrete zeros-and-poles description"
+    annotation (Documentation(info="<html> </html>"));
+
+    encapsulated function fromReal
+      "Generate a discrete state space system data record from a real value"
 
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
-        input Real r "Value of Real variable";
-        input Modelica.SIunits.Time Ts=1 "Sample time";
-        input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
+      input Real r "Value of Real variable";
+      input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
         "Discretization method";
-        output DiscreteStateSpace dss(
-      redeclare Real A[0,0],
-      redeclare Real B[0,1],
-      redeclare Real B2[0,1],
-      redeclare Real C[1,0],
-      redeclare Real D[1,1]) "= r";
+      output DiscreteStateSpace dss(
+        redeclare Real A[0,0],
+        redeclare Real B[0,1],
+        redeclare Real B2[0,1],
+        redeclare Real C[1,0],
+        redeclare Real D[1,1]) "= r";
 
-     algorithm
-        dss.D[1, 1] := r;
-        dss.Ts := Ts;
-        dss.method := method;
-        annotation (overloadsConstructor=true, Documentation(info=
+    algorithm
+      dss.D[1, 1] := r;
+      dss.Ts := Ts;
+      dss.method := method;
+      annotation (overloadsConstructor=true, Documentation(info=
                                                               "<html>
 <h4>Syntax</h4>
 <table>
@@ -91,9 +95,10 @@ respectively.
  
  
 </html>"));
-     end fromReal;
+    end fromReal;
 
-    function fromMatrices "Default constructor for a DiscreteStateSpace record"
+    function fromMatrices
+      "Generate a discrete state space system data record from A, B, C and D matrices"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
@@ -187,7 +192,7 @@ public
     end fromMatrices;
 
     function fromStateSpace
-      "Transform a continuous state space system into a discrete linear state space system"
+      "Generate a discrete state space system data record from a continuous state space system "
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Types.Method;
@@ -396,7 +401,7 @@ public
     end fromStateSpace;
 
     encapsulated function fromMatrices2
-      "Constructs a discrete linear state space system from the matrices of a continuous state space system"
+      "Generate a discrete state space system data record from matrices of a continuous state space system"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Types.Method;

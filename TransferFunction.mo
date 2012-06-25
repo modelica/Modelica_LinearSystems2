@@ -139,6 +139,8 @@ follow each other as above. An error occurs if this is not the case.
   end 'constructor';
 
   encapsulated operator '-'
+    "Collection of operators for subtraction of transfer functions"
+
     import Modelica;
     extends Modelica.Icons.Package;
     function subtract "Subtract two transfer functions (tf1 - tf2)"
@@ -306,6 +308,8 @@ Generate the complex Laplace variable as a TransferFunction. It can be used for 
   end s;
 
   encapsulated package Analysis
+    "Collection of functions to analyse a transfer function"
+
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.StateSpace;

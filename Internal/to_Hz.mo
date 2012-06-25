@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Internal;
-function to_Hz "Convert from rad/s to Hz"
+function to_Hz "Obsolete class: Convert from rad/s to Hz"
   extends Modelica.SIunits.Conversions.ConversionIcon;
+  extends Modelica.Icons.ObsoleteModel;
+
   input Modelica.SIunits.AngularVelocity w "angular velocity";
   output Modelica.SIunits.Frequency f "frequency";
 algorithm
@@ -11,5 +13,7 @@ algorithm
           textString="K"), Text(
           extent={{100,-20},{20,-100}},
           lineColor={0,0,0},
-          textString="°C")}));
+          textString="°C")}), Documentation(info="<html>
+<p>This model is obsolete. Use <a href=\"Modelica://Modelica.SIunits.Conversions.to_Hz\">Modelica.SIunits.Conversions.to_Hz</a> instead.</p>
+</html>"));
 end to_Hz;

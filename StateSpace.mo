@@ -21,7 +21,7 @@ encapsulated operator 'constructor'
   import Modelica_LinearSystems2;
 
   function fromABCDMatrices
-      "Generate a StateSpace data record from a A, B, C and D matrices"
+      "Generate a StateSpace data record from A, B, C and D matrices"
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.StateSpace;

@@ -1249,12 +1249,12 @@ See also <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Anal
   end numeratorDegree;
 
   encapsulated function evaluate
-      "Evaluate a DiscreteZerosAndPoles transfer function at a given value of q"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
-      import Modelica_LinearSystems2.Math.Complex;
+    "Evaluate a DiscreteZerosAndPoles transfer function at a given value of q"
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+    import Modelica_LinearSystems2.Math.Complex;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles transfer function of a system";
@@ -2558,6 +2558,7 @@ second column respectively. The variable k is the real gain in both cases.
     end scaleFactor2;
 
   function findMatrixName
+    "Find out whether matrix matName exists in file filename"
     input String filename;
     input String matName="z";
 
