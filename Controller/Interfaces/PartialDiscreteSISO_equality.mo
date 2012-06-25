@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Controller.Interfaces;
 partial block PartialDiscreteSISO_equality
   "Common discrete part of blocks extending from PartialSISO_equality"
-  extends Modelica_LinearSystems2.Controller.Icons.PartialBlockDiscrete;
+  extends Controller.Icons.PartialBlockIcon(cont=false);
 
   parameter Integer sampleFactor(min=1)=1
     "Sample factor (Ts = sampleFactor * sampleClock.sampleTime)";

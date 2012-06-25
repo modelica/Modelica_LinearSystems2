@@ -1,8 +1,8 @@
 within Modelica_LinearSystems2.Controller.Interfaces;
 partial block PartialDiscreteBlock
   "Partial discrete block, i.e. no continuous alternative"
+  extends Controller.Icons.PartialBlockIcon(cont=false);
 
-  extends Icons.PartialBlockIcon(cont=false);
   parameter Types.InitWithGlobalDefault initType=Types.InitWithGlobalDefault.UseSampleClockOption
     "Type of initialization (no init/initial/steady state/output)"
     annotation(Evaluate=true, Hide=true,  Dialog(tab="Advanced options"));

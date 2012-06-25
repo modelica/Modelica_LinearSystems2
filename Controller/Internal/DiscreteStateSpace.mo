@@ -1,11 +1,10 @@
 within Modelica_LinearSystems2.Controller.Internal;
 model DiscreteStateSpace
   "Discrete linear time invariant state space system block parameterized with a continuous state space system"
+  extends Controller.Icons.PartialBlockIcon(cont=false);
 
   import Modelica_LinearSystems2.Controller.Types;
   import Modelica.Math.Matrices;
-
-  extends Modelica_LinearSystems2.Controller.Icons.PartialBlockDiscrete;
 
   parameter Modelica_LinearSystems2.StateSpace system(
     A=fill(0, 0, 0),

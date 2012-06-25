@@ -5,7 +5,7 @@ block MatrixGain
   extends Modelica.Blocks.Interfaces.MIMO(
     final nin=size(K2, 2),
     final nout=size(K2, 1));
-  extends Modelica_LinearSystems2.Controller.Icons.PartialBlockDiscrete;
+  extends Controller.Icons.PartialBlockIcon(cont=false);
 
   parameter Boolean matrixOnFile=false
     "True, if matrix should be read from file";

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Controller.Internal;
 block DiscreteNoise "Uniform distributed noise for discrete blocks"
-  extends Modelica_LinearSystems2.Controller.Icons.PartialBlockDiscrete;
+  extends Controller.Icons.PartialBlockIcon(cont=false);
 
   parameter Real y_min "Lower limit of noise band";
   parameter Real y_max "Upper limit of noise band";
