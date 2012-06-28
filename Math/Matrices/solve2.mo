@@ -13,7 +13,7 @@ algorithm
   if size(A, 1) > 0 then
     (X,info) := Modelica.Math.Matrices.LAPACK.dgesv(A, B);
     assert(info == 0, "Solving a linear system of equations with function
-\"Matrices.solve2\" is not possible, because the system has either 
+\"Matrices.solve2\" is not possible, because the system has either
 no or infinitely many solutions (A is singular).");
   else
     X := fill(
@@ -46,7 +46,7 @@ i.e., by Gaussian elemination with partial pivoting.
 </p>
 <h4>Example</h4>
 <blockquote><pre>
-  Real A[3,3] = [1,2,3; 
+  Real A[3,3] = [1,2,3;
                  3,4,5;
                  2,1,4];
   Real B[3,2] = [10, 20;
@@ -59,7 +59,7 @@ i.e., by Gaussian elemination with partial pivoting.
                                         2, 4;
                                         1, 2] */
 </pre></blockquote>
- 
+
 <h4>See also</h4>
 <a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
 <a href=\"modelica://Modelica.Math.Matrices.LU_solve2\">Matrices.LU_solve2</a>

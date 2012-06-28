@@ -33,7 +33,7 @@ external "Fortran 77" dlsei(W_out, size(W, 1), n_E, n_A, n_G, n_x, options, x,
     Library="dlsei",
     Documentation(info="<HTML>
 <p>
-This function solves a least squares problem with 
+This function solves a least squares problem with
 linear equality and linear inequality constraints.
 The problem to be solved is mathematically formulated as:
 </p>
@@ -54,7 +54,7 @@ Remarks:
      generalized inverse solution is computed such that the
      residual vector length <b>f</b>-<b>E</b>*<b>x</b> is
      minimized.</li>
-<li> The number of rows of matrices <b>A</b>, <b>E</b>, and/or <b>G</b> 
+<li> The number of rows of matrices <b>A</b>, <b>E</b>, and/or <b>G</b>
      are arbitrary.
      Especially, these matrices may have zero rows.</li>
 </ul>
@@ -72,9 +72,9 @@ With output argument <b>mode</b> the type of solution is
 characterized:
 </p>
 <pre>
-  mode = 0: A solution has been computed. Both equality and 
+  mode = 0: A solution has been computed. Both equality and
             inequality constraints are compatible and have been satisfied.
-       = 1: A solution has been computed. Equality constraints are 
+       = 1: A solution has been computed. Equality constraints are
             contradictory. A generalized inverse solution of E*x=f was used
             to minimize the residual vector length f-E*x.
             In this sense, the solution is still meaningful.

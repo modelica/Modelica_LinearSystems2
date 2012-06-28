@@ -25,7 +25,7 @@ algorithm
       result := max(result, sum(abs(A[i, :])));
     end for;
   else
-    assert(false, "Optional argument \"p\" of function \"norm\" must be 
+    assert(false, "Optional argument \"p\" of function \"norm\" must be
 1, 2 or Modelica.Constants.inf");
   end if;
   annotation (Documentation(info="<HTML>
@@ -42,7 +42,7 @@ The function call \"<code>Matrices.norm(A, p)</code>\" returns the
 p-norm of matrix A. The only allowed values for p are</p>
 <ul>
 <li> \"p=1\": the largest column sum of A</li>
-<li> \"p=2\": the largest singular value of A</li> 
+<li> \"p=2\": the largest singular value of A</li>
 <li> \"p=Modelica.Constants.inf\": the largest row sum of A</li>
 </ul>
 <p>

@@ -76,8 +76,8 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
- 
- 
+
+
 Function <b>laypunov</b> computes the solution <b>X</b> of the continuous-time Lyapunov equation
 <blockquote><pre>
  <b>X</b><b>A</b> + <b>A</b>'*<b>X</b> = <b>C</b>.

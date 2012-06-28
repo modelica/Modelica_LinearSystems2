@@ -62,7 +62,7 @@ algorithm
 
   ok := true;
   annotation (interactive=true, Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isObservable</b> which is 
+This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isObservable</b> which is
 to check whether a system is observable or not.
 </html>"));
 end analysisObservability;

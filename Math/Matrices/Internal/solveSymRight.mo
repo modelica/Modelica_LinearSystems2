@@ -40,7 +40,7 @@ where matrix <b>A</b> with symmetric positiv definite matrix. The calculation is
 Due to symmetrie, Matrix <b>A</b> is uniquely defined by a triangle, i.e. the upper or the lower triangular matrix. It is assumed, that the input to describe <b>A</b> is either a Cholesky factor or
 part of matrix <b>A</b> itself. This is defined by the user with the boolean inputs <i>isCholesky</i> and <i>upper</i> which is true when <b>A</b> is already Cholesky factor and when <b>A</b> is upper triangular respectively.
 </p>
-Considering the Cholesky decomposition 
+Considering the Cholesky decomposition
 <blockquote><pre>
          T
   <b>A</b> = <b>L</b>*<b>L</b>

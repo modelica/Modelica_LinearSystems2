@@ -29,14 +29,14 @@ protected
 algorithm
   /* - Real zero:
        tan(phi_desired) = w/|re| -> w = |re|*tan(phi_desired)
-  
+
      - Conjugate complex zero:
        tan(phi1) = (w + im)/|re|
        tan(phi2) = (w - im)/|re|
-       phi1 + phi2 = phi_desired -> 
+       phi1 + phi2 = phi_desired ->
           tan(phi1 + phi2) = (tan(phi1) + tan(phi2))/(1-tan(phi1)*tan(phi2))
                            = ((w + im)/re + (w - im)/re) / ( 1 - (w+im)/re*(w-im)/re )
-                           = 2*w/re / (re^2 - (w^2 - im^2))/re^2 
+                           = 2*w/re / (re^2 - (w^2 - im^2))/re^2
                            = 2*w*re / (re^2 - w^2 + im^2)
           tan(phi_desired)*(re^2 + im^2 - w^2) = 2*w*re
           tan(phi_desired)*w^2 + 2*w*re - tan(phi_desired)*(re^2 + im^2) = 0
@@ -89,7 +89,7 @@ algorithm
 <p>
 This function estimates a useful frequency range for the
 Bode plot of a vector of zeros (numerator or denominator zeros).
-This frequency range is estimated such that the phase angle 
+This frequency range is estimated such that the phase angle
 of <b>one</b> zero is in the range:
 <p>
 <pre>
@@ -109,9 +109,9 @@ such that the essential part of the phase angle (defined by phi_min)
 is present.
 </p>
 <p>
-If the real part of a complex zero vanishes 
-(i.e., the zero is located on the imaginary axis), 
-the maximum value of the bode plot magnitude of the zero 
+If the real part of a complex zero vanishes
+(i.e., the zero is located on the imaginary axis),
+the maximum value of the bode plot magnitude of the zero
 is infinity. In order to avoid difficulties, zeros close to
 the imaginary axis are shifted by the input argument
 real_min along the real axis.

@@ -70,7 +70,7 @@ nRealEigenvalues:=numberOfRealZeros(complexVector);
 <h4>Syntax</h4>
 <blockquote><pre>
                reorderedZero = Matrices.<b>reorderZeros</b>(complexVector);
-(reorderedZeros, nRealZeros) = Matrices.<b>reorderZeros</b>(complexVector, 
+(reorderedZeros, nRealZeros) = Matrices.<b>reorderZeros</b>(complexVector,
                                                      name=\"complexVector\");
 </pre></blockquote>
 <h4>Description</h4>
@@ -79,10 +79,10 @@ Function <b>reorderZeros</b>(..) reorders the zeros from the
 Complex vector \"complexVector\" such that the returned Complex vector
 reorderedZeros contains first all real Zeros and afterwards the conjugate
 complex zero pairs. It is required that all elements
-of complexVector define either a real zero (complexVector[i].im=0) 
+of complexVector define either a real zero (complexVector[i].im=0)
 or a conjugate complex zero pair
 (complexVector[i].re == complexVector[i+1].re and
-complexVector[i].im == -complexVector[i+1].im). 
+complexVector[i].im == -complexVector[i+1].im).
 The optional input argument
 \"name\" is used as name of \"complexVector\" in error messages.
 </p>
@@ -91,14 +91,14 @@ The function returns the vector element reordered, as well as
 the number of real zeros (nRealZeros).
 <h4>Example</h4>
 <blockquote><pre>
-    
+
   // c = {0; 1+2j; 1-2j; 2; -3; -1-j; -1+j};
     Real complexZeros[:] = fill(Complex(0), integer((size(c,1)-n)/2));
   algorithm
   (reorderedZeros, nRealZeros) := reorderZeros(c);
       -> reorderedZeros = {0, 2, (-3), 1+2j, 1-2j, -1+j, -1-j}
          nRealZeros     = 3
- 
+
 </pre></blockquote>
 </HTML>"));
 end reorderEigenvalue;

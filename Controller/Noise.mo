@@ -109,7 +109,7 @@ noise signal is shown in the next figure:
 <p>
 The Integer[3] parameter vector <b>firstSeed</b> is used to initialize the
 basic random number generator. The 3 elements of firstSeed need
-to be in the range [0, 255]. The use of the same seed vector 
+to be in the range [0, 255]. The use of the same seed vector
 will lead to the same sequence of numbers when these are computed serially.
 This is usually not desired. Therefore, for every usage of block
 <b>Noise</b> a different firstSeed should be defined.
@@ -125,13 +125,13 @@ maximum step size of the integrator.<br>&nbsp;
 </p>
 <p>
 This noise generator is based on a function that generates
-a random real number uniformely in the semi-open range [0.0, 1.0). 
-The function uses the standard Wichmann-Hill generator, 
-combining three pure multiplicative congruential generators of 
-modulus 30269, 30307 and 30323. Its period (how many numbers it 
-generates before repeating the sequence exactly) is 6,953,607,871,644. 
-While of much higher quality than the rand() function supplied by 
-most C libraries, the theoretical properties are much the same 
+a random real number uniformely in the semi-open range [0.0, 1.0).
+The function uses the standard Wichmann-Hill generator,
+combining three pure multiplicative congruential generators of
+modulus 30269, 30307 and 30323. Its period (how many numbers it
+generates before repeating the sequence exactly) is 6,953,607,871,644.
+While of much higher quality than the rand() function supplied by
+most C libraries, the theoretical properties are much the same
 as for a single linear congruential generator of large modulus.
 </p>
 </html>"));

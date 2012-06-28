@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Math.Matrices;
-package LAPACK 
+package LAPACK
   extends Modelica.Icons.Package;
 
 end LAPACK;

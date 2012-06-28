@@ -18,25 +18,25 @@ function wrapper_zgetri
   #include<f2c.h>
 extern  int zgetri_(integer *, doublecomplex *, integer *, integer *, doublecomplex *, integer *, integer *);
 
-int c_inter_zgetri_(integer *n, doublereal *a_real, doublereal *a_imag, integer *lda, integer *pivots,  integer *info) 
+int c_inter_zgetri_(integer *n, doublereal *a_real, doublereal *a_imag, integer *lda, integer *pivots,  integer *info)
 {
    doublecomplex *a;
    doublecomplex *work;
-     
+
   integer nn=*n;
   integer mm=*lda;
   integer lwork=-1;
   integer i;
-  
-   a = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));      
-        
+
+   a = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));
+
    for(i=0;i<nn*mm;i++)
    {
      a[i].r=a_real[i];
      a[i].i=a_imag[i];
    }
-   
-   
+
+
    work = (doublecomplex *) malloc((nn+1)*sizeof(doublecomplex));
    zgetri_(n, a, lda, pivots, work, &lwork, info);
    lwork=(int)(work[0].r);
@@ -48,7 +48,7 @@ int c_inter_zgetri_(integer *n, doublereal *a_real, doublereal *a_imag, integer 
      a_real[i]=a[i].r;
      a_imag[i]=a[i].i;
    }
-   
+
    free(a);
    free(work);
   return 0;

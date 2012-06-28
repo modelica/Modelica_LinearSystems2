@@ -4,7 +4,7 @@ package Icons "Icons used in the Linear Systems library"
 
 annotation (Documentation(info="<html>
 <p>
-  Package contains Icons used in the Linear Systems library. 
+  Package contains Icons used in the Linear Systems library.
 </p>
 <h1>Graphical display of function maturity</h1>
 <p>
@@ -21,9 +21,9 @@ Additionally following icons are provided that can be combined with the former o
 </p>
 <ul>
 <li>DeprecatedFunction - Deprecated functions that should not be used any more</li>
-<li>FineDocumentationFunction - Functions which pretty well documented. 
+<li>FineDocumentationFunction - Functions which pretty well documented.
 As soon as there are more documented than non-documented function, this Icon may be replaced by a BadDocumentationFunction-Icon.</li>
 </ul>
- 
+
   </html>"));
 end Icons;

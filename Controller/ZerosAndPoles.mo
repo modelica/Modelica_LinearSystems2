@@ -48,7 +48,7 @@ parameter Boolean withDelay=false;
 
 initial equation
   /* Compute scaling factor for every block in order that the gain of the block is 1.
-     The for blocks and the if-blocks have the same structure as in the 
+     The for blocks and the if-blocks have the same structure as in the
      equation part below
   */
    for i in 1:max(n_den2, n_num2) loop
@@ -244,7 +244,7 @@ The ZerosAndPoles transfer function is defined as:
          product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
 </pre>
 <p>
-This is treated as a series connection of first and second order 
+This is treated as a series connection of first and second order
 systems. If size(n1) == size(d1) and size(n2) == size(d2)
 this gives the following sequence of operations:
 </p>
@@ -270,17 +270,17 @@ Based on this representation, evrey block with transfer function G(s) could be t
 <pre>  G(s) = k * F(s)
 </pre>
 <p>
-with F(s) has unit gain. This leads to representations of the forms 
+with F(s) has unit gain. This leads to representations of the forms
 </p>
-<pre>           a2 + a1*s + s^2       a2      b2 + a1*b2/a2*s + b2/a2*s^2         
+<pre>           a2 + a1*s + s^2       a2      b2 + a1*b2/a2*s + b2/a2*s^2
   G(s) = -------------------- = ---- * ------------------------------ = k * F(s),  k = a2/b2  (1)
-           b2 + b1*s + s^2       b2           b2 + b1*s + s^2                 
+           b2 + b1*s + s^2       b2           b2 + b1*s + s^2
 &nbsp;
-for second order systems and 
+for second order systems and
 &nbsp;
-           a + s     a     b + b/a*s       
+           a + s     a     b + b/a*s
   G(s) = -------- = --- * ---------- = k * F(s),   k = a/b
-           b + s     b      b + s           
+           b + s     b      b + s
 </pre>
 <p>
 for first order systems respectively.
@@ -302,7 +302,7 @@ and the corresponding state space systems can appear
 &nbsp;
 (2)
              s + a                 der(x1) = x2
-    y = ---------------- * u  -->  der(x2) = -b2*x1 - b1*x2 + b2*u 
+    y = ---------------- * u  -->  der(x2) = -b2*x1 - b1*x2 + b2*u
         b2 + b1*s + s^2                  y = k*(a1/b2*x1 +x2/b2),  c = b2/a
 &nbsp;
 (3)
@@ -316,7 +316,7 @@ and the corresponding state space systems can appear
        b + s
 &nbsp;
 (5)
-         1                 
+         1
    y = ----- * u             -->   der(x) = -b*x + b*u
        b + s                            y = x,  c = b
 </pre>
@@ -326,7 +326,7 @@ do not match, the small systems are built in the
 following way:
 </p>
 <pre>(1) Build systems of form (1) by combining
-    - 1 d2 and 1 n2 
+    - 1 d2 and 1 n2
       (= 1 second order denominator and 1 second order numerator) or
     - 1 d2 and 2 n1 or
     - 2 d1 and 1 n2
@@ -336,14 +336,14 @@ following way:
     - 1 d2
 (4) Build systems of form (4) by combining
     - 1 d1 and 1 n1
-(5) Build systems of form (5) by 
-    - 1 d1 
+(5) Build systems of form (5) by
+    - 1 d1
 </pre>
 <p>
-The numeric properties of the resulting state space system 
-depends on which first and second order polynomials are 
+The numeric properties of the resulting state space system
+depends on which first and second order polynomials are
 combined and connected together. From a numerical point of view, it
-would therefore be useful to combine the polynomials 
+would therefore be useful to combine the polynomials
 based on the numeric values of the polynomial coefficients,
 (e.g., in a first step the polynomials could be sorted
 according to their cut-off frequency).
@@ -361,13 +361,13 @@ If, on the other hand, the structure of the state
 space system depends only on dimension information
 of the n1,n2,d1,d2 arrays, then the polynomial coefficients
 can be changed without a new translation of the model.
-This is the major reason why the structure of the 
+This is the major reason why the structure of the
 state space system in the implementation of this block
 is based only on dimension information.
 </p>
 <p>
 This is, e.g., not critical for the provided filters:
-The dimension of the n1,n2,d1,d2 arrays depend for 
+The dimension of the n1,n2,d1,d2 arrays depend for
 filters only on the filter characteristics
 (Bessel, Butterworth etc.), the filter type (low pass,
 high pass etc.) and on the filter order. If any
@@ -431,6 +431,6 @@ Differentiating y symbolically leads to:
 Therefore, in this case, the derivative of u is not
 needed and the tool can continue with the symbolic
 processing.
-</p> 
+</p>
 </html>"));
 end ZerosAndPoles;

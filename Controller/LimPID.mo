@@ -277,7 +277,7 @@ equation
           textString="%sampleFactor")}),
     Documentation(info="<HTML>
 <p>
-Via parameter <b>controllerType</b> either <b>P</b>, <b>PI</b>, <b>PD</b>, 
+Via parameter <b>controllerType</b> either <b>P</b>, <b>PI</b>, <b>PD</b>,
 or <b>PID</b> can be selected. If, e.g., PI is selected, all components belonging to the
 D-part are removed from the block (via conditional declarations).
 The example model
@@ -286,7 +286,7 @@ demonstrates the usage of this controller.
 Several practical aspects of PID controller design are incorporated
 according to chapter 3 of the book:
 </p>
- 
+
 <dl>
 <dt>Astroem K.J., and Haegglund T.:</dt>
 <dd> <b>PID Controllers: Theory, Design, and Tuning</b>.
@@ -295,7 +295,7 @@ according to chapter 3 of the book:
      <a href=\"http://www.control.lth.se/publications/books/asthagg95.html\">http://www.control.lth.se/publications/books/asthagg95.html</a>
      </dd>
 </dl>
- 
+
 <p>
 Besides the additive <b>proportional, integral</b> and <b>derivative</b>
 part of this controller, the following features are present:
@@ -315,13 +315,13 @@ part of this controller, the following features are present:
      for the derivative part to zero, if steps may occur in the
      setpoint signal.</li>
 </ul>
- 
+
 <p>
 The parameters of the controller can be manually adjusted by performing
 simulations of the closed loop system (= controller + plant connected
 together) and using the following strategy:
 </p>
- 
+
 <ol>
 <li> Set very large limits, e.g., yMax = Modelica.Constants.inf</li>
 <li> Select a <b>P</b>-controller and manually enlarge parameter <b>k</b>
@@ -335,28 +335,28 @@ together) and using the following strategy:
      occur in the previous step, start with Ti=0.01 s.</li>
 <li> If you want to make the reaction of the control loop faster
      (but probably less robust against disturbances and measurement noise)
-     select a <b>PID</b>-Controller and manually adjust parameters 
+     select a <b>PID</b>-Controller and manually adjust parameters
      <b>k</b>, <b>Ti</b>, <b>Td</b> (time constant of derivative block).</li>
 <li> Set the limits yMax and yMin according to your specification.</li>
 <li> Perform simulations such that the output of the PID controller
-     goes in its limits. Tune <b>Ni</b> (Ni*Ti is the time constant of 
+     goes in its limits. Tune <b>Ni</b> (Ni*Ti is the time constant of
      the anti-windup compensation) such that the input to the limiter
      block (= limiter.u) goes quickly enough back to its limits.
      If Ni is decreased, this happens faster. If Ni=infinity, the
      anti-windup compensation is switched off and the controller works bad.</li>
 </ol>
- 
+
 <p>
 <b>Initialization</b>
 </p>
- 
+
 <p>
 This block can be initialized in different
 ways controlled by parameter <b>initType</b>. The possible
-values of initType are defined in 
+values of initType are defined in
 <a href=\"modelica://Modelica.Blocks.Types.InitPID\">Modelica.Blocks.Types.InitPID</a>.
-This type is identical to 
-<a href=\"modelica://Modelica.Blocks.Types.Init\">Types.Init</a>, 
+This type is identical to
+<a href=\"modelica://Modelica.Blocks.Types.Init\">Types.Init</a>,
 with the only exception that the additional option
 <b>DoNotUse_InitialIntegratorState</b> is added for
 backward compatibility reasons (= integrator is initialized with
@@ -364,51 +364,51 @@ InitialState whereas differential part is initialized with
 NoInit which was the initialization in version 2.2 of the Modelica
 standard library).
 </p>
- 
+
 <p>
 Based on the setting of initType, the integrator (I) and derivative (D)
 blocks inside the PID controller are initialized according to the following table:
 </p>
- 
+
 <table border=1 cellspacing=0 cellpadding=2>
   <tr><td valign=\"top\"><b>initType</b></td>
       <td valign=\"top\"><b>I.initType</b></td>
       <td valign=\"top\"><b>D.initType</b></td></tr>
- 
+
   <tr><td valign=\"top\"><b>NoInit</b></td>
       <td valign=\"top\">NoInit</td>
       <td valign=\"top\">NoInit</td></tr>
- 
+
   <tr><td valign=\"top\"><b>SteadyState</b></td>
       <td valign=\"top\">SteadyState</td>
       <td valign=\"top\">SteadyState</td></tr>
- 
+
   <tr><td valign=\"top\"><b>InitialState</b></td>
       <td valign=\"top\">InitialState</td>
       <td valign=\"top\">InitialState</td></tr>
- 
+
   <tr><td valign=\"top\"><b>InitialOutput</b><br>
           and initial equation: y = y_start</td>
       <td valign=\"top\">NoInit</td>
       <td valign=\"top\">SteadyState</td></tr>
- 
+
   <tr><td valign=\"top\"><b>DoNotUse_InitialIntegratorState</b></td>
       <td valign=\"top\">InitialState</td>
       <td valign=\"top\">NoInit</td></tr>
 </table>
- 
+
 <p>
 In many cases, the most useful initial condition is
 <b>SteadyState</b> because initial transients are then no longer
 present. If initType = InitPID.SteadyState, then in some
-cases difficulties might occur. The reason is the 
+cases difficulties might occur. The reason is the
 equation of the integrator:
 </p>
- 
+
 <pre>
    <b>der</b>(y) = k*u;
 </pre>
- 
+
 <p>
 The steady state equation \"der(x)=0\" leads to the condition that the input u to the
 integrator is zero. If the input u is already (directly or indirectly) defined
@@ -420,13 +420,13 @@ initialize it with zero. As sketched this is, however, not possible.
 The solution is to not initialize u_m or the variable that is used
 to compute u_m by an algebraic equation.
 </p>
- 
+
 <p>
 If parameter <b>limitAtInit</b> = <b>false</b>, the limits at the
-output of this controller block are removed from the initialization problem which 
+output of this controller block are removed from the initialization problem which
 leads to a much simpler equation system. After initialization has been
 performed, it is checked via an assert whether the output is in the
-defined limits. For backward compatibility reasons 
+defined limits. For backward compatibility reasons
 <b>limitAtInit</b> = <b>true</b>. In most cases it is best
 to use <b>limitAtInit</b> = <b>false</b>.
 </p>

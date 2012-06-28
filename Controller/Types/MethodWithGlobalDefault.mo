@@ -13,6 +13,6 @@ type MethodWithGlobalDefault = enumeration(
     UseSampleClockOption "Use method defined in sampleClock component")
   "Enumeration of discretization methods"
     annotation (Evaluate=true, Documentation(info="<html>
- 
+
 </html>"));
 

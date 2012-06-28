@@ -24,29 +24,29 @@ protected
   #include<f2c.h>
 extern  int zgerq2_(integer *, integer *, doublecomplex *, integer *, doublecomplex *, doublecomplex *, integer *);
 
-int c_inter_zgerq2_(integer *n, integer *m, doublereal *a_real, doublereal *a_imag, integer *lda, doublereal *tau_real, doublereal *tau_imag,  integer *info) 
+int c_inter_zgerq2_(integer *n, integer *m, doublereal *a_real, doublereal *a_imag, integer *lda, doublereal *tau_real, doublereal *tau_imag,  integer *info)
 {
    doublecomplex *a;
    doublecomplex *tau;
    doublecomplex *work;
-     
+
   integer nn=*n;
   integer mm=*m;
   integer mn=min(mm,nn);
   integer i;
-  
-   a = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));      
-   tau = (doublecomplex *) malloc((mn+1)*sizeof(doublecomplex));      
+
+   a = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));
+   tau = (doublecomplex *) malloc((mn+1)*sizeof(doublecomplex));
    work = (doublecomplex *) malloc((nn+1)*sizeof(doublecomplex));
-        
+
    for(i=0;i<nn*mm;i++)
    {
      a[i].r=a_real[i];
      a[i].i=a_imag[i];
    }
-   
+
    zgerq2_(n, m, a, lda, tau, work, info);
-  
+
    for(i=0;i<nn*mm;i++)
    {
      a_real[i]=a[i].r;
@@ -57,7 +57,7 @@ int c_inter_zgerq2_(integer *n, integer *m, doublereal *a_real, doublereal *a_im
      tau_real[i]=tau[i].r;
      tau_imag[i]=tau[i].i;
    }
-   
+
    free(a);
    free(tau);
    free(work);

@@ -61,6 +61,6 @@ This function plots a set of 2-dimensional curves in a diagram.
 For an overview, see the documentation of package
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot\">Modelica_LinearSystems2.Utilities.Plot</a>.
 </p>
- 
+
 </html>"));
 end diagram;

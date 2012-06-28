@@ -21,28 +21,28 @@ external"FORTRAN 77" c_inter_calcK(n, m, A, U0, Z, gamma_real, gamma_imag, X_rea
 
   annotation (Include="
   #include<f2c.h>
-  
-  
+
+
 extern int dgemm_(char *, char *, integer *, integer *, integer *, doublereal *, doublereal *, integer *, doublereal *, integer *, doublereal *, doublereal *, integer *);
 extern int zgemm_(char *, char *, integer *, integer *, integer *, doublecomplex *, doublecomplex *, integer *, doublecomplex *, integer *, doublecomplex *, doublecomplex *, integer *);
 extern  int zgesv_(integer *, integer *, doublecomplex *, integer *, integer *, doublecomplex *, integer *, integer *);
 
-int c_inter_calcK_(integer *n, integer *m, doublereal *a, doublereal *u0, doublereal *z, doublereal *gamma_real, doublereal *gamma_imag, doublereal *x_real, doublereal *x_imag, integer *nre, doublereal *k) 
+int c_inter_calcK_(integer *n, integer *m, doublereal *a, doublereal *u0, doublereal *z, doublereal *gamma_real, doublereal *gamma_imag, doublereal *x_real, doublereal *x_imag, integer *nre, doublereal *k)
 {
    static integer c1 = 1;
-   
+
    doublecomplex *gamma;
    doublecomplex *xh;
    doublecomplex *x2;
    doublereal *ma;
    doublereal *mp;
-   
+
    doublecomplex nc={0.0,0.0};
    doublecomplex ic={1.0,0.0};
    doublereal ndd=0.0;
    doublereal idd=1.0;
-     
-    
+
+
    integer nn=*n;
    integer mm=*m;
    integer nnre=*nre;// number of real eigenvalues
@@ -51,19 +51,19 @@ int c_inter_calcK_(integer *n, integer *m, doublereal *a, doublereal *u0, double
    integer ii;
    integer info;
    integer *ipiv;
-   
+
    char *all=\"A\";
    char *conj=\"C\";
    char *trans=\"T\";
    char *no=\"N\";
    char *fro=\"F\";
-   
-  
-   ma = (doublereal *) malloc((nn*nn+1)*sizeof(doublereal));  
-   mp = (doublereal *) malloc((nn*mm+1)*sizeof(doublereal));         
-   if(nn>mm)  
+
+
+   ma = (doublereal *) malloc((nn*nn+1)*sizeof(doublereal));
+   mp = (doublereal *) malloc((nn*mm+1)*sizeof(doublereal));
+   if(nn>mm)
    {
-      gamma = (doublecomplex *) malloc((nn+1)*sizeof(doublecomplex)); 
+      gamma = (doublecomplex *) malloc((nn+1)*sizeof(doublecomplex));
 
    for(i=0;i<nn;i++)
    {
@@ -72,33 +72,33 @@ int c_inter_calcK_(integer *n, integer *m, doublereal *a, doublereal *u0, double
    }
 
 
-   xh = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));      
-   x2 = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));      
-     
-   ipiv = (integer *) malloc((nn+1)*sizeof(integer));      
-        
-   
-     
-   for(i=0;i<nn;i++)    
-     for(ii=0;ii<nn;ii++)    
+   xh = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));
+   x2 = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));
+
+   ipiv = (integer *) malloc((nn+1)*sizeof(integer));
+
+
+
+   for(i=0;i<nn;i++)
+     for(ii=0;ii<nn;ii++)
      {
        x2[ii*nn+i].r = gamma[i].r*x_real[i*nn+ii]-gamma[i].i*x_imag[i*nn+ii];
        x2[ii*nn+i].i = -gamma[i].r*x_imag[i*nn+ii]-gamma[i].i*x_real[i*nn+ii];
        xh[i*nn+ii].r = x_real[ii*nn+i];
        xh[i*nn+ii].i = -x_imag[ii*nn+i];
      }
-   
-   
-   zgesv_(n, n, xh, n, ipiv, x2, n, &info); 
-   for(i=0;i<nn;i++)    
+
+
+   zgesv_(n, n, xh, n, ipiv, x2, n, &info);
+   for(i=0;i<nn;i++)
      for(ii=0;ii<nn;ii++)
        ma[i*nn+ii] = -x2[ii*nn+i].r+a[i*nn+ii];
-   
+
    dgemm_(no, trans, m, n, m, &idd, z, m, u0, n, &ndd, mp, m);//mp=z*u0'
    dgemm_(no, no, m, n, n, &idd, mp, m, ma, n, &ndd, k, m);//k=mp*ma'
    free(xh);
    free(x2);
-   free(ipiv); 
+   free(ipiv);
    free(gamma);
    }// if nn>mm
    else
@@ -118,7 +118,7 @@ int c_inter_calcK_(integer *n, integer *m, doublereal *a, doublereal *u0, double
          ma[nn*(nnre+2*i+1)+nnre+2*i] = ma[nn*(nnre+2*i+1)+nnre+2*i]+gamma_imag[nnre + 2*i];
          ma[nn*(nnre+2*i)+nnre+2*i+1] = ma[nn*(nnre+2*i)+nnre+2*i+1]-gamma_imag[nnre + 2*i];
      }
-     
+
       dgemm_(no, trans, m, n, m, &idd, z, m, u0, n, &ndd, mp, m);//mp=z*u0'; z'=inv(z) with z resulting from svd
       dgemm_(no, no, m, n, n, &idd, mp, m, ma, n, &ndd, k, m);//k=mp*ma
    }

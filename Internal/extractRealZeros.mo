@@ -71,7 +71,7 @@ Complex vector \"complexVector\". It is required that all elements
 of complexVector define either
 a real zero (complexVector[i].im=0) or a conjugate complex zero pair
 (complexVector[i].re == complexVector[i+1].re and
-complexVector[i].im == -complexVector[i+1].im). 
+complexVector[i].im == -complexVector[i+1].im).
 The second argument \"numberOfRealZeros\" is determined by a function
 call of Internal.numberOfRealZeros().
 The optional input argument

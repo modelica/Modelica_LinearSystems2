@@ -73,7 +73,7 @@ solution <b>X</b> of the linear system of equations
 </p>
 </blockquote>
 <p>
-with 
+with
 </p>
 <blockquote>
 <p>
@@ -95,7 +95,7 @@ i.e., by Gaussian elemination with partial pivoting.
   Real A[3,3] = [1,2,3;
                  3,4,5;
                  2,1,4];
-  
+
   Real B[2,3]  = [10, 22, 12;
                   20, 44, 24];
   Real X[2,3];

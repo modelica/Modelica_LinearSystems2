@@ -5,5 +5,5 @@ type FIRspec = enumeration(
     Coefficients "FIR filter defined by coefficient vector")
   "Enumeration of FIR specification"
     annotation (Evaluate=true, Documentation(info="<html>
- 
+
 </html>"));

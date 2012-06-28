@@ -47,7 +47,7 @@ This generates pseudo-random numbers U(k) uniformly distributed
 in the interval (0,1). There are many forms of generators depending
 on the parameters m (prime numbers) and a. The sequence needs an
 initial Integer vector {x,y,z} known as the seed. The use of the same
-seed will lead to the same sequence of numbers. 
+seed will lead to the same sequence of numbers.
 </p>
 <p>
 <b>Remarks</b>
@@ -115,7 +115,7 @@ Copyright &copy; Hubertus Tummescheit and Department of Automatic Control, Lund 
 <p>
 <i>This Modelica function is <b>free</b> software; it can be redistributed and/or modified
 under the terms of the <b>Modelica license</b>, see the license conditions
-and the accompanying <b>disclaimer</b> 
+and the accompanying <b>disclaimer</b>
 <a href=\"modelica://Modelica.UsersGuide.ModelicaLicense\">here</a>.</i>
 </p>
 </HTML>

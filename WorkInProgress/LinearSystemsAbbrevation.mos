@@ -14,7 +14,7 @@ import zp2ss=Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace;
 import poly    = Modelica_LinearSystems2.Math.Polynomial;
 import Complex = Modelica_LinearSystems2.Math.Complex;
 import Plot    = Modelica_LinearSystems2.Utilities.Plot;
- 
+
 import Re = Modelica_LinearSystems2.Math.Complex.real;
 import Im = Modelica_LinearSystems2.Math.Complex.imag;
 import eigss = Modelica_LinearSystems2.StateSpace.Analysis.eigenValues;

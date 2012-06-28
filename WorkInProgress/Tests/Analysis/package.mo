@@ -1,4 +1,4 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests;
-package Analysis 
+package Analysis
 
 end Analysis;

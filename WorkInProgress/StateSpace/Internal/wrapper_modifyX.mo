@@ -33,7 +33,7 @@ external"FORTRAN 77" c_inter_modifyX2(
 
   annotation (Include="
   #include<f2c.h>
- 
+
 
 extern  int zgeqrf_(integer *, integer *, doublecomplex *, integer *, doublecomplex *, doublecomplex *, integer *, integer *);
 extern  int zungqr_(integer *, integer *, integer *, doublecomplex *, integer *,doublecomplex *, doublecomplex *, integer *, integer *);
@@ -43,7 +43,7 @@ extern void zdotc_(doublecomplex *, integer *, doublecomplex *, integer *, doubl
 extern int zcopy_(integer *, doublecomplex *, integer *, doublecomplex *, integer *);
 
 
-int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, doublereal *s_real, doublereal *s_imag, integer *m, integer *ncp, integer *steps, integer *inix) 
+int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, doublereal *s_real, doublereal *s_imag, integer *m, integer *ncp, integer *steps, integer *inix)
 {
    static integer c1 = 1;
    doublecomplex *x;
@@ -55,14 +55,14 @@ int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, double
    doublecomplex *workgqr;
    doublecomplex *y;
    doublecomplex *qx;
-   
+
    doublecomplex nc={0.0,0.0};
    doublecomplex ic={1.0,0.0};
    doublecomplex normc={0.0,0.0};
-     
+
    doublereal norm=2;
    doublereal *work;
-     
+
    integer nn=*n;
    integer mm=*m;
    integer nncp=*ncp;
@@ -75,26 +75,26 @@ int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, double
    integer info2;
    integer lworkqrf=-1;
    integer lworkgqr=-1;
-   
+
    char *conj=\"C\";
    char *no=\"N\";
    char *fro=\"F\";
-   
+
    if(nn>mm)
    {
-   x = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));      
-   xj = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));      
-   s = (doublecomplex *) malloc((nn*nn*mm+1)*sizeof(doublecomplex));      
-   ss = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));      
-   y = (doublecomplex *) malloc((mm+1)*sizeof(doublecomplex));      
-   qx = (doublecomplex *) malloc((nn+1)*sizeof(doublecomplex));      
-   tauqrf = (doublecomplex *) malloc((nn)*sizeof(doublecomplex));      
+   x = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));
+   xj = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));
+   s = (doublecomplex *) malloc((nn*nn*mm+1)*sizeof(doublecomplex));
+   ss = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));
+   y = (doublecomplex *) malloc((mm+1)*sizeof(doublecomplex));
+   qx = (doublecomplex *) malloc((nn+1)*sizeof(doublecomplex));
+   tauqrf = (doublecomplex *) malloc((nn)*sizeof(doublecomplex));
 
    work = (doublereal *) malloc((2)*sizeof(doublereal));
    workqrf = (doublecomplex *) malloc((2*nn+1)*sizeof(doublecomplex));
-   
-   zgeqrf_(n, n, xj, n, tauqrf, workqrf, &lworkqrf, &info2);      
- 
+
+   zgeqrf_(n, n, xj, n, tauqrf, workqrf, &lworkqrf, &info2);
+
    lworkqrf=(int)(workqrf[0].r);
    free(workqrf);
    workqrf = (doublecomplex *) malloc((lworkqrf+1)*sizeof(doublecomplex));
@@ -104,15 +104,15 @@ int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, double
    lworkgqr=(int)(workgqr[0].r);
    free(workgqr);
    workgqr = (doublecomplex *) malloc((lworkgqr+1)*sizeof(doublecomplex));
-       
+
     for(i=0;i<nn*nn*mm;i++)
     {
       s[i].r=s_real[i];
       s[i].i=s_imag[i];
-    }     
+    }
 
    if(*inix==1)
-   { 
+   {
      for(i=0;i<nn*nn;i++)
      {
        x[i].r=x_real[i];
@@ -122,7 +122,7 @@ int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, double
    else
    {
      for(i=0;i<nn - nncp;i++)
-       zcopy_(n, &s[mm*i*nn], &c1, &x[i*nn], &c1);  
+       zcopy_(n, &s[mm*i*nn], &c1, &x[i*nn], &c1);
      for(i=0;i<nncp;i++)
        for(ii=0;ii<nn;ii++)
        {
@@ -130,17 +130,17 @@ int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, double
           x[ii+ (nre + nncp + i)*nn].i = -x[ii+ (nre + i)*nn].i;
        }
    }
-   
+
    if(mm>1)
    {
     for(i=0;i<nn*nn;i++)
-      xj[i]=nc;   
-  
+      xj[i]=nc;
+
   k = 0;
   while(k < *steps)
   {
     k = k + 1;
- 
+
 
     for(i=1; i<=nn-nncp;i++)
     {
@@ -156,13 +156,13 @@ int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, double
         for(ii=i*nn;ii<nn*nn;ii++)
           xj[ii-nn] = x[ii];
       }//end if
-      
+
       for(ii=0;ii<nn;ii++)
-        xj[nn*(nn-1)+ii]=nc;   
-        
-      zgeqrf_(n, n, xj, n, tauqrf, workqrf, &lworkqrf, &info2);  
+        xj[nn*(nn-1)+ii]=nc;
+
+      zgeqrf_(n, n, xj, n, tauqrf, workqrf, &lworkqrf, &info2);
       zungqr_(n, n, n, xj, n, tauqrf, workgqr, &lworkgqr, &info2);
-      
+
       for(ii=0;ii<mm*nn;ii++)
         ss[ii] = s[(i-1)*mm*nn+ii];
       for(ii=0;ii<nn;ii++)
@@ -174,7 +174,7 @@ int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, double
       normc.r=1/norm;
       normc.i=0.0;
       zgemv_(no, n, m, &normc, ss, n, y, &c1, &nc, qx, &c1);//y=qx
-      
+
 //       zdotc_(&normc, m, qx, &c1, qx, &c1);//qx^H*qx
 //       if(i>nncp && normc.r*normc.r+normc.i*normc.i>0.81)
 //       {
@@ -184,7 +184,7 @@ int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, double
 
      for(ii=0;ii<nn;ii++)
        x[(i-1)*nn+ii] = qx[ii];
-       
+
       if(i>nre)
       {
         for(ii=0;ii<nn;ii++)
@@ -205,7 +205,7 @@ int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, double
    }
 
 
-  
+
    free(x);
    free(xj);
    free(s);
@@ -236,9 +236,9 @@ int c_inter_modifyX2_(doublereal *x_real, doublereal *x_imag, integer *n, double
          x_imag[nn*(nre+2*i+1)+nre+2*i] = -0.5;
      }
 
-     
+
    }
-   
+
   return 0;
 }", Library={"zlapack"});
 

@@ -81,10 +81,10 @@ results in
 </pre></p>
 </p>
 <p>
-A necessary extension to the Modelica language to realize overloading operators for constructors, conversions, and operations has been the introduction 
-of the \"operator\" keyword, i.e. 
+A necessary extension to the Modelica language to realize overloading operators for constructors, conversions, and operations has been the introduction
+of the \"operator\" keyword, i.e.
 <p><pre>
-  operator 'constructor' 
+  operator 'constructor'
     function fromReal
       input Real re;
       output Complex result = Complex(re=re, im=0.0);
@@ -92,7 +92,7 @@ of the \"operator\" keyword, i.e.
     end fromReal;
   end'constructor';
 </pre></p>
-and 
+and
 <p><pre>
   operator function '+'
     input Complex c1;
@@ -144,8 +144,8 @@ the definition of record Complex allows to write the following commands:
 <pre>
   import Modelica_LinearSystems2.Math.Complex;
 
-  j  = Complex.j();    
-  c1 = 1 + 3*j;        
+  j  = Complex.j();
+  c1 = 1 + 3*j;
   c2 = 1 - 5*j;
   c3 = c1 + c2;
 
@@ -160,10 +160,10 @@ The overloading concept also includes the build in function 'String', i.e. typin
 
   j  = Complex.j();
   c1 = 1 + 3*j;
-  Modelica.Utilities.Streams.print(\"c1 = \"+String(c1));  
+  Modelica.Utilities.Streams.print(\"c1 = \"+String(c1));
 
 </pre>
-results in 
+results in
 <p><pre>
   c1 = 1 + 3j
 </pre></p>
@@ -172,7 +172,7 @@ results in
 <p>
 Besides the basic operations, the most important specific
 functions for Complex numbers are also available, e.g.,
-exp(), sin() or conj() to compute 
+exp(), sin() or conj() to compute
 <pre>
 
   exp(z)  = exp(Re(z)*(cos(Im(z)) + j sin(Im(z)))
@@ -246,10 +246,10 @@ has to be applied.
 <p>
 At the top level of the Modelica_LinearSystems2 library,
 data structures are provided as Modelica
-records defining different representations of 
+records defining different representations of
 linear, time invariant differential and difference
 equation systems. In the record definitions,
-functions are provided that operate on the 
+functions are provided that operate on the
 corresponding data structure. Currently, the following
 linear system representations are available:
 </p>
@@ -258,34 +258,34 @@ linear system representations are available:
       <td>Multi input, multi output, linear differential equation systems in state space form:
 <pre>    <b>der</b>(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
         <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>
- 
+
 </pre>
       </td>
   </tr>
   <tr><td>record&nbsp;<a href=\"modelica://Modelica_Control.LinearSystems.TransferFunction\">TransferFunction</a></td>
-      <td>Single input, single output, transfer functions defined via a numerator 
+      <td>Single input, single output, transfer functions defined via a numerator
           and a denominator polynomial n(s) and d(s) respectively:
 <pre>        n(s)                                2*s+3
    y = ------ * u,  for example:   y = ----------------- * u
         d(s)                            4*s^2 + 5*s + 6
-       
+
 </pre>
       </td>
   </tr>
   <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles\">ZerosAndPoles</a></td>
       <td> Single input, single output, transfer function defined via the products of
-           its zeros z and poles p, respectively; 
+           its zeros z and poles p, respectively;
 <pre>
          product(s - z[i])
   y = k*------------------- * u
          product(s - p[i])
 </pre>
- 
-A description with zeros and poles is problematic: For example, 
+
+A description with zeros and poles is problematic: For example,
 a small change in the imaginary part of a conjugate complex pole pair,
 leads no longer to a transfer function with real coefficients.
 If the same zero or pole is present twice or more, then a diagonal state space
-form is no longer possible. This means that the structure is 
+form is no longer possible. This means that the structure is
 very sensitive if zeros or poles are close together.
 For this and other reasons, internally, this data structure
 stores the zeros and poles as first and second order
@@ -293,25 +293,25 @@ polynomials with real coefficients:
 <pre>         product(s+n1[i]) * product(s^2+n2[i,1]*s+n2[i,2])
   y = k*---------------------------------------------------
          product(s+d1[i]) * product(s^2+d2[i,1]*s+d2[i,2])
- 
+
 </pre></td>
   </tr>
   <tr><td>record&nbsp;<a href=\"modelica://Modelica_Control.LinearSystems.DiscreteStateSpace\">DiscreteStateSpace</a></td>
-      <td> Multi input, multi output, linear difference equation system 
+      <td> Multi input, multi output, linear difference equation system
           in state space form:
 <pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
      <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
 </pre>
-with <b>Ts</b> the sample time and <b>k</b> 
+with <b>Ts</b> the sample time and <b>k</b>
 the index of the actual sample instance (k=0,1,2,3,...).
 <b>x</b>(t) is the discrete state vector and <b>x</b>_continuous(t)
-is the state vector of the continuous system from which the 
+is the state vector of the continuous system from which the
 discrete block has been derived by a state transformation,
 in order to remove dependencies of past values of <b>u</b>.</td>
   </tr>
 </table>
- 
+
 <p>
 It is planned to add linear system descriptions such as
 DiscreteTransferFunction,
@@ -319,79 +319,79 @@ DiscreteFactorized, FrequencyResponse, and DiscreteFrequencyResponse,
 in the future. Furthermore, several useful functions are not yet
 available in the records above. They will also be added in the future.
 </p>
- 
+
 <p>
 Below, a typical session in the command window is shown:
 </p>
- 
+
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction1.png\">
 </blockquote>
- 
+
 <p>
 The last command (plotBode) results in the following frequency response:
 </p>
- 
+
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction2.png\">
 </blockquote>
- 
+
 <p>
-Note, the interesting frequency range is automatically determined 
+Note, the interesting frequency range is automatically determined
 (it can be fairly good deduced from the phase information of
 poles and zeros).
 </p>
- 
+
 <p>
 Transfer function tf3 can be transformed into a state
 space description with command
 ss=StateSpace(tf3) and an poles-and-zeros plot and print out is then available via StateSpace.Plot.polesAndZeros(ss)
 </p>
- 
+
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction4.png\">
 </blockquote>
- 
+
 <p>
 resulting in:
 </p>
- 
+
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction3.png\">
 </blockquote>
- 
+
 <p>
 It is also possible to linearize any Modelica model at
 the start time (after initialization has been performed).
-This is especially useful if the model is initialized in 
+This is especially useful if the model is initialized in
 steady state. For example, the command
 StateSpace.Import.fromModel(\"xxx\") results in:
 </p>
- 
+
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction5.png\">
 </blockquote>
- 
+
 <p>
-Also several 
+Also several
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">filters</a>
-are provided in. Typical frequency responses 
+are provided in. Typical frequency responses
 are shown in the next figure:
 </p>
- 
+
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4Filters.png\">
 </blockquote>
- 
+
 <p>
 The step responses of the same low pass filters are shown in the next figure,
 starting from a steady state initial filter with initial input = 0.2:
 </p>
- 
+
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4FiltersStepResponse.png\">
 </blockquote>
- 
+
 </html>
 "));
     end LinearSystemDataStructures;
@@ -411,14 +411,14 @@ are described in the following sections:
      because the structuring of records as well as operator overloading
      is explained that is also the basis for the other parts of the
      library.</li>
- 
+
 <li> Section <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.Polynomials\">Polynomials</a>
      describes the Modelica_LinearSystems2.Math.Polynomials record that
-     provides a data structure for Polynomials with real coefficients 
+     provides a data structure for Polynomials with real coefficients
      and operations such as evaluation, fitting, integration.
      The Complex and Polynomial data structures are basic
      building blocks for the other parts of the library.</li>
- 
+
 <li> <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.LinearSystemDataStructures\">Linear system data structures</a>
      are records on the top level of Modelica_LinearSystems2 that define
      data structures for different representations of
@@ -426,9 +426,9 @@ are described in the following sections:
      e.g., record StateSpace. Furthermore, operations are provided
      on these data structures, e.g., to connect linear systems together
      or plot a frequency response.</li>
- 
+
 </ol>
- 
+
 </html>
 "));
   end GettingStarted;
@@ -442,12 +442,12 @@ This library is implemented with Modelica 3.1 (especially the
 operator overloading features are utilized) and requires the
 <a href=\"http://www.netlib.org/clapack/CLAPACK-3.1.1-VisualStudio.zip\">LAPACK 3.1.1</a> object library.
 Furthermore, linearization and plotting is implemented
-with Dymola API calls. It is planned to move these tool specific calls to the 
+with Dymola API calls. It is planned to move these tool specific calls to the
 <a href=\"modelica://ModelicaServices\">ModelicaServices</a> package
 (introduced for the Modelica Standard Library 3.1 for these
 purposes), in order that other Modelica tools can provide the same functionality in a clean way.
 </p>
- 
+
 </html>
 "));
   end Requirements;
@@ -458,7 +458,7 @@ purposes), in order that other Modelica tools can provide the same functionality
     annotation (Documentation(info="<html>
 <p>All files in this directory (Modelica_LinearSystems2) and in all
 subdirectories, especially all files that build package \"Modelica_LinearSystems2\" and all
-files in \"Modelica_LinearSystems2/Resources/\" and \"Modelica_LinearSystems2/help/\"  
+files in \"Modelica_LinearSystems2/Resources/\" and \"Modelica_LinearSystems2/help/\"
 are licensed by <b><u>DLR</u></b> under the
 <b><u>Modelica License 2</u></b>.</p>
 
@@ -1017,7 +1017,7 @@ This library is based on the following references:
 <dt>Tietze U., and Schenk C. (2002):</dt>
 <dd> <b>Halbleiter-Schaltungstechnik</b>.
      Springer Verlag, 12. Auflage, S. 815-852., ISBN 978-3540428497<br>&nbsp;</dd>
- 
+
 <dt>Walther N. (2002):</dt>
 <dd> <b>Praxisgerechte Modelica-Bibliothek f&uuml;r Abtastregler</b>.
      Thesis (in German), HTWK Leipzig, Fachbereich Elektro- und
@@ -1051,9 +1051,9 @@ New functions/records:
 
 <li> Constructors and basic operators for  <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace\">DiscreteStateSpace</a>,
      <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles\">DiscreteZerosAndPole</a> and
-     <a href=\"modelica://Modelica_LinearSystems2.DiscreteTransferFunction\">DiscreteTransferFunction</a>.</li> 
+     <a href=\"modelica://Modelica_LinearSystems2.DiscreteTransferFunction\">DiscreteTransferFunction</a>.</li>
 
-<li> Functions to construct, to convert, to analyze, and to plot for records DiscreteStateSpace, DiscreteTransferFunction and DiscreteZerosAndPoles are provided.</li> 
+<li> Functions to construct, to convert, to analyze, and to plot for records DiscreteStateSpace, DiscreteTransferFunction and DiscreteZerosAndPoles are provided.</li>
 
 <li> Examples for DiscreteStateSpace, DiscreteTransferFunction and DiscreteZerosAndPoles demonstarate the discrete system records
      ( <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteStateSpace\">Examples_DiscreteStateSpace</a>,
@@ -1061,7 +1061,7 @@ New functions/records:
        <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteTransferFunction\">Examples_DiscreteTransferFunction</a>,).</li>
 </ul>
 
-  
+
 </html>
 "));
     end Version_2_2;
@@ -1084,16 +1084,16 @@ New functions/blocks:
      to solve Sylvester equations \"<b>A</b>*<b>X</b> + <b>X</b>*<b>B</b> = <b>C</b>\"
      using a Schur method.</li>
 
-<li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a> 
-     to calculate the orthogonal nullspace and the dimension (nullity) of 
-     the nullspace of a matrix.</li> 
+<li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a>
+     to calculate the orthogonal nullspace and the dimension (nullity) of
+     the nullspace of a matrix.</li>
 
 <li> Functions <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">conditionNumber</a>
      and <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">rcond</a>
      to calculate the condition number and the reciprocal condition number of a
-     matrix respectively.</li> 
+     matrix respectively.</li>
 
-<li> Block <a href=\"modelica://Modelica_LinearSystems2.Controller.Interpolator\">Controller.Interpolator</a> 
+<li> Block <a href=\"modelica://Modelica_LinearSystems2.Controller.Interpolator\">Controller.Interpolator</a>
      to increase the sampling frequency with linear interpolation and optional mean-value filtering.</li>
 
 <li> Blocks have been added to Controller.Examples to demonstrate the discretization methods
@@ -1103,7 +1103,7 @@ New functions/blocks:
      and the new Interpolator block
      (<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Interpolator</a>).</li>
 </ul>
-  
+
 <p>
 Other improvements:
 </p>
@@ -1116,24 +1116,24 @@ Other improvements:
 </ul>
 
 <p>
-Bug fixes: 
+Bug fixes:
 </p>
 
 <ul>
-<li>Redundant results for initial responses of multi input state space systems have been fixed.</li> 
+<li>Redundant results for initial responses of multi input state space systems have been fixed.</li>
 <li>Several functions have been modified to work (or to terminate correctly) for state space system without in- and/or outputs:
 <ul>
 <li><a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">Analysis.analysis</a></li>
 <li><a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros\">Analysis.invariantZeros.</a></li>
-<li> Check for controllability and observability.</li> 
-<li> Staircase algorithm to reduce a system to controller Hessenberg form.</li> 
-<li> Computation of controllable/uncontrollable poles.</li> 
-</ul></li> 
-<li> The design of FIR filters in block <a href=\"modelica://Modelica_LinearSystems2.Controller.FilterFIR\">Controller.FilterFIR</a> was 
+<li> Check for controllability and observability.</li>
+<li> Staircase algorithm to reduce a system to controller Hessenberg form.</li>
+<li> Computation of controllable/uncontrollable poles.</li>
+</ul></li>
+<li> The design of FIR filters in block <a href=\"modelica://Modelica_LinearSystems2.Controller.FilterFIR\">Controller.FilterFIR</a> was
 disabled. It is now enabled and the previously wrong design of highpass filters with odd order
 was corrected, by increasing the order by one in this case.</li>
 </ul>
-  
+
 </html>
 "));
     end Version_2_1;
@@ -1148,23 +1148,23 @@ but is not backwards compatible to this library due to many changes (e.g. the sy
 data structures include strings for signals names whereas the 0.95 version does not
 have these names in the records). Most important improvements with respect to version 0.95:
 </p>
- 
+
 <ul>
 <li> The library has been extended and contains now about 180 functions and a lot of examples for the analysis and design of linear control systems in different description forms.</li>
-<li> The library has been restructured and the functions are now organized in sub packages.</li> 
-<li>  Documentation has been upgraded and improved.</li> 
-<li>  Operator overloading concept has been fully utilized.</li> 
-<li>  Analysis functions like tests for controllability, observability, stabilizability, and detectability have been added.</li> 
+<li> The library has been restructured and the functions are now organized in sub packages.</li>
+<li>  Documentation has been upgraded and improved.</li>
+<li>  Operator overloading concept has been fully utilized.</li>
+<li>  Analysis functions like tests for controllability, observability, stabilizability, and detectability have been added.</li>
 <li>      The analyse-function to determine the characteristic of a system and to analyse the relation of the system states to the dynamics of the uncoupled modal states is provided.</li>
-<li>      Calculation of invariant zeros for arbitrary systems (i.e. systems with different numbers of inputs and outputs) is now provided.</li> 
-<li>      The Design package contains functions for controller design, i.e. pole assignment, LQ controller, Kalman Filter, and LQG controller.</li> 
-<li>      Since the design of optimal controllers is based on the solution of algebraic Riccati equation, a solver for those equations is provided in Math.Matrices. Also an algorithm to solve Lyapunov equations has been added.</li> 
+<li>      Calculation of invariant zeros for arbitrary systems (i.e. systems with different numbers of inputs and outputs) is now provided.</li>
+<li>      The Design package contains functions for controller design, i.e. pole assignment, LQ controller, Kalman Filter, and LQG controller.</li>
+<li>      Since the design of optimal controllers is based on the solution of algebraic Riccati equation, a solver for those equations is provided in Math.Matrices. Also an algorithm to solve Lyapunov equations has been added.</li>
 <li>      The package Sampled was renamed to Controller. All blocks are now available in a discrete representation,
-          especially also the \"Filter\" block (was only available in a continuous representation in 0.95)</li> 
-<li>      The Controller package contains a sub package Template which provides standard controller structures (e.g. a state-feedback-control-structure and a two degree of freedom controller template with an inverse system model in the feed forward loop) with replaceable components.</li> 
+          especially also the \"Filter\" block (was only available in a continuous representation in 0.95)</li>
+<li>      The Controller package contains a sub package Template which provides standard controller structures (e.g. a state-feedback-control-structure and a two degree of freedom controller template with an inverse system model in the feed forward loop) with replaceable components.</li>
 <li>      The besselFilter coefficients have been recalculated with high precision calculation up to order 41.</li>
-<li>      LimPID, comprising P, PI, PD, and PID controller with limited output, anti-windup compensation and input weighting (setpoint and measured value) added.</li> 
-<li>      Improved new generic plot functions are used for time and frequency plots.</li> 
+<li>      LimPID, comprising P, PI, PD, and PID controller with limited output, anti-windup compensation and input weighting (setpoint and measured value) added.</li>
+<li>      Improved new generic plot functions are used for time and frequency plots.</li>
 <li> New system transformations (similarity transformation, canonical forms).</li>
 <li> New transformations between system descriptions added, especially from
      ZerosAndPoles to StateSpace and from TransferFunction to StateSpace.</li>
@@ -1175,7 +1175,7 @@ have these names in the records). Most important improvements with respect to ve
      uses a better algorithm from the newest LAPACK version.</li>
 <li> Based on a newer LAPACK version 3.1.1.</li>
 </ul>
-  
+
 </html>
 "));
     end Version_2_0;
@@ -1184,12 +1184,12 @@ have these names in the records). Most important improvements with respect to ve
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
- 
+
 <p>
-Adapted the library to the Modelica Standard Library 3.0 and 
+Adapted the library to the Modelica Standard Library 3.0 and
 to the new restrictions of the Modelica Language Version 3.0.
 </p>
- 
+
 </html>
 "));
     end Version_0_95;
@@ -1198,42 +1198,42 @@ to the new restrictions of the Modelica Language Version 3.0.
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
- 
+
 <p>
 The following new components have been added:
 </p>
- 
+
 <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
   <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.StateSpace.</b></td></tr>
   <tr><td valign=\"top\"> plotBodeMIMO </td>
       <td valign=\"top\"> Plot bode plot of all transfer functions of a state space system.</td>
   </tr>
- 
+
   <tr><td valign=\"top\"> plotBodeSISO </td>
       <td valign=\"top\"> Plot bode plot of transfer function from input iu to output iy
                         of a state space system.</td>
   </tr>
- 
+
   <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.StateSpace.Examples.</b></td></tr>
   <tr><td valign=\"top\"> bodePlotMIMO<br>
                         bodePlotSISO </td>
       <td valign=\"top\"> Demonstrate the new Bode plot possibilities.</td>
-  </tr> 
- 
+  </tr>
+
   <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.TransferFunction.</b></td></tr>
   <tr><td valign=\"top\"> fromStateSpaceSISO<br>
                         fromStateSpaceMIMO </td>
       <td valign=\"top\"> Generate transfer functions of a state space system.</td>
   </tr>
- 
+
   <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.ZerosAndPoles.</b></td></tr>
   <tr><td valign=\"top\"> fromStateSpaceSISO<br>
                         fromStateSpaceMIMO </td>
       <td valign=\"top\"> Generate ZerosAndPoles from a state space system.</td>
   </tr>
- 
+
 </table>
- 
+
 </html>
 "));
     end Version_0_93;
@@ -1243,17 +1243,17 @@ The following new components have been added:
 
       annotation (Documentation(info="<html>
 <p>
-First Beta-Version of the library. 
+First Beta-Version of the library.
 </p>
 <p>
 The Modelica_LinearSystems2.Controller library (previously called Modelica_LinearSystems.Sampled) is based on the
-Sampled library from Nico Walther (master thesis 
+Sampled library from Nico Walther (master thesis
 from the electrical engineering at the HTWK-Leipzig,
 supervised by Prof. M&uuml;ller, HTWK, and Prof. Martin Otter, DLR).
-Based on the experience in using the Sampled library, 
-new features in Modelica as well as in Dymola, 
+Based on the experience in using the Sampled library,
+new features in Modelica as well as in Dymola,
 the Sampled library was considerably restructured, and
-newly implemented. The following main changes have been 
+newly implemented. The following main changes have been
 performed:
 </p>
 <ul>
@@ -1261,13 +1261,13 @@ performed:
      of the Modelica standard library 2.1 (and higher). Previously,
      it was based on version 1.6. Similar as in 2.1, all blocks
      have been de-vectorized (more convenient for the user in the
-     standard case. Modelica allows now easy vectorization of 
+     standard case. Modelica allows now easy vectorization of
      blocks).</li>
 <li> The previous parameter \"method\" was split into \"blockType\" (continuous/discrete)
      and \"methodType\" (discretization method). It is therefore
      easier to switch between a continuous and a discrete representation because
-     one does not have to remember which discretization method was used 
-     previously when switching from a continuous to a discrete representation.</li> 
+     one does not have to remember which discretization method was used
+     previously when switching from a continuous to a discrete representation.</li>
 <li> The main options (blockType, methodType, sampleTime, initType) are set
      globally in component SampleClock via inner/outer and no longer in every
      component. The default defined in SampleClock can be changed in every
@@ -1275,7 +1275,7 @@ performed:
      much more convenient to define the sampling setting and
      switch between different representations.</li>
 <li> In every component, the Integer parameter sampleFactor is present that
-     defines the sampling time of this component as a \"sampleFactor\" 
+     defines the sampling time of this component as a \"sampleFactor\"
      multiple of the base sample time defined in sampleClock.
      This allows a more easier definition of standard multi-rate
      systems (in the previous version, in every component the actual
@@ -1314,8 +1314,8 @@ performed:
      </pre>
      Furthermore, parameter startTime was removed (= first sample time of
      when-clause after the initialization) since this is nearly never needed
-     in a practical application and therefore this parameter could be 
-     removed (and no longer confuses users).</li> 
+     in a practical application and therefore this parameter could be
+     removed (and no longer confuses users).</li>
 <li> The continuous representations of all blocks are implemented such that
      as much struture as possible is preserved in order that index reduction
      is possible. For example, if a transfer function has more poles as
@@ -1330,11 +1330,11 @@ performed:
      possible. In such a case, a Bessel filter is most appropriate, because
      it does not introduce osciallations as the Butterworth and Chebyhev
      filter do and it is faster as the critical damping filter, see the
-     description of the <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">filter</a> 
+     description of the <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">filter</a>
      function. Previously, a Bessel filter was not supported.
      </li>
 <li> Previously, blocks have been implement with a large if-clause in which
-     the different representations have been defined. In the new version, 
+     the different representations have been defined. In the new version,
      the discrete representations are defined in a separate block that
      are activated via a conditional declaration, if the block is discrete.
      (conditional declarations have been only recently introduced into
@@ -1345,7 +1345,7 @@ performed:
 <li> Previously, for all simple blocks (such as FirstOrder) the different
      discrete representations have been specifially derived and implemented.
      In the new version, all blocks are first transformed to
-     state space form with a function call and then the 
+     state space form with a function call and then the
      discrete state space system block is used for the discrete
      representation. This approach is less error prone and
      the implementation is much simpler.</li>
@@ -1355,10 +1355,10 @@ performed:
      such as StateSpace or TransferFunction are now records instead
      of arrays. It is then possible to generate such system representations
      by appropriate function calls and supply the result as record
-     instance to the corresponding block.</li> 
+     instance to the corresponding block.</li>
 </ul>
- 
- 
+
+
 </html>
 "));
     end Version_0_9;
@@ -1386,7 +1386,7 @@ on the Modelica LinearSystems library.
 </dl>
 <p><b>Acknowledgements:</b></p>
 <ul>
-<li> Some functionality of Modelica_LinearSystems2 (e.g., 
+<li> Some functionality of Modelica_LinearSystems2 (e.g.,
      linearizing a Modelica model by
      Modelica_LinearSystems2.StateSpace.Import.fromModel)
      has been originally developed by Sven Erik Mattsson
@@ -1403,17 +1403,17 @@ on the Modelica LinearSystems library.
      Math.Polynomial) has been inspired by the discussions
      about operator overloading at various Modelica design
      meetings.</li>
-<li> Advice for implementation issues given by Hans Olsson 
+<li> Advice for implementation issues given by Hans Olsson
      from Dynasim, as well as advice for some numerical algorithms
      given by Andras Varga and Dieter Joos from DLR is appreciated.</li>
 <li> Financial support of DLR for the development of this library within
      the European Network of Excellence HYCON (Hybrid Control: taming heterogeneity
-     and complexity of networked embedded systems; 
+     and complexity of networked embedded systems;
      contract number: 511368), and within the German BMBF Verbundprojekt
-     PAPAS (Plug-And-Play Antriebs- und Steuerungskonzepte f&uuml;r 
+     PAPAS (Plug-And-Play Antriebs- und Steuerungskonzepte f&uuml;r
      die Produktion von Morgen; F&ouml;rderkennzeichen: 02PH2060) is
      highly appreciated.</li>
-<li> Since Oct. 2007, the library development was partially funded by BMBF within the 
+<li> Since Oct. 2007, the library development was partially funded by BMBF within the
      <a href=\"http://www.itea2.org/public/project_leaflets/EUROSYSLIB_profile_oct-07.pdf\">ITEA2 EUROSYSLIB</a>
       project. </li>
 </ul>
@@ -1422,16 +1422,16 @@ on the Modelica LinearSystems library.
   end Contact;
   annotation (DocumentationClass=true, Documentation(info="<html>
 <p>
-Library <b>Modelica_LinearSystems2</b> is a Modelica package 
-providing different representations of linear, time invariant differential and 
+Library <b>Modelica_LinearSystems2</b> is a Modelica package
+providing different representations of linear, time invariant differential and
 difference equation systems, as well as typical operations on these
 system descriptions. Additionally, data structures and operations for
 Complex numbers and for Polynomials are provided. These are utilized
 above, but are, of course, also useful for other purposes.
 </p>
- 
+
 <p>
-This package contains the <b>users guide</b> for 
+This package contains the <b>users guide</b> for
 the library and has the following content:
 </p>
 <ol>
@@ -1439,16 +1439,16 @@ the library and has the following content:
     contains an introduction to the most important features and how
     to use them at hand of examples.</li>
 <li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Requirements\">Requirements</a>
-    scetches the requirements on a Modelica tool, in order that this library 
+    scetches the requirements on a Modelica tool, in order that this library
     can be utilized.</li>
 <li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ModelicaLicense2\">Modelica License 2</a>
     is the legal license text und which this library is submitted.</li>
 <li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Literature\">References</a>
-    provides references that have been used to design and implement this 
+    provides references that have been used to design and implement this
     library.</li>
 <li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ReleaseNotes\">Release Notes</a>
     summarizes the differences between different versions of this library.</li>
-<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Contact\">Contact</a> 
+<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Contact\">Contact</a>
     provides information about the author of the library as well as
     acknowledgments.</li>
 </ol>

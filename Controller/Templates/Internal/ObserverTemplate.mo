@@ -9,7 +9,7 @@ block ObserverTemplate
   parameter Boolean matrixOnFile=false
     "True, if matrix should be read from file";
   parameter String fileName=Modelica_LinearSystems2.DataDir + "observer.mat"
-    "Name of the state space system data file" 
+    "Name of the state space system data file"
     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
       caption="observer data file"),enable = matrixOnFile));
   parameter String systemName="stateSpace" "Name of state space system" annotation(Dialog(enable = matrixOnFile));

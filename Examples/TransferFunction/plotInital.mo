@@ -11,6 +11,6 @@ algorithm
   Modelica_LinearSystems2.TransferFunction.Plot.initialResponse(tf=tf, y0=y0, dt=0.1, tSpan=10);
 
   annotation (interactive=true, Documentation(info="<html>
- 
+
 </html>"));
 end plotInital;

@@ -68,7 +68,7 @@ algorithm
     (X,info) := Matrices.LAPACK.dgesvx(Z11, transpose(Z21));//function does not need to transpose Z11 as solve2 does
     X := transpose(X);
     assert(info == 0, "Solving a linear system of equations with function
-\"Matrices.LAPACK.dgesvx\" is not possible, because the system has either 
+\"Matrices.LAPACK.dgesvx\" is not possible, because the system has either
 no or infinitely many solutions (input A is singular).");
 
       if refine then
@@ -95,9 +95,9 @@ It is assumed that <b>Q</b> is symmetric and positve semidefinite and <b>R</b> i
 <p><b>
 The assumptions are not checked in this function
 </b>
- 
+
 <p>
-The assumptions guarantee that the Hamiltonian matrix 
+The assumptions guarantee that the Hamiltonian matrix
 <blockquote><pre>
       -1  -1       -1        -1
 <b>H</b> = [<b>A</b>, -<b>A</b>  *<b>G</b>; <b>Q</b>*<b>A</b>, <b>A</b>' + <b>Q</b>*<b>A</b>  *<b>G</b> ]
@@ -105,11 +105,11 @@ The assumptions guarantee that the Hamiltonian matrix
 with
 <blockquote><pre>
        -1
-<b>G</b> = <b>B</b>*<b>R</b> *<b>B</b>' 
+<b>G</b> = <b>B</b>*<b>R</b> *<b>B</b>'
 </pre>
 </blockquote>
 has no eigenvalue on the unit circle and can be put
-to an ordered real Schur form 
+to an ordered real Schur form
 <blockquote><pre>
 <b>U</b>'*<b>H</b>*<b>U</b> = <b>X</b> = [<b>S11</b>, <b>S12</b>; <b>0</b>, <b>S22</b>]
 </pre></blockquote>
@@ -120,7 +120,7 @@ that <b>S11</b> contains the n stable eigenvalues of the closed loop system with
 <b>A</b> - <b>B</b>*(<b>R</b> + <b>B</b>'*<b>X</b>*<b>B</b>)  *<b>B</b>'*<b>X</b>*<b>A</b>
 </pre>
 </blockquote>
-If <b>U</b> is partitioned to 
+If <b>U</b> is partitioned to
 <blockquote><pre>
 <b>U</b> = [<b>U11</b>, <b>U12</b>; <b>U21</b>, <b>U22</b>]
 </pre></blockquote>
@@ -128,12 +128,12 @@ according to <b>X</b>, the solution <b>X</b> can be calculated by
 <blockquote><pre>
 <b>X</b>*<b>U11</b> = <b>U21</b>.
 </pre></blockquote>
- 
+
 The algorithm uses LAPACK routines dgehrd (to compute the upper Hessenberg matrix of <b>H</b>), dorghr (to calculate the orthogonal
-matrix from the elementary reflectors as returned from dgehrd), dhseqr (to put transformed <b>H</b> to Schur form and to calculate the eigenvalues 
+matrix from the elementary reflectors as returned from dgehrd), dhseqr (to put transformed <b>H</b> to Schur form and to calculate the eigenvalues
 of the closed loop system) and dtrsen (to compute the ordered real Schur form and matrix <b>U</b>).
 <p>
- 
+
 <A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A>
 <PRE>
   [1] Laub, A.J.

@@ -78,11 +78,11 @@ It is also shown how to linearize a model of a crane trolley system [1]. The lin
   [1] Föllinger, O. \"Regelungstechnik\", Hüthig-Verlag
 </PRE>
 </html>"),    Documentation(info="<html>
-This example demonstrates how to design a lq-controller or a pole placement controller respectively. 
+This example demonstrates how to design a lq-controller or a pole placement controller respectively.
 The feedback matrices and a simple pre filter for tracking are save to MATLAB files which can be used in
 ModelicaController library.<br>
 It is also shown how to linearize a model of a crane trolley system [1]. The linear model is used as a base for control design
- 
+
 <A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A>
 <PRE>
   [1] Föllinger, O. \"Regelungstechnik\", Hüthig-Verlag

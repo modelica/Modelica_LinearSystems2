@@ -97,12 +97,12 @@ Example:
    zp = (s+(2+3*j))*(s+(2-3*j))
 </pre>
 <p>
-can be expressed as 
+can be expressed as
 </p>
 <pre>
-   <b>import</b> Modelica_LinearSystems2.Math.Complex; 
+   <b>import</b> Modelica_LinearSystems2.Math.Complex;
    <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
-   
+
    j = Complex.j();
    zp = ZerosAndPoles({2+3*j}, {2-3*j});
 </pre>
@@ -258,20 +258,20 @@ algorithm
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right> z </td><td align=center> =  </td>  <td> DiscreteTransferFunction.<b>s</b>()  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
-Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can be used for generating like 
+Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can be used for generating like
 <blockquote><pre>
         DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
 </pre></blockquote>
 
 </p>
- 
 
- 
- 
+
+
+
 </html> "));
 end z;
 
@@ -420,21 +420,21 @@ Plots the bode-diagram of a transfer function.
 
 <h4>Example</h4>
 <blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();  
+   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
    Modelica_LinearSystems2.TransferFunction tf =(s^2 + 5*s + 7)/(s^2 + 5*s + 6);
-   
+
 <b>algorithm</b>
    Modelica_LinearSystems2.TransferFunction.Plot.plotBode(tf)
 //  gives:
 </pre></blockquote>
 
 </p>
- 
+
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
- 
+
 </blockquote>
 <p>
 
@@ -463,7 +463,7 @@ algorithm
 </table>
 <h4>Description</h4>
 <p>
-Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of a discrete transfer function. 
+Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of a discrete transfer function.
 
 </p>
 
@@ -471,7 +471,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 <blockquote><pre>
    TransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.DiscreteTransferFunction dtf=(z+1)/(z^2+z+1);
- 
+
    Real dDegree;
 
 <b>algorithm</b>
@@ -531,7 +531,7 @@ Computes a DiscreteZerosAndPoles record
 
 <h4>Example</h4>
 <blockquote><pre>
-   DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();  
+   DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.TransferFunction tf = 1/(z^2 + 3*z +2)
 
 
@@ -541,7 +541,7 @@ Computes a DiscreteZerosAndPoles record
 </pre></blockquote>
 
 
- 
+
 </html>"));
 end toDiscreteZerosAndPoles;
 

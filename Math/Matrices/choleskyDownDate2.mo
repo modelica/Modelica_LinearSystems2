@@ -81,7 +81,7 @@ Function </b>choleskyDownDate(L, v)</b> computes the rank-1-downdated Cholesky f
 </p>
 <blockquote><pre>
              T          T     T      T
-<b>Add</b> = <b>Ldd</b>*<b>Ldd</b> = <b>A</b> -  <b>v</b>*<b>v</b> = <b>L</b>*<b>L</b> -  <b>v</b>*<b>v</b>  
+<b>Add</b> = <b>Ldd</b>*<b>Ldd</b> = <b>A</b> -  <b>v</b>*<b>v</b> = <b>L</b>*<b>L</b> -  <b>v</b>*<b>v</b>
 
 </pre>
 </blockquote>
@@ -92,7 +92,7 @@ The algortihm is taken from [1].
 Matrix <b>Ldd</b> is calculated by
 <p>
 <blockquote><pre>
-          T           T    
+          T           T
   [<b>v</b>, <b>Ldd</b>] = <b>H</b> *[<b>0</b>, <b>L</b>]
 </blockquote></pre>
 with orthogonal Matrix <b>H</b> such that
@@ -100,7 +100,7 @@ with orthogonal Matrix <b>H</b> such that
      T          T                     T          T         T               T     T
    <b>v</b>*<b>v</b> + <b>Ldd</b>*<b>Ldd</b> = [<b>v</b>, <b>Ldd</b>] * [<b>v</b>, <b>Ldd</b>] = [<b>0</b>, <b>L</b>]*<b>H</b> *<b>H</b>*[<b>0</b>, <b>L</b>] = [<b>0</b>, <b>L</b>]*[<b>0</b>, <b>L</b>] = <b>L</b>*<b>L</b> = <b>A</b>,
 </blockquote></pre>
-i.e., by orthogonal transformation 
+i.e., by orthogonal transformation
 <blockquote><pre>
  <b>H</b> = <b>H</b>_1*...*<b>H</b>_n.
 </blockquote></pre>
@@ -113,14 +113,14 @@ with <b>a</b> is the solution of
 <blockquote><pre>
 <b>L</b>*<b>a</b> = <b>v</b>
 </blockquote></pre>
-and 
+and
 <blockquote><pre>
 z = ||<b>a</b>||.
 </blockquote></pre>
 </p>
 The following sequence illustrate the principle of calculating the <b>H</b>_i, starting with <b>H</b>_n
 <blockquote><pre>
-|z|      |z|      |z|      |z|      
+|z|      |z|      |z|      |z|
 |a| H_3  |a| H_2  |a| H_1  |0|
 |a| -->  |a| -->  |0| -->  |0|
 |a|      |0|      |0|      |0|
@@ -144,7 +144,7 @@ If \"upper==true\", the output <b>Ldd</b> is also upper triangular. Default is \
 </blockquote>
 <h4>Example</h4>
 <blockquote><pre>
- 
+
 
 </HTML>", revisions="<html>
 <ul>

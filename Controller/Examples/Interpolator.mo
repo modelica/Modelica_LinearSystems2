@@ -53,7 +53,7 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
             -100},{100,100}}), graphics), Documentation(info="<html>
 <p>
-This example demonstrates the usage of the 
+This example demonstrates the usage of the
 <a href=\"modelica://Modelica_LinearSystems2.Controller.Interpolator\">Interpolator</a>
 block. This block is used in multi-rate controllers to interpolate between two different
 sample rates. In this example, a sampled sine-signal is interpolated in different ways:
@@ -72,7 +72,7 @@ sample rates. In this example, a sampled sine-signal is interpolated in differen
      at a sample time of 4*Ts (= violet curve in the figure below).
      This gives a 20*Ts delay and a sine signal
      sampled with 4*Ts (instead of 20*Ts).</li>
-     
+
 <li> In order to remove frequencies introduced by the interpolation, \"interpolator3\"
      additionally filters the linearly interpolated signal with a mean value filter
      of the same length (= black curve in the figure below).

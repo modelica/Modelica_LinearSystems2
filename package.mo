@@ -53,7 +53,7 @@ For an introduction, have especially a look at:
 </p>
 <ul>
 <li> <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted\">Getting started</a>
-     provides an overview of the Library in 
+     provides an overview of the Library in
      the <a href=\"modelica://Modelica_LinearSystems2.UsersGuide\">User's Guide</a>.</li>
 <li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ReleaseNotes\">Release Notes</a>
      summarizes the changes of new versions of this package.</li>
@@ -87,7 +87,7 @@ scripts are provided, but different library names are used.
 the use is completely at <u>your own risk</u>;
 it can be redistributed and/or modified under the terms of the
 Modelica license 2, see the license conditions (including the
-disclaimer of warranty) in the  
+disclaimer of warranty) in the
 <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ModelicaLicense2\">User's Guide</a></u>
 or at
 <a href=\"http://www.Modelica.org/licenses/ModelicaLicense2\">

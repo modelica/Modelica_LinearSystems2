@@ -58,7 +58,7 @@ more convenient to just use the function
 <a href=\"Modelica:Modelica.Math.Matrices.solve2\">Matrices.solve2</a>.
 </p>
 <p>
-If a unique solution <b>X</b> does not exist (since the 
+If a unique solution <b>X</b> does not exist (since the
 LU decomposition is singular), an exception is raised.
 </p>
 <p>
@@ -66,16 +66,16 @@ The LU factorization is computed
 with the LAPACK function \"dgetrf\",
 i.e., by Gaussian elemination using partial pivoting
 with row interchanges. Vector \"pivots\" are the
-pivot indices, i.e., for 1 &le; i &le; min(m,n), row i of 
+pivot indices, i.e., for 1 &le; i &le; min(m,n), row i of
 matrix A was interchanged with row pivots[i].
 </p>
 <p>See also
-<a href=\"Modelica:Modelica.Math.Matrices.LU\">Matrices.LU</a>, 
+<a href=\"Modelica:Modelica.Math.Matrices.LU\">Matrices.LU</a>,
 <a href=\"Modelica:Modelica.Math.Matrices.solve2\">Matrices.solve2</a>.</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-  Real A[3,3] = [1,2,3; 
+  Real A[3,3] = [1,2,3;
                  3,4,5;
                  2,1,4];
   Real B1[3] = [10, 20;

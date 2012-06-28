@@ -521,7 +521,7 @@ Therefore, in this case, the derivative of u is not
 needed and the tool can continue with the symbolic
 processing.
 </p>
- 
+
 
 </p>
 

@@ -1,3 +1,3 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests;
-package Complex 
+package Complex
 end Complex;

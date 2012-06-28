@@ -46,7 +46,7 @@ Z = Matrices.<b>nullspace</b>(A);<br>
 <p>
 This function calculates a orthonormal basis Z=[z_1, z_2, ...] of the nullspace of a matrix A, i.e. A*z_i=0.
 </p>
-The nullspace is obtained by svd method. That is, matrix A is dcomposed into the matrices S, U, V: 
+The nullspace is obtained by svd method. That is, matrix A is dcomposed into the matrices S, U, V:
 <blockquote><pre>
         H
  <b>A</b> = <b>U</b><b>S</b><b>V</b>
@@ -82,14 +82,14 @@ with
        3, 4,  5, 2;
       -1, 2, -3, 3];
   (Z, nullity) = nullspace(A);
-  
+
   results in:
-  
+
   Z=[0.1715;
     -0.686;
      0.1715;
      0.686]
-     
+
   nullity = 1
 </pre></blockquote>
 </p>

@@ -49,7 +49,7 @@ algorithm
   annotation (Documentation(info="<html>
 <p>
 Computes the time response of the system
-<blockquote><pre> 
+<blockquote><pre>
      dss = DiscreteStateSpace( A=[0.99005, 0.00985;
                                   0,       0.9802],
       B=[0.01,0;
@@ -58,7 +58,7 @@ Computes the time response of the system
       D=[0,0; 0,0],
       Ts=0.01,
       B2=[0,0; 0,0],
-      method=Modelica_LinearSystems2.Types.Method.StepExact), 
+      method=Modelica_LinearSystems2.Types.Method.StepExact),
 </pre></blockquote>
 
 sampled at <i>Ts=0.01</i> with inititial state <i>x0=[0;0]</i>

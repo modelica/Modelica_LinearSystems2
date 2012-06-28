@@ -276,7 +276,7 @@ package Filters
        /* Check coefficients of first and second order transfer functions
         Tietze/Schenk:  (a1*p + 1); (b2*p^2 + a2*p + 1)
         ZerosAndPoles:  (p + a3)  ; (p + a3)^2 = p^2 + 2*a3*p + a3^2)
-        Therefore:       a1 = 1/a3; a2 = 2/a3, b2 = 1/a3^2 
+        Therefore:       a1 = 1/a3; a2 = 2/a3, b2 = 1/a3^2
      */
        evenOrder :=mod(i, 2) == 0;
        if i==1 then
@@ -342,10 +342,10 @@ In tables Abb. 13.14 on pages 828-834 of (Tietze/Schenk 2002), the filter coeffi
 given with respect to normalized filters for a cut-off angular frequency
 of 1 rad/s. The normalization is performed in such a way that at the cut-off
 frequency the transfer function has an amplitude of -3db (= 10^(-3/20) = 0.7079457..).
-In the tables, not the exact -3db value is used but the approximation 
+In the tables, not the exact -3db value is used but the approximation
 sqrt(2)/2 (= 0.707106...). Due to \"historical\" reasons, function baseFilter
 from the Modelica_LinearSystems library uses -3db for Bessel and Chebyshev filters
-and sqrt(2)/2 for CriticalDamping and Butterworth filters. Furthermore, the table 
+and sqrt(2)/2 for CriticalDamping and Butterworth filters. Furthermore, the table
 gives the values only up to 4 significant digits. For these reasons, in this test
 function the comparison is performed up to 3 significant digits.
 </p>

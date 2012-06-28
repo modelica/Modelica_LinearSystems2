@@ -488,20 +488,20 @@ algorithm
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right> z </td><td align=center> =  </td>  <td> DiscreteTransferFunction.<b>z</b>()  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
-Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can be used for generating like 
+Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can be used for generating like
 <blockquote><pre>
         DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
 </pre></blockquote>
 
 </p>
- 
 
- 
- 
+
+
+
 </html> "));
 end z;
 
@@ -545,11 +545,11 @@ algorithm
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>timeResponse</b>(tf, dt, tSpan, responseType, x0)  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
-First, the discrete transfer function representation is transformed into a discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. 
+First, the discrete transfer function representation is transformed into a discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e.
 <blockquote><pre>
     Impulse \"Impulse response\",
     Step \"Step response\",
@@ -558,7 +558,7 @@ First, the discrete transfer function representation is transformed into a discr
 </pre></blockquote>
 The outputs y and x are calculated from the system equations of the discrete state space system for each time step t=k*dt.
 </p>
- 
+
 <h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
@@ -568,11 +568,11 @@ The outputs y and x are calculated from the system equations of the discrete sta
   Real tSpan= 0.4;
   Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
   Real x0[1]={0,0};
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
- 
+  Real x[5,1,1]
+
 <b>algorithm</b>
   dtf.Ts:=0.1;
   (y,t,x):=Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.timeResponse(dtf,tSpan,response,x0);
@@ -580,7 +580,7 @@ The outputs y and x are calculated from the system equations of the discrete sta
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = {0.0, 0.0, 1.0, 2.89548693586698, 5.58336953639396}
 </pre></blockquote>
- 
+
 </html>"));
 end timeResponse;
 
@@ -616,7 +616,7 @@ annotation(interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>impulseResponse</b>(dtf, tSpan, x0)  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
@@ -627,7 +627,7 @@ and the impulse response of the discrete state space system is calculated. The t
 </pre></blockquote>
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
 </p>
- 
+
 <h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
@@ -635,11 +635,11 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 
   Real tSpan= 0.4;
   Real x0[1]={0,0};
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
- 
+  Real x[5,1,1]
+
 <b>algorithm</b>
   dtf.Ts:=0.1;
   (y,t,x):=Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.impulseResponse(dtf,tSpan,response,x0);
@@ -647,8 +647,8 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = {0.0, 0.0, 1.0, 1.89548693586698, 2.68788260052697}
 </pre></blockquote>
- 
- 
+
+
 </html> "));
 end impulseResponse;
 
@@ -683,7 +683,7 @@ algorithm
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>stepResponse</b>(tf, tSpan, x0)  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
@@ -694,7 +694,7 @@ and the step response of the discrete state space system is calculated. The type
 </pre></blockquote>
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
 </p>
- 
+
 <h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
@@ -702,11 +702,11 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 
   Real tSpan= 0.4;
   Real x0[1]={0,0};
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
- 
+  Real x[5,1,1]
+
 <b>algorithm</b>
   dtf.Ts:=0.1;
   (y,t,x):=Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.stepResponse(dtf,tSpan,response,x0);
@@ -714,8 +714,8 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = {0.0, 0.0, 1.0, 2.89548693586698, 5.58336953639396}
 </pre></blockquote>
- 
-  
+
+
 </html> "));
 end stepResponse;
 
@@ -751,7 +751,7 @@ algorithm
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>rampResponse</b>(tf, tSpan, x0)  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
@@ -762,7 +762,7 @@ and the ramp response of the discrete state space system is calculated. The type
 </pre></blockquote>
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
 </p>
- 
+
 <h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
@@ -770,11 +770,11 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 
   Real tSpan= 0.4;
   Real x0[1]={0,0};
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
- 
+  Real x[5,1,1]
+
 <b>algorithm</b>
   dtf.Ts:=0.1;
   (y,t,x):=Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.rampResponse(dtf,tSpan,response,x0);
@@ -782,7 +782,7 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = {0.0, 0.0, 0.0, 0.1, 0.389548693586699}
 </pre></blockquote>
- 
+
 </html> "));
 end rampResponse;
 
@@ -820,7 +820,7 @@ annotation(interactive=true, Documentation(info="<html>
  <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>initialResponse</b>(x0, tf, tSpan)  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
@@ -831,7 +831,7 @@ and the initial response of the discrete state space system for initial state x0
 </pre></blockquote>
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
 </p>
- 
+
 <h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
@@ -839,11 +839,11 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 
   Real tSpan= 0.4;
   Real x0[1]={1,2};
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
- 
+  Real x[5,1,1]
+
 <b>algorithm</b>
   dtf.Ts:=0.1;
   (y,t,x):=Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.initialResponse(x0,dtf,tSpan,response,x0);
@@ -851,7 +851,7 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = {1.0, 2.0, 2.88598574821853, 3.66037203581564, 4.3264045475288}
 </pre></blockquote>
- 
+
 </html> "));
 end initialResponse;
 
@@ -873,14 +873,14 @@ algorithm
 </table>
 <h4>Description</h4>
 <p>
-Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of a discrete transfer function. 
+Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of a discrete transfer function.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
    DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.DiscreteTransferFunction  dtf=(0.0023753*z^2 + 0.00475059*z + 0.0023753)/(z^2 - 1.89549*z + 0.904988);
- 
+
    Real dDegree;
 
 <b>algorithm</b>
@@ -935,15 +935,15 @@ Computes a DiscreteZerosAndPoles record
                  product(q + n1[i]) * product(q^2 + n2[i,1]*q + n2[i,2])
         dzp = k*---------------------------------------------------------
                  product(q + d1[i]) * product(q^2 + d2[i,1]*q + d2[i,2])
-                 
+
 </pre></blockquote>
-of a discrete transfer function representated by numerator and denominator polynomial. The poles and zeros and the gain <tt>k</tt> are computed 
+of a discrete transfer function representated by numerator and denominator polynomial. The poles and zeros and the gain <tt>k</tt> are computed
 from the DiscreteTransferFunctio-input and are used as inputs the DiscreteZerosAndPoles constructor.
 
 
 <h4>Example</h4>
 <blockquote><pre>
-   DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();  
+   DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
    Modelica_LinearSystems2.DiscreteTransferFunction dtf = 1/(z^2 + 3*z + 2)
 
 
@@ -1036,7 +1036,7 @@ is transformed into:
              <b>D</b> = [b4/a4];
 </pre></blockquote>
 
-   
+
 </pre></blockquote>
 
 
@@ -1502,8 +1502,8 @@ algorithm
 
   annotation (interactive=true, Documentation(info="<html>
 
- 
- 
+
+
 </html> "));
 end fromModel;
 

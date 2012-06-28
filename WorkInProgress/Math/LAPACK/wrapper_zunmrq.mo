@@ -29,31 +29,31 @@ protected
   #include<f2c.h>
 extern  int zunmrq_(char *, char *, integer *, integer *, integer *, doublecomplex *, integer *, doublecomplex *, doublecomplex *, integer *, doublecomplex *, integer *, integer *);
 
- #include <stdio.h> 
+ #include <stdio.h>
 
-int c_inter_zunmrq_(char *side, char *trans, integer *m, integer *n, integer *k, integer *dim2, doublereal *rq_real, doublereal *rq_imag, integer *lda, doublereal *tau_real, doublereal *tau_imag, 
+int c_inter_zunmrq_(char *side, char *trans, integer *m, integer *n, integer *k, integer *dim2, doublereal *rq_real, doublereal *rq_imag, integer *lda, doublereal *tau_real, doublereal *tau_imag,
         doublereal *c_real, doublereal *c_imag, integer *ldc, integer *lwork, integer *info)
 {
    doublecomplex *rq;
    doublecomplex *c;
    doublecomplex *tau;
    doublecomplex *work;
-     
+
    integer nn=*n;
    integer mm=*m;
    integer kk=*k;
    integer ddim2=*dim2;
    integer llwork=*lwork;
    integer i;
-     FILE *fileptr;  
-    
-   fileptr = fopen(\"test.txt\",\"w\"); 
-  
-   rq = (doublecomplex *) malloc((kk*ddim2+1)*sizeof(doublecomplex));    
-   c = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));    
-   tau = (doublecomplex *) malloc((kk+1)*sizeof(doublecomplex));      
+     FILE *fileptr;
+
+   fileptr = fopen(\"test.txt\",\"w\");
+
+   rq = (doublecomplex *) malloc((kk*ddim2+1)*sizeof(doublecomplex));
+   c = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));
+   tau = (doublecomplex *) malloc((kk+1)*sizeof(doublecomplex));
    work = (doublecomplex *) malloc((llwork+1)*sizeof(doublecomplex));
-        
+
    for(i=0;i<kk*ddim2;i++)
    {
      rq[i].r=rq_real[i];
@@ -69,16 +69,16 @@ int c_inter_zunmrq_(char *side, char *trans, integer *m, integer *n, integer *k,
       tau[i].r=tau_real[i];
       tau[i].i=tau_imag[i];
     }
-  
+
  zunmrq_(side, trans, m, n, k, rq, lda, tau, c, ldc, work, lwork, info);
  fprintf(fileptr,\"info = %d\\n\",*info);
-   
+
    for(i=0;i<nn*mm;i++)
    {
      c_real[i]=c[i].r;
      c_imag[i]=c[i].i;
    }
-  
+
    free(rq);
    free(c);
    free(tau);

@@ -83,7 +83,7 @@ algorithm
 <h4>Description</h4>
 <p>
 Function <b>UKF</b> computes one recursion of the Unscented Kalman filter. Unscented Kalman filters are similar to Extended Kalman filters
-but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation 
+but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
 See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to

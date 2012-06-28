@@ -29,7 +29,7 @@ r = Matrices.<b>rcond</b>(A);
 </pre></blockquote>
 <h4>Description</h4>
 <p>
-This function estimates the reciprocal of the condition number (norm(A) * norm(inv(A))) of a general real matrix A, in either the 1-norm or the infinity-norm, using the LAPACK function DGECON.   
+This function estimates the reciprocal of the condition number (norm(A) * norm(inv(A))) of a general real matrix A, in either the 1-norm or the infinity-norm, using the LAPACK function DGECON.
 </p>
 <p>
 <h4>Example</h4>
@@ -37,9 +37,9 @@ This function estimates the reciprocal of the condition number (norm(A) * norm(i
   A = [1, 2
        2, 1];
   r = rcond(A);
-  
+
   results in:
-  
+
   r = 0.3333
 </pre></blockquote>
 </p>

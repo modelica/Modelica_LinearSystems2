@@ -8,13 +8,13 @@ external "C" readMatrixSizeEx(
     matrixName,
     dim);
   annotation (Include="
- 
-#include <matrixop.h> 
- 
-void readMatrixSizeEx(const char *file, const char *matname, int* dim) 
+
+#include <matrixop.h>
+
+void readMatrixSizeEx(const char *file, const char *matname, int* dim)
 {
   IntegerArray ms;
-  ms=readMatrixSize(file,matname); 
+  ms=readMatrixSize(file,matname);
   dim[0]=ms.data[0];
   dim[1]=ms.data[1];
   return;

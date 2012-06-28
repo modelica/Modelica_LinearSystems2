@@ -18,7 +18,7 @@ algorithm
       b,
       100*Modelica.Constants.eps);
     x := xx[1:size(A, 2)];
-    assert(info == 0, "Solving an overdetermined or underdetermined linear system of 
+    assert(info == 0, "Solving an overdetermined or underdetermined linear system of
 equations with function \"Matrices.leastSquares\" failed.");
   else
     x := fill(0, size(A, 2));
@@ -37,12 +37,12 @@ a solution in a least squarse sense:
 <pre>
   size(A,1) &gt; size(A,2):  returns x such that |A*x - b|^2 is a minimum
   size(A,1) = size(A,2):  returns x such that A*x = b
-  size(A,1) &lt; size(A,2):  returns x such that |x|^2 is a minimum for all 
+  size(A,1) &lt; size(A,2):  returns x such that |x|^2 is a minimum for all
                           vectors x that fulfill A*x = b
 </pre>
 <p>
 Note, the solution is computed with the LAPACK function \"dgelsx\",
-i.e., QR or LQ factorization of A with column pivoting. 
+i.e., QR or LQ factorization of A with column pivoting.
 If A does not have full rank,
 the solution is not unique and from the infinitely many solutions
 the one is selected that minimizes both |x|^2 and |A*x - b|^2.

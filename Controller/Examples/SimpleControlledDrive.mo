@@ -164,7 +164,7 @@ P-PI cascade controller. Simulate for 3 s and plot
   ramp.y          (reference angle of loadInertia)
   loadInertia.phi (angle of loadInertia)
   loadInertia.w   (speed of loadInertia)
-  torque.tau      (motor torque)         
+  torque.tau      (motor torque)
 </pre>
 <p>
 The standard setting in component sampleClock models a continuous controller.
@@ -178,13 +178,13 @@ the 3 sampler blocks and the PI speed controller are transformed into
 a discrete representation. The base sample time is defined in
 component sampleClock (= 0.02 s). Every discrete component samples
 its input and output. The sampling time of every component is a multiple
-of the base sample time (defined via parameter sampleFactor). 
+of the base sample time (defined via parameter sampleFactor).
 Here, the sampler and the PI speed controller are sampled with the
 base sample frequency. The sample time of the 2 samplers and
 of the P position controller is a factor of 5 slower.
 </p>
 <p>
-When comparing the simulations of the continuous and the 
+When comparing the simulations of the continuous and the
 (more realistic) discrete representation, it turns out that the
 discrete control systems works a bit worse. This can be improved
 by reducing the sample time in sampleClock.
@@ -198,7 +198,7 @@ time to determine the analog actuator (torque) signal, and
 component Noise to add uniformly distributed noise to
 the measurement signals.
 </p>
-<p>Within Dymola simulation tool the &QUOT;Commands / Simulate and Plot Results&QUOT; 
+<p>Within Dymola simulation tool the &QUOT;Commands / Simulate and Plot Results&QUOT;
 selection plots the simulation result of either continuous or discrete controller.</p>
 <h4>Simulation results </h4>
 <p>

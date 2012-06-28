@@ -68,7 +68,7 @@ Vectors.<b>length</b>(v);
 <h4>Description</h4>
 <p>
 The function call \"<code>Vectors.<b>length</b>(v)</code>\" returns the
-<b>Euclidean length</b> \"<code>sqrt(v*v)</code>\" of vector v. 
+<b>Euclidean length</b> \"<code>sqrt(v*v)</code>\" of vector v.
 The function call is equivalent to Vectors.norm(v). The advantage of
 length(v) over norm(v)\"is that function length(..) is implemented
 in one statement and therefore the function is usually automatically
@@ -114,8 +114,8 @@ Vectors.<b>norm</b>(v,p=2);   // 1 &le; p &le; &#8734;
 <h4>Description</h4>
 <p>
 The function call \"<code>Vectors.<b>norm</b>(v)</code>\" returns the
-<b>Euclidean norm</b> \"<code>sqrt(v*v)</code>\" of vector v. 
-With the optional 
+<b>Euclidean norm</b> \"<code>sqrt(v*v)</code>\" of vector v.
+With the optional
 second argument \"p\", any other p-norm can be computed:
 </p>
 <blockquote>
@@ -189,13 +189,13 @@ Note, for any vector norm the following inequality holds:
   <h4>Description</h4>
   <p>
   The function call \"<code>Vectors.<b>normalize</b>(v)</code>\" returns the
-  <b>unit vector</b> \"<code>v/length(v)</code>\" of vector v. 
-  If length(v) is close to zero (more precisely, if length(v) &lt; eps), 
+  <b>unit vector</b> \"<code>v/length(v)</code>\" of vector v.
+  If length(v) is close to zero (more precisely, if length(v) &lt; eps),
   v is returned in order to avoid
   a division by zero. For many applications this is useful, because
   often the unit vector <b>e</b> = <b>v</b>/length(<b>v</b>) is used to compute
-  a vector x*<b>e</b>, where the scalar x is in the order of length(<b>v</b>), 
-  i.e., x*<b>e</b> is small, when length(<b>v</b>) is small and then 
+  a vector x*<b>e</b>, where the scalar x is in the order of length(<b>v</b>),
+  i.e., x*<b>e</b> is small, when length(<b>v</b>) is small and then
   it is fine to replace <b>e</b> by <b>v</b> to avoid a division by zero.
   </p>
   <p>
@@ -640,7 +640,7 @@ algorithm
      index  := 0;
   end if;
   annotation (Documentation(info="<html>
- 
+
 </html>"));
 end 'max';
 
@@ -803,7 +803,7 @@ Computes the invariant zeros of a system in state space form:
 The invariant zeros of this system are defined as the variables
 z that make the following matrix singular:
 </p>
-<pre> 
+<pre>
     | <b>A</b> <b>B</b> |     | <b>I</b> <b>0</b> |
     |     | - z*|     |
     | <b>C</b> <b>D</b> |     | <b>0</b> <b>0</b> |
@@ -813,7 +813,7 @@ where <b>I</b> is the identity matrix of the same size as <b>A</b>
 and <b>0</b> are zero matrices of appropriate dimensions.
 </p>
 <p>
-Currently, there is the restriction that the number of 
+Currently, there is the restriction that the number of
 inputs and the number of outputs must be identical.
 </p>
 </html>"));
@@ -879,10 +879,10 @@ inputs and the number of outputs must be identical.
   <p>
   Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of a state space system. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <b>ss.A</b>. Just like in <a href=\"modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
   The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
-  
-  
+
+
   </p>
-  
+
   <h4>Example</h4>
   <blockquote><pre>
      Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
@@ -890,21 +890,21 @@ inputs and the number of outputs must be identical.
         B=[1;1],
         C=[1,1],
         D=[0]);
-  
+
      Real eigenvectors[2,2];
      Complex eigenvalues[2];
-  
+
   <b>algorithm</b>
     (eigenvectors, eigenvalues) = Modelica_LinearSystems2.StateSpace.Analysis.eigenVectors(ss, true);
   // eigenvectors = [0.707, 0; 0, 0.707]
   // eigenvalues = {-1 + 1j, -1 - 1j}
-  
+
             |0.707 |         | 0.707 |
   i.e. v1 = |      |,   v2 = |       |
             |0.707i|         |-0.707i|
   </pre></blockquote>
-  
-  
+
+
   </html> "));
   end eigenVectors;
 

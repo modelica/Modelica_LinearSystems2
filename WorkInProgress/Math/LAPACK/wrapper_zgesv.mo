@@ -21,18 +21,18 @@ external"FORTRAN 77" c_inter_zgesv(size(A_real, 1), size(B_real, 2), Awork_real,
   #include<f2c.h>
 extern  int zgesv_(integer *, integer *, doublecomplex *, integer *, integer *, doublecomplex *, integer *, integer *);
 
-int c_inter_zgesv_(integer *n, integer *nrhs, doublereal *a_real, doublereal *a_imag, integer *lda, integer *ipiv, doublereal *b_real, doublereal *b_imag, integer *ldb, integer *info) 
+int c_inter_zgesv_(integer *n, integer *nrhs, doublereal *a_real, doublereal *a_imag, integer *lda, integer *ipiv, doublereal *b_real, doublereal *b_imag, integer *ldb, integer *info)
 {
    doublecomplex *a;
    doublecomplex *b;
-     
+
    integer nn=*n;
    integer mm=*nrhs;
    integer i;
-  
-   a = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));      
-   b = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));      
-        
+
+   a = (doublecomplex *) malloc((nn*nn+1)*sizeof(doublecomplex));
+   b = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));
+
    for(i=0;i<nn*nn;i++)
    {
      a[i].r=a_real[i];
@@ -43,15 +43,15 @@ int c_inter_zgesv_(integer *n, integer *nrhs, doublereal *a_real, doublereal *a_
      b[i].r=b_real[i];
      b[i].i=b_imag[i];
    }
-   
+
    zgesv_(n, nrhs, a, lda, ipiv, b, ldb, info);
-  
+
    for(i=0;i<nn*mm;i++)
    {
      b_real[i]=b[i].r;
      b_imag[i]=b[i].i;
    }
-   
+
    free(a);
    free(b);
   return 0;

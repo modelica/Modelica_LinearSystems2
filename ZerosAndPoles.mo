@@ -46,7 +46,7 @@ record ZerosAndPoles
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
@@ -160,14 +160,14 @@ follow each other as above. An error occurs if this is not the case.
 <p>
 with j=sqrt(-1), is defined as
 </p>
-<pre> 
-   <b>import</b> Modelica_LinearSystems2.Math.Complex; 
+<pre>
+   <b>import</b> Modelica_LinearSystems2.Math.Complex;
    <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
-   
+
    zp = ZerosAndPoles(z = {Complex(-1,0)},
                       p = {Complex(1,0),
                            Complex(2,3),
-                           Complex(2,-3)}, 
+                           Complex(2,-3)},
                            k=4);
 </pre></blockquote>
 </html>"));
@@ -648,20 +648,20 @@ end '==';
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  p </td><td align=center> =  </td>  <td> ZerosAndPoles.<b>p</b>()  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
-Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It can be used for generating like 
+Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It can be used for generating like
 <blockquote><pre>
         ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
 </pre></blockquote>
 
 </p>
- 
 
- 
- 
+
+
+
 </html> "));
   end p;
 
@@ -869,7 +869,7 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
 </table>
 <h4>Description</h4>
 <p>
-Function <b>impulseResponse</b> calculates the time response of a ZerosAndPoles transfer function with impulse imput. 
+Function <b>impulseResponse</b> calculates the time response of a ZerosAndPoles transfer function with impulse imput.
 The system is first transformed zo a state space system, wich is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
 <blockquote><pre>
 ZerosAndPoles.Analysis.impulseResponse(zp, dt, tSpan)
@@ -880,25 +880,25 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.I
 </pre></blockquote>
 See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
 </p>
- 
+
 <h4>Example</h4>
 <blockquote><pre>
   Modelica_LinearSystems2.ZerosAndPoles zp=zp=1/(p^2 + p + 1)
   Real Ts=0.1;
   Real tSpan= 0.4;
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
- 
+  Real x[5,1,1]
+
 <b>algorithm</b>
   (y,t,x):=Modelica_LinearSystems2.ZerosAndPoles.Analysis.impulseResponse(zp,Ts,tSpan);
 //  y[:,1,1]={0, 0.095, 0.18, 0.2553, 0.321}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.095, 0.18, 0.2553, 0.321}
 </pre></blockquote>
- 
- 
+
+
 </html> "));
   end impulseResponse;
 
@@ -925,7 +925,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
 </table>
 <h4>Description</h4>
 <p>
-Function <b>stepResponse</b> calculates the step response of a transfer function. 
+Function <b>stepResponse</b> calculates the step response of a transfer function.
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
 <blockquote><pre>
 ZerosAndPoles.Analysis.stepResponse(zp, dt, tSpan)
@@ -936,25 +936,25 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.S
 </pre></blockquote>
 See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
 </p>
- 
+
 <h4>Example</h4>
 <blockquote><pre>
   Modelica_LinearSystems2.ZerosAndPoles zp=zp=1/(p^2 + p + 1)
   Real Ts=0.1;
   Real tSpan= 0.4;
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
- 
+  Real x[5,1,1]
+
 <b>algorithm</b>
   (y,t,x):=Modelica_LinearSystems2.ZerosAndPoles.Analysis.stepResponse(zp,Ts,tSpan);
 //  y[:,1,1]={0, 0.0048, 0.01867, 0.04, 0.0694}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0048, 0.01867, 0.04, 0.0694}
 </pre></blockquote>
- 
- 
+
+
 </html> "));
   end stepResponse;
 
@@ -982,7 +982,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
 </table>
 <h4>Description</h4>
 <p>
-Function <b>rampResponse</b> calculates the time response of a transfer function for ramp imput u = t. 
+Function <b>rampResponse</b> calculates the time response of a transfer function for ramp imput u = t.
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
 <blockquote><pre>
 ZerosAndPoles.Analysis.rampResponse(zp, dt, tSpan)
@@ -993,25 +993,25 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.R
 </pre></blockquote>
 See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
 </p>
- 
+
 <h4>Example</h4>
 <blockquote><pre>
   Modelica_LinearSystems2.ZerosAndPoles zp=zp=1/(p^2 + p + 1)
   Real Ts=0.1;
   Real tSpan= 0.4;
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
- 
+  Real x[5,1,1]
+
 <b>algorithm</b>
   (y,t,x):=Modelica_LinearSystems2.ZerosAndPoles.Analysis.rampResponse(zp,Ts,tSpan);
 //  y[:,1,1]={0, 0.0002, 0.0012, 0.0042, 0.0096}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0002, 0.0012, 0.0042, 0.0096}
 </pre></blockquote>
- 
- 
+
+
 </html> "));
   end rampResponse;
 
@@ -1042,7 +1042,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
 </table>
 <h4>Description</h4>
 <p>
-Function <b>initialResponse</b> calculates the time response of a state space system for given initial condition and zero inputs. 
+Function <b>initialResponse</b> calculates the time response of a state space system for given initial condition and zero inputs.
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
 <blockquote><pre>
 ZerosAndPoles.Analysis.initialResponse(x0,zp, dt, tSpan)
@@ -1053,26 +1053,26 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.I
 </pre></blockquote>
 See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
 </p>
- 
+
 <h4>Example</h4>
 <blockquote><pre>
   Modelica_LinearSystems2.ZerosAndPoles zp=zp=1/(p^2 + p + 1)
   Real Ts=0.1;
   Real tSpan= 0.4;
   Real x0[2] = {1,1};
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
- 
+  Real x[5,1,1]
+
 <b>algorithm</b>
   (y,t,x):=Modelica_LinearSystems2.ZerosAndPoles.Analysis.initialResponse(x0,zp,Ts,tSpan);
 //  y[:,1,1]={1, 1.0903, 1.1616, 1.2151, 1.252}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={1, 1.0903, 1.1616, 1.2151, 1.252}
 </pre></blockquote>
- 
- 
+
+
 </html> "));
   end initialResponse;
 
@@ -1092,7 +1092,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
 </table>
 <h4>Description</h4>
 <p>
-Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial constituted by the first and second order polynomials of the ZeroAndPoles numerator. 
+Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial constituted by the first and second order polynomials of the ZeroAndPoles numerator.
 See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree\">ZerosAndPoles.Analysis.denominatorDegree</a>.
 </p>
 
@@ -1128,7 +1128,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.den
 </table>
 <h4>Description</h4>
 <p>
-Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial constituted by the first and second order polynomials of the ZeroAndPoles denominator. 
+Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial constituted by the first and second order polynomials of the ZeroAndPoles denominator.
 See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.numeratorDegree\">ZerosAndPoles.Analysis.numeratorDegree</a>.
 </p>
 
@@ -1136,7 +1136,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.num
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
- 
+
    Real dDegree;
 
 <b>algorithm</b>
@@ -1205,7 +1205,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
    Complex j = Modelica_LinearSystems2.Math.Complex.j();
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
- 
+
    Complex result;
 
 <b>algorithm</b>
@@ -1302,27 +1302,27 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
 <p>
 This function calculates the zeros, poles and gain of a ZerosAndPoels transfer function.
 
- 
+
 </p>
- 
+
 <h4>Example</h4>
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
-     
+
 public
    output Complex z;
    output Complex p;
    output Real k;
- 
+
 <b>algorithm</b>
   (z,p,k)=Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles(zp);
 //  z = {-1}
 //  p = {-0.5 + 0.866025j, -0.5 - 0.866025j}
 //  k = 1
 </pre></blockquote>
- 
- 
+
+
 </html> "));
     end zerosAndPoles;
 
@@ -1359,12 +1359,12 @@ Calculate the eigenvalues of the corresponding state space representation of a z
 <blockquote><pre>
    ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
-  
+
    Complex eigenvalues[2];
-   
+
 <b>algorithm</b>
   eigenvalues = Modelica_LinearSystems2.ZerosAndPoles.Analysis.eigenValues(zp);
-// eigenvalues = {-0.5 + j*sqrt(3)/2, -0.5 - j*sqrt(3)/2}  
+// eigenvalues = {-0.5 + j*sqrt(3)/2, -0.5 - j*sqrt(3)/2}
 </pre></blockquote>
 
 
@@ -1501,16 +1501,16 @@ Computes the invariant zeros of the corresponding state space representation of 
 
 <h4>Description</h4>
 
-<p> 
-This function computes the steady state gain <b>k</b> of a 
+<p>
+This function computes the steady state gain <b>k</b> of a
 ZerosAndPoles transfer function g(s), i.e. k = g(s=0).
 For a stable transfer function, a step input u results
 in the output y(t->t<sub>&infin;</sub>) = k.</li>
-</ul> 
+</ul>
 
 <p>
 If the transfer function has one or more zero poles, <b>k</b> is infinite.
-In this case, the output argument <b>finite</b> = <b>false</b> and 
+In this case, the output argument <b>finite</b> = <b>false</b> and
 <b>k</b> = Modelica.Constants.inf.
 </p>
 </html>
@@ -1584,7 +1584,7 @@ Function ZerosAndPoles.Analysis.<b>isControllable</b> checks the controllability
         observable := StateSpace.Analysis.isObservable(ss=ss, method=method);
 
         annotation (Documentation(info="<html>
- 
+
 </html><html>
 <h4>Syntax</h4>
 <table>
@@ -1654,7 +1654,7 @@ The transfer function is stabilizable if all unstable poles are controllable.
 
    Boolean stabilizable;
 
-<b>algorithm</b> 
+<b>algorithm</b>
    stabilizable := Modelica_LinearSystems2.ZerosAndPoles.Analysis.isStabilizable(zp);
 // stabilizable = true
 </pre></blockquote>
@@ -1701,7 +1701,7 @@ The transfer function is detectable if all unstable poles are observable.
 
    Boolean detectable;
 
-<b>algorithm</b> 
+<b>algorithm</b>
     detectable := Modelica_LinearSystems2.ZerosAndPoles.Analysis.isDetectable(zp);
 // detectable = false
 </pre></blockquote>
@@ -1790,7 +1790,7 @@ of a zeros and poles transfer function.
 <p>
 Calculate the observability matrix
 <blockquote><pre>
-  <b>Q</b> = [<b>C</b>; <b>C</b>*<b>A</b>; ...; <b>C</b>*<b>A</b>^(n-1)] 
+  <b>Q</b> = [<b>C</b>; <b>C</b>*<b>A</b>; ...; <b>C</b>*<b>A</b>^(n-1)]
 </pre>
 </blockquote>
 of the system corresponding state space system
@@ -1851,17 +1851,17 @@ of a zeros-and-poles transfer function.
     input Modelica.SIunits.Frequency f_min=0
         "Band of normalized band pass/stop filter is f_min (-3db*gain) .. f_cut (-3db*gain)";
 
-   /* 
+   /*
                                | size(n1,1)   | size(n2,1)       | size(d1,1)   | size(d2,1)
     ---------------------------+--------------+------------------+--------------+-------------------
     CriticalDamping - LowPass  |      0       |      0           |    order     |     0
     CriticalDamping - HighPass |    order     |      0           |    order     |     0
     CriticalDamping - BandPass |    order     |      0           |      0       |   order
-    CriticalDamping - BandStop |      0       |    order         |      0       |   order 
+    CriticalDamping - BandStop |      0       |    order         |      0       |   order
     ---------------------------+--------------+------------------+--------------+-------------------
     LowPass                    |      0       |      0           | mod(order,2) | integer(order/2)
     HighPass                   | mod(order,2) | integer(order/2) | mod(order,2) | integer(order/2)
-    BandPass                   |     order    |      0           |      0       |   order 
+    BandPass                   |     order    |      0           |      0       |   order
     BandStop                   |      0       |    order         |      0       |   order
  */
     output ZerosAndPoles filter(
@@ -1950,15 +1950,15 @@ of a zeros-and-poles transfer function.
     elseif filterType == Types.FilterType.BandPass then
       /* The band pass filter is derived from the low pass filter by
        the transformation new(p) = (p + 1/p)/w   (w = w_band = (f_max - f_min)/sqrt(f_max*f_min) )
-        
-       1/(p + a)         -> 1/(p/w + 1/p/w) + a) 
+
+       1/(p + a)         -> 1/(p/w + 1/p/w) + a)
                             = w*p / (p^2 + a*w*p + 1)
-                            
+
        1/(p^2 + a*p + b) -> 1/( (p+1/p)^2/w^2 + a*(p + 1/p)/w + b )
                             = 1 / ( p^2 + 1/p^2 + 2)/w^2 + (p + 1/p)*a/w + b )
                             = w^2*p^2 / (p^4 + 2*p^2 + 1 + (p^3 + p)a*w + b*w^2*p^2)
                             = w^2*p^2 / (p^4 + a*w*p^3 + (2+b*w^2)*p^2 + a*w*p + 1)
-                            
+
                             Assume the following description with PT2:
                             = w^2*p^2 /( (p^2 + p*(c/alpha) + 1/alpha^2)*
                                          (p^2 + p*(c*alpha) + alpha^2) )
@@ -1972,7 +1972,7 @@ of a zeros-and-poles transfer function.
                               alpha^2 + 1/alpha^2 + c^2 = 2+b*w^2 -> equation to determine alpha
                               alpha^4 + 1 + a^2*w^2*alpha^4/(1+alpha^2)^2 = (2+b*w^2)*alpha^2
                               or z = alpha^2
-                              z^2 + a^2*w^2*z^2/(1+z)^2 - (2+b*w^2)*z + 1 = 0                                     
+                              z^2 + a^2*w^2*z^2/(1+z)^2 - (2+b*w^2)*z + 1 = 0
     */
       assert(n_num2 == 0 and n_den1 == 0, "Internal error 2, should not occur");
       assert(n_num1 == order and n_den2 == order, "Internal error 3, should not occur:");
@@ -2001,16 +2001,16 @@ of a zeros-and-poles transfer function.
     elseif filterType == Types.FilterType.BandStop then
       /* The band stop filter is derived from the low pass filter by
        the transformation new(p) = w/( (p + 1/p) )   (w = w_band = (f_max - f_min)/sqrt(f_max*f_min) )
-       
-       1/(p + a)         -> 1/( w/(p + 1/p) ) + a) 
+
+       1/(p + a)         -> 1/( w/(p + 1/p) ) + a)
                             = 1/a*(p^2 + 1) / (p^2 + (w/a)*p + 1)
-                                                        
+
        1/(p^2 + a*p + b) -> 1/( w^2/(p + 1/p)^2 + a*w/(p + 1/p) + b )
                             = 1/b*(p^2 + 1)^2 / (p^4 + a*w*p^3/b + (2+w^2/b)*p^2 + a*w*p/b + 1)
-                                 
+
                             Assume the following description with PT2:
                             = 1/b*(p^2 + 1)^2 / ( (p^2 + p*(c/alpha) + 1/alpha^2)*
-                                                  (p^2 + p*(c*alpha) + alpha^2) ) 
+                                                  (p^2 + p*(c*alpha) + alpha^2) )
                             = 1/b*(p^2 + 1)^2 / (  p^4 + c*(alpha + 1/alpha)*p^3
                                                    + (alpha^2 + 1/alpha^2 + c^2)*p^2
                                                    + c*(alpha + 1/alpha)*p + 1 )
@@ -2020,11 +2020,11 @@ of a zeros-and-poles transfer function.
                               alpha^2 + 1/alpha^2 + c^2 = 2+w^2/b -> equation to determine alpha
                               alpha^4 + 1 + (a*w/b*alpha^2)^2/(1+alpha^2)^2 = (2+w^2/b)*alpha^2
                               or z = alpha^2
-                              z^2 + (a*w/b*z)^2/(1+z)^2 - (2+w^2/b)*z + 1 = 0  
-                            
+                              z^2 + (a*w/b*z)^2/(1+z)^2 - (2+w^2/b)*z + 1 = 0
+
                             same as:  ww = w/b
                               z^2 + (a*ww*z)^2/(1+z)^2 - (2+b*ww)*z + 1 = 0  -> same equation as for BandPass
-                                                      
+
     */
       assert(n_num1 == 0 and n_den1 == 0, "Internal error 4, should not occur");
       assert(n_num2 == order and n_den2 == order, "Internal error 5, should not occur:");
@@ -2057,7 +2057,7 @@ of a zeros-and-poles transfer function.
     end if;
 
     /* Transform filter to desired cut-off frequency ===================================
-  
+
      Change filter coefficients according to transformation new(p) = p/w_cut
      Numerator  :     (p/w)^2 + a*(p/w) + b = (1/w^2)*(p^2 + (a*w)*p + b*w^2)
                                   (p/w) + a = (1/w)*(p + w*a)
@@ -2073,8 +2073,8 @@ of a zeros-and-poles transfer function.
     /* Add gain ======================================================================= */
     if filterType == Types.FilterType.LowPass then
        /* A low pass filter does not have numerator polynomials and all coefficients
-        of the denominator polynomial are guaranteed to be non-zero. It is then 
-        easy to compute the gain: 
+        of the denominator polynomial are guaranteed to be non-zero. It is then
+        easy to compute the gain:
            1/(p + a)         -> a/(p + a)        , since g(0) = 1; k = a
            1/(p^2 + a*p + b) -> b/(p^2 + a*p + b), since g(0) = 1; k = b
      */
@@ -2089,7 +2089,7 @@ of a zeros-and-poles transfer function.
 
      elseif filterType == Types.FilterType.HighPass or
             filterType == Types.FilterType.BandStop then
-       /* A high pass filter and a band stop filter have g(s->infinity) = 1 
+       /* A high pass filter and a band stop filter have g(s->infinity) = 1
         and therefore filter.k = 1 is required, in ZerosAndPoles formulation
      */
        filter.k := gain;
@@ -2170,9 +2170,9 @@ is set.
 <h4>Example</h4>
 <blockquote><pre>
    Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping;
-   Integer order=2; 
+   Integer order=2;
    Modelica.SIunits.Frequency f_cut=10;
-   
+
    ZerosAndPoles zp_filter;
 
 <b>algorithm</b>
@@ -2275,7 +2275,7 @@ ZerosAndPoles.Plot.<b>polesAndZeros</b>(zp);
    or
 ZerosAndPoles.Plot.<b>polesAndZeros</b>(zp, poles=true, zeros=true, plot=true,
                      defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</a>(),
-                     device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>()); 
+                     device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>());
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -2305,9 +2305,9 @@ defines a transfer functions as:
       defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
             heading=\"Poles and zeros of \" + String(tf)));
 </pre>
-   
+
 <p>
-and results in 
+and results in
 </p>
 
 <blockquote>
@@ -2445,21 +2445,21 @@ Plots the bode-diagram of a transfer function.
 
 <h4>Example</h4>
 <blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp =(p^2 + 5*p + 7)/(p + 2)/(p + 3);
-   
+
 <b>algorithm</b>
    Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(zp)
 //  gives:
 </pre></blockquote>
 
 </p>
- 
-<blockquote> 
+
+<blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
- 
+
 </blockquote>
 
 
@@ -2522,7 +2522,7 @@ ZerosAndPoles.Plot.<b>timeResponse</b>(zp, dt, tSpan,response, x0, columnLabels,
                    device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4>Description</h4>
-<p>Function <b>timeResponse</b> plots the time response of a transfer function. The character of the time response if defined by the input 
+<p>Function <b>timeResponse</b> plots the time response of a transfer function. The character of the time response if defined by the input
 <a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>, <a href=\"Modelica://Modelica_LinearSystems2.
 ZerosAndPoles.Plot.step\">step</a>, <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>, and <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>. </p>
 
@@ -2530,7 +2530,7 @@ ZerosAndPoles.Plot.step\">step</a>, <a href=\"modelica://Modelica_LinearSystems2
 
 <h4>Example</h4>
 <blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp =(p + 1)/(p^2 + 5*p + 12);
 
    Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
@@ -2582,7 +2582,7 @@ ZerosAndPoles.Plot.step\">step</a>, <a href=\"modelica://Modelica_LinearSystems2
     annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-ZerosAndPoles.Plot.<b>impulse</b>(zp)  
+ZerosAndPoles.Plot.<b>impulse</b>(zp)
    or
 ZerosAndPoles.Plot.<b>impulse</b>(zp, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
@@ -2591,7 +2591,7 @@ ZerosAndPoles.Plot.<b>impulse</b>(zp, dt, tSpan, x0, columnLabels, defaultDiagra
 <p>
 Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer function. It is based on
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>, and
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
 
@@ -2602,7 +2602,7 @@ Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer
 <h4>Example</h4>
 <blockquote><pre>
 
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp =(p + 1)/(p^2 + 5*p + 12);
 
 <b>algorithm</b>
@@ -2703,14 +2703,14 @@ Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer
     annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-ZerosAndPoles.Plot.<b>ramp</b>(zp)  
+ZerosAndPoles.Plot.<b>ramp</b>(zp)
    or
 ZerosAndPoles.Plot.<b>ramp</b>(zp, dt, tSpan, x0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4>Description</h4>
 <p>
 Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">ramp</a>, and
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
 
@@ -2720,7 +2720,7 @@ Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer funct
 
 <h4>Example</h4>
 <blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp =(2*p^2 + 7*p + 13)/(p + 1)/(p^2 + 5*p + 12);
 
 <b>algorithm</b>
@@ -2777,14 +2777,14 @@ Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer funct
     annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-ZerosAndPoles.Plot.<b>initialResponse</b>(zp)  
+ZerosAndPoles.Plot.<b>initialResponse</b>(zp)
    or
 ZerosAndPoles.Plot.<b>initialResponse</b>(zp, dt, tSpan, y0, columnLabels, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 <h4>Description</h4>
 <p>
 Function <b>initialResponse</b> plots the initial response, i.e. the zeros input response of a zeros and poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>, and
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">initialResponse</a>.
 
@@ -2794,9 +2794,9 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
 
 <h4>Example</h4>
 <blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp = (p + 1)/(p^2 + 5*p + 12);
-   Real y0=1; 
+   Real y0=1;
 
 
 
@@ -2856,7 +2856,7 @@ Function <b>initialResponse</b> plots the initial response, i.e. the zeros input
 Computes a TransferFunction record
  <blockquote><pre>
            n(s)     b0 + b1*s + ... + bn*s^n
-   tf = -------- = -------------------------- 
+   tf = -------- = --------------------------
            d(s)     a0 + a1*s + ... + an*s^n
  </pre></blockquote>
 from a ZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the TransferFunction constructor.
@@ -2864,7 +2864,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
 
 <h4>Example</h4>
 <blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp = 1/(p + 3)/(p + 1)
 
 
@@ -2874,7 +2874,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
 </pre></blockquote>
 
 
- 
+
 </html>"));
     end toTransferFunction;
 
@@ -2913,7 +2913,7 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
 
 <h4>Example</h4>
 <blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp = [1/(p + 2)/(p + 1);p/(p + 1)/(p + 1)]
 
 
@@ -3448,7 +3448,7 @@ Therefore, in this case, the derivative of u is not
 needed and the tool can continue with the symbolic
 processing.
 </p>
- 
+
 
 </p>
 
@@ -3987,7 +3987,7 @@ Therefore, in this case, the derivative of u is not
 needed and the tool can continue with the symbolic
 processing.
 </p>
- 
+
 
 </p>
 
@@ -4085,13 +4085,13 @@ processing.
 <p><br/><h4>Description</h4></p>
 <p>Generate a matrix of ZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromModel</a> followed by a conversion from sate space to transfer function representation. </p>
 <p><h4>Example</h4></p>
-<blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
-   Real T_linearize = 5; 
-   
- 
+<blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;;
+   Real T_linearize = 5;
+
+
 <b>algorithm</b>
   zp = Modelica_LinearSystems2.ZerosAndPoles.Import.fromModel(modelName, T_linearize);
- 
+
 //  zp =[0.157605*(p + 0.706559)*(p + 12.3798)*(p^2-7.34273*p + 18.674)/( (p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572)*(p^2 + 2.07022e-015*p + 3.38074e-015) );
          0.157605*(p + 0.706559)*(p + 12.3798)*(p^2-7.34273*p + 18.674)/( (p-1.94349e-015)*(p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572) );
         -0.166305*(p^2-1.20297*p + 3.48327)/( (p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572) );
@@ -4155,7 +4155,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
 <h4>Example</h4>
 <blockquote><pre>
-     
+
 
 <b>algorithm</b>
   zp:=Modelica_LinearSystems2.ZerosAndPoles.Import.fromFile(\"zp.mat\", \"n\", \"d\");
@@ -5366,38 +5366,38 @@ using the following rules:
       end if;
 
       annotation (Documentation(info="<html> The transfer function H(p) of a <i>n</i> 'th order Bessel filter is given by
- 
+
 <blockquote><pre>
          Bn(0)
  H(p) = -------
          Bn(p)
  </pre>
 </blockquote> with the denominator polynomial
- 
+
 <blockquote><pre>
           n             n  (2n - k)!       p^k
  Bn(p) = sum c_k*p^k = sum ----------- * -------   (1)
          k=0           k=0 (n - k)!k!    2^(n-k)
 </pre></blockquote>
- 
+
 and the numerator
- 
+
 <blockquote><pre>
                (2n)!     1
 Bn(0) = c_0 = ------- * ---- .                     (2)
                 n!      2^n
  </pre></blockquote>
- 
+
 Although the coefficients c_k are integer numbers, it is not advisable to use the
 polynomials in an unfactorized form because the coefficients are fast growing with order
 n (c_0 is approximately 0.3e24 and 0.8e59 for order n=20 and order n=40
 respectively).<br>
- 
+
 Therefore, the polynomial Bn(p) is factorized to first and second order polynomials with
-real coefficients corresponding to zeros and poles representation that is used in this library. 
+real coefficients corresponding to zeros and poles representation that is used in this library.
 <p>
 The function returns the coefficients which resulted from factorization of the normalized transfer function
- 
+
 <blockquote><pre>
 H'(p') = H(p),  p' = p/w0
 </pre></blockquote>
@@ -5407,13 +5407,13 @@ alpha = 1/w0
 </pre></blockquote>
 the reciprocal of the cut of frequency w0 where the gain of the transfer function is
 decreased 3dB.<p>
- 
+
 Both, coefficients and cut off frequency were calculated symbolically and were eventually evaluated
 with high precision calculation. The results were stored in this function as real
 numbers.<p>
- 
+
 <br><br><b>Calculation of normalized Bessel filter coefficients</b><br><br>
- 
+
 Equation <blockquote><pre>
    abs(H(j*w0)) = abs(Bn(0)/Bn(j*w0)) = 10^(-3/20)
  </pre></blockquote>
@@ -5424,30 +5424,30 @@ which must be fulfilled for cut off frequency w = w0 leads to
 which has exactly one real solution w0 for each order n. This solutions of w0 are
 calculated symbolically first and evaluated by using high precise values of the
 coefficients c_k calculated by following (1) and (2). <br>
- 
+
 With w0, the coefficients of the factorized polynomial can be computed by calculating the
 zeros of the denominator polynomial
- 
+
 <blockquote><pre>
          n
  Bn(p) = sum w0^k*c_k*(p/w0)^k
          k=0
 </pre></blockquote>
- 
+
 of the normalized transfer function H'(p'). There exist n/2 of conjugate complex
 pairs of zeros (beta +-j*gamma) if n is even and one additional real zero (alpha) if n is
 odd. Finally, the coefficients a, b1_k, b2_k of the polynomials
- 
+
 <blockquote><pre> a*p + 1,  n is odd </pre></blockquote> and
- 
+
 <blockquote><pre> b2_k*p^2 + b1_k*p + 1,   k = 1,... div(n,2) </pre></blockquote>
- 
+
 results from <blockquote><pre> a = -1/alpha </pre></blockquote> and
 <blockquote><pre> b2_k = 1/(beta_k^2 + gamma_k^2) b1_k = -2*beta_k/(beta_k^2 + gamma_k^2)
 </pre></blockquote>
 </p>
- 
- 
+
+
 </html>
 "));
     end BesselCoefficients;
@@ -5892,11 +5892,11 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
       annotation (Documentation(info="<html>
 <p>
-A band pass with bandwidth \"w\" is determined from a low pass 
+A band pass with bandwidth \"w\" is determined from a low pass
 </p>
 
 <pre>
-  1/(p^2 + a*p + b) 
+  1/(p^2 + a*p + b)
 </pre>
 
 <p>
@@ -5904,7 +5904,7 @@ with the transformation
 </p>
 
 <pre>
-  new(p) = (p + 1/p)/w 
+  new(p) = (p + 1/p)/w
 </pre>
 
 <p>
@@ -5920,7 +5920,7 @@ This results in the following derivation:
 
 <p>
 This 4th order transfer function shall be split in to two transfer functions of order 2 each
-for numerical reasons. With the following formulation, the fourth order 
+for numerical reasons. With the following formulation, the fourth order
 polynomial can be represented (with the unknowns \"c\" and \"alpha\"):
 </p>
 
@@ -6230,9 +6230,9 @@ is set.
 <h4>Example</h4>
 <blockquote><pre>
    Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping;
-   Integer order=2; 
+   Integer order=2;
    Modelica.SIunits.Frequency f_cut=10;
-   
+
    ZerosAndPoles zp_filter;
 
 <b>algorithm</b>
@@ -6264,28 +6264,28 @@ is set.
             matName,
             "NoClass");
 
-      annotation (Include="#include <matrixop.h> 
-#include <matrixop.c> 
- 
- 
+      annotation (Include="#include <matrixop.h>
+#include <matrixop.c>
+
+
 #if !defined(DYMOLA_DSPACE) && !defined(NO_FILE)
 #include <amat.h>
 #include <sprwat.h>
 #endif
- 
+
 extern int findMatrixName(const char* fil,const char* matname, char *noClass) {
 int found=0;
- 
- 
+
+
 #if !defined(DYMOLA_DSPACE) && !defined(NO_FILE)
 {
         AmatGetFile afile;
         Amatrix amatrix;
- 
+
         int ret=amatGetOpen((char*)fil,noClass,(char*)0,&afile);
- 
+
         Assert(ret==0,amatError);
-        for(;ret==0 && !found;)  
+        for(;ret==0 && !found;)
 {
                 amatInit(&amatrix);
                 ret=amatGetMatrix(&afile, &amatrix);
@@ -6293,7 +6293,7 @@ int found=0;
                   found=1;
                 else
                   found=0;
- 
+
                 amatDel(&amatrix);
         }
         amatGetClose(&afile);
@@ -7150,13 +7150,13 @@ results in a polynomial with Real coefficients).
 <p>
 In the record, the zeros and poles are transformed
 into a product of first and second order polynomials.
-The data structure is especially useful in applications where first and 
-second order polynomials are naturally occuring, e.g., as 
-for <b>filters</b>. In fact, via function 
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>, a 
+The data structure is especially useful in applications where first and
+second order polynomials are naturally occuring, e.g., as
+for <b>filters</b>. In fact, via function
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>, a
 ZeroAndPole transfer function is generated from
-<b>low</b> and <b>high pass</b> analog filters 
-(<b>CriticalDamping</b>, <b>Bessel</b>, <b>Butterworth</b>, <b>Chebyshev</b>). 
+<b>low</b> and <b>high pass</b> analog filters
+(<b>CriticalDamping</b>, <b>Bessel</b>, <b>Butterworth</b>, <b>Chebyshev</b>).
 The filters are available in <b>normalized</b> (default) and non-normalized form.
 In the normalized form, the amplitude of the filter transfer function
 at the cutoff frequency is 3 dB.
@@ -7188,14 +7188,14 @@ Example:
 <p>
 with j=sqrt(-1), is defined as
 </p>
-<pre> 
-   <b>import</b> Modelica_LinearSystems2.Math.Complex; 
+<pre>
+   <b>import</b> Modelica_LinearSystems2.Math.Complex;
    <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
-   
+
    zp = ZerosAndPoles(z = {Complex(-1,0)},
                       p = {Complex(1,0),
                            Complex(2,3),
-                           Complex(2,-3)}, 
+                           Complex(2,-3)},
                            k=4);
 </pre>
 </html>"),

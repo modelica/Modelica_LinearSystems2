@@ -39,8 +39,8 @@ end if;
 </pre></blockquote>
 <h4>Description</h4>
 <p>
-This function call returns the eigenvalues and 
-optionally the (right) eigenvectors of a square matrix 
+This function call returns the eigenvalues and
+optionally the (right) eigenvectors of a square matrix
 <b>A</b>. The first column of \"eigenvalues\" contains the real and the
 second column contains the imaginary part of the eigenvalues.
 If the i-th eigenvalue has no imaginary part, then eigenvectors[:,i] is
@@ -48,10 +48,10 @@ the corresponding real eigenvector. If the i-th eigenvalue
 has an imaginary part, then eigenvalues[i+1,:] is the conjugate complex
 eigenvalue and eigenvectors[:,i] is the real and eigenvectors[:,i+1] is the
 imaginary part of the eigenvector of the i-th eigenvalue.
-With function 
+With function
 <a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a>,
-a real block diagonal matrix is constructed from the eigenvalues 
-such that 
+a real block diagonal matrix is constructed from the eigenvalues
+such that
 </p>
 <blockquote>
 <pre>
@@ -65,12 +65,12 @@ and no eigenvalue is zero).
 </p>
 <h4>Example</h4>
 <blockquote><pre>
-  Real A[3,3] = [1,2,3; 
+  Real A[3,3] = [1,2,3;
                  3,4,5;
                  2,1,4];
   Real eval;
 <b>algorithm</b>
-  eval := Matrices.eigenValues(A);  // eval = [-0.618, 0; 
+  eval := Matrices.eigenValues(A);  // eval = [-0.618, 0;
                                     //          8.0  , 0;
                                     //          1.618, 0];
 </pre>

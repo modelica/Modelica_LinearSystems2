@@ -26,54 +26,54 @@ external "Fortran 77" dgecon(
     iwork,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info=" 
- 
-  Purpose   
-    =======   
+  annotation (Documentation(info="
 
-    DGECON estimates the reciprocal of the condition number of a general   
-    real matrix A, in either the 1-norm or the infinity-norm, using   
-    the LU factorization computed by DGETRF.   
+  Purpose
+    =======
 
-    An estimate is obtained for norm(inv(A)), and the reciprocal of the   
-    condition number is computed as   
-       RCOND = 1 / ( norm(A) * norm(inv(A)) ).   
+    DGECON estimates the reciprocal of the condition number of a general
+    real matrix A, in either the 1-norm or the infinity-norm, using
+    the LU factorization computed by DGETRF.
 
-    Arguments   
-    =========   
+    An estimate is obtained for norm(inv(A)), and the reciprocal of the
+    condition number is computed as
+       RCOND = 1 / ( norm(A) * norm(inv(A)) ).
 
-    NORM    (input) CHARACTER*1   
-            Specifies whether the 1-norm condition number or the   
-            infinity-norm condition number is required:   
-            = '1' or 'O':  1-norm;   
-            = 'I':         Infinity-norm.   
+    Arguments
+    =========
 
-    N       (input) INTEGER   
-            The order of the matrix A.  N >= 0.   
+    NORM    (input) CHARACTER*1
+            Specifies whether the 1-norm condition number or the
+            infinity-norm condition number is required:
+            = '1' or 'O':  1-norm;
+            = 'I':         Infinity-norm.
 
-    A       (input) DOUBLE PRECISION array, dimension (LDA,N)   
-            The factors L and U from the factorization A = P*L*U   
-            as computed by DGETRF.   
+    N       (input) INTEGER
+            The order of the matrix A.  N >= 0.
 
-    LDA     (input) INTEGER   
-            The leading dimension of the array A.  LDA >= max(1,N).   
+    A       (input) DOUBLE PRECISION array, dimension (LDA,N)
+            The factors L and U from the factorization A = P*L*U
+            as computed by DGETRF.
 
-    ANORM   (input) DOUBLE PRECISION   
-            If NORM = '1' or 'O', the 1-norm of the original matrix A.   
-            If NORM = 'I', the infinity-norm of the original matrix A.   
+    LDA     (input) INTEGER
+            The leading dimension of the array A.  LDA >= max(1,N).
 
-    RCOND   (output) DOUBLE PRECISION   
-            The reciprocal of the condition number of the matrix A,   
-            computed as RCOND = 1/(norm(A) * norm(inv(A))).   
+    ANORM   (input) DOUBLE PRECISION
+            If NORM = '1' or 'O', the 1-norm of the original matrix A.
+            If NORM = 'I', the infinity-norm of the original matrix A.
 
-    WORK    (workspace) DOUBLE PRECISION array, dimension (4*N)   
+    RCOND   (output) DOUBLE PRECISION
+            The reciprocal of the condition number of the matrix A,
+            computed as RCOND = 1/(norm(A) * norm(inv(A))).
 
-    IWORK   (workspace) INTEGER array, dimension (N)   
+    WORK    (workspace) DOUBLE PRECISION array, dimension (4*N)
 
-    INFO    (output) INTEGER   
-            = 0:  successful exit   
-            < 0:  if INFO = -i, the i-th argument had an illegal value   
+    IWORK   (workspace) INTEGER array, dimension (N)
 
-    =====================================================================  
+    INFO    (output) INTEGER
+            = 0:  successful exit
+            < 0:  if INFO = -i, the i-th argument had an illegal value
+
+    =====================================================================
 "));
 end dgecon;

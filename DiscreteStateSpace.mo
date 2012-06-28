@@ -65,7 +65,7 @@ record DiscreteStateSpace
 <table>
 <tr> <td align=right>  dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
 <tr> <td align=right>  dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r, Ts, method)  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
@@ -81,19 +81,19 @@ Therefore, the matrices are defined by
   dss.C = fill(0,1,0);
   ss.D = [r];
   dss.B2 = fill(0,0,1);
-  
+
 </pre></blockquote>
 The default values of sample time <b>Ts</b> and discretization method <b>method</b> are
 <blockquote><pre>
     Ts = 1
-method = Modelica_LinearSystems2.Types.Method.Trapezoidal 
+method = Modelica_LinearSystems2.Types.Method.Trapezoidal
 
 </pre></blockquote>
 respectively.
- 
+
 </p>
- 
- 
+
+
 </html>"));
     end fromReal;
 
@@ -152,12 +152,12 @@ This function constructs a DiscreteStateSpace record dss with<br>
   dss.B2 = B2;
   dss.Ts = Ts;
   dss.method = method;
-  
+
 </pre></blockquote>
 i.e. the input-matrices are the system matrices of the discrete system. The default values of sample time <b>Ts</b> and discretization method <b>method</b> are
 <blockquote><pre>
     Ts = 1
-method = Modelica_LinearSystems2.Types.Method.Trapezoidal 
+method = Modelica_LinearSystems2.Types.Method.Trapezoidal
 
 </pre></blockquote>
 respectively. See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>
@@ -183,9 +183,9 @@ public
   // dss.D = [0]
   // dss.B2 = [0]
   // dss.Ts = 1
-  // dss.method = Modelica_LinearSystems2.Types.Method.Trapezoidal 
-  
-  
+  // dss.method = Modelica_LinearSystems2.Types.Method.Trapezoidal
+
+
 
 </pre></blockquote>
 </html>"));
@@ -232,7 +232,7 @@ public
 
       elseif method == Method.ImplicitEuler then
             /*  der_x = A*x + B*u
-             x = pre(x) + Ts*der_x 
+             x = pre(x) + Ts*der_x
      */
         (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
           Ts*ss.A);
@@ -250,7 +250,7 @@ public
 
       elseif method == Method.Trapezoidal then
             /*  der_x = A*x + B*u
-             x = pre_x + (Ts/2)*(pre_der_x + der_x); 
+             x = pre_x + (Ts/2)*(pre_der_x + der_x);
      */
         (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
           (Ts/2)*ss.A);
@@ -283,11 +283,11 @@ public
         -> x = phi*pre(x) + (gamma - gamma1/Ts)*pre(u) + gamma1/Ts*u;
   z = x - gamma1/Ts*u
       leads to
-        z = phi*pre(z) + phi*gamma1/Ts*pre(u) +gamma*pre(u) - gamma1/Ts*pre(u) 
+        z = phi*pre(z) + phi*gamma1/Ts*pre(u) +gamma*pre(u) - gamma1/Ts*pre(u)
        y = C*x + D*u
       -> y = C*z + (D + C*gamma1/Ts)*u
       x = z + gamma1/Ts*u
-    
+
     */
         (dss.A,dss.B,dss.B2) := Modelica.Math.Matrices.integralExpT(
               ss.A,
@@ -324,7 +324,7 @@ public
 
 </table>
 <h4>Description</h4>
-    
+
 <p>
 This function derives a linear time invariant difference
 equation system in state space form
@@ -332,7 +332,7 @@ equation system in state space form
 <p>
 <blockquote><pre>    <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
      <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
 </pre></blockquote>
 </p>
 <p>
@@ -375,7 +375,7 @@ See also  <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'const
 <blockquote><pre>
   import dss=Modelica_LinearSystems2.DiscreteStateSpace;
   import Modelica_LinearSystems2.StateSpace;
-  
+
   StateSpace ss=StateSpace(A = [1], B = [1], C = [1], D = [0]);
   Modelica.SIunits.Time Ts=0.1;
   Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal;
@@ -385,16 +385,16 @@ public
 
 <b>algorithm</b>
   dss := dss.'constructor'.fromStateSpace(ss, Ts);
-  
+
   //or just:
   //dss := dss(ss=ss, Ts=Ts, method=method);
-  
-  //  dss.A = [1.1053], 
-  //  dss.B = [0.11080], 
-  //  dss.C = [1], 
-  //  dss.D = [0.0526], 
-  //  dss.Ts = 0.1, 
-  //  dss.B2 = [0.0526], 
+
+  //  dss.A = [1.1053],
+  //  dss.B = [0.11080],
+  //  dss.C = [1],
+  //  dss.D = [0.0526],
+  //  dss.Ts = 0.1,
+  //  dss.B2 = [0.0526],
   //  dss.method = Modelica_LinearSystems2.Types.Method.Trapezoidal
 </p>
 </html>"));
@@ -443,7 +443,7 @@ public
 
       elseif method == Method.ImplicitEuler then
             /*  der_x = A*x + B*u
-             x = pre(x) + Ts*der_x 
+             x = pre(x) + Ts*der_x
      */
         (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
           Ts*A);
@@ -461,7 +461,7 @@ public
 
       elseif method == Method.Trapezoidal then
             /*  der_x = A*x + B*u
-             x = pre_x + (Ts/2)*(pre_der_x + der_x); 
+             x = pre_x + (Ts/2)*(pre_der_x + der_x);
      */
         (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
           (Ts/2)*A);
@@ -494,11 +494,11 @@ public
         -> x = phi*pre(x) + (gamma - gamma1/Ts)*pre(u) + gamma1/Ts*u;
   z = x - gamma1/Ts*u
       leads to
-        z = phi*pre(z) + phi*gamma1/Ts*pre(u) +gamma*pre(u) - gamma1/Ts*pre(u) 
+        z = phi*pre(z) + phi*gamma1/Ts*pre(u) +gamma*pre(u) - gamma1/Ts*pre(u)
        y = C*x + D*u
       -> y = C*z + (D + C*gamma1/Ts)*u
       x = z + gamma1/Ts*u
-    
+
     */
         (dss.A,dss.B,dss.B2) := Modelica.Math.Matrices.integralExpT(
               A,
@@ -535,7 +535,7 @@ equation system in state space form:
 <blockquote><pre>
      <b>xd</b>(Ts*(k+1)) = <b>Ad</b> * <b>xd</b>(Ts*k) + <b>Bd</b> * <b>ud</b>(Ts*k)
      <b>yd</b>(Ts*k)     = <b>Cd</b> * <b>xd</b>(Ts*k) + <b>Dd</b> * <b>ud</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>xd</b>(Ts*k) + <b>B2</b> * <b>ud</b>(Ts*k) 
+     <b>x</b>_continuous(Ts*k) = <b>xd</b>(Ts*k) + <b>B2</b> * <b>ud</b>(Ts*k)
 </pre></blockquote>
 from the matrices <b>A</b>, <b>B</b>, <b>C</b>, <b>D</b> of the corresponding continuous system
 <blockquote><pre>
@@ -561,18 +561,18 @@ public
 
 <b>algorithm</b>
   dss := dss.'constructor'.fromMatrices2(A, B, C, D);
-  
+
   //or just:
   //dss := dss(A, B, C, D, Ts=0.1, method=Modelica_LinearSystems2.Types.Method.Trapezoidal);
-  
-  //  dss.A = [1.1053], 
-  //  dss.B = [0.11080], 
-  //  dss.C = [1], 
-  //  dss.D = [0.0526], 
-  //  dss.Ts = 0.1, 
-  //  dss.B2 = [0.0526], 
+
+  //  dss.A = [1.1053],
+  //  dss.B = [0.11080],
+  //  dss.C = [1],
+  //  dss.D = [0.0526],
+  //  dss.Ts = 0.1,
+  //  dss.B2 = [0.0526],
   //  dss.method = Modelica_LinearSystems2.Types.Method.Trapezoidal
- 
+
 </html>"));
     end fromMatrices2;
   end 'constructor';
@@ -629,7 +629,7 @@ The operator is used by writing just the following command:
 <blockquote><pre>
    DiscreteStateSpace dss1 = DiscreteStateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
    DiscreteStateSpace dss2 = DiscreteStateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
-   
+
    DiscreteStateSpace dss3;
 
 <b>algorithm</b>
@@ -668,7 +668,7 @@ The operator is used by writing just the following command:
     annotation (Documentation(info="<html>
 <h4>Description</h4>
 <p>
-This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'subtract'</a> and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'-'</a> operator for DiscreteStateSpace records. 
+This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'subtract'</a> and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'-'</a> operator for DiscreteStateSpace records.
 
 </html>"));
 end '-';
@@ -1138,8 +1138,8 @@ Default of initial state <b>x0</b> is <b>x0</b>=<b>0</b>.
 
 <h4>Example</h4>
 <blockquote><pre>
-   import dss=Modelica_LinearSystems2.DiscreteStateSpace; 
-   import Modelica_LinearSystems2.StateSpace; 
+   import dss=Modelica_LinearSystems2.DiscreteStateSpace;
+   import Modelica_LinearSystems2.StateSpace;
    StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1],
       B=[1],
@@ -1159,8 +1159,8 @@ Default of initial state <b>x0</b> is <b>x0</b>=<b>0</b>.
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
-</ul>  
- 
+</ul>
+
 </html>"));
   end timeResponse;
 
@@ -1204,8 +1204,8 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
 
 <h4>Example</h4>
 <blockquote><pre>
-   import dss=Modelica_LinearSystems2.DiscreteStateSpace; 
-   import Modelica_LinearSystems2.StateSpace; 
+   import dss=Modelica_LinearSystems2.DiscreteStateSpace;
+   import Modelica_LinearSystems2.StateSpace;
    StateSpace ss=Modelica_LinearSystems2.StateSpace(
       A=[-1],
       B=[1],
@@ -1225,8 +1225,8 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
-</ul>  
- 
+</ul>
+
 
 </html>"));
   end initialResponse;
@@ -1280,9 +1280,9 @@ The eigenvalues <b>ev</b>_d of the discrete system are related to the eigenvalue
       Ts=0.1);
 
    DiscreteStateSpace dss=DiscreteStateSpace(ss, Ts=0.1);
- 
+
    Complex eigenvalues[2];
-   
+
 <b>algorithm</b>
   eigenvalues = Modelica_LinearSystems2.DiscreteStateSpace.Analysis.eigenValues(dss);
 // eigenvalues = {0.900452 + 0.0904977*j, 0.900452 - 0.0904977*j}
@@ -1393,13 +1393,13 @@ algorithm
 </table>
 <h4>Description</h4>
 <p>
-Function timeResponse calculates the time responses of a discrete state space system. The type of the time response is defined by the input <b>responseType</b>, i.e. 
+Function timeResponse calculates the time responses of a discrete state space system. The type of the time response is defined by the input <b>responseType</b>, i.e.
 <blockquote><pre>
     Impulse \"Impulse response\",
     Step \"Step response\",
     Ramp \"Ramp response\",
     Initial \"Initial condition response\"
-    
+
 </pre></blockquote>
 Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x are calculated for each time step t=k*dss.Ts.
 </p>
@@ -1413,16 +1413,16 @@ Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x are cal
      D = [0],
      B2 = [0],
      Ts = 0.1);
-  
+
   Real tSpan = 0.4;
-  
+
   Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
-  
+
   Real x0[1] = {0};
 
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
+  Real x[5,1,1]
 
 <b>algorithm</b>
   (y,t,x):=Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(dss,tSpan,response,x0);
@@ -1478,7 +1478,7 @@ gives the same result as
 <blockquote><pre>
 DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-Note that an appropriate impulse response of a discrete system that is comparable to the impulse response of the corresponding continuous system 
+Note that an appropriate impulse response of a discrete system that is comparable to the impulse response of the corresponding continuous system
 requires the \"ImpulseExact\" conversion from continuous system to discrete system.<br>
 See also<br>
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
@@ -1496,13 +1496,13 @@ See also<br>
       B2=[0],
       Ts=0.1,
       method = Modelica_LinearSystems2.Types.Method.StepExact);
- 
+
 
   Real tSpan= 0.4;
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
+  Real x[5,1,1]
 
 <b>algorithm</b>
   (y,t,x):=Modelica_LinearSystems2.DiscreteStateSpace.Analysis.impulseResponse(dss,tSpan);
@@ -1549,7 +1549,7 @@ algorithm
 </table>
 <h4>Description</h4>
 <p>
-Function <b>stepResponse</b> calculates the step response of a discrete state space system. 
+Function <b>stepResponse</b> calculates the step response of a discrete state space system.
 Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and the states <b>x</b> are calculated for each time step t=k*dss.Ts.
 <blockquote><pre>
 DiscreteStateSpace.Analysis.stepResponse(dss, tSpan)
@@ -1558,7 +1558,7 @@ gives the same result as
 <blockquote><pre>
 DiscreteStateSpace.Analysis.timeResponse(response=Types.TimeResponse.Step, dss, tSpan, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-Note that an appropriate step response of a discrete system that is comparable to the step response of the corresponding continuous system 
+Note that an appropriate step response of a discrete system that is comparable to the step response of the corresponding continuous system
 requires the \"StepExact\" conversion from continuous system to discrete system.<br>
 See also <br>
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
@@ -1576,14 +1576,14 @@ See also <br>
       B2=[0],
       Ts=0.1,
       method = Modelica_LinearSystems2Types.Method.StepExact);
-      
-      
+
+
 
   Real tSpan= 0.4;
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
+  Real x[5,1,1]
 
 <b>algorithm</b>
   (y,t,x) := Modelica_LinearSystems2.DiscreteStateSpace.Analysis.stepResponse(dss,tSpan);
@@ -1630,7 +1630,7 @@ algorithm
 </table>
 <h4>Description</h4>
 <p>
-Function <b>rampResponse</b> calculates the time response of a discrete state space system for ramp imput u = t. 
+Function <b>rampResponse</b> calculates the time response of a discrete state space system for ramp imput u = t.
 Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts.
 <blockquote><pre>
 DiscreteStateSpace.Analysis.rampResponse(dss, tSpan)
@@ -1639,7 +1639,7 @@ gives the same result as
 <blockquote><pre>
 DiscreteStateSpace.Analysis.timeResponse(response=Types.TimeResponse.Ramp, dss, tSpan, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-Note that an appropriate ramp response of a discrete system that is comparable to the ramp response of the corresponding continuous system 
+Note that an appropriate ramp response of a discrete system that is comparable to the ramp response of the corresponding continuous system
 requires the \"RampExact\" conversion from continuous system to discrete system.<br>
 
 See also<br>
@@ -1657,12 +1657,12 @@ See also<br>
       B2=[0.0483741803596],
       Ts=0.1,
       method = Modelica_LinearSystems2.Types.Method.RampExact);
-      
+
   Real tSpan= 0.4;
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
+  Real x[5,1,1]
 
 <b>algorithm</b>
   (y,t,x) := Modelica_LinearSystems2.DiscreteStateSpace.Analysis.rampResponse(dss,tSpan);
@@ -1712,7 +1712,7 @@ algorithm
 </table>
 <h4>Description</h4>
 <p>
-Function <b>initialResponse</b> calculates the time response of a discrete state space system for given initial condition and zero inputs. 
+Function <b>initialResponse</b> calculates the time response of a discrete state space system for given initial condition and zero inputs.
 tarting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts.
 <blockquote><pre>
 DiscreteStateSpace.Analysis.initialResponse(x0,dss, dt, tSpan)
@@ -1736,13 +1736,13 @@ See also <br>
       B2=[0],
       Ts=0.1,
       method = Modelica_LinearSystems2.Types.Method.StepExact);
-      
+
   Real tSpan= 0.4;
   Real x0[1] = {1};
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
+  Real x[5,1,1]
 
 
 <b>algorithm</b>
@@ -2312,22 +2312,22 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
    Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
    A = [0.9048, 0.0,    0.0;
           0.0,   0.8187, 0.0;
-          0.0,   0.0,    0.7408] 
-      
-   B = [0.0;         
-        0.0906;         
+          0.0,   0.0,    0.7408]
+
+   B = [0.0;
+        0.0906;
        -0.0864],
-      
+
    C = [0.0, 1.0, 1.0],
-      
+
    D = [1.0],
-        
+
    B2 = [0.0;
          0.0;
-         0.0],         
+         0.0],
    Ts = 0.1);
 
-   
+
    Integer iu=1;
    Integer iy=1;
 
@@ -2453,7 +2453,7 @@ algorithm
     end if;
   end for;
 
-  annotation (interactive=true, Documentation(info="<html> 
+  annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>timeResponse</b>(dss);
@@ -2466,8 +2466,8 @@ device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Devic
 <h4>Description</h4>
 <p>
 Function <b>timeResponse</b> plots the time response of a discrete state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.plotImpulse\">plotImpulse</a>, 
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.plotImpulse\">plotImpulse</a>,
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
 
@@ -2478,7 +2478,7 @@ Function <b>timeResponse</b> plots the time response of a discrete state space s
 <h4>Example</h4>
 <blockquote><pre>
 import Modelica_LinearSystems2.DiscreteStateSpace;
-      
+
 Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
 A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
 B=[1.0; 1.0; 0.0],
@@ -2540,7 +2540,7 @@ algorithm
       defaultDiagram=defaultDiagram,
       device=device);
 
-    annotation (interactive=true, Documentation(info="<html> 
+    annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>impulse</b>(dss);
@@ -2551,7 +2551,7 @@ device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Devic
 <h4>Description</h4>
 <p>
 Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
 
@@ -2624,7 +2624,7 @@ algorithm
       defaultDiagram=defaultDiagram,
       device=device);
 
-    annotation (interactive=true, Documentation(info="<html> 
+    annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>step</b>(dss);
@@ -2635,7 +2635,7 @@ device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Devic
 <h4>Description</h4>
 <p>
 Function <b>step</b> plots the discrete step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
 
@@ -2707,7 +2707,7 @@ algorithm
       defaultDiagram=defaultDiagram,
       device=device);
 
-    annotation (interactive=true, Documentation(info="<html> 
+    annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>ramp</b>(ss);
@@ -2718,7 +2718,7 @@ device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Devic
 <h4>Description</h4>
 <p>
 Function <b>ramp</b> plots the ramp responses of a discrete state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
 
@@ -2787,7 +2787,7 @@ algorithm
     defaultDiagram=defaultDiagram,
     device=device);
 
-  annotation (interactive=true, Documentation(info="<html> 
+  annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>initial</b>(ss);
@@ -2798,7 +2798,7 @@ device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Devic
 <h4>Description</h4>
 <p>
 Function <b>initial</b> plots the initial responses of a discrete state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>.
 
@@ -2814,7 +2814,7 @@ B=[1.0; 1.0; 0.0],
 C=[0.0,1.0,1.0],
 D=[0.0])
 
-Real x0={1,0.5,0.5}; 
+Real x0={1,0.5,0.5};
 
 Real Ts = 0.1;
 Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
@@ -2949,16 +2949,16 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
       A = [0.9048, 0.0,    0.0;
             0.0,   0.8187, 0.0;
             0.0,   0.0,    0.7408],
-      B = [0.09516;         
+      B = [0.09516;
            0.09063;
            0.0],
       C = [1.0,1.0,1.0],
       D = [0.0],
       Ts = 0.1);
-      
+
  <b>algorithm</b>
   dzp:=Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(dss);
-  
+
 //                         q - 0.860735
 //   dzp = 0.1858 -------------------------------
 //                 (q - 0.904837)*(q - 0.818731)
@@ -3042,18 +3042,18 @@ of a system from discrete state space representation, i.e. isolating the uncontr
    Modelica_LinearSystems2.DiscreteStateSpace ss=Modelica_LinearSystems2.DiscreteStateSpace(
     A = [0.9048, 0.0,    0.0;
           0.0,   0.8187, 0.0;
-          0.0,   0.0,    0.7408] 
-      
-   B = [0.0,      0.09516;         
-        0.0906,   0.09063;         
+          0.0,   0.0,    0.7408]
+
+   B = [0.0,      0.09516;
+        0.0906,   0.09063;
        -0.0864,   0.0],
-      
+
    C = [0.0, 1.0, 1.0;
         1.0, 1.0, 1.0],
-      
+
    D = [1.0, 0.0;
         0.0, 1.0],
-        
+
    B2 = [0.0,  0.0;
          0.0,  0.0;
          0.0,  0.0],
@@ -3074,7 +3074,7 @@ of a system from discrete state space representation, i.e. isolating the uncontr
  1*(q - 0.870319)*(q - 0.667452)/( (q - 0.904837)*(q - 0.818731) )
     Ts = 0.1
     method =StepExact]
-    
+
 </pre></blockquote>
 
 <h4>References</h4>
@@ -3120,7 +3120,7 @@ algorithm
 Computes a DiscreteTransferFunction record
 <blockquote><pre>
            n(z)     b0 + b1*z + ... + bn*z^n
-  dtf = -------- = -------------------------- 
+  dtf = -------- = --------------------------
            d(z)     a0 + a1*z + ... + an*z^n
  </pre></blockquote>
 
@@ -3135,7 +3135,7 @@ discrete state space system into a discrete zeros and poles representation first
       A = [0.9048, 0.0,    0.0;
             0.0,   0.8187, 0.0;
             0.0,   0.0,    0.7408],
-      B = [0.09516;         
+      B = [0.09516;
            0.09063;
            0.0],
       C = [1.0,1.0,1.0],
@@ -3144,11 +3144,11 @@ discrete state space system into a discrete zeros and poles representation first
             0, 0;
             0, 0],
       Ts = 0.1);
-      
+
  <b>algorithm</b>
 
   dtf:=Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss);
-  
+
 //             0.185797*z - 0.159922
 //   dtf = -------------------------------
 //           z^2 - 1.72357*z + 0.740818
@@ -3201,7 +3201,7 @@ algorithm
 Computes a matrix of DiscreteTransferFunction records
 <blockquote><pre>
            n(z)     b0 + b1*z + ... + bn*z^n
-  dtf = -------- = -------------------------- 
+  dtf = -------- = --------------------------
            d(z)     a0 + a1*z + ... + an*z^n
  </pre></blockquote>
 with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteTransferFunction\">Conversion.toDiscreteTransferFunction</a>
@@ -3212,18 +3212,18 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
    Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
    A = [0.9048, 0.0,    0.0;
           0.0,   0.8187, 0.0;
-          0.0,   0.0,    0.7408] 
-      
-   B = [0.0,      0.09516;         
-        0.0906,   0.09063;         
+          0.0,   0.0,    0.7408]
+
+   B = [0.0,      0.09516;
+        0.0906,   0.09063;
        -0.0864,   0.0],
-      
+
    C = [0.0, 1.0, 1.0;
         1.0, 1.0, 1.0],
-      
+
    D = [1.0, 0.0;
         0.0, 1.0],
-        
+
    B2 = [0.0,  0.0;
          0.0,  0.0;
          0.0,  0.0],
@@ -3233,19 +3233,19 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
   dtf:=Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(dss);
 
 // dtf = [(1*z^2 - 1.55531*z + 0.61012)/(z^2 - 1.55955*z + 0.606531)
- 
+
  Ts = 0.1
  method =StepExact,
  0.0906346/(z - 0.818731)
- 
+
  Ts = 0.1
  method =StepExact;
 (0.0042407*z + 0.00358958)/(z^2 - 1.55955*z + 0.606531)
- 
+
  Ts = 0.1
  method =StepExact,
  (1*z^2 - 1.53777*z + 0.580896)/(z^2 - 1.72357*z + 0.740818)
- 
+
  Ts = 0.1
  method =StepExact]
 </pre></blockquote>
@@ -3350,7 +3350,7 @@ algorithm
 <p><br/><h4>Description</h4></p>
 <p>Generate a DiscreteStateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record and then converted into a DiscreteStateSpace record </p>
 <p><h4>Example</h4></p>
-<blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
+<blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;;
    Real T_linearize = 5;
 
 <b>algorithm</b>
@@ -3369,7 +3369,7 @@ algorithm
          -0.02103518146498;
           0.00152042385523347;
           0.0144812915324601];
-          
+
 // ss.C=identity(6),
 // ss.D= [0.000437113227802044;
           0.00874226455604088;
@@ -3377,14 +3377,14 @@ algorithm
          -0.0109827598973295;
           0.000398179639293453;
           0.00796359278610463];
-          
+
 ss.B2  = [0.000437113227802044;
           0.00874226455604088;
          -0.000549137994866478;
          -0.0109827598973295;
           0.000398179639305232;
           0.00796359278610463];
-      
+
 <blockquote><br/><code>                </code> </blockquote>
 </html>"));
 end fromModel;
@@ -3453,7 +3453,7 @@ Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>.
 
 <h4>Example</h4>
 <blockquote><pre>
-     
+
 
 <b>algorithm</b>
   dss:=Modelica_LinearSystems2.DiscreteStateSpace.Import.fromFile(\"dss.mat\");
@@ -3552,7 +3552,7 @@ Computes the initial response of a system in discrete state space form:
 </p>
 <pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k)
      <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) 
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k)
 </pre>
 <p>
 Note that the system input <b>u</b> is equal to zero.
@@ -3594,7 +3594,7 @@ Computes the time response of a system in discrete state space form:
 </p>
 <pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
      <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
 </pre>
 <p>
 Note that the system input <b>u</b> must be sampled with the discrete system sample time Ts.

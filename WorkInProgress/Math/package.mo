@@ -1,4 +1,4 @@
 within Modelica_LinearSystems2.WorkInProgress;
-package Math 
+package Math
 
 end Math;

@@ -12,6 +12,6 @@ type Method = enumeration(
       "Exact discretization for ramp inputs (first-order hold equivalent)")
   "Enumeration of discretization methods"
     annotation (Evaluate=true, Documentation(info="<html>
- 
+
 </html>"));
 

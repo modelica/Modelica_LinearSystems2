@@ -20,9 +20,9 @@ record Curve "Properties of a curve (displayed in a diagram)"
     "Symbol for points on curve" annotation(Dialog(group="If autoLine = false (otherwise ignored)"));
 
 /*
-   Modelica_LinearSystems2.Utilities.Plot.Types.LineThickness_mm lineThickness=0.25 
+   Modelica_LinearSystems2.Utilities.Plot.Types.LineThickness_mm lineThickness=0.25
     "Line thickness of curve" annotation(Dialog(group="If autoLine = false (otherwise ignored)"));
-   Modelica_LinearSystems2.Utilities.Plot.Types.LineThickness_mm lineSymbolSize=3 
+   Modelica_LinearSystems2.Utilities.Plot.Types.LineThickness_mm lineSymbolSize=3
     "Symbol size" annotation(Dialog(group="If autoLine = false (otherwise ignored)"));
 */
 

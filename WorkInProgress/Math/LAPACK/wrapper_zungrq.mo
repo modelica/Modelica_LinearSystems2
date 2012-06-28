@@ -18,22 +18,22 @@ function wrapper_zungrq
   #include<f2c.h>
 extern  int zungrq_(integer *, integer *, integer *, doublecomplex *, integer *,doublecomplex *, doublecomplex *, integer *, integer *);
 
-int c_inter_zungrq_(integer *m, integer *n, integer *k, doublereal *rq_real, doublereal *rq_imag, integer *lda, doublereal *tau_real, doublereal *tau_imag, integer *info) 
+int c_inter_zungrq_(integer *m, integer *n, integer *k, doublereal *rq_real, doublereal *rq_imag, integer *lda, doublereal *tau_real, doublereal *tau_imag, integer *info)
 {
    doublecomplex *a;
    doublecomplex *tau;
    doublecomplex *work;
-     
+
    integer nn=*n;
    integer mm=*m;
    integer mn=min(mm,nn);
    integer i;
    integer lwork=-1;
-  
-   a = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));      
-   tau = (doublecomplex *) malloc((mn+1)*sizeof(doublecomplex));      
 
-        
+   a = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));
+   tau = (doublecomplex *) malloc((mn+1)*sizeof(doublecomplex));
+
+
    for(i=0;i<nn*mm;i++)
    {
      a[i].r=rq_real[i];
@@ -44,7 +44,7 @@ int c_inter_zungrq_(integer *m, integer *n, integer *k, doublereal *rq_real, dou
       tau[i].r=tau_real[i];
       tau[i].i=tau_imag[i];
     }
-  
+
    work = (doublecomplex *) malloc(nn*sizeof(doublecomplex));
    zungrq_(m, n, k, a, lda, tau, work, &lwork, info);
    lwork=(int)(work[0].r);
@@ -57,7 +57,7 @@ int c_inter_zungrq_(integer *m, integer *n, integer *k, doublereal *rq_real, dou
      rq_real[i]=a[i].r;
      rq_imag[i]=a[i].i;
    }
-  
+
    free(a);
    free(tau);
    free(work);

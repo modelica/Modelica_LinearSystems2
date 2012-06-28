@@ -42,9 +42,9 @@ In the case of 2-norm the result is he ratio of the largest to the smallest sing
   A = [1, 2
        2, 1];
   r = conditionNumber(A);
-  
+
   results in:
-  
+
   r = 3.0
 </pre></blockquote>
 </p>

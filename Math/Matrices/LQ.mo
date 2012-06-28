@@ -67,7 +67,7 @@ vector. Matrix <b>R</b> has the following important properties:
 <p>
 This means that if abs(R[i,i]) &le; &epsilon; then abs(R[j,k]) &le; &epsilon;
 for j &ge; i, i.e., the i-th row up to the last row of <b>R</b> have
-small elements and can be treated as being zero. 
+small elements and can be treated as being zero.
 This allows to, e.g., estimate the row-rank
 of <b>R</b> (which is the same row-rank as <b>A</b>). Furthermore,
 <b>R</b> can be partitioned in two parts
@@ -79,7 +79,7 @@ of <b>R</b> (which is the same row-rank as <b>A</b>). Furthermore,
 </pre>
 </blockquote>
 <p>
-where <b>R</b><sub>1</sub> is a regular, upper triangular matrix. 
+where <b>R</b><sub>1</sub> is a regular, upper triangular matrix.
 </p>
 <p>
 Note, the solution is computed with the LAPACK functions \"dgeqp3\"
@@ -89,7 +89,7 @@ called as: <code>(,R,p) = QR(A)</code>.
 </p>
 <h4>Example</h4>
 <blockquote><pre>
-  Real A[3,3] = [1,2,3; 
+  Real A[3,3] = [1,2,3;
                  3,4,5;
                  2,1,4];
   Real R[3,3];

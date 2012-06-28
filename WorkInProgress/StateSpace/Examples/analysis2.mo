@@ -54,7 +54,7 @@ protected
   Real eigvecIm[4,4]=fill(0, 4, 4) "eigen values of the system";
   Complex eigval[4]=fill(Complex(0), 4)
   annotation (Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is 
+This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is
 to design pole assigment controllers for state space systems with multiple input.
 </html>"));
   Complex j= Modelica_LinearSystems2.Math.Complex.j();
@@ -117,7 +117,7 @@ algorithm
 
   ok := true;
   annotation (interactive=true, Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</b> which is 
+This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</b> which is
 to check whether a system is controllable or not.
 </html>"));
 end analysis2;

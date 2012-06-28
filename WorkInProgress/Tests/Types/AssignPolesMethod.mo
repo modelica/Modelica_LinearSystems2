@@ -4,5 +4,5 @@ type AssignPolesMethod = enumeration(
     KNV "KNV, Robust pole assignment accordimg to MATLAB's place-algorithm ")
   "Enumeration of algorithms for pole aassignment"
     annotation (Evaluate=true, Documentation(info="<html>
- 
+
 </html>"));

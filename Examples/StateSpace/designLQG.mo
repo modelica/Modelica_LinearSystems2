@@ -45,6 +45,6 @@ algorithm
  ok := true;
 
   annotation (Documentation(info="<html>
-This example demonstrates the computatrion of a LQG controllerr by calling function <b>StateSpace.Design.lqg()</b> 
+This example demonstrates the computatrion of a LQG controllerr by calling function <b>StateSpace.Design.lqg()</b>
 </html>"));
 end designLQG;

@@ -188,7 +188,7 @@ encapsulated operator '-'
 <p><h4>Example</h4></p>
 <blockquote><pre>  StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
   StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
-   
+
   StateSpace ss3;
 
 <b>algorithm</b>
@@ -2117,7 +2117,7 @@ The solution <b>x</b>(t) of the initial value problem (1) consists of the homoge
 <pre>
 <b>x</b><sub>h</sub>(t) = exp(<b>A</b>*(t-t<sub>0</sub>))<b>x</b><sub>0</sub>.
 </pre>
-The system can also be represented as a linear combination of the modal states <b>z</b>, 
+The system can also be represented as a linear combination of the modal states <b>z</b>,
 <pre>
 <b>x</b> = <b>V</b><b>z</b>
 </pre>
@@ -2171,10 +2171,10 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
 <p><br> The system <b>Demonstation System</b>
 </p>
 <br><table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"0\">
- 
+
 <tr><td>der(x) </td><td>=</td><td> Ax</td><td> +</td><td> Bu</tr><td> y </td><td>=</td><td> Cx</td><td> + Du</td></tr></table> <br>is defined by<br>
 <table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"0\">
- 
+
 <tr><td><br></td><td><br></td><td><br></td>
 <td style=\"text-align:center\" valign=\"top\"> x1 </td>
 <td style=\"text-align:center\" valign=\"top\"> x2 </td>
@@ -2302,7 +2302,7 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
 <p>
 <br><br>
 <table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"0\">
- 
+
 <tr><td><br></td><td><br></td><td><br></td>
 <td style=\"text-align:center\" valign=\"top\"> x1 </td>
 <td style=\"text-align:center\" valign=\"top\"> x2 </td>
@@ -2367,7 +2367,7 @@ System to demonstrate the usage of Modelica_LinearSystems2.StateSpace.Analysis.a
 <p>
 <b>Characteristics</b>
 </p>The system
-<p></p> is 
+<p></p> is
 not stable
 <br>but it is controllable
 <br> and therefore it is stabilizable
@@ -2378,13 +2378,13 @@ not stable
 <br><table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td><td> eigenvalue </td> <td> T [s] </td>  <td> characteristics </td><td> contribution to states</td></tr>
 <tr>
- <td style=\"text-align:center\">       1 </td> <td style=\"text-align:left\"> &nbsp;   -4.9874e+001 </td> <td style=\"text-align:left\"> &nbsp;    0.0201 </td> <td style=\"text-align:left\"> &nbsp; stable, controllable, observable  </td> <td style=\"text-align:left\"> &nbsp;  z[1] contributes to x3 with 54.6 %<br>&nbsp;  z[1] contributes to x5 with 37 % </td> </tr> 
+ <td style=\"text-align:center\">       1 </td> <td style=\"text-align:left\"> &nbsp;   -4.9874e+001 </td> <td style=\"text-align:left\"> &nbsp;    0.0201 </td> <td style=\"text-align:left\"> &nbsp; stable, controllable, observable  </td> <td style=\"text-align:left\"> &nbsp;  z[1] contributes to x3 with 54.6 %<br>&nbsp;  z[1] contributes to x5 with 37 % </td> </tr>
 <tr>
- <td style=\"text-align:center\">       2 </td> <td style=\"text-align:left\"> &nbsp;   -3.0000e+000 </td> <td style=\"text-align:left\"> &nbsp;    0.3333 </td> <td style=\"text-align:left\"> &nbsp; stable, controllable, not observable  </td> <td style=\"text-align:left\"> &nbsp;  z[2] contributes to x1 with 100 %<br> </td> </tr> 
+ <td style=\"text-align:center\">       2 </td> <td style=\"text-align:left\"> &nbsp;   -3.0000e+000 </td> <td style=\"text-align:left\"> &nbsp;    0.3333 </td> <td style=\"text-align:left\"> &nbsp; stable, controllable, not observable  </td> <td style=\"text-align:left\"> &nbsp;  z[2] contributes to x1 with 100 %<br> </td> </tr>
 <tr>
- <td style=\"text-align:center\">       3 </td> <td style=\"text-align:left\"> &nbsp;    2.9891e+000 </td> <td style=\"text-align:left\"> &nbsp;    0.3346 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[3] contributes to x2 with 51.9 %<br>&nbsp;  z[3] contributes to x1 with 23.9 % </td> </tr> 
+ <td style=\"text-align:center\">       3 </td> <td style=\"text-align:left\"> &nbsp;    2.9891e+000 </td> <td style=\"text-align:left\"> &nbsp;    0.3346 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[3] contributes to x2 with 51.9 %<br>&nbsp;  z[3] contributes to x1 with 23.9 % </td> </tr>
 <tr>
- <td style=\"text-align:center\">       4 </td> <td style=\"text-align:left\"> &nbsp;    5.5825e+001 </td> <td style=\"text-align:left\"> &nbsp;    0.0179 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[4] contributes to x3 with 48.4 %<br>&nbsp;  z[4] contributes to x5 with 32.5 % </td> </tr> 
+ <td style=\"text-align:center\">       4 </td> <td style=\"text-align:left\"> &nbsp;    5.5825e+001 </td> <td style=\"text-align:left\"> &nbsp;    0.0179 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[4] contributes to x3 with 48.4 %<br>&nbsp;  z[4] contributes to x5 with 32.5 % </td> </tr>
 </table><br><br>
 
 
@@ -2392,19 +2392,19 @@ not stable
 <br><table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td>  <td> contribution to states</td></tr>
 <tr>
- <td style=\"text-align:left\">     5/6 </td> <td style=\"text-align:left\"> &nbsp;    1.0299e+000 &plusmn;  6.5528e+000j </td> <td style=\"text-align:left\"> &nbsp;    1.0557 </td> <td style=\"text-align:left\">> &nbsp;   -0.1553 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[    5/6] contribute to x6 with 35.9 %<br>&nbsp;  z[    5/6] contribute to x2 with 20.6 % </td> </tr> 
+ <td style=\"text-align:left\">     5/6 </td> <td style=\"text-align:left\"> &nbsp;    1.0299e+000 &plusmn;  6.5528e+000j </td> <td style=\"text-align:left\"> &nbsp;    1.0557 </td> <td style=\"text-align:left\">> &nbsp;   -0.1553 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[    5/6] contribute to x6 with 35.9 %<br>&nbsp;  z[    5/6] contribute to x2 with 20.6 % </td> </tr>
 </table>
 <p>
 In the tabel above, the column <b>contribution to states</b> lists for each eigenvalue the states to which thecorresponding modal state contributes most. This information is based on the
-two largest absolute values of the corresponding right eigenvector (if the second large value 
+two largest absolute values of the corresponding right eigenvector (if the second large value
 is less than 5 % of the largest contribution, it is not shown).
-<br> 
+<br>
 </p>
 <p>
-In the next table, for each state in the column <b>correlation to modal states</b>, the modal 
+In the next table, for each state in the column <b>correlation to modal states</b>, the modal
 states which contribute most to the coresponding state are summarized, i.e. the state is mostly composed of these modal states
 This information is based on the two largest absolute values of row i of the
-eigenvector matrix that is associated with eigenvalue i (if the second large value 
+eigenvector matrix that is associated with eigenvalue i (if the second large value
 is less than 5 % of the largest contribution, it is not shown). This only holds
 if the modal states are in the same order of magnitude. Otherwise, the modal states
 listed in the last column might be not the most relevant one.
@@ -2412,27 +2412,27 @@ listed in the last column might be not the most relevant one.
 <table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> state </td> <td> composition </td> <td> eigenvalue #</td> <td> freq. [Hz] </td> <td> damping </td>  </td> <td> T [s] </td></tr>
 <tr>
- <td style=\"text-align:left\"> &nbsp; x1 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  42.5% by z[2] <br> &nbsp;  is composed of  35.4% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 2<br> &nbsp; 5/6 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    1.0557 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp;    0.0201<br> &nbsp; --- </td> </tr> 
+ <td style=\"text-align:left\"> &nbsp; x1 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  42.5% by z[2] <br> &nbsp;  is composed of  35.4% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 2<br> &nbsp; 5/6 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    1.0557 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp;    0.0201<br> &nbsp; --- </td> </tr>
 <tr>
- <td style=\"text-align:left\"> &nbsp; x2 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  44.2% by z[3] <br> &nbsp;  is composed of  43.7% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 3<br> &nbsp; 5/6 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    1.0557 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp;    0.3333<br> &nbsp; --- </td> </tr> 
+ <td style=\"text-align:left\"> &nbsp; x2 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  44.2% by z[3] <br> &nbsp;  is composed of  43.7% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 3<br> &nbsp; 5/6 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    1.0557 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp;    0.3333<br> &nbsp; --- </td> </tr>
 <tr>
- <td style=\"text-align:left\"> &nbsp; x3 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  36.9% by z[1] <br> &nbsp;  is composed of  36.3% by z[4] </td> <td style=\"text-align:center\"> &nbsp; 1<br> &nbsp; 4 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp;    0.3346<br> &nbsp;    0.0179 </td> </tr> 
+ <td style=\"text-align:left\"> &nbsp; x3 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  36.9% by z[1] <br> &nbsp;  is composed of  36.3% by z[4] </td> <td style=\"text-align:center\"> &nbsp; 1<br> &nbsp; 4 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp;    0.3346<br> &nbsp;    0.0179 </td> </tr>
 <tr>
- <td style=\"text-align:left\"> &nbsp; x4 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  88.9% by z[5/6] <br> &nbsp;  is composed of   9.8% by z[4] </td> <td style=\"text-align:center\"> &nbsp; 5/6<br> &nbsp; 4 </td> <td style=\"text-align:center\"> &nbsp;    1.0557<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp;   -0.1553<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    0.0179 </td> </tr> 
+ <td style=\"text-align:left\"> &nbsp; x4 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  88.9% by z[5/6] <br> &nbsp;  is composed of   9.8% by z[4] </td> <td style=\"text-align:center\"> &nbsp; 5/6<br> &nbsp; 4 </td> <td style=\"text-align:center\"> &nbsp;    1.0557<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp;   -0.1553<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    0.0179 </td> </tr>
 <tr>
- <td style=\"text-align:left\"> &nbsp; x5 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  45.3% by z[1] <br> &nbsp;  is composed of  44.1% by z[4] </td> <td style=\"text-align:center\"> &nbsp; 1<br> &nbsp; 4 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp;    0.0000<br> &nbsp;    0.0179 </td> </tr> 
+ <td style=\"text-align:left\"> &nbsp; x5 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  45.3% by z[1] <br> &nbsp;  is composed of  44.1% by z[4] </td> <td style=\"text-align:center\"> &nbsp; 1<br> &nbsp; 4 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp;    0.0000<br> &nbsp;    0.0179 </td> </tr>
 <tr>
- <td style=\"text-align:left\"> &nbsp; x6 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  95.7% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 5/6          </td> <td style=\"text-align:center\"> &nbsp;    1.0557          </td> <td style=\"text-align:center\"> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr> 
+ <td style=\"text-align:left\"> &nbsp; x6 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  95.7% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 5/6          </td> <td style=\"text-align:center\"> &nbsp;    1.0557          </td> <td style=\"text-align:center\"> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
 </table>
 <p>
 <br><br><b>Invariant zeros</b><br><table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> invariant zero </td><td> Time constant [s] </td> <td> freq. [Hz] </td> <td> damping </td></tr>
 <tr>
- <td style=\"text-align:left\"> &nbsp;       1 </td> <td> &nbsp;   -5.4983e+001 </td> <td> &nbsp;    0.0182 </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr> 
+ <td style=\"text-align:left\"> &nbsp;       1 </td> <td> &nbsp;   -5.4983e+001 </td> <td> &nbsp;    0.0182 </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
 <tr>
- <td style=\"text-align:left\"> &nbsp;       2 </td> <td> &nbsp;   -3.0000e+000 </td> <td> &nbsp;    0.3333 </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr> 
+ <td style=\"text-align:left\"> &nbsp;       2 </td> <td> &nbsp;   -3.0000e+000 </td> <td> &nbsp;    0.3333 </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
 <tr>
- <td style=\"text-align:left\"> &nbsp;     3/4 </td> <td style=\"text-align:left\"> &nbsp;    3.2417e+000 &plusmn;  5.6548e+000j </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:left\"> &nbsp;    1.0374 </td> <td style=\"text-align:left\"> &nbsp;   -0.4973 </td> </tr> 
+ <td style=\"text-align:left\"> &nbsp;     3/4 </td> <td style=\"text-align:left\"> &nbsp;    3.2417e+000 &plusmn;  5.6548e+000j </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:left\"> &nbsp;    1.0374 </td> <td style=\"text-align:left\"> &nbsp;   -0.4973 </td> </tr>
 </table>
 </body>
 </html>
@@ -2442,57 +2442,57 @@ listed in the last column might be not the most relevant one.
        by Marcus Baur, DLR-RM</li>
 </ul>
 </html>"),      Documentation(info="<html>
- 
+
 Function <b>Modelica_LinearSystems2.StateSpace.Analysis.analysis</b> analyzes a state space system <br>
 <pre>    der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
                                 <label for=\"eqn1\">(1)</label>
-        <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>  
-        <b>x</b>(t=0) = <b>x</b><sub>0</sub> 
+        <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>
+        <b>x</b>(t=0) = <b>x</b><sub>0</sub>
 </pre>
 based on its poles, i.e. the eigenvalues, and the zeros of the system.
 The system will be checked for stability, controllability and observability. If the case that the system is not stable stabilizability and detectability are examined. Furthermore, stability, controllability, observability, stabilizability, and detectability are indicated for each pole.
 <br>
- 
+
 Generally, The states of the system can be described as linear combination of modal states (see below) and, therefore, the states can be characterized to a certain extend by the
 modal states if the proportions of the combination are known. Hence, for each modal state z<sub>i</sub> of the vector <b>z</b> the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub>|$ of the corresponding right eigenvector <b>v</b><sub>i</sub> indicates the proportion of <b>z</b><sub>i</sub> that is contributed to the state x<sub>j</sub>.<br>
-On the other hand, the composition of xi is indicated by the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>|, i.e. the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>| of the corresponding row <b>v</b><sub>i</sub><sup>T</sup> of the eigenvector matrix <b>V</b> indicates the proportion of the state x<sub>i</sub> that is contributed by the modal state z<sub>j</sub>. 
- 
+On the other hand, the composition of xi is indicated by the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>|, i.e. the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>| of the corresponding row <b>v</b><sub>i</sub><sup>T</sup> of the eigenvector matrix <b>V</b> indicates the proportion of the state x<sub>i</sub> that is contributed by the modal state z<sub>j</sub>.
+
 <br><br>
 <b>Stability</b><br>
- 
+
 System (1) is stable if and only if all eigenvalues of the matrix <b>A</b> have negative real parts.
 <br>
 The calculation of the eigenvalues and also of the eigenvalues uses LAPACK routine dgeev.
 <br><br>
 <b>Controllability</b><br>
-System (1) is said to be controllable if starting from any initial state <b>x</b>0, the system can be driven by appropriate inputs to any final state <b>x</b>1 within some finite time window. Equivalent is, that the eigenvalues of <b>A</b>-<b>BK</b> can be arbitrarily be assigned by an appropriate choice of matrix <b>K</b>. 
+System (1) is said to be controllable if starting from any initial state <b>x</b>0, the system can be driven by appropriate inputs to any final state <b>x</b>1 within some finite time window. Equivalent is, that the eigenvalues of <b>A</b>-<b>BK</b> can be arbitrarily be assigned by an appropriate choice of matrix <b>K</b>.
 <br>
 <br>
 <b>Stabilizability</b><br>
- 
+
 System (1) is said to be stabilizable if all the unstable eigenvalues, i.e. all &lambda with Re(&lambda)>=0, of <b>A</b> are controllable. Therefore, a controllable system is always stabilizable. An equivalent definition of stabilizability is, that a system is said to be stabilizable if there exist a matrix K such that A-BK is stable.
 <br>
 <br>
 <b>Observability</b><br>
- 
+
 System (1) is said to be observable if the (arbitrary) initial state x0 can be uniquely determined from any sate x(t1), t1>0, from the knowledge of the input u(t) and output y(t). With other words,  from the system's outputs it is possible to determine the behaviour of the entire system. Equivalent is, that the eigenvalues of <b>A</b>-<b>LC</b> can be arbitrarily be assigned by an appropriate choice of matrix <b>L</b>.<br>
 Observability is called the dual concept of controllability, since a system (<b>A</b>,<b>B</b>,<b>C</b>,<b>D</b>) is observable if the system (<b>A</b><sup>T</sup>, <b>C</b><sup>T</sup>, <b>B</b><sup>T</sup>, <b>D</b><sup>T</sup>) is controllable.
- 
+
 <br>
 <br>
 <b>Detectability</b><br>
- 
+
 System (1) is said to be detectable if all the unstable eigenvalues, i.e. all &lambda with Re(&lambda)>=0, of <b>A</b> are observable. Therefore, a observable system is always detectable. An equivalent definition of detectability is, that a system is said to be detectable if there exist a matrix <b>L</b> such that <b>A</b>-<b>LC</b> is stable.
 Detectability is called the dual concept of stabilizability, since a system (<b>A</b>,<b>B</b>,<b>C</b>,<b>D</b>) is detectable if the system (<b>A</b><sup>T</sup>, <b>C</b><sup>T</sup>, <b>B</b><sup>T</sup>, <b>D</b><sup>T</sup>) is stabilizable.<br>
 <br>
 <b>Algorithm to test controllability/stabilizability and observability/detectability respectively</b> <br>
- 
+
 The test of controllability and stabilizability is performed with the staircase algorithm which transforms the system (<b>A</b>,<b>B</b>,<b>C</b>,<b>D</b>) into the controller-Hessenberg form (<b>A</b><sub>H</sub>, <b>B</b><sub>H</sub>, <b>C</b>H, <b>D</b>) with <b>A</b>H is a block upper Hessenberg matrix and <b>B</b><sub>H</sub>=[<b>B</b>1; 0] with triangular matrix <b>B</b>1 with rank(<b>B</b>1) = rank(<b>B</b>).<br>
 In <b>A</b><sub>H</sub>=[<b>A</b>c, *,0, <b>A</b>nc) the eigenvalues of the matrices <b>A</b>c and <b>A</b>nc are the controllable eigenvalues and uncontrollable eigenvalues of <b>A</b> respectively.<br>
 The test of observability and detectability is performed by testing the system (<b>A</b><sup>T</sup>, <b>C</b><sup>T</sup>, <b>B</b><sup>T</sup>, <b>D</b><sup>T</sup>) with respect to controllability and stabilizability.<br>
 <br>
 <b>Solution of a linear time invariant system </b><br>
- 
+
 The solution x(t) of the initial value problem (1) consists of the homogeneous part (zero input response) x<sub>h</sub>(t) and the inhomogeneous part x<sub>i</sub>(t). The zero input solution is given by
 <pre>
 <b>x</b><sub>h</sub>(t) = exp(<b>A</b>*(t-t<sub>0</sub>))<b>x</b><sub>0</sub>.
@@ -2509,22 +2509,22 @@ and the real Jordan form  V-1AV. For single real eigenvectors is decoupled, i.e.
 <pre>
 z_i = exp(&lambda_i t)*z0i
 </pre>
- 
+
 The behavior of the modal states is determined as the solution of a linear first order differential equation for real eigenvalues. Since this behavior is well known, the behavior of the xi can at least roughly be estimated by means of the behavior of the most relevant modal states. Therefore, the contribution of the modal states to the states is computed an .
 <br>
- 
+
 <b>Contribution of the modal states to the states</b><br>
 Generally, as described above, the states of the system can be described as linear combination of modal states and, therefore, the states can be characterized to a certain extend by the
 modal states if the proportions of the combination are known. Hence, for each modal state z<sub>i</sub> of the vector <b>z</b> the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub>|$ of the corresponding right eigenvector <b>v</b><sub>i</sub> indicates the proportion of <b>z</b><sub>i</sub> that is contributed to the state x<sub>j</sub>.<br>
-On the other hand, the composition of xi is indicated by the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>|, i.e. the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>| of the corresponding row <b>v</b><sub>i</sub><sup>T</sup> of the eigenvector matrix <b>V</b> indicates the proportion of the state x<sub>i</sub> that is contributed by the modal state z<sub>j</sub>. 
- 
- 
- 
+On the other hand, the composition of xi is indicated by the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>|, i.e. the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>| of the corresponding row <b>v</b><sub>i</sub><sup>T</sup> of the eigenvector matrix <b>V</b> indicates the proportion of the state x<sub>i</sub> that is contributed by the modal state z<sub>j</sub>.
+
+
+
 <a href=\"file:ls2Docu2.pdf\">text.pdf</a>
- 
- 
- 
- 
+
+
+
+
 </html>"));
   end analysis;
 
@@ -2653,7 +2653,7 @@ Initial &QUOT;Initial condition response&QUOT;</pre></blockquote>
 
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
+  Real x[5,1,1]
 
 <b>algorithm</b>
   (y,t,x) := Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(ss,Ts,tSpan,response,x0);
@@ -2702,10 +2702,10 @@ annotation(interactive=true, Documentation(info="<html>
     D=[0]);
   Real Ts=0.1;
   Real tSpan= 0.4;
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
+  Real x[5,1,1]
 
 <b>algorithm</b>
   (y,t,x) := StateSpace.Analysis.impulseResponse(ss,Ts,tSpan);
@@ -2744,7 +2744,7 @@ annotation(interactive=true, Documentation(info="<html>
 </table>
 <h4>Description</h4>
 <p>
-Function <b>stepResponse</b> calculates the step response of a state space system. 
+Function <b>stepResponse</b> calculates the step response of a state space system.
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
 <blockquote><pre>
 StateSpace.Analysis.stepResponse(ss, dt, tSpan)
@@ -2766,10 +2766,10 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
       D=[0]);
   Real Ts=0.1;
   Real tSpan= 0.4;
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
+  Real x[5,1,1]
 
 <b>algorithm</b>
   (y,t,x):=StateSpace.Analysis.stepResponse(ss,Ts,tSpan);
@@ -2811,7 +2811,7 @@ annotation(interactive=true, Documentation(info="<html>
 </table>
 <h4>Description</h4>
 <p>
-Function <b>rampResponse</b> calculates the time response of a state space system for ramp imput u = t. 
+Function <b>rampResponse</b> calculates the time response of a state space system for ramp imput u = t.
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
 <blockquote><pre>
 StateSpace.Analysis.rampResponse(ss, dt, tSpan)
@@ -2832,10 +2832,10 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
       D=[0]);
   Real Ts=0.1;
   Real tSpan= 0.4;
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
+  Real x[5,1,1]
 
 <b>algorithm</b>
   (y,t,x):=StateSpace.Analysis.rampResponse(ss,Ts,tSpan);
@@ -2881,7 +2881,7 @@ annotation(interactive=true, Documentation(info="<html>
 </table>
 <h4>Description</h4>
 <p>
-Function <b>initialResponse</b> calculates the time response of a state space system for given initial condition and zero inputs. 
+Function <b>initialResponse</b> calculates the time response of a state space system for given initial condition and zero inputs.
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
 <blockquote><pre>
 StateSpace.Analysis.initialResponse(x0,ss, dt, tSpan)
@@ -2903,10 +2903,10 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
   Real Ts=0.1;
   Real tSpan= 0.4;
   Real x0[2] = {1};
- 
+
   Real y[5,1,1];
   Real t[5];
-  Real x[5,1,1] 
+  Real x[5,1,1]
 
 <b>algorithm</b>
   (y,t,x):=StateSpace.Analysis.initialResponse(x0,ss,Ts,tSpan);
@@ -2949,7 +2949,7 @@ end initialResponse;
 </table>
 <h4>Description</h4>
 <p>
-Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial of the corresponding transfer function. 
+Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial of the corresponding transfer function.
 The state space system is converted to the transfer function G(s)=N(s)/D(s) with the polynomial N(s) as numerator.
 See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.denominatorDegree\">StateSpace.Analysis.denominatorDegree</a>.
 </p>
@@ -2961,7 +2961,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
       B=[1],
       C=[1],
       D=[1]);
- 
+
    Real nDegree;
 
 <b>algorithm</b>
@@ -2997,7 +2997,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
 </table>
 <h4>Description</h4>
 <p>
-Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of the corresponding transfer function. 
+Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of the corresponding transfer function.
 The state space system is converted to the transfer function G(s)=N(s)/D(s) with the polynomial D(s) as denominator.
 See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.numeratorDegree\">StateSpace.Analysis.numeratorDegree</a>.
 </p>
@@ -3009,7 +3009,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
       B=[1],
       C=[1],
       D=[1]);
- 
+
    Real dDegree;
 
 <b>algorithm</b>
@@ -3067,7 +3067,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
       C=[1],
       D=[0]);
    Complex s=Complex(1,1);
- 
+
    Complex result;
 
 <b>algorithm</b>
@@ -3149,7 +3149,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
       B=[1],
       C=[1],
       D=[1]);
- 
+
    Complex z;
    Complex p;
    Real k;
@@ -3197,12 +3197,12 @@ Calculate the eigenvalues of a state space system, i.e. the eigenvalues of the s
       B=[1;1],
       C=[1,1],
       D=[0]);
-  
+
    Complex eigenvalues[2];
-   
+
 <b>algorithm</b>
   eigenvalues = Modelica_LinearSystems2.StateSpace.Analysis.eigenValues(ss);
-// eigenvalues = {-1 + 1j, -1 - 1j}  
+// eigenvalues = {-1 + 1j, -1 - 1j}
 </pre></blockquote>
 
 
@@ -3474,7 +3474,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
 
 <h4>Description</h4>
 
-<p> 
+<p>
 This function computes the steady state gain <b>K</b> of a state space system.
 <b>K</b> is defined in the following way:
 </p>
@@ -3513,14 +3513,14 @@ Interpretations of matrix <b>K</b>:
 <li> <b>K</b> is the value of the transfer function G(s) at s=0</li>
 <li> For a stable state space system, a step input u[j] results in
      the output y[i](t->t<sub>&infin;</sub>) = K[i,j].</li>
-</ul> 
+</ul>
 
 <p>
 If <b>A</b> is singular (e.g. due to a zero eigenvalue), then a unique inverse
-of <b>A</b> does not exist. If there are non-unique solutions of the 
+of <b>A</b> does not exist. If there are non-unique solutions of the
 equation \"<b>A</b>*<b>X</b>=<b>B</b>\", the one with the smallest norm
 in <b>X</b> is used to compute <b>K</b>. If no solution of this equation exists,
-<b>K</b> cannot be computed. In this case, output argument 
+<b>K</b> cannot be computed. In this case, output argument
 <b>finite</b> = <b>false</b> and all elements of
 <b>K</b> are set to Modelica.Constants.inf (when <b>K</b> could be computed,
 <b>finite</b> = <b>true</b>).
@@ -3556,11 +3556,11 @@ in <b>X</b> is used to compute <b>K</b>. If no solution of this equation exists,
 <p>
 Function StateSpace.Analysis.<b>isControllable</b> checks the observability of a state space system. Therefore, the system is transformed into staircase form, i.e. the system matrix <b>H</b> of the transformed system has block upper Hessenberg form:
 <blockquote><pre>
-     | H11    H12     H13    ...     H1k |           
-     | H21    H22     H23    ...     H2k |          
+     | H11    H12     H13    ...     H1k |
+     | H21    H22     H23    ...     H2k |
  <b>H</b> = |  0     H32     ...    ...     ... |
-     | ...    ...     ...    ...     ... |            
-     |  0     ...      0    Hk,k-1   Hkk |             
+     | ...    ...     ...    ...     ... |
+     |  0     ...      0    Hk,k-1   Hkk |
 </pre>
 </blockquote>
 where, if <b>H</b>k,k-1 has full rank, indicating whether the system is controllable or not.<br>
@@ -3700,7 +3700,7 @@ Then, the uncontrollable poles are checked to be stable, i.e. to have negative r
 
    Boolean stabilizable;
 
-<b>algorithm</b> 
+<b>algorithm</b>
    stabilizable := Modelica_LinearSystems2.StateSpace.Analysis.isStabilizable(ss);
 // stabilizable = true
 </pre></blockquote>
@@ -3874,7 +3874,7 @@ of the system
 <p>
 This function calculates the observability matrix
 <blockquote><pre>
-   <b>Q</b> = [<b>C</b>; <b>C</b>*<b>A</b>; ...; <b>C</b>*<b>A</b>^(n-1)] 
+   <b>Q</b> = [<b>C</b>; <b>C</b>*<b>A</b>; ...; <b>C</b>*<b>A</b>^(n-1)]
 </pre>
 </blockquote>
 
@@ -4442,7 +4442,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 
 <b>algorithm</b>
  (K, S, newPoles) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, p);
- 
+
  // K = [6.0, 4.0]
  // S = [-1.0, 1.0; -6.0, -6.0]
  // newPoles = {-3, -4}
@@ -4510,7 +4510,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  (L, kss) </td><td align=center> =  </td>  <td> StateSpace.Design.<b>kalmanFilter</b>(ss, Q, R)  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
@@ -4529,7 +4529,7 @@ The plant output is affected by r(t)
 </blockquote>
 <p>
 The covariance matrices of q and r have to be given via Q and R, respectively.
- 
+
 <p>
 The filter uses an observer that tries to reconstruct the original behaviour. Its states and outputs are trailed with a hat (^)<br>
 The observer is controlled by feedback of the output difference y - y^ (y^= Cx^+ Du)
@@ -4537,7 +4537,7 @@ over a Matrix L, such that x^
 </p>
 <blockquote>dx^/dt = (A - LC) x^ + (B - LD)u + Ly
 </blockquote>
-<p> 
+<p>
 follows the plant state x. L is designed to minimize noise in states and inputs.
 L is calculated from a Riccati Equation
 <blockquote><pre>
@@ -4546,7 +4546,7 @@ SC'R  CS - SA' - AS - Q = 0
         -1
 L = SC'R
 </pre></blockquote>
- 
+
 <p>
 The representation of the estimation model would be as follows:
 </p>
@@ -4554,13 +4554,13 @@ The representation of the estimation model would be as follows:
   .                            |u|
   x^  = [A-LC] x^ + [B-LD , L] | |
                                |y|
-                      |u|             
+                      |u|
   y^ = [C] x^ + [D 0] | |
                       |y|
 </pre></blockquote>
 Since the controller approach was made to provide the estimated states, the representation of the ooutput kss is such that
 <blockquote><pre>
-   y^ = x^ 
+   y^ = x^
 </pre></blockquote>
 i.e., kss:
 <blockquote><pre>
@@ -4570,7 +4570,7 @@ i.e., kss:
               |u|
   y^ = Ix^ + 0| |
               |y|
-            
+
 </pre></blockquote>
 i.e.
 <blockquote><pre>
@@ -4581,10 +4581,10 @@ i.e.
 Since the calculation of a Kalman filter is the dual problem of lqr calculation function
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Design.lqr\">Modelica_LinearSystems2.StateSpace.Design.lqr</a>
 is used to solve the Riccati euation.<br>
-The algebraic Riccati equation is solved by using the Schur algorithm 
+The algebraic Riccati equation is solved by using the Schur algorithm
 <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.care\">care</a>.
 </p>
- 
+
 <h4>Example</h4>
 <blockquote><pre>
   import Modelica_LinearSystems2.StateSpace;
@@ -4592,41 +4592,41 @@ The algebraic Riccati equation is solved by using the Schur algorithm
   StateSpace css = StateSpace(TransferFunction.constructor({1},{1,2,3,4}));
   Real Q[:,:] = identity(3);
   Real R[:,:] = [1];
-  
+
   Real L[:,:];
   StateSpace kss(
             redeclare Real A[size(css.A,1),size(css.A,1)],
             redeclare Real B[size(css.B,1),size(css.B,2)+size(css.C,1)],
             redeclare Real C[size(css.C,1)+size(css.A,1),size(css.C,2)],
             redeclare Real D[size(css.C,1)+size(css.A,1),size(css.B,2)+size(css.C,1)]);
-  
+
 <b>algorithm</b>
   ( L, kss) := StateSpace.Design.kalmanFilter(css, Q, R);
 //  L = [0.9928;
        (-0.0072);
        (-1.4868)]
 // kss = StateSpace(
-          A = [-0.993,     1,     0;                      
+          A = [-0.993,     1,     0;
                 0.007,     0,     1;
                -2.513,     3,    -2],
-          
+
           B = [ 0,         0.993;
                 0,        -0.0072;
                 1,        -1.4868],
 
           C = [ 1,     0,     0;
                 0,     1,     0;
-                0,     0,     1],                      
- 
+                0,     0,     1],
+
           D = [ 0,     0;
                 0,     0;
                 0,     0])
 </pre></blockquote>
- 
- 
- 
- 
- 
+
+
+
+
+
 </html>", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
@@ -4985,7 +4985,7 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
       B=[0.14,  -0.12; 0.36, -8.6; 0.35, 0.009; 0, 0],
       C=[0, 1, 0, 0; 0, 0, 0, 57.3],
       D=[0,0; 0,0]);
- 
+
    Real Q[:,:] = transpose(ss.C)*ss.C \" state weighting matrix\";
    Real R[:,:] = identity(2) \" input weighting matrix\";
    Real V[:,:] = identity(2) \" covariance output noise matrix\";
@@ -4998,11 +4998,11 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
 
 // Kc = [-0.0033,     0.04719,      14.6421,        60.8894;
           0.0171,    -1.05154,       0.29273,        3.2468]
-         
+
 // Kf = [0.015,     -0.2405;
          9.066,     -0.1761;
          0.009,      0.2289;
-        -0.003,      0.08934]             
+        -0.003,      0.08934]
 </pre></blockquote>
 
 </html> ", revisions="<html>
@@ -5095,7 +5095,7 @@ StateSpace.Plot.<b>polesAndZeros</b>(ss);
    or
 diagram = StateSpace.Plot.<b>polesAndZeros</b>(ss, poles=true, zeros=true, plot=true,
                      defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</a>(),
-                     device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>()); 
+                     device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>());
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -5118,28 +5118,28 @@ is defined as
 
 <pre>
   Plot.polesAndZeros(ss = Modelica_LinearSystems2.StateSpace(
-      A=[-3, 2,-3,  4, 5,6; 
-          0, 6, 7,  8, 9,4; 
-          0, 2, 3,  0,78,6; 
-          0, 1, 2,  2, 3,3; 
-          0,13,34,  0, 0,1; 
+      A=[-3, 2,-3,  4, 5,6;
+          0, 6, 7,  8, 9,4;
+          0, 2, 3,  0,78,6;
+          0, 1, 2,  2, 3,3;
+          0,13,34,  0, 0,1;
           0, 0, 0,-17, 0,0],
       B=[1,0;
-         0,1; 
-         1,0; 
-         0,1; 
-         1,0; 
+         0,1;
+         1,0;
+         0,1;
+         1,0;
          0,1],
-      C=[0,0,1,0,1,0; 
+      C=[0,0,1,0,1,0;
          0,1,0,0,1,1],
-      D=[0,0; 
+      D=[0,0;
          0,0]));
 </pre>
-   
+
 <p>
-and results in 
+and results in
 </p>
- 
+
 <blockquote><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/polesAndZerosSS.png\"/> </blockquote>
 
 </html>"));
@@ -5227,7 +5227,7 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
       B=[0.0,1.0; 1.0,1.0; -1.0,0.0],
       C=[0.0,1.0,1.0; 1.0,1.0,1.0],
       D=[1.0,0.0; 0.0,1.0])
-   
+
    Integer iu=1;
    Integer iy=1;
 
@@ -5334,7 +5334,7 @@ StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnit
       B=[0.0,1.0; 1.0,1.0; -1.0,0.0],
       C=[0.0,1.0,1.0],
       D=[1.0,0.0])
-   
+
 
 
 <b>algorithm</b>
@@ -5447,7 +5447,7 @@ StateSpace.Plot.<b>plotBodeMIMO</b>(ss, nPoints, autoRange, f_min, f_max, magnit
         end if;
       end for;
 
-      annotation (interactive=true, Documentation(info="<html> 
+      annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>timeResponse</b>(ss);
@@ -5460,8 +5460,8 @@ device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Devic
 <h4>Description</h4>
 <p>
 Function <b>timeResponse</b> plots the time response of a state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.plotImpulse\">plotImpulse</a>, 
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.plotImpulse\">plotImpulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
 
@@ -5523,7 +5523,7 @@ Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (interactive=true, Documentation(info="<html> 
+      annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>impulse</b>(ss);
@@ -5534,7 +5534,7 @@ device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Devic
 <h4>Description</h4>
 <p>
 Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
 
@@ -5598,7 +5598,7 @@ Modelica_LinearSystems2.StateSpace.Plot.impulse(ss)
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (interactive=true, Documentation(info="<html> 
+      annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>step</b>(ss);
@@ -5609,7 +5609,7 @@ device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Devic
 <h4>Description</h4>
 <p>
 Function <b>step</b> plots the step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
 
@@ -5673,7 +5673,7 @@ Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
           defaultDiagram=defaultDiagram,
           device=device);
 
-    annotation (interactive=true, Documentation(info="<html> 
+    annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>ramp</b>(ss);
@@ -5684,7 +5684,7 @@ device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Devic
 <h4>Description</h4>
 <p>
 Function <b>ramp</b> plots the ramp responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, and
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
 
@@ -5746,7 +5746,7 @@ Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (interactive=true, Documentation(info="<html> 
+      annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>initial</b>(ss);
@@ -5757,7 +5757,7 @@ device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Devic
 <h4>Description</h4>
 <p>
 Function <b>initial</b> plots the initial responses of a state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, and
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>.
 
@@ -5773,7 +5773,7 @@ B=[1.0; 1.0; 0.0],
 C=[0.0,1.0,1.0],
 D=[0.0])
 
-Real x0={1,0.5,0.5}; 
+Real x0={1,0.5,0.5};
 
 
 
@@ -5907,7 +5907,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 
 <b>algorithm</b>
   zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
-//                s + 1.5  
+//                s + 1.5
 //   zp = 2 -----------------
              (s + 1)*(s + 2)
 </pre></blockquote>
@@ -5961,7 +5961,7 @@ vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
 Computes a TransferFunction record
 <blockquote><pre>
            n(s)     b0 + b1*s + ... + bn*s^n
-   tf = -------- = -------------------------- 
+   tf = -------- = --------------------------
            d(s)     a0 + a1*s + ... + an*s^n
  </pre></blockquote>
 
@@ -5983,7 +5983,7 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
 
 <b>algorithm</b>
   tf:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
-//             2*s + 3  
+//             2*s + 3
 //   tf =  -----------------
              s^2 + 3*s + 2
 </pre></blockquote>
@@ -6137,7 +6137,7 @@ algorithm
 Computes a matrix of TransferFunction records
 <blockquote><pre>
            n_i(s)     b0_i + b1_i*s + ... + bn_i*s^n
-   tf_i = -------- = -------------------------------- 
+   tf_i = -------- = --------------------------------
            d_i(s)     a0_i + a1_i*s + ... + an_i*s^n
  </pre></blockquote>
 with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
@@ -6153,7 +6153,7 @@ with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.Stat
 Computes a matrix of TransferFunction records
 <blockquote><pre>
            n(s)     b0 + b1*s + ... + bn*s^n
-   tf = -------- = -------------------------- 
+   tf = -------- = --------------------------
            d(s)     a0 + a1*s + ... + an*s^n
  </pre></blockquote>
 with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
@@ -6249,12 +6249,12 @@ Function <b>toSimilarForm</b> calculates a similar state space system, i.e.
 <blockquote><pre>
    der(z) = T*A*inv(T)*z + T*B*u
         y = C*T*z + D*u
-</pre></blockquote> 
-if inverted==false and 
+</pre></blockquote>
+if inverted==false and
 <blockquote><pre>
    der(z) = inv(T)*A*T*z + inv(T)*B*u
         y = C*inv(T)*z + D*u
-</pre></blockquote> 
+</pre></blockquote>
 if inverted=true. Matrix T has to be invertible. The transformed system has the same eigenvalues. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">analysis</a>
 
 <h4>Example</h4>
@@ -6266,7 +6266,7 @@ if inverted=true. Matrix T has to be invertible. The transformed system has the 
       D=[0]);
 
    Real T[2,2]=[1, 1;0, sqrt(2)];
- 
+
 <b>algorithm</b>
   tss:=Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm(ss, T, false);
 //  tss=StateSpace(
@@ -6350,7 +6350,7 @@ the canonical observability form is
    A = | 0   1   ...   0   -a2   |,   B = |     ...        |
        |... ...  ...  ...  -a3   |        | bn-2 - an-2*bn |
        | 0  ...  ...   1   -an-1 |        | bn-1 - an-1*bn |
-       
+
    C = [0, 0, ..., 1],                D = [bn]
  </pre></blockquote>
 
@@ -6456,7 +6456,7 @@ the canonical observability form is
    A = | ...   ...   ...  ...   ...  |,                   B = |...|
        |  0     0     0    0     0   |                        | 0 |
        | -a0   -a1   -a2  ...  -an-1 |                        | 1 |
-       
+
    C = [ b0 - bn*a0, b1 - bn*a1, ..., bn-1 - bn*an-1],    D = [bn]
  </pre></blockquote>
 
@@ -6824,7 +6824,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
 
 <h4>Example</h4>
 <blockquote><pre>
-     
+
 
 <b>algorithm</b>
   ss:=Modelica_LinearSystems2.StateSpace.Import.fromFile(\"stateSpace.mat\", \"ABCD\");
@@ -6893,7 +6893,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
 <p><h4>Description</h4></p>
 <p>Generate a StateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record. </p>
 <p><h4>Example</h4></p>
-<blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
+<blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;;
    Real T_linearize = 5;
 
 <b>algorithm</b>
@@ -6939,8 +6939,8 @@ encapsulated package Internal
   algorithm
     isSISO := size(ss.B, 2) == 1 and size(ss.C, 1) == 1;
     annotation (Documentation(info="<html>
- 
- 
+
+
 </html>"));
   end isSISO;
 
@@ -7013,7 +7013,7 @@ Computes the invariant zeros of a system in state space form:
 The invariant zeros of this system are defined as the variables
 z that make the following matrix singular:
 </p>
-<pre> 
+<pre>
     | <b>A</b> <b>B</b> |     | <b>I</b> <b>0</b> |
     |     | - z*|     |
     | <b>C</b> <b>D</b> |     | <b>0</b> <b>0</b> |
@@ -7038,7 +7038,7 @@ into an upper Hessenberg form system.
 This function is used in fromStateSpace transformation functions which use Hessenberg form systems anyway.
 </p>
 <p>
-Currently, there is the restriction that the number of 
+Currently, there is the restriction that the number of
 inputs and the number of outputs must be identical. Other systems
 have to be treated like p*q SISO systems where p is the number of putputs and q the number of inputs of the MIMO system.
 </p>
@@ -7216,21 +7216,21 @@ To check stabilizability, ths system is transformed to to upper controller Hesse
  <b>Q</b>*<b>A</b>*<b>Q</b> ' = <b>H</b> = | 0   *   ...   ...    * |,    <b>Q</b>*<b>b</b> = <b>q</b> = | . |,   <b>c</b>*<b>Q</b> = ( *, ..., * )
                | .   .    .     .     . |               | . |
                | 0  ...   0     *     * |               | 0 |
- 
+
 </pre>
 </blockquote>
-The system can be partitioned to 
- 
+The system can be partitioned to
+
 <blockquote><pre>
 <b>H</b>=[<b>H</b>11,<b>H</b>12; <b>H</b>21, <b>H</b>22], <b>q</b>=[<b>q</b>1;<b>0</b>],
 </pre>
 </blockquote
 where the pair (<b>H</b>11, <b>q</b>1) contains the controllable part of the system, that is, rank(<b>H</b>) = rank(<b>H</b>11). For
 stabilizability the <b>H</b>22 has to be stable.
- 
- 
- 
- 
+
+
+
+
 </html>"));
   end isStabilizableSISO;
 
@@ -7277,7 +7277,7 @@ Hence, a controllable system is always stabilizable of course.
 <p>
 To check stabilizability, staircase algorithm is used to separate the controllable subspace from the uncontrollable subspace.
 The uncontrollable poles are checked to to stable.
-  
+
 </html>"));
   end isStabilizableMIMO;
 
@@ -7339,11 +7339,11 @@ To check stabilizability (see Modelica_LinearSystems2.StateSpace.Analysis.isStab
  <b>Q</b>*<b>A</b>*<b>Q</b> ' = <b>H</b> = | 0   *   ...   ...    * |,    <b>Q</b>*<b>b</b> = <b>q</b> = | . |,   <b>c</b>*<b>Q</b> = ( *, ..., * )
                | .   .    .     .     . |               | . |
                | 0  ...   0     *     * |               | 0 |
- 
+
 </pre>
 </blockquote>
-The system can be partitioned to 
- 
+The system can be partitioned to
+
 <blockquote><pre>
 <b>H</b>=[<b>H</b>11,<b>H</b>12; <b>H</b>21, <b>H</b>22], <b>q</b>=[<b>q</b>1;<b>0</b>],
 </pre>
@@ -7351,7 +7351,7 @@ The system can be partitioned to
 where the pair (<b>H</b>11, <b>q</b>1) contains the controllable part of the system, that is, rank(<b>H</b>) = rank(<b>H</b>11). For
 stabilizability the <b>H</b>22 has to be stable.
 </p>
- 
+
 </html>"));
   end isDetectableSISO;
 
@@ -7402,10 +7402,10 @@ Hence, a observable system is always detectable of course.
 <p>
 To check detectability, staircase algorithm is used to separate the observable subspace from the unobservable subspace.
 The unobservable poles are checked to be stable.
- 
- 
- 
- 
+
+
+
+
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics));
   end isDetectableMIMO;
@@ -7445,7 +7445,7 @@ it is transformed to upper observer Hessenberg form
  <b>Q</b>*<b>A'</b>*<b>Q</b>' = <b>H</b> = | 0   *   ...   ...    * |,    <b>Q</b>*<b>c'</b> =  | . |,   <b>b'</b>*<b>Q</b> = <b>q</b> = ( 0, ..., 0, * )
                | .   .    .     .     . |             | * |
                | 0  ...   0     *     * |             | * |
-  
+
 </pre>
 </blockquote>
 Note, that
@@ -7461,8 +7461,8 @@ and that
 </pre>
 </blockquote>
 is a lower triangular matrix and has full rank if and only if none of the elements in the diagonal is zero. That is, that neither qn or hi,i-1,   i = 2,..., n   may be zero.
- 
- 
+
+
 </html>"));
   end isObservableSISO;
 
@@ -7500,7 +7500,7 @@ it is transformed to lower controller Hessenberg form
  <b>Q</b>*<b>A</b>*<b>Q</b> ' = <b>H</b> = | *   ...   ...   *   0 |,    <b>Q</b>*<b>b</b> = <b>q</b> = | . |,   <b>c</b>*<b>Q</b> = ( *, ..., * )
                | *   ...   ...   *   * |               | 0 |
                | *   ...   ...   *   * |               | * |
- 
+
 </pre>
 </blockquote>
 Note, that
@@ -7516,8 +7516,8 @@ and that
 </pre>
 </blockquote>
 is a lower triangular matrix and has full rank if and only if none of the elements in the diagonal is zero. That is, that neither qn or hi,i+1,   i = 1,..., n-1   may be zero.
- 
- 
+
+
 </html>"));
   end isControllableSISO;
 
@@ -7534,7 +7534,7 @@ is a lower triangular matrix and has full rank if and only if none of the elemen
     output Boolean controllable;
   algorithm
     assert(method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD or
-        method == Modelica_LinearSystems2.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore, 
+        method == Modelica_LinearSystems2.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore,
 the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isControllableMIMO\" has to be qr or svd but is method = "
          + String(method));
     if min(size(ss.B)) == 0 then
@@ -7547,9 +7547,9 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
       end if;
     end if;
     annotation (Documentation(info="<html>
- 
- 
- 
+
+
+
 </html>"));
   end isControllableMIMO;
 
@@ -7570,7 +7570,7 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
     output Boolean observable;
   algorithm
     assert(method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD or
-        method == Modelica_LinearSystems2.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore, 
+        method == Modelica_LinearSystems2.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore,
 the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isControllableMIMO\" has to be qr or svd but is method = "
          + String(method));
     if min(size(ss.C)) == 0 then
@@ -7584,9 +7584,9 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
     end if;
 
     annotation (Documentation(info="<html>
- 
- 
- 
+
+
+
 </html>"));
   end isObservableMIMO;
 
@@ -7777,7 +7777,7 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
     end if;
 
     annotation (Documentation(info="<html>
-This algorithm usues QR factorization to generate staircase form i.e. block upper Hessenberg form of the pair (A,B). Due to the well known problem to determine 
+This algorithm usues QR factorization to generate staircase form i.e. block upper Hessenberg form of the pair (A,B). Due to the well known problem to determine
 numerically reliable the rank of a matrix, this algorithm should only be used to well conditioned systems. The best way for rank decision would be singular value decomposition, that is used in staicasSVD.
 </html>"));
   end staircaseQR;
@@ -8761,7 +8761,7 @@ The function is primarily used to calculate the transfer function gain from a SI
  <b>A</b> = ( 0   *   ...   ...    * ),    <b>b</b> =  ( . ),   <b>c</b> = ( 0, ..., 0, * )
      ( .   .    .     .     . )          ( * )
      ( 0  ...   0     *     * )          ( * )
- 
+
 </pre>
 </blockquote>
 If <b>A</b> is upper Hessenberg and <b>T</b> = <b>Q</b>*<b>A</b> is triangular then obviously <b>H</b>(s) = <b>Q</b>*(s*<b>I</b> -<b>A</b>) = s*<b>I</b> - <b>T</b>.
@@ -8778,10 +8778,10 @@ and because only the n'th element of <b>c</b> is different to zero the gain k is
 k = ---------- * ----------------------
        h_nn       product(s0 - zeros_i)
 </pre></blockquote>
- 
- 
+
+
 </p>
- 
+
 </html>"));
   end trianUpperHess;
 
@@ -9127,7 +9127,7 @@ Computes the invariant zeros of a system in state space form:
 The invariant zeros of this system are defined as the variables
 z that make the following matrix singular:
 </p>
-<pre> 
+<pre>
     | <b>A</b> <b>B</b> |     | <b>I</b> <b>0</b> |
     |     | - z*|     |
     | <b>C</b> <b>D</b> |     | <b>0</b> <b>0</b> |
@@ -9137,7 +9137,7 @@ where <b>I</b> is the identity matrix of the same size as <b>A</b>
 and <b>0</b> are zero matrices of appropriate dimensions.
 </p>
 <p>
-Currently, there is the restriction that the number of 
+Currently, there is the restriction that the number of
 inputs and the number of outputs must be identical.
 </p>
 </html>"));
@@ -9254,8 +9254,8 @@ inputs and the number of outputs must be identical.
   algorithm
 
     annotation (Documentation(info="<html>
- 
- 
+
+
 </html>"));
   end transposeStateSpace;
 
@@ -9658,7 +9658,7 @@ algorithm
 <p><h4>Description</h4></p>
 <p>Generate a StateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record. </p>
 <p><h4>Example</h4></p>
-<blockquote><pre>  String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;; 
+<blockquote><pre>  String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;;
   Real T_linearize = 5;
 
 <b>algorithm</b>
@@ -9674,7 +9674,7 @@ algorithm
 // ss.B=[0.0; 0.13; 0.0; -0.014; 0.0; -0.1],
 // ss.C=identity(6),
 // ss.D=[0; 0; 0; 0; 0; 0]
-      
+
 <blockquote><br/><code>                </code> </blockquote>
 </html>"));
 end read_dslin;

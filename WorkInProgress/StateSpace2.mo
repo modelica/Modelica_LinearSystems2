@@ -108,7 +108,7 @@ public
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
@@ -123,10 +123,10 @@ Therefore, the matrices are defined by
   ss.C = fill(0,1,0);
   ss.D = [r];
 </pre></blockquote>
- 
+
 </p>
- 
- 
+
+
 </html>"));
   end fromReal;
 
@@ -192,7 +192,7 @@ The operator is used by writing just the following command:
 <blockquote><pre>
    StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
    StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
-   
+
    StateSpace ss3;
 
 <b>algorithm</b>
@@ -226,7 +226,7 @@ The operator is used by writing just the following command:
     annotation (Documentation(info="<html>
 <h4>Description</h4>
 <p>
-This package contains the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.subtract#info\">'subtract'</a> and the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.subtract#info\">'-'</a> operator for StateSpace records. 
+This package contains the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.subtract#info\">'subtract'</a> and the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.subtract#info\">'-'</a> operator for StateSpace records.
 
 </html>"));
 end '-';
@@ -360,7 +360,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
 
 <h4>Example</h4>
 <blockquote><pre>
-     
+
 
 <b>algorithm</b>
   ss:=Modelica_LinearSystems2.StateSpace.Import.fromFile(\"stateSpace.mat\", \"ABCD\");

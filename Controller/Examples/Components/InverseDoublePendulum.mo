@@ -411,12 +411,12 @@ equation
         extent={{-150,-100},{150,100}},
         grid={2,2}), graphics),
     Documentation(info="<html>
- 
+
 Model of a simple inverted double pendulum system. The mdel is the same as in Modelica_Controller.Examples.Components.DoublePendulum but with different initial values because the initial values are used as a working point for linearization.<br>
 The physical Model is used in Modelica_LinearSystems2.Examples.StateSpace.inverseDoublePendulumController where it is being
 linearized an used as a base for linear controller design. The results are used to control the crane system
 in Modelica_Controller.Examples.InverseDoublePendulum.mo
- 
+
 </html>"),
     uses(Modelica(version="3.0")),
     experimentSetupOutput,

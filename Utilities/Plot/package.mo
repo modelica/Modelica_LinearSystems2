@@ -18,10 +18,10 @@ to either plot one diagram (Plot.diagram) to plot several diagrams under each ot
 <p>
 Every diagram can have a set of <u>curves</u>. Every diagram has the same
 width, defined by <u>diagramWidth</u>. The height of a diagram is defined
-by variable <u>heightRatio</u> 
-(diagram height in row j = diagram[j].heightRatio*diagramWidth). 
+by variable <u>heightRatio</u>
+(diagram height in row j = diagram[j].heightRatio*diagramWidth).
 Several curves can be displayed in one diagram.
 </p>
- 
+
 </html>"));
 end Plot;

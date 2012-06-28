@@ -23,11 +23,11 @@ algorithm
     (S, QZ, alphaReal, alphaImag, info) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgees(A);
      assert(info == 0, "The output info of LAPACK.dgees should be zero, else if\n
      info < 0:  if info = -i, the i-th argument of dgees had an illegal value\n
-     info > 0:  if INFO = i, and i is   
-               <= N: the QR algorithm failed to compute all the   
-                     eigenvalues; elements 1:ILO-1 and i+1:N of WR and WI   
-                     contain those eigenvalues which have converged; if   
-                     JOBVS = 'V', VS contains the matrix which reduces A   
+     info > 0:  if INFO = i, and i is
+               <= N: the QR algorithm failed to compute all the
+                     eigenvalues; elements 1:ILO-1 and i+1:N of WR and WI
+                     contain those eigenvalues which have converged; if
+                     JOBVS = 'V', VS contains the matrix which reduces A
                      to its partially converged Schur form.\n");
   else
     S := A;

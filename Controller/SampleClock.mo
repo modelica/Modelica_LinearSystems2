@@ -28,8 +28,8 @@ equation
   annotation (
     defaultComponentName="sampleClock",
     defaultComponentPrefixes="inner",
-    missingInnerMessage="A \"sampleClock\" component is not defined. A default 
-sampleClock with blockType = Continuous will be used. If this is not desired, 
+    missingInnerMessage="A \"sampleClock\" component is not defined. A default
+sampleClock with blockType = Continuous will be used. If this is not desired,
 drag Modelica_LinearSystems2.Controller.SampleClock into the top level of your model.",
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={

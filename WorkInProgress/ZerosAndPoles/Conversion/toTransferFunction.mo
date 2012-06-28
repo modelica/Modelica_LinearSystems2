@@ -37,7 +37,7 @@ algorithm
 Computes a TransferFunction record
  <blockquote><pre>
            n(s)     b0 + b1*s + ... + bn*s^n
-   tf = -------- = -------------------------- 
+   tf = -------- = --------------------------
            d(s)     a0 + a1*s + ... + an*s^n
  </pre></blockquote>
 from a ZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the TransferFunction constructor.
@@ -45,7 +45,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
 
 <h4>Example</h4>
 <blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles zp = 1/(p + 3)/(p + 1)
 
 
@@ -55,6 +55,6 @@ from a ZerosAndPoles record representated by first and second order numerator an
 </pre></blockquote>
 
 
- 
+
 </html>"));
 end toTransferFunction;

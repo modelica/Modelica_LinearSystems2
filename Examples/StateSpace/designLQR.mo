@@ -35,6 +35,6 @@ algorithm
   ok := true;
 
   annotation (Documentation(info="<html>
-This example demonstrates the computatrion of a LQR controller by calling function <b>StateSpace.Design.lqr()</b> 
+This example demonstrates the computatrion of a LQR controller by calling function <b>StateSpace.Design.lqr()</b>
 </html>"));
 end designLQR;

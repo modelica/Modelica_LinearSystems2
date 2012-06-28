@@ -29,7 +29,7 @@ algorithm
 Computes a TransferFunction record
 <blockquote><pre>
            n(s)     b0 + b1*s + ... + bn*s^n
-   tf = -------- = -------------------------- 
+   tf = -------- = --------------------------
            d(s)     a0 + a1*s + ... + an*s^n
  </pre></blockquote>
 
@@ -49,7 +49,7 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
 
 <b>algorithm</b>
   tf:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
-//             2*s + 3  
+//             2*s + 3
 //   tf =  -----------------
              s^2 + 3*s + 2
 </pre></blockquote>

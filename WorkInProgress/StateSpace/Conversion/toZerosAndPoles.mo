@@ -111,7 +111,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 
 <b>algorithm</b>
   zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
-//                s + 1.5  
+//                s + 1.5
 //   zp = 2 -----------------
              (s + 1)*(s + 2)
 </pre></blockquote>

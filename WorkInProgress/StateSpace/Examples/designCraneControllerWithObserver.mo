@@ -115,17 +115,17 @@ An observer can be designed by applying assignPolesMI to the dual system (A', C'
 The results, which are controller feedback matrix, observer feedback matrix, system model for usage in observer and a simple pre filter for tracking are saved to MATLAB files which can be used in ModelicaController library.<br>
 It is also shown how to linearize a model of a crane trolley system [1]. The linear model is then used as a base for controller design.
 <p>
- 
+
 <A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A> <PRE>
   [1] Varga A., \"A Schur method for pole assignment\",
       IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981.
 </PRE>
 </html>"),    Documentation(info="<html>
-This example demonstrates how to design a lq-controller or a pole placement controller respectively. 
+This example demonstrates how to design a lq-controller or a pole placement controller respectively.
 The feedback matrices and a simple pre filter for tracking are save to MATLAB files which can be used in
 ModelicaController library.<br>
 It is also shown how to linearize a model of a crane trolley system [1]. The linear model is used as a base for control design
- 
+
 <A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A>
 <PRE>
   [1] Föllinger, O. \"Regelungstechnik\", Hüthig-Verlag

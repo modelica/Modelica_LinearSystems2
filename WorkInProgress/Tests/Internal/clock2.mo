@@ -9,10 +9,10 @@ annotation(Include = "
 #include <time.h>
 int clock_ms(double *rt)
 {
-*rt=(double)clock() * 1000 / (double)CLOCKS_PER_SEC; 
+*rt=(double)clock() * 1000 / (double)CLOCKS_PER_SEC;
  return 0;
 }
- 
+
 ");
 
 end clock2;

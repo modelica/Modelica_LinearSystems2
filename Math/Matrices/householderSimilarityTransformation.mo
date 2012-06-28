@@ -43,14 +43,14 @@ This transformation is widely used for transforming non-symmetric matrices to a 
 <blockquote><pre>
 // First step of Hessenberg decomposition
   import   Modelica.Math.Vectors.Utilities;
-  
+
   Real A[4,4] = [1,2,3,4;
                  3,4,5,6;
                  9,8,7,6;
                  1,2,0,0];
   Real Ar[4,4];
   Real u[4]={0,0,0,0};
-  
+
   u[2:4]=Utilities.householderVector(A[2:4,1],{1,0,0});
   // u= = {0, 0.8107, 0.5819, 0.0647}
   Ar=householderSimilarityTransformation(A,u);

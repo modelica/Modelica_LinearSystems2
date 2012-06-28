@@ -147,14 +147,14 @@ Example:
 <p>
 with j=sqrt(-1), is defined as
 </p>
-<pre> 
-   <b>import</b> Modelica_LinearSystems2.Math.Complex; 
+<pre>
+   <b>import</b> Modelica_LinearSystems2.Math.Complex;
    <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
-   
+
    zp = ZerosAndPoles(z = {Complex(-1,0)},
                       p = {Complex(1,0),
                            Complex(2,3),
-                           Complex(2,-3)}, 
+                           Complex(2,-3)},
                            k=4);
 </pre>
 <p>
@@ -625,20 +625,20 @@ end '==';
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  q </td><td align=center> =  </td>  <td>DiscreteZerosAndPoles.<b>q</b>()  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
-Generate the complex Laplace variable q=rxp(s*T) as a DiscreteZerosAndPoles transfer function. It can be used for generating like 
+Generate the complex Laplace variable q=rxp(s*T) as a DiscreteZerosAndPoles transfer function. It can be used for generating like
 <blockquote><pre>
         DiscreteZerosAndPoles dzp = q/(q^2 + q + 1)/(q + 1)
 </pre></blockquote>
 
 </p>
- 
 
- 
- 
+
+
+
 </html> "));
   end q;
 
@@ -660,7 +660,7 @@ Generate the complex Laplace variable q=rxp(s*T) as a DiscreteZerosAndPoles tran
 </table>
 <h4>Description</h4>
 <p>
-Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial constituted by the first and second order polynomials of the DiscreteZeroAndPoles numerator. 
+Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial constituted by the first and second order polynomials of the DiscreteZeroAndPoles numerator.
 See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.numeratorDegree\">DiscreteZerosAndPoles.Analysis.numeratorDegree</a>.
 </p>
 
@@ -668,7 +668,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Anal
 <blockquote><pre>
    DiscreteZerosAndPoles q = Modelica_LinearSystems2.DiscreteZerosAndPoles.q();
    Modelica_LinearSystems2.DiscreteZerosAndPoles zp=(p+1)/(p^2+p+1);
- 
+
    Real dDegree;
 
 <b>algorithm</b>
@@ -732,7 +732,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Anal
 Computes a TransferFunction record
  <blockquote><pre>
            n(s)     b0 + b1*s + ... + bn*s^n
-   tf = -------- = -------------------------- 
+   tf = -------- = --------------------------
            d(s)     a0 + a1*s + ... + an*s^n
  </pre></blockquote>
 from a ZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the TransferFunction constructor.
@@ -740,7 +740,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
 
 <h4>Example</h4>
 <blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
+   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
    Modelica_LinearSystems2.ZerosAndPoles tf = 1/(p + 3)/(p + 1)
 
 
@@ -750,7 +750,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
 </pre></blockquote>
 
 
- 
+
 </html>"));
   end toDiscreteTransferFunction;
 
@@ -1285,7 +1285,7 @@ Therefore, in this case, the derivative of u is not
 needed and the tool can continue with the symbolic
 processing.
 </p>
- 
+
 
 </p>
 
@@ -1371,7 +1371,7 @@ processing.
 
       zp := StateSpace.Conversion.toZerosAndPolesMIMO(result);
 
-      annotation (interactive=true, Documentation(info="function fromModel 
+      annotation (interactive=true, Documentation(info="function fromModel
   \"Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model\"
 
   import Modelica;
@@ -1390,28 +1390,28 @@ processing.
 <h4>Description</h4>
 <p>
 Generate a matrix of ZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conversion from sate space to transfer function representation.
- 
+
 <h4>Example</h4>
 <blockquote><pre>
-   String modelName = \"Modelica_LinearSystems2.Examples.DoublePendulum\"; 
-   Real T_linearize = 5; 
-   
- 
+   String modelName = \"Modelica_LinearSystems2.Examples.DoublePendulum\";
+   Real T_linearize = 5;
+
+
 <b>algorithm</b>
   zp = Modelica_LinearSystems2.ZerosAndPoles.Import.fromModel(modelName, T_linearize);
- 
+
 //  zp =[0.157605*(p + 0.706559)*(p + 12.3798)*(p^2-7.34273*p + 18.674)/( (p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572)*(p^2 + 2.07022e-015*p + 3.38074e-015) );
          0.157605*(p + 0.706559)*(p + 12.3798)*(p^2-7.34273*p + 18.674)/( (p-1.94349e-015)*(p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572) );
         -0.166305*(p^2-1.20297*p + 3.48327)/( (p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572) );
         -0.166305*p*(p^2-1.20297*p + 3.48327)/( (p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572) );
          0.283325*(p-5.23615)*(p + 0.551929)/( (p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572) );
          0.283325*p*(p-5.23615)*(p + 0.551929)/( (p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572) )]
-                      
+
 </pre></blockquote>
- 
- 
- 
- 
+
+
+
+
 </html> \"));
 
 "));
@@ -1471,7 +1471,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
 <h4>Example</h4>
 <blockquote><pre>
-     
+
 
 <b>algorithm</b>
   zp:=Modelica_LinearSystems2.ZerosAndPoles.Import.fromFile(\"zp.mat\", \"n\", \"d\");
@@ -1561,13 +1561,13 @@ results in a polynomial with Real coefficients).
 <p>
 In the record, the zeros and poles are transformed
 into a product of first and second order polynomials.
-The data structure is especially useful in applications where first and 
-second order polynomials are naturally occuring, e.g., as 
-for <b>filters</b>. In fact, via function 
-<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>, a 
+The data structure is especially useful in applications where first and
+second order polynomials are naturally occuring, e.g., as
+for <b>filters</b>. In fact, via function
+<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>, a
 ZeroAndPole transfer function is generated from
-<b>low</b> and <b>high pass</b> analog filters 
-(<b>CriticalDamping</b>, <b>Bessel</b>, <b>Butterworth</b>, <b>Chebyshev</b>). 
+<b>low</b> and <b>high pass</b> analog filters
+(<b>CriticalDamping</b>, <b>Bessel</b>, <b>Butterworth</b>, <b>Chebyshev</b>).
 The filters are available in <b>normalized</b> (default) and non-normalized form.
 In the normalized form, the amplitude of the filter transfer function
 at the cutoff frequency is 3 dB.
@@ -1599,14 +1599,14 @@ Example:
 <p>
 with j=sqrt(-1), is defined as
 </p>
-<pre> 
-   <b>import</b> Modelica_LinearSystems2.Math.Complex; 
+<pre>
+   <b>import</b> Modelica_LinearSystems2.Math.Complex;
    <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
-   
+
    zp = ZerosAndPoles(z = {Complex(-1,0)},
                       p = {Complex(1,0),
                            Complex(2,3),
-                           Complex(2,-3)}, 
+                           Complex(2,-3)},
                            k=4);
 </pre>
 </html>"),

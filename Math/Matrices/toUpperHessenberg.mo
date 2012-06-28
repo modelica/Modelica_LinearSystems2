@@ -45,7 +45,7 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
-  
+
    <h4>Syntax</h4>
 <blockquote><pre>
          H = Matrices.Utilities<b>toUpperHessenberg</b>(A);
@@ -61,16 +61,16 @@ It calls LAPACK function DGEHRD. See Matrices.Lapack.dgehrd for more information
 <blockquote><pre>
  A  = [1, 2,  3;
        6, 5,  4;
-       1, 0,  0]; 
+       1, 0,  0];
 
  H = toUpperHessenberg(A);
 
   results in:
-  
+
  H = [1.0,  -2.466,  2.630;
      -6.083, 5.514, -3.081;
       0.0,   0.919, -0.514]
-      
+
 </pre></blockquote>
 
 </html>"));

@@ -42,8 +42,8 @@ algorithm
     assert(info == 0, "Solving of Sylvester equation with Matrices.sylvester was not sucessfull.\n
                     The value of info is " + String(info) + ", but should be zero. A value unequal to zero means:\n
             < 0: if INFO = -i, the i-th argument had an illegal value\n
-            = 1: A and B have common or very close eigenvalues; perturbed   
-                 values were used to solve the equation (but the matrices   
+            = 1: A and B have common or very close eigenvalues; perturbed
+                 values were used to solve the equation (but the matrices
                  A and B are unchanged).");
     X := if aIsSchur and bIsSchur then scale*X else if aIsSchur then scale*X*
       transpose(V) else if bIsSchur then scale*U*X else scale*U*X*transpose(V);
@@ -52,8 +52,8 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
- 
- 
+
+
 Function <b>sylvester</b> computes the solution <b>X</b> of the continuous-time Sylvester equation
 <blockquote><pre>
  <b>A</b>*<b>X</b> + <b>X</b>*<b>B</b> = <b>C</b>.

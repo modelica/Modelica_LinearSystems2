@@ -22,7 +22,7 @@ algorithm
       B,
       b);
 
-    assert(info == 0, "Solving a linear equality-constrained least squares problem 
+    assert(info == 0, "Solving a linear equality-constrained least squares problem
 with function \"Matrices.equalityLeastSquares\" failed.");
   else
     if size(A, 2) == 0 then
@@ -52,16 +52,16 @@ solution <b>x</b> of the linear equality-constrained least squares problem:
 min|<b>A</b>*<b>x</b> - <b>a</b>|^2 over <b>x</b>, subject to <b>B</b>*<b>x</b> = <b>b</b>
 </p>
 </blockquote>
- 
+
 <p>
 It is required that the dimensions of A and B fulfill the following
 relationship:
 </p>
- 
+
 <blockquote>
 size(B,1) &le; size(A,2) &le; size(A,1) + size(B,1)
 </blockquote>
- 
+
 <p>
 Note, the solution is computed with the LAPACK function \"dgglse\"
 using the generalized RQ factorization under the assumptions that

@@ -17,7 +17,7 @@ protected
 external "Fortran 77" drot(n,xr,incx,yr,incy,c,s) annotation(Library = {"lapack"});
 
   annotation (Documentation(info="
-    Purpose   
-    =======   
+    Purpose
+    =======
     applies a plane rotation.      "));
 end drot;

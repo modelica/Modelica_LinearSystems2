@@ -32,7 +32,7 @@ extern logical lsame_(char *, char *);
 //extern int dpotrf_(char *, integer *, doublereal *, integer *, integer *);
 extern int dpotrf_(const char* , int  *, double  *, int  *, int  *);
 
- #include <stdio.h> 
+ #include <stdio.h>
 
 int c_solve2rSym_(doublereal *a, doublereal *b, char *trian, char *uplo, integer *m, integer *n, integer *lda, integer *ldb, integer *info)
 {
@@ -40,27 +40,27 @@ int c_solve2rSym_(doublereal *a, doublereal *b, char *trian, char *uplo, integer
    static logical tri;
    static doublereal alpha = 1.0;
 
-   
+
    doublereal *aa;
-   
-         
+
+
    integer nn=*n;
    integer mm=*m;
    integer llda=*lda;
    integer lldb=*ldb;
-   
+
    integer i,j;
-   
- 
-//    FILE *fileptr;      
-//    fileptr = fopen(\"test.txt\",\"w\"); 
-//    fprintf(fileptr,\"a = %f, %f, %f, %f, %f, %f\\n\",a[0],a[1],a[2],a[3],a[4],a[5]);  
-   
-   aa = (doublereal *) malloc((nn*nn+1)*sizeof(doublereal));    
-   
-   upp = lsame_(uplo, \"U\");   
-   tri = lsame_(trian, \"T\");   
-   
+
+
+//    FILE *fileptr;
+//    fileptr = fopen(\"test.txt\",\"w\");
+//    fprintf(fileptr,\"a = %f, %f, %f, %f, %f, %f\\n\",a[0],a[1],a[2],a[3],a[4],a[5]);
+
+   aa = (doublereal *) malloc((nn*nn+1)*sizeof(doublereal));
+
+   upp = lsame_(uplo, \"U\");
+   tri = lsame_(trian, \"T\");
+
    if(upp)
    {
      for(i=0;i<nn*nn;i++)
@@ -72,23 +72,23 @@ int c_solve2rSym_(doublereal *a, doublereal *b, char *trian, char *uplo, integer
        for(j=0;j<nn;j++)
          aa[j*nn+i]=a[i*nn+j];
    }
- 
+
 // fprintf(fileptr,\"aa = %f, %f, %f\\n %f, %f, %f\\n %f, %f, %f\\n\",aa[0],aa[3],aa[6],aa[1],aa[4],aa[7],aa[2],aa[5],aa[8]);
-   
+
    if(! tri)
      dpotrf_(\"U\",n,aa,lda,info);
- 
-  
+
+
    for(i=1;i<nn;i++)
      for(j=i;j<nn;j++)
        aa[(i-1)*nn+j]=aa[j*nn+i-1];
-   
+
    dtrsm_(\"R\", \"U\", \"N\", \"N\", m, n, &alpha, aa, lda, b, ldb);
    dtrsm_(\"R\", \"L\", \"N\", \"N\", m, n, &alpha, aa, lda, b, ldb);
 // fprintf(fileptr,\"b2 = %f, %f, %f\\n %f, %f, %f\\n %f, %f, %f\\n\",b[0],b[3],b[6],b[1],b[4],b[7],b[2],b[5],b[8]);
-   
- 
-   
+
+
+
    free(aa);
 //   fclose(fileptr);
   return 0;
@@ -110,7 +110,7 @@ where matrix <b>A</b> with symmetric positiv definite matrix. The calculation is
 Due to symmetrie, Matrix <b>A</b> is uniquely defined by a triangle, i.e. the upper or the lower triangular matrix. It is assumed, that the input to describe <b>A</b> is either a Cholesky factor or
 part of matrix <b>A</b> itself. This is defined by the user with the boolean inputs <i>isCholesky</i> and <i>upper</i> which is true when <b>A</b> is already Cholesky factor and when <b>A</b> is upper triangular respectively.
 <p>
-Considering the Cholesky decomposition 
+Considering the Cholesky decomposition
 <blockquote><pre>
          T
   <b>A</b> = <b>L</b>*<b>L</b>

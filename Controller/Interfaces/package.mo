@@ -13,7 +13,7 @@ package Interfaces "Interfaces (partial blocks) of Controller library"
       Documentation(info="<HTML>
 <p>
 This package contains the partial blocks of the Controller library. The
-components define global parameters, like <i>startTime, method, Ts</i> or 
+components define global parameters, like <i>startTime, method, Ts</i> or
 <i>steadyStateStart</i> and handle the input/output conversation.
 </p>
 

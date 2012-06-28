@@ -80,6 +80,6 @@ The functionality of such control system structures is described in [1]
 <pre>
   [1] Looye, G. et al, \"Nonlinear inverse moldes for control\",
       Proceedings Modelica Conference 2005, pp. 267-279, 2005.
-</pre> 
+</pre>
 </html>"));
 end TwoDegreesOfFreedomControlSISO;

@@ -45,7 +45,7 @@ diagonal elements (lower trapezoidal if m &gt; n), and
 <b>U</b> is an upper triangular matrix (upper trapezoidal if m &lt; n).
 Matrices <b>L</b> and <b>U</b> are stored in the returned
 matrix <code>LU</code> (the diagonal of <b>L</b> is not stored).
-With the companion function 
+With the companion function
 <a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>,
 this decomposition can be used to solve
 linear systems (<b>P</b>*<b>L</b>*<b>U</b>)*<b>x</b> = <b>b</b> with different right
@@ -61,7 +61,7 @@ The optional third (Integer) output argument has the following meaning:
       <td valign=\"top\">successful exit</td></tr>
   <tr><td valign=\"top\">info &gt; 0:</td>
       <td valign=\"top\">if info = i, U[i,i] is exactly zero. The factorization
-          has been completed, <br> 
+          has been completed, <br>
           but the factor U is exactly
           singular, and division by zero will occur<br> if it is used
           to solve a system of equations.</td></tr>
@@ -72,12 +72,12 @@ The LU factorization is computed
 with the LAPACK function \"dgetrf\",
 i.e., by Gaussian elemination using partial pivoting
 with row interchanges. Vector \"pivots\" are the
-pivot indices, i.e., for 1 &le; i &le; min(m,n), row i of 
+pivot indices, i.e., for 1 &le; i &le; min(m,n), row i of
 matrix A was interchanged with row pivots[i].
 </p>
 <h4>Example</h4>
 <blockquote><pre>
-  Real A[3,3] = [1,2,3; 
+  Real A[3,3] = [1,2,3;
                  3,4,5;
                  2,1,4];
   Real b1[3] = {10,22,12};
@@ -92,7 +92,7 @@ matrix A was interchanged with row pivots[i].
   x2 := Matrices.LU_solve(LU, pivots, b2);  // x2 = {1,0,2}
 </pre></blockquote>
 <h4>See also</h4>
-<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>, 
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>,
 <a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>,
 </HTML>"));
 end LU;

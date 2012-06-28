@@ -21,30 +21,30 @@ function wrapper_zgetrf
   #include<f2c.h>
 extern  int zgetrf_(integer *, integer *, doublecomplex *, integer *, integer *, integer *);
 
-int c_inter_zgetrf_(integer *m, integer *n, doublereal *a_real, doublereal *a_imag, integer *lda, integer *pivots, integer *info) 
+int c_inter_zgetrf_(integer *m, integer *n, doublereal *a_real, doublereal *a_imag, integer *lda, integer *pivots, integer *info)
 {
    doublecomplex *a;
-     
+
   integer nn=*n;
   integer mm=*m;
   integer i;
-  
-   a = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));      
-        
+
+   a = (doublecomplex *) malloc((nn*mm+1)*sizeof(doublecomplex));
+
    for(i=0;i<nn*mm;i++)
    {
      a[i].r=a_real[i];
      a[i].i=a_imag[i];
    }
-   
+
    zgetrf_(m, n, a, lda, pivots, info);
-  
+
    for(i=0;i<nn*mm;i++)
    {
      a_real[i]=a[i].r;
      a_imag[i]=a[i].i;
    }
-     
+
    free(a);
   return 0;
 }", Library={"zlapack"});

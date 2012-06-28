@@ -66,9 +66,9 @@ algorithm
       Q);
     assert(info2 == 0, "The output info of LAPACK.dhseqr should be zero, else if\n
      info < 0:  if info = -i, the i-th argument of LAPACK.dhseqr had an illegal value\n
-     info > 0:  if INFO = i, LAPACK.dhseqr failed to compute all of the  
-                 eigenvalues in a total of 30*n iterations;\n  
-                 elements 1:n-1 and i+1:n of WR and WI contain those  
+     info > 0:  if INFO = i, LAPACK.dhseqr failed to compute all of the
+                 eigenvalues in a total of 30*n iterations;\n
+                 elements 1:n-1 and i+1:n of WR and WI contain those
                  eigenvalues which have been successfully computed.\n");
   else
     T := A;

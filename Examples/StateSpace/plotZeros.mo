@@ -134,7 +134,7 @@ This example plots the output y and the states (x1, x2, x3) of a system with the
 
 <blockquote><pre>
    u(t) = uk*exp(zk*t)
-</pre></blockquote> 
+</pre></blockquote>
 where zk is an invariant zero of the system. Assuming appropriate initial conditions, the output of the system is forced to zero. It is demonstrated that the output can also be forced to zero by applying a transient unstable input. Although the output is zero, the states show transient and unstable behavior. In comparison, the outputs as an reaction of inputs with half or double frequency are not equal to zero.
 
 </html>"));

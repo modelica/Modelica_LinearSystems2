@@ -44,13 +44,13 @@ Householder reflection is widely used in numerical linear algebra, e.g. to perfo
 <blockquote><pre>
 // First step of QR decomposition
   import   Modelica.Math.Vectors.Utilities;
-  
+
   Real A[3,3] = [1,2,3;
                  3,4,5;
                  2,1,4];
   Real Ar[3,3];
   Real u[:];
-  
+
   u=Utilities.householderVector(A[:,1],{1,0,0});
   // u={ = {0.763, 0.646, 0}
   Ar=householderReflexion(A,u);

@@ -5,5 +5,5 @@ type BlockTypeWithGlobalDefault = enumeration(
     UseSampleClockOption "Use blockType defined in sampleClock component")
   "Enumeration of block types (continuous, discrete, sampleBlock.blocktype)"
     annotation (Evaluate=true, Documentation(info="<html>
- 
+
 </html>"));

@@ -103,7 +103,7 @@ record DiscreteStateSpace
 
       elseif method == Method.ImplicitEuler then
             /*  der_x = A*x + B*u
-             x = pre(x) + Ts*der_x 
+             x = pre(x) + Ts*der_x
      */
         (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
           Ts*sc.A);
@@ -121,7 +121,7 @@ record DiscreteStateSpace
 
       elseif method == Method.Trapezoidal then
             /*  der_x = A*x + B*u
-             x = pre_x + (Ts/2)*(pre_der_x + der_x); 
+             x = pre_x + (Ts/2)*(pre_der_x + der_x);
      */
         (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
           (Ts/2)*sc.A);
@@ -154,11 +154,11 @@ record DiscreteStateSpace
         -> x = phi*pre(x) + (gamma - gamma1/Ts)*pre(u) + gamma1/Ts*u;
   z = x - gamma1/Ts*u
       leads to
-        z = phi*pre(z) + phi*gamma1/Ts*pre(u) +gamma*pre(u) - gamma1/Ts*pre(u) 
+        z = phi*pre(z) + phi*gamma1/Ts*pre(u) +gamma*pre(u) - gamma1/Ts*pre(u)
        y = C*x + D*u
       -> y = C*z + (D + C*gamma1/Ts)*u
       x = z + gamma1/Ts*u
-    
+
     */
         (sd.A,sd.B,sd.B2) := Modelica.Math.Matrices.integralExpT(
               sc.A,
@@ -215,7 +215,7 @@ record DiscreteStateSpace
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
- 
+
 </table>
 <h4>Description</h4>
 <p>
@@ -230,10 +230,10 @@ Therefore, the matrices are defined by
   ss.C = fill(0,1,0);
   ss.D = [r];
 </pre></blockquote>
- 
+
 </p>
- 
- 
+
+
 </html>"));
       end fromReal;
 
@@ -280,7 +280,7 @@ Therefore, the matrices are defined by
 
       elseif method == Method.ImplicitEuler then
             /*  der_x = A*x + B*u
-             x = pre(x) + Ts*der_x 
+             x = pre(x) + Ts*der_x
      */
         (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
           Ts*A);
@@ -298,7 +298,7 @@ Therefore, the matrices are defined by
 
       elseif method == Method.Trapezoidal then
             /*  der_x = A*x + B*u
-             x = pre_x + (Ts/2)*(pre_der_x + der_x); 
+             x = pre_x + (Ts/2)*(pre_der_x + der_x);
      */
         (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
           (Ts/2)*A);
@@ -331,11 +331,11 @@ Therefore, the matrices are defined by
         -> x = phi*pre(x) + (gamma - gamma1/Ts)*pre(u) + gamma1/Ts*u;
   z = x - gamma1/Ts*u
       leads to
-        z = phi*pre(z) + phi*gamma1/Ts*pre(u) +gamma*pre(u) - gamma1/Ts*pre(u) 
+        z = phi*pre(z) + phi*gamma1/Ts*pre(u) +gamma*pre(u) - gamma1/Ts*pre(u)
        y = C*x + D*u
       -> y = C*z + (D + C*gamma1/Ts)*u
       x = z + gamma1/Ts*u
-    
+
     */
         (sd.A,sd.B,sd.B2) := Modelica.Math.Matrices.integralExpT(
               A,
@@ -401,7 +401,7 @@ Computes the time response of a system in discrete state space form:
 </p>
 <pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
      <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
 </pre>
 <p>
 Note that the system input <b>u</b> must be sampled with the discrete system sample time Ts.
@@ -441,7 +441,7 @@ Computes the initial response of a system in discrete state space form:
 </p>
 <pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k)
      <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) 
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k)
 </pre>
 <p>
 Note that the system input <b>u</b> is equal to zero.
@@ -604,7 +604,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 
 <b>algorithm</b>
   zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
-//                s + 1.5  
+//                s + 1.5
 //   zp = 2 -----------------
              (s + 1)*(s + 2)
 </pre></blockquote>
@@ -708,7 +708,7 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
       B=[0.0,1.0; 1.0,1.0; -1.0,0.0],
       C=[0.0,1.0,1.0; 1.0,1.0,1.0],
       D=[1.0,0.0; 0.0,1.0])
-   
+
    Integer iu=1;
    Integer iy=1;
 
@@ -2046,10 +2046,10 @@ the Riccati difference equation and the Kalman filter gain and correction of the
 The system functions are defined in function ekfFunction(), which is to provide by the user. Matrices <b>A</b>_k and <b>C</b>_k are the
 Jacobians F_x and H_x of the system equations <b>f</b> and <b>h</b>
 <blockquote><pre>
- 
+
  x_k = f(x_k-1, u_k-1)
  y_k = h(x_k, u_k)
-  
+
 </pre></blockquote>
 i.e., in the case of linear systems the system matrix <b>A</b> and the output matrix <b>C</b>.
 
@@ -2108,10 +2108,10 @@ the Riccati difference equation and the Kalman filter gain and correction of the
 The system functions are defined in function ekfFunction(), which is to provide by the user. Matrices <b>A</b>_k and <b>C</b>_k are the
 Jacobians F_x and H_x of the system equations <b>f</b> and <b>h</b>
 <blockquote><pre>
- 
+
  x_k = f(x_k-1, u_k-1)
  y_k = h(x_k, u_k)
-  
+
 </pre></blockquote>
 i.e., in the case of linear systems the system matrix <b>A</b> and the output matrix <b>C</b>.
 
@@ -2176,7 +2176,7 @@ i.e., in the case of linear systems the system matrix <b>A</b> and the output ma
 <h4>Description</h4>
 <p>
 Function <b>UKF</b> computes one recursion of the Unscented Kalman filter. Unscented Kalman filters are similar to Extended Kalman filters
-but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation 
+but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
 See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to
@@ -2250,7 +2250,7 @@ solve the mathematically identical problem.
 <p>
 Function <b>UKF_SR</b> computes one recursion of the Square Root Unscented Kalman filter (SR-UKF). SR-UKF follow the same princible as UKF but using Cholesky factors (square roots)
 of the positive definite matrices. This means less computational effort and higher reliablitiy.<br>
-Unscented Kalman filters are similar to Extended Kalman filters but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation 
+Unscented Kalman filters are similar to Extended Kalman filters but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
 See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF\">UKF</a>, where the standard method (without Cholesky factorization)
@@ -2273,7 +2273,7 @@ equation system in state space form:
 </p>
 <pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
      <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k) 
+     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
 </pre>
 <p>
 with
@@ -2290,21 +2290,21 @@ with
 <li> <b>A,B,C,D,B2</b> - matrices of appropriate dimensions.</li>
 </ul>
 <p>
-A discrete system is usually derived by discretization from a 
+A discrete system is usually derived by discretization from a
 continuous block, e.g., by function
 LinearSystems.DiscreteStateSpace.fromStateSpace.
 If the discretization method, e.g., the trapezoidal method,
-accesses <b>actual and past</b> values of the input <b>u</b> 
-(e.g. <b>u</b>(Ts*k), <b>u</b>(Ts*(k-1), <b>u</b>(Ts*(k-2))), 
-a state transformation is needed to get the difference equation 
-above where only the actual value <b>u</b>(Ts*k) is accessed. 
+accesses <b>actual and past</b> values of the input <b>u</b>
+(e.g. <b>u</b>(Ts*k), <b>u</b>(Ts*(k-1), <b>u</b>(Ts*(k-2))),
+a state transformation is needed to get the difference equation
+above where only the actual value <b>u</b>(Ts*k) is accessed.
 </p>
 <p>
 If the original continuous state vector should be computed
-from the sampled data system above, the matrices of this 
+from the sampled data system above, the matrices of this
 transformation have to be known. For simplicity and efficiency,
 here only the specific transformation used by function
-LinearSystems.DiscreteStateSpace.fromStateSpace is stored in 
+LinearSystems.DiscreteStateSpace.fromStateSpace is stored in
 the data record of the discrete system via matrix <b>B2</b>.
 Therefore, the state vector of the underlying continuous
 system can be calculated by adding the term <b>B2</b>*<b>u</b> to the
@@ -2331,7 +2331,7 @@ is defined via equation \"x = <b>pre</b>(new_x)\".
 <p>
 The body of the when-clause is active during initialization and at the
 next sample instant t=Ts. Note, the when-equation is not
-active after the initialization at t=0 (due to <b>sample</b>(Ts,Ts)), 
+active after the initialization at t=0 (due to <b>sample</b>(Ts,Ts)),
 since the state x of the initialization has to be used also at t=0.
 </p>
 <p>
@@ -2340,7 +2340,7 @@ added for the initialization to uniquely compute the
 initial vector x:
 </p>
 <pre>
-  <b>initial equation</b> 
+  <b>initial equation</b>
      <b>if</b> init == InitialState <b>then</b>
         x = x_start;
      <b>elseif</b> init == SteadyState <b>then</b>
@@ -2352,7 +2352,7 @@ Optionally, x is set to a given start vector x_start.
 As <b>default initialization</b>, the equation \"x = new_x\" is
 added that defines steady state initialization for the
 discrete system. As a consequence, the output y(Ts*k), k=0,1,2,..,
-remains constant after this initialization, 
+remains constant after this initialization,
 provided the input vector u(Ts*k) remains constant.
 </p>
 </html>"));

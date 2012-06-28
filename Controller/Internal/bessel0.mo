@@ -27,7 +27,7 @@ algorithm
       component=[20, 20]),
     Documentation(info="<HTML>
 <p>
-Polynomial approximation of the zeroth order modified Bessel function. 
+Polynomial approximation of the zeroth order modified Bessel function.
 The algorithm is taken from
 </p>
 <dl>

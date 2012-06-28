@@ -61,7 +61,7 @@ Function </b>choleskyUpDate(L, v)</b> computes the rank-1-updated Cholesky facto
 </p>
 <blockquote><pre>
              T          T     T      T
-<b>Aud</b> = <b>Lud</b>*<b>Lud</b> = <b>A</b> +  <b>v</b>*<b>v</b> = <b>L</b>*<b>L</b> +  <b>v</b>*<b>v</b>  
+<b>Aud</b> = <b>Lud</b>*<b>Lud</b> = <b>A</b> +  <b>v</b>*<b>v</b> = <b>L</b>*<b>L</b> +  <b>v</b>*<b>v</b>
 </pre></blockquote>
 <p>
 from the input <b>L</b>, i.e. the left (lower) Cholesky factor of the original matrix <b>A</b>.<br>
@@ -74,11 +74,11 @@ The approach is a transformation <b>H</b>*[<b>v</b>, <b>L</b>]' = [<b>0</b>, <b>
 and matrix <b>Lud</b> is lower (upper) triangular. The transformation is performed by n (order of <b>A</b>) Givens rotations.
 The following sequence illustrates the principle of stepwise transformation of matrix [v, L]'. \"*\" are arbitrary elements. For each step the changed elements are bold.
 <blockquote><pre>
-| v' |    | * * * * |       | 0 <b>*</b> <b>*</b> <b>*</b> |       | 0 0 <b>*</b> <b>*</b> |       | 0 0 0 <b>*</b> |       | 0 0 0 0 | 
-|    |    | * * * * |       | <b>*</b> <b>*</b> <b>*</b> <b>*</b> |       | * * * * |       | * * * * |       | * * * * | 
-| L' | =  | 0 * * * |  ->   | 0 * * * |  ->   | 0 <b>*</b> <b>*</b> <b>*</b> |  ->   | 0 * * * |  ->   | 0 * * * | 
-|    |    | 0 0 * * |       | 0 0 * * |       | 0 0 * * |       | 0 0 <b>*</b> <b>*</b> |       | 0 0 * * |  
-|    |    | 0 0 0 * |       | 0 0 0 * |       | 0 0 0 * |       | 0 0 0 * |       | 0 0 0 <b>*</b> | 
+| v' |    | * * * * |       | 0 <b>*</b> <b>*</b> <b>*</b> |       | 0 0 <b>*</b> <b>*</b> |       | 0 0 0 <b>*</b> |       | 0 0 0 0 |
+|    |    | * * * * |       | <b>*</b> <b>*</b> <b>*</b> <b>*</b> |       | * * * * |       | * * * * |       | * * * * |
+| L' | =  | 0 * * * |  ->   | 0 * * * |  ->   | 0 <b>*</b> <b>*</b> <b>*</b> |  ->   | 0 * * * |  ->   | 0 * * * |
+|    |    | 0 0 * * |       | 0 0 * * |       | 0 0 * * |       | 0 0 <b>*</b> <b>*</b> |       | 0 0 * * |
+|    |    | 0 0 0 * |       | 0 0 0 * |       | 0 0 0 * |       | 0 0 0 * |       | 0 0 0 <b>*</b> |
 
 </pre></blockquote>
 With the boolean input \"upper\" the user specifies wether the matrix <b>L</b> is lower or upper triangular matrix (left or right Cholesky factor).
@@ -87,7 +87,7 @@ If \"upper==true\", the output <b>Lud</b> is also upper triangular. Default is \
 </blockquote>
 <h4>Example</h4>
 <blockquote><pre>
- 
+
 
 </HTML>", revisions="<html>
 <ul>

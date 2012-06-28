@@ -4,5 +4,5 @@ type FilterType = enumeration(
     HighPass "High pass filter")
   "Enumeration of analog filter types (high pass or low pass)"
     annotation (Evaluate=true, Documentation(info="<html>
- 
+
 </html>"));
