@@ -1261,9 +1261,10 @@ algorithm
 
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  eigenvalues </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>eigenValues</b>(dss)  </td> </tr>
-</table>
+<blockquote><pre>
+eigenvalues = DiscreteStateSpace.Analysis.<b>eigenValues</b>(dss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Calculate the eigenvalues of a discrete state space system, i.e. the eigenvalues of the system matrix <b>A</b> of a discrete state space system.
@@ -1271,37 +1272,28 @@ The output is a complex vector containing the eigenvalues.<br>
 The eigenvalues <b>ev</b>_d of the discrete system are related to the eigenvalues of the corresponding continuous system <b>ev</b>_c by
 </p>
 <blockquote>
-<p>
-<b>ev</b>_d = exp(Ts*<b>ev</b>_c)
-</p>
+<b>ev</b>_d = exp(Ts*<b>ev</b>_c).
 </blockquote>
-<p>
-
-
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1,1;-1,-1],
-      B=[1;1],
-      C=[1,1],
-      D=[0],
-      B2=[0;0],
-      Ts=0.1);
+  StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1,1;-1,-1],
+    B=[1;1],
+    C=[1,1],
+    D=[0],
+    B2=[0;0],
+    Ts=0.1);
 
-   DiscreteStateSpace dss=DiscreteStateSpace(ss, Ts=0.1);
+  DiscreteStateSpace dss=DiscreteStateSpace(ss, Ts=0.1);
 
-   Complex eigenvalues[2];
+  Complex eigenvalues[2];
 
 <b>algorithm</b>
   eigenvalues = Modelica_LinearSystems2.DiscreteStateSpace.Analysis.eigenValues(dss);
 // eigenvalues = {0.900452 + 0.0904977*j, 0.900452 - 0.0904977*j}
 //
-
 </pre></blockquote>
-
-
 </html> "));
 end eigenValues;
 
@@ -1397,33 +1389,36 @@ algorithm
 
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td>DiscreteStateSpace.Analysis.<b>timeResponse</b>(responseType, dss)  </td> </tr>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td>DiscreteStateSpace.Analysis.<b>timeResponse</b>(responseType, dss, tSpan, x0)  </td> </tr>
+<blockquote><pre>
+      (y) = DiscreteStateSpace.Analysis.<b>timeResponse</b>(responseType, dss)
+(y, t, x) = DiscreteStateSpace.Analysis.<b>timeResponse</b>(responseType, dss, tSpan, x0)
+</pre></blockquote>
 
-</table>
 <h4>Description</h4>
 <p>
-Function timeResponse calculates the time responses of a discrete state space system. The type of the time response is defined by the input <b>responseType</b>, i.e.
+Function timeResponse calculates the time responses of a discrete state space 
+system. The type of the time response is defined by the input <b>responseType</b>, i.e.
+</p>
 <blockquote><pre>
-    Impulse \"Impulse response\",
-    Step \"Step response\",
-    Ramp \"Ramp response\",
-    Initial \"Initial condition response\"
-
+Impulse \"Impulse response\",
+Step \"Step response\",
+Ramp \"Ramp response\",
+Initial \"Initial condition response\"
 </pre></blockquote>
-Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x are calculated for each time step t=k*dss.Ts.
+<p>
+Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x 
+are calculated for each time step t=k*dss.Ts.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
-     A = [0.904837418036],
-     B = [0.095162581964],
-     C = [2],
-     D = [0],
-     B2 = [0],
-     Ts = 0.1);
+  Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+    A = [0.904837418036],
+    B = [0.095162581964],
+    C = [2],
+    D = [0],
+    B2 = [0],
+    Ts = 0.1);
 
   Real tSpan = 0.4;
 
@@ -1441,8 +1436,6 @@ Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x are cal
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = {0, 0.0952, 0.1813, 0.2592, 0.33}
 </pre></blockquote>
-
-
 </html> "));
 end timeResponse;
 
@@ -1474,40 +1467,44 @@ algorithm
 
       annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss)  </td> </tr>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss, tSpan)  </td> </tr>
-</table>
+<blockquote><pre>
+      (y) = DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss)
+(y, t, x) = DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss, tSpan)  
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and states <b>x</b> are calculated for each time step t=k*dss.Ts.
+Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
+the outputs <b>y</b> and states <b>x</b> are calculated for each time step t=k*dss.Ts. The function call 
+</p>
 <blockquote><pre>
 DiscreteStateSpace.Analysis.impulseResponse(dss, tSpan)
-
 </pre></blockquote>
+<p>
 gives the same result as
+</p>
 <blockquote><pre>
 DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-Note that an appropriate impulse response of a discrete system that is comparable to the impulse response of the corresponding continuous system
-requires the \"ImpulseExact\" conversion from continuous system to discrete system.<br>
-See also<br>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.impulseResponse\">StateSpace.Analysis.impulseResponse</a>
-
+<p>
+Note that an appropriate impulse response of a discrete system that is comparable 
+to the impulse response of the corresponding continuous system requires 
+the \"ImpulseExact\" conversion from continuous system to discrete system.
+See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a> and
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.impulseResponse\">StateSpace.Analysis.impulseResponse</a>.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-    Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
-      A=[0.904837418036 ],
-      B=[0.095162581964],
-      C=[2],
-      D=[0],
-      B2=[0],
-      Ts=0.1,
-      method = Modelica_LinearSystems2.Types.Method.StepExact);
-
+  Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+    A=[0.904837418036 ],
+    B=[0.095162581964],
+    C=[2],
+    D=[0],
+    B2=[0],
+    Ts=0.1,
+    method = Modelica_LinearSystems2.Types.Method.StepExact);
 
   Real tSpan= 0.4;
 
@@ -1521,8 +1518,6 @@ See also<br>
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = = {0, 0.0952, 0.08611, 0.0779, 0.07050}
 </pre></blockquote>
-
-
 </html> "));
 end impulseResponse;
 
@@ -1554,41 +1549,47 @@ algorithm
 
       annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss)  </td> </tr>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss, tSpan)  </td> </tr>
-</table>
+<blockquote><pre>
+      (y) = DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss)
+(y, t, x) = DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss, tSpan)  
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>stepResponse</b> calculates the step response of a discrete state space system.
-Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and the states <b>x</b> are calculated for each time step t=k*dss.Ts.
+Function <b>stepResponse</b> calculates the step response of a discrete 
+state space system. Starting at 
+<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
+the outputs <b>y</b> and the states <b>x</b> are calculated for each 
+time step t=k*dss.Ts. The function call 
+</p>
 <blockquote><pre>
 DiscreteStateSpace.Analysis.stepResponse(dss, tSpan)
 </pre></blockquote>
+<p>
 gives the same result as
+</p>
 <blockquote><pre>
 DiscreteStateSpace.Analysis.timeResponse(response=Types.TimeResponse.Step, dss, tSpan, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-Note that an appropriate step response of a discrete system that is comparable to the step response of the corresponding continuous system
-requires the \"StepExact\" conversion from continuous system to discrete system.<br>
-See also <br>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.stepResponse\">StateSpace.Analysis.stepResponse</a>
+<p>
+Note that an appropriate step response of a discrete system that is comparable 
+to the step response of the corresponding continuous system requires 
+the \"StepExact\" conversion from continuous system to discrete system.
+See also 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a> and 
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.stepResponse\">StateSpace.Analysis.stepResponse</a>.
 </p>
-
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
-      A=[0.904837418036 ],
-      B=[0.095162581964],
-      C=[2],
-      D=[0],
-      B2=[0],
-      Ts=0.1,
-      method = Modelica_LinearSystems2Types.Method.StepExact);
-
-
+  Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+    A=[0.904837418036 ],
+    B=[0.095162581964],
+    C=[2],
+    D=[0],
+    B2=[0],
+    Ts=0.1,
+    method = Modelica_LinearSystems2Types.Method.StepExact);
 
   Real tSpan= 0.4;
 
@@ -1602,8 +1603,6 @@ See also <br>
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0952, 0.1813, 0.2592, 0.33}
 </pre></blockquote>
-
-
 </html> "));
 end stepResponse;
 
@@ -1635,27 +1634,35 @@ algorithm
 
   annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>rampResponse</b>(dss)  </td> </tr>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>rampResponse</b>(dss, tSpan, x0)  </td> </tr>
-</table>
+<blockquote><pre>
+      (y) = DiscreteStateSpace.Analysis.<b>rampResponse</b>(dss)
+(y, t, x) = DiscreteStateSpace.Analysis.<b>rampResponse</b>(dss, tSpan, x0)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>rampResponse</b> calculates the time response of a discrete state space system for ramp imput u = t.
-Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts.
+Function <b>rampResponse</b> calculates the time response 
+of a discrete state space system for ramp imput u = t. Starting at 
+<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
+the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts. 
+The function call 
+</p>
 <blockquote><pre>
 DiscreteStateSpace.Analysis.rampResponse(dss, tSpan)
 </pre></blockquote>
+<p>
 gives the same result as
+</p>
 <blockquote><pre>
 DiscreteStateSpace.Analysis.timeResponse(response=Types.TimeResponse.Ramp, dss, tSpan, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
+<p>
 Note that an appropriate ramp response of a discrete system that is comparable to the ramp response of the corresponding continuous system
-requires the \"RampExact\" conversion from continuous system to discrete system.<br>
+requires the \"RampExact\" conversion from continuous system to discrete system.
 
-See also<br>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a>
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.rampResponse\">StateSpace.Analysis.rampResponse</a>
+See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a> and 
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.rampResponse\">StateSpace.Analysis.rampResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -1717,36 +1724,43 @@ algorithm
 
   annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss)  </td> </tr>
-<tr> <td align=right>  (y, t, x) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss, tSpan)  </td> </tr>
-</table>
+<blockquote><pre>
+      (y) = DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss)
+(y, t, x) = DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss, tSpan)  
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>initialResponse</b> calculates the time response of a discrete state space system for given initial condition and zero inputs.
-tarting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts.
+Function <b>initialResponse</b> calculates the time response of 
+a discrete state space system for given initial condition and zero inputs.
+Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
+the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts. The function call 
+</p>
 <blockquote><pre>
 DiscreteStateSpace.Analysis.initialResponse(x0,dss, dt, tSpan)
 </pre></blockquote>
+<p>
 gives the same result as
+</p>
 <blockquote><pre>
 DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse.Initial, x0=x0).
 </pre></blockquote>
-See also <br>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a><br>
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.initialResponse\">StateSpace.Analysis.initialResponse</a><br>
+<p>
+See also 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a> or 
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.initialResponse\">StateSpace.Analysis.initialResponse</a>.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
-      A=[0.904837418036 ],
-      B=[0.095162581964],
-      C=[2],
-      D=[0],
-      B2=[0],
-      Ts=0.1,
-      method = Modelica_LinearSystems2.Types.Method.StepExact);
+  Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+    A=[0.904837418036 ],
+    B=[0.095162581964],
+    C=[2],
+    D=[0],
+    B2=[0],
+    Ts=0.1,
+    method = Modelica_LinearSystems2.Types.Method.StepExact);
 
   Real tSpan= 0.4;
   Real x0[1] = {1};
@@ -1755,15 +1769,12 @@ See also <br>
   Real t[5];
   Real x[5,1,1]
 
-
 <b>algorithm</b>
   (y,t,x):=Modelica_LinearSystems2.DiscreteStateSpace.Analysis.initialResponse(x0,dss,tSpan);
 //  y[:,1,1]={2, 1.809, 1.637, 1.4812, 1.3402}
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={1, 0.9048, 0.8186, 0.7406, 0.6701}
 </pre></blockquote>
-
-
 </html> "));
 end initialResponse;
 
@@ -2145,86 +2156,99 @@ encapsulated package Design
 
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  (K, S, po, nfp, nap, nup) </td><td align=center> =  </td>  <td> DiscreteStateSpace.Design.<b>assignPolesMI</b>(dss, gamma, np, tol, calculateEigenvectors)  </td> </tr>
-</table>
+<blockquote><pre>
+(K, S, po, nfp, nap, nup) = DiscreteStateSpace.Design.<b>assignPolesMI</b>(dss, gamma, np, tol, calculateEigenvectors)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 The purpose of this function is to determine the state feedback matrix <b>K</b> for a
 given time invariant multi input state system (<b>A</b>,<b>B</b>) such that the
 closed-loop state matrix <b>A</b>-<b>B</b>*<b>K</b> has specified eigenvalues. The
 feedback matrix <b>K</b> is calculated by factorization following [1]. The algorithm
-modifies the eigenvalues sequentially and also allows partial eigenvalue assignment.<br>
-<br>
-
-
- At the beginning of the algorithm, the feedback matrix <b>K</b> is set to zero (<b>K</b> = <b>0</b>) and the matrix <b>A</b> is
- reduced to an ordered real Schur form by separating its spectrum in two parts
-
+modifies the eigenvalues sequentially and also allows partial eigenvalue assignment.
+</p>
+<p>
+At the beginning of the algorithm, the feedback matrix <b>K</b> is set 
+to zero (<b>K</b> = <b>0</b>) and the matrix <b>A</b> is reduced to an ordered 
+real Schur form by separating its spectrum in two parts
+</p>
 <blockquote><pre>
               | <b>F</b>1  <b>F</b>3|
  <b>F</b> = <b>Q</b>*<b>A</b>*<b>Q</b>' = |       |
               | <b>0</b>   <b>F</b>2|
- </pre>
-</blockquote> in such a way, that <b>F</b>1 contains the eigenvalues that will be
-retained and <b>F</b>3 contains the eigenvalues going to be modified. On the suggestion
+</pre>
+</blockquote>
+<p>
+in such a way, that <b>F</b>1 contains the eigenvalues that will be retained 
+and <b>F</b>3 contains the eigenvalues going to be modified. On the suggestion
 of [1] the eigenvalues <i>evr</i> to be retained are chosen as
- <blockquote><pre>
-  evr = {s in C: Re(s) &lt -alpha, alpha &gt =0}
- </pre> </blockquote>
-but other specification are conceivable of course.<br>
-<br>
-
+</p>
+<blockquote><pre>
+evr = {s in C: Re(s) &lt; -alpha, alpha &gt;=0}
+</pre> </blockquote>
+<p>
+but other specification are conceivable of course.
+</p>
+<p>
 Let
- <blockquote><pre>
-  <b>G</b> = [<b>G</b>1;<b>G</b>2] = <b>Q</b>*<b>B</b>
- </pre> </blockquote>
+</p>
+<blockquote><pre>
+<b>G</b> = [<b>G</b>1;<b>G</b>2] = <b>Q</b>*<b>B</b>
+</pre> </blockquote>
+<p>
 with an appropriate partition according to <b>F</b>2. (<b>F</b>2, <b>G</b>2) has to be
-controllable.<br>
-
+controllable.
+</p>
+<p>
 If the feedback matrix <b>K</b> is taken in a form <blockquote><pre> <b>K</b> = [0, <b>K</b>2]
 </pre></blockquote> the special structure of <b>F</b> and <b>K</b> results in a closed loop state
-matrix <blockquote><pre>
+matrix 
+</p>
+<blockquote><pre>
           |<b>F</b>1 <b>F</b>3 - <b>G</b>1*<b>K</b>2|
 <b>F</b> - <b>G</b>*<b>K</b> = |             |
           |0  <b>F</b>2 - <b>G</b>2*<b>K</b>2|
-</pre></blockquote> with only the eigenvalues of <b>F</b>2 are modified. This approach to modify
+</pre></blockquote>
+<p>
+with only the eigenvalues of <b>F</b>2 are modified. This approach to modify
 separated eigenvalues is used to sequentially shift one real eigenvalue ore two
 complex conjugated eigenvalues stepwise until all assigned eigenvalues are placed.
 Therefore, at each step i always the (two) lower right eigenvalue(s) are modified by an
-appropriate feedback matrix <b>K</b>i. The matrix <b>F</b> - <b>G</b>*<b>K</b>i remains in real Schur form. The
-assigned eigenvalue(s) is (are) then moved to another diagonal position of the real Schur
-form using reordering techniques <b>F</b> &lt -- <b>Q</b>i*<b>F</b>*<b>Q</b>i'  and a new block is transferred to the
-lower right diagonal position. The transformations are accumulated in <b>Q</b>i and are also
-applicated to the matrices <blockquote><pre> <b>G</b> &lt - <b>Q</b>i*<b>G</b> <b>Q</b> &lt - <b>Q</b>i*<b>Q</b> </pre></blockquote>
-The eigenvalue(s) to be assigned at  each step is (are) chosen such that the norm of each <b>K</b>i is minimized [1].
+appropriate feedback matrix <b>K</b>i. The matrix <b>F</b> - <b>G</b>*<b>K</b>i remains 
+in real Schur form. The assigned eigenvalue(s) is (are) then moved to another diagonal 
+position of the real Schur form using reordering techniques <b>F</b> 
+&lt; -- <b>Q</b>i*<b>F</b>*<b>Q</b>i'  and a new block is transferred to the
+lower right diagonal position. The transformations are accumulated in <b>Q</b>i 
+and are also applicated to the matrices
+</p>
+<blockquote><pre>
+<b>G</b> &lt; - <b>Q</b>i*<b>G</b> <b>Q</b> &lt; - <b>Q</b>i*<b>Q</b>
+</pre></blockquote>
 <p>
-
-
-
+The eigenvalue(s) to be assigned at  each step is (are) chosen such that 
+the norm of each <b>K</b>i is minimized [1].
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
-      A=[-1, 1, 1;0, 1, 1;0, 0, 1],
-      B=[0; 0; 1],
-      C=[0, 1, 0],
-      D=[0]);
+  Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+    A=[-1, 1, 1;0, 1, 1;0, 0, 1],
+    B=[0; 0; 1],
+    C=[0, 1, 0],
+    D=[0]);
 
-   Real Q[3,3];
+  Real Q[3,3];
 
 <b>algorithm</b>
   Q := Modelica_LinearSystems2.DiscreteStateSpace.Analysis.observabilityMatrix(dss);
 // Q = [0, 1, 0; 0, 1, 1; 1, 1, 2]
 </pre></blockquote>
 
-
 <h4>References</h4>
 <table>
 <tr> <td align=right>  [1] </td><td align=center>  Varga A.  </td>  <td> \"A Schur method for pole assignment\"  </td> <td> IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981 </td></tr>
 </table>
-
 </html> ",
          revisions="<html>
 <ul>
@@ -2305,61 +2329,56 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>plotBodeSISO</b>(dss)
-   or
-DiscreteStateSpace.Plot.<b>plotBodeSISO</b>(dss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+DiscreteStateSpace.Plot.<b>plotBodeSISO</b>(
+  dss,
+  iu,
+  iy,
+  nPoints,
+  autoRange,
+  f_min,
+  f_max,
+  magnitude=true,
+  phase=true,
+  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
+  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Plots the bode-diagram of a transfer function.
-<h4>Description</h4>
-<p>
-Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corresponding to the behavior of the state space system from iu'th element of the input vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
-
-
+This function plots a bode-diagram of the transfer function corresponding 
+to the behavior of the state space system from iu'th element of the input 
+vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
-   A = [0.9048, 0.0,    0.0;
-          0.0,   0.8187, 0.0;
-          0.0,   0.0,    0.7408]
+  Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+    A = [0.9048, 0.0,    0.0;
+           0.0,   0.8187, 0.0;
+           0.0,   0.0,    0.7408]
+    B = [0.0;
+          0.0906;
+        -0.0864],
+    C = [0.0, 1.0, 1.0],
+    D = [1.0],
+    B2 = [0.0;
+          0.0;
+          0.0],
+    Ts = 0.1);
 
-   B = [0.0;
-        0.0906;
-       -0.0864],
-
-   C = [0.0, 1.0, 1.0],
-
-   D = [1.0],
-
-   B2 = [0.0;
-         0.0;
-         0.0],
-   Ts = 0.1);
-
-
-   Integer iu=1;
-   Integer iy=1;
-
+  Integer iu=1;
+  Integer iy=1;
 
 <b>algorithm</b>
-   Modelica_LinearSystems2.DiscreteStateSpace.Plot.plotBodeSISO(dss, iu, iy)
+  Modelica_LinearSystems2.DiscreteStateSpace.Plot.plotBodeSISO(dss, iu, iy)
 //  gives:
 </pre></blockquote>
-
-</p>
 <p>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagDis.png\">
 </p>
 <p>
-</p>
-<p>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhaseDis.png\">
 </p>
-<p>
-
-
 </html> "));
 end bodeSISO;
 
@@ -2468,11 +2487,14 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>timeResponse</b>(dss);
-or
-DiscreteStateSpace.Plot.<b>timeResponse</b>(dss, tSpan,response, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteStateSpace.Plot.<b>timeResponse</b>(
+  dss,
+  tSpan,
+  response,
+  x0,
+  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-
 
 <h4>Description</h4>
 <p>
@@ -2481,29 +2503,25 @@ Function <b>timeResponse</b> plots the time response of a discrete state space s
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
-
-
-
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
 
-Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
-B=[1.0; 1.0; 0.0],
-C=[0.0,1.0,1.0],
-D=[0.0])
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+    B=[1.0; 1.0; 0.0],
+    C=[0.0,1.0,1.0],
+    D=[0.0])
 
-Real Ts = 0.1;
-Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
-DiscreteStateSpace dss=DiscreteStateSpace(ss,Ts,method);
-Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+  Real Ts = 0.1;
+  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
+  DiscreteStateSpace dss=DiscreteStateSpace(ss,Ts,method);
+  Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
 
 <b>algorithm</b>
-DiscreteStateSpace.Plot.timeResponse(dss, response=response);
-
+  DiscreteStateSpace.Plot.timeResponse(dss, response=response);
 </pre></blockquote>
 </html> "));
 end timeResponse;
@@ -2555,39 +2573,37 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>impulse</b>(dss);
-or
-DiscreteStateSpace.Plot.<b>impulse</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteStateSpace.Plot.<b>impulse</b>(
+  dss,
+  tSpan,
+  x0,
+  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
-
-
-
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
-B=[1.0; 1.0; 0.0],
-C=[0.0,1.0,1.0],
-D=[0.0])
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+    B=[1.0; 1.0; 0.0],
+    C=[0.0,1.0,1.0],
+    D=[0.0])
 
-Real Ts = 0.1;
-Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.ImpulseExact;
-DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
+  Real Ts = 0.1;
+  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.ImpulseExact;
+  DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
 
 <b>algorithm</b>
-Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse(dss)
-
-</p>
+  Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse(dss)
 </pre></blockquote>
-
 </html> "));
 end impulse;
 
@@ -2639,39 +2655,37 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>step</b>(dss);
-or
-DiscreteStateSpace.Plot.<b>step</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteStateSpace.Plot.<b>step</b>(
+  dss,
+  tSpan,
+  x0,
+  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function <b>step</b> plots the discrete step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
-
-
-
-
-
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
-B=[1.0; 1.0; 0.0],
-C=[0.0,1.0,1.0],
-D=[0.0])
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+    B=[1.0; 1.0; 0.0],
+    C=[0.0,1.0,1.0],
+    D=[0.0])
 
-Real Ts = 0.1;
-Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
-DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
+  Real Ts = 0.1;
+  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
+  DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
 
 <b>algorithm</b>
-Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss, tSpan=3)
+  Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss, tSpan=3)
 </pre></blockquote>
-
 </html> "));
 end step;
 
@@ -2722,38 +2736,37 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>ramp</b>(ss);
-or
-DiscreteStateSpace.Plot.<b>ramp</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteStateSpace.Plot.<b>ramp</b>(
+  dss,
+  tSpan,
+  x0,
+  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function <b>ramp</b> plots the ramp responses of a discrete state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
-
-
-
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
-B=[1.0; 1.0; 0.0],
-C=[1.0,1.0,1.0],
-D=[0.0])
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+    B=[1.0; 1.0; 0.0],
+    C=[1.0,1.0,1.0],
+    D=[0.0])
 
-Real Ts = 0.1;
-Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.RampExact;
-DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
+  Real Ts = 0.1;
+  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.RampExact;
+  DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
 
 <b>algorithm</b>
-Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp(dss)
+  Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp(dss)
 </pre></blockquote>
-
-
 </html> "));
 end ramp;
 
@@ -2802,38 +2815,38 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>initial</b>(ss);
-or
-DiscreteStateSpace.Plot.<b>initial</b>(dss, tSpan, x0, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+DiscreteStateSpace.Plot.<b>initial</b>(
+  dss,
+  tSpan,
+  x0,
+  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function <b>initial</b> plots the initial responses of a discrete state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>.
-
-
-
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
-B=[1.0; 1.0; 0.0],
-C=[0.0,1.0,1.0],
-D=[0.0])
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+    B=[1.0; 1.0; 0.0],
+    C=[0.0,1.0,1.0],
+    D=[0.0])
 
-Real x0={1,0.5,0.5};
+  Real x0={1,0.5,0.5};
 
-Real Ts = 0.1;
-Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
-DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
-
+  Real Ts = 0.1;
+  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
+  DiscreteStateSpace dss=DiscreteStateSpace(dss,Ts,method);
 
 <b>algorithm</b>
-Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial(dss, x0=x0)
+  Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial(dss, x0=x0)
 </pre></blockquote>
 </html> "));
 end initialResponse;
@@ -3352,17 +3365,22 @@ algorithm
 
   annotation (interactive=true, Documentation(info="<html>
 <p><h4>Syntax</h4></p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
-<td><p align=\"right\">dss </p></td>
-<td><p align=\"center\">= </p></td>
-<td><p>DiscreteStateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method) </p></td>
-</tr>
-</table>
-<p><br/><h4>Description</h4></p>
-<p>Generate a DiscreteStateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record and then converted into a DiscreteStateSpace record </p>
-<p><h4>Example</h4></p>
-<blockquote><pre>   String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;;
-   Real T_linearize = 5;
+<blockquote><pre>
+dss = DiscreteStateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method)
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Generate a discrete state space data record by linearization of 
+a model defined by modelName. The linearization is performed at time T_linearize 
+of the simulation. The result of linearization is transformed into a state space 
+record and then converted into a discrete state space record.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+  String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;;
+  Real T_linearize = 5;
 
 <b>algorithm</b>
   dss = Modelica_LinearSystems2.DiscreteStateSpace.Import.fromModel(modelName, T_linearize);
@@ -3395,8 +3413,7 @@ ss.B2  = [0.000437113227802044;
          -0.0109827598973295;
           0.000398179639305232;
           0.00796359278610463];
-
-<blockquote><br/><code>                </code> </blockquote>
+</pre></blockquote>
 </html>"));
 end fromModel;
 
