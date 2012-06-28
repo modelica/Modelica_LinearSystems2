@@ -10,10 +10,10 @@ algorithm
   annotation (Icon(graphics={Text(
           extent={{-20,100},{-100,20}},
           lineColor={0,0,0},
-          textString="K"), Text(
+          textString="rad/s"), Text(
           extent={{100,-20},{20,-100}},
           lineColor={0,0,0},
-          textString="°C")}), Documentation(info="<html>
+          textString="Hz")}), Documentation(info="<html>
 <p>This model is obsolete. Use <a href=\"Modelica://Modelica.SIunits.Conversions.to_Hz\">Modelica.SIunits.Conversions.to_Hz</a> instead.</p>
 </html>"));
 end to_Hz;

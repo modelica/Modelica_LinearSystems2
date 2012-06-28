@@ -76,7 +76,7 @@ It is also shown how to linearize a model of a crane trolley system [1]. The lin
 
 <A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A>
 <PRE>
-  [1] Föllinger, O. \"Regelungstechnik\", Hüthig-Verlag
+  [1] F&ouml;llinger, O. \"Regelungstechnik\", H&uuml;thig-Verlag
 </PRE>
 </html>"));
 end designInversePendulumController;

@@ -33,6 +33,6 @@ algorithm
   ok := true;
 
   annotation (interactive=true, Documentation(info="<html>
-This example demonstrates the construnction of a zeros-and-poles-transfer-function-matrix from a MIMO state space representation and üplots the Bode diagrams with automatic determination of the frequency range to plot
+This example demonstrates the construnction of a zeros-and-poles-transfer-function-matrix from a MIMO state space representation and plots the Bode diagrams with automatic determination of the frequency range to plot
 </html>"));
 end plotBodeMIMO;
