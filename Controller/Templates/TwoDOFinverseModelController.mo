@@ -74,7 +74,7 @@ Template of a controller with two structural degrees of freedom and an inverse p
 The functionality of such contorl system structures is discribed in [1]
 </p>
 
-<a name=\"References\"><h4>References</h4></A>
+<h4><a name=\"References\">R</a>eferences</h4>
 <pre>
   [1] Looye, G. et al, \"Nonlinear inverse moldes for control\",
       Proceedings Modelica Conference 2005, pp. 267-279, 2005.

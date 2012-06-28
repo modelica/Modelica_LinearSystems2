@@ -59,41 +59,41 @@ record DiscreteStateSpace
       dss.D[1, 1] := r;
       dss.Ts := Ts;
       dss.method := method;
-      annotation (overloadsConstructor=true, Documentation(info=
-                                                              "<html>
+      annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
-<tr> <td align=right>  dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r, Ts, method)  </td> </tr>
+<blockquote><pre>
+dss = 'constructor'.<b>fromReal</b>(r)
+dss = 'constructor'.<b>fromReal</b>(r, Ts, method)
+</pre></blockquote>
 
-</table>
 <h4>Description</h4>
 <p>
-This function constructs a DiscreteStateSpace record dss from a Real value, i.e. a discrete state space system without a state and an output without dynamics:
+This function constructs a DiscreteStateSpace record dss from a Real value, 
+i.e. a discrete state space system without a state and an output without dynamics:
+</p>
 <blockquote><pre>
 y = r*u
-
 </pre></blockquote>
+<p>
 Therefore, the matrices are defined by
+</p>
 <blockquote><pre>
-  dss.A = fill(0,0,0);
-  dss.B = fill(0,0,1);
-  dss.C = fill(0,1,0);
-  ss.D = [r];
-  dss.B2 = fill(0,0,1);
-
+dss.A = fill(0,0,0);
+dss.B = fill(0,0,1);
+dss.C = fill(0,1,0);
+ss.D = [r];
+dss.B2 = fill(0,0,1);
 </pre></blockquote>
+<p>
 The default values of sample time <b>Ts</b> and discretization method <b>method</b> are
+</p>
 <blockquote><pre>
     Ts = 1
 method = Modelica_LinearSystems2.Types.Method.Trapezoidal
-
 </pre></blockquote>
+<p>
 respectively.
-
 </p>
-
-
 </html>"));
     end fromReal;
 
@@ -136,31 +136,38 @@ respectively.
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right> dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromMatrices</b>(A, B, C, D)  </td> </tr>
-<tr> <td align=right> dss </td><td align=center>=</td>  <td> 'constructor'.<b>fromMatrices</b>(A, B, C, D, Ts, B2, method)  </td> </tr>
+<blockquote>
+<pre>
+dss = 'constructor'.<b>fromMatrices</b>(A, B, C, D)
+dss = 'constructor'.<b>fromMatrices</b>(A, B, C, D, Ts, B2, method)
+</pre>
+</blockquote>
 
-</table>
 <h4>Description</h4>
 <p>
-This function constructs a DiscreteStateSpace record dss with<br>
+This function constructs a DiscreteStateSpace record dss with
+</p>
 <blockquote><pre>
-  dss.A = A;
-  dss.B = B;
-  dss.C = C;
-  dss.D = D;
-  dss.B2 = B2;
-  dss.Ts = Ts;
-  dss.method = method;
-
+dss.A = A;
+dss.B = B;
+dss.C = C;
+dss.D = D;
+dss.B2 = B2;
+dss.Ts = Ts;
+dss.method = method;
 </pre></blockquote>
-i.e. the input-matrices are the system matrices of the discrete system. The default values of sample time <b>Ts</b> and discretization method <b>method</b> are
+<p>
+i.e. the input-matrices are the system matrices of the discrete system. 
+The default values of sample time <b>Ts</b> and discretization method 
+<b>method</b> are
+</p>
 <blockquote><pre>
     Ts = 1
 method = Modelica_LinearSystems2.Types.Method.Trapezoidal
-
 </pre></blockquote>
-respectively. See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>
+<p>
+respectively. See also 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>
 where the inputs are the matrices of a continuous system which is to convert to discrete state space.
 </p>
 
@@ -184,9 +191,6 @@ public
   // dss.B2 = [0]
   // dss.Ts = 1
   // dss.method = Modelica_LinearSystems2.Types.Method.Trapezoidal
-
-
-
 </pre></blockquote>
 </html>"));
     end fromMatrices;
@@ -318,30 +322,28 @@ public
       annotation (overloadsConstructor=true,
         Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right> dss </td><td align=center>=</td>  <td> <b>fromStateSpace</b>(ss, Ts)  </td> </tr>
-<tr> <td align=right> dss </td><td align=center>=</td>  <td> <b>fromStateSpace</b>(ss, Ts, method)  </td> </tr>
+<blockquote><pre>
+dss = 'constructor'.<b>fromStateSpace</b>(ss, Ts)
+dss = 'constructor'.<b>fromStateSpace</b>(ss, Ts, method)
+</pre></blockquote>
 
-</table>
 <h4>Description</h4>
-
 <p>
 This function derives a linear time invariant difference
 equation system in state space form
 </p>
-<p>
-<blockquote><pre>    <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
-     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
+<blockquote><pre>
+<b>x</b>(Ts*(k+1))        = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
+<b>y</b>(Ts*k)            = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
+<b>x</b>_continuous(Ts*k) =     <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
 </pre></blockquote>
-</p>
 <p>
 with
-</p><p>
+</p>
 <ul>
-<li> <b>Ts</b> - the sample time</li>
-<li> <b>k</b> - the index of the actual sample instance (k=0,1,2,3,...)</li>
-<li> <b>t</b> - the time</li>
+<li> <b>Ts</b> - the sample time,</li>
+<li> <b>k</b> - the index of the actual sample instance (k=0,1,2,3,...),</li>
+<li> <b>t</b> - the time,</li>
 <li> <b>u</b>(t) - the input vector,</li>
 <li> <b>y</b>(t) - the output vector,</li>
 <li> <b>x</b>(t) - the discrete state vector (x(t=Ts*0) is the initial state),</li>
@@ -349,28 +351,28 @@ with
      from which the discrete block has been derived (details see below),</li>
 <li> <b>A, B, C, D, B2</b> - matrices of appropriate dimensions.</li>
 </ul>
-</p>
 <p>
 from continuous state space form
+</p>
 <blockquote><pre>
-    der(<b>xc</b>(t)) = <b>ss.A</b> * <b>xc</b>(t) + <b>ss.B</b> * <b>us</b>(t)
-    <b>yc</b>(t) = <b>ss.C</b> * <b>xc</b>(t) + <b>ss.D</b> * <b>uc</b>(t)
+der(<b>xc</b>(t)) = <b>ss.A</b> * <b>xc</b>(t) + <b>ss.B</b> * <b>us</b>(t)
+    <b>yc</b>(t)  = <b>ss.C</b> * <b>xc</b>(t) + <b>ss.D</b> * <b>uc</b>(t)
 </pre></blockquote>
 <p>
 The applied discretization method is selected by the user from
-<ul>
-<li> <b>ExplicitEuler</b> - Discretization with explicit Euler integration</li>
-<li> <b>ImplicitEuler</b> - Discretization with implicit Euler integration</li>
-<li> <b>Trapezoidal</b> - Discretization with trapezoidal integration (Tustins method, recommended)</li>
-<li> <b>ImpulseExact</b> - Exact discretization for impulse inputs</li>
-<li> <b>StepExact</b> - Exact discretization for step inputs (zero-order hold equivalent)</li>
-<li> <b>RampExact</b> - Exact discretization for ramp inputs (first-order hold equivalent)</li>
-</ul>
 </p>
+<ul>
+<li> <b>ExplicitEuler</b> - Discretization with explicit Euler integration,</li>
+<li> <b>ImplicitEuler</b> - Discretization with implicit Euler integration,</li>
+<li> <b>Trapezoidal</b> - Discretization with trapezoidal integration (Tustins method, recommended),</li>
+<li> <b>ImpulseExact</b> - Exact discretization for impulse inputs,</li>
+<li> <b>StepExact</b> - Exact discretization for step inputs (zero-order hold equivalent),</li>
+<li> <b>RampExact</b> - Exact discretization for ramp inputs (first-order hold equivalent).</li>
+</ul>
 <p>
 See also  <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>.
 </p>
-<p>
+
 <h4>Example</h4>
 <blockquote><pre>
   import dss=Modelica_LinearSystems2.DiscreteStateSpace;
@@ -396,7 +398,7 @@ public
   //  dss.Ts = 0.1,
   //  dss.B2 = [0.0526],
   //  dss.method = Modelica_LinearSystems2.Types.Method.Trapezoidal
-</p>
+</pre></blockquote>
 </html>"));
     end fromStateSpace;
 
@@ -533,20 +535,22 @@ This function derives a linear time invariant difference
 equation system in state space form:
 </p>
 <blockquote><pre>
-     <b>xd</b>(Ts*(k+1)) = <b>Ad</b> * <b>xd</b>(Ts*k) + <b>Bd</b> * <b>ud</b>(Ts*k)
-     <b>yd</b>(Ts*k)     = <b>Cd</b> * <b>xd</b>(Ts*k) + <b>Dd</b> * <b>ud</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>xd</b>(Ts*k) + <b>B2</b> * <b>ud</b>(Ts*k)
-</pre></blockquote>
-from the matrices <b>A</b>, <b>B</b>, <b>C</b>, <b>D</b> of the corresponding continuous system
-<blockquote><pre>
-     der(<b>x</b>(t)) = <b>A</b> * <b>x</b>(t) + <b>B</b> * <b>u</b>(t)
-     <b>y</b>(t)      = <b>C</b> * <b>x</b>(t) + <b>D</b> * <b>u</b>(t)
+<b>xd</b>(Ts*(k+1))       = <b>Ad</b> * <b>xd</b>(Ts*k) + <b>Bd</b> * <b>ud</b>(Ts*k)
+<b>yd</b>(Ts*k)           = <b>Cd</b> * <b>xd</b>(Ts*k) + <b>Dd</b> * <b>ud</b>(Ts*k)
+<b>x</b>_continuous(Ts*k) =      <b>xd</b>(Ts*k) + <b>B2</b> * <b>ud</b>(Ts*k)
 </pre></blockquote>
 <p>
-The function is similar to  <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">fromStateSpace</a> but the inputs are restricted
-to the matrices, the sample time and the discretization method.
+from the matrices <b>A</b>, <b>B</b>, <b>C</b>, <b>D</b> of the corresponding continuous system
 </p>
-
+<blockquote><pre>
+der(<b>x</b>(t)) = <b>A</b> * <b>x</b>(t) + <b>B</b> * <b>u</b>(t)
+<b>y</b>(t)      = <b>C</b> * <b>x</b>(t) + <b>D</b> * <b>u</b>(t)
+</pre></blockquote>
+<p>
+The function is similar to 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">fromStateSpace</a> 
+but the inputs are restricted to the matrices, the sample time and the discretization method.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -572,7 +576,7 @@ public
   //  dss.Ts = 0.1,
   //  dss.B2 = [0.0526],
   //  dss.method = Modelica_LinearSystems2.Types.Method.Trapezoidal
-
+</pre></blockquote>
 </html>"));
     end fromMatrices2;
   end 'constructor';
@@ -612,25 +616,33 @@ encapsulated operator '-'
     result.method := dss1.method;
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  dss </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.DiscreteStateSpace.'-'.<b>subtract</b>(dss1, dss2)  </td> </tr>
-</table>
+<blockquote>
+<pre>
+dss = DiscreteStateSpace.'-'.<b>subtract</b>(dss1, dss2)
+</pre>
+</blockquote>
+
 <h4>Description</h4>
 <p>
-This operator function computes the subtraction of two discrete state space systems connected in parallel, i.e. the inputs are the same and the outputs of the two systems are subtracted. Therefore, The systems must have the same number of inputs and outputs but not the same number of states. The resulting system has an order of system_order1 + system_order2.<br>
-The operator is used by writing just the following command:
-<blockquote><pre>
-    dss3 := dss1 - dss2;
-</pre></blockquote>
-
+This operator function computes the subtraction of two discrete state space 
+systems connected in parallel, i.e. the inputs are the same and the outputs 
+of the two systems are subtracted. Therefore, The systems must have the same 
+number of inputs and outputs but not the same number of states. 
+The resulting system has an order of system_order1 + system_order2.
 </p>
+<p>
+The operator is used by writing just the following command:
+</p>
+<blockquote><pre>
+dss3 := dss1 - dss2;
+</pre></blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
-   DiscreteStateSpace dss1 = DiscreteStateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
-   DiscreteStateSpace dss2 = DiscreteStateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
+  DiscreteStateSpace dss1 = DiscreteStateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
+  DiscreteStateSpace dss2 = DiscreteStateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
 
-   DiscreteStateSpace dss3;
+  DiscreteStateSpace dss3;
 
 <b>algorithm</b>
   dss3 := dss1 - dss2;
@@ -640,7 +652,6 @@ The operator is used by writing just the following command:
 // dss.D = [0],
 // dss.B2 = [0; 0; 0; 0],
 </pre></blockquote>
-
 </html> "));
   end subtract;
 

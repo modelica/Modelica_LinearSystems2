@@ -198,7 +198,7 @@ time to determine the analog actuator (torque) signal, and
 component Noise to add uniformly distributed noise to
 the measurement signals.
 </p>
-<p>Within Dymola simulation tool the &QUOT;Commands / Simulate and Plot Results&QUOT;
+<p>Within Dymola simulation tool the &quot;Commands / Simulate and Plot Results&quot;
 selection plots the simulation result of either continuous or discrete controller.</p>
 <h4>Simulation results </h4>
 <p>

@@ -30,38 +30,31 @@ protected
   Real w[order2 + 1];
   Real k;
 algorithm
-assert(f_cut<=1/(2*Ts),"The cut-off frequency f_cut may not be greater than half the sample frequency (Nyquist frequency), i.e. f_cut <= " + String(1/(2*Ts)) + " but is "+String(f_cut));
+	assert(f_cut<=1/(2*Ts),"The cut-off frequency f_cut may not be greater than half the sample frequency (Nyquist frequency), i.e. f_cut <= " + String(1/(2*Ts)) + " but is "+String(f_cut));
   if specType == FIRspec.MeanValue then
-     a := fill(1/L, L);
+    a := fill(1/L, L);
   elseif specType == FIRspec.Window then
-     w := Internal.FIR_window(order2 + 1, window, beta);
-     for i in 1:order2 + 1 loop
-       k := i - 1 - order2/2;
-       if i - 1 == order2/2 then
-         a[i] := if filterType == FilterType.LowPass then Wc*w[i]/pi else
-                 w[i] - Wc*w[i]/pi;
-       else
-         a[i] := if filterType == FilterType.LowPass then sin(k*Wc)*
-           w[i]/(k*pi) else w[i]*(sin(k*pi) - sin(k*Wc))/(k*pi);
-       end if;
-     end for;
+    w := Internal.FIR_window(order2 + 1, window, beta);
+    for i in 1:order2 + 1 loop
+      k := i - 1 - order2/2;
+      if i - 1 == order2/2 then
+        a[i] := if filterType == FilterType.LowPass then Wc*w[i]/pi else
+                w[i] - Wc*w[i]/pi;
+      else
+        a[i] := if filterType == FilterType.LowPass then sin(k*Wc)*
+          w[i]/(k*pi) else w[i]*(sin(k*pi) - sin(k*Wc))/(k*pi);
+      end if;
+    end for;
   else
-     a := a_desired;
-       end if;
-       if not isEven and filterType == FilterType.HighPass then
-         Modelica.Utilities.Streams.print("The requested order of the FIR filter in FIR_coefficients is odd and has been increased by one to get an even order filter\n");
-       end if;
+    a := a_desired;
+  end if;
+
+  if not isEven and filterType == FilterType.HighPass then
+    Modelica.Utilities.Streams.print("The requested order of the FIR filter in FIR_coefficients is odd and has been increased by one to get an even order filter\n");
+  end if;
+  
   annotation (
-    Coordsys(
-      extent=[-100, -100; 100, 100],
-      grid=[2, 2],
-      component=[20, 20]),
-    Window(
-      x=0.22,
-      y=0.24,
-      width=0.64,
-      height=0.61),
-    Documentation(info="<HTML>
+    Documentation(info="<html>
 <p>
 The FIR-filter synthesis based on the window method. The coefficients are
 calculated through a fourier series approximation of the desired amplitude
@@ -75,14 +68,14 @@ coefficients with the window coefficients in the time domain.
 </p>
 <p>
 The filter equation
+</p>
 <pre>
      y(k) = a0*u(k) + a1*u(k-1) + a2*u(k-2) + ... + an*u(k-n)
 </pre>
+<p>
 implies that the function outputs n+1 coefficients for a n-th order filter. The
 coefficients can be weightened with different kind of windows: Rectangle, Bartlett,
-Hann, Hamming, Blackman, Kaiser <br>
-The beta parameter is only needed by the Kaiser window.
+Hann, Hamming, Blackman, Kaiser. The beta parameter is only needed by the Kaiser window.
 </p>
-</HTML>
-"));
+</html>"));
 end FIR_coefficients;

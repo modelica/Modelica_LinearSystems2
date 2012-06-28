@@ -2,12 +2,8 @@ within Modelica_LinearSystems2;
 package Controller "Continuous and discrete input/output blocks. Easy to switch from continuous to discrete representation."
   extends Modelica.Icons.Package;
 
-constant String DataDir=Modelica_LinearSystems2.DataDir
-  "Absolute path to directory containing utilitiy files for this package, such as images";
-
-
-  extends Modelica.Icons.Package;
-
+  constant String DataDir=Modelica_LinearSystems2.DataDir
+    "Absolute path to directory containing utilitiy files for this package, such as images";
 
   annotation (Documentation(info="<html>
 <p>
