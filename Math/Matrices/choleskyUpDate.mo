@@ -49,30 +49,38 @@ algorithm
       end for;
     end for;
   end if;
-annotation (Documentation(info="<HTML>
+annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-  Lud = Matrices.Utilities.<b>choleskyUpDate</b>(L, v);
-  Lud = Matrices.Utilities.<b>choleskyUpDate</b>(L, v, true);
+Lud = Matrices.Utilities.<b>choleskyUpDate</b>(L, v);
+Lud = Matrices.Utilities.<b>choleskyUpDate</b>(L, v, true);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function </b>choleskyUpDate(L, v)</b> computes the rank-1-updated Cholesky factorization <b>Lud</b>, with
 </p>
-<blockquote><pre>
-             T          T     T      T
-<b>Aud</b> = <b>Lud</b>*<b>Lud</b> = <b>A</b> +  <b>v</b>*<b>v</b> = <b>L</b>*<b>L</b> +  <b>v</b>*<b>v</b>
-</pre></blockquote>
+<blockquote>
+  <b>Aud</b> = <b>Lud</b>*<b>Lud</b><sup><big>T</big></sup> = 
+  <b>A</b> +  <b>v</b>*<b>v</b><sup><big>T</big></sup> = 
+  <b>L</b>*<b>L</b><sup><big>T</big></sup> +  <b>v</b>*<b>v</b><sup><big>T</big></sup>
+</blockquote>
 <p>
 from the input <b>L</b>, i.e. the left (lower) Cholesky factor of the original matrix <b>A</b>.<br>
 The approach is a transformation <b>H</b>*[<b>v</b>, <b>L</b>]' = [<b>0</b>, <b>Lud</b>]' with orthonormal matrix <b>H</b> such, that
 </p>
-<blockquote><pre>
-                      T          T         T               T     T
-   [<b>0</b>, <b>Lud</b>] * [<b>0</b>, <b>Lud</b>] = [<b>v</b>, <b>L</b>]*<b>H</b> *<b>H</b>*[<b>v</b>, <b>L</b>] = [<b>v</b>, <b>L</b>]*[<b>v</b>, <b>L</b>] = <b>v</b>*<b>v</b> + <b>A</b>
-</blockquote></pre>
-and matrix <b>Lud</b> is lower (upper) triangular. The transformation is performed by n (order of <b>A</b>) Givens rotations.
-The following sequence illustrates the principle of stepwise transformation of matrix [v, L]'. \"*\" are arbitrary elements. For each step the changed elements are bold.
+<blockquote>
+  [<b>0</b>, <b>Lud</b>] * [<b>0</b>, <b>Lud</b>]<sup><big>T</big></sup> = 
+  [<b>v</b>, <b>L</b>]*<b>H</b><sup><big>T</big></sup> *<b>H</b>*[<b>v</b>, <b>L</b>]<sup><big>T</big></sup> = 
+  [<b>v</b>, <b>L</b>]*[<b>v</b>, <b>L</b>]<sup><big>T</big></sup> = <b>v</b>*<b>v</b><sup><big>T</big></sup> + <b>A</b>
+</blockquote>
+<p>
+and matrix <b>Lud</b> is lower (upper) triangular. The transformation is performed 
+by n (order of <b>A</b>) Givens rotations.
+The following sequence illustrates the principle of stepwise transformation of 
+matrix [v, L]'. Symbol \"*\" represents arbitrary elements. For each step the changed 
+elements are bold.
+</p>
 <blockquote><pre>
 | v' |    | * * * * |       | 0 <b>*</b> <b>*</b> <b>*</b> |       | 0 0 <b>*</b> <b>*</b> |       | 0 0 0 <b>*</b> |       | 0 0 0 0 |
 |    |    | * * * * |       | <b>*</b> <b>*</b> <b>*</b> <b>*</b> |       | * * * * |       | * * * * |       | * * * * |
@@ -81,15 +89,13 @@ The following sequence illustrates the principle of stepwise transformation of m
 |    |    | 0 0 0 * |       | 0 0 0 * |       | 0 0 0 * |       | 0 0 0 * |       | 0 0 0 <b>*</b> |
 
 </pre></blockquote>
-With the boolean input \"upper\" the user specifies wether the matrix <b>L</b> is lower or upper triangular matrix (left or right Cholesky factor).
+<p>
+With the boolean input \"upper\" the user specifies wether the matrix <b>L</b> 
+is lower or upper triangular matrix (left or right Cholesky factor).
 If \"upper==true\", the output <b>Lud</b> is also upper triangular. Default is \"upper==false\".
+</p>
 
-</blockquote>
-<h4>Example</h4>
-<blockquote><pre>
-
-
-</HTML>", revisions="<html>
+</html>", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>

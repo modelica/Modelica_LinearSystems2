@@ -361,13 +361,22 @@ Note, for any vector norm the following inequality holds:
       algorithm
         result := {v[end-i+1] for i in 1:size(v,1)};
       annotation (Inline=true, Documentation(info="<html>
-  <p><h4>Syntax</h4></p>
-  <blockquote><pre>Vectors.<b>reverse</b>(v);</pre></blockquote>
-  <p><h4>Description</h4></p>
-  <pre>The function call &QUOT;Vectors.<b>reverse</b>(v)&QUOT; returns the complex vector elements in reverse order. </pre>
-  <p><h4>Example</h4></p>
-  <blockquote><pre>  <b>reverse</b>({1,2,3,4});  // = {4,3,2,1}</pre></blockquote>
-  </html>"));
+<h4>Syntax</h4>
+<blockquote><pre>
+Vectors.<b>reverse</b>(v);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+The function call &QUOT;Vectors.<b>reverse</b>(v)&QUOT; returns the complex vector elements in reverse order.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+<b>reverse</b>({1,2,3,4});
+  // = {4,3,2,1}
+</pre></blockquote>
+</html>"));
       end reverse;
 
   end Vectors;

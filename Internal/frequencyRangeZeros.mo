@@ -91,18 +91,20 @@ This function estimates a useful frequency range for the
 Bode plot of a vector of zeros (numerator or denominator zeros).
 This frequency range is estimated such that the phase angle
 of <b>one</b> zero is in the range:
-<p>
-<pre>
-   phi_min/n_zeros &le; |phase angle| &le; pi/2 - phi_min/n_zeros
-</pre>
+</p>
+<blockquote><pre>
+phi_min/n_zeros &le; |phase angle| &le; pi/2 - phi_min/n_zeros
+</pre></blockquote>
+
 <p>
 where n_zeros is the number of zeros.
 Note, the phase angle of one zero for a frequency of 0 up to infinity
 is in the range:
 </p>
-<pre>
-   0 &le; |phase angle| &le; pi/2
-</pre>
+<blockquote><pre>
+0 &le; |phase angle| &le; pi/2
+</pre></blockquote>
+
 <p>
 Therefore, the frequency range is estimated
 such that the essential part of the phase angle (defined by phi_min)

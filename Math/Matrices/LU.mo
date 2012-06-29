@@ -27,6 +27,7 @@ algorithm
 (LU, pivots)       = Matrices.<b>LU</b>(A);
 (LU, pivots, info) = Matrices.<b>LU</b>(A);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function call returns the
@@ -56,17 +57,18 @@ more convenient to just use the function
 </p>
 <p>
 The optional third (Integer) output argument has the following meaning:
+</p>
+<blockquote>
 <table border=0 cellspacing=0 cellpadding=2>
-  <tr><td valign=\"top\">info = 0:</td
-      <td valign=\"top\">successful exit</td></tr>
+  <tr><td valign=\"top\">info = 0:</td>
+      <td valign=\"top\">Successful exit</td></tr>
   <tr><td valign=\"top\">info &gt; 0:</td>
-      <td valign=\"top\">if info = i, U[i,i] is exactly zero. The factorization
-          has been completed, <br>
-          but the factor U is exactly
-          singular, and division by zero will occur<br> if it is used
+      <td valign=\"top\" width=\"350\">If info = i then U[i,i] is exactly zero. The factorization
+          has been completed, but the factor U is exactly
+          singular, and division by zero will occur if it is used
           to solve a system of equations.</td></tr>
 </table>
-</p>
+</blockquote>
 <p>
 The LU factorization is computed
 with the LAPACK function \"dgetrf\",
@@ -75,6 +77,7 @@ with row interchanges. Vector \"pivots\" are the
 pivot indices, i.e., for 1 &le; i &le; min(m,n), row i of
 matrix A was interchanged with row pivots[i].
 </p>
+
 <h4>Example</h4>
 <blockquote><pre>
   Real A[3,3] = [1,2,3;
@@ -91,8 +94,9 @@ matrix A was interchanged with row pivots[i].
   x1 := Matrices.LU_solve(LU, pivots, b1);  // x1 = {3,2,1}
   x2 := Matrices.LU_solve(LU, pivots, b2);  // x2 = {1,0,2}
 </pre></blockquote>
+
 <h4>See also</h4>
-<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>,
-<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>,
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a> and 
+<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>.
 </HTML>"));
 end LU;

@@ -40,7 +40,7 @@ else
           lineColor={0,0,127},
           textString="D"),
         Text(
-          extent={{-100,-60},{80,-90}},
+          extent={{-100,94},{100,64}},
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,

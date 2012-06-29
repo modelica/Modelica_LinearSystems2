@@ -31,12 +31,13 @@ if size(A,1) > 0 then
 numerical algorithm does not converge.");
 end if;
   annotation (
-    Documentation(info="<HTML>
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
                 eigenvalues = Matrices.<b>eigenValues</b>(A);
 (eigenvalues, eigenvectors) = Matrices.<b>eigenValues</b>(A);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function call returns the eigenvalues and
@@ -53,35 +54,35 @@ With function
 a real block diagonal matrix is constructed from the eigenvalues
 such that
 </p>
-<blockquote>
-<pre>
-A = eigenvectors * eigenValueMatrix(eigenvalues) * inv(eigenvectors)
-</pre>
-</blockquote>
+<blockquote><pre>
+A = eigenvectors * eigenValueMatrix(eigenvalues) * inv(eigenvectors),
+</pre></blockquote>
 <p>
 provided the eigenvector matrix \"eigenvectors\" can be inverted
 (an inversion is possible, if all eigenvalues are different
 and no eigenvalue is zero).
 </p>
+<p>
+See also
+<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a> and
+<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>.
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
   Real A[3,3] = [1,2,3;
                  3,4,5;
                  2,1,4];
   Real eval;
+
 <b>algorithm</b>
   eval := Matrices.eigenValues(A);  // eval = [-0.618, 0;
                                     //          8.0  , 0;
                                     //          1.618, 0];
-</pre>
-</blockquote>
-<p>
-i.e., matrix A has the 3 real eigenvalues -0.618, 8, 1.618.
-</p>
 </pre></blockquote>
-<h4>See also</h4>
-<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a>,
-<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
-</HTML>
+<p>
+i.e., matrix <b>A</b> has the 3 real eigenvalues -0.618, 8, 1.618.
+</p>
+</html>
 "));
 end eigenValues;

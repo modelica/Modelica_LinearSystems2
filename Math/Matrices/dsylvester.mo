@@ -105,63 +105,66 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
- <h4>Syntax</h4>
+<h4>Syntax</h4>
 <blockquote><pre>
-         X = Matrices.<b>dsylvester</b>(A, B, C);
-         X = Matrices.<b>dsylvester</b>(A, B, C, AisHess, BTisSchur, sgn, eps);
+X = Matrices.<b>dsylvester</b>(A, B, C);
+X = Matrices.<b>dsylvester</b>(A, B, C, AisHess, BTisSchur, sgn, eps);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function <b>dsylvester</b> computes the solution <b>X</b> of the discrete-time Sylvester equation
-<p>
-<blockquote><pre>
- <b>A</b>*<b>X</b>*<b>B</b> + sgn*<b>X</b> = <b>C</b>.
-
-</pre></blockquote>
 </p>
-where sgn = 1 or sgn = -1. The algorithm applies the Hessenberg-Schur method proposed by Golub et al [1].
-For sgn = -1, the discrete Sylvester equation is also known as Stein equation:
+<blockquote>
+  <b>A</b>*<b>X</b>*<b>B</b> + sgn*<b>X</b> = <b>C</b>.
+</blockquote>
 <p>
-<blockquote><pre>
- <b>A</b>*<b>X</b>*<b>B</b> - <b>X</b> + <b>Q</b> = <b>0</b>.
-
-</pre></blockquote>
+where sgn = 1 or sgn = -1. The algorithm applies the Hessenberg-Schur 
+method proposed by Golub et al [1]. For sgn = -1, the discrete Sylvester 
+equation is also known as Stein equation:
 </p>
-
+<blockquote>
+  <b>A</b>*<b>X</b>*<b>B</b> - <b>X</b> + <b>Q</b> = <b>0</b>.
+</blockquote>
+<p>
 In a nutshell, the problem is reduced to the corresponding problem
-<blockquote><pre>
- <b>H</b>*<b>Y</b>*<b>S</b>' + sgn*<b>Y</b> = <b>F</b>.
-</pre></blockquote>
-<p>
-with <b>H</b>=<b>U</b>'*<b>A</b>*<b>U</b> is the Hessenberg form of <b>A</b> and <b>S</b>=<b>V</b>'*<b>B</b>'*<b>V</b> is the real Schur form of <b>B</b>',
-<b>F</b>=<b>U</b>'*<b>C</b>*<b>V</b> and <b>Y</b>=<b>U</b>*<b>X</b>*<b>V</b>'
-are appropriate transformations of <b>C</b> and <b>X</b>. This problem is solved sequently by exploiting the specific forms of <b>S</b> and <b>H</b>.
-Finally the solution of the the original problem is recovered as <b>X</b>=<b>U</b>'*<b>Y</b>*<b>V</b>.<br>
-The boolean inputs \"AisHess\" and \"BTisSchur\" indicate to omit one or both of the transformation to Hessenberg form or Schur form repectively in the case that <b>A</b> and/or <b>B</b> have already Hessenberg form or Schur respectively.
-
 </p>
+<blockquote>
+  <b>H</b>*<b>Y</b>*<b>S</b>' + sgn*<b>Y</b> = <b>F</b>.
+</blockquote>
+<p>
+with <b>H</b>=<b>U</b>'*<b>A</b>*<b>U</b> is the Hessenberg form 
+of <b>A</b> and <b>S</b>=<b>V</b>'*<b>B</b>'*<b>V</b> is the real Schur 
+form of <b>B</b>', <b>F</b>=<b>U</b>'*<b>C</b>*<b>V</b> and 
+<b>Y</b>=<b>U</b>*<b>X</b>*<b>V</b>' are appropriate transformations 
+of <b>C</b> and <b>X</b>. This problem is solved sequently by exploiting 
+the specific forms of <b>S</b> and <b>H</b>.
+Finally, the solution of the the original problem is recovered as 
+<b>X</b>=<b>U</b>'*<b>Y</b>*<b>V</b>.
+</p>
+<p>
+The boolean inputs \"AisHess\" and \"BTisSchur\" indicate to omit one 
+or both of the transformation to Hessenberg form or Schur form, repectively, 
+in the case that <b>A</b> and/or <b>B</b> have already Hessenberg form 
+or Schur, respectively.
+</p>
+
 <h4>References</h4>
-<PRE>
+<pre>
   [1] Golub, G.H., Nash, S. and Van Loan, C.F.
       A Hessenberg-Schur method for the problem AX + XB = C.
       IEEE Transaction on Automatic Control, AC-24, no. 6, pp. 909-913, 1979.
+</pre>
 
-
-</PRE>
-
-
-</p>
 <h4>Example</h4>
 <blockquote><pre>
   A = [1.0,   2.0,   3.0;
        6.0,   7.0,   8.0;
        9.0,   2.0,   3.0];
 
-
   B = [7.0,   2.0,   3.0;
        2.0,   1.0,   2.0;
        3.0,   4.0,   1.0];
-
 
   C = [271.0,   135.0,   147.0;
        923.0,   494.0,   482.0;
@@ -169,15 +172,11 @@ The boolean inputs \"AisHess\" and \"BTisSchur\" indicate to omit one or both of
 
   X = discreteSylvester(A, B, C);
 
-  results in:
+results in:
   X = [2.0,   3.0,   6.0;
        4.0,   7.0,   1.0;
        5.0,   3.0,   2.0];
-
 </pre></blockquote>
-
-
-
 </html>",
         revisions="<html>
 <ul>

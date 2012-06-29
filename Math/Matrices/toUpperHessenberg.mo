@@ -45,33 +45,35 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
-
-   <h4>Syntax</h4>
+<h4>Syntax</h4>
 <blockquote><pre>
-         H = Matrices.Utilities<b>toUpperHessenberg</b>(A);
-         (H, V, tau, info) = Matrices.Utilities<b>toUpperHessenberg</b>(A,ilo, ihi);
+                H = Matrices.Utilities<b>toUpperHessenberg</b>(A);
+(H, V, tau, info) = Matrices.Utilities<b>toUpperHessenberg</b>(A,ilo, ihi);
 </pre></blockquote>
-<h4>Description</h4>
-Function <b>toUpperHessenberg</b> computes a upper Hessenberg form <b>H</b> of a matrix <b>A</b> by orthogonal similarity transformation:  <b>Q</b>' * <b>A</b> * <b>Q</b> = <b>H</b>.
-It calls LAPACK function DGEHRD. See Matrices.Lapack.dgehrd for more information about the additional outputs V, tau, info and inputs ilo, ihi for more information.
-<p>
 
+<h4>Description</h4>
+<p>
+Function <b>toUpperHessenberg</b> computes a upper Hessenberg form <b>H</b> 
+of a matrix <b>A</b> by orthogonal similarity transformation: 
+<b>Q</b>' * <b>A</b> * <b>Q</b> = <b>H</b>. It calls LAPACK function DGEHRD. 
+See <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.LAPACK.dgehrd\">Matrices.LAPACK.dgehrd</a> 
+for more information about the additional outputs V, tau, info and 
+inputs ilo, ihi for more information.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
- A  = [1, 2,  3;
-       6, 5,  4;
-       1, 0,  0];
+  A  = [1, 2,  3;
+        6, 5,  4;
+        1, 0,  0];
 
- H = toUpperHessenberg(A);
+  H = toUpperHessenberg(A);
 
   results in:
 
- H = [1.0,  -2.466,  2.630;
-     -6.083, 5.514, -3.081;
-      0.0,   0.919, -0.514]
-
+  H = [1.0,  -2.466,  2.630;
+      -6.083, 5.514, -3.081;
+       0.0,   0.919, -0.514]
 </pre></blockquote>
-
 </html>"));
 end toUpperHessenberg;

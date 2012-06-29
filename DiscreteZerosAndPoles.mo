@@ -693,7 +693,7 @@ end '*';
   end '^';
 
 encapsulated operator function '=='
-    "Check whether two DiscreteZerosAndPoles transfer functions are identical"
+    "Check whether two discreteZerosAndPoles transfer functions are identical"
     import Modelica;
     import Modelica.Math;
     import Modelica_LinearSystems2.Math.Polynomial;

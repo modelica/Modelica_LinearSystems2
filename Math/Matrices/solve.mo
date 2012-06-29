@@ -23,15 +23,14 @@ no or infinitely many solutions (A is singular).");
 <blockquote><pre>
 Matrices.<b>solve</b>(A,b);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function call returns the
 solution <b>x</b> of the linear system of equations
 </p>
 <blockquote>
-<p>
 <b>A</b>*<b>x</b> = <b>b</b>
-</p>
 </blockquote>
 <p>
 If a unique solution <b>x</b> does not exist (since <b>A</b> is singular),
@@ -41,6 +40,12 @@ an exception is raised.
 Note, the solution is computed with the LAPACK function \"dgesv\",
 i.e., by Gaussian elemination with partial pivoting.
 </p>
+<p>
+See also
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a> and 
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>.
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
   Real A[3,3] = [1,2,3;
@@ -51,8 +56,5 @@ i.e., by Gaussian elemination with partial pivoting.
 <b>algorithm</b>
   x := Matrices.solve(A,b);  // x = {3,2,1}
 </pre></blockquote>
-<h4>See also</h4>
-<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
-<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>
 </HTML>"));
 end solve;

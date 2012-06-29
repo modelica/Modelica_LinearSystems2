@@ -47,32 +47,39 @@ algorithm
 
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  (T, Z, alphaReal, alphaImag) </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.Math.Matrices.<b<rsf2</b>(A)  </td> </tr>
-</table>
+<blockquote><pre>
+(T, Z, alphaReal, alphaImag) = Modelica_LinearSystems2.Math.Matrices.<b>rsf2</b>(A)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>rsf2</b> (real Schur form) calculates the real Schur form af a real square matrix <b>A</b>, i.e.
-<blockquote><pre>
-         T
-A = Z*T*Z
-
-</pre></blockquote>
-with the real nxn matrices <b>T</b> and <b>Z</b>. <b>Z</b> is an orthogonal matrix.  <b>T</b> is an block upper triangular matrix with 1x1 and 2x2 blocks in the diagonal.The 1x1 blocks contains the real eigenvalues of a. The 2x2 blocks are matrices with the conjugated complex pairs of eigenvalues, whereas the real parts of the eigenvalues are the elements of the diagonal.
+Function <b>rsf2</b> (real Schur form) calculates the real Schur form af 
+a real square matrix <b>A</b>, i.e.
+</p>
+<blockquote>
+  <b>A</b> = <b>Z</b>*<b>T</b>*<b>Z</b><sup><big>T</big></sup>
+</blockquote>
+<p>
+with the real nxn matrices <b>T</b> and <b>Z</b>. <b>Z</b> is an orthogonal matrix. 
+<b>T</b> is an block upper triangular matrix with 1x1 and 2x2 blocks in the diagonal. 
+The 1x1 blocks contains the real eigenvalues of&nbsp;a. The 2x2 blocks are matrices with 
+the conjugated complex pairs of eigenvalues, whereas the real parts of the eigenvalues 
+are the elements of the diagonal.
+</p>
 <p>
 The calculation is performed stepwise using lapack.dgees, i.e. using the internal mehtods of balacing and scaling of dgees.
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rsf\">Math.Matrices.rsf</a>
 </p>
-
+<p>
+See also <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rsf\">Math.Matrices.rsf</a>.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Real A[3,3] = [1, 2, 3; 4, 5, 6; 7, 8, 9];
-   Real T[3,3];
-   Real Z[3,3];
-   Real alphaReal[3];
-   Real alphaImag[3];
+  Real A[3,3] = [1, 2, 3; 4, 5, 6; 7, 8, 9];
+  Real T[3,3];
+  Real Z[3,3];
+  Real alphaReal[3];
+  Real alphaImag[3];
 
 <b>algorithm</b>
   (T, Z, alphaReal, alphaImag):=Modelica_LinearSystems2.Math.Matrices.rsf2(A);
@@ -84,7 +91,6 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rsf\">Math.M
 //        -0.82,   0.4,    0.41]
 //alphaReal = {16.12, -1.12, -1.32E-015}
 //alphaImag = {0, 0, 0}
-
 </pre></blockquote>
 </html> "));
 end rsf2;

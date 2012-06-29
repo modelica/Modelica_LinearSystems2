@@ -81,8 +81,7 @@ Function <b>care</b> computes the solution <b>X</b> of the continuous-time algeb
 </pre></blockquote>
 with
 <blockquote><pre>
-       -1
-<b>G</b> = <b>B</b>*<b>R</b> *<b>B</b>'
+<b>G</b> = <b>B</b>*<b>R</b><sup><big>-1</big></sup>*<b>B</b>'
 </pre>
 </blockquote>
 using the Schur vector approach proposed by Laub [1].
@@ -105,8 +104,7 @@ to an ordered real Schur form
 with orthogonal similarity transformation <b>U</b>. <b>S</b> is ordered in such a way,
 that <b>S11</b> contains the n stable eigenvalues of the closed loop system with system matrix
 <blockquote><pre>
-       -1
-<b>A</b> - <b>B</b>*<b>R</b> *<b>B</b>'*<b>X</b>
+<b>A</b> - <b>B</b>*<b>R</b><sup><big>-1</big></sup>*<b>B</b>'*<b>X</b>
 </pre></blockquote>
 If <b>U</b> is partitioned to
 <blockquote><pre>

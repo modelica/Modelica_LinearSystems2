@@ -27,29 +27,33 @@ result := max(s)/min(s);
     end if;
 
   annotation (Documentation(info="<html>
-  <h4>Syntax</h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 r = Matrices.<b>conditionNumber</b>(A);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
-This function calculates the the condition number (norm(A) * norm(inv(A))) of a general real matrix A, in either the 1-norm, 2-norm or the infinity-norm.
-In the case of 2-norm the result is he ratio of the largest to the smallest singular value to A.
+This function calculates the the condition number 
+(norm(<b>A</b>) * norm(inv(<b>A</b>))) of a general real matrix <b>A</b>, 
+in either the 1-norm, 2-norm or the infinity-norm. In the case of 2-norm 
+the result is the ratio of the largest to the smallest singular value to <b>A</b>.
 </p>
 <p>
+See also
+<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">Matrices.rcond</a>.
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
-  A = [1, 2
-       2, 1];
-  r = conditionNumber(A);
+A = [1, 2
+     2, 1];
+r = conditionNumber(A);
 
-  results in:
+results in:
 
-  r = 3.0
+r = 3.0
 </pre></blockquote>
-</p>
-<h4>See also</h4>
-<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">Matrices.rcond</a>
 </html>", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>

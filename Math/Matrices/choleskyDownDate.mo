@@ -67,84 +67,93 @@ algorithm
     end for;
   end if;
 
- annotation (Documentation(info="<HTML>
+ annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-  Ldd = Matrices.Utilities.<b>choleskyUpDate</b>(L, v);
-  Ldd = Matrices.Utilities.<b>choleskyUpDate</b>(L, v, true);
+Ldd = Matrices.Utilities.<b>choleskyDownDate</b>(L, v);
+Ldd = Matrices.Utilities.<b>choleskyDownDate</b>(L, v, true);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function </b>choleskyDownDate(L, v)</b> computes the rank-1-downdated Cholesky factorization <b>Ldd</b>, with
+Function </b>choleskyDownDate(L, v)</b> computes the rank-1-downdated 
+Cholesky factorization <b>Ldd</b>, with
 </p>
-<blockquote><pre>
-             T          T     T      T
-<b>Add</b> = <b>Ldd</b>*<b>Ldd</b> = <b>A</b> -  <b>v</b>*<b>v</b> = <b>L</b>*<b>L</b> -  <b>v</b>*<b>v</b>
-
-</pre>
+<blockquote>
+  <b>Add</b> = <b>Ldd</b>*<b>Ldd</b><sup><big>T</big></sup> = 
+  <b>A</b> -  <b>v</b>*<b>v</b><sup><big>T</big></sup> = 
+  <b>L</b>*<b>L</b><sup><big>T</big></sup> -  <b>v</b>*<b>v</b><sup><big>T</big></sup>
 </blockquote>
 <p>
-from the input <b>L</b>, i.e. the left (lower) Cholesky factor of the original matrix <b>A</b>.<br>
-The algortihm is taken from [1].
+from the input <b>L</b>, i.e. the left (lower) Cholesky factor of the 
+original matrix <b>A</b>. The algortihm is taken from [1].
 </p>
-Matrix <b>Ldd</b> is calculated by
 <p>
-<blockquote><pre>
-          T           T
-  [<b>v</b>, <b>Ldd</b>] = <b>H</b> *[<b>0</b>, <b>L</b>]
-</blockquote></pre>
-with orthogonal Matrix <b>H</b> such that
-<blockquote><pre>
-     T          T                     T          T         T               T     T
-   <b>v</b>*<b>v</b> + <b>Ldd</b>*<b>Ldd</b> = [<b>v</b>, <b>Ldd</b>] * [<b>v</b>, <b>Ldd</b>] = [<b>0</b>, <b>L</b>]*<b>H</b> *<b>H</b>*[<b>0</b>, <b>L</b>] = [<b>0</b>, <b>L</b>]*[<b>0</b>, <b>L</b>] = <b>L</b>*<b>L</b> = <b>A</b>,
-</blockquote></pre>
-i.e., by orthogonal transformation
-<blockquote><pre>
- <b>H</b> = <b>H</b>_1*...*<b>H</b>_n.
-</blockquote></pre>
-The matrices <b>H</b>_i are Givens matrices computed such, that
-<blockquote><pre>
-                     T T                T
-<b>H</b>_1*<b>H</b>_2*...*<b>H</b>_n*[z, <b>a</b> ] = [1, 0, ..., 0],
-</blockquote></pre>
-with <b>a</b> is the solution of
-<blockquote><pre>
-<b>L</b>*<b>a</b> = <b>v</b>
-</blockquote></pre>
-and
-<blockquote><pre>
-z = ||<b>a</b>||.
-</blockquote></pre>
+Matrix <b>Ldd</b> is calculated by
 </p>
+<blockquote>
+  [<b>v</b>, <b>Ldd</b>]<sup><big>T</big></sup> = <b>H</b> *[<b>0</b>, <b>L</b>]<sup><big>T</big></sup>
+</blockquote>
+<p>
+with orthogonal Matrix <b>H</b> such that
+</p>
+<blockquote>
+  <b>v</b>*<b>v</b><sup><big>T</big></sup> + <b>Ldd</b>*<b>Ldd</b><sup><big>T</big></sup> = 
+  [<b>v</b>, <b>Ldd</b>] * [<b>v</b>, <b>Ldd</b>]<sup><big>T</big></sup> = 
+  [<b>0</b>, <b>L</b>]*<b>H</b><sup><big>T</big></sup> *<b>H</b>*[<b>0</b>, <b>L</b>]<sup><big>T</big></sup> = 
+  [<b>0</b>, <b>L</b>]*[<b>0</b>, <b>L</b>]<sup><big>T</big></sup> = <b>L</b>*<b>L</b><sup><big>T</big></sup> = <b>A</b>,
+</blockquote>
+<p>
+i.e., by orthogonal transformation
+</p>
+<blockquote>
+  <b>H</b> = <b>H</b>_1*...*<b>H</b>_n.
+</blockquote>
+<p>
+The matrices <b>H</b>_i are Givens matrices computed such that
+</p>
+<blockquote>
+  <b>H</b>_1*<b>H</b>_2*...*<b>H</b>_n*[z, <b>a</b><sup><big>T</big></sup> ]<sup><big>T</big></sup> = [1, 0, ..., 0]<sup><big>T</big></sup>,
+</blockquote>
+<p>
+with <b>a</b> is the solution of
+</p>
+<blockquote>
+  <b>L</b>*<b>a</b> = <b>v</b>
+</blockquote>
+<p>
+and
+</p>
+<blockquote>
+  z = ||<b>a</b>||.
+</blockquote>
+<p>
 The following sequence illustrate the principle of calculating the <b>H</b>_i, starting with <b>H</b>_n
+</p>
 <blockquote><pre>
-|z|      |z|      |z|      |z|
-|a| H_3  |a| H_2  |a| H_1  |0|
-|a| -->  |a| -->  |0| -->  |0|
-|a|      |0|      |0|      |0|
-
+|z|       |z|       |z|       |z|
+|a|  H_3  |a|  H_2  |a|  H_1  |0|
+|a| ----> |a| --->  |0| --->  |0|
+|a|       |0|       |0|       |0|
 </pre></blockquote>
-Note, that the z and a are different in each column.<br>
-It is shown in [1] that this algorithms results in the modified Cholesky factor <b>Ldd</b>.<br>
-
-With the boolean input \"upper\" the user specifies wether the matrix <b>L</b> is lower or upper triangular matrix (left or right Cholesky factor).
+<p>
+Note, that the z and a are different in each column. 
+It is shown in [1] that this algorithm results in the modified Cholesky factor <b>Ldd</b>.
+</p>
+<p>
+With the boolean input \"upper\" the user specifies whether the matrix <b>L</b> is lower 
+or upper triangular matrix (left or right Cholesky factor).
 If \"upper==true\", the output <b>Ldd</b> is also upper triangular. Default is \"upper==false\".
-
+</p>
 
 <h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center>  Dongarra, J. J., Bunch, J. R., Moler, G. B., Stewart, G.W.
-  </td>  <td> \"LINPACK Users' Guide \"  </td> <td> Society for Industrial Mathematics, 1987
- </td></tr>
-</table>
+<pre>
+  [1] Dongarra, J. J., Bunch, J. R., Moler, G. B., Stewart, G.W.
+      \"LINPACK Users' Guide\"
+      Society for Industrial Mathematics, 1987.
+</pre>
 
-
-</blockquote>
-<h4>Example</h4>
-<blockquote><pre>
-
-
-</HTML>", revisions="<html>
+</html>", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>

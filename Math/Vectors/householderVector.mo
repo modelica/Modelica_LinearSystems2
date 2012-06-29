@@ -18,11 +18,12 @@ algorithm
   alpha := if norm(a + norm_a/norm_b*b,2) > norm(a - norm_a/norm_b*b,2) then norm_a/norm_b else -norm_a/norm_b;
   u := (a + alpha*b)/length(a + alpha*b);
 
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Vectors.Utilities.<b>householderVector</b>(a,b);
+Vectors.<b>householderVector</b>(a,b);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 The function call \"<code>householderVector(a, b)</code>\" returns the normalized Householder vector
@@ -30,32 +31,32 @@ The function call \"<code>householderVector(a, b)</code>\" returns the normalize
 vector of the reflection plane. Algebraically, the reflection is performed by transformation matrix <b>Q</b>
 </p>
 <blockquote>
-<p>
-<b>Q</b> = <b>I</b> - 2*<b>u</b>*<b>u</b>',
-</p>
+  <b>Q</b> = <b>I</b> - 2*<b>u</b>*<b>u</b>',
 </blockquote>
+<p>
 i.e., vector <b>a</b> is mapped to
-<blockquote>
-<p>
-<b>a</b> -> <b>Q</b>*<b>a</b>=c*<b>b</b>
 </p>
+<blockquote>
+  <b>a</b> -> <b>Q</b>*<b>a</b>=c*<b>b</b>
 </blockquote>
+<p>
 with scalar c, |c| = ||<b>a</b>|| / ||<b>b</b>||. <b>Q</b>*<b>a</b> is the reflection of <b>a</b> about the hyperplane orthogonal to <b>u</b>.
 <b>Q</b> is an orthogonal matrix, i.e.
-<blockquote>
-<p>
-    <b>Q</b> = inv(<b>Q</b>) = <b>Q</b>'
 </p>
+<blockquote>
+<b>Q</b> = inv(<b>Q</b>) = <b>Q</b>'.
 </blockquote>
+
 <h4>Example</h4>
 <blockquote><pre>
   a = {2, -4, -2, -1};
   b = {1, 0, 0, 0};
 
-  u = <b>householderVector</b>(a,b);    // {0.837, -0.478, -0.239, -0.119}
-                               // Computation (identity(4) - 2*matrix(u)*transpose(matrix(u)))*a results in
-                               // {-5, 0, 0, 0} = -5*b
+  u = <b>householderVector</b>(a,b);
+    // {0.837, -0.478, -0.239, -0.119}
+    // Computation (identity(4) - 2*matrix(u)*transpose(matrix(u)))*a results in
+    // {-5, 0, 0, 0} = -5*b
+</pre></blockquote>
 
-
-</HTML>"));
+</html>"));
 end householderVector;

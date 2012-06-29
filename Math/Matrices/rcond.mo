@@ -22,16 +22,23 @@ algorithm
   end if;
 
   annotation (Documentation(info="<HTML>
-  <h4>Syntax</h4>
+<h4>Syntax</h4>
 <blockquote><pre>
-r = Matrices.<b>rcond</b>(A);
+        r = Matrices.<b>rcond</b>(A);
 (r, info) = Matrices.<b>rcond</b>(A, false);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
-This function estimates the reciprocal of the condition number (norm(A) * norm(inv(A))) of a general real matrix A, in either the 1-norm or the infinity-norm, using the LAPACK function DGECON.
+This function estimates the reciprocal of the condition number 
+(norm(<b>A</b>) * norm(inv(<b>A</b>))) of a general real matrix <b>A</b>, 
+in either the 1-norm or the infinity-norm, using the LAPACK function DGECON.
 </p>
 <p>
+See also
+<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">Matrices.conditionNumber</a>.
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
   A = [1, 2
@@ -42,9 +49,6 @@ This function estimates the reciprocal of the condition number (norm(A) * norm(i
 
   r = 0.3333
 </pre></blockquote>
-</p>
-<h4>See also</h4>
-<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">Matrices.conditionNumber</a>
 </HTML>", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
