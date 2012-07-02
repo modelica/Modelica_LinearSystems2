@@ -5,8 +5,8 @@ function diagram "Plot one diagram"
    input Modelica_LinearSystems2.Utilities.Plot.Records.Diagram diagram
     "Diagram to be shown" annotation(Dialog);
    input Modelica_LinearSystems2.Utilities.Plot.Records.Device device=
-      Records.Device() "Properties of device where figure is shown"
-                                                 annotation(Dialog);
+      Modelica_LinearSystems2.Utilities.Plot.Records.Device()
+    "Properties of device where figure is shown" annotation(Dialog);
 protected
   Real mmToPixel= device.windowResolution/25.4;
   Real position[4];
