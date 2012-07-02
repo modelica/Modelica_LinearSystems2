@@ -2499,10 +2499,10 @@ DiscreteStateSpace.Plot.<b>timeResponse</b>(
 <h4>Description</h4>
 <p>
 Function <b>timeResponse</b> plots the time response of a discrete state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.plotImpulse\">plotImpulse</a>,
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2585,8 +2585,8 @@ DiscreteStateSpace.Plot.<b>impulse</b>(
 <p>
 Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a> and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2667,8 +2667,8 @@ DiscreteStateSpace.Plot.<b>step</b>(
 <p>
 Function <b>step</b> plots the discrete step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a> and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2748,8 +2748,8 @@ DiscreteStateSpace.Plot.<b>ramp</b>(
 <p>
 Function <b>ramp</b> plots the ramp responses of a discrete state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, and
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initial\">initial</a>.
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a> and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2827,7 +2827,7 @@ DiscreteStateSpace.Plot.<b>initial</b>(
 <p>
 Function <b>initial</b> plots the initial responses of a discrete state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>, and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a> and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>.
 </p>
 

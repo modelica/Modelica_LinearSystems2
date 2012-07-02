@@ -5426,12 +5426,12 @@ StateSpace.Plot.<b>impulse</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>plotImpulse</b> plots the impulse responses of a state space system 
+This function plots the impulse responses of a state space system 
 for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. 
 See also
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>.
 </p>
 
 <h4>Example</h4>
