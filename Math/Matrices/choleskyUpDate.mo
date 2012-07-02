@@ -58,7 +58,7 @@ Lud = Matrices.Utilities.<b>choleskyUpDate</b>(L, v, true);
 
 <h4>Description</h4>
 <p>
-Function </b>choleskyUpDate(L, v)</b> computes the rank-1-updated Cholesky factorization <b>Lud</b>, with
+This function computes the rank-1-updated Cholesky factorization <b>Lud</b>, with
 </p>
 <blockquote>
   <b>Aud</b> = <b>Lud</b>*<b>Lud</b><sup><big>T</big></sup> = 

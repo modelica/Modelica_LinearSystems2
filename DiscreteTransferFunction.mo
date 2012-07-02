@@ -1012,7 +1012,7 @@ Transforms a discrete transfer function into discrete state space representation
 There are an infinite number of possible realizations.
 Here, the transfer function is transformed into
 controller canonical form, i.e. the transfer function
-<p>
+</p>
 <blockquote><pre>
      b4*z^4 + b3*z^3 + b2*z^2 + b1*z + b0
 y = -------------------------------------- * u

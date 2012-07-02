@@ -78,7 +78,7 @@ Ldd = Matrices.Utilities.<b>choleskyDownDate</b>(L, v, true);
 
 <h4>Description</h4>
 <p>
-Function </b>choleskyDownDate(L, v)</b> computes the rank-1-downdated 
+This function computes the rank-1-downdated 
 Cholesky factorization <b>Ldd</b>, with
 </p>
 <blockquote>

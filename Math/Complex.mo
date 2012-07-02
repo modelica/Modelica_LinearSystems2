@@ -368,7 +368,7 @@ Vectors.<b>reverse</b>(v);
 
 <h4>Description</h4>
 <p>
-The function call &QUOT;Vectors.<b>reverse</b>(v)&QUOT; returns the complex vector elements in reverse order.
+The function call &quot;Vectors.<b>reverse</b>(v)&quot; returns the complex vector elements in reverse order.
 </p>
 
 <h4>Example</h4>

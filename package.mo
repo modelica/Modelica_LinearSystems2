@@ -8,14 +8,15 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (2.2 Beta 1) - Analysis
 
 annotation (
   preferredView="info",
- uses(Modelica(version="3.2")),
-    version="2.2",
-    versionBuild=3,
-    versionDate="2010-11-03",
-    dateModified = "2010-10-26 09:27:58Z",
-    revisionID="$Id::                                       $",
-    conversion(noneFromVersion="2.0",
-               noneFromVersion="2.1"),
+  uses(Modelica(version="3.2")),
+  version="2.2",
+  versionBuild=3,
+  versionDate="2010-11-03",
+  dateModified = "2010-10-26 09:27:58Z",
+  revisionID="$Id::                                       $",
+  conversion(
+    noneFromVersion="2.0",
+    noneFromVersion="2.1"),
   Documentation(info="<html>
 <p>
 Library <b>Modelica_LinearSystems2</b> is a Modelica package
@@ -25,9 +26,10 @@ difference equation systems. For example, record
 defines a linear time invariant differential
 equation system in state space form:
 </p>
-<pre>   <b>der</b>(x) = A * x + B * u
-       y  = C * x + D * u
-</pre>
+<blockquote><pre>
+der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
+    <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>
+</pre></blockquote>
 <p>
 Operators are overloaded to work conveniently with these system descriptions in an
 interactive environment, e.g. to multiply transfer functions or to operate on complex numbers.
@@ -83,15 +85,15 @@ scripts are provided, but different library names are used.
 
 
 <p>
-<i>This Modelica package is <u>free</u> software and
+<em>This Modelica package is <u>free</u> software and
 the use is completely at <u>your own risk</u>;
 it can be redistributed and/or modified under the terms of the
 Modelica license 2, see the license conditions (including the
 disclaimer of warranty) in the
-<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ModelicaLicense2\">User's Guide</a></u>
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ModelicaLicense2\">User's Guide</a>
 or at
 <a href=\"http://www.Modelica.org/licenses/ModelicaLicense2\">
-http://www.Modelica.org/licenses/ModelicaLicense2</a>.</i>
+http://www.Modelica.org/licenses/ModelicaLicense2</a>.</em>
 </p>
 </html>"));
 end Modelica_LinearSystems2;

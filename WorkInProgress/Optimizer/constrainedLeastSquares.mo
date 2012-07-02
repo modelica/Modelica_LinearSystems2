@@ -406,7 +406,7 @@ The Fortran interface of DLSEI is defined as:
 ***REVISION HISTORY  (YYMMDD)
    790701  DATE WRITTEN
    890531  Changed all specific intrinsics to generic.  (WRB)
-   890618  Completely restructured and extensively revised (WRB & RWC)
+   890618  Completely restructured and extensively revised (WRB &amp; RWC)
    890831  REVISION DATE from Version 3.2
    891214  Prologue converted to Version 4.0 format.  (BAB)
    900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)

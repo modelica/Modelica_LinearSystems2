@@ -112,8 +112,6 @@ initial equation
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics),
     Documentation(info="<html>
-<p>
-</p>
 </html>
 "));
 end DiscreteInterpolator;

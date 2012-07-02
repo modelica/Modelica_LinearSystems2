@@ -2245,7 +2245,7 @@ not stable
 <br><table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td>  <td> contribution to states</td></tr>
 <tr>
- <td style=\"text-align:left\">     5/6 </td> <td style=\"text-align:left\"> &nbsp;    1.0299e+000 &plusmn;  6.5528e+000j </td> <td style=\"text-align:left\"> &nbsp;    1.0557 </td> <td style=\"text-align:left\">> &nbsp;   -0.1553 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[    5/6] contribute to x6 with 35.9 %<br>&nbsp;  z[    5/6] contribute to x2 with 20.6 % </td> </tr>
+ <td style=\"text-align:left\">     5/6 </td> <td style=\"text-align:left\"> &nbsp;    1.0299e+000 &plusmn;  6.5528e+000j </td> <td style=\"text-align:left\"> &nbsp;    1.0557 </td> <td style=\"text-align:left\"> &nbsp;   -0.1553 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[    5/6] contribute to x6 with 35.9 %<br>&nbsp;  z[    5/6] contribute to x2 with 20.6 % </td> </tr>
 </table>
 </p>
 <p>
@@ -2265,7 +2265,7 @@ listed in the last column might be not the most relevant one.
 <br>
 </p>
 <table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
-<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> state </td> <td> composition </td> <td> eigenvalue #</td> <td> freq. [Hz] </td> <td> damping </td>  </td> <td> T [s] </td></tr>
+<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> state </td> <td> composition </td> <td> eigenvalue #</td> <td> freq. [Hz] </td> <td> damping </td> <td> T [s] </td></tr>
 <tr>
  <td style=\"text-align:left\"> &nbsp; x1 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  42.5% by z[2] <br> &nbsp;  is composed of  35.4% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 2<br> &nbsp; 5/6 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    1.0557 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp;    0.0201<br> &nbsp; --- </td> </tr>
 <tr>
@@ -2291,7 +2291,6 @@ listed in the last column might be not the most relevant one.
  <td style=\"text-align:left\"> &nbsp;     3/4 </td> <td style=\"text-align:left\"> &nbsp;    3.2417e+000 &plusmn;  5.6548e+000j </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:left\"> &nbsp;    1.0374 </td> <td style=\"text-align:left\"> &nbsp;   -0.4973 </td> </tr>
 </table>
 </p>
-</body>
 </html>
 ", revisions="<html>
 <ul>
@@ -2498,10 +2497,10 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
 This function calculates the time responses of a state space system. The type of the time response is defined by the input <code>responseType</code>, i.e. 
 </p>
 <blockquote><pre>
-Impulse &QUOT;Impulse response&QUOT;,
-Step &QUOT;Step response&QUOT;,
-Ramp &QUOT;Ramp response&QUOT;,
-Initial &QUOT;Initial condition response&QUOT;
+Impulse &quot;Impulse response&quot;,
+Step &quot;Step response&quot;,
+Ramp &quot;Ramp response&quot;,
+Initial &quot;Initial condition response&quot;
 </pre></blockquote>
 <p>
 The state space system is transformed to a appropriate discrete state space system and, 
@@ -2632,16 +2631,19 @@ annotation(interactive=true, Documentation(info="<html>
 <p>
 Function <b>stepResponse</b> calculates the step response of a state space system.
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+</p>
 <blockquote><pre>
 StateSpace.Analysis.stepResponse(ss, dt, tSpan)
 </pre></blockquote>
+<p>
 gives the same result as
+</p>
 <blockquote><pre>
 StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Step, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
+<p>
 See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
 </p>
-
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -2663,8 +2665,6 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0952, 0.1813, 0.2592, 0.33}
 </pre></blockquote>
-
-
 </html> ", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
@@ -2700,13 +2700,17 @@ annotation(interactive=true, Documentation(info="<html>
 <p>
 Function <b>rampResponse</b> calculates the time response of a state space system for ramp imput u = t.
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+</p>
 <blockquote><pre>
 StateSpace.Analysis.rampResponse(ss, dt, tSpan)
 </pre></blockquote>
+<p>
 gives the same result as
+</p>
 <blockquote><pre>
 StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Ramp, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
+<p>
 See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
 </p>
 
@@ -2730,8 +2734,6 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.00484, 0.018734, 0.04082, 0.07032}
 </pre></blockquote>
-
-
 </html> ", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
@@ -2771,13 +2773,17 @@ annotation(interactive=true, Documentation(info="<html>
 <p>
 Function <b>initialResponse</b> calculates the time response of a state space system for given initial condition and zero inputs.
 The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+</p>
 <blockquote><pre>
 StateSpace.Analysis.initialResponse(x0,ss, dt, tSpan)
 </pre></blockquote>
+<p>
 gives the same result as
+</p>
 <blockquote><pre>
 StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Initial, x0=x0).
 </pre></blockquote>
+<p>
 See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
 </p>
 
@@ -2802,8 +2808,6 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={1, 0.9048, 0.8186, 0.7406, 0.6701}
 </pre></blockquote>
-
-
 </html> ", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
@@ -2940,7 +2944,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-result = StateSpace.Analysis.<b>evaluate</b>(ss)
+result = StateSpace.Analysis.<b>evaluate</b>(ss,s)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -3647,9 +3651,9 @@ Then, the unobservable poles are checked to be stable, i.e. to have negative rea
   end isDetectable;
 
   encapsulated function controllabilityMatrix
-      "Compute the controllability matrix [B, A*B, ..., A^(n-1)*B] of a state space system"
+      "Calculate the controllability matrix [B, A*B, ..., A^(n-1)*B] of a state space system"
 
-      import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.StateSpace;
 
     input StateSpace ss;
     output Real cm[size(ss.B, 1),size(ss.A, 2)*size(ss.B, 2)];
@@ -3683,7 +3687,7 @@ This function calculates the controllability matrix
   <b>Q</b> = [<b>B</b>, <b>A</b>*<b>B</b>, ..., <b>A</b>^(n-1)*<b>B</b>]
 </blockquote>
 <p>
-of the system
+of the system corresponding to state space system
 </p>
 <blockquote><pre>
 der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
@@ -3709,10 +3713,10 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
   end controllabilityMatrix;
 
   encapsulated function observabilityMatrix
-      "Compute the observability matrix of a state space system"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
+      "Calculate the observability matrix of a state space system"
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace;
 
     input StateSpace ss;
     output Real om[size(ss.A, 1)*size(ss.C, 1),size(ss.C, 2)];
@@ -6767,7 +6771,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
 </p>
 <h4>Example</h4>
 <blockquote><pre>
-  String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;;
+  String modelName = &quot;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&quot;;
   Real T_linearize = 5;
 
 <b>algorithm</b>
@@ -7853,8 +7857,6 @@ inputs and the number of outputs must be identical.
 </html>"));
   end isSISO;
 
-
-
  encapsulated function isControllableAndObservableSISO
       "To check whether a SISO system is controllable and observable"
 
@@ -8154,7 +8156,7 @@ it is transformed to upper observer Hessenberg form
 Note, that
 </p>
 <blockquote><pre>
-rank(<b>c'</b>; <b>c'*<b>A'</b>; ...; <b>c'</b>*A'</b><sup><big>(n-1)</big></sup>) = rank(<b>q</b>; <b>q</b>*<b>H</b>; ...; <b>q</b>*<b>H</b><sup><big>(n-1)</big></sup>)
+rank(<b>c'</b>; <b>c'</b>*<b>A'</b>; ...; <b>c'</b>*<b>A'</b><sup><big>(n-1)</big></sup>) = rank(<b>q</b>; <b>q</b>*<b>H</b>; ...; <b>q</b>*<b>H</b><sup><big>(n-1)</big></sup>)
 </pre></blockquote>
 <p>
 and that
@@ -8322,14 +8324,6 @@ The uncontrollable poles are checked to to stable.
 
 </html>"));
   end isStabilizableMIMO;
-
-
-
-
-
-
-
-
 
   encapsulated function numberOfPoles
       "Calculate the number of poles of the related transfer function"
@@ -9076,19 +9070,6 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
 
   end staircaseSVD;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   encapsulated function trianUpperHess
       "Triangulize an upper Hessenberg matrix by repeatedly applicated householder reflexion"
     import Modelica;
@@ -9166,13 +9147,6 @@ k = ---------- * ----------------------
 </pre></blockquote>
 </html>"));
   end trianUpperHess;
-
-
-
-
-
-
-
 
   encapsulated function transposeStateSpace
       "Return the transposed state space system"
@@ -9601,7 +9575,7 @@ ss = StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)
 
 <h4>Example</h4>
 <blockquote><pre>
-  String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;;
+  String modelName = &quot;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&quot;;
   Real T_linearize = 5;
 
 <b>algorithm</b>

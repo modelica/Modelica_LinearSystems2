@@ -3364,7 +3364,7 @@ algorithm
     method=method);
 
   annotation (interactive=true, Documentation(info="<html>
-<p><h4>Syntax</h4></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 dss = DiscreteStateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method)
 </pre></blockquote>
@@ -3379,7 +3379,7 @@ record and then converted into a discrete state space record.
 
 <h4>Example</h4>
 <blockquote><pre>
-  String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;;
+  String modelName = &quot;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&quot;;
   Real T_linearize = 5;
 
 <b>algorithm</b>

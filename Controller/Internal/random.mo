@@ -72,7 +72,7 @@ techniques used below is given in:
 <p>Some of the other references are quoted below.</p>
 <pre>
    WICHMANN-HILL RANDOM NUMBER GENERATOR
-   Wichmann, B. A. & Hill, I. D. (1982)
+   Wichmann, B. A. &amp; Hill, I. D. (1982)
      Algorithm AS 183:
      An efficient and portable pseudo-random number generator
      Applied Statistics 31 (1982) 188-190
@@ -96,7 +96,7 @@ techniques used below is given in:
 
 <h4>Reference Literature:</h4>
 <ul>
-<li>function random: Wichmann, B. A. & Hill, I. D. (1982), Algorithm AS 183:
+<li>function random: Wichmann, B. A. &amp; Hill, I. D. (1982), Algorithm AS 183:
   <br>
   An efficient and portable pseudo-random number generator, Applied Statistics 31 (1982) 188-190<br>
   see also: Correction to Algorithm AS 183, Applied Statistics 33 (1984) 123 <br>

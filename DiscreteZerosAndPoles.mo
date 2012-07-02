@@ -803,22 +803,17 @@ end '==';
     dzp.Ts := Ts;
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  q </td><td align=center> =  </td>  <td>DiscreteZerosAndPoles.<b>q</b>()  </td> </tr>
-
-</table>
-<h4>Description</h4>
-<p>
-Generate the complex Laplace variable q=exp(s*T) as a DiscreteZerosAndPoles transfer function. It can be used for generating like
 <blockquote><pre>
-        DiscreteZerosAndPoles dzp = q/(q^2 + q + 1)/(q + 1)
+q = DiscreteZerosAndPoles.<b>q</b>()
 </pre></blockquote>
 
+<h4>Description</h4>
+<p>
+Generate the complex Laplace variable q=exp(s*T) as a discrete zeros and poles transfer function. It can be used for generating like
 </p>
-
-
-
-
+<blockquote><pre>
+DiscreteZerosAndPoles dzp = q/(q^2 + q + 1)/(q + 1)
+</pre></blockquote>
 </html> "));
   end q;
 
@@ -2477,7 +2472,7 @@ transfer function representation.
 
 <h4>Example</h4>
 <blockquote><pre>
-  String modelName = &QUOT;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&QUOT;;
+  String modelName = &quot;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&quot;;
   Real T_linearize = 5;
   Modelica.SIunits.Time Ts=0.01;
 
