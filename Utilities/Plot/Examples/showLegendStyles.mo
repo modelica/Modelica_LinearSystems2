@@ -59,5 +59,17 @@ algorithm
     yTopLeft=0,
     diagramWidth=100));
 
-      annotation(interactive=true);
+      annotation(interactive=true, Documentation(info="<html>
+
+<p>
+This function plots the following diagram (with default input arguments):
+</p>
+
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showLegendStyles.png\">
+</blockquote>
+
+
+
+</html>"));
 end showLegendStyles;

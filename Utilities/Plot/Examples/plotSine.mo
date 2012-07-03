@@ -20,5 +20,14 @@ algorithm
     heading="Bearing friction torque",
     xLabel="w [rad/s]",
     yLabel="[N.m]"));
-    annotation(interactive=true);
+    annotation(interactive=true, Documentation(info="<html>
+<p>
+This function plots the following diagram (with default input arguments):
+</p>
+
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotSine.png\">
+</blockquote>
+
+</html>"));
 end plotSine;

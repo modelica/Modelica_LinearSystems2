@@ -80,5 +80,14 @@ For an overview, see the documentation of package
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot\">Modelica_LinearSystems2.Utilities.Plot</a>.
 </p>
 
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.plotTwoSineDifferentStyles\">Example</a>:
+</p>
+
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotTwoSineDifferentStyles.png\">
+</blockquote>
+
+
 </html>"));
 end diagram;

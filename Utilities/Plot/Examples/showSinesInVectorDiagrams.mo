@@ -21,7 +21,7 @@ protected
 algorithm
    (x1,y1) :=Utilities.dampedSine(freqHz1, damping1, nPeriod, nX);
    (x2,y2) :=Utilities.dampedSine(freqHz2, damping2, nPeriod, nX);
-   (x3,y3) :=Utilities.dampedSine(freqHz1, damping1, nPeriod, nSymbol);
+   (x3,y3) :=Utilities.dampedSine(freqHz1, 2*damping1, nPeriod, nSymbol);
 
   Modelica_LinearSystems2.Utilities.Plot.diagramVector({
     Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
@@ -31,7 +31,9 @@ algorithm
       legend="torque1"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
       x=x2,
       y=y2,
-      legend="torque2")},
+      legend="torque2",
+      autoLine=false,
+      lineColor={255,0,0})},
     heading="Bearing friction torques",
     yLabel="[N.m]"),Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
     curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
@@ -40,14 +42,27 @@ algorithm
       legend="torque3"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
       x=x2,
       y=1.2*y2,
-      legend="torque4"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
+      legend="torque4",
+      autoLine=false,
+     linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.Dot),Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
       x=x3,
       y=y3,
-      legend="torque4",
+      legend="torque5",
       autoLine=false,
       linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.None,
       lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.Circle)},
     xLabel="w [rad/s]",
     yLabel="[N.m]")});
-    annotation(interactive=true);
+    annotation(interactive=true, Documentation(info="<html>
+
+<p>
+This function plots the following diagram (with default input arguments):
+</p>
+
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showSinesInVectorDiagram.png\">
+</blockquote>
+
+
+</html>"));
 end showSinesInVectorDiagrams;
