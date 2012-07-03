@@ -2243,14 +2243,15 @@ not stable
 
 <p>
 <b>Conjugated complex pairs of eigenvalues</b>
-<br><table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
+<br>
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td>  <td> contribution to states</td></tr>
 <tr>
  <td style=\"text-align:left\">     5/6 </td> <td style=\"text-align:left\"> &nbsp;    1.0299e+000 &plusmn;  6.5528e+000j </td> <td style=\"text-align:left\"> &nbsp;    1.0557 </td> <td style=\"text-align:left\"> &nbsp;   -0.1553 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[    5/6] contribute to x6 with 35.9 %<br>&nbsp;  z[    5/6] contribute to x2 with 20.6 % </td> </tr>
 </table>
 </p>
 <p>
-In the tabel above, the column <b>contribution to states</b> lists for each eigenvalue the states 
+In the table above, the column <b>contribution to states</b> lists for each eigenvalue the states 
 to which thecorresponding modal state contributes most. This information is based on the
 two largest absolute values of the corresponding right eigenvector (if the second large value
 is less than 5 % of the largest contribution, it is not shown).
@@ -2264,7 +2265,6 @@ is less than 5 % of the largest contribution, it is not shown). This only holds
 if the modal states are in the same order of magnitude. Otherwise, the modal states
 listed in the last column might be not the most relevant one.
 <br>
-</p>
 <table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> state </td> <td> composition </td> <td> eigenvalue #</td> <td> freq. [Hz] </td> <td> damping </td> <td> T [s] </td></tr>
 <tr>
