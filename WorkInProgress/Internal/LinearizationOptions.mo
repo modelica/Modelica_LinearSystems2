@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Internal;
 record LinearizationOptions "Options for simulation setup for linearization"
-  Real t_linearize=1
+  Real t_linearize=0.0
     "Simulation stop time at which the linearization should be performed"                  annotation (Dialog(
       group="Simulation interval",
       label="Linearization time",
@@ -10,7 +10,7 @@ record LinearizationOptions "Options for simulation setup for linearization"
       group="Output",
       label="Interval length",
       absoluteWidth=15));
-  Integer numberOfIntervals=500
+  Integer numberOfIntervals=1
     "Number of intervals for output (if > 0 and Interval length == 0)"
     annotation (Dialog(
       group="Output",

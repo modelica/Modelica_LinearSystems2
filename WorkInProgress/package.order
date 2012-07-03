@@ -1,4 +1,5 @@
 plotRootLoci
+plotEigenvalues
 LinearSystems2Tests
 DiscreteZerosAndPoles
 DiscreteTransferFunction

@@ -105,7 +105,7 @@ algorithm
     sSpace:=Modelica_LinearSystems2.StateSpace.Internal.read_dslin(fileName);
 
     // Plot root loci
-    Modelica_LinearSystems2.Examples.StateSpace.plotEigenvalues(sSpace.A, if i == 1 then true else false, position, "Root loci of " + modelName + "; parVar: " + modelParams[1].parName, useLegend, String(parValue), grid, markerStyle, integer(color[i, :]));
+    Modelica_LinearSystems2.WorkInProgress.plotEigenvalues(     sSpace.A, if i == 1 then true else false, position, "Root loci of " + modelName + "; parVar: " + modelParams[1].parName, useLegend, String(parValue), grid, markerStyle, integer(color[i, :]));
   end for;
   annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>

@@ -2,15 +2,21 @@ within Modelica_LinearSystems2.Utilities.Import;
 function linearize "Linearize a model after simulation up to a given time"
   input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
   input Modelica.SIunits.Time t_linearize= 0
-    "Simulate until T_linearize and then linearize" annotation(Dialog);
-
+    "Simulate until t_linearize and then linearize" annotation(Dialog);
+  input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
+      Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
+    "Simulation options it t_linearize > 0" annotation(Dialog);
 protected
   String fileName="dslin";
   String fileName2=fileName+".mat";
 
   // Simulate until t_linearize and then linearize at this time instant
-  Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=t_linearize);
-  Boolean OK2 = importInitial("dsfinal.txt");
+  Boolean OK1 = if t_linearize <= 0.0 then true else
+                   simulateModel(problem=modelName, startTime=0, stopTime=t_linearize,
+                                 method=simulationSetup.method,
+                                 tolerance=simulationSetup.tolerance,
+                                 fixedstepsize=simulationSetup.fixedStepSize);
+  Boolean OK2 = if t_linearize <= 0.0 then true else importInitial("dsfinal.txt");
   Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
 
   // Read linear system from file
@@ -36,7 +42,7 @@ algorithm
    annotation (interactive=true, Documentation(info="<html>
 <p>
 This function initializes a Modelica model and then simulates the model 
-with its default experiment options until time instant \"t_linearize\". 
+until time instant \"t_linearize\". 
 If t_linearize=0, no simulation takes place (only initialization). 
 At the simulation stop time, the model is linearized in such a form that 
 </p>

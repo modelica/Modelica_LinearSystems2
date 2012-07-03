@@ -1,4 +1,4 @@
 within Modelica_LinearSystems2.WorkInProgress.StateSpace;
-package Internal
+package Internal 
 
 end Internal;

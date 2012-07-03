@@ -25,7 +25,6 @@ importFromModel
 plotPolesAndZeros
 plotBodeMIMO
 plotBodeSISO
-plotEigenvalues
 plotImpulse
 plotInital
 plotRamp
