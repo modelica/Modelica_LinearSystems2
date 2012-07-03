@@ -1442,9 +1442,9 @@ filterFunction = TransferFunction.Design.<b>filter</b>(analogFilter, filterType,
 
 <h4>Description</h4>
 <p>This function constructs a TransferFunction transfer function description 
-of low and high pass filters. Typical frequency responses for the 4 supported 
+of low and high pass filters. Typical frequency responses for the four supported 
 low pass filter types are shown in the next figure (this figure was generated 
-with function <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Examples.bodePlot_filter2\">TransferFunction.Examples.bodePlot_filter2</a>):
+with function <a href=\"modelica://Modelica_LinearSystems2.Examples.TransferFunction.plotBodeFilter2\">Examples.TransferFunction.plotBodeFilter2</a>):
 </p>
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4Filters.png\"/> </p>
 <p>
@@ -1461,7 +1461,7 @@ or a Bessel filter should be selected, if a filter is mainly used to make
 a non-linear inverse model realizable. 
 </p>
 <p>
-Typical frequency responses for the 4 supported high pass filter types are shown 
+Typical frequency responses for the four supported high pass filter types are shown 
 in the next figure:
 </p>
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4Filters.png\"/> </p>
@@ -1560,11 +1560,10 @@ TransferFunction.Plot.<b>polesAndZeros</b>(
 <h4>Description</h4>
 <p>
 This function plots a pole-zero-map of the poles and zeros of a transfer function.
-The Boolean inputs
-\"poles\" and \"zeros\" define what to plot. If Boolean input \"plot = true\", the pole-zero-map
-is plotted. If false, only the diagram is generated and returned as output argument.
-The records \"defaultDiagram\" and \"device\" allow to set various layout options and the
-size and location of the diagram on the screen.
+The Boolean inputs \"poles\" and \"zeros\" define what to plot. If Boolean input 
+\"plot = true\", the pole-zero-map is plotted. If false, only the diagram is generated 
+and returned as output argument. The records \"defaultDiagram\" and \"device\" allow 
+to set various layout options and the size and location of the diagram on the screen.
 </p>
 
 <h4>Example</h4>
@@ -1585,8 +1584,9 @@ Modelica_LinearSystems2.TransferFunction.Plot.polesAndZeros(
 <p>
 and results in
 </p>
-<blockquote><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/PolesAndZerosTF.png\"> </blockquote>
-
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/PolesAndZerosTF.png\">
+</blockquote>
 </html> "));
   end polesAndZeros;
 
@@ -1701,9 +1701,9 @@ and results in
       annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-TransferFunction.Plot.<b>plotBode</b>(tf)
+TransferFunction.Plot.<b>bode</b>(tf)
    or
-TransferFunction.Plot.<b>plotBode</b>(
+TransferFunction.Plot.<b>bode</b>(
   tf,
   nPoints,
   autoRange,
@@ -1717,7 +1717,7 @@ TransferFunction.Plot.<b>plotBode</b>(
 
 <h4>Description</h4>
 <p>
-Plots the bode-diagram of a transfer function.
+This function plots the bode-diagram of a transfer function.
 </p>
 
 <h4>Example</h4>
@@ -1804,7 +1804,8 @@ TransferFunction.Plot.<b>timeResponse</b>(
 </pre></blockquote>
 
 <h4>Description</h4>
-<p>Function <b>timeResponse</b> plots the time response of a transfer function. The character of the time response if defined by the input
+<p>
+This function plots the time response of a transfer function. The character of the time response if defined by the input
 <a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>,
@@ -1882,9 +1883,9 @@ TransferFunction.Plot.<b>impulse</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>impulse</b> plots the impulse response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
+This function plots the impulse response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>,
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a> and
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
 </p>
 
@@ -1952,9 +1953,9 @@ TransferFunction.Plot.<b>step</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>step</b> plots the step response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">step</a>,
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
+This function plots the step response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a> and
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
 </p>
 
@@ -2024,9 +2025,9 @@ TransferFunction.Plot.<b>ramp</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>ramp</b> plots the ramp response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">step</a>,
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">ramp</a>, and
+This function plots the ramp response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, and
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
 </p>
 
@@ -2106,10 +2107,10 @@ TransferFunction.Plot.<b>initialResponse</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>initialResponse</b> plots the initial response, i.e. the zeros input response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>,
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">initialResponse</a>.
+This function plots the initial response, i.e. the zeros input response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a> and
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>.
 </p>
 
 <h4>Example</h4>

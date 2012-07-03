@@ -592,16 +592,15 @@ encapsulated package Analysis
   function analysis
       "Perform a system analysis based on the poles and zeros of the system"
 
-      import Modelica;
-      import Modelica.Utilities.Strings;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Internal.Eigenvalue;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica_LinearSystems2.Internal;
-      import Modelica.Utilities.Streams.print;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
+    import Modelica;
+    import Modelica.Utilities.Strings;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.Internal.Eigenvalue;
+    import Modelica_LinearSystems2.Math.Complex;
+    import Modelica_LinearSystems2.Internal;
+    import Modelica.Utilities.Streams.print;
+    import Modelica_LinearSystems2.Utilities.Plot;
 
     input StateSpace ss;
 
@@ -4983,7 +4982,7 @@ encapsulated package Plot
 <blockquote><pre>
 StateSpace.Plot.<b>polesAndZeros</b>(ss);
    or
-diagram = StateSpace.Plot.<b>polesAndZeros</b>(
+StateSpace.Plot.<b>polesAndZeros</b>(
   ss,
   poles=true,
   zeros=true,
@@ -5100,9 +5099,9 @@ and results in
       annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-StateSpace.Plot.<b>plotBodeSISO</b>(ss)
+StateSpace.Plot.<b>bodeSISO</b>(ss)
    or
-StateSpace.Plot.<b>plotBodeSISO</b>(
+StateSpace.Plot.<b>bodeSISO</b>(
   ss,
   iu,
   iy,
@@ -5118,7 +5117,9 @@ StateSpace.Plot.<b>plotBodeSISO</b>(
 
 <h4>Description</h4>
 <p>
-Plots the bode-diagram of a transfer function corresponding to the behavior of the state space system from iu'th element of the input vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
+This function plots the bode-diagram of a transfer function corresponding 
+to the behavior of the state space system from iu'th element of the input 
+vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 </p>
 
 <h4>Example</h4>
@@ -5213,9 +5214,9 @@ Plots the bode-diagram of a transfer function corresponding to the behavior of t
       annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-StateSpace.Plot.<b>plotBodeMIMO</b>(ss)
+StateSpace.Plot.<b>bodeMIMO</b>(ss)
    or
-StateSpace.Plot.<b>plotBodeMIMO</b>(
+StateSpace.Plot.<b>bodeMIMO</b>(
   ss,
   nPoints,
   autoRange,
@@ -5338,36 +5339,38 @@ StateSpace.Plot.<b>plotBodeMIMO</b>(
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>timeResponse</b>(ss);
-or
-StateSpace.Plot.<b>timeResponse</b>(ss, dt, tSpan,response, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+   or
+StateSpace.Plot.<b>timeResponse</b>(
+  ss,
+  dt,
+  tSpan,
+  response,
+  x0,
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
-
 
 <h4>Description</h4>
 <p>
-Function <b>timeResponse</b> plots the time response of a state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.plotImpulse\">plotImpulse</a>,
+This function plots the time response of a state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
-
-
-
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a> and
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
-B=[1.0; 1.0; 0.0],
-C=[0.0,1.0,1.0],
-D=[0.0])
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+    B=[1.0; 1.0; 0.0],
+    C=[0.0,1.0,1.0],
+    D=[0.0])
 
-Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+  Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
 
 <b>algorithm</b>
-Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
+  Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
 // gives:
 </pre></blockquote>
 <blockquote>
@@ -5414,7 +5417,7 @@ Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>impulse</b>(ss);
-or
+   or
 StateSpace.Plot.<b>impulse</b>(
   ss,
   dt,
@@ -5430,7 +5433,7 @@ This function plots the impulse responses of a state space system
 for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. 
 See also
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a> and
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>.
 </p>
 
@@ -5491,35 +5494,34 @@ See also
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>step</b>(ss);
-or
-StateSpace.Plot.<b>step</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+   or
+StateSpace.Plot.<b>step</b>(
+  ss,
+  dt,
+  tSpan,
+  x0,
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>step</b> plots the step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
+This function plots the step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
-
-
-
-
-
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a> and
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
-B=[1.0; 1.0; 0.0],
-C=[0.0,1.0,1.0],
-D=[0.0])
-
-
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+    B=[1.0; 1.0; 0.0],
+    C=[0.0,1.0,1.0],
+    D=[0.0])
 
 <b>algorithm</b>
-Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
+  Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
 // gives:
 </pre></blockquote>
 <blockquote>
@@ -5566,33 +5568,34 @@ Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>ramp</b>(ss);
-or
-StateSpace.Plot.<b>ramp</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+   or
+StateSpace.Plot.<b>ramp</b>(
+  ss,
+  dt,
+  tSpan,
+  x0,
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>ramp</b> plots the ramp responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
+This function plots the ramp responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initial\">initial</a>.
-
-
-
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a> and
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
-B=[1.0; 1.0; 0.0],
-C=[1.0,1.0,1.0],
-D=[0.0])
-
-
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+    B=[1.0; 1.0; 0.0],
+    C=[1.0,1.0,1.0],
+    D=[0.0])
 
 <b>algorithm</b>
-Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
+  Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
 // gives:
 </pre></blockquote>
 <blockquote>
@@ -5639,35 +5642,36 @@ Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>initial</b>(ss);
-or
-StateSpace.Plot.<b>initial</b>(ss, dt, tSpan, x0, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+   or
+StateSpace.Plot.<b>initial</b>(
+  ss,
+  dt,
+  tSpan,
+  x0,
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>initial</b> plots the initial responses of a state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
+This function plots the initial responses of a state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a> and
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>.
-
-
-
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
-B=[1.0; 1.0; 0.0],
-C=[0.0,1.0,1.0],
-D=[0.0])
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1.0,0.0,0.0; 0.0,-2.0,3.0; 0.0,-2.0,-3.0],
+    B=[1.0; 1.0; 0.0],
+    C=[0.0,1.0,1.0],
+    D=[0.0])
 
-Real x0={1,0.5,0.5};
-
-
+  Real x0={1,0.5,0.5};
 
 <b>algorithm</b>
-Modelica_LinearSystems2.StateSpace.Plot.initial(ss, x0=x0)
+  Modelica_LinearSystems2.StateSpace.Plot.initial(ss, x0=x0)
 // gives:
 </pre></blockquote>
 

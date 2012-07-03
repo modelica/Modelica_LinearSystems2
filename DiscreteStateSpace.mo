@@ -2201,8 +2201,13 @@ with an appropriate partition according to <b>F</b>2. (<b>F</b>2, <b>G</b>2) has
 controllable.
 </p>
 <p>
-If the feedback matrix <b>K</b> is taken in a form <blockquote><pre> <b>K</b> = [0, <b>K</b>2]
-</pre></blockquote> the special structure of <b>F</b> and <b>K</b> results in a closed loop state
+If the feedback matrix <b>K</b> is taken in a form 
+</p>
+<blockquote><pre>
+<b>K</b> = [0, <b>K</b>2]
+</pre></blockquote>
+<p>
+the special structure of <b>F</b> and <b>K</b> results in a closed loop state
 matrix 
 </p>
 <blockquote><pre>
@@ -2328,8 +2333,9 @@ algorithm
   annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-DiscreteStateSpace.Plot.<b>plotBodeSISO</b>(dss)
-DiscreteStateSpace.Plot.<b>plotBodeSISO</b>(
+DiscreteStateSpace.Plot.<b>bodeSISO</b>(dss)
+   or
+DiscreteStateSpace.Plot.<b>bodeSISO</b>(
   dss,
   iu,
   iy,
@@ -2487,6 +2493,7 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>timeResponse</b>(dss);
+   or
 DiscreteStateSpace.Plot.<b>timeResponse</b>(
   dss,
   tSpan,
@@ -2498,10 +2505,10 @@ DiscreteStateSpace.Plot.<b>timeResponse</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>timeResponse</b> plots the time response of a discrete state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
+This function plots the time response of a discrete state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>, and
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a> and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>.
 </p>
 
@@ -2573,6 +2580,7 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>impulse</b>(dss);
+   or
 DiscreteStateSpace.Plot.<b>impulse</b>(
   dss,
   tSpan,
@@ -2583,7 +2591,7 @@ DiscreteStateSpace.Plot.<b>impulse</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>plotImpulse</b> plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+This function plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a> and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>.
@@ -2655,6 +2663,7 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>step</b>(dss);
+   or
 DiscreteStateSpace.Plot.<b>step</b>(
   dss,
   tSpan,
@@ -2665,7 +2674,7 @@ DiscreteStateSpace.Plot.<b>step</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>step</b> plots the discrete step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+This function plots the discrete step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a> and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>.
@@ -2736,6 +2745,7 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>ramp</b>(ss);
+   or
 DiscreteStateSpace.Plot.<b>ramp</b>(
   dss,
   tSpan,
@@ -2746,7 +2756,7 @@ DiscreteStateSpace.Plot.<b>ramp</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>ramp</b> plots the ramp responses of a discrete state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+This function plots the ramp responses of a discrete state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a> and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>.
@@ -2814,8 +2824,9 @@ algorithm
   annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-DiscreteStateSpace.Plot.<b>initial</b>(ss);
-DiscreteStateSpace.Plot.<b>initial</b>(
+DiscreteStateSpace.Plot.<b>initialResponse</b>(ss);
+   or
+DiscreteStateSpace.Plot.<b>initialResponse</b>(
   dss,
   tSpan,
   x0,
@@ -2825,7 +2836,7 @@ DiscreteStateSpace.Plot.<b>initial</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>initial</b> plots the initial responses of a discrete state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+This function plots the initial responses of a discrete state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a> and
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>.

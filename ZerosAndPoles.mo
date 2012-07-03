@@ -2421,7 +2421,7 @@ and results in
     annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-ZerosAndPoles.Plot.<b>plotBode</b>(zp)
+ZerosAndPoles.Plot.<b>bode</b>(zp)
    or
 ZerosAndPoles.Plot.<b>bode</b>(
   zp,
@@ -2437,16 +2437,16 @@ ZerosAndPoles.Plot.<b>bode</b>(
 
 <h4>Description</h4>
 <p>
-Plots the bode-diagram of a transfer function.
+This function plots the bode-diagram of a transfer function.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
-   Modelica_LinearSystems2.ZerosAndPoles zp =(p^2 + 5*p + 7)/(p + 2)/(p + 3);
+  ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();  
+  Modelica_LinearSystems2.ZerosAndPoles zp =(p^2 + 5*p + 7)/(p + 2)/(p + 3);
    
 <b>algorithm</b>
-   Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(zp)
+  Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(zp)
 //  gives:
 </pre></blockquote>
  
@@ -2522,8 +2522,8 @@ ZerosAndPoles.Plot.<b>timeResponse</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>timeResponse</b> plots the time response of a transfer function. The character of the time response if defined by the input 
-<a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>, <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>, <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>, and <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>. 
+This function plots the time response of a transfer function. The character of the time response if defined by the input 
+<a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>, <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>, <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a> and <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>. 
 </p>
 
 <h4>Example</h4>
@@ -2594,7 +2594,7 @@ ZerosAndPoles.Plot.<b>impulse</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>impulse</b> plots the impulse response of a zeros-and-poles transfer function. It is based on
+This function plots the impulse response of a zeros-and-poles transfer function. It is based on
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>, 
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>, and
@@ -2667,7 +2667,7 @@ ZerosAndPoles.Plot.<b>step</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>step</b> plots the step response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">step</a>, <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>, and <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
+This function plots the step response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>, <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a> and <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2734,9 +2734,9 @@ ZerosAndPoles.Plot.<b>ramp</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>ramp</b> plots the ramp response of a zeros-and-poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">step</a>, 
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">ramp</a>, and
+This function plots the ramp response of a zeros-and-poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a> and
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
 </p>
 
@@ -2813,10 +2813,10 @@ ZerosAndPoles.Plot.<b>initialResponse</b>(
 
 <h4>Description</h4>
 <p>
-Function <b>initialResponse</b> plots the initial response, i.e. the zeros input response of a zeros and poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.plotTimeResponse\">plotTimeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>, 
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">initialResponse</a>.
+This function plots the initial response, i.e. the zeros input response of a zeros and poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>, 
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>, and
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>.
 </p>
 
 <h4>Example</h4>
@@ -4025,7 +4025,6 @@ processing.
     "Collection of functions to import zeros-and-poles description"
     extends Modelica.Icons.Package;
     import Modelica;
-
 
     encapsulated function fromFile
       "Generate a ZerosAndPoles record by reading the polynomial coefficients or zeros and poles from a file"
@@ -5766,8 +5765,6 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
 </html>"));
     end checkRepresentation;
 
-
-
   encapsulated function filter
       "Generate the data record of a ZerosAndPoles transfer function from a filter description"
 
@@ -5988,9 +5985,9 @@ filterFunction = ZerosAndPoles.Internal<b>filter</b>(
 <p>
 This function constructs a ZerosAndPoles transfer function
 description of low and high pass filters.
-Typical frequency responses for the 4 supported low pass filter types
+Typical frequency responses for the four supported low pass filter types
 are shown in the next figure (this figure was generated with function
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Examples.bodePlot_filter2\">ZerosAndPoles.Examples.bodePlot_filter2</a>):
+<a href=\"modelica://Modelica_LinearSystems2.Examples.ZerosAndPoles.plotBodeFilter2\">Examples.ZerosAndPoles.plotBodeFilter2</a>):
 </p>
 <p align=\"center\">
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4Filters.png\">
@@ -6014,8 +6011,9 @@ realizable.
 </p>
 
 <p>
-Typical frequency responses for the 4 supported high pass filter types
-are shown in the next figure:
+Typical frequency responses for the four supported high pass filter types
+are shown in the next figure (generated with function
+<a href=\"modelica://Modelica_LinearSystems2.Examples.ZerosAndPoles.plotBodeFilter3\">Examples.ZerosAndPoles.plotBodeFilter3</a>):
 </p>
 <p align=\"center\">
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4Filters.png\">
@@ -7044,13 +7042,6 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
   end scaleFactor2;
 
-
-
-
-
-
-
-
     function secondOrderToString
       "Transform vector of coefficients of second order polynomials to a string representation"
       import Modelica_LinearSystems2.Math.Matrices;
@@ -7180,18 +7171,6 @@ function. The solver function is a direct mapping of the Algol 60 procedure
        end while;
     end if;
     end secondOrderToString;
-
-
-
-
-
-
-
-
-
-
-
-
 
   end Internal;
 
