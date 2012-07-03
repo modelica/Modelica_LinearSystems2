@@ -136,8 +136,7 @@ zp.d2 = fill(0,1,2);
       zp.uName := uName;
       zp.yName := yName;
 
-    annotation (Documentation(info="<html>
-<p>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = <b>fromPolesAndZeros</b>(z, p, k)
@@ -158,14 +157,14 @@ follow each other as above. An error occurs if this is not the case.
 
 <h4>Example</h4>
 <blockquote><pre>
-                         (s+1)
-  zp = 4 * -------------------------------------
-            (s - 1)*(s - (2+j*3))*(s - (2-j*3))
-</pre>
+                       (s+1)
+zp = 4 * -------------------------------------
+          (s - 1)*(s - (2+j*3))*(s - (2-j*3))
+</pre></blockquote>
 <p>
 with j=sqrt(-1), is defined as
 </p>
-<pre> 
+<blockquote><pre> 
   <b>import</b> Modelica_LinearSystems2.Math.Complex; 
   <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
    

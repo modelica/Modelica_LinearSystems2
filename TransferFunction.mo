@@ -453,20 +453,27 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
 
 <h4>Description</h4>
 <p>
-First, the transfer function representation is transformed into state space representation which is given to StateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e.
+First, the transfer function representation is transformed into state 
+space representation which is given to StateSpace.Analysis.timeResponse 
+and the time response of the state space system is calculated. The type 
+of the time response is defined by the input <b>responseType</b>, i.e.
+<p>
 <blockquote><pre>
-    Impulse \"Impulse response\",
-    Step \"Step response\",
-    Ramp \"Ramp response\",
-    Initial \"Initial condition response\"
+Impulse \"Impulse response\",
+Step \"Step response\",
+Ramp \"Ramp response\",
+Initial \"Initial condition response\"
 </pre></blockquote>
-The state space system is transformed to a appropriate discrete state space system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt.
+<p>
+The state space system is transformed to a appropriate discrete state space 
+system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and 
+x are calculated for each time step t=k*dt.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
+  TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+  Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
 
   Real Ts=0.1;
   Real tSpan= 0.4;
@@ -513,20 +520,27 @@ The state space system is transformed to a appropriate discrete state space syst
 
 <h4>Description</h4>
 <p>
-First, the transfer function representation is transformed into state space representation which is given to StateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e.
+First, the transfer function representation is transformed into state space 
+representation which is given to StateSpace.Analysis.timeResponse and the 
+time response of the state space system is calculated. The type of the time 
+response is defined by the input <b>responseType</b>, i.e.
+</p>
 <blockquote><pre>
     Impulse \"Impulse response\",
     Step \"Step response\",
     Ramp \"Ramp response\",
     Initial \"Initial condition response\"
 </pre></blockquote>
-The state space system is transformed to a appropriate discrete state space system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt.
+<p>
+The state space system is transformed to a appropriate discrete state space 
+system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y 
+and x are calculated for each time step t=k*dt.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
+  TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+  Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
 
   Real Ts=0.1;
   Real tSpan= 0.4;
@@ -573,21 +587,28 @@ The state space system is transformed to a appropriate discrete state space syst
 <h4>Description</h4>
 <p>
 Function <b>stepResponse</b> calculates the step response of a transfer function.
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+The state space system is transformed to a appropriate discrete state space 
+system and, starting at 
+<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
+the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+</p>
 <blockquote><pre>
 TransferFunction.Analysis.stepResponse(tf, dt, tSpan)
 </pre></blockquote>
+<p>
 gives the same result as
+</p>
 <blockquote><pre>
 TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Step, x0=fill(0,TransferFunction.Analysis.denominatorDegree(tf))).
 </pre></blockquote>
+<p>
 See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
+  TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+  Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
 
   Real Ts=0.1;
   Real tSpan= 0.4;
@@ -631,22 +652,29 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 
 <h4>Description</h4>
 <p>
-Function <b>rampResponse</b> calculates the time response of a transfer function for ramp imput u = t.
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+Function <b>rampResponse</b> calculates the time response of a transfer 
+function for ramp imput u = t. The state space system is transformed 
+to a appropriate discrete state space system and, starting at 
+<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
+the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+</p>
 <blockquote><pre>
 TransferFunction.Analysis.rampResponse(ss, dt, tSpan)
 </pre></blockquote>
+<p>
 gives the same result as
+</p>
 <blockquote><pre>
 TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Ramp, x0=fill(0,TransferFunction.Analysis.denominatorDegree(tf))).
 </pre></blockquote>
+<p>
 See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
+  TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+  Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
 
   Real Ts=0.1;
   Real tSpan= 0.4;
@@ -661,9 +689,6 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0002, 0.0012, 0.0042, 0.0096}
 </pre></blockquote>
-
-
-
 </html> "));
   end rampResponse;
 
@@ -695,22 +720,29 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 
 <h4>Description</h4>
 <p>
-Function <b>initialResponse</b> calculates the time response of a state space system for given initial condition and zero inputs.
-The state space system is transformed to a appropriate discrete state space system and, starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+This function calculates the time response of a state space system for 
+given initial condition and zero inputs. The state space system is transformed 
+to a appropriate discrete state space system and, starting at 
+<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
+the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
+</p>
 <blockquote><pre>
 TransferFunction.Analysis.initialResponse(x0,tf, dt, tSpan)
 </pre></blockquote>
+<p>
 gives the same result as
+</p>
 <blockquote><pre>
 TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Initial, x0=x0).
 </pre></blockquote>
+<p>
 See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
+  TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+  Modelica_LinearSystems2.TransferFunction tf=1/(s^2+s+1);
 
   Real Ts=0.1;
   Real tSpan= 0.4;
@@ -1435,13 +1467,14 @@ of a transfer function.
       filter := ZerosAndPoles.Conversion.toTransferFunction(zpFilter);
 
     annotation (Documentation(info="<html>
-<p><h4>Syntax</h4></p>
+<h4>Syntax</h4>
 <blockquote><pre>
 filterFunction = TransferFunction.Design.<b>filter</b>(analogFilter, filterType, order, f_cut, gain, A_ripple, normalized)
 </pre></blockquote>
 
 <h4>Description</h4>
-<p>This function constructs a TransferFunction transfer function description 
+<p>
+This function constructs a TransferFunction transfer function description 
 of low and high pass filters. Typical frequency responses for the four supported 
 low pass filter types are shown in the next figure (this figure was generated 
 with function <a href=\"modelica://Modelica_LinearSystems2.Examples.TransferFunction.plotBodeFilter2\">Examples.TransferFunction.plotBodeFilter2</a>):
@@ -1544,7 +1577,7 @@ algorithm
   algorithm
      StateSpace.Plot.polesAndZeros(StateSpace(tf), poles, zeros, defaultDiagram, device);
          annotation (interactive=true, Documentation(info="<html>
-<h4>Syntax</font></h4>
+<h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>polesAndZeros</b>(tf);
    or

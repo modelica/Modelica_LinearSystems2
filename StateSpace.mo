@@ -4303,7 +4303,12 @@ appropriate feedback matrix <b>K</b>i. The matrix <b>F</b> - <b>G</b>*<b>K</b>i 
 assigned eigenvalue(s) is (are) then moved to another diagonal position of the real Schur
 form using reordering techniques <b>F</b> &lt; -- <b>Q</b>i*<b>F</b>*<b>Q</b>i'  and a new block is transferred to the
 lower right diagonal position. The transformations are accumulated in <b>Q</b>i and are also
-applicated to the matrices <blockquote><pre> <b>G</b> &lt; - <b>Q</b>i*<b>G</b> <b>Q</b> &lt; - <b>Q</b>i*<b>Q</b> </pre></blockquote>
+applicated to the matrices 
+</p>
+<blockquote><pre>
+<b>G</b> &lt; - <b>Q</b>i*<b>G</b> <b>Q</b> &lt; - <b>Q</b>i*<b>Q</b>
+</pre></blockquote>
+<p>
 The eigenvalue(s) to be assigned at  each step is (are) chosen such that the norm of each <b>K</b>i is minimized [1].
 </p>
 

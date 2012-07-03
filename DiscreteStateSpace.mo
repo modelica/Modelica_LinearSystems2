@@ -63,6 +63,7 @@ record DiscreteStateSpace
 <h4>Syntax</h4>
 <blockquote><pre>
 dss = 'constructor'.<b>fromReal</b>(r)
+   or
 dss = 'constructor'.<b>fromReal</b>(r, Ts, method)
 </pre></blockquote>
 

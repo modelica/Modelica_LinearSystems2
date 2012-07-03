@@ -57,9 +57,6 @@ equation
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
             -100},{100,100}}), graphics), Documentation(info="<html>
-<p>
-</p>
-
 </html>"),
     experiment(StopTime=1.5, Tolerance=1e-006),
     experimentSetupOutput,
