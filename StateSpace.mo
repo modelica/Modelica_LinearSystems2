@@ -2084,9 +2084,9 @@ Modelica_LinearSystems2.StateSpace.Analysis.<b>analysis</b>(
 This function analyzes a state space system 
 </p>
 <blockquote><pre>
-    der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
-        <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>     <label for=\"eqn1\">(1)</label>
-        <b>x</b>(t=0) = <b>x</b><sub>0</sub>
+der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
+    <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>     <label for=\"eqn1\">(1)</label>
+    <b>x</b>(t=0) = <b>x</b><sub>0</sub>
 </pre></blockquote>
 <p>
 based on its poles, i.e. the eigenvalues, and the zeros of the system.
@@ -2189,8 +2189,8 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
 The system <b>Demonstation System</b>
 </p>
 <blockquote><pre>
-    der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
-        <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>
+der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
+    <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>
 </pre></blockquote>
 <p>
 is defined by
@@ -2298,90 +2298,6 @@ listed in the last column might be not the most relevant one.
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
 </ul>
-</html>"),      Documentation(info="<html>
-
-Function <b>Modelica_LinearSystems2.StateSpace.Analysis.analysis</b> analyzes a state space system <br>
-<pre>    der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
-                                <label for=\"eqn1\">(1)</label>
-        <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>
-        <b>x</b>(t=0) = <b>x</b><sub>0</sub>
-</pre>
-based on its poles, i.e. the eigenvalues, and the zeros of the system.
-The system will be checked for stability, controllability and observability. If the case that the system is not stable stabilizability and detectability are examined. Furthermore, stability, controllability, observability, stabilizability, and detectability are indicated for each pole.
-<br>
-
-Generally, The states of the system can be described as linear combination of modal states (see below) and, therefore, the states can be characterized to a certain extend by the
-modal states if the proportions of the combination are known. Hence, for each modal state z<sub>i</sub> of the vector <b>z</b> the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub>|$ of the corresponding right eigenvector <b>v</b><sub>i</sub> indicates the proportion of <b>z</b><sub>i</sub> that is contributed to the state x<sub>j</sub>.<br>
-On the other hand, the composition of xi is indicated by the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>|, i.e. the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>| of the corresponding row <b>v</b><sub>i</sub><sup>T</sup> of the eigenvector matrix <b>V</b> indicates the proportion of the state x<sub>i</sub> that is contributed by the modal state z<sub>j</sub>.
-
-<br><br>
-<b>Stability</b><br>
-
-System (1) is stable if and only if all eigenvalues of the matrix <b>A</b> have negative real parts.
-<br>
-The calculation of the eigenvalues and also of the eigenvalues uses LAPACK routine dgeev.
-<br><br>
-<b>Controllability</b><br>
-System (1) is said to be controllable if starting from any initial state <b>x</b>0, the system can be driven by appropriate inputs to any final state <b>x</b>1 within some finite time window. Equivalent is, that the eigenvalues of <b>A</b>-<b>BK</b> can be arbitrarily be assigned by an appropriate choice of matrix <b>K</b>.
-<br>
-<br>
-<b>Stabilizability</b><br>
-
-System (1) is said to be stabilizable if all the unstable eigenvalues, i.e. all &lambda with Re(&lambda)>=0, of <b>A</b> are controllable. Therefore, a controllable system is always stabilizable. An equivalent definition of stabilizability is, that a system is said to be stabilizable if there exist a matrix K such that A-BK is stable.
-<br>
-<br>
-<b>Observability</b><br>
-
-System (1) is said to be observable if the (arbitrary) initial state x0 can be uniquely determined from any sate x(t1), t1>0, from the knowledge of the input u(t) and output y(t). With other words,  from the system's outputs it is possible to determine the behaviour of the entire system. Equivalent is, that the eigenvalues of <b>A</b>-<b>LC</b> can be arbitrarily be assigned by an appropriate choice of matrix <b>L</b>.<br>
-Observability is called the dual concept of controllability, since a system (<b>A</b>,<b>B</b>,<b>C</b>,<b>D</b>) is observable if the system (<b>A</b><sup>T</sup>, <b>C</b><sup>T</sup>, <b>B</b><sup>T</sup>, <b>D</b><sup>T</sup>) is controllable.
-
-<br>
-<br>
-<b>Detectability</b><br>
-
-System (1) is said to be detectable if all the unstable eigenvalues, i.e. all &lambda with Re(&lambda)>=0, of <b>A</b> are observable. Therefore, a observable system is always detectable. An equivalent definition of detectability is, that a system is said to be detectable if there exist a matrix <b>L</b> such that <b>A</b>-<b>LC</b> is stable.
-Detectability is called the dual concept of stabilizability, since a system (<b>A</b>,<b>B</b>,<b>C</b>,<b>D</b>) is detectable if the system (<b>A</b><sup>T</sup>, <b>C</b><sup>T</sup>, <b>B</b><sup>T</sup>, <b>D</b><sup>T</sup>) is stabilizable.<br>
-<br>
-<b>Algorithm to test controllability/stabilizability and observability/detectability respectively</b> <br>
-
-The test of controllability and stabilizability is performed with the staircase algorithm which transforms the system (<b>A</b>,<b>B</b>,<b>C</b>,<b>D</b>) into the controller-Hessenberg form (<b>A</b><sub>H</sub>, <b>B</b><sub>H</sub>, <b>C</b>H, <b>D</b>) with <b>A</b>H is a block upper Hessenberg matrix and <b>B</b><sub>H</sub>=[<b>B</b>1; 0] with triangular matrix <b>B</b>1 with rank(<b>B</b>1) = rank(<b>B</b>).<br>
-In <b>A</b><sub>H</sub>=[<b>A</b>c, *,0, <b>A</b>nc) the eigenvalues of the matrices <b>A</b>c and <b>A</b>nc are the controllable eigenvalues and uncontrollable eigenvalues of <b>A</b> respectively.<br>
-The test of observability and detectability is performed by testing the system (<b>A</b><sup>T</sup>, <b>C</b><sup>T</sup>, <b>B</b><sup>T</sup>, <b>D</b><sup>T</sup>) with respect to controllability and stabilizability.<br>
-<br>
-<b>Solution of a linear time invariant system </b><br>
-
-The solution x(t) of the initial value problem (1) consists of the homogeneous part (zero input response) x<sub>h</sub>(t) and the inhomogeneous part x<sub>i</sub>(t). The zero input solution is given by
-<pre>
-<b>x</b><sub>h</sub>(t) = exp(<b>A</b>*(t-t<sub>0</sub>))<b>x</b><sub>0</sub>.
-</pre>
-The system can also be represented as a linear combination of the modal system, i.e. the solution a similar system
-<pre>
-<b>x</b> = <b>V</b><b>z</b>
-</pre>
-with
-<pre>
-der(z) = V-1AVz + V-1Bu
-</pre>
-and the real Jordan form  V-1AV. For single real eigenvectors is decoupled, i.e. the solution of the modal states are denoted ba
-<pre>
-z_i = exp(&lambda_i t)*z0i
-</pre>
-
-The behavior of the modal states is determined as the solution of a linear first order differential equation for real eigenvalues. Since this behavior is well known, the behavior of the xi can at least roughly be estimated by means of the behavior of the most relevant modal states. Therefore, the contribution of the modal states to the states is computed an .
-<br>
-
-<b>Contribution of the modal states to the states</b><br>
-Generally, as described above, the states of the system can be described as linear combination of modal states and, therefore, the states can be characterized to a certain extend by the
-modal states if the proportions of the combination are known. Hence, for each modal state z<sub>i</sub> of the vector <b>z</b> the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub>|$ of the corresponding right eigenvector <b>v</b><sub>i</sub> indicates the proportion of <b>z</b><sub>i</sub> that is contributed to the state x<sub>j</sub>.<br>
-On the other hand, the composition of xi is indicated by the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>|, i.e. the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>| of the corresponding row <b>v</b><sub>i</sub><sup>T</sup> of the eigenvector matrix <b>V</b> indicates the proportion of the state x<sub>i</sub> that is contributed by the modal state z<sub>j</sub>.
-
-
-
-<a href=\"file:ls2Docu2.pdf\">text.pdf</a>
-
-
-
-
 </html>"));
   end analysis;
 
