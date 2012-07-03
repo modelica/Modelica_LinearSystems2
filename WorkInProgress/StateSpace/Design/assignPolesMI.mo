@@ -422,7 +422,7 @@ retained and <b>F</b>3 contains the eigenvalues going to be modified. On the sug
 of [1] the eigenvalues <i>evr</i> to be retained are chosen as
 </p>
 <blockquote><pre>
-evr = {s in C: Re(s) &lt -alpha, alpha &gt =0}
+evr = {s in C: Re(s) &lt; -alpha, alpha &gt; =0}
 </pre> </blockquote>
 <p>
 but other specification are conceivable of course.<br>
@@ -442,7 +442,8 @@ controllable.
 <p>
 If the feedback matrix <b>K</b> is taken in a form 
 </p>
-<blockquote><pre> <b>K</b> = [0, <b>K</b>2]
+<blockquote><pre>
+<b>K</b> = [0, <b>K</b>2]
 </pre></blockquote>
 <p>
 the special structure of <b>F</b> and <b>K</b> results in a closed loop state
@@ -460,9 +461,14 @@ complex conjugated eigenvalues stepwise until all assigned eigenvalues are place
 Therefore, at each step i always the (two) lower right eigenvalue(s) are modified by an
 appropriate feedback matrix <b>K</b>i. The matrix <b>F</b> - <b>G</b>*<b>K</b>i remains in real Schur form. The
 assigned eigenvalue(s) is (are) then moved to another diagonal position of the real Schur
-form using reordering techniques <b>F</b> &lt -- <b>Q</b>i*<b>F</b>*<b>Q</b>i'  and a new block is transferred to the
+form using reordering techniques <b>F</b> &lt; -- <b>Q</b>i*<b>F</b>*<b>Q</b>i'  and a new block is transferred to the
 lower right diagonal position. The transformations are accumulated in <b>Q</b>i and are also
-applicated to the matrices <blockquote><pre> <b>G</b> &lt - <b>Q</b>i*<b>G</b> <b>Q</b> &lt - <b>Q</b>i*<b>Q</b> </pre></blockquote>
+applicated to the matrices
+</p>
+<blockquote><pre>
+<b>G</b> &lt; - <b>Q</b>i*<b>G</b> <b>Q</b> &lt; - <b>Q</b>i*<b>Q</b>
+</pre></blockquote>
+<p>
 The eigenvalue(s) to be assigned at  each step is (are) chosen such that the norm of each <b>K</b>i is minimized [1].
 </p>
 

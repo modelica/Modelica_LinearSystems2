@@ -25,20 +25,29 @@ algorithm
 <blockquote><pre>
 Matrices.<b>householderSimilarityTransformation</b>(A,u);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function computes the Housholder similarity transformation
 </p>
 <blockquote>
- <b>As</b> = <b>S</b>*<b>A</b>*<b>S</b>
+  <b>As</b> = <b>S</b>*<b>A</b>*<b>S</b>
 </blockquote>
+<p>
 with
+</p>
 <blockquote>
- <b>S</b> = <b>I</b> -2*<b>u</b>*<b>u</b>'/(<b>u</b>'*<b>u</b>).
+  <b>S</b> = <b>I</b> -2*<b>u</b>*<b>u</b>'/(<b>u</b>'*<b>u</b>).
 </blockquote>
 <p>
 This transformation is widely used for transforming non-symmetric matrices to a Hessenberg form.
 </p>
+
+<p>
+See also 
+<a href=\"modelica://Modelica.Math.Matrices.Utilities.householderReflection\">Matrices.housholderReflection</a>,
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
 // First step of Hessenberg decomposition
@@ -60,9 +69,5 @@ This transformation is widely used for transforming non-symmetric matrices to a 
            0.0,     0.8021,     -1.1656,   -1.0932]
 </pre></blockquote>
 
-<h4>See also</h4>
-<p>
-<a href=\"modelica://Modelica.Math.Matrices.housholderReflection\">Matrices.housholderReflection</a>,
-</p>
 </html>"));
 end householderSimilarityTransformation;

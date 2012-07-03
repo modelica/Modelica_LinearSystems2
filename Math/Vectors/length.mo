@@ -12,6 +12,7 @@ algorithm
 <blockquote><pre>
 Vectors.<b>length</b>(v);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 The function call \"<code>Vectors.<b>length</b>(v)</code>\" returns the
@@ -24,7 +25,7 @@ not the case with function norm(..).
 </p>
 <p>
 See also
-<a href=\"Modelica:Modelica_LinearSystems2.Math.Vectors.norm\">Vectors.norm</a>. </p>
+<a href=\"Modelica://Modelica.Math.Vectors.norm\">Vectors.norm</a>. </p>
 
 <h4>Example</h4>
 <blockquote><pre>

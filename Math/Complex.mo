@@ -181,38 +181,41 @@ Note, for any vector norm the following inequality holds:
        result :=v;
     end if;
     annotation (Documentation(info="<html>
-  <h4>Syntax</h4>
-  <blockquote><pre>
-  Vectors.<b>normalize</b>(v);
-  Vectors.<b>normalize</b>(v,eps=100*Modelica.Constants.eps);
-  </pre></blockquote>
-  <h4>Description</h4>
-  <p>
-  The function call \"<code>Vectors.<b>normalize</b>(v)</code>\" returns the
-  <b>unit vector</b> \"<code>v/length(v)</code>\" of vector v.
-  If length(v) is close to zero (more precisely, if length(v) &lt; eps),
-  v is returned in order to avoid
-  a division by zero. For many applications this is useful, because
-  often the unit vector <b>e</b> = <b>v</b>/length(<b>v</b>) is used to compute
-  a vector x*<b>e</b>, where the scalar x is in the order of length(<b>v</b>),
-  i.e., x*<b>e</b> is small, when length(<b>v</b>) is small and then
-  it is fine to replace <b>e</b> by <b>v</b> to avoid a division by zero.
-  </p>
-  <p>
-  Since the function is implemented in one statement,
-  it is usually inlined and therefore symbolic processing is
-  possible.
-  </p>
-  <p>
-  See also
-  <a href=\"Modelica:Modelica_LinearSystems2.Math.Vectors.length\">Vectors.length</a>.
-  </p>
-  <h4>Example</h4>
-  <blockquote><pre>
-    <b>normalize</b>({1,2,3});  // = {0.267, 0.534, 0.802}
-    <b>normalize</b>({0,0,0});  // = {0,0,0}
-  </pre></blockquote>
-  </html>"));
+<h4>Syntax</h4>
+<blockquote><pre>
+Vectors.<b>normalize</b>(v);
+   or
+Vectors.<b>normalize</b>(v,eps=100*Modelica.Constants.eps);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+The function call \"<code>Vectors.<b>normalize</b>(v)</code>\" returns the
+<b>unit vector</b> \"<code>v/length(v)</code>\" of vector v.
+If length(v) is close to zero (more precisely, if length(v) &lt; eps),
+v is returned in order to avoid
+a division by zero. For many applications this is useful, because
+often the unit vector <b>e</b> = <b>v</b>/length(<b>v</b>) is used to compute
+a vector x*<b>e</b>, where the scalar x is in the order of length(<b>v</b>),
+i.e., x*<b>e</b> is small, when length(<b>v</b>) is small and then
+it is fine to replace <b>e</b> by <b>v</b> to avoid a division by zero.
+</p>
+<p>
+Since the function is implemented in one statement,
+it is usually inlined and therefore symbolic processing is
+possible.
+</p>
+<p>
+See also
+<a href=\"modelica://Modelica_LinearSystems2.Math.Vectors.length\">Vectors.length</a>.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+  <b>normalize</b>({1,2,3});  // = {0.267, 0.534, 0.802}
+  <b>normalize</b>({0,0,0});  // = {0,0,0}
+</pre></blockquote>
+</html>"));
   end normalize;
 
   function sortComplex "Sort elements of complex vector"

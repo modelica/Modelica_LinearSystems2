@@ -82,7 +82,7 @@ Therefore, the matrices are defined by
 dss.A = fill(0,0,0);
 dss.B = fill(0,0,1);
 dss.C = fill(0,1,0);
-ss.D = [r];
+dss.D = [r];
 dss.B2 = fill(0,0,1);
 </pre></blockquote>
 <p>
@@ -679,9 +679,7 @@ dss3 := dss1 - dss2;
   end negate;
     annotation (Documentation(info="<html>
 <p>
-This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'subtract'</a> 
-and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'-'</a> 
-operator for discrete state space records.
+This package contains operators for subtraction of discrete state space records.
 </p>
 </html>"));
 end '-';
@@ -1138,26 +1136,27 @@ end '==';
     end for;
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.<b>timeResponse</b>(dss, u)  </td> </tr>
-<tr> <td align=right>  (y, xc) </td><td align=center> =  </td>  <td> DiscreteStateSpace.<b>timeResponse</b>(dss, u, x0)  </td> </tr>
+<blockquote><pre>
+    (y) = DiscreteStateSpace.<b>timeResponse</b>(dss, u)
+            or
+(y, xc) = DiscreteStateSpace.<b>timeResponse</b>(dss, u, x0)
+</pre></blockquote>
 
-</table>
 <h4>Description</h4>
 <p>
-Function DiscreteStateSpace.timeResponse calculates the time responses to input u of a discrete state space system.
+This function calculates the time responses to input u of a discrete state space system.
 Default of initial state <b>x0</b> is <b>x0</b>=<b>0</b>.
-
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   import dss=Modelica_LinearSystems2.DiscreteStateSpace;
-   import Modelica_LinearSystems2.StateSpace;
-   StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1],
-      B=[1],
-      C=[2],
-      D=[0]);
+  import dss=Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.StateSpace;
+  StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1],
+     B=[1],
+     C=[2],
+     D=[0]);
   Real Ts=0.1;
   dss=dss(ss,Ts);
   Real x0[1]={0};
@@ -1166,7 +1165,6 @@ Default of initial state <b>x0</b> is <b>x0</b>=<b>0</b>.
 
 //  y=[0.09524, 0.2766, 0.4408,..., 1.9844, 1.9859, 1.9872]
 </pre></blockquote>
-
 
 </html> ",  revisions="<html>
 <ul>
@@ -1205,25 +1203,27 @@ Default of initial state <b>x0</b> is <b>x0</b>=<b>0</b>.
     end for;
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  (y) </td><td align=center> =  </td>  <td> DiscreteStateSpace.<b>timeResponse</b>(dss, x0, samples)  </td> </tr>
-</table>
+<blockquote><pre>
+    (y) = DiscreteStateSpace.<b>initialResponse</b>(dss, x0, samples)
+            or
+(y, xc) = DiscreteStateSpace.<b>initialResponse</b>(dss, x0, samples)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function DiscreteStateSpace.initialResponse calculates the initial response to Default of initial state <b>x0</b> of a discrete state space system.
 Input <b>sample</b> is the number of samples. Sample time is the sample time of the discrete state space system.
-
-
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   import dss=Modelica_LinearSystems2.DiscreteStateSpace;
-   import Modelica_LinearSystems2.StateSpace;
-   StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1],
-      B=[1],
-      C=[2],
-      D=[0]);
+  import dss=Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.StateSpace;
+  StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1],
+    B=[1],
+    C=[2],
+    D=[0]);
   Real Ts=0.1;
   dss=dss(ss,Ts);
   Real x0[1]={1};

@@ -210,30 +210,42 @@ record DiscreteStateSpace
         dss.D[1, 1] := r;
         dss.Ts := Ts;
         dss.method := method;
-        annotation (overloadsConstructor=true, Documentation(info=
-                                                              "<html>
+        annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  ss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
+<blockquote><pre>
+dss = 'constructor'.<b>fromReal</b>(r)
+   or
+dss = 'constructor'.<b>fromReal</b>(r, Ts, method)
+</pre></blockquote>
 
-</table>
 <h4>Description</h4>
 <p>
-This function constructs a StateSpace record ss from a Real value, i.e. a state space system without a state and an output without dynamics:
+This function constructs a DiscreteStateSpace record dss from a Real value, 
+i.e. a discrete state space system without a state and an output without dynamics:
+</p>
 <blockquote><pre>
 y = r*u
 </pre></blockquote>
+<p>
 Therefore, the matrices are defined by
-<blockquote><pre>
-  ss.A = fill(0,0,0);
-  ss.B = fill(0,0,1);
-  ss.C = fill(0,1,0);
-  ss.D = [r];
-</pre></blockquote>
-
 </p>
-
-
+<blockquote><pre>
+dss.A = fill(0,0,0);
+dss.B = fill(0,0,1);
+dss.C = fill(0,1,0);
+dss.D = [r];
+dss.B2 = fill(0,0,1);
+</pre></blockquote>
+<p>
+The default values of sample time <b>Ts</b> and discretization method <b>method</b> are
+</p>
+<blockquote><pre>
+    Ts = 1
+method = Modelica_LinearSystems2.Types.Method.Trapezoidal
+</pre></blockquote>
+<p>
+respectively.
+</p>
 </html>"));
       end fromReal;
 
@@ -696,45 +708,38 @@ StateSpace.Plot.<b>plotBodeSISO</b>(ss)
    or
 StateSpace.Plot.<b>plotBodeSISO</b>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Plots the bode-diagram of a transfer function.
+</p>
+
 <h4>Description</h4>
 <p>
 Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corresponding to the behavior of the state space system from iu'th element of the input vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
-
-
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0],
-      B=[0.0,1.0; 1.0,1.0; -1.0,0.0],
-      C=[0.0,1.0,1.0; 1.0,1.0,1.0],
-      D=[1.0,0.0; 0.0,1.0])
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0],
+    B=[0.0,1.0; 1.0,1.0; -1.0,0.0],
+    C=[0.0,1.0,1.0; 1.0,1.0,1.0],
+    D=[1.0,0.0; 0.0,1.0])
 
-   Integer iu=1;
-   Integer iy=1;
-
+  Integer iu=1;
+  Integer iy=1;
 
 <b>algorithm</b>
-   Modelica_LinearSystems2.StateSpace.Plot.plotBodeSISO(ss, iu, iy)
+  Modelica_LinearSystems2.StateSpace.Plot.plotBodeSISO(ss, iu, iy)
 //  gives:
 </pre></blockquote>
 
-</p>
 <p>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
-</p>
-<p>
-</p>
-<p>
+<br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
 </p>
-<p>
-
-
 </html> "));
 end bodeSISO;
 

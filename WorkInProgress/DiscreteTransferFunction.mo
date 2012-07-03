@@ -256,22 +256,17 @@ algorithm
 
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right> z </td><td align=center> =  </td>  <td> DiscreteTransferFunction.<b>s</b>()  </td> </tr>
+<blockquote><pre>
+z = DiscreteTransferFunction.<b>s</b>()
+</pre></blockquote>
 
-</table>
 <h4>Description</h4>
 <p>
 Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can be used for generating like
-<blockquote><pre>
-        DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
-</pre></blockquote>
-
 </p>
-
-
-
-
+<blockquote><pre>
+DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
+</pre></blockquote>
 </html> "));
 end z;
 
@@ -407,38 +402,31 @@ algorithm
   annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-TransferFunction.Plot.<b>plotBode</b>(tf)
+TransferFunction.Plot.<b>plotBode</b>(dtf)
    or
-TransferFunction.Plot.<b>plotBode</b>(tf, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+TransferFunction.Plot.<b>plotBode</b>(dtf, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Plots the bode-diagram of a transfer function.
-
-
+This function plots the bode-diagram of a transfer function.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf =(s^2 + 5*s + 7)/(s^2 + 5*s + 6);
+  TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+  Modelica_LinearSystems2.TransferFunction tf =(s^2 + 5*s + 7)/(s^2 + 5*s + 6);
 
 <b>algorithm</b>
-   Modelica_LinearSystems2.TransferFunction.Plot.plotBode(tf)
+  Modelica_LinearSystems2.TransferFunction.Plot.plotBode(tf)
 //  gives:
 </pre></blockquote>
-
-</p>
 
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
-
 </blockquote>
-<p>
-
-
 </html> "));
 end bode;
 
@@ -518,30 +506,30 @@ algorithm
 <table>
 <tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.<b>toDiscreteZerosAndPoles</b>(tf)  </td> </tr>
 </table>
+
 <h4>Description</h4>
 <p>
 Computes a DiscreteZerosAndPoles record
- <blockquote><pre>
-                 product(z + n1[i]) * product(z^2 + n2[i,1]*z + n2[i,2])
-        zp = k*---------------------------------------------------------
-                product(z + d1[i]) * product(z^2 + d2[i,1]*z + d2[i,2])
-</pre></blockquote>of a discrete transfer function representated by numerator and denominator polynomial. The poles and zeros and the gain <tt>k</tt> are computed by
+</p>
+<blockquote><pre>
+          product(z + n1[i]) * product(z^2 + n2[i,1]*z + n2[i,2])
+zp = k * ---------------------------------------------------------
+          product(z + d1[i]) * product(z^2 + d2[i,1]*z + d2[i,2])
+</pre></blockquote>
+<p>
+of a discrete transfer function representated by numerator and denominator polynomial. The poles and zeros and the gain <tt>k</tt> are computed by
 (<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs the DiscreteZerosAndPoles constructor.
-
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
-   Modelica_LinearSystems2.TransferFunction tf = 1/(z^2 + 3*z +2)
-
+  DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
+  Modelica_LinearSystems2.TransferFunction tf = 1/(z^2 + 3*z +2)
 
 <b>algorithm</b>
   dzp:=Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles(dtf);
 //  zp = 1/( (z + 1)*(z + 2) )
 </pre></blockquote>
-
-
-
 </html>"));
 end toDiscreteZerosAndPoles;
 
@@ -593,50 +581,54 @@ end if;
 <table>
 <tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.toStateSpace<b>toDiscreteStateSpace</b>(dtf)  </td> </tr>
 </table>
+
 <h4>Description</h4>
 <p>
 Transforms a discrete transfer function into discrete state space representation.
 There are an infinite number of possible realizations.
 Here, the transfer function is transformed into
 controller canonical form, i.e. the transfer function
+</p>
 <blockquote><pre>
-       b4*z^4 + b3*z^3 + b2*z^2 + b1*z + b0
-  y = -------------------------------------- *u
-       a4*z^4 + a3*z^3 + a2*z^2 + a1*z + a0
+     b4*z^4 + b3*z^3 + b2*z^2 + b1*z + b0
+y = -------------------------------------- *u
+     a4*z^4 + a3*z^3 + a2*z^2 + a1*z + a0
 </pre></blockquote>
+<p>
 is transformed into:
 </p>
 <blockquote><pre>
-  <b>der</b>(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
-      <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
-     with
-             <b>A</b> = [   0  ,    1  ,    0  ,    0;
-                     0  ,    0  ,    1  ,    0:
-                     0  ,    0  ,    0  ,    1;
-                  -a0/a4, -a1/a4, -a2/a4, -a3/a4];
-
-             <b>B</b> = [  0;
-                    0;
-                    0;
-                   1/a4];
-             <b>C</b> = [b0-b4*a0/a4, b1-b4*a1/a4, b2-b4*a2/a4, b3-b4*a3/a4];
-             <b>D</b> = [b4/a4];
+<b>der</b>(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
+    <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
+   with
+           <b>A</b> = [   0  ,    1  ,    0  ,    0;
+                   0  ,    0  ,    1  ,    0:
+                   0  ,    0  ,    0  ,    1;
+                -a0/a4, -a1/a4, -a2/a4, -a3/a4];
+            <b>B</b> = [  0;
+                  0;
+                  0;
+                 1/a4];
+           <b>C</b> = [b0-b4*a0/a4, b1-b4*a1/a4, b2-b4*a2/a4, b3-b4*a3/a4];
+           <b>D</b> = [b4/a4];
 </pre></blockquote>
+<p>
 If the numerator polynomial is 1, then the state vector
 <b>x</b> is built up of the y(k) (the privious y) and of all the nx-1 predecessor
 (nx is the dimension of the state vector):
+</p>
 <blockquote><pre>
    <b>x</b>(k+1) = {y(k-n+1), y(k-n+2), ..., y(k)};
 </pre></blockquote>
+<p>
 Note, the state vector <b>x</b> of Modelica.Blocks.Continuous.TransferFunction
 is defined slightly differently.
-
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   TransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
-   Modelica_LinearSystems2.DiscreteTransferFunction dtf=(z+1)/(z^3 + z^2 + z +1);
+  TransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
+  Modelica_LinearSystems2.DiscreteTransferFunction dtf=(z+1)/(z^3 + z^2 + z +1);
 
 <b>algorithm</b>
   dss := Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace(dtf);

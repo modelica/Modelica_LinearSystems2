@@ -28,8 +28,9 @@ is singular, i.e., no unique solution exists.");
   annotation (Documentation(info="<HTML>
 <h4>Syntax</h4>
 <blockquote><pre>
-Matrices.<b>LU_solve</b>(LU, pivots, B);
+Matrices.<b>LU_solve2</b>(LU, pivots, B);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function call returns the
@@ -47,7 +48,7 @@ defined by vector <code>pivots</code>),
 diagonal elements (lower trapezoidal if m &gt; n), and
 <b>U</b> is an upper triangular matrix (upper trapezoidal if m &lt; n).
 The matrices of this decomposition are computed with function
-<a href=\"Modelica:Modelica.Math.Matrices.LU\">Matrices.LU</a> that
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a> that
 returns arguments <code>LU</code> and <code>pivots</code>
 used as input arguments of <code>Matrices.LU_solve</code>.
 With <code>Matrices.LU</code> and <code>Matrices.LU_solve</code>
@@ -55,7 +56,7 @@ it is possible to efficiently solve linear systems
 with different right hand side <b>matrices</b>. If a linear system of equations with
 just one right hand side matrix shall be solved, it is
 more convenient to just use the function
-<a href=\"Modelica:Modelica.Math.Matrices.solve2\">Matrices.solve2</a>.
+<a href=\"modelica://Modelica.Math.Matrices.solve2\">Matrices.solve2</a>.
 </p>
 <p>
 If a unique solution <b>X</b> does not exist (since the
@@ -70,8 +71,8 @@ pivot indices, i.e., for 1 &le; i &le; min(m,n), row i of
 matrix A was interchanged with row pivots[i].
 </p>
 <p>See also
-<a href=\"Modelica:Modelica.Math.Matrices.LU\">Matrices.LU</a>,
-<a href=\"Modelica:Modelica.Math.Matrices.solve2\">Matrices.solve2</a>.</p>
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
+<a href=\"modelica://Modelica.Math.Matrices.solve2\">Matrices.solve2</a>.</p>
 
 <h4>Example</h4>
 <blockquote><pre>

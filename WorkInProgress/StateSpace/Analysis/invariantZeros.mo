@@ -80,49 +80,47 @@ algorithm
   end if;
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  zeros </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>invariantZeros</b>(ss)  </td> </tr>
-</table>
+<blockquote><pre>
+zeros = StateSpace.Analysis.<b>invariantZeros</b>(ss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Computes the invariant zeros of a system in state space form:
 </p>
-<pre>
-   der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>
-        <b>y</b> = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>
-</pre>
+<blockquote><pre>
+der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>
+    <b>y</b> = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>
+</pre></blockquote>
 <p>
 The invariant zeros of this system are defined as the variables
 s  that make the Rosenbrock matrix of the system
 </p>
-<pre>
-    | s<b>I-A</b>   <b>-B</b> |
-    |           |
-    | <b>C</b>       <b>D</b> |
-
-</pre>
+<blockquote><pre>
+| s<b>I-A</b>   <b>-B</b> |
+|           |
+| <b>C</b>       <b>D</b> |
+</pre></blockquote>
+<p>
 singular.
+</p>
 <p>
 This function applies the algorithm described in [1] where the system (<b>A</b>, <b>B</b>, <b>C</b>, <b>D</b>) is reduced to a new system (<b>A</b>r, <b>B</b>r <b>C</b>r, <b>D</b>r) with the same zeros and with <b>D</b>r of full rank.
 </p>
 
-
-</p>
-
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[1, 1, 1;0, 1, 1;0,0,1],
-      B=[1;0;1],
-      C=[0,1,1],
-      D=[0]);
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[1, 1, 1;0, 1, 1;0,0,1],
+    B=[1;0;1],
+    C=[0,1,1],
+    D=[0]);
 
-   Complex zeros[:];
+  Complex zeros[:];
 
 <b>algorithm</b>
   zeros := Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros(ss);
 // zeros = {1, 0}
-
 </pre></blockquote>
 
 <h4><a name=\"References\">References</a></h4>

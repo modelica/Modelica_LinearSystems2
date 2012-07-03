@@ -170,6 +170,7 @@ record DiscreteTransferFunction
   end 'constructor';
 
   encapsulated operator '*'
+    "Contains operators for multiplication of discrete transfer functions"
     import Modelica;
     extends Modelica.Icons.Package;
 
@@ -218,7 +219,7 @@ record DiscreteTransferFunction
       result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.n),Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
 
       annotation (Documentation(info="<html>
-<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'*'.'dtf*dtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;*&apos;.&apos;dtf*dtf&apos;</a> instead.</p>
+<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'Multiplication'.'dtfMultiplicationdtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;*&apos;.&apos;dtf*dtf&apos;</a> instead.</p>
 </html>"));
     end 'dft*dft';
 
@@ -238,15 +239,16 @@ record DiscreteTransferFunction
       result.n := r*dtf.n;
 
       annotation (Documentation(info="<html>
-<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'*'.'r*dtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;*&apos;.&apos;r*dtf&apos;</a> instead.</p>
+<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'Multiplication'.'rMultiplicationdtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;*&apos;.&apos;r*dtf&apos;</a> instead.</p>
 </html>"));
     end 'r*dft';
     annotation (Documentation(info="<html>
-<p>This package contains multiplication operators for discrete fransfer function records. </p>
+<p>This package contains operators for multiplication of discrete fransfer function records. </p>
 </html>"));
   end '*';
 
   encapsulated operator '-'
+    "Contains operators for subtraction of discrete transfer functions"
     import Modelica;
     extends Modelica.Icons.Package;
 
@@ -280,11 +282,12 @@ record DiscreteTransferFunction
     algorithm
     end negate;
     annotation (Documentation(info="<html>
-<p>This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'-'.negate\">negate</a> operator for discrete fransfer function records. </p>
+<p>This package contains operators for subtraction of discrete fransfer function records. </p>
 </html>"));
   end '-';
 
   encapsulated operator '/'
+    "Contains operators for division of discrete transfer functions"
     import Modelica;
     extends Modelica.Icons.Package;
 
@@ -335,7 +338,7 @@ record DiscreteTransferFunction
       result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.d),Polynomial(dtf1.d)*
         Polynomial(dtf2.n),Ts=dtf1.Ts, method=dtf1.method);
       annotation (Documentation(info="<html>
-<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'/'.'dtf/dtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;/&apos;.&apos;dtf/dtf&apos;</a> instead.</p>
+<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'Division'.'dtfDivisiondtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;/&apos;.&apos;dtf/dtf&apos;</a> instead.</p>
 </html>"));
     end 'dft/dft';
 
@@ -354,12 +357,16 @@ record DiscreteTransferFunction
     algorithm
       result := DiscreteTransferFunction(r*dtf.d,dtf.n,Ts=dtf.Ts, method=dtf.method);
       annotation (Documentation(info="<html>
-<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'/'.'r/dtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;/&apos;.&apos;r/dtf&apos;</a> instead.</p>
+<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'Division'.'rDivisiondtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;/&apos;.&apos;r/dtf&apos;</a> instead.</p>
 </html>"));
     end 'r/dft';
+    annotation (Documentation(info="<html>
+<p>This package contains operators for division of discrete fransfer function records. </p>
+</html>"));
   end '/';
 
   encapsulated operator '+'
+    "Contains operators for addition of discrete transfer functions"
     import Modelica;
     extends Modelica.Icons.Package;
   function 'dtf+dtf'
@@ -392,6 +399,9 @@ record DiscreteTransferFunction
 
     result := dtf+dtfr;
   end 'dtf+r';
+    annotation (Documentation(info="<html>
+<p>This package contains operators for addition of discrete fransfer function records. </p>
+</html>"));
   end '+';
 
   encapsulated operator function '^'

@@ -28,6 +28,7 @@ is singular, i.e., no unique solution exists.");
 <blockquote><pre>
 Matrices.<b>LU_solve</b>(LU, pivots, b);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function call returns the

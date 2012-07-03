@@ -163,7 +163,7 @@ follow each other as above. An error occurs if this is not the case.
     algorithm
     end negate;
     annotation (Documentation(info="<html>
-<p>This package contains the <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.'-'.negate\">negate</a> operator for transfer function records. </p>
+<p>This package contains operators for subtraction of transfer function records. </p>
 </html>"));
   end '-';
 
@@ -460,12 +460,12 @@ First, the transfer function representation is transformed into state
 space representation which is given to StateSpace.Analysis.timeResponse 
 and the time response of the state space system is calculated. The type 
 of the time response is defined by the input <b>responseType</b>, i.e.
-<p>
+</p>
 <blockquote><pre>
-Impulse \"Impulse response\",
-Step \"Step response\",
-Ramp \"Ramp response\",
-Initial \"Initial condition response\"
+Impulse &quot;Impulse response&quot;,
+Step &quot;Step response&quot;,
+Ramp &quot;Ramp response&quot;,
+Initial &quot;Initial condition response&quot;.
 </pre></blockquote>
 <p>
 The state space system is transformed to a appropriate discrete state space 

@@ -337,7 +337,7 @@ encapsulated operator '-'
   algorithm
   end negate;
     annotation (Documentation(info="<html>
-<p>This package contains the <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.'-'.negate\">negate</a> operator for state space records. </p>
+<p>This package contains operators for subtraction of state space records. </p>
 </html>"));
 end '-';
 

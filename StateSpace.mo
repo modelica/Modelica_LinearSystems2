@@ -229,7 +229,7 @@ ss3 := ss1 - ss2;
   end negate;
     annotation (Documentation(info="<html>
 <p>
-This package contains the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.negate\">negate</a> operator for state space records.
+This package contains operators for subtraction of state space records.
 </p>
 </html>"));
 end '-';
@@ -5785,12 +5785,12 @@ tf = StateSpace.Conversion.<b>toTransferFunction</b>(ss)
 Computes a TransferFunction record
 </p>
 <blockquote><pre>
-        n(s)     b0 + b1*s + ... + bn*s^n
-tf = -------- = --------------------------
-        d(s)     a0 + a1*s + ... + an*s^n
+      n(s)     b0 + b1*s + ... + bn*s^n
+tf = ------ = --------------------------
+      d(s)     a0 + a1*s + ... + an*s^n
 </pre></blockquote>
 <p>
-The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles\">toZerosAndPoles</a> to convert the state space system into a zeros and poles representation first and after that <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction\">ZerosAndPoles.Conversion.toTransferFunction</a> to generate the transfer function.
+The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles\">StateSpace.Conversion.toZerosAndPoles</a> to convert the state space system into a zeros and poles representation first and after that <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction\">ZerosAndPoles.Conversion.toTransferFunction</a> to generate the transfer function.
 </p>
 
 <h4>Example</h4>

@@ -54,19 +54,18 @@ encapsulated operator 'constructor'
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center>=</td>  <td> 'constructor'.<b>fromABCDMatrices</b>(A, B, C, D)  </td> </tr>
-
 </table>
+
 <h4>Description</h4>
 <p>
 This function constructs a StateSpace record ss with<br>
-<blockquote><pre>
-  ss.A = A;
-  ss.B = B;
-  ss.C = C;
-  ss.D = D;
-</pre></blockquote>
-
 </p>
+<blockquote><pre>
+ss.A = A;
+ss.B = B;
+ss.C = C;
+ss.D = D;
+</pre></blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -108,24 +107,24 @@ public
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  ss </td><td align=center>=</td>  <td> 'constructor'.<b>fromReal</b>(r)  </td> </tr>
-
 </table>
+
 <h4>Description</h4>
 <p>
 This function constructs a StateSpace record ss from a Real value, i.e. a state space system without a state and an output without dynamics:
+</p>
 <blockquote><pre>
 y = r*u
 </pre></blockquote>
+<p>
 Therefore, the matrices are defined by
-<blockquote><pre>
-  ss.A = fill(0,0,0);
-  ss.B = fill(0,0,1);
-  ss.C = fill(0,1,0);
-  ss.D = [r];
-</pre></blockquote>
-
 </p>
-
+<blockquote><pre>
+ss.A = fill(0,0,0);
+ss.B = fill(0,0,1);
+ss.C = fill(0,1,0);
+ss.D = [r];
+</pre></blockquote>
 
 </html>"));
   end fromReal;
@@ -178,22 +177,24 @@ encapsulated operator '-'
 <table>
 <tr> <td align=right>  ss </td><td align=center> =  </td>  <td> Modelica_LinearSystems2.StateSpace.'-'.<b>subtract</b>(ss1, ss2)  </td> </tr>
 </table>
+
 <h4>Description</h4>
 <p>
-This operator function computes the subtraction of two state space systems connected in parallel, i.e. the inputs are the same and the outputs of the two systems are subtracted. Therefore, The systems must have the same number of inputs and outputs but not the same number of states. The resulting system has an order of system_order1 + system_order2.<br>
-The operator is used by writing just the following command:
-<blockquote><pre>
-    ss3 := ss1 - ss2;
-</pre></blockquote>
-
+This operator function computes the subtraction of two state space systems connected in parallel, i.e. the inputs are the same and the outputs of the two systems are subtracted. Therefore, The systems must have the same number of inputs and outputs but not the same number of states. The resulting system has an order of system_order1 + system_order2.
 </p>
+<p>
+The operator is used by writing just the following command:
+</p>
+<blockquote><pre>
+ss3 := ss1 - ss2;
+</pre></blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
-   StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
-   StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
+  StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
+  StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
 
-   StateSpace ss3;
+  StateSpace ss3;
 
 <b>algorithm</b>
   ss3 := ss1 - ss2;

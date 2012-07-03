@@ -21,31 +21,34 @@ algorithm
 
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunction</b>(ss)  </td> </tr>
-</table>
+<blockquote><pre>
+tf = StateSpace.Conversion.<b>toTransferFunction</b>(ss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Computes a TransferFunction record
+</p>
 <blockquote><pre>
-           n(s)     b0 + b1*s + ... + bn*s^n
-   tf = -------- = --------------------------
-           d(s)     a0 + a1*s + ... + an*s^n
+      n(s)     b0 + b1*s + ... + bn*s^n
+tf = ------ = --------------------------
+      d(s)     a0 + a1*s + ... + an*s^n
  </pre></blockquote>
-
-The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles\">toZerosAndPoles</a> to convert the state space system into a zeros and poles representation first and after that href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction\">ZerosAndPoles.Conversion.toTransferFunction</a> to generate the transfer function.
+<p>
+The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles\">StateSpace.Conversion.toZerosAndPoles</a> to convert the state space system into a zeros and poles representation first and after that <a  href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction\">ZerosAndPoles.Conversion.toTransferFunction</a> to generate the transfer function.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A = [-1.0, 0.0, 0.0;
-            0.0,-2.0, 0.0;
-            0.0, 0.0,-3.0],
-      B = [1.0;
-           1.0;
-           0.0],
-      C = [1.0,1.0,1.0],
-      D = [0.0]);
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A = [-1.0, 0.0, 0.0;
+          0.0,-2.0, 0.0;
+          0.0, 0.0,-3.0],
+    B = [1.0;
+         1.0;
+         0.0],
+    C = [1.0,1.0,1.0],
+    D = [0.0]);
 
 <b>algorithm</b>
   tf:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
@@ -53,10 +56,6 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
 //   tf =  -----------------
              s^2 + 3*s + 2
 </pre></blockquote>
-
-
-
-
 </html> ",
          revisions="<html>
 <ul>

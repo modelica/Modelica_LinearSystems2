@@ -24,22 +24,32 @@ algorithm
 <blockquote><pre>
 Matrices.<b>householderReflection</b>(A,u);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function computes the Housholder reflection (transformation)
 </p>
 <blockquote>
- <b>Ar</b> = <b>Q</b>*<b>A</b>
+  <b>Ar</b> = <b>Q</b>*<b>A</b>
 </blockquote>
+<p>
 with
+</p>
 <blockquote>
- <b>Q</b> = <b>I</b> -2*<b>u</b>*<b>u</b>'/(<b>u</b>'*<b>u</b>)
+  <b>Q</b> = <b>I</b> -2*<b>u</b>*<b>u</b>'/(<b>u</b>'*<b>u</b>)
 </blockquote>
 <p>
 where <b>u</b>*<b>u</b> is housholder vector, i.e. the normal vector of the reflection plane.
+</p>
 <p>
 Householder reflection is widely used in numerical linear algebra, e.g. to perform QR decompositions.
 </p>
+
+<p>
+See also
+<a href=\"modelica://Modelica.Math.Matrices.Utilities.householderSimilarityTransformation\">Matrices.housholderSimilarityTransformation</a>.
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
 // First step of QR decomposition
@@ -59,10 +69,5 @@ Householder reflection is widely used in numerical linear algebra, e.g. to perfo
  //        0.0,       2.0,       0.0]
 
 </pre></blockquote>
-
-<h4>See also</h4>
-<p>
-<a href=\"modelica://Modelica.Math.Matrices.housholderSimilarityTransformation\">Matrices.housholderSimilarityTransformation</a>,
-</p>
 </html>"));
 end householderReflexion;

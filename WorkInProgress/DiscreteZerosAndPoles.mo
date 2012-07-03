@@ -623,22 +623,17 @@ end '==';
     dzp.n1[1] := 0;
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  q </td><td align=center> =  </td>  <td>DiscreteZerosAndPoles.<b>q</b>()  </td> </tr>
+<blockquote><pre>
+q = DiscreteZerosAndPoles.<b>q</b>()
+</pre></blockquote>
 
-</table>
 <h4>Description</h4>
 <p>
 Generate the complex Laplace variable q=rxp(s*T) as a DiscreteZerosAndPoles transfer function. It can be used for generating like
-<blockquote><pre>
-        DiscreteZerosAndPoles dzp = q/(q^2 + q + 1)/(q + 1)
-</pre></blockquote>
-
 </p>
-
-
-
-
+<blockquote><pre>
+DiscreteZerosAndPoles dzp = q/(q^2 + q + 1)/(q + 1)
+</pre></blockquote>
 </html> "));
   end q;
 
@@ -1060,6 +1055,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
 <table>
 <tr> <td align=right>  ss </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
 </table>
+
 <h4>Description</h4>
 <p>
 This function transforms a zeros-poles-gain system representation into state space representation.
@@ -1070,12 +1066,14 @@ canonical form and scaled such that the gain from the input
 of this block to its output is one (i.e. y(p=0) = u(p=0)),
 if this is possible. Details are given below.
 </p>
-<b>Algorithmic details</b>
+
+<h4>Algorithmic details</h4>
 <p>
 The ZerosAndPoles transfer function is defined as:
+</p>
 <blockquote><pre>
          product(p + n1[i]) * product(p^2 + n2[i,1]*p + n2[i,2])
-  y = k*--------------------------------------------------------- * u
+y = k * --------------------------------------------------------- * u
          product(p + d1[i]) * product(p^2 + d2[i,1]*p + d2[i,2])
 </pre></blockquote>
 <p>
@@ -1084,7 +1082,6 @@ systems. If size(n1) == size(d1) and size(n2) == size(d2)
 this gives the following sequence of operations:
 </p>
 <blockquote><pre>
-
         p^2 + n2[1,1]*p + n2[1,2]
   y_1 = ------------------------- * u
         p^2 + d2[1,1]*p + d2[1,2]
@@ -1100,43 +1097,40 @@ this gives the following sequence of operations:
         p + d1[..]
 &nbsp;
     y = k*y_n
-
-</pre></blockquote>
-
-Based on this representation, evrey block with transfer function G(p) could be transformed into
-<blockquote><pre>
-  G(p) = k * F(p)
-
-</pre>
-with F(p) has unit gain. This leads to representations of the forms
 </pre></blockquote>
 <p>
-<blockquote><pre>
-
-           a2 + a1*p + p^2       a2      b2 + a1*b2/a2*p + b2/a2*p^2
-  G(p) = -------------------- = ---- * ------------------------------ = k * F(p),  k = a2/b2  (1)
-
-           b2 + b1*p + p^2       b2           b2 + b1*p + p^2
-&nbsp;
-for second order systems and
-&nbsp;
-           a + p     a     b + b/a*p
-  G(p) = -------- = --- * ---------- = k * F(p),   k = a/b
-
-           b + p     b      b + p
+Based on this representation, evrey block with transfer function G(p) could be transformed into
 </p>
+<blockquote><pre>
+G(p) = k * F(p)
 </pre></blockquote>
+<p>
+with F(p) has unit gain. This leads to representations of the forms
+</p>
+<blockquote><pre>
+         a2 + a1*p + p^2       a2      b2 + a1*b2/a2*p + b2/a2*p^2
+G(p) = -------------------- = ---- * ------------------------------ = k * F(p),  k = a2/b2  (1)
+         b2 + b1*p + p^2       b2           b2 + b1*p + p^2
+</pre></blockquote>
+<p>
+for second order systems and
+</p>
+<blockquote><pre>
+         a + p     a     b + b/a*p
+G(p) = -------- = --- * ---------- = k * F(p),   k = a/b
+         b + p     b      b + p
+</pre></blockquote>
+<p>
 for first order systems respectively.
+</p>
 
 <p>
 The complete system is now considered as the series connections of all the single unit gain transfer functions and an overall gain k with
-<blockquote><pre>
-  k = product(ki).
-
-</pre></blockquote>
 </p>
-
-
+<blockquote><pre>
+k = product(ki).
+</pre></blockquote>
+<p>
 In the general case, the following system structures
 and the corresponding state space systems can appear
 (note, 'c' is the reciprocal local gain 1/k):
@@ -1168,7 +1162,7 @@ and the corresponding state space systems can appear
        b + p                            y = x,  c = b
 
 </pre></blockquote>
-
+<p>
 If the sizes of the numerator and denominator polynomials
 do not match, the small systems are built in the
 following way:
@@ -1246,8 +1240,8 @@ Assume, a generic first order state space system
 is present
 </p>
 <blockquote><pre>
-   <b>der</b>(x) = a*x + b*u
-        y = c*x + d*u
+<b>der</b>(x) = a*x + b*u
+     y = c*x + d*u
 </pre></blockquote>
 <p>
 and the values of the scalars a,b,c,d are parameters
@@ -1256,8 +1250,8 @@ If y has to be differentiated symbolically during code
 generation, then
 </p>
 <blockquote><pre>
-      <b>der</b>(y) = c*<b>der</b>(x) + d*<b>der</b>(u)
-      <b>der</b>(x) = a*x + b*u
+<b>der</b>(y) = c*<b>der</b>(x) + d*<b>der</b>(u)
+<b>der</b>(x) = a*x + b*u
 </pre></blockquote>
 <p>
 As a result, u needs to be differentiated too, and this
@@ -1270,15 +1264,15 @@ system is generated by keeping this structure, we have
 (see form (5) above):
 </p>
 <blockquote><pre>
-  <b>der</b>(x) = -b*x + u
-        y = x
+<b>der</b>(x) = -b*x + u
+      y = x
 </pre></blockquote>
 <p>
 Differentiating y symbolically leads to:
 </p>
 <blockquote><pre>
-     <b>der</b>(y) = <b>der</b>(x)
-     <b>der</b>(x) = -b*x + u
+<b>der</b>(y) = <b>der</b>(x)
+<b>der</b>(x) = -b*x + u
 </pre></blockquote>
 <p>
 Therefore, in this case, the derivative of u is not
@@ -1291,8 +1285,8 @@ processing.
 
 <h4>Example</h4>
 <blockquote><pre>
-   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
-   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + p +1);
+  ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
+  Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2 + p +1);
 
 <b>algorithm</b>
   ss := Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace(zp);

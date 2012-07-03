@@ -349,7 +349,8 @@ which is equal to
   end 'constructor';
 
 encapsulated operator '-'
-    import Modelica;
+    "Contains operators for subtraction of discrete zeros and poles records"
+  import Modelica;
   extends Modelica.Icons.Package;
   function subtract "Subtract two DiscreteZerosAndPoles (dzp1 - dzp2)"
       import Modelica;
@@ -437,26 +438,27 @@ encapsulated operator '-'
   algorithm
   end negate;
     annotation (Documentation(info="<html>
-<p>This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.'-'.negate\">negate</a> operator for zeros and poles records. </p>
+<p>This package contains operators for subtraction of discrete zeros and poles records. </p>
 </html>"));
 end '-';
 
 encapsulated operator '*'
+    "Contains operators for multiplication of discrete zeros and poles records"
   import Modelica;
   extends Modelica.Icons.Package;
 function 'dzp*dzp'
       "Multiply two DiscreteZerosAndPoles transfer functions (dzp1 * dzp2)"
 
-      import Modelica;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2;
+  import Modelica;
+  import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+  import Modelica_LinearSystems2;
 
   input DiscreteZerosAndPoles dzp1;
   input DiscreteZerosAndPoles dzp2;
   input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
         "Discretization method";
-  input String uName=dzp1.uName "input name";
-  input String yName=dzp2.yName "output name";
+  input String uName=dzp1.uName "Input name";
+  input String yName=dzp2.yName "Output name";
 
   output DiscreteZerosAndPoles result "= dzp1 * dzp2";
 algorithm
@@ -493,14 +495,14 @@ end 'dzp*dzp';
 function 'r*dzp'
       "Multiply a real number with a discrete DiscreteZerosAndPoles transfer function  (r * dzp2)"
 
-      import Modelica;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2;
+  import Modelica;
+  import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+  import Modelica_LinearSystems2;
 
   input Real r;
   input DiscreteZerosAndPoles dzp;
-  input String uName=dzp.uName "input name";
-  input String yName=dzp.yName "output name";
+  input String uName=dzp.uName "Input name";
+  input String yName=dzp.yName "Output name";
 
   output DiscreteZerosAndPoles result "= r * dzp1";
 algorithm
@@ -517,7 +519,7 @@ algorithm
 
 end 'r*dzp';
     annotation (Documentation(info="<html>
-<p>This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.'*'.'dzp*dzp'\">dzp multiplication</a> and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.'*'.'r*dzp'\">real number multiplication</a> operator for zeros and poles records. </p>
+<p>This package contains operators for multiplication of discrete zeros and poles records. </p>
 </html>"));
 end '*';
 
@@ -1960,32 +1962,32 @@ This function plots the initial response, i.e. the zeros input response of a zer
     dtf.yName := dzp.yName;
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Conversion.<b>toDiscreteTransferFunction</b>(dzp)  </td> </tr>
-</table>
+<blockquote><pre>
+dtf = DiscreteZerosAndPoles.Conversion.<b>toDiscreteTransferFunction</b>(dzp)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Computes a DiscreteTransferFunction record
- <blockquote><pre>
-           n(z)     b0 + b1*z + ... + bn*z^n
-   dtf = -------- = --------------------------
-           d(z)     a0 + a1*z + ... + an*z^n
- </pre></blockquote>
+</p>
+<blockquote><pre>
+       n(z)     b0 + b1*z + ... + bn*z^n
+dtf = ------ = --------------------------
+       d(z)     a0 + a1*z + ... + an*z^n
+</pre></blockquote>
+<p>
 from a DiscreteZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the DiscreteTransferFunction constructor.
-
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   ZerosAndPoles q = Modelica_LinearSystems2.DiscreteZerosAndPoles.q();
-   Modelica_LinearSystems2.DiscreteZerosAndPoles dzp = 1/(q + 3)/(q + 1)
-
+  ZerosAndPoles q = Modelica_LinearSystems2.DiscreteZerosAndPoles.q();
+  Modelica_LinearSystems2.DiscreteZerosAndPoles dzp = 1/(q + 3)/(q + 1)
 
 <b>algorithm</b>
   dtf:=Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction(dzp);
 //  dtf = 1/(z^2 + 4*z + 3)
 </pre></blockquote>
-
-
 </html>"));
   end toDiscreteTransferFunction;
 
@@ -2318,9 +2320,10 @@ from a DiscreteZerosAndPoles record representated by first and second order nume
 
     annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Conversion<b>toDiscreteStateSpace</b>(tf)  </td> </tr>
-</table>
+<blockquote><pre>
+dss = DiscreteZerosAndPoles.Conversion<b>toDiscreteStateSpace</b>(dzp)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function transforms a discrete zeros-poles-gain system representation into the corresponding discrete state space representation.
@@ -2329,31 +2332,36 @@ form by creating first and second order blocks that are connected
 together in series. Every block is represented in controller
 canonical form and scaled such that the gain from the input
 of this block to its output is one (i.e. y(p=0) = u(p=0)),
-if this is possible.<br>
-
+if this is possible.
+</p>
+<p>
 The construction of the state space blocks is the same as of the corresponding continuous transformation ( <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace\">ZerosAndPoles.Conversion.toStateSpace()</a>),
 except for that the first order and second order systems are scaled by
+</p>
 <blockquote><pre>
-         1 + n1
-  k_2 = --------
-         1 + d1
-
+       1 + n1
+k_2 = --------
+       1 + d1
 </pre></blockquote>
+<p>
 and
+</p>
 <blockquote><pre>
-         1 + n2 + n2
-  k_2 = -------------
-         1 + d2 + d2
+       1 + n2 + n2
+k_2 = -------------
+       1 + d2 + d2
 </pre></blockquote>
+<p>
 respectiively.
+</p>
 <p>
 See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace\">ZerosAndPoles.Conversion.toStateSpace()</a> for more information.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   DiscreteZerosAndPoles q = Modelica_LinearSystems2.DiscreteZerosAndPoles.q();
-   Modelica_LinearSystems2.DiscreteZerosAndPoles dzp=(q+1)/(q^2 + q + 1);
+  DiscreteZerosAndPoles q = Modelica_LinearSystems2.DiscreteZerosAndPoles.q();
+  Modelica_LinearSystems2.DiscreteZerosAndPoles dzp=(q+1)/(q^2 + q + 1);
 
 <b>algorithm</b>
   dss := Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace(dzp);
@@ -2362,7 +2370,6 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
 // dss.C = [0.333, 0.333],
 // dss.D = [0],
 // dss.B2 = [0; 0],
-
 </pre></blockquote>
 
 </html> "));

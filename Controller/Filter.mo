@@ -38,11 +38,6 @@ protected
 
   annotation (
     defaultComponentName="filter",
-    Window(
-      x=0.27,
-      y=0.1,
-      width=0.57,
-      height=0.75),
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
@@ -94,7 +89,7 @@ protected
     Documentation(info="<html>
 <p>
 For details of the filter characteristics, see
-<a href=\"Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>.
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>.
 </p>
 </html>
 "));
