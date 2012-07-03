@@ -116,10 +116,12 @@ The results, which are controller feedback matrix, observer feedback matrix, sys
 It is also shown how to linearize a model of a crane trolley system [1]. The linear model is then used as a base for controller design.
 <p>
 
-<A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A> <PRE>
-  [1] Varga A., \"A Schur method for pole assignment\",
-      IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981.
-</PRE>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga A. (1981):</dt>
+<dd> <b>A Schur method for pole assignment</b>.
+     IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
+</dl>
 </html>"),    Documentation(info="<html>
 This example demonstrates how to design a lq-controller or a pole placement controller respectively.
 The feedback matrices and a simple pre filter for tracking are save to MATLAB files which can be used in

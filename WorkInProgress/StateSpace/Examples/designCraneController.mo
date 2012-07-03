@@ -119,16 +119,24 @@ print("\nXXXXXXXXXXX:\n");
 
   print("\nok!");
 annotation (interactive=true, Documentation(info="<html>
-This example demonstrates how to design a lq-controller or a pole placement controller respectively. Compared with example <b>craneController</b>,
-the plant is smaller to achieve suitable dynamics for animation.
-The feedback matrices and a simple pre filter for tracking are save to MATLAB files which can be used in
-ModelicaController library.<br>
-It is also shown how to linearize a model of a crane trolley system [1]. The linear model is used as a base for control design
- <p>
-<A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A>
-<PRE>
-  [1] F&ouml;llinger, O. \"Regelungstechnik\", H&uuml;thig-Verlag
-</PRE>
+<p>
+This example demonstrates how to design a lq-controller or a pole placement controller 
+respectively. Compared with example <b>craneController</b>, the plant is smaller to 
+achieve suitable dynamics for animation.
+The feedback matrices and a simple pre filter for tracking are save to MATLAB files 
+which can be used in ModelicaController library.
+</p>
+<p>
+It is also shown how to linearize a model of a crane trolley system [1]. 
+The linear model is used as a base for control design
+</p>
+
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] F&ouml;llinger O.:</dt>
+<dd> <b>Regelungstechnik</b>.
+     H&uuml;thig-Verlag.<br>&nbsp;</dd>
+</dl>
 </html>"),    Documentation(info="<html>
 This example demonstrates how to design a lq-controller or a pole placement controller respectively.
 The feedback matrices and a simple pre filter for tracking are save to MATLAB files which can be used in

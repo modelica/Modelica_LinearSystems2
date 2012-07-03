@@ -125,10 +125,12 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
 
 </pre></blockquote>
 
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center>  Emami-Naeini, A. and Van Dooren, P. </td>  <td> \"Computation of Zeros of Linear Multivariable Systems\"  </td> <td> Automatica, 18, pp. 415-430, 1982. </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Emami-Naeini, A. and Van Dooren, P. (1982):</dt>
+<dd> <b>Computation of Zeros of Linear Multivariable Systems</b>.
+     Automatica, 18, pp. 415-430.<br>&nbsp;</dd>
+</dl>
 </html> ",
          revisions="<html>
 <ul>

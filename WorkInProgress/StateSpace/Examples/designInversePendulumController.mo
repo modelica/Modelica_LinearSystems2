@@ -8,11 +8,11 @@ function designInversePendulumController
   import Modelica_LinearSystems2.Math.Matrices;
 
   input String modelName="Modelica_Controller.Examples.Components.InversePendulum_small"
-    "name of the model to linearize";
-   input Complex pa[4]={-5+0*j,-5+0*j,-5.0-0.25*j,-5.0+0.25*j} "assigned poles";
+    "Name of the model to linearize";
+  input Complex pa[4]={-5+0*j,-5+0*j,-5.0-0.25*j,-5.0+0.25*j} "Assigned poles";
 
   input String fileName=DataDir + "inversePendulumController_small.mat"
-    "file name for results";
+    "File name for results";
 protected
    input Complex j = Modelica_LinearSystems2.Math.Complex.j();
 public
@@ -62,21 +62,14 @@ algorithm
     true);
 
   print("\nok!");
-annotation (interactive=true, Documentation(info="<html>
+
+  annotation (interactive=true, Documentation(info="<html>
+<p>
 This example demonstrates how to design pole placement controller to balance an inverted pendulum. For controller design a linearized model of a (simple) physical system model is used.
 The controller is applied to the physical model in Moldelica_Controller library.
-<br>
+</p>
+<p>
 It is also shown how to linearize a modelica model. The linear model is used as a base for control design
-
-</html>"),    Documentation(info="<html>
-This example demonstrates how to design a lq-controller or a pole placement controller respectively.
-The feedback matrices and a simple pre filter for tracking are save to MATLAB files which can be used in
-ModelicaController library.<br>
-It is also shown how to linearize a model of a crane trolley system [1]. The linear model is used as a base for control design
-
-<A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A>
-<PRE>
-  [1] F&ouml;llinger, O. \"Regelungstechnik\", H&uuml;thig-Verlag
-</PRE>
+</p>
 </html>"));
 end designInversePendulumController;

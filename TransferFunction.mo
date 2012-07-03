@@ -1532,22 +1532,12 @@ algorithm
 // tf_filter = 9530.93/(s^2 + 195.253*s + 9530.93)
 </pre></blockquote>
 
-<h4>References</h4>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
-<td>
-<p>[1] </p>
-</td>
-<td>
-<p align=\"center\">Tietze U., and Schenk Ch. </p>
-</td>
-<td>
-<p>\"Halbleiter-Schaltungstechnik\" </p>
-</td>
-<td>
-<p>Springer Verlag, 12. Auflage, pp. 815-852, 2002. </p>
-</td>
-</tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Tietze U., and Schenk Ch. (2002):</dt>
+<dd> <b>Halbleiter-Schaltungstechnik</b>.
+     Springer Verlag, 12. Auflage, pp. 815-852.<br>&nbsp;</dd>
+</dl>
 </html>"));
     end filter;
 

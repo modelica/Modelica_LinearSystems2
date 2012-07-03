@@ -134,12 +134,12 @@ matrix from the elementary reflectors as returned from dgehrd), dhseqr (to put t
 of the closed loop system) and dtrsen (to compute the ordered real Schur form and matrix <b>U</b>).
 <p>
 
-<A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A>
-<PRE>
-  [1] Laub, A.J.
-      A Schur Method for Solving Algebraic Riccati equations.
-      IEEE Trans. Auto. Contr., AC-24, pp. 913-921, 1979.
-</PRE>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Laub A.J. (1979):</dt>
+<dd> <b>A Schur Method for Solving Algebraic Riccati equations</b>.
+     IEEE Trans. Auto. Contr., AC-24, pp. 913-921.<br>&nbsp;</dd>
+</dl>
 </html>", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>

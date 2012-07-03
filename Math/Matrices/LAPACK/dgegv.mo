@@ -17,7 +17,7 @@ protected
   Real dummy1[1,1];
   Real dummy2[1,1];
 
-external "Fortran 77" dgegv(
+  external "Fortran 77" dgegv(
     "N",
     "N",
     n,
@@ -35,7 +35,9 @@ external "Fortran 77" dgegv(
     work,
     size(work, 1),
     info)   annotation (Library="lapack");
-  annotation (Documentation(info="   Purpose
+  annotation (Documentation(info="<html>
+<pre>
+   Purpose
    =======
 
    This routine is deprecated and has been replaced by routine DGGEV.
@@ -50,7 +52,7 @@ external "Fortran 77" dgegv(
    is singular.  It is usually represented as the pair (alpha,beta),
    as there is a reasonable interpretation for beta=0, and even for
    both being zero.  A good beginning reference is the book, \"Matrix
-   Computations\", by G. Golub & C. van Loan (Johns Hopkins U. Press)
+   Computations\", by G. Golub &amp; C. van Loan (Johns Hopkins U. Press)
 
    A right generalized eigenvector corresponding to a generalized
    eigenvalue  w  for a pair of matrices (A,B) is a vector  r  such
@@ -73,7 +75,7 @@ external "Fortran 77" dgegv(
            = 'V':  compute the right generalized eigenvectors.
 
    N       (input) INTEGER
-           The order of the matrices A, B, VL, and VR.  N >= 0.
+           The order of the matrices A, B, VL, and VR.  N &gt;= 0.
 
    A       (input/output) DOUBLE PRECISION array, dimension (LDA, N)
            On entry, the first of the pair of matrices whose
@@ -84,7 +86,7 @@ external "Fortran 77" dgegv(
            Details\", below.)
 
    LDA     (input) INTEGER
-           The leading dimension of A.  LDA >= max(1,N).
+           The leading dimension of A.  LDA &gt;= max(1,N).
 
    B       (input/output) DOUBLE PRECISION array, dimension (LDB, N)
            On entry, the second of the pair of matrices whose
@@ -95,7 +97,7 @@ external "Fortran 77" dgegv(
            Details\", below.)
 
    LDB     (input) INTEGER
-           The leading dimension of B.  LDB >= max(1,N).
+           The leading dimension of B.  LDB &gt;= max(1,N).
 
    ALPHAR  (output) DOUBLE PRECISION array, dimension (N)
    ALPHAI  (output) DOUBLE PRECISION array, dimension (N)
@@ -126,8 +128,8 @@ external "Fortran 77" dgegv(
            Not referenced if JOBVL = 'N'.
 
    LDVL    (input) INTEGER
-           The leading dimension of the matrix VL. LDVL >= 1, and
-           if JOBVL = 'V', LDVL >= N.
+           The leading dimension of the matrix VL. LDVL &gt;= 1, and
+           if JOBVL = 'V', LDVL &gt;= N.
 
    VR      (output) DOUBLE PRECISION array, dimension (LDVR,N)
            If JOBVR = 'V', the right generalized eigenvectors.  (See
@@ -142,14 +144,14 @@ external "Fortran 77" dgegv(
            Not referenced if JOBVR = 'N'.
 
    LDVR    (input) INTEGER
-           The leading dimension of the matrix VR. LDVR >= 1, and
-           if JOBVR = 'V', LDVR >= N.
+           The leading dimension of the matrix VR. LDVR &gt;= 1, and
+           if JOBVR = 'V', LDVR &gt;= N.
 
    WORK    (workspace/output) DOUBLE PRECISION array, dimension (LWORK)
            On exit, if INFO = 0, WORK(1) returns the optimal LWORK.
 
    LWORK   (input) INTEGER
-           The dimension of the array WORK.  LWORK >= max(1,8*N).
+           The dimension of the array WORK.  LWORK &gt;= max(1,8*N).
            For good performance, LWORK must generally be larger.
            To compute the optimal value of LWORK, call ILAENV to get
            blocksizes (for DGEQRF, DORMQR, and DORGQR.)  Then compute:
@@ -164,12 +166,12 @@ external "Fortran 77" dgegv(
 
    INFO    (output) INTEGER
            = 0:  successful exit
-           < 0:  if INFO = -i, the i-th argument had an illegal value.
+           &lt; 0:  if INFO = -i, the i-th argument had an illegal value.
            = 1,...,N:
                  The QZ iteration failed.  No eigenvectors have been
                  calculated, but ALPHAR(j), ALPHAI(j), and BETA(j)
                  should be correct for j=INFO+1,...,N.
-           > N:  errors that usually indicate LAPACK problems:
+           &gt; N:  errors that usually indicate LAPACK problems:
                  =N+1: error return from DGGBAL
                  =N+2: error return from DGEQRF
                  =N+3: error return from DORMQR
@@ -213,5 +215,6 @@ external "Fortran 77" dgegv(
        by Golub & van Loan, pub. by Johns Hopkins U. Press.
 
    =====================================================================
-"));
+</pre>
+</html>"));
 end dgegv;

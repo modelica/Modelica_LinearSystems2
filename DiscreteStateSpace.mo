@@ -2252,10 +2252,12 @@ the norm of each <b>K</b>i is minimized [1].
 // Q = [0, 1, 0; 0, 1, 1; 1, 1, 2]
 </pre></blockquote>
 
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center>  Varga A.  </td>  <td> \"A Schur method for pole assignment\"  </td> <td> IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981 </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga A. (1981):</dt>
+<dd> <b>A Schur method for pole assignment</b>.
+     IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
+</dl>
 </html> ",
          revisions="<html>
 <ul>
@@ -2964,36 +2966,40 @@ algorithm
 
   annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPoles</b>(dss)  </td> </tr>
-</table>
+<blockquote><pre>
+dzp = DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPoles</b>(dss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Computes a DiscreteZerosAndPoles record
- <blockquote><pre>
-                 product(q + n1[i]) * product(q^2 + n2[i,1]*q + n2[i,2])
-        dzp = k*---------------------------------------------------------
-                product(q + d1[i]) * product(q^2 + d2[i,1]*q + d2[i,2])
-
-</pre></blockquote>of a system from discrete state space representation using the transformation algorithm described in [1].
-<br>
+</p>
+<blockquote><pre>
+           product(q + n1[i]) * product(q^2 + n2[i,1]*q + n2[i,2])
+dzp = k * ---------------------------------------------------------
+           product(q + d1[i]) * product(q^2 + d2[i,1]*q + d2[i,2])
+</pre></blockquote>
+<p>
+of a system from discrete state space representation using the transformation algorithm described in [1].
+</p>
+<p>
 The uncontrollable and unobservable parts are isolated and the eigenvalues and invariant zeros of the controllable and observable sub system are calculated.
-
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
-      A = [0.9048, 0.0,    0.0;
-            0.0,   0.8187, 0.0;
-            0.0,   0.0,    0.7408],
-      B = [0.09516;
-           0.09063;
-           0.0],
-      C = [1.0,1.0,1.0],
-      D = [0.0],
-      Ts = 0.1);
+  Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+    A = [0.9048, 0.0,    0.0;
+         0.0,    0.8187, 0.0;
+         0.0,    0.0,    0.7408],
+    B = [0.09516;
+         0.09063;
+         0.0],
+    C = [1.0,1.0,1.0],
+    D = [0.0],
+    Ts = 0.1);
 
- <b>algorithm</b>
+<b>algorithm</b>
   dzp:=Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(dss);
 
 //                         q - 0.860735
@@ -3001,12 +3007,12 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 //                 (q - 0.904837)*(q - 0.818731)
 </pre></blockquote>
 
-
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
-vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
+<dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
+     Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
+</dl>
 
 </html> ", revisions="<html>
 <ul>
@@ -3059,42 +3065,44 @@ algorithm
   end for;
   annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPolesMIMO</b>(dss)  </td> </tr>
-</table>
+<blockquote><pre>
+dzp = DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPolesMIMO</b>(dss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Computes a matrix of DiscreteZerosAndPoles records
- <blockquote><pre>
-                 product(q + n1[i]) * product(q^2 + n2[i,1]*q + n2[i,2])
-       dzp = k*---------------------------------------------------------
-                product(q + d1[i]) * product(q^2 + d2[i,1]*q + d2[i,2])
-
+</p>
+<blockquote><pre>
+           product(q + n1[i]) * product(q^2 + n2[i,1]*q + n2[i,2])
+dzp = k * ---------------------------------------------------------
+           product(q + d1[i]) * product(q^2 + d2[i,1]*q + d2[i,2])
 </pre></blockquote>
+<p>
 of a system from discrete state space representation, i.e. isolating the uncontrollable and unobservable parts and the eigenvalues and invariant zeros of the controllable and observable sub systems are calculated. The algorithm applies the method described in [1] for each single-input-output pair.
-
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.DiscreteStateSpace ss=Modelica_LinearSystems2.DiscreteStateSpace(
+  Modelica_LinearSystems2.DiscreteStateSpace ss=Modelica_LinearSystems2.DiscreteStateSpace(
     A = [0.9048, 0.0,    0.0;
-          0.0,   0.8187, 0.0;
-          0.0,   0.0,    0.7408]
+         0.0,    0.8187, 0.0;
+         0.0,    0.0,    0.7408]
 
-   B = [0.0,      0.09516;
-        0.0906,   0.09063;
-       -0.0864,   0.0],
+    B = [0.0,      0.09516;
+         0.0906,   0.09063;
+        -0.0864,   0.0],
 
-   C = [0.0, 1.0, 1.0;
-        1.0, 1.0, 1.0],
+    C = [0.0, 1.0, 1.0;
+         1.0, 1.0, 1.0],
 
-   D = [1.0, 0.0;
-        0.0, 1.0],
+    D = [1.0, 0.0;
+         0.0, 1.0],
 
-   B2 = [0.0,  0.0;
-         0.0,  0.0;
-         0.0,  0.0],
-   Ts = 0.1);
+    B2 = [0.0,  0.0;
+          0.0,  0.0;
+          0.0,  0.0],
+    Ts = 0.1);
 
 <b>algorithm</b>
   dzp:=Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPolesMIMO(dss);
@@ -3111,14 +3119,14 @@ of a system from discrete state space representation, i.e. isolating the uncontr
  1*(q - 0.870319)*(q - 0.667452)/( (q - 0.904837)*(q - 0.818731) )
     Ts = 0.1
     method =StepExact]
-
 </pre></blockquote>
 
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
-vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
+<dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
+     Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
+</dl>
 
 </html> ", revisions="<html>
 <ul>

@@ -108,6 +108,7 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
 X = Matrices.<b>dsylvester</b>(A, B, C);
+   or
 X = Matrices.<b>dsylvester</b>(A, B, C, AisHess, BTisSchur, sgn, eps);
 </pre></blockquote>
 
@@ -149,12 +150,12 @@ in the case that <b>A</b> and/or <b>B</b> have already Hessenberg form
 or Schur, respectively.
 </p>
 
-<h4>References</h4>
-<pre>
-  [1] Golub, G.H., Nash, S. and Van Loan, C.F.
-      A Hessenberg-Schur method for the problem AX + XB = C.
-      IEEE Transaction on Automatic Control, AC-24, no. 6, pp. 909-913, 1979.
-</pre>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Golub, G.H., Nash, S. and Van Loan, C.F. (1979):</dt>
+<dd> <b>A Hessenberg-Schur method for the problem AX + XB = C</b>.
+     IEEE Transaction on Automatic Control, AC-24, no. 6, pp. 909-913.<br>&nbsp;</dd>
+</dl>
 
 <h4>Example</h4>
 <blockquote><pre>

@@ -39,24 +39,28 @@ algorithm
 
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  tss </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toIrreducibleForm</b>(ss)  </td> </tr>
-</table>
+<blockquote><pre>
+tss = StateSpace.Transformation.<b>toIrreducibleForm</b>(ss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function calculates a minimal controllable and observable block Hessenberg realization for a given state-space representation.
 Therefore, all uncontrollable and unobservable modes are removed by performing orthogonal similarity transformations as described in [1].
+</p>
 <p>
 This function is called to compute transfer functions of state space representations as described in [1]. Look at [1] for further details
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A = [-4.5,  1.5,   4.0;
-           -4.0,  1.0,   4.0;
-           -1.5, -0.5,   1.0],
-      B = [  1; 0; 1 ],
-      C = [1,  0,  0],
-      D = [0]);
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A = [-4.5,  1.5,   4.0;
+         -4.0,  1.0,   4.0;
+         -1.5, -0.5,   1.0],
+    B = [  1; 0; 1 ],
+    C = [1,  0,  0],
+    D = [0]);
 
 <b>algorithm</b>
   tss:=Modelica_LinearSystems2.StateSpace.Transformation.toIrreducibleForm(ss);
@@ -64,13 +68,16 @@ This function is called to compute transfer functions of state space representat
       A=[-0.5],
       B=[-sqrt(0.5)],
       C=[-1/sqrt(0.5)1],
-      D=[0]
-)
+      D=[0])
 </pre></blockquote>
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V. </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control, vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
-</table>
+
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
+<dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
+     Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
+</dl>
+
 </html> ",
      revisions="<html>
 <ul>

@@ -1482,7 +1482,7 @@ above, but are, of course, also useful for other purposes.
 </p>
 
 <p>
-This package contains the <b>users guide</b> for
+This package contains the <b>user's guide</b> for
 the library and has the following content:
 </p>
 <ol>

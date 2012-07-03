@@ -73,13 +73,14 @@ equation
     Documentation(info="<html>
 <p>
 Template of a controller with two structural degrees of freedom and an inverse plant model in forward path.
-The functionality of such control system structures is described in [1]
+The functionality of such control system structures is described in [1].
 </p>
 
-<h4><a name=\"References\">R</a>eferences</h4>
-<pre>
-  [1] Looye, G. et al, \"Nonlinear inverse moldes for control\",
-      Proceedings Modelica Conference 2005, pp. 267-279, 2005.
-</pre>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Looye, G. et al. (2005):</dt>
+<dd> <b>Nonlinear Inverse Models for Control</b>.
+    In Proceedings of Modelica Conference 2005, pp. 267-279.<br>&nbsp;</dd>
+</dl>
 </html>"));
 end TwoDegreesOfFreedomControlSISO;

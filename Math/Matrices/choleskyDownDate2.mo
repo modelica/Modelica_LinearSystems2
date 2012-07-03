@@ -148,12 +148,12 @@ or upper triangular matrix (left or right Cholesky factor).
 If \"upper==true\", the output <b>Ldd</b> is also upper triangular. Default is \"upper==false\".
 </p>
 
-<h4>References</h4>
-<pre>
-  [1] Dongarra, J. J., Bunch, J. R., Moler, G. B., Stewart, G.W.
-      \"LINPACK Users' Guide\"
-      Society for Industrial Mathematics, 1987.
-</pre>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Dongarra J. J., Bunch J. R., Moler G. B., Stewart G.W. (1987):</dt>
+<dd> <b>LINPACK Users' Guide</b>.
+     Society for Industrial Mathematics.<br>&nbsp;</dd>
+</dl>
 
 </html>", revisions="<html>
 <ul>

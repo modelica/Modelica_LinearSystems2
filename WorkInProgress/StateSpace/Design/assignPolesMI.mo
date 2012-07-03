@@ -398,6 +398,7 @@ Modelica.Utilities.Streams.print("2x2, 2 compl system, complex ass Ann = "+Matri
 <table>
 <tr> <td align=right>  (K, S, po, nfp, nap, nup) </td><td align=center> =  </td>  <td> StateSpace.Design.<b>assignPolesMI</b>(ss, gamma, np, tol, calculateEigenvectors)  </td> </tr>
 </table>
+
 <h4>Description</h4>
 <p>
 The purpose of this function is to determine the state feedback matrix <b>K</b> for a
@@ -405,40 +406,55 @@ given time invariant multi input state system (<b>A</b>,<b>B</b>) such that the
 closed-loop state matrix <b>A</b>-<b>B</b>*<b>K</b> has specified eigenvalues. The
 feedback matrix <b>K</b> is calculated by factorization following [1]. The algorithm
 modifies the eigenvalues sequentially and also allows partial eigenvalue assignment.<br>
-<br>
-
-
- At the beginning of the algorithm, the feedback matrix <b>K</b> is set to zero (<b>K</b> = <b>0</b>) and the matrix <b>A</b> is
- reduced to an ordered real Schur form by separating its spectrum in two parts
-
+</p>
+<p>
+At the beginning of the algorithm, the feedback matrix <b>K</b> is set to zero (<b>K</b> = <b>0</b>) and the matrix <b>A</b> is
+reduced to an ordered real Schur form by separating its spectrum in two parts
+</p>
 <blockquote><pre>
-              | <b>F</b>1  <b>F</b>3|
- <b>F</b> = <b>Q</b>*<b>A</b>*<b>Q</b>' = |       |
-              | <b>0</b>   <b>F</b>2|
- </pre>
-</blockquote> in such a way, that <b>F</b>1 contains the eigenvalues that will be
+             | <b>F</b>1  <b>F</b>3|
+<b>F</b> = <b>Q</b>*<b>A</b>*<b>Q</b>' = |       |
+             | <b>0</b>   <b>F</b>2|
+</pre></blockquote>
+<p>
+in such a way, that <b>F</b>1 contains the eigenvalues that will be
 retained and <b>F</b>3 contains the eigenvalues going to be modified. On the suggestion
 of [1] the eigenvalues <i>evr</i> to be retained are chosen as
- <blockquote><pre>
-  evr = {s in C: Re(s) &lt -alpha, alpha &gt =0}
- </pre> </blockquote>
+</p>
+<blockquote><pre>
+evr = {s in C: Re(s) &lt -alpha, alpha &gt =0}
+</pre> </blockquote>
+<p>
 but other specification are conceivable of course.<br>
-<br>
+</p>
 
+<p>
 Let
- <blockquote><pre>
-  <b>G</b> = [<b>G</b>1;<b>G</b>2] = <b>Q</b>*<b>B</b>
- </pre> </blockquote>
+</p>
+<blockquote><pre>
+<b>G</b> = [<b>G</b>1;<b>G</b>2] = <b>Q</b>*<b>B</b>
+</pre> </blockquote>
+<p>
 with an appropriate partition according to <b>F</b>2. (<b>F</b>2, <b>G</b>2) has to be
-controllable.<br>
+controllable.
+</p>
 
-If the feedback matrix <b>K</b> is taken in a form <blockquote><pre> <b>K</b> = [0, <b>K</b>2]
-</pre></blockquote> the special structure of <b>F</b> and <b>K</b> results in a closed loop state
-matrix <blockquote><pre>
+<p>
+If the feedback matrix <b>K</b> is taken in a form 
+</p>
+<blockquote><pre> <b>K</b> = [0, <b>K</b>2]
+</pre></blockquote>
+<p>
+the special structure of <b>F</b> and <b>K</b> results in a closed loop state
+matrix 
+</p>
+<blockquote><pre>
           |<b>F</b>1 <b>F</b>3 - <b>G</b>1*<b>K</b>2|
 <b>F</b> - <b>G</b>*<b>K</b> = |             |
           |0  <b>F</b>2 - <b>G</b>2*<b>K</b>2|
-</pre></blockquote> with only the eigenvalues of <b>F</b>2 are modified. This approach to modify
+</pre></blockquote>
+<p>
+with only the eigenvalues of <b>F</b>2 are modified. This approach to modify
 separated eigenvalues is used to sequentially shift one real eigenvalue ore two
 complex conjugated eigenvalues stepwise until all assigned eigenvalues are placed.
 Therefore, at each step i always the (two) lower right eigenvalue(s) are modified by an
@@ -448,32 +464,29 @@ form using reordering techniques <b>F</b> &lt -- <b>Q</b>i*<b>F</b>*<b>Q</b>i'  
 lower right diagonal position. The transformations are accumulated in <b>Q</b>i and are also
 applicated to the matrices <blockquote><pre> <b>G</b> &lt - <b>Q</b>i*<b>G</b> <b>Q</b> &lt - <b>Q</b>i*<b>Q</b> </pre></blockquote>
 The eigenvalue(s) to be assigned at  each step is (are) chosen such that the norm of each <b>K</b>i is minimized [1].
-<p>
-
-
-
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1, 1, 1;0, 1, 1;0, 0, 1],
-      B=[0; 0; 1],
-      C=[0, 1, 0],
-      D=[0]);
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1, 1, 1;0, 1, 1;0, 0, 1],
+    B=[0; 0; 1],
+    C=[0, 1, 0],
+    D=[0]);
 
-   Real Q[3,3];
+  Real Q[3,3];
 
 <b>algorithm</b>
   Q := Modelica_LinearSystems2.StateSpace.Analysis.observabilityMatrix(ss);
 // Q = [0, 1, 0; 0, 1, 1; 1, 1, 2]
 </pre></blockquote>
 
-
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center>  Varga A.  </td>  <td> \"A Schur method for pole assignment\"  </td> <td> IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981 </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga A. (1981):</dt>
+<dd> <b>A Schur method for pole assignment</b>.
+     IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
+</dl>
 
 </html> "));
 end assignPolesMI;

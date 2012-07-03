@@ -2169,11 +2169,12 @@ is set.
 // zp_filter = 9530.93/( (p + 97.6265)^2 )
 </pre></blockquote>
 
-
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center>  Tietze U., and Schenk Ch.  </td>  <td> \"Halbleiter-Schaltungstechnik\"  </td> <td> Springer Verlag, 12. Auflage, pp. 815-852, 2002. </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Tietze U., and Schenk Ch. (2002):</dt>
+<dd> <b>Halbleiter-Schaltungstechnik</b>.
+     Springer Verlag, 12. Auflage, pp. 815-852.<br>&nbsp;</dd>
+</dl>
 
 </html> "));
   end filter;
@@ -4658,7 +4659,7 @@ using the following rules:
  // zp_filter = 1 /  ( (p + 1)*(p^2 + p + 1) )
 </pre></blockquote>
 
-<h4>References</h4>
+<h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>Tietze U., and Schenk C. (2002):</dt>
 <dd> <b>Halbleiter-Schaltungstechnik</b>.
@@ -6052,10 +6053,13 @@ is set.
 // zp_filter = 9530.93/( (p + 97.6265)^2 )
 </pre></blockquote>
 
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center>  Tietze U., and Schenk Ch.  </td>  <td> \"Halbleiter-Schaltungstechnik\"  </td> <td> Springer Verlag, 12. Auflage, pp. 815-852, 2002. </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Tietze U., and Schenk Ch. (2002):</dt>
+<dd> <b>Halbleiter-Schaltungstechnik</b>.
+     Springer Verlag, 12. Auflage, pp. 815-852.<br>&nbsp;</dd>
+</dl>
+
 </html> "));
   end filter;
 

@@ -370,11 +370,12 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 // Q = [0, 1, 0; 0, 1, 1; 1, 1, 2]
 </pre></blockquote>
 
-
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center>  Varga A.  </td>  <td> \"A Schur method for pole assignment\"  </td> <td> IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981 </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga A. (1981):</dt>
+<dd> <b>A Schur method for pole assignment</b>.
+     IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
+</dl>
 
 </html> "));
 end assignPolesMI2;

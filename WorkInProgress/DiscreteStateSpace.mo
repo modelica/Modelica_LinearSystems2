@@ -575,32 +575,37 @@ algorithm
 
   annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toZerosAndPoles</b>(ss)  </td> </tr>
-</table>
+<blockquote><pre>
+dzp = DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPoles</b>(dss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Computes a ZerosAndPoles record
- <blockquote><pre>
-                 product(s + n1[i]) * product(s^2 + n2[i,1]*s + n2[i,2])
-        zp = k*---------------------------------------------------------
-                product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
-</pre></blockquote>of a system from state space representation using the transformation algorithm described in [1].
-<br>
+</p>
+<blockquote><pre>
+          product(s + n1[i]) * product(s^2 + n2[i,1]*s + n2[i,2])
+zp = k * ---------------------------------------------------------
+          product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
+</pre></blockquote>
+<p>
+of a system from state space representation using the transformation algorithm described in [1].
+</p>
+<p>
 The uncontrollable and unobservable parts are isolated and the eigenvalues and invariant zeros of the controllable and observable sub system are calculated.
-
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A = [-1.0, 0.0, 0.0;
-            0.0,-2.0, 0.0;
-            0.0, 0.0,-3.0],
-      B = [1.0;
-           1.0;
-           0.0],
-      C = [1.0,1.0,1.0],
-      D = [0.0]);
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A = [-1.0, 0.0, 0.0;
+          0.0,-2.0, 0.0;
+          0.0, 0.0,-3.0],
+    B = [1.0;
+         1.0;
+         0.0],
+    C = [1.0,1.0,1.0],
+    D = [0.0]);
 
 <b>algorithm</b>
   zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
@@ -609,12 +614,12 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
              (s + 1)*(s + 2)
 </pre></blockquote>
 
-
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
-vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
+<dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
+     Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
+</dl>
 
 </html> "));
 end toDiscreteZerosAndPoles;
@@ -2171,22 +2176,26 @@ i.e., in the case of linear systems the system matrix <b>A</b> and the output ma
 </html>",   info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-         (x_est, y_est, P, K) = DiscreteStateSpace.Design.<b>UKF</b>(x_pre, u_pre, y, P_pre, Q, R, alpha, beta, kappa, Ts)
+(x_est, y_est, P, K) = DiscreteStateSpace.Design.<b>UKF</b>(x_pre, u_pre, y, P_pre, Q, R, alpha, beta, kappa, Ts)
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function <b>UKF</b> computes one recursion of the Unscented Kalman filter. Unscented Kalman filters are similar to Extended Kalman filters
 but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
-See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to
-solve the mathematically identical problem.
+<p>
+See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to solve the mathematically identical problem.
+</p>
 
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1]:</dt>
+<dd> <b>http://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter</b>.
+    <br>&nbsp;</dd>
+</dl>
 
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center> http://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter </td></tr>
-</table>
 </html>"));
   end UKF;
 
@@ -2244,23 +2253,28 @@ solve the mathematically identical problem.
 </html>",   info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-         (x_est, y_est, CfP, K) = DiscreteStateSpace.Design.<b>UKF_SR</b>(x_pre, u_pre, y, CfP_pre, QCf, CfR, alpha, beta, kappa, Ts)
+(x_est, y_est, CfP, K) = DiscreteStateSpace.Design.<b>UKF_SR</b>(x_pre, u_pre, y, CfP_pre, QCf, CfR, alpha, beta, kappa, Ts)
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function <b>UKF_SR</b> computes one recursion of the Square Root Unscented Kalman filter (SR-UKF). SR-UKF follow the same princible as UKF but using Cholesky factors (square roots)
-of the positive definite matrices. This means less computational effort and higher reliablitiy.<br>
+of the positive definite matrices. This means less computational effort and higher reliablitiy.
+</p>
+<p>
 Unscented Kalman filters are similar to Extended Kalman filters but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
-See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF\">UKF</a>, where the standard method (without Cholesky factorization)
-to calculate UKF is applied.
+<p>
+See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF\">UKF</a>, where the standard method (without Cholesky factorization) to calculate UKF is applied.
+</p>
 
-
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center> http://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1]</dt>
+<dd> <b>http://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter</b>.
+    <br>&nbsp;</dd>
+</dl>
 </html>"));
   end UKF_SR;
 end Design;

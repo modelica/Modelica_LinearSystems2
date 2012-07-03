@@ -2182,8 +2182,6 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
 //  gives:
 </pre></blockquote>
 
-
-
 <h4>System report</h4>
 <p>
 The system <b>Demonstation System</b>
@@ -2254,14 +2252,14 @@ not stable
 In the table above, the column <b>contribution to states</b> lists for each eigenvalue the states 
 to which thecorresponding modal state contributes most. This information is based on the
 two largest absolute values of the corresponding right eigenvector (if the second large value
-is less than 5 % of the largest contribution, it is not shown).
+is less than 5&nbsp;% of the largest contribution, it is not shown).
 </p>
 <p>
 In the next table, for each state in the column <b>correlation to modal states</b>, the modal
 states which contribute most to the coresponding state are summarized, i.e. the state is mostly composed of these modal states
 This information is based on the two largest absolute values of row i of the
 eigenvector matrix that is associated with eigenvalue i (if the second large value
-is less than 5 % of the largest contribution, it is not shown). This only holds
+is less than 5&nbsp;% of the largest contribution, it is not shown). This only holds
 if the modal states are in the same order of magnitude. Otherwise, the modal states
 listed in the last column might be not the most relevant one.
 <br>
@@ -2282,7 +2280,9 @@ listed in the last column might be not the most relevant one.
 </table>
 </p>
 <p>
-<b>Invariant zeros</b><br><table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
+<b>Invariant zeros</b>
+<br>
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> invariant zero </td><td> Time constant [s] </td> <td> freq. [Hz] </td> <td> damping </td></tr>
 <tr>
  <td style=\"text-align:left\"> &nbsp;       1 </td> <td> &nbsp;   -5.4983e+001 </td> <td> &nbsp;    0.0182 </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
@@ -3216,10 +3216,13 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
 // zeros = {1, 0}
 </pre></blockquote>
 
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center>  Emami-Naeini, A. and Van Dooren, P. </td>  <td> \"Computation of Zeros of Linear Multivariable Systems\"  </td> <td> Automatica, 18, pp. 415-430, 1982. </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Emami-Naeini, A. and Van Dooren, P. (1982):</dt>
+<dd> <b>Computation of Zeros of Linear Multivariable Systems</b>.
+     Automatica, 18, pp. 415-430.<br>&nbsp;</dd>
+</dl>
+
 </html> ", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
@@ -4248,11 +4251,12 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
  // newPoles = {-3, -4}
 </pre></blockquote>
 
-
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center>  Varga A.  </td>  <td> \"A Schur method for pole assignment\"  </td> <td> IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519, 1981 </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga A. (1981):</dt>
+<dd> <b>A Schur method for pole assignment</b>.
+     IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
+</dl>
 
 </html> ", revisions="<html>
 <ul>
@@ -5731,11 +5735,12 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
              (s + 1)*(s + 2)
 </pre></blockquote>
 
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
-vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
+<dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
+     Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
+</dl>
 
 </html> ", revisions="<html>
 <ul>
@@ -5903,11 +5908,12 @@ i.e.
          |                                                   |
 </pre></blockquote>
 
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
-vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
-</table>
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
+<dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
+     Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
+</dl>
 
 </html> ", revisions="<html>
 <ul>
@@ -6401,24 +6407,28 @@ Matrix T has to be diagonalizable, i.e. the algebraic and geometric multipliciti
 
         annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  tss </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toIrreducibleForm</b>(ss)  </td> </tr>
-</table>
+<blockquote><pre>
+tss = StateSpace.Transformation.<b>toIrreducibleForm</b>(ss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function calculates a minimal controllable and observable block Hessenberg realization for a given state-space representation.
 Therefore, all uncontrollable and unobservable modes are removed by performing orthogonal similarity transformations as described in [1].
+</p>
 <p>
 This function is called to compute transfer functions of state space representations as described in [1]. Look at [1] for further details
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A = [-4.5,  1.5,   4.0;
-           -4.0,  1.0,   4.0;
-           -1.5, -0.5,   1.0],
-      B = [  1; 0; 1 ],
-      C = [1,  0,  0],
-      D = [0]);
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A = [-4.5,  1.5,   4.0;
+         -4.0,  1.0,   4.0;
+         -1.5, -0.5,   1.0],
+    B = [  1; 0; 1 ],
+    C = [1,  0,  0],
+    D = [0]);
 
 <b>algorithm</b>
   tss:=Modelica_LinearSystems2.StateSpace.Transformation.toIrreducibleForm(ss);
@@ -6426,13 +6436,16 @@ This function is called to compute transfer functions of state space representat
       A=[-0.5],
       B=[-sqrt(0.5)],
       C=[-1/sqrt(0.5)1],
-      D=[0]
-)
+      D=[0])
 </pre></blockquote>
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V. </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control, vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
-</table>
+
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
+<dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
+     Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
+</dl>
+
 </html> ", revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>

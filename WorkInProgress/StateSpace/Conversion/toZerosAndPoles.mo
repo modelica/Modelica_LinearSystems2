@@ -82,32 +82,35 @@ algorithm
 
   annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toZerosAndPoles</b>(ss)  </td> </tr>
-</table>
+<blockquote><pre>
+zp = StateSpace.Conversion.<b>toZerosAndPoles</b>(ss)
+</pre> </blockquote>
+
 <h4>Description</h4>
 <p>
 Computes a ZerosAndPoles record
- <blockquote><pre>
-                 product(s + n1[i]) * product(s^2 + n2[i,1]*s + n2[i,2])
-        zp = k*---------------------------------------------------------
-                product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
-</pre></blockquote>of a system from state space representation using the transformation algorithm described in [1].
-<br>
+</p>
+<blockquote><pre>
+          product(s + n1[i]) * product(s^2 + n2[i,1]*s + n2[i,2])
+zp = k * ---------------------------------------------------------
+          product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
+</pre></blockquote>
+<p>
+of a system from state space representation using the transformation algorithm described in [1].
 The uncontrollable and unobservable parts are isolated and the eigenvalues and invariant zeros of the controllable and observable sub system are calculated.
-
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A = [-1.0, 0.0, 0.0;
-            0.0,-2.0, 0.0;
-            0.0, 0.0,-3.0],
-      B = [1.0;
-           1.0;
-           0.0],
-      C = [1.0,1.0,1.0],
-      D = [0.0]);
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A = [-1.0, 0.0, 0.0;
+          0.0,-2.0, 0.0;
+          0.0, 0.0,-3.0],
+    B = [1.0;
+         1.0;
+         0.0],
+    C = [1.0,1.0,1.0],
+    D = [0.0]);
 
 <b>algorithm</b>
   zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
@@ -116,13 +119,12 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
              (s + 1)*(s + 2)
 </pre></blockquote>
 
-
-<h4>References</h4>
-<table>
-<tr> <td align=right>  [1] </td><td align=center> Varga, A, Sima, V.  </td>  <td> \"Numerically stable algorithm for transfer function matrix evaluation\"  </td> <td> Int. J. Control,
-vol. 33, No. 6, pp. 1123-1133, 1981 </td></tr>
-</table>
-
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
+<dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
+     Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
+</dl>
 </html> ",
          revisions="<html>
 <ul>

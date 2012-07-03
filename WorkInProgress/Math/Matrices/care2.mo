@@ -141,13 +141,13 @@ of the closed loop system) and dtrsen (to compute the ordered real Schur form an
 
 <p>
 
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Laub A.J. (1979):</dt>
+<dd> <b>A Schur Method for Solving Algebraic Riccati equations</b>.
+     IEEE Trans. Auto. Contr., AC-24, pp. 913-921.<br>&nbsp;</dd>
+</dl>
 
-<A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A>
-<PRE>
-  [1] Laub, A.J.
-      A Schur Method for Solving Algebraic Riccati equations.
-      IEEE Trans. Auto. Contr., AC-24, pp. 913-921, 1979.
-</PRE>
 </html>",
         revisions="<html>
 <ul>
