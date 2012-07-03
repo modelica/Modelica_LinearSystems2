@@ -241,6 +241,9 @@ record DiscreteTransferFunction
 <p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'*'.'r*dtf'\">Modelica_LinearSystems2.DiscreteTransferFunction.&apos;*&apos;.&apos;r*dtf&apos;</a> instead.</p>
 </html>"));
     end 'r*dft';
+    annotation (Documentation(info="<html>
+<p>This package contains multiplication operators for discrete fransfer function records. </p>
+</html>"));
   end '*';
 
   encapsulated operator '-'
@@ -276,6 +279,9 @@ record DiscreteTransferFunction
       output DiscreteTransferFunction result(n=-dtf.n, d=dtf.d, Ts=dtf.Ts, method=dtf.method) "= -dtf";
     algorithm
     end negate;
+    annotation (Documentation(info="<html>
+<p>This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteTransferFunction.'-'.negate\">negate</a> operator for discrete fransfer function records. </p>
+</html>"));
   end '-';
 
   encapsulated operator '/'

@@ -461,7 +461,7 @@ with j=sqrt(-1), is defined as
     annotation (Documentation(info="<HTML>
 <p>
 Polynomial.fitting(x,y,order) computes a Polynomial
-y=p(x) of degree \"order\" that fits the data \"p(x[i]) - y[i]\"
+y=p(x) of degree &quot;order&quot; that fits the data &quot;p(x[i]) - y[i]&quot;
 in a least squares sense.
 </p>
 </HTML>"));

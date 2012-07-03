@@ -65,12 +65,12 @@ algorithm
 <blockquote><pre>
                reorderedZero = Internal.<b>reorderZeros</b>(complexVector);
 (reorderedZeros, nRealZeros) = Internal.<b>reorderZeros</b>(complexVector,
-                                                     name=\"complexVector\");
+                                                     name=&quot;complexVector&quot;);
 </pre></blockquote>
 <h4>Description</h4>
 <p>
 Function <b>reorderZeros</b>(..) reorders the zeros from the
-Complex vector \"complexVector\" such that the returned Complex vector
+Complex vector &quot;complexVector&quot; such that the returned Complex vector
 reorderedZeros contains first all real Zeros and afterwards the conjugate
 complex zero pairs. It is required that all elements
 of complexVector define either a real zero (complexVector[i].im=0)
@@ -78,7 +78,7 @@ or a conjugate complex zero pair
 (complexVector[i].re == complexVector[i+1].re and
 complexVector[i].im == -complexVector[i+1].im).
 The optional input argument
-\"name\" is used as name of \"complexVector\" in error messages.
+&quot;name&quot; is used as name of &quot;complexVector&quot; in error messages.
 </p>
 <p>
 The function returns the vector element reordered, as well as

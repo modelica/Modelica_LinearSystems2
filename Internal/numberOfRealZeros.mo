@@ -21,7 +21,7 @@ algorithm
 <h4>Description</h4>
 <p>
 Function <b>numberOfRealZeros</b>(..) determines the number of
-elements of vector \"complexVector\" with vanishing imaginary part,
+elements of vector &quot;complexVector&quot; with vanishing imaginary part,
 i.e., complexVector[i].im = 0.
 </p>
 <h4>Example</h4>

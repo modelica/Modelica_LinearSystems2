@@ -70,7 +70,7 @@ Vectors.<b>length</b>(v);
 The function call \"<code>Vectors.<b>length</b>(v)</code>\" returns the
 <b>Euclidean length</b> \"<code>sqrt(v*v)</code>\" of vector v.
 The function call is equivalent to Vectors.norm(v). The advantage of
-length(v) over norm(v)\"is that function length(..) is implemented
+length(v) over norm(v) is that function length(..) is implemented
 in one statement and therefore the function is usually automatically
 inlined. Further symbolic processing is therefore possible, which is
 not the case with function norm(..).

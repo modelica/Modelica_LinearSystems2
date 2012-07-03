@@ -162,6 +162,9 @@ follow each other as above. An error occurs if this is not the case.
       output TransferFunction result(n=-tf.n, d=tf.d) "= -tf";
     algorithm
     end negate;
+    annotation (Documentation(info="<html>
+<p>This package contains the <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.'-'.negate\">negate</a> operator for transfer function records. </p>
+</html>"));
   end '-';
 
   encapsulated operator function '+'

@@ -678,10 +678,11 @@ dss3 := dss1 - dss2;
 
   end negate;
     annotation (Documentation(info="<html>
-<h4>Description</h4>
 <p>
-This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'subtract'</a> and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'-'</a> operator for DiscreteStateSpace records.
-
+This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'subtract'</a> 
+and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'-'.subtract\">'-'</a> 
+operator for discrete state space records.
+</p>
 </html>"));
 end '-';
 

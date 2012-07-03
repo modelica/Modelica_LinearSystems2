@@ -20,13 +20,13 @@ result = <b>isEqual</b>(r1, r2, eps=0.0);
 <h4>Description</h4>
 
 <p>
-The function call \"<code>isEqual(r1, r2)</code>\" returns <b>true</b>,
+The function call &quot;<code>isEqual(r1, r2)</code>&quot; returns <b>true</b>,
 if the two Real numbers r1 and r2 are the same up to a given precision eps.
 (result = abs(r1-r2) &le; eps). Otherwise the function
 returns <b>false</b>. With the optional third argument <b>eps</b>
 the range can be defined, in which two Real numbers are treated as identical.
-The default is \"eps = 0\". Another useful value is, e.g.,
-\"eps = 10*Modelica.Constants.eps\".
+The default is &quot;eps = 0&quot;. Another useful value is, e.g.,
+&quot;eps = 10*Modelica.Constants.eps&quot;.
 </p>
 
 <h4>Example</h4>

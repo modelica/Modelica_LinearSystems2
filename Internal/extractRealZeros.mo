@@ -61,33 +61,36 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
                 realZeros = Matrices.<b>extractRealZeros</b>(complexVector, numberOfRealRoots);
-(realZeros, complexZeros) = Matrices.<b>extractRealZeros</b>(complexVector, numberOfRealRoots,
-                                                      name=\"complexVector\");
+(realZeros, complexZeros) = Matrices.<b>extractRealZeros</b>(
+                              complexVector,
+                              numberOfRealRoots,
+                              name=&quot;complexVector&quot;);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>extractRealZeros</b>(..) extracts the real zeros from the
-Complex vector \"complexVector\". It is required that all elements
-of complexVector define either
-a real zero (complexVector[i].im=0) or a conjugate complex zero pair
+This function extracts the real zeros from the Complex vector 
+&quot;complexVector&quot;. It is required that all elements of complexVector 
+define either a real zero (complexVector[i].im=0) or a conjugate complex zero 
+pair
 (complexVector[i].re == complexVector[i+1].re and
 complexVector[i].im == -complexVector[i+1].im).
-The second argument \"numberOfRealZeros\" is determined by a function
-call of Internal.numberOfRealZeros().
-The optional input argument
-\"name\" is used as name of \"complexVector\" in error messages.
+The second argument &quot;numberOfRealZeros&quot; is determined by a function
+call of Internal.numberOfRealZeros(). The optional input argument
+&quot;name&quot; is used as name of &quot;complexVector&quot; in error messages.
 </p>
 <p>
 The function returns the real elements of complexVector in
-vector \"realZeros\" and the real and imaginary part of a conjugate
-complex zero pair in matrix complexZeros[:]\".
+vector &quot;realZeros&quot; and the real and imaginary part of a conjugate
+complex zero pair in matrix &quot;complexZeros[:]&quot;.
+
 <h4>Example</h4>
 <blockquote><pre>
   // c = {0; 1+2j; 1-2j; 2; -3; -1-j; -1+j};
-    Integer n = numberOfRealZeros(c);
-    Real realZeros[n];
-    Real complexZeros[:] = fill(Complex(0), integer((size(c,1)-n)/2));
-  algorithm
+  Integer n = numberOfRealZeros(c);
+  Real realZeros[n];
+  Real complexZeros[:] = fill(Complex(0), integer((size(c,1)-n)/2));
+algorithm
   (realZeros, complexZeros) := extractRealZeros(c, n);
            -> realZeros    = {0, 2, (-3)};
               complexZeros = { 1+2j,

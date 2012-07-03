@@ -106,7 +106,7 @@ algorithm
 <p>
 Function <b>sort</b>(..) sorts a Real vector v
 in ascending order and returns the result in sorted_v.
-If the optional argument \"ascending\" is <b>false</b>, the vector
+If the optional argument &quot;ascending&quot; is <b>false</b>, the vector
 is sorted in descending order. In the optional second
 output argument the indices of the sorted vector with respect
 to the original vector are given, such that sorted_v = v[indices].

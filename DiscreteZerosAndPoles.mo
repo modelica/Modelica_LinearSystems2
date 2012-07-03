@@ -436,6 +436,9 @@ encapsulated operator '-'
      output DiscreteZerosAndPoles result(n1=dzp.n1, n2=dzp.n2, d1=dzp.d1, d2=dzp.d2, k=-dzp.k, Ts=dzp.Ts, method=dzp.method) "= -dzp";
   algorithm
   end negate;
+    annotation (Documentation(info="<html>
+<p>This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.'-'.negate\">negate</a> operator for zeros and poles records. </p>
+</html>"));
 end '-';
 
 encapsulated operator '*'
@@ -513,6 +516,9 @@ algorithm
     result.yName := yName;
 
 end 'r*dzp';
+    annotation (Documentation(info="<html>
+<p>This package contains the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.'*'.'dzp*dzp'\">dzp multiplication</a> and the <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.'*'.'r*dzp'\">real number multiplication</a> operator for zeros and poles records. </p>
+</html>"));
 end '*';
 
   encapsulated operator function '/'

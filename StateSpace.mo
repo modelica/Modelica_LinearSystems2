@@ -228,7 +228,9 @@ ss3 := ss1 - ss2;
     result.D := -ss.D;
   end negate;
     annotation (Documentation(info="<html>
-<p>This package contains the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.negate\">negate</a> operator for state space records. </p>
+<p>
+This package contains the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.subtract\">subtract</a> and the <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.'-'.negate\">negate</a> operator for state space records.
+</p>
 </html>"));
 end '-';
 
