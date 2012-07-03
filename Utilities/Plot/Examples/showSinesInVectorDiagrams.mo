@@ -43,6 +43,7 @@ algorithm
       legend="torque4"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
       x=x3,
       y=y3,
+      legend="torque4",
       autoLine=false,
       linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.None,
       lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.Circle)},

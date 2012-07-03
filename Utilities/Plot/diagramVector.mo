@@ -6,6 +6,7 @@ function diagramVector "Plot several diagrams in vector layout"
       Modelica_LinearSystems2.Utilities.Plot.Records.Device()
     "Properties of device where figure is shown" annotation(Dialog);
 
+  import Modelica_LinearSystems2.Utilities.Plot.Internal;
 protected
   Real mmToPixel= device.windowResolution/25.4;
   Integer position[4];
@@ -62,20 +63,21 @@ algorithm
                    legendLocation=diagram[i].legendLocation);
 
        for j in 1:size(diagram[i].curve,1) loop
-          if diagram[i].curve[j].autoLine or
-             diagram[i].curve[j].lineSymbol==Types.PointSymbol.None then
-             style :=0;
-          elseif diagram[i].curve[j].linePattern==Types.LinePattern.None then
-             style :=-(diagram[i].curve[j].lineSymbol - 1);
+          if diagram[i].curve[j].autoLine then
+             OK :=plotArray(diagram[i].curve[j].x,
+                            diagram[i].curve[j].y,
+                            legend=diagram[i].curve[j].legend,
+                            id=id);
           else
-             style :=diagram[i].curve[j].lineSymbol - 1;
+             OK :=plotArray(diagram[i].curve[j].x,
+                            diagram[i].curve[j].y,
+                            legend=diagram[i].curve[j].legend,
+                            color=diagram[i].curve[j].lineColor,
+                            pattern=Internal.convertToDymolaPattern(diagram[i].curve[j].linePattern),
+                            marker=Internal.convertToDymolaMarker(diagram[i].curve[j].lineSymbol),
+                            thickness=diagram[i].curve[j].lineThickness,
+                            id=id);
           end if;
-
-          OK :=plotArray(diagram[i].curve[j].x,
-                         diagram[i].curve[j].y,
-                         legend=diagram[i].curve[j].legend,
-                         style=style,
-                         id=id);
        end for;
     end for;
 

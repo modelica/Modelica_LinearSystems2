@@ -39,7 +39,8 @@ algorithm
                    legendLocation=diagram.legendLocation);
 
    for i in 1:nCurves loop
-       if diagram.curve[i].autoLine or
+       /*
+       if diagram.curve[i].autoLine or 
           diagram.curve[i].lineSymbol==Types.PointSymbol.None then
           style :=0;
        elseif diagram.curve[i].linePattern==Types.LinePattern.None then
@@ -53,6 +54,23 @@ algorithm
                       legend=diagram.curve[i].legend,
                       style=style,
                       id=id);
+       */
+
+       if diagram.curve[i].autoLine then
+          OK :=plotArray(diagram.curve[i].x,
+                         diagram.curve[i].y,
+                         legend=diagram.curve[i].legend,
+                         id=id);
+       else
+          OK :=plotArray(diagram.curve[i].x,
+                         diagram.curve[i].y,
+                         legend=diagram.curve[i].legend,
+                         color=diagram.curve[i].lineColor,
+                         pattern=Internal.convertToDymolaPattern(diagram.curve[i].linePattern),
+                         marker=Internal.convertToDymolaMarker(diagram.curve[i].lineSymbol),
+                         thickness=diagram.curve[i].lineThickness,
+                         id=id);
+       end if;
     end for;
 
   annotation (interactive = true, Documentation(info="<html>

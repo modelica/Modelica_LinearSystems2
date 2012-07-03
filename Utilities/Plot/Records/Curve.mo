@@ -10,18 +10,18 @@ record Curve "Properties of a curve (displayed in a diagram)"
      annotation(Dialog,  choices(__Dymola_checkBox=true));
 
    Integer lineColor[3]={0,0,255} "Color of curve as rgb values"
-     annotation(Dialog(group="If autoLine = false (otherwise ignored)",__Dymola_colorSelector, __Dymola_treeView=false));
+     annotation(Dialog(enable=not autoLine,group="If autoLine = false (otherwise ignored)",__Dymola_colorSelector, __Dymola_treeView=false));
 
    Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern linePattern=
       Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.Solid
-    "Line pattern of curve" annotation(Dialog(group="If autoLine = false (otherwise ignored)"));
+    "Line pattern of curve" annotation(Dialog(enable=not autoLine,group="If autoLine = false (otherwise ignored)"));
    Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol lineSymbol=
       Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.None
-    "Symbol for points on curve" annotation(Dialog(group="If autoLine = false (otherwise ignored)"));
+    "Symbol for points on curve" annotation(Dialog(enable=not autoLine,group="If autoLine = false (otherwise ignored)"));
+   Real lineThickness=0.25 "Line thickness of curve"
+                              annotation(Dialog(group="If autoLine = false (otherwise ignored)"));
 
 /*
-   Modelica_LinearSystems2.Utilities.Plot.Types.LineThickness_mm lineThickness=0.25
-    "Line thickness of curve" annotation(Dialog(group="If autoLine = false (otherwise ignored)"));
    Modelica_LinearSystems2.Utilities.Plot.Types.LineThickness_mm lineSymbolSize=3
     "Symbol size" annotation(Dialog(group="If autoLine = false (otherwise ignored)"));
 */
