@@ -976,97 +976,135 @@ encapsulated package Analysis
       Integer ny=size(ss.C, 1);
       Integer c1=integer(ceil(nx/2) - 1);
       Integer c2=integer(ceil(ny/2) - 1);
-      Integer dist=1;
+      Integer dist=2;
+      Boolean centered=true
+          "True, if matrices columns should be centered, otherwise right aligned";
+
+      String td_align=if centered then "  <td style=\"text-align:center\">" else "  <td style=\"text-align:right\">";
 
     algorithm
+      // ---------------------------------------------------------------------------------------------------
+      // The correct HTML format generated with this function can be checked with following commands:
+      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printSystem(Modelica_LinearSystems2.StateSpace(A=[2,1,1;1,1,1;1,2,2], B=[1;2.2;3], C=[2,4,6;3,8,5], D=[6;4], yNames={"y1_test","y2_test"}, xNames={"xx1","xx2","xx3"}, uNames={"u1_test"}));
+      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printSystem(Modelica_LinearSystems2.StateSpace(A=[2, 1.43, 12, 3; 1, 1, 1, 43; 1, 3, 2, 2; 1, 1, 4.2, 1.2], B=[1, 2; 2.2, 3; 3, 1; 4, 0], C=[25, 1.4, 6.3, 1; 0.3, 8, 5, 1; 1, 3, 2, 2], D=[6, 4; 4, 2; 6, 5], yNames={"y1_test","y2_te","y3_"}, xNames={"xx1","x2","xxx3","xx4"}, uNames={"u1_test","u2_test"}));
+      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printSystem(ss=Modelica_LinearSystems2.StateSpace.Import.fromModel("Modelica.Mechanics.Rotational.Examples.First"), description="Test file in HTML format from function printSystem.");
+      // ---------------------------------------------------------------------------------------------------
+
       Modelica.Utilities.Files.removeFile(fileName);
-      print("<html>\n<body><h1>System report</h1>", fileName);
+      print("<html>\n<body>\n<h1>System report</h1>", fileName);
       print("<h2>Matrices</h2>", fileName);
-      print("<p>The system <b>" + systemName + "</b></p>", fileName);
       print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
          + "cellpadding=\"3\" border=\"0\"> ", fileName);
       print("<tr><td>der(x) </td> <td>=</td> <td> Ax</td> <td> +</td><td> Bu</td></tr>
-         <tr><td> y </td>     <td>=</td> <td> Cx</td> <td> + </td><td>Du</td></tr></table> <br><br>is defined by<br>",
+         <tr><td> y </td>     <td>=</td> <td> Cx</td> <td> + </td><td>Du</td></tr>",
         fileName);
+      print("</table>\n<p>\nis defined by\n</p>", fileName);
 
-      // Print A and B
+      // ======================
+      // Print matices A and B
+      // =====================
       print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
          + "cellpadding=\"3\" border=\"0\"> ", fileName);
-      print("<tr><td><br></td><td><br></td><td><br></td>", fileName);
+
+      // Print table header
+      // ------------------
+      print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
       for i1 in 1:nx loop
-        print("<td style=\"text-align:center\" valign=\"top\"> " + ss.xNames[i1] + " </td>",
+        print("  <td style=\"text-align:center\" valign=\"top\">&nbsp; " + ss.xNames[i1] + " &nbsp;</td>",
           fileName);
       end for;
       for i1 in 1:dist loop
-        print("<td><br></td>", fileName);
+        print("  <td>&nbsp;</td>", fileName);
       end for;
-      for i1 in 1:nu loop
-        print("<td>" + ss.uNames[i1] + "</td>", fileName);
-      end for;
+      if nu > 0 then
+        print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
+        for i1 in 1:nu loop
+          print("  <td>&nbsp; " + ss.uNames[i1] + " &nbsp;</td>", fileName);
+        end for;
+      else
+        for i1 in 1:3 loop
+          print("  <td>&nbsp;</td>", fileName);
+        end for;
+      end if;
 
       print("</tr>", fileName);
 
       // Print upper parts of A and B
+      // ----------------------------
       for i1 in 1:c1 loop
-        print("<tr> <td><br></td><td><br></td><td> " + ss.xNames[i1] + " </td>",
+        print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td> " + ss.xNames[i1] + " </td>",
           fileName);
         for i2 in 1:nx loop
-          print("<td> " + String(ss.A[i1, i2], format=format) + " </td>", fileName);
+          print(td_align + String(ss.A[i1, i2], format=format) + " </td>", fileName);
         end for;
 
-        for i2 in 1:dist - 1 loop
-          print("<td><br></td>", fileName);
+        for i2 in 1:dist loop
+          print("  <td>&nbsp;</td>", fileName);
         end for;
 
         if nu > 0 then
-          print("<td>" + ss.xNames[i1] + " </td>", fileName);
+          print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
+          print("  <td>" + ss.xNames[i1] + " </td>", fileName);
           for i2 in 1:nu loop
-            print("<td> " + String(ss.B[i1, i2], format=format) + " </td>",
+            print(td_align + String(ss.B[i1, i2], format=format) + " </td>",
               fileName);
           end for;
+        else
+          for i1 in 1:3 loop
+            print("  <td>&nbsp;</td>", fileName);
+          end for;
         end if;
-           //nu>0
         print("</tr>", fileName);
       end for;
 
-      // Print middle part of A and B
-      print("<tr><td>A</td><td>=</td><td>" + ss.xNames[c1 + 1] + " </td>", fileName);
+      // Print middle part of A and B (just ONE row!)
+      // --------------------------------------------
+      print("<tr>\n  <td>A</td>\n  <td>=</td>\n  <td>" + ss.xNames[c1 + 1] + " </td>", fileName);
       for i2 in 1:nx loop
-        print("<td> " + String(ss.A[c1 + 1, i2], format=format) + " </td>",
+        print(td_align + String(ss.A[c1 + 1, i2], format=format) + " </td>",
           fileName);
       end for;
       // Print space between matrix A and B
-      print("<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>", fileName);
+      for i2 in 1:dist loop
+        print("  <td>&nbsp;</td>", fileName);
+      end for;
 
       if nu > 0 then
-        print("<td>B</td><td>=</td><td>" + ss.xNames[c1 + 1] + " </td>", fileName);
+        print("  <td>B</td>\n  <td>=</td>\n  <td>" + ss.xNames[c1 + 1] + " </td>", fileName);
 
         for i2 in 1:nu loop
-          print("<td> " + String(ss.B[c1 + 1, i2], format=format) + " </td>",
+          print(td_align + String(ss.B[c1 + 1, i2], format=format) + " </td>",
             fileName);
         end for;
       else
-        print("<td>B</td><td>=</td><td>[ ],  empty matrix: " +String(nx)+" by "+String(nu) + " </td>", fileName);
+        print("  <td>B</td>\n  <td>=</td>\n  <td>[ ],  empty matrix: " +String(nx)+" by "+String(nu) + " </td>", fileName);
 
       end if;
-           //nu>0
+      print("</tr>", fileName);
+      //nu>0
 
       // Print lower parts of A and B
+      // ----------------------------
       for i1 in c1 + 2:nx loop
-        print("<tr><td><br></td><td><br></td><td> " + ss.xNames[i1] + " </td>",
+        print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td> " + ss.xNames[i1] + " </td>",
           fileName);
         for i2 in 1:nx loop
-          print("<td> " + String(ss.A[i1, i2], format=format) + " </td>", fileName);
+          print(td_align + String(ss.A[i1, i2], format=format) + " </td>", fileName);
         end for;
 
-        for i2 in 1:dist - 1 loop
-          print("<td><br></td>", fileName);
+        for i2 in 1:dist loop
+          print("  <td>&nbsp;</td>", fileName);
         end for;
         if nu > 0 then
-          print("<td>" + ss.xNames[i1] + " </td>", fileName);
+          print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
+          print("  <td>" + ss.xNames[i1] + " </td>", fileName);
           for i2 in 1:nu loop
-            print("<td> " + String(ss.B[i1, i2], format=format) + " </td>",
+            print(td_align + String(ss.B[i1, i2], format=format) + " </td>",
               fileName);
+          end for;
+        else
+          for i1 in 1:3 loop
+            print("  <td>&nbsp;</td>", fileName);
           end for;
         end if;
            //nu>0
@@ -1074,95 +1112,110 @@ encapsulated package Analysis
       end for;
 
       print("</table>\n", fileName);
+      print("<br>&nbsp;<br>", fileName);
 
-      print("<br><br>", fileName);
-
-      // Print C and D
+      // ======================
+      // Print matrices C and D
+      // ======================
       print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
          + "cellpadding=\"3\" border=\"0\">", fileName);
-      print("<tr><td><br></td><td><br></td><td><br></td>", fileName);
 
+      // Print table header
+      // ------------------
       if ny > 0 then
+        print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp</td>", fileName);
         for i1 in 1:nx loop
-          print("<td style=\"text-align:center\" valign=\"top\"> " + ss.xNames[i1] + " </td>",
+          print("  <td style=\"text-align:center\" valign=\"top\">&nbsp; " + ss.xNames[i1] + " &nbsp;</td>",
             fileName);
         end for;
         for i1 in 1:dist loop
-          print("<td><br></td>", fileName);
+          print("  <td>&nbsp;</td>", fileName);
         end for;
+        print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
         for i1 in 1:nu loop
-          print("<td>" + ss.uNames[i1] + "</td>", fileName);
+          print("  <td>&nbsp; " + ss.uNames[i1] + " &nbsp;</td>", fileName);
         end for;
+
+        print("</tr>", fileName);
       end if;
-           //ny>0
-      print("</tr>", fileName);
 
       if ny > 0 then
         // Print upper parts of C and D
+        // ----------------------------
         for i1 in 1:c2 loop
-          print("<tr> <td><br></td><td><br></td><td> " + ss.yNames[i1] + " </td>",
+          print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td> " + ss.yNames[i1] + " </td>",
             fileName);
           for i2 in 1:nx loop
-            print("<td> " + String(ss.C[i1, i2], format=format) + " </td>",
+            print(td_align + String(ss.C[i1, i2], format=format) + " </td>",
               fileName);
           end for;
 
-          for i2 in 1:dist - 1 loop
-            print("<td><br></td>", fileName);
+          for i2 in 1:dist loop
+            print("  <td>&nbsp;</td>", fileName);
           end for;
-          print("<td>" + ss.yNames[i1] + " </td>", fileName);
+          print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
+          print("  <td>" + ss.yNames[i1] + " </td>", fileName);
           for i2 in 1:nu loop
-            print("<td> " + String(ss.D[i1, i2], format=format) + " </td>",
+            print(td_align + String(ss.D[i1, i2], format=format) + " </td>",
               fileName);
           end for;
 
           print("</tr>", fileName);
         end for;
 
-        // Print middle part of C and D
-        print("<tr><td>C</td><td>=</td><td>" + ss.yNames[c2 + 1] + " </td>",
+        // Print middle part of C and D (just ONE row!)
+        // --------------------------------------------
+        print("<tr>\n  <td>C</td>\n  <td>=</td>\n  <td>" + ss.yNames[c2 + 1] + " </td>",
           fileName);
         for i2 in 1:nx loop
-          print("<td> " + String(ss.C[c2 + 1, i2], format=format) + " </td>",
+          print(td_align + String(ss.C[c2 + 1, i2], format=format) + " </td>",
             fileName);
         end for;
         // Print space between matrix A and B
-        print("<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>", fileName);
+        for i2 in 1:dist loop
+          print("  <td>&nbsp;</td>", fileName);
+        end for;
 
-        print("<td>D</td><td>=</td><td>" + (if nu>0 then ss.yNames[min(c2 + 1, ny)] else "[ ],  empty matrix: " +String(ny)+" by "+String(nu)) + " </td>",
+        print("  <td>D</td>\n  <td>=</td>\n  <td>" + (if nu>0 then ss.yNames[min(c2 + 1, ny)] else "[ ],  empty matrix: " +String(ny)+" by "+String(nu)) + " </td>",
           fileName);
 
         for i2 in 1:nu loop
-          print("<td> " + String(ss.D[c2 + 1, i2], format=format) + " </td>",
+          print(td_align + String(ss.D[c2 + 1, i2], format=format) + " </td>",
             fileName);
         end for;
+        print("</tr>", fileName);
 
         // Print lower parts of C and D
+        // ----------------------------
         for i1 in c2 + 2:ny loop
-          print("<tr><td><br></td><td><br></td><td> " + ss.yNames[i1] + " </td>",
+          print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td> " + ss.yNames[i1] + " </td>",
             fileName);
           for i2 in 1:nx loop
-            print("<td> " + String(ss.C[i1, i2], format=format) + " </td>",
+            print(td_align + String(ss.C[i1, i2], format=format) + " </td>",
               fileName);
           end for;
 
-          for i2 in 1:dist - 1 loop
-            print("<td><br></td>", fileName);
+          for i2 in 1:dist loop
+            print("  <td>&nbsp;</td>", fileName);
           end for;
-          print("<td>" + ss.yNames[i1] + " </td>", fileName);
+          print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
+          print("  <td>" + ss.yNames[i1] + " </td>", fileName);
           for i2 in 1:nu loop
-            print("<td> " + String(ss.D[i1, i2], format=format) + " </td>",
+            print(td_align + String(ss.D[i1, i2], format=format) + " </td>",
               fileName);
           end for;
           print("</tr>", fileName);
         end for;
       else
-        // Matrices C and D are empty
-        print("<tr><td>C</td><td>=</td><td>[ ],  empty matrix: " +String(ny)+" by "+String(nx) + " </td>", fileName);
-        // Print space between matrix A and B
-        print("<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>", fileName);
 
-        print("<td>D</td><td>=</td><td>[ ],  empty matrix: " +String(ny)+" by "+String(nu) + " </td>", fileName);
+        // Matrices C and D are empty
+        // --------------------------
+        print("<tr>\n  <td>C</td>\n  <td>=</td>\n  <td>[ ],  empty matrix: " +String(ny)+" by "+String(nx) + " </td>", fileName);
+        // Print space between matrix C and D
+        print("  <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>", fileName);
+
+        print("  <td>D</td>\n  <td>=</td>\n  <td>[ ],  empty matrix: " +String(ny)+" by "+String(nu) + " </td>", fileName);
+        print("</tr>", fileName);
       end if;
 
       print("</table>\n", fileName);
@@ -1177,9 +1230,8 @@ encapsulated package Analysis
 
       if description == "" then
       else
-        print("</table>\n", fileName);
-        print("<h2>Description</h2>", fileName);
-        print(description, fileName);
+        print("\n<h2>Description</h2>", fileName);
+        print("<p>\n"+description+"\n</p>", fileName);
       end if;
 
       print("</body>\n</html>", fileName);
@@ -1202,8 +1254,6 @@ encapsulated package Analysis
       input Boolean isDetectable;
       input String fileName="systemHead1.html"
           "File on which the information is written in html format";
-      input Integer hSize(min=1, max=5)=2
-          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)";
 
       input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
           Modelica_LinearSystems2.Internal.AnalyseOptions(
@@ -1220,13 +1270,34 @@ encapsulated package Analysis
             headingInvariantzeros="Invariant zeros",
             headingStepResponse="Step response",
             headingFrequencyResponse="Frequency response");
+
+      input Boolean htmlEnv=true
+          "True, if text should be printed within 'html' and 'body' environment, otherwise text printed into existing file fileName"
+        annotation(Dialog(group="HTML format"));
+      input Integer hSize(min=1, max=5)=2
+          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)"
+        annotation(Dialog(group="HTML format"));
+
       protected
       Integer hSizeOK= if hSize<1 then 1 else if hSize > 5 then 5 else hSize;
       String heading= "h"+String(hSizeOK);
 
     algorithm
-      print("<html>\n<body>\n<"+heading+">Characteristics</"+heading+">\n<p>The system\n<p>\n</p> is ",
-        fileName);
+      // ---------------------------------------------------------------------------------------------------
+      // The correct HTML format generated with this function can be checked with following commands:
+      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead1(Modelica_LinearSystems2.StateSpace(A=[2], B=[1], C=[1], D=[1]), false, false, false, true, false, htmlEnv=true, hSize=3);
+      // ---------------------------------------------------------------------------------------------------
+
+      if htmlEnv then
+        // Text should be printed into new file in HTML environment
+        Modelica.Utilities.Files.removeFile(fileName);
+        print("<html>\n<body>", fileName);
+      //else
+        // Print at end of existing file
+      end if;
+
+      print("\n<"+heading+">Characteristics</"+heading+">\n<p>The system\n</p>\n<p> is ", fileName);
+
       if analyseOptions.printControllability and analyseOptions.printObservability then
         print((if isStable then " " else "not ") + "stable" + "\n<br>" + (if
           isStable then if isControllable then "and it is " else "but it is not " else
@@ -1251,10 +1322,18 @@ encapsulated package Analysis
                 if isDetectable then " but it is " else "and is not ") + "detectable.")
            + "\n<br></br>", fileName);
       else
-        print((if isStable then " " else "not ") + "stable." + "\n<br></br>",
+        print((if isStable then " " else "not ") + "stable." + "\n<br><br>",
           fileName);
       end if;
-      print("</body>\n</html>", fileName);
+
+      print("</p>", fileName);
+
+      if htmlEnv then
+        // Last print of HTML environment
+        print("</body>\n</html>", fileName);
+      //else
+        // Print at end of existing file
+      end if;
 
     end printHead1;
 
@@ -1268,8 +1347,6 @@ encapsulated package Analysis
 
       input String fileName="systemHead2a.html"
           "File on which the information is written in html format";
-      input Integer hSize(min=1, max=5)=3
-          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)";
       input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
           Modelica_LinearSystems2.Internal.AnalyseOptions(
             plotEigenValues=true,
@@ -1285,23 +1362,53 @@ encapsulated package Analysis
             headingInvariantzeros="Invariant zeros",
             headingStepResponse="Step response",
             headingFrequencyResponse="Frequency response");
+
+      input Boolean htmlEnv=false
+          "True, if text should be printed within 'html' and 'body' environment, otherwise text printed into existing file fileName"
+        annotation(Dialog(group="HTML format"));
+      input Integer hSize(min=1, max=5)=3
+          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)"
+        annotation(Dialog(group="HTML format"));
       protected
       Integer hSizeOK= if hSize<1 then 1 else if hSize > 5 then 5 else hSize;
       String heading= "h"+String(hSizeOK);
 
     algorithm
-      print("<html>\n<body>\n<"+heading+">Eigenvalues analysis</"+heading+">\n<p><b>Real eigenvalues</b></p>",
+      // ---------------------------------------------------------------------------------------------------
+      // The correct HTML format generated with this function can be checked with following commands:
+      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead2a(htmlEnv=true, hSize=3);
+      // ---------------------------------------------------------------------------------------------------
+
+      if htmlEnv then
+        // Text should be printed into new file in HTML environment
+        Modelica.Utilities.Files.removeFile(fileName);
+        print("<html>\n<body>", fileName);
+      //else
+        // Print at end of existing file
+      end if;
+
+      print("\n<"+heading+">Eigenvalues analysis</"+heading+">\n<p>\n<b>Real eigenvalues</b>\n</p>",
         fileName);
+      print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+           + "cellpadding=\"3\" border=\"1\">", fileName);
+      print("<caption>Real eigenvalues</caption>", fileName);
+
       if analyseOptions.printEigenValueProperties then
-        print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-           + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+        print("<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
            + "<td> number </td><td> eigenvalue </td> <td> T [s] </td>  <td> characteristics </td><td> contribution to states</td></tr>",
           fileName);
       else
-        print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-           + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+        print("<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
            + "<td> number </td><td> eigenvalue </td> <td> T [s] </td>  <td> characteristics </td></tr>",
           fileName);
+      end if;
+
+      if htmlEnv then
+        // Last print of HTML environment
+        print("</table>", fileName);
+        print("</body>\n</html>", fileName);
+      //else
+        // Print at end of existing file
       end if;
     end printHead2a;
 
@@ -1315,8 +1422,6 @@ encapsulated package Analysis
 
       input String fileName="systemHead2b.html"
           "File on which the information is written in html format";
-      input Integer hSize(min=1, max=5)=3
-          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)";
       input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
           Modelica_LinearSystems2.Internal.AnalyseOptions(
             plotEigenValues=true,
@@ -1332,20 +1437,24 @@ encapsulated package Analysis
             headingInvariantzeros="Invariant zeros",
             headingStepResponse="Step response",
             headingFrequencyResponse="Frequency response");
-      protected
-      Integer hSizeOK= if hSize<1 then 1 else if hSize > 5 then 5 else hSize;
-      String heading= "h"+String(hSizeOK);
 
     algorithm
-      print("<html>\n<body>\n<"+heading+">Conjugated complex pairs of eigenvalues</"+heading+">", fileName);
+      // ---------------------------------------------------------------------------------------------------
+      // The correct HTML format generated with this function can be checked with following commands:
+      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead2b(htmlEnv=true, hSize=3);
+      // ---------------------------------------------------------------------------------------------------
+
+      print("<p>\n<b>Conjugated complex pairs of eigenvalues</b>\n</p>", fileName);
+      print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+           + "cellpadding=\"3\" border=\"1\">", fileName);
+      print("<caption>Conjugated complex pairs of eigenvalues</caption>", fileName);
+
       if analyseOptions.printEigenValueProperties then
-        print("<br>" + "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-           + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+        print("<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
            + "<td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td>  <td> contribution to states</td></tr>",
           fileName);
       else
-        print("<br>" + "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-           + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+        print("<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
            + "<td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td> </tr>",
           fileName);
       end if;
@@ -1377,20 +1486,20 @@ encapsulated package Analysis
             headingFrequencyResponse="Frequency response");
 
     algorithm
-      print("<html>\n<body>", fileName);
-      print("<p> In the tables above, the column <b>contribution to states</b> lists for each eigenvalue the states to which the"
+      print("<p>\nIn the tables above, the column <b>contribution to states</b> lists for each eigenvalue the states to which the"
          + "corresponding modal state contributes most. This information is based on the "
          + "two largest absolute values of the corresponding right eigenvector (if the second large value "
-         + "is less than 5 % of the largest contribution, it is not shown).<br>" + "</p><p>"
-         + "In the next table, for each state in the column <b>correlation to modal states</b>, the modal  "
+         + "is less than 5 % of the largest contribution, it is not shown)." + "\n</p>\n<p>\n"
+         + "In the next table, for each state in the column <b>correlation to modal states</b>, the modal "
          + "states which contribute most to the coresponding state are summarized, i.e. the state is mostly composed of these modal states "
          + "This information is based on the two largest absolute values of row i of the "
          + "eigenvector matrix that is associated with eigenvalue i (if the second large value  "
          + "is less than 5 % of the largest contribution, it is not shown). This only holds "
          + "if the modal states are in the same order of magnitude. Otherwise, the modal states "
-         + "listed in the last column might be not the most relevant one. </p><br><br> "
-         + "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-         + "cellpadding=\"3\" border=\"1\"> " + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+         + "listed in the last column might be not the most relevant one.\n</p>\n<br>",
+        fileName);
+      print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+         + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
          + "<td> state </td> <td> composition </td> <td> eigenvalue #</td> <td> freq. [Hz] </td> <td> damping </td>  </td> <td> T [s] </td></tr>",
         fileName);
 
@@ -1405,8 +1514,6 @@ encapsulated package Analysis
 
       input String fileName="systemHead4.html"
           "File on which the information is written in html format";
-      input Integer hSize(min=1, max=5)=3
-          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)";
       input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
           Modelica_LinearSystems2.Internal.AnalyseOptions(
             plotEigenValues=true,
@@ -1422,18 +1529,47 @@ encapsulated package Analysis
             headingInvariantzeros="Invariant zeros",
             headingStepResponse="Step response",
             headingFrequencyResponse="Frequency response");
+
+      input Boolean htmlEnv=false
+          "True, if text should be printed within 'html' and 'body' environment, otherwise text printed into existing file fileName"
+        annotation(Dialog(group="HTML format"));
+      input Integer hSize(min=1, max=5)=3
+          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)"
+        annotation(Dialog(group="HTML format"));
       protected
       Integer hSizeOK= if hSize<1 then 1 else if hSize > 5 then 5 else hSize;
       String heading= "h"+String(hSizeOK);
 
     algorithm
-      print("<html>\n<body>\n<"+heading+">Invariant zeros</"+heading+">",
+      // ---------------------------------------------------------------------------------------------------
+      // The correct HTML format generated with this function can be checked with following commands:
+      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead4(htmlEnv=true, hSize=3);
+      // ---------------------------------------------------------------------------------------------------
+
+      if htmlEnv then
+        // Text should be printed into new file in HTML environment
+        Modelica.Utilities.Files.removeFile(fileName);
+        print("<html>\n<body>", fileName);
+      //else
+        // Print at end of existing file
+      end if;
+
+      print("\n<"+heading+">Invariant zeros</"+heading+">",
+        fileName);
+      print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+         + "cellpadding=\"3\" border=\"1\">", fileName);
+      print("<caption>Invariant zeros</caption>", fileName);
+      print( "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+         + "<td> number </td> <td> invariant zero </td> <td> Time constant [s] </td> <td> freq. [Hz] </td> <td> damping </td></tr>",
         fileName);
 
-      print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-         + "cellpadding=\"3\" border=\"1\">" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
-         + "<td> number </td> <td> invariant zero </td><td> Time constant [s] </td> <td> freq. [Hz] </td> <td> damping </td></tr>",
-        fileName);
+      if htmlEnv then
+        // Last print of HTML environment
+        print("</table>", fileName);
+        print("</body>\n</html>", fileName);
+      //else
+        // Print at end of existing file
+      end if;
     end printHead4;
 
     encapsulated function printTab1
