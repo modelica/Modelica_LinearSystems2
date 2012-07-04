@@ -29,7 +29,8 @@ external "Fortran 77" dgehrd(
     lwork,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="
+  annotation (Documentation(info="Lapack documentation:
+
    Purpose
    =======
 

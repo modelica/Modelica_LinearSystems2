@@ -15,7 +15,8 @@ protected
   external "FORTRAN 77" dtrtri(uplo, diag, n, invA, lda, info) annotation (Library="Lapack");
 
   annotation (
-    Documentation(info="Lapack documentation
+    Documentation(info="Lapack documentation:
+
    Purpose
    =======
 

@@ -47,11 +47,12 @@ external "Fortran 77" dtrsen(
     liwork,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="
+  annotation (Documentation(info="Lapack documentation:
+
    Purpose
    =======
 
-     DTRSEN reorders the real Schur factorization of a real matrix
+   DTRSEN reorders the real Schur factorization of a real matrix
    A = Q*T*Q**T, so that a selected cluster of eigenvalues appears in
    the leading diagonal blocks of the upper quasi-triangular matrix T,
    and the leading columns of Q form an orthonormal basis of the

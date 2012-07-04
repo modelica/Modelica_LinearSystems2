@@ -1052,9 +1052,9 @@ from a ZerosAndPoles record representated by first and second order numerator an
 
     annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(tf)  </td> </tr>
-</table>
+<blockquote><pre>
+ss = ZerosAndPoles.Conversion.<b>toStateSpace</b>(zp)
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -1278,9 +1278,6 @@ Differentiating y symbolically leads to:
 Therefore, in this case, the derivative of u is not
 needed and the tool can continue with the symbolic
 processing.
-</p>
-
-
 </p>
 
 <h4>Example</h4>

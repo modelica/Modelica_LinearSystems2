@@ -9,8 +9,12 @@ function drotg "Construct Givens plane rotation"
 
 external "Fortran 77" drotg(r,b,c,s) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="
-    Purpose
-    =======
-    construct givens plane rotation.     "));
+  annotation (Documentation(info="Lapack documentation:
+
+   Purpose
+   =======
+
+   construct givens plane rotation.     
+
+   =====================================================================  "));
 end drotg;

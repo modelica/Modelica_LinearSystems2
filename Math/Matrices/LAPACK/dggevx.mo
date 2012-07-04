@@ -60,8 +60,10 @@ external "Fortran 77" dggevx(
     iwork,
     bwork,
     info)  annotation(Library = {"lapack"});
-  annotation (Documentation(info="/*  Purpose
-/*  =======
+  annotation (Documentation(info="Lapack documentation:
+
+   Purpose
+   =======
 
    DGGEVX computes for a pair of N-by-N real nonsymmetric matrices (A,B)
    the generalized eigenvalues, and optionally, the left and/or right
@@ -90,7 +92,6 @@ external "Fortran 77" dggevx(
                     u(j)**H * A  = lambda(j) * u(j)**H * B.
 
    where u(j)**H is the conjugate-transpose of u(j).
-
 
    Arguments
    =========

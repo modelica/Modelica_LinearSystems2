@@ -40,7 +40,9 @@ external "Fortran 77" dggev(
     work,
     lwork,
     info)         annotation(Library = {"lapack"});
-  annotation (Documentation(info="   Purpose
+  annotation (Documentation(info="Lapack documentation:
+
+   Purpose
    =======
 
    DGGEV computes for a pair of N-by-N real nonsymmetric matrices (A,B)
@@ -64,7 +66,6 @@ external "Fortran 77" dggev(
                     u(j)**H * A  = lambda(j) * u(j)**H * B .
 
    where u(j)**H is the conjugate-transpose of u(j).
-
 
    Arguments
    =========

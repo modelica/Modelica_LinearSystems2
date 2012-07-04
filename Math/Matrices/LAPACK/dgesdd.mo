@@ -31,7 +31,9 @@ external "Fortran 77" dgesdd(
     iwork,
     info)
     annotation (Library="lapack");
-  annotation (Documentation(info="   Purpose
+  annotation (Documentation(info="Lapack documentation:
+
+   Purpose
    =======
 
    DGESDD computes the singular value decomposition (SVD) of a real

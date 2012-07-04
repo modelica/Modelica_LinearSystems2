@@ -31,7 +31,9 @@ external "Fortran 77" dormqr(
     lwork,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="   Purpose
+  annotation (Documentation(info="Lapack documentation:
+
+   Purpose
    =======
 
    DORGQR generates an M-by-N real matrix Q with orthonormal columns,

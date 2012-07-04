@@ -82,57 +82,69 @@ no or infinitely many solutions (input A is singular).");
   end if;
 
   annotation (Documentation(info="<html>
-Function <b>dare</b> computes the solution <b>X</b> of the discrete-time algebraic Riccati equation
-<blockquote><pre>
-                                 -1
- <b>X</b> = <b>A</b>'*<b>X</b>*<b>A</b> - <b>A</b>'*<b>X</b>*<b>B</b>*(<b>R</b> + <b>B</b>'*<b>X</b>*<b>B</b>)  *<b>B</b>'*<b>X</b>*<b>A</b> + <b>Q</b>
-</pre>
-</blockquote>
-using the Schur vector approach proposed by Laub [1].
 <p>
-It is assumed that <b>Q</b> is symmetric and positve semidefinite and <b>R</b> is symmetric, nonsingular and positive definite,
-(<b>A</b>,<b>B</b>) is stabilizable and (<b>A</b>,<b>Q</b>) is detectable.
-<p><b>
-The assumptions are not checked in this function
-</b>
+Function <b>dare</b> computes the solution <b>X</b> of the discrete-time 
+algebraic Riccati equation
+</p>
+<blockquote><pre>
+<b>X</b> = <b>A</b>'*<b>X</b>*<b>A</b> - <b>A</b>'*<b>X</b>*<b>B</b>*(<b>R</b> + <b>B</b>'*<b>X</b>*<b>B</b>)<sup>-1</big></sup>*<b>B</b>'*<b>X</b>*<b>A</b> + <b>Q</b>
+</pre></blockquote>
+<p>
+using the Schur vector approach proposed by Laub [1].
+</p>
+<p>
+It is assumed that <b>Q</b> is symmetric and positve semidefinite and <b>R</b> 
+is symmetric, nonsingular and positive definite, (<b>A</b>,<b>B</b>) is stabilizable 
+and (<b>A</b>,<b>Q</b>) is detectable.
+<b>The assumptions are not checked in this function</b>
+</p>
 
 <p>
 The assumptions guarantee that the Hamiltonian matrix
+</p>
 <blockquote><pre>
-      -1  -1       -1        -1
-<b>H</b> = [<b>A</b>, -<b>A</b>  *<b>G</b>; <b>Q</b>*<b>A</b>, <b>A</b>' + <b>Q</b>*<b>A</b>  *<b>G</b> ]
+<b>H</b> = [<b>A</b><sup>-1</sup>, -<b>A</b><sup>-1</sup>*<b>G</b>; <b>Q</b>*<b>A</b><sup>-1</sup>, <b>A</b>' + <b>Q</b>*<b>A</b><sup>-1</sup>*<b>G</b> ]
 </pre></blockquote>
+<p>
 with
+</p>
 <blockquote><pre>
-       -1
-<b>G</b> = <b>B</b>*<b>R</b> *<b>B</b>'
-</pre>
-</blockquote>
+<b>G</b> = <b>B</b>*<b>R</b><sup>-1</sup>*<b>B</b>'
+</pre></blockquote>
+<p>
 has no eigenvalue on the unit circle and can be put
 to an ordered real Schur form
+</p>
 <blockquote><pre>
 <b>U</b>'*<b>H</b>*<b>U</b> = <b>X</b> = [<b>S11</b>, <b>S12</b>; <b>0</b>, <b>S22</b>]
 </pre></blockquote>
+<p>
 with orthogonal similarity transformation <b>U</b>. <b>X</b> is ordered in such a way,
 that <b>S11</b> contains the n stable eigenvalues of the closed loop system with system matrix
+</p>
 <blockquote><pre>
-                  -1
-<b>A</b> - <b>B</b>*(<b>R</b> + <b>B</b>'*<b>X</b>*<b>B</b>)  *<b>B</b>'*<b>X</b>*<b>A</b>
-</pre>
-</blockquote>
+<b>A</b> - <b>B</b>*(<b>R</b> + <b>B</b>'*<b>X</b>*<b>B</b>)<sup>-1</sup>  *<b>B</b>'*<b>X</b>*<b>A</b>
+</pre></blockquote>
+<p>
 If <b>U</b> is partitioned to
+</p>
 <blockquote><pre>
 <b>U</b> = [<b>U11</b>, <b>U12</b>; <b>U21</b>, <b>U22</b>]
 </pre></blockquote>
+<p>
 according to <b>X</b>, the solution <b>X</b> can be calculated by
+</p>
 <blockquote><pre>
 <b>X</b>*<b>U11</b> = <b>U21</b>.
 </pre></blockquote>
 
-The algorithm uses LAPACK routines dgehrd (to compute the upper Hessenberg matrix of <b>H</b>), dorghr (to calculate the orthogonal
-matrix from the elementary reflectors as returned from dgehrd), dhseqr (to put transformed <b>H</b> to Schur form and to calculate the eigenvalues
-of the closed loop system) and dtrsen (to compute the ordered real Schur form and matrix <b>U</b>).
 <p>
+The algorithm uses LAPACK routines dgehrd (to compute the upper Hessenberg matrix 
+of <b>H</b>), dorghr (to calculate the orthogonal matrix from the elementary reflectors 
+as returned from dgehrd), dhseqr (to put transformed <b>H</b> to Schur form and to 
+calculate the eigenvalues of the closed loop system) and dtrsen (to compute the ordered 
+real Schur form and matrix <b>U</b>).
+</p>
 
 <h4><a name=\"References\">References</a></h4>
 <dl>

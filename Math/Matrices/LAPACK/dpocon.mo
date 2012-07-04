@@ -25,53 +25,52 @@ external "Fortran 77" dpocon(
     iwork,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="
+  annotation (Documentation(info="Lapack documentation:
 
+   Purpose
+   =======
 
-    Purpose
-    =======
+   DPOCON estimates the reciprocal of the condition number (in the
+   1-norm) of a real symmetric positive definite matrix using the
+   Cholesky factorization A = U**T*U or A = L*L**T computed by DPOTRF.
 
-    DPOCON estimates the reciprocal of the condition number (in the
-    1-norm) of a real symmetric positive definite matrix using the
-    Cholesky factorization A = U**T*U or A = L*L**T computed by DPOTRF.
+   An estimate is obtained for norm(inv(A)), and the reciprocal of the
+   condition number is computed as RCOND = 1 / (ANORM * norm(inv(A))).
 
-    An estimate is obtained for norm(inv(A)), and the reciprocal of the
-    condition number is computed as RCOND = 1 / (ANORM * norm(inv(A))).
+   Arguments
+   =========
 
-    Arguments
-    =========
+   UPLO    (input) CHARACTER*1
+           = 'U':  Upper triangle of A is stored;
+           = 'L':  Lower triangle of A is stored.
 
-    UPLO    (input) CHARACTER*1
-            = 'U':  Upper triangle of A is stored;
-            = 'L':  Lower triangle of A is stored.
+   N       (input) INTEGER
+           The order of the matrix A.  N >= 0.
 
-    N       (input) INTEGER
-            The order of the matrix A.  N >= 0.
+   A       (input) DOUBLE PRECISION array, dimension (LDA,N)
+           The triangular factor U or L from the Cholesky factorization
+           A = U**T*U or A = L*L**T, as computed by DPOTRF.
 
-    A       (input) DOUBLE PRECISION array, dimension (LDA,N)
-            The triangular factor U or L from the Cholesky factorization
-            A = U**T*U or A = L*L**T, as computed by DPOTRF.
+   LDA     (input) INTEGER
+           The leading dimension of the array A.  LDA >= max(1,N).
 
-    LDA     (input) INTEGER
-            The leading dimension of the array A.  LDA >= max(1,N).
+   ANORM   (input) DOUBLE PRECISION
+           The 1-norm (or infinity-norm) of the symmetric matrix A.
 
-    ANORM   (input) DOUBLE PRECISION
-            The 1-norm (or infinity-norm) of the symmetric matrix A.
+   RCOND   (output) DOUBLE PRECISION
+           The reciprocal of the condition number of the matrix A,
+           computed as RCOND = 1/(ANORM * AINVNM), where AINVNM is an
+           estimate of the 1-norm of inv(A) computed in this routine.
 
-    RCOND   (output) DOUBLE PRECISION
-            The reciprocal of the condition number of the matrix A,
-            computed as RCOND = 1/(ANORM * AINVNM), where AINVNM is an
-            estimate of the 1-norm of inv(A) computed in this routine.
+   WORK    (workspace) DOUBLE PRECISION array, dimension (3*N)
 
-    WORK    (workspace) DOUBLE PRECISION array, dimension (3*N)
+   IWORK   (workspace) INTEGER array, dimension (N)
 
-    IWORK   (workspace) INTEGER array, dimension (N)
+   INFO    (output) INTEGER
+           = 0:  successful exit
+           < 0:  if INFO = -i, the i-th argument had an illegal value
 
-    INFO    (output) INTEGER
-            = 0:  successful exit
-            < 0:  if INFO = -i, the i-th argument had an illegal value
-
-    =====================================================================
+   =====================================================================
 
 
 "));

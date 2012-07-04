@@ -91,55 +91,63 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
-
-
+<p>
 Function <b>care</b> computes the solution <b>X</b> of the continuous-time algebraic Riccati equation
+</p>
 <blockquote><pre>
- <b>Q</b> + <b>A</b>'*<b>X</b> + <b>X</b>*<b>A</b> - <b>X</b>*<b>G</b>*<b>X</b> = <b>0</b>
+<b>Q</b> + <b>A</b>'*<b>X</b> + <b>X</b>*<b>A</b> - <b>X</b>*<b>G</b>*<b>X</b> = <b>0</b>
 </pre></blockquote>
+<p>
 with
+</p>
 <blockquote><pre>
-       -1
-<b>G</b> = <b>B</b>*<b>R</b> *<b>B</b>'
-</pre>
-</blockquote>
+<b>G</b> = <b>B</b>*<b>R</b><sup><big>-1</big></sup>*<b>B</b>'
+</pre></blockquote>
+<p>
 using the Schur vector approach proposed by Laub [1].
+</p>
 <p>
 It is assumed that <b>Q</b> is symmetric and positve semidefinite and <b>R</b> is symmetric, nonsingular and positive definite,
 (<b>A</b>,<b>B</b>) is stabilizable and (<b>A</b>,<b>Q</b>) is detectable.
-<p><b>
-The assumptions are not checked in this function
-</b>
+<b>The assumptions are not checked in this function!</b>
+</p>
 <p>
 The assumptions guarantee that Hamiltonian matrix
+</p>
 <blockquote><pre>
 <b>H</b> = [<b>A</b>, -<b>G</b>; -<b>Q</b>, -<b>A</b>']
 </pre></blockquote>
+<p>
 has no pure imaginary eigenvalue and can be put
 to an ordered real Schur form
+</p>
 <blockquote><pre>
 <b>U</b>'*<b>H</b>*<b>U</b> = <b>S</b> = [<b>S</b>11, <b>S</b>12; <b>0</b>, <b>S</b>22]
 </pre></blockquote>
+<p>
 with orthogonal similarity transformation <b>U</b>. <b>S</b> is ordered in such a way,
 that <b>S11</b> contains the n stable eigenvalues of the closed loop system with system matrix
+</p>
 <blockquote><pre>
-       -1
-<b>A</b> - <b>B</b>*<b>R</b> *<b>B</b>'*<b>X</b>
+<b>A</b> - <b>B</b>*<b>R</b><sup><big>-1</big></sup>*<b>B</b>'*<b>X</b>
 </pre></blockquote>
+<p>
 If <b>U</b> is partitioned to
+</p>
 <blockquote><pre>
 <b>U</b> = [<b>U</b>11, <b>U</b>12; <b>U</b>21, <b>U</b>22]
 </pre></blockquote>
+<p>
 with dimenstions according to <b>S</b>, the solution <b>X</b> can be calculated by
+</p>
 <blockquote><pre>
 <b>X</b>*<b>U</b>11 = <b>U</b>21.
 </pre></blockquote>
-
+<p>
 The algorithm uses LAPACK routines dgehrd (to compute the upper Hessenberg matrix of <b>H</b>), dorghr (to calculate the orthogonal
 matrix from the elementary reflectors as returned from dgehrd), dhseqr (to put transformed <b>H</b> to Schur form and to calculate the eigenvalues
 of the closed loop system) and dtrsen (to compute the ordered real Schur form and matrix <b>U</b>).
-
-<p>
+</p>
 
 <h4><a name=\"References\">References</a></h4>
 <dl>

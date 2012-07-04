@@ -26,7 +26,8 @@ external "Fortran 77" dgeqrf(
     lwork2,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="
+  annotation (Documentation(info="Lapack documentation:
+
    Purpose
    =======
 

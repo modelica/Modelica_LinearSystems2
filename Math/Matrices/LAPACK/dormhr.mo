@@ -39,11 +39,12 @@ external "Fortran 77" dormhr(
     lwork,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="
+  annotation (Documentation(info="Lapack documentation:
+
    Purpose
    =======
 
-     DORMHR overwrites the general real M-by-N matrix C with
+   DORMHR overwrites the general real M-by-N matrix C with
 
                    SIDE = 'L'     SIDE = 'R'
    TRANS = 'N':      Q * C          C * Q

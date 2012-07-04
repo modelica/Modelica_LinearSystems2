@@ -45,8 +45,9 @@ external "Fortran 77" dhgeqz(
     lwork,
     info)         annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="
-     Purpose
+  annotation (Documentation(info="Lapack documentation:
+
+   Purpose
    =======
 
    DHGEQZ implements a single-/double-shift version of the QZ method for

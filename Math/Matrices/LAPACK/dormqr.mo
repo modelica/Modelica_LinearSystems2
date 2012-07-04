@@ -36,7 +36,9 @@ external "Fortran 77" dormqr(
     lwork,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="   Purpose
+  annotation (Documentation(info="Lapack documentation:
+
+   Purpose
    =======
 
    DORMQR overwrites the general real M-by-N matrix C with

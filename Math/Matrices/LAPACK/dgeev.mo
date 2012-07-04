@@ -34,7 +34,9 @@ external "Fortran 77" dgeev(
     size(work, 1),
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="   Purpose
+  annotation (Documentation(info="Lapack documentation:
+
+   Purpose
    =======
 
    DGEEV computes for an N-by-N real nonsymmetric matrix A, the

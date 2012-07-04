@@ -39,7 +39,12 @@ external "Fortran 77" dhseqr(
     lw,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="    DHSEQR computes the eigenvalues of a real upper Hessenberg matrix H
+  annotation (Documentation(info="Lapack documentation:
+
+   Purpose
+   =======
+
+   DHSEQR computes the eigenvalues of a real upper Hessenberg matrix H
    and, optionally, the matrices T and Z from the Schur decomposition
    H = Z T Z**T, where T is an upper quasi-triangular matrix (the Schur
    form), and Z is the orthogonal matrix of Schur vectors.

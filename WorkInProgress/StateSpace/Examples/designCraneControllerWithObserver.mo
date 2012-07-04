@@ -107,14 +107,20 @@ algorithm
 
   print("\nok!");
   annotation (interactive=true, Documentation(info="<html>
-This example demonstrates how to use pole placement function assignPolesMI to design a pole placement controller and an observer also using assignPolesMI as well.
-Function assignPoles is based on the Schur form of the state space matrix an also allows partial poles shifting [1].
-<br>
-An observer can be designed by applying assignPolesMI to the dual system (A', C', B').
-<br>
-The results, which are controller feedback matrix, observer feedback matrix, system model for usage in observer and a simple pre filter for tracking are saved to MATLAB files which can be used in ModelicaController library.<br>
-It is also shown how to linearize a model of a crane trolley system [1]. The linear model is then used as a base for controller design.
 <p>
+This example demonstrates how to use pole placement function assignPolesMI to 
+design a pole placement controller and an observer also using assignPolesMI as well.
+Function assignPoles is based on the Schur form of the state space matrix an also 
+allows partial poles shifting [1].
+</p>
+<p>
+An observer can be designed by applying assignPolesMI to the dual system (A', C', B').
+The results, which are controller feedback matrix, observer feedback matrix, system 
+model for usage in observer and a simple pre filter for tracking are saved to MATLAB 
+files which can be used in ModelicaController library.
+It is also shown how to linearize a model of a crane trolley system [1]. 
+The linear model is then used as a base for controller design.
+</p>
 
 <h4><a name=\"References\">References</a></h4>
 <dl>

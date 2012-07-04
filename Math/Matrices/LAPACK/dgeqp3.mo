@@ -28,7 +28,9 @@ external "Fortran 77" dgeqp3(
     lwork2,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="   Purpose
+  annotation (Documentation(info="Lapack documentation:
+
+   Purpose
    =======
 
    DGEQP3 computes a QR factorization with column pivoting of a

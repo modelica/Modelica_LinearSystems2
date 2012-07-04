@@ -37,6 +37,8 @@ protected
     info)   annotation (Library="lapack");
   annotation (Documentation(info="<html>
 <pre>
+Lapack documentation:
+
    Purpose
    =======
 
@@ -212,7 +214,7 @@ protected
    are computed, then only the diagonal blocks will be correct.
 
    [*] See DHGEQZ, DGEGS, or read the book \"Matrix Computations\",
-       by Golub & van Loan, pub. by Johns Hopkins U. Press.
+       by Golub &amp; van Loan, pub. by Johns Hopkins U. Press.
 
    =====================================================================
 </pre>
