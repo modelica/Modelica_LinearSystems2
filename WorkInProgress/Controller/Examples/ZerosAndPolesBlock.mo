@@ -67,8 +67,7 @@ equation
       points={{-22,10},{-32,10},{-32,-10},{-39,-10}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (uses(Modelica_LinearSystems2(version="2.1"), Modelica(version="3.1")),
-      Diagram(graphics),
+  annotation (
     experiment(StopTime=5),
     experimentSetupOutput);
 end ZerosAndPolesBlock;

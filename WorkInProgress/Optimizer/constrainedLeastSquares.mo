@@ -422,6 +422,5 @@ The Fortran interface of DLSEI is defined as:
        Martin Otter (DLR): implemented
 </li>
 </ul>
-</html>"),
-    uses(Modelica(version="2.2.2 development")));
+</html>"));
 end constrainedLeastSquares;

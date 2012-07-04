@@ -418,7 +418,6 @@ linearized an used as a base for linear controller design. The results are used 
 in Modelica_Controller.Examples.InverseDoublePendulum.mo
 
 </html>"),
-    uses(Modelica(version="3.0")),
     experimentSetupOutput,
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
