@@ -2044,25 +2044,27 @@ end sr_ukfEstimate_2;
        by Marcus Baur, DLR-RM</li>
 </ul>
 </html>",   info="<html>
-
 <h4>Syntax</h4>
 <blockquote><pre>
-         (x_est, y_est, M, K) = DiscreteStateSpace.Design.<b>EKF</b>(x_pre, u_pre, y, M_pre, Q, R, Ts)
+(x_est, y_est, M, K) = DiscreteStateSpace.Design.<b>EKF</b>(x_pre, u_pre, y, M_pre, Q, R, Ts)
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function <b>EKF</b> computes one recursion of the Kalman filter or the extended Kalman filter equations respectively, i.e updating
-the Riccati difference equation and the Kalman filter gain and correction of the predicted state.<br>
+the Riccati difference equation and the Kalman filter gain and correction of the predicted state.
+</p>
+<p>
 The system functions are defined in function ekfFunction(), which is to provide by the user. Matrices <b>A</b>_k and <b>C</b>_k are the
 Jacobians F_x and H_x of the system equations <b>f</b> and <b>h</b>
+</p>
 <blockquote><pre>
-
- x_k = f(x_k-1, u_k-1)
- y_k = h(x_k, u_k)
-
+x_k = f(x_k-1, u_k-1)
+y_k = h(x_k, u_k)
 </pre></blockquote>
+<p>
 i.e., in the case of linear systems the system matrix <b>A</b> and the output matrix <b>C</b>.
-
+</p>
 </html>"));
   end EKF;
 
@@ -2106,25 +2108,27 @@ i.e., in the case of linear systems the system matrix <b>A</b> and the output ma
        by Marcus Baur, DLR-RM</li>
 </ul>
 </html>",   info="<html>
-
 <h4>Syntax</h4>
 <blockquote><pre>
-         (x_est, y_est, M, K) = DiscreteStateSpace.Design.<b>EKF</b>(x_pre, u_pre, y, M_pre, Q, R, Ts)
+(x_est, y_est, M, K) = DiscreteStateSpace.Design.<b>EKF</b>(x_pre, u_pre, y, M_pre, Q, R, Ts)
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function <b>EKF</b> computes one recursion of the Kalman filter or the extended Kalman filter equations respectively, i.e updating
-the Riccati difference equation and the Kalman filter gain and correction of the predicted state.<br>
+the Riccati difference equation and the Kalman filter gain and correction of the predicted state.
+</p>
+<p>
 The system functions are defined in function ekfFunction(), which is to provide by the user. Matrices <b>A</b>_k and <b>C</b>_k are the
 Jacobians F_x and H_x of the system equations <b>f</b> and <b>h</b>
+</p>
 <blockquote><pre>
-
- x_k = f(x_k-1, u_k-1)
- y_k = h(x_k, u_k)
-
+x_k = f(x_k-1, u_k-1)
+y_k = h(x_k, u_k)
 </pre></blockquote>
+<p>
 i.e., in the case of linear systems the system matrix <b>A</b> and the output matrix <b>C</b>.
-
+</p>
 </html>"));
   end EKF_Bsp;
 
@@ -2191,7 +2195,7 @@ but using statistical linearization where extended Kalman filter apply the user-
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
 <p>
-See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to solve the mathematically identical problem.
+See also <a href=\"Modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to solve the mathematically identical problem.
 </p>
 
 <h4><a name=\"References\">References</a></h4>
@@ -2271,7 +2275,7 @@ Unscented Kalman filters are similar to Extended Kalman filters but using statis
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
 <p>
-See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Design.UKF\">UKF</a>, where the standard method (without Cholesky factorization) to calculate UKF is applied.
+See also <a href=\"Modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Design.UKF\">UKF</a>, where the standard method (without Cholesky factorization) to calculate UKF is applied.
 </p>
 
 <h4><a name=\"References\">References</a></h4>
