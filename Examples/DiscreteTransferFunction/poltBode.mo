@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Examples.DiscreteTransferFunction;
-function poltBode "Bode plot of a DiscreteTransferFunction objekt"
+function poltBode
+  "Obsolete function: Bode plot of a DiscreteTransferFunction objekt"
   extends Modelica.Icons.Function;
+  extends Modelica.Icons.ObsoleteModel;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
 
 protected
@@ -14,5 +16,7 @@ algorithm
   dtf.method := method;
   DiscreteTransferFunction.Plot.bode(dtf);
 
-annotation (interactive=true);
+annotation (interactive=true, Documentation(info="<html>
+<p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.Examples.DiscreteTransferFunction.plotBode\">plotBode</a> instead.</p>
+</html>"));
 end poltBode;
