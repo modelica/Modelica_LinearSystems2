@@ -25,13 +25,13 @@ record DiscreteTransferFunction
 */
 
   encapsulated operator 'constructor'
-    "Default constructor for a discrete transfer function"
+    "Collection of operators to construct a DiscreteTransferFunction data record"
     import Modelica;
     import Modelica_LinearSystems2.TransferFunction;
     extends Modelica.Icons.Package;
 
     encapsulated function fromReal
-      "Generate a discrete transfer function data record from a Real value"
+      "Generate a DiscreteTransferFunction data record from a real value"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -53,7 +53,7 @@ record DiscreteTransferFunction
     end fromReal;
 
     encapsulated function fromZerosAndPoles
-      "Generate a discrete transfer function data record from a set of zeros and poles"
+      "Generate a DiscreteStateSpace data record from a set of zeros and poles"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -93,7 +93,7 @@ record DiscreteTransferFunction
     end fromZerosAndPoles;
 
     encapsulated function fromArrays
-      "Generate a discrete transfer function data record from numerator and denominator array"
+      "Generate a DiscreteTransferFunction data record from numerator and denominator array"
       import Modelica;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2;
@@ -122,7 +122,7 @@ record DiscreteTransferFunction
     end fromArrays;
 
     function fromPolynomials
-      "Generate a discrete transfer function data record from a numerator and denominator polynomial"
+      "Generate a DiscreteTransferFunction data record from a numerator and denominator polynomial"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -142,7 +142,7 @@ record DiscreteTransferFunction
     end fromPolynomials;
 
     function fromTransferFunction
-      "Generate a discrete transfer function data record from a continuous Transfer function"
+      "Generate a DiscreteTransferFunction data record from a continuous Transfer function"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
@@ -369,36 +369,36 @@ record DiscreteTransferFunction
     "Contains operators for addition of discrete transfer functions"
     import Modelica;
     extends Modelica.Icons.Package;
-  function 'dtf+dtf'
+
+    function 'dtf+dtf'
       "Parallel connection of two discrete transfer functions (= inputs are the same, outputs of the two systems are added)"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-    input DiscreteTransferFunction dtf1 "Transfer function system 1";
-    input DiscreteTransferFunction dtf2 "Transfer function system 2";
-    output DiscreteTransferFunction result;
+      input DiscreteTransferFunction dtf1 "Transfer function system 1";
+      input DiscreteTransferFunction dtf2 "Transfer function system 2";
+      output DiscreteTransferFunction result;
 
-  algorithm
-    assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps,
-      "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"+\".");
-    result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.d) + Polynomial(dtf2.n)*Polynomial(dtf1.d), Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
-  end 'dtf+dtf';
+    algorithm
+      assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps,
+        "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"+\".");
+      result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.d) + Polynomial(dtf2.n)*Polynomial(dtf1.d), Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
+    end 'dtf+dtf';
 
-  function 'dtf+r' "Add a real number to a DiscreteTransferFunction"
+    function 'dtf+r' "Add a real number to a DiscreteTransferFunction"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-    input DiscreteTransferFunction dtf "Transfer function system";
-    input Real r "Real number";
-    output DiscreteTransferFunction result;
+      input DiscreteTransferFunction dtf "Transfer function system";
+      input Real r "Real number";
+      output DiscreteTransferFunction result;
     protected
-    DiscreteTransferFunction dtfr=DiscreteTransferFunction(r, Ts=dtf.Ts, method=dtf.method);
-  algorithm
-
-    result := dtf+dtfr;
-  end 'dtf+r';
+      DiscreteTransferFunction dtfr=DiscreteTransferFunction(r, Ts=dtf.Ts, method=dtf.method);
+    algorithm
+      result := dtf+dtfr;
+    end 'dtf+r';
     annotation (Documentation(info="<html>
 <p>This package contains operators for addition of discrete fransfer function records. </p>
 </html>"));
@@ -516,43 +516,44 @@ DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
 </html> "));
 end z;
 
-encapsulated package Analysis
-  import Modelica;
-  extends Modelica.Icons.Package;
+  encapsulated package Analysis
+    "Package of functions to analyse discrete transfer function represented by a DiscreteTransferFunction record"
+    import Modelica;
+    extends Modelica.Icons.Package;
 
-encapsulated function timeResponse
+    encapsulated function timeResponse
       "Calculate the time response of a discrete transfer function"
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.DiscreteStateSpace;
-  import Modelica_LinearSystems2.DiscreteTransferFunction;
-  import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Types.TimeResponse;
 
-  extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;// Input/Output declarations of discrete time response functions
-  input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
-  input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
+      extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;// Input/Output declarations of discrete time response functions
+      input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+      input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
         "Initial state vector";
 
     protected
-  DiscreteStateSpace dss=DiscreteStateSpace(dtf);
-  Real tSpanVar;
+      DiscreteStateSpace dss=DiscreteStateSpace(dtf);
+      Real tSpanVar;
 
-algorithm
-  // set sample time
-  if tSpan == 0 then
-    tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
-  else
-    tSpanVar := tSpan;
-  end if;
+    algorithm
+      // set sample time
+      if tSpan == 0 then
+        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
+      else
+        tSpanVar := tSpan;
+      end if;
 
-  (y,t,x_discrete) := DiscreteStateSpace.Analysis.timeResponse(
-    dss=dss,
-    tSpan=tSpanVar,
-    response=response,
-    x0=x0);
+      (y,t,x_discrete) := DiscreteStateSpace.Analysis.timeResponse(
+        dss=dss,
+        tSpan=tSpanVar,
+        response=response,
+        x0=x0);
 
-      annotation (Documentation(info="<html>
+          annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>timeResponse</b>(dtf, tSpan, responseType, x0)
@@ -593,37 +594,37 @@ The outputs y and x are calculated from the system equations of the discrete sta
 //  x[:,1,1] = {0.0, 0.0, 1.0, 2.89548693586698, 5.58336953639396}
 </pre></blockquote>
 </html>"));
-end timeResponse;
+    end timeResponse;
 
-encapsulated function impulseResponse
+    encapsulated function impulseResponse
       "Calculate the impulse time response of a discrete transfer function"
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.DiscreteTransferFunction;
-  import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
-  // Input/Output declarations of time response functions:
-  extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
+      // Input/Output declarations of time response functions:
+      extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
 
     protected
-  Real tSpanVar;
-algorithm
-  // set simulation time span
-  if tSpan == 0 then
-    tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
-      DiscreteStateSpace(dtf));
-  else
-    tSpanVar := tSpan;
-  end if;
+      Real tSpanVar;
+    algorithm
+      // set simulation time span
+      if tSpan == 0 then
+        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
+          DiscreteStateSpace(dtf));
+      else
+        tSpanVar := tSpan;
+      end if;
 
-  (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
-    dtf=dtf,
-    tSpan=tSpanVar,
-    response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
-    x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
+      (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
+        dtf=dtf,
+        tSpan=tSpanVar,
+        response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
+        x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
-annotation(interactive=true, Documentation(info="<html>
+    annotation(interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>impulseResponse</b>(dtf, tSpan, x0) 
@@ -661,36 +662,36 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 //  x[:,1,1] = {0.0, 0.0, 1.0, 1.89548693586698, 2.68788260052697}
 </pre></blockquote>
 </html> "));
-end impulseResponse;
+    end impulseResponse;
 
-encapsulated function stepResponse
+    encapsulated function stepResponse
       "Calculate the step time response of a discrete transfer function"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+          import Modelica;
+          import Modelica_LinearSystems2;
+          import Modelica_LinearSystems2.DiscreteTransferFunction;
+          import Modelica_LinearSystems2.DiscreteStateSpace;
 
-      extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
+          extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
     protected
-      Real tSpanVar;
-algorithm
+          Real tSpanVar;
+    algorithm
 
-// set simulation time span
-      if tSpan == 0 then
-        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
-          DiscreteStateSpace(dtf));
-      else
-        tSpanVar := tSpan;
-      end if;
+    // set simulation time span
+          if tSpan == 0 then
+            tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
+              DiscreteStateSpace(dtf));
+          else
+            tSpanVar := tSpan;
+          end if;
 
-      (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
-        dtf=dtf,
-        tSpan=tSpanVar,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Step,
-        x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
+          (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
+            dtf=dtf,
+            tSpan=tSpanVar,
+            response=Modelica_LinearSystems2.Types.TimeResponse.Step,
+            x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
-      annotation (interactive=true, Documentation(info="<html>
+          annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>stepResponse</b>(dtf, tSpan, x0)
@@ -728,37 +729,37 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 //  x[:,1,1] = {0.0, 0.0, 1.0, 2.89548693586698, 5.58336953639396}
 </pre></blockquote>
 </html> "));
-end stepResponse;
+    end stepResponse;
 
-encapsulated function rampResponse
+    encapsulated function rampResponse
       "Calculate the ramp time response of a discrete transfer function"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+          import Modelica;
+          import Modelica_LinearSystems2;
+          import Modelica_LinearSystems2.DiscreteTransferFunction;
+          import Modelica_LinearSystems2.DiscreteStateSpace;
 
-    // Input/Output declarations of time response functions:
-      extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
+        // Input/Output declarations of time response functions:
+          extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
 
     protected
-      Real tSpanVar;
-algorithm
+          Real tSpanVar;
+    algorithm
 
-// set simulation time span
-      if tSpan == 0 then
-        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
-          DiscreteStateSpace(dtf));
-      else
-        tSpanVar := tSpan;
-      end if;
-      (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
-        dtf=dtf,
-        tSpan=tSpanVar,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
-        x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
+    // set simulation time span
+          if tSpan == 0 then
+            tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
+              DiscreteStateSpace(dtf));
+          else
+            tSpanVar := tSpan;
+          end if;
+          (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
+            dtf=dtf,
+            tSpan=tSpanVar,
+            response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
+            x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
-      annotation (interactive=true, Documentation(info="<html>
+          annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>rampResponse</b>(dtf, tSpan, x0)
@@ -796,39 +797,39 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 //  x[:,1,1] = {0.0, 0.0, 0.0, 0.1, 0.389548693586699}
 </pre></blockquote>
 </html> "));
-end rampResponse;
+    end rampResponse;
 
-encapsulated function initialResponse
+    encapsulated function initialResponse
       "Calculate the initial time response of a discrete transfer function"
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.DiscreteTransferFunction;
-  import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
-  input Real x0[:]=fill(0,0) "Initial state vector";
+      input Real x0[:]=fill(0,0) "Initial state vector";
 
-    // Input/Output declarations of time response functions:
-  extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
+        // Input/Output declarations of time response functions:
+      extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
 
     protected
-      Real tSpanVar;
-algorithm
+          Real tSpanVar;
+    algorithm
 
-// set simulation time span
-      if tSpan == 0 then
-        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
-          DiscreteStateSpace(dtf));
-      else
-        tSpanVar := tSpan;
-      end if;
-  (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.timeResponse(
-      dtf=dtf,
-      tSpan=tSpanVar,
-      response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
-      x0=x0);
+    // set simulation time span
+          if tSpan == 0 then
+            tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
+              DiscreteStateSpace(dtf));
+          else
+            tSpanVar := tSpan;
+          end if;
+      (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.timeResponse(
+          dtf=dtf,
+          tSpan=tSpanVar,
+          response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
+          x0=x0);
 
-annotation(interactive=true, Documentation(info="<html>
+    annotation(interactive=true, Documentation(info="<html>
  <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>initialResponse</b>(x0, dtf, tSpan)
@@ -866,20 +867,21 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 //  x[:,1,1] = {1.0, 2.0, 2.88598574821853, 3.66037203581564, 4.3264045475288}
 </pre></blockquote>
 </html> "));
-end initialResponse;
+    end initialResponse;
 
-encapsulated function denominatorDegree
+    encapsulated function denominatorDegree
       "Return denominator degree of a discrete transfer function"
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
+          import Modelica;
+          import Modelica_LinearSystems2.Math.Polynomial;
+          import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-  input DiscreteTransferFunction dtf "discrete transfer function of a system";
-  output Integer result;
+      input DiscreteTransferFunction dtf
+        "discrete transfer function of a system";
+      output Integer result;
 
-algorithm
-  result := size(dtf.d,1)-1;
-  annotation (Documentation(info="<html>
+    algorithm
+      result := size(dtf.d,1)-1;
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 result = DiscreteTransferFunction.Analysis.<b>denominatorDegree</b>(dtf)
@@ -902,15 +904,381 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 //  dDegree = 2
 </pre></blockquote>
 </html> "));
-end denominatorDegree;
+    end denominatorDegree;
 
-end Analysis;
+  end Analysis;
 
-encapsulated package Conversion
+
+  encapsulated package Plot
+    "Package of functions to plot discrete transfer function responses"
     import Modelica;
-  extends Modelica.Icons.Package;
+    extends Modelica.Icons.Package;
 
-encapsulated function toDiscreteZerosAndPoles
+    encapsulated function bode "Plot discrete transfer function as bode plot"
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Internal;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Utilities.Plot;
+      import SI = Modelica.SIunits;
+
+      input DiscreteTransferFunction dtf
+        "DiscreteTransfer function to be plotted";
+      input Integer nPoints(min=2) = 200 "Number of points";
+      input Boolean autoRange=true
+        "True, if abszissa range is automatically determined";
+      input SI.Frequency f_min(min=0) = 0.1
+        "Minimum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
+      input SI.Frequency f_max(min=0) = 10
+        "Maximum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
+
+      input Boolean magnitude=true "= true, to plot the magnitude of tf"
+                                                                        annotation(choices(__Dymola_checkBox=true));
+      input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
+
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+            Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot of  dtf = "
+             + String(dtf)));
+
+    protected
+      SI.AngularVelocity w[nPoints];
+      Complex z[nPoints];
+      SI.Frequency f[nPoints];
+      SI.Conversions.NonSIunits.Angle_deg phi[nPoints];
+      Real A[nPoints];
+      Boolean OK;
+      Complex c;
+      SI.Angle phi_old;
+      Complex numZeros[:];
+      Complex denZeros[:];
+      Complex numZerosZ[:];
+      Complex denZerosZ[:];
+      TransferFunction tf=TransferFunction(n=dtf.n, d=dtf.d);
+
+      Plot.Records.Curve curves[2];
+      Integer i;
+      Plot.Records.Diagram diagram2[2];
+
+    algorithm
+            // Determine frequency vector f
+      if autoRange then
+        (numZerosZ,denZerosZ) := TransferFunction.Analysis.zerosAndPoles(tf);
+      else
+        numZerosZ := fill(Complex(0), 0);
+        denZerosZ := fill(Complex(0), 0);
+      end if;
+
+      numZeros := fill(Complex(0),0);
+     // numZeros := fill(Complex(0),size(numZerosZ,1));
+      // for i in 1:size(numZerosZ,1) loop
+      //   numZeros[i] := Complex.log(numZerosZ[i])/dtf.Ts;
+      // end for;
+
+      denZeros := fill(Complex(0),size(denZerosZ,1));
+      for i in 1:size(denZerosZ,1) loop
+        denZeros[i] := Complex.log(denZerosZ[i])/dtf.Ts;
+      end for;
+
+      f := Internal.frequencyVector(
+            nPoints,
+            autoRange,
+            f_min,
+            f_max,
+            numZeros,
+            denZeros);
+
+      // Compute magnitude/phase at the frequency points
+      phi_old := 0.0;
+      for i in 1:nPoints loop
+        w[i] := SI.Conversions.from_Hz(f[i]);
+        z[i] := Complex.exp(Complex(0,w[i]*dtf.Ts));
+        c := TransferFunction.Analysis.evaluate(
+              tf,
+              z[i],
+              1e-10);
+        A[i] := Complex.'abs'(c);
+        phi_old := Complex.arg(c, phi_old);
+        phi[i] := SI.Conversions.to_deg(phi_old);
+
+      end for;
+
+     // Plot computed frequency response
+     diagram2 := fill(defaultDiagram, 2);
+      i := 0;
+      if magnitude then
+        i := i + 1;
+        curves[i] := Plot.Records.Curve(
+              x=f,
+              y=A,
+              autoLine=true);
+        diagram2[i].curve := {curves[i]};
+        diagram2[i].yLabel := "magnitude";
+        if phase then
+           diagram2[i].xLabel:="";
+        end if;
+      end if;
+
+      if phase then
+        i := i + 1;
+        curves[i] := Plot.Records.Curve(
+              x=f,
+              y=phi,
+              autoLine=true);
+        diagram2[i].curve := {curves[i]};
+        diagram2[i].yLabel := "phase [deg]";
+        diagram2[i].logY := false;
+        if magnitude then
+          diagram2[i].heading:="";
+       end if;
+      end if;
+
+        if magnitude and phase then
+          Plot.diagramVector(diagram2, device);
+        else
+          Plot.diagram(diagram2[1], device);
+        end if;
+
+      annotation (interactive=true, Documentation(info="<html>
+
+</html> "));
+    end bode;
+
+    encapsulated function timeResponse
+      "Plot the time response of a system represented by a discrete transfer function. The response type is selectable"
+          import Modelica;
+          import Modelica_LinearSystems2;
+          import Modelica_LinearSystems2.DiscreteTransferFunction;
+          import Modelica_LinearSystems2.Types.TimeResponse;
+
+          import Modelica_LinearSystems2.Utilities.Plot;
+
+      input Modelica_LinearSystems2.DiscreteTransferFunction dtf;
+    //  input Real dt=0 "Sample time [s]";
+      input Real tSpan=0 "Simulation time span [s]";
+
+      input Modelica_LinearSystems2.Types.TimeResponse response=
+          Modelica_LinearSystems2.Types.TimeResponse.Step
+        "Type of time response";
+      input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
+          DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
+        "Initial state vector";
+
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Time response of  dtf = "
+             + String(dtf)));
+
+    protected
+      Plot.Records.Curve curve;
+      Plot.Records.Diagram diagram2;
+      Real y[:,1,1] "Output response";
+      Real t[:] "Time vector: (number of samples)";
+
+      Real yy[:] "Output response";
+      Real tt[:] "Time vector: (number of samples)";
+
+    algorithm
+      (y,t) := DiscreteTransferFunction.Analysis.timeResponse(
+        dtf,
+        tSpan,
+        response,
+        x0);
+
+      tt := fill(0,2*size(t,1)-1);
+      yy := fill(0,2*size(t,1)-1);
+
+      for i in 1:size(t,1)-1 loop
+        tt[2*i-1] := t[i];
+        tt[2*i] := t[i+1];
+        yy[2*i-1] := y[i,1,1];
+        yy[2*i] := y[i,1,1];
+      end for;
+      tt[size(tt,1)] := t[size(t,1)];
+      yy[size(tt,1)] := y[size(t,1),1,1];
+
+      curve := Plot.Records.Curve(
+        x=tt,
+        y=yy,
+        legend="y",
+        autoLine=true);
+      diagram2 := defaultDiagram;
+      diagram2.curve := {curve};
+
+      Plot.diagram(diagram2, device);
+      annotation (interactive=true, Documentation(info="<html>
+
+</html>"));
+    end timeResponse;
+
+    encapsulated function impulse
+      "Impulse response plot of a discrete transfer function"
+          import Modelica;
+          import Modelica_LinearSystems2;
+          import Modelica_LinearSystems2.DiscreteTransferFunction;
+
+          import Modelica_LinearSystems2.Utilities.Plot;
+
+        input DiscreteTransferFunction dtf "zeros-and-poles transfer function";
+        input Real tSpan=0 "Simulation time span [s]";
+
+        extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+             Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response of  zp = "
+               + String(dtf)));
+
+    protected
+        input Modelica_LinearSystems2.Types.TimeResponse response=
+            Modelica_LinearSystems2.Types.TimeResponse.Impulse
+        "type of time response";
+
+       Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
+            DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
+        "Initial state vector";
+    algorithm
+    // set sample time
+        Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
+          dtf=dtf,
+          tSpan=tSpan,
+          response=response,
+          x0=x0,
+          defaultDiagram=defaultDiagram,
+          device=device);
+
+        annotation (interactive=true, Documentation(info="<html>
+
+
+</html> "));
+    end impulse;
+
+    encapsulated function step
+      "Step response plot of a discrete transfer function"
+          import Modelica;
+          import Modelica_LinearSystems2;
+          import Modelica_LinearSystems2.DiscreteTransferFunction;
+          import Modelica_LinearSystems2.Types.TimeResponse;
+
+          import Modelica_LinearSystems2.Utilities.Plot;
+
+      input DiscreteTransferFunction dtf;
+      input Real tSpan=0 "Simulation time span [s]";
+
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Step response of  dtf = "
+             + String(dtf)));
+
+    protected
+      input Modelica_LinearSystems2.Types.TimeResponse response=
+          Modelica_LinearSystems2.Types.TimeResponse.Step
+        "type of time response";
+      input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
+          DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
+        "Initial state vector";
+
+    algorithm
+     DiscreteTransferFunction.Plot.timeResponse(
+        dtf=dtf,
+        tSpan=tSpan,
+        response=response,
+        x0=x0,
+        defaultDiagram=defaultDiagram,
+        device=device);
+
+    equation
+
+      annotation (interactive=true, Documentation(info="<html>
+</html>"));
+    end step;
+
+    encapsulated function ramp
+      "Ramp response plot of a discrete transfer function"
+          import Modelica;
+          import Modelica_LinearSystems2;
+          import Modelica_LinearSystems2.DiscreteTransferFunction;
+          import Modelica_LinearSystems2.Types.TimeResponse;
+
+          import Modelica_LinearSystems2.Utilities.Plot;
+
+      input DiscreteTransferFunction dtf;
+      input Real tSpan=0 "Simulation time span [s]";
+
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Ramp response of  dtf = "
+             + String(dtf)));
+
+    protected
+      input Modelica_LinearSystems2.Types.TimeResponse response=
+          Modelica_LinearSystems2.Types.TimeResponse.Ramp
+        "type of time response";
+      input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
+          DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
+        "Initial state vector";
+    algorithm
+     Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
+        dtf=dtf,
+        tSpan=tSpan,
+        response=response,
+        x0=x0,
+        defaultDiagram=defaultDiagram,
+        device=device);
+
+      annotation (interactive=true, Documentation(info="<html>
+
+</html> "));
+    end ramp;
+
+    encapsulated function initialResponse
+      "Initial condition response plot of a discrete transfer function"
+          import Modelica;
+          import Modelica_LinearSystems2;
+          import Modelica_LinearSystems2.DiscreteTransferFunction;
+          import Modelica_LinearSystems2.Types.TimeResponse;
+
+          import Modelica_LinearSystems2.Utilities.Plot;
+
+      input Modelica_LinearSystems2.DiscreteTransferFunction dtf;
+      input Real tSpan=0 "Simulation time span [s]";
+
+      input Modelica_LinearSystems2.Types.TimeResponse response=
+          Modelica_LinearSystems2.Types.TimeResponse.Initial
+        "type of time response";
+      input Real y0 "Initial output (for initial condition plot)";
+
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Initial response of  dtf = "
+             + String(dtf) + "  with y0 = " + String(y0)));
+
+    protected
+      Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(dtf);
+      Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=
+          Modelica.Math.Matrices.equalityLeastSquares(
+          dss.A,
+          fill(0, size(dss.B, 1)),
+          dss.C,
+          vector(y0)) "Initial state vector (for initial condition plot)";
+    algorithm
+      Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
+            dtf=dtf,
+            tSpan=tSpan,
+            response=response,
+            x0=x0,
+            defaultDiagram=defaultDiagram,
+            device=device);
+
+      annotation (interactive=true, Documentation(info="<html>
+
+
+</html> "));
+    end initialResponse;
+
+  end Plot;
+
+  encapsulated package Conversion
+    "Package of functions for conversion of DiscreteTransferFunction data record"
+    import Modelica;
+    extends Modelica.Icons.Package;
+
+    encapsulated function toDiscreteZerosAndPoles
       "Generate a DiscreteZerosAndPoles object from a DiscreteTransferFunction object"
       import Modelica;
       import Modelica_LinearSystems2;
@@ -920,8 +1288,8 @@ encapsulated function toDiscreteZerosAndPoles
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Complex;
 
-  input DiscreteTransferFunction dtf "transfer function of a system";
-  output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp(
+      input DiscreteTransferFunction dtf "transfer function of a system";
+      output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp(
     redeclare Real n1[Internal.numberOfRealZeros2(dtf)],
     redeclare Real n2[integer((size(dtf.n, 1) - 1 -
       Internal.numberOfRealZeros2(dtf))/2),2],
@@ -929,14 +1297,22 @@ encapsulated function toDiscreteZerosAndPoles
     redeclare Real d2[integer((size(dtf.d, 1) - 1 -
       Internal.numberOfRealPoles(dtf))/2),2]);
     protected
-  TransferFunction tf=TransferFunction(n=dtf.n, d=dtf.d);
-  Complex z[:];
-  Complex p[:];
-  Real k;
-algorithm
-  (z,p,k) := TransferFunction.Analysis.zerosAndPoles(tf);
-  dzp := DiscreteZerosAndPoles(z, p, k, dtf.Ts, dtf.method, uName=dtf.uName, yName=dtf.yName);
-  annotation (Documentation(info="<html>
+      TransferFunction tf=TransferFunction(n=dtf.n, d=dtf.d);
+      Complex z[:];
+      Complex p[:];
+      Real k;
+    algorithm
+      (z,p,k) := TransferFunction.Analysis.zerosAndPoles(tf);
+      dzp := DiscreteZerosAndPoles(
+            z,
+            p,
+            k,
+            dtf.Ts,
+            dtf.method,
+            uName=dtf.uName,
+            yName=dtf.yName);
+      annotation (Documentation(info=
+                                 "<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dzp = DiscreteTransferFunction.Conversion.<b>toDiscreteZerosAndPoles</b>(tf)
@@ -968,55 +1344,56 @@ DiscreteZerosAndPoles constructor.
 //  dzp = 1/( (z + 1)*(z + 2) )
 </pre></blockquote>
 </html>"));
-end toDiscreteZerosAndPoles;
+    end toDiscreteZerosAndPoles;
 
-function toDiscreteStateSpace
+    function toDiscreteStateSpace
       "Convert a DiscreteTransferFunction into a DiscreteStateSpace representation"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica.Math.Vectors;
+          import Modelica;
+          import Modelica_LinearSystems2;
+          import Modelica_LinearSystems2.DiscreteTransferFunction;
+          import Modelica_LinearSystems2.TransferFunction;
+          import Modelica_LinearSystems2.DiscreteStateSpace;
+          import Modelica.Math.Vectors;
 
- input DiscreteTransferFunction dtf "discrete transfer function of a system";
-      output DiscreteStateSpace dss(
-        redeclare Real A[DiscreteTransferFunction.Analysis.denominatorDegree(dtf),DiscreteTransferFunction.Analysis.denominatorDegree(dtf)],
-        redeclare Real B[DiscreteTransferFunction.Analysis.denominatorDegree(dtf),1],
-        redeclare Real B2[DiscreteTransferFunction.Analysis.denominatorDegree(dtf),1],
-        redeclare Real C[1,DiscreteTransferFunction.Analysis.denominatorDegree(dtf)],
-        redeclare Real D[1,1]) "Discrete state space record";
+     input DiscreteTransferFunction dtf
+        "discrete transfer function of a system";
+          output DiscreteStateSpace dss(
+            redeclare Real A[DiscreteTransferFunction.Analysis.denominatorDegree(dtf),DiscreteTransferFunction.Analysis.denominatorDegree(dtf)],
+            redeclare Real B[DiscreteTransferFunction.Analysis.denominatorDegree(dtf),1],
+            redeclare Real B2[DiscreteTransferFunction.Analysis.denominatorDegree(dtf),1],
+            redeclare Real C[1,DiscreteTransferFunction.Analysis.denominatorDegree(dtf)],
+            redeclare Real D[1,1]) "Discrete state space record";
 
     protected
- Integer na=DiscreteTransferFunction.Analysis.denominatorDegree(dtf) + 1;
- Integer nb=size(dtf.n,1);//numerator degree
- Integer nx=na - 1;
- TransferFunction tf=TransferFunction(n=dtf.n, d=dtf.d);
- Real a[na]=Vectors.reverse(tf.d) "Reverse element order of tf.a";
- Real b[na];//=vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
- Real d;//=b[na]/a[na];
-algorithm
- assert(nb<=na,"DiscreteTransferFunction\n" +String(dtf) +"\nis acausal and cannot be transformed to DiscreteStaeSpace in function \"Conversion.toDiscreteStateSpace()\"");
- b := vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
- d := b[na]/a[na];
- if nx == 0 then
-   dss.A := fill(0, 0, nx);
-   dss.B := fill(0, 0, 1);
-   dss.B2 := fill(0, 0, 1);
-   dss.C := fill(0, 1, 0);
- else
-   dss.A[1:nx - 1, 1:nx] := [zeros(nx - 1, 1),identity(nx - 1)];
-   dss.A[nx, 1:nx] := -a[1:na - 1]/a[na];
-   dss.B := [zeros(nx - 1, 1); 1/a[na]];
-   dss.B2 := fill(0,nx,1);
-   dss.C := {b[1:nx] - d*a[1:nx]};
+     Integer na=DiscreteTransferFunction.Analysis.denominatorDegree(dtf) + 1;
+     Integer nb=size(dtf.n,1);//numerator degree
+     Integer nx=na - 1;
+     TransferFunction tf=TransferFunction(n=dtf.n, d=dtf.d);
+     Real a[na]=Vectors.reverse(tf.d) "Reverse element order of tf.a";
+     Real b[na];//=vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
+     Real d;//=b[na]/a[na];
+    algorithm
+     assert(nb<=na,"DiscreteTransferFunction\n" +String(dtf) +"\nis acausal and cannot be transformed to DiscreteStaeSpace in function \"Conversion.toDiscreteStateSpace()\"");
+     b := vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
+     d := b[na]/a[na];
+     if nx == 0 then
+       dss.A := fill(0, 0, nx);
+       dss.B := fill(0, 0, 1);
+       dss.B2 := fill(0, 0, 1);
+       dss.C := fill(0, 1, 0);
+     else
+       dss.A[1:nx - 1, 1:nx] := [zeros(nx - 1, 1),identity(nx - 1)];
+       dss.A[nx, 1:nx] := -a[1:na - 1]/a[na];
+       dss.B := [zeros(nx - 1, 1); 1/a[na]];
+       dss.B2 := fill(0,nx,1);
+       dss.C := {b[1:nx] - d*a[1:nx]};
 
-end if;
-  dss.D := [d];
-  dss.Ts := dtf.Ts;
-  dss.method := dtf.method;
+    end if;
+      dss.D := [d];
+      dss.Ts := dtf.Ts;
+      dss.method := dtf.method;
 
- annotation (overloadsConstructor=true, Documentation(info="<html>
+     annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dss = DiscreteTransferFunction.Conversion<b>toDiscreteStateSpace</b>(dtf)
@@ -1068,401 +1445,90 @@ with
 // ss.B2 = [0; 0; 0],
 </pre></blockquote>
 </html> "));
-end toDiscreteStateSpace;
+    end toDiscreteStateSpace;
 
-end Conversion;
+  end Conversion;
 
-encapsulated package Plot "Functions to plot state space system responses"
+  encapsulated package Import
+    "Package of functions to generate a DiscreteTransferFunction data record from imported data"
     import Modelica;
-  extends Modelica.Icons.Package;
+    extends Modelica.Icons.Package;
 
-encapsulated function bode "Plot discrete transfer function as bode plot"
-  import Modelica;
-  import Modelica.Utilities.Strings;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Internal;
-  import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.DiscreteTransferFunction;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.Utilities.Plot;
-  import SI = Modelica.SIunits;
+    encapsulated function fromFile
+      "Generate a DiscreteTransferFunction data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
 
-  input DiscreteTransferFunction dtf "DiscreteTransfer function to be plotted";
-  input Integer nPoints(min=2) = 200 "Number of points";
-  input Boolean autoRange=true
-        "True, if abszissa range is automatically determined";
-  input SI.Frequency f_min(min=0) = 0.1
-        "Minimum frequency value, if autoRange = false"
-                                                    annotation(Dialog(enable=not autoRange));
-  input SI.Frequency f_max(min=0) = 10
-        "Maximum frequency value, if autoRange = false"
-                                                    annotation(Dialog(enable=not autoRange));
-
-  input Boolean magnitude=true "= true, to plot the magnitude of tf"
-                                                                    annotation(choices(__Dymola_checkBox=true));
-  input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
-
-  extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-        Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot of  dtf = "
-         + String(dtf)));
+          import Modelica_LinearSystems2.DiscreteTransferFunction;
+          import Modelica_LinearSystems2.Math.Polynomial;
+      input String fileName="dtf.mat" "Name of the transfer function data file"
+                                                                                  annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+                          caption="transfer function data file")));
+      input String numName="n" "Name of the numenator of the transfer function";
+      input String denName="d"
+        "Name of the denominator of the transfer function";
 
     protected
-  SI.AngularVelocity w[nPoints];
-  Complex z[nPoints];
-  SI.Frequency f[nPoints];
-  SI.Conversions.NonSIunits.Angle_deg phi[nPoints];
-  Real A[nPoints];
-  Boolean OK;
-  Complex c;
-  SI.Angle phi_old;
-  Complex numZeros[:];
-  Complex denZeros[:];
-  Complex numZerosZ[:];
-  Complex denZerosZ[:];
-  TransferFunction tf=TransferFunction(n=dtf.n, d=dtf.d);
+      input Integer numSize[2]=readMatrixSize(fileName, numName);
+      input Integer denSize[2]=readMatrixSize(fileName, denName);
 
-  Plot.Records.Curve curves[2];
-  Integer i;
-  Plot.Records.Diagram diagram2[2];
+      Real num[numSize[1],numSize[2]]=readMatrix(
+            fileName,
+            numName,
+            numSize[1],
+            numSize[2]) "numenator coefficients";
+      Real den[denSize[1],denSize[2]]=readMatrix(
+            fileName,
+            denName,
+            denSize[1],
+            denSize[2]) "denominator coefficients";
+      input Integer ns2=numSize[2];
+      input Integer ds2=denSize[2];
+      Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);
 
-algorithm
-        // Determine frequency vector f
-  if autoRange then
-    (numZerosZ,denZerosZ) := TransferFunction.Analysis.zerosAndPoles(tf);
-  else
-    numZerosZ := fill(Complex(0), 0);
-    denZerosZ := fill(Complex(0), 0);
-  end if;
+    public
+     output DiscreteTransferFunction dtf(n=fill(0,ns2),d=fill(0,ds2))
+        "Discrete transfer function";
 
-  numZeros := fill(Complex(0),0);
- // numZeros := fill(Complex(0),size(numZerosZ,1));
-  // for i in 1:size(numZerosZ,1) loop
-  //   numZeros[i] := Complex.log(numZerosZ[i])/dtf.Ts;
-  // end for;
+    algorithm
+      dtf.n := vector(num);
+      dtf.d := vector(den);
+      dtf.uName := numName;
+      dtf.yName := denName;
+      dtf.Ts := scalar(Ts);
 
-  denZeros := fill(Complex(0),size(denZerosZ,1));
-  for i in 1:size(denZerosZ,1) loop
-    denZeros[i] := Complex.log(denZerosZ[i])/dtf.Ts;
-  end for;
-
-  f := Internal.frequencyVector(
-        nPoints,
-        autoRange,
-        f_min,
-        f_max,
-        numZeros,
-        denZeros);
-
-  // Compute magnitude/phase at the frequency points
-  phi_old := 0.0;
-  for i in 1:nPoints loop
-    w[i] := SI.Conversions.from_Hz(f[i]);
-    z[i] := Complex.exp(Complex(0,w[i]*dtf.Ts));
-    c := TransferFunction.Analysis.evaluate(
-          tf,
-          z[i],
-          1e-10);
-    A[i] := Complex.'abs'(c);
-    phi_old := Complex.arg(c, phi_old);
-    phi[i] := SI.Conversions.to_deg(phi_old);
-
-  end for;
-
- // Plot computed frequency response
- diagram2 := fill(defaultDiagram, 2);
-  i := 0;
-  if magnitude then
-    i := i + 1;
-    curves[i] := Plot.Records.Curve(
-          x=f,
-          y=A,
-          autoLine=true);
-    diagram2[i].curve := {curves[i]};
-    diagram2[i].yLabel := "magnitude";
-    if phase then
-       diagram2[i].xLabel:="";
-    end if;
-  end if;
-
-  if phase then
-    i := i + 1;
-    curves[i] := Plot.Records.Curve(
-          x=f,
-          y=phi,
-          autoLine=true);
-    diagram2[i].curve := {curves[i]};
-    diagram2[i].yLabel := "phase [deg]";
-    diagram2[i].logY := false;
-    if magnitude then
-      diagram2[i].heading:="";
-   end if;
-  end if;
-
-    if magnitude and phase then
-      Plot.diagramVector(diagram2, device);
-    else
-      Plot.diagram(diagram2[1], device);
-    end if;
-
-  annotation (interactive=true, Documentation(info="<html>
+        annotation (Documentation(info="<html>
 
 </html> "));
-end bode;
+    end fromFile;
 
-encapsulated function timeResponse
-      "Plot the time response of a system represented by a discrete transfer function. The response type is selectable"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.Types.TimeResponse;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
-
-  input Modelica_LinearSystems2.DiscreteTransferFunction dtf;
-//  input Real dt=0 "Sample time [s]";
-  input Real tSpan=0 "Simulation time span [s]";
-
-  input Modelica_LinearSystems2.Types.TimeResponse response=
-      Modelica_LinearSystems2.Types.TimeResponse.Step "Type of time response";
-  input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
-      DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
-        "Initial state vector";
-
-  extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-        Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Time response of  dtf = "
-         + String(dtf)));
-
-    protected
-  Plot.Records.Curve curve;
-  Plot.Records.Diagram diagram2;
-  Real y[:,1,1] "Output response";
-  Real t[:] "Time vector: (number of samples)";
-
-  Real yy[:] "Output response";
-  Real tt[:] "Time vector: (number of samples)";
-
-algorithm
-  (y,t) := DiscreteTransferFunction.Analysis.timeResponse(
-    dtf,
-    tSpan,
-    response,
-    x0);
-
-  tt := fill(0,2*size(t,1)-1);
-  yy := fill(0,2*size(t,1)-1);
-
-  for i in 1:size(t,1)-1 loop
-    tt[2*i-1] := t[i];
-    tt[2*i] := t[i+1];
-    yy[2*i-1] := y[i,1,1];
-    yy[2*i] := y[i,1,1];
-  end for;
-  tt[size(tt,1)] := t[size(t,1)];
-  yy[size(tt,1)] := y[size(t,1),1,1];
-
-  curve := Plot.Records.Curve(
-    x=tt,
-    y=yy,
-    legend="y",
-    autoLine=true);
-  diagram2 := defaultDiagram;
-  diagram2.curve := {curve};
-
-  Plot.diagram(diagram2, device);
-  annotation (interactive=true, Documentation(info="<html>
-
-</html>"));
-end timeResponse;
-
-encapsulated function impulse
-      "Impulse response plot of a discrete transfer function"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
-
-    input DiscreteTransferFunction dtf "zeros-and-poles transfer function";
-    input Real tSpan=0 "Simulation time span [s]";
-
-    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-         Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response of  zp = "
-           + String(dtf)));
-
-    protected
-    input Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Impulse
-        "type of time response";
-
-   Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
-        DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
-        "Initial state vector";
-algorithm
-// set sample time
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
-      dtf=dtf,
-      tSpan=tSpan,
-      response=response,
-      x0=x0,
-      defaultDiagram=defaultDiagram,
-      device=device);
-
-    annotation (interactive=true, Documentation(info="<html>
-
-
-</html> "));
-end impulse;
-
-encapsulated function step "Step response plot of a discrete transfer function"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.Types.TimeResponse;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
-
-  input DiscreteTransferFunction dtf;
-  input Real tSpan=0 "Simulation time span [s]";
-
-  extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-        Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Step response of  dtf = "
-         + String(dtf)));
-
-    protected
-  input Modelica_LinearSystems2.Types.TimeResponse response=
-      Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
-  input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
-      DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
-        "Initial state vector";
-
-algorithm
- DiscreteTransferFunction.Plot.timeResponse(
-    dtf=dtf,
-    tSpan=tSpan,
-    response=response,
-    x0=x0,
-    defaultDiagram=defaultDiagram,
-    device=device);
-
-equation
-
-  annotation (interactive=true, Documentation(info="<html>
-</html>"));
-end step;
-
-encapsulated function ramp "Ramp response plot of a discrete transfer function"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.Types.TimeResponse;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
-
-  input DiscreteTransferFunction dtf;
-  input Real tSpan=0 "Simulation time span [s]";
-
-  extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-        Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Ramp response of  dtf = "
-         + String(dtf)));
-
-    protected
-  input Modelica_LinearSystems2.Types.TimeResponse response=
-      Modelica_LinearSystems2.Types.TimeResponse.Ramp "type of time response";
-  input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
-      DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
-        "Initial state vector";
-algorithm
- Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
-    dtf=dtf,
-    tSpan=tSpan,
-    response=response,
-    x0=x0,
-    defaultDiagram=defaultDiagram,
-    device=device);
-
-  annotation (interactive=true, Documentation(info="<html>
-
-</html> "));
-end ramp;
-
-encapsulated function initialResponse
-      "Initial condition response plot of a discrete transfer function"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.Types.TimeResponse;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
-
-  input Modelica_LinearSystems2.DiscreteTransferFunction dtf;
-  input Real tSpan=0 "Simulation time span [s]";
-
-  input Modelica_LinearSystems2.Types.TimeResponse response=
-      Modelica_LinearSystems2.Types.TimeResponse.Initial
-        "type of time response";
-  input Real y0 "Initial output (for initial condition plot)";
-
-  extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-        Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Initial response of  dtf = "
-         + String(dtf) + "  with y0 = " + String(y0)));
-
-    protected
-  Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(dtf);
-  Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=
-      Modelica.Math.Matrices.equalityLeastSquares(
-      dss.A,
-      fill(0, size(dss.B, 1)),
-      dss.C,
-      vector(y0)) "Initial state vector (for initial condition plot)";
-algorithm
-  Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
-        dtf=dtf,
-        tSpan=tSpan,
-        response=response,
-        x0=x0,
-        defaultDiagram=defaultDiagram,
-        device=device);
-
-  annotation (interactive=true, Documentation(info="<html>
-
-
-</html> "));
-end initialResponse;
-
-end Plot;
-
-encapsulated package Import
-    import Modelica;
-  extends Modelica.Icons.Package;
-
-function fromModel
+  function fromModel
       "Generate a DiscreteTransferFunction record array from a state space representation resulted from linearization of a model"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-  input String modelName "Name of the Modelica model" annotation(Dialog(translatedModel));
-  input Real T_linearize=0 "point in time of simulation to linearize the model";
-  input String fileName="dslin" "Name of the result file";
-  input Modelica.SIunits.Time Ts=1 "Sample time";
-  input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
+    input String modelName "Name of the Modelica model" annotation(Dialog(translatedModel));
+    input Real T_linearize=0
+        "point in time of simulation to linearize the model";
+    input String fileName="dslin" "Name of the result file";
+    input Modelica.SIunits.Time Ts=1 "Sample time";
+    input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
         "Discretization method";
 
     protected
-  String fileName2=fileName + ".mat";
-  Boolean OK1=simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
-  Boolean OK2=importInitial("dsfinal.txt");
-  Boolean OK3=linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
-  Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
-  Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
-  Integer nx=integer(nxMat[1, 1]);
-  Integer nu=ABCDsizes[2] - nx;
-  Integer ny=ABCDsizes[1] - nx;
-  Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-  String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
+    String fileName2=fileName + ".mat";
+    Boolean OK1=simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
+    Boolean OK2=importInitial("dsfinal.txt");
+    Boolean OK3=linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
+    Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
+    Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+    Integer nx=integer(nxMat[1, 1]);
+    Integer nu=ABCDsizes[2] - nx;
+    Integer ny=ABCDsizes[1] - nx;
+    Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+    String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
     StateSpace ss(
       redeclare Real A[nx,nx],
@@ -1483,85 +1549,42 @@ function fromModel
       redeclare Real B2[nx,1]) "= model linearized at initial point";
 
     public
-  output DiscreteTransferFunction dtf[:,:];
+    output DiscreteTransferFunction dtf[:,:];
 
-algorithm
-  ss.A := ABCD[1:nx, 1:nx];
-  ss.B := ABCD[1:nx, nx + 1:nx + nu];
-  ss.C := ABCD[nx + 1:nx + ny, 1:nx];
-  ss.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-  ss.uNames := xuyName[nx + 1:nx + nu];
-  ss.yNames := xuyName[nx + nu + 1:nx + nu + ny];
-  ss.xNames := xuyName[1:nx];
+  algorithm
+    ss.A := ABCD[1:nx, 1:nx];
+    ss.B := ABCD[1:nx, nx + 1:nx + nu];
+    ss.C := ABCD[nx + 1:nx + ny, 1:nx];
+    ss.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+    ss.uNames := xuyName[nx + 1:nx + nu];
+    ss.yNames := xuyName[nx + nu + 1:nx + nu + ny];
+    ss.xNames := xuyName[1:nx];
 
-  dss := DiscreteStateSpace(ss, Ts=Ts, method=method);
-  dtf := DiscreteStateSpace.Conversion.toDiscreteTransferFunctionMIMO(dss);
+    dss := DiscreteStateSpace(ss, Ts=Ts, method=method);
+    dtf := DiscreteStateSpace.Conversion.toDiscreteTransferFunctionMIMO(dss);
 
-//   for ic in 1:ny loop
-//     for ib in 1:nu loop
-//       dss_siso := DiscreteStateSpace(
-//         A=dss.A,
-//         B=matrix(dss.B[:, ib]),
-//         C=transpose(matrix(dss.C[ic, :])),
-//         D=matrix(dss.D[ic, ib]),
-//         B2=matrix(dss.B2[:, ib]),
-//         Ts=dss.Ts,
-//         method=dss.method);
-//         dtf[ic, ib] := DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss_siso);
-//     end for;
-//   end for;
+    //   for ic in 1:ny loop
+    //     for ib in 1:nu loop
+    //       dss_siso := DiscreteStateSpace(
+    //         A=dss.A,
+    //         B=matrix(dss.B[:, ib]),
+    //         C=transpose(matrix(dss.C[ic, :])),
+    //         D=matrix(dss.D[ic, ib]),
+    //         B2=matrix(dss.B2[:, ib]),
+    //         Ts=dss.Ts,
+    //         method=dss.method);
+    //         dtf[ic, ib] := DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss_siso);
+    //     end for;
+    //   end for;
 
   annotation (interactive=true, Documentation(info="<html>
 
 
 
 </html> "));
-end fromModel;
+  end fromModel;
 
-encapsulated function fromFile
-      "Generate a discrete transfer function data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
 
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.Math.Polynomial;
-  input String fileName="dtf.mat" "Name of the transfer function data file"   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="transfer function data file")));
-  input String numName="n" "Name of the numenator of the transfer function";
-  input String denName="d" "Name of the denominator of the transfer function";
-
-    protected
-  input Integer numSize[2]=readMatrixSize(fileName, numName);
-  input Integer denSize[2]=readMatrixSize(fileName, denName);
-
-  Real num[numSize[1],numSize[2]]=readMatrix(
-        fileName,
-        numName,
-        numSize[1],
-        numSize[2]) "numenator coefficients";
-  Real den[denSize[1],denSize[2]]=readMatrix(
-        fileName,
-        denName,
-        denSize[1],
-        denSize[2]) "denominator coefficients";
-  input Integer ns2=numSize[2];
-  input Integer ds2=denSize[2];
-  Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);
-
-    public
- output DiscreteTransferFunction dtf(n=fill(0,ns2),d=fill(0,ds2))
-        "Discrete transfer function";
-
-algorithm
-  dtf.n := vector(num);
-  dtf.d := vector(den);
-  dtf.uName := numName;
-  dtf.yName := denName;
-  dtf.Ts := scalar(Ts);
-
-    annotation (Documentation(info="<html>
-
-</html> "));
-end fromFile;
-
-end Import;
+  end Import;
 
 end DiscreteTransferFunction;

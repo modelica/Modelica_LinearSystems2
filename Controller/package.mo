@@ -7,7 +7,7 @@ package Controller "Package of continuous and discrete input/output blocks"
 
   annotation (Documentation(info="<html>
 <p>
-This library provides input/output blocks where every
+This package provides input/output blocks where every
 block is available in a <b>continuous</b> and a <b>discrete</b> (sampled)
 representation. A block is defined via its <b>continuous
 parameterization</b>. By specifying a discretization method and

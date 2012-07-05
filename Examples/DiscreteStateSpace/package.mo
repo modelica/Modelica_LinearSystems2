@@ -5,7 +5,7 @@ package DiscreteStateSpace "Package of examples to demonstrate the usage of the 
   annotation (Documentation(info="<html>
 <p>
 This package contains example function calls to demonstrate the
-usage of the functions of the DiscreteStateSpace record.
+usage of the functions operating with the DiscreteStateSpace record.
 </p>
 </html>"));
 end DiscreteStateSpace;

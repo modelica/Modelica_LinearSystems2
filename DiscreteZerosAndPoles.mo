@@ -29,13 +29,14 @@ record DiscreteZerosAndPoles
   String uName="u" "Name of input signal"    annotation(Dialog(group="Signal names"));
   String yName="y" "Name of output signal"  annotation(Dialog(group="Signal names"));
 
-  encapsulated operator 'constructor' "Generate a ZerosAndPoles object"
+  encapsulated operator 'constructor'
+    "Collection of operators to construct a DiscreteZerosAndPoles data record"
     import Modelica_LinearSystems2;
     import Modelica;
     extends Modelica.Icons.Package;
 
     encapsulated function fromReal
-      "Generate a DiscreteZerosAndPoles transfer function from a Real value"
+      "Generate a DiscreteZerosAndPoles data record from a real value"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
@@ -148,7 +149,7 @@ discrete zeros-and-poles transfer function is derived from DiscreteStateSpace by
   end fromZerosAndPoles;
 
   encapsulated function fromPolesAndZeros
-      "Generate a DiscreteZerosAndPoles transfer function from a set of zeros and poles"
+      "Generate a DiscreteZerosAndPoles data record from a set of zeros and poles"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -264,10 +265,11 @@ is defined as
 
     function fromDiscreteTransferFunction =
         Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteZerosAndPoles
-                                                                                             annotation (Documentation(info="<html>
+        annotation (Documentation(info="<html>
 </html>"));
+
     encapsulated function fromFactorization
-      "Generate a DiscreteZerosAndPoles object from first and second order polynomials"
+      "Generate a DiscreteZerosAndPoles data record from first and second order polynomials"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
@@ -349,7 +351,7 @@ which is equal to
   end 'constructor';
 
 encapsulated operator '-'
-    "Contains operators for subtraction of discrete zeros and poles records"
+    "Contains operators for subtraction of discrete zeros and poles descriptions"
   import Modelica;
   extends Modelica.Icons.Package;
   function subtract "Subtract two DiscreteZerosAndPoles (dzp1 - dzp2)"
@@ -826,6 +828,7 @@ DiscreteZerosAndPoles dzp = q/(q^2 + q + 1)/(q + 1)
   end q;
 
   encapsulated package Analysis
+    "Package of functions to analyse discrete zeros-and-poles description represented by a DiscreteZerosAndPoles record"
     import Modelica;
     extends Modelica.Icons.Package;
 
@@ -1355,12 +1358,14 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
   end Analysis;
 
   encapsulated package Design
+    "Package of functions to design discrete zeros-and-poles controllers and observers"
     import Modelica;
     extends Modelica.Icons.Package;
 
   end Design;
 
   encapsulated package Plot
+    "Package of functions to plot discrete zeros and poles description responses"
     import Modelica;
     extends Modelica.Icons.Package;
 
@@ -1925,6 +1930,7 @@ This function plots the initial response, i.e. the zeros input response of a zer
   end Plot;
 
   encapsulated package Conversion
+    "Package of functions for conversion of DiscreteZerosAndPoles data record"
     import Modelica_LinearSystems2;
     import Modelica;
     extends Modelica.Icons.Package;
@@ -2378,11 +2384,68 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
   end Conversion;
 
   encapsulated package Import
+    "Package of functions to generate a DiscreteZerosAndPoles data record from imported data"
     import Modelica;
     extends Modelica.Icons.Package;
 
+    encapsulated function fromFile
+      "Generate a DiscreteZerosAndPoles data record by reading the polynomial coefficients or zeros and poles from a file"
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica_LinearSystems2.DataDir;
+
+      input String fileName=DataDir + "dzp.mat"
+        "Name of the discrete zeros and poles data file"        annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+                        caption="state space system data file")));
+
+    protected
+      input Integer n1n2d1d2[4]=if ZerosAndPoles.Internal.checkRepresentation(
+          fileName) then ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(
+          fileName) else ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(
+          fileName);
+      input Integer n1=n1n2d1d2[1];
+      input Integer n2=n1n2d1d2[2];
+      input Integer d1=n1n2d1d2[3];
+      input Integer d2=n1n2d1d2[4];
+      input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
+      input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
+    public
+      output DiscreteZerosAndPoles dzp(n1=fill(0, n1), n2=fill(0, n2, 2), d1=fill(0, d1), d2=fill(0, d2, 2));
+    algorithm
+    //Whenever this function becomes operational the code must be rewritten if fromFile_pc2 and fromFile_zp2 are in the 'constructor'
+
+      dzp := if ZerosAndPoles.Internal.checkRepresentation(fileName) then DiscreteZerosAndPoles.Internal.fromFile_zp( fileName) else DiscreteZerosAndPoles.Internal.fromFile_pc(
+        fileName);
+
+      annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<table>
+<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Import.<b>fromFile</b>(fileName)  </td> </tr>
+</table>
+<h4>Description</h4>
+<p>
+Reads and loads a discrete zeros-and-poles transfer function from a mat-file <tt>fileName</tt>. The file must contain the sample time Ts and either the set of variables n1, n2, d1, d2, and k with
+the associated first and second order polynomials or the variables p, z, and k with the poles and zeros, written in two column arrays with real and imaginary in the first and
+second column respectively. The variable k is the real gain in both cases.
+
+
+<h4>Example</h4>
+<blockquote><pre>
+
+
+<b>algorithm</b>
+  dzp:=Modelica_LinearSystems2.DiscreteZerosAndPoles.Import.fromFile(DataDir + "    /dzp.mat " );
+//  zp = (q^2 + 2*q + 3)/(q + 2)/(q^2 + 2*q + 2)
+</pre></blockquote>
+
+</html> "));
+    end fromFile;
+
   function fromModel
-      "Generate a DiscreteZerosAndPoles record array from a state space representation resulted from linearization of a model"
+      "Generate a DiscreteZerosAndPoles data record from a state space representation resulted from linearization of a model"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -2521,66 +2584,11 @@ transfer function representation.
 </html>"));
   end fromModel;
 
-    encapsulated function fromFile
-      "Generate a DiscreteZerosAndPoles record by reading the polynomial coefficients or zeros and poles from a file"
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica;
-      import Modelica_LinearSystems2.DataDir;
-
-      input String fileName=DataDir + "dzp.mat"
-        "Name of the discrete zeros and poles data file"        annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                        caption="state space system data file")));
-
-    protected
-      input Integer n1n2d1d2[4]=if ZerosAndPoles.Internal.checkRepresentation(
-          fileName) then ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(
-          fileName) else ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(
-          fileName);
-      input Integer n1=n1n2d1d2[1];
-      input Integer n2=n1n2d1d2[2];
-      input Integer d1=n1n2d1d2[3];
-      input Integer d2=n1n2d1d2[4];
-      input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
-      input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
-    public
-      output DiscreteZerosAndPoles dzp(n1=fill(0, n1), n2=fill(0, n2, 2), d1=fill(0, d1), d2=fill(0, d2, 2));
-    algorithm
-    //Whenever this function becomes operational the code must be rewritten if fromFile_pc2 and fromFile_zp2 are in the 'constructor'
-
-      dzp := if ZerosAndPoles.Internal.checkRepresentation(fileName) then DiscreteZerosAndPoles.Internal.fromFile_zp( fileName) else DiscreteZerosAndPoles.Internal.fromFile_pc(
-        fileName);
-
-      annotation (Documentation(info="<html>
-<h4>Syntax</h4>
-<table>
-<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Import.<b>fromFile</b>(fileName)  </td> </tr>
-</table>
-<h4>Description</h4>
-<p>
-Reads and loads a discrete zeros-and-poles transfer function from a mat-file <tt>fileName</tt>. The file must contain the sample time Ts and either the set of variables n1, n2, d1, d2, and k with
-the associated first and second order polynomials or the variables p, z, and k with the poles and zeros, written in two column arrays with real and imaginary in the first and
-second column respectively. The variable k is the real gain in both cases.
-
-
-<h4>Example</h4>
-<blockquote><pre>
-
-
-<b>algorithm</b>
-  dzp:=Modelica_LinearSystems2.DiscreteZerosAndPoles.Import.fromFile(DataDir + "    /dzp.mat " );
-//  zp = (q^2 + 2*q + 3)/(q + 2)/(q^2 + 2*q + 2)
-</pre></blockquote>
-
-</html> "));
-    end fromFile;
 
   end Import;
 
   encapsulated package Internal
-    "Internal library of record Filter (should not be directly used by user)"
+    "Package of internal material of record DiscreteZerosAndPoles (for advanced users only)"
 
     import Modelica;
     import Modelica_LinearSystems2;
@@ -2705,7 +2713,7 @@ int found=0;
   end fromRealAndImag;
 
   encapsulated function fromFile_pc
-      "Generate a zeros and poles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
+      "Generate a DiscreteZerosAndPoles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
@@ -2781,12 +2789,12 @@ int found=0;
   end fromFile_pc;
 
   encapsulated function fromFile_zp
-      "Generate a zeros and poles data record by reading poles and zeros from a file (default file name is zp.mat)"
+      "Generate a DiscreteZerosAndPoles data record by reading poles and zeros from a file (default file name is zp.mat)"
 
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.Math.Complex;
 
     input String fileName="dzp.mat" "Name of the zeros and poles data file"
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",

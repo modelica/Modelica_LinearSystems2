@@ -17,13 +17,13 @@ record TransferFunction
 */
 
   encapsulated operator 'constructor'
-    "Default constructor for a transfer function"
+    "Collection of operators to construct a TransferFunction data record"
     import Modelica;
     import Modelica_LinearSystems2.TransferFunction;
     extends Modelica.Icons.Package;
 
     function fromReal
-      "Generate a TransferFunction data record from a Real value"
+      "Generate a TransferFunction data record from a real value"
       import Modelica;
       import Modelica_LinearSystems2.TransferFunction;
 
@@ -39,7 +39,7 @@ record TransferFunction
     end fromReal;
 
   encapsulated function fromZerosAndPoles
-      "Generate a transfer function from a set of zeros and poles"
+      "Generate a TransferFunction data record from a set of zeros and poles"
 
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
@@ -307,8 +307,7 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
   end s;
 
   encapsulated package Analysis
-    "Collection of functions to analyse a transfer function"
-
+    "Package of functions to analyse transfer function represented by a TransferFunction record"
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.StateSpace;
@@ -1437,6 +1436,7 @@ of a transfer function.
   end Analysis;
 
   encapsulated package Design
+    "Package of functions to design transfer function controllers and observers"
     import Modelica;
     extends Modelica.Icons.Package;
     encapsulated function filter
@@ -1544,6 +1544,7 @@ algorithm
   end Design;
 
   encapsulated package Plot
+    "Package of functions to plot transfer function responses"
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.TransferFunction;
@@ -2159,6 +2160,7 @@ This function plots the initial response, i.e. the zeros input response of a tra
   end Plot;
 
   encapsulated package Conversion
+    "Package of functions for conversion of TransferFunction data record"
     import Modelica;
     extends Modelica.Icons.Package;
     encapsulated function toZerosAndPoles
@@ -2480,11 +2482,69 @@ is defined slightly differently.
   end Conversion;
 
   encapsulated package Import
+    "Package of functions to generate a TransferFunction data record from imported data"
     import Modelica;
     extends Modelica.Icons.Package;
 
+  encapsulated function fromFile
+      "Generate a TransferFunction data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
+
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Math.Polynomial;
+    input String fileName="tf.mat" "Name of the transfer function data file"   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+                        caption="transfer function data file")));
+    input String numName="n" "Name of the numenator of the transfer function";
+    input String denName="d" "Name of the denominator of the transfer function";
+
+    protected
+    input Integer numSize[2]=readMatrixSize(fileName, numName);
+    input Integer denSize[2]=readMatrixSize(fileName, denName);
+
+    Real num[numSize[1],numSize[2]]=readMatrix(
+          fileName,
+          numName,
+          numSize[1],
+          numSize[2]) "numenator coefficients";
+    Real den[denSize[1],denSize[2]]=readMatrix(
+          fileName,
+          denName,
+          denSize[1],
+          denSize[2]) "denominator coefficients";
+    input Integer ns2=numSize[2];
+    input Integer ds2=denSize[2];
+    public
+   output TransferFunction tf(n=fill(0,ns2),d=fill(0,ds2)) "transfer function";
+
+  algorithm
+    tf.n := vector(num);
+    tf.d := vector(den);
+    tf.uName := numName;
+    tf.yName := denName;
+
+      annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<table>
+<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> TransferFunction.Import.<b>fromFile</b>(fileName, numName, denName)  </td> </tr>
+</table>
+<h4>Description</h4>
+<p>
+Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file must contain the names of the vector with the polynomial coefficients of numerator and denominator
+
+<h4>Example</h4>
+<blockquote><pre>
+
+
+<b>algorithm</b>
+  tf:=Modelica_LinearSystems2.TransferFunction.Import.fromFile(\"tf.mat\", \"n\", \"d\");
+//  tf = (s^2 + 2*s + 3)/(4*s^2 + 5*s + 6)
+</pre></blockquote>
+
+
+</html> "));
+  end fromFile;
+
   function fromModel
-      "Generate a TransferFunction record array from a state space representation resulted from linearization of a model"
+      "Generate a TransferFunction data record from a state space representation resulted from linearization of a model"
 
     import Modelica;
     import Modelica_LinearSystems2;
@@ -2560,67 +2620,11 @@ followed by a conversion from sate space to transfer function representation.
 </html>"));
   end fromModel;
 
-  encapsulated function fromFile
-      "Generate a transfer function data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
-
-      import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Math.Polynomial;
-    input String fileName="tf.mat" "Name of the transfer function data file"   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                        caption="transfer function data file")));
-    input String numName="n" "Name of the numenator of the transfer function";
-    input String denName="d" "Name of the denominator of the transfer function";
-
-    protected
-    input Integer numSize[2]=readMatrixSize(fileName, numName);
-    input Integer denSize[2]=readMatrixSize(fileName, denName);
-
-    Real num[numSize[1],numSize[2]]=readMatrix(
-          fileName,
-          numName,
-          numSize[1],
-          numSize[2]) "numenator coefficients";
-    Real den[denSize[1],denSize[2]]=readMatrix(
-          fileName,
-          denName,
-          denSize[1],
-          denSize[2]) "denominator coefficients";
-    input Integer ns2=numSize[2];
-    input Integer ds2=denSize[2];
-    public
-   output TransferFunction tf(n=fill(0,ns2),d=fill(0,ds2)) "transfer function";
-
-  algorithm
-    tf.n := vector(num);
-    tf.d := vector(den);
-    tf.uName := numName;
-    tf.yName := denName;
-
-      annotation (Documentation(info="<html>
-<h4>Syntax</h4>
-<table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> TransferFunction.Import.<b>fromFile</b>(fileName, numName, denName)  </td> </tr>
-</table>
-<h4>Description</h4>
-<p>
-Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file must contain the names of the vector with the polynomial coefficients of numerator and denominator
-
-<h4>Example</h4>
-<blockquote><pre>
-
-
-<b>algorithm</b>
-  tf:=Modelica_LinearSystems2.TransferFunction.Import.fromFile(\"tf.mat\", \"n\", \"d\");
-//  tf = (s^2 + 2*s + 3)/(4*s^2 + 5*s + 6)
-</pre></blockquote>
-
-
-</html> "));
-  end fromFile;
 
   end Import;
 
   encapsulated package Internal
-    "Internal library of record transferFunction (should not be directly used by user)"
+    "Package of internal material of record TransferFunction (for advanced users only)"
     import Modelica;
     extends Modelica.Icons.Package;
 

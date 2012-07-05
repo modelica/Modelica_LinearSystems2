@@ -14,7 +14,7 @@ record StateSpace
   String uNames[size(B, 2)]=fill("", size(B, 2)) "Names of the input signals"  annotation(Dialog(group="Signal names"));
 
 encapsulated operator 'constructor'
-    "Collection of functions to generate a state space data record"
+    "Collection of operators to construct a StateSpace data record"
   extends Modelica.Icons.Package;
 
   import Modelica;
@@ -93,7 +93,7 @@ public
 </html>"));
   end fromABCDMatrices;
 
-  function fromReal "Generate a StateSpace data record from a Real value"
+  function fromReal "Generate a StateSpace data record from a real value"
 
     import Modelica;
     import Modelica_LinearSystems2.StateSpace;
@@ -138,6 +138,7 @@ ss.D = [r];
       Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace
       "Generate a StateSpace data record from a transfer function"
     annotation (Documentation(info="<html> </html>"));
+
   function fromZerosAndPoles =
       Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace
       "Generate a StateSpace data record from a zeros-and-poles system"                                                               annotation (Documentation(info="<html> </html>"));
@@ -587,7 +588,7 @@ algorithm
 end 'String';
 
 encapsulated package Analysis
-    "Package with functions to analyse state space systems represented by a StateSpace record"
+    "Package of functions to analyse state space system represented by a StateSpace record"
   import Modelica;
   extends Modelica.Icons.Package;
 
@@ -3834,7 +3835,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
 end Analysis;
 
   encapsulated package Design
-    "Package with functions for state space controller design"
+    "Package of functions to design state space controllers and observers"
     import Modelica;
     extends Modelica.Icons.Package;
     encapsulated function assignPolesSI
@@ -4967,10 +4968,10 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
 
   end Design;
 
-encapsulated package Plot
-    "Package with functions to plot state space system responses"
+  encapsulated package Plot
+    "Package of functions to plot state space system responses"
     import Modelica;
-  extends Modelica.Icons.Package;
+    extends Modelica.Icons.Package;
 
     encapsulated function polesAndZeros
       "Plot poles (i.e. eigenvalues) and/or invariant zeros of a state space system"
@@ -5744,12 +5745,12 @@ This function plots the initial responses of a state space system for the initia
 </html> "));
     end initialResponse;
 
-end Plot;
+  end Plot;
 
-encapsulated package Conversion
-    "Package with functions to convert state space system into other representation"
-  import Modelica;
-  extends Modelica.Icons.Package;
+  encapsulated package Conversion
+    "Package of functions for conversion of StateSpace data record"
+    import Modelica;
+    extends Modelica.Icons.Package;
 
   encapsulated function toZerosAndPoles
       "Generate a zeros-and-poles representation from a SISO state space representation"
@@ -5955,42 +5956,43 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
 </html>"));
   end toTransferFunction;
 
-encapsulated function toZerosAndPolesMIMO
+    encapsulated function toZerosAndPolesMIMO
       "Generate a zeros-and-poles representation from a MIMO state space representation"
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.StateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.StateSpace;
 
-  input StateSpace ss "State space system";
-  input Real tol=1e-10 "Tolerance of reduction procedure, default tol = 1e-10";
+      input StateSpace ss "State space system";
+      input Real tol=1e-10
+        "Tolerance of reduction procedure, default tol = 1e-10";
 
-  output ZerosAndPoles zp[size(ss.C, 1),size(ss.B, 2)];
+      output ZerosAndPoles zp[size(ss.C, 1),size(ss.B, 2)];
 
     protected
-  StateSpace ss_siso(
-    redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
-    redeclare Real B[size(ss.B, 1),1],
-    redeclare Real C[1,size(ss.C, 2)],
-    redeclare Real D[1,1]);
+      StateSpace ss_siso(
+        redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
+        redeclare Real B[size(ss.B, 1),1],
+        redeclare Real C[1,size(ss.C, 2)],
+        redeclare Real D[1,1]);
 
-  Integer ny=size(ss.C, 1);
-  Integer nu=size(ss.B, 2);
+      Integer ny=size(ss.C, 1);
+      Integer nu=size(ss.B, 2);
 
-algorithm
-  for ic in 1:ny loop
-    for ib in 1:nu loop
-      ss_siso := StateSpace(
-          A=ss.A,
-          B=matrix(ss.B[:, ib]),
-          C=transpose(matrix(ss.C[ic, :])),
-          D=matrix(ss.D[ic, ib]));
-          zp[ic, ib] := StateSpace.Conversion.toZerosAndPoles(ss_siso, tol);
-     end for;
-  end for;
-  annotation (overloadsConstructor=true, Documentation(info="<html>
+    algorithm
+      for ic in 1:ny loop
+        for ib in 1:nu loop
+          ss_siso := StateSpace(
+              A=ss.A,
+              B=matrix(ss.B[:, ib]),
+              C=transpose(matrix(ss.C[ic, :])),
+              D=matrix(ss.D[ic, ib]));
+              zp[ic, ib] := StateSpace.Conversion.toZerosAndPoles(ss_siso, tol);
+         end for;
+      end for;
+      annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = StateSpace.Conversion.<b>toZerosAndPolesMIMO</b>(ss)
@@ -6051,43 +6053,44 @@ i.e.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 
-</html> ", revisions="<html>
+</html> ",     revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
 </ul>
 </html>"));
-end toZerosAndPolesMIMO;
+    end toZerosAndPolesMIMO;
 
-function toTransferFunctionMIMO
+    function toTransferFunctionMIMO
       "Generate a transfer function of a MIMO system from state space representation"
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.ZerosAndPoles;
 
-  input StateSpace ss "State space system";
-  input Real tol=1e-10 "Tolerance of reduction procedure, default tol = 1e-10";
+      input StateSpace ss "State space system";
+      input Real tol=1e-10
+        "Tolerance of reduction procedure, default tol = 1e-10";
 
-  output TransferFunction tf[size(ss.C, 1),size(ss.B, 2)]
+      output TransferFunction tf[size(ss.C, 1),size(ss.B, 2)]
         "Matrix of transfer function objects";
 
     protected
-  ZerosAndPoles zp[:,:];
-  parameter Integer m=size(ss.B, 2);
-  parameter Integer p=size(ss.C, 1);
+      ZerosAndPoles zp[:,:];
+      parameter Integer m=size(ss.B, 2);
+      parameter Integer p=size(ss.C, 1);
 
-algorithm
-  zp := StateSpace.Conversion.toZerosAndPolesMIMO(ss, tol);
-  for i1 in 1:m loop
-    for i2 in 1:p loop
-      tf[i2, i1] := ZerosAndPoles.Conversion.toTransferFunction(zp[i2, i1]);
-    end for;
-  end for;
+    algorithm
+      zp := StateSpace.Conversion.toZerosAndPolesMIMO(ss, tol);
+      for i1 in 1:m loop
+        for i2 in 1:p loop
+          tf[i2, i1] := ZerosAndPoles.Conversion.toTransferFunction(zp[i2, i1]);
+        end for;
+      end for;
 
-      annotation (Documentation(info="<html>
+          annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 tf = StateSpace.Conversion.<b>toTransferFunctionMIMO</b>(ss)
@@ -6140,18 +6143,18 @@ i.e.
          | (s + 2)*(s + 3)            (s + 1)*(s + 2)        |
          |                                                   |
 </pre></blockquote>
-</html> ", revisions="<html>
+</html> ",     revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
 </ul>
 </html>"));
-end toTransferFunctionMIMO;
+    end toTransferFunctionMIMO;
 
-end Conversion;
+  end Conversion;
 
   encapsulated package Transformation
-    "Package with functions for state space similarity transformations"
+    "Package of functions for state space similarity transformations"
     import Modelica;
     extends Modelica.Icons.Package;
 
@@ -6722,12 +6725,12 @@ Function <b>extract</b> computes the subsystem of a state space system correspon
 
   end Transformation;
 
-encapsulated package Import
-    "Package with utilitiy functions to import state space representations"
-  extends Modelica.Icons.Package;
-  import Modelica;
+  encapsulated package Import
+    "Package of functions to generate a StateSpace data record from imported data"
+    extends Modelica.Icons.Package;
+    import Modelica;
 
-  encapsulated function fromFile "Read a state space data record from mat-file"
+  encapsulated function fromFile "Read a StateSpace data record from mat-file"
 
     import Modelica;
     import Modelica_LinearSystems2;
@@ -6875,13 +6878,13 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
 
     annotation (Documentation(info="<html>
 </html>"));
-end Import;
+  end Import;
 
-encapsulated package Internal
-    "Internal library of record StateSpace (should not be directly used by user)"
+  encapsulated package Internal
+    "Package of internal material of record StateSpace (for advanced users only)"
     import Modelica;
     import Modelica_LinearSystems2;
-  extends Modelica.Icons.Package;
+    extends Modelica.Icons.Package;
 
   encapsulated function assignOneOrTwoPoles
       "Algorithm to assign p (p = 1 or 2) eigenvalues"
@@ -7232,124 +7235,125 @@ encapsulated package Internal
 
   end assignOneOrTwoPoles_alpha;
 
-function characterizeEigenvalue
+    function characterizeEigenvalue
       "Check stability, stabilizability, controllability, observability nad detectability of the single poles"
 
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Internal.Eigenvalue;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.Internal;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Internal.Eigenvalue;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Internal;
 
-  input StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=fill(
-        0,
-        0,
-        0),
-      B=fill(
-        0,
-        0,
-        0),
-      C=fill(
-        0,
-        0,
-        0),
-      D=fill(
-        0,
-        0,
-        0)) "State space system";
-  input Eigenvalue evin[:] "Eigenvalues or a pairs of conjugated complex pair";
-  output Eigenvalue ev[size(ss.A, 1)];
+      input StateSpace ss=Modelica_LinearSystems2.StateSpace(
+          A=fill(
+            0,
+            0,
+            0),
+          B=fill(
+            0,
+            0,
+            0),
+          C=fill(
+            0,
+            0,
+            0),
+          D=fill(
+            0,
+            0,
+            0)) "State space system";
+      input Eigenvalue evin[:]
+        "Eigenvalues or a pairs of conjugated complex pair";
+      output Eigenvalue ev[size(ss.A, 1)];
 
     protected
-  Real cPoles[:,2] "Controllable poles";
-  Real ncPoles[:,2] "Uncontrollable poles";
-  Real poles[size(ss.A, 1),2] "Controllable and uncontrollable poles";
-  Integer n_c;
-  Integer nx=size(ss.A, 1);
+      Real cPoles[:,2] "Controllable poles";
+      Real ncPoles[:,2] "Uncontrollable poles";
+      Real poles[size(ss.A, 1),2] "Controllable and uncontrollable poles";
+      Integer n_c;
+      Integer nx=size(ss.A, 1);
 
-  Eigenvalue cdummy[size(ss.A, 1)];
-  Eigenvalue odummy[size(ss.A, 1)];
-  StateSpace sst=StateSpace(
-      A=transpose(ss.A),
-      B=transpose(ss.C),
-      C=transpose(ss.B),
-      D=transpose(ss.D));
-  Boolean equal;
-  Integer ii;
+      Eigenvalue cdummy[size(ss.A, 1)];
+      Eigenvalue odummy[size(ss.A, 1)];
+      StateSpace sst=StateSpace(
+          A=transpose(ss.A),
+          B=transpose(ss.C),
+          C=transpose(ss.B),
+          D=transpose(ss.D));
+      Boolean equal;
+      Integer ii;
 
-  Real eps=1e-16*Modelica.Math.Matrices.norm(A=ss.A, p=1);
-  Real factor_eps=1;
-  Real absVector[nx];
-  Integer indices[:];
-  Integer indexMin;
-  Real indexVector[:];
-  Integer vv[:];
-  Complex j = Modelica_LinearSystems2.Math.Complex.j();
+      Real eps=1e-16*Modelica.Math.Matrices.norm(A=ss.A, p=1);
+      Real factor_eps=1;
+      Real absVector[nx];
+      Integer indices[:];
+      Integer indexMin;
+      Real indexVector[:];
+      Integer vv[:];
+      Complex j = Modelica_LinearSystems2.Math.Complex.j();
 
-algorithm
-  for i in 1:nx loop
-    ev[i].ev := evin[i].ev;
-  end for;
+    algorithm
+      for i in 1:nx loop
+        ev[i].ev := evin[i].ev;
+      end for;
 
-  (cPoles,ncPoles,poles) := StateSpace.Internal.controllablePoles(ss);
-  n_c := size(cPoles, 1);
-  for i in 1:n_c loop
-    cdummy[i].ev := cPoles[i, 1]+cPoles[i, 2]*j;
-    cdummy[i].isControllable := true;
-  end for;
-  for i in 1:size(ncPoles, 1) loop
-    cdummy[n_c + i].ev := ncPoles[i, 1]+ncPoles[i, 2]*j;
-    cdummy[n_c + i].isControllable := false;
-  end for;
+      (cPoles,ncPoles,poles) := StateSpace.Internal.controllablePoles(ss);
+      n_c := size(cPoles, 1);
+      for i in 1:n_c loop
+        cdummy[i].ev := cPoles[i, 1]+cPoles[i, 2]*j;
+        cdummy[i].isControllable := true;
+      end for;
+      for i in 1:size(ncPoles, 1) loop
+        cdummy[n_c + i].ev := ncPoles[i, 1]+ncPoles[i, 2]*j;
+        cdummy[n_c + i].isControllable := false;
+      end for;
 
-// controllable poles of the trnasposed system are the observable poles
-  (cPoles,ncPoles,poles) := StateSpace.Internal.controllablePoles(sst);
-  n_c := size(cPoles, 1);
-  for i in 1:n_c loop
-    odummy[i].ev := cPoles[i, 1]+cPoles[i, 2]*j;
-    odummy[i].isObservable := true;
-  end for;
-  for i in 1:size(ncPoles, 1) loop
-    odummy[n_c + i].ev := ncPoles[i, 1]+ncPoles[i, 2]*j;
-    odummy[n_c + i].isObservable := false;
-  end for;
+    // controllable poles of the trnasposed system are the observable poles
+      (cPoles,ncPoles,poles) := StateSpace.Internal.controllablePoles(sst);
+      n_c := size(cPoles, 1);
+      for i in 1:n_c loop
+        odummy[i].ev := cPoles[i, 1]+cPoles[i, 2]*j;
+        odummy[i].isObservable := true;
+      end for;
+      for i in 1:size(ncPoles, 1) loop
+        odummy[n_c + i].ev := ncPoles[i, 1]+ncPoles[i, 2]*j;
+        odummy[n_c + i].isObservable := false;
+      end for;
 
-// using ev.imag as an flag to mark the eigenvalues
-  for i in 1:nx loop
-    absVector := fill(1e50, nx);
-    for ii in 1:nx loop
-      if not odummy[ii].imag then
-        absVector[ii] := Complex.'abs'(ev[i].ev - odummy[ii].ev);
-      end if;
-    end for;
-    (absVector,indices) := Modelica.Math.Vectors.sort(absVector);
-    indexMin := indices[1];
-    ev[i].isObservable := odummy[indexMin].isObservable;
-    odummy[indexMin].imag := true;
-  end for;
+    // using ev.imag as an flag to mark the eigenvalues
+      for i in 1:nx loop
+        absVector := fill(1e50, nx);
+        for ii in 1:nx loop
+          if not odummy[ii].imag then
+            absVector[ii] := Complex.'abs'(ev[i].ev - odummy[ii].ev);
+          end if;
+        end for;
+        (absVector,indices) := Modelica.Math.Vectors.sort(absVector);
+        indexMin := indices[1];
+        ev[i].isObservable := odummy[indexMin].isObservable;
+        odummy[indexMin].imag := true;
+      end for;
 
-  for i in 1:nx loop
-    absVector := fill(1e50, nx);
-    for ii in 1:nx loop
-      if not cdummy[ii].imag then
-        absVector[ii] := Complex.'abs'(ev[i].ev - cdummy[ii].ev);
-      end if;
-    end for;
-    (absVector,indices) := Modelica.Math.Vectors.sort(absVector);
-    indexMin := indices[1];
-    ev[i].isControllable := cdummy[indexMin].isControllable;
-    cdummy[indexMin].imag := true;
-  end for;
+      for i in 1:nx loop
+        absVector := fill(1e50, nx);
+        for ii in 1:nx loop
+          if not cdummy[ii].imag then
+            absVector[ii] := Complex.'abs'(ev[i].ev - cdummy[ii].ev);
+          end if;
+        end for;
+        (absVector,indices) := Modelica.Math.Vectors.sort(absVector);
+        indexMin := indices[1];
+        ev[i].isControllable := cdummy[indexMin].isControllable;
+        cdummy[indexMin].imag := true;
+      end for;
 
-  for i in 1:nx loop
-    ev[i] := Eigenvalue(
-      ev[i].ev,
-      ev[i].isControllable,
-      ev[i].isObservable);
-  end for;
+      for i in 1:nx loop
+        ev[i] := Eigenvalue(
+          ev[i].ev,
+          ev[i].isControllable,
+          ev[i].isObservable);
+      end for;
 
-end characterizeEigenvalue;
+    end characterizeEigenvalue;
 
   encapsulated function cntrHessenberg
       "Calculate the controllable part of a SISO system"
@@ -7726,64 +7730,63 @@ to separate the uncontrollable poles from the controllable poles.
 
   end householder;
 
-encapsulated function invariantZeros2
+    encapsulated function invariantZeros2
       "Compute invariant zeros of linear SISO state space system with a generalized system matrix [A, B, C, D] which is of upper Hessenberg form"
-  import Modelica;
-  import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Modelica;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
-  input StateSpace ss "Linear system in state space form";
-  output Complex Zeros[:]
+      input StateSpace ss "Linear system in state space form";
+      output Complex Zeros[:]
         "Finite, invariant zeros of ss; size(Zeros,1) <= size(ss.A,1)";
 
     protected
-  Integer nx=size(ss.A, 1) "Number of states";
-  Integer nu=size(ss.B, 2) "Number of inputs";
-  Integer ny=size(ss.C, 1) "Number of outputs";
-  Integer na=nx + nu;
-  Real A[nx + ny,nx + nu]=[ss.A,ss.B; ss.C,ss.D];
-  Real B[nx + ny,nx + nu]=[identity(nx),zeros(nx, nu); zeros(ny, nx + nu)];
-  Real alphaReal[na];
-  Real alphaImag[na];
-  Real beta[na];
-  Integer info;
-  Real beta_small=100*Modelica.Constants.eps;
-  Integer nZeros;
-  Complex z[size(ss.A, 1)];
-  Integer j;
-  Real normB=max(beta_small,Modelica.Math.Matrices.norm(ss.B, p=1));
-algorithm
-  assert(nu == ny, "Function invariantZeros requires currently that the number of
-inputs (= "
-          + String(nu) + ") = number of outputs (= " + String(ny) + ")
+      Integer nx=size(ss.A, 1) "Number of states";
+      Integer nu=size(ss.B, 2) "Number of inputs";
+      Integer ny=size(ss.C, 1) "Number of outputs";
+      Integer na=nx + nu;
+      Real A[nx + ny,nx + nu]=[ss.A,ss.B; ss.C,ss.D];
+      Real B[nx + ny,nx + nu]=[identity(nx),zeros(nx, nu); zeros(ny, nx + nu)];
+      Real alphaReal[na];
+      Real alphaImag[na];
+      Real beta[na];
+      Integer info;
+      Real beta_small=100*Modelica.Constants.eps;
+      Integer nZeros;
+      Complex z[size(ss.A, 1)];
+      Integer j;
+      Real normB=max(beta_small,Modelica.Math.Matrices.norm(ss.B, p=1));
+    algorithm
+      assert(nu == ny, "Function invariantZeros requires currently that the number of
+inputs (= "   + String(nu) + ") = number of outputs (= " + String(ny) + ")
 This condition is however not fulfilled");
 
-// Compute zeros
+    // Compute zeros
 
-  (alphaReal,alphaImag,beta,info) :=
-    Matrices.generalizedEigenvaluesTriangular(A, B);
+      (alphaReal,alphaImag,beta,info) :=
+        Matrices.generalizedEigenvaluesTriangular(A, B);
 
-  assert(info == 0,
-    "Failed to compute invariant zeros with function invariantZeros(..)");
+      assert(info == 0,
+        "Failed to compute invariant zeros with function invariantZeros(..)");
 
-// If beta[i] is zero, then zero i is infinite.
-  j := 1;
-  for i in 1:na loop
+    // If beta[i] is zero, then zero i is infinite.
+      j := 1;
+      for i in 1:na loop
 
-   if beta[i] >= normB*1e-10 then
-     // finite eigenvalue
-      z[j].re := if abs(alphaReal[i]) >= normB*1e-12 then alphaReal[i]/beta[i] else
-              0;
-      z[j].im := if abs(alphaImag[i]) >= normB*1e-12 then alphaImag[i]/beta[i] else
-              0;
-      j := j + 1;
-    end if;
-  end for;
-  nZeros := j - 1;
-  Zeros := z[1:nZeros];
-  annotation (Documentation(info="<html>
+       if beta[i] >= normB*1e-10 then
+         // finite eigenvalue
+          z[j].re := if abs(alphaReal[i]) >= normB*1e-12 then alphaReal[i]/beta[i] else
+                  0;
+          z[j].im := if abs(alphaImag[i]) >= normB*1e-12 then alphaImag[i]/beta[i] else
+                  0;
+          j := j + 1;
+        end if;
+      end for;
+      nZeros := j - 1;
+      Zeros := z[1:nZeros];
+      annotation (Documentation(info="<html>
 <p>
 Computes the invariant zeros of a system in state space form:
 </p>
@@ -7825,7 +7828,7 @@ inputs and the number of outputs must be identical. Other systems
 have to be treated like p*q SISO systems where p is the number of putputs and q the number of inputs of the MIMO system.
 </p>
 </html>"));
-end invariantZeros2;
+    end invariantZeros2;
 
   encapsulated function invariantZerosHessenberg
       "Fast version to calculate the system zeros of a SISO system with D=[0] and A has upper Hessenberg form, delivered by StateSpace.reduceSystem"
@@ -7933,41 +7936,41 @@ inputs and the number of outputs must be identical.
 </html>"));
   end isSISO;
 
- encapsulated function isControllableAndObservableSISO
+    encapsulated function isControllableAndObservableSISO
       "To check whether a SISO system is controllable and observable"
 
-   import Modelica_LinearSystems2;
-   import Modelica_LinearSystems2.StateSpace;
+       import Modelica_LinearSystems2;
+       import Modelica_LinearSystems2.StateSpace;
 
-   input StateSpace ss "State space system";
+       input StateSpace ss "State space system";
 
     protected
-   Modelica_LinearSystems2.Internal.StateSpaceR ssm1=
-        StateSpace.Internal.reducedCtrSystem(ss);
-   Integer nx=size(ss.A, 1);
-   Integer rankQ=ssm1.r;
-   StateSpace ss2=StateSpace(
-          A=transpose(ssm1.A[nx - rankQ + 1:nx, nx - rankQ + 1:nx]),
-          B=transpose(ssm1.C[:, nx - rankQ + 1:nx]),
-          C=transpose(ssm1.B[nx - rankQ + 1:nx, :]),
-          D=ssm1.D);
-   Integer nx2=ssm1.r;
-   Modelica_LinearSystems2.Internal.StateSpaceR ssm2=
-        StateSpace.Internal.reducedCtrSystem(ss2);
+       Modelica_LinearSystems2.Internal.StateSpaceR ssm1=
+            StateSpace.Internal.reducedCtrSystem(ss);
+       Integer nx=size(ss.A, 1);
+       Integer rankQ=ssm1.r;
+       StateSpace ss2=StateSpace(
+              A=transpose(ssm1.A[nx - rankQ + 1:nx, nx - rankQ + 1:nx]),
+              B=transpose(ssm1.C[:, nx - rankQ + 1:nx]),
+              C=transpose(ssm1.B[nx - rankQ + 1:nx, :]),
+              D=ssm1.D);
+       Integer nx2=ssm1.r;
+       Modelica_LinearSystems2.Internal.StateSpaceR ssm2=
+            StateSpace.Internal.reducedCtrSystem(ss2);
     public
-   output Boolean controllableAndObservable;
- algorithm
-   if size(ss.C, 1) <> 1 or size(ss.B, 2) <> 1 then
-     assert(size(ss.B, 2) == 1,
-       "A SISO-system is expected as input\n but the number of inputs is " +
-       String(size(ss.B, 2)) + " instead of 1");
-     assert(size(ss.C, 1) == 1,
-       " A SISO-system is expected as input\n but the number of outputs is "
-        + String(size(ss.C, 1)) + " instead of 1");
-   end if;
-   controllableAndObservable := size(ss.A, 1) == ssm2.r;
+       output Boolean controllableAndObservable;
+    algorithm
+       if size(ss.C, 1) <> 1 or size(ss.B, 2) <> 1 then
+         assert(size(ss.B, 2) == 1,
+           "A SISO-system is expected as input\n but the number of inputs is " +
+           String(size(ss.B, 2)) + " instead of 1");
+         assert(size(ss.C, 1) == 1,
+           " A SISO-system is expected as input\n but the number of outputs is "
+            + String(size(ss.C, 1)) + " instead of 1");
+       end if;
+       controllableAndObservable := size(ss.A, 1) == ssm2.r;
 
- end isControllableAndObservableSISO;
+    end isControllableAndObservableSISO;
 
   encapsulated function isControllableSISO
       "To check a SISO system wether it is controllable"
@@ -9607,39 +9610,40 @@ k = ---------- * ----------------------
     end if;
   end reducedCtrSystemX;
 
-function read_dslin "Read a StateSpace data record from mat-file"
+    function read_dslin "Read a StateSpace data record from mat-file"
 
-  import Modelica;
-  import Modelica_LinearSystems2.StateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2.StateSpace;
 
-  input String fileName="dslin" "Name of the result file";
+      input String fileName="dslin" "Name of the result file";
 
     protected
-  String fileName2=fileName + ".mat" "Name of the result file with extension";
-  Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
-  Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
-  Integer nx=integer(nxMat[1, 1]);
-  Integer nu=ABCDsizes[2] - nx;
-  Integer ny=ABCDsizes[1] - nx;
-  Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-  String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
+      String fileName2=fileName + ".mat"
+        "Name of the result file with extension";
+      Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
+      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+      Integer nx=integer(nxMat[1, 1]);
+      Integer nu=ABCDsizes[2] - nx;
+      Integer ny=ABCDsizes[1] - nx;
+      Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+      String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
     public
-  output StateSpace result(
-    redeclare Real A[nx,nx],
-    redeclare Real B[nx,nu],
-    redeclare Real C[ny,nx],
-    redeclare Real D[ny,nu]) "Outputs model linearized at initial point";
+      output StateSpace result(
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,nu],
+        redeclare Real C[ny,nx],
+        redeclare Real D[ny,nu]) "Outputs model linearized at initial point";
 
-algorithm
-  result.A := ABCD[1:nx, 1:nx];
-  result.B := ABCD[1:nx, nx + 1:nx + nu];
-  result.C := ABCD[nx + 1:nx + ny, 1:nx];
-  result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-  result.uNames := xuyName[nx + 1:nx + nu];
-  result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
-  result.xNames := xuyName[1:nx];
+    algorithm
+      result.A := ABCD[1:nx, 1:nx];
+      result.B := ABCD[1:nx, nx + 1:nx + nu];
+      result.C := ABCD[nx + 1:nx + ny, 1:nx];
+      result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+      result.uNames := xuyName[nx + 1:nx + nu];
+      result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
+      result.xNames := xuyName[1:nx];
 
-        annotation (interactive=true, Documentation(info="<html>
+            annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ss = StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)
@@ -9669,9 +9673,9 @@ ss = StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)
 // ss.D=[0; 0; 0; 0; 0; 0]
 </pre></blockquote>
 </html>"));
-end read_dslin;
+    end read_dslin;
 
-end Internal;
+  end Internal;
 
     annotation (
     defaultComponentName="stateSpace",

@@ -3,12 +3,11 @@ package Interfaces "Package of interfaces (partial blocks) of controllers"
   extends Modelica.Icons.BasesPackage;
 
   annotation (
-    Documentation(info="<HTML>
+    Documentation(info="<html>
 <p>
-This package contains the partial blocks of the Controller library. The
-components define global parameters, like <i>startTime, method, Ts</i> or
-<i>steadyStateStart</i> and handle the input/output conversation.
+This package contains the partial blocks of controller models. The
+components define global parameters, such as <em>startTime</em>, <em>method</em>, 
+<em>Ts</em> or <em>steadyStateStart</em> and handle the input/output conversation.
 </p>
-
-</HTML>"));
+</html>"));
 end Interfaces;

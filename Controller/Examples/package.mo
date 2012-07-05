@@ -4,8 +4,7 @@ package Examples "Package of examples to demonstrate the usage of controllers"
 
   annotation (Documentation(info="<html>
 <p>
-This package contains simulatable examples to demonstrate the
-usage of controllers.
+This package contains simulatable examples to demonstrate the usage of controllers.
 </p>
 </html>"));
 

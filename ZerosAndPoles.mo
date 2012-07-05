@@ -17,14 +17,14 @@ record ZerosAndPoles
   String yName="y" "Name of output signal" annotation(Dialog(group="Signal names"));
 
   encapsulated operator 'constructor'
-    "Collection of functions to generate a zeros-and-poles data record"
+    "Collection of operators to construct a ZerosAndPoles data record"
     extends Modelica.Icons.Package;
 
     import Modelica;
     import Modelica_LinearSystems2;
 
     encapsulated function fromReal
-      "Generate a zeros and poles data record from a Real value"
+      "Generate a ZerosAndPoles data record from a real value"
       import Modelica;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -69,7 +69,7 @@ zp.d2 = fill(0,1,2);
     end fromReal;
 
     encapsulated function fromZerosAndPoles
-      "Generate a zeros and poles data record from a set of zeros and poles"
+      "Generate a ZerosAndPoles data record from a set of zeros and poles"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -179,10 +179,11 @@ with j=sqrt(-1), is defined as
 
     function fromTransferFunction =
         Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles
-      "Generate a zeros and poles data record from a transfer function"
+      "Generate a ZerosAndPoles data record from a transfer function"
       annotation (Documentation(info="<html> </html>"));
+
     encapsulated function fromFactorization
-      "Generate a zeros and poles data record from first and second order polynomials"
+      "Generate a ZerosAndPoles data record from first and second order polynomials"
       import Modelica;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -664,7 +665,7 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
   end p;
 
   encapsulated package Analysis
-    "Collection of functions to analyse zeros-and-poles description"
+    "Package of functions to analyse zeros-and-poles description represented by a ZerosAndPoles record"
     extends Modelica.Icons.Package;
     import Modelica;
 
@@ -1808,7 +1809,7 @@ of a zeros-and-poles transfer function.
   end Analysis;
 
   encapsulated package Design
-    "Collection of functions to design zeros-and-poles description"
+    "Package of functions to design zeros-and-poles controllers and observers"
     extends Modelica.Icons.Package;
     import Modelica;
 
@@ -2182,7 +2183,7 @@ is set.
   end Design;
 
   encapsulated package Plot
-    "Collection of functions to plot zeros-and-poles description"
+    "Package of functions to plot zeros and poles description responses"
     extends Modelica.Icons.Package;
     import Modelica;
 
@@ -2839,12 +2840,12 @@ This function plots the initial response, i.e. the zeros input response of a zer
   end Plot;
 
   encapsulated package Conversion
-    "Collection of functions for conversion of zeros-and-poles description"
+    "Package of functions for conversion of ZerosAndPoles data record"
     extends Modelica.Icons.Package;
     import Modelica;
 
     function toTransferFunction
-      "Generate a TransferFunction object from a ZerosAndPoles object"
+      "Generate a TransferFunction data record from a ZerosAndPoles data record"
       //encapsulated function fromZerosAndPoles
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
@@ -4022,12 +4023,12 @@ processing.
   end Conversion;
 
   encapsulated package Import
-    "Collection of functions to import zeros-and-poles description"
+    "Package of functions to generate a ZerosAndPoles data record from imported data"
     extends Modelica.Icons.Package;
     import Modelica;
 
     encapsulated function fromFile
-      "Generate a ZerosAndPoles record by reading the polynomial coefficients or zeros and poles from a file"
+      "Generate a ZerosAndPoles data record by reading the polynomial coefficients or zeros and poles from a file"
       import Modelica;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2;
@@ -4090,7 +4091,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
     end fromFile;
 
     function fromModel
-      "Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model"
+      "Generate a ZerosAndPoles data record from a state space representation resulted from linearization of a model"
 
       import Modelica;
       import Modelica_LinearSystems2.StateSpace;
@@ -4185,7 +4186,7 @@ followed by a conversion from sate space to transfer function representation.
   end Import;
 
   encapsulated package Internal
-    "Collection of internal material of record Filter (should not be directly used by user)"
+    "Package of internal material of record ZerosAndPoles (for advanced users only)"
     extends Modelica.Icons.Package;
 
     import Modelica;
@@ -6346,7 +6347,7 @@ int found=0;
     end frequencyRangeBode;
 
   encapsulated function fromFile_pc
-      "Generate a zeros and poles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
+      "Generate a ZerosAndPoles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.ZerosAndPoles;
@@ -6426,7 +6427,7 @@ int found=0;
   end fromFile_pc;
 
   encapsulated function fromFile_zp
-      "Generate a zeros and poles data record by reading poles and zeros from a file (default file name is zp.mat)"
+      "Generate a ZerosAndPoles data record by reading poles and zeros from a file (default file name is zp.mat)"
 
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;

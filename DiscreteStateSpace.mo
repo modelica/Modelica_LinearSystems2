@@ -22,23 +22,23 @@ record DiscreteStateSpace
 //      String uNames[size(B, 2)]=fill("", size(B, 2)) "Names of the input signals" annotation(Dialog(group="Signal names"));
 
   encapsulated operator 'constructor'
-    "Default constructors for a DiscreteStateSpace record"
+    "Collection of operators to construct a DiscreteStateSpace data record"
     import Modelica_LinearSystems2;
     import Modelica;
     extends Modelica.Icons.Package;
 
     function fromDiscreteTransferFunction =
       Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
-      "Generate a discrete state space system data record from a discrete transfer function"
+      "Generate a DiscreteStateSpace data record from a discrete transfer function"
     annotation (Documentation(info="<html> </html>"));
 
     function fromDiscreteZerosAndPoles =
       Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace
-      "Generate a discrete state space system data record from a discrete zeros-and-poles description"
+      "Generate a DiscreteStateSpace data record from a discrete zeros-and-poles description"
     annotation (Documentation(info="<html> </html>"));
 
     encapsulated function fromReal
-      "Generate a discrete state space system data record from a real value"
+      "Generate a DiscreteStateSpace data record from a real value"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -99,7 +99,7 @@ respectively.
     end fromReal;
 
     function fromMatrices
-      "Generate a discrete state space system data record from A, B, C and D matrices"
+      "Generate a DiscreteStateSpace data record from A, B, C and D matrices"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
@@ -197,7 +197,7 @@ public
     end fromMatrices;
 
     function fromStateSpace
-      "Generate a discrete state space system data record from a continuous state space system "
+      "Generate a DiscreteStateSpace data record from a continuous state space system "
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Types.Method;
@@ -404,7 +404,7 @@ public
     end fromStateSpace;
 
     encapsulated function fromMatrices2
-      "Generate a discrete state space system data record from matrices of a continuous state space system"
+      "Generate a DiscreteStateSpace data record from matrices of a continuous state space system"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Types.Method;
@@ -1232,8 +1232,6 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
 
 //  y=[2, 1.8095, 1.6372,..., 0.01812, 0.01639, 0.01483]
 </pre></blockquote>
-
-
 </html> ",  revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
@@ -1245,23 +1243,24 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
   end initialResponse;
 
 encapsulated package Analysis
-    "Functions to analyse discrete state space systems represented by a DiscreteStateSpace record"
+    "Package of functions to analyse discrete state space system represented by a DiscreteStateSpace record"
   import Modelica;
   extends Modelica.Icons.Package;
-encapsulated function eigenValues
+
+  encapsulated function eigenValues
       "Calculate the eigenvalues of a linear discrete state space system and write them in a complex vector"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica_LinearSystems2.Math.Complex;
 
-  input DiscreteStateSpace dss "Discrete state space system";
-  output Complex eigvalues[size(dss.A, 1)]=Complex.eigenValues(dss.A)
-        "eigen values of the system";
-algorithm
+    input DiscreteStateSpace dss "Discrete state space system";
+    output Complex eigvalues[size(dss.A, 1)]=Complex.eigenValues(dss.A)
+        "Eigenvalues of the system";
+  algorithm
 
-  annotation (Documentation(info="<html>
+    annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 eigenvalues = DiscreteStateSpace.Analysis.<b>eigenValues</b>(dss)
@@ -1297,99 +1296,99 @@ The eigenvalues <b>ev</b>_d of the discrete system are related to the eigenvalue
 //
 </pre></blockquote>
 </html> "));
-end eigenValues;
+  end eigenValues;
 
-encapsulated function timeResponse
+  encapsulated function timeResponse
       "Calculate the time response of a discrete state space system"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica_LinearSystems2.Types.TimeResponse;
 
-  input TimeResponse response=TimeResponse.Step;
-  extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(redeclare Real
+    input TimeResponse response=TimeResponse.Step;
+    extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(redeclare Real
                y[
              :,size(dss.C, 1),if response == TimeResponse.Initial then 1 else
       size(dss.B, 2)], redeclare Real x_discrete[:,size(dss.A, 1),if response ==
       TimeResponse.Initial then 1 else size(dss.B, 2)]);// Input/Output declarations of time response functions
 
-  input Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
+    input Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
 
     protected
-  Real dtVar;
-  Real tSpanVar;
-  Integer samples;
-  Real u[:,size(dss.B, 2)];
-//  Real new_x[size(sc.A, 1),1];
-//  Real x[size(sc.A, 1),1]=zeros(size(sc.A, 1), 1);
+    Real dtVar;
+    Real tSpanVar;
+    Integer samples;
+    Real u[:,size(dss.B, 2)];
+    //  Real new_x[size(sc.A, 1),1];
+    //  Real x[size(sc.A, 1),1]=zeros(size(sc.A, 1), 1);
 
-  Real i1;
-  Real i2;
+    Real i1;
+    Real i2;
 
-algorithm
-// set sample time
-  if tSpan == 0 then
-    tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
-  else
-    tSpanVar := tSpan;
-  end if;
+  algorithm
+    // set sample time
+    if tSpan == 0 then
+      tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
+    else
+      tSpanVar := tSpan;
+    end if;
 
-  samples := integer(tSpanVar/dss.Ts + dss.Ts/100 + 1);
-// Modelica.Utilities.Streams.print("\nsamples = "+String(samples));
+    samples := integer(tSpanVar/dss.Ts + dss.Ts/100 + 1);
+    // Modelica.Utilities.Streams.print("\nsamples = "+String(samples));
 
-  t := 0:dss.Ts:tSpanVar;
-  u := zeros(samples, size(dss.B, 2));
+    t := 0:dss.Ts:tSpanVar;
+    u := zeros(samples, size(dss.B, 2));
 
-  y := if response == TimeResponse.Initial then zeros(
-    samples,
-    size(dss.C, 1),
-    1) else zeros(
-    samples,
-    size(dss.C, 1),
-    size(dss.B, 2));
-  x_discrete := if response == TimeResponse.Initial then zeros(
-    samples,
-    size(dss.A, 1),
-    1) else zeros(
-    samples,
-    size(dss.A, 1),
-    size(dss.B, 2));
+    y := if response == TimeResponse.Initial then zeros(
+      samples,
+      size(dss.C, 1),
+      1) else zeros(
+      samples,
+      size(dss.C, 1),
+      size(dss.B, 2));
+    x_discrete := if response == TimeResponse.Initial then zeros(
+      samples,
+      size(dss.A, 1),
+      1) else zeros(
+      samples,
+      size(dss.A, 1),
+      size(dss.B, 2));
 
-  if response == TimeResponse.Initial then
-    (y[:, :, 1],x_discrete[:, :, 1]) :=
-      Modelica_LinearSystems2.DiscreteStateSpace.Internal.initialResponse1(
-      dss,
-      x0,
-      samples);
-  else
-
-    for i1 in 1:size(dss.B, 2) loop
-       // Loop over inputs
-
-       // time response to plot
-      if response == TimeResponse.Impulse then
-        u[1, :] := zeros(size(dss.B, 2));
-        u[1, i1] := 1;
-      elseif response == TimeResponse.Step then
-        u[:, :] := zeros(samples, size(dss.B, 2));
-        u[:, i1] := ones(samples);
-      elseif response == TimeResponse.Ramp then
-        u[:, :] := zeros(samples, size(dss.B, 2));
-        u[:, i1] := 0:dss.Ts:tSpanVar + dss.Ts/100;
-      else
-        assert(false, "Argument response (= " + String(response) + ") of \"Time response to plot\" is wrong.");
-      end if;
-      (y[:, :, i1],x_discrete[:, :, i1]) :=
-        DiscreteStateSpace.Internal.timeResponse1(
+    if response == TimeResponse.Initial then
+      (y[:, :, 1],x_discrete[:, :, 1]) :=
+        Modelica_LinearSystems2.DiscreteStateSpace.Internal.initialResponse1(
         dss,
-        u,
-        x0);
+        x0,
+        samples);
+    else
 
-    end for;
-  end if;
+      for i1 in 1:size(dss.B, 2) loop
+         // Loop over inputs
 
-  annotation (Documentation(info="<html>
+         // time response to plot
+        if response == TimeResponse.Impulse then
+          u[1, :] := zeros(size(dss.B, 2));
+          u[1, i1] := 1;
+        elseif response == TimeResponse.Step then
+          u[:, :] := zeros(samples, size(dss.B, 2));
+          u[:, i1] := ones(samples);
+        elseif response == TimeResponse.Ramp then
+          u[:, :] := zeros(samples, size(dss.B, 2));
+          u[:, i1] := 0:dss.Ts:tSpanVar + dss.Ts/100;
+        else
+          assert(false, "Argument response (= " + String(response) + ") of \"Time response to plot\" is wrong.");
+        end if;
+        (y[:, :, i1],x_discrete[:, :, i1]) :=
+          DiscreteStateSpace.Internal.timeResponse1(
+          dss,
+          u,
+          x0);
+
+      end for;
+    end if;
+
+    annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>timeResponse</b>(responseType, dss)
@@ -1439,35 +1438,35 @@ are calculated for each time step t=k*dss.Ts.
 //  x[:,1,1] = {0, 0.0952, 0.1813, 0.2592, 0.33}
 </pre></blockquote>
 </html> "));
-end timeResponse;
+  end timeResponse;
 
-encapsulated function impulseResponse
+  encapsulated function impulseResponse
       "Calculate the impulse time response of a discrete state space system"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
     // Input/Output declarations of time response functions:
-      extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete;
+    extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete;
     protected
-      Real tSpanVar;
-algorithm
+    Real tSpanVar;
+  algorithm
 
-// set simulation time span
-      if tSpan == 0 then
-        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
-      else
-        tSpanVar := tSpan;
-      end if;
+    // set simulation time span
+    if tSpan == 0 then
+      tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
+    else
+      tSpanVar := tSpan;
+    end if;
 
-      (y,t,x_discrete) :=
-        Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
-        dss=dss,
-        tSpan=tSpanVar,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
-        x0=zeros(size(dss.A, 1)));
+    (y,t,x_discrete) :=
+      Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
+      dss=dss,
+      tSpan=tSpanVar,
+      response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
+      x0=zeros(size(dss.A, 1)));
 
-      annotation (interactive=true, Documentation(info="<html>
+    annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss)
@@ -1521,35 +1520,35 @@ See also
 //  x[:,1,1] = = {0, 0.0952, 0.08611, 0.0779, 0.07050}
 </pre></blockquote>
 </html> "));
-end impulseResponse;
+  end impulseResponse;
 
-encapsulated function stepResponse
+  encapsulated function stepResponse
       "Calculate the step time response of a discrete state space system"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
     // Input/Output declarations of time response functions:
-      extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete;
+    extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete;
     protected
-      Real tSpanVar;
-algorithm
+    Real tSpanVar;
+  algorithm
 
-// set simulation time span
-      if tSpan == 0 then
-        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
-      else
-        tSpanVar := tSpan;
-      end if;
+    // set simulation time span
+    if tSpan == 0 then
+      tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
+    else
+      tSpanVar := tSpan;
+    end if;
 
-      (y,t,x_discrete) :=
-        Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
-        dss=dss,
-        tSpan=tSpanVar,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Step,
-        x0=zeros(size(dss.A, 1)));
+    (y,t,x_discrete) :=
+      Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
+      dss=dss,
+      tSpan=tSpanVar,
+      response=Modelica_LinearSystems2.Types.TimeResponse.Step,
+      x0=zeros(size(dss.A, 1)));
 
-      annotation (interactive=true, Documentation(info="<html>
+    annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss)
@@ -1606,35 +1605,35 @@ See also
 //  x[:,1,1]={0, 0.0952, 0.1813, 0.2592, 0.33}
 </pre></blockquote>
 </html> "));
-end stepResponse;
+  end stepResponse;
 
-encapsulated function rampResponse
+  encapsulated function rampResponse
       "Calculate the ramp time response of a discrete state space system"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
     // Input/Output declarations of time response functions:
-  extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete;
+    extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete;
     protected
-  Real tSpanVar;
-algorithm
+    Real tSpanVar;
+  algorithm
 
-// set simulation time span
-  if tSpan == 0 then
-    tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
-  else
-    tSpanVar := tSpan;
-  end if;
+    // set simulation time span
+    if tSpan == 0 then
+      tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
+    else
+      tSpanVar := tSpan;
+    end if;
 
-  (y,t,x_discrete) :=
-    Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
-    dss=dss,
-    tSpan=tSpanVar,
-    response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
-    x0=zeros(size(dss.A, 1)));
+    (y,t,x_discrete) :=
+      Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
+      dss=dss,
+      tSpan=tSpanVar,
+      response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
+      x0=zeros(size(dss.A, 1)));
 
-  annotation (interactive=true, Documentation(info="<html>
+    annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>rampResponse</b>(dss)
@@ -1692,39 +1691,39 @@ See also
 </pre></blockquote>
 
 </html> "));
-end rampResponse;
+  end rampResponse;
 
-encapsulated function initialResponse
+  encapsulated function initialResponse
       "Calculate the time response of a discrete state space system for given initial condition and zero inputs"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
 
-  input Real x0[:]=fill(0, 0) "Initial state vector";
+    input Real x0[:]=fill(0, 0) "Initial state vector";
 
     // Input/Output declarations of time response functions:
-  extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(redeclare Real
+    extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(redeclare Real
                y[
              :,size(dss.C, 1),1], redeclare Real x_discrete[:,size(dss.A, 1),1]);
     protected
-  Real tSpanVar;
+    Real tSpanVar;
 
-algorithm
-  if tSpan == 0 then
-    tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
-  else
-    tSpanVar := tSpan;
-  end if;
+  algorithm
+    if tSpan == 0 then
+      tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
+    else
+      tSpanVar := tSpan;
+    end if;
 
-  (y,t,x_discrete) :=
-    Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
-    dss=dss,
-    tSpan=tSpanVar,
-    response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
-    x0=x0);
+    (y,t,x_discrete) :=
+      Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
+      dss=dss,
+      tSpan=tSpanVar,
+      response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
+      x0=x0);
 
-  annotation (interactive=true, Documentation(info="<html>
+    annotation (interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss)
@@ -1778,12 +1777,12 @@ See also
 //  x[:,1,1]={1, 0.9048, 0.8186, 0.7406, 0.6701}
 </pre></blockquote>
 </html> "));
-end initialResponse;
+  end initialResponse;
 
 end Analysis;
 
-encapsulated package Design
-    "Functions to design discrete state space controllers and observers"
+  encapsulated package Design
+    "Package of functions to design discrete state space controllers and observers"
     import Modelica;
   extends Modelica.Icons.Package;
 
@@ -2267,10 +2266,10 @@ the norm of each <b>K</b>i is minimized [1].
 </html>"));
   end assignPolesMI;
 
-end Design;
+  end Design;
 
 encapsulated package Plot
-    "Functions to plot discrete state space system responses"
+    "Package of functions to plot discrete state space system responses"
     import Modelica;
   extends Modelica.Icons.Package;
 encapsulated function bodeSISO
@@ -2868,103 +2867,103 @@ end initialResponse;
 
 end Plot;
 
-encapsulated package Conversion
-    "Conversion functions from DiscreteStateSpace into DiscreteTransferFunction"
+  encapsulated package Conversion
+    "Package of functions for conversion of DiscreteStateSpace data record"
     import Modelica;
   extends Modelica.Icons.Package;
 
-encapsulated function toDiscreteZerosAndPoles
+    encapsulated function toDiscreteZerosAndPoles
       "Generate a discrete zeros-and-poles representation from a discrete SISO state space representation"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+          import Modelica;
+          import Modelica_LinearSystems2;
+          import Modelica_LinearSystems2.StateSpace;
+          import Modelica_LinearSystems2.ZerosAndPoles;
+          import Modelica_LinearSystems2.Math.Complex;
+          import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+          import Modelica_LinearSystems2.DiscreteStateSpace;
 
-  input DiscreteStateSpace dss "StateSpace object";
-  output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
+      input DiscreteStateSpace dss "StateSpace object";
+      output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
 
     protected
-  StateSpace ss=StateSpace(A=dss.A, B=dss.B, C=dss.C, D=dss.D);
-  StateSpace ssm=StateSpace.Transformation.toIrreducibleForm(ss);
-  Complex poles[:];
-  Complex zeros[:];
-  Complex cpoles[:];
-  Complex czeros[:];
-  Real gain;
-  Complex frequency;
-  Complex cfrequency;
-  Complex Gq;
-  Real As[:,:];
-  Real pk;
-  Integer i;
-  Integer k;
-  Boolean h;
-  Real v;
+      StateSpace ss=StateSpace(A=dss.A, B=dss.B, C=dss.C, D=dss.D);
+      StateSpace ssm=StateSpace.Transformation.toIrreducibleForm(ss);
+      Complex poles[:];
+      Complex zeros[:];
+      Complex cpoles[:];
+      Complex czeros[:];
+      Real gain;
+      Complex frequency;
+      Complex cfrequency;
+      Complex Gq;
+      Real As[:,:];
+      Real pk;
+      Integer i;
+      Integer k;
+      Boolean h;
+      Real v;
 
-algorithm
-  if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
-      Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
+    algorithm
+      if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
+          Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
-    poles := Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
-    zeros := StateSpace.Internal.invariantZeros2(ssm);
-    cpoles := fill(Complex(0),size(poles,1));
-    czeros := fill(Complex(0),size(zeros,1));
+        poles := Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
+        zeros := StateSpace.Internal.invariantZeros2(ssm);
+        cpoles := fill(Complex(0),size(poles,1));
+        czeros := fill(Complex(0),size(zeros,1));
 
-    if size(ss.C, 1) <> 1 or size(ss.B, 2) <> 1 then
-      assert(size(ss.B, 2) == 1, " function fromStateSpaceSISO expects a SISO-system as input\n but the number of inputs is "
-         + String(size(ss.B, 2)) + " instead of 1");
-      assert(size(ss.C, 1) == 1, " function fromStateSpaceSISO expects a SISO-system as input\n but the number of outputs is "
-         + String(size(ss.C, 1)) + " instead of 1");
-    end if;
-    dzp := DiscreteZerosAndPoles(
-        z=zeros,
-        p=poles,
-        k=1,
-        Ts=dss.Ts, method=dss.method);
-// set frequency to a complex value which is whether pole nor zero
-    for i in 1:size(poles,1) loop
-      cpoles[i] := if Complex.'abs'(poles[i])>0 then Complex.log(poles[i])/dss.Ts else Complex(-100);
-    end for;
-    for i in 1:size(zeros,1) loop
-      czeros[i] := if Complex.'abs'(zeros[i])>0 then Complex.log(zeros[i])/dss.Ts else Complex(-100);
-    end for;
+        if size(ss.C, 1) <> 1 or size(ss.B, 2) <> 1 then
+          assert(size(ss.B, 2) == 1, " function fromStateSpaceSISO expects a SISO-system as input\n but the number of inputs is "
+             + String(size(ss.B, 2)) + " instead of 1");
+          assert(size(ss.C, 1) == 1, " function fromStateSpaceSISO expects a SISO-system as input\n but the number of outputs is "
+             + String(size(ss.C, 1)) + " instead of 1");
+        end if;
+        dzp := DiscreteZerosAndPoles(
+            z=zeros,
+            p=poles,
+            k=1,
+            Ts=dss.Ts, method=dss.method);
+    // set frequency to a complex value which is whether pole nor zero
+        for i in 1:size(poles,1) loop
+          cpoles[i] := if Complex.'abs'(poles[i])>0 then Complex.log(poles[i])/dss.Ts else Complex(-100);
+        end for;
+        for i in 1:size(zeros,1) loop
+          czeros[i] := if Complex.'abs'(zeros[i])>0 then Complex.log(zeros[i])/dss.Ts else Complex(-100);
+        end for;
 
-     v := sum(cat(1, czeros[:].re,  cpoles[:].re))/max(size(czeros,1)+size(cpoles,1),1) + 13/19;
-//     v := sum(cat(1, zeros[:].re,  poles[:].re))/max(size(zeros,1)+size(poles,1),1);
-    frequency := Complex(v)*17/19;
-    cfrequency := Complex.exp(frequency*dss.Ts);
-//    cfrequency := frequency;
+         v := sum(cat(1, czeros[:].re,  cpoles[:].re))/max(size(czeros,1)+size(cpoles,1),1) + 13/19;
+    //     v := sum(cat(1, zeros[:].re,  poles[:].re))/max(size(zeros,1)+size(poles,1),1);
+        frequency := Complex(v)*17/19;
+        cfrequency := Complex.exp(frequency*dss.Ts);
+    //    cfrequency := frequency;
 
-    Gq := DiscreteZerosAndPoles.Analysis.evaluate(dzp, cfrequency);
+        Gq := DiscreteZerosAndPoles.Analysis.evaluate(dzp, cfrequency);
 
-    As := -ssm.A;
-    for i in 1:size(As, 1) loop
-      As[i, i] := As[i, i] + cfrequency.re;
-    end for;
+        As := -ssm.A;
+        for i in 1:size(As, 1) loop
+          As[i, i] := As[i, i] + cfrequency.re;
+        end for;
 
-    pk := StateSpace.Internal.partialGain(As, ssm.B[:, 1]);
-    gain := (ssm.C[1, size(As, 1)]*pk + ss.D[1, 1])/Gq.re;
+        pk := StateSpace.Internal.partialGain(As, ssm.B[:, 1]);
+        gain := (ssm.C[1, size(As, 1)]*pk + ss.D[1, 1])/Gq.re;
 
-    dzp := DiscreteZerosAndPoles(
-        z=zeros,
-        p=poles,
-        k=gain,Ts=dss.Ts, method=dss.method);
+        dzp := DiscreteZerosAndPoles(
+            z=zeros,
+            p=poles,
+            k=gain,Ts=dss.Ts, method=dss.method);
 
-  else
-    dzp := DiscreteZerosAndPoles(
-        z=fill(Complex(0), 0),
-        p=fill(Complex(0), 0),
-        k=scalar(dss.D),Ts=dss.Ts, method=dss.method);
+      else
+        dzp := DiscreteZerosAndPoles(
+            z=fill(Complex(0), 0),
+            p=fill(Complex(0), 0),
+            k=scalar(dss.D),Ts=dss.Ts, method=dss.method);
 
-  end if;
-//  dzp.uName := dss.uNames[1];
-//  dzp.yName := dss.yNames[1];
+      end if;
+    //  dzp.uName := dss.uNames[1];
+    //  dzp.yName := dss.yNames[1];
 
-  annotation (overloadsConstructor=true, Documentation(info="<html>
+      annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dzp = DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPoles</b>(dss)
@@ -3014,56 +3013,56 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 
-</html> ", revisions="<html>
+</html> ",     revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
 </ul>
 </html>"));
-end toDiscreteZerosAndPoles;
+    end toDiscreteZerosAndPoles;
 
-encapsulated function toDiscreteZerosAndPolesMIMO
+    encapsulated function toDiscreteZerosAndPolesMIMO
       "Generate a zeros-and-poles representation from a MIMO state space representation"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+          import Modelica;
+          import Modelica_LinearSystems2;
+          import Modelica_LinearSystems2.Math.Complex;
+          import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+          import Modelica_LinearSystems2.DiscreteStateSpace;
 
-  input DiscreteStateSpace dss "DiscreteStateSpace object";
+      input DiscreteStateSpace dss "DiscreteStateSpace object";
 
-  output DiscreteZerosAndPoles dzp[size(dss.C, 1),size(dss.B, 2)];
+      output DiscreteZerosAndPoles dzp[size(dss.C, 1),size(dss.B, 2)];
 
     protected
-  DiscreteStateSpace dss_siso(
-    redeclare Real A[size(dss.A, 1),size(dss.A, 2)],
-    redeclare Real B[size(dss.B, 1),1],
-    redeclare Real C[1,size(dss.C, 2)],
-    redeclare Real D[1,1]);
+      DiscreteStateSpace dss_siso(
+        redeclare Real A[size(dss.A, 1),size(dss.A, 2)],
+        redeclare Real B[size(dss.B, 1),1],
+        redeclare Real C[1,size(dss.C, 2)],
+        redeclare Real D[1,1]);
 
-  Integer ny=size(dss.C, 1);
-  Integer nu=size(dss.B, 2);
+      Integer ny=size(dss.C, 1);
+      Integer nu=size(dss.B, 2);
 
-algorithm
-  for ic in 1:ny loop
-    for ib in 1:nu loop
-      dss_siso := DiscreteStateSpace(
-        A=dss.A,
-        B=matrix(dss.B[:, ib]),
-        C=transpose(matrix(dss.C[ic, :])),
-        D=matrix(dss.D[ic, ib]),
-        Ts=dss.Ts,
-        B2=matrix(dss.B2[:, ib]),
-        method=dss.method);
-//       dss_siso.uNames := {dss.uNames[ib]};
-//       dss_siso.yNames := {dss.yNames[ic]};
-//       dss_siso.xNames := dss.xNames;
-      dzp[ic, ib] := DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(
-        dss_siso);
-    end for;
-  end for;
-  annotation (overloadsConstructor=true, Documentation(info="<html>
+    algorithm
+      for ic in 1:ny loop
+        for ib in 1:nu loop
+          dss_siso := DiscreteStateSpace(
+            A=dss.A,
+            B=matrix(dss.B[:, ib]),
+            C=transpose(matrix(dss.C[ic, :])),
+            D=matrix(dss.D[ic, ib]),
+            Ts=dss.Ts,
+            B2=matrix(dss.B2[:, ib]),
+            method=dss.method);
+    //       dss_siso.uNames := {dss.uNames[ib]};
+    //       dss_siso.yNames := {dss.yNames[ic]};
+    //       dss_siso.xNames := dss.xNames;
+          dzp[ic, ib] := DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(
+            dss_siso);
+        end for;
+      end for;
+      annotation (overloadsConstructor=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dzp = DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPolesMIMO</b>(dss)
@@ -3128,34 +3127,34 @@ of a system from discrete state space representation, i.e. isolating the uncontr
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 
-</html> ", revisions="<html>
+</html> ",     revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
 </ul>
 </html>"));
-end toDiscreteZerosAndPolesMIMO;
+    end toDiscreteZerosAndPolesMIMO;
 
-function toDiscreteTransferFunction
-      "Generate a transfer function from a SISO state space representation"
+  function toDiscreteTransferFunction
+      "Generate a TransferFunction data record from a SISO DiscreteStateSpace data record"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteTransferFunction;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
-  input DiscreteStateSpace dss "DiscreteStateSpace object";
+    input DiscreteStateSpace dss "DiscreteStateSpace object";
 
-  output DiscreteTransferFunction dtf "DiscreteTransferFunction object";
+    output DiscreteTransferFunction dtf "DiscreteTransferFunction object";
 
     protected
-  DiscreteZerosAndPoles dzp=DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(dss);
+    DiscreteZerosAndPoles dzp=DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(dss);
 
-algorithm
-  dtf := DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction(dzp);
+  algorithm
+    dtf := DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction(dzp);
 
-  annotation (Documentation(info="<html>
+    annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  dtf </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<b>toDiscreteTransferFunction</b>(dss)  </td> </tr>
@@ -3207,16 +3206,16 @@ discrete state space system into a discrete zeros and poles representation first
        by Marcus Baur, DLR-RM</li>
 </ul>
 </html>"));
-end toDiscreteTransferFunction;
+  end toDiscreteTransferFunction;
 
-function toDiscreteTransferFunctionMIMO
+  function toDiscreteTransferFunctionMIMO
       "Generate a discrete transfer function of a MIMO system from discrete state space representation"
-      import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2;
 
-      import Modelica;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+    import Modelica;
+    import Modelica_LinearSystems2.DiscreteTransferFunction;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
   input DiscreteStateSpace dss "DiscreteStateSpace object";
 
@@ -3228,7 +3227,7 @@ function toDiscreteTransferFunctionMIMO
   parameter Integer m=size(dss.B, 2);
   parameter Integer p=size(dss.C, 1);
 
-algorithm
+  algorithm
   dzp := Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPolesMIMO(dss);
   for i1 in 1:m loop
     for i2 in 1:p loop
@@ -3301,145 +3300,17 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
        by Marcus Baur, DLR-RM</li>
 </ul>
 </html>"));
-end toDiscreteTransferFunctionMIMO;
+  end toDiscreteTransferFunctionMIMO;
 
-end Conversion;
+  end Conversion;
 
-encapsulated package Import
+  encapsulated package Import
+    "Package of functions to generate a DiscreteStateSpace data record from imported data"
     import Modelica;
-  extends Modelica.Icons.Package;
-
-function fromModel
-      "Generate a DiscreteStateSpace record by linearization of a modelica model"
-
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-
-  input String modelName "Name of the Modelica model" annotation(Dialog(translatedModel));
-  input Modelica.SIunits.Time T_linearize=0
-        "point in time of simulation to linearize the model";
-  input String fileName="dslin" "Name of the result file";
-  input Modelica.SIunits.Time Ts=1 "Sample time";
-  input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
-
-    protected
-  String fileName2=fileName + ".mat";
-  Boolean OK1=simulateModel(
-      problem=modelName,
-      startTime=0,
-      stopTime=T_linearize);
-  Boolean OK2=importInitial("dsfinal.txt");
-  Boolean OK3=linearizeModel(
-      problem=modelName,
-      resultFile=fileName,
-      startTime=T_linearize,
-      stopTime=T_linearize + 3*Ts);
-
-  Real nxMat[1,1]=readMatrix(
-      fileName2,
-      "nx",
-      1,
-      1);
-  Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
-  Integer nx=integer(nxMat[1, 1]);
-  Integer nu=ABCDsizes[2] - nx;
-  Integer ny=ABCDsizes[1] - nx;
-  Real ABCD[nx + ny,nx + nu]=readMatrix(
-      fileName2,
-      "ABCD",
-      nx + ny,
-      nx + nu);
-  String xuyName[nx + nu + ny]=readStringMatrix(
-      fileName2,
-      "xuyName",
-      nx + nu + ny);
-
-  StateSpace ss(
-    redeclare Real A[nx,nx],
-    redeclare Real B[nx,nu],
-    redeclare Real C[ny,nx],
-    redeclare Real D[ny,nu]) "= model linearized at initial point";
-    public
-  output DiscreteStateSpace result(
-    redeclare Real A[nx,nx],
-    redeclare Real B[nx,nu],
-    redeclare Real B2[nx,nu],
-    redeclare Real C[ny,nx],
-    redeclare Real D[ny,nu]) "= discrete model linearized at initial point";
-
-algorithm
-  ss.A := ABCD[1:nx, 1:nx];
-  ss.B := ABCD[1:nx, nx + 1:nx + nu];
-  ss.C := ABCD[nx + 1:nx + ny, 1:nx];
-  ss.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-  ss.uNames := xuyName[nx + 1:nx + nu];
-  ss.yNames := xuyName[nx + nu + 1:nx + nu + ny];
-  ss.xNames := xuyName[1:nx];
-
-  result := DiscreteStateSpace(
-    ss=ss,
-    Ts=Ts,
-    method=method);
-
-  annotation (interactive=true, Documentation(info="<html>
-<h4>Syntax</h4>
-<blockquote><pre>
-dss = DiscreteStateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method)
-</pre></blockquote>
-
-<h4>Description</h4>
-<p>
-Generate a discrete state space data record by linearization of 
-a model defined by modelName. The linearization is performed at time T_linearize 
-of the simulation. The result of linearization is transformed into a state space 
-record and then converted into a discrete state space record.
-</p>
-
-<h4>Example</h4>
-<blockquote><pre>
-  String modelName = &quot;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&quot;;
-  Real T_linearize = 5;
-
-<b>algorithm</b>
-  dss = Modelica_LinearSystems2.DiscreteStateSpace.Import.fromModel(modelName, T_linearize);
-
-// ss.A  = [1, 0.1, 0.0338415578929376, 0.00169207789464688, -0.010114371760331, -0.000505718588016548;
-            0, 1, 0.676831157858752, 0.0338415578929376, -0.202287435206619,   -0.010114371760331;
-            0, 0, 0.892698457060726, 0.0946349228530364, -0.0895698633812754,  -0.00447849316906376;
-            0, 0, -2.14603085878547, 0.892698457060726, -1.79139726762551, -0.0895698633812755;
-            0, 0, 0.0738077919657481, 0.0036903895982874, 1.0110083777752, 0.10055041888876;
-            0, 0, 1.47615583931496, 0.0738077919657481, 0.220167555503916, 1.0110083777752];
-
-// ss.B= [0.00170323086692055;
-          0.0165800882263292;
-         -0.00215003506298196;
-         -0.02103518146498;
-          0.00152042385523347;
-          0.0144812915324601];
-
-// ss.C=identity(6),
-// ss.D= [0.000437113227802044;
-          0.00874226455604088;
-         -0.000549137994799829;
-         -0.0109827598973295;
-          0.000398179639293453;
-          0.00796359278610463];
-
-ss.B2  = [0.000437113227802044;
-          0.00874226455604088;
-         -0.000549137994866478;
-         -0.0109827598973295;
-          0.000398179639305232;
-          0.00796359278610463];
-</pre></blockquote>
-</html>"));
-end fromModel;
+    extends Modelica.Icons.Package;
 
   encapsulated function fromFile
-      "Read a DiscreteStateSpace record from mat-file"
+      "Read a DiscreteStateSpace data record from mat-file"
 
       import Modelica;
       import Modelica_LinearSystems2.DiscreteStateSpace;
@@ -3522,52 +3393,185 @@ Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>.
 </html> "));
   end fromFile;
 
-end Import;
+    function fromModel
+      "Generate a DiscreteStateSpace data record by linearization of a modelica model"
 
-encapsulated package Internal
-    import Modelica;
-  extends Modelica.Icons.Package;
-
-function timeResponseSamples
-      "Estimate reasonable discretisation sample time and simulation time span for time response plot"
       import Modelica;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
-  input Modelica_LinearSystems2.DiscreteStateSpace dss;
-  output Real tSpan "Time span";
+      input String modelName "Name of the Modelica model"
+        annotation (Dialog(translatedModel));
+      input Modelica.SIunits.Time T_linearize=0
+        "point in time of simulation to linearize the model";
+      input String fileName="dslin" "Name of the result file";
+      input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
+        "Discretization method";
+
     protected
-  Modelica_LinearSystems2.Math.Complex eig[size(dss.A, 1)];
-  Real realp[size(dss.A, 1)];
-  Real sorted[size(dss.A, 1)];
-  Real indices[size(dss.A, 1)];
-  Integer i;
-algorithm
-  eig := Modelica_LinearSystems2.DiscreteStateSpace.Analysis.eigenValues(dss);
-  for i in 1:size(dss.A, 1) loop
-    eig[i] := if Complex.'abs'(eig[i])>1e-10 then Complex.log(eig[i])/dss.Ts else Complex(-100);
-  end for;
+      String fileName2=fileName + ".mat";
+      Boolean OK1=simulateModel(
+      problem=modelName,
+      startTime=0,
+      stopTime=T_linearize);
+      Boolean OK2=importInitial("dsfinal.txt");
+      Boolean OK3=linearizeModel(
+      problem=modelName,
+      resultFile=fileName,
+      startTime=T_linearize,
+      stopTime=T_linearize + 3*Ts);
 
-  //eig := Complex.log(eig)/dss.Ts;
-  for i in 1:size(eig, 1) loop
-    realp[i] := eig[i].re;
-  end for;
-  (sorted,indices) := Modelica.Math.Vectors.sort(realp);
+      Real nxMat[1,1]=readMatrix(
+      fileName2,
+      "nx",
+      1,
+      1);
+      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+      Integer nx=integer(nxMat[1, 1]);
+      Integer nu=ABCDsizes[2] - nx;
+      Integer ny=ABCDsizes[1] - nx;
+      Real ABCD[nx + ny,nx + nu]=readMatrix(
+      fileName2,
+      "ABCD",
+      nx + ny,
+      nx + nu);
+      String xuyName[nx + nu + ny]=readStringMatrix(
+      fileName2,
+      "xuyName",
+      nx + nu + ny);
 
-  // Estimate simulation time span
-  if sorted[end] < 0 then
-    tSpan := -5/sorted[end];
-  elseif sorted[end] > 0 then
-    tSpan := 15/sorted[end];
-  elseif sorted[end] == 0 then
-    tSpan := 15000;
-  end if;
-  // Curb simulation time span to maximal 15000s
-  if tSpan > 15000 then
-    tSpan := 15000;
-  end if;
+      StateSpace ss(
+    redeclare Real A[nx,nx],
+    redeclare Real B[nx,nu],
+    redeclare Real C[ny,nx],
+    redeclare Real D[ny,nu]) "= model linearized at initial point";
+    public
+      output DiscreteStateSpace result(
+    redeclare Real A[nx,nx],
+    redeclare Real B[nx,nu],
+    redeclare Real B2[nx,nu],
+    redeclare Real C[ny,nx],
+    redeclare Real D[ny,nu]) "= discrete model linearized at initial point";
 
-end timeResponseSamples;
+    algorithm
+      ss.A := ABCD[1:nx, 1:nx];
+      ss.B := ABCD[1:nx, nx + 1:nx + nu];
+      ss.C := ABCD[nx + 1:nx + ny, 1:nx];
+      ss.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+      ss.uNames := xuyName[nx + 1:nx + nu];
+      ss.yNames := xuyName[nx + nu + 1:nx + nu + ny];
+      ss.xNames := xuyName[1:nx];
+
+      result := DiscreteStateSpace(
+    ss=ss,
+    Ts=Ts,
+    method=method);
+
+      annotation (interactive=true, Documentation(info=
+                                                   "<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+dss = DiscreteStateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method)
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Generate a discrete state space data record by linearization of 
+a model defined by modelName. The linearization is performed at time T_linearize 
+of the simulation. The result of linearization is transformed into a state space 
+record and then converted into a discrete state space record.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+  String modelName = &quot;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&quot;;
+  Real T_linearize = 5;
+
+<b>algorithm</b>
+  dss = Modelica_LinearSystems2.DiscreteStateSpace.Import.fromModel(modelName, T_linearize);
+
+// ss.A  = [1, 0.1, 0.0338415578929376, 0.00169207789464688, -0.010114371760331, -0.000505718588016548;
+            0, 1, 0.676831157858752, 0.0338415578929376, -0.202287435206619,   -0.010114371760331;
+            0, 0, 0.892698457060726, 0.0946349228530364, -0.0895698633812754,  -0.00447849316906376;
+            0, 0, -2.14603085878547, 0.892698457060726, -1.79139726762551, -0.0895698633812755;
+            0, 0, 0.0738077919657481, 0.0036903895982874, 1.0110083777752, 0.10055041888876;
+            0, 0, 1.47615583931496, 0.0738077919657481, 0.220167555503916, 1.0110083777752];
+
+// ss.B= [0.00170323086692055;
+          0.0165800882263292;
+         -0.00215003506298196;
+         -0.02103518146498;
+          0.00152042385523347;
+          0.0144812915324601];
+
+// ss.C=identity(6),
+// ss.D= [0.000437113227802044;
+          0.00874226455604088;
+         -0.000549137994799829;
+         -0.0109827598973295;
+          0.000398179639293453;
+          0.00796359278610463];
+
+ss.B2  = [0.000437113227802044;
+          0.00874226455604088;
+         -0.000549137994866478;
+         -0.0109827598973295;
+          0.000398179639305232;
+          0.00796359278610463];
+</pre></blockquote>
+</html>"));
+    end fromModel;
+
+
+  end Import;
+
+  encapsulated package Internal
+    "Package of internal material of record DiscreteStateSpace (for advanced users only)"
+    import Modelica;
+    extends Modelica.Icons.Package;
+
+    function timeResponseSamples
+      "Estimate reasonable discretisation sample time and simulation time span for time response plot"
+          import Modelica;
+          import Modelica_LinearSystems2;
+          import Modelica_LinearSystems2.Math.Complex;
+
+      input Modelica_LinearSystems2.DiscreteStateSpace dss;
+      output Real tSpan "Time span";
+    protected
+      Modelica_LinearSystems2.Math.Complex eig[size(dss.A, 1)];
+      Real realp[size(dss.A, 1)];
+      Real sorted[size(dss.A, 1)];
+      Real indices[size(dss.A, 1)];
+      Integer i;
+    algorithm
+      eig := Modelica_LinearSystems2.DiscreteStateSpace.Analysis.eigenValues(dss);
+      for i in 1:size(dss.A, 1) loop
+        eig[i] := if Complex.'abs'(eig[i])>1e-10 then Complex.log(eig[i])/dss.Ts else Complex(-100);
+      end for;
+
+      //eig := Complex.log(eig)/dss.Ts;
+      for i in 1:size(eig, 1) loop
+        realp[i] := eig[i].re;
+      end for;
+      (sorted,indices) := Modelica.Math.Vectors.sort(realp);
+
+      // Estimate simulation time span
+      if sorted[end] < 0 then
+        tSpan := -5/sorted[end];
+      elseif sorted[end] > 0 then
+        tSpan := 15/sorted[end];
+      elseif sorted[end] == 0 then
+        tSpan := 15000;
+      end if;
+      // Curb simulation time span to maximal 15000s
+      if tSpan > 15000 then
+        tSpan := 15000;
+      end if;
+
+    end timeResponseSamples;
 
   encapsulated function initialResponse1
       "Compute initial response of DiscreteStateSpace system"
@@ -3609,35 +3613,36 @@ Note that the system input <b>u</b> is equal to zero.
 </html>"));
   end initialResponse1;
 
-encapsulated function timeResponse1
+    encapsulated function timeResponse1
       "Compute time response of DiscreteStateSpace system"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+          import Modelica;
+          import Modelica_LinearSystems2;
+          import Modelica_LinearSystems2.DiscreteStateSpace;
 
-  input DiscreteStateSpace dss "Linear system in discrete state space form";
-  input Real u[:,size(dss.B, 2)]=ones(3, size(dss.B, 2))
+      input DiscreteStateSpace dss "Linear system in discrete state space form";
+      input Real u[:,size(dss.B, 2)]=ones(3, size(dss.B, 2))
         "System input (dimension: (input samples) x (number of inputs))";
-  input Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial system state";
-  output Real y[size(u, 1),size(dss.C, 1)]
+      input Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1))
+        "Initial system state";
+      output Real y[size(u, 1),size(dss.C, 1)]
         "System response (dimension: (input samples) x (number of outputs))";
-  output Real x[size(u, 1),size(dss.A, 1)]
+      output Real x[size(u, 1),size(dss.A, 1)]
         "State trajectories (dimension: (input samples) x (number of states)";
 
     protected
-  Integer samples=size(u, 1);
-  Integer i;
-  Real new_x[size(dss.A, 1)];
-  Real xi[size(dss.A, 1)]=x0;
+      Integer samples=size(u, 1);
+      Integer i;
+      Real new_x[size(dss.A, 1)];
+      Real xi[size(dss.A, 1)]=x0;
 
-algorithm
-  for i in 1:samples loop
-    new_x := dss.A*xi + dss.B*u[i, :];
-    y[i, :] := dss.C*xi + dss.D*u[i, :];
-    x[i, :] := xi;
-    xi := new_x;
-  end for;
-  annotation (Documentation(info="<html>
+    algorithm
+      for i in 1:samples loop
+        new_x := dss.A*xi + dss.B*u[i, :];
+        y[i, :] := dss.C*xi + dss.D*u[i, :];
+        x[i, :] := xi;
+        xi := new_x;
+      end for;
+      annotation (Documentation(info="<html>
 <p>
 Computes the time response of a system in discrete state space form:
 </p>
@@ -3649,7 +3654,7 @@ Computes the time response of a system in discrete state space form:
 Note that the system input <b>u</b> must be sampled with the discrete system sample time Ts.
 </p>
 </html>"));
-end timeResponse1;
+    end timeResponse1;
 
   encapsulated function assignOneOrTwoPoles
       "Algorithm to assign p (p = 1 or 2) eigenvalues"
@@ -3815,7 +3820,7 @@ end timeResponse1;
     end if;
 
   end assignOneOrTwoPoles;
-end Internal;
+  end Internal;
 
 end DiscreteStateSpace;
 
