@@ -264,8 +264,9 @@ is defined as
   end fromPolesAndZeros;
 
     function fromDiscreteTransferFunction =
-        Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteZerosAndPoles
-        annotation (Documentation(info="<html>
+      Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteZerosAndPoles
+      "Generate a DiscreteZerosAndPoles data record from a discrete transfer function"
+      annotation (Documentation(info="<html>
 </html>"));
 
     encapsulated function fromFactorization
@@ -2583,7 +2584,6 @@ transfer function representation.
 </pre></blockquote>
 </html>"));
   end fromModel;
-
 
   end Import;
 

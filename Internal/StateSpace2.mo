@@ -138,9 +138,11 @@ ss.D = [r];
 //   //end constructor;
 
   function fromTransferFunction =
-      Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace;
+    Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace
+      "Generate a StateSpace data record from a transfer function";
   function fromZerosAndPoles =
-      Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace;
+    Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace
+      "Generate a StateSpace data record from a zeros-and-poles system";
 
     annotation (Documentation(info="<html>
 This package contains the default constructors for StateSpace record.

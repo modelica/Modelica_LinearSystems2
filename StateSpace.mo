@@ -135,13 +135,14 @@ ss.D = [r];
   end fromReal;
 
   function fromTransferFunction =
-      Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace
+    Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace
       "Generate a StateSpace data record from a transfer function"
     annotation (Documentation(info="<html> </html>"));
 
   function fromZerosAndPoles =
-      Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace
-      "Generate a StateSpace data record from a zeros-and-poles system"                                                               annotation (Documentation(info="<html> </html>"));
+    Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace
+    "Generate a StateSpace data record from a zeros-and-poles system"
+    annotation (Documentation(info="<html> </html>"));
 
     annotation (Documentation(info="<html>
 <p>This package contains the default constructors for a data record of state space system. </p>

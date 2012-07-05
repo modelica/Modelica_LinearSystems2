@@ -44,7 +44,7 @@ public
     limitsAtInit=limitsAtInit,
     sampleFactor=sampleFactor,
     withDelay=false)
-    annotation (Placement(transformation(extent={{-10,-12},{10,8}})));
+    annotation (Placement(transformation(extent={{10,-10},{30,10}})));
   Modelica.Blocks.Nonlinear.VariableLimiter variableLimiter(limitsAtInit=
         limitsAtInit)
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
@@ -54,19 +54,19 @@ public
         extent={{-10,-10},{10,10}},
         rotation=180)));
   Modelica_LinearSystems2.Controller.Internal.Add add
-    annotation (Placement(transformation(extent={{-50,8},{-30,-12}})));
+    annotation (Placement(transformation(extent={{-20,10},{0,-10}})));
   Modelica_LinearSystems2.Controller.Sampler sampler1(blockType=blockType,
       sampleFactor=sampleFactor)
-    annotation (Placement(transformation(extent={{-94,-10},{-74,10}})));
+    annotation (Placement(transformation(extent={{-84,-10},{-64,10}})));
   Modelica_LinearSystems2.Controller.Sampler sampler2(blockType=blockType,
       sampleFactor=sampleFactor)
-    annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
+    annotation (Placement(transformation(extent={{-80,-78},{-60,-58}})));
   Modelica_LinearSystems2.Controller.Sampler sampler3(sampleFactor=sampleFactor,
       blockType=blockType)                            annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
-        origin={-36,-64})));
+        origin={-30,-50})));
   Modelica.Blocks.Math.Gain gain(k=1/k)
     annotation (Placement(transformation(extent={{12,-38},{-8,-18}})));
 
@@ -74,24 +74,24 @@ public
       sampleFactor=sampleFactor)
     annotation (Placement(transformation(extent={{-20,-38},{-40,-18}})));
   Modelica.Blocks.Math.Abs abs1
-    annotation (Placement(transformation(extent={{-52,-46},{-72,-26}})));
+    annotation (Placement(transformation(extent={{-52,-50},{-72,-30}})));
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=0)
-    annotation (Placement(transformation(extent={{-86,-46},{-106,-26}})));
+    annotation (Placement(transformation(extent={{-82,-50},{-102,-30}})));
   Modelica.Blocks.Logical.Switch switch1
-    annotation (Placement(transformation(extent={{-56,14},{-36,34}})));
+    annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
   Modelica.Blocks.Sources.Constant const(k=0)
-    annotation (Placement(transformation(extent={{-132,26},{-112,46}})));
+    annotation (Placement(transformation(extent={{-84,24},{-64,44}})));
 equation
   connect(variableLimiter.y, y) annotation (Line(
       points={{81,0},{110,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(variableLimiter.u, integrator.y) annotation (Line(
-      points={{58,0},{26,0},{26,-2},{11,-2}},
+      points={{58,0},{31,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(addSat.u2, integrator.y) annotation (Line(
-      points={{44,-22},{40,-22},{40,-2},{11,-2}},
+      points={{44,-22},{48,-22},{48,0},{31,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(addSat.u1, variableLimiter.y) annotation (Line(
@@ -99,15 +99,15 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.y, integrator.u) annotation (Line(
-      points={{-31,-2},{-12,-2}},
+      points={{-1,0},{8,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(sampler1.u, u) annotation (Line(
-      points={{-96,0},{-120,0}},
+      points={{-86,0},{-120,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(sampler2.u, limit2) annotation (Line(
-      points={{-82,-80},{-120,-80}},
+      points={{-82,-68},{-90,-68},{-90,-80},{-120,-80}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(gain.u, addSat.y) annotation (Line(
@@ -115,15 +115,15 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(gain.y, sampler3.u) annotation (Line(
-      points={{-9,-28},{-24,-28},{-24,-64}},
+      points={{-9,-28},{-12,-28},{-12,-50},{-18,-50}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(integrator.limit2, limit2) annotation (Line(
-      points={{-6,10},{-6,40},{-100,40},{-100,-80},{-120,-80}},
+      points={{14,12},{14,56},{-100,56},{-100,-80},{-120,-80}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(unitDelay.y, add.u1) annotation (Line(
-      points={{-41,-28},{-40,-28},{-40,-10}},
+      points={{-41,-28},{-44,-28},{-44,-12},{-10,-12},{-10,-8}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(unitDelay.u, gain.y) annotation (Line(
@@ -131,7 +131,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(limit1, integrator.limit1) annotation (Line(
-      points={{-120,80},{-64,80},{-64,82},{6,82},{6,10}},
+      points={{-120,80},{26,80},{26,12}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(limit1, variableLimiter.limit1) annotation (Line(
@@ -139,31 +139,31 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(limit2, variableLimiter.limit2) annotation (Line(
-      points={{-120,-80},{-44,-80},{-44,-82},{50,-82},{50,-8},{58,-8}},
+      points={{-120,-80},{52,-80},{52,-8},{58,-8}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(abs1.u, addSat.y) annotation (Line(
-      points={{-50,-36},{-21,-36},{-21,-28},{21,-28}},
+      points={{-50,-40},{-44,-40},{-44,-72},{20,-72},{20,-28},{21,-28}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(greaterThreshold.u, abs1.y) annotation (Line(
-      points={{-84,-36},{-73,-36}},
+      points={{-80,-40},{-73,-40}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(greaterThreshold.y, switch1.u2) annotation (Line(
-      points={{-107,-36},{-130,-36},{-130,24},{-58,24}},
+      points={{-103,-40},{-130,-40},{-130,20},{-52,20}},
       color={255,0,255},
       smooth=Smooth.None));
   connect(switch1.u1, const.y) annotation (Line(
-      points={{-58,32},{-92,32},{-92,36},{-111,36}},
+      points={{-52,28},{-56,28},{-56,34},{-63,34}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(switch1.u3, sampler1.y) annotation (Line(
-      points={{-58,16},{-72,16},{-72,0},{-73,0}},
+      points={{-52,12},{-56,12},{-56,0},{-63,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(switch1.y, add.u2) annotation (Line(
-      points={{-35,24},{-32,24},{-32,-2},{-48,-2}},
+      points={{-29,20},{-22,20},{-22,0},{-18,0}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (

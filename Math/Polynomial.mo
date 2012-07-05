@@ -4,7 +4,7 @@ record Polynomial "Record defining the data for a polynomial"
   Real c[:] "Polynomial coefficients (c[1]*x^n + ... c[n]*x + c[n+1])" annotation(Dialog);
 
   encapsulated package Examples
-    "Examples demonstrating the usage of Polynomials"
+    "Package of examples to demonstrate the usage of polynomials"
     extends Modelica.Icons.ExamplesPackage;
     import Modelica;
 
@@ -119,11 +119,12 @@ record Polynomial "Record defining the data for a polynomial"
   end Examples;
 
   encapsulated operator 'constructor'
+    "Collection of operators to construct a Polynomial data record"
     extends Modelica.Icons.Package;
     import Modelica;
 
     function fromVector
-      "Constructor for a polynomial by providing a vector of coefficients"
+      "Generate a Polynomial data record from a vector of coefficients"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
 
@@ -133,7 +134,7 @@ record Polynomial "Record defining the data for a polynomial"
       p.c := c;
     end fromVector;
 
-    function fromReal "Generate a Polynomial data record from a Real value"
+    function fromReal "Generate a Polynomial data record from a real value"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
 
@@ -144,7 +145,7 @@ record Polynomial "Record defining the data for a polynomial"
       annotation (overloadsConstructor=true);
     end fromReal;
 
-    function fromZeros "Generate a polynomial from given zeros"
+    function fromZeros "Generate a Polynomial data record from given zeros"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica.Utilities.Streams;
@@ -225,9 +226,14 @@ with j=sqrt(-1), is defined as
 </html>"));
     end fromZeros;
 
+    annotation (Documentation(info="<html>
+<p>This package contains the default constructors for a data record of polynomial. </p>
+</html>
+"));
   end 'constructor';
 
   encapsulated operator '-'
+    "Collection of operators for subtraction of polynomials"
     import Modelica;
     extends Modelica.Icons.Package;
 
@@ -257,6 +263,11 @@ with j=sqrt(-1), is defined as
             zeros(max(size(p1.c, 1), size(p2.c, 1)) - size(p2.c, 1)),
             p2.c);
     end subtract;
+    annotation (Documentation(info="<html>
+<p>
+This package contains operators for subtraction of Polynomial data records.
+</p>
+</html>"));
   end '-';
 
   encapsulated operator function '+' "Add two polynomials (p1 + p2)"
@@ -299,7 +310,7 @@ with j=sqrt(-1), is defined as
       end for;
   end '*';
 
-  encapsulated operator function '/'
+  encapsulated operator function '/' "Divide two polynomials (p1 / p2)"
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.TransferFunction;
 
@@ -315,30 +326,30 @@ with j=sqrt(-1), is defined as
 
   end '/';
 
-  encapsulated operator function '^'
+  encapsulated operator function '^' "Integer power of polynomial (p^n)"
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica.Utilities.Streams.print;
 
-      input Polynomial p;
-      input Integer n(min=0) = 1 "p^n shall be computed";
-      output Polynomial result(redeclare Real c[max((size(p.c, 1) - 1)*n + 1, 1)])
+    input Polynomial p;
+    input Integer n(min=0) = 1 "p^n shall be computed";
+    output Polynomial result(redeclare Real c[max((size(p.c, 1) - 1)*n + 1, 1)])
       "= p^n";
   protected
-      Integer n_p=size(p.c, 1);
-      Integer n_power_p=max((n_p - 1)*n + 1, 1);
+    Integer n_p=size(p.c, 1);
+    Integer n_power_p=max((n_p - 1)*n + 1, 1);
   algorithm
-      if n == 0 then
-        result.c := {1};
-      else
-        result.c[n_power_p - n_p + 1:n_power_p] := p.c;
-        for i in 2:n loop
-          result.c := Polynomial.Internal.mult(
-                result.c,
-                (n_p - 1)*(i - 1) + 1,
-                p.c,
-                n_power_p);
-        end for;
-      end if;
+    if n == 0 then
+      result.c := {1};
+    else
+      result.c[n_power_p - n_p + 1:n_power_p] := p.c;
+      for i in 2:n loop
+        result.c := Polynomial.Internal.mult(
+              result.c,
+              (n_p - 1)*(i - 1) + 1,
+              p.c,
+              n_power_p);
+      end for;
+    end if;
   end '^';
 
   encapsulated operator function '=='

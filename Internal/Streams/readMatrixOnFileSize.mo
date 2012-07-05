@@ -1,8 +1,8 @@
 within Modelica_LinearSystems2.Internal.Streams;
-function readMatrixOnFileSize
-  input String fileName "file name";
-  input String matrixName "matrix name";
-  output Integer dim[2] "matrix to read";
+function readMatrixOnFileSize "Read size of matrix matrixName from file"
+  input String fileName "File name";
+  input String matrixName "Matrix name";
+  output Integer dim[2] "Size of matrix matrixName";
 external "C" readMatrixSizeEx(
     fileName,
     matrixName,

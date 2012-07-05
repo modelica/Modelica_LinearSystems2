@@ -42,11 +42,6 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
             -100},{100,100}}), graphics), Icon(coordinateSystem(
           preserveAspectRatio=true, extent={{-100,-100},{100,100}}), graphics={
-        Ellipse(
-          extent={{-20,22},{20,-18}},
-          lineColor={0,0,127},
-          fillColor={235,235,235},
-          fillPattern=FillPattern.Solid),
         Line(
           visible=fromLeft,
           points={{-100,0},{-20,0}},
@@ -58,7 +53,25 @@ equation
           points={{0,-18},{0,-60}},
           color={0,0,127}),
         Text(
-          extent={{32,62},{92,18}},
+          extent={{-150,-20},{150,-60}},
           lineColor={0,0,255},
-          textString="%name")}));
+          textString="%name"),
+        Ellipse(
+          extent={{-20,20},{20,-20}},
+          lineColor={0,0,127},
+          fillColor={235,235,235},
+          fillPattern=FillPattern.Solid)}),
+    Documentation(info="<html>
+<p>
+This blocks computes output <b>y</b> as <i>sum</i> of the
+two input signals <b>u1</b> and <b>u2</b>:
+</p>
+<pre>
+    <b>y</b> = <b>u1</b> + <b>u2</b>;
+</pre>
+<p>
+The second input can be obtained either from left side of block or from bottom. 
+The corresponding connectors are <b>u2</b> or <b>u2b</b>, respectively.
+</p>
+</html>"));
 end Add2;

@@ -5,7 +5,7 @@ record Complex "Record defining a Complex number"
   Real im "Imaginary part of complex number" annotation(Dialog);
 
   encapsulated package Examples
-    "Library demonstrating the usage of complex numbers"
+    "Package of examples to demonstrate the usage of complex numbers"
 
     import Modelica;
     extends Modelica.Icons.ExamplesPackage;
@@ -32,6 +32,7 @@ record Complex "Record defining a Complex number"
   end Examples;
 
   encapsulated package Vectors
+    "Package of functions operating on vectors of complex numbers"
     extends Modelica.Icons.Package;
     import Modelica;
 
@@ -382,9 +383,15 @@ The function call &quot;Vectors.<b>reverse</b>(v)&quot; returns the complex vect
 </html>"));
       end reverse;
 
+    annotation (Documentation(info="<html>
+<p>
+This package provides functions operating on vectors of complex numbers.
+</p>
+</html>"));
   end Vectors;
 
   encapsulated package Matrices
+    "Package of functions operating on matrices of complex numbers"
     extends Modelica.Icons.Package;
     import Modelica;
     import Modelica_LinearSystems2;
@@ -488,13 +495,19 @@ The function call &quot;Vectors.<b>reverse</b>(v)&quot; returns the complex vect
 
     end matVecMul;
 
+    annotation (Documentation(info="<html>
+<p>
+This package provides functions operating on matrices of complex numbers.
+</p>
+</html>"));
   end Matrices;
 
   encapsulated operator 'constructor'
+    "Collection of operators to construct a Complex number data record"
     extends Modelica.Icons.Package;
     import Modelica;
 
-    function fromReal
+    function fromReal "Generate a complex number record from a real value"
       import Modelica_LinearSystems2.Math.Complex;
       input Real re "Real part of complex number";
       input Real im=0 "Imaginary part of complex number";
@@ -503,9 +516,14 @@ The function call &quot;Vectors.<b>reverse</b>(v)&quot; returns the complex vect
 
       annotation(Inline=true);
     end fromReal;
+    annotation (Documentation(info="<html>
+<p>This package contains the default constructors for a data record of complex number. </p>
+</html>
+"));
   end 'constructor';
 
-  encapsulated operator '-' "Unary and binary minus"
+  encapsulated operator '-'
+    "Collection of operators for subtraction of complex numbers"
     extends Modelica.Icons.Package;
     import Modelica;
 
@@ -527,6 +545,11 @@ The function call &quot;Vectors.<b>reverse</b>(v)&quot; returns the complex vect
       c3 := Complex(c1.re - c2.re, c1.im - c2.im);
       annotation(Inline=true);
     end subtract;
+    annotation (Documentation(info="<html>
+<p>
+This package contains operators for subtraction of complex numbers.
+</p>
+</html>"));
   end '-';
 
   encapsulated operator function '+' "Add two complex numbers"
@@ -551,7 +574,7 @@ The function call &quot;Vectors.<b>reverse</b>(v)&quot; returns the complex vect
     annotation(Inline=true);
   end '*';
 
-  encapsulated operator function '/' "Divide two complex numbers"
+  encapsulated operator function '/' "Divide two complex numbers (c1 / c2)"
     import Modelica_LinearSystems2.Math.Complex;
 
       input Complex c1 "Complex number 1";
@@ -959,6 +982,7 @@ phase angle phi of the Complex number c in the range
   end frequency;
 
   encapsulated package Internal
+    "Package of internal functions operating on complex number (for advanced users only)"
     extends Modelica.Icons.Package;
     import Modelica;
 
@@ -1030,6 +1054,16 @@ phase angle phi of the Complex number c in the range
       result := sqrt(result);
     end frobeniusNorm;
 
+    annotation (Documentation(info="<html>
+<p>
+Generally, the functions in this package should not be used by the user.
+</p>
+<p>
+This package contains functions which cannot be used in an arbitrary 
+way and require particular knowledge.
+Therefore, only advanced users should deal with such a functions.
+</p>
+</html>"));
   end Internal;
 
   annotation (

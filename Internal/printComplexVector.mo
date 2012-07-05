@@ -1,10 +1,10 @@
 within Modelica_LinearSystems2.Internal;
-function printComplexVector
+function printComplexVector "Print elements of vector of complex numbers"
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.Math.Complex;
 
-  input String name;
-  input Complex c[:];
+  input String name "Name of vector c";
+  input Complex c[:] "Vector of complex numbers";
 
 algorithm
   print(name + " =");
