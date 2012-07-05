@@ -52,8 +52,8 @@ algorithm
 annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Lud = Matrices.Utilities.<b>choleskyUpDate</b>(L, v);
-Lud = Matrices.Utilities.<b>choleskyUpDate</b>(L, v, true);
+Lud = Matrices.<b>choleskyUpDate</b>(L, v);
+Lud = Matrices.<b>choleskyUpDate</b>(L, v, true);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -61,18 +61,18 @@ Lud = Matrices.Utilities.<b>choleskyUpDate</b>(L, v, true);
 This function computes the rank-1-updated Cholesky factorization <b>Lud</b>, with
 </p>
 <blockquote>
-  <b>Aud</b> = <b>Lud</b>*<b>Lud</b><sup><big>T</big></sup> = 
-  <b>A</b> +  <b>v</b>*<b>v</b><sup><big>T</big></sup> = 
-  <b>L</b>*<b>L</b><sup><big>T</big></sup> +  <b>v</b>*<b>v</b><sup><big>T</big></sup>
+  <b>Aud</b> = <b>Lud</b>*<b>Lud</b><sup>T</sup> = 
+  <b>A</b> +  <b>v</b>*<b>v</b><sup>T</sup> = 
+  <b>L</b>*<b>L</b><sup>T</sup> +  <b>v</b>*<b>v</b><sup>T</sup>
 </blockquote>
 <p>
 from the input <b>L</b>, i.e. the left (lower) Cholesky factor of the original matrix <b>A</b>.<br>
 The approach is a transformation <b>H</b>*[<b>v</b>, <b>L</b>]' = [<b>0</b>, <b>Lud</b>]' with orthonormal matrix <b>H</b> such, that
 </p>
 <blockquote>
-  [<b>0</b>, <b>Lud</b>] * [<b>0</b>, <b>Lud</b>]<sup><big>T</big></sup> = 
-  [<b>v</b>, <b>L</b>]*<b>H</b><sup><big>T</big></sup> *<b>H</b>*[<b>v</b>, <b>L</b>]<sup><big>T</big></sup> = 
-  [<b>v</b>, <b>L</b>]*[<b>v</b>, <b>L</b>]<sup><big>T</big></sup> = <b>v</b>*<b>v</b><sup><big>T</big></sup> + <b>A</b>
+  [<b>0</b>, <b>Lud</b>] * [<b>0</b>, <b>Lud</b>]<sup>T</sup> = 
+  [<b>v</b>, <b>L</b>]*<b>H</b><sup>T</sup> *<b>H</b>*[<b>v</b>, <b>L</b>]<sup>T</sup> = 
+  [<b>v</b>, <b>L</b>]*[<b>v</b>, <b>L</b>]<sup>T</sup> = <b>v</b>*<b>v</b><sup>T</sup> + <b>A</b>
 </blockquote>
 <p>
 and matrix <b>Lud</b> is lower (upper) triangular. The transformation is performed 

@@ -5,7 +5,7 @@ function LU "LU decomposition of square or rectangular matrix"
   output Real LU[size(A, 1),size(A, 2)]=A
     "L,U factors (used with LU_solve(..))";
   output Integer pivots[min(size(A, 1), size(A, 2))]
-    "pivot indices (used with LU_solve(..))";
+    "Pivot indices (used with LU_solve(..))";
   output Integer info "Information";
 
 algorithm

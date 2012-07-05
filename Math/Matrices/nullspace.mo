@@ -2,15 +2,15 @@ within Modelica_LinearSystems2.Math.Matrices;
 function nullspace "Orthonormal nullspace of a matrix"
   extends Modelica.Icons.Function;
 
-  input Real A[:,:] "input matrix";
-  output Real Z[size(A, 2),:] "orthonormal nullspace of matrix A";
-  output Integer nullity "nullity, i.e. the dimension of the nullspace";
+  input Real A[:,:] "Input matrix";
+  output Real Z[size(A, 2),:] "Orthonormal nullspace of matrix A";
+  output Integer nullity "Nullity, i.e. the dimension of the nullspace";
 
 protected
   Real V[size(A, 2),size(A, 2)] "Right orthogonal matrix ";
-  Real sigma[min(size(A, 1), size(A, 2))] "singular values";
-  Integer rank "rank of matrix A";
-  Real eps "tolerance for rank determination";
+  Real sigma[min(size(A, 1), size(A, 2))] "Singular values";
+  Integer rank "Rank of matrix A";
+  Real eps "Tolerance for rank determination";
   Integer n=min(size(A, 1), size(A, 2));
   Integer i=n;
 
@@ -47,7 +47,7 @@ The nullspace is obtained by svd method. That is, matrix <b>A</b> is decomposed
 into the matrices <b>S</b>, <b>U</b>, <b>V</b>:
 </p>
 <blockquote>
-  <b>A</b> = <b>U</b><b>S</b><b>V</b><sup><big>T</big></sup>
+  <b>A</b> = <b>U</b><b>S</b><b>V</b><sup>T</sup>
 </blockquote>
 <p>
 with the orthonormal matrices <b>U</b> and <b>V</b> and the matrix <b>S</b> with
@@ -62,7 +62,7 @@ Note, that <b>S</b> has the same size as <b>A</b>. Since <b>U</b> and <b>V</b> a
 orthonormal, we may write
 </p>
 <blockquote>
-  <b>U</b><sup><big>T</big></sup>*<b>A</b>*<b>V</b> = [<b>S</b>1, <b>0</b>].
+  <b>U</b><sup>T</sup>*<b>A</b>*<b>V</b> = [<b>S</b>1, <b>0</b>].
 </blockquote>
 <p>
 Matrix <b>S</b>1 obviously has full column rank and therefore, the left n-r rows 

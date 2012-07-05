@@ -84,7 +84,7 @@ algebraic Riccati equation
 with
 </p>
 <blockquote><pre>
-<b>G</b> = <b>B</b>*<b>R</b><sup><big>-1</big></sup>*<b>B</b>'
+<b>G</b> = <b>B</b>*<b>R</b><sup>-1</sup>*<b>B</b>'
 </pre></blockquote>
 <p>
 using the Schur vector approach proposed by Laub [1].
@@ -114,7 +114,7 @@ with orthogonal similarity transformation <b>U</b>. <b>S</b> is ordered in such 
 that <b>S11</b> contains the n stable eigenvalues of the closed loop system with system matrix
 </p>
 <blockquote><pre>
-<b>A</b> - <b>B</b>*<b>R</b><sup><big>-1</big></sup>*<b>B</b>'*<b>X</b>
+<b>A</b> - <b>B</b>*<b>R</b><sup>-1</sup>*<b>B</b>'*<b>X</b>
 </pre></blockquote>
 <p>
 If <b>U</b> is partitioned to

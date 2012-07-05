@@ -87,7 +87,7 @@ Function <b>dare</b> computes the solution <b>X</b> of the discrete-time
 algebraic Riccati equation
 </p>
 <blockquote><pre>
-<b>X</b> = <b>A</b>'*<b>X</b>*<b>A</b> - <b>A</b>'*<b>X</b>*<b>B</b>*(<b>R</b> + <b>B</b>'*<b>X</b>*<b>B</b>)<sup>-1</big></sup>*<b>B</b>'*<b>X</b>*<b>A</b> + <b>Q</b>
+<b>X</b> = <b>A</b>'*<b>X</b>*<b>A</b> - <b>A</b>'*<b>X</b>*<b>B</b>*(<b>R</b> + <b>B</b>'*<b>X</b>*<b>B</b>)<sup>-1</sup>*<b>B</b>'*<b>X</b>*<b>A</b> + <b>Q</b>
 </pre></blockquote>
 <p>
 using the Schur vector approach proposed by Laub [1].

@@ -311,10 +311,11 @@ linear system representations are available:
 </pre>
       </td>
   </tr>
-  <tr><td>record&nbsp;<a href=\"modelica://Modelica_Control.LinearSystems.TransferFunction\">TransferFunction</a></td>
+  <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.TransferFunction\">TransferFunction</a></td>
       <td>Single input, single output, transfer functions defined via a numerator
           and a denominator polynomial n(s) and d(s) respectively:
-<pre>        n(s)                                2*s+3
+<pre>
+        n(s)                                2*s+3
    y = ------ * u,  for example:   y = ----------------- * u
         d(s)                            4*s^2 + 5*s + 6
 
@@ -328,6 +329,7 @@ linear system representations are available:
          product(s - z[i])
   y = k*------------------- * u
          product(s - p[i])
+
 </pre>
 
 A description with zeros and poles is problematic: For example,
@@ -339,25 +341,29 @@ very sensitive if zeros or poles are close together.
 For this and other reasons, internally, this data structure
 stores the zeros and poles as first and second order
 polynomials with real coefficients:
-<pre>         product(s+n1[i]) * product(s^2+n2[i,1]*s+n2[i,2])
+<pre>
+         product(s+n1[i]) * product(s^2+n2[i,1]*s+n2[i,2])
   y = k*---------------------------------------------------
          product(s+d1[i]) * product(s^2+d2[i,1]*s+d2[i,2])
 
 </pre></td>
   </tr>
-  <tr><td>record&nbsp;<a href=\"modelica://Modelica_Control.LinearSystems.DiscreteStateSpace\">DiscreteStateSpace</a></td>
+  <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace\">DiscreteStateSpace</a></td>
       <td> Multi input, multi output, linear difference equation system
           in state space form:
-<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
+<pre>
+     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
      <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
      <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
+
 </pre>
 with <b>Ts</b> the sample time and <b>k</b>
 the index of the actual sample instance (k=0,1,2,3,...).
 <b>x</b>(t) is the discrete state vector and <b>x</b>_continuous(t)
 is the state vector of the continuous system from which the
 discrete block has been derived by a state transformation,
-in order to remove dependencies of past values of <b>u</b>.</td>
+in order to remove dependencies of past values of <b>u</b>.<br>
+      </td>
   </tr>
 </table>
 
@@ -424,7 +430,7 @@ StateSpace.Import.fromModel(\"xxx\") results in:
 <p>
 Also several
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">filters</a>
-are provided in. Typical frequency responses
+are provided in. Typical frequency responses of implemented filters
 are shown in the next figure:
 </p>
 

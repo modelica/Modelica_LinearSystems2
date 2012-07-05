@@ -26,6 +26,7 @@ no or infinitely many solutions (A is singular).");
 <blockquote><pre>
 Matrices.<b>solve2</b>(A,b);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function call returns the
@@ -44,6 +45,11 @@ an exception is raised.
 Note, the solution is computed with the LAPACK function \"dgesv\",
 i.e., by Gaussian elemination with partial pivoting.
 </p>
+<p>See also
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a> and
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve2\">Matrices.LU_solve2</a>.
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
   Real A[3,3] = [1,2,3;
@@ -60,8 +66,5 @@ i.e., by Gaussian elemination with partial pivoting.
                                         1, 2] */
 </pre></blockquote>
 
-<h4>See also</h4>
-<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
-<a href=\"modelica://Modelica.Math.Matrices.LU_solve2\">Matrices.LU_solve2</a>
 </HTML>"));
 end solve2;

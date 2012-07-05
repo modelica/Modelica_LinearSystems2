@@ -34,11 +34,12 @@ algorithm
     Q := fill(1, nrow, ncol);
 
   end if;
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (Q,R,p) = Matrices.<b>QR</b>(A);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function returns the QR decomposition of
@@ -74,8 +75,8 @@ of <b>R</b> (which is the same row-rank as <b>A</b>). Furthermore,
 </p>
 <blockquote>
 <pre>
-   <b>A</b>[:,<b>p</b>] = <b>Q</b> * [<b>R</b><sub>1</sub>, <b>R</b><sub>2</sub>;
-                 <b>0</b>,  <b>0</b>]
+<b>A</b>[:,<b>p</b>] = <b>Q</b> * [<b>R</b><sub>1</sub>, <b>R</b><sub>2</sub>;
+              <b>0</b>,  <b>0</b>]
 </pre>
 </blockquote>
 <p>
@@ -87,6 +88,7 @@ and \"dorgqr\", i.e., by Housholder transformations with
 column pivoting. If <b>Q</b> is not needed, the function may be
 called as: <code>(,R,p) = QR(A)</code>.
 </p>
+
 <h4>Example</h4>
 <blockquote><pre>
   Real A[3,3] = [1,2,3;
@@ -98,5 +100,5 @@ called as: <code>(,R,p) = QR(A)</code>.
                                     0     , -1.73.., -0.23..;
                                     0     ,  0     ,  0.65..];
 </pre></blockquote>
-</HTML>"));
+</html>"));
 end LQ;

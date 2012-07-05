@@ -4,9 +4,9 @@ function equalityLeastSquares
   extends Modelica.Icons.Function;
   input Real A[:,:] "Minimize |A*x - a|^2";
   input Real a[size(A, 1)];
-  input Real B[:,size(A, 2)] "subject to B*x=b";
+  input Real B[:,size(A, 2)] "Subject to B*x=b";
   input Real b[size(B, 1)];
-  output Real x[size(A, 2)] "solution vector";
+  output Real x[size(A, 2)] "Solution vector";
 
 protected
   Integer info;

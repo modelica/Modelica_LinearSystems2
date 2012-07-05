@@ -59,9 +59,10 @@ algorithm
   annotation (Documentation(info="<HTML>
 <h4>Syntax</h4>
 <blockquote><pre>
-  X = Matrices.<b>solve2r</b>(A,B);
-  X = Matrices.<b>solve2r</b>(A, B, transA=false, isTriangular=false);
+X = Matrices.<b>solve2r</b>(A,B);
+X = Matrices.<b>solve2r</b>(A, B, transA=false, isTriangular=false);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function call returns the
@@ -77,8 +78,8 @@ with
 </p>
 <blockquote>
 <p>
-  op<b>(A)</b> = transpose(<b>(A)</b>)  if   transA==true
-  op<b>(A)</b> = <b>(A)</b>  if   transA==false
+op<b>(A)</b> = transpose(<b>(A)</b>)  if   transA==true
+op<b>(A)</b> = <b>(A)</b>  if   transA==false
 </p>
 </blockquote>
 <p>
@@ -90,6 +91,11 @@ an exception is raised.
 Note, the solution is computed with the LAPACK function \"dgesv\",
 i.e., by Gaussian elemination with partial pivoting.
 </p>
+<p>See also
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a> and
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve2\">Matrices.LU_solve2</a>.
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
   Real A[3,3] = [1,2,3;
@@ -104,8 +110,5 @@ i.e., by Gaussian elemination with partial pivoting.
                                         -68.0, 34.4, 4.8] */
 </pre></blockquote>
 
-<h4>See also</h4>
-<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
-<a href=\"modelica://Modelica.Math.Matrices.LU_solve2\">Matrices.LU_solve2</a>
 </HTML>"));
 end solve2r;

@@ -16,11 +16,12 @@ algorithm
   else
     result := -1e100;
   end if;
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Matrices.<b>det</b>(A);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function call returns the determinant of matrix A
@@ -30,8 +31,11 @@ there are nearly always better numerical algorithms
 as by computing the determinant. E.g., use function
 <a href=\"modelica://Modelica.Math.Matrices.rank\">Matrices.rank</a>
 to compute the rank of a matrix.
-<h4>See also</h4>
-<a href=\"modelica://Modelica.Math.Matrices.rank\">Matrices.rank</a>,
-<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>
-</HTML>"));
+</p>
+<p>
+See also
+<a href=\"modelica://Modelica.Math.Matrices.rank\">Matrices.rank</a> and
+<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>.
+</p>
+</html>"));
 end det;

@@ -48,7 +48,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(T, Z, alphaReal, alphaImag) = Modelica_LinearSystems2.Math.Matrices.<b>rsf2</b>(A)
+(T, Z, alphaReal, alphaImag) = Matrices.<b>rsf2</b>(A)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -57,7 +57,7 @@ Function <b>rsf2</b> (real Schur form) calculates the real Schur form af
 a real square matrix <b>A</b>, i.e.
 </p>
 <blockquote>
-  <b>A</b> = <b>Z</b>*<b>T</b>*<b>Z</b><sup><big>T</big></sup>
+  <b>A</b> = <b>Z</b>*<b>T</b>*<b>Z</b><sup>T</sup>
 </blockquote>
 <p>
 with the real nxn matrices <b>T</b> and <b>Z</b>. <b>Z</b> is an orthogonal matrix. 

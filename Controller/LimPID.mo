@@ -275,7 +275,7 @@ equation
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="%sampleFactor")}),
-    Documentation(info="<HTML>
+    Documentation(info="<html>
 <p>
 Via parameter <b>controllerType</b> either <b>P</b>, <b>PI</b>, <b>PD</b>,
 or <b>PID</b> can be selected. If, e.g., PI is selected, all components belonging to the
@@ -288,11 +288,9 @@ according to chapter 3 of the book:
 </p>
 
 <dl>
-<dt>Astroem K.J., and Haegglund T.:</dt>
+<dt>&Aring;str&ouml;m K.J., and H&auml;gglund T. (1995):</dt>
 <dd> <b>PID Controllers: Theory, Design, and Tuning</b>.
-     Instrument Society of America, 2nd edition, 1995.
-     Information from:
-     <a href=\"http://www.control.lth.se/publications/books/asthagg95.html\">http://www.control.lth.se/publications/books/asthagg95.html</a>
+     Instrument Society of America, 2nd edition, ISBN: 1556175167.
      </dd>
 </dl>
 
@@ -346,9 +344,7 @@ together) and using the following strategy:
      anti-windup compensation is switched off and the controller works bad.</li>
 </ol>
 
-<p>
-<b>Initialization</b>
-</p>
+<h4>Initialization</h4>
 
 <p>
 This block can be initialized in different
@@ -405,9 +401,9 @@ cases difficulties might occur. The reason is the
 equation of the integrator:
 </p>
 
-<pre>
-   <b>der</b>(y) = k*u;
-</pre>
+<blockquote><pre>
+<b>der</b>(y) = k*u;
+</pre></blockquote>
 
 <p>
 The steady state equation \"der(x)=0\" leads to the condition that the input u to the
@@ -430,7 +426,7 @@ defined limits. For backward compatibility reasons
 <b>limitAtInit</b> = <b>true</b>. In most cases it is best
 to use <b>limitAtInit</b> = <b>false</b>.
 </p>
-</HTML>
+</html>
 "), Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},

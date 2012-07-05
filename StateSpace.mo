@@ -4665,13 +4665,13 @@ of the discrete time case is minimized. The cases are chosen by the input <b>isc
 the continuous-time algebraic Riccati equation (CARE)
 </p>
 <blockquote><pre>
-<b>Q</b> + <b>A</b>'*<b>X</b> + <b>X</b>*<b>A</b> - <b>X</b>*<b>B</b>*<b>R<sup><big>-1</big></sup></b>*<b>B</b>'*<b>X</b> = <b>0</b>
+<b>Q</b> + <b>A</b>'*<b>X</b> + <b>X</b>*<b>A</b> - <b>X</b>*<b>B</b>*<b>R</b><sup>-1</sup>*<b>B</b>'*<b>X</b> = <b>0</b>
 </pre></blockquote>
 <p>
 or the discrete-time algebraic Riccati equation (DARE)
 </p>
 <blockquote><pre>
-<b>X</b> - <b>A</b>'*<b>X</b>*<b>A</b> + <b>A</b>'*<b>X</b>*<b>B</b>*(<b>R</b> + <b>B</b>'*<b>X</b>*<b>B</b>)<sup><big>-1</big></sup>*<b>B</b>'*<b>X</b>*<b>A</b> - <b>Q</b> = <b>0</b>
+<b>X</b> - <b>A</b>'*<b>X</b>*<b>A</b> + <b>A</b>'*<b>X</b>*<b>B</b>*(<b>R</b> + <b>B</b>'*<b>X</b>*<b>B</b>)<sup>-1</sup>*<b>B</b>'*<b>X</b>*<b>A</b> - <b>Q</b> = <b>0</b>
 </pre>
 </blockquote>
 <p>
@@ -4681,13 +4681,13 @@ for <b>X</b> using the Schur vector approach. See <a href=\"modelica://Modelica_
 The gain matrix <b>K</b> of the continuous-time case is calculated from
 </p>
 <blockquote><pre>
-<b>K</b> = <b>R</b><sup><big>-1</big></sup>*<b>B</b>'*<b>X</b>
+<b>K</b> = <b>R</b><sup>-1</sup>*<b>B</b>'*<b>X</b>
 </pre></blockquote>
 <p>
 or from
 </p>
 <blockquote><pre>
-<b>K</b> = (<b>R</b> + <b>B</b>'*<b>X</b>*<b>B</b>)<sup><big>-1</big></sup>*<b>B</b>'*<b>X</b>*<b>A</b>
+<b>K</b> = (<b>R</b> + <b>B</b>'*<b>X</b>*<b>B</b>)<sup>-1</sup>*<b>B</b>'*<b>X</b>*<b>A</b>
 </pre></blockquote>
 <p>
 for the discrete-time case.
@@ -4884,13 +4884,13 @@ where the weighting matrices <b>Q</b> and <b>R</b> are, respectively, symmetric 
 The feedback matrix Kc is calculated by
 </p>
 <blockquote><pre>
-<b>K</b>c = <b>R</b><sup><big>-1</big></sup>*<b>B</b>'*<b>X</b>c,
+<b>K</b>c = <b>R</b><sup>-1</sup>*<b>B</b>'*<b>X</b>c,
 </pre></blockquote>
 <p>
 where <b>X</b>c satisfying the continuous-time algebraic Riccati equation (<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.care\">care</a>)
 </p>
 <blockquote><pre>
-<b>Q</b> + <b>A</b>'*<b>X</b>c + <b>X</b>c*<b>A</b> - <b>X</b>c*<b>B</b>*<b>R</b><sup><big>-1</big></sup>*<b>B</b>'*<b>X</b>c = <b>0</b>.
+<b>Q</b> + <b>A</b>'*<b>X</b>c + <b>X</b>c*<b>A</b> - <b>X</b>c*<b>B</b>*<b>R</b><sup>-1</sup>*<b>B</b>'*<b>X</b>c = <b>0</b>.
 </pre></blockquote>
 <p>
 The matrix <b>K</b>f of the filter problem to generate the estimated state vector <b>x</b>^(t) is given by
@@ -4902,7 +4902,7 @@ The matrix <b>K</b>f of the filter problem to generate the estimated state vecto
 where <b>X</b>f is satisfying the continuous-time algebraic Riccati equation
 </p>
 <blockquote><pre>
-<b>W</b> + <b>A</b>*<b>X</b>f + <b>X</b>f*<b>A</b>' - <b>X</b>f*<b>C</b>'*<b>V<sup><big>-1</big></sup></b>*<b>C</b>*<b>X</b>f = <b>0</b>.
+<b>W</b> + <b>A</b>*<b>X</b>f + <b>X</b>f*<b>A</b>' - <b>X</b>f*<b>C</b>'*<b>V</b><sup>-1</sup>*<b>C</b>*<b>X</b>f = <b>0</b>.
 </pre></blockquote>
 <p>
 The vector <b>x</b>^(t) satisfies the differential equation
@@ -9211,7 +9211,7 @@ Further on, if <b>T</b> is triangular then also <b>H</b> = s<b>I</b> - <b>T</b> 
 The frequency response G(s0)for a given s0 that is neither zero nor pole of the system can be calculated by
 </p>
 <blockquote><pre>
-G(s0)  = <b>c</b>*(s0*<b>I</b> -<b>A</b>)<sup><big>-1</big></sup>*<b>b</b> = <b>c</b>*(s0*<b>I</b> -<b>A</b>)<sup><big>-1</big></sup> *<b>Q</b>*<b>Q</b><sup><big>-1</big></sup>*<b>b</b> = <b>c</b>*(<b>Q</b><sup><big>-1</big></sup>*(s0*<b>I</b> -<b>A</b>))<sup><big>-1</big></sup>*<b>Q</b><sup><big>-1</big></sup>*<b>b</b> = <b>c</b>*<b>H</b><sup><big>-1</big></sup>(s0)*<b>q</b>
+G(s0)  = <b>c</b>*(s0*<b>I</b> -<b>A</b>)<sup>-1</sup>*<b>b</b> = <b>c</b>*(s0*<b>I</b> -<b>A</b>)<sup>-1</sup> *<b>Q</b>*<b>Q</b><sup>-1</sup>*<b>b</b> = <b>c</b>*(<b>Q</b><sup>-1</sup>*(s0*<b>I</b> -<b>A</b>))<sup>-1</sup>*<b>Q</b><sup>-1</sup>*<b>b</b> = <b>c</b>*<b>H</b><sup>-1</sup>(s0)*<b>q</b>
 </pre></blockquote>
 <p>
 and because only the n'th element of <b>c</b> is different to zero the gain k is given by

@@ -6,9 +6,9 @@ function toUpperHessenberg
 
   input Real A[:,size(A, 1)] "Square matrix A";
   input Integer ilo=1
-    "lowest index where the original matrix had been Hessenbergform";
+    "Lowest index where the original matrix had been Hessenbergform";
   input Integer ihi=size(A, 1)
-    "highest index where the original matrix had been Hessenbergform";
+    "Highest index where the original matrix had been Hessenbergform";
   output Real H[size(A, 1),size(A, 2)] "Upper Hessenberg form";
   output Real V[size(A, 1),size(A, 2)]
     "V=[v1,v2,..vn-1,0] with vi are vectors which define the elementary reflectors";
@@ -47,8 +47,8 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-                H = Matrices.Utilities<b>toUpperHessenberg</b>(A);
-(H, V, tau, info) = Matrices.Utilities<b>toUpperHessenberg</b>(A,ilo, ihi);
+                H = Matrices.<b>toUpperHessenberg</b>(A);
+(H, V, tau, info) = Matrices.<b>toUpperHessenberg</b>(A,ilo, ihi);
 </pre></blockquote>
 
 <h4>Description</h4>

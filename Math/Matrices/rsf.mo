@@ -12,9 +12,9 @@ protected
   Real tau[max(0, size(A, 1) - 1)];
 
   Real Aout[size(A, 1),size(A, 2)];
-  Real H[size(A, 1),size(A, 2)] "upper Hessenberg form of A";
+  Real H[size(A, 1),size(A, 2)] "Upper Hessenberg form of A";
   Real Q[size(A, 1),size(A, 2)]
-    "represents the Hessenberg transformation as a product of the elementary reflectors";
+    "Represents the Hessenberg transformation as a product of the elementary reflectors";
   Integer info1;
   Integer info2;
 
@@ -89,7 +89,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(T, Z, alphaReal, alphaImag) = Modelica_LinearSystems2.Math.Matrices.<b>rsf</b>(A)
+(T, Z, alphaReal, alphaImag) = Matrices.<b>rsf</b>(A)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -98,7 +98,7 @@ Function <b>rsf</b> (real Schur form) calculates the real Schur form af
 a real square matrix <b>A</b>, i.e.
 </p>
 <blockquote>
-  <b>A</b> = <b>Z</b>*<b>T</b>*<b>Z</b><sup><big>T</big></sup>
+  <b>A</b> = <b>Z</b>*<b>T</b>*<b>Z</b><sup>T</sup>
 </blockquote>
 <p>
 with the real nxn matrices <b>T</b> and <b>Z</b>. <b>Z</b> is an orthogonal matrix. 

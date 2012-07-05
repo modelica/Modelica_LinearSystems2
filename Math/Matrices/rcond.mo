@@ -9,7 +9,7 @@ function rcond "Reciprocal condition number"
 protected
   Real LU[:,:] "LU factorization of matrix A, returned by dgetrf";
   Real anorm "Norm of matrix A";
-  String normspec= if inf then "I" else "1" "specifies the norm 1 or inf";
+  String normspec= if inf then "I" else "1" "Specifies the norm 1 or inf";
 
 algorithm
   if min(size(A)) > 0 then

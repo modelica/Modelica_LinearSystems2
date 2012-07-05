@@ -72,8 +72,8 @@ algorithm
  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Ldd = Matrices.Utilities.<b>choleskyDownDate</b>(L, v);
-Ldd = Matrices.Utilities.<b>choleskyDownDate</b>(L, v, true);
+Ldd = Matrices.<b>choleskyDownDate</b>(L, v);
+Ldd = Matrices.<b>choleskyDownDate</b>(L, v, true);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -82,9 +82,9 @@ This function computes the rank-1-downdated
 Cholesky factorization <b>Ldd</b>, with
 </p>
 <blockquote>
-  <b>Add</b> = <b>Ldd</b>*<b>Ldd</b><sup><big>T</big></sup> = 
-  <b>A</b> -  <b>v</b>*<b>v</b><sup><big>T</big></sup> = 
-  <b>L</b>*<b>L</b><sup><big>T</big></sup> -  <b>v</b>*<b>v</b><sup><big>T</big></sup>
+  <b>Add</b> = <b>Ldd</b>*<b>Ldd</b><sup>T</sup> = 
+  <b>A</b> -  <b>v</b>*<b>v</b><sup>T</sup> = 
+  <b>L</b>*<b>L</b><sup>T</sup> -  <b>v</b>*<b>v</b><sup>T</sup>
 </blockquote>
 <p>
 from the input <b>L</b>, i.e. the left (lower) Cholesky factor of the 
@@ -94,16 +94,16 @@ original matrix <b>A</b>. The algortihm is taken from [1].
 Matrix <b>Ldd</b> is calculated by
 </p>
 <blockquote>
-  [<b>v</b>, <b>Ldd</b>]<sup><big>T</big></sup> = <b>H</b> *[<b>0</b>, <b>L</b>]<sup><big>T</big></sup>
+  [<b>v</b>, <b>Ldd</b>]<sup>T</sup> = <b>H</b> *[<b>0</b>, <b>L</b>]<sup>T</sup>
 </blockquote>
 <p>
 with orthogonal Matrix <b>H</b> such that
 </p>
 <blockquote>
-  <b>v</b>*<b>v</b><sup><big>T</big></sup> + <b>Ldd</b>*<b>Ldd</b><sup><big>T</big></sup> = 
-  [<b>v</b>, <b>Ldd</b>] * [<b>v</b>, <b>Ldd</b>]<sup><big>T</big></sup> = 
-  [<b>0</b>, <b>L</b>]*<b>H</b><sup><big>T</big></sup> *<b>H</b>*[<b>0</b>, <b>L</b>]<sup><big>T</big></sup> = 
-  [<b>0</b>, <b>L</b>]*[<b>0</b>, <b>L</b>]<sup><big>T</big></sup> = <b>L</b>*<b>L</b><sup><big>T</big></sup> = <b>A</b>,
+  <b>v</b>*<b>v</b><sup>T</sup> + <b>Ldd</b>*<b>Ldd</b><sup>T</sup> = 
+  [<b>v</b>, <b>Ldd</b>] * [<b>v</b>, <b>Ldd</b>]<sup>T</sup> = 
+  [<b>0</b>, <b>L</b>]*<b>H</b><sup>T</sup> *<b>H</b>*[<b>0</b>, <b>L</b>]<sup>T</sup> = 
+  [<b>0</b>, <b>L</b>]*[<b>0</b>, <b>L</b>]<sup>T</sup> = <b>L</b>*<b>L</b><sup>T</sup> = <b>A</b>,
 </blockquote>
 <p>
 i.e., by orthogonal transformation
@@ -115,7 +115,7 @@ i.e., by orthogonal transformation
 The matrices <b>H</b>_i are Givens matrices computed such that
 </p>
 <blockquote>
-  <b>H</b>_1*<b>H</b>_2*...*<b>H</b>_n*[z, <b>a</b><sup><big>T</big></sup> ]<sup><big>T</big></sup> = [1, 0, ..., 0]<sup><big>T</big></sup>,
+  <b>H</b>_1*<b>H</b>_2*...*<b>H</b>_n*[z, <b>a</b><sup>T</sup>]<sup>T</sup> = [1, 0, ..., 0]<sup>T</sup>,
 </blockquote>
 <p>
 with <b>a</b> is the solution of
