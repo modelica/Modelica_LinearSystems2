@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples;
-package TransferFunction "Package with examples to demonstrate the usage of the TransferFunction record"
+package TransferFunction "Package of examples to demonstrate the usage of the TransferFunction record"
   extends Modelica.Icons.ExamplesPackage;
 
 

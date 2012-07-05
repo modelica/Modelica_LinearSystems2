@@ -1,5 +1,14 @@
 within Modelica_LinearSystems2.Utilities.Plot;
-package Types "Types used for the plotting functions"
+package Types "Package of type definitions used for the plotting functions"
   extends Modelica.Icons.Package;
 
+  annotation (
+    preferedView="info",
+    Documentation(info="<html>
+<p>
+This package contains type definitions. Generally, 
+the enumeration type is used to assign a unique choice of parameter 
+within a model.
+</p>
+</html>"));
 end Types;

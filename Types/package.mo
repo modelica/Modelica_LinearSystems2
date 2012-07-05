@@ -1,14 +1,14 @@
 within Modelica_LinearSystems2;
-package Types "Constants and types with choices, especially to build menus"
-extends Modelica.Icons.Package;
+package Types "Package of type definitions"
+  extends Modelica.Icons.Package;
 
-
-annotation (Documentation(info="<HTML>
+  annotation (
+    preferedView="info",
+    Documentation(info="<html>
 <p>
-In this package <b>types</b> and <b>constants</b> are defined that are used in the
-Sampled library. The types have additional annotation choices
-definitions that define the menus to be built up in the graphical
-user interface when the type is used as parameter in a declaration.
+This package contains type definitions. Generally, 
+the enumeration type is used to assign a unique choice of parameter 
+within a model.
 </p>
-</HTML>"));
+</html>"));
 end Types;

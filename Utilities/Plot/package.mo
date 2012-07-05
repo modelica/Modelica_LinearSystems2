@@ -1,9 +1,9 @@
 within Modelica_LinearSystems2.Utilities;
-package Plot "Functions for generation of 2D-plots"
-    extends Modelica.Icons.Package;
+package Plot "Package of functions for generation of 2D-plots"
+  extends Modelica.Icons.Package;
 
-
-  annotation (Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This package provides functions to plot curves in two dimensions. Here is a short overview:
 </p>
