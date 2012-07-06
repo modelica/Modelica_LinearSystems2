@@ -14,5 +14,5 @@ algorithm
   Modelica_LinearSystems2.TransferFunction.Plot.bode(    tf);
   ok := true;
 
-  annotation (interactive=true);
+  annotation (__Dymola_interactive=true);
 end plotBode3;

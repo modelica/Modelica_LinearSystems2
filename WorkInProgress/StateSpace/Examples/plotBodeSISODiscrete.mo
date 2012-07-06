@@ -8,8 +8,7 @@ function plotBodeSISODiscrete
   import Modelica_LinearSystems2.TransferFunction;
 
   input Boolean systemOnFile=false
-    "True, if state space system is defined on file"
-  annotation (interactive=true);
+    "True, if state space system is defined on file";
   input String fileName="NoName" "file where matrix [A, B; C, D] is stored";
 
   input Real A[:,size(A, 1)]=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0];
@@ -49,5 +48,5 @@ algorithm
     iy);
   ok := true;
 
-  annotation (interactive=true);
+  annotation (__Dymola_interactive=true);
 end plotBodeSISODiscrete;

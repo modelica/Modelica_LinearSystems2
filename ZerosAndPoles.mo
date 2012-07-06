@@ -774,7 +774,8 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
        end if;
 
      end printSystem;
-      annotation (interactive=true, Documentation(revisions="<html>
+
+     annotation (__Dymola_interactive=true, Documentation(revisions="<html>
 <ul>
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
@@ -862,7 +863,7 @@ algorithm
         response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
         x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
-  annotation(interactive=true, Documentation(info="<html>
+  annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = ZerosAndPoles.Analysis.<b>impulseResponse</b>(zp, dt, tSpan)
@@ -921,7 +922,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
         response=Modelica_LinearSystems2.Types.TimeResponse.Step,
         x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
-  annotation(interactive=true, Documentation(info="<html>
+  annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = ZerosAndPoles.Analysis.<b>stepResponse</b>(zp, dt, tSpan)
@@ -981,7 +982,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
         response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
         x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
-  annotation(interactive=true, Documentation(info="<html>
+  annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = ZerosAndPoles.Analysis.<b>rampResponse</b>(zp, dt, tSpan)
@@ -1044,7 +1045,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
         response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
         x0=x0);
 
-  annotation(interactive=true, Documentation(info="<html>
+  annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = ZerosAndPoles.Analysis.<b>initialResponse</b>(zp, dt, tSpan, x0)
@@ -2255,7 +2256,7 @@ is set.
        diagram2.curve :=curves[1:i];
        Plot.diagram(diagram2,device);
 
-     annotation (interactive=true, Documentation(info="<html>
+     annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>polesAndZeros</b>(zp);
@@ -2419,7 +2420,7 @@ and results in
       Plot.diagram(diagram2[1], device);
     end if;
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>bode</b>(zp)
@@ -2505,7 +2506,7 @@ This function plots the bode-diagram of a transfer function.
     diagram2.curve := {curve};
 
     Plot.diagram(diagram2, device);
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>timeResponse</b>(zp);
@@ -2578,7 +2579,7 @@ This function plots the time response of a transfer function. The character of t
       defaultDiagram=defaultDiagram,
       device=device);
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>impulse</b>(zp)  
@@ -2651,7 +2652,7 @@ This function plots the impulse response of a zeros-and-poles transfer function.
 
   equation
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>step</b>(zp)  
@@ -2718,7 +2719,7 @@ This function plots the step response of a transfer function. It is based on <a 
       defaultDiagram=defaultDiagram,
       device=device);
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>ramp</b>(zp)  
@@ -2797,7 +2798,7 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
           defaultDiagram=defaultDiagram,
           device=device);
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>initialResponse</b>(zp)  
@@ -4151,7 +4152,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
       zp := StateSpace.Conversion.toZerosAndPolesMIMO(result);
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = ZerosAndPoles.Import.<b>fromModel</b>(modelName, T_linearize, fileName)

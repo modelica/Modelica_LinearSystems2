@@ -63,5 +63,5 @@ Computes the time response of the system
 
 sampled at <i>Ts=0.01</i> with inititial state <i>x0=[0;0]</i>
 subject to the system input <i>u = ones(300,2)</i> (which results with Ts=0.01 in 3 sec).
-</html>"), interactive=true);
+</html>"), __Dymola_interactive=true);
 end analysisTimeResponse;

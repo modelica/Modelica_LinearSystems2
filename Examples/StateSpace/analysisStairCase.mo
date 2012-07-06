@@ -61,7 +61,7 @@ algorithm
   Modelica.Utilities.Streams.print("\nTransformed dual system is:\n"+String(ss3));
 
   ok := true;
-  annotation (interactive=true,
+  annotation (__Dymola_interactive=true,
               Documentation(info="<html>
 This example shows the usage of the staircase algorithm to transform a state space system in staircase form to analyze controllability.
 </html>"));

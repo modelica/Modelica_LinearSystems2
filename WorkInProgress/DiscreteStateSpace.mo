@@ -701,7 +701,7 @@ algorithm
     defaultDiagram=defaultDiagram,
     device=device);
 
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>plotBodeSISO</b>(ss)

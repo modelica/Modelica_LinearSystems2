@@ -15,5 +15,5 @@ function importFromModel
     modelName, Ts=Ts,T_linearize=T_linearize);
 algorithm
 
-annotation (interactive=true);
+annotation (__Dymola_interactive=true);
 end importFromModel;

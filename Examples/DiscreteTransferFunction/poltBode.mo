@@ -16,7 +16,7 @@ algorithm
   dtf.method := method;
   DiscreteTransferFunction.Plot.bode(dtf);
 
-annotation (interactive=true, Documentation(info="<html>
+annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.Examples.DiscreteTransferFunction.plotBode\">plotBode</a> instead.</p>
 </html>"));
 end poltBode;

@@ -46,5 +46,5 @@ algorithm
 
   tf1 := tf[1, 1];
   ok := true;
-annotation(interactive=true);
+  annotation(__Dymola_interactive=true);
 end conversioToTransferFunction_bench;

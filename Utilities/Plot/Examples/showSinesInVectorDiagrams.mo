@@ -53,8 +53,7 @@ algorithm
       lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.Circle)},
     xLabel="w [rad/s]",
     yLabel="[N.m]")});
-    annotation(interactive=true, Documentation(info="<html>
-
+    annotation(__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function plots the following diagram (with default input arguments):
 </p>
@@ -62,7 +61,5 @@ This function plots the following diagram (with default input arguments):
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showSinesInVectorDiagram.png\">
 </blockquote>
-
-
 </html>"));
 end showSinesInVectorDiagrams;

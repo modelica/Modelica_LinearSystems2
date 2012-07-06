@@ -20,7 +20,7 @@ package DiscreteZerosAndPoles
     dzp.method := method;
     DiscreteZerosAndPoles.Plot.bode(dzp);
 
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>This function is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.Examples.DiscreteZerosAndPoles.plotBode\">plotBode</a> instead.</p>
 </html>"));
   end poltBode;
@@ -41,6 +41,6 @@ package DiscreteZerosAndPoles
     dzp.method := method;
     DiscreteZerosAndPoles.Plot.bode(dzp);
 
-  annotation (interactive=true);
+  annotation (__Dymola_interactive=true);
   end plotBode;
 end DiscreteZerosAndPoles;

@@ -46,7 +46,7 @@ algorithm
   print(Matrices.printMatrix(K3, name="K3") + "\nfinite3 = " + String(finite) + "\n");
 
   ok := true;
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 This example shows how to calculate the dc-gain of a state space system.
 </html>"));
 end analysisDcGain;

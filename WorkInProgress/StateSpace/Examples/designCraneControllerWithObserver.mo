@@ -106,7 +106,7 @@ algorithm
     true);
 
   print("\nok!");
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This example demonstrates how to use pole placement function assignPolesMI to 
 design a pole placement controller and an observer also using assignPolesMI as well.

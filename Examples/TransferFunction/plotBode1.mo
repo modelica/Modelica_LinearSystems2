@@ -20,5 +20,5 @@ algorithm
     tf=tf2);
   ok := true;
 
-  annotation (interactive=true);
+  annotation (__Dymola_interactive=true);
 end plotBode1;

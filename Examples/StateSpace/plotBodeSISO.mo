@@ -7,8 +7,7 @@ function plotBodeSISO
   import Modelica_LinearSystems2.TransferFunction;
 
   input Boolean systemOnFile=false
-    "True, if state space system is defined on file"
-    annotation (interactive=true);
+    "True, if state space system is defined on file";
   input String fileName="NoName" "file where matrix [A, B; C, D] is stored"
     annotation (Dialog(enable=systemOnFile));
 
@@ -42,7 +41,7 @@ algorithm
     iy);
   ok := true;
 
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 This example demonstrates the construnction of a zeros-and-poles-transfer-function from a SISO state space representation and plots the Bode diagrams with automatic determination of the frequency range to plot
 </html>"));
 end plotBodeSISO;

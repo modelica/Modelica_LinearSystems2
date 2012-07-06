@@ -14,5 +14,5 @@ algorithm
   dtf.method := method;
   DiscreteTransferFunction.Plot.bode(dtf);
 
-annotation (interactive=true);
+annotation (__Dymola_interactive=true);
 end plotBode;

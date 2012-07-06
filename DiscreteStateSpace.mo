@@ -1466,7 +1466,7 @@ are calculated for each time step t=k*dss.Ts.
       response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
       x0=zeros(size(dss.A, 1)));
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss)
@@ -1548,7 +1548,7 @@ See also
       response=Modelica_LinearSystems2.Types.TimeResponse.Step,
       x0=zeros(size(dss.A, 1)));
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss)
@@ -1633,7 +1633,7 @@ See also
       response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
       x0=zeros(size(dss.A, 1)));
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>rampResponse</b>(dss)
@@ -1723,7 +1723,7 @@ See also
       response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
       x0=x0);
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss)
@@ -2333,7 +2333,7 @@ algorithm
     defaultDiagram=defaultDiagram,
     device=device);
 
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>bodeSISO</b>(dss)
@@ -2492,7 +2492,7 @@ algorithm
     end if;
   end for;
 
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>timeResponse</b>(dss);
@@ -2536,15 +2536,14 @@ This function plots the time response of a discrete state space system. The char
 </html> "));
 end timeResponse;
 
-encapsulated function impulse
-      "Impulse response plot of a discrete state space system"
+  encapsulated function impulse
+    "Impulse response plot of a discrete state space system"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica_LinearSystems2.Types.TimeResponse;
+    import Modelica_LinearSystems2.Utilities.Plot;
 
     input DiscreteStateSpace dss;
     input Real tSpan=0 "Simulation time span [s]";
@@ -2563,7 +2562,7 @@ encapsulated function impulse
         "type of time response";
     Real tSpanVar;
 
-algorithm
+  algorithm
       // set sample time
     if tSpan == 0 then
       tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
@@ -2579,7 +2578,7 @@ algorithm
       defaultDiagram=defaultDiagram,
       device=device);
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>impulse</b>(dss);
@@ -2618,15 +2617,14 @@ This function plots the impulse responses of a state space system for each syste
 </html> "));
 end impulse;
 
-encapsulated function step
-      "Step response plot of a discrete state space system"
+  encapsulated function step
+    "Step response plot of a discrete state space system"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica_LinearSystems2.Types.TimeResponse;
+    import Modelica_LinearSystems2.Utilities.Plot;
 
     input DiscreteStateSpace dss;
     input Real tSpan=0 "Simulation time span [s]";
@@ -2646,8 +2644,8 @@ encapsulated function step
 
     Real tSpanVar;
 
-algorithm
-// set sample time
+  algorithm
+    // set sample time
     if tSpan == 0 then
       tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
     else
@@ -2662,7 +2660,7 @@ algorithm
       defaultDiagram=defaultDiagram,
       device=device);
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>step</b>(dss);
@@ -2701,15 +2699,14 @@ This function plots the discrete step responses of a state space system for each
 </html> "));
 end step;
 
-encapsulated function ramp
-      "Ramp response plot of a discrete state space system"
+  encapsulated function ramp
+    "Ramp response plot of a discrete state space system"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica_LinearSystems2.Types.TimeResponse;
+    import Modelica_LinearSystems2.Utilities.Plot;
 
     input DiscreteStateSpace dss;
     input Real tSpan=0 "Simulation time span [s]";
@@ -2728,8 +2725,8 @@ encapsulated function ramp
 
     Real tSpanVar;
 
-algorithm
-// set sample time
+  algorithm
+    // set sample time
     if tSpan == 0 then
       tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(dss);
     else
@@ -2744,7 +2741,7 @@ algorithm
       defaultDiagram=defaultDiagram,
       device=device);
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>ramp</b>(ss);
@@ -2824,7 +2821,7 @@ algorithm
     defaultDiagram=defaultDiagram,
     device=device);
 
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>initialResponse</b>(ss);
@@ -3443,17 +3440,17 @@ Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>.
       nx + nu + ny);
 
       StateSpace ss(
-    redeclare Real A[nx,nx],
-    redeclare Real B[nx,nu],
-    redeclare Real C[ny,nx],
-    redeclare Real D[ny,nu]) "= model linearized at initial point";
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,nu],
+        redeclare Real C[ny,nx],
+        redeclare Real D[ny,nu]) "= model linearized at initial point";
     public
       output DiscreteStateSpace result(
-    redeclare Real A[nx,nx],
-    redeclare Real B[nx,nu],
-    redeclare Real B2[nx,nu],
-    redeclare Real C[ny,nx],
-    redeclare Real D[ny,nu]) "= discrete model linearized at initial point";
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,nu],
+        redeclare Real B2[nx,nu],
+        redeclare Real C[ny,nx],
+        redeclare Real D[ny,nu]) "= discrete model linearized at initial point";
 
     algorithm
       ss.A := ABCD[1:nx, 1:nx];
@@ -3465,11 +3462,11 @@ Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>.
       ss.xNames := xuyName[1:nx];
 
       result := DiscreteStateSpace(
-    ss=ss,
-    Ts=Ts,
-    method=method);
+        ss=ss,
+        Ts=Ts,
+        method=method);
 
-      annotation (interactive=true, Documentation(info=
+      annotation (__Dymola_interactive=true, Documentation(info=
                                                    "<html>
 <h4>Syntax</h4>
 <blockquote><pre>

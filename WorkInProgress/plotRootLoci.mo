@@ -107,7 +107,7 @@ algorithm
     // Plot root loci
     Modelica_LinearSystems2.WorkInProgress.plotEigenvalues(     sSpace.A, if i == 1 then true else false, position, "Root loci of " + modelName + "; parVar: " + modelParams[1].parName, useLegend, String(parValue), grid, markerStyle, integer(color[i, :]));
   end for;
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>plotRootLoci(modelName, modelParams, simulationOptions, position, useLegend, grid, markerStyle, markerColorMin, markerColorMax)</pre></blockquote>
 

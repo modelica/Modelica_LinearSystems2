@@ -1303,77 +1303,66 @@ processing.
   function fromModel
       "Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model"
 
-      import Modelica;
-      import Modelica_LinearSystems2.StateSpace;
-      import ZerosAndPoles =
+    import Modelica;
+    import Modelica_LinearSystems2.StateSpace;
+    import ZerosAndPoles =
         Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
 
-      input String modelName "Name of the Modelica model";
-      input Real T_linearize=0
-        "point in time of simulation to linearize the model";
-      input String fileName="dslin" "Name of the result file";
+    input String modelName "Name of the Modelica model";
+    input Real T_linearize=0
+        "Point in time of simulation to linearize the model";
+    input String fileName="dslin" "Name of the result file";
 
     protected
-      String fileName2=fileName + ".mat";
-      Boolean OK1=simulateModel(
-            problem=modelName,
-            startTime=0,
-            stopTime=T_linearize);
-      Boolean OK2=importInitial("dsfinal.txt");
-      Boolean OK3=linearizeModel(
-            problem=modelName,
-            resultFile=fileName,
-            startTime=T_linearize,
-            stopTime=T_linearize + 1);
-      Real nxMat[1,1]=readMatrix(
-            fileName2,
-            "nx",
-            1,
-            1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
-      Integer nx=integer(nxMat[1, 1]);
-      Integer nu=ABCDsizes[2] - nx;
-      Integer ny=ABCDsizes[1] - nx;
-      Real ABCD[nx + ny,nx + nu]=readMatrix(
-            fileName2,
-            "ABCD",
-            nx + ny,
-            nx + nu);
-      String xuyName[nx + nu + ny]=readStringMatrix(
-            fileName2,
-            "xuyName",
-            nx + nu + ny);
+    String fileName2=fileName + ".mat";
+    Boolean OK1=simulateModel(
+          problem=modelName,
+          startTime=0,
+          stopTime=T_linearize);
+    Boolean OK2=importInitial("dsfinal.txt");
+    Boolean OK3=linearizeModel(
+          problem=modelName,
+          resultFile=fileName,
+          startTime=T_linearize,
+          stopTime=T_linearize + 1);
+    Real nxMat[1,1]=readMatrix(
+          fileName2,
+          "nx",
+          1,
+          1);
+    Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+    Integer nx=integer(nxMat[1, 1]);
+    Integer nu=ABCDsizes[2] - nx;
+    Integer ny=ABCDsizes[1] - nx;
+    Real ABCD[nx + ny,nx + nu]=readMatrix(
+          fileName2,
+          "ABCD",
+          nx + ny,
+          nx + nu);
+    String xuyName[nx + nu + ny]=readStringMatrix(
+          fileName2,
+          "xuyName",
+          nx + nu + ny);
 
-      StateSpace result(
-        redeclare Real A[nx,nx],
-        redeclare Real B[nx,nu],
-        redeclare Real C[ny,nx],
-        redeclare Real D[ny,nu]) "= model linearized at initial point";
+    StateSpace result(
+      redeclare Real A[nx,nx],
+      redeclare Real B[nx,nu],
+      redeclare Real C[ny,nx],
+      redeclare Real D[ny,nu]) "= model linearized at initial point";
     public
-      output ZerosAndPoles zp[:,:];
+    output ZerosAndPoles zp[:,:];
   algorithm
-      result.A := ABCD[1:nx, 1:nx];
-      result.B := ABCD[1:nx, nx + 1:nx + nu];
-      result.C := ABCD[nx + 1:nx + ny, 1:nx];
-      result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-      result.uNames := xuyName[nx + 1:nx + nu];
-      result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
-      result.xNames := xuyName[1:nx];
+    result.A := ABCD[1:nx, 1:nx];
+    result.B := ABCD[1:nx, nx + 1:nx + nu];
+    result.C := ABCD[nx + 1:nx + ny, 1:nx];
+    result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+    result.uNames := xuyName[nx + 1:nx + nu];
+    result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
+    result.xNames := xuyName[1:nx];
 
-      zp := StateSpace.Conversion.toZerosAndPolesMIMO(result);
+    zp := StateSpace.Conversion.toZerosAndPolesMIMO(result);
 
-      annotation (interactive=true, Documentation(info="function fromModel
-  \"Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model\"
-
-  import Modelica;
-  import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.ZerosAndPoles;
-
-  input String modelName \"Name of the Modelica model\" annotation(Dialog(translatedModel));
-  input Real T_linearize=0 \"point in time of simulation to linearize the model\";
-  input String fileName=\"dslin\" \"Name of the result file\";
-
-  annotation (interactive=true, Documentation(info=\"<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  zp </td><td align=center> =  </td>  <td> ZerosAndPoles.Import.<b>fromModel</b>(modelName, T_linearize, fileName)  </td> </tr>
@@ -1399,13 +1388,7 @@ Generate a matrix of ZerosAndPoles data records by linearization of a model defi
          0.283325*p*(p-5.23615)*(p + 0.551929)/( (p + 0.829834)*(p + 10.6304)*(p^2-7.27298*p + 18.1572) )]
 
 </pre></blockquote>
-
-
-
-
-</html> \"));
-
-"));
+</html>"));
   end fromModel;
 
     encapsulated function fromFile

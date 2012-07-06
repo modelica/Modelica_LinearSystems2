@@ -14,8 +14,7 @@ algorithm
     Modelica_LinearSystems2.Utilities.Plot.diagramVector(diagram[:, i], device2);
    end for;
 
-  annotation (interactive=true, Documentation(info="<html>
-
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function plots a set of 2-dimensional curves in a set of diagrams
 using a matrix layout. For an overview, see the documentation of package

@@ -31,5 +31,5 @@ algorithm
     heading="Bearing friction torques",
     xLabel="w [rad/s]",
     yLabel="[N.m]"));
-    annotation(interactive=true);
+    annotation(__Dymola_interactive=true);
 end plotTwoSine;

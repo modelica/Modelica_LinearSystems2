@@ -39,7 +39,7 @@ public
   output String stateNames[nx] =  xuyName[1:nx] "Modelica names of states";
 algorithm
 
-   annotation (interactive=true, Documentation(info="<html>
+   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function initializes a Modelica model and then simulates the model 
 until time instant \"t_linearize\". 

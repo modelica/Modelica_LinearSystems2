@@ -97,7 +97,7 @@ algorithm
                     marker=MarkerStyle.Square,
                     id=id);
   end for;
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>plotRootLoci(modelName, modelParam, simulationOptions, position, useLegend, grid, markerStyle, markerColorMin, markerColorMax)</pre></blockquote>
 

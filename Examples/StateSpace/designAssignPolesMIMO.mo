@@ -22,7 +22,7 @@ algorithm
   newPoles := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A-ss.B*K);
   Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
 
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 Computes the gain vector k for the state space system
 <pre>

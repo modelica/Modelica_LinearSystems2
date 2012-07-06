@@ -21,6 +21,5 @@ algorithm
   ok := true;
 equation
 
-  annotation (interactive=true,
-              interactive=true);
+  annotation (__Dymola_interactive=true);
 end plotBodeFilter1;

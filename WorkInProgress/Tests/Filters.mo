@@ -142,45 +142,47 @@ package Filters
                             getAmplitude(filter6, f_cut));
      end if;
 
-   annotation(interactive=true);
+   annotation(__Dymola_interactive=true);
   end plotFilter;
 
   function plotFilter2
     import ZP = Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica_LinearSystems2.Types;
-     input Modelica_LinearSystems2.Types.FilterType filterType
+    input Modelica_LinearSystems2.Types.FilterType filterType
       "Type of filter (LowPass/HighPass)";
-     input Modelica.SIunits.Frequency f_cut=3 "Cut-off frequency";
-     input Real A_ripple(unit="dB") = 0.5
+    input Modelica.SIunits.Frequency f_cut=3 "Cut-off frequency";
+    input Real A_ripple(unit="dB") = 0.5
       "Pass band ripple for Chebyshev filter (otherwise not used)";
-     input Modelica.SIunits.Frequency f_min=0
+    input Modelica.SIunits.Frequency f_min=0
       "Band of pass band filter is f_min (-3db) .. f_cut (-3db)";
-     input Boolean normalized=true
+    input Boolean normalized=true
       "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   algorithm
-     plotFilter(Types.AnalogFilter.CriticalDamping, filterType, f_cut, A_ripple, f_min, normalized);
-     plotFilter(Types.AnalogFilter.Bessel,          filterType, f_cut, A_ripple, f_min, normalized);
-     plotFilter(Types.AnalogFilter.Butterworth,     filterType, f_cut, A_ripple, f_min, normalized);
-     plotFilter(Types.AnalogFilter.Chebyshev,       filterType, f_cut, A_ripple, f_min, normalized);
-   annotation(interactive=true);
+    plotFilter(Types.AnalogFilter.CriticalDamping, filterType, f_cut, A_ripple, f_min, normalized);
+    plotFilter(Types.AnalogFilter.Bessel,          filterType, f_cut, A_ripple, f_min, normalized);
+    plotFilter(Types.AnalogFilter.Butterworth,     filterType, f_cut, A_ripple, f_min, normalized);
+    plotFilter(Types.AnalogFilter.Chebyshev,       filterType, f_cut, A_ripple, f_min, normalized);
+
+    annotation(__Dymola_interactive=true);
   end plotFilter2;
 
   function plotFilter3
     import ZP = Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica_LinearSystems2.Types;
-     input Modelica.SIunits.Frequency f_cut=3 "Cut-off frequency";
-     input Real A_ripple(unit="dB") = 0.5
+    input Modelica.SIunits.Frequency f_cut=3 "Cut-off frequency";
+    input Real A_ripple(unit="dB") = 0.5
       "Pass band ripple for Chebyshev filter (otherwise not used)";
-     input Modelica.SIunits.Frequency f_min=2
+    input Modelica.SIunits.Frequency f_min=2
       "Band of pass band filter is f_min (-3db) .. f_cut (-3db)";
-     input Boolean normalized=true
+    input Boolean normalized=true
       "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   algorithm
-     //plotFilter2(Types.FilterType.LowPass,  f_cut, A_ripple, f_min, normalized);
-     //plotFilter2(Types.FilterType.HighPass, f_cut, A_ripple, f_min, normalized);
-     // plotFilter2(Types.FilterType.BandPass, f_cut, A_ripple, f_min, normalized);
-     plotFilter2(Types.FilterType.BandStop, f_cut, A_ripple, f_min, normalized);
-   annotation(interactive=true);
+    //plotFilter2(Types.FilterType.LowPass,  f_cut, A_ripple, f_min, normalized);
+    //plotFilter2(Types.FilterType.HighPass, f_cut, A_ripple, f_min, normalized);
+    // plotFilter2(Types.FilterType.BandPass, f_cut, A_ripple, f_min, normalized);
+    plotFilter2(Types.FilterType.BandStop, f_cut, A_ripple, f_min, normalized);
+
+    annotation(__Dymola_interactive=true);
   end plotFilter3;
 
   function compareBaseFiltersWithTietzeSchenk
@@ -372,6 +374,6 @@ function the comparison is performed up to 3 significant digits.
             y=res,
             legend="residue")}));
 
-      annotation(interactive=true);
+    annotation(__Dymola_interactive=true);
   end plotAlphaForPassBand;
 end Filters;

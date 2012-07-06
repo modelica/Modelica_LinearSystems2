@@ -424,7 +424,7 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
 
       end printSystem;
 
-      annotation (interactive=true);
+      annotation (__Dymola_interactive=true);
     end analysis;
 
    encapsulated function timeResponse
@@ -514,7 +514,7 @@ x are calculated for each time step t=k*dt.
         response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
         x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
 
-  annotation(interactive=true, Documentation(info="<html>
+    annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = TransferFunction.Analysis.<b>timeResponse</b>(tf, dt, tSpan, responseType, x0)
@@ -580,7 +580,7 @@ and x are calculated for each time step t=k*dt.
         response=Modelica_LinearSystems2.Types.TimeResponse.Step,
         x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
 
-  annotation(interactive=true, Documentation(info="<html>
+    annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = TransferFunction.Analysis.<b>stepResponse</b>(tf, dt, tSpan, x0)
@@ -646,7 +646,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
         response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
         x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
 
-  annotation(interactive=true, Documentation(info="<html>
+    annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = TransferFunction.Analysis.<b>rampResponse</b>(tf, dt, tSpan, x0)
@@ -714,7 +714,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
         response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
         x0=x0);
 
-  annotation(interactive=true, Documentation(info="<html>
+    annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = TransferFunction.Analysis.<b>initialResponse</b>(tf, dt, tSpan, x0)
@@ -1552,25 +1552,26 @@ algorithm
     extends Modelica.Icons.Package;
 
   encapsulated function polesAndZeros
-      "Plot poles and/or the zeros of a transfer function"
+    "Plot poles and/or the zeros of a transfer function"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.TransferFunction;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.TransferFunction;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
+    import Modelica_LinearSystems2.Utilities.Plot;
 
     input TransferFunction tf "Linear system in transfer function form";
     input Boolean poles=true "= true, to plot the poles of tf" annotation(choices(__Dymola_checkBox=true));
     input Boolean zeros=true "= true, to plot the zeros of tf" annotation(choices(__Dymola_checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
-       defaultDiagram = Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
+      defaultDiagram = Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
 
   algorithm
-     StateSpace.Plot.polesAndZeros(StateSpace(tf), poles, zeros, defaultDiagram, device);
-         annotation (interactive=true, Documentation(info="<html>
+    StateSpace.Plot.polesAndZeros(StateSpace(tf), poles, zeros, defaultDiagram, device);
+
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>polesAndZeros</b>(tf);
@@ -1725,7 +1726,7 @@ and results in
           Plot.diagram(diagram2[1], device);
         end if;
 
-      annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>bode</b>(tf)
@@ -1815,7 +1816,7 @@ This function plots the bode-diagram of a transfer function.
 
       Plot.diagram(diagram2, device);
 
-      annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>timeResponse</b>(tf);
@@ -1859,41 +1860,41 @@ This function plots the time response of a transfer function. The character of t
   end timeResponse;
 
   encapsulated function impulse "Impulse response plot"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.TransferFunction;
+    import Modelica_LinearSystems2.Types.TimeResponse;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
+    import Modelica_LinearSystems2.Utilities.Plot;
 
-      input Modelica_LinearSystems2.TransferFunction tf "transfer function";
-      input Real dt=0 "Sample time [s]";
-      input Real tSpan=0 "Simulation time span [s]";
+    input Modelica_LinearSystems2.TransferFunction tf "transfer function";
+    input Real dt=0 "Sample time [s]";
+    input Real tSpan=0 "Simulation time span [s]";
 
-      input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
-          TransferFunction.Analysis.denominatorDegree(tf))
-        "Initial state vector";
+    input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
+      TransferFunction.Analysis.denominatorDegree(tf))
+      "Initial state vector";
 
-      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
-          defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response of  tf = "
-             + String(tf)));
+    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+      defaultDiagram=
+      Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response of  tf = "
+        + String(tf)));
 
-    protected
-      input Modelica_LinearSystems2.Types.TimeResponse response=
-          Modelica_LinearSystems2.Types.TimeResponse.Impulse
-        "type of time response";
+  protected
+    input Modelica_LinearSystems2.Types.TimeResponse response=
+      Modelica_LinearSystems2.Types.TimeResponse.Impulse
+      "type of time response";
   algorithm
-      Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
-          tf=tf,
-          dt=dt,
-          tSpan=tSpan,
-          response=response,
-          x0=x0,
-          defaultDiagram=defaultDiagram,
-          device=device);
+    Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
+      tf=tf,
+      dt=dt,
+      tSpan=tSpan,
+      response=response,
+      x0=x0,
+      defaultDiagram=defaultDiagram,
+      device=device);
 
-      annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>impulse</b>(tf)
@@ -1954,7 +1955,7 @@ This function plots the impulse response of a transfer function. It is based on 
            + String(tf)));
 
   algorithm
-   Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
+    Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
       tf=tf,
       dt=dt,
       tSpan=tSpan,
@@ -1963,7 +1964,7 @@ This function plots the impulse response of a transfer function. It is based on 
       defaultDiagram=defaultDiagram,
       device=device);
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>step</b>(tf)
@@ -2024,7 +2025,7 @@ This function plots the step response of a transfer function. It is based on <a 
            + String(tf)));
 
   algorithm
-   Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
+    Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
       tf=tf,
       dt=dt,
       tSpan=tSpan,
@@ -2035,7 +2036,7 @@ This function plots the step response of a transfer function. It is based on <a 
 
   equation
 
-         annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>ramp</b>(tf)
@@ -2107,17 +2108,16 @@ This function plots the ramp response of a transfer function. It is based on <a 
             ss.C,
             vector(y0)) "Initial state vector (for initial condition plot)";
   algorithm
+    Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
+      tf=tf,
+      dt=dt,
+      tSpan=tSpan,
+      response=response,
+      x0=x0,
+      defaultDiagram=defaultDiagram,
+      device=device);
 
-      Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
-          tf=tf,
-          dt=dt,
-          tSpan=tSpan,
-          response=response,
-          x0=x0,
-          defaultDiagram=defaultDiagram,
-          device=device);
-
-      annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>initialResponse</b>(tf)
@@ -2588,7 +2588,7 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
 
     tf := Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunctionMIMO(result);
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 tf = TransferFunction.Import.<b>fromModel</b>(modelName, T_linearize, fileName)

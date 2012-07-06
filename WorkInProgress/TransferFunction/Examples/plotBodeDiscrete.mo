@@ -22,5 +22,5 @@ algorithm
   Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction.Plot.bode(dtf);
   ok := true;
 
-  annotation (interactive=true);
+  annotation (__Dymola_interactive=true);
 end plotBodeDiscrete;

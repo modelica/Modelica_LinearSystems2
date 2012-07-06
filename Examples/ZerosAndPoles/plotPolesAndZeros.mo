@@ -17,5 +17,5 @@ algorithm
       heading="Poles and zeros of " + String(tf)),
       device=Modelica_LinearSystems2.Utilities.Plot.Records.Device(xTopLeft=50, yTopLeft=30));
 
-  annotation(interactive=true);
+  annotation(__Dymola_interactive=true);
 end plotPolesAndZeros;

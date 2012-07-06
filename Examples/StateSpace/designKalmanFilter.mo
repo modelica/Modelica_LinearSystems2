@@ -24,7 +24,7 @@ algorithm
    Q,
    R);
 
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 This example demonstrates the computatrion of a  Kalman filter by calling function <b>StateSpace.Design.kalmanFilter()</b>
 </html>"));
 end designKalmanFilter;

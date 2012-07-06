@@ -59,8 +59,7 @@ algorithm
     yTopLeft=0,
     diagramWidth=100));
 
-      annotation(interactive=true, Documentation(info="<html>
-
+    annotation(__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function plots the following diagram (with default input arguments):
 </p>
@@ -68,8 +67,5 @@ This function plots the following diagram (with default input arguments):
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showLegendStyles.png\">
 </blockquote>
-
-
-
 </html>"));
 end showLegendStyles;

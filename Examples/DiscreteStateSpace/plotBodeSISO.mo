@@ -31,7 +31,7 @@ algorithm
   Modelica_LinearSystems2.DiscreteStateSpace.Plot.bodeSISO(dss, iu,  iy);
   ok := true;
 
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 This example demonstrates the construnction of a zeros-and-poles-transfer-function from a SISO state space representation and plots the Bode diagrams with automatic determination of the frequency range to plot
 </html>"));
 end plotBodeSISO;

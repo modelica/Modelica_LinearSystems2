@@ -18,5 +18,5 @@ algorithm
 
 equation
 
-  annotation (interactive=true);
+  annotation (__Dymola_interactive=true);
 end plotBode1;

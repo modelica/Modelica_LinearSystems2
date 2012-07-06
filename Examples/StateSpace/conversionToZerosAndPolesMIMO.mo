@@ -40,7 +40,7 @@ algorithm
     end for;
   end for;
   ok := true;
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 This example demonstrates the conversion of a MIMO zeros-and-poles system into a state space system.
 </html>"));
 end conversionToZerosAndPolesMIMO;

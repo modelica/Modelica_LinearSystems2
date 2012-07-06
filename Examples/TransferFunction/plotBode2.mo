@@ -24,5 +24,5 @@ algorithm
     f_max=30);
   ok := true;
 
-  annotation (interactive=true);
+  annotation (__Dymola_interactive=true);
 end plotBode2;

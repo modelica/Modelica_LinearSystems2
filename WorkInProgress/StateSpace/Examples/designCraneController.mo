@@ -118,7 +118,7 @@ print("\nXXXXXXXXXXX:\n");
     true);
 
   print("\nok!");
-annotation (interactive=true, Documentation(info="<html>
+annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This example demonstrates how to design a lq-controller or a pole placement controller 
 respectively. Compared with example <b>craneController</b>, the plant is smaller to 

@@ -44,7 +44,7 @@ algorithm
   ok := false;
   StateSpace.Analysis.analysis(ss, fileName="analysis.html", analyseOptions=analyseOptions, description="Description of the system");
   ok := true;
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</b> which is
 to check whether a system is controllable or not.
 </html>"),    Documentation(info="<html>

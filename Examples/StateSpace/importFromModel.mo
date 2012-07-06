@@ -13,7 +13,7 @@ function importFromModel
   output StateSpace ss=StateSpace.Import.fromModel(modelName=modelName, T_linearize=T_linearize);
 algorithm
 
-annotation (interactive=true, Documentation(info="<html>
+annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>This example demonstrates how to generate a linear state space system from a (nonlinear) Modelica model.</p>
 </html>"));
 end importFromModel;

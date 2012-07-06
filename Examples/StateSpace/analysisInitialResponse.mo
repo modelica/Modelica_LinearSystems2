@@ -38,7 +38,7 @@ algorithm
                   heading="Initial response y2",
                   xLabel="time [s]")});
 
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 Computes and plots the initial response of a state space system by given initial values.
 </html>"));
 end analysisInitialResponse;

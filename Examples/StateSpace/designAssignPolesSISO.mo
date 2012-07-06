@@ -15,7 +15,7 @@ protected
       Modelica_LinearSystems2.Math.Complex(-4,0)};
 algorithm
   k := Modelica_LinearSystems2.StateSpace.Design.assignPolesSI(sc, p);
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 Computes the gain vector k for the state space system
 <pre>

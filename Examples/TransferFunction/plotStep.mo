@@ -10,7 +10,7 @@ Modelica_LinearSystems2.TransferFunction.Plot.step(
     tf=tf,
     dt=0.1,
     tSpan=10);
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 Computes the impulse response of the system tf =1/s^2 + s + 1.
 </html>"));

@@ -46,7 +46,7 @@ algorithm
                  heading="Impulse response to u2",
                  xLabel="time [s]",
                  yLabel="y1, y2")});
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 Computes and plots the impulse response of a state space system.
 </html>"));

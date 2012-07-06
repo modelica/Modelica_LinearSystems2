@@ -141,7 +141,7 @@ ss.D = [r];
 
   function fromZerosAndPoles =
     Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace
-    "Generate a StateSpace data record from a zeros-and-poles system"
+      "Generate a StateSpace data record from a zeros-and-poles system"
     annotation (Documentation(info="<html> </html>"));
 
     annotation (Documentation(info="<html>
@@ -668,6 +668,8 @@ encapsulated package Analysis
     Boolean instableZeros=false;
 
   algorithm
+    // Get eigenvalues
+    // ---------------
     (eval,levec,revec) := Modelica_LinearSystems2.Math.Matrices.eigenValues(ss.A);
 
     for i in 1:nx loop
@@ -678,7 +680,8 @@ encapsulated package Analysis
 
     (evSorted,evIndex) := Modelica_LinearSystems2.Internal.sortEigenvalue(ev);
 
-   // Build x names
+    // Build x names
+    // -------------
     if size(ss.xNames, 1) <> nx then
       for i in 1:nx loop
         xNames2[i] := "x[" + String(i) + "]";
@@ -687,29 +690,30 @@ encapsulated package Analysis
       xNames2 := ss.xNames;
     end if;
 
-  // ###### whole system checks ######
-  // stability check
+  // Whole system checks
+  // ===================
+    // Stability check
     isStable := true;
     for i in 1:nx loop
       isStable := isStable and ev[i].ev.re < 0;
     end for;
 
-  //controllability check, stabilizability check
+    // Controllability check, stabilizability check
     isControllable := StateSpace.Analysis.isControllable(ss);
     isStabilizable := StateSpace.Analysis.isStabilizable(ss);
 
-  // observability check, detectability check
+    // Observability check, detectability check
     isObservable := StateSpace.Analysis.isObservable(ss);
     isDetectable := StateSpace.Analysis.isDetectable(ss);
 
-  // analysis of single eingenvalues
+    // Analysis of single eingenvalues
     ev := StateSpace.Internal.characterizeEigenvalue(ss, ev);
 
-  // Sort eigen values according to smallest imaginary value and restore the original order
+    // Sort eigen values according to smallest imaginary value and restore the original order
     evSorted := Modelica_LinearSystems2.Internal.sortEigenvalue(ev);
 
-  // analysis file
-
+    // Analysis file
+    // -------------
     Modelica.Utilities.Files.removeFile(fileName);
     Modelica.Utilities.Files.removeFile(dummyFileName);
     if printStateSpaceSystem then
@@ -746,10 +750,11 @@ encapsulated package Analysis
 
     Modelica.Utilities.Streams.readFile(dummyFileName);
 
-  // Plot step response
+    // Plot step response
+    // ------------------
     if analyseOptions.plotStepResponse then
       Modelica.Utilities.Files.removeFile(dummyFileName);
-      print("<html>\n<body>\n<p>\n<b>Step responses</b>\n</p></body></html>",
+      print("<html>\n<body>\n<p>\n<b>Step responses</b>\n</p>\n</body>\n</html>",
         dummyFileName);
       Modelica.Utilities.Streams.readFile(dummyFileName);
       StateSpace.Plot.step(ss=ss);
@@ -2204,7 +2209,8 @@ encapsulated package Analysis
 
       print("</table>\n", fileName);
     end printTab4;
-    annotation (interactive=true, Documentation(info="<html>
+
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Modelica_LinearSystems2.StateSpace.Analysis.<b>analysis</b>(ss);
@@ -2608,7 +2614,7 @@ algorithm
       response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
       x0=zeros(size(sc.A, 1)));
 
-annotation(interactive=true, Documentation(info="<html>
+  annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = StateSpace.Analysis.<b>impulseResponse</b>(ss, dt, tSpan)
@@ -2676,7 +2682,7 @@ algorithm
       response=Modelica_LinearSystems2.Types.TimeResponse.Step,
       x0=zeros(size(sc.A, 1)));
 
-annotation(interactive=true, Documentation(info="<html>
+  annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = StateSpace.Analysis.<b>stepResponse</b>(ss, dt, tSpan)
@@ -2745,7 +2751,7 @@ algorithm
       response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
       x0=zeros(size(sc.A, 1)));
 
-annotation(interactive=true, Documentation(info="<html>
+  annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = StateSpace.Analysis.<b>rampResponse</b>(ss, dt, tSpan)
@@ -2818,7 +2824,7 @@ algorithm
       response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
       x0=x0);
 
-annotation(interactive=true, Documentation(info="<html>
+  annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = StateSpace.Analysis.<b>initialResponse</b>(ss, dt, tSpan, x0)
@@ -5042,7 +5048,7 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
          diagram2.curve :=curves[1:i];
          Plot.diagram(diagram2,device);
 
-           annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>polesAndZeros</b>(ss);
@@ -5161,7 +5167,7 @@ and results in
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>bodeSISO</b>(ss)
@@ -5276,7 +5282,7 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
         end for;
       end for;
 
-      annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>bodeMIMO</b>(ss)
@@ -5400,7 +5406,7 @@ StateSpace.Plot.<b>bodeMIMO</b>(
         end if;
       end for;
 
-      annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>timeResponse</b>(ss);
@@ -5478,7 +5484,7 @@ This function plots the time response of a state space system. The character of 
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>impulse</b>(ss);
@@ -5555,7 +5561,7 @@ See also
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>step</b>(ss);
@@ -5629,7 +5635,7 @@ This function plots the step responses of a state space system for each system c
           defaultDiagram=defaultDiagram,
           device=device);
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>ramp</b>(ss);
@@ -5703,7 +5709,7 @@ This function plots the ramp responses of a state space system for each system c
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>initial</b>(ss);
@@ -6839,7 +6845,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
     result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
     result.xNames := xuyName[1:nx];
 
-    annotation (interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ss = StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)
@@ -9644,7 +9650,7 @@ k = ---------- * ----------------------
       result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
       result.xNames := xuyName[1:nx];
 
-            annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ss = StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)

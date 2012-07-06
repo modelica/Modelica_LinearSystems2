@@ -60,5 +60,5 @@ algorithm
 
   ok := true;
 
-  annotation (interactive=true);
+  annotation (__Dymola_interactive=true);
 end plotBodeFilter3;

@@ -53,5 +53,5 @@ algorithm
     f_max=f_max);
    ok := true;
 
-  annotation (interactive=true);
+  annotation (__Dymola_interactive=true);
 end plotBode3;

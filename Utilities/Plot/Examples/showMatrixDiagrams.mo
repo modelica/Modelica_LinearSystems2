@@ -28,5 +28,5 @@ algorithm
     5,
     3), Records.Device(diagramWidth=80));
 
-  annotation(interactive=true);
+  annotation(__Dymola_interactive=true);
 end showMatrixDiagrams;

@@ -63,7 +63,7 @@ algorithm
 
   print("\nok!");
 
-  annotation (interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This example demonstrates how to design pole placement controller to balance an inverted pendulum. For controller design a linearized model of a (simple) physical system model is used.
 The controller is applied to the physical model in Moldelica_Controller library.

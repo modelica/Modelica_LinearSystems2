@@ -624,7 +624,7 @@ The outputs y and x are calculated from the system equations of the discrete sta
         response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
         x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
-    annotation(interactive=true, Documentation(info="<html>
+    annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>impulseResponse</b>(dtf, tSpan, x0) 
@@ -667,31 +667,30 @@ The outputs y and x of the discrete state space systrem are calculated for each 
     encapsulated function stepResponse
       "Calculate the step time response of a discrete transfer function"
 
-          import Modelica;
-          import Modelica_LinearSystems2;
-          import Modelica_LinearSystems2.DiscreteTransferFunction;
-          import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
-          extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
+      extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
     protected
-          Real tSpanVar;
+      Real tSpanVar;
     algorithm
+      // set simulation time span
+      if tSpan == 0 then
+        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
+          DiscreteStateSpace(dtf));
+      else
+        tSpanVar := tSpan;
+      end if;
 
-    // set simulation time span
-          if tSpan == 0 then
-            tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
-              DiscreteStateSpace(dtf));
-          else
-            tSpanVar := tSpan;
-          end if;
+      (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
+        dtf=dtf,
+        tSpan=tSpanVar,
+        response=Modelica_LinearSystems2.Types.TimeResponse.Step,
+        x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
-          (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
-            dtf=dtf,
-            tSpan=tSpanVar,
-            response=Modelica_LinearSystems2.Types.TimeResponse.Step,
-            x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
-
-          annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>stepResponse</b>(dtf, tSpan, x0)
@@ -734,32 +733,31 @@ The outputs y and x of the discrete state space systrem are calculated for each 
     encapsulated function rampResponse
       "Calculate the ramp time response of a discrete transfer function"
 
-          import Modelica;
-          import Modelica_LinearSystems2;
-          import Modelica_LinearSystems2.DiscreteTransferFunction;
-          import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
-        // Input/Output declarations of time response functions:
-          extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
+    // Input/Output declarations of time response functions:
+      extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
 
     protected
-          Real tSpanVar;
+      Real tSpanVar;
     algorithm
+      // set simulation time span
+      if tSpan == 0 then
+        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
+          DiscreteStateSpace(dtf));
+      else
+        tSpanVar := tSpan;
+      end if;
+      (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
+        dtf=dtf,
+        tSpan=tSpanVar,
+        response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
+        x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
-    // set simulation time span
-          if tSpan == 0 then
-            tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
-              DiscreteStateSpace(dtf));
-          else
-            tSpanVar := tSpan;
-          end if;
-          (y,t,x_discrete) := DiscreteTransferFunction.Analysis.timeResponse(
-            dtf=dtf,
-            tSpan=tSpanVar,
-            response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
-            x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
-
-          annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>rampResponse</b>(dtf, tSpan, x0)
@@ -809,27 +807,26 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 
       input Real x0[:]=fill(0,0) "Initial state vector";
 
-        // Input/Output declarations of time response functions:
+    // Input/Output declarations of time response functions:
       extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;
 
     protected
-          Real tSpanVar;
+      Real tSpanVar;
     algorithm
-
-    // set simulation time span
-          if tSpan == 0 then
-            tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
-              DiscreteStateSpace(dtf));
-          else
-            tSpanVar := tSpan;
-          end if;
+      // set simulation time span
+      if tSpan == 0 then
+        tSpanVar := DiscreteStateSpace.Internal.timeResponseSamples(
+          DiscreteStateSpace(dtf));
+      else
+        tSpanVar := tSpan;
+      end if;
       (y,t,x_discrete) := Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.timeResponse(
           dtf=dtf,
           tSpan=tSpanVar,
           response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
           x0=x0);
 
-    annotation(interactive=true, Documentation(info="<html>
+    annotation(__Dymola_interactive=true, Documentation(info="<html>
  <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>initialResponse</b>(x0, dtf, tSpan)
@@ -963,7 +960,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       Plot.Records.Diagram diagram2[2];
 
     algorithm
-            // Determine frequency vector f
+      // Determine frequency vector f
       if autoRange then
         (numZerosZ,denZerosZ) := TransferFunction.Analysis.zerosAndPoles(tf);
       else
@@ -972,7 +969,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       end if;
 
       numZeros := fill(Complex(0),0);
-     // numZeros := fill(Complex(0),size(numZerosZ,1));
+      // numZeros := fill(Complex(0),size(numZerosZ,1));
       // for i in 1:size(numZerosZ,1) loop
       //   numZeros[i] := Complex.log(numZerosZ[i])/dtf.Ts;
       // end for;
@@ -1005,8 +1002,8 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
       end for;
 
-     // Plot computed frequency response
-     diagram2 := fill(defaultDiagram, 2);
+      // Plot computed frequency response
+      diagram2 := fill(defaultDiagram, 2);
       i := 0;
       if magnitude then
         i := i + 1;
@@ -1035,14 +1032,13 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
        end if;
       end if;
 
-        if magnitude and phase then
-          Plot.diagramVector(diagram2, device);
-        else
-          Plot.diagram(diagram2[1], device);
-        end if;
+      if magnitude and phase then
+        Plot.diagramVector(diagram2, device);
+      else
+        Plot.diagram(diagram2[1], device);
+      end if;
 
-      annotation (interactive=true, Documentation(info="<html>
-
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 </html> "));
     end bode;
 
@@ -1107,37 +1103,36 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       diagram2.curve := {curve};
 
       Plot.diagram(diagram2, device);
-      annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 
 </html>"));
     end timeResponse;
 
     encapsulated function impulse
       "Impulse response plot of a discrete transfer function"
-          import Modelica;
-          import Modelica_LinearSystems2;
-          import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
-          import Modelica_LinearSystems2.Utilities.Plot;
+      input DiscreteTransferFunction dtf "zeros-and-poles transfer function";
+      input Real tSpan=0 "Simulation time span [s]";
 
-        input DiscreteTransferFunction dtf "zeros-and-poles transfer function";
-        input Real tSpan=0 "Simulation time span [s]";
-
-        extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-             Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response of  zp = "
-               + String(dtf)));
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+           Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response of  zp = "
+             + String(dtf)));
 
     protected
-        input Modelica_LinearSystems2.Types.TimeResponse response=
-            Modelica_LinearSystems2.Types.TimeResponse.Impulse
-        "type of time response";
+      input Modelica_LinearSystems2.Types.TimeResponse response=
+        Modelica_LinearSystems2.Types.TimeResponse.Impulse
+        "Type of time response";
 
-       Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
-            DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
+      Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
+           DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
         "Initial state vector";
     algorithm
-    // set sample time
-        Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
+      // set sample time
+      Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
           dtf=dtf,
           tSpan=tSpan,
           response=response,
@@ -1145,20 +1140,17 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
           defaultDiagram=defaultDiagram,
           device=device);
 
-        annotation (interactive=true, Documentation(info="<html>
-
-
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 </html> "));
     end impulse;
 
     encapsulated function step
       "Step response plot of a discrete transfer function"
-          import Modelica;
-          import Modelica_LinearSystems2;
-          import Modelica_LinearSystems2.DiscreteTransferFunction;
-          import Modelica_LinearSystems2.Types.TimeResponse;
-
-          import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
       input DiscreteTransferFunction dtf;
       input Real tSpan=0 "Simulation time span [s]";
@@ -1176,7 +1168,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
         "Initial state vector";
 
     algorithm
-     DiscreteTransferFunction.Plot.timeResponse(
+      DiscreteTransferFunction.Plot.timeResponse(
         dtf=dtf,
         tSpan=tSpan,
         response=response,
@@ -1186,7 +1178,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
     equation
 
-      annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 </html>"));
     end step;
 
@@ -1222,7 +1214,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 
 </html> "));
     end ramp;
@@ -1265,7 +1257,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
             defaultDiagram=defaultDiagram,
             device=device);
 
-      annotation (interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 
 
 </html> "));
@@ -1577,13 +1569,9 @@ with
     //     end for;
     //   end for;
 
-  annotation (interactive=true, Documentation(info="<html>
-
-
-
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 </html> "));
   end fromModel;
-
 
   end Import;
 

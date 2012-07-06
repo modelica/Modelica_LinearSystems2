@@ -114,7 +114,7 @@ record Polynomial "Record defining the data for a polynomial"
     algorithm
       Polynomial.plot(p);
       ok := true;
-      annotation (interactive=true);
+      annotation (__Dymola_interactive=true);
     end plotPolynomial;
   end Examples;
 
@@ -597,8 +597,8 @@ in a least squares sense.
 
   equation
 
-    annotation (interactive=true,
-                Documentation(info="<html>
+    annotation (__Dymola_interactive=true,
+      Documentation(info="<html>
 <p>
 Plots the given polynomial. If default arguments are used, as in:
 </p>

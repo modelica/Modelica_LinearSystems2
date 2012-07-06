@@ -4,7 +4,7 @@ algorithm
   Modelica_LinearSystems2.Utilities.Plot.rootLocus(
      "Modelica.Mechanics.Rotational.Examples.First",
      modelParam={Modelica_LinearSystems2.Records.ParameterVariation(Name="Jload", Min=1, Max=20, nVar=30, Unit="kg.m2")});
-    annotation(interactive=true, Documentation(info="<html>
+    annotation(__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function plots the root locus of model
 <a href=\"modelica://Modelica.Mechanics.Rotational.Examples.First\">Rotational.Examples.First</a>
