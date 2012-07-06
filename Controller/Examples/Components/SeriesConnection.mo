@@ -55,11 +55,9 @@ equation
       points={{11,-30},{50,-30},{50,-8}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-            -100},{100,100}}), graphics), Documentation(info="<html>
+  annotation ( Documentation(info="<html>
 </html>"),
     experiment(StopTime=1.5, Tolerance=1e-006),
-    experimentSetupOutput,
     Icon(graphics={
         Rectangle(extent={{-66,26},{-20,-10}}, lineColor={0,0,255}),
         Rectangle(extent={{20,26},{72,-10}}, lineColor={0,0,255}),

@@ -83,7 +83,7 @@ no or infinitely many solutions (input A is singular).");
 
   annotation (Documentation(info="<html>
 <p>
-Function <b>dare</b> computes the solution <b>X</b> of the discrete-time 
+Function <b>dare</b> computes the solution <b>X</b> of the discrete-time
 algebraic Riccati equation
 </p>
 <blockquote><pre>
@@ -93,8 +93,8 @@ algebraic Riccati equation
 using the Schur vector approach proposed by Laub [1].
 </p>
 <p>
-It is assumed that <b>Q</b> is symmetric and positve semidefinite and <b>R</b> 
-is symmetric, nonsingular and positive definite, (<b>A</b>,<b>B</b>) is stabilizable 
+It is assumed that <b>Q</b> is symmetric and positve semidefinite and <b>R</b>
+is symmetric, nonsingular and positive definite, (<b>A</b>,<b>B</b>) is stabilizable
 and (<b>A</b>,<b>Q</b>) is detectable.
 <b>The assumptions are not checked in this function</b>
 </p>
@@ -139,10 +139,10 @@ according to <b>X</b>, the solution <b>X</b> can be calculated by
 </pre></blockquote>
 
 <p>
-The algorithm uses LAPACK routines dgehrd (to compute the upper Hessenberg matrix 
-of <b>H</b>), dorghr (to calculate the orthogonal matrix from the elementary reflectors 
-as returned from dgehrd), dhseqr (to put transformed <b>H</b> to Schur form and to 
-calculate the eigenvalues of the closed loop system) and dtrsen (to compute the ordered 
+The algorithm uses LAPACK routines dgehrd (to compute the upper Hessenberg matrix
+of <b>H</b>), dorghr (to calculate the orthogonal matrix from the elementary reflectors
+as returned from dgehrd), dhseqr (to put transformed <b>H</b> to Schur form and to
+calculate the eigenvalues of the closed loop system) and dtrsen (to compute the ordered
 real Schur form and matrix <b>U</b>).
 </p>
 

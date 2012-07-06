@@ -139,10 +139,6 @@ equation
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="%inputSampleFactor | %outputSampleFactor")}),
-    Diagram(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics),
     Documentation(info="<html>
 <p>
 This block decreases the sampling time from the sampling time of the input signal

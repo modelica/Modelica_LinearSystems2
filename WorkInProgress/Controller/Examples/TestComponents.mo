@@ -136,9 +136,5 @@ equation
       points={{1,-150},{20,-150},{20,-120},{-10,-120},{-10,-112}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-            -260},{100,260}}), graphics),
-    experiment(StopTime=5),
-    experimentSetupOutput,
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}})));
+  annotation (    experiment(StopTime=5));
 end TestComponents;

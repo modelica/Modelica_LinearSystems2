@@ -627,7 +627,7 @@ The outputs y and x are calculated from the system equations of the discrete sta
     annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(y, t, x) = DiscreteTransferFunction.Analysis.<b>impulseResponse</b>(dtf, tSpan, x0) 
+(y, t, x) = DiscreteTransferFunction.Analysis.<b>impulseResponse</b>(dtf, tSpan, x0)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -1319,9 +1319,9 @@ dzp = k * ---------------------------------------------------------
            product(q + d1[i]) * product(q^2 + d2[i,1]*q + d2[i,2])
 </pre></blockquote>
 <p>
-of a discrete transfer function representated by numerator and denominator 
-polynomial. The poles and zeros and the gain <tt>k</tt> are computed from 
-the DiscreteTransferFunction-input and are used as inputs the 
+of a discrete transfer function representated by numerator and denominator
+polynomial. The poles and zeros and the gain <tt>k</tt> are computed from
+the DiscreteTransferFunction-input and are used as inputs the
 DiscreteZerosAndPoles constructor.
 </p>
 

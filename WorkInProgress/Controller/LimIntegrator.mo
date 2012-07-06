@@ -167,11 +167,6 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    Window(
-      x=0.29,
-      y=0.05,
-      width=0.53,
-      height=0.54),
     Documentation(info="<html>
 <p>
 This blocks defines the transfer function between the input u and
@@ -222,9 +217,5 @@ interpreted as \"initType = InitialState\".
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
-          textString="%sampleFactor")}),
-    Diagram(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics));
+          textString="%sampleFactor")}));
 end LimIntegrator;

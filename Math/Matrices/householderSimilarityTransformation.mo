@@ -44,7 +44,7 @@ This transformation is widely used for transforming non-symmetric matrices to a 
 </p>
 
 <p>
-See also 
+See also
 <a href=\"modelica://Modelica.Math.Matrices.Utilities.householderReflection\">Matrices.housholderReflection</a>,
 </p>
 

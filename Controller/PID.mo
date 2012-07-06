@@ -237,8 +237,5 @@ to compute u by an algebraic equation.
 
 </HTML>
 
-"), Diagram(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics));
+"));
 end PID;

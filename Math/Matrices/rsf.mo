@@ -94,29 +94,29 @@ algorithm
 
 <h4>Description</h4>
 <p>
-Function <b>rsf</b> (real Schur form) calculates the real Schur form af 
+Function <b>rsf</b> (real Schur form) calculates the real Schur form af
 a real square matrix <b>A</b>, i.e.
 </p>
 <blockquote>
   <b>A</b> = <b>Z</b>*<b>T</b>*<b>Z</b><sup>T</sup>
 </blockquote>
 <p>
-with the real nxn matrices <b>T</b> and <b>Z</b>. <b>Z</b> is an orthogonal matrix. 
-<b>T</b> is an block upper triangular matrix with 1x1 and 2x2 blocks in the diagonal. 
-The 1x1 blocks contains the real eigenvalues of&nbsp;a. The 2x2 blocks are matrices with 
-the conjugated complex pairs of eigenvalues, whereas the real parts of the eigenvalues 
+with the real nxn matrices <b>T</b> and <b>Z</b>. <b>Z</b> is an orthogonal matrix.
+<b>T</b> is an block upper triangular matrix with 1x1 and 2x2 blocks in the diagonal.
+The 1x1 blocks contains the real eigenvalues of&nbsp;a. The 2x2 blocks are matrices with
+the conjugated complex pairs of eigenvalues, whereas the real parts of the eigenvalues
 are the elements of the diagonal.
 </p>
 <p>
-The calculation is performed stepwise using several lapack routines. 
-First, lapack.dgehrd reduces matrix <b>A</b> is to upper Hessenberg form 
-<b>H</b>=<b>Q'AQ</b>, whereas <b>Q</b> is computed by lapack.dodrghr. 
-Finally, lapack.dhseqr transforms <b>H</b> to <b>T</b>. The eigenvalues 
+The calculation is performed stepwise using several lapack routines.
+First, lapack.dgehrd reduces matrix <b>A</b> is to upper Hessenberg form
+<b>H</b>=<b>Q'AQ</b>, whereas <b>Q</b> is computed by lapack.dodrghr.
+Finally, lapack.dhseqr transforms <b>H</b> to <b>T</b>. The eigenvalues
 of <b>A</b> are calculated straightforward from <b>T</b>.
 </p>
 <p>
-Function <b>rsf</b> does not apply lapack.dgees, a routine to directly compute 
-the real Schur from. 
+Function <b>rsf</b> does not apply lapack.dgees, a routine to directly compute
+the real Schur from.
 </p>
 <p>
 See also

@@ -90,11 +90,6 @@ initial equation
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="%sampleFactor")}),
-    Window(
-      x=0.27,
-      y=0.13,
-      width=0.55,
-      height=0.75),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

@@ -440,14 +440,14 @@ controllable.
 </p>
 
 <p>
-If the feedback matrix <b>K</b> is taken in a form 
+If the feedback matrix <b>K</b> is taken in a form
 </p>
 <blockquote><pre>
 <b>K</b> = [0, <b>K</b>2]
 </pre></blockquote>
 <p>
 the special structure of <b>F</b> and <b>K</b> results in a closed loop state
-matrix 
+matrix
 </p>
 <blockquote><pre>
           |<b>F</b>1 <b>F</b>3 - <b>G</b>1*<b>K</b>2|

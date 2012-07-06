@@ -69,9 +69,9 @@ algorithm
 
 <h4>Description</h4>
 <p>
-This function extracts the real zeros from the Complex vector 
-&quot;complexVector&quot;. It is required that all elements of complexVector 
-define either a real zero (complexVector[i].im=0) or a conjugate complex zero 
+This function extracts the real zeros from the Complex vector
+&quot;complexVector&quot;. It is required that all elements of complexVector
+define either a real zero (complexVector[i].im=0) or a conjugate complex zero
 pair
 (complexVector[i].re == complexVector[i+1].re and
 complexVector[i].im == -complexVector[i+1].im).

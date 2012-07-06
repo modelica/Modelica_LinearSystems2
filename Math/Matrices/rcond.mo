@@ -30,8 +30,8 @@ algorithm
 
 <h4>Description</h4>
 <p>
-This function estimates the reciprocal of the condition number 
-(norm(<b>A</b>) * norm(inv(<b>A</b>))) of a general real matrix <b>A</b>, 
+This function estimates the reciprocal of the condition number
+(norm(<b>A</b>) * norm(inv(<b>A</b>))) of a general real matrix <b>A</b>,
 in either the 1-norm or the infinity-norm, using the LAPACK function DGECON.
 </p>
 <p>

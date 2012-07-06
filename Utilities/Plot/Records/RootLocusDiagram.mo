@@ -7,10 +7,10 @@ record RootLocusDiagram "Properties of a root locus diagram"
   Boolean grid=true "True, if grid is shown" annotation(Dialog,  choices(__Dymola_checkBox=true));
 
 /*
-  Integer markerColorMin[3]={0,0,255} 
+  Integer markerColorMin[3]={0,0,255}
     "Color of marker for minimum parameter value"
     annotation(Dialog(colorSelector=true));
-  Integer markerColorMax[3]={255,0,0} 
+  Integer markerColorMax[3]={255,0,0}
     "Color of marker for maximum parameter value"
     annotation(Dialog(colorSelector=true));
 */

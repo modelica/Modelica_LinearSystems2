@@ -184,10 +184,10 @@ ss = Modelica_LinearSystems2.StateSpace.'-'.<b>subtract</b>(ss1, ss2)
 
 <h4>Description</h4>
 <p>
-This operator function computes the subtraction of two state space systems 
-connected in parallel, i.e. the inputs are the same and the outputs of the two 
-systems are subtracted. Therefore, The systems must have the same number of 
-inputs and outputs but not the same number of states. The resulting system has 
+This operator function computes the subtraction of two state space systems
+connected in parallel, i.e. the inputs are the same and the outputs of the two
+systems are subtracted. Therefore, The systems must have the same number of
+inputs and outputs but not the same number of states. The resulting system has
 an order of system_order1 + system_order2.
 </p>
 <p>
@@ -407,6 +407,5 @@ with
 <li> x - the state vector</li>
 <li> A,B,C,D - matrices of appropriate dimensions</li>
 </ul>
-</html>"),
-    DymolaStoredErrors);
+</html>"));
 end StateSpace2;

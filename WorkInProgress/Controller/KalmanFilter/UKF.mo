@@ -59,7 +59,7 @@ equation
     (x_est, y_est, P, K) = Design.UKF(function F_function(), function H_function(), pre(x_est), pre(u), y_measure, pre(P), Q2, R, alpha, beta, kappa, Ts);
   end when;
 
-  annotation (Diagram(graphics), Icon(graphics={
+  annotation ( Icon(graphics={
         Text(
           extent={{-84,34},{76,-40}},
           lineColor={0,0,0},

@@ -1,3 +1,3 @@
 within Modelica_LinearSystems2.WorkInProgress.StateSpace;
-package Transformation 
+package Transformation
 end Transformation;

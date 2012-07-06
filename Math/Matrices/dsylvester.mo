@@ -120,8 +120,8 @@ Function <b>dsylvester</b> computes the solution <b>X</b> of the discrete-time S
   <b>A</b>*<b>X</b>*<b>B</b> + sgn*<b>X</b> = <b>C</b>.
 </blockquote>
 <p>
-where sgn = 1 or sgn = -1. The algorithm applies the Hessenberg-Schur 
-method proposed by Golub et al [1]. For sgn = -1, the discrete Sylvester 
+where sgn = 1 or sgn = -1. The algorithm applies the Hessenberg-Schur
+method proposed by Golub et al [1]. For sgn = -1, the discrete Sylvester
 equation is also known as Stein equation:
 </p>
 <blockquote>
@@ -134,19 +134,19 @@ In a nutshell, the problem is reduced to the corresponding problem
   <b>H</b>*<b>Y</b>*<b>S</b>' + sgn*<b>Y</b> = <b>F</b>.
 </blockquote>
 <p>
-with <b>H</b>=<b>U</b>'*<b>A</b>*<b>U</b> is the Hessenberg form 
-of <b>A</b> and <b>S</b>=<b>V</b>'*<b>B</b>'*<b>V</b> is the real Schur 
-form of <b>B</b>', <b>F</b>=<b>U</b>'*<b>C</b>*<b>V</b> and 
-<b>Y</b>=<b>U</b>*<b>X</b>*<b>V</b>' are appropriate transformations 
-of <b>C</b> and <b>X</b>. This problem is solved sequently by exploiting 
+with <b>H</b>=<b>U</b>'*<b>A</b>*<b>U</b> is the Hessenberg form
+of <b>A</b> and <b>S</b>=<b>V</b>'*<b>B</b>'*<b>V</b> is the real Schur
+form of <b>B</b>', <b>F</b>=<b>U</b>'*<b>C</b>*<b>V</b> and
+<b>Y</b>=<b>U</b>*<b>X</b>*<b>V</b>' are appropriate transformations
+of <b>C</b> and <b>X</b>. This problem is solved sequently by exploiting
 the specific forms of <b>S</b> and <b>H</b>.
-Finally, the solution of the the original problem is recovered as 
+Finally, the solution of the the original problem is recovered as
 <b>X</b>=<b>U</b>'*<b>Y</b>*<b>V</b>.
 </p>
 <p>
-The boolean inputs \"AisHess\" and \"BTisSchur\" indicate to omit one 
-or both of the transformation to Hessenberg form or Schur form, repectively, 
-in the case that <b>A</b> and/or <b>B</b> have already Hessenberg form 
+The boolean inputs \"AisHess\" and \"BTisSchur\" indicate to omit one
+or both of the transformation to Hessenberg form or Schur form, repectively,
+in the case that <b>A</b> and/or <b>B</b> have already Hessenberg form
 or Schur, respectively.
 </p>
 

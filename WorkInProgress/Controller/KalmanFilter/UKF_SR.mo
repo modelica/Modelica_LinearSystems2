@@ -66,7 +66,7 @@ equation
     (x_est, y_est, CfP, K) = Design.UKF_SR(function F_function(), function H_function(), pre(x_est), pre(u), y_measure, pre(CfP), CfQ, CfR, alpha, beta, kappa, Ts);
   end when;
 
-  annotation (Diagram(graphics), Icon(graphics={
+  annotation ( Icon(graphics={
         Text(
           extent={{52,30},{114,-26}},
           lineColor={0,0,255},

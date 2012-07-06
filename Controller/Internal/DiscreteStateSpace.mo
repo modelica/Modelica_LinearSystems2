@@ -140,11 +140,6 @@ initial equation
         Text(extent={{15,15},{90,90}}, textString="B"),
         Text(extent={{-90,-15},{-15,-90}}, textString="C"),
         Text(extent={{15,-15},{90,-90}}, textString="D")}),
-    Window(
-      x=0.27,
-      y=0.13,
-      width=0.55,
-      height=0.75),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

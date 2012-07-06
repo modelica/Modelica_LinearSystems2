@@ -96,7 +96,7 @@ matrix A was interchanged with row pivots[i].
 </pre></blockquote>
 
 <h4>See also</h4>
-<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a> and 
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a> and
 <a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>.
 </HTML>"));
 end LU;

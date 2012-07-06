@@ -338,5 +338,4 @@ public
     Modelica_LinearSystems2.Math.Complex S[:,:];
   end subSpace;
 
-  annotation (experiment, experimentSetupOutput);
 end assignPolesMI_rob_old;

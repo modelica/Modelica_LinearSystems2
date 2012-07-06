@@ -1583,6 +1583,5 @@ with j=sqrt(-1), is defined as
                            Complex(2,-3)},
                            k=4);
 </pre>
-</html>"),
-    DymolaStoredErrors);
+</html>"));
 end DiscreteZerosAndPoles;

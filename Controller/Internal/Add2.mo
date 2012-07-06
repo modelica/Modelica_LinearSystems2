@@ -39,8 +39,7 @@ equation
       points={{29,0},{56,0},{56,0},{90,0}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-            -100},{100,100}}), graphics), Icon(coordinateSystem(
+  annotation ( Icon(coordinateSystem(
           preserveAspectRatio=true, extent={{-100,-100},{100,100}}), graphics={
         Line(
           visible=fromLeft,
@@ -70,7 +69,7 @@ two input signals <b>u1</b> and <b>u2</b>:
     <b>y</b> = <b>u1</b> + <b>u2</b>;
 </pre>
 <p>
-The second input can be obtained either from left side of block or from bottom. 
+The second input can be obtained either from left side of block or from bottom.
 The corresponding connectors are <b>u2</b> or <b>u2b</b>, respectively.
 </p>
 </html>"));

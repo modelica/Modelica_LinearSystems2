@@ -6,8 +6,8 @@ package Types "Package of type definitions used for the plotting functions"
     preferedView="info",
     Documentation(info="<html>
 <p>
-This package contains type definitions. Generally, 
-the enumeration type is used to assign a unique choice of parameter 
+This package contains type definitions. Generally,
+the enumeration type is used to assign a unique choice of parameter
 within a model.
 </p>
 </html>"));

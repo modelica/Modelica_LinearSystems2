@@ -63,9 +63,5 @@ Example:
         grid={2,2}), graphics={Text(
           extent={{-88,-62},{92,58}},
           lineColor={160,160,164},
-          textString="*[kij]")}),
-    Diagram(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics));
+          textString="*[kij]")}));
 end MatrixGain;

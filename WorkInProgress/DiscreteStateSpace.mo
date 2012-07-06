@@ -220,7 +220,7 @@ dss = 'constructor'.<b>fromReal</b>(r, Ts, method)
 
 <h4>Description</h4>
 <p>
-This function constructs a DiscreteStateSpace record dss from a Real value, 
+This function constructs a DiscreteStateSpace record dss from a Real value,
 i.e. a discrete state space system without a state and an output without dynamics:
 </p>
 <blockquote><pre>

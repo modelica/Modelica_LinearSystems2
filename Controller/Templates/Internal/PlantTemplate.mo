@@ -15,6 +15,4 @@ partial model PlantTemplate "MIMO plant template"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,-110})));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-            -100},{100,100}}), graphics));
 end PlantTemplate;

@@ -42,7 +42,7 @@ i.e., by Gaussian elemination with partial pivoting.
 </p>
 <p>
 See also
-<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a> and 
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a> and
 <a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>.
 </p>
 

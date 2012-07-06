@@ -58,9 +58,9 @@ distribution. There are two types of techniques for transforming random variates
 <li>Transformation techniques</li>
 </ul>
 <p>
-Acceptance-Rejection techniques throw away some of the generated variates and 
-are thus less efficient. They can not be avoided for all distributions. 
-A good summary about random number generation and most of the transformation 
+Acceptance-Rejection techniques throw away some of the generated variates and
+are thus less efficient. They can not be avoided for all distributions.
+A good summary about random number generation and most of the transformation
 techniques used below is given in:
 </p>
  <address>
@@ -114,7 +114,7 @@ Copyright &copy; Hubertus Tummescheit and Department of Automatic Control, Lund 
 <p>
 <i>This Modelica function is <b>free</b> software; it can be redistributed and/or modified
 under the terms of the <b>Modelica license</b>, see the license conditions
-and the accompanying <b>disclaimer</b> in 
+and the accompanying <b>disclaimer</b> in
 <a href=\"modelica://Modelica.UsersGuide.ModelicaLicense2\">ModelicaLicense2</a>.</i>
 </p>
 </HTML>

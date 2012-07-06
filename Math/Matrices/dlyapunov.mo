@@ -77,7 +77,7 @@ algorithm
 
   annotation (Documentation(info="<html>
 <p>
-Function <b>laypunov</b> computes the solution <b>X</b> of the continuous-time 
+Function <b>laypunov</b> computes the solution <b>X</b> of the continuous-time
 Lyapunov equation
 </p>
 <blockquote><pre>

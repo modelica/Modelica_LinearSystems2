@@ -21,10 +21,6 @@ algorithm
        + a*0.00392377))))))));
   end if;
   annotation (
-    Coordsys(
-      extent=[-100, -100; 100, 100],
-      grid=[2, 2],
-      component=[20, 20]),
     Documentation(info="<HTML>
 <p>
 Polynomial approximation of the zeroth order modified Bessel function.
@@ -46,9 +42,5 @@ The function is used to calculate the Kaiser-window via
        Realized.</li>
 </ul>
 </HTML>
-"), Window(
-      x=0.44,
-      y=0.25,
-      width=0.49,
-      height=0.49));
+"));
 end bessel0;

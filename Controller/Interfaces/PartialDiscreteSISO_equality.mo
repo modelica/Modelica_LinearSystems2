@@ -38,17 +38,6 @@ equation
 initial equation
   pre(ticks) = 0;
   annotation (
-    Coordsys(
-      extent=[-100, -100; 100, 100],
-      grid=[2, 2],
-      component=[20, 20]),
-    Icon(graphics),
-    Window(
-      x=0.37,
-      y=0.09,
-      width=0.52,
-      height=0.68),
-    Diagram,
     Documentation(info="<HTML>
 </HTML>
 "));

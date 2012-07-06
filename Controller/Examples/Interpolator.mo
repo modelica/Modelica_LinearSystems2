@@ -50,8 +50,7 @@ equation
       points={{-19,10},{-12,10},{-12,-30},{-2,-30}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-            -100},{100,100}}), graphics), Documentation(info="<html>
+  annotation ( Documentation(info="<html>
 <p>
 This example demonstrates the usage of the
 <a href=\"modelica://Modelica_LinearSystems2.Controller.Interpolator\">Interpolator</a>
@@ -85,6 +84,5 @@ sample rates. In this example, a sampled sine-signal is interpolated in differen
 </p>
 
 </html>"),
-    experiment(StopTime=0.5),
-    experimentSetupOutput);
+    experiment(StopTime=0.5));
 end Interpolator;

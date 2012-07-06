@@ -67,10 +67,7 @@ equation
       points={{59,-20},{68,-20}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-            {100,100}}),       graphics), Icon(coordinateSystem(
-          preserveAspectRatio=true, extent={{-100,-100},{100,100}})),
-    Documentation(info="<html>
+  annotation (    Documentation(info="<html>
 <p>
 Template of a controller with two structural degrees of freedom and an inverse plant model in forward path.
 The functionality of such control system structures is described in [1].

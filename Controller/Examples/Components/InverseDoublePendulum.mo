@@ -406,10 +406,6 @@ equation
       smooth=Smooth.None));
   annotation (
     experiment(StopTime=50, Algorithm="Dassl"),
-    Diagram(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-150,-100},{150,100}},
-        grid={2,2}), graphics),
     Documentation(info="<html>
 
 Model of a simple inverted double pendulum system. The mdel is the same as in Modelica_Controller.Examples.Components.DoublePendulum but with different initial values because the initial values are used as a working point for linearization.<br>
@@ -418,7 +414,6 @@ linearized an used as a base for linear controller design. The results are used 
 in Modelica_Controller.Examples.InverseDoublePendulum.mo
 
 </html>"),
-    experimentSetupOutput,
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Rectangle(

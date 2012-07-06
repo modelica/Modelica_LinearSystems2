@@ -12,5 +12,4 @@ block blockFunction
 
 equation
   (y1,y2)=Modelica_LinearSystems2.WorkInProgress.Tests.temp.endFunction(function Modelica_LinearSystems2.WorkInProgress.Tests.temp.instFunction(),u1,u2);
-  annotation (Diagram(graphics));
 end blockFunction;

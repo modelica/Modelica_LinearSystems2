@@ -34,9 +34,9 @@ r = Matrices.<b>conditionNumber</b>(A);
 
 <h4>Description</h4>
 <p>
-This function calculates the the condition number 
-(norm(<b>A</b>) * norm(inv(<b>A</b>))) of a general real matrix <b>A</b>, 
-in either the 1-norm, 2-norm or the infinity-norm. In the case of 2-norm 
+This function calculates the the condition number
+(norm(<b>A</b>) * norm(inv(<b>A</b>))) of a general real matrix <b>A</b>,
+in either the 1-norm, 2-norm or the infinity-norm. In the case of 2-norm
 the result is the ratio of the largest to the smallest singular value to <b>A</b>.
 </p>
 <p>

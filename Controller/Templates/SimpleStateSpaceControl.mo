@@ -50,7 +50,5 @@ equation
       points={{90,-11},{90,-40},{86,-40}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (defaultComponentName="controller",Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-            -100},{100,100}}), graphics), Icon(coordinateSystem(
-          preserveAspectRatio=true, extent={{-100,-100},{100,100}})));
+  annotation (defaultComponentName="controller");
 end SimpleStateSpaceControl;

@@ -94,7 +94,6 @@ equation
       StopTime=60,
       NumberOfIntervals=2000,
       Tolerance=1e-005),
-    experimentSetupOutput,
     Documentation(info="<html>
 <p>
 This example shows a control system with constant state feedback.
@@ -115,7 +114,5 @@ Examples.StateSpace.designCraneController</a>.
 <dd> <b>Regelungstechnik</b>.
      H&uuml;thig-Verlag.<br>&nbsp;</dd>
 </dl>
-</html>"),
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-            100}})));
+</html>"));
 end InverseDoublePendulumWithObserver;

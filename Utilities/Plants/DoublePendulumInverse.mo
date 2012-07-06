@@ -114,9 +114,7 @@ equation
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-150,
-            -100},{150,100}}),
-                         graphics), Documentation(info="<html>
+  annotation ( Documentation(info="<html>
 <p>Multibody model of a simple inverted double pendulum system. This physical model is used in various models and functions of the library e.g. for linearization or as a base for linear controller design. The mdel is the same as in Modelica_Controller.Examples.Components.DoublePendulum but with different initial values because the initial values are used as a working point for linearization.</p>
 </html>"));
 end DoublePendulumInverse;

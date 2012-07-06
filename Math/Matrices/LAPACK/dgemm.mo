@@ -111,7 +111,7 @@ external "Fortran 77" dgemm(
             in  the  calling  (sub)  program.   LDC  must  be  at  least
             max( 1, m ).
             Unchanged on exit.
-  
+
    Further Details
    ===============
 

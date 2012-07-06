@@ -2225,7 +2225,7 @@ Modelica_LinearSystems2.StateSpace.Analysis.<b>analysis</b>(
 
 <h4>Description</h4>
 <p>
-This function analyzes a state space system 
+This function analyzes a state space system
 </p>
 <blockquote><pre>
 der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
@@ -2348,7 +2348,7 @@ A = x3   0    2    3    0   78    6     B = x3  1   0
 
         x1   x2   x3   x4   x5   x6            u1  u2
 C = y1   0    0    1    0    1    0     D = y1  0   0
-    y2   0    1    0    0    1    1         y2  0   0 
+    y2   0    1    0    0    1    1         y2  0   0
 </pre></blockquote>
 
 <h5>Description</h5>
@@ -2393,7 +2393,7 @@ not stable
 </table>
 
 <p>
-In the table above, the column <b>contribution to states</b> lists for each eigenvalue the states 
+In the table above, the column <b>contribution to states</b> lists for each eigenvalue the states
 to which thecorresponding modal state contributes most. This information is based on the
 two largest absolute values of the corresponding right eigenvector (if the second large value
 is less than 5&nbsp;% of the largest contribution, it is not shown).
@@ -2555,7 +2555,7 @@ listed in the last column might be not the most relevant one.
 
 <h4>Description</h4>
 <p>
-This function calculates the time responses of a state space system. The type of the time response is defined by the input <code>responseType</code>, i.e. 
+This function calculates the time responses of a state space system. The type of the time response is defined by the input <code>responseType</code>, i.e.
 </p>
 <blockquote><pre>
 Impulse &quot;Impulse response&quot;,
@@ -2564,7 +2564,7 @@ Ramp &quot;Ramp response&quot;,
 Initial &quot;Initial condition response&quot;
 </pre></blockquote>
 <p>
-The state space system is transformed to a appropriate discrete state space system and, 
+The state space system is transformed to a appropriate discrete state space system and,
 starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt.
 </p>
 
@@ -4352,7 +4352,7 @@ If the feedback matrix <b>K</b> is taken in a form
 </pre></blockquote>
 <p>
 the special structure of <b>F</b> and <b>K</b> results in a closed loop state
-matrix 
+matrix
 </p>
 <blockquote><pre>
           |<b>F</b>1 <b>F</b>3 - <b>G</b>1*<b>K</b>2|
@@ -4368,7 +4368,7 @@ appropriate feedback matrix <b>K</b>i. The matrix <b>F</b> - <b>G</b>*<b>K</b>i 
 assigned eigenvalue(s) is (are) then moved to another diagonal position of the real Schur
 form using reordering techniques <b>F</b> &lt; -- <b>Q</b>i*<b>F</b>*<b>Q</b>i'  and a new block is transferred to the
 lower right diagonal position. The transformations are accumulated in <b>Q</b>i and are also
-applicated to the matrices 
+applicated to the matrices
 </p>
 <blockquote><pre>
 <b>G</b> &lt; - <b>Q</b>i*<b>G</b> <b>Q</b> &lt; - <b>Q</b>i*<b>Q</b>
@@ -4585,7 +4585,7 @@ The algebraic Riccati equation is solved by using the Schur algorithm
 <li><i>2010/05/31 </i>
        by Marcus Baur, DLR-RM</li>
 </ul>
-</html>"),   DymolaStoredErrors);
+</html>"));
   end kalmanFilter;
 
     encapsulated function lqr "LQR design algorithm"
@@ -5182,14 +5182,14 @@ StateSpace.Plot.<b>bodeSISO</b>(
   f_max,
   magnitude=true,
   phase=true,
-  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), 
+  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
   device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-This function plots the bode-diagram of a transfer function corresponding 
-to the behavior of the state space system from iu'th element of the input 
+This function plots the bode-diagram of a transfer function corresponding
+to the behavior of the state space system from iu'th element of the input
 vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 </p>
 
@@ -5295,7 +5295,7 @@ StateSpace.Plot.<b>bodeMIMO</b>(
   f_max,
   magnitude=true,
   phase=true,
-  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), 
+  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
   device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
@@ -5500,8 +5500,8 @@ StateSpace.Plot.<b>impulse</b>(
 
 <h4>Description</h4>
 <p>
-This function plots the impulse responses of a state space system 
-for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. 
+This function plots the impulse responses of a state space system
+for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>.
 See also
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a> and
@@ -8196,8 +8196,7 @@ The unobservable poles are checked to be stable.
 
 
 
-</html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}), graphics));
+</html>"));
   end isDetectableMIMO;
 
   encapsulated function isObservableSISO
@@ -8251,7 +8250,7 @@ and that
 (<b>q</b>; <b>H</b>*<b>q</b>; ...; <b>q</b>*<b>H</b><sup><big>(n-1)</big></sup>)
 </pre></blockquote>
 <p>
-is a lower triangular matrix and has full rank if and only if none of the elements in 
+is a lower triangular matrix and has full rank if and only if none of the elements in
 the diagonal is zero. That is, that neither qn or hi,i-1,   i = 2,...,&nbsp;n   may be zero.
 </p>
 </html>"));
@@ -9704,6 +9703,5 @@ with
 <li> x ... the state vector,</li>
 <li> A, B, C, D - matrices of appropriate dimensions.</li>
 </ul>
-</html>"),
-    DymolaStoredErrors);
+</html>"));
 end StateSpace;

@@ -1059,7 +1059,7 @@ phase angle phi of the Complex number c in the range
 Generally, the functions in this package should not be used by the user.
 </p>
 <p>
-This package contains functions which cannot be used in an arbitrary 
+This package contains functions which cannot be used in an arbitrary
 way and require particular knowledge.
 Therefore, only advanced users should deal with such a functions.
 </p>

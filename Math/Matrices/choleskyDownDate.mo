@@ -76,16 +76,16 @@ Ldd = Matrices.<b>choleskyDownDate</b>(L, v, true);
 
 <h4>Description</h4>
 <p>
-This function computes the rank-1-downdated 
+This function computes the rank-1-downdated
 Cholesky factorization <b>Ldd</b>, with
 </p>
 <blockquote>
-  <b>Add</b> = <b>Ldd</b>*<b>Ldd</b><sup>T</sup> = 
-  <b>A</b> -  <b>v</b>*<b>v</b><sup>T</sup> = 
+  <b>Add</b> = <b>Ldd</b>*<b>Ldd</b><sup>T</sup> =
+  <b>A</b> -  <b>v</b>*<b>v</b><sup>T</sup> =
   <b>L</b>*<b>L</b><sup>T</sup> -  <b>v</b>*<b>v</b><sup>T</sup>
 </blockquote>
 <p>
-from the input <b>L</b>, i.e. the left (lower) Cholesky factor of the 
+from the input <b>L</b>, i.e. the left (lower) Cholesky factor of the
 original matrix <b>A</b>. The algortihm is taken from [1].
 </p>
 <p>
@@ -98,9 +98,9 @@ Matrix <b>Ldd</b> is calculated by
 with orthogonal Matrix <b>H</b> such that
 </p>
 <blockquote>
-  <b>v</b>*<b>v</b><sup>T</sup> + <b>Ldd</b>*<b>Ldd</b><sup>T</sup> = 
-  [<b>v</b>, <b>Ldd</b>] * [<b>v</b>, <b>Ldd</b>]<sup>T</sup> = 
-  [<b>0</b>, <b>L</b>]*<b>H</b><sup>T</sup> *<b>H</b>*[<b>0</b>, <b>L</b>]<sup>T</sup> = 
+  <b>v</b>*<b>v</b><sup>T</sup> + <b>Ldd</b>*<b>Ldd</b><sup>T</sup> =
+  [<b>v</b>, <b>Ldd</b>] * [<b>v</b>, <b>Ldd</b>]<sup>T</sup> =
+  [<b>0</b>, <b>L</b>]*<b>H</b><sup>T</sup> *<b>H</b>*[<b>0</b>, <b>L</b>]<sup>T</sup> =
   [<b>0</b>, <b>L</b>]*[<b>0</b>, <b>L</b>]<sup>T</sup> = <b>L</b>*<b>L</b><sup>T</sup> = <b>A</b>,
 </blockquote>
 <p>
@@ -137,11 +137,11 @@ The following sequence illustrate the principle of calculating the <b>H</b>_i, s
 |a|       |0|       |0|       |0|
 </pre></blockquote>
 <p>
-Note, that the z and a are different in each column. 
+Note, that the z and a are different in each column.
 It is shown in [1] that this algorithm results in the modified Cholesky factor <b>Ldd</b>.
 </p>
 <p>
-With the boolean input \"upper\" the user specifies whether the matrix <b>L</b> is lower 
+With the boolean input \"upper\" the user specifies whether the matrix <b>L</b> is lower
 or upper triangular matrix (left or right Cholesky factor).
 If \"upper==true\", the output <b>Ldd</b> is also upper triangular. Default is \"upper==false\".
 </p>

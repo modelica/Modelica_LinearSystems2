@@ -31,40 +31,7 @@ equation
 
   y = y_delaySampled;
   annotation (
-    Coordsys(
-      extent=[-100, -100; 100, 100],
-      grid=[2, 2],
-      component=[20, 20]),
-    Icon(
-      Text(
-        extent=[-90, 90; -10, 10],
-        string="D",
-        style(color=74, rgbcolor={0,0,127})),
-      Text(
-        extent=[10, -10; 90, -90],
-        string="A",
-        style(color=74, rgbcolor={0,0,127})),
-      Line(points=[-100, -100; 100, 100], style(color=74, rgbcolor={0,0,127})),
-      Text(
-        extent=[-150, -150; 150, -110],
-        string="bits=%bits",
-        style(color=0))),
-    Diagram(
-      Text(
-        extent=[-90, 90; -10, 10],
-        string="D",
-        style(color=74, rgbcolor={0,0,127})),
-      Text(
-        extent=[10, -10; 90, -90],
-        string="A",
-        style(color=74, rgbcolor={0,0,127})),
-      Line(points=[-100, -100; 100, 100], style(color=74, rgbcolor={0,0,127})),
-      Rectangle(extent=[-100, 100; 100, -100])),
     Documentation(info="<HTML>
 </HTML>
-"), Window(
-      x=0.45,
-      y=0.01,
-      width=0.35,
-      height=0.49));
+"));
 end DiscreteDAconverter;

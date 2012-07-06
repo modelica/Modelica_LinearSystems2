@@ -62,14 +62,5 @@ provided precision of the AD converter defined via parameter bits
 If <b>continuous</b> block, the output y is identical to the input u,
 but is limited by y_min and y_max.
 </p>
-</html>"),
-    Diagram(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics),
-    Window(
-      x=0.45,
-      y=0.01,
-      width=0.35,
-      height=0.49));
+</html>"));
 end ADconverter;

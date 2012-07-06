@@ -365,7 +365,7 @@ G(p) = ------- = --- * ----------- = k * F(p),   k = a/b
 for first order systems respectively.
 </p>
 <p>
-The complete system is now considered as the series connections of all 
+The complete system is now considered as the series connections of all
 the single unit gain transfer functions and an overall gain k with
 </p>
 <blockquote><pre>

@@ -27,11 +27,6 @@ initial equation
   end if;
   annotation (
   defaultComponentName="firstOrder",
-    Window(
-      x=0.27,
-      y=0.1,
-      width=0.57,
-      height=0.75),
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

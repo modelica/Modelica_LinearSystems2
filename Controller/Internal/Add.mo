@@ -11,8 +11,7 @@ model Add "Output the sum of the two real inputs"
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
 equation
   y = u1+u2;
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-            -100},{100,100}}), graphics), Icon(coordinateSystem(
+  annotation ( Icon(coordinateSystem(
           preserveAspectRatio=true, extent={{-100,-100},{100,100}}), graphics={
         Ellipse(
           extent={{-20,20},{20,-20}},

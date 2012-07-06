@@ -86,8 +86,7 @@ equation
       points={{-59,50},{-52,50},{-52,80},{0,80},{0,-50},{18,-50}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-            -100},{100,100}}), graphics), Documentation(info="<html>
+  annotation ( Documentation(info="<html>
 <p>
 Demonstrates the different discretization methods by simulating the step
 response of a second order system as continuous system and as discrete system
@@ -96,6 +95,5 @@ to demonstrate the steady-state initialization.
 </p>
 
 </html>"),
-    experiment(Tolerance=1e-006),
-    experimentSetupOutput);
+    experiment(Tolerance=1e-006));
 end Discretization1;

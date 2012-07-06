@@ -55,7 +55,5 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    Diagram(graphics),
-    experiment,
     __Dymola_experimentSetupOutput);
 end limIntegrator;

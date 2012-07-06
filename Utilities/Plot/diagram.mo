@@ -40,7 +40,7 @@ algorithm
 
    for i in 1:nCurves loop
        /*
-       if diagram.curve[i].autoLine or 
+       if diagram.curve[i].autoLine or
           diagram.curve[i].lineSymbol==Types.PointSymbol.None then
           style :=0;
        elseif diagram.curve[i].linePattern==Types.LinePattern.None then

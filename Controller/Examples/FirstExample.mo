@@ -50,8 +50,5 @@ equation
       points={{-22,-30},{-40,-30},{-40,10},{-59,10}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-            -100},{100,100}}), graphics),
-    experiment(StopTime=5),
-    experimentSetupOutput);
+  annotation (    experiment(StopTime=5));
 end FirstExample;

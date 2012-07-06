@@ -106,7 +106,7 @@ external "Fortran 77" dtrmm(side, uplo, transA, diag, m, n, alpha, A, lda, Bout,
             in  the  calling  (sub)  program.   LDB  must  be  at  least
             max( 1, m ).
             Unchanged on exit.
-  
+
    Further Details
    ===============
 

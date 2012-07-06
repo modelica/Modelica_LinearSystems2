@@ -25,12 +25,12 @@ algorithm
 
 <h4>Description</h4>
 <p>
-Function <b>hessenberg</b> computes the Hessenberg matrix <b>H</b> 
-of matrix <b>A</b> as well as the orthogonal transformation matrix 
+Function <b>hessenberg</b> computes the Hessenberg matrix <b>H</b>
+of matrix <b>A</b> as well as the orthogonal transformation matrix
 <b>U</b> that holds <b>H</b> = <b>U</b>'*<b>A</b>*<b>U</b>.
-The Hessenberg form of a matrix is computed by repeated Householder 
-similarity transformation. The elementary reflectors and the corresponding 
-scalar factors are provided by function \"Utilities.toUpperHessenberg()\". 
+The Hessenberg form of a matrix is computed by repeated Householder
+similarity transformation. The elementary reflectors and the corresponding
+scalar factors are provided by function \"Utilities.toUpperHessenberg()\".
 The transformation matrix <b>U</b> is then computed by
 <a href=\"modelica://Modelica.Math.Matrices.LAPACK.dorghr\">LAPACK.dorghr</a>.
 </p>

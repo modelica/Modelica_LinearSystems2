@@ -20,26 +20,6 @@ equation
   end when;
   y = y_sampled;
   annotation (
-    Coordsys(
-      extent=[-100, -100; 100, 100],
-      grid=[2, 2],
-      component=[20, 20]),
-    Icon(
-      Text(
-        extent=[-90,90; -10,10],
-        string="A",
-          style(color=74, rgbcolor={0,0,127})),
-      Line(points=[-100,-100; 100,100], style(color=74, rgbcolor={0,0,127})),
-      Text(
-        extent=[10,-10; 90,-90],
-        string="D",
-          style(color=74, rgbcolor={0,0,127}))),
-    Window(
-      x=0.37,
-      y=0.09,
-      width=0.52,
-      height=0.68),
-    Diagram,
     Documentation(info="<HTML>
 </HTML>
 "));

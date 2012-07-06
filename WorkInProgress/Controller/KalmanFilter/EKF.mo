@@ -65,7 +65,7 @@ equation
     y_measure, pre(M), Q2, R, Ts);
   end when;
 
-  annotation (Diagram(graphics), Icon(graphics={
+  annotation ( Icon(graphics={
         Text(
           extent={{-84,34},{76,-40}},
           lineColor={0,0,0},

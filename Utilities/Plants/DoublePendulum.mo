@@ -268,10 +268,6 @@ equation
       StartTime=1,
       StopTime=10,
       Algorithm="Dassl"),
-    Diagram(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-150,-100},{150,100}},
-        grid={2,2}), graphics),
     Documentation(info="<html>
 <p>Multibody model of a simple double pendulum system. This physical model is used in various models and functions of the library e.g. for linearization or as a base for linear controller design. </p>
 </html>"),

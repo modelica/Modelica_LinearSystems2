@@ -9,6 +9,5 @@ partial model PartialPlantSISO "Template for single-input single-output plants"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,-110})));
-  annotation (defaultComponentName="plant",Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-            -100},{100,100}}), graphics));
+  annotation (defaultComponentName="plant");
 end PartialPlantSISO;

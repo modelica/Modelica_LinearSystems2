@@ -402,6 +402,5 @@ with
 <li> x - the state vector</li>
 <li> A,B,C,D - matrices of appropriate dimensions</li>
 </ul>
-</html>"),
-    DymolaStoredErrors);
+</html>"));
 end StateSpace2;

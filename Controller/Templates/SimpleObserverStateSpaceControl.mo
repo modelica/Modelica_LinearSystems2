@@ -60,10 +60,7 @@ equation
       points={{62,-34},{68,-34},{68,0},{-11,0}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-            {100,100}}),       graphics), Icon(coordinateSystem(
-          preserveAspectRatio=true, extent={{-100,-100},{100,100}})),
-    Documentation(info="<html>
+  annotation (    Documentation(info="<html>
 <p>This template represents the structure of a simple state feedback controller with observer and optional pre-filter. In the application it must be extended with an input signal.</p>
 </html>"));
 end SimpleObserverStateSpaceControl;

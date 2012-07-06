@@ -61,8 +61,8 @@ Lud = Matrices.<b>choleskyUpDate</b>(L, v, true);
 This function computes the rank-1-updated Cholesky factorization <b>Lud</b>, with
 </p>
 <blockquote>
-  <b>Aud</b> = <b>Lud</b>*<b>Lud</b><sup>T</sup> = 
-  <b>A</b> +  <b>v</b>*<b>v</b><sup>T</sup> = 
+  <b>Aud</b> = <b>Lud</b>*<b>Lud</b><sup>T</sup> =
+  <b>A</b> +  <b>v</b>*<b>v</b><sup>T</sup> =
   <b>L</b>*<b>L</b><sup>T</sup> +  <b>v</b>*<b>v</b><sup>T</sup>
 </blockquote>
 <p>
@@ -70,15 +70,15 @@ from the input <b>L</b>, i.e. the left (lower) Cholesky factor of the original m
 The approach is a transformation <b>H</b>*[<b>v</b>, <b>L</b>]' = [<b>0</b>, <b>Lud</b>]' with orthonormal matrix <b>H</b> such, that
 </p>
 <blockquote>
-  [<b>0</b>, <b>Lud</b>] * [<b>0</b>, <b>Lud</b>]<sup>T</sup> = 
-  [<b>v</b>, <b>L</b>]*<b>H</b><sup>T</sup> *<b>H</b>*[<b>v</b>, <b>L</b>]<sup>T</sup> = 
+  [<b>0</b>, <b>Lud</b>] * [<b>0</b>, <b>Lud</b>]<sup>T</sup> =
+  [<b>v</b>, <b>L</b>]*<b>H</b><sup>T</sup> *<b>H</b>*[<b>v</b>, <b>L</b>]<sup>T</sup> =
   [<b>v</b>, <b>L</b>]*[<b>v</b>, <b>L</b>]<sup>T</sup> = <b>v</b>*<b>v</b><sup>T</sup> + <b>A</b>
 </blockquote>
 <p>
-and matrix <b>Lud</b> is lower (upper) triangular. The transformation is performed 
+and matrix <b>Lud</b> is lower (upper) triangular. The transformation is performed
 by n (order of <b>A</b>) Givens rotations.
-The following sequence illustrates the principle of stepwise transformation of 
-matrix [v, L]'. Symbol \"*\" represents arbitrary elements. For each step the changed 
+The following sequence illustrates the principle of stepwise transformation of
+matrix [v, L]'. Symbol \"*\" represents arbitrary elements. For each step the changed
 elements are bold.
 </p>
 <blockquote><pre>
@@ -90,7 +90,7 @@ elements are bold.
 
 </pre></blockquote>
 <p>
-With the boolean input \"upper\" the user specifies wether the matrix <b>L</b> 
+With the boolean input \"upper\" the user specifies wether the matrix <b>L</b>
 is lower or upper triangular matrix (left or right Cholesky factor).
 If \"upper==true\", the output <b>Lud</b> is also upper triangular. Default is \"upper==false\".
 </p>

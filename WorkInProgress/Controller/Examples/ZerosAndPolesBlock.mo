@@ -68,6 +68,5 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    experiment(StopTime=5),
-    experimentSetupOutput);
+    experiment(StopTime=5));
 end ZerosAndPolesBlock;

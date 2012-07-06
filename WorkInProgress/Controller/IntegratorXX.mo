@@ -63,11 +63,6 @@ initial equation
     end if;
   end if;
   annotation (
-    Window(
-      x=0.29,
-      y=0.05,
-      width=0.53,
-      height=0.54),
     Documentation(info="<html>
 <p>
 This blocks defines the transfer function between the input u and

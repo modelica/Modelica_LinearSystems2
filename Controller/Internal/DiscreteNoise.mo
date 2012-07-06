@@ -46,45 +46,6 @@ initial equation
   pre(ticks) = 0;
   pre(seedState) = firstSeed;
   annotation (
-    Coordsys(
-      extent=[-100, -100; 100, 100],
-      grid=[1,1],
-      component=[20, 20],
-        scale=0),
-    Icon(
-      Polygon(points=[-81,90; -89,68; -73,68; -81,90],     style(
-          color=8,
-          fillColor=8,
-          fillPattern=1)),
-      Line(points=[-81,78; -81,-90],   style(color=8)),
-      Line(points=[-90,-23; 82,-23],   style(color=8)),
-      Polygon(points=[91,-22; 69,-14; 69,-30; 91,-22],     style(
-          color=8,
-          fillColor=8,
-          fillPattern=1)),
-      Text(
-        extent=[-24,95; 94,56],
-        style(color=8),
-          string="noise"),
-      Line(points=[-35,13; -35,-47; -25,-47; -25,-29; -15,-29; -15,-57; -5,
-              -57; -5,25; 1,25; 1,39; 7,39; 7,-17; 17,-17; 17,-5; 23,-5; 23,
-              -35; 33,-35; 33,37; 43,37; 43,3; 51,3; 51,-63; 61,-63], style(
-              color=74, rgbcolor={0,0,127})),
-      Line(points=[-81,-29; -67,-29; -67,-13; -59,-13; -59,-61; -51,-61; -51,
-              -39; -43,-39; -43,45; -35,45; -35,13], style(color=74, rgbcolor=
-               {0,0,127})),
-        Line(points=[-90,-70; 84,-70], style(color=1, rgbcolor={255,0,0})),
-        Line(points=[-89,50; 85,50], style(color=1, rgbcolor={255,0,0})),
-        Text(
-          extent=[-145,-105; 144,-133],
-          string="[%y_min .. %y_max]",
-          style(color=0, rgbcolor={0,0,0}))),
-    Window(
-      x=0.37,
-      y=0.09,
-      width=0.52,
-      height=0.68),
-    Diagram,
     Documentation(info="<HTML>
 </HTML>
 "));

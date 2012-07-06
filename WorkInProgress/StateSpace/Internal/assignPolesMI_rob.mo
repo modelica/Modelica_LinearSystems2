@@ -297,5 +297,4 @@ algorithm
 // end if;//nx>rankB
 //    K := -Z*transpose(U0)*M;
 
-  annotation (experiment, experimentSetupOutput);
 end assignPolesMI_rob;

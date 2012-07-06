@@ -40,11 +40,6 @@ initial equation
   end if;
   annotation (
     defaultComponentName="secondOrder",
-    Window(
-      x=0.23,
-      y=0.1,
-      width=0.54,
-      height=0.49),
     Documentation(info="
 <HTML>
 <p>

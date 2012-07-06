@@ -28,5 +28,4 @@ equation
     ticks = if pre(ticks) < sampleFactor then pre(ticks) + 1 else 1;
   end when;
   sampleTrigger = sampleClock.sampleTrigger and ticks >= sampleFactor;
-  annotation (Icon(graphics));
 end PartialDiscreteBlock;

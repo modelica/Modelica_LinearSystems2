@@ -86,7 +86,7 @@ external "Fortran 77" dtrsv(uplo, transA, diag, n, A, lda, x, incx) annotation(L
    Further Details
    ===============
 
-   Level 2 Blas routine.     
+   Level 2 Blas routine.
 
    =====================================================================  "));
 end dtrsv;

@@ -66,7 +66,7 @@ nRealEigenvalues:=numberOfRealZeros(complexVector);
       jc := jc + 2;
     end if;
   end while;
-  
+
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>

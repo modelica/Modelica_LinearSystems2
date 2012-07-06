@@ -138,22 +138,6 @@ equation
         partOfCheck=true)=
         "modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/SimpleControlledDriver_plot.mos"
         "Simulate and Plot Results"),
-    Diagram(
-      coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
-      Rectangle(extent=[-50,60; 96,-18], style(color=1, rgbcolor={255,0,0})),
-      Text(
-        extent=[0,68; 60,62],
-        style(color=1, rgbcolor={255,0,0}),
-        string="controller"),
-      Text(
-        extent=[-111,12; -48,6],
-        style(color=1, rgbcolor={255,0,0}),
-        string="reference"),
-      Text(
-        extent=[-12,-91; 53,-97],
-        style(color=1, rgbcolor={255,0,0}),
-        string="plant (flexible drive)"),
-      graphics),
     Documentation(info="<html>
 <p>
 This example demonstrates the control of a simple model

@@ -63,8 +63,7 @@ equation
     Documentation(info="<html>
 
 </HTML>
-"), Diagram(graphics),
-    Icon(graphics={
+"),    Icon(graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={0,0,0},

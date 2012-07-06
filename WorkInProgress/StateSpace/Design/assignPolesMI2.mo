@@ -309,8 +309,8 @@ feedback matrix <b>K</b> is calculated by factorization following [1]. The algor
 modifies the eigenvalues sequentially and also allows partial eigenvalue assignment.<br>
 </p>
 <p>
-At the beginning of the algorithm, the feedback matrix <b>K</b> is set to zero 
-(<b>K</b> = <b>0</b>) and the matrix <b>A</b> is reduced to an ordered real Schur 
+At the beginning of the algorithm, the feedback matrix <b>K</b> is set to zero
+(<b>K</b> = <b>0</b>) and the matrix <b>A</b> is reduced to an ordered real Schur
 form by separating its spectrum in two parts
 </p>
 <blockquote><pre>
@@ -340,7 +340,7 @@ with an appropriate partition according to <b>F</b>2. (<b>F</b>2, <b>G</b>2) has
 controllable.
 </p>
 <p>
-If the feedback matrix <b>K</b> is taken in a form 
+If the feedback matrix <b>K</b> is taken in a form
 </p>
 <blockquote><pre>
 <b>K</b> = [0, <b>K</b>2]

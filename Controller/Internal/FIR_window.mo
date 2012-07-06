@@ -33,15 +33,6 @@ algorithm
     a := ones(L);
   end if;
   annotation (
-    Coordsys(
-      extent=[-100, -100; 100, 100],
-      grid=[2, 2],
-      component=[20, 20]),
-    Window(
-      x=0.28,
-      y=0.15,
-      width=0.64,
-      height=0.71),
     Documentation(info="<HTML>
 <p>
 Weighting windows are used for digital filter design or spectrum estimation (e.g. DFT)

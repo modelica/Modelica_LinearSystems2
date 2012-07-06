@@ -82,10 +82,6 @@ protected
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="%sampleFactor")}),
-    Diagram(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics),
     Documentation(info="<html>
 <p>
 For details of the filter characteristics, see

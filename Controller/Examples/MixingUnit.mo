@@ -53,17 +53,15 @@ equation
         partOfCheck=true)=
         "modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/MixingUnit_plot.mos"
         "Simulate and Plot Results"),
-    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{120,
-            100}}), graphics),
     Documentation(info="<html>
 <p>
-This example demonstrates the usage of the control structure template 
-<i>Modelica_Controller.Templates.TwoDOFinverseModelController2</i> to 
-control a system by using of an inverse system model in the forward path. 
+This example demonstrates the usage of the control structure template
+<i>Modelica_Controller.Templates.TwoDOFinverseModelController2</i> to
+control a system by using of an inverse system model in the forward path.
 The controlled system is a mixing unit described in [1].
 </p>
 <p>
-Within Dymola simulation tool the &quot;Commands / Simulate and Plot Results&quot; 
+Within Dymola simulation tool the &quot;Commands / Simulate and Plot Results&quot;
 selection yields the following simulation result.
 </p>
 
@@ -76,7 +74,5 @@ selection yields the following simulation result.
 <dd> <b>Nichtlineare Regelungen I</b>.
      Oldenbourg Verlag, 8. Auflage.<br>&nbsp;</dd>
 </dl>
-</html>"),
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-            100}})));
+</html>"));
 end MixingUnit;

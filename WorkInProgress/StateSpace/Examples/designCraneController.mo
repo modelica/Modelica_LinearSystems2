@@ -120,14 +120,14 @@ print("\nXXXXXXXXXXX:\n");
   print("\nok!");
 annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-This example demonstrates how to design a lq-controller or a pole placement controller 
-respectively. Compared with example <b>craneController</b>, the plant is smaller to 
+This example demonstrates how to design a lq-controller or a pole placement controller
+respectively. Compared with example <b>craneController</b>, the plant is smaller to
 achieve suitable dynamics for animation.
-The feedback matrices and a simple pre filter for tracking are save to MATLAB files 
+The feedback matrices and a simple pre filter for tracking are save to MATLAB files
 which can be used in ModelicaController library.
 </p>
 <p>
-It is also shown how to linearize a model of a crane trolley system [1]. 
+It is also shown how to linearize a model of a crane trolley system [1].
 The linear model is used as a base for control design
 </p>
 

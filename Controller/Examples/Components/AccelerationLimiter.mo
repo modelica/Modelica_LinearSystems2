@@ -135,8 +135,7 @@ equation
       points={{86.6,0},{90,0},{90,60},{110,60}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-            -100},{100,100}}), graphics), Icon(graphics={
+  annotation ( Icon(graphics={
         Text(
           extent={{-38,-36},{92,-80}},
           lineColor={0,0,0},

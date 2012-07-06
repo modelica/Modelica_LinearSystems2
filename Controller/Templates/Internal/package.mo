@@ -8,7 +8,7 @@ package Internal "Package of internal utilities of controller templates (for adv
 Generally, the functions in this package should not be used by the user.
 </p>
 <p>
-This package contains functions which cannot be used in an arbitrary 
+This package contains functions which cannot be used in an arbitrary
 way and require particular knowledge.
 Therefore, only advanced users should deal with contained classes.
 </p>

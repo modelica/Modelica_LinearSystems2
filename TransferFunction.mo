@@ -297,7 +297,7 @@ s = TransferFunction.<b>s</b>()
 
 <h4>Description</h4>
 <p>
-Generate the complex Laplace variable as a TransferFunction. 
+Generate the complex Laplace variable as a TransferFunction.
 It can be used for generating like
 </p>
 <blockquote><pre>
@@ -455,9 +455,9 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
 
 <h4>Description</h4>
 <p>
-First, the transfer function representation is transformed into state 
-space representation which is given to StateSpace.Analysis.timeResponse 
-and the time response of the state space system is calculated. The type 
+First, the transfer function representation is transformed into state
+space representation which is given to StateSpace.Analysis.timeResponse
+and the time response of the state space system is calculated. The type
 of the time response is defined by the input <b>responseType</b>, i.e.
 </p>
 <blockquote><pre>
@@ -467,8 +467,8 @@ Ramp &quot;Ramp response&quot;,
 Initial &quot;Initial condition response&quot;.
 </pre></blockquote>
 <p>
-The state space system is transformed to a appropriate discrete state space 
-system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and 
+The state space system is transformed to a appropriate discrete state space
+system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and
 x are calculated for each time step t=k*dt.
 </p>
 
@@ -522,9 +522,9 @@ x are calculated for each time step t=k*dt.
 
 <h4>Description</h4>
 <p>
-First, the transfer function representation is transformed into state space 
-representation which is given to StateSpace.Analysis.timeResponse and the 
-time response of the state space system is calculated. The type of the time 
+First, the transfer function representation is transformed into state space
+representation which is given to StateSpace.Analysis.timeResponse and the
+time response of the state space system is calculated. The type of the time
 response is defined by the input <b>responseType</b>, i.e.
 </p>
 <blockquote><pre>
@@ -534,8 +534,8 @@ response is defined by the input <b>responseType</b>, i.e.
     Initial \"Initial condition response\"
 </pre></blockquote>
 <p>
-The state space system is transformed to a appropriate discrete state space 
-system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y 
+The state space system is transformed to a appropriate discrete state space
+system and, starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y
 and x are calculated for each time step t=k*dt.
 </p>
 
@@ -589,9 +589,9 @@ and x are calculated for each time step t=k*dt.
 <h4>Description</h4>
 <p>
 Function <b>stepResponse</b> calculates the step response of a transfer function.
-The state space system is transformed to a appropriate discrete state space 
-system and, starting at 
-<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
+The state space system is transformed to a appropriate discrete state space
+system and, starting at
+<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0,
 the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
 </p>
 <blockquote><pre>
@@ -654,10 +654,10 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 
 <h4>Description</h4>
 <p>
-Function <b>rampResponse</b> calculates the time response of a transfer 
-function for ramp imput u = t. The state space system is transformed 
-to a appropriate discrete state space system and, starting at 
-<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
+Function <b>rampResponse</b> calculates the time response of a transfer
+function for ramp imput u = t. The state space system is transformed
+to a appropriate discrete state space system and, starting at
+<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0,
 the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
 </p>
 <blockquote><pre>
@@ -722,10 +722,10 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 
 <h4>Description</h4>
 <p>
-This function calculates the time response of a state space system for 
-given initial condition and zero inputs. The state space system is transformed 
-to a appropriate discrete state space system and, starting at 
-<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
+This function calculates the time response of a state space system for
+given initial condition and zero inputs. The state space system is transformed
+to a appropriate discrete state space system and, starting at
+<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0,
 the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dt.
 </p>
 <blockquote><pre>
@@ -1477,50 +1477,50 @@ filterFunction = TransferFunction.Design.<b>filter</b>(analogFilter, filterType,
 
 <h4>Description</h4>
 <p>
-This function constructs a TransferFunction transfer function description 
-of low and high pass filters. Typical frequency responses for the four supported 
-low pass filter types are shown in the next figure (this figure was generated 
+This function constructs a TransferFunction transfer function description
+of low and high pass filters. Typical frequency responses for the four supported
+low pass filter types are shown in the next figure (this figure was generated
 with function <a href=\"modelica://Modelica_LinearSystems2.Examples.TransferFunction.plotBodeFilter2\">Examples.TransferFunction.plotBodeFilter2</a>):
 </p>
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4Filters.png\"/> </p>
 <p>
-The step responses of the same low pass filters are shown in the next figure, 
-starting from a steady state initial filter with initial input = 0.2: 
+The step responses of the same low pass filters are shown in the next figure,
+starting from a steady state initial filter with initial input = 0.2:
 </p>
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4FiltersStepResponse.png\"/> </p>
 <p>
-Obviously, the frequency responses give a somewhat wrong impression of the filter 
-characteristics: Although Butterworth and Chebyshev filters have a significantly 
-steeper magnitude as the CriticalDamping and Bessel filters, the step responses 
-of the latter ones are much better. This means for example, that a CriticalDamping 
-or a Bessel filter should be selected, if a filter is mainly used to make 
-a non-linear inverse model realizable. 
+Obviously, the frequency responses give a somewhat wrong impression of the filter
+characteristics: Although Butterworth and Chebyshev filters have a significantly
+steeper magnitude as the CriticalDamping and Bessel filters, the step responses
+of the latter ones are much better. This means for example, that a CriticalDamping
+or a Bessel filter should be selected, if a filter is mainly used to make
+a non-linear inverse model realizable.
 </p>
 <p>
-Typical frequency responses for the four supported high pass filter types are shown 
+Typical frequency responses for the four supported high pass filter types are shown
 in the next figure:
 </p>
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4Filters.png\"/> </p>
 <p>
-The corresponding step responses of these high pass filters are shown in the next figure: 
+The corresponding step responses of these high pass filters are shown in the next figure:
 </p>
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4FiltersStepResponse.png\"/> </p>
 <p>
-All filters are available in <b>normalized</b> (default) and non-normalized form. 
-In the normalized form, the amplitude of the filter transfer function at the cutoff 
-frequency is 1/sqrt(2) (= 3 dB). Note, when comparing the filters of this function 
-with other software systems, the setting of \"normalized\" has to be selected 
-appropriately. For example, the signal processing toolbox of Matlab provides 
-the filters in non-normalized form and therefore a comparision makes only sense, 
+All filters are available in <b>normalized</b> (default) and non-normalized form.
+In the normalized form, the amplitude of the filter transfer function at the cutoff
+frequency is 1/sqrt(2) (= 3 dB). Note, when comparing the filters of this function
+with other software systems, the setting of \"normalized\" has to be selected
+appropriately. For example, the signal processing toolbox of Matlab provides
+the filters in non-normalized form and therefore a comparision makes only sense,
 if normalized = <b>false</b> is set.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
   Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Types.AnalogFilter.CriticalDamping;
-  Integer order=2; 
+  Integer order=2;
   Modelica.SIunits.Frequency f_cut=10;
-   
+
   TransferFunction tf_filter;
 
 algorithm
@@ -1588,9 +1588,9 @@ TransferFunction.Plot.<b>polesAndZeros</b>(
 <h4>Description</h4>
 <p>
 This function plots a pole-zero-map of the poles and zeros of a transfer function.
-The Boolean inputs \"poles\" and \"zeros\" define what to plot. If Boolean input 
-\"plot = true\", the pole-zero-map is plotted. If false, only the diagram is generated 
-and returned as output argument. The records \"defaultDiagram\" and \"device\" allow 
+The Boolean inputs \"poles\" and \"zeros\" define what to plot. If Boolean input
+\"plot = true\", the pole-zero-map is plotted. If false, only the diagram is generated
+and returned as output argument. The records \"defaultDiagram\" and \"device\" allow
 to set various layout options and the size and location of the diagram on the screen.
 </p>
 
@@ -1739,7 +1739,7 @@ TransferFunction.Plot.<b>bode</b>(
   f_max,
   magnitude=true,
   phase=true,
-  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), 
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
   device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 
@@ -1838,7 +1838,7 @@ This function plots the time response of a transfer function. The character of t
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>. 
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -1905,7 +1905,7 @@ TransferFunction.Plot.<b>impulse</b>(
   tSpan,
   x0,
   columnLabels,
-  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), 
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
   device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
@@ -1975,7 +1975,7 @@ TransferFunction.Plot.<b>step</b>(
   tSpan,
   x0,
   columnLabels,
-  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), 
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
   device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
@@ -2047,7 +2047,7 @@ TransferFunction.Plot.<b>ramp</b>(
   tSpan,
   x0,
   columnLabels,
-  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), 
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
   device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
@@ -2128,7 +2128,7 @@ TransferFunction.Plot.<b>initialResponse</b>(
   tSpan,
   y0,
   columnLabels,
-  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(), 
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
   device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
@@ -2205,9 +2205,9 @@ zp = k * ---------------------------------------------------------
           product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
 </pre></blockquote>
 <p>
-of a transfer function representated by numerator and denominator polynomial. 
+of a transfer function representated by numerator and denominator polynomial.
 The poles and zeros and the gain <tt>k</tt> are computed
-(<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">zerosAndPoles</a>) 
+(<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">zerosAndPoles</a>)
 and are used as inputs the ZerosAndPoles constructor.
 </p>
 
@@ -2595,11 +2595,11 @@ tf = TransferFunction.Import.<b>fromModel</b>(modelName, T_linearize, fileName)
 </pre></blockquote>
 
 <h4>Description</h4>
-<p>Generate a matrix of TransferFunction data records by linearization of a model 
-defined by modelName. The linearization is performed at time T_linearize of 
-the simulation. The system is genrated by using 
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> 
-followed by a conversion from sate space to transfer function representation. 
+<p>Generate a matrix of TransferFunction data records by linearization of a model
+defined by modelName. The linearization is performed at time T_linearize of
+the simulation. The system is genrated by using
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a>
+followed by a conversion from sate space to transfer function representation.
 </p>
 
 <h4>Example</h4>

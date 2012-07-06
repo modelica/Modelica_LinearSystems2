@@ -14,7 +14,7 @@ external "Fortran 77" drotg(r,b,c,s) annotation(Library = {"lapack"});
    Purpose
    =======
 
-   construct givens plane rotation.     
+   construct givens plane rotation.
 
    =====================================================================  "));
 end drotg;

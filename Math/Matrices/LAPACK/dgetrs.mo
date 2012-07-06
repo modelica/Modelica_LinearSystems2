@@ -24,15 +24,15 @@ external "FORTRAN 77" dgetrs(
 
    Purpose
    =======
-   
+
    DGETRS solves a system of linear equations
       A * X = B  or  A' * X = B
    with a general N-by-N matrix A using the LU factorization computed
    by DGETRF.
-   
+
    Arguments
    =========
-   
+
    TRANS   (input) CHARACTER*1
            Specifies the form of the system of equations:
            = 'N':  A * X = B  (No transpose)
@@ -60,10 +60,5 @@ external "FORTRAN 77" dgetrs(
            = 0:  successful exit
            < 0:  if INFO = -i, the i-th argument had an illegal value
 
-   =====================================================================  "),
-    Window(
-      x=0.4,
-      y=0.4,
-      width=0.6,
-      height=0.6));
+   =====================================================================  "));
 end dgetrs;

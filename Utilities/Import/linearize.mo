@@ -41,10 +41,10 @@ algorithm
 
    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-This function initializes a Modelica model and then simulates the model 
-until time instant \"t_linearize\". 
-If t_linearize=0, no simulation takes place (only initialization). 
-At the simulation stop time, the model is linearized in such a form that 
+This function initializes a Modelica model and then simulates the model
+until time instant \"t_linearize\".
+If t_linearize=0, no simulation takes place (only initialization).
+At the simulation stop time, the model is linearized in such a form that
 </p>
 <ul>
 <li>all top-level signals with prefix \"input\" are treated as inputs <b>u</b>(t) of the model ,</li>
@@ -52,21 +52,21 @@ At the simulation stop time, the model is linearized in such a form that
 <li>all variables that appear differentiated and that are selected as states at this time instant are treated as states <b>x</b> of the model.</li>
 </ul>
 <p>
-Formally, the non-linear hybrid differential-algebraic equation system is 
-therefore treated as the following ordinary equation system at time 
-instant t_linearize: 
+Formally, the non-linear hybrid differential-algebraic equation system is
+therefore treated as the following ordinary equation system at time
+instant t_linearize:
 </p>
 <blockquote><pre>
 der(<b>x</b>) = <b>f</b>(<b>x</b>,<b>u</b>)
     <b>y</b> = <b>g</b>(<b>x</b>,<b>u</b>)
 </pre></blockquote>
 <p>
-Taylor series expansion (linearization) of this model around the simulation stop time t_linearize: 
+Taylor series expansion (linearization) of this model around the simulation stop time t_linearize:
 </p>
 <blockquote><pre>
 <b>u</b>0 = <b>u</b>(t_linearize)
 <b>y</b>0 = <b>y</b>(t_linearize)
-<b>x</b>0 = <b>x</b>(t_linearize) 
+<b>x</b>0 = <b>x</b>(t_linearize)
 </pre></blockquote>
 <p>and neglecting higher order terms results in the following system: </p>
 <blockquote><pre>

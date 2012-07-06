@@ -5,8 +5,8 @@ package Types "Package of type definitions"
   annotation (
     Documentation(info="<html>
 <p>
-This package contains type definitions used in the library. Generally, 
-the enumeration type is used to assign a unique choice of parameter 
+This package contains type definitions used in the library. Generally,
+the enumeration type is used to assign a unique choice of parameter
 within a model.
 </p>
 </html>"));

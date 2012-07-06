@@ -84,15 +84,6 @@ connect(y,discretePart.y);
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="%sampleFactor")}),
-    Window(
-      x=0.37,
-      y=0.09,
-      width=0.52,
-      height=0.68),
-    Diagram(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics),
     Documentation(info="<html>
 <p>
 If <b>discrete</b> block, the output y is sampled according to sample time

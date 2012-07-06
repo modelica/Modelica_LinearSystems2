@@ -74,7 +74,7 @@ algorithm
 
   annotation (Documentation(info="<html>
 <p>
-Function <b>care</b> computes the solution <b>X</b> of the continuous-time 
+Function <b>care</b> computes the solution <b>X</b> of the continuous-time
 algebraic Riccati equation
 </p>
 <blockquote><pre>
@@ -90,8 +90,8 @@ with
 using the Schur vector approach proposed by Laub [1].
 </p>
 <p>
-It is assumed that <b>Q</b> is symmetric and positve semidefinite and <b>R</b> is 
-symmetric, nonsingular and positive definite, (<b>A</b>,<b>B</b>) is stabilizable 
+It is assumed that <b>Q</b> is symmetric and positve semidefinite and <b>R</b> is
+symmetric, nonsingular and positive definite, (<b>A</b>,<b>B</b>) is stabilizable
 and (<b>A</b>,<b>Q</b>) is detectable.
 <b>
 The assumptions are not checked in this function!

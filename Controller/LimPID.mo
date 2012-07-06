@@ -427,8 +427,5 @@ defined limits. For backward compatibility reasons
 to use <b>limitAtInit</b> = <b>false</b>.
 </p>
 </html>
-"), Diagram(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics));
+"));
 end LimPID;

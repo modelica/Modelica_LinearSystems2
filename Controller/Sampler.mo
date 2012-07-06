@@ -37,11 +37,6 @@ equation
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="%sampleFactor")}),
-    Window(
-      x=0.37,
-      y=0.09,
-      width=0.52,
-      height=0.68),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

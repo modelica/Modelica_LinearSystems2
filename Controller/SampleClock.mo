@@ -71,7 +71,6 @@ drag Modelica_LinearSystems2.Controller.SampleClock into the top level of your m
           lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),
-    Diagram,
     Documentation(info="<HTML>
 <p>
 Global block that defines options for all components of the

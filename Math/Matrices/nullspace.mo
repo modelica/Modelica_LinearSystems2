@@ -41,9 +41,9 @@ annotation (Documentation(info="<html>
 
 <h4>Description</h4>
 <p>
-This function calculates an orthonormal basis <b>Z</b>=[<b>z</b>_1, <b>z</b>_2, ...] 
+This function calculates an orthonormal basis <b>Z</b>=[<b>z</b>_1, <b>z</b>_2, ...]
 of the nullspace of a matrix <b>A</b>, i.e. <b>A</b>*<b>z</b>_i=0.
-The nullspace is obtained by svd method. That is, matrix <b>A</b> is decomposed 
+The nullspace is obtained by svd method. That is, matrix <b>A</b> is decomposed
 into the matrices <b>S</b>, <b>U</b>, <b>V</b>:
 </p>
 <blockquote>
@@ -57,20 +57,20 @@ with the orthonormal matrices <b>U</b> and <b>V</b> and the matrix <b>S</b> with
   <b>S</b>1 = [diag(s); <b>0</b>]
 </blockquote>
 <p>
-with the singular values <b>s</b>={s1, s2, ..., sr} of <b>A</b> and r=rank(<b>A</b>). 
-Note, that <b>S</b> has the same size as <b>A</b>. Since <b>U</b> and <b>V</b> are 
+with the singular values <b>s</b>={s1, s2, ..., sr} of <b>A</b> and r=rank(<b>A</b>).
+Note, that <b>S</b> has the same size as <b>A</b>. Since <b>U</b> and <b>V</b> are
 orthonormal, we may write
 </p>
 <blockquote>
   <b>U</b><sup>T</sup>*<b>A</b>*<b>V</b> = [<b>S</b>1, <b>0</b>].
 </blockquote>
 <p>
-Matrix <b>S</b>1 obviously has full column rank and therefore, the left n-r rows 
-(n is the number of columns of <b>A</b> or <b>S</b>) of matrix <b>V</b> span 
+Matrix <b>S</b>1 obviously has full column rank and therefore, the left n-r rows
+(n is the number of columns of <b>A</b> or <b>S</b>) of matrix <b>V</b> span
 a nullspace of <b>A</b>.
 </p>
 <p>
-The nullity of matrix <b>A</b> is the dimension of the nullspace of <b>A</b>. 
+The nullity of matrix <b>A</b> is the dimension of the nullspace of <b>A</b>.
 In view of the above, it becomes clear that nullity holds
 </p>
 <blockquote><pre>

@@ -69,7 +69,7 @@ dss = 'constructor'.<b>fromReal</b>(r, Ts, method)
 
 <h4>Description</h4>
 <p>
-This function constructs a DiscreteStateSpace record dss from a Real value, 
+This function constructs a DiscreteStateSpace record dss from a Real value,
 i.e. a discrete state space system without a state and an output without dynamics:
 </p>
 <blockquote><pre>
@@ -158,8 +158,8 @@ dss.Ts = Ts;
 dss.method = method;
 </pre></blockquote>
 <p>
-i.e. the input-matrices are the system matrices of the discrete system. 
-The default values of sample time <b>Ts</b> and discretization method 
+i.e. the input-matrices are the system matrices of the discrete system.
+The default values of sample time <b>Ts</b> and discretization method
 <b>method</b> are
 </p>
 <blockquote><pre>
@@ -167,7 +167,7 @@ The default values of sample time <b>Ts</b> and discretization method
 method = Modelica_LinearSystems2.Types.Method.Trapezoidal
 </pre></blockquote>
 <p>
-respectively. See also 
+respectively. See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>
 where the inputs are the matrices of a continuous system which is to convert to discrete state space.
 </p>
@@ -548,8 +548,8 @@ der(<b>x</b>(t)) = <b>A</b> * <b>x</b>(t) + <b>B</b> * <b>u</b>(t)
 <b>y</b>(t)      = <b>C</b> * <b>x</b>(t) + <b>D</b> * <b>u</b>(t)
 </pre></blockquote>
 <p>
-The function is similar to 
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">fromStateSpace</a> 
+The function is similar to
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">fromStateSpace</a>
 but the inputs are restricted to the matrices, the sample time and the discretization method.
 </p>
 
@@ -625,10 +625,10 @@ dss = DiscreteStateSpace.'-'.<b>subtract</b>(dss1, dss2)
 
 <h4>Description</h4>
 <p>
-This operator function computes the subtraction of two discrete state space 
-systems connected in parallel, i.e. the inputs are the same and the outputs 
-of the two systems are subtracted. Therefore, The systems must have the same 
-number of inputs and outputs but not the same number of states. 
+This operator function computes the subtraction of two discrete state space
+systems connected in parallel, i.e. the inputs are the same and the outputs
+of the two systems are subtracted. Therefore, The systems must have the same
+number of inputs and outputs but not the same number of states.
 The resulting system has an order of system_order1 + system_order2.
 </p>
 <p>
@@ -1397,7 +1397,7 @@ The eigenvalues <b>ev</b>_d of the discrete system are related to the eigenvalue
 
 <h4>Description</h4>
 <p>
-Function timeResponse calculates the time responses of a discrete state space 
+Function timeResponse calculates the time responses of a discrete state space
 system. The type of the time response is defined by the input <b>responseType</b>, i.e.
 </p>
 <blockquote><pre>
@@ -1407,7 +1407,7 @@ Ramp \"Ramp response\",
 Initial \"Initial condition response\"
 </pre></blockquote>
 <p>
-Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x 
+Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and states x
 are calculated for each time step t=k*dss.Ts.
 </p>
 
@@ -1470,13 +1470,13 @@ are calculated for each time step t=k*dss.Ts.
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss)
-(y, t, x) = DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss, tSpan)  
+(y, t, x) = DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss, tSpan)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
-the outputs <b>y</b> and states <b>x</b> are calculated for each time step t=k*dss.Ts. The function call 
+Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0,
+the outputs <b>y</b> and states <b>x</b> are calculated for each time step t=k*dss.Ts. The function call
 </p>
 <blockquote><pre>
 DiscreteStateSpace.Analysis.impulseResponse(dss, tSpan)
@@ -1488,8 +1488,8 @@ gives the same result as
 DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
 <p>
-Note that an appropriate impulse response of a discrete system that is comparable 
-to the impulse response of the corresponding continuous system requires 
+Note that an appropriate impulse response of a discrete system that is comparable
+to the impulse response of the corresponding continuous system requires
 the \"ImpulseExact\" conversion from continuous system to discrete system.
 See also
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a> and
@@ -1552,16 +1552,16 @@ See also
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss)
-(y, t, x) = DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss, tSpan)  
+(y, t, x) = DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss, tSpan)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function <b>stepResponse</b> calculates the step response of a discrete 
-state space system. Starting at 
-<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
-the outputs <b>y</b> and the states <b>x</b> are calculated for each 
-time step t=k*dss.Ts. The function call 
+Function <b>stepResponse</b> calculates the step response of a discrete
+state space system. Starting at
+<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0,
+the outputs <b>y</b> and the states <b>x</b> are calculated for each
+time step t=k*dss.Ts. The function call
 </p>
 <blockquote><pre>
 DiscreteStateSpace.Analysis.stepResponse(dss, tSpan)
@@ -1573,11 +1573,11 @@ gives the same result as
 DiscreteStateSpace.Analysis.timeResponse(response=Types.TimeResponse.Step, dss, tSpan, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
 <p>
-Note that an appropriate step response of a discrete system that is comparable 
-to the step response of the corresponding continuous system requires 
+Note that an appropriate step response of a discrete system that is comparable
+to the step response of the corresponding continuous system requires
 the \"StepExact\" conversion from continuous system to discrete system.
-See also 
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a> and 
+See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a> and
 <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.stepResponse\">StateSpace.Analysis.stepResponse</a>.
 </p>
 
@@ -1642,11 +1642,11 @@ See also
 
 <h4>Description</h4>
 <p>
-Function <b>rampResponse</b> calculates the time response 
-of a discrete state space system for ramp imput u = t. Starting at 
-<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
-the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts. 
-The function call 
+Function <b>rampResponse</b> calculates the time response
+of a discrete state space system for ramp imput u = t. Starting at
+<b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0,
+the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts.
+The function call
 </p>
 <blockquote><pre>
 DiscreteStateSpace.Analysis.rampResponse(dss, tSpan)
@@ -1662,7 +1662,7 @@ Note that an appropriate ramp response of a discrete system that is comparable t
 requires the \"RampExact\" conversion from continuous system to discrete system.
 
 See also
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a> and 
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a> and
 <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.rampResponse\">StateSpace.Analysis.rampResponse</a>.
 </p>
 
@@ -1727,15 +1727,15 @@ See also
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss)
-(y, t, x) = DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss, tSpan)  
+(y, t, x) = DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss, tSpan)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function <b>initialResponse</b> calculates the time response of 
+Function <b>initialResponse</b> calculates the time response of
 a discrete state space system for given initial condition and zero inputs.
-Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0, 
-the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts. The function call 
+Starting at <b>x</b>(t=0)=<b>0</b> and <b>y</b>(t=0)=<b>C</b>*<b>x</b>0 + <b>D</b>*<b>u</b>0,
+the outputs <b>y</b> and <b>x</b> are calculated for each time step t=k*dss.Ts. The function call
 </p>
 <blockquote><pre>
 DiscreteStateSpace.Analysis.initialResponse(x0,dss, dt, tSpan)
@@ -1747,8 +1747,8 @@ gives the same result as
 DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse.Initial, x0=x0).
 </pre></blockquote>
 <p>
-See also 
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a> or 
+See also
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a> or
 <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.initialResponse\">StateSpace.Analysis.initialResponse</a>.
 </p>
 
@@ -2170,8 +2170,8 @@ feedback matrix <b>K</b> is calculated by factorization following [1]. The algor
 modifies the eigenvalues sequentially and also allows partial eigenvalue assignment.
 </p>
 <p>
-At the beginning of the algorithm, the feedback matrix <b>K</b> is set 
-to zero (<b>K</b> = <b>0</b>) and the matrix <b>A</b> is reduced to an ordered 
+At the beginning of the algorithm, the feedback matrix <b>K</b> is set
+to zero (<b>K</b> = <b>0</b>) and the matrix <b>A</b> is reduced to an ordered
 real Schur form by separating its spectrum in two parts
 </p>
 <blockquote><pre>
@@ -2181,7 +2181,7 @@ real Schur form by separating its spectrum in two parts
 </pre>
 </blockquote>
 <p>
-in such a way, that <b>F</b>1 contains the eigenvalues that will be retained 
+in such a way, that <b>F</b>1 contains the eigenvalues that will be retained
 and <b>F</b>3 contains the eigenvalues going to be modified. On the suggestion
 of [1] the eigenvalues <i>evr</i> to be retained are chosen as
 </p>
@@ -2202,14 +2202,14 @@ with an appropriate partition according to <b>F</b>2. (<b>F</b>2, <b>G</b>2) has
 controllable.
 </p>
 <p>
-If the feedback matrix <b>K</b> is taken in a form 
+If the feedback matrix <b>K</b> is taken in a form
 </p>
 <blockquote><pre>
 <b>K</b> = [0, <b>K</b>2]
 </pre></blockquote>
 <p>
 the special structure of <b>F</b> and <b>K</b> results in a closed loop state
-matrix 
+matrix
 </p>
 <blockquote><pre>
           |<b>F</b>1 <b>F</b>3 - <b>G</b>1*<b>K</b>2|
@@ -2221,18 +2221,18 @@ with only the eigenvalues of <b>F</b>2 are modified. This approach to modify
 separated eigenvalues is used to sequentially shift one real eigenvalue ore two
 complex conjugated eigenvalues stepwise until all assigned eigenvalues are placed.
 Therefore, at each step i always the (two) lower right eigenvalue(s) are modified by an
-appropriate feedback matrix <b>K</b>i. The matrix <b>F</b> - <b>G</b>*<b>K</b>i remains 
-in real Schur form. The assigned eigenvalue(s) is (are) then moved to another diagonal 
-position of the real Schur form using reordering techniques <b>F</b> 
+appropriate feedback matrix <b>K</b>i. The matrix <b>F</b> - <b>G</b>*<b>K</b>i remains
+in real Schur form. The assigned eigenvalue(s) is (are) then moved to another diagonal
+position of the real Schur form using reordering techniques <b>F</b>
 &lt; -- <b>Q</b>i*<b>F</b>*<b>Q</b>i'  and a new block is transferred to the
-lower right diagonal position. The transformations are accumulated in <b>Q</b>i 
+lower right diagonal position. The transformations are accumulated in <b>Q</b>i
 and are also applicated to the matrices
 </p>
 <blockquote><pre>
 <b>G</b> &lt; - <b>Q</b>i*<b>G</b> <b>Q</b> &lt; - <b>Q</b>i*<b>Q</b>
 </pre></blockquote>
 <p>
-The eigenvalue(s) to be assigned at  each step is (are) chosen such that 
+The eigenvalue(s) to be assigned at  each step is (are) chosen such that
 the norm of each <b>K</b>i is minimized [1].
 </p>
 
@@ -2354,8 +2354,8 @@ DiscreteStateSpace.Plot.<b>bodeSISO</b>(
 
 <h4>Description</h4>
 <p>
-This function plots a bode-diagram of the transfer function corresponding 
-to the behavior of the state space system from iu'th element of the input 
+This function plots a bode-diagram of the transfer function corresponding
+to the behavior of the state space system from iu'th element of the input
 vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 </p>
 
@@ -3475,9 +3475,9 @@ dss = DiscreteStateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileNam
 
 <h4>Description</h4>
 <p>
-Generate a discrete state space data record by linearization of 
-a model defined by modelName. The linearization is performed at time T_linearize 
-of the simulation. The result of linearization is transformed into a state space 
+Generate a discrete state space data record by linearization of
+a model defined by modelName. The linearization is performed at time T_linearize
+of the simulation. The result of linearization is transformed into a state space
 record and then converted into a discrete state space record.
 </p>
 
