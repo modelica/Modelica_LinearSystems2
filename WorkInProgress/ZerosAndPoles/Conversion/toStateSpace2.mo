@@ -291,7 +291,7 @@ algorithm
     ss := Modelica_LinearSystems2.StateSpace(zp.k);
   end if;
 
-  annotation (overloadsConstructor=true, Documentation(info="<html>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ss = ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(zp)

@@ -34,7 +34,7 @@ algorithm
           zp[ic, ib] := Modelica_LinearSystems2.WorkInProgress.StateSpace.Conversion.toZerosAndPoles(ss_siso);
      end for;
   end for;
-  annotation (overloadsConstructor=true, Documentation(info="<html>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = StateSpace.Conversion.<b>toZerosAndPolesMIMO</b>(ss)

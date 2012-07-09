@@ -142,7 +142,6 @@ record Polynomial "Record defining the data for a polynomial"
       output Polynomial p(redeclare Real c[1]);
     algorithm
       p.c := {r};
-      annotation (overloadsConstructor=true);
     end fromReal;
 
     function fromZeros "Generate a Polynomial data record from given zeros"
@@ -197,7 +196,6 @@ record Polynomial "Record defining the data for a polynomial"
         end if;
       end while;
       annotation (
-        overloadsConstructor=true,
         Documentation(info="<html>
 <p>
 This function constructs a polynomial from given zeros

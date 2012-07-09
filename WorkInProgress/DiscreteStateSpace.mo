@@ -186,7 +186,6 @@ record DiscreteStateSpace
         assert(false, "Argument method (= " + String(method) +
           ") of makeDiscrete is wrong.");
       end if;
-      annotation (overloadsConstructor=true);
     end fromStateSpace;
 
       function fromReal "Generate a StateSpace data record from a Real value"
@@ -210,7 +209,7 @@ record DiscreteStateSpace
         dss.D[1, 1] := r;
         dss.Ts := Ts;
         dss.method := method;
-        annotation (overloadsConstructor=true, Documentation(info="<html>
+        annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dss = 'constructor'.<b>fromReal</b>(r)
@@ -375,7 +374,6 @@ respectively.
         assert(false, "Argument method (= " + String(method) +
           ") of makeDiscrete is wrong.");
       end if;
-      annotation (overloadsConstructor=true);
     end fromMatrices2;
   end 'constructor';
 
@@ -585,7 +583,7 @@ algorithm
 //  dzp.uName := dss.uNames[1];
 //  dzp.yName := dss.yNames[1];
 
-  annotation (overloadsConstructor=true, Documentation(info="<html>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dzp = DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPoles</b>(dss)

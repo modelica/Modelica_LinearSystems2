@@ -104,7 +104,7 @@ public
 
   algorithm
     ss.D[1, 1] := r;
-    annotation (overloadsConstructor=true, Documentation(info="<html>
+    annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ss = 'constructor'.<b>fromReal</b>(r)

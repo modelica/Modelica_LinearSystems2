@@ -42,7 +42,7 @@ record ZerosAndPoles
       zp.uName := uName;
       zp.yName := yName;
 
-      annotation (overloadsConstructor=true, Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = 'constructor'.<b>fromReal</b>(r)
@@ -2927,7 +2927,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
           tf[iy, iu] := ZerosAndPoles.Conversion.toTransferFunction(zp[iy, iu]);
         end for;
       end for;
-    annotation (overloadsConstructor=true, Documentation(info="<html>
+    annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 tf = ZerosAndPoles.Conversion.toStateSpace<b>toTransferFunctionMIMO</b>(zp)
@@ -3242,7 +3242,7 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
 
       ABCD := [ssA,ssB; ssC,ssD];
 
-      annotation (overloadsConstructor=true, Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ABCD = ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(zp)
@@ -3776,7 +3776,7 @@ processing.
         ss := Modelica_LinearSystems2.StateSpace(zp.k);
       end if;
 
-      annotation (overloadsConstructor=true, Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ss = ZerosAndPoles.Conversion.toStateSpace<b>toStateSpace</b>(zp)

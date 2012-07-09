@@ -48,7 +48,6 @@ record DiscreteTransferFunction
       dtf.method := method;
       dtf.uName := uName;
       dtf.yName := yName;
-      annotation (overloadsConstructor=true);
     end fromReal;
 
     encapsulated function fromZerosAndPoles
@@ -164,7 +163,6 @@ follow each other as above. An error occurs if this is not the case.
       output DiscreteTransferFunction dtf(n=n.c, d=d.c, Ts=Ts, method=method, uName=uName, yName=yName);
 
     algorithm
-      annotation (overloadsConstructor=true);
     end fromPolynomials;
 
     function fromTransferFunction
@@ -193,7 +191,6 @@ follow each other as above. An error occurs if this is not the case.
 
     algorithm
       dtf := DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss);
-      annotation (overloadsConstructor=true);
     end fromTransferFunction;
   end 'constructor';
 
@@ -576,7 +573,7 @@ end if;
   dss.Ts := dtf.Ts;
   dss.method := dtf.method;
 
- annotation (overloadsConstructor=true, Documentation(info="<html>
+ annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <table>
 <tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.toStateSpace<b>toDiscreteStateSpace</b>(dtf)  </td> </tr>

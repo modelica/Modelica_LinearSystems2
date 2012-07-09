@@ -35,7 +35,6 @@ record TransferFunction
     algorithm
       tf.uName := uName;
       tf.yName := yName;
-      annotation (overloadsConstructor=true);
     end fromReal;
 
   encapsulated function fromZerosAndPoles
@@ -133,7 +132,6 @@ follow each other as above. An error occurs if this is not the case.
       output TransferFunction tf(n=n.c, d=d.c,uName=uName, yName=yName);
 
     algorithm
-      annotation (overloadsConstructor=true);
     end fromPolynomials;
 
   end 'constructor';
@@ -2259,7 +2257,7 @@ and are used as inputs the ZerosAndPoles constructor.
     end if;
 
       ss.D := [d];
-     annotation (overloadsConstructor=true, Documentation(info="<html>
+     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ss = TransferFunction.Conversion.toStateSpace<b>toStateSpace</b>(tf)
@@ -2346,7 +2344,7 @@ is defined slightly differently.
         end for;
       end for;
 
-      annotation (overloadsConstructor=true, Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = TransferFunction.Conversion.<b>toZerosAndPolesMIMO</b>(tf)
@@ -2416,7 +2414,7 @@ Converts a matrix of transfer functions denoted as rational polynomial function 
     end if;
       D := [d];
       ABCD := [A,B;C,D];
-     annotation (overloadsConstructor=true, Documentation(info="<html>
+     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (A, B, C, D) = TransferFunction.Conversion.toStateSpace<b>toStateSpace</b>(tf)

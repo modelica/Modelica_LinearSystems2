@@ -59,7 +59,7 @@ record DiscreteStateSpace
       dss.D[1, 1] := r;
       dss.Ts := Ts;
       dss.method := method;
-      annotation (overloadsConstructor=true, Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dss = 'constructor'.<b>fromReal</b>(r)
@@ -320,7 +320,7 @@ public
         assert(false, "Argument method (= " + String(method) +
           ") of makeDiscrete is wrong.");
       end if;
-      annotation (overloadsConstructor=true,
+      annotation (
         Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -529,7 +529,7 @@ public
         assert(false, "Argument method (= " + String(method) +
           ") of makeDiscrete is wrong.");
       end if;
-      annotation (overloadsConstructor=true,
+      annotation (
          Documentation(info="<html>
 <p>
 This function derives a linear time invariant difference
@@ -2960,7 +2960,7 @@ end Plot;
     //  dzp.uName := dss.uNames[1];
     //  dzp.yName := dss.yNames[1];
 
-      annotation (overloadsConstructor=true, Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dzp = DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPoles</b>(dss)
@@ -3059,7 +3059,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
             dss_siso);
         end for;
       end for;
-      annotation (overloadsConstructor=true, Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dzp = DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPolesMIMO</b>(dss)

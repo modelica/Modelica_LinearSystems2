@@ -60,7 +60,7 @@ record DiscreteZerosAndPoles
       dzp.uName := uName;
       dzp.yName := yName;
 
-      annotation (overloadsConstructor=true, Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dzp = 'constructor'.<b>fromReal</b>(r)
@@ -111,7 +111,7 @@ Therefore, the record is defined by
 
   algorithm
     dzp := DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(dss);
-    annotation (overloadsConstructor=true,
+    annotation (
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -2325,7 +2325,7 @@ from a DiscreteZerosAndPoles record representated by first and second order nume
     dss.Ts := dzp.Ts;
     dss.method := dzp.method;
 
-    annotation (overloadsConstructor=true, Documentation(info="<html>
+    annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dss = DiscreteZerosAndPoles.Conversion<b>toDiscreteStateSpace</b>(dzp)

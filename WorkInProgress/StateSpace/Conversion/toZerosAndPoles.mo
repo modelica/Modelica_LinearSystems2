@@ -80,7 +80,7 @@ algorithm
   zp.uName := ss.uNames[1];
   zp.yName := ss.yNames[1];
 
-  annotation (overloadsConstructor=true, Documentation(info="<html>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = StateSpace.Conversion.<b>toZerosAndPoles</b>(ss)

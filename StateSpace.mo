@@ -107,7 +107,7 @@ public
 
   algorithm
     ss.D[1, 1] := r;
-    annotation (overloadsConstructor=true, Documentation(info="<html>
+    annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote>
 <pre>
@@ -5840,7 +5840,7 @@ This function plots the initial responses of a state space system for the initia
     zp.uName := ss.uNames[1];
     zp.yName := ss.yNames[1];
 
-    annotation (overloadsConstructor=true, Documentation(info="<html>
+    annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = StateSpace.Conversion.<b>toZerosAndPoles</b>(ss)
@@ -5999,7 +5999,7 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
               zp[ic, ib] := StateSpace.Conversion.toZerosAndPoles(ss_siso, tol);
          end for;
       end for;
-      annotation (overloadsConstructor=true, Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = StateSpace.Conversion.<b>toZerosAndPolesMIMO</b>(ss)
