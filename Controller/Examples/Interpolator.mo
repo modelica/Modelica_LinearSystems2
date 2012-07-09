@@ -43,11 +43,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(sine.y, interpolator1.u) annotation (Line(
-      points={{-59,10},{-48,10},{-48,50},{-2,50}},
+      points={{-59,10},{-50,10},{-50,50},{-2,50}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(sampler.y, interpolator3.u) annotation (Line(
-      points={{-19,10},{-12,10},{-12,-30},{-2,-30}},
+      points={{-19,10},{-10,10},{-10,-30},{-2,-30}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation ( Documentation(info="<html>

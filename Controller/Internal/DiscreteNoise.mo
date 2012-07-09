@@ -48,5 +48,52 @@ initial equation
   annotation (
     Documentation(info="<HTML>
 </HTML>
-"));
+"), Icon(graphics={
+        Line(
+          points={{-84,76},{-84,-92}},
+          color={175,175,175},
+          smooth=Smooth.None),
+                   Line(
+          points={{86,-84},{-94,-84}},
+          color={175,175,175},
+          smooth=Smooth.None),
+        Polygon(
+          points={{-84,90},{-92,68},{-76,68},{-84,90}},
+          lineColor={175,175,175},
+          smooth=Smooth.None,
+          fillColor={175,175,175},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{90,-84},{68,-92},{68,-76},{90,-84}},
+          lineColor={175,175,175},
+          smooth=Smooth.None,
+          fillColor={175,175,175},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{-35,13},{-35,-47},{-25,-47},{-25,-29},{-15,-29},{-15,-57},{-5,-57},
+          {-5,25},{1,25},{1,39},{7,39},{7,-17},{17,-17},{17,-5},{23,-5},{23,-35},
+          { 33,-35},{33,37},{43,37},{43,3},{51,3},{51,-63},{61,-63}},
+          color={0,0,127},
+          smooth=Smooth.None),
+        Line(
+          points={{-81,-29},{-67,-29},{-67,-13},{-59,-13},{-59,-61},{-51,-61},{-51,-39},
+          {-43,-39},{-43,45},{-35,45},{-35,13}},
+          color={0,0,127},
+          smooth=Smooth.None),
+        Line(
+          points={{-90,-70},{84,-70}},
+          color={255,0,0},
+          smooth=Smooth.None),
+        Line(
+          points={{-89,50},{85,50}},
+          color={255,0,0},
+          smooth=Smooth.None),
+        Text(
+          extent={{-50,90},{50,60}},
+          lineColor={95,95,95},
+          textString="noise"),
+        Text(
+          extent={{-130,-100},{130,-130}},
+          lineColor={0,0,0},
+          textString="[%y_min .. %y_max]")}));
 end DiscreteNoise;

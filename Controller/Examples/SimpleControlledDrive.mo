@@ -192,5 +192,17 @@ of the continuous controller are compared.
 <p>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controllers/Examples/SimpleControlledDrive_Plot1.png\">
 </p>
-</html>"));
+</html>"),
+    Diagram(graphics={Text(
+          extent={{0,58},{60,52}},
+          lineColor={255,0,0},
+          textString="controller"),
+                      Text(
+          extent={{-111,12},{-48,6}},
+          lineColor={255,0,0},
+          textString="reference"),
+                      Text(
+          extent={{-12,-91},{53,-97}},
+          lineColor={255,0,0},
+          textString="plant (flexible drive)")}));
 end SimpleControlledDrive;

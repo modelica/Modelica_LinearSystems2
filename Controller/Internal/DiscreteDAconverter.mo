@@ -33,5 +33,20 @@ equation
   annotation (
     Documentation(info="<HTML>
 </HTML>
-"));
+"), Icon(graphics={Line(
+          points={{-100,-100},{100,100}},
+          color={95,95,95},
+          smooth=Smooth.None),
+        Text(
+          extent={{-90,90},{-10,10}},
+          lineColor={95,95,95},
+          textString="D"),
+        Text(
+          extent={{10,-10},{90,-90}},
+          lineColor={95,95,95},
+          textString="A"),
+        Text(
+          extent={{-100,-100},{100,-130}},
+          lineColor={0,0,0},
+          textString="bits=%bits")}));
 end DiscreteDAconverter;

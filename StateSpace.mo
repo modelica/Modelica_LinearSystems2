@@ -760,15 +760,15 @@ encapsulated package Analysis
       StateSpace.Plot.step(ss=ss);
     end if;
 
-  // Plot Bode plots
+    // Plot Bode plots
     if analyseOptions.plotFrequencyResponse then
       Modelica.Utilities.Files.removeFile(dummyFileName);
-      print("<html>\n<body>\n<p>\n<b>Bode plots</b>\n</p></html>", dummyFileName);
+      print("<html>\n<body>\n<p>\n<b>Bode plots</b>\n</p>\n</body>\n</html>", dummyFileName);
       Modelica.Utilities.Streams.readFile(dummyFileName);
       StateSpace.Plot.bodeMIMO(ss=ss);
     end if;
 
-   // calculate the number of real eigenvalues
+    // Calculate the number of real eigenvalues
     nReal := Modelica_LinearSystems2.Internal.numberOfRealZeros(cev);
 
     // Construct complex eigenvector matrix
@@ -815,7 +815,7 @@ encapsulated package Analysis
           analyseOptions=analyseOptions);
         Modelica.Utilities.Streams.readFile(dummyFileName);
       else
-        print("<b>The system has no real eigenvalues</b><br><br>", fileName);
+        print("<b>The system has no real eigenvalues</b>\n<br><br>", fileName);
         Modelica.Utilities.Files.removeFile(dummyFileName);
         print("<html><body><b>The system has no real eigenvalues</b><br><br></body></html>",
           dummyFileName);
