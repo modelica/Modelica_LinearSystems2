@@ -2,10 +2,12 @@ within Modelica_LinearSystems2.Math.Matrices;
 package Examples "Package of examples to demonstrate the usage of matrices"
   extends Modelica.Icons.ExamplesPackage;
   function exampleHessenberg
+    "Example for the transformation of a matrix to upper Hessenberg form"
     import Modelica_LinearSystems2.Math.Matrices;
     input String fileName=DataDir + "m.mat"
-                                annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                        caption="matrix file")));
+      "Name of file where the matrix is saved"
+      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+                        caption="Open file with matrix")));
     input String matrixName="A" "Name of the matrix";
   protected
     Real M[:,:]=Matrices.fromFile(fileName, matrixName);

@@ -1,18 +1,7 @@
 within Modelica_LinearSystems2.Controller.Examples.Components;
 model MixingUnit
   "Mixing unit demo from Foellinger, Nichtlineare Regelungen II, p. 280"
-
-extends Templates.Internal.PlantTemplate_SISO;
-  MixingUnit1 mixingUnit(
-    c0=c0,
-    T0=T0,
-    a1=a1,
-    a21=a21,
-    a22=a22,
-    b=b,
-    k0=k0,
-    eps=eps)
-    annotation (Placement(transformation(extent={{-40,-40},{40,40}})));
+  extends Templates.Internal.PlantTemplate_SISO;
 
   parameter Real a1 = 0.2674;
   parameter Real a21 = 1.815;
@@ -32,6 +21,17 @@ extends Templates.Internal.PlantTemplate_SISO;
   final parameter Modelica.SIunits.Temperature T_start = T0*(1+x20);
   final parameter Real c_high_start(unit="mol/l") = c0*(1-0.72);
   final parameter Real T_c_start = T0*(1+u0);
+
+  MixingUnit1 mixingUnit(
+    c0=c0,
+    T0=T0,
+    a1=a1,
+    a21=a21,
+    a22=a22,
+    b=b,
+    k0=k0,
+    eps=eps)
+    annotation (Placement(transformation(extent={{-40,-40},{40,40}})));
 
 equation
   connect(mixingUnit.c, y) annotation (Line(

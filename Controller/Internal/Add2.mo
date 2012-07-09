@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Controller.Internal;
-model Add2
+model Add2 "Output the sum of the two real inputs (graphics can be changed)"
 
   parameter Boolean fromLeft = true
     "True, if second input is left (else below)"

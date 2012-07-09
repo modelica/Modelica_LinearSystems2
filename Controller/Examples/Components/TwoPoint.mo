@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Controller.Examples.Components;
 block TwoPoint "Block with two-point behaviour"
   extends Modelica.Blocks.Interfaces.SISO;
-  parameter Real b(min=0)=1;
+  parameter Real b(min=0)=1 "Absolute value for output (y = +-b)";
 
 equation
   y = if u<0 then -b else b;

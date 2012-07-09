@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Controller.Templates;
 partial model PlantTemplate "MIMO plant template"
-  parameter Integer n=1 "system order";
-  parameter Integer m=1 "number of inputs";
+  parameter Integer n=1 "System order";
+  parameter Integer m=1 "Number of inputs";
   parameter Boolean additionalMeasurableOutputs = true
     "Enable additional output vector of dimension l";
   parameter Integer l=1 "Number of measurable outputs"

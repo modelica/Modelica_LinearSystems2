@@ -1180,10 +1180,10 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.num
       // Build numerator
       num := zp.k+0*j;
       for i in 1:size(zp.n1, 1) loop
-         num := num*Internal.'p+a'(p, zp.n1[i]);
+        num := num*Internal.'p+a'(p, zp.n1[i]);
       end for;
       for i in 1:size(zp.n2, 1) loop
-         num := num*Internal.'p^2+k[1]*p+k[2]'(p, zp.n2[i, :]);
+        num := num*Internal.'p^2+k[1]*p+k[2]'(p, zp.n2[i, :]);
       end for;
 
       // Build denominator
@@ -6901,12 +6901,12 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
     end numberOfRealZerosAndPoles_zp;
 
-    function 'p+a'
+    function 'p+a' "Addition of a complex number and a real value"
       import Modelica;
       import Modelica_LinearSystems2.Math.Complex;
 
-      input Complex p;
-      input Real a;
+      input Complex p; // "Complex number";
+      input Real a "Value of Real variable";
       output Complex c;
     protected
       Complex j = Modelica_LinearSystems2.Math.Complex.j();

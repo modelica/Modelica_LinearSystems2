@@ -2,19 +2,8 @@ within Modelica_LinearSystems2.Controller.Examples.Components;
 model MixingUnit1
   "Mixing unit demo from Foellinger, Nichtlineare Regelungen II, p. 280"
   import SI = Modelica.SIunits;
-  Modelica.Blocks.Interfaces.RealInput T_c(unit="K") "Cooling temperature"
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-          rotation=0)));
-  Modelica.Blocks.Interfaces.RealOutput c(unit="mol/l") "Concentration"
-    annotation (Placement(transformation(extent={{100,-20},{140,20}},
-          rotation=0)));
 
-  Modelica.Blocks.Interfaces.RealOutput T(unit="K")
-    "Temperature in mixing unit"
-    annotation (Placement(transformation(extent={{-20,-20},{20,20}},
-          rotation=-90,
-        origin={0,-120})));
-  parameter Real c0(unit="mol/l") = 0.848 "Nominal concentration";
+  parameter Real c0(unit="mol/l") = 0.848 "Nominal concentration"; // Should be Modelica.SIunits.Concentration
   parameter SI.Temperature T0 = 308.5 "Nominal temperature";
   parameter Real a1 = 0.2674;
   parameter Real a21 = 1.815;
@@ -34,6 +23,20 @@ protected
   parameter Real wa22 = a22*T0/tau0;
   parameter Real wa23 = T0*(a21 - b)/tau0;
   parameter Real wb = b/tau0;
+
+public
+  Modelica.Blocks.Interfaces.RealInput T_c(unit="K") "Cooling temperature"
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+          rotation=0)));
+  Modelica.Blocks.Interfaces.RealOutput c(unit="mol/l") "Concentration"
+    annotation (Placement(transformation(extent={{100,-20},{140,20}},
+          rotation=0)));
+
+  Modelica.Blocks.Interfaces.RealOutput T(unit="K")
+    "Temperature in mixing unit"
+    annotation (Placement(transformation(extent={{-20,-20},{20,20}},
+          rotation=-90,
+        origin={0,-120})));
 equation
   gamma = c*wk0*exp( -weps/(T+1));
   der(c) = -wa11*c - wa12*gamma + wa13;

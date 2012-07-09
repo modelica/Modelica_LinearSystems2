@@ -8,8 +8,8 @@ model SeriesConnection "Series connection of two PT1 blocks"
     "Discretization method for discrete blocks";
   parameter Modelica.SIunits.Time sampleTime=0.05
     "Base sample time for discrete blocks";
-  parameter Modelica.SIunits.Time T1=0.2;
-  parameter Modelica.SIunits.Time T2=0.15;
+  parameter Modelica.SIunits.Time T1=0.2 "Time constant of first PT1 block";
+  parameter Modelica.SIunits.Time T2=0.15 "Time constant of second PT1 block";
 
   inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(
     blockType=blockType,
