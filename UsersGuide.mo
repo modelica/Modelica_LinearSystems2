@@ -1435,7 +1435,7 @@ on the Modelica LinearSystems library.
 <dt><b>Main Authors:</b></dt>
 <dd>Martin Otter and Marcus Baur<br>
     Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)<br>
-    Institut f&uuml;r Robotik und Mechatronik<br>
+    DLR Institut f&uuml;r Systemdynamik und Regelungstechnik<br>
     Postfach 1116<br>
     D-82230 Wessling<br>
     Germany<br>

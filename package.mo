@@ -77,12 +77,17 @@ scripts are provided, but different library names are used.
 
 
 <p>
-<b>Licensed by DLR under the Modelica License 2</b><br>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dlr_logo.png\"  width=60 >
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- <b>      Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</b>
+<b>Licensed by DLR under the Modelica License 2</b>
 </p>
-
+<table border=0 cellspacing=0 cellpadding=2>
+  <tr>
+    <td valign=\"top\"><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dlr_logo.png\"  width=60 ></td>
+    <td valign=\"top\">&nbsp;&nbsp;&nbsp;</td>
+    <td valign=\"top\"><b>Copyright</b>
+      <br>&copy; 2005-2012, DLR Institut f&uuml;r Robotik und Mechatronik
+      <br>&copy; 2012, DLR Institut f&uuml;r Systemdynamik und Regelungstechnik</td>
+  </tr>
+</table>
 
 <p>
 <em>This Modelica package is <u>free</u> software and
