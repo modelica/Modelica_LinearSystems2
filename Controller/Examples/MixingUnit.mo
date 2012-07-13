@@ -74,5 +74,7 @@ selection yields the following simulation result.
 <dd> <b>Nichtlineare Regelungen I</b>.
      Oldenbourg Verlag, 8. Auflage.<br>&nbsp;</dd>
 </dl>
-</html>"));
+</html>"),
+    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{120,
+            100}})));
 end MixingUnit;
