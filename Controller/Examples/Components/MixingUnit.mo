@@ -1,26 +1,29 @@
 within Modelica_LinearSystems2.Controller.Examples.Components;
-model MixingUnit
-  "Mixing unit demo from Foellinger, Nichtlineare Regelungen II, p. 280"
+model MixingUnit "Stirred tank reactor for inversion"
   extends Templates.Internal.PlantTemplate_SISO;
+  import SI = Modelica.SIunits;
 
-  parameter Real a1 = 0.2674;
-  parameter Real a21 = 1.815;
-  parameter Real a22 = 0.4682;
-  parameter Real b = 1.5476;
-  parameter Real k0 = 1.05e14;
-  parameter Real eps = 34.2894;
-  parameter Real c0(unit="mol/l") = 0.848 "Nominal concentration";
-  parameter Modelica.SIunits.Temperature T0 = 308.5 "Nominal temperature";
-  parameter Real x10 = 0.42;
-  parameter Real x10_inv = 0.6;
-  parameter Real x20 = 0.01;
-  parameter Real u0 = -0.021439;
+  parameter Real c0(unit="mol/l") = 0.848 "Nominal concentration"; // Should be Modelica.SIunits.Concentration in [mol/m^3]
+  parameter SI.Temperature T0 = 308.5 "Nominal temperature";
+  parameter Real a1 = 0.2674 "Matrix A: Coefficient of element [1,1]";
+  parameter Real a21 = 1.815 "Matrix A: Coefficient of element [2,1]";
+  parameter Real a22 = 0.4682 "Matrix A: Coefficient of element [2,2]";
+  parameter Real b = 1.5476 "Matrix B: Coefficient of element [2,1]";
+  parameter Real k0(min=0) = 1.05e14 "Constant k0 for gamma";
+  parameter Real eps(min=0) = 34.2894 "Constant eps for gamma";
+  parameter Real x10 = 0.42
+    "Initial value of state x1 (related concentration of substance A in tank)";
+  parameter Real x10_inv = 0.6 "Initial value of state x1 of inverted model";
+  parameter Real x20 = 0.01
+    "Initial value of state x2 (related temperature of substance A in tank)";
+  parameter Real u0 = -0.021439
+    "Initial related temperature of cooling medium [-]";
 
   final parameter Real c_start(unit="mol/l") = c0*(1-x10);
   final parameter Real c_inv_start(unit="mol/l") = c0*(1-x10_inv);
-  final parameter Modelica.SIunits.Temperature T_start = T0*(1+x20);
+  final parameter SI.Temperature T_start = T0*(1+x20);
   final parameter Real c_high_start(unit="mol/l") = c0*(1-0.72);
-  final parameter Real T_c_start = T0*(1+u0);
+  final parameter SI.Temperature T_c_start = T0*(1+u0);
 
   MixingUnit1 mixingUnit(
     c0=c0,
@@ -35,18 +38,20 @@ model MixingUnit
 
 equation
   connect(mixingUnit.c, y) annotation (Line(
-      points={{48,0},{110,0}},
+      points={{44,0},{110,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(mixingUnit.T, ym[1]) annotation (Line(
-      points={{0,-48},{0,-110}},
+      points={{0,-44},{0,-110}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(u, mixingUnit.T_c) annotation (Line(
       points={{-120,0},{-48,0}},
       color={0,0,127},
       smooth=Smooth.None));
-annotation (                       Icon(coordinateSystem(preserveAspectRatio=false,
+
+  annotation (
+    Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
           extent={{-100,40},{100,-100}},
@@ -62,15 +67,15 @@ annotation (                       Icon(coordinateSystem(preserveAspectRatio=fal
           textString="%name"),
         Text(
           extent={{8,-100},{50,-138}},
-          lineColor={0,0,0},
+          lineColor={95,95,95},
           textString="T"),
         Text(
-          extent={{92,44},{134,6}},
-          lineColor={0,0,0},
+          extent={{100,50},{142,12}},
+          lineColor={95,95,95},
           textString="c"),
         Text(
-          extent={{-194,72},{-108,34}},
-          lineColor={0,0,0},
+          extent={{-186,68},{-100,30}},
+          lineColor={95,95,95},
           textString="T_c"),
         Line(points={{0,-50},{0,-100}}, color={0,0,0}),
         Ellipse(
@@ -86,5 +91,8 @@ annotation (                       Icon(coordinateSystem(preserveAspectRatio=fal
         Line(points={{0,80},{0,16}}, color={0,0,0}),
         Line(points={{20,80},{20,16}}, color={0,0,0}),
         Line(points={{-86,-72},{-86,-114}}, color={0,0,0}),
-        Line(points={{-66,-72},{-66,-114}}, color={0,0,0})}));
+        Line(points={{-66,-72},{-66,-114}}, color={0,0,0})}), Documentation(
+        info="<html>
+<p>Model of idealized stirred tank reactor (see <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Components.MixingUnit1\">MixingUnit1</a> for more details) intended for model inversion.</p>
+</html>"));
 end MixingUnit;
