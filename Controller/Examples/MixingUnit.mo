@@ -59,6 +59,9 @@ This example demonstrates the usage of the control structure template
 <i>Modelica_Controller.Templates.TwoDOFinverseModelController2</i> to
 control a system by using of an inverse system model in the forward path.
 The controlled system is a mixing unit described in [1].
+See also model of
+<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Components.MixingUnit1\">MixingUnit1</a>
+for more details.
 </p>
 <p>
 Within Dymola simulation tool the &quot;Commands / Simulate and Plot Results&quot;
@@ -70,9 +73,9 @@ selection yields the following simulation result.
 
 <h4><a name=\"References\">References</a></h4>
 <dl>
-<dt>&nbsp;[1] F&ouml;llinger O.:</dt>
+<dt>&nbsp;[1] F&ouml;llinger O. (1998):</dt>
 <dd> <b>Nichtlineare Regelungen I</b>.
-     Oldenbourg Verlag, 8. Auflage.<br>&nbsp;</dd>
+     8th Edition, Oldenbourg Verlag München.<br>&nbsp;</dd>
 </dl>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{120,

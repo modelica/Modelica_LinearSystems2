@@ -13,7 +13,7 @@ model MixingUnit1 "Stirred tank reactor"
   parameter Real eps(min=0) = 34.2894 "Constant eps for gamma";
   Real gamma "Reaction speed";
 protected
-  parameter SI.Time tau0 = 60;
+  parameter SI.Time tau0 = 60 "Time scaling";
   parameter Real wk0 = k0/c0;
   parameter Real weps = eps*T0;
   parameter Real wa11 = a1/tau0;
@@ -40,19 +40,14 @@ equation
   gamma = c*wk0*exp( -weps/(T+1));
   der(c) = -wa11*c - wa12*gamma + wa13;
   der(T) = -wa21*T + wa22*gamma + wa23 + wb*T_c;
-  annotation (                       Icon(coordinateSystem(preserveAspectRatio=false,
+  annotation (                       Icon(coordinateSystem(preserveAspectRatio=true,
           extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
-          extent={{-100,30},{100,-100}},
-          lineColor={255,255,255},
-          fillColor={170,213,255},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-80,40},{80,-100}},
+          extent={{-100,40},{100,-100}},
           lineColor={255,255,255},
           fillColor={0,255,255},
           fillPattern=FillPattern.Solid),
-        Line(points={{-80,100},{-80,-100},{80,-100},{80,100}},     color={0,0,0}),
+        Line(points={{-100,100},{-100,-100},{100,-100},{100,100}}, color={0,0,0}),
         Text(
           extent={{-144,148},{148,100}},
           lineColor={0,0,255},
@@ -70,10 +65,10 @@ equation
           lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Line(points={{0,80},{0,16}}, color={0,0,0}),
-        Line(points={{20,80},{20,16}}, color={0,0,0}),
-        Line(points={{-66,40},{-66,-114}},  color={0,0,0}),
-        Line(points={{-54,40},{-54,-114}},  color={0,0,0}),
+        Line(points={{40,80},{40,16}}, color={0,0,0}),
+        Line(points={{60,80},{60,16}}, color={0,0,0}),
+        Line(points={{-80,-78},{-80,-120}}, color={0,0,0}),
+        Line(points={{-60,-78},{-60,-120}}, color={0,0,0}),
         Text(
           extent={{-186,68},{-100,30}},
           lineColor={95,95,95},
@@ -85,8 +80,7 @@ equation
         Text(
           extent={{8,-100},{50,-138}},
           lineColor={95,95,95},
-          textString="T"),
-        Line(points={{-100,80},{-100,-100},{100,-100},{100,80}},   color={0,0,0})}),
+          textString="T")}),
     Diagram(graphics={
         Rectangle(
           extent={{-70,16},{70,-60}},

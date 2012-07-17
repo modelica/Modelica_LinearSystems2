@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Controller.Examples.Components;
-model MixingUnit "Stirred tank reactor for inversion"
+model MixingUnit
+  "Stirred tank reactor as controller plant with standard interfaces"
   extends Templates.Internal.PlantTemplate_SISO;
   import SI = Modelica.SIunits;
 
@@ -88,11 +89,16 @@ equation
           lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Line(points={{0,80},{0,16}}, color={0,0,0}),
-        Line(points={{20,80},{20,16}}, color={0,0,0}),
-        Line(points={{-86,-72},{-86,-114}}, color={0,0,0}),
-        Line(points={{-66,-72},{-66,-114}}, color={0,0,0})}), Documentation(
+        Line(points={{-60,80},{-60,16}},
+                                     color={0,0,0}),
+        Line(points={{-40,80},{-40,16}},
+                                       color={0,0,0}),
+        Line(points={{60,-78},{60,-120}},   color={0,0,0}),
+        Line(points={{80,-78},{80,-120}},   color={0,0,0})}), Documentation(
         info="<html>
-<p>Model of idealized stirred tank reactor (see <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Components.MixingUnit1\">MixingUnit1</a> for more details) intended for model inversion.</p>
+<p>Model of idealized stirred tank reactor, see <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Components.MixingUnit1\">MixingUnit1</a>
+for more details.
+It is intended for replacement of a plant instance in general model of controller. 
+</p>
 </html>"));
 end MixingUnit;
