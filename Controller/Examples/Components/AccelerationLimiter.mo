@@ -25,18 +25,18 @@ block AccelerationLimiter
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(extent={{-85,5},{-75,-5}})));
   Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=v_limit) if velocityLimitation
-    annotation (Placement(transformation(extent={{-44,5},{-34,15}})));
+    annotation (Placement(transformation(extent={{-60,5},{-50,15}})));
   Modelica.Blocks.Math.Gain gain(k=1) if not velocityLimitation
-    annotation (Placement(transformation(extent={{-44,-16},{-34,-6}})));
+    annotation (Placement(transformation(extent={{-60,-16},{-50,-6}})));
   Integrator integrator1(
     k=1,
     withDelay=withDelay1,
     y_start=y1_start)
-    annotation (Placement(transformation(extent={{34,-6},{46,6}})));
+    annotation (Placement(transformation(extent={{14,-6},{26,6}})));
   Modelica.Blocks.Math.Feedback feedback1
-    annotation (Placement(transformation(extent={{-25,5},{-15,-5}})));
+    annotation (Placement(transformation(extent={{-37,5},{-27,-5}})));
   Modelica.Blocks.Nonlinear.Limiter limiter2(uMax=a_limit)
-    annotation (Placement(transformation(extent={{-6,-5},{4,5}})));
+    annotation (Placement(transformation(extent={{-18,-5},{-8,5}})));
   Modelica.Blocks.Interfaces.RealInput u
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput s
@@ -46,65 +46,65 @@ block AccelerationLimiter
   Modelica.Blocks.Interfaces.RealOutput a
     annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
   Modelica.Blocks.Math.Abs abs1
-    annotation (Placement(transformation(extent={{25,35},{15,45}})));
+    annotation (Placement(transformation(extent={{35,35},{25,45}})));
   Modelica.Blocks.Math.Product product
-    annotation (Placement(transformation(extent={{5,55},{-5,65}})));
+    annotation (Placement(transformation(extent={{15,55},{5,65}})));
   Modelica.Blocks.Math.Gain gain1(k=1/(2*a_limit))
-    annotation (Placement(transformation(extent={{-16,55},{-26,65}})));
+    annotation (Placement(transformation(extent={{-6,55},{-16,65}})));
   Internal.Add add
     annotation (Placement(transformation(extent={{-55,55},{-65,65}})));
   Integrator integrator2(
     k=1,
     withDelay=withDelay2,
     y_start=y2_start)
-    annotation (Placement(transformation(extent={{74,-6},{86,6}})));
+    annotation (Placement(transformation(extent={{54,-6},{66,6}})));
 equation
   connect(feedback.y, limiter1.u) annotation (Line(
-      points={{-75.5,0},{-50,0},{-50,10},{-45,10}},
+      points={{-75.5,0},{-66,0},{-66,10},{-61,10}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(feedback1.y, limiter2.u) annotation (Line(
-      points={{-15.5,0},{-7,0}},
+      points={{-27.5,0},{-19,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(limiter2.y, integrator1.u) annotation (Line(
-      points={{4.5,0},{32.8,0}},
+      points={{-7.5,0},{12.8,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(integrator1.y, feedback1.u2) annotation (Line(
-      points={{46.6,0},{60,0},{60,20},{-20,20},{-20,4}},
+      points={{26.6,0},{40,0},{40,20},{-32,20},{-32,4}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(limiter1.y, feedback1.u1) annotation (Line(
-      points={{-33.5,10},{-28,10},{-28,0},{-24,0}},
+      points={{-49.5,10},{-44,10},{-44,0},{-36,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(gain.u, feedback.y) annotation (Line(
-      points={{-45,-11},{-50,-11},{-50,0},{-75.5,0}},
+      points={{-61,-11},{-66,-11},{-66,0},{-75.5,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(gain.y, feedback1.u1) annotation (Line(
-      points={{-33.5,-11},{-28,-11},{-28,0},{-24,0}},
+      points={{-49.5,-11},{-44,-11},{-44,0},{-36,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(integrator1.y, abs1.u) annotation (Line(
-      points={{46.6,0},{60,0},{60,40},{26,40}},
+      points={{26.6,0},{40,0},{40,40},{36,40}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(abs1.y, product.u2) annotation (Line(
-      points={{14.5,40},{10,40},{10,57},{6,57}},
+      points={{24.5,40},{20,40},{20,57},{16,57}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(product.u1, integrator1.y) annotation (Line(
-      points={{6,63},{60,63},{60,0},{46.6,0}},
+      points={{16,63},{40,63},{40,0},{26.6,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(gain1.u, product.y) annotation (Line(
-      points={{-15,60},{-5.5,60}},
+      points={{-5,60},{4.5,60}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.u2, gain1.y) annotation (Line(
-      points={{-56,60},{-26.5,60}},
+      points={{-56,60},{-16.5,60}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.y, feedback.u2) annotation (Line(
@@ -112,11 +112,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(integrator1.y, v) annotation (Line(
-      points={{46.6,0},{60,0},{60,-20},{96,-20},{96,0},{110,0}},
+      points={{26.6,0},{40,0},{40,-20},{90,-20},{90,0},{110,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(limiter2.y, a) annotation (Line(
-      points={{4.5,0},{20,0},{20,-60},{110,-60}},
+      points={{-7.5,0},{0,0},{0,-60},{110,-60}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(feedback.u1, u) annotation (Line(
@@ -124,15 +124,15 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(integrator2.u, integrator1.y) annotation (Line(
-      points={{72.8,0},{46.6,0}},
+      points={{52.8,0},{26.6,0}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(integrator2.y, add.u1) annotation (Line(
-      points={{86.6,0},{90,0},{90,80},{-60,80},{-60,64}},
+      points={{66.6,0},{80,0},{80,80},{-60,80},{-60,64}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(integrator2.y, s) annotation (Line(
-      points={{86.6,0},{90,0},{90,60},{110,60}},
+      points={{66.6,0},{80,0},{80,60},{110,60}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation ( Icon(graphics={
@@ -153,5 +153,5 @@ equation
           visible=velocityLimitation,
           extent={{-106,-14},{-28,-38}},
           lineColor={0,0,0},
-          textString="and")}));
+          textString="and")}), Diagram(graphics));
 end AccelerationLimiter;

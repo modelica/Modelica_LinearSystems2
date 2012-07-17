@@ -125,10 +125,10 @@ equation
     Documentation(info="<html>
 <p>Model of a simple inverted double pendulum system using Modelica_Controller.Examples.Components.InverseDoublePendulum. The physical Model is used in Modelica_LinearSystems2.Examples.StateSpace.inverseDoublePendulumController where it is being linearized an used as a base for linear controller design. The results are used to control the crane system in Modelica_Controller.Examples.InverseDoublePendulum.mo </p>
 </html>"),
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{150,
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Rectangle(
-          extent={{-150,100},{150,-100}},
+          extent={{-100,100},{100,-100}},
           lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),

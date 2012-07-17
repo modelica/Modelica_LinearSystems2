@@ -59,16 +59,16 @@ equation
 </html>"),
     experiment(StopTime=1.5, Tolerance=1e-006),
     Icon(graphics={
-        Rectangle(extent={{-66,26},{-20,-10}}, lineColor={0,0,255}),
-        Rectangle(extent={{20,26},{72,-10}}, lineColor={0,0,255}),
+        Rectangle(extent={{-66,26},{-20,-10}}, lineColor={0,0,127}),
+        Rectangle(extent={{20,26},{72,-10}}, lineColor={0,0,127}),
         Line(
           points={{-20,8},{20,8}},
-          color={0,0,255},
+          color={0,0,127},
           smooth=Smooth.None),
         Polygon(
           points={{20,8},{6,12},{6,4},{20,8}},
-          lineColor={0,0,255},
+          lineColor={0,0,127},
           smooth=Smooth.None,
-          fillColor={0,0,255},
+          fillColor={0,0,127},
           fillPattern=FillPattern.Solid)}));
 end SeriesConnection;

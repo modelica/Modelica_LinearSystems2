@@ -145,7 +145,7 @@ model InverseDoublePendulum "Inverse double pendulum"
         origin={-80,120}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
-        origin={-60,122})));
+        origin={-60,120})));
   Modelica.Mechanics.Translational.Sources.Force distrubanceForceCart if cartDisturbance
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -156,7 +156,7 @@ model InverseDoublePendulum "Inverse double pendulum"
         origin={80,120}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
-        origin={60,122})));
+        origin={60,120})));
   Modelica.Mechanics.MultiBody.Forces.Torque torque if bodyDisturbance
     annotation (Placement(transformation(extent={{40,60},{60,80}})));
   Modelica.Blocks.Sources.Constant const2[2](k={0,0}) if bodyDisturbance
@@ -417,7 +417,7 @@ in Modelica_Controller.Examples.InverseDoublePendulum.mo
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Rectangle(
-          extent={{-100,102},{100,-100}},
+          extent={{-100,100},{100,-100}},
           lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
@@ -478,5 +478,7 @@ in Modelica_Controller.Examples.InverseDoublePendulum.mo
           extent={{-20,-2},{-14,-8}},
           lineColor={0,0,0},
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}),
+    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{150,
+            100}})));
 end InverseDoublePendulum;
