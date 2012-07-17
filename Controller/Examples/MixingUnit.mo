@@ -18,21 +18,33 @@ model MixingUnit
     redeclare Controller.PI controller(k=10, T=10));
 
   import SI = Modelica.SIunits;
-  parameter Real x10 = 0.42;
-  parameter Real x10_inv = 0.6;
-  parameter Real x20 = 0.01;
-  parameter Real u0 = -0.0224;
+  parameter Real x10 = 0.42
+    "Initial value of state x1 (related concentration of substance A in tank)";
+  parameter Real x10_inv = 0.6 "Initial value of state x1 of inverted model";
+  parameter Real x20 = 0.01
+    "Initial value of state x2 (related temperature in tank)";
+  parameter Real u0 = -0.0224
+    "Initial related temperature of cooling medium [-]";
   parameter SI.Frequency freq = 1/300 "Critical frequency of filter";
-  final parameter Real c0 = 0.848;
-  final parameter SI.Temperature T0 = 308.5;
-  final parameter Real c_start(unit="mol/l") = c0*(1-x10);
-  final parameter Real c_inv_start(unit="mol/l") = c0*(1-x10_inv);
-  final parameter SI.Temperature T_start = T0*(1+x20);
-  final parameter Real c_high_start(unit="mol/l") = c0*(1-0.72);
-  final parameter Real T_c_start = T0*(1+u0);
 
-  Modelica.Blocks.Sources.Step step1(height=c_high_start - c_start, offset=
-        c_start,
+  final parameter Real c0 = 0.848
+    "Nominal concentration of substance A on intake";
+  final parameter SI.Temperature T0 = 308.5
+    "Nominal temperature of substance A on intake";
+  final parameter Real c_start(unit="mol/l") = c0*(1-x10)
+    "Initial concentration of substance A in tank";
+  final parameter Real c_inv_start(unit="mol/l") = c0*(1-x10_inv)
+    "Initial concentration of substance A in tank";
+  final parameter SI.Temperature T_start = T0*(1+x20)
+    "Initial temperature in tank";
+  final parameter Real c_high_start(unit="mol/l") = c0*(1-0.72)
+    "Concentration change height";
+  final parameter SI.Temperature T_c_start = T0*(1+u0)
+    "Initial temperature of cooling medium";
+
+  Modelica.Blocks.Sources.Step step1(
+    height=c_high_start - c_start,
+    offset=c_start,
     startTime=25)
     annotation (Placement(transformation(extent={{-120,10},{-100,30}},
           rotation=0)));

@@ -28,7 +28,8 @@ public
   Modelica.Blocks.Interfaces.RealInput T_c(unit="K") "Cooling temperature"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
           rotation=0)));
-  Modelica.Blocks.Interfaces.RealOutput c(unit="mol/l") "Concentration"
+  Modelica.Blocks.Interfaces.RealOutput c(unit="mol/l")
+    "Concentration in mixing unit"
     annotation (Placement(transformation(extent={{100,-10},{120,10}},
           rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput T(unit="K")

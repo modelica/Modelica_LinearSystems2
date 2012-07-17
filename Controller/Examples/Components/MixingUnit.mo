@@ -16,15 +16,19 @@ model MixingUnit
     "Initial value of state x1 (related concentration of substance A in tank)";
   parameter Real x10_inv = 0.6 "Initial value of state x1 of inverted model";
   parameter Real x20 = 0.01
-    "Initial value of state x2 (related temperature of substance A in tank)";
+    "Initial value of state x2 (related temperature in tank)";
   parameter Real u0 = -0.021439
     "Initial related temperature of cooling medium [-]";
 
-  final parameter Real c_start(unit="mol/l") = c0*(1-x10);
-  final parameter Real c_inv_start(unit="mol/l") = c0*(1-x10_inv);
-  final parameter SI.Temperature T_start = T0*(1+x20);
-  final parameter Real c_high_start(unit="mol/l") = c0*(1-0.72);
-  final parameter SI.Temperature T_c_start = T0*(1+u0);
+  final parameter Real c_start(unit="mol/l") = c0*(1-x10)
+    "Initial concentration of substance A in tank";
+  final parameter Real c_inv_start(unit="mol/l") = c0*(1-x10_inv)
+    "Initial concentration of substance A in tank";
+  final parameter SI.Temperature T_start = T0*(1+x20)
+    "Initial temperature in tank";
+  //final parameter Real c_high_start(unit="mol/l") = c0*(1-0.72);
+  final parameter SI.Temperature T_c_start = T0*(1+u0)
+    "Initial temperature of cooling medium";
 
   MixingUnit1 mixingUnit(
     c0=c0,

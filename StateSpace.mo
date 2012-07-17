@@ -7710,7 +7710,7 @@ to separate the uncontrollable poles from the controllable poles.
 
   end dgreeOfRedSys;
 
-  encapsulated function householder
+  encapsulated function householder "Householder transformation"
     import Modelica_LinearSystems2.StateSpace;
     import Modelica_LinearSystems2.Math.Matrices;
     import Modelica_LinearSystems2.Math.Vectors;

@@ -3,8 +3,8 @@ model FirstExample "First example to demonstrate representative block"
   extends Modelica.Icons.Example;
   import Modelica_LinearSystems2;
 
-  parameter Real w=10;
-  parameter Real D=0.1;
+  parameter Modelica.SIunits.AngularFrequency w=10 "Undamped natural frequency";
+  parameter Real D=0.1 "Damping ratio";
 
   Modelica.Blocks.Sources.Step step(
     startTime=0.5,

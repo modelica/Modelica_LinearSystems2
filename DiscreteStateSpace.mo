@@ -2615,7 +2615,7 @@ This function plots the impulse responses of a state space system for each syste
   Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse(dss)
 </pre></blockquote>
 </html> "));
-end impulse;
+  end impulse;
 
   encapsulated function step
     "Step response plot of a discrete state space system"
@@ -2697,7 +2697,7 @@ This function plots the discrete step responses of a state space system for each
   Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss, tSpan=3)
 </pre></blockquote>
 </html> "));
-end step;
+  end step;
 
   encapsulated function ramp
     "Ramp response plot of a discrete state space system"
@@ -2778,7 +2778,7 @@ This function plots the ramp responses of a discrete state space system for each
   Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp(dss)
 </pre></blockquote>
 </html> "));
-end ramp;
+  end ramp;
 
 encapsulated function initialResponse
       "Initial condition response plot of a discrete state space system"
@@ -3520,7 +3520,6 @@ ss.B2  = [0.000437113227802044;
 </pre></blockquote>
 </html>"));
     end fromModel;
-
 
   end Import;
 
