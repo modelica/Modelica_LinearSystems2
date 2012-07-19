@@ -67,7 +67,8 @@ algorithm
     legend=legend,
     color=markerColor,
     pattern=  LinePattern.None,
-    marker=  markerStyle2);
+    marker=  markerStyle2,
+    erase=false);
 
 //   removePlots();
 // function createPlot "Create plot window"
