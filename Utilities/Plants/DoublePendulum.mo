@@ -329,5 +329,7 @@ equation
         Text(
           extent={{-150,140},{150,100}},
           lineColor={0,0,255},
-          textString="%name")}));
+          textString="%name")}),
+    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{150,
+            100}})));
 end DoublePendulum;

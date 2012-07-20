@@ -116,5 +116,6 @@ equation
       smooth=Smooth.None));
   annotation ( Documentation(info="<html>
 <p>Multibody model of a simple inverted double pendulum system. This physical model is used in various models and functions of the library e.g. for linearization or as a base for linear controller design. The mdel is the same as in Modelica_Controller.Examples.Components.DoublePendulum but with different initial values because the initial values are used as a working point for linearization.</p>
-</html>"));
+</html>"), Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-150,
+            -100},{150,100}})));
 end DoublePendulumInverse;

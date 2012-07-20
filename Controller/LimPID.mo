@@ -210,11 +210,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(I.y, addPID.u3) annotation (Line(
-      points={{-9,-50},{-5,-50},{-5,-8},{8,-8}},
+      points={{-9,-50},{-1,-50},{-1,-8},{8,-8}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(Izero.y, addPID.u3) annotation (Line(
-      points={{9.5,-49.5},{-4.5,-49.5},{-4.5,-8},{8,-8}},
+      points={{9.5,-49.5},{-0.5,-49.5},{-0.5,-8},{8,-8}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(gainPID.y, addSat.u2) annotation (Line(points={{61,0},{65,0},{65,-20},
