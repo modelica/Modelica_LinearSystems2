@@ -1,4 +1,5 @@
 plotRootLoci
+plotRootLociNoLoop
 plotEigenvalues
 LinearSystems2Tests
 DiscreteZerosAndPoles
