@@ -36,8 +36,8 @@ protected
 
 public
   output Real X[size(A, 1),size(A, 2)]
-    "orthogonal matrix of the Schur vectors associated to ordered rsf";
-  output Complex ev[size(A, 1)] "eigenvalues of the closed loop system";
+    "Orthogonal matrix of the Schur vectors associated to ordered rsf";
+  output Complex ev[size(A, 1)] "Eigenvalues of the closed loop system";
 
 algorithm
   (LU,p) := Modelica.Math.Matrices.LU(AT);
@@ -71,14 +71,11 @@ algorithm
 \"Matrices.LAPACK.dgesvx\" is not possible, because the system has either
 no or infinitely many solutions (input A is singular).");
 
-      if refine then
-        X := Matrices.Internal.darenls(A, B, R, Q, X);
-      end if;
+    if refine then
+      X := Matrices.Internal.darenls(A, B, R, Q, X);
+    end if;
   else
-    X := fill(
-      0,
-      size(Z21, 1),
-      size(Z11, 1));
+    X := fill(0,size(Z21, 1),size(Z11, 1));
   end if;
 
   annotation (Documentation(info="<html>

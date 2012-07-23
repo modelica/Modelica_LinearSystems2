@@ -23,12 +23,11 @@ protected
   Integer evSize;
   Complex xc[2];
 public
-  output Real X[size(A, 1),size(A, 2)] "stabilizing solution of CARE";
-  output Complex ev[size(A, 1)] "eigenvalues of the closed loop system";
+  output Real X[size(A, 1),size(A, 2)] "Stabilizing solution of CARE";
+  output Complex ev[size(A, 1)] "Eigenvalues of the closed loop system";
 
 algorithm
-  Modelica.Utilities.Streams.print("\nStrart");
-    if n > 1 then
+  if n > 1 then
     (H_RSF,Z,alphaReal,alphaImag) := Matrices.rsf2(H);
     (H_RSF,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSF(
       true,
@@ -54,10 +53,7 @@ algorithm
         X := Matrices.Internal.carenls(A, B, R, Q, X);
       end if;
     else
-      X := fill(
-        0,
-        size(Z21, 1),
-        size(Z11, 1));
+      X := fill(0,size(Z21, 1),size(Z11, 1));
     end if;
 
   elseif n == 1 then

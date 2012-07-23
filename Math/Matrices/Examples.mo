@@ -100,65 +100,25 @@ package Examples "Package of examples to demonstrate the usage of matrices"
     end for;
     Modelica.Utilities.Streams.print(
       "Show results of QR2 - QR factorization with pivoting:\n-----------------------------------------------------");
-    Matrices.printMatrix(
-        M,
-        6,
-        "M");
-    Matrices.printMatrix(
-        Q,
-        6,
-        "Q");
-    Matrices.printMatrix(
-        R,
-        6,
-        "R");
-    Vectors.printVector(
-        p,
-        6,
-        "p");
-    Matrices.printMatrix(
-        QR,
-        6,
-        "QR");
-    Matrices.printMatrix(
-        QR2,
-        6,
-        "QR2");
-    Matrices.printMatrix(
-        M*P,
-        6,
-        "M*P");
-    Matrices.printMatrix(
-        M2,
-        6,
-        "M2");
+    Matrices.printMatrix(M,6,"M");
+    Matrices.printMatrix(Q,6,"Q");
+    Matrices.printMatrix(R,6,"R");
+    Vectors.printVector(p,6,"p");
+    Matrices.printMatrix(QR,6,"QR");
+    Matrices.printMatrix(QR2,6,"QR2");
+    Matrices.printMatrix(M*P,6,"M*P");
+    Matrices.printMatrix(M2,6,"M2");
     QR2 := QR*transpose(P);
-    Matrices.printMatrix(
-        QR2,
-        6,
-        "QR2");
+    Matrices.printMatrix(QR2,6,"QR2");
 
     Modelica.Utilities.Streams.print(
       "Show results of QR factorization without pivoting:\n-----------------------------------------------------");
-    (Q,R,tau,QR2) := Modelica_LinearSystems2.Math.Matrices.QR(
-                              M);
+    (Q,R,tau,QR2) := Modelica_LinearSystems2.Math.Matrices.QR(M);
     QR := Q*R;
-    Matrices.printMatrix(
-        Q,
-        6,
-        "Q");
-    Matrices.printMatrix(
-        R,
-        6,
-        "R");
-    Matrices.printMatrix(
-        QR,
-        6,
-        "QR");
-    Matrices.printMatrix(
-        QR2,
-        6,
-        "QR2");
+    Matrices.printMatrix(Q,6,"Q");
+    Matrices.printMatrix(R,6,"R");
+    Matrices.printMatrix(QR,6,"QR");
+    Matrices.printMatrix(QR2,6,"QR2");
 
   end exampleQR;
 
