@@ -80,6 +80,7 @@ algorithm
   color := [linspace(markerColorMin[1],markerColorMax[1],nVarMin),linspace(markerColorMin[2],markerColorMax[2],nVarMin),linspace(markerColorMin[3],markerColorMax[3],nVarMin)];
 
   parValues:=linspace(modelParams[1].parMin,modelParams[1].parMax,nVarMin);
+  closeModel();
   ok:=simulateMultiExtendedModel(
     problem=modelName,
     startTime=0,
@@ -87,10 +88,9 @@ algorithm
     initialNames={modelParams[1].parName,"linearize:"},
     initialValues=transpose({parValues,linspace(1,nVarMin,nVarMin)}),
     finalNames=fill("",0),
-      method=method,
-      numberOfIntervals=2,
-      tolerance=simulationOptions.tolerance,
-      fixedstepsize=simulationOptions.fixedStepSize);
+    method=method,
+    tolerance=simulationOptions.tolerance,
+    fixedstepsize=simulationOptions.fixedStepSize);
 
   // input String problem := "" "Name of model, e.g. Modelica.Mechanics.Rotational.Components.Clutch";
   // input Real startTime := 0.0 "Start of simulation";
