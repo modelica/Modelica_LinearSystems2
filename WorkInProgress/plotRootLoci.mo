@@ -9,7 +9,9 @@ function plotRootLoci
     "Name of the Modelica model"
     annotation(Dialog(translatedModel));
   input Boolean simulate = false
-    "Linearize model after simulation (time-consuming!), otherwise linearization of all parameter variants at once";
+    "Linearize model after simulation (time-consuming!), otherwise linearization of all parameter variants at once"
+    annotation (Dialog(__Dymola_compact=false),
+      choices(__Dymola_checkBox=true));
 
   input Modelica_LinearSystems2.WorkInProgress.Internal.ModelParameters modelParams[:]=
     {Modelica_LinearSystems2.WorkInProgress.Internal.ModelParameters(
@@ -35,9 +37,11 @@ function plotRootLoci
   input Integer position[4]={5, 5, 600, 450} "Window Position"
     annotation (Dialog(group="Plot settings"));
   input Boolean useLegend = true "Use legend"
-    annotation (Dialog(group="Plot settings"));
-  input Boolean grid = true "Add grid"
-    annotation (Dialog(group="Plot settings"));
+    annotation (Dialog(group="Plot settings", __Dymola_compact=true, __Dymola_descriptionLabel = true),
+      choices(__Dymola_checkBox=true));
+  input Boolean grid = true "Use grid"
+    annotation (Dialog(group="Plot settings", __Dymola_compact=true, __Dymola_descriptionLabel = true),
+      choices(__Dymola_checkBox=true));
   input MarkerStyles markerStyle=MarkerStyles.Square "Style of marker"
     annotation (Dialog(group="Plot settings"));
   input Integer markerColorMin[3]={0,0,255}
@@ -47,7 +51,9 @@ function plotRootLoci
     "Color of marker for maximum parameter value"
     annotation(Dialog(group="Plot settings", colorSelector=true));
 
-  input Boolean deleteResult = false "Delete result files of linearization";
+  input Boolean deleteResult = false "Delete result files of linearization"
+    annotation (Dialog(__Dymola_compact=false),
+      choices(__Dymola_checkBox=true));
 protected
   String fileName="dslin" "Name of the result file";
   String fileName2=fileName+".mat" "Name of the result file with extension";
