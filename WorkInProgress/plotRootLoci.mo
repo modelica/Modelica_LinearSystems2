@@ -8,6 +8,9 @@ function plotRootLoci
   input String modelName="Modelica.Mechanics.Rotational.Examples.First"
     "Name of the Modelica model"
     annotation(Dialog(translatedModel));
+  input Boolean simulate = false
+    "Linearize model after simulation (time-consuming!), otherwise linearization of all parameter variants at once";
+
   input Modelica_LinearSystems2.WorkInProgress.Internal.ModelParameters modelParams[:]=
     {Modelica_LinearSystems2.WorkInProgress.Internal.ModelParameters(
     parName="Jload",
@@ -63,8 +66,8 @@ algorithm
   parValues:=linspace(modelParams[1].parMin,modelParams[1].parMax,nVarMin);
   color := [linspace(markerColorMin[1],markerColorMax[1],nVarMin),linspace(markerColorMin[2],markerColorMax[2],nVarMin),linspace(markerColorMin[3],markerColorMax[3],nVarMin)];
 
-  if simulationOptions.t_linearize==0 then
-    // Linearization of parameter variants at once
+  if not simulate then // and simulationOptions.t_linearize==0
+    // Linearization of all parameter variants at once
     closeModel();
     ok:=simulateMultiExtendedModel(
       problem=modelName,
