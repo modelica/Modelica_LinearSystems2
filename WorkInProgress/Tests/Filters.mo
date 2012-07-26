@@ -331,13 +331,8 @@ package Filters
     annotation (Documentation(info="<html>
 <p>
 This function compares the filters with the ones from
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Literature\">[Tietze2002]</a>, pp. 815-852.
 </p>
-
-<dl>
-<dt>Tietze U., and Schenk C. (2002):</dt>
-<dd> <b>Halbleiter-Schaltungstechnik</b>.
-     Springer Verlag, 12. Auflage, pp. 815-852.</dd>
-</dl>
 
 <p>
 In tables Abb. 13.14 on pages 828-834 of (Tietze/Schenk 2002), the filter coefficients are

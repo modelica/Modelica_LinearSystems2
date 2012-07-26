@@ -1475,8 +1475,12 @@ filterFunction = TransferFunction.Design.<b>filter</b>(analogFilter, filterType,
 
 <h4>Description</h4>
 <p>
-This function constructs a TransferFunction transfer function description
-of low and high pass filters. Typical frequency responses for the four supported
+This function constructs a transfer function description
+of low and high pass filters. For more details see also
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Literature\">[Tietze2002]</a>, pp. 815-852.
+</p>
+<p>
+Typical frequency responses for the four supported
 low pass filter types are shown in the next figure (this figure was generated
 with function <a href=\"modelica://Modelica_LinearSystems2.Examples.TransferFunction.plotBodeFilter2\">Examples.TransferFunction.plotBodeFilter2</a>):
 </p>
@@ -1529,13 +1533,6 @@ algorithm
 
 // tf_filter = 9530.93/(s^2 + 195.253*s + 9530.93)
 </pre></blockquote>
-
-<h4><a name=\"References\">References</a></h4>
-<dl>
-<dt>&nbsp;[1] Tietze U., and Schenk Ch. (2002):</dt>
-<dd> <b>Halbleiter-Schaltungstechnik</b>.
-     Springer Verlag, 12. Auflage, pp. 815-852.<br>&nbsp;</dd>
-</dl>
 </html>"));
     end filter;
 
@@ -1870,8 +1867,7 @@ This function plots the time response of a transfer function. The character of t
     input Real tSpan=0 "Simulation time span [s]";
 
     input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
-      TransferFunction.Analysis.denominatorDegree(tf))
-      "Initial state vector";
+      TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
       defaultDiagram=
@@ -1881,7 +1877,7 @@ This function plots the time response of a transfer function. The character of t
   protected
     input Modelica_LinearSystems2.Types.TimeResponse response=
       Modelica_LinearSystems2.Types.TimeResponse.Impulse
-      "type of time response";
+        "Type of time response";
   algorithm
     Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
       tf=tf,
@@ -2617,7 +2613,6 @@ followed by a conversion from sate space to transfer function representation.
 </pre></blockquote>
 </html>"));
   end fromModel;
-
 
   end Import;
 

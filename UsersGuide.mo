@@ -1058,29 +1058,39 @@ printing and shipping costs may be recovered.</p>
 <p>
 This library is based on the following references:
 </p>
-<dl>
-<dt>Astr&ouml;m K.J., Wittenmark B. (1997):</dt>
-<dd> <b>Computer Controlled Systems: Theory and Design</b>.
-     Prentice Hall, 3rd edition, ISBN 978-0133148992.<br>&nbsp;</dd>
-
-<dt>Datta B. N. (2004):</dt>
-<dd> <b>Numerical Methods for Linear Control Systems</b>.
-     Elsevier Academic Press, ISBN:978-0122035906.<br>&nbsp;</dd>
-
-<dt>Goloub G.H., Van Loan C.F. (1996):</dt>
-<dd> <b>Matrix Computations</b>.
-     Johns Hopkins University Press, 3rd edition, ISBN 978-0801854149.<br>&nbsp;</dd>
-
-<dt>Tietze U., and Schenk C. (2002):</dt>
-<dd> <b>Halbleiter-Schaltungstechnik</b>.
-     Springer Verlag, 12. Auflage, S. 815-852., ISBN 978-3540428497<br>&nbsp;</dd>
-
-<dt>Walther N. (2002):</dt>
-<dd> <b>Praxisgerechte Modelica-Bibliothek f&uuml;r Abtastregler</b>.
-     Thesis (in German), HTWK Leipzig, Fachbereich Elektro- und
-     Informationstechnik.
-     <br>&nbsp;</dd>
-</dl>
+<table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
+    <tr>
+      <td valign=\"top\">[Astroem1997]</td>
+      <td valign=\"top\">K.J. Astr&ouml;m and B. Wittenmark,
+        <i>Computer Controlled Systems: Theory and Design</i>,
+        Prentice Hall, 3rd edition, ISBN 978-0133148992, 1997.</td>
+    </tr>
+    <tr>
+      <td valign=\"top\">[Datta2004]</td>
+      <td valign=\"top\">B.N. Datta,
+        <i>Numerical Methods for Linear Control Systems</i>,
+        Elsevier Academic Press, ISBN:978-0122035906, 2004.</td>
+    </tr>
+    <tr>
+      <td valign=\"top\">[Golub1996]</td>
+      <td valign=\"top\">G.H. Golub and C.F. Van Loan,
+        <i>Matrix Computations</i>,
+        Johns Hopkins University Press, 3rd edition, ISBN 978-0801854149, 1996.</td>
+    </tr>
+    <tr>
+      <td valign=\"top\">[Tietze2002]</td>
+      <td valign=\"top\">U. Tietze and C. Schenk,
+        <i>Halbleiter-Schaltungstechnik</i>,
+        Springer Verlag, 12. Auflage, ISBN 978-3540428497, 2002.</td>
+    </tr>
+    <tr>
+      <td valign=\"top\">[Walther2002]</td>
+      <td valign=\"top\">N. Walther,
+        \"Praxisgerechte Modelica-Bibliothek f&uuml;r Abtastregler\",
+        Master's thesis (in German), HTWK Leipzig, Fachbereich Elektro- und Informationstechnik, 2002.</td>
+    </tr>
+</table> 
+&nbsp;
 </html>
 "));
   end Literature;

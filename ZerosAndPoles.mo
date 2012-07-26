@@ -2101,7 +2101,10 @@ zp = <b>filter</b>(analogFilter, filterType, order, f_cut, gain, A_ripple, norma
 
 <p>
 This function constructs a ZerosAndPoles transfer function
-description of low and high pass filters.
+description of low and high pass filters. For more details see also
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Literature\">[Tietze2002]</a>, pp. 815-852.
+</p>
+<p>
 Typical frequency responses for the 4 supported low pass filter types
 are shown in the next figure (this figure was generated with function
 <a href=\"modelica://Modelica_LinearSystems2.Examples.ZerosAndPoles.plotBodeFilter2\">Examples.ZerosAndPoles.plotBodeFilter2</a>):
@@ -2170,14 +2173,6 @@ is set.
 
 // zp_filter = 9530.93/( (p + 97.6265)^2 )
 </pre></blockquote>
-
-<h4><a name=\"References\">References</a></h4>
-<dl>
-<dt>&nbsp;[1] Tietze U., and Schenk Ch. (2002):</dt>
-<dd> <b>Halbleiter-Schaltungstechnik</b>.
-     Springer Verlag, 12. Auflage, pp. 815-852.<br>&nbsp;</dd>
-</dl>
-
 </html> "));
   end filter;
 
@@ -4647,6 +4642,10 @@ using the following rules:
     <td> replace \"p\" by \"p/w_cut\" </td>
     </tr>
 </table>
+<p>
+For more details see also
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Literature\">[Tietze2002]</a>, pp. 815-852.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -4660,14 +4659,6 @@ using the following rules:
 
  // zp_filter = 1 /  ( (p + 1)*(p^2 + p + 1) )
 </pre></blockquote>
-
-<h4><a name=\"References\">References</a></h4>
-<dl>
-<dt>Tietze U., and Schenk C. (2002):</dt>
-<dd> <b>Halbleiter-Schaltungstechnik</b>.
-     Springer Verlag, 12. Auflage, pp. 815-852.</dd>
-</dl>
-
 </html> "));
   end baseFilter;
 
@@ -5986,7 +5977,10 @@ filterFunction = ZerosAndPoles.Internal<b>filter</b>(
 <h4>Description</h4>
 <p>
 This function constructs a ZerosAndPoles transfer function
-description of low and high pass filters.
+description of low and high pass filters. For more details see also
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Literature\">[Tietze2002]</a>, pp. 815-852.
+</p>
+<p>
 Typical frequency responses for the four supported low pass filter types
 are shown in the next figure (this figure was generated with function
 <a href=\"modelica://Modelica_LinearSystems2.Examples.ZerosAndPoles.plotBodeFilter2\">Examples.ZerosAndPoles.plotBodeFilter2</a>):
@@ -6054,14 +6048,6 @@ is set.
 
 // zp_filter = 9530.93/( (p + 97.6265)^2 )
 </pre></blockquote>
-
-<h4><a name=\"References\">References</a></h4>
-<dl>
-<dt>&nbsp;[1] Tietze U., and Schenk Ch. (2002):</dt>
-<dd> <b>Halbleiter-Schaltungstechnik</b>.
-     Springer Verlag, 12. Auflage, pp. 815-852.<br>&nbsp;</dd>
-</dl>
-
 </html> "));
   end filter;
 

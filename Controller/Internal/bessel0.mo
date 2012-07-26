@@ -21,26 +21,32 @@ algorithm
        + a*0.00392377))))))));
   end if;
   annotation (
-    Documentation(info="<HTML>
+    Documentation(info="<html>
 <p>
 Polynomial approximation of the zeroth order modified Bessel function.
-The algorithm is taken from
+The algorithm is taken from&nbsp;[1].
+The function is used to calculate the Kaiser-window via <em>calcWindow</em>.
 </p>
+
+<h4><a name=\"References\">References</a></h4>
 <dl>
-<dt>H. W. Press, S.A. Teukolsky, W. Vetterling:
+<dt>[1] H. W. Press, S.A. Teukolsky, W. Vetterling:
 <dd><b>Numerical Reciepes in C: The Art of Scientific Computing</b><br>
        Cambridge UP, 1988
 </dl>
-<p>
-The function is used to calculate the Kaiser-window via
-<i>calcWindow</i>.
-</p>
-<p><b>Release Notes:</b></p>
-<ul>
-<li><i>July 10, 2002</i>
-       by Nico Walther<br>
-       Realized.</li>
-</ul>
-</HTML>
-"));
+</html>
+", revisions="<html>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2002-07-10</td>
+    <td valign=\"top\">Nico Walther</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>"));
 end bessel0;
