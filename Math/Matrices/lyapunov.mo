@@ -128,9 +128,18 @@ using the Schur method for Lyapunov equations proposed by Bartels and Stewart [1
      Comm. ACM., Vol. 15, pp. 820-826.<br>&nbsp;</dd>
 </dl>
 </html>", revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-</html>"));
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>
+"));
 end lyapunov;

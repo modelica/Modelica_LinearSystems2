@@ -776,10 +776,18 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
      end printSystem;
 
      annotation (__Dymola_interactive=true, Documentation(revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
     end analysis;
 
@@ -1225,10 +1233,18 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
 //  result = 0.538462 - 0.307692j
 </pre></blockquote>
 </html> ", revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
     end evaluate;
 
@@ -1468,10 +1484,18 @@ Computes the invariant zeros of the corresponding state space representation of 
 </html>
 ",   revisions=
              "<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
     end invariantZeros;
 

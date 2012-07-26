@@ -94,10 +94,19 @@ int c_solve2rSym_(doublereal *a, doublereal *b, char *trian, char *uplo, integer
   return 0;
 }", Library={"lapack"},
     Documentation(revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-</html>"));
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>
+"));
 
 end solve2rSym_C;

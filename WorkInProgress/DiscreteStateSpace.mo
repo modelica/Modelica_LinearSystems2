@@ -1118,10 +1118,18 @@ algorithm
   Pk := Pk+Q;
 
       annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
 end ukfPredict;
 
@@ -1225,10 +1233,18 @@ algorithm
   Ryy := Ryy+R;
 
       annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
 end ukfUpdate;
 
@@ -1290,10 +1306,18 @@ algorithm
   xmu := xm + K*(y - ym);
   ymu := yOut(xmu, u, Ts, ny);
       annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
 end ukfEstimate;
 
@@ -1386,10 +1410,18 @@ algorithm
     end if;
   end if;
       annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
 end ukfPredict_sr;
 
@@ -1467,10 +1499,18 @@ algorithm
   end for;
 
       annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
 end ukfUpdate_sr;
 
@@ -1502,10 +1542,18 @@ algorithm
   ymu := yOut(xmu, u, Ts, ny);
 
       annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
 end ukfEstimate_sr;
 
@@ -2037,10 +2085,18 @@ end sr_ukfEstimate_2;
     (K, M) := Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfUpdate( Ak, Ck, Mpre, Q, R);
     x_est := xmu + K*(y - y_est);
       annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>",   info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -2101,10 +2157,18 @@ i.e., in the case of linear systems the system matrix <b>A</b> and the output ma
   algorithm
     (x_est, y_est, M, K) := DiscreteStateSpace.Design.EKF(function   DiscreteStateSpace.Design.ekfSystem_pendular(), xpre, upre,y,Mpre,Q,R,Ts);
       annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>",   info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -2175,11 +2239,18 @@ i.e., in the case of linear systems the system matrix <b>A</b> and the output ma
       (muy,Ryy,Rxy) := DiscreteStateSpace.Internal.ukfUpdate(function hSigma(), mux, upre, Rxx, R,  alpha, beta, kappa, Ts);
       (K,P,x_est, y_est) := DiscreteStateSpace.Internal.ukfEstimate(function hSigma(), y, mux, muy, upre, Rxx, Ryy, Rxy, Ts);
       annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>",   info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -2252,11 +2323,18 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteSta
       (muy,Syy,Rxy) := DiscreteStateSpace.Internal.ukfUpdate_sr(function hSigma(), mux, upre, Sxx, CfR,  alpha, beta, kappa, Ts);
       (K,CfP,x_est, y_est) := DiscreteStateSpace.Internal.ukfEstimate_sr(function hSigma(), y, mux, muy, upre, Sxx, Syy, Rxy, Ts);
       annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>",   info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>

@@ -13,8 +13,7 @@ equation
   annotation (
     Documentation(info="<HTML>
 </HTML>
-"),
-    Icon(graphics={
+"), Icon(graphics={
         Line(
           points={{-100,0},{-36,0}},
           color={0,0,127},

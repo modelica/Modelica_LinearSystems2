@@ -2,11 +2,11 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Conversion;
 function toTransferFunction
   "Generate a transfer function from a SISO state space representation"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.TransferFunction;
-    import Modelica_LinearSystems2.WorkInProgress.StateSpace;
-    import Modelica_LinearSystems2.WorkInProgress.ZerosAndPoles;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.TransferFunction;
+  import Modelica_LinearSystems2.WorkInProgress.StateSpace;
+  import Modelica_LinearSystems2.WorkInProgress.ZerosAndPoles;
 
   input StateSpace ss "StateSpace object";
 
@@ -58,9 +58,17 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
 </pre></blockquote>
 </html> ",
          revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
 end toTransferFunction;

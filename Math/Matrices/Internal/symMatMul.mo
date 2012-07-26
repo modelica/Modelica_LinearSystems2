@@ -52,11 +52,20 @@ algorithm
   end for;
 
   annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-</html>", info="<html>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>
+",        info="<html>
 This function is used to efficiently calculate the matrix <b>X</b> from equation
 <blockquote><pre>
            T

@@ -29,30 +29,52 @@ function UKF "Unscented Kalman filter design function"
   replaceable function predict=DiscreteStateSpace.Internal.ukfPredict(redeclare
         Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy
           fSigma) annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
 
   replaceable function update=DiscreteStateSpace.Internal.ukfUpdate(redeclare
         Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy
           hSigma) annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
 
   replaceable function estimate=DiscreteStateSpace.Internal.ukfEstimate(redeclare
         Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy
           yOut) annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
 
 protected
@@ -70,11 +92,18 @@ algorithm
     (muy,Ryy,Rxy) := update(mux, upre, Rxx, R,  alpha, beta, kappa, Ts);
     (K,P,x_est, y_est) := estimate(y, mux, muy, upre, Rxx, Ryy, Rxy, Ts);
     annotation (Documentation(revisions="<html>
-<ul>
-<li><i>2010/06/11 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-06-11</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>", info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>

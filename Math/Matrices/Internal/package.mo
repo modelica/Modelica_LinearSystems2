@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Math.Matrices;
 package Internal "Package of internal functions operating on matrices (for advanced users only)"
   extends Modelica.Icons.Package;
 
+
   annotation (Documentation(info="<html>
 <p>
 Generally, the functions in this package should not be used by the user.

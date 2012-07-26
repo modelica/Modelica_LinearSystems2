@@ -1167,12 +1167,20 @@ Default of initial state <b>x0</b> is <b>x0</b>=<b>0</b>.
 </pre></blockquote>
 
 </html> ",  revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-
-</html>"));
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>
+"));
   end timeResponse;
 
   encapsulated function initialResponse
@@ -1233,13 +1241,20 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
 //  y=[2, 1.8095, 1.6372,..., 0.01812, 0.01639, 0.01483]
 </pre></blockquote>
 </html> ",  revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-
-
-</html>"));
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>
+"));
   end initialResponse;
 
 encapsulated package Analysis
@@ -2259,11 +2274,20 @@ the norm of each <b>K</b>i is minimized [1].
 </dl>
 </html> ",
          revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-</html>"));
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>
+"));
   end assignPolesMI;
 
   end Design;
@@ -3011,11 +3035,20 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 </dl>
 
 </html> ",     revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-</html>"));
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>
+"));
     end toDiscreteZerosAndPoles;
 
     encapsulated function toDiscreteZerosAndPolesMIMO
@@ -3125,11 +3158,20 @@ of a system from discrete state space representation, i.e. isolating the uncontr
 </dl>
 
 </html> ",     revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-</html>"));
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>
+"));
     end toDiscreteZerosAndPolesMIMO;
 
   function toDiscreteTransferFunction
@@ -3198,11 +3240,20 @@ discrete state space system into a discrete zeros and poles representation first
 
 
 </html> ", revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-</html>"));
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>
+"));
   end toDiscreteTransferFunction;
 
   function toDiscreteTransferFunctionMIMO
@@ -3292,11 +3343,20 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
 </pre></blockquote>
 
 </html> ", revisions="<html>
-<ul>
-<li><i>2010/05/31 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
-</html>"));
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>
+"));
   end toDiscreteTransferFunctionMIMO;
 
   end Conversion;

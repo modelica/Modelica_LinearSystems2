@@ -17,11 +17,19 @@ model EKF "Extended Kalman filter"
     annotation (
       choicesAllMatching,
             Documentation(revisions="<html>
-      <ul>
-      <li><i>2010/10/25 </i>
-             by Marcus Baur, DLR-RM</li>
-      </ul>
-      </html>"));
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-10-25</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>"));
 
   parameter Real x_est_init[:] "Initial value for state estimation";
   parameter Real Q[:,size(Q,1)]=identity(size(x_est_init,1))
@@ -101,9 +109,17 @@ equation
           lineColor={0,0,255},
           textString="m")}),
     Documentation(revisions="<html>
-<ul>
-<li><i>2010/10/25 </i>
-       by Marcus Baur, DLR-RM</li>
-</ul>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-10-25</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
 </html>"));
 end EKF;
