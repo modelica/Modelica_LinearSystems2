@@ -95,7 +95,8 @@ algorithm
                     color=integer(color[i, :]),
                     pattern=LinePattern.None,
                     marker=MarkerStyle.Square,
-                    id=id);
+                    id=id,
+                    erase=false);
   end for;
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>

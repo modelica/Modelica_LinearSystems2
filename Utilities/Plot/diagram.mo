@@ -60,7 +60,8 @@ algorithm
           OK :=plotArray(diagram.curve[i].x,
                          diagram.curve[i].y,
                          legend=diagram.curve[i].legend,
-                         id=id);
+                         id=id,
+                         erase=false);
        else
           OK :=plotArray(diagram.curve[i].x,
                          diagram.curve[i].y,
@@ -69,7 +70,8 @@ algorithm
                          pattern=Internal.convertToDymolaPattern(diagram.curve[i].linePattern),
                          marker=Internal.convertToDymolaMarker(diagram.curve[i].lineSymbol),
                          thickness=diagram.curve[i].lineThickness,
-                         id=id);
+                         id=id,
+                         erase=false);
        end if;
     end for;
 
