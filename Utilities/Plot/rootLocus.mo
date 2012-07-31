@@ -77,26 +77,26 @@ algorithm
 
   // Loop over the selected parameter range
   for i in 1:nVar loop
-     // Linearize
-     parValue := modelParam[1].Min+(i-1)*dp;
-     ok :=SetVariable(modelParam[1].Name, parValue);
-     A :=Modelica_LinearSystems2.Utilities.Import.linearize2(
-             modelName,
-             t_linearize=t_linearize,
-             simulationSetup=simulationSetup);
+    // Linearize
+    parValue := modelParam[1].Min+(i-1)*dp;
+    ok :=SetVariable(modelParam[1].Name, parValue);
+    A :=Modelica_LinearSystems2.Utilities.Import.linearize2(
+            modelName,
+            t_linearize=t_linearize,
+            simulationSetup=simulationSetup);
 
-     // compute eigen values
-     eigenValues :=Modelica.Math.Matrices.eigenValues(A);
+    // Compute eigen values
+    eigenValues :=Modelica.Math.Matrices.eigenValues(A);
 
-     // Plot root loci
-     ok :=plotArray(eigenValues[:,1],
-                    eigenValues[:,2],
-                    legend=String(parValue,significantDigits=3),
-                    color=integer(color[i, :]),
-                    pattern=LinePattern.None,
-                    marker=MarkerStyle.Square,
-                    id=id,
-                    erase=false);
+    // Plot root loci
+    ok :=plotArray(eigenValues[:,1],
+                   eigenValues[:,2],
+                   legend=String(parValue,significantDigits=3),
+                   color=integer(color[i, :]),
+                   pattern=LinePattern.None,
+                   marker=MarkerStyle.Square,
+                   id=id,
+                   erase=false);
   end for;
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
