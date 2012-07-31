@@ -100,10 +100,37 @@ algorithm
   end for;
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<blockquote><pre>plotRootLoci(modelName, modelParam, simulationOptions, position, useLegend, grid, markerStyle, markerColorMin, markerColorMax)</pre></blockquote>
+<blockquote><pre>
+Plot.<b>rootLocus</b>(modelName, t_linearize, modelParam, simulationSetup, diagram)
+</pre></blockquote>
 
 <h4>Description</h4>
-<p>Calling this function with default setup the following root loci plot will be generated.</p>
+<p>
+This function examines a root locus analysis of a selected Modelica model over 
+variation of a certain system parameter. 
+Note, only first parameter <code>modelParam[1]</code> is considered for the analysis. 
+The parameter is varied equidistantly from minimum to maximum value. 
+</p>
+
+<h4>Example</h4>
+<p>
+Calling the function
+</p>
+<blockquote><pre>
+Utilities.Plot.<b>rootLocus</b>(
+  modelName = \"Modelica.Mechanics.Rotational.Examples.First\",
+  t_linearize = 0,
+  modelParam={
+    Modelica_LinearSystems2.Records.ParameterVariation(
+      Name=\"Jload\",
+      Min=1,
+      Max=6,
+      nVar=10,
+      Unit=\"kg.m2\")});
+</pre></blockquote>
+<p>
+yields following diagram
+</p>
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rootLociiDefaultSetup.png\"/></p>
 </html>"));
 end rootLocus;
