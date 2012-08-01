@@ -64,8 +64,7 @@ algorithm
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-",        info="<html>
+</html>",        info="<html>
 This function is used to efficiently calculate the matrix <b>X</b> from equation
 <blockquote><pre>
            T
@@ -107,6 +106,5 @@ Note, that only the upper trinagle is calculated. The complete solution could be
 <blockquote><pre>
 <b>X</b> := symmetric(<b>X</b>)
 </pre></blockquote>
-
 </html>"));
 end symMatMul;

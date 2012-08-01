@@ -60,7 +60,7 @@ algorithm
       jc := jc + 2;
     end if;
   end while;
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
                reorderedZero = Internal.<b>reorderZeros</b>(complexVector);
@@ -94,5 +94,5 @@ the number of real zeros (nRealZeros).
          nRealZeros     = 3
 
 </pre></blockquote>
-</HTML>"));
+</html>"));
 end reorderZeros;

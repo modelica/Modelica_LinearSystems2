@@ -22,7 +22,7 @@ algorithm
   x := rem((seedOut[1]/30269.0 + seedOut[2]/30307.0 + seedOut[3]/30323.0), 1.0);
 
   annotation (
-    Documentation(info="<HTML>
+    Documentation(info="<html>
 <p>
 <i>Random</i> generates a sequence of uniform distributed
 pseudo-random numbers. The algorithm is a variant of the
@@ -117,6 +117,5 @@ under the terms of the <b>Modelica license</b>, see the license conditions
 and the accompanying <b>disclaimer</b> in
 <a href=\"modelica://Modelica.UsersGuide.ModelicaLicense2\">ModelicaLicense2</a>.</i>
 </p>
-</HTML>
-"));
+</html>"));
 end random;

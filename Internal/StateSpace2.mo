@@ -86,7 +86,6 @@ public
   // ss.C = [1]
   // ss.D = [0]
 </pre></blockquote>
-
 </html>"));
   end fromABCDMatrices;
 
@@ -211,7 +210,6 @@ ss3 := ss1 - ss2;
 // ss.C = [0, 1, 0, -2],
 // ss.D = [0],
 </pre></blockquote>
-
 </html>"));
   end subtract;
 
@@ -236,7 +234,7 @@ ss3 := ss1 - ss2;
 <h4>Description</h4>
 <p>
 This package contains the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.subtract#info\">'subtract'</a> and the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.subtract#info\">'-'</a> operator for StateSpace records.
-
+</p>
 </html>"));
 end '-';
 

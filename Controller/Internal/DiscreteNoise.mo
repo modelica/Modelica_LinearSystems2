@@ -46,9 +46,8 @@ initial equation
   pre(ticks) = 0;
   pre(seedState) = firstSeed;
   annotation (
-    Documentation(info="<HTML>
-</HTML>
-"), Icon(graphics={
+    Documentation(info="<html>
+</html>"), Icon(graphics={
         Line(
           points={{-84,76},{-84,-92}},
           color={175,175,175},

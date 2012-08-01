@@ -96,7 +96,7 @@ algorithm
      end while;
      gap := div(gap,2);
   end while;
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
            sorted_v = Vectors.<b>sort</b>(v);
@@ -117,5 +117,5 @@ to the original vector are given, such that sorted_v = v[indices].
        -> v2 = {-1, 2, 3, 6, 8}
           i2 = {1, 5, 3, 4, 2}
 </pre></blockquote>
-</HTML>"));
+</html>"));
 end sortEigenvalue;

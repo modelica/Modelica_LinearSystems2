@@ -57,10 +57,9 @@ equation
   end when;
 
   annotation (
-    Documentation(info="<HTML>
+    Documentation(info="<html>
 <p>This block extends <a href=\"Modelica://Modelica.Blocks.Continuous.LimIntegrator\">Modelica.Blocks.Continuous.LimIntegrator</a> and adds an external reset trigger.  When the boolean input <b>reset</b> becomes true the integrator start is reset to <b>y_start</b>.</p>
-</HTML>
-", revisions="<html>
+</html>", revisions="<html>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={

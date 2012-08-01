@@ -39,7 +39,6 @@ algorithm
     end for;
   end if;
   annotation (Documentation(info="<html>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>

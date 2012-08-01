@@ -68,8 +68,7 @@ parameters, use the general model class <b>TransferFunction</b>
 instead and model a DT1 system with parameters<br>
 n = {k,0}, d = {T,1}.
 </p>
-</html>
-"), Icon(coordinateSystem(
+</html>"), Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={

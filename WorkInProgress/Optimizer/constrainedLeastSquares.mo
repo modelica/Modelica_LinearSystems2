@@ -31,7 +31,7 @@ external "Fortran 77" dlsei(W_out, size(W, 1), n_E, n_A, n_G, n_x, options, x,
   annotation (
     Include="#include <dlsei.h>",
     Library="dlsei",
-    Documentation(info="<HTML>
+    Documentation(info="<html>
 <p>
 This function solves a least squares problem with
 linear equality and linear inequality constraints.
@@ -414,8 +414,7 @@ The Fortran interface of DLSEI is defined as:
    900604  DP version created from SP version.  (RWC)
    920501  Reformatted the REFERENCES section.  (WRB)
 </pre>
-</HTML>
-", revisions="<html>
+</html>", revisions="<html>
 <p><b>Release Notes:</b></p>
 <ul>
 <li><i>Sept. 3, 2004</i>

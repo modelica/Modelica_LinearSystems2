@@ -89,7 +89,6 @@ public
   // ss.C = [1]
   // ss.D = [0]
 </pre></blockquote>
-
 </html>"));
   end fromABCDMatrices;
 
@@ -146,8 +145,7 @@ ss.D = [r];
 
     annotation (Documentation(info="<html>
 <p>This package contains the default constructors for a data record of state space system. </p>
-</html>
-"));
+</html>"));
 end 'constructor';
 
 encapsulated operator '-'
@@ -2436,8 +2434,7 @@ listed in the last column might be not the most relevant one.
 <tr>
  <td style=\"text-align:left\"> &nbsp;     3/4 </td> <td style=\"text-align:left\"> &nbsp;    3.2417e+000 &plusmn;  5.6548e+000j </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:left\"> &nbsp;    1.0374 </td> <td style=\"text-align:left\"> &nbsp;   -0.4973 </td> </tr>
 </table>
-</html>
-", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -3097,7 +3094,6 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s), whi
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -3236,8 +3232,6 @@ Calculate the eigenvalues of a state space system, i.e. the eigenvalues of the s
   eigenvalues = Modelica_LinearSystems2.StateSpace.Analysis.eigenValues(ss);
 // eigenvalues = {-1 + 1j, -1 - 1j}
 </pre></blockquote>
-
-
 </html>"));
   end eigenValues;
 
@@ -3308,8 +3302,6 @@ The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
 i.e. v1 = |      |,   v2 = |       |
           |0.707i|         |-0.707i|
 </pre></blockquote>
-
-
 </html>"));
   end eigenVectors;
 
@@ -3442,7 +3434,6 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
 <dd> <b>Computation of Zeros of Linear Multivariable Systems</b>.
      Automatica, 18, pp. 415-430.<br>&nbsp;</dd>
 </dl>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -3620,7 +3611,6 @@ Since controllability is dual to observability of the dual system (A', C', B', D
   controllable := Modelica_LinearSystems2.StateSpace.Analysis.isControllable(ss, method);
 // controllable = true
 </pre></blockquote>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -3747,7 +3737,6 @@ Then, the uncontrollable poles are checked to be stable, i.e. to have negative r
    stabilizable := Modelica_LinearSystems2.StateSpace.Analysis.isStabilizable(ss);
 // stabilizable = true
 </pre></blockquote>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -3813,7 +3802,6 @@ Then, the unobservable poles are checked to be stable, i.e. to have negative rea
   detectable := Modelica_LinearSystems2.StateSpace.Analysis.isDetectable(ss);
 // detectable = true
 </pre></blockquote>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -3827,8 +3815,7 @@ Then, the unobservable poles are checked to be stable, i.e. to have negative rea
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
   end isDetectable;
 
   encapsulated function controllabilityMatrix
@@ -3889,7 +3876,6 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
   Q := Modelica_LinearSystems2.StateSpace.Analysis.controllabilityMatrix(ss);
 // Q = [0, 1, 3; 0, 1, 2; 1, 1, 1]
 </pre></blockquote>
-
 </html>"));
   end controllabilityMatrix;
 
@@ -3952,7 +3938,6 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
   Q := Modelica_LinearSystems2.StateSpace.Analysis.observabilityMatrix(ss);
 // Q = [0, 1, 0; 0, 1, 1; 1, 1, 2]
 </pre></blockquote>
-
 </html>"));
   end observabilityMatrix;
 
@@ -4526,7 +4511,6 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 <dd> <b>A Schur method for pole assignment</b>.
      IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
 </dl>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -4872,7 +4856,6 @@ The eigenvalues of the closed loop system <b>A</b> - <b>B</b>*<b>K</b> are compu
 
 // K = [-1, -3.63271, 108.763, 18.3815]
 </pre></blockquote>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -5113,7 +5096,6 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
          0.009,      0.2289;
         -0.003,      0.08934]
 </pre></blockquote>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -5262,7 +5244,6 @@ and results in
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/polesAndZerosSS.png\"/>
 </blockquote>
-
 </html>"));
     end polesAndZeros;
 
@@ -5608,7 +5589,6 @@ This function plots the time response of a state space system. The character of 
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initial</a>
 </p>
-
 </html>"));
     end timeResponse;
 
@@ -6062,7 +6042,6 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 <dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -6255,7 +6234,6 @@ i.e.
 <dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
-
 </html>",     revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -6854,7 +6832,6 @@ This function is called to compute transfer functions of state space representat
 <dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -6932,7 +6909,6 @@ Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
     C=[1, 0],
     D=[0])
 </pre></blockquote>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -8226,8 +8202,6 @@ inputs and the number of outputs must be identical.
   algorithm
     isSISO := size(ss.B, 2) == 1 and size(ss.C, 1) == 1;
     annotation (Documentation(info="<html>
-
-
 </html>"));
   end isSISO;
 
@@ -8317,8 +8291,6 @@ and that
 </pre>
 </blockquote>
 is a lower triangular matrix and has full rank if and only if none of the elements in the diagonal is zero. That is, that neither qn or hi,i+1,   i = 1,..., n-1   may be zero.
-
-
 </html>"));
   end isControllableSISO;
 
@@ -8348,9 +8320,6 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
       end if;
     end if;
     annotation (Documentation(info="<html>
-
-
-
 </html>"));
   end isControllableMIMO;
 
@@ -8429,7 +8398,6 @@ The system can be partitioned to
 where the pair (<b>H</b>11, <b>q</b>1) contains the controllable part of the system, that is, rank(<b>H</b>) = rank(<b>H</b>11). For
 stabilizability the <b>H</b>22 has to be stable.
 </p>
-
 </html>"));
   end isDetectableSISO;
 
@@ -8480,10 +8448,6 @@ Hence, a observable system is always detectable of course.
 <p>
 To check detectability, staircase algorithm is used to separate the observable subspace from the unobservable subspace.
 The unobservable poles are checked to be stable.
-
-
-
-
 </html>"));
   end isDetectableMIMO;
 
@@ -8575,9 +8539,6 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
     end if;
 
     annotation (Documentation(info="<html>
-
-
-
 </html>"));
   end isObservableMIMO;
 
@@ -8694,7 +8655,6 @@ Hence, a controllable system is always stabilizable of course.
 <p>
 To check stabilizability, staircase algorithm is used to separate the controllable subspace from the uncontrollable subspace.
 The uncontrollable poles are checked to to stable.
-
 </html>"));
   end isStabilizableMIMO;
 
@@ -9538,8 +9498,6 @@ k = ---------- * ----------------------
   algorithm
 
     annotation (Documentation(info="<html>
-
-
 </html>"));
   end transposeStateSpace;
 

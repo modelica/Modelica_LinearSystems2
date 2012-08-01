@@ -426,6 +426,5 @@ defined limits. For backward compatibility reasons
 <b>limitAtInit</b> = <b>true</b>. In most cases it is best
 to use <b>limitAtInit</b> = <b>false</b>.
 </p>
-</html>
-"));
+</html>"));
 end LimPID;

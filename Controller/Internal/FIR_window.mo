@@ -33,7 +33,7 @@ algorithm
     a := ones(L);
   end if;
   annotation (
-    Documentation(info="<HTML>
+    Documentation(info="<html>
 <p>
 Weighting windows are used for digital filter design or spectrum estimation (e.g. DFT)
 to increase the quality. In designing FIR-Filter the main role of windowing is to remove
@@ -53,6 +53,5 @@ only needed by the Kaiser window. The types of windows are:
 <LI>Blackman</LI>
 <LI>Kaiser</LI>
 </OL>
-</HTML>
-"));
+</html>"));
 end FIR_window;

@@ -11,9 +11,8 @@ equation
   end when;
   y = y_sampled;
   annotation (
-    Documentation(info="<HTML>
-</HTML>
-"), Icon(graphics={
+    Documentation(info="<html>
+</html>"), Icon(graphics={
         Line(
           points={{-100,0},{-36,0}},
           color={0,0,127},

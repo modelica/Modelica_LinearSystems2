@@ -73,7 +73,5 @@ in a block where the input and the output of the block
 is sampled by a sampling time that is 10 times slower
 as the base sample time of the global sampleClock component.
 </p>
-
-</html>
-"));
+</html>"));
 end GettingStarted;

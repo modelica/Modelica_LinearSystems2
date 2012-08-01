@@ -38,6 +38,5 @@ algorithm
   annotation (Documentation(info="<html>
 <html>
 This function calculates one step in the calculation of upper Hessenberg form. Therein it calculates the r'th column of the Hessenberg matrix which is of shape {x,x,fill(1,n-r-1)}.
-</html>
 </html>"));
 end hohoTrafoUpperHess;

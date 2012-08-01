@@ -134,8 +134,7 @@ int c_symMatMul_(doublereal *a, doublereal *b, doublereal *c, char *addi, intege
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-",        info="<html>
+</html>",        info="<html>
 This function is used to efficiently calculate the matrix <b>X</b> from equation
 <blockquote><pre>
            T
@@ -179,7 +178,6 @@ Note, that only the upper trinagle is calculated. The complete solution could be
 </pre></blockquote>
 
 In contrast to function <i>symMatMul</i> this function is implemented in C-code
-
 </html>"));
 
 end symMatMul_C;

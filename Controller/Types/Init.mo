@@ -10,6 +10,5 @@ type Init = enumeration(
       "Initialization with initial outputs (and steady state of the states if possibles)")
   "Enumeration defining initialization of a block"
     annotation (Evaluate=true, Documentation(info="<html>
-
 </html>"));
 

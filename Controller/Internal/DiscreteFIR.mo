@@ -22,9 +22,8 @@ initial equation
   x = pre(x);
   sum = pre(sum);
   annotation (
-    Documentation(info="<HTML>
-</HTML>
-"), Icon(graphics={Line(
+    Documentation(info="<html>
+</html>"), Icon(graphics={Line(
           points={{86,-84},{-94,-84}},
           color={175,175,175},
           smooth=Smooth.None),

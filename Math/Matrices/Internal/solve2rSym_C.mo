@@ -106,7 +106,6 @@ int c_solve2rSym_(doublereal *a, doublereal *b, char *trian, char *uplo, integer
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 
 end solve2rSym_C;

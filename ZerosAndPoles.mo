@@ -1501,8 +1501,7 @@ Computes the invariant zeros of the corresponding state space representation of 
 // zeros = {-1}
 
 </pre></blockquote>
-</html>
-",   revisions=
+</html>",   revisions=
              "<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -1558,10 +1557,7 @@ If the transfer function has one or more zero poles, <b>k</b> is infinite.
 In this case, the output argument <b>finite</b> = <b>false</b> and
 <b>k</b> = Modelica.Constants.inf.
 </p>
-</html>
-
-
-"));
+</html>"));
     end dcGain;
 
     encapsulated function isControllable
@@ -1607,7 +1603,6 @@ into a state space representation which is applied to <a href=\"modelica://Model
   controllable := Modelica_LinearSystems2.StateSpace.Analysis.isControllable(zp, method);
 // controllable = true
 </pre></blockquote>
-
 </html>"));
     end isControllable;
 
@@ -1738,7 +1733,6 @@ The transfer function is detectable if all unstable poles are observable.
   detectable := Modelica_LinearSystems2.ZerosAndPoles.Analysis.isDetectable(zp);
 // detectable = false
 </pre></blockquote>
-
 </html>"));
     end isDetectable;
 
@@ -2817,7 +2811,6 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>
 </p>
-
 </html>"));
   end ramp;
 
@@ -2968,7 +2961,6 @@ from a ZerosAndPoles record representated by first and second order numerator an
   tf:=Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction(zp);
 //  tf = 1/( s^2 + 4*s + 3 )
 </pre></blockquote>
-
 </html>"));
     end toTransferFunction;
 
@@ -4448,7 +4440,6 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 <dd> <b>Algorithms for Minimization without derivatives</b>.
      Prentice Hall, 1973, pp. 58-59.</dd>
 </dl>
-
 </html>"));
     end solveOneNonlinearEquation;
 
@@ -4525,7 +4516,6 @@ a real zero of a fourth order polynomal):
 <p>
 This function computes the solution of this equation and returns \"alpha = z^2\" and \"c\";
 </p>
-
 </html>"));
     end bandPassAlpha;
 
@@ -5802,8 +5792,7 @@ and
 <blockquote><pre>
 b2_k = 1/(beta_k^2 + gamma_k^2) b1_k = -2*beta_k/(beta_k^2 + gamma_k^2)
 </pre></blockquote>
-</html>
-"));
+</html>"));
     end BesselCoefficients;
 
     function checkRepresentation
@@ -6826,7 +6815,6 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 <dd> <b>Algorithms for Minimization without derivatives</b>.
      Prentice Hall, 1973, pp. 58-59.</dd>
 </dl>
-
 </html>"));
     end solveOneNonlinearEquation;
 

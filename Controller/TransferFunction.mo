@@ -98,7 +98,6 @@ initial equation
           lineColor={0,0,0},
           textString="d(s)"),
         Line(points={{60,0},{100,0}}, color={0,0,255})}),
-    Documentation(info="<HTML>
-</HTML>
-"));
+    Documentation(info="<html>
+</html>"));
 end TransferFunction;

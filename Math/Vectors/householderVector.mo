@@ -57,6 +57,5 @@ with scalar c, |c| = ||<b>a</b>|| / ||<b>b</b>||. <b>Q</b>*<b>a</b> is the refle
     // Computation (identity(4) - 2*matrix(u)*transpose(matrix(u)))*a results in
     // {-5, 0, 0, 0} = -5*b
 </pre></blockquote>
-
 </html>"));
 end householderVector;

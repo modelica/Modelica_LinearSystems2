@@ -4,5 +4,4 @@ type BlockType = enumeration(
     Discrete "Discrete block")
   "Enumeration of block types (continuous, discrete)"
     annotation (Evaluate=true, Documentation(info="<html>
-
 </html>"));

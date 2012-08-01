@@ -66,8 +66,7 @@ equation
   end when;
   annotation (Documentation(info="<html>
 
-</HTML>
-"),    Icon(graphics={Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0},
+</html>"),    Icon(graphics={Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
           Text(

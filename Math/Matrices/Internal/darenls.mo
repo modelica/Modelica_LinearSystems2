@@ -77,6 +77,5 @@ algorithm
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end darenls;

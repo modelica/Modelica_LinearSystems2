@@ -36,6 +36,5 @@ Therefore, <b>H</b> is reduced to Schur form <b>T</b>. The eigenvalues are obtai
 <p>
 See Modelica_LinearSystems2.Math.Matrices.LAPACK.dhseqr for details
 </p>
-</html>
-"));
+</html>"));
 end eigenvaluesHessenberg;

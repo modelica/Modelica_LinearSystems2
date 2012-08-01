@@ -99,6 +99,5 @@ using a vector layout. For an overview, see the documentation of package
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showSinesInVectorDiagram.png\">
 </blockquote>
-
 </html>"));
 end diagramVector;

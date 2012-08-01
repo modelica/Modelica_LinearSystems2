@@ -78,6 +78,5 @@ The transformation matrix <b>U</b> is then computed by
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end hessenberg;

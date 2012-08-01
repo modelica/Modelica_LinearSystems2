@@ -162,6 +162,5 @@ real Schur form and matrix <b>U</b>).
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end dare;

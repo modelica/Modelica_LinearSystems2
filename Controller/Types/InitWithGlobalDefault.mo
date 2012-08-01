@@ -12,6 +12,5 @@ type InitWithGlobalDefault = enumeration(
     UseSampleClockOption "Use initialization defined in sampleClock component")
   "Enumeration defining initialization of a block"
     annotation (Evaluate=true, Documentation(info="<html>
-
 </html>"));
 

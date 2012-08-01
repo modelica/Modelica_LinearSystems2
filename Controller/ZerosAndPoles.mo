@@ -219,7 +219,7 @@ initial equation
           extent={{-50,-10},{52,-52}},
           lineColor={0,0,0},
           textString="p(s)")}),
-    Documentation(info="<HTML>
+    Documentation(info="<html>
 <p>
 This function transforms a zeros-poles-gain system representation into state space representation.
 To achieve well numerical condition the ZerosAndPoles transfer function is transformed into state space

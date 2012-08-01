@@ -37,7 +37,7 @@ with function \"Matrices.equalityLeastSquares\" failed.");
         b));
     end if;
   end if;
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 x = Matrices.<b>equalityLeastSquares</b>(A,a,B,b);
@@ -71,5 +71,5 @@ B has full row rank (= size(B,1)) and the matrix [A;B] has
 full column rank (= size(A,2)). In this case, the problem
 has a unique solution.
 </p>
-</HTML>"));
+</html>"));
 end equalityLeastSquares;

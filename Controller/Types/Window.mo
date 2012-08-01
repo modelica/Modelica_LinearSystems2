@@ -7,5 +7,4 @@ type Window = enumeration(
     Blackman "Blackman",
     Kaiser "Kaiser") "Enumeration of window type for FIR filter"
     annotation (Evaluate=true, Documentation(info="<html>
-
 </html>"));

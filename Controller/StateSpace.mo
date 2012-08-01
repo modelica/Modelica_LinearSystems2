@@ -105,6 +105,6 @@ initial equation
           textString=" y=Cx+Du"),
         Line(points={{-100,0},{-60,0}}),
         Line(points={{60,0},{100,0}})}),
-    Documentation(info="<HTML>
-</HTML>"));
+    Documentation(info="<html>
+</html>"));
 end StateSpace;

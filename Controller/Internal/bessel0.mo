@@ -34,8 +34,7 @@ The function is used to calculate the Kaiser-window via <em>calcWindow</em>.
 <dd><b>Numerical Reciepes in C: The Art of Scientific Computing</b><br>
        Cambridge UP, 1988
 </dl>
-</html>
-", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>

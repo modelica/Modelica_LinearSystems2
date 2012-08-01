@@ -14,6 +14,5 @@ over the load inertia <b>Jload</b>:
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfDrive.png\">
 </blockquote>
-
 </html>"));
 end rootLocusOfDrive;

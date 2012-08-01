@@ -10,7 +10,7 @@ function QR
 
   output Real tau[min(size(A, 1), size(A, 2))];
   output Real Q2[size(A,1),size(A, 1)]
-  annotation ( Documentation(info="<HTML>
+  annotation ( Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (Q,R,p) = Matrices.<b>QR</b>(A);
@@ -74,7 +74,7 @@ called as: <code>(,R,p) = QR(A)</code>.
                                     0     , -1.73.., -0.23..;
                                     0     ,  0     ,  0.65..];
 </pre></blockquote>
-</HTML>"));
+</html>"));
 
 protected
   Integer nrow=size(A, 1);

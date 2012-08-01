@@ -407,12 +407,12 @@ equation
   annotation (
     experiment(StopTime=50, Algorithm="Dassl"),
     Documentation(info="<html>
-
+<p>
 Model of a simple inverted double pendulum system. The mdel is the same as in Modelica_Controller.Examples.Components.DoublePendulum but with different initial values because the initial values are used as a working point for linearization.<br>
 The physical Model is used in Modelica_LinearSystems2.Examples.StateSpace.inverseDoublePendulumController where it is being
 linearized an used as a base for linear controller design. The results are used to control the crane system
 in Modelica_Controller.Examples.InverseDoublePendulum.mo
-
+</p>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={

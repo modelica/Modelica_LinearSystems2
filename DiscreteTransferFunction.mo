@@ -87,7 +87,6 @@ record DiscreteTransferFunction
       dtf.yName := yName;
 
       annotation (Documentation(info="<html>
-
 </html>"));
     end fromZerosAndPoles;
 
@@ -1101,7 +1100,6 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
       Plot.diagram(diagram2, device);
       annotation (__Dymola_interactive=true, Documentation(info="<html>
-
 </html>"));
     end timeResponse;
 
@@ -1212,7 +1210,6 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
         device=device);
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
-
 </html>"));
     end ramp;
 
@@ -1255,8 +1252,6 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
             device=device);
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
-
-
 </html>"));
     end initialResponse;
 
@@ -1485,7 +1480,6 @@ with
       dtf.Ts := scalar(Ts);
 
         annotation (Documentation(info="<html>
-
 </html>"));
     end fromFile;
 

@@ -28,7 +28,7 @@ algorithm
     assert(false, "Optional argument \"p\" of function \"norm\" must be
 1, 2 or Modelica.Constants.inf");
   end if;
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Matrices.<b>norm</b>(A);
@@ -59,5 +59,5 @@ Note, for any matrix A and vector v the following inequality holds:
 <blockquote><pre>
 Vectors.<b>norm</b>(A*v,p) &le; Matrices.<b>norm</b>(A,p)*Vectors.<b>norm</b>(A,p)
 </pre></blockquote>
-</HTML>"));
+</html>"));
 end norm;

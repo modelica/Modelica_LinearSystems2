@@ -6,5 +6,4 @@ type AnalogFilter = enumeration(
     Chebyshev "Chebyshev filter")
   "Enumeration defining the method of filtering"
       annotation (Evaluate=true, Documentation(info="<html>
-
 </html>"));

@@ -62,8 +62,7 @@ equation
   annotation (
     Documentation(info="<html>
 
-</HTML>
-"),    Icon(graphics={
+</html>"),    Icon(graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={0,0,0},

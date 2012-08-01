@@ -44,7 +44,6 @@ response of a second order system as continuous system and as discrete system
 with the supported discretization methods. The step starts with an offset at 0.1 s
 to demonstrate the steady-state initialization.
 </p>
-
 </html>"),
     experiment(StopTime=1.5));
 end DiscretizationSeries;

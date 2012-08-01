@@ -26,9 +26,8 @@ algorithm
   X := LAPACK.dtrsm(H, X, 1, true, true, false, false);
   X := LAPACK.dtrsm(H, X, 1, true, false, false, false);
 
-  annotation (Documentation(info="<HTML>
-
-</HTML>", revisions="<html>
+  annotation (Documentation(info="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -41,6 +40,5 @@ algorithm
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end solve2rSym;

@@ -223,8 +223,7 @@ possible.
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.Math.Vectors.length\">Vectors.length</a>
 </p>
-</html>
-"));
+</html>"));
   end normalize;
 
   function sortComplex "Sort elements of complex vector"
@@ -319,7 +318,7 @@ possible.
        end while;
        gap := div(gap,2);
     end while;
-    annotation (Documentation(info="<HTML>
+    annotation (Documentation(info="<html>
   <h4>Syntax</h4>
   <blockquote><pre>
              sorted_v = Vectors.<b>sort</b>(v);
@@ -340,7 +339,7 @@ possible.
          -> v2 = {-1, 2, 3, 6, 8}
             i2 = {1, 5, 3, 4, 2}
   </pre></blockquote>
-  </HTML>"));
+  </html>"));
   end sortComplex;
 
   function multiply "Scalar product of two complex vectors"
@@ -526,8 +525,7 @@ This package provides functions operating on matrices of complex numbers.
     end fromReal;
     annotation (Documentation(info="<html>
 <p>This package contains the default constructors for a data record of complex number. </p>
-</html>
-"));
+</html>"));
   end 'constructor';
 
   encapsulated operator '-'
@@ -683,7 +681,6 @@ algorithm
      index  := 0;
   end if;
   annotation (Documentation(info="<html>
-
 </html>"));
 end 'max';
 

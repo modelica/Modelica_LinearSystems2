@@ -113,6 +113,5 @@ i.e., by Gaussian elemination with partial pivoting.
 <a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
 <a href=\"modelica://Modelica.Math.Matrices.LU_solve2\">Matrices.LU_solve2</a>
 </p>
-
 </html>"));
 end solve2r;

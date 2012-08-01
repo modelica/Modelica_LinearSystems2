@@ -61,6 +61,5 @@ algorithm
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end findLocal_tk;

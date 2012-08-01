@@ -118,6 +118,5 @@ r = rank(<b>A</b>).
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end nullspace;

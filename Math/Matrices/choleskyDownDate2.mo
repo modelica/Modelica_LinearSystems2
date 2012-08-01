@@ -154,7 +154,6 @@ If \"upper==true\", the output <b>Ldd</b> is also upper triangular. Default is \
 <dd> <b>LINPACK Users' Guide</b>.
      Society for Industrial Mathematics.<br>&nbsp;</dd>
 </dl>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -168,6 +167,5 @@ If \"upper==true\", the output <b>Ldd</b> is also upper triangular. Default is \
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end choleskyDownDate2;

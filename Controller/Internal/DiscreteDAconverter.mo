@@ -31,9 +31,8 @@ equation
 
   y = y_delaySampled;
   annotation (
-    Documentation(info="<HTML>
-</HTML>
-"), Icon(graphics={Line(
+    Documentation(info="<html>
+</html>"), Icon(graphics={Line(
           points={{-100,-100},{100,100}},
           color={95,95,95},
           smooth=Smooth.None),

@@ -1167,7 +1167,6 @@ Default of initial state <b>x0</b> is <b>x0</b>=<b>0</b>.
 
 //  y=[0.09524, 0.2766, 0.4408,..., 1.9844, 1.9859, 1.9872]
 </pre></blockquote>
-
 </html>",  revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -1181,8 +1180,7 @@ Default of initial state <b>x0</b> is <b>x0</b>=<b>0</b>.
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
   end timeResponse;
 
   encapsulated function initialResponse
@@ -1255,8 +1253,7 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
   end initialResponse;
 
 encapsulated package Analysis
@@ -2297,8 +2294,7 @@ the norm of each <b>K</b>i is minimized [1].
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
   end assignPolesMI;
 
   end Design;
@@ -3060,7 +3056,6 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 <dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
-
 </html>",     revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -3074,8 +3069,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
     end toDiscreteZerosAndPoles;
 
     encapsulated function toDiscreteZerosAndPolesMIMO
@@ -3183,7 +3177,6 @@ of a system from discrete state space representation, i.e. isolating the uncontr
 <dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
-
 </html>",     revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -3197,8 +3190,7 @@ of a system from discrete state space representation, i.e. isolating the uncontr
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
     end toDiscreteZerosAndPolesMIMO;
 
   function toDiscreteTransferFunction
@@ -3263,9 +3255,6 @@ discrete state space system into a discrete zeros and poles representation first
 //   dtf = -------------------------------
 //           z^2 - 1.72357*z + 0.740818
 </pre></blockquote>
-
-
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -3279,8 +3268,7 @@ discrete state space system into a discrete zeros and poles representation first
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
   end toDiscreteTransferFunction;
 
   function toDiscreteTransferFunctionMIMO
@@ -3368,7 +3356,6 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
  Ts = 0.1
  method =StepExact]
 </pre></blockquote>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -3382,8 +3369,7 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
   end toDiscreteTransferFunctionMIMO;
 
   end Conversion;
@@ -3472,8 +3458,6 @@ Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>.
 
 
 </pre></blockquote>
-
-
 </html>"));
   end fromFile;
 

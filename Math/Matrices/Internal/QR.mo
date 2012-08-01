@@ -39,7 +39,7 @@ This is not allowed when calling Modelica.Matrices.QR(A).");
       0,
       0);
   end if;
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (Q,R,p) = Matrices.<b>QR</b>(A);
@@ -103,5 +103,5 @@ called as: <code>(,R,p) = QR(A)</code>.
                                     0     , -1.73.., -0.23..;
                                     0     ,  0     ,  0.65..];
 </pre></blockquote>
-</HTML>"));
+</html>"));
 end QR;

@@ -22,6 +22,5 @@ algorithm
   end for;
 
   annotation (Documentation(info="<html>
-
 </html>"));
 end householderReflexion;

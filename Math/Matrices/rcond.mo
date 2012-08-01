@@ -63,6 +63,5 @@ in either the 1-norm or the infinity-norm, using the LAPACK function DGECON.
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end rcond;

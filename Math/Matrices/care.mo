@@ -136,7 +136,6 @@ of the closed loop system) and dtrsen (to compute the ordered real Schur form an
 <dd> <b>A Schur Method for Solving Algebraic Riccati equations</b>.
      IEEE Trans. Auto. Contr., AC-24, pp. 913-921.<br>&nbsp;</dd>
 </dl>
-
 </html>",
         revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -151,6 +150,5 @@ of the closed loop system) and dtrsen (to compute the ordered real Schur form an
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end care;

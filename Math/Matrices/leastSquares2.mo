@@ -147,6 +147,5 @@ where Q1 consists of the first \"rank\" columns of Q.
 <a href=\"modelica://Modelica.Math.Matrices.solve2\">Matrices.solve2</a>
 (for square, regular matrices A)
 </p>
-
 </html>"));
 end leastSquares2;

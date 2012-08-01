@@ -226,8 +226,7 @@ with j=sqrt(-1), is defined as
 
     annotation (Documentation(info="<html>
 <p>This package contains the default constructors for a data record of polynomial. </p>
-</html>
-"));
+</html>"));
   end 'constructor';
 
   encapsulated operator '-'
@@ -467,13 +466,13 @@ This package contains operators for subtraction of Polynomial data records.
 
       // Solve least squares problem
     p.c := Modelica.Math.Matrices.leastSquares(V, y);
-    annotation (Documentation(info="<HTML>
+    annotation (Documentation(info="<html>
 <p>
 Polynomial.fitting(x,y,order) computes a Polynomial
 y=p(x) of degree &quot;order&quot; that fits the data &quot;p(x[i]) - y[i]&quot;
 in a least squares sense.
 </p>
-</HTML>"));
+</html>"));
   end fitting;
 
   encapsulated function degree "Return degree of polynomial"

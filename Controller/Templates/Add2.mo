@@ -24,8 +24,7 @@ inputs <b>u1</b> and <b>u2</b>:
 <pre>
     <b>y</b> = <b>u1</b> + <b>u2</b>;
 </pre>
-</html>
-"), Icon(coordinateSystem(
+</html>"), Icon(coordinateSystem(
     preserveAspectRatio=true,
     extent={{-100,-100},{100,100}},
     grid={2,2}), graphics={

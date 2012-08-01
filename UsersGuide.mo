@@ -126,8 +126,7 @@ and
 For details see
 <a href=\"http://www.modelica.org/documents/ModelicaSpec31.pdf\">Modelica Language Specification version 3.1</a> (chapter 14) from June 2009.
 </p>
-</html>
-"));
+</html>"));
       end FunctionsAndOperators;
       annotation (Documentation(info="<html>
 <p>
@@ -227,8 +226,7 @@ a = Complex.'abs'(3 + j*4)
 <p>
 has to be applied.
 </p>
-</html>
-"));
+</html>"));
     end ComplexNumbers;
 
     class Polynomials "Polynomials"
@@ -446,9 +444,7 @@ starting from a steady state initial filter with initial input = 0.2:
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4FiltersStepResponse.png\">
 </blockquote>
-
-</html>
-"));
+</html>"));
     end LinearSystemDataStructures;
 
     annotation (Documentation(info="<html>
@@ -483,9 +479,7 @@ are described in the following sections:
      or plot a frequency response.</li>
 
 </ol>
-
-</html>
-"));
+</html>"));
   end GettingStarted;
 
   class Requirements "Requirements"
@@ -502,9 +496,7 @@ with Dymola API calls. It is planned to move these tool specific calls to the
 (introduced for the Modelica Standard Library 3.1 for these
 purposes), in order that other Modelica tools can provide the same functionality in a clean way.
 </p>
-
-</html>
-"));
+</html>"));
   end Requirements;
 
   class ModelicaLicense2 "Modelica License 2"
@@ -1091,8 +1083,7 @@ This library is based on the following references:
     </tr>
 </table> 
 &nbsp;
-</html>
-"));
+</html>"));
   end Literature;
 
   package ReleaseNotes "Release notes"
@@ -1127,10 +1118,7 @@ New functions/records:
        <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteZerosAndPoles\">Examples_DiscreteZerosAndPoles</a>,
        <a href=\"modelica://Modelica_LinearSystems2.Examples.DiscreteTransferFunction\">Examples_DiscreteTransferFunction</a>,).</li>
 </ul>
-
-
-</html>
-"));
+</html>"));
     end Version_2_2;
 
     class Version_2_1 "Version 2.1 (January 15, 2010)"
@@ -1200,9 +1188,7 @@ Bug fixes:
 disabled. It is now enabled and the previously wrong design of highpass filters with odd order
 was corrected, by increasing the order by one in this case.</li>
 </ul>
-
-</html>
-"));
+</html>"));
     end Version_2_1;
 
     class Version_2_0 "Version 2.0 (September 2, 2009)"
@@ -1242,9 +1228,7 @@ have these names in the records). Most important improvements with respect to ve
      uses a better algorithm from the newest LAPACK version.</li>
 <li> Based on a newer LAPACK version 3.1.1.</li>
 </ul>
-
-</html>
-"));
+</html>"));
     end Version_2_0;
 
     class Version_0_95 "Version 0.95 (Feb. 11, 2008)"
@@ -1256,9 +1240,7 @@ have these names in the records). Most important improvements with respect to ve
 Adapted the library to the Modelica Standard Library 3.0 and
 to the new restrictions of the Modelica Language Version 3.0.
 </p>
-
-</html>
-"));
+</html>"));
     end Version_0_95;
 
     class Version_0_93 "Version 0.93 (Feb. 11, 2008)"
@@ -1300,9 +1282,7 @@ The following new components have been added:
   </tr>
 
 </table>
-
-</html>
-"));
+</html>"));
     end Version_0_93;
 
     class Version_0_9 "Version 0.9 (Oct. 17, 2005)"
@@ -1424,10 +1404,7 @@ performed:
      by appropriate function calls and supply the result as record
      instance to the corresponding block.</li>
 </ul>
-
-
-</html>
-"));
+</html>"));
     end Version_0_9;
     annotation (Documentation(info="<html>
 <p>
@@ -1486,8 +1463,7 @@ email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
      <a href=\"http://www.itea2.org/public/project_leaflets/EUROSYSLIB_profile_oct-07.pdf\">ITEA2 EUROSYSLIB</a>
       project. </li>
 </ul>
-</html>
-"));
+</html>"));
   end Contact;
   annotation (DocumentationClass=true, Documentation(info="<html>
 <p>
@@ -1521,7 +1497,5 @@ the library and has the following content:
     provides information about the author of the library as well as
     acknowledgments.</li>
 </ol>
-
-
 </html>"));
 end UsersGuide;

@@ -23,7 +23,7 @@ equations with function \"Matrices.leastSquares\" failed.");
   else
     x := fill(0, size(A, 2));
   end if;
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 x = Matrices.<b>leastSquares</b>(A,b);
@@ -49,5 +49,5 @@ If A does not have full rank,
 the solution is not unique and from the infinitely many solutions
 the one is selected that minimizes both |x|^2 and |A*x - b|^2.
 </p>
-</HTML>"));
+</html>"));
 end leastSquares;

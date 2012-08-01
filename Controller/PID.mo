@@ -156,7 +156,7 @@ equation
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="%sampleFactor")}),
-    Documentation(info="<HTML>
+    Documentation(info="<html>
 <p>
 This is the text-book version of a PID-controller.
 For a more practically useful PID-controller, use
@@ -233,9 +233,5 @@ initialize it with zero. As sketched this is, however, not possible.
 The solution is to not initialize u or the variable that is used
 to compute u by an algebraic equation.
 </p>
-
-
-</HTML>
-
-"));
+</html>"));
 end PID;

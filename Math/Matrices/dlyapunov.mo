@@ -106,6 +106,5 @@ using the Schur method for Lyapunov equations proposed by Bartels and Stewart [1
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end dlyapunov;

@@ -103,5 +103,5 @@ the number of real zeros (nRealZeros).
          nRealZeros     = 3
 
 </pre></blockquote>
-</HTML>"));
+</html>"));
 end reorderEigenvalue;

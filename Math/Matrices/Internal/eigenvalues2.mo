@@ -47,7 +47,5 @@ algorithm
   (lEigenVectors,rEigenVectors) := LAPACK.dtrevc(Ho, "B", "B", Zo);
 
   annotation (Documentation(info="<html>
-
-</html>
-"));
+</html>"));
 end eigenvalues2;

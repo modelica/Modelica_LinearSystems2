@@ -71,7 +71,7 @@ drag Modelica_LinearSystems2.Controller.SampleClock into the top level of your m
           lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<HTML>
+    Documentation(info="<html>
 <p>
 Global block that defines options for all components of the
 Controller library that are on the same or on a lower level
@@ -82,6 +82,5 @@ discretization method and the base sample time is defined.
 The sample time of a block is an integer multiple of the base sample
 time defined in the SampleClock component.
 </p>
-</HTML>
-"));
+</html>"));
 end SampleClock;

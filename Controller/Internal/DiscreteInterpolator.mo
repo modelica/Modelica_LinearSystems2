@@ -103,6 +103,5 @@ initial equation
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
-</html>
-"));
+</html>"));
 end DiscreteInterpolator;

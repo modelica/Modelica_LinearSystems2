@@ -4,5 +4,4 @@ type StaircaseMethod = enumeration(
     SVD "Apply staircase algorithm based on SVD")
   "Enumeration of methods for staircase algorithm"
     annotation (Evaluate=true, Documentation(info="<html>
-
 </html>"));

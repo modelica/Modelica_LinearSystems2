@@ -52,8 +52,7 @@ For this reason, option \"initType = SteadyState\" is ignored for
 a continuous PI block and
 interpreted as \"initType = InitialState\".
 </p>
-</html>
-"), Icon(coordinateSystem(
+</html>"), Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={

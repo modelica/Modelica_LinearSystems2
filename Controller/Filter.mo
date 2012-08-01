@@ -87,7 +87,6 @@ protected
 For details of the filter characteristics, see
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>.
 </p>
-</html>
-"));
+</html>"));
 
 end Filter;

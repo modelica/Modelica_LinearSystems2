@@ -10,6 +10,5 @@ on printer in [mm]. For example, if the width of a diagram is 120,
 and the diagram is pasted into a Word or PowerPoint document,
 then the width of the diagram in the document is 120 mm.
 </p>
-
 </html>"));
 end DrawingUnit_mm;

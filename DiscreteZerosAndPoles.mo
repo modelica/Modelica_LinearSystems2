@@ -345,7 +345,6 @@ which is equal to
 
   dzp = DiscreteZerosAndPoles(n1={0.1},n2=fill(0,0,2), d1=fill(0,0), d2=[0.9, -0.1], k=4);
 </pre></blockquote>
-
 </html>"));
     end fromFactorization;
 
@@ -1660,8 +1659,7 @@ i.e. Impulse, Step, Ramp, or Initial.
 <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp\">ramp</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.initialResponse\">initialResponse</a>
 </p>
-</html>
-"));
+</html>"));
   end timeResponse;
 
   encapsulated function impulse
@@ -1812,8 +1810,7 @@ This function plots the step response of a transfer function. It is based on <a 
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp\">ramp</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.initialResponse\">initialResponse</a>
 </p>
-</html>
-"));
+</html>"));
   end step;
 
   encapsulated function ramp
@@ -1887,8 +1884,7 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
 <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.initialResponse\">initialResponse</a>
 </p>
-</html>
-"));
+</html>"));
   end ramp;
 
   encapsulated function initialResponse
@@ -2422,7 +2418,6 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
 // dss.D = [0],
 // dss.B2 = [0; 0],
 </pre></blockquote>
-
 </html>"));
   end toDiscreteStateSpace;
 
@@ -2485,7 +2480,6 @@ second column respectively. The variable k is the real gain in both cases.
   dzp:=Modelica_LinearSystems2.DiscreteZerosAndPoles.Import.fromFile(DataDir + "    /dzp.mat " );
 //  zp = (q^2 + 2*q + 3)/(q + 2)/(q^2 + 2*q + 2)
 </pre></blockquote>
-
 </html>"));
     end fromFile;
 

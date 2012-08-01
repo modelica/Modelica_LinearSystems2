@@ -94,7 +94,6 @@ With the boolean input \"upper\" the user specifies wether the matrix <b>L</b>
 is lower or upper triangular matrix (left or right Cholesky factor).
 If \"upper==true\", the output <b>Lud</b> is also upper triangular. Default is \"upper==false\".
 </p>
-
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -108,6 +107,5 @@ If \"upper==true\", the output <b>Lud</b> is also upper triangular. Default is \
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end choleskyUpDate;

@@ -57,7 +57,7 @@ algorithm
       i := i + 2;
     end if;
   end while;
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
                 realZeros = Matrices.<b>extractRealZeros</b>(complexVector, numberOfRealRoots);
@@ -96,5 +96,5 @@ algorithm
               complexZeros = { 1+2j,
                               -1+j}
 </pre></blockquote>
-</HTML>"));
+</html>"));
 end extractRealZeros;

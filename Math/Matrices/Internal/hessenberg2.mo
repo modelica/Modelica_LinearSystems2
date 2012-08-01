@@ -48,19 +48,27 @@ algorithm
   end for;
 
   annotation (Documentation(info="<html>
-
+<p>
 This function computes the Hessenberg matrix of matrix <b>A</b> by repetitive application of Householder similarity transformation
- <pre>
+</p>
+<pre>
     <b>A</b>i+1 = (<b>I</b>-2*<b>u</b>_i*<b>u</b>_i')*<b>A</b>i*(<b>I</b>-2*<b>u</b>_i*<b>u</b>_i')
 </pre>
+<p>
 with Householder vector <b>u</b>_i.
+</p>
 <p>
 The elementary transformations can be subsumed under
- <pre> <b>A</b> -> <b>Q</b>*<b>A</b>*<b>Q</b>
+</p>
+<pre>
+   <b>A</b> -> <b>Q</b>*<b>A</b>*<b>Q</b>
 </pre>
-and <b>Q</b>*<b>A</b>*<b>Q</b> is Hessenberg matrix.
+<p>
+and
+<b>Q</b>*<b>A</b>*<b>Q</b> is Hessenberg matrix.
+</p>
 <p>
 In contrast to function <b>Modelica_LinearSystems2.Math.Matrices.hess</b>, function <b>Modelica_LinearSystems2.Math.Matrices.hess3</b> does not use any LAPACK routine.
-
+</p>
 </html>"));
 end hessenberg2;

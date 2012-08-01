@@ -28,7 +28,7 @@ algorithm
   X := LAPACK.dtrsm(H, X, 1, true, true, false, false);
   X := LAPACK.dtrsm(H, X, 1, true, false, false, false);
 
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 This function solves the equation
 <blockquote><pre>
 
@@ -53,7 +53,7 @@ with lower triangular matrix <b>L</b> the equation above could be rewritten as
 
 </pre></blockquote>
 which is solved with BLAS function <i>dtrmm</i> applied to a upper triangular matrix and subsequently to a lower triangular matrix.
-</HTML>", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>

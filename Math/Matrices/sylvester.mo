@@ -81,6 +81,5 @@ using the Schur method for Sylvester equations proposed by Bartels and Stewart [
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end sylvester;

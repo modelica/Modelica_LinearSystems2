@@ -80,7 +80,7 @@ initial equation
         Line(points={{-100,0},{-60,0}}, color={0,0,127}),
         Line(points={{60,0},{100,0}}, color={0,0,127})}),
     Documentation(info="
-<HTML>
+<html>
 <p>
 This blocks defines the transfer function between the input u and
 the output y as <i>first order</i> system:
@@ -92,6 +92,5 @@ the output y as <i>first order</i> system:
 <p>
 The block can be continuous or discrete (with continuous parameterization).
 </p>
-</HTML>
-"));
+</html>"));
 end FirstOrder;

@@ -18,7 +18,7 @@ equation
   y = u1 + u2;
   annotation (
     Documentation(info="
-<HTML>
+<html>
 <p>
 This blocks computes output <b>y</b> as <i>difference</i> of the
 commanded input <b>u1</b> and the feedback
@@ -37,9 +37,7 @@ Example:
 
      y = u1 - u2
 </pre>
-
-</HTML>
-"), Icon(coordinateSystem(
+</html>"), Icon(coordinateSystem(
     preserveAspectRatio=true,
     extent={{-100,-100},{100,100}},
     grid={2,2}), graphics={

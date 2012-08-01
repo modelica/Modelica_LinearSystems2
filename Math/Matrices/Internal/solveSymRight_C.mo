@@ -106,7 +106,7 @@ int c_solve2rSym_(doublereal *a, doublereal *b, char *trian, char *uplo, integer
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>", info="<HTML>
+</html>", info="<html>
 This function solves the equation
 <blockquote><pre>
 
@@ -133,7 +133,7 @@ with lower triangular matrix <b>L</b> the equation above could be rewritten as
 which is solved with BLAS function <i>dtrmm</i> applied to a upper triangular matrix and subsequently to a lower triangular matrix.
 <p>
 In contrast to function <i>solveSymRight</i> this function is implemented in C-code
-
-</HTML>"));
+</p>
+</html>"));
 
 end solveSymRight_C;

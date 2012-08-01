@@ -961,8 +961,6 @@ public
 //  p = {-0.5 + 0.866025j, -0.5 - 0.866025j}
 //  k = 1
 </pre></blockquote>
-
-
 </html>"));
     end zerosAndPoles;
 
@@ -1108,8 +1106,7 @@ Computes the invariant zeros of the corresponding state space representation of 
   zeros := Modelica_LinearSystems2.TransferFunction.Analysis.invariantZeros(tf);
 // zeros = {-1}
 </pre></blockquote>
-</html>
-"));
+</html>"));
     end invariantZeros;
 
     encapsulated function dcGain
@@ -1149,10 +1146,7 @@ If the transfer function has one or more zero poles, <b>k</b> is infinite.
 In this case, the output argument <b>finite</b> = <b>false</b> and
 <b>k</b> = Modelica.Constants.inf.
 </p>
-</html>
-
-
-"));
+</html>"));
     end dcGain;
 
     encapsulated function isControllable
@@ -2554,8 +2548,6 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
   tf:=Modelica_LinearSystems2.TransferFunction.Import.fromFile(\"tf.mat\", \"n\", \"d\");
 //  tf = (s^2 + 2*s + 3)/(4*s^2 + 5*s + 6)
 </pre></blockquote>
-
-
 </html>"));
   end fromFile;
 

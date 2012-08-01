@@ -41,7 +41,7 @@ initial equation
   annotation (
     defaultComponentName="secondOrder",
     Documentation(info="
-<HTML>
+<html>
 <p>
 This blocks defines the transfer function between the input u and
 the output y as <i>second order</i> system:
@@ -69,8 +69,7 @@ Example:
       y = ------------------- * u
           4.0 s^2 + 1.6 s + 1
 </pre>
-</HTML>
-"), Icon(coordinateSystem(
+</html>"), Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={

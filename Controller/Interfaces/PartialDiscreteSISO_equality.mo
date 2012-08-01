@@ -38,7 +38,6 @@ equation
 initial equation
   pre(ticks) = 0;
   annotation (
-    Documentation(info="<HTML>
-</HTML>
-"));
+    Documentation(info="<html>
+</html>"));
 end PartialDiscreteSISO_equality;

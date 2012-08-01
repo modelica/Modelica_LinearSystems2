@@ -22,6 +22,5 @@ by variable <u>heightRatio</u>
 (diagram height in row j = diagram[j].heightRatio*diagramWidth).
 Several curves can be displayed in one diagram.
 </p>
-
 </html>"));
 end Plot;
