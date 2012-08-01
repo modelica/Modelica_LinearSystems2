@@ -2754,7 +2754,7 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Step
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
 </p>
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -2833,7 +2833,7 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Ramp
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
 </p>
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -2917,7 +2917,7 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Init
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
 </p>
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -2983,7 +2983,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.denominatorDegree\">StateSpace.Analysis.denominatorDegree</a>
 </p>
-</html> "));
+</html>"));
   end numeratorDegree;
 
   encapsulated function denominatorDegree
@@ -3035,7 +3035,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
 <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.numeratorDegree\">StateSpace.Analysis.numeratorDegree</a>
 </p>
-</html> "));
+</html>"));
   end denominatorDegree;
 
   encapsulated function evaluate
@@ -3098,7 +3098,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s), whi
 <a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -3195,7 +3195,7 @@ This function calculates the zeros, poles and gain of the corresponding transfer
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">TransferFunction.Analysis.zerosAndPoles</a>
 </p>
-</html> "));
+</html>"));
   end zerosAndPoles;
 
   encapsulated function eigenValues
@@ -3238,7 +3238,7 @@ Calculate the eigenvalues of a state space system, i.e. the eigenvalues of the s
 </pre></blockquote>
 
 
-</html> "));
+</html>"));
   end eigenValues;
 
   encapsulated function eigenVectors
@@ -3310,7 +3310,7 @@ i.e. v1 = |      |,   v2 = |       |
 </pre></blockquote>
 
 
-</html> "));
+</html>"));
   end eigenVectors;
 
   encapsulated function invariantZeros
@@ -3443,7 +3443,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
      Automatica, 18, pp. 415-430.<br>&nbsp;</dd>
 </dl>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -3557,7 +3557,7 @@ in <b>X</b> is used to compute <b>K</b>. If no solution of this equation exists,
 <b>K</b> are set to Modelica.Constants.inf (when <b>K</b> could be computed,
 <b>finite</b> = <b>true</b>).
 </p>
-</html> "));
+</html>"));
   end dcGain;
 
   encapsulated function isControllable
@@ -3621,7 +3621,7 @@ Since controllability is dual to observability of the dual system (A', C', B', D
 // controllable = true
 </pre></blockquote>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -3682,7 +3682,7 @@ The boolean input <b>method</b> defines for multi output systems the method to g
   observable := Modelica_LinearSystems2.StateSpace.Analysis.isObservable(ss, method);
 // observable = false
 </pre></blockquote>
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -3748,7 +3748,7 @@ Then, the uncontrollable poles are checked to be stable, i.e. to have negative r
 // stabilizable = true
 </pre></blockquote>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -3814,7 +3814,7 @@ Then, the unobservable poles are checked to be stable, i.e. to have negative rea
 // detectable = true
 </pre></blockquote>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -3890,7 +3890,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
 // Q = [0, 1, 3; 0, 1, 2; 1, 1, 1]
 </pre></blockquote>
 
-</html> "));
+</html>"));
   end controllabilityMatrix;
 
   encapsulated function observabilityMatrix
@@ -3953,7 +3953,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
 // Q = [0, 1, 0; 0, 1, 1; 1, 1, 2]
 </pre></blockquote>
 
-</html> "));
+</html>"));
   end observabilityMatrix;
 
 end Analysis;
@@ -4527,7 +4527,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
      IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
 </dl>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -4873,7 +4873,7 @@ The eigenvalues of the closed loop system <b>A</b> - <b>B</b>*<b>K</b> are compu
 // K = [-1, -3.63271, 108.763, 18.3815]
 </pre></blockquote>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -5114,7 +5114,7 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
         -0.003,      0.08934]
 </pre></blockquote>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -5370,7 +5370,7 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
 </p>
-</html> "));
+</html>"));
     end bodeSISO;
 
     encapsulated function bodeMIMO
@@ -5478,7 +5478,7 @@ StateSpace.Plot.<b>bodeMIMO</b>(
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase2.png\">
 </p>
-</html> "));
+</html>"));
     end bodeMIMO;
 
     encapsulated function timeResponse
@@ -5609,7 +5609,7 @@ This function plots the time response of a state space system. The character of 
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initial</a>
 </p>
 
-</html> "));
+</html>"));
     end timeResponse;
 
     encapsulated function impulse "Impulse response plot"
@@ -5689,7 +5689,7 @@ for each system corresponding to the transition matrix. It is based on <a href=\
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>
 </p>
-</html> "));
+</html>"));
     end impulse;
 
     encapsulated function step "Step response plot"
@@ -5767,7 +5767,7 @@ This function plots the step responses of a state space system for each system c
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>
 </p>
-</html> "));
+</html>"));
     end step;
 
     encapsulated function ramp "Ramp response plot"
@@ -5845,7 +5845,7 @@ This function plots the ramp responses of a state space system for each system c
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>
 </p>
-</html> "));
+</html>"));
     end ramp;
 
     encapsulated function initialResponse "Initial condition response plot"
@@ -5926,7 +5926,7 @@ This function plots the initial responses of a state space system for the initia
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>
 </p>
-</html> "));
+</html>"));
     end initialResponse;
 
   end Plot;
@@ -6063,7 +6063,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -6143,7 +6143,7 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
 //   tf =  -----------------
              s^2 + 3*s + 2
 </pre></blockquote>
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -6256,7 +6256,7 @@ i.e.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 
-</html> ",     revisions="<html>
+</html>",     revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -6354,7 +6354,7 @@ i.e.
          | (s + 2)*(s + 3)            (s + 1)*(s + 2)        |
          |                                                   |
 </pre></blockquote>
-</html> ",     revisions="<html>
+</html>",     revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -6457,7 +6457,7 @@ if inverted=true. Matrix T has to be invertible. The transformed system has the 
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">State space analysis</a>
 </p>
-</html> "));
+</html>"));
       end toSimilarForm;
 
       encapsulated function toObservabilityForm
@@ -6568,7 +6568,7 @@ The transformed system has the same eigenvalues.
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toControllabilityForm\">toControllabilityForm</a>
 </p>
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -6692,7 +6692,7 @@ Matrix T has to be invertible, i.e. the system has to be controllable. The trans
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toObservabilityForm\">toObservabilityForm</a>
 </p>
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -6771,7 +6771,7 @@ Matrix T has to be diagonalizable, i.e. the algebraic and geometric multipliciti
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>
 </p>
-</html> "));
+</html>"));
       end toDiagonalForm;
 
       encapsulated function toIrreducibleForm
@@ -6855,7 +6855,7 @@ This function is called to compute transfer functions of state space representat
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -6933,7 +6933,7 @@ Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
     D=[0])
 </pre></blockquote>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -7007,7 +7007,7 @@ subsystem.D = ss.D[outputIndex, inputIndex];
       C=[1, 1, 0; 0, 1, 1],
       D=[0; 0])
 </pre></blockquote>
-</html> "));
+</html>"));
   end extract;
 
   end Transformation;
@@ -7081,7 +7081,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
       C=[1, 1, 1],
       D=[0])
 </pre></blockquote>
-</html> "));
+</html>"));
   end fromFile;
 
   function fromModel

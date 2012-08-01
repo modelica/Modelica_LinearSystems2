@@ -661,7 +661,7 @@ Generate the complex Laplace variable p as a ZerosAndPoles transfer function. It
 <blockquote><pre>
 ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
 </pre></blockquote>
-</html> "));
+</html>"));
   end p;
 
   encapsulated package Analysis
@@ -913,7 +913,7 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.I
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
 </p>
-</html> "));
+</html>"));
   end impulseResponse;
 
   encapsulated function stepResponse "Calculate the step time response"
@@ -974,7 +974,7 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.S
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
 </p>
-</html> "));
+</html>"));
   end stepResponse;
 
   encapsulated function rampResponse "Calculate the ramp time response"
@@ -1036,7 +1036,7 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.R
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
 </p>
-</html> "));
+</html>"));
   end rampResponse;
 
   encapsulated function initialResponse
@@ -1102,7 +1102,7 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.I
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
 </p>
-</html> "));
+</html>"));
   end initialResponse;
 
     encapsulated function numeratorDegree
@@ -1141,7 +1141,7 @@ Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator 
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree\">ZerosAndPoles.Analysis.denominatorDegree</a>
 </p>
-</html> "));
+</html>"));
     end numeratorDegree;
 
     encapsulated function denominatorDegree
@@ -1180,7 +1180,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.numeratorDegree\">ZerosAndPoles.Analysis.numeratorDegree</a>
 </p>
-</html> "));
+</html>"));
     end denominatorDegree;
 
     encapsulated function evaluate
@@ -1252,7 +1252,7 @@ The transfer function G(p)=N(p)/D(p) is evaluated by calculating the numerator p
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -1366,7 +1366,7 @@ public
 //  p = {-0.5 + 0.866025j, -0.5 - 0.866025j}
 //  k = 1
 </pre></blockquote>
-</html> "));
+</html>"));
     end zerosAndPoles;
 
     function eigenValues
@@ -1408,7 +1408,7 @@ Calculate the eigenvalues of the corresponding state space representation of a z
   eigenvalues = Modelica_LinearSystems2.ZerosAndPoles.Analysis.eigenValues(zp);
 // eigenvalues = {-0.5 + j*sqrt(3)/2, -0.5 - j*sqrt(3)/2}
 </pre></blockquote>
-</html> "));
+</html>"));
     end eigenValues;
 
     encapsulated function eigenVectors
@@ -1462,7 +1462,7 @@ The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
 i.e. v1 = |                 |,   v2 = |                   |
           |     0.8165      |         |      0.8165       |
 </pre></blockquote>
-</html> "));
+</html>"));
     end eigenVectors;
 
     encapsulated function invariantZeros
@@ -1608,7 +1608,7 @@ into a state space representation which is applied to <a href=\"modelica://Model
 // controllable = true
 </pre></blockquote>
 
-</html> "));
+</html>"));
     end isControllable;
 
     encapsulated function isObservable
@@ -1653,7 +1653,7 @@ Function ZerosAndPoles.Analysis.<b>isObservable</b> checks the observability of 
   observable := Modelica_LinearSystems2.StateSpace.Analysis.isObservable(zp, method);
 // observable = false
 </pre></blockquote>
-</html> "));
+</html>"));
     end isObservable;
 
     encapsulated function isStabilizable
@@ -1695,7 +1695,7 @@ The transfer function is stabilizable if all unstable poles are controllable.
    stabilizable := Modelica_LinearSystems2.ZerosAndPoles.Analysis.isStabilizable(zp);
 // stabilizable = true
 </pre></blockquote>
-</html> "));
+</html>"));
     end isStabilizable;
 
     encapsulated function isDetectable
@@ -1739,7 +1739,7 @@ The transfer function is detectable if all unstable poles are observable.
 // detectable = false
 </pre></blockquote>
 
-</html> "));
+</html>"));
     end isDetectable;
 
     encapsulated function controllabilityMatrix
@@ -1794,7 +1794,7 @@ of a zeros and poles transfer function.
   Q := Modelica_LinearSystems2.ZerosAndPoles.Analysis.controllabilityMatrix(zp);
 // Q = [0, 1, 1, -1]
 </pre></blockquote>
-</html> "));
+</html>"));
     end controllabilityMatrix;
 
     encapsulated function observabilityMatrix
@@ -1848,7 +1848,7 @@ of a zeros-and-poles transfer function.
   Q := Modelica_LinearSystems2.ZerosAndPoles.Analysis.observabilityMatrix(zp);
 // Q = [1, 1, -1, 0]
 </pre></blockquote>
-</html> "));
+</html>"));
     end observabilityMatrix;
 
   end Analysis;
@@ -2217,7 +2217,7 @@ is set.
 
 // zp_filter = 9530.93/( (p + 97.6265)^2 )
 </pre></blockquote>
-</html> "));
+</html>"));
   end filter;
 
   end Design;
@@ -2343,7 +2343,7 @@ and results in
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/polesAndZerosZP.png\">
 </blockquote>
-</html> "));
+</html>"));
   end polesAndZeros;
 
   encapsulated function bode
@@ -2496,7 +2496,7 @@ This function plots the bode-diagram of a transfer function.
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
 </blockquote>
-</html> "));
+</html>"));
   end bode;
 
   encapsulated function timeResponse
@@ -2590,7 +2590,7 @@ This function plots the time response of a transfer function. The character of t
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>,
 <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>
 </p>
-</html> "));
+</html>"));
   end timeResponse;
 
   encapsulated function impulse "Impulse response plot"
@@ -2667,7 +2667,7 @@ This function plots the impulse response of a zeros-and-poles transfer function.
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>,
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>
 </p>
-</html> "));
+</html>"));
   end impulse;
 
   encapsulated function step "Step response plot"
@@ -2818,7 +2818,7 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>
 </p>
 
-</html> "));
+</html>"));
   end ramp;
 
   encapsulated function initialResponse "Initial condition response plot"
@@ -2902,7 +2902,7 @@ This function plots the initial response, i.e. the zeros input response of a zer
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>
 </p>
-</html> "));
+</html>"));
   end initialResponse;
 
   end Plot;
@@ -3014,7 +3014,7 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
   tf := Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction(zp);
 //  tf = [1/( (p + 1)*(p + 2) ); p/( (p + 1)^2 )]
 </pre></blockquote>
-</html> "));
+</html>"));
     end toTransferFunctionMIMO;
 
     function toMatrices
@@ -3552,7 +3552,7 @@ processing.
 // ssC = [1, 1],
 // ssD = [0],
 </pre></blockquote>
-</html> "));
+</html>"));
     end toMatrices;
 
     function toStateSpace
@@ -4086,7 +4086,7 @@ processing.
 // ss.C = [1, 1],
 // ss.D = [0],
 </pre></blockquote>
-</html> "));
+</html>"));
     end toStateSpace;
   end Conversion;
 
@@ -4155,7 +4155,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
   zp:=Modelica_LinearSystems2.ZerosAndPoles.Import.fromFile(\"zp.mat\", \"n\", \"d\");
 //  zp = (p^2 + 2*p + 3)/(p + 2)/(p^2 + 2*p + 2)
 </pre></blockquote>
-</html> "));
+</html>"));
     end fromFile;
 
     function fromModel
@@ -4731,7 +4731,7 @@ For more details see also
 
  // zp_filter = 1 /  ( (p + 1)*(p^2 + p + 1) )
 </pre></blockquote>
-</html> "));
+</html>"));
   end baseFilter;
 
     function BesselCoefficients
@@ -6120,7 +6120,7 @@ is set.
 
 // zp_filter = 9530.93/( (p + 97.6265)^2 )
 </pre></blockquote>
-</html> "));
+</html>"));
   end filter;
 
     function filterToNormalized

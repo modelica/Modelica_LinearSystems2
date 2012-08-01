@@ -948,7 +948,7 @@ inputs and the number of outputs must be identical.
   </pre></blockquote>
 
 
-  </html> "));
+  </html>"));
   end eigenVectors;
 
   encapsulated function frequency

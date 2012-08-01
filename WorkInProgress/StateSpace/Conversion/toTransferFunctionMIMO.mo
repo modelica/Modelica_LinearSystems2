@@ -90,7 +90,7 @@ i.e.
            | (s + 2)*(s + 3)            (s + 1)*(s + 2)        |
            |                                                   |
 </pre></blockquote>
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>

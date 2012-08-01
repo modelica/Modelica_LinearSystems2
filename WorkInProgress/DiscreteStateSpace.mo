@@ -488,7 +488,7 @@ algorithm
 
 
 
-</html> "));
+</html>"));
 end toDiscreteTransferFunction;
 
 encapsulated function toDiscreteZerosAndPoles
@@ -631,7 +631,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 
-</html> "));
+</html>"));
 end toDiscreteZerosAndPoles;
 
 end Conversion;
@@ -738,7 +738,7 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
 </p>
-</html> "));
+</html>"));
 end bodeSISO;
 
 end Plot;

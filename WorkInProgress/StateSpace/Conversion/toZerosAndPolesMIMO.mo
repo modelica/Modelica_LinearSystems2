@@ -95,7 +95,7 @@ i.e.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>

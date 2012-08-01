@@ -301,7 +301,7 @@ It can be used for generating like
 <blockquote><pre>
 TransferFunction tf = s/(3*s^2 + 2*s +2)
 </pre></blockquote>
-</html> "));
+</html>"));
   end s;
 
   encapsulated package Analysis
@@ -490,9 +490,7 @@ x are calculated for each time step t=k*dt.
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0048, 0.0187, 0.04, 0.0694}
 </pre></blockquote>
-
-
-</html> "));
+</html>"));
    end timeResponse;
 
   encapsulated function impulseResponse "Calculate the impulse time response"
@@ -557,9 +555,7 @@ and x are calculated for each time step t=k*dt.
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0048, 0.0187, 0.04, 0.0694}
 </pre></blockquote>
-
-
-</html> "));
+</html>"));
   end impulseResponse;
 
   encapsulated function stepResponse "Calculate the step time response"
@@ -625,7 +621,7 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
 </p>
-</html> "));
+</html>"));
   end stepResponse;
 
   encapsulated function rampResponse "Calculate the ramp time response"
@@ -692,7 +688,7 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
 </p>
-</html> "));
+</html>"));
   end rampResponse;
 
   encapsulated function initialResponse
@@ -763,7 +759,7 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
 </p>
-</html> "));
+</html>"));
   end initialResponse;
 
     encapsulated function numeratorDegree "Return numerator degree"
@@ -803,7 +799,7 @@ Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator 
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree\">TransferFunction.Analysis.denominatorDegree</a>
 </p>
-</html> "));
+</html>"));
     end numeratorDegree;
 
     encapsulated function denominatorDegree "Return denominator degree"
@@ -843,7 +839,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.numeratorDegree\">TransferFunction.Analysis.numeratorDegree</a>
 </p>
-</html> "));
+</html>"));
     end denominatorDegree;
 
     encapsulated function evaluate
@@ -896,7 +892,7 @@ The transfer function G(s)=N(s)/D(s) is evaluated by calculating the numerator p
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
-</html> "));
+</html>"));
     end evaluate;
 
     encapsulated function zerosAndPoles
@@ -967,7 +963,7 @@ public
 </pre></blockquote>
 
 
-</html> "));
+</html>"));
     end zerosAndPoles;
 
     function eigenValues
@@ -1014,7 +1010,7 @@ Calculate the eigenvalues of the corresponding state space representation of a t
   eigenvalues = Modelica_LinearSystems2.TransferFunction.Analysis.eigenValues(tf);
 // eigenvalues = {-0.5 + j*sqrt(3)/2, -0.5 - j*sqrt(3)/2}
 </pre></blockquote>
-</html> "));
+</html>"));
     end eigenValues;
 
     encapsulated function eigenVectors
@@ -1069,7 +1065,7 @@ The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
 i.e. v1 = |                 |,   v2 = |                   |
           |     0.8165      |         |      0.8165       |
 </pre></blockquote>
-</html> "));
+</html>"));
     end eigenVectors;
 
     encapsulated function invariantZeros
@@ -1200,7 +1196,7 @@ Function TransferFunction.Analysis.<b>isControllable</b> checks the controllabil
   controllable := Modelica_LinearSystems2.StateSpace.Analysis.isControllable(tf, method);
 // controllable = true
 </pre></blockquote>
-</html> "));
+</html>"));
     end isControllable;
 
     encapsulated function isObservable
@@ -1244,7 +1240,7 @@ Function TransferFunction.Analysis.<b>isObservable</b> checks the observability 
   controllable := Modelica_LinearSystems2.StateSpace.Analysis.isObservable(tf, method);
 // controllable = false
 </pre></blockquote>
-</html> "));
+</html>"));
     end isObservable;
 
     encapsulated function isStabilizable
@@ -1286,7 +1282,7 @@ The transfer function is stabilizable if all unstable poles are controllable.
    stabilizable := Modelica_LinearSystems2.TransferFunction.Analysis.isStabilizable(tf);
 // stabilizable = true
 </pre></blockquote>
-</html> "));
+</html>"));
     end isStabilizable;
 
     encapsulated function isDetectable
@@ -1329,7 +1325,7 @@ The transfer function is detectable if all unstable poles are observable.
   detectable := Modelica_LinearSystems2.TransferFunction.Analysis.isDetectable(tf);
 // detectable = false
 </pre></blockquote>
-</html> "));
+</html>"));
     end isDetectable;
 
     encapsulated function controllabilityMatrix
@@ -1384,7 +1380,7 @@ of a transfer function.
   Q := Modelica_LinearSystems2.TransferFunction.Analysis.controllabilityMatrix(tf);
 // Q = [0, 1, 1, -1]
 </pre></blockquote>
-</html> "));
+</html>"));
     end controllabilityMatrix;
 
     encapsulated function observabilityMatrix
@@ -1438,7 +1434,7 @@ of a transfer function.
   Q := Modelica_LinearSystems2.TransferFunction.Analysis.observabilityMatrix(tf);
 // Q = [1, 1, -1, 0]
 </pre></blockquote>
-</html> "));
+</html>"));
     end observabilityMatrix;
   end Analysis;
 
@@ -1619,7 +1615,7 @@ and results in
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/PolesAndZerosTF.png\">
 </blockquote>
-</html> "));
+</html>"));
   end polesAndZeros;
 
     encapsulated function bode "Plot transfer function as bode plot"
@@ -1767,7 +1763,7 @@ This function plots the bode-diagram of a transfer function.
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
 </blockquote>
-</html> "));
+</html>"));
     end bode;
 
   encapsulated function timeResponse
@@ -1938,7 +1934,7 @@ This function plots the impulse response of a transfer function. It is based on 
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>,
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>
 </p>
-</html> "));
+</html>"));
   end impulse;
 
   encapsulated function step "Step response plot"
@@ -2012,7 +2008,7 @@ This function plots the step response of a transfer function. It is based on <a 
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>,
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>
 </p>
-</html> "));
+</html>"));
   end step;
 
   encapsulated function ramp "Ramp response plot"
@@ -2088,7 +2084,7 @@ This function plots the ramp response of a transfer function. It is based on <a 
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>
 </p>
-</html> "));
+</html>"));
   end ramp;
 
   encapsulated function initialResponse "Initial condition response plot"
@@ -2174,7 +2170,7 @@ This function plots the initial response, i.e. the zeros input response of a tra
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>
 </p>
-</html> "));
+</html>"));
   end initialResponse;
 
   end Plot;
@@ -2340,7 +2336,7 @@ is defined slightly differently.
 // ss.C = [1, 1, 0],
 // ss.D = [0],
 </pre></blockquote>
-</html> "));
+</html>"));
     end toStateSpace;
 
     encapsulated function toZerosAndPolesMIMO
@@ -2387,7 +2383,7 @@ Converts a matrix of transfer functions denoted as rational polynomial function 
   zp:=Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles(tf);
 //  zp = [1/( (s + 1)*(s + 2) ); s/( (s + 1)^2 )]
 </pre></blockquote>
-</html> "));
+</html>"));
     end toZerosAndPolesMIMO;
 
     function toMatrices
@@ -2497,7 +2493,7 @@ is defined slightly differently.
 // C = [1, 1, 0],
 // D = [0],
 </pre></blockquote>
-</html> "));
+</html>"));
     end toMatrices;
   end Conversion;
 
@@ -2560,7 +2556,7 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
 </pre></blockquote>
 
 
-</html> "));
+</html>"));
   end fromFile;
 
   function fromModel

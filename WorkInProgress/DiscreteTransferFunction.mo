@@ -264,7 +264,7 @@ Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can b
 <blockquote><pre>
 DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
 </pre></blockquote>
-</html> "));
+</html>"));
 end z;
 
 encapsulated package Plot "Functions to plot state space system responses"
@@ -424,7 +424,7 @@ This function plots the bode-diagram of a transfer function.
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
 </blockquote>
-</html> "));
+</html>"));
 end bode;
 
 end Plot;
@@ -465,7 +465,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 </pre></blockquote>
 
 
-</html> "));
+</html>"));
 end denominatorDegree;
 
 end Analysis;
@@ -635,7 +635,7 @@ is defined slightly differently.
 // dss.D = [0],
 </pre></blockquote>
 
-</html> "));
+</html>"));
 end toDiscreteStateSpace;
 
 end Conversion;

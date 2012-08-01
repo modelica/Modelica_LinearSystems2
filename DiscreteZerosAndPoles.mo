@@ -145,7 +145,7 @@ discrete zeros-and-poles transfer function is derived from DiscreteStateSpace by
   // dzp = 0.00248841 * ---------------------------------------------
   //                     (q - 0.904762)*(q^2 - 1.89549*q + 0.904988)
 </pre></blockquote>
-</html> "));
+</html>"));
   end fromZerosAndPoles;
 
   encapsulated function fromPolesAndZeros
@@ -825,7 +825,7 @@ Generate the complex Laplace variable q=exp(s*T) as a discrete zeros and poles t
 <blockquote><pre>
 DiscreteZerosAndPoles dzp = q/(q^2 + q + 1)/(q + 1)
 </pre></blockquote>
-</html> "));
+</html>"));
   end q;
 
   encapsulated package Analysis
@@ -1551,7 +1551,7 @@ This function plots the bode-diagram of a DiscreteZerosAndPoles transfer functio
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dBodePhase.png\">
 </p>
-</html> "));
+</html>"));
   end bode;
 
   encapsulated function timeResponse
@@ -2423,7 +2423,7 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
 // dss.B2 = [0; 0],
 </pre></blockquote>
 
-</html> "));
+</html>"));
   end toDiscreteStateSpace;
 
   end Conversion;
@@ -2486,7 +2486,7 @@ second column respectively. The variable k is the real gain in both cases.
 //  zp = (q^2 + 2*q + 3)/(q + 2)/(q^2 + 2*q + 2)
 </pre></blockquote>
 
-</html> "));
+</html>"));
     end fromFile;
 
   function fromModel

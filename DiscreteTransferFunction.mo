@@ -510,7 +510,7 @@ Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can b
 <blockquote><pre>
 DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
 </pre></blockquote>
-</html> "));
+</html>"));
 end z;
 
   encapsulated package Analysis
@@ -658,7 +658,7 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = {0.0, 0.0, 1.0, 1.89548693586698, 2.68788260052697}
 </pre></blockquote>
-</html> "));
+</html>"));
     end impulseResponse;
 
     encapsulated function stepResponse
@@ -724,7 +724,7 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = {0.0, 0.0, 1.0, 2.89548693586698, 5.58336953639396}
 </pre></blockquote>
-</html> "));
+</html>"));
     end stepResponse;
 
     encapsulated function rampResponse
@@ -791,7 +791,7 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = {0.0, 0.0, 0.0, 0.1, 0.389548693586699}
 </pre></blockquote>
-</html> "));
+</html>"));
     end rampResponse;
 
     encapsulated function initialResponse
@@ -860,7 +860,7 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = {1.0, 2.0, 2.88598574821853, 3.66037203581564, 4.3264045475288}
 </pre></blockquote>
-</html> "));
+</html>"));
     end initialResponse;
 
     encapsulated function denominatorDegree
@@ -897,7 +897,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
   dDegree := DiscreteTransferFunction.Analysis.denominatorDegree(dtf);
 //  dDegree = 2
 </pre></blockquote>
-</html> "));
+</html>"));
     end denominatorDegree;
 
   end Analysis;
@@ -1036,7 +1036,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       end if;
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
-</html> "));
+</html>"));
     end bode;
 
     encapsulated function timeResponse
@@ -1138,7 +1138,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
           device=device);
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
-</html> "));
+</html>"));
     end impulse;
 
     encapsulated function step
@@ -1213,7 +1213,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 
-</html> "));
+</html>"));
     end ramp;
 
     encapsulated function initialResponse
@@ -1257,7 +1257,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 
 
-</html> "));
+</html>"));
     end initialResponse;
 
   end Plot;
@@ -1433,7 +1433,7 @@ with
 // ss.D = [0],
 // ss.B2 = [0; 0; 0],
 </pre></blockquote>
-</html> "));
+</html>"));
     end toDiscreteStateSpace;
 
   end Conversion;
@@ -1486,7 +1486,7 @@ with
 
         annotation (Documentation(info="<html>
 
-</html> "));
+</html>"));
     end fromFile;
 
   function fromModel
@@ -1567,7 +1567,7 @@ with
     //   end for;
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
-</html> "));
+</html>"));
   end fromModel;
 
   end Import;

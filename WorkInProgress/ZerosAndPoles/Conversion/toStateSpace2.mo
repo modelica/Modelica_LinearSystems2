@@ -534,5 +534,5 @@ processing.
 // ss.C = [1, 1],
 // ss.D = [0],
 </pre></blockquote>
-</html> "));
+</html>"));
 end toStateSpace2;

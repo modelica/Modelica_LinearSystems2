@@ -78,7 +78,7 @@ This function is called to compute transfer functions of state space representat
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 
-</html> ",
+</html>",
      revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>

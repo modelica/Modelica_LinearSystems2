@@ -633,7 +633,7 @@ Generate the complex Laplace variable q=rxp(s*T) as a DiscreteZerosAndPoles tran
 <blockquote><pre>
 DiscreteZerosAndPoles dzp = q/(q^2 + q + 1)/(q + 1)
 </pre></blockquote>
-</html> "));
+</html>"));
   end q;
 
   encapsulated package Analysis
@@ -673,7 +673,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 <p>
 <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.numeratorDegree\">DiscreteZerosAndPoles.Analysis.numeratorDegree</a>
 </p>
-</html> "));
+</html>"));
   end denominatorDegree;
 
   end Analysis;
@@ -1294,7 +1294,7 @@ processing.
 // ss.D = [0],
 </pre></blockquote>
 
-</html> "));
+</html>"));
   end toStateSpace;
 
   end Conversion;
@@ -1454,7 +1454,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 </pre></blockquote>
 
 
-</html> "));
+</html>"));
     end fromFile;
 
   end Import;

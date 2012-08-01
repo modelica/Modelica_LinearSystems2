@@ -394,5 +394,5 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
      IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
 </dl>
 
-</html> "));
+</html>"));
 end assignPolesMI2;

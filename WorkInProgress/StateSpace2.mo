@@ -204,7 +204,7 @@ ss3 := ss1 - ss2;
 // ss.D = [0],
 </pre></blockquote>
 
-</html> "));
+</html>"));
   end subtract;
 
   function negate
@@ -375,7 +375,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
 </pre></blockquote>
 
 
-</html> "));
+</html>"));
   end fromFile;
 
     annotation (Documentation(info="<html>

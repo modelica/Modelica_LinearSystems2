@@ -40,7 +40,7 @@ algorithm
   end if;
   annotation (Documentation(info="<html>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -53,6 +53,5 @@ algorithm
     <td valign=\"top\">Realization</td>
   </tr>
 </table>
-</html>
-"));
+</html>"));
 end cholesky;

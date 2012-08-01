@@ -655,7 +655,7 @@ dss3 := dss1 - dss2;
 // dss.D = [0],
 // dss.B2 = [0; 0; 0; 0],
 </pre></blockquote>
-</html> "));
+</html>"));
   end subtract;
 
   function negate
@@ -1168,7 +1168,7 @@ Default of initial state <b>x0</b> is <b>x0</b>=<b>0</b>.
 //  y=[0.09524, 0.2766, 0.4408,..., 1.9844, 1.9859, 1.9872]
 </pre></blockquote>
 
-</html> ",  revisions="<html>
+</html>",  revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -1242,7 +1242,7 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
 
 //  y=[2, 1.8095, 1.6372,..., 0.01812, 0.01639, 0.01483]
 </pre></blockquote>
-</html> ",  revisions="<html>
+</html>",  revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -1312,7 +1312,7 @@ The eigenvalues <b>ev</b>_d of the discrete system are related to the eigenvalue
 // eigenvalues = {0.900452 + 0.0904977*j, 0.900452 - 0.0904977*j}
 //
 </pre></blockquote>
-</html> "));
+</html>"));
   end eigenValues;
 
   encapsulated function timeResponse
@@ -1454,7 +1454,7 @@ are calculated for each time step t=k*dss.Ts.
 //         t = {0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1] = {0, 0.0952, 0.1813, 0.2592, 0.33}
 </pre></blockquote>
-</html> "));
+</html>"));
   end timeResponse;
 
   encapsulated function impulseResponse
@@ -2283,7 +2283,7 @@ the norm of each <b>K</b>i is minimized [1].
 <dd> <b>A Schur method for pole assignment</b>.
      IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
 </dl>
-</html> ",
+</html>",
          revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -2423,7 +2423,7 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 <p>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhaseDis.png\">
 </p>
-</html> "));
+</html>"));
 end bodeSISO;
 
 encapsulated function timeResponse
@@ -2824,7 +2824,7 @@ This function plots the ramp responses of a discrete state space system for each
 <b>algorithm</b>
   Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp(dss)
 </pre></blockquote>
-</html> "));
+</html>"));
   end ramp;
 
 encapsulated function initialResponse
@@ -3061,7 +3061,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 
-</html> ",     revisions="<html>
+</html>",     revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -3184,7 +3184,7 @@ of a system from discrete state space representation, i.e. isolating the uncontr
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 
-</html> ",     revisions="<html>
+</html>",     revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -3266,7 +3266,7 @@ discrete state space system into a discrete zeros and poles representation first
 
 
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -3369,7 +3369,7 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
  method =StepExact]
 </pre></blockquote>
 
-</html> ", revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -3474,7 +3474,7 @@ Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>.
 </pre></blockquote>
 
 
-</html> "));
+</html>"));
   end fromFile;
 
     function fromModel
