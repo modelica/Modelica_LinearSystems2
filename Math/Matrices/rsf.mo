@@ -118,10 +118,6 @@ of <b>A</b> are calculated straightforward from <b>T</b>.
 Function <b>rsf</b> does not apply lapack.dgees, a routine to directly compute
 the real Schur from.
 </p>
-<p>
-See also
-<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rsf2\">Math.Matrices.rsf2</a>.
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -142,5 +138,10 @@ See also
 //alphaReal = {16.12, -1.12, -1.32E-015}
 //alphaImag = {0, 0, 0}
 </pre></blockquote>
-</html> "));
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rsf2\">Math.Matrices.rsf2</a>
+</p>
+</html>"));
 end rsf;

@@ -56,7 +56,7 @@ algorithm
     end for;
   end if;
 
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 X = Matrices.<b>solve2r</b>(A,B);
@@ -87,13 +87,11 @@ If matrix <b>(A)</b> is already lower triangular, the factorization is avoided i
 If a unique solution <b>X</b> does not exist (since <b>A</b> is singular),
 an exception is raised.
 </p>
+
+<h4>Note</h4>
 <p>
-Note, the solution is computed with the LAPACK function \"dgesv\",
+The solution is computed with the LAPACK function \"dgesv\",
 i.e., by Gaussian elemination with partial pivoting.
-</p>
-<p>See also
-<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a> and
-<a href=\"modelica://Modelica.Math.Matrices.LU_solve2\">Matrices.LU_solve2</a>.
 </p>
 
 <h4>Example</h4>
@@ -110,5 +108,11 @@ i.e., by Gaussian elemination with partial pivoting.
                                         -68.0, 34.4, 4.8] */
 </pre></blockquote>
 
-</HTML>"));
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve2\">Matrices.LU_solve2</a>
+</p>
+
+</html>"));
 end solve2r;

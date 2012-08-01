@@ -23,6 +23,8 @@ equations with function \"Matrices.leastSquares2\" failed.");
 <blockquote><pre>
 X = Matrices.<b>leastSquares2</b>(A,B);
 </pre></blockquote>
+
+
 <h4>Description</h4>
 <p>
 Returns a solution of equation A*X = B in a least
@@ -90,13 +92,14 @@ minimum norm |X| is selected. This gives a unique solution that minimizes both
 </ul>
 
 
+<h4>Note</h4>
 <p>
-Note, the solution is computed with the LAPACK function \"dgelsx\",
+The solution is computed with the LAPACK function \"dgelsx\",
 i.e., QR or LQ factorization of A with column pivoting.
 </p>
 
-<h4>Algorithmic details</h4>
 
+<h4>Algorithmic details</h4>
 <p>
 The function first computes a QR factorization with column pivoting:
 </p>
@@ -138,10 +141,9 @@ where Q1 consists of the first \"rank\" columns of Q.
 
 
 <h4>See also</h4>
-
 <p>
 <a href=\"modelica://Modelica.Math.Matrices.leastSquares\">Matrices.leastSquares</a>
-(same as leastSquares2, but with a right hand side vector), <br>
+(same as leastSquares2, but with a right hand side vector),
 <a href=\"modelica://Modelica.Math.Matrices.solve2\">Matrices.solve2</a>
 (for square, regular matrices A)
 </p>

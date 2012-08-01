@@ -53,10 +53,10 @@ algorithm
 
   annotation (Documentation(info="<html>
 <p>
-Function <b>sylvester</b> computes the solution <b>X</b> of the continuous-time Sylvester equation
+This function computes the solution <b>X</b> of the continuous-time Sylvester equation
 </p>
 <blockquote><pre>
-<b>A</b>*<b>X</b> + <b>X</b>*<b>B</b> = <b>C</b>.
+<b>A</b>*<b>X</b> + <b>X</b>*<b>B</b> = <b>C</b>
 </pre></blockquote>
 <p>
 using the Schur method for Sylvester equations proposed by Bartels and Stewart [1].

@@ -39,22 +39,24 @@ This function calculates the the condition number
 in either the 1-norm, 2-norm or the infinity-norm. In the case of 2-norm
 the result is the ratio of the largest to the smallest singular value to <b>A</b>.
 </p>
-<p>
-See also
-<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">Matrices.rcond</a>.
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-A = [1, 2
-     2, 1];
-r = conditionNumber(A);
+  A = [1, 2
+       2, 1];
+  r = conditionNumber(A);
 
 results in:
 
-r = 3.0
+  r = 3.0
 </pre></blockquote>
-</html>", revisions="<html>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">Matrices.rcond</a>
+</p>
+</html></html>",
+          revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>

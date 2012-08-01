@@ -2649,9 +2649,6 @@ gives the same result as
 <blockquote><pre>
 StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>.
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -2673,6 +2670,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
   //        t = {0, 0.1, 0.2, 0.3, 0.4}
   // x[:,1,1] = {1, 0.9048, 0.8187, 0.7408, 0.6703}
 </pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
+</p>
 </html>",  revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -2726,17 +2728,14 @@ gives the same result as
 <blockquote><pre>
 StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Step, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1],
-      B=[1],
-      C=[2],
-      D=[0]);
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1],
+    B=[1],
+    C=[2],
+    D=[0]);
   Real Ts=0.1;
   Real tSpan= 0.4;
 
@@ -2750,6 +2749,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0952, 0.1813, 0.2592, 0.33}
 </pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
+</p>
 </html> ", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -2803,9 +2807,6 @@ gives the same result as
 <blockquote><pre>
 StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Ramp, x0=fill(0,size(ss.A,1))).
 </pre></blockquote>
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -2827,6 +2828,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.00484, 0.018734, 0.04082, 0.07032}
 </pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
+</p>
 </html> ", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -2884,9 +2890,6 @@ gives the same result as
 <blockquote><pre>
 StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Initial, x0=x0).
 </pre></blockquote>
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -2909,6 +2912,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeRe
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={1, 0.9048, 0.8186, 0.7406, 0.6701}
 </pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.timeResponse\">StateSpace.Analysis.timeResponse</a>
+</p>
 </html> ", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -2953,7 +2961,6 @@ result = StateSpace.Analysis.<b>numeratorDegree</b>(ss)
 <p>
 Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial of the corresponding transfer function.
 The state space system is converted to the transfer function G(s)=N(s)/D(s) with the polynomial N(s) as numerator.
-See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.denominatorDegree\">StateSpace.Analysis.denominatorDegree</a>.
 </p>
 
 <h4>Example</h4>
@@ -2971,7 +2978,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
 //  nDegree = 1
 </pre></blockquote>
 
-
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.denominatorDegree\">StateSpace.Analysis.denominatorDegree</a>
+</p>
 </html> "));
   end numeratorDegree;
 
@@ -3002,7 +3013,6 @@ result = StateSpace.Analysis.<b>denominatorDegree</b>(ss)
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of the corresponding transfer function.
 The state space system is converted to the transfer function G(s)=N(s)/D(s) with the polynomial D(s) as denominator.
-See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.numeratorDegree\">StateSpace.Analysis.numeratorDegree</a>.
 </p>
 
 <h4>Example</h4>
@@ -3020,7 +3030,11 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
 //  nDegree = 1
 </pre></blockquote>
 
-
+<h4>See also</h4>
+<p>
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.numeratorDegree\">StateSpace.Analysis.numeratorDegree</a>
+</p>
 </html> "));
   end denominatorDegree;
 
@@ -3060,7 +3074,6 @@ result = StateSpace.Analysis.<b>evaluate</b>(ss,s)
 <p>
 Function Analysis.<b>evaluate</b> evaluates the corresponding transfer function of the state space system at a given (complex) value of s.
 The state space system is converted to the transfer function G(s)=N(s)/D(s), which is evaluated by calculating the numerator polynomial N(s) and the denominator polynomial D(s).
-See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
 
 <h4>Example</h4>
@@ -3079,6 +3092,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
 //  result = 0.4 - 0.2j
 </pre></blockquote>
 
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
+<a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
+</p>
 
 </html> ", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -3151,8 +3169,6 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
 <h4>Description</h4>
 <p>
 This function calculates the zeros, poles and gain of the corresponding transfer function of a state space system.
-See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a> and <a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">TransferFunction.Analysis.zerosAndPoles</a>
-
 </p>
 
 <h4>Example</h4>
@@ -3174,7 +3190,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTr
 //  k = 1
 </pre></blockquote>
 
-
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
+<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">TransferFunction.Analysis.zerosAndPoles</a>
+</p>
 </html> "));
   end zerosAndPoles;
 
@@ -5560,11 +5580,7 @@ StateSpace.Plot.<b>timeResponse</b>(
 
 <h4>Description</h4>
 <p>
-This function plots the time response of a state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp, or Initial. See also
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a> and
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>.
+This function plots the time response of a state space system. The character of the time response if defined by the input <tt>response</tt>, i.e. Impulse, Step, Ramp or Initial.
 </p>
 
 <h4>Example</h4>
@@ -5584,6 +5600,15 @@ This function plots the time response of a state space system. The character of 
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/timeResponseSS.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initial</a>
+</p>
+
 </html> "));
     end timeResponse;
 
@@ -5639,10 +5664,6 @@ StateSpace.Plot.<b>impulse</b>(
 <p>
 This function plots the impulse responses of a state space system
 for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>.
-See also
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a> and
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -5661,6 +5682,13 @@ See also
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/impulseResponseSS.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>
+</p>
 </html> "));
     end impulse;
 
@@ -5714,10 +5742,7 @@ StateSpace.Plot.<b>step</b>(
 
 <h4>Description</h4>
 <p>
-This function plots the step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a> and
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>.
+This function plots the step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -5735,6 +5760,13 @@ This function plots the step responses of a state space system for each system c
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/stepResponseSS.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>
+</p>
 </html> "));
     end step;
 
@@ -5788,10 +5820,7 @@ StateSpace.Plot.<b>ramp</b>(
 
 <h4>Description</h4>
 <p>
-This function plots the ramp responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a> and
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>.
+This function plots the ramp responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -5809,6 +5838,13 @@ This function plots the ramp responses of a state space system for each system c
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/rampResponseSS.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.initialResponse\">initialResponse</a>
+</p>
 </html> "));
     end ramp;
 
@@ -5862,10 +5898,7 @@ StateSpace.Plot.<b>initial</b>(
 
 <h4>Description</h4>
 <p>
-This function plots the initial responses of a state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a> and
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>.
+This function plots the initial responses of a state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -5886,6 +5919,13 @@ This function plots the initial responses of a state space system for the initia
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/initialResponseSS.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Plot.ramp\">ramp</a>
+</p>
 </html> "));
     end initialResponse;
 
@@ -6371,32 +6411,38 @@ i.e.
         end if;
         annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  tss </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toSimilarForm</b>(ss, T, inverted)  </td> </tr>
-</table>
+<blockquote><pre>
+tss = StateSpace.Transformation.<b>toSimilarForm</b>(ss, T, inverted)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>toSimilarForm</b> calculates a similar state space system, i.e.
+This function calculates a similar state space system, i.e.
+</p>
 <blockquote><pre>
-   der(z) = T*A*inv(T)*z + T*B*u
-        y = C*T*z + D*u
+der(z) = T*A*inv(T)*z + T*B*u
+     y = C*T*z + D*u
 </pre></blockquote>
+<p>
 if inverted==false and
+</p>
 <blockquote><pre>
-   der(z) = inv(T)*A*T*z + inv(T)*B*u
-        y = C*inv(T)*z + D*u
+der(z) = inv(T)*A*T*z + inv(T)*B*u
+     y = C*inv(T)*z + D*u
 </pre></blockquote>
-if inverted=true. Matrix T has to be invertible. The transformed system has the same eigenvalues. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">analysis</a>
+<p>
+if inverted=true. Matrix T has to be invertible. The transformed system has the same eigenvalues.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1, 1; 0, -2],
-      B=[1; 0],
-      C=[0, 1],
-      D=[0]);
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+     A=[-1, 1; 0, -2],
+     B=[1; 0],
+     C=[0, 1],
+     D=[0]);
 
-   Real T[2,2]=[1, 1;0, sqrt(2)];
+  Real T[2,2]=[1, 1;0, sqrt(2)];
 
 <b>algorithm</b>
   tss:=Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm(ss, T, false);
@@ -6407,7 +6453,10 @@ if inverted=true. Matrix T has to be invertible. The transformed system has the 
       D=[0])
 </pre></blockquote>
 
-
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">State space analysis</a>
+</p>
 </html> "));
       end toSimilarForm;
 
@@ -6452,51 +6501,58 @@ if inverted=true. Matrix T has to be invertible. The transformed system has the 
 
         annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  tss </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toObservabilityForm</b>(ss)  </td> </tr>
-</table>
+<blockquote><pre>
+tss = StateSpace.Transformation.<b>toObservabilityForm</b>(ss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>toObservabilityForm</b> computes the observability form of a SISO state space system, i.e.
+This function computes the observability form of a SISO state space system, i.e.
+</p>
 <blockquote><pre>
-   tss:
-   der(z) = inv(T)*A*T*z + inv(T)*B*u
-        y = C*inv(T)*z + D*u
+tss:
+der(z) = inv(T)*A*T*z + inv(T)*B*u
+     y = C*inv(T)*z + D*u
 </pre></blockquote>
+<p>
 with
+</p>
 <blockquote><pre>
-   T = [C; C*A; ...; C*A^(n-1)]
+T = [C; C*A; ...; C*A^(n-1)]
 </pre></blockquote>
+<p>
 is the observability matrix of the original state space system.
 In comparison to the corresponding transfer function
+</p>
 <blockquote><pre>
-           b0 + b1*s + ... + bn*s^n
-   G(s) = --------------------------
-           a0 + a1*s + ... + an*s^n
- </pre></blockquote>
+        b0 + b1*s + ... + bn*s^n
+G(s) = --------------------------
+        a0 + a1*s + ... + an*s^n
+</pre></blockquote>
+<p>
 the canonical observability form is
+</p>
 <blockquote><pre>
-       | 0   0   ...   0   -a0   |        | b0   - a0*bn   |
-       | 1   0   ...   0   -a1   |        | b1   - a1*bn   |
-   A = | 0   1   ...   0   -a2   |,   B = |     ...        |
-       |... ...  ...  ...  -a3   |        | bn-2 - an-2*bn |
-       | 0  ...  ...   1   -an-1 |        | bn-1 - an-1*bn |
+    | 0   0   ...   0   -a0   |        | b0   - a0*bn   |
+    | 1   0   ...   0   -a1   |        | b1   - a1*bn   |
+A = | 0   1   ...   0   -a2   |,   B = |     ...        |
+    |... ...  ...  ...  -a3   |        | bn-2 - an-2*bn |
+    | 0  ...  ...   1   -an-1 |        | bn-1 - an-1*bn |
 
-   C = [0, 0, ..., 1],                D = [bn]
- </pre></blockquote>
-
-
-
-
-Matrix T has to be invertible, i.e. the system has to be observable. The transformed system has the same eigenvalues. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>, <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toControllabilityForm\">toControllabilityForm</a>
+C = [0, 0, ..., 1],                D = [bn]
+</pre></blockquote>
+<p>
+Matrix <code>T</code> has to be invertible, i.e. the system has to be observable.
+The transformed system has the same eigenvalues.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1, 1; 1, -2],
-      B=[1; 0],
-      C=[1, 1],
-      D=[2]);
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1, 1; 1, -2],
+    B=[1; 0],
+    C=[1, 1],
+    D=[2]);
 
 <b>algorithm</b>
   tss:=Modelica_LinearSystems2.StateSpace.Transformation.toObservabilityForm(ss);
@@ -6507,7 +6563,11 @@ Matrix T has to be invertible, i.e. the system has to be observable. The transfo
       D=[2])
 </pre></blockquote>
 
-
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>,
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toControllabilityForm\">toControllabilityForm</a>
+</p>
 </html> ", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -6566,43 +6626,49 @@ Matrix T has to be invertible, i.e. the system has to be observable. The transfo
 
         annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  tss </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toControllabilityForm</b>(ss)  </td> </tr>
-</table>
+<blockquote><pre>
+tss = StateSpace.Transformation.<b>toControllabilityForm</b>(ss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>toControllabilityForm</b> computes the controllability form of a SISO state space system, i.e.
+This function computes the controllability form of a SISO state space system, i.e.
+</p>
 <blockquote><pre>
-   tss:
-   der(z) = T*A*inv(T)*z + T*B*u
-        y = C*T*z + D*u
+tss:
+der(z) = T*A*inv(T)*z + T*B*u
+     y = C*T*z + D*u
 </pre></blockquote>
+<p>
 with
+</p>
 <blockquote><pre>
-   T = [B, A*B,..., A^(n-1)*B]
+T = [B, A*B,..., A^(n-1)*B]
 </pre></blockquote>
+<p>
 is the observability matrix of the original state space system.
 In comparison to the corresponding transfer function
+</p>
 <blockquote><pre>
-           b0 + b1*s + ... + bn*s^n
-   G(s) = --------------------------
-           a0 + a1*s + ... + an*s^n
- </pre></blockquote>
+        b0 + b1*s + ... + bn*s^n
+G(s) = --------------------------
+        a0 + a1*s + ... + an*s^n
+</pre></blockquote>
+<p>
 the canonical observability form is
+</p>
 <blockquote><pre>
-       | 0   1   0   ...   0     0   |                        | 0 |
-       |  0     0     0    0     0   |                        | 0 |
-   A = | ...   ...   ...  ...   ...  |,                   B = |...|
-       |  0     0     0    0     0   |                        | 0 |
-       | -a0   -a1   -a2  ...  -an-1 |                        | 1 |
+    | 0   1   0   ...   0     0   |                        | 0 |
+    |  0     0     0    0     0   |                        | 0 |
+A = | ...   ...   ...  ...   ...  |,                   B = |...|
+    |  0     0     0    0     0   |                        | 0 |
+    | -a0   -a1   -a2  ...  -an-1 |                        | 1 |
 
-   C = [ b0 - bn*a0, b1 - bn*a1, ..., bn-1 - bn*an-1],    D = [bn]
- </pre></blockquote>
-
-
-
-
-Matrix T has to be invertible, i.e. the system has to be controllable. The transformed system has the same eigenvalues. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>, <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toObservabilityForm\">toObservabilityForm</a>
+C = [ b0 - bn*a0, b1 - bn*a1, ..., bn-1 - bn*an-1],    D = [bn]
+</pre></blockquote>
+<p>
+Matrix T has to be invertible, i.e. the system has to be controllable. The transformed system has the same eigenvalues.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -6621,7 +6687,11 @@ Matrix T has to be invertible, i.e. the system has to be controllable. The trans
       D=[2])
 </pre></blockquote>
 
-
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>,
+<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toObservabilityForm\">toObservabilityForm</a>
+</p>
 </html> ", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -6663,20 +6733,22 @@ Matrix T has to be invertible, i.e. the system has to be controllable. The trans
 
         annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  tss </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toDiagonalForm</b>(ss)  </td> </tr>
-</table>
-<h4>Description</h4>
-<p>
-Function <b>toDiagonalForm</b> computes the diagonal form of a SISO state space system, i.e.
 <blockquote><pre>
-   tss:
-   der(z) = inv(T)*A*T*z + inv(T)*B*u
-        y = C*inv(T)*z + D*u
+tss = StateSpace.Transformation.<b>toDiagonalForm</b>(ss)
 </pre></blockquote>
 
-
-Matrix T has to be diagonalizable, i.e. the algebraic and geometric multiplicities of an eigenvalue must coincide. The diagonal entries of the new system matrix tss.<b>A</b> are the eigenvalues off the systemmatrix ss.<b>A</b>. See also <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>.
+<h4>Description</h4>
+<p>
+This function computes the diagonal form of a SISO state space system, i.e.
+</p>
+<blockquote><pre>
+tss:
+der(z) = inv(T)*A*T*z + inv(T)*B*u
+     y = C*inv(T)*z + D*u
+</pre></blockquote>
+<p>
+Matrix T has to be diagonalizable, i.e. the algebraic and geometric multiplicities of an eigenvalue must coincide. The diagonal entries of the new system matrix tss.<b>A</b> are the eigenvalues off the systemmatrix ss.<b>A</b>.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -6695,7 +6767,10 @@ Matrix T has to be diagonalizable, i.e. the algebraic and geometric multipliciti
       D=[0])
 </pre></blockquote>
 
-
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>
+</p>
 </html> "));
       end toDiagonalForm;
 
@@ -6822,41 +6897,41 @@ This function is called to compute transfer functions of state space representat
 
         annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  ss_sc </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>toStaircaseForm</b>(ss, method)  </td> </tr>
-</table>
+<blockquote><pre>
+ss_sc = StateSpace.Transformation.<b>toStaircaseForm</b>(ss, method)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>toStaircaseForm</b> computes the upper staircase form state space system.
-
+This function computes the upper staircase form state space system.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[17.0,   24.0,    1.0,    8.0,   15.0;
-         23.0,    5.0,    7.0,   14.0,   16.0;
-          4.0,    6.0,   13.0,   20.0,   22.0;
-         10.0,   12.0,   19.0,   21.0,    3.0;
-         11.0,   18.0,   25.0,    2.0,    9.0],
-      B=[-1.0,   -4.0;
-          4.0,    9.0;
-         -9.0,  -16.0;
-         16.0,   25.0;
-        -25.0,  -36.0],
-      C=[1, 0, 1, 0, 0;
-         0, 1, 0, 1, 1],
-      D=[0, 0;
-         0, 0]);
+Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+   A=[17.0,   24.0,    1.0,    8.0,   15.0;
+      23.0,    5.0,    7.0,   14.0,   16.0;
+       4.0,    6.0,   13.0,   20.0,   22.0;
+      10.0,   12.0,   19.0,   21.0,    3.0;
+      11.0,   18.0,   25.0,    2.0,    9.0],
+   B=[-1.0,   -4.0;
+       4.0,    9.0;
+      -9.0,  -16.0;
+      16.0,   25.0;
+     -25.0,  -36.0],
+   C=[1, 0, 1, 0, 0;
+      0, 1, 0, 1, 1],
+   D=[0, 0;
+      0, 0]);
 
 <b>algorithm</b>
   ss_sc:=Modelica_LinearSystems2.StateSpace.Transformation.toStaircaseForm(ss);
   ss_sc=StateSpace(
-      A=[-1, 0; 0, -2],
-      B=[1; 0],
-      C=[1, 0],
-      D=[0])
+    A=[-1, 0; 0, -2],
+    B=[1; 0],
+    C=[1, 0],
+    D=[0])
 </pre></blockquote>
-
 
 </html> ", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -6898,39 +6973,40 @@ Function <b>toStaircaseForm</b> computes the upper staircase form state space sy
 
         annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  subsystem </td><td align=center> =  </td>  <td> StateSpace.Transformation.<b>extract</b>(ss, outputIndex, inputIndex)  </td> </tr>
-</table>
+<blockquote><pre>
+subsystem = StateSpace.Transformation.<b>extract</b>(ss, outputIndex, inputIndex)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Function <b>extract</b> computes the subsystem of a state space system corresponding to the indices in outputIndex and inputIndex, i.e.
+This function computes the subsystem of a state space system corresponding to the indices in outputIndex and inputIndex, i.e.
+</p>
 <blockquote><pre>
-  subsystem.A = ss.A;
-  subsystem.B = ss.B[:, inputIndex];
-  subsystem.C = ss.C[outputIndex, :];
-  subsystem.D = ss.D[outputIndex, inputIndex];</pre></blockquote>
+subsystem.A = ss.A;
+subsystem.B = ss.B[:, inputIndex];
+subsystem.C = ss.C[outputIndex, :];
+subsystem.D = ss.D[outputIndex, inputIndex];
+</pre></blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1, 1, 2; 0, -2, 3;-3, 2, 1],
-      B=[1, 0; 0, 1; 1, 0],
-      C=[1, 1, 0; 0, 1, 1],
-      D=[0, 0; 0,0]);
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1, 1, 2; 0, -2, 3;-3, 2, 1],
+    B=[1, 0; 0, 1; 1, 0],
+    C=[1, 1, 0; 0, 1, 1],
+    D=[0, 0; 0,0]);
 
-   Integer outputIndex={1, 2};
-   Integer inputIndex={2}
+  Integer outputIndex={1, 2};
+  Integer inputIndex={2}
 
 <b>algorithm</b>
   tss:=Modelica_LinearSystems2.StateSpace.Transformation.extract(ss, outputIndex, inputIndex);
 //  tss=StateSpace(
-     A=[-1, 1, 2; 0, -2, 3;-3, 2, 1],
+      A=[-1, 1, 2; 0, -2, 3;-3, 2, 1],
       B=[0; 1; 0],
       C=[1, 1, 0; 0, 1, 1],
       D=[0; 0])
 </pre></blockquote>
-
-
 </html> "));
   end extract;
 

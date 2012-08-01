@@ -76,15 +76,18 @@ in one statement and therefore the function is usually automatically
 inlined. Further symbolic processing is therefore possible, which is
 not the case with function norm(..).
 </p>
-<p>See also
-<a href=\"Modelica://Modelica.Math.Vectors.length\">Vectors.length</a>.</p>
 
 <h4>Example</h4>
 <blockquote><pre>
 v = {2, -4, -2, -1};
 <b>length</b>(v);  // = 5
 </pre></blockquote>
-</html>"));
+
+<h4>See also</h4>
+<p>
+<a href=\"Modelica://Modelica.Math.Vectors.length\">Vectors.length</a>
+</p>
+</html></html>"));
   end length;
 
   function norm "Returns the norm of a complex vector"
@@ -105,7 +108,7 @@ v = {2, -4, -2, -1};
     else
       result:=(sum(Complex.'abs'(v[i])^p for i in 1:size(v, 1)))^(1/p);
     end if;
-    annotation (Documentation(info="<HTML>
+    annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Vectors.<b>norm</b>(v);
@@ -120,7 +123,7 @@ With the optional
 second argument \"p\", any other p-norm can be computed:
 </p>
 <blockquote>
-<IMG src=\"modelica://Modelica_LinearSystems2/Resources/Images/Math/vectorNorm.png\" ALT=\"function Vectors.norm\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Math/vectorNorm.png\" alt=\"function Vectors.norm\">
 </blockquote>
 <p>
 Besides the Euclidean norm (p=2), also the 1-norm and the
@@ -146,8 +149,6 @@ Note, for any vector norm the following inequality holds:
 <blockquote><pre>
 <b>norm</b>(v1+v2,p) &le; <b>norm</b>(v1,p) + <b>norm</b>(v2,p)
 </pre></blockquote>
-<p>See also
-<a href=\"Modelica://Modelica.Math.Matrices.norm\">Matrices.norm</a>.</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -158,7 +159,12 @@ Note, for any vector norm the following inequality holds:
   <b>norm</b>(v,10.5); // = 4.00052597412635
   <b>norm</b>(v,Modelica.Constants.inf);  // = 4
 </pre></blockquote>
-</HTML>"));
+
+<h4>See also</h4>
+<p>
+<a href=\"Modelica://Modelica.Math.Matrices.norm\">Matrices.norm</a>
+</p>
+</html>"));
   end norm;
 
   function normalize
@@ -206,17 +212,19 @@ Since the function is implemented in one statement,
 it is usually inlined and therefore symbolic processing is
 possible.
 </p>
-<p>
-See also
-<a href=\"modelica://Modelica_LinearSystems2.Math.Vectors.length\">Vectors.length</a>.
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
   <b>normalize</b>({1,2,3});  // = {0.267, 0.534, 0.802}
   <b>normalize</b>({0,0,0});  // = {0,0,0}
 </pre></blockquote>
-</html>"));
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Vectors.length\">Vectors.length</a>
+</p>
+</html>
+"));
   end normalize;
 
   function sortComplex "Sort elements of complex vector"

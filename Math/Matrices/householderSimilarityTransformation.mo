@@ -43,11 +43,6 @@ with
 This transformation is widely used for transforming non-symmetric matrices to a Hessenberg form.
 </p>
 
-<p>
-See also
-<a href=\"modelica://Modelica.Math.Matrices.Utilities.householderReflection\">Matrices.housholderReflection</a>,
-</p>
-
 <h4>Example</h4>
 <blockquote><pre>
 // First step of Hessenberg decomposition
@@ -69,5 +64,9 @@ See also
            0.0,     0.8021,     -1.1656,   -1.0932]
 </pre></blockquote>
 
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica.Math.Matrices.Utilities.householderReflection\">Matrices.housholderReflection</a>
+</p>
 </html>"));
 end householderSimilarityTransformation;

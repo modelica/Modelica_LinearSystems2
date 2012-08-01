@@ -83,9 +83,6 @@ with
 n = number of columns of matrix A
 r = rank(A)
 </pre></blockquote>
-<p>
-See also <a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>.
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -104,5 +101,9 @@ See also <a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.s
   nullity = 1
 </pre></blockquote>
 
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
+</p>
 </html>"));
 end C_nullspace;

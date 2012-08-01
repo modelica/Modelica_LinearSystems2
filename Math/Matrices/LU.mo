@@ -21,7 +21,7 @@ algorithm
     info := 0;
   end if;
 
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (LU, pivots)       = Matrices.<b>LU</b>(A);
@@ -96,7 +96,9 @@ matrix A was interchanged with row pivots[i].
 </pre></blockquote>
 
 <h4>See also</h4>
-<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a> and
-<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>.
-</HTML>"));
+<p>
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>,
+<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>
+</p>
+</html>"));
 end LU;

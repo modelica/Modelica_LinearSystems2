@@ -47,5 +47,9 @@ The default is &quot;eps = 0&quot;. Another useful value is, e.g.,
 <a href=\"modelica://Modelica.Math.Matrices.isEqual\">Matrices.isEqual</a>,
 <a href=\"modelica://Modelica.Utilities.Strings.isEqual\">Strings.isEqual</a>
 </p>
-</html> "));
+
+<h4>See also</h4>
+<p>
+</p>
+</html></html> "));
 end isEqual;

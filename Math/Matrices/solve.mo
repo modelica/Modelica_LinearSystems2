@@ -18,7 +18,7 @@ no or infinitely many solutions (A is singular).");
   else
     x := fill(0, 0);
   end if;
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Matrices.<b>solve</b>(A,b);
@@ -36,14 +36,11 @@ solution <b>x</b> of the linear system of equations
 If a unique solution <b>x</b> does not exist (since <b>A</b> is singular),
 an exception is raised.
 </p>
+
+<h4>Note</h4>
 <p>
-Note, the solution is computed with the LAPACK function \"dgesv\",
+The solution is computed with the LAPACK function \"dgesv\",
 i.e., by Gaussian elemination with partial pivoting.
-</p>
-<p>
-See also
-<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a> and
-<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>.
 </p>
 
 <h4>Example</h4>
@@ -56,5 +53,11 @@ See also
 <b>algorithm</b>
   x := Matrices.solve(A,b);  // x = {3,2,1}
 </pre></blockquote>
-</HTML>"));
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>
+</p>
+</html>"));
 end solve;

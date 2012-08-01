@@ -408,7 +408,7 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
 
       algorithm
         Modelica.Utilities.Files.removeFile(fileName);
-        print("<html><body><br><br><p><b>System report</b></p>", fileName);
+        print("<html>\n<body>\n<p><b>System report</b></p>", fileName);
         print("<p> The system " + systemName + " is defined by</p>", fileName);
         print("G(s) = " + st, fileName);
          if description == "" then
@@ -601,9 +601,6 @@ gives the same result as
 <blockquote><pre>
 TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Step, x0=fill(0,TransferFunction.Analysis.denominatorDegree(tf))).
 </pre></blockquote>
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -624,6 +621,10 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 //  x[:,1,1]={0, 0.0048, 0.01867, 0.04, 0.0694}
 </pre></blockquote>
 
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
+</p>
 </html> "));
   end stepResponse;
 
@@ -667,9 +668,6 @@ gives the same result as
 <blockquote><pre>
 TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Ramp, x0=fill(0,TransferFunction.Analysis.denominatorDegree(tf))).
 </pre></blockquote>
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -689,6 +687,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0002, 0.0012, 0.0042, 0.0096}
 </pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
+</p>
 </html> "));
   end rampResponse;
 
@@ -735,9 +738,6 @@ gives the same result as
 <blockquote><pre>
 TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeResponse.Initial, x0=x0).
 </pre></blockquote>
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -759,7 +759,10 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 //  x[:,1,1]={1, 1.0903, 1.1616, 1.2151, 1.252}
 </pre></blockquote>
 
-
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse\">TransferFunction.Analysis.timeResponse</a>
+</p>
 </html> "));
   end initialResponse;
 
@@ -782,7 +785,6 @@ result = TransferFunction.Analysis.<b>numeratorDegree</b>(tf)
 <h4>Description</h4>
 <p>
 Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial of a transfer function.
-See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree\">TransferFunction.Analysis.denominatorDegree</a>.
 </p>
 
 <h4>Example</h4>
@@ -797,7 +799,10 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 //  nDegree = 1
 </pre></blockquote>
 
-
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree\">TransferFunction.Analysis.denominatorDegree</a>
+</p>
 </html> "));
     end numeratorDegree;
 
@@ -820,7 +825,6 @@ result = TransferFunction.Analysis.<b>denominatorDegree</b>(tf)
 <h4>Description</h4>
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of a transfer function.
-See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.numeratorDegree\">TransferFunction.Analysis.numeratorDegree</a>.
 </p>
 
 <h4>Example</h4>
@@ -835,7 +839,10 @@ See also <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.
 //  dDegree = 2
 </pre></blockquote>
 
-
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.numeratorDegree\">TransferFunction.Analysis.numeratorDegree</a>
+</p>
 </html> "));
     end denominatorDegree;
 
@@ -870,7 +877,6 @@ result = TransferFunction.Analysis.<b>evaluate</b>(tf, s)
 <p>
 Function Analysis.<b>evaluate</b> evaluates a transfer function at a given (complex) value of s.
 The transfer function G(s)=N(s)/D(s) is evaluated by calculating the numerator polynomial N(s) and the denominator polynomial D(s).
-See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
 
 <h4>Example</h4>
@@ -886,7 +892,10 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
 //  result = 0.538462 - 0.307692j
 </pre></blockquote>
 
-
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
+</p>
 </html> "));
     end evaluate;
 
@@ -1547,7 +1556,7 @@ algorithm
     extends Modelica.Icons.Package;
 
   encapsulated function polesAndZeros
-    "Plot poles and/or the zeros of a transfer function"
+      "Plot poles and/or the zeros of a transfer function"
 
     import Modelica;
     import Modelica_LinearSystems2;
@@ -1764,54 +1773,51 @@ This function plots the bode-diagram of a transfer function.
   encapsulated function timeResponse
       "Plot the time response of a system represented by a transfer function. The response type is selectable"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.TransferFunction;
+    import Modelica_LinearSystems2.Types.TimeResponse;
+    import Modelica_LinearSystems2.Utilities.Plot;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
+    input Modelica_LinearSystems2.TransferFunction tf;
+    input Real dt=0 "Sample time [s]";
+    input Real tSpan=0 "Simulation time span [s]";
 
-      input Modelica_LinearSystems2.TransferFunction tf;
-      input Real dt=0 "Sample time [s]";
-      input Real tSpan=0 "Simulation time span [s]";
+    input Modelica_LinearSystems2.Types.TimeResponse response=
+      Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
+    input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
+      TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
 
-      input Modelica_LinearSystems2.Types.TimeResponse response=
-          Modelica_LinearSystems2.Types.TimeResponse.Step
-        "type of time response";
-      input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
-          TransferFunction.Analysis.denominatorDegree(tf))
-        "Initial state vector";
-
-      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
-          defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
-             "time response of  tf = " + String(tf)));
+    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+      defaultDiagram=
+      Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
+      "Time response of  tf = " + String(tf)));
 
     protected
-      Plot.Records.Curve curve;
-      Plot.Records.Diagram diagram2;
-      Real y[:,1,1] "Output response";
-      Real t[:] "Time vector: (number of samples)";
+    Plot.Records.Curve curve;
+    Plot.Records.Diagram diagram2;
+    Real y[:,1,1] "Output response";
+    Real t[:] "Time vector: (number of samples)";
 
   algorithm
-      (y,t) := TransferFunction.Analysis.timeResponse(
+    (y,t) := TransferFunction.Analysis.timeResponse(
           tf,
           dt,
           tSpan,
           response,
           x0);
 
-      curve := Plot.Records.Curve(
+    curve := Plot.Records.Curve(
           x=t,
           y=y[:, 1, 1],
           legend="y",
           autoLine=true);
-      diagram2 := defaultDiagram;
-      diagram2.curve := {curve};
+    diagram2 := defaultDiagram;
+    diagram2.curve := {curve};
 
-      Plot.diagram(diagram2, device);
+    Plot.diagram(diagram2, device);
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>timeResponse</b>(tf);
@@ -1829,11 +1835,7 @@ TransferFunction.Plot.<b>timeResponse</b>(
 <h4>Description</h4>
 <p>
 This function plots the time response of a transfer function. The character of the time response if defined by the input
-<a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>,
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
+<a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial.
 </p>
 
 <h4>Example</h4>
@@ -1851,6 +1853,14 @@ This function plots the time response of a transfer function. The character of t
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/timeResponseTF.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>
+</p>
 </html>"));
   end timeResponse;
 
@@ -1874,7 +1884,7 @@ This function plots the time response of a transfer function. The character of t
       Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response of  tf = "
         + String(tf)));
 
-  protected
+    protected
     input Modelica_LinearSystems2.Types.TimeResponse response=
       Modelica_LinearSystems2.Types.TimeResponse.Impulse
         "Type of time response";
@@ -1905,10 +1915,7 @@ TransferFunction.Plot.<b>impulse</b>(
 
 <h4>Description</h4>
 <p>
-This function plots the impulse response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>,
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a> and
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
+This function plots the impulse response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -1924,6 +1931,13 @@ This function plots the impulse response of a transfer function. It is based on 
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/impulseResponseTF.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>
+</p>
 </html> "));
   end impulse;
 
@@ -1975,10 +1989,7 @@ TransferFunction.Plot.<b>step</b>(
 
 <h4>Description</h4>
 <p>
-This function plots the step response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a> and
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
+This function plots the step response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -1994,6 +2005,13 @@ This function plots the step response of a transfer function. It is based on <a 
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/stepResponseTF.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>
+</p>
 </html> "));
   end step;
 
@@ -2047,10 +2065,7 @@ TransferFunction.Plot.<b>ramp</b>(
 
 <h4>Description</h4>
 <p>
-This function plots the ramp response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>.
+This function plots the ramp response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2066,6 +2081,13 @@ This function plots the ramp response of a transfer function. It is based on <a 
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/rampResponseTF.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>
+</p>
 </html> "));
   end ramp;
 
@@ -2128,10 +2150,7 @@ TransferFunction.Plot.<b>initialResponse</b>(
 
 <h4>Description</h4>
 <p>
-This function plots the initial response, i.e. the zeros input response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a> and
-<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>.
+This function plots the initial response, i.e. the zeros input response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2148,6 +2167,13 @@ This function plots the initial response, i.e. the zeros input response of a tra
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/initialResponseTF.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>
+</p>
 </html> "));
   end initialResponse;
 

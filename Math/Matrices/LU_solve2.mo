@@ -25,7 +25,7 @@ is singular, i.e., no unique solution exists.");
       size(B, 1),
       size(B, 2));
   end if;
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Matrices.<b>LU_solve2</b>(LU, pivots, B);
@@ -70,9 +70,6 @@ with row interchanges. Vector \"pivots\" are the
 pivot indices, i.e., for 1 &le; i &le; min(m,n), row i of
 matrix A was interchanged with row pivots[i].
 </p>
-<p>See also
-<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
-<a href=\"modelica://Modelica.Math.Matrices.solve2\">Matrices.solve2</a>.</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -98,5 +95,11 @@ matrix A was interchanged with row pivots[i].
                                                       0, 0;
                                                       2, 4] */
 </pre></blockquote>
-</HTML>"));
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
+<a href=\"modelica://Modelica.Math.Matrices.solve2\">Matrices.solve2</a>
+</p>
+</html>"));
 end LU_solve2;

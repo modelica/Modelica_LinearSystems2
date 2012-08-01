@@ -1441,17 +1441,19 @@ on the Modelica LinearSystems library.
     extends Modelica.Icons.Contact;
 
     annotation (Documentation(info="<html>
-<dl>
-<dt><b>Main Authors:</b></dt>
-<dd>Martin Otter and Marcus Baur<br>
-    Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)<br>
-    DLR Institut f&uuml;r Systemdynamik und Regelungstechnik<br>
-    Postfach 1116<br>
-    D-82230 Wessling<br>
-    Germany<br>
-    email: <A HREF=mailto:Martin.Otter@dlr.de>Martin.Otter@dlr.de</A><br></dd>
-</dl>
-<p><b>Acknowledgements:</b></p>
+<h4>Main Authors</h4>
+<blockquote>
+Martin Otter and Marcus Baur<br>
+Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)<br>
+DLR Institut f&uuml;r Systemdynamik und Regelungstechnik<br>
+Postfach 1116<br>
+D-82230 Wessling<br>
+Germany<br>
+email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
+</blockquote>
+
+
+<h4>Acknowledgements</h4>
 <ul>
 <li> Some functionality of Modelica_LinearSystems2 (e.g.,
      linearizing a Modelica model by

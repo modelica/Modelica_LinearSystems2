@@ -34,9 +34,6 @@ scalar factors are provided by function \"Utilities.toUpperHessenberg()\".
 The transformation matrix <b>U</b> is then computed by
 <a href=\"modelica://Modelica.Math.Matrices.LAPACK.dorghr\">LAPACK.dorghr</a>.
 </p>
-<p>See also
-<a href=\"modelica://Modelica.Math.Matrices.Utilities.toUpperHessenberg\">Matrices.Utilities.toUpperHessenberg</a>.
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -63,6 +60,10 @@ The transformation matrix <b>U</b> is then computed by
                       1.0, 0.0, 0.0]
 </pre></blockquote>
 
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica.Math.Matrices.Utilities.toUpperHessenberg\">Matrices.Utilities.toUpperHessenberg</a>
+</p>
 </html>",
         revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">

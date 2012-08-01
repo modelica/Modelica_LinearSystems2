@@ -62,11 +62,6 @@ provided the eigenvector matrix \"eigenvectors\" can be inverted
 (an inversion is possible, if all eigenvalues are different
 and no eigenvalue is zero).
 </p>
-<p>
-See also
-<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a> and
-<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>.
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -83,6 +78,11 @@ See also
 <p>
 i.e., matrix <b>A</b> has the 3 real eigenvalues -0.618, 8, 1.618.
 </p>
-</html>
-"));
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a>,
+<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
+</p>
+</html>"));
 end eigenValues;

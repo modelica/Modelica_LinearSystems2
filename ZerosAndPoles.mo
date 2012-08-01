@@ -891,9 +891,6 @@ gives the same result as
 <blockquote><pre>
 ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.Impulse, x0=fill(0,ZerosAndPoles.Analysis.denominatorDegree(zp))).
 </pre></blockquote>
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -911,6 +908,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.095, 0.18, 0.2553, 0.321}
 </pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
+</p>
 </html> "));
   end impulseResponse;
 
@@ -950,9 +952,6 @@ gives the same result as
 <blockquote><pre>
 ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.Step, x0=fill(0,ZerosAndPoles.Analysis.denominatorDegree(zp))).
 </pre></blockquote>
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -970,6 +969,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0048, 0.01867, 0.04, 0.0694}
 </pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
+</p>
 </html> "));
   end stepResponse;
 
@@ -1010,9 +1014,6 @@ gives the same result as
 <blockquote><pre>
 ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.Ramp, x0=fill(0,ZerosAndPoles.Analysis.denominatorDegree(zp))).
 </pre></blockquote>
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -1030,6 +1031,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={0, 0.0002, 0.0012, 0.0042, 0.0096}
 </pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
+</p>
 </html> "));
   end rampResponse;
 
@@ -1073,9 +1079,6 @@ gives the same result as
 <blockquote><pre>
 ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.Initial, x0=x0).
 </pre></blockquote>
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -1094,6 +1097,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.tim
 //         t={0, 0.1, 0.2, 0.3, 0.4}
 //  x[:,1,1]={1, 1.0903, 1.1616, 1.2151, 1.252}
 </pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse\">ZerosAndPoles.Analysis.timeResponse</a>
+</p>
 </html> "));
   end initialResponse;
 
@@ -1115,7 +1123,6 @@ result = ZerosAndPoles.Analysis.<b>numeratorDegree</b>(zp)
 <h4>Description</h4>
 <p>
 Function Analysis.<b>numeratorDegree</b> calculates the degree of the numerator polynomial constituted by the first and second order polynomials of the ZeroAndPoles numerator.
-See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree\">ZerosAndPoles.Analysis.denominatorDegree</a>.
 </p>
 
 <h4>Example</h4>
@@ -1129,6 +1136,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.den
   nDegree := ZerosAndPoles.Analysis.numeratorDegree(zp);
 //  nDegree = 1
 </pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree\">ZerosAndPoles.Analysis.denominatorDegree</a>
+</p>
 </html> "));
     end numeratorDegree;
 
@@ -1150,7 +1162,6 @@ result = ZerosAndPoles.Analysis.<b>denominatorDegree</b>(zp)
 <h4>Description</h4>
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial constituted by the first and second order polynomials of the ZeroAndPoles denominator.
-See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.numeratorDegree\">ZerosAndPoles.Analysis.numeratorDegree</a>.
 </p>
 
 <h4>Example</h4>
@@ -1164,6 +1175,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.num
   dDegree := ZerosAndPoles.Analysis.denominatorDegree(zp);
 //  dDegree = 2
 </pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.numeratorDegree\">ZerosAndPoles.Analysis.numeratorDegree</a>
+</p>
 </html> "));
     end denominatorDegree;
 
@@ -1217,7 +1233,6 @@ result = ZerosAndPoles.Analysis.<b>evaluate</b>(zp,p)
 <p>
 Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function at a given (complex) value of p.
 The transfer function G(p)=N(p)/D(p) is evaluated by calculating the numerator polynomial N(p) and the denominator polynomial D(p).
-See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
 
 <h4>Example</h4>
@@ -1232,6 +1247,11 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateCo
   result := Modelica_LinearSystems2.ZerosAndPoles.Analysis.evaluate(zp, j+1);
 //  result = 0.538462 - 0.307692j
 </pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
+</p>
 </html> ", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -2544,7 +2564,7 @@ ZerosAndPoles.Plot.<b>timeResponse</b>(
 <h4>Description</h4>
 <p>
 This function plots the time response of a transfer function. The character of the time response if defined by the input
-<a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>, <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>, <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a> and <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
+<a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. 
 </p>
 
 <h4>Example</h4>
@@ -2562,6 +2582,14 @@ This function plots the time response of a transfer function. The character of t
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/timeResponseZP.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>,
+<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>,
+<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>
+</p>
 </html> "));
   end timeResponse;
 
@@ -2616,10 +2644,7 @@ ZerosAndPoles.Plot.<b>impulse</b>(
 <h4>Description</h4>
 <p>
 This function plots the impulse response of a zeros-and-poles transfer function. It is based on
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>,
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2635,6 +2660,13 @@ This function plots the impulse response of a zeros-and-poles transfer function.
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/impulseResponseZP.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>,
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>
+</p>
 </html> "));
   end impulse;
 
@@ -2688,7 +2720,7 @@ ZerosAndPoles.Plot.<b>step</b>(
 
 <h4>Description</h4>
 <p>
-This function plots the step response of a transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>, <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a> and <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
+This function plots the step response of a zeros-and-poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2704,6 +2736,13 @@ This function plots the step response of a transfer function. It is based on <a 
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/stepResponseZP.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>,
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>
+</p>
 </html>"));
   end step;
 
@@ -2755,10 +2794,7 @@ ZerosAndPoles.Plot.<b>ramp</b>(
 
 <h4>Description</h4>
 <p>
-This function plots the ramp response of a zeros-and-poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a> and
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>.
+This function plots the ramp response of a zeros-and-poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2774,6 +2810,14 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/rampResponseZP.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>
+</p>
+
 </html> "));
   end ramp;
 
@@ -2834,10 +2878,7 @@ ZerosAndPoles.Plot.<b>initialResponse</b>(
 
 <h4>Description</h4>
 <p>
-This function plots the initial response, i.e. the zeros input response of a zeros and poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a> . See also
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>,
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>, and
-<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>.
+This function plots the initial response, i.e. the zeros input response of a zeros and poles transfer function. It is based on <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2854,6 +2895,13 @@ This function plots the initial response, i.e. the zeros input response of a zer
 <blockquote>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/initialResponseZP.png\">
 </blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>
+</p>
 </html> "));
   end initialResponse;
 

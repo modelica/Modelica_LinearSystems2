@@ -32,10 +32,11 @@ as by computing the determinant. E.g., use function
 <a href=\"modelica://Modelica.Math.Matrices.rank\">Matrices.rank</a>
 to compute the rank of a matrix.
 </p>
+
+<h4>See also</h4>
 <p>
-See also
-<a href=\"modelica://Modelica.Math.Matrices.rank\">Matrices.rank</a> and
-<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>.
+<a href=\"modelica://Modelica.Math.Matrices.rank\">Matrices.rank</a>,
+<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>
 </p>
 </html>"));
 end det;

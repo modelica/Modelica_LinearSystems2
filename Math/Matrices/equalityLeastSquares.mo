@@ -42,6 +42,7 @@ with function \"Matrices.equalityLeastSquares\" failed.");
 <blockquote><pre>
 x = Matrices.<b>equalityLeastSquares</b>(A,a,B,b);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function returns the
@@ -62,8 +63,9 @@ relationship:
 size(B,1) &le; size(A,2) &le; size(A,1) + size(B,1)
 </blockquote>
 
+<h4>Note</h4>
 <p>
-Note, the solution is computed with the LAPACK function \"dgglse\"
+The solution is computed with the LAPACK function \"dgglse\"
 using the generalized RQ factorization under the assumptions that
 B has full row rank (= size(B,1)) and the matrix [A;B] has
 full column rank (= size(A,2)). In this case, the problem

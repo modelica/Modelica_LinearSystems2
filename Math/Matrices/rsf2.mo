@@ -67,10 +67,8 @@ the conjugated complex pairs of eigenvalues, whereas the real parts of the eigen
 are the elements of the diagonal.
 </p>
 <p>
-The calculation is performed stepwise using lapack.dgees, i.e. using the internal mehtods of balacing and scaling of dgees.
-</p>
-<p>
-See also <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rsf\">Math.Matrices.rsf</a>.
+The calculation is performed stepwise using lapack.dgees, i.e. using the internal 
+mehtods of balacing and scaling of dgees.
 </p>
 
 <h4>Example</h4>
@@ -92,5 +90,10 @@ See also <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rsf\">Math.M
 //alphaReal = {16.12, -1.12, -1.32E-015}
 //alphaImag = {0, 0, 0}
 </pre></blockquote>
-</html> "));
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rsf\">Math.Matrices.rsf</a>
+</p>
+</html>"));
 end rsf2;

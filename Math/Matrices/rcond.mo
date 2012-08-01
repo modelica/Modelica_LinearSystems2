@@ -21,7 +21,7 @@ algorithm
     info := 0;
   end if;
 
-  annotation (Documentation(info="<HTML>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
         r = Matrices.<b>rcond</b>(A);
@@ -34,10 +34,6 @@ This function estimates the reciprocal of the condition number
 (norm(<b>A</b>) * norm(inv(<b>A</b>))) of a general real matrix <b>A</b>,
 in either the 1-norm or the infinity-norm, using the LAPACK function DGECON.
 </p>
-<p>
-See also
-<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">Matrices.conditionNumber</a>.
-</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -49,7 +45,12 @@ See also
 
   r = 0.3333
 </pre></blockquote>
-</HTML>", revisions="<html>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">Matrices.conditionNumber</a>
+</p>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>

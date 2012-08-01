@@ -655,7 +655,6 @@ DiscreteZerosAndPoles dzp = q/(q^2 + q + 1)/(q + 1)
 <h4>Description</h4>
 <p>
 Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial constituted by the first and second order polynomials of the DiscreteZeroAndPoles numerator.
-See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.numeratorDegree\">DiscreteZerosAndPoles.Analysis.numeratorDegree</a>.
 </p>
 
 <h4>Example</h4>
@@ -670,7 +669,10 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Anal
 //  dDegree = 2
 </pre></blockquote>
 
-
+<h4>See also</h4>
+<p>
+<a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.numeratorDegree\">DiscreteZerosAndPoles.Analysis.numeratorDegree</a>
+</p>
 </html> "));
   end denominatorDegree;
 

@@ -40,8 +40,10 @@ a solution in a least squarse sense:
   size(A,1) &lt; size(A,2):  returns x such that |x|^2 is a minimum for all
                           vectors x that fulfill A*x = b
 </pre>
+
+<h4>Note</h4>
 <p>
-Note, the solution is computed with the LAPACK function \"dgelsx\",
+The solution is computed with the LAPACK function \"dgelsx\",
 i.e., QR or LQ factorization of A with column pivoting.
 If A does not have full rank,
 the solution is not unique and from the infinitely many solutions
