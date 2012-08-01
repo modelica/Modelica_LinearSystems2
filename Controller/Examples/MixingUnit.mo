@@ -87,7 +87,7 @@ selection yields the following simulation result.
 <dl>
 <dt>&nbsp;[1] F&ouml;llinger O. (1998):</dt>
 <dd> <b>Nichtlineare Regelungen I</b>.
-     8th Edition, Oldenbourg Verlag München.<br>&nbsp;</dd>
+     8th Edition, Oldenbourg Verlag M&uuml;nchen.<br>&nbsp;</dd>
 </dl>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{120,

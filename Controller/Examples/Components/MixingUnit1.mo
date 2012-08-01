@@ -168,29 +168,29 @@ equation
         Rectangle(extent={{-70,40},{70,-60}}, lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>
-Model of idealized stirred tank reactor from [1], p. 280. In the stirred tank there is 
-a continuous intake of substance A which reacts with a catalyzer and brakes down into 
-other substances. 
-Since the content of the tank reactor is stired continuously, it can be supposed 
+Model of idealized stirred tank reactor from [1], p. 280. In the stirred tank there is
+a continuous intake of substance A which reacts with a catalyzer and brakes down into
+other substances.
+Since the content of the tank reactor is stired continuously, it can be supposed
 a homogenous distribution of all substances within the tank.
-Therefore, the tank reactor system can be described by means of concentrated 
+Therefore, the tank reactor system can be described by means of concentrated
 parameters.
 </p>
 <p>
-The chemical reaction in the tank reactor is exothermic, i.e. it produces themal 
-energy which affects the stability of the reaction. 
-To stabilize it, the tank reactor is cooled. The temperature&nbsp;<code>T_c</code> 
+The chemical reaction in the tank reactor is exothermic, i.e. it produces themal
+energy which affects the stability of the reaction.
+To stabilize it, the tank reactor is cooled. The temperature&nbsp;<code>T_c</code>
 of cooling medium is the variable to be actuated by controller.
 </p>
 <p>
-The speed &gamma; of the reaction depends on the concentration&nbsp;<code>c</code> and 
+The speed &gamma; of the reaction depends on the concentration&nbsp;<code>c</code> and
 temperature&nbsp;<code>T</code> as follows:
 </p>
 <blockquote><pre>
 gamma = (1-x1) * k0 * e^(-eps/(1+x2))
 </pre></blockquote>
 <p>
-with related concentration&nbsp;<code>x1</code> and related temperature&nbsp;<code>x2</code>: 
+with related concentration&nbsp;<code>x1</code> and related temperature&nbsp;<code>x2</code>:
 </p>
 <blockquote><pre>
       c0 - c            T - T0
@@ -198,7 +198,7 @@ x1 = --------;    x2 = --------.
         c0                T0
 </pre></blockquote>
 <p>
-Both variables <code>x1</code> and &nbsp;<code>x2</code> are states of the model. 
+Both variables <code>x1</code> and &nbsp;<code>x2</code> are states of the model.
 Additionally, there is used related temperature&nbsp;<code>u</code> of cooling medium:
 </p>
 <blockquote><pre>
@@ -211,7 +211,7 @@ u = --------.
 <dl>
 <dt>&nbsp;[1] F&ouml;llinger O. (1998):</dt>
 <dd> <b>Nichtlineare Regelungen I</b>.
-     8th Edition, Oldenbourg Verlag München.<br>&nbsp;</dd>
+     8th Edition, Oldenbourg Verlag M&uuml;nchen.<br>&nbsp;</dd>
 </dl>
 </html>"));
 end MixingUnit1;
