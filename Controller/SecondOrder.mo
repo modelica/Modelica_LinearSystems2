@@ -40,8 +40,7 @@ initial equation
   end if;
   annotation (
     defaultComponentName="secondOrder",
-    Documentation(info="
-<html>
+    Documentation(info="<html>
 <p>
 This blocks defines the transfer function between the input u and
 the output y as <i>second order</i> system:

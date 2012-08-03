@@ -106,10 +106,10 @@ Plot.<b>rootLocus</b>(modelName, t_linearize, modelParam, simulationSetup, diagr
 
 <h4>Description</h4>
 <p>
-This function examines a root locus analysis of a selected Modelica model over 
-variation of a certain system parameter. 
-Note, only first parameter <code>modelParam[1]</code> is considered for the analysis. 
-The parameter is varied equidistantly from minimum to maximum value. 
+This function examines a root locus analysis of a selected Modelica model over
+variation of a certain system parameter.
+Note, only first parameter <code>modelParam[1]</code> is considered for the analysis.
+The parameter is varied equidistantly from minimum to maximum value.
 </p>
 
 <h4>Example</h4>

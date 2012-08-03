@@ -47,7 +47,7 @@ algorithm
     else
        style :=diagram.curve[i].lineSymbol - 1;
     end if;
-    
+
     OK :=plotArray(diagram.curve[i].x,
                    diagram.curve[i].y,
                    legend=diagram.curve[i].legend,

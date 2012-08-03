@@ -102,7 +102,7 @@ equation
         info="<html>
 <p>Model of idealized stirred tank reactor, see <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Components.MixingUnit1\">MixingUnit1</a>
 for more details.
-It is intended for replacement of a plant instance in general model of controller. 
+It is intended for replacement of a plant instance in general model of controller.
 </p>
 </html>"));
 end MixingUnit;

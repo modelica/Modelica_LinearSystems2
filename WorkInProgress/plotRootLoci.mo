@@ -144,13 +144,13 @@ plotRootLoci(modelName, modelParams, simulationOptions, position, useLegend, gri
 
 <h4>Description</h4>
 <p>
-This function linearizes Modelica model, calculates its eigenvalues and 
-plots root loci for variants of selected model parameter <code>modelParams[1].parName</code>. 
-Optionally, the model will be simulated before linearization. 
+This function linearizes Modelica model, calculates its eigenvalues and
+plots root loci for variants of selected model parameter <code>modelParams[1].parName</code>.
+Optionally, the model will be simulated before linearization.
 This is reasonable e.g. if the model is initially not at equilibrium and it
-contains nonlinearities. 
-The end time of the simulation is <code>simulationOptions.t_linearize</code>. 
-The linearization will be performed for the states of model at that time. 
+contains nonlinearities.
+The end time of the simulation is <code>simulationOptions.t_linearize</code>.
+The linearization will be performed for the states of model at that time.
 Therefore, this process can generally be very time-consuming.
 </p>
 <p>

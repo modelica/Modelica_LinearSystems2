@@ -2558,7 +2558,7 @@ ZerosAndPoles.Plot.<b>timeResponse</b>(
 <h4>Description</h4>
 <p>
 This function plots the time response of a transfer function. The character of the time response if defined by the input
-<a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial. 
+<a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial.
 </p>
 
 <h4>Example</h4>

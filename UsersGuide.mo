@@ -1081,7 +1081,7 @@ This library is based on the following references:
         \"Praxisgerechte Modelica-Bibliothek f&uuml;r Abtastregler\",
         Master's thesis (in German), HTWK Leipzig, Fachbereich Elektro- und Informationstechnik, 2002.</td>
     </tr>
-</table> 
+</table>
 &nbsp;
 </html>"));
   end Literature;

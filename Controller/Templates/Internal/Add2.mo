@@ -17,8 +17,7 @@ block Add2
 equation
   y = u1 + u2;
   annotation (
-    Documentation(info="
-<html>
+    Documentation(info="<html>
 <p>
 This blocks computes output <b>y</b> as <i>difference</i> of the
 commanded input <b>u1</b> and the feedback

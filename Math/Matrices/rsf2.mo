@@ -67,7 +67,7 @@ the conjugated complex pairs of eigenvalues, whereas the real parts of the eigen
 are the elements of the diagonal.
 </p>
 <p>
-The calculation is performed stepwise using lapack.dgees, i.e. using the internal 
+The calculation is performed stepwise using lapack.dgees, i.e. using the internal
 mehtods of balacing and scaling of dgees.
 </p>
 
