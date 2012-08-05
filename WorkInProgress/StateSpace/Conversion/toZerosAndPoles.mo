@@ -125,8 +125,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 <dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
-</html>",
-         revisions="<html>
+</html>",revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>

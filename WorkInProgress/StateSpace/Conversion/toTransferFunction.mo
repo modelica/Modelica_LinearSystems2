@@ -56,8 +56,7 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
 //   tf =  -----------------
              s^2 + 3*s + 2
 </pre></blockquote>
-</html>",
-         revisions="<html>
+</html>",revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>

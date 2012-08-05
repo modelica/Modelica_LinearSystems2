@@ -5,13 +5,22 @@ extends Modelica.Icons.Package;
   record ParameterVariation
     "Define variation of one parameter in a given range and optionally select the parameter from a translated model"
     String Name "Name of parameter" annotation (Dialog);
-    Real Min "Minimum value of parameter" annotation (Dialog);
-    Real Max "Maximum value of parameter" annotation (Dialog);
-    Integer nVar(min=2) = 10 "Number of parameter variations (min=2)" annotation (Dialog);
+    Integer nVar(min=1) = 1
+      "= 1: Variable is not varied; > 1: Number of parameter variations" annotation (Dialog);
+    Boolean logVar = false
+      "= true, if logarithmic variation, otherwise equidistant" annotation (Dialog,  choices(__Dymola_checkBox=true));
+    Real Value=0 "Value of parameter (used if nVar=1, otherwise ignored)" annotation (Dialog);
+    Real Min=-1e100
+      "Minimum value of parameter (if nVar>1: nVar points between Min ... Max)"
+                                                                                              annotation (Dialog);
+    Real Max=1e100
+      "Maximum value of parameter (if nVar>1: nVar points between Min ... Max)"
+                                                                                             annotation (Dialog);
     String Unit="" "Unit of parameter" annotation (Dialog);
     annotation (
     Dialog(__Dymola_importDsin(onlyStart=true,
       fields(Name=initialName,
+             Value=initialValue.value,
              Min=initialValue.minimum,
              Max=initialValue.maximum,
              Unit=initialValue.unit))),
@@ -85,4 +94,45 @@ extends Modelica.Icons.Package;
             fillPattern=FillPattern.Solid)}));
 
   end SimulationOptionsForLinearization;
+
+  record ParameterVariation2
+    "Define variation of one parameter in a given range and optionally select the parameter from a translated model"
+    String Name "Name of parameter" annotation (Dialog);
+    Real Min "Minimum value of parameter" annotation (Dialog);
+    Real Max "Maximum value of parameter" annotation (Dialog);
+    Integer nVar(min=2) = 10 "Number of parameter variations (min=2)" annotation (Dialog);
+    String Unit="" "Unit of parameter" annotation (Dialog);
+    annotation (
+    Dialog(__Dymola_importDsin(onlyStart=true,
+      fields(Name=initialName,
+             Min=initialValue.minimum,
+             Max=initialValue.maximum,
+             Unit=initialValue.unit))),
+    Icon(graphics={
+          Rectangle(
+            extent={{-100,-30},{100,-90}},
+            lineColor={0,0,0},
+            fillColor={175,175,175},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{-100,-30},{-100,44}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{100,-32},{100,44}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{-100,40},{100,40}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{-60,68},{-100,40},{-60,12}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{60,68},{100,40},{60,12}},
+            color={0,0,0},
+            smooth=Smooth.None)}));
+  end ParameterVariation2;
 end Records;

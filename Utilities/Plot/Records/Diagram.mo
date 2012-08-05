@@ -11,8 +11,8 @@ record Diagram
   Boolean grid=true "True, if grid is shown" annotation(Dialog,  choices(__Dymola_checkBox=true));
 
   /* group "Axes" (Axes properties) */
-  String xLabel="" "String displayed at horizontal axis" annotation(Dialog(group="Axes"));
-  String yLabel="" "String displayed at vertical axis" annotation(Dialog(group="Axes"));
+  String xLabel=" " "String displayed at horizontal axis" annotation(Dialog(group="Axes"));
+  String yLabel=" " "String displayed at vertical axis" annotation(Dialog(group="Axes"));
   Boolean logX = false "True, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
   Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
   Boolean uniformScaling = false

@@ -129,8 +129,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
 <dd> <b>Computation of Zeros of Linear Multivariable Systems</b>.
      Automatica, 18, pp. 415-430.<br>&nbsp;</dd>
 </dl>
-</html>",
-         revisions="<html>
+</html>",revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
