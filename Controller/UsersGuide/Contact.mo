@@ -10,7 +10,7 @@ class Contact "Contact"
     Postfach 1116<br>
     D-82230 Wessling<br>
     Germany<br>
-    email: <a href=\"mailto:Martin.Otter@dlr.de>Martin.Otter@dlr.de\"</a><br></dd>
+    email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a><br></dd>
 </dl>
 <p><b>Acknowledgements:</b></p>
 <ul>
