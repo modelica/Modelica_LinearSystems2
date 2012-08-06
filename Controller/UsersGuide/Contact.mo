@@ -10,7 +10,7 @@ class Contact "Contact"
     Postfach 1116<br>
     D-82230 Wessling<br>
     Germany<br>
-    email: <A HREF=mailto:Martin.Otter@dlr.de>Martin.Otter@dlr.de</A><br></dd>
+    email: <a href=\"mailto:Martin.Otter@dlr.de>Martin.Otter@dlr.de\"</a><br></dd>
 </dl>
 <p><b>Acknowledgements:</b></p>
 <ul>
@@ -35,6 +35,5 @@ class Contact "Contact"
      <a href=\"http://www.itea2.org/public/project_leaflets/EUROSYSLIB_profile_oct-07.pdf\">ITEA2 EUROSYSLIB</a>
       project. </li>
 </ul>
-</html>
-"));
+</html>"));
 end Contact;
