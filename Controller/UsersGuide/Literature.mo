@@ -17,6 +17,5 @@ This library is based on the following references:
      and Prof. Martin Otter (DLR), 12 Nov. 2002.
      <br>&nbsp;</dd>
 </dl>
-</html>
-"));
+</html>"));
 end Literature;
