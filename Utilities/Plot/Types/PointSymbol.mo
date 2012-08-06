@@ -7,4 +7,5 @@ type PointSymbol = enumeration(
     FilledSquare,
     TriangleDown,
     TriangleUp,
-    Diamond) "Choices for point symbol";
+    Diamond,
+    Dot) "Choices for point symbol";

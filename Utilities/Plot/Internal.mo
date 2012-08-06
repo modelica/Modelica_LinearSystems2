@@ -22,7 +22,9 @@ package Internal "Internal functions, that should not be utilized by a user"
               if symbol == Symbol.TriangleUp then
                  MarkerStyle.TriangleUp else
               if symbol == Symbol.Diamond then
-                 MarkerStyle.Diamond else MarkerStyle.None;
+                 MarkerStyle.Diamond else
+              if symbol == Symbol.Dot then
+                 MarkerStyle.Dot else MarkerStyle.None;
 
      annotation(Inline=true);
   end convertToDymolaMarker;

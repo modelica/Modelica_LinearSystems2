@@ -32,7 +32,7 @@ record RootLocusDiagram "Properties of a root locus diagram"
       Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.None
     "Line pattern of curve" annotation(Dialog(group="Curve properties"));
    Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol lineSymbol=
-      Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.Circle
+      Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.Dot
     "Symbol for points on curve" annotation(Dialog(group="Curve properties"));
    Real lineThickness=0.25 "Line thickness of curve"
                               annotation(Dialog(group="Curve properties"));
