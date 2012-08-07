@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.Utilities.Plot;
 function parameterizedCurves
   "Plot parametrized curve with one or more branches"
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Utilities.Types.MarkerStyles;
+  import Modelica_LinearSystems2.WorkInProgress.RootLocusOld.Types.MarkerStyles;
 
   input Modelica_LinearSystems2.Utilities.Plot.Records.ParametrizedCurves diagram
     "Parametrized curve data points" annotation(Dialog);
