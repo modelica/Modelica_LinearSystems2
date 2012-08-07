@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress;
 function plotEigenvalues
   "Calculate eigenvalues of matrix A and plot root locus"
-  import Modelica_LinearSystems2.Utilities.Types.MarkerStyles;
+  import Modelica_LinearSystems2.WorkInProgress.RootLocusOld.Types.MarkerStyles;
 
   input Real A[:,size(A, 1)] = [2,1,1;1,1,1;1,2,2] "Square matrix";
   input Boolean removePrevious=true

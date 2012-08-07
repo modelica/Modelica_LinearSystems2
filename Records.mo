@@ -16,9 +16,10 @@ extends Modelica.Icons.Package;
     Real Max=1e100
       "Maximum value of parameter (if nVar>1: nVar points between Min ... Max)"
                                                                                              annotation (Dialog);
-    String Unit="" "Unit of parameter" annotation (Dialog);
+    String Unit="" "Unit of parameter" annotation (Dialog(enable=false));
     annotation (
-    Dialog(__Dymola_importDsin(onlyStart=true,
+    Dialog(__Dymola_importDsin(button="select"
+            "select the model parameters to be included in this table",                                   onlyStart=true,
       fields(Name=initialName,
              Value=initialValue.value,
              Min=initialValue.minimum,
