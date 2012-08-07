@@ -58,8 +58,9 @@ algorithm
 
   elseif nParam == 1 then
      // Exactly one parameter defined
-     assert(modelParam[1].nVar > 1, "One parameter defined, but nVar (= the number of variations) is not > 1");
-     np :=modelParam[1].nVar;
+     assert(modelParam[1].grid == "Equidistant" or
+            modelParam[1].grid == "Logarithmic",  "One parameter defined, but grid is not defined as Equidistant or Logarithmic");
+     np :=modelParam[1].nPoints;
      index_p_var :=1;
      OK :=closeModel();
 
@@ -67,20 +68,24 @@ algorithm
      // More as one parameter defined; find the parameter to be varied
      index_p_var :=0;
      for i in 1:nParam loop
-        if modelParam[i].nVar > 1 then
+        if modelParam[i].grid == "Value" then
+           // do nothing
+        elseif modelParam[i].grid == "Equidistant" or modelParam[i].grid == "Logarithmic" then
            if index_p_var > 0 then
-              Modelica.Utilities.Streams.print("Parameters " + modelParam[index_p_var] + " and " + modelParam[i] +
+              Modelica.Utilities.Streams.error("Parameters " + modelParam[index_p_var].Name + " and " + modelParam[i].Name +
                                                " shall be varied,\n" + "but this is only possible for one parameter.\n"+
-                                               " Therefore, the variation over " + modelParam[i] + " is not performed.");
-           else
-              index_p_var :=i;
+                                               " Therefore, change the definition of \"grid\".");
            end if;
+           index_p_var :=i;
+        else
+           assert(false, "Wrong definition of \"grid\" for parameter " + modelParam[i].Name);
         end if;
      end for;
      assert(index_p_var > 0, "No parameter defined that shall be varied for the root locus.");
-     np :=modelParam[index_p_var].nVar;
+     np :=modelParam[index_p_var].nPoints;
 
      // Translate model and set the new parameter values
+     OK:=closeModel();
      OK:=translateModel(modelName);
      assert(OK, "Translation of model " + modelName + " failed.");
      for i in 1:nParam loop
@@ -102,10 +107,10 @@ algorithm
   assert(Max <  1e99, "Maximum value not set for parameter to be varied: " + paramName);
 
   // Compute all parameter values
-  if modelParam[index_p_var].logVar then
+  if modelParam[index_p_var].grid == "Logarithmic" then
      // logarithmic spacing
-     assert(Min*Max >= 0.0, "Since logVar = true for parameter to be varied: " + paramName +
-                            "\nThe Min and Max values need to have the same sign");
+     assert(Min*Max >= 0.0, "Since grid = Logarithmic for parameter to be varied: " + paramName +
+                            "\nThe Min and Max values need to have the same sign.");
      if Min < 0.0 then
         logMin :=-log10(Min);
      elseif Min > 0.0 then
@@ -161,6 +166,9 @@ algorithm
 
   // Read all matrices from file, compute eigenvalues and store them in output arrays
   (Re,Im) :=Modelica_LinearSystems2.Internal.eigenValuesFromLinearization(is, nx, nu, ny, reorder);
+
+  // Close model
+  OK := closeModel();
 
   annotation (__Dymola_interactive=true);
 end rootLocusOfModel;

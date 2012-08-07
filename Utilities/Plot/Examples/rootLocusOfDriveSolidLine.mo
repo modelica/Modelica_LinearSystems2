@@ -12,9 +12,9 @@ algorithm
   Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel(
      "Modelica.Mechanics.Rotational.Examples.First",
      modelParam={Modelica_LinearSystems2.Records.ParameterVariation(
-                      Name="Jload", Min=1, Max=20, nVar=30, Unit="kg.m2"),
+                      Name="Jload", grid="Equidistant", Min=1, Max=20, nPoints=30, Unit="kg.m2"),
                  Modelica_LinearSystems2.Records.ParameterVariation(
-                      Name="Jmotor", Value=0.1)},
+                      Name="Jmotor", Value=0.1, Unit="kg.m2")},
      diagram=Modelica_LinearSystems2.Utilities.Plot.Records.RootLocusDiagram(
                  linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.Solid,
                  lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.None));
