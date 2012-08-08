@@ -621,7 +621,7 @@ encapsulated package Analysis
         headingInvariantzeros="Invariant zeros",
         headingStepResponse="Step response",
         headingFrequencyResponse="Frequency response");
-    input String fileName="eigenvalues.html"
+    input String fileName="systemReport.html"
         "Name of html-file that contains eigenvalue table";
     input String systemName="" "Name of system (used as heading in html file)";
     input String description="" "Description of system (used in html file)";
@@ -629,8 +629,8 @@ encapsulated package Analysis
     input Boolean printStateSpaceSystem=true annotation(Dialog(enable=false));
     String dummyFileName="dummy" + fileName;
     public
-    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-          Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
+    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+      defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
 
     protected
     input Complex j=Modelica_LinearSystems2.Math.Complex.j();
@@ -714,12 +714,19 @@ encapsulated package Analysis
     // -------------
     Modelica.Utilities.Files.removeFile(fileName);
     Modelica.Utilities.Files.removeFile(dummyFileName);
+
+    // Text should be printed into new file in HTML environment
+    // --------------------------------------------------------
+    StateSpace.Analysis.analysis.printHTMLbasics(fileName, true);
+
     if printStateSpaceSystem then
       printSystem(
         ss,
         fileName,
         systemName,
         description);
+
+      StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
       printSystem(
         ss,
         dummyFileName,
@@ -745,6 +752,7 @@ encapsulated package Analysis
       isDetectable,
       dummyFileName,
       analyseOptions=analyseOptions);
+    StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
 
     Modelica.Utilities.Streams.readFile(dummyFileName);
 
@@ -788,8 +796,8 @@ encapsulated package Analysis
     end while;
 
     if analyseOptions.printEigenValues then
+      printHead2a(fileName, analyseOptions=analyseOptions, printTable=(nReal > 0));
       if nReal > 0 then
-        printHead2a(fileName, analyseOptions=analyseOptions);
         printTab1(
           evSorted,
           evIndex,
@@ -799,30 +807,27 @@ encapsulated package Analysis
           xNames2,
           fileName,
           analyseOptions=analyseOptions);
-
-        Modelica.Utilities.Files.removeFile(dummyFileName);
-        printHead2a(dummyFileName, analyseOptions=analyseOptions);
-        printTab1(
-          evSorted,
-          evIndex,
-          revec,
-          levec,
-          nReal,
-          xNames2,
-          dummyFileName,
-          analyseOptions=analyseOptions);
-        Modelica.Utilities.Streams.readFile(dummyFileName);
-      else
-        print("<b>The system has no real eigenvalues</b>\n<br><br>", fileName);
-        Modelica.Utilities.Files.removeFile(dummyFileName);
-        print("<html><body><b>The system has no real eigenvalues</b><br><br></body></html>",
-          dummyFileName);
-        Modelica.Utilities.Streams.readFile(dummyFileName);
-
       end if;
 
+      Modelica.Utilities.Files.removeFile(dummyFileName);
+      StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
+      printHead2a(dummyFileName, analyseOptions=analyseOptions, printTable=(nReal > 0));
+      if nReal > 0 then
+        printTab1(
+          evSorted,
+          evIndex,
+          revec,
+          levec,
+          nReal,
+          xNames2,
+          dummyFileName,
+          analyseOptions=analyseOptions);
+      end if;
+      StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
+      Modelica.Utilities.Streams.readFile(dummyFileName);
+
+      printHead2b(fileName, analyseOptions=analyseOptions, printTable=(nReal < nx));
       if nReal < nx then
-        printHead2b(fileName, analyseOptions=analyseOptions);
         printTab2(
           evSorted,
           evIndex,
@@ -832,9 +837,12 @@ encapsulated package Analysis
           xNames2,
           fileName,
           analyseOptions=analyseOptions);
+      end if;
 
-        Modelica.Utilities.Files.removeFile(dummyFileName);
-        printHead2b(dummyFileName, analyseOptions=analyseOptions);
+      Modelica.Utilities.Files.removeFile(dummyFileName);
+      StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
+      printHead2b(dummyFileName, analyseOptions=analyseOptions, printTable=(nReal < nx));
+      if nReal < nx then
         printTab2(
           evSorted,
           evIndex,
@@ -844,9 +852,12 @@ encapsulated package Analysis
           xNames2,
           dummyFileName,
           analyseOptions=analyseOptions);
-        Modelica.Utilities.Streams.readFile(dummyFileName);
+      end if;
+      StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
+      Modelica.Utilities.Streams.readFile(dummyFileName);
 
-    // Plot eigen values
+      if nReal < nx then
+        // Plot eigenvalues
         i := 0;
         if analyseOptions.plotEigenValues then
           i := i + 1;
@@ -858,7 +869,8 @@ encapsulated package Analysis
             linePattern=Plot.Types.LinePattern.None,
             lineSymbol=Plot.Types.PointSymbol.Cross);
         end if;
-   // Plot invariant zeros
+
+        // Plot invariant zeros
         if size(systemZeros, 1) > 0 and analyseOptions.plotInvariantZeros then
           i := i + 1;
           curves[i] := Plot.Records.Curve(
@@ -873,12 +885,6 @@ encapsulated package Analysis
         diagram2 := defaultDiagram;
         diagram2.curve := curves[1:i];
         Plot.diagram(diagram2, device);
-      else
-        print("<b>The system has no conjugated complex eigenvalues</b><br><br>", fileName);
-        Modelica.Utilities.Files.removeFile(dummyFileName);
-        print("<html><body><b>No conjugated complex eigenvalues</b><br><br></body></html>",
-          dummyFileName);
-        Modelica.Utilities.Streams.readFile(dummyFileName);
       end if;
 
       if analyseOptions.printEigenValueProperties then
@@ -893,6 +899,7 @@ encapsulated package Analysis
           fileName);
 
         Modelica.Utilities.Files.removeFile(dummyFileName);
+        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
         printHead3(dummyFileName);
         printTab3(
           evSorted,
@@ -902,6 +909,7 @@ encapsulated package Analysis
           nReal,
           xNames2,
           dummyFileName);
+        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
         Modelica.Utilities.Streams.readFile(dummyFileName);
 
       end if;
@@ -913,25 +921,22 @@ encapsulated package Analysis
     nReal := Modelica_LinearSystems2.Internal.numberOfRealZeros(zerosSorted);
 
     if analyseOptions.printInvariantZeros then
+      printHead4(fileName, printTable=(size(systemZeros, 1) > 0));
       if size(systemZeros, 1) > 0 then
-        printHead4(fileName);
         Modelica_LinearSystems2.StateSpace.Analysis.analysis.printTab4(
           zerosSorted,
           zerosIndex,
           nReal,
           fileName);
+      end if;
 
-        Modelica.Utilities.Files.removeFile(dummyFileName);
-        printHead4(dummyFileName);
+      StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
+      printHead4(dummyFileName, printTable=(size(systemZeros, 1) > 0));
+      if size(systemZeros, 1) > 0 then
         printTab4(
           zerosSorted,
           zerosIndex,
           nReal,
-          dummyFileName);
-      else
-        print("The system has no invariant zeros<br><br>", fileName);
-        Modelica.Utilities.Files.removeFile(dummyFileName);
-        print("<html><body><p><br><br><b>Invariant zeros</b><br>The system has no invariant zeros<br><br></body></html>",
           dummyFileName);
       end if;
       k := 0;
@@ -941,24 +946,25 @@ encapsulated package Analysis
         end if;
       end for;
       if k > 0 then
-        print("<b>Note, that the system has " + String(k) + " zeros in the right complex half-plane</b>",
+        print("<p>\n<b>Note, that the system has " + String(k) + " zeros in the right complex half-plane.</b>\n</p>",
           fileName);
-        print("<html><body><b>Note, that the system has " + String(k) + " zeros in the right complex half-plane</b></body></html>",
+        print("<p>\n<b>Note, that the system has " + String(k) + " zeros in the right complex half-plane.</b>\n</p>",
           dummyFileName);
       end if;
+      StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
 
     end if;
-    print("</body></html>", fileName);
-    print("</body></html>", dummyFileName);
     Modelica.Utilities.Streams.readFile(dummyFileName);
     Modelica.Utilities.Files.removeFile(dummyFileName);
 
     print("\n\nAnalysis results have been written to file \"" +
       Modelica.Utilities.Files.fullPathName(fileName) + "\"");
 
-  // SUB FUNCTIONS
+    // Last print of HTML environment
+    // --------------------------------------------------------
+    StateSpace.Analysis.analysis.printHTMLbasics(fileName, false);
 
-  equation
+  // SUB FUNCTIONS
 
     public
     encapsulated function printSystem
@@ -972,9 +978,16 @@ encapsulated package Analysis
       input String fileName="systemAnalysis.html"
           "File on which the state space is written in html format";
       input String systemName="State Space System"
-          "name of the state space system";
+          "Name of the state space system";
       input String description="" "Description of system (used in html file)";
       input String format=".3g" "Format of numbers (e.g. \"20.8e\")";
+
+      input Boolean htmlBasics=false
+          "True, if text should be printed within 'html' and 'body' environment, otherwise text printed into existing file fileName"
+        annotation(Dialog(group="HTML format"));
+      input Integer hSize(min=1, max=5)=1
+          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)"
+        annotation(Dialog(group="HTML format"));
       protected
       Integer nx=size(ss.A, 1);
       Integer nu=size(ss.B, 2);
@@ -987,6 +1000,11 @@ encapsulated package Analysis
 
       String td_align=if centered then "  <td style=\"text-align:center\">" else "  <td style=\"text-align:right\">";
 
+      protected
+      Integer hSizeOK= if hSize<1 then 1 else if hSize > 5 then 5 else hSize;
+      String heading= "h"+String(hSizeOK);
+      String heading2= "h"+String(hSizeOK+1);
+
     algorithm
       // ---------------------------------------------------------------------------------------------------
       // The correct HTML format generated with this function can be checked with following commands:
@@ -995,9 +1013,31 @@ encapsulated package Analysis
       //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printSystem(ss=Modelica_LinearSystems2.StateSpace.Import.fromModel("Modelica.Mechanics.Rotational.Examples.First"), description="Test file in HTML format from function printSystem.");
       // ---------------------------------------------------------------------------------------------------
 
-      Modelica.Utilities.Files.removeFile(fileName);
-      print("<html>\n<body>\n<h1>System report</h1>", fileName);
-      print("<h2>Matrices</h2>", fileName);
+      if htmlBasics then
+        // Text should be printed into new file in HTML environment
+        // --------------------------------------------------------
+        StateSpace.Analysis.analysis.printHTMLbasics(fileName, true);
+      end if;
+
+      //print("\n<"+heading+">System report</"+heading+">", fileName);
+      //print("\n<"+heading2+">Matrices</"+heading2+">", fileName);
+      print("<h1>System report</h1>", fileName);
+      print("\n<h2>General information</h2>", fileName);
+
+      if systemName == "" then
+      else
+        print("\n<h3>System name</h3>", fileName);
+        print("<p>\n"+systemName+"\n</p>", fileName);
+      end if;
+
+      if description == "" then
+      else
+        print("\n<h3>Description</h3>", fileName);
+        print("<p>\n"+description+"\n</p>", fileName);
+      end if;
+
+      print("\n<h3>Matrices</h3>", fileName);
+      print("<p>\nThe system described in the state space representation\n</p>", fileName);
       print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
          + "cellpadding=\"3\" border=\"0\"> ", fileName);
       print("<tr><td>der(x) </td> <td>=</td> <td> Ax</td> <td> +</td><td> Bu</td></tr>
@@ -1128,7 +1168,7 @@ encapsulated package Analysis
       // Print table header
       // ------------------
       if ny > 0 then
-        print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp</td>", fileName);
+        print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
         for i1 in 1:nx loop
           print("  <td style=\"text-align:center\" valign=\"top\">&nbsp; " + ss.xNames[i1] + " &nbsp;</td>",
             fileName);
@@ -1223,7 +1263,7 @@ encapsulated package Analysis
         print("</tr>", fileName);
       end if;
 
-      print("</table>\n", fileName);
+      print("</table>", fileName);
 
       if ny==0 and nu==0 then
         print("<p>\n<b>Note</b>, that matrices <b>B</b> and <b>C</b> are empty matrices, i.e. the system has neither inputs nor outputs!\n</p>", fileName);
@@ -1233,13 +1273,11 @@ encapsulated package Analysis
         print("<p>\n<b>Note</b>, that matrix <b>B</b> is empty matrix, i.e. the system has no inputs!\n</p>", fileName);
       end if;
 
-      if description == "" then
-      else
-        print("\n<h2>Description</h2>", fileName);
-        print("<p>\n"+description+"\n</p>", fileName);
+      if htmlBasics then
+        // Last print of HTML environment
+        // --------------------------------------------------------
+        StateSpace.Analysis.analysis.printHTMLbasics(fileName, false);
       end if;
-
-      print("</body>\n</html>", fileName);
 
     end printSystem;
 
@@ -1251,7 +1289,7 @@ encapsulated package Analysis
       import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2.StateSpace;
 
-      input StateSpace ss;
+      input StateSpace ss;  // This could be deleted sinc not used. But for reasons of beackward compatibility it is still here.
       input Boolean isStable;
       input Boolean isControllable;
       input Boolean isStabilizable;
@@ -1276,7 +1314,7 @@ encapsulated package Analysis
             headingStepResponse="Step response",
             headingFrequencyResponse="Frequency response");
 
-      input Boolean htmlEnv=true
+      input Boolean htmlBasics=false
           "True, if text should be printed within 'html' and 'body' environment, otherwise text printed into existing file fileName"
         annotation(Dialog(group="HTML format"));
       input Integer hSize(min=1, max=5)=2
@@ -1290,65 +1328,62 @@ encapsulated package Analysis
     algorithm
       // ---------------------------------------------------------------------------------------------------
       // The correct HTML format generated with this function can be checked with following commands:
-      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead1(Modelica_LinearSystems2.StateSpace(A=[2], B=[1], C=[1], D=[1]), false, false, false, true, false, htmlEnv=true, hSize=3);
+      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead1(Modelica_LinearSystems2.StateSpace(A=[2], B=[1], C=[1], D=[1]), false, false, false, true, false, htmlBasics=true, hSize=3);
       // ---------------------------------------------------------------------------------------------------
 
-      if htmlEnv then
+      if htmlBasics then
         // Text should be printed into new file in HTML environment
-        Modelica.Utilities.Files.removeFile(fileName);
-        print("<html>\n<body>", fileName);
-      //else
-        // Print at end of existing file
+        // --------------------------------------------------------
+        StateSpace.Analysis.analysis.printHTMLbasics(fileName, true);
       end if;
 
-      print("\n<"+heading+">Characteristics</"+heading+">\n<p>The system\n</p>\n<p> is ", fileName);
+      print("\n<"+heading+">Characteristics</"+heading+">\n<p>\nThe system\n</p>\n<p> is ", fileName);
 
       if analyseOptions.printControllability and analyseOptions.printObservability then
-        print((if isStable then " " else "not ") + "stable" + "\n<br>" + (if
-          isStable then if isControllable then "and it is " else "but it is not " else
-                if isControllable then "but it is " else "and it is not ") + "controllable"
+        print((if isStable then " " else "<b>not</b> ") + "stable" + "\n<br>" + (if
+          isStable then if isControllable then "and it is " else "but it is <b>not</b> " else
+                if isControllable then "but it is " else "and it is <b>not</b> ") + "controllable"
            + (if isStable then "" else "\n<br>" + (if isControllable then " and therefore it is " else
-                if isStabilizable then " but it is " else "and is not ") + "stabilizable.")
-           + "\n<br> The system is " + (if isObservable then " " else "not ") + "observable"
+                if isStabilizable then " but it is " else "and is <b>not</b> ") + "stabilizable.")
+           + "\n<br> The system is " + (if isObservable then " " else "<b>not</b> ") + "observable"
            + (if isStable then "" else "\n<br>" + (if isObservable then " and therefore it is " else
-                if isDetectable then " but it is " else "and is not ") + "detectable.")
-           + "\n<br></br>", fileName);
+                if isDetectable then " but it is " else "and is <b>not</b> ") + "detectable.")
+           + "\n<br>", fileName);
       elseif not analyseOptions.printObservability and analyseOptions.printControllability then
-        print((if isStable then " " else "not ") + "stable" + "\n<br>" + (if
-          isStable then if isControllable then "and it is " else "but it is not " else
-                if isControllable then "but it is " else "and it is not ") + "controllable"
+        print((if isStable then " " else "<b>not</b> ") + "stable" + "\n<br>" + (if
+          isStable then if isControllable then "and it is " else "but it is <b>not</b> " else
+                if isControllable then "but it is " else "and it is <b>not</b> ") + "controllable"
            + (if isStable then "" else "\n<br>" + (if isControllable then " and therefore it is " else
-                if isStabilizable then " but it is " else "and is not ") + "stabilizable.")
-           + "\n<br></br>", fileName);
+                if isStabilizable then " but it is " else "and is <b>not</b> ") + "stabilizable.")
+           + "\n<br>", fileName);
       elseif not analyseOptions.printControllability and analyseOptions.printObservability then
-        print((if isStable then " " else "not ") + "stable." + "\n<br> The system is "
-           + (if isObservable then " " else "not ") + "observable" + (if isStable then
+        print((if isStable then " " else "<b>not</b> ") + "stable." + "\n<br> The system is "
+           + (if isObservable then " " else "<b>not</b> ") + "observable" + (if isStable then
                 "" else "\n<br>" + (if isObservable then " and therefore it is " else
-                if isDetectable then " but it is " else "and is not ") + "detectable.")
-           + "\n<br></br>", fileName);
+                if isDetectable then " but it is " else "and is <b>not</b> ") + "detectable.")
+           + "\n<br>", fileName);
       else
-        print((if isStable then " " else "not ") + "stable." + "\n<br><br>",
+        print((if isStable then " " else "<b>not</b> ") + "stable." + "\n<br>",
           fileName);
       end if;
 
       print("</p>", fileName);
 
-      if htmlEnv then
+      if htmlBasics then
         // Last print of HTML environment
-        print("</body>\n</html>", fileName);
-      //else
-        // Print at end of existing file
+        // --------------------------------------------------------
+        StateSpace.Analysis.analysis.printHTMLbasics(fileName, false);
       end if;
 
     end printHead1;
 
-    public
     encapsulated function printHead2a
         "Print the heading of document for eigenvalues in html format on file"
       import Modelica;
       import Modelica.Utilities.Strings;
       import Modelica_LinearSystems2;
       import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.StateSpace;
 
       input String fileName="systemHead2a.html"
           "File on which the information is written in html format";
@@ -1368,9 +1403,8 @@ encapsulated package Analysis
             headingStepResponse="Step response",
             headingFrequencyResponse="Frequency response");
 
-      input Boolean htmlEnv=false
-          "True, if text should be printed within 'html' and 'body' environment, otherwise text printed into existing file fileName"
-        annotation(Dialog(group="HTML format"));
+      input Boolean printTable=true
+          "True, if the system has real eigenvalues to be printed in table";
       input Integer hSize(min=1, max=5)=3
           "Size of heading of printed document (=1: Title, =2: Chapter, etc.)"
         annotation(Dialog(group="HTML format"));
@@ -1381,49 +1415,38 @@ encapsulated package Analysis
     algorithm
       // ---------------------------------------------------------------------------------------------------
       // The correct HTML format generated with this function can be checked with following commands:
-      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead2a(htmlEnv=true, hSize=3);
+      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead2a(htmlBasics=true, hSize=3);
       // ---------------------------------------------------------------------------------------------------
 
-      if htmlEnv then
-        // Text should be printed into new file in HTML environment
-        Modelica.Utilities.Files.removeFile(fileName);
-        print("<html>\n<body>", fileName);
-      //else
-        // Print at end of existing file
-      end if;
+      print("\n<"+heading+">Eigenvalues analysis</"+heading+">", fileName);
+      //print("<p>\n<b>Real eigenvalues</b>\n</p>", fileName);
 
-      print("\n<"+heading+">Eigenvalues analysis</"+heading+">\n<p>\n<b>Real eigenvalues</b>\n</p>",
-        fileName);
-      print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+      if printTable then
+        print("<p>\nThe system has following real eigenvalues.\n</p>", fileName);
+        print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
            + "cellpadding=\"3\" border=\"1\">", fileName);
-      print("<caption>Real eigenvalues</caption>", fileName);
-
-      if analyseOptions.printEigenValueProperties then
+        print("<caption>Real eigenvalues</caption>", fileName);
         print("<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
-           + "<td> number </td><td> eigenvalue </td> <td> T [s] </td>  <td> characteristics </td><td> contribution to states</td></tr>",
+           + "\n  <td> number </td>\n  <td> eigenvalue </td>\n  <td> T [s] </td>\n  <td> characteristics </td>",
           fileName);
+
+        if analyseOptions.printEigenValueProperties then
+          print("  <td> contribution to states</td>", fileName);
+        end if;
+
+        print("</tr>", fileName);
       else
-        print("<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
-           + "<td> number </td><td> eigenvalue </td> <td> T [s] </td>  <td> characteristics </td></tr>",
-          fileName);
+        print("<p>\nThe system has no real eigenvalues.\n</p>", fileName);
       end if;
 
-      if htmlEnv then
-        // Last print of HTML environment
-        print("</table>", fileName);
-        print("</body>\n</html>", fileName);
-      //else
-        // Print at end of existing file
-      end if;
     end printHead2a;
 
-    public
     encapsulated function printHead2b
         "Print the heading of document for conjugated complex pairs in html format on file"
-        import Modelica;
-        import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
-        import Modelica.Utilities.Streams.print;
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica.Utilities.Streams.print;
 
       input String fileName="systemHead2b.html"
           "File on which the information is written in html format";
@@ -1442,27 +1465,33 @@ encapsulated package Analysis
             headingInvariantzeros="Invariant zeros",
             headingStepResponse="Step response",
             headingFrequencyResponse="Frequency response");
+      input Boolean printTable=true
+          "True, if the system has complex pairs to be printed in table";
 
     algorithm
       // ---------------------------------------------------------------------------------------------------
       // The correct HTML format generated with this function can be checked with following commands:
-      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead2b(htmlEnv=true, hSize=3);
+      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead2b();
       // ---------------------------------------------------------------------------------------------------
 
-      print("<p>\n<b>Conjugated complex pairs of eigenvalues</b>\n</p>", fileName);
-      print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-           + "cellpadding=\"3\" border=\"1\">", fileName);
-      print("<caption>Conjugated complex pairs of eigenvalues</caption>", fileName);
+      if printTable then
+        print("<p>\nThe system has following conjugated complex pairs of eigenvalues.\n</p>", fileName);
+        print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+             + "cellpadding=\"3\" border=\"1\">", fileName);
+        print("<caption>Conjugated complex pairs of eigenvalues</caption>", fileName);
+        print("<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+           + "\n  <td> number </td>\n  <td> eigenvalue </td>\n  <td> freq. [Hz] </td>\n  <td> damping </td>\n  <td> characteristics </td>",
+          fileName);
 
-      if analyseOptions.printEigenValueProperties then
-        print("<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
-           + "<td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td>  <td> contribution to states</td></tr>",
-          fileName);
+        if analyseOptions.printEigenValueProperties then
+          print("  <td> contribution to states</td>", fileName);
+        end if;
+
+        print("</tr>", fileName);
       else
-        print("<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
-           + "<td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td> </tr>",
-          fileName);
+        print("<p>\nThe system has no conjugated complex eigenvalues.\n</p>", fileName);
       end if;
+
     end printHead2b;
 
     encapsulated function printHead3
@@ -1491,21 +1520,24 @@ encapsulated package Analysis
             headingFrequencyResponse="Frequency response");
 
     algorithm
-      print("<p>\nIn the tables above, the column <b>contribution to states</b> lists for each eigenvalue the states to which the"
-         + "corresponding modal state contributes most. This information is based on the "
+      print("<p>\nIn the tables above, the column <b>contribution to states</b> lists for each eigenvalue the states to which the "
+         + "corresponding modal state contributes at most. This information is based on the "
          + "two largest absolute values of the corresponding right eigenvector (if the second large value "
-         + "is less than 5 % of the largest contribution, it is not shown)." + "\n</p>\n<p>\n"
+         + "is less than 5&nbsp;% of the largest contribution, it is not shown)."
+         + "\n</p>\n<p>\n"
          + "In the next table, for each state in the column <b>correlation to modal states</b>, the modal "
-         + "states which contribute most to the coresponding state are summarized, i.e. the state is mostly composed of these modal states "
+         + "states which contribute most to the coresponding state are summarized, i.e. the state is mostly composed of these modal states. "
          + "This information is based on the two largest absolute values of row i of the "
          + "eigenvector matrix that is associated with eigenvalue i (if the second large value  "
-         + "is less than 5 % of the largest contribution, it is not shown). This only holds "
+         + "is less than 5&nbsp;% of the largest contribution, it is not shown). This only holds "
          + "if the modal states are in the same order of magnitude. Otherwise, the modal states "
-         + "listed in the last column might be not the most relevant one.\n</p>\n<br>",
+         + "listed in the last column might be not the most relevant one."
+         + "\n</p>",
         fileName);
       print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
          + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
-         + "<td> state </td> <td> composition </td> <td> eigenvalue #</td> <td> freq. [Hz] </td> <td> damping </td>  </td> <td> T [s] </td></tr>",
+         + "\n  <td> state </td>\n  <td> correlation to modal states </td>\n  <td> eigenvalue # </td>"
+         + "\n  <td> freq. [Hz] </td>\n  <td> damping </td>\n  <td> T [s] </td>\n</tr>",
         fileName);
 
     end printHead3;
@@ -1513,9 +1545,9 @@ encapsulated package Analysis
     encapsulated function printHead4
         "Print the heading of document for invariant zeros in html format on file"
       import Modelica;
-      import Modelica.Utilities.Strings;
       import Modelica_LinearSystems2;
       import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.StateSpace;
 
       input String fileName="systemHead4.html"
           "File on which the information is written in html format";
@@ -1534,16 +1566,8 @@ encapsulated package Analysis
             headingInvariantzeros="Invariant zeros",
             headingStepResponse="Step response",
             headingFrequencyResponse="Frequency response");
-
-      input Boolean htmlEnv=false
-          "True, if text should be printed within 'html' and 'body' environment, otherwise text printed into existing file fileName"
-        annotation(Dialog(group="HTML format"));
-      input Integer hSize(min=1, max=5)=3
-          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)"
-        annotation(Dialog(group="HTML format"));
-      protected
-      Integer hSizeOK= if hSize<1 then 1 else if hSize > 5 then 5 else hSize;
-      String heading= "h"+String(hSizeOK);
+      input Boolean printTable=true
+          "True, if the system has complex pairs to be printed in table";
 
     algorithm
       // ---------------------------------------------------------------------------------------------------
@@ -1551,31 +1575,47 @@ encapsulated package Analysis
       //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead4(htmlEnv=true, hSize=3);
       // ---------------------------------------------------------------------------------------------------
 
-      if htmlEnv then
-        // Text should be printed into new file in HTML environment
-        Modelica.Utilities.Files.removeFile(fileName);
-        print("<html>\n<body>", fileName);
-      //else
-        // Print at end of existing file
+      if printTable then
+        print("<p>\nThe system has following invariant zeros.\n</p>", fileName);
+        print("\n<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+           + "cellpadding=\"3\" border=\"1\">", fileName);
+        print("<caption>Invariant zeros</caption>", fileName);
+        print( "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+           + "\n  <td> number </td>\n  <td> invariant zero </td>\n  <td> Time constant [s] </td>"
+           + "\n  <td> freq. [Hz] </td>\n  <td> damping </td>\n</tr>",
+          fileName);
+      else
+        print("<p>\nThe system has no invariant zeros.\n</p>", fileName);
       end if;
 
-      print("\n<"+heading+">Invariant zeros</"+heading+">",
-        fileName);
-      print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-         + "cellpadding=\"3\" border=\"1\">", fileName);
-      print("<caption>Invariant zeros</caption>", fileName);
-      print( "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
-         + "<td> number </td> <td> invariant zero </td> <td> Time constant [s] </td> <td> freq. [Hz] </td> <td> damping </td></tr>",
-        fileName);
-
-      if htmlEnv then
-        // Last print of HTML environment
-        print("</table>", fileName);
-        print("</body>\n</html>", fileName);
-      //else
-        // Print at end of existing file
-      end if;
     end printHead4;
+
+    encapsulated function printHTMLbasics
+        "Print the html preamble or ending on file"
+      import Modelica.Utilities.Files;
+      import Modelica.Utilities.Streams;
+
+      input String fileName="systemReport.html"
+          "File on which the html basics should be written";
+      input Boolean printBegin=false
+          "True, if beginning of a html file should be printed, otherwise the ending"
+        annotation(choices(checkBox=true));
+
+    algorithm
+      if printBegin then
+        // First print of HTML environment into new file
+        Files.removeFile(fileName);
+        // Following doesn't work in Dymola
+        //Streams.print("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">", fileName);
+        Streams.print("<html>", fileName);
+        Streams.print("<head>\n  <title>Analysis of a state space system from Modelica LinearSystems2</title>\n</head>", fileName);
+        Streams.print("<body>", fileName);
+      else
+        // Last print of HTML environment
+        Streams.print("</body>\n</html>", fileName);
+      end if;
+
+    end printHTMLbasics;
 
     encapsulated function printTab1
         "Print the table with eigenvalues in html format on file"
@@ -1741,46 +1781,36 @@ encapsulated package Analysis
           l_two := false;
         end if;
 
-       // Print data for one eigen value
+        // Print data for one eigen value
+        print("<tr>\n  <td style=\"text-align:center\"> " + number + " </td>\n  <td style=\"text-align:left\"> &nbsp; "
+           + String(evSorted[i].ev.re, format="14.4e") + " </td>\n  <td style=\"text-align:left\"> &nbsp; "
+           + (if evSorted[i].timeConstant < 1e6 then
+               String(evSorted[i].timeConstant, format="9.4f") else
+                   "---")
+           + " </td>\n  <td style=\"text-align:left\"> &nbsp; "
+           + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if
+          evSorted[i].isStable then (if evSorted[i].isControllable then "" else
+                "not ") + "controllable, " else (if evSorted[i].isStabilizable then
+                "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then
+                (if evSorted[i].isObservable then "" else "not ") + "observable " else
+                (if evSorted[i].isDetectable then "" else "not ") + "detectable ")
+           + " </td>", fileName);
+
         if analyseOptions.printEigenValueProperties then
-          print("<tr>\n <td style=\"text-align:center\"> " + number + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + String(evSorted[i].ev.re, format="14.4e") + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + (if evSorted[i].timeConstant < 1e6 then
-                 String(evSorted[i].timeConstant, format="9.4f") else
-                     "---")
-             + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if
-            evSorted[i].isStable then (if evSorted[i].isControllable then "" else
-                  "not ") + "controllable, " else (if evSorted[i].isStabilizable then
-                  "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then
-                  (if evSorted[i].isObservable then "" else "not ") + "observable " else
-                  (if evSorted[i].isDetectable then "" else "not ") + "detectable ")
-             + " </td> <td style=\"text-align:left\"> &nbsp; " + " z[" + String(i)
+          print("  <td style=\"text-align:left\"> &nbsp; " + " z[" + String(i)
              + "]" + " contributes to " + xNames2[r_maxIndex1] + " with " +
             String(r_absMax1, format=".3g") + " %<br>" + (if r_two then "&nbsp; " + " z["
              + String(i) + "]" + " contributes to " + xNames2[r_maxIndex2] + " with "
-             + String(r_absMax2, format=".3g") + " %" else "") + " </td> </tr> ",
+             + String(r_absMax2, format=".3g") + " %" else "") + " </td>",
             fileName);
-
-        else
-          print("<tr>\n <td style=\"text-align:center\"> " + number + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + String(evSorted[i].ev.re, format="14.4e") + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + (if evSorted[i].timeConstant < 1e6 then
-                 String(evSorted[i].timeConstant, format="9.4f") else
-                     "---")
-             + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if
-            evSorted[i].isStable then (if evSorted[i].isControllable then "" else
-                  "not ") + "controllable, " else (if evSorted[i].isStabilizable then
-                  "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then
-                  (if evSorted[i].isObservable then "" else "not ") + "observable " else
-                  (if evSorted[i].isDetectable then "" else "not ") + "detectable ")
-             + " </td> </tr> ", fileName);
         end if;
+
+        print("</tr>", fileName);
+
         i := j;
       end while;
 
-      print("</table>\n\n</body>\n</html>", fileName);
+      print("</table>", fileName);
     end printTab1;
 
     encapsulated function printTab2
@@ -1941,54 +1971,45 @@ encapsulated package Analysis
           l_two := false;
         end if;
 
-       // Print data for one eigen value
+        // Print data for one eigen value
+        print("<tr>\n  <td style=\"text-align:left\"> " + number + " </td>"
+          + "\n  <td style=\"text-align:left\"> &nbsp; " + String(evSorted[i].ev.re, format="14.4e")
+          + " &plusmn; " + String(evSorted[i].ev.im, format="12.4e") + "j" + " </td>"
+          + "\n  <td style=\"text-align:left\"> &nbsp; " + String(evSorted[i].frequency, format="9.4f") + " </td>"
+          + "\n  <td style=\"text-align:left\"> &nbsp; " + String(evSorted[i].damping, format="9.4f") + " </td>"
+          + "\n  <td style=\"text-align:left\"> &nbsp; "
+          + (if evSorted[i].isStable then "" else "not ") + "stable, "
+          + (if evSorted[i].isStable then (if evSorted[i].isControllable then "" else "not ") + "controllable, " else
+          (if evSorted[i].isStabilizable then "" else "not ") + "stabilizable, ")
+          + (if evSorted[i].isStable then (if evSorted[i].isObservable then "" else "not ") + "observable " else
+          (if evSorted[i].isDetectable then "" else "not ") + "detectable ") + " </td>", fileName);
+
         if analyseOptions.printEigenValueProperties then
-          print("<tr>\n <td style=\"text-align:left\"> " + number + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + String(evSorted[i].ev.re, format="14.4e") + " &plusmn; " + String(
-            evSorted[i].ev.im, format="12.4e") + "j" + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + String(evSorted[i].frequency, format="9.4f") + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + String(evSorted[i].damping, format="9.4f") + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if
-            evSorted[i].isStable then (if evSorted[i].isControllable then "" else
-                  "not ") + "controllable, " else (if evSorted[i].isStabilizable then
-                  "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then
-                  (if evSorted[i].isObservable then "" else "not ") + "observable " else
-                  (if evSorted[i].isDetectable then "" else "not ") + "detectable ")
-             + " </td> <td style=\"text-align:left\"> &nbsp; " + " z[" + number + "]"
+          print("  <td style=\"text-align:left\"> &nbsp; " + " z[" + number + "]"
              + " contribute to " + xNames2[r_maxIndex1] + " with " + String(
             r_absMax1, format=".3g") + " %<br>" + (if r_two then "&nbsp; " + " z["
              + number + "]" + " contribute to " + xNames2[r_maxIndex2] + " with " +
-            String(r_absMax2, format=".3g") + " %" else "") + " </td> </tr> ",
+            String(r_absMax2, format=".3g") + " %" else "") + " </td>",
             fileName);
-        else
-          print("<tr>\n <td style=\"text-align:left\"> " + number + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + String(evSorted[i].ev.re, format="14.4e") + " &plusmn; " + String(
-            evSorted[i].ev.im, format="12.4e") + "j" + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + String(evSorted[i].frequency, format="9.4f") + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + String(evSorted[i].damping, format="9.4f") + " </td> <td style=\"text-align:left\"> &nbsp; "
-             + (if evSorted[i].isStable then "" else "not ") + "stable, " + (if
-            evSorted[i].isStable then (if evSorted[i].isControllable then "" else
-                  "not ") + "controllable, " else (if evSorted[i].isStabilizable then
-                  "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable then
-                  (if evSorted[i].isObservable then "" else "not ") + "observable " else
-                  (if evSorted[i].isDetectable then "" else "not ") + "detectable ")
-             + " </td> </tr> ", fileName);
         end if;
+
+        print("</tr>", fileName);
+
         i := j;
       end while;
 
       print("</table>", fileName);
-      print("</table>\n\n</body>\n</html>", fileName);
     end printTab2;
+
 
     encapsulated function printTab3
         "Print the table with eigenvalues in html format on file"
-      import Modelica;
-      import Modelica.Utilities.Strings;
-      import Modelica_LinearSystems2;
-      import Modelica.Utilities.Streams.print;
-      import Modelica_LinearSystems2.Internal.Eigenvalue;
-      import Modelica_LinearSystems2.Math.Complex;
+        import Modelica;
+        import Modelica.Utilities.Strings;
+        import Modelica_LinearSystems2;
+        import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2.Internal.Eigenvalue;
+        import Modelica_LinearSystems2.Math.Complex;
 
       input Eigenvalue evSorted[:];
       input Complex evecComplex[:,:];
@@ -2111,25 +2132,49 @@ encapsulated package Analysis
           end if;
         end if;
 
-        print("<tr>\n <td style=\"text-align:left\"> &nbsp; " + xNames2[i] + " </td> <td style=\"text-align:left\"> &nbsp; "
-           + " is composed of " + String(100*absMax1, format="5.1f") + "% by z[" +
-          number1 + "]" + (if two then " <br>" + " &nbsp; " + " is composed of " +
-          String(100*absMax2, format="5.1f") + "% by z[" + number2 + "]" else "") + " </td> <td style=\"text-align:center\"> &nbsp; "
-           + number1 + (if two then "<br> &nbsp; " + number2 else Strings.repeat(9))
-           + " </td> <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then
-                "---" else String(w1, format="9.4f")) + (if two then "<br> &nbsp; "
-           + (if iw2 <= nReal then "---" else String(w2, format="9.4f")) else
-          Strings.repeat(9)) + " </td> <td style=\"text-align:center\"> &nbsp; " +
-          (if iw1 <= nReal then "---" else String(d1, format="9.4f")) + (if two then
-                "<br> &nbsp; " + (if iw2 <= nReal then "---" else String(d2,
-          format="9.4f")) else "") + " </td> <td style=\"text-align:center\"> &nbsp; "
-           + (if (iw1 <= nReal) then String(evSorted[i].timeConstant, format="9.4f") else
-                "---") + (if two then "<br> &nbsp; " + (if (iw2 <= nReal and abs(
-          cev[maxIndex2].re) > 1e-10) then String(1/abs(cev[maxIndex2].re),
-          format="9.4f") else "---") else "") + " </td> </tr> ", fileName);
+        if two then
+          print("<tr>\n  <td rowspan=2 style=\"text-align:left\"> &nbsp; " + xNames2[i] + " </td>"
+            + "\n  <td style=\"text-align:left\"> &nbsp; is composed of " + String(100*absMax1, format="5.1f") + "% by z[" + number1 + "]</td>"
+            + "\n  <td style=\"text-align:center\"> &nbsp; " + number1 + "</td>"
+            + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then "---" else String(w1, format="9.4f")) + "</td>"
+            + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then "---" else String(d1, format="9.4f")) + "</td>"
+            + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then String(evSorted[i].timeConstant, format="9.4f") else "--- </td>")
+            + "\n</tr>\n<tr>"
+            + "\n  <td style=\"text-align:left\"> &nbsp; is composed of " + String(100*absMax2, format="5.1f") + "% by z[" + number2 + "]</td>"
+            + "\n  <td style=\"text-align:center\"> &nbsp; " + number2 + "</td>"
+            + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw2 <= nReal then "---" else String(w2, format="9.4f")) + "</td>"
+            + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw2 <= nReal then "---" else String(d2, format="9.4f")) + "</td>"
+            + "\n  <td style=\"text-align:center\"> &nbsp; " + (if (iw2 <= nReal  and abs(cev[maxIndex2].re) > 1e-10) then
+              String(1/abs(cev[maxIndex2].re), format="9.4f") else "--- </td>\n</tr>"),
+            fileName);
+        else
+          print("<tr>\n  <td style=\"text-align:left\"> &nbsp; " + xNames2[i] + " </td>"
+            + "\n  <td style=\"text-align:left\"> &nbsp; is composed of " + String(100*absMax1, format="5.1f") + "% by z[" + number1 + "]</td>"
+            + "\n  <td style=\"text-align:center\"> &nbsp; " + number1 + "</td>"
+            + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then "---" else String(w1, format="9.4f")) + "</td>"
+            + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then "---" else String(d1, format="9.4f")) + "</td>"
+            + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then String(evSorted[i].timeConstant, format="9.4f") else "--- </td>\n</tr>"),
+            fileName);
+        end if;
+    //     print("<tr>\n  <td style=\"text-align:left\"> &nbsp; " + xNames2[i] + " </td>\n  <td style=\"text-align:left\"> &nbsp; "
+    //        + " is composed of " + String(100*absMax1, format="5.1f") + "% by z[" +
+    //       number1 + "]" + (if two then " <br>" + " &nbsp; " + " is composed of " +
+    //       String(100*absMax2, format="5.1f") + "% by z[" + number2 + "]" else "") + " </td> <td style=\"text-align:center\"> &nbsp; "
+    //        + number1 + (if two then "<br> &nbsp; " + number2 else Strings.repeat(9))
+    //        + " </td> <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then
+    //             "---" else String(w1, format="9.4f")) + (if two then "<br> &nbsp; "
+    //        + (if iw2 <= nReal then "---" else String(w2, format="9.4f")) else
+    //       Strings.repeat(9)) + " </td>\n  <td style=\"text-align:center\"> &nbsp; " +
+    //       (if iw1 <= nReal then "---" else String(d1, format="9.4f")) + (if two then
+    //             "<br> &nbsp; " + (if iw2 <= nReal then "---" else String(d2,
+    //       format="9.4f")) else "") + " </td>\n  <td style=\"text-align:center\"> &nbsp; "
+    //        + (if (iw1 <= nReal) then String(evSorted[i].timeConstant, format="9.4f") else
+    //             "---") + (if two then "<br> &nbsp; " + (if (iw2 <= nReal and abs(
+    //       cev[maxIndex2].re) > 1e-10) then String(1/abs(cev[maxIndex2].re),
+    //       format="9.4f") else "---") else "") + " </td>\n</tr> ", fileName);
 
       end for;
-      print("</table>\n\n</body>\n</html>", fileName);
+      print("</table>", fileName);
 
     end printTab3;
 
@@ -2181,10 +2226,11 @@ encapsulated package Analysis
         timeConstant := if abs(systemZeros[i].re) > 10*Modelica.Constants.eps then
                 1/abs(systemZeros[i].re) else 1/(10*Modelica.Constants.eps);
 
-        print("<tr>\n <td style=\"text-align:left\"> &nbsp; " + number + " </td> <td> &nbsp; "
-           + String(systemZeros[i].re, format="14.4e") + " </td> <td> &nbsp; " +
-          String(timeConstant, format="9.4f") + " </td> <td style=\"text-align:center\"> &nbsp; "
-           + "---" + " </td> <td style=\"text-align:center\"> &nbsp; " + "---" + " </td> </tr> ",
+        print("<tr>\n  <td style=\"text-align:left\"> &nbsp; " + number + " </td>"
+          + "\n  <td> &nbsp; " + String(systemZeros[i].re, format="14.4e") + " </td>"
+          + "\n  <td> &nbsp; " + String(timeConstant, format="9.4f") + " </td>"
+          + "\n  <td style=\"text-align:center\"> &nbsp; --- </td>"
+          + "\n  <td style=\"text-align:center\"> &nbsp; --- </td>\n</tr>",
           fileName);
 
       end for;
@@ -2196,12 +2242,13 @@ encapsulated package Analysis
        // Determine frequency and number of corresponding zero
         (freq,damp) := Complex.frequency(systemZeros[i]);
 
-        print("<tr>\n <td style=\"text-align:left\"> &nbsp; " + number + " </td> <td style=\"text-align:left\"> &nbsp; "
-           + String(systemZeros[i].re, format="14.4e") + " &plusmn; " + String(
-          systemZeros[i].im, format="12.4e") + "j" + " </td> <td style=\"text-align:center\"> &nbsp; "
-           + "---" + " </td> <td style=\"text-align:left\"> &nbsp; " + String(
-          freq, format="9.4f") + " </td> <td style=\"text-align:left\"> &nbsp; " +
-          String(damp, format="9.4f") + " </td> </tr> ", fileName);
+        print("<tr>\n  <td style=\"text-align:left\"> &nbsp; " + number + " </td>"
+          + "\n  <td style=\"text-align:left\"> &nbsp; " + String(systemZeros[i].re, format="14.4e")
+          + " &plusmn; " + String(systemZeros[i].im, format="12.4e") + "j </td>"
+          + "\n  <td style=\"text-align:center\"> &nbsp; --- </td>"
+          + "\n  <td style=\"text-align:left\"> &nbsp; " + String(freq, format="9.4f") + " </td>"
+          + "\n  <td style=\"text-align:left\"> &nbsp; " + String(damp, format="9.4f") + " </td>\n</tr>",
+          fileName);
 
       end for;
 
