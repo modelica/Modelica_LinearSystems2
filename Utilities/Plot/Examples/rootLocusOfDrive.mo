@@ -1,19 +1,12 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function rootLocusOfDrive "Plot the root locus of a drive with varying load"
 algorithm
-  /*
   Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel(
      "Modelica.Mechanics.Rotational.Examples.First",
      modelParam={Modelica_LinearSystems2.Records.ParameterVariation(
-                      Name="Jload", Min=1, Max=20, nVar=30, Unit="kg.m2")});
-  */
-
-  Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel(
-     "Modelica.Mechanics.Rotational.Examples.First",
-     modelParam={Modelica_LinearSystems2.Records.ParameterVariation(
-                      Name="Jload", grid="Equidistant", nPoints=30, Min=1, Max=20, Unit="kg.m2"),
+                      Name="Jload", grid=Modelica_LinearSystems2.Types.Grid.Equidistant, nPoints=30, Min=1, Max=20),
                  Modelica_LinearSystems2.Records.ParameterVariation(
-                      Name="Jmotor", Value=0.1, Unit="kg.m2")});
+                      Name="Jmotor", Value=0.1)});
 
     annotation(__Dymola_interactive=true, Documentation(info="<html>
 <p>

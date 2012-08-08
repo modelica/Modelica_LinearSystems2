@@ -2,6 +2,8 @@ within Modelica_LinearSystems2;
 package Types "Package of type definitions"
   extends Modelica.Icons.Package;
 
+
+
   annotation (
     preferedView="info",
     Documentation(info="<html>

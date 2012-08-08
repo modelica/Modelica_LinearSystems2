@@ -3,7 +3,7 @@ function rootLocusOfModel
   "Compute and plot the root locus of one parameter of a model (= eigen values of the model that is linearized for every parameter value)"
   input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
   input Modelica_LinearSystems2.Records.ParameterVariation modelParam[:]
-    "Model parameter to be varied and modified values for other parameters";
+    "Model parameter to be varied (exactly one) and values for other parameters";
   input Boolean linearizeAtInitial=true
     "= true, if linearization at inital time; otherwise simulate until t_linearize"
      annotation (choices(__Dymola_checkBox=true));

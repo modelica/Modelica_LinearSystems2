@@ -1,10 +1,10 @@
 within Modelica_LinearSystems2.Utilities.Import;
 function rootLocusOfModel
   "Return the root locus of one parameter (= eigen values of the model that is linearized for every parameter value)"
-  import Modelica.Utilities.Streams.print;
+  import Modelica_LinearSystems2.Types.Grid;
   input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
   input Modelica_LinearSystems2.Records.ParameterVariation modelParam[:]
-    "Model parameter to be varied and modified values for other parameters";
+    "Model parameter to be varied (exactly one) and values for other parameters";
   input Boolean linearizeAtInitial=true
     "= true, if linearization at inital time; otherwise simulate until t_linearize"
      annotation (choices(__Dymola_checkBox=true));
@@ -58,8 +58,8 @@ algorithm
 
   elseif nParam == 1 then
      // Exactly one parameter defined
-     assert(modelParam[1].grid == "Equidistant" or
-            modelParam[1].grid == "Logarithmic",  "One parameter defined, but grid is not defined as Equidistant or Logarithmic");
+     assert(modelParam[1].grid == Grid.Equidistant or
+            modelParam[1].grid == Grid.Logarithmic,  "One parameter defined, but grid is not defined as Equidistant or Logarithmic");
      np :=modelParam[1].nPoints;
      index_p_var :=1;
      OK :=closeModel();
@@ -68,9 +68,9 @@ algorithm
      // More as one parameter defined; find the parameter to be varied
      index_p_var :=0;
      for i in 1:nParam loop
-        if modelParam[i].grid == "Value" then
+        if modelParam[i].grid == Grid.OneValue then
            // do nothing
-        elseif modelParam[i].grid == "Equidistant" or modelParam[i].grid == "Logarithmic" then
+        elseif modelParam[i].grid == Grid.Equidistant or modelParam[i].grid == Grid.Logarithmic then
            if index_p_var > 0 then
               Modelica.Utilities.Streams.error("Parameters " + modelParam[index_p_var].Name + " and " + modelParam[i].Name +
                                                " shall be varied,\n" + "but this is only possible for one parameter.\n"+
@@ -98,7 +98,7 @@ algorithm
 
   // Parameter that is varied
   paramName :=modelParam[index_p_var].Name;
-  paramUnit :=modelParam[index_p_var].Unit;
+  paramUnit :="";
 
   // Check min/max values
   Min :=modelParam[index_p_var].Min;
@@ -107,7 +107,7 @@ algorithm
   assert(Max <  1e99, "Maximum value not set for parameter to be varied: " + paramName);
 
   // Compute all parameter values
-  if modelParam[index_p_var].grid == "Logarithmic" then
+  if modelParam[index_p_var].grid == Grid.Logarithmic then
      // logarithmic spacing
      assert(Min*Max >= 0.0, "Since grid = Logarithmic for parameter to be varied: " + paramName +
                             "\nThe Min and Max values need to have the same sign.");

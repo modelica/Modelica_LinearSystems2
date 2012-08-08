@@ -13,4 +13,3 @@ type Method = enumeration(
   "Enumeration of discretization methods"
     annotation (Evaluate=true, Documentation(info="<html>
 </html>"));
-
