@@ -665,7 +665,22 @@ encapsulated package Analysis
     Plot.Records.Diagram diagram2;
     Boolean instableZeros=false;
 
+    String filePathOnly "NOT USED: Path to fileName";
+    String fileNameOnly "Name of fileName without extension and path";
+    String fileExtOnly "Extension of fileName";
+    String fileNameImg "General name (without extension) of file for a plot";
+    String fileNameImg2="none" "Current name of file for a plot";
+
   algorithm
+    // ---------------------------------------------------------------------------------------------------
+    // The correct HTML format generated with this function can be checked with following commands:
+    //   Modelica_LinearSystems2.StateSpace.Analysis.analysis(Modelica_LinearSystems2.StateSpace(A=[2,1,1;1,1,1;1,2,2], B=[1;2.2;3], C=[2,4,6;3,8,5], D=[6;4], yNames={"y1_test","y2_test"}, xNames={"xx1","xx2","xx3"}, uNames={"u1_test"}), description="Test file in HTML format from function 'analysis'.");
+    //   Modelica_LinearSystems2.StateSpace.Analysis.analysis(Modelica_LinearSystems2.StateSpace(A=[2, 1.43, 12, 3; 1, 1, 1, 43; 1, 3, 2, 2; 1, 1, 4.2, 1.2], B=[1, 2; 2.2, 3; 3, 1; 4, 0], C=[25, 1.4, 6.3, 1; 0.3, 8, 5, 1; 1, 3, 2, 2], D=[6, 4; 4, 2; 6, 5], yNames={"y1_test","y2_te","y3_"}, xNames={"xx1","x2","xxx3","xx4"}, uNames={"u1_test","u2_test"}));
+    // ---------------------------------------------------------------------------------------------------
+
+    (filePathOnly, fileNameOnly, fileExtOnly) := Modelica.Utilities.Files.splitPathName(fileName);
+    fileNameImg:=fileNameOnly;
+
     // Get eigenvalues
     // ---------------
     (eval,levec,revec) := Modelica_LinearSystems2.Math.Matrices.eigenValues(ss.A);
@@ -764,6 +779,11 @@ encapsulated package Analysis
         dummyFileName);
       Modelica.Utilities.Streams.readFile(dummyFileName);
       StateSpace.Plot.step(ss=ss);
+  //     fileNameImg2 := fileNameImg + "Step.png";
+  //     ExportPlotAsImage(
+  //       fileName=fileNameImg2,
+  //       id=-1,
+  //       includeInLog=false);
     end if;
 
     // Plot Bode plots
@@ -772,6 +792,11 @@ encapsulated package Analysis
       print("<html>\n<body>\n<p>\n<b>Bode plots</b>\n</p>\n</body>\n</html>", dummyFileName);
       Modelica.Utilities.Streams.readFile(dummyFileName);
       StateSpace.Plot.bodeMIMO(ss=ss);
+  //     fileNameImg2 := fileNameImg + "BodeMIMO1.png";
+  //     ExportPlotAsImage(
+  //       fileName=fileNameImg2,
+  //       id=-1,
+  //       includeInLog=false);
     end if;
 
     // Calculate the number of real eigenvalues
@@ -1001,9 +1026,10 @@ encapsulated package Analysis
       String td_align=if centered then "  <td style=\"text-align:center\">" else "  <td style=\"text-align:right\">";
 
       protected
-      Integer hSizeOK= if hSize<1 then 1 else if hSize > 5 then 5 else hSize;
+      Integer hSizeOK= if hSize<1 then 1 else if hSize > 4 then 4 else hSize;
       String heading= "h"+String(hSizeOK);
       String heading2= "h"+String(hSizeOK+1);
+      String heading3= "h"+String(hSizeOK+2);
 
     algorithm
       // ---------------------------------------------------------------------------------------------------
@@ -1019,24 +1045,27 @@ encapsulated package Analysis
         StateSpace.Analysis.analysis.printHTMLbasics(fileName, true);
       end if;
 
-      //print("\n<"+heading+">System report</"+heading+">", fileName);
-      //print("\n<"+heading2+">Matrices</"+heading2+">", fileName);
-      print("<h1>System report</h1>", fileName);
-      print("\n<h2>General information</h2>", fileName);
+      print("<"+heading+">System report</"+heading+">", fileName);
+      print("\n<"+heading2+">General information</"+heading2+">", fileName);
+      //print("<h1>System report</h1>", fileName);
+      //print("\n<h2>General information</h2>", fileName);
 
       if systemName == "" then
       else
-        print("\n<h3>System name</h3>", fileName);
+        print("\n<"+heading3+">System name</"+heading3+">", fileName);
+        //print("\n<h3>System name</h3>", fileName);
         print("<p>\n"+systemName+"\n</p>", fileName);
       end if;
 
       if description == "" then
       else
-        print("\n<h3>Description</h3>", fileName);
+        print("\n<"+heading3+">Description</"+heading3+">", fileName);
+        //print("\n<h3>Description</h3>", fileName);
         print("<p>\n"+description+"\n</p>", fileName);
       end if;
 
-      print("\n<h3>Matrices</h3>", fileName);
+      print("\n<"+heading3+">Matrices</"+heading3+">", fileName);
+      //print("\n<h3>Matrices</h3>", fileName);
       print("<p>\nThe system described in the state space representation\n</p>", fileName);
       print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
          + "cellpadding=\"3\" border=\"0\"> ", fileName);
@@ -1045,7 +1074,7 @@ encapsulated package Analysis
         fileName);
       print("</table>\n<p>\nis defined by\n</p>", fileName);
 
-      // ======================
+      // =====================
       // Print matices A and B
       // =====================
       print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
@@ -1087,18 +1116,11 @@ encapsulated package Analysis
           print("  <td>&nbsp;</td>", fileName);
         end for;
 
-        if nu > 0 then
-          print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
-          print("  <td>" + ss.xNames[i1] + " </td>", fileName);
-          for i2 in 1:nu loop
-            print(td_align + String(ss.B[i1, i2], format=format) + " </td>",
-              fileName);
-          end for;
-        else
-          for i1 in 1:3 loop
-            print("  <td>&nbsp;</td>", fileName);
-          end for;
-        end if;
+        print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
+        print("  <td>" + (if nu>0 then ss.xNames[i1] else "&nbsp;") + " </td>", fileName);
+        for i2 in 1:nu loop
+          print(td_align + String(ss.B[i1, i2], format=format) + " </td>", fileName);
+        end for;
         print("</tr>", fileName);
       end for;
 
@@ -1140,34 +1162,28 @@ encapsulated package Analysis
         for i2 in 1:dist loop
           print("  <td>&nbsp;</td>", fileName);
         end for;
-        if nu > 0 then
-          print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
-          print("  <td>" + ss.xNames[i1] + " </td>", fileName);
-          for i2 in 1:nu loop
-            print(td_align + String(ss.B[i1, i2], format=format) + " </td>",
-              fileName);
-          end for;
-        else
-          for i1 in 1:3 loop
-            print("  <td>&nbsp;</td>", fileName);
-          end for;
-        end if;
-           //nu>0
+        print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
+        print("  <td>" + (if nu>0 then ss.xNames[i1] else "&nbsp;") + " </td>", fileName);
+        for i2 in 1:nu loop
+          print(td_align + String(ss.B[i1, i2], format=format) + " </td>", fileName);
+        end for;
         print("</tr>", fileName);
       end for;
-
-      print("</table>\n", fileName);
-      print("<br>&nbsp;<br>", fileName);
 
       // ======================
       // Print matrices C and D
       // ======================
-      print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-         + "cellpadding=\"3\" border=\"0\">", fileName);
-
-      // Print table header
-      // ------------------
       if ny > 0 then
+        // Print empty row between A,B and C,D
+        // -----------------------------------
+        print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
+        for i1 in 1:nx+dist+nu loop
+          print("  <td>&nbsp;</td>", fileName);
+        end for;
+        print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n</tr>", fileName);
+
+        // Print table header
+        // ------------------
         print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
         for i1 in 1:nx loop
           print("  <td style=\"text-align:center\" valign=\"top\">&nbsp; " + ss.xNames[i1] + " &nbsp;</td>",
@@ -1182,9 +1198,7 @@ encapsulated package Analysis
         end for;
 
         print("</tr>", fileName);
-      end if;
 
-      if ny > 0 then
         // Print upper parts of C and D
         // ----------------------------
         for i1 in 1:c2 loop
@@ -1236,34 +1250,36 @@ encapsulated package Analysis
           print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td> " + ss.yNames[i1] + " </td>",
             fileName);
           for i2 in 1:nx loop
-            print(td_align + String(ss.C[i1, i2], format=format) + " </td>",
-              fileName);
+            print(td_align + String(ss.C[i1, i2], format=format) + " </td>", fileName);
           end for;
 
           for i2 in 1:dist loop
             print("  <td>&nbsp;</td>", fileName);
           end for;
           print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
-          print("  <td>" + ss.yNames[i1] + " </td>", fileName);
+          print("  <td>" + (if nu>0 then ss.yNames[i1] else "&nbsp;") + " </td>", fileName);
           for i2 in 1:nu loop
-            print(td_align + String(ss.D[i1, i2], format=format) + " </td>",
-              fileName);
+            print(td_align + String(ss.D[i1, i2], format=format) + " </td>", fileName);
           end for;
           print("</tr>", fileName);
         end for;
+
+        print("</table>", fileName);
+
       else
+        print("</table>\n", fileName);
+        print("<p></p>", fileName);
 
         // Matrices C and D are empty
         // --------------------------
+        print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+           + "cellpadding=\"3\" border=\"0\">", fileName);
         print("<tr>\n  <td>C</td>\n  <td>=</td>\n  <td>[ ],  empty matrix: " +String(ny)+" by "+String(nx) + " </td>", fileName);
         // Print space between matrix C and D
         print("  <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>", fileName);
-
         print("  <td>D</td>\n  <td>=</td>\n  <td>[ ],  empty matrix: " +String(ny)+" by "+String(nu) + " </td>", fileName);
-        print("</tr>", fileName);
+        print("</tr>\n</table>", fileName);
       end if;
-
-      print("</table>", fileName);
 
       if ny==0 and nu==0 then
         print("<p>\n<b>Note</b>, that matrices <b>B</b> and <b>C</b> are empty matrices, i.e. the system has neither inputs nor outputs!\n</p>", fileName);
@@ -2000,7 +2016,6 @@ encapsulated package Analysis
 
       print("</table>", fileName);
     end printTab2;
-
 
     encapsulated function printTab3
         "Print the table with eigenvalues in html format on file"
