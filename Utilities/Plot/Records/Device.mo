@@ -14,6 +14,6 @@ record Device "Properties of a device"
     "[dpi] Image resolution in window if applicable (e.g. unscaled window)"   annotation(Dialog);
 
   Boolean autoLineColor = true
-    "if automatic line properties: distinguish curves by color otherwise by line style"
+    "If automatic line properties: distinguish curves by color otherwise by line style"
        annotation(Dialog,choices(__Dymola_checkBox=true));
 end Device;

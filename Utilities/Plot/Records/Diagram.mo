@@ -17,17 +17,17 @@ record Diagram
   Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
   Boolean uniformScaling = false
     "True, if same vertical and horizontal axis increment"
-      annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
+    annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
 
   /* group "Legend" (Legend properties) */
   Boolean legend = true "True, if legend is shown" annotation(Dialog(group="Legend"),choices(__Dymola_checkBox=true));
   Boolean legendFrame=false "True, if frame around legend"
-        annotation(Dialog(group="Legend"),   choices(__Dymola_checkBox=true));
+    annotation(Dialog(group="Legend"),   choices(__Dymola_checkBox=true));
   Boolean legendHorizontal=true
     "True, if horizontal legend (provided it is meaningful)"
-        annotation(Dialog(group="Legend"),choices(__Dymola_checkBox=true));
+    annotation(Dialog(group="Legend"),choices(__Dymola_checkBox=true));
   Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation legendLocation=
-      Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation.Above
+    Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation.Above
     "Legend placement" annotation(Dialog(group="Legend"));
 
 end Diagram;

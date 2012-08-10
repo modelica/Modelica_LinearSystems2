@@ -3,22 +3,22 @@ record RootLocusDiagram "Properties of a root locus diagram"
   extends Modelica.Icons.Record;
 
   String heading=""
-    "Heading displayed above diagram (if empty, default heading)"                 annotation(Dialog);
+    "Heading displayed above diagram (if empty, default heading)" annotation(Dialog);
   String ReName="Re"
-    "Name of the real part of the eigen values (shown in tool tip)"                   annotation(Dialog);
+    "Name of the real part of the eigen values (shown in tool tip)" annotation(Dialog);
   String ImName="Im"
-    "Name of the imaginary part of the eigen values (shown in tool tip)"                   annotation(Dialog);
+    "Name of the imaginary part of the eigen values (shown in tool tip)" annotation(Dialog);
   Real heightRatio = 0.8 "Height of diagram = heightRatio*diagramWidth" annotation(Dialog);
   Boolean grid=true "True, if grid is shown" annotation(Dialog,  choices(__Dymola_checkBox=true));
   Boolean labelWithParam=false
     "True, if values of parameter shall be shown along the curves"
-       annotation(Dialog,  choices(__Dymola_checkBox=true));
+    annotation(Dialog,  choices(__Dymola_checkBox=true));
 
   /* group "Axes" (Axes properties) */
   String xLabel="Real part of eigenvalues"
-    "String displayed at horizontal axis"                                        annotation(Dialog(group="Axes"));
+    "String displayed at horizontal axis" annotation(Dialog(group="Axes"));
   String yLabel="Imaginary part of eigenvalues"
-    "String displayed at vertical axis"                                             annotation(Dialog(group="Axes"));
+    "String displayed at vertical axis" annotation(Dialog(group="Axes"));
   Boolean logX = false "True, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
   Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
   Boolean uniformScaling = false
