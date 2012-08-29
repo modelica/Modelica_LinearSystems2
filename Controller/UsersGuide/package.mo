@@ -1,9 +1,10 @@
 within Modelica_LinearSystems2.Controller;
 package UsersGuide "Controllers Tutorial"
 
+
   annotation (
-  	DocumentationClass=true,
-  	Documentation(info="<html>
+   DocumentationClass=true,
+   Documentation(info="<html>
 <p>
 Package <b>Controller</b> provides blocks
 to conveniently model and simulate sampled data systems where it is

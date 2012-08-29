@@ -4,7 +4,8 @@ package RootLocusOld
     "Plot root locus of nonlinear Modelica model by linearizing the model for variations of one model parameter"
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.WorkInProgress.RootLocusOld.Types.MarkerStyles;
+    import
+      Modelica_LinearSystems2.WorkInProgress.RootLocusOld.Types.MarkerStyles;
 
     input String modelName "Name of the Modelica model"
       annotation(Dialog(__Dymola_translatedModel(caption="Model to be linearized for the root locus")));

@@ -864,9 +864,9 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 
     encapsulated function denominatorDegree
       "Return denominator degree of a discrete transfer function"
-          import Modelica;
-          import Modelica_LinearSystems2.Math.Polynomial;
-          import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
 
       input DiscreteTransferFunction dtf
         "discrete transfer function of a system";
@@ -900,7 +900,6 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
     end denominatorDegree;
 
   end Analysis;
-
 
   encapsulated package Plot
     "Package of functions to plot discrete transfer function responses"
@@ -1040,12 +1039,12 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
     encapsulated function timeResponse
       "Plot the time response of a system represented by a discrete transfer function. The response type is selectable"
-          import Modelica;
-          import Modelica_LinearSystems2;
-          import Modelica_LinearSystems2.DiscreteTransferFunction;
-          import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Types.TimeResponse;
 
-          import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
       input Modelica_LinearSystems2.DiscreteTransferFunction dtf;
     //  input Real dt=0 "Sample time [s]";
@@ -1179,12 +1178,12 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
     encapsulated function ramp
       "Ramp response plot of a discrete transfer function"
-          import Modelica;
-          import Modelica_LinearSystems2;
-          import Modelica_LinearSystems2.DiscreteTransferFunction;
-          import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Types.TimeResponse;
 
-          import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
       input DiscreteTransferFunction dtf;
       input Real tSpan=0 "Simulation time span [s]";
@@ -1215,12 +1214,12 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
     encapsulated function initialResponse
       "Initial condition response plot of a discrete transfer function"
-          import Modelica;
-          import Modelica_LinearSystems2;
-          import Modelica_LinearSystems2.DiscreteTransferFunction;
-          import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Types.TimeResponse;
 
-          import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
       input Modelica_LinearSystems2.DiscreteTransferFunction dtf;
       input Real tSpan=0 "Simulation time span [s]";
@@ -1332,12 +1331,12 @@ DiscreteZerosAndPoles constructor.
 
     function toDiscreteStateSpace
       "Convert a DiscreteTransferFunction into a DiscreteStateSpace representation"
-          import Modelica;
-          import Modelica_LinearSystems2;
-          import Modelica_LinearSystems2.DiscreteTransferFunction;
-          import Modelica_LinearSystems2.TransferFunction;
-          import Modelica_LinearSystems2.DiscreteStateSpace;
-          import Modelica.Math.Vectors;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica.Math.Vectors;
 
      input DiscreteTransferFunction dtf
         "discrete transfer function of a system";
@@ -1441,8 +1440,8 @@ with
     encapsulated function fromFile
       "Generate a DiscreteTransferFunction data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
 
-          import Modelica_LinearSystems2.DiscreteTransferFunction;
-          import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Math.Polynomial;
       input String fileName="dtf.mat" "Name of the transfer function data file"
                                                                                   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                           caption="transfer function data file")));
@@ -1486,11 +1485,11 @@ with
   function fromModel
       "Generate a DiscreteTransferFunction record array from a state space representation resulted from linearization of a model"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
-    import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
 
     input String modelName "Name of the Modelica model" annotation(Dialog(translatedModel));
     input Real T_linearize=0

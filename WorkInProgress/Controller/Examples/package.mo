@@ -3,7 +3,6 @@ package Examples "Package of examples to demonstrate the usage of controllers in
   extends Modelica.Icons.ExamplesPackage;
 
 
-
   annotation (Documentation(info="<html>
 <p>
 This package contains example function calls to demonstrate the

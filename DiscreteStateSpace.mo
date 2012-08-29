@@ -586,7 +586,7 @@ public
 
 encapsulated operator '-'
     "Contains operators for subtraction of discrete state space systems"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
   function subtract
@@ -1258,16 +1258,16 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
 
 encapsulated package Analysis
     "Package of functions to analyse discrete state space system represented by a DiscreteStateSpace record"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 
   encapsulated function eigenValues
       "Calculate the eigenvalues of a linear discrete state space system and write them in a complex vector"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input DiscreteStateSpace dss "Discrete state space system";
     output Complex eigvalues[size(dss.A, 1)]=Complex.eigenValues(dss.A)
@@ -1315,10 +1315,10 @@ The eigenvalues <b>ev</b>_d of the discrete system are related to the eigenvalue
   encapsulated function timeResponse
       "Calculate the time response of a discrete state space system"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
-    import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Types.TimeResponse;
 
     input TimeResponse response=TimeResponse.Step;
     extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(redeclare Real
@@ -1457,9 +1457,9 @@ are calculated for each time step t=k*dss.Ts.
   encapsulated function impulseResponse
       "Calculate the impulse time response of a discrete state space system"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
     // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete;
     protected
@@ -1542,9 +1542,9 @@ the \"ImpulseExact\" conversion from continuous system to discrete system.
   encapsulated function stepResponse
       "Calculate the step time response of a discrete state space system"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
     // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete;
     protected
@@ -1630,9 +1630,9 @@ the \"StepExact\" conversion from continuous system to discrete system.
   encapsulated function rampResponse
       "Calculate the ramp time response of a discrete state space system"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
     // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete;
     protected
@@ -1718,9 +1718,9 @@ requires the \"RampExact\" conversion from continuous system to discrete system.
   encapsulated function initialResponse
       "Calculate the time response of a discrete state space system for given initial condition and zero inputs"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
     input Real x0[:]=fill(0, 0) "Initial state vector";
 
@@ -2280,8 +2280,7 @@ the norm of each <b>K</b>i is minimized [1].
 <dd> <b>A Schur method for pole assignment</b>.
      IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
 </dl>
-</html>",
-         revisions="<html>
+</html>",revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -2574,11 +2573,11 @@ end timeResponse;
   encapsulated function impulse
       "Impulse response plot of a discrete state space system"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
-    import Modelica_LinearSystems2.Types.TimeResponse;
-    import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
     input DiscreteStateSpace dss;
     input Real tSpan=0 "Simulation time span [s]";
@@ -2659,11 +2658,11 @@ This function plots the impulse responses of a state space system for each syste
   encapsulated function step
       "Step response plot of a discrete state space system"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
-    import Modelica_LinearSystems2.Types.TimeResponse;
-    import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
     input DiscreteStateSpace dss;
     input Real tSpan=0 "Simulation time span [s]";
@@ -2745,11 +2744,11 @@ This function plots the discrete step responses of a state space system for each
   encapsulated function ramp
       "Ramp response plot of a discrete state space system"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
-    import Modelica_LinearSystems2.Types.TimeResponse;
-    import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
     input DiscreteStateSpace dss;
     input Real tSpan=0 "Simulation time span [s]";
@@ -2919,13 +2918,13 @@ end Plot;
     encapsulated function toDiscreteZerosAndPoles
       "Generate a discrete zeros-and-poles representation from a discrete SISO state space representation"
 
-          import Modelica;
-          import Modelica_LinearSystems2;
-          import Modelica_LinearSystems2.StateSpace;
-          import Modelica_LinearSystems2.ZerosAndPoles;
-          import Modelica_LinearSystems2.Math.Complex;
-          import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-          import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
       input DiscreteStateSpace dss "StateSpace object";
       output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
@@ -3075,11 +3074,11 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
     encapsulated function toDiscreteZerosAndPolesMIMO
       "Generate a zeros-and-poles representation from a MIMO state space representation"
 
-          import Modelica;
-          import Modelica_LinearSystems2;
-          import Modelica_LinearSystems2.Math.Complex;
-          import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-          import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
       input DiscreteStateSpace dss "DiscreteStateSpace object";
 
@@ -3196,11 +3195,11 @@ of a system from discrete state space representation, i.e. isolating the uncontr
   function toDiscreteTransferFunction
       "Generate a TransferFunction data record from a SISO DiscreteStateSpace data record"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteTransferFunction;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
     input DiscreteStateSpace dss "DiscreteStateSpace object";
 
@@ -3273,12 +3272,12 @@ discrete state space system into a discrete zeros and poles representation first
 
   function toDiscreteTransferFunctionMIMO
       "Generate a discrete transfer function of a MIMO system from discrete state space representation"
-    import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2;
 
-    import Modelica;
-    import Modelica_LinearSystems2.DiscreteTransferFunction;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
   input DiscreteStateSpace dss "DiscreteStateSpace object";
 
@@ -3601,9 +3600,9 @@ ss.B2  = [0.000437113227802044;
 
     function timeResponseSamples
       "Estimate reasonable discretisation sample time and simulation time span for time response plot"
-          import Modelica;
-          import Modelica_LinearSystems2;
-          import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
 
       input Modelica_LinearSystems2.DiscreteStateSpace dss;
       output Real tSpan "Time span";
@@ -3682,9 +3681,9 @@ Note that the system input <b>u</b> is equal to zero.
 
     encapsulated function timeResponse1
       "Compute time response of DiscreteStateSpace system"
-          import Modelica;
-          import Modelica_LinearSystems2;
-          import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
 
       input DiscreteStateSpace dss "Linear system in discrete state space form";
       input Real u[:,size(dss.B, 2)]=ones(3, size(dss.B, 2))
@@ -3890,4 +3889,3 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
   end Internal;
 
 end DiscreteStateSpace;
-

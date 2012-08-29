@@ -626,9 +626,9 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
 
   encapsulated function rampResponse "Calculate the ramp time response"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.TransferFunction;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.TransferFunction;
 
       // Input/Output declarations of time response functions:
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
@@ -1548,12 +1548,12 @@ algorithm
   encapsulated function polesAndZeros
       "Plot poles and/or the zeros of a transfer function"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.TransferFunction;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.TransferFunction;
 
-    import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
     input TransferFunction tf "Linear system in transfer function form";
     input Boolean poles=true "= true, to plot the poles of tf" annotation(choices(__Dymola_checkBox=true));
@@ -1763,11 +1763,11 @@ This function plots the bode-diagram of a transfer function.
   encapsulated function timeResponse
       "Plot the time response of a system represented by a transfer function. The response type is selectable"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.TransferFunction;
-    import Modelica_LinearSystems2.Types.TimeResponse;
-    import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
     input Modelica_LinearSystems2.TransferFunction tf;
     input Real dt=0 "Sample time [s]";
@@ -1855,12 +1855,12 @@ This function plots the time response of a transfer function. The character of t
   end timeResponse;
 
   encapsulated function impulse "Impulse response plot"
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.TransferFunction;
-    import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Types.TimeResponse;
 
-    import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
     input Modelica_LinearSystems2.TransferFunction tf "transfer function";
     input Real dt=0 "Sample time [s]";
@@ -2554,10 +2554,10 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
   function fromModel
       "Generate a TransferFunction data record from a state space representation resulted from linearization of a model"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.TransferFunction;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.TransferFunction;
 
     input String modelName "Name of the Modelica model" annotation(Dialog(translatedModel));
     input Real T_linearize=0

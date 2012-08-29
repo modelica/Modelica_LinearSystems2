@@ -352,7 +352,7 @@ which is equal to
 
 encapsulated operator '-'
     "Contains operators for subtraction of discrete zeros and poles descriptions"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
   function subtract "Subtract two DiscreteZerosAndPoles (dzp1 - dzp2)"
       import Modelica;
@@ -446,14 +446,14 @@ end '-';
 
 encapsulated operator '*'
     "Contains operators for multiplication of discrete zeros and poles records"
-  import Modelica;
+    import Modelica;
   extends Modelica.Icons.Package;
 function 'dzp*dzp'
       "Multiply two DiscreteZerosAndPoles transfer functions (dzp1 * dzp2)"
 
-  import Modelica;
-  import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-  import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2;
 
   input DiscreteZerosAndPoles dzp1;
   input DiscreteZerosAndPoles dzp2;
@@ -497,9 +497,9 @@ end 'dzp*dzp';
 function 'r*dzp'
       "Multiply a real number with a discrete DiscreteZerosAndPoles transfer function  (r * dzp2)"
 
-  import Modelica;
-  import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-  import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2;
 
   input Real r;
   input DiscreteZerosAndPoles dzp;
@@ -1218,8 +1218,8 @@ DiscreteZerosAndPoles.Analysis.timeResponse(dzp, tSpan, response=Types.TimeRespo
 
   encapsulated function denominatorDegree
       "Return denominator degree of a discrete zeros-and-poles transfer function"
-    import Modelica;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles transfer function of a system";
@@ -1302,11 +1302,11 @@ order polynomials of the DiscreteZeroAndPoles numerator.
 
   encapsulated function evaluate
       "Evaluate a DiscreteZerosAndPoles transfer function at a given value of q"
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Modelica_LinearSystems2.ZerosAndPoles.Internal;
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles transfer function of a system";
@@ -1391,15 +1391,15 @@ numerator polynomial N(z) and the denominator polynomial D(q).
 
   encapsulated function bode
       "Plot discrete zeros a-and-poles transfer function as bode plot"
-    import Modelica;
-    import Modelica.Utilities.Strings;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Internal;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.Utilities.Plot;
-    import SI = Modelica.SIunits;
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Internal;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Utilities.Plot;
+      import SI = Modelica.SIunits;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles function to be plotted";
@@ -1555,11 +1555,11 @@ This function plots the bode-diagram of a DiscreteZerosAndPoles transfer functio
 
   encapsulated function timeResponse
       "Plot the time response of a system represented by a discrete zeros-and-poles transfer function. The response type is selectable"
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Modelica_LinearSystems2.Types.TimeResponse;
-    import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
     input Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
   //  input Real dt=0 "Sample time [s]";
@@ -1664,10 +1664,10 @@ i.e. Impulse, Step, Ramp, or Initial.
 
   encapsulated function impulse
       "Impulse response plot of a discrete zeros-and-poles transfer function"
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
     input DiscreteZerosAndPoles dzp "zeros-and-poles transfer function";
     input Real tSpan=0 "Simulation time span [s]";
@@ -2829,10 +2829,10 @@ int found=0;
   encapsulated function fromFile_zp
       "Generate a DiscreteZerosAndPoles data record by reading poles and zeros from a file (default file name is zp.mat)"
 
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input String fileName="dzp.mat" "Name of the zeros and poles data file"
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",

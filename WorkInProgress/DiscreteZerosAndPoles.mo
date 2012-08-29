@@ -639,8 +639,8 @@ DiscreteZerosAndPoles dzp = q/(q^2 + q + 1)/(q + 1)
   encapsulated package Analysis
 
   encapsulated function denominatorDegree "Return denominator degree"
-    import Modelica;
-    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+      import Modelica;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles transfer function of a system";
@@ -753,13 +753,13 @@ from a ZerosAndPoles record representated by first and second order numerator an
   function toStateSpace
       "Transform a ZerosAndPoles object into a StateSpace object"
    //encapsulated function fromZerosAndPoles
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.Math.Vectors;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.StateSpace;
-    import
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Vectors;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.StateSpace;
+      import
         Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
 
     input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
@@ -1304,9 +1304,9 @@ processing.
   function fromModel
       "Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model"
 
-    import Modelica;
-    import Modelica_LinearSystems2.StateSpace;
-    import ZerosAndPoles =
+      import Modelica;
+      import Modelica_LinearSystems2.StateSpace;
+      import ZerosAndPoles =
         Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
 
     input String modelName "Name of the Modelica model";
@@ -1467,10 +1467,10 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
     extends Modelica.Icons.Package;
 
     function numberOfRealZeros2 "Calculate number of real zeros"
-    import Modelica;
-    import Modelica_LinearSystems2.Internal;
-    import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-    import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica;
+      import Modelica_LinearSystems2.Internal;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Math.Polynomial;
 
     input DiscreteTransferFunction dtf "DiscreteTransferFunction";
     output Integer result=Internal.numberOfRealZeros(Polynomial.roots(Polynomial(dtf.n)));
@@ -1478,10 +1478,10 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
     end numberOfRealZeros2;
 
     function numberOfRealPoles "Calculate number of real poles"
-    import Modelica;
-    import Modelica_LinearSystems2.Internal;
-    import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-    import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica;
+      import Modelica_LinearSystems2.Internal;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Math.Polynomial;
 
     input DiscreteTransferFunction dtf "TransferFunction";
       output Integer result=Internal.numberOfRealZeros(Polynomial.roots(Polynomial(

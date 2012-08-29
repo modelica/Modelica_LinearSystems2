@@ -2,12 +2,12 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Conversion;
 function toZerosAndPoles
   "Generate a zeros-and-poles representation from a SISO state space representation"
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.WorkInProgress;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2.ZerosAndPoles;
+  import Modelica_LinearSystems2.StateSpace;
+  import Modelica_LinearSystems2.WorkInProgress;
   input StateSpace ss "StateSpace object";
   input Complex frequency2 = Complex(1);
 //protected

@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Math;
 package Matrices "Package of functions operating on matrices"
   extends Modelica.Icons.Package;
 
+
   annotation (
     Documentation(info="<html>
 <p>

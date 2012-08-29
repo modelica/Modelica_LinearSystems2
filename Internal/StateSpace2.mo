@@ -16,8 +16,8 @@ record StateSpace2
 encapsulated operator 'constructor'
     "Default constructors for a StateSpace record"
   extends Modelica.Icons.Package;
-  import Modelica;
-  import Modelica_LinearSystems2;
+    import Modelica;
+    import Modelica_LinearSystems2;
 
   function fromABCDMatrices "Default constructor for a StateSpace record"
       import Modelica;
@@ -151,7 +151,7 @@ end 'constructor';
 encapsulated operator '-'
     "Contains operators for subtraction of state space systems"
   extends Modelica.Icons.Package;
-  import Modelica;
+    import Modelica;
 
   function subtract
       "Subtraction of two state space systems connected in parallel (= inputs are the same, outputs of the two systems are subtracted)"
@@ -317,14 +317,14 @@ end '==';
 encapsulated package Import
     "Utilitiy functions to import StaeSpace representations"
   extends Modelica.Icons.Package;
-  import Modelica;
+    import Modelica;
 
   encapsulated function fromFile "Read a StateSpace data record from mat-file"
 
-    import Modelica;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.Internal.StateSpace2;
-    import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Internal.StateSpace2;
+      import Modelica_LinearSystems2;
 
     input String fileName="dslin.mat"
         "Name of the state space system data file"     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",

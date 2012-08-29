@@ -1089,6 +1089,31 @@ This library is based on the following references:
   package ReleaseNotes "Release notes"
     extends Modelica.Icons.ReleaseNotes;
 
+    class Version_2_3 "Version 2.3 (August 30, 2012)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>
+This release is <b>backward compatible</b> to the previous version 2.2.
+It contains the following main improvements (and several minor ones):
+</p>
+
+<ul>
+<li> New package \"Modelica_LinearSystems2.ModelAnalysis\" 
+     that contains several functions to linearize
+     a model and perform a selected linear analysis operation, like 
+     plotting of poles, zeros or transfer functions.</li>
+<li> New plot functions in package \"Modelica_LinearSystems2.Utilities.Plot\"
+     to plot parameterized curvces, as well as to plot
+     a root locus of a model, by linearizing a model for a set of selected
+     parameter values.</li>
+<li> A new function \"Modelica_LinearSystems2.Utilities.Import.linearize2\"
+     to linearize a model and return a StateSpace object.</li>
+</ul>
+
+</html>"));
+    end Version_2_3;
+
     class Version_2_2 "Version 2.2 (October 27, 2010)"
       extends Modelica.Icons.ReleaseNotes;
 
@@ -1420,7 +1445,7 @@ on the Modelica LinearSystems library.
     annotation (Documentation(info="<html>
 <h4>Main Authors</h4>
 <blockquote>
-Martin Otter and Marcus Baur<br>
+Martin Otter, Marcus Baur, and Jakub Tobolar<br>
 Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)<br>
 DLR Institut f&uuml;r Systemdynamik und Regelungstechnik<br>
 Postfach 1116<br>
@@ -1459,7 +1484,7 @@ email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
      PAPAS (Plug-And-Play Antriebs- und Steuerungskonzepte f&uuml;r
      die Produktion von Morgen; F&ouml;rderkennzeichen: 02PH2060) is
      highly appreciated.</li>
-<li> Since Oct. 2007, the library development was partially funded by BMBF within the
+<li> In 2007 - 2010, the library development was partially funded by BMBF within the
      <a href=\"http://www.itea2.org/public/project_leaflets/EUROSYSLIB_profile_oct-07.pdf\">ITEA2 EUROSYSLIB</a>
       project. </li>
 </ul>

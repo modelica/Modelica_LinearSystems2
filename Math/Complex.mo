@@ -54,7 +54,7 @@ record Complex "Record defining a Complex number"
     end print;
 
   function length "Return length of a complex vector"
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Math.Complex;
     input Complex v[:] "Vector";
     output Real result "Length of vector v";
 
@@ -91,8 +91,8 @@ v = {2, -4, -2, -1};
   end length;
 
   function norm "Returns the norm of a complex vector"
-    import Modelica;
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Complex;
     input Complex v[:] "Vector";
     input Real p(min=1) = 2
         "Type of p-norm (often used: 1, 2, or Modelica.Constants.inf)";
@@ -169,8 +169,8 @@ Note, for any vector norm the following inequality holds:
 
   function normalize
       "Return normalized complex vector such that length = 1 and prevent zero-division for zero vector"
-    import Modelica;
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input Complex v[:] "Vector";
     input Real eps = 100*Modelica.Constants.eps "if |v| < eps then result = v";
@@ -227,7 +227,7 @@ possible.
   end normalize;
 
   function sortComplex "Sort elements of complex vector"
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Math.Complex;
     input Complex v[:] "Vector to be sorted";
     input Boolean ascending = true
         "= true if ascending order, otherwise descending order";
@@ -344,8 +344,8 @@ possible.
 
   function multiply "Scalar product of two complex vectors"
     extends Modelica.Icons.Function;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
 
     input Complex v1[:];
     input Complex v2[size(v1,1)];
@@ -362,8 +362,8 @@ possible.
       "Reverse vector elements (e.g. v[1] becomes last element)"
         extends Modelica.Icons.Function;
 
-        import Modelica;
-        import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Complex;
 
         input Complex v[:] "Vector";
         output Complex result[size(v, 1)]
@@ -404,9 +404,9 @@ This package provides functions operating on vectors of complex numbers.
     import Modelica_LinearSystems2;
 
     function print "Print matrix"
-          import Modelica_LinearSystems2.StateSpace;
-          import Modelica.Utilities.Strings;
-          import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2.Math.Complex;
 
       input Complex M[:,:];
       input Integer significantDigits=6
@@ -442,9 +442,9 @@ This package provides functions operating on vectors of complex numbers.
     end print;
 
     encapsulated function matMatMul "Multiply two complex matrices"
-          import Modelica_LinearSystems2.Math.Complex;
-          import Re = Modelica_LinearSystems2.Math.Complex.real;
-          import Im = Modelica_LinearSystems2.Math.Complex.imag;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Re = Modelica_LinearSystems2.Math.Complex.real;
+      import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
       input Complex m1[:,:] "Complex matrix 1";
       input Complex m2[size(m1, 2),:] "Complex matrix 2";
@@ -471,7 +471,7 @@ This package provides functions operating on vectors of complex numbers.
 
     encapsulated function matVecMul
       "Multiply a complex matrices with a complex vector"
-          import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Math.Complex;
     //  import Re = Modelica_LinearSystems2.Math.Complex.real;
     //  import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
@@ -861,11 +861,11 @@ inputs and the number of outputs must be identical.
 
   encapsulated function eigenVectors
     "Calculate the rigth eigenvectors of a linear state space system and write them columnwise in a matrix."
-      import Modelica;
-      import Modelica.Math.Matrices.LAPACK;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Re = Modelica_LinearSystems2.Math.Complex.real;
-      import Im = Modelica_LinearSystems2.Math.Complex.imag;
+    import Modelica;
+    import Modelica.Math.Matrices.LAPACK;
+    import Modelica_LinearSystems2.Math.Complex;
+    import Re = Modelica_LinearSystems2.Math.Complex.real;
+    import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
     input Real A[:,size(A, 1)] "real square matrix";
     output Complex eigvec[size(A, 1),size(A, 2)] "eigen values of the system";

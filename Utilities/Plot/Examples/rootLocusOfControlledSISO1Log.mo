@@ -9,4 +9,5 @@ algorithm
         diagram=Modelica_LinearSystems2.Utilities.Plot.Records.RootLocusDiagram(
                     linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.Solid,
                     lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.None));
+annotation(__Dymola_interactive=true);
 end rootLocusOfControlledSISO1Log;

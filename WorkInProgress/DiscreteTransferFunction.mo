@@ -245,8 +245,8 @@ follow each other as above. An error occurs if this is not the case.
     end 'String';
 
 encapsulated function z "Generate the discrete transfer function z"
-  import Modelica_LinearSystems2.Math.Polynomial;
-  import Modelica_LinearSystems2.DiscreteTransferFunction;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.DiscreteTransferFunction;
 
   output DiscreteTransferFunction dtf(n={1,0}, d={1}) "z";
 algorithm
@@ -270,15 +270,15 @@ end z;
 encapsulated package Plot "Functions to plot state space system responses"
 
 encapsulated function bode "Plot transfer function as bode plot"
-  import Modelica;
-  import Modelica.Utilities.Strings;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Internal;
-  import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.Utilities.Plot;
-  import SI = Modelica.SIunits;
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Internal;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Utilities.Plot;
+      import SI = Modelica.SIunits;
 
   input DiscreteTransferFunction dtf "DiscreteTransfer function to be plotted";
   input Integer nPoints(min=2) = 200 "Number of points";
@@ -432,9 +432,9 @@ end Plot;
 encapsulated package Analysis
 
 encapsulated function denominatorDegree "Return denominator degree"
-  import Modelica;
-  import Modelica_LinearSystems2.Math.Polynomial;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
 
   input DiscreteTransferFunction dtf "discrete transfer function of a system";
   output Integer result;
@@ -474,13 +474,14 @@ encapsulated package Conversion
 
 encapsulated function toDiscreteZerosAndPoles
       "Generate a DiscreteZerosAndPoles object from a DiscreteTransferFunction object"
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-  import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+      import
+        Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Math.Complex;
 
   input DiscreteTransferFunction dtf "transfer function of a system";
   output DiscreteZerosAndPoles dzp(
@@ -532,12 +533,12 @@ end toDiscreteZerosAndPoles;
 
 function toDiscreteStateSpace
       "Convert a DiscreteTransferFunction into a DiscreteStateSpace representation"
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-  import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
-  import Modelica.Math.Vectors;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+      import Modelica.Math.Vectors;
 
  input DiscreteTransferFunction dtf "discrete transfer function of a system";
       output DiscreteStateSpace dss(

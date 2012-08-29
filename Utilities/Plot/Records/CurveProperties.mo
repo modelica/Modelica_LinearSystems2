@@ -13,7 +13,6 @@ record CurveProperties "Properties of a curve"
     "Symbol for points on curve" annotation(Dialog(group="Curve properties"));
   Real lineThickness=0.25 "Line thickness of curve"
     annotation(Dialog(group="Curve properties"));
-
 /*
   Modelica_LinearSystems2.Utilities.Plot.Types.LineThickness_mm lineSymbolSize=3
     "Symbol size" annotation(Dialog(group="If autoLine = false (otherwise ignored)"));

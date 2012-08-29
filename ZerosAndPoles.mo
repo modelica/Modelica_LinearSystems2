@@ -230,13 +230,13 @@ with j=sqrt(-1), is defined as
 encapsulated operator '-'
     "Collection of operators for subtraction of zeros and poles descriptions"
   extends Modelica.Icons.Package;
-  import Modelica;
+    import Modelica;
 
   function subtract "Subtract two zeros and poles descriptions (zp1 - zp2)"
-    import Modelica;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.Math.Polynomial;
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input ZerosAndPoles zp1 "Zeros-and-poles data record 1";
     input ZerosAndPoles zp2 "Zeros-and-poles data record 2";
@@ -331,7 +331,7 @@ encapsulated operator '-'
   end subtract;
 
   function negate "Unary minus (multiply zeros and poles description by -1)"
-    import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.ZerosAndPoles;
 
     input ZerosAndPoles zp "Zeros-and-poles data record";
     output ZerosAndPoles result(n1=zp.n1, n2=zp.n2, d1=zp.d1, d2=zp.d2, k=-zp.k) "= -zp";
@@ -743,10 +743,10 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
     public
      encapsulated function printSystem
         "Print the state space system in html format on file"
-       import Modelica;
-       import Modelica.Utilities.Streams.print;
-       import Modelica_LinearSystems2.ZerosAndPoles;
-       import Modelica_LinearSystems2;
+        import Modelica;
+        import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2.ZerosAndPoles;
+        import Modelica_LinearSystems2;
 
        input ZerosAndPoles zp "transfer function to analyze";
        input String fileName="systemAnalysis.html"
@@ -794,11 +794,11 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
    encapsulated function timeResponse
       "Calculate the time response of a zeros-and-poles transfer function"
 
-     import Modelica;
-     import Modelica_LinearSystems2;
-     import Modelica_LinearSystems2.StateSpace;
-     import Modelica_LinearSystems2.ZerosAndPoles;
-     import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Types.TimeResponse;
 
      extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;     // Input/Output declarations of time response functions
      input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
@@ -1855,11 +1855,11 @@ of a zeros-and-poles transfer function.
   encapsulated function filter
       "Generate a ZerosAndPoles transfer function from a filter description"
 
-    import Modelica;
-    import Modelica.Utilities.Streams;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Types;
-    import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica;
+      import Modelica.Utilities.Streams;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Types;
+      import Modelica_LinearSystems2.ZerosAndPoles;
 
     input Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
         "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
@@ -2342,16 +2342,16 @@ and results in
 
   encapsulated function bode
       "Plot ZerosAndPoles transfer function as bode plot"
-    import Modelica;
-    import Modelica.Utilities.Streams.print;
-    import Modelica.Utilities.Strings;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.Internal;
-    import SI = Modelica.SIunits;
+      import Modelica;
+      import Modelica.Utilities.Streams.print;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Internal;
+      import SI = Modelica.SIunits;
 
-    import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
     input ZerosAndPoles zp "ZerosAndPoles transfer function to be plotted";
     input Integer nPoints(min=2) = 200 "Number of points";
@@ -4522,13 +4522,13 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
   encapsulated function baseFilter
       "Generate a ZerosAndPoles transfer function from a base filter description (= low pass filter with w_cut = 1 rad/s)"
 
-    import Modelica;
-    import Modelica.Math;
-    import Modelica.Utilities.Streams;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Types;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+      import Modelica;
+      import Modelica.Math;
+      import Modelica.Utilities.Streams;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Types;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
 
     input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
         "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
@@ -5822,13 +5822,13 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
   encapsulated function filter
       "Generate the data record of a ZerosAndPoles transfer function from a filter description"
 
-    import Modelica;
-    import Modelica.Utilities.Streams;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Types;
-    import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica;
+      import Modelica.Utilities.Streams;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Types;
+      import Modelica_LinearSystems2.ZerosAndPoles;
 
-    import MMath = Modelica.Math;
+      import MMath = Modelica.Math;
 
     input Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
         "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
@@ -6396,10 +6396,10 @@ int found=0;
 
   encapsulated function fromFile_pc
       "Generate a ZerosAndPoles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input String fileName="pc.mat" "Name of the zeros and poles data file"
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
@@ -7069,7 +7069,7 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
   encapsulated function scaleFactor1
       "Return scale factor for first order block"
-    import Modelica;
+      import Modelica;
     input Real n "(s+n)/(s+d)";
     input Real d "(s+n)/(s+d)";
     input Real small=100*Modelica.Constants.eps;
@@ -7080,7 +7080,7 @@ function. The solver function is a direct mapping of the Algol 60 procedure
   end scaleFactor1;
 
   function scaleFactor2 "Return scale factor for second order block"
-    import Modelica;
+      import Modelica;
     input Real n1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
     input Real n2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
     input Real d1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";

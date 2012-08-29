@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Controller;
 package Templates "Package of templates used for demonstration purposes"
   extends Modelica.Icons.BasesPackage;
 
+
   annotation (
     Documentation(info="<html>
 <p>

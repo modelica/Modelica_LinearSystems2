@@ -97,5 +97,23 @@ extends Modelica.Icons.Package;
 
   end SimulationOptionsForLinearization;
 
+  record Cases "Case information"
+    CaseDefinition Definition[:] annotation (Dialog);
+    String caseParameter[:] annotation (Dialog(
+          importDsin(
+          button="Select parameters",
+          onlyStart=true,
+          fields(caseParameter=initialName))));
+    Real parameterValues[:,:] "Case parameter values for each case"
+                                             annotation (
+        Dialog(
+        treeView=true,
+        rowHeadings=Definition.name,
+        columnHeadings=caseParameter));
+  end Cases;
 
+  record CaseDefinition "Definition of cases"
+    String name="case" "Name of the case";
+    Boolean active=true "Case shall be included in optimization";
+  end CaseDefinition;
 end Records;

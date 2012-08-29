@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function plotParameterizedCurve1 "Plot two circles as parameterized curve"
-   import Modelica.SIunits.Conversions.from_deg;
-   import Modelica.Math.sin;
+  import Modelica.SIunits.Conversions.from_deg;
+  import Modelica.Math.sin;
    input Modelica.SIunits.Conversions.NonSIunits.Angle_deg maxAngle = 300
     "Maximum opening angle";
    input Integer nPoints(min=2) = 100 "Number of points";

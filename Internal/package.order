@@ -10,6 +10,7 @@ DefaultDiagramTimeResponse
 StateSpace2
 PartialPlotFunction
 PartialPlotFunctionMIMO
+PartialAnalyzeFunction
 defaultColumnLabels
 defaultImpulseResponseHeadings
 defaultInitialResponseHeadings

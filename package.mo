@@ -1,22 +1,35 @@
 within ;
-package Modelica_LinearSystems2 "Modelica_LinearSystems2 (2.2 Beta 1) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
+package Modelica_LinearSystems2 "Modelica_LinearSystems2 (2.3 Beta 1) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
   extends Modelica.Icons.Package;
 
-  constant String DataDir=classDirectory() + "Resources/Data/"
-  "Absolute path to directory containing utilitiy files for this package";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 annotation (
   preferredView="info",
   uses(Modelica(version="3.2")),
-  version="2.2",
-  versionBuild=3,
-  versionDate="2010-11-03",
-  dateModified = "2010-10-26 09:27:58Z",
+  version="2.3",
+  versionBuild=0,
+  versionDate="2012-08-30",
+  dateModified = "2012-08-30 09:27:58Z",
   revisionID="$Id::                                       $",
   conversion(
     noneFromVersion="2.0",
-    noneFromVersion="2.1"),
+    noneFromVersion="2.1",
+    noneFromVersion="2.2"),
   Documentation(info="<html>
 <p>
 Library <b>Modelica_LinearSystems2</b> is a Modelica package
@@ -101,4 +114,6 @@ or at
 http://www.Modelica.org/licenses/ModelicaLicense2</a>.</em>
 </p>
 </html>"));
+  constant String DataDir=classDirectory() + "Resources/Data/"
+  "Absolute path to directory containing utilitiy files for this package";
 end Modelica_LinearSystems2;

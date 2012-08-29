@@ -1013,8 +1013,8 @@ end kfStepMatrices2;
 partial function ekfSystemBase "Base class of ekf-system functions"
      extends Modelica.Icons.Function;
 
-     import Modelica;
-     import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2;
 
      input Real x[:] "Estimated vector at instant k";
      input Real u[:] "Input at instant k";
@@ -1055,8 +1055,8 @@ end ekfSystemBase;
 partial function ekfSystemBase2 "Base class of ekf-system functions"
       extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2;
 
       input Real x[:] "Estimated vector at instant k";
 
@@ -1068,10 +1068,10 @@ partial function ekfSystemBase2 "Base class of ekf-system functions"
 end ekfSystemBase2;
 
 function ukfPredict "Prediction step in ukf"
-  import Modelica_LinearSystems2;
-  import Modelica.Math.Matrices.LU_solve;
-  import Modelica.Math.Matrices.solve;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Modelica_LinearSystems2;
+      import Modelica.Math.Matrices.LU_solve;
+      import Modelica.Math.Matrices.solve;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.predictBase;
 
@@ -1136,8 +1136,8 @@ end ukfPredict;
 partial function predictBase "Base class of prediction-function"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2;
 
   input Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase fSigma;
 
@@ -1176,11 +1176,11 @@ end predictBase;
 function ukfUpdate "Update step in ukf"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.DiscreteStateSpace;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-  import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Modelica_LinearSystems2.Math.Matrices;
 
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.updateBase;
@@ -1251,8 +1251,8 @@ end ukfUpdate;
 partial function updateBase "Bass class of update-function"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2;
 
   input Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase hSigma;
 
@@ -1293,8 +1293,8 @@ end updateBase;
 
 function ukfEstimate
       "Calculate filter gain and the updated mean of the state and covariance P"
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Matrices.Internal;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Matrices.Internal;
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.estimateBase;
 
@@ -1324,8 +1324,8 @@ end ukfEstimate;
 function estimateBase "Base class of estimation function"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2;
 
   input Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase yOut;
 
@@ -1349,12 +1349,12 @@ end estimateBase;
 
 function ukfPredict_sr "Prediction step in square root ukf"
   extends Modelica.Icons.Function;
-  import Modelica.Math.Matrices.solve;
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.DiscreteStateSpace;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-  import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica.Math.Matrices.solve;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Modelica_LinearSystems2.Math.Matrices;
 
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.predictBase_sr;
@@ -1428,11 +1428,11 @@ end ukfPredict_sr;
 function ukfUpdate_sr "Update step in square root ukf"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.DiscreteStateSpace;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-  import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Modelica_LinearSystems2.Math.Matrices;
 
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.updateBase_sr;
@@ -1519,10 +1519,10 @@ function ukfEstimate_sr
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.estimateBase_sr;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
   output Real xmu[size(xm, 1)] "Updated state mean";
 
@@ -1560,8 +1560,8 @@ end ukfEstimate_sr;
 partial function predictBase_sr "Base class of prediction function"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2;
 
   input Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase fSigma;
 
@@ -1600,8 +1600,8 @@ end predictBase_sr;
 partial function updateBase_sr "Bass class of update_sr-function"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2;
 
   input Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase hSigma;
 
@@ -1644,8 +1644,8 @@ end updateBase_sr;
 function estimateBase_sr "Base class of estimation function"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2;
 
   input Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase yOut;
 
@@ -2004,8 +2004,8 @@ end sr_ukfEstimate_2;
 
   function ekfSystem_pendular "Pendular state function"
 
-    import Modelica.Math.Matrices;
-    import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+      import Modelica.Math.Matrices;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
     extends DiscreteStateSpace.Internal.ekfSystemBase;
 
@@ -2046,10 +2046,10 @@ end sr_ukfEstimate_2;
   end ekfSystem_pendular;
 
   function EKF "Extended Kalman filter design function"
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
-    import Modelica_LinearSystems2.Internal.StateSpace2;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Internal.StateSpace2;
 
     input DiscreteStateSpace.Internal.ekfSystemBase ekfFunction
         "Integrand function";
@@ -2123,10 +2123,10 @@ i.e., in the case of linear systems the system matrix <b>A</b> and the output ma
   end EKF;
 
   function EKF_Bsp "Extended Kalman filter design function"
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
-    import Modelica_LinearSystems2.Internal.StateSpace2;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+      import Modelica_LinearSystems2.Internal.StateSpace2;
 
       input Real xpre[:] "State at instant k-1";
     input Real upre[:] "Input at instant k-1";
@@ -2198,9 +2198,9 @@ i.e., in the case of linear systems the system matrix <b>A</b> and the output ma
 
     extends Modelica.Icons.Function;
 
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
     input Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase fSigma;
     input Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase hSigma;
@@ -2279,9 +2279,9 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteSta
 
   function UKF_SR
       "Design function for Unscented Kalman filter withcomputation for square root method"
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
     input Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase fSigma;
     input Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase hSigma;

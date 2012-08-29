@@ -1,5 +1,5 @@
 UsersGuide
-DataDir
+ModelAnalysis
 Examples
 StateSpace
 ZerosAndPoles
@@ -14,3 +14,4 @@ Internal
 Types
 Records
 WorkInProgress
+DataDir
