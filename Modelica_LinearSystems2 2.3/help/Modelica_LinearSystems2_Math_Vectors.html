@@ -1,0 +1,345 @@
+<HTML>
+<HEAD>
+<TITLE>Modelica_LinearSystems2.Math.Vectors</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<META name="description" content="&quot;Package of functions operating on vectors&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal}
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Vectors<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Vectors"></A><A HREF="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math"
+>Modelica_LinearSystems2.Math</A>.Vectors</H2>
+<B>Package of functions operating on vectors</B>
+<P>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This package provides functions operating on vectors, see also
+Vectors</a>.
+</p>
+<pre></PRE><P>
+Extends from Modelica.Icons.Package (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.M8479270e558d7465.careS.png" ALT="Modelica_LinearSystems2.Math.Vectors.find" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.find"
+>find</A>
+</TD><TD>Find element in vector</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.M13668b92de26c549exionS.png" ALT="Modelica_LinearSystems2.Math.Vectors.householderReflexion" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.householderReflexion"
+>householderReflexion</A>
+</TD><TD>Reflect vector a on a plane with orthogonal vector u</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.M13668b92de26c549exionS.png" ALT="Modelica_LinearSystems2.Math.Vectors.householderReflexion_e1" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.householderReflexion_e1"
+>householderReflexion_e1</A>
+</TD><TD>Reflect vector a to the unity vector e_1={1,0,...,0}</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.M13668b92de26c549exionS.png" ALT="Modelica_LinearSystems2.Math.Vectors.householderReflexion_en" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.householderReflexion_en"
+>householderReflexion_en</A>
+</TD><TD>Reflect vector a to the unity vector e_n={0, ..., 0, 1}</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.M13668b92de26c549exionS.png" ALT="Modelica_LinearSystems2.Math.Vectors.householderVector" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.householderVector"
+>householderVector</A>
+</TD><TD>Calculate a normalized householder vector to reflect vector a onto vector b</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.M13668b92de26c549exionS.png" ALT="Modelica_LinearSystems2.Math.Vectors.length" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.length"
+>length</A>
+</TD><TD>Return length of a vector (inlined and therefore usable in symbolic manipulations)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.M13668b92de26c549exionS.png" ALT="Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml"
+>printStringVectorInHtml</A>
+</TD><TD>Print a string vector in html format on file (without html/body heading)</TD></TR>
+<TR><TD><IMG SRC="Modelica_LinearSystems2.M13668b92de26c549exionS.png" ALT="Modelica_LinearSystems2.Math.Vectors.printVector" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors.printVector"
+>printVector</A>
+</TD><TD>Print vector</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE find<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="Modelica_LinearSystems2.M4ffa2fff4f2b68a5.findI.png" ALT="Modelica_LinearSystems2.Math.Vectors.find" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="Modelica_LinearSystems2.Math.Vectors.find"></A><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>.find</H2>
+<B>Find element in vector</B><p>
+<P><H3>Information</H3></P>
+Extends from Modelica.Icons.Function (Icon for functions).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>s</TD><TD>Search for s</TD></TR>
+<TR><TD>v[:]</TD><TD>Vector</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>result</TD><TD>v[result] = s (first occurrence of s); result=0, if not found</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE householderReflexion<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Vectors.householderReflexion"></A><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>.householderReflexion</H2>
+<B>Reflect vector a on a plane with orthogonal vector u</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>a[:]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u[size(a, 1)]</TD><TD>Householder vector</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>ra[size(u, 1)]</TD><TD>Reflexion of a</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE householderReflexion_e1<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Vectors.householderReflexion_e1"></A><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>.householderReflexion_e1</H2>
+<B>Reflect vector a to the unity vector e_1={1,0,...,0}</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>a[:]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u[size(a, 1)]</TD><TD>householder vector</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>ra[size(u, 1)]</TD><TD>reflexion of a</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE householderReflexion_en<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Vectors.householderReflexion_en"></A><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>.householderReflexion_en</H2>
+<B>Reflect vector a to the unity vector e_n={0, ..., 0, 1}</B><p>
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>a[:]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>u[size(a, 1)]</TD><TD>householder vector</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>ra[size(u, 1)]</TD><TD>reflexion of a</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE householderVector<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Vectors.householderVector"></A><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>.householderVector</H2>
+<B>Calculate a normalized householder vector to reflect vector a onto vector b</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4>Syntax</h4>
+<blockquote><pre>
+Vectors.<b>householderVector</b>(a,b);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+The function call "<code>householderVector(a, b)</code>" returns the normalized Householder vector
+<b>u</b> for Householder reflection of input vector <b>a</b> onto vector <b>b</b>, i.e. Householder vector <b>u</b> is the normal
+vector of the reflection plane. Algebraically, the reflection is performed by transformation matrix <b>Q</b>
+</p>
+<blockquote>
+  <b>Q</b> = <b>I</b> - 2*<b>u</b>*<b>u</b>',
+</blockquote>
+<p>
+i.e., vector <b>a</b> is mapped to
+</p>
+<blockquote>
+  <b>a</b> -> <b>Q</b>*<b>a</b>=c*<b>b</b>
+</blockquote>
+<p>
+with scalar c, |c| = ||<b>a</b>|| / ||<b>b</b>||. <b>Q</b>*<b>a</b> is the reflection of <b>a</b> about the hyperplane orthogonal to <b>u</b>.
+<b>Q</b> is an orthogonal matrix, i.e.
+</p>
+<blockquote>
+<b>Q</b> = inv(<b>Q</b>) = <b>Q</b>'.
+</blockquote>
+
+<h4>Example</h4>
+<blockquote><pre>
+  a = {2, -4, -2, -1};
+  b = {1, 0, 0, 0};
+
+  u = <b>householderVector</b>(a,b);
+    // {0.837, -0.478, -0.239, -0.119}
+    // Computation (identity(4) - 2*matrix(u)*transpose(matrix(u)))*a results in
+    // {-5, 0, 0, 0} = -5*b
+</pre></blockquote>
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>a[:]</TD><TD>Real vector to be reflected</TD></TR>
+<TR><TD>b[size(a, 1)]</TD><TD>Real vector b vector a is mapped onto</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>u[size(a, 1)]</TD><TD>Housholder vector to map a onto b</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE length<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Vectors.length"></A><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>.length</H2>
+<B>Return length of a vector (inlined and therefore usable in symbolic manipulations)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4>Syntax</h4>
+<blockquote><pre>
+Vectors.<b>length</b>(v);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+The function call "<code>Vectors.<b>length</b>(v)</code>" returns the
+<b>Euclidean length</b> "<code>sqrt(v*v)</code>" of vector v.
+The function call is equivalent to Modelica.Math.Vectors.norm(v)</a>. The advantage of
+length(v) over norm(v) is that function length(..) is implemented
+in one statement and therefore the function is usually automatically
+inlined. Further symbolic processing is therefore possible, which is
+not the case with function norm(..).
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+v = {2, -4, -2, -1};
+<b>length</b>(v);  // = 5
+</pre></blockquote>
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>v[:]</TD><TD>Vector</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>result</TD><TD>Length of vector v</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE printStringVectorInHtml<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml"></A><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>.printStringVectorInHtml</H2>
+<B>Print a string vector in html format on file (without html/body heading)</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4>Syntax</h4>
+<blockquote><pre>
+Vectors.<b>printStringVectorInHtml</b>(s, name, fileName, printIndices);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Print vector of strings <code>s</code> called <code>name</code> into
+a file <code>fileName</code> in HTML format.
+Optionally, row indices are printed as well.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+s = {"w", "3", "alpha"};
+<b>printStringVectorInHtml</b>(s, "myVec", "log.html", true);
+</pre></blockquote>
+<p>
+saves following HTML code in the file <em>log.html</em>:
+</p>
+<blockquote><pre>
+&lt;table border="0"&gt;
+&lt;tr&gt;
+  &lt;td valign="middle"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;myVec&lt;/td&gt;
+  &lt;td valign="middle"&gt;=&lt;/td&gt;
+  &lt;td&gt;
+    &lt;table style="background-color:rgb(100, 100, 100);" cellpadding="3" border="0" cellspacing="1"&gt;
+    &lt;tr style="background-color:white"&gt;
+      &lt;td align="right" style="background-color:rgb(230, 230, 230);"&gt;1&lt;/td&gt;
+      &lt;td align="left"&gt;w&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr style="background-color:white"&gt;
+      &lt;td align="right" style="background-color:rgb(230, 230, 230);"&gt;2&lt;/td&gt;
+      &lt;td align="left"&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr style="background-color:white"&gt;
+      &lt;td align="right" style="background-color:rgb(230, 230, 230);"&gt;3&lt;/td&gt;
+      &lt;td align="left"&gt;alpha&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</pre></blockquote>
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>s[:]</TD><TD>String vector</TD></TR>
+<TR><TD>name</TD><TD>Vector name used for printing</TD></TR>
+<TR><TD>fileName</TD><TD>&nbsp;</TD></TR>
+<TR><TD>printIndices</TD><TD>=true, if row indices shall be printed, otherwise they are not printed</TD></TR>
+</TABLE>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE printVector<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="Modelica_LinearSystems2.Math.Vectors.printVector"></A><A HREF="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Modelica_LinearSystems2.Math.Vectors</A>.printVector</H2>
+<B>Print vector</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre>
+<h4>Syntax</h4>
+<blockquote><pre>
+s = Vectors.<b>printVector</b>(v,significantDigits,name);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This function returns string <code>s</code> containing vector of real numbers <code>v</code> called <code>name</code>.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+v = {2,0,-342.1};
+<b>printVector</b>(v, 6, "myVec");
+//  = "
+// myVec =
+//          2
+//          0
+//         -342
+// "
+</pre></blockquote>
+<pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>v[:]</TD><TD>Vector of real numbers to be printed</TD></TR>
+<TR><TD>significantDigits</TD><TD>Number of significant digits that are shown</TD></TR>
+<TR><TD>name</TD><TD>Independent variable name used for printing</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>s</TD><TD>String containing v</TD></TR>
+</TABLE>
+<address><a href="http://www.3ds.com/">Automatically generated</a> Fri Feb 08 00:21:54 2013.
+</address></BODY>
+</HTML>
