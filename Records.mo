@@ -2,6 +2,36 @@ within Modelica_LinearSystems2;
 package Records "Records, especially to build menus"
 extends Modelica.Icons.Package;
 
+  record SetParameter "Set value of one parameter from a translated model"
+
+    String Name "Name of parameter" annotation (Dialog);
+    Real Value "Value of parameter" annotation (Dialog);
+
+    annotation (
+    Dialog(__Dymola_importDsin(button="select"
+            "Select the model parameters to be included in this table",
+                                              onlyStart=true,
+      fields(Name=initialName,
+             Value=initialValue.value))),
+    Icon(graphics={
+          Rectangle(
+            extent={{-100,-30},{100,-90}},
+            lineColor={0,0,0},
+            fillColor={175,175,175},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{-40,-30},{-40,80}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{20,28},{-20,0},{20,-28}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            origin={-40,-10},
+            rotation=90)}));
+
+  end SetParameter;
+
   record ParameterVariation
     "Define variation of one parameter in a given range and optionally select the parameter from a translated model"
 
@@ -56,7 +86,15 @@ extends Modelica.Icons.Package;
 
   record SimulationOptionsForLinearization
     "Options to define the simulation setup used for linearization"
-    String method="Dassl" "Integration method" annotation(Dialog,
+    Boolean linearizeAtInitial=true
+      "= true, if linearization at inital time; otherwise simulate until t_linearize"
+       annotation (Dialog,choices(__Dymola_checkBox=true));
+    Modelica.SIunits.Time t_start=0.0 "Start time of simulation" annotation(Dialog);
+    Modelica.SIunits.Time t_linearize=0.0
+      "Simulate from t_start until t_linearize and then linearize, if linearizeAtInitial=false"
+                              annotation(Dialog(enable=not linearizeAtInitial));
+
+    String method="Dassl" "Integration method, if linearizeAtInitial=false" annotation(Dialog(enable=not linearizeAtInitial),
         choices(
           choice="Lsodar" "Lsodar",
           choice="Dassl" "Dassl",
@@ -74,8 +112,10 @@ extends Modelica.Icons.Package;
           choice="Cerk23" "Cerk23",
           choice="Cerk34" "Cerk34",
           choice="Cerk45" "Cerk45"));
-    Real tolerance=1e-4 "Relative error tolerance" annotation(Dialog);
-    Real fixedStepSize=0.001 "Step size for fixed step integrators" annotation(Dialog);
+    Real tolerance=1e-4 "Relative error tolerance, if linearizeAtInitial=false"
+                                                                                annotation(Dialog(enable=not linearizeAtInitial));
+    Real fixedStepSize=0.001
+      "Step size for fixed step integrators, if linearizeAtInitial=false"                        annotation(Dialog(enable=not linearizeAtInitial));
 
     annotation (Icon(graphics={
           Rectangle(
@@ -97,23 +137,5 @@ extends Modelica.Icons.Package;
 
   end SimulationOptionsForLinearization;
 
-  record Cases "Case information"
-    CaseDefinition Definition[:] annotation (Dialog);
-    String caseParameter[:] annotation (Dialog(
-          importDsin(
-          button="Select parameters",
-          onlyStart=true,
-          fields(caseParameter=initialName))));
-    Real parameterValues[:,:] "Case parameter values for each case"
-                                             annotation (
-        Dialog(
-        treeView=true,
-        rowHeadings=Definition.name,
-        columnHeadings=caseParameter));
-  end Cases;
 
-  record CaseDefinition "Definition of cases"
-    String name="case" "Name of the case";
-    Boolean active=true "Case shall be included in optimization";
-  end CaseDefinition;
 end Records;

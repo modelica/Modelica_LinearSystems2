@@ -4,15 +4,9 @@ function rootLocusOfModel
   input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
   input Modelica_LinearSystems2.Records.ParameterVariation modelParam[:]
     "Model parameter to be varied (exactly one) and values for other parameters";
-  input Boolean linearizeAtInitial=true
-    "= true, if linearization at inital time; otherwise simulate until t_linearize"
-     annotation (choices(__Dymola_checkBox=true));
-  input Modelica.SIunits.Time t_linearize= 0
-    "Simulate until t_linearize and then linearize, if linearizeAtInitial == false"
-                                                                                    annotation(Dialog(enable=not linearizeAtInitial));
   input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
       Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
-    "Simulation options it t_linearize > 0, if linearizeAtInitial == false" annotation(Dialog(enable=not linearizeAtInitial));
+    "Simulation options" annotation(Dialog(enable=not linearizeAtInitial));
   input Modelica_LinearSystems2.Utilities.Plot.Records.RootLocusDiagram diagram annotation(Dialog);
   input Modelica_LinearSystems2.Utilities.Plot.Records.Device device
     "Properties of device where figure is shown" annotation(Dialog);
@@ -35,8 +29,6 @@ algorithm
     Modelica_LinearSystems2.Utilities.Import.rootLocusOfModel(
     modelName,
     modelParam,
-    linearizeAtInitial,
-    t_linearize,
     simulationSetup,
     reorder);
   if paramUnit == "" or paramUnit == " " then

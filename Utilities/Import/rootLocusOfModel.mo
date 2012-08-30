@@ -5,15 +5,9 @@ function rootLocusOfModel
   input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
   input Modelica_LinearSystems2.Records.ParameterVariation modelParam[:]
     "Model parameter to be varied (exactly one) and values for other parameters";
-  input Boolean linearizeAtInitial=true
-    "= true, if linearization at inital time; otherwise simulate until t_linearize"
-     annotation (choices(__Dymola_checkBox=true));
-  input Modelica.SIunits.Time t_linearize= 0
-    "Simulate until t_linearize and then linearize, if linearizeAtInitial=false"
-                                                                                    annotation(Dialog(enable=not linearizeAtInitial));
   input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
       Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
-    "Simulation options it t_linearize > 0, if linearizeAtInitial == false" annotation(Dialog(enable=not linearizeAtInitial));
+    "Simulation options" annotation(Dialog(enable=not linearizeAtInitial));
   input Boolean reorder=false
     "True, if eigen values shall be reordered so that they are closest to the previous ones";
   output Real Re[:,:]
@@ -138,7 +132,7 @@ algorithm
   end if;
 
   is := 1:np;
-  if linearizeAtInitial then
+  if simulationSetup.linearizeAtInitial then
     // Linearization of all parameter variants at once at the initial point
     OK :=simulateMultiExtendedModel(
       problem=modelName,
