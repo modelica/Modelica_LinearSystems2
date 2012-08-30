@@ -58,7 +58,7 @@ package ModelAnalysis
     "Linearize a model and plot the transfer functions from all inputs to all outputs of the linearized model"
     extends Modelica_LinearSystems2.Internal.PartialAnalyzeFunction;
   algorithm
-    Modelica_LinearSystems2.StateSpace.Plot.bodeSISO(ssLin);
+    Modelica_LinearSystems2.StateSpace.Plot.bodeMIMO(ssLin);
     annotation(__Dymola_interactive=true, Icon(graphics={
             Ellipse(
             extent={{-100,100},{100,-100}},
@@ -87,4 +87,18 @@ package ModelAnalysis
             lineColor={255,127,0},
             textString="A")}));
   end FullAnalysis;
+
+  function RootLocus = Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel
+    "Compute and plot the root locus of one parameter of a model (= eigen values of the model that is linearized for every parameter value)"
+    annotation (Icon(graphics={
+            Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={255,127,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{-80,80},{80,-80}},
+            lineColor={255,127,0},
+          textString="RL")}));
+
 end ModelAnalysis;
