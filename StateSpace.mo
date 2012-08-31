@@ -671,6 +671,7 @@ encapsulated package Analysis
     String fileNameImg "General name (without extension) of file for a plot";
     String fileNameImg2="none" "Current name of file for a plot";
 
+    Internal.AnalyseOptions analyseOptions2 = analyseOptions;
   algorithm
     // ---------------------------------------------------------------------------------------------------
     // The correct HTML format generated with this function can be checked with following commands:
@@ -680,6 +681,14 @@ encapsulated package Analysis
 
     (filePathOnly, fileNameOnly, fileExtOnly) := Modelica.Utilities.Files.splitPathName(fileName);
     fileNameImg:=fileNameOnly;
+
+    // If system has no inputs and outputs, modify analyze options that do not make sense
+    if size(ss.B,2) == 0 or size(ss.C,1) == 0 then
+       analyseOptions2.plotStepResponse      :=false;
+       analyseOptions2.plotFrequencyResponse :=false;
+       analyseOptions2.printControllability  :=false;
+       analyseOptions2.printObservability    :=false;
+    end if;
 
     // Get eigenvalues
     // ---------------
@@ -711,13 +720,20 @@ encapsulated package Analysis
       isStable := isStable and ev[i].ev.re < 0;
     end for;
 
-    // Controllability check, stabilizability check
-    isControllable := StateSpace.Analysis.isControllable(ss);
-    isStabilizable := StateSpace.Analysis.isStabilizable(ss);
+    if size(ss.B,2) > 0 and size(ss.C,1) > 0 then
+       // Controllability check, stabilizability check
+       isControllable := StateSpace.Analysis.isControllable(ss);
+       isStabilizable := StateSpace.Analysis.isStabilizable(ss);
 
-    // Observability check, detectability check
-    isObservable := StateSpace.Analysis.isObservable(ss);
-    isDetectable := StateSpace.Analysis.isDetectable(ss);
+       // Observability check, detectability check
+       isObservable := StateSpace.Analysis.isObservable(ss);
+       isDetectable := StateSpace.Analysis.isDetectable(ss);
+    else
+       isControllable :=false;
+       isStabilizable :=false;
+       isObservable   :=false;
+       isDetectable   :=false;
+    end if;
 
     // Analysis of single eingenvalues
     ev := StateSpace.Internal.characterizeEigenvalue(ss, ev);
@@ -757,7 +773,7 @@ encapsulated package Analysis
       isObservable,
       isDetectable,
       fileName,
-      analyseOptions=analyseOptions);
+      analyseOptions=analyseOptions2);
     printHead1(
       ss,
       isStable,
@@ -766,14 +782,14 @@ encapsulated package Analysis
       isObservable,
       isDetectable,
       dummyFileName,
-      analyseOptions=analyseOptions);
+      analyseOptions=analyseOptions2);
     StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
 
     Modelica.Utilities.Streams.readFile(dummyFileName);
 
     // Plot step response
     // ------------------
-    if analyseOptions.plotStepResponse then
+    if analyseOptions2.plotStepResponse then
       Modelica.Utilities.Files.removeFile(dummyFileName);
       print("<html>\n<body>\n<p>\n<b>Step responses</b>\n</p>\n</body>\n</html>",
         dummyFileName);
@@ -787,7 +803,7 @@ encapsulated package Analysis
     end if;
 
     // Plot Bode plots
-    if analyseOptions.plotFrequencyResponse then
+    if analyseOptions2.plotFrequencyResponse then
       Modelica.Utilities.Files.removeFile(dummyFileName);
       print("<html>\n<body>\n<p>\n<b>Bode plots</b>\n</p>\n</body>\n</html>", dummyFileName);
       Modelica.Utilities.Streams.readFile(dummyFileName);
@@ -820,8 +836,8 @@ encapsulated package Analysis
       end if;
     end while;
 
-    if analyseOptions.printEigenValues then
-      printHead2a(fileName, analyseOptions=analyseOptions, printTable=(nReal > 0));
+    if analyseOptions2.printEigenValues then
+      printHead2a(fileName, analyseOptions=analyseOptions2, printTable=(nReal > 0));
       if nReal > 0 then
         printTab1(
           evSorted,
@@ -831,12 +847,12 @@ encapsulated package Analysis
           nReal,
           xNames2,
           fileName,
-          analyseOptions=analyseOptions);
+          analyseOptions=analyseOptions2);
       end if;
 
       Modelica.Utilities.Files.removeFile(dummyFileName);
       StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
-      printHead2a(dummyFileName, analyseOptions=analyseOptions, printTable=(nReal > 0));
+      printHead2a(dummyFileName, analyseOptions=analyseOptions2, printTable=(nReal > 0));
       if nReal > 0 then
         printTab1(
           evSorted,
@@ -846,12 +862,12 @@ encapsulated package Analysis
           nReal,
           xNames2,
           dummyFileName,
-          analyseOptions=analyseOptions);
+          analyseOptions=analyseOptions2);
       end if;
       StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
       Modelica.Utilities.Streams.readFile(dummyFileName);
 
-      printHead2b(fileName, analyseOptions=analyseOptions, printTable=(nReal < nx));
+      printHead2b(fileName, analyseOptions=analyseOptions2, printTable=(nReal < nx));
       if nReal < nx then
         printTab2(
           evSorted,
@@ -861,12 +877,12 @@ encapsulated package Analysis
           nReal,
           xNames2,
           fileName,
-          analyseOptions=analyseOptions);
+          analyseOptions=analyseOptions2);
       end if;
 
       Modelica.Utilities.Files.removeFile(dummyFileName);
       StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
-      printHead2b(dummyFileName, analyseOptions=analyseOptions, printTable=(nReal < nx));
+      printHead2b(dummyFileName, analyseOptions=analyseOptions2, printTable=(nReal < nx));
       if nReal < nx then
         printTab2(
           evSorted,
@@ -876,7 +892,7 @@ encapsulated package Analysis
           nReal,
           xNames2,
           dummyFileName,
-          analyseOptions=analyseOptions);
+          analyseOptions=analyseOptions2);
       end if;
       StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
       Modelica.Utilities.Streams.readFile(dummyFileName);
@@ -884,7 +900,7 @@ encapsulated package Analysis
       if nReal < nx then
         // Plot eigenvalues
         i := 0;
-        if analyseOptions.plotEigenValues then
+        if analyseOptions2.plotEigenValues then
           i := i + 1;
           curves[i] := Plot.Records.Curve(
             x=eval[:, 1],
@@ -896,7 +912,7 @@ encapsulated package Analysis
         end if;
 
         // Plot invariant zeros
-        if size(systemZeros, 1) > 0 and analyseOptions.plotInvariantZeros then
+        if size(systemZeros, 1) > 0 and analyseOptions2.plotInvariantZeros then
           i := i + 1;
           curves[i] := Plot.Records.Curve(
             x=systemZeros[:].re,
@@ -912,7 +928,7 @@ encapsulated package Analysis
         Plot.diagram(diagram2, device);
       end if;
 
-      if analyseOptions.printEigenValueProperties then
+      if analyseOptions2.printEigenValueProperties then
         printHead3(fileName);
         printTab3(
           evSorted,
@@ -945,7 +961,7 @@ encapsulated package Analysis
       Modelica_LinearSystems2.Math.Complex.Vectors.sortComplex(systemZeros);
     nReal := Modelica_LinearSystems2.Internal.numberOfRealZeros(zerosSorted);
 
-    if analyseOptions.printInvariantZeros then
+    if analyseOptions2.printInvariantZeros then
       printHead4(fileName, printTable=(size(systemZeros, 1) > 0));
       if size(systemZeros, 1) > 0 then
         Modelica_LinearSystems2.StateSpace.Analysis.analysis.printTab4(
@@ -2121,8 +2137,11 @@ encapsulated package Analysis
             maxIndex2 := k;
           end if;
         end while;
-        absMax1 := absMax1/abs_v_normalized;
-        absMax2 := absMax2/abs_v_normalized;
+
+        if abs_v_normalized > 1e-30 then
+           absMax1 := absMax1/abs_v_normalized;
+           absMax2 := absMax2/abs_v_normalized;
+        end if;
 
         if absMax2 < 0.05*absMax1 then
           two := false;
@@ -2543,7 +2562,11 @@ listed in the last column might be not the most relevant one.
    Real i2;
 
  algorithm
-      // set sample time and simulation time span
+   // Check whether system has inputs and outputs
+   assert(size(sc.B,2) > 0, "\n... StateSpace system has no inputs and it is not possible to compute a time response.\n");
+   assert(size(sc.C,1) > 0, "\n... StateSpace system has no outputs and it is not possible to compute a time response.\n");
+
+   // set sample time and simulation time span
    if (dt == 0 and tSpan == 0) then
      (dtVar,tSpanVar) := Modelica_LinearSystems2.Internal.timeResponseSamples(
      sc);
@@ -3637,7 +3660,7 @@ controllable = StateSpace.Analysis.<b>isControllable</b>(ss, method)
 
 <h4>Description</h4>
 <p>
-Function StateSpace.Analysis.<b>isControllable</b> checks the observability of a state space system. Therefore, the system is transformed into staircase form, i.e. the system matrix <b>H</b> of the transformed system has block upper Hessenberg form:
+Function StateSpace.Analysis.<b>isControllable</b> checks the controllability of a state space system. Therefore, the system is transformed into staircase form, i.e. the system matrix <b>H</b> of the transformed system has block upper Hessenberg form:
 </p>
 <blockquote><pre>
      | H11    H12     H13    ...     H1k |
@@ -5349,6 +5372,17 @@ and results in
         redeclare Real D[1,1]);
 
     algorithm
+     // Check that system has inputs and outputs
+     if size(ss.B,2) == 0 then
+        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no inputs."+
+                                         "\n... Call of Plot.bodeSISO is ignored.\n");
+        return;
+     elseif size(ss.C,1) == 0 then
+        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no outputs."+
+                                         "\n... Call of Plot.bodeSISO is ignored.\n");
+        return;
+     end if;
+
       assert(iu <= size(ss.B, 2) and iu > 0, "index for input is " + String(iu) + " which is not in [1, "
          + String(size(ss.B, 2)) + "].");
       assert(iy <= size(ss.C, 1) and iy > 0, "index for output is " + String(iy) + " which is not in [1, "
@@ -5460,6 +5494,17 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
       String uNames[size(ss.B, 2)];
 
     algorithm
+     // Check that system has inputs and outputs
+     if size(ss.B,2) == 0 then
+        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no inputs."+
+                                         "\n... Call of Plot.bodeMIMO is ignored.\n");
+        return;
+     elseif size(ss.C,1) == 0 then
+        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no outputs."+
+                                         "\n... Call of Plot.bodeMIMO is ignored.\n");
+        return;
+     end if;
+
      // generate headings
       for i1 in 1:size(ss.B, 2) loop
         uNames[i1] := if ss.uNames[i1] == "" then "u" + String(i1) else ss.uNames[i1];

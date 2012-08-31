@@ -5,7 +5,8 @@ package ModelAnalysis
     "Linearize a model and return the linearized model as StateSpace object"
     extends Modelica_LinearSystems2.Internal.PartialAnalyzeFunction;
   public
-    output Modelica_LinearSystems2.StateSpace ss = ssLin;
+    output Modelica_LinearSystems2.StateSpace ss = ssLin
+      "Linearized system as StateSpace object";
   algorithm
 
     annotation(__Dymola_interactive=true, Icon(graphics={
