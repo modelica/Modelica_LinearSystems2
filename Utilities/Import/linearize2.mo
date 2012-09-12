@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Import;
 function linearize2
   "Linearize a model at the start time, or optionally after simulation up to a given time instant, and return it as StateSpace object"
+  import Modelica.Utilities.Streams.print;
   input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
   input Modelica_LinearSystems2.Records.SetParameter modelParam[:]=
     fill(Modelica_LinearSystems2.Records.SetParameter(Name="",Value=0.0),0)
@@ -39,7 +40,7 @@ protected
                                  fixedstepsize=simulationSetup.fixedStepSize);
   Boolean OK3 = if simulationSetup.linearizeAtInitial then true else importInitial("dsfinal.txt");
   Boolean OK4 = linearizeModel(problem=modelName, resultFile=fileName,
-                               startTime=simulationSetup.t_start,
+                               startTime=simulationSetup.t_linearize,
                                stopTime=simulationSetup.t_linearize);
 
   // Read linear system from file
@@ -63,12 +64,13 @@ public
             Modelica_LinearSystems2.StateSpace(A=A,B=B,C=C,D=D,uNames=uNames,yNames=yNames,xNames=xNames)
     "Linearized system as StateSpace object";
 algorithm
+
   /*
   Modelica.Utilities.Streams.print("xNames = " + xNames[1]);
   Modelica.Utilities.Streams.print("uNames = " + uNames[1]);
   Modelica.Utilities.Streams.print("yNames = " + yNames[1]);
   */
-
+  print("t_linearize = " + String(simulationSetup.t_linearize));
    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function initializes a Modelica model and then simulates the model
