@@ -91,7 +91,7 @@ package ModelAnalysis
 
   function RootLocus = Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel
     "Compute and plot the root locus of one parameter of a model (= eigen values of the model that is linearized for every parameter value)"
-    annotation (Icon(graphics={
+    annotation (__Dymola_interactive=true, Icon(graphics={
             Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={255,127,0},
