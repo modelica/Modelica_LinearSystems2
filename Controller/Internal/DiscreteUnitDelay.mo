@@ -3,7 +3,9 @@ block DiscreteUnitDelay "Delay the input signal by one sample instant"
   extends Interfaces.PartialDiscreteSISO_equality;
 
 protected
-  discrete Real y_sampled "Sampled output" annotation(Hide=true);
+  discrete Real y_sampled "Sampled output" annotation(HideResult=true);
+initial equation
+  pre(u_sampled) = 0.0;
 equation
   when {initial(), sampleTrigger} then
      u_sampled = u;
