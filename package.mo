@@ -2,21 +2,8 @@ within ;
 package Modelica_LinearSystems2 "Modelica_LinearSystems2 (Version 2.3) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
   extends Modelica.Icons.Package;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  constant String DataDir=classDirectory() + "Resources/Data/"
+  "Absolute path to directory containing utilitiy files for this package";
 
 annotation (
   preferredView="info",
@@ -82,25 +69,21 @@ For an introduction, have especially a look at:
 
 <p>
 It is planned to include this library in a future version of the
-Modelica Standard Library. Note, the library is <u>not</u> backwards compatible
-to the previous beta version 0.95, called \"Modelica_LinearSystems\", which was shipped
-with previous versions of Dymola. Since the differences are too large, no conversion
-scripts are provided, but different library names are used.
+Modelica Standard Library. 
 </p>
 
 
 <p>
-<b>Licensed by DLR under the Modelica License 2</b>
-</p>
-<table border=0 cellspacing=0 cellpadding=2>
-  <tr>
-    <td valign=\"top\"><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dlr_logo.png\"  width=60 ></td>
-    <td valign=\"top\">&nbsp;&nbsp;&nbsp;</td>
-    <td valign=\"top\"><b>Copyright</b>
-      <br>&copy; 2005-2012, DLR Institut f&uuml;r Robotik und Mechatronik
-      <br>&copy; 2012, DLR Institut f&uuml;r Systemdynamik und Regelungstechnik</td>
-  </tr>
+<table border=\"0\" cellpadding=\"2\" cellspacing=\"2\">
+<tr><td colspan=\"1\" rowspan=\"3\" style=\"vertical-align: middle;\">
+    <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dlr_logo.png\">
+    </td>
+    <td style=\"vertical-align: top;\"><br><b>Licensed by DLR under the Modelica License 2</b></td>
+</tr>
+<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</b></td></tr>
+<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012, DLR Institute of System Dynamics and Control</b></td></tr>
 </table>
+</p>
 
 <p>
 <em>This Modelica package is <u>free</u> software and
@@ -114,6 +97,4 @@ or at
 http://www.Modelica.org/licenses/ModelicaLicense2</a>.</em>
 </p>
 </html>"));
-  constant String DataDir=classDirectory() + "Resources/Data/"
-  "Absolute path to directory containing utilitiy files for this package";
 end Modelica_LinearSystems2;
