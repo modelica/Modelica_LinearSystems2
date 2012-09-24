@@ -23,6 +23,7 @@ protected
   Real rconde[n];
   Real rcondv[n];
   Integer lwork=n*(n + 6);
+  Integer iwork[2*n-2]; // Not referenced, but necessary for call
   Real work[lwork];
 
 external "Fortran 77" dgeevx(
@@ -47,6 +48,7 @@ external "Fortran 77" dgeevx(
     rcondv,
     work,
     lwork,
+    iwork,
     info) annotation(Library = {"lapack"});
 
   annotation (Documentation(info="Lapack documentation:
