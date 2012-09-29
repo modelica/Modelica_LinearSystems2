@@ -343,13 +343,13 @@ algorithm
     for i in 1:nu loop
       uNamesExist := uNamesExist or (ss.uNames[i] <> "");
     end for;
-
+/*
     if xNamesExist then
       Modelica.Utilities.Streams.print("xNamesExist == true");
     else
       Modelica.Utilities.Streams.print("xNamesExist == false");
     end if;
-
+*/
     stringMaxLength := max(size(ss.xNames, 1), min(size(ss.yNames, 1),
       11));
 
@@ -1017,7 +1017,7 @@ encapsulated package Analysis
 
       input StateSpace ss "State space system to analyze";
       input String fileName="systemAnalysis.html"
-          "File on which the state space is written in html format";
+          "File on which the state space system is written in html format";
       input String systemName="State Space System"
           "Name of the state space system";
       input String description="" "Description of system (used in html file)";
@@ -1090,219 +1090,24 @@ encapsulated package Analysis
         fileName);
       print("</table>\n<p>\nis defined by\n</p>", fileName);
 
-      // =====================
-      // Print matices A and B
-      // =====================
-      print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-         + "cellpadding=\"3\" border=\"0\"> ", fileName);
+      // ===============================
+      // Print signal names and matrices
+      // ===============================
+      Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml(ss.uNames, "uNames", fileName=fileName);
+      Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml(ss.yNames, "yNames", fileName=fileName);
+      Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml(ss.xNames, "xNames", fileName=fileName);
 
-      // Print table header
-      // ------------------
-      print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
-      for i1 in 1:nx loop
-        print("  <td style=\"text-align:center\" valign=\"top\">&nbsp; " + ss.xNames[i1] + " &nbsp;</td>",
-          fileName);
-      end for;
-      for i1 in 1:dist loop
-        print("  <td>&nbsp;</td>", fileName);
-      end for;
-      if nu > 0 then
-        print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
-        for i1 in 1:nu loop
-          print("  <td>&nbsp; " + ss.uNames[i1] + " &nbsp;</td>", fileName);
-        end for;
-      else
-        for i1 in 1:3 loop
-          print("  <td>&nbsp;</td>", fileName);
-        end for;
-      end if;
-
-      print("</tr>", fileName);
-
-      // Print upper parts of A and B
-      // ----------------------------
-      for i1 in 1:c1 loop
-        print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td> " + ss.xNames[i1] + " </td>",
-          fileName);
-        for i2 in 1:nx loop
-          print(td_align + String(ss.A[i1, i2], format=format) + " </td>", fileName);
-        end for;
-
-        for i2 in 1:dist loop
-          print("  <td>&nbsp;</td>", fileName);
-        end for;
-
-        print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
-        print("  <td>" + (if nu>0 then ss.xNames[i1] else "&nbsp;") + " </td>", fileName);
-        for i2 in 1:nu loop
-          print(td_align + String(ss.B[i1, i2], format=format) + " </td>", fileName);
-        end for;
-        print("</tr>", fileName);
-      end for;
-
-      // Print middle part of A and B (just ONE row!)
-      // --------------------------------------------
-      print("<tr>\n  <td>A</td>\n  <td>=</td>\n  <td>" + ss.xNames[c1 + 1] + " </td>", fileName);
-      for i2 in 1:nx loop
-        print(td_align + String(ss.A[c1 + 1, i2], format=format) + " </td>",
-          fileName);
-      end for;
-      // Print space between matrix A and B
-      for i2 in 1:dist loop
-        print("  <td>&nbsp;</td>", fileName);
-      end for;
-
-      if nu > 0 then
-        print("  <td>B</td>\n  <td>=</td>\n  <td>" + ss.xNames[c1 + 1] + " </td>", fileName);
-
-        for i2 in 1:nu loop
-          print(td_align + String(ss.B[c1 + 1, i2], format=format) + " </td>",
-            fileName);
-        end for;
-      else
-        print("  <td>B</td>\n  <td>=</td>\n  <td>[ ],  empty matrix: " +String(nx)+" by "+String(nu) + " </td>", fileName);
-
-      end if;
-      print("</tr>", fileName);
-      //nu>0
-
-      // Print lower parts of A and B
-      // ----------------------------
-      for i1 in c1 + 2:nx loop
-        print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td> " + ss.xNames[i1] + " </td>",
-          fileName);
-        for i2 in 1:nx loop
-          print(td_align + String(ss.A[i1, i2], format=format) + " </td>", fileName);
-        end for;
-
-        for i2 in 1:dist loop
-          print("  <td>&nbsp;</td>", fileName);
-        end for;
-        print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
-        print("  <td>" + (if nu>0 then ss.xNames[i1] else "&nbsp;") + " </td>", fileName);
-        for i2 in 1:nu loop
-          print(td_align + String(ss.B[i1, i2], format=format) + " </td>", fileName);
-        end for;
-        print("</tr>", fileName);
-      end for;
-
-      // ======================
-      // Print matrices C and D
-      // ======================
-      if ny > 0 then
-        // Print empty row between A,B and C,D
-        // -----------------------------------
-        print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
-        for i1 in 1:nx+dist+nu loop
-          print("  <td>&nbsp;</td>", fileName);
-        end for;
-        print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n</tr>", fileName);
-
-        // Print table header
-        // ------------------
-        print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
-        for i1 in 1:nx loop
-          print("  <td style=\"text-align:center\" valign=\"top\">&nbsp; " + ss.xNames[i1] + " &nbsp;</td>",
-            fileName);
-        end for;
-        for i1 in 1:dist loop
-          print("  <td>&nbsp;</td>", fileName);
-        end for;
-        print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
-        for i1 in 1:nu loop
-          print("  <td>&nbsp; " + ss.uNames[i1] + " &nbsp;</td>", fileName);
-        end for;
-
-        print("</tr>", fileName);
-
-        // Print upper parts of C and D
-        // ----------------------------
-        for i1 in 1:c2 loop
-          print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td> " + ss.yNames[i1] + " </td>",
-            fileName);
-          for i2 in 1:nx loop
-            print(td_align + String(ss.C[i1, i2], format=format) + " </td>",
-              fileName);
-          end for;
-
-          for i2 in 1:dist loop
-            print("  <td>&nbsp;</td>", fileName);
-          end for;
-          print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
-          print("  <td>" + ss.yNames[i1] + " </td>", fileName);
-          for i2 in 1:nu loop
-            print(td_align + String(ss.D[i1, i2], format=format) + " </td>",
-              fileName);
-          end for;
-
-          print("</tr>", fileName);
-        end for;
-
-        // Print middle part of C and D (just ONE row!)
-        // --------------------------------------------
-        print("<tr>\n  <td>C</td>\n  <td>=</td>\n  <td>" + ss.yNames[c2 + 1] + " </td>",
-          fileName);
-        for i2 in 1:nx loop
-          print(td_align + String(ss.C[c2 + 1, i2], format=format) + " </td>",
-            fileName);
-        end for;
-        // Print space between matrix A and B
-        for i2 in 1:dist loop
-          print("  <td>&nbsp;</td>", fileName);
-        end for;
-
-        print("  <td>D</td>\n  <td>=</td>\n  <td>" + (if nu>0 then ss.yNames[min(c2 + 1, ny)] else "[ ],  empty matrix: " +String(ny)+" by "+String(nu)) + " </td>",
-          fileName);
-
-        for i2 in 1:nu loop
-          print(td_align + String(ss.D[c2 + 1, i2], format=format) + " </td>",
-            fileName);
-        end for;
-        print("</tr>", fileName);
-
-        // Print lower parts of C and D
-        // ----------------------------
-        for i1 in c2 + 2:ny loop
-          print("<tr>\n  <td>&nbsp;</td>\n  <td>&nbsp;</td>\n  <td> " + ss.yNames[i1] + " </td>",
-            fileName);
-          for i2 in 1:nx loop
-            print(td_align + String(ss.C[i1, i2], format=format) + " </td>", fileName);
-          end for;
-
-          for i2 in 1:dist loop
-            print("  <td>&nbsp;</td>", fileName);
-          end for;
-          print("  <td>&nbsp;</td>\n  <td>&nbsp;</td>", fileName);
-          print("  <td>" + (if nu>0 then ss.yNames[i1] else "&nbsp;") + " </td>", fileName);
-          for i2 in 1:nu loop
-            print(td_align + String(ss.D[i1, i2], format=format) + " </td>", fileName);
-          end for;
-          print("</tr>", fileName);
-        end for;
-
-        print("</table>", fileName);
-
-      else
-        print("</table>\n", fileName);
-        print("<p></p>", fileName);
-
-        // Matrices C and D are empty
-        // --------------------------
-        print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-           + "cellpadding=\"3\" border=\"0\">", fileName);
-        print("<tr>\n  <td>C</td>\n  <td>=</td>\n  <td>[ ],  empty matrix: " +String(ny)+" by "+String(nx) + " </td>", fileName);
-        // Print space between matrix C and D
-        print("  <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>", fileName);
-        print("  <td>D</td>\n  <td>=</td>\n  <td>[ ],  empty matrix: " +String(ny)+" by "+String(nu) + " </td>", fileName);
-        print("</tr>\n</table>", fileName);
-      end if;
+      Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(ss.A, "A", format=format, fileName=fileName);
+      Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(ss.B, "B", format=format, fileName=fileName);
+      Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(ss.C, "C", format=format, fileName=fileName);
+      Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(ss.D, "D", format=format, fileName=fileName);
 
       if ny==0 and nu==0 then
-        print("<p>\n<b>Note</b>, that matrices <b>B</b> and <b>C</b> are empty matrices, i.e. the system has neither inputs nor outputs!\n</p>", fileName);
+        print("<p>\n<b>Note</b>, that the system has neither inputs nor outputs (and therefore matrices B, C, and D are empty matrices)!\n</p>", fileName);
       elseif ny==0 then
-        print("<p>\n<b>Note</b>, that matrix <b>C</b> is empty matrix, i.e. the system has no outputs!\n</p>", fileName);
+        print("<p>\n<b>Note</b>, that the system has no outputs (and therefore matrices C and D are empty matrices)!\n</p>", fileName);
       elseif nu==0 then
-        print("<p>\n<b>Note</b>, that matrix <b>B</b> is empty matrix, i.e. the system has no inputs!\n</p>", fileName);
+        print("<p>\n<b>Note</b>, that the system has no inputs (and therefore matrices B and D are empty matrices)!\n</p>", fileName);
       end if;
 
       if htmlBasics then
@@ -1455,8 +1260,8 @@ encapsulated package Analysis
 
       if printTable then
         print("<p>\nThe system has following real eigenvalues.\n</p>", fileName);
-        print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-           + "cellpadding=\"3\" border=\"1\">", fileName);
+        print("<table style=\"background-color:rgb(100, 100, 100);text-align:right\" "
+           + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
         print("<caption>Real eigenvalues</caption>", fileName);
         print("<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
            + "\n  <td> number </td>\n  <td> eigenvalue </td>\n  <td> T [s] </td>\n  <td> characteristics </td>",
@@ -1507,10 +1312,10 @@ encapsulated package Analysis
       // ---------------------------------------------------------------------------------------------------
 
       if printTable then
-        print("<p>\nThe system has following conjugated complex pairs of eigenvalues.\n</p>", fileName);
-        print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-             + "cellpadding=\"3\" border=\"1\">", fileName);
-        print("<caption>Conjugated complex pairs of eigenvalues</caption>", fileName);
+        print("<p>\nThe system has the following complex conjugate pairs of eigenvalues.\n</p>", fileName);
+        print("<table style=\"background-color:rgb(100, 100, 100);text-align:right\" "
+           + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
+        print("<caption>Complex conjugate pairs of eigenvalues</caption>", fileName);
         print("<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
            + "\n  <td> number </td>\n  <td> eigenvalue </td>\n  <td> freq. [Hz] </td>\n  <td> damping </td>\n  <td> characteristics </td>",
           fileName);
@@ -1521,7 +1326,7 @@ encapsulated package Analysis
 
         print("</tr>", fileName);
       else
-        print("<p>\nThe system has no conjugated complex eigenvalues.\n</p>", fileName);
+        print("<p>\nThe system has no complex conjugate eigenvalue pairs.\n</p>", fileName);
       end if;
 
     end printHead2b;
@@ -1552,22 +1357,28 @@ encapsulated package Analysis
             headingFrequencyResponse="Frequency response");
 
     algorithm
-      print("<p>\nIn the tables above, the column <b>contribution to states</b> lists for each eigenvalue the states to which the "
-         + "corresponding modal state contributes at most. This information is based on the "
-         + "two largest absolute values of the corresponding right eigenvector (if the second large value "
-         + "is less than 5&nbsp;% of the largest contribution, it is not shown)."
-         + "\n</p>\n<p>\n"
-         + "In the next table, for each state in the column <b>correlation to modal states</b>, the modal "
-         + "states which contribute most to the coresponding state are summarized, i.e. the state is mostly composed of these modal states. "
-         + "This information is based on the two largest absolute values of row i of the "
-         + "eigenvector matrix that is associated with eigenvalue i (if the second large value  "
-         + "is less than 5&nbsp;% of the largest contribution, it is not shown). This only holds "
-         + "if the modal states are in the same order of magnitude. Otherwise, the modal states "
-         + "listed in the last column might be not the most relevant one."
-         + "\n</p>",
-        fileName);
-      print("<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-         + "cellpadding=\"3\" border=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+      print("<p>\nIn the tables above, the column <b>contribution to states</b> lists for each eigenvalue the states to which the"
+         + " corresponding modal state z[i] contributes most. This information is based on the"
+         + " two largest absolute values of the corresponding right eigenvector (if the second large value"
+         + " is less than 5&nbsp;% of the largest contribution, it is not shown). Note"
+         + " the <b>right eigenvector</b> v<sub>j</sub> and the <b>left eigenvector</b> u<sub>j</sub> of A satisfy the"
+         + " following relationships with regards to <b>eigenvalue</b> &lambda;<sub>j</sub>,"
+         + " state vector x and modal state vector z (u<sub>j</sub><sup>H</sup> denotes the conjugate transpose of u<sub>j</sub>):"
+         + " </p>"
+         + " <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">"
+         + " <tr><td width=\"50\"></td>" + "\n    <td>A * v<sub>j</sub> = &lambda;<sub>j</sub> * v<sub>j</sub>; &nbsp;&nbsp;&nbsp;&nbsp;"
+         + "         u<sub>j</sub><sup>H</sup> * A = &lambda;<sub>j</sub> * u<sub>j</sub><sup>H</sup>; &nbsp;&nbsp;&nbsp;&nbsp;"
+         + "               x = V * z; &nbsp;&nbsp;&nbsp;&nbsp; V = [v<sub>1</sub>, v<sub>2</sub>, ...]</td>"
+         + "           </tr>" + "\n</table>" + "\n<p>" + "\nIn the next table, for each state in the column <b>correlation to modal states</b>, the modal"
+         + " states z[i] which contribute most to the corresponding state are summarized, that is"
+         + " the state is mostly composed of these modal states." + "\nThis information is based on the two largest absolute values of row i of the"
+         + " eigenvector matrix that is associated with eigenvalue i (if the second large value"
+         + " is less than 5&nbsp;% of the largest contribution, it is not shown). This only holds"
+         + " if the modal states z[i] are in the same order of magnitude. Otherwise, the listed modal states"
+         + " might be not the most relevant ones.</p>",fileName);
+
+      print("<table style=\"background-color:rgb(100, 100, 100); text-align:right\" "
+         + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">\n" + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
          + "\n  <td> state </td>\n  <td> correlation to modal states </td>\n  <td> eigenvalue # </td>"
          + "\n  <td> freq. [Hz] </td>\n  <td> damping </td>\n  <td> T [s] </td>\n</tr>",
         fileName);
@@ -1609,8 +1420,8 @@ encapsulated package Analysis
 
       if printTable then
         print("<p>\nThe system has following invariant zeros.\n</p>", fileName);
-        print("\n<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
-           + "cellpadding=\"3\" border=\"1\">", fileName);
+        print("\n<table style=\"background-color:rgb(100, 100, 100); text-align:right\" "
+           + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
         print("<caption>Invariant zeros</caption>", fileName);
         print( "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
            + "\n  <td> number </td>\n  <td> invariant zero </td>\n  <td> Time constant [s] </td>"
@@ -1641,16 +1452,17 @@ encapsulated package Analysis
         //Streams.print("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">", fileName);
         Streams.print("<html>", fileName);
         Streams.print("<head>\n  <title>Analysis of a state space system from Modelica LinearSystems2</title>\n</head>", fileName);
-        Streams.print("<body>", fileName);
+        Streams.print("<style type=\"text/css\">", fileName);
+        Streams.print("* { font-size: 10pt; font-family: Arial,sans-serif; }", fileName);
+        Streams.print("</style>",fileName);
       else
         // Last print of HTML environment
-        Streams.print("</body>\n</html>", fileName);
+        Streams.print("</html>", fileName);
       end if;
-
     end printHTMLbasics;
 
     encapsulated function printTab1
-        "Print the table with eigenvalues in html format on file"
+        "Print the table with real eigenvalues in html format on file"
         import Modelica;
         import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
@@ -1814,7 +1626,7 @@ encapsulated package Analysis
         end if;
 
         // Print data for one eigen value
-        print("<tr>\n  <td style=\"text-align:center\"> " + number + " </td>\n  <td style=\"text-align:left\"> &nbsp; "
+        print("<tr style=\"background-color:white\">\n  <td style=\"text-align:center\"> " + number + " </td>\n  <td style=\"text-align:left\"> &nbsp; "
            + String(evSorted[i].ev.re, format="14.4e") + " </td>\n  <td style=\"text-align:left\"> &nbsp; "
            + (if evSorted[i].timeConstant < 1e6 then
                String(evSorted[i].timeConstant, format="9.4f") else
@@ -1846,7 +1658,7 @@ encapsulated package Analysis
     end printTab1;
 
     encapsulated function printTab2
-        "Print the table with eigenvalues in html format on file"
+        "Print the table with complex conjugate eigenvalues in html format on file"
         import Modelica;
         import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
@@ -1883,6 +1695,7 @@ encapsulated package Analysis
       Integer i;
       Integer k;
       String number;
+      String number2;
       Integer j;
 
       Real r_abs_evec[nx];
@@ -1910,6 +1723,7 @@ encapsulated package Analysis
       while i <= nx loop
        // Build eigenvalue number
         number := String(i) + "/" + String(i + 1);
+        number2 := number;
         number := Strings.repeat(max(0, 7 - Strings.length(number))) + number;
         j := j + 2;
 
@@ -2004,7 +1818,7 @@ encapsulated package Analysis
         end if;
 
         // Print data for one eigen value
-        print("<tr>\n  <td style=\"text-align:left\"> " + number + " </td>"
+        print("<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> " + number + " </td>"
           + "\n  <td style=\"text-align:left\"> &nbsp; " + String(evSorted[i].ev.re, format="14.4e")
           + " &plusmn; " + String(evSorted[i].ev.im, format="12.4e") + "j" + " </td>"
           + "\n  <td style=\"text-align:left\"> &nbsp; " + String(evSorted[i].frequency, format="9.4f") + " </td>"
@@ -2017,10 +1831,10 @@ encapsulated package Analysis
           (if evSorted[i].isDetectable then "" else "not ") + "detectable ") + " </td>", fileName);
 
         if analyseOptions.printEigenValueProperties then
-          print("  <td style=\"text-align:left\"> &nbsp; " + " z[" + number + "]"
+          print("  <td style=\"text-align:left\"> &nbsp; " + " z[" + number2 + "]"
              + " contribute to " + xNames2[r_maxIndex1] + " with " + String(
             r_absMax1, format=".3g") + " %<br>" + (if r_two then "&nbsp; " + " z["
-             + number + "]" + " contribute to " + xNames2[r_maxIndex2] + " with " +
+             + number2 + "]" + " contribute to " + xNames2[r_maxIndex2] + " with " +
             String(r_absMax2, format=".3g") + " %" else "") + " </td>",
             fileName);
         end if;
@@ -2167,13 +1981,13 @@ encapsulated package Analysis
         end if;
 
         if two then
-          print("<tr>\n  <td rowspan=2 style=\"text-align:left\"> &nbsp; " + xNames2[i] + " </td>"
+          print("<tr style=\"background-color:white\">\n  <td rowspan=2 style=\"text-align:left\"> &nbsp; " + xNames2[i] + " </td>"
             + "\n  <td style=\"text-align:left\"> &nbsp; is composed of " + String(100*absMax1, format="5.1f") + "% by z[" + number1 + "]</td>"
             + "\n  <td style=\"text-align:center\"> &nbsp; " + number1 + "</td>"
             + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then "---" else String(w1, format="9.4f")) + "</td>"
             + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then "---" else String(d1, format="9.4f")) + "</td>"
             + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then String(evSorted[i].timeConstant, format="9.4f") else "--- </td>")
-            + "\n</tr>\n<tr>"
+            + "\n</tr>\n<tr style=\"background-color:white\">"
             + "\n  <td style=\"text-align:left\"> &nbsp; is composed of " + String(100*absMax2, format="5.1f") + "% by z[" + number2 + "]</td>"
             + "\n  <td style=\"text-align:center\"> &nbsp; " + number2 + "</td>"
             + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw2 <= nReal then "---" else String(w2, format="9.4f")) + "</td>"
@@ -2182,7 +1996,7 @@ encapsulated package Analysis
               String(1/abs(cev[maxIndex2].re), format="9.4f") else "--- </td>\n</tr>"),
             fileName);
         else
-          print("<tr>\n  <td style=\"text-align:left\"> &nbsp; " + xNames2[i] + " </td>"
+          print("<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> &nbsp; " + xNames2[i] + " </td>"
             + "\n  <td style=\"text-align:left\"> &nbsp; is composed of " + String(100*absMax1, format="5.1f") + "% by z[" + number1 + "]</td>"
             + "\n  <td style=\"text-align:center\"> &nbsp; " + number1 + "</td>"
             + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then "---" else String(w1, format="9.4f")) + "</td>"
@@ -2190,7 +2004,7 @@ encapsulated package Analysis
             + "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then String(evSorted[i].timeConstant, format="9.4f") else "--- </td>\n</tr>"),
             fileName);
         end if;
-    //     print("<tr>\n  <td style=\"text-align:left\"> &nbsp; " + xNames2[i] + " </td>\n  <td style=\"text-align:left\"> &nbsp; "
+    //     print("<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> &nbsp; " + xNames2[i] + " </td>\n  <td style=\"text-align:left\"> &nbsp; "
     //        + " is composed of " + String(100*absMax1, format="5.1f") + "% by z[" +
     //       number1 + "]" + (if two then " <br>" + " &nbsp; " + " is composed of " +
     //       String(100*absMax2, format="5.1f") + "% by z[" + number2 + "]" else "") + " </td> <td style=\"text-align:center\"> &nbsp; "
@@ -2260,7 +2074,7 @@ encapsulated package Analysis
         timeConstant := if abs(systemZeros[i].re) > 10*Modelica.Constants.eps then
                 1/abs(systemZeros[i].re) else 1/(10*Modelica.Constants.eps);
 
-        print("<tr>\n  <td style=\"text-align:left\"> &nbsp; " + number + " </td>"
+        print("<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> &nbsp; " + number + " </td>"
           + "\n  <td> &nbsp; " + String(systemZeros[i].re, format="14.4e") + " </td>"
           + "\n  <td> &nbsp; " + String(timeConstant, format="9.4f") + " </td>"
           + "\n  <td style=\"text-align:center\"> &nbsp; --- </td>"
@@ -2276,7 +2090,7 @@ encapsulated package Analysis
        // Determine frequency and number of corresponding zero
         (freq,damp) := Complex.frequency(systemZeros[i]);
 
-        print("<tr>\n  <td style=\"text-align:left\"> &nbsp; " + number + " </td>"
+        print("<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> &nbsp; " + number + " </td>"
           + "\n  <td style=\"text-align:left\"> &nbsp; " + String(systemZeros[i].re, format="14.4e")
           + " &plusmn; " + String(systemZeros[i].im, format="12.4e") + "j </td>"
           + "\n  <td style=\"text-align:center\"> &nbsp; --- </td>"
@@ -2432,7 +2246,7 @@ C = y1   0    0    1    0    1    0     D = y1  0   0
 
 <h5>Description</h5>
 <p>
-System to demonstrate the usage of Modelica_LinearSystems2.StateSpace.Analysis.anlysis()
+System to demonstrate the usage of Modelica_LinearSystems2.StateSpace.Analysis.analysis()
 </p>
 
 <h5>Characteristics</h5>
@@ -2450,7 +2264,7 @@ not stable
 <br><br>
 <b>Real eigenvalues</b>
 </p>
-<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td><td> eigenvalue </td> <td> T [s] </td>  <td> characteristics </td><td> contribution to states</td></tr>
 <tr>
  <td style=\"text-align:center\">       1 </td> <td style=\"text-align:left\"> &nbsp;   -4.9874e+001 </td> <td style=\"text-align:left\"> &nbsp;    0.0201 </td> <td style=\"text-align:left\"> &nbsp; stable, controllable, observable  </td> <td style=\"text-align:left\"> &nbsp;  z[1] contributes to x3 with 54.6 %<br>&nbsp;  z[1] contributes to x5 with 37 % </td> </tr>
@@ -2465,7 +2279,7 @@ not stable
 <p>
 <b>Conjugated complex pairs of eigenvalues</b>
 </p>
-<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td>  <td> contribution to states</td></tr>
 <tr>
  <td style=\"text-align:left\">     5/6 </td> <td style=\"text-align:left\"> &nbsp;    1.0299e+000 &plusmn;  6.5528e+000j </td> <td style=\"text-align:left\"> &nbsp;    1.0557 </td> <td style=\"text-align:left\"> &nbsp;   -0.1553 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[    5/6] contribute to x6 with 35.9 %<br>&nbsp;  z[    5/6] contribute to x2 with 20.6 % </td> </tr>
@@ -2487,7 +2301,7 @@ is less than 5&nbsp;% of the largest contribution, it is not shown). This only h
 if the modal states are in the same order of magnitude. Otherwise, the modal states
 listed in the last column might be not the most relevant one.
 </p>
-<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> state </td> <td> composition </td> <td> eigenvalue #</td> <td> freq. [Hz] </td> <td> damping </td> <td> T [s] </td></tr>
 <tr>
  <td style=\"text-align:left\"> &nbsp; x1 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  42.5% by z[2] <br> &nbsp;  is composed of  35.4% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 2<br> &nbsp; 5/6 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    1.0557 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp;    0.0201<br> &nbsp; --- </td> </tr>
@@ -2506,7 +2320,7 @@ listed in the last column might be not the most relevant one.
 <p>
 <b>Invariant zeros</b>
 </p>
-<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\">
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> invariant zero </td><td> Time constant [s] </td> <td> freq. [Hz] </td> <td> damping </td></tr>
 <tr>
  <td style=\"text-align:left\"> &nbsp;       1 </td> <td> &nbsp;   -5.4983e+001 </td> <td> &nbsp;    0.0182 </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
