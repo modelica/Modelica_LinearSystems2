@@ -1102,15 +1102,26 @@ It contains the following main improvements (and several minor ones):
 <li> New package \"Modelica_LinearSystems2.ModelAnalysis\" 
      that contains several functions to linearize
      a model and perform a selected linear analysis operation, like 
-     plotting of poles, zeros or transfer functions.</li>
+     plotting of poles, zeros or transfer functions.
+     This allows a user to conveniently utilize the analyis
+     functions by basically only providing the name of a 
+     Modelica model.<br></li>
 <li> New plot functions in package \"Modelica_LinearSystems2.Utilities.Plot\"
      to plot parameterized curvces, as well as to plot
      a root locus of a model, by linearizing a model for a set of selected
-     parameter values.</li>
+     parameter values.<br></li>
 <li> A new function \"Modelica_LinearSystems2.Utilities.Import.linearize2\"
-     to linearize a model and return a StateSpace object.</li>
+     to (a) set parameters of a model, (b) linearize the model 
+     and (c) return a StateSpace object (the existing Import.linearize function
+     does only allow to linearize around the default parameter settings and the
+     function returns the A,B,C,D matrices and therefore it is not possible to
+     utilize directly the many functions operating on StateSpace objects).<br></li>
+<li> The layout of the output of function Modelica_LinearSystems2.StateSpace.Analysis.analysis
+     has been improved.<br></li>
+<li> The analysis functions have been corrected, so that they do not trigger an
+     error, if inputs or outputs are not present. Instead, analysis operations
+     that require inputs and/or outputs are not executed.</li>
 </ul>
-
 </html>"));
     end Version_2_3;
 

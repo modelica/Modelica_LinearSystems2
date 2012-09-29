@@ -9,8 +9,14 @@ function printStringVectorInHtml
   input String fileName="log.html";
 protected
   Integer r=size(s, 1);
+  Boolean siExist=false;
 algorithm
-  if r == 0 then
+  // Check whether all entries are an empty string
+  for i in 1:r loop
+     siExist := siExist or (s[i] <> "");
+  end for;
+
+  if not siExist then
      if name == "" then
         print("<p>&nbsp;&nbsp;&nbsp;[&nbsp;], empty vector</p>\n", fileName);
      else

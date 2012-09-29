@@ -1259,7 +1259,7 @@ encapsulated package Analysis
       //print("<p>\n<b>Real eigenvalues</b>\n</p>", fileName);
 
       if printTable then
-        print("<p>\nThe system has following real eigenvalues.\n</p>", fileName);
+        print("<p>\nThe system has the following real eigenvalues.\n</p>", fileName);
         print("<table style=\"background-color:rgb(100, 100, 100);text-align:right\" "
            + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
         print("<caption>Real eigenvalues</caption>", fileName);
