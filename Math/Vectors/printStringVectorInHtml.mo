@@ -25,25 +25,25 @@ algorithm
   else
      // Print "name = "
      if name <> "" then
-        print("<table border=\"0\"><tr><td valign=\"middle\">" +
-              "&nbsp;&nbsp;&nbsp;" + name + "&nbsp;=&nbsp;</td><td>", fileName);
+        print("<table border=\"0\">\n<tr>\n  <td valign=\"middle\">" +
+              "&nbsp;&nbsp;&nbsp;" + name + "</td>\n  <td valign=\"middle\">=</td>\n  <td>", fileName);
      end if;
 
      // Print table heading
-     print("<table style=\"background-color:rgb(100, 100, 100);\" cellpadding=\"3\" border=\"0\" cellspacing=\"1\">",
+     print("    <table style=\"background-color:rgb(100, 100, 100);\" cellpadding=\"3\" border=\"0\" cellspacing=\"1\">",
            fileName);
 
      // Print vector elements
      for i in 1:r loop
-        print("<tr style=\"background-color:white\"><td align=\"right\" style=\"background-color:rgb(230, 230, 230);\">"
+        print("    <tr style=\"background-color:white\">\n      <td align=\"right\" style=\"background-color:rgb(230, 230, 230);\">"
                   + String(i) + "</td>", fileName);
-        print("   <td align=\"left\">" + s[i] + "</td></tr>", fileName);
+        print("      <td align=\"left\">" + s[i] + "</td>\n    </tr>", fileName);
      end for;
 
      // Print row closing tags
-     print("</table>", fileName);
+     print("    </table>", fileName);
      if name <> "" then
-        print("</td></tr></table>", fileName);
+        print("  </td>\n</tr>\n</table>", fileName);
      end if;
   end if;
 

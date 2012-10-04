@@ -6,7 +6,8 @@ function printMatrixInHtml
 
   input Real M[:,:] "Real matrix";
   input String name="" "Matrix name used for printing";
-  input String fileName="log.html";
+  input String fileName="log.html"
+    "Name of file to be printed in (incl. file extension)";
   input String format=".6g" "Format of numbers (e.g. \"20.8e\")";
 protected
   Integer r=size(M, 1);
@@ -22,36 +23,36 @@ algorithm
   else
      // Print "name = "
      if name <> "" then
-        print("<table border=\"0\"><tr><td valign=\"middle\">" +
-              "&nbsp;&nbsp;&nbsp;" + name + "&nbsp;=&nbsp;</td><td>", fileName);
+        print("<table border=\"0\">\n<tr>\n  <td valign=\"middle\">" +
+              "&nbsp;&nbsp;&nbsp;" + name + "</td>\n  <td valign=\"middle\">=</td>\n  <td>", fileName);
      end if;
 
      // Print table heading
-     print(  "<table style=\"background-color:rgb(100, 100, 100);\" cellpadding=\"3\" border=\"0\" cellspacing=\"1\">"
-           + "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
-           + "<td> </td>", fileName);
+     print(  "    <table style=\"background-color:rgb(100, 100, 100);\" cellpadding=\"3\" border=\"0\" cellspacing=\"1\">"
+           + "\n    <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+           + "\n      <td> </td>", fileName);
 
      for j in 1:c loop
-        print("   <td align=\"center\">" + String(j) + "</td>", fileName);
+        print("      <td align=\"center\">" + String(j) + "</td>", fileName);
      end for;
-     print("</tr>", fileName);
+     print("    </tr>", fileName);
 
      // Print matrix elements
      for i in 1:r loop
-        print("<tr style=\"background-color:white\"><td align=\"right\" style=\"background-color:rgb(230, 230, 230);\">"
+        print("    <tr style=\"background-color:white\">\n      <td align=\"right\" style=\"background-color:rgb(230, 230, 230);\">"
                   + String(i) + "</td>", fileName);
 
         for j in 1:c loop
-           print("   <td align=\"right\">" + String(M[i, j],format=format) + "</td>", fileName);
+           print("      <td align=\"right\">" + String(M[i, j],format=format) + "</td>", fileName);
         end for;
 
-        print("</tr>", fileName);
+        print("    </tr>", fileName);
      end for;
 
      // Print row closing tags
-     print("</table>", fileName);
+     print("    </table>", fileName);
      if name <> "" then
-        print("</td></tr></table>", fileName);
+        print("  </td>\n</tr>\n</table>", fileName);
      end if;
   end if;
 
