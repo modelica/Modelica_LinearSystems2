@@ -59,18 +59,15 @@ protected
   String yNames[ny] =  xuyName[nx + nu + 1:nx + nu + ny]
     "Modelica names of outputs";
   String xNames[nx] =  xuyName[1:nx] "Modelica names of states";
+
+  // Model is already translated. Reset to the default initial conditions
+  Boolean OK5 = translateModel(problem=modelName);
 public
   output Modelica_LinearSystems2.StateSpace ss=
             Modelica_LinearSystems2.StateSpace(A=A,B=B,C=C,D=D,uNames=uNames,yNames=yNames,xNames=xNames)
     "Linearized system as StateSpace object";
 algorithm
 
-  /*
-  Modelica.Utilities.Streams.print("xNames = " + xNames[1]);
-  Modelica.Utilities.Streams.print("uNames = " + uNames[1]);
-  Modelica.Utilities.Streams.print("yNames = " + yNames[1]);
-  */
-  print("t_linearize = " + String(simulationSetup.t_linearize));
    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function initializes a Modelica model and then simulates the model
