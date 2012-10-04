@@ -7,6 +7,8 @@ function printStringVectorInHtml
   input String s[:] "String vector";
   input String name="" "Vector name used for printing";
   input String fileName="log.html";
+  input Boolean printIndices=true
+    "=true, if row indices shall be printed, otherwise they are not printed";
 protected
   Integer r=size(s, 1);
   Boolean siExist=false;
@@ -34,11 +36,18 @@ algorithm
            fileName);
 
      // Print vector elements
-     for i in 1:r loop
-        print("    <tr style=\"background-color:white\">\n      <td align=\"right\" style=\"background-color:rgb(230, 230, 230);\">"
-                  + String(i) + "</td>", fileName);
-        print("      <td align=\"left\">" + s[i] + "</td>\n    </tr>", fileName);
-     end for;
+     if printIndices then
+        for i in 1:r loop
+           print("    <tr style=\"background-color:white\">\n      <td align=\"right\" style=\"background-color:rgb(230, 230, 230);\">"
+                     + String(i) + "</td>", fileName);
+           print("      <td align=\"left\">" + s[i] + "</td>\n    </tr>", fileName);
+        end for;
+     else
+        for i in 1:r loop
+           print("    <tr style=\"background-color:white\">\n" +
+                 "      <td align=\"left\">" + s[i] + "</td>\n    </tr>", fileName);
+        end for;
+     end if;
 
      // Print row closing tags
      print("    </table>", fileName);

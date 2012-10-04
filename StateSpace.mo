@@ -27,9 +27,9 @@ encapsulated operator 'constructor'
       import Modelica_LinearSystems2.StateSpace;
 
     input Real A[:,size(A, 1)];
-    input Real B[size(A, 1),:];
-    input Real C[:,size(A, 1)];
-    input Real D[size(C, 1),size(B, 2)];
+    input Real B[size(A, 1),:] = fill(0.0, size(A,1),0);
+    input Real C[:,size(A, 1)] = fill(0.0, 0, size(A,1));
+    input Real D[size(C, 1),size(B, 2)] = fill(0.0, 0,0);
 
     input String uNames[size(B, 2)]=fill("", size(B, 2));
     input String yNames[size(C, 1)]=fill("", size(C, 1));
@@ -1046,6 +1046,7 @@ encapsulated package Analysis
       String heading= "h"+String(hSizeOK);
       String heading2= "h"+String(hSizeOK+1);
       String heading3= "h"+String(hSizeOK+2);
+      Boolean printIndices;
 
     algorithm
       // ---------------------------------------------------------------------------------------------------
@@ -1091,16 +1092,18 @@ encapsulated package Analysis
       print("</table>\n<p>\nis defined by\n</p>", fileName);
 
       // ===============================
-      // Print signal names and matrices
+      // Print signal names and matrices (print row and column indices if at least one matrix has more as 5 elements)
       // ===============================
-      Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml(ss.uNames, "uNames", fileName=fileName);
-      Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml(ss.yNames, "yNames", fileName=fileName);
-      Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml(ss.xNames, "xNames", fileName=fileName);
+      printIndices :=size(ss.A, 1) > 5 or size(ss.B, 2) > 5 or size(ss.C, 1) >
+          5;
+      Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml(ss.uNames, "uNames", fileName=fileName, printIndices=printIndices);
+      Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml(ss.yNames, "yNames", fileName=fileName, printIndices=printIndices);
+      Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml(ss.xNames, "xNames", fileName=fileName, printIndices=printIndices);
 
-      Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(ss.A, "A", format=format, fileName=fileName);
-      Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(ss.B, "B", format=format, fileName=fileName);
-      Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(ss.C, "C", format=format, fileName=fileName);
-      Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(ss.D, "D", format=format, fileName=fileName);
+      Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(ss.A, "A", format=format, fileName=fileName, printIndices=printIndices);
+      Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(ss.B, "B", format=format, fileName=fileName, printIndices=printIndices);
+      Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(ss.C, "C", format=format, fileName=fileName, printIndices=printIndices);
+      Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(ss.D, "D", format=format, fileName=fileName, printIndices=printIndices);
 
       if ny==0 and nu==0 then
         print("<p>\n<b>Note</b>, that the system has neither inputs nor outputs (and therefore matrices B, C, and D are empty matrices)!\n</p>", fileName);
