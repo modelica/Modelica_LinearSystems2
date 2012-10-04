@@ -9,7 +9,7 @@ annotation (
   preferredView="info",
   uses(Modelica(version="3.2")),
   version="2.3",
-  versionBuild=1,
+  versionBuild=2,
   versionDate="2012-08-30",
   dateModified = "2012-08-30 09:27:58Z",
   revisionID="$Id::                                       $",
@@ -69,7 +69,7 @@ For an introduction, have especially a look at:
 
 <p>
 It is planned to include this library in a future version of the
-Modelica Standard Library. 
+Modelica Standard Library.
 </p>
 
 
