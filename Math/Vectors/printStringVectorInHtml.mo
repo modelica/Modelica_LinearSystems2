@@ -36,18 +36,13 @@ algorithm
            fileName);
 
      // Print vector elements
-     if printIndices then
-        for i in 1:r loop
-           print("    <tr style=\"background-color:white\">\n      <td align=\"right\" style=\"background-color:rgb(230, 230, 230);\">"
-                     + String(i) + "</td>", fileName);
-           print("      <td align=\"left\">" + s[i] + "</td>\n    </tr>", fileName);
-        end for;
-     else
-        for i in 1:r loop
-           print("    <tr style=\"background-color:white\">\n" +
-                 "      <td align=\"left\">" + s[i] + "</td>\n    </tr>", fileName);
-        end for;
-     end if;
+     for i in 1:r loop
+        print("    <tr style=\"background-color:white\">", fileName);
+        if printIndices then
+           print("      <td align=\"right\" style=\"background-color:rgb(230, 230, 230);\">" + String(i) + "</td>", fileName);
+        end if;
+        print("      <td align=\"left\">" + s[i] + "</td>\n    </tr>", fileName);
+     end for;
 
      // Print row closing tags
      print("    </table>", fileName);
@@ -57,7 +52,50 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+Vectors.<b>printStringVectorInHtml</b>(s, name, fileName, printIndices);
+</pre></blockquote>
 
+<h4>Description</h4>
+<p>
+Print vector of strings <code>s</code> called <code>name</code> into
+a file <code>fileName</code> in HTML format.
+Optionally, row indices are printed as well.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+s = {\"w\", \"3\", \"alpha\"};
+<b>printStringVectorInHtml</b>(s, \"myVec\", \"log.html\", true);
+</pre></blockquote>
+<p>
+saves following HTML code in the file <em>log.html</em>:
+</p>
+<blockquote><pre>
+&lt;table border=\"0\"&gt;
+&lt;tr&gt;
+  &lt;td valign=\"middle\"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;myVec&lt;/td&gt;
+  &lt;td valign=\"middle\"&gt;=&lt;/td&gt;
+  &lt;td&gt;
+    &lt;table style=\"background-color:rgb(100, 100, 100);\" cellpadding=\"3\" border=\"0\" cellspacing=\"1\"&gt;
+    &lt;tr style=\"background-color:white\"&gt;
+      &lt;td align=\"right\" style=\"background-color:rgb(230, 230, 230);\"&gt;1&lt;/td&gt;
+      &lt;td align=\"left\"&gt;w&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr style=\"background-color:white\"&gt;
+      &lt;td align=\"right\" style=\"background-color:rgb(230, 230, 230);\"&gt;2&lt;/td&gt;
+      &lt;td align=\"left\"&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr style=\"background-color:white\"&gt;
+      &lt;td align=\"right\" style=\"background-color:rgb(230, 230, 230);\"&gt;3&lt;/td&gt;
+      &lt;td align=\"left\"&gt;alpha&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</pre></blockquote>
 </html>", revisions="<html>
 </html>"));
 end printStringVectorInHtml;
