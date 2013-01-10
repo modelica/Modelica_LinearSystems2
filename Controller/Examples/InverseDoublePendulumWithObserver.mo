@@ -24,6 +24,7 @@ model InverseDoublePendulumWithObserver
       matrixName="K_pa",
       fileName=DataDir + "inverseDoublePendulumController.mat"),
     sampleClock(sampleTime=0.002, blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous),
+
     observer(
       systemName="stateSpace",
       matrixOnFile=true,
@@ -41,7 +42,7 @@ model InverseDoublePendulumWithObserver
     width=50,
     period=30,
     amplitude=5)
-              annotation (Placement(transformation(extent={{-140,-10},{-120,10}})));
+    annotation (Placement(transformation(extent={{-140,-10},{-120,10}})));
   Components.AccelerationLimiter accelerationLimiter(
     v_limit=20,
     velocityLimitation=false,
@@ -63,8 +64,8 @@ model InverseDoublePendulumWithObserver
     annotation (Placement(transformation(extent={{50,40},{70,60}})));
 
 initial equation
-//feedback.y = {0.0};
-plant.u = {0.0};
+  //feedback.y = {0.0};
+  // plant.u = {0.0};
 
 equation
   connect(pulse.y, accelerationLimiter.u) annotation (Line(
@@ -72,11 +73,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(noise1.y, plant.dist) annotation (Line(
-      points={{71,50},{86.8,50},{86.8,5.6}},
+      points={{71,50},{85.2,50},{85.2,5.6}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(noise.y, plant.dist2) annotation (Line(
-      points={{109,50},{93.6,50},{93.6,5.6}},
+      points={{109,50},{95.4,50},{95.4,5.6}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(preFilter.u[1], accelerationLimiter.s) annotation (Line(
@@ -84,8 +85,8 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,-100},{140,
-            100}}),     graphics={Text(
+    Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,-100},{140,
+            100}}), graphics={Text(
           extent={{44,76},{134,64}},
           lineColor={0,0,0},
           textString="disturbance"), Rectangle(extent={{-76,28},{108,-60}},
