@@ -267,10 +267,6 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   annotation (
-    experiment(
-      StartTime=1,
-      StopTime=10,
-      Algorithm="Dassl"),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-150,-100},{150,100}},

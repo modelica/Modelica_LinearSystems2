@@ -45,13 +45,14 @@ equation
       points={{-59,20},{-42,20}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation ( Documentation(info="<html>
+  annotation (
+    experiment(Tolerance=1e-006),
+    Documentation(info="<html>
 <p>
 Demonstrates the different discretization methods by simulating the step
 response of a second order system as continuous system and as discrete system
 with the supported discretization methods. The step starts with an offset at 0.1 s
 to demonstrate the steady-state initialization.
 </p>
-</html>"),
-    experiment(Tolerance=1e-006));
+</html>"));
 end Discretization2;

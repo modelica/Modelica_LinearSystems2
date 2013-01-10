@@ -13,24 +13,22 @@ block SimpleMIMOSystem
     order=3,
     f_cut=2,
     analogFilter=Modelica.Blocks.Types.AnalogFilter.Bessel)
-             annotation (Placement(transformation(extent={{-12,-40},{8,-20}})));
+    annotation (Placement(transformation(extent={{-12,-40},{8,-20}})));
 equation
   connect(filter1.u, u[1]) annotation (Line(
-      points={{-14,-30},{-60,-30},{-60,-10},{-120,-10}},
+      points={{-14,-30},{-30,-30},{-30,-2},{-120,-2},{-120,-10},{-120,-10}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(filter2.u, u[2]) annotation (Line(
-      points={{-14,30},{-58,30},{-58,10},{-120,10}},
+      points={{-14,30},{-30,30},{-30,2},{-120,2},{-120,10},{-120,10}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(filter1.y, y[1]) annotation (Line(
-      points={{9,-30},{54,-30},{54,-5},{110,-5}},
+      points={{9,-30},{30,-30},{30,-2},{110,-2},{110,-5}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(filter2.y, y[2]) annotation (Line(
-      points={{9,30},{56,30},{56,5},{110,5}},
+      points={{9,30},{30,30},{30,2},{110,2},{110,5}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics));
 end SimpleMIMOSystem;

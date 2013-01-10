@@ -150,7 +150,6 @@ dist1_s=0.02*Modelica.Math.sin(20*time);
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    experiment(StopTime=20),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},

@@ -1,10 +1,10 @@
-DoublePendulum2
-SeriesConnection
-InverseDoublePendulum2
-InverseDoublePendulum
-InverseDoublePendulum3
 AccelerationLimiter
+DoublePendulum
+DoublePendulum2
+InverseDoublePendulum
+InverseDoublePendulum2
+InverseDoublePendulum3
 MixingUnit
 MixingUnit1
+SeriesConnection
 TwoPoint
-DoublePendulum

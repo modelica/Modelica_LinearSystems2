@@ -405,7 +405,6 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   annotation (
-    experiment(StopTime=50, Algorithm="Dassl"),
     Documentation(info="<html>
 <p>
 Model of a simple inverted double pendulum system. The mdel is the same as in Modelica_Controller.Examples.Components.DoublePendulum but with different initial values because the initial values are used as a working point for linearization.<br>

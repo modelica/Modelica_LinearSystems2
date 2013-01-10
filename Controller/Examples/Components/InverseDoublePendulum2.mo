@@ -105,11 +105,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(dist2, inverseDoublePendulum.dist2) annotation (Line(
-      points={{60,120},{60,60},{-24,60},{-24,12.2}},
+      points={{60,120},{60,60},{-24,60},{-24,12}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(dist, inverseDoublePendulum.dist) annotation (Line(
-      points={{-60,120},{-60,60},{-36,60},{-36,12.2}},
+      points={{-60,120},{-60,60},{-36,60},{-36,12}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(u[1], inverseDoublePendulum.u) annotation (Line(
@@ -121,7 +121,6 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    experiment(StopTime=20),
     Documentation(info="<html>
 <p>Model of a simple inverted double pendulum system using Modelica_Controller.Examples.Components.InverseDoublePendulum. The physical Model is used in Modelica_LinearSystems2.Examples.StateSpace.inverseDoublePendulumController where it is being linearized an used as a base for linear controller design. The results are used to control the crane system in Modelica_Controller.Examples.InverseDoublePendulum.mo </p>
 </html>"),

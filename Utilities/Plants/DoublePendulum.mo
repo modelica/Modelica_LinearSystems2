@@ -264,10 +264,6 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   annotation (
-    experiment(
-      StartTime=1,
-      StopTime=10,
-      Algorithm="Dassl"),
     Documentation(info="<html>
 <p>Multibody model of a simple double pendulum system. This physical model is used in various models and functions of the library e.g. for linearization or as a base for linear controller design. </p>
 </html>"),
