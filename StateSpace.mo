@@ -5540,92 +5540,86 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 </html>"));
     end bodeSISO;
 
-    encapsulated function bodeMIMO
-      "Plot bode plot of all transfer functions, corresponding to the state space system"
+encapsulated function bodeMIMO
+  "Plot bode plot of all transfer functions, corresponding to the state space system"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Utilities.Plot;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.StateSpace;
+  import Modelica_LinearSystems2.ZerosAndPoles;
+  import Modelica_LinearSystems2.Utilities.Plot;
 
-      input StateSpace ss "State space system";
-      input Integer nPoints(min=2) = 200 "Number of points";
-      input Boolean autoRange[:, :]=fill(
-              true,
-              size(ss.C, 1),
-              size(ss.B, 2))
-        "True, if abszissa range is automatically determined";
-      input Modelica.SIunits.Frequency f_min[:, :]=fill(
-              0.1,
-              size(ss.C, 1),
-              size(ss.B, 2)) "Minimum frequency value, if autoRange = false";
-      input Modelica.SIunits.Frequency f_max[:, :]=fill(
-              10,
-              size(ss.C, 1),
-              size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
-      input Boolean magnitude=true "True, if magnitude of tf should be plotted"
-        annotation (choices(__Dymola_checkBox=true));
-      input Boolean phase=true "True, if pase of tf should be plotted"
-        annotation (choices(__Dymola_checkBox=true));
-      input Real tol=1e-10
-        "Tolerance of reduction procedure, default tol = 1e-10";
+  input StateSpace ss "State space system";
+  input Integer nPoints(min=2) = 200 "Number of points";
+  input Boolean autoRange[:, :]=fill(
+      true,
+      size(ss.C, 1),
+      size(ss.B, 2)) "True, if abszissa range is automatically determined";
+  input Modelica.SIunits.Frequency f_min[:, :]=fill(
+      0.1,
+      size(ss.C, 1),
+      size(ss.B, 2)) "Minimum frequency value, if autoRange = false";
+  input Modelica.SIunits.Frequency f_max[:, :]=fill(
+      10,
+      size(ss.C, 1),
+      size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
+  input Boolean magnitude=true "True, if magnitude of tf should be plotted"
+    annotation (choices(__Dymola_checkBox=true));
+  input Boolean phase=true "True, if pase of tf should be plotted"
+    annotation (choices(__Dymola_checkBox=true));
+  input Real tol=1e-10 "Tolerance of reduction procedure, default tol = 1e-10";
 
-      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
-          defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
+  extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+        Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
 
-    protected
-      TransferFunction tf[size(ss.C, 1), size(ss.B, 2)]
-        "Transfer functions to be plotted";
-      Plot.Records.Diagram diagram2=defaultDiagram;
-      String yNames[size(ss.C, 1)];
-      String uNames[size(ss.B, 2)];
+protected
+  ZerosAndPoles zp[size(ss.C, 1), size(ss.B, 2)]
+    "ZerosAndPoles object to be plotted";
+  Plot.Records.Diagram diagram2=defaultDiagram;
+  String yNames[size(ss.C, 1)];
+  String uNames[size(ss.B, 2)];
 
-    algorithm
-      // Check that system has inputs and outputs
-      if size(ss.B, 2) == 0 then
-        Modelica.Utilities.Streams.print(
-          "\n... Not possible to plot transfer function because system has no inputs."
-           + "\n... Call of Plot.bodeMIMO is ignored.\n");
-        return;
-      elseif size(ss.C, 1) == 0 then
-        Modelica.Utilities.Streams.print(
-          "\n... Not possible to plot transfer function because system has no outputs."
-           + "\n... Call of Plot.bodeMIMO is ignored.\n");
-        return;
-      end if;
+algorithm
+  // Check that system has inputs and outputs
+  if size(ss.B, 2) == 0 then
+    Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no inputs."
+       + "\n... Call of Plot.bodeMIMO is ignored.\n");
+    return;
+  elseif size(ss.C, 1) == 0 then
+    Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no outputs."
+       + "\n... Call of Plot.bodeMIMO is ignored.\n");
+    return;
+  end if;
 
-      // generate headings
-      for i1 in 1:size(ss.B, 2) loop
-        uNames[i1] := if ss.uNames[i1] == "" then "u" + String(i1) else ss.uNames[
-          i1];
-      end for;
-      for i1 in 1:size(ss.C, 1) loop
-        yNames[i1] := if ss.yNames[i1] == "" then "y" + String(i1) else ss.yNames[
-          i1];
-      end for;
+  // generate headings
+  for i1 in 1:size(ss.B, 2) loop
+    uNames[i1] := if ss.uNames[i1] == "" then "u" + String(i1) else ss.uNames[
+      i1];
+  end for;
+  for i1 in 1:size(ss.C, 1) loop
+    yNames[i1] := if ss.yNames[i1] == "" then "y" + String(i1) else ss.yNames[
+      i1];
+  end for;
+  zp := StateSpace.Conversion.toZerosAndPolesMIMO(ss, tol);
 
-      tf := StateSpace.Conversion.toTransferFunctionMIMO(ss, tol);
+  for i1 in 1:size(ss.C, 1) loop
+    for i2 in 1:size(ss.B, 2) loop
+      diagram2.heading := defaultDiagram.heading + "  " + uNames[i2] + " -> " +
+        yNames[i1];
+      ZerosAndPoles.Plot.bode(
+        zp[i1, i2],
+        nPoints,
+        autoRange[i1, i2],
+        f_min[i1, i2],
+        f_max[i1, i2],
+        magnitude,
+        phase,
+        defaultDiagram=diagram2,
+        device=device);
+    end for;
+  end for;
 
-      for i1 in 1:size(ss.C, 1) loop
-        for i2 in 1:size(ss.B, 2) loop
-          diagram2.heading := defaultDiagram.heading + "  " + uNames[i2] +
-            " -> " + yNames[i1];
-          TransferFunction.Plot.bode(
-                tf[i1, i2],
-                nPoints,
-                autoRange[i1, i2],
-                f_min[i1, i2],
-                f_max[i1, i2],
-                magnitude,
-                phase,
-                defaultDiagram=diagram2,
-                device=device);
-        end for;
-      end for;
-
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>bodeMIMO</b>(ss)
@@ -5665,7 +5659,8 @@ StateSpace.Plot.<b>bodeMIMO</b>(
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase2.png\">
 </p>
 </html>"));
-    end bodeMIMO;
+end bodeMIMO;
+
 
     encapsulated function timeResponse
       "Plot the time response of the system. The response type is selectable"
