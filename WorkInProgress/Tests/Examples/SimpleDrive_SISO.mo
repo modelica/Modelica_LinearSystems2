@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Examples;
-model SimpleDrive_SISO
+block SimpleDrive_SISO
   parameter Modelica.SIunits.Radius r=0.5 "Radius of load";
   parameter Modelica.SIunits.Mass m=80 "Mass of load";
   Motor motor annotation (Placement(transformation(extent={{-10,-10},{10,10}},
