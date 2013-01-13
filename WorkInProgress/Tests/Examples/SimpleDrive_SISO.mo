@@ -2,8 +2,8 @@ within Modelica_LinearSystems2.WorkInProgress.Tests.Examples;
 model SimpleDrive_SISO
   parameter Modelica.SIunits.Radius r=0.5 "Radius of load";
   parameter Modelica.SIunits.Mass m=80 "Mass of load";
-  DriveLib.Motor motor annotation (Placement(transformation(extent={{-10,-10},{
-            10,10}}, rotation=0)));
+  Motor motor annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+          rotation=0)));
   Modelica.Mechanics.Rotational.Components.IdealGear gearbox(ratio=100,
       useSupport=false) annotation (Placement(transformation(extent={{30,-10},{
             50,10}}, rotation=0)));
@@ -25,10 +25,12 @@ equation
     annotation (Line(points={{80,0},{80,-20}}));
   connect(motor.flange_b, gearbox.flange_a)
     annotation (Line(points={{10,0},{30,0}}));
-  connect(i_ref, motor.inPort)
-    annotation (Line(points={{-100,20},{-54.95,20},{-54.95,0},{-9.9,0}}));
   connect(phi, phiload.phi)
     annotation (Line(points={{40,-100},{40,-70.5},{80,-70.5},{80,-41}}));
+  connect(motor.i_ref, i_ref) annotation (Line(
+      points={{-9.9,0},{-60,0},{-60,20},{-100,20}},
+      color={0,0,127},
+      smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics));
 end SimpleDrive_SISO;
