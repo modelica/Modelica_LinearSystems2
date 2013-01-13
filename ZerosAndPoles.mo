@@ -1183,57 +1183,67 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 </html>"));
     end denominatorDegree;
 
-    encapsulated function evaluate
-      "Evaluate a ZerosAndPoles transfer function at a given value of p"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
-      import Modelica_LinearSystems2.Math.Complex;
+encapsulated function evaluate
+  "Evaluate a ZerosAndPoles transfer function at a given value of p"
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.ZerosAndPoles;
+  import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+  import Modelica_LinearSystems2.Math.Complex;
 
-      input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
-      input Complex p=Complex(0) "Complex value p where zp is evaluated";
-      input Real den_min=0 "|denominator(p)| is limited by den_min";
-      output Complex y "= zp(p)";
-    protected
-      Complex j = Modelica_LinearSystems2.Math.Complex.j();
-      Complex num;
-      Complex den;
-      Real abs_den;
-    algorithm
-      // Build numerator
-      num := zp.k+0*j;
-      for i in 1:size(zp.n1, 1) loop
-        num := num*Internal.'p+a'(p, zp.n1[i]);
-      end for;
-      for i in 1:size(zp.n2, 1) loop
-        num := num*Internal.'p^2+k[1]*p+k[2]'(p, zp.n2[i, :]);
-      end for;
+  input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
+  input Complex p=Complex(0) "Complex value p where zp is evaluated";
+  input Real den_min(min=0)=0 "|denominator(p)| is limited by den_min";
+  output Complex y "= zp(p)";
+protected
+  Complex j=Modelica_LinearSystems2.Math.Complex.j();
+  Complex num;
+  Complex den;
+  Real abs_den;
+algorithm
+  // Build numerator
+  num := zp.k + 0*j;
+  for i in 1:size(zp.n1, 1) loop
+    num := num*Internal.'p+a'(p, zp.n1[i]);
+  end for;
+  for i in 1:size(zp.n2, 1) loop
+    num := num*Internal.'p^2+k[1]*p+k[2]'(p, zp.n2[i, :]);
+  end for;
 
-      // Build denominator
-      den := 1+0*j;
-      for i in 1:size(zp.d1, 1) loop
-        den := den*Internal.'p+a'(p, zp.d1[i]);
-      end for;
-      for i in 1:size(zp.d2, 1) loop
-        den := den*Internal.'p^2+k[1]*p+k[2]'(p, zp.d2[i, :]);
-      end for;
+  // Build denominator
+  den := 1 + 0*j;
+  for i in 1:size(zp.d1, 1) loop
+    den := den*Internal.'p+a'(p, zp.d1[i]);
+  end for;
+  for i in 1:size(zp.d2, 1) loop
+    den := den*Internal.'p^2+k[1]*p+k[2]'(p, zp.d2[i, :]);
+  end for;
 
-      // Build value of transfer function
-      abs_den := Complex.'abs'(den);
-      den := if abs_den >= den_min then den else -abs_den+0*j;
-      y := num/den;
-      annotation (Documentation(info="<html>
+  // Build value of transfer function
+  abs_den := Complex.'abs'(den);
+  den := if abs_den >= den_min then den else (if den.re >= 0 then den_min else -
+    den_min) + 0*j;
+  y := num/den;
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-result = ZerosAndPoles.Analysis.<b>evaluate</b>(zp,p)
+result = ZerosAndPoles.Analysis.<b>evaluate</b>(zp, p, den_min=0)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function at a given (complex) value of p.
-The transfer function G(p)=N(p)/D(p) is evaluated by calculating the numerator polynomial N(p) and the denominator polynomial D(p).
+Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function at a given (complex) value of p and returns the value G(p)=N(p)/D(p). The optional argument den_min with default 0 is used to guard against a division by zero.
 </p>
+<pre>
+  <b>if</b> |(D(p))| >= den_min <b>then</b>
+     G(p) = N(p) / D(p);
+  <b>elseif</b> D(p).re >= 0.0 <b>then</b>
+     G(p) = N(p) / den_min
+  <b>else</b>
+     G(p) = -N(p) / den_min
+  <b>end if</b>;
+</p>
+</pre>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -1266,7 +1276,7 @@ The transfer function G(p)=N(p)/D(p) is evaluated by calculating the numerator p
   </tr>
 </table>
 </html>"));
-    end evaluate;
+end evaluate;
 
     encapsulated function zerosAndPoles
       "Calculate zeros and poles of a ZerosAndPoles transfer function"
