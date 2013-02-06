@@ -3412,9 +3412,9 @@ i.e. v1 = |      |,   v2 = |       |
       import Modelica;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Math.Matrices;
       import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Complex;
 
       input StateSpace ss "Linear system in state space form";
 
@@ -3443,6 +3443,8 @@ i.e. v1 = |      |,   v2 = |       |
       Real alphaImag[:];
       Real beta[:];
       Integer info;
+      Real zerosMax;
+      Real absZero;
     algorithm
       if min(size(ss.B)) == 0 or min(size(ss.C)) == 0 then
         Zeros := fill(Complex(0), 0);
@@ -3481,11 +3483,29 @@ i.e. v1 = |      |,   v2 = |       |
              form is done so that Bf is regular. Therefore, the generalized eigenvalues
              represented by alpha[i]/beta[i] have the property that beta[i] cannot be zero
              and a division by beta[i] is uncritical.
+
+             |alpha| / beta <= zerosMax
+             if |alpha| <= beta*zerosMax then
+                zero is used
+             else
+                assumed that zero is at infinity (i.e. it is ignored)
           */
+          j := 0;
+          zerosMax := 1.0e4*Modelica.Math.Matrices.norm([Af, Bf], p=1);
           for i in 1:size(beta, 1) loop
-            Zeros[i].re := alphaReal[i]/beta[i];
-            Zeros[i].im := alphaImag[i]/beta[i];
+             absZero := Modelica_LinearSystems2.Math.Complex.'abs'(Complex(alphaReal[i], alphaImag[i]));
+             if absZero <= beta[i]*zerosMax then
+                j := j + 1;
+                Zeros[j].re := alphaReal[i]/beta[i];
+                Zeros[j].im := alphaImag[i]/beta[i];
+             end if;
           end for;
+
+          if j == 0 then
+             Zeros := fill(Complex(0), 0);
+          else
+             Zeros := Zeros[1:j];
+          end if;
         end if;
       end if;
       annotation (Documentation(info="<html>
@@ -6253,7 +6273,6 @@ This function plots the initial responses of a state space system for the initia
 
         v := getReOutsidePolesZeros(Poles, Zeros);
         frequency := Complex(v);
-        Modelica.Utilities.Streams.print("v=" + String(v));
 
         Gs := ZerosAndPoles.Analysis.evaluate(zp, frequency);
 
@@ -8374,7 +8393,8 @@ to separate the uncontrollable poles from the controllable poles.
       Integer nZeros;
       Complex z[size(ss.A, 1)];
       Integer j;
-      Real normB=max(beta_small, Modelica.Math.Matrices.norm(ss.B, p=1));
+      Real zerosMax;
+      Real absZero;
     algorithm
       assert(nu == ny, "Function invariantZeros requires currently that the number of
 inputs (= " + String(nu) + ") = number of outputs (= " + String(ny) + ")
