@@ -6127,6 +6127,8 @@ This function plots the initial responses of a state space system for the initia
     import Modelica;
     extends Modelica.Icons.Package;
 
+
+
     encapsulated function toZerosAndPoles
       "Generate a zeros-and-poles representation from a SISO state space representation"
 
@@ -6149,8 +6151,8 @@ This function plots the initial responses of a state space system for the initia
       StateSpace ssm=if size(ss.A, 1) > 0 then
           StateSpace.Transformation.toIrreducibleForm(ss, tol) else StateSpace(
           ss.D[1, 1]);
-      Complex poles[:];
-      Complex zeros[:];
+      Complex Poles[:];
+      Complex Zeros[:];
 
       Real gain;
 
@@ -6163,14 +6165,78 @@ This function plots the initial responses of a state space system for the initia
       Boolean h;
       Real v;
 
+      function getReOutsidePolesZeros
+        "Get p on the real axis so that there is a minimum distance to all poles and zeros"
+        input Complex Poles[:];
+        input Complex Zeros[:];
+        input Real minimumDistance=1.0;
+        output Real p
+          "Value on real axis >= 0.0, so that poles.re and zeros.re have a minimumDistance to it";
+      protected
+        Integer nVec=size(Poles, 1) + size(Zeros, 1);
+        Real vec[:];
+        Real vecSorted[:];
+        Integer i;
+        Integer iMax;
+      algorithm
+        i := 0;
+        vec := zeros(nVec);
+        for j in 1:size(Poles, 1) loop
+          if Poles[j].re >= 0.0 then
+            i := i + 1;
+            vec[i] := Poles[j].re;
+          end if;
+        end for;
+        for j in 1:size(Zeros, 1) loop
+          if Zeros[j].re >= 0.0 then
+            i := i + 1;
+            vec[i] := Zeros[j].re;
+          end if;
+        end for;
+        iMax := i;
+        if iMax == 0 then
+          p := minimumDistance;
+          return;
+        elseif iMax == 1 then
+          if vec[1] < 0.0 or vec[1] > 2*minimumDistance then
+            p := minimumDistance;
+          else
+            p := vec[1] + minimumDistance;
+          end if;
+          return;
+        end if;
+
+        vec := vec[1:iMax];
+        vecSorted := Modelica.Math.Vectors.sort(vec);
+        Modelica.Utilities.Streams.print(
+          Modelica_LinearSystems2.Math.Vectors.printVector(vecSorted, name=
+          "vecSorted"));
+
+        // Find p, so that vecSorted[i+1] - vecSorted[i] > 2*minimumDistance
+        while i <= iMax loop
+          if i == iMax then
+            p := vecSorted[i] + minimumDistance;
+            Modelica.Utilities.Streams.print("i = nVec");
+            break;
+          elseif vecSorted[i + 1] - vecSorted[i] > 2*minimumDistance then
+            p := vecSorted[i] + minimumDistance;
+            Modelica.Utilities.Streams.print("i = " + String(i) +
+              ", vecSorted[i] = " + String(vecSorted[i]));
+            break;
+          else
+            i := i + 1;
+          end if;
+        end while;
+      end getReOutsidePolesZeros;
+
     algorithm
       if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
           Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
-        poles := Complex.Internal.eigenValues_dhseqr(ssm.A);
+        Poles := Complex.Internal.eigenValues_dhseqr(ssm.A);
         //ssm.A is of upper Hessenberg form
 
-        zeros := StateSpace.Analysis.invariantZeros(ssm);
+        Zeros := StateSpace.Analysis.invariantZeros(ssm);
 
         if size(ss.C, 1) <> 1 or size(ss.B, 2) <> 1 then
           assert(size(ss.B, 2) == 1,
@@ -6181,15 +6247,13 @@ This function plots the initial responses of a state space system for the initia
              + String(size(ss.C, 1)) + " instead of 1");
         end if;
         zp := ZerosAndPoles(
-              z=zeros,
-              p=poles,
+              z=Zeros,
+              p=Poles,
               k=1);
 
-        v := sum(cat(
-              1,
-              zeros[:].re,
-              -poles[:].re))/max(size(poles, 1), 1) + 13/23;
-        frequency := Complex(v)*19/17;
+        v := getReOutsidePolesZeros(Poles, Zeros);
+        frequency := Complex(v);
+        Modelica.Utilities.Streams.print("v=" + String(v));
 
         Gs := ZerosAndPoles.Analysis.evaluate(zp, frequency);
 
@@ -6202,8 +6266,8 @@ This function plots the initial responses of a state space system for the initia
         gain := (ssm.C[1, size(As, 1)]*pk + ss.D[1, 1])/Gs.re;
 
         zp := ZerosAndPoles(
-              z=zeros,
-              p=poles,
+              z=Zeros,
+              p=Poles,
               k=gain);
 
       else
