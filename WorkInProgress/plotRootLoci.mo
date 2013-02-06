@@ -74,7 +74,8 @@ algorithm
 
   if not simulate then // and simulationOptions.t_linearize==0
     // Linearization of all parameter variants at once
-    closeModel();
+    ok := translateModel(modelName);
+    assert(ok, "Translation of model " + modelName + " failed.");
     ok:=simulateMultiExtendedModel(
       problem=modelName,
       startTime=0,

@@ -2,73 +2,97 @@ within Modelica_LinearSystems2.Utilities.Import;
 function linearize2
   "Linearize a model at the start time, or optionally after simulation up to a given time instant, and return it as StateSpace object"
   import Modelica.Utilities.Streams.print;
-  input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
-  input Modelica_LinearSystems2.Records.SetParameter modelParam[:]=
-    fill(Modelica_LinearSystems2.Records.SetParameter(Name="",Value=0.0),0)
+  input String modelName "Name of the Modelica model"
+    annotation (Dialog(__Dymola_translatedModel));
+  input Modelica_LinearSystems2.Records.SetParameter modelParam[:]=fill(
+      Modelica_LinearSystems2.Records.SetParameter(Name="", Value=0.0), 0)
     "Values of model parameters used for linearization";
-  input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
+  input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization
+    simulationSetup=
       Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
-    "Simulation options" annotation(Dialog(enable=not linearizeAtInitial));
+    "Simulation options" annotation (Dialog(enable=not linearizeAtInitial));
 protected
   String fileName="dslin";
-  String fileName2=fileName+".mat";
+  String fileName2=fileName + ".mat";
 
   function setModelParam
-     input String modelName;
-     input Modelica_LinearSystems2.Records.SetParameter modelParam[:];
-     output Boolean OK;
+    input String modelName;
+    input Modelica_LinearSystems2.Records.SetParameter modelParam[:];
+    output Boolean OK;
   algorithm
-     OK:=closeModel();
-     OK:=translateModel(modelName);
-     assert(OK, "Translation of model " + modelName + " failed.");
-     for i in 1:size(modelParam,1) loop
-        OK :=SetVariable(modelParam[i].Name, modelParam[i].Value);
-        assert(OK, "Setting parameter " + modelParam[i].Name + " = " + String(modelParam[i].Value) + " failed.");
-     end for;
+    OK := translateModel(modelName);
+    assert(OK, "Translation of model " + modelName + " failed.");
+    for i in 1:size(modelParam, 1) loop
+      OK := SetVariable(modelParam[i].Name, modelParam[i].Value);
+      assert(OK, "Setting parameter " + modelParam[i].Name + " = " + String(
+        modelParam[i].Value) + " failed.");
+    end for;
   end setModelParam;
 
   // Set model parameters
-  Boolean OK1 = if size(modelParam,1) == 0 then true else setModelParam(modelName, modelParam);
+  Boolean OK1=if size(modelParam, 1) == 0 then true else setModelParam(
+      modelName, modelParam);
 
   // Simulate until t_linearize and then linearize at this time instant
-  Boolean OK2 = if simulationSetup.linearizeAtInitial then true else
-                   simulateModel(problem=modelName,
-                                 startTime=simulationSetup.t_start,
-                                 stopTime=simulationSetup.t_linearize,
-                                 method=simulationSetup.method,
-                                 tolerance=simulationSetup.tolerance,
-                                 fixedstepsize=simulationSetup.fixedStepSize);
-  Boolean OK3 = if simulationSetup.linearizeAtInitial then true else importInitial("dsfinal.txt");
-  Boolean OK4 = linearizeModel(problem=modelName, resultFile=fileName,
-                               startTime=simulationSetup.t_linearize,
-                               stopTime=simulationSetup.t_linearize);
+  Boolean OK2=if simulationSetup.linearizeAtInitial then true else
+      simulateModel(
+      problem=modelName,
+      startTime=simulationSetup.t_start,
+      stopTime=simulationSetup.t_linearize,
+      method=simulationSetup.method,
+      tolerance=simulationSetup.tolerance,
+      fixedstepsize=simulationSetup.fixedStepSize);
+  Boolean OK3=if simulationSetup.linearizeAtInitial then true else
+      importInitial("dsfinal.txt");
+  Boolean OK4=linearizeModel(
+      problem=modelName,
+      resultFile=fileName,
+      startTime=simulationSetup.t_linearize,
+      stopTime=simulationSetup.t_linearize);
 
   // Read linear system from file
-  Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
+  Real nxMat[1, 1]=readMatrix(
+      fileName2,
+      "nx",
+      1,
+      1);
   Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
   Integer nx=integer(nxMat[1, 1]);
   Integer nu=ABCDsizes[2] - nx;
   Integer ny=ABCDsizes[1] - nx;
-  Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-  String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
-  Real A[nx,nx] =  ABCD[1:nx, 1:nx] "A-matrix";
-  Real B[nx,nu] =  ABCD[1:nx, nx + 1:nx + nu] "B-matrix";
-  Real C[ny,nx] =  ABCD[nx + 1:nx + ny, 1:nx] "C-matrix";
-  Real D[ny,nu] =  ABCD[nx + 1:nx + ny, nx + 1:nx + nu] "D-matrix";
-  String uNames[nu] =  xuyName[nx + 1:nx + nu] "Modelica names of inputs";
-  String yNames[ny] =  xuyName[nx + nu + 1:nx + nu + ny]
+  Real ABCD[nx + ny, nx + nu]=readMatrix(
+      fileName2,
+      "ABCD",
+      nx + ny,
+      nx + nu);
+  String xuyName[nx + nu + ny]=readStringMatrix(
+      fileName2,
+      "xuyName",
+      nx + nu + ny);
+  Real A[nx, nx]=ABCD[1:nx, 1:nx] "A-matrix";
+  Real B[nx, nu]=ABCD[1:nx, nx + 1:nx + nu] "B-matrix";
+  Real C[ny, nx]=ABCD[nx + 1:nx + ny, 1:nx] "C-matrix";
+  Real D[ny, nu]=ABCD[nx + 1:nx + ny, nx + 1:nx + nu] "D-matrix";
+  String uNames[nu]=xuyName[nx + 1:nx + nu] "Modelica names of inputs";
+  String yNames[ny]=xuyName[nx + nu + 1:nx + nu + ny]
     "Modelica names of outputs";
-  String xNames[nx] =  xuyName[1:nx] "Modelica names of states";
+  String xNames[nx]=xuyName[1:nx] "Modelica names of states";
 
   // Model is already translated. Reset to the default initial conditions
-  Boolean OK5 = translateModel(problem=modelName);
+  Boolean OK5=translateModel(problem=modelName);
 public
   output Modelica_LinearSystems2.StateSpace ss=
-            Modelica_LinearSystems2.StateSpace(A=A,B=B,C=C,D=D,uNames=uNames,yNames=yNames,xNames=xNames)
-    "Linearized system as StateSpace object";
+      Modelica_LinearSystems2.StateSpace(
+      A=A,
+      B=B,
+      C=C,
+      D=D,
+      uNames=uNames,
+      yNames=yNames,
+      xNames=xNames) "Linearized system as StateSpace object";
 algorithm
 
-   annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function initializes a Modelica model and then simulates the model
 until time instant \"t_linearize\".

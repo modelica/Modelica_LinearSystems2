@@ -80,7 +80,8 @@ algorithm
   color := [linspace(markerColorMin[1],markerColorMax[1],nVarMin),linspace(markerColorMin[2],markerColorMax[2],nVarMin),linspace(markerColorMin[3],markerColorMax[3],nVarMin)];
 
   parValues:=linspace(modelParams[1].parMin,modelParams[1].parMax,nVarMin);
-  closeModel();
+  ok := translateModel(modelName);
+  assert(ok, "Translation of model " + modelName + " failed.");
   ok:=simulateMultiExtendedModel(
     problem=modelName,
     startTime=0,
