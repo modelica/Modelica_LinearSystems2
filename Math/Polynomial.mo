@@ -1,7 +1,8 @@
 within Modelica_LinearSystems2.Math;
 record Polynomial "Record defining the data for a polynomial"
   extends Modelica.Icons.Record;
-  Real c[:] "Polynomial coefficients (c[1]*x^n + ... c[n]*x + c[n+1])" annotation(Dialog);
+  Real c[:] "Polynomial coefficients (c[1]*x^n + ... c[n]*x + c[n+1])"
+    annotation (Dialog);
 
   encapsulated package Examples
     "Package of examples to demonstrate the usage of polynomials"
@@ -108,8 +109,8 @@ record Polynomial "Record defining the data for a polynomial"
       output Boolean ok;
 
     protected
-      Complex j = Modelica_LinearSystems2.Math.Complex.j();
-      Complex c[:]={-2+0*j,Complex(0),2+0*j,7+j,7-j};
+      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex c[:]={-2 + 0*j,Complex(0),2 + 0*j,7 + j,7 - j};
       Polynomial p=Polynomial(c);
     algorithm
       Polynomial.plot(p);
@@ -165,15 +166,19 @@ record Polynomial "Record defining the data for a polynomial"
       i := 1;
       nn := 1;
       while i <= nr loop
-         // Determine whether zero is real or conjugate complex
+        // Determine whether zero is real or conjugate complex
         if roots[i].im == 0.0 then
-            // real root
-          p.c := Polynomial.Internal.mult(p.c, nn, {1,-roots[i].re}, nc);
+          // real root
+          p.c := Polynomial.Internal.mult(
+                p.c,
+                nn,
+                {1,-roots[i].re},
+                nc);
 
           i := i + 1;
           nn := nn + 1;
         else
-            // complex root; check that it is a conjugate complex pair
+          // complex root; check that it is a conjugate complex pair
           assert(i < nr, "Roots do not define a real valued polynomial\n" +
             "(roots[" + String(nr) + "] is complex without complex conjugate)");
           assert(roots[i].re == roots[i + 1].re,
@@ -195,8 +200,7 @@ record Polynomial "Record defining the data for a polynomial"
           nn := nn + 2;
         end if;
       end while;
-      annotation (
-        Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <p>
 This function constructs a polynomial from given zeros
 (also called roots). The zeros are defined as a vector
@@ -251,7 +255,7 @@ with j=sqrt(-1), is defined as
       output Polynomial result(redeclare Real c[max(size(p1.c, 1), size(p2.c, 1))])
         "= p1 - p2";
     algorithm
-    // Auxiliary variables not used, to enforce function inlining
+      // Auxiliary variables not used, to enforce function inlining
       result.c := cat(
             1,
             zeros(max(size(p1.c, 1), size(p2.c, 1)) - size(p1.c, 1)),
@@ -270,56 +274,57 @@ This package contains operators for subtraction of Polynomial data records.
   encapsulated operator function '+' "Add two polynomials (p1 + p2)"
     import Modelica_LinearSystems2.Math.Polynomial;
 
-     input Polynomial p1;
-     input Polynomial p2;
-     output Polynomial result(redeclare Real c[max(size(p1.c, 1), size(p2.c, 1))])
+    input Polynomial p1;
+    input Polynomial p2;
+    output Polynomial result(redeclare Real c[max(size(p1.c, 1), size(p2.c, 1))])
       "= p1 + p2";
   algorithm
     // Auxiliary variables not used, to enforce function inlining
-      result.c := cat(
-            1,
-            zeros(max(size(p1.c, 1), size(p2.c, 1)) - size(p1.c, 1)),
-            p1.c) + cat(
-            1,
-            zeros(max(size(p1.c, 1), size(p2.c, 1)) - size(p2.c, 1)),
-            p2.c);
+    result.c := cat(
+        1,
+        zeros(max(size(p1.c, 1), size(p2.c, 1)) - size(p1.c, 1)),
+        p1.c) + cat(
+        1,
+        zeros(max(size(p1.c, 1), size(p2.c, 1)) - size(p2.c, 1)),
+        p2.c);
   end '+';
 
   encapsulated operator function '*' "Multiply two polynomials (p1 * p2)"
     import Modelica_LinearSystems2.Math.Polynomial;
 
-      input Polynomial p1;
-      input Polynomial p2;
-      output Polynomial result(redeclare Real c[size(p1.c, 1) + size(p2.c, 1)
-           - 1]) "= p1 * p2";
+    input Polynomial p1;
+    input Polynomial p2;
+    output Polynomial result(redeclare Real c[size(p1.c, 1) + size(p2.c, 1) - 1])
+      "= p1 * p2";
   protected
-      Integer n1=size(p1.c, 1);
-      Integer n2=size(p2.c, 1);
-      Integer n3=n1 + n2 - 1;
-      Real ck;
+    Integer n1=size(p1.c, 1);
+    Integer n2=size(p2.c, 1);
+    Integer n3=n1 + n2 - 1;
+    Real ck;
   algorithm
-      for k in 1:n3 loop
-        ck := 0.0;
-        for j in max(1, k + 1 - n2):min(k, n1) loop
-          ck := ck + p1.c[j]*p2.c[k + 1 - j];
-        end for;
-        result.c[k] := ck;
+    for k in 1:n3 loop
+      ck := 0.0;
+      for j in max(1, k + 1 - n2):min(k, n1) loop
+        ck := ck + p1.c[j]*p2.c[k + 1 - j];
       end for;
+      result.c[k] := ck;
+    end for;
   end '*';
 
   encapsulated operator function '/' "Divide two polynomials (p1 / p2)"
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.TransferFunction;
 
-      input Polynomial p1;
-      input Polynomial p2;
+    input Polynomial p1;
+    input Polynomial p2;
 
-      output TransferFunction tf(n=p1.c, d=p2.c);//only for tfpoly
+    output TransferFunction tf(n=p1.c, d=p2.c);
+    //only for tfpoly
   algorithm
 
-      assert(size(p2.c, 1) > 0,
-        "Denominator polynomial p2 must have at least one element, however\n"
-         + "denominator is an empty polynomial. This is not allowed for p1/p2.");
+    assert(size(p2.c, 1) > 0,
+      "Denominator polynomial p2 must have at least one element, however\n" +
+      "denominator is an empty polynomial. This is not allowed for p1/p2.");
 
   end '/';
 
@@ -341,10 +346,10 @@ This package contains operators for subtraction of Polynomial data records.
       result.c[n_power_p - n_p + 1:n_power_p] := p.c;
       for i in 2:n loop
         result.c := Polynomial.Internal.mult(
-              result.c,
-              (n_p - 1)*(i - 1) + 1,
-              p.c,
-              n_power_p);
+            result.c,
+            (n_p - 1)*(i - 1) + 1,
+            p.c,
+            n_power_p);
       end for;
     end if;
   end '^';
@@ -353,86 +358,85 @@ This package contains operators for subtraction of Polynomial data records.
     "Check whether two polynomials are identical"
     import Modelica_LinearSystems2.Math.Polynomial;
 
-      input Polynomial p1;
-      input Polynomial p2;
-      input Real eps(min=0) = 0
+    input Polynomial p1;
+    input Polynomial p2;
+    input Real eps(min=0) = 0
       "Two coefficients c1 and c2 of the two polynomials are identical if abs(c1-c2) <= eps";
-      output Boolean same "=true, if identical";
+    output Boolean same "=true, if identical";
   protected
-      Integer n1=size(p1.c, 1);
-      Integer n2=size(p2.c, 1);
+    Integer n1=size(p1.c, 1);
+    Integer n2=size(p2.c, 1);
   algorithm
-      if n1 == n2 then
-        same := true;
-        for i in 1:n1 loop
-          if abs(p1.c[i] - p2.c[i]) > eps then
-            same := false;
-          end if;
-        end for;
-      else
-        same := false;
-      end if;
+    if n1 == n2 then
+      same := true;
+      for i in 1:n1 loop
+        if abs(p1.c[i] - p2.c[i]) > eps then
+          same := false;
+        end if;
+      end for;
+    else
+      same := false;
+    end if;
   end '==';
 
   encapsulated operator function 'String'
     "Transform Polynomial into a String representation"
     import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2;
     import Modelica;
 
-      input Polynomial p
+    input Polynomial p
       "Polynomial to be transformed in a String representation";
-      input Integer significantDigits=6
+    input Integer significantDigits=6
       "Number of significant digits that are shown";
-      input String name="x" "Independent variable name used for printing";
-      output String s="";
+    input String name="x" "Independent variable name used for printing";
+    output String s="";
   protected
-      Boolean outputCoefficient;
-      Integer power;
-      Real ci;
-      String v;
-      Integer n=size(p.c, 1);
-      Boolean printZero=true;
+    Boolean outputCoefficient;
+    Integer power;
+    Real ci;
+    String v;
+    Integer n=size(p.c, 1);
+    Boolean first=true;
   algorithm
-      if n == 0 then
-        s := "0";
-      else
-        for i in 1:n loop
-          if p.c[i] <> 0 and printZero then
-            printZero := false;
-          end if;
-
-          if p.c[i] <> 0 or printZero then
-            power := n - i;
-            ci := p.c[i];
-            if i > 1 then
-              if ci > 0 then
-                s := s + " + ";
-              elseif ci < 0 then
-                s := s + " - ";
-                ci := abs(ci);
-              end if;
-            end if;
-
-            outputCoefficient := power == 0 or abs(ci-1) > Modelica.Constants.eps;
-            if outputCoefficient then
-              s := s + String(ci, significantDigits=significantDigits);
-            end if;
-            if outputCoefficient and power >= 1 then
-              s := s + "*";
-            end if;
-            if name == "" then
-              v := "?";
-            else
-              v := name;
-            end if;
-            if power >= 2 then
-              s := s + v + "^" + String(power);
-            elseif power == 1 then
-              s := s + v;
+    if n == 0 then
+      s := "0";
+    else
+      for i in 1:n loop
+        if p.c[i] <> 0 or i == n then
+          power := n - i;
+          ci := p.c[i];
+          if first then
+            first := false;
+          else
+            if ci > 0 then
+              s := s + " + ";
+            elseif ci < 0 then
+              s := s + " - ";
+              ci := abs(ci);
             end if;
           end if;
-        end for;
-      end if;
+
+          outputCoefficient := power == 0 or abs(ci - 1) > Modelica.Constants.eps;
+          if outputCoefficient then
+            s := s + String(ci, significantDigits=significantDigits);
+          end if;
+          if outputCoefficient and power >= 1 then
+            s := s + "*";
+          end if;
+          if name == "" then
+            v := "?";
+          else
+            v := name;
+          end if;
+          if power >= 2 then
+            s := s + v + "^" + String(power);
+          elseif power == 1 then
+            s := s + v;
+          end if;
+        end if;
+      end for;
+    end if;
   end 'String';
 
   encapsulated function x "Generate a base polynomial y=x"
@@ -456,15 +460,15 @@ This package contains operators for subtraction of Polynomial data records.
       "Polynomial that fits the date points in a least squares sense";
 
   protected
-    Real V[size(x, 1),order + 1] "Vandermonde matrix";
+    Real V[size(x, 1), order + 1] "Vandermonde matrix";
   algorithm
-      // Construct Vandermonde matrix
+    // Construct Vandermonde matrix
     V[:, order + 1] := ones(size(x, 1));
     for j in order:-1:1 loop
       V[:, j] := {x[i]*V[i, j + 1] for i in 1:size(x, 1)};
     end for;
 
-      // Solve least squares problem
+    // Solve least squares problem
     p.c := Modelica.Math.Matrices.leastSquares(V, y);
     annotation (Documentation(info="<html>
 <p>
@@ -495,7 +499,7 @@ in a least squares sense.
   algorithm
     s := size(p.c, 1);
     for i in 1:s loop
-                      // added correct code for degree calculation
+      // added correct code for degree calculation
       if p.c[i] <> 0 then
         result := s - i;
         break;
@@ -532,7 +536,7 @@ in a least squares sense.
     Complex points[:];
     String argument="x";
   algorithm
-  /* Determine suitable x_min and x_max:
+    /* Determine suitable x_min and x_max:
         Plotted range should contain roots and extrema
      */
 
@@ -575,8 +579,8 @@ in a least squares sense.
 
     // Determine labels
     if autoLabel then
-        yLabel2 := String(p);
-       if Strings.length(yLabel2) >= 100 then
+      yLabel2 := String(p);
+      if Strings.length(yLabel2) >= 100 then
         yLabel2 := Strings.substring(
             yLabel2,
             1,
@@ -594,8 +598,7 @@ in a least squares sense.
 
   equation
 
-    annotation (__Dymola_interactive=true,
-      Documentation(info="<html>
+    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 Plots the given polynomial. If default arguments are used, as in:
 </p>
@@ -664,8 +667,8 @@ of the polynomial is used as generated by Polynomial.'String'(..).
     import Modelica_LinearSystems2.Math.Polynomial;
 
     input Polynomial p "Polynomial to be evaluated";
-    input Real X[:,size(X, 1)] "Square matrix argument";
-    output Real Y[size(X, 1),size(X, 2)] "Value of polynomial at X";
+    input Real X[:, size(X, 1)] "Square matrix argument";
+    output Real Y[size(X, 1), size(X, 2)] "Value of polynomial at X";
 
   protected
     Integer n=size(p.c, 1);
@@ -758,8 +761,8 @@ Horner's method is used for polynomial evaluation.
 
     input Polynomial p "Polynomial";
     input Boolean printRoots=false "True, if roots shall be pretty printed";
-    output Complex result[:]=fill(Complex(0, 0),
-        Polynomial.numberOfRoots(p)) "Roots of polynomial";
+    output Complex result[:]=fill(Complex(0, 0), Polynomial.numberOfRoots(p))
+      "Roots of polynomial";
 
   algorithm
     result := Polynomial.rootsOfNonZeroHighestCoefficientPolynomial(p,
@@ -775,20 +778,19 @@ a vector of Complex elements.
 </html>"));
   end roots;
 
-    encapsulated function numberOfRoots
-    "Determine number of roots of polynomial"
+  encapsulated function numberOfRoots "Determine number of roots of polynomial"
     import Modelica_LinearSystems2.Math.Polynomial;
-       input Polynomial p "Polynomial";
-       output Integer result "Number of roots of p";
+    input Polynomial p "Polynomial";
+    output Integer result "Number of roots of p";
   protected
-       Integer nc=size(p.c, 1);
-       Integer i;
-    algorithm
+    Integer nc=size(p.c, 1);
+    Integer i;
+  algorithm
     if nc <= 1 then
-         // no roots
+      // no roots
       result := 0;
     else
-         // Remove all leading zero coefficients
+      // Remove all leading zero coefficients
       i := 1;
       result := 0;
       while i <= nc - 1 loop
@@ -800,65 +802,65 @@ a vector of Complex elements.
         end if;
       end while;
     end if;
-    end numberOfRoots;
+  end numberOfRoots;
 
-    encapsulated function rootsOfNonZeroHighestCoefficientPolynomial
+  encapsulated function rootsOfNonZeroHighestCoefficientPolynomial
     "Determine zeros of polynomial where highest coefficient of polynomial is not zero"
     import Modelica_LinearSystems2.Math.Matrices;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.Math.Complex;
 
-      input Polynomial p "Polynomial";
-      input Integer numberOfRoots "Number of roots of polynomial";
-      output Complex result[:]=fill(Complex(0, 0), numberOfRoots)
+    input Polynomial p "Polynomial";
+    input Integer numberOfRoots "Number of roots of polynomial";
+    output Complex result[:]=fill(Complex(0, 0), numberOfRoots)
       "Roots of polynomial";
   protected
-      Integer nc=size(p.c, 1);
-      Integer i_start=nc - numberOfRoots;
-      Integer n=numberOfRoots;
-      Real A[n,n] "Companion matrix";
-      Real ev[n,2] "Eigen values";
-                                            Complex j = Modelica_LinearSystems2.Math.Complex.j();
-    algorithm
-      assert(numberOfRoots >= 0 and numberOfRoots < nc,
-        "Argument numberOfRoots (= " + String(numberOfRoots) +
-        ") is not in the range\n" + "0 <= numberOfRoots <= " + String(nc - 1));
-      assert(p.c[i_start] <> 0, "p.c[" + String(i_start) +
-        "] = 0. Probably wrong argument numberOfRoots (=" + String(
-        numberOfRoots) + ")");
+    Integer nc=size(p.c, 1);
+    Integer i_start=nc - numberOfRoots;
+    Integer n=numberOfRoots;
+    Real A[n, n] "Companion matrix";
+    Real ev[n, 2] "Eigen values";
+    Complex j=Modelica_LinearSystems2.Math.Complex.j();
+  algorithm
+    assert(numberOfRoots >= 0 and numberOfRoots < nc,
+      "Argument numberOfRoots (= " + String(numberOfRoots) +
+      ") is not in the range\n" + "0 <= numberOfRoots <= " + String(nc - 1));
+    assert(p.c[i_start] <> 0, "p.c[" + String(i_start) +
+      "] = 0. Probably wrong argument numberOfRoots (=" + String(numberOfRoots)
+       + ")");
 
-      if numberOfRoots > 0 then
-        // companion matrix
-        A[1, :] := -p.c[i_start + 1:nc]/p.c[i_start];
-        A[2:n, :] := [identity(n - 1),zeros(n - 1)];
+    if numberOfRoots > 0 then
+      // companion matrix
+      A[1, :] := -p.c[i_start + 1:nc]/p.c[i_start];
+      A[2:n, :] := [identity(n - 1), zeros(n - 1)];
 
-        // roots are eigenvalues of companion matrix
-    //    ev := Matrices.eigenValues(A);
-        (ev[:,1],ev[:,2]) := Matrices.Internal.eigenvaluesHessenberg(A);
-        for i in 1:n loop
-          result[i] := ev[i, 1]+ j*ev[i, 2];
-        end for;
-      end if;
-    end rootsOfNonZeroHighestCoefficientPolynomial;
+      // roots are eigenvalues of companion matrix
+      //    ev := Matrices.eigenValues(A);
+      (ev[:, 1],ev[:, 2]) := Matrices.Internal.eigenvaluesHessenberg(A);
+      for i in 1:n loop
+        result[i] := ev[i, 1] + j*ev[i, 2];
+      end for;
+    end if;
+  end rootsOfNonZeroHighestCoefficientPolynomial;
 
-    encapsulated function evaluate_der
+  encapsulated function evaluate_der
     "Evaluate derivative of polynomial at a given abszissa value"
     import Modelica_LinearSystems2.Math.Polynomial;
 
-      input Polynomial p "Polynomial";
-      input Real x "Abszissa value";
-      input Real dx "Derivative of abszissa value, der(x)";
-      output Real dy "Derivative value of polynomial at x";
+    input Polynomial p "Polynomial";
+    input Real x "Abszissa value";
+    input Real dx "Derivative of abszissa value, der(x)";
+    output Real dy "Derivative value of polynomial at x";
   protected
-      Integer n=size(p.c, 1);
-    algorithm
-      dy := p.c[1]*(n - 1);
-      for j in 2:n - 1 loop
-        dy := p.c[j]*(n - j) + x*dy;
-      end for;
-      dy := dy*dx;
-    end evaluate_der;
+    Integer n=size(p.c, 1);
+  algorithm
+    dy := p.c[1]*(n - 1);
+    for j in 2:n - 1 loop
+      dy := p.c[j]*(n - j) + x*dy;
+    end for;
+    dy := dy*dx;
+  end evaluate_der;
 
   encapsulated function integralValue_der
     "Evaluate derivative of integral of polynomial p(x) from x_low to x_high, assuming only x_high as time-dependent (Leibnitz rule)"
@@ -880,34 +882,33 @@ a vector of Complex elements.
     import Modelica_LinearSystems2.Math.Polynomial;
     extends Modelica.Icons.Package;
 
-  function mult "Multiply two polynomials (polynomials are defined by vectors)"
+    function mult
+      "Multiply two polynomials (polynomials are defined by vectors)"
       import Modelica.Utilities.Streams.print;
 
-    input Real p1[:];
-    input Integer n1
+      input Real p1[:];
+      input Integer n1
         "Number of coefficients of p1 to be used, i.e., (end-n1+1:end)";
-    input Real p2[:];
-    input Integer n3_max "Dimension of output vector";
-    output Real p3[n3_max];
+      input Real p2[:];
+      input Integer n3_max "Dimension of output vector";
+      output Real p3[n3_max];
     protected
-    Integer n1_max = size(p1,1);
-    Integer n2=size(p2,1);
-    Integer n3=n1+n2-1;
-    Real ck;
-  algorithm
-    for k in 1:n3 loop
-       ck := 0.0;
-       for j in max(1,k+1-n2):min(k,n1) loop
-         ck := ck + p1[n1_max - n1 + j]*p2[k + 1 - j];
-       end for;
-       p3[n3_max-n3+k] := ck;
-    end for;
-  end mult;
+      Integer n1_max=size(p1, 1);
+      Integer n2=size(p2, 1);
+      Integer n3=n1 + n2 - 1;
+      Real ck;
+    algorithm
+      for k in 1:n3 loop
+        ck := 0.0;
+        for j in max(1, k + 1 - n2):min(k, n1) loop
+          ck := ck + p1[n1_max - n1 + j]*p2[k + 1 - j];
+        end for;
+        p3[n3_max - n3 + k] := ck;
+      end for;
+    end mult;
   end Internal;
 
-  annotation (
-    defaultComponentName="polynomial",
-    Documentation(info="<html>
+  annotation (defaultComponentName="polynomial", Documentation(info="<html>
 <p>
 This record defines a polynomial, e.g., y = 2*x^2 + 3*x + 1. The general form is:
 </p>

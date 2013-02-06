@@ -1057,7 +1057,7 @@ This package contains operators for subtraction of state space records.
         input String systemName="State Space System"
           "Name of the state space system";
         input String description="" "Description of system (used in html file)";
-        input String format=".3g" "Format of numbers (e.g. \"20.8e\")";
+        input String format=".6g" "Format of numbers (e.g. \"20.8e\")";
 
         input Boolean htmlBasics=false
           "True, if text should be printed within 'html' and 'body' environment, otherwise text printed into existing file fileName"
@@ -3443,10 +3443,6 @@ i.e. v1 = |      |,   v2 = |       |
       Real alphaImag[:];
       Real beta[:];
       Integer info;
-      Real beta_small=100*Modelica.Constants.eps;
-      Real normB=max(Modelica.Math.Matrices.norm(ss.B, p=1), beta_small);
-      Real normA=max(Modelica.Math.Matrices.norm(ss.A, p=1), beta_small);
-
     algorithm
       if min(size(ss.B)) == 0 or min(size(ss.C)) == 0 then
         Zeros := fill(Complex(0), 0);
@@ -3480,20 +3476,16 @@ i.e. v1 = |      |,   v2 = |       |
             "Failed to compute invariant zeros with function invariantZeros(..)");
 
           Zeros := fill(Complex(0), size(beta, 1));
-          normB := max(Modelica.Math.Matrices.norm(Bf), beta_small);
-          normA := max(Modelica.Math.Matrices.norm(Af, p=1), beta_small);
 
-          // If beta[i] is zero, then zero i is infinite.
+          /* The pencil (Af,Bf) has n eigenvalues, since the transformation to this
+             form is done so that Bf is regular. Therefore, the generalized eigenvalues
+             represented by alpha[i]/beta[i] have the property that beta[i] cannot be zero
+             and a division by beta[i] is uncritical.
+          */
           for i in 1:size(beta, 1) loop
-            if beta[i] >= normB*1e-3 then
-              // finite eigenvalue
-              Zeros[i].re := if abs(alphaReal[i]) >= normB*1e-12 then alphaReal[
-                i]/beta[i] else 0;
-              Zeros[i].im := if abs(alphaImag[i]) >= normB*1e-12 then alphaImag[
-                i]/beta[i] else 0;
-            end if;
+            Zeros[i].re := alphaReal[i]/beta[i];
+            Zeros[i].im := alphaImag[i]/beta[i];
           end for;
-
         end if;
       end if;
       annotation (Documentation(info="<html>
@@ -9848,9 +9840,10 @@ k = ---------- * ----------------------
       Boolean stop1 "reduction finished";
       Boolean stop2 "system has no zeros";
       Integer rankR;
-      Real normA=Modelica.Math.Matrices.norm(A=A, p=1);
-      Real eps=normA*1e-12;
-
+      // Real normA=Modelica.Math.Matrices.norm(A=A, p=1);
+      // Real eps=normA*1e-12;
+      Real normABCD=Modelica.Math.Matrices.norm([A, B; C, D], p=1);
+      Real eps=normABCD*Modelica.Constants.eps*1000;
     algorithm
       if nx > 0 then
 
