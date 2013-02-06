@@ -1550,7 +1550,7 @@ This package contains operators for subtraction of state space records.
         // ---------------------------------------------------------------------------------------------------
 
         if printTable then
-          print("<p>\nThe system has following invariant zeros.\n</p>",
+          print("<p>\nThe system has the following invariant zeros.\n</p>",
             fileName);
           print(
             "\n<table style=\"background-color:rgb(100, 100, 100); text-align:right\" "
