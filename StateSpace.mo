@@ -3445,6 +3445,8 @@ i.e. v1 = |      |,   v2 = |       |
       Integer info;
       Real zerosMax;
       Real absZero;
+
+      Integer j;
     algorithm
       if min(size(ss.B)) == 0 or min(size(ss.C)) == 0 then
         Zeros := fill(Complex(0), 0);
@@ -8393,8 +8395,7 @@ to separate the uncontrollable poles from the controllable poles.
       Integer nZeros;
       Complex z[size(ss.A, 1)];
       Integer j;
-      Real zerosMax;
-      Real absZero;
+      Real normB=max(beta_small,Modelica.Math.Matrices.norm(ss.B, p=1));
     algorithm
       assert(nu == ny, "Function invariantZeros requires currently that the number of
 inputs (= " + String(nu) + ") = number of outputs (= " + String(ny) + ")
