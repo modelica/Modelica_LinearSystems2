@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2;
-record StateSpace
+operator record StateSpace
   "Continuous state space description of a linear, time invariant differential equation system (data + operations)"
 
   extends Modelica.Icons.Record;

@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Math;
-record Polynomial "Record defining the data for a polynomial"
+operator record Polynomial "Record defining the data for a polynomial"
   extends Modelica.Icons.Record;
   Real c[:] "Polynomial coefficients (c[1]*x^n + ... c[n]*x + c[n+1])"
     annotation (Dialog);

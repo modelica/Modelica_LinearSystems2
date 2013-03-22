@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2;
-record ZerosAndPoles
+operator record ZerosAndPoles
   "Continuous zeros and poles description of a single input, single output system (data + operations)"
   extends Modelica.Icons.Record;
 

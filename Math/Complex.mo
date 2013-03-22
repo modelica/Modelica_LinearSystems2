@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Math;
-record Complex "Record defining a Complex number"
+operator record Complex "Record defining a Complex number"
   extends Modelica.Icons.Record;
   Real re "Real part of complex number" annotation(Dialog);
   Real im "Imaginary part of complex number" annotation(Dialog);

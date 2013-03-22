@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2;
-record DiscreteStateSpace
+operator record DiscreteStateSpace
   "Discrete state space description of a linear, time invariant difference equation system (data + operations)"
   extends Modelica.Icons.Record;
 

@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2;
-record DiscreteTransferFunction
+operator record DiscreteTransferFunction
   "Discrete transfer function description of a single input, single output system (data + operations)"
   extends Modelica.Icons.Record;
 
