@@ -287,7 +287,7 @@ record DiscreteTransferFunction
     import Modelica;
     extends Modelica.Icons.Package;
 
-    encapsulated operator function 'dtf/dtf'
+    encapsulated function 'dtf/dtf'
       "Divide two discrete transfer functions (dtf1 / dtf2)"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
@@ -317,7 +317,7 @@ record DiscreteTransferFunction
       result := DiscreteTransferFunction(r*dtf.d,dtf.n,Ts=dtf.Ts, method=dtf.method);
     end 'r/dtf';
 
-    encapsulated operator function 'dft/dft'
+    encapsulated function 'dft/dft'
       "Obsolete function: Divide two discrete transfer functions (dtf1 / dtf2)"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
