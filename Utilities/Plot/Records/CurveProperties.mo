@@ -18,4 +18,10 @@ record CurveProperties "Properties of a curve"
     "Symbol size" annotation(Dialog(group="If autoLine = false (otherwise ignored)"));
 */
 
+  annotation (Documentation(info="<html>
+<p>
+With this record the curve properties of a parameterized curve, such as line color or line pattern can be defined. This record is used in record
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.ParametrizedCurves\">Modelica_LinearSystems2.Utilities.Plot.Records.ParametrizedCurves</a>.
+</p>
+</html>"));
 end CurveProperties;

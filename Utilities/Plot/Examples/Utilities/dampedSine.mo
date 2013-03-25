@@ -14,4 +14,32 @@ algorithm
       y[i] :=Modelica.Math.exp(-x[i]*damping)*
              Modelica.Math.sin(2*Modelica.Constants.pi*freqHz*x[i]);
    end for;
+
+  annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+(x,y) = Plot.Examples.Utilities.<b>dampedSine</b>(freqHz, damping, nPeriod=5, nPoints=500);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This function computes nPoints points x[i], y[i] of a sine-curve
+</p>
+
+<pre>
+   y = exp(-x*damping)*sin(2*pi*freqHz*x)
+</pre>
+
+<p>
+where the abszissa values x[i] are in the range 0 .. nPeriod*T, where T = 1/freqHz is the period
+of the sine wave.
+</p>
+
+<h4>Example</h4>
+<p>
+With the default options and freqHz=2 Hz and damping=0.8, the following curve is generated:
+</p>
+
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/dampedSine.png\"/></p>
+</html>"));
 end dampedSine;

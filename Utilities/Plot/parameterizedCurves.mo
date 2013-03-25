@@ -88,7 +88,7 @@ algorithm
                    thicknesses=thicknesses);
   end if;
 
-/*                   
+/*
 function plotParametricCurves "plot parametric curves"
   input Real x[:, size(s, 1)] "x(s) vectors";
   input Real y[size(x, 1), size(s, 1)] "y(s) vectors";
@@ -108,36 +108,44 @@ function plotParametricCurves "plot parametric curves"
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Plot.<b>rootLocus</b>(modelName, t_linearize, modelParam, simulationSetup, diagram)
+Plot.<b>parameterizedCurves</b>(diagram, device)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-This function examines a root locus analysis of a selected Modelica model over 
-variation of a certain system parameter. 
-Note, only first parameter <code>modelParam[1]</code> is considered for the analysis. 
-The parameter is varied equidistantly from minimum to maximum value. 
+This function plots a set of parametrized curves that depend on the same path parameter s
+in one window. The set of parameterized curves is defined by:
 </p>
+<pre>
+   s = s[i]   // Vector of s-values
+   X = X[j,i] // X=X(s), where s[i] is the s-value and j is the s-branch of the x-value
+   Y = Y[j,i] // Y=Y(s), where s[i] is the s-value and j is the s-branch of the y-value
+</pre>
 
 <h4>Example</h4>
 <p>
-Calling the function
+Execute function <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.plotParameterizedCurve1\">Examples.plotParameterizedCurve1</a>
+that is defined as parameterized sine and cosine-functions:
 </p>
 <blockquote><pre>
-Utilities.Plot.<b>rootLocus</b>(
-  modelName = \"Modelica.Mechanics.Rotational.Examples.First\",
-  t_linearize = 0,
-  modelParam={
-    Modelica_LinearSystems2.Records.ParameterVariation(
-      Name=\"Jload\",
-      Min=1,
-      Max=6,
-      nVar=10,
-      Unit=\"kg.m2\")});
+s = linspace(0, Modelica.SIunits.Conversions.from_deg(300), 100);
+<b>for</b> i <b>in</b> 1:nPoints <b>loop</b>
+  X[1, i] := cos(s[i]);
+  Y[1, i] := sin(s[i]);
+  X[2, i] := X[1, i] - 0.5;
+  Y[2, i] := Y[1, i];
+<b>end for</b>;
+Plot.parameterizedCurves(diagram=
+  Plot.Records.ParametrizedCurves(
+    X=X,
+    Y=Y,
+    s=s));
 </pre></blockquote>
 <p>
-yields following diagram
+This yields the following diagram (the menu on the right lower part is displayed when moving
+the cursor on one curve point; then all points belonging to the same path parameter value are
+marked with a red square):
 </p>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rootLociiDefaultSetup.png\"/></p>
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotParameterizedCurve1.png\"/></p>
 </html>"));
 end parameterizedCurves;

@@ -31,5 +31,11 @@ algorithm
     heading="Bearing friction torques",
     xLabel="w [rad/s]",
     yLabel="[N.m]"));
-    annotation(__Dymola_interactive=true);
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
+<p>
+This function plots the following diagram (with default input arguments):
+</p>
+
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotTwoSine.png\"></p>
+</html>"));
 end plotTwoSine;

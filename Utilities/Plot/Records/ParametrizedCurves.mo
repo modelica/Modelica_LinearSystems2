@@ -43,4 +43,11 @@ record ParametrizedCurves
       Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation.Above
     "Legend placement" annotation(Dialog(group="Legend"));
 
+  annotation (Documentation(info="<html>
+<p>
+With this record the properties of a set of parameterized curves can be defined, as needed by
+function
+<a href=\"Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves\">Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves</a>
+</p>
+</html>"));
 end ParametrizedCurves;

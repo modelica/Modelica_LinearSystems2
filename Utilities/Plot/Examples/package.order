@@ -2,7 +2,6 @@ plotSine
 plotTwoSine
 plotTwoSineDifferentStyles
 showSinesInVectorDiagrams
-showLegendStyles
 showMatrixDiagrams
 plotParameterizedCurve1
 plotParameterizedCurve2
@@ -12,4 +11,7 @@ rootLocusOfControlledSISO1Log
 rootLocusOfControlledSISO2
 rootLocusOfControlledSISO2Log
 rootLocusOfPIDDrive
+showLinePatterns
+showLegendStyles
+showPointSymbols
 Utilities

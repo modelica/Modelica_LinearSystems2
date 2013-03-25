@@ -16,4 +16,15 @@ record Device "Properties of a device"
   Boolean autoLineColor = true
     "If automatic line properties: distinguish curves by color otherwise by line style"
        annotation(Dialog,choices(__Dymola_checkBox=true));
+
+  annotation (Documentation(info="<html>
+<p>
+With this record the placement of a diagram in the drawing window is defined,
+as well as the diagram width (the height to width ratio of a diagram is defined
+with record
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Diagram\">Modelica_LinearSystems2.Utilities.Plot.Records.Diagram</a>.
+Furthermore the window resolution is defined here in order to compute the number of pixels from length definitions in
+mm.
+</p>
+</html>"));
 end Device;

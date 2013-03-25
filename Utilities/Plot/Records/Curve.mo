@@ -26,4 +26,10 @@ record Curve "Properties of a curve (displayed in a diagram)"
     "Symbol size" annotation(Dialog(group="If autoLine = false (otherwise ignored)"));
 */
 
+  annotation (Documentation(info="<html>
+<p>
+With this record the properties of one curve in a diagram are defined
+(such as data points, color, line pattern).
+</p>
+</html>"));
 end Curve;

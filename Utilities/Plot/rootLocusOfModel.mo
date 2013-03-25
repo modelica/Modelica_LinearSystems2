@@ -66,5 +66,41 @@ algorithm
                         lineThickness=diagram.lineThickness)}),
       device=device);
 
-  annotation (__Dymola_interactive=true);
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+Plot.<b>rootLocusOfModel</b>(modelName, modelParam, simulationSetup, diagram, device)
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This function computes and plots a root locus of a selected Modelica model by
+varying one parameter and performing an eigen value analysis for every parameter value.
+Other parameters of the model can be set to a specific value. An equidistant or
+a logarithmic gridding of the parameter to be varied can be selected and then the gridding
+is performed between the given minimum and maximum value.
+</p>
+
+<h4>Example</h4>
+<p>
+Calling the function
+</p>
+<blockquote><pre>
+Utilities.Plot.<b>rootLocusOfModel</b>(
+  modelName = \"Modelica.Mechanics.Rotational.Examples.First\",
+  modelParam={
+    Modelica_LinearSystems2.Records.ParameterVariation(
+      Name=\"Jload\",
+      grid=Modelica_LinearSystems2.Types.Grid.Logarithmic
+      Min=1,
+      Max=6,
+      nPoints=101)});
+</pre></blockquote>
+<p>
+yields the following diagram (the menu on the right lower part is displayed when moving
+the cursor on one curve point; then all points belonging to the same parameter value are
+marked with a red square):
+</p>
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/RootLocusOfModel.png\"/></p>
+</html>"));
 end rootLocusOfModel;

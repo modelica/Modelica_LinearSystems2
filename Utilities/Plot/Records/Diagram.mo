@@ -30,4 +30,11 @@ record Diagram
     Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation.Above
     "Legend placement" annotation(Dialog(group="Legend"));
 
+  annotation (Documentation(info="<html>
+<p>
+With this record the properties of a diagram are defined (like heading and legend),
+as well as the properties of one or several curves in this diagram using record
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Curve\">Modelica_LinearSystems2.Utilities.Plot.Records.Curve</a>
+</p>
+</html>"));
 end Diagram;

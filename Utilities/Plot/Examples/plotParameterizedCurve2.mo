@@ -23,14 +23,12 @@ algorithm
        yLabel="y(s)",
        legends={"circle1", "circle2"}, labelWithS=true, legend=true));
 
-    annotation(__Dymola_interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-This function plots the following diagram (with default input arguments):
+This function plots the following parameterized cuves diagram using function
+<a href=\"Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves\">parameterizedCurves</a>
 </p>
 
-<blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotSine.png\">
-</blockquote>
-
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotParameterizedCurve2.png\"/></p>
 </html>"));
 end plotParameterizedCurve2;

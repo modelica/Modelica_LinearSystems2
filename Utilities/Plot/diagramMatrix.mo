@@ -21,5 +21,13 @@ This function plots a set of 2-dimensional curves in a set of diagrams
 using a matrix layout. For an overview, see the documentation of package
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot\">Modelica_LinearSystems2.Utilities.Plot</a>.
 </p>
+
+
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.showMatrixDiagrams\">Example</a>:
+</p>
+
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showMatrixDiagrams.png\"></p>
+
 </html>"));
 end diagramMatrix;

@@ -20,14 +20,16 @@ algorithm
      diagram=  Modelica_LinearSystems2.Utilities.Plot.Records.ParametrizedCurves(
        X=X, Y=Y, s=s));
 
-    annotation(__Dymola_interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-This function plots the following diagram (with default input arguments):
+This function plots the following parameterized cuves diagram (with default input arguments;
+the menu on the right part is displayed when moving
+the cursor on one curve point; then all points belonging to the same path parameter value are
+marked with a red square):
+
 </p>
 
-<blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotSine.png\">
-</blockquote>
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotParameterizedCurve1.png\"/></p>
 
 </html>"));
 end plotParameterizedCurve1;

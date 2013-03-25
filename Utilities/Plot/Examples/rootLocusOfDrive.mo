@@ -8,15 +8,16 @@ algorithm
                  Modelica_LinearSystems2.Records.ParameterVariation(
                       Name="Jmotor", Value=0.1)});
 
-    annotation(__Dymola_interactive=true, Documentation(info="<html>
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function plots the root locus of model
 <a href=\"modelica://Modelica.Mechanics.Rotational.Examples.First\">Rotational.Examples.First</a>
-over the load inertia <b>Jload</b>:
+over the load inertia <b>Jload</b> (the menu on the right lower part is displayed when moving
+the cursor on one curve point; then all points belonging to the same parameter value are
+marked with a red square):
 </p>
 
-<blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfDrive.png\">
-</blockquote>
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/RootLocusOfModel.png\"/></p>
+
 </html>"));
 end rootLocusOfDrive;

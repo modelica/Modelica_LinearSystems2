@@ -36,4 +36,12 @@ record RootLocusDiagram "Properties of a root locus diagram"
     "Symbol for points on curve" annotation(Dialog(group="Curve properties"));
    Real lineThickness=0.25 "Line thickness of curve"
                               annotation(Dialog(group="Curve properties"));
+
+  annotation (Documentation(info="<html>
+<p>
+With this record the properties of a root locus diagram can be defined, as needed by
+function
+<a href=\"Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel\">Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel</a>.
+</p>
+</html>"));
 end RootLocusDiagram;
