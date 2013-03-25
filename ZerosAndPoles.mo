@@ -715,8 +715,8 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
                headingFrequencyResponse=analyseOptions2.headingFrequencyResponse);
 
     algorithm
-      assert(ZerosAndPoles.Analysis.denominatorDegree(zp) > ZerosAndPoles.Analysis.numeratorDegree(zp),
-        " Denominator polynominal of transfer function in function\"TransferFunction.Analysis.analysis\"has to be of higher order than numerator polynomial");
+      assert(ZerosAndPoles.Analysis.denominatorDegree(zp) >= ZerosAndPoles.Analysis.numeratorDegree(zp),
+        " Denominator polynominal of ZerosAndPoles object in function\"ZerosAndPoles.Analysis.analysis\"has to be of higher or equal order than numerator polynomial");
       Modelica.Utilities.Files.removeFile(fileName);
       Modelica.Utilities.Files.removeFile(dummyFileName);
       if printStateSpaceSystem then
