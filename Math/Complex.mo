@@ -821,16 +821,16 @@ phase angle phi of the Complex number c in the range
 
   algorithm
    // Compute eigenvalues
+    if size(A, 1) > 0 then
+       (alphaReal,alphaImag,,,,info) := dgeevx(A);
+       assert(info == 0,
+         "Failed to compute eigenvalues with function eigenValues_dgeevx(..)");
 
-    (alphaReal,alphaImag,,,,info) := dgeevx(A);
-    assert(info == 0,
-      "Failed to compute eigenvalues with function eigenValues_dgeevx(..)");
-
-    for i in 1:nx loop
-      eigval[i].re := alphaReal[i];
-      eigval[i].im := alphaImag[i];
-    end for;
-
+       for i in 1:nx loop
+         eigval[i].re := alphaReal[i];
+         eigval[i].im := alphaImag[i];
+       end for;
+    end if;
     annotation (Documentation(info="<html>
 <p>
 Computes the invariant zeros of a system in state space form:

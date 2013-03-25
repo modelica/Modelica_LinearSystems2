@@ -710,6 +710,17 @@ This package contains operators for subtraction of state space records.
         analyseOptions2.printObservability := false;
       end if;
 
+
+      // If system has no states, modify analyze options that do not make sense
+      if nx < 1 then
+         analyseOptions2.plotEigenValues=false;
+         analyseOptions2.plotInvariantZeros=false;
+         analyseOptions2.printEigenValues=false;
+         analyseOptions2.printEigenValueProperties=false;
+         analyseOptions2.printInvariantZeros=false;
+      end if;
+
+
       // Get eigenvalues
       // ---------------
       (eval,levec,revec) := Modelica_LinearSystems2.Math.Matrices.eigenValues(
@@ -8012,7 +8023,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       Real u[:] "householder vector";
       Real Q[nx, nx];
       Real V[size(ss.A, 1), size(ss.A, 2)];
-      Real tau[nx - 1];
+      Real tau[max(0,nx - 1)];
       Real Qc[:, :];
       Real svd[:];
       Real normA=Modelica.Math.Matrices.norm(A=ss.A, p=1);
