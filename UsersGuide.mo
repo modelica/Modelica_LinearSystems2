@@ -1099,19 +1099,19 @@ It contains the following main improvements (and several minor ones):
 </p>
 
 <ul>
-<li> New package \"Modelica_LinearSystems2.ModelAnalysis\" 
+<li> New package \"Modelica_LinearSystems2.ModelAnalysis\"
      that contains several functions to linearize
-     a model and perform a selected linear analysis operation, like 
+     a model and perform a selected linear analysis operation, like
      plotting of poles, zeros or transfer functions.
      This allows a user to conveniently utilize the analyis
-     functions by basically only providing the name of a 
+     functions by basically only providing the name of a
      Modelica model.<br></li>
 <li> New plot functions in package \"Modelica_LinearSystems2.Utilities.Plot\"
      to plot parameterized curvces, as well as to plot
      a root locus of a model, by linearizing a model for a set of selected
      parameter values.<br></li>
 <li> A new function \"Modelica_LinearSystems2.Utilities.Import.linearize2\"
-     to (a) set parameters of a model, (b) linearize the model 
+     to (a) set parameters of a model, (b) linearize the model
      and (c) return a StateSpace object (the existing Import.linearize function
      does only allow to linearize around the default parameter settings and the
      function returns the A,B,C,D matrices and therefore it is not possible to
@@ -1122,6 +1122,38 @@ It contains the following main improvements (and several minor ones):
      error, if inputs or outputs are not present. Instead, analysis operations
      that require inputs and/or outputs are not executed.</li>
 </ul>
+
+<p>
+For versionBuild=4, several bug fixes have been performed. In particular:
+</p>
+
+<ul>
+<li> Several issues with limiting cases (no states and/or no inputs and/or no outputs) have been fixed for the
+     analysis functions (#1050, #1051, #1052).</li>
+<li> Some wrong Modelica constructs regarding the \"operator\" language keyword have been fixed
+     (#908, #909). </li>
+<li> Improved and corrected the algorithm to compute invariant zeros, so that large zeros are treated as \"infinite\"
+     (and are therefore removed). Hereby also corrected an error that set infinite zeros to \"zero\" (and not
+     to \"infinite\"), resulting in a wrong system description.
+     As a result the conversion from a StateSpace to a ZerosAndPoles
+     object is corrected/improved, in case large zeros are present.</li>
+<li> Improved efficiency of some analysis functions so that unnecessary translations of
+     models are removed (and the previous translated model is utilized again).</li>
+<li> Fixed error in Modelica_LinearSystems2.Examples.StateSpace.designKalmanFilter since
+     design matrices Q and R had been declared with fixed dimensions that run only for the
+     default example case.</li>
+<li> Improved numerical efficiency and reliability for StateSpace.Plot.BodeMIMO
+     (originally, the state space system was transformed to a zeros and poles
+     object then to a transfer function and then the Bode plot of the transfer
+     function was generated. This was changed to only transform to a zeros and poles
+     object and plot the Bode plot of this object).</li>
+<li> Corrected minor bug in Modelica_LinearSystems2.ZerosAndPoles.Analysis.evaluate
+     that resulted in some cases in a wrong division by zero.</li>
+<li> Fixed bug in isControllableSISO and isDetectableSISO
+     (if all eigenvalues are controllable or observable, the eigenvalue LAPACK function was
+     called with a (0,0) matrix resulting in an error).</li>
+</ul>
+
 </html>"));
     end Version_2_3;
 
