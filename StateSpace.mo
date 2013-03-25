@@ -781,6 +781,7 @@ This package contains operators for subtraction of state space records.
       // Text should be printed into new file in HTML environment
       // --------------------------------------------------------
       StateSpace.Analysis.analysis.printHTMLbasics(fileName, true);
+      StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
 
       if printStateSpaceSystem then
         printSystem(
@@ -789,7 +790,6 @@ This package contains operators for subtraction of state space records.
               systemName,
               description);
 
-        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
         printSystem(
               ss,
               dummyFileName,
@@ -6241,20 +6241,14 @@ This function plots the initial responses of a state space system for the initia
 
         vec := vec[1:iMax];
         vecSorted := Modelica.Math.Vectors.sort(vec);
-        Modelica.Utilities.Streams.print(
-          Modelica_LinearSystems2.Math.Vectors.printVector(vecSorted, name=
-          "vecSorted"));
 
         // Find p, so that vecSorted[i+1] - vecSorted[i] > 2*minimumDistance
         while i <= iMax loop
           if i == iMax then
             p := vecSorted[i] + minimumDistance;
-            Modelica.Utilities.Streams.print("i = nVec");
             break;
           elseif vecSorted[i + 1] - vecSorted[i] > 2*minimumDistance then
             p := vecSorted[i] + minimumDistance;
-            Modelica.Utilities.Streams.print("i = " + String(i) +
-              ", vecSorted[i] = " + String(vecSorted[i]));
             break;
           else
             i := i + 1;

@@ -360,9 +360,9 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
               headingFrequencyResponse=analyseOptions2.headingFrequencyResponse);
 
     algorithm
-      assert(TransferFunction.Analysis.denominatorDegree(tf) >
+      assert(TransferFunction.Analysis.denominatorDegree(tf) >=
         TransferFunction.Analysis.numeratorDegree(tf),
-        " Denominator polynominal of transfer function in function\"TransferFunction.Analysis.analysis\"has to be of higher order than numerator polynomial");
+        " Denominator polynominal of transfer function in function\"TransferFunction.Analysis.analysis\"has to be of higher or equal order than numerator polynomial");
 
      Modelica.Utilities.Files.removeFile(fileName);
      Modelica.Utilities.Files.removeFile(dummyFileName);
