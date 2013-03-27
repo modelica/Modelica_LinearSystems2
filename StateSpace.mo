@@ -713,11 +713,11 @@ This package contains operators for subtraction of state space records.
 
       // If system has no states, modify analyze options that do not make sense
       if nx < 1 then
-         analyseOptions2.plotEigenValues=false;
-         analyseOptions2.plotInvariantZeros=false;
-         analyseOptions2.printEigenValues=false;
-         analyseOptions2.printEigenValueProperties=false;
-         analyseOptions2.printInvariantZeros=false;
+         analyseOptions2.plotEigenValues          :=false;
+         analyseOptions2.plotInvariantZeros       :=false;
+         analyseOptions2.printEigenValues         :=false;
+         analyseOptions2.printEigenValueProperties:=false;
+         analyseOptions2.printInvariantZeros      :=false;
       end if;
 
 

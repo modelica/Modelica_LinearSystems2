@@ -36,7 +36,7 @@ algorithm
      // set sample time:
      dt := tSpan/1000;
   else
-    tSpan = 1.0;
-    dt = 0.01;
+    tSpan := 1.0;
+    dt := 0.01;
   end if;
 end timeResponseSamples;

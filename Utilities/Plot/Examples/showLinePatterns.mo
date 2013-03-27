@@ -1,3 +1,4 @@
+within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function showLinePatterns "Show the available line patterns"
 protected
   Real x1[:]={0,1};

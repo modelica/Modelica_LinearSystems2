@@ -1,3 +1,4 @@
+within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function showPointSymbols "Show the available point symbols"
 protected
   Real y1[:]=0:0.2:1.0;
