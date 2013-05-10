@@ -2,7 +2,7 @@ within ;
 package Modelica_LinearSystems2 "Modelica_LinearSystems2 (Version 2.3 build 4) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
   extends Modelica.Icons.Package;
 
-  constant String DataDir=classDirectory() + "Resources/Data/"
+  constant String DataDir=classDirectory() +  "Resources/Data/"
   "Absolute path to directory containing utilitiy files for this package";
 
 annotation (
