@@ -943,8 +943,9 @@ This package contains operators for subtraction of state space records.
         StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
         Modelica.Utilities.Streams.readFile(dummyFileName);
 
-        if nReal < nx then
-          // Plot eigenvalues
+       // Plot eigenvalues and invariant zeros
+       if analyseOptions2.plotEigenValues or
+          analyseOptions2.plotInvariantZeros and size(systemZeros, 1) > 0 then
           i := 0;
           if analyseOptions2.plotEigenValues then
             i := i + 1;
@@ -974,6 +975,7 @@ This package contains operators for subtraction of state space records.
           diagram2.curve := curves[1:i];
           Plot.diagram(diagram2, device);
         end if;
+
 
         if analyseOptions2.printEigenValueProperties then
           printHead3(fileName);
