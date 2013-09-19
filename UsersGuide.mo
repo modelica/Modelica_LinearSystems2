@@ -1156,10 +1156,12 @@ For <b>versionBuild=4</b> (March 25, 2013), several bug fixes have been performe
 
 
 <p>
-For <b>versionBuild=5</b> (Sept. 19, 2013), some minor bugs have been fixed:
+Fixes in <b>versionBuild=5</b> (Sept. 19, 2013):
 </p>
 
 <ul>
+<li> Uses annotation changed to Modelica 3.2.1. </li>
+
 <li> Modelica_LinearSystems2.Controller.Internal.DiscreteFIR:<br>
      Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace<br>
      Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace2<br>
