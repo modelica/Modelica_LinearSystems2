@@ -1413,8 +1413,8 @@ numerator polynomial N(z) and the denominator polynomial D(q).
         "Maximum frequency value, if autoRange = false"                                                annotation(Dialog(enable=not autoRange));
 
     input Boolean magnitude=true "= true, to plot the magnitude of dzp"
-                                                                       annotation(choices(__Dymola_checkBox=true));
-    input Boolean phase=true "= true, to plot the pase of dzp" annotation(choices(__Dymola_checkBox=true));
+                                                                       annotation(choices(checkBox=true));
+    input Boolean phase=true "= true, to plot the pase of dzp" annotation(choices(checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
           Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot of  dzp = "

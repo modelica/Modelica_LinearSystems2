@@ -5,20 +5,20 @@ partial block PartialDiscreteBlock
 
   parameter Types.InitWithGlobalDefault initType=Types.InitWithGlobalDefault.UseSampleClockOption
     "Type of initialization (no init/initial/steady state/output)"
-    annotation(Evaluate=true, Hide=true,  Dialog(tab="Advanced options"));
+    annotation(Evaluate=true, HideResult=true,  Dialog(tab="Advanced options"));
   final parameter Types.Init init=if initType == Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.UseSampleClockOption then
             sampleClock.initType else initType
     "Type of initialization (no init/InitialState/SteadyState)" annotation(Evaluate=true);
 
   parameter Integer sampleFactor(min=1) = 1
     "Sample factor (Ts = sampleFactor * sampleClock.sampleTime)"
-     annotation(Hide=true);
+     annotation(HideResult=true);
   final parameter Modelica.SIunits.Time Ts=sampleClock.sampleTime*sampleFactor
-    "Sample time" annotation(Hide=false);
+    "Sample time" annotation(HideResult=false);
 protected
   Integer ticks
-    "Actual number of base samples starting from the last sample time instant" annotation(Hide=true);
-    Boolean sampleTrigger "Triggers next sample time" annotation(Hide=true);
+    "Actual number of base samples starting from the last sample time instant" annotation(HideResult=true);
+    Boolean sampleTrigger "Triggers next sample time" annotation(HideResult=true);
   outer SampleClock sampleClock "Global options";
 
 initial equation

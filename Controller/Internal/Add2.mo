@@ -3,7 +3,7 @@ model Add2 "Output the sum of the two real inputs (graphics can be changed)"
 
   parameter Boolean fromLeft = true
     "True, if second input is left (else below)"
-    annotation(Dialog(choices(checkBox=true)));
+    annotation(choices(checkBox=true));
   parameter Integer n(min=1)=1 "Number of inputs = number of outputs";
 
   Modelica.Blocks.Interfaces.RealInput u1[n]

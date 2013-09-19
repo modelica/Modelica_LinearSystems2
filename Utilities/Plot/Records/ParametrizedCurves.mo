@@ -14,10 +14,10 @@ record ParametrizedCurves
   String heading="" "Heading displayed above diagram" annotation(Dialog);
   String legends[:]=fill("",0) "Legends of the curves" annotation(Dialog);
   Real heightRatio = 0.8 "Height of diagram = heightRatio*diagramWidth" annotation(Dialog);
-  Boolean grid=true "True, if grid is shown" annotation(Dialog,  choices(__Dymola_checkBox=true));
+  Boolean grid=true "True, if grid is shown" annotation(  choices(checkBox=true));
 
   Boolean labelWithS=false "True, if s-values shall be shown along the curve"
-       annotation(Dialog,  choices(__Dymola_checkBox=true));
+       annotation(  choices(checkBox=true));
   Modelica_LinearSystems2.Utilities.Plot.Records.CurveProperties curveProperties[:]=
       fill(Modelica_LinearSystems2.Utilities.Plot.Records.CurveProperties(),0)
     "Properties of the curves X[j,:] (if none given, a default is used; if only one curve property given, it is used for all curves)"
@@ -26,19 +26,19 @@ record ParametrizedCurves
   /* group "Axes" (Axes properties) */
   String xLabel=" " "String displayed at horizontal axis" annotation(Dialog(group="Axes"));
   String yLabel=" " "String displayed at vertical axis" annotation(Dialog(group="Axes"));
-  Boolean logX = false "True, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
-  Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
+  Boolean logX = false "True, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(checkBox=true));
+  Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(checkBox=true));
   Boolean uniformScaling = false
     "True, if same vertical and horizontal axis increment"
-      annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
+      annotation(Dialog(group="Axes"),choices(checkBox=true));
 
   /* group "Legend" (Legend properties) */
-  Boolean legend = false "True, if legend is shown" annotation(Dialog(group="Legend"),choices(__Dymola_checkBox=true));
+  Boolean legend = false "True, if legend is shown" annotation(Dialog(group="Legend"),choices(checkBox=true));
   Boolean legendFrame=false "True, if frame around legend"
-        annotation(Dialog(group="Legend"),   choices(__Dymola_checkBox=true));
+        annotation(Dialog(group="Legend"),   choices(checkBox=true));
   Boolean legendHorizontal=true
     "True, if horizontal legend (provided it is meaningful)"
-        annotation(Dialog(group="Legend"),choices(__Dymola_checkBox=true));
+        annotation(Dialog(group="Legend"),choices(checkBox=true));
   Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation legendLocation=
       Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation.Above
     "Legend placement" annotation(Dialog(group="Legend"));

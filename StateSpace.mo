@@ -5321,9 +5321,9 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
         annotation (Dialog);
       input Boolean poles=true
         "= true, to plot the poles (i.e. the eigenvalues) of ss"
-        annotation (choices(__Dymola_checkBox=true));
+        annotation (choices(checkBox=true));
       input Boolean zeros=true "= true, to plot the (invariant) zeros of ss "
-        annotation (choices(__Dymola_checkBox=true));
+        annotation (choices(checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
           defaultDiagram=if poles and zeros then
@@ -5464,9 +5464,9 @@ and results in
         "Maximum frequency value, if autoRange = false";
 
       input Boolean magnitude=true "True, if magnitude of tf should be plotted"
-        annotation (choices(__Dymola_checkBox=true));
+        annotation (choices(checkBox=true));
       input Boolean phase=true "True, if pase of tf should be plotted"
-        annotation (choices(__Dymola_checkBox=true));
+        annotation (choices(checkBox=true));
       input Real tol=1e-10
         "Tolerance of reduction procedure, default tol = 1e-10";
 
@@ -5591,9 +5591,9 @@ encapsulated function bodeMIMO
       size(ss.C, 1),
       size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
   input Boolean magnitude=true "True, if magnitude of tf should be plotted"
-    annotation (choices(__Dymola_checkBox=true));
+    annotation (choices(checkBox=true));
   input Boolean phase=true "True, if pase of tf should be plotted"
-    annotation (choices(__Dymola_checkBox=true));
+    annotation (choices(checkBox=true));
   input Real tol=1e-10 "Tolerance of reduction procedure, default tol = 1e-10";
 
   extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
@@ -5710,7 +5710,7 @@ end bodeMIMO;
 
       input Boolean subPlots=true
         "True, if all subsystem time responses are plotted in one window with subplots"
-        annotation (Dialog, choices(__Dymola_checkBox=true));
+        annotation (Dialog, choices(checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
           defaultDiagram=
@@ -5842,7 +5842,7 @@ This function plots the time response of a state space system. The character of 
 
       input Boolean subPlots=true
         "True, if all subsystem time responses are plotted in one window with subplots"
-        annotation (Dialog, choices(__Dymola_checkBox=true));
+        annotation (Dialog, choices(checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
           defaultDiagram=
@@ -5926,7 +5926,7 @@ for each system corresponding to the transition matrix. It is based on <a href=\
 
       input Boolean subPlots=true
         "True, if all subsystem time responses are plotted in one window with subplots"
-        annotation (Dialog, choices(__Dymola_checkBox=true));
+        annotation (Dialog, choices(checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
           defaultDiagram=
@@ -6007,7 +6007,7 @@ This function plots the step responses of a state space system for each system c
 
       input Boolean subPlots=true
         "True, if all subsystem time responses are plotted in one window with subplots"
-        annotation (Dialog, choices(__Dymola_checkBox=true));
+        annotation (Dialog, choices(checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
           defaultDiagram=
@@ -6087,7 +6087,7 @@ This function plots the ramp responses of a state space system for each system c
 
       input Boolean subPlots=true
         "True, if all subsystem time responses are plotted in one window with subplots"
-        annotation (Dialog, choices(__Dymola_checkBox=true));
+        annotation (Dialog, choices(checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
           defaultDiagram=

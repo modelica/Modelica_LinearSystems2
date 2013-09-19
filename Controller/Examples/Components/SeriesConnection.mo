@@ -19,7 +19,7 @@ model SeriesConnection "Series connection of two PT1 blocks"
   Modelica.Blocks.Sources.Step step(
     height=1.2,
     offset=0.2,
-    startTime=0.1)                   annotation (extent=[-80,40; -60,60],
+    startTime=0.1)                   annotation (
       Placement(transformation(extent={{-70,-10},{-50,10}})));
 
   FirstOrder S1(T=T1)

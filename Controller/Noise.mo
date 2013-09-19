@@ -2,17 +2,20 @@ within Modelica_LinearSystems2.Controller;
 block Noise
   "Block that generates a uniform distributed noise output signal at sample instants if discrete and y=0 if continuous"
   extends Icons.PartialBlockIcon(cont=continuous);
-  parameter Real y_min if not continuous "Lower limit of noise band";
-  parameter Real y_max if not continuous "Upper limit of noise band";
+  parameter Real y_min "Lower limit of noise band (if not continuous)"
+  annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
+  parameter Real y_max "Upper limit of noise band (if not continuous)"
+  annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   parameter Integer firstSeed[3](
     each min=0,
-    each max=255) = {23,87,187} if                                          not continuous
-    "Integer[3] defining random sequence; required element range: 0..255";
+    each max=255) = {23,87,187}
+    "Integer[3] defining random sequence; required element range: 0..255 (if not continuous)"
+  annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   parameter Types.BlockTypeWithGlobalDefault blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption
     "Type of block"
     annotation (
       Evaluate=true,
-      Hide=true,
+      HideResult=true,
       Dialog(
         __Dymola_compact=true,
         __Dymola_descriptionLabel=true),
@@ -26,11 +29,11 @@ block Noise
        or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption
        and sampleClock.blockType == Types.BlockType.Continuous
     "True, if continuous block, otherwise discrete block";
-  parameter Integer sampleFactor(min=1) = 1 if not continuous
-    "Sample factor for sample time (Ts = sampleFactor * sampleClock.sampleTime)"
+  parameter Integer sampleFactor(min=1) = 1
+    "Sample factor for sample time (Ts = sampleFactor * sampleClock.sampleTime) if not continuous"
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   Modelica.Blocks.Interfaces.RealOutput y "Discrete output signal of block"
-    annotation (extent=[100, -10; 120, 10]);
+     annotation(Placement(transformation(extent={{100,-10},{120,10}})));
 
 protected
   outer SampleClock sampleClock "Global options";

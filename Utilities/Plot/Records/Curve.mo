@@ -7,10 +7,10 @@ record Curve "Properties of a curve (displayed in a diagram)"
   String legend="" "Legend text of curve" annotation(Dialog);
 
   Boolean autoLine = true "True, if automatic line properties of curve"
-    annotation(Dialog,  choices(__Dymola_checkBox=true));
+    annotation(  choices(checkBox=true));
 
   Integer lineColor[3]={0,0,255} "Color of curve as rgb values"
-    annotation(Dialog(enable=not autoLine,group="If autoLine = false (otherwise ignored)",__Dymola_colorSelector, __Dymola_treeView=false));
+    annotation(Dialog(enable=not autoLine,group="If autoLine = false (otherwise ignored)",colorSelector=true));
 
   Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern linePattern=
     Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.Solid

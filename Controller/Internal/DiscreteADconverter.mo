@@ -9,8 +9,8 @@ block DiscreteADconverter "AD converter as discrete block"
 protected
   parameter Real quantization=if bits > 0 then ((y_max - y_min)/2^bits) else 0;
   Real y_bound "Bounded output"
-                               annotation(Hide=true);
-  discrete Real y_sampled "Sampled output" annotation(Hide=true);
+                               annotation(HideResult=true);
+  discrete Real y_sampled "Sampled output" annotation(HideResult=true);
 equation
   when {initial(), sampleTrigger} then
      u_sampled = u;

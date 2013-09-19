@@ -13,11 +13,15 @@ model SimpleControlledDrive
   inner SampleClock sampleClock(sampleTime=0.005, blockType=
     Modelica_LinearSystems2.Controller.Types.BlockType.Continuous)
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
-  Modelica.Mechanics.Rotational.Components.Inertia motorInertia(J=0.1)
+  Modelica.Mechanics.Rotational.Components.Inertia motorInertia(J=0.1,
+    phi(fixed=true, start=0),
+    w(fixed=true, start=0))
     annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=0.3)
     annotation (Placement(transformation(extent={{60,-80},{80,-60}})));
-  Modelica.Mechanics.Rotational.Components.SpringDamper spring(c=1e5, d=100)
+  Modelica.Mechanics.Rotational.Components.SpringDamper spring(c=1e5, d=100,
+    phi_rel(fixed=true),
+    w_rel(fixed=true))
     annotation (Placement(transformation(extent={{30,-80},{50,-60}})));
   Modelica.Mechanics.Rotational.Sources.Torque torque
     annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
@@ -53,7 +57,8 @@ model SimpleControlledDrive
   PI PI1(
     k=kv,
     T=Tv,
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous)
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous,
+    initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState)
     annotation (Placement(
         transformation(extent={{64,20},{84,40}})));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speed
@@ -130,7 +135,7 @@ equation
       smooth=Smooth.None));
   annotation (
     experiment(StopTime=3),
-    Commands(
+    __Dymola_Commands(
       file="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/SimpleControlledDriver_plot.mos"
         "Plot Results",
       file(

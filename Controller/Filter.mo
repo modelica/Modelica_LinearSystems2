@@ -27,7 +27,7 @@ protected
       f_cut=f_cut,
       gain=gain,
       A_ripple=A_ripple,
-      normalized=normalized) "Filter"          annotation(Hide=true);
+      normalized=normalized) "Filter"          annotation(HideResult=true);
 
   parameter Modelica_LinearSystems2.ZerosAndPoles system3(
     k=system2.k,

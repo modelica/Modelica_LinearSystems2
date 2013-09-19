@@ -8,7 +8,7 @@ partial block PartialSISO_equality
     "Type of block"
     annotation (
       Evaluate=true,
-      Hide=true,
+      HideResult=true,
       Dialog(
         __Dymola_compact=true,
         __Dymola_descriptionLabel=true),
@@ -22,16 +22,16 @@ partial block PartialSISO_equality
                                  blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Continuous
     "True, if continuous block, otherwise discrete block";
-  parameter Integer sampleFactor(min=1)=1 if not continuous
+  parameter Integer sampleFactor(min=1)=1
     "Sample factor for sample time (Ts = sampleFactor * sampleClock.sampleTime)"
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous,
      group="Discrete block parameters"));
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block"
-    annotation (extent=[-140, -20; -100, 20]);
+     annotation(Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput y
     "Continuous or discrete output signal of block"
-    annotation (extent=[100, -10; 120, 10]);
+     annotation(Placement(transformation(extent={{100,-10},{120,10}})));
 
 protected
   outer SampleClock sampleClock "Global options";

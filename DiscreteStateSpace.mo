@@ -2321,8 +2321,8 @@ encapsulated function bodeSISO
         "Maximum frequency value, if autoRange = false";
 
   input Boolean magnitude=true "= true, to plot the magnitude of dtf"
-                                                                     annotation(choices(__Dymola_checkBox=true));
-  input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
+                                                                     annotation(choices(checkBox=true));
+  input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
 
   extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
         Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
@@ -2439,7 +2439,7 @@ encapsulated function timeResponse
 
   input Boolean subPlots=true
         "True, if all subsystem time responses are plotted in one window with subplots"
-                                                                                     annotation(Dialog,choices(__Dymola_checkBox=true));
+                                                                                     annotation(choices(checkBox=true));
 
   extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
         heading="Time response"));
@@ -2585,7 +2585,7 @@ end timeResponse;
 
     input Boolean subPlots=true
         "True, if all subsystem time responses are plotted in one window with subplots"
-                                                                                     annotation(Dialog,choices(__Dymola_checkBox=true));
+                                                                                     annotation(choices(checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
            heading="Impulse response"));
@@ -2669,7 +2669,7 @@ This function plots the impulse responses of a state space system for each syste
 
     input Boolean subPlots=true
         "True, if all subsystem time responses are plotted in one window with subplots"
-                                                                                     annotation(Dialog,choices(__Dymola_checkBox=true));
+                                                                                     annotation(choices(checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
            heading="Step response"));
@@ -2755,7 +2755,7 @@ This function plots the discrete step responses of a state space system for each
 
     input Boolean subPlots=true
         "True, if all subsystem time responses are plotted in one window with subplots"
-                                                                                     annotation(Dialog,choices(__Dymola_checkBox=true));
+                                                                                     annotation(choices(checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
            heading="Ramp response"));
@@ -2837,7 +2837,7 @@ encapsulated function initialResponse
 
   input Boolean subPlots=true
         "True, if all subsystem time responses are plotted in one window with subplots"
-                                                                                     annotation(Dialog,choices(__Dymola_checkBox=true));
+                                                                                     annotation(choices(checkBox=true));
 
   extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
         heading="Initial response"));

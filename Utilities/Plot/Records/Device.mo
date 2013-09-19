@@ -15,7 +15,7 @@ record Device "Properties of a device"
 
   Boolean autoLineColor = true
     "If automatic line properties: distinguish curves by color otherwise by line style"
-       annotation(Dialog,choices(__Dymola_checkBox=true));
+       annotation(choices(checkBox=true));
 
   annotation (Documentation(info="<html>
 <p>

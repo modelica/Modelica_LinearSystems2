@@ -3,7 +3,7 @@ record CurveProperties "Properties of a curve"
   extends Modelica.Icons.Record;
 
   Integer lineColor[3]={0,0,255} "Color of curve as rgb values"
-    annotation(Dialog(group="Curve properties",__Dymola_colorSelector, __Dymola_treeView=false));
+    annotation(Dialog(group="Curve properties",colorSelector=true));
 
   Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern linePattern=
     Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.Solid

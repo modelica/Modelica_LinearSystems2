@@ -9,7 +9,35 @@ function QR
     "Square upper triangular matrix";
 
   output Real tau[min(size(A, 1), size(A, 2))];
-  output Real Q2[size(A,1),size(A, 1)]
+  output Real Q2[size(A,1),size(A, 1)];
+protected
+  Integer nrow=size(A, 1);
+  Integer ncol=size(A, 2);
+  Integer minrowcol=min(nrow, ncol);
+  Integer lwork=3*max(1,max(nrow,ncol));//Internal.dgeqrf_workdim(A);
+
+algorithm
+  if minrowcol > 0 then
+
+    (Q,tau) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqrf(A, lwork);
+
+  // determine R
+    R := zeros(minrowcol, ncol);
+    for i in 1:minrowcol loop
+      for j in i:ncol loop
+        R[i, j] := Q[i, j];
+      end for;
+    end for;
+
+    //Q2 := Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr(Q, tau);// would return the economic size Q matrix
+
+    Q2 := Modelica_LinearSystems2.Math.Matrices.Internal.multiplyWithOrthogonalQ_qr(identity(size(A, 1)), Q, tau, "L", "N");
+
+  else
+    Q := fill(1, size(A, 1), size(A, 2));
+    R := fill(0, min(size(A, 1), size(A, 2)), size(A, 2));
+  end if;
+
   annotation ( Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -75,32 +103,4 @@ called as: <code>(,R,p) = QR(A)</code>.
                                     0     ,  0     ,  0.65..];
 </pre></blockquote>
 </html>"));
-
-protected
-  Integer nrow=size(A, 1);
-  Integer ncol=size(A, 2);
-  Integer minrowcol=min(nrow, ncol);
-  Integer lwork=3*max(1,max(nrow,ncol));//Internal.dgeqrf_workdim(A);
-
-algorithm
-  if minrowcol > 0 then
-
-    (Q,tau) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqrf(A, lwork);
-
-  // determine R
-    R := zeros(minrowcol, ncol);
-    for i in 1:minrowcol loop
-      for j in i:ncol loop
-        R[i, j] := Q[i, j];
-      end for;
-    end for;
-
-    //Q2 := Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr(Q, tau);// would return the economic size Q matrix
-
-    Q2 := Modelica_LinearSystems2.Math.Matrices.Internal.multiplyWithOrthogonalQ_qr(identity(size(A, 1)), Q, tau, "L", "N");
-
-  else
-    Q := fill(1, size(A, 1), size(A, 2));
-    R := fill(0, min(size(A, 1), size(A, 2)), size(A, 2));
-  end if;
 end QR;

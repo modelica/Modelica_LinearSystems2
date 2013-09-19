@@ -6,22 +6,22 @@ partial block PartialDiscreteSISO_equality
   parameter Integer sampleFactor(min=1)=1
     "Sample factor (Ts = sampleFactor * sampleClock.sampleTime)";
   final parameter Modelica.SIunits.Time Ts = sampleClock.sampleTime*sampleFactor
-    "Sample time" annotation(Hide=false);
+    "Sample time" annotation(HideResult=false);
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block"
-    annotation (extent=[-140, -20; -100, 20]);
+     annotation(Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput y
     "Continuous or discrete output signal of block"
-    annotation (extent=[100, -10; 120, 10]);
+     annotation(Placement(transformation(extent={{100,-10},{120,10}})));
 
 protected
-  outer SampleClock sampleClock "Global options"                      annotation(Hide=true);
+  outer SampleClock sampleClock "Global options"                      annotation(HideResult=true);
 
  // Derived quantities
   discrete Real u_sampled "Sampled continuous input signal u";
   Integer ticks
-    "Actual number of base samples starting from the last sample time instant" annotation(Hide=true);
-  Boolean sampleTrigger "Triggers next sample time" annotation(Hide=true);
+    "Actual number of base samples starting from the last sample time instant" annotation(HideResult=true);
+  Boolean sampleTrigger "Triggers next sample time" annotation(HideResult=true);
 
 equation
   if sampleClock.blockType == Types.BlockType.Continuous then

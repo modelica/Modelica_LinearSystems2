@@ -955,27 +955,7 @@ inputs and the number of outputs must be identical.
     import Modelica_LinearSystems2.Math.Complex;
     input Complex c "Complex number";
     output Modelica.SIunits.Frequency f "Frequency of c (= c.im in Hz)";
-    output Real damping "Damping of c (= c.re/c.im)"
-    annotation (Documentation(info="<html>
-<h4>Syntax</h4>
-<blockquote><pre>
-   Complex.<b>arg</b>(c);
-   Complex.<b>arg</b>(c, phi0=0);
-</pre></blockquote>
-<h4>Description</h4>
-<p>
-The function call \"<code>Complex.<b>arg</b>(c)</code>\" returns the
-phase angle phi of the Complex number c in the range
--pi &lt; phi &lt; pi.<br>
-The function call \"<code>Complex.<b>arg</b>(c,phi0)</code>\" returns the
-phase angle phi of the Complex number c in the range
--pi &lt; phi - phi0 &lt; pi.
-</p>
-<h4>Example</h4>
-<blockquote><pre>
-  Complex.<b>arg</b>( Complex(1,0.5), 4*pi );  // = 4*pi+pi/4 = 13.351...
-</pre></blockquote>
-</html>"));
+    output Real damping "Damping of c (= c.re/c.im)";
 
   protected
     Real abs_ev=(c.re^2 + c.im^2)^0.5;

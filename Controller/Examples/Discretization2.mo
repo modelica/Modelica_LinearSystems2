@@ -29,7 +29,7 @@ model Discretization2
   Modelica.Blocks.Sources.Step step1(
     startTime=0.1,
     height=1,
-    offset=0)                        annotation (extent=[-80,40; -60,60],
+    offset=0)                        annotation (
       Placement(transformation(extent={{-80,10},{-60,30}})));
 
 equation

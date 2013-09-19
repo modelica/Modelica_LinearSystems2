@@ -3,10 +3,10 @@ block DiscreteFIR "Realization of FIR filter"
   extends Interfaces.PartialDiscreteSISO_equality;
   parameter Real a[:]={1,1} "Coefficients of FIR filter";
 protected
-  parameter Integer n = size(a, 1) - 1 annotation(Hide=true);
-  discrete Real x[n] annotation(Hide=true);
-  discrete Real sum[n] annotation(Hide=true);
-  discrete Real y_sampled "Sampled output" annotation(Hide=true);
+  parameter Integer n = size(a, 1) - 1 annotation(HideResult=true);
+  discrete Real x[n] annotation(HideResult=true);
+  discrete Real sum[n] annotation(HideResult=true);
+  discrete Real y_sampled "Sampled output" annotation(HideResult=true);
 equation
   when {initial(), sampleTrigger} then
      u_sampled = u;
@@ -18,9 +18,9 @@ equation
   end when;
   y = y_sampled;
 initial equation
-  u = pre(u);
+  //u = pre(u);
   x = pre(x);
-  sum = pre(sum);
+  //sum = pre(sum);
   annotation (
     Documentation(info="<html>
 </html>"), Icon(graphics={Line(

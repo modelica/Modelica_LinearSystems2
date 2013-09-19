@@ -2,11 +2,10 @@ within Modelica_LinearSystems2.Controller.Internal;
 function random "Pseudo random number generator"
 
   input Integer seedIn[3]
-    "Integer vector defining random number sequence, e.g., {23,87,187}"                                 annotation (extent=[-85, 15; -15, 85]);
+    "Integer vector defining random number sequence, e.g., {23,87,187}";
   output Real x "Random number between 0 and 1";
   output Integer seedOut[3]
-    "Modified seed to be used for next call of random()"
-                                 annotation (extent=[15, 15; 85, 85]);
+    "Modified seed to be used for next call of random()";
 algorithm
   seedOut[1] := rem((171*seedIn[1]), 30269);
   seedOut[2] := rem((172*seedIn[2]), 30307);

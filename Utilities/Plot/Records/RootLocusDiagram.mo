@@ -9,24 +9,24 @@ record RootLocusDiagram "Properties of a root locus diagram"
   String ImName="Im"
     "Name of the imaginary part of the eigen values (shown in tool tip)" annotation(Dialog);
   Real heightRatio = 0.8 "Height of diagram = heightRatio*diagramWidth" annotation(Dialog);
-  Boolean grid=true "True, if grid is shown" annotation(Dialog,  choices(__Dymola_checkBox=true));
+  Boolean grid=true "True, if grid is shown" annotation(  choices(checkBox=true));
   Boolean labelWithParam=false
     "True, if values of parameter shall be shown along the curves"
-    annotation(Dialog,  choices(__Dymola_checkBox=true));
+    annotation(  choices(checkBox=true));
 
   /* group "Axes" (Axes properties) */
   String xLabel="Real part of eigenvalues"
     "String displayed at horizontal axis" annotation(Dialog(group="Axes"));
   String yLabel="Imaginary part of eigenvalues"
     "String displayed at vertical axis" annotation(Dialog(group="Axes"));
-  Boolean logX = false "True, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
-  Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
+  Boolean logX = false "True, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(checkBox=true));
+  Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(checkBox=true));
   Boolean uniformScaling = false
     "True, if same vertical and horizontal axis increment"
-      annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
+      annotation(Dialog(group="Axes"),choices(checkBox=true));
 
    Integer lineColor[3]={0,0,255} "Color of curve as rgb values"
-     annotation(Dialog(group="Curve properties",__Dymola_colorSelector, __Dymola_treeView=false));
+     annotation(Dialog(group="Curve properties",colorSelector=true));
 
    Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern linePattern=
       Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.None

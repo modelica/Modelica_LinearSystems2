@@ -23,12 +23,12 @@ block StateSpace "Continuous or discrete state space system block"
             0)));
   Modelica.Blocks.Interfaces.RealOutput x[nx](start=x_start)
     "State vector of continuous system";
-  final parameter Integer nx=size(system.A, 1) "Number of states x" annotation(Hide=true);
-  final parameter Integer ny=size(system.C, 1) "Number of outputs y" annotation(Hide=true);
+  final parameter Integer nx=size(system.A, 1) "Number of states x" annotation(HideResult=true);
+  final parameter Integer ny=size(system.C, 1) "Number of outputs y" annotation(HideResult=true);
 
   parameter Boolean withDelay=false
     "True, if a unit delay should be considered"
-    annotation(Evaluate=true, Hide=true,Dialog(tab="Advanced options"));
+    annotation(Evaluate=true, HideResult=true,Dialog(tab="Advanced options"));
 protected
   Internal.DiscreteStateSpace discretePart(
     system=system,

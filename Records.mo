@@ -7,8 +7,7 @@ extends Modelica.Icons.Package;
     String Name "Name of parameter" annotation (Dialog);
     Real Value "Value of parameter" annotation (Dialog);
 
-    annotation (
-    Dialog(__Dymola_importDsin(button="select"
+    annotation (Dialog(__Dymola_importDsin(button="select"
             "Select the model parameters to be included in this table",
                                               onlyStart=true,
       fields(Name=initialName,
@@ -48,7 +47,7 @@ extends Modelica.Icons.Package;
       "Number of parameter values in the range Min .. Max"    annotation(Dialog(group="if grid = Equidistant or Logarithmic"));
 
     annotation (
-    Dialog(__Dymola_importDsin(button="select"
+       Dialog(__Dymola_importDsin(button="select"
             "select the model parameters to be included in this table",                                   onlyStart=true,
       fields(Name=initialName,
              Value=initialValue.value,
@@ -88,7 +87,7 @@ extends Modelica.Icons.Package;
     "Options to define the simulation setup used for linearization"
     Boolean linearizeAtInitial=true
       "= true, if linearization at inital time; otherwise simulate until t_linearize"
-       annotation (Dialog,choices(__Dymola_checkBox=true));
+       annotation (choices(checkBox=true));
     Modelica.SIunits.Time t_start=0.0 "Start time of simulation" annotation(Dialog);
     Modelica.SIunits.Time t_linearize=0.0
       "Simulate from t_start until t_linearize and then linearize, if linearizeAtInitial=false"

@@ -2242,8 +2242,8 @@ is set.
       import Modelica_LinearSystems2.Utilities.Plot;
 
     input ZerosAndPoles zp "Linear system in ZerosAndPoles form";
-    input Boolean poles=true "= true, to plot the poles of zp" annotation(choices(__Dymola_checkBox=true));
-    input Boolean zeros=true "= true, to plot the zeros of zp" annotation(choices(__Dymola_checkBox=true));
+    input Boolean poles=true "= true, to plot the poles of zp" annotation(choices(checkBox=true));
+    input Boolean zeros=true "= true, to plot the zeros of zp" annotation(choices(checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
        defaultDiagram = Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
@@ -2375,8 +2375,8 @@ and results in
                                                       annotation(Dialog(enable=not autoRange));
 
     input Boolean magnitude=true "= true, to plot the magnitude of tf"
-                                                                      annotation(choices(__Dymola_checkBox=true));
-    input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
+                                                                      annotation(choices(checkBox=true));
+    input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
           Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot of  zp = "

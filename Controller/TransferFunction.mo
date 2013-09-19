@@ -25,11 +25,11 @@ block TransferFunction
 protected
 parameter Boolean withDelay=false;
   parameter Integer na=size(system.d, 1)
-                         annotation(Hide=true);
+                         annotation(HideResult=true);
   parameter Integer nb=size(system.n, 1)
-                         annotation(Hide=true);
-  Real a[na]=system.d "Reverse element order of system.denominator"                       annotation(Hide=true);
-  Real b[nb]=system.n    annotation(Hide=true);
+                         annotation(HideResult=true);
+  Real a[na]=system.d "Reverse element order of system.denominator"                       annotation(HideResult=true);
+  Real b[nb]=system.n    annotation(HideResult=true);
   Real bb[:]=vector([zeros(max(0, na - nb), 1); b]);
   Real d=bb[1]/a[1];
   Real a_end=if a[end] > 100*Modelica.Constants.eps*sqrt(a*a) then a[end] else 1.0;

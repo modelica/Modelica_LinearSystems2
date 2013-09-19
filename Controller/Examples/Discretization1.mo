@@ -13,7 +13,7 @@ model Discretization1 "Demonstrates the discretization methods"
   Modelica.Blocks.Sources.Step step(
     height=1.2,
     offset=0.2,
-    startTime=0.1)                   annotation (extent=[-80,40; -60,60],
+    startTime=0.1)                   annotation (
       Placement(transformation(extent={{-80,40},{-60,60}})));
   Modelica_LinearSystems2.Controller.SecondOrder explicitEuler(
     w=w,

@@ -1124,7 +1124,7 @@ It contains the following main improvements (and several minor ones):
 </ul>
 
 <p>
-For versionBuild=4, several bug fixes have been performed. In particular:
+For <b>versionBuild=4</b> (March 25, 2013), several bug fixes have been performed. In particular:
 </p>
 
 <ul>
@@ -1154,6 +1154,52 @@ For versionBuild=4, several bug fixes have been performed. In particular:
      called with a (0,0) matrix resulting in an error).</li>
 </ul>
 
+
+<p>
+For <b>versionBuild=5</b> (Sept. 19, 2013), some minor bugs have been fixed:
+</p>
+
+<ul>
+<li> Modelica_LinearSystems2.Controller.Internal.DiscreteFIR:<br>
+     Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace<br>
+     Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace2<br>
+     Modelica_LinearSystems2.Controller.Internal.DiscreteInterpolator:<br>
+     According to the improved/corrected rules for initialization in
+     Modelica Specification 3.2 rev. 2, the initialization in these models
+     were overconstrained. Removed the (consistently) overconstrained
+     initial conditions.</li>
+
+<li> Modelica_LinearSystems2.StateSpace.Analysis.analysis:<br>
+     If the system had only real eigen values and poles/zeros should be plotted,
+     then this plot was not generated. This has been fixed.</li>
+
+<li> Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock,<br>
+     Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality,<br>
+     Modelica_LinearSystems2.Controller.Noise,<br>
+     Modelica_LinearSystems2.Controller.Interpolator:<br>
+     Parameters have been defined conditionally leading to not strict
+     Modelica models.
+     The if-clauses have been removed.</li>
+
+<li> Wrong annotation \"preferedView\" replaced by correct
+     \"preferredView\" annotation. (3 times)</li>
+
+<li> Non-standardized annotation \"Hide\" replaced by standardized
+     annotation \"HideResult\" (77 times)</li>
+
+<li> Non-standardized annotation \"__Dymola_checkBox\" replaced by standardized
+     annotation \"checkBox\" (53 times)</li>
+
+<li> Non-standardized annotation \"NumberOfIntervals\" replaced by
+     tool specific annotation \"__Dymola_NumberOfIntervals\" (3 times)</li>
+
+<li> Non-standardized annotation \"Commands\" replaced by
+     tool specific annotation \"__Dymola_Commands\" (3 times)</li>
+
+<li> Obsolete Dymola specific annotation \"__Dymola_treeView\" removed (3 times)</li>
+
+<li> Old \"extend\" annotation code that has been present at a few places, has been removed.</li>
+</ul>
 </html>"));
     end Version_2_3;
 

@@ -11,10 +11,10 @@ block DiscreteInterpolator
      annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block"
-    annotation (extent=[-140, -20; -100, 20]);
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput y
     "Continuous or discrete output signal of block"
-    annotation (extent=[100, -10; 120, 10]);
+    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
   Integer inputOutputSampleFactor = div(inputSampleFactor,outputSampleFactor);
   outer SampleClock sampleClock "Global options";
@@ -47,7 +47,7 @@ equation
   end when;
 
 initial equation
-  u = pre(u);
+  // u = pre(u);
   pre_u = pre(pre_u);
   u = y;
 

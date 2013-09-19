@@ -1,5 +1,5 @@
 within ;
-package Modelica_LinearSystems2 "Modelica_LinearSystems2 (Version 2.3 build 4) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
+package Modelica_LinearSystems2 "Modelica_LinearSystems2 (Version 2.3 build 5) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
   extends Modelica.Icons.Package;
 
   constant String DataDir=classDirectory() +  "Resources/Data/"
@@ -7,12 +7,12 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (Version 2.3 build 4) -
 
 annotation (
   preferredView="info",
-  uses(Modelica(version="3.2")),
+  uses(Modelica(version="3.2.1")),
   version="2.3",
-  versionBuild=4,
+  versionBuild=5,
   versionDate="2012-08-30",
-  dateModified = "2013-03-25 17:32:01Z",
-  revisionID="$Id::                                       $",
+  dateModified = "2013-09-16 17:32:01Z",
+  revisionId="$Id::                                       $",
   conversion(
     noneFromVersion="2.0",
     noneFromVersion="2.1",
@@ -81,7 +81,7 @@ Modelica Standard Library.
     <td style=\"vertical-align: top;\"><br><b>Licensed by DLR under the Modelica License 2</b></td>
 </tr>
 <tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</b></td></tr>
-<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012, DLR Institute of System Dynamics and Control</b></td></tr>
+<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2013, DLR Institute of System Dynamics and Control</b></td></tr>
 </table>
 </p>
 

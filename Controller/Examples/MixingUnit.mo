@@ -3,11 +3,10 @@ model MixingUnit
   "Example of system control with inverse model in a controller with two degrees of freedom"
   extends Modelica.Icons.Example;
   extends Templates.TwoDOFinverseModelController(
-    redeclare Examples.Components.MixingUnit plant_inv(
-        mixingUnit(
+    redeclare Examples.Components.MixingUnit plant_inv(mixingUnit(
         c(start=c_start, fixed=true),
         T_c(start=T_c_start, fixed=true),
-        T(start=T_start, fixed=false))),
+        T(start=T_start, fixed=true))),
     redeclare Examples.Components.MixingUnit plant(
         mixingUnit(c(start=c_start, fixed=true), T(start=T_start, fixed=true))),
     filter(
@@ -15,7 +14,8 @@ model MixingUnit
       normalized=false,
       f_cut=freq,
       initType=Types.InitWithGlobalDefault.NoInit),
-    redeclare Controller.PI controller(k=10, T=10));
+    redeclare Controller.PI controller(k=10, T=10,
+      initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState));
 
   import SI = Modelica.SIunits;
   parameter Real x10 = 0.42
@@ -57,7 +57,7 @@ equation
       smooth=Smooth.None));
   annotation (
     experiment(StopTime=500),
-    Commands(
+    __Dymola_Commands(
       file="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/MixingUnit_plot.mos"
         "Plot Results",
       file(
@@ -90,6 +90,6 @@ selection yields the following simulation result.
      8th Edition, Oldenbourg Verlag M&uuml;nchen.<br>&nbsp;</dd>
 </dl>
 </html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{120,
-            100}})));
+    Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-100},{120,
+            100}}), graphics));
 end MixingUnit;

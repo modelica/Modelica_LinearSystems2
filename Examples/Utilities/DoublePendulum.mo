@@ -37,7 +37,9 @@ model DoublePendulum "double pendulum system"
     shapeType="box",
     animateSphere=true,
     m=m_trolley,
-    sphereDiameter=world.defaultBodyDiameter)
+    sphereDiameter=world.defaultBodyDiameter,
+    r={0,0,0},
+    r_CM={0,0,0})
     annotation (Placement(transformation(extent={{-58,0},{-38,20}})));
   Modelica.Mechanics.Translational.Sources.Force force
     annotation (Placement(transformation(extent={{-98,34},{-78,54}})));
@@ -269,20 +271,19 @@ equation
     experiment(
       StartTime=1,
       StopTime=10,
-      Algorithm="Dassl"),
+      __Dymola_Algorithm="Dassl"),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-150,-100},{150,100}},
         grid={2,2}), graphics),
     Documentation(info="<html>
- 
+
 Model of a simple double pendulum system. <br>
 The physical Model is used in Modelica_LinearSystems2.Examples.StateSpace.doublePendulumController where it is being
 linearized an used as a base for linear controller design. The results are used to control the crane system
 in Modelica_LinearSystems2.Controller.Examples.DoublePendulum.mo
- 
+
 </html>"),
-    experimentSetupOutput,
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{150,
             100}}), graphics={
         Rectangle(

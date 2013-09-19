@@ -928,8 +928,8 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
         "Maximum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
 
       input Boolean magnitude=true "= true, to plot the magnitude of tf"
-                                                                        annotation(choices(__Dymola_checkBox=true));
-      input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
+                                                                        annotation(choices(checkBox=true));
+      input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
             Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot of  dtf = "
