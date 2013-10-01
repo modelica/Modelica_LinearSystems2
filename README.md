@@ -24,9 +24,12 @@ It is planned to include this library in a future version of the Modelica Standa
 
 ## Current release
 
-Download [Modelica_LinearSystems2 v2.3 (2012-08-30)](../../archive/v2.3.zip)
+Download [Modelica_LinearSystems2 v2.3.1 (2013-10-01)](../../archive/v2.3.1.zip)
 
 #### Release notes
+*  [Version v2.3.1 (2013-10-01)](../../archive/v2.3.1.zip)
+ * This version requires the Modelica Standard Library 3.2.1
+ * Backward compatible release to the previous 2.x versions.
 *  [Version v2.3 (2012-08-30)](../../archive/v2.3.zip)
  * Backward compatible release to the previous 2.x versions. It contains the following main improvements:
    * New package `Modelica_LinearSystems2.ModelAnalysis` that contains several functions to linearize a model and perform a selected linear analysis operation.
