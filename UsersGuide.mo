@@ -1089,6 +1089,64 @@ This library is based on the following references:
   package ReleaseNotes "Release notes"
     extends Modelica.Icons.ReleaseNotes;
 
+    class Version_2_3_1 "Version 2.3.1 (Oct. 1, 2013)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>This version requires the <b>Modelica 3.2.1</b> Library.
+It is is <b>backward compatible</b> to the previous version 2.3.</p>
+
+<h4>
+Improvements and bug fixes performed in this version:
+</h4>
+
+<ul>
+<li> Uses annotation changed to Modelica 3.2.1. </li>
+
+<li> Modelica_LinearSystems2.Controller.Internal.DiscreteFIR:<br>
+     Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace<br>
+     Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace2<br>
+     Modelica_LinearSystems2.Controller.Internal.DiscreteInterpolator:<br>
+     According to the improved/corrected rules for initialization in
+     Modelica Specification 3.2 rev. 2, the initialization in these models
+     were overconstrained. Removed the (consistently) overconstrained
+     initial conditions.</li>
+
+<li> Modelica_LinearSystems2.StateSpace.Analysis.analysis:<br>
+     If the system had only real eigen values and poles/zeros should be plotted,
+     then this plot was not generated. This has been fixed.</li>
+
+<li> Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock,<br>
+     Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality,<br>
+     Modelica_LinearSystems2.Controller.Noise,<br>
+     Modelica_LinearSystems2.Controller.Interpolator:<br>
+     Parameters have been defined conditionally leading to not strict
+     Modelica models.
+     The if-clauses have been removed.</li>
+
+<li> Wrong annotation \"preferedView\" replaced by correct
+     \"preferredView\" annotation. (3 times)</li>
+
+<li> Non-standardized annotation \"Hide\" replaced by standardized
+     annotation \"HideResult\" (77 times)</li>
+
+<li> Non-standardized annotation \"__Dymola_checkBox\" replaced by standardized
+     annotation \"checkBox\" (53 times)</li>
+
+<li> Non-standardized annotation \"NumberOfIntervals\" replaced by
+     tool specific annotation \"__Dymola_NumberOfIntervals\" (3 times)</li>
+
+<li> Non-standardized annotation \"Commands\" replaced by
+     tool specific annotation \"__Dymola_Commands\" (3 times)</li>
+
+<li> Obsolete Dymola specific annotation \"__Dymola_treeView\" removed (3 times)</li>
+
+<li> Old \"extend\" annotation code that has been present at a few places, has been removed.</li>
+</ul>
+
+</html>"));
+    end Version_2_3_1;
+
     class Version_2_3 "Version 2.3 (August 30, 2012)"
       extends Modelica.Icons.ReleaseNotes;
 
@@ -1152,55 +1210,6 @@ For <b>versionBuild=4</b> (March 25, 2013), several bug fixes have been performe
 <li> Fixed bug in isControllableSISO and isDetectableSISO
      (if all eigenvalues are controllable or observable, the eigenvalue LAPACK function was
      called with a (0,0) matrix resulting in an error).</li>
-</ul>
-
-
-<p>
-Fixes in <b>versionBuild=5</b> (Sept. 19, 2013):
-</p>
-
-<ul>
-<li> Uses annotation changed to Modelica 3.2.1. </li>
-
-<li> Modelica_LinearSystems2.Controller.Internal.DiscreteFIR:<br>
-     Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace<br>
-     Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace2<br>
-     Modelica_LinearSystems2.Controller.Internal.DiscreteInterpolator:<br>
-     According to the improved/corrected rules for initialization in
-     Modelica Specification 3.2 rev. 2, the initialization in these models
-     were overconstrained. Removed the (consistently) overconstrained
-     initial conditions.</li>
-
-<li> Modelica_LinearSystems2.StateSpace.Analysis.analysis:<br>
-     If the system had only real eigen values and poles/zeros should be plotted,
-     then this plot was not generated. This has been fixed.</li>
-
-<li> Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock,<br>
-     Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality,<br>
-     Modelica_LinearSystems2.Controller.Noise,<br>
-     Modelica_LinearSystems2.Controller.Interpolator:<br>
-     Parameters have been defined conditionally leading to not strict
-     Modelica models.
-     The if-clauses have been removed.</li>
-
-<li> Wrong annotation \"preferedView\" replaced by correct
-     \"preferredView\" annotation. (3 times)</li>
-
-<li> Non-standardized annotation \"Hide\" replaced by standardized
-     annotation \"HideResult\" (77 times)</li>
-
-<li> Non-standardized annotation \"__Dymola_checkBox\" replaced by standardized
-     annotation \"checkBox\" (53 times)</li>
-
-<li> Non-standardized annotation \"NumberOfIntervals\" replaced by
-     tool specific annotation \"__Dymola_NumberOfIntervals\" (3 times)</li>
-
-<li> Non-standardized annotation \"Commands\" replaced by
-     tool specific annotation \"__Dymola_Commands\" (3 times)</li>
-
-<li> Obsolete Dymola specific annotation \"__Dymola_treeView\" removed (3 times)</li>
-
-<li> Old \"extend\" annotation code that has been present at a few places, has been removed.</li>
 </ul>
 </html>"));
     end Version_2_3;

@@ -1,5 +1,5 @@
 within ;
-package Modelica_LinearSystems2 "Modelica_LinearSystems2 (Version 2.3 build 5) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
+package Modelica_LinearSystems2 "Modelica_LinearSystems2 (Version 2.3.1) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
   extends Modelica.Icons.Package;
 
   constant String DataDir=classDirectory() +  "Resources/Data/"
@@ -8,15 +8,16 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (Version 2.3 build 5) -
 annotation (
   preferredView="info",
   uses(Modelica(version="3.2.1")),
-  version="2.3",
-  versionBuild=5,
-  versionDate="2012-08-30",
-  dateModified = "2013-09-16 17:32:01Z",
+  version="2.3.1",
+  versionBuild=1,
+  versionDate="2013-10-01",
+  dateModified = "2013-10-01 15:20:01Z",
   revisionId="$Id::                                       $",
   conversion(
     noneFromVersion="2.0",
     noneFromVersion="2.1",
-    noneFromVersion="2.2"),
+    noneFromVersion="2.2",
+    noneFromVersion="2.3"),
   Documentation(info="<html>
 <p>
 Library <b>Modelica_LinearSystems2</b> is a Modelica package
