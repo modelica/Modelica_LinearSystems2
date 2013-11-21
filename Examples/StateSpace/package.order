@@ -11,6 +11,7 @@ analysisPolesAndZerosSISO
 analysisInvariantZeros
 analysisPolesAndZeros_SISO
 analysisStairCase
+conversionFromTransferFunction
 conversionFromZerosAndPoles
 conversionToTransferFunctionMIMO
 conversionToTransferFunctionSISO
