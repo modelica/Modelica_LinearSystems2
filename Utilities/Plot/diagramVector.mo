@@ -61,7 +61,7 @@ algorithm
                     legend=diagram[i].legend,
                     legendHorizontal=diagram[i].legendHorizontal,
                     legendFrame=diagram[i].legendFrame,
-                    legendLocation=diagram[i].legendLocation);
+                    legendLocation=Integer(diagram[i].legendLocation));
 
     for j in 1:size(diagram[i].curve,1) loop
       if diagram[i].curve[j].autoLine then

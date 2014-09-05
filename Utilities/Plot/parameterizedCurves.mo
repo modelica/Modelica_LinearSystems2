@@ -48,7 +48,7 @@ algorithm
                   legend=diagram.legend,
                   legendHorizontal=diagram.legendHorizontal,
                   legendFrame=diagram.legendFrame,
-                  legendLocation=diagram.legendLocation);
+                  legendLocation=Integer(diagram.legendLocation));
 
   // Plot parameterized curve
   if nProperties == 0 then

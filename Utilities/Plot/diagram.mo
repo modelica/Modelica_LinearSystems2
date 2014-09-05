@@ -35,7 +35,7 @@ algorithm
                   legend=diagram.legend,
                   legendHorizontal=diagram.legendHorizontal,
                   legendFrame=diagram.legendFrame,
-                  legendLocation=diagram.legendLocation);
+                  legendLocation=Integer(diagram.legendLocation));
 
   for i in 1:nCurves loop
     /*
