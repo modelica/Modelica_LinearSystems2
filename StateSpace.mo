@@ -710,7 +710,6 @@ This package contains operators for subtraction of state space records.
         analyseOptions2.printObservability := false;
       end if;
 
-
       // If system has no states, modify analyze options that do not make sense
       if nx < 1 then
          analyseOptions2.plotEigenValues          :=false;
@@ -719,7 +718,6 @@ This package contains operators for subtraction of state space records.
          analyseOptions2.printEigenValueProperties:=false;
          analyseOptions2.printInvariantZeros      :=false;
       end if;
-
 
       // Get eigenvalues
       // ---------------
@@ -959,8 +957,7 @@ This package contains operators for subtraction of state space records.
           end if;
 
           // Plot invariant zeros
-          if size(systemZeros, 1) > 0 and analyseOptions2.plotInvariantZeros
-               then
+          if size(systemZeros, 1) > 0 and analyseOptions2.plotInvariantZeros then
             i := i + 1;
             curves[i] := Plot.Records.Curve(
                   x=systemZeros[:].re,
@@ -975,7 +972,6 @@ This package contains operators for subtraction of state space records.
           diagram2.curve := curves[1:i];
           Plot.diagram(diagram2, device);
         end if;
-
 
         if analyseOptions2.printEigenValueProperties then
           printHead3(fileName);
@@ -1277,8 +1273,7 @@ This package contains operators for subtraction of state space records.
         print("\n<" + heading + ">Characteristics</" + heading +
           ">\n<p>\nThe system\n</p>\n<p> is ", fileName);
 
-        if analyseOptions.printControllability and analyseOptions.printObservability
-             then
+        if analyseOptions.printControllability and analyseOptions.printObservability then
           print((if isStable then " " else "<b>not</b> ") + "stable" + "\n<br>"
              + (if isStable then if isControllable then "and it is " else
             "but it is <b>not</b> " else if isControllable then "but it is "
@@ -1291,8 +1286,7 @@ This package contains operators for subtraction of state space records.
              + (if isObservable then " and therefore it is " else if
             isDetectable then " but it is " else "and is <b>not</b> ") +
             "detectable.") + "\n<br>", fileName);
-        elseif not analyseOptions.printObservability and analyseOptions.printControllability
-             then
+        elseif not analyseOptions.printObservability and analyseOptions.printControllability then
           print((if isStable then " " else "<b>not</b> ") + "stable" + "\n<br>"
              + (if isStable then if isControllable then "and it is " else
             "but it is <b>not</b> " else if isControllable then "but it is "
@@ -1300,8 +1294,7 @@ This package contains operators for subtraction of state space records.
              then "" else "\n<br>" + (if isControllable then
             " and therefore it is " else if isStabilizable then " but it is "
              else "and is <b>not</b> ") + "stabilizable.") + "\n<br>", fileName);
-        elseif not analyseOptions.printControllability and analyseOptions.printObservability
-             then
+        elseif not analyseOptions.printControllability and analyseOptions.printObservability then
           print((if isStable then " " else "<b>not</b> ") + "stable." +
             "\n<br> The system is " + (if isObservable then " " else
             "<b>not</b> ") + "observable" + (if isStable then "" else "\n<br>"
@@ -5567,86 +5560,87 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 </html>"));
     end bodeSISO;
 
-encapsulated function bodeMIMO
-  "Plot bode plot of all transfer functions, corresponding to the state space system"
+    encapsulated function bodeMIMO
+      "Plot bode plot of all transfer functions, corresponding to the state space system"
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Utilities.Plot;
 
-  input StateSpace ss "State space system";
-  input Integer nPoints(min=2) = 200 "Number of points";
-  input Boolean autoRange[:, :]=fill(
-      true,
-      size(ss.C, 1),
-      size(ss.B, 2)) "True, if abszissa range is automatically determined";
-  input Modelica.SIunits.Frequency f_min[:, :]=fill(
-      0.1,
-      size(ss.C, 1),
-      size(ss.B, 2)) "Minimum frequency value, if autoRange = false";
-  input Modelica.SIunits.Frequency f_max[:, :]=fill(
-      10,
-      size(ss.C, 1),
-      size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
-  input Boolean magnitude=true "True, if magnitude of tf should be plotted"
-    annotation (choices(checkBox=true));
-  input Boolean phase=true "True, if pase of tf should be plotted"
-    annotation (choices(checkBox=true));
-  input Real tol=1e-10 "Tolerance of reduction procedure, default tol = 1e-10";
+      input StateSpace ss "State space system";
+      input Integer nPoints(min=2) = 200 "Number of points";
+      input Boolean autoRange[:, :]=fill(
+          true,
+          size(ss.C, 1),
+          size(ss.B, 2)) "True, if abszissa range is automatically determined";
+      input Modelica.SIunits.Frequency f_min[:, :]=fill(
+          0.1,
+          size(ss.C, 1),
+          size(ss.B, 2)) "Minimum frequency value, if autoRange = false";
+      input Modelica.SIunits.Frequency f_max[:, :]=fill(
+          10,
+          size(ss.C, 1),
+          size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
+      input Boolean magnitude=true "True, if magnitude of tf should be plotted"
+        annotation (choices(checkBox=true));
+      input Boolean phase=true "True, if pase of tf should be plotted"
+        annotation (choices(checkBox=true));
+      input Real tol=1e-10
+        "Tolerance of reduction procedure, default tol = 1e-10";
 
-  extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-        Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+            Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
 
-protected
-  ZerosAndPoles zp[size(ss.C, 1), size(ss.B, 2)]
-    "ZerosAndPoles object to be plotted";
-  Plot.Records.Diagram diagram2=defaultDiagram;
-  String yNames[size(ss.C, 1)];
-  String uNames[size(ss.B, 2)];
+    protected
+      ZerosAndPoles zp[size(ss.C, 1), size(ss.B, 2)]
+        "ZerosAndPoles object to be plotted";
+      Plot.Records.Diagram diagram2=defaultDiagram;
+      String yNames[size(ss.C, 1)];
+      String uNames[size(ss.B, 2)];
 
-algorithm
-  // Check that system has inputs and outputs
-  if size(ss.B, 2) == 0 then
-    Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no inputs."
-       + "\n... Call of Plot.bodeMIMO is ignored.\n");
-    return;
-  elseif size(ss.C, 1) == 0 then
-    Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no outputs."
-       + "\n... Call of Plot.bodeMIMO is ignored.\n");
-    return;
-  end if;
+    algorithm
+      // Check that system has inputs and outputs
+      if size(ss.B, 2) == 0 then
+        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no inputs."
+           + "\n... Call of Plot.bodeMIMO is ignored.\n");
+        return;
+      elseif size(ss.C, 1) == 0 then
+        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no outputs."
+           + "\n... Call of Plot.bodeMIMO is ignored.\n");
+        return;
+      end if;
 
-  // generate headings
-  for i1 in 1:size(ss.B, 2) loop
-    uNames[i1] := if ss.uNames[i1] == "" then "u" + String(i1) else ss.uNames[
-      i1];
-  end for;
-  for i1 in 1:size(ss.C, 1) loop
-    yNames[i1] := if ss.yNames[i1] == "" then "y" + String(i1) else ss.yNames[
-      i1];
-  end for;
-  zp := StateSpace.Conversion.toZerosAndPolesMIMO(ss, tol);
+      // generate headings
+      for i1 in 1:size(ss.B, 2) loop
+        uNames[i1] := if ss.uNames[i1] == "" then "u" + String(i1) else ss.uNames[
+          i1];
+      end for;
+      for i1 in 1:size(ss.C, 1) loop
+        yNames[i1] := if ss.yNames[i1] == "" then "y" + String(i1) else ss.yNames[
+          i1];
+      end for;
+      zp := StateSpace.Conversion.toZerosAndPolesMIMO(ss, tol);
 
-  for i1 in 1:size(ss.C, 1) loop
-    for i2 in 1:size(ss.B, 2) loop
-      diagram2.heading := defaultDiagram.heading + "  " + uNames[i2] + " -> " +
-        yNames[i1];
-      ZerosAndPoles.Plot.bode(
-        zp[i1, i2],
-        nPoints,
-        autoRange[i1, i2],
-        f_min[i1, i2],
-        f_max[i1, i2],
-        magnitude,
-        phase,
-        defaultDiagram=diagram2,
-        device=device);
-    end for;
-  end for;
+      for i1 in 1:size(ss.C, 1) loop
+        for i2 in 1:size(ss.B, 2) loop
+          diagram2.heading := defaultDiagram.heading + "  " + uNames[i2] + " -> " +
+            yNames[i1];
+          ZerosAndPoles.Plot.bode(
+            zp[i1, i2],
+            nPoints,
+            autoRange[i1, i2],
+            f_min[i1, i2],
+            f_max[i1, i2],
+            magnitude,
+            phase,
+            defaultDiagram=diagram2,
+            device=device);
+        end for;
+      end for;
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 StateSpace.Plot.<b>bodeMIMO</b>(ss)
@@ -5686,8 +5680,7 @@ StateSpace.Plot.<b>bodeMIMO</b>(
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase2.png\">
 </p>
 </html>"));
-end bodeMIMO;
-
+    end bodeMIMO;
 
     encapsulated function timeResponse
       "Plot the time response of the system. The response type is selectable"
@@ -5714,8 +5707,8 @@ end bodeMIMO;
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
           defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading
-            ="Time response"));
+            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
+             "Time response"));
 
     protected
       Plot.Records.Curve curve;
@@ -5846,8 +5839,8 @@ This function plots the time response of a state space system. The character of 
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
           defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading
-            ="Impulse response"));
+            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
+             "Impulse response"));
 
     protected
       input Modelica_LinearSystems2.Types.TimeResponse response=
@@ -5930,8 +5923,8 @@ for each system corresponding to the transition matrix. It is based on <a href=\
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
           defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading
-            ="Step response"));
+            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
+             "Step response"));
 
       input Modelica_LinearSystems2.Types.TimeResponse response=
           Modelica_LinearSystems2.Types.TimeResponse.Step
@@ -6011,8 +6004,8 @@ This function plots the step responses of a state space system for each system c
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
           defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading
-            ="Ramp response"));
+            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
+             "Ramp response"));
 
       input Modelica_LinearSystems2.Types.TimeResponse response=
           Modelica_LinearSystems2.Types.TimeResponse.Ramp
@@ -6091,8 +6084,8 @@ This function plots the ramp responses of a state space system for each system c
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
           defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading
-            ="Initial response"));
+            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
+             "Initial response"));
 
       input Modelica_LinearSystems2.Types.TimeResponse response=
           Modelica_LinearSystems2.Types.TimeResponse.Initial
@@ -6162,11 +6155,8 @@ This function plots the initial responses of a state space system for the initia
     import Modelica;
     extends Modelica.Icons.Package;
 
-
-
     encapsulated function toZerosAndPoles
       "Generate a zeros-and-poles representation from a SISO state space representation"
-
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Complex;
@@ -6204,26 +6194,31 @@ This function plots the initial responses of a state space system for the initia
         "Get p on the real axis so that there is a minimum distance to all poles and zeros"
         input Complex Poles[:];
         input Complex Zeros[:];
-        input Real minimumDistance=1.0;
+        input Real minimumDistance=0.1;
         output Real p
-          "Value on real axis >= 0.0, so that poles.re and zeros.re have a minimumDistance to it";
+          "Value on real axis > 0.0, so that poles.re and zeros.re have a minimumDistance to it";
+        /* Most systems have no or only a few unstable poles or zeros.
+    Searching for a suitable p is therefore fastest when searching 
+    only in the unstable region, that is p > 0.0
+    */
       protected
         Integer nVec=size(Poles, 1) + size(Zeros, 1);
         Real vec[:];
         Real vecSorted[:];
         Integer i;
         Integer iMax;
+        Real small = minimumDistance*1e-6;
       algorithm
         i := 0;
         vec := zeros(nVec);
         for j in 1:size(Poles, 1) loop
-          if Poles[j].re >= 0.0 then
+          if Poles[j].re > small then
             i := i + 1;
             vec[i] := Poles[j].re;
           end if;
         end for;
         for j in 1:size(Zeros, 1) loop
-          if Zeros[j].re >= 0.0 then
+          if Zeros[j].re > small then
             i := i + 1;
             vec[i] := Zeros[j].re;
           end if;
@@ -6232,19 +6227,18 @@ This function plots the initial responses of a state space system for the initia
         if iMax == 0 then
           p := minimumDistance;
           return;
-        elseif iMax == 1 then
-          if vec[1] < 0.0 or vec[1] > 2*minimumDistance then
-            p := minimumDistance;
-          else
-            p := vec[1] + minimumDistance;
-          end if;
-          return;
         end if;
 
         vec := vec[1:iMax];
         vecSorted := Modelica.Math.Vectors.sort(vec);
 
         // Find p, so that vecSorted[i+1] - vecSorted[i] > 2*minimumDistance
+        if vecSorted[1] >= 2*minimumDistance then
+           p := minimumDistance;
+           return;
+        end if;
+
+        i :=1;
         while i <= iMax loop
           if i == iMax then
             p := vecSorted[i] + minimumDistance;
@@ -9179,8 +9173,8 @@ The uncontrollable poles are checked to to stable.
         redeclare Real p_real[size(ssm.A, 1)],
         redeclare Real p_im[size(ssm.A, 1)],
         redeclare Real z_real[size(StateSpace.Analysis.invariantZeros(ssm), 1)],
-
         redeclare Real z_im[size(StateSpace.Analysis.invariantZeros(ssm), 1)]);
+
     protected
       Complex poles[:]=Complex.eigenValues(ssm.A);
       Complex zeros[:]=StateSpace.Analysis.invariantZeros(ssm);
@@ -9541,8 +9535,7 @@ The uncontrollable poles are checked to to stable.
 
           //  !!!! rank has to be determined. In the case of ill conditioned systems svd should be used
           for i in 1:min(size(R, 1), size(R, 2)) loop
-            if abs(R[i, size(R, 2) - min(size(R, 1), size(R, 2)) + i]) > eps
-                 then
+            if abs(R[i, size(R, 2) - min(size(R, 1), size(R, 2)) + i]) > eps then
               rankR := rankR + 1;
             end if;
           end for;
@@ -9572,8 +9565,7 @@ The uncontrollable poles are checked to to stable.
 
             //  !!!! rank has to be determined. In the case of ill conditioned systems svd should be used
             for i in 1:min(size(R, 1), size(R, 2)) loop
-              if abs(R[i, size(R, 2) - min(size(R, 1), size(R, 2)) + i]) > eps
-                   then
+              if abs(R[i, size(R, 2) - min(size(R, 1), size(R, 2)) + i]) > eps then
                 rankR := rankR + 1;
               end if;
             end for;
@@ -9958,8 +9950,7 @@ k = ---------- * ----------------------
           rankR := 0;
           //  !!!! rank has to be determined. In the case of ill conditioned systems svd should be used
           for i in 1:min(size(R, 1), size(R, 2)) loop
-            if abs(R[i, size(R, 2) - min(size(R, 1), size(R, 2)) + i]) > eps
-                 then
+            if abs(R[i, size(R, 2) - min(size(R, 1), size(R, 2)) + i]) > eps then
               rankR := rankR + 1;
             end if;
           end for;
@@ -9983,8 +9974,7 @@ k = ---------- * ----------------------
             rankR := 0;
             //  !!!! rank determination
             for i in 1:min(size(R, 1), size(R, 2)) loop
-              if abs(R[i, size(R, 2) - min(size(R, 1), size(R, 2)) + i]) > eps
-                   then
+              if abs(R[i, size(R, 2) - min(size(R, 1), size(R, 2)) + i]) > eps then
                 rankR := rankR + 1;
               end if;
             end for;
