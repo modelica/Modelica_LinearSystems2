@@ -1103,6 +1103,9 @@ Bug fixes performed in version 2.3.1 Build 2 (Sept. 11, 2014):
 <ul>
 <li> Some Enumeration/Integer errors corrected (issued as warning
      due to stricter checking by Dymola 2015 FD01).</li>
+<li> Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock:<br>
+     Enumeration1/Enumeration2 errors corrected (issued as warning
+     due to stricter checking by Dymola 2015 FD01).</li>
 <li> Some Plot functions have been called without providing record input arguments.
      This has been fixed by providing a default record in the function definitions.</li>
 <li> Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles:<br>

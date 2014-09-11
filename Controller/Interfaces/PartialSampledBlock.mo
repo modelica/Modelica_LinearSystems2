@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Controller.Interfaces;
 partial block PartialSampledBlock
   "Partial block of Sampled library (icon + default parameters)"
   extends Icons.PartialBlockIcon(cont=continuous);
+  import Modelica_LinearSystems2.Controller.Types;
 
   parameter Types.BlockTypeWithGlobalDefault blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption
     "Type of block"
@@ -22,12 +23,17 @@ partial block PartialSampledBlock
                                  blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
                                  sampleClock.blockType == Types.BlockType.Continuous
     "True, if continuous block, otherwise discrete block";
-  parameter Types.MethodWithGlobalDefault methodType=Types.MethodWithGlobalDefault.UseSampleClockOption "Type of discretization if discrete block"
+  parameter Types.MethodWithGlobalDefault methodType=Types.MethodWithGlobalDefault.UseSampleClockOption
+    "Type of discretization if discrete block"
      annotation(Evaluate=true, HideResult=true,Dialog(tab="Advanced options",group="Discrete block parameters",
                 enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
 
-  final parameter Types.Init init=if initType == Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.UseSampleClockOption then
-            sampleClock.initType else initType
+  final parameter Types.Init init=if initType == Types.InitWithGlobalDefault.UseSampleClockOption then
+            sampleClock.initType else
+            (if initType==Types.InitWithGlobalDefault.NoInit then Types.Init.NoInit else
+            (if initType==Types.InitWithGlobalDefault.SteadyState then Types.Init.SteadyState else
+            (if initType==Types.InitWithGlobalDefault.InitialState then Types.Init.InitialState else
+            Types.Init.InitialOutput)))
     "Type of initialization (no init/InitialState/SteadyState)" annotation(Evaluate=true);
 
   parameter Integer sampleFactor(min=1)=1
