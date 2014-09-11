@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Modelica_LinearSystems2.Utilities.Import</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="&quot;Package of functions to import data in a Modelica environment&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial, sans-serif; }
+.modelica, .modelica * { font-size: 9pt; font-family: Courier, monospace; white-space: pre; }
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address { font-weight: normal; }
+td      { border: 1px solid #808080; vertical-align: top; }
+th      { border: 1px solid #808080; vertical-align: top; font-weight: bold; }
+table   { border: 1px solid #808080; border-collapse: collapse; }
+</style>
+</head>
+<body>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE Import<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Utilities.Import"></a><a href="Modelica_LinearSystems2_Utilities.html#Modelica_LinearSystems2.Utilities"
+>Modelica_LinearSystems2.Utilities</a>.Import</h2>
+<p>
+<b>Package of functions to import data in a Modelica environment</b><br>
+</p>
+<h3>Information</h3>
+
+<p>
+This package provides functions to import external data in a Modelica environment.
+</p>
+
+<p>Extends from Modelica.Icons.Package (Icon for standard packages).</p>
+<h3>Package Content</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Package Content">
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.U266793f020045b32mplesS.png" alt="Modelica_LinearSystems2.Utilities.Import.Examples" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Import_Examples.html#Modelica_LinearSystems2.Utilities.Import.Examples"
+>Examples</a>
+</td>
+<td>Package of examples to demonstrate the usage of import functions</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Uc41cd020dd947e8aarizeS.png" alt="Modelica_LinearSystems2.Utilities.Import.linearize" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Import.html#Modelica_LinearSystems2.Utilities.Import.linearize"
+>linearize</a>
+</td>
+<td>Linearize a model after simulation up to a given time</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Uc41cd020dd947e8aarizeS.png" alt="Modelica_LinearSystems2.Utilities.Import.linearize2" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Import.html#Modelica_LinearSystems2.Utilities.Import.linearize2"
+>linearize2</a>
+</td>
+<td>Linearize a model at the start time, or optionally after simulation up to a given time instant, and return it as StateSpace object</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Uc41cd020dd947e8aarizeS.png" alt="Modelica_LinearSystems2.Utilities.Import.rootLocusOfModel" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Import.html#Modelica_LinearSystems2.Utilities.Import.rootLocusOfModel"
+>rootLocusOfModel</a>
+</td>
+<td>Return the root locus of one parameter (= eigen values of the model that is linearized for every parameter value)</td>
+</tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE linearize<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Utilities.Import.linearize"></a><a href="Modelica_LinearSystems2_Utilities_Import.html#Modelica_LinearSystems2.Utilities.Import"
+>Modelica_LinearSystems2.Utilities.Import</a>.linearize</h2>
+<p>
+<b>Linearize a model after simulation up to a given time</b>
+</p>
+<h3>Information</h3>
+
+<p>This function initializes a Modelica model and then simulates the model with its default experiment options until time instant "t_linearize". If t_linearize=0, no simulation takes place (only initialization). At the simulation stop time, the model is linearized in such a form that </p>
+<p><ul>
+<li>all top-level signals with prefix "input" are treated as inputs <b>u</b>(t) of the model ,</li>
+<li>all top-level signals with prefix "output" are treated as outputs <b>y</b>(t) of the model,</li>
+<li>all variables that appear differentiated and that are selected as states at this time instant are treated as states <b>x</b> of the model.</li>
+</ul></p>
+<p>Formally, the non-linear hybrid differential-algebraic equation system is therefore treated as the following ordinary equation system at time instant t_linearize: </p>
+<pre>    der(<b>x</b>) = <b>f</b>(<b>x</b>,<b>u</b>)</pre>
+<pre>         <b>y</b> = <b>g</b>(<b>x</b>,<b>u</b>) </pre>
+<p>Taylor series expansion (linearization) of this model around the simulation stop time t_linearize: </p>
+<pre>   <b>u</b>0 = <b>u</b>(t_linearize)</pre>
+<pre>   <b>y</b>0 = <b>y</b>(t_linearize)</pre>
+<pre>   <b>x</b>0 = <b>x</b>(t_linearize) </pre>
+<p>and neglecting higher order terms results in the following system: </p>
+<pre>   der(<b>x</b>0+d<b>x</b>) = <b>f</b>(<b>x</b>0,<b>u</b>0) + der(<b>f</b>,<b>x</b>)*d<b>x</b> + der(<b>f</b>,<b>u</b>)*d<b>u</b></pre>
+<pre>      <b>y</b>0 + d<b>y</b> = <b>g</b>(<b>x</b>0,<b>u</b>0) + der(<b>g</b>,<b>x</b>)*d<b>x</b> + der(<b>g</b>,<b>u</b>)*d<b>u</b></pre>
+<p>where der(<b>f</b>,<b>x</b>) is the partial derivative of <b>f</b> with respect to <b>x</b>, and the partial derivatives are computed at the linearization point t_linearize. Re-ordering of terms gives (note <b>der</b>(<b>x</b>0) = <b>0</b>): </p>
+<pre>   der(d<b>x</b>) = der(<b>f</b>,<b>x</b>)*d<b>x</b> + der(<b>f</b>,<b>u</b>)*d<b>u</b> + <b>f</b>(<b>x</b>0,<b>u</b>0)</pre>
+<pre>        d<b>y</b> = der(<b>g</b>,<b>x</b>)*d<b>x</b> + der(<b>g</b>,<b>u</b>)*d<b>u</b> + (<b>g</b>(<b>x</b>0,<b>u</b>0) - <b>y</b>0)</pre>
+<p>or </p>
+<pre>   der(d<b>x</b>) = <b>A</b>*d<b>x</b> + <b>B</b>*d<b>u</b> + <b>f</b>0</pre>
+<pre>        d<b>y</b> = <b>C</b>*d<b>x</b> + <b>D</b>*d<b>u</b></pre>
+<p>This function returns the matrices <b>A</b>, <b>B</b>, <b>C</b>, <b>D</b> and assumes that the linearization point is a steady-state point of the simulation (i.e., <b>f</b>(<b>x</b>0,<b>u</b>0) = 0). Additionally, the full Modelica names of all inputs, outputs and states shall be returned if possible (default is to return empty name strings).</p>
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>modelName</td><td>Name of the Modelica model</td></tr>
+<tr><td>t_linearize</td><td>Simulate until T_linearize and then linearize [s]</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>A[nx, nx]</td><td>A-matrix</td></tr>
+<tr><td>B[nx, nu]</td><td>B-matrix</td></tr>
+<tr><td>C[ny, nx]</td><td>C-matrix</td></tr>
+<tr><td>D[ny, nu]</td><td>D-matrix</td></tr>
+<tr><td>inputNames[nu]</td><td>Modelica names of inputs</td></tr>
+<tr><td>outputNames[ny]</td><td>Modelica names of outputs</td></tr>
+<tr><td>stateNames[nx]</td><td>Modelica names of states</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE linearize2<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Utilities.Import.linearize2"></a><a href="Modelica_LinearSystems2_Utilities_Import.html#Modelica_LinearSystems2.Utilities.Import"
+>Modelica_LinearSystems2.Utilities.Import</a>.linearize2</h2>
+<p>
+<b>Linearize a model at the start time, or optionally after simulation up to a given time instant, and return it as StateSpace object</b>
+</p>
+<h3>Information</h3>
+
+<p>
+This function initializes a Modelica model and then simulates the model
+until time instant "t_linearize".
+If t_linearize=0, no simulation takes place (only initialization).
+At the simulation stop time, the model is linearized in such a form that
+</p>
+<ul>
+<li>all top-level signals with prefix "input" are treated as inputs <b>u</b>(t) of the model ,</li>
+<li>all top-level signals with prefix "output" are treated as outputs <b>y</b>(t) of the model,</li>
+<li>all variables that appear differentiated and that are selected as states at this time instant are treated as states <b>x</b> of the model.</li>
+</ul>
+<p>
+Formally, the non-linear hybrid differential-algebraic equation system is
+therefore treated as the following ordinary equation system at time
+instant t_linearize:
+</p>
+<blockquote><pre>
+der(<b>x</b>) = <b>f</b>(<b>x</b>,<b>u</b>)
+    <b>y</b> = <b>g</b>(<b>x</b>,<b>u</b>)
+</pre></blockquote>
+<p>
+Taylor series expansion (linearization) of this model around the simulation stop time t_linearize:
+</p>
+<blockquote><pre>
+<b>u</b>0 = <b>u</b>(t_linearize)
+<b>y</b>0 = <b>y</b>(t_linearize)
+<b>x</b>0 = <b>x</b>(t_linearize)
+</pre></blockquote>
+<p>and neglecting higher order terms results in the following system: </p>
+<blockquote><pre>
+der(<b>x</b>0+d<b>x</b>) = <b>f</b>(<b>x</b>0,<b>u</b>0) + der(<b>f</b>,<b>x</b>)*d<b>x</b> + der(<b>f</b>,<b>u</b>)*d<b>u</b>
+    <b>y</b>0 + d<b>y</b> = <b>g</b>(<b>x</b>0,<b>u</b>0) + der(<b>g</b>,<b>x</b>)*d<b>x</b> + der(<b>g</b>,<b>u</b>)*d<b>u</b>
+</pre></blockquote>
+<p>where der(<b>f</b>,<b>x</b>) is the partial derivative of <b>f</b> with respect to <b>x</b>, and the partial derivatives are computed at the linearization point t_linearize. Re-ordering of terms gives (note <b>der</b>(<b>x</b>0) = <b>0</b>): </p>
+<blockquote><pre>
+der(d<b>x</b>) = der(<b>f</b>,<b>x</b>)*d<b>x</b> + der(<b>f</b>,<b>u</b>)*d<b>u</b> + <b>f</b>(<b>x</b>0,<b>u</b>0)
+    d<b>y</b> = der(<b>g</b>,<b>x</b>)*d<b>x</b> + der(<b>g</b>,<b>u</b>)*d<b>u</b> + (<b>g</b>(<b>x</b>0,<b>u</b>0) - <b>y</b>0)
+</pre></blockquote>
+<p>
+or
+</p>
+<blockquote><pre>
+der(d<b>x</b>) = <b>A</b>*d<b>x</b> + <b>B</b>*d<b>u</b> + <b>f</b>0
+    d<b>y</b> = <b>C</b>*d<b>x</b> + <b>D</b>*d<b>u</b>
+</pre></blockquote>
+<p>
+This function returns the matrices <b>A</b>, <b>B</b>, <b>C</b>, <b>D</b> and assumes that the linearization point is a steady-state point of the simulation (i.e., <b>f</b>(<b>x</b>0,<b>u</b>0) = 0). Additionally, the full Modelica names of all inputs, outputs and states shall be returned if possible (default is to return empty name strings).
+</p>
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>modelName</td><td>Name of the Modelica model</td></tr>
+<tr><td>modelParam[:]</td><td>Values of model parameters used for linearization</td></tr>
+<tr><td>simulationSetup</td><td>Simulation options</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ss</td><td>Linearized system as StateSpace object</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE rootLocusOfModel<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Utilities.Import.rootLocusOfModel"></a><a href="Modelica_LinearSystems2_Utilities_Import.html#Modelica_LinearSystems2.Utilities.Import"
+>Modelica_LinearSystems2.Utilities.Import</a>.rootLocusOfModel</h2>
+<p>
+<b>Return the root locus of one parameter (= eigen values of the model that is linearized for every parameter value)</b>
+</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>modelName</td><td>Name of the Modelica model</td></tr>
+<tr><td>modelParam[:]</td><td>Model parameter to be varied (exactly one) and values for other parameters</td></tr>
+<tr><td>simulationSetup</td><td>Simulation options</td></tr>
+<tr><td>reorder</td><td>True, if eigen values shall be reordered so that they are closest to the previous ones</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>Re[:, :]</td><td>Re[nx,np] Real values of eigenvalues Re[j,i], where i are the different parameter values and j the eigenvalue numbers</td></tr>
+<tr><td>Im[:, :]</td><td>Im[nx,np] Imaginary values of eigenvalues Im[j,i], where i are the different parameter values and j the eigenvalue numbers</td></tr>
+<tr><td>s[:]</td><td>s[np] The different parameter values s[i] associated with Re[i,j] and Im[i,j]</td></tr>
+<tr><td>paramName</td><td>Name of the parameter that was varied</td></tr>
+<tr><td>paramUnit</td><td>Unit of parameter paramName</td></tr>
+</table>
+<address>
+<a href="http://www.3ds.com/">Automatically generated</a> Fri Sep 12 12:44:59 2014.
+</address>
+</body>
+</html>

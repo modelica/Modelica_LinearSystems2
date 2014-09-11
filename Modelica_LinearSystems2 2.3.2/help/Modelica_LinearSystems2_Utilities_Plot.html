@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Modelica_LinearSystems2.Utilities.Plot</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="&quot;Package of functions for generation of 2D-plots&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial, sans-serif; }
+.modelica, .modelica * { font-size: 9pt; font-family: Courier, monospace; white-space: pre; }
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address { font-weight: normal; }
+td      { border: 1px solid #808080; vertical-align: top; }
+th      { border: 1px solid #808080; vertical-align: top; font-weight: bold; }
+table   { border: 1px solid #808080; border-collapse: collapse; }
+</style>
+</head>
+<body>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE Plot<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Utilities.Plot"></a><a href="Modelica_LinearSystems2_Utilities.html#Modelica_LinearSystems2.Utilities"
+>Modelica_LinearSystems2.Utilities</a>.Plot</h2>
+<p>
+<b>Package of functions for generation of 2D-plots</b><br>
+</p>
+<h3>Information</h3>
+
+<p>
+This package provides functions to plot curves in two dimensions. Here is a short overview:
+</p>
+
+<p>
+A figure consists of a <b>set of diagrams</b>. Different functions are provided
+to either plot one diagram (Plot.diagram) to plot several diagrams under each other
+(Plot.vectorDiagrams) or to plot several diagrams in matrix layout
+(Plot.matrixDiagrams).
+</p>
+
+<p>
+Every diagram can have a set of <b>curves</b>. Every diagram has the same
+width, defined by <b>diagramWidth</b>. The height of a diagram is defined
+by variable <b>heightRatio</b>
+(diagram height in row j = diagram[j].heightRatio*diagramWidth).
+Several curves can be displayed in one diagram.
+</p>
+
+<p>
+A typical example is shown in the next figure:
+</p>
+
+<p><img src="../Resources/Images/Utilities/showSinesInVectorDiagram.png"></p>
+
+<p>Extends from Modelica.Icons.Package (Icon for standard packages).</p>
+<h3>Package Content</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Package Content">
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.U9e3036bca1ef4a36mplesS.png" alt="Modelica_LinearSystems2.Utilities.Plot.Examples" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Plot_Examples.html#Modelica_LinearSystems2.Utilities.Plot.Examples"
+>Examples</a>
+</td>
+<td>Package of examples to demonstrate the usage of plot functions</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ufc3e7ea44f0a73b2agramS.png" alt="Modelica_LinearSystems2.Utilities.Plot.diagram" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot.diagram"
+>diagram</a>
+</td>
+<td>Plot one diagram</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ufc3e7ea44f0a73b2agramS.png" alt="Modelica_LinearSystems2.Utilities.Plot.diagramVector" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot.diagramVector"
+>diagramVector</a>
+</td>
+<td>Plot several diagrams in vector layout</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ufc3e7ea44f0a73b2agramS.png" alt="Modelica_LinearSystems2.Utilities.Plot.diagramMatrix" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot.diagramMatrix"
+>diagramMatrix</a>
+</td>
+<td>Plot several diagrams in matrix layout</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ufc3e7ea44f0a73b2agramS.png" alt="Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves"
+>parameterizedCurves</a>
+</td>
+<td>Plot parametrized curve with one or more branches</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ufc3e7ea44f0a73b2agramS.png" alt="Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel"
+>rootLocusOfModel</a>
+</td>
+<td>Compute and plot the root locus of one parameter of a model (= eigen values of the model that is linearized for every parameter value)</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.U56ea8a16dcdb86deTypesS.png" alt="Modelica_LinearSystems2.Utilities.Plot.Types" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Plot_Types.html#Modelica_LinearSystems2.Utilities.Plot.Types"
+>Types</a>
+</td>
+<td>Package of type definitions used for the plotting functions</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.U56ea8a16dcdb86deTypesS.png" alt="Modelica_LinearSystems2.Utilities.Plot.Records" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Plot_Records.html#Modelica_LinearSystems2.Utilities.Plot.Records"
+>Records</a>
+</td>
+<td>Package of library records</td>
+</tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE diagram<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Utilities.Plot.diagram"></a><a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</a>.diagram</h2>
+<p>
+<b>Plot one diagram</b>
+</p>
+<h3>Information</h3>
+
+<p>
+This function plots a set of 2-dimensional curves in a diagram.
+For an overview, see the documentation of package
+<a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</a>.
+</p>
+
+<p>
+<a href="Modelica_LinearSystems2_Utilities_Plot_Examples.html#Modelica_LinearSystems2.Utilities.Plot.Examples.plotTwoSineDifferentStyles"
+>Example</a>:
+</p>
+
+<blockquote>
+<img src="../Resources/Images/Utilities/plotTwoSineDifferentStyles.png">
+</blockquote>
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>diagram</td><td>Diagram to be shown</td></tr>
+<tr><td>device</td><td>Properties of device where figure is shown</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE diagramVector<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Utilities.Plot.diagramVector"></a><a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</a>.diagramVector</h2>
+<p>
+<b>Plot several diagrams in vector layout</b>
+</p>
+<h3>Information</h3>
+
+<p>
+This function plots a set of 2-dimensional curves in a set of diagrams
+using a vector layout. For an overview, see the documentation of package
+<a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</a>.
+</p>
+
+
+<p>
+<a href="Modelica_LinearSystems2_Utilities_Plot_Examples.html#Modelica_LinearSystems2.Utilities.Plot.Examples.showSinesInVectorDiagrams"
+>Example</a>:
+</p>
+
+<blockquote>
+<img src="../Resources/Images/Utilities/showSinesInVectorDiagram.png">
+</blockquote>
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>diagram[:]</td><td>Properties of a set of diagrams (vector layout)</td></tr>
+<tr><td>device</td><td>Properties of device where figure is shown</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE diagramMatrix<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Utilities.Plot.diagramMatrix"></a><a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</a>.diagramMatrix</h2>
+<p>
+<b>Plot several diagrams in matrix layout</b>
+</p>
+<h3>Information</h3>
+
+<p>
+This function plots a set of 2-dimensional curves in a set of diagrams
+using a matrix layout. For an overview, see the documentation of package
+<a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</a>.
+</p>
+
+
+<p>
+<a href="Modelica_LinearSystems2_Utilities_Plot_Examples.html#Modelica_LinearSystems2.Utilities.Plot.Examples.showMatrixDiagrams"
+>Example</a>:
+</p>
+
+<p><img src="../Resources/Images/Utilities/showMatrixDiagrams.png"></p>
+
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>diagram[:, :]</td><td>Properties of a set of diagrams (matrix layout)</td></tr>
+<tr><td>device</td><td>Properties of device where figure is shown</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE parameterizedCurves<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves"></a><a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</a>.parameterizedCurves</h2>
+<p>
+<b>Plot parametrized curve with one or more branches</b>
+</p>
+<h3>Information</h3>
+
+<h4>Syntax</h4>
+<blockquote><pre>
+Plot.<b>parameterizedCurves</b>(diagram, device)
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This function plots a set of parametrized curves that depend on the same path parameter s
+in one window. The set of parameterized curves is defined by:
+</p>
+<pre>
+   s = s[i]   // Vector of s-values
+   X = X[j,i] // X=X(s), where s[i] is the s-value and j is the s-branch of the x-value
+   Y = Y[j,i] // Y=Y(s), where s[i] is the s-value and j is the s-branch of the y-value
+</pre>
+
+<h4>Example</h4>
+<p>
+Execute function <a href="Modelica_LinearSystems2_Utilities_Plot_Examples.html#Modelica_LinearSystems2.Utilities.Plot.Examples.plotParameterizedCurve1"
+>Examples.plotParameterizedCurve1</a>
+that is defined as parameterized sine and cosine-functions:
+</p>
+<blockquote><pre>
+s = linspace(0, Modelica.SIunits.Conversions.from_deg(300), 100);
+<b>for</b> i <b>in</b> 1:nPoints <b>loop</b>
+  X[1, i] := cos(s[i]);
+  Y[1, i] := sin(s[i]);
+  X[2, i] := X[1, i] - 0.5;
+  Y[2, i] := Y[1, i];
+<b>end for</b>;
+Plot.parameterizedCurves(diagram=
+  Plot.Records.ParametrizedCurves(
+    X=X,
+    Y=Y,
+    s=s));
+</pre></blockquote>
+<p>
+This yields the following diagram (the menu on the right lower part is displayed when moving
+the cursor on one curve point; then all points belonging to the same path parameter value are
+marked with a red square):
+</p>
+<p><img src="../Resources/Images/Utilities/plotParameterizedCurve1.png"/></p>
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>diagram</td><td>Parametrized curve data points</td></tr>
+<tr><td>device</td><td>Properties of device where figure is shown</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE rootLocusOfModel<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel"></a><a href="Modelica_LinearSystems2_Utilities_Plot.html#Modelica_LinearSystems2.Utilities.Plot"
+>Modelica_LinearSystems2.Utilities.Plot</a>.rootLocusOfModel</h2>
+<p>
+<b>Compute and plot the root locus of one parameter of a model (= eigen values of the model that is linearized for every parameter value)</b>
+</p>
+<h3>Information</h3>
+
+<h4>Syntax</h4>
+<blockquote><pre>
+Plot.<b>rootLocusOfModel</b>(modelName, modelParam, simulationSetup, diagram, device)
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This function computes and plots a root locus of a selected Modelica model by
+varying one parameter and performing an eigen value analysis for every parameter value.
+Other parameters of the model can be set to a specific value. An equidistant or
+a logarithmic gridding of the parameter to be varied can be selected and then the gridding
+is performed between the given minimum and maximum value.
+</p>
+
+<h4>Example</h4>
+<p>
+Calling the function
+</p>
+<blockquote><pre>
+Utilities.Plot.<b>rootLocusOfModel</b>(
+  modelName = "Modelica.Mechanics.Rotational.Examples.First",
+  modelParam={
+    Modelica_LinearSystems2.Records.ParameterVariation(
+      Name="Jload",
+      grid=Modelica_LinearSystems2.Types.Grid.Logarithmic
+      Min=1,
+      Max=6,
+      nPoints=101)});
+</pre></blockquote>
+<p>
+yields the following diagram (the menu on the right lower part is displayed when moving
+the cursor on one curve point; then all points belonging to the same parameter value are
+marked with a red square):
+</p>
+<p><img src="../Resources/Images/Utilities/RootLocusOfModel.png"/></p>
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>modelName</td><td>Name of the Modelica model</td></tr>
+<tr><td>modelParam[:]</td><td>Model parameter to be varied (exactly one) and values for other parameters</td></tr>
+<tr><td>simulationSetup</td><td>Simulation options</td></tr>
+<tr><td>diagram</td><td>&nbsp;</td></tr>
+<tr><td>device</td><td>Properties of device where figure is shown</td></tr>
+</table>
+<address>
+<a href="http://www.3ds.com/">Automatically generated</a> Fri Sep 12 12:44:59 2014.
+</address>
+</body>
+</html>

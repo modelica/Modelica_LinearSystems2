@@ -24,22 +24,31 @@ It is planned to include this library in a future version of the Modelica Standa
 
 ## Current release
 
-Download [Modelica_LinearSystems2 v2.3.1 (2013-10-01)](../../archive/v2.3.1.zip)
+Download [Modelica_LinearSystems2 v2.3.2 (2014-09-11)](../../archive/v2.3.2.zip)
 
 #### Release notes
+*  [Version v2.3.2 (2014-09-11)](../../archive/v2.3.2.zip)
+    * This version requires the Modelica Standard Library 3.2.1
+    * Improvements performed in version:
+        * All Bode diagrams (in all representation forms) can be optionally plotted as magnitude in dB over angular frequency in rad/s, instead of the default to use magnitude over frequency in Hz.
+    * Bug fixes performed in version:
+        * When computing the gain of the ZerosAndPoles object, a better algorithm is used (the previous one could give bad results if there are large zeros or poles with positive Re-values).
+        * Enumeration1/Enumeration2 errors corrected (issued as warning due to stricter checking by Dymola 2015 FD01).
+        * Some Enumeration/Integer errors corrected (issued as warning due to stricter checking by Dymola 2015 FD01).
+        * Some Plot functions have been called without providing record input arguments. This has been fixed by providing a default record in the function definitions.
 *  [Version v2.3.1 (2013-10-01)](../../archive/v2.3.1.zip)
- * This version requires the Modelica Standard Library 3.2.1
- * Backward compatible release to the previous 2.x versions.
+    * This version requires the Modelica Standard Library 3.2.1
+        * Backward compatible release to the previous 2.x versions.
 *  [Version v2.3 (2012-08-30)](../../archive/v2.3.zip)
- * Backward compatible release to the previous 2.x versions. It contains the following main improvements:
-   * New package `Modelica_LinearSystems2.ModelAnalysis` that contains several functions to linearize a model and perform a selected linear analysis operation.
-   * New plot functions in package `Modelica_LinearSystems2.Utilities.Plot` to plot parameterized curvces, as well as to plot a root locus of a model, by linearizing a model for a set of selected parameter values.
-   * A new function `Modelica_LinearSystems2.Utilities.Import.linearize2` to (a) set parameters of a model, (b) linearize the model and (c) return a StateSpace object (the existing Import.linearize function does only allow to linearize around the default parameter settings and the function returns the A,B,C,D matrices and therefore it is not possible to utilize directly the many functions operating on StateSpace objects).
+    * Backward compatible release to the previous 2.x versions. It contains the following main improvements:
+       * New package `Modelica_LinearSystems2.ModelAnalysis` that contains several functions to linearize a model and perform a selected linear analysis operation.
+       * New plot functions in package `Modelica_LinearSystems2.Utilities.Plot` to plot parameterized curvces, as well as to plot a root locus of a model, by linearizing a model for a set of selected parameter values.
+       * A new function `Modelica_LinearSystems2.Utilities.Import.linearize2` to (a) set parameters of a model, (b) linearize the model and (c) return a StateSpace object (the existing Import.linearize function does only allow to linearize around the default parameter settings and the function returns the A,B,C,D matrices and therefore it is not possible to utilize directly the many functions operating on StateSpace objects).
 
 *  [Version v2.0 (2009-09-02)](../../archive/v2.0.zip)
- * New library based on library Modelica_LinearSystems2 (version 0.95) but is not backwards compatible to this library due to many changes.
- * `Modelica_LinearSystems2` is in principal based on standard Modelica 3.1. However:
-   * The plotting functions and the linearization use the Dymola API. This is separated out in package `Modelica_LinearSystems2.Utilities`. The plan is to move this (always tool-dependent package) in to the ModelicaServices package. This is documented under: `Modelica_LinearSystems2.UsersGuide.Requirements`.
+     * New library based on library Modelica_LinearSystems2 (version 0.95) but is not backwards compatible to this library due to many changes.
+     * `Modelica_LinearSystems2` is in principal based on standard Modelica 3.1. However:
+       * The plotting functions and the linearization use the Dymola API. This is separated out in package `Modelica_LinearSystems2.Utilities`. The plan is to move this (always tool-dependent package) in to the ModelicaServices package. This is documented under: `Modelica_LinearSystems2.UsersGuide.Requirements`.
 
 ## License
 

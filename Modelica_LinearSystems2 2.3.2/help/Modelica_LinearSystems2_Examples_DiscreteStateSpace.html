@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Modelica_LinearSystems2.Examples.DiscreteStateSpace</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="&quot;Package of examples to demonstrate the usage of the DiscreteStateSpace record&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial, sans-serif; }
+.modelica, .modelica * { font-size: 9pt; font-family: Courier, monospace; white-space: pre; }
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address { font-weight: normal; }
+td      { border: 1px solid #808080; vertical-align: top; }
+th      { border: 1px solid #808080; vertical-align: top; font-weight: bold; }
+table   { border: 1px solid #808080; border-collapse: collapse; }
+</style>
+</head>
+<body>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE DiscreteStateSpace<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.DiscreteStateSpace"></a><a href="Modelica_LinearSystems2_Examples.html#Modelica_LinearSystems2.Examples"
+>Modelica_LinearSystems2.Examples</a>.DiscreteStateSpace</h2>
+<p>
+<b>Package of examples to demonstrate the usage of the DiscreteStateSpace record</b><br>
+</p>
+<h3>Information</h3>
+
+<p>
+This package contains example function calls to demonstrate the
+usage of the functions operating with the DiscreteStateSpace record.
+</p>
+
+<p>Extends from Modelica.Icons.ExamplesPackage (Icon for packages containing runnable examples).</p>
+<h3>Package Content</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Package Content">
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.DiscreteStateSpace.analysisEigenvalues" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_DiscreteStateSpace.html#Modelica_LinearSystems2.Examples.DiscreteStateSpace.analysisEigenvalues"
+>analysisEigenvalues</a>
+</td>
+<td>Example to compute the eigenvalues of a discrete state space system</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.DiscreteStateSpace.analysisTimeResponse" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_DiscreteStateSpace.html#Modelica_LinearSystems2.Examples.DiscreteStateSpace.analysisTimeResponse"
+>analysisTimeResponse</a>
+</td>
+<td>Compute time response of a discrete state space system</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E6906e6296c6b4b0cModelS.png" alt="Modelica_LinearSystems2.Examples.DiscreteStateSpace.importFromModel" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_DiscreteStateSpace.html#Modelica_LinearSystems2.Examples.DiscreteStateSpace.importFromModel"
+>importFromModel</a>
+</td>
+<td>This example demonstrates how to generate a linear discrete state space system from a (nonlinear) Modelica moodel</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E15daf17e2669b1b0eSISOS.png" alt="Modelica_LinearSystems2.Examples.DiscreteStateSpace.plotBodeSISO" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_DiscreteStateSpace.html#Modelica_LinearSystems2.Examples.DiscreteStateSpace.plotBodeSISO"
+>plotBodeSISO</a>
+</td>
+<td>Bode plot of a discrete state space system</td>
+</tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisEigenvalues<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.DiscreteStateSpace.analysisEigenvalues"></a><a href="Modelica_LinearSystems2_Examples_DiscreteStateSpace.html#Modelica_LinearSystems2.Examples.DiscreteStateSpace"
+>Modelica_LinearSystems2.Examples.DiscreteStateSpace</a>.analysisEigenvalues</h2>
+<p>
+<b>Example to compute the eigenvalues of a discrete state space system</b>
+</p>
+<h3>Information</h3>
+
+<p>
+This example shows the computation of the poles and zeros of state space system.
+</p>
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ss</td><td>&nbsp;</td></tr>
+<tr><td>Ts</td><td>Sample time [s]</td></tr>
+<tr><td>method</td><td>Discretization method</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisTimeResponse<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.DiscreteStateSpace.analysisTimeResponse"></a><a href="Modelica_LinearSystems2_Examples_DiscreteStateSpace.html#Modelica_LinearSystems2.Examples.DiscreteStateSpace"
+>Modelica_LinearSystems2.Examples.DiscreteStateSpace</a>.analysisTimeResponse</h2>
+<p>
+<b>Compute time response of a discrete state space system</b>
+</p>
+<h3>Information</h3>
+
+<p>
+Computes the time response of the system
+<blockquote><pre>
+     dss = DiscreteStateSpace( A=[0.99005, 0.00985;
+                                  0,       0.9802],
+      B=[0.01,0;
+         0,0.01],
+      C=[1,0; 0,1],
+      D=[0,0; 0,0],
+      Ts=0.01,
+      B2=[0,0; 0,0],
+      method=Modelica_LinearSystems2.Types.Method.StepExact),
+</pre></blockquote>
+
+sampled at <i>Ts=0.01</i> with inititial state <i>x0=[0;0]</i>
+subject to the system input <i>u = ones(300,2)</i> (which results with Ts=0.01 in 3 sec).
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>u[:, 2]</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>y[samples, 2]</td><td>System response (dimension: (input samples) x (number of outputs))</td></tr>
+<tr><td>t[samples]</td><td>Time vector used for simulation</td></tr>
+<tr><td>x[samples, 2]</td><td>State trajectories (dimension: (input samples) x (number of states)</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE importFromModel<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.E6906e6296c6b4b0cModelI.png" alt="Modelica_LinearSystems2.Examples.DiscreteStateSpace.importFromModel" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Examples.DiscreteStateSpace.importFromModel"></a><a href="Modelica_LinearSystems2_Examples_DiscreteStateSpace.html#Modelica_LinearSystems2.Examples.DiscreteStateSpace"
+>Modelica_LinearSystems2.Examples.DiscreteStateSpace</a>.importFromModel</h2>
+<p>
+<b>This example demonstrates how to generate a linear discrete state space system from a (nonlinear) Modelica moodel</b>
+</p>
+<h3>Information</h3>
+<p>Extends from Modelica.Icons.Function (Icon for functions).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>modelName</td><td>&nbsp;</td></tr>
+<tr><td>Ts</td><td>[s]</td></tr>
+<tr><td>T_linearize</td><td>point in time of simulation to linearize the model [s]</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>dss</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE plotBodeSISO<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.DiscreteStateSpace.plotBodeSISO"></a><a href="Modelica_LinearSystems2_Examples_DiscreteStateSpace.html#Modelica_LinearSystems2.Examples.DiscreteStateSpace"
+>Modelica_LinearSystems2.Examples.DiscreteStateSpace</a>.plotBodeSISO</h2>
+<p>
+<b>Bode plot of a discrete state space system</b>
+</p>
+<h3>Information</h3>
+
+This example demonstrates the construnction of a zeros-and-poles-transfer-function from a SISO state space representation and plots the Bode diagrams with automatic determination of the frequency range to plot
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>dss</td><td>&nbsp;</td></tr>
+<tr><td>iu</td><td>index of inout</td></tr>
+<tr><td>iy</td><td>index of output</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<address>
+<a href="http://www.3ds.com/">Automatically generated</a> Fri Sep 12 12:44:58 2014.
+</address>
+</body>
+</html>

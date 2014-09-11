@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Modelica_LinearSystems2.Math</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="&quot;Package of additional functions for Modelica.Math&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial, sans-serif; }
+.modelica, .modelica * { font-size: 9pt; font-family: Courier, monospace; white-space: pre; }
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address { font-weight: normal; }
+td      { border: 1px solid #808080; vertical-align: top; }
+th      { border: 1px solid #808080; vertical-align: top; font-weight: bold; }
+table   { border: 1px solid #808080; border-collapse: collapse; }
+</style>
+</head>
+<body>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE Math<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Math"></a><a href="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</a>.Math</h2>
+<p>
+<b>Package of additional functions for Modelica.Math</b><br>
+</p>
+<h3>Information</h3>
+
+<p>
+This package contains functions operating on
+<a href="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>vectors</a>,
+<a href="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>matrices</a>,
+<a href="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>complex</a>, and
+<a href="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>polynomial</a>.
+</p>
+
+<p>Extends from Modelica.Icons.Package (Icon for standard packages).</p>
+<h3>Package Content</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Package Content">
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Math.ComplexS.png" alt="Modelica_LinearSystems2.Math.Complex" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Complex"
+>Complex</a>
+</td>
+<td>Record defining a Complex number</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Math.ComplexS.png" alt="Modelica_LinearSystems2.Math.Polynomial" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.Polynomial"
+>Polynomial</a>
+</td>
+<td>Record defining the data for a polynomial</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Math.isEqualS.png" alt="Modelica_LinearSystems2.Math.isEqual" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math.isEqual"
+>isEqual</a>
+</td>
+<td>Determine whether two Real numbers are numerically identical (up to machine precision)</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Math.MatricesS.png" alt="Modelica_LinearSystems2.Math.Matrices" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Math_Matrices.html#Modelica_LinearSystems2.Math.Matrices"
+>Matrices</a>
+</td>
+<td>Package of functions operating on matrices</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Math.MatricesS.png" alt="Modelica_LinearSystems2.Math.Vectors" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Math_Vectors.html#Modelica_LinearSystems2.Math.Vectors"
+>Vectors</a>
+</td>
+<td>Package of functions operating on vectors</td>
+</tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE Complex<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.Math.ComplexI.png" alt="Modelica_LinearSystems2.Math.Complex" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Math.Complex"></a><a href="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math"
+>Modelica_LinearSystems2.Math</a>.Complex</h2>
+<p>
+<b>Record defining a Complex number</b>
+</p>
+<h3>Information</h3>
+
+<p>
+This record defines a complex number consisting of a real
+and an imaginary part. Additionally, various utility functions
+are provided in the record to operate on instances of this record.
+Example (note: "j" in the comments is defined as j=sqrt(-1)):
+</p>
+<pre>
+   <b>import</b> Modelica.Utilities.Streams;
+   <b>import</b> Modelica_LinearSystems2.Math.Complex;
+   Complex c1=Complex(re=2, im=3) "= 2 + 3j";
+   Complex c2=Complex(3,4) "= 3 + 4j";
+ <b>algorithm</b>
+   c3 := Complex.'+'(c1, c2) "= c1 + c2";
+   Streams.print("c3 = " + Complex.'String'(c3));
+   Streams.print("c3 = " + Complex.'String'(c3,"i"));
+   // This gives the following print-out:
+   c3 = 5 + 7j
+   c3 = 5 + 7i
+</pre>
+<p>
+The utility functions are written in such a way that it
+is convenient to work with them, once operator overloading
+is provided in Modelica and Modelica tools. Example:
+</p>
+<pre>
+   // Assume operator overloading is available (this is not yet the case):
+   Complex j  = Complex.j();
+   Complex c4 = -2 + 5*j;
+   // A Modelica tool will transform the statement of c4 into
+   Complex c4 = Complex.'+'( Complex.(-2,0), Complex.'*'(Complex(5,0),j)));
+</pre>
+<p>
+The utility functions are implemented so that they can be easily
+inlined by a tool. In such a case, the above statement will
+not lead to any overhead.
+</p>
+
+<p>Extends from Modelica.Icons.Record (Icon for records).</p>
+<h3>Parameters</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Parameters">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>re</td><td>Real part of complex number</td></tr>
+<tr><td>im</td><td>Imaginary part of complex number</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE Polynomial<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.Math.ComplexI.png" alt="Modelica_LinearSystems2.Math.Polynomial" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Math.Polynomial"></a><a href="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math"
+>Modelica_LinearSystems2.Math</a>.Polynomial</h2>
+<p>
+<b>Record defining the data for a polynomial</b>
+</p>
+<h3>Information</h3>
+
+<p>
+This record defines a polynomial, e.g., y = 2*x^2 + 3*x + 1. The general form is:
+</p>
+<pre>
+   y = c[1]*x^n + c[2]*x^(n-1) + ... + c[n]*x + c[n+1];
+</pre>
+<p>
+In the record, the coefficients c[i] are stored. Usually, the record is not directly accessed. Instead, a polynomial is generated with the functions provided in the record such as Polynomial.base(..),
+Polynomial.fitting(..).
+Several functions are provided that operate on polynomials.
+</p>
+
+<p>Extends from Modelica.Icons.Record (Icon for records).</p>
+<h3>Parameters</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Parameters">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>c[:]</td><td>Polynomial coefficients (c[1]*x^n + ... c[n]*x + c[n+1])</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE isEqual<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.Math.isEqualI.png" alt="Modelica_LinearSystems2.Math.isEqual" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Math.isEqual"></a><a href="Modelica_LinearSystems2_Math.html#Modelica_LinearSystems2.Math"
+>Modelica_LinearSystems2.Math</a>.isEqual</h2>
+<p>
+<b>Determine whether two Real numbers are numerically identical (up to machine precision)</b>
+</p>
+<h3>Information</h3>
+
+<h4>Syntax</h4>
+<blockquote><pre>
+result = <b>isEqual</b>(r1, r2);
+result = <b>isEqual</b>(r1, r2, eps=0.0);
+</pre></blockquote>
+
+<h4>Description</h4>
+
+<p>
+The function call &quot;<code>isEqual(r1, r2)</code>&quot; returns <b>true</b>,
+if the two Real numbers r1 and r2 are the same up to a given precision eps.
+(result = abs(r1-r2) &le; eps). Otherwise the function
+returns <b>false</b>. With the optional third argument <b>eps</b>
+the range can be defined, in which two Real numbers are treated as identical.
+The default is &quot;eps = 0&quot;. Another useful value is, e.g.,
+&quot;eps = 10*Modelica.Constants.eps&quot;.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+  Real r1 = 3;
+  Real r2 = 3;
+  Real r3 = 3.0001;
+  Boolean result;
+<b>algorithm</b>
+  result := isEqual(r1,r2);          // = <b>true</b>
+  result := isEqual(r1,r3);          // = <b>false</b>
+  result := isEqual(r1,r3, eps=0.1); // = <b>true</b>
+</pre></blockquote>
+
+<h4>See also</h4>
+<p>
+Vectors.isEqual</a>,
+Matrices.isEqual</a>,
+Strings.isEqual</a>
+</p>
+
+<p>Extends from Modelica.Icons.Function (Icon for functions).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>u1</td><td>First scalar</td></tr>
+<tr><td>u2</td><td>Second scalar</td></tr>
+<tr><td>eps</td><td>The two scalars are identical if abs(u1-u2) &lt;= eps</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>result</td><td>True, if abs(u1-u2) &lt;= eps</td></tr>
+</table>
+<address>
+<a href="http://www.3ds.com/">Automatically generated</a> Fri Sep 12 12:44:58 2014.
+</address>
+</body>
+</html>

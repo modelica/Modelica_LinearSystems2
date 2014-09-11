@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Modelica_LinearSystems2.ModelAnalysis</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="&quot;Package of functions to perform analysis on Modelica models (nonlinear models are linearized)&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial, sans-serif; }
+.modelica, .modelica * { font-size: 9pt; font-family: Courier, monospace; white-space: pre; }
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address { font-weight: normal; }
+td      { border: 1px solid #808080; vertical-align: top; }
+th      { border: 1px solid #808080; vertical-align: top; font-weight: bold; }
+table   { border: 1px solid #808080; border-collapse: collapse; }
+</style>
+</head>
+<body>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE ModelAnalysis<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.ModelAnalysis"></a><a href="Modelica_LinearSystems2.html#Modelica_LinearSystems2"
+>Modelica_LinearSystems2</a>.ModelAnalysis</h2>
+<p>
+<b>Package of functions to perform analysis on Modelica models (nonlinear models are linearized)</b><br>
+</p>
+<h3>Information</h3>
+<p>Extends from Modelica.Icons.ExamplesPackage (Icon for packages containing runnable examples).</p>
+<h3>Package Content</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Package Content">
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Mbb0a9f9089746f1darizeS.png" alt="Modelica_LinearSystems2.ModelAnalysis.Linearize" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_ModelAnalysis.html#Modelica_LinearSystems2.ModelAnalysis.Linearize"
+>Linearize</a>
+</td>
+<td>Linearize a model and return the linearized model as StateSpace object</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.M5597780ccf808086PolesS.png" alt="Modelica_LinearSystems2.ModelAnalysis.Poles" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_ModelAnalysis.html#Modelica_LinearSystems2.ModelAnalysis.Poles"
+>Poles</a>
+</td>
+<td>Linearize a model and plot the poles of the linearized model</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.M3b24b864cd13c143ZerosS.png" alt="Modelica_LinearSystems2.ModelAnalysis.PolesAndZeros" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_ModelAnalysis.html#Modelica_LinearSystems2.ModelAnalysis.PolesAndZeros"
+>PolesAndZeros</a>
+</td>
+<td>Linearize a model and plot the poles and zeros of the linearized model</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.M3b24b864cd13c143ZerosS.png" alt="Modelica_LinearSystems2.ModelAnalysis.TransferFunctions" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_ModelAnalysis.html#Modelica_LinearSystems2.ModelAnalysis.TransferFunctions"
+>TransferFunctions</a>
+</td>
+<td>Linearize a model and plot the transfer functions from all inputs to all outputs of the linearized model</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.M3503b26657914deelysisS.png" alt="Modelica_LinearSystems2.ModelAnalysis.FullAnalysis" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_ModelAnalysis.html#Modelica_LinearSystems2.ModelAnalysis.FullAnalysis"
+>FullAnalysis</a>
+</td>
+<td>Linearize a model and perform all available linear analysis operations</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.M1e3f5701e9aad8dbLocusS.png" alt="Modelica_LinearSystems2.ModelAnalysis.RootLocus" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_ModelAnalysis.html#Modelica_LinearSystems2.ModelAnalysis.RootLocus"
+>RootLocus</a>
+</td>
+<td>Compute and plot the root locus of one parameter of a model (= eigen values of the model that is linearized for every parameter value)</td>
+</tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE Linearize<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.Mbb0a9f9089746f1darizeI.png" alt="Modelica_LinearSystems2.ModelAnalysis.Linearize" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.ModelAnalysis.Linearize"></a><a href="Modelica_LinearSystems2_ModelAnalysis.html#Modelica_LinearSystems2.ModelAnalysis"
+>Modelica_LinearSystems2.ModelAnalysis</a>.Linearize</h2>
+<p>
+<b>Linearize a model and return the linearized model as StateSpace object</b>
+</p>
+<h3>Information</h3>
+<p>Extends from <a href="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialAnalyzeFunction"
+>Modelica_LinearSystems2.Internal.PartialAnalyzeFunction</a> (Partial function to linearize a model and then perform operations on the linearized model).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>modelName</td><td>Name of the Modelica model</td></tr>
+<tr><td>modelParam[:]</td><td>Values of model parameters used for linearization</td></tr>
+<tr><td>simulationSetup</td><td>Simulation options</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ss</td><td>Linearized system as StateSpace object</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE Poles<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.M5597780ccf808086PolesI.png" alt="Modelica_LinearSystems2.ModelAnalysis.Poles" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.ModelAnalysis.Poles"></a><a href="Modelica_LinearSystems2_ModelAnalysis.html#Modelica_LinearSystems2.ModelAnalysis"
+>Modelica_LinearSystems2.ModelAnalysis</a>.Poles</h2>
+<p>
+<b>Linearize a model and plot the poles of the linearized model</b>
+</p>
+<h3>Information</h3>
+<p>Extends from <a href="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialAnalyzeFunction"
+>Modelica_LinearSystems2.Internal.PartialAnalyzeFunction</a> (Partial function to linearize a model and then perform operations on the linearized model).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>modelName</td><td>Name of the Modelica model</td></tr>
+<tr><td>modelParam[:]</td><td>Values of model parameters used for linearization</td></tr>
+<tr><td>simulationSetup</td><td>Simulation options</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE PolesAndZeros<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.M3b24b864cd13c143ZerosI.png" alt="Modelica_LinearSystems2.ModelAnalysis.PolesAndZeros" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.ModelAnalysis.PolesAndZeros"></a><a href="Modelica_LinearSystems2_ModelAnalysis.html#Modelica_LinearSystems2.ModelAnalysis"
+>Modelica_LinearSystems2.ModelAnalysis</a>.PolesAndZeros</h2>
+<p>
+<b>Linearize a model and plot the poles and zeros of the linearized model</b>
+</p>
+<h3>Information</h3>
+<p>Extends from <a href="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialAnalyzeFunction"
+>Modelica_LinearSystems2.Internal.PartialAnalyzeFunction</a> (Partial function to linearize a model and then perform operations on the linearized model).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>modelName</td><td>Name of the Modelica model</td></tr>
+<tr><td>modelParam[:]</td><td>Values of model parameters used for linearization</td></tr>
+<tr><td>simulationSetup</td><td>Simulation options</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE TransferFunctions<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.M3b24b864cd13c143ZerosI.png" alt="Modelica_LinearSystems2.ModelAnalysis.TransferFunctions" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.ModelAnalysis.TransferFunctions"></a><a href="Modelica_LinearSystems2_ModelAnalysis.html#Modelica_LinearSystems2.ModelAnalysis"
+>Modelica_LinearSystems2.ModelAnalysis</a>.TransferFunctions</h2>
+<p>
+<b>Linearize a model and plot the transfer functions from all inputs to all outputs of the linearized model</b>
+</p>
+<h3>Information</h3>
+<p>Extends from <a href="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialAnalyzeFunction"
+>Modelica_LinearSystems2.Internal.PartialAnalyzeFunction</a> (Partial function to linearize a model and then perform operations on the linearized model).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>modelName</td><td>Name of the Modelica model</td></tr>
+<tr><td>modelParam[:]</td><td>Values of model parameters used for linearization</td></tr>
+<tr><td>simulationSetup</td><td>Simulation options</td></tr>
+<tr><td>dB_w</td><td>= true, to plot dB over w [rad/s] otherwise magnitude over f [Hz]</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE FullAnalysis<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.M3503b26657914deelysisI.png" alt="Modelica_LinearSystems2.ModelAnalysis.FullAnalysis" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.ModelAnalysis.FullAnalysis"></a><a href="Modelica_LinearSystems2_ModelAnalysis.html#Modelica_LinearSystems2.ModelAnalysis"
+>Modelica_LinearSystems2.ModelAnalysis</a>.FullAnalysis</h2>
+<p>
+<b>Linearize a model and perform all available linear analysis operations</b>
+</p>
+<h3>Information</h3>
+<p>Extends from <a href="Modelica_LinearSystems2_Internal.html#Modelica_LinearSystems2.Internal.PartialAnalyzeFunction"
+>Modelica_LinearSystems2.Internal.PartialAnalyzeFunction</a> (Partial function to linearize a model and then perform operations on the linearized model).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>modelName</td><td>Name of the Modelica model</td></tr>
+<tr><td>modelParam[:]</td><td>Values of model parameters used for linearization</td></tr>
+<tr><td>simulationSetup</td><td>Simulation options</td></tr>
+<tr><td>dB_w</td><td>= true, to plot Bode as dB over w [rad/s] otherwise magnitude over f [Hz]</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE RootLocus<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.M1e3f5701e9aad8dbLocusI.png" alt="Modelica_LinearSystems2.ModelAnalysis.RootLocus" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.ModelAnalysis.RootLocus"></a><a href="Modelica_LinearSystems2_ModelAnalysis.html#Modelica_LinearSystems2.ModelAnalysis"
+>Modelica_LinearSystems2.ModelAnalysis</a>.RootLocus</h2>
+<p>
+<b>Compute and plot the root locus of one parameter of a model (= eigen values of the model that is linearized for every parameter value)</b>
+</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>modelName</td><td>Name of the Modelica model</td></tr>
+<tr><td>modelParam[:]</td><td>Model parameter to be varied (exactly one) and values for other parameters</td></tr>
+<tr><td>simulationSetup</td><td>Simulation options</td></tr>
+<tr><td>diagram</td><td>&nbsp;</td></tr>
+<tr><td>device</td><td>Properties of device where figure is shown</td></tr>
+</table>
+<address>
+<a href="http://www.3ds.com/">Automatically generated</a> Fri Sep 12 12:44:58 2014.
+</address>
+</body>
+</html>

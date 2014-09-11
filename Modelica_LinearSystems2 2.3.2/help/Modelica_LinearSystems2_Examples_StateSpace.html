@@ -1,0 +1,1243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Modelica_LinearSystems2.Examples.StateSpace</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="&quot;Package of examples to demonstrate the usage of the StateSpace record&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial, sans-serif; }
+.modelica, .modelica * { font-size: 9pt; font-family: Courier, monospace; white-space: pre; }
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address { font-weight: normal; }
+td      { border: 1px solid #808080; vertical-align: top; }
+th      { border: 1px solid #808080; vertical-align: top; font-weight: bold; }
+table   { border: 1px solid #808080; border-collapse: collapse; }
+</style>
+</head>
+<body>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE StateSpace<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace"></a><a href="Modelica_LinearSystems2_Examples.html#Modelica_LinearSystems2.Examples"
+>Modelica_LinearSystems2.Examples</a>.StateSpace</h2>
+<p>
+<b>Package of examples to demonstrate the usage of the StateSpace record</b><br>
+</p>
+<h3>Information</h3>
+
+<p>
+This package contains example function calls to demonstrate the
+usage of the functions operating with the StateSpace record.
+</p>
+
+<p>Extends from Modelica.Icons.ExamplesPackage (Icon for packages containing runnable examples).</p>
+<h3>Package Content</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Package Content">
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysis" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysis"
+>analysis</a>
+</td>
+<td>Example to check controllability of a state space system</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysisDcGain" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysisDcGain"
+>analysisDcGain</a>
+</td>
+<td>Example to compute dcGain of a state space system</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysisControllability" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysisControllability"
+>analysisControllability</a>
+</td>
+<td>Example to check controllability of a state space system</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysisObservability" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysisObservability"
+>analysisObservability</a>
+</td>
+<td>Example to check controllability of a state space system</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysisControllablePoles" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysisControllablePoles"
+>analysisControllablePoles</a>
+</td>
+<td>Example to check controllability of a state space system and print the controllable poles</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysisTimeResponse" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysisTimeResponse"
+>analysisTimeResponse</a>
+</td>
+<td>Compute time response of a state space system</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysisInitialResponse" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysisInitialResponse"
+>analysisInitialResponse</a>
+</td>
+<td>Initial response example</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysisImpulseResponse" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysisImpulseResponse"
+>analysisImpulseResponse</a>
+</td>
+<td>Impulse response example</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysisStepResponse" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysisStepResponse"
+>analysisStepResponse</a>
+</td>
+<td>Step response example</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysisPolesAndZerosSISO" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysisPolesAndZerosSISO"
+>analysisPolesAndZerosSISO</a>
+</td>
+<td>Compute poles and invariant zeros of a SISO state space system by transformation to a minmal system</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysisInvariantZeros" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysisInvariantZeros"
+>analysisInvariantZeros</a>
+</td>
+<td>Example to compute the invariant zeros of a state space system</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysisPolesAndZeros_SISO" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysisPolesAndZeros_SISO"
+>analysisPolesAndZeros_SISO</a>
+</td>
+<td>Compute poles and invariant zeros of a SISO state space system by transformation to a minmal system</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.analysisStairCase" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.analysisStairCase"
+>analysisStairCase</a>
+</td>
+<td>Example to check controllability of a state space system</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.conversionFromTransferFunction" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.conversionFromTransferFunction"
+>conversionFromTransferFunction</a>
+</td>
+<td>Transform a TransferFunction into a StateSpace description</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.conversionFromZerosAndPoles" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.conversionFromZerosAndPoles"
+>conversionFromZerosAndPoles</a>
+</td>
+<td>Transform a TransferFunction into a StateSpace description</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.conversionToTransferFunctionMIMO" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.conversionToTransferFunctionMIMO"
+>conversionToTransferFunctionMIMO</a>
+</td>
+<td>Compute a transfer function matrix of a MIMO system from state space representation</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.conversionToTransferFunctionSISO" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.conversionToTransferFunctionSISO"
+>conversionToTransferFunctionSISO</a>
+</td>
+<td>Example to compute a transfer function from SISO state space representation</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.conversionToZerosAndPolesMIMO" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.conversionToZerosAndPolesMIMO"
+>conversionToZerosAndPolesMIMO</a>
+</td>
+<td>Example to compute a zeros-and-poles representation of a MIMO system from state space representation</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ecb58421ea2740ddalysisS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.conversionToZerosAndPolesSISO" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.conversionToZerosAndPolesSISO"
+>conversionToZerosAndPolesSISO</a>
+</td>
+<td>Example to compute a zeros and poles representation from SISO state space representation</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Efb48a0be445fca0bsSISOS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.designAssignPolesSISO" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.designAssignPolesSISO"
+>designAssignPolesSISO</a>
+</td>
+<td>Example for pole placing using Ackermann&#39;s method</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Efb48a0be445fca0bsSISOS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.designAssignPolesMIMO" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.designAssignPolesMIMO"
+>designAssignPolesMIMO</a>
+</td>
+<td>Example for pole placing</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Efb48a0be445fca0bsSISOS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.designKalmanFilter" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.designKalmanFilter"
+>designKalmanFilter</a>
+</td>
+<td>Example for Kalman filter design</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Efb48a0be445fca0bsSISOS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.designLQG" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.designLQG"
+>designLQG</a>
+</td>
+<td>Example for LQG controller design</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Efb48a0be445fca0bsSISOS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.designLQR" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.designLQR"
+>designLQR</a>
+</td>
+<td>Example for LQR controller design</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Efb48a0be445fca0bsSISOS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.importFromModel" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.importFromModel"
+>importFromModel</a>
+</td>
+<td>Generate a linear state space system from a (nonlinear) Modelica model</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.plotPolesAndZeros" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.plotPolesAndZeros"
+>plotPolesAndZeros</a>
+</td>
+<td>Example for plotting eigenvalues and invariant zeros of a state space system</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.plotBodeMIMO" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.plotBodeMIMO"
+>plotBodeMIMO</a>
+</td>
+<td>Constructs zeros-and-poles-transfers from state space representation and plots the Bode diagrams with automatic determination of the frequency range to plot </td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.plotBodeSISO" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.plotBodeSISO"
+>plotBodeSISO</a>
+</td>
+<td>Constructs a zeros-and-poles transfer function from state space representation and plots the Bode diagram with automatic determination of the frequency range to plot </td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.plotImpulse" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.plotImpulse"
+>plotImpulse</a>
+</td>
+<td>Impulse plot example</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.plotInital" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.plotInital"
+>plotInital</a>
+</td>
+<td>Initial condition plot example</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.plotRamp" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.plotRamp"
+>plotRamp</a>
+</td>
+<td>Plot ramp response</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.plotStep" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.plotStep"
+>plotStep</a>
+</td>
+<td>Step plot example</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.plotTimeResponse" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.plotTimeResponse"
+>plotTimeResponse</a>
+</td>
+<td>Time response plot example</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.plotZeros" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.plotZeros"
+>plotZeros</a>
+</td>
+<td>Case studies of systems with zeros</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.transformation" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.transformation"
+>transformation</a>
+</td>
+<td>Example to demonstrate the transformation to Jordan- observabilitiy- and controllability canonical form</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.transformationExtract" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.transformationExtract"
+>transformationExtract</a>
+</td>
+<td>Example how to extract input/output related subsystems from state space system record</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.E98360200523db37cZerosS.png" alt="Modelica_LinearSystems2.Examples.StateSpace.transformationToIrreducibleForm" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace.transformationToIrreducibleForm"
+>transformationToIrreducibleForm</a>
+</td>
+<td>Example to compute the minimal state space realization of a given SISO state space realization</td>
+</tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysis<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysis"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysis</h2>
+<p>
+<b>Example to check controllability of a state space system</b>
+</p>
+<h3>Information</h3>
+
+This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</b> which is
+to check whether a system is controllable or not.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ssi</td><td>&nbsp;</td></tr>
+<tr><td>analyseOptions</td><td>&nbsp;</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisDcGain<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysisDcGain"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysisDcGain</h2>
+<p>
+<b>Example to compute dcGain of a state space system</b>
+</p>
+<h3>Information</h3>
+
+This example shows how to calculate the dc-gain of a state space system.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ssi</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisControllability<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysisControllability"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysisControllability</h2>
+<p>
+<b>Example to check controllability of a state space system</b>
+</p>
+<h3>Information</h3>
+
+This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</b> which is
+to check whether a system is controllable or not.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ssi</td><td>&nbsp;</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisObservability<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysisObservability"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysisObservability</h2>
+<p>
+<b>Example to check controllability of a state space system</b>
+</p>
+<h3>Information</h3>
+
+This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isObservable</b> which is
+to check whether a system is observable or not.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ssi</td><td>&nbsp;</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisControllablePoles<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysisControllablePoles"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysisControllablePoles</h2>
+<p>
+<b>Example to check controllability of a state space system and print the controllable poles</b>
+</p>
+<h3>Information</h3>
+
+This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</b> which is
+to check whether a system is controllable or not.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ssi</td><td>&nbsp;</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisTimeResponse<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysisTimeResponse"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysisTimeResponse</h2>
+<p>
+<b>Compute time response of a state space system</b>
+</p>
+<h3>Information</h3>
+
+<p>
+Computes the time response of the system
+StateSpace <i>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>,
+sampled at <i>Ts=0.01</i> with inititial state <i>x0=[0;0]</i>
+subject to the system input <i>u = ones(samples,2)</i>, (<i>samples</i> is set to 30).
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>sc</td><td>&nbsp;</td></tr>
+<tr><td>response</td><td>&nbsp;</td></tr>
+<tr><td>dt</td><td>&nbsp;</td></tr>
+<tr><td>span</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>y[samples, 2, 2]</td><td>System response (dimension: (input samples) x (number of outputs))</td></tr>
+<tr><td>t[samples]</td><td>Time vector used for simulation</td></tr>
+<tr><td>x[samples, 2, 2]</td><td>State trajectories (dimension: (input samples) x (number of states)</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisInitialResponse<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysisInitialResponse"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysisInitialResponse</h2>
+<p>
+<b>Initial response example</b>
+</p>
+<h3>Information</h3>
+
+Computes and plots the initial response of a state space system by given initial values.
+
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>y[:, size(sc.C, 1), 1]</td><td>Output response: (number of samples) x (number of outputs) x 1</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisImpulseResponse<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysisImpulseResponse"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysisImpulseResponse</h2>
+<p>
+<b>Impulse response example</b>
+</p>
+<h3>Information</h3>
+
+<p>
+Computes and plots the impulse response of a state space system.
+
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>y[:, size(sc.C, 1), size(sc.B, 2)]</td><td>Output response: (number of samples) x (number of outputs) x (number of inuputs)</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisStepResponse<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysisStepResponse"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysisStepResponse</h2>
+<p>
+<b>Step response example</b>
+</p>
+<h3>Information</h3>
+
+<p>
+Computes and plots the step response of a state space system.
+
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>y[:, size(sc.C, 1), size(sc.B, 2)]</td><td>Output response: (number of samples) x (number of outputs) x (number of inuputs)</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisPolesAndZerosSISO<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysisPolesAndZerosSISO"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysisPolesAndZerosSISO</h2>
+<p>
+<b>Compute poles and invariant zeros of a SISO state space system by transformation to a minmal system</b>
+</p>
+<h3>Information</h3>
+
+<p>
+This example shows the computation of the poles and zeros of a SISO system and of its irreducible representation.
+</p>
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system matrices</td></tr>
+<tr><td>A[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>B[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>C[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>D[:, :]</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisInvariantZeros<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysisInvariantZeros"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysisInvariantZeros</h2>
+<p>
+<b>Example to compute the invariant zeros of a state space system</b>
+</p>
+<h3>Information</h3>
+
+<p>
+This example shows the computation of the poles and zeros of state space system.
+</p>
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>z[:]</td><td>Zeros (Complex vector of numerator zeros)</td></tr>
+<tr><td>p[:]</td><td>Poles (Complex vector of denominator zeros)</td></tr>
+<tr><td>k</td><td>Constant multiplied with transfer function</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisPolesAndZeros_SISO<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysisPolesAndZeros_SISO"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysisPolesAndZeros_SISO</h2>
+<p>
+<b>Compute poles and invariant zeros of a SISO state space system by transformation to a minmal system</b>
+</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system matrices</td></tr>
+<tr><td>A[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>B[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>C[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>D[:, :]</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE analysisStairCase<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.analysisStairCase"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.analysisStairCase</h2>
+<p>
+<b>Example to check controllability of a state space system</b>
+</p>
+<h3>Information</h3>
+
+This example shows the usage of the staircase algorithm to transform a state space system in staircase form to analyze controllability.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ssi</td><td>&nbsp;</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE conversionFromTransferFunction<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.conversionFromTransferFunction"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.conversionFromTransferFunction</h2>
+<p>
+<b>Transform a TransferFunction into a StateSpace description</b>
+</p>
+<h3>Information</h3>
+
+<p>
+This example demonstrates the conversion of a transfer function into a state space system.
+Running this function the following output will be printed containing the input transfer 
+function&nbsp;<code>tf</code> and the resulting output state space description&nbsp;<code>ss</code>.
+</p>
+<pre>
+tf = (s + 1)/(s^3 + s^2 + s + 1)
+ss = 
+  ss.A = 
+             x1     x2     x3 
+       x1    0      1      0                      
+       x2    0      0      1                      
+       x3   -1     -1     -1                      
+   
+  ss.B = 
+             u1 
+       x1    0                      
+       x2    0                      
+       x3    1                      
+   
+  ss.C = 
+             x1     x2     x3 
+       y1    1      1      0                      
+   
+  ss.D = 
+             u1 
+       y1    0                      
+</pre>
+
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>Standard output</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE conversionFromZerosAndPoles<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.conversionFromZerosAndPoles"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.conversionFromZerosAndPoles</h2>
+<p>
+<b>Transform a TransferFunction into a StateSpace description</b>
+</p>
+<h3>Information</h3>
+
+<p>
+This example demonstrates the conversion of a zeros-and-poles system into a state space system.
+Running this function the following output will be printed containing the input zeroes and poles 
+description&nbsp;<code>zp</code> and the resulting output state space description&nbsp;<code>ss</code>.
+</p>
+<pre>
+zp = 4*(p - 2) /  ( (p - 1)*(p^2 - 4*p + 13) )
+ss = 
+  ss.A = 
+             x1     x2     x3 
+       x1    0      1      0                      
+       x2   -13     4      0                      
+       x3   -1      0.5    1                      
+   
+  ss.B = 
+             u1 
+       x1    0                      
+       x2    13                     
+       x3    0                      
+   
+  ss.C = 
+             x1     x2     x3 
+       y1    0      0      0.615384615385         
+   
+  ss.D = 
+             u1 
+       y1    0                      
+</pre>
+
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>Standard output</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE conversionToTransferFunctionMIMO<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.conversionToTransferFunctionMIMO"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.conversionToTransferFunctionMIMO</h2>
+<p>
+<b>Compute a transfer function matrix of a MIMO system from state space representation</b>
+</p>
+<h3>Information</h3>
+
+<p>This example demonstrates the conversion from a state space representation of a system into a MIMO transfer function. </p>
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>File where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system matrices</td></tr>
+<tr><td>A[:, size(A, 1)]</td><td>&nbsp;</td></tr>
+<tr><td>B[size(A, 2), :]</td><td>&nbsp;</td></tr>
+<tr><td>C[:, size(A, 1)]</td><td>&nbsp;</td></tr>
+<tr><td>D[size(C, 1), size(B, 2)]</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE conversionToTransferFunctionSISO<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.conversionToTransferFunctionSISO"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.conversionToTransferFunctionSISO</h2>
+<p>
+<b>Example to compute a transfer function from SISO state space representation</b>
+</p>
+<h3>Information</h3>
+
+This example demonstrates the conversion of a SISO transfer function  system into a state space system.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system matrices</td></tr>
+<tr><td>A[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>B[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>C[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>D[:, :]</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE conversionToZerosAndPolesMIMO<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.conversionToZerosAndPolesMIMO"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.conversionToZerosAndPolesMIMO</h2>
+<p>
+<b>Example to compute a zeros-and-poles representation of a MIMO system from state space representation</b>
+</p>
+<h3>Information</h3>
+
+This example demonstrates the conversion of a MIMO zeros-and-poles system into a state space system.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system matrices</td></tr>
+<tr><td>A[:, size(A, 1)]</td><td>&nbsp;</td></tr>
+<tr><td>B[size(A, 2), :]</td><td>&nbsp;</td></tr>
+<tr><td>C[:, size(A, 1)]</td><td>&nbsp;</td></tr>
+<tr><td>D[size(C, 1), size(B, 2)]</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE conversionToZerosAndPolesSISO<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.conversionToZerosAndPolesSISO"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.conversionToZerosAndPolesSISO</h2>
+<p>
+<b>Example to compute a zeros and poles representation from SISO state space representation</b>
+</p>
+<h3>Information</h3>
+
+This example demonstrates the conversion of a SISO zeros-and-poles system into a state space system.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system matrices</td></tr>
+<tr><td>A[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>B[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>C[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>D[:, :]</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE designAssignPolesSISO<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.Efb48a0be445fca0bsSISOI.png" alt="Modelica_LinearSystems2.Examples.StateSpace.designAssignPolesSISO" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Examples.StateSpace.designAssignPolesSISO"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.designAssignPolesSISO</h2>
+<p>
+<b>Example for pole placing using Ackermann&#39;s method</b>
+</p>
+<h3>Information</h3>
+
+<p>
+Computes the gain vector k for the state space system
+<pre>
+sc = StateSpace(A=[-1,1;0,-2],B=[0, 1],C=[1,0; 0, 1],D=[0; 0])
+</pre>
+such that for the state feedback
+<pre>u = -k*y = -k*x</pre> the closed-loop
+poles are placed at
+<pre>p = {-3,-4}.</pre>
+
+<p>Extends from Modelica.Icons.Function (Icon for functions).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>sc</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>k[2]</td><td>Gain vector</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE designAssignPolesMIMO<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.Efb48a0be445fca0bsSISOI.png" alt="Modelica_LinearSystems2.Examples.StateSpace.designAssignPolesMIMO" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Examples.StateSpace.designAssignPolesMIMO"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.designAssignPolesMIMO</h2>
+<p>
+<b>Example for pole placing</b>
+</p>
+<h3>Information</h3>
+
+<p>
+Computes the gain vector k for the state space system
+<pre>
+ss = StateSpace(A=[-1,1;0,-2],B=[0, 1],C=[1,0; 0, 1],D=[0; 0])
+</pre>
+such that for the state feedback
+<pre>u = -k*y = -k*x</pre> the closed-loop
+poles are placed at
+<pre>p = {-3,-4}.</pre>
+
+<p>Extends from Modelica.Icons.Function (Icon for functions).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ss</td><td>&nbsp;</td></tr>
+<tr><td>p[:]</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>K[:, :]</td><td>Gain vector</td></tr>
+<tr><td>S[:, :]</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE designKalmanFilter<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.Efb48a0be445fca0bsSISOI.png" alt="Modelica_LinearSystems2.Examples.StateSpace.designKalmanFilter" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Examples.StateSpace.designKalmanFilter"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.designKalmanFilter</h2>
+<p>
+<b>Example for Kalman filter design</b>
+</p>
+<h3>Information</h3>
+
+This example demonstrates the computatrion of a  Kalman filter by calling function <b>StateSpace.Design.kalmanFilter()</b>
+
+<p>Extends from Modelica.Icons.Function (Icon for functions).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ss</td><td>&nbsp;</td></tr>
+<tr><td>Q[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>R[:, :]</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>L[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>kss</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE designLQG<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.Efb48a0be445fca0bsSISOI.png" alt="Modelica_LinearSystems2.Examples.StateSpace.designLQG" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Examples.StateSpace.designLQG"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.designLQG</h2>
+<p>
+<b>Example for LQG controller design</b>
+</p>
+<h3>Information</h3>
+
+This example demonstrates the computatrion of a LQG controllerr by calling function <b>StateSpace.Design.lqg()</b>
+
+<p>Extends from Modelica.Icons.Function (Icon for functions).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ssi</td><td>&nbsp;</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE designLQR<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.Efb48a0be445fca0bsSISOI.png" alt="Modelica_LinearSystems2.Examples.StateSpace.designLQR" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Examples.StateSpace.designLQR"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.designLQR</h2>
+<p>
+<b>Example for LQR controller design</b>
+</p>
+<h3>Information</h3>
+
+This example demonstrates the computatrion of a LQR controller by calling function <b>StateSpace.Design.lqr()</b>
+
+<p>Extends from Modelica.Icons.Function (Icon for functions).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ssi</td><td>&nbsp;</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE importFromModel<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.Efb48a0be445fca0bsSISOI.png" alt="Modelica_LinearSystems2.Examples.StateSpace.importFromModel" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Examples.StateSpace.importFromModel"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.importFromModel</h2>
+<p>
+<b>Generate a linear state space system from a (nonlinear) Modelica model</b>
+</p>
+<h3>Information</h3>
+
+<p>This example demonstrates how to generate a linear state space system from a (nonlinear) Modelica model.</p>
+
+<p>Extends from Modelica.Icons.Function (Icon for functions).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>modelName</td><td>&nbsp;</td></tr>
+<tr><td>T_linearize</td><td>Simulate until T_linearize and then linearize the model</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ss</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE plotPolesAndZeros<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.plotPolesAndZeros"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.plotPolesAndZeros</h2>
+<p>
+<b>Example for plotting eigenvalues and invariant zeros of a state space system</b>
+</p>
+<h3>Information</h3>
+
+This example demonstrates the plotting of eigenvalues and invariant zeros of a state space system.
+
+<p>Extends from <a href="Modelica_LinearSystems2_Plot.html#Modelica_LinearSystems2.StateSpace.Plot.polesAndZeros"
+>Modelica_LinearSystems2.StateSpace.Plot.polesAndZeros</a> (Plot poles (i.e. eigenvalues) and/or invariant zeros of a state space system).</p>
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ss</td><td>Linear system in state space form</td></tr>
+<tr><td>poles</td><td>= true, to plot the poles (i.e. the eigenvalues) of ss</td></tr>
+<tr><td>zeros</td><td>= true, to plot the (invariant) zeros of ss </td></tr>
+<tr><td>defaultDiagram</td><td>Default diagram layout</td></tr>
+<tr><td>device</td><td>Properties of device where figure is shown</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE plotBodeMIMO<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.plotBodeMIMO"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.plotBodeMIMO</h2>
+<p>
+<b>Constructs zeros-and-poles-transfers from state space representation and plots the Bode diagrams with automatic determination of the frequency range to plot </b>
+</p>
+<h3>Information</h3>
+
+This example demonstrates the construnction of a zeros-and-poles-transfer-function-matrix from a MIMO state space representation and plots the Bode diagrams with automatic determination of the frequency range to plot
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system matrices</td></tr>
+<tr><td>A[:, size(A, 1)]</td><td>&nbsp;</td></tr>
+<tr><td>B[size(A, 2), :]</td><td>&nbsp;</td></tr>
+<tr><td>C[:, size(A, 1)]</td><td>&nbsp;</td></tr>
+<tr><td>D[size(C, 1), size(B, 2)]</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE plotBodeSISO<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.plotBodeSISO"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.plotBodeSISO</h2>
+<p>
+<b>Constructs a zeros-and-poles transfer function from state space representation and plots the Bode diagram with automatic determination of the frequency range to plot </b>
+</p>
+<h3>Information</h3>
+
+This example demonstrates the construnction of a zeros-and-poles-transfer-function from a SISO state space representation and plots the Bode diagrams with automatic determination of the frequency range to plot
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>systemOnFile</td><td>True, if state space system is defined on file</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>A[:, size(A, 1)]</td><td>&nbsp;</td></tr>
+<tr><td>B[size(A, 2), :]</td><td>&nbsp;</td></tr>
+<tr><td>C[:, size(A, 1)]</td><td>&nbsp;</td></tr>
+<tr><td>D[size(C, 1), size(B, 2)]</td><td>&nbsp;</td></tr>
+<tr><td>iu</td><td>Index of inout</td></tr>
+<tr><td>iy</td><td>Index of output</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE plotImpulse<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.plotImpulse"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.plotImpulse</h2>
+<p>
+<b>Impulse plot example</b>
+</p>
+<h3>Information</h3>
+
+<p>
+Computes the impulse response of the system
+StateSpace <i>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ss</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE plotInital<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.plotInital"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.plotInital</h2>
+<p>
+<b>Initial condition plot example</b>
+</p>
+<h3>Information</h3>
+
+<p>
+Computes the initial condition response of the system
+StateSpace <i>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i> to the initial condition <i>x0=[1;1]</i>.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ss</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE plotRamp<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.plotRamp"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.plotRamp</h2>
+<p>
+<b>Plot ramp response</b>
+</p>
+<h3>Information</h3>
+
+<p>
+Computes the ramp response of the system
+StateSpace <i>ss = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ss</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE plotStep<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.plotStep"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.plotStep</h2>
+<p>
+<b>Step plot example</b>
+</p>
+<h3>Information</h3>
+
+<p>
+Computes and plots the step response of the system
+StateSpace <i>ss = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ss</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE plotTimeResponse<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.plotTimeResponse"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.plotTimeResponse</h2>
+<p>
+<b>Time response plot example</b>
+</p>
+<h3>Information</h3>
+
+<p>
+Computes the impulse response of the system
+StateSpace <i>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>.
+</p>
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>response</td><td>Type of time response</td></tr>
+<tr><td>ss</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE plotZeros<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.plotZeros"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.plotZeros</h2>
+<p>
+<b>Case studies of systems with zeros</b>
+</p>
+<h3>Information</h3>
+
+<p>
+Computes the initial condition response of the system
+StateSpace <i>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i> to the initial condition <i>x0=[1;1]</i>.
+</p>
+
+<p>
+This example plots the output y and the states (x1, x2, x3) of a system with the input
+</p>
+<blockquote><pre>
+   u(t) = uk*exp(zk*t)
+</pre></blockquote>
+<p>
+where zk is an invariant zero of the system. Assuming appropriate initial conditions, the output of the system is forced to zero. It is demonstrated that the output can also be forced to zero by applying a transient unstable input. Although the output is zero, the states show transient and unstable behavior. In comparison, the outputs as an reaction of inputs with half or double frequency are not equal to zero.
+</p>
+
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE transformation<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.transformation"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.transformation</h2>
+<p>
+<b>Example to demonstrate the transformation to Jordan- observabilitiy- and controllability canonical form</b>
+</p>
+<h3>Information</h3>
+
+Example to demonstrate the transformation of a state space representation to Jordan- observabilitiy- and controllability canonical form
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system matrices</td></tr>
+<tr><td>A[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>B[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>C[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>D[:, :]</td><td>&nbsp;</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE transformationExtract<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.transformationExtract"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.transformationExtract</h2>
+<p>
+<b>Example how to extract input/output related subsystems from state space system record</b>
+</p>
+<h3>Information</h3>
+
+This example shows how to extract input/output related subsystems from state space system record.
+
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE transformationToIrreducibleForm<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Examples.StateSpace.transformationToIrreducibleForm"></a><a href="Modelica_LinearSystems2_Examples_StateSpace.html#Modelica_LinearSystems2.Examples.StateSpace"
+>Modelica_LinearSystems2.Examples.StateSpace</a>.transformationToIrreducibleForm</h2>
+<p>
+<b>Example to compute the minimal state space realization of a given SISO state space realization</b>
+</p>
+<h3>Information</h3>
+
+This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.reduceSystem</b> which compute
+a controllable and observable state space realization of a given state space realization.
+
+<h3>Inputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Inputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>A[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>B[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>C[:, :]</td><td>&nbsp;</td></tr>
+<tr><td>D[:, :]</td><td>&nbsp;</td></tr>
+<tr style="background-color: #e0e0e0"><td colspan="2">system data definition</td></tr>
+<tr><td>fileName</td><td>file where matrix [A, B; C, D] is stored</td></tr>
+<tr><td>matrixName</td><td>Name of the state space system matrix</td></tr>
+</table>
+<h3>Outputs</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Outputs">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>ok</td><td>&nbsp;</td></tr>
+</table>
+<address>
+<a href="http://www.3ds.com/">Automatically generated</a> Fri Sep 12 12:44:58 2014.
+</address>
+</body>
+</html>

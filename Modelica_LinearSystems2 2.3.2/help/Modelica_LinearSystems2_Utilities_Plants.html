@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Modelica_LinearSystems2.Utilities.Plants</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="&quot;Package of plant models&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial, sans-serif; }
+.modelica, .modelica * { font-size: 9pt; font-family: Courier, monospace; white-space: pre; }
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address { font-weight: normal; }
+td      { border: 1px solid #808080; vertical-align: top; }
+th      { border: 1px solid #808080; vertical-align: top; font-weight: bold; }
+table   { border: 1px solid #808080; border-collapse: collapse; }
+</style>
+</head>
+<body>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE Plants<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="Modelica_LinearSystems2.Utilities.Plants"></a><a href="Modelica_LinearSystems2_Utilities.html#Modelica_LinearSystems2.Utilities"
+>Modelica_LinearSystems2.Utilities</a>.Plants</h2>
+<p>
+<b>Package of plant models</b><br>
+</p>
+<h3>Information</h3>
+
+<p>
+This package provides models of devices to be used as system plants in a control design.
+</p>
+
+<p>Extends from Modelica.Icons.Package (Icon for standard packages).</p>
+<h3>Package Content</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Package Content">
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Uc15154eb6c53993fdulumS.png" alt="Modelica_LinearSystems2.Utilities.Plants.DoublePendulum" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Plants.html#Modelica_LinearSystems2.Utilities.Plants.DoublePendulum"
+>DoublePendulum</a>
+</td>
+<td>Multibody model of crane trolley</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.Ucaa57f21fb8f8fecverseS.png" alt="Modelica_LinearSystems2.Utilities.Plants.DoublePendulumInverse" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Plants.html#Modelica_LinearSystems2.Utilities.Plants.DoublePendulumInverse"
+>DoublePendulumInverse</a>
+</td>
+<td>Multibody model of inverse crane trolley</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.U151685f252585ad3ystemS.png" alt="Modelica_LinearSystems2.Utilities.Plants.SimpleLinearSystem" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Plants.html#Modelica_LinearSystems2.Utilities.Plants.SimpleLinearSystem"
+>SimpleLinearSystem</a>
+</td>
+<td>Simple linear test system with zeros and poles</td>
+</tr>
+<tr>
+<td><img src="Modelica_LinearSystems2.U151685f252585ad3ystemS.png" alt="Modelica_LinearSystems2.Utilities.Plants.SimpleMIMOSystem" width="20" height="20" align="top">&nbsp;<a href="Modelica_LinearSystems2_Utilities_Plants.html#Modelica_LinearSystems2.Utilities.Plants.SimpleMIMOSystem"
+>SimpleMIMOSystem</a>
+</td>
+<td>Simple MIMO test system with two inputs, two outputs, zeros and poles</td>
+</tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE DoublePendulum<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.Uc15154eb6c53993fdulumI.png" alt="Modelica_LinearSystems2.Utilities.Plants.DoublePendulum" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Utilities.Plants.DoublePendulum"></a><a href="Modelica_LinearSystems2_Utilities_Plants.html#Modelica_LinearSystems2.Utilities.Plants"
+>Modelica_LinearSystems2.Utilities.Plants</a>.DoublePendulum</h2>
+<p>
+<b>Multibody model of crane trolley</b>
+</p>
+<h3>Information</h3>
+
+<p>Multibody model of a simple double pendulum system. This physical model is used in various models and functions of the library e.g. for linearization or as a base for linear controller design. </p>
+
+<h3>Parameters</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Parameters">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>m_trolley</td><td>Mass of trolley [kg]</td></tr>
+<tr><td>m_load</td><td>Mass of load on 2nd arm [kg]</td></tr>
+<tr><td>length</td><td>Total length of double pendulum (i.e. length of each arm = length/2) [m]</td></tr>
+<tr><td>s_start</td><td>Initial position of trolley relative to world [m]</td></tr>
+<tr><td>v_start</td><td>Initial velocity of trolley relative to world [m/s]</td></tr>
+<tr><td>phi1_start</td><td>Initial rotation angle of 1st arm relative to trolley [rad]</td></tr>
+<tr><td>phi2_start</td><td>Initial rotation angle of 2nd arm relative to 1st arm [rad]</td></tr>
+<tr><td>w1_start</td><td>Initial angular velocity of 1st arm relative to trolley [rad/s]</td></tr>
+<tr><td>w2_start</td><td>Initial angular velocity of 2nd arm relative to 1st arm [rad/s]</td></tr>
+<tr><td>d</td><td>Damping constant for revolute joint of 1st arm  [N.m.s/rad]</td></tr>
+</table>
+<h3>Connectors</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Connectors">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>u</td><td>&nbsp;</td></tr>
+<tr><td>s</td><td>&nbsp;</td></tr>
+<tr><td>v</td><td>&nbsp;</td></tr>
+<tr><td>phi</td><td>&nbsp;</td></tr>
+<tr><td>w</td><td>&nbsp;</td></tr>
+<tr><td>phi1</td><td>&nbsp;</td></tr>
+<tr><td>w1</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE DoublePendulumInverse<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.Ucaa57f21fb8f8fecverseI.png" alt="Modelica_LinearSystems2.Utilities.Plants.DoublePendulumInverse" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Utilities.Plants.DoublePendulumInverse"></a><a href="Modelica_LinearSystems2_Utilities_Plants.html#Modelica_LinearSystems2.Utilities.Plants"
+>Modelica_LinearSystems2.Utilities.Plants</a>.DoublePendulumInverse</h2>
+<p>
+<b>Multibody model of inverse crane trolley</b>
+</p>
+<h3>Information</h3>
+
+<p>Multibody model of a simple inverted double pendulum system. This physical model is used in various models and functions of the library e.g. for linearization or as a base for linear controller design. The mdel is the same as in Modelica_Controller.Examples.Components.DoublePendulum but with different initial values because the initial values are used as a working point for linearization.</p>
+
+<p>Extends from <a href="Modelica_LinearSystems2_Utilities_Plants.html#Modelica_LinearSystems2.Utilities.Plants.DoublePendulum"
+>DoublePendulum</a> (Multibody model of crane trolley).</p>
+<h3>Parameters</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Parameters">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>m_trolley</td><td>Mass of trolley [kg]</td></tr>
+<tr><td>m_load</td><td>Mass of load on 2nd arm [kg]</td></tr>
+<tr><td>length</td><td>Total length of double pendulum (i.e. length of each arm = length/2) [m]</td></tr>
+<tr><td>s_start</td><td>Initial position of trolley relative to world [m]</td></tr>
+<tr><td>v_start</td><td>Initial velocity of trolley relative to world [m/s]</td></tr>
+<tr><td>phi1_start</td><td>Initial rotation angle of 1st arm relative to trolley [rad]</td></tr>
+<tr><td>phi2_start</td><td>Initial rotation angle of 2nd arm relative to 1st arm [rad]</td></tr>
+<tr><td>w1_start</td><td>Initial angular velocity of 1st arm relative to trolley [rad/s]</td></tr>
+<tr><td>w2_start</td><td>Initial angular velocity of 2nd arm relative to 1st arm [rad/s]</td></tr>
+<tr><td>d</td><td>Damping constant for revolute joint of 1st arm  [N.m.s/rad]</td></tr>
+<tr><td>cartDisturbance</td><td>True, if cart disturbance should be enabled</td></tr>
+<tr><td>bodyDisturbance</td><td>True, if body disturbance should be enabled</td></tr>
+</table>
+<h3>Connectors</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Connectors">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>u</td><td>&nbsp;</td></tr>
+<tr><td>s</td><td>&nbsp;</td></tr>
+<tr><td>v</td><td>&nbsp;</td></tr>
+<tr><td>phi</td><td>&nbsp;</td></tr>
+<tr><td>w</td><td>&nbsp;</td></tr>
+<tr><td>phi1</td><td>&nbsp;</td></tr>
+<tr><td>w1</td><td>&nbsp;</td></tr>
+<tr><td>dist</td><td>&nbsp;</td></tr>
+<tr><td>dist2</td><td>&nbsp;</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE SimpleLinearSystem<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.U151685f252585ad3ystemI.png" alt="Modelica_LinearSystems2.Utilities.Plants.SimpleLinearSystem" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Utilities.Plants.SimpleLinearSystem"></a><a href="Modelica_LinearSystems2_Utilities_Plants.html#Modelica_LinearSystems2.Utilities.Plants"
+>Modelica_LinearSystems2.Utilities.Plants</a>.SimpleLinearSystem</h2>
+<p>
+<b>Simple linear test system with zeros and poles</b>
+</p>
+<h3>Information</h3>
+<p>Extends from Modelica.Blocks.Interfaces.SISO (Single Input Single Output continuous control block).</p>
+<h3>Connectors</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Connectors">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>u</td><td>Connector of Real input signal</td></tr>
+<tr><td>y</td><td>Connector of Real output signal</td></tr>
+</table>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE SimpleMIMOSystem<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="Modelica_LinearSystems2.U151685f252585ad3ystemI.png" alt="Modelica_LinearSystems2.Utilities.Plants.SimpleMIMOSystem" align="right" style="border: 1px solid" width="80" height="80">
+<a name="Modelica_LinearSystems2.Utilities.Plants.SimpleMIMOSystem"></a><a href="Modelica_LinearSystems2_Utilities_Plants.html#Modelica_LinearSystems2.Utilities.Plants"
+>Modelica_LinearSystems2.Utilities.Plants</a>.SimpleMIMOSystem</h2>
+<p>
+<b>Simple MIMO test system with two inputs, two outputs, zeros and poles</b>
+</p>
+<h3>Information</h3>
+<p>Extends from Modelica.Blocks.Interfaces.MIMO (Multiple Input Multiple Output continuous control block).</p>
+<h3>Parameters</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Parameters">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>nin</td><td>Number of inputs</td></tr>
+<tr><td>nout</td><td>Number of outputs</td></tr>
+</table>
+<h3>Connectors</h3>
+<table border="1" cellspacing="0" cellpadding="2" summary="Connectors">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>u[nin]</td><td>Connector of Real input signals</td></tr>
+<tr><td>y[nout]</td><td>Connector of Real output signals</td></tr>
+</table>
+<address>
+<a href="http://www.3ds.com/">Automatically generated</a> Fri Sep 12 12:44:59 2014.
+</address>
+</body>
+</html>
