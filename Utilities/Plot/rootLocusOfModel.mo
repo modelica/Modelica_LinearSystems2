@@ -7,8 +7,10 @@ function rootLocusOfModel
   input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
       Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
     "Simulation options" annotation(Dialog(enable=not linearizeAtInitial));
-  input Modelica_LinearSystems2.Utilities.Plot.Records.RootLocusDiagram diagram annotation(Dialog);
-  input Modelica_LinearSystems2.Utilities.Plot.Records.Device device
+  input Modelica_LinearSystems2.Utilities.Plot.Records.RootLocusDiagram diagram=
+    Modelica_LinearSystems2.Utilities.Plot.Records.RootLocusDiagram() annotation(Dialog);
+  input Modelica_LinearSystems2.Utilities.Plot.Records.Device device=
+    Modelica_LinearSystems2.Utilities.Plot.Records.Device()
     "Properties of device where figure is shown" annotation(Dialog);
 
 protected

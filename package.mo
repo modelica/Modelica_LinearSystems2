@@ -9,9 +9,9 @@ annotation (
   preferredView="info",
   uses(Modelica(version="3.2.1")),
   version="2.3.1",
-  versionBuild=1,
+  versionBuild=2,
   versionDate="2013-10-01",
-  dateModified = "2013-10-01 15:20:01Z",
+  dateModified = "2014-09-11 15:20:01Z",
   revisionId="$Id::                                       $",
   conversion(
     noneFromVersion="2.0",

@@ -6,7 +6,8 @@ function parameterizedCurves
 
   input Modelica_LinearSystems2.Utilities.Plot.Records.ParametrizedCurves diagram
     "Parametrized curve data points" annotation(Dialog);
-  input Modelica_LinearSystems2.Utilities.Plot.Records.Device device
+  input Modelica_LinearSystems2.Utilities.Plot.Records.Device device=
+    Modelica_LinearSystems2.Utilities.Plot.Records.Device()
     "Properties of device where figure is shown" annotation(Dialog);
 
 protected

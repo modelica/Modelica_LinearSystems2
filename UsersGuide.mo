@@ -1097,7 +1097,24 @@ This library is based on the following references:
 It is is <b>backward compatible</b> to the previous version 2.3.</p>
 
 <h4>
-Improvements and bug fixes performed in this version:
+Bug fixes performed in version 2.3.1 Build 2 (Sept. 11, 2014):
+</h4>
+
+<ul>
+<li> Some Enumeration/Integer errors corrected (issued as warning
+     due to stricter checking by Dymola 2015 FD01).</li>
+<li> Some Plot functions have been called without providing record input arguments.
+     This has been fixed by providing a default record in the function definitions.</li>
+<li> Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles:<br>
+     When computing the gain of the ZerosAndPoles object, a better
+     algorithm is used (the previous one could give bad results if there
+     are large zeros or poles with positive Re-value.</li>
+</ul>
+
+
+
+<h4>
+Improvements and bug fixes performed in version 2.3.1 Build 1 (Oct. 1, 2013):
 </h4>
 
 <ul>
