@@ -4,9 +4,9 @@ record AnalyseOptions
   extends Modelica.Icons.Record;
   Boolean plotEigenValues=true "Plot eigenvalues"     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean plotInvariantZeros=true "Plot invariant zeros"    annotation(Dialog(group="Analyse options"),choices(checkBox=true));
-  Boolean plotStepResponse=true "Plot step respones: Only for SISO system"
+  Boolean plotStepResponse=true "Plot step respones"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
-  Boolean plotFrequencyResponse=true "Plot bode diagram: Only for SISO system"
+  Boolean plotFrequencyResponse=true "Plot bode diagram"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean printEigenValues=true "Write eigenvalues into the report"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
@@ -24,5 +24,8 @@ record AnalyseOptions
   String headingInvariantzeros="Invariant zeros";
   String headingStepResponse="Step response";
   String headingFrequencyResponse="Frequency response";
+  Boolean dB_w = false
+    "= true, to plot Bode with dB over w [rad/s] otherwise magnitude over f [Hz]"
+  annotation(Dialog(group="Analyse options"),choices(checkBox=true));
 
 end AnalyseOptions;

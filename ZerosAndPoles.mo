@@ -77,9 +77,9 @@ zp.d2 = fill(0,1,2);
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.Math.Complex;
 
-      input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0,0), 0)
         "Zeros (Complex vector of numerator zeros)";
-      input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0,0), 0)
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
       input String uName="" "input name";
@@ -712,7 +712,8 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
                headingEigenValues=analyseOptions2.headingEigenValues,
                headingInvariantzeros=analyseOptions2.headingInvariantzeros,
                headingStepResponse=analyseOptions2.headingStepResponse,
-               headingFrequencyResponse=analyseOptions2.headingFrequencyResponse);
+               headingFrequencyResponse=analyseOptions2.headingFrequencyResponse,
+               dB_w=analyseOptions2.dB_w);
 
     algorithm
       assert(ZerosAndPoles.Analysis.denominatorDegree(zp) >= ZerosAndPoles.Analysis.numeratorDegree(zp),
@@ -1183,48 +1184,48 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 </html>"));
     end denominatorDegree;
 
-encapsulated function evaluate
-  "Evaluate a ZerosAndPoles transfer function at a given value of p"
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.ZerosAndPoles.Internal;
-  import Modelica_LinearSystems2.Math.Complex;
+    encapsulated function evaluate
+      "Evaluate a ZerosAndPoles transfer function at a given value of p"
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+      import Modelica_LinearSystems2.Math.Complex;
 
-  input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
-  input Complex p=Complex(0) "Complex value p where zp is evaluated";
-  input Real den_min(min=0)=0 "|denominator(p)| is limited by den_min";
-  output Complex y "= zp(p)";
-protected
-  Complex j=Modelica_LinearSystems2.Math.Complex.j();
-  Complex num;
-  Complex den;
-  Real abs_den;
-algorithm
-  // Build numerator
-  num := zp.k + 0*j;
-  for i in 1:size(zp.n1, 1) loop
-    num := num*Internal.'p+a'(p, zp.n1[i]);
-  end for;
-  for i in 1:size(zp.n2, 1) loop
-    num := num*Internal.'p^2+k[1]*p+k[2]'(p, zp.n2[i, :]);
-  end for;
+      input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
+      input Complex p=Complex(0) "Complex value p where zp is evaluated";
+      input Real den_min(min=0)=0 "|denominator(p)| is limited by den_min";
+      output Complex y "= zp(p)";
+    protected
+      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex num;
+      Complex den;
+      Real abs_den;
+    algorithm
+      // Build numerator
+      num := zp.k + 0*j;
+      for i in 1:size(zp.n1, 1) loop
+        num := num*Internal.'p+a'(p, zp.n1[i]);
+      end for;
+      for i in 1:size(zp.n2, 1) loop
+        num := num*Internal.'p^2+k[1]*p+k[2]'(p, zp.n2[i, :]);
+      end for;
 
-  // Build denominator
-  den := 1 + 0*j;
-  for i in 1:size(zp.d1, 1) loop
-    den := den*Internal.'p+a'(p, zp.d1[i]);
-  end for;
-  for i in 1:size(zp.d2, 1) loop
-    den := den*Internal.'p^2+k[1]*p+k[2]'(p, zp.d2[i, :]);
-  end for;
+      // Build denominator
+      den := 1 + 0*j;
+      for i in 1:size(zp.d1, 1) loop
+        den := den*Internal.'p+a'(p, zp.d1[i]);
+      end for;
+      for i in 1:size(zp.d2, 1) loop
+        den := den*Internal.'p^2+k[1]*p+k[2]'(p, zp.d2[i, :]);
+      end for;
 
-  // Build value of transfer function
-  abs_den := Complex.'abs'(den);
-  den := if abs_den >= den_min then den else (if den.re >= 0 then den_min else -
-    den_min) + 0*j;
-  y := num/den;
-  annotation (Documentation(info="<html>
+      // Build value of transfer function
+      abs_den := Complex.'abs'(den);
+      den := if abs_den >= den_min then den else (if den.re >= 0 then den_min else -
+        den_min) + 0*j;
+      y := num/den;
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 result = ZerosAndPoles.Analysis.<b>evaluate</b>(zp, p, den_min=0)
@@ -1262,7 +1263,7 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
-</html>", revisions="<html>
+</html>",     revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
@@ -1276,7 +1277,7 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
   </tr>
 </table>
 </html>"));
-end evaluate;
+    end evaluate;
 
     encapsulated function zerosAndPoles
       "Calculate zeros and poles of a ZerosAndPoles transfer function"
@@ -2374,13 +2375,19 @@ and results in
         "Maximum frequency value, if autoRange = false"
                                                       annotation(Dialog(enable=not autoRange));
 
-    input Boolean magnitude=true "= true, to plot the magnitude of tf"
-                                                                      annotation(choices(checkBox=true));
-    input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
+    input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
+    input Boolean phase=true "= true, to plot phase" annotation(choices(checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-          Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot of  zp = "
+          Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot: "
            + String(zp)));
+
+    input Boolean Hz=true
+        "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)"
+                                                                           annotation(choices(checkBox=true));
+    input Boolean dB=false
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
+                                                                              annotation(choices(checkBox=true),Diagram(enable=magnitude));
 
     protected
     SI.AngularVelocity w[nPoints];
@@ -2397,7 +2404,7 @@ and results in
     Integer i;
     Plot.Records.Diagram diagram2[2];
   algorithm
-         // Determine frequency vector f
+    // Determine frequency vector f
     if autoRange then
       (numZeros,denZeros) := ZerosAndPoles.Analysis.zerosAndPoles(zp);
     else
@@ -2412,8 +2419,7 @@ and results in
       numZeros,
       denZeros);
 
-         // Compute magnitude/phase at the frequency points
-
+    // Compute magnitude/phase at the frequency points
     phi_old := 0.0;
     for i in 1:nPoints loop
       w[i] := SI.Conversions.from_Hz(f[i]);
@@ -2425,6 +2431,13 @@ and results in
       phi_old := Complex.arg(c, phi_old);
       phi[i] := SI.Conversions.to_deg(phi_old);
 
+      // Convert to other units, if required
+      if not Hz then
+         f[i] := w[i];
+      end if;
+      if dB then
+         A[i] := 20*log10(A[i]);
+      end if;
     end for;
 
     // Plot computed frequency response
@@ -2437,9 +2450,12 @@ and results in
         y=A,
         autoLine=true);
       diagram2[i].curve := {curves[i]};
-      diagram2[i].yLabel := "magnitude";
+      diagram2[i].yLabel := if dB then "magnitude [dB]" else "magnitude";
       if phase then
          diagram2[i].xLabel:="";
+      end if;
+      if dB then
+         diagram2[i].logY := false;
       end if;
     end if;
 
@@ -2454,7 +2470,11 @@ and results in
       diagram2[i].logY := false;
       if magnitude then
         diagram2[i].heading:="";
-     end if;
+      end if;
+    end if;
+
+    if not Hz then
+       diagram2[i].xLabel:="Angular frequency [rad/s]";
     end if;
 
     if magnitude and phase then

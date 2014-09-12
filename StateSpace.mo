@@ -637,7 +637,8 @@ This package contains operators for subtraction of state space records.
               headingEigenValues="Eigenvalues",
               headingInvariantzeros="Invariant zeros",
               headingStepResponse="Step response",
-              headingFrequencyResponse="Frequency response");
+              headingFrequencyResponse="Frequency response",
+              dB_w=  false);
       input String fileName="systemReport.html"
         "Name of html-file that contains eigenvalue table";
       input String systemName=""
@@ -839,7 +840,7 @@ This package contains operators for subtraction of state space records.
         print("<html>\n<body>\n<p>\n<b>Bode plots</b>\n</p>\n</body>\n</html>",
           dummyFileName);
         Modelica.Utilities.Streams.readFile(dummyFileName);
-        StateSpace.Plot.bodeMIMO(ss=ss);
+        StateSpace.Plot.bodeMIMO(ss=ss, Hz=not analyseOptions.dB_w, dB=analyseOptions.dB_w);
         //     fileNameImg2 := fileNameImg + "BodeMIMO1.png";
         //     ExportPlotAsImage(
         //       fileName=fileNameImg2,
@@ -5456,16 +5457,21 @@ and results in
       input Modelica.SIunits.Frequency f_max=10
         "Maximum frequency value, if autoRange = false";
 
-      input Boolean magnitude=true "True, if magnitude of tf should be plotted"
-        annotation (choices(checkBox=true));
-      input Boolean phase=true "True, if pase of tf should be plotted"
-        annotation (choices(checkBox=true));
+      input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
+      input Boolean phase=true "= true, to plot phase" annotation(choices(checkBox=true));
+
       input Real tol=1e-10
         "Tolerance of reduction procedure, default tol = 1e-10";
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
           defaultDiagram=
             Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
+
+      input Boolean Hz=true
+        "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
+      input Boolean dB=false
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
+                                                                                annotation(choices(checkBox=true),Diagram(enable=magnitude));
 
     protected
       ZerosAndPoles zp "ZP-Transfer functions to be plotted";
@@ -5506,8 +5512,10 @@ and results in
             autoRange,
             f_min,
             f_max,
-            magnitude,
-            phase,
+            Hz=Hz,
+            magnitude=magnitude,
+            dB=dB,
+            phase=phase,
             defaultDiagram=defaultDiagram,
             device=device);
 
@@ -5583,16 +5591,21 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
           10,
           size(ss.C, 1),
           size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
-      input Boolean magnitude=true "True, if magnitude of tf should be plotted"
-        annotation (choices(checkBox=true));
-      input Boolean phase=true "True, if pase of tf should be plotted"
-        annotation (choices(checkBox=true));
+
+      input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
+      input Boolean phase=true "= true, to plot phase" annotation(choices(checkBox=true));
+
       input Real tol=1e-10
         "Tolerance of reduction procedure, default tol = 1e-10";
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
             Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
 
+      input Boolean Hz=true
+        "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
+      input Boolean dB=false
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
+                                                                                annotation(choices(checkBox=true),Diagram(enable=magnitude));
     protected
       ZerosAndPoles zp[size(ss.C, 1), size(ss.B, 2)]
         "ZerosAndPoles object to be plotted";
@@ -5633,8 +5646,10 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
             autoRange[i1, i2],
             f_min[i1, i2],
             f_max[i1, i2],
-            magnitude,
-            phase,
+            magnitude=magnitude,
+            phase=phase,
+            Hz=Hz,
+            dB=dB,
             defaultDiagram=diagram2,
             device=device);
         end for;

@@ -26,5 +26,8 @@ record AnalyseOptions2
   final Boolean printEigenValueProperties = false
     "Write eigenvalues with properties"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
+  Boolean dB_w = false
+    "= true, to plot Bode with dB over w [rad/s] otherwise magnitude over f [Hz]"
+  annotation(Dialog(group="Analyse options"),choices(checkBox=true));
 
 end AnalyseOptions2;

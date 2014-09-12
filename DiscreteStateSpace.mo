@@ -2327,6 +2327,12 @@ encapsulated function bodeSISO
   extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
         Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
 
+  input Boolean Hz=true
+        "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)"
+                                                                         annotation(choices(checkBox=true));
+  input Boolean dB=false
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
+                                                                            annotation(choices(checkBox=true),Diagram(enable=magnitude));
     protected
   Modelica_LinearSystems2.DiscreteZerosAndPoles dzp
         "Zeros and poles Transfer functions to be plotted";
@@ -2358,8 +2364,10 @@ algorithm
     autoRange,
     f_min,
     f_max,
-    magnitude,
-    phase,
+    Hz=Hz,
+    magnitude=magnitude,
+    dB=dB,
+    phase=phase,
     defaultDiagram=defaultDiagram,
     device=device);
 

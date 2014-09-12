@@ -1417,8 +1417,15 @@ numerator polynomial N(z) and the denominator polynomial D(q).
     input Boolean phase=true "= true, to plot the pase of dzp" annotation(choices(checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-          Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot of  dzp = "
+          Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot: "
            + String(dzp)));
+
+    input Boolean Hz=true
+        "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)"
+                                                                           annotation(choices(checkBox=true));
+    input Boolean dB=false
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
+                                                                              annotation(choices(checkBox=true),Diagram(enable=magnitude));
 
     protected
     SI.AngularVelocity w[nPoints];
@@ -1475,6 +1482,13 @@ numerator polynomial N(z) and the denominator polynomial D(q).
       phi_old := Complex.arg(c, phi_old);
       phi[i] := SI.Conversions.to_deg(phi_old);
 
+      // Convert to other units, if required
+      if not Hz then
+         f[i] := w[i];
+      end if;
+      if dB then
+         A[i] := 20*log10(A[i]);
+      end if;
     end for;
 
    // Plot computed frequency response
@@ -1487,9 +1501,12 @@ numerator polynomial N(z) and the denominator polynomial D(q).
             y=A,
             autoLine=true);
       diagram2[i].curve := {curves[i]};
-      diagram2[i].yLabel := "magnitude";
+      diagram2[i].yLabel := if dB then "magnitude [dB]" else "magnitude";
       if phase then
          diagram2[i].xLabel:="";
+      end if;
+      if dB then
+         diagram2[i].logY := false;
       end if;
     end if;
 
@@ -1507,11 +1524,15 @@ numerator polynomial N(z) and the denominator polynomial D(q).
      end if;
     end if;
 
-      if magnitude and phase then
-        Plot.diagramVector(diagram2, device);
-      else
-        Plot.diagram(diagram2[1], device);
-      end if;
+    if not Hz then
+      diagram2[i].xLabel:="Angular frequency [rad/s]";
+    end if;
+
+    if magnitude and phase then
+      Plot.diagramVector(diagram2, device);
+    else
+      Plot.diagram(diagram2[1], device);
+    end if;
 
     annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
