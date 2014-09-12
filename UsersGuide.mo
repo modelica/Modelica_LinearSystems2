@@ -1089,15 +1089,26 @@ This library is based on the following references:
   package ReleaseNotes "Release notes"
     extends Modelica.Icons.ReleaseNotes;
 
-    class Version_2_3_1 "Version 2.3.1 (Oct. 1, 2013)"
+    class Version_2_3_2 "Version 2.3.2 (Sept.11, 2014)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
 <p>This version requires the <b>Modelica 3.2.1</b> Library.
-It is is <b>backward compatible</b> to the previous version 2.3.</p>
+It is is <b>backward compatible</b> to the previous version 2.3.1</p>
 
 <h4>
-Bug fixes performed in version 2.3.1 Build 2 (Sept. 11, 2014):
+Improvements performed in version 2.3.2 Build 1 (Sept. 11, 2014):
+</h4>
+
+<ul>
+<li> All Bode diagrams (in all representation forms) can be optionally
+     plotted as magnitude in dB over angular frequency in rad/s, 
+     instead of the default to use magnitude over frequency in Hz.</li>
+</ul>
+
+
+<h4>
+Bug fixes performed in version 2.3.2 Build 1 (Sept. 11, 2014):
 </h4>
 
 <ul>
@@ -1118,6 +1129,15 @@ Bug fixes performed in version 2.3.1 Build 2 (Sept. 11, 2014):
 
 </ul>
 
+</html>"));
+    end Version_2_3_2;
+
+    class Version_2_3_1 "Version 2.3.1 (Oct. 1, 2013)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>This version requires the <b>Modelica 3.2.1</b> Library.
+It is is <b>backward compatible</b> to the previous version 2.3.</p>
 
 
 <h4>
