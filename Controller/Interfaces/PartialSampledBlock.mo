@@ -28,13 +28,9 @@ partial block PartialSampledBlock
      annotation(Evaluate=true, HideResult=true,Dialog(tab="Advanced options",group="Discrete block parameters",
                 enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
 
-  final parameter Types.Init init=if initType == Types.InitWithGlobalDefault.UseSampleClockOption then
-            sampleClock.initType else
-            (if initType==Types.InitWithGlobalDefault.NoInit then Types.Init.NoInit else
-            (if initType==Types.InitWithGlobalDefault.SteadyState then Types.Init.SteadyState else
-            (if initType==Types.InitWithGlobalDefault.InitialState then Types.Init.InitialState else
-            Types.Init.InitialOutput)))
-    "Type of initialization (no init/InitialState/SteadyState)" annotation(Evaluate=true);
+  final parameter Types.Init init=Modelica_LinearSystems2.Controller.Internal.convertToInit(initType,sampleClock.initType)
+    "Type of initialization (no init/steady state/initial state/initial output)"
+                                                                                 annotation(Evaluate=true);
 
   parameter Integer sampleFactor(min=1)=1
     "Sample factor (Ts = sampleFactor * sampleClock.sampleTime)"
@@ -42,7 +38,7 @@ partial block PartialSampledBlock
                 enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
 
   parameter Types.InitWithGlobalDefault initType=Types.InitWithGlobalDefault.UseSampleClockOption
-    "Type of initialization (no init/initial/steady state/output)"
+    "Type of initialization (no init/steady state/initial state/initial output)"
     annotation(Evaluate=true, HideResult=true,  Dialog(tab="Advanced options"));
 
 protected

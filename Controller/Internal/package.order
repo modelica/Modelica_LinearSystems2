@@ -15,3 +15,5 @@ FIR_window
 random
 scaleFactor1
 scaleFactor2
+convertToInit
+convertToMethod

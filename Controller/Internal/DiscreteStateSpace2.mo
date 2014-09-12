@@ -20,17 +20,17 @@ public
   final parameter Integer ny=size(C, 1) "Number of outputs"  annotation(HideResult=true);
   parameter Types.MethodWithGlobalDefault methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.UseSampleClockOption
     "Type of discretization" annotation(Evaluate=true, HideResult=true);
-  final parameter Types.Method method=if methodType == Types.MethodWithGlobalDefault.UseSampleClockOption then
-            sampleClock.methodType else methodType
+  final parameter Types.Method method=convertToMethod(methodType, sampleClock.methodType)
     "Discretization method (explicitEuler/implicitEuler/trapezoidal/stepExact/rampExact)"
      annotation(Evaluate=true, HideResult=false);
 
   parameter Integer sampleFactor(min=1) = 1
     "Factor so that sample time=sampleClock.sampleTime*sampleFactor"
      annotation(HideResult=true);
-  parameter Types.Init init=Types.InitWithGlobalDefault.UseSampleClockOption
-    "Type of initialization (No init/InitialState/SteadyState/Output)"
+  parameter Types.Init init
+    "Type of initialization (NoInit/Steady State/InitialState/InitialOutput)"
     annotation(Evaluate=true, HideResult=true);
+
   parameter Real x_start[nx]=zeros(nx)
     "Initial value of continuous state x, if init=InitialState (otherwise guess value)"
     annotation(Evaluate=true,HideResult=true);

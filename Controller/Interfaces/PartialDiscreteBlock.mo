@@ -4,11 +4,10 @@ partial block PartialDiscreteBlock
   extends Controller.Icons.PartialBlockIcon(cont=false);
 
   parameter Types.InitWithGlobalDefault initType=Types.InitWithGlobalDefault.UseSampleClockOption
-    "Type of initialization (no init/initial/steady state/output)"
+    "Type of initialization (NoInit/SteadyState/InitialState/InitialOutput)"
     annotation(Evaluate=true, HideResult=true,  Dialog(tab="Advanced options"));
-  final parameter Types.Init init=if initType == Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.UseSampleClockOption then
-            sampleClock.initType else initType
-    "Type of initialization (no init/InitialState/SteadyState)" annotation(Evaluate=true);
+  final parameter Types.Init init=Modelica_LinearSystems2.Controller.Internal.convertToInit(initType, sampleClock.initType)
+    "Type of initialization (NoInit/SteadyState/InitialState/InitialOutput)" annotation(Evaluate=true);
 
   parameter Integer sampleFactor(min=1) = 1
     "Sample factor (Ts = sampleFactor * sampleClock.sampleTime)"
