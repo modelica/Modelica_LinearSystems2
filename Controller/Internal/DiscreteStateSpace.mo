@@ -23,7 +23,7 @@ model DiscreteStateSpace
     "Factor so that sample time = sampleClock.sampleTime * sampleFactor"
      annotation(HideResult=true);
 
-  parameter Types.Init init
+  parameter Types.Init init = Modelica_LinearSystems2.Controller.Types.Init.SteadyState
     "Type of initialization (No init/SteadyState/InitialState/InitialOutput)"
     annotation(Evaluate=true, HideResult=true);
 
