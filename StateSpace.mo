@@ -620,6 +620,7 @@ This package contains operators for subtraction of state space records.
       import Modelica_LinearSystems2.Internal;
       import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2.Utilities.Plot;
+      import DymolaCommands;
 
       input StateSpace ss;
 
@@ -645,7 +646,7 @@ This package contains operators for subtraction of state space records.
         "Name of system (used as heading in html file)";
       input String description="" "Description of system (used in html file)";
     protected
-      input Boolean printStateSpaceSystem=true annotation (Dialog(enable=false));
+      Boolean printStateSpaceSystem=true annotation (Dialog(enable=false));
       String dummyFileName="dummy" + fileName;
     public
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
@@ -718,6 +719,11 @@ This package contains operators for subtraction of state space records.
          analyseOptions2.printEigenValues         :=false;
          analyseOptions2.printEigenValueProperties:=false;
          analyseOptions2.printInvariantZeros      :=false;
+      end if;
+
+      // If system is too large, do not print A,B,C,D matrices
+      if nx > 50 or size(ss.B, 2) > 50 or size(ss.C, 1) > 50 then
+         printStateSpaceSystem:=false;
       end if;
 
       // Get eigenvalues
@@ -827,11 +833,9 @@ This package contains operators for subtraction of state space records.
           dummyFileName);
         Modelica.Utilities.Streams.readFile(dummyFileName);
         StateSpace.Plot.step(ss=ss);
-        //     fileNameImg2 := fileNameImg + "Step.png";
-        //     ExportPlotAsImage(
-        //       fileName=fileNameImg2,
-        //       id=-1,
-        //       includeInLog=false);
+        fileNameImg2 := fileNameImg + "Step.png";
+        DymolaCommands.Plot.ExportPlotAsImage(fileName=fileNameImg2, id=-1, includeInLog=false);
+        print("<p>\n<img src=\"" + fileNameImg2 + "\">\n</p>", fileName);
       end if;
 
       // Plot Bode plots
@@ -5319,6 +5323,10 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
       input Boolean zeros=true "= true, to plot the (invariant) zeros of ss "
         annotation (choices(checkBox=true));
 
+      input Boolean print=false
+        "= true, to print the selection to the output window"
+        annotation (choices(checkBox=true));
+
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
           defaultDiagram=if poles and zeros then
             Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros()
@@ -5333,6 +5341,7 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
       Real invZerosRe[:];
       Real invZerosIm[:];
       Complex invZeros[:];
+      Complex eig[size(ss.A,1)];
       Plot.Records.Curve curves[2];
       Integer i;
       Plot.Records.Diagram diagram2;
@@ -5378,6 +5387,20 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
       diagram2 := defaultDiagram;
       diagram2.curve := curves[1:i];
       Plot.diagram(diagram2, device);
+
+      if print then
+         if poles then
+            for i in 1:nx loop
+              eig[i].re := eval[i,1];
+              eig[i].im := eval[i,2];
+            end for;
+            Modelica_LinearSystems2.Math.Complex.Vectors.printHTML(eig,heading="Eigenvalues", name="eigenvalue");
+         end if;
+
+         if zeros then
+            Modelica_LinearSystems2.Math.Complex.Vectors.printHTML(invZeros,heading="Invariant zeros", name="invariant zero");
+         end if;
+      end if;
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>

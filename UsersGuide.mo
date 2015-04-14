@@ -1087,6 +1087,31 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
+    class Version_2_3_3 "Version 2.3.3 (xx, 2015)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>This version requires the <b>Modelica 3.2.1</b> Library.
+It is is <b>backward compatible</b> to the previous version 2.3.2</p>
+
+<h4>
+Improvements performed in version 2.3.3 (not yet released, 2015):
+</h4>
+
+<ul>
+<li> ModelAnalysis.Poles and ModelAnalysis.Zeros:<br>
+     By default, the poles/zeros are also printed to the output window.</li>
+
+<li> ModelAnalysis.FullAnalysis<br>
+     If the system is too large (> 50 states, inputs, or outputs), then the
+     system is not printed to the output</li>
+
+<li> ModelAnalysis.FullAnalysis<br>
+     The step response is included as png-file in the html log file
+     systemReport.html.</li>
+</ul>
+</html>"));
+    end Version_2_3_3;
     extends Modelica.Icons.ReleaseNotes;
 
     class Version_2_3_2 "Version 2.3.2 (Sept.11, 2014)"

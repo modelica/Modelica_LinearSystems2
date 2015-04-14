@@ -24,6 +24,7 @@ designLQG
 designLQR
 importFromModel
 plotPolesAndZeros
+plotPolesAndZeros2
 plotBodeMIMO
 plotBodeSISO
 plotImpulse

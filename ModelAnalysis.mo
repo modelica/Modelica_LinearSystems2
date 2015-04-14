@@ -24,7 +24,7 @@ package ModelAnalysis
   function Poles "Linearize a model and plot the poles of the linearized model"
     extends Modelica_LinearSystems2.Internal.PartialAnalyzeFunction;
   algorithm
-    Modelica_LinearSystems2.StateSpace.Plot.polesAndZeros(ssLin, zeros=false);
+    Modelica_LinearSystems2.StateSpace.Plot.polesAndZeros(ssLin, zeros=false, print=true);
     annotation(__Dymola_interactive=true, Icon(graphics={
             Ellipse(
             extent={{-100,100},{100,-100}},
@@ -42,7 +42,7 @@ package ModelAnalysis
     "Linearize a model and plot the poles and zeros of the linearized model"
     extends Modelica_LinearSystems2.Internal.PartialAnalyzeFunction;
   algorithm
-    Modelica_LinearSystems2.StateSpace.Plot.polesAndZeros(ssLin);
+    Modelica_LinearSystems2.StateSpace.Plot.polesAndZeros(ssLin, print=true);
     annotation(__Dymola_interactive=true, Icon(graphics={
             Ellipse(
             extent={{-100,100},{100,-100}},
