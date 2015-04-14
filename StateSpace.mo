@@ -630,6 +630,7 @@ This package contains operators for subtraction of state space records.
               plotInvariantZeros=true,
               plotStepResponse=true,
               plotFrequencyResponse=true,
+              printSystem=true,
               printEigenValues=true,
               printEigenValueProperties=true,
               printInvariantZeros=true,
@@ -646,7 +647,6 @@ This package contains operators for subtraction of state space records.
         "Name of system (used as heading in html file)";
       input String description="" "Description of system (used in html file)";
     protected
-      Boolean printStateSpaceSystem=true annotation (Dialog(enable=false));
       String dummyFileName="dummy" + fileName;
     public
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
@@ -723,7 +723,7 @@ This package contains operators for subtraction of state space records.
 
       // If system is too large, do not print A,B,C,D matrices
       if nx > 50 or size(ss.B, 2) > 50 or size(ss.C, 1) > 50 then
-         printStateSpaceSystem:=false;
+         analyseOptions2.printSystem:=false;
       end if;
 
       // Get eigenvalues
@@ -788,7 +788,7 @@ This package contains operators for subtraction of state space records.
       StateSpace.Analysis.analysis.printHTMLbasics(fileName, true);
       StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
 
-      if printStateSpaceSystem then
+      if analyseOptions2.printSystem then
         printSystem(
               ss,
               fileName,
@@ -4737,8 +4737,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
       (L) := StateSpace.Design.lqr(
             rss,
             Q,
-            R,
-            true);
+            R);
       L := transpose(L);
 
       AK := ss.A - L*ss.C;
@@ -4908,7 +4907,7 @@ The algebraic Riccati equation is solved by using the Schur algorithm
       input Real R[size(ss.B, 2), size(ss.B, 2)]=identity(size(ss.B, 2))
         "Input weighting matrix";
     protected
-      input Boolean iscontinuousSystem=true;
+      Boolean iscontinuousSystem=true;
     public
       output Real K[size(ss.B, 2), size(ss.A, 1)] "Feedback gain matrix";
       output StateSpace sslqr(
@@ -5881,7 +5880,7 @@ This function plots the time response of a state space system. The character of 
              "Impulse response"));
 
     protected
-      input Modelica_LinearSystems2.Types.TimeResponse response=
+      Modelica_LinearSystems2.Types.TimeResponse response=
           Modelica_LinearSystems2.Types.TimeResponse.Impulse
         "type of time response";
     algorithm
@@ -7358,10 +7357,10 @@ subsystem.D = ss.D[outputIndex, inputIndex];
         "Name of the state space system matrix (default is \"ABCD\") in the fileName"
         annotation (Dialog);
     protected
-      input Integer xuy[3]=Internal.readSystemDimension(fileName, matrixName);
-      input Integer nx=xuy[1];
-      input Integer nu=xuy[2];
-      input Integer ny=xuy[3];
+      Integer xuy[3]=Internal.readSystemDimension(fileName, matrixName);
+      Integer nx=xuy[1];
+      Integer nu=xuy[2];
+      Integer ny=xuy[3];
 
     public
       output StateSpace result(

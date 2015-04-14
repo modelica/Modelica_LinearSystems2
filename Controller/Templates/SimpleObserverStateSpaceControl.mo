@@ -56,11 +56,10 @@ equation
       points={{39,-40},{32,-40}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(observer.u, feedback.y) annotation (Line(
-      points={{62,-34},{68,-34},{68,0},{-11,0}},
-      color={0,0,127},
-      smooth=Smooth.None));
+  connect(observer.u, feedback.y) annotation (Line(points={{62,-34},{70,-34},{
+          70,0},{-11,0}}, color={0,0,127}));
   annotation (    Documentation(info="<html>
 <p>This template represents the structure of a simple state feedback controller with observer and optional pre-filter. In the application it must be extended with an input signal.</p>
-</html>"));
+</html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -100},{100,100}})));
 end SimpleObserverStateSpaceControl;

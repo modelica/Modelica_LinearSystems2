@@ -338,7 +338,6 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
       input String description="" "Description of system (used in html file)";
 
     protected
-      input Boolean printStateSpaceSystem=true annotation(Dialog(enable=false));
       String dummyFileName = "dummy" + fileName;
 
       input StateSpace ss=StateSpace(tf);
@@ -349,6 +348,7 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
               plotInvariantZeros=analyseOptions2.plotInvariantZeros,
               plotStepResponse=analyseOptions2.plotStepResponse,
               plotFrequencyResponse=analyseOptions2.plotFrequencyResponse,
+              printSystem=analyseOptions2.printSystem,
               printEigenValues=analyseOptions2.printEigenValues,
               printEigenValueProperties=analyseOptions2.printEigenValueProperties,
               printInvariantZeros=analyseOptions2.printInvariantZeros,
@@ -367,7 +367,7 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
 
      Modelica.Utilities.Files.removeFile(fileName);
      Modelica.Utilities.Files.removeFile(dummyFileName);
-    if printStateSpaceSystem then
+     if analyseOptions.printSystem and size(ss.A,1) <= 50 then
     Modelica_LinearSystems2.TransferFunction.Analysis.analysis.printSystem(
             tf,
             fileName,
@@ -381,13 +381,13 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
     end if;
       Modelica.Utilities.Streams.readFile(dummyFileName);
 
+      analyseOptions.printSystem :=false;
       StateSpace.Analysis.analysis(
             ss=ss,
             analyseOptions=analyseOptions,
             fileName=fileName,
             systemName=systemName,
-            description=description,
-            printStateSpaceSystem=false);
+            description=description);
     equation
 
     public
@@ -1895,7 +1895,7 @@ This function plots the time response of a transfer function. The character of t
         + String(tf)));
 
     protected
-    input Modelica_LinearSystems2.Types.TimeResponse response=
+    Modelica_LinearSystems2.Types.TimeResponse response=
       Modelica_LinearSystems2.Types.TimeResponse.Impulse
         "Type of time response";
   algorithm
@@ -2417,10 +2417,10 @@ Converts a matrix of transfer functions denoted as rational polynomial function 
      Integer na=TransferFunction.Analysis.denominatorDegree(tf) + 1;
      Integer nb=TransferFunction.Analysis.numeratorDegree(tf) + 1;
      Integer nx=na - 1;
-     output Real A[nx,nx];
-     output Real B[nx,1];
-     output Real C[1,nx];
-     output Real D[1,1];
+     Real A[nx,nx];
+     Real B[nx,1];
+     Real C[1,nx];
+     Real D[1,1];
      Real a[na]=Vectors.reverse(tf.d) "Reverse element order of tf.a";
      Real b[na]=vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
      Real d=b[na]/a[na];
@@ -2527,8 +2527,8 @@ is defined slightly differently.
     input String denName="d" "Name of the denominator of the transfer function";
 
     protected
-    input Integer numSize[2]=readMatrixSize(fileName, numName);
-    input Integer denSize[2]=readMatrixSize(fileName, denName);
+    Integer numSize[2]=readMatrixSize(fileName, numName);
+    Integer denSize[2]=readMatrixSize(fileName, denName);
 
     Real num[numSize[1],numSize[2]]=readMatrix(
           fileName,
@@ -2540,8 +2540,8 @@ is defined slightly differently.
           denName,
           denSize[1],
           denSize[2]) "denominator coefficients";
-    input Integer ns2=numSize[2];
-    input Integer ds2=denSize[2];
+    Integer ns2=numSize[2];
+    Integer ds2=denSize[2];
     public
    output TransferFunction tf(n=fill(0,ns2),d=fill(0,ds2)) "transfer function";
 

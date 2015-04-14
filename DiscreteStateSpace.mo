@@ -2599,7 +2599,7 @@ end timeResponse;
            heading="Impulse response"));
 
     protected
-    input Modelica_LinearSystems2.Types.TimeResponse response=
+    Modelica_LinearSystems2.Types.TimeResponse response=
         Modelica_LinearSystems2.Types.TimeResponse.Impulse
         "type of time response";
     Real tSpanVar;
@@ -2683,7 +2683,7 @@ This function plots the impulse responses of a state space system for each syste
            heading="Step response"));
 
     protected
-    input Modelica_LinearSystems2.Types.TimeResponse response=
+    Modelica_LinearSystems2.Types.TimeResponse response=
         Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
 
     Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
@@ -2768,7 +2768,7 @@ This function plots the discrete step responses of a state space system for each
     extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
            heading="Ramp response"));
     protected
-    input Modelica_LinearSystems2.Types.TimeResponse response=
+    Modelica_LinearSystems2.Types.TimeResponse response=
         Modelica_LinearSystems2.Types.TimeResponse.Ramp "type of time response";
 
     Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
@@ -2850,7 +2850,7 @@ encapsulated function initialResponse
   extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
         heading="Initial response"));
     protected
-  input Modelica_LinearSystems2.Types.TimeResponse response=
+  Modelica_LinearSystems2.Types.TimeResponse response=
       Modelica_LinearSystems2.Types.TimeResponse.Initial
         "type of time response";
 
@@ -3399,10 +3399,10 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
                         caption="state space system data file")));
     input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
     protected
-    input Integer xuy[3]=Internal.readSystemDimension(fileName, matrixName);
-    input Integer nx=xuy[1];
-    input Integer nu=xuy[2];
-    input Integer ny=xuy[3];
+    Integer xuy[3]=Internal.readSystemDimension(fileName, matrixName);
+    Integer nx=xuy[1];
+    Integer nu=xuy[2];
+    Integer ny=xuy[3];
 
     public
     output DiscreteStateSpace result(

@@ -1137,7 +1137,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
              + String(dtf)));
 
     protected
-      input Modelica_LinearSystems2.Types.TimeResponse response=
+      Modelica_LinearSystems2.Types.TimeResponse response=
         Modelica_LinearSystems2.Types.TimeResponse.Impulse
         "Type of time response";
 
@@ -1174,10 +1174,10 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
              + String(dtf)));
 
     protected
-      input Modelica_LinearSystems2.Types.TimeResponse response=
+      Modelica_LinearSystems2.Types.TimeResponse response=
           Modelica_LinearSystems2.Types.TimeResponse.Step
         "type of time response";
-      input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
+      Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
           DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
         "Initial state vector";
 
@@ -1213,10 +1213,10 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
              + String(dtf)));
 
     protected
-      input Modelica_LinearSystems2.Types.TimeResponse response=
+      Modelica_LinearSystems2.Types.TimeResponse response=
           Modelica_LinearSystems2.Types.TimeResponse.Ramp
         "type of time response";
-      input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
+      Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
           DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
         "Initial state vector";
     algorithm
@@ -1470,8 +1470,8 @@ with
         "Name of the denominator of the transfer function";
 
     protected
-      input Integer numSize[2]=readMatrixSize(fileName, numName);
-      input Integer denSize[2]=readMatrixSize(fileName, denName);
+      Integer numSize[2]=readMatrixSize(fileName, numName);
+      Integer denSize[2]=readMatrixSize(fileName, denName);
 
       Real num[numSize[1],numSize[2]]=readMatrix(
             fileName,
@@ -1483,8 +1483,8 @@ with
             denName,
             denSize[1],
             denSize[2]) "denominator coefficients";
-      input Integer ns2=numSize[2];
-      input Integer ds2=denSize[2];
+      Integer ns2=numSize[2];
+      Integer ds2=denSize[2];
       Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);
 
     public

@@ -1698,7 +1698,7 @@ i.e. Impulse, Step, Ramp, or Initial.
         heading="Impulse response of  zp = "+String(dzp)));
 
     protected
-    input Modelica_LinearSystems2.Types.TimeResponse response=
+    Modelica_LinearSystems2.Types.TimeResponse response=
       Modelica_LinearSystems2.Types.TimeResponse.Impulse
         "Type of time response";
     Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
@@ -1775,7 +1775,7 @@ This function plots the impulse response of a discrete zeros-and-poles transfer 
            + String(dzp)));
 
     protected
-    input Modelica_LinearSystems2.Types.TimeResponse response=
+    Modelica_LinearSystems2.Types.TimeResponse response=
         Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
     Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
         DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
@@ -1851,7 +1851,7 @@ This function plots the step response of a transfer function. It is based on <a 
            + String(dzp)));
 
     protected
-    input Modelica_LinearSystems2.Types.TimeResponse response=
+    Modelica_LinearSystems2.Types.TimeResponse response=
         Modelica_LinearSystems2.Types.TimeResponse.Ramp "type of time response";
 
     Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
@@ -2463,16 +2463,16 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
                         caption="state space system data file")));
 
     protected
-      input Integer n1n2d1d2[4]=if ZerosAndPoles.Internal.checkRepresentation(
+      Integer n1n2d1d2[4]=if ZerosAndPoles.Internal.checkRepresentation(
           fileName) then ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(
           fileName) else ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(
           fileName);
-      input Integer n1=n1n2d1d2[1];
-      input Integer n2=n1n2d1d2[2];
-      input Integer d1=n1n2d1d2[3];
-      input Integer d2=n1n2d1d2[4];
-      input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
-      input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
+      Integer n1=n1n2d1d2[1];
+      Integer n2=n1n2d1d2[2];
+      Integer d1=n1n2d1d2[3];
+      Integer d2=n1n2d1d2[4];
+      Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
+      Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
     public
       output DiscreteZerosAndPoles dzp(n1=fill(0, n1), n2=fill(0, n2, 2), d1=fill(0, d1), d2=fill(0, d2, 2));
     algorithm
@@ -2784,13 +2784,13 @@ int found=0;
                       caption="state space system data file")));
 
     protected
-    input Integer n1n2d1d2[4]=ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(fileName);
-    input Integer n1=n1n2d1d2[1];
-    input Integer n2=n1n2d1d2[2];
-    input Integer d1=n1n2d1d2[3];
-    input Integer d2=n1n2d1d2[4];
-    input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
-    input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
+    Integer n1n2d1d2[4]=ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(fileName);
+    Integer n1=n1n2d1d2[1];
+    Integer n2=n1n2d1d2[2];
+    Integer d1=n1n2d1d2[3];
+    Integer d2=n1n2d1d2[4];
+    Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
+    Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
     public
     output DiscreteZerosAndPoles dzp(
       n1=fill(0, n1),
@@ -2859,14 +2859,14 @@ int found=0;
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
     protected
-    input Integer n1n2d1d2[4]=
+    Integer n1n2d1d2[4]=
         ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(fileName);
-    input Integer n1=n1n2d1d2[1];
-    input Integer n2=n1n2d1d2[2];
-    input Integer d1=n1n2d1d2[3];
-    input Integer d2=n1n2d1d2[4];
-    input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
-    input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
+    Integer n1=n1n2d1d2[1];
+    Integer n2=n1n2d1d2[2];
+    Integer d1=n1n2d1d2[3];
+    Integer d2=n1n2d1d2[4];
+    Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
+    Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
     public
     output DiscreteZerosAndPoles dzp(
       n1=fill(0, n1),

@@ -1110,6 +1110,18 @@ Improvements performed in version 2.3.3 (not yet released, 2015):
      The step response is included as png-file in the html log file
      systemReport.html.</li>
 </ul>
+
+<h4>
+Bug fixes performed in version 2.3.3:
+</h4>
+
+<ul>
+<li> Several functions had used the input/output attribute in a protected declaration.
+     Due to stricter checking by Dymola 2016, this is reported as warning.
+     These wrong attributes have been removed.
+</li>
+
+</ul>
 </html>"));
     end Version_2_3_3;
     extends Modelica.Icons.ReleaseNotes;

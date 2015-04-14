@@ -695,15 +695,15 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
       input String description = "" "Description of system (used in html file)";
 
     protected
-      input Boolean printStateSpaceSystem=true annotation(Dialog(enable=false));
       String dummyFileName = "dummy" + fileName;
-      input StateSpace ss=StateSpace(zp);
+      StateSpace ss=StateSpace(zp);
 
       AnalyseOptions analyseOptions=AnalyseOptions(
                plotEigenValues=analyseOptions2.plotEigenValues,
                plotInvariantZeros=analyseOptions2.plotInvariantZeros,
                plotStepResponse=analyseOptions2.plotStepResponse,
                plotFrequencyResponse=analyseOptions2.plotFrequencyResponse,
+               printSystem=  analyseOptions2.printSystem,
                printEigenValues=analyseOptions2.printEigenValues,
                printEigenValueProperties=analyseOptions2.printEigenValueProperties,
                printInvariantZeros=analyseOptions2.printInvariantZeros,
@@ -720,7 +720,7 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
         " Denominator polynominal of ZerosAndPoles object in function\"ZerosAndPoles.Analysis.analysis\"has to be of higher or equal order than numerator polynomial");
       Modelica.Utilities.Files.removeFile(fileName);
       Modelica.Utilities.Files.removeFile(dummyFileName);
-      if printStateSpaceSystem then
+      if analyseOptions.printSystem and size(ss.A,1) <= 50 then
         printSystem(
           zp,
           fileName,
@@ -733,13 +733,13 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
           description);
       end if;
       Modelica.Utilities.Streams.readFile(dummyFileName);
+      analyseOptions.printSystem :=false;
       StateSpace.Analysis.analysis(
         ss=ss,
         analyseOptions=analyseOptions,
         fileName=fileName,
         systemName=systemName,
-        description=description,
-        printStateSpaceSystem=false);
+        description=description);
 
     public
      encapsulated function printSystem
@@ -2637,7 +2637,7 @@ This function plots the time response of a transfer function. The character of t
            + String(zp)));
 
     protected
-    input Modelica_LinearSystems2.Types.TimeResponse response=
+    Modelica_LinearSystems2.Types.TimeResponse response=
         Modelica_LinearSystems2.Types.TimeResponse.Impulse
         "type of time response";
   algorithm
@@ -4131,16 +4131,16 @@ processing.
                         caption="state space system data file")));
 
     protected
-      input Integer n1n2d1d2[4]=if ZerosAndPoles.Internal.checkRepresentation(
+      Integer n1n2d1d2[4]=if ZerosAndPoles.Internal.checkRepresentation(
           fileName) then ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(
           fileName) else ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(
           fileName);
-      input Integer n1=n1n2d1d2[1];
-      input Integer n2=n1n2d1d2[2];
-      input Integer d1=n1n2d1d2[3];
-      input Integer d2=n1n2d1d2[4];
-      input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
-      input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
+      Integer n1=n1n2d1d2[1];
+      Integer n2=n1n2d1d2[2];
+      Integer d1=n1n2d1d2[3];
+      Integer d2=n1n2d1d2[4];
+      Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
+      Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
     public
       output ZerosAndPoles zp(
         n1=fill(0, n1),
@@ -6436,14 +6436,14 @@ int found=0;
                       caption="state space system data file")));
 
     protected
-    input Integer n1n2d1d2[4]=
+    Integer n1n2d1d2[4]=
         ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(fileName);
-    input Integer n1=n1n2d1d2[1];
-    input Integer n2=n1n2d1d2[2];
-    input Integer d1=n1n2d1d2[3];
-    input Integer d2=n1n2d1d2[4];
-    input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
-    input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
+    Integer n1=n1n2d1d2[1];
+    Integer n2=n1n2d1d2[2];
+    Integer d1=n1n2d1d2[3];
+    Integer d2=n1n2d1d2[4];
+    Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
+    Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
     public
     output ZerosAndPoles zp(
       n1=fill(0, n1),
@@ -6515,14 +6515,14 @@ int found=0;
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
     protected
-    input Integer n1n2d1d2[4]=
+    Integer n1n2d1d2[4]=
         ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(fileName);
-    input Integer n1=n1n2d1d2[1];
-    input Integer n2=n1n2d1d2[2];
-    input Integer d1=n1n2d1d2[3];
-    input Integer d2=n1n2d1d2[4];
-    input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
-    input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
+    Integer n1=n1n2d1d2[1];
+    Integer n2=n1n2d1d2[2];
+    Integer d1=n1n2d1d2[3];
+    Integer d2=n1n2d1d2[4];
+    Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
+    Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
     public
     output ZerosAndPoles zp(
       n1=fill(0, n1),
