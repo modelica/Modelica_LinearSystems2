@@ -1,16 +1,17 @@
 within ;
-package Modelica_LinearSystems2 "Modelica_LinearSystems2 (Version 2.3.2) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
+package Modelica_LinearSystems2 "Modelica_LinearSystems2 (Version 2.3.2 Build 2) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
   extends Modelica.Icons.Package;
 
   constant String DataDir=classDirectory() +  "Resources/Data/"
   "Absolute path to directory containing utilitiy files for this package";
 
+
 annotation (
   preferredView="info",
   uses(Modelica(version="3.2.1")),
   version="2.3.2",
-  versionBuild=1,
-  versionDate="2014-09-11",
+  versionBuild=2,
+  versionDate="2015-04-17",
   dateModified = "2014-09-11 15:20:01Z",
   revisionId="$Id::                                       $",
   conversion(

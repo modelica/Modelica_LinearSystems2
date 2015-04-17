@@ -654,7 +654,7 @@ This package contains operators for subtraction of state space records.
             Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
 
     protected
-      input Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex j=Modelica_LinearSystems2.Math.Complex.j();
       Eigenvalue ev[size(ss.A, 1)];
       Integer nx=size(ss.A, 1);
       Integer window=0;
