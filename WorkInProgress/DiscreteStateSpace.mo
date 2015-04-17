@@ -1036,10 +1036,10 @@ partial function ekfSystemBase "Base class of ekf-system functions"
 end ekfSystemBase;
 
   function ekfSystemDummy "Dummy function for ekfSystem"
-
-      import Modelica.Math.Matrices;
-
-    extends Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemBase;
+    import Modelica.Math.Matrices;
+    import Modelica_LinearSystems2;
+    extends
+        Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.ekfSystemBase;
 
     protected
   Integer nx=size(x,1);

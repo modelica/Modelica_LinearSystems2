@@ -6,9 +6,9 @@ function fromFile "Read matrix from a matlab file"
   input String matrixName="m" "Name of the matrix";
 
 protected
-  input Integer Msizes[2]=readMatrixSize(fileName, matrixName);
-  input Integer n=Msizes[1];
-  input Integer m=Msizes[2];
+  Integer Msizes[2]=readMatrixSize(fileName, matrixName);
+  Integer n=Msizes[1];
+  Integer m=Msizes[2];
   Real M[n,m]=readMatrix(
       fileName,
       matrixName,

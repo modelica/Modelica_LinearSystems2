@@ -1143,14 +1143,14 @@ Bug fixes performed in version 2.3.2 Build 2 (April 17, 2015):
 <li> ModelAnalysis.FullAnalysis<br>
      If the system is too large (> 50 states, inputs, or outputs), then the
      system is not printed to the output (previously, the tool \"hangs\" if printing a 
-     too large system.</li>
+     too large system).</li>
 
 <li> ModelAnalysis.FullAnalysis<br>
      The step response is included as png-file in the html log file
      systemReport.html.</li>
 
 <li> ModelAnalysis.Poles and ModelAnalysis.Zeros:<br>
-     By default, the poles/zeros are also printed to the output window.</li>
+     Besides plotted, the poles/zeros are also printed to the output window.</li>
 </ul>
 
 

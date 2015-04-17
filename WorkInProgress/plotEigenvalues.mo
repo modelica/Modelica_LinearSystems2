@@ -27,6 +27,7 @@ function plotEigenvalues
 //  output Real evRe[size(A, 1)];
 //  output Real evIm[size(A, 1)];
 protected
+  Integer id;
   Integer markerStyle2=
     if markerStyle==MarkerStyles.Cross then MarkerStyle.Cross else
     if markerStyle==MarkerStyles.Circle then MarkerStyle.Circle else

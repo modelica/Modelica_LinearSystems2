@@ -538,8 +538,8 @@ end '==';
     import Modelica;
     import ZerosAndPoles =
       Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-    import
-      Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
+    //import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
+    import Modelica_LinearSystems2.ZerosAndPoles.Internal;
 
       input ZerosAndPoles zp
       "ZerosAndPoles transfer function to be transformed in a String representation";
@@ -1394,8 +1394,8 @@ Generate a matrix of ZerosAndPoles data records by linearization of a model defi
 
     encapsulated function fromFile
       "Generate a ZerosAndPoles record by reading the polynomial coefficients or zeros and poles from a file"
-      import ZerosAndPoles =
-        Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+      //import ZerosAndPoles = Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica;
@@ -1406,16 +1406,16 @@ Generate a matrix of ZerosAndPoles data records by linearization of a model defi
                         caption="state space system data file")));
 
     protected
-      input Integer n1n2d1d2[4]=if ZerosAndPoles.Internal.checkRepresentation(
+      Integer n1n2d1d2[4]=if ZerosAndPoles.Internal.checkRepresentation(
           fileName) then ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(
           fileName) else ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(
           fileName);
-      input Integer n1=n1n2d1d2[1];
-      input Integer n2=n1n2d1d2[2];
-      input Integer d1=n1n2d1d2[3];
-      input Integer d2=n1n2d1d2[4];
-      input Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
-      input Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
+      Integer n1=n1n2d1d2[1];
+      Integer n2=n1n2d1d2[2];
+      Integer d1=n1n2d1d2[3];
+      Integer d2=n1n2d1d2[4];
+      Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
+      Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
     public
       output ZerosAndPoles zp(
         n1=fill(0, n1),

@@ -40,10 +40,10 @@ package RootLocusNew
       Modelica_LinearSystems2.Utilities.Import.rootLocusOfModel(
       modelName,
       modelParam,
-      linearizeAtInitial,
-      t_linearize,
       simulationSetup,
       reorder);
+      //linearizeAtInitial,
+      //t_linearize,
     if paramUnit == "" or paramUnit == " " then
        pName :=paramName;
     else
