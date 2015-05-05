@@ -1,11 +1,14 @@
 within Modelica_LinearSystems2.Internal;
-function frequencyVector "Determine frequency vector for Bode plot"
+function frequencyVector2
+  "Determine frequency vector for Bode plot (using Real matrices for zeros and poles)"
   import Modelica;
-  import Modelica_LinearSystems2.Math.Complex;
-  import LinearSystems = Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Internal;
   import SI = Modelica.SIunits;
 
+  input Real Zeros[:,2]
+    "Zeros as Real matrix (first column: real, second column imaginary values)";
+  input Real Poles[:,2]
+    "Poles as Real matrix (first column: real, second column imaginary values)";
   input Integer nPoints(min=2) = 200 "Number of points";
   input Boolean autoRange=true
     "True, if abszissa range is automatically determined";
@@ -13,10 +16,6 @@ function frequencyVector "Determine frequency vector for Bode plot"
     "Minimum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
   input Modelica.SIunits.Frequency f_max(min=0) = 10
     "Maximum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
-  input Complex numZeros[:]=fill(Complex(0), 0) "Zeros of numerator"
-                                                                    annotation(Dialog(enable=autoRange));
-  input Complex denZeros[:]=fill(Complex(0), 0) "Zeros of denominator"
-                                                                      annotation(Dialog(enable=autoRange));
   input Boolean logX=true
     "=true: logarithmic scale; = false: linear scale of frequency vector";
   output SI.Frequency f[nPoints] "Frequency vector (automatic or manual)";
@@ -30,7 +29,7 @@ protected
 algorithm
   // Determine f_min2, f_max2 (auto or manual)
   if autoRange then
-    (w_min,w_max) := Internal.frequencyRangeBode(numZeros, denZeros);
+    (w_min,w_max) := Internal.frequencyRangeBode2(Zeros, Poles);
     f_min2 := SI.Conversions.to_Hz(w_min);
     f_max2 := SI.Conversions.to_Hz(w_max);
   else
@@ -58,4 +57,4 @@ algorithm
   else
      f :=linspace(f_min,f_max,nPoints);
   end if;
-end frequencyVector;
+end frequencyVector2;

@@ -1186,6 +1186,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
     encapsulated function evaluate
       "Evaluate a ZerosAndPoles transfer function at a given value of p"
+      import Modelica.Utilities.Streams.print;
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
@@ -1201,30 +1202,41 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       Complex num;
       Complex den;
       Real abs_den;
+      Integer n1 = size(zp.n1,1);
+      Integer n2 = size(zp.n2,1);
+      Integer d1 = size(zp.d1,1);
+      Integer d2 = size(zp.d2,1);
+      Complex n[size(zp.n1,1)+size(zp.n2,1)];
+      Complex d[size(zp.d1,1)+size(zp.d2,1)];
+      Complex y2;
+      Integer info;
     algorithm
       // Build numerator
-      num := zp.k + 0*j;
-      for i in 1:size(zp.n1, 1) loop
-        num := num*Internal.'p+a'(p, zp.n1[i]);
+      for i in 1:n1 loop
+        n[i] :=Internal.'p+a'(p, zp.n1[i]);
       end for;
-      for i in 1:size(zp.n2, 1) loop
-        num := num*Internal.'p^2+k[1]*p+k[2]'(p, zp.n2[i, :]);
+      for i in 1:n2 loop
+        n[n1+i] := Internal.'p^2+k[1]*p+k[2]'(p, zp.n2[i, :]);
       end for;
 
       // Build denominator
-      den := 1 + 0*j;
-      for i in 1:size(zp.d1, 1) loop
-        den := den*Internal.'p+a'(p, zp.d1[i]);
+      for i in 1:d1 loop
+        d[i] := Internal.'p+a'(p, zp.d1[i]);
       end for;
-      for i in 1:size(zp.d2, 1) loop
-        den := den*Internal.'p^2+k[1]*p+k[2]'(p, zp.d2[i, :]);
+      for i in 1:d2 loop
+        d[d1+i] :=Internal.'p^2+k[1]*p+k[2]'(p, zp.d2[i, :]);
       end for;
 
       // Build value of transfer function
-      abs_den := Complex.'abs'(den);
-      den := if abs_den >= den_min then den else (if den.re >= 0 then den_min else -
-        den_min) + 0*j;
-      y := num/den;
+      (y2, info) :=Modelica_LinearSystems2.Internal.complexFraction(n, d);
+      if info == 0 then
+         y :=Complex(zp.k, 0)*y2;
+      elseif info == 1 then
+         y :=if zp.k >= 0 then y2 else -y2;
+      else
+         y :=y2;
+      end if;
+
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -2389,11 +2401,22 @@ and results in
         "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
                                                                               annotation(choices(checkBox=true),Diagram(enable=magnitude));
 
+    input Boolean onFile=false
+        "= true, if frequency response is stored on file as matrix [f,A,phi]"
+                                                                            annotation(choices(checkBox=true));
+    input String fileName="frequencyResponse.mat"
+        "If onFile=true, file on which the frequency response will be stored"
+                                                                             annotation(Dialog(enable=onFile));
+    input String matrixName=if Hz and not dB then "fHz_A_phiDeg" elseif
+                               Hz and dB then "fHz_AdB_phiDeg" elseif
+                               not Hz and dB then "f_AdB_phiDeg" else "f_A_phiDeg"
+        "If onFile=true, Name of matrix on file"                                                                            annotation(Dialog(enable=onFile));
     protected
     SI.AngularVelocity w[nPoints];
     SI.Frequency f[nPoints];
     SI.Conversions.NonSIunits.Angle_deg phi[nPoints];
     Real A[nPoints];
+    Real fAp[nPoints,if onFile then 3 else 0];
     Boolean OK;
     Complex c;
     Integer window=0;
@@ -2403,6 +2426,7 @@ and results in
     Plot.Records.Curve curves[2];
     Integer i;
     Plot.Records.Diagram diagram2[2];
+    Boolean success;
   algorithm
     // Determine frequency vector f
     if autoRange then
@@ -2417,7 +2441,8 @@ and results in
       f_min,
       f_max,
       numZeros,
-      denZeros);
+      denZeros,
+      defaultDiagram.logX);
 
     // Compute magnitude/phase at the frequency points
     phi_old := 0.0;
@@ -2481,6 +2506,16 @@ and results in
       Plot.diagramVector(diagram2, device);
     else
       Plot.diagram(diagram2[1], device);
+    end if;
+
+    if onFile then
+       fAp :=[f,A,phi];
+       Modelica.Utilities.Files.removeFile(fileName);
+       success:=writeMatrix(fileName,matrixName,fAp,append=false);
+       if success then
+          Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
+                   Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+       end if;
     end if;
 
     annotation (__Dymola_interactive=true, Documentation(info="<html>
@@ -6980,33 +7015,28 @@ function. The solver function is a direct mapping of the Algol 60 procedure
     function 'p+a' "Addition of a complex number and a real value"
       import Modelica;
       import Modelica_LinearSystems2.Math.Complex;
+      import Modelica.ComplexMath.j;
 
       input Complex p; // "Complex number";
       input Real a "Value of Real variable";
       output Complex c;
-    protected
-      Complex j = Modelica_LinearSystems2.Math.Complex.j();
     algorithm
       c := p.re + p.im*j +a;
+      annotation(Inline=true);
     end 'p+a';
 
     function 'p^2+k[1]*p+k[2]'
       import Modelica;
       import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2.Math.Complex;
+      import Modelica.ComplexMath.j;
 
       input Complex p;
       input Real k[2];
       output Complex c;
-    protected
-      Complex c1;
-      Complex c2;
-      Complex c3;
-      Complex c4;
-      Complex j = Modelica_LinearSystems2.Math.Complex.j();
     algorithm
       c := p.re^2 - p.im^2 + k[1]*p.re + k[2]+p.im*(2*p.re + k[1])*j;
-
+      annotation(Inline=true);
     end 'p^2+k[1]*p+k[2]';
 
     function roots "Determine zeros of factorized polynomial"

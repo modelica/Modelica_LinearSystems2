@@ -348,6 +348,16 @@ This package contains operators for subtraction of state space records.
     Boolean yNamesExist=false;
 
   algorithm
+    // If system is too large, do not print the matrices
+    if size(ss.A,1) > 0 or size(ss.B, 2) > 50 or size(ss.C, 1) > 50 then
+      s := "System not printed since too large (only dimensions):\n" +
+           "   " + name + ".A[" + String(nx) + "," + String(nx) + "]\n" +
+           "   " + name + ".B[" + String(nx) + "," + String(nu) + "]\n" +
+           "   " + name + ".C[" + String(ny) + "," + String(nx) + "]\n" +
+           "   " + name + ".D[" + String(ny) + "," + String(nu) + "]";
+      return;
+    end if;
+
     //Checking if name arrays are empty
     for i in 1:nx loop
       xNamesExist := xNamesExist or (ss.xNames[i] <> "");
@@ -654,6 +664,7 @@ This package contains operators for subtraction of state space records.
             Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
 
     protected
+      StateSpace ssBalanced = StateSpace.Transformation.toBalancedForm(ss);
       Complex j=Modelica_LinearSystems2.Math.Complex.j();
       Eigenvalue ev[size(ss.A, 1)];
       Integer nx=size(ss.A, 1);
@@ -663,7 +674,7 @@ This package contains operators for subtraction of state space records.
       Real levec[nx, nx];
       Complex cev[size(ss.A, 1)];
       Complex systemZeros[:]=
-          Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros(ss);
+          Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros(ssBalanced);
       Boolean isStable;
       Boolean isControllable;
       Boolean isStabilizable;
@@ -741,7 +752,7 @@ This package contains operators for subtraction of state space records.
 
       // Build x names
       // -------------
-      if size(ss.xNames, 1) <> nx then
+      if size(ss.xNames, 1) <> nx or nx > 1 and ss.xNames[1]=="" then
         for i in 1:nx loop
           xNames2[i] := "x[" + String(i) + "]";
         end for;
@@ -759,12 +770,12 @@ This package contains operators for subtraction of state space records.
 
       if size(ss.B, 2) > 0 and size(ss.C, 1) > 0 then
         // Controllability check, stabilizability check
-        isControllable := StateSpace.Analysis.isControllable(ss);
-        isStabilizable := StateSpace.Analysis.isStabilizable(ss);
+        isControllable := StateSpace.Analysis.isControllable(ssBalanced);
+        isStabilizable := StateSpace.Analysis.isStabilizable(ssBalanced);
 
         // Observability check, detectability check
-        isObservable := StateSpace.Analysis.isObservable(ss);
-        isDetectable := StateSpace.Analysis.isDetectable(ss);
+        isObservable := StateSpace.Analysis.isObservable(ssBalanced);
+        isDetectable := StateSpace.Analysis.isDetectable(ssBalanced);
       else
         isControllable := false;
         isStabilizable := false;
@@ -832,7 +843,7 @@ This package contains operators for subtraction of state space records.
           "<html>\n<body>\n<p>\n<b>Step responses</b>\n</p>\n</body>\n</html>",
           dummyFileName);
         Modelica.Utilities.Streams.readFile(dummyFileName);
-        StateSpace.Plot.step(ss=ss);
+        StateSpace.Plot.step(ss=ssBalanced);
         fileNameImg2 := fileNameImg + "Step.png";
         DymolaCommands.Plot.ExportPlotAsImage(fileName=fileNameImg2, id=-1, includeInLog=false);
         print("<p>\n<img src=\"" + fileNameImg2 + "\">\n</p>", fileName);
@@ -3146,7 +3157,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
     end denominatorDegree;
 
     encapsulated function evaluate
-      "Evaluate a the corresponding transfer function at a given (complex) value of s"
+      "Evaluate the corresponding transfer function at a given (complex) value of s"
 
       import Modelica;
       import Modelica_LinearSystems2;
@@ -4088,6 +4099,1921 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
 </html>"));
     end observabilityMatrix;
 
+    function analysis2
+      "Perform a system analysis based on the poles and zeros of the system"
+
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Internal.Eigenvalue;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Internal;
+      import Modelica.Utilities.Streams.print;
+      import Modelica_LinearSystems2.Utilities.Plot;
+      import DymolaCommands;
+
+      input StateSpace ss;
+
+      input Internal.AnalyseOptions analyseOptions=
+          Modelica_LinearSystems2.Internal.AnalyseOptions(
+              plotEigenValues=true,
+              plotInvariantZeros=true,
+              plotStepResponse=true,
+              plotFrequencyResponse=true,
+              printSystem=true,
+              printEigenValues=true,
+              printEigenValueProperties=true,
+              printInvariantZeros=true,
+              printControllability=true,
+              printObservability=true,
+              headingEigenValues="Eigenvalues",
+              headingInvariantzeros="Invariant zeros",
+              headingStepResponse="Step response",
+              headingFrequencyResponse="Frequency response",
+              dB_w=  false);
+      input String fileName="systemReport.html"
+        "Name of html-file that contains eigenvalue table";
+      input String systemName=""
+        "Name of system (used as heading in html file)";
+      input String description="" "Description of system (used in html file)";
+    protected
+      String dummyFileName="dummy" + fileName;
+    public
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+          defaultDiagram=
+            Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
+
+    protected
+      StateSpace ssBalanced = StateSpace.Transformation.toBalancedForm(ss);
+      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Eigenvalue ev[size(ss.A, 1)];
+      Integer nx=size(ss.A, 1);
+      Integer window=0;
+      Real eval[nx, 2];
+      Real revec[nx, nx];
+      Real levec[nx, nx];
+      Complex cev[size(ss.A, 1)];
+      Complex systemZeros[:]=
+          Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros(ssBalanced);
+      Boolean isStable;
+      Boolean isControllable;
+      Boolean isStabilizable;
+      Boolean isObservable;
+      Boolean isDetectable;
+
+      Real abs_evec[nx];
+      String xNames2[nx];
+      String heading="Eigenvalues" "Eigen values of system";
+      Eigenvalue evSorted[size(ss.A, 1)];
+      Integer evIndex[size(ss.A, 1)];
+      Complex zerosSorted[:];
+      Integer zerosIndex[size(systemZeros, 1)];
+      Integer nReal;
+
+      Integer i;
+      Integer k;
+      Complex evecComplex[size(ss.A, 1), size(ss.A, 1)];
+      Plot.Records.Curve curves[2];
+      Plot.Records.Diagram diagram2;
+      Boolean instableZeros=false;
+
+      String filePathOnly "NOT USED: Path to fileName";
+      String fileNameOnly "Name of fileName without extension and path";
+      String fileExtOnly "Extension of fileName";
+      String fileNameImg "General name (without extension) of file for a plot";
+      String fileNameImg2="none" "Current name of file for a plot";
+
+      Internal.AnalyseOptions analyseOptions2=analyseOptions;
+    algorithm
+      // ---------------------------------------------------------------------------------------------------
+      // The correct HTML format generated with this function can be checked with following commands:
+      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis(Modelica_LinearSystems2.StateSpace(A=[2,1,1;1,1,1;1,2,2], B=[1;2.2;3], C=[2,4,6;3,8,5], D=[6;4], yNames={"y1_test","y2_test"}, xNames={"xx1","xx2","xx3"}, uNames={"u1_test"}), description="Test file in HTML format from function 'analysis'.");
+      //   Modelica_LinearSystems2.StateSpace.Analysis.analysis(Modelica_LinearSystems2.StateSpace(A=[2, 1.43, 12, 3; 1, 1, 1, 43; 1, 3, 2, 2; 1, 1, 4.2, 1.2], B=[1, 2; 2.2, 3; 3, 1; 4, 0], C=[25, 1.4, 6.3, 1; 0.3, 8, 5, 1; 1, 3, 2, 2], D=[6, 4; 4, 2; 6, 5], yNames={"y1_test","y2_te","y3_"}, xNames={"xx1","x2","xxx3","xx4"}, uNames={"u1_test","u2_test"}));
+      // ---------------------------------------------------------------------------------------------------
+
+      (filePathOnly,fileNameOnly,fileExtOnly) :=
+        Modelica.Utilities.Files.splitPathName(fileName);
+      fileNameImg := fileNameOnly;
+
+      // If system has no inputs and outputs, modify analyze options that do not make sense
+      if size(ss.B, 2) == 0 or size(ss.C, 1) == 0 then
+        analyseOptions2.plotStepResponse := false;
+        analyseOptions2.plotFrequencyResponse := false;
+        analyseOptions2.printControllability := false;
+        analyseOptions2.printObservability := false;
+      end if;
+
+      // If system has no states, modify analyze options that do not make sense
+      if nx < 1 then
+         analyseOptions2.plotEigenValues          :=false;
+         analyseOptions2.plotInvariantZeros       :=false;
+         analyseOptions2.printEigenValues         :=false;
+         analyseOptions2.printEigenValueProperties:=false;
+         analyseOptions2.printInvariantZeros      :=false;
+      end if;
+
+      // If system is too large, do not print A,B,C,D matrices
+      if nx > 50 or size(ss.B, 2) > 50 or size(ss.C, 1) > 50 then
+         analyseOptions2.printSystem:=false;
+      end if;
+
+      // Get eigenvalues
+      // ---------------
+      (eval,levec,revec) := Modelica_LinearSystems2.Math.Matrices.eigenValues(
+        ss.A);
+
+      for i in 1:nx loop
+        cev[i].re := eval[i, 1];
+        cev[i].im := eval[i, 2];
+        ev[i].ev := cev[i];
+      end for;
+
+      (evSorted,evIndex) := Modelica_LinearSystems2.Internal.sortEigenvalue(ev);
+
+      // Build x names
+      // -------------
+      if size(ss.xNames, 1) <> nx or nx > 1 and ss.xNames[1]=="" then
+        for i in 1:nx loop
+          xNames2[i] := "x[" + String(i) + "]";
+        end for;
+      else
+        xNames2 := ss.xNames;
+      end if;
+
+      // Whole system checks
+      // ===================
+      // Stability check
+      isStable := true;
+      for i in 1:nx loop
+        isStable := isStable and ev[i].ev.re < 0;
+      end for;
+
+      if size(ss.B, 2) > 0 and size(ss.C, 1) > 0 then
+        // Controllability check, stabilizability check
+        isControllable := StateSpace.Analysis.isControllable(ssBalanced);
+        isStabilizable := StateSpace.Analysis.isStabilizable(ssBalanced);
+
+        // Observability check, detectability check
+        isObservable := StateSpace.Analysis.isObservable(ssBalanced);
+        isDetectable := StateSpace.Analysis.isDetectable(ssBalanced);
+      else
+        isControllable := false;
+        isStabilizable := false;
+        isObservable := false;
+        isDetectable := false;
+      end if;
+
+      // Analysis of single eingenvalues
+      ev := StateSpace.Internal.characterizeEigenvalue(ss, ev);
+
+      // Sort eigen values according to smallest imaginary value and restore the original order
+      evSorted := Modelica_LinearSystems2.Internal.sortEigenvalue(ev);
+
+      // Analysis file
+      // -------------
+      Modelica.Utilities.Files.removeFile(fileName);
+      Modelica.Utilities.Files.removeFile(dummyFileName);
+
+      // Text should be printed into new file in HTML environment
+      // --------------------------------------------------------
+      StateSpace.Analysis.analysis.printHTMLbasics(fileName, true);
+      StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
+
+      if analyseOptions2.printSystem then
+        printSystem(
+              ss,
+              fileName,
+              systemName,
+              description);
+
+        printSystem(
+              ss,
+              dummyFileName,
+              systemName,
+              description);
+      end if;
+
+      printHead1(
+            ss,
+            isStable,
+            isControllable,
+            isStabilizable,
+            isObservable,
+            isDetectable,
+            fileName,
+            analyseOptions=analyseOptions2);
+      printHead1(
+            ss,
+            isStable,
+            isControllable,
+            isStabilizable,
+            isObservable,
+            isDetectable,
+            dummyFileName,
+            analyseOptions=analyseOptions2);
+      StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
+
+      Modelica.Utilities.Streams.readFile(dummyFileName);
+
+      // Plot step response
+      // ------------------
+      if analyseOptions2.plotStepResponse then
+        Modelica.Utilities.Files.removeFile(dummyFileName);
+        print(
+          "<html>\n<body>\n<p>\n<b>Step responses</b>\n</p>\n</body>\n</html>",
+          dummyFileName);
+        Modelica.Utilities.Streams.readFile(dummyFileName);
+        StateSpace.Plot.step(ss=ssBalanced);
+        fileNameImg2 := fileNameImg + "Step.png";
+        DymolaCommands.Plot.ExportPlotAsImage(fileName=fileNameImg2, id=-1, includeInLog=false);
+        print("<p>\n<img src=\"" + fileNameImg2 + "\">\n</p>", fileName);
+      end if;
+
+      // Plot Bode plots
+      if analyseOptions2.plotFrequencyResponse then
+        Modelica.Utilities.Files.removeFile(dummyFileName);
+        print("<html>\n<body>\n<p>\n<b>Bode plots</b>\n</p>\n</body>\n</html>",
+          dummyFileName);
+        Modelica.Utilities.Streams.readFile(dummyFileName);
+        StateSpace.Plot.bodeMIMO(ss=ss, Hz=not analyseOptions.dB_w, dB=analyseOptions.dB_w);
+        //     fileNameImg2 := fileNameImg + "BodeMIMO1.png";
+        //     ExportPlotAsImage(
+        //       fileName=fileNameImg2,
+        //       id=-1,
+        //       includeInLog=false);
+      end if;
+
+      // Calculate the number of real eigenvalues
+      nReal := Modelica_LinearSystems2.Internal.numberOfRealZeros(cev);
+
+      // Construct complex eigenvector matrix
+      i := 1;
+      while i <= nx loop
+        if eval[i, 2] == 0.0 then
+
+          for jj in 1:nx loop
+            evecComplex[jj, i] := revec[jj, i] + 0*j;
+          end for;
+          i := i + 1;
+        else
+          for jj in 1:nx loop
+            evecComplex[jj, i] := revec[jj, i] + revec[jj, i + 1]*j;
+            evecComplex[jj, i + 1] := revec[jj, i] - revec[jj, i + 1]*j;
+          end for;
+          i := i + 2;
+        end if;
+      end while;
+
+      if analyseOptions2.printEigenValues then
+        printHead2a(
+              fileName,
+              analyseOptions=analyseOptions2,
+              printTable=(nReal > 0));
+        if nReal > 0 then
+          printTab1(
+                evSorted,
+                evIndex,
+                revec,
+                levec,
+                nReal,
+                xNames2,
+                fileName,
+                analyseOptions=analyseOptions2);
+        end if;
+
+        Modelica.Utilities.Files.removeFile(dummyFileName);
+        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
+        printHead2a(
+              dummyFileName,
+              analyseOptions=analyseOptions2,
+              printTable=(nReal > 0));
+        if nReal > 0 then
+          printTab1(
+                evSorted,
+                evIndex,
+                revec,
+                levec,
+                nReal,
+                xNames2,
+                dummyFileName,
+                analyseOptions=analyseOptions2);
+        end if;
+        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
+        Modelica.Utilities.Streams.readFile(dummyFileName);
+
+        printHead2b(
+              fileName,
+              analyseOptions=analyseOptions2,
+              printTable=(nReal < nx));
+        if nReal < nx then
+          printTab2(
+                evSorted,
+                evIndex,
+                revec,
+                levec,
+                nReal,
+                xNames2,
+                fileName,
+                analyseOptions=analyseOptions2);
+        end if;
+
+        Modelica.Utilities.Files.removeFile(dummyFileName);
+        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
+        printHead2b(
+              dummyFileName,
+              analyseOptions=analyseOptions2,
+              printTable=(nReal < nx));
+        if nReal < nx then
+          printTab2(
+                evSorted,
+                evIndex,
+                revec,
+                levec,
+                nReal,
+                xNames2,
+                dummyFileName,
+                analyseOptions=analyseOptions2);
+        end if;
+        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
+        Modelica.Utilities.Streams.readFile(dummyFileName);
+
+       // Plot eigenvalues and invariant zeros
+       if analyseOptions2.plotEigenValues or
+          analyseOptions2.plotInvariantZeros and size(systemZeros, 1) > 0 then
+          i := 0;
+          if analyseOptions2.plotEigenValues then
+            i := i + 1;
+            curves[i] := Plot.Records.Curve(
+                  x=eval[:, 1],
+                  y=eval[:, 2],
+                  legend="poles",
+                  autoLine=false,
+                  linePattern=Plot.Types.LinePattern.None,
+                  lineSymbol=Plot.Types.PointSymbol.Cross);
+          end if;
+
+          // Plot invariant zeros
+          if size(systemZeros, 1) > 0 and analyseOptions2.plotInvariantZeros then
+            i := i + 1;
+            curves[i] := Plot.Records.Curve(
+                  x=systemZeros[:].re,
+                  y=systemZeros[:].im,
+                  legend="zeros",
+                  autoLine=false,
+                  linePattern=Plot.Types.LinePattern.None,
+                  lineSymbol=Plot.Types.PointSymbol.Circle);
+          end if;
+
+          diagram2 := defaultDiagram;
+          diagram2.curve := curves[1:i];
+          Plot.diagram(diagram2, device);
+        end if;
+
+        if analyseOptions2.printEigenValueProperties then
+          printHead3(fileName);
+          printTab3(
+                evSorted,
+                evecComplex,
+                evIndex,
+                cev,
+                nReal,
+                xNames2,
+                fileName);
+
+          Modelica.Utilities.Files.removeFile(dummyFileName);
+          StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
+          printHead3(dummyFileName);
+          printTab3(
+                evSorted,
+                evecComplex,
+                evIndex,
+                cev,
+                nReal,
+                xNames2,
+                dummyFileName);
+          StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
+          Modelica.Utilities.Streams.readFile(dummyFileName);
+
+        end if;
+      end if;
+
+      // ZEROS
+      (zerosSorted,zerosIndex) :=
+        Modelica_LinearSystems2.Math.Complex.Vectors.sortComplex(systemZeros);
+      nReal := Modelica_LinearSystems2.Internal.numberOfRealZeros(zerosSorted);
+
+      if analyseOptions2.printInvariantZeros then
+        printHead4(fileName, printTable=(size(systemZeros, 1) > 0));
+        if size(systemZeros, 1) > 0 then
+          Modelica_LinearSystems2.StateSpace.Analysis.analysis.printTab4(
+                zerosSorted,
+                zerosIndex,
+                nReal,
+                fileName);
+        end if;
+
+        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
+        printHead4(dummyFileName, printTable=(size(systemZeros, 1) > 0));
+        if size(systemZeros, 1) > 0 then
+          printTab4(
+                zerosSorted,
+                zerosIndex,
+                nReal,
+                dummyFileName);
+        end if;
+        k := 0;
+        for i in 1:size(systemZeros, 1) loop
+          if systemZeros[i].re > 0 then
+            k := k + 1;
+          end if;
+        end for;
+        if k > 0 then
+          print("<p>\n<b>Note, that the system has " + String(k) +
+            " zeros in the right complex half-plane.</b>\n</p>", fileName);
+          print("<p>\n<b>Note, that the system has " + String(k) +
+            " zeros in the right complex half-plane.</b>\n</p>", dummyFileName);
+        end if;
+        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
+
+      end if;
+      Modelica.Utilities.Streams.readFile(dummyFileName);
+      Modelica.Utilities.Files.removeFile(dummyFileName);
+
+      print("\n\nAnalysis results have been written to file \"" +
+        Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+
+      // Last print of HTML environment
+      // --------------------------------------------------------
+      StateSpace.Analysis.analysis.printHTMLbasics(fileName, false);
+
+      // SUB FUNCTIONS
+
+    public
+      encapsulated function printSystem
+        "Print the state space system in html format on file"
+        import Modelica;
+        import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2.StateSpace;
+        import Modelica_LinearSystems2;
+
+        input StateSpace ss "State space system to analyze";
+        input String fileName="systemAnalysis.html"
+          "File on which the state space system is written in html format";
+        input String systemName="State Space System"
+          "Name of the state space system";
+        input String description="" "Description of system (used in html file)";
+        input String format=".6g" "Format of numbers (e.g. \"20.8e\")";
+
+        input Boolean htmlBasics=false
+          "True, if text should be printed within 'html' and 'body' environment, otherwise text printed into existing file fileName"
+          annotation (Dialog(group="HTML format"));
+        input Integer hSize(
+          min=1,
+          max=5) = 1
+          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)"
+          annotation (Dialog(group="HTML format"));
+      protected
+        Integer nx=size(ss.A, 1);
+        Integer nu=size(ss.B, 2);
+        Integer ny=size(ss.C, 1);
+        Integer c1=integer(ceil(nx/2) - 1);
+        Integer c2=integer(ceil(ny/2) - 1);
+        Integer dist=2;
+        Boolean centered=true
+          "True, if matrices columns should be centered, otherwise right aligned";
+
+        String td_align=if centered then "  <td style=\"text-align:center\">"
+             else "  <td style=\"text-align:right\">";
+
+      protected
+        Integer hSizeOK=if hSize < 1 then 1 else if hSize > 4 then 4 else hSize;
+        String heading="h" + String(hSizeOK);
+        String heading2="h" + String(hSizeOK + 1);
+        String heading3="h" + String(hSizeOK + 2);
+        Boolean printIndices;
+
+      algorithm
+        // ---------------------------------------------------------------------------------------------------
+        // The correct HTML format generated with this function can be checked with following commands:
+        //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printSystem(Modelica_LinearSystems2.StateSpace(A=[2,1,1;1,1,1;1,2,2], B=[1;2.2;3], C=[2,4,6;3,8,5], D=[6;4], yNames={"y1_test","y2_test"}, xNames={"xx1","xx2","xx3"}, uNames={"u1_test"}));
+        //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printSystem(Modelica_LinearSystems2.StateSpace(A=[2, 1.43, 12, 3; 1, 1, 1, 43; 1, 3, 2, 2; 1, 1, 4.2, 1.2], B=[1, 2; 2.2, 3; 3, 1; 4, 0], C=[25, 1.4, 6.3, 1; 0.3, 8, 5, 1; 1, 3, 2, 2], D=[6, 4; 4, 2; 6, 5], yNames={"y1_test","y2_te","y3_"}, xNames={"xx1","x2","xxx3","xx4"}, uNames={"u1_test","u2_test"}));
+        //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printSystem(ss=Modelica_LinearSystems2.StateSpace.Import.fromModel("Modelica.Mechanics.Rotational.Examples.First"), description="Test file in HTML format from function printSystem.");
+        // ---------------------------------------------------------------------------------------------------
+
+        if htmlBasics then
+          // Text should be printed into new file in HTML environment
+          // --------------------------------------------------------
+          StateSpace.Analysis.analysis.printHTMLbasics(fileName, true);
+        end if;
+
+        print("<" + heading + ">System report</" + heading + ">", fileName);
+        print("\n<" + heading2 + ">General information</" + heading2 + ">",
+          fileName);
+        //print("<h1>System report</h1>", fileName);
+        //print("\n<h2>General information</h2>", fileName);
+
+        if systemName == "" then
+        else
+          print("\n<" + heading3 + ">System name</" + heading3 + ">", fileName);
+          //print("\n<h3>System name</h3>", fileName);
+          print("<p>\n" + systemName + "\n</p>", fileName);
+        end if;
+
+        if description == "" then
+        else
+          print("\n<" + heading3 + ">Description</" + heading3 + ">", fileName);
+          //print("\n<h3>Description</h3>", fileName);
+          print("<p>\n" + description + "\n</p>", fileName);
+        end if;
+
+        print("\n<" + heading3 + ">Matrices</" + heading3 + ">", fileName);
+        //print("\n<h3>Matrices</h3>", fileName);
+        print(
+          "<p>\nThe system described in the state space representation\n</p>",
+          fileName);
+        print(
+          "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+           + "cellpadding=\"3\" border=\"0\"> ", fileName);
+        print("<tr><td>der(x) </td> <td>=</td> <td> Ax</td> <td> +</td><td> Bu</td></tr>
+         <tr><td> y </td>     <td>=</td> <td> Cx</td> <td> + </td><td>Du</td></tr>",
+          fileName);
+        print("</table>\n<p>\nis defined by\n</p>", fileName);
+
+        // ===============================
+        // Print signal names and matrices (print row and column indices if at least one matrix has more as 5 elements)
+        // ===============================
+        printIndices := size(ss.A, 1) > 5 or size(ss.B, 2) > 5 or size(ss.C, 1)
+           > 5;
+        Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml(
+                ss.uNames,
+                "uNames",
+                fileName=fileName,
+                printIndices=printIndices);
+        Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml(
+                ss.yNames,
+                "yNames",
+                fileName=fileName,
+                printIndices=printIndices);
+        Modelica_LinearSystems2.Math.Vectors.printStringVectorInHtml(
+                ss.xNames,
+                "xNames",
+                fileName=fileName,
+                printIndices=printIndices);
+
+        Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(
+                ss.A,
+                "A",
+                format=format,
+                fileName=fileName,
+                printIndices=printIndices);
+        Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(
+                ss.B,
+                "B",
+                format=format,
+                fileName=fileName,
+                printIndices=printIndices);
+        Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(
+                ss.C,
+                "C",
+                format=format,
+                fileName=fileName,
+                printIndices=printIndices);
+        Modelica_LinearSystems2.Math.Matrices.printMatrixInHtml(
+                ss.D,
+                "D",
+                format=format,
+                fileName=fileName,
+                printIndices=printIndices);
+
+        if ny == 0 and nu == 0 then
+          print(
+            "<p>\n<b>Note</b>, that the system has neither inputs nor outputs (and therefore matrices B, C, and D are empty matrices)!\n</p>",
+            fileName);
+        elseif ny == 0 then
+          print(
+            "<p>\n<b>Note</b>, that the system has no outputs (and therefore matrices C and D are empty matrices)!\n</p>",
+            fileName);
+        elseif nu == 0 then
+          print(
+            "<p>\n<b>Note</b>, that the system has no inputs (and therefore matrices B and D are empty matrices)!\n</p>",
+            fileName);
+        end if;
+
+        if htmlBasics then
+          // Last print of HTML environment
+          // --------------------------------------------------------
+          StateSpace.Analysis.analysis.printHTMLbasics(fileName, false);
+        end if;
+
+      end printSystem;
+
+      encapsulated function printHead1
+        "Print the heading of document for characteristics in html format on file"
+        import Modelica;
+        import Modelica.Utilities.Strings;
+        import Modelica_LinearSystems2;
+        import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2.StateSpace;
+
+        input StateSpace ss;
+        // This could be deleted sinc not used. But for reasons of beackward compatibility it is still here.
+        input Boolean isStable;
+        input Boolean isControllable;
+        input Boolean isStabilizable;
+        input Boolean isObservable;
+        input Boolean isDetectable;
+        input String fileName="systemHead1.html"
+          "File on which the information is written in html format";
+
+        input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
+            Modelica_LinearSystems2.Internal.AnalyseOptions(
+                  plotEigenValues=true,
+                  plotInvariantZeros=true,
+                  plotStepResponse=true,
+                  plotFrequencyResponse=true,
+                  printEigenValues=true,
+                  printEigenValueProperties=true,
+                  printInvariantZeros=true,
+                  printControllability=true,
+                  printObservability=true,
+                  headingEigenValues="Eigenvalues",
+                  headingInvariantzeros="Invariant zeros",
+                  headingStepResponse="Step response",
+                  headingFrequencyResponse="Frequency response");
+
+        input Boolean htmlBasics=false
+          "True, if text should be printed within 'html' and 'body' environment, otherwise text printed into existing file fileName"
+          annotation (Dialog(group="HTML format"));
+        input Integer hSize(
+          min=1,
+          max=5) = 2
+          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)"
+          annotation (Dialog(group="HTML format"));
+
+      protected
+        Integer hSizeOK=if hSize < 1 then 1 else if hSize > 5 then 5 else hSize;
+        String heading="h" + String(hSizeOK);
+
+      algorithm
+        // ---------------------------------------------------------------------------------------------------
+        // The correct HTML format generated with this function can be checked with following commands:
+        //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead1(Modelica_LinearSystems2.StateSpace(A=[2], B=[1], C=[1], D=[1]), false, false, false, true, false, htmlBasics=true, hSize=3);
+        // ---------------------------------------------------------------------------------------------------
+
+        if htmlBasics then
+          // Text should be printed into new file in HTML environment
+          // --------------------------------------------------------
+          StateSpace.Analysis.analysis.printHTMLbasics(fileName, true);
+        end if;
+
+        print("\n<" + heading + ">Characteristics</" + heading +
+          ">\n<p>\nThe system\n</p>\n<p> is ", fileName);
+
+        if analyseOptions.printControllability and analyseOptions.printObservability then
+          print((if isStable then " " else "<b>not</b> ") + "stable" + "\n<br>"
+             + (if isStable then if isControllable then "and it is " else
+            "but it is <b>not</b> " else if isControllable then "but it is "
+             else "and it is <b>not</b> ") + "controllable" + (if isStable
+             then "" else "\n<br>" + (if isControllable then
+            " and therefore it is " else if isStabilizable then " but it is "
+             else "and is <b>not</b> ") + "stabilizable.") +
+            "\n<br> The system is " + (if isObservable then " " else
+            "<b>not</b> ") + "observable" + (if isStable then "" else "\n<br>"
+             + (if isObservable then " and therefore it is " else if
+            isDetectable then " but it is " else "and is <b>not</b> ") +
+            "detectable.") + "\n<br>", fileName);
+        elseif not analyseOptions.printObservability and analyseOptions.printControllability then
+          print((if isStable then " " else "<b>not</b> ") + "stable" + "\n<br>"
+             + (if isStable then if isControllable then "and it is " else
+            "but it is <b>not</b> " else if isControllable then "but it is "
+             else "and it is <b>not</b> ") + "controllable" + (if isStable
+             then "" else "\n<br>" + (if isControllable then
+            " and therefore it is " else if isStabilizable then " but it is "
+             else "and is <b>not</b> ") + "stabilizable.") + "\n<br>", fileName);
+        elseif not analyseOptions.printControllability and analyseOptions.printObservability then
+          print((if isStable then " " else "<b>not</b> ") + "stable." +
+            "\n<br> The system is " + (if isObservable then " " else
+            "<b>not</b> ") + "observable" + (if isStable then "" else "\n<br>"
+             + (if isObservable then " and therefore it is " else if
+            isDetectable then " but it is " else "and is <b>not</b> ") +
+            "detectable.") + "\n<br>", fileName);
+        else
+          print((if isStable then " " else "<b>not</b> ") + "stable." +
+            "\n<br>", fileName);
+        end if;
+
+        print("</p>", fileName);
+
+        if htmlBasics then
+          // Last print of HTML environment
+          // --------------------------------------------------------
+          StateSpace.Analysis.analysis.printHTMLbasics(fileName, false);
+        end if;
+
+      end printHead1;
+
+      encapsulated function printHead2a
+        "Print the heading of document for eigenvalues in html format on file"
+        import Modelica;
+        import Modelica.Utilities.Strings;
+        import Modelica_LinearSystems2;
+        import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2.StateSpace;
+
+        input String fileName="systemHead2a.html"
+          "File on which the information is written in html format";
+        input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
+            Modelica_LinearSystems2.Internal.AnalyseOptions(
+                  plotEigenValues=true,
+                  plotInvariantZeros=true,
+                  plotStepResponse=true,
+                  plotFrequencyResponse=true,
+                  printEigenValues=true,
+                  printEigenValueProperties=true,
+                  printInvariantZeros=true,
+                  printControllability=true,
+                  printObservability=true,
+                  headingEigenValues="Eigenvalues",
+                  headingInvariantzeros="Invariant zeros",
+                  headingStepResponse="Step response",
+                  headingFrequencyResponse="Frequency response");
+
+        input Boolean printTable=true
+          "True, if the system has real eigenvalues to be printed in table";
+        input Integer hSize(
+          min=1,
+          max=5) = 3
+          "Size of heading of printed document (=1: Title, =2: Chapter, etc.)"
+          annotation (Dialog(group="HTML format"));
+      protected
+        Integer hSizeOK=if hSize < 1 then 1 else if hSize > 5 then 5 else hSize;
+        String heading="h" + String(hSizeOK);
+
+      algorithm
+        // ---------------------------------------------------------------------------------------------------
+        // The correct HTML format generated with this function can be checked with following commands:
+        //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead2a(htmlBasics=true, hSize=3);
+        // ---------------------------------------------------------------------------------------------------
+
+        print("\n<" + heading + ">Eigenvalues analysis</" + heading + ">",
+          fileName);
+        //print("<p>\n<b>Real eigenvalues</b>\n</p>", fileName);
+
+        if printTable then
+          print("<p>\nThe system has the following real eigenvalues.\n</p>",
+            fileName);
+          print(
+            "<table style=\"background-color:rgb(100, 100, 100);text-align:right\" "
+             + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
+          print("<caption>Real eigenvalues</caption>", fileName);
+          print(
+            "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+             +
+            "\n  <td> number </td>\n  <td> eigenvalue </td>\n  <td> T [s] </td>\n  <td> characteristics </td>",
+            fileName);
+
+          if analyseOptions.printEigenValueProperties then
+            print("  <td> contribution to states</td>", fileName);
+          end if;
+
+          print("</tr>", fileName);
+        else
+          print("<p>\nThe system has no real eigenvalues.\n</p>", fileName);
+        end if;
+
+      end printHead2a;
+
+      encapsulated function printHead2b
+        "Print the heading of document for conjugated complex pairs in html format on file"
+        import Modelica;
+        import Modelica.Utilities.Strings;
+        import Modelica_LinearSystems2;
+        import Modelica.Utilities.Streams.print;
+
+        input String fileName="systemHead2b.html"
+          "File on which the information is written in html format";
+        input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
+            Modelica_LinearSystems2.Internal.AnalyseOptions(
+                  plotEigenValues=true,
+                  plotInvariantZeros=true,
+                  plotStepResponse=true,
+                  plotFrequencyResponse=true,
+                  printEigenValues=true,
+                  printEigenValueProperties=true,
+                  printInvariantZeros=true,
+                  printControllability=true,
+                  printObservability=true,
+                  headingEigenValues="Eigenvalues",
+                  headingInvariantzeros="Invariant zeros",
+                  headingStepResponse="Step response",
+                  headingFrequencyResponse="Frequency response");
+        input Boolean printTable=true
+          "True, if the system has complex pairs to be printed in table";
+
+      algorithm
+        // ---------------------------------------------------------------------------------------------------
+        // The correct HTML format generated with this function can be checked with following commands:
+        //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead2b();
+        // ---------------------------------------------------------------------------------------------------
+
+        if printTable then
+          print(
+            "<p>\nThe system has the following complex conjugate pairs of eigenvalues.\n</p>",
+            fileName);
+          print(
+            "<table style=\"background-color:rgb(100, 100, 100);text-align:right\" "
+             + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
+          print("<caption>Complex conjugate pairs of eigenvalues</caption>",
+            fileName);
+          print(
+            "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+             +
+            "\n  <td> number </td>\n  <td> eigenvalue </td>\n  <td> freq. [Hz] </td>\n  <td> damping </td>\n  <td> characteristics </td>",
+            fileName);
+
+          if analyseOptions.printEigenValueProperties then
+            print("  <td> contribution to states</td>", fileName);
+          end if;
+
+          print("</tr>", fileName);
+        else
+          print(
+            "<p>\nThe system has no complex conjugate eigenvalue pairs.\n</p>",
+            fileName);
+        end if;
+
+      end printHead2b;
+
+      encapsulated function printHead3
+        "Print the heading of document for description in html format on file"
+        import Modelica;
+        import Modelica.Utilities.Strings;
+        import Modelica_LinearSystems2;
+        import Modelica.Utilities.Streams.print;
+
+        input String fileName="systemHead3.html"
+          "File on which the information is written in html format";
+        input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
+            Modelica_LinearSystems2.Internal.AnalyseOptions(
+                  plotEigenValues=true,
+                  plotInvariantZeros=true,
+                  plotStepResponse=true,
+                  plotFrequencyResponse=true,
+                  printEigenValues=true,
+                  printEigenValueProperties=true,
+                  printInvariantZeros=true,
+                  printControllability=true,
+                  printObservability=true,
+                  headingEigenValues="Eigenvalues",
+                  headingInvariantzeros="Invariant zeros",
+                  headingStepResponse="Step response",
+                  headingFrequencyResponse="Frequency response");
+
+      algorithm
+        print(
+          "<p>\nIn the tables above, the column <b>contribution to states</b> lists for each eigenvalue the states to which the"
+           +
+          " corresponding modal state z[i] contributes most. This information is based on the"
+           +
+          " two largest absolute values of the corresponding right eigenvector (if the second large value"
+           +
+          " is less than 5&nbsp;% of the largest contribution, it is not shown). Note"
+           +
+          " the <b>right eigenvector</b> v<sub>j</sub> and the <b>left eigenvector</b> u<sub>j</sub> of A satisfy the"
+           +
+          " following relationships with regards to <b>eigenvalue</b> &lambda;<sub>j</sub>,"
+           +
+          " state vector x and modal state vector z (u<sub>j</sub><sup>H</sup> denotes the conjugate transpose of u<sub>j</sub>):"
+           + " </p>" +
+          " <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">" +
+          " <tr><td width=\"50\"></td>" +
+          "\n    <td>A * v<sub>j</sub> = &lambda;<sub>j</sub> * v<sub>j</sub>; &nbsp;&nbsp;&nbsp;&nbsp;"
+           +
+          "         u<sub>j</sub><sup>H</sup> * A = &lambda;<sub>j</sub> * u<sub>j</sub><sup>H</sup>; &nbsp;&nbsp;&nbsp;&nbsp;"
+           +
+          "               x = V * z; &nbsp;&nbsp;&nbsp;&nbsp; V = [v<sub>1</sub>, v<sub>2</sub>, ...]</td>"
+           + "           </tr>" + "\n</table>" + "\n<p>" +
+          "\nIn the next table, for each state in the column <b>correlation to modal states</b>, the modal"
+           +
+          " states z[i] which contribute most to the corresponding state are summarized, that is"
+           + " the state is mostly composed of these modal states." +
+          "\nThis information is based on the two largest absolute values of row i of the"
+           +
+          " eigenvector matrix that is associated with eigenvalue i (if the second large value"
+           +
+          " is less than 5&nbsp;% of the largest contribution, it is not shown). This only holds"
+           +
+          " if the modal states z[i] are in the same order of magnitude. Otherwise, the listed modal states"
+           + " might be not the most relevant ones.</p>", fileName);
+
+        print(
+          "<table style=\"background-color:rgb(100, 100, 100); text-align:right\" "
+           + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">\n" +
+          "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+           +
+          "\n  <td> state </td>\n  <td> correlation to modal states </td>\n  <td> eigenvalue # </td>"
+           +
+          "\n  <td> freq. [Hz] </td>\n  <td> damping </td>\n  <td> T [s] </td>\n</tr>",
+          fileName);
+
+      end printHead3;
+
+      encapsulated function printHead4
+        "Print the heading of document for invariant zeros in html format on file"
+        import Modelica;
+        import Modelica_LinearSystems2;
+        import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2.StateSpace;
+
+        input String fileName="systemHead4.html"
+          "File on which the information is written in html format";
+        input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
+            Modelica_LinearSystems2.Internal.AnalyseOptions(
+                  plotEigenValues=true,
+                  plotInvariantZeros=true,
+                  plotStepResponse=true,
+                  plotFrequencyResponse=true,
+                  printEigenValues=true,
+                  printEigenValueProperties=true,
+                  printInvariantZeros=true,
+                  printControllability=true,
+                  printObservability=true,
+                  headingEigenValues="Eigenvalues",
+                  headingInvariantzeros="Invariant zeros",
+                  headingStepResponse="Step response",
+                  headingFrequencyResponse="Frequency response");
+        input Boolean printTable=true
+          "True, if the system has complex pairs to be printed in table";
+
+      algorithm
+        // ---------------------------------------------------------------------------------------------------
+        // The correct HTML format generated with this function can be checked with following commands:
+        //   Modelica_LinearSystems2.StateSpace.Analysis.analysis.printHead4(htmlEnv=true, hSize=3);
+        // ---------------------------------------------------------------------------------------------------
+
+        if printTable then
+          print("<p>\nThe system has the following invariant zeros.\n</p>",
+            fileName);
+          print(
+            "\n<table style=\"background-color:rgb(100, 100, 100); text-align:right\" "
+             + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
+          print("<caption>Invariant zeros</caption>", fileName);
+          print(
+            "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
+             +
+            "\n  <td> number </td>\n  <td> invariant zero </td>\n  <td> Time constant [s] </td>"
+             + "\n  <td> freq. [Hz] </td>\n  <td> damping </td>\n</tr>",
+            fileName);
+        else
+          print("<p>\nThe system has no invariant zeros.\n</p>", fileName);
+        end if;
+
+      end printHead4;
+
+      encapsulated function printHTMLbasics
+        "Print the html preamble or ending on file"
+        import Modelica.Utilities.Files;
+        import Modelica.Utilities.Streams;
+
+        input String fileName="systemReport.html"
+          "File on which the html basics should be written";
+        input Boolean printBegin=false
+          "True, if beginning of a html file should be printed, otherwise the ending"
+          annotation (choices(checkBox=true));
+
+      algorithm
+        if printBegin then
+          // First print of HTML environment into new file
+          Files.removeFile(fileName);
+          // Following doesn't work in Dymola
+          //Streams.print("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">", fileName);
+          Streams.print("<html>", fileName);
+          Streams.print(
+            "<head>\n  <title>Analysis of a state space system from Modelica LinearSystems2</title>\n</head>",
+            fileName);
+          Streams.print("<style type=\"text/css\">", fileName);
+          Streams.print("* { font-size: 10pt; font-family: Arial,sans-serif; }",
+            fileName);
+          Streams.print("</style>", fileName);
+        else
+          // Last print of HTML environment
+          Streams.print("</html>", fileName);
+        end if;
+      end printHTMLbasics;
+
+      encapsulated function printTab1
+        "Print the table with real eigenvalues in html format on file"
+        import Modelica;
+        import Modelica.Utilities.Strings;
+        import Modelica_LinearSystems2;
+        import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2.Internal.Eigenvalue;
+        import Modelica_LinearSystems2.Math.Complex;
+
+        input Eigenvalue evSorted[:];
+        input Integer evIndex[size(evSorted, 1)];
+        input Real r_evec[size(evSorted, 1), size(evSorted, 1)];
+        input Real l_evec[size(evSorted, 1), size(evSorted, 1)];
+        input Integer nReal;
+        input String xNames2[size(evSorted, 1)];
+        input String fileName;
+        input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
+            Modelica_LinearSystems2.Internal.AnalyseOptions(
+                  plotEigenValues=true,
+                  plotInvariantZeros=true,
+                  plotStepResponse=true,
+                  plotFrequencyResponse=true,
+                  printEigenValues=true,
+                  printEigenValueProperties=true,
+                  printInvariantZeros=true,
+                  printControllability=true,
+                  printObservability=true,
+                  headingEigenValues="Eigenvalues",
+                  headingInvariantzeros="Invariant zeros",
+                  headingStepResponse="Step response",
+                  headingFrequencyResponse="Frequency response");
+
+      protected
+        Integer nx=size(evSorted, 1);
+        Real w;
+        Real d;
+
+        Integer i;
+        Integer j;
+        Integer k;
+        String number;
+
+        Real r_abs_evec[nx];
+        Real l_abs_evec[nx];
+        Integer r_maxIndex1;
+        Integer l_maxIndex1;
+        Integer r_maxIndex2;
+        Integer l_maxIndex2;
+        //  Complex v_normalized[size(evSorted,1)];
+        Real r_abs_v_normalized;
+        Real l_abs_v_normalized;
+        Real r_v;
+        Real l_v;
+        Real r_absMax1;
+        Real l_absMax1;
+        Real r_absMax2;
+        Real l_absMax2;
+        Boolean r_two;
+        Boolean l_two;
+        Boolean r_first;
+        Boolean l_first;
+
+      algorithm
+        i := 1;
+        j := i;
+        while i <= nReal loop
+          // Build eigenvalue number
+
+          number := String(
+                  i,
+                  minimumLength=7,
+                  leftJustified=false);
+          j := j + 1;
+
+          // Determine largest value in eigenvector
+          k := evIndex[i] "Index with respect to unsorted eigen values";
+          r_abs_evec := abs(r_evec[:, k]);
+          l_abs_evec := abs(l_evec[:, k]);
+
+          r_first := true;
+          r_two := false;
+          r_absMax1 := 0;
+          r_maxIndex1 := 0;
+          r_absMax2 := 0;
+          r_maxIndex2 := 0;
+          r_abs_v_normalized := Modelica.Math.Vectors.norm(r_abs_evec, 1);
+
+          l_first := true;
+          l_two := false;
+          l_absMax1 := 0;
+          l_maxIndex1 := 0;
+          l_absMax2 := 0;
+          l_maxIndex2 := 0;
+          l_abs_v_normalized := Modelica.Math.Vectors.norm(l_abs_evec, 1);
+          for j in 1:nx loop
+            r_v := r_abs_evec[j];
+            l_v := l_abs_evec[j];
+
+            if r_first then
+              r_first := false;
+              r_absMax1 := r_v;
+              r_maxIndex1 := j;
+            elseif not r_two then
+              r_two := true;
+              if r_v < r_absMax1 then
+                r_absMax2 := r_v;
+                r_maxIndex2 := j;
+              else
+                r_absMax2 := r_absMax1;
+                r_maxIndex2 := r_maxIndex1;
+                r_absMax1 := r_v;
+                r_maxIndex1 := j;
+              end if;
+            elseif r_v > r_absMax1 then
+              r_absMax2 := r_absMax1;
+              r_maxIndex2 := r_maxIndex1;
+              r_absMax1 := r_v;
+              r_maxIndex1 := j;
+            elseif r_v > r_absMax2 then
+              r_absMax2 := r_v;
+              r_maxIndex2 := j;
+            end if;
+
+            if l_first then
+              l_first := false;
+              l_absMax1 := l_v;
+              l_maxIndex1 := j;
+            elseif not l_two then
+              l_two := true;
+              if l_v < l_absMax1 then
+                l_absMax2 := l_v;
+                l_maxIndex2 := j;
+              else
+                l_absMax2 := l_absMax1;
+                l_maxIndex2 := l_maxIndex1;
+                l_absMax1 := l_v;
+                l_maxIndex1 := j;
+              end if;
+            elseif l_v > l_absMax1 then
+              l_absMax2 := l_absMax1;
+              l_maxIndex2 := l_maxIndex1;
+              l_absMax1 := l_v;
+              l_maxIndex1 := j;
+            elseif l_v > l_absMax2 then
+              l_absMax2 := l_v;
+              l_maxIndex2 := j;
+            end if;
+
+          end for;
+
+          r_absMax1 := 100*r_absMax1/r_abs_v_normalized;
+          r_absMax2 := 100*r_absMax2/r_abs_v_normalized;
+
+          if r_absMax2 < 0.05*r_absMax1 then
+            r_two := false;
+          end if;
+
+          l_absMax1 := 100*l_absMax1/l_abs_v_normalized;
+          l_absMax2 := 100*l_absMax2/l_abs_v_normalized;
+
+          if l_absMax2 < 0.05*l_absMax1 then
+            l_two := false;
+          end if;
+
+          // Print data for one eigen value
+          print(
+            "<tr style=\"background-color:white\">\n  <td style=\"text-align:center\"> "
+             + number + " </td>\n  <td style=\"text-align:left\"> &nbsp; " +
+            String(evSorted[i].ev.re, format="14.4e") +
+            " </td>\n  <td style=\"text-align:left\"> &nbsp; " + (if evSorted[i].timeConstant
+             < 1e6 then String(evSorted[i].timeConstant, format="9.4f") else
+            "---") + " </td>\n  <td style=\"text-align:left\"> &nbsp; " + (if
+            evSorted[i].isStable then "" else "not ") + "stable, " + (if
+            evSorted[i].isStable then (if evSorted[i].isControllable then ""
+             else "not ") + "controllable, " else (if evSorted[i].isStabilizable
+             then "" else "not ") + "stabilizable, ") + (if evSorted[i].isStable
+             then (if evSorted[i].isObservable then "" else "not ") +
+            "observable " else (if evSorted[i].isDetectable then "" else "not ")
+             + "detectable ") + " </td>", fileName);
+
+          if analyseOptions.printEigenValueProperties then
+            print("  <td style=\"text-align:left\"> &nbsp; " + " z[" + String(i)
+               + "]" + " contributes to " + xNames2[r_maxIndex1] + " with " +
+              String(r_absMax1, format=".3g") + " %<br>" + (if r_two then
+              "&nbsp; " + " z[" + String(i) + "]" + " contributes to " +
+              xNames2[r_maxIndex2] + " with " + String(r_absMax2, format=".3g")
+               + " %" else "") + " </td>", fileName);
+          end if;
+
+          print("</tr>", fileName);
+
+          i := j;
+        end while;
+
+        print("</table>", fileName);
+      end printTab1;
+
+      encapsulated function printTab2
+        "Print the table with complex conjugate eigenvalues in html format on file"
+        import Modelica;
+        import Modelica.Utilities.Strings;
+        import Modelica_LinearSystems2;
+        import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2.Internal.Eigenvalue;
+        import Modelica_LinearSystems2.Math.Complex;
+
+        input Eigenvalue evSorted[:];
+        input Integer evIndex[size(evSorted, 1)];
+        input Real r_evec[size(evSorted, 1), size(evSorted, 1)];
+        input Real l_evec[size(evSorted, 1), size(evSorted, 1)];
+        input Integer nReal;
+        input String xNames2[size(evSorted, 1)];
+        input String fileName;
+        input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
+            Modelica_LinearSystems2.Internal.AnalyseOptions(
+                  plotEigenValues=true,
+                  plotInvariantZeros=true,
+                  plotStepResponse=true,
+                  plotFrequencyResponse=true,
+                  printEigenValues=true,
+                  printEigenValueProperties=true,
+                  printInvariantZeros=true,
+                  printControllability=true,
+                  printObservability=true,
+                  headingEigenValues="Eigenvalues",
+                  headingInvariantzeros="Invariant zeros",
+                  headingStepResponse="Step response",
+                  headingFrequencyResponse="Frequency response");
+
+      protected
+        Integer nx=size(evSorted, 1);
+
+        Integer i;
+        Integer k;
+        String number;
+        String number2;
+        Integer j;
+
+        Real r_abs_evec[nx];
+        Real l_abs_evec[nx];
+        Integer r_maxIndex1;
+        Integer r_maxIndex2;
+        Integer l_maxIndex1;
+        Integer l_maxIndex2;
+        Real r_abs_v_normalized;
+        Real l_abs_v_normalized;
+        Real r_v;
+        Real l_v;
+        Real r_absMax1;
+        Real r_absMax2;
+        Real l_absMax1;
+        Real l_absMax2;
+        Boolean r_two;
+        Boolean l_two;
+        Boolean r_first;
+        Boolean l_first;
+
+      algorithm
+        i := nReal + 1;
+        j := i;
+        while i <= nx loop
+          // Build eigenvalue number
+          number := String(i) + "/" + String(i + 1);
+          number2 := number;
+          number := Strings.repeat(max(0, 7 - Strings.length(number))) + number;
+          j := j + 2;
+
+          // Determine largest value in eigenvector
+          k := evIndex[i] "Index with respect to unsorted eigen values";
+
+          for i2 in 1:nx loop
+            r_abs_evec[i2] := sqrt(r_evec[i2, k]^2 + r_evec[i2, k + 1]^2);
+            l_abs_evec[i2] := sqrt(l_evec[i2, k]^2 + l_evec[i2, k + 1]^2);
+          end for;
+
+          r_first := true;
+          r_two := false;
+          r_absMax1 := 0;
+          r_maxIndex1 := 0;
+          r_absMax2 := 0;
+          r_maxIndex2 := 0;
+          r_abs_v_normalized := Modelica.Math.Vectors.norm(r_abs_evec, 1);
+          l_first := true;
+          l_two := false;
+          l_absMax1 := 0;
+          l_maxIndex1 := 0;
+          l_absMax2 := 0;
+          l_maxIndex2 := 0;
+          l_abs_v_normalized := Modelica.Math.Vectors.norm(l_abs_evec, 1);
+
+          for j in 1:nx loop
+            r_v := r_abs_evec[j];
+            l_v := l_abs_evec[j];
+
+            if r_first then
+              r_first := false;
+              r_absMax1 := r_v;
+              r_maxIndex1 := j;
+            elseif not r_two then
+              r_two := true;
+              if r_v < r_absMax1 then
+                r_absMax2 := r_v;
+                r_maxIndex2 := j;
+              else
+                r_absMax2 := r_absMax1;
+                r_maxIndex2 := r_maxIndex1;
+                r_absMax1 := r_v;
+                r_maxIndex1 := j;
+              end if;
+            elseif r_v > r_absMax1 then
+              r_absMax2 := r_absMax1;
+              r_maxIndex2 := r_maxIndex1;
+              r_absMax1 := r_v;
+              r_maxIndex1 := j;
+            elseif r_v > r_absMax2 then
+              r_absMax2 := r_v;
+              r_maxIndex2 := j;
+            end if;
+
+            if l_first then
+              l_first := false;
+              l_absMax1 := l_v;
+              l_maxIndex1 := j;
+            elseif not l_two then
+              l_two := true;
+              if l_v < l_absMax1 then
+                l_absMax2 := l_v;
+                l_maxIndex2 := j;
+              else
+                l_absMax2 := l_absMax1;
+                l_maxIndex2 := l_maxIndex1;
+                l_absMax1 := l_v;
+                l_maxIndex1 := j;
+              end if;
+            elseif l_v > l_absMax1 then
+              l_absMax2 := l_absMax1;
+              l_maxIndex2 := l_maxIndex1;
+              l_absMax1 := l_v;
+              l_maxIndex1 := j;
+            elseif l_v > l_absMax2 then
+              l_absMax2 := l_v;
+              l_maxIndex2 := j;
+            end if;
+
+          end for;
+          r_absMax1 := 100*r_absMax1/r_abs_v_normalized;
+          r_absMax2 := 100*r_absMax2/r_abs_v_normalized;
+          if r_absMax2 < 0.05*r_absMax1 then
+            r_two := false;
+          end if;
+
+          l_absMax1 := 100*l_absMax1/l_abs_v_normalized;
+          l_absMax2 := 100*l_absMax2/l_abs_v_normalized;
+          if l_absMax2 < 0.05*l_absMax1 then
+            l_two := false;
+          end if;
+
+          // Print data for one eigen value
+          print(
+            "<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> "
+             + number + " </td>" + "\n  <td style=\"text-align:left\"> &nbsp; "
+             + String(evSorted[i].ev.re, format="14.4e") + " &plusmn; " +
+            String(evSorted[i].ev.im, format="12.4e") + "j" + " </td>" +
+            "\n  <td style=\"text-align:left\"> &nbsp; " + String(evSorted[i].frequency,
+            format="9.4f") + " </td>" +
+            "\n  <td style=\"text-align:left\"> &nbsp; " + String(evSorted[i].damping,
+            format="9.4f") + " </td>" +
+            "\n  <td style=\"text-align:left\"> &nbsp; " + (if evSorted[i].isStable
+             then "" else "not ") + "stable, " + (if evSorted[i].isStable then
+            (if evSorted[i].isControllable then "" else "not ") +
+            "controllable, " else (if evSorted[i].isStabilizable then "" else
+            "not ") + "stabilizable, ") + (if evSorted[i].isStable then (if
+            evSorted[i].isObservable then "" else "not ") + "observable " else
+            (if evSorted[i].isDetectable then "" else "not ") + "detectable ")
+             + " </td>", fileName);
+
+          if analyseOptions.printEigenValueProperties then
+            print("  <td style=\"text-align:left\"> &nbsp; " + " z[" + number2
+               + "]" + " contribute to " + xNames2[r_maxIndex1] + " with " +
+              String(r_absMax1, format=".3g") + " %<br>" + (if r_two then
+              "&nbsp; " + " z[" + number2 + "]" + " contribute to " + xNames2[
+              r_maxIndex2] + " with " + String(r_absMax2, format=".3g") + " %"
+               else "") + " </td>", fileName);
+          end if;
+
+          print("</tr>", fileName);
+
+          i := j;
+        end while;
+
+        print("</table>", fileName);
+      end printTab2;
+
+      encapsulated function printTab3
+        "Print the table with eigenvalues in html format on file"
+        import Modelica;
+        import Modelica.Utilities.Strings;
+        import Modelica_LinearSystems2;
+        import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2.Internal.Eigenvalue;
+        import Modelica_LinearSystems2.Math.Complex;
+
+        input Eigenvalue evSorted[:];
+        input Complex evecComplex[:, :];
+        input Integer evIndex[size(evecComplex, 1)];
+        input Complex cev[size(evecComplex, 1)];
+        input Integer nReal;
+        input String xNames2[size(evecComplex, 1)];
+        input String fileName;
+        input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
+            Modelica_LinearSystems2.Internal.AnalyseOptions(
+                  plotEigenValues=true,
+                  plotInvariantZeros=true,
+                  plotStepResponse=true,
+                  plotFrequencyResponse=true,
+                  printEigenValues=true,
+                  printEigenValueProperties=true,
+                  printInvariantZeros=true,
+                  printControllability=true,
+                  printObservability=true,
+                  headingEigenValues="Eigenvalues",
+                  headingInvariantzeros="Invariant zeros",
+                  headingStepResponse="Step response",
+                  headingFrequencyResponse="Frequency response");
+
+      protected
+        Integer nx=size(evecComplex, 1);
+
+        Integer maxIndex1;
+        Integer maxIndex2;
+
+        Complex v_normalized[size(evecComplex, 1)];
+        Real abs_v_normalized;
+        Real v;
+        Real absMax1;
+        Real absMax2;
+        Boolean two;
+        Boolean first;
+        Integer j;
+        Integer k;
+        Integer iw1;
+        Integer iw2;
+        String number1;
+        String number2;
+        Real w1;
+        Real w2;
+        Real d1;
+        Real d2;
+
+      algorithm
+        for i in 1:nx loop
+          // Normalize i-th row of complex eigenvector matrix and determine two largest elements
+          v_normalized := Complex.Vectors.normalize(evecComplex[i, :]);
+          first := true;
+          two := false;
+          absMax1 := 0;
+          maxIndex1 := 0;
+          absMax2 := 0;
+          maxIndex2 := 0;
+          j := 1;
+          abs_v_normalized := Complex.Vectors.norm(v_normalized, 1);
+          while j <= nx loop
+            if cev[j].im == 0 then
+              v := abs(v_normalized[j].re);
+              k := j;
+              j := j + 1;
+            else
+              v := 2*Complex.'abs'(v_normalized[j]);
+              k := j;
+              j := j + 2;
+            end if;
+
+            if first then
+              first := false;
+              absMax1 := v;
+              maxIndex1 := k;
+            elseif not two then
+              two := true;
+              if v < absMax1 then
+                absMax2 := v;
+                maxIndex2 := k;
+              else
+                absMax2 := absMax1;
+                maxIndex2 := maxIndex1;
+                absMax1 := v;
+                maxIndex1 := k;
+              end if;
+            elseif v > absMax1 then
+              absMax2 := absMax1;
+              maxIndex2 := maxIndex1;
+              absMax1 := v;
+              maxIndex1 := k;
+            elseif v > absMax2 then
+              absMax2 := v;
+              maxIndex2 := k;
+            end if;
+          end while;
+
+          if abs_v_normalized > 1e-30 then
+            absMax1 := absMax1/abs_v_normalized;
+            absMax2 := absMax2/abs_v_normalized;
+          end if;
+
+          if absMax2 < 0.05*absMax1 then
+            two := false;
+          end if;
+
+          // Determine frequency and number of corresponding eigenvalue
+          (w1,d1) := Complex.frequency(cev[maxIndex1]);
+          iw1 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex1, evIndex);
+          if iw1 <= nReal then
+            number1 := String(iw1);
+          else
+            number1 := String(iw1) + "/" + String(iw1 + 1);
+          end if;
+
+          if two then
+            (w2,d2) := Complex.frequency(cev[maxIndex2]);
+            iw2 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex2, evIndex);
+            if iw2 <= nReal then
+              number2 := String(iw2);
+            else
+              number2 := String(iw2) + "/" + String(iw2 + 1);
+            end if;
+          end if;
+
+          if two then
+            print(
+              "<tr style=\"background-color:white\">\n  <td rowspan=2 style=\"text-align:left\"> &nbsp; "
+               + xNames2[i] + " </td>" +
+              "\n  <td style=\"text-align:left\"> &nbsp; is composed of " +
+              String(100*absMax1, format="5.1f") + "% by z[" + number1 +
+              "]</td>" + "\n  <td style=\"text-align:center\"> &nbsp; " +
+              number1 + "</td>" +
+              "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal
+               then "---" else String(w1, format="9.4f")) + "</td>" +
+              "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal
+               then "---" else String(d1, format="9.4f")) + "</td>" +
+              "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal
+               then String(evSorted[i].timeConstant, format="9.4f") else
+              "--- </td>") + "\n</tr>\n<tr style=\"background-color:white\">"
+               + "\n  <td style=\"text-align:left\"> &nbsp; is composed of " +
+              String(100*absMax2, format="5.1f") + "% by z[" + number2 +
+              "]</td>" + "\n  <td style=\"text-align:center\"> &nbsp; " +
+              number2 + "</td>" +
+              "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw2 <= nReal
+               then "---" else String(w2, format="9.4f")) + "</td>" +
+              "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw2 <= nReal
+               then "---" else String(d2, format="9.4f")) + "</td>" +
+              "\n  <td style=\"text-align:center\"> &nbsp; " + (if (iw2 <=
+              nReal and abs(cev[maxIndex2].re) > 1e-10) then String(1/abs(cev[
+              maxIndex2].re), format="9.4f") else "--- </td>\n</tr>"), fileName);
+          else
+            print(
+              "<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> &nbsp; "
+               + xNames2[i] + " </td>" +
+              "\n  <td style=\"text-align:left\"> &nbsp; is composed of " +
+              String(100*absMax1, format="5.1f") + "% by z[" + number1 +
+              "]</td>" + "\n  <td style=\"text-align:center\"> &nbsp; " +
+              number1 + "</td>" +
+              "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal
+               then "---" else String(w1, format="9.4f")) + "</td>" +
+              "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal
+               then "---" else String(d1, format="9.4f")) + "</td>" +
+              "\n  <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal
+               then String(evSorted[i].timeConstant, format="9.4f") else
+              "--- </td>\n</tr>"), fileName);
+          end if;
+          //     print("<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> &nbsp; " + xNames2[i] + " </td>\n  <td style=\"text-align:left\"> &nbsp; "
+          //        + " is composed of " + String(100*absMax1, format="5.1f") + "% by z[" +
+          //       number1 + "]" + (if two then " <br>" + " &nbsp; " + " is composed of " +
+          //       String(100*absMax2, format="5.1f") + "% by z[" + number2 + "]" else "") + " </td> <td style=\"text-align:center\"> &nbsp; "
+          //        + number1 + (if two then "<br> &nbsp; " + number2 else Strings.repeat(9))
+          //        + " </td> <td style=\"text-align:center\"> &nbsp; " + (if iw1 <= nReal then
+          //             "---" else String(w1, format="9.4f")) + (if two then "<br> &nbsp; "
+          //        + (if iw2 <= nReal then "---" else String(w2, format="9.4f")) else
+          //       Strings.repeat(9)) + " </td>\n  <td style=\"text-align:center\"> &nbsp; " +
+          //       (if iw1 <= nReal then "---" else String(d1, format="9.4f")) + (if two then
+          //             "<br> &nbsp; " + (if iw2 <= nReal then "---" else String(d2,
+          //       format="9.4f")) else "") + " </td>\n  <td style=\"text-align:center\"> &nbsp; "
+          //        + (if (iw1 <= nReal) then String(evSorted[i].timeConstant, format="9.4f") else
+          //             "---") + (if two then "<br> &nbsp; " + (if (iw2 <= nReal and abs(
+          //       cev[maxIndex2].re) > 1e-10) then String(1/abs(cev[maxIndex2].re),
+          //       format="9.4f") else "---") else "") + " </td>\n</tr> ", fileName);
+
+        end for;
+        print("</table>", fileName);
+
+      end printTab3;
+
+      encapsulated function printTab4
+        "Print the table with eigenvalues in html format on file"
+        import Modelica;
+        import Modelica.Utilities.Strings;
+        import Modelica_LinearSystems2;
+        import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2.Internal.Eigenvalue;
+        import Modelica_LinearSystems2.Math.Complex;
+
+        input Complex systemZeros[:];
+        input Integer evIndex[size(systemZeros, 1)];
+        input Integer nReal;
+        input String fileName;
+        input Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
+            Modelica_LinearSystems2.Internal.AnalyseOptions(
+                  plotEigenValues=true,
+                  plotInvariantZeros=true,
+                  plotStepResponse=true,
+                  plotFrequencyResponse=true,
+                  printEigenValues=true,
+                  printEigenValueProperties=true,
+                  printInvariantZeros=true,
+                  printControllability=true,
+                  printObservability=true,
+                  headingEigenValues="Eigenvalues",
+                  headingInvariantzeros="Invariant zeros",
+                  headingStepResponse="Step response",
+                  headingFrequencyResponse="Frequency response");
+
+      protected
+        Integer nz=size(systemZeros, 1);
+
+        String number;
+        Real timeConstant;
+        Real freq;
+        Real damp;
+
+      algorithm
+        for i in 1:nReal loop
+          // Build eigenvalue number
+
+          number := String(
+                  i,
+                  minimumLength=7,
+                  leftJustified=false);
+          timeConstant := if abs(systemZeros[i].re) > 10*Modelica.Constants.eps
+             then 1/abs(systemZeros[i].re) else 1/(10*Modelica.Constants.eps);
+
+          print(
+            "<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> &nbsp; "
+             + number + " </td>" + "\n  <td> &nbsp; " + String(systemZeros[i].re,
+            format="14.4e") + " </td>" + "\n  <td> &nbsp; " + String(
+            timeConstant, format="9.4f") + " </td>" +
+            "\n  <td style=\"text-align:center\"> &nbsp; --- </td>" +
+            "\n  <td style=\"text-align:center\"> &nbsp; --- </td>\n</tr>",
+            fileName);
+
+        end for;
+
+        for i in nReal + 1:2:nz loop
+          number := String(i) + "/" + String(i + 1);
+          number := Strings.repeat(max(0, 7 - Strings.length(number))) + number;
+
+          // Determine frequency and number of corresponding zero
+          (freq,damp) := Complex.frequency(systemZeros[i]);
+
+          print(
+            "<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> &nbsp; "
+             + number + " </td>" + "\n  <td style=\"text-align:left\"> &nbsp; "
+             + String(systemZeros[i].re, format="14.4e") + " &plusmn; " +
+            String(systemZeros[i].im, format="12.4e") + "j </td>" +
+            "\n  <td style=\"text-align:center\"> &nbsp; --- </td>" +
+            "\n  <td style=\"text-align:left\"> &nbsp; " + String(freq, format=
+            "9.4f") + " </td>" + "\n  <td style=\"text-align:left\"> &nbsp; "
+             + String(damp, format="9.4f") + " </td>\n</tr>", fileName);
+
+        end for;
+
+        print("</table>\n", fileName);
+      end printTab4;
+
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+Modelica_LinearSystems2.StateSpace.Analysis.<b>analysis</b>(ss);
+   or
+Modelica_LinearSystems2.StateSpace.Analysis.<b>analysis</b>(
+  ss,
+  analyseOptions=<a href=\"modelica://Modelica_LinearSystems2.Internal.AnalyseOptions\">analyseOptions</a>,
+  fileName,
+  systemName,
+  description);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This function analyzes a state space system
+</p>
+<blockquote><pre>
+der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
+    <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>     <label for=\"eqn1\">(1)</label>
+    <b>x</b>(t=0) = <b>x</b><sub>0</sub>
+</pre></blockquote>
+<p>
+based on its poles, i.e. the eigenvalues, and the zeros of the system.
+The system will be checked for stability, controllability and observability. In the case that the system is not stable stabilizability and detectability are examined. Furthermore, stability, controllability, observability, stabilizability, and detectability are indicated for each eigenvalue.
+</p>
+
+<h5>Stability</h5>
+<p>
+System (1) is stable if and only if all eigenvalues of the matrix <b>A</b> have negative real parts.
+The calculation of the eigenvalues is based on the LAPACK routine dgeev.
+</p>
+
+<h5>Controllability</h5>
+<p>
+System (1) is said to be controllable if, starting from any initial state <b>x</b><sub>0</sub>, the system can be driven by appropriate inputs to any final state <b>x</b><sub>1</sub> within some finite time window. Equivalent is that the eigenvalues of <b>A</b>-<b>BK</b> can  arbitrarily be assigned by an appropriate choice of the matrix <b>K</b>.
+</p>
+
+<h5>Stabilizability</h5>
+<p>
+System (1) is said to be stabilizable if all the unstable eigenvalues, i.e. all <tt>s</tt> with Re(<tt>s</tt>)>=0, of <b>A</b> are controllable. Therefore, a controllable system is always stabilizable. An equivalent definition of stabilizability is, that a system is said to be stabilizable if there exist a matrix <b>K</b> such that <b>A</b>-<b>BK</b> is stable.
+</p>
+
+<h5>Observability</h5>
+<p>
+System (1) is said to be observable if the (arbitrary) initial state <b>x</b><sub>0</sub> can be uniquely determined from any state <b>x</b>(t<sub>1</sub>), t<sub>1</sub>>0, from the knowledge of the input <b>u</b>(t) and output <b>y</b>(t). With other words,  from the system's outputs it is possible to determine the behavior of the entire system. Equivalent is, that the eigenvalues of <b>A</b>-<b>LC</b> can be arbitrarily be assigned by an appropriate choice of matrix <b>L</b>.
+Observability is called the dual concept of controllability, since a system (<b>A</b>,<b>B</b>,<b>C</b>,<b>D</b>) is observable if the system (<b>A</b><sup>T</sup>, <b>C</b><sup>T</sup>, <b>B</b><sup>T</sup>, <b>D</b><sup>T</sup>) is controllable.
+</p>
+
+<h5>Detectability</h5>
+<p>
+System (1) is said to be detectable if all the unstable eigenvalues, i.e. all <tt>s</tt> with Re(<tt>s</tt>)>=0, of <b>A</b> are observable. Therefore, a observable system is always detectable. An equivalent definition of detectability is, that a system is said to be detectable if there exist a matrix <b>L</b> such that <b>A</b>-<b>LC</b> is stable.
+Detectability is called the dual concept of stabilizability, since a system (<b>A</b>,<b>B</b>,<b>C</b>,<b>D</b>) is detectable if the system (<b>A</b><sup>T</sup>, <b>C</b><sup>T</sup>, <b>B</b><sup>T</sup>, <b>D</b><sup>T</sup>) is stabilizable.
+</p>
+
+<h5>Algorithm to test controllability/stabilizability and observability/detectability respectively</h5>
+<p>
+The test of controllability and stabilizability is performed with the staircase algorithm which transforms the system (<b>A</b>,<b>B</b>,<b>C</b>,<b>D</b>) into the controller-Hessenberg form (<b>A</b><sub>H</sub>, <b>B</b><sub>H</sub>, <b>C</b><sub>H</sub>, <b>D</b>) with <b>A</b><sub>H</sub> is a block upper Hessenberg matrix and <b>B</b><sub>H</sub>=[<b>B</b><sub>1</sub>; 0] with triangular matrix <b>B</b><sub>1</sub> with rank(<b>B</b><sub>1</sub>) = rank(<b>B</b>).
+In <b>A</b><sub>H</sub>=[<b>A</b><sub>c</sub>, *,0, <b>A</b><sub>nc</sub>) the eigenvalues of the matrices <b>A</b><sub>c</sub> and <b>A</b><sub>nc</sub> are the controllable eigenvalues and uncontrollable eigenvalues of <b>A</b> respectively.
+The test of observability and detectability is performed by testing the system (<b>A</b><sup>T</sup>, <b>C</b><sup>T</sup>, <b>B</b><sup>T</sup>, <b>D</b><sup>T</sup>) with respect to controllability and stabilizability.
+</p>
+
+<h5>Solution of a linear time invariant system </h5>
+<p>
+The solution <b>x</b>(t) of the initial value problem (1) consists of the homogeneous part (zero input response) <b>x</b><sub>h</sub>(t) and the inhomogeneous part x<sub>i</sub>(t). The zero input solution is given by
+</p>
+<blockquote><pre>
+<b>x</b><sub>h</sub>(t) = exp(<b>A</b>*(t-t<sub>0</sub>))<b>x</b><sub>0</sub>.
+</pre></blockquote>
+<p>
+The system can also be represented as a linear combination of the modal states <b>z</b>,
+</p>
+<blockquote><pre>
+<b>x</b> = <b>V</b><b>z</b>
+</pre></blockquote>
+<p>
+i.e. the states of a similar system, with
+</p>
+<blockquote><pre>
+der(<b>z</b>) = <b>V</b><sup>-1</sup><b>AVz</b> + <b>V</b><sup>-1</sup><b>B</b><b>u</b>
+</pre></blockquote>
+<p>
+where the system matrix <b>V</b><sup>-1</sup><b>AV</b> is the real Jordan form. For single real eigenvectors the system is decoupled, i.e. the solution of the modal states are denoted by
+<blockquote><pre>
+z<sub>i</sub> = exp(s<sub>i</sub> t)*z<sub>0i</sub>
+</pre></blockquote>
+<p>
+The behavior of the modal states is determined as the solution of a linear first order differential equation for real eigenvalues. Since this behavior is well known, the behavior of the x<sub>i</sub> can at least roughly be estimated by means of the behavior of the most relevant modal states. Therefore, the contribution of the modal states to the states is computed as an indication of the original system behavior.
+</p>
+
+<h5>Contribution of the modal states to the states</h5>
+<p>
+Generally, as described above, the states of the system can be described as linear combination of modal states and, therefore, the states can be characterized to a certain extend by the modal states if the proportions of the combination are known. Hence, for each modal state z<sub>i</sub> of the vector <b>z</b> the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub>| of the corresponding right eigenvector <b>v</b><sub>i</sub> indicate the proportion of <b>z</b><sub>i</sub> that is contributed to the state x<sub>j</sub>.
+On the other hand, the composition of xi is indicated by the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>|, i.e. the elements |v<sub>i,j</sub>|/|<b>v</b><sub>i</sub><sup>T</sup>| of the corresponding row <b>v</b><sub>i</sub><sup>T</sup> of the eigenvector matrix <b>V</b> indicate the proportion of the state x<sub>i</sub> that is contributed by the modal state z<sub>j</sub>.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+  ss=StateSpace(
+    A=[-3,2,-3,4,5,6; 0,6,7,8,9,4; 0,2,3,0,78,6; 0,1,2,2,3,3; 0,13,34,0,0,1; 0,
+      0,0,-17,0,0],
+    B=[1,0; 0,1; 1,0; 0,1; 1,0; 0,1],
+    C=[0,0,1,0,1,0; 0,1,0,0,1,1],
+    D=[0,0; 0,0],
+    xNames={\"x1\",\"x2\",\"x3\",\"x4\",\"x5\",\"x6\"},
+    uNames={\"u1\",\"u2\"}, yNames={\"y1\",\"y2\"});
+
+  String fileName=\"analysis.html\";
+  String systemName=\"Demonstration System\";
+  String description=\"System to demonstrate the usage of Modelica_LinearSystems2.StateSpace.Analysis.anlysis()\"
+
+<b>algorithm</b>
+  Modelica_LinearSystems2.StateSpace.Analysis.analysis(ss, fileName=fileName, systemName=systemName, description=description)
+//  gives:
+</pre></blockquote>
+
+<h4>System report</h4>
+<p>
+The system <b>Demonstation System</b>
+</p>
+<blockquote><pre>
+der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
+    <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>
+</pre></blockquote>
+<p>
+is defined by
+</p>
+<blockquote><pre>
+        x1   x2   x3   x4   x5   x6            u1  u2
+    x1  -3    2   -3    4    5    6         x1  1   0
+    x2   0    6    7    8    9    4         x2  0   1
+A = x3   0    2    3    0   78    6     B = x3  1   0
+    x4   0    1    2    2    3    3         x4  0   1
+    x5   0   13   34    0    0    1         x5  1   0
+    x6   0    0    0  -17    0    0         x6  0   1
+
+        x1   x2   x3   x4   x5   x6            u1  u2
+C = y1   0    0    1    0    1    0     D = y1  0   0
+    y2   0    1    0    0    1    1         y2  0   0
+</pre></blockquote>
+
+<h5>Description</h5>
+<p>
+System to demonstrate the usage of Modelica_LinearSystems2.StateSpace.Analysis.analysis()
+</p>
+
+<h5>Characteristics</h5>
+<p>The system
+<br> is
+not stable
+<br>but it is controllable
+<br> and therefore it is stabilizable
+<br> The system is not observable
+<br> but it is detectable
+</p>
+
+<p>
+<b><big>Eigenvalues analysis</big></b>
+<br><br>
+<b>Real eigenvalues</b>
+</p>
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
+<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td><td> eigenvalue </td> <td> T [s] </td>  <td> characteristics </td><td> contribution to states</td></tr>
+<tr>
+ <td style=\"text-align:center\">       1 </td> <td style=\"text-align:left\"> &nbsp;   -4.9874e+001 </td> <td style=\"text-align:left\"> &nbsp;    0.0201 </td> <td style=\"text-align:left\"> &nbsp; stable, controllable, observable  </td> <td style=\"text-align:left\"> &nbsp;  z[1] contributes to x3 with 54.6 %<br>&nbsp;  z[1] contributes to x5 with 37 % </td> </tr>
+<tr>
+ <td style=\"text-align:center\">       2 </td> <td style=\"text-align:left\"> &nbsp;   -3.0000e+000 </td> <td style=\"text-align:left\"> &nbsp;    0.3333 </td> <td style=\"text-align:left\"> &nbsp; stable, controllable, not observable  </td> <td style=\"text-align:left\"> &nbsp;  z[2] contributes to x1 with 100 %<br> </td> </tr>
+<tr>
+ <td style=\"text-align:center\">       3 </td> <td style=\"text-align:left\"> &nbsp;    2.9891e+000 </td> <td style=\"text-align:left\"> &nbsp;    0.3346 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[3] contributes to x2 with 51.9 %<br>&nbsp;  z[3] contributes to x1 with 23.9 % </td> </tr>
+<tr>
+ <td style=\"text-align:center\">       4 </td> <td style=\"text-align:left\"> &nbsp;    5.5825e+001 </td> <td style=\"text-align:left\"> &nbsp;    0.0179 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[4] contributes to x3 with 48.4 %<br>&nbsp;  z[4] contributes to x5 with 32.5 % </td> </tr>
+</table>
+
+<p>
+<b>Conjugated complex pairs of eigenvalues</b>
+</p>
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
+<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td>  <td> contribution to states</td></tr>
+<tr>
+ <td style=\"text-align:left\">     5/6 </td> <td style=\"text-align:left\"> &nbsp;    1.0299e+000 &plusmn;  6.5528e+000j </td> <td style=\"text-align:left\"> &nbsp;    1.0557 </td> <td style=\"text-align:left\"> &nbsp;   -0.1553 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[    5/6] contribute to x6 with 35.9 %<br>&nbsp;  z[    5/6] contribute to x2 with 20.6 % </td> </tr>
+</table>
+
+<p>
+In the table above, the column <b>contribution to states</b> lists for each eigenvalue the states
+to which thecorresponding modal state contributes most. This information is based on the
+two largest absolute values of the corresponding right eigenvector (if the second large value
+is less than 5&nbsp;% of the largest contribution, it is not shown).
+</p>
+
+<p>
+In the next table, for each state in the column <b>correlation to modal states</b>, the modal
+states which contribute most to the coresponding state are summarized, i.e. the state is mostly composed of these modal states
+This information is based on the two largest absolute values of row i of the
+eigenvector matrix that is associated with eigenvalue i (if the second large value
+is less than 5&nbsp;% of the largest contribution, it is not shown). This only holds
+if the modal states are in the same order of magnitude. Otherwise, the modal states
+listed in the last column might be not the most relevant one.
+</p>
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
+<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> state </td> <td> composition </td> <td> eigenvalue #</td> <td> freq. [Hz] </td> <td> damping </td> <td> T [s] </td></tr>
+<tr>
+ <td style=\"text-align:left\"> &nbsp; x1 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  42.5% by z[2] <br> &nbsp;  is composed of  35.4% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 2<br> &nbsp; 5/6 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    1.0557 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp;    0.0201<br> &nbsp; --- </td> </tr>
+<tr>
+ <td style=\"text-align:left\"> &nbsp; x2 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  44.2% by z[3] <br> &nbsp;  is composed of  43.7% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 3<br> &nbsp; 5/6 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    1.0557 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp;    0.3333<br> &nbsp; --- </td> </tr>
+<tr>
+ <td style=\"text-align:left\"> &nbsp; x3 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  36.9% by z[1] <br> &nbsp;  is composed of  36.3% by z[4] </td> <td style=\"text-align:center\"> &nbsp; 1<br> &nbsp; 4 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp;    0.3346<br> &nbsp;    0.0179 </td> </tr>
+<tr>
+ <td style=\"text-align:left\"> &nbsp; x4 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  88.9% by z[5/6] <br> &nbsp;  is composed of   9.8% by z[4] </td> <td style=\"text-align:center\"> &nbsp; 5/6<br> &nbsp; 4 </td> <td style=\"text-align:center\"> &nbsp;    1.0557<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp;   -0.1553<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    0.0179 </td> </tr>
+<tr>
+ <td style=\"text-align:left\"> &nbsp; x5 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  45.3% by z[1] <br> &nbsp;  is composed of  44.1% by z[4] </td> <td style=\"text-align:center\"> &nbsp; 1<br> &nbsp; 4 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp;    0.0000<br> &nbsp;    0.0179 </td> </tr>
+<tr>
+ <td style=\"text-align:left\"> &nbsp; x6 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  95.7% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 5/6          </td> <td style=\"text-align:center\"> &nbsp;    1.0557          </td> <td style=\"text-align:center\"> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
+</table>
+
+<p>
+<b>Invariant zeros</b>
+</p>
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
+<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> invariant zero </td><td> Time constant [s] </td> <td> freq. [Hz] </td> <td> damping </td></tr>
+<tr>
+ <td style=\"text-align:left\"> &nbsp;       1 </td> <td> &nbsp;   -5.4983e+001 </td> <td> &nbsp;    0.0182 </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
+<tr>
+ <td style=\"text-align:left\"> &nbsp;       2 </td> <td> &nbsp;   -3.0000e+000 </td> <td> &nbsp;    0.3333 </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
+<tr>
+ <td style=\"text-align:left\"> &nbsp;     3/4 </td> <td style=\"text-align:left\"> &nbsp;    3.2417e+000 &plusmn;  5.6548e+000j </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:left\"> &nbsp;    1.0374 </td> <td style=\"text-align:left\"> &nbsp;   -0.4973 </td> </tr>
+</table>
+</html>", revisions="<html>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>"));
+    end analysis2;
   end Analysis;
 
   encapsulated package Design
@@ -5322,7 +7248,7 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
       input Boolean zeros=true "= true, to plot the (invariant) zeros of ss "
         annotation (choices(checkBox=true));
 
-      input Boolean print=false
+      input Boolean print=true
         "= true, to print the selection to the output window"
         annotation (choices(checkBox=true));
 
@@ -5331,53 +7257,57 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
             Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros()
              else if poles then
             Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
-            heading="Poles (x)") else
+            heading="Eigenvalues (x)") else
             Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
             heading="Invariant zeros (o)"));
     protected
       Integer nx=size(ss.A, 1);
-      Real eval[nx, 2];
-      Real invZerosRe[:];
-      Real invZerosIm[:];
+      Real EigReal[:, 2];
+      Real InvZerosReal[:,2];
       Complex invZeros[:];
-      Complex eig[size(ss.A,1)];
+      Complex eig[:];
       Plot.Records.Curve curves[2];
       Integer i;
       Plot.Records.Diagram diagram2;
+      Real Ab[size(ss.A,1),size(ss.A,1)];
+      Real Bb[size(ss.A,1),size(ss.B,2)];
+      Real Cb[size(ss.C,1),size(ss.A,1)];
     algorithm
-      // Determine eigen values
-      if poles then
-        eval := Modelica.Math.Matrices.eigenValues(ss.A);
+      if poles and size(ss.A, 1) > 0 then
+        EigReal := Modelica_LinearSystems2.Math.Matrices.eigenValuesAsRealMatrix(ss.A);
+      else
+        EigReal := fill(0.0,0,2);
       end if;
 
-      if zeros then
-        invZeros := StateSpace.Analysis.invariantZeros(ss);
-        invZerosRe := fill(0, size(invZeros, 1));
-        invZerosIm := fill(0, size(invZeros, 1));
-        for i in 1:size(invZeros, 1) loop
-          invZerosRe[i] := invZeros[i].re;
-          invZerosIm[i] := invZeros[i].im;
-        end for;
+      if zeros and size(ss.A,1) > 0 and size(ss.B,2) > 0 and size(ss.C,1) > 0 then
+        (,Ab,Bb,Cb) :=Modelica_LinearSystems2.Internal.balanceABC(
+          ss.A,
+          ss.B,
+          ss.C);
+        InvZerosReal := Modelica_LinearSystems2.StateSpace.Internal.invariantZerosWithRealMatrix(Ab,Bb,Cb,ss.D);
+      else
+        InvZerosReal :=fill(0.0,  0, 2);
       end if;
 
       i := 0;
       if poles then
         i := i + 1;
         curves[i] := Plot.Records.Curve(
-              x=eval[:, 1],
-              y=eval[:, 2],
-              legend="poles",
+              x=EigReal[:, 1],
+              y=EigReal[:, 2],
+              legend="Eigenvalues",
+              lineColor={0,0,255},
               autoLine=false,
               linePattern=Plot.Types.LinePattern.None,
               lineSymbol=Plot.Types.PointSymbol.Cross);
       end if;
-
       if zeros then
         i := i + 1;
         curves[i] := Plot.Records.Curve(
-              x=invZerosRe,
-              y=invZerosIm,
-              legend="zeros",
+              x=InvZerosReal[:,1],
+              y=InvZerosReal[:,2],
+              legend="invariant zeros",
+              lineColor={255,0,0},
               autoLine=false,
               linePattern=Plot.Types.LinePattern.None,
               lineSymbol=Plot.Types.PointSymbol.Circle);
@@ -5389,14 +7319,20 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
 
       if print then
          if poles then
-            for i in 1:nx loop
-              eig[i].re := eval[i,1];
-              eig[i].im := eval[i,2];
+            eig :=fill(Complex(0), size(EigReal, 1));
+            for i in 1:size(eig,1) loop
+               eig[i].re :=EigReal[i, 1];
+               eig[i].im :=EigReal[i, 2];
             end for;
             Modelica_LinearSystems2.Math.Complex.Vectors.printHTML(eig,heading="Eigenvalues", name="eigenvalue");
          end if;
 
          if zeros then
+            invZeros :=fill(Complex(0), size(InvZerosReal, 1));
+            for i in 1:size(invZeros,1) loop
+               invZeros[i].re :=InvZerosReal[i, 1];
+               invZeros[i].im :=InvZerosReal[i, 2];
+            end for;
             Modelica_LinearSystems2.Math.Complex.Vectors.printHTML(invZeros,heading="Invariant zeros", name="invariant zero");
          end if;
       end if;
@@ -5466,14 +7402,16 @@ and results in
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Math;
       import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Internal;
 
       input StateSpace ss "State space system";
       input Integer iu=1 "Index of input";
       input Integer iy=1 "Index of output";
       input Integer nPoints(min=2) = 200 "Number of points";
       input Boolean autoRange=true
-        "True, if abszissa range is automatically determined";
+        "= true, if abszissa range is automatically determined";
       input Modelica.SIunits.Frequency f_min=0.1
         "Minimum frequency value, if autoRange = false";
       input Modelica.SIunits.Frequency f_max=10
@@ -5494,15 +7432,30 @@ and results in
       input Boolean dB=false
         "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
                                                                                 annotation(choices(checkBox=true),Diagram(enable=magnitude));
+      input Boolean onFile=false
+        "= true, if frequency response is stored on file as matrix [f,a,phi]" annotation(choices(checkBox=true));
+      input String fileName="frequencyResponse.mat"
+        "If onFile=true, file on which the frequency response will be stored"  annotation(Dialog(enable=onFile));
+      input String matrixName=if Hz and not dB then "fHz_a_phiDeg" elseif
+                                 Hz and dB then "fHz_adB_phiDeg" elseif
+                                 not Hz and dB then "f_adB_phiDeg" else "f_a_phiDeg"
+        "If onFile=true, Name of matrix on file" annotation(Dialog(enable=onFile));
 
     protected
-      ZerosAndPoles zp "ZP-Transfer functions to be plotted";
-      StateSpace ss_siso(
-        redeclare Real A[size(ss.A, 1), size(ss.A, 2)],
-        redeclare Real B[size(ss.B, 1), 1],
-        redeclare Real C[1, size(ss.C, 2)],
-        redeclare Real D[1, 1]);
+      Real A[size(ss.A, 1), size(ss.A, 2)];
+      Real B[size(ss.B, 1), 1];
+      Real C[1, size(ss.C, 2)];
+      Real D[1, 1];
 
+      Real Eig[size(ss.A,1), 2];
+      Real InvZeros[:,2];
+      Real f[nPoints];
+      Real a[nPoints] "Absolute value (magnitude)";
+      Real phi[nPoints];
+      Real gain;
+
+      Real fap[nPoints,if onFile then 3 else 0];
+      Boolean success;
     algorithm
       // Check that system has inputs and outputs
       if size(ss.B, 2) == 0 then
@@ -5517,30 +7470,41 @@ and results in
         return;
       end if;
 
+      // Extract desired SISO system
       assert(iu <= size(ss.B, 2) and iu > 0, "index for input is " + String(iu)
          + " which is not in [1, " + String(size(ss.B, 2)) + "].");
       assert(iy <= size(ss.C, 1) and iy > 0, "index for output is " + String(iy)
          + " which is not in [1, " + String(size(ss.C, 1)) + "].");
-      ss_siso := StateSpace(
-            A=ss.A,
-            B=matrix(ss.B[:, iu]),
-            C=transpose(matrix(ss.C[iy, :])),
-            D=matrix(ss.D[iy, iu]));
-      zp := StateSpace.Conversion.toZerosAndPoles(ss_siso, tol);
 
-      ZerosAndPoles.Plot.bode(
-            zp,
-            nPoints,
-            autoRange,
-            f_min,
-            f_max,
-            Hz=Hz,
-            magnitude=magnitude,
-            dB=dB,
-            phase=phase,
-            defaultDiagram=defaultDiagram,
-            device=device);
+      // Extract SISO system and balance it
+      (,A,B,C) :=Internal.balanceABC(A=ss.A, B=matrix(ss.B[:, iu]),
+                                     C=transpose(matrix(ss.C[iy, :])));
+      D :=matrix(ss.D[iy, iu]);
 
+      // Compute eigenvalues and invariant zeros (as Real Matrices)
+      Eig := Math.Matrices.eigenValuesAsRealMatrix(A,balance=false);
+      InvZeros := StateSpace.Internal.invariantZerosWithRealMatrix(A,B,C,D);
+      gain := Internal.frequencyResponseGain(A,B,C,D,InvZeros,Eig);
+
+      // Compute frequency response values
+      (f,a,phi) :=Modelica_LinearSystems2.Internal.frequencyResponse(gain,
+                     InvZeros, Eig, nPoints, autoRange, f_min, f_max,
+                     Hz, dB, defaultDiagram.logX);
+
+      // Bode plot
+      Internal.frequencyResponsePlot(f,a,phi,autoRange,f_min,f_max,magnitude,
+                                     phase,Hz,dB,defaultDiagram,device);
+
+      // Store frequency response values on file
+      if onFile then
+         fap :=[f,a,phi];
+         Modelica.Utilities.Files.removeFile(fileName);
+         success:=writeMatrix(fileName,matrixName,fap,append=false);
+         if success then
+            Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
+                     Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+         end if;
+      end if;
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -5592,12 +7556,14 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 
     encapsulated function bodeMIMO
       "Plot bode plot of all transfer functions, corresponding to the state space system"
-
+      import Modelica.Utilities.Streams.print;
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Plot;
+      import Modelica_LinearSystems2.Math;
+      import Modelica_LinearSystems2.Internal;
 
       input StateSpace ss "State space system";
       input Integer nPoints(min=2) = 200 "Number of points";
@@ -5628,13 +7594,39 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
       input Boolean dB=false
         "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
                                                                                 annotation(choices(checkBox=true),Diagram(enable=magnitude));
+
+      input Boolean onFile=false
+        "= true, if frequency response is stored on file as matrix [f,a,phi]" annotation(choices(checkBox=true));
+      input String fileName="frequencyResponse.mat"
+        "If onFile=true, file on which the frequency response will be stored"  annotation(Dialog(enable=onFile));
+      input String matrixName=if Hz and not dB then "fHz_a_phiDeg" elseif
+                                 Hz and dB then "fHz_adB_phiDeg" elseif
+                                 not Hz and dB then "f_adB_phiDeg" else "f_a_phiDeg"
+        "If onFile=true, prefix name of matrix on file" annotation(Dialog(enable=onFile));
+
     protected
-      ZerosAndPoles zp[size(ss.C, 1), size(ss.B, 2)]
-        "ZerosAndPoles object to be plotted";
-      Plot.Records.Diagram diagram2=defaultDiagram;
+      Real A[    size(ss.A, 1), size(ss.A, 2)];
+      Real Bfull[size(ss.B, 1), size(ss.B, 2)];
+      Real Cfull[size(ss.C, 1), size(ss.C, 2)];
+
+      Real B[size(ss.B, 1), 1];
+      Real C[1, size(ss.C, 2)];
+      Real D[1,1];
+
+      Real Eig[size(ss.A,1), 2];
+      Real InvZeros[:,2];
+      Real f[nPoints];
+      Real a[nPoints] "Absolute value (magnitude)";
+      Real phi[nPoints];
+      Real gain;
+
+      Real fap[nPoints,if onFile then 3 else 0];
+      Boolean success;
+
       String yNames[size(ss.C, 1)];
       String uNames[size(ss.B, 2)];
 
+      Plot.Records.Diagram diagram2=defaultDiagram;
     algorithm
       // Check that system has inputs and outputs
       if size(ss.B, 2) == 0 then
@@ -5656,26 +7648,53 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
         yNames[i1] := if ss.yNames[i1] == "" then "y" + String(i1) else ss.yNames[
           i1];
       end for;
-      zp := StateSpace.Conversion.toZerosAndPolesMIMO(ss, tol);
 
+      // Balance system
+      (,A,Bfull,Cfull) :=Internal.balanceABC(A=ss.A, B=ss.B, C=ss.C);
+
+      // Compute eigen values
+      Eig := Math.Matrices.eigenValuesAsRealMatrix(A,balance=false);
+
+      // Remove output file, if onFile=true
+      if onFile then
+         Modelica.Utilities.Files.removeFile(fileName);
+      end if;
+
+      // Perform computation from every input to every output
       for i1 in 1:size(ss.C, 1) loop
         for i2 in 1:size(ss.B, 2) loop
-          diagram2.heading := defaultDiagram.heading + "  " + uNames[i2] + " -> " +
-            yNames[i1];
-          ZerosAndPoles.Plot.bode(
-            zp[i1, i2],
-            nPoints,
-            autoRange[i1, i2],
-            f_min[i1, i2],
-            f_max[i1, i2],
-            magnitude=magnitude,
-            phase=phase,
-            Hz=Hz,
-            dB=dB,
-            defaultDiagram=diagram2,
-            device=device);
+          // Compute zeros
+          B :=matrix(ss.B[:, i2]);
+          C :=transpose(matrix(ss.C[i1, :]));
+          D :=matrix(ss.D[i1, i2]);
+          InvZeros := StateSpace.Internal.invariantZerosWithRealMatrix(A,B,C,D);
+          gain := Internal.frequencyResponseGain(A,B,C,D,InvZeros,Eig);
+
+          // Compute frequency response values
+          (f,a,phi) :=Modelica_LinearSystems2.Internal.frequencyResponse(gain,
+                         InvZeros, Eig, nPoints, autoRange[i1, i2], f_min[i1, i2],
+                         f_max[i1, i2], Hz, dB, defaultDiagram.logX);
+
+          // Bode plot
+          diagram2.heading := defaultDiagram.heading + "  " + uNames[i2] +
+                              " -> " + yNames[i1];
+          Internal.frequencyResponsePlot(f,a,phi,autoRange[i1, i2],
+                                         f_min[i1, i2], f_max[i1, i2],magnitude,
+                                         phase,Hz,dB,diagram=diagram2,
+                                         device=device);
+
+          // Store result optionally on file
+          if onFile then
+             fap :=[f,a,phi];
+             success:=writeMatrix(fileName,matrixName+"_"+uNames[i2]+"_"+yNames[i1],fap,append=true);
+          end if;
         end for;
       end for;
+
+      if success then
+         Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
+                        Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+      end if;
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -6194,6 +8213,8 @@ This function plots the initial responses of a state space system for the initia
 
     encapsulated function toZerosAndPoles
       "Generate a zeros-and-poles representation from a SISO state space representation"
+      import Modelica.Utilities.Streams.print;
+
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Complex;
@@ -6292,10 +8313,8 @@ This function plots the initial responses of a state space system for the initia
     algorithm
       if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
           Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
-
         Poles := Complex.Internal.eigenValues_dhseqr(ssm.A);
         //ssm.A is of upper Hessenberg form
-
         Zeros := StateSpace.Analysis.invariantZeros(ssm);
 
         if size(ss.C, 1) <> 1 or size(ss.B, 2) <> 1 then
@@ -6313,9 +8332,7 @@ This function plots the initial responses of a state space system for the initia
 
         v := getReOutsidePolesZeros(Poles, Zeros);
         frequency := Complex(v);
-
         Gs := ZerosAndPoles.Analysis.evaluate(zp, frequency);
-
         As := -ssm.A;
         for i in 1:size(As, 1) loop
           As[i, i] := As[i, i] + frequency.re;
@@ -6323,12 +8340,10 @@ This function plots the initial responses of a state space system for the initia
 
         pk := StateSpace.Internal.partialGain(As, ssm.B[:, 1]);
         gain := (ssm.C[1, size(As, 1)]*pk + ss.D[1, 1])/Gs.re;
-
         zp := ZerosAndPoles(
               z=Zeros,
               p=Poles,
               k=gain);
-
       else
         zp := ZerosAndPoles(
               z=fill(Complex(0), 0),
@@ -6482,7 +8497,7 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
 
     encapsulated function toZerosAndPolesMIMO
       "Generate a zeros-and-poles representation from a MIMO state space representation"
-
+      import Modelica.Utilities.Streams.print;
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Complex;
@@ -7099,6 +9114,95 @@ Matrix T has to be diagonalizable, i.e. the algebraic and geometric multipliciti
 </p>
 </html>"));
     end toDiagonalForm;
+
+    encapsulated function toBalancedForm
+      "Perform the similarity transformation to a balanced form (to make further numerical computations on the StateSpace system more reliable)"
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+
+      input StateSpace ss "State space system";
+      output StateSpace ssBalanced(
+        redeclare Real A[size(ss.A, 1), size(ss.A, 2)],
+        redeclare Real B[size(ss.B, 1), size(ss.B, 2)],
+        redeclare Real C[size(ss.C, 1), size(ss.C, 2)],
+        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]) "Balanced ss";
+    algorithm
+      (,ssBalanced.A, ssBalanced.B, ssBalanced.C) :=
+        Modelica_LinearSystems2.Internal.balanceABC(
+            ss.A,
+            ss.B,
+            ss.C);
+      ssBalanced.D :=ss.D;
+      ssBalanced.uNames := ss.uNames;
+      ssBalanced.yNames := ss.yNames;
+
+      annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+ssBalanced = StateSpace.Transformation.<b>toBalancedForm</b>(ss);
+</pre></blockquote>
+
+<h4>Description</h4>
+
+<p>
+Balancing a linear dynamic system in state space form ss means to find a 
+state transformation x_new = T*x = diagonal(scale)*x
+so that the transformed system is better suited for numerical algorithms.
+In more detail:
+</p>
+
+<p>
+This function performs a similarity transformation with T=diagonal(scale) such that S_scale
+</p>
+
+<pre>             |inv(T)*ss.A*T, inv(T)*ss.B|
+   S_scale = |                          |
+             |       ss.C*T,     0      |
+</pre>
+
+<p>
+has a better condition as system matrix S
+</p>
+
+<pre>       |ss.A, ss.B|
+   S = |          |
+       |ss.C, 0   |
+</pre>
+that is, conditionNumber(S_scale) &le; conditionNumber(S). The elements of vector scale
+are multiples of 2 which means that this function does not introduce round-off errors.
+</p>
+
+
+<h4>Example</h4>
+
+<blockquote>
+<pre>import Modelica.Math.Matrices.norm;
+ss = Modelica_LinearSystems2.StateSpace(A=[1, -10,  1000; 0.01,  0,  10; 0.005,  -0.01,  10], 
+                                        B=[100, 10; 1,0; -0.003, 1], 
+                                        C=[-0.5, 1, 100], 
+                                        D=[0,0]);
+sb = Modelica_LinearSystems2.StateSpace.Transformation.toBalancedForm(ss);
+
+-> Results in: 
+norm(ss.A) = 1000.15, norm(ss.B) = 100.504, norm(ss.C) = 100.006
+norm(sb.A) = 10.8738, norm(sb.B) = 16.0136, norm(sb.C) = 10.2011
+</pre>
+</blockquote>
+
+<p>
+The algorithm is taken from
+</p>
+<dl>
+<dt>H. D. Joos, G. Gr&uuml;bel:
+<dd><b>RASP'91 Regulator Analysis and Synthesis Programs</b><br>
+    DLR - Control Systems Group 1991
+</dl>
+<p>
+which is based on the <code>balance</code> function from EISPACK.
+</p>
+</html>"));
+    end toBalancedForm;
 
     encapsulated function toIrreducibleForm
       "Calculate a minimal controllable and observable block Hessenberg realization of a given SISO state-space representation "
@@ -8405,6 +10509,180 @@ to separate the uncontrollable poles from the controllable poles.
             D=ss.D);
 
     end householder;
+
+    encapsulated function invariantZerosWithRealMatrix
+      "Compute invariant zeros of linear state space system (system given by A,B,C,D matrices)"
+      import Modelica;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+      import Complex;
+
+      input Real A[:,size(A,1)] "A-matrix of linear state space system";
+      input Real B[size(A,1),:] "B-matrix of linear state space system";
+      input Real C[:,size(A,1)] "C-matrix of linear state space system";
+      input Real D[size(C,1),size(B,2)] "D-matrix of linear state space system";
+
+      output Real InvariantZeros[:,2]
+        "Finite, invariant zeros of linear state space system; size(Zeros,1) <= size(A,1); Zeros[:,1]: Real part, Zeros[:,2]: Imaginary part";
+
+    protected
+      Integer n;
+      Integer m;
+      Integer p;
+      Real Ar[:, :];
+      Real Br[:, :];
+      Real Cr[:, :];
+      Real Dr[:, :];
+
+      Real Af[:, :];
+      Real Bf[:, :];
+      Real AfBf[:, :];
+
+      Real V2[:, :];
+      Real Vf[:, :];
+      Real R[:, :];
+
+      Integer na;
+      Real alphaReal[:];
+      Real alphaImag[:];
+      Real beta[:];
+      Integer info;
+      Real zerosMax;
+      Real absZero[:];
+
+      Integer j;
+    algorithm
+      if min(size(B)) == 0 or min(size(C)) == 0 then
+        // no inputs or no outputs
+        InvariantZeros := fill(0.0,0,2);
+      else
+        // Reduce system
+        (Ar,Br,Cr,Dr,n,m,p) := StateSpace.Internal.reduceRosenbrock(A,B,C,D);
+        if n > 0 then
+          (Ar,Br,Cr,Dr,n,m,p) := StateSpace.Internal.reduceRosenbrock(
+                transpose(Ar),
+                transpose(Cr),
+                transpose(Br),
+                transpose(Dr));
+        end if;
+        if n == 0 then
+           InvariantZeros := fill(0.0,0,2);
+        else
+          (,R,,V2) := Matrices.QR(Matrices.fliplr(transpose([Cr, Dr])));
+          Vf := Matrices.fliplr(V2);
+          AfBf := [Ar, Br]*Vf;
+          Af := AfBf[:, 1:size(Ar, 2)];
+          Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
+
+          (alphaReal,alphaImag,beta,info) :=
+             Modelica_LinearSystems2.Math.Matrices.LAPACK.dggev_eigenValues(Af,Bf);
+          assert(info == 0,
+            "Failed to compute invariant zeros with function invariantZerosWithRealMatrix(..)");
+
+          InvariantZeros := fill(0.0, size(beta, 1),2);
+
+          /* The pencil (Af,Bf) has n eigenvalues, since the transformation to this
+             form is done so that Bf is regular. Therefore, the generalized eigenvalues
+             represented by alpha[i]/beta[i] have the property that beta[i] cannot be zero
+             and a division by beta[i] is uncritical.
+
+             |alpha| / beta <= zerosMax
+             if |alpha| <= beta*zerosMax then
+                zero is used
+             else
+                assumed that zero is at infinity (i.e. it is ignored)
+          */
+          j := 0;
+          zerosMax := 1.0e4*Modelica.Math.Matrices.norm([Af, Bf], p=1);
+          absZero := Modelica_LinearSystems2.StateSpace.Internal.absComplexVector(alphaReal, alphaImag);
+          for i in 1:size(beta, 1) loop
+             if absZero[i] <= beta[i]*zerosMax then
+                j := j + 1;
+                InvariantZeros[j,1] := alphaReal[i]/beta[i];
+                InvariantZeros[j,2] := alphaImag[i]/beta[i];
+             end if;
+          end for;
+
+          if j == 0 then
+             InvariantZeros := fill(0.0, 0,2);
+          else
+             InvariantZeros := InvariantZeros[1:j,:];
+          end if;
+        end if;
+      end if;
+      annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+InvariantZeros = StateSpace.Internal.<b>invariantZerosWithRealMatrix</b>(A,B,C,D)
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Computes the invariant zeros of a system in state space form:
+</p>
+<blockquote><pre>
+der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>
+     <b>y</b> = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>
+</pre></blockquote>
+<p>
+The invariant zeros of this system are defined as the variables
+s  that make the Rosenbrock matrix of the system
+</p>
+<pre>
+    | s<b>I-A</b>   <b>-B</b> |
+    |           |
+    | <b>C</b>       <b>D</b> |
+</pre>
+<p>
+singular.
+</p>
+<p>
+This function applies the algorithm described in [1] where the system (<b>A</b>, <b>B</b>, <b>C</b>, <b>D</b>) is reduced to a new system (<b>A</b>r, <b>B</b>r <b>C</b>r, <b>D</b>r) with the same zeros and with <b>D</b>r of full rank.
+</p>
+
+<p>
+The zeros are returned as a matrix InvariantZeros[:,2] where InvariantZeros[i,1] is the real and InvariantZeros[i,2] is the imaginary part
+of the complex zero i.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[1, 1, 1;0, 1, 1;0,0,1],
+    B=[1;0;1],
+    C=[0,1,1],
+    D=[0]);
+
+  Complex zeros[:];
+
+<b>algorithm</b>
+  zeros := Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros(ss);
+// zeros = {1, 0}
+</pre></blockquote>
+
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Emami-Naeini, A. and Van Dooren, P. (1982):</dt>
+<dd> <b>Computation of Zeros of Linear Multivariable Systems</b>.
+     Automatica, 18, pp. 415-430.<br>&nbsp;</dd>
+</dl>
+</html>", revisions="<html>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th>Date</th>
+    <th>Author</th>
+    <th>Comment</th>
+  </tr>
+  <tr>
+    <td valign=\"top\">2010-05-31</td>
+    <td valign=\"top\">Marcus Baur, DLR-RM</td>
+    <td valign=\"top\">Realization</td>
+  </tr>
+</table>
+</html>"));
+    end invariantZerosWithRealMatrix;
 
     encapsulated function invariantZeros2
       "Compute invariant zeros of linear SISO state space system with a generalized system matrix [A, B, C, D] which is of upper Hessenberg form"
@@ -9927,9 +12205,9 @@ k = ---------- * ----------------------
       output Real Br[:, :];
       output Real Cr[:, :];
       output Real Dr[:, :];
-      output Integer n;
-      output Integer m;
-      output Integer p;
+      output Integer n "= dimension of Ar: Ar[n,n]";
+      output Integer m "= second dimension of Br: Br{n,m]";
+      output Integer p "= first dimension of Cr: Cr[p,n]";
 
     protected
       Real A2[:, :];
@@ -10088,12 +12366,23 @@ k = ---------- * ----------------------
         D2 := D;
       end if;
 
-      annotation (Documentation(info="<html></html>"));
+      annotation (Documentation(info="<html>
+
+<h4><a name=\"References\">References</a></h4>
+<dl>
+<dt>&nbsp;[1] Emami-Naeini, A. and Van Dooren, P. (1982):</dt>
+<dd> <b>Computation of Zeros of Linear Multivariable Systems</b>.
+     Automatica, 18, pp. 415-430.<br>&nbsp;</dd>
+</dl>
+</html>
+
+
+"));
     end reduceRosenbrock;
 
     encapsulated function reducedCtrSystem
       "Calculate the controllable part of a SISO system"
-
+      import Modelica.Utilities.Streams.print;
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -10150,7 +12439,6 @@ k = ---------- * ----------------------
           bh1 := Vectors.householderReflexion_en(bh1, u);
           ch1 := Vectors.householderReflexion(ch1, u);
           bh1[1:nx - 1] := fill(0, nx - 1);
-
           ll := nx;
           maxa := max(abs(Ah1[1:ll - 1, ll]));
 
@@ -10174,9 +12462,7 @@ k = ---------- * ----------------------
 
             r := r + 1;
           end while;
-
         end if;
-
         ssm1 := Modelica_LinearSystems2.Internal.StateSpaceR(
               A=Ah1,
               B=matrix(bh1),
@@ -10357,6 +12643,454 @@ ss = StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)
 </html>"));
     end read_dslin;
 
+    encapsulated function absComplexVector
+      "Return the absolute values of all elements of a complex vector that is defined by a vr[:] vector (real part) and a vi[:] vector (imaginary part)"
+      import Modelica;
+      input Real vr[:] "Real part of complex vector";
+      input Real vi[size(vr,1)] "Imaginary part of complex vector";
+      output Real v_abs[size(vr,1)]
+        "Absolute values of the elements of the complex vector";
+    protected
+      Real r_abs;
+      Real i_abs;
+    algorithm
+       for i in 1:size(vr,1) loop
+          r_abs :=abs(vr[i]);
+          i_abs :=abs(vi[i]);
+          v_abs[i] :=if r_abs == 0 and i_abs == 0 then 0 else if r_abs > i_abs
+           then r_abs*sqrt(1 + (i_abs/r_abs)^2) else i_abs*sqrt(1 + (r_abs/i_abs)^2);
+       end for;
+    end absComplexVector;
+
+    encapsulated function polesAndZeros_Old
+      "Plot poles (i.e. eigenvalues) and/or invariant zeros of a state space system (previous version of polesAndZeros that is kept, just in case)"
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Utilities.Plot;
+
+      input StateSpace ss "Linear system in state space form"
+        annotation (Dialog);
+      input Boolean poles=true
+        "= true, to plot the poles (i.e. the eigenvalues) of ss"
+        annotation (choices(checkBox=true));
+      input Boolean zeros=true "= true, to plot the (invariant) zeros of ss "
+        annotation (choices(checkBox=true));
+
+      input Boolean print=false
+        "= true, to print the selection to the output window"
+        annotation (choices(checkBox=true));
+
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+          defaultDiagram=if poles and zeros then
+            Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros()
+             else if poles then
+            Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
+            heading="Poles (x)") else
+            Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
+            heading="Invariant zeros (o)"));
+    protected
+      Integer nx=size(ss.A, 1);
+      Real eval[nx, 2];
+      Real invZerosRe[:];
+      Real invZerosIm[:];
+      Complex invZeros[:];
+      Complex eig[size(ss.A,1)];
+      Plot.Records.Curve curves[2];
+      Integer i;
+      Plot.Records.Diagram diagram2;
+    algorithm
+      // Determine eigen values
+      if poles then
+        eval := Modelica.Math.Matrices.eigenValues(ss.A);
+        //eval :=Modelica_LinearSystems2.Math.Matrices.eigenValuesAsRealMatrix(ss.A);
+      end if;
+
+      if zeros then
+        invZeros := StateSpace.Analysis.invariantZeros(ss);
+        invZerosRe := fill(0, size(invZeros, 1));
+        invZerosIm := fill(0, size(invZeros, 1));
+        for i in 1:size(invZeros, 1) loop
+          invZerosRe[i] := invZeros[i].re;
+          invZerosIm[i] := invZeros[i].im;
+        end for;
+      end if;
+
+      i := 0;
+      if poles then
+        i := i + 1;
+        curves[i] := Plot.Records.Curve(
+              x=eval[:, 1],
+              y=eval[:, 2],
+              legend="poles",
+              autoLine=false,
+              linePattern=Plot.Types.LinePattern.None,
+              lineSymbol=Plot.Types.PointSymbol.Cross);
+      end if;
+
+      if zeros then
+        i := i + 1;
+        curves[i] := Plot.Records.Curve(
+              x=invZerosRe,
+              y=invZerosIm,
+              legend="zeros",
+              autoLine=false,
+              linePattern=Plot.Types.LinePattern.None,
+              lineSymbol=Plot.Types.PointSymbol.Circle);
+      end if;
+
+      diagram2 := defaultDiagram;
+      diagram2.curve := curves[1:i];
+      Plot.diagram(diagram2, device);
+
+      if print then
+         if poles then
+            for i in 1:nx loop
+              eig[i].re := eval[i,1];
+              eig[i].im := eval[i,2];
+            end for;
+            Modelica_LinearSystems2.Math.Complex.Vectors.printHTML(eig,heading="Eigenvalues", name="eigenvalue");
+         end if;
+
+         if zeros then
+            Modelica_LinearSystems2.Math.Complex.Vectors.printHTML(invZeros,heading="Invariant zeros", name="invariant zero");
+         end if;
+      end if;
+
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+StateSpace.Plot.<b>polesAndZeros</b>(ss);
+   or
+StateSpace.Plot.<b>polesAndZeros</b>(
+  ss,
+  poles=true,
+  zeros=true,
+  plot=true,
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>());
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This function plots a pole-zero-map of the poles and transmission zeros of a state space system.
+The poles are the eigenvalues of the system matrix (eigenvalues(ss.A)). The Boolean inputs
+\"poles\" and \"zeros\" define what to plot. If Boolean input \"plot = true\", the pole-zero-map
+is plotted. If false, only the diagram is generated and returned as output argument.
+The records \"defaultDiagram\" and \"device\" allow to set various layout options and the
+size and location of the diagram on the screen.
+</p>
+
+<h4>Example</h4>
+<p>
+The example <a href=\"modelica://Modelica_LinearSystems2.Examples.StateSpace.plotPolesAndZeros\">
+Modelica_LinearSystems2.Examples.StateSpace.plotPolesAndZeros</a>
+is defined as
+</p>
+<pre>
+  Plot.polesAndZeros(ss = Modelica_LinearSystems2.StateSpace(
+    A=[-3, 2,-3,  4, 5,6;
+        0, 6, 7,  8, 9,4;
+        0, 2, 3,  0,78,6;
+        0, 1, 2,  2, 3,3;
+        0,13,34,  0, 0,1;
+        0, 0, 0,-17, 0,0],
+    B=[1,0;
+       0,1;
+       1,0;
+       0,1;
+       1,0;
+       0,1],
+    C=[0,0,1,0,1,0;
+       0,1,0,0,1,1],
+    D=[0,0;
+       0,0]));
+</pre>
+
+<p>
+and results in
+</p>
+
+<blockquote>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/polesAndZerosSS.png\"/>
+</blockquote>
+</html>"));
+    end polesAndZeros_Old;
+
+    encapsulated function bodeSISO_Old
+      "Plot bode plot of the corresponding transfer function"
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica.Utilities.Streams.print;
+
+      input StateSpace ss "State space system";
+      input Integer iu=1 "Index of input";
+      input Integer iy=1 "Index of output";
+      input Integer nPoints(min=2) = 200 "Number of points";
+      input Boolean autoRange=true
+        "True, if abszissa range is automatically determined";
+      input Modelica.SIunits.Frequency f_min=0.1
+        "Minimum frequency value, if autoRange = false";
+      input Modelica.SIunits.Frequency f_max=10
+        "Maximum frequency value, if autoRange = false";
+
+      input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
+      input Boolean phase=true "= true, to plot phase" annotation(choices(checkBox=true));
+
+      input Real tol=1e-10
+        "Tolerance of reduction procedure, default tol = 1e-10";
+
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+          defaultDiagram=
+            Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
+
+      input Boolean Hz=true
+        "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
+      input Boolean dB=false
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
+                                                                                annotation(choices(checkBox=true),Diagram(enable=magnitude));
+      input Boolean onFile=false
+        "= true, if frequency response is stored on file as matrix [f,A,phi]" annotation(choices(checkBox=true));
+      input String fileName="frequencyResponse.mat"
+        "If onFile=true, file on which the frequency response will be stored"  annotation(Dialog(enable=onFile));
+      input String matrixName=if Hz and not dB then "fHz_A_phiDeg" elseif
+                                 Hz and dB then "fHz_AdB_phiDeg" elseif
+                                 not Hz and dB then "f_AdB_phiDeg" else "f_A_phiDeg"
+        "If onFile=true, Name of matrix on file" annotation(Dialog(enable=onFile));
+
+    protected
+      ZerosAndPoles zp "ZP-Transfer functions to be plotted";
+      StateSpace ss_siso(
+        redeclare Real A[size(ss.A, 1), size(ss.A, 2)],
+        redeclare Real B[size(ss.B, 1), 1],
+        redeclare Real C[1, size(ss.C, 2)],
+        redeclare Real D[1, 1]);
+
+    algorithm
+      // Check that system has inputs and outputs
+      if size(ss.B, 2) == 0 then
+        Modelica.Utilities.Streams.print(
+          "\n... Not possible to plot transfer function because system has no inputs."
+           + "\n... Call of Plot.bodeSISO is ignored.\n");
+        return;
+      elseif size(ss.C, 1) == 0 then
+        Modelica.Utilities.Streams.print(
+          "\n... Not possible to plot transfer function because system has no outputs."
+           + "\n... Call of Plot.bodeSISO is ignored.\n");
+        return;
+      end if;
+
+      assert(iu <= size(ss.B, 2) and iu > 0, "index for input is " + String(iu)
+         + " which is not in [1, " + String(size(ss.B, 2)) + "].");
+      assert(iy <= size(ss.C, 1) and iy > 0, "index for output is " + String(iy)
+         + " which is not in [1, " + String(size(ss.C, 1)) + "].");
+      ss_siso := StateSpace(
+            A=ss.A,
+            B=matrix(ss.B[:, iu]),
+            C=transpose(matrix(ss.C[iy, :])),
+            D=matrix(ss.D[iy, iu]));
+
+      zp := StateSpace.Conversion.toZerosAndPoles(
+               StateSpace.Transformation.toBalancedForm(ss_siso), tol);
+
+      ZerosAndPoles.Plot.bode(
+            zp,
+            nPoints,
+            autoRange,
+            f_min,
+            f_max,
+            Hz=Hz,
+            magnitude=magnitude,
+            dB=dB,
+            phase=phase,
+            onFile=onFile,
+            fileName=fileName,
+            matrixName=matrixName,
+            defaultDiagram=defaultDiagram,
+            device=device);
+
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+StateSpace.Plot.<b>bodeSISO</b>(ss)
+   or
+StateSpace.Plot.<b>bodeSISO</b>(
+  ss,
+  iu,
+  iy,
+  nPoints,
+  autoRange,
+  f_min,
+  f_max,
+  magnitude=true,
+  phase=true,
+  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
+  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This function plots the bode-diagram of a transfer function corresponding
+to the behavior of the state space system from iu'th element of the input
+vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0],
+    B=[0.0,1.0; 1.0,1.0; -1.0,0.0],
+    C=[0.0,1.0,1.0; 1.0,1.0,1.0],
+    D=[1.0,0.0; 0.0,1.0])
+
+  Integer iu=1;
+  Integer iy=1;
+
+<b>algorithm</b>
+   Modelica_LinearSystems2.StateSpace.Plot.plotBodeSISO(ss, iu, iy)
+//  gives:
+</pre></blockquote>
+<p>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
+<br>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
+</p>
+</html>"));
+    end bodeSISO_Old;
+
+    encapsulated function bodeMIMO_old
+      "Plot bode plot of all transfer functions, corresponding to the state space system"
+      import Modelica.Utilities.Streams.print;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Utilities.Plot;
+
+      input StateSpace ss "State space system";
+      input Integer nPoints(min=2) = 200 "Number of points";
+      input Boolean autoRange[:, :]=fill(
+          true,
+          size(ss.C, 1),
+          size(ss.B, 2)) "True, if abszissa range is automatically determined";
+      input Modelica.SIunits.Frequency f_min[:, :]=fill(
+          0.1,
+          size(ss.C, 1),
+          size(ss.B, 2)) "Minimum frequency value, if autoRange = false";
+      input Modelica.SIunits.Frequency f_max[:, :]=fill(
+          10,
+          size(ss.C, 1),
+          size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
+
+      input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
+      input Boolean phase=true "= true, to plot phase" annotation(choices(checkBox=true));
+
+      input Real tol=1e-10
+        "Tolerance of reduction procedure, default tol = 1e-10";
+
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
+            Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
+
+      input Boolean Hz=true
+        "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
+      input Boolean dB=false
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
+                                                                                annotation(choices(checkBox=true),Diagram(enable=magnitude));
+    protected
+      ZerosAndPoles zp[size(ss.C, 1), size(ss.B, 2)]
+        "ZerosAndPoles object to be plotted";
+      Plot.Records.Diagram diagram2=defaultDiagram;
+      String yNames[size(ss.C, 1)];
+      String uNames[size(ss.B, 2)];
+
+    algorithm
+      // Check that system has inputs and outputs
+      if size(ss.B, 2) == 0 then
+        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no inputs."
+           + "\n... Call of Plot.bodeMIMO is ignored.\n");
+        return;
+      elseif size(ss.C, 1) == 0 then
+        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no outputs."
+           + "\n... Call of Plot.bodeMIMO is ignored.\n");
+        return;
+      end if;
+
+      // generate headings
+      for i1 in 1:size(ss.B, 2) loop
+        uNames[i1] := if ss.uNames[i1] == "" then "u" + String(i1) else ss.uNames[
+          i1];
+      end for;
+      for i1 in 1:size(ss.C, 1) loop
+        yNames[i1] := if ss.yNames[i1] == "" then "y" + String(i1) else ss.yNames[
+          i1];
+      end for;
+
+      zp := StateSpace.Conversion.toZerosAndPolesMIMO(
+            StateSpace.Transformation.toBalancedForm(ss), tol);
+
+      for i1 in 1:size(ss.C, 1) loop
+        for i2 in 1:size(ss.B, 2) loop
+          diagram2.heading := defaultDiagram.heading + "  " + uNames[i2] + " -> " +
+            yNames[i1];
+          ZerosAndPoles.Plot.bode(
+            zp[i1, i2],
+            nPoints,
+            autoRange[i1, i2],
+            f_min[i1, i2],
+            f_max[i1, i2],
+            magnitude=magnitude,
+            phase=phase,
+            Hz=Hz,
+            dB=dB,
+            defaultDiagram=diagram2,
+            device=device);
+        end for;
+      end for;
+
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+StateSpace.Plot.<b>bodeMIMO</b>(ss)
+   or
+StateSpace.Plot.<b>bodeMIMO</b>(
+  ss,
+  nPoints,
+  autoRange,
+  f_min,
+  f_max,
+  magnitude=true,
+  phase=true,
+  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
+  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+</pre></blockquote>
+
+<h4>Example</h4>
+<blockquote><pre>
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0],
+    B=[0.0,1.0; 1.0,1.0; -1.0,0.0],
+    C=[0.0,1.0,1.0],
+    D=[1.0,0.0])
+
+<b>algorithm</b>
+   Modelica_LinearSystems2.StateSpace.Plot.plotBodeMIMO(ss)
+//  gives:
+</pre></blockquote>
+<p>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
+<br>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
+</p>
+<p>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude2.png\">
+<br>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase2.png\">
+</p>
+</html>"));
+    end bodeMIMO_old;
   end Internal;
 
   annotation (defaultComponentName="stateSpace", Documentation(info="<html>

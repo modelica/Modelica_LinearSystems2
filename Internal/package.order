@@ -17,9 +17,17 @@ defaultInitialResponseHeadings
 defaultRampResponseHeadings
 defaultStepResponseHeadings
 extractRealZeros
+frequencyResponse
+frequencyResponsePlot
 frequencyRangeBode
+frequencyRangeBode2
 frequencyRangeZeros
+frequencyRangeZeros2
 frequencyVector
+frequencyVector2
+frequencyEvaluate
+frequencyResponseGain
+toPolarForm
 numberOfRealZeros
 printComplexVector
 reorderEigenvalue
@@ -41,3 +49,5 @@ timeResponseMask_tf_discrete
 eigenValuesFromLinearization
 printHTML_start
 printHTML_end
+complexFraction
+balanceABC

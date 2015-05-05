@@ -1,45 +1,40 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
-function dgeevx
-  "Compute the eigenvalues and the (real) left and right eigenvectors of matrix A, using lapack routine dgeevx (includes balancing of A)"
+function dgeevx_eigenValues
+  "Compute the eigenvalues of matrix A, using lapack routine dgeevx (with balancing)"
 
   input Real A[:,size(A, 1)];
   output Real alphaReal[size(A, 1)]
-    "Real part of alpha (eigenvalue=(alphaReal+i*alphaImag))";
+    "Real parts of eigenvalues (eigenvalue=(alphaReal+i*alphaImag))";
   output Real alphaImag[size(A, 1)]
-    "Imaginary part of alpha (eigenvalue=(alphaReal+i*alphaImag))";
-  output Real lEigenVectors[size(A, 1),size(A, 1)]
-    "left eigenvectors of matrix A";
-  output Real rEigenVectors[size(A, 1),size(A, 1)]
-    "right eigenvectors of matrix A";
-  output Real AS[size(A, 1),size(A, 2)]=A
-    "AS iss the real Schur form of the balanced version of the input matrix A";
-  output Integer info;
+    "Imaginary part of eigenvalues (eigenvalue=(alphaReal+i*alphaImag))";
+  output Integer info "=0: success";
 protected
+  Real Awork[size(A,1), size(A,1)] = A;
+  Real abnrm[size(A, 1)];
   Integer n=size(A, 1);
   Integer ilo;
   Integer ihi;
-  Real scale[n];
-  Real abnrm;
-  Real rconde[n];
-  Real rcondv[n];
-  Integer lwork=n*(n + 6);
-  Integer iwork[2*n-2]; // Not referenced, but necessary for call
+  Real scale[size(A, 1)];
+  Real rconde[size(A, 1)];
+  Real rcondv[size(A, 1)];
+  Integer lwork=2*n*(n + 6);
+  Integer iwork[2*size(A, 1)-2]; // Not referenced, but necessary for call
   Real work[lwork];
 
 external "Fortran 77" dgeevx(
     "B",
-    "V",
-    "V",
-    "E",
-    n,
-    AS,
-    n,
+    "N",
+    "N",
+    "N",
+    size(A, 1),
+    Awork,
+    size(A, 1),
     alphaReal,
     alphaImag,
-    lEigenVectors,
-    n,
-    rEigenVectors,
-    n,
+    rconde,
+    size(A, 1),
+    rcondv,
+    size(A, 1),
     ilo,
     ihi,
     scale,
@@ -231,4 +226,4 @@ external "Fortran 77" dgeevx(
 
    =====================================================================
 "));
-end dgeevx;
+end dgeevx_eigenValues;

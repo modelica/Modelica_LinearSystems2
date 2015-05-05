@@ -1087,6 +1087,67 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
+    class Version_2_4 "Version 2.4 (xxx, 2015)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>This version requires the <b>Modelica 3.2.1</b> Library.
+It is is <b>backward compatible</b> to the previous version 2.3.2</p>
+
+
+<h4>
+Improvements performed in version 2.4 (xxx, 2015):
+</h4>
+
+<ul>
+<li> New function StateSpace.Transformation.<b>toBalancedForm</b><br>
+     Performs a similarity transformation to a balanced form. The goal is to 
+     make further numerical computations on the system more reliable.</li>
+
+<li> Improved functions<br>
+     &nbsp;&nbsp;&nbsp;<b>ModelAnalysis.Poles</b><br>
+     &nbsp;&nbsp;&nbsp;<b>ModelAnalysis.Zeros</b><br>
+     &nbsp;&nbsp;&nbsp;<b>ModelAnalysis.FullAnalysis</b><br>
+     &nbsp;&nbsp;&nbsp;StateSpace.<b>Plot.polesAndZeros</b><br>
+     System is now balanced, before eigenvalues and transmission zeros are computed
+     (to improve numerics for systems with largely varying zeros and poles).</li>
+
+<li> Improved functions<br>
+     &nbsp;&nbsp;&nbsp;<b>ModelAnalysis.TransferFunctions</b><br>
+     &nbsp;&nbsp;&nbsp;StateSpace.<b>Plot.bodeSISO</b><br>
+     &nbsp;&nbsp;&nbsp;StateSpace.<b>Plot.bodeMIMO</b><br>
+     System is now balanced, before bode plot is computed
+     (to improve numerics for systems with largely varying zeros and poles).<br>
+     For large systems with large eigenvalues or zeros, an overflow could occur.
+     The algorithm has been changed so that overflow is much more unlikely to occur.<br>
+     The computation of the bode plot is now 1-2 orders of magnitudes faster
+     for large systems (the implementation of the algorithm was restructured
+     and part of the restructured functionality is now pre-compiled in object
+     code using the __Dymola_translate=true annotation.<br>
+     Optionally, it is now possible to store the frequency, magnitude and angle
+     vectors of the bode diagram on file. </li>
+</li>
+</ul>
+
+
+<h4>
+Bug fixes performed in version 2.4 (xxx, 2014):
+</h4>
+
+<ul>
+<li> StateSpace.<b>Plot.bodeSISO</b><br>
+     StateSpace.<b>Plot.bodeMIMO</b><br>
+     ZerosAndPoles.<b>Plot.bode</b><br>
+     Defining logX=false, still computed the frequency vector in logarithmic scale
+     (and f_min=0 gave an error). This has been fixed.<br>
+     If a system had many zeros and poles with large absolute values,
+     an overflow could occur. The algorithm has been changed to make
+     this situation much more unlikely.</li>
+</ul>
+
+
+</html>"));
+    end Version_2_4;
     extends Modelica.Icons.ReleaseNotes;
 
     class Version_2_3_2 "Version 2.3.2 (April 17, 2015)"

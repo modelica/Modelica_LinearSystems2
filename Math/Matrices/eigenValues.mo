@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function eigenValues
-  "Compute eigenvalues and eigenvectors for a real, nonsymmetric matrix"
+  "Compute eigenvalues and eigenvectors for a real, nonsymmetric matrix (matrix is balanced before eigenvalues are computed)"
 
   extends Modelica.Icons.Function;
 
@@ -24,7 +24,7 @@ if size(A,1) > 0 then
      rightEigenvectors :=zeros(size(A, 1), size(A, 1));
      leftEigenvectors :=zeros(size(A, 1), size(A, 1));
   else
-      (eigenvalues[:, 1],eigenvalues[:, 2],leftEigenvectors,rightEigenvectors,info) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev(A);
+      (eigenvalues[:, 1],eigenvalues[:, 2],leftEigenvectors,rightEigenvectors,,info) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeevx(A);
   end if;
   assert(info == 0, "Calculating the eigenvalues with function
 \"Matrices.eigenvalues\" is not possible, since the

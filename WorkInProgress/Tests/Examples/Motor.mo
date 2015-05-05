@@ -64,7 +64,6 @@ equation
           fillPattern=FillPattern.Solid),
         Text(extent={{-80,100},{80,60}}, textString="%name")}),
     Documentation(info="A basic model of an electrical dc motor.
-"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics));
 end Motor;

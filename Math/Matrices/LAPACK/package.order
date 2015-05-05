@@ -1,7 +1,9 @@
 dgecon
 dgees
 dgeev
+dgeev_eigenValues
 dgeevx
+dgeevx_eigenValues
 dgegv
 dgehrd
 dgeqp3
@@ -11,6 +13,7 @@ dgesvd
 dgesvx
 dgetrs
 dggev
+dggev_eigenValues
 dggevx
 dhgeqz
 dhseqr

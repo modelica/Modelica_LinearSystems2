@@ -29,7 +29,7 @@ protected
       D=D);
 
 algorithm
-  Modelica_LinearSystems2.StateSpace.Plot.bodeMIMO(    ss);
+  Modelica_LinearSystems2.StateSpace.Plot.bodeMIMO(ss,onFile=true);
   ok := true;
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
