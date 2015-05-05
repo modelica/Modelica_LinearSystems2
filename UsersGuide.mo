@@ -1107,25 +1107,21 @@ Improvements performed in version 2.4 (xxx, 2015):
 <li> Improved functions<br>
      &nbsp;&nbsp;&nbsp;<b>ModelAnalysis.Poles</b><br>
      &nbsp;&nbsp;&nbsp;<b>ModelAnalysis.Zeros</b><br>
-     &nbsp;&nbsp;&nbsp;<b>ModelAnalysis.FullAnalysis</b><br>
      &nbsp;&nbsp;&nbsp;StateSpace.<b>Plot.polesAndZeros</b><br>
      System is now balanced, before eigenvalues and transmission zeros are computed
      (to improve numerics for systems with largely varying zeros and poles).</li>
 
 <li> Improved functions<br>
-     &nbsp;&nbsp;&nbsp;<b>ModelAnalysis.TransferFunctions</b><br>
      &nbsp;&nbsp;&nbsp;StateSpace.<b>Plot.bodeSISO</b><br>
      &nbsp;&nbsp;&nbsp;StateSpace.<b>Plot.bodeMIMO</b><br>
      System is now balanced, before bode plot is computed
      (to improve numerics for systems with largely varying zeros and poles).<br>
-     For large systems with large eigenvalues or zeros, an overflow could occur.
-     The algorithm has been changed so that overflow is much more unlikely to occur.<br>
      The computation of the bode plot is now 1-2 orders of magnitudes faster
      for large systems (the implementation of the algorithm was restructured
      and part of the restructured functionality is now pre-compiled in object
-     code using the __Dymola_translate=true annotation.<br>
+     code using the __Dymola_translate=true annotation<br>
      Optionally, it is now possible to store the frequency, magnitude and angle
-     vectors of the bode diagram on file. </li>
+     vectors of the bode diagram on file </li>
 </li>
 </ul>
 
