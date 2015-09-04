@@ -11,9 +11,9 @@ annotation (
   preferredView="info",
   uses(Modelica(version="3.2.1")),
   version="2.4",
-  versionBuild=0,
-  versionDate="2015-05-05",
-  dateModified = "2015-05-05 15:20:01Z",
+  versionBuild=1,
+  versionDate="2015-09-04",
+  dateModified = "2015-09-04 15:20:01Z",
   revisionId="$Id::                                       $",
   conversion(
     noneFromVersion="2.0",
@@ -86,7 +86,7 @@ Modelica Standard Library.
     <td style=\"vertical-align: top;\"><br><b>Licensed by DLR under the Modelica License 2</b></td>
 </tr>
 <tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</b></td></tr>
-<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2014, DLR Institute of System Dynamics and Control</b></td></tr>
+<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2015, DLR Institute of System Dynamics and Control</b></td></tr>
 </table>
 </p>
 

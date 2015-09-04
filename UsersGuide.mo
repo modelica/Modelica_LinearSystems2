@@ -1087,16 +1087,15 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_2_4 "Version 2.4 (xxx, 2015)"
+    class Version_2_4 "Version 2.4 (Sept. 4, 2015)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
 <p>This version requires the <b>Modelica 3.2.1</b> Library.
 It is is <b>backward compatible</b> to the previous version 2.3.2</p>
 
-
 <h4>
-Improvements performed in version 2.4 (xxx, 2015):
+Improvements performed in version 2.4 Build 1 (Sept. 4, 2015):
 </h4>
 
 <ul>
@@ -1127,7 +1126,7 @@ Improvements performed in version 2.4 (xxx, 2015):
 
 
 <h4>
-Bug fixes performed in version 2.4 (xxx, 2014):
+Bug fixes performed in version 2.4 Build 1 (Sept. 4, 2014):
 </h4>
 
 <ul>
