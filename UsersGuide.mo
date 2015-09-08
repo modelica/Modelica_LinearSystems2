@@ -1087,21 +1087,22 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_2_4 "Version 2.4 (Sept. 4, 2015)"
+    class Version_2_3_3 "Version 2.3.3 (Sept. 8, 2015)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
 <p>This version requires the <b>Modelica 3.2.1</b> Library.
-It is is <b>backward compatible</b> to the previous version 2.3.2</p>
+It is <b>backward compatible</b> to the previous version 2.3.2</p>
 
 <h4>
-Improvements performed in version 2.4 Build 1 (Sept. 4, 2015):
+Improvements performed in version 2.3.3 Build 1 (Sept. 8, 2015):
 </h4>
 
 <ul>
 <li> New function StateSpace.Transformation.<b>toBalancedForm</b><br>
-     Performs a similarity transformation to a balanced form. The goal is to 
-     make further numerical computations on the system more reliable.</li>
+     Performs a similarity transformation to a balanced form of the
+     linear system. The goal is to find state so that further numerical computations
+     on the system are more reliable.</li>
 
 <li> Improved functions<br>
      &nbsp;&nbsp;&nbsp;<b>ModelAnalysis.Poles</b><br>
@@ -1126,7 +1127,7 @@ Improvements performed in version 2.4 Build 1 (Sept. 4, 2015):
 
 
 <h4>
-Bug fixes performed in version 2.4 Build 1 (Sept. 4, 2014):
+Bug fixes performed in version 2.3.3 Build 1 (Sept. 8, 2014):
 </h4>
 
 <ul>
@@ -1142,7 +1143,7 @@ Bug fixes performed in version 2.4 Build 1 (Sept. 4, 2014):
 
 
 </html>"));
-    end Version_2_4;
+    end Version_2_3_3;
     extends Modelica.Icons.ReleaseNotes;
 
     class Version_2_3_2 "Version 2.3.2 (April 17, 2015)"
