@@ -28,9 +28,6 @@ protected
    constant Real pi = Modelica.Constants.pi;
    constant Real pi2 = 2*pi;
 algorithm
-   assert( nd >= 1, "Vector d must have at least one element");
-   assert( nn <= nd, "Size of vector n <= size of vector d required");
-
    // Transform elements of n to polar form
    for i in 1:nn loop
       wr :=n[i].re;
@@ -72,13 +69,23 @@ algorithm
 
    // Compute angle of fraction
    z_phi :=0;
-   for i in 1:nn loop
-      z_phi := z_phi + n_phi[i] - d_phi[i];
-   end for;
+   if nn <= nd then
+      for i in 1:nn loop
+         z_phi := z_phi + n_phi[i] - d_phi[i];
+      end for;
 
-   for i in nn+1:nd loop
-      z_phi := z_phi - d_phi[i];
-   end for;
+      for i in nn+1:nd loop
+         z_phi := z_phi - d_phi[i];
+      end for;
+   else
+      for i in 1:nd loop
+         z_phi := z_phi + n_phi[i] - d_phi[i];
+      end for;
+
+      for i in nd+1:nn loop
+         z_phi := z_phi + n_phi[i];
+      end for;
+   end if;
 
    // Compute absolute value (avoid overflow)
    if d_zero then
@@ -86,15 +93,29 @@ algorithm
       z_abs :=Modelica.Constants.inf;
    else
       info :=0;
-      n_abs2 :=Modelica.Math.Vectors.sort(n_abs, ascending=false);
-      d_abs2 :=Modelica.Math.Vectors.sort(d_abs, ascending=false);
+      if nn > 0 then
+         n_abs2 :=Modelica.Math.Vectors.sort(n_abs, ascending=false);
+      end if;
+      if nd > 0 then
+         d_abs2 :=Modelica.Math.Vectors.sort(d_abs, ascending=false);
+      end if;
       z_abs := 1;
-      for i in 1:nn loop
-         z_abs :=z_abs*(n_abs2[i]/d_abs2[i]);
-      end for;
-      for i in nn+1:nd loop
-         z_abs :=z_abs/d_abs2[i];
-      end for;
+
+      if nn <= nd then
+         for i in 1:nn loop
+            z_abs :=z_abs*(n_abs2[i]/d_abs2[i]);
+         end for;
+         for i in nn+1:nd loop
+            z_abs :=z_abs/d_abs2[i];
+         end for;
+      else
+         for i in 1:nd loop
+            z_abs :=z_abs*(n_abs2[i]/d_abs2[i]);
+         end for;
+         for i in nd+1:nn loop
+            z_abs :=z_abs*n_abs2[i];
+         end for;
+      end if;
    end if;
 
    // Transform polar in Cartesian description

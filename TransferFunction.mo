@@ -1564,7 +1564,7 @@ algorithm
       defaultDiagram = Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
 
   algorithm
-    StateSpace.Plot.polesAndZeros(StateSpace(tf), poles, zeros, defaultDiagram, device);
+    StateSpace.Plot.polesAndZeros(StateSpace(tf), poles, zeros, defaultDiagram=defaultDiagram, device=device);
 
     annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>

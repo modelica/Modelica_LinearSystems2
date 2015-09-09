@@ -6,9 +6,9 @@ LibraryInfoMenuCommand(
   category="libraries",
   text="Modelica_LinearSystems2",
   reference="Modelica_LinearSystems2",
-  version="2.3.2",
+  version="2.3.3",
   isModel=true,
-  description="Modelica_LinearSystems2 Library (2.3.2)",
+  description="Modelica_LinearSystems2 Library (2.3.3)",
   ModelicaVersion="3.2.1",
   pos=101)
 

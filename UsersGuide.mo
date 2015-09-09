@@ -1109,7 +1109,8 @@ Improvements performed in version 2.3.3 Build 1 (Sept. 8, 2015):
      &nbsp;&nbsp;&nbsp;<b>ModelAnalysis.Zeros</b><br>
      &nbsp;&nbsp;&nbsp;StateSpace.<b>Plot.polesAndZeros</b><br>
      System is now balanced, before eigenvalues and transmission zeros are computed
-     (to improve numerics for systems with largely varying zeros and poles).</li>
+     (to improve numerics for systems with largely varying zeros and poles).<br>
+     By default, the poles/zeros are also printed to the output window (and not only plotted)</li>
 
 <li> Improved functions<br>
      &nbsp;&nbsp;&nbsp;StateSpace.<b>Plot.bodeSISO</b><br>
@@ -1122,7 +1123,13 @@ Improvements performed in version 2.3.3 Build 1 (Sept. 8, 2015):
      code using the __Dymola_translate=true annotation<br>
      Optionally, it is now possible to store the frequency, magnitude and angle
      vectors of the bode diagram on file </li>
-</li>
+
+<li> Improved function: ModelAnalysis.FullAnalysis<br>
+     If the system is too large (> 50 states, inputs, or outputs), then the
+     system is not printed to the output.<br>
+     The step response is included as png-file in the html log file
+     systemReport.html (if several plots are generated, only the last one is 
+     currently stored on file (needs to be improved in the future).</li>
 </ul>
 
 
@@ -1139,6 +1146,23 @@ Bug fixes performed in version 2.3.3 Build 1 (Sept. 8, 2014):
      If a system had many zeros and poles with large absolute values,
      an overflow could occur. The algorithm has been changed to make
      this situation much more unlikely.</li>
+
+<li> Minor bugs fixed (due to stricter checking of Dymola 2016 FD01, warnings had been
+     present that protected variables in functions have the input/output attributes; 
+     these wrong attributes have been removed.</li>
+
+<li> The following functions are not correct Modelica because local and result arrays depend
+     on dimensions defined locally (but must be from inputs or parameter expressions).
+     Since this is not practical to fix, the Dymola specific annotation 
+     __Dymola_allowForSize=true was introduced in Dymola 2016 FD01
+     to allow relaxed rules for Modelica dimension definition:<br>
+     &nbsp;&nbsp;&nbsp;StateSpace.Import.fromFile<br>
+     &nbsp;&nbsp;&nbsp;StateSpace.Import.fromModel<br>
+     &nbsp;&nbsp;&nbsp;Internal.StateSpace2.Import.fromFile<br>
+     &nbsp;&nbsp;&nbsp;DiscreteStateSpace.Import.fromFile<br>
+     &nbsp;&nbsp;&nbsp;DiscreteStateSpace.Import.fromModel
+</li>
+  
 </ul>
 
 

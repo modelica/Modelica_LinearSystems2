@@ -2373,7 +2373,6 @@ and results in
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Internal;
       import SI = Modelica.SIunits;
-
       import Modelica_LinearSystems2.Utilities.Plot;
 
     input ZerosAndPoles zp "ZerosAndPoles transfer function to be plotted";

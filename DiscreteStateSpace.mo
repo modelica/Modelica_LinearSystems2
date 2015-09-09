@@ -3399,10 +3399,10 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
                         caption="state space system data file")));
     input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
     protected
-    Integer xuy[3]=Internal.readSystemDimension(fileName, matrixName);
-    Integer nx=xuy[1];
-    Integer nu=xuy[2];
-    Integer ny=xuy[3];
+    Integer xuy[3]=Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+    Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
+    Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
+    Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
 
     public
     output DiscreteStateSpace result(
@@ -3502,11 +3502,11 @@ Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>.
       fileName2,
       "nx",
       1,
-      1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
-      Integer nx=integer(nxMat[1, 1]);
-      Integer nu=ABCDsizes[2] - nx;
-      Integer ny=ABCDsizes[1] - nx;
+      1)  annotation(__Dymola_allowForSize=true);
+      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD")  annotation(__Dymola_allowForSize=true);
+      Integer nx=integer(nxMat[1, 1])  annotation(__Dymola_allowForSize=true);
+      Integer nu=ABCDsizes[2] - nx  annotation(__Dymola_allowForSize=true);
+      Integer ny=ABCDsizes[1] - nx annotation(__Dymola_allowForSize=true);
       Real ABCD[nx + ny,nx + nu]=readMatrix(
       fileName2,
       "ABCD",

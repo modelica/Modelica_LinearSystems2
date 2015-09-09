@@ -349,7 +349,7 @@ This package contains operators for subtraction of state space records.
 
   algorithm
     // If system is too large, do not print the matrices
-    if size(ss.A,1) > 0 or size(ss.B, 2) > 50 or size(ss.C, 1) > 50 then
+    if size(ss.A,1) > 50 or size(ss.B, 2) > 50 or size(ss.C, 1) > 50 then
       s := "System not printed since too large (only dimensions):\n" +
            "   " + name + ".A[" + String(nx) + "," + String(nx) + "]\n" +
            "   " + name + ".B[" + String(nx) + "," + String(nu) + "]\n" +
@@ -9461,10 +9461,10 @@ subsystem.D = ss.D[outputIndex, inputIndex];
         "Name of the state space system matrix (default is \"ABCD\") in the fileName"
         annotation (Dialog);
     protected
-      Integer xuy[3]=Internal.readSystemDimension(fileName, matrixName);
-      Integer nx=xuy[1];
-      Integer nu=xuy[2];
-      Integer ny=xuy[3];
+      Integer xuy[3]=Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+      Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
+      Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
+      Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
 
     public
       output StateSpace result(
@@ -9547,11 +9547,11 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
               fileName2,
               "nx",
               1,
-              1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
-      Integer nx=integer(nxMat[1, 1]);
-      Integer nu=ABCDsizes[2] - nx;
-      Integer ny=ABCDsizes[1] - nx;
+              1) annotation(__Dymola_allowForSize=true);
+      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD") annotation(__Dymola_allowForSize=true);
+      Integer nx=integer(nxMat[1, 1]) annotation(__Dymola_allowForSize=true);
+      Integer nu=ABCDsizes[2] - nx annotation(__Dymola_allowForSize=true);
+      Integer ny=ABCDsizes[1] - nx annotation(__Dymola_allowForSize=true);
       Real ABCD[nx + ny, nx + nu]=readMatrix(
               fileName2,
               "ABCD",

@@ -17,11 +17,13 @@ algorithm
   Modelica_LinearSystems2.TransferFunction.Plot.polesAndZeros(tf=tf1,
     defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
                        heading="Poles and zeros of " + String(tf1)));
+
+                       /*
   Modelica_LinearSystems2.TransferFunction.Plot.polesAndZeros(
     tf=tf2,
     defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
       heading="Poles and zeros of " + String(tf2)),
     device=Modelica_LinearSystems2.Utilities.Plot.Records.Device(xTopLeft=50, yTopLeft=30));
-
+*/
   annotation(__Dymola_interactive=true);
 end plotPolesAndZeros;
