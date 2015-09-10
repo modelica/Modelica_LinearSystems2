@@ -356,7 +356,7 @@ encapsulated package Import
     result.C := ABCD[nx + 1:nx + ny, 1:nx];
     result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
     Modelica.Utilities.Streams.print("StateSpace record loaded from file: \""
-       + fileName + "\"");
+       + Modelica.Utilities.Files.fullPathName(fileName) + "\"");
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>

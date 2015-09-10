@@ -3437,7 +3437,7 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
     result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
     result.Ts := scalar(Ts);
     Modelica.Utilities.Streams.print("StateSpace record loaded from file: \"" +
-      fileName + "\"");
+      Modelica.Utilities.Files.fullPathName(fileName) + "\"");
 
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
@@ -3446,14 +3446,44 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
 </table>
 <h4>Description</h4>
 <p>
-Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>. The file must contain the matrix [A, B; C, D] named matrixName, the matrix B2 and the integer nx representing the order of the system, i.e. the number of rows of the square matrix A.
+Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>. The discrete System on the file must be described as:
+</p>
+
+<blockquote><pre>
+<b>x</b>(Ts*(k+1))  = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
+<b>y</b>(Ts*k)         = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
+<b>x</b>_continuous(Ts*k) =  <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
+</pre></blockquote>
+<p>
+with (for more details see <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">DiscreteStateSpace.'constructor'.fromStateSpace</a>):
+</p>
+<ul>
+<li> <b>Ts</b> - the sample time,</li>
+<li> <b>k</b> - the index of the actual sample instance (k=0,1,2,3,...),</li>
+<li> <b>t</b> - the time,</li>
+<li> <b>u</b>(t) - the input vector,</li>
+<li> <b>y</b>(t) - the output vector,</li>
+<li> <b>x</b>(t) - the discrete state vector (x(t=Ts*0) is the initial state),</li>
+<li> <b>x</b>_continuous(t) - the state vector of the continuous system
+     from which the discrete block has been derived,</li>
+<li> <b>A, B, C, D, B2</b> - matrices of appropriate dimensions.</li>
+</ul>
+
+<p>
+The file must contain
+</p>
+<ul>
+<li> the Real matrix [A, B; C, D]  with name \"matrixName\",</li>
+<li> the Integer matrix \"nx[1,1]\" defining the number of states (that is the number of rows of the square matrix A),</li>
+<li> the Real matrix B2 that has the same dimensions as B,</li>
+<li> the Real matrix \"Ts[1,1]\" defining the sample time in [s] with which the continuous-time system was discretized to arrive at this discrete system</li>
+</ul>
 
 <h4>Example</h4>
 <blockquote><pre>
-
-
 <b>algorithm</b>
-  dss:=Modelica_LinearSystems2.DiscreteStateSpace.Import.fromFile(\"dss.mat\");
+  file := Modelica.Utilities.Files.loadResource(\"modelica://Modelica_LinearSystems2/Resources/Data/dss.mat\")
+  dss:=Modelica_LinearSystems2.DiscreteStateSpace.Import.fromFile(file)
 //  dss=StateSpace(
       A=[-4.5, 1.5, 4.0; -4.0, 1.0, 4.0; -1.5, -0.5, 1],
       B=[2; 1; 2],
@@ -3462,8 +3492,6 @@ Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>.
       B2=[0;0;0],
       Ts=0.2,
       method=Trapezoidal);
-
-
 </pre></blockquote>
 </html>"));
   end fromFile;

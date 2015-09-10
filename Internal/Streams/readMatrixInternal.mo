@@ -29,8 +29,6 @@ void Modelica_LinearSystem2_readMatrixInternal(const char *filename, const char 
       matrix[i+j*cols]=m.data[i+j*cols];
     }
   }
-
-//ModelicaFormatMessage(filename);
   return;
 }", Documentation(info="<html>
 <h4>Syntax</h4>
