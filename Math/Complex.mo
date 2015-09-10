@@ -167,7 +167,7 @@ operator record Complex "Record defining a Complex number"
       print("* { font-size: 10pt; font-family: Arial,sans-serif; }", tempFile);
       print("</style>", tempFile);
 
-      print("<table style=\"background-color:rgb(100, 100, 100); text-align:right\" "
+      print("<table style=\"background-color:rgb(100, 100, 100); margin:20px 0 20px 20px;\" "
              + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", tempFile);
       print("<caption>" + heading + "</caption>", tempFile);
       print("<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">" +

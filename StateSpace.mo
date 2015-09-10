@@ -1152,7 +1152,7 @@ This package contains operators for subtraction of state space records.
           "<p>\nThe system described in the state space representation\n</p>",
           fileName);
         print(
-          "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+          "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin: 20px 0 20px 20px\" "
            + "cellpadding=\"3\" border=\"0\"> ", fileName);
         print("<tr><td>der(x) </td> <td>=</td> <td> Ax</td> <td> +</td><td> Bu</td></tr>
          <tr><td> y </td>     <td>=</td> <td> Cx</td> <td> + </td><td>Du</td></tr>",
@@ -1380,10 +1380,10 @@ This package contains operators for subtraction of state space records.
         //print("<p>\n<b>Real eigenvalues</b>\n</p>", fileName);
 
         if printTable then
-          print("<p>\nThe system has the following real eigenvalues.\n</p>",
+          print("<p>The system has the following real eigenvalues.</p>",
             fileName);
           print(
-            "<table style=\"background-color:rgb(100, 100, 100);text-align:right\" "
+            "<table style=\"background-color:rgb(100, 100, 100); margin: 20px 0 20px 20px\" "
              + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
           print("<caption>Real eigenvalues</caption>", fileName);
           print(
@@ -1438,10 +1438,10 @@ This package contains operators for subtraction of state space records.
 
         if printTable then
           print(
-            "<p>\nThe system has the following complex conjugate pairs of eigenvalues.\n</p>",
+            "<p>The system has the following complex conjugate pairs of eigenvalues.<br>&nbsp;</p>",
             fileName);
           print(
-            "<table style=\"background-color:rgb(100, 100, 100);text-align:right\" "
+            "<table style=\"background-color:rgb(100, 100, 100); margin: 20px 0 20px 20px\" "
              + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
           print("<caption>Complex conjugate pairs of eigenvalues</caption>",
             fileName);
@@ -1527,7 +1527,7 @@ This package contains operators for subtraction of state space records.
            + " might be not the most relevant ones.</p>", fileName);
 
         print(
-          "<table style=\"background-color:rgb(100, 100, 100); text-align:right\" "
+          "<table style=\"background-color:rgb(100, 100, 100); margin: 20px 0 20px 20px\" "
            + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">\n" +
           "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
            +
@@ -1572,10 +1572,10 @@ This package contains operators for subtraction of state space records.
         // ---------------------------------------------------------------------------------------------------
 
         if printTable then
-          print("<p>\nThe system has the following invariant zeros.\n</p>",
+          print("<p>The system has the following invariant zeros.<br>&nbsp;</p>",
             fileName);
           print(
-            "\n<table style=\"background-color:rgb(100, 100, 100); text-align:right\" "
+            "\n<table style=\"background-color:rgb(100, 100, 100); margin: 20px 0 20px 20px\" "
              + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
           print("<caption>Invariant zeros</caption>", fileName);
           print(
@@ -2453,7 +2453,7 @@ not stable
 <br><br>
 <b>Real eigenvalues</b>
 </p>
-<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin: 20px 0 20px 20px\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td><td> eigenvalue </td> <td> T [s] </td>  <td> characteristics </td><td> contribution to states</td></tr>
 <tr>
  <td style=\"text-align:center\">       1 </td> <td style=\"text-align:left\"> &nbsp;   -4.9874e+001 </td> <td style=\"text-align:left\"> &nbsp;    0.0201 </td> <td style=\"text-align:left\"> &nbsp; stable, controllable, observable  </td> <td style=\"text-align:left\"> &nbsp;  z[1] contributes to x3 with 54.6 %<br>&nbsp;  z[1] contributes to x5 with 37 % </td> </tr>
@@ -2468,7 +2468,7 @@ not stable
 <p>
 <b>Conjugated complex pairs of eigenvalues</b>
 </p>
-<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin: 20px 0 20px 20px\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td>  <td> contribution to states</td></tr>
 <tr>
  <td style=\"text-align:left\">     5/6 </td> <td style=\"text-align:left\"> &nbsp;    1.0299e+000 &plusmn;  6.5528e+000j </td> <td style=\"text-align:left\"> &nbsp;    1.0557 </td> <td style=\"text-align:left\"> &nbsp;   -0.1553 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[    5/6] contribute to x6 with 35.9 %<br>&nbsp;  z[    5/6] contribute to x2 with 20.6 % </td> </tr>
@@ -2490,7 +2490,7 @@ is less than 5&nbsp;% of the largest contribution, it is not shown). This only h
 if the modal states are in the same order of magnitude. Otherwise, the modal states
 listed in the last column might be not the most relevant one.
 </p>
-<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin: 20px 0 20px 20px\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> state </td> <td> composition </td> <td> eigenvalue #</td> <td> freq. [Hz] </td> <td> damping </td> <td> T [s] </td></tr>
 <tr>
  <td style=\"text-align:left\"> &nbsp; x1 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  42.5% by z[2] <br> &nbsp;  is composed of  35.4% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 2<br> &nbsp; 5/6 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    1.0557 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp;    0.0201<br> &nbsp; --- </td> </tr>
@@ -2509,7 +2509,7 @@ listed in the last column might be not the most relevant one.
 <p>
 <b>Invariant zeros</b>
 </p>
-<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin: 20px 0 20px 20px\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> invariant zero </td><td> Time constant [s] </td> <td> freq. [Hz] </td> <td> damping </td></tr>
 <tr>
  <td style=\"text-align:left\"> &nbsp;       1 </td> <td> &nbsp;   -5.4983e+001 </td> <td> &nbsp;    0.0182 </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
@@ -4633,7 +4633,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
           "<p>\nThe system described in the state space representation\n</p>",
           fileName);
         print(
-          "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" "
+          "<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin:20px 0 20px 20px;\" "
            + "cellpadding=\"3\" border=\"0\"> ", fileName);
         print("<tr><td>der(x) </td> <td>=</td> <td> Ax</td> <td> +</td><td> Bu</td></tr>
          <tr><td> y </td>     <td>=</td> <td> Cx</td> <td> + </td><td>Du</td></tr>",
@@ -4864,7 +4864,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
           print("<p>\nThe system has the following real eigenvalues.\n</p>",
             fileName);
           print(
-            "<table style=\"background-color:rgb(100, 100, 100);text-align:right\" "
+            "<table style=\"background-color:rgb(100, 100, 100);margin:20px 0 20px 20px;\" "
              + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
           print("<caption>Real eigenvalues</caption>", fileName);
           print(
@@ -4922,7 +4922,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
             "<p>\nThe system has the following complex conjugate pairs of eigenvalues.\n</p>",
             fileName);
           print(
-            "<table style=\"background-color:rgb(100, 100, 100);text-align:right\" "
+            "<table style=\"background-color:rgb(100, 100, 100);margin:20px 0 20px 20px;\" "
              + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
           print("<caption>Complex conjugate pairs of eigenvalues</caption>",
             fileName);
@@ -5008,7 +5008,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
            + " might be not the most relevant ones.</p>", fileName);
 
         print(
-          "<table style=\"background-color:rgb(100, 100, 100); text-align:right\" "
+          "<table style=\"background-color:rgb(100, 100, 100); margin:20px 0 20px 20px;\" "
            + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">\n" +
           "<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">"
            +
@@ -5056,7 +5056,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
           print("<p>\nThe system has the following invariant zeros.\n</p>",
             fileName);
           print(
-            "\n<table style=\"background-color:rgb(100, 100, 100); text-align:right\" "
+            "\n<table style=\"background-color:rgb(100, 100, 100); margin:20px 0 20px 20px;\" "
              + "cellpadding=\"3\" border=\"0\" cellspacing=\"1\">", fileName);
           print("<caption>Invariant zeros</caption>", fileName);
           print(
@@ -5934,7 +5934,7 @@ not stable
 <br><br>
 <b>Real eigenvalues</b>
 </p>
-<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin:20px 0 20px 20px;\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td><td> eigenvalue </td> <td> T [s] </td>  <td> characteristics </td><td> contribution to states</td></tr>
 <tr>
  <td style=\"text-align:center\">       1 </td> <td style=\"text-align:left\"> &nbsp;   -4.9874e+001 </td> <td style=\"text-align:left\"> &nbsp;    0.0201 </td> <td style=\"text-align:left\"> &nbsp; stable, controllable, observable  </td> <td style=\"text-align:left\"> &nbsp;  z[1] contributes to x3 with 54.6 %<br>&nbsp;  z[1] contributes to x5 with 37 % </td> </tr>
@@ -5949,7 +5949,7 @@ not stable
 <p>
 <b>Conjugated complex pairs of eigenvalues</b>
 </p>
-<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin:20px 0 20px 20px;\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td>  <td> contribution to states</td></tr>
 <tr>
  <td style=\"text-align:left\">     5/6 </td> <td style=\"text-align:left\"> &nbsp;    1.0299e+000 &plusmn;  6.5528e+000j </td> <td style=\"text-align:left\"> &nbsp;    1.0557 </td> <td style=\"text-align:left\"> &nbsp;   -0.1553 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[    5/6] contribute to x6 with 35.9 %<br>&nbsp;  z[    5/6] contribute to x2 with 20.6 % </td> </tr>
@@ -5971,7 +5971,7 @@ is less than 5&nbsp;% of the largest contribution, it is not shown). This only h
 if the modal states are in the same order of magnitude. Otherwise, the modal states
 listed in the last column might be not the most relevant one.
 </p>
-<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin:20px 0 20px 20px;\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> state </td> <td> composition </td> <td> eigenvalue #</td> <td> freq. [Hz] </td> <td> damping </td> <td> T [s] </td></tr>
 <tr>
  <td style=\"text-align:left\"> &nbsp; x1 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  42.5% by z[2] <br> &nbsp;  is composed of  35.4% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 2<br> &nbsp; 5/6 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    1.0557 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp;    0.0201<br> &nbsp; --- </td> </tr>
@@ -5990,7 +5990,7 @@ listed in the last column might be not the most relevant one.
 <p>
 <b>Invariant zeros</b>
 </p>
-<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; text-align:right\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
+<table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin:20px 0 20px 20px;\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
 <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> invariant zero </td><td> Time constant [s] </td> <td> freq. [Hz] </td> <td> damping </td></tr>
 <tr>
  <td style=\"text-align:left\"> &nbsp;       1 </td> <td> &nbsp;   -5.4983e+001 </td> <td> &nbsp;    0.0182 </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
