@@ -1128,13 +1128,13 @@ Improvements performed in version 2.3.3 Build 1 (Sept. 8, 2015):
      If the system is too large (> 50 states, inputs, or outputs), then the
      system is not printed to the output.<br>
      The step response is included as png-file in the html log file
-     systemReport.html (if several plots are generated, only the last one is 
+     systemReport.html (if several plots are generated, only the last one is
      currently stored on file (needs to be improved in the future).</li>
 </ul>
 
 
 <h4>
-Bug fixes performed in version 2.3.3 Build 1 (Sept. 8, 2014):
+Bug fixes performed in version 2.3.3 Build 1 (Sept. 8, 2015):
 </h4>
 
 <ul>
@@ -1148,12 +1148,12 @@ Bug fixes performed in version 2.3.3 Build 1 (Sept. 8, 2014):
      this situation much more unlikely.</li>
 
 <li> Minor bugs fixed (due to stricter checking of Dymola 2016 FD01, warnings had been
-     present that protected variables in functions have the input/output attributes; 
+     present that protected variables in functions have the input/output attributes;
      these wrong attributes have been removed.</li>
 
 <li> The following functions are not correct Modelica because local and result arrays depend
      on dimensions defined locally (but must be from inputs or parameter expressions).
-     Since this is not practical to fix, the Dymola specific annotation 
+     Since this is not practical to fix, the Dymola specific annotation
      __Dymola_allowForSize=true was introduced in Dymola 2016 FD01
      to allow relaxed rules for Modelica dimension definition:<br>
      &nbsp;&nbsp;&nbsp;StateSpace.Import.fromFile<br>
@@ -1162,7 +1162,7 @@ Bug fixes performed in version 2.3.3 Build 1 (Sept. 8, 2014):
      &nbsp;&nbsp;&nbsp;DiscreteStateSpace.Import.fromFile<br>
      &nbsp;&nbsp;&nbsp;DiscreteStateSpace.Import.fromModel
 </li>
-  
+
 </ul>
 
 
@@ -1184,7 +1184,7 @@ Improvements performed in version 2.3.2 Build 1 (Sept. 11, 2014):
 
 <ul>
 <li> All Bode diagrams (in all representation forms) can be optionally
-     plotted as magnitude in dB over angular frequency in rad/s, 
+     plotted as magnitude in dB over angular frequency in rad/s,
      instead of the default to use magnitude over frequency in Hz.</li>
 </ul>
 
@@ -1223,7 +1223,7 @@ Bug fixes performed in version 2.3.2 Build 2 (April 17, 2015):
 
 <li> ModelAnalysis.FullAnalysis<br>
      If the system is too large (> 50 states, inputs, or outputs), then the
-     system is not printed to the output (previously, the tool \"hangs\" if printing a 
+     system is not printed to the output (previously, the tool \"hangs\" if printing a
      too large system).</li>
 
 <li> ModelAnalysis.FullAnalysis<br>
