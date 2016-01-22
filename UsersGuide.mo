@@ -1087,6 +1087,28 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
+    class Version_2_3_4 "Version 2.3.4 (Jan. 22, 2016)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>This version requires the <b>Modelica 3.2.1</b> Library.
+It is <b>backward compatible</b> to the previous version 2.3.3</p>
+
+<h4>
+Improvements performed in version 2.3.4 Build 1 (Jan. 22, 2016):
+</h4>
+
+<ul>
+<li> New functions in Modelica_LinearSystems2.Utilities.Plot to read FFT results from file and plot them
+     (e.g. from <a href=\"modelica://Modelica.Math.FastFourierTransform.Examples.RealFFT1\">Modelica.Math.FastFourierTransform.Examples.RealFFT1</a>):<br>
+     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.plot_FFT_fromFile\">plot_FFT_fromFile</a><br>
+     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.plot_FFTs_from_directory\">plot_FFTs_from_directory</a><br>
+     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.plot_FFTs_of_model\">plot_FFTs_of_model</a>
+     </li>
+</ul>
+</html>"));
+    end Version_2_3_4;
+
     class Version_2_3_3 "Version 2.3.3 (Sept. 8, 2015)"
       extends Modelica.Icons.ReleaseNotes;
 
