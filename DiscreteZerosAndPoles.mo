@@ -609,7 +609,7 @@ end '*';
     result.Ts := dzp1.Ts;
 
     if dzp1 == -dzp2 then
-      result := DiscreteZerosAndPoles(0,Ts=  dzp1.Ts);
+      result := DiscreteZerosAndPoles(0,Ts = dzp1.Ts);
     else
 
       p1 := Polynomial(1);
@@ -2069,7 +2069,6 @@ from a DiscreteZerosAndPoles record representated by first and second order nume
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles.Internal;
 
     input DiscreteZerosAndPoles dzp
         "ZerosAndPoles transfer function of a system";
@@ -2126,28 +2125,28 @@ from a DiscreteZerosAndPoles record representated by first and second order nume
         if i <= n_den2 then
           if i <= n_num2 then
               // State space system in form (1)
-            k[i] := Internal.scaleFactor2(
+            k[i] := DiscreteZerosAndPoles.Internal.scaleFactor2(
                 num[i, 1],
                 num[i, 2],
                 den[i, 1],
                 den[i, 2],eps);
           elseif 2*(i - n_num2) <= n_num1 then
               // State space system in form (1) with 2 first order numerator polynomials
-            k[i] := Internal.scaleFactor2(
+            k[i] := DiscreteZerosAndPoles.Internal.scaleFactor2(
                 num[2*(i - n_num2)-1, 1] + num[2*(i - n_num2), 1],
                 num[2*(i - n_num2)-1, 1]*num[2*(i - n_num2), 1],
                 den[i, 1],
                 den[i, 2],eps);
           elseif  2*(i-n_num2) -1== n_num1 then
               // State space system in form (2) with 1 first order numerator polynomial
-            k[i] := Internal.scaleFactor2(
+            k[i] := DiscreteZerosAndPoles.Internal.scaleFactor2(
                 0,
                 num[2*i-n_num2-1, 1],
                 den[i, 1],
                 den[i, 2],eps);
            else
               // State space system in form (3)
-            k[i] := Internal.scaleFactor2(
+            k[i] := DiscreteZerosAndPoles.Internal.scaleFactor2(
                 0,
                 0,
                 den[i, 1],
@@ -2156,7 +2155,7 @@ from a DiscreteZerosAndPoles record representated by first and second order nume
         else
            // State space system in form (1) with 2 first order denominator polynomials
 
-          k[i] := Internal.scaleFactor2(
+          k[i] := DiscreteZerosAndPoles.Internal.scaleFactor2(
               num[i, 1],
               num[i, 2],
               den[2*(i - n_den2)-1, 1] + den[2*(i - n_den2), 1],
@@ -2168,15 +2167,15 @@ from a DiscreteZerosAndPoles record representated by first and second order nume
         // State space systems of order 1
         if n_num2 <= n_den2 and 2*(n_den2 - n_num2) + i <= n_num1 then
            // State space system in form (4)
-          k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
+          k[i_k + i] := DiscreteZerosAndPoles.Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
             n_num2) + i), 1], den[n_den2 + i, 1],eps);
         elseif n_num2 > n_den2 and i - i_d + 1 <= n_num1 then
            // State space system in form (4)
-          k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
+          k[i_k + i] := DiscreteZerosAndPoles.Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
             1], den[n_den2 + i, 1],eps);
         else
            // State space system in form (5)
-          k[i_k + i] := Internal.scaleFactor1(0, den[n_den2 + i, 1],eps);
+          k[i_k + i] := DiscreteZerosAndPoles.Internal.scaleFactor1(0, den[n_den2 + i, 1],eps);
         end if;
       end for;
 
