@@ -27,7 +27,7 @@ protected
       sampleClock.sampleTime*sampleFactor,
       window,
       beta,
-      a) if  not continuous;
+      a);
   Internal.DiscreteFIR discretePart(
     sampleFactor=sampleFactor,
     a=a2) if  not continuous "FIR realization";
