@@ -703,7 +703,7 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
                plotInvariantZeros=analyseOptions2.plotInvariantZeros,
                plotStepResponse=analyseOptions2.plotStepResponse,
                plotFrequencyResponse=analyseOptions2.plotFrequencyResponse,
-               printSystem=  analyseOptions2.printSystem,
+               printSystem = analyseOptions2.printSystem,
                printEigenValues=analyseOptions2.printEigenValues,
                printEigenValueProperties=analyseOptions2.printEigenValueProperties,
                printInvariantZeros=analyseOptions2.printInvariantZeros,
@@ -1943,7 +1943,8 @@ of a zeros-and-poles transfer function.
                                        filterType == Types.FilterType.BandStop then
                                                      sqrt(f_min*f_cut) else f_cut;
     Modelica.SIunits.AngularVelocity w_cut=2*pi*f0 "Cut-off angular frequency";
-    Modelica.SIunits.AngularVelocity w_band = (f_cut - f_min) / f0;
+    constant Modelica.SIunits.AngularVelocity wOne = 1.0 "Just to make unit handling correct";
+    Modelica.SIunits.AngularVelocity w_band = wOne*(f_cut - f_min) / f0;
     Real w_cut2 "= w_cut*w_cut";
     Real alpha=1.0 "Frequency correction factor";
     Real alpha2 "= alpha*alpha";

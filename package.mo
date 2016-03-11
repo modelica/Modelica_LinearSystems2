@@ -9,10 +9,10 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.3.4) - Analy
 
 annotation (
   preferredView="info",
-  uses(Modelica(version="3.2.1")),
+  uses(Modelica(version="3.2.2")),
   version="2.3.4",
   versionBuild=0,
-  versionDate="2016-01-22",
+  versionDate="2016-03-11",
   dateModified = "2016-01-22 15:20:01Z",
   revisionId="$Id::                                       $",
   conversion(
@@ -87,7 +87,7 @@ Modelica Standard Library.
     <td style=\"vertical-align: top;\"><br><b>Licensed by DLR under the Modelica License 2</b></td>
 </tr>
 <tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</b></td></tr>
-<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2015, DLR Institute of System Dynamics and Control</b></td></tr>
+<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2016, DLR Institute of System Dynamics and Control</b></td></tr>
 </table>
 </p>
 

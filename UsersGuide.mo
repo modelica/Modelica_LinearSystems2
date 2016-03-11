@@ -1087,15 +1087,15 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_2_3_4 "Version 2.3.4 (Jan. 22, 2016)"
+    class Version_2_3_4 "Version 2.3.4 (March 11, 2016)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
-<p>This version requires the <b>Modelica 3.2.1</b> Library.
-It is <b>backward compatible</b> to the previous version 2.3.3</p>
+<p>This version requires the <b>Modelica 3.2.2</b> Library.
+It is <b>backward compatible</b> to the previous version 2.3.3.</p>
 
 <h4>
-Improvements performed in version 2.3.4 Build 1 (Jan. 22, 2016):
+Improvements in this version:
 </h4>
 
 <ul>
@@ -1105,6 +1105,25 @@ Improvements performed in version 2.3.4 Build 1 (Jan. 22, 2016):
      <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.plot_FFTs_from_directory\">plot_FFTs_from_directory</a><br>
      <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.plot_FFTs_of_model\">plot_FFTs_of_model</a>
      </li>
+
+<li> Improved log output (by logging the full path name and not only the given file name) for:<br>
+     StateSpace.Import.fromFile<br>
+     Internal.StateSpace2.Import.fromFile<br>
+     DiscreteStateSpace.Import.fromFile</li>
+
+<li> Improved documentation of DiscreteStateSpace.Import.fromFile</li>
+
+<li> HTML formatting of tables improved (left justifed instead of right justified, margins above and below)</li>
+</ul>
+
+
+<h4>
+Bug fixes performed in this version:
+</h4>
+
+<ul>
+<li> FilterFIR: Removed if-condition of a parameter declaration (not possible to disable a parameter declaration in Modelica)</li>
+<li> Removed wrong C++ comment in Modelica_LinearSystems2.Internal.Streams.readMatrixInternal.</li>
 </ul>
 </html>"));
     end Version_2_3_4;
