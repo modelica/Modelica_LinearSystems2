@@ -36,7 +36,7 @@ public
   output String stateNames[nx] =  xuyName[1:nx] "Modelica names of states";
 algorithm
 
-   annotation (interactive=true, Documentation(info="<html>
+   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>This function initializes a Modelica model and then simulates the model with its default experiment options until time instant \"t_linearize\". If t_linearize=0, no simulation takes place (only initialization). At the simulation stop time, the model is linearized in such a form that </p>
 <p><ul>
 <li>all top-level signals with prefix \"input\" are treated as inputs <b>u</b>(t) of the model ,</li>

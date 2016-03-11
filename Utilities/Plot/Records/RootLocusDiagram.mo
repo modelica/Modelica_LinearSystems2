@@ -9,10 +9,10 @@ record RootLocusDiagram "Properties of a root locus diagram"
   String ImName="Im"
     "Name of the imaginary part of the eigen values (shown in tool tip)" annotation(Dialog);
   Real heightRatio = 0.8 "Height of diagram = heightRatio*diagramWidth" annotation(Dialog);
-  Boolean grid=true "True, if grid is shown" annotation(  choices(checkBox=true));
+  Boolean grid=true "True, if grid is shown" annotation ( choices(checkBox=true));
   Boolean labelWithParam=false
     "True, if values of parameter shall be shown along the curves"
-    annotation(  choices(checkBox=true));
+    annotation ( choices(checkBox=true));
 
   /* group "Axes" (Axes properties) */
   String xLabel="Real part of eigenvalues"

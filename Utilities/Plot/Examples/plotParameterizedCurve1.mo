@@ -17,7 +17,7 @@ algorithm
      Y[2,i] :=Y[1,i];
    end for;
    Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves(
-     diagram=  Modelica_LinearSystems2.Utilities.Plot.Records.ParametrizedCurves(
+     diagram = Modelica_LinearSystems2.Utilities.Plot.Records.ParametrizedCurves(
        X=X, Y=Y, s=s));
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>

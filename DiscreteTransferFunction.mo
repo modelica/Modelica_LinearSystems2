@@ -861,8 +861,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       input Boolean Hz=true
         "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
       input Boolean dB=false
-        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
-                                                                                annotation(choices(checkBox=true),Diagram(enable=magnitude));
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Dialog(enable=magnitude));
 
     protected
       SI.AngularVelocity w[nPoints];
@@ -1209,19 +1208,18 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles.Internal;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Complex;
 
       input DiscreteTransferFunction dtf "transfer function of a system";
       output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp(
-    redeclare Real n1[Internal.numberOfRealZeros2(dtf)],
+    redeclare Real n1[DiscreteZerosAndPoles.Internal.numberOfRealZeros2(dtf)],
     redeclare Real n2[integer((size(dtf.n, 1) - 1 -
-      Internal.numberOfRealZeros2(dtf))/2),2],
-    redeclare Real d1[Internal.numberOfRealPoles(dtf)],
+      DiscreteZerosAndPoles.Internal.numberOfRealZeros2(dtf))/2),2],
+    redeclare Real d1[DiscreteZerosAndPoles.Internal.numberOfRealPoles(dtf)],
     redeclare Real d2[integer((size(dtf.d, 1) - 1 -
-      Internal.numberOfRealPoles(dtf))/2),2]);
+      DiscreteZerosAndPoles.Internal.numberOfRealPoles(dtf))/2),2]);
     protected
       TransferFunction tf=TransferFunction(n=dtf.n, d=dtf.d);
       Complex z[:];
@@ -1385,8 +1383,7 @@ with
 
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
-      input String fileName="dtf.mat" "Name of the transfer function data file"
-                                                                                  annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+      input String fileName="dtf.mat" "Name of the transfer function data file"   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                           caption="transfer function data file")));
       input String numName="n" "Name of the numenator of the transfer function";
       input String denName="d"
@@ -1434,7 +1431,7 @@ with
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-    input String modelName "Name of the Modelica model" annotation(Dialog(translatedModel));
+    input String modelName "Name of the Modelica model"  annotation(Dialog(__Dymola_translatedModel(translate=true)));
     input Real T_linearize=0
         "point in time of simulation to linearize the model";
     input String fileName="dslin" "Name of the result file";

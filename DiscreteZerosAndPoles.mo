@@ -1305,7 +1305,7 @@ order polynomials of the DiscreteZeroAndPoles numerator.
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+      import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Math.Complex;
 
     input DiscreteZerosAndPoles dzp
@@ -1322,19 +1322,19 @@ order polynomials of the DiscreteZeroAndPoles numerator.
     // Build numerator
     num := dzp.k+0*j;
     for i in 1:size(dzp.n1, 1) loop
-       num := num*Internal.'p+a'(q, dzp.n1[i]);
+       num := num*ZerosAndPoles.Internal.'p+a'(q, dzp.n1[i]);
     end for;
     for i in 1:size(dzp.n2, 1) loop
-       num := num*Internal.'p^2+k[1]*p+k[2]'(q, dzp.n2[i, :]);
+       num := num*ZerosAndPoles.Internal.'p^2+k[1]*p+k[2]'(q, dzp.n2[i, :]);
     end for;
 
     // Build denominator
     den := 1+0*j;
     for i in 1:size(dzp.d1, 1) loop
-      den := den*Internal.'p+a'(q, dzp.d1[i]);
+      den := den*ZerosAndPoles.Internal.'p+a'(q, dzp.d1[i]);
     end for;
     for i in 1:size(dzp.d2, 1) loop
-      den := den*Internal.'p^2+k[1]*p+k[2]'(q, dzp.d2[i, :]);
+      den := den*ZerosAndPoles.Internal.'p^2+k[1]*p+k[2]'(q, dzp.d2[i, :]);
     end for;
 
     // Build value of transfer function
@@ -1425,7 +1425,7 @@ numerator polynomial N(z) and the denominator polynomial D(q).
                                                                            annotation(choices(checkBox=true));
     input Boolean dB=false
         "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
-                                                                              annotation(choices(checkBox=true),Diagram(enable=magnitude));
+                                                                              annotation(choices(checkBox=true),Dialog(enable=magnitude));
 
     protected
     SI.AngularVelocity w[nPoints];
@@ -2512,7 +2512,7 @@ second column respectively. The variable k is the real gain in both cases.
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
-      input String modelName "Name of the Modelica model";
+      input String modelName "Name of the Modelica model"  annotation(Dialog(__Dymola_translatedModel(translate=true)));
       input Real T_linearize=0
         "point in time of simulation to linearize the model";
       input String fileName="dslin" "Name of the result file";
@@ -2709,7 +2709,7 @@ transfer function representation.
 
     output Integer m;
 
-  external "C" m=  findMatrixName(
+  external "C" m = findMatrixName(
           filename,
           matName,
           "NoClass");

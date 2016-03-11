@@ -548,7 +548,6 @@ end '==';
     "Transform zeros and poles description into a String representation"
     import Modelica;
     import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.ZerosAndPoles.Internal;
 
     input ZerosAndPoles zp
       "Zeros-and-poles data record to be transformed in a String representation";
@@ -577,10 +576,10 @@ end '==';
     end if;
 
     // construct numerator and denominator strings
-    (sn1,kn1) :=Internal.firstOrderToString( zp.n1, significantDigits, name, normalized);
-    (sn2,kn2) :=Internal.secondOrderToString(zp.n2, significantDigits, name, normalized);
-    (sd1,kd1) :=Internal.firstOrderToString( zp.d1, significantDigits, name, normalized);
-    (sd2,kd2) :=Internal.secondOrderToString(zp.d2, significantDigits, name, normalized);
+    (sn1,kn1) :=ZerosAndPoles.Internal.firstOrderToString( zp.n1, significantDigits, name, normalized);
+    (sn2,kn2) :=ZerosAndPoles.Internal.secondOrderToString(zp.n2, significantDigits, name, normalized);
+    (sd1,kd1) :=ZerosAndPoles.Internal.firstOrderToString( zp.d1, significantDigits, name, normalized);
+    (sd2,kd2) :=ZerosAndPoles.Internal.secondOrderToString(zp.d2, significantDigits, name, normalized);
 
     // compute overall gain
     if normalized then
@@ -1190,7 +1189,6 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
       import Modelica_LinearSystems2.Math.Complex;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
@@ -1213,18 +1211,18 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
     algorithm
       // Build numerator
       for i in 1:n1 loop
-        n[i] :=Internal.'p+a'(p, zp.n1[i]);
+        n[i] :=ZerosAndPoles.Internal.'p+a'(p, zp.n1[i]);
       end for;
       for i in 1:n2 loop
-        n[n1+i] := Internal.'p^2+k[1]*p+k[2]'(p, zp.n2[i, :]);
+        n[n1+i] := ZerosAndPoles.Internal.'p^2+k[1]*p+k[2]'(p, zp.n2[i, :]);
       end for;
 
       // Build denominator
       for i in 1:d1 loop
-        d[i] := Internal.'p+a'(p, zp.d1[i]);
+        d[i] := ZerosAndPoles.Internal.'p+a'(p, zp.d1[i]);
       end for;
       for i in 1:d2 loop
-        d[d1+i] :=Internal.'p^2+k[1]*p+k[2]'(p, zp.d2[i, :]);
+        d[d1+i] :=ZerosAndPoles.Internal.'p^2+k[1]*p+k[2]'(p, zp.d2[i, :]);
       end for;
 
       // Build value of transfer function
@@ -1297,7 +1295,6 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
       output Complex z[:]=fill(Complex(0, 0), size(zp.n1, 1) + 2*size(zp.n2, 1))
@@ -1315,9 +1312,9 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
       Integer n_den=n_den1 + 2*n_den2;
       Real re;
       Real im;
-      Integer nz_real=Internal.numberOfRealZeros(zp.n1, zp.n2)
+      Integer nz_real=ZerosAndPoles.Internal.numberOfRealZeros(zp.n1, zp.n2)
         "z[1:nz_real] are the real zeros";
-      Integer np_real=Internal.numberOfRealZeros(zp.d1, zp.d2)
+      Integer np_real=ZerosAndPoles.Internal.numberOfRealZeros(zp.d1, zp.d2)
         "p[1:np_real] are the real poles";
       Real num_zeros1[nz_real];
       Real den_zeros1[np_real];
@@ -1328,11 +1325,11 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
       Complex j=Modelica_LinearSystems2.Math.Complex.j();
 
     algorithm
-      (num_zeros1,num_zeros2) := Internal.roots(
+      (num_zeros1,num_zeros2) := ZerosAndPoles.Internal.roots(
           zp.n1,
           zp.n2,
           nz_real);
-      (den_zeros1,den_zeros2) := Internal.roots(
+      (den_zeros1,den_zeros2) := ZerosAndPoles.Internal.roots(
           zp.d1,
           zp.d2,
           np_real);
@@ -2399,7 +2396,7 @@ and results in
                                                                            annotation(choices(checkBox=true));
     input Boolean dB=false
         "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
-                                                                              annotation(choices(checkBox=true),Diagram(enable=magnitude));
+                                                                              annotation(choices(checkBox=true),Dialog(enable=magnitude));
 
     input Boolean onFile=false
         "= true, if frequency response is stored on file as matrix [f,A,phi]"
@@ -3083,7 +3080,6 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
       import Modelica_LinearSystems2.Math.Vectors;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.StateSpace.Internal;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
       output Real ABCD[ZerosAndPoles.Analysis.denominatorDegree(zp)+1,
@@ -3144,28 +3140,28 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
           if i <= n_den2 then
             if i <= n_num2 then
                 // State space system in form (1)
-              k[i] := Internal.scaleFactor2(
+              k[i] := StateSpace.Internal.scaleFactor2(
                   num[i, 1],
                   num[i, 2],
                   den[i, 1],
                   den[i, 2],eps);
             elseif 2*(i - n_num2) <= n_num1 then
                 // State space system in form (1) with 2 first order numerator polynomials
-              k[i] := Internal.scaleFactor2(
+              k[i] := StateSpace.Internal.scaleFactor2(
                   num[max(1,2*(i - n_num2)-1), 1] + num[max(1,2*(i - n_num2)), 1],
                   num[max(1,2*(i - n_num2)-1), 1]*num[max(1,2*(i - n_num2)), 1],
                   den[i, 1],
                   den[i, 2],eps);
             elseif  2*(i-n_num2) -1== n_num1 then
                 // State space system in form (2) with 1 first order numerator polynomial
-              k[i] := Internal.scaleFactor2(
+              k[i] := StateSpace.Internal.scaleFactor2(
                   1,
                   num[2*i-n_num2-1, 1],
                   den[i, 1],
                   den[i, 2],eps);
             else
                 // State space system in form (3)
-              k[i] := Internal.scaleFactor2(
+              k[i] := StateSpace.Internal.scaleFactor2(
                   1,
                   1,
                   den[i, 1],
@@ -3173,7 +3169,7 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
             end if;
           else
              // State space system in form (1) with 2 first order denominator polynomials
-            k[i] := Internal.scaleFactor2(
+            k[i] := StateSpace.Internal.scaleFactor2(
                 num[i, 1],
                 num[i, 2],
                 den[max(1,2*(i - n_den2)-1), 1] + den[max(1,2*(i - n_den2)), 1],
@@ -3185,15 +3181,15 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
           // State space systems of order 1
           if n_num2 <= n_den2 and 2*(n_den2 - n_num2) + i <= n_num1 then
              // State space system in form (4)
-            k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
+            k[i_k + i] := StateSpace.Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
               n_num2) + i), 1], den[n_den2 + i, 1],eps);
           elseif n_num2 > n_den2 and i - i_d + 1 <= n_num1 then
              // State space system in form (4)
-            k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
+            k[i_k + i] := StateSpace.Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
               1], den[n_den2 + i, 1],eps);
           else
              // State space system in form (5)
-            k[i_k + i] := Internal.scaleFactor1(1, den[n_den2 + i, 1],eps);
+            k[i_k + i] := StateSpace.Internal.scaleFactor1(1, den[n_den2 + i, 1],eps);
           end if;
         end for;
 
@@ -3621,7 +3617,6 @@ processing.
       import Modelica_LinearSystems2.Math.Vectors;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.StateSpace.Internal;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
       output StateSpace ss(
@@ -3676,28 +3671,28 @@ processing.
           if i <= n_den2 then
             if i <= n_num2 then
                 // State space system in form (1)
-              k[i] := Internal.scaleFactor2(
+              k[i] := StateSpace.Internal.scaleFactor2(
                   num[i, 1],
                   num[i, 2],
                   den[i, 1],
                   den[i, 2],eps);
             elseif 2*(i - n_num2) <= n_num1 then
                 // State space system in form (1) with 2 first order numerator polynomials
-              k[i] := Internal.scaleFactor2(
+              k[i] := StateSpace.Internal.scaleFactor2(
                   num[2*(i - n_num2)-1, 1] + num[2*(i - n_num2), 1],
                   num[2*(i - n_num2)-1, 1]*num[2*(i - n_num2), 1],
                   den[i, 1],
                   den[i, 2],eps);
             elseif  2*(i-n_num2) -1== n_num1 then
                 // State space system in form (2) with 1 first order numerator polynomial
-              k[i] := Internal.scaleFactor2(
+              k[i] := StateSpace.Internal.scaleFactor2(
                   1,
                   num[2*i-n_num2-1, 1],
                   den[i, 1],
                   den[i, 2],eps);
              else
                 // State space system in form (3)
-              k[i] := Internal.scaleFactor2(
+              k[i] := StateSpace.Internal.scaleFactor2(
                   1,
                   1,
                   den[i, 1],
@@ -3705,7 +3700,7 @@ processing.
             end if;
           else
              // State space system in form (1) with 2 first order denominator polynomials
-            k[i] := Internal.scaleFactor2(
+            k[i] := StateSpace.Internal.scaleFactor2(
                 num[i, 1],
                 num[i, 2],
                 den[2*(i - n_den2)-1, 1] + den[2*(i - n_den2), 1],
@@ -3717,15 +3712,15 @@ processing.
           // State space systems of order 1
           if n_num2 <= n_den2 and 2*(n_den2 - n_num2) + i <= n_num1 then
              // State space system in form (4)
-            k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
+            k[i_k + i] := StateSpace.Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
               n_num2) + i), 1], den[n_den2 + i, 1],eps);
           elseif n_num2 > n_den2 and i - i_d + 1 <= n_num1 then
              // State space system in form (4)
-            k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
+            k[i_k + i] := StateSpace.Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
               1], den[n_den2 + i, 1],eps);
           else
              // State space system in form (5)
-            k[i_k + i] := Internal.scaleFactor1(1, den[n_den2 + i, 1],eps);
+            k[i_k + i] := StateSpace.Internal.scaleFactor1(1, den[n_den2 + i, 1],eps);
           end if;
         end for;
 
@@ -4222,7 +4217,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
-      input String modelName "Name of the Modelica model";
+      input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
       input Real T_linearize=0
         "point in time of simulation to linearize the model";
       input String fileName="dslin" "Name of the result file";
@@ -4593,7 +4588,6 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Types;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
 
     input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
         "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
@@ -4641,7 +4635,7 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
       end for;
 
     elseif analogFilter == Types.AnalogFilter.Bessel then
-      (den1,den2,alpha) := Internal.BesselCoefficients(order);
+      (den1,den2,alpha) := ZerosAndPoles.Internal.BesselCoefficients(order);
       if not normalized then
         alpha2 := alpha*alpha;
         for i in 1:n_den2 loop
@@ -4669,7 +4663,7 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
     */
       /*
     if normalized then
-      alpha := Internal.normalizationFactor(den1, den2);
+      alpha := ZerosAndPoles.Internal.normalizationFactor(den1, den2);
       alpha2 := alpha*alpha;
       for i in 1:n_den2 loop
         den2[i, 1] := den2[i, 1]*alpha2;
@@ -4703,7 +4697,7 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
         -3 db at the cutoff frequency
      */
       if normalized then
-        alpha := Internal.normalizationFactor(den1, den2);
+        alpha := ZerosAndPoles.Internal.normalizationFactor(den1, den2);
         alpha2 := alpha*alpha;
         for i in 1:n_den2 loop
           den2[i, 1] := den2[i, 1]*alpha2;
@@ -4720,7 +4714,7 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
     end if;
 
     // Determine normalized denominator polynomials with highest power of p equal to one
-    (filter.d1,filter.d2,k) := Internal.filterToNormalized(den1, den2);
+    (filter.d1,filter.d2,k) := ZerosAndPoles.Internal.filterToNormalized(den1, den2);
     filter.k := 1.0/k;
 
     annotation (Documentation(info="<html>
@@ -5862,8 +5856,7 @@ b2_k = 1/(beta_k^2 + gamma_k^2) b1_k = -2*beta_k/(beta_k^2 + gamma_k^2)
 
     function checkRepresentation
       "Check whether the system on file is represented by zeros and poles (z, p) or first and second order polynomials (n1, n2, d1, d2)"
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
-      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
       input String fileName="zp.mat" "Name of the zeros and poles data file"
         annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
           caption="state space system data file")));
@@ -5872,8 +5865,8 @@ b2_k = 1/(beta_k^2 + gamma_k^2) b1_k = -2*beta_k/(beta_k^2 + gamma_k^2)
       Integer m=0;
 
     algorithm
-      m := Internal.findMatrixName(fileName, "z");
-      m := m + Internal.findMatrixName(fileName, "p");
+      m := ZerosAndPoles.Internal.findMatrixName(fileName, "z");
+      m := m + ZerosAndPoles.Internal.findMatrixName(fileName, "p");
       iszp := m == 2;
 
       annotation (Documentation(info="<html>

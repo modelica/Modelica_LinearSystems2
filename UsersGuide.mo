@@ -1124,6 +1124,11 @@ Bug fixes performed in this version:
 <ul>
 <li> FilterFIR: Removed if-condition of a parameter declaration (not possible to disable a parameter declaration in Modelica)</li>
 <li> Removed wrong C++ comment in Modelica_LinearSystems2.Internal.Streams.readMatrixInternal.</li>
+<li> Minor issues correct so that Dymola 2017 Beta.1 checkes successfully with pedantic flag:<br>
+     import statements corrected<br>
+     wrong Diagram annotations changed to Dialog annotations<br>
+     non-standard annotation \"translateModel\" changed to \"__Dymola_translateModel\"
+</li>
 </ul>
 </html>"));
     end Version_2_3_4;

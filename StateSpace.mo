@@ -650,7 +650,7 @@ This package contains operators for subtraction of state space records.
               headingInvariantzeros="Invariant zeros",
               headingStepResponse="Step response",
               headingFrequencyResponse="Frequency response",
-              dB_w=  false);
+              dB_w = false);
       input String fileName="systemReport.html"
         "Name of html-file that contains eigenvalue table";
       input String systemName=""
@@ -3712,7 +3712,6 @@ in <b>X</b> is used to compute <b>K</b>. If no solution of this equation exists,
 
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.StateSpace.Internal;
 
       input StateSpace ss;
       input Modelica_LinearSystems2.Types.StaircaseMethod method=
@@ -4131,7 +4130,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
               headingInvariantzeros="Invariant zeros",
               headingStepResponse="Step response",
               headingFrequencyResponse="Frequency response",
-              dB_w=  false);
+              dB_w = false);
       input String fileName="systemReport.html"
         "Name of html-file that contains eigenvalue table";
       input String systemName=""
@@ -7430,8 +7429,7 @@ and results in
       input Boolean Hz=true
         "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
       input Boolean dB=false
-        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
-                                                                                annotation(choices(checkBox=true),Diagram(enable=magnitude));
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Dialog(enable=magnitude));
       input Boolean onFile=false
         "= true, if frequency response is stored on file as matrix [f,a,phi]" annotation(choices(checkBox=true));
       input String fileName="frequencyResponse.mat"
@@ -7592,8 +7590,7 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
       input Boolean Hz=true
         "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
       input Boolean dB=false
-        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
-                                                                                annotation(choices(checkBox=true),Diagram(enable=magnitude));
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Dialog(enable=magnitude));
 
       input Boolean onFile=false
         "= true, if frequency response is stored on file as matrix [f,a,phi]" annotation(choices(checkBox=true));
@@ -9451,7 +9448,6 @@ subsystem.D = ss.D[outputIndex, inputIndex];
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.StateSpace.Internal;
 
       input String fileName="dslin.mat"
         "Name of the state space system data file" annotation (Dialog(
@@ -9461,10 +9457,10 @@ subsystem.D = ss.D[outputIndex, inputIndex];
         "Name of the state space system matrix (default is \"ABCD\") in the fileName"
         annotation (Dialog);
     protected
-      Integer xuy[3]=Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
-      Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
-      Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
-      Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
+      Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName);
+      Integer nx=xuy[1];
+      Integer nu=xuy[2];
+      Integer ny=xuy[3];
 
     public
       output StateSpace result(
@@ -9521,7 +9517,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
       import Modelica_LinearSystems2.StateSpace;
 
       input String modelName "Name of the model"
-        annotation (Dialog(translatedModel));
+       annotation(Dialog(__Dymola_translatedModel(translate=true)));
       input Real T_linearize=0
         "Simulate until T_linearize and then linearize the model";
       input String fileName="dslin" "Name of the result file";
@@ -9547,11 +9543,11 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
               fileName2,
               "nx",
               1,
-              1) annotation(__Dymola_allowForSize=true);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD") annotation(__Dymola_allowForSize=true);
-      Integer nx=integer(nxMat[1, 1]) annotation(__Dymola_allowForSize=true);
-      Integer nu=ABCDsizes[2] - nx annotation(__Dymola_allowForSize=true);
-      Integer ny=ABCDsizes[1] - nx annotation(__Dymola_allowForSize=true);
+              1);
+      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+      Integer nx=integer(nxMat[1, 1]);
+      Integer nu=ABCDsizes[2] - nx;
+      Integer ny=ABCDsizes[1] - nx;
       Real ABCD[nx + ny, nx + nu]=readMatrix(
               fileName2,
               "ABCD",
@@ -11454,7 +11450,6 @@ The uncontrollable poles are checked to to stable.
     encapsulated function partialGain "Algorithm for partial gain"
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.StateSpace.Internal;
 
       input Real H[:, size(H, 1)] "Upper Hessenberg matrix";
       input Real b[size(H, 1)];
@@ -11465,7 +11460,7 @@ The uncontrollable poles are checked to to stable.
       Integer q=size(H, 1);
     algorithm
 
-      (Hh,bh) := Internal.trianUpperHess(Hh, bh);
+      (Hh,bh) := StateSpace.Internal.trianUpperHess(Hh, bh);
       result := bh[q]/Hh[q, q];
 
     end partialGain;
@@ -12850,8 +12845,7 @@ and results in
       input Boolean Hz=true
         "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
       input Boolean dB=false
-        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
-                                                                                annotation(choices(checkBox=true),Diagram(enable=magnitude));
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Dialog(enable=magnitude));
       input Boolean onFile=false
         "= true, if frequency response is stored on file as matrix [f,A,phi]" annotation(choices(checkBox=true));
       input String fileName="frequencyResponse.mat"
@@ -12997,8 +12991,7 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
       input Boolean Hz=true
         "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
       input Boolean dB=false
-        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
-                                                                                annotation(choices(checkBox=true),Diagram(enable=magnitude));
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Dialog(enable=magnitude));
     protected
       ZerosAndPoles zp[size(ss.C, 1), size(ss.B, 2)]
         "ZerosAndPoles object to be plotted";

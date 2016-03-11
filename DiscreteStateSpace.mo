@@ -2332,7 +2332,7 @@ encapsulated function bodeSISO
                                                                          annotation(choices(checkBox=true));
   input Boolean dB=false
         "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
-                                                                            annotation(choices(checkBox=true),Diagram(enable=magnitude));
+                                                                            annotation(choices(checkBox=true),Dialog(enable=magnitude));
     protected
   Modelica_LinearSystems2.DiscreteZerosAndPoles dzp
         "Zeros and poles Transfer functions to be plotted";
@@ -3393,16 +3393,16 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace.Internal;
+
     input String fileName="dslin.mat"
         "Name of the state space system data file"     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="state space system data file")));
     input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
     protected
-    Integer xuy[3]=Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
-    Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
-    Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
-    Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
+    Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName);
+    Integer nx=xuy[1];
+    Integer nu=xuy[2];
+    Integer ny=xuy[3];
 
     public
     output DiscreteStateSpace result(
@@ -3505,7 +3505,7 @@ The file must contain
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
       input String modelName "Name of the Modelica model"
-        annotation (Dialog(translatedModel));
+        annotation (Dialog(__Dymola_translatedModel(translate=true)));
       input Modelica.SIunits.Time T_linearize=0
         "point in time of simulation to linearize the model";
       input String fileName="dslin" "Name of the result file";
@@ -3530,11 +3530,11 @@ The file must contain
       fileName2,
       "nx",
       1,
-      1)  annotation(__Dymola_allowForSize=true);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD")  annotation(__Dymola_allowForSize=true);
-      Integer nx=integer(nxMat[1, 1])  annotation(__Dymola_allowForSize=true);
-      Integer nu=ABCDsizes[2] - nx  annotation(__Dymola_allowForSize=true);
-      Integer ny=ABCDsizes[1] - nx annotation(__Dymola_allowForSize=true);
+      1);
+      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+      Integer nx=integer(nxMat[1, 1]);
+      Integer nu=ABCDsizes[2] - nx;
+      Integer ny=ABCDsizes[1] - nx;
       Real ABCD[nx + ny,nx + nu]=readMatrix(
       fileName2,
       "ABCD",

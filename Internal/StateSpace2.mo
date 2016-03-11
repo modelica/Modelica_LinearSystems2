@@ -331,10 +331,10 @@ encapsulated package Import
                         caption="state space system data file")));
     input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
     protected
-    Integer xuy[3]=Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
-    Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
-    Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
-    Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
+    Integer xuy[3]=Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName);
+    Integer nx=xuy[1];
+    Integer nu=xuy[2];
+    Integer ny=xuy[3];
 
     public
     output StateSpace2 result(

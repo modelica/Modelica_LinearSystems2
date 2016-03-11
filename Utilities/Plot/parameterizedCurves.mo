@@ -60,7 +60,7 @@ algorithm
                    yName=diagram.yName,
                    sName=diagram.sName,
                    legends=diagram.legends,
-                   id=  id,
+                   id = id,
                    labelWithS=diagram.labelWithS);
   else
      for i in 1:nBranches loop
@@ -80,7 +80,7 @@ algorithm
                    yName=diagram.yName,
                    sName=diagram.sName,
                    legends=diagram.legends,
-                   id=  id,
+                   id = id,
                    labelWithS=diagram.labelWithS,
                    colors=colors,
                    patterns=Internal.convertToDymolaPattern(patterns),

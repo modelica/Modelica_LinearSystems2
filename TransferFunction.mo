@@ -1642,8 +1642,7 @@ and results in
       input Boolean Hz=true
         "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
       input Boolean dB=false
-        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
-                                                                                annotation(choices(checkBox=true),Diagram(enable=magnitude));
+        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Dialog(enable=magnitude));
 
     protected
       SI.AngularVelocity w[nPoints];
@@ -2197,18 +2196,17 @@ This function plots the initial response, i.e. the zeros input response of a tra
       "Convert a TransferFunction into a ZerosAndPoles object"
       import Modelica;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles.Internal;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Complex;
 
       input TransferFunction tf "transfer function of a system";
       output ZerosAndPoles zp(
-        redeclare Real n1[Internal.numberOfRealZeros2(tf)],
+        redeclare Real n1[ZerosAndPoles.Internal.numberOfRealZeros2(tf)],
         redeclare Real n2[integer((size(tf.n, 1) - 1 -
-          Internal.numberOfRealZeros2(tf))/2),2],
-        redeclare Real d1[Internal.numberOfRealPoles(tf)],
+          ZerosAndPoles.Internal.numberOfRealZeros2(tf))/2),2],
+        redeclare Real d1[ZerosAndPoles.Internal.numberOfRealPoles(tf)],
         redeclare Real d2[integer((size(tf.d, 1) - 1 -
-          Internal.numberOfRealPoles(tf))/2),2]);
+          ZerosAndPoles.Internal.numberOfRealPoles(tf))/2),2]);
     protected
       Complex z[:];
       Complex p[:];
@@ -2579,7 +2577,7 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-    input String modelName "Name of the Modelica model" annotation(Dialog(translatedModel));
+    input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
     input Real T_linearize=0
         "point in time of simulation to linearize the model";
     input String fileName="dslin" "Name of the result file";
@@ -2659,8 +2657,7 @@ followed by a conversion from sate space to transfer function representation.
       "Read the number n of coefficients written in a [n,1]-matrix"
       input String fileName="tf.mat" "Name of the transfer function data file";
       input String polyName="n"
-        "Name of the polynominal (numenator or denominator) coefficients of the transfer function"
-                                                                                                            annotation(Dialog);
+        "Name of the polynominal (numenator or denominator) coefficients of the transfer function"          annotation(Dialog);
       output Integer result;
     protected
       Integer polySize[2]=readMatrixSize(fileName, polyName);

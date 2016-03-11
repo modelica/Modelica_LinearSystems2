@@ -8,7 +8,7 @@ record Diagram
 
   String heading="" "Heading displayed above diagram" annotation(Dialog);
   Real heightRatio = 0.45 "Height of diagram = heightRatio*diagramWidth" annotation(Dialog);
-  Boolean grid=true "True, if grid is shown" annotation(  choices(checkBox=true));
+  Boolean grid=true "True, if grid is shown" annotation ( choices(checkBox=true));
 
   /* group "Axes" (Axes properties) */
   String xLabel=" " "String displayed at horizontal axis" annotation(Dialog(group="Axes"));

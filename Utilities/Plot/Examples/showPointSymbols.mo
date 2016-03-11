@@ -46,8 +46,7 @@ algorithm
     lineThickness=0.5,
     linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.None,
     lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.FilledSquare,
-    legend="FilledSquare"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve
-    (
+    legend="FilledSquare"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
     x=x5,
     y=y1,
     autoLine=false,
@@ -55,8 +54,7 @@ algorithm
     lineThickness=0.5,
     linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.None,
     lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.TriangleDown,
-    legend="TriangleDown"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve
-    (
+    legend="TriangleDown"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
     x=x6,
     y=y1,
     autoLine=false,

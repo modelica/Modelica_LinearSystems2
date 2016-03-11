@@ -14,10 +14,10 @@ record ParametrizedCurves
   String heading="" "Heading displayed above diagram" annotation(Dialog);
   String legends[:]=fill("",0) "Legends of the curves" annotation(Dialog);
   Real heightRatio = 0.8 "Height of diagram = heightRatio*diagramWidth" annotation(Dialog);
-  Boolean grid=true "True, if grid is shown" annotation(  choices(checkBox=true));
+  Boolean grid=true "True, if grid is shown" annotation ( choices(checkBox=true));
 
   Boolean labelWithS=false "True, if s-values shall be shown along the curve"
-       annotation(  choices(checkBox=true));
+       annotation ( choices(checkBox=true));
   Modelica_LinearSystems2.Utilities.Plot.Records.CurveProperties curveProperties[:]=
       fill(Modelica_LinearSystems2.Utilities.Plot.Records.CurveProperties(),0)
     "Properties of the curves X[j,:] (if none given, a default is used; if only one curve property given, it is used for all curves)"

@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.Examples.StateSpace;
 function conversionToZerosAndPolesMIMO
   "Example to compute a zeros-and-poles representation of a MIMO system from state space representation"
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.StateSpace.*;
+  import Modelica_LinearSystems2.StateSpace;
 
   input Boolean systemOnFile=false
     "True, if state space system is defined on file"

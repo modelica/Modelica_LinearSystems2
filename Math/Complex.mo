@@ -575,8 +575,6 @@ This package provides functions operating on vectors of complex numbers.
 
     encapsulated function matMatMul "Multiply two complex matrices"
       import Modelica_LinearSystems2.Math.Complex;
-      import Re = Modelica_LinearSystems2.Math.Complex.real;
-      import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
       input Complex m1[:,:] "Complex matrix 1";
       input Complex m2[size(m1, 2),:] "Complex matrix 2";
@@ -855,13 +853,12 @@ end 'max';
 
   encapsulated function cos "Cosine of complex number"
     import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.Math.Complex.exp;
 
     input Complex c1 "Complex number";
     output Complex c2 "= cos(c1)";
 
   algorithm
-   c2 := (exp(Complex(-c1.im, +c1.re)) + exp(Complex(+c1.im, -c1.re)))/2;
+   c2 := (Complex.exp(Complex(-c1.im, +c1.re)) + Complex.exp(Complex(+c1.im, -c1.re)))/2;
     annotation(Inline=true);
   end cos;
 
@@ -996,8 +993,6 @@ inputs and the number of outputs must be identical.
     import Modelica;
     import Modelica.Math.Matrices.LAPACK;
     import Modelica_LinearSystems2.Math.Complex;
-    import Re = Modelica_LinearSystems2.Math.Complex.real;
-    import Im = Modelica_LinearSystems2.Math.Complex.imag;
 
     input Real A[:,size(A, 1)] "real square matrix";
     output Complex eigvec[size(A, 1),size(A, 2)] "eigen values of the system";
@@ -1137,8 +1132,7 @@ inputs and the number of outputs must be identical.
       extends Modelica.Icons.Function;
 
       import Modelica_LinearSystems2.Math.Complex;
-      import Re = Modelica_LinearSystems2.Math.Complex.real;
-      import Im = Modelica_LinearSystems2.Math.Complex.imag;
+
 
       input Complex C[:,:];
       output Complex CT[size(C, 2),size(C, 1)];

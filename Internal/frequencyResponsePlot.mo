@@ -24,7 +24,7 @@ encapsulated function frequencyResponsePlot "Bode plot given f,A,phi values"
   input Boolean Hz=true
     "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
   input Boolean dB=false
-    "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Diagram(enable=magnitude));
+    "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Dialog(enable=magnitude));
 
   input Plot.Records.Diagram diagram "Diagram layout" annotation(Dialog);
   input Plot.Records.Device device=Modelica_LinearSystems2.Utilities.Plot.Records.Device()

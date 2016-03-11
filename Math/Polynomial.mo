@@ -13,7 +13,6 @@ operator record Polynomial "Record defining the data for a polynomial"
       "Demonstrate basic algebraic operations on polynomials"
       import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Polynomial.*;
 
       output Boolean ok;
 
@@ -32,7 +31,6 @@ operator record Polynomial "Record defining the data for a polynomial"
       "Demonstrate differentiation and integration of polynomials"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Polynomial.*;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica.Utilities.Streams.print;
 
@@ -51,8 +49,8 @@ operator record Polynomial "Record defining the data for a polynomial"
       Real der_val4;
     algorithm
       print("Show integration and differentation of y = " + String(p));
-      int_p := integral(p);
-      der_p := derivative(p);
+      int_p := Polynomial.integral(p);
+      der_p := Polynomial.derivative(p);
 
       print("  Integral of polynomial  : " + String(int_p));
       print("  Derivative of polynomial: " + String(der_p));
@@ -60,20 +58,20 @@ operator record Polynomial "Record defining the data for a polynomial"
       print(
         "Compute derivatives and integral directly and via polynomials above (for p(x=2)):");
       x := 2;
-      int_val1 := integralValue(p, x);
-      int_val2 := evaluate(int_p, x);
+      int_val1 := Polynomial.integralValue(p, x);
+      int_val2 := Polynomial.evaluate(int_p, x);
       print("      integralValue(p,x) = " + String(int_val1) +
         ", evaluate(integral(p),x) = " + String(int_val2));
 
-      der_val1 := derivativeValue(p, x);
-      der_val2 := evaluate(der_p, x);
+      der_val1 := Polynomial.derivativeValue(p, x);
+      der_val2 := Polynomial.evaluate(der_p, x);
       print("    derivativeValue(p,x) = " + String(der_val1) +
         ", evaluate(derivative(p),x) = " + String(der_val2));
-      der_val3 := derivativeValue(
+      der_val3 := Polynomial.derivativeValue(
             p,
             x,
             2);
-      der_val4 := evaluate(derivative(der_p), x);
+      der_val4 := Polynomial.evaluate(Polynomial.derivative(der_p), x);
       print("  derivativeValue(p,x,2) = " + String(der_val3) +
         ", evaluate(derivative(derivative(p)),x) = " + String(der_val4));
       tf := der_p/int_p;
@@ -83,7 +81,6 @@ operator record Polynomial "Record defining the data for a polynomial"
 
     function PascalTriangle "Generate and print Pascals triangle"
       import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Polynomial.*;
       import Modelica.Utilities.Streams.print;
 
       output Boolean ok;
