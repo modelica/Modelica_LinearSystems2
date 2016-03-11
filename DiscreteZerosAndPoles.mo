@@ -2465,13 +2465,13 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
       Integer n1n2d1d2[4]=if ZerosAndPoles.Internal.checkRepresentation(
           fileName) then ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(
           fileName) else ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(
-          fileName);
-      Integer n1=n1n2d1d2[1];
-      Integer n2=n1n2d1d2[2];
-      Integer d1=n1n2d1d2[3];
-      Integer d2=n1n2d1d2[4];
-      Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
-      Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
+          fileName) annotation(__Dymola_allowForSize=true);
+      Integer n1=n1n2d1d2[1] annotation(__Dymola_allowForSize=true);
+      Integer n2=n1n2d1d2[2] annotation(__Dymola_allowForSize=true);
+      Integer d1=n1n2d1d2[3] annotation(__Dymola_allowForSize=true);
+      Integer d2=n1n2d1d2[4] annotation(__Dymola_allowForSize=true);
+      Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2] annotation(__Dymola_allowForSize=true);
+      Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4] annotation(__Dymola_allowForSize=true);
     public
       output DiscreteZerosAndPoles dzp(n1=fill(0, n1), n2=fill(0, n2, 2), d1=fill(0, d1), d2=fill(0, d2, 2));
     algorithm

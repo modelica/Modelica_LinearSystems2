@@ -1390,8 +1390,8 @@ with
         "Name of the denominator of the transfer function";
 
     protected
-      Integer numSize[2]=readMatrixSize(fileName, numName);
-      Integer denSize[2]=readMatrixSize(fileName, denName);
+      Integer numSize[2]=readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
+      Integer denSize[2]=readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
 
       Real num[numSize[1],numSize[2]]=readMatrix(
             fileName,
@@ -1403,8 +1403,8 @@ with
             denName,
             denSize[1],
             denSize[2]) "denominator coefficients";
-      Integer ns2=numSize[2];
-      Integer ds2=denSize[2];
+      Integer ns2=numSize[2] annotation(__Dymola_allowForSize=true);
+      Integer ds2=denSize[2] annotation(__Dymola_allowForSize=true);
       Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);
 
     public

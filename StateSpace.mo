@@ -9457,10 +9457,10 @@ subsystem.D = ss.D[outputIndex, inputIndex];
         "Name of the state space system matrix (default is \"ABCD\") in the fileName"
         annotation (Dialog);
     protected
-      Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName);
-      Integer nx=xuy[1];
-      Integer nu=xuy[2];
-      Integer ny=xuy[3];
+      Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+      Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
+      Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
+      Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
 
     public
       output StateSpace result(

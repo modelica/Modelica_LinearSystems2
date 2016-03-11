@@ -2525,8 +2525,8 @@ is defined slightly differently.
     input String denName="d" "Name of the denominator of the transfer function";
 
     protected
-    Integer numSize[2]=readMatrixSize(fileName, numName);
-    Integer denSize[2]=readMatrixSize(fileName, denName);
+    Integer numSize[2]=readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
+    Integer denSize[2]=readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
 
     Real num[numSize[1],numSize[2]]=readMatrix(
           fileName,
@@ -2538,8 +2538,8 @@ is defined slightly differently.
           denName,
           denSize[1],
           denSize[2]) "denominator coefficients";
-    Integer ns2=numSize[2];
-    Integer ds2=denSize[2];
+    Integer ns2=numSize[2] annotation(__Dymola_allowForSize=true);
+    Integer ds2=denSize[2] annotation(__Dymola_allowForSize=true);
     public
    output TransferFunction tf(n=fill(0,ns2),d=fill(0,ds2)) "transfer function";
 

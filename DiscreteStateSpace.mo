@@ -3399,10 +3399,10 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
                         caption="state space system data file")));
     input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
     protected
-    Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName);
-    Integer nx=xuy[1];
-    Integer nu=xuy[2];
-    Integer ny=xuy[3];
+    Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+    Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
+    Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
+    Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
 
     public
     output DiscreteStateSpace result(
