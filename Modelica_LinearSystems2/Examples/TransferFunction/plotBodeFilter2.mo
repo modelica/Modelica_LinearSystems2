@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
 function plotBodeFilter2
   "Show low pass filters of all filter types in one diagram"
+  extends Modelica.Icons.Function;
+  
   import Modelica;
   import Modelica_LinearSystems2.TransferFunction;
   import AF = Modelica_LinearSystems2.Types.AnalogFilter;
@@ -14,25 +16,25 @@ function plotBodeFilter2
   output Boolean ok;
 protected
   TransferFunction tf1=TransferFunction.Design.filter(
-      analogFilter=AF.CriticalDamping,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple);
+    analogFilter=AF.CriticalDamping,
+    order=order,
+    f_cut=f_cut,
+    A_ripple=A_ripple);
   TransferFunction tf2=TransferFunction.Design.filter(
-      analogFilter=AF.Bessel,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple);
+    analogFilter=AF.Bessel,
+    order=order,
+    f_cut=f_cut,
+    A_ripple=A_ripple);
   TransferFunction tf3=TransferFunction.Design.filter(
-      analogFilter=AF.Butterworth,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple);
+    analogFilter=AF.Butterworth,
+    order=order,
+    f_cut=f_cut,
+    A_ripple=A_ripple);
   TransferFunction tf4=TransferFunction.Design.filter(
-      analogFilter=AF.Chebyshev,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple);
+    analogFilter=AF.Chebyshev,
+    order=order,
+    f_cut=f_cut,
+    A_ripple=A_ripple);
 algorithm
   Modelica_LinearSystems2.TransferFunction.Plot.bode(
     tf1,

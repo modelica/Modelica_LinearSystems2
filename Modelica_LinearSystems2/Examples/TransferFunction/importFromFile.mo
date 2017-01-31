@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
 function importFromFile
   "Example how to read a transfer function from a matlab file"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.Math.Polynomial;
 
@@ -9,8 +11,9 @@ function importFromFile
     annotation(Dialog(group="system data definition"),choices(checkBox=true));
 
   input String fileName=DataDir + "tf_siso_1.mat"
-    "file where numenator n and denominator d are stored" annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="transfer function data file"),enable = systemOnFile));
+    "File where numenator n and denominator d are stored"
+    annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+      caption="transfer function data file"),enable = systemOnFile));
 
   input Polynomial n=Polynomial({1,2,3}) annotation(Dialog(group="coefficients",enable = not systemOnFile));
   input Polynomial d=Polynomial({4,5,6}) annotation(Dialog(group="coefficients",enable = not systemOnFile));

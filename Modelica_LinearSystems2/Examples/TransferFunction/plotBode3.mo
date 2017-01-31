@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
 function plotBode3
   "Construct 2 transfer functions and plot the Bode diagram with automatic determination of the frequency range to plot"
+  extends Modelica.Icons.Function;
 
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.Math.Complex;
@@ -11,7 +12,7 @@ protected
   TransferFunction tf=TransferFunction({1}, {1,0,1});
 
 algorithm
-  Modelica_LinearSystems2.TransferFunction.Plot.bode(    tf);
+  Modelica_LinearSystems2.TransferFunction.Plot.bode(tf);
   ok := true;
 
   annotation (__Dymola_interactive=true);

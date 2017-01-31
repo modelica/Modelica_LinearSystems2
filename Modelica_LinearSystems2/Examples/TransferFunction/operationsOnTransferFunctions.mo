@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
 function operationsOnTransferFunctions
   "Demonstrate the usage of the functions of Modelica_LinearSystems2.TransferFunction"
+  extends Modelica.Icons.Function;
+  
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.TransferFunction;
@@ -10,12 +12,12 @@ function operationsOnTransferFunctions
 
 protected
   Complex j = Modelica_LinearSystems2.Math.Complex.j();
-TransferFunction tf1=TransferFunction(n={1,2}, d={2,3,4});
+  TransferFunction tf1=TransferFunction(n={1,2}, d={2,3,4});
   TransferFunction tf2=TransferFunction(3.4);
   ZerosAndPoles zp1=ZerosAndPoles({-1+0*j},{1+0*j,2+3*j,2-3*j},  k=4);
 
   ZerosAndPoles zp2=ZerosAndPoles(
-      fill(Complex(0), 0),{0.1+0*j}, k=5);
+    fill(Complex(0), 0),{0.1+0*j}, k=5);
   TransferFunction tf4=ZerosAndPoles.Conversion.toTransferFunction(zp1);
   TransferFunction tf5=ZerosAndPoles.Conversion.toTransferFunction(zp2);
 
