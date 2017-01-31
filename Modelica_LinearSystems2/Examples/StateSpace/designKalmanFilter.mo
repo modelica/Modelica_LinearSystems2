@@ -1,9 +1,10 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function designKalmanFilter "Example for Kalman filter design"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.TransferFunction;
-  extends Modelica.Icons.Function;
 
   input StateSpace ss=Modelica_LinearSystems2.StateSpace(TransferFunction(n={1},
       d={1,2,3,4}));
@@ -22,6 +23,9 @@ algorithm
     R);
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
-This example demonstrates the computatrion of a  Kalman filter by calling function <b>StateSpace.Design.kalmanFilter()</b>
+<p>
+This example demonstrates the computatrion of a Kalman filter by calling function 
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Design.kalmanFilter\">StateSpace.Design.kalmanFilter</a>.
+</p>
 </html>"));
 end designKalmanFilter;

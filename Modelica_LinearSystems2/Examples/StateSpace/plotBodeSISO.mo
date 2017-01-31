@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function plotBodeSISO
   "Constructs a zeros-and-poles transfer function from state space representation and plots the Bode diagram with automatic determination of the frequency range to plot "
+  extends Modelica.Icons.Function;
 
   import Modelica;
   import Modelica_LinearSystems2.StateSpace;
@@ -42,6 +43,10 @@ algorithm
   ok := true;
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
-This example demonstrates the construnction of a zeros-and-poles-transfer-function from a SISO state space representation and plots the Bode diagrams with automatic determination of the frequency range to plot
+<p>
+This example demonstrates the construnction of a zeros-and-poles-transfer-function 
+from a SISO state space representation and plots the Bode diagrams with automatic 
+determination of the frequency range to plot.
+</p>
 </html>"));
 end plotBodeSISO;

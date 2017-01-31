@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function conversionFromTransferFunction
   "Transform a TransferFunction into a StateSpace description"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.TransferFunction;
 
@@ -22,7 +24,7 @@ This example demonstrates the conversion of a transfer function into a state spa
 Running this function the following output will be printed containing the input transfer 
 function&nbsp;<code>tf</code> and the resulting output state space description&nbsp;<code>ss</code>.
 </p>
-<pre>
+<blockquote><pre>
 tf = (s + 1)/(s^3 + s^2 + s + 1)
 ss = 
   ss.A = 
@@ -44,6 +46,6 @@ ss =
   ss.D = 
              u1 
        y1    0                      
-</pre>
+</pre></blockquote>
 </html>"));
 end conversionFromTransferFunction;

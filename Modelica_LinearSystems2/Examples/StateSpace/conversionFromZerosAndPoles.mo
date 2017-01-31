@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function conversionFromZerosAndPoles
   "Transform a TransferFunction into a StateSpace description"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.Math.Complex;
@@ -22,7 +24,7 @@ This example demonstrates the conversion of a zeros-and-poles system into a stat
 Running this function the following output will be printed containing the input zeroes and poles 
 description&nbsp;<code>zp</code> and the resulting output state space description&nbsp;<code>ss</code>.
 </p>
-<pre>
+<blockquote><pre>
 zp = 4*(p - 2) /  ( (p - 1)*(p^2 - 4*p + 13) )
 ss = 
   ss.A = 
@@ -44,6 +46,6 @@ ss =
   ss.D = 
              u1 
        y1    0                      
-</pre>
+</pre></blockquote>
 </html>"));
 end conversionFromZerosAndPoles;

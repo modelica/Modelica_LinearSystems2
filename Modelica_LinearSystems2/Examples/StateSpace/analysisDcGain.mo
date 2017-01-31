@@ -1,16 +1,18 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function analysisDcGain "Example to compute dcGain of a state space system"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Utilities.Streams.print;
 
   input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
-      A=[1,0,0,0,0,0; 1,4,0,2,0,-1; 0,2,3,0,78,6; 1,1,2,2,3,3; 10,13,34,0,0,1; 3,
-        0,0,2,0,0],
-      B=[0,0; 0,0; 0,0; 0,0; 1,0; 0,0],
-      C=[1,0,1,0,1,0; 0,1,0,1,0,1; 0,1,0,1,0,1],
-     D=[0,0; 0,0; 0,0]);
+    A=[1,0,0,0,0,0; 1,4,0,2,0,-1; 0,2,3,0,78,6; 1,1,2,2,3,3; 10,13,34,0,0,1; 3,
+       0,0,2,0,0],
+    B=[0,0; 0,0; 0,0; 0,0; 1,0; 0,0],
+    C=[1,0,1,0,1,0; 0,1,0,1,0,1; 0,1,0,1,0,1],
+    D=[0,0; 0,0; 0,0]);
 
   output Boolean ok;
 protected
@@ -20,19 +22,19 @@ protected
 
   Real K2[2,1];
   StateSpace ss2=Modelica_LinearSystems2.StateSpace(
-      A=[0,0;
-         0,1],
-      B=[0;-2],
-      C=[1,0;0,1],
-      D=[0;0]);
+    A=[0,0;
+       0,1],
+    B=[0;-2],
+    C=[1,0;0,1],
+    D=[0;0]);
 
   Real K3[2,1];
   StateSpace ss3=Modelica_LinearSystems2.StateSpace(
-      A=[0,0;
-         0,1],
-      B=[5;-2],
-      C=[1,0;0,1],
-      D=[0;0]);
+    A=[0,0;
+       0,1],
+    B=[5;-2],
+    C=[1,0;0,1],
+    D=[0;0]);
 
 algorithm
   ok := false;
@@ -46,7 +48,12 @@ algorithm
   print(Matrices.printMatrix(K3, name="K3") + "\nfinite3 = " + String(finite) + "\n");
 
   ok := true;
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+
+  annotation (
+    __Dymola_interactive=true,
+    Documentation(info="<html>
+<p>
 This example shows how to calculate the dc-gain of a state space system.
+</p>
 </html>"));
 end analysisDcGain;

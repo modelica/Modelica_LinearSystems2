@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function plotTimeResponse "Time response plot example"
+  extends Modelica.Icons.Function;
 
   input Modelica_LinearSystems2.Types.TimeResponse response=
     Modelica_LinearSystems2.Types.TimeResponse.Step "Type of time response";

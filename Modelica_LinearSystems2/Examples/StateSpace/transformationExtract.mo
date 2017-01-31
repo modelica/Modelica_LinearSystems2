@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function transformationExtract
   "Example how to extract input/output related subsystems from state space system record"
+  extends Modelica.Icons.Function;
 
 protected
   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
@@ -23,7 +24,10 @@ subSys :=  Modelica_LinearSystems2.StateSpace.Transformation.extract(
     i2);
  Modelica.Utilities.Streams.print("Subsystem is " +String(subSys));
 
-  annotation (Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
+<p>
 This example shows how to extract input/output related subsystems from state space system record.
+</p>
 </html>"));
 end transformationExtract;

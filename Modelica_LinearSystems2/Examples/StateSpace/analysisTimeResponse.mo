@@ -1,14 +1,16 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function analysisTimeResponse "Compute time response of a state space system"
+  extends Modelica.Icons.Function;
+
   import Modelica;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Types.TimeResponse;
 
   input Modelica_LinearSystems2.StateSpace sc=Modelica_LinearSystems2.StateSpace(
-      A=[-1,1; 0,-2],
-      B=[1,0; 0,1],
-      C=[1,0; 0,1],
-      D=[0,0; 0,0]);
+    A=[-1,1; 0,-2],
+    B=[1,0; 0,1],
+    C=[1,0; 0,1],
+    D=[0,0; 0,0]);
   input TimeResponse response=TimeResponse.Step;
   input Real dt=0.01;
   input Real span=5;
@@ -64,11 +66,14 @@ algorithm
     heading="Step response to synchronous step of u1 and u2",
     xLabel="time [s]",
     yLabel="y1, y2"));
-  annotation (Documentation(info="<html>
+  annotation (
+    __Dymola_interactive=true,
+    Documentation(info="<html>
 <p>
 Computes the time response of the system
 StateSpace <i>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>,
 sampled at <i>Ts=0.01</i> with inititial state <i>x0=[0;0]</i>
 subject to the system input <i>u = ones(samples,2)</i>, (<i>samples</i> is set to 30).
-</html>"), __Dymola_interactive=true);
+</p>
+</html>"));
 end analysisTimeResponse;

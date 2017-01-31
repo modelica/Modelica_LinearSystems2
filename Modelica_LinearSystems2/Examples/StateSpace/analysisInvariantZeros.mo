@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function analysisInvariantZeros
   "Example to compute the invariant zeros of a state space system"
+  extends Modelica.Icons.Function;
+
   import Modelica;
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.Math.Complex;
@@ -15,12 +17,12 @@ function analysisInvariantZeros
   input Real k=1.0 "Constant multiplied with transfer function";
 
 protected
-  input Complex j=Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j = Modelica_LinearSystems2.Math.Complex.j();
 
-  ZerosAndPoles zp=ZerosAndPoles(
-      z=z,
-      p=p,
-      k=k);
+  ZerosAndPoles zp = ZerosAndPoles(
+    z=z,
+    p=p,
+    k=k);
 
   StateSpace ss=StateSpace(zp);
   Complex Zeros[:];

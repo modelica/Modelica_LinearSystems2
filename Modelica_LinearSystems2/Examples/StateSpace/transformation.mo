@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function transformation
   "Example to demonstrate the transformation to Jordan- observabilitiy- and controllability canonical form"
+  extends Modelica.Icons.Function;
   import Modelica_LinearSystems2.StateSpace;
 
   input String fileName="NoName" "file where matrix [A, B; C, D] is stored" annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
@@ -82,6 +83,8 @@ algorithm
   ok := true;
 
   annotation (Documentation(info="<html>
+</p>
 Example to demonstrate the transformation of a state space representation to Jordan- observabilitiy- and controllability canonical form
+</p>
 </html>"));
 end transformation;

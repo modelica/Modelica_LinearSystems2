@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function plotZeros "Case studies of systems with zeros"
+  extends Modelica.Icons.Function;
 
   import Modelica;
   import Modelica_LinearSystems2;
@@ -133,7 +134,7 @@ StateSpace <i>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 
 This example plots the output y and the states (x1, x2, x3) of a system with the input
 </p>
 <blockquote><pre>
-   u(t) = uk*exp(zk*t)
+u(t) = uk*exp(zk*t)
 </pre></blockquote>
 <p>
 where zk is an invariant zero of the system. Assuming appropriate initial conditions, the output of the system is forced to zero. It is demonstrated that the output can also be forced to zero by applying a transient unstable input. Although the output is zero, the states show transient and unstable behavior. In comparison, the outputs as an reaction of inputs with half or double frequency are not equal to zero.

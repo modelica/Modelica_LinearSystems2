@@ -10,6 +10,8 @@ function plotPolesAndZeros
       C=[0,0,1,0,1,0; 0,1,0,0,1,1],
       D=[0,0; 0,0]));
   annotation(__Dymola_interactive=true, Documentation(info="<html>
+<p>
 This example demonstrates the plotting of eigenvalues and invariant zeros of a state space system.
+</p>
 </html>"));
 end plotPolesAndZeros;

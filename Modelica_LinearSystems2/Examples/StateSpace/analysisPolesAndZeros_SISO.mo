@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function analysisPolesAndZeros_SISO
-  "Compute poles and invariant zeros of a SISO state space system by transformation to a minmal system"
+  "Obsolete function. Use Examples.StateSpace.analysisPolesAndZerosSISO instead"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Complex;
 
@@ -47,4 +49,10 @@ algorithm
 
   ok := true;
 
+
+  annotation (Icon(graphics={Ellipse(
+          extent={{-100,100},{100,-100}},
+          lineColor={255,0,0},
+          pattern=LinePattern.Dash,
+          lineThickness=0.5)}));
 end analysisPolesAndZeros_SISO;

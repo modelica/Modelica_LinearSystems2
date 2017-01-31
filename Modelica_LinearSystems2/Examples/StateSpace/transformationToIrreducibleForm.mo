@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function transformationToIrreducibleForm
   "Example to compute the minimal state space realization of a given SISO state space realization"
+  extends Modelica.Icons.Function;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.StateSpace;
 
@@ -45,7 +46,9 @@ algorithm
   Modelica.Utilities.Streams.print("\n\nminimal system:\n" + String(sso));
   ok := true;
   annotation (Documentation(info="<html>
+<p>
 This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.reduceSystem</b> which compute
 a controllable and observable state space realization of a given state space realization.
+</p>
 </html>"));
 end transformationToIrreducibleForm;
