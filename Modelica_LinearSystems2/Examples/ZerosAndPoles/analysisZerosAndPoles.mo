@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 encapsulated function analysisZerosAndPoles
   "Compute zeros and poles of a ZerosAndPoles transfer function"
+  extends Modelica.Icons.Function;
+
   import Modelica;
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2;
@@ -16,10 +18,12 @@ protected
   Complex numeratorZeros3[4]={-1+j,-1-j,1+0*j,1+0*j};
   Complex denominatorZeros3[6]={1+0*j,2+0*j,2+3*j,2-3*j,3+4*j,3-4*j};
 
-  ZerosAndPoles zp=ZerosAndPoles(z=numeratorZeros1, p=
-      denominatorZeros1);
-  ZerosAndPoles zp2=ZerosAndPoles(z=numeratorZeros3, p=
-      denominatorZeros3);
+  ZerosAndPoles zp = ZerosAndPoles(
+    z=numeratorZeros1,
+    p=denominatorZeros1);
+  ZerosAndPoles zp2 = ZerosAndPoles(
+    z=numeratorZeros3,
+    p=denominatorZeros3);
   Complex numeratorZeros2[:];
   Complex denominatorZeros2[:];
   Real k;

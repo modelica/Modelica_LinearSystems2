@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 function plotBode1
   "Construct a ZerosAndPoles system and plot the Bode diagram with automatic determination of the frequency range to plot"
+  extends Modelica.Icons.Function;
+
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
@@ -13,10 +15,9 @@ protected
   TransferFunction tf=TransferFunction(n={w}, d={1,w});
   ZerosAndPoles zp=ZerosAndPoles(tf);
 algorithm
-  Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(    zp);
-  ok := true;
+  Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(zp);
 
-equation
+  ok := true;
 
   annotation (__Dymola_interactive=true);
 end plotBode1;

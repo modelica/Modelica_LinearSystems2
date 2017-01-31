@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 function plotBodeFilter2 "Show low pass filters of all filter types"
+  extends Modelica.Icons.Function;
+
   import Modelica;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import AF = Modelica_LinearSystems2.Types.AnalogFilter;
@@ -13,25 +15,25 @@ function plotBodeFilter2 "Show low pass filters of all filter types"
   output Boolean ok;
 protected
   ZerosAndPoles tf1=ZerosAndPoles.Design.filter(
-      analogFilter=AF.CriticalDamping,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple);
+    analogFilter=AF.CriticalDamping,
+    order=order,
+    f_cut=f_cut,
+    A_ripple=A_ripple);
   ZerosAndPoles tf2=ZerosAndPoles.Design.filter(
-      analogFilter=AF.Bessel,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple);
+    analogFilter=AF.Bessel,
+    order=order,
+    f_cut=f_cut,
+    A_ripple=A_ripple);
   ZerosAndPoles tf3=ZerosAndPoles.Design.filter(
-      analogFilter=AF.Butterworth,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple);
+    analogFilter=AF.Butterworth,
+    order=order,
+    f_cut=f_cut,
+    A_ripple=A_ripple);
   ZerosAndPoles tf4=ZerosAndPoles.Design.filter(
-      analogFilter=AF.Chebyshev,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple);
+    analogFilter=AF.Chebyshev,
+    order=order,
+    f_cut=f_cut,
+    A_ripple=A_ripple);
 algorithm
   Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(
     tf1,

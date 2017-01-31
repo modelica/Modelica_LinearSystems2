@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 function plotBode3
   "Construct a ZerosAndPoles system and plot the Bode diagram with automatic determination of the frequency range to plot"
+  extends Modelica.Icons.Function;
+
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.TransferFunction;
@@ -51,7 +53,8 @@ algorithm
     autoRange=false,
     f_min=f_min,
     f_max=f_max);
-   ok := true;
+
+  ok := true;
 
   annotation (__Dymola_interactive=true);
 end plotBode3;

@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 encapsulated function analysisDcGain "Compute steady state gain"
+  extends Modelica.Icons.Function;
+
   import Modelica;
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2;
@@ -15,12 +17,14 @@ protected
   Complex numeratorZeros3[4]={-1+j,-1-j,1+0*j,1+0*j};
   Complex denominatorZeros3[6]={1+0*j,2+0*j,2+3*j,2-3*j,3+4*j,3-4*j};
 
-  ZerosAndPoles zp=ZerosAndPoles(z=numeratorZeros1,
-                                 p=denominatorZeros1);
-  ZerosAndPoles zp2=ZerosAndPoles(z=numeratorZeros3,
-                                  p=denominatorZeros3);
+  ZerosAndPoles zp=ZerosAndPoles(
+    z=numeratorZeros1,
+    p=denominatorZeros1);
+  ZerosAndPoles zp2=ZerosAndPoles(
+    z=numeratorZeros3,
+    p=denominatorZeros3);
   ZerosAndPoles zp3=ZerosAndPoles.Internal.baseFilter(
-                                                    Types.AnalogFilter.Bessel,order=5);
+    Types.AnalogFilter.Bessel,order=5);
   Real k;
   Boolean finite;
 algorithm

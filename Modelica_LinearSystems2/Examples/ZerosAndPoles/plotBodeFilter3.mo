@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 function plotBodeFilter3 "Show high pass filters of all filter types"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.ZerosAndPoles;
   import AF = Modelica_LinearSystems2.Types.AnalogFilter;
   import FT = Modelica_LinearSystems2.Types.FilterType;
@@ -13,29 +15,29 @@ function plotBodeFilter3 "Show high pass filters of all filter types"
   output Boolean ok;
 protected
   ZerosAndPoles tf1=ZerosAndPoles.Design.filter(
-      analogFilter=AF.CriticalDamping,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple,
-      filterType=FT.HighPass);
+    analogFilter=AF.CriticalDamping,
+    order=order,
+    f_cut=f_cut,
+    A_ripple=A_ripple,
+    filterType=FT.HighPass);
   ZerosAndPoles tf2=ZerosAndPoles.Design.filter(
-      analogFilter=AF.Bessel,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple,
-      filterType=FT.HighPass);
+    analogFilter=AF.Bessel,
+    order=order,
+    f_cut=f_cut,
+    A_ripple=A_ripple,
+    filterType=FT.HighPass);
   ZerosAndPoles tf3=ZerosAndPoles.Design.filter(
-      analogFilter=AF.Butterworth,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple,
-      filterType=FT.HighPass);
+    analogFilter=AF.Butterworth,
+    order=order,
+    f_cut=f_cut,
+    A_ripple=A_ripple,
+    filterType=FT.HighPass);
   ZerosAndPoles tf4=ZerosAndPoles.Design.filter(
-      analogFilter=AF.Chebyshev,
-      order=order,
-      f_cut=f_cut,
-      A_ripple=A_ripple,
-      filterType=FT.HighPass);
+    analogFilter=AF.Chebyshev,
+    order=order,
+    f_cut=f_cut,
+    A_ripple=A_ripple,
+    filterType=FT.HighPass);
 algorithm
   Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(
     tf1,

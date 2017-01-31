@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 function plotPolesAndZeros
   "Example for plotting poles and zeros of a ZerosAndPoles transfer function"
+  extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
@@ -13,9 +14,9 @@ protected
 algorithm
   Modelica_LinearSystems2.ZerosAndPoles.Plot.polesAndZeros(
     zp=zp,
- defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
-      heading="Poles and zeros of " + String(tf)),
-      device=Modelica_LinearSystems2.Utilities.Plot.Records.Device(xTopLeft=50, yTopLeft=30));
+ defaultDiagram = Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
+   heading="Poles and zeros of " + String(tf)),
+   device=Modelica_LinearSystems2.Utilities.Plot.Records.Device(xTopLeft=50, yTopLeft=30));
 
   annotation(__Dymola_interactive=true);
 end plotPolesAndZeros;

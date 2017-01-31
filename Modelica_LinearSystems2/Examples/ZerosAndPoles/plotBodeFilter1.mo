@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 function plotBodeFilter1 "Compute filter and plot frequency response of filter"
+  extends Modelica.Icons.Function;
+
   import Modelica;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.Types;
@@ -11,15 +13,13 @@ function plotBodeFilter1 "Compute filter and plot frequency response of filter"
   output Boolean ok;
 protected
   ZerosAndPoles tf_filter=ZerosAndPoles.Design.filter(
-      order=order,
-      f_cut=f_cut,
-      analogFilter=analogFilter);
+    order=order,
+    f_cut=f_cut,
+    analogFilter=analogFilter);
 
 algorithm
-  Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(
-                                  tf_filter);
+  Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(tf_filter);
   ok := true;
-equation
 
   annotation (__Dymola_interactive=true);
 end plotBodeFilter1;

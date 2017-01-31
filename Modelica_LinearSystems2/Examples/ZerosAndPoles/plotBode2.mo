@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 function plotBode2 "Bode plot of PT2 transfer function with zero damping"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.Math.Complex;
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.TransferFunction;
@@ -16,8 +18,8 @@ protected
   TransferFunction tf=TransferFunction(n={k*w^2}, d={1,2*D*w,w*w});
   ZerosAndPoles zp=ZerosAndPoles(tf);
 algorithm
-  Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(
-                                  zp, nPoints);
+  Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(zp, nPoints);
+  
   ok := true;
 
   annotation (__Dymola_interactive=true);
