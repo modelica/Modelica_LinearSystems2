@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 function diagram "Plot one diagram"
   import Modelica_LinearSystems2.Utilities.Plot.Types;
+  import Modelica_LinearSystems2.Utilities.Plot.Internal;
+
   input Modelica_LinearSystems2.Utilities.Plot.Records.Diagram diagram
     "Diagram to be shown" annotation(Dialog);
   input Modelica_LinearSystems2.Utilities.Plot.Records.Device device=
@@ -62,15 +64,16 @@ algorithm
                      id=id,
                      erase=false);
     else
-      OK :=plotArray(diagram.curve[i].x,
-                     diagram.curve[i].y,
-                     legend=diagram.curve[i].legend,
-                     color=diagram.curve[i].lineColor,
-                     pattern=Internal.convertToDymolaPattern(diagram.curve[i].linePattern),
-                     marker=Internal.convertToDymolaMarker(diagram.curve[i].lineSymbol),
-                     thickness=diagram.curve[i].lineThickness,
-                     id=id,
-                     erase=false);
+      OK := plotArray(
+        diagram.curve[i].x,
+        diagram.curve[i].y,
+        legend=diagram.curve[i].legend,
+        color=diagram.curve[i].lineColor,
+        pattern=Internal.convertToDymolaPattern(diagram.curve[i].linePattern),
+        marker=Internal.convertToDymolaMarker(diagram.curve[i].lineSymbol),
+        thickness=diagram.curve[i].lineThickness,
+        id=id,
+        erase=false);
     end if;
   end for;
 

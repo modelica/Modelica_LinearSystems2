@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Utilities.Plot;
 function parameterizedCurves
   "Plot parametrized curve with one or more branches"
   import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Utilities.Plot.Internal;
 
   input Modelica_LinearSystems2.Utilities.Plot.Records.ParametrizedCurves diagram
     "Parametrized curve data points" annotation(Dialog);
@@ -72,20 +73,20 @@ algorithm
         symbols[i]     :=diagram.curveProperties[j].lineSymbol;
         thicknesses[i] :=diagram.curveProperties[j].lineThickness;
      end for;
-     plotParametricCurves(
-                   x=diagram.X,
-                   y=diagram.Y,
-                   s=diagram.s,
-                   xName=diagram.xName,
-                   yName=diagram.yName,
-                   sName=diagram.sName,
-                   legends=diagram.legends,
-                   id = id,
-                   labelWithS=diagram.labelWithS,
-                   colors=colors,
-                   patterns=Internal.convertToDymolaPattern(patterns),
-                   markers=Internal.convertToDymolaMarker(symbols),
-                   thicknesses=thicknesses);
+    plotParametricCurves(
+      x=diagram.X,
+      y=diagram.Y,
+      s=diagram.s,
+      xName=diagram.xName,
+      yName=diagram.yName,
+      sName=diagram.sName,
+      legends=diagram.legends,
+      id=id,
+      labelWithS=diagram.labelWithS,
+      colors=colors,
+      patterns=Internal.convertToDymolaPattern(patterns),
+      markers=Internal.convertToDymolaMarker(symbols),
+      thicknesses=thicknesses);
   end if;
 
 /*
