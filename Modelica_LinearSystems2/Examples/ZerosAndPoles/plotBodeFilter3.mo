@@ -3,8 +3,8 @@ function plotBodeFilter3 "Show high pass filters of all filter types"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import AF = Modelica_LinearSystems2.Types.AnalogFilter;
-  import FT = Modelica_LinearSystems2.Types.FilterType;
+  import AF = Modelica_LinearSystems2.Utilities.Types.AnalogFilter;
+  import FT = Modelica_LinearSystems2.Utilities.Types.FilterType;
 
   input Integer order(min=1) = 4 "Order of filter";
   input Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency";

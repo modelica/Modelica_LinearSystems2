@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Types;
+within Modelica_LinearSystems2.Utilities.Types;
 type Grid = enumeration(
     OneValue,
     Equidistant,

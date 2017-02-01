@@ -52,11 +52,10 @@ model ZerosAndPolesBlock
   Modelica.Blocks.Sources.Step step(startTime=1)
     annotation (Placement(transformation(extent={{-60,-20},{-40,0}})));
   inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(
-    methodType=Modelica_LinearSystems2.Types.Method.Trapezoidal,
+    methodType=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal,
     sampleTime=0.01,
     initType=Modelica_LinearSystems2.Controller.Types.Init.InitialOutput,
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete)
-    annotation (Placement(transformation(extent={{60,60},{80,80}})));
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete) annotation (Placement(transformation(extent={{60,60},{80,80}})));
 
 equation
   connect(zerosAndPoles.u, step.y) annotation (Line(

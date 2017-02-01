@@ -28,10 +28,10 @@ model InverseDoublePendulum "Inverse double pendulum"
 
   inner Modelica.Mechanics.MultiBody.World world(
     gravityType=Modelica.Mechanics.MultiBody.Types.GravityTypes.UniformGravity,
-
     animateWorld=false,
     animateGravity=false) annotation (Placement(transformation(extent={{-140,-80},
             {-120,-60}}, rotation=0)));
+
   Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(
     useAxisFlange=true,
     s(start=s_start, fixed=true),
@@ -120,8 +120,8 @@ model InverseDoublePendulum "Inverse double pendulum"
           extent={{150,-30},{170,-10}}), iconTransformation(extent={{100,-30},{
             120,-10}})));
   Modelica.Blocks.Interfaces.RealOutput phi1 annotation (Placement(
-        transformation(extent={{150,-70},{170,-50}}), iconTransformation(extent
-          ={{100,-70},{120,-50}})));
+        transformation(extent={{150,-70},{170,-50}}), iconTransformation(extent=
+           {{100,-70},{120,-50}})));
   Modelica.Blocks.Interfaces.RealOutput w1 annotation (Placement(transformation(
           extent={{150,-110},{170,-90}}), iconTransformation(extent={{100,-110},
             {120,-90}})));

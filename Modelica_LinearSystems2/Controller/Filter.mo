@@ -1,14 +1,10 @@
 within Modelica_LinearSystems2.Controller;
 block Filter
   "Continuous or discretized analog low or high pass IIR-filter (CriticalDamping/Bessel/Butterworth/Chebyshev)"
-  import Modelica_LinearSystems2.Types;
+  import Modelica_LinearSystems2.Utilities.Types;
   extends ZerosAndPoles(final system=system3);
-  parameter Modelica_LinearSystems2.Types.AnalogFilter analogFilter=
-      Modelica_LinearSystems2.Types.AnalogFilter.CriticalDamping
-    "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-  parameter Modelica_LinearSystems2.Types.FilterType filterType=
-      Modelica_LinearSystems2.Types.FilterType.LowPass
-    "Type of filter (LowPass/HighPass)";
+  parameter Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+  parameter Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
   parameter Integer order(min=1) = 2 "Order of filter";
   parameter Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency";
   parameter Real gain=1.0
@@ -16,7 +12,7 @@ block Filter
   parameter Boolean normalized=true
     "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   parameter Real A_ripple(unit="dB") = 0.5
-    "Pass band ripple for Chebyshev filter (otherwise not used)" annotation(Dialog(enable=analogFilter==Modelica_LinearSystems2.Types.AnalogFilter.Chebyshev));
+    "Pass band ripple for Chebyshev filter (otherwise not used)" annotation(Dialog(enable=analogFilter == Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Chebyshev));
 
 protected
   parameter Modelica_LinearSystems2.ZerosAndPoles.Internal.ZerosAndPoles

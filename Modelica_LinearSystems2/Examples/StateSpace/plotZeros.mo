@@ -24,7 +24,7 @@ protected
   Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
   Real x[size(t,1),size(ss.A,1)];
   Real Ts=sampleT;
-  Modelica_LinearSystems2.DiscreteStateSpace sd=Modelica_LinearSystems2.DiscreteStateSpace(ss, Ts, method=Modelica_LinearSystems2.Types.Method.StepExact);
+  Modelica_LinearSystems2.DiscreteStateSpace sd=Modelica_LinearSystems2.DiscreteStateSpace(ss, Ts, method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact);
   Boolean ok;
 
 algorithm

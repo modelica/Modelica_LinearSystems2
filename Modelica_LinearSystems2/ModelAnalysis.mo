@@ -78,8 +78,7 @@ package ModelAnalysis
     "Linearize a model and perform all available linear analysis operations"
     extends Modelica_LinearSystems2.Internal.PartialAnalyzeFunction;
     input Boolean dB_w = false
-      "= true, to plot Bode as dB over w [rad/s] otherwise magnitude over f [Hz]"
-                                                                                  annotation(choices(checkBox=true));
+      "= true, to plot Bode as dB over w [rad/s] otherwise magnitude over f [Hz]" annotation(choices(checkBox=true));
   algorithm
      Modelica_LinearSystems2.StateSpace.Analysis.analysis(ssLin,
         analyseOptions=Modelica_LinearSystems2.Internal.AnalyseOptions(dB_w=dB_w));

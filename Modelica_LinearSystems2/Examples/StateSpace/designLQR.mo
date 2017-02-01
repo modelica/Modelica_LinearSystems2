@@ -22,7 +22,7 @@ function designLQR "Example for LQR controller design"
   output Boolean ok;
 
 protected
-  StateSpace ss=if systemOnFile then 
+  StateSpace ss=if systemOnFile then
     Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName) else ssi;
   Real Q[:,:]=identity(4) " state weighting matrix";
   Real R[:,:]=identity(1) " input weighting matrix";

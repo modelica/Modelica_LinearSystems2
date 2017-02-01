@@ -17,8 +17,7 @@ function plotBodeSISODiscrete
   input Real D[size(C, 1),size(B, 2)]=[1.0,0.0; 0.0,1.0];
 
   input Modelica.SIunits.Time Ts = 0.1 "Sample time";
-  input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact
-    "Discretization method";
+  input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact "Discretization method";
 
   input Integer iu=1 "index of inout";
   input Integer iy=1 "index of output";

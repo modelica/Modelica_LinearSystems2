@@ -21,7 +21,7 @@ function designLQG "Example for LQG controller design"
   output Boolean ok;
 
 protected
-  StateSpace ss=if systemOnFile then 
+  StateSpace ss=if systemOnFile then
     Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName) else ssi;
   Real Q[:,:] = transpose(ss.C)*ss.C "State weighting matrix";
   Real R[:,:] = identity(2) "Input weighting matrix";

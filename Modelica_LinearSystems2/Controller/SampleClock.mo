@@ -10,9 +10,7 @@ block SampleClock
         "Continuous",
         choice=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete
         "Discrete"));
-  parameter Modelica_LinearSystems2.Types.Method methodType=
-      Modelica_LinearSystems2.Types.Method.Trapezoidal
-    "Discretization method for discrete blocks";
+  parameter Modelica_LinearSystems2.Utilities.Types.Method methodType=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method for discrete blocks";
   parameter Modelica.SIunits.Time sampleTime = 1
     "Base sample time for discrete blocks";
   parameter Types.Init initType=Modelica_LinearSystems2.Controller.Types.Init.SteadyState

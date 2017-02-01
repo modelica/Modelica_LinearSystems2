@@ -1,14 +1,12 @@
 within Modelica_LinearSystems2.Controller.Internal;
 function FIR_coefficients "Calculates the FIR-filter coefficient vector"
-  import Modelica_LinearSystems2.Types.FilterType;
+  import Modelica_LinearSystems2.Utilities.Types.FilterType;
   import Modelica_LinearSystems2.Controller.Types.FIRspec;
 
   input FIRspec specType=Modelica_LinearSystems2.Controller.Types.FIRspec.MeanValue
     "Specification type of FIR filter";
   input Integer L(min=2) = 2 "Length of mean value filter" annotation(Dialog(enable=specType==FIRspec.MeanValue));
-  input Modelica_LinearSystems2.Types.FilterType filterType=
-      Modelica_LinearSystems2.Types.FilterType.LowPass "Type of filter"
-                            annotation(Dialog(enable=specType==FIRspec.Window));
+  input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter" annotation (Dialog(enable=specType == FIRspec.Window));
   input Integer order(min=1) = 2 "Order of filter" annotation(Dialog(enable=specType==FIRspec.Window));
   input Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency" annotation(Dialog(enable=specType==FIRspec.Window));
   input Modelica.SIunits.Time Ts(min=0) "Sampling time";

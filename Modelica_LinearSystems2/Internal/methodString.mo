@@ -3,7 +3,7 @@ function methodString
   "Return a sting with the name of the discretization method"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Types.Method;
+  import Modelica_LinearSystems2.Utilities.Types.Method;
 
   input Method method;
   output String s;

@@ -10,7 +10,7 @@ protected
     3.59015)*(q^2 - 1.80063*q + 0.818731)/((q - 0.904837)*(q - 0.860708)*(q
     ^2 - 1.89533*q + 0.904837)*(q^2 - 1.79161*q + 0.818731));
   Real Ts=0.1;
-  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
+  Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact;
 algorithm
   dzp.Ts := Ts;
   dzp.method := method;

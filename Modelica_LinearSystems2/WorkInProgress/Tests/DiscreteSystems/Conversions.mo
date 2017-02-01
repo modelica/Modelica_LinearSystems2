@@ -17,7 +17,7 @@ function Conversions
   input Modelica.SIunits.Time Ts=0.1;
 
 protected
-  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
+  Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact;
 
   ZerosAndPoles zp1=ZerosAndPoles(
       n1={2},
@@ -149,7 +149,7 @@ algorithm
   assert(ok, "dzp1 or dtf1 failed");
 
 //##############   impulse check   ###################
-  method := Modelica_LinearSystems2.Types.Method.ImpulseExact;
+  method :=Modelica_LinearSystems2.Utilities.Types.Method.ImpulseExact;
 
   dzp1 := DiscreteZerosAndPoles(zp1, Ts, method);
   dss1 := DiscreteStateSpace(dzp1);

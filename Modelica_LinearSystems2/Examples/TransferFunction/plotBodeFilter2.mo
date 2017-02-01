@@ -2,10 +2,10 @@ within Modelica_LinearSystems2.Examples.TransferFunction;
 function plotBodeFilter2
   "Show low pass filters of all filter types in one diagram"
   extends Modelica.Icons.Function;
-  
+
   import Modelica;
   import Modelica_LinearSystems2.TransferFunction;
-  import AF = Modelica_LinearSystems2.Types.AnalogFilter;
+  import AF = Modelica_LinearSystems2.Utilities.Types.AnalogFilter;
 
   input Integer order(min=1) = 4 "Order of filter";
   input Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency";

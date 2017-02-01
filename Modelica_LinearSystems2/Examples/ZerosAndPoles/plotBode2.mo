@@ -19,7 +19,7 @@ protected
   ZerosAndPoles zp=ZerosAndPoles(tf);
 algorithm
   Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(zp, nPoints);
-  
+
   ok := true;
 
   annotation (__Dymola_interactive=true);

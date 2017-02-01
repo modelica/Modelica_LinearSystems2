@@ -17,9 +17,7 @@ operator record DiscreteZerosAndPoles
   Modelica.SIunits.Time Ts "Sample time"
     annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
-  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-    "Discretization method"
-        annotation(Dialog(group="Data used to construct discrete from continuous system"));
+  Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
 /* If the numerator polynomial has no coefficients, the transfer function
    is zero. The denominator polynomial must always have at
@@ -43,8 +41,7 @@ operator record DiscreteZerosAndPoles
 
       input Real r "Value of Real variable";
       input Modelica.SIunits.Time Ts=0 "Sample time";
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
       output DiscreteZerosAndPoles dzp(
@@ -99,9 +96,7 @@ Therefore, the record is defined by
     input Modelica.SIunits.Time Ts "Sample time"
          annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
-    input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method"
-          annotation(Dialog(group="Data used to construct discrete from continuous system"));
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
     output DiscreteZerosAndPoles dzp;
     protected
@@ -164,8 +159,7 @@ discrete zeros-and-poles transfer function is derived from DiscreteStateSpace by
         "Poles (Complex vector of denominator zeros)";
     input Real k=1.0 "Constant multiplied with transfer function";
     input Modelica.SIunits.Time Ts "Sample time";
-       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
     input String uName="" "input name";
     input String yName="" "output name";
     output DiscreteZerosAndPoles dzp(
@@ -294,8 +288,7 @@ is defined as
       input Real k=1.0 "Multiplicative factor of transfer function"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Modelica.SIunits.Time Ts=1 "Sample time";
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
       output DiscreteZerosAndPoles dzp(
@@ -457,8 +450,7 @@ function 'dzp*dzp'
 
   input DiscreteZerosAndPoles dzp1;
   input DiscreteZerosAndPoles dzp2;
-  input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
   input String uName=dzp1.uName "Input name";
   input String yName=dzp2.yName "Output name";
 
@@ -726,7 +718,7 @@ end '==';
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.DiscreteZerosAndPoles;
     import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.Types.Method;
+    import Modelica_LinearSystems2.Utilities.Types.Method;
 
       input DiscreteZerosAndPoles dzp
       "DiscreteZerosAndPoles transfer function to be transformed in a String representation";
@@ -839,10 +831,10 @@ DiscreteZerosAndPoles dzp = q/(q^2 + q + 1)/(q + 1)
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       extends Modelica_LinearSystems2.Internal.timeResponseMask_zp_discrete;  // Input/Output declarations of discrete time response functions
-      input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
       input Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
         "Initial state vector";
 
@@ -933,10 +925,10 @@ Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated
         tSpanVar := tSpan;
       end if;
 
-      (y,t,x_discrete) := DiscreteZerosAndPoles.Analysis.timeResponse(
+      (y,t,x_discrete) :=DiscreteZerosAndPoles.Analysis.timeResponse(
           dzp=dzp,
           tSpan=tSpanVar,
-          response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
           x0=zeros(DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)));
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
@@ -1011,11 +1003,11 @@ DiscreteZerosAndPoles.Analysis.timeResponse(dzp, tSpan, response=Types.TimeRespo
       tSpanVar := tSpan;
     end if;
 
-    (y,t,x_discrete) := DiscreteZerosAndPoles.Analysis.timeResponse(
-      dzp=dzp,
-      tSpan=tSpanVar,
-      response=Modelica_LinearSystems2.Types.TimeResponse.Step,
-      x0=zeros(DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)));
+    (y,t,x_discrete) :=DiscreteZerosAndPoles.Analysis.timeResponse(
+          dzp=dzp,
+          tSpan=tSpanVar,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
+          x0=zeros(DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)));
 
     annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -1087,10 +1079,10 @@ DiscreteZerosAndPoles.Analysis.timeResponse(dzp, tSpan, response=Types.TimeRespo
         tSpanVar := tSpan;
       end if;
 
-      (y,t,x_discrete) := DiscreteZerosAndPoles.Analysis.timeResponse(
+      (y,t,x_discrete) :=DiscreteZerosAndPoles.Analysis.timeResponse(
           dzp=dzp,
           tSpan=tSpanVar,
-          response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
           x0=zeros(DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)));
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
@@ -1164,10 +1156,10 @@ DiscreteZerosAndPoles.Analysis.timeResponse(dzp, tSpan, response=Types.TimeRespo
         tSpanVar := tSpan;
       end if;
 
-      (y,t,x_discrete) := DiscreteZerosAndPoles.Analysis.timeResponse(
+      (y,t,x_discrete) :=DiscreteZerosAndPoles.Analysis.timeResponse(
           dzp=dzp,
           tSpan=tSpanVar,
-          response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial,
           x0=x0);
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
@@ -1579,15 +1571,14 @@ This function plots the bode-diagram of a DiscreteZerosAndPoles transfer functio
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
       import Modelica_LinearSystems2.Utilities.Plot;
 
     input Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
   //  input Real dt=0 "Sample time [s]";
     input Real tSpan=0 "Simulation time span [s]";
 
-    input Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Step "Type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "Type of time response";
     input Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
         DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
         "Initial state vector";
@@ -1698,9 +1689,7 @@ i.e. Impulse, Step, Ramp, or Initial.
         heading="Impulse response of  zp = "+String(dzp)));
 
     protected
-    Modelica_LinearSystems2.Types.TimeResponse response=
-      Modelica_LinearSystems2.Types.TimeResponse.Impulse
-        "Type of time response";
+      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse "Type of time response";
     Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
       DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
         "Initial state vector";
@@ -1763,7 +1752,7 @@ This function plots the impulse response of a discrete zeros-and-poles transfer 
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -1775,8 +1764,7 @@ This function plots the impulse response of a discrete zeros-and-poles transfer 
            + String(dzp)));
 
     protected
-    Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
+      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
     Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
         DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
         "Initial state vector";
@@ -1839,7 +1827,7 @@ This function plots the step response of a transfer function. It is based on <a 
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -1851,8 +1839,7 @@ This function plots the step response of a transfer function. It is based on <a 
            + String(dzp)));
 
     protected
-    Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Ramp "type of time response";
+      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp "type of time response";
 
     Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
         DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
@@ -1913,16 +1900,14 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
     input Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
     input Real tSpan=0 "Simulation time span [s]";
 
-    input Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Initial
-        "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "type of time response";
     input Real y0 "Initial output (for initial condition plot)";
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
@@ -2517,8 +2502,7 @@ second column respectively. The variable k is the real gain in both cases.
         "point in time of simulation to linearize the model";
       input String fileName="dslin" "Name of the result file";
       input Modelica.SIunits.Time Ts=1 "Sample time";
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
     protected
       String fileName2=fileName + ".mat";

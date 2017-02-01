@@ -29,9 +29,8 @@ model SimpleControlledDrive
     annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
   Filter filter(
     f_cut=5,
-    analogFilter=Modelica_LinearSystems2.Types.AnalogFilter.Bessel,
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete)
-    annotation (Placement(transformation(extent={{-71,20},{-51,40}})));
+    analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Bessel,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete) annotation (Placement(transformation(extent={{-71,20},{-51,40}})));
   Sampler sampler1(sampleFactor=2)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,

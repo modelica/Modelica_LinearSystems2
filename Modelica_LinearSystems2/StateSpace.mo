@@ -2708,7 +2708,7 @@ listed in the last column might be not the most relevant one.
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       input TimeResponse response=TimeResponse.Step;
       extends Modelica_LinearSystems2.Internal.timeResponseMask2(redeclare Real
@@ -2776,10 +2776,10 @@ listed in the last column might be not the most relevant one.
             size(sc.B, 2));
 
       if response == TimeResponse.Initial then
-        sd := Modelica_LinearSystems2.DiscreteStateSpace(
+        sd :=Modelica_LinearSystems2.DiscreteStateSpace(
               sc,
               dtVar,
-              Modelica_LinearSystems2.Types.Method.Trapezoidal);
+              Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal);
         (y[:, :, 1],x_continuous[:, :, 1]) :=
           Modelica_LinearSystems2.DiscreteStateSpace.initialResponse(
               sd,
@@ -2794,24 +2794,24 @@ listed in the last column might be not the most relevant one.
           if response == TimeResponse.Impulse then
             u[1, :] := zeros(size(sc.B, 2));
             u[1, i1] := 1;
-            sd := Modelica_LinearSystems2.DiscreteStateSpace(
+            sd :=Modelica_LinearSystems2.DiscreteStateSpace(
                   sc,
                   dtVar,
-                  Modelica_LinearSystems2.Types.Method.ImpulseExact);
+                  Modelica_LinearSystems2.Utilities.Types.Method.ImpulseExact);
           elseif response == TimeResponse.Step then
             u[:, :] := zeros(samples, size(sc.B, 2));
             u[:, i1] := ones(samples);
-            sd := Modelica_LinearSystems2.DiscreteStateSpace(
+            sd :=Modelica_LinearSystems2.DiscreteStateSpace(
                   sc,
                   dtVar,
-                  Modelica_LinearSystems2.Types.Method.StepExact);
+                  Modelica_LinearSystems2.Utilities.Types.Method.StepExact);
           elseif response == TimeResponse.Ramp then
             u[:, :] := zeros(samples, size(sc.B, 2));
             u[:, i1] := 0:dtVar:tSpanVar;
-            sd := Modelica_LinearSystems2.DiscreteStateSpace(
+            sd :=Modelica_LinearSystems2.DiscreteStateSpace(
                   sc,
                   dtVar,
-                  Modelica_LinearSystems2.Types.Method.RampExact);
+                  Modelica_LinearSystems2.Utilities.Types.Method.RampExact);
             //    elseif response == TimeResponse.Initial then
             //      u[:, :] := zeros(samples, size(sc.B, 2));
             //      sd := Modelica_LinearSystems2.DiscreteStateSpace(
@@ -2899,12 +2899,11 @@ starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated
       extends Modelica_LinearSystems2.Internal.timeResponseMask2;
 
     algorithm
-      (y,t,x_continuous) :=
-        Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
+      (y,t,x_continuous) :=Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
             sc=sc,
             dt=dt,
             tSpan=tSpan,
-            response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
+            response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
             x0=zeros(size(sc.A, 1)));
 
       annotation (__Dymola_interactive=true,Documentation(info="<html>
@@ -2978,12 +2977,11 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Impu
       extends Modelica_LinearSystems2.Internal.timeResponseMask2;
 
     algorithm
-      (y,t,x_continuous) :=
-        Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
+      (y,t,x_continuous) :=Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
             sc=sc,
             dt=dt,
             tSpan=tSpan,
-            response=Modelica_LinearSystems2.Types.TimeResponse.Step,
+            response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
             x0=zeros(size(sc.A, 1)));
 
       annotation (__Dymola_interactive=true,Documentation(info="<html>
@@ -3058,12 +3056,11 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Step
       extends Modelica_LinearSystems2.Internal.timeResponseMask2;
 
     algorithm
-      (y,t,x_continuous) :=
-        Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
+      (y,t,x_continuous) :=Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
             sc=sc,
             dt=dt,
             tSpan=tSpan,
-            response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
+            response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
             x0=zeros(size(sc.A, 1)));
 
       annotation (__Dymola_interactive=true,Documentation(info="<html>
@@ -3142,12 +3139,11 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Ramp
           1]);
 
     algorithm
-      (y,t,x_continuous) :=
-        Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
+      (y,t,x_continuous) :=Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(
             sc=sc,
             dt=dt,
             tSpan=tSpan,
-            response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
+            response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial,
             x0=x0);
 
       annotation (__Dymola_interactive=true,Documentation(info="<html>
@@ -3882,8 +3878,7 @@ in <b>X</b> is used to compute <b>K</b>. If no solution of this equation exists,
       import Modelica_LinearSystems2.StateSpace;
 
       input StateSpace ss;
-      input Modelica_LinearSystems2.Types.StaircaseMethod method=
-          Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
 
       output Boolean controllable;
     algorithm
@@ -3959,8 +3954,7 @@ Since controllability is dual to observability of the dual system (A', C', B', D
       import Modelica_LinearSystems2.StateSpace;
 
       input StateSpace ss;
-      input Modelica_LinearSystems2.Types.StaircaseMethod method=
-          Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
 
       output Boolean observable;
     algorithm
@@ -7915,7 +7909,7 @@ StateSpace.Plot.<b>bodeMIMO</b>(
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -7923,8 +7917,7 @@ StateSpace.Plot.<b>bodeMIMO</b>(
       input Modelica.SIunits.Time dt=0 "Sample time";
       input Modelica.SIunits.Time tSpan=0 "Simulation time span";
 
-      input Modelica_LinearSystems2.Types.TimeResponse response=
-          Modelica_LinearSystems2.Types.TimeResponse.Step;
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
 
       input Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
 
@@ -8051,7 +8044,7 @@ This function plots the time response of a state space system. The character of 
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -8070,9 +8063,7 @@ This function plots the time response of a state space system. The character of 
              "Impulse response"));
 
     protected
-      Modelica_LinearSystems2.Types.TimeResponse response=
-          Modelica_LinearSystems2.Types.TimeResponse.Impulse
-        "type of time response";
+      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse "type of time response";
     algorithm
 
       Modelica_LinearSystems2.StateSpace.Plot.timeResponse(
@@ -8135,7 +8126,7 @@ for each system corresponding to the transition matrix. It is based on <a href=\
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -8153,9 +8144,7 @@ for each system corresponding to the transition matrix. It is based on <a href=\
             Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
              "Step response"));
 
-      input Modelica_LinearSystems2.Types.TimeResponse response=
-          Modelica_LinearSystems2.Types.TimeResponse.Step
-        "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
 
     algorithm
       Modelica_LinearSystems2.StateSpace.Plot.timeResponse(
@@ -8216,7 +8205,7 @@ This function plots the step responses of a state space system for each system c
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -8234,9 +8223,7 @@ This function plots the step responses of a state space system for each system c
             Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
              "Ramp response"));
 
-      input Modelica_LinearSystems2.Types.TimeResponse response=
-          Modelica_LinearSystems2.Types.TimeResponse.Ramp
-        "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp "type of time response";
 
     algorithm
       Modelica_LinearSystems2.StateSpace.Plot.timeResponse(
@@ -8296,7 +8283,7 @@ This function plots the ramp responses of a state space system for each system c
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -8314,9 +8301,7 @@ This function plots the ramp responses of a state space system for each system c
             Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
              "Initial response"));
 
-      input Modelica_LinearSystems2.Types.TimeResponse response=
-          Modelica_LinearSystems2.Types.TimeResponse.Initial
-        "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "type of time response";
     algorithm
 
       Modelica_LinearSystems2.StateSpace.Plot.timeResponse(
@@ -9478,9 +9463,7 @@ This function is called to compute transfer functions of state space representat
       import Modelica_LinearSystems2.StateSpace;
 
       input StateSpace ss "State space system";
-      input Modelica_LinearSystems2.Types.StaircaseMethod method=
-          Modelica_LinearSystems2.Types.StaircaseMethod.SVD
-        "Method for staircase algorithm";
+      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD "Method for staircase algorithm";
 
       output StateSpace ss_sc(
         redeclare Real A[size(ss.A, 1), size(ss.A, 2)],
@@ -9489,7 +9472,7 @@ This function is called to compute transfer functions of state space representat
         redeclare Real D[size(ss.D, 1), size(ss.D, 2)]);
 
     algorithm
-      if method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD then
+      if method == Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD then
         (,ss_sc) := StateSpace.Internal.staircaseSVD(ss);
       else
         (,ss_sc) := Modelica_LinearSystems2.StateSpace.Internal.staircaseQR(ss);
@@ -11154,19 +11137,16 @@ is a lower triangular matrix and has full rank if and only if none of the elemen
       import Modelica_LinearSystems2.StateSpace;
 
       input StateSpace ss "State space system";
-      input Modelica_LinearSystems2.Types.StaircaseMethod method=
-          Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
 
       output Boolean controllable;
     algorithm
-      assert(method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD or
-        method == Modelica_LinearSystems2.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore,
-the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isControllableMIMO\" has to be qr or svd but is method = "
-         + String(method));
+      assert(method == Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD or method == Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore,
+the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isControllableMIMO\" has to be qr or svd but is method = " + String(method));
       if min(size(ss.B)) == 0 then
         controllable := false;
       else
-        if method == Modelica_LinearSystems2.Types.StaircaseMethod.QR then
+        if method == Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.QR then
           controllable := StateSpace.Internal.staircaseQR(ss);
         else
           controllable := StateSpace.Internal.staircaseSVD(ss);
@@ -11362,8 +11342,7 @@ the diagonal is zero. That is, that neither qn or hi,i-1,   i = 2,...,&nbsp;n   
       import Modelica_LinearSystems2.StateSpace;
 
       input StateSpace ss "State space system";
-      input Modelica_LinearSystems2.Types.StaircaseMethod method=
-          Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
 
     protected
       StateSpace ss2=StateSpace.Internal.transposeStateSpace(ss);
@@ -11371,14 +11350,12 @@ the diagonal is zero. That is, that neither qn or hi,i-1,   i = 2,...,&nbsp;n   
     public
       output Boolean observable;
     algorithm
-      assert(method == Modelica_LinearSystems2.Types.StaircaseMethod.SVD or
-        method == Modelica_LinearSystems2.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore,
-the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isControllableMIMO\" has to be qr or svd but is method = "
-         + String(method));
+      assert(method == Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD or method == Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.QR, "\nMethods for staircase algorithm are QR factorization or singular value decomposition. Therefore,
+the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isControllableMIMO\" has to be qr or svd but is method = " + String(method));
       if min(size(ss.C)) == 0 then
         observable := false;
       else
-        if method == Modelica_LinearSystems2.Types.StaircaseMethod.QR then
+        if method == Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.QR then
           observable := StateSpace.Internal.staircaseQR(ss2);
         else
           observable := StateSpace.Internal.staircaseSVD(ss2);

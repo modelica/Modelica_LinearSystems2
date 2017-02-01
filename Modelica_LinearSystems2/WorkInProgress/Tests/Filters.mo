@@ -2,15 +2,13 @@ within Modelica_LinearSystems2.WorkInProgress.Tests;
 package Filters
   function plotFilter
     import ZP = Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.Types;
+    import Modelica_LinearSystems2.Utilities.Types;
     import Modelica.Utilities.Streams.print;
     import Modelica.Constants.pi;
     import Modelica_LinearSystems2.Math.Complex;
 
-     input Modelica_LinearSystems2.Types.AnalogFilter analogFilter
-      "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-     input Modelica_LinearSystems2.Types.FilterType filterType=Types.FilterType.LowPass
-      "Type of filter (LowPass/HighPass)";
+    input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+    input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
      input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
       "Cut-off frequency";
      input Real A_ripple(unit="dB") = 0.5
@@ -42,16 +40,16 @@ package Filters
     end getAmplitude;
 
      function getFilterName "Return the filter name as string"
-        input Modelica_LinearSystems2.Types.AnalogFilter analogFilter;
+      input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter;
         output String str;
      algorithm
-        if analogFilter == Modelica_LinearSystems2.Types.AnalogFilter.CriticalDamping then
+      if analogFilter == Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping then
            str :="CriticalDamping";
-        elseif analogFilter == Modelica_LinearSystems2.Types.AnalogFilter.Bessel then
+      elseif analogFilter == Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Bessel then
            str :="Bessel";
-        elseif analogFilter == Modelica_LinearSystems2.Types.AnalogFilter.Butterworth then
+      elseif analogFilter == Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Butterworth then
            str :="Butterworth";
-        elseif analogFilter == Modelica_LinearSystems2.Types.AnalogFilter.Chebyshev then
+      elseif analogFilter == Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Chebyshev then
            str :="Chebyshev";
         else
            str :="unknown";
@@ -60,12 +58,12 @@ package Filters
 
      Real f_0;
 
-     ZP filter1 = ZP.Design.filter(analogFilter, filterType, order=1, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
-     ZP filter2 = ZP.Design.filter(analogFilter, filterType, order=2, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
-     ZP filter3 = ZP.Design.filter(analogFilter, filterType, order=3, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
-     ZP filter4 = ZP.Design.filter(analogFilter, filterType, order=4, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
-     ZP filter5 = ZP.Design.filter(analogFilter, filterType, order=5, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
-     ZP filter6 = ZP.Design.filter(analogFilter, filterType, order=6, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min=  f_min);
+     ZP filter1 = ZP.Design.filter(analogFilter, filterType, order=1, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min = f_min);
+     ZP filter2 = ZP.Design.filter(analogFilter, filterType, order=2, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min = f_min);
+     ZP filter3 = ZP.Design.filter(analogFilter, filterType, order=3, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min = f_min);
+     ZP filter4 = ZP.Design.filter(analogFilter, filterType, order=4, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min = f_min);
+     ZP filter5 = ZP.Design.filter(analogFilter, filterType, order=5, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min = f_min);
+     ZP filter6 = ZP.Design.filter(analogFilter, filterType, order=6, f_cut=f_cut, A_ripple=A_ripple, normalized=normalized, f_min = f_min);
   algorithm
      ZP.Plot.bode(filter1);
      ZP.Plot.bode(filter2);
@@ -147,9 +145,8 @@ package Filters
 
   function plotFilter2
     import ZP = Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.Types;
-    input Modelica_LinearSystems2.Types.FilterType filterType
-      "Type of filter (LowPass/HighPass)";
+    import Modelica_LinearSystems2.Utilities.Types;
+    input Modelica_LinearSystems2.Utilities.Types.FilterType filterType "Type of filter (LowPass/HighPass)";
     input Modelica.SIunits.Frequency f_cut=3 "Cut-off frequency";
     input Real A_ripple(unit="dB") = 0.5
       "Pass band ripple for Chebyshev filter (otherwise not used)";
@@ -168,7 +165,7 @@ package Filters
 
   function plotFilter3
     import ZP = Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.Types;
+    import Modelica_LinearSystems2.Utilities.Types;
     input Modelica.SIunits.Frequency f_cut=3 "Cut-off frequency";
     input Real A_ripple(unit="dB") = 0.5
       "Pass band ripple for Chebyshev filter (otherwise not used)";
@@ -187,7 +184,7 @@ package Filters
 
   function compareBaseFiltersWithTietzeSchenk
     "Compare normalized base filters with the table of Tietze/Schenk Halbleiterschaltungstechnik"
-    import Modelica_LinearSystems2.Types;
+    import Modelica_LinearSystems2.Utilities.Types;
     import ZP = Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica.Utilities.Streams.print;
     import Modelica_LinearSystems2.Math.Complex;

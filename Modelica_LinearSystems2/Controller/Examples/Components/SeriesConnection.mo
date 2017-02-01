@@ -3,9 +3,7 @@ model SeriesConnection "Series connection of two PT1 blocks"
   extends Modelica.Blocks.Interfaces.BlockIcon;
   parameter Types.BlockType blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous
     "Type of Sampled blocks (Continuous or Discrete)";
-  parameter Modelica_LinearSystems2.Types.Method methodType=
-      Modelica_LinearSystems2.Types.Method.Trapezoidal
-    "Discretization method for discrete blocks";
+  parameter Modelica_LinearSystems2.Utilities.Types.Method methodType=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method for discrete blocks";
   parameter Modelica.SIunits.Time sampleTime=0.05
     "Base sample time for discrete blocks";
   parameter Modelica.SIunits.Time T1=0.2 "Time constant of first PT1 block";

@@ -5,7 +5,7 @@ encapsulated function analysisDcGain "Compute steady state gain"
   import Modelica;
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Types;
+  import Modelica_LinearSystems2.Utilities.Types;
   import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -23,8 +23,8 @@ protected
   ZerosAndPoles zp2=ZerosAndPoles(
     z=numeratorZeros3,
     p=denominatorZeros3);
-  ZerosAndPoles zp3=ZerosAndPoles.Internal.baseFilter(
-    Types.AnalogFilter.Bessel,order=5);
+  ZerosAndPoles zp3=ZerosAndPoles.Internal.baseFilter(Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Bessel,
+                              order=5);
   Real k;
   Boolean finite;
 algorithm
