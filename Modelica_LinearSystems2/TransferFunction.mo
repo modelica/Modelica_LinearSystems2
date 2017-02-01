@@ -310,7 +310,7 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.StateSpace;
     import Modelica_LinearSystems2.TransferFunction;
-    import Modelica_LinearSystems2.Types.TimeResponse;
+    import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
     extends Modelica.Icons.Package;
     function analysis
       "Make a system analysis based on the poles and zeros of the system"
@@ -435,7 +435,7 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
       import Modelica_LinearSystems2.TransferFunction;
 
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;     // Input/Output declarations of time response functions
-    input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
 
     input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(TransferFunction.Analysis.denominatorDegree(tf))
         "Initial state vector";
@@ -504,12 +504,12 @@ x are calculated for each time step t=k*dt.
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
 
   algorithm
-    (y,t,x_continuous) := Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
-        tf=tf,
-        dt=dt,
-        tSpan=tSpan,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
-        x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
+    (y,t,x_continuous) :=Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
+          tf=tf,
+          dt=dt,
+          tSpan=tSpan,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
+          x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
 
     annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -568,12 +568,12 @@ and x are calculated for each time step t=k*dt.
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
 
   algorithm
-    (y,t,x_continuous) := Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
-        tf=tf,
-        dt=dt,
-        tSpan=tSpan,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Step,
-        x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
+    (y,t,x_continuous) :=Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
+          tf=tf,
+          dt=dt,
+          tSpan=tSpan,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
+          x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
 
     annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -635,12 +635,12 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
 
   algorithm
-    (y,t,x_continuous) := Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
-        tf=tf,
-        dt=dt,
-        tSpan=tSpan,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
-        x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
+    (y,t,x_continuous) :=Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
+          tf=tf,
+          dt=dt,
+          tSpan=tSpan,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
+          x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
 
     annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -705,12 +705,12 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
 
   algorithm
-    (y,t,x_continuous) := Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
-        tf=tf,
-        dt=dt,
-        tSpan=tSpan,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
-        x0=x0);
+    (y,t,x_continuous) :=Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
+          tf=tf,
+          dt=dt,
+          tSpan=tSpan,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial,
+          x0=x0);
 
     annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -1158,7 +1158,7 @@ In this case, the output argument <b>finite</b> = <b>false</b> and
       import Modelica_LinearSystems2.TransferFunction;
 
         input TransferFunction tf "transfer function of a system";
-        input Modelica_LinearSystems2.Types.StaircaseMethod method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
 
         output Boolean controllable;
     protected
@@ -1202,8 +1202,7 @@ Function TransferFunction.Analysis.<b>isControllable</b> checks the controllabil
       import Modelica_LinearSystems2.TransferFunction;
 
         input TransferFunction tf "transfer function of a system";
-        input Modelica_LinearSystems2.Types.StaircaseMethod method=
-            Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
         output Boolean observable;
     protected
         StateSpace ss=StateSpace(tf);
@@ -1445,10 +1444,8 @@ of a transfer function.
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
-      input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Types.AnalogFilter.CriticalDamping
-        "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-      input Modelica_LinearSystems2.Types.FilterType filterType=Modelica_LinearSystems2.Types.FilterType.LowPass
-        "Type of filter (LowPass/HighPass)";
+      input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+      input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
       input Integer order(min=1) = 2 "Order of filter";
       input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
         "Cut-off frequency (default is w_cut = 1 rad/s)";
@@ -1785,15 +1782,14 @@ This function plots the bode-diagram of a transfer function.
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
       import Modelica_LinearSystems2.Utilities.Plot;
 
     input Modelica_LinearSystems2.TransferFunction tf;
     input Real dt=0 "Sample time [s]";
     input Real tSpan=0 "Simulation time span [s]";
 
-    input Modelica_LinearSystems2.Types.TimeResponse response=
-      Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
     input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
       TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
 
@@ -1877,7 +1873,7 @@ This function plots the time response of a transfer function. The character of t
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -1894,9 +1890,7 @@ This function plots the time response of a transfer function. The character of t
         + String(tf)));
 
     protected
-    Modelica_LinearSystems2.Types.TimeResponse response=
-      Modelica_LinearSystems2.Types.TimeResponse.Impulse
-        "Type of time response";
+      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse "Type of time response";
   algorithm
     Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
       tf=tf,
@@ -1954,7 +1948,7 @@ This function plots the impulse response of a transfer function. It is based on 
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -1962,8 +1956,7 @@ This function plots the impulse response of a transfer function. It is based on 
     input Real dt=0 "Sample time [s]";
     input Real tSpan=0 "Simulation time span [s]";
 
-    input Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
     input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
         TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
 
@@ -2028,7 +2021,7 @@ This function plots the step response of a transfer function. It is based on <a 
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -2036,8 +2029,7 @@ This function plots the step response of a transfer function. It is based on <a 
     input Real dt=0 "Sample time [s]";
     input Real tSpan=0 "Simulation time span [s]";
 
-    input Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Ramp "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp "type of time response";
     input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
         TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
 
@@ -2104,7 +2096,7 @@ This function plots the ramp response of a transfer function. It is based on <a 
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -2112,9 +2104,7 @@ This function plots the ramp response of a transfer function. It is based on <a 
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
-      input Modelica_LinearSystems2.Types.TimeResponse response=
-          Modelica_LinearSystems2.Types.TimeResponse.Initial
-        "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "type of time response";
       input Real y0 "Initial output (for initial condition plot)";
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(

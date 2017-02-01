@@ -6,9 +6,7 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
   parameter Modelica_LinearSystems2.Controller.Types.FIRspec specType=Modelica_LinearSystems2.Controller.Types.FIRspec.MeanValue
     "Specification type of FIR filter" annotation(Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous));
   parameter Integer L(min=2) = 2 "Length of mean value filter" annotation(Dialog(group="Mean value filter",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.MeanValue));
-  parameter Modelica_LinearSystems2.Types.FilterType filterType=
-      Modelica_LinearSystems2.Types.FilterType.LowPass "Type of filter"
-                            annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
+  parameter Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter" annotation (Dialog(group="FIR filter design", enable=blockType <> Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType == Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
   parameter Integer order(min=1) = 2 "Order of filter" annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
   parameter Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency" annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
   parameter Types.Window window=Modelica_LinearSystems2.Controller.Types.Window.Rectangle

@@ -100,8 +100,8 @@ algorithm
         method=method,
         numberOfIntervals=simulationOptions.numberOfIntervals,
         outputInterval=simulationOptions.outputInterval,
-        tolerance=  simulationOptions.tolerance,
-        fixedstepsize=  simulationOptions.fixedStepSize);
+        tolerance = simulationOptions.tolerance,
+        fixedstepsize = simulationOptions.fixedStepSize);
       ok := importInitial("dsfinal.txt");
       ok := linearizeModel(
         problem=modelName2,
@@ -109,8 +109,8 @@ algorithm
         startTime=simulationOptions.t_linearize,
         stopTime=simulationOptions.t_linearize+1,
         method=method,
-        tolerance=  simulationOptions.tolerance,
-        fixedstepsize=  simulationOptions.fixedStepSize);
+        tolerance = simulationOptions.tolerance,
+        fixedstepsize = simulationOptions.fixedStepSize);
     end for;
   end if;
 

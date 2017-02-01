@@ -78,7 +78,10 @@ algorithm
     n2=[1,2;-1,2], d2=[2,3;0,0]);
 
   for i in 1:14 loop
-    dzp[i] := DiscreteZerosAndPoles(zp[i],Ts=0.1,method=Modelica_LinearSystems2.Types.Method.StepExact);
+    dzp[i] :=DiscreteZerosAndPoles(
+      zp[i],
+      Ts=0.1,
+      method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact);
   end for;
 
   dzp[15]:= dzp[1];

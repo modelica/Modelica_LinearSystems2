@@ -3,8 +3,7 @@ record ParameterVariation
   "Define variation of one parameter in a given range and optionally select the parameter from a translated model"
 
   String Name "Name of parameter" annotation (Dialog);
-  Modelica_LinearSystems2.Types.Grid grid = Modelica_LinearSystems2.Types.Grid.OneValue
-    "Definition of parameter grid"    annotation (Dialog);
+  Modelica_LinearSystems2.Utilities.Types.Grid grid=Modelica_LinearSystems2.Utilities.Types.Grid.OneValue "Definition of parameter grid" annotation (Dialog);
 
   Real Value=0 "Value of parameter" annotation (Dialog(group="if grid = OneValue"));
   Real Min=-1e100 "Minimum value of parameter"

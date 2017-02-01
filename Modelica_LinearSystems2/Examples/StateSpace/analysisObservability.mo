@@ -26,16 +26,16 @@ function analysisObservability
   output Boolean ok;
 
 protected
-  StateSpace ss = if systemOnFile then 
+  StateSpace ss = if systemOnFile then
     Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName) else ssi;
 
   Boolean isObservable;
-  Modelica_LinearSystems2.Types.StaircaseMethod method;
+  Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method;
   Boolean isSISO=StateSpace.Internal.isSISO(ss);
 algorithm
   ok := false;
 
-  method:=  Modelica_LinearSystems2.Types.StaircaseMethod.QR;
+  method:=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.QR;
   isObservable := StateSpace.Analysis.isObservable(ss,method);
 
   if isSISO then
@@ -53,7 +53,7 @@ algorithm
         "pair (A, B) is not observable checked by QR factorzation");
     end if;
 
-    method := Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+    method :=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
     isObservable := StateSpace.Analysis.isObservable(ss, method);
     if isObservable then
       Modelica.Utilities.Streams.print("pair (A, B) is observable checked by SVD");

@@ -16,7 +16,7 @@ function Operations
   input Modelica.SIunits.Time Ts=0.1;
 
 protected
-  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.StepExact;
+  Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact;
 
   ZerosAndPoles zp1=ZerosAndPoles(
       n1={2},

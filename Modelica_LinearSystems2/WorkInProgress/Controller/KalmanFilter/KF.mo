@@ -18,7 +18,7 @@ model KF "Discrete State Space block"
     "Initial state covariance matrix of the previous instant";
   parameter Real x_init[size(dss.A,1)]=fill(0,size(dss.A,1));
 
-  parameter DiscreteStateSpace dss=DiscreteStateSpace(ss,sampleTime,method=Modelica_LinearSystems2.Types.Method.StepExact)
+  parameter DiscreteStateSpace dss=DiscreteStateSpace(ss,sampleTime,method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact)
     "Discrete linear system model";
 
 public

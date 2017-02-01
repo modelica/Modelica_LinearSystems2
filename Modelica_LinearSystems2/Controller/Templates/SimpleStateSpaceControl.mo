@@ -10,8 +10,7 @@ partial model SimpleStateSpaceControl
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   replaceable
     Modelica_LinearSystems2.Controller.Templates.Internal.PartialPlantMIMO
-    plant(n=feedbackMatrix.nin, m=feedbackMatrix.nout) constrainedby
-    Modelica_LinearSystems2.Controller.Templates.Internal.PartialPlantMIMO
+    plant(n=feedbackMatrix.nin, m=feedbackMatrix.nout) constrainedby Modelica_LinearSystems2.Controller.Templates.Internal.PartialPlantMIMO
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
   Sampler samplerPreFilter[feedbackMatrix.nout]
     annotation (Placement(transformation(extent={{-15,-5},{-5,5}})));

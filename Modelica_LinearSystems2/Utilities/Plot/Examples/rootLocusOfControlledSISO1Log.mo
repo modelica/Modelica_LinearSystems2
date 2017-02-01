@@ -2,13 +2,15 @@ within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function rootLocusOfControlledSISO1Log "Root locus of a SISO system over controller gain k with logarithmic gridding"
 
 algorithm
-   Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel(
-        "Modelica_LinearSystems2.Utilities.Plot.Examples.Utilities.ControlledSISO1",
-        modelParam={Modelica_LinearSystems2.Records.ParameterVariation(
-                     Name="k", grid=Modelica_LinearSystems2.Types.Grid.Logarithmic, nPoints=100, Min=0, Max=1000)},
-        diagram=Modelica_LinearSystems2.Utilities.Plot.Records.RootLocusDiagram(
-                    linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.Solid,
-                    lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.None));
+  Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel(
+    "Modelica_LinearSystems2.Utilities.Plot.Examples.Utilities.ControlledSISO1",
+    modelParam={Modelica_LinearSystems2.Records.ParameterVariation(
+      Name="k",
+      grid=Modelica_LinearSystems2.Utilities.Types.Grid.Logarithmic,
+      nPoints=100,
+      Min=0,
+      Max=1000)},
+    diagram=Modelica_LinearSystems2.Utilities.Plot.Records.RootLocusDiagram(linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.Solid, lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.None));
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function plots the root locus of model

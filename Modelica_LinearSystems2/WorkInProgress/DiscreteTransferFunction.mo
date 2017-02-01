@@ -12,9 +12,7 @@ record DiscreteTransferFunction
   Modelica.SIunits.Time Ts "Sample time"
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
-  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-    "Discretization method"
-        annotation(Dialog(group="Data used to construct discrete from continuous system"));
+  Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
   String uName="u" "Name of input signal"    annotation(Dialog(group="Signal names"));
   String yName="y" "Name of output signal"  annotation(Dialog(group="Signal names"));
@@ -37,8 +35,7 @@ record DiscreteTransferFunction
 
       input Real r "Value of Real variable";
       input Modelica.SIunits.Time Ts "Sample time";
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
       output DiscreteTransferFunction dtf(n={r}, d={1});
@@ -65,8 +62,7 @@ record DiscreteTransferFunction
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
       input Modelica.SIunits.Time Ts "Sample time";
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
       output DiscreteTransferFunction dtf(redeclare Real n[size(z, 1)+1], redeclare Real
@@ -124,8 +120,7 @@ follow each other as above. An error occurs if this is not the case.
            input Real n[:] "Coefficients of numerator polynomial";
            input Real d[:] "Coefficients of denominator polynomial";
            input Modelica.SIunits.Time Ts "Sample time";
-           input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
            input String uName = "" "input name";
            input String yName = "" "output name";
@@ -156,8 +151,7 @@ follow each other as above. An error occurs if this is not the case.
       input Polynomial n "Numerator polynomial";
       input Polynomial d "Denominator polynomial";
       input Modelica.SIunits.Time Ts "Sample time";
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
       output DiscreteTransferFunction dtf(n=n.c, d=d.c, Ts=Ts, method=method, uName=uName, yName=yName);
@@ -178,9 +172,7 @@ follow each other as above. An error occurs if this is not the case.
       input Modelica.SIunits.Time Ts "Sample time"
            annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method"
-            annotation(Dialog(group="Data used to construct discrete from continuous system"));
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
       output DiscreteTransferFunction dtf;
     protected

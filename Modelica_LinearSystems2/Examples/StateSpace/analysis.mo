@@ -13,7 +13,7 @@ function analysis "Example to check controllability of a state space system"
     D=[0,0; 0,0],
     xNames={"x1","x2","x3","x4","x5","x6"},
     uNames={"u1","u2"}, yNames={"y1","y2"});
-  input Internal.AnalyseOptions analyseOptions =
+  input Internal.AnalyseOptions analyseOptions=
     Modelica_LinearSystems2.Internal.AnalyseOptions(
       plotEigenValues=true,
       plotInvariantZeros=true,

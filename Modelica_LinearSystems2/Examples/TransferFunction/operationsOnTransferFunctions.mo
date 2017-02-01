@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.Examples.TransferFunction;
 function operationsOnTransferFunctions
   "Demonstrate the usage of the functions of Modelica_LinearSystems2.TransferFunction"
   extends Modelica.Icons.Function;
-  
+
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.TransferFunction;

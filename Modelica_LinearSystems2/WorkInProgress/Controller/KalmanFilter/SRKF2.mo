@@ -12,7 +12,7 @@ model SRKF2 "Discrete State Space block"
   parameter StateSpace ss "Continuous linear system model";
   parameter Modelica.SIunits.Time sampleTime=0.5
     "Base sample time for discrete blocks";
-  parameter DiscreteStateSpace dss=DiscreteStateSpace(ss,sampleTime,method=Modelica_LinearSystems2.Types.Method.StepExact)
+  parameter DiscreteStateSpace dss=DiscreteStateSpace(ss,sampleTime,method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact)
     "Discrete linear system model";
   parameter Real Q[size(dss.A, 1),size(dss.A, 1)]=identity(size(dss.A, 1))
     "Input or process noise covariance matrix of the previous instant";

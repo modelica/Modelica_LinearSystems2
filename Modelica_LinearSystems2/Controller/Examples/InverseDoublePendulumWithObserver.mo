@@ -24,7 +24,6 @@ model InverseDoublePendulumWithObserver
       matrixName="K_pa",
       fileName=DataDir + "inverseDoublePendulumController.mat"),
     sampleClock(sampleTime=0.002, blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous),
-
     observer(
       systemName="stateSpace",
       matrixOnFile=true,

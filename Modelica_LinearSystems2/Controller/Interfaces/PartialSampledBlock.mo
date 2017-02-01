@@ -29,8 +29,7 @@ partial block PartialSampledBlock
                 enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
 
   final parameter Types.Init init=Modelica_LinearSystems2.Controller.Internal.convertToInit(initType,sampleClock.initType)
-    "Type of initialization (no init/steady state/initial state/initial output)"
-                                                                                 annotation(Evaluate=true);
+    "Type of initialization (no init/steady state/initial state/initial output)" annotation(Evaluate=true);
 
   parameter Integer sampleFactor(min=1)=1
     "Sample factor (Ts = sampleFactor * sampleClock.sampleTime)"

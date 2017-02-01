@@ -22,7 +22,7 @@ function conversionToZerosAndPolesMIMO
   output Boolean ok;
 
 protected
-  Modelica_LinearSystems2.StateSpace ss = if systemOnFile then 
+  Modelica_LinearSystems2.StateSpace ss = if systemOnFile then
     Modelica_LinearSystems2.StateSpace.Import.fromFile( fileName, matrixName) else
     Modelica_LinearSystems2.StateSpace(A=A, B=B, C=C, D=D);
 

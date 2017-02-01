@@ -16,8 +16,7 @@ block TransferFunction
   parameter Real x_start[nx]=zeros(nx) "Initial or guess values of states"
     annotation(Dialog(tab="Advanced options"));
   parameter Real y_start=0
-    "Initial value of output (derivatives of y are zero upto nx-1-th derivative)"
-                                                                                   annotation(Dialog(tab="Advanced options"));
+    "Initial value of output (derivatives of y are zero upto nx-1-th derivative)"  annotation(Dialog(tab="Advanced options"));
   final parameter Integer nx=size(system.d, 1) - 1 "Number of states x";
   Modelica.Blocks.Interfaces.RealOutput x[nx]
     "State of continuous transfer function";

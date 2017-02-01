@@ -823,10 +823,10 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
      extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;     // Input/Output declarations of time response functions
-     input Modelica_LinearSystems2.Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
 
      input Real x0[Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)]=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp))
         "Initial state vector";
@@ -889,12 +889,12 @@ algorithm
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;
 
   algorithm
-    (y,t,x_continuous) := Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
-        zp=zp,
-        dt=dt,
-        tSpan=tSpan,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
-        x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
+    (y,t,x_continuous) :=Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
+          zp=zp,
+          dt=dt,
+          tSpan=tSpan,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
+          x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
   annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -950,12 +950,12 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.I
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;
 
   algorithm
-    (y,t,x_continuous) := Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
-        zp=zp,
-        dt=dt,
-        tSpan=tSpan,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Step,
-        x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
+    (y,t,x_continuous) :=Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
+          zp=zp,
+          dt=dt,
+          tSpan=tSpan,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
+          x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
   annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -1012,12 +1012,12 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.S
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;
 
   algorithm
-    (y,t,x_continuous) := Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
-        zp=zp,
-        dt=dt,
-        tSpan=tSpan,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
-        x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
+    (y,t,x_continuous) :=Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
+          zp=zp,
+          dt=dt,
+          tSpan=tSpan,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
+          x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
   annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -1077,12 +1077,12 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.R
     extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;
 
   algorithm
-    (y,t,x_continuous) := Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
-        zp=zp,
-        dt=dt,
-        tSpan=tSpan,
-        response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
-        x0=x0);
+    (y,t,x_continuous) :=Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
+          zp=zp,
+          dt=dt,
+          tSpan=tSpan,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial,
+          x0=x0);
 
   annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -1613,7 +1613,7 @@ In this case, the output argument <b>finite</b> = <b>false</b> and
       import Modelica_LinearSystems2.ZerosAndPoles;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
-      input Modelica_LinearSystems2.Types.StaircaseMethod method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
 
       output Boolean controllable;
     protected
@@ -1659,8 +1659,7 @@ into a state space representation which is applied to <a href=\"modelica://Model
       import Modelica_LinearSystems2.ZerosAndPoles;
 
         input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
-        input Modelica_LinearSystems2.Types.StaircaseMethod method=
-            Modelica_LinearSystems2.Types.StaircaseMethod.SVD;
+      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
 
         output Boolean observable;
     protected
@@ -1903,13 +1902,11 @@ of a zeros-and-poles transfer function.
       import Modelica;
       import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Types;
+      import Modelica_LinearSystems2.Utilities.Types;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
-    input Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
-        "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-    input Types.FilterType filterType=Types.FilterType.LowPass
-        "Type of filter (LowPass/HighPass/BandPass)";
+      input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+      input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass/BandPass)";
     input Integer order(min=1) = 2 "Order of filter";
     input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
         "Cut-off frequency (default is w_cut = 1 rad/s)";
@@ -2586,7 +2583,7 @@ This function plots the bode-diagram of a transfer function.
       import Modelica_LinearSystems2;
   //    import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -2594,8 +2591,7 @@ This function plots the bode-diagram of a transfer function.
     input Real dt=0 "Sample time [s]";
     input Real tSpan=0 "Simulation time span [s]";
 
-    input Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
     input Real x0[ZerosAndPoles.Analysis.denominatorDegree(zp)]=zeros(
         ZerosAndPoles.Analysis.denominatorDegree(zp)) "Initial state vector";
 
@@ -2694,9 +2690,7 @@ This function plots the time response of a transfer function. The character of t
            + String(zp)));
 
     protected
-    Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Impulse
-        "type of time response";
+      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse "type of time response";
   algorithm
     Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse(
       zp=zp,
@@ -2755,7 +2749,7 @@ This function plots the impulse response of a zeros-and-poles transfer function.
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -2763,8 +2757,7 @@ This function plots the impulse response of a zeros-and-poles transfer function.
     input Real dt=0 "Sample time [s]";
     input Real tSpan=0 "Simulation time span [s]";
 
-    input Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
     input Real x0[ZerosAndPoles.Analysis.denominatorDegree(zp)]=zeros(
         ZerosAndPoles.Analysis.denominatorDegree(zp)) "Initial state vector";
 
@@ -2831,7 +2824,7 @@ This function plots the step response of a zeros-and-poles transfer function. It
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -2839,8 +2832,7 @@ This function plots the step response of a zeros-and-poles transfer function. It
     input Real dt=0 "Sample time [s]";
     input Real tSpan=0 "Simulation time span [s]";
 
-    input Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Ramp "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp "type of time response";
     input Real x0[ZerosAndPoles.Analysis.denominatorDegree(zp)]=zeros(
         ZerosAndPoles.Analysis.denominatorDegree(zp)) "Initial state vector";
 
@@ -2905,7 +2897,7 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -2913,9 +2905,7 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
     input Real dt=0 "Sample time [s]";
     input Real tSpan=0 "Simulation time span [s]";
 
-    input Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Initial
-        "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "type of time response";
     input Real y0 "Initial output (for initial condition plot)";
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
@@ -4611,11 +4601,10 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
       import Modelica.Math;
       import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Types;
+      import Modelica_LinearSystems2.Utilities.Types;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
-    input Modelica_LinearSystems2.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
-        "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+      input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
     input Integer order(min=1) = 2 "Order of filter";
     input Real A_ripple(unit="dB") = 0.5
         "Pass band ripple (only for Chebyshev filter)";
@@ -5908,15 +5897,13 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
       import Modelica;
       import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Types;
+      import Modelica_LinearSystems2.Utilities.Types;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
       import MMath = Modelica.Math;
 
-    input Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping
-        "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-    input Types.FilterType filterType=Types.FilterType.LowPass
-        "Type of filter (LowPass/HighPass)";
+      input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+      input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
     input Integer order(min=1) = 2 "Order of filter";
     input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
         "Cut-off frequency (default is w_cut = 1 rad/s)";

@@ -19,23 +19,20 @@ model DiscretizationSeries
     T1=T1,
     T2=T2,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
-    methodType=Modelica_LinearSystems2.Types.Method.Trapezoidal,
-    sampleTime=sampleTime)
-    annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+    methodType=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal,
+    sampleTime=sampleTime) annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   Components.SeriesConnection rampExact(
     T1=T1,
     T2=T2,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
-    methodType=Modelica_LinearSystems2.Types.Method.RampExact,
-    sampleTime=sampleTime)
-    annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
+    methodType=Modelica_LinearSystems2.Utilities.Types.Method.RampExact,
+    sampleTime=sampleTime) annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
   Components.SeriesConnection stepExact(
     T1=T1,
     T2=T2,
     blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
-    methodType=Modelica_LinearSystems2.Types.Method.StepExact,
-    sampleTime=sampleTime)
-    annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
+    methodType=Modelica_LinearSystems2.Utilities.Types.Method.StepExact,
+    sampleTime=sampleTime) annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
 
   annotation ( Documentation(info="<html>
 <p>

@@ -352,25 +352,25 @@ within a model.
       ok := removePlots();
       createPlot(id= 1,
         position=position,
-        leftTitleType=  2,
-        leftTitle=  "Im",
-        bottomTitleType=  2,
-        bottomTitle=  "Re",
+        leftTitleType = 2,
+        leftTitle = "Im",
+        bottomTitleType = 2,
+        bottomTitle = "Re",
         autoerase= false,
         grid=grid,
         heading=heading,
         legend=useLegend,
         erase= false,
-        legendLocation=  2,
-        legendHorizontal=  false);
+        legendLocation = 2,
+        legendHorizontal = false);
     end if;
     plotArray(
       x= eigenvalues[:, 1],
       y= eigenvalues[:, 2],
       legend=legend,
       color=markerColor,
-      pattern=  LinePattern.None,
-      marker=  markerStyle2);
+      pattern = LinePattern.None,
+      marker = markerStyle2);
 
   //   removePlots();
   // function createPlot "Create plot window"

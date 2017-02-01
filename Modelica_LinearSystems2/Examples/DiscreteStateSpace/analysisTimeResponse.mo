@@ -18,7 +18,7 @@ protected
     D=[0,0; 0,0],
     Ts=0.01,
     B2=[0,0; 0,0],
-    method=Modelica_LinearSystems2.Types.Method.StepExact);
+    method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact);
 
   Integer samples=size(u,1);
   Real x0[2]={0, 0};

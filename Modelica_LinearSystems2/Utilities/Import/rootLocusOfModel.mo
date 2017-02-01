@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Import;
 function rootLocusOfModel
   "Return the root locus of one parameter (= eigen values of the model that is linearized for every parameter value)"
-  import Modelica_LinearSystems2.Types.Grid;
+  import Modelica_LinearSystems2.Utilities.Types.Grid;
   input String modelName "Name of the Modelica model"
     annotation (Dialog(__Dymola_translatedModel));
   input Modelica_LinearSystems2.Records.ParameterVariation modelParam[:]

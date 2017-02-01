@@ -2,8 +2,7 @@ within Modelica_LinearSystems2.Examples.StateSpace;
 function plotTimeResponse "Time response plot example"
   extends Modelica.Icons.Function;
 
-  input Modelica_LinearSystems2.Types.TimeResponse response=
-    Modelica_LinearSystems2.Types.TimeResponse.Step "Type of time response";
+  input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "Type of time response";
 
   input Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
     A=[-1,1; 0,-2],

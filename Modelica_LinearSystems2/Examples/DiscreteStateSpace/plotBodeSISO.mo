@@ -18,7 +18,7 @@ function plotBodeSISO "Bode plot of a discrete state space system"
     D=[0.0],
     Ts=0.1,
     B2=[0.0; 0.0; 0.0; 0.0; 0.0; 0.0],
-    method=Modelica_LinearSystems2.Types.Method.StepExact);
+    method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact);
   input Integer iu=1 "index of inout";
   input Integer iy=1 "index of output";
   output Boolean ok;

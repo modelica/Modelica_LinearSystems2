@@ -17,9 +17,7 @@ record DiscreteZerosAndPoles
     Modelica.SIunits.Time Ts "Sample time"
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
 
-  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-    "Discretization method"
-        annotation(Dialog(group="Data used to construct discrete from continuous system"));
+  Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
 /* If the numerator polynomial has no coefficients, the transfer function
    is zero. The denominator polynomial must always have at
@@ -40,8 +38,7 @@ record DiscreteZerosAndPoles
 
       input Real r "Value of Real variable";
       input Modelica.SIunits.Time Ts=1 "Sample time";
-         input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
       output DiscreteZerosAndPoles dzp(
@@ -75,8 +72,7 @@ record DiscreteZerosAndPoles
         "Poles (Complex vector of denominator zeros)";
     input Real k=1.0 "Constant multiplied with transfer function";
     input Modelica.SIunits.Time Ts=1 "Sample time";
-       input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
     input String uName="" "input name";
     input String yName="" "output name";
     output DiscreteZerosAndPoles dzp(
@@ -192,8 +188,7 @@ follow each other as above. An error occurs if this is not the case.
       input Real k=1.0 "Multiplicative factor of transfer function"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Modelica.SIunits.Time Ts=1 "Sample time";
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
       output DiscreteZerosAndPoles dzp(

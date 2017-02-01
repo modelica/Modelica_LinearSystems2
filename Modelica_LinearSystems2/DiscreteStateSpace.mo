@@ -13,9 +13,7 @@ operator record DiscreteStateSpace
   Real B2[size(B, 1),size(B, 2)]=fill(0,size(B,1),size(B,2))
     "Reconstruct continuous state"
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
-  Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-    "Discretization method"
-        annotation(Dialog(group="Data used to construct discrete from continuous system"));
+  Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
 //      String yNames[size(C, 1)]=fill("", size(C, 1)) "Names of the output signals" annotation(Dialog(group="Signal names"));
 //      String xNames[size(A, 1)]=fill("", size(A, 1)) "Names of the states"  annotation(Dialog(group="Signal names"));
@@ -46,8 +44,7 @@ operator record DiscreteStateSpace
 
       input Real r "Value of Real variable";
       input Modelica.SIunits.Time Ts=1 "Sample time";
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       output DiscreteStateSpace dss(
         redeclare Real A[0,0],
         redeclare Real B[0,1],
@@ -116,9 +113,7 @@ respectively.
       input Modelica.SIunits.Time Ts=1 "Sample time"
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
       input Real B2[:,:]=zeros(size(B, 1), size(B, 2));
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization methodDiscretization method"
-        annotation(Dialog(group="Data used to construct discrete from continuous system"));
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization methodDiscretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
       output DiscreteStateSpace result(
         redeclare Real A[size(A, 1),size(A, 2)],
         redeclare Real B[size(B, 1),size(B, 2)],
@@ -200,14 +195,13 @@ public
       "Generate a DiscreteStateSpace data record from a continuous state space system "
       import Modelica;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Types.Method;
+      import Modelica_LinearSystems2.Utilities.Types.Method;
       import Modelica_LinearSystems2.Math.Matrices.LU_solve2;
 
       input Modelica_LinearSystems2.StateSpace ss
         "Continuous linear state space system";
       input Modelica.SIunits.Time Ts "Sample time";
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       output Modelica_LinearSystems2.DiscreteStateSpace dss(
         redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
         redeclare Real B[size(ss.B, 1),size(ss.B, 2)],
@@ -409,7 +403,7 @@ public
       "Generate a DiscreteStateSpace data record from matrices of a continuous state space system"
       import Modelica;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Types.Method;
+      import Modelica_LinearSystems2.Utilities.Types.Method;
       import Modelica_LinearSystems2.Math.Matrices.LU_solve2;
 
       input Real A[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
@@ -417,8 +411,7 @@ public
       input Real C[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
       input Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
       input Modelica.SIunits.Time Ts "Sample time";
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
     //  input Modelica_LinearSystems2.Types method=Modelica_LinearSystems2.Types.Method.Trapezoidal
       output Modelica_LinearSystems2.DiscreteStateSpace dss(
         redeclare Real A[size(A, 1),size(A, 2)],
@@ -1318,7 +1311,7 @@ The eigenvalues <b>ev</b>_d of the discrete system are related to the eigenvalue
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
     input TimeResponse response=TimeResponse.Step;
     extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(redeclare Real
@@ -1473,12 +1466,11 @@ are calculated for each time step t=k*dss.Ts.
       tSpanVar := tSpan;
     end if;
 
-    (y,t,x_discrete) :=
-      Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
-      dss=dss,
-      tSpan=tSpanVar,
-      response=Modelica_LinearSystems2.Types.TimeResponse.Impulse,
-      x0=zeros(size(dss.A, 1)));
+    (y,t,x_discrete) :=Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
+          dss=dss,
+          tSpan=tSpanVar,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
+          x0=zeros(size(dss.A, 1)));
 
     annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -1558,12 +1550,11 @@ the \"ImpulseExact\" conversion from continuous system to discrete system.
       tSpanVar := tSpan;
     end if;
 
-    (y,t,x_discrete) :=
-      Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
-      dss=dss,
-      tSpan=tSpanVar,
-      response=Modelica_LinearSystems2.Types.TimeResponse.Step,
-      x0=zeros(size(dss.A, 1)));
+    (y,t,x_discrete) :=Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
+          dss=dss,
+          tSpan=tSpanVar,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
+          x0=zeros(size(dss.A, 1)));
 
     annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -1646,12 +1637,11 @@ the \"StepExact\" conversion from continuous system to discrete system.
       tSpanVar := tSpan;
     end if;
 
-    (y,t,x_discrete) :=
-      Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
-      dss=dss,
-      tSpan=tSpanVar,
-      response=Modelica_LinearSystems2.Types.TimeResponse.Ramp,
-      x0=zeros(size(dss.A, 1)));
+    (y,t,x_discrete) :=Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
+          dss=dss,
+          tSpan=tSpanVar,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
+          x0=zeros(size(dss.A, 1)));
 
     annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -1738,12 +1728,11 @@ requires the \"RampExact\" conversion from continuous system to discrete system.
       tSpanVar := tSpan;
     end if;
 
-    (y,t,x_discrete) :=
-      Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
-      dss=dss,
-      tSpan=tSpanVar,
-      response=Modelica_LinearSystems2.Types.TimeResponse.Initial,
-      x0=x0);
+    (y,t,x_discrete) :=Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
+          dss=dss,
+          tSpan=tSpanVar,
+          response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial,
+          x0=x0);
 
     annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -2435,7 +2424,7 @@ encapsulated function timeResponse
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
       import Modelica_LinearSystems2.Utilities.Plot;
 
   input DiscreteStateSpace dss;
@@ -2584,7 +2573,7 @@ end timeResponse;
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
       import Modelica_LinearSystems2.Utilities.Plot;
 
     input DiscreteStateSpace dss;
@@ -2599,9 +2588,7 @@ end timeResponse;
            heading="Impulse response"));
 
     protected
-    Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Impulse
-        "type of time response";
+      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse "type of time response";
     Real tSpanVar;
 
   algorithm
@@ -2669,7 +2656,7 @@ This function plots the impulse responses of a state space system for each syste
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
       import Modelica_LinearSystems2.Utilities.Plot;
 
     input DiscreteStateSpace dss;
@@ -2683,8 +2670,7 @@ This function plots the impulse responses of a state space system for each syste
            heading="Step response"));
 
     protected
-    Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Step "type of time response";
+      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
 
     Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
 
@@ -2755,7 +2741,7 @@ This function plots the discrete step responses of a state space system for each
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
       import Modelica_LinearSystems2.Utilities.Plot;
 
     input DiscreteStateSpace dss;
@@ -2768,8 +2754,7 @@ This function plots the discrete step responses of a state space system for each
     extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
            heading="Ramp response"));
     protected
-    Modelica_LinearSystems2.Types.TimeResponse response=
-        Modelica_LinearSystems2.Types.TimeResponse.Ramp "type of time response";
+      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp "type of time response";
 
     Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
 
@@ -2835,7 +2820,7 @@ encapsulated function initialResponse
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Types.TimeResponse;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
@@ -2850,9 +2835,7 @@ encapsulated function initialResponse
   extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
         heading="Initial response"));
     protected
-  Modelica_LinearSystems2.Types.TimeResponse response=
-      Modelica_LinearSystems2.Types.TimeResponse.Initial
-        "type of time response";
+      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "type of time response";
 
     Real tSpanVar;
 
@@ -3510,8 +3493,7 @@ The file must contain
         "point in time of simulation to linearize the model";
       input String fileName="dslin" "Name of the result file";
       input Modelica.SIunits.Time Ts=1 "Sample time";
-      input Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal
-        "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
     protected
       String fileName2=fileName + ".mat";
