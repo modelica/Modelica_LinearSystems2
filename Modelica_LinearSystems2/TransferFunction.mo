@@ -2199,24 +2199,21 @@ This function plots the initial response, i.e. the zeros input response of a tra
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Complex;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
       output ZerosAndPoles zp(
         redeclare Real n1[ZerosAndPoles.Internal.numberOfRealZeros2(tf)],
         redeclare Real n2[integer((size(tf.n, 1) - 1 -
           ZerosAndPoles.Internal.numberOfRealZeros2(tf))/2),2],
         redeclare Real d1[ZerosAndPoles.Internal.numberOfRealPoles(tf)],
         redeclare Real d2[integer((size(tf.d, 1) - 1 -
-          ZerosAndPoles.Internal.numberOfRealPoles(tf))/2),2]);
+          ZerosAndPoles.Internal.numberOfRealPoles(tf))/2),2]) "ZerosAndPoles object";
     protected
       Complex z[:];
       Complex p[:];
       Real k;
     algorithm
       (z,p,k) := TransferFunction.Analysis.zerosAndPoles(tf);
-      zp := ZerosAndPoles(
-          z,
-          p,
-          k);
+      zp := ZerosAndPoles(z, p, k);
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -2259,12 +2256,12 @@ and are used as inputs the ZerosAndPoles constructor.
       import Modelica.Math.Vectors;
 
      input Modelica_LinearSystems2.TransferFunction tf
-        "transfer function of a system";
-          output Modelica_LinearSystems2.StateSpace ss(
-            redeclare Real A[TransferFunction.Analysis.denominatorDegree(tf),TransferFunction.Analysis.denominatorDegree(tf)],
-            redeclare Real B[TransferFunction.Analysis.denominatorDegree(tf),1],
-            redeclare Real C[1,TransferFunction.Analysis.denominatorDegree(tf)],
-            redeclare Real D[1,1]) "Transfer function in StateSpace form";
+        "Transfer function of a system";
+     output Modelica_LinearSystems2.StateSpace ss(
+       redeclare Real A[TransferFunction.Analysis.denominatorDegree(tf),TransferFunction.Analysis.denominatorDegree(tf)],
+       redeclare Real B[TransferFunction.Analysis.denominatorDegree(tf),1],
+       redeclare Real C[1,TransferFunction.Analysis.denominatorDegree(tf)],
+       redeclare Real D[1,1]) "Transfer function in StateSpace form";
 
     protected
      Integer na=TransferFunction.Analysis.denominatorDegree(tf) + 1;
@@ -2287,10 +2284,11 @@ and are used as inputs the ZerosAndPoles constructor.
     end if;
 
       ss.D := [d];
-     annotation (Documentation(info="<html>
+
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-ss = TransferFunction.Conversion.toStateSpace<b>toStateSpace</b>(tf)
+ss = TransferFunction.Conversion.<b>toStateSpace</b>(tf)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -2406,10 +2404,10 @@ Converts a matrix of transfer functions denoted as rational polynomial function 
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica.Math.Vectors;
 
-     input Modelica_LinearSystems2.TransferFunction tf
-        "transfer function of a system";
+      input Modelica_LinearSystems2.TransferFunction tf
+        "Transfer function of a system";
 
-          output Real ABCD[size(tf.d,1),size(tf.d,1)];
+      output Real ABCD[size(tf.d,1),size(tf.d,1)];
 
     protected
      Integer na=TransferFunction.Analysis.denominatorDegree(tf) + 1;
