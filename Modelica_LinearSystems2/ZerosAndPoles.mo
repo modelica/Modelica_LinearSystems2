@@ -28,9 +28,9 @@ operator record ZerosAndPoles
       import Modelica;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
-      input Real r "Value of Real variable";
-      input String uName="" "input name";
-      input String yName="" "output name";
+      input Real r "Value of real variable";
+      input String uName="" "Input name";
+      input String yName="" "Output name";
       output ZerosAndPoles zp(
         redeclare Real n1[0],
         redeclare Real n2[0,2],
@@ -45,12 +45,12 @@ operator record ZerosAndPoles
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-zp = 'constructor'.<b>fromReal</b>(r)
+zp = ZerosAndPoles&apos;constructor&apos;.<b>fromReal</b>(r)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-This function constructs a ZerosAndPoles record zp from a Real value, i.e. a without dynamics:
+This function constructs a ZerosAndPoles record zp from a real value, i.e. a without dynamics:
 </p>
 <blockquote><pre>
 y = r*u
@@ -82,8 +82,8 @@ zp.d2 = fill(0,1,2);
       input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0,0), 0)
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
-      input String uName="" "input name";
-      input String yName="" "output name";
+      input String uName="" "Input name";
+      input String yName="" "Output name";
       output ZerosAndPoles zp(
         redeclare Real n1[Internal.numberOfRealZeros(z)],
         redeclare Real n2[integer((size(z, 1) - Internal.numberOfRealZeros(z))/2),
@@ -139,8 +139,9 @@ zp.d2 = fill(0,1,2);
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-zp = <b>fromPolesAndZeros</b>(z, p, k)
-zp = <b>fromPolesAndZeros</b>(z, p, k, uName, yName)
+zp = ZerosAndPoles&apos;constructor&apos;.<b>fromPolesAndZeros</b>(z, p, k)
+   or
+zp = ZerosAndPoles&apos;constructor&apos;.<b>fromPolesAndZeros</b>(z, p, k, uName, yName)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -178,9 +179,23 @@ with j=sqrt(-1), is defined as
     end fromZerosAndPoles;
 
     function fromTransferFunction =
-        Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles
+      Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles
       "Generate a ZerosAndPoles data record from a transfer function"
-      annotation (Documentation(info="<html> </html>"));
+      annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote>
+<pre>
+zp = ZerosAndPoles&apos;constructor&apos;.<b>fromTransferFunction</b>(tf)
+</pre>
+</blockquote>
+
+<h4>Description</h4>
+<p>
+This function constructs a ZerosAndPoles record zp from a transfer function tf.
+For the simplicity of implementation, this function directly extends from
+<a href=\"Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles\">TransferFunction.Conversion.toZerosAndPoles</a>.
+</p>
+</html>"));
 
     encapsulated function fromFactorization
       "Generate a ZerosAndPoles data record from first and second order polynomials"
@@ -189,24 +204,20 @@ with j=sqrt(-1), is defined as
 
       input Real n1[:]=fill(0, 0)
         "[p^0] coefficients of 1st order numerator polynomials"
-           annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-      input Real n2[:,2]=fill(
-              0,
-              0,
-              2) "[p,p^0] coefficients of 2nd order numerator polynomials"
-           annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+        annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+      input Real n2[:,2]=fill(0, 0, 2)
+        "[p,p^0] coefficients of 2nd order numerator polynomials"
+        annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real d1[:]=fill(0, 0)
         "[p^0] coefficients of 1st order denominator polynomials"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-      input Real d2[:,2]=fill(
-              0,
-              0,
-              2) "[p,p^0] coefficients of 2nd order denominator polynomials"
-           annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+      input Real d2[:,2]=fill(0, 0, 2)
+        "[p,p^0] coefficients of 2nd order denominator polynomials"
+        annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real k=1.0 "Multiplicative factor of transfer function"
-           annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-      input String uName="" "input name";
-      input String yName="" "output name";
+        annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+      input String uName="" "Input name";
+      input String yName="" "Output name";
       output ZerosAndPoles zp(
         redeclare Real n1[size(n1, 1)],
         redeclare Real n2[size(n2, 1),2],
@@ -220,6 +231,20 @@ with j=sqrt(-1), is defined as
       zp.k := k;
       zp.uName := uName;
       zp.yName := yName;
+
+      annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote>
+<pre>
+zp = ZerosAndPoles&apos;constructor&apos;.<b>fromFactorization</b>(n1, n2, d1, d2, k, uName, yName)
+</pre>
+</blockquote>
+
+<h4>Description</h4>
+<p>
+This function constructs a ZerosAndPoles record zp from first and second order polynomials.
+</p>
+</html>"));
     end fromFactorization;
 
     annotation (Documentation(info="<html>
@@ -230,7 +255,7 @@ with j=sqrt(-1), is defined as
 encapsulated operator '-'
     "Collection of operators for subtraction of zeros and poles descriptions"
   extends Modelica.Icons.Package;
-    import Modelica;
+  import Modelica;
 
   function subtract "Subtract two zeros and poles descriptions (zp1 - zp2)"
       import Modelica;
@@ -338,7 +363,7 @@ encapsulated operator '-'
   algorithm
   end negate;
     annotation (Documentation(info="<html>
-<p>This package contains operators for subtraction of state space records. </p>
+<p>This package contains operators for subtraction of zeros and poles descriptions. </p>
 </html>"));
 end '-';
 
