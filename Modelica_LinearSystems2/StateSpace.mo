@@ -33,23 +33,23 @@ operator record StateSpace
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
 
-      input Real A[:, size(A, 1)];
+      input Real A[:, size(A, 1)] "System matrix";
       input Real B[size(A, 1), :]=fill(
               0.0,
               size(A, 1),
-              0);
+              0) "Control matrix";
       input Real C[:, size(A, 1)]=fill(
               0.0,
               0,
-              size(A, 1));
+              size(A, 1)) "Output matrix";
       input Real D[size(C, 1), size(B, 2)]=fill(
               0.0,
               0,
-              0);
+              0) "Feed-forward matrix";
 
-      input String uNames[size(B, 2)]=fill("", size(B, 2));
-      input String yNames[size(C, 1)]=fill("", size(C, 1));
-      input String xNames[size(A, 2)]=fill("", size(A, 2));
+      input String uNames[size(B, 2)]=fill("", size(B, 2)) "Names of the input signals";
+      input String yNames[size(C, 1)]=fill("", size(C, 1)) "Names of the output signals";
+      input String xNames[size(A, 2)]=fill("", size(A, 2)) "Names of the states";
 
       output StateSpace result(
         redeclare Real A[size(A, 1), size(A, 2)],
@@ -58,7 +58,7 @@ operator record StateSpace
         redeclare Real D[size(D, 1), size(D, 2)],
         redeclare String uNames[size(B, 2)],
         redeclare String yNames[size(C, 1)],
-        redeclare String xNames[size(A, 2)]);
+        redeclare String xNames[size(A, 2)]) "State space record";
 
     algorithm
       result.A := A;
@@ -73,7 +73,7 @@ operator record StateSpace
 <h4>Syntax</h4>
 <blockquote>
 <pre>
-ss = 'constructor'.<b>fromABCDMatrices</b>(A, B, C, D)
+ss = StateSpace.&apos;constructor&apos;.<b>fromABCDMatrices</b>(A, B, C, D)
 </pre>
 </blockquote>
 
@@ -113,7 +113,7 @@ public
       import Modelica;
       import Modelica_LinearSystems2.StateSpace;
 
-      input Real r "Value of Real variable";
+      input Real r "Value of real variable";
       output StateSpace ss(
         redeclare Real A[0, 0],
         redeclare Real B[0, 1],
@@ -126,13 +126,13 @@ public
 <h4>Syntax</h4>
 <blockquote>
 <pre>
-ss = 'constructor'.<b>fromReal</b>(r)
+ss = StateSpace.&apos;constructor&apos;.<b>fromReal</b>(r)
 </pre>
 </blockquote>
 
 <h4>Description</h4>
 <p>
-This function constructs a StateSpace record ss from a Real value, i.e. a state space system without a state and an output without dynamics:
+This function constructs a StateSpace record ss from a real value, i.e. a state-space system without a state and an output without dynamics:
 </p>
 <blockquote><pre>
 y = r*u
@@ -150,14 +150,42 @@ ss.D = [r];
     end fromReal;
 
     function fromTransferFunction =
-        Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace
+      Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace
       "Generate a StateSpace data record from a transfer function" annotation (
-        Documentation(info="<html> </html>"));
+        Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote>
+<pre>
+ss = StateSpace.&apos;constructor&apos;.<b>fromTransferFunction</b>(tf)
+</pre>
+</blockquote>
+
+<h4>Description</h4>
+<p>
+This function constructs a StateSpace record ss from a transfer function tf.
+For the simplicity of implementation, this function directly extends from
+<a href=\"Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace\">TransferFunction.Conversion.toStateSpace</a>.
+</p>
+</html>"));
 
     function fromZerosAndPoles =
-        Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace
+      Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace
       "Generate a StateSpace data record from a zeros-and-poles system"
-      annotation (Documentation(info="<html> </html>"));
+      annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote>
+<pre>
+ss = StateSpace.&apos;constructor&apos;.<b>fromZerosAndPoles</b>(zp)
+</pre>
+</blockquote>
+
+<h4>Description</h4>
+<p>
+This function constructs a StateSpace record ss from a zeros-poles-gain system zp.
+For the simplicity of implementation, this function directly extends from
+<a href=\"Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace\">ZerosAndPoles.Conversion.toStateSpace</a>.
+</p>
+</html>"));
 
     annotation (Documentation(info="<html>
 <p>This package contains the default constructors for a data record of state space system. </p>
@@ -175,8 +203,8 @@ ss.D = [r];
       import Modelica;
       import Modelica_LinearSystems2.StateSpace;
 
-      input StateSpace ss1 "State space system 1";
-      input StateSpace ss2 "State Space system 2 is subtracted from system 1";
+      input StateSpace ss1 "State-space system 1";
+      input StateSpace ss2 "State-space system 2 is subtracted from system 1";
       output StateSpace result(
         redeclare Real A[size(ss1.A, 1) + size(ss2.A, 1), size(ss1.A, 2) + size(
           ss2.A, 2)],
@@ -194,12 +222,15 @@ ss.D = [r];
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-ss = Modelica_LinearSystems2.StateSpace.&apos;-&apos;.<b>subtract</b>(ss1, ss2)
+ss = StateSpace.&apos;-&apos;.<b>subtract</b>(ss1, ss2)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-This operator function computes the subtraction of two state space systems connected in parallel, i.e. the inputs are the same and the outputs of the two systems are subtracted. Therefore, the systems must have the same number of inputs and outputs but not the same number of states. The resulting system has an order of system_order1 + system_order2.
+This operator function computes the subtraction of two state space systems connected in parallel,
+i.e. the inputs are the same and the outputs of the two systems are subtracted.
+Therefore, the systems must have the same number of inputs and outputs but not the same
+number of states. The resulting system has an order of system_order1 + system_order2.
 </p>
 <p>
 The operator is used by writing just the following command:
@@ -210,8 +241,8 @@ ss3 := ss1 - ss2;
 
 <h4>Example</h4>
 <blockquote><pre>
-  StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1;2], C=[0, 1], D=[0]);
-  StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3;4], C=[0, 2], D=[0]);
+  StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1; 2], C=[0, 1], D=[0]);
+  StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3; 4], C=[0, 2], D=[0]);
 
   StateSpace ss3;
 
@@ -231,7 +262,7 @@ ss3 := ss1 - ss2;
       import Modelica;
       import Modelica_LinearSystems2.StateSpace;
 
-      input StateSpace ss "State space system";
+      input StateSpace ss "State-space system";
       output StateSpace result(
         redeclare Real A[size(ss.A, 1), size(ss.A, 2)],
         redeclare Real B[size(ss.B, 1), size(ss.B, 2)],
@@ -242,6 +273,38 @@ ss3 := ss1 - ss2;
       result.B := ss.B;
       result.C := -ss.C;
       result.D := -ss.D;
+      annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+ss = StateSpace.&apos;-&apos;.<b>negate</b>(ss1)
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This operator function negates the state space system, i.e. the output ss
+is the negation ot the state space input ss1.
+</p>
+<p>
+The operator is used by writing just the following command:
+</p>
+<blockquote><pre>
+ss := -ss1;
+</pre> </blockquote>
+
+<h4>Example</h4>
+<blockquote><pre>
+  StateSpace ss1 = StateSpace(A=[-1, 3; 0, -2], B=[1; 2], C=[0.2, 1], D=[0.17]);
+
+  StateSpace ss;
+
+<b>algorithm</b>
+  ss := -ss1;
+// ss.A = [-1, 3; 0, -2],
+// ss.B = [1; 2],
+// ss.C = [-0.2, -1],
+// ss.D = [-0.17],
+</pre></blockquote>
+</html>"));
     end negate;
     annotation (Documentation(info="<html>
 <p>
@@ -271,6 +334,43 @@ This package contains operators for subtraction of state space records.
     result.B := [ss1.B; ss2.B];
     result.C := [ss1.C, ss2.C];
     result.D := ss1.D + ss2.D;
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+ss = StateSpace.<b>&apos;+&apos;</b>(ss1, ss2)
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This operator function computes the addition of two state space systems connected in parallel,
+i.e. the inputs are the same and the outputs of the two systems are added.
+Therefore, the systems must have the same number of inputs and outputs but not the same
+number of states. The resulting system has an order of system_order1 + system_order2.
+</p>
+<p>
+The operator is used by writing just the following command:
+</p>
+<blockquote><pre>
+ss3 := ss1 + ss2;
+</pre> </blockquote>
+
+<h4>Example</h4>
+<blockquote><pre>
+  StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1; 2], C=[0, 1], D=[0]);
+  StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3; 4], C=[0, 2], D=[0.2]);
+
+  StateSpace ss3;
+
+<b>algorithm</b>
+  ss3 := ss1 - ss2;
+// ss.A = [-1, 0, 0, 0; 0, -2, 0, 0; 0, 0, -3, 0; 0, 0, 0, -4],
+// ss.B = [1; 2; 3; 4],
+// ss.C = [0, 1, 0, 2],
+
+// ss.D = [0.2],
+</pre></blockquote>
+
+</html>"));
   end '+';
 
   encapsulated operator function '*'
@@ -294,6 +394,43 @@ This package contains operators for subtraction of state space records.
     result.B := [ss1.B*ss2.D; ss2.B];
     result.C := [ss1.C, ss1.D*ss2.C];
     result.D := ss1.D*ss2.D;
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+ss = StateSpace.<b>&apos;*&apos;</b>(ss1, ss2)
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This operator function computes the addition of two state space systems connected in series.
+<!--,
+i.e. the inputs are the same and the outputs of the two systems are added.
+Therefore, the systems must have the same number of inputs and outputs but not the same
+number of states. The resulting system has an order of system_order1 + system_order2.
+-->
+</p>
+<p>
+The operator is used by writing just the following command:
+</p>
+<blockquote><pre>
+result := ss1 * ss2;
+</pre> </blockquote>
+
+<h4>Example</h4>
+<blockquote><pre>
+  StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1; 2], C=[0, 1], D=[0]);
+  StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3; 4], C=[0, 2], D=[0.2]);
+
+  StateSpace ss3;
+
+<b>algorithm</b>
+  ss3 := ss1 - ss2;
+// ss.A = [-1, 0, 0, 0; 0, -2, 0, 0; 0, 0, -3, 0; 0, 0, 0, -4],
+// ss.B = [0.2; 0.4; 3; 4],
+// ss.C = [0, 1, 0, 0],
+// ss.D = [0],
+</pre></blockquote>
+</html>"));
   end '*';
 
   encapsulated operator function '=='
@@ -307,19 +444,41 @@ This package contains operators for subtraction of state space records.
       "Two elements e1 and e2 of the two systems are identical if abs(e1-e2) <= eps";
     output Boolean same "=true, if the two systems are identical";
   algorithm
-    same := isEqual(
-        ss1.A,
-        ss2.A,
-        eps) and isEqual(
-        ss1.B,
-        ss2.B,
-        eps) and isEqual(
-        ss1.C,
-        ss2.C,
-        eps) and isEqual(
-        ss1.D,
-        ss2.D,
-        eps);
+    same := isEqual(ss1.A, ss2.A, eps) and
+      isEqual(ss1.B, ss2.B, eps) and
+      isEqual(ss1.C, ss2.C, eps) and
+      isEqual(ss1.D, ss2.D, eps);
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+same = StateSpace.<b>&apos;==&apos;</b>(ss1, ss2)
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This operator function returns true, if all appropriate matrices of two state space systems
+ss1 and ss2 are identical. False is returned in any other case.
+</p>
+<p>
+The operator is used by writing just the following command:
+</p>
+<blockquote><pre>
+same := ss1 == ss2;
+</pre></blockquote>
+
+<h4>Example</h4>
+<blockquote><pre>
+  StateSpace ss1 = StateSpace(A=[-1, 0; 0, -2], B=[1; 2], C=[0, 1], D=[0]);
+  StateSpace ss2 = StateSpace(A=[-3, 0; 0, -4], B=[3; 4], C=[0, 2], D=[0.2]);
+  StateSpace ss3 = StateSpace(A=[-3, 0; 0, -4], B=[3; 4], C=[0, 2], D=[0.2]);
+
+  ss1 == ss2;
+// false
+
+  ss2 == ss3;
+// true
+</pre></blockquote>
+</html>"));
   end '==';
 
   encapsulated operator function 'String'
@@ -611,10 +770,19 @@ This package contains operators for subtraction of state space records.
 
     end if;
 
+    annotation (Documentation(info="<html>
+<p>
+Returns a pretty formated string representing the input state space ss.
+The operator is used by writing just the following command:
+</p>
+<blockquote><pre>
+ss;
+</pre></blockquote>
+</html>"));
   end 'String';
 
   encapsulated package Analysis
-    "Package of functions to analyse state space system represented by a StateSpace record"
+    "Collection of functions to analyse state space system represented by a StateSpace record"
     import Modelica;
     extends Modelica.Icons.Package;
 
@@ -6013,6 +6181,12 @@ listed in the last column might be not the most relevant one.
 </table>
 </html>"));
     end analysis2;
+    annotation (Documentation(info="<html>
+<p>
+This package collects functions used for common analyses on a state space system
+represented by a StateSpace record.
+</p>
+</html>"));
   end Analysis;
 
   encapsulated package Design
