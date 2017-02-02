@@ -1,19 +1,28 @@
 ﻿within Modelica_LinearSystems2.Utilities.Plot;
 function plot_FFT_fromFile
   "Plot amplitudes of FFT results (from result file)"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.Utilities.Plot;
   input String fileName "File where FFT data is stored"
     annotation (Dialog(
-      loadSelector(filter="MATLAB MAT-files (*.mat)",
-          caption="Open file of FFT result data")));
+      loadSelector(
+        filter="MATLAB MAT-files (*.mat)",
+        caption="Open file of FFT result data")));
   input Boolean logX = false "= true, if logarithmic scale of x-axis" annotation(choices(checkBox=true));
 protected
-   Integer dims[2] = readMatrixSize(fileName,"FFT");
-   Real fA[:,:] = readMatrix(fileName, "FFT", dims[1], dims[2]);
+  Integer dims[2] = readMatrixSize(fileName,"FFT");
+  Real fA[:,:] = readMatrix(fileName, "FFT", dims[1], dims[2]);
 algorithm
-  Plot.diagram(Plot.Records.Diagram(curve={Plot.Records.Curve(x=if logX then fA[4:size(fA,1),1] else fA[:,1], y=if logX then fA[4:size(fA,1),2] else fA[:,2])},
-                                    heading="Result of FFT calculation (" + fileName+")",
-                                    xLabel="Frequency in [Hz]", yLabel="Amplitude", logX=logX));
+  Plot.diagram(
+    Plot.Records.Diagram(
+      curve={
+        Plot.Records.Curve(
+          x=if logX then fA[4:size(fA,1),1] else fA[:,1],
+          y=if logX then fA[4:size(fA,1),2] else fA[:,2])},
+      heading="Result of FFT calculation (" + fileName+")",
+      xLabel="Frequency in [Hz]", yLabel="Amplitude", logX=logX));
+
   annotation(__Dymola_interactive=true, Documentation(revisions="<html>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Date</th> <th align=\"left\">Description</th></tr>

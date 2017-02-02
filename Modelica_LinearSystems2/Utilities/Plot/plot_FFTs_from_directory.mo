@@ -1,13 +1,15 @@
 ﻿within Modelica_LinearSystems2.Utilities.Plot;
 function plot_FFTs_from_directory
   "Plot amplitudes of FFT results (from result files in existing directory)"
+  extends Modelica.Icons.Function;
+
   import Modelica.Utilities.Internal.FileSystem;
   import Modelica.Utilities.Streams.print;
   import Modelica.Utilities.Strings;
   import Modelica_LinearSystems2.Utilities.Plot;
   input String directory
     "Existing directory in which result data is present";
-  input Boolean logX = false "= trrue, if logarithmic scale of x-axis" annotation(choices(checkBox=true));
+  input Boolean logX = false "= true, if logarithmic scale of x-axis" annotation(choices(checkBox=true));
 protected
   Integer nFiles = FileSystem.getNumberOfFiles(directory);
   String files[nFiles] = FileSystem.readDirectory(directory,nFiles);
@@ -23,14 +25,14 @@ protected
 algorithm
   // Determine FFT files in directory
   for i in 1:nFiles loop
-     // Determine whether file starts with "FFT."
-     if Strings.length(files[i]) > 4 then
-        if Strings.substring(files[i],1,4) == "FFT." then
-           // Store file in "fft_files"
-           nFFT :=nFFT + 1;
-           fft_files[nFFT] :=files[i];
-        end if;
-     end if;
+    // Determine whether file starts with "FFT."
+    if Strings.length(files[i]) > 4 then
+      if Strings.substring(files[i],1,4) == "FFT." then
+        // Store file in "fft_files"
+        nFFT :=nFFT + 1;
+        fft_files[nFFT] :=files[i];
+      end if;
+    end if;
   end for;
 
   // Sort the files
@@ -38,20 +40,27 @@ algorithm
 
   // Plot the files
   for i in 1:nFFT loop
-     file := directory + "/" + fft_filesSorted[i];
-     dims := DymolaCommands.MatrixIO.readMatrixSize(file,"FFT");
-     fA   := DymolaCommands.MatrixIO.readMatrix(file, "FFT", dims[1], dims[2]);
+    file := directory + "/" + fft_filesSorted[i];
+    dims := DymolaCommands.MatrixIO.readMatrixSize(file,"FFT");
+    fA   := DymolaCommands.MatrixIO.readMatrix(file, "FFT", dims[1], dims[2]);
 
-     ix :=ix + increment;
-     iy :=iy + increment;
-     Plot.diagram(Plot.Records.Diagram(curve={
-          Plot.Records.Curve(x=if logX then fA[4:size(fA,1),1] else fA[:,1],
-                             y=if logX then fA[4:size(fA,1),2] else fA[:,2])},
-          heading="Result of FFT calculation (" + file +")",
-          xLabel="Frequency in [Hz]", yLabel="Amplitude", logX=logX),
-          Plot.Records.Device(xTopLeft=ix,
-                              yTopLeft=iy));
+    ix :=ix + increment;
+    iy :=iy + increment;
+    Plot.diagram(
+      Plot.Records.Diagram(
+        curve={
+          Plot.Records.Curve(
+            x=if logX then fA[4:size(fA,1),1] else fA[:,1],
+            y=if logX then fA[4:size(fA,1),2] else fA[:,2])},
+        heading="Result of FFT calculation (" + file +")",
+        xLabel="Frequency in [Hz]",
+        yLabel="Amplitude",
+        logX=logX),
+      Plot.Records.Device(
+        xTopLeft=ix,
+        yTopLeft=iy));
   end for;
+
   annotation(__Dymola_interactive=true, Documentation(revisions="<html>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Date</th> <th align=\"left\">Description</th></tr>

@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 function diagramMatrix "Plot several diagrams in matrix layout"
+  extends Modelica.Icons.Function;
+
   input Modelica_LinearSystems2.Utilities.Plot.Records.Diagram diagram[:,:]
     "Properties of a set of diagrams (matrix layout)"
     annotation(Dialog);
@@ -22,12 +24,12 @@ using a matrix layout. For an overview, see the documentation of package
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot\">Modelica_LinearSystems2.Utilities.Plot</a>.
 </p>
 
-
+<h4>Example</h4>
 <p>
-<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.showMatrixDiagrams\">Example</a>:
+See an <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.showMatrixDiagrams\">example</a>
+for possible usage of this function:
 </p>
 
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showMatrixDiagrams.png\"></p>
-
 </html>"));
 end diagramMatrix;
