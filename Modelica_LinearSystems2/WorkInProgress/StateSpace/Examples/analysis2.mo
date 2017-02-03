@@ -3,8 +3,8 @@ function analysis2 "Example to check controllability of a state space system"
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
 
   input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
       A=[-6.0,0,2,-13.0; -9.0,-12.0,-3.25,19.25; 0,0,1,34.0; 0,0,-34.0,-31.0]/6,

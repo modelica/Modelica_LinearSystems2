@@ -14,7 +14,7 @@ algorithm
   if p == 1 then
     // column sum norm
     for i in 1:size(A, 2) loop
-      result := max(result, sum(Complex.'abs'(A[:, i])));
+      result :=max(result, sum(Modelica.ComplexMath.'abs'(A[:, i])));
 
     end for;
   elseif p == 2 then
@@ -27,7 +27,7 @@ algorithm
   elseif p == Modelica.Constants.inf then
     // row sum norm
     for i in 1:size(A, 1) loop
-      result := max(result, sum(Complex.'abs'(A[i, :])));
+      result :=max(result, sum(Modelica.ComplexMath.'abs'(A[i, :])));
     end for;
   else
     assert(false, "Optional argument \"p\" of function \"norm\" must be

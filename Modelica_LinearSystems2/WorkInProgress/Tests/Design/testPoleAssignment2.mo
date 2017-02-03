@@ -4,8 +4,8 @@ function testPoleAssignment2
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.WorkInProgress.Tests.Design;
   import Modelica.Utilities.Streams.print;

@@ -2471,8 +2471,8 @@ and results in
         zp,
         Complex(0, w[i]),
         1e-10);
-      A[i] := Complex.'abs'(c);
-      phi_old := Complex.arg(c, phi_old);
+      A[i] :=Modelica.ComplexMath.'abs'(c);
+      phi_old :=Modelica.ComplexMath.arg(c, phi_old);
       phi[i] := SI.Conversions.to_deg(phi_old);
 
       // Convert to other units, if required
@@ -6397,7 +6397,7 @@ int found=0;
       end for;
 
       for i in 1:size(zeros2, 1) loop
-        w := Complex.'abs'(zeros2[i]);
+        w :=Modelica.ComplexMath.'abs'(zeros2[i]);
         w_min := min(w_min, w);
         w_max := max(w_max, w);
         w_found := true;

@@ -27,8 +27,8 @@ protected
   Complex evContinuous[:] = StateSpace.Analysis.eigenValues(ss);
 
    //alternative calculation
-  Complex ev1=Complex.exp(evContinuous[1]*Ts);
-  Complex ev2=Complex.exp(evContinuous[2]*Ts);
+  Complex ev1=Modelica.ComplexMath.exp(evContinuous[1]*Ts);
+  Complex ev2=Modelica.ComplexMath.exp(evContinuous[2]*Ts);
   Complex evDiscrete2[2]={ev1,ev2};
 
 algorithm

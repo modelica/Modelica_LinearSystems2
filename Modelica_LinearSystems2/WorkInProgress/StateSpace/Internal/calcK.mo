@@ -3,8 +3,8 @@ function calcK
   "Computes the feedback matrix from the assigned eigenvalues, closed loop eigenvectors and the B matrix factorization"
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
 
   input Real A[:,size(A, 1)] "Real square system matrix";
   input Real U0[size(A, 1),:] "U0 and Z are the decompositions of B";
@@ -19,10 +19,14 @@ protected
   Integer n=size(A, 1);
   Integer m=size(U0, 2);
 
-  Real gamma_real[n]=Re(gamma) "Eigenvalue vector, real part";
-  Real gamma_imag[n]=Im(gamma) "Eigenvalue vector, imaginary part";
-  Real X_real[n,n]=Re(X) "Eigenvectors, real part";
-  Real X_imag[n,n]=Im(X) "Eigenvectors, imaginary part";
+  Real gamma_real[n]=Modelica.ComplexMath.real(
+                        gamma) "Eigenvalue vector, real part";
+  Real gamma_imag[n]=Modelica.ComplexMath.imag(
+                        gamma) "Eigenvalue vector, imaginary part";
+  Real X_real[n,n]=Modelica.ComplexMath.real(
+                      X) "Eigenvectors, real part";
+  Real X_imag[n,n]=Modelica.ComplexMath.imag(
+                      X) "Eigenvectors, imaginary part";
 
 algorithm
   K := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.wrapper_calcK(

@@ -64,11 +64,7 @@ algorithm
       "], therefore, the demanded assigned pole must be real. However, the imaginary part is "
        + String(gamma[1].im));
   elseif abs(gamma[1].im) > 0 or abs(gamma[2].im) > 0 then
-    assert(gamma[1].re == gamma[2].re and gamma[1].im == -gamma[2].im,
-      "\nThe assigned pole pair given in function StateSpace.Internal.assignOneOrTwoPoles() must be conjungated complex. However, the poles are\npole1 = "
-       + String(gamma[1]) + "\npole2 = " + String(gamma[2]) +
-      ". \nTry\npole1 = " + String(gamma[1]) + "\npole2 = " + String(
-      Complex.conj(gamma[1])) + "\ninstead");
+    assert(gamma[1].re == gamma[2].re and gamma[1].im == -gamma[2].im, "\nThe assigned pole pair given in function StateSpace.Internal.assignOneOrTwoPoles() must be conjungated complex. However, the poles are\npole1 = " + String(gamma[1]) + "\npole2 = " + String(gamma[2]) + ". \nTry\npole1 = " + String(gamma[1]) + "\npole2 = " + String(Modelica.ComplexMath.conj(gamma[1])) + "\ninstead");
   end if;
 
   if not Modelica.Math.Matrices.isEqual(

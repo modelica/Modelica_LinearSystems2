@@ -11,8 +11,8 @@ function assignPolesSI_rq
   import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
   import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
   import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
   import Modelica.Utilities.Streams.print;
 
   input StateSpace ss;

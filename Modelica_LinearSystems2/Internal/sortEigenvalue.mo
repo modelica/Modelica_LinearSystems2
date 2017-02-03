@@ -49,9 +49,9 @@ algorithm
               end if;
            else
               if ascending then
-                 swap := Complex.'abs'(sorted_ev[k1].ev) > Complex.'abs'(sorted_ev[k2].ev);
+                 swap :=Modelica.ComplexMath.'abs'(sorted_ev[k1].ev) > Modelica.ComplexMath.'abs'(sorted_ev[k2].ev);
               else
-                 swap := Complex.'abs'(sorted_ev[k1].ev) < Complex.'abs'(sorted_ev[k2].ev);
+                 swap :=Modelica.ComplexMath.'abs'(sorted_ev[k1].ev) < Modelica.ComplexMath.'abs'(sorted_ev[k2].ev);
               end if;
            end if;
         else
@@ -83,9 +83,9 @@ algorithm
                  end if;
               else
                  if ascending then
-                    swap := Complex.'abs'(sorted_ev[k1].ev) > Complex.'abs'(sorted_ev[k2].ev);
+                    swap :=Modelica.ComplexMath.'abs'(sorted_ev[k1].ev) > Modelica.ComplexMath.'abs'(sorted_ev[k2].ev);
                  else
-                    swap := Complex.'abs'(sorted_ev[k1].ev) < Complex.'abs'(sorted_ev[k2].ev);
+                    swap :=Modelica.ComplexMath.'abs'(sorted_ev[k1].ev) < Modelica.ComplexMath.'abs'(sorted_ev[k2].ev);
                  end if;
               end if;
            else

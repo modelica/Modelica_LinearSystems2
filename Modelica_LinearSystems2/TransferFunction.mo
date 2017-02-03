@@ -860,7 +860,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
     protected
       Complex j = Modelica_LinearSystems2.Math.Complex.j();
      Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
-      Real abs_den=Complex.'abs'(den);
+      Real abs_den=Modelica.ComplexMath.'abs'(den);
     algorithm
       den := if abs_den >= den_min then den else -abs_den+0*j;
       result := Polynomial.evaluateComplex(Polynomial(tf.n), s)/den;
@@ -1680,8 +1680,8 @@ and results in
               tf,
               Complex(0, w[i]),
               1e-10);
-        A[i] := Complex.'abs'(c);
-        phi_old := Complex.arg(c, phi_old);
+        A[i] :=Modelica.ComplexMath.'abs'(c);
+        phi_old :=Modelica.ComplexMath.arg(c, phi_old);
         phi[i] := SI.Conversions.to_deg(phi_old);
 
         // Convert to other units, if required

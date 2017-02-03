@@ -1801,13 +1801,13 @@ end Analysis;
   encapsulated function assignPolesMI
       "Pole assigment design algorithm for multi input systems"
 
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.Math.Complex;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica;
   //  import Modelica.Utilities.Streams.print;
-      import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Math.Matrices;
+    import Modelica_LinearSystems2.TransferFunction;
+    import Modelica_LinearSystems2.Math.Matrices;
 
     input DiscreteStateSpace dss "state space system";
 
@@ -1941,7 +1941,7 @@ end Analysis;
 
     // reorder gamma and A_rsf
     (gammaReordered,rpg) := Modelica_LinearSystems2.Internal.reorderZeros(gamma);
-    gammaReordered := Complex.Vectors.reverse(gammaReordered);
+    gammaReordered :=Modelica.ComplexMath.Vectors.reverse(gammaReordered);
     nccg := div(size(gammaReordered, 1) - rpg, 2);
     ncc := min(nccA, nccg);
     rp := min(rpA, rpg);
@@ -2960,16 +2960,16 @@ end Plot;
             Ts=dss.Ts, method=dss.method);
     // set frequency to a complex value which is whether pole nor zero
         for i in 1:size(poles,1) loop
-          cpoles[i] := if Complex.'abs'(poles[i])>0 then Complex.log(poles[i])/dss.Ts else Complex(-100);
+          cpoles[i] :=if Modelica.ComplexMath.'abs'(poles[i]) > 0 then Modelica.ComplexMath.log(poles[i])/dss.Ts else Complex(-100);
         end for;
         for i in 1:size(zeros,1) loop
-          czeros[i] := if Complex.'abs'(zeros[i])>0 then Complex.log(zeros[i])/dss.Ts else Complex(-100);
+          czeros[i] :=if Modelica.ComplexMath.'abs'(zeros[i]) > 0 then Modelica.ComplexMath.log(zeros[i])/dss.Ts else Complex(-100);
         end for;
 
          v := sum(cat(1, czeros[:].re,  cpoles[:].re))/max(size(czeros,1)+size(cpoles,1),1) + 13/19;
     //     v := sum(cat(1, zeros[:].re,  poles[:].re))/max(size(zeros,1)+size(poles,1),1);
         frequency := Complex(v)*17/19;
-        cfrequency := Complex.exp(frequency*dss.Ts);
+        cfrequency :=Modelica.ComplexMath.exp(frequency*dss.Ts);
     //    cfrequency := frequency;
 
         Gq := DiscreteZerosAndPoles.Analysis.evaluate(dzp, cfrequency);
@@ -3633,7 +3633,7 @@ ss.B2  = [0.000437113227802044;
     algorithm
       eig := Modelica_LinearSystems2.DiscreteStateSpace.Analysis.eigenValues(dss);
       for i in 1:size(dss.A, 1) loop
-        eig[i] := if Complex.'abs'(eig[i])>1e-10 then Complex.log(eig[i])/dss.Ts else Complex(-100);
+        eig[i] :=if Modelica.ComplexMath.'abs'(eig[i]) > 1e-10 then Modelica.ComplexMath.log(eig[i])/dss.Ts else Complex(-100);
       end for;
 
       //eig := Complex.log(eig)/dss.Ts;

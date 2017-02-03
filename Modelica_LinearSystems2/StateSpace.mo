@@ -1186,8 +1186,7 @@ ss;
       end if;
 
       // ZEROS
-      (zerosSorted,zerosIndex) :=
-        Modelica_LinearSystems2.Math.Complex.Vectors.sortComplex(systemZeros);
+      (zerosSorted,zerosIndex) :=Modelica.ComplexMath.Vectors.sort(systemZeros);
       nReal := Modelica_LinearSystems2.Internal.numberOfRealZeros(zerosSorted);
 
       if analyseOptions2.printInvariantZeros then
@@ -2241,7 +2240,7 @@ ss;
       algorithm
         for i in 1:nx loop
           // Normalize i-th row of complex eigenvector matrix and determine two largest elements
-          v_normalized := Complex.Vectors.normalize(evecComplex[i, :]);
+          v_normalized :=Modelica.ComplexMath.Vectors.normalize(evecComplex[i, :]);
           first := true;
           two := false;
           absMax1 := 0;
@@ -2249,14 +2248,14 @@ ss;
           absMax2 := 0;
           maxIndex2 := 0;
           j := 1;
-          abs_v_normalized := Complex.Vectors.norm(v_normalized, 1);
+          abs_v_normalized :=Modelica.ComplexMath.Vectors.norm(v_normalized, 1);
           while j <= nx loop
             if cev[j].im == 0 then
               v := abs(v_normalized[j].re);
               k := j;
               j := j + 1;
             else
-              v := 2*Complex.'abs'(v_normalized[j]);
+              v :=2*Modelica.ComplexMath.'abs'(v_normalized[j]);
               k := j;
               j := j + 2;
             end if;
@@ -3341,7 +3340,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
           StateSpace.Conversion.toTransferFunction(ss) else TransferFunction(1);
       Complex j=Modelica_LinearSystems2.Math.Complex.j();
       Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
-      Real abs_den=Complex.'abs'(den);
+      Real abs_den=Modelica.ComplexMath.'abs'(den);
     algorithm
       assert(issiso, "System must be SISO but is " + String(size(ss.B, 2)) +
         "-by-" + String(size(ss.C, 1)) + " system");
@@ -3681,7 +3680,7 @@ i.e. v1 = |      |,   v2 = |       |
           j := 0;
           zerosMax := 1.0e4*Modelica.Math.Matrices.norm([Af, Bf], p=1);
           for i in 1:size(beta, 1) loop
-             absZero := Modelica_LinearSystems2.Math.Complex.'abs'(Complex(alphaReal[i], alphaImag[i]));
+             absZero :=Modelica.ComplexMath.'abs'(Complex(alphaReal[i], alphaImag[i]));
              if absZero <= beta[i]*zerosMax then
                 j := j + 1;
                 Zeros[j].re := alphaReal[i]/beta[i];
@@ -4660,8 +4659,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
       end if;
 
       // ZEROS
-      (zerosSorted,zerosIndex) :=
-        Modelica_LinearSystems2.Math.Complex.Vectors.sortComplex(systemZeros);
+      (zerosSorted,zerosIndex) :=Modelica.ComplexMath.Vectors.sort(systemZeros);
       nReal := Modelica_LinearSystems2.Internal.numberOfRealZeros(zerosSorted);
 
       if analyseOptions2.printInvariantZeros then
@@ -5715,7 +5713,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
       algorithm
         for i in 1:nx loop
           // Normalize i-th row of complex eigenvector matrix and determine two largest elements
-          v_normalized := Complex.Vectors.normalize(evecComplex[i, :]);
+          v_normalized :=Modelica.ComplexMath.Vectors.normalize(evecComplex[i, :]);
           first := true;
           two := false;
           absMax1 := 0;
@@ -5723,14 +5721,14 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
           absMax2 := 0;
           maxIndex2 := 0;
           j := 1;
-          abs_v_normalized := Complex.Vectors.norm(v_normalized, 1);
+          abs_v_normalized :=Modelica.ComplexMath.Vectors.norm(v_normalized, 1);
           while j <= nx loop
             if cev[j].im == 0 then
               v := abs(v_normalized[j].re);
               k := j;
               j := j + 1;
             else
-              v := 2*Complex.'abs'(v_normalized[j]);
+              v :=2*Modelica.ComplexMath.'abs'(v_normalized[j]);
               k := j;
               j := j + 2;
             end if;
@@ -6228,8 +6226,8 @@ represented by a StateSpace record.
       p_sorted := p;
       for i1 in 1:size(p_sorted, 1) loop
         for i2 in (1 + i1):size(p_sorted, 1) loop
-          if Modelica_LinearSystems2.Math.Complex.'abs'(p_sorted[i1]) >
-              Modelica_LinearSystems2.Math.Complex.'abs'(p_sorted[i2]) then
+          if Modelica.ComplexMath.'abs'(p_sorted[i1]) >
+            Modelica.ComplexMath.'abs'(p_sorted[i2]) then
             smaller := p_sorted[i2];
             p_sorted[i2] := p_sorted[i1];
             p_sorted[i1] := smaller;
@@ -6242,8 +6240,8 @@ represented by a StateSpace record.
       // sort actual eigenvalues
       for i1 in 1:size(p_actual, 1) loop
         for i2 in (1 + i1):size(p_actual, 1) loop
-          if Modelica_LinearSystems2.Math.Complex.'abs'(p_actual[i1]) >
-              Modelica_LinearSystems2.Math.Complex.'abs'(p_actual[i2]) then
+          if Modelica.ComplexMath.'abs'(p_actual[i1]) > 
+            Modelica.ComplexMath.'abs'(p_actual[i2]) then
             smaller := p_actual[i2];
             p_actual[i2] := p_actual[i1];
             p_actual[i1] := smaller;
@@ -6253,10 +6251,9 @@ represented by a StateSpace record.
 
       // check for poles that have an error of more than 10%
       for i in 1:size(p_sorted, 1) loop
-        if (Modelica_LinearSystems2.Math.Complex.'abs'(p_sorted[i]) <> 0) then
-          poleError := Modelica_LinearSystems2.Math.Complex.'abs'((p_sorted[i]
-             - p_actual[i]))/Modelica_LinearSystems2.Math.Complex.'abs'(
-            p_sorted[i]);
+        if (Modelica.ComplexMath.'abs'(p_sorted[i]) <> 0) then
+          poleError :=Modelica.ComplexMath.'abs'(p_sorted[i] - p_actual[i])/
+            Modelica.ComplexMath.'abs'(p_sorted[i]);
 
           if poleError > 0.1 then
             Modelica.Utilities.Streams.print("Warning: Pole location of pole "
@@ -6427,7 +6424,7 @@ represented by a StateSpace record.
       // reorder gamma and A_rsf
       (gammaReordered,rpg) := Modelica_LinearSystems2.Internal.reorderZeros(
         gamma);
-      gammaReordered := Complex.Vectors.reverse(gammaReordered);
+      gammaReordered :=Modelica.ComplexMath.Vectors.reverse(gammaReordered);
       nccg := div(size(gammaReordered, 1) - rpg, 2);
       ncc := min(nccA, nccg);
       rp := min(rpA, rpg);
@@ -10249,7 +10246,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
         absVector := fill(1e50, nx);
         for ii in 1:nx loop
           if not odummy[ii].imag then
-            absVector[ii] := Complex.'abs'(ev[i].ev - odummy[ii].ev);
+            absVector[ii] :=Modelica.ComplexMath.'abs'(ev[i].ev - odummy[ii].ev);
           end if;
         end for;
         (absVector,indices) := Modelica.Math.Vectors.sort(absVector);
@@ -10262,7 +10259,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
         absVector := fill(1e50, nx);
         for ii in 1:nx loop
           if not cdummy[ii].imag then
-            absVector[ii] := Complex.'abs'(ev[i].ev - cdummy[ii].ev);
+            absVector[ii] :=Modelica.ComplexMath.'abs'(ev[i].ev - cdummy[ii].ev);
           end if;
         end for;
         (absVector,indices) := Modelica.Math.Vectors.sort(absVector);
@@ -10987,8 +10984,8 @@ This condition is however not fulfilled because the number of outputs is ny = "
           Zeros := Complex.Internal.eigenValues_dhseqr(Ah[1:k - 1, 1:k - 1]);
 
           for i in 1:k - 1 loop
-            if Complex.'abs'(Zeros[i]) < Modelica.Math.Matrices.norm(Ah[1:k - 1,
-                1:k - 1], p=1)*1e-12 then
+            if Modelica.ComplexMath.'abs'(Zeros[i]) <
+              Modelica.Math.Matrices.norm(Ah[1:k - 1, 1:k - 1], p=1)*1e-12 then
               Zeros[i] := Complex(0);
             end if;
 

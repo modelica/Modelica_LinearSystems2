@@ -891,7 +891,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
       denZeros := fill(Complex(0),size(denZerosZ,1));
       for i in 1:size(denZerosZ,1) loop
-        denZeros[i] := Complex.log(denZerosZ[i])/dtf.Ts;
+        denZeros[i] :=Modelica.ComplexMath.log(denZerosZ[i])/dtf.Ts;
       end for;
 
       f := Internal.frequencyVector(
@@ -906,13 +906,13 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       phi_old := 0.0;
       for i in 1:nPoints loop
         w[i] := SI.Conversions.from_Hz(f[i]);
-        z[i] := Complex.exp(Complex(0,w[i]*dtf.Ts));
+        z[i] :=Modelica.ComplexMath.exp(Complex(0, w[i]*dtf.Ts));
         c := TransferFunction.Analysis.evaluate(
               tf,
               z[i],
               1e-10);
-        A[i] := Complex.'abs'(c);
-        phi_old := Complex.arg(c, phi_old);
+        A[i] :=Modelica.ComplexMath.'abs'(c);
+        phi_old :=Modelica.ComplexMath.arg(c, phi_old);
         phi[i] := SI.Conversions.to_deg(phi_old);
 
         // Convert to other units, if required

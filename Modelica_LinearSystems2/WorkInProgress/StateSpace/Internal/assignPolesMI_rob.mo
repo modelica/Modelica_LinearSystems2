@@ -11,8 +11,8 @@ function assignPolesMI_rob
   import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
   import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
   import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
   import Modelica.Utilities.Streams.print;
 
   input Real A[:,size(A, 1)] "system matrix";
@@ -96,10 +96,8 @@ algorithm
   numberOfComplexPairs := integer((nx - numberOfRealEigenvalues)/2);
   for i in numberOfRealEigenvalues + 1:numberOfRealEigenvalues +
       numberOfComplexPairs loop
-    gammaSorted[i] := if Im(gammaSorted2[2*i - numberOfRealEigenvalues - 1]) > 0 then
-            gammaSorted2[2*i - numberOfRealEigenvalues - 1] else Complex.conj(
-      gammaSorted2[2*i - numberOfRealEigenvalues - 1]);
-    gammaSorted[i + numberOfComplexPairs] := Complex.conj(gammaSorted[i]);
+    gammaSorted[i] :=if Im(gammaSorted2[2*i - numberOfRealEigenvalues - 1]) > 0 then gammaSorted2[2*i - numberOfRealEigenvalues - 1] else Modelica.ComplexMath.conj(gammaSorted2[2*i - numberOfRealEigenvalues - 1]);
+    gammaSorted[i + numberOfComplexPairs] :=Modelica.ComplexMath.conj(gammaSorted[i]);
   end for;
 
   S := fill(Complex(0), nx, size(B, 2)*(nx - numberOfComplexPairs));// set dimension of S

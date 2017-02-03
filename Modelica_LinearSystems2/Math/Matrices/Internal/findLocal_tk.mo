@@ -33,9 +33,9 @@ algorithm
       -2*alpha_k}));
     h := false;
     for i1 in 1:3 loop
-      if (abs(Complex.imag(p[i1])) < Modelica.Constants.eps) then
-        if (abs(Complex.real(p[i1]) - 1) <= 1) then
-          tk := Complex.real(p[i1]);
+      if (abs(Modelica.ComplexMath.imag(p[i1])) < Modelica.Constants.eps) then
+        if (abs(Modelica.ComplexMath.real(p[i1]) - 1) <= 1) then
+          tk :=Modelica.ComplexMath.real(p[i1]);
           h := true;
         end if;
       end if;

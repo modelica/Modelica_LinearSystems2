@@ -537,16 +537,16 @@ algorithm
         Ts=dss.Ts, method=dss.method);
 // set frequency to a complex value which is whether pole nor zero
     for i in 1:size(poles,1) loop
-      cpoles[i] := Complex.log(poles[i])/dss.Ts;
+      cpoles[i] :=Modelica.ComplexMath.log(poles[i])/dss.Ts;
     end for;
     for i in 1:size(zeros,1) loop
-      czeros[i] := Complex.log(zeros[i])/dss.Ts;
+      czeros[i] :=Modelica.ComplexMath.log(zeros[i])/dss.Ts;
     end for;
 
      v := sum(cat(1, czeros[:].re,  cpoles[:].re))/max(size(czeros,1)+size(cpoles,1),1) + 13/19;
 //     v := sum(cat(1, zeros[:].re,  poles[:].re))/max(size(zeros,1)+size(poles,1),1);
     frequency := Complex(v)*17/19;
-    cfrequency := Complex.exp(frequency*dss.Ts);
+    cfrequency :=Modelica.ComplexMath.exp(frequency*dss.Ts);
 //    cfrequency := frequency;
 
     Gq := DiscreteZerosAndPoles.Analysis.evaluate(dzp, cfrequency);

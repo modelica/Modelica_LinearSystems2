@@ -1330,7 +1330,7 @@ order polynomials of the DiscreteZeroAndPoles numerator.
     end for;
 
     // Build value of transfer function
-    abs_den := Complex.'abs'(den);
+    abs_den :=Modelica.ComplexMath.'abs'(den);
     den := if abs_den >= den_min then den else -abs_den+0*j;
     y := num/den;
     annotation (Documentation(info="<html>
@@ -1450,7 +1450,7 @@ numerator polynomial N(z) and the denominator polynomial D(q).
     numZeros := fill(Complex(0),0);
     denZeros := fill(Complex(0),size(denZerosZ,1));
     for i in 1:size(denZerosZ,1) loop
-      denZeros[i] := Complex.log(denZerosZ[i])/dzp.Ts;
+      denZeros[i] :=Modelica.ComplexMath.log(denZerosZ[i])/dzp.Ts;
     end for;
 
     f := Internal.frequencyVector(
@@ -1465,13 +1465,13 @@ numerator polynomial N(z) and the denominator polynomial D(q).
     phi_old := 0.0;
     for i in 1:nPoints loop
       w[i] := SI.Conversions.from_Hz(f[i]);
-      z[i] := Complex.exp(Complex(0,w[i]*dzp.Ts));
+      z[i] :=Modelica.ComplexMath.exp(Complex(0, w[i]*dzp.Ts));
       c := ZerosAndPoles.Analysis.evaluate(
             zp,
             z[i],
             1e-10);
-      A[i] := Complex.'abs'(c);
-      phi_old := Complex.arg(c, phi_old);
+      A[i] :=Modelica.ComplexMath.'abs'(c);
+      phi_old :=Modelica.ComplexMath.arg(c, phi_old);
       phi[i] := SI.Conversions.to_deg(phi_old);
 
       // Convert to other units, if required

@@ -142,7 +142,7 @@ algorithm
 
   // reorder gamma and A_rsf
   (gammaReordered,rpg) := Modelica_LinearSystems2.Internal.reorderZeros(gamma);
-  gammaReordered := Complex.Vectors.reverse(gammaReordered);
+  gammaReordered :=Modelica.ComplexMath.Vectors.reverse(gammaReordered);
   nccg := div(size(gammaReordered, 1) - rpg, 2);
   ncc := min(nccA, nccg);
   rp := min(rpA, rpg);

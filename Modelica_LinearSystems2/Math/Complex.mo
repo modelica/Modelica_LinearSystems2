@@ -147,7 +147,10 @@ operator record Complex "Record defining a Complex number"
 
       // Sort complex vector
       if sort then
-        (cSorted,cIndex) := Complex.Vectors.sortComplex(c,ascending,sortFrequency);
+        (cSorted,cIndex) :=Modelica.ComplexMath.Vectors.sort(
+              c,
+              ascending,
+              sortFrequency);
       else
         cSorted :=c;
         cIndex :=1:nc;
@@ -560,11 +563,10 @@ This package provides functions operating on vectors of complex numbers.
         for i in 1:r loop
           s := s + space;
           for j in 1:c loop
-            if Complex.'abs'(M[i, j]) >= 0 then
+            if Modelica.ComplexMath.'abs'(M[i, j]) >= 0 then
               s := s + " ";
             end if;
-            s := s + String(M[i, j], significantDigits=significantDigits) +
-              Strings.repeat(significantDigits + 8 - Strings.length(String(Complex.'abs'(M[i,j]))));
+            s :=s + String(M[i, j], significantDigits=significantDigits) + Strings.repeat(significantDigits + 8 - Strings.length(String(Modelica.ComplexMath.'abs'(M[i, j]))));
 
           end for;
           s := s + "\n";
@@ -1145,7 +1147,7 @@ inputs and the number of outputs must be identical.
       for l1 in 1:size(C, 1) loop
         for l2 in 1:size(C, 2) loop
     //      CT[l2, l1] := Re(C[l1, l2]) - j*Im(C[l1, l2]);
-          CT[l2, l1] := Complex.conj(C[l1,l2]);
+          CT[l2, l1] :=Modelica.ComplexMath.conj(C[l1, l2]);
         end for;
       end for;
 
@@ -1159,7 +1161,7 @@ inputs and the number of outputs must be identical.
     algorithm
       for i1 in 1:size(A, 1) loop
         for i2 in 1:size(A, 2) loop
-          result := result + Complex.real(A[i1, i2]*Complex.conj(A[i1, i2]));
+          result :=result + Modelica.ComplexMath.real(A[i1, i2]*Modelica.ComplexMath.conj(A[i1, i2]));
         end for;
       end for;
       result := sqrt(result);
