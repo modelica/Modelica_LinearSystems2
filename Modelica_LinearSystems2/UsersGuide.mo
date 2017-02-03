@@ -1087,6 +1087,33 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
+    class Version_2_3_5_DV "Version 2.3.5 development version (Month Day, 2017)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>This version requires the <b>Modelica 3.2.2</b> Library.
+It is <b>backward compatible</b> to the previous version 2.3.4.</p>
+
+<h4>
+Improvements in this version:
+</h4>
+
+<ul>
+<li> Improved documentation of lot of classes/functions.</li>
+
+</ul>
+
+
+<h4>
+Bug fixes performed in this version:
+</h4>
+
+<ul>
+<li> ...</li>
+</ul>
+</html>"));
+    end Version_2_3_5_DV;
+
     class Version_2_3_4 "Version 2.3.4 (March 11, 2016)"
       extends Modelica.Icons.ReleaseNotes;
 
