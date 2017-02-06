@@ -5659,7 +5659,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
         import Modelica_LinearSystems2.Internal.Eigenvalue;
-        import Modelica_LinearSystems2.Math.Complex;
+        import Complex;
 
         input Eigenvalue evSorted[:];
         input Complex evecComplex[:, :];
@@ -5767,7 +5767,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
           end if;
 
           // Determine frequency and number of corresponding eigenvalue
-          (w1,d1) := Complex.frequency(cev[maxIndex1]);
+          (w1,d1) := Modelica_LinearSystems2.Math.Complex.frequency(cev[maxIndex1]);
           iw1 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex1, evIndex);
           if iw1 <= nReal then
             number1 := String(iw1);
@@ -5776,7 +5776,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
           end if;
 
           if two then
-            (w2,d2) := Complex.frequency(cev[maxIndex2]);
+            (w2,d2) := Modelica_LinearSystems2.Math.Complex.frequency(cev[maxIndex2]);
             iw2 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex2, evIndex);
             if iw2 <= nReal then
               number2 := String(iw2);
