@@ -3,7 +3,7 @@ function conditionNumbers
   "Calculate several condition numbers to evaluate a pole assigment method"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Utilities.Streams.print;
 
@@ -37,7 +37,7 @@ algorithm
   dl :=Modelica.ComplexMath.Vectors.norm(sortedAssignedPoles - sortedCalcPoles)/max(1, Modelica.ComplexMath.Vectors.norm(sortedAssignedPoles));
   YT := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.inv(X);
   for l1 in 1:n loop
-    c[l1] :=Modelica.ComplexMath.Vectors.norm(YT[l1, :])*Modelica.ComplexMath.Vectors.norm(X[:, l1])/Modelica.ComplexMath.'abs'(Complex.Vectors.multiply(YT[l1, :], X[:, l1]));
+    c[l1] :=Modelica.ComplexMath.Vectors.norm(YT[l1, :])*Modelica.ComplexMath.Vectors.norm(X[:, l1])/Modelica.ComplexMath.'abs'(Modelica_LinearSystems2.Math.Complex.Vectors.multiply(YT[l1, :], X[:, l1]));
   end for;
   //performance indices
   // condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2

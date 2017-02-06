@@ -4,7 +4,7 @@ encapsulated function assignOneOrTwoPoles
 
   import Modelica;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Modelica_LinearSystems2.Math.Vectors;
 
   input Real F[:,size(F, 1)] "system matrix of order p=1 or p=2";
@@ -180,7 +180,7 @@ algorithm
       Modelica.Utilities.Streams.print("\n A subsystem (F, G) in StateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
       That is, " + String(F[1, 1]) + " remains and " + String(gamma[1].re) + " cannot be realized");
     else
-      system_ev := Complex.eigenValues(F);
+      system_ev := Modelica_LinearSystems2.Math.Complex.eigenValues(F);
       Modelica.Utilities.Streams.print("\n A subsystem (F, G) in StateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
       That is, " + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then " + " else
               " - ") + String(system_ev[1].im) + "j and " + String(system_ev[2].re)

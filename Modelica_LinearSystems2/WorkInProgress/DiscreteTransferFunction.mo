@@ -268,7 +268,7 @@ encapsulated function bode "Plot transfer function as bode plot"
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
       import SI = Modelica.SIunits;
 

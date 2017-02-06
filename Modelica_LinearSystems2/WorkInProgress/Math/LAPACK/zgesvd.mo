@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function zgesvd "Determine singular values of a complex matrix"
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Modelica_LinearSystems2.Math.Matrices;
 
   input Complex A[:,:] "Square or rectangular matrix";

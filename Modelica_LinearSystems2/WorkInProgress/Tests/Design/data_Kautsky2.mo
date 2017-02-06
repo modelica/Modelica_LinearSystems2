@@ -2,16 +2,14 @@ within Modelica_LinearSystems2.WorkInProgress.Tests.Design;
 function data_Kautsky2 "Example for pole assignment"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
+  import Modelica.ComplexMath.j;
   import Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData;
 
   output DesignData data(
   redeclare Real A[5,5],
   redeclare Real B[5,2],
   redeclare Complex assignedPoles[5]);
-
-protected
- Complex j = Complex.j();
 
 algorithm
   data.A:=[-0.1094,  0.0628, 0.0,     0.0,  0.0;

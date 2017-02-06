@@ -177,7 +177,7 @@ algorithm
 //   for l1 in 1:numberOfComplexPairs loop
 //     for l2 in 1:nx loop
 //       X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
-//         Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+//         Modelica.ComplexMath.conj(X[l2, numberOfRealEigenvalues + l1]);
 //     end for;
 //   end for;
 

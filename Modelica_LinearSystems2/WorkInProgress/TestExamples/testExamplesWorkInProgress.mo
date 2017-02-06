@@ -2,9 +2,9 @@ within Modelica_LinearSystems2.WorkInProgress.TestExamples;
 function testExamplesWorkInProgress "Test all examples from package WorkInProgress"
 
 algorithm
-  Modelica_LinearSystems2.WorkInProgress.Controller.Examples.TestComponents();
-  Modelica_LinearSystems2.WorkInProgress.Controller.Examples.ZerosAndPolesBlock();
-  Modelica_LinearSystems2.WorkInProgress.Controller.Examples.limIntegrator();
+  simulateModel("Modelica_LinearSystems2.WorkInProgress.Controller.Examples.TestComponents");
+  simulateModel("Modelica_LinearSystems2.WorkInProgress.Controller.Examples.ZerosAndPolesBlock");
+  simulateModel("Modelica_LinearSystems2.WorkInProgress.Controller.Examples.limIntegrator");
   Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples.designCraneController();
   Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples.designCraneControllerWithObserver();
   Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples.designInverseDoublePendulumController();

@@ -6,9 +6,9 @@ function toStateSpace2
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.Math.Vectors;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.StateSpace.Internal;
+  import Complex;
 
   input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
   output StateSpace ss(

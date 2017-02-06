@@ -179,7 +179,7 @@ algorithm
 // //   for l1 in 1:numberOfComplexPairs loop
 // //     for l2 in 1:nx loop
 // //       X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
-// //         Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+// //         Modelica.ComplexMath.conj(X[l2, numberOfRealEigenvalues + l1]);
 // //     end for;
 // //   end for;
 //
@@ -192,7 +192,7 @@ algorithm
 //     for l1 in 1:numberOfComplexPairs loop
 //       for l2 in 1:nx loop
 //         X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
-//           Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+//           Modelica.ComplexMath.conj(X[l2, numberOfRealEigenvalues + l1]);
 //       end for;
 //     end for;
 //   end if;
@@ -206,7 +206,7 @@ algorithm
 //     for l1 in 1:numberOfComplexPairs loop
 //       for l2 in 1:nx loop
 //         X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
-//           Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+//           Modelica.ComplexMath.conj(X[l2, numberOfRealEigenvalues + l1]);
 //       end for;
 //     end for;
 //     end if;
@@ -243,7 +243,7 @@ algorithm
 //       y := matVecMul(S[:, rankB*(l1 - 1) + 1:rankB*l1], y)/norm_y;
 //
 //       if l1 > numberOfRealEigenvalues and Complex.'abs'(
-//           Complex.Vectors.multiply(y, Complex.conj(y))) > 0.9 then
+//           Complex.Vectors.multiply(y, Modelica.ComplexMath.conj(y))) > 0.9 then
 //         idx := 1 + rem(k, rankB - size(Sr, 2));
 //         y := (y + S[:, (l1 - 1)*rankB + idx])/sqrt(2);
 //       end if;
@@ -254,7 +254,7 @@ algorithm
 //
 //       if l1 > numberOfRealEigenvalues then
 //         for l2 in 1:nx loop
-//           X[l2, l1 + numberOfComplexPairs] := Complex.conj(y[l2]);
+//           X[l2, l1 + numberOfComplexPairs] := Modelica.ComplexMath.conj(y[l2]);
 //         end for;
 //       end if;
 //     end for;

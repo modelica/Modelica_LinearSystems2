@@ -124,7 +124,7 @@ algorithm
    Z := fill(Complex(0), size(B, 2), rankB);
    for l1 in 1:rankB loop
      for l2 in 1:size(B, 2) loop
-//       Z[l1, l2] := Complex.conj(R[l2, l1])/sigmaB[l2];
+//       Z[l1, l2] := Modelica.ComplexMath.conj(R[l2, l1])/sigmaB[l2];
        Z[l1, l2] := Complex((Vr[l2, l1])/sigmaB[l2]);
      end for;
    end for;
@@ -215,7 +215,7 @@ algorithm
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(subS[l1].S),6,"ResubS[l1].S");
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(subS[l1].S),6,"ImsubS[l1].S");
 
-// MM := matMul(C,Complex.conj(Matrices.C_nullspace(Cc)));
+// MM := matMul(C,Modelica.ComplexMath.conj(Matrices.C_nullspace(Cc)));
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(MM),6,"ReMM");
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(MM),6,"ImMM");
 
@@ -278,14 +278,13 @@ end if;
         end for;
       end if;
 
-      QX := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_QR2(
-                                                        Xj);
+      QX := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_QR2(Xj);
       ST := C_transpose(subS[l1].S);
       y := matVecMul(ST, QX[:, nx]);
       norm_y :=Modelica.ComplexMath.Vectors.norm(y);
       y := matVecMul(subS[l1].S, y)/norm_y;
 
-//        if l1 > numberOfRealEigenvalues and Complex.'abs'(Complex.Vectors.multiply(y,Complex.conj(y)))>0.9 then
+//        if l1 > numberOfRealEigenvalues and Complex.'abs'(Complex.Vectors.multiply(y,Modelica.ComplexMath.conj(y)))>0.9 then
 //          idx := 1 + rem(k, size(subS[l1].S, 2) - size(Sr, 2));
 //          print(" k = "+String(k)+", l1 = "+String(l1)+", idx = " + String(idx));
 //          y := (y + subS[l1].S[:, idx])/sqrt(2);
