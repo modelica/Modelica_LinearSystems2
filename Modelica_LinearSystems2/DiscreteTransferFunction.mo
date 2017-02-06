@@ -52,14 +52,14 @@ operator record DiscreteTransferFunction
       "Generate a DiscreteStateSpace data record from a set of zeros and poles"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Complex;
 
-      input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex z[:] = fill(Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
-      input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex p[:] = fill(Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
       input Modelica.SIunits.Time Ts "Sample time";
@@ -403,15 +403,15 @@ operator record DiscreteTransferFunction
 
     end 'String';
 
-encapsulated function z "Generate the discrete transfer function z"
+  encapsulated function z "Generate the discrete transfer function z"
     import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
-  input Modelica.SIunits.Time Ts=0;
-  output DiscreteTransferFunction dtf(n={1,0}, d={1},Ts=Ts) "z";
-algorithm
+    input Modelica.SIunits.Time Ts=0;
+    output DiscreteTransferFunction dtf(n={1,0}, d={1},Ts=Ts) "z";
+  algorithm
 
-  annotation (Documentation(info="<html>
+    annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 z = DiscreteTransferFunction.<b>z</b>()
@@ -425,7 +425,7 @@ Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can b
 DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
 </pre></blockquote>
 </html>"));
-end z;
+  end z;
 
   encapsulated package Analysis
     "Package of functions to analyse discrete transfer function represented by a DiscreteTransferFunction record"
@@ -1188,11 +1188,11 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
     encapsulated function toDiscreteZerosAndPoles
       "Generate a DiscreteZerosAndPoles object from a DiscreteTransferFunction object"
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input DiscreteTransferFunction dtf "transfer function of a system";
       output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp(
