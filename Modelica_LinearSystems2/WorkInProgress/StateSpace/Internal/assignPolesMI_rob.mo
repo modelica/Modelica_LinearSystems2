@@ -7,7 +7,7 @@ function assignPolesMI_rob
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
   import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
   import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;

@@ -2,6 +2,20 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace;
 package Internal "Package of internal utilities of state space systems (for advanced users only)"
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   annotation (Documentation(info="<html>
 <p>
 Generally, the functions in this package should not be used by the user.

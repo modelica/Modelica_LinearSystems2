@@ -7,7 +7,7 @@ function assignPolesMI_rob2
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
   import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
   import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
@@ -242,7 +242,8 @@ algorithm
        norm_y :=Modelica.ComplexMath.Vectors.norm(y);
        y := matVecMul(S[:, rankB*(l1 - 1) + 1:rankB*l1], y)/norm_y;
 
-          if l1 > numberOfRealEigenvalues and Modelica.ComplexMath.'abs'(Complex.Vectors.multiply(y, Modelica.ComplexMath.conj(y))) > 0.9 then
+         if l1 > numberOfRealEigenvalues and Modelica.ComplexMath.'abs'(
+           Modelica_LinearSystems2.Math.Complex.Vectors.multiply(y, Modelica.ComplexMath.conj(y))) > 0.9 then
          idx := 1 + rem(k, rankB - size(Sr, 2));
          y := (y + S[:, (l1 - 1)*rankB + idx])/sqrt(2);
        end if;

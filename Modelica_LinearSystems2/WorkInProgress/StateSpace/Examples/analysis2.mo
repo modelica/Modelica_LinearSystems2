@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function analysis2 "Example to check controllability of a state space system"
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Re = Modelica.ComplexMath.real;
   import Im = Modelica.ComplexMath.imag;
 

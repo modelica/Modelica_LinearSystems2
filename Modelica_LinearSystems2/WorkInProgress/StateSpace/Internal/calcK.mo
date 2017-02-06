@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal;
 function calcK
   "Computes the feedback matrix from the assigned eigenvalues, closed loop eigenvectors and the B matrix factorization"
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Re = Modelica.ComplexMath.real;
   import Im = Modelica.ComplexMath.imag;
 

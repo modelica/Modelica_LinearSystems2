@@ -6,7 +6,7 @@ function assignPolesMI_rob_old
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
   import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
   import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
@@ -323,7 +323,7 @@ condX2 := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.condition
   K := -Re(KC);
   evX := X;
 
-  ev := Complex.eigenValues(A - B*K);
+  ev := Modelica_LinearSystems2.Math.Complex.eigenValues(A - B*K);
 //    Complex.Vectors.print("gammaSorted", gammaSorted);
 //    Complex.Vectors.print("ev", ev);
 
@@ -331,8 +331,9 @@ public
   encapsulated record subSpace
     import Modelica;
     import Modelica_LinearSystems2;
+    import Complex;
     extends Modelica.Icons.Record;
-    Modelica_LinearSystems2.Math.Complex S[:,:];
+    Complex S[:,:];
   end subSpace;
 
 end assignPolesMI_rob_old;
