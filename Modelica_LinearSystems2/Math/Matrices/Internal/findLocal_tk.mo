@@ -5,7 +5,7 @@ function findLocal_tk
 
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.Math.Polynomial;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
 
   input Real Rk[:,size(Rk, 2)];
   input Real Vk[size(Rk, 1),size(Rk, 2)];
