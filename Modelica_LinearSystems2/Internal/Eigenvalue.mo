@@ -16,10 +16,10 @@ record Eigenvalue
   Real timeConstant;
 
 encapsulated function constructor "Default constructor for eigenvalue"
-    import Modelica;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.Internal;
-    import Modelica_LinearSystems2.Internal.Eigenvalue;
+  import Modelica;
+  import Complex;
+  import Modelica_LinearSystems2.Internal;
+  import Modelica_LinearSystems2.Internal.Eigenvalue;
 
   input Complex ev_in=Complex(0);
   input Boolean isControllable=false;
