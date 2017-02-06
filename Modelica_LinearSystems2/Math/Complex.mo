@@ -87,10 +87,10 @@ operator record Complex "Record defining a Complex number"
         "Print the table with eigenvalues in html format on file"
         import Modelica;
         import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2;
         import Modelica_LinearSystems2.Internal.Eigenvalue;
-        import Modelica_LinearSystems2.Math.Complex;
+        import Complex;
 
         input Complex systemZeros[:];
         input Integer nReal;
@@ -130,7 +130,7 @@ operator record Complex "Record defining a Complex number"
           number := Strings.repeat(max(0, 7 - Strings.length(number))) + number;
 
           // Determine frequency and number of corresponding zero
-          (freq,damp) := Complex.frequency(systemZeros[i]);
+          (freq,damp) := Modelica_LinearSystems2.Math.Complex.frequency(systemZeros[i]);
 
           print(
             "<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> &nbsp; "
