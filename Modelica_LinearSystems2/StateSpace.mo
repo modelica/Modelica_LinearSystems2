@@ -3488,10 +3488,10 @@ This function calculates the zeros, poles and gain of the corresponding transfer
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex.eigenValues;
 
       input StateSpace ss "State space system";
-      output Complex eigvalues[size(ss.A, 1)] = eigenValues(ss.A)
+      output Complex eigvalues[size(ss.A, 1)]=
+        Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A)
         "Eigen values of the system";
     algorithm
 
@@ -5262,11 +5262,10 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
       encapsulated function printTab1
         "Print the table with real eigenvalues in html format on file"
         import Modelica;
-        import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2;
         import Modelica_LinearSystems2.Internal.Eigenvalue;
-        import Modelica_LinearSystems2.Math.Complex;
+        import Complex;
 
         input Eigenvalue evSorted[:];
         input Integer evIndex[size(evSorted, 1)];
@@ -5460,10 +5459,10 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
         "Print the table with complex conjugate eigenvalues in html format on file"
         import Modelica;
         import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2;
         import Modelica_LinearSystems2.Internal.Eigenvalue;
-        import Modelica_LinearSystems2.Math.Complex;
+        import Complex;
 
         input Eigenvalue evSorted[:];
         input Integer evIndex[size(evSorted, 1)];
@@ -9830,7 +9829,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
           + "\npole2 = " + ComplexToString(gamma[2])
           + ". \nTry\npole1 = " + ComplexToString(gamma[1])
           + "\npole2 = " + ComplexToString(
-            Modelica_LinearSystems2.Math.Complex.conj(gamma[1])) + "\ninstead");
+            Modelica.ComplexMath.conj(gamma[1])) + "\ninstead");
       end if;
 
       if not Modelica.Math.Matrices.isEqual(
@@ -10011,7 +10010,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
           + "\npole2 = " + ComplexToString(gamma[2])
           + ". \nTry\npole1 = " + ComplexToString(gamma[1])
           + "\npole2 = " + ComplexToString(
-            Modelica_LinearSystems2.Math.Complex.conj(gamma[1])) + "\ninstead");
+            Modelica.ComplexMath.conj(gamma[1])) + "\ninstead");
       end if;
 
       if not Modelica.Math.Matrices.isEqual(
