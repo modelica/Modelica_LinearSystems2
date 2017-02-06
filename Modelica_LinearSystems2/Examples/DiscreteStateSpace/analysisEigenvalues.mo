@@ -5,9 +5,9 @@ function analysisEigenvalues
 
   import Modelica;
   import Modelica.Utilities.Streams.print;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Complex;
 
   input StateSpace ss = StateSpace(
     A=[-1,1; -1,-1],
@@ -32,9 +32,9 @@ protected
   Complex evDiscrete2[2]={ev1,ev2};
 
 algorithm
-  Complex.Vectors.print("evDiscrete", evDiscrete);
-  Complex.Vectors.print("evDiscrete2", evDiscrete2);
-  Complex.Vectors.print("evContiuous", evContinuous);
+  Modelica_LinearSystems2.Math.Complex.Vectors.print("evDiscrete", evDiscrete);
+  Modelica_LinearSystems2.Math.Complex.Vectors.print("evDiscrete2", evDiscrete2);
+  Modelica_LinearSystems2.Math.Complex.Vectors.print("evContiuous", evContinuous);
 
   annotation (Documentation(info="<html>
 <p>
