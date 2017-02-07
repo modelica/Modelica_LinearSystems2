@@ -123,48 +123,144 @@ and
 <font color=#0000ff>end</font> '+';
 </pre></blockquote>
 <p>
+The concept has finally been integrated into the Modelica standard library since the
+<a href=\"modelica://Modelica.UsersGuide.ReleaseNotes.Version_3_2\">version 3.2</a>.
+Subsequently, the LinearSystems2 has been adapted to use
+<a href=\"modelica://Modelica.ComplexMath\">ComplexMath</a> for complex number operations.
+In 
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers.ConvertComplexMath\">ConvertComplexMath</a>,
+there is described how to properly convert user's libraries as well.
+</p>
+<p>
 For details see
 <a href=\"http://www.modelica.org/documents/ModelicaSpec31.pdf\">Modelica Language Specification version 3.1</a> (chapter 14) from June 2009.
 </p>
 </html>"));
       end FunctionsAndOperators;
+
+      class ConvertComplexMath "Convert complex mathematics"
+        extends Modelica.Icons.Information;
+        annotation (Documentation(info="<html>
+<p>
+Since <a href=\"modelica://Modelica.UsersGuide.ReleaseNotes.Version_3_2\">version 3.2</a>,
+the Modelica standard library contains a <a href=\"modelica://Modelica.ComplexMath\">ComplexMath</a>
+library used for complex number operations.Since the functions contained in the ComplexMth
+library widely originate from the Modelica_LinearSystems2.Math.Complex, there has been
+a duplicity of particular classes for a time period. To abolish these duplicities,
+the LinearSystems2 has eventually been adapted and obsolete classes deleted from
+<a href=\"modelica://Modelica_LinearSystems2.Math.Complex\">Math.Complex</a> pacakge.
+</p>
+
+<p>
+To facilitate the migration of concerned complex number operators and functions used
+within other libraries, a conversion script has been adopted.
+Nevertheless, there are some features which has to be considered on users own.
+In particular:
+</p>
+
+<ul>
+<li>
+Generally, the
+<blockquote>
+<pre>
+<span style=\"font-family:'Courier New,courier'; color: #0000ff;\">import</span> Modelica_LinearSystems2.Math.Complex;
+</pre>
+</blockquote>
+has to be changed to
+<blockquote>
+<pre>
+<span style=\"font-family:'Courier New,courier'; color: #0000ff;\">import</span> .Complex;
+</pre>
+</blockquote>
+&nbsp;
+</li>
+<li>
+For particular class instnaces, the abovementioned change demands the import of Modelica_LinearSystems2 
+as well, and the usage of appropriate instance path, i.e the original definition
+<blockquote>
+<pre>
+<span style=\"font-family:'Courier New,courier'; color:#0000ff;\">encapsulated function</span> functionName
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import </span><span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Modelica_LinearSystems2.Math.Complex</span>;
+  ...
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span> c1;
+  ...
+<span style=\"font-family:'Courier New,courier'; color:#0000ff;\">algorithm </span>
+  ...
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex.eigenValues</span>(A);
+  ...
+<span style=\"font-family:'Courier New,courier'; color:#0000ff;\">end </span>functionName;
+</pre>
+</blockquote>
+has to be adapted to
+<blockquote>
+<pre>
+<span style=\"font-family:'Courier New,courier'; color:#0000ff;\">encapsulated function</span> functionName
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import </span><span style=\"font-family:'Courier New,courier'; color:#ff0000;\">.Complex</span>;
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import </span><span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Modelica_LinearSystems2</span>;
+  ...
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span> c1;        &lt;-- No change in the variable definition
+  ...
+<span style=\"font-family:'Courier New,courier'; color:#0000ff;\">algorithm </span>
+  ...
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Modelica_LinearSystems2.Math.Complex.eigenValues</span>(A);
+  ...
+<span style=\"font-family:'Courier New,courier'; color:#0000ff;\">end </span>functionName;
+</pre>
+</blockquote>
+This especially applies for encapsulated classes.
+</li>
+<li>
+The imaginary unit <i>j</i> is no function more, it is defined as a constant within ComplexMath.
+Therefore, the usage similar to
+<blockquote>
+<pre>
+<span style=\"font-family:'Courier New,courier'; color: #ff0000;\">Complex</span>&nbsp;j&nbsp;=<span style=\"font-family:'Courier New,courier'; color: #ff0000;\">&nbsp;Modelica_LinearSystems2.Math.Complex.j</span>();
+</pre>
+</blockquote>
+has to be converted to e.g.
+<blockquote>
+<pre>
+<span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import</span> <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Modelica.ComplexMath.j</span>;
+</pre>
+</blockquote>
+in the class preamble.
+</li>
+</ul>
+</html>"));
+      end ConvertComplexMath;
+
       annotation (Documentation(info="<html>
 <p>
-<b>Complex</b> numbers are defined via record Modelica_LinearSystems2.Math.Complex.
-Basically, the record consists of the real and imaginary part of a
-complex number and functions stored in the record that operate
-on Complex numbers. A screenshot of the record and its content
-is given in the next figure:
-</p>
-<blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Complex.png\">
-</blockquote>
-<p>
-Switch to an interactive Modelica environment
-(e.g., Dymola command window)
-and type in the following commands:
+Generally, there is used a <a href=\"modelica://Modelica.ComplexMath\">ComplexMath</a>
+library from the Modelica standard library for all operations on complex numbers.
+Then, the Complex record is used in a similar way as the built-in type Real and
+consists of the real and imaginary part of a complex number.
+Additionally to the functionalities provided in the <a href=\"modelica://Modelica.ComplexMath\">ComplexMath</a>
+library, there are defined some extended functions in
+<a href=\"modelica://Modelica_LinearSystems2.Math.Complex\">Modelica_LinearSystems2.Math.Complex</a>.
+Since the usage of the ComplexMath within LinearSystems2
+has been adopted only recently, refer also to
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers.ConvertComplexMath\">ConvertComplexMath</a>
+for how to properly convert user's libraries as well.
 </p>
 
-<blockquote><pre>
-import Modelica_LinearSystems2.Math.Complex;
-</pre></blockquote>
-
 <p>
-This import statement defines a convenient abbreviation, so that
-in the following, we have only to type \"Complex\" and no longer
-\"Modelica_LinearSystems2.Complex\".<br>
 Since the Modelica language has been extended to support the concept of operator overloading,
-the definition of record Complex allows to write the following commands:
+the definition of record Complex allows to write the following commands.
+Switch to an interactive Modelica environment (e.g., Dymola command window)
+and type in the following:
 </p>
 
-<blockquote><pre>
+<blockquote>
+<pre>
 import Modelica_LinearSystems2.Math.Complex;
+import Modelica.ComplexMath.j;
 
-j  = Complex.j();
 c1 = 1 + 3*j;
 c2 = 1 - 5*j;
 c3 = c1 + c2;
-</pre></blockquote>
+</pre>
+</blockquote>
 
 <p>
 The original generation of complex numbers by using the record-constructor and calling
@@ -176,8 +272,7 @@ The overloading concept also includes the build in function 'String', i.e. typin
 <blockquote><pre>
 import Modelica_LinearSystems2.Math.Complex;
 
-j  = Complex.j();
-c1 = 1 + 3*j;
+c1 = Complex(1, 3);
 Modelica.Utilities.Streams.print(\"c1 = \"+String(c1));
 </pre></blockquote>
 <p>

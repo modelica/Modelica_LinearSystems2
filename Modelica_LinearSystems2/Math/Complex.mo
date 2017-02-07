@@ -195,7 +195,8 @@ operator record Complex "Record defining a Complex number"
     end printHTML;
 
   function length "Return length of a complex vector"
-      import Modelica_LinearSystems2.Math.Complex;
+    extends Modelica.Icons.Function;
+    import Modelica_LinearSystems2.Math.Complex;
     input Complex v[:] "Vector";
     output Real result "Length of vector v";
 
@@ -237,8 +238,9 @@ v = {2, -4, -2, -1};
   end length;
 
   function norm "Returns the norm of a complex vector"
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Complex;
+    extends Modelica.Icons.Function;
+    import Modelica;
+    import Modelica_LinearSystems2.Math.Complex;
     input Complex v[:] "Vector";
     input Real p(min=1) = 2
         "Type of p-norm (often used: 1, 2, or Modelica.Constants.inf)";
@@ -320,6 +322,7 @@ Note, for any vector norm the following inequality holds:
 
   function normalize
       "Return normalized complex vector such that length = 1 and prevent zero-division for zero vector"
+    extends Modelica.Icons.Function;
       import Modelica;
       import Modelica_LinearSystems2.Math.Complex;
 
@@ -383,6 +386,7 @@ possible.
   end normalize;
 
   function sortComplex "Sort elements of complex vector"
+    extends Modelica.Icons.Function;
       import Modelica_LinearSystems2.Math.Complex;
     input Complex v[:] "Vector to be sorted";
     input Boolean ascending = true
@@ -688,6 +692,7 @@ This package provides functions operating on matrices of complex numbers.
     import Modelica;
 
     function negate "Unary minus (multiply complex number by -1)"
+      extends Modelica.Icons.Function;
       import Modelica_LinearSystems2.Math.Complex; // changed to Modelica_LinearSystems2
       input Complex c1 "Complex number";
       output Complex c2 "= -c1";
@@ -702,6 +707,7 @@ This package provides functions operating on matrices of complex numbers.
     end negate;
 
     function subtract "Subtract two complex numbers"
+      extends Modelica.Icons.Function;
       import Modelica_LinearSystems2.Math.Complex;// changed to Modelica_LinearSystems2
       input Complex c1 "Complex number 1";
       input Complex c2 "Complex number 2";
@@ -816,6 +822,8 @@ This package contains operators for subtraction of complex numbers.
   end 'String';
 
   encapsulated function j "Returns sqrt(-1)"
+    extends Modelica.Icons.Function;
+    import Modelica;
     import Modelica_LinearSystems2.Math.Complex;
 
     output Complex c "= sqrt(-1)";
@@ -830,6 +838,8 @@ This package contains operators for subtraction of complex numbers.
   end j;
 
   encapsulated function 'abs' "Absolute value of complex number"
+    extends Modelica.Icons.Function;
+    import Modelica;
     import Modelica_LinearSystems2.Math.Complex;
 
     input Complex c "Complex number";
@@ -845,6 +855,8 @@ This package contains operators for subtraction of complex numbers.
   end 'abs';
 
   encapsulated function 'sqrt' "Square root of complex number"
+    extends Modelica.Icons.Function;
+    import Modelica;
     import Modelica.Math;
     import Modelica_LinearSystems2.Math.Complex;
 
@@ -861,7 +873,9 @@ This package contains operators for subtraction of complex numbers.
             lineThickness=0.5)}));
   end 'sqrt';
 
-encapsulated function 'max' "Return maximum element of complex vector"
+  encapsulated function 'max' "Return maximum element of complex vector"
+    extends Modelica.Icons.Function;
+    import Modelica;
     import Modelica_LinearSystems2.Math.Complex;
 
   input Complex v[:] "Vector";
@@ -870,7 +884,7 @@ encapsulated function 'max' "Return maximum element of complex vector"
 
   protected
   Real absv_i;
-algorithm
+  algorithm
   if size(v,1) > 0 then
      result := Complex.'abs'(v[1]);
      index  := 1;
@@ -892,9 +906,11 @@ algorithm
           extent={{-100,-100},{100,100}},
             pattern=LinePattern.Dash,
             lineThickness=0.5)}));
-end 'max';
+  end 'max';
 
   encapsulated function exp "Exponential of complex number"
+    extends Modelica.Icons.Function;
+    import Modelica;
     import Modelica_LinearSystems2.Math.Complex;
     import Modelica.Math;
 
@@ -911,6 +927,7 @@ end 'max';
   end exp;
 
   encapsulated function log "Logarithm of complex number"
+    extends Modelica.Icons.Function;
 
     import Modelica;
     import Modelica_LinearSystems2.Math.Complex;
@@ -928,7 +945,9 @@ end 'max';
   end log;
 
   encapsulated function sin "Sine of complex number"
+    extends Modelica.Icons.Function;
 
+    import Modelica;
     import Modelica_LinearSystems2.Math.Complex;
 
     input Complex c1 "Complex number";
@@ -947,8 +966,10 @@ end 'max';
   end sin;
 
   encapsulated function cos "Cosine of complex number"
+    extends Modelica.Icons.Function;
     import Modelica_LinearSystems2.Math.Complex;
 
+    import Modelica;
     input Complex c1 "Complex number";
     output Complex c2 "= cos(c1)";
 
@@ -963,6 +984,7 @@ end 'max';
   end cos;
 
   encapsulated function arg "Phase angle of complex number"
+    extends Modelica.Icons.Function;
     import Modelica;
     import Modelica_LinearSystems2.Math;
     import Modelica_LinearSystems2.Math.Complex;
@@ -1006,8 +1028,10 @@ phase angle phi of the Complex number c in the range
   end arg;
 
   encapsulated function conj "Conjugate of complex number"
+    extends Modelica.Icons.Function;
     import Modelica_LinearSystems2.Math.Complex;
 
+    import Modelica;
     input Complex c1 "Complex number";
     output Complex c2 "= c1.re - j*c1.im";
   algorithm
@@ -1021,8 +1045,10 @@ phase angle phi of the Complex number c in the range
   end conj;
 
   encapsulated function real "Real part of complex number"
+    extends Modelica.Icons.Function;
     import Modelica_LinearSystems2.Math.Complex;
 
+    import Modelica;
     input Complex c "Complex number";
     output Real r "= c.re ";
   algorithm
@@ -1036,8 +1062,10 @@ phase angle phi of the Complex number c in the range
   end real;
 
   encapsulated function imag "Imaginary part of complex number"
+    extends Modelica.Icons.Function;
     import Modelica_LinearSystems2.Math.Complex;
 
+    import Modelica;
     input Complex c "Complex number";
     output Real r "= c.im ";
   algorithm
@@ -1312,6 +1340,8 @@ Therefore, only advanced users should deal with such a functions.
 This package contains some <b>utility functions</b>
 operating on complex numbers (such as frequency(..)), as well as
 functions operating on vectors and matrices of complex numbers.
+For general information about the complex numbers usage, please refer to
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">GettingStarted.ComplexNumbers</a>.
 </p>
 <p>
 Example (note: \"j\" in the comments is defined as j=sqrt(-1)):
