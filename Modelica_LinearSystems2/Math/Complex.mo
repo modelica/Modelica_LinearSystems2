@@ -1309,36 +1309,50 @@ Therefore, only advanced users should deal with such a functions.
   annotation (
     Documentation(info="<html>
 <p>
-This record defines a complex number consisting of a real
-and an imaginary part. Additionally, various utility functions
-are provided in the record to operate on instances of this record.
+This package contains some <b>utility functions</b>
+operating on complex numbers (such as frequency(..)), as well as
+functions operating on vectors and matrices of complex numbers.
+</p>
+<p>
 Example (note: \"j\" in the comments is defined as j=sqrt(-1)):
 </p>
+<blockquote>
 <pre>
-   <b>import</b> Modelica.Utilities.Streams;
-   <b>import</b> Modelica_LinearSystems2.Math.Complex;
-   Complex c1=Complex(re=2, im=3) \"= 2 + 3j\";
-   Complex c2=Complex(3,4) \"= 3 + 4j\";
- <b>algorithm</b>
-   c3 := Complex.'+'(c1, c2) \"= c1 + c2\";
-   Streams.print(\"c3 = \" + Complex.'String'(c3));
-   Streams.print(\"c3 = \" + Complex.'String'(c3,\"i\"));
-   // This gives the following print-out:
-   c3 = 5 + 7j
-   c3 = 5 + 7i
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import </span><span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Modelica.Utilities.Streams.print</span>;
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import </span>LS2 = <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Modelica_LinearSystems2</span>;
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import </span><span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span>;
+
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span> c1 = <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span>(re=2, im=3) <span style=\"font-family:'Courier New,courier'; color:#006400;\">\"= 2 + 3j\"</span>;
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span> c2 = <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span>(3,4) <span style=\"font-family:'Courier New,courier'; color:#006400;\">\"= 3 + 4j\"</span>;
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span> c3;
+
+<span style=\"font-family:'Courier New,courier'; color:#0000ff;\">algorithm </span>
+  c3 := c1 + c2;
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">print</span>(<span style=\"font-family:'Courier New,courier'; color:#006400;\">\"c3 = \"</span> + <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">LS2.Math.Complex.'String'</span>(c3));
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">print</span>(<span style=\"font-family:'Courier New,courier'; color:#006400;\">\"c3 = \"</span> + <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">LS2.Math.Complex.'String'</span>(c3,<span style=\"font-family:'Courier New,courier'; color:#006400;\">\"i\"</span>));
+
+  <span style=\"color:#006400;\">// This gives the following print-out:</span>
+  <span style=\"color:#006400;\">// c3 = 5 + 7j</span>
+  <span style=\"color:#006400;\">// c3 = 5 + 7i</span>
+  ...
+<span style=\"font-family:'Courier New,courier'; color:#0000ff;\">end </span>functionName;
 </pre>
+</blockquote>
+
 <p>
 The utility functions are written in such a way that it
 is convenient to work with them, once operator overloading
 is provided in Modelica and Modelica tools. Example:
 </p>
+<blockquote>
 <pre>
-   // Assume operator overloading is available (this is not yet the case):
-   Complex j  = Complex.j();
-   Complex c4 = -2 + 5*j;
-   // A Modelica tool will transform the statement of c4 into
-   Complex c4 = Complex.'+'( Complex.(-2,0), Complex.'*'(Complex(5,0),j)));
+  <span style=\"color:#006400;\">// Assume operator overloading is available</span>:
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import</span> <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span>;
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import</span> <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Modelica.ComplexMath.j</span>;
+
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span> c4 = -2 + 5*j;
 </pre>
+</blockquote>
 <p>
 The utility functions are implemented so that they can be easily
 inlined by a tool. In such a case, the above statement will
