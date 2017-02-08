@@ -1,6 +1,5 @@
 ﻿within Modelica_LinearSystems2.Utilities.Plot;
-function plot_FFTs_from_directory
-  "Plot amplitudes of FFT results (from result files in existing directory)"
+function plotFFTs_fromDirectory "Plot amplitudes of FFT results (from result files in existing directory)"
   extends Modelica.Icons.Function;
 
   import Modelica.Utilities.Internal.FileSystem;
@@ -69,7 +68,7 @@ algorithm
 </html>", info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Utilities.Plot.plotFFT_fromDirectory(
+Utilities.Plot.plotFFTs_fromDirectory(
   directory, logX, fullPathTitle)
 </pre></blockquote>
 
@@ -82,4 +81,4 @@ To generate the FFT result file, see e.g.
 <a href=\"modelica://Modelica.Math.FastFourierTransform.Examples.RealFFT1\">Modelica.Math.FastFourierTransform.Examples.RealFFT1</a>.
 </p>
 </html>"));
-end plot_FFTs_from_directory;
+end plotFFTs_fromDirectory;

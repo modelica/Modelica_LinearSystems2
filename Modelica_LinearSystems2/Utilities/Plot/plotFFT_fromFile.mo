@@ -1,6 +1,5 @@
 ﻿within Modelica_LinearSystems2.Utilities.Plot;
-function plot_FFT_fromFile
-  "Plot amplitudes of FFT results (from result file)"
+function plotFFT_fromFile "Plot amplitudes of FFT results (from result file)"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Utilities.Plot;
@@ -42,7 +41,7 @@ algorithm
           x=if logX then fA[4:size(fA,1),1] else fA[:,1],
           y=if logX then fA[4:size(fA,1),2] else fA[:,2])},
       heading="Result of FFT calculation (" + fileNamePrint+")",
-      xLabel="Frequency in [Hz]",
+      xLabel="Frequency [Hz]",
       yLabel="Amplitude",
       logX=logX),
     Plot.Records.Device(
@@ -76,4 +75,4 @@ To generate the FFT result file, see e.g.
 <a href=\"modelica://Modelica.Math.FastFourierTransform.Examples.RealFFT1\">Modelica.Math.FastFourierTransform.Examples.RealFFT1</a>.
 </p>
 </html>"));
-end plot_FFT_fromFile;
+end plotFFT_fromFile;
