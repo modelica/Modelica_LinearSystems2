@@ -7,17 +7,18 @@ function plot_FFTs_from_directory
   import Modelica.Utilities.Streams.print;
   import Modelica.Utilities.Strings;
   import Modelica_LinearSystems2.Utilities.Plot;
-  input String directory
-    "Existing directory in which result data is present";
+  input String directory "Existing directory in which result data is present";
   input Boolean logX = false "= true, if logarithmic scale of x-axis" annotation(choices(checkBox=true));
+  input Boolean fullPathTitle = false
+    "= true, if directory path should be contained in the plot title, otherwise just file name"
+    annotation(choices(checkBox=true));
 protected
-  Integer nFiles = FileSystem.getNumberOfFiles(directory);
-  String files[nFiles] = FileSystem.readDirectory(directory,nFiles);
-  String fft_files[nFiles];
+  String fftMarker = "FFT." "Substring at the beginning indicating a file containing fft";
+  Integer nFiles = FileSystem.getNumberOfFiles(directory) "Number of files in the directory";
+  String files[nFiles] = FileSystem.readDirectory(directory,nFiles) "List of files in the directory";
+  String fft_files[nFiles] "List of files matching fftMarker condition";
   String fft_filesSorted[:];
-  Integer nFFT=0;
-  Integer dims[2];
-  Real fA[:,:];
+  Integer nFFT=0 "Number of files matching fftMarker condition";
   String file;
   Real ix=0;
   Real iy=0;
@@ -25,9 +26,9 @@ protected
 algorithm
   // Determine FFT files in directory
   for i in 1:nFiles loop
-    // Determine whether file starts with "FFT."
-    if Strings.length(files[i]) > 4 then
-      if Strings.substring(files[i],1,4) == "FFT." then
+    // Determine whether file starts with fftMarker
+    if Strings.length(files[i]) > Strings.length(fftMarker) then
+      if Strings.isEqual(Strings.substring(files[i],1,Strings.length(fftMarker)), fftMarker) then
         // Store file in "fft_files"
         nFFT :=nFFT + 1;
         fft_files[nFFT] :=files[i];
@@ -35,31 +36,22 @@ algorithm
     end if;
   end for;
 
-  // Sort the files
-  fft_filesSorted := Modelica.Utilities.Strings.sort(fft_files[1:nFFT]);
+  if nFFT > 0 then
+    // Sort the files
+    fft_filesSorted := Modelica.Utilities.Strings.sort(fft_files[1:nFFT]);
 
-  // Plot the files
-  for i in 1:nFFT loop
-    file := directory + "/" + fft_filesSorted[i];
-    dims := DymolaCommands.MatrixIO.readMatrixSize(file,"FFT");
-    fA   := DymolaCommands.MatrixIO.readMatrix(file, "FFT", dims[1], dims[2]);
-
-    ix :=ix + increment;
-    iy :=iy + increment;
-    Plot.diagram(
-      Plot.Records.Diagram(
-        curve={
-          Plot.Records.Curve(
-            x=if logX then fA[4:size(fA,1),1] else fA[:,1],
-            y=if logX then fA[4:size(fA,1),2] else fA[:,2])},
-        heading="Result of FFT calculation (" + file +")",
-        xLabel="Frequency in [Hz]",
-        yLabel="Amplitude",
-        logX=logX),
-      Plot.Records.Device(
-        xTopLeft=ix,
-        yTopLeft=iy));
-  end for;
+    // Plot the files
+    for i in 1:nFFT loop
+      file := directory + "/" + fft_filesSorted[i];
+      Modelica_LinearSystems2.Utilities.Plot.plot_FFT_fromFile(
+        file, logX, ix, iy, fullPathTitle);
+      ix :=ix + increment;
+      iy :=iy + increment;
+    end for;
+    print("Finished.");
+  else
+    print("No file for a FFT plot found in directory " + directory);
+  end if;
 
   annotation(__Dymola_interactive=true, Documentation(revisions="<html>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -74,5 +66,20 @@ algorithm
      Framework Programme (FP7/2007-2016) for the Clean Sky Joint Technology Initiative under
      grant agreement no. CSJU-GAM-SGO-2008-001.</td></tr>
 </table>
+</html>", info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+Utilities.Plot.plotFFT_fromDirectory(
+  directory, logX, fullPathTitle)
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Generate plots of a Fast Fourier Transformation results of <b>all concerning files</b> saved in <code>directory</code>.
+The files which contain the FFT results muss all start with a substring &quot;FFT.&quot;.
+Only such a files will be proceeded by this function.
+To generate the FFT result file, see e.g.
+<a href=\"modelica://Modelica.Math.FastFourierTransform.Examples.RealFFT1\">Modelica.Math.FastFourierTransform.Examples.RealFFT1</a>.
+</p>
 </html>"));
 end plot_FFTs_from_directory;
