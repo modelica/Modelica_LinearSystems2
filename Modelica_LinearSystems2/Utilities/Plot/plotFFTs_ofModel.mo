@@ -1,6 +1,5 @@
 ﻿within Modelica_LinearSystems2.Utilities.Plot;
-function plot_FFTs_of_model
-  "Plot amplitudes of FFT results (from result files of translated model)"
+function plotFFTs_ofModel "Plot amplitudes of FFT results (from result files of translated model)"
   extends Modelica.Icons.Function;
 
   import Modelica.Utilities.Streams.print;
@@ -21,7 +20,7 @@ algorithm
   end if;
 
   // Read FFT.* files and plot them
-  plot_FFTs_from_directory(directory=directory, logX=logX);
+  plotFFTs_fromDirectory(directory=directory, logX=logX);
 
   annotation(__Dymola_interactive=true, Documentation(revisions="<html>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -37,4 +36,4 @@ algorithm
      grant agreement no. CSJU-GAM-SGO-2008-001.</td></tr>
 </table>
 </html>"));
-end plot_FFTs_of_model;
+end plotFFTs_ofModel;

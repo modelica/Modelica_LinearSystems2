@@ -1,4 +1,4 @@
-// Convert from Modelica_LinearSystems2 2.2 to Modelica_LinearSystems2 XXX
+// Convert from Modelica_LinearSystems2 2.3.4 to Modelica_LinearSystems2 2.4.0 or higher
 
 // clear
 convertClear();
@@ -55,4 +55,9 @@ convertClass("Modelica_LinearSystems2.Math.Complex.conj","Modelica.ComplexMath.c
 convertClass("Modelica_LinearSystems2.Math.Complex.real","Modelica.ComplexMath.real")
 convertClass("Modelica_LinearSystems2.Math.Complex.imag","Modelica.ComplexMath.imag")
 
-
+convertClass("Modelica_LinearSystems2.Utilities.Plot.plot_FFT_fromFile",
+             "Modelica_LinearSystems2.Utilities.Plot.plotFFT_fromFile")
+convertClass("Modelica_LinearSystems2.Utilities.Plot.plot_FFTs_from_directory",
+             "Modelica_LinearSystems2.Utilities.Plot.plotFFTs_fromDirectory")
+convertClass("Modelica_LinearSystems2.Utilities.Plot.plot_FFTs_of_model",
+             "Modelica_LinearSystems2.Utilities.Plot.plotFFTs_ofModel")
