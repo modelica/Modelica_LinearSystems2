@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 function frequencyVector "Determine frequency vector for Bode plot"
   import Modelica;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import LinearSystems = Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Internal;
   import SI = Modelica.SIunits;

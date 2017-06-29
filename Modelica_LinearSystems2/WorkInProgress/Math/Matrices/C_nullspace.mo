@@ -1,15 +1,16 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.Matrices;
 function C_nullspace "Orthonormal nullspace of a complex matrix"
   import Modelica_LinearSystems2;
+  import Complex;
   extends Modelica.Icons.Function;
 
-  input Modelica_LinearSystems2.Math.Complex A[:,:] "input matrix";
-  output Modelica_LinearSystems2.Math.Complex Z[size(A, 2),:]
+  input Complex A[:,:] "input matrix";
+  output Complex Z[size(A, 2),:]
     "orthonormal nullspace of matrix A";
   output Integer nullity "nullity, i.e. the dimension of the nullspace";
 
 protected
-  Modelica_LinearSystems2.Math.Complex V[size(A, 2),size(A, 2)]
+  Complex V[size(A, 2),size(A, 2)]
     "Right orthogonal matrix ";
   Real sigma[min(size(A, 1), size(A, 2))] "singular values";
   Integer rank "rank of matrix A";
@@ -18,8 +19,7 @@ protected
   Integer i=n;
 
 algorithm
-  (sigma,,V) := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues(
-                                                                       A);
+  (sigma,,V) := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues(A);
   V := Modelica_LinearSystems2.Math.Complex.Internal.C_transpose(V);
   // rank computation
   eps := max(size(A, 1), size(A, 2))*max(sigma)*Modelica.Constants.eps;

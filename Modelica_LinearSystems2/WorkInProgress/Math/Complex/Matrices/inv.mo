@@ -3,7 +3,7 @@ function inv
   "Inverse of a comlex matrix (try to avoid, use function solve(..) instead)"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Modelica_LinearSystems2.Math.Matrices;
 
   input Complex A[:,size(A, 1)];

@@ -4,7 +4,7 @@ function designInverseDoublePendulumControllerWithObserver
 
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.StateSpace;
 //  input String modelName="Modelica_Controller.Examples.Components.InverseDoublePendulum"  "name of the model to linearize";

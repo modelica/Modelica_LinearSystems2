@@ -49,7 +49,7 @@ algorithm
 //   print("Gain for pre filtering:\n" +
 //     Matrices.printMatrix(M_pa, 6, "M_pa"));
 
-  assignedPoles := Complex.Vectors.reverse(assignedPoles);
+  assignedPoles :=Modelica.ComplexMath.Vectors.reverse(assignedPoles);
   assignedPoles[3]:=Complex(-1);
   assignedPoles[4]:=Complex(-2);
 // feedback matrix of a pole assignment controller with assigned eigenvalues pa

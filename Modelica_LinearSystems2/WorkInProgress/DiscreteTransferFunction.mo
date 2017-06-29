@@ -268,7 +268,7 @@ encapsulated function bode "Plot transfer function as bode plot"
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
       import SI = Modelica.SIunits;
 
@@ -326,7 +326,7 @@ algorithm
 
   denZeros := fill(Complex(0),size(denZerosZ,1));
   for i in 1:size(denZerosZ,1) loop
-    denZeros[i] := Complex.log(denZerosZ[i])/dtf.Ts;
+    denZeros[i] :=Modelica.ComplexMath.log(denZerosZ[i])/dtf.Ts;
   end for;
 
   f := Internal.frequencyVector(
@@ -341,13 +341,13 @@ algorithm
   phi_old := 0.0;
   for i in 1:nPoints loop
     w[i] := SI.Conversions.from_Hz(f[i]);
-    z[i] := Complex.exp(Complex(0,w[i]*dtf.Ts));
+    z[i] :=Modelica.ComplexMath.exp(Complex(0, w[i]*dtf.Ts));
     c := TransferFunction.Analysis.evaluate(
           tf,
           z[i],
           1e-10);
-    A[i] := Complex.'abs'(c);
-    phi_old := Complex.arg(c, phi_old);
+    A[i] :=Modelica.ComplexMath.'abs'(c);
+    phi_old :=Modelica.ComplexMath.arg(c, phi_old);
     phi[i] := SI.Conversions.to_deg(phi_old);
 
   end for;

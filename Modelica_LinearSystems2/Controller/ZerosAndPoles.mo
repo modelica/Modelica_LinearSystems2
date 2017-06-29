@@ -4,8 +4,8 @@ block ZerosAndPoles
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Utilities.Types;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Controller.Internal;
+  import Complex;
 
   extends Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2(
       discretePart(

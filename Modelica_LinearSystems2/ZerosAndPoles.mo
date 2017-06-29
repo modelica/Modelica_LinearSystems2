@@ -75,11 +75,11 @@ zp.d2 = fill(0,1,2);
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
-      input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0,0), 0)
+      input Complex z[:]=fill(Complex(0,0), 0)
         "Zeros (Complex vector of numerator zeros)";
-      input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0,0), 0)
+      input Complex p[:]=fill(Complex(0,0), 0)
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
       input String uName="" "Input name";
@@ -258,10 +258,10 @@ encapsulated operator '-'
   import Modelica;
 
   function subtract "Subtract two zeros and poles descriptions (zp1 - zp2)"
-      import Modelica;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    import Complex;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.Math.Polynomial;
 
     input ZerosAndPoles zp1 "Zeros-and-poles data record 1";
     input ZerosAndPoles zp2 "Zeros-and-poles data record 2";
@@ -279,8 +279,7 @@ encapsulated operator '-'
     Polynomial p2;
     Polynomial p3;
     Complex numZeros[:];
-    Complex dummy[:]=fill(Complex(1), size_z1d1 + size_z2d1 + 2*(size_z1d2 +
-        size_z2d2));
+    Complex dummy[:]=fill(Complex(1), size_z1d1 + size_z2d1 + 2*(size_z1d2 + size_z2d2));
     Real k;
 
     output ZerosAndPoles result "= zp1/zp2";
@@ -371,9 +370,9 @@ end '-';
     "Addition of two zeros and poles descriptions zp1 + zp2, i.e. parallel connection of two transfer functions (= inputs are the same, outputs of the two systems are added)"
 
     import Modelica;
+    import Complex;
     import Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica_LinearSystems2.Math.Polynomial;
-    import Modelica_LinearSystems2.Math.Complex;
 
     input ZerosAndPoles zp1 "Zeros-and-poles data record 1";
     input ZerosAndPoles zp2 "Zeros-and-poles data record 2";
@@ -1210,18 +1209,18 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
     encapsulated function evaluate
       "Evaluate a ZerosAndPoles transfer function at a given value of p"
-      import Modelica.Utilities.Streams.print;
       import Modelica;
+      import Modelica.Utilities.Streams.print;
+      import Complex;
+      import Modelica.ComplexMath.j;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
       input Complex p=Complex(0) "Complex value p where zp is evaluated";
       input Real den_min(min=0)=0 "|denominator(p)| is limited by den_min";
       output Complex y "= zp(p)";
     protected
-      Complex j=Modelica_LinearSystems2.Math.Complex.j();
       Complex num;
       Complex den;
       Real abs_den;
@@ -1318,7 +1317,8 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
       "Calculate zeros and poles of a ZerosAndPoles transfer function"
       import Modelica;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
+      import Modelica.ComplexMath.j;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
@@ -1347,7 +1347,6 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
       Complex den_zeros2[:]=fill(Complex(0, 0), integer((n_den - np_real)/2));
       Integer n;
       Integer jj;
-      Complex j=Modelica_LinearSystems2.Math.Complex.j();
 
     algorithm
       (num_zeros1,num_zeros2) := ZerosAndPoles.Internal.roots(
@@ -1417,9 +1416,10 @@ public
     function eigenValues
       "Calculate the eigen values of a linear zeros-and-poles transfer function and write them in a complex vector"
       import Modelica;
+      import Complex;
+      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
       output Complex eigval[:] "eigen values of the system";
@@ -1430,7 +1430,7 @@ public
       assert(ZerosAndPoles.Analysis.denominatorDegree(zp) >
         ZerosAndPoles.Analysis.numeratorDegree(zp),
         " Denominator polynominal of transfer function in function\"ZerosAndPoles.Analysis.eigenValues\"has to be of higher order than numerator polynomial");
-      eigval := Complex.eigenValues(ss.A);
+      eigval := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -1461,7 +1461,7 @@ Calculate the eigenvalues of the corresponding state space representation of a z
       import Modelica;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
       input Boolean onlyEigenvectors=true;
@@ -1516,13 +1516,14 @@ i.e. v1 = |                 |,   v2 = |                   |
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
 
       output Complex Zeros[:]= ZerosAndPoles.Analysis.zerosAndPoles(zp);
 
     algorithm
+
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -2265,14 +2266,13 @@ is set.
     import Modelica;
 
   encapsulated function polesAndZeros
-      "Plot eigenvalues and or the zeros of a zeros-and-poles transfer function"
+    "Plot eigenvalues and or the zeros of a zeros-and-poles transfer function"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
+    import Modelica;
+    import Complex;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.Utilities.Plot;
 
     input ZerosAndPoles zp "Linear system in ZerosAndPoles form";
     input Boolean poles=true "= true, to plot the poles of zp" annotation(choices(checkBox=true));
@@ -2384,52 +2384,50 @@ and results in
   end polesAndZeros;
 
   encapsulated function bode
-      "Plot ZerosAndPoles transfer function as bode plot"
-      import Modelica;
-      import Modelica.Utilities.Streams.print;
-      import Modelica.Utilities.Strings;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica_LinearSystems2.Internal;
-      import SI = Modelica.SIunits;
-      import Modelica_LinearSystems2.Utilities.Plot;
+    "Plot ZerosAndPoles transfer function as bode plot"
+    import Modelica;
+    import Complex;
+    import SI = Modelica.SIunits;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.Internal;
+    import Modelica_LinearSystems2.Utilities.Plot;
 
     input ZerosAndPoles zp "ZerosAndPoles transfer function to be plotted";
     input Integer nPoints(min=2) = 200 "Number of points";
     input Boolean autoRange=true
-        "True, if abszissa range is automatically determined";
+      "True, if abszissa range is automatically determined";
     input SI.Frequency f_min(min=0) = 0.1
-        "Minimum frequency value, if autoRange = false"
-                                                      annotation(Dialog(enable=not autoRange));
+      "Minimum frequency value, if autoRange = false"
+      annotation(Dialog(enable=not autoRange));
     input SI.Frequency f_max(min=0) = 10
-        "Maximum frequency value, if autoRange = false"
-                                                      annotation(Dialog(enable=not autoRange));
+      "Maximum frequency value, if autoRange = false"
+      annotation(Dialog(enable=not autoRange));
 
     input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
     input Boolean phase=true "= true, to plot phase" annotation(choices(checkBox=true));
 
-    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-          Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot: "
-           + String(zp)));
+    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+      defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(
+        heading="Bode plot: " + String(zp)));
 
     input Boolean Hz=true
-        "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)"
-                                                                           annotation(choices(checkBox=true));
+      "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)"
+      annotation(choices(checkBox=true));
     input Boolean dB=false
-        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
-                                                                              annotation(choices(checkBox=true),Dialog(enable=magnitude));
+      "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
+      annotation(choices(checkBox=true),Dialog(enable=magnitude));
 
     input Boolean onFile=false
-        "= true, if frequency response is stored on file as matrix [f,A,phi]"
-                                                                            annotation(choices(checkBox=true));
+      "= true, if frequency response is stored on file as matrix [f,A,phi]"
+      annotation(choices(checkBox=true));
     input String fileName="frequencyResponse.mat"
-        "If onFile=true, file on which the frequency response will be stored"
-                                                                             annotation(Dialog(enable=onFile));
+      "If onFile=true, file on which the frequency response will be stored"
+                                                                           annotation(Dialog(enable=onFile));
     input String matrixName=if Hz and not dB then "fHz_A_phiDeg" elseif
                                Hz and dB then "fHz_AdB_phiDeg" elseif
                                not Hz and dB then "f_AdB_phiDeg" else "f_A_phiDeg"
-        "If onFile=true, Name of matrix on file"                                                                            annotation(Dialog(enable=onFile));
+      "If onFile=true, Name of matrix on file"                                                                            annotation(Dialog(enable=onFile));
     protected
     SI.AngularVelocity w[nPoints];
     SI.Frequency f[nPoints];
@@ -2467,12 +2465,9 @@ and results in
     phi_old := 0.0;
     for i in 1:nPoints loop
       w[i] := SI.Conversions.from_Hz(f[i]);
-      c := ZerosAndPoles.Analysis.evaluate(
-        zp,
-        Complex(0, w[i]),
-        1e-10);
-      A[i] := Complex.'abs'(c);
-      phi_old := Complex.arg(c, phi_old);
+      c := ZerosAndPoles.Analysis.evaluate(zp, Complex(0, w[i]), 1e-10);
+      A[i] := Modelica.ComplexMath.'abs'(c);
+      phi_old := Modelica.ComplexMath.arg(c, phi_old);
       phi[i] := SI.Conversions.to_deg(phi_old);
 
       // Convert to other units, if required
@@ -2989,12 +2984,13 @@ This function plots the initial response, i.e. the zeros input response of a zer
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.Math.Complex;
+      //import Modelica_LinearSystems2.Internal;
+      import Complex;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
-      output TransferFunction tf(redeclare Real n[2*size(zp.n2,1)+size(zp.n1,1)+1], redeclare Real
-               d[                                                                                    2*size(zp.d2,1)+size(zp.d1,1)+1]);
+      output TransferFunction tf(
+        redeclare Real n[2*size(zp.n2,1)+size(zp.n1,1)+1],
+        redeclare Real d[2*size(zp.d2,1)+size(zp.d1,1)+1]);
 
     protected
       Real k;
@@ -3092,8 +3088,6 @@ Converts a matrix of ZerosAndPoles transfer functions denoted by the product of 
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Vectors;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
@@ -3629,8 +3623,6 @@ processing.
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Vectors;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
@@ -3642,14 +3634,14 @@ processing.
         redeclare Real D[1,1]) "Transfer function in StateSpace SISO form";
 
     protected
-      Real A[2,2] "system matrix of partial 2nd order system";
-      Real B[2,1] "input matrix of partial 2nd order system";
-      Real C[1,2] "output matrix of partial 2nd order system";
-      Real D[1,1] "feedthrough matrix of partial 2nd order system";
-      Real a "system 'matrix' of partial 1st order system";
-      Real b "input 'matrix' of partial 1st order system";
-      Real c "output 'matrix' of partial 1st order system";
-      Real d "feedthrough 'matrix' of partial 1st order system";
+      Real A[2,2] "System matrix of partial 2nd order system";
+      Real B[2,1] "Input matrix of partial 2nd order system";
+      Real C[1,2] "Output matrix of partial 2nd order system";
+      Real D[1,1] "Feedthrough matrix of partial 2nd order system";
+      Real a "System 'matrix' of partial 1st order system";
+      Real b "Input 'matrix' of partial 1st order system";
+      Real c "Output 'matrix' of partial 1st order system";
+      Real d "Feedthrough 'matrix' of partial 1st order system";
       Real eps = 1e-6;
       Integer nx=max(ZerosAndPoles.Analysis.numeratorDegree(zp),ZerosAndPoles.Analysis.denominatorDegree(zp));
       Integer n_num1=size(zp.n1, 1);
@@ -4165,9 +4157,9 @@ processing.
     encapsulated function fromFile
       "Generate a ZerosAndPoles data record by reading the polynomial coefficients or zeros and poles from a file"
       import Modelica;
-      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Complex;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.DataDir;
 
       input String fileName=DataDir + "zp.mat"
@@ -6364,7 +6356,7 @@ int found=0;
 
     function frequencyRange "Determine min. and max. resonance frequencies"
       import Modelica;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
       input Real poly1[:];
       input Real poly2[:,2];
@@ -6397,7 +6389,7 @@ int found=0;
       end for;
 
       for i in 1:size(zeros2, 1) loop
-        w := Complex.'abs'(zeros2[i]);
+        w :=Modelica.ComplexMath.'abs'(zeros2[i]);
         w_min := min(w_min, w);
         w_max := max(w_max, w);
         w_found := true;
@@ -6407,7 +6399,7 @@ int found=0;
     function frequencyRangeBode
       "Determine min. and max. frequencies for Bode plot"
       import Modelica;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -6465,14 +6457,13 @@ int found=0;
     end frequencyRangeBode;
 
   encapsulated function fromFile_pc
-      "Generate a ZerosAndPoles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
+    "Generate a ZerosAndPoles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.ZerosAndPoles;
 
     input String fileName="pc.mat" "Name of the zeros and poles data file"
-                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
 
     protected
@@ -6545,11 +6536,11 @@ int found=0;
   end fromFile_pc;
 
   encapsulated function fromFile_zp
-      "Generate a ZerosAndPoles data record by reading poles and zeros from a file (default file name is zp.mat)"
+    "Generate a ZerosAndPoles data record by reading poles and zeros from a file (default file name is zp.mat)"
 
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Complex;
 
     input String fileName="zp.mat" "Name of the zeros and poles data file"
                                                      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
@@ -6610,7 +6601,7 @@ int found=0;
     function fromRealAndImag
       "Generate a complex vector from a real part vector and imaginary part vector "
 
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
       input Real real[:];
       input Real imag[size(real, 1)];
@@ -6643,7 +6634,7 @@ int found=0;
     function isRoot
       "Check if frequency is an element of the complex vector zeros"
 
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
       //import Modelica_LinearSystems2;
 
       input Complex zeros[:];
@@ -6944,7 +6935,6 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
     function numberOfRealZerosAndPoles_pc
       "Generate a zeros and poles data record by reading the polynomial coefficients from a file (default file name is zp.mat)"
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica;
 
       input String fileName="pc.mat" "Name of the zeros and poles data file"
@@ -7019,7 +7009,7 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
     function 'p+a' "Addition of a complex number and a real value"
       import Modelica;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
       import Modelica.ComplexMath.j;
 
       input Complex p; // "Complex number";
@@ -7033,7 +7023,7 @@ function. The solver function is a direct mapping of the Algol 60 procedure
     function 'p^2+k[1]*p+k[2]'
       import Modelica;
       import Modelica.Utilities.Streams.print;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
       import Modelica.ComplexMath.j;
 
       input Complex p;
@@ -7046,7 +7036,8 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
     function roots "Determine zeros of factorized polynomial"
       import Modelica;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
+      import Modelica.ComplexMath.j;
 
       input Real poly1[:] "[p^0] coefficients of first order polynomials";
       input Real poly2[:,2] "[p, p^0] coefficients of second order polynomials";
@@ -7064,7 +7055,6 @@ function. The solver function is a direct mapping of the Algol 60 procedure
       Real b;
       Integer j1;
       Integer j2;
-      Complex j = Modelica_LinearSystems2.Math.Complex.j();
 
     algorithm
       assert(np1 <= n_real, "Size of poly1 = " + String(np1) + " > n_real " +

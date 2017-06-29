@@ -4,7 +4,7 @@ function designInverseDoublePendulumController
 
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.StateSpace;
 

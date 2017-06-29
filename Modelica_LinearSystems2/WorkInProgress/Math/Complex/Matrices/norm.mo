@@ -3,7 +3,7 @@ function norm "Returns the norm of a matrix"
   extends Modelica.Icons.Function;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
 
   input Complex A[:, :] "Input matrix";
   input Real p(min=1) = 2
@@ -14,20 +14,19 @@ algorithm
   if p == 1 then
     // column sum norm
     for i in 1:size(A, 2) loop
-      result := max(result, sum(Complex.'abs'(A[:, i])));
+      result :=max(result, sum(Modelica.ComplexMath.'abs'(A[:, i])));
 
     end for;
   elseif p == 2 then
     // largest singular value
-    result := max(Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues(
-                                                 A));
+    result := max(Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues(A));
   elseif p==3 then
     // Frobenius norm
-    result := Complex.Internal.frobeniusNorm(A);
+    result := Modelica_LinearSystems2.Math.Complex.Internal.frobeniusNorm(A);
   elseif p == Modelica.Constants.inf then
     // row sum norm
     for i in 1:size(A, 1) loop
-      result := max(result, sum(Complex.'abs'(A[i, :])));
+      result :=max(result, sum(Modelica.ComplexMath.'abs'(A[i, :])));
     end for;
   else
     assert(false, "Optional argument \"p\" of function \"norm\" must be

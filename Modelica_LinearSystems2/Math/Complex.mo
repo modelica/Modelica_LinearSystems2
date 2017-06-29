@@ -11,12 +11,12 @@ operator record Complex "Record defining a Complex number"
     extends Modelica.Icons.ExamplesPackage;
 
     function addTwoComplexNumbers "Show how to add 2 complex number"
-      import Modelica_LinearSystems2.Math.Complex;
+      import .Complex;
+      import Modelica.ComplexMath.j;
       import Modelica.Utilities.Streams;
 
       output Boolean ok;
     protected
-      Complex j = Complex.j();
       Complex c1=2+3*j;
       Complex c2=3+4*j;
       Complex c3;
@@ -37,8 +37,11 @@ operator record Complex "Record defining a Complex number"
     import Modelica;
 
     function print "Print vector"
+      extends Modelica.Icons.Function;
+
+      import Modelica;
       import Modelica.Utilities.Streams.print;
-      import Modelica_LinearSystems2.Math.Complex;
+      import .Complex;
 
       input String name="" "Name of complex vector";
       input Complex c[:] "Complex vector to be printed";
@@ -55,10 +58,13 @@ operator record Complex "Record defining a Complex number"
 
     function printHTML
       "Print complex vector as HTML in sorted form (vector is expected to have pure real and/or conjugate complex values (so poles and/or zeros)"
+      extends Modelica.Icons.Function;
+
+      import Modelica;
       import Modelica.Utilities.Files;
-      import Modelica.Utilities.Streams;
+      import Modelica.Utilities.Streams.readFile;
       import Modelica.Utilities.Streams.print;
-      import Modelica_LinearSystems2.Math.Complex;
+      import .Complex;
       import Modelica_LinearSystems2;
 
       input Complex c[:] "Complex vector to be printed";
@@ -81,10 +87,10 @@ operator record Complex "Record defining a Complex number"
         "Print the table with eigenvalues in html format on file"
         import Modelica;
         import Modelica.Utilities.Strings;
-        import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
+        import Modelica_LinearSystems2;
         import Modelica_LinearSystems2.Internal.Eigenvalue;
-        import Modelica_LinearSystems2.Math.Complex;
+        import Complex;
 
         input Complex systemZeros[:];
         input Integer nReal;
@@ -124,7 +130,7 @@ operator record Complex "Record defining a Complex number"
           number := Strings.repeat(max(0, 7 - Strings.length(number))) + number;
 
           // Determine frequency and number of corresponding zero
-          (freq,damp) := Complex.frequency(systemZeros[i]);
+          (freq,damp) := Modelica_LinearSystems2.Math.Complex.frequency(systemZeros[i]);
 
           print(
             "<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> &nbsp; "
@@ -147,7 +153,10 @@ operator record Complex "Record defining a Complex number"
 
       // Sort complex vector
       if sort then
-        (cSorted,cIndex) := Complex.Vectors.sortComplex(c,ascending,sortFrequency);
+        (cSorted,cIndex) :=Modelica.ComplexMath.Vectors.sort(
+              c,
+              ascending,
+              sortFrequency);
       else
         cSorted :=c;
         cIndex :=1:nc;
@@ -181,12 +190,13 @@ operator record Complex "Record defining a Complex number"
       print("</html>", tempFile);
 
       // Read file into output window and remove temporary file
-      Streams.readFile(tempFile);
+      readFile(tempFile);
       Files.removeFile(tempFile);
     end printHTML;
 
   function length "Return length of a complex vector"
-      import Modelica_LinearSystems2.Math.Complex;
+    extends Modelica.Icons.Function;
+    import Modelica_LinearSystems2.Math.Complex;
     input Complex v[:] "Vector";
     output Real result "Length of vector v";
 
@@ -219,12 +229,18 @@ v = {2, -4, -2, -1};
 <p>
 <a href=\"Modelica://Modelica.Math.Vectors.length\">Vectors.length</a>
 </p>
-</html></html>"));
+</html></html>"), Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+              pattern=LinePattern.Dash,
+              lineThickness=0.5)}));
   end length;
 
   function norm "Returns the norm of a complex vector"
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Complex;
+    extends Modelica.Icons.Function;
+    import Modelica;
+    import Modelica_LinearSystems2.Math.Complex;
     input Complex v[:] "Vector";
     input Real p(min=1) = 2
         "Type of p-norm (often used: 1, 2, or Modelica.Constants.inf)";
@@ -296,11 +312,17 @@ Note, for any vector norm the following inequality holds:
 <p>
 <a href=\"Modelica://Modelica.Math.Matrices.norm\">Matrices.norm</a>
 </p>
-</html>"));
+</html>"), Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+              pattern=LinePattern.Dash,
+              lineThickness=0.5)}));
   end norm;
 
   function normalize
       "Return normalized complex vector such that length = 1 and prevent zero-division for zero vector"
+    extends Modelica.Icons.Function;
       import Modelica;
       import Modelica_LinearSystems2.Math.Complex;
 
@@ -355,10 +377,16 @@ possible.
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.Math.Vectors.length\">Vectors.length</a>
 </p>
-</html>"));
+</html>"), Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+              pattern=LinePattern.Dash,
+              lineThickness=0.5)}));
   end normalize;
 
   function sortComplex "Sort elements of complex vector"
+    extends Modelica.Icons.Function;
       import Modelica_LinearSystems2.Math.Complex;
     input Complex v[:] "Vector to be sorted";
     input Boolean ascending = true
@@ -471,13 +499,18 @@ possible.
          -> v2 = {-1, 2, 3, 6, 8}
             i2 = {1, 5, 3, 4, 2}
   </pre></blockquote>
-  </html>"));
+  </html>"), Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+              pattern=LinePattern.Dash,
+              lineThickness=0.5)}));
   end sortComplex;
 
   function multiply "Scalar product of two complex vectors"
     extends Modelica.Icons.Function;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica;
+    import Modelica;
+    import .Complex;
 
     input Complex v1[:];
     input Complex v2[size(v1,1)];
@@ -519,7 +552,13 @@ The function call &quot;Vectors.<b>reverse</b>(v)&quot; returns the complex vect
 <b>reverse</b>({1,2,3,4});
   // = {4,3,2,1}
 </pre></blockquote>
-</html>"));
+</html>"),
+        Icon(graphics={
+              Ellipse(
+                lineColor={255,0,0},
+                extent={{-100,-100},{100,100}},
+              pattern=LinePattern.Dash,
+              lineThickness=0.5)}));
       end reverse;
 
     annotation (Documentation(info="<html>
@@ -536,9 +575,12 @@ This package provides functions operating on vectors of complex numbers.
     import Modelica_LinearSystems2;
 
     function print "Print matrix"
-      import Modelica_LinearSystems2.StateSpace;
+      extends Modelica.Icons.Function;
+
+      import Modelica;
       import Modelica.Utilities.Strings;
-      import Modelica_LinearSystems2.Math.Complex;
+      import .Complex;
+      import Modelica_LinearSystems2.StateSpace;
 
       input Complex M[:,:];
       input Integer significantDigits=6
@@ -560,11 +602,10 @@ This package provides functions operating on vectors of complex numbers.
         for i in 1:r loop
           s := s + space;
           for j in 1:c loop
-            if Complex.'abs'(M[i, j]) >= 0 then
+            if Modelica.ComplexMath.'abs'(M[i, j]) >= 0 then
               s := s + " ";
             end if;
-            s := s + String(M[i, j], significantDigits=significantDigits) +
-              Strings.repeat(significantDigits + 8 - Strings.length(String(Complex.'abs'(M[i,j]))));
+            s :=s + String(M[i, j], significantDigits=significantDigits) + Strings.repeat(significantDigits + 8 - Strings.length(String(Modelica.ComplexMath.'abs'(M[i, j]))));
 
           end for;
           s := s + "\n";
@@ -574,7 +615,11 @@ This package provides functions operating on vectors of complex numbers.
     end print;
 
     encapsulated function matMatMul "Multiply two complex matrices"
-      import Modelica_LinearSystems2.Math.Complex;
+      extends Modelica.Icons.Function;
+
+      import Modelica;
+      import .Complex;
+      import Modelica_LinearSystems2;
 
       input Complex m1[:,:] "Complex matrix 1";
       input Complex m2[size(m1, 2),:] "Complex matrix 2";
@@ -593,7 +638,7 @@ This package provides functions operating on vectors of complex numbers.
 
      for l1 in 1:size(m1,1) loop
        for l2 in 1:size(m2,2) loop
-         m3[l1,l2] := Complex.Vectors.multiply(m1[l1,:],m2[:,l2]);
+         m3[l1,l2] := Modelica_LinearSystems2.Math.Complex.Vectors.multiply(m1[l1,:],m2[:,l2]);
        end for;
        end for;
 
@@ -601,9 +646,11 @@ This package provides functions operating on vectors of complex numbers.
 
     encapsulated function matVecMul
       "Multiply a complex matrices with a complex vector"
-      import Modelica_LinearSystems2.Math.Complex;
-    //  import Re = Modelica_LinearSystems2.Math.Complex.real;
-    //  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+      extends Modelica.Icons.Function;
+
+      import Modelica;
+      import .Complex;
+      import Modelica_LinearSystems2;
 
       input Complex m[:,:] "Complex matrix";
       input Complex vi[size(m, 2)] "Complex vector";
@@ -627,7 +674,7 @@ This package provides functions operating on vectors of complex numbers.
     //    end for;  //l1
 
     for l1 in 1:size(m, 1) loop
-      vo[l1] := Complex.Vectors.multiply(m[l1,:],vi);
+      vo[l1] := Modelica_LinearSystems2.Math.Complex.Vectors.multiply(m[l1,:],vi);
     end for;
 
     end matVecMul;
@@ -639,47 +686,40 @@ This package provides functions operating on matrices of complex numbers.
 </html>"));
   end Matrices;
 
-  encapsulated operator 'constructor'
-    "Collection of operators to construct a Complex number data record"
-    extends Modelica.Icons.Package;
-    import Modelica;
-
-    function fromReal "Generate a complex number record from a real value"
-      import Modelica_LinearSystems2.Math.Complex;
-      input Real re "Real part of complex number";
-      input Real im=0 "Imaginary part of complex number";
-      output Complex result(re=re, im=im) "Complex number";
-    algorithm
-
-      annotation(Inline=true);
-    end fromReal;
-    annotation (Documentation(info="<html>
-<p>This package contains the default constructors for a data record of complex number. </p>
-</html>"));
-  end 'constructor';
-
   encapsulated operator '-'
     "Collection of operators for subtraction of complex numbers"
     extends Modelica.Icons.Package;
     import Modelica;
 
     function negate "Unary minus (multiply complex number by -1)"
+      extends Modelica.Icons.Function;
       import Modelica_LinearSystems2.Math.Complex; // changed to Modelica_LinearSystems2
       input Complex c1 "Complex number";
       output Complex c2 "= -c1";
     algorithm
       c2 := Complex(-c1.re, -c1.im);
-      annotation(Inline=true);
+      annotation(Inline=true, Icon(graphics={
+            Ellipse(
+              lineColor={255,0,0},
+              extent={{-100,-100},{100,100}},
+              pattern=LinePattern.Dash,
+              lineThickness=0.5)}));
     end negate;
 
     function subtract "Subtract two complex numbers"
+      extends Modelica.Icons.Function;
       import Modelica_LinearSystems2.Math.Complex;// changed to Modelica_LinearSystems2
       input Complex c1 "Complex number 1";
       input Complex c2 "Complex number 2";
       output Complex c3 "= c1 - c2";
     algorithm
       c3 := Complex(c1.re - c2.re, c1.im - c2.im);
-      annotation(Inline=true);
+      annotation(Inline=true, Icon(graphics={
+            Ellipse(
+              lineColor={255,0,0},
+              extent={{-100,-100},{100,100}},
+              pattern=LinePattern.Dash,
+              lineThickness=0.5)}));
     end subtract;
     annotation (Documentation(info="<html>
 <p>
@@ -690,13 +730,20 @@ This package contains operators for subtraction of complex numbers.
 
   encapsulated operator function '+' "Add two complex numbers"
     import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    extends Modelica.Icons.Function;
 
       input Complex c1 "Complex number 1";
       input Complex c2 "Complex number 2";
       output Complex c3 "= c1 + c2";
   algorithm
     c3 := Complex(c1.re + c2.re, c1.im + c2.im);
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end '+';
 
   encapsulated operator function '*' "Multiply two complex numbers"
@@ -707,18 +754,28 @@ This package contains operators for subtraction of complex numbers.
       output Complex c3 "= c1*c2";
   algorithm
       c3 := Complex(c1.re*c2.re - c1.im*c2.im, c1.re*c2.im + c1.im*c2.re);
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end '*';
 
   encapsulated operator function '/' "Divide two complex numbers (c1 / c2)"
-    import Modelica_LinearSystems2.Math.Complex;
+   import .Complex;
 
       input Complex c1 "Complex number 1";
       input Complex c2 "Complex number 2";
       output Complex c3 "= c1/c2";
   algorithm
       c3 := Complex((c1.re*c2.re + c1.im*c2.im)/(c2.re^2 + c2.im^2), (-c1.re*c2.im + c1.im*c2.re)/(c2.re^2 + c2.im^2));
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end '/';
 
   encapsulated operator function '=='
@@ -729,52 +786,77 @@ This package contains operators for subtraction of complex numbers.
       output Boolean result "c1 == c2";
   algorithm
       result := c1.re == c2.re and c1.im == c2.im;
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end '==';
 
   encapsulated operator function 'String'
     "Transform Complex number into a String representation"
-    import Modelica_LinearSystems2.Math.Complex;
-      input Complex c
+    extends Modelica.Icons.Function;
+
+    import Modelica;
+    import .Complex;
+
+    input Complex c
       "Complex number to be transformed in a String representation";
-      input String name="j"
+    input String name="j"
       "Name of variable representing sqrt(-1) in the string";
-      input Integer significantDigits=6
+    input Integer significantDigits=6
       "Number of significant digits that are shown";
-      output String s="";
+    output String s="";
   algorithm
-      s := String(c.re, significantDigits=significantDigits);
-      if c.im <> 0 then
-        if c.im > 0 then
-          s := s + " + ";
-        else
-          s := s + " - ";
-        end if;
-        s := s + String(abs(c.im), significantDigits=significantDigits) + "*" + name;
+    s := String(c.re, significantDigits=significantDigits);
+    if c.im <> 0 then
+      if c.im > 0 then
+        s := s + " + ";
+      else
+        s := s + " - ";
       end if;
+      s := s + String(abs(c.im), significantDigits=significantDigits) + "*" + name;
+    end if;
     //    end toString;
   end 'String';
 
   encapsulated function j "Returns sqrt(-1)"
+    extends Modelica.Icons.Function;
+    import Modelica;
     import Modelica_LinearSystems2.Math.Complex;
 
     output Complex c "= sqrt(-1)";
   algorithm
     c := Complex(0,1);
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end j;
 
   encapsulated function 'abs' "Absolute value of complex number"
+    extends Modelica.Icons.Function;
+    import Modelica;
     import Modelica_LinearSystems2.Math.Complex;
 
     input Complex c "Complex number";
     output Real result "= abs(c)";
   algorithm
     result := (c.re^2 + c.im^2)^0.5; //changed from sqrt
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end 'abs';
 
   encapsulated function 'sqrt' "Square root of complex number"
+    extends Modelica.Icons.Function;
+    import Modelica;
     import Modelica.Math;
     import Modelica_LinearSystems2.Math.Complex;
 
@@ -783,10 +865,17 @@ This package contains operators for subtraction of complex numbers.
   algorithm
     c2 := Complex(sqrt(Complex.'abs'(c1))*Math.cos(Complex.arg(c1)/2), sqrt(
       Complex.'abs'(c1))*Math.sin(Complex.arg(c1)/2));
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end 'sqrt';
 
-encapsulated function 'max' "Return maximum element of complex vector"
+  encapsulated function 'max' "Return maximum element of complex vector"
+    extends Modelica.Icons.Function;
+    import Modelica;
     import Modelica_LinearSystems2.Math.Complex;
 
   input Complex v[:] "Vector";
@@ -795,7 +884,7 @@ encapsulated function 'max' "Return maximum element of complex vector"
 
   protected
   Real absv_i;
-algorithm
+  algorithm
   if size(v,1) > 0 then
      result := Complex.'abs'(v[1]);
      index  := 1;
@@ -811,10 +900,17 @@ algorithm
      index  := 0;
   end if;
   annotation (Documentation(info="<html>
-</html>"));
-end 'max';
+</html>"), Icon(graphics={
+        Ellipse(
+          lineColor={255,0,0},
+          extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
+  end 'max';
 
   encapsulated function exp "Exponential of complex number"
+    extends Modelica.Icons.Function;
+    import Modelica;
     import Modelica_LinearSystems2.Math.Complex;
     import Modelica.Math;
 
@@ -822,10 +918,16 @@ end 'max';
     output Complex c2 "= exp(c1)";
   algorithm
      c2 := Complex(Math.exp(c1.re)*Math.cos(c1.im), Math.exp(c1.re)*Math.sin(c1.im));
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end exp;
 
   encapsulated function log "Logarithm of complex number"
+    extends Modelica.Icons.Function;
 
     import Modelica;
     import Modelica_LinearSystems2.Math.Complex;
@@ -834,11 +936,18 @@ end 'max';
     output Complex c2 "= log(c1)";
   algorithm
     c2 := Complex(Modelica.Math.log(Complex.'abs'(c1)), Complex.arg(c1));
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end log;
 
   encapsulated function sin "Sine of complex number"
+    extends Modelica.Icons.Function;
 
+    import Modelica;
     import Modelica_LinearSystems2.Math.Complex;
 
     input Complex c1 "Complex number";
@@ -848,21 +957,34 @@ end 'max';
      c2 := (Complex.exp(Complex(-c1.im, +c1.re)) - Complex.exp(Complex(+c1.im, -c1.re)))/
       Complex(0, 2);
 
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end sin;
 
   encapsulated function cos "Cosine of complex number"
+    extends Modelica.Icons.Function;
     import Modelica_LinearSystems2.Math.Complex;
 
+    import Modelica;
     input Complex c1 "Complex number";
     output Complex c2 "= cos(c1)";
 
   algorithm
    c2 := (Complex.exp(Complex(-c1.im, +c1.re)) + Complex.exp(Complex(+c1.im, -c1.re)))/2;
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end cos;
 
   encapsulated function arg "Phase angle of complex number"
+    extends Modelica.Icons.Function;
     import Modelica;
     import Modelica_LinearSystems2.Math;
     import Modelica_LinearSystems2.Math.Complex;
@@ -896,43 +1018,72 @@ phase angle phi of the Complex number c in the range
 <blockquote><pre>
   Complex.<b>arg</b>( Complex(1,0.5), 4*pi );  // = 4*pi+pi/4 = 13.351...
 </pre></blockquote>
-</html>"),     Inline=true);
+</html>"),     Inline=true,
+      Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end arg;
 
   encapsulated function conj "Conjugate of complex number"
+    extends Modelica.Icons.Function;
     import Modelica_LinearSystems2.Math.Complex;
 
+    import Modelica;
     input Complex c1 "Complex number";
     output Complex c2 "= c1.re - j*c1.im";
   algorithm
     c2 := Complex(c1.re, -c1.im);
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end conj;
 
   encapsulated function real "Real part of complex number"
+    extends Modelica.Icons.Function;
     import Modelica_LinearSystems2.Math.Complex;
 
+    import Modelica;
     input Complex c "Complex number";
     output Real r "= c.re ";
   algorithm
     r := c.re;
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end real;
 
   encapsulated function imag "Imaginary part of complex number"
+    extends Modelica.Icons.Function;
     import Modelica_LinearSystems2.Math.Complex;
 
+    import Modelica;
     input Complex c "Complex number";
     output Real r "= c.im ";
   algorithm
     r := c.im;
-    annotation(Inline=true);
+    annotation(Inline=true, Icon(graphics={
+          Ellipse(
+            lineColor={255,0,0},
+            extent={{-100,-100},{100,100}},
+            pattern=LinePattern.Dash,
+            lineThickness=0.5)}));
   end imag;
 
   encapsulated function eigenValues
     "Compute eingenvalues of a matrix A, using lapack routine dgeevx"
+    extends Modelica.Icons.Function;
 
-    import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    import .Complex;
     import Modelica_LinearSystems2.Math.Matrices.LAPACK;
     import Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeevx;
 
@@ -990,9 +1141,12 @@ inputs and the number of outputs must be identical.
 
   encapsulated function eigenVectors
     "Calculate the rigth eigenvectors of a linear state space system and write them columnwise in a matrix."
+    extends Modelica.Icons.Function;
+
     import Modelica;
     import Modelica.Math.Matrices.LAPACK;
-    import Modelica_LinearSystems2.Math.Complex;
+    import .Complex;
+    import Modelica.ComplexMath.j;
 
     input Real A[:,size(A, 1)] "real square matrix";
     output Complex eigvec[size(A, 1),size(A, 2)] "eigen values of the system";
@@ -1005,7 +1159,6 @@ inputs and the number of outputs must be identical.
     Real eigvalIm[size(A, 1)]=fill(0, size(A, 1));
     Integer n=size(A, 1);
     Integer i;
-    Complex j=Complex.j();
   algorithm
     if size(A, 1) > 0 then
 
@@ -1077,9 +1230,11 @@ inputs and the number of outputs must be identical.
 
   encapsulated function frequency
     "Frequency and damping of conjugated complex pole pair"
+    extends Modelica.Icons.Function;
+
     import Modelica;
-    import Modelica_LinearSystems2.Math;
-    import Modelica_LinearSystems2.Math.Complex;
+    import .Complex;
+
     input Complex c "Complex number";
     output Modelica.SIunits.Frequency f "Frequency of c (= c.im in Hz)";
     output Real damping "Damping of c (= c.re/c.im)";
@@ -1100,9 +1255,10 @@ inputs and the number of outputs must be identical.
 
     function eigenValues_dhseqr
       "Compute eingenvalues of a upper Hessenberg matrix using lapack routine DHSEQR"
+      extends Modelica.Icons.Function;
 
       import Modelica;
-      import Modelica_LinearSystems2.Math.Complex;
+      import .Complex;
       import
         Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg;
 
@@ -1131,13 +1287,12 @@ inputs and the number of outputs must be identical.
     function C_transpose "Computes the transposed matrix of a complex matrix"
       extends Modelica.Icons.Function;
 
-      import Modelica_LinearSystems2.Math.Complex;
-
+      import .Complex;
+      import Modelica.ComplexMath.j;
 
       input Complex C[:,:];
       output Complex CT[size(C, 2),size(C, 1)];
     protected
-      Complex j=Complex.j();
       Integer l1;
       Integer l2;
     algorithm
@@ -1145,7 +1300,7 @@ inputs and the number of outputs must be identical.
       for l1 in 1:size(C, 1) loop
         for l2 in 1:size(C, 2) loop
     //      CT[l2, l1] := Re(C[l1, l2]) - j*Im(C[l1, l2]);
-          CT[l2, l1] := Complex.conj(C[l1,l2]);
+          CT[l2, l1] :=Modelica.ComplexMath.conj(C[l1, l2]);
         end for;
       end for;
 
@@ -1153,13 +1308,15 @@ inputs and the number of outputs must be identical.
 
     function frobeniusNorm "Return the Frobenius norm of a matrix"
       extends Modelica.Icons.Function;
-      import Modelica_LinearSystems2.Math.Complex;
+
+      import .Complex;
+
       input Complex A[:,:] "Input matrix";
       output Real result=0.0 "frobenius norm of matrix A";
     algorithm
       for i1 in 1:size(A, 1) loop
         for i2 in 1:size(A, 2) loop
-          result := result + Complex.real(A[i1, i2]*Complex.conj(A[i1, i2]));
+          result :=result + Modelica.ComplexMath.real(A[i1, i2]*Modelica.ComplexMath.conj(A[i1, i2]));
         end for;
       end for;
       result := sqrt(result);
@@ -1180,36 +1337,52 @@ Therefore, only advanced users should deal with such a functions.
   annotation (
     Documentation(info="<html>
 <p>
-This record defines a complex number consisting of a real
-and an imaginary part. Additionally, various utility functions
-are provided in the record to operate on instances of this record.
+This package contains some <b>utility functions</b>
+operating on complex numbers (such as frequency(..)), as well as
+functions operating on vectors and matrices of complex numbers.
+For general information about the complex numbers usage, please refer to
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">GettingStarted.ComplexNumbers</a>.
+</p>
+<p>
 Example (note: \"j\" in the comments is defined as j=sqrt(-1)):
 </p>
+<blockquote>
 <pre>
-   <b>import</b> Modelica.Utilities.Streams;
-   <b>import</b> Modelica_LinearSystems2.Math.Complex;
-   Complex c1=Complex(re=2, im=3) \"= 2 + 3j\";
-   Complex c2=Complex(3,4) \"= 3 + 4j\";
- <b>algorithm</b>
-   c3 := Complex.'+'(c1, c2) \"= c1 + c2\";
-   Streams.print(\"c3 = \" + Complex.'String'(c3));
-   Streams.print(\"c3 = \" + Complex.'String'(c3,\"i\"));
-   // This gives the following print-out:
-   c3 = 5 + 7j
-   c3 = 5 + 7i
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import </span><span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Modelica.Utilities.Streams.print</span>;
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import </span>LS2 = <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Modelica_LinearSystems2</span>;
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import </span><span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span>;
+
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span> c1 = <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span>(re=2, im=3) <span style=\"font-family:'Courier New,courier'; color:#006400;\">\"= 2 + 3j\"</span>;
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span> c2 = <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span>(3,4) <span style=\"font-family:'Courier New,courier'; color:#006400;\">\"= 3 + 4j\"</span>;
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span> c3;
+
+<span style=\"font-family:'Courier New,courier'; color:#0000ff;\">algorithm </span>
+  c3 := c1 + c2;
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">print</span>(<span style=\"font-family:'Courier New,courier'; color:#006400;\">\"c3 = \"</span> + <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">LS2.Math.Complex.'String'</span>(c3));
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">print</span>(<span style=\"font-family:'Courier New,courier'; color:#006400;\">\"c3 = \"</span> + <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">LS2.Math.Complex.'String'</span>(c3,<span style=\"font-family:'Courier New,courier'; color:#006400;\">\"i\"</span>));
+
+  <span style=\"color:#006400;\">// This gives the following print-out:</span>
+  <span style=\"color:#006400;\">// c3 = 5 + 7j</span>
+  <span style=\"color:#006400;\">// c3 = 5 + 7i</span>
+  ...
+<span style=\"font-family:'Courier New,courier'; color:#0000ff;\">end </span>functionName;
 </pre>
+</blockquote>
+
 <p>
 The utility functions are written in such a way that it
 is convenient to work with them, once operator overloading
 is provided in Modelica and Modelica tools. Example:
 </p>
+<blockquote>
 <pre>
-   // Assume operator overloading is available (this is not yet the case):
-   Complex j  = Complex.j();
-   Complex c4 = -2 + 5*j;
-   // A Modelica tool will transform the statement of c4 into
-   Complex c4 = Complex.'+'( Complex.(-2,0), Complex.'*'(Complex(5,0),j)));
+  <span style=\"color:#006400;\">// Assume operator overloading is available</span>:
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import</span> <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span>;
+  <span style=\"font-family:'Courier New,courier'; color:#0000ff;\">import</span> <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Modelica.ComplexMath.j</span>;
+
+  <span style=\"font-family:'Courier New,courier'; color:#ff0000;\">Complex</span> c4 = -2 + 5*j;
 </pre>
+</blockquote>
 <p>
 The utility functions are implemented so that they can be easily
 inlined by a tool. In such a case, the above statement will

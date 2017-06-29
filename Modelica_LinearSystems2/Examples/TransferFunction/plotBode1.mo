@@ -4,8 +4,8 @@ function plotBode1
   extends Modelica.Icons.Function;
 
   import Modelica.Utilities.Streams.print;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.TransferFunction;
+  import Complex;
 
   output Boolean ok;
 

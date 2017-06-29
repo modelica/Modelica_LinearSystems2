@@ -1,9 +1,9 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function zunmrq
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
 
-  input Modelica_LinearSystems2.Math.Complex C[:,:] "Matrix to multiply with Q";
-  input Modelica_LinearSystems2.Math.Complex RQ[:,:]
+  input Complex C[:,:] "Matrix to multiply with Q";
+  input Complex RQ[:,:]
     "Matrix as a result of zgerq2";
   input Complex tau[:] "elementary reflectors";
   input Boolean left=true;

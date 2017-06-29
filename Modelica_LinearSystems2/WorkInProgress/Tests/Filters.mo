@@ -28,7 +28,7 @@ package Filters
       constant Real machEps = 100*Modelica.Constants.eps;
     algorithm
       c := ZP.Analysis.evaluate(zp, Complex(0,2*pi*f_cut));
-      A :=Complex.'abs'(c);
+      A :=Modelica.ComplexMath.'abs'(c);
       str :="amplitude(f=" + String(f_cut) + ") = ";
       if Modelica_LinearSystems2.Math.isEqual(A, 10^(-3/20), machEps) then
          str := str + "-3db";
@@ -235,7 +235,7 @@ package Filters
       Real A;
     algorithm
       c := ZP.Analysis.evaluate(zp, Complex(0,1.0));
-      A :=Complex.'abs'(c);
+      A :=Modelica.ComplexMath.'abs'(c);
 
       if Modelica_LinearSystems2.Math.isEqual(A, 10^(-3/20), machEps) then
          str :="amplitude(w=1) = -3db";
