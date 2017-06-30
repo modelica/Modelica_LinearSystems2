@@ -870,10 +870,10 @@ to calculate the time response of the state space system. The type of the time
 response is defined by the input <b>responseType</b>, i.e.
 </p>
 <blockquote><pre>
-Impulse \"Impulse response\",
-Step \"Step response\",
-Ramp \"Ramp response\",
-Initial \"Initial condition response\"
+Impulse &quot;Impulse response&quot;,
+Step    &quot;Step response&quot;,
+Ramp    &quot;Ramp response&quot;,
+Initial &quot;Initial condition response&quot;
 </pre></blockquote>
 <p>
 Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt.
@@ -2465,22 +2465,23 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Import.<b>fromFile</b>(fileName)  </td> </tr>
-</table>
+<blockquote><pre>
+dzp = DiscreteZerosAndPoles.Import.fromFile(fileName)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Reads and loads a discrete zeros-and-poles transfer function from a mat-file <tt>fileName</tt>. The file must contain the sample time Ts and either the set of variables n1, n2, d1, d2, and k with
-the associated first and second order polynomials or the variables p, z, and k with the poles and zeros, written in two column arrays with real and imaginary in the first and
-second column respectively. The variable k is the real gain in both cases.
-
+Reads and loads a discrete zeros-and-poles transfer function from a mat-file <code>fileName</code>.
+The file must contain the sample time Ts and either the set of variables n1, n2, d1, d2, and k with
+the associated first and second order polynomials or the variables p, z, and k with the poles and
+zeros, written in two column arrays with real and imaginary in the first and second column respectively.
+The variable k is the real gain in both cases.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-
-
 <b>algorithm</b>
-  dzp:=Modelica_LinearSystems2.DiscreteZerosAndPoles.Import.fromFile(DataDir + "    /dzp.mat " );
+  dzp := DiscreteZerosAndPoles.Import.fromFile(DataDir + &quot;/dzp.mat&quot;);
 //  zp = (q^2 + 2*q + 3)/(q + 2)/(q^2 + 2*q + 2)
 </pre></blockquote>
 </html>"));
@@ -2576,7 +2577,8 @@ second column respectively. The variable k is the real gain in both cases.
    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-dzp = DiscreteZerosAndPoles.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method)
+dzp = DiscreteZerosAndPoles.Import.<b>fromModel</b>(
+  modelName, T_linearize, fileName, Ts, method)
 </pre></blockquote>
 
 <h4>Description</h4>

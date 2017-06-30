@@ -15,7 +15,7 @@ class Contact "Contact"
 <p><b>Acknowledgements:</b></p>
 <ul>
 <li> The first version of the Controller library was the library
-     \"Sampled\" of Nico Walther as a result of his master thesis
+     &quot;Sampled&quot; of Nico Walther as a result of his master thesis
      from the electrical engineering at the HTWK-Leipzig
      (supervised by Prof. M&uuml;ller, HTWK, and Prof.
      Martin Otter, DLR).

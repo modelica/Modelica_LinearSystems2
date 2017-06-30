@@ -42,16 +42,16 @@ Multiplying the coefficients with a window damps the coefficients at the beginni
 the end.
 </p>
 <p>
-The function outputs a L-point vector for a given kind of window. The parameter \"beta\" is
+The function outputs a L-point vector for a given kind of window. The parameter &quot;beta&quot; is
 only needed by the Kaiser window. The types of windows are:
 </p>
-<OL>
-<LI>Rectangle</LI>
-<LI>Bartlett</LI>
-<LI>Hann</LI>
-<LI>Hamming</LI>
-<LI>Blackman</LI>
-<LI>Kaiser</LI>
-</OL>
+<ol>
+<li>Rectangle</li>
+<li>Bartlett</li>
+<li>Hann</li>
+<li>Hamming</li>
+<li>Blackman</li>
+<li>Kaiser</li>
+</ol>
 </html>"));
 end FIR_window;

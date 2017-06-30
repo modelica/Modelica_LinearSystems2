@@ -475,10 +475,10 @@ DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
 First, the discrete transfer function representation is transformed into a discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e.
 </p>
 <blockquote><pre>
-Impulse \"Impulse response\",
-Step \"Step response\",
-Ramp \"Ramp response\",
-Initial \"Initial condition response\"
+Impulse &quot;Impulse response&quot;,
+Step    &quot;Step response&quot;,
+Ramp    &quot;Ramp response&quot;,
+Initial &quot;Initial condition response&quot;
 </pre></blockquote>
 <p>
 The outputs y and x are calculated from the system equations of the discrete state space system for each time step t=k*dt.
@@ -547,7 +547,7 @@ First, the discrete transfer function representation is transformed into discret
 and the impulse response of the discrete state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
 </p>
 <blockquote><pre>
-Impulse \"Impulse response\",
+Impulse &quot;Impulse response&quot;,
 </pre></blockquote>
 <p>
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
@@ -613,7 +613,7 @@ First, the discrete transfer function representation is transformed into discret
 and the step response of the discrete state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
 </p>
 <blockquote><pre>
-Step \"Step response\",
+Step &quot;Step response&quot;,
 </pre></blockquote>
 <p>
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
@@ -680,7 +680,7 @@ First, the discrete transfer function representation is transformed into discret
 and the ramp response of the discrete state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
 </p>
 <blockquote><pre>
-Ramp \"Ramp response\",
+Ramp &quot;Ramp response&quot;,
 </pre></blockquote>
 <p>
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
@@ -749,7 +749,7 @@ First, the discrete transfer function representation is transformed into discret
 and the initial response of the discrete state space system for initial state x0 is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
 </p>
 <blockquote><pre>
-Initial \"Initial response\",
+Initial &quot;Initial response&quot;,
 </pre></blockquote>
 <p>
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.

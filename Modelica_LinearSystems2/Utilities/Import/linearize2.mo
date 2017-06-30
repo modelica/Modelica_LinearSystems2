@@ -104,13 +104,13 @@ ss = Utilities.Import.linearize2(
 <h4>Description</h4>
 <p>
 This function initializes a Modelica model and then simulates the model
-until time instant \"t_linearize\".
+until time instant &quot;t_linearize&quot;.
 If t_linearize=0, no simulation takes place (only initialization).
 At the simulation stop time, the model is linearized in such a form that
 </p>
 <ul>
-<li>all top-level signals with prefix \"input\" are treated as inputs <b>u</b>(t) of the model ,</li>
-<li>all top-level signals with prefix \"output\" are treated as outputs <b>y</b>(t) of the model,</li>
+<li>all top-level signals with prefix &quot;input&quot; are treated as inputs <b>u</b>(t) of the model ,</li>
+<li>all top-level signals with prefix &quot;output&quot; are treated as outputs <b>y</b>(t) of the model,</li>
 <li>all variables that appear differentiated and that are selected as states at this time instant are treated as states <b>x</b> of the model.</li>
 </ul>
 <p>

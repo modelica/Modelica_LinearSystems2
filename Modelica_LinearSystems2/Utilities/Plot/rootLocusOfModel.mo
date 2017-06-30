@@ -91,10 +91,10 @@ Calling the function
 </p>
 <blockquote><pre>
 Utilities.Plot.<b>rootLocusOfModel</b>(
-  modelName = \"Modelica.Mechanics.Rotational.Examples.First\",
+  modelName = &quot;Modelica.Mechanics.Rotational.Examples.First&quot;,
   modelParam={
     Modelica_LinearSystems2.Records.ParameterVariation(
-      Name=\"Jload\",
+      Name=&quot;Jload&quot;,
       grid=Modelica_LinearSystems2.Types.Grid.Logarithmic
       Min=1,
       Max=6,

@@ -62,9 +62,9 @@ LU decomposition is singular), an exception is raised.
 </p>
 <p>
 The LU factorization is computed
-with the LAPACK function \"dgetrf\",
+with the LAPACK function &quot;dgetrf&quot;,
 i.e., by Gaussian elemination using partial pivoting
-with row interchanges. Vector \"pivots\" are the
+with row interchanges. Vector &quot;pivots&quot; are the
 pivot indices, i.e., for 1 &le; i &le; min(m,n), row i of
 matrix A was interchanged with row pivots[i].
 </p>
