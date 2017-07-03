@@ -182,9 +182,9 @@ The block can be continuous or discrete (with continuous parameterization).
 </p>
 <p>
 It is not possible to initalize a continuous integrator in steady state.
-For this reason, option \"initType = SteadyState\" is ignored for
+For this reason, option &quot;initType = SteadyState&quot; is ignored for
 a continuous integrator block and
-interpreted as \"initType = InitialState\".
+interpreted as &quot;initType = InitialState&quot;.
 </p>
 </html>"), Icon(coordinateSystem(
         preserveAspectRatio=false,

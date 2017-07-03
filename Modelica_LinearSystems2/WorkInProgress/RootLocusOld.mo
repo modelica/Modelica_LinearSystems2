@@ -127,15 +127,15 @@ Calling the function
 </p>
 <blockquote><pre>
 Utilities.Plot.<b>rootLocus</b>(
-  modelName = \"Modelica.Mechanics.Rotational.Examples.First\",
+  modelName = &quot;Modelica.Mechanics.Rotational.Examples.First&quot;,
   t_linearize = 0,
   modelParam={
     Modelica_LinearSystems2.Records.ParameterVariation(
-      Name=\"Jload\",
+      Name=&quot;Jload&quot;,
       Min=1,
       Max=6,
       nVar=10,
-      Unit=\"kg.m2\")});
+      Unit=&quot;kg.m2&quot;)});
 </pre></blockquote>
 <p>
 yields following diagram

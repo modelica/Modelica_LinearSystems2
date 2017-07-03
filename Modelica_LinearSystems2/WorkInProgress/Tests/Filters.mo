@@ -337,7 +337,7 @@ given with respect to normalized filters for a cut-off angular frequency
 of 1 rad/s. The normalization is performed in such a way that at the cut-off
 frequency the transfer function has an amplitude of -3db (= 10^(-3/20) = 0.7079457..).
 In the tables, not the exact -3db value is used but the approximation
-sqrt(2)/2 (= 0.707106...). Due to \"historical\" reasons, function baseFilter
+sqrt(2)/2 (= 0.707106...). Due to &quot;historical&quot; reasons, function baseFilter
 from the Modelica_LinearSystems library uses -3db for Bessel and Chebyshev filters
 and sqrt(2)/2 for CriticalDamping and Butterworth filters. Furthermore, the table
 gives the values only up to 4 significant digits. For these reasons, in this test
