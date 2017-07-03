@@ -10,19 +10,20 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.3.4) - Analy
 annotation (
   preferredView="info",
   uses(Modelica(version="3.2.2")),
-  version="2.3.4",
+  version="2.3.5",
   versionBuild=0,
-  versionDate="2016-03-11",
+  versionDate="2017-06-03",
   dateModified = "2016-01-22 15:20:01Z",
   revisionId="$Id::                                       $",
   conversion(
-    noneFromVersion="2.0",
-    noneFromVersion="2.1",
-    noneFromVersion="2.2",
-    noneFromVersion="2.3",
-    noneFromVersion="2.3.1",
+    from(version="2.3.4", script="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/ConvertLinearSystems2_from_2.3.4.mos"),
+    noneFromVersion="2.3.3",
     noneFromVersion="2.3.2",
-    noneFromVersion="2.3.3"),
+    noneFromVersion="2.3.1",
+    noneFromVersion="2.3",
+    from(version="2.2", script="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/ConvertLinearSystems2_from_2.2.mos"),
+    noneFromVersion="2.1",
+    noneFromVersion="2.0"),
   Documentation(info="<html>
 <p>
 Library <b>Modelica_LinearSystems2</b> is a Modelica package
