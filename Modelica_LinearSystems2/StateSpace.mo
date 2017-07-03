@@ -9779,7 +9779,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Vectors;
-      import ComplexToString = Modelica_LinearSystems2.Math.Complex.'String';
+      import ComplexToString = Complex.'String';
 
       input Real F[:, size(F, 1)] "System matrix of order p=1 or p=2";
       input Real G[size(F, 1), :] "Control input matrix p rows";
@@ -9962,7 +9962,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Vectors;
-      import ComplexToString = Modelica_LinearSystems2.Math.Complex.'String';
+      import ComplexToString = Complex.'String';
 
       input Real F[:, size(F, 1)] "System matrix of order p=1 or p=2";
       input Real G[size(F, 1), :] "Control input matrix p rows";
