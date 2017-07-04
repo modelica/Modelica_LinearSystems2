@@ -2,10 +2,11 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function designCraneControllerWithObserver
   "Design pole assignment controller and observer for an overhead crane"
   import Modelica.Utilities.Streams.print;
+  import Modelica.Utilities.Streams.writeRealMatrix;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Complex;
   import Modelica_LinearSystems2.Math.Matrices;
+  import Complex;
 
   input String modelName="Modelica_Controller.Examples.Components.Pendulum_small"
     "name of the model to linearize";
@@ -56,54 +57,28 @@ algorithm
   print("eigenvalues of the closed loop system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
 
-  writeMatrix(
-    fileName,
-    "K_pa",
-    K_pa,
-    false);
+  writeRealMatrix(fileName, "K_pa", K_pa, false);
 
 // Pre filter calculation
   M_pa := -Modelica.Math.Matrices.inv([1,0,0,0]*Matrices.solve2(ss_pa.A, ss_pa.B));
   print("Gain for pre filtering:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
-    M_pa,
-    6,
-    "M_pa"));
-  writeMatrix(
-    fileName,
-    "M_pa",
-    M_pa,
-    true);
+    Modelica_LinearSystems2.Math.Matrices.printMatrix(M_pa, 6, "M_pa"));
+  writeRealMatrix(fileName, "M_pa", M_pa, true);
 
 // observer feedback
   (K_ob,,p) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss_ob, pob);
   K_ob := transpose(K_ob);
 
-  writeMatrix(
-    fileName,
-    "stateSpace",
-    [ssPlant.A,ssPlant.B; ssPlant.C,ssPlant.D],
-    true);
+  writeRealMatrix(fileName, "stateSpace", [ssPlant.A, ssPlant.B; ssPlant.C, ssPlant.D], true);
 // write matrix dimension nx
-  writeMatrix(
-    fileName,
-    "nx",
-    [size(ssPlant.A,1)],
-    true);
+  writeRealMatrix(fileName, "nx", [size(ssPlant.A, 1)], true);
   print("The feedback matrix of the observer system is:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
-    K_ob,
-    6,
-    "K_ob"));
+    Modelica_LinearSystems2.Math.Matrices.printMatrix(K_ob, 6, "K_ob"));
   ss_ob.A := ss.A - K_ob*ssPlant.C;
 
   print("eigenvalues of the observer system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pob", pob);
-  writeMatrix(
-    fileName,
-    "K_ob",
-    K_ob,
-    true);
+  writeRealMatrix(fileName, "K_ob", K_ob, true);
 
   print("\nok!");
   annotation (__Dymola_interactive=true, Documentation(info="<html>

@@ -7562,6 +7562,7 @@ and results in
     encapsulated function bodeSISO
       "Plot bode plot of the corresponding transfer function"
       import Modelica;
+      import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Math;
@@ -7620,12 +7621,12 @@ and results in
     algorithm
       // Check that system has inputs and outputs
       if size(ss.B, 2) == 0 then
-        Modelica.Utilities.Streams.print(
+        print(
           "\n... Not possible to plot transfer function because system has no inputs."
            + "\n... Call of Plot.bodeSISO is ignored.\n");
         return;
       elseif size(ss.C, 1) == 0 then
-        Modelica.Utilities.Streams.print(
+        print(
           "\n... Not possible to plot transfer function because system has no outputs."
            + "\n... Call of Plot.bodeSISO is ignored.\n");
         return;
@@ -7658,13 +7659,14 @@ and results in
 
       // Store frequency response values on file
       if onFile then
-         fap :=[f,a,phi];
-         Modelica.Utilities.Files.removeFile(fileName);
-         success:=writeMatrix(fileName,matrixName,fap,append=false);
-         if success then
-            Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
-                     Modelica.Utilities.Files.fullPathName(fileName) + "\"");
-         end if;
+        fap :=[f,a,phi];
+        Modelica.Utilities.Files.removeFile(fileName);
+        success:=Modelica.Utilities.Streams.writeRealMatrix(
+          fileName,matrixName,fap,append=false);
+        if success then
+          print("... Frequency response stored on file \"" +
+            Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+        end if;
       end if;
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -7717,8 +7719,8 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 
     encapsulated function bodeMIMO
       "Plot bode plot of all transfer functions, corresponding to the state space system"
-      import Modelica.Utilities.Streams.print;
       import Modelica;
+      import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
@@ -7790,11 +7792,11 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
     algorithm
       // Check that system has inputs and outputs
       if size(ss.B, 2) == 0 then
-        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no inputs."
+        print("\n... Not possible to plot transfer function because system has no inputs."
            + "\n... Call of Plot.bodeMIMO is ignored.\n");
         return;
       elseif size(ss.C, 1) == 0 then
-        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no outputs."
+        print("\n... Not possible to plot transfer function because system has no outputs."
            + "\n... Call of Plot.bodeMIMO is ignored.\n");
         return;
       end if;
@@ -7845,15 +7847,16 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 
           // Store result optionally on file
           if onFile then
-             fap :=[f,a,phi];
-             success:=writeMatrix(fileName,matrixName+"_"+uNames[i2]+"_"+yNames[i1],fap,append=true);
+            fap :=[f,a,phi];
+            success:=Modelica.Utilities.Streams.writeRealMatrix(
+              fileName,matrixName+"_"+uNames[i2]+"_"+yNames[i1],fap,append=true);
           end if;
         end for;
       end for;
 
       if success then
-         Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
-                        Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+        print("... Frequency response stored on file \"" +
+          Modelica.Utilities.Files.fullPathName(fileName) + "\"");
       end if;
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>

@@ -2407,8 +2407,8 @@ and results in
     input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
     input Boolean phase=true "= true, to plot phase" annotation(choices(checkBox=true));
 
-    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
-      defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(
+    extends Internal.PartialPlotFunction(
+      defaultDiagram=Internal.DefaultDiagramBodePlot(
         heading="Bode plot: " + String(zp)));
 
     input Boolean Hz=true
@@ -2472,10 +2472,10 @@ and results in
 
       // Convert to other units, if required
       if not Hz then
-         f[i] := w[i];
+        f[i] := w[i];
       end if;
       if dB then
-         A[i] := 20*log10(A[i]);
+        A[i] := 20*log10(A[i]);
       end if;
     end for;
 
@@ -2491,10 +2491,10 @@ and results in
       diagram2[i].curve := {curves[i]};
       diagram2[i].yLabel := if dB then "magnitude [dB]" else "magnitude";
       if phase then
-         diagram2[i].xLabel:="";
+        diagram2[i].xLabel:="";
       end if;
       if dB then
-         diagram2[i].logY := false;
+        diagram2[i].logY := false;
       end if;
     end if;
 
@@ -2523,13 +2523,13 @@ and results in
     end if;
 
     if onFile then
-       fAp :=[f,A,phi];
-       Modelica.Utilities.Files.removeFile(fileName);
-       success:=writeMatrix(fileName,matrixName,fAp,append=false);
-       if success then
-          Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
-                   Modelica.Utilities.Files.fullPathName(fileName) + "\"");
-       end if;
+      fAp :=[f,A,phi];
+      Modelica.Utilities.Files.removeFile(fileName);
+      success:=Modelica.Utilities.Streams.writeRealMatrix(fileName,matrixName,fAp,append=false);
+      if success then
+        Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
+          Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+      end if;
     end if;
 
     annotation (__Dymola_interactive=true, Documentation(info="<html>
