@@ -34,11 +34,13 @@ protected
   Complex assignedPoles[:]=Complex(1)*assignedPolesR[1, :] + j*assignedPolesI[1, :]
     "Complex assigned poles";
 
-  Boolean isKprovided=min(nmk) > 0;
-  Real Ki[:,:]=if isKprovided then readMatrix(dataFile, "K", nm[2], nm[1]) else fill(0, 0, 0);
+  Boolean isKprovided = min(nmk) > 0;
+  Real Ki[:,:] = if isKprovided then
+    Modelica.Utilities.Streams.readRealMatrix(dataFile, "K", nm[2], nm[1]) else fill(0, 0, 0);
 //  Integer n=size(A, 1);
   Real S[nm[1],nm[1]] "closed loop system matrix A-BK";
-  StateSpace ss=Modelica_LinearSystems2.StateSpace(A=A, B=B, C=zeros(1, nm[1]), D=zeros(1, size(B, 2)));
+  StateSpace ss = Modelica_LinearSystems2.StateSpace(
+    A=A, B=B, C=zeros(1, nm[1]), D=zeros(1, size(B, 2)));
   Real Xre[nm[1],nm[1]];
   Real k[size(A, 1)] "Feedback gain matrix";
 
@@ -125,6 +127,7 @@ algorithm
 
   annotation (Documentation(info="<html>
 <p>
-Computes the feedback gain K for the state space system according to assigned close loop poles
+Computes the feedback gain K for the state space system according to assigned close loop poles.
+</p>
 </html>"));
 end testPoleAssignment2;
