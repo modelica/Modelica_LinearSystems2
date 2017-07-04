@@ -4222,41 +4222,38 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
       "Generate a ZerosAndPoles data record from a state space representation resulted from linearization of a model"
 
       import Modelica;
+      import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
       input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
-      input Real T_linearize=0
-        "point in time of simulation to linearize the model";
-      input String fileName="dslin" "Name of the result file";
+      input Real T_linearize = 0
+        "Point in time of simulation to linearize the model";
+      input String fileName = "dslin" "Name of the result file";
 
     protected
-      String fileName2=fileName + ".mat";
-      Boolean OK1=simulateModel(
+      String fileName2 = fileName + ".mat";
+      Boolean OK1 = simulateModel(
             problem=modelName,
             startTime=0,
             stopTime=T_linearize);
-      Boolean OK2=importInitial("dsfinal.txt");
-      Boolean OK3=linearizeModel(
+      Boolean OK2 = importInitial("dsfinal.txt");
+      Boolean OK3 = linearizeModel(
             problem=modelName,
             resultFile=fileName,
             startTime=T_linearize,
             stopTime=T_linearize + 1);
-      Real nxMat[1,1]=readMatrix(
-            fileName2,
-            "nx",
-            1,
-            1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
-      Integer nx=integer(nxMat[1, 1]);
-      Integer nu=ABCDsizes[2] - nx;
-      Integer ny=ABCDsizes[1] - nx;
-      Real ABCD[nx + ny,nx + nu]=readMatrix(
+      Real nxMat[1,1] = Streams.readRealMatrix(fileName2, "nx", 1, 1);
+      Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
+      Integer nx = integer(nxMat[1, 1]);
+      Integer nu = ABCDsizes[2] - nx;
+      Integer ny = ABCDsizes[1] - nx;
+      Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(
             fileName2,
             "ABCD",
             nx + ny,
             nx + nu);
-      String xuyName[nx + nu + ny]=readStringMatrix(
+      String xuyName[nx + nu + ny] = readStringMatrix(
             fileName2,
             "xuyName",
             nx + nu + ny);
@@ -4265,7 +4262,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
         redeclare Real A[nx,nx],
         redeclare Real B[nx,nu],
         redeclare Real C[ny,nx],
-        redeclare Real D[ny,nu]) "= model linearized at initial point";
+        redeclare Real D[ny,nu]) "Model linearized at initial point";
     public
       output ZerosAndPoles zp[:,:];
     algorithm
@@ -6524,7 +6521,7 @@ int found=0;
     import Modelica_LinearSystems2.ZerosAndPoles;
     import Complex;
 
-    input String fileName="zp.mat" "Name of the zeros and poles data file"
+    input String fileName = "zp.mat" "Name of the zeros and poles data file"
       annotation (
         Dialog(
           loadSelector(
@@ -6547,10 +6544,10 @@ int found=0;
       d2=fill(0, d2, 2));
 
     protected
-    Integer z_2=if zSize > 0 then 2 else 0 "second dimension of zeros-matrix";
-    Integer p_2=if pSize > 0 then 2 else 0 "second dimension of poles-matrix";
+    Integer z_2 = if zSize > 0 then 2 else 0 "second dimension of zeros-matrix";
+    Integer p_2 = if pSize > 0 then 2 else 0 "second dimension of poles-matrix";
 
-    Real k=scalar(readMatrix(fileName, "k", 1, 1));
+    Real k = scalar(Streams.readRealMatrix(fileName, "k", 1, 1));
     Real zerosMatrix[zSize,z_2] = Streams.readRealMatrix(fileName, "z", zSize, z_2)
       "Zeros in rows of real parts and imaginary parts";
     Real polesMatrix[pSize,p_2] = Streams.readRealMatrix(fileName, "p", pSize, p_2)
@@ -6928,6 +6925,7 @@ function. The solver function is a direct mapping of the Algol 60 procedure
     function numberOfRealZerosAndPoles_zp
       "Get the number of first oder polynomials (n1, d1) and second order polynomials (n2, d2) of zeros and poles from zeros and poles written in a MAT-file"
 
+      import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2.DataDir;
       import Modelica_LinearSystems2.Internal;
 
@@ -6942,15 +6940,15 @@ function. The solver function is a direct mapping of the Algol 60 procedure
       Integer n1;
       Integer d1;
 
-      Integer zSize[2]=readMatrixSize(fileName, "z");
-      Integer pSize[2]=readMatrixSize(fileName, "p");
+      Integer zSize[2] = Streams.readMatrixSize(fileName, "z");
+      Integer pSize[2] = Streams.readMatrixSize(fileName, "p");
 
-      Real zerosMatrix[zSize[1],zSize[2]]=readMatrix(
+      Real zerosMatrix[zSize[1],zSize[2]] = Streams.readRealMatrix(
               fileName,
               "z",
               zSize[1],
               zSize[2]) "zeros in rows of real parts and imaginary parts";
-      Real polesMatrix[pSize[1],pSize[2]]=readMatrix(
+      Real polesMatrix[pSize[1],pSize[2]] = Streams.readRealMatrix(
               fileName,
               "p",
               pSize[1],

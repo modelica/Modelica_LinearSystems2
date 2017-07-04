@@ -2488,56 +2488,57 @@ The variable k is the real gain in both cases.
     end fromFile;
 
   function fromModel
-      "Generate a DiscreteZerosAndPoles data record from a state space representation resulted from linearization of a model"
+    "Generate a DiscreteZerosAndPoles data record from a state space representation resulted from linearization of a model"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+    import Modelica;
+    import Modelica.Utilities.Streams;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
-      input String modelName "Name of the Modelica model"  annotation(Dialog(__Dymola_translatedModel(translate=true)));
-      input Real T_linearize=0
-        "point in time of simulation to linearize the model";
-      input String fileName="dslin" "Name of the result file";
-      input Modelica.SIunits.Time Ts=1 "Sample time";
-      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
+    input String modelName "Name of the Modelica model"  annotation(Dialog(__Dymola_translatedModel(translate=true)));
+    input Real T_linearize = 0
+      "Point in time of simulation to linearize the model";
+    input String fileName = "dslin" "Name of the result file";
+    input Modelica.SIunits.Time Ts = 1 "Sample time";
+    input Modelica_LinearSystems2.Utilities.Types.Method method = Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
     protected
-      String fileName2=fileName + ".mat";
-      Boolean OK1=simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
-      Boolean OK2=importInitial("dsfinal.txt");
-      Boolean OK3=linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
-      Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
-      Integer nx=integer(nxMat[1, 1]);
-      Integer nu=ABCDsizes[2] - nx;
-      Integer ny=ABCDsizes[1] - nx;
-      Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-      String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
+    String fileName2 = fileName + ".mat";
+    Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
+    Boolean OK2 = importInitial("dsfinal.txt");
+    Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
+    Real nxMat[1,1] = Streams.readRealMatrix(fileName2, "nx", 1, 1);
+    Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
+    Integer nx = integer(nxMat[1, 1]);
+    Integer nu = ABCDsizes[2] - nx;
+    Integer ny = ABCDsizes[1] - nx;
+    Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+    String xuyName[nx + nu + ny] = readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
-      StateSpace ss(
-        redeclare Real A[nx,nx],
-        redeclare Real B[nx,nu],
-        redeclare Real C[ny,nx],
-        redeclare Real D[ny,nu]) "= model linearized at initial point";
-      DiscreteStateSpace dss(
-        redeclare Real A[nx,nx],
-        redeclare Real B[nx,nu],
-        redeclare Real C[ny,nx],
-        redeclare Real D[ny,nu],
-        redeclare Real B2[nx,nu]) "= model linearized at initial point";
-      DiscreteStateSpace dss_siso(
-        redeclare Real A[nx,nx],
-        redeclare Real B[nx,1],
-        redeclare Real C[1,nx],
-        redeclare Real D[1,1],
-        redeclare Real B2[nx,1]) "= model linearized at initial point";
+    StateSpace ss(
+      redeclare Real A[nx,nx],
+      redeclare Real B[nx,nu],
+      redeclare Real C[ny,nx],
+      redeclare Real D[ny,nu]) "Model linearized at initial point";
+    DiscreteStateSpace dss(
+      redeclare Real A[nx,nx],
+      redeclare Real B[nx,nu],
+      redeclare Real C[ny,nx],
+      redeclare Real D[ny,nu],
+      redeclare Real B2[nx,nu]) "Model linearized at initial point";
+    DiscreteStateSpace dss_siso(
+      redeclare Real A[nx,nx],
+      redeclare Real B[nx,1],
+      redeclare Real C[1,nx],
+      redeclare Real D[1,1],
+      redeclare Real B2[nx,1]) "Model linearized at initial point";
 
-        DiscreteZerosAndPoles dummy;
+    DiscreteZerosAndPoles dummy;
 
     public
-      output DiscreteZerosAndPoles dzp[:,:];//=fill(dummy,ny,nu);
+    output DiscreteZerosAndPoles dzp[:,:];//=fill(dummy,ny,nu);
   algorithm
     ss.A := ABCD[1:nx, 1:nx];
     ss.B := ABCD[1:nx, nx + 1:nx + nu];

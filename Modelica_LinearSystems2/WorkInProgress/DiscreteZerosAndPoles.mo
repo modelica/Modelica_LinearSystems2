@@ -1299,9 +1299,10 @@ processing.
   function fromModel
       "Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model"
 
-      import Modelica;
-      import Modelica_LinearSystems2.StateSpace;
-      import ZerosAndPoles =
+    import Modelica;
+    import Modelica.Utilities.Streams;
+    import Modelica_LinearSystems2.StateSpace;
+    import ZerosAndPoles =
         Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
 
     input String modelName "Name of the Modelica model";
@@ -1321,16 +1322,16 @@ processing.
           resultFile=fileName,
           startTime=T_linearize,
           stopTime=T_linearize + 1);
-    Real nxMat[1,1]=readMatrix(
+    Real nxMat[1,1]=Streams.readRealMatrix(
           fileName2,
           "nx",
           1,
           1);
-    Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+    Integer ABCDsizes[2]=Streams.readMatrixSize(fileName2, "ABCD");
     Integer nx=integer(nxMat[1, 1]);
     Integer nu=ABCDsizes[2] - nx;
     Integer ny=ABCDsizes[1] - nx;
-    Real ABCD[nx + ny,nx + nu]=readMatrix(
+    Real ABCD[nx + ny,nx + nu]=Streams.readRealMatrix(
           fileName2,
           "ABCD",
           nx + ny,
