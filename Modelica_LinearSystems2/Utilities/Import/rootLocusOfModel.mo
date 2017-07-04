@@ -172,12 +172,8 @@ algorithm
 
   // Determine array dimensions of the first linearization point
   fileName2 := fileName + String(is[1]) + ".mat";
-  nxMat := readMatrix(
-    fileName2,
-    "nx",
-    1,
-    1);
-  ABCDsizes := readMatrixSize(fileName2, "ABCD");
+  nxMat := Modelica.Utilities.Streams.readRealMatrix(fileName2, "nx", 1, 1);
+  ABCDsizes := Modelica.Utilities.Streams.readMatrixSize(fileName2, "ABCD");
   nx := integer(nxMat[1, 1]);
   nu := ABCDsizes[2] - nx;
   ny := ABCDsizes[1] - nx;

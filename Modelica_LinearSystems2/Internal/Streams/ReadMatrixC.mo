@@ -13,7 +13,7 @@ function ReadMatrixC "Read the output matrix of a state space system"
 
 protected
   Real sizeA[1,1] = Streams.readRealMatrix(fileName, "nx", 1, 1);
-  Integer ABCDsizes[2] = readMatrixSize(fileName, matrixName);
+  Integer ABCDsizes[2] = Streams.readMatrixSize(fileName, matrixName);
   Integer nx = integer(sizeA[1, 1]);
   Integer nu = ABCDsizes[2] - nx;
   Integer ny = ABCDsizes[1] - nx;
