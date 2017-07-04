@@ -42,7 +42,7 @@ algorithm
     // Plot the files
     for i in 1:nFFT loop
       file := directory + "/" + fft_filesSorted[i];
-      Modelica_LinearSystems2.Utilities.Plot.plot_FFT_fromFile(
+      Modelica_LinearSystems2.Utilities.Plot.plotFFT_fromFile(
         file, logX, ix, iy, fullPathTitle);
       ix :=ix + increment;
       iy :=iy + increment;
