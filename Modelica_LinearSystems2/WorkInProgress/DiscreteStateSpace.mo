@@ -485,13 +485,14 @@ end toDiscreteTransferFunction;
 encapsulated function toDiscreteZerosAndPoles
       "Generate a discrete zeros-and-poles representation from a discrete SISO state space representation"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.StateSpace;
+  import Modelica_LinearSystems2.ZerosAndPoles;
+  import LS2Complex = Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+  import Complex;
 
   input DiscreteStateSpace dss "StateSpace object";
   output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
@@ -518,7 +519,7 @@ algorithm
   if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
       Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
-    poles := Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
+    poles := LS2Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
     zeros := StateSpace.Internal.invariantZeros2(ssm);
     cpoles := fill(Complex(0),size(poles,1));
     czeros := fill(Complex(0),size(zeros,1));

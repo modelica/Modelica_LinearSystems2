@@ -212,11 +212,11 @@ follow each other as above. An error occurs if this is not the case.
 
 encapsulated operator '-'
   function subtract "Subtract two TransferFunctions (zp1 - zp2)"
-      import Modelica;
-      import ZerosAndPoles =
-        Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    import ZerosAndPoles =
+      Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Complex;
 
     input ZerosAndPoles zp1;
     input ZerosAndPoles zp2;
@@ -324,10 +324,9 @@ end '-';
     "Addition of to tarnsfwer functions zp1 + zp2, i.e. parallel connection of two transfer functions (= inputs are the same, outputs of the two systems are added)"
 
     import Modelica;
-    import ZerosAndPoles =
-      Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import ZerosAndPoles = Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
     import Modelica_LinearSystems2.Math.Polynomial;
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
 
     input ZerosAndPoles zp1;
     input ZerosAndPoles zp2;
@@ -684,13 +683,13 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
   function toDiscreteTransferFunction
       "Generate a DiscreteTransferFunction object from a DiscreteZerosAndPoles object"
 
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.Internal;
+    import Complex;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles transfer function of a system";
