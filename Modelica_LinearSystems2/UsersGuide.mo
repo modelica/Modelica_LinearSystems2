@@ -1195,6 +1195,7 @@ Improvements in this version:
 
 <ul>
 <li>Improved documentation of lot of classes/functions.</li>
+<li>Renamed functions to plot FFT, see <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot\">Utilities.Plot.plotFFT...</a>.</li>
 <li>Using a <a href=\"modelica://Modelica.ComplexMath\">ComplexMath</a> library from 
 the Modelica standard library for all operations on complex numbers. A conversion script exists.
 See also <a href=\"Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers.FunctionsAndOperators\">Functions and operators</a> in Getting started.</li>

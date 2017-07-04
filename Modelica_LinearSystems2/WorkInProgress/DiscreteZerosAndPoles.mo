@@ -59,29 +59,29 @@ record DiscreteZerosAndPoles
   encapsulated function fromZerosAndPoles
       "Generate a ZerosAndPoles transfer function from a set of zeros and poles"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica.Utilities.Streams.print;
+    import Modelica;
+    import Complex;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.Internal;
+    import Modelica.Utilities.Streams.print;
 
-    input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+    input Complex z[:] = fill(Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
-    input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+    input Complex p[:] = fill(Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
-    input Real k=1.0 "Constant multiplied with transfer function";
-    input Modelica.SIunits.Time Ts=1 "Sample time";
-      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
-    input String uName="" "input name";
-    input String yName="" "output name";
+    input Real k = 1.0 "Constant multiplied with transfer function";
+    input Modelica.SIunits.Time Ts = 1 "Sample time";
+    input Modelica_LinearSystems2.Utilities.Types.Method method=
+      Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
+    input String uName = "" "input name";
+    input String yName = "" "output name";
     output DiscreteZerosAndPoles dzp(
       redeclare Real n1[Internal.numberOfRealZeros(z)],
-      redeclare Real n2[integer((size(z, 1) - Internal.numberOfRealZeros(z))/2),
-        2],
+      redeclare Real n2[integer((size(z, 1) - Internal.numberOfRealZeros(z))/2), 2],
       redeclare Real d1[Internal.numberOfRealZeros(p)],
-      redeclare Real d2[integer((size(p, 1) - Internal.numberOfRealZeros(p))/2),
-        2]) "ZerosAndPoles transfer functions of the zeros, poles and k";
+      redeclare Real d2[integer((size(p, 1) - Internal.numberOfRealZeros(p))/2), 2])
+      "ZerosAndPoles transfer functions of the zeros, poles and k";
 
     protected
     Integer n_n1=size(dzp.n1, 1);
