@@ -3404,7 +3404,7 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
     Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(
       fileName, matrixName, nx + ny, nx + nu);
     Real B2[nx,nu] = Streams.readRealMatrix(fileName, "B2", nx, nu);
-    Real Ts[1,1] = readMatrix(fileName, "Ts", 1, 1);
+    Real Ts[1,1] = Streams.readRealMatrix(fileName, "Ts", 1, 1);
 
   algorithm
     result.A := ABCD[1:nx, 1:nx];

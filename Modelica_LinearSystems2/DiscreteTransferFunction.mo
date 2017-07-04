@@ -1362,9 +1362,10 @@ with
 
     encapsulated function fromFile
       "Generate a DiscreteTransferFunction data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
-
+      import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
+
       input String fileName="dtf.mat" "Name of the transfer function data file"   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                           caption="transfer function data file")));
       input String numName="n" "Name of the numenator of the transfer function";
@@ -1372,19 +1373,15 @@ with
         "Name of the denominator of the transfer function";
 
     protected
-      Integer numSize[2]=readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
-      Integer denSize[2]=readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
+      Integer numSize[2] = Streams.readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
+      Integer denSize[2] = Streams.readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
 
-      Real num[numSize[1],numSize[2]]=readMatrix(
-            fileName,
-            numName,
-            numSize[1],
-            numSize[2]) "numenator coefficients";
-      Real den[denSize[1],denSize[2]]=readMatrix(
-            fileName,
-            denName,
-            denSize[1],
-            denSize[2]) "denominator coefficients";
+      Real num[numSize[1],numSize[2]]=
+        Streams.readRealMatrix(fileName, numName, numSize[1], numSize[2])
+        "Numenator coefficients";
+      Real den[denSize[1],denSize[2]]=
+        Streams.readRealMatrix(fileName, denName, denSize[1], denSize[2])
+        "Denominator coefficients";
       Integer ns2=numSize[2] annotation(__Dymola_allowForSize=true);
       Integer ds2=denSize[2] annotation(__Dymola_allowForSize=true);
       Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);

@@ -323,7 +323,7 @@ encapsulated package Import
                         caption="state space system data file")));
     input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
     protected
-    input Integer xuy[3]=Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName);
+    input Integer xuy[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName);
     input Integer nx=xuy[1];
     input Integer nu=xuy[2];
     input Integer ny=xuy[3];
@@ -336,7 +336,7 @@ encapsulated package Import
       redeclare Real D[ny,nu]) "= model linearized at initial point";
 
     protected
-    Real ABCD[nx + ny,nx + nu]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
+    Real ABCD[nx + ny,nx + nu] = Modelica.Utilities.Streams.readRealMatrix(
           fileName,
           matrixName,
           nx + ny,

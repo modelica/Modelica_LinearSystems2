@@ -4194,8 +4194,9 @@ processing.
       //Whenever this function becomes operational the code must be
       // rewritten if fromFile_pc2 and fromFile_zp2 are in the 'constructor'
 
-      zp := if ZerosAndPoles.Internal.checkRepresentation(fileName) then ZerosAndPoles.Internal.fromFile_zp( fileName) else ZerosAndPoles.Internal.fromFile_pc(
-        fileName);
+      zp := if ZerosAndPoles.Internal.checkRepresentation(fileName) then
+        ZerosAndPoles.Internal.fromFile_zp(fileName) else
+        ZerosAndPoles.Internal.fromFile_pc(fileName);
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
@@ -6460,6 +6461,7 @@ int found=0;
   encapsulated function fromFile_pc
     "Generate a ZerosAndPoles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
     import Modelica;
+    import Modelica.Utilities.Streams;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -6495,57 +6497,39 @@ int found=0;
     Integer d1_2=if d1 > 0 then 1 else 0 "second dimension of d1-matrix";
     Integer d2_2=if d2 > 0 then 2 else 0 "second dimension of d2-matrix";
 
-    Real k=scalar(readMatrix(
-          fileName,
-          "k",
-          1,
-          1));
-    Real n1Vector[n1]=vector(readMatrix(
-          fileName,
-          "n1",
-          n1,
-          n1_2)) "coefficients of first order numenator polynomials";
-    Real n2Matrix[n2,n2_2]=readMatrix(
-          fileName,
-          "n2",
-          n2,
-          n2_2) "coefficients of second order denominator polynomials";
-    Real d1Vector[d1]=vector(readMatrix(
-          fileName,
-          "d1",
-          d2,
-          d1_2)) "coefficients of first order denominator polynomials";
-    Real d2Matrix[d2,d2_2]=readMatrix(
-          fileName,
-          "d2",
-          d2,
-          d2_2) "coefficients of second order numenator polynomials";
+    Real k = scalar(Streams.readRealMatrix(fileName, "k", 1, 1));
+    Real n1Vector[n1] = vector(Streams.readRealMatrix(fileName, "n1", n1, n1_2))
+      "Coefficients of first order numenator polynomials";
+    Real n2Matrix[n2,n2_2] = Streams.readRealMatrix(fileName, "n2", n2, n2_2)
+      "Coefficients of second order denominator polynomials";
+    Real d1Vector[d1] = vector(Streams.readRealMatrix(fileName, "d1", d2, d1_2))
+      "Coefficients of first order denominator polynomials";
+    Real d2Matrix[d2,d2_2] = Streams.readRealMatrix(fileName, "d2", d2, d2_2)
+      "Coefficients of second order numenator polynomials";
 
   algorithm
     zp.k := k;
     zp.n1 := if n1 > 0 then n1Vector else fill(0, 0);
-    zp.n2 := if n2 > 0 then n2Matrix else fill(
-        0,
-        0,
-        2);
+    zp.n2 := if n2 > 0 then n2Matrix else fill(0, 0, 2);
     zp.d1 := if d1 > 0 then d1Vector else fill(0, 0);
-    zp.d2 := if d2 > 0 then d2Matrix else fill(
-        0,
-        0,
-        2);
+    zp.d2 := if d2 > 0 then d2Matrix else fill(0, 0, 2);
 
   end fromFile_pc;
 
   encapsulated function fromFile_zp
     "Generate a ZerosAndPoles data record by reading poles and zeros from a file (default file name is zp.mat)"
 
+    import Modelica.Utilities.Streams;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.ZerosAndPoles;
     import Complex;
 
     input String fileName="zp.mat" "Name of the zeros and poles data file"
-                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="state space system data file")));
+      annotation (
+        Dialog(
+          loadSelector(
+            filter="MAT files (*.mat);; All files (*.*)",
+            caption="state space system data file")));
     protected
     Integer n1n2d1d2[4]=
         ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(fileName);
@@ -6558,35 +6542,19 @@ int found=0;
     public
     output ZerosAndPoles zp(
       n1=fill(0, n1),
-      n2=fill(
-            0,
-            n2,
-            2),
+      n2=fill(0, n2, 2),
       d1=fill(0, d1),
-      d2=fill(
-            0,
-            d2,
-            2));
+      d2=fill(0, d2, 2));
 
     protected
     Integer z_2=if zSize > 0 then 2 else 0 "second dimension of zeros-matrix";
     Integer p_2=if pSize > 0 then 2 else 0 "second dimension of poles-matrix";
 
-    Real k=scalar(readMatrix(
-          fileName,
-          "k",
-          1,
-          1));
-    Real zerosMatrix[zSize,z_2]=readMatrix(
-          fileName,
-          "z",
-          zSize,
-          z_2) "zeros in rows of real parts and imaginary parts";
-    Real polesMatrix[pSize,p_2]=readMatrix(
-          fileName,
-          "p",
-          pSize,
-          p_2) "poles in rows of real parts and imaginary parts";
+    Real k=scalar(readMatrix(fileName, "k", 1, 1));
+    Real zerosMatrix[zSize,z_2] = Streams.readRealMatrix(fileName, "z", zSize, z_2)
+      "Zeros in rows of real parts and imaginary parts";
+    Real polesMatrix[pSize,p_2] = Streams.readRealMatrix(fileName, "p", pSize, p_2)
+      "Poles in rows of real parts and imaginary parts";
     Complex zeros[:]=if zSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
         zerosMatrix[:, 1], zerosMatrix[:, z_2]) else fill(Complex(0), 0);
     Complex poles[:]=if pSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
