@@ -6902,17 +6902,21 @@ function. The solver function is a direct mapping of the Algol 60 procedure
     function numberOfRealZerosAndPoles_pc
       "Generate a zeros and poles data record by reading the polynomial coefficients from a file (default file name is zp.mat)"
       import Modelica;
+      import Modelica.Utilities.Streams;
 
-      input String fileName="pc.mat" "Name of the zeros and poles data file"
-                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="state space system data file")));
+      input String fileName = "pc.mat" "Name of the zeros and poles data file"
+        annotation (
+          Dialog(
+            loadSelector(
+              filter="MAT files (*.mat);; All files (*.*)",
+              caption="State space system data file")));
       output Integer n1n2d1d2[4];
 
     protected
-      Integer n1Size[2]=readMatrixSize(fileName, "n1");
-      Integer n2Size[2]=readMatrixSize(fileName, "n2");
-      Integer d1Size[2]=readMatrixSize(fileName, "d1");
-      Integer d2Size[2]=readMatrixSize(fileName, "d2");
+      Integer n1Size[2] = Streams.readMatrixSize(fileName, "n1");
+      Integer n2Size[2] = Streams.readMatrixSize(fileName, "n2");
+      Integer d1Size[2] = Streams.readMatrixSize(fileName, "d1");
+      Integer d2Size[2] = Streams.readMatrixSize(fileName, "d2");
 
     algorithm
       n1n2d1d2[1] := n1Size[1];

@@ -2638,12 +2638,14 @@ followed by a conversion from sate space to transfer function representation.
 
     encapsulated function readLength
       "Read the number n of coefficients written in a [n,1]-matrix"
-      input String fileName="tf.mat" "Name of the transfer function data file";
-      input String polyName="n"
+      import Modelica.Utilities.Streams;
+
+      input String fileName = "tf.mat" "Name of the transfer function data file";
+      input String polyName = "n"
         "Name of the polynominal (numenator or denominator) coefficients of the transfer function"          annotation(Dialog);
       output Integer result;
     protected
-      Integer polySize[2]=readMatrixSize(fileName, polyName);
+      Integer polySize[2] = Streams.readMatrixSize(fileName, polyName);
 
     algorithm
       result := polySize[2];
