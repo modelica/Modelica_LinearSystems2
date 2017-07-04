@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Internal.Streams;
-function readMatrixInternal "Read matrix matrixName[m,n] from file"
+function readMatrixInternal "OBSOLETE- - use Modelica.Utilities.Streams.readRealMatrix instead: Read matrix matrixName[m,n] from file"
   input String fileName "File name";
   input String matrixName "Matrix name";
   input Integer m "Number of rows";
@@ -36,5 +36,10 @@ void Modelica_LinearSystem2_readMatrixInternal(const char *filename, const char 
 
 <h4>Description</h4>
 <p>Read matrix <code>matrixName</code> from file <code>fileName</code>. The matrix saved in file must be of dimension [m,n].</p>
-</html>"));
+</html>"),
+    Icon(graphics={Ellipse(
+          extent={{-100,100},{100,-100}},
+          lineColor={238,46,47},
+          lineThickness=0.5,
+          pattern=LinePattern.Dash)}));
 end readMatrixInternal;

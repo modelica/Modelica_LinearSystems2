@@ -61,3 +61,11 @@ convertClass("Modelica_LinearSystems2.Utilities.Plot.plot_FFTs_from_directory",
              "Modelica_LinearSystems2.Utilities.Plot.plotFFTs_fromDirectory")
 convertClass("Modelica_LinearSystems2.Utilities.Plot.plot_FFTs_of_model",
              "Modelica_LinearSystems2.Utilities.Plot.plotFFTs_ofModel")
+
+convertClass("Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize",
+             "Modelica.Utilities.Streams.readMatrixSize")
+convertClass("Modelica_LinearSystems2.Internal.Streams.readMatrixInternal",
+             "Modelica.Utilities.Streams.readRealMatrix")
+//convertClass("","")
+//convertClass("","")
+//convertClass("","")
