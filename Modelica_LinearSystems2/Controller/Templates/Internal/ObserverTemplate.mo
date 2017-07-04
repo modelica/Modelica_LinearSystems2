@@ -26,7 +26,7 @@ protected
   parameter Integer n=mn[2];
 
   parameter Real L2[:,:]=if matrixOnFile then
-      Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain(
+    Modelica.Utilities.Streams.readRealMatrix(
       fileName,
       observerMatrixName,
       m,
