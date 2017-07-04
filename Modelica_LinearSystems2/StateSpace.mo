@@ -9590,44 +9590,43 @@ subsystem.D = ss.D[outputIndex, inputIndex];
       "Read a StateSpace data record from mat-file"
 
       import Modelica;
+      import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
 
-      input String fileName="dslin.mat"
-        "Name of the state space system data file" annotation (Dialog(
-            loadSelector(filter="MAT files (*.mat);; All files (*.*)", caption=
-                "State space system data file")));
-      input String matrixName="ABCD"
+      input String fileName = "dslin.mat" "Name of the state space system data file"
+        annotation (
+          Dialog(
+            loadSelector(
+              filter="MAT files (*.mat);; All files (*.*)",
+              caption="State space system data file")));
+      input String matrixName = "ABCD"
         "Name of the state space system matrix (default is \"ABCD\") in the fileName"
         annotation (Dialog);
     protected
-      Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
-      Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
-      Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
-      Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
+      Integer xuy[3] = StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+      Integer nx = xuy[1] annotation(__Dymola_allowForSize=true);
+      Integer nu = xuy[2] annotation(__Dymola_allowForSize=true);
+      Integer ny = xuy[3] annotation(__Dymola_allowForSize=true);
 
     public
       output StateSpace result(
         redeclare Real A[nx, nx],
         redeclare Real B[nx, nu],
         redeclare Real C[ny, nx],
-        redeclare Real D[ny, nu]) "Outputs model read from file";
+        redeclare Real D[ny, nu]) "Model read from file";
 
     protected
-      Real ABCD[nx + ny, nx + nu]=
-          Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
-              fileName,
-              matrixName,
-              nx + ny,
-              nx + nu);
+      Real ABCD[nx + ny, nx + nu] = Streams.readRealMatrix(
+        fileName, matrixName, nx + ny, nx + nu);
 
     algorithm
       result.A := ABCD[1:nx, 1:nx];
       result.B := ABCD[1:nx, nx + 1:nx + nu];
       result.C := ABCD[nx + 1:nx + ny, 1:nx];
       result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-      Modelica.Utilities.Streams.print(
-        "State space record loaded from file: \"" + Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+      Streams.print("State space record loaded from file: \"" +
+        Modelica.Utilities.Files.fullPathName(fileName) + "\"");
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>

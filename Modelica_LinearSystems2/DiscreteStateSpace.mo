@@ -3372,21 +3372,25 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
 
   encapsulated function fromFile
       "Read a DiscreteStateSpace data record from mat-file"
+    import Modelica;
+    import Modelica.Utilities.Streams;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2;
 
-      import Modelica;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2;
-
-    input String fileName="dslin.mat"
-        "Name of the state space system data file"     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                        caption="state space system data file")));
-    input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
+    input String fileName = "dslin.mat" "Name of the state space system data file"
+      annotation (
+        Dialog(
+          loadSelector(
+            filter="MAT files (*.mat);; All files (*.*)",
+            caption="State space system data file")));
+    input String matrixName = "ABCD"
+      "Name of the state space system matrix" annotation(Dialog);
     protected
-    Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
-    Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
-    Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
-    Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
+    Integer xuy[3] = StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+    Integer nx = xuy[1] annotation(__Dymola_allowForSize=true);
+    Integer nu = xuy[2] annotation(__Dymola_allowForSize=true);
+    Integer ny = xuy[3] annotation(__Dymola_allowForSize=true);
 
     public
     output DiscreteStateSpace result(
@@ -3394,24 +3398,13 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
       redeclare Real B[nx,nu],
       redeclare Real B2[nx,nu],
       redeclare Real C[ny,nx],
-      redeclare Real D[ny,nu]) "= model linearized at initial point";
+      redeclare Real D[ny,nu]) "Model linearized at initial point";
 
     protected
-    Real ABCD[nx + ny,nx + nu]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
-        fileName,
-        matrixName,
-        nx + ny,
-        nx + nu);
-    Real B2[nx,nu]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
-        fileName,
-        "B2",
-        nx,
-        nu);
-    Real Ts[1,1]=readMatrix(
-        fileName,
-        "Ts",
-        1,
-        1);
+    Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(
+      fileName, matrixName, nx + ny, nx + nu);
+    Real B2[nx,nu] = Streams.readRealMatrix(fileName, "B2", nx, nu);
+    Real Ts[1,1] = readMatrix(fileName, "Ts", 1, 1);
 
   algorithm
     result.A := ABCD[1:nx, 1:nx];
@@ -3420,7 +3413,7 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
     result.C := ABCD[nx + 1:nx + ny, 1:nx];
     result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
     result.Ts := scalar(Ts);
-    Modelica.Utilities.Streams.print("StateSpace record loaded from file: \"" +
+    Streams.print("StateSpace record loaded from file: \"" +
       Modelica.Utilities.Files.fullPathName(fileName) + "\"");
 
     annotation (Documentation(info="<html>
