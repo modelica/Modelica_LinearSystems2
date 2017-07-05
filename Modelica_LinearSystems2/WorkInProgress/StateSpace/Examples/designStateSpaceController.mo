@@ -3,11 +3,11 @@ function designStateSpaceController
   "Demonstration of controller design for a state space system"
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2;
-  import Complex;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.StateSpace;
+  import Complex;
 
   input StateSpace ss=StateSpace(
       A=[0,1,0,0; 0,0,39.2,0; 0,0,0,1; 0,0,-49.0,0],

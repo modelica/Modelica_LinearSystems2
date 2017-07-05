@@ -239,6 +239,8 @@ over the load inertia <b>Jload</b>:
 
   function linearize2
     "Linearize a model after simulation up to a given time and return only the A matrix"
+    import Modelica.Utilities.Streams;
+
     input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
     input Modelica.SIunits.Time t_linearize= 0
       "Simulate until t_linearize and then linearize" annotation(Dialog);
@@ -260,12 +262,12 @@ over the load inertia <b>Jload</b>:
     Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
 
     // Read linear system from file
-    Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
-    Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+    Real nxMat[1,1]=Streams.readRealMatrix(fileName2, "nx", 1, 1);
+    Integer ABCDsizes[2]=Streams.readMatrixSize(fileName2, "ABCD");
     Integer nx=integer(nxMat[1, 1]);
     Integer nu=ABCDsizes[2] - nx;
     Integer ny=ABCDsizes[1] - nx;
-    Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+    Real ABCD[nx + ny,nx + nu]=Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
   public
     output Real A[nx,nx] =  ABCD[1:nx, 1:nx] "A-matrix";
   algorithm

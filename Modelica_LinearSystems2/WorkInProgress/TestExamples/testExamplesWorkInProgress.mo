@@ -14,9 +14,9 @@ algorithm
   Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples.analysis2();
   Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples.plotBodeSISODiscrete();
   Modelica_LinearSystems2.WorkInProgress.TransferFunction.Examples.plotBodeDiscrete();
-  Modelica_LinearSystems2.WorkInProgress.Tests.Examples.SimpleDrive_SISO();
-  Modelica_LinearSystems2.WorkInProgress.Tests.Examples.Motor();
-  Modelica_LinearSystems2.WorkInProgress.Tests.Examples.SimpleStateSpaceSystem();
+  simulateModel("Modelica_LinearSystems2.WorkInProgress.Tests.Examples.SimpleDrive_SISO");
+  simulateModel("Modelica_LinearSystems2.WorkInProgress.Tests.Examples.Motor");
+  simulateModel("Modelica_LinearSystems2.WorkInProgress.Tests.Examples.SimpleStateSpaceSystem");
 
   Modelica.Utilities.Streams.print("testExamplesWorkInProgress done!");
 end testExamplesWorkInProgress;

@@ -2407,8 +2407,8 @@ and results in
     input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
     input Boolean phase=true "= true, to plot phase" annotation(choices(checkBox=true));
 
-    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
-      defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(
+    extends Internal.PartialPlotFunction(
+      defaultDiagram=Internal.DefaultDiagramBodePlot(
         heading="Bode plot: " + String(zp)));
 
     input Boolean Hz=true
@@ -2472,10 +2472,10 @@ and results in
 
       // Convert to other units, if required
       if not Hz then
-         f[i] := w[i];
+        f[i] := w[i];
       end if;
       if dB then
-         A[i] := 20*log10(A[i]);
+        A[i] := 20*log10(A[i]);
       end if;
     end for;
 
@@ -2491,10 +2491,10 @@ and results in
       diagram2[i].curve := {curves[i]};
       diagram2[i].yLabel := if dB then "magnitude [dB]" else "magnitude";
       if phase then
-         diagram2[i].xLabel:="";
+        diagram2[i].xLabel:="";
       end if;
       if dB then
-         diagram2[i].logY := false;
+        diagram2[i].logY := false;
       end if;
     end if;
 
@@ -2523,13 +2523,13 @@ and results in
     end if;
 
     if onFile then
-       fAp :=[f,A,phi];
-       Modelica.Utilities.Files.removeFile(fileName);
-       success:=writeMatrix(fileName,matrixName,fAp,append=false);
-       if success then
-          Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
-                   Modelica.Utilities.Files.fullPathName(fileName) + "\"");
-       end if;
+      fAp :=[f,A,phi];
+      Modelica.Utilities.Files.removeFile(fileName);
+      success:=Modelica.Utilities.Streams.writeRealMatrix(fileName,matrixName,fAp,append=false);
+      if success then
+        Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
+          Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+      end if;
     end if;
 
     annotation (__Dymola_interactive=true, Documentation(info="<html>
@@ -4194,8 +4194,9 @@ processing.
       //Whenever this function becomes operational the code must be
       // rewritten if fromFile_pc2 and fromFile_zp2 are in the 'constructor'
 
-      zp := if ZerosAndPoles.Internal.checkRepresentation(fileName) then ZerosAndPoles.Internal.fromFile_zp( fileName) else ZerosAndPoles.Internal.fromFile_pc(
-        fileName);
+      zp := if ZerosAndPoles.Internal.checkRepresentation(fileName) then
+        ZerosAndPoles.Internal.fromFile_zp(fileName) else
+        ZerosAndPoles.Internal.fromFile_pc(fileName);
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
@@ -4221,41 +4222,38 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
       "Generate a ZerosAndPoles data record from a state space representation resulted from linearization of a model"
 
       import Modelica;
+      import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
       input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
-      input Real T_linearize=0
-        "point in time of simulation to linearize the model";
-      input String fileName="dslin" "Name of the result file";
+      input Real T_linearize = 0
+        "Point in time of simulation to linearize the model";
+      input String fileName = "dslin" "Name of the result file";
 
     protected
-      String fileName2=fileName + ".mat";
-      Boolean OK1=simulateModel(
+      String fileName2 = fileName + ".mat";
+      Boolean OK1 = simulateModel(
             problem=modelName,
             startTime=0,
             stopTime=T_linearize);
-      Boolean OK2=importInitial("dsfinal.txt");
-      Boolean OK3=linearizeModel(
+      Boolean OK2 = importInitial("dsfinal.txt");
+      Boolean OK3 = linearizeModel(
             problem=modelName,
             resultFile=fileName,
             startTime=T_linearize,
             stopTime=T_linearize + 1);
-      Real nxMat[1,1]=readMatrix(
-            fileName2,
-            "nx",
-            1,
-            1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
-      Integer nx=integer(nxMat[1, 1]);
-      Integer nu=ABCDsizes[2] - nx;
-      Integer ny=ABCDsizes[1] - nx;
-      Real ABCD[nx + ny,nx + nu]=readMatrix(
+      Real nxMat[1,1] = Streams.readRealMatrix(fileName2, "nx", 1, 1);
+      Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
+      Integer nx = integer(nxMat[1, 1]);
+      Integer nu = ABCDsizes[2] - nx;
+      Integer ny = ABCDsizes[1] - nx;
+      Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(
             fileName2,
             "ABCD",
             nx + ny,
             nx + nu);
-      String xuyName[nx + nu + ny]=readStringMatrix(
+      String xuyName[nx + nu + ny] = readStringMatrix(
             fileName2,
             "xuyName",
             nx + nu + ny);
@@ -4264,7 +4262,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
         redeclare Real A[nx,nx],
         redeclare Real B[nx,nu],
         redeclare Real C[ny,nx],
-        redeclare Real D[ny,nu]) "= model linearized at initial point";
+        redeclare Real D[ny,nu]) "Model linearized at initial point";
     public
       output ZerosAndPoles zp[:,:];
     algorithm
@@ -6460,6 +6458,7 @@ int found=0;
   encapsulated function fromFile_pc
     "Generate a ZerosAndPoles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
     import Modelica;
+    import Modelica.Utilities.Streams;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -6495,57 +6494,39 @@ int found=0;
     Integer d1_2=if d1 > 0 then 1 else 0 "second dimension of d1-matrix";
     Integer d2_2=if d2 > 0 then 2 else 0 "second dimension of d2-matrix";
 
-    Real k=scalar(readMatrix(
-          fileName,
-          "k",
-          1,
-          1));
-    Real n1Vector[n1]=vector(readMatrix(
-          fileName,
-          "n1",
-          n1,
-          n1_2)) "coefficients of first order numenator polynomials";
-    Real n2Matrix[n2,n2_2]=readMatrix(
-          fileName,
-          "n2",
-          n2,
-          n2_2) "coefficients of second order denominator polynomials";
-    Real d1Vector[d1]=vector(readMatrix(
-          fileName,
-          "d1",
-          d2,
-          d1_2)) "coefficients of first order denominator polynomials";
-    Real d2Matrix[d2,d2_2]=readMatrix(
-          fileName,
-          "d2",
-          d2,
-          d2_2) "coefficients of second order numenator polynomials";
+    Real k = scalar(Streams.readRealMatrix(fileName, "k", 1, 1));
+    Real n1Vector[n1] = vector(Streams.readRealMatrix(fileName, "n1", n1, n1_2))
+      "Coefficients of first order numenator polynomials";
+    Real n2Matrix[n2,n2_2] = Streams.readRealMatrix(fileName, "n2", n2, n2_2)
+      "Coefficients of second order denominator polynomials";
+    Real d1Vector[d1] = vector(Streams.readRealMatrix(fileName, "d1", d2, d1_2))
+      "Coefficients of first order denominator polynomials";
+    Real d2Matrix[d2,d2_2] = Streams.readRealMatrix(fileName, "d2", d2, d2_2)
+      "Coefficients of second order numenator polynomials";
 
   algorithm
     zp.k := k;
     zp.n1 := if n1 > 0 then n1Vector else fill(0, 0);
-    zp.n2 := if n2 > 0 then n2Matrix else fill(
-        0,
-        0,
-        2);
+    zp.n2 := if n2 > 0 then n2Matrix else fill(0, 0, 2);
     zp.d1 := if d1 > 0 then d1Vector else fill(0, 0);
-    zp.d2 := if d2 > 0 then d2Matrix else fill(
-        0,
-        0,
-        2);
+    zp.d2 := if d2 > 0 then d2Matrix else fill(0, 0, 2);
 
   end fromFile_pc;
 
   encapsulated function fromFile_zp
     "Generate a ZerosAndPoles data record by reading poles and zeros from a file (default file name is zp.mat)"
 
+    import Modelica.Utilities.Streams;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.ZerosAndPoles;
     import Complex;
 
-    input String fileName="zp.mat" "Name of the zeros and poles data file"
-                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="state space system data file")));
+    input String fileName = "zp.mat" "Name of the zeros and poles data file"
+      annotation (
+        Dialog(
+          loadSelector(
+            filter="MAT files (*.mat);; All files (*.*)",
+            caption="state space system data file")));
     protected
     Integer n1n2d1d2[4]=
         ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(fileName);
@@ -6558,35 +6539,19 @@ int found=0;
     public
     output ZerosAndPoles zp(
       n1=fill(0, n1),
-      n2=fill(
-            0,
-            n2,
-            2),
+      n2=fill(0, n2, 2),
       d1=fill(0, d1),
-      d2=fill(
-            0,
-            d2,
-            2));
+      d2=fill(0, d2, 2));
 
     protected
-    Integer z_2=if zSize > 0 then 2 else 0 "second dimension of zeros-matrix";
-    Integer p_2=if pSize > 0 then 2 else 0 "second dimension of poles-matrix";
+    Integer z_2 = if zSize > 0 then 2 else 0 "second dimension of zeros-matrix";
+    Integer p_2 = if pSize > 0 then 2 else 0 "second dimension of poles-matrix";
 
-    Real k=scalar(readMatrix(
-          fileName,
-          "k",
-          1,
-          1));
-    Real zerosMatrix[zSize,z_2]=readMatrix(
-          fileName,
-          "z",
-          zSize,
-          z_2) "zeros in rows of real parts and imaginary parts";
-    Real polesMatrix[pSize,p_2]=readMatrix(
-          fileName,
-          "p",
-          pSize,
-          p_2) "poles in rows of real parts and imaginary parts";
+    Real k = scalar(Streams.readRealMatrix(fileName, "k", 1, 1));
+    Real zerosMatrix[zSize,z_2] = Streams.readRealMatrix(fileName, "z", zSize, z_2)
+      "Zeros in rows of real parts and imaginary parts";
+    Real polesMatrix[pSize,p_2] = Streams.readRealMatrix(fileName, "p", pSize, p_2)
+      "Poles in rows of real parts and imaginary parts";
     Complex zeros[:]=if zSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
         zerosMatrix[:, 1], zerosMatrix[:, z_2]) else fill(Complex(0), 0);
     Complex poles[:]=if pSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
@@ -6937,17 +6902,21 @@ function. The solver function is a direct mapping of the Algol 60 procedure
     function numberOfRealZerosAndPoles_pc
       "Generate a zeros and poles data record by reading the polynomial coefficients from a file (default file name is zp.mat)"
       import Modelica;
+      import Modelica.Utilities.Streams;
 
-      input String fileName="pc.mat" "Name of the zeros and poles data file"
-                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="state space system data file")));
+      input String fileName = "pc.mat" "Name of the zeros and poles data file"
+        annotation (
+          Dialog(
+            loadSelector(
+              filter="MAT files (*.mat);; All files (*.*)",
+              caption="State space system data file")));
       output Integer n1n2d1d2[4];
 
     protected
-      Integer n1Size[2]=readMatrixSize(fileName, "n1");
-      Integer n2Size[2]=readMatrixSize(fileName, "n2");
-      Integer d1Size[2]=readMatrixSize(fileName, "d1");
-      Integer d2Size[2]=readMatrixSize(fileName, "d2");
+      Integer n1Size[2] = Streams.readMatrixSize(fileName, "n1");
+      Integer n2Size[2] = Streams.readMatrixSize(fileName, "n2");
+      Integer d1Size[2] = Streams.readMatrixSize(fileName, "d1");
+      Integer d2Size[2] = Streams.readMatrixSize(fileName, "d2");
 
     algorithm
       n1n2d1d2[1] := n1Size[1];
@@ -6960,6 +6929,7 @@ function. The solver function is a direct mapping of the Algol 60 procedure
     function numberOfRealZerosAndPoles_zp
       "Get the number of first oder polynomials (n1, d1) and second order polynomials (n2, d2) of zeros and poles from zeros and poles written in a MAT-file"
 
+      import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2.DataDir;
       import Modelica_LinearSystems2.Internal;
 
@@ -6974,15 +6944,15 @@ function. The solver function is a direct mapping of the Algol 60 procedure
       Integer n1;
       Integer d1;
 
-      Integer zSize[2]=readMatrixSize(fileName, "z");
-      Integer pSize[2]=readMatrixSize(fileName, "p");
+      Integer zSize[2] = Streams.readMatrixSize(fileName, "z");
+      Integer pSize[2] = Streams.readMatrixSize(fileName, "p");
 
-      Real zerosMatrix[zSize[1],zSize[2]]=readMatrix(
+      Real zerosMatrix[zSize[1],zSize[2]] = Streams.readRealMatrix(
               fileName,
               "z",
               zSize[1],
               zSize[2]) "zeros in rows of real parts and imaginary parts";
-      Real polesMatrix[pSize[1],pSize[2]]=readMatrix(
+      Real polesMatrix[pSize[1],pSize[2]] = Streams.readRealMatrix(
               fileName,
               "p",
               pSize[1],

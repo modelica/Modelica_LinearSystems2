@@ -54,19 +54,20 @@ record DiscreteTransferFunction
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
-      input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex z[:]=fill(Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
-      input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex p[:]=fill(Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
       input Modelica.SIunits.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
-      output DiscreteTransferFunction dtf(redeclare Real n[size(z, 1)+1], redeclare Real
-               d[                                                                          size(p, 1)+1])
+      output DiscreteTransferFunction dtf(
+        redeclare Real n[size(z, 1)+1],
+        redeclare Real d[size(p, 1)+1])
         "TransferFunction built by ZerosAndPoles object";
 
     protected
@@ -465,15 +466,14 @@ end Analysis;
 encapsulated package Conversion
 
 encapsulated function toDiscreteZerosAndPoles
-      "Generate a DiscreteZerosAndPoles object from a DiscreteTransferFunction object"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-      import
-        Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Math.Complex;
+  "Generate a DiscreteZerosAndPoles object from a DiscreteTransferFunction object"
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+  import Modelica_LinearSystems2.TransferFunction;
+  import Complex;
 
   input DiscreteTransferFunction dtf "transfer function of a system";
   output DiscreteZerosAndPoles dzp(

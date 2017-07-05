@@ -19,8 +19,10 @@ function plotFFT_fromFile "Plot amplitudes of FFT results (from result file)"
     "= true, if directory path should be contained in the plot title, otherwise just file name"
     annotation(choices(checkBox=true));
 protected
-  Integer dims[2] = readMatrixSize(fileName,"FFT") "Dimension of FFT matrix in file";
-  Real fA[:,:] = readMatrix(fileName, "FFT", dims[1], dims[2]) "Frequency and amplitude";
+  Integer dims[2] = Modelica.Utilities.Streams.readMatrixSize(fileName,"FFT")
+    "Dimension of FFT matrix in file";
+  Real fA[:,:] = Modelica.Utilities.Streams.readRealMatrix(fileName, "FFT", dims[1], dims[2])
+    "Frequency and amplitude";
   String splitPath[3] "fileName splitted into directory, file name and extension";
   String fileNamePrint "Name of file to be contained in plot title";
 algorithm
