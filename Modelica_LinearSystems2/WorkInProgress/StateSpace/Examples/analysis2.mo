@@ -68,7 +68,7 @@ algorithm
   ok := false;
   StateSpace.Analysis.analysis(ss, fileName="analysis.html", analyseOptions=analyseOptions, description="Description of the system");
   (eigvec,eigval) := Modelica_LinearSystems2.StateSpace.Analysis.eigenVectors(ss, false);
-  Complex.Vectors.print("eval",eigval);
+  Modelica_LinearSystems2.Math.Complex.Vectors.print("eval",eigval);
   Modelica_LinearSystems2.Math.Matrices.printMatrix(eigvec, 6, "leftEigenVectors");
 
   i := 1;

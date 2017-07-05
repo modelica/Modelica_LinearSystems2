@@ -75,7 +75,7 @@ isObservable := StateSpace.Analysis.isObservable(ssPlant);
     end if;
 
  print("The eigenvalues are:\n");
-Complex.Vectors.print("p",p);
+  Modelica_LinearSystems2.Math.Complex.Vectors.print("p",p);
 
   //####### POLE ASSIGNMENT ##########
 
