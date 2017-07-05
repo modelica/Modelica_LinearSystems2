@@ -3,7 +3,6 @@ function designStateSpaceController
   "Demonstration of controller design for a state space system"
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2;
- // import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
@@ -20,7 +19,7 @@ function designStateSpaceController
       xNames={"s","v","phi","w"});
 
   input Complex pa[:]={Complex(-1,0),Complex(-2,0),Complex(-2, -0.2),Complex(-2,0.2)}
-    "assigned poles";
+    "Assigned poles";
 
   output Real K_pa[:,:] "feedback matrix pole assigment controller";
   output Real M_pa[:,:] "pre filter pole assignment controller";
