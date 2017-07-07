@@ -3,8 +3,9 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.3.4) - Analy
 
   extends Modelica.Icons.Package;
 
-  constant String DataDir=classDirectory() +  "Resources/Data/"
-  "Absolute path to directory containing utilitiy files for this package";
+  constant String DataDir=
+    Modelica.Utilities.Files.loadResource("modelica://Modelica_LinearSystems2/Resources/Data/")
+    "Absolute path to directory containing utilitiy files for this package";
 
 
 annotation (

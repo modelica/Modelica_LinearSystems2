@@ -875,9 +875,10 @@ a vector of Complex elements.
 
   encapsulated package Internal
     "Internal library of record Polynomial (should not be directly used by user)"
+    extends Modelica.Icons.InternalPackage;
+
     import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
-    extends Modelica.Icons.Package;
 
     function mult
       "Multiply two polynomials (polynomials are defined by vectors)"

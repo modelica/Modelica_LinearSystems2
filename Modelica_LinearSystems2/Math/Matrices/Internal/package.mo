@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices;
 package Internal "Package of internal functions operating on matrices (for advanced users only)"
-  extends Modelica.Icons.Package;
+  extends Modelica.Icons.InternalPackage;
 
 
   annotation (Documentation(info="<html>

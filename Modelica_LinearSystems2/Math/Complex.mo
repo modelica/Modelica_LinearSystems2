@@ -508,7 +508,7 @@ inputs and the number of outputs must be identical.
 
   encapsulated package Internal
     "Package of internal functions operating on complex number (for advanced users only)"
-    extends Modelica.Icons.Package;
+    extends Modelica.Icons.InternalPackage;
     import Modelica;
 
     function eigenValues_dhseqr

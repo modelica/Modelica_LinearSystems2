@@ -4312,7 +4312,7 @@ followed by a conversion from sate space to transfer function representation.
 
   encapsulated package Internal
     "Package of internal material of record ZerosAndPoles (for advanced users only)"
-    extends Modelica.Icons.Package;
+    extends Modelica.Icons.InternalPackage;
 
     import Modelica;
     import Modelica_LinearSystems2;

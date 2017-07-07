@@ -736,10 +736,13 @@ end bodeSISO;
 end Plot;
 
 encapsulated package Internal
-    import Modelica_LinearSystems2;
+  extends Modelica.Icons.InternalPackage;
+  import Modelica;
+  import Modelica_LinearSystems2;
+
 function kfStepMatrices
-      "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
-extends Modelica.Icons.Function;
+  "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
+  extends Modelica.Icons.Function;
 
       import Modelica;
       import Modelica_LinearSystems2;

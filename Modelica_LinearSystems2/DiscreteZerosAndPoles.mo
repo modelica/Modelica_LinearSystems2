@@ -2632,11 +2632,11 @@ transfer function representation.
 
   encapsulated package Internal
     "Package of internal material of record DiscreteZerosAndPoles (for advanced users only)"
+    extends Modelica.Icons.InternalPackage;
 
     import Modelica;
     import Modelica_LinearSystems2;
-    extends Modelica.Icons.Package;
-
+  
     function numberOfRealZeros2 "Calculate number of real zeros"
       import Modelica;
       import Modelica_LinearSystems2.Internal;

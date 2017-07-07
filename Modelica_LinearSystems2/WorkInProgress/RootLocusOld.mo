@@ -282,7 +282,7 @@ but returns only the A-matrix.
   end linearize2;
 
   package Types "Package of type definitions"
-    extends Modelica.Icons.Package;
+    extends Modelica.Icons.TypesPackage;
 
     type MarkerStyles = enumeration(
         Cross "Cross",
