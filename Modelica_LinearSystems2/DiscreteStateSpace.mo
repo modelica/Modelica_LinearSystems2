@@ -3598,9 +3598,9 @@ ss.B2  = [0.000437113227802044;
 
   encapsulated package Internal
     "Package of internal material of record DiscreteStateSpace (for advanced users only)"
+    extends Modelica.Icons.InternalPackage;
     import Modelica;
-    extends Modelica.Icons.Package;
-
+    
     function timeResponseSamples
       "Estimate reasonable discretisation sample time and simulation time span for time response plot"
       import Modelica;

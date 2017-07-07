@@ -9771,9 +9771,10 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
 
   encapsulated package Internal
     "Package of internal material of record StateSpace (for advanced users only)"
+    extends Modelica.Icons.InternalPackage;
+
     import Modelica;
     import Modelica_LinearSystems2;
-    extends Modelica.Icons.Package;
 
     encapsulated function assignOneOrTwoPoles
       "Algorithm to assign p (p = 1 or 2) eigenvalues"

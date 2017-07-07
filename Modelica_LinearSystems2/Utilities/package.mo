@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2;
 package Utilities "Package of utility elements used in the library"
-  extends Modelica.Icons.Package;
+  extends Modelica.Icons.UtilitiesPackage;
 
 
   annotation (Documentation(info="<html>

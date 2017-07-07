@@ -2633,8 +2633,8 @@ followed by a conversion from sate space to transfer function representation.
 
   encapsulated package Internal
     "Package of internal material of record TransferFunction (for advanced users only)"
+    extends Modelica.Icons.InternalPackage;
     import Modelica;
-    extends Modelica.Icons.Package;
 
     encapsulated function readLength
       "Read the number n of coefficients written in a [n,1]-matrix"

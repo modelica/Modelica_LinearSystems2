@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.StateSpace;
 package Internal "Package of internal utilities of state space systems (for advanced users only)"
+  extends Modelica.Icons.InternalPackage;
 
 
 

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Controller;
 package Types "Package of type definitions"
-  extends Modelica.Icons.Package;
+  extends Modelica.Icons.TypesPackage;
 
 
   annotation (

@@ -1456,10 +1456,10 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
   encapsulated package Internal
     "Internal library of record Filter (should not be directly used by user)"
+    extends Modelica.Icons.InternalPackage;
 
     import Modelica;
     import Modelica_LinearSystems2;
-    extends Modelica.Icons.Package;
 
     function numberOfRealZeros2 "Calculate number of real zeros"
       import Modelica;
