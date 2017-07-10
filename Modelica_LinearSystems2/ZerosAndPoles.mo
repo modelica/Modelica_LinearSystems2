@@ -4243,9 +4243,8 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
             resultFile=fileName,
             startTime=T_linearize,
             stopTime=T_linearize + 1);
-      Real nxMat[1,1] = Streams.readRealMatrix(fileName2, "nx", 1, 1);
       Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
-      Integer nx = integer(nxMat[1, 1]);
+      Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
       Integer nu = ABCDsizes[2] - nx;
       Integer ny = ABCDsizes[1] - nx;
       Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(
