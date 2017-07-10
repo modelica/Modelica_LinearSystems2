@@ -29,6 +29,7 @@ model limIntegrator "linIntegrator"
 
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{-8,-74},{12,-54}})));
+  Modelica_LinearSystems2.WorkInProgress.Controller.LimIntegratorReset integratorXX annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
 equation
   connect(sine.y, limIntegrator.u) annotation (Line(
       points={{-59,10},{-2,10}},
@@ -43,15 +44,15 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(integratorXX.u, sine.y) annotation (Line(
-      points={{22,-38},{-22,-38},{-22,10},{-59,10}},
+      points={{-2,-30},{-22,-30},{-22,10},{-59,10}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(integratorXX.lowerLimit, pulse1.y) annotation (Line(
-      points={{22,-46},{-22,-46},{-22,-30},{-59,-30}},
+      points={{-2,-38},{-22,-38},{-22,-30},{-59,-30}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(integratorXX.upperLimit, pulse.y) annotation (Line(
-      points={{22,-30},{-20,-30},{-20,50},{-59,50}},
+      points={{-2,-22},{-20,-22},{-20,50},{-59,50}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
