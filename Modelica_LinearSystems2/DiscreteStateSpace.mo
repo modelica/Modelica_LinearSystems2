@@ -3478,6 +3478,7 @@ The file must contain
       "Generate a DiscreteStateSpace data record by linearization of a modelica model"
 
       import Modelica;
+      import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.DiscreteStateSpace;
@@ -3503,12 +3504,11 @@ The file must contain
       startTime=T_linearize,
       stopTime=T_linearize + 3*Ts);
 
-      Real nxMat[1,1] = Modelica.Utilities.Streams.readRealMatrix(fileName2, "nx", 1, 1);
-      Integer ABCDsizes[2] = Modelica.Utilities.Streams.readMatrixSize(fileName2, "ABCD");
-      Integer nx = integer(nxMat[1, 1]);
+      Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
+      Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
       Integer nu = ABCDsizes[2] - nx;
       Integer ny = ABCDsizes[1] - nx;
-      Real ABCD[nx + ny,nx + nu] = Modelica.Utilities.Streams.readRealMatrix(
+      Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(
         fileName2, "ABCD", nx + ny, nx + nu);
       String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
@@ -3600,7 +3600,7 @@ ss.B2  = [0.000437113227802044;
     "Package of internal material of record DiscreteStateSpace (for advanced users only)"
     extends Modelica.Icons.InternalPackage;
     import Modelica;
-    
+
     function timeResponseSamples
       "Estimate reasonable discretisation sample time and simulation time span for time response plot"
       import Modelica;

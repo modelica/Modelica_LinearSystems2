@@ -2509,9 +2509,8 @@ The variable k is the real gain in both cases.
     Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
     Boolean OK2 = importInitial("dsfinal.txt");
     Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
-    Real nxMat[1,1] = Streams.readRealMatrix(fileName2, "nx", 1, 1);
     Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
-    Integer nx = integer(nxMat[1, 1]);
+    Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
     Integer nu = ABCDsizes[2] - nx;
     Integer ny = ABCDsizes[1] - nx;
     Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
@@ -2636,7 +2635,7 @@ transfer function representation.
 
     import Modelica;
     import Modelica_LinearSystems2;
-  
+
     function numberOfRealZeros2 "Calculate number of real zeros"
       import Modelica;
       import Modelica_LinearSystems2.Internal;

@@ -9686,13 +9686,8 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
               stopTime=T_linearize + 1,
               method=method);
 
-      Real nxMat[1, 1] = Streams.readRealMatrix(
-              fileName2,
-              "nx",
-              1,
-              1);
       Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
-      Integer nx = integer(nxMat[1, 1]);
+      Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
       Integer nu = ABCDsizes[2] - nx;
       Integer ny = ABCDsizes[1] - nx;
       Real ABCD[nx + ny, nx + nu] = Streams.readRealMatrix(
@@ -11650,9 +11645,8 @@ The uncontrollable poles are checked to to stable.
 
       output Integer nu;
     protected
-      Real nxMat[1, 1] = Streams.readRealMatrix(fileName, "nx", 1, 1);
       Integer ABCDsizes[2] = Streams.readMatrixSize(fileName, matrixName);
-      Integer nx = integer(nxMat[1, 1]);
+      Integer nx = integer(scalar(Streams.readRealMatrix(fileName, "nx", 1, 1)));
 
     algorithm
       nu := ABCDsizes[2] - nx;
@@ -11668,10 +11662,9 @@ The uncontrollable poles are checked to to stable.
             loadSelector(filter="MAT files (*.mat);; All files (*.*)", caption=
                 "state space system data file")));
       output Integer nx;
-    protected
-      Real nxMat[1, 1] = Streams.readRealMatrix(fileName, "nx", 1, 1);
+
     algorithm
-      nx := integer(nxMat[1, 1]);
+      nx :=integer(scalar(Streams.readRealMatrix(fileName, "nx", 1, 1)));
     end readLength_nx;
 
     encapsulated function readLength_ny
@@ -11688,9 +11681,8 @@ The uncontrollable poles are checked to to stable.
 
       output Integer ny;
     protected
-      Real nxMat[1, 1] = Streams.readRealMatrix(fileName, "nx", 1, 1);
       Integer ABCDsizes[2] = Streams.readMatrixSize(fileName, matrixName);
-      Integer nx = integer(nxMat[1, 1]);
+      Integer nx = integer(scalar(Streams.readRealMatrix(fileName, "nx", 1, 1)));
 
     algorithm
       ny := ABCDsizes[1] - nx;
@@ -12697,13 +12689,8 @@ k = ---------- * ----------------------
     protected
       String fileName2 = fileName + ".mat"
         "Name of the result file with extension";
-      Real nxMat[1, 1] = Streams.readRealMatrix(
-              fileName2,
-              "nx",
-              1,
-              1);
       Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
-      Integer nx = integer(nxMat[1, 1]);
+      Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
       Integer nu = ABCDsizes[2] - nx;
       Integer ny = ABCDsizes[1] - nx;
       Real ABCD[nx + ny, nx + nu] = Streams.readRealMatrix(
