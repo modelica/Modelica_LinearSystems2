@@ -3,7 +3,8 @@ model ControlledSISO1
   extends Modelica.Blocks.Interfaces.SISO;
   parameter Real k=1;
 
-  Controller.ZerosAndPoles zerosAndPoles(system(
+  Controllers.ZerosAndPoles zerosAndPoles(
+    system(
       n2=[2,2; 4,8],
       d2=[20,101; 22,122],
       n1=fill(0.0, 0),
@@ -13,7 +14,7 @@ model ControlledSISO1
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Blocks.Math.Gain gain(k=k)
     annotation (Placement(transformation(extent={{-36,-10},{-16,10}})));
-  inner Controller.SampleClock sampleClock
+  inner Controllers.SampleClock sampleClock
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
 equation
   connect(zerosAndPoles.u, gain.y) annotation (Line(

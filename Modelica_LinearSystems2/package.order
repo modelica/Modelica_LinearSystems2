@@ -7,7 +7,7 @@ TransferFunction
 DiscreteStateSpace
 DiscreteZerosAndPoles
 DiscreteTransferFunction
-Controller
+Controllers
 Math
 Records
 Utilities

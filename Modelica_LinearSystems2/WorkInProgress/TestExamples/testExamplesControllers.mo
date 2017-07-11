@@ -1,17 +1,32 @@
 within Modelica_LinearSystems2.WorkInProgress.TestExamples;
 function testExamplesControllers "Test all examples from package Controllers"
 
+  output Boolean ok "True, if all OK";
 algorithm
-  simulateModel("Modelica_LinearSystems2.Controller.Examples.FirstExample");
-  simulateModel("Modelica_LinearSystems2.Controller.Examples.SimpleControlledDrive");
-  simulateModel("Modelica_LinearSystems2.Controller.Examples.Discretization1");
-  simulateModel("Modelica_LinearSystems2.Controller.Examples.Discretization2");
-  simulateModel("Modelica_LinearSystems2.Controller.Examples.DiscretizationSeries");
-  simulateModel("Modelica_LinearSystems2.Controller.Examples.Interpolator");
-  simulateModel("Modelica_LinearSystems2.Controller.Examples.DoublePendulum");
-  simulateModel("Modelica_LinearSystems2.Controller.Examples.InverseDoublePendulum");
-  simulateModel("Modelica_LinearSystems2.Controller.Examples.InverseDoublePendulumWithObserver");
-  simulateModel("Modelica_LinearSystems2.Controller.Examples.MixingUnit");
+  ok := false;
+  ok := simulateModel("Modelica_LinearSystems2.Controllers.Examples.FirstExample");
+  ok := if ok then simulateModel("Modelica_LinearSystems2.Controllers.Examples.SimpleControlledDrive")
+        else false;
+  ok := if ok then simulateModel("Modelica_LinearSystems2.Controllers.Examples.Discretization1")
+        else false;
+  ok := if ok then simulateModel("Modelica_LinearSystems2.Controllers.Examples.Discretization2")
+        else false;
+  ok := if ok then simulateModel("Modelica_LinearSystems2.Controllers.Examples.DiscretizationSeries")
+        else false;
+  ok := if ok then simulateModel("Modelica_LinearSystems2.Controllers.Examples.Interpolator")
+        else false;
+  ok := if ok then simulateModel("Modelica_LinearSystems2.Controllers.Examples.DoublePendulum")
+        else false;
+  ok := if ok then simulateModel("Modelica_LinearSystems2.Controllers.Examples.InverseDoublePendulum")
+        else false;
+  ok := if ok then simulateModel("Modelica_LinearSystems2.Controllers.Examples.InverseDoublePendulumWithObserver")
+        else false;
+  ok := if ok then simulateModel("Modelica_LinearSystems2.Controllers.Examples.MixingUnit")
+        else false;
 
-  Modelica.Utilities.Streams.print("testExamplesControllers done!");
+  if ok then
+    Modelica.Utilities.Streams.print("testExamplesControllers done!");
+  else
+    Modelica.Utilities.Streams.print("testExamplesControllers FAILED!");
+  end if;
 end testExamplesControllers;

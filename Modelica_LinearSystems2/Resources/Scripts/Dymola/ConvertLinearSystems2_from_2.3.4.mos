@@ -7,6 +7,8 @@ convertClear();
 // Change references to classes that are removed from Modelica_LinearSystems2 or are obsolete
 convertClass("Modelica_LinearSystems2.Types",
              "Modelica_LinearSystems2.Utilities.Types")
+convertClass("Modelica_LinearSystems2.Controller",
+             "Modelica_LinearSystems2.Controllers")
 
 // Convert elemnts for complex math operations
 //convertClass("Modelica_LinearSystems2.Math.Complex","Modelica.ComplexMath")
