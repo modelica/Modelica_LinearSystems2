@@ -4,8 +4,8 @@ block LimIntegrator
   extends Interfaces.PartialSampledBlock;
 
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault;
-  import Modelica_LinearSystems2.Controller.Interfaces;
+  import Modelica_LinearSystems2.Controllers.Types.InitWithGlobalDefault;
+  import Modelica_LinearSystems2.Controllers.Interfaces;
 
   parameter Real k=1 "Integrator gain";
   parameter Boolean withDelay=false
@@ -53,15 +53,15 @@ public
         origin={32,-28},
         extent={{-10,-10},{10,10}},
         rotation=180)));
-  Modelica_LinearSystems2.Controller.Internal.Add add
+  Modelica_LinearSystems2.Controllers.Internal.Add add
     annotation (Placement(transformation(extent={{-20,10},{0,-10}})));
-  Modelica_LinearSystems2.Controller.Sampler sampler1(blockType=blockType,
+  Modelica_LinearSystems2.Controllers.Sampler sampler1(blockType=blockType,
       sampleFactor=sampleFactor)
     annotation (Placement(transformation(extent={{-84,-10},{-64,10}})));
-  Modelica_LinearSystems2.Controller.Sampler sampler2(blockType=blockType,
+  Modelica_LinearSystems2.Controllers.Sampler sampler2(blockType=blockType,
       sampleFactor=sampleFactor)
     annotation (Placement(transformation(extent={{-80,-78},{-60,-58}})));
-  Modelica_LinearSystems2.Controller.Sampler sampler3(sampleFactor=sampleFactor,
+  Modelica_LinearSystems2.Controllers.Sampler sampler3(sampleFactor=sampleFactor,
       blockType=blockType)                            annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
@@ -70,7 +70,7 @@ public
   Modelica.Blocks.Math.Gain gain(k=1/k)
     annotation (Placement(transformation(extent={{12,-38},{-8,-18}})));
 
-  Modelica_LinearSystems2.Controller.UnitDelay unitDelay(blockType=blockType,
+  Modelica_LinearSystems2.Controllers.UnitDelay unitDelay(blockType=blockType,
       sampleFactor=sampleFactor)
     annotation (Placement(transformation(extent={{-20,-38},{-40,-18}})));
   Modelica.Blocks.Math.Abs abs1

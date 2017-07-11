@@ -7,7 +7,7 @@ model limIntegrator "linIntegrator"
     y_start=1.5,
     limitsAtInit=false,
     withDelay=true,
-    initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState)
+    initType=Modelica_LinearSystems2.Controllers.Types.InitWithGlobalDefault.InitialState)
     annotation (Placement(transformation(extent={{0,0},{20,20}})));
   Modelica.Blocks.Sources.Sine sine(freqHz=1, amplitude=5)
     annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
@@ -21,9 +21,9 @@ model limIntegrator "linIntegrator"
     offset=0.5,
     period=0.34)
     annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
-  inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(
-    initType=Modelica_LinearSystems2.Controller.Types.Init.InitialState,
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous,
+  inner Modelica_LinearSystems2.Controllers.SampleClock sampleClock(
+    initType=Modelica_LinearSystems2.Controllers.Types.Init.InitialState,
+    blockType=Modelica_LinearSystems2.Controllers.Types.BlockType.Continuous,
     sampleTime=0.02)
              annotation (Placement(transformation(extent={{54,50},{74,70}})));
 
