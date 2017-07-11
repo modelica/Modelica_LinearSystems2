@@ -10,7 +10,7 @@ function designInverseDoublePendulumControllerWithObserver
   import Complex;
 
   //  input String modelName="Modelica_Controller.Examples.Components.InverseDoublePendulum"  "name of the model to linearize";
-  input String modelName="Modelica_LinearSystems2.Controller.Examples.Components.InverseDoublePendulum"
+  input String modelName="Modelica_LinearSystems2.Controllers.Examples.Components.InverseDoublePendulum"
     "Name of the model to linearize";
 
 //input Complex pa[6]={-1+0*j, -1+0*j, -6-0.2*j,-6+0.2*j,-6-0.2*j,-6+0.2*j}     "assigned poles";

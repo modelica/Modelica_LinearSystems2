@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Controllers.Interfaces;
 partial block PartialSISO2
-  "Partial Single Input Single Output (continuous or discrete) control block of Controller library"
+  "Partial Single Input Single Output (continuous or discrete) control block of Controllers library"
   extends PartialSampledBlock;
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block"

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Controllers;
 block SampleClock
-  "Global options for blocks of Controller library (in particular sample clock)"
+  "Global options for blocks of Controllers library (in particular sample clock)"
 
   parameter Types.BlockType blockType=Modelica_LinearSystems2.Controllers.Types.BlockType.Continuous
     "Type of Sampled blocks"
@@ -72,7 +72,7 @@ drag Modelica_LinearSystems2.Controllers.SampleClock into the top level of your 
     Documentation(info="<html>
 <p>
 Global block that defines options for all components of the
-Controller library that are on the same or on a lower level
+Controllers library that are on the same or on a lower level
 as the sampleClock component. In particular it is defined whether
 the blocks shall be used by default in a continuous or a
 discrete representation. In the latter case, the default

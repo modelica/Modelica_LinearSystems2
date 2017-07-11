@@ -180,7 +180,7 @@ discrete control systems works a bit worse. This can be improved
 by reducing the sample time in sampleClock.
 </p>
 <p>
-The Controller library has several blocks to model this system
+The Controllers library has several blocks to model this system
 even more realistically, e.g, by component AD converter to model
 the quantization errors of the analog measurement signals,
 component DA converter to model the quantization errors and computing

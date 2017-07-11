@@ -50,7 +50,7 @@ generate a linear system description by linearization of a Modelica model.
 
 <p>
 Furthermore, in subpackage
-<a href=\"modelica://Modelica_LinearSystems2.Controller\">Controller</a>
+<a href=\"modelica://Modelica_LinearSystems2.Controllers\">Controllers</a>
 about 20 input/output blocks of linear systems are provided that are
 based on the different representation forms, e.g. PID, StateSpace, Filter blocks.
 A unique feature of these blocks is that it is very convenient to quickly switch

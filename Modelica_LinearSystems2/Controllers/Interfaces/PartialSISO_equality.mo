@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Controllers.Interfaces;
 partial block PartialSISO_equality
-  "Partial Single Input Single Output (continuous or discrete) control block of Controller library where usually y=u if continuous block"
+  "Partial Single Input Single Output (continuous or discrete) control block of Controllers library where usually y=u if continuous block"
   extends Icons.PartialBlockIcon(cont=continuous);
   import Modelica_LinearSystems2.Controllers.Types;
 
