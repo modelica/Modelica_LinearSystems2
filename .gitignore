@@ -8,3 +8,6 @@ dsmodel.c
 dymosim.exe
 dymosim.exp
 dymosim.lib
+*.bck
+*.bak
+*.bak-mo

@@ -3,7 +3,8 @@ model ControlledSISO2
   extends Modelica.Blocks.Interfaces.SISO;
   parameter Real k=1;
 
-  Controller.ZerosAndPoles zerosAndPoles(system(
+  Controllers.ZerosAndPoles zerosAndPoles(
+    system(
       d2=[20,101; 22,122],
       d1=fill(0.0, 0),
       n1={4},
@@ -13,7 +14,7 @@ model ControlledSISO2
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Blocks.Math.Gain gain(k=k)
     annotation (Placement(transformation(extent={{-36,-10},{-16,10}})));
-  inner Controller.SampleClock sampleClock
+  inner Controllers.SampleClock sampleClock
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
 equation
   connect(zerosAndPoles.u, gain.y) annotation (Line(
@@ -44,7 +45,7 @@ Utility model in order to demonstrate the plotting of a root locus:
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/ControlledSISO1a.png\"/></p>
 
 <p>
-This model consists of a linear, time invariant single-input, single-output plant \"zerosAndPoles\"
+This model consists of a linear, time invariant single-input, single-output plant &quot;zerosAndPoles&quot;
 </p>
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/ControlledSISO2c.png\"/></p>
 <p>

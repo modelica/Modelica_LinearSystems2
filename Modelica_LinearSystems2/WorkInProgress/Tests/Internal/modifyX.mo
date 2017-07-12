@@ -4,8 +4,8 @@ function modifyX
 
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
 
   input Complex X[:,size(X,1)] "Complex eigenvector matrix";
   input Complex S[size(X,1),:] "Complex eigenvector matrix";
@@ -17,12 +17,16 @@ function modifyX
   output Complex Xm[size(X, 1),size(X, 2)];
 
 protected
-   Complex j=Modelica_LinearSystems2.Math.Complex.j();
-   Integer n=size(X,1);
-   Real X_real[n,n]=Re(X) "Eigenvector matrix, real part";
-   Real X_imag[n,n]=Im(X) "Eigenvector matrix, imaginary part";
-   Real S_real[n,m*n]=Re(S) "Eigenvector bases, real part";
-   Real S_imag[n,m*n]=Im(S) "Eigenvector bases, imaginary part";
+  Complex j=Modelica_LinearSystems2.Math.Complex.j();
+  Integer n=size(X,1);
+  Real X_real[n,n]=Modelica.ComplexMath.real(X)
+    "Eigenvector matrix, real part";
+  Real X_imag[n,n]=Modelica.ComplexMath.imag(X)
+    "Eigenvector matrix, imaginary part";
+  Real S_real[n,m*n]=Modelica.ComplexMath.real(S)
+    "Eigenvector bases, real part";
+  Real S_imag[n,m*n]=Modelica.ComplexMath.imag(S)
+    "Eigenvector bases, imaginary part";
 
   Real Xm_real[n,n];
   Real Xm_imag[n,n];

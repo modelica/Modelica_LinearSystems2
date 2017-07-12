@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.Tests.Design;
 function data_Byers4 "Example for pole assignment"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData;
 
   output DesignData data(

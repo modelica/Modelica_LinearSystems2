@@ -7,12 +7,12 @@ function assignPolesSI_rq
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
   import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
   import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
   import Modelica.Utilities.Streams.print;
 
   input StateSpace ss;
@@ -128,6 +128,6 @@ algorithm
     K := (rho.re/alpha/beta)*K*P;
     end if;
     S := ss.A-ss.B*K;
-    po :=  Complex.eigenValues(S);
-    Complex.Vectors.print("ev",ev);
+    po :=  Modelica_LinearSystems2.Math.Complex.eigenValues(S);
+    Modelica_LinearSystems2.Math.Complex.Vectors.print("ev",ev);
 end assignPolesSI_rq;

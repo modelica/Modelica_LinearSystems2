@@ -42,7 +42,7 @@ package Old
     end for;
 
     // Build value of transfer function
-    abs_den := Complex.'abs'(den);
+    abs_den :=Modelica.ComplexMath.'abs'(den);
     den := if abs_den >= den_min then den else (if den.re >= 0 then den_min else -
       den_min) + 0*j;
     print("... evaluate 3: num = "+ String(num) + ", den = "+String(den));

@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 record Eigenvalue
   "Record containing a eigen value or a pair of conjugated complex pair, repectively and additionally characteristics of the eigenvalue(s)"
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   extends Modelica.Icons.Record;
 
   Complex ev;
@@ -16,10 +16,10 @@ record Eigenvalue
   Real timeConstant;
 
 encapsulated function constructor "Default constructor for eigenvalue"
-    import Modelica;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.Internal;
-    import Modelica_LinearSystems2.Internal.Eigenvalue;
+  import Modelica;
+  import Complex;
+  import Modelica_LinearSystems2.Internal;
+  import Modelica_LinearSystems2.Internal.Eigenvalue;
 
   input Complex ev_in=Complex(0);
   input Boolean isControllable=false;

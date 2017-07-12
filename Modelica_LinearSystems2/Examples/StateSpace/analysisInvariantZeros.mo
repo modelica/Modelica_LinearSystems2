@@ -5,10 +5,10 @@ function analysisInvariantZeros
 
   import Modelica;
   import Modelica.Utilities.Streams.print;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
+  import Complex;
 
   input Complex z[:]={-2 + 0*j,-3 + 4*j,-3 - 4*j}
     "Zeros (Complex vector of numerator zeros)";

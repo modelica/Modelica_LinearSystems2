@@ -5,7 +5,7 @@ function toIrreducibleForm
  // test of SISO has to be added
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Modelica;
   import Modelica_LinearSystems2.WorkInProgress;
 

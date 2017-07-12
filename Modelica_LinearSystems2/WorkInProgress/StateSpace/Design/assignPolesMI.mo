@@ -2,14 +2,14 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Design;
 encapsulated function assignPolesMI
   "Pole assigment design algorithm for multi input systems"
 
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.StateSpace;
   import Modelica;
   import Modelica.Utilities.Streams.print;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal;
+  import Complex;
 
   input StateSpace ss "state space system";
 
@@ -142,7 +142,7 @@ algorithm
 
   // reorder gamma and A_rsf
   (gammaReordered,rpg) := Modelica_LinearSystems2.Internal.reorderZeros(gamma);
-  gammaReordered := Complex.Vectors.reverse(gammaReordered);
+  gammaReordered :=Modelica.ComplexMath.Vectors.reverse(gammaReordered);
   nccg := div(size(gammaReordered, 1) - rpg, 2);
   ncc := min(nccA, nccg);
   rp := min(rpA, rpg);
@@ -237,7 +237,7 @@ Modelica.Utilities.Streams.print("1x1 Ann = "+String(A_rsf[n,n])+"\n ap = "+Stri
 
 Modelica.Utilities.Streams.print("2x2, compl system, real ass Ann = "+Matrices.printMatrix(A_rsf[n-1:n,n-1:n])+"\n ap = ");
 
-Complex.Vectors.print("as",gammaReordered[ng - rp - 2*i + 1:ng - rp - 2*(i - 1)]);
+Modelica_LinearSystems2.Math.Complex.Vectors.print("as",gammaReordered[ng - rp - 2*i + 1:ng - rp - 2*(i - 1)]);
 
 //###############################################################
 
@@ -372,7 +372,7 @@ Modelica.Utilities.Streams.print("2x2, 2 compl system, complex ass Ann = "+Matri
   end for;
 
   S := ss.A - ss.B*K;
-  po := Complex.eigenValues(S);
+  po := Modelica_LinearSystems2.Math.Complex.eigenValues(S);
 
   if calculateEigenvectors then
 //     X := fill(Complex(0), n, n);
@@ -388,7 +388,7 @@ Modelica.Utilities.Streams.print("2x2, 2 compl system, complex ass Ann = "+Matri
 //       end for;
 //     end for;
 //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X1");
-    X := Complex.eigenVectors(S);
+    X := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
 //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X2");
 
   end if;
