@@ -7722,8 +7722,8 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 
     encapsulated function bodeMIMO
       "Plot bode plot of all transfer functions, corresponding to the state space system"
-      import Modelica.Utilities.Streams.print;
       import Modelica;
+      import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
@@ -7733,40 +7733,40 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 
       input StateSpace ss "State space system";
       input Integer nPoints(min=2) = 200 "Number of points";
-      input Boolean autoRange[:, :]=fill(
+      input Boolean autoRange[:, :] = fill(
           true,
           size(ss.C, 1),
           size(ss.B, 2)) "True, if abszissa range is automatically determined";
-      input Modelica.SIunits.Frequency f_min[:, :]=fill(
+      input Modelica.SIunits.Frequency f_min[:, :] = fill(
           0.1,
           size(ss.C, 1),
           size(ss.B, 2)) "Minimum frequency value, if autoRange = false";
-      input Modelica.SIunits.Frequency f_max[:, :]=fill(
+      input Modelica.SIunits.Frequency f_max[:, :] = fill(
           10,
           size(ss.C, 1),
           size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
 
-      input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
-      input Boolean phase=true "= true, to plot phase" annotation(choices(checkBox=true));
+      input Boolean magnitude = true "= true, to plot magnitude" annotation(choices(checkBox=true));
+      input Boolean phase = true "= true, to plot phase" annotation(choices(checkBox=true));
 
-      input Real tol=1e-10
+      input Real tol = 1e-10
         "Tolerance of reduction procedure, default tol = 1e-10";
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
             Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
 
-      input Boolean Hz=true
+      input Boolean Hz = true
         "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
-      input Boolean dB=false
-        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Dialog(enable=magnitude));
+      input Boolean dB = false
+        "= true, to plot magnitude in [-], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Dialog(enable=magnitude));
 
-      input Boolean onFile=false
+      input Boolean onFile = false
         "= true, if frequency response is stored on file as matrix [f,a,phi]" annotation(choices(checkBox=true));
-      input String fileName="frequencyResponse.mat"
-        "If onFile=true, file on which the frequency response will be stored"  annotation(Dialog(enable=onFile));
-      input String matrixName=if Hz and not dB then "fHz_a_phiDeg" elseif
-                                 Hz and dB then "fHz_adB_phiDeg" elseif
-                                 not Hz and dB then "f_adB_phiDeg" else "f_a_phiDeg"
+      input String fileName = "frequencyResponse.mat"
+        "If onFile=true, file on which the frequency response will be stored" annotation(Dialog(enable=onFile));
+      input String matrixName = if Hz and not dB then "fHz_a_phiDeg" elseif
+                                   Hz and dB then "fHz_adB_phiDeg" elseif
+                                   not Hz and dB then "f_adB_phiDeg" else "f_a_phiDeg"
         "If onFile=true, prefix name of matrix on file" annotation(Dialog(enable=onFile));
 
     protected
@@ -7780,9 +7780,9 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 
       Real Eig[size(ss.A,1), 2];
       Real InvZeros[:,2];
-      Real f[nPoints];
+      Real f[nPoints] "Frequency";
       Real a[nPoints] "Absolute value (magnitude)";
-      Real phi[nPoints];
+      Real phi[nPoints] "Phase";
       Real gain;
 
       Real fap[nPoints,if onFile then 3 else 0];
@@ -7791,33 +7791,31 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
       String yNames[size(ss.C, 1)];
       String uNames[size(ss.B, 2)];
 
-      Plot.Records.Diagram diagram2=defaultDiagram;
+      Plot.Records.Diagram diagram2 = defaultDiagram;
     algorithm
       // Check that system has inputs and outputs
       if size(ss.B, 2) == 0 then
-        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no inputs."
+        print("\n... Not possible to plot transfer function because system has no inputs."
            + "\n... Call of Plot.bodeMIMO is ignored.\n");
         return;
       elseif size(ss.C, 1) == 0 then
-        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no outputs."
+        print("\n... Not possible to plot transfer function because system has no outputs."
            + "\n... Call of Plot.bodeMIMO is ignored.\n");
         return;
       end if;
 
       // generate headings
       for i1 in 1:size(ss.B, 2) loop
-        uNames[i1] := if ss.uNames[i1] == "" then "u" + String(i1) else ss.uNames[
-          i1];
+        uNames[i1] := if ss.uNames[i1] == "" then "u" + String(i1) else ss.uNames[i1];
       end for;
       for i1 in 1:size(ss.C, 1) loop
-        yNames[i1] := if ss.yNames[i1] == "" then "y" + String(i1) else ss.yNames[
-          i1];
+        yNames[i1] := if ss.yNames[i1] == "" then "y" + String(i1) else ss.yNames[i1];
       end for;
 
       // Balance system
-      (,A,Bfull,Cfull) :=Internal.balanceABC(A=ss.A, B=ss.B, C=ss.C);
+      (,A,Bfull,Cfull) := Internal.balanceABC(A=ss.A, B=ss.B, C=ss.C);
 
-      // Compute eigen values
+      // Compute eigen values (matrix A balanced already)
       Eig := Math.Matrices.eigenValuesAsRealMatrix(A,balance=false);
 
       // Remove output file, if onFile=true
@@ -7829,20 +7827,19 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
       for i1 in 1:size(ss.C, 1) loop
         for i2 in 1:size(ss.B, 2) loop
           // Compute zeros
-          B :=matrix(ss.B[:, i2]);
-          C :=transpose(matrix(ss.C[i1, :]));
-          D :=matrix(ss.D[i1, i2]);
+          B := matrix(Bfull[:, i2]);
+          C := transpose(matrix(Cfull[i1, :]));
+          D := matrix(ss.D[i1, i2]);
           InvZeros := StateSpace.Internal.invariantZerosWithRealMatrix(A,B,C,D);
           gain := Internal.frequencyResponseGain(A,B,C,D,InvZeros,Eig);
 
           // Compute frequency response values
-          (f,a,phi) :=Modelica_LinearSystems2.Internal.frequencyResponse(gain,
-                         InvZeros, Eig, nPoints, autoRange[i1, i2], f_min[i1, i2],
-                         f_max[i1, i2], Hz, dB, defaultDiagram.logX);
+          (f,a,phi) := Modelica_LinearSystems2.Internal.frequencyResponse(
+                         gain, InvZeros, Eig, nPoints, autoRange[i1, i2],
+                         f_min[i1, i2], f_max[i1, i2], Hz, dB, defaultDiagram.logX);
 
           // Bode plot
-          diagram2.heading := defaultDiagram.heading + "  " + uNames[i2] +
-                              " -> " + yNames[i1];
+          diagram2.heading := defaultDiagram.heading + "  " + uNames[i2] + " -> " + yNames[i1];
           Internal.frequencyResponsePlot(f,a,phi,autoRange[i1, i2],
                                          f_min[i1, i2], f_max[i1, i2],magnitude,
                                          phase,Hz,dB,diagram=diagram2,
@@ -7850,15 +7847,16 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
 
           // Store result optionally on file
           if onFile then
-             fap :=[f,a,phi];
-             success:=writeMatrix(fileName,matrixName+"_"+uNames[i2]+"_"+yNames[i1],fap,append=true);
+            fap := [f,a,phi];
+            success := Modelica.Utilities.Streams.writeRealMatrix(
+              fileName, matrixName + "_" + uNames[i2] + "_" + yNames[i1], fap, append=true);
           end if;
         end for;
       end for;
 
-      if success then
-         Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
-                        Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+      if onFile and success then
+        print("... Frequency response stored on file \"" +
+          Modelica.Utilities.Files.fullPathName(fileName) + "\"");
       end if;
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
@@ -7872,10 +7870,16 @@ StateSpace.Plot.<b>bodeMIMO</b>(
   autoRange,
   f_min,
   f_max,
-  magnitude=true,
-  phase=true,
+  magnitude,
+  phase,
+  tol,
   defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>(),
+  Hz,
+  dB,
+  onFile,
+  fileName,
+  matrixName)
 </pre></blockquote>
 
 <h4>Example</h4>
