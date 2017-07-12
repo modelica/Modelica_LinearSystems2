@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function zgetrf
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
   input Complex A[:,:] "Square or rectangular matrix";
   output Complex LU[size(A, 1),size(A, 2)];

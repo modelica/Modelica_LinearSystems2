@@ -127,15 +127,15 @@ Calling the function
 </p>
 <blockquote><pre>
 Utilities.Plot.<b>rootLocus</b>(
-  modelName = &quot;Modelica.Mechanics.Rotational.Examples.First&quot;,
+  modelName = \"Modelica.Mechanics.Rotational.Examples.First\",
   t_linearize = 0,
   modelParam={
     Modelica_LinearSystems2.Records.ParameterVariation(
-      Name=&quot;Jload&quot;,
+      Name=\"Jload\",
       Min=1,
       Max=6,
       nVar=10,
-      Unit=&quot;kg.m2&quot;)});
+      Unit=\"kg.m2\")});
 </pre></blockquote>
 <p>
 yields following diagram
@@ -239,8 +239,6 @@ over the load inertia <b>Jload</b>:
 
   function linearize2
     "Linearize a model after simulation up to a given time and return only the A matrix"
-    import Modelica.Utilities.Streams;
-
     input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
     input Modelica.SIunits.Time t_linearize= 0
       "Simulate until t_linearize and then linearize" annotation(Dialog);
@@ -262,11 +260,12 @@ over the load inertia <b>Jload</b>:
     Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
 
     // Read linear system from file
-    Integer ABCDsizes[2]=Streams.readMatrixSize(fileName2, "ABCD");
-    Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
+    Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
+    Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+    Integer nx=integer(nxMat[1, 1]);
     Integer nu=ABCDsizes[2] - nx;
     Integer ny=ABCDsizes[1] - nx;
-    Real ABCD[nx + ny,nx + nu]=Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+    Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
   public
     output Real A[nx,nx] =  ABCD[1:nx, 1:nx] "A-matrix";
   algorithm
@@ -281,7 +280,7 @@ but returns only the A-matrix.
   end linearize2;
 
   package Types "Package of type definitions"
-    extends Modelica.Icons.TypesPackage;
+    extends Modelica.Icons.Package;
 
     type MarkerStyles = enumeration(
         Cross "Cross",

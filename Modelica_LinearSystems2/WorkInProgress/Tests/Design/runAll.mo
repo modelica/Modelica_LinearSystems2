@@ -6,9 +6,7 @@ function runAll
 
   input String dataSpecifier = "data_";
   input String fileSpecifier = "Design";
-  input String directoryName=
-    Modelica.Utilities.Files.loadResource("modelica://Modelica_LinearSystems2/WorkInProgress/Tests/Data/")
-    annotation(Dialog);
+  input String directoryName= classDirectory()+ "../" + "Data";
   input String outputFile = fileSpecifier+".txt";
   input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.KNV
     "method for pole assignment";
@@ -39,9 +37,9 @@ algorithm
   Modelica.Utilities.Streams.print("import Modelica_LinearSystems2.WorkInProgress.Tests",designMos);
   Modelica.Utilities.Streams.print("import Modelica_LinearSystems2.WorkInProgress.Tests.Types",designMos);
 
-  (functions, n) := Tests.Internal.getMatFiles(dataSpecifier,directoryName,fileNameSpec);
-  functions2 := fill("",n);
-  for i in 1:n loop
+   (functions, n) := Tests.Internal.getMatFiles(dataSpecifier,directoryName,fileNameSpec);
+   functions2 := fill("",n);
+   for i in 1:n loop
     index := Modelica.Utilities.Strings.find(functions[i],".");
     functions2[i] := Modelica.Utilities.Strings.substring(functions[i],1,index-1);
     functions[i]:="/"+functions[i];
@@ -58,7 +56,7 @@ algorithm
     end if;
     end if;
   end for;
-  ok := RunScript(designMos);
+   ok := RunScript(designMos);
 //ok := true;
 
 numberOfFunctions := n;

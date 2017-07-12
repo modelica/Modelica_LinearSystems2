@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 package Internal "Internal functions, that should not be utilized by a user"
-  extends Modelica.Icons.InternalPackage;
-
+  extends Modelica.Icons.Package;
 
 
   annotation (Documentation(info="<html>

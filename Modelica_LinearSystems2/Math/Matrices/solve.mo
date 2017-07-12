@@ -39,7 +39,7 @@ an exception is raised.
 
 <h4>Note</h4>
 <p>
-The solution is computed with the LAPACK function &quot;dgesv&quot;,
+The solution is computed with the LAPACK function \"dgesv\",
 i.e., by Gaussian elemination with partial pivoting.
 </p>
 

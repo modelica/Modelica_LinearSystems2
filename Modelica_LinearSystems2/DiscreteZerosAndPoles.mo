@@ -146,16 +146,16 @@ discrete zeros-and-poles transfer function is derived from DiscreteStateSpace by
   encapsulated function fromPolesAndZeros
       "Generate a DiscreteZerosAndPoles data record from a set of zeros and poles"
 
-    import Modelica;
-    import Complex;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Modelica_LinearSystems2.Internal;
-    import Modelica.Utilities.Streams.print;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.Internal;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica.Utilities.Streams.print;
 
-    input Complex z[:]=fill(Complex(0), 0)
+    input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
-    input Complex p[:]=fill(Complex(0), 0)
+    input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
     input Real k=1.0 "Constant multiplied with transfer function";
     input Modelica.SIunits.Time Ts "Sample time";
@@ -348,10 +348,10 @@ encapsulated operator '-'
     import Modelica;
   extends Modelica.Icons.Package;
   function subtract "Subtract two DiscreteZerosAndPoles (dzp1 - dzp2)"
-    import Modelica;
-    import Complex;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input DiscreteZerosAndPoles dzp1;
     input DiscreteZerosAndPoles dzp2;
@@ -568,9 +568,9 @@ end '*';
     "Addition of to discrete transfer functions dzp1 + dzp2, i.e. parallel connection of two transfer functions (= inputs are the same, outputs of the two systems are added)"
 
     import Modelica;
-    import Complex;
     import Modelica_LinearSystems2.DiscreteZerosAndPoles;
     import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.Math.Complex;
 
     input DiscreteZerosAndPoles dzp1;
     input DiscreteZerosAndPoles dzp2;
@@ -870,10 +870,10 @@ to calculate the time response of the state space system. The type of the time
 response is defined by the input <b>responseType</b>, i.e.
 </p>
 <blockquote><pre>
-Impulse &quot;Impulse response&quot;,
-Step    &quot;Step response&quot;,
-Ramp    &quot;Ramp response&quot;,
-Initial &quot;Initial condition response&quot;
+Impulse \"Impulse response\",
+Step \"Step response\",
+Ramp \"Ramp response\",
+Initial \"Initial condition response\"
 </pre></blockquote>
 <p>
 Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated for each time step t=k*dt.
@@ -1293,12 +1293,12 @@ order polynomials of the DiscreteZeroAndPoles numerator.
   end numeratorDegree;
 
   encapsulated function evaluate
-    "Evaluate a DiscreteZerosAndPoles transfer function at a given value of q"
-    import Modelica;
-    import Complex;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Modelica_LinearSystems2.ZerosAndPoles;
+      "Evaluate a DiscreteZerosAndPoles transfer function at a given value of q"
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles transfer function of a system";
@@ -1330,7 +1330,7 @@ order polynomials of the DiscreteZeroAndPoles numerator.
     end for;
 
     // Build value of transfer function
-    abs_den :=Modelica.ComplexMath.'abs'(den);
+    abs_den := Complex.'abs'(den);
     den := if abs_den >= den_min then den else -abs_den+0*j;
     y := num/den;
     annotation (Documentation(info="<html>
@@ -1382,16 +1382,16 @@ numerator polynomial N(z) and the denominator polynomial D(q).
     extends Modelica.Icons.Package;
 
   encapsulated function bode
-    "Plot discrete zeros a-and-poles transfer function as bode plot"
-    import Modelica;
-    import Modelica.Utilities.Strings;
-    import Complex;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Internal;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Modelica_LinearSystems2.Utilities.Plot;
-    import SI = Modelica.SIunits;
+      "Plot discrete zeros a-and-poles transfer function as bode plot"
+      import Modelica;
+      import Modelica.Utilities.Strings;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Internal;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.Utilities.Plot;
+      import SI = Modelica.SIunits;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles function to be plotted";
@@ -1450,7 +1450,7 @@ numerator polynomial N(z) and the denominator polynomial D(q).
     numZeros := fill(Complex(0),0);
     denZeros := fill(Complex(0),size(denZerosZ,1));
     for i in 1:size(denZerosZ,1) loop
-      denZeros[i] :=Modelica.ComplexMath.log(denZerosZ[i])/dzp.Ts;
+      denZeros[i] := Complex.log(denZerosZ[i])/dzp.Ts;
     end for;
 
     f := Internal.frequencyVector(
@@ -1465,13 +1465,13 @@ numerator polynomial N(z) and the denominator polynomial D(q).
     phi_old := 0.0;
     for i in 1:nPoints loop
       w[i] := SI.Conversions.from_Hz(f[i]);
-      z[i] :=Modelica.ComplexMath.exp(Complex(0, w[i]*dzp.Ts));
+      z[i] := Complex.exp(Complex(0,w[i]*dzp.Ts));
       c := ZerosAndPoles.Analysis.evaluate(
             zp,
             z[i],
             1e-10);
-      A[i] :=Modelica.ComplexMath.'abs'(c);
-      phi_old :=Modelica.ComplexMath.arg(c, phi_old);
+      A[i] := Complex.'abs'(c);
+      phi_old := Complex.arg(c, phi_old);
       phi[i] := SI.Conversions.to_deg(phi_old);
 
       // Convert to other units, if required
@@ -1982,18 +1982,19 @@ This function plots the initial response, i.e. the zeros input response of a zer
     import Modelica;
     extends Modelica.Icons.Package;
   function toDiscreteTransferFunction
-    "Generate a DiscreteTransferFunction object from a DiscreteZerosAndPoles object"
+      "Generate a DiscreteTransferFunction object from a DiscreteZerosAndPoles object"
 
-    import Modelica;
-    import Complex;
-    import Modelica_LinearSystems2.Math.Polynomial;
-    import Modelica_LinearSystems2.DiscreteTransferFunction;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Internal;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles transfer function of a system";
-    output DiscreteTransferFunction dtf;
+    output Modelica_LinearSystems2.DiscreteTransferFunction dtf;
 
     protected
     ZerosAndPoles zp=ZerosAndPoles(k=dzp.k, n1=dzp.n1, n2=dzp.n2, d1=dzp.d1, d2=dzp.d2);
@@ -2044,14 +2045,15 @@ from a DiscreteZerosAndPoles record representated by first and second order nume
   end toDiscreteTransferFunction;
 
   function toDiscreteStateSpace
-    "Transform a DiscreteZerosAndPoles object into a DiscreteStateSpace object"
+      "Transform a DiscreteZerosAndPoles object into a DiscreteStateSpace object"
    //encapsulated function fromZerosAndPoles
-    import Modelica;
-    import Complex;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Vectors;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
     input DiscreteZerosAndPoles dzp
         "ZerosAndPoles transfer function of a system";
@@ -2433,11 +2435,11 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
 
     encapsulated function fromFile
       "Generate a DiscreteZerosAndPoles data record by reading the polynomial coefficients or zeros and poles from a file"
-      import Modelica;
-      import Complex;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
       import Modelica_LinearSystems2.DataDir;
 
       input String fileName=DataDir + "dzp.mat"
@@ -2465,79 +2467,78 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<blockquote><pre>
-dzp = DiscreteZerosAndPoles.Import.fromFile(fileName)
-</pre></blockquote>
-
+<table>
+<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Import.<b>fromFile</b>(fileName)  </td> </tr>
+</table>
 <h4>Description</h4>
 <p>
-Reads and loads a discrete zeros-and-poles transfer function from a mat-file <code>fileName</code>.
-The file must contain the sample time Ts and either the set of variables n1, n2, d1, d2, and k with
-the associated first and second order polynomials or the variables p, z, and k with the poles and
-zeros, written in two column arrays with real and imaginary in the first and second column respectively.
-The variable k is the real gain in both cases.
-</p>
+Reads and loads a discrete zeros-and-poles transfer function from a mat-file <tt>fileName</tt>. The file must contain the sample time Ts and either the set of variables n1, n2, d1, d2, and k with
+the associated first and second order polynomials or the variables p, z, and k with the poles and zeros, written in two column arrays with real and imaginary in the first and
+second column respectively. The variable k is the real gain in both cases.
+
 
 <h4>Example</h4>
 <blockquote><pre>
+
+
 <b>algorithm</b>
-  dzp := DiscreteZerosAndPoles.Import.fromFile(DataDir + &quot;/dzp.mat&quot;);
+  dzp:=Modelica_LinearSystems2.DiscreteZerosAndPoles.Import.fromFile(DataDir + "    /dzp.mat " );
 //  zp = (q^2 + 2*q + 3)/(q + 2)/(q^2 + 2*q + 2)
 </pre></blockquote>
 </html>"));
     end fromFile;
 
   function fromModel
-    "Generate a DiscreteZerosAndPoles data record from a state space representation resulted from linearization of a model"
+      "Generate a DiscreteZerosAndPoles data record from a state space representation resulted from linearization of a model"
 
-    import Modelica;
-    import Modelica.Utilities.Streams;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
-    input String modelName "Name of the Modelica model"  annotation(Dialog(__Dymola_translatedModel(translate=true)));
-    input Real T_linearize = 0
-      "Point in time of simulation to linearize the model";
-    input String fileName = "dslin" "Name of the result file";
-    input Modelica.SIunits.Time Ts = 1 "Sample time";
-    input Modelica_LinearSystems2.Utilities.Types.Method method = Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
+      input String modelName "Name of the Modelica model"  annotation(Dialog(__Dymola_translatedModel(translate=true)));
+      input Real T_linearize=0
+        "point in time of simulation to linearize the model";
+      input String fileName="dslin" "Name of the result file";
+      input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
     protected
-    String fileName2 = fileName + ".mat";
-    Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
-    Boolean OK2 = importInitial("dsfinal.txt");
-    Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
-    Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
-    Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
-    Integer nu = ABCDsizes[2] - nx;
-    Integer ny = ABCDsizes[1] - nx;
-    Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-    String xuyName[nx + nu + ny] = readStringMatrix(fileName2, "xuyName", nx + nu + ny);
+      String fileName2=fileName + ".mat";
+      Boolean OK1=simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
+      Boolean OK2=importInitial("dsfinal.txt");
+      Boolean OK3=linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
+      Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
+      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+      Integer nx=integer(nxMat[1, 1]);
+      Integer nu=ABCDsizes[2] - nx;
+      Integer ny=ABCDsizes[1] - nx;
+      Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+      String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
-    StateSpace ss(
-      redeclare Real A[nx,nx],
-      redeclare Real B[nx,nu],
-      redeclare Real C[ny,nx],
-      redeclare Real D[ny,nu]) "Model linearized at initial point";
-    DiscreteStateSpace dss(
-      redeclare Real A[nx,nx],
-      redeclare Real B[nx,nu],
-      redeclare Real C[ny,nx],
-      redeclare Real D[ny,nu],
-      redeclare Real B2[nx,nu]) "Model linearized at initial point";
-    DiscreteStateSpace dss_siso(
-      redeclare Real A[nx,nx],
-      redeclare Real B[nx,1],
-      redeclare Real C[1,nx],
-      redeclare Real D[1,1],
-      redeclare Real B2[nx,1]) "Model linearized at initial point";
+      StateSpace ss(
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,nu],
+        redeclare Real C[ny,nx],
+        redeclare Real D[ny,nu]) "= model linearized at initial point";
+      DiscreteStateSpace dss(
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,nu],
+        redeclare Real C[ny,nx],
+        redeclare Real D[ny,nu],
+        redeclare Real B2[nx,nu]) "= model linearized at initial point";
+      DiscreteStateSpace dss_siso(
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,1],
+        redeclare Real C[1,nx],
+        redeclare Real D[1,1],
+        redeclare Real B2[nx,1]) "= model linearized at initial point";
 
-    DiscreteZerosAndPoles dummy;
+        DiscreteZerosAndPoles dummy;
 
     public
-    output DiscreteZerosAndPoles dzp[:,:];//=fill(dummy,ny,nu);
+      output DiscreteZerosAndPoles dzp[:,:];//=fill(dummy,ny,nu);
   algorithm
     ss.A := ABCD[1:nx, 1:nx];
     ss.B := ABCD[1:nx, nx + 1:nx + nu];
@@ -2577,8 +2578,7 @@ The variable k is the real gain in both cases.
    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-dzp = DiscreteZerosAndPoles.Import.<b>fromModel</b>(
-  modelName, T_linearize, fileName, Ts, method)
+dzp = DiscreteZerosAndPoles.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -2631,10 +2631,10 @@ transfer function representation.
 
   encapsulated package Internal
     "Package of internal material of record DiscreteZerosAndPoles (for advanced users only)"
-    extends Modelica.Icons.InternalPackage;
 
     import Modelica;
     import Modelica_LinearSystems2;
+    extends Modelica.Icons.Package;
 
     function numberOfRealZeros2 "Calculate number of real zeros"
       import Modelica;
@@ -2740,9 +2740,9 @@ int found=0;
   end findMatrixName;
 
   function fromRealAndImag
-    "Generate a complex vector from a real part vector and imaginary part vector "
+      "Generate a complex vector from a real part vector and imaginary part vector "
 
-    import Complex;
+      import Modelica_LinearSystems2.Math.Complex;
 
     input Real real[:];
     input Real imag[size(real, 1)];
@@ -2755,17 +2755,16 @@ int found=0;
   end fromRealAndImag;
 
   encapsulated function fromFile_pc
-    "Generate a DiscreteZerosAndPoles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
-    import Modelica;
-    import Modelica.Utilities.Streams;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Complex;
+      "Generate a DiscreteZerosAndPoles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica;
 
     input String fileName="pc.mat" "Name of the zeros and poles data file"
-      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-        caption="state space system data file")));
+                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+                      caption="state space system data file")));
 
     protected
     Integer n1n2d1d2[4]=ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(fileName);
@@ -2778,9 +2777,15 @@ int found=0;
     public
     output DiscreteZerosAndPoles dzp(
       n1=fill(0, n1),
-      n2=fill(0, n2, 2),
+      n2=fill(
+            0,
+            n2,
+            2),
       d1=fill(0, d1),
-      d2=fill(0, d2, 2));
+      d2=fill(
+            0,
+            d2,
+            2));
 
     protected
     Integer n1_2=if n1 > 0 then 1 else 0 "second dimension of n1-matrix";
@@ -2788,16 +2793,32 @@ int found=0;
     Integer d1_2=if d1 > 0 then 1 else 0 "second dimension of d1-matrix";
     Integer d2_2=if d2 > 0 then 2 else 0 "second dimension of d2-matrix";
 
-    Real k = scalar(Streams.readRealMatrix(fileName, "k", 1, 1));
-    Real n1Vector[n1] = vector(Streams.readRealMatrix(fileName, "n1", n1, n1_2))
-      "Coefficients of first order numenator polynomials";
-    Real n2Matrix[n2,n2_2] = Streams.readRealMatrix(fileName, "n2", n2, n2_2)
-      "Coefficients of second order denominator polynomials";
-    Real d1Vector[d1] = vector(Streams.readRealMatrix(fileName, "d1", d2, d1_2))
-      "Coefficients of first order denominator polynomials";
-    Real d2Matrix[d2,d2_2] = Streams.readRealMatrix(fileName, "d2", d2, d2_2)
-      "Coefficients of second order numenator polynomials";
-    Real Ts[1,1] = Streams.readRealMatrix(fileName, "Ts", 1, 1);
+    Real k=scalar(readMatrix(
+          fileName,
+          "k",
+          1,
+          1));
+    Real n1Vector[n1]=vector(readMatrix(
+          fileName,
+          "n1",
+          n1,
+          n1_2)) "coefficients of first order numenator polynomials";
+    Real n2Matrix[n2,n2_2]=readMatrix(
+          fileName,
+          "n2",
+          n2,
+          n2_2) "coefficients of second order denominator polynomials";
+    Real d1Vector[d1]=vector(readMatrix(
+          fileName,
+          "d1",
+          d2,
+          d1_2)) "coefficients of first order denominator polynomials";
+    Real d2Matrix[d2,d2_2]=readMatrix(
+          fileName,
+          "d2",
+          d2,
+          d2_2) "coefficients of second order numenator polynomials";
+    Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);
 
   algorithm
     dzp.k := k;
@@ -2810,47 +2831,62 @@ int found=0;
   end fromFile_pc;
 
   encapsulated function fromFile_zp
-    "Generate a DiscreteZerosAndPoles data record by reading poles and zeros from a file (default file name is zp.mat)"
+      "Generate a DiscreteZerosAndPoles data record by reading poles and zeros from a file (default file name is zp.mat)"
 
-    import Modelica.Utilities.Streams;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-    import Complex;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
 
-    input String fileName = "dzp.mat" "Name of the zeros and poles data file"
-      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-        caption="state space system data file")));
+    input String fileName="dzp.mat" "Name of the zeros and poles data file"
+                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+                      caption="state space system data file")));
     protected
     Integer n1n2d1d2[4]=
-      ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(fileName);
-    Integer n1 = n1n2d1d2[1];
-    Integer n2 = n1n2d1d2[2];
-    Integer d1 = n1n2d1d2[3];
-    Integer d2 = n1n2d1d2[4];
-    Integer zSize = n1n2d1d2[1] + 2*n1n2d1d2[2];
-    Integer pSize = n1n2d1d2[3] + 2*n1n2d1d2[4];
+        ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(fileName);
+    Integer n1=n1n2d1d2[1];
+    Integer n2=n1n2d1d2[2];
+    Integer d1=n1n2d1d2[3];
+    Integer d2=n1n2d1d2[4];
+    Integer zSize=n1n2d1d2[1] + 2*n1n2d1d2[2];
+    Integer pSize=n1n2d1d2[3] + 2*n1n2d1d2[4];
     public
     output DiscreteZerosAndPoles dzp(
       n1=fill(0, n1),
-      n2=fill(0, n2,2),
+      n2=fill(
+            0,
+            n2,
+            2),
       d1=fill(0, d1),
-      d2=fill(0, d2, 2));
+      d2=fill(
+            0,
+            d2,
+            2));
 
     protected
-    Integer z_2 = if zSize > 0 then 2 else 0 "second dimension of zeros-matrix";
-    Integer p_2 = if pSize > 0 then 2 else 0 "second dimension of poles-matrix";
+    Integer z_2=if zSize > 0 then 2 else 0 "second dimension of zeros-matrix";
+    Integer p_2=if pSize > 0 then 2 else 0 "second dimension of poles-matrix";
 
-    Real k = scalar(Streams.readRealMatrix(fileName, "k", 1, 1));
-    Real zerosMatrix[zSize,z_2] = Streams.readRealMatrix(fileName, "z", zSize, z_2)
-      "Zeros in rows of real parts and imaginary parts";
-    Real polesMatrix[pSize,p_2] = Streams.readRealMatrix(fileName, "p", pSize, p_2)
-      "Poles in rows of real parts and imaginary parts";
-    Real Ts[1,1] = Streams.readRealMatrix(fileName, "Ts", 1, 1);
+    Real k=scalar(readMatrix(
+          fileName,
+          "k",
+          1,
+          1));
+    Real zerosMatrix[zSize,z_2]=readMatrix(
+          fileName,
+          "z",
+          zSize,
+          z_2) "zeros in rows of real parts and imaginary parts";
+    Real polesMatrix[pSize,p_2]=readMatrix(
+          fileName,
+          "p",
+          pSize,
+          p_2) "poles in rows of real parts and imaginary parts";
+    Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);
 
-    Complex zeros[:] = if zSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
+    Complex zeros[:]=if zSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
         zerosMatrix[:, 1], zerosMatrix[:, z_2]) else fill(Complex(0), 0);
-    Complex poles[:] = if pSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
+    Complex poles[:]=if pSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
         polesMatrix[:, 1], polesMatrix[:, p_2]) else fill(Complex(0), 0);
 
   algorithm

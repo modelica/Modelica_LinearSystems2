@@ -1,7 +1,5 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 function diagramVector "Plot several diagrams in vector layout"
-  extends Modelica.Icons.Function;
-
   input Modelica_LinearSystems2.Utilities.Plot.Records.Diagram diagram[:]
     "Properties of a set of diagrams (vector layout)"
     annotation(Dialog);
@@ -21,12 +19,11 @@ protected
   Integer id;
 
   function round "Round to nearest Integer"
-    input Real r;
-    output Integer i;
+     input Real r;
+     output Integer i;
   algorithm
-    i :=if r > 0 then integer(floor(r + 0.5)) else integer(ceil(r - 0.5));
+     i :=if r > 0 then integer(floor(r + 0.5)) else integer(ceil(r - 0.5));
   end round;
-
 algorithm
   id := -1;
 
@@ -94,10 +91,9 @@ using a vector layout. For an overview, see the documentation of package
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot\">Modelica_LinearSystems2.Utilities.Plot</a>.
 </p>
 
-<h4>Example</h4>
+
 <p>
-See an <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.showSinesInVectorDiagrams\">example</a>
-for possible usage of this function:
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.showSinesInVectorDiagrams\">Example</a>:
 </p>
 
 <blockquote>

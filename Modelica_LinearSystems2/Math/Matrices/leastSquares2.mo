@@ -94,7 +94,7 @@ minimum norm |X| is selected. This gives a unique solution that minimizes both
 
 <h4>Note</h4>
 <p>
-The solution is computed with the LAPACK function &quot;dgelsx&quot;,
+The solution is computed with the LAPACK function \"dgelsx\",
 i.e., QR or LQ factorization of A with column pivoting.
 </p>
 
@@ -136,7 +136,7 @@ The minimum-norm solution is then
 </pre>
 
 <p>
-where Q1 consists of the first &quot;rank&quot; columns of&nbsp;Q.
+where Q1 consists of the first \"rank\" columns of Q.
 </p>
 
 

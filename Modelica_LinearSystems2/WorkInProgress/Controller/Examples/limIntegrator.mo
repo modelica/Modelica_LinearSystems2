@@ -7,7 +7,7 @@ model limIntegrator "linIntegrator"
     y_start=1.5,
     limitsAtInit=false,
     withDelay=true,
-    initType=Modelica_LinearSystems2.Controllers.Types.InitWithGlobalDefault.InitialState)
+    initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState)
     annotation (Placement(transformation(extent={{0,0},{20,20}})));
   Modelica.Blocks.Sources.Sine sine(freqHz=1, amplitude=5)
     annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
@@ -21,15 +21,14 @@ model limIntegrator "linIntegrator"
     offset=0.5,
     period=0.34)
     annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
-  inner Modelica_LinearSystems2.Controllers.SampleClock sampleClock(
-    initType=Modelica_LinearSystems2.Controllers.Types.Init.InitialState,
-    blockType=Modelica_LinearSystems2.Controllers.Types.BlockType.Continuous,
+  inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(
+    initType=Modelica_LinearSystems2.Controller.Types.Init.InitialState,
+    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous,
     sampleTime=0.02)
              annotation (Placement(transformation(extent={{54,50},{74,70}})));
 
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{-8,-74},{12,-54}})));
-  Modelica_LinearSystems2.WorkInProgress.Controller.LimIntegratorReset integratorXX annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
 equation
   connect(sine.y, limIntegrator.u) annotation (Line(
       points={{-59,10},{-2,10}},
@@ -44,15 +43,15 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(integratorXX.u, sine.y) annotation (Line(
-      points={{-2,-30},{-22,-30},{-22,10},{-59,10}},
+      points={{22,-38},{-22,-38},{-22,10},{-59,10}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(integratorXX.lowerLimit, pulse1.y) annotation (Line(
-      points={{-2,-38},{-22,-38},{-22,-30},{-59,-30}},
+      points={{22,-46},{-22,-46},{-22,-30},{-59,-30}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(integratorXX.upperLimit, pulse.y) annotation (Line(
-      points={{-2,-22},{-20,-22},{-20,50},{-59,50}},
+      points={{22,-30},{-20,-30},{-20,50},{-59,50}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (

@@ -7,10 +7,10 @@ TransferFunction
 DiscreteStateSpace
 DiscreteZerosAndPoles
 DiscreteTransferFunction
-Controllers
+Controller
 Math
-Records
 Utilities
 Internal
+Records
 DataDir
 WorkInProgress

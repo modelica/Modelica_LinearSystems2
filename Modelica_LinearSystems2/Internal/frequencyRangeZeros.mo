@@ -4,14 +4,14 @@ function frequencyRangeZeros
   import Modelica;
   import Modelica.Math;
   import SI = Modelica.SIunits;
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
   input Complex z[:] "Vector of zeros";
   input SI.Angle phi_min(min=10*Modelica.Constants.eps)=
-    SI.Conversions.from_deg(5) "Minimum phase angle";
+    Modelica.SIunits.Conversions.from_deg(5) "Minimum phase angle";
   input Real real_min(min=0) = 1.e-4 "|r| < real_min are treated as |real_min|";
-  output SI.AngularVelocity w_min "Minimum frequency";
-  output SI.AngularVelocity w_max "Maximum frequency";
+  output Modelica.SIunits.AngularVelocity w_min "Minimum frequency";
+  output Modelica.SIunits.AngularVelocity w_max "Maximum frequency";
   output Boolean useFullRange = true;
 protected
   Integer nz=size(z, 1);

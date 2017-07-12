@@ -2,11 +2,10 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function designCraneControllerWithObserver
   "Design pole assignment controller and observer for an overhead crane"
   import Modelica.Utilities.Streams.print;
-  import Modelica.Utilities.Streams.writeRealMatrix;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
+  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Complex;
 
   input String modelName="Modelica_Controller.Examples.Components.Pendulum_small"
     "name of the model to linearize";
@@ -57,28 +56,54 @@ algorithm
   print("eigenvalues of the closed loop system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
 
-  writeRealMatrix(fileName, "K_pa", K_pa, false);
+  writeMatrix(
+    fileName,
+    "K_pa",
+    K_pa,
+    false);
 
 // Pre filter calculation
   M_pa := -Modelica.Math.Matrices.inv([1,0,0,0]*Matrices.solve2(ss_pa.A, ss_pa.B));
   print("Gain for pre filtering:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(M_pa, 6, "M_pa"));
-  writeRealMatrix(fileName, "M_pa", M_pa, true);
+    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    M_pa,
+    6,
+    "M_pa"));
+  writeMatrix(
+    fileName,
+    "M_pa",
+    M_pa,
+    true);
 
 // observer feedback
   (K_ob,,p) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss_ob, pob);
   K_ob := transpose(K_ob);
 
-  writeRealMatrix(fileName, "stateSpace", [ssPlant.A, ssPlant.B; ssPlant.C, ssPlant.D], true);
+  writeMatrix(
+    fileName,
+    "stateSpace",
+    [ssPlant.A,ssPlant.B; ssPlant.C,ssPlant.D],
+    true);
 // write matrix dimension nx
-  writeRealMatrix(fileName, "nx", [size(ssPlant.A, 1)], true);
+  writeMatrix(
+    fileName,
+    "nx",
+    [size(ssPlant.A,1)],
+    true);
   print("The feedback matrix of the observer system is:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(K_ob, 6, "K_ob"));
+    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    K_ob,
+    6,
+    "K_ob"));
   ss_ob.A := ss.A - K_ob*ssPlant.C;
 
   print("eigenvalues of the observer system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pob", pob);
-  writeRealMatrix(fileName, "K_ob", K_ob, true);
+  writeMatrix(
+    fileName,
+    "K_ob",
+    K_ob,
+    true);
 
   print("\nok!");
   annotation (__Dymola_interactive=true, Documentation(info="<html>
@@ -103,5 +128,15 @@ The linear model is then used as a base for controller design.
 <dd> <b>A Schur method for pole assignment</b>.
      IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
 </dl>
+</html>"),    Documentation(info="<html>
+This example demonstrates how to design a lq-controller or a pole placement controller respectively.
+The feedback matrices and a simple pre filter for tracking are save to MATLAB files which can be used in
+ModelicaController library.<br>
+It is also shown how to linearize a model of a crane trolley system [1]. The linear model is used as a base for control design
+
+<A name=\"References\"><B><FONT SIZE=\"+1\">References</FONT></B></A>
+<PRE>
+  [1] F&ouml;llinger, O. \"Regelungstechnik\", H&uuml;thig-Verlag
+</PRE>
 </html>"));
 end designCraneControllerWithObserver;

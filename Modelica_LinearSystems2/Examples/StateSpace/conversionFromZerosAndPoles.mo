@@ -1,15 +1,15 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function conversionFromZerosAndPoles
-  "Transform a zeros-and-poles representation into a StateSpace description"
+  "Transform a TransferFunction into a StateSpace description"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Complex;
-  import Modelica.ComplexMath.j;
+  import Modelica_LinearSystems2.Math.Complex;
 
 protected
-  ZerosAndPoles zp= ZerosAndPoles({2+0*j}, {1+0*j,2+3*j,2-3*j}, 4);
+  input ZerosAndPoles zp= ZerosAndPoles({2+0*j}, {1+0*j,2+3*j,2-3*j}, 4);
+  input Complex j = Complex.j();
   StateSpace ss=StateSpace(zp);
 public
   output Boolean ok "Standard output";

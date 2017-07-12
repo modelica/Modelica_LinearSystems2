@@ -7,12 +7,12 @@ function assignPolesMI_rob2
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
   import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
   import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
   import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
-  import Re = Modelica.ComplexMath.real;
-  import Im = Modelica.ComplexMath.imag;
+  import Re = Modelica_LinearSystems2.Math.Complex.real;
+  import Im = Modelica_LinearSystems2.Math.Complex.imag;
   import Modelica.Utilities.Streams.print;
 
   input Real A[:,size(A, 1)] "system matrix";
@@ -97,8 +97,10 @@ algorithm
   numberOfComplexPairs := integer((nx - numberOfRealEigenvalues)/2);
   for i in numberOfRealEigenvalues + 1:numberOfRealEigenvalues +
       numberOfComplexPairs loop
-    gammaSorted[i] :=if Im(gammaSorted2[2*i - numberOfRealEigenvalues - 1]) > 0 then gammaSorted2[2*i - numberOfRealEigenvalues - 1] else Modelica.ComplexMath.conj(gammaSorted2[2*i - numberOfRealEigenvalues - 1]);
-    gammaSorted[i + numberOfComplexPairs] :=Modelica.ComplexMath.conj(gammaSorted[i]);
+    gammaSorted[i] := if Im(gammaSorted2[2*i - numberOfRealEigenvalues - 1]) > 0 then
+            gammaSorted2[2*i - numberOfRealEigenvalues - 1] else Complex.conj(
+      gammaSorted2[2*i - numberOfRealEigenvalues - 1]);
+    gammaSorted[i + numberOfComplexPairs] := Complex.conj(gammaSorted[i]);
   end for;
 
   for i in 1:nx loop
@@ -177,7 +179,7 @@ algorithm
 //   for l1 in 1:numberOfComplexPairs loop
 //     for l2 in 1:nx loop
 //       X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
-//         Modelica.ComplexMath.conj(X[l2, numberOfRealEigenvalues + l1]);
+//         Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
 //     end for;
 //   end for;
 
@@ -189,7 +191,8 @@ algorithm
     end for;
     for l1 in 1:numberOfComplexPairs loop
       for l2 in 1:nx loop
-        X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=Modelica.ComplexMath.conj(X[l2, numberOfRealEigenvalues + l1]);
+        X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
+          Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
       end for;
     end for;
   end if;
@@ -202,7 +205,8 @@ algorithm
     end for;
     for l1 in 1:numberOfComplexPairs loop
       for l2 in 1:nx loop
-        X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=Modelica.ComplexMath.conj(X[l2, numberOfRealEigenvalues + l1]);
+        X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
+          Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
       end for;
     end for;
   end if;
@@ -239,10 +243,11 @@ algorithm
        ST := C_transpose(S[:, rankB*(l1 - 1) + 1:rankB*l1]);
        y := matVecMul(ST, QX[:, nx]);
 
-       norm_y :=Modelica.ComplexMath.Vectors.norm(y);
+       norm_y := Complex.Vectors.norm(y);
        y := matVecMul(S[:, rankB*(l1 - 1) + 1:rankB*l1], y)/norm_y;
 
-          if l1 > numberOfRealEigenvalues and Modelica.ComplexMath.'abs'(Complex.'*'.scalarProduct(y, Modelica.ComplexMath.conj(y))) > 0.9 then
+       if l1 > numberOfRealEigenvalues and Complex.'abs'(
+           Complex.Vectors.multiply(y, Complex.conj(y))) > 0.9 then
          idx := 1 + rem(k, rankB - size(Sr, 2));
          y := (y + S[:, (l1 - 1)*rankB + idx])/sqrt(2);
        end if;
@@ -253,7 +258,7 @@ algorithm
 
        if l1 > numberOfRealEigenvalues then
          for l2 in 1:nx loop
-           X[l2, l1 + numberOfComplexPairs] :=Modelica.ComplexMath.conj(y[l2]);
+           X[l2, l1 + numberOfComplexPairs] := Complex.conj(y[l2]);
          end for;
        end if;
      end for;

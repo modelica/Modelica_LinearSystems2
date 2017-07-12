@@ -15,8 +15,8 @@ Vectors.<b>length</b>(v);
 
 <h4>Description</h4>
 <p>
-The function call &quot;<code>Vectors.<b>length</b>(v)</code>&quot; returns the
-<b>Euclidean length</b> &quot;<code>sqrt(v*v)</code>&quot; of vector v.
+The function call \"<code>Vectors.<b>length</b>(v)</code>\" returns the
+<b>Euclidean length</b> \"<code>sqrt(v*v)</code>\" of vector v.
 The function call is equivalent to <a href=\"Modelica://Modelica.Math.Vectors.norm\">Modelica.Math.Vectors.norm(v)</a>. The advantage of
 length(v) over norm(v) is that function length(..) is implemented
 in one statement and therefore the function is usually automatically

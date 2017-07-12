@@ -4,7 +4,7 @@ encapsulated function assignOneOrTwoPoles
 
   import Modelica;
   import Modelica_LinearSystems2;
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Vectors;
 
   input Real F[:,size(F, 1)] "system matrix of order p=1 or p=2";
@@ -64,7 +64,11 @@ algorithm
       "], therefore, the demanded assigned pole must be real. However, the imaginary part is "
        + String(gamma[1].im));
   elseif abs(gamma[1].im) > 0 or abs(gamma[2].im) > 0 then
-    assert(gamma[1].re == gamma[2].re and gamma[1].im == -gamma[2].im, "\nThe assigned pole pair given in function StateSpace.Internal.assignOneOrTwoPoles() must be conjungated complex. However, the poles are\npole1 = " + String(gamma[1]) + "\npole2 = " + String(gamma[2]) + ". \nTry\npole1 = " + String(gamma[1]) + "\npole2 = " + String(Modelica.ComplexMath.conj(gamma[1])) + "\ninstead");
+    assert(gamma[1].re == gamma[2].re and gamma[1].im == -gamma[2].im,
+      "\nThe assigned pole pair given in function StateSpace.Internal.assignOneOrTwoPoles() must be conjungated complex. However, the poles are\npole1 = "
+       + String(gamma[1]) + "\npole2 = " + String(gamma[2]) +
+      ". \nTry\npole1 = " + String(gamma[1]) + "\npole2 = " + String(
+      Complex.conj(gamma[1])) + "\ninstead");
   end if;
 
   if not Modelica.Math.Matrices.isEqual(
@@ -180,7 +184,7 @@ algorithm
       Modelica.Utilities.Streams.print("\n A subsystem (F, G) in StateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
       That is, " + String(F[1, 1]) + " remains and " + String(gamma[1].re) + " cannot be realized");
     else
-      system_ev := Modelica_LinearSystems2.Math.Complex.eigenValues(F);
+      system_ev := Complex.eigenValues(F);
       Modelica.Utilities.Streams.print("\n A subsystem (F, G) in StateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
       That is, " + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then " + " else
               " - ") + String(system_ev[1].im) + "j and " + String(system_ev[2].re)

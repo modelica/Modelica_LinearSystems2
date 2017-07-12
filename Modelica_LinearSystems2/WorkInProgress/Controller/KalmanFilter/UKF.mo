@@ -4,8 +4,8 @@ model UKF "Unscented Kalman filter"
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Design;
 
-  extends Modelica_LinearSystems2.Controllers.Interfaces.PartialDiscreteBlock(final
-      initType = Modelica_LinearSystems2.Controllers.Types.Init.InitialState);
+  extends Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock(final
+      initType = Modelica_LinearSystems2.Controller.Types.Init.InitialState);
 
   replaceable function F_function =
     Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy constrainedby Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase(
@@ -49,7 +49,7 @@ model UKF "Unscented Kalman filter"
         origin={0,-110})));
 
 protected
-  outer Modelica_LinearSystems2.Controllers.SampleClock sampleClock
+  outer Modelica_LinearSystems2.Controller.SampleClock sampleClock
     "Global options";
 initial equation
   x_est = x_est_init;

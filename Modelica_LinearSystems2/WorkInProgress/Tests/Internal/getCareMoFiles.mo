@@ -1,9 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Internal;
 function getCareMoFiles "Returns a vector of files with care*.mo"
   extends Modelica.Icons.Function;
-  input String directoryName=
-    Modelica.Utilities.Files.loadResource("modelica://Modelica_LinearSystems2/WorkInProgress/Tests/care/")
-    annotation(Dialog);
+  input String directoryName = classDirectory()+ "../care" annotation(Dialog);
   output String matFiles[:];
   output Integer nrMat;
 protected

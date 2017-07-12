@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.Examples.StateSpace;
 function designKalmanFilter "Example for Kalman filter design"
   extends Modelica.Icons.Function;
 
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.TransferFunction;
 
@@ -17,7 +17,10 @@ function designKalmanFilter "Example for Kalman filter design"
     redeclare Real C[size(ss.A, 1), size(ss.A, 2)],
     redeclare Real D[size(ss.A, 1), size(ss.B, 2) + size(ss.C, 1)]);
 algorithm
-  (L,kss) := StateSpace.Design.kalmanFilter(ss, Q, R);
+  (L,kss) := StateSpace.Design.kalmanFilter(
+    ss,
+    Q,
+    R);
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>

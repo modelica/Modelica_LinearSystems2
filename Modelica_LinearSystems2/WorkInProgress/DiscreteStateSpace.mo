@@ -485,14 +485,13 @@ end toDiscreteTransferFunction;
 encapsulated function toDiscreteZerosAndPoles
       "Generate a discrete zeros-and-poles representation from a discrete SISO state space representation"
 
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.ZerosAndPoles;
-  import LS2Complex = Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
-  import Complex;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
   input DiscreteStateSpace dss "StateSpace object";
   output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
@@ -519,7 +518,7 @@ algorithm
   if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
       Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
-    poles := LS2Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
+    poles := Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
     zeros := StateSpace.Internal.invariantZeros2(ssm);
     cpoles := fill(Complex(0),size(poles,1));
     czeros := fill(Complex(0),size(zeros,1));
@@ -538,16 +537,16 @@ algorithm
         Ts=dss.Ts, method=dss.method);
 // set frequency to a complex value which is whether pole nor zero
     for i in 1:size(poles,1) loop
-      cpoles[i] :=Modelica.ComplexMath.log(poles[i])/dss.Ts;
+      cpoles[i] := Complex.log(poles[i])/dss.Ts;
     end for;
     for i in 1:size(zeros,1) loop
-      czeros[i] :=Modelica.ComplexMath.log(zeros[i])/dss.Ts;
+      czeros[i] := Complex.log(zeros[i])/dss.Ts;
     end for;
 
      v := sum(cat(1, czeros[:].re,  cpoles[:].re))/max(size(czeros,1)+size(cpoles,1),1) + 13/19;
 //     v := sum(cat(1, zeros[:].re,  poles[:].re))/max(size(zeros,1)+size(poles,1),1);
     frequency := Complex(v)*17/19;
-    cfrequency :=Modelica.ComplexMath.exp(frequency*dss.Ts);
+    cfrequency := Complex.exp(frequency*dss.Ts);
 //    cfrequency := frequency;
 
     Gq := DiscreteZerosAndPoles.Analysis.evaluate(dzp, cfrequency);
@@ -736,13 +735,10 @@ end bodeSISO;
 end Plot;
 
 encapsulated package Internal
-  extends Modelica.Icons.InternalPackage;
-  import Modelica;
-  import Modelica_LinearSystems2;
-
+    import Modelica_LinearSystems2;
 function kfStepMatrices
-  "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
-  extends Modelica.Icons.Function;
+      "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
+extends Modelica.Icons.Function;
 
       import Modelica;
       import Modelica_LinearSystems2;

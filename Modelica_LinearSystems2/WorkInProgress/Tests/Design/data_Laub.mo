@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.Tests.Design;
 function data_Laub "Example for pole assignment"
   extends Modelica.Icons.Function;
 
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData;
 
   input Integer n=10 annotation(Dialog);

@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 function printComplexVector "Print elements of vector of complex numbers"
   import Modelica.Utilities.Streams.print;
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
   input String name "Name of vector c";
   input Complex c[:] "Vector of complex numbers";

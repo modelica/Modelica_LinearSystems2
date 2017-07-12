@@ -3,10 +3,9 @@ function designInversePendulumController
   "Design pole assignment for an inverse pedulum"
 
   import Modelica.Utilities.Streams.print;
-  import Modelica.Utilities.Streams.writeRealMatrix;
   import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Complex;
 
   input String modelName="Modelica_Controller.Examples.Components.InversePendulum_small"
     "Name of the model to linearize";
@@ -37,16 +36,30 @@ algorithm
   ss_pa.A := ss.A - ss.B*K_pa;
 
   print("The feedback matrix of the pole assignment controller is:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(K_pa, 6, "K_pa"));
+    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    K_pa,
+    6,
+    "K_pa"));
   print("eigenvalues of the closed loop system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
-  writeRealMatrix(fileName, "K_pa", K_pa, true);
+  writeMatrix(
+   fileName,
+    "K_pa",
+    K_pa,
+    true);
 
 // Pre filter calculation
   M_pa := -Modelica.Math.Matrices.inv([1,0,0,0]*Matrices.solve2(ss_pa.A, ss_pa.B));
   print("Gain for pre filtering:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(M_pa, 6, "M_pa"));
-  writeRealMatrix(fileName, "M_pa", M_pa, true);
+    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    M_pa,
+    6,
+    "M_pa"));
+  writeMatrix(
+   fileName,
+    "M_pa",
+    M_pa,
+    true);
 
   print("\nok!");
 

@@ -46,13 +46,13 @@ This function returns string <code>s</code> containing vector of real numbers <c
 <h4>Example</h4>
 <blockquote><pre>
 v = {2,0,-342.1};
-<b>printVector</b>(v, 6, &quot;myVec&quot;);
-//  = &quot;
+<b>printVector</b>(v, 6, \"myVec\");
+//  = \"
 // myVec = 
 //          2          
 //          0          
 //         -342      
-// &quot;
+// \"
 </pre></blockquote>
 </html>"));
 end printVector;

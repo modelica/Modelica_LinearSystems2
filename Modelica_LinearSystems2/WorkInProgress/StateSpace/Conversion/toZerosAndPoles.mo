@@ -4,11 +4,10 @@ function toZerosAndPoles
 
   import Modelica;
   import Modelica_LinearSystems2;
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.WorkInProgress;
-
   input StateSpace ss "StateSpace object";
   input Complex frequency2 = Complex(1);
 //protected
@@ -36,7 +35,7 @@ algorithm
   if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
       Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
-    poles := Modelica_LinearSystems2.Math.Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
+    poles := Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
 
    zeros := WorkInProgress.StateSpace.Analysis.invariantZeros(ssm);
 

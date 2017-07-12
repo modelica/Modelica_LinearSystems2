@@ -5,7 +5,7 @@ function plotPolesAndZeros
 
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
 protected
   TransferFunction s = TransferFunction.s();

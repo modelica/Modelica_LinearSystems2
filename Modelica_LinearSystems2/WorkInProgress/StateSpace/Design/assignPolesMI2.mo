@@ -2,13 +2,13 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Design;
 encapsulated function assignPolesMI2
   "Pole assigment design algorithm for multi input systems"
 
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2.StateSpace;
   import Modelica;
   import Modelica.Utilities.Streams.print;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Complex;
 
   input StateSpace ss "state space system";
 
@@ -65,7 +65,7 @@ protected
   Real alphaImag[size(ss.A, 1)]
     "Imaginary part of eigenvalue=(alphaReal+i*alphaImag";
 
-  Complex pi[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+  Complex pi[:]=Complex.eigenValues(ss.A);
 
   Boolean complex_assignedPoles=false
     "True, if there is at least one conjugated comples pole pair in the set of the assigned poles";
@@ -97,7 +97,7 @@ algorithm
       po[i].re := alphaReal[i];
       po[i].im := alphaImag[i];
     end for;
-    Modelica_LinearSystems2.Math.Complex.Vectors.print("The eigenvalues of the open loop system are sorted to\n eigenvalues", pi);
+    Complex.Vectors.print("The eigenvalues of the open loop system are sorted to\n eigenvalues", pi);
   else
     assert(size(gamma, 1) <= size(ss.A, 1), "At most n (order of ss) eigenvalues can be assigned");
 
@@ -274,8 +274,8 @@ print("ev1 = "+String(A_rsf[n,n])+"\n");
     end while;
 
   S := ss.A - ss.B*K;
-  po := Modelica_LinearSystems2.Math.Complex.eigenValues(S);
-   X := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
+  po := Complex.eigenValues(S);
+   X := Complex.eigenVectors(S);
 
 //    X := fill(Complex(0),n,n);
 //    for i in 1:n loop

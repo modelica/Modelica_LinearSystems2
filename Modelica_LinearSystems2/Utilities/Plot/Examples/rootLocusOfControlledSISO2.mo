@@ -1,21 +1,13 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function rootLocusOfControlledSISO2 "Root locus of a SISO system over controller gain k with equidistant gridding"
-  extends Modelica.Icons.Function;
-
 algorithm
-  Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel(
-    "Modelica_LinearSystems2.Utilities.Plot.Examples.Utilities.ControlledSISO2",
-    modelParam={
-      Modelica_LinearSystems2.Records.ParameterVariation(
-        Name="k",
-        grid=Modelica_LinearSystems2.Utilities.Types.Grid.Equidistant,
-        nPoints=200,
-        Min=0,
-        Max=10)});
-
-  annotation(
-    __Dymola_interactive=true,
-    Documentation(info="<html>
+  Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel("Modelica_LinearSystems2.Utilities.Plot.Examples.Utilities.ControlledSISO2", modelParam={Modelica_LinearSystems2.Records.ParameterVariation(
+    Name="k",
+    grid=Modelica_LinearSystems2.Utilities.Types.Grid.Equidistant,
+    nPoints=200,
+    Min=0,
+    Max=10)});
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function plots the root locus of model
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.Utilities.ControlledSISO2\">Plot.Examples.Utilities.ControlledSISO2</a>

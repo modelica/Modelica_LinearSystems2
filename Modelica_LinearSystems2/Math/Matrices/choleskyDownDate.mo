@@ -141,9 +141,9 @@ Note, that the z and a are different in each column.
 It is shown in [1] that this algorithm results in the modified Cholesky factor <b>Ldd</b>.
 </p>
 <p>
-With the boolean input &quot;upper&quot; the user specifies whether the matrix <b>L</b> is lower
+With the boolean input \"upper\" the user specifies whether the matrix <b>L</b> is lower
 or upper triangular matrix (left or right Cholesky factor).
-If &quot;upper==true&quot;, the output <b>Ldd</b> is also upper triangular. Default is &quot;upper==false&quot;.
+If \"upper==true\", the output <b>Ldd</b> is also upper triangular. Default is \"upper==false\".
 </p>
 
 <h4><a name=\"References\">References</a></h4>

@@ -6,10 +6,14 @@ function fromFile "Read matrix from a matlab file"
   input String matrixName="m" "Name of the matrix";
 
 protected
-  Integer Msizes[2] = Modelica.Utilities.Streams.readMatrixSize(fileName, matrixName);
+  Integer Msizes[2]=readMatrixSize(fileName, matrixName);
   Integer n=Msizes[1];
   Integer m=Msizes[2];
-  Real M[n,m] = Modelica.Utilities.Streams.readRealMatrix(fileName, matrixName, n, m);
+  Real M[n,m]=readMatrix(
+      fileName,
+      matrixName,
+      n,
+      m);
 
 public
   output Real A[n,m]=M;

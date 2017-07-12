@@ -2,9 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.Tests.Internal;
 function getMatFiles "Returns a vector of files ending with .mat"
   extends Modelica.Icons.Function;
   input String specifier="data";
-  input String directoryName=
-    Modelica.Utilities.Files.loadResource("modelica://Modelica_LinearSystems2/WorkInProgress/Tests/" + specifier)
-    annotation(Dialog);
+  input String directoryName=classDirectory() + "../" + specifier  annotation(Dialog);
   input String fileNameSpec="";
   output String matFiles[:];
   output Integer nrMat;

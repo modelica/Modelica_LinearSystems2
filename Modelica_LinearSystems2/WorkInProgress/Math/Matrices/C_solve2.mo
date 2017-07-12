@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.Matrices;
 function C_solve2
   "computes the solution to a complex system of linear equations A*X=B, using LU decomposition with partial pivoting and row interchanges"
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
 
   input Complex A[:,size(A, 1)];

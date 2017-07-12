@@ -1,11 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Import;
 function rootLocusOfModel
   "Return the root locus of one parameter (= eigen values of the model that is linearized for every parameter value)"
-  extends Modelica.Icons.Function;
-
-  import Modelica.Utilities.Streams;
   import Modelica_LinearSystems2.Utilities.Types.Grid;
-
   input String modelName "Name of the Modelica model"
     annotation (Dialog(__Dymola_translatedModel));
   input Modelica_LinearSystems2.Records.ParameterVariation modelParam[:]
@@ -36,6 +32,7 @@ protected
 
   String fileName="dslin";
   String fileName2;
+  Real nxMat[1, 1];
   Integer ABCDsizes[2];
   Integer nx;
   Integer nu;
@@ -53,7 +50,7 @@ algorithm
   // Determine the parameter to be varied and assign new parameter values to the model if necessary
   if nParam == 0 then
     // No parameter defined
-    Streams.error(
+    Modelica.Utilities.Streams.error(
       "No parameter defined that shall be varied for the root locus");
 
   elseif nParam == 1 then
@@ -73,7 +70,7 @@ algorithm
       elseif modelParam[i].grid == Grid.Equidistant or modelParam[i].grid ==
           Grid.Logarithmic then
         if index_p_var > 0 then
-          Streams.error("Parameters " + modelParam[
+          Modelica.Utilities.Streams.error("Parameters " + modelParam[
             index_p_var].Name + " and " + modelParam[i].Name +
             " shall be varied,\n" +
             "but this is only possible for one parameter.\n" +
@@ -168,13 +165,18 @@ algorithm
       "Linearization with function simulateMultiExtendedModel failed\n(maybe some parameter values are not meaningful?).");
   else
     // Simulate always until t_lineare and only then linearize
-    Streams.error("Option not yet implemented");
+    Modelica.Utilities.Streams.error("Option not yet implemented");
   end if;
 
   // Determine array dimensions of the first linearization point
   fileName2 := fileName + String(is[1]) + ".mat";
-  ABCDsizes := Streams.readMatrixSize(fileName2, "ABCD");
-  nx :=integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
+  nxMat := readMatrix(
+    fileName2,
+    "nx",
+    1,
+    1);
+  ABCDsizes := readMatrixSize(fileName2, "ABCD");
+  nx := integer(nxMat[1, 1]);
   nu := ABCDsizes[2] - nx;
   ny := ABCDsizes[1] - nx;
 
@@ -186,16 +188,5 @@ algorithm
     ny,
     reorder);
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
-<h4>Syntax</h4>
-<blockquote><pre>
-(Re,Im,s,paramName,paramUnit) = Utilities.Import.rootLocusOfModel(
-  modelName,modelParam,simulationSetup,reorder)
-</pre></blockquote>
-
-<h4>Description</h4>
-<p>
-Return the root locus of one parameter, i.e eigen values of the model that is linearized for every parameter value.
-</p>
-</html>"));
+  annotation (__Dymola_interactive=true);
 end rootLocusOfModel;

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function zgetri
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
   input Complex LU[:, size(LU, 1)]
     "LU factorization of zgetrf of a complex square matrix";

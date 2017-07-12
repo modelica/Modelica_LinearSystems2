@@ -7,7 +7,7 @@ encapsulated function reducedCtrSystem
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.Math.Vectors;
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
   input StateSpace ss;
 
