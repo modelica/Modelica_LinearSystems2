@@ -52,14 +52,14 @@ operator record DiscreteTransferFunction
       "Generate a DiscreteStateSpace data record from a set of zeros and poles"
 
       import Modelica;
-      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.Math.Complex;
 
-      input Complex z[:] = fill(Complex(0), 0)
+      input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
-      input Complex p[:] = fill(Complex(0), 0)
+      input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
       input Modelica.SIunits.Time Ts "Sample time";
@@ -403,15 +403,15 @@ operator record DiscreteTransferFunction
 
     end 'String';
 
-  encapsulated function z "Generate the discrete transfer function z"
+encapsulated function z "Generate the discrete transfer function z"
     import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
-    input Modelica.SIunits.Time Ts=0;
-    output DiscreteTransferFunction dtf(n={1,0}, d={1},Ts=Ts) "z";
-  algorithm
+  input Modelica.SIunits.Time Ts=0;
+  output DiscreteTransferFunction dtf(n={1,0}, d={1},Ts=Ts) "z";
+algorithm
 
-    annotation (Documentation(info="<html>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 z = DiscreteTransferFunction.<b>z</b>()
@@ -425,7 +425,7 @@ Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can b
 DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
 </pre></blockquote>
 </html>"));
-  end z;
+end z;
 
   encapsulated package Analysis
     "Package of functions to analyse discrete transfer function represented by a DiscreteTransferFunction record"
@@ -475,10 +475,10 @@ DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
 First, the discrete transfer function representation is transformed into a discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e.
 </p>
 <blockquote><pre>
-Impulse &quot;Impulse response&quot;,
-Step    &quot;Step response&quot;,
-Ramp    &quot;Ramp response&quot;,
-Initial &quot;Initial condition response&quot;
+Impulse \"Impulse response\",
+Step \"Step response\",
+Ramp \"Ramp response\",
+Initial \"Initial condition response\"
 </pre></blockquote>
 <p>
 The outputs y and x are calculated from the system equations of the discrete state space system for each time step t=k*dt.
@@ -547,7 +547,7 @@ First, the discrete transfer function representation is transformed into discret
 and the impulse response of the discrete state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
 </p>
 <blockquote><pre>
-Impulse &quot;Impulse response&quot;,
+Impulse \"Impulse response\",
 </pre></blockquote>
 <p>
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
@@ -613,7 +613,7 @@ First, the discrete transfer function representation is transformed into discret
 and the step response of the discrete state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
 </p>
 <blockquote><pre>
-Step &quot;Step response&quot;,
+Step \"Step response\",
 </pre></blockquote>
 <p>
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
@@ -680,7 +680,7 @@ First, the discrete transfer function representation is transformed into discret
 and the ramp response of the discrete state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
 </p>
 <blockquote><pre>
-Ramp &quot;Ramp response&quot;,
+Ramp \"Ramp response\",
 </pre></blockquote>
 <p>
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
@@ -749,7 +749,7 @@ First, the discrete transfer function representation is transformed into discret
 and the initial response of the discrete state space system for initial state x0 is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
 </p>
 <blockquote><pre>
-Initial &quot;Initial response&quot;,
+Initial \"Initial response\",
 </pre></blockquote>
 <p>
 The outputs y and x of the discrete state space systrem are calculated for each time step t=k*dt.
@@ -828,8 +828,8 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
-      import Complex;
       import SI = Modelica.SIunits;
 
       input DiscreteTransferFunction dtf
@@ -891,7 +891,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
       denZeros := fill(Complex(0),size(denZerosZ,1));
       for i in 1:size(denZerosZ,1) loop
-        denZeros[i] :=Modelica.ComplexMath.log(denZerosZ[i])/dtf.Ts;
+        denZeros[i] := Complex.log(denZerosZ[i])/dtf.Ts;
       end for;
 
       f := Internal.frequencyVector(
@@ -906,13 +906,13 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       phi_old := 0.0;
       for i in 1:nPoints loop
         w[i] := SI.Conversions.from_Hz(f[i]);
-        z[i] :=Modelica.ComplexMath.exp(Complex(0, w[i]*dtf.Ts));
+        z[i] := Complex.exp(Complex(0,w[i]*dtf.Ts));
         c := TransferFunction.Analysis.evaluate(
               tf,
               z[i],
               1e-10);
-        A[i] :=Modelica.ComplexMath.'abs'(c);
-        phi_old :=Modelica.ComplexMath.arg(c, phi_old);
+        A[i] := Complex.'abs'(c);
+        phi_old := Complex.arg(c, phi_old);
         phi[i] := SI.Conversions.to_deg(phi_old);
 
         // Convert to other units, if required
@@ -1188,11 +1188,11 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
     encapsulated function toDiscreteZerosAndPoles
       "Generate a DiscreteZerosAndPoles object from a DiscreteTransferFunction object"
       import Modelica;
-      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Math.Complex;
 
       input DiscreteTransferFunction dtf "transfer function of a system";
       output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp(
@@ -1362,36 +1362,35 @@ with
 
     encapsulated function fromFile
       "Generate a DiscreteTransferFunction data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
-      import Modelica.Utilities.Streams;
+
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
-
-      input String fileName = "dtf.mat" "Name of the transfer function data file"
-        annotation (
-          Dialog(
-            loadSelector(
-              filter="MAT files (*.mat);; All files (*.*)",
-              caption="Transfer function data file")));
-      input String numName = "n" "Name of the numenator of the transfer function";
-      input String denName = "d"
+      input String fileName="dtf.mat" "Name of the transfer function data file"   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+                          caption="transfer function data file")));
+      input String numName="n" "Name of the numenator of the transfer function";
+      input String denName="d"
         "Name of the denominator of the transfer function";
 
     protected
-      Integer numSize[2] = Streams.readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
-      Integer denSize[2] = Streams.readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
+      Integer numSize[2]=readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
+      Integer denSize[2]=readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
 
-      Real num[numSize[1],numSize[2]]=
-        Streams.readRealMatrix(fileName, numName, numSize[1], numSize[2])
-        "Numenator coefficients";
-      Real den[denSize[1],denSize[2]]=
-        Streams.readRealMatrix(fileName, denName, denSize[1], denSize[2])
-        "Denominator coefficients";
-      Integer ns2 = numSize[2] annotation(__Dymola_allowForSize=true);
-      Integer ds2 = denSize[2] annotation(__Dymola_allowForSize=true);
-      Real Ts[1,1] = Streams.readRealMatrix(fileName, "Ts", 1, 1);
+      Real num[numSize[1],numSize[2]]=readMatrix(
+            fileName,
+            numName,
+            numSize[1],
+            numSize[2]) "numenator coefficients";
+      Real den[denSize[1],denSize[2]]=readMatrix(
+            fileName,
+            denName,
+            denSize[1],
+            denSize[2]) "denominator coefficients";
+      Integer ns2=numSize[2] annotation(__Dymola_allowForSize=true);
+      Integer ds2=denSize[2] annotation(__Dymola_allowForSize=true);
+      Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);
 
     public
-      output DiscreteTransferFunction dtf(n=fill(0,ns2), d=fill(0,ds2))
+     output DiscreteTransferFunction dtf(n=fill(0,ns2),d=fill(0,ds2))
         "Discrete transfer function";
 
     algorithm
@@ -1406,34 +1405,33 @@ with
     end fromFile;
 
   function fromModel
-    "Generate a DiscreteTransferFunction record array from a state space representation resulted from linearization of a model"
+      "Generate a DiscreteTransferFunction record array from a state space representation resulted from linearization of a model"
 
-    import Modelica;
-    import Modelica.Utilities.Streams;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.DiscreteStateSpace;
-    import Modelica_LinearSystems2.DiscreteTransferFunction;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
 
     input String modelName "Name of the Modelica model"  annotation(Dialog(__Dymola_translatedModel(translate=true)));
-    input Real T_linearize = 0
+    input Real T_linearize=0
         "point in time of simulation to linearize the model";
-    input String fileName = "dslin" "Name of the result file";
-    input Modelica.SIunits.Time Ts = 1 "Sample time";
-    input Modelica_LinearSystems2.Utilities.Types.Method method=
-      Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
+    input String fileName="dslin" "Name of the result file";
+    input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
     protected
-    String fileName2 = fileName + ".mat";
-    Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
-    Boolean OK2 = importInitial("dsfinal.txt");
-    Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
-    Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
-    Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
-    Integer nu = ABCDsizes[2] - nx;
-    Integer ny = ABCDsizes[1] - nx;
-    Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-    String xuyName[nx + nu + ny] = readStringMatrix(fileName2, "xuyName", nx + nu + ny);
+    String fileName2=fileName + ".mat";
+    Boolean OK1=simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
+    Boolean OK2=importInitial("dsfinal.txt");
+    Boolean OK3=linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
+    Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
+    Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+    Integer nx=integer(nxMat[1, 1]);
+    Integer nu=ABCDsizes[2] - nx;
+    Integer ny=ABCDsizes[1] - nx;
+    Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+    String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
     StateSpace ss(
       redeclare Real A[nx,nx],

@@ -1,8 +1,8 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function wrapper_zgerq2 "Wrapper for lapack function zgerq2"
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
-//  input Complex A[ :, :] "Square or rectangular matrix";
+//  input Modelica_LinearSystems2.Math.Complex A[ :, :] "Square or rectangular matrix";
   input Real A_real[ :, :] "Square or rectangular matrix";
   input Real A_imag[size(A_real,1), size(A_real,2)]
     "Square or rectangular matrix";

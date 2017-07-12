@@ -1,6 +1,5 @@
 within Modelica_LinearSystems2.WorkInProgress;
-package Icons "Package of icons used in the Linear Systems library"
-  extends Modelica.Icons.IconsPackage;
+package Icons "Icons used in the Linear Systems library"
 
 
 annotation (Documentation(info="<html>

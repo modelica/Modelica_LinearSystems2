@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Design;
 record DesignData_Chow_Kokotovic
   "Contains the system matrix A, the input matrix B, the assigned Poles and optionally the ideal feedback matrix"
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
   import
     Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic;
   extends Modelica.Icons.Record;
@@ -17,8 +17,9 @@ record DesignData_Chow_Kokotovic
   function parameters "Default constructor for a DesignData record"
       import Modelica;
       import Modelica_LinearSystems2;
-      import Complex;
-      import Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic;
+      import Modelica_LinearSystems2.Math.Complex;
+      import
+        Modelica_LinearSystems2.WorkInProgress.Tests.Design.DesignData_Chow_Kokotovic;
 
     input Real d=1e-6;
     output DesignData_Chow_Kokotovic data(

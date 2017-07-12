@@ -1,4 +1,4 @@
-// Convert from Modelica_LinearSystems2 2.3.4 to Modelica_LinearSystems2 2.4.0 or higher
+// Convert from Modelica_LinearSystems2 2.2 to Modelica_LinearSystems2 XXX
 
 // clear
 convertClear();
@@ -7,69 +7,3 @@ convertClear();
 // Change references to classes that are removed from Modelica_LinearSystems2 or are obsolete
 convertClass("Modelica_LinearSystems2.Types",
              "Modelica_LinearSystems2.Utilities.Types")
-convertClass("Modelica_LinearSystems2.Controller",
-             "Modelica_LinearSystems2.Controllers")
-
-// Convert elemnts for complex math operations
-//convertClass("Modelica_LinearSystems2.Math.Complex","Modelica.ComplexMath")
-//"Modelica_LinearSystems2.Math.Complex.Vectors.print"
-//"Modelica_LinearSystems2.Math.Complex.Vectors.printHTML"
-convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.multiply","Complex.'*'.scalarProduct")
-convertClass("Modelica_LinearSystems2.Math.Complex.'constructor'","Complex.'constructor'")
-convertClass("Modelica_LinearSystems2.Math.Complex.'-'","Complex.'-'")
-convertClass("Modelica_LinearSystems2.Math.Complex.'+'","Complex.'+'")
-convertClass("Modelica_LinearSystems2.Math.Complex.'*'","Complex.'*'.multiply")
-convertClass("Modelica_LinearSystems2.Math.Complex.'/'","Complex.'/'")
-convertClass("Modelica_LinearSystems2.Math.Complex.'=='","Complex.'=='")
-convertClass("Modelica_LinearSystems2.Math.Complex.'String'","Complex.'String'")
-//"Modelica_LinearSystems2.Math.Complex.j","")
-//"Modelica_LinearSystems2.Math.Complex.eigenValues"
-//"Modelica_LinearSystems2.Math.Complex.eigenVectors"
-//"Modelica_LinearSystems2.Math.Complex.frequency"
-convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.length","Modelica.ComplexMath.Vectors.length")
-convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.norm","Modelica.ComplexMath.Vectors.norm")
-convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.normalize","Modelica.ComplexMath.Vectors.normalize")
-convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.sortComplex","Modelica.ComplexMath.Vectors.sort")
-convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.reverse","Modelica.ComplexMath.Vectors.reverse")
-convertClass("Modelica_LinearSystems2.Math.Complex.'abs'","Modelica.ComplexMath.'abs'")
-convertClass("Modelica_LinearSystems2.Math.Complex.'sqrt'","Modelica.ComplexMath.'sqrt'")
-convertClass("Modelica_LinearSystems2.Math.Complex.'max'","Modelica.ComplexMath.'max'")
-convertClass("Modelica_LinearSystems2.Math.Complex.exp","Modelica.ComplexMath.exp")
-convertClass("Modelica_LinearSystems2.Math.Complex.log","Modelica.ComplexMath.log")
-convertClass("Modelica_LinearSystems2.Math.Complex.sin","Modelica.ComplexMath.sin")
-convertClass("Modelica_LinearSystems2.Math.Complex.cos","Modelica.ComplexMath.cos")
-convertClass("Modelica_LinearSystems2.Math.Complex.arg","Modelica.ComplexMath.arg")
-convertClass("Modelica_LinearSystems2.Math.Complex.conj","Modelica.ComplexMath.conj")
-convertClass("Modelica_LinearSystems2.Math.Complex.real","Modelica.ComplexMath.real")
-convertClass("Modelica_LinearSystems2.Math.Complex.imag","Modelica.ComplexMath.imag")
-//"Modelica.ComplexMath.tan"
-//"Modelica.ComplexMath.asin"
-//"Modelica.ComplexMath.acos"
-//"Modelica.ComplexMath.atan"
-//"Modelica.ComplexMath.sinh"
-//"Modelica.ComplexMath.cosh"
-//"Modelica.ComplexMath.tanh"
-//"Modelica.ComplexMath.asinh"
-//"Modelica.ComplexMath.acosh"
-//"Modelica.ComplexMath.atanh"
-//"Modelica.ComplexMath.fromPolar"
-//"Modelica.ComplexMath.'min'"
-//"Modelica.ComplexMath.'sum'"
-//"Modelica.ComplexMath.'product'"
-
-convertClass("Modelica_LinearSystems2.Utilities.Plot.plot_FFT_fromFile",
-             "Modelica_LinearSystems2.Utilities.Plot.plotFFT_fromFile")
-convertClass("Modelica_LinearSystems2.Utilities.Plot.plot_FFTs_from_directory",
-             "Modelica_LinearSystems2.Utilities.Plot.plotFFTs_fromDirectory")
-convertClass("Modelica_LinearSystems2.Utilities.Plot.plot_FFTs_of_model",
-             "Modelica_LinearSystems2.Utilities.Plot.plotFFTs_ofModel")
-
-// Use ModelicaIO for reading matrices from a file
-convertClass("Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize",
-             "Modelica.Utilities.Streams.readMatrixSize")
-convertClass("Modelica_LinearSystems2.Internal.Streams.readMatrixInternal",
-             "Modelica.Utilities.Streams.readRealMatrix")
-convertClass("Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
-             "Modelica.Utilities.Streams.readRealMatrix")
-//convertClass("","")
-//convertClass("","")

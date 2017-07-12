@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function wrapper_zgetri
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
   input Real LU_real[ :, :]
     "LU factorization of zgetrf of a square matrix, real part";

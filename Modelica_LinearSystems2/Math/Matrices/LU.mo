@@ -31,7 +31,7 @@ algorithm
 <h4>Description</h4>
 <p>
 This function call returns the
-LU decomposition of a &quot;Real[m,n]&quot; matrix A, i.e.,
+LU decomposition of a \"Real[m,n]\" matrix A, i.e.,
 </p>
 <blockquote>
 <p>
@@ -63,7 +63,7 @@ The optional third (Integer) output argument has the following meaning:
   <tr><td valign=\"top\">info = 0:</td>
       <td valign=\"top\">Successful exit</td></tr>
   <tr><td valign=\"top\">info &gt; 0:</td>
-      <td valign=\"top\" width=&quot;350&quot;>If info = i then U[i,i] is exactly zero. The factorization
+      <td valign=\"top\" width=\"350\">If info = i then U[i,i] is exactly zero. The factorization
           has been completed, but the factor U is exactly
           singular, and division by zero will occur if it is used
           to solve a system of equations.</td></tr>
@@ -71,9 +71,9 @@ The optional third (Integer) output argument has the following meaning:
 </blockquote>
 <p>
 The LU factorization is computed
-with the LAPACK function &quot;dgetrf&quot;,
+with the LAPACK function \"dgetrf\",
 i.e., by Gaussian elemination using partial pivoting
-with row interchanges. Vector &quot;pivots&quot; are the
+with row interchanges. Vector \"pivots\" are the
 pivot indices, i.e., for 1 &le; i &le; min(m,n), row i of
 matrix A was interchanged with row pivots[i].
 </p>

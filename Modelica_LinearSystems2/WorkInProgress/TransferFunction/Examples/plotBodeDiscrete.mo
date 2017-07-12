@@ -3,7 +3,7 @@ function plotBodeDiscrete
   "Plot the Bode diagram of the continuous and the discrete transfer functions with automatic determination of the frequency range to plot"
 
   import Modelica.Utilities.Streams.print;
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
 

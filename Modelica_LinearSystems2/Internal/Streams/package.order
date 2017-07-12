@@ -7,6 +7,8 @@ ReadMatrixC
 ReadMatrixC2
 ReadMatrixD
 ReadMatrixD2
+readMatrixInternal
+readMatrixOnFileSize
 ReadSystemDimension
 ReadSystemDimension2
 stateSpaceString_html

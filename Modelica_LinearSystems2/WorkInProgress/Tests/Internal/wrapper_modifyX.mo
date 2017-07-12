@@ -182,7 +182,7 @@ int c_inter_modifyX_(doublereal *x_real, doublereal *x_imag, integer *n, doubler
 
 
 
-//         if l1 > numberOfRealEigenvalues and Complex.'abs'(Complex.Vectors.multiply(y,Modelica.ComplexMath.conj(y)))>0.9 then
+//         if l1 > numberOfRealEigenvalues and Complex.'abs'(Complex.Vectors.multiply(y,Complex.conj(y)))>0.9 then
 //           idx = 1 + rem(k, size(subS[l1].S, 2) - size(Sr, 2));
 //           y = (y + subS[l1].S[:, idx])/sqrt(2);
 //         end if;

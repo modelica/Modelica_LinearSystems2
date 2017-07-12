@@ -1,8 +1,6 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 function parameterizedCurves
   "Plot parametrized curve with one or more branches"
-  extends Modelica.Icons.Function;
-
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Utilities.Plot.Internal;
 
@@ -55,26 +53,26 @@ algorithm
 
   // Plot parameterized curve
   if nProperties == 0 then
-    plotParametricCurves(
-                  x=diagram.X,
-                  y=diagram.Y,
-                  s=diagram.s,
-                  xName=diagram.xName,
-                  yName=diagram.yName,
-                  sName=diagram.sName,
-                  legends=diagram.legends,
-                  id = id,
-                  labelWithS=diagram.labelWithS);
+     plotParametricCurves(
+                   x=diagram.X,
+                   y=diagram.Y,
+                   s=diagram.s,
+                   xName=diagram.xName,
+                   yName=diagram.yName,
+                   sName=diagram.sName,
+                   legends=diagram.legends,
+                   id = id,
+                   labelWithS=diagram.labelWithS);
   else
-    for i in 1:nBranches loop
-      k := i;
-      j :=mod(k, nProperties) + 1
-      "if k is replaced by i, Dymola gives an error about assignment of Real to Integer";
-      colors[i,:]    :=diagram.curveProperties[j].lineColor;
-      patterns[i]    :=diagram.curveProperties[j].linePattern;
-      symbols[i]     :=diagram.curveProperties[j].lineSymbol;
-      thicknesses[i] :=diagram.curveProperties[j].lineThickness;
-    end for;
+     for i in 1:nBranches loop
+        k := i;
+        j :=mod(k, nProperties) + 1
+        "if k is replaced by i, Dymola gives an error about assignment of Real to Integer";
+        colors[i,:]    :=diagram.curveProperties[j].lineColor;
+        patterns[i]    :=diagram.curveProperties[j].linePattern;
+        symbols[i]     :=diagram.curveProperties[j].lineSymbol;
+        thicknesses[i] :=diagram.curveProperties[j].lineThickness;
+     end for;
     plotParametricCurves(
       x=diagram.X,
       y=diagram.Y,

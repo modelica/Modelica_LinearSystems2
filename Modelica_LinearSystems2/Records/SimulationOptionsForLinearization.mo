@@ -7,11 +7,9 @@ record SimulationOptionsForLinearization
   Modelica.SIunits.Time t_start=0.0 "Start time of simulation" annotation(Dialog);
   Modelica.SIunits.Time t_linearize=0.0
     "Simulate from t_start until t_linearize and then linearize, if linearizeAtInitial=false"
-    annotation(Dialog(enable=not linearizeAtInitial));
+                            annotation(Dialog(enable=not linearizeAtInitial));
 
-  String method="Dassl" "Integration method, if linearizeAtInitial=false"
-    annotation (
-      Dialog(enable=not linearizeAtInitial),
+  String method="Dassl" "Integration method, if linearizeAtInitial=false" annotation(Dialog(enable=not linearizeAtInitial),
       choices(
         choice="Lsodar" "Lsodar",
         choice="Dassl" "Dassl",
@@ -29,11 +27,9 @@ record SimulationOptionsForLinearization
         choice="Cerk23" "Cerk23",
         choice="Cerk34" "Cerk34",
         choice="Cerk45" "Cerk45"));
-  Real tolerance=1e-4 "Relative error tolerance, if linearizeAtInitial=false"
-    annotation(Dialog(enable=not linearizeAtInitial));
+  Real tolerance=1e-4 "Relative error tolerance, if linearizeAtInitial=false" annotation(Dialog(enable=not linearizeAtInitial));
   Real fixedStepSize=0.001
-    "Step size for fixed step integrators, if linearizeAtInitial=false"
-    annotation(Dialog(enable=not linearizeAtInitial));
+    "Step size for fixed step integrators, if linearizeAtInitial=false"                        annotation(Dialog(enable=not linearizeAtInitial));
 
   annotation (Icon(graphics={
         Rectangle(

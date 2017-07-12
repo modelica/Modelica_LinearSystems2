@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.Matrices;
 function C_singularValues
   "Compute singular values and left and right singular vectors of a complex matrix"
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
   input Complex A[:,:] "Square or rectangular matrix";
   output Real sigma[min(size(A, 1), size(A, 2))] "singular values";

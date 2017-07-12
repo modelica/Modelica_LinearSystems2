@@ -7,7 +7,7 @@ function toTransferFunction
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.Internal;
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
   input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
   output TransferFunction tf(redeclare Real n[2*size(zp.n2,1)+size(zp.n1,1)+1], redeclare Real

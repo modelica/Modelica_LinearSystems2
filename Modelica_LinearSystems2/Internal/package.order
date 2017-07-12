@@ -41,6 +41,8 @@ timeResponseMask_tf
 timeResponseMask_zp
 timeResponseSamples
 methodString
+from_Hz
+to_Hz
 timeResponseMask_discrete
 timeResponseMask_zp_discrete
 timeResponseMask_tf_discrete

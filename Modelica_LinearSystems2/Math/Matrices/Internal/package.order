@@ -15,6 +15,7 @@ multiplyWithOrthogonalQ_hr
 multiplyWithOrthogonalQ_qr
 QR
 QR2
+readMatrixGain
 reorderRSF
 reorderRSFc
 reorderRSFd

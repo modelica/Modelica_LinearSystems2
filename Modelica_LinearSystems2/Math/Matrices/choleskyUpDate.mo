@@ -78,7 +78,7 @@ The approach is a transformation <b>H</b>*[<b>v</b>, <b>L</b>]' = [<b>0</b>, <b>
 and matrix <b>Lud</b> is lower (upper) triangular. The transformation is performed
 by n (order of <b>A</b>) Givens rotations.
 The following sequence illustrates the principle of stepwise transformation of
-matrix [v, L]'. Symbol &quot;*&quot; represents arbitrary elements. For each step the changed
+matrix [v, L]'. Symbol \"*\" represents arbitrary elements. For each step the changed
 elements are bold.
 </p>
 <blockquote><pre>
@@ -90,9 +90,9 @@ elements are bold.
 
 </pre></blockquote>
 <p>
-With the boolean input &quot;upper&quot; the user specifies wether the matrix <b>L</b>
+With the boolean input \"upper\" the user specifies wether the matrix <b>L</b>
 is lower or upper triangular matrix (left or right Cholesky factor).
-If &quot;upper==true&quot;, the output <b>Lud</b> is also upper triangular. Default is &quot;upper==false&quot;.
+If \"upper==true\", the output <b>Lud</b> is also upper triangular. Default is \"upper==false\".
 </p>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">

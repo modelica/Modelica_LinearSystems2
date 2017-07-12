@@ -1,8 +1,8 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function zgerq2
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
-  input Complex A[:,:]
+  input Modelica_LinearSystems2.Math.Complex A[:,:]
     "Square or rectangular matrix";
   output Complex RQ[size(A, 1),size(A, 2)] "RQ factorization in packed format";
   output Complex tau[:] "elementory reflectors";

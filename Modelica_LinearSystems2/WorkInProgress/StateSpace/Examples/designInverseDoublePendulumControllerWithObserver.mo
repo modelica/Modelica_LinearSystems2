@@ -3,44 +3,42 @@ function designInverseDoublePendulumControllerWithObserver
   "Design pole assignment for an inverse double pedulum"
 
   import Modelica.Utilities.Streams.print;
-  import Modelica.Utilities.Streams.writeRealMatrix;
   import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.StateSpace;
-  import Complex;
-
-  //  input String modelName="Modelica_Controller.Examples.Components.InverseDoublePendulum"  "name of the model to linearize";
-  input String modelName="Modelica_LinearSystems2.Controllers.Examples.Components.InverseDoublePendulum"
-    "Name of the model to linearize";
+//  input String modelName="Modelica_Controller.Examples.Components.InverseDoublePendulum"  "name of the model to linearize";
+  input String modelName="Modelica_LinearSystems2.Controller.Examples.Components.InverseDoublePendulum"
+    "name of the model to linearize";
 
 //input Complex pa[6]={-1+0*j, -1+0*j, -6-0.2*j,-6+0.2*j,-6-0.2*j,-6+0.2*j}     "assigned poles";
-  input Complex pa[6]={Complex(-1,0), Complex(-1,0), Complex(-12,-0.2),Complex(-12,0.2),Complex(-15,-0),Complex(-15,0)}
-    "Assigned poles";
+input Complex pa[6]={Complex(-1,0), Complex(-1,0), Complex(-12,-0.2),Complex(-12,0.2),Complex(-15,-0),Complex(-15,0)}
+    "assigned poles";
   input Complex pob[6]=cat(1,fill(-15+0*j,4),fill(-20+0*j,2))
-    "Assigned observer poles";
+    "assigned observer poles";
 
-  input String fileName=DataDir + "inverseDoublePendulumControllerO.mat"
-    "File name for results";
+ input String fileName=DataDir + "inverseDoublePendulumControllerO.mat"
+    "file name for results";
 
   input Boolean makeAnalysis=false;
 
- output Real K_pa[:,:] "Feedback matrix pole assigment controller";
- output Real M_pa[:,:] "Pre filter LQ controller";
- output Real K_ob[:,:] "Feedback matrix pole assigment controller";
+ output Real K_pa[:,:] "feedback matrix pole assigment controller";
+ output Real M_pa[:,:] "pre filter LQ controller";
+ output Real K_ob[:,:] "feedback matrix pole assigment controller";
 
 protected
-  input Complex j = Modelica_LinearSystems2.Math.Complex.j();
+ input Complex j = Modelica_LinearSystems2.Math.Complex.j();
 protected
-  Real Q[:,:];
-  Real R[:,:];
-  Boolean isControllable;
-  Boolean isObservable;
+ Real Q[:,:];
+ Real R[:,:];
+ Boolean isControllable;
+ Boolean isObservable;
 
   // Determine linear System from Modelica_Controller.Examples.Components.InverseDoublePendulum.mo
-  Modelica_LinearSystems2.StateSpace ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName);
+ Modelica_LinearSystems2.StateSpace ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName);
 
-  Complex p[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
-  Modelica_LinearSystems2.StateSpace ss_pa=ss;
+ Complex p[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+ Modelica_LinearSystems2.StateSpace ss_pa=ss;
 // Modelica_LinearSystems2.StateSpace ss_ob=StateSpace(A=transpose(ss.A), B=transpose([1,0,0,0,0,0;0,0,1,0,0,0]), C=transpose(ss.B), D=fill(0,size(ss.B,2),2));
 // Modelica_LinearSystems2.StateSpace ssPlant=Modelica_LinearSystems2.StateSpace(A=ss.A, B=ss.B,C=[1,0,0,0,0,0;0,0,1,0,0,0],D=zeros(2,size(ss.B,2)));
 
@@ -53,31 +51,31 @@ protected
   Modelica_LinearSystems2.StateSpace ssPlant=Modelica_LinearSystems2.StateSpace(A=ss.A, B=ss.B,C=[1,0,0,0,0,0;0,0,1,0,0,0],D=zeros(2,size(ss.B,2)), yNames={"s","phi1"}, xNames=ss.xNames, uNames=ss.uNames);
 
 algorithm
-  ss.C:=identity(6);
-  print("The linearized state space system is determined to:\n" + String(ss));
+ ss.C:=identity(6);
+print("The linearized state space system is determined to:\n" + String(ss));
   Modelica_LinearSystems2.Math.Matrices.printMatrix(ss.C,6,"C");
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(ss.D,6,"D");
+ Modelica_LinearSystems2.Math.Matrices.printMatrix(ss.D,6,"D");
 
-  if makeAnalysis then
-    StateSpace.Analysis.analysis(ssPlant,fileName="inverseDoublePendulum.html");
-  end if;
+if makeAnalysis then
+StateSpace.Analysis.analysis(ssPlant,fileName="inverseDoublePendulum.html");
+end if;
 
-  isControllable := StateSpace.Analysis.isControllable(ssPlant);
+isControllable := StateSpace.Analysis.isControllable(ssPlant);
+
   if isControllable then
-    Modelica.Utilities.Streams.print("ssPlant is controllable");
-  else
-    Modelica.Utilities.Streams.print("ssPlant is not controllable");
-  end if;
-
-  isObservable := StateSpace.Analysis.isObservable(ssPlant);
+      Modelica.Utilities.Streams.print("ssPlant is controllable");
+    else
+      Modelica.Utilities.Streams.print("ssPlant is not controllable");
+    end if;
+isObservable := StateSpace.Analysis.isObservable(ssPlant);
   if isObservable then
-    Modelica.Utilities.Streams.print("ssPlant is observable");
-  else
-    Modelica.Utilities.Streams.print("ssPlant is not observable");
-  end if;
+      Modelica.Utilities.Streams.print("ssPlant is observable");
+    else
+      Modelica.Utilities.Streams.print("ssPlant is not observable");
+    end if;
 
-  print("The eigenvalues are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("p",p);
+ print("The eigenvalues are:\n");
+Complex.Vectors.print("p",p);
 
   //####### POLE ASSIGNMENT ##########
 
@@ -93,22 +91,45 @@ algorithm
   print("eigenvalues of the closed loop system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
 
-  writeRealMatrix(fileName, "K_pa", K_pa, true);
+  writeMatrix(
+    fileName,
+    "K_pa",
+    K_pa,
+    true);
 
   // Pre filter calculation
   M_pa := -Modelica.Math.Matrices.inv([1,0,0,0,0,0]*Matrices.solve2(ss_pa.A,
     ss_pa.B));
   print("Gain for pre filtering:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(M_pa, 6, "M_pa"));
-  writeRealMatrix(fileName, "M_pa", M_pa, true);
+    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    M_pa,
+    6,
+    "M_pa"));
+  writeMatrix(
+    fileName,
+    "M_pa",
+    M_pa,
+    true);
 
   K_ob := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss_ob, pob);
   K_ob := transpose(K_ob);
 
-  writeRealMatrix(fileName, "nx", [size(ssPlant.A, 1)], true);
-  writeRealMatrix(fileName, "stateSpace", [ssPlant.A, ssPlant.B; ssPlant.C, ssPlant.D], true);
+  writeMatrix(
+    fileName,
+    "nx",
+    [size(ssPlant.A,1)],
+    true);
+ writeMatrix(
+    fileName,
+    "stateSpace",
+    [ssPlant.A,ssPlant.B; ssPlant.C,ssPlant.D],
+    true);
 
-  writeRealMatrix(fileName, "K_ob2", K_ob, true);
+  writeMatrix(
+    fileName,
+    "K_ob2",
+    K_ob,
+    true);
 
   if makeAnalysis then
     StateSpace.Analysis.analysis(ss_pa,fileName="inverseDoublePendulumControlled.html");

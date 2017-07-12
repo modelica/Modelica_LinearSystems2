@@ -5,7 +5,7 @@ function carenls
 
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.Math.Polynomial;
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
   input Real A[:,size(A, 1)];
   input Real B[size(A, 1),:];
@@ -13,7 +13,7 @@ function carenls
   input Real Q[size(A, 1),size(A, 2)]=identity(size(A, 1));
   input Real X0[size(A, 1),size(A, 2)];
   input Real eps=Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm(
-    A)*1e-9;
+                                        A)*1e-9;
 
   output Real X[size(X0, 1),size(X0, 2)];
   output Real r;

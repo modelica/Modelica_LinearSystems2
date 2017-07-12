@@ -6,7 +6,7 @@ function plotZeros "Case studies of systems with zeros"
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.StateSpace;
-  import Complex;
+  import Modelica_LinearSystems2.Math.Complex;
 
 protected
   parameter Real sampleT=0.001;

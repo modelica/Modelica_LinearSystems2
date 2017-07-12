@@ -38,16 +38,16 @@ record TransferFunction
     end fromReal;
 
   encapsulated function fromZerosAndPoles
-    "Generate a TransferFunction data record from a set of zeros and poles"
+      "Generate a TransferFunction data record from a set of zeros and poles"
 
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.TransferFunction;
-    import Modelica_LinearSystems2.Math.Polynomial;
-    import Complex;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.Math.Complex;
 
-    input Complex z[:]=fill(Complex(0), 0)
+    input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
-    input Complex p[:]=fill(Complex(0), 0)
+    input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
     input Real k=1.0 "Constant multiplied with transfer function";
     input String uName="" "input name";
@@ -56,11 +56,11 @@ record TransferFunction
         "TransferFunction built by ZerosAndPoles object";
 
     protected
-    Polynomial pn = k*Polynomial(z);
-    Polynomial pd = Polynomial(p);
-
+    Polynomial pn=k*Polynomial(z);
+    Polynomial pd=Polynomial(p);
   algorithm
-    tf.n := pn.c;
+
+  tf.n := pn.c;
     tf.d := pd.c;
     tf.uName := uName;
     tf.yName := yName;
@@ -847,20 +847,20 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       "Evaluate a transfer function for a given (Complex) value of s"
 
       import Modelica;
-      import Complex;
-      import Modelica.ComplexMath.j;
       import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf "Transfer function of a system";
+      input TransferFunction tf "transfer function of a system";
       input Complex s "Value of s where tf shall be evaluated";
-      input Real den_min=0 "Value of |denominator(s)| is limited by den_min";
+      input Real den_min=0 "|denominator(s)| is limited by den_min";
       output Complex result "= tf(s)";
 
     protected
-      Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
-      Real abs_den=Modelica.ComplexMath.'abs'(den);
+      Complex j = Modelica_LinearSystems2.Math.Complex.j();
+     Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
+      Real abs_den=Complex.'abs'(den);
     algorithm
       den := if abs_den >= den_min then den else -abs_den+0*j;
       result := Polynomial.evaluateComplex(Polynomial(tf.n), s)/den;
@@ -899,7 +899,7 @@ The transfer function G(s)=N(s)/D(s) is evaluated by calculating the numerator p
     encapsulated function zerosAndPoles
       "Calculate zeros and poles of a transfer function"
       import Modelica;
-      import Complex;
+      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
 
@@ -969,10 +969,10 @@ public
       "Calculate the eigenvalues of a linear transfer function system and write them in a complex vector"
     //encapsulated function eigenValues
       import Modelica;
-      import Complex;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Math.Complex;
 
       input TransferFunction tf "transfer function of a system";
       output Complex eigval[:] "eigen values of the system";
@@ -1015,10 +1015,10 @@ Calculate the eigenvalues of the corresponding state space representation of a t
     encapsulated function eigenVectors
       "Calculate the right eigenvectors of the state space system corresponding to a transfer function and write them columnwise in a matrix. Optionally, the eigenvalues are computed"
       import Modelica;
-      import Complex;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica.Math.Matrices.LAPACK;
+      import Modelica_LinearSystems2.Math.Complex;
 
       input TransferFunction tf "transfer function of a system";
       input Boolean onlyEigenvectors=true;
@@ -1071,9 +1071,9 @@ i.e. v1 = |                 |,   v2 = |                   |
       "Compute invariant zeros of linear transfer function"
 
       import Modelica;
-      import Complex;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
 
       input TransferFunction tf "transfer function of a system";
@@ -1613,10 +1613,10 @@ and results in
     encapsulated function bode "Plot transfer function as bode plot"
       import Modelica;
       import Modelica.Utilities.Strings;
-      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
       import SI = Modelica.SIunits;
 
@@ -1676,9 +1676,12 @@ and results in
       phi_old := 0.0;
       for i in 1:nPoints loop
         w[i] := SI.Conversions.from_Hz(f[i]);
-        c := TransferFunction.Analysis.evaluate(tf, Complex(0, w[i]), 1e-10);
-        A[i] :=Modelica.ComplexMath.'abs'(c);
-        phi_old :=Modelica.ComplexMath.arg(c, phi_old);
+        c := TransferFunction.Analysis.evaluate(
+              tf,
+              Complex(0, w[i]),
+              1e-10);
+        A[i] := Complex.'abs'(c);
+        phi_old := Complex.arg(c, phi_old);
         phi[i] := SI.Conversions.to_deg(phi_old);
 
         // Convert to other units, if required
@@ -2184,7 +2187,7 @@ This function plots the initial response, i.e. the zeros input response of a tra
       import Modelica;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.TransferFunction;
-      import Complex;
+      import Modelica_LinearSystems2.Math.Complex;
 
       input TransferFunction tf "Transfer function of a system";
       output ZerosAndPoles zp(
@@ -2501,25 +2504,28 @@ is defined slightly differently.
 
   encapsulated function fromFile
       "Generate a TransferFunction data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
-    import Modelica.Utilities.Streams;
-    import Modelica_LinearSystems2.TransferFunction;
-    import Modelica_LinearSystems2.Math.Polynomial;
 
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Math.Polynomial;
     input String fileName="tf.mat" "Name of the transfer function data file"   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="transfer function data file")));
     input String numName="n" "Name of the numenator of the transfer function";
     input String denName="d" "Name of the denominator of the transfer function";
 
     protected
-    Integer numSize[2] = Streams.readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
-    Integer denSize[2] = Streams.readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
+    Integer numSize[2]=readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
+    Integer denSize[2]=readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
 
-    Real num[numSize[1],numSize[2]]=
-      Streams.readRealMatrix(fileName, numName, numSize[1], numSize[2])
-      "Numenator coefficients";
-    Real den[denSize[1],denSize[2]]=
-      Streams.readRealMatrix(fileName, denName, denSize[1], denSize[2])
-      "Denominator coefficients";
+    Real num[numSize[1],numSize[2]]=readMatrix(
+          fileName,
+          numName,
+          numSize[1],
+          numSize[2]) "numenator coefficients";
+    Real den[denSize[1],denSize[2]]=readMatrix(
+          fileName,
+          denName,
+          denSize[1],
+          denSize[2]) "denominator coefficients";
     Integer ns2=numSize[2] annotation(__Dymola_allowForSize=true);
     Integer ds2=denSize[2] annotation(__Dymola_allowForSize=true);
     public
@@ -2552,36 +2558,36 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
   end fromFile;
 
   function fromModel
-    "Generate a TransferFunction data record from a state space representation resulted from linearization of a model"
+      "Generate a TransferFunction data record from a state space representation resulted from linearization of a model"
 
-    import Modelica;
-    import Modelica.Utilities.Streams;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.TransferFunction;
+      import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.TransferFunction;
 
     input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
-    input Real T_linearize = 0
+    input Real T_linearize=0
         "point in time of simulation to linearize the model";
-    input String fileName = "dslin" "Name of the result file";
+    input String fileName="dslin" "Name of the result file";
 
     protected
-    String fileName2 = fileName + ".mat";
+    String fileName2=fileName + ".mat";
     Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
     Boolean OK2 = importInitial("dsfinal.txt");
     Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize+1);
-    Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
-    Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
-    Integer nu = ABCDsizes[2] - nx;
-    Integer ny = ABCDsizes[1] - nx;
-    Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-    String xuyName[nx + nu + ny] = readStringMatrix(fileName2, "xuyName", nx + nu + ny);
+    Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
+    Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+    Integer nx=integer(nxMat[1, 1]);
+    Integer nu=ABCDsizes[2] - nx;
+    Integer ny=ABCDsizes[1] - nx;
+    Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+    String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
     StateSpace result(
       redeclare Real A[nx,nx],
       redeclare Real B[nx,nu],
       redeclare Real C[ny,nx],
-      redeclare Real D[ny,nu]) "Model linearized at initial point";
+      redeclare Real D[ny,nu]) "= model linearized at initial point";
     public
     output TransferFunction tf[:,:];
 
@@ -2632,19 +2638,17 @@ followed by a conversion from sate space to transfer function representation.
 
   encapsulated package Internal
     "Package of internal material of record TransferFunction (for advanced users only)"
-    extends Modelica.Icons.InternalPackage;
     import Modelica;
+    extends Modelica.Icons.Package;
 
     encapsulated function readLength
       "Read the number n of coefficients written in a [n,1]-matrix"
-      import Modelica.Utilities.Streams;
-
-      input String fileName = "tf.mat" "Name of the transfer function data file";
-      input String polyName = "n"
+      input String fileName="tf.mat" "Name of the transfer function data file";
+      input String polyName="n"
         "Name of the polynominal (numenator or denominator) coefficients of the transfer function"          annotation(Dialog);
       output Integer result;
     protected
-      Integer polySize[2] = Streams.readMatrixSize(fileName, polyName);
+      Integer polySize[2]=readMatrixSize(fileName, polyName);
 
     algorithm
       result := polySize[2];
