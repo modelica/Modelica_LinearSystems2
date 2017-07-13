@@ -9,6 +9,8 @@ convertClass("Modelica_LinearSystems2.Types",
              "Modelica_LinearSystems2.Utilities.Types")
 convertClass("Modelica_LinearSystems2.Controller",
              "Modelica_LinearSystems2.Controllers")
+convertClass("Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2",
+             "Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension")
 
 // Convert elemnts for complex math operations
 //convertClass("Modelica_LinearSystems2.Math.Complex","Modelica.ComplexMath")
