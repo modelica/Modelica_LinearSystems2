@@ -83,14 +83,14 @@ op<b>(A)</b> = <b>(A)</b>  if   transA==false
 </p>
 </blockquote>
 <p>
-If matrix <b>(A)</b> is already lower triangular, the factorization is avoided if input \"isTriangular\" is set true.
+If matrix <b>(A)</b> is already lower triangular, the factorization is avoided if input &quot;isTriangular&quot; is set true.
 If a unique solution <b>X</b> does not exist (since <b>A</b> is singular),
 an exception is raised.
 </p>
 
 <h4>Note</h4>
 <p>
-The solution is computed with the LAPACK function \"dgesv\",
+The solution is computed with the LAPACK function &quot;dgesv&quot;,
 i.e., by Gaussian elemination with partial pivoting.
 </p>
 

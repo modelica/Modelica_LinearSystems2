@@ -66,30 +66,30 @@ Optionally, row indices are printed as well.
 
 <h4>Example</h4>
 <blockquote><pre>
-s = {\"w\", \"3\", \"alpha\"};
-<b>printStringVectorInHtml</b>(s, \"myVec\", \"log.html\", true);
+s = {&quot;w&quot;, &quot;3&quot;, &quot;alpha&quot;};
+<b>printStringVectorInHtml</b>(s, &quot;myVec&quot;, &quot;log.html&quot;, true);
 </pre></blockquote>
 <p>
 saves following HTML code in the file <em>log.html</em>:
 </p>
 <blockquote><pre>
-&lt;table border=\"0\"&gt;
+&lt;table border=&quot;0&quot;&gt;
 &lt;tr&gt;
-  &lt;td valign=\"middle\"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;myVec&lt;/td&gt;
-  &lt;td valign=\"middle\"&gt;=&lt;/td&gt;
+  &lt;td valign=&quot;middle&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;myVec&lt;/td&gt;
+  &lt;td valign=&quot;middle&quot;&gt;=&lt;/td&gt;
   &lt;td&gt;
-    &lt;table style=\"background-color:rgb(100, 100, 100);\" cellpadding=\"3\" border=\"0\" cellspacing=\"1\"&gt;
-    &lt;tr style=\"background-color:white\"&gt;
-      &lt;td align=\"right\" style=\"background-color:rgb(230, 230, 230);\"&gt;1&lt;/td&gt;
-      &lt;td align=\"left\"&gt;w&lt;/td&gt;
+    &lt;table style=&quot;background-color:rgb(100, 100, 100);&quot; cellpadding=&quot;3&quot; border=&quot;0&quot; cellspacing=&quot;1&quot;&gt;
+    &lt;tr style=&quot;background-color:white&quot;&gt;
+      &lt;td align=&quot;right&quot; style=&quot;background-color:rgb(230, 230, 230);&quot;&gt;1&lt;/td&gt;
+      &lt;td align=&quot;left&quot;&gt;w&lt;/td&gt;
     &lt;/tr&gt;
-    &lt;tr style=\"background-color:white\"&gt;
-      &lt;td align=\"right\" style=\"background-color:rgb(230, 230, 230);\"&gt;2&lt;/td&gt;
-      &lt;td align=\"left\"&gt;3&lt;/td&gt;
+    &lt;tr style=&quot;background-color:white&quot;&gt;
+      &lt;td align=&quot;right&quot; style=&quot;background-color:rgb(230, 230, 230);&quot;&gt;2&lt;/td&gt;
+      &lt;td align=&quot;left&quot;&gt;3&lt;/td&gt;
     &lt;/tr&gt;
-    &lt;tr style=\"background-color:white\"&gt;
-      &lt;td align=\"right\" style=\"background-color:rgb(230, 230, 230);\"&gt;3&lt;/td&gt;
-      &lt;td align=\"left\"&gt;alpha&lt;/td&gt;
+    &lt;tr style=&quot;background-color:white&quot;&gt;
+      &lt;td align=&quot;right&quot; style=&quot;background-color:rgb(230, 230, 230);&quot;&gt;3&lt;/td&gt;
+      &lt;td align=&quot;left&quot;&gt;alpha&lt;/td&gt;
     &lt;/tr&gt;
     &lt;/table&gt;
   &lt;/td&gt;

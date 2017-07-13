@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests;
 package Types "Package of type definitions used in Test package"
+  extends Modelica.Icons.TypesPackage;
 
 
   annotation (

@@ -6,13 +6,13 @@ model EKF "Extended Kalman filter"
   import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Design;
   import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
- extends Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock(final
-      initType = Modelica_LinearSystems2.Controller.Types.Init.InitialState);
+ extends Modelica_LinearSystems2.Controllers.Interfaces.PartialDiscreteBlock(final
+      initType = Modelica_LinearSystems2.Controllers.Types.Init.InitialState);
 
   replaceable function ekfFunction =
-            Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy
-            constrainedby Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemBase(
-                                                                      redeclare input Real x[4])
+    Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.ekfSystemDummy
+    constrainedby Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.ekfSystemBase(
+      redeclare input Real x[4])
     "Function to calculate xk, yk, Ak, Ck"
     annotation (
       choicesAllMatching,
@@ -61,7 +61,7 @@ model EKF "Extended Kalman filter"
         origin={0,-110})));
 
 protected
-  outer Modelica_LinearSystems2.Controller.SampleClock sampleClock
+  outer Modelica_LinearSystems2.Controllers.SampleClock sampleClock
     "Global options";
 initial equation
   x_est = x_est_init;

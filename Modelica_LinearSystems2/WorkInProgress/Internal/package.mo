@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress;
 package Internal "Package of internal utilities (for advanced users only)"
-  extends Modelica.Icons.Package;
+  extends Modelica.Icons.InternalPackage;
 
 
   annotation (Documentation(info="<html>

@@ -1,8 +1,8 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function zgeqrf
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
 
-  input Modelica_LinearSystems2.Math.Complex A[:,:]
+  input Complex A[:,:]
     "Square or rectangular matrix";
   output Complex Q[size(A, 1),size(A, 2)] "Square upper triangular matrix";
   output Complex R[size(A, 2),size(A, 2)] "Square upper triangular matrix";

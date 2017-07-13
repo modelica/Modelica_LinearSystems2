@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 function diagram "Plot one diagram"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.Utilities.Plot.Types;
   import Modelica_LinearSystems2.Utilities.Plot.Internal;
 
@@ -84,8 +86,10 @@ For an overview, see the documentation of package
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot\">Modelica_LinearSystems2.Utilities.Plot</a>.
 </p>
 
+<h4>Example</h4>
 <p>
-<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.plotTwoSineDifferentStyles\">Example</a>:
+See an <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.plotTwoSineDifferentStyles\">example</a>
+for possible usage of this function:
 </p>
 
 <blockquote>
