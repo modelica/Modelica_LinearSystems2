@@ -11617,6 +11617,7 @@ The uncontrollable poles are checked to to stable.
       "Read the number of inputs nu of a state space system from a file"
 
       import Modelica.Utilities.Streams;
+      import Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension;
 
       input String fileName = "ss_siso.mat"
         "Name of the state space system data file" annotation (Dialog(
@@ -11627,11 +11628,9 @@ The uncontrollable poles are checked to to stable.
 
       output Integer nu;
     protected
-      Integer ABCDsizes[2] = Streams.readMatrixSize(fileName, matrixName);
-      Integer nx = integer(scalar(Streams.readRealMatrix(fileName, "nx", 1, 1)));
-
+      Integer xuy[3] = ReadSystemDimension(fileName, matrixName);
     algorithm
-      nu := ABCDsizes[2] - nx;
+      nu := xuy[2];
     end readLength_nu;
 
     encapsulated function readLength_nx
@@ -11653,6 +11652,7 @@ The uncontrollable poles are checked to to stable.
       "Read the number of outputs ny of a state space system from a file"
 
       import Modelica.Utilities.Streams;
+      import Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension;
 
       input String fileName = "ss_siso.mat"
         "Name of the state space system data file" annotation (Dialog(
@@ -11663,11 +11663,9 @@ The uncontrollable poles are checked to to stable.
 
       output Integer ny;
     protected
-      Integer ABCDsizes[2] = Streams.readMatrixSize(fileName, matrixName);
-      Integer nx = integer(scalar(Streams.readRealMatrix(fileName, "nx", 1, 1)));
-
+      Integer xuy[3] = ReadSystemDimension(fileName, matrixName);
     algorithm
-      ny := ABCDsizes[1] - nx;
+      ny := xuy[3];
     end readLength_ny;
 
     encapsulated function reducedCtrSystem2

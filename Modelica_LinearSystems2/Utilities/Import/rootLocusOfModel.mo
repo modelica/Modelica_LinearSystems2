@@ -36,7 +36,7 @@ protected
 
   String fileName="dslin";
   String fileName2;
-  Integer ABCDsizes[2];
+  Integer xuy[3];
   Integer nx;
   Integer nu;
   Integer ny;
@@ -173,18 +173,13 @@ algorithm
 
   // Determine array dimensions of the first linearization point
   fileName2 := fileName + String(is[1]) + ".mat";
-  ABCDsizes := Streams.readMatrixSize(fileName2, "ABCD");
-  nx :=integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
-  nu := ABCDsizes[2] - nx;
-  ny := ABCDsizes[1] - nx;
+  xuy :=Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension(fileName2, "ABCD");
+  nx := xuy[1];
+  nu := xuy[2];
+  ny := xuy[3];
 
   // Read all matrices from file, compute eigenvalues and store them in output arrays
-  (Re,Im) := Modelica_LinearSystems2.Internal.eigenValuesFromLinearization(
-    is,
-    nx,
-    nu,
-    ny,
-    reorder);
+  (Re,Im) := Modelica_LinearSystems2.Internal.eigenValuesFromLinearization(is, nx, nu, ny, reorder);
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
