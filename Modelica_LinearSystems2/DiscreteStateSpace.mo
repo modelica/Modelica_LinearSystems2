@@ -3371,12 +3371,13 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
     extends Modelica.Icons.Package;
 
   encapsulated function fromFile
-      "Read a DiscreteStateSpace data record from mat-file"
+    "Read a DiscreteStateSpace data record from mat-file"
     import Modelica;
     import Modelica.Utilities.Streams;
+    import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.DiscreteStateSpace;
     import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension;
 
     input String fileName = "dslin.mat" "Name of the state space system data file"
       annotation (
@@ -3387,18 +3388,18 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
     input String matrixName = "ABCD"
       "Name of the state space system matrix" annotation(Dialog);
     protected
-    Integer xuy[3] = StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+    Integer xuy[3] = ReadSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
     Integer nx = xuy[1] annotation(__Dymola_allowForSize=true);
     Integer nu = xuy[2] annotation(__Dymola_allowForSize=true);
     Integer ny = xuy[3] annotation(__Dymola_allowForSize=true);
 
     public
     output DiscreteStateSpace result(
-      redeclare Real A[nx,nx],
-      redeclare Real B[nx,nu],
-      redeclare Real B2[nx,nu],
-      redeclare Real C[ny,nx],
-      redeclare Real D[ny,nu]) "Model linearized at initial point";
+      redeclare Real A[nx, nx],
+      redeclare Real B[nx, nu],
+      redeclare Real B2[nx, nu],
+      redeclare Real C[ny, nx],
+      redeclare Real D[ny, nu]) "Model read from file";
 
     protected
     Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(

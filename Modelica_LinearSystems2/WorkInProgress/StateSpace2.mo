@@ -313,17 +313,18 @@ encapsulated package Import
 
   encapsulated function fromFile "Read a StateSpace data record from mat-file"
 
-      import Modelica;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.WorkInProgress.StateSpace2;
-      import Modelica_LinearSystems2;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.WorkInProgress.StateSpace2;
+    import Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension;
 
     input String fileName="dslin.mat"
         "Name of the state space system data file"     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="state space system data file")));
     input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
     protected
-    input Integer xuy[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName);
+    input Integer xuy[3] = ReadSystemDimension(fileName, matrixName);
     input Integer nx=xuy[1];
     input Integer nu=xuy[2];
     input Integer ny=xuy[3];

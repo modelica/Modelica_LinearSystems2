@@ -15,11 +15,10 @@ function ReadSystemDimension
   output Integer xuy[3];
 
 protected
-  Real sizeA[1,1] = Streams.readRealMatrix(fileName, "nx", 1, 1);
   Integer ABCDsizes[2] = Streams.readMatrixSize(fileName, matrixName);
 
 algorithm
-  xuy[1] := integer(sizeA[1, 1]);
+  xuy[1] := integer(scalar(Streams.readRealMatrix(fileName, "nx", 1, 1)));
   xuy[2] := ABCDsizes[2] - xuy[1];
   xuy[3] := ABCDsizes[1] - xuy[1];
 

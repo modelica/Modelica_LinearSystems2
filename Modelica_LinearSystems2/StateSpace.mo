@@ -9596,11 +9596,11 @@ subsystem.D = ss.D[outputIndex, inputIndex];
 
     encapsulated function fromFile
       "Read a StateSpace data record from mat-file"
-
       import Modelica;
       import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension;
 
       input String fileName = "dslin.mat" "Name of the state space system data file"
         annotation (
@@ -9612,7 +9612,7 @@ subsystem.D = ss.D[outputIndex, inputIndex];
         "Name of the state space system matrix (default is \"ABCD\") in the fileName"
         annotation (Dialog);
     protected
-      Integer xuy[3] = StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+      Integer xuy[3] = ReadSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
       Integer nx = xuy[1] annotation(__Dymola_allowForSize=true);
       Integer nu = xuy[2] annotation(__Dymola_allowForSize=true);
       Integer ny = xuy[3] annotation(__Dymola_allowForSize=true);
@@ -9691,34 +9691,11 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
               stopTime=T_linearize + 1,
               method=method);
 
-      Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
-      Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
-      Integer nu = ABCDsizes[2] - nx;
-      Integer ny = ABCDsizes[1] - nx;
-      Real ABCD[nx + ny, nx + nu] = Streams.readRealMatrix(
-              fileName2,
-              "ABCD",
-              nx + ny,
-              nx + nu);
-      String xuyName[nx + nu + ny] = readStringMatrix(
-              fileName2,
-              "xuyName",
-              nx + nu + ny);
     public
-      output StateSpace result(
-        redeclare Real A[nx, nx],
-        redeclare Real B[nx, nu],
-        redeclare Real C[ny, nx],
-        redeclare Real D[ny, nu]) "Model linearized at initial point";
+      output StateSpace result = StateSpace.Internal.read_dslin(fileName)
+        "Model linearized at initial point";
 
     algorithm
-      result.A := ABCD[1:nx, 1:nx];
-      result.B := ABCD[1:nx, nx + 1:nx + nu];
-      result.C := ABCD[nx + 1:nx + ny, 1:nx];
-      result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-      result.uNames := xuyName[nx + 1:nx + nu];
-      result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
-      result.xNames := xuyName[1:nx];
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -12688,6 +12665,7 @@ k = ---------- * ----------------------
       import Modelica;
       import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension;
 
       input String fileName = "dslin" "Name of the result file";
         //annotation (Dialog(
@@ -12695,21 +12673,13 @@ k = ---------- * ----------------------
         //    caption="State space system data file")));
 
     protected
-      String fileName2 = fileName + ".mat"
-        "Name of the result file with extension";
-      Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
-      Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
-      Integer nu = ABCDsizes[2] - nx;
-      Integer ny = ABCDsizes[1] - nx;
-      Real ABCD[nx + ny, nx + nu] = Streams.readRealMatrix(
-              fileName2,
-              "ABCD",
-              nx + ny,
-              nx + nu);
-      String xuyName[nx + nu + ny] = readStringMatrix(
-              fileName2,
-              "xuyName",
-              nx + nu + ny);
+      String fileName2 = fileName + ".mat" "Name of the result file with extension";
+      Integer xuy[3] = ReadSystemDimension(fileName2, "ABCD");
+      Integer nx = xuy[1];
+      Integer nu = xuy[2];
+      Integer ny = xuy[3];
+      Real ABCD[nx + ny, nx + nu] = Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+      String xuyName[nx + nu + ny] = readStringMatrix(fileName2, "xuyName",nx + nu + ny);
     public
       output StateSpace result(
         redeclare Real A[nx, nx],
@@ -12725,6 +12695,8 @@ k = ---------- * ----------------------
       result.uNames := xuyName[nx + 1:nx + nu];
       result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
       result.xNames := xuyName[1:nx];
+      Modelica.Utilities.Streams.print("StateSpace record loaded from file: \""
+         + fileName + "\"");
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
