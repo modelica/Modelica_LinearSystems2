@@ -16,7 +16,6 @@ function linearize2
     "Simulation options" annotation (Dialog(enable=not linearizeAtInitial));
 protected
   String fileName = "dslin";
-  String fileName2 = fileName + ".mat";
 
   function setModelParam
     input String modelName;
@@ -33,12 +32,12 @@ protected
   end setModelParam;
 
   // Set model parameters
-  Boolean OK1 = if size(modelParam, 1) == 0 then true else setModelParam(
-      modelName, modelParam);
+  Boolean OK1 = if size(modelParam, 1) == 0 then true else
+    setModelParam(modelName, modelParam);
 
   // Simulate until t_linearize and then linearize at this time instant
   Boolean OK2 = if simulationSetup.linearizeAtInitial then true else
-      simulateModel(
+    simulateModel(
       problem=modelName,
       startTime=simulationSetup.t_start,
       stopTime=simulationSetup.t_linearize,
@@ -46,44 +45,19 @@ protected
       tolerance=simulationSetup.tolerance,
       fixedstepsize=simulationSetup.fixedStepSize);
   Boolean OK3 = if simulationSetup.linearizeAtInitial then true else
-      importInitial("dsfinal.txt");
+    importInitial("dsfinal.txt");
   Boolean OK4 = linearizeModel(
       problem=modelName,
       resultFile=fileName,
       startTime=simulationSetup.t_linearize,
       stopTime=simulationSetup.t_linearize);
 
-  // Read linear system from file
-  Integer ABCDsizes[2] = Streams.readMatrixSize(fileName2, "ABCD");
-  Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
-  Integer nu = ABCDsizes[2] - nx;
-  Integer ny = ABCDsizes[1] - nx;
-  Real ABCD[nx + ny, nx + nu] = Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-  String xuyName[nx + nu + ny] = readStringMatrix(
-      fileName2,
-      "xuyName",
-      nx + nu + ny);
-  Real A[nx, nx] = ABCD[1:nx, 1:nx] "A-matrix";
-  Real B[nx, nu] = ABCD[1:nx, nx + 1:nx + nu] "B-matrix";
-  Real C[ny, nx] = ABCD[nx + 1:nx + ny, 1:nx] "C-matrix";
-  Real D[ny, nu] = ABCD[nx + 1:nx + ny, nx + 1:nx + nu] "D-matrix";
-  String uNames[nu] = xuyName[nx + 1:nx + nu] "Modelica names of inputs";
-  String yNames[ny] = xuyName[nx + nu + 1:nx + nu + ny]
-    "Modelica names of outputs";
-  String xNames[nx] = xuyName[1:nx] "Modelica names of states";
-
   // Model is already translated. Reset to the default initial conditions
   Boolean OK5 = translateModel(problem=modelName);
 public
   output Modelica_LinearSystems2.StateSpace ss=
-    Modelica_LinearSystems2.StateSpace(
-      A=A,
-      B=B,
-      C=C,
-      D=D,
-      uNames=uNames,
-      yNames=yNames,
-      xNames=xNames) "Linearized system as StateSpace object";
+    Modelica_LinearSystems2.StateSpace.Internal.read_dslin(fileName)
+    "Linearized system as StateSpace object";
 algorithm
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
