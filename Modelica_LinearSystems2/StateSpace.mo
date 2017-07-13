@@ -12670,8 +12670,6 @@ k = ---------- * ----------------------
       result.uNames := xuyName[nx + 1:nx + nu];
       result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
       result.xNames := xuyName[1:nx];
-      Modelica.Utilities.Streams.print("StateSpace record loaded from file: \""
-         + fileName + "\"");
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
