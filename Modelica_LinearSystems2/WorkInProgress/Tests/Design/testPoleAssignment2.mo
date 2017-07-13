@@ -3,12 +3,13 @@ function testPoleAssignment2
   "Function to assess algorithms for pole assignment"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Complex;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
+  import Modelica.Utilities.Streams;
+  import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.WorkInProgress.Tests.Design;
-  import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData;
   import Modelica_LinearSystems2.StateSpace;
 
@@ -21,24 +22,26 @@ function testPoleAssignment2
   input Boolean deleteExistingOutputfile=true;
 
 protected
-  Integer nm[2]=readMatrixSize(dataFile, "B")
+  Integer nm[2]=Streams.readMatrixSize(dataFile, "B")
     "Read system order and number of inputs";
-  Integer nmk[2]=readMatrixSize(dataFile, "K") "Read dimensions of K";
-  Real A[:,:]=readMatrix(dataFile, "A", nm[1], nm[1]) "Read system matrix A";
-  Real B[:,:]=readMatrix(dataFile, "B", nm[1], nm[2]) "Read system matrix B";
+  Integer nmk[2]=Streams.readMatrixSize(dataFile, "K") "Read dimensions of K";
+  Real A[:,:]=Streams.readRealMatrix(dataFile, "A", nm[1], nm[1]) "Read system matrix A";
+  Real B[:,:]=Streams.readRealMatrix(dataFile, "B", nm[1], nm[2]) "Read system matrix B";
   Complex j=Modelica_LinearSystems2.Math.Complex.j();
-  Real assignedPolesR[1,:]=readMatrix(dataFile, "assignedPoles", 1, nm[1])
+  Real assignedPolesR[1,:]=Streams.readRealMatrix(dataFile, "assignedPoles", 1, nm[1])
     "Read real part of assigned poles";
-  Real assignedPolesI[1,:]=readMatrix(dataFile, "assignedPolesIm", 1, nm[1])
+  Real assignedPolesI[1,:]=Streams.readRealMatrix(dataFile, "assignedPolesIm", 1, nm[1])
     "Read imaginary part of assigned poles";
   Complex assignedPoles[:]=Complex(1)*assignedPolesR[1, :] + j*assignedPolesI[1, :]
     "Complex assigned poles";
 
-  Boolean isKprovided=min(nmk) > 0;
-  Real Ki[:,:]=if isKprovided then readMatrix(dataFile, "K", nm[2], nm[1]) else fill(0, 0, 0);
+  Boolean isKprovided = min(nmk) > 0;
+  Real Ki[:,:] = if isKprovided then
+    Streams.readRealMatrix(dataFile, "K", nm[2], nm[1]) else fill(0, 0, 0);
 //  Integer n=size(A, 1);
   Real S[nm[1],nm[1]] "closed loop system matrix A-BK";
-  StateSpace ss=Modelica_LinearSystems2.StateSpace(A=A, B=B, C=zeros(1, nm[1]), D=zeros(1, size(B, 2)));
+  StateSpace ss = Modelica_LinearSystems2.StateSpace(
+    A=A, B=B, C=zeros(1, nm[1]), D=zeros(1, size(B, 2)));
   Real Xre[nm[1],nm[1]];
   Real k[size(A, 1)] "Feedback gain matrix";
 
@@ -75,7 +78,7 @@ algorithm
       (K,X) := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob(
                                                                              A, B, assignedPoles);
       S := A - B*K;
-      calcPoles := Complex.eigenValues(S);
+      calcPoles := Modelica_LinearSystems2.Math.Complex.eigenValues(S);
       if isKprovided then
         gap := Modelica.Math.Matrices.norm(K - Ki);
       end if;
@@ -106,8 +109,8 @@ algorithm
   end if;
   print("n = "+String(nm[1])+",  m = "+ String(nm[2])+"\n",outputFile);
   print(Matrices.printMatrix(K, 6, "K"),outputFile);
-  Complex.Vectors.print("assignedPoles", assignedPoles,outputFile);
-  Complex.Vectors.print("calcPoles", calcPoles,outputFile);
+  Modelica_LinearSystems2.Math.Complex.Vectors.print("assignedPoles", assignedPoles,outputFile);
+  Modelica_LinearSystems2.Math.Complex.Vectors.print("calcPoles", calcPoles,outputFile);
 //   Matrices.printMatrix(Re(X), 6, "ReX");
 //   Matrices.printMatrix(Im(X), 6, "ImX");
   print("kappa2 " + String(kappa2),outputFile);
@@ -125,6 +128,7 @@ algorithm
 
   annotation (Documentation(info="<html>
 <p>
-Computes the feedback gain K for the state space system according to assigned close loop poles
+Computes the feedback gain K for the state space system according to assigned close loop poles.
+</p>
 </html>"));
 end testPoleAssignment2;

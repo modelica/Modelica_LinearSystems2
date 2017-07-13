@@ -1,8 +1,8 @@
 ﻿within Modelica_LinearSystems2.Utilities.Plot.Internal;
 function getLastName "Get last name of a Modelica path name"
    import Modelica.Utilities.Strings;
-   input String path;
-   output String tail "= last part of path (after the last '.'";
+   input String path "Path string";
+   output String tail "Last part of path (after the last '.'";
 protected
    Integer startIndex;
    Integer endIndex;
@@ -26,5 +26,29 @@ algorithm
      Framework Programme (FP7/2007-2016) for the Clean Sky Joint Technology Initiative under
      grant agreement no. CSJU-GAM-SGO-2008-001.</td></tr>
 </table>
+</html>", info="<html>
+<h4>Syntax</h4>
+<blockquote>
+<pre>
+tail = Utilities.Plot.Internal.<b>getLastName</b>(path)
+</pre>
+</blockquote>
+
+<h4>Description</h4>
+<p>
+Return a suffix of the input string. The suffix is a substring identified after the most
+last dot separator &quot;.&quot;.</p>
+
+<h4>Examples</h4>
+<blockquote><pre>
+getLastName(&quot;noPath.exe&quot;);
+// = &quot;exe&quot;</p>
+
+getLastName(&quot;./relative/Path.exe&quot;);
+// = &quot;exe&quot;
+
+getLastName(&quot;C:/absolute/Path.exe&quot;);
+// = &quot;exe&quot;
+</pre></blockquote>
 </html>"));
 end getLastName;

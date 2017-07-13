@@ -1,8 +1,8 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function wrapper_zungqr
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
 
-//  input Modelica_LinearSystems2.Math.Complex A[ :, :] "Square or rectangular matrix";
+//  input Complex A[ :, :] "Square or rectangular matrix";
   input Real QR_real[ :, :] "Square or rectangular matrix";
   input Real QR_imag[size(QR_real,1), size(QR_real,2)]
     "Square or rectangular matrix";

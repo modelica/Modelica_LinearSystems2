@@ -8,7 +8,7 @@ model ZerosAndPolesBlock
 
 //  parameter TransferFunction tf=ZerosAndPoles.Conversion.toTransferFunction(zp);
 
-  Modelica_LinearSystems2.Controller.ZerosAndPoles zerosAndPoles(
+  Modelica_LinearSystems2.Controllers.ZerosAndPoles zerosAndPoles(
     system(
     k=4096,
       n1 = {0, -3.0, -1, -1, -1, 1, 1, 1, 1.5, 1.5, 2, 2, 2, 2, 3.0, 4.0},
@@ -26,11 +26,11 @@ model ZerosAndPolesBlock
 2.0, 2.0;
 2.0, 2.0;
 2, 3.0]),
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption,
-    initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.NoInit)
+    blockType=Modelica_LinearSystems2.Controllers.Types.BlockTypeWithGlobalDefault.UseSampleClockOption,
+    initType=Modelica_LinearSystems2.Controllers.Types.InitWithGlobalDefault.NoInit)
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
 
-  Modelica_LinearSystems2.Controller.TransferFunction transferFunction(
+  Modelica_LinearSystems2.Controllers.TransferFunction transferFunction(
     system(n = {4096.0, 69632.0, 484352.0, 1660928.0, 1910784.0, -7356416.0, -40869888.0,
   -102811648.0, -165557248.0, -172556288.0, -69864447.9999999, 159680512.0,
   464871424.0, 681885696.0, 565237760.0, 24422399.9999997, -634348544.0,
@@ -45,17 +45,17 @@ model ZerosAndPolesBlock
   2127539809735.55, 1037814234428.29, 438182671104.399, 156735759450.941,
   46122743997.6048, 10703484314.0928, 1833242319.5328, 205601583.0528,
   11302042.752}),
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption,
-    initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.NoInit)
+    blockType=Modelica_LinearSystems2.Controllers.Types.BlockTypeWithGlobalDefault.UseSampleClockOption,
+    initType=Modelica_LinearSystems2.Controllers.Types.InitWithGlobalDefault.NoInit)
     annotation (Placement(transformation(extent={{-20,0},{0,20}})));
 
   Modelica.Blocks.Sources.Step step(startTime=1)
     annotation (Placement(transformation(extent={{-60,-20},{-40,0}})));
-  inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(
+  inner Modelica_LinearSystems2.Controllers.SampleClock sampleClock(
     methodType=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal,
     sampleTime=0.01,
-    initType=Modelica_LinearSystems2.Controller.Types.Init.InitialOutput,
-    blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete) annotation (Placement(transformation(extent={{60,60},{80,80}})));
+    initType=Modelica_LinearSystems2.Controllers.Types.Init.InitialOutput,
+    blockType=Modelica_LinearSystems2.Controllers.Types.BlockType.Discrete) annotation (Placement(transformation(extent={{60,60},{80,80}})));
 
 equation
   connect(zerosAndPoles.u, step.y) annotation (Line(

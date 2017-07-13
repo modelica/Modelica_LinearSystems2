@@ -28,7 +28,7 @@ package Filters
       constant Real machEps = 100*Modelica.Constants.eps;
     algorithm
       c := ZP.Analysis.evaluate(zp, Complex(0,2*pi*f_cut));
-      A :=Complex.'abs'(c);
+      A :=Modelica.ComplexMath.'abs'(c);
       str :="amplitude(f=" + String(f_cut) + ") = ";
       if Modelica_LinearSystems2.Math.isEqual(A, 10^(-3/20), machEps) then
          str := str + "-3db";
@@ -235,7 +235,7 @@ package Filters
       Real A;
     algorithm
       c := ZP.Analysis.evaluate(zp, Complex(0,1.0));
-      A :=Complex.'abs'(c);
+      A :=Modelica.ComplexMath.'abs'(c);
 
       if Modelica_LinearSystems2.Math.isEqual(A, 10^(-3/20), machEps) then
          str :="amplitude(w=1) = -3db";
@@ -337,7 +337,7 @@ given with respect to normalized filters for a cut-off angular frequency
 of 1 rad/s. The normalization is performed in such a way that at the cut-off
 frequency the transfer function has an amplitude of -3db (= 10^(-3/20) = 0.7079457..).
 In the tables, not the exact -3db value is used but the approximation
-sqrt(2)/2 (= 0.707106...). Due to \"historical\" reasons, function baseFilter
+sqrt(2)/2 (= 0.707106...). Due to &quot;historical&quot; reasons, function baseFilter
 from the Modelica_LinearSystems library uses -3db for Bessel and Chebyshev filters
 and sqrt(2)/2 for CriticalDamping and Butterworth filters. Furthermore, the table
 gives the values only up to 4 significant digits. For these reasons, in this test

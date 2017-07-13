@@ -321,55 +321,62 @@ encapsulated package Import
 
   encapsulated function fromFile "Read a StateSpace data record from mat-file"
 
-      import Modelica;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Internal.StateSpace2;
-      import Modelica_LinearSystems2;
+    import Modelica;
+    import Modelica.Utilities.Streams;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.Internal.StateSpace2;
+    import Modelica_LinearSystems2;
 
-    input String fileName="dslin.mat"
-        "Name of the state space system data file"     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                        caption="state space system data file")));
-    input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
+    input String fileName = "dslin.mat" "Name of the state space system data file"
+      annotation (
+        Dialog(
+          loadSelector(
+            filter="MAT files (*.mat);; All files (*.*)",
+            caption="State space system data file")));
+    input String matrixName = "ABCD"
+      "Name of the state space system matrix" annotation(Dialog);
+
     protected
-    Integer xuy[3]=Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName)  annotation(__Dymola_allowForSize=true);
-    Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
-    Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
-    Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
+    Integer xuy[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName)  annotation(__Dymola_allowForSize=true);
+    Integer nx = xuy[1] annotation(__Dymola_allowForSize=true);
+    Integer nu = xuy[2] annotation(__Dymola_allowForSize=true);
+    Integer ny = xuy[3] annotation(__Dymola_allowForSize=true);
 
     public
     output StateSpace2 result(
       redeclare Real A[nx,nx],
       redeclare Real B[nx,nu],
       redeclare Real C[ny,nx],
-      redeclare Real D[ny,nu]) "= model linearized at initial point";
+      redeclare Real D[ny,nu]) "Model linearized at initial point";
 
     protected
-    Real ABCD[nx + ny,nx + nu]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
-          fileName,
-          matrixName,
-          nx + ny,
-          nx + nu);
+    Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(
+      fileName, matrixName, nx + ny, nx + nu);
 
   algorithm
     result.A := ABCD[1:nx, 1:nx];
     result.B := ABCD[1:nx, nx + 1:nx + nu];
     result.C := ABCD[nx + 1:nx + ny, 1:nx];
     result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-    Modelica.Utilities.Streams.print("StateSpace record loaded from file: \""
+    Streams.print("StateSpace record loaded from file: \""
        + Modelica.Utilities.Files.fullPathName(fileName) + "\"");
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> StateSpace.Import.<b>fromFile</b>(fileName, matrixName)  </td> </tr>
-</table>
+<blockquote><pre>
+ss = StateSpace.Import.<b>fromFile</b>(fileName, matrixName)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
-Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file must contain the matrix [A, B; C, D] named matrixName and the integer nx representing the order of the system, i.e. the number of rows of the square matrix A.
+Reads and loads a state space system from a mat-file <code>fileName</code>.
+The file must contain the matrix [A, B; C, D] named matrixName and the
+integer nx representing the order of the system, i.e. the number of rows
+of the square matrix&nbsp;A.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-
 <b>algorithm</b>
   ss:=Modelica_LinearSystems2.StateSpace.Import.fromFile(&quot;stateSpace.mat&quot;, &quot;ABCD&quot;);
 //  ss=StateSpace(

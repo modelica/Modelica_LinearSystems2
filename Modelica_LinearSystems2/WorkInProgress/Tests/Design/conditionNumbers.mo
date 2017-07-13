@@ -3,7 +3,7 @@ function conditionNumbers
   "Calculate several condition numbers to evaluate a pole assigment method"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Utilities.Streams.print;
 
@@ -32,12 +32,12 @@ protected
   Complex sortedCalcPoles[size(X,1)];
 
 algorithm
-  sortedAssignedPoles := Complex.Vectors.sortComplex(assignedPoles);
-  sortedCalcPoles := Complex.Vectors.sortComplex(calcPoles);
-  dl := Complex.Vectors.norm(sortedAssignedPoles-sortedCalcPoles)/max(1,Complex.Vectors.norm(sortedAssignedPoles));
+  sortedAssignedPoles :=Modelica.ComplexMath.Vectors.sort(assignedPoles);
+  sortedCalcPoles :=Modelica.ComplexMath.Vectors.sort(calcPoles);
+  dl :=Modelica.ComplexMath.Vectors.norm(sortedAssignedPoles - sortedCalcPoles)/max(1, Modelica.ComplexMath.Vectors.norm(sortedAssignedPoles));
   YT := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.inv(X);
   for l1 in 1:n loop
-    c[l1] := Complex.Vectors.norm(YT[l1, :])*Complex.Vectors.norm(X[:,l1])/Complex.'abs'(Complex.Vectors.multiply(YT[l1,:],X[:,l1]));
+    c[l1] :=Modelica.ComplexMath.Vectors.norm(YT[l1, :])*Modelica.ComplexMath.Vectors.norm(X[:, l1])/Modelica.ComplexMath.'abs'(Complex.'*'.scalarProduct(YT[l1, :], X[:, l1]));
   end for;
   //performance indices
   // condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2
@@ -49,10 +49,10 @@ algorithm
   norm2K := Modelica.Math.Matrices.norm(K);
   normFroK := Matrices.norm(K, 3);
   kappaFroYT := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber(
-                                                 YT, 3);
+    YT, 3);
   kappa2X_B := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm(
-                                     X)^2 + Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm(
-                                                                  YT)^2;
+    X)^2 + Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm(
+    YT)^2;
   JXK := array(alpha/2*kappa2X_B + (1 - alpha)/2*normFroK^2 for alpha in 0:0.1:1);
   annotation (Documentation(info="<html>
 </html>"));

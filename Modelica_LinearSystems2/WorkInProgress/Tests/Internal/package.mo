@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests;
 package Internal "Package of internal material of test routines in progress"
+  extends Modelica.Icons.InternalPackage;
 
 
   annotation (Documentation(info="<html>

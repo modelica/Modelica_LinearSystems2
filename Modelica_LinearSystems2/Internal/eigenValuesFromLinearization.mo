@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 function eigenValuesFromLinearization
   "Return eigen values from a set of linearization data (assumes files dslinX.mat in current directory)"
-  import Modelica.Utilities.Streams.print;
   input Real is[:] "File indices X of the dslinX.mat files";
   input Integer nx "Number of states";
   input Integer nu "Number of inputs";
@@ -35,7 +34,7 @@ algorithm
   for i in 1:np loop
      // Read matrix A from file i
      fileName2 := fileName+String(i)+".mat";
-     ABCD :=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+     ABCD :=Modelica.Utilities.Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
      A :=ABCD[1:nx, 1:nx];
 
      // Compute eigen values of A

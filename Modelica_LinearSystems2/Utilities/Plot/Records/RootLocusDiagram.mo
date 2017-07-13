@@ -25,17 +25,17 @@ record RootLocusDiagram "Properties of a root locus diagram"
     "True, if same vertical and horizontal axis increment"
       annotation(Dialog(group="Axes"),choices(checkBox=true));
 
-   Integer lineColor[3]={0,0,255} "Color of curve as rgb values"
-     annotation(Dialog(group="Curve properties",colorSelector=true));
+  Integer lineColor[3]={0,0,255} "Color of curve as rgb values"
+    annotation(Dialog(group="Curve properties",colorSelector=true));
 
-   Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern linePattern=
-      Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.None
+  Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern linePattern=
+    Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.None
     "Line pattern of curve" annotation(Dialog(group="Curve properties"));
-   Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol lineSymbol=
-      Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.Dot
+  Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol lineSymbol=
+    Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.Dot
     "Symbol for points on curve" annotation(Dialog(group="Curve properties"));
-   Real lineThickness=0.25 "Line thickness of curve"
-                              annotation(Dialog(group="Curve properties"));
+  Real lineThickness=0.25 "Line thickness of curve"
+    annotation(Dialog(group="Curve properties"));
 
   annotation (Documentation(info="<html>
 <p>

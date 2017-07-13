@@ -3,26 +3,28 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.3.4) - Analy
 
   extends Modelica.Icons.Package;
 
-  constant String DataDir=classDirectory() +  "Resources/Data/"
-  "Absolute path to directory containing utilitiy files for this package";
+  constant String DataDir=
+    Modelica.Utilities.Files.loadResource("modelica://Modelica_LinearSystems2/Resources/Data/")
+    "Absolute path to directory containing utilitiy files for this package";
 
 
 annotation (
   preferredView="info",
   uses(Modelica(version="3.2.2")),
-  version="2.3.4",
+  version="2.3.5",
   versionBuild=0,
-  versionDate="2016-03-11",
+  versionDate="2017-06-03",
   dateModified = "2016-01-22 15:20:01Z",
   revisionId="$Id::                                       $",
   conversion(
-    noneFromVersion="2.0",
-    noneFromVersion="2.1",
-    noneFromVersion="2.2",
-    noneFromVersion="2.3",
-    noneFromVersion="2.3.1",
+    from(version="2.3.4", script="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/ConvertLinearSystems2_from_2.3.4.mos"),
+    noneFromVersion="2.3.3",
     noneFromVersion="2.3.2",
-    noneFromVersion="2.3.3"),
+    noneFromVersion="2.3.1",
+    noneFromVersion="2.3",
+    from(version="2.2", script="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/ConvertLinearSystems2_from_2.2.mos"),
+    noneFromVersion="2.1",
+    noneFromVersion="2.0"),
   Documentation(info="<html>
 <p>
 Library <b>Modelica_LinearSystems2</b> is a Modelica package
@@ -48,7 +50,7 @@ generate a linear system description by linearization of a Modelica model.
 
 <p>
 Furthermore, in subpackage
-<a href=\"modelica://Modelica_LinearSystems2.Controller\">Controller</a>
+<a href=\"modelica://Modelica_LinearSystems2.Controllers\">Controllers</a>
 about 20 input/output blocks of linear systems are provided that are
 based on the different representation forms, e.g. PID, StateSpace, Filter blocks.
 A unique feature of these blocks is that it is very convenient to quickly switch

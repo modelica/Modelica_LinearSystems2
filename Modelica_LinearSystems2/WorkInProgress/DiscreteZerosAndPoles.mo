@@ -59,29 +59,29 @@ record DiscreteZerosAndPoles
   encapsulated function fromZerosAndPoles
       "Generate a ZerosAndPoles transfer function from a set of zeros and poles"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica.Utilities.Streams.print;
+    import Modelica;
+    import Complex;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.Internal;
+    import Modelica.Utilities.Streams.print;
 
-    input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+    input Complex z[:] = fill(Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
-    input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+    input Complex p[:] = fill(Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
-    input Real k=1.0 "Constant multiplied with transfer function";
-    input Modelica.SIunits.Time Ts=1 "Sample time";
-      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
-    input String uName="" "input name";
-    input String yName="" "output name";
+    input Real k = 1.0 "Constant multiplied with transfer function";
+    input Modelica.SIunits.Time Ts = 1 "Sample time";
+    input Modelica_LinearSystems2.Utilities.Types.Method method=
+      Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
+    input String uName = "" "input name";
+    input String yName = "" "output name";
     output DiscreteZerosAndPoles dzp(
       redeclare Real n1[Internal.numberOfRealZeros(z)],
-      redeclare Real n2[integer((size(z, 1) - Internal.numberOfRealZeros(z))/2),
-        2],
+      redeclare Real n2[integer((size(z, 1) - Internal.numberOfRealZeros(z))/2), 2],
       redeclare Real d1[Internal.numberOfRealZeros(p)],
-      redeclare Real d2[integer((size(p, 1) - Internal.numberOfRealZeros(p))/2),
-        2]) "ZerosAndPoles transfer functions of the zeros, poles and k";
+      redeclare Real d2[integer((size(p, 1) - Internal.numberOfRealZeros(p))/2), 2])
+      "ZerosAndPoles transfer functions of the zeros, poles and k";
 
     protected
     Integer n_n1=size(dzp.n1, 1);
@@ -212,11 +212,11 @@ follow each other as above. An error occurs if this is not the case.
 
 encapsulated operator '-'
   function subtract "Subtract two TransferFunctions (zp1 - zp2)"
-      import Modelica;
-      import ZerosAndPoles =
-        Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    import ZerosAndPoles =
+      Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Complex;
 
     input ZerosAndPoles zp1;
     input ZerosAndPoles zp2;
@@ -324,10 +324,9 @@ end '-';
     "Addition of to tarnsfwer functions zp1 + zp2, i.e. parallel connection of two transfer functions (= inputs are the same, outputs of the two systems are added)"
 
     import Modelica;
-    import ZerosAndPoles =
-      Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import ZerosAndPoles = Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
     import Modelica_LinearSystems2.Math.Polynomial;
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
 
     input ZerosAndPoles zp1;
     input ZerosAndPoles zp2;
@@ -684,13 +683,13 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
   function toDiscreteTransferFunction
       "Generate a DiscreteTransferFunction object from a DiscreteZerosAndPoles object"
 
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.Internal;
+    import Complex;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles transfer function of a system";
@@ -1299,9 +1298,10 @@ processing.
   function fromModel
       "Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model"
 
-      import Modelica;
-      import Modelica_LinearSystems2.StateSpace;
-      import ZerosAndPoles =
+    import Modelica;
+    import Modelica.Utilities.Streams;
+    import Modelica_LinearSystems2.StateSpace;
+    import ZerosAndPoles =
         Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
 
     input String modelName "Name of the Modelica model";
@@ -1321,16 +1321,11 @@ processing.
           resultFile=fileName,
           startTime=T_linearize,
           stopTime=T_linearize + 1);
-    Real nxMat[1,1]=readMatrix(
-          fileName2,
-          "nx",
-          1,
-          1);
-    Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
-    Integer nx=integer(nxMat[1, 1]);
+    Integer ABCDsizes[2]=Streams.readMatrixSize(fileName2, "ABCD");
+    Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
     Integer nu=ABCDsizes[2] - nx;
     Integer ny=ABCDsizes[1] - nx;
-    Real ABCD[nx + ny,nx + nu]=readMatrix(
+    Real ABCD[nx + ny,nx + nu]=Streams.readRealMatrix(
           fileName2,
           "ABCD",
           nx + ny,
@@ -1456,10 +1451,10 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
   encapsulated package Internal
     "Internal library of record Filter (should not be directly used by user)"
+    extends Modelica.Icons.InternalPackage;
 
     import Modelica;
     import Modelica_LinearSystems2;
-    extends Modelica.Icons.Package;
 
     function numberOfRealZeros2 "Calculate number of real zeros"
       import Modelica;

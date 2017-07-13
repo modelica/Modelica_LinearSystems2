@@ -4,9 +4,9 @@ diagramVector
 diagramMatrix
 parameterizedCurves
 rootLocusOfModel
-plot_FFT_fromFile
-plot_FFTs_from_directory
-plot_FFTs_of_model
+plotFFT_fromFile
+plotFFTs_fromDirectory
+plotFFTs_ofModel
 Types
 Records
 Internal
