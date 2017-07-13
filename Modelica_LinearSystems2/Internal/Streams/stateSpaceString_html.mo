@@ -279,4 +279,16 @@ algorithm
 
   end if;
 
+  annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+s = Streams.<strong>stateSpaceString_html</strong>(ss, significantDigits, name)
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This function prints a state space representation of a system in one string in HTML format.
+Such a string can be used e.g. within an analysis performed on the system.
+</p>
+</html>"));
 end stateSpaceString_html;

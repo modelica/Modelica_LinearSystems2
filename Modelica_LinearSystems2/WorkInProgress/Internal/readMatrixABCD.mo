@@ -1,37 +1,37 @@
-within Modelica_LinearSystems2.Internal.Streams;
-function ReadMatrixB "Read the input matrix of a state space system from MATLAB MAT file"
+within Modelica_LinearSystems2.WorkInProgress.Internal;
+function readMatrixABCD "Read the ABCD matrix of a state space system from MATLAB MAT file"
   import Modelica.Utilities.Streams;
 
-  input String fileName = DataDir + "abcd.mat"
+  input String fileName = "dslin.mat" "File where matrixName data is stored"
     annotation (
       Dialog(
         loadSelector(
           filter="MAT files (*.mat);; All files (*.*)",
-          caption="State space system data file")));
+          caption="Open MATLAB MAT file")));
   input String matrixName = "ABCD"
-    "Name of the generalized state space system matrix";
+    "Name of the generalized state space system matrix on file";
 
 protected
   Integer xuy[3] = Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension(fileName, matrixName);
   Integer nx = xuy[1];
   Integer nu = xuy[2];
   Integer ny = xuy[3];
-  Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(fileName, matrixName, nx + ny, nx + nu);
-
 public
-  output Real B[nx,nu] = ABCD[1:nx, nx + 1:nx + nu];
+  output Real ABCD[nx + ny, nx + nu] = Streams.readRealMatrix(fileName, matrixName, nx + ny, nx + nu);
+
 algorithm
 
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-B = Streams.<strong>ReadMatrixB</strong>(fileName, matrixName)
+ABCD = Streams.<strong>readMatrixABCD</strong>(fileName, matrixName)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 This function opens the given MATLAB MAT file
-and reads the given <b>input matrix&nbsp;B</b> of a state space system from this file.
+(in format v4, v6, v7, and if HDF is supported in the Modelica tool, also v7.3),
+and reads the given matrix of a state space system from this file.
 </p>
 
 <h4>See also</h4>
@@ -40,4 +40,4 @@ and reads the given <b>input matrix&nbsp;B</b> of a state space system from this
 <a href=\"modelica://Modelica.Utilities.Streams.readRealMatrix\">Modelica.Utilities.Streams.readRealMatrix</a>
 </p>
 </html>"));
-end ReadMatrixB;
+end readMatrixABCD;

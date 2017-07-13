@@ -7,7 +7,7 @@ package Streams "Package of functions to read from files and write to files"
     Documentation(info="<html>
 <p>
 This package contains functions to input and output data from and to
-the file, respectively.
+a&nbsp;file, respectively.
 </p>
 </html>"));
 end Streams;

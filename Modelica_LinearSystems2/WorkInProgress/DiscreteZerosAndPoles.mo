@@ -1303,6 +1303,7 @@ processing.
     import Modelica_LinearSystems2.StateSpace;
     import ZerosAndPoles =
         Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension;
 
     input String modelName "Name of the Modelica model";
     input Real T_linearize=0
@@ -1321,10 +1322,10 @@ processing.
           resultFile=fileName,
           startTime=T_linearize,
           stopTime=T_linearize + 1);
-    Integer ABCDsizes[2]=Streams.readMatrixSize(fileName2, "ABCD");
-    Integer nx = integer(scalar(Streams.readRealMatrix(fileName2, "nx", 1, 1)));
-    Integer nu=ABCDsizes[2] - nx;
-    Integer ny=ABCDsizes[1] - nx;
+    Integer xuy[3] = ReadSystemDimension(fileName2, "ABCD");
+    Integer nx = xuy[1];
+    Integer nu = xuy[2];
+    Integer ny = xuy[3];
     Real ABCD[nx + ny,nx + nu]=Streams.readRealMatrix(
           fileName2,
           "ABCD",
