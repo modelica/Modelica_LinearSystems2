@@ -465,24 +465,22 @@ end Analysis;
 encapsulated package Conversion
 
 encapsulated function toDiscreteZerosAndPoles
-      "Generate a DiscreteZerosAndPoles object from a DiscreteTransferFunction object"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-      import
-        Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Math.Complex;
+  "Generate a DiscreteZerosAndPoles object from a DiscreteTransferFunction object"
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+  import Modelica_LinearSystems2.TransferFunction;
+  import Modelica_LinearSystems2.Math.Complex;
 
   input DiscreteTransferFunction dtf "transfer function of a system";
   output DiscreteZerosAndPoles dzp(
-    redeclare Real n1[Internal.numberOfRealZeros2(dtf)],
+    redeclare Real n1[DiscreteZerosAndPoles.Internal.numberOfRealZeros2(dtf)],
     redeclare Real n2[integer((size(dtf.n, 1) - 1 -
-      Internal.numberOfRealZeros2(dtf))/2),2],
-    redeclare Real d1[Internal.numberOfRealPoles(dtf)],
+      DiscreteZerosAndPoles.Internal.numberOfRealZeros2(dtf))/2),2],
+    redeclare Real d1[DiscreteZerosAndPoles.Internal.numberOfRealPoles(dtf)],
     redeclare Real d2[integer((size(dtf.d, 1) - 1 -
-      Internal.numberOfRealPoles(dtf))/2),2]);
+      DiscreteZerosAndPoles.Internal.numberOfRealPoles(dtf))/2),2]);
     protected
   TransferFunction tf=TransferFunction(n=dtf.n, d=dtf.d);
   Complex z[:];
