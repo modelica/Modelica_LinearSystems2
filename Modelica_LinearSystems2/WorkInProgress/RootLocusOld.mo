@@ -410,6 +410,6 @@ within a model.
   //   input Real thicknesses[size(y, 1)] "Line thicknesses";
   //   output Integer _window;
 
-    annotation (interactive=true);
+    annotation (__Dymola_interactive=true);
   end plotEigenvalues;
 end RootLocusOld;

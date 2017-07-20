@@ -83,18 +83,18 @@ package RootLocusNew
 
   record Cases "Case information"
     Modelica_LinearSystems2.WorkInProgress.RootLocusNew.CaseDefinition Definition[:]
-                                 annotation (Dialog);
+      annotation (Dialog);
     String caseParameter[:] annotation (Dialog(
-          importDsin(
-          button="Select parameters",
-          onlyStart=true,
-          fields(caseParameter=initialName))));
+          __Dymola_importDsin(
+            button="Select parameters",
+            onlyStart=true,
+            fields(caseParameter=initialName))));
     Real parameterValues[:,:] "Case parameter values for each case"
-                                             annotation (
+      annotation (
         Dialog(
-        treeView=true,
-        rowHeadings=Definition.name,
-        columnHeadings=caseParameter));
+        __Dymola_treeView=true,
+        __Dymola_rowHeadings=Definition.name,
+        __Dymola_columnHeadings=caseParameter));
   end Cases;
 
   record CaseDefinition "Definition of cases"

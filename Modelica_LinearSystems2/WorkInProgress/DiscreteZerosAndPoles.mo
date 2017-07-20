@@ -531,75 +531,74 @@ end '==';
   encapsulated operator function 'String'
     "Transform ZerosAndPoles transfer function into a String representation"
     import Modelica;
-    import ZerosAndPoles =
-      Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
     //import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
-    import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+    import Modelica_LinearSystems2.ZerosAndPoles;
 
-      input ZerosAndPoles zp
+    input DiscreteZerosAndPoles zp
       "ZerosAndPoles transfer function to be transformed in a String representation";
-      input Integer significantDigits=6
+    input Integer significantDigits=6
       "Number of significant digits that are shown";
-      input String name="p" "Independent variable name used for printing";
-      output String s="";
+    input String name="p" "Independent variable name used for printing";
+    output String s="";
   protected
-      Integer num_order=size(zp.n1, 1) + 2*size(zp.n2, 1);
-      Integer den_order=size(zp.d1, 1) + 2*size(zp.d2, 1);
+    Integer num_order=size(zp.n1, 1) + 2*size(zp.n2, 1);
+    Integer den_order=size(zp.d1, 1) + 2*size(zp.d2, 1);
   algorithm
-      if num_order == 0 and den_order == 0 then
+    if num_order == 0 and den_order == 0 then
+      s := String(zp.k);
+
+    else
+      // construct string for multiplicative factor
+      if zp.k <> 1.0 or zp.k == 1.0 and num_order == 0 then
         s := String(zp.k);
-
-      else
-         // construct string for multiplicative factor
-        if zp.k <> 1.0 or zp.k == 1.0 and num_order == 0 then
-          s := String(zp.k);
-          if num_order <> 0 then
-            s := s + "*";
-          end if;
-        end if;
-
         if num_order <> 0 then
-            // construct numerator string
-          s := s + Internal.firstOrderToString(
-                zp.n1,
-                significantDigits,
-                name);
-          if size(zp.n2, 1) <> 0 then
-            s := if size(zp.n1, 1) > 0 then s + "*" +
-              Internal.secondOrderToString(
-                  zp.n2,
-                  significantDigits,
-                  name) else s + Internal.secondOrderToString(
-                  zp.n2,
-                  significantDigits,
-                  name);
-          end if;
-        end if;
-
-        if den_order <> 0 then
-            // construct denominator string
-          s := s + "/";
-          if den_order > 1 then
-            s := s + "( ";
-          end if;
-          s := s + Internal.firstOrderToString(
-                zp.d1,
-                significantDigits,
-                name);
-          if size(zp.d2, 1) <> 0 then
-            if size(zp.d1, 1) > 0 then
-              s := s + "*";
-            end if;
-            s := s + Internal.secondOrderToString(
-                  zp.d2,
-                  significantDigits,
-                  name);
-          end if;
-          if den_order > 1 then
-            s := s + " )";
-          end if;
+          s := s + "*";
         end if;
       end if;
+
+      if num_order <> 0 then
+        // construct numerator string
+        s := s + ZerosAndPoles.Internal.firstOrderToString(
+              zp.n1,
+              significantDigits,
+              name);
+        if size(zp.n2, 1) <> 0 then
+          s := if size(zp.n1, 1) > 0 then s + "*" +
+            ZerosAndPoles.Internal.secondOrderToString(
+                zp.n2,
+                significantDigits,
+                name) else s + ZerosAndPoles.Internal.secondOrderToString(
+                zp.n2,
+                significantDigits,
+                name);
+        end if;
+      end if;
+
+      if den_order <> 0 then
+          // construct denominator string
+        s := s + "/";
+        if den_order > 1 then
+          s := s + "( ";
+        end if;
+        s := s + ZerosAndPoles.Internal.firstOrderToString(
+              zp.d1,
+              significantDigits,
+              name);
+        if size(zp.d2, 1) <> 0 then
+          if size(zp.d1, 1) > 0 then
+            s := s + "*";
+          end if;
+          s := s + ZerosAndPoles.Internal.secondOrderToString(
+                zp.d2,
+                significantDigits,
+                name);
+        end if;
+        if den_order > 1 then
+          s := s + " )";
+        end if;
+      end if;
+    end if;
     //    end toString;
   end 'String';
 
@@ -754,8 +753,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
       import Modelica_LinearSystems2.Math.Vectors;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
-      import
-        Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
+      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
 
     input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
     output StateSpace ss(
@@ -809,28 +807,28 @@ from a ZerosAndPoles record representated by first and second order numerator an
         if i <= n_den2 then
           if i <= n_num2 then
               // State space system in form (1)
-            k[i] := Internal.scaleFactor2(
+            k[i] := DiscreteZerosAndPoles.Internal.scaleFactor2(
                 num[i, 1],
                 num[i, 2],
                 den[i, 1],
                 den[i, 2]);
           elseif i - n_num2 + 1 <= n_num1 then
               // State space system in form (1) with 2 first order numerator polynomials
-            k[i] := Internal.scaleFactor2(
+            k[i] := DiscreteZerosAndPoles.Internal.scaleFactor2(
                 num[i, 1] + num[i + 1, 1],
                 num[i, 1]*num[i + 1, 1],
                 den[i, 1],
                 den[i, 2]);
           elseif i - n_num2 == n_num1 then
               // State space system in form (2) with 1 first order numerator polynomial
-            k[i] := Internal.scaleFactor2(
+            k[i] := DiscreteZerosAndPoles.Internal.scaleFactor2(
                 0,
                 num[i, 1],
                 den[i, 1],
                 den[i, 2]);
           else
               // State space system in form (3)
-            k[i] := Internal.scaleFactor2(
+            k[i] := DiscreteZerosAndPoles.Internal.scaleFactor2(
                 0,
                 0,
                 den[i, 1],
@@ -838,7 +836,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
           end if;
         else
            // State space system in form (1) with 2 first order denominator polynomials
-          k[i] := Internal.scaleFactor2(
+          k[i] := DiscreteZerosAndPoles.Internal.scaleFactor2(
               num[i, 1],
               num[i, 2],
               den[i, 1] + den[i + 1, 1],
@@ -850,15 +848,15 @@ from a ZerosAndPoles record representated by first and second order numerator an
         // State space systems of order 1
         if n_num2 <= n_den2 and 2*(n_den2 - n_num2) + i <= n_num1 then
            // State space system in form (4)
-          k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
+          k[i_k + i] := DiscreteZerosAndPoles.Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
             n_num2) + i), 1], den[n_den2 + i, 1]);
         elseif n_num2 > n_den2 and i - i_d + 1 <= n_num1 then
            // State space system in form (4)
-          k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
+          k[i_k + i] := DiscreteZerosAndPoles.Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
             1], den[n_den2 + i, 1]);
         else
            // State space system in form (5)
-          k[i_k + i] := Internal.scaleFactor1(0, den[n_den2 + i, 1]);
+          k[i_k + i] := DiscreteZerosAndPoles.Internal.scaleFactor1(0, den[n_den2 + i, 1]);
         end if;
       end for;
 
