@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Design;
 function conditionNumbers
-  "Calculate several condition numbers to evaluate a pole assigment method"
+  "Calculate several condition numbers to evaluate a pole assignment method"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Math.Complex;

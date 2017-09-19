@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function reorderRSFc
-  "Reorders a real Schur factorization for poleAssigmentMI design for continuous systems"
+  "Reorders a real Schur factorization for poleAssignmentMI design for continuous systems"
 
   import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
