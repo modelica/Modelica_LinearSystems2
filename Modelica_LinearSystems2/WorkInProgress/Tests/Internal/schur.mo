@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Internal;
 encapsulated function schur
-  "Pole assigment design algorithm for multi input systems"
+  "Pole assignment design algorithm for multi input systems"
 
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Complex;

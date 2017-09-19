@@ -93,7 +93,7 @@ algorithm
 //   input Integer legendLocation := 1 "Where to place legend (1 above, 2 right, 3 below, 4-7 inside)";
 //   input Boolean legendHorizontal := true "Horizontal legend";
 //   input Boolean legendFrame := false "Draw frame around legend";
-//   input Boolean supressMarker := false "Deprecated. Replaced by colors, patterns, markers, and thicknesses.";
+//   input Boolean suppressMarker := false "Deprecated. Replaced by colors, patterns, markers, and thicknesses.";
 //   input Boolean logX := false "Logarithmic X scale";
 //   input Boolean logY := false "Logarithmic Y scale";
 //   input String legends[size(y, 1)] "Legends";

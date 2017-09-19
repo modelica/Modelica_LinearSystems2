@@ -49,7 +49,7 @@ which should have a very large period before they repeat itself and
 appropriate statistic properties such that the sequence appears to be
 a random draw. For real-valued random numbers, the integers are scaled to
 the real interval 0.0-1.0. They result in a uniformly distributed random variate
-between 0-1, which has to be tranformed to give a random variate of a wanted
+between 0-1, which has to be transformed to give a random variate of a wanted
 distribution. There are two types of techniques for transforming random variates:
 </p>
 <ul>

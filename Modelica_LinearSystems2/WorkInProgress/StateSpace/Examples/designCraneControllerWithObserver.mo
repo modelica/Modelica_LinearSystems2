@@ -21,8 +21,8 @@ function designCraneControllerWithObserver
 protected
  input Complex j = Modelica_LinearSystems2.Math.Complex.j();
 public
-  output Real K_ob[:,:] "feedback matrix pole assigment controller";
-  output Real K_pa[:,:] "feedback matrix pole assigment controller";
+  output Real K_ob[:,:] "feedback matrix pole assignment controller";
+  output Real K_pa[:,:] "feedback matrix pole assignment controller";
   output Real M_pa[:,:] "pre filter LQ controller";
 
 // Determine linear System from Modelica_Controller.Examples.Pendulum.mo

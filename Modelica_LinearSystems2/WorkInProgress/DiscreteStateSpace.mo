@@ -166,7 +166,7 @@ record DiscreteStateSpace
            /* x = phi*pre(x) + phi*B*u;
         y = C*x
         (u = [1,0,1,1,0..,0])
-      Limitations: The infinit impulses at t = kT is ignored in the mapping
+      Limitations: The infinite impulses at t = kT is ignored in the mapping
     */
 
         sd.A := Modelica.Math.Matrices.exp(sc.A, Ts);
@@ -352,7 +352,7 @@ respectively.
            /* x = phi*pre(x) + phi*B*u;
         y = C*x
         (u = [1,0,1,1,0..,0])
-      Limitations: The infinit impulses at t = kT is ignored in the mapping
+      Limitations: The infinite impulses at t = kT is ignored in the mapping
     */
 
         sd.A := Modelica.Math.Matrices.exp(A, Ts);

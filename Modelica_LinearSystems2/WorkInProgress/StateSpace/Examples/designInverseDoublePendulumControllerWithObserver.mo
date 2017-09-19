@@ -22,9 +22,9 @@ input Complex pa[6]={Complex(-1,0), Complex(-1,0), Complex(-12,-0.2),Complex(-12
 
   input Boolean makeAnalysis=false;
 
- output Real K_pa[:,:] "feedback matrix pole assigment controller";
+ output Real K_pa[:,:] "feedback matrix pole assignment controller";
  output Real M_pa[:,:] "pre filter LQ controller";
- output Real K_ob[:,:] "feedback matrix pole assigment controller";
+ output Real K_ob[:,:] "feedback matrix pole assignment controller";
 
 protected
  input Complex j = Modelica_LinearSystems2.Math.Complex.j();

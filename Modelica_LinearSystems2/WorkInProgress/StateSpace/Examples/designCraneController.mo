@@ -16,7 +16,7 @@ function designCraneController
     "assigned poles";
 
   output Real K_lq[:,:] "feedback matrix LQ controller";
-  output Real K_pa[:,:] "feedback matrix pole assigment controller";
+  output Real K_pa[:,:] "feedback matrix pole assignment controller";
   output Real M_lq[:,:] "pre filter LQ controller";
   output Real M_pa[:,:] "pre filter pole assignment controller";
 protected

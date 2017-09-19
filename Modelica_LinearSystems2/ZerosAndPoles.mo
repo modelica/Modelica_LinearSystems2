@@ -2232,7 +2232,7 @@ at the cutoff frequency is 3 dB. Note, when comparing the filters
 of this function with other software systems, the setting of \"normalized\"
 has to be selected appropriately. For example, the signal processing
 toolbox of Matlab provides the filters in non-normalized form and
-therefore a comparision makes only sense, if normalized = <b>false</b>
+therefore a comparison makes only sense, if normalized = <b>false</b>
 is set.
 
 
@@ -6159,7 +6159,7 @@ at the cutoff frequency is 1/sqrt(2) (= 3 dB). Note, when comparing the filters
 of this function with other software systems, the setting of \"normalized\"
 has to be selected appropriately. For example, the signal processing
 toolbox of Matlab provides the filters in non-normalized form and
-therefore a comparision makes only sense, if normalized = <b>false</b>
+therefore a comparison makes only sense, if normalized = <b>false</b>
 is set.
 </p>
 
@@ -7311,7 +7311,7 @@ results in a polynomial with Real coefficients).
 In the record, the zeros and poles are transformed
 into a product of first and second order polynomials.
 The data structure is especially useful in applications where first and
-second order polynomials are naturally occuring, e.g., as
+second order polynomials are naturally occurring, e.g., as
 for <b>filters</b>. In fact, via function
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>, a
 ZeroAndPole transfer function is generated from

@@ -307,8 +307,8 @@ part of this controller, the following features are present:
      to avoid excessive amplification of measurement noise.</li>
 <li> Setpoint weighting is present, which allows to weight
      the setpoint in the proportional and the derivative part
-     independantly from the measurement. The controller will respond
-     to load disturbances and measurement noise independantly of this setting
+     independently from the measurement. The controller will respond
+     to load disturbances and measurement noise independently of this setting
      (parameters wp, wd). However, setpoint changes will depend on this
      setting. For example, it is useful to set the setpoint weight wd
      for the derivative part to zero, if steps may occur in the
@@ -329,7 +329,7 @@ together) and using the following strategy:
 <li> Select a <b>PI</b>-controller and manually adjust parameters
      <b>k</b> and <b>Ti</b> (the time constant of the integrator).
      The first value of Ti can be selected, such that it is in the
-     order of the time constant of the oscillations occuring with
+     order of the time constant of the oscillations occurring with
      the P-controller. If, e.g., vibrations in the order of T=10 ms
      occur in the previous step, start with Ti=0.01 s.</li>
 <li> If you want to make the reaction of the control loop faster

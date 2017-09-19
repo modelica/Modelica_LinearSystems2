@@ -55,7 +55,7 @@ protected
   Complex eigval[4]=fill(Complex(0), 4)
   annotation (Documentation(info="<html>
 This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is
-to design pole assigment controllers for state space systems with multiple input.
+to design pole assignment controllers for state space systems with multiple input.
 </html>"));
   Complex j= Modelica_LinearSystems2.Math.Complex.j();
   Complex Tp[2,2]=sqrt(0.5)*[1+0*j, -j; 1+0*j, j];
