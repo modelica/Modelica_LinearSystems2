@@ -316,7 +316,7 @@ dzp = 'constructor'.<b>fromFactorization</b>(n1, n2, d1, d2, k, Ts, method, uNam
 
 <h4>Description</h4>
 <p>
-This function constructs a DiscreteZerosAndPoles transfer function from the real first and scond order polynomials of the numerator and the denominator, repectively.
+This function constructs a DiscreteZerosAndPoles transfer function from the real first and scond order polynomials of the numerator and the denominator, respectively.
 </p>
 
 <h4>Example</h4>

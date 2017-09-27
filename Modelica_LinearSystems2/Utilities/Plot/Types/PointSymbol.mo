@@ -16,7 +16,7 @@ Enumeration to define the style of the symbol to mark a point in a diagram. Poss
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th><b>Types.PointSymbol.</b></th><th><b>Meaning</b></th></tr>
 <tr><td valign=\"top\">None</td>
-    <td valign=\"top\">No symbol (point is not explicitely marked)</td></tr>
+    <td valign=\"top\">No symbol (point is not explicitly marked)</td></tr>
 
 <tr><td valign=\"top\">Cross</td>
     <td valign=\"top\">x</td></tr>

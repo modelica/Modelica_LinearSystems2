@@ -26,7 +26,7 @@ Matrices.<b>det</b>(A);
 <p>
 This function call returns the determinant of matrix A
 computed by a LU decomposition.
-Usally, this function should never be used, because
+Usually, this function should never be used, because
 there are nearly always better numerical algorithms
 as by computing the determinant. E.g., use function
 <a href=\"modelica://Modelica.Math.Matrices.rank\">Matrices.rank</a>

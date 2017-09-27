@@ -21,7 +21,7 @@ function designStateSpaceController
    input Complex pa[:]={Complex(-1,0),Complex(-2,0),Complex(-2, -0.2),Complex(-2,0.2)}
     "assigned poles";
 
-  output Real K_pa[:,:] "feedback matrix pole assigment controller";
+  output Real K_pa[:,:] "feedback matrix pole assignment controller";
   output Real M_pa[:,:] "pre filter pole assignment controller";
   output Complex po[size(ss.A,1)];
 

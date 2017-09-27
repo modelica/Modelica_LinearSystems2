@@ -1510,7 +1510,7 @@ In the normalized form, the amplitude of the filter transfer function at the cut
 frequency is 1/sqrt(2) (= 3 dB). Note, when comparing the filters of this function
 with other software systems, the setting of \"normalized\" has to be selected
 appropriately. For example, the signal processing toolbox of Matlab provides
-the filters in non-normalized form and therefore a comparision makes only sense,
+the filters in non-normalized form and therefore a comparison makes only sense,
 if normalized = <b>false</b> is set.
 </p>
 
@@ -2313,7 +2313,7 @@ is transformed into:
 </pre></blockquote>
 <p>
 If the numerator polynomial is 1, then the state vector
-<b>x</b> is built up of y and of all derivatives of y upto nx-1
+<b>x</b> is built up of y and of all derivatives of y up to nx-1
 (nx is the dimension of the state vector):
 </p>
 <blockquote><pre>
@@ -2470,7 +2470,7 @@ is transformed into:
 </pre></blockquote>
 <p>
 If the numerator polynomial is 1, then the state vector
-<b>x</b> is built up of y and of all derivatives of y upto nx-1
+<b>x</b> is built up of y and of all derivatives of y up to nx-1
 (nx is the dimension of the state vector):
 </p>
 <blockquote><pre>

@@ -55,7 +55,7 @@ algorithm
 <p>
 This example shows the usage of function
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Design.assignPolesMI\">StateSpace.Design.assignPolesMI</a>
-which is to design pole assigment controllers for state space systems with multiple input.
+which is to design pole assignment controllers for state space systems with multiple input.
 </p>
 </html>"));
 end analysis;
