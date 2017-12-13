@@ -6279,7 +6279,7 @@ represented by a StateSpace record.
     end assignPolesSI;
 
     encapsulated function assignPolesMI
-      "Pole assigment design algorithm for multi input systems"
+      "Pole assignment design algorithm for multi input systems"
 
       import Modelica;
       // import Modelica.Utilities.Streams.print;
@@ -11041,7 +11041,7 @@ inputs and the number of outputs must be identical.
     end isControllableAndObservableSISO;
 
     encapsulated function isControllableSISO
-      "To check a SISO system wether it is controllable"
+      "To check a SISO system whether it is controllable"
 
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -11094,7 +11094,7 @@ is a lower triangular matrix and has full rank if and only if none of the elemen
     end isControllableSISO;
 
     encapsulated function isControllableMIMO
-      "To check a MIMO system wether it is controllable"
+      "To check a MIMO system whether it is controllable"
 
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -11120,7 +11120,7 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
     end isControllableMIMO;
 
     encapsulated function isDetectableSISO
-      "To check wether a SISO system is detectable"
+      "To check whether a SISO system is detectable"
 
       import Modelica;
       import Complex;
@@ -11192,7 +11192,7 @@ stabilizability the <b>H</b>22 has to be stable.
     end isDetectableSISO;
 
     encapsulated function isDetectableMIMO
-      "Check wether a MIMO system is detectable"
+      "Check whether a MIMO system is detectable"
 
       import Modelica;
       import Complex;
@@ -11242,7 +11242,7 @@ The unobservable poles are checked to be stable.
     end isDetectableMIMO;
 
     encapsulated function isObservableSISO
-      "To check wether a SISO system is observable"
+      "To check whether a SISO system is observable"
 
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -11299,7 +11299,7 @@ the diagonal is zero. That is, that neither qn or hi,i-1,   i = 2,...,&nbsp;n   
     end isObservableSISO;
 
     encapsulated function isObservableMIMO
-      "To check a MIMO system wether it is observable"
+      "To check a MIMO system whether it is observable"
 
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -11330,7 +11330,7 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
     end isObservableMIMO;
 
     encapsulated function isStabilizableSISO
-      "To check wether a SISO system is stabliziable"
+      "To check whether a SISO system is stabliziable"
 
       import Modelica;
       import Complex;
@@ -11396,7 +11396,7 @@ stabilizability the <b>H</b>22 has to be stable.
     end isStabilizableSISO;
 
     encapsulated function isStabilizableMIMO
-      "To check wether a MIMO system is stabliziable"
+      "To check whether a MIMO system is stabliziable"
 
       import Modelica;
       import Complex;
@@ -11686,7 +11686,7 @@ The uncontrollable poles are checked to to stable.
         redeclare Real B[size(ss.B, 1), size(ss.B, 2)],
         redeclare Real C[size(ss.C, 1), size(ss.C, 2)],
         redeclare Real D[size(ss.D, 1), size(ss.D, 2)])
-        "tranformed state space system";
+        "Transformed state space system";
 
       Integer nx=size(ss.A, 1);
       Real Ah1[size(ss.A, 1), size(ss.A, 2)];

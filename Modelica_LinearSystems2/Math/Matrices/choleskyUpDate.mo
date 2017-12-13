@@ -90,7 +90,7 @@ elements are bold.
 
 </pre></blockquote>
 <p>
-With the boolean input &quot;upper&quot; the user specifies wether the matrix <b>L</b>
+With the boolean input &quot;upper&quot; the user specifies whether the matrix <b>L</b>
 is lower or upper triangular matrix (left or right Cholesky factor).
 If &quot;upper==true&quot;, the output <b>Lud</b> is also upper triangular. Default is &quot;upper==false&quot;.
 </p>

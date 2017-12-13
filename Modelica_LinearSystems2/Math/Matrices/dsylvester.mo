@@ -145,7 +145,7 @@ Finally, the solution of the the original problem is recovered as
 </p>
 <p>
 The boolean inputs &quot;AisHess&quot; and &quot;BTisSchur&quot; indicate to omit one
-or both of the transformation to Hessenberg form or Schur form, repectively,
+or both of the transformation to Hessenberg form or Schur form, respectively,
 in the case that <b>A</b> and/or <b>B</b> have already Hessenberg form
 or Schur, respectively.
 </p>

@@ -153,7 +153,7 @@ operator record Polynomial "Record defining the data for a polynomial"
 
     protected
       Integer nr=size(roots, 1) "Number of roots";
-      Integer nc=nr + 1 "Length of coefficent vector";
+      Integer nc=nr + 1 "Length of coefficient vector";
       Integer nn;
       Integer i;
     algorithm
@@ -860,7 +860,7 @@ a vector of Complex elements.
   end evaluate_der;
 
   encapsulated function integralValue_der
-    "Evaluate derivative of integral of polynomial p(x) from x_low to x_high, assuming only x_high as time-dependent (Leibnitz rule)"
+    "Evaluate derivative of integral of polynomial p(x) from x_low to x_high, assuming only x_high as time-dependent (Leibniz rule)"
     import Modelica_LinearSystems2.Math.Polynomial;
 
     input Polynomial p "Polynomial";

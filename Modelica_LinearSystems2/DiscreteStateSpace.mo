@@ -301,7 +301,7 @@ public
            /* x = phi*pre(x) + phi*B*u;
         y = C*x
         (u = [1,0,1,1,0..,0])
-      Limitations: The infinit impulses at t = kT is ignored in the mapping
+      Limitations: The infinite impulses at t = kT is ignored in the mapping
     */
 
         dss.A := Modelica.Math.Matrices.exp(ss.A, Ts);
@@ -511,7 +511,7 @@ public
            /* x = phi*pre(x) + phi*B*u;
         y = C*x
         (u = [1,0,1,1,0..,0])
-      Limitations: The infinit impulses at t = kT is ignored in the mapping
+      Limitations: The infinite impulses at t = kT is ignored in the mapping
     */
 
         dss.A := Modelica.Math.Matrices.exp(A, Ts);
@@ -1800,7 +1800,7 @@ end Analysis;
   extends Modelica.Icons.Package;
 
   encapsulated function assignPolesMI
-      "Pole assigment design algorithm for multi input systems"
+      "Pole assignment design algorithm for multi input systems"
 
     import Modelica;
     import Complex;

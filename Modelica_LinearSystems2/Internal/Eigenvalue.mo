@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 record Eigenvalue
-  "Record containing a eigen value or a pair of conjugated complex pair, repectively and additionally characteristics of the eigenvalue(s)"
+  "Record containing a eigen value or a pair of conjugated complex pair, respectively and additionally characteristics of the eigenvalue(s)"
   import Complex;
   extends Modelica.Icons.Record;
 

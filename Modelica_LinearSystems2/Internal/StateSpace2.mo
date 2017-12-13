@@ -129,7 +129,7 @@ ss.D = [r];
   end fromReal;
 
 // algorithm
-//            // this is the contructor algorithm
+//            // this is the constructor algorithm
 //   result.A := A;
 //   result.B := B;
 //   result.C := C;
