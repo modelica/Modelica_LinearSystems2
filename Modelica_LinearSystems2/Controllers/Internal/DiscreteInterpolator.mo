@@ -4,11 +4,9 @@ block DiscreteInterpolator
   extends Controllers.Icons.PartialBlockIcon(cont=false);
 
   parameter Integer inputSampleFactor(min=1)=1
-    "Input sample time = inputSampleFactor * sampleClock.sampleTime"
-    annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controllers.Types.BlockTypeWithGlobalDefault.Continuous));
+    "Input sample time = inputSampleFactor * sampleClock.sampleTime";
   parameter Integer outputSampleFactor(min=1)=1
-    "<html>Output sample time = outputSampleFactor * sampleClock.sampleTime<br>(inputSampleFactor must be an integer multiple of outputSampleFactor)</html>"
-    annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controllers.Types.BlockTypeWithGlobalDefault.Continuous));
+    "<html>Output sample time = outputSampleFactor * sampleClock.sampleTime<br>(inputSampleFactor must be an integer multiple of outputSampleFactor)</html>";
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));

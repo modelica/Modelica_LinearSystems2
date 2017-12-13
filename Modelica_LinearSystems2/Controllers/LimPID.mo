@@ -13,19 +13,19 @@ block LimPID
     "Type of PID representation";
   parameter Modelica.Blocks.Types.SimpleController controllerType=Modelica.Blocks.Types.SimpleController.PID
     "Type of controller";
-  parameter Real k(min=0) = 1 "Gain of controller" annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants));
+  parameter Real k(min=0) = 1 "Gain of controller" annotation(Dialog(enable=pidRepresentation==Types.PID_representation.timeConstants));
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small, start=0.5)
     "Time constant of Integrator block"
-    annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants and
+    annotation(Dialog(enable=pidRepresentation==Types.PID_representation.timeConstants and
                         (controllerType==SimpleController.PI or
                          controllerType==SimpleController.PID)));
   parameter Modelica.SIunits.Time Td(min=0, start=0.1)
     "Time constant of Derivative block"
-    annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants and (controllerType==SimpleController.PD or
+    annotation(Dialog(enable=pidRepresentation==Types.PID_representation.timeConstants and (controllerType==SimpleController.PD or
                                 controllerType==SimpleController.PID)));
-  parameter Real kp=1 "P part parameter of gain representation" annotation(Dialog(enable=pidRep==Types.PID_representation.gains));
-  parameter Real ki=1 "I part parameter of gain representation" annotation(Dialog(enable=pidRep==Types.PID_representation.gains and   (controllerType==SimpleController.PI or  controllerType==SimpleController.PID)));
-  parameter Real kd=1 "D part parameter of gain representation" annotation(Dialog(enable=pidRep==Types.PID_representation.gains and (controllerType==SimpleController.PD or controllerType==SimpleController.PID)));
+  parameter Real kp=1 "P part parameter of gain representation" annotation(Dialog(enable=pidRepresentation==Types.PID_representation.gains));
+  parameter Real ki=1 "I part parameter of gain representation" annotation(Dialog(enable=pidRepresentation==Types.PID_representation.gains and   (controllerType==SimpleController.PI or  controllerType==SimpleController.PID)));
+  parameter Real kd=1 "D part parameter of gain representation" annotation(Dialog(enable=pidRepresentation==Types.PID_representation.gains and (controllerType==SimpleController.PD or controllerType==SimpleController.PID)));
   parameter Real yMax(start=1) "Upper limit of output";
   parameter Real yMin=-yMax "Lower limit of output";
   parameter Real wp(min=0) = 1 "Set-point weight for Proportional block (0..1)";
@@ -56,8 +56,9 @@ block LimPID
                          enable=controllerType==SimpleController.PD or
                                 controllerType==SimpleController.PID));
   parameter Real y_start=0 "Initial value of output"
-    annotation(Dialog(enable=initType == InitPID.InitialOutput, group=
-          "Initialization"));
+    annotation(Dialog(
+      enable = initType == Types.InitWithGlobalDefault.InitialOutput,
+      group = "Initialization"));
 
   Sampler sampler_s(blockType=blockType)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
@@ -296,8 +297,8 @@ part of this controller, the following features are present:
      to avoid excessive amplification of measurement noise.</li>
 <li> Setpoint weighting is present, which allows to weight
      the setpoint in the proportional and the derivative part
-     independantly from the measurement. The controller will respond
-     to load disturbances and measurement noise independantly of this setting
+     independently from the measurement. The controller will respond
+     to load disturbances and measurement noise independently of this setting
      (parameters wp, wd). However, setpoint changes will depend on this
      setting. For example, it is useful to set the setpoint weight wd
      for the derivative part to zero, if steps may occur in the
@@ -318,7 +319,7 @@ together) and using the following strategy:
 <li> Select a <b>PI</b>-controller and manually adjust parameters
      <b>k</b> and <b>Ti</b> (the time constant of the integrator).
      The first value of Ti can be selected, such that it is in the
-     order of the time constant of the oscillations occuring with
+     order of the time constant of the oscillations occurring with
      the P-controller. If, e.g., vibrations in the order of T=10 ms
      occur in the previous step, start with Ti=0.01 s.</li>
 <li> If you want to make the reaction of the control loop faster
