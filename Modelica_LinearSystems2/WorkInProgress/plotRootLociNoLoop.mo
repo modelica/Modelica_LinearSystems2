@@ -7,14 +7,14 @@ function plotRootLociNoLoop
 
   input String modelName="Modelica.Mechanics.Rotational.Examples.First"
     "Name of the Modelica model"
-    annotation(Dialog(translatedModel));
+    annotation(Dialog(__Dymola_translatedModel));
   input Modelica_LinearSystems2.WorkInProgress.Internal.ModelParameters modelParams[:]=
     {Modelica_LinearSystems2.WorkInProgress.Internal.ModelParameters(
     parName="Jload",
     parMin=1,
     parMax=6,
     nVar=10)}
-    annotation (Dialog(label="Model parameters", importDsin(
+    annotation (Dialog(__Dymola_label="Model parameters", __Dymola_importDsin(
         button="Select model parameter" "Select parameters to be optimized",
         onlyStart=true,
         fields(
@@ -27,7 +27,7 @@ function plotRootLociNoLoop
     Modelica_LinearSystems2.WorkInProgress.Internal.LinearizationOptions(
     method="Dassl",
     tolerance=0.0001)
-    annotation (Dialog(label="Simulation setup"));
+    annotation (Dialog(__Dymola_label="Simulation setup"));
 
 //   input Modelica_LinearSystems2.WorkInProgress.Internal.ModelSetup modelSetup
 //     "Setup of the model to be analysed";

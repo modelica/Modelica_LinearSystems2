@@ -7,7 +7,7 @@ function plotRootLoci
 
   input String modelName="Modelica.Mechanics.Rotational.Examples.First"
     "Name of the Modelica model"
-    annotation(Dialog(translatedModel));
+    annotation(Dialog(__Dymola_translatedModel));
   input Boolean simulate = false
     "Linearize model after simulation (time-consuming!), otherwise linearization of all parameter variants at once"
     annotation (Dialog(__Dymola_compact=false),
@@ -19,7 +19,7 @@ function plotRootLoci
     parMin=1,
     parMax=6,
     nVar=10)}
-    annotation (Dialog(label="Model parameters", importDsin(
+    annotation (Dialog(__Dymola_label="Model parameters", __Dymola_importDsin(
         button="Select model parameter" "Select parameters to be optimized",
         onlyStart=true,
         fields(
@@ -32,7 +32,7 @@ function plotRootLoci
     Modelica_LinearSystems2.WorkInProgress.Internal.LinearizationOptions(
     method="Dassl",
     tolerance=0.0001)
-    annotation (Dialog(label="Simulation setup"));
+    annotation (Dialog(__Dymola_label="Simulation setup"));
 
   input Integer position[4]={5, 5, 600, 450} "Window Position"
     annotation (Dialog(group="Plot settings"));
