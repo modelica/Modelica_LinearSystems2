@@ -605,7 +605,7 @@ are licensed by <b><u>DLR</u></b> under the
 <b><u>Modelica License 2</u></b>.</p>
 
 <p style=\"margin-left: 40px;\"><b>Licensor:</b><br>
-<a href=\"http://www.dlr.de/rm\">Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)</a><br>
+<a href=\"http://www.dlr.de/sr/en\">Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)</a><br>
 Institut f&uuml;r Systemdynamik und Regelungstechnik<br>
 Postfach 1116<br>
 D-82230 Wessling<br>
@@ -616,7 +616,7 @@ email: Martin.Otter@dlr.de
 <p style=\"margin-left: 40px;\"><b>Copyright notices of the files:</b><br>
 Copyright
 <br>&copy; 2005-2012, DLR Institut f&uuml;r Robotik und Mechatronik.
-<br>&copy; 2012, DLR Institut f&uuml;r Systemdynamik und Regelungstechnik.
+<br>&copy; since 2012, DLR Institut f&uuml;r Systemdynamik und Regelungstechnik.
 </p>
 
 
@@ -1199,7 +1199,11 @@ Improvements in this version:
 <li>Renamed package Controller into <a href=\"modelica://Modelica_LinearSystems2.Controllers\">Controllers</a>.</li>
 <li>Using a <a href=\"modelica://Modelica.ComplexMath\">ComplexMath</a> library from 
 the Modelica standard library for all operations on complex numbers. A conversion script exists.
-See also <a href=\"Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers.FunctionsAndOperators\">Functions and operators</a> in Getting started.</li>
+See also <a href=\"Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers.FunctionsAndOperators\">Functions and operators</a> in Getting started.
+The original package Modelica_LinearSystems2.Math.Complex has been renamed to 
+<a href=\"modelica://Modelica_LinearSystems2.Math.ComplexAdvanced\">Modelica_LinearSystems2.Math.ComplexAdvanced</a>
+in order to clearly distinguish from the package <a href=\"modelica://Modelica.ComplexMath\">Modelica.ComplexMath</a>
+and the operator <a href=\"modelica://Complex\">Complex</a>.</li>
 <li>Deleted obsolete classes to read and write matrices on a file
 (<code>readMatrixOnFileSize</code>, <code>readMatrixInternal</code> and <code>readMatrixGain</code>). Instead, corresponding functions from
 <a href=\"modelica://Modelica.Utilities.Streams\">Modelica.Utilities.Streams</a> are used.
