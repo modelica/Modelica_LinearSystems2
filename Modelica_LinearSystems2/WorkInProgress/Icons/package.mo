@@ -10,7 +10,7 @@ annotation (Documentation(info="<html>
 
 <h4>Graphical display of function maturity</h4>
 <p>
-Mainly to faciliate the development process following icons exist to
+Mainly to facilitate the development process following icons exist to
 identify the level of maturity of a function:
 </p>
 <ol>

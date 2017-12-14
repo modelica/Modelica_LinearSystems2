@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.StateSpace.Design;
 encapsulated function assignPolesMI
-  "Pole assigment design algorithm for multi input systems"
+  "Pole assignment design algorithm for multi input systems"
 
   import Modelica;
   import Modelica.Utilities.Streams.print;

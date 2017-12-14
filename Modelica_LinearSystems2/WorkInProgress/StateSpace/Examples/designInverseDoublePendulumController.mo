@@ -19,15 +19,15 @@ function designInverseDoublePendulumController
   input Complex pa[6]={Complex(-2,0), Complex(-2,0), Complex(-15,-0.2),Complex(-15,0.2),Complex(-20,-0),Complex(-20,0)}
     "assigned poles";
 
-//  input Complex pob[6]=fill(-10+0*j,6) "assigned observer poles";
+//  input Complex pob[6]=fill(-10+0*j,6) "Assigned observer poles";
 
   input String fileName=DataDir + "inverseDoublePendulumController.mat"
     "File name for results";
 
-  output Real K_pa[:,:] "feedback matrix pole assigment controller";
-  output Real M_pa[:,:] "pre filter LQ controller";
+  output Real K_pa[:,:] "Feedback matrix pole assignment controller";
+  output Real M_pa[:,:] "Pre filter LQ controller";
 
-// output Real K_ob[:,:] "feedback matrix pole assigment controller";
+// output Real K_ob[:,:] "Feedback matrix pole assignment controller";
 
 protected
   input Complex j = Modelica_LinearSystems2.Math.Complex.j();

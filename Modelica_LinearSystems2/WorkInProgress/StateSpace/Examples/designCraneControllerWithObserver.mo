@@ -9,22 +9,20 @@ function designCraneControllerWithObserver
   import Complex;
 
   input String modelName="Modelica_Controller.Examples.Components.Pendulum_small"
-    "name of the model to linearize";
-
+    "Name of the model to linearize";
   input Complex pa[4]={-3.5+0*j,-3.5+0*j, -3.5-0.5*j, -3.5+0.5*j}
-    "assigned system poles";
-
+    "Assigned system poles";
   input Complex pob[4]={-10+0*j,-10+0*j,-10+0*j,-10+0*j}
-    "assigned observer poles";
- input String fileName=DataDir + "craneController_small.mat"
-    "file name for results";
+    "Assigned observer poles";
+  input String fileName=DataDir + "craneController_small.mat"
+    "File name for results";
 
 protected
- input Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j = Modelica_LinearSystems2.Math.Complex.j();
 public
-  output Real K_ob[:,:] "feedback matrix pole assigment controller";
-  output Real K_pa[:,:] "feedback matrix pole assigment controller";
-  output Real M_pa[:,:] "pre filter LQ controller";
+  output Real K_ob[:,:] "Feedback matrix pole assignment controller";
+  output Real K_pa[:,:] "Feedback matrix pole assignment controller";
+  output Real M_pa[:,:] "Pre filter LQ controller";
 
 // Determine linear System from Modelica_Controller.Examples.Pendulum.mo
 protected
@@ -50,10 +48,7 @@ algorithm
   (K_pa,,p) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, pa);
   ss_pa.A := ss.A - ss.B*K_pa;
   print("The feedback matrix of the pole assignment controller is:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
-    K_pa,
-    6,
-    "K_pa"));
+    Modelica_LinearSystems2.Math.Matrices.printMatrix(K_pa, 6, "K_pa"));
   print("eigenvalues of the closed loop system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
 
@@ -81,7 +76,9 @@ algorithm
   writeRealMatrix(fileName, "K_ob", K_ob, true);
 
   print("\nok!");
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    __Dymola_interactive=true,
+    Documentation(info="<html>
 <p>
 This example demonstrates how to use pole placement function assignPolesMI to
 design a pole placement controller and an observer also using assignPolesMI as well.

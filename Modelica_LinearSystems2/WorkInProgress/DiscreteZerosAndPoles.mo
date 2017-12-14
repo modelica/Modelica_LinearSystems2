@@ -74,8 +74,8 @@ record DiscreteZerosAndPoles
     input Modelica.SIunits.Time Ts = 1 "Sample time";
     input Modelica_LinearSystems2.Utilities.Types.Method method=
       Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
-    input String uName = "" "input name";
-    input String yName = "" "output name";
+    input String uName = "" "Input name";
+    input String yName = "" "Output name";
     output DiscreteZerosAndPoles dzp(
       redeclare Real n1[Internal.numberOfRealZeros(z)],
       redeclare Real n2[integer((size(z, 1) - Internal.numberOfRealZeros(z))/2), 2],
@@ -1528,7 +1528,7 @@ results in a polynomial with Real coefficients).
 In the record, the zeros and poles are transformed
 into a product of first and second order polynomials.
 The data structure is especially useful in applications where first and
-second order polynomials are naturally occuring, e.g., as
+second order polynomials are naturally occurring, e.g., as
 for <b>filters</b>. In fact, via function
 <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>, a
 ZeroAndPole transfer function is generated from

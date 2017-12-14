@@ -11,15 +11,15 @@ function designCraneController
 
   input String modelName=
       "Modelica_Controller.Examples.Components.Pendulum_small"
-    "name of the model to linearize";
+    "Name of the model to linearize";
 
   input Complex pa[4]={-3.5 + 0*j,-3.5 + 0*j,-3.5 - 0.5*j,-3.5 + 0.5*j}
-    "assigned poles";
+    "Assigned poles";
 
-  output Real K_lq[:,:] "feedback matrix LQ controller";
-  output Real K_pa[:,:] "feedback matrix pole assigment controller";
-  output Real M_lq[:,:] "pre filter LQ controller";
-  output Real M_pa[:,:] "pre filter pole assignment controller";
+  output Real K_lq[:,:] "Feedback matrix LQ controller";
+  output Real K_pa[:,:] "Feedback matrix pole assignment controller";
+  output Real M_lq[:,:] "Pre filter LQ controller";
+  output Real M_pa[:,:] "Pre filter pole assignment controller";
 protected
   input Complex j=Modelica_LinearSystems2.Math.Complex.j();
 
@@ -89,7 +89,9 @@ algorithm
   writeRealMatrix(DataDir + "craneController_small.mat", "M_pa", M_pa, true);
 
   print("\nok!");
-annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    __Dymola_interactive=true,
+    Documentation(info="<html>
 <p>
 This example demonstrates how to design a lq-controller or a pole placement controller
 respectively. Compared with example <b>craneController</b>, the plant is smaller to

@@ -21,8 +21,8 @@ function designStateSpaceController
   input Complex pa[:]={Complex(-1,0),Complex(-2,0),Complex(-2, -0.2),Complex(-2,0.2)}
     "Assigned poles";
 
-  output Real K_pa[:,:] "feedback matrix pole assigment controller";
-  output Real M_pa[:,:] "pre filter pole assignment controller";
+  output Real K_pa[:,:] "Feedback matrix pole assignment controller";
+  output Real M_pa[:,:] "Pre filter pole assignment controller";
   output Complex po[size(ss.A,1)];
 
 protected
@@ -66,7 +66,9 @@ algorithm
 //     Matrices.printMatrix(M_pa, 6, "M_pa"));
 
   print("\nok!");
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    __Dymola_interactive=true,
+    Documentation(info="<html>
 <p>
 This example demonstrates how to design a lq-controller or a pole placement controller respectively. 
 Compared with example <b>craneController</b>,

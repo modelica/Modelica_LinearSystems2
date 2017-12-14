@@ -1269,16 +1269,15 @@ result = ZerosAndPoles.Analysis.<b>evaluate</b>(zp, p, den_min=0)
 <p>
 Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function at a given (complex) value of p and returns the value G(p)=N(p)/D(p). The optional argument den_min with default 0 is used to guard against a division by zero.
 </p>
-<pre>
-  <b>if</b> |(D(p))| >= den_min <b>then</b>
-     G(p) = N(p) / D(p);
-  <b>elseif</b> D(p).re >= 0.0 <b>then</b>
-     G(p) = N(p) / den_min
-  <b>else</b>
-     G(p) = -N(p) / den_min
-  <b>end if</b>;
-</p>
-</pre>
+<blockquote><pre>
+<b>if</b> |(D(p))| >= den_min <b>then</b>
+   G(p) = N(p) / D(p);
+<b>elseif</b> D(p).re >= 0.0 <b>then</b>
+   G(p) = N(p) / den_min
+<b>else</b>
+   G(p) = -N(p) / den_min
+<b>end if</b>;
+</pre></blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -2233,7 +2232,7 @@ at the cutoff frequency is 3 dB. Note, when comparing the filters
 of this function with other software systems, the setting of &quot;normalized&quot;
 has to be selected appropriately. For example, the signal processing
 toolbox of Matlab provides the filters in non-normalized form and
-therefore a comparision makes only sense, if normalized = <b>false</b>
+therefore a comparison makes only sense, if normalized = <b>false</b>
 is set.
 
 
@@ -4736,9 +4735,9 @@ are the starting point to construct other filters by transformation
 of the filter transfer function:
 </p>
 
-<pre>
-   zp(p) = 1 / ( product( p + a[i] ) * product(p^2 + b[i]*p + a[i]) )
-</pre>
+<blockquote><pre>
+zp(p) = 1 / ( product( p + a[i] ) * product(p^2 + b[i]*p + a[i]) )
+</pre></blockquote>
 
 <p>
 using the following rules:
@@ -6150,7 +6149,7 @@ at the cutoff frequency is 1/sqrt(2) (= 3 dB). Note, when comparing the filters
 of this function with other software systems, the setting of &quot;normalized&quot;
 has to be selected appropriately. For example, the signal processing
 toolbox of Matlab provides the filters in non-normalized form and
-therefore a comparision makes only sense, if normalized = <b>false</b>
+therefore a comparison makes only sense, if normalized = <b>false</b>
 is set.
 </p>
 
@@ -7257,10 +7256,11 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 <p>
 This record defines a transfer function by its zeros, poles and a gain:
 </p>
-<pre>         product(p - z[i])
-  y = k*------------------- * u
+<blockquote><pre>
+         product(p - z[i])
+y = k * ------------------- * u
          product(p - n[i])
-</pre>
+</pre></blockquote>
 <p>
 where z[:] is a Complex vector of zeros, n[:] is a Complex
 vector of poles and k is an additional multiplicative factor.
@@ -7272,7 +7272,7 @@ results in a polynomial with Real coefficients).
 In the record, the zeros and poles are transformed
 into a product of first and second order polynomials.
 The data structure is especially useful in applications where first and
-second order polynomials are naturally occuring, e.g., as
+second order polynomials are naturally occurring, e.g., as
 for <b>filters</b>. In fact, via function
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>, a
 ZeroAndPole transfer function is generated from
@@ -7287,37 +7287,38 @@ A ZeroAndPole transfer function is internally stored by the coefficients
 of first and second order polynomials, and by an additional
 multiplicative factor k:
 </p>
-<pre>         product(p + n1[i]) * product(p^2 + n2[i,1]*p + n2[i,2])
-  y = k*---------------------------------------------------------
+<blockquote><pre>
+         product(p + n1[i]) * product(p^2 + n2[i,1]*p + n2[i,2])
+y = k * ---------------------------------------------------------
          product(p + d1[i]) * product(p^2 + d2[i,1]*p + d2[i,2])
-</pre>
+</pre></blockquote>
 <p>
 Note, the degrees of the numerator and denominator
 polynomials are given as:
 </p>
-<pre>
-   degree of numerator   = size(n1,1) + 2*size(n2,1);
-   degree of denominator = size(d1,1) + 2*size(d2,1);
-</pre>
-<p>
-Example:
-</p>
-<pre>                          (p+1)
-  zp = 4* -------------------------------------
-           (p - 1)*(p - (2+j*3))*(p - (2-j*3))
-</pre>
+<blockquote><pre>
+degree of numerator   = size(n1,1) + 2*size(n2,1);
+degree of denominator = size(d1,1) + 2*size(d2,1);
+</pre></blockquote>
+
+<h4>Example</h4>
+<blockquote><pre>
+                         (p+1)
+zp = 4 * -------------------------------------
+          (p - 1)*(p - (2+j*3))*(p - (2-j*3))
+</pre></blockquote>
 <p>
 with j=sqrt(-1), is defined as
 </p>
-<pre>
-   <b>import</b> Modelica_LinearSystems2.Math.Complex;
-   <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
+<blockquote><pre>
+<b>import</b> Modelica_LinearSystems2.Math.Complex;
+<b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
 
-   zp = ZerosAndPoles(z = {Complex(-1,0)},
-                      p = {Complex(1,0),
-                           Complex(2,3),
-                           Complex(2,-3)},
-                           k=4);
-</pre>
+zp = ZerosAndPoles(z = {Complex(-1,0)},
+                   p = {Complex(1,0),
+                        Complex(2,3),
+                        Complex(2,-3)},
+                        k=4);
+</pre></blockquote>
 </html>"));
 end ZerosAndPoles;

@@ -11,14 +11,13 @@ function designInversePendulumController
   input String modelName="Modelica_Controller.Examples.Components.InversePendulum_small"
     "Name of the model to linearize";
   input Complex pa[4]={-5+0*j,-5+0*j,-5.0-0.25*j,-5.0+0.25*j} "Assigned poles";
-
   input String fileName=DataDir + "inversePendulumController_small.mat"
     "File name for results";
 protected
    input Complex j = Modelica_LinearSystems2.Math.Complex.j();
 public
-  output Real K_pa[:,:] "feedback matrix pole assigment controller";
-  output Real M_pa[:,:] "pre filter LQ controller";
+  output Real K_pa[:,:] "Feedback matrix pole assignment controller";
+  output Real M_pa[:,:] "Pre filter LQ controller";
 // Determine linear System from Modelica_Controller.Examples.Pendulum.mo
 protected
   Modelica_LinearSystems2.StateSpace ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName);
@@ -50,7 +49,9 @@ algorithm
 
   print("\nok!");
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    __Dymola_interactive=true,
+    Documentation(info="<html>
 <p>
 This example demonstrates how to design pole placement controller to balance an inverted pendulum. For controller design a linearized model of a (simple) physical system model is used.
 The controller is applied to the physical model in Moldelica_Controller library.
