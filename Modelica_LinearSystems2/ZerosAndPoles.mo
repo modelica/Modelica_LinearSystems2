@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2;
 operator record ZerosAndPoles
   "Continuous zeros and poles description of a single input, single output system (data + operations)"
-  extends Modelica.Icons.Record;
 
   Real k=1.0 "Multiplicative factor of transfer function"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
@@ -18,7 +17,6 @@ operator record ZerosAndPoles
 
   encapsulated operator 'constructor'
     "Collection of operators to construct a ZerosAndPoles data record"
-    extends Modelica.Icons.Package;
 
     import Modelica;
     import Modelica_LinearSystems2;
@@ -254,7 +252,6 @@ This function constructs a ZerosAndPoles record zp from first and second order p
 
 encapsulated operator '-'
     "Collection of operators for subtraction of zeros and poles descriptions"
-  extends Modelica.Icons.Package;
   import Modelica;
 
   function subtract "Subtract two zeros and poles descriptions (zp1 - zp2)"

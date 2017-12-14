@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2;
 operator record DiscreteTransferFunction
   "Discrete transfer function description of a single input, single output system (data + operations)"
-  extends Modelica.Icons.Record;
 
   import Modelica_LinearSystems2.Math.Polynomial;
   import Modelica_LinearSystems2;
@@ -26,7 +25,6 @@ operator record DiscreteTransferFunction
     "Collection of operators to construct a DiscreteTransferFunction data record"
     import Modelica;
     import Modelica_LinearSystems2.TransferFunction;
-    extends Modelica.Icons.Package;
 
     encapsulated function fromReal
       "Generate a DiscreteTransferFunction data record from a real value"
@@ -160,7 +158,6 @@ operator record DiscreteTransferFunction
   encapsulated operator '*'
     "Contains operators for multiplication of discrete transfer functions"
     import Modelica;
-    extends Modelica.Icons.Package;
 
     function 'dtf*dtf' "Multiply two discrete transfer functions (dtf1 * dtf2)"
       import Modelica;
@@ -199,7 +196,6 @@ operator record DiscreteTransferFunction
   encapsulated operator '-'
     "Contains operators for subtraction of discrete transfer functions"
     import Modelica;
-    extends Modelica.Icons.Package;
 
     function subtract "Subtract two discrete transfer functions (dtf1 - dtf2)"
       import Modelica;
@@ -238,7 +234,6 @@ operator record DiscreteTransferFunction
   encapsulated operator '/'
     "Contains operators for division of discrete transfer functions"
     import Modelica;
-    extends Modelica.Icons.Package;
 
     encapsulated function 'dtf/dtf'
       "Divide two discrete transfer functions (dtf1 / dtf2)"
@@ -279,7 +274,6 @@ operator record DiscreteTransferFunction
   encapsulated operator '+'
     "Contains operators for addition of discrete transfer functions"
     import Modelica;
-    extends Modelica.Icons.Package;
 
     function 'dtf+dtf'
       "Parallel connection of two discrete transfer functions (= inputs are the same, outputs of the two systems are added)"

@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2;
-record TransferFunction
+operator record TransferFunction
   "Continuous transfer function description of a single input, single output system (data + operations)"
-  extends Modelica.Icons.Record;
 
   import Modelica_LinearSystems2.Math.Polynomial;
 
@@ -20,7 +19,6 @@ record TransferFunction
     "Collection of operators to construct a TransferFunction data record"
     import Modelica;
     import Modelica_LinearSystems2.TransferFunction;
-    extends Modelica.Icons.Package;
 
     function fromReal
       "Generate a TransferFunction data record from a real value"

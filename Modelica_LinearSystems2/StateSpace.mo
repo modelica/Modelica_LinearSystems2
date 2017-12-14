@@ -2,8 +2,6 @@ within Modelica_LinearSystems2;
 operator record StateSpace
   "Continuous state space description of a linear, time invariant differential equation system (data + operations)"
 
-  extends Modelica.Icons.Record;
-
   Real A[:, size(A, 1)]
     annotation (Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
   Real B[size(A, 1), :]
@@ -22,8 +20,6 @@ operator record StateSpace
 
   encapsulated operator 'constructor'
     "Collection of operators to construct a StateSpace data record"
-    extends Modelica.Icons.Package;
-
     import Modelica;
     import Modelica_LinearSystems2;
 
@@ -195,7 +191,6 @@ For the simplicity of implementation, this function directly extends from
   encapsulated operator '-'
     "Collection of operators for subtraction of state space systems"
     import Modelica;
-    extends Modelica.Icons.Package;
 
     function subtract
       "Subtraction of two state space systems connected in parallel (= inputs are the same, outputs of the two systems are subtracted)"

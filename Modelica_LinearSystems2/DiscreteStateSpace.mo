@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2;
 operator record DiscreteStateSpace
   "Discrete state space description of a linear, time invariant difference equation system (data + operations)"
-  extends Modelica.Icons.Record;
 
   Real A[:,size(A, 1)]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
   Real B[size(A, 1),:]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
@@ -23,7 +22,6 @@ operator record DiscreteStateSpace
     "Collection of operators to construct a DiscreteStateSpace data record"
     import Modelica_LinearSystems2;
     import Modelica;
-    extends Modelica.Icons.Package;
 
     function fromDiscreteTransferFunction =
       Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
@@ -577,40 +575,39 @@ public
     end fromMatrices2;
   end 'constructor';
 
-encapsulated operator '-'
+  encapsulated operator '-'
     "Contains operators for subtraction of discrete state space systems"
     import Modelica;
-  extends Modelica.Icons.Package;
-
-  function subtract
-      "Subtraction of two state space systems connected in parallel (= inputs are the same, outputs of the two systems are subtracted)"
-
-      import Modelica;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-
-    input DiscreteStateSpace dss1 "State space system 1";
-    input DiscreteStateSpace dss2
-        "State Space system 2 is subtracted from system 1";
-    output DiscreteStateSpace result(
-      redeclare Real A[size(dss1.A, 1) + size(dss2.A, 1),size(dss1.A, 2) + size(dss2.A, 2)],
-      redeclare Real B[size(dss1.B, 1) + size(dss2.B, 1),size(dss1.B, 2)],
-      redeclare Real C[size(dss1.C, 1),size(dss1.C, 2) + size(dss2.C, 2)],
-      redeclare Real D[size(dss1.D, 1),size(dss1.D, 2)],
-      redeclare Real B2[size(dss1.B2, 1) + size(dss2.B2, 1),size(dss1.B2, 2)])
-        "= dss1 - dss2";
-    protected
-    Integer nx1=size(dss1.A, 1);
-    Integer nx2=size(dss2.A, 1);
-  algorithm
-    assert(abs(dss1.Ts-dss2.Ts)<=Modelica.Constants.eps,"Two discrete state space systems must have the same sample time Ts for subtraction with \"-\".");
-    result.A := [dss1.A,zeros(nx1, nx2); zeros(nx2, nx1),dss2.A];
-    result.B := [dss1.B; dss2.B];
-    result.B2 := [dss1.B2; dss2.B2];
-    result.C := [dss1.C,-dss2.C];
-    result.D := dss1.D - dss2.D;
-    result.Ts := dss1.Ts;
-    result.method := dss1.method;
-      annotation (Documentation(info="<html>
+  
+    function subtract
+        "Subtraction of two state space systems connected in parallel (= inputs are the same, outputs of the two systems are subtracted)"
+  
+        import Modelica;
+        import Modelica_LinearSystems2.DiscreteStateSpace;
+  
+      input DiscreteStateSpace dss1 "State space system 1";
+      input DiscreteStateSpace dss2
+          "State Space system 2 is subtracted from system 1";
+      output DiscreteStateSpace result(
+        redeclare Real A[size(dss1.A, 1) + size(dss2.A, 1),size(dss1.A, 2) + size(dss2.A, 2)],
+        redeclare Real B[size(dss1.B, 1) + size(dss2.B, 1),size(dss1.B, 2)],
+        redeclare Real C[size(dss1.C, 1),size(dss1.C, 2) + size(dss2.C, 2)],
+        redeclare Real D[size(dss1.D, 1),size(dss1.D, 2)],
+        redeclare Real B2[size(dss1.B2, 1) + size(dss2.B2, 1),size(dss1.B2, 2)])
+          "= dss1 - dss2";
+      protected
+      Integer nx1=size(dss1.A, 1);
+      Integer nx2=size(dss2.A, 1);
+    algorithm
+      assert(abs(dss1.Ts-dss2.Ts)<=Modelica.Constants.eps,"Two discrete state space systems must have the same sample time Ts for subtraction with \"-\".");
+      result.A := [dss1.A,zeros(nx1, nx2); zeros(nx2, nx1),dss2.A];
+      result.B := [dss1.B; dss2.B];
+      result.B2 := [dss1.B2; dss2.B2];
+      result.C := [dss1.C,-dss2.C];
+      result.D := dss1.D - dss2.D;
+      result.Ts := dss1.Ts;
+      result.method := dss1.method;
+        annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote>
 <pre>
@@ -649,35 +646,35 @@ dss3 := dss1 - dss2;
 // dss.B2 = [0; 0; 0; 0],
 </pre></blockquote>
 </html>"));
-  end subtract;
-
-  function negate
-      "Unary minus (discrete state space system where the output is multiplied by a gain of -1)"
-      import Modelica;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-
-    input DiscreteStateSpace dss;
-    output DiscreteStateSpace result(
-      redeclare Real A[size(dss.A, 1),size(dss.A, 2)],
-      redeclare Real B[size(dss.B, 1),size(dss.B, 2)],
-      redeclare Real C[size(dss.C, 1),size(dss.C, 2)],
-      redeclare Real D[size(dss.D, 1),size(dss.D, 2)]) "= -dss";
-  algorithm
-    result.A := dss.A;
-    result.B := dss.B;
-    result.B2 := dss.B2;
-    result.C := -dss.C;
-    result.D := -dss.D;
-    result.Ts := dss.Ts;
-    result.method := dss.method;
-
-  end negate;
-    annotation (Documentation(info="<html>
+    end subtract;
+  
+    function negate
+        "Unary minus (discrete state space system where the output is multiplied by a gain of -1)"
+        import Modelica;
+        import Modelica_LinearSystems2.DiscreteStateSpace;
+  
+      input DiscreteStateSpace dss;
+      output DiscreteStateSpace result(
+        redeclare Real A[size(dss.A, 1),size(dss.A, 2)],
+        redeclare Real B[size(dss.B, 1),size(dss.B, 2)],
+        redeclare Real C[size(dss.C, 1),size(dss.C, 2)],
+        redeclare Real D[size(dss.D, 1),size(dss.D, 2)]) "= -dss";
+    algorithm
+      result.A := dss.A;
+      result.B := dss.B;
+      result.B2 := dss.B2;
+      result.C := -dss.C;
+      result.D := -dss.D;
+      result.Ts := dss.Ts;
+      result.method := dss.method;
+  
+    end negate;
+      annotation (Documentation(info="<html>
 <p>
 This package contains operators for subtraction of discrete state space records.
 </p>
 </html>"));
-end '-';
+  end '-';
 
 encapsulated operator function '+'
     "Parallel connection of two discrete state space systems (= inputs are the same, outputs of the two systems are added)"
