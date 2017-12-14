@@ -14,4 +14,6 @@ algorithm
     Modelica_LinearSystems2.ModelAnalysis.FullAnalysis(name);
   end for;
   ok := true;
+
+  annotation(__Dymola_interactive=true);
 end fullAnalysisForNamesOnFile;

@@ -4,7 +4,7 @@ package Types "Package of type definitions used in Test package"
 
 
   annotation (
-    preferedView="info",
+    preferredView="info",
     Documentation(info="<html>
 <p>
 This package contains type definitions. Generally,

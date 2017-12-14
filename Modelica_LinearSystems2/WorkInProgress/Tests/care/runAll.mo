@@ -38,5 +38,7 @@ algorithm
   end for;
     ok := RunScript(careMos);
 
-numberOfFunctions := n;
+  numberOfFunctions := n;
+
+  annotation(__Dymola_interactive=true);
 end runAll;

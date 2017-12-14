@@ -31,11 +31,6 @@ equation
   connect(Jm.flange_b, flange_b) annotation (Line(points={{60,0},{100,0}}));
   connect(i_ref, Vs.v) annotation (Line(points={{-99,0},{-77,4.28626e-016}}));
   annotation (
-    Window(
-      x=0.15,
-      y=0.18,
-      width=0.45,
-      height=0.58),
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

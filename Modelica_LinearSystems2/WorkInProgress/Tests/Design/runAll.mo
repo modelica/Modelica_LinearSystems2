@@ -61,5 +61,7 @@ algorithm
   ok := RunScript(designMos);
 //ok := true;
 
-numberOfFunctions := n;
+  numberOfFunctions := n;
+
+  annotation(__Dymola_interactive=true);
 end runAll;
