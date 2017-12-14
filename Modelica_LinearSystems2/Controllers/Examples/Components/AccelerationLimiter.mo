@@ -12,16 +12,19 @@ block AccelerationLimiter
   parameter Real y1_start=0 "Start value of integrator1" annotation(Evaluate=true,Dialog(tab="Advanced options",group = "Integrator1"));
   parameter Boolean withDelay1=blockType==Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
     sampleClock.blockType == Types.BlockType.Discrete
-    "Delays the input of integrator1" annotation(Evaluate=true,Dialog(tab="Advanced options",group = "Integrator1",
-    enable=blockType==Modelica_Controller.Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
-    sampleClock.blockType == Types.BlockType.Discrete));
+    "Delays the input of integrator1"
+    annotation(Evaluate=true,Dialog(tab="Advanced options",group = "Integrator1",
+      enable=blockType==Modelica_LinearSystems2.Controllers.Types.BlockTypeWithGlobalDefault.Discrete or
+        blockType == Modelica_LinearSystems2.Controllers.Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
+        sampleClock.blockType == Modelica_LinearSystems2.Controllers.Types.BlockType.Discrete));
   parameter Real y2_start=0 "Start value of integrator2" annotation(Evaluate=true,Dialog(tab="Advanced options",group = "Integrator2"));
   parameter Boolean withDelay2=blockType==Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
     sampleClock.blockType == Types.BlockType.Discrete
     "Delays the input of integrator2"
     annotation(Dialog(tab="Advanced options",group = "Integrator2",
-      enable=blockType==Modelica_Controller.Types.BlockTypeWithGlobalDefault.Discrete or blockType == Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
-      sampleClock.blockType == Types.BlockType.Discrete));
+      enable=blockType==Modelica_LinearSystems2.Controllers.Types.BlockTypeWithGlobalDefault.Discrete or
+        blockType == Modelica_LinearSystems2.Controllers.Types.BlockTypeWithGlobalDefault.UseSampleClockOption and
+        sampleClock.blockType == Modelica_LinearSystems2.Controllers.Types.BlockType.Discrete));
 
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(extent={{-85,5},{-75,-5}})));
