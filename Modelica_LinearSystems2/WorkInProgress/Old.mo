@@ -8,7 +8,7 @@ package Old
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.ZerosAndPoles.Internal;
+    import Complex;
 
     input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
     input Complex p=Complex(0) "Complex value p where zp is evaluated";
@@ -23,20 +23,20 @@ package Old
     // Build numerator
     num := zp.k + 0*j;
     for i in 1:size(zp.n1, 1) loop
-      num := num*Internal.'p+a'(p, zp.n1[i]);
+      num := num*ZerosAndPoles.Internal.'p+a'(p, zp.n1[i]);
     end for;
     for i in 1:size(zp.n2, 1) loop
-      num := num*Internal.'p^2+k[1]*p+k[2]'(p, zp.n2[i, :]);
+      num := num*ZerosAndPoles.Internal.'p^2+k[1]*p+k[2]'(p, zp.n2[i, :]);
       print("... evaluate 1: i="+ String(i)+", num = "+ String(num));
     end for;
 
     // Build denominator
     den := 1 + 0*j;
     for i in 1:size(zp.d1, 1) loop
-      den := den*Internal.'p+a'(p, zp.d1[i]);
+      den := den*ZerosAndPoles.Internal.'p+a'(p, zp.d1[i]);
     end for;
     for i in 1:size(zp.d2, 1) loop
-      den := den*Internal.'p^2+k[1]*p+k[2]'(p, zp.d2[i, :]);
+      den := den*ZerosAndPoles.Internal.'p^2+k[1]*p+k[2]'(p, zp.d2[i, :]);
       print("... evaluate 2: i="+ String(i)+", den = "+ String(den));
     end for;
 
@@ -105,19 +105,17 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
     "Example to compute the invariant zeros of a state space system"
     import Modelica;
     import Modelica.Utilities.Streams.print;
-    import Complex =
-           Modelica_LinearSystems2.Math.ComplexAdvanced;
-    import Modelica_LinearSystems2.TransferFunction;
+    import Complex;
     import Modelica_LinearSystems2.StateSpace;
     import Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica_LinearSystems2;
 
-    input Modelica_LinearSystems2.Math.ComplexAdvanced z[:]={-2 + 0*j,-3 + 4*j,-3 - 4*j} "Zeros (Complex vector of numerator zeros)";
-    input Modelica_LinearSystems2.Math.ComplexAdvanced p[:]={-0.5 + 0*j,-5 + 2*j,-5 - 2*j} "Poles (Complex vector of denominator zeros)";
+    input Complex z[:]={-2 + 0*j,-3 + 4*j,-3 - 4*j} "Zeros (Complex vector of numerator zeros)";
+    input Complex p[:]={-0.5 + 0*j,-5 + 2*j,-5 - 2*j} "Poles (Complex vector of denominator zeros)";
     input Real k=1.0 "Constant multiplied with transfer function";
 
   protected
-    input Modelica_LinearSystems2.Math.ComplexAdvanced j=Modelica_LinearSystems2.Math.ComplexAdvanced.j();
+    input Complex j = Modelica.ComplexMath.j;
 
     ZerosAndPoles zp=ZerosAndPoles(
         z=z,
@@ -129,7 +127,7 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
     Real Zeros[:,2];
     Boolean ok;
   algorithm
-    Zeros := Modelica_LinearSystems2.StateSpace.Internal.invariantZerosWithRealMatrix(ss.A, ss.B, ss.C, ss.D);
+    Zeros := StateSpace.Internal.invariantZerosWithRealMatrix(ss.A, ss.B, ss.C, ss.D);
     if size(Zeros, 1) == 0 then
       print("\nSystem\n  "+String(zp)+"\nhas no invariant zeros\n");
     else
@@ -151,19 +149,17 @@ This example shows the computation of the poles and zeros of state space system.
     "Example to compute the invariant zeros of a state space system"
     import Modelica;
     import Modelica.Utilities.Streams.print;
-    import Complex =
-           Modelica_LinearSystems2.Math.ComplexAdvanced;
-    import Modelica_LinearSystems2.TransferFunction;
+    import Complex;
     import Modelica_LinearSystems2.StateSpace;
     import Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica_LinearSystems2;
 
-    input Modelica_LinearSystems2.Math.ComplexAdvanced z[:]={-2 + 0*j,-3 + 4*j,-3 - 4*j} "Zeros (Complex vector of numerator zeros)";
-    input Modelica_LinearSystems2.Math.ComplexAdvanced p[:]={-0.5 + 0*j,-5 + 2*j,-5 - 2*j} "Poles (Complex vector of denominator zeros)";
+    input Complex z[:]={-2 + 0*j,-3 + 4*j,-3 - 4*j} "Zeros (Complex vector of numerator zeros)";
+    input Complex p[:]={-0.5 + 0*j,-5 + 2*j,-5 - 2*j} "Poles (Complex vector of denominator zeros)";
     input Real k=1.0 "Constant multiplied with transfer function";
 
   protected
-    input Modelica_LinearSystems2.Math.ComplexAdvanced j=Modelica_LinearSystems2.Math.ComplexAdvanced.j();
+    input Complex j = Modelica.ComplexMath.j;
 
     ZerosAndPoles zp=ZerosAndPoles(
         z=z,

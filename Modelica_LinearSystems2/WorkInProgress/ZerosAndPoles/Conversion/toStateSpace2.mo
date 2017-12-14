@@ -7,7 +7,6 @@ function toStateSpace2
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.Math.Vectors;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.StateSpace.Internal;
   import Complex;
 
   input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
@@ -62,33 +61,33 @@ algorithm
       if i <= n_den2 then
         if i <= n_num2 then
             // State space system in form (1)
-          k[i] := Internal.scaleFactor2(
+          k[i] := StateSpace.Internal.scaleFactor2(
               num[i, 1],
               num[i, 2],
               den[i, 1],
               den[i, 2]);
         elseif 2*(i - n_num2) <= n_num1 then
             // State space system in form (1) with 2 first order numerator polynomials
-          k[i] := Internal.scaleFactor2(
+          k[i] := StateSpace.Internal.scaleFactor2(
               num[2*(i - n_num2)-1, 1] + num[2*(i - n_num2), 1],
               num[2*(i - n_num2)-1, 1]*num[2*(i - n_num2), 1],
               den[i, 1],
               den[i, 2]);
         elseif  2*(i-n_num2) -1== n_num1 then
             // State space system in form (2) with 1 first order numerator polynomial
-//          k[i] := Internal.scaleFactor2(
+//          k[i] := StateSpace.Internal.scaleFactor2(
 //              num[2*i-n_num2-1, 1],
 //              0,
 //              den[i, 1],
 //              den[i, 2]);
-          k[i] := Internal.scaleFactor2(
+          k[i] := StateSpace.Internal.scaleFactor2(
               1,
               num[2*i-n_num2-1, 1],
               den[i, 1],
               den[i, 2]);
         else
             // State space system in form (3)
-          k[i] := Internal.scaleFactor2(
+          k[i] := StateSpace.Internal.scaleFactor2(
               1,
               1,
               den[i, 1],
@@ -96,7 +95,7 @@ algorithm
         end if;
       else
          // State space system in form (1) with 2 first order denominator polynomials
-        k[i] := Internal.scaleFactor2(
+        k[i] := StateSpace.Internal.scaleFactor2(
             num[i, 1],
             num[i, 2],
             den[2*(i - n_den2)-1, 1] + den[2*(i - n_den2), 1],
@@ -108,15 +107,15 @@ algorithm
       // State space systems of order 1
       if n_num2 <= n_den2 and 2*(n_den2 - n_num2) + i <= n_num1 then
          // State space system in form (4)
-        k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
+        k[i_k + i] := StateSpace.Internal.scaleFactor1(num[max(1, n_num2 + 2*(n_den2 -
           n_num2) + i), 1], den[n_den2 + i, 1]);
       elseif n_num2 > n_den2 and i - i_d + 1 <= n_num1 then
          // State space system in form (4)
-        k[i_k + i] := Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
+        k[i_k + i] := StateSpace.Internal.scaleFactor1(num[max(1, n_num2 + i - i_d + 1),
           1], den[n_den2 + i, 1]);
       else
          // State space system in form (5)
-        k[i_k + i] := Internal.scaleFactor1(1, den[n_den2 + i, 1]);
+        k[i_k + i] := StateSpace.Internal.scaleFactor1(1, den[n_den2 + i, 1]);
       end if;
     end for;
 

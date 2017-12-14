@@ -36,7 +36,7 @@ algorithm
   end for;
   ss.C[1, 1:ll] := fill(1, ll);
 
-  tf := ControlDesign.StateSpace.Conversions.toTransferFunction(ss, 1e-4);
+  tf := StateSpace.Conversion.toTransferFunction(ss, 1e-4);
   for i1 in 1:size(ss.C, 1) loop
     for i2 in 1:size(ss.B, 2) loop
       Modelica.Utilities.Streams.print("TransferFunction[" + String(i1) + ","

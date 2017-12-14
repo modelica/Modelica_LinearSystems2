@@ -5,10 +5,9 @@ function toTransferFunction
   import Modelica;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.WorkInProgress.StateSpace;
-  import Modelica_LinearSystems2.WorkInProgress.ZerosAndPoles;
+  import Modelica_LinearSystems2.ZerosAndPoles;
 
-  input StateSpace ss "StateSpace object";
+  input Modelica_LinearSystems2.StateSpace ss "StateSpace object";
 
   output TransferFunction tf;
 
@@ -16,8 +15,8 @@ protected
   ZerosAndPoles zp;
 
 algorithm
-  zp := Modelica_LinearSystems2.WorkInProgress.StateSpace.toZerosAndPoles(ss);
-  tf := Modelica_LinearSystems2.WorkInProgress.ZerosAndPoles.Conversion.toTransferFunction(zp);
+  zp := Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
+  tf := ZerosAndPoles.Conversion.toTransferFunction(zp);
 
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
