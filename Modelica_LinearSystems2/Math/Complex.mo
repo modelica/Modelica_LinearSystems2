@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math;
 operator record Complex "Record defining a Complex number"
-  extends Modelica.Icons.Record;
+
   Real re "Real part of complex number" annotation(Dialog);
   Real im "Imaginary part of complex number" annotation(Dialog);
 
@@ -641,7 +641,6 @@ This package provides functions operating on matrices of complex numbers.
 
   encapsulated operator 'constructor'
     "Collection of operators to construct a Complex number data record"
-    extends Modelica.Icons.Package;
     import Modelica;
 
     function fromReal "Generate a complex number record from a real value"
@@ -660,7 +659,6 @@ This package provides functions operating on matrices of complex numbers.
 
   encapsulated operator '-'
     "Collection of operators for subtraction of complex numbers"
-    extends Modelica.Icons.Package;
     import Modelica;
 
     function negate "Unary minus (multiply complex number by -1)"
