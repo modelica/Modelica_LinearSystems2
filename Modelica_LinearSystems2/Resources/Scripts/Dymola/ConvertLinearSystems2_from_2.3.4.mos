@@ -16,9 +16,6 @@ convertClass("Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension",
 
 // Convert elemnts for complex math operations
 //convertClass("Modelica_LinearSystems2.Math.Complex","Modelica.ComplexMath")
-//"Modelica_LinearSystems2.Math.Complex.Vectors.print"
-//"Modelica_LinearSystems2.Math.Complex.Vectors.printHTML"
-convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.multiply","Complex.'*'.scalarProduct")
 convertClass("Modelica_LinearSystems2.Math.Complex.'constructor'","Complex.'constructor'")
 convertClass("Modelica_LinearSystems2.Math.Complex.'-'","Complex.'-'")
 convertClass("Modelica_LinearSystems2.Math.Complex.'+'","Complex.'+'")
@@ -26,15 +23,18 @@ convertClass("Modelica_LinearSystems2.Math.Complex.'*'","Complex.'*'.multiply")
 convertClass("Modelica_LinearSystems2.Math.Complex.'/'","Complex.'/'")
 convertClass("Modelica_LinearSystems2.Math.Complex.'=='","Complex.'=='")
 convertClass("Modelica_LinearSystems2.Math.Complex.'String'","Complex.'String'")
-//"Modelica_LinearSystems2.Math.Complex.j","")
-//"Modelica_LinearSystems2.Math.Complex.eigenValues"
-//"Modelica_LinearSystems2.Math.Complex.eigenVectors"
-//"Modelica_LinearSystems2.Math.Complex.frequency"
+//convertClass("Modelica_LinearSystems2.Math.Complex.j","")
 convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.length","Modelica.ComplexMath.Vectors.length")
 convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.norm","Modelica.ComplexMath.Vectors.norm")
 convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.normalize","Modelica.ComplexMath.Vectors.normalize")
 convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.sortComplex","Modelica.ComplexMath.Vectors.sort")
 convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.reverse","Modelica.ComplexMath.Vectors.reverse")
+convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.print","Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print")
+convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.printHTML","Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.printHTML")
+convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.multiply","Complex.'*'.scalarProduct")
+convertClass("Modelica_LinearSystems2.Math.Complex.Matrices.print","Modelica_LinearSystems2.Math.ComplexAdvanced.Matrices.print")
+convertClass("Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul","Modelica_LinearSystems2.Math.ComplexAdvanced.Matrices.matMatMul")
+convertClass("Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul","Modelica_LinearSystems2.Math.ComplexAdvanced.Matrices.matVecMul")
 convertClass("Modelica_LinearSystems2.Math.Complex.'abs'","Modelica.ComplexMath.'abs'")
 convertClass("Modelica_LinearSystems2.Math.Complex.'sqrt'","Modelica.ComplexMath.'sqrt'")
 convertClass("Modelica_LinearSystems2.Math.Complex.'max'","Modelica.ComplexMath.'max'")
@@ -46,6 +46,9 @@ convertClass("Modelica_LinearSystems2.Math.Complex.arg","Modelica.ComplexMath.ar
 convertClass("Modelica_LinearSystems2.Math.Complex.conj","Modelica.ComplexMath.conj")
 convertClass("Modelica_LinearSystems2.Math.Complex.real","Modelica.ComplexMath.real")
 convertClass("Modelica_LinearSystems2.Math.Complex.imag","Modelica.ComplexMath.imag")
+convertClass("Modelica_LinearSystems2.Math.Complex.eigenValues","Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues")
+convertClass("Modelica_LinearSystems2.Math.Complex.eigenVectors","Modelica_LinearSystems2.Math.ComplexAdvanced.eigenVectors")
+convertClass("Modelica_LinearSystems2.Math.Complex.frequency","Modelica_LinearSystems2.Math.ComplexAdvanced.frequency")
 //"Modelica.ComplexMath.tan"
 //"Modelica.ComplexMath.asin"
 //"Modelica.ComplexMath.acos"
