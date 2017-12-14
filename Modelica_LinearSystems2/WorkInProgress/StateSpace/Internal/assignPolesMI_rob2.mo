@@ -8,9 +8,9 @@ function assignPolesMI_rob2
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
   import Complex;
-  import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
-  import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
-  import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
+  import matMul = Modelica_LinearSystems2.Math.ComplexAdvanced.Matrices.matMatMul;
+  import Modelica_LinearSystems2.Math.ComplexAdvanced.Matrices.matVecMul;
+  import Modelica_LinearSystems2.Math.ComplexAdvanced.Internal.C_transpose;
   import Re = Modelica.ComplexMath.real;
   import Im = Modelica.ComplexMath.imag;
   import Modelica.Utilities.Streams.print;
@@ -257,37 +257,37 @@ algorithm
          end for;
        end if;
      end for;
-     condX2 := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber(
+      condX2 := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber(
                                                 X);
-   end while;
-   end if;//rankB>1
+      end while;
+    end if;//rankB>1
 
 // Computation of the feedback matrix K
-   XC := C_transpose(X);
-   XC2 := C_transpose(matMul(X, Lambda));
-   MM := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2(
+    XC := C_transpose(X);
+    XC2 := C_transpose(matMul(X, Lambda));
+    MM := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2(
                                                         XC, XC2);
-   M := Re(MM);
-   M := transpose(M);
+    M := Re(MM);
+    M := transpose(M);
 
-   for l2 in 1:nx loop
-     for l3 in 1:nx loop
-       M[l2, l3] := M[l2, l3] - A[l2, l3];
-     end for;
-     end for;
+    for l2 in 1:nx loop
+      for l3 in 1:nx loop
+        M[l2, l3] := M[l2, l3] - A[l2, l3];
+      end for;
+    end for;
 
-   else
- gammaSorted2 :=  Modelica_LinearSystems2.Internal.reorderZeros(gamma);
+  else
+    gammaSorted2 :=  Modelica_LinearSystems2.Internal.reorderZeros(gamma);
     for i in 1:nx loop
-    Lambda[i, i] := gammaSorted2[i];
-  end for;
-  X:=fill(Complex(0),nx,nx);
+      Lambda[i, i] := gammaSorted2[i];
+    end for;
+    X:=fill(Complex(0),nx,nx);
 
-   for i in 1:numberOfRealEigenvalues loop
-     M[i,i]:=Re(gammaSorted[i]);
-     X[i,i] := Complex(1);
-   end for;
-   for i in 1:numberOfComplexPairs loop
+    for i in 1:numberOfRealEigenvalues loop
+      M[i,i]:=Re(gammaSorted[i]);
+      X[i,i] := Complex(1);
+    end for;
+    for i in 1:numberOfComplexPairs loop
          M[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i] := -Im(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
          M[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i-1] := Im(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
          M[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i-1] := Re(gammaSorted[numberOfRealEigenvalues + 2*i - 1]);
@@ -296,20 +296,20 @@ algorithm
          X[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i] := Complex(0,0.5);
          X[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i] := Complex(0,-0.5);
          X[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i-1] := Complex(0.5);
-   end for;
-         Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X");
-         Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M");
-         MM := Complex(1)*M;
-         XX := matMul(MM,X);
-         XX := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2(
+    end for;
+    Modelica_LinearSystems2.Math.ComplexAdvanced.Matrices.print(X, 6, "X");
+    Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M");
+    MM := Complex(1)*M;
+    XX := matMul(MM,X);
+    XX := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2(
                                                               X, XX);
-         Modelica_LinearSystems2.Math.Complex.Matrices.print(XX,6,"XX");
-         M:=M-A;
-         Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M-A");
+    Modelica_LinearSystems2.Math.ComplexAdvanced.Matrices.print(XX, 6, "XX");
+    M:=M-A;
+    Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M-A");
 
-   end if;
+  end if;
 
-   K := -Z*transpose(U0)*M;
+  K := -Z*transpose(U0)*M;
 //  evX := X;
 //K:=Modelica_LinearSystems2.StateSpace.Internal.calcK(A,U0,Z,gammaSorted,X);
 

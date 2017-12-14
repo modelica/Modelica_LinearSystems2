@@ -33,7 +33,7 @@ algorithm
 //####### POLE ASSIGNMENT ##########
 // return the Schur form representation
   (,,po) := Modelica_LinearSystems2.WorkInProgress.StateSpace.Design.assignPolesMI2(ss,assignedPoles,size(assignedPoles,1),true);
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("poSchur", po);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("poSchur", po);
   StateSpace.Analysis.analysis(ss,fileName="openloopSystem.html");
 
 // feedback matrix of a pole assignment controller with assigned eigenvalues pa
@@ -43,7 +43,7 @@ algorithm
   print("The feedback matrix of the pole assignment controller is:\n" +
     Matrices.printMatrix(K_pa, 6, "K_pa"));
   print("eigenvalues of the closed loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", po);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("ev_pa", po);
 // Pre filter calculation
 //   M_pa := -Modelica.Math.Matrices.inv([1,0,0,0;0,0,1,0]*Matrices.solve2(ss_pa.A, ss_pa.B));
 //   print("Gain for pre filtering:\n" +
@@ -59,7 +59,7 @@ algorithm
   print("The feedback matrix of the pole assignment controller is:\n" +
     Matrices.printMatrix(K_pa, 6, "K_pa"));
   print("eigenvalues of the closed loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", po);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("ev_pa", po);
 // Pre filter calculation
 //   M_pa := -Modelica.Math.Matrices.inv([1,0,0,0;0,0,1,0]*Matrices.solve2(ss_pa.A, ss_pa.B));
 //   print("Gain for pre filtering:\n" +

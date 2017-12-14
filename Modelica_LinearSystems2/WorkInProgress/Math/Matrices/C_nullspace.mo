@@ -20,7 +20,7 @@ protected
 
 algorithm
   (sigma,,V) := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues(A);
-  V := Modelica_LinearSystems2.Math.Complex.Internal.C_transpose(V);
+  V :=Modelica_LinearSystems2.Math.ComplexAdvanced.Internal.C_transpose(V);
   // rank computation
   eps := max(size(A, 1), size(A, 2))*max(sigma)*Modelica.Constants.eps;
   rank := 0;

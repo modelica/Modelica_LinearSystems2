@@ -1426,7 +1426,7 @@ public
       assert(ZerosAndPoles.Analysis.denominatorDegree(zp) >
         ZerosAndPoles.Analysis.numeratorDegree(zp),
         " Denominator polynominal of transfer function in function\"ZerosAndPoles.Analysis.eigenValues\"has to be of higher order than numerator polynomial");
-      eigval := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+      eigval := Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A);
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>

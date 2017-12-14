@@ -29,7 +29,7 @@ function designInverseDoublePendulumControllerWithObserver
  output Real K_ob[:,:] "Feedback matrix pole assigment controller";
 
 protected
-  input Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j = Modelica.ComplexMath.j;
 protected
   Real Q[:,:];
   Real R[:,:];
@@ -39,7 +39,7 @@ protected
   // Determine linear System from Modelica_Controller.Examples.Components.InverseDoublePendulum.mo
   Modelica_LinearSystems2.StateSpace ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName);
 
-  Complex p[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+  Complex p[:]=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A);
   Modelica_LinearSystems2.StateSpace ss_pa=ss;
 // Modelica_LinearSystems2.StateSpace ss_ob=StateSpace(A=transpose(ss.A), B=transpose([1,0,0,0,0,0;0,0,1,0,0,0]), C=transpose(ss.B), D=fill(0,size(ss.B,2),2));
 // Modelica_LinearSystems2.StateSpace ssPlant=Modelica_LinearSystems2.StateSpace(A=ss.A, B=ss.B,C=[1,0,0,0,0,0;0,0,1,0,0,0],D=zeros(2,size(ss.B,2)));
@@ -77,7 +77,7 @@ algorithm
   end if;
 
   print("The eigenvalues are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("p",p);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("p", p);
 
   //####### POLE ASSIGNMENT ##########
 
@@ -91,7 +91,7 @@ algorithm
     6,
     "K_pa"));
   print("eigenvalues of the closed loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("ev_pa", p);
 
   writeRealMatrix(fileName, "K_pa", K_pa, true);
 

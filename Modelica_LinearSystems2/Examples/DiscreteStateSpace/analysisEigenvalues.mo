@@ -32,9 +32,9 @@ protected
   Complex evDiscrete2[2]={ev1,ev2};
 
 algorithm
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("evDiscrete", evDiscrete);
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("evDiscrete2", evDiscrete2);
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("evContiuous", evContinuous);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("evDiscrete", evDiscrete);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("evDiscrete2", evDiscrete2);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("evContiuous", evContinuous);
 
   annotation (Documentation(info="<html>
 <p>

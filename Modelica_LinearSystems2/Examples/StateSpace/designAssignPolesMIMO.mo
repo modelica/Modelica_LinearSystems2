@@ -10,18 +10,16 @@ function designAssignPolesMIMO "Example for pole placing"
     B=[0; 1],
     C=[1,0; 0,1],
     D=[0; 0]);
-  input Modelica_LinearSystems2.Math.Complex p[:]={
-    Modelica_LinearSystems2.Math.Complex(-3,0),
-    Modelica_LinearSystems2.Math.Complex(-4,0)};
+  input Complex p[:]={Complex(-3, 0),Complex(-4, 0)};
 
 protected
-  Modelica_LinearSystems2.Math.Complex newPoles[:];
+  Complex newPoles[:];
 
 algorithm
   (K, S, newPoles) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, p);
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
-  newPoles := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A-ss.B*K);
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("newPoles", newPoles);
+  newPoles :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A - ss.B*K);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("newPoles", newPoles);
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>

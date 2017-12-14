@@ -10,7 +10,6 @@ function Operations
   import Modelica_LinearSystems2.DiscreteZerosAndPoles;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
   import Modelica.Math.Vectors;
-  import Modelica_LinearSystems2.Math.Complex;
 
   input Boolean doPlot=true;
   input Modelica.SIunits.Time Ts=0.1;

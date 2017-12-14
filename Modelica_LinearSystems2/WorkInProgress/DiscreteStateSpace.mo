@@ -489,7 +489,7 @@ encapsulated function toDiscreteZerosAndPoles
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import LS2Complex = Modelica_LinearSystems2.Math.Complex;
+  import LS2Complex = Modelica_LinearSystems2.Math.ComplexAdvanced;
   import Modelica_LinearSystems2.DiscreteZerosAndPoles;
   import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
   import Complex;

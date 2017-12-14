@@ -30,7 +30,7 @@ protected
 algorithm
   Modelica.Utilities.Streams.print(String(ss));
   Modelica.Utilities.Streams.print(String(tf));
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("Invariant zeros", invZeros);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("Invariant zeros", invZeros);
 
   invZero1 := invZeros[1];
   invMat := Modelica.Math.Matrices.inv([invZero1.re*identity(size(ss.A, 1)) -

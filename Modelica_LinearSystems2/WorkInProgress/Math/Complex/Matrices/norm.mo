@@ -22,7 +22,7 @@ algorithm
     result := max(Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues(A));
   elseif p==3 then
     // Frobenius norm
-    result := Modelica_LinearSystems2.Math.Complex.Internal.frobeniusNorm(A);
+    result :=Modelica_LinearSystems2.Math.ComplexAdvanced.Internal.frobeniusNorm(A);
   elseif p == Modelica.Constants.inf then
     // row sum norm
     for i in 1:size(A, 1) loop

@@ -27,7 +27,7 @@ protected
   Integer nmk[2]=Streams.readMatrixSize(dataFile, "K") "Read dimensions of K";
   Real A[:,:]=Streams.readRealMatrix(dataFile, "A", nm[1], nm[1]) "Read system matrix A";
   Real B[:,:]=Streams.readRealMatrix(dataFile, "B", nm[1], nm[2]) "Read system matrix B";
-  Complex j=Modelica_LinearSystems2.Math.Complex.j();
+  Complex j = Modelica.ComplexMath.j;
   Real assignedPolesR[1,:]=Streams.readRealMatrix(dataFile, "assignedPoles", 1, nm[1])
     "Read real part of assigned poles";
   Real assignedPolesI[1,:]=Streams.readRealMatrix(dataFile, "assignedPolesIm", 1, nm[1])
@@ -69,7 +69,7 @@ algorithm
 //    K := transpose(matrix(k));
     ss.A := ss.A - ss.B*K;
     S := ss.A;
-    (X,calcPoles) := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
+    (X,calcPoles) :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenVectors(S);
 //    X := Complex(1)*Xre;
   else// end isSI
 
@@ -78,7 +78,7 @@ algorithm
       (K,X) := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob(
                                                                              A, B, assignedPoles);
       S := A - B*K;
-      calcPoles := Modelica_LinearSystems2.Math.Complex.eigenValues(S);
+      calcPoles :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(S);
       if isKprovided then
         gap := Modelica.Math.Matrices.norm(K - Ki);
       end if;
@@ -109,8 +109,14 @@ algorithm
   end if;
   print("n = "+String(nm[1])+",  m = "+ String(nm[2])+"\n",outputFile);
   print(Matrices.printMatrix(K, 6, "K"),outputFile);
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("assignedPoles", assignedPoles,outputFile);
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("calcPoles", calcPoles,outputFile);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print(
+    "assignedPoles",
+    assignedPoles,
+    outputFile);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print(
+    "calcPoles",
+    calcPoles,
+    outputFile);
 //   Matrices.printMatrix(Re(X), 6, "ReX");
 //   Matrices.printMatrix(Im(X), 6, "ImX");
   print("kappa2 " + String(kappa2),outputFile);

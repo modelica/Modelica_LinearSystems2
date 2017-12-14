@@ -33,7 +33,7 @@ protected
   Complex zeros[:];
 
 algorithm
-  poles := Modelica_LinearSystems2.Math.Complex.eigenValues(ssm.A);
+  poles :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ssm.A);
 
   for i in 1:size(poles, 1) loop
 

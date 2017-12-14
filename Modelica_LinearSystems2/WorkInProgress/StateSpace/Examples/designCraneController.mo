@@ -21,7 +21,7 @@ function designCraneController
   output Real M_lq[:,:] "Pre filter LQ controller";
   output Real M_pa[:,:] "Pre filter pole assignment controller";
 protected
-  input Complex j=Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j = Modelica.ComplexMath.j;
 
 protected
   Real Q[:,:];
@@ -32,7 +32,7 @@ protected
       Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName);
 //Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(A= [0,1,0,0;0,0,39.24,0;0,0,0,1;0,0,-4.904,0], B=[0;1e-3;0;-1e-4], C=[1,0,1,0], D=[0]);
 
-  Complex p[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+  Complex p[:]=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A);
   Modelica_LinearSystems2.StateSpace ss_lq=ss;
   Modelica_LinearSystems2.StateSpace ss_pa=ss;
 
@@ -42,9 +42,9 @@ algorithm
 // ####### LQ CONTROLLER #######
 
 // eigenvalues of open loop system
-  p := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+  p :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A);
   print("eigenvalues of the open loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev", p);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("ev", p);
 
 // Calculate feesback matrix of a lq controller (Riccati) with weighting matrices Q and R
   Q := [1,0,300,1000; 0,100,0,3000; 0,0,1000,0; 0,10,0,1];
@@ -60,9 +60,9 @@ algorithm
   writeRealMatrix(DataDir + "craneController_small.mat", "K_lq", K_lq);
 
 // eigenvalues of closed loop system
-  p := Modelica_LinearSystems2.Math.Complex.eigenValues(ss_lq.A);
+  p :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss_lq.A);
   print("eigenvalues of the closed loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_lq", p);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("ev_lq", p);
 
 // Pre filter calculation
   M_lq := -Modelica.Math.Matrices.inv([1,0,0,0]*Matrices.solve2(ss_lq.A, ss_lq.B));
@@ -78,7 +78,7 @@ algorithm
   print("The feedback matrix of the pole assignment controller is:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(K_pa, 6, "K_pa"));
   print("eigenvalues of the closed loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("ev_pa", p);
 
   writeRealMatrix(DataDir + "craneController_small.mat", "K_pa", K_pa, true);
 

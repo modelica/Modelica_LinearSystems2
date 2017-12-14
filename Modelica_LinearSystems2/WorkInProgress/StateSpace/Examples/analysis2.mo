@@ -57,8 +57,8 @@ protected
 This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is
 to design pole assignment controllers for state space systems with multiple input.
 </html>"));
-  Complex j= Modelica_LinearSystems2.Math.Complex.j();
-  Complex Tp[2,2]=sqrt(0.5)*[1+0*j, -j; 1+0*j, j];
+  Complex j = Modelica.ComplexMath.j;
+  Complex Tp[2,2] = sqrt(0.5)*[1+0*j, -j; 1+0*j, j];
   Integer i;
 
   Real x0[size(ss.A, 1)]=ones(size(ss.A, 1)) "Initial state vector";
@@ -68,7 +68,7 @@ algorithm
   ok := false;
   StateSpace.Analysis.analysis(ss, fileName="analysis.html", analyseOptions=analyseOptions, description="Description of the system");
   (eigvec,eigval) := Modelica_LinearSystems2.StateSpace.Analysis.eigenVectors(ss, false);
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("eval",eigval);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("eval", eigval);
   Modelica_LinearSystems2.Math.Matrices.printMatrix(eigvec, 6, "leftEigenVectors");
 
   i := 1;

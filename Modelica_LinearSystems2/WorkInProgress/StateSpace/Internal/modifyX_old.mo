@@ -17,7 +17,7 @@ function modifyX_old
   output Complex Xm[size(X, 1),size(X, 2)];
 
 protected
-  Complex j=Modelica_LinearSystems2.Math.Complex.j();
+  Complex j = Modelica.ComplexMath.j;
   Integer n=size(X,1);
   Real X_real[n,n]=Modelica.ComplexMath.real(X)
     "Eigenvector matrix, real part";

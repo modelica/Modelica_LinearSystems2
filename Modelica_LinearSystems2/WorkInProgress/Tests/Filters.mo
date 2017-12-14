@@ -5,7 +5,7 @@ package Filters
     import Modelica_LinearSystems2.Utilities.Types;
     import Modelica.Utilities.Streams.print;
     import Modelica.Constants.pi;
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
 
     input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
     input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
@@ -19,6 +19,7 @@ package Filters
       "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   protected
     function getAmplitude "Compute amplitude at f_cut and return it as string"
+      import Modelica_LinearSystems2;
       input ZP zp;
       input Modelica.SIunits.Frequency f_cut;
       output String str;
@@ -27,7 +28,7 @@ package Filters
       Real A;
       constant Real machEps = 100*Modelica.Constants.eps;
     algorithm
-      c := ZP.Analysis.evaluate(zp, Complex(0,2*pi*f_cut));
+      c :=ZP.Analysis.evaluate(zp, Complex(0, 2*pi*f_cut));
       A :=Modelica.ComplexMath.'abs'(c);
       str :="amplitude(f=" + String(f_cut) + ") = ";
       if Modelica_LinearSystems2.Math.isEqual(A, 10^(-3/20), machEps) then
@@ -187,7 +188,7 @@ package Filters
     import Modelica_LinearSystems2.Utilities.Types;
     import ZP = Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica.Utilities.Streams.print;
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
     input String outputFile = "";
   protected
     constant Real machEps = 100*Modelica.Constants.eps;
@@ -228,13 +229,14 @@ package Filters
     end printCoefficients;
 
     function getAmplitude "Compute amplitude at w=1 and return it as string"
+      import Modelica_LinearSystems2;
       input ZP zp;
       output String str;
     protected
       Complex c;
       Real A;
     algorithm
-      c := ZP.Analysis.evaluate(zp, Complex(0,1.0));
+      c :=ZP.Analysis.evaluate(zp, Complex(0, 1.0));
       A :=Modelica.ComplexMath.'abs'(c);
 
       if Modelica_LinearSystems2.Math.isEqual(A, 10^(-3/20), machEps) then

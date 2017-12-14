@@ -749,7 +749,7 @@ Horner's method is used for polynomial evaluation.
   encapsulated function roots
     "Determine zeros of polynomial, i.e., points x with p(x)=0"
     import Modelica_LinearSystems2.Math.Polynomial;
-    import LS2ComplexVectors = Modelica_LinearSystems2.Math.Complex.Vectors;
+    import Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors;
     import Complex;
 
     input Polynomial p "Polynomial";
@@ -761,7 +761,7 @@ Horner's method is used for polynomial evaluation.
     result := Polynomial.rootsOfNonZeroHighestCoefficientPolynomial(
       p, Polynomial.numberOfRoots(p));
     if printRoots then
-      LS2ComplexVectors.print("", result);
+      Vectors.print("", result);
     end if;
     annotation (Documentation(info="<html>
 <p>

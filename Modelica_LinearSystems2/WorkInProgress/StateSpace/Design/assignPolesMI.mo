@@ -235,9 +235,9 @@ Modelica.Utilities.Streams.print("1x1 Ann = "+String(A_rsf[n,n])+"\n ap = "+Stri
 
 //###############################################################
 
-Modelica.Utilities.Streams.print("2x2, compl system, real ass Ann = "+Matrices.printMatrix(A_rsf[n-1:n,n-1:n])+"\n ap = ");
+      Modelica.Utilities.Streams.print("2x2, compl system, real ass Ann = "+Matrices.printMatrix(A_rsf[n-1:n,n-1:n])+"\n ap = ");
 
-Modelica_LinearSystems2.Math.Complex.Vectors.print("as",gammaReordered[ng - rp - 2*i + 1:ng - rp - 2*(i - 1)]);
+      Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("as", gammaReordered[ng - rp - 2*i + 1:ng - rp - 2*(i - 1)]);
 
 //###############################################################
 
@@ -372,7 +372,7 @@ Modelica.Utilities.Streams.print("2x2, 2 compl system, complex ass Ann = "+Matri
   end for;
 
   S := ss.A - ss.B*K;
-  po := Modelica_LinearSystems2.Math.Complex.eigenValues(S);
+  po :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(S);
 
   if calculateEigenvectors then
 //     X := fill(Complex(0), n, n);
@@ -388,7 +388,7 @@ Modelica.Utilities.Streams.print("2x2, 2 compl system, complex ass Ann = "+Matri
 //       end for;
 //     end for;
 //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X1");
-    X := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
+    X :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenVectors(S);
 //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X2");
 
   end if;

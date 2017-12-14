@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Internal;
 function multiplyComplexMatrices "Some case studies to complex matrices"
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2;
+  import Complex;
 
   input Integer n=30;
   output Boolean ok;
@@ -13,6 +12,6 @@ protected
 
 algorithm
 //  C2 := C1*C1;
-  C2 := Complex.Matrices.matMatMul(C1,C1);
+  C2 := Modelica_LinearSystems2.Math.ComplexAdvanced.Matrices.matMatMul(C1,C1);
   ok := true;
 end multiplyComplexMatrices;

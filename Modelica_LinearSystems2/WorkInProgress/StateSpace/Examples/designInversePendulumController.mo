@@ -14,7 +14,7 @@ function designInversePendulumController
   input String fileName=DataDir + "inversePendulumController_small.mat"
     "File name for results";
 protected
-   input Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j = Modelica.ComplexMath.j;
 public
   output Real K_pa[:,:] "Feedback matrix pole assignment controller";
   output Real M_pa[:,:] "Pre filter LQ controller";
@@ -22,7 +22,7 @@ public
 protected
   Modelica_LinearSystems2.StateSpace ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName);
 
-  Complex p[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+  Complex p[:]=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A);
 
   Modelica_LinearSystems2.StateSpace ss_pa=ss;
 
@@ -38,7 +38,7 @@ algorithm
   print("The feedback matrix of the pole assignment controller is:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(K_pa, 6, "K_pa"));
   print("eigenvalues of the closed loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("ev_pa", p);
   writeRealMatrix(fileName, "K_pa", K_pa, true);
 
 // Pre filter calculation

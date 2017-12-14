@@ -2182,7 +2182,7 @@ ss;
         import Complex;
         import Modelica_LinearSystems2;
         import Modelica_LinearSystems2.Internal.Eigenvalue;
-        import LS2Complex = Modelica_LinearSystems2.Math.Complex;
+        import LS2Complex = Modelica_LinearSystems2.Math.ComplexAdvanced;
 
         input Eigenvalue evSorted[:];
         input Complex evecComplex[:, :];
@@ -2380,7 +2380,7 @@ ss;
         import Complex;
         import Modelica_LinearSystems2;
         import Modelica_LinearSystems2.Internal.Eigenvalue;
-        import LS2Complex = Modelica_LinearSystems2.Math.Complex;
+        import LS2Complex = Modelica_LinearSystems2.Math.ComplexAdvanced;
 
         input Complex systemZeros[:];
         input Integer evIndex[size(systemZeros, 1)];
@@ -3333,7 +3333,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
       Boolean issiso=StateSpace.Internal.isSISO(ss);
       TransferFunction tf=if issiso then
           StateSpace.Conversion.toTransferFunction(ss) else TransferFunction(1);
-      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex j=Modelica.ComplexMath.j;
       Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
       Real abs_den=Modelica.ComplexMath.'abs'(den);
     algorithm
@@ -3485,8 +3485,8 @@ This function calculates the zeros, poles and gain of the corresponding transfer
       import Modelica_LinearSystems2.StateSpace;
 
       input StateSpace ss "State space system";
-      output Complex eigvalues[size(ss.A, 1)]=
-        Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A)
+      output Complex eigvalues[size(ss.A, 1)] =
+        Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A)
         "Eigen values of the system";
     algorithm
 
@@ -5761,7 +5761,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
           end if;
 
           // Determine frequency and number of corresponding eigenvalue
-          (w1,d1) := Modelica_LinearSystems2.Math.Complex.frequency(cev[maxIndex1]);
+          (w1,d1) :=Modelica_LinearSystems2.Math.ComplexAdvanced.frequency(cev[maxIndex1]);
           iw1 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex1, evIndex);
           if iw1 <= nReal then
             number1 := String(iw1);
@@ -5770,7 +5770,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
           end if;
 
           if two then
-            (w2,d2) := Modelica_LinearSystems2.Math.Complex.frequency(cev[maxIndex2]);
+            (w2,d2) :=Modelica_LinearSystems2.Math.ComplexAdvanced.frequency(cev[maxIndex2]);
             iw2 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex2, evIndex);
             if iw2 <= nReal then
               number2 := String(iw2);
@@ -5907,7 +5907,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
           number := Strings.repeat(max(0, 7 - Strings.length(number))) + number;
 
           // Determine frequency and number of corresponding zero
-          (freq,damp) := Modelica_LinearSystems2.Math.Complex.frequency(systemZeros[i]);
+          (freq,damp) :=Modelica_LinearSystems2.Math.ComplexAdvanced.frequency(systemZeros[i]);
 
           print(
             "<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> &nbsp; "
@@ -6228,7 +6228,7 @@ represented by a StateSpace record.
         end for;
       end for;
 
-      p_actual := Modelica_LinearSystems2.Math.Complex.eigenValues(
+      p_actual :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(
         ss.A - ss.B*transpose(matrix(k)));
       // sort actual eigenvalues
       for i1 in 1:size(p_actual, 1) loop
@@ -6641,7 +6641,7 @@ represented by a StateSpace record.
       end for;
 
       S := ss.A - ss.B*K;
-      po := Modelica_LinearSystems2.Math.Complex.eigenValues(S);
+      po :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(S);
 
       if calculateEigenvectors then
         //     X := fill(Complex(0), n, n);
@@ -6657,7 +6657,7 @@ represented by a StateSpace record.
         //       end for;
         //     end for;
         //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X1");
-        X := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
+        X :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenVectors(S);
         //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X2");
 
       end if;
@@ -6997,12 +6997,10 @@ The algebraic Riccati equation is solved by using the Schur algorithm
         redeclare Real A[size(ss.A, 1), size(ss.A, 2)],
         redeclare Real B[size(ss.B, 1), size(ss.B, 2)],
         redeclare Real C[size(ss.C, 1), size(ss.C, 2)],
-        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]) "closed loop system";
+        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]) "Closed loop system";
 
-      output Real S[size(ss.A, 1), size(ss.A, 1)]
-        "solution of the Riccati equation";
-
-      output Math.Complex ev[:];
+      output Real S[size(ss.A, 1), size(ss.A, 1)] "Solution of the Riccati equation";
+      output Complex ev[:] "Eigenvalues of the system";
 
     algorithm
       if min(size(ss.A, 1), size(ss.A, 2)) > 0 then
@@ -7481,7 +7479,8 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
                eig[i].re :=EigReal[i, 1];
                eig[i].im :=EigReal[i, 2];
             end for;
-            Modelica_LinearSystems2.Math.Complex.Vectors.printHTML(eig,heading="Eigenvalues", name="eigenvalue");
+          Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.printHTML(
+            eig, heading="Eigenvalues", name="eigenvalue");
          end if;
 
          if zeros then
@@ -7490,7 +7489,8 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
                invZeros[i].re :=InvZerosReal[i, 1];
                invZeros[i].im :=InvZerosReal[i, 2];
             end for;
-            Modelica_LinearSystems2.Math.Complex.Vectors.printHTML(invZeros,heading="Invariant zeros", name="invariant zero");
+          Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.printHTML(
+            invZeros, heading="Invariant zeros", name="invariant zero");
          end if;
       end if;
 
@@ -8467,7 +8467,7 @@ This function plots the initial responses of a state space system for the initia
     algorithm
       if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
           Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
-        Poles := Modelica_LinearSystems2.Math.Complex.Internal.eigenValues_dhseqr(ssm.A);
+        Poles :=Modelica_LinearSystems2.Math.ComplexAdvanced.Internal.eigenValues_dhseqr(ssm.A);
         //ssm.A is of upper Hessenberg form
         Zeros := StateSpace.Analysis.invariantZeros(ssm);
 
@@ -9755,7 +9755,6 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Vectors;
-      import ComplexToString = Complex.'String';
 
       input Real F[:, size(F, 1)] "System matrix of order p=1 or p=2";
       input Real G[size(F, 1), :] "Control input matrix p rows";
@@ -9801,10 +9800,10 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
         assert(gamma[1].re == gamma[2].re and gamma[1].im == -gamma[2].im,
           "\nThe assigned pole pair given in function StateSpace.Internal.assignOneOrTwoPoles()"
           + "must be conjungated complex. However, the poles are"
-          + "\npole1 = " + ComplexToString(gamma[1])
-          + "\npole2 = " + ComplexToString(gamma[2])
-          + ". \nTry\npole1 = " + ComplexToString(gamma[1])
-          + "\npole2 = " + ComplexToString(
+          + "\npole1 = " + Complex.'String'(gamma[1])
+          + "\npole2 = " + Complex.'String'(gamma[2])
+          + ". \nTry\npole1 = " + Complex.'String'(gamma[1])
+          + "\npole2 = " + Complex.'String'(
             Modelica.ComplexMath.conj(gamma[1])) + "\ninstead");
       end if;
 
@@ -9914,7 +9913,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       That is, " + String(F[1, 1]) + " remains and " + String(gamma[1].re) +
             " cannot be realized");
         else
-          system_ev := Modelica_LinearSystems2.Math.Complex.eigenValues(F);
+          system_ev :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(F);
           Modelica.Utilities.Streams.print("\n A subsystem (F, G) in StateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
       That is, " + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then
             " + " else " - ") + String(system_ev[1].im) + "j and " + String(
@@ -9938,7 +9937,6 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Vectors;
-      import ComplexToString = Complex.'String';
 
       input Real F[:, size(F, 1)] "System matrix of order p=1 or p=2";
       input Real G[size(F, 1), :] "Control input matrix p rows";
@@ -9982,10 +9980,10 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
         assert(gamma[1].re == gamma[2].re and gamma[1].im == -gamma[2].im,
           "\nThe assigned pole pair given in function StateSpace.Internal.assignOneOrTwoPoles()"
           + "must be conjungated complex. However, the poles are"
-          + "\npole1 = " + ComplexToString(gamma[1])
-          + "\npole2 = " + ComplexToString(gamma[2])
-          + ". \nTry\npole1 = " + ComplexToString(gamma[1])
-          + "\npole2 = " + ComplexToString(
+          + "\npole1 = " + Complex.'String'(gamma[1])
+          + "\npole2 = " + Complex.'String'(gamma[2])
+          + ". \nTry\npole1 = " + Complex.'String'(gamma[1])
+          + "\npole2 = " + Complex.'String'(
             Modelica.ComplexMath.conj(gamma[1])) + "\ninstead");
       end if;
 
@@ -10376,7 +10374,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       zeros := StateSpace.Analysis.invariantZeros(ss);
       zeros2 := zeros;
 
-      poles := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+      poles :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A);
 
       for i in 1:size(zeros, 1) loop
         for j in 1:size(poles, 1) loop
@@ -10455,7 +10453,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
 
       zeros := StateSpace.Analysis.invariantZeros(ss);
 
-      poles := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+      poles :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A);
 
       for i in 1:size(zeros, 1) loop
         for j in 1:size(poles, 1) loop
@@ -10560,7 +10558,7 @@ to separate the uncontrollable poles from the controllable poles.
     algorithm
       eigenvalues := StateSpace.Analysis.eigenValues(ss);
       for i in 1:n loop
-        (frequency[i],damp[i]) := Modelica_LinearSystems2.Math.Complex.frequency(eigenvalues[i]);
+        (frequency[i],damp[i]) :=Modelica_LinearSystems2.Math.ComplexAdvanced.frequency(eigenvalues[i]);
         frequency[i] := 2*pi*frequency[i];
       end for;
 
@@ -10942,7 +10940,7 @@ This condition is however not fulfilled because the number of outputs is ny = "
           Ah[:, k - 1] := ss.A[:, k - 1] - ss.A[k, k - 1]/ss.B[k, 1]*ss.B[:, 1];
 
           //    Zeros := Complex.eigenValues(Ah[1:k - 1, 1:k - 1]);
-          Zeros := Modelica_LinearSystems2.Math.Complex.Internal.eigenValues_dhseqr(Ah[1:k - 1, 1:k - 1]);
+          Zeros :=Modelica_LinearSystems2.Math.ComplexAdvanced.Internal.eigenValues_dhseqr(Ah[1:k - 1, 1:k - 1]);
 
           for i in 1:k - 1 loop
             if Modelica.ComplexMath.'abs'(Zeros[i]) <
@@ -11141,8 +11139,7 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
 
       detectable := true;
       if size(ss.A, 1) > ssm.r then
-        evd := Modelica_LinearSystems2.Math.Complex.eigenValues(ssm.A[ssm.r + 1:size(ss.A, 1), ssm.r + 1:
-          size(ss.A, 1)]);
+        evd :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ssm.A[ssm.r + 1:size(ss.A, 1), ssm.r + 1:size(ss.A, 1)]);
         for i1 in 1:size(evd, 1) loop
           detectable := detectable and evd[i1].re < 0;
         end for;
@@ -11351,8 +11348,7 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
       stabilizable := true;
 
       if size(ss.A, 1) > ssm.r then
-        evd := Modelica_LinearSystems2.Math.Complex.eigenValues(ssm.A[ssm.r + 1:size(ss.A, 1), ssm.r + 1:
-          size(ss.A, 1)]);
+        evd :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ssm.A[ssm.r + 1:size(ss.A, 1), ssm.r + 1:size(ss.A, 1)]);
         for i1 in 1:size(evd, 1) loop
           stabilizable := stabilizable and evd[i1].re < 0;
         end for;
@@ -11492,7 +11488,7 @@ The uncontrollable poles are checked to to stable.
       zeros := StateSpace.Analysis.invariantZeros(ss);
       zeros2 := zeros;
 
-      poles := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+      poles :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A);
       poles2 := poles;
 
       //Reduce terms which are in nominator as well as in denominator
@@ -11595,7 +11591,7 @@ The uncontrollable poles are checked to to stable.
         redeclare Real z_im[size(StateSpace.Analysis.invariantZeros(ssm), 1)]);
 
     protected
-      Complex poles[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ssm.A);
+      Complex poles[:]=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ssm.A);
       Complex zeros[:]=StateSpace.Analysis.invariantZeros(ssm);
 
     algorithm
@@ -12803,11 +12799,13 @@ ss = StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)
               eig[i].re := eval[i,1];
               eig[i].im := eval[i,2];
             end for;
-            Modelica_LinearSystems2.Math.Complex.Vectors.printHTML(eig,heading="Eigenvalues", name="eigenvalue");
+          Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.printHTML(
+            eig, heading="Eigenvalues", name="eigenvalue");
          end if;
 
          if zeros then
-            Modelica_LinearSystems2.Math.Complex.Vectors.printHTML(invZeros,heading="Invariant zeros", name="invariant zero");
+          Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.printHTML(
+            invZeros, heading="Invariant zeros", name="invariant zero");
          end if;
       end if;
 

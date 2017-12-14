@@ -1,9 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Internal;
 function xBase "Compute the eigenvector bases according to Kautsky algorithm"
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica.ComplexMath.real;
-  import Im = Modelica.ComplexMath.imag;
+  import Complex;
 
   input Real A[:,size(A,1)] "Real square system matrix";
   input Real B[size(A,1),:] "Real input matrix";
@@ -16,13 +14,13 @@ function xBase "Compute the eigenvector bases according to Kautsky algorithm"
   output Integer rankB;
 
 protected
-  Complex j=Modelica_LinearSystems2.Math.Complex.j();
+  Complex j=Modelica.ComplexMath.j;
   Integer n=size(A,1);
   Integer m=size(B,2);
 
-  Real gamma_real[n]=Modelica.ComplexMath.real(gamma)
+  Real gamma_real[n] = Modelica.ComplexMath.real(gamma)
     "Eigenvalue vector, real part";
-  Real gamma_imag[n]=Modelica.ComplexMath.imag(gamma)
+  Real gamma_imag[n] = Modelica.ComplexMath.imag(gamma)
     "Eigenvalue vector, imaginary part";
   Real S_real[n,m*(n-ncp)] "Eigenvector bases, real part";
   Real S_imag[n,m*(n-ncp)] "Eigenvector bases, imaginary part";
@@ -30,8 +28,8 @@ protected
   Integer ii;
 
 algorithm
-  (U0, Z, S_real, S_imag, rankB) :=Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.wrapper_xBase(
-                                                                                            A, B, gamma_real, gamma_imag, ncp);
+  (U0, Z, S_real, S_imag, rankB) := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.wrapper_xBase(
+                                    A, B, gamma_real, gamma_imag, ncp);
   assert(m==rankB,"Input matrix B must have full column rank");
   for i in 1:n loop
     for ii in 1:(n-ncp)*m loop

@@ -30,7 +30,7 @@ protected
   Complex zeros[:];
 
 algorithm
-  poles := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+  poles :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A);
 
   Modelica.Utilities.Streams.print("\nThe poles of the unreduced system are\n");
   for i in 1:size(poles, 1) loop
@@ -44,7 +44,7 @@ algorithm
      Modelica.Utilities.Streams.print("zero_" + String(i) + " = " + String(zeros[i]));
   end for;
 
-  poles := Modelica_LinearSystems2.Math.Complex.eigenValues(ssm.A);
+  poles :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ssm.A);
 
   Modelica.Utilities.Streams.print("\n\nThe poles of the reduced system are\n");
   for i in 1:size(poles, 1) loop

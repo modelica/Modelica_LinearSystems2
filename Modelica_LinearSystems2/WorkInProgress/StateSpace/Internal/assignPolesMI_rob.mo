@@ -8,9 +8,9 @@ function assignPolesMI_rob
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
   import Complex;
-  import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
-  import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
-  import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
+  import matMul = Modelica_LinearSystems2.Math.ComplexAdvanced.Matrices.matMatMul;
+  import Modelica_LinearSystems2.Math.ComplexAdvanced.Matrices.matVecMul;
+  import Modelica_LinearSystems2.Math.ComplexAdvanced.Internal.C_transpose;
   import Re = Modelica.ComplexMath.real;
   import Im = Modelica.ComplexMath.imag;
   import Modelica.Utilities.Streams.print;

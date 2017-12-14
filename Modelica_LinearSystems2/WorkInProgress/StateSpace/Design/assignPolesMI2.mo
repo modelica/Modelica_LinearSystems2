@@ -65,7 +65,7 @@ protected
   Real alphaImag[size(ss.A, 1)]
     "Imaginary part of eigenvalue=(alphaReal+i*alphaImag";
 
-  Complex pi[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+  Complex pi[:]=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A);
 
   Boolean complex_assignedPoles=false
     "True, if there is at least one conjugated comples pole pair in the set of the assigned poles";
@@ -97,7 +97,7 @@ algorithm
       po[i].re := alphaReal[i];
       po[i].im := alphaImag[i];
     end for;
-    Modelica_LinearSystems2.Math.Complex.Vectors.print("The eigenvalues of the open loop system are sorted to\n eigenvalues", pi);
+    Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("The eigenvalues of the open loop system are sorted to\n eigenvalues", pi);
   else
     assert(size(gamma, 1) <= size(ss.A, 1), "At most n (order of ss) eigenvalues can be assigned");
 
@@ -154,7 +154,7 @@ algorithm
 
     Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal,6,"alphaReal");
     Modelica_LinearSystems2.Math.Vectors.printVector(alphaImag,6,"alphaImag");
-   Modelica_LinearSystems2.Math.Complex.Vectors.print("gammaReordered1",gammaReordered);
+    Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("gammaReordered1", gammaReordered);
 
   // Reorder gammaReordered according to alpha
     ii := 1;
@@ -191,10 +191,10 @@ algorithm
     if markA[n + nfp + 1 - counter] == 2 or markg[n + nfp + 1 - counter] == 2 then
 
 //#############################
-Modelica_LinearSystems2.Math.Complex.Vectors.print("g2",gammaReordered[n + nfp - counter:n + nfp + 1 - counter]);
-Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal[n + nfp - counter:n + nfp + 1 - counter],6,"ar2");
-ev:=Modelica_LinearSystems2.Math.Complex.eigenValues( A_rsf[n - 1:n, n - 1:n]);
-Modelica_LinearSystems2.Math.Complex.Vectors.print("ev2",ev);
+      Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("g2", gammaReordered[n + nfp - counter:n + nfp + 1 - counter]);
+      Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal[n + nfp - counter:n + nfp + 1 - counter],6,"ar2");
+      ev:=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(A_rsf[n - 1:n, n - 1:n]);
+      Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("ev2", ev);
 //#############################
 
       Ks2 := StateSpace.Internal.assignOneOrTwoPoles(
@@ -274,8 +274,8 @@ print("ev1 = "+String(A_rsf[n,n])+"\n");
     end while;
 
   S := ss.A - ss.B*K;
-  po := Modelica_LinearSystems2.Math.Complex.eigenValues(S);
-   X := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
+  po :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(S);
+   X :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenVectors(S);
 
 //    X := fill(Complex(0),n,n);
 //    for i in 1:n loop

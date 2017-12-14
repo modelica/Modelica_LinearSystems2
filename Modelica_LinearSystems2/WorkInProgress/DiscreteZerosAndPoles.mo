@@ -751,7 +751,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Math.Vectors;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex = Modelica_LinearSystems2.Math.ComplexAdvanced;
       import Modelica_LinearSystems2.StateSpace;
       import
         Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles.Internal;
@@ -1388,12 +1388,13 @@ Generate a matrix of ZerosAndPoles data records by linearization of a model defi
       //import ZerosAndPoles = Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex = Modelica_LinearSystems2.Math.ComplexAdvanced;
       import Modelica;
       import Modelica_LinearSystems2.DataDir;
 
       input String fileName=DataDir + "zp.mat"
-        "Name of the zeros and poles data file"        annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+        "Name of the zeros and poles data file"
+        annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="state space system data file")));
 
     protected

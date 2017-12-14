@@ -1,8 +1,6 @@
 within Modelica_LinearSystems2.Math;
-operator record Complex "Record defining a Complex number"
-
-  Real re "Real part of complex number" annotation(Dialog);
-  Real im "Imaginary part of complex number" annotation(Dialog);
+package ComplexAdvanced "Collection of advanced operations on Complex numbers"
+  extends Modelica.Icons.Package;
 
   encapsulated package Examples
     "Package of examples to demonstrate the usage of complex numbers"
@@ -132,7 +130,7 @@ operator record Complex "Record defining a Complex number"
           number := Strings.repeat(max(0, 7 - Strings.length(number))) + number;
 
           // Determine frequency and number of corresponding zero
-          (freq,damp) := Modelica_LinearSystems2.Math.Complex.frequency(systemZeros[i]);
+          (freq,damp) :=Modelica_LinearSystems2.Math.ComplexAdvanced.frequency(systemZeros[i]);
 
           print(
             "<tr style=\"background-color:white\">\n  <td style=\"text-align:left\"> &nbsp; "
@@ -321,10 +319,10 @@ This package provides functions operating on matrices of complex numbers.
 </html>"));
   end Matrices;
 
-  encapsulated function j "Returns sqrt(-1)"
+  encapsulated function j "Obsolete function - use Modelica.ComplexMath.j instead"
     extends Modelica.Icons.Function;
     import Modelica;
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
 
     output Complex c "= sqrt(-1)";
   algorithm
@@ -334,7 +332,13 @@ This package provides functions operating on matrices of complex numbers.
             lineColor={255,0,0},
             extent={{-100,-100},{100,100}},
             pattern=LinePattern.Dash,
-            lineThickness=0.5)}));
+            lineThickness=0.5)}),
+      Documentation(info="<html>
+<p>This function is <b>obsolete and will be deleted</b> in the next Library version. Use <a href=\"modelica://Modelica.ComplexMath.j\">Modelica.ComplexMath.j</a> instead, e.g. as </p>
+<blockquote><pre>
+Complex j = Modelica.ComplexMath.j;
+</pre></blockquote>
+</html>"));
   end j;
 
   encapsulated function eigenValues
@@ -517,8 +521,7 @@ inputs and the number of outputs must be identical.
 
       import Modelica;
       import Complex;
-      import
-        Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg;
+      import Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg;
 
       input Real H[:,size(H, 1)] "Real upper Hessenberg matrix";
       output Complex zeros[size(H, 1)]
@@ -590,7 +593,6 @@ Therefore, only advanced users should deal with such a functions.
 </p>
 </html>"));
   end Internal;
-
   annotation (
     Documentation(info="<html>
 <p>
@@ -646,4 +648,4 @@ inlined by a tool. In such a case, the above statement will
 not lead to any overhead.
 </p>
 </html>"));
-end Complex;
+end ComplexAdvanced;

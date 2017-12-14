@@ -56,7 +56,7 @@ algorithm
      (K,X) := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob(
                                                                             data.A, data.B, data.assignedPoles);
      S := data.A - data.B*K;
-     calcPoles := Modelica_LinearSystems2.Math.Complex.eigenValues(S);
+     calcPoles :=Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(S);
      if isKprovided then
        gap := Modelica.Math.Matrices.norm(K - Ki);
      end if;
@@ -75,8 +75,8 @@ algorithm
   (kappa2,kappaF,,cInf,nu2,nuF,zeta,Jalpha,dlambda) := conditionNumbers(K, X, data.assignedPoles, calcPoles);
 
   Matrices.printMatrix(K, 6, "K");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("assignedPoles", data.assignedPoles);
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("calcPoles", calcPoles);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("assignedPoles", data.assignedPoles);
+  Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.print("calcPoles", calcPoles);
   Matrices.printMatrix(Re(X), 6, "ReX");
   Matrices.printMatrix(Im(X), 6, "ImX");
   print("kappa2 " + String(kappa2));
