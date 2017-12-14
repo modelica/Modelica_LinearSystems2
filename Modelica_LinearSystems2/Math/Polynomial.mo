@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math;
 operator record Polynomial "Record defining the data for a polynomial"
-  extends Modelica.Icons.Record;
+
   Real c[:] "Polynomial coefficients (c[1]*x^n + ... c[n]*x + c[n+1])"
     annotation (Dialog);
 
@@ -118,7 +118,6 @@ operator record Polynomial "Record defining the data for a polynomial"
 
   encapsulated operator 'constructor'
     "Collection of operators to construct a Polynomial data record"
-    extends Modelica.Icons.Package;
     import Modelica;
 
     function fromVector
@@ -233,7 +232,6 @@ with j=sqrt(-1), is defined as
   encapsulated operator '-'
     "Collection of operators for subtraction of polynomials"
     import Modelica;
-    extends Modelica.Icons.Package;
 
     encapsulated function negate "Unary minus (multiply polynomial by -1)"
 

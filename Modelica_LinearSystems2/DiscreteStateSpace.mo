@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2;
 operator record DiscreteStateSpace
   "Discrete state space description of a linear, time invariant difference equation system (data + operations)"
-  extends Modelica.Icons.Record;
 
   Real A[:,size(A, 1)]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
   Real B[size(A, 1),:]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
@@ -23,7 +22,6 @@ operator record DiscreteStateSpace
     "Collection of operators to construct a DiscreteStateSpace data record"
     import Modelica_LinearSystems2;
     import Modelica;
-    extends Modelica.Icons.Package;
 
     function fromDiscreteTransferFunction =
       Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
@@ -578,9 +576,8 @@ public
   end 'constructor';
 
 encapsulated operator '-'
-    "Contains operators for subtraction of discrete state space systems"
-    import Modelica;
-  extends Modelica.Icons.Package;
+  "Contains operators for subtraction of discrete state space systems"
+  import Modelica;
 
   function subtract
       "Subtraction of two state space systems connected in parallel (= inputs are the same, outputs of the two systems are subtracted)"

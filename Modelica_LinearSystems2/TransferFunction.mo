@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2;
-record TransferFunction
+operator record TransferFunction
   "Continuous transfer function description of a single input, single output system (data + operations)"
   extends Modelica.Icons.Record;
 
@@ -20,7 +20,6 @@ record TransferFunction
     "Collection of operators to construct a TransferFunction data record"
     import Modelica;
     import Modelica_LinearSystems2.TransferFunction;
-    extends Modelica.Icons.Package;
 
     function fromReal
       "Generate a TransferFunction data record from a real value"
@@ -138,9 +137,8 @@ follow each other as above. An error occurs if this is not the case.
 
   encapsulated operator '-'
     "Collection of operators for subtraction of transfer functions"
-
     import Modelica;
-    extends Modelica.Icons.Package;
+
     function subtract "Subtract two transfer functions (tf1 - tf2)"
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
