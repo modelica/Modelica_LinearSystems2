@@ -10,9 +10,7 @@ function designAssignPolesSISO "Example for pole placing using Ackermann's metho
     C=[1,0; 0,1],
     D=[0; 0]);
 protected
-  Modelica_LinearSystems2.Math.Complex p[2]={
-    Modelica_LinearSystems2.Math.Complex(-3,0),
-    Modelica_LinearSystems2.Math.Complex(-4,0)};
+  Complex p[2]={Complex(-3, 0),Complex(-4, 0)};
 algorithm
   k := Modelica_LinearSystems2.StateSpace.Design.assignPolesSI(sc, p);
 

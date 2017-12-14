@@ -26,9 +26,7 @@ model SeriesConnection "Series connection of two PT1 blocks"
     annotation (Placement(transformation(extent={{10,-10},{30,10}})));
   ZerosAndPoles S12(
     system=Modelica_LinearSystems2.ZerosAndPoles.'constructor'.fromZerosAndPoles(
-      p={Modelica_LinearSystems2.Math.Complex(re=-1/T1, im=0),
-         Modelica_LinearSystems2.Math.Complex(re=-1/T2, im=0)},
-      k=1/(T1*T2)))
+      p={Complex(re=-1/T1, im=0), Complex(re=-1/T2, im=0)}, k=1/(T1*T2)))
     annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
   Modelica.Blocks.Math.Feedback diff
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));

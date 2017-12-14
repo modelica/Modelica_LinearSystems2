@@ -2,12 +2,13 @@ within Modelica_LinearSystems2.Internal;
 function timeResponseSamples
   "Estimate reasonable discretisation sample time and simulation time span for time response plot"
   import Modelica_LinearSystems2;
+  import Complex;
 
   input Modelica_LinearSystems2.StateSpace sc;
   output Real dt "Sample time";
   output Real tSpan "Time span";
 protected
-  Modelica_LinearSystems2.Math.Complex eig[size(sc.A, 1)];
+  Complex eig[size(sc.A, 1)];
   Real realp[size(sc.A, 1)];
   Real sorted[size(sc.A, 1)];
   Real indices[size(sc.A, 1)];

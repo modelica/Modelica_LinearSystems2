@@ -17,7 +17,7 @@ function analysisInvariantZeros
   input Real k=1.0 "Constant multiplied with transfer function";
 
 protected
-  input Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j = Modelica.ComplexMath.j;
 
   ZerosAndPoles zp = ZerosAndPoles(
     z=z,

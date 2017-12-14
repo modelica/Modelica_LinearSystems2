@@ -1304,7 +1304,7 @@ order polynomials of the DiscreteZeroAndPoles numerator.
     input Real den_min=0 "|denominator(p)| is limited by den_min";
     output Complex y "= zp(p)";
     protected
-    Complex j = Modelica_LinearSystems2.Math.Complex.j();
+    Complex j = Modelica.ComplexMath.j;
     Complex num;
     Complex den;
     Real abs_den;
