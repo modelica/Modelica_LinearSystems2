@@ -10885,7 +10885,7 @@ achieved when <b>A</b> is of upper Hessenberg form and [1, n] matrix <b>C</b> is
 <p>
 The function uses the LAPACK routine DHGEQZ. Look at <b>Modelica_LinearSystems2.Math.Matrices.LAPACK.dhgeqz</b> for details.
 <p>
-The advantage of this function in comparision to the general invariantZeros function
+The advantage of this function in comparison to the general invariantZeros function
 is the lower computatioal effort bacause systems with arbitrary system functions are first transformed
 into an upper Hessenberg form system.
 <p>
