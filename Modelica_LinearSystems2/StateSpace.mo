@@ -185,7 +185,16 @@ For the simplicity of implementation, this function directly extends from
 
     annotation (Documentation(info="<html>
 <p>This package contains the default constructors for a data record of state space system. </p>
-</html>"));
+</html>"), Icon(graphics={Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0), Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0)}));
   end 'constructor';
 
   encapsulated operator '-'
@@ -305,7 +314,22 @@ ss := -ss1;
 <p>
 This package contains operators for subtraction of state space records.
 </p>
-</html>"));
+</html>"), Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Line(
+            points={{-50,0},{50,0}},
+            color={0,0,0},
+            smooth=Smooth.None)}));
   end '-';
 
   encapsulated operator function '+'
@@ -13160,5 +13184,17 @@ with
 <li> x ... the state vector,</li>
 <li> A, B, C, D - matrices of appropriate dimensions.</li>
 </ul>
-</html>"));
+</html>"),
+    Icon(
+      graphics={
+        Rectangle(
+          lineColor={160,160,164},
+          fillColor={160,160,164},
+          fillPattern=FillPattern.Solid,
+          extent={{-100,-100},{100,100}},
+          radius=25.0),
+        Text(
+          lineColor={255,255,255},
+          extent={{-90,-50},{90,50}},
+          textString="SS")}));
 end StateSpace;

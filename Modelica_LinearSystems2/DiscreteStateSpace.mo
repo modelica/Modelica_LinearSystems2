@@ -573,6 +573,18 @@ public
 </pre></blockquote>
 </html>"));
     end fromMatrices2;
+    annotation (Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0)}));
   end 'constructor';
 
   encapsulated operator '-'
@@ -673,7 +685,22 @@ dss3 := dss1 - dss2;
 <p>
 This package contains operators for subtraction of discrete state space records.
 </p>
-</html>"));
+</html>"), Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Line(
+            points={{-50,0},{50,0}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0)}));
   end '-';
 
 encapsulated operator function '+'
@@ -3890,4 +3917,17 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
   end assignOneOrTwoPoles;
   end Internal;
 
+  annotation (
+    Icon(
+      graphics={
+        Rectangle(
+          lineColor={160,160,164},
+          fillColor={160,160,164},
+          fillPattern=FillPattern.Solid,
+          extent={{-100,-100},{100,100}},
+          radius=25),
+        Text(
+          lineColor={255,255,170},
+          extent={{-90,-50},{90,50}},
+          textString="ss")}));
 end DiscreteStateSpace;

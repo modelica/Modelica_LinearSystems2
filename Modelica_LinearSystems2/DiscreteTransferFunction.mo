@@ -153,6 +153,18 @@ operator record DiscreteTransferFunction
     algorithm
       dtf := DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss);
     end fromTransferFunction;
+    annotation (Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0)}));
   end 'constructor';
 
   encapsulated operator '*'
@@ -190,7 +202,34 @@ operator record DiscreteTransferFunction
 
     annotation (Documentation(info="<html>
 <p>This package contains operators for multiplication of discrete fransfer function records. </p>
-</html>"));
+</html>"), Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Line(
+            points={{-50,0},{50,0}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Line(
+            points={{-36,36},{36,-36}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{0,50},{0,-50}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{36,36},{-36,-36}},
+            color={0,0,0},
+            smooth=Smooth.None)}));
   end '*';
 
   encapsulated operator '-'
@@ -228,7 +267,22 @@ operator record DiscreteTransferFunction
     end negate;
     annotation (Documentation(info="<html>
 <p>This package contains operators for subtraction of discrete fransfer function records. </p>
-</html>"));
+</html>"), Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Line(
+            points={{-50,0},{50,0}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0)}));
   end '-';
 
   encapsulated operator '/'
@@ -268,7 +322,22 @@ operator record DiscreteTransferFunction
 
     annotation (Documentation(info="<html>
 <p>This package contains operators for division of discrete fransfer function records. </p>
-</html>"));
+</html>"), Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Line(
+            points={{20,50},{-20,-50}},
+            color={0,0,0},
+            smooth=Smooth.None)}));
   end '/';
 
   encapsulated operator '+'
@@ -306,7 +375,26 @@ operator record DiscreteTransferFunction
     end 'dtf+r';
     annotation (Documentation(info="<html>
 <p>This package contains operators for addition of discrete fransfer function records. </p>
-</html>"));
+</html>"), Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Line(
+            points={{-50,0},{50,0}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Line(
+            points={{0,50},{0,-50}},
+            color={0,0,0},
+            smooth=Smooth.None)}));
   end '+';
 
   encapsulated operator function '^'
@@ -1482,4 +1570,15 @@ with
 
   end Import;
 
+  annotation (Icon(graphics={
+        Rectangle(
+          lineColor={160,160,164},
+          fillColor={160,160,164},
+          fillPattern=FillPattern.Solid,
+          extent={{-100,-100},{100,100}},
+          radius=25.0),
+        Text(
+          lineColor={255,255,170},
+          extent={{-90,-50},{90,50}},
+          textString="tf")}));
 end DiscreteTransferFunction;

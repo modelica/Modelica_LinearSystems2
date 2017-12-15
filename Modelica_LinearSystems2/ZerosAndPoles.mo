@@ -247,11 +247,22 @@ This function constructs a ZerosAndPoles record zp from first and second order p
 
     annotation (Documentation(info="<html>
 <p>This package contains the default constructors for a data record of zeros-and-poles transfer function.</p>
-</html>"));
+</html>"), Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0)}));
   end 'constructor';
 
 encapsulated operator '-'
-    "Collection of operators for subtraction of zeros and poles descriptions"
+  "Collection of operators for subtraction of zeros and poles descriptions"
   import Modelica;
 
   function subtract "Subtract two zeros and poles descriptions (zp1 - zp2)"
@@ -360,7 +371,22 @@ encapsulated operator '-'
   end negate;
     annotation (Documentation(info="<html>
 <p>This package contains operators for subtraction of zeros and poles descriptions. </p>
-</html>"));
+</html>"), Icon(graphics={
+        Rectangle(
+          lineColor={200,200,200},
+          fillColor={248,248,248},
+          fillPattern=FillPattern.HorizontalCylinder,
+          extent={{-100,-100},{100,100}},
+          radius=25.0),
+        Line(
+          points={{-50,0},{50,0}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Rectangle(
+          lineColor={128,128,128},
+          fillPattern=FillPattern.None,
+          extent={{-100,-100},{100,100}},
+          radius=25.0)}));
 end '-';
 
   encapsulated operator function '+'
@@ -7317,5 +7343,16 @@ zp = ZerosAndPoles(z = {Complex(-1,0)},
                         Complex(2,-3)},
                         k=4);
 </pre></blockquote>
-</html>"));
+</html>"),
+    Icon(graphics={
+        Rectangle(
+          lineColor={160,160,164},
+          fillColor={160,160,164},
+          fillPattern=FillPattern.Solid,
+          extent={{-100,-100},{100,100}},
+          radius=25.0),
+        Text(
+          lineColor={255,255,255},
+          extent={{-90,-50},{90,50}},
+          textString="ZP")}));
 end ZerosAndPoles;

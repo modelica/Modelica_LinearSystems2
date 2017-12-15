@@ -339,6 +339,18 @@ which is equal to
 </html>"));
     end fromFactorization;
 
+    annotation (Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0)}));
   end 'constructor';
 
 encapsulated operator '-'
@@ -432,7 +444,22 @@ encapsulated operator '-'
   end negate;
     annotation (Documentation(info="<html>
 <p>This package contains operators for subtraction of discrete zeros and poles records. </p>
-</html>"));
+</html>"), Icon(graphics={
+        Rectangle(
+          lineColor={200,200,200},
+          fillColor={248,248,248},
+          fillPattern=FillPattern.HorizontalCylinder,
+          extent={{-100,-100},{100,100}},
+          radius=25.0),
+        Line(
+          points={{-50,0},{50,0}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Rectangle(
+          lineColor={128,128,128},
+          fillPattern=FillPattern.None,
+          extent={{-100,-100},{100,100}},
+          radius=25.0)}));
 end '-';
 
 encapsulated operator '*'
@@ -512,7 +539,34 @@ algorithm
 end 'r*dzp';
     annotation (Documentation(info="<html>
 <p>This package contains operators for multiplication of discrete zeros and poles records. </p>
-</html>"));
+</html>"), Icon(graphics={
+        Rectangle(
+          lineColor={200,200,200},
+          fillColor={248,248,248},
+          fillPattern=FillPattern.HorizontalCylinder,
+          extent={{-100,-100},{100,100}},
+          radius=25.0),
+        Line(
+            points={{-50,0},{50,0}},
+            color={0,0,0},
+            smooth=Smooth.None),
+        Rectangle(
+          lineColor={128,128,128},
+          fillPattern=FillPattern.None,
+          extent={{-100,-100},{100,100}},
+          radius=25.0),
+        Line(
+          points={{-36,36},{36,-36}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Line(
+            points={{0,50},{0,-50}},
+            color={0,0,0},
+            smooth=Smooth.None),
+        Line(
+          points={{36,36},{-36,-36}},
+          color={0,0,0},
+          smooth=Smooth.None)}));
 end '*';
 
   encapsulated operator function '/'
@@ -2933,5 +2987,17 @@ with j = Complex.j(); is defined as
                             0.6-j*0.3},
                             k=4);
 </pre>
-</html>"));
+</html>"),
+    Icon(
+      graphics={
+        Rectangle(
+          lineColor={160,160,164},
+          fillColor={160,160,164},
+          fillPattern=FillPattern.Solid,
+          extent={{-100,-100},{100,100}},
+          radius=25.0),
+        Text(
+          lineColor={255,255,170},
+          extent={{-90,-50},{90,50}},
+          textString="zp")}));
 end DiscreteZerosAndPoles;

@@ -132,13 +132,24 @@ follow each other as above. An error occurs if this is not the case.
     algorithm
     end fromPolynomials;
 
+    annotation (Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0)}));
   end 'constructor';
 
   encapsulated operator '-'
     "Collection of operators for subtraction of transfer functions"
-
     import Modelica;
-    extends Modelica.Icons.Package;
+
     function subtract "Subtract two transfer functions (tf1 - tf2)"
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
@@ -160,7 +171,22 @@ follow each other as above. An error occurs if this is not the case.
     end negate;
     annotation (Documentation(info="<html>
 <p>This package contains operators for subtraction of transfer function records. </p>
-</html>"));
+</html>"), Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100,-100},{100,100}},
+            radius=25.0),
+          Line(
+            points={{-50,0},{50,0}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Rectangle(
+            lineColor={128,128,128},
+            fillPattern=FillPattern.None,
+            extent={{-100,-100},{100,100}},
+            radius=25.0)}));
   end '-';
 
   encapsulated operator function '+'
@@ -2703,5 +2729,16 @@ is transformed in the following way in a TransferFunction record:
    // prints the following string to the output window:
    //   y = (2*s + 3) / (4*s^2 + 5*s + 6) * u
 </pre>
-</html>"));
+</html>"),
+    Icon(graphics={
+        Rectangle(
+          lineColor={160,160,164},
+          fillColor={160,160,164},
+          fillPattern=FillPattern.Solid,
+          extent={{-100,-100},{100,100}},
+          radius=25.0),
+        Text(
+          lineColor={255,255,255},
+          extent={{-90,-50},{90,50}},
+          textString="TF")}));
 end TransferFunction;
