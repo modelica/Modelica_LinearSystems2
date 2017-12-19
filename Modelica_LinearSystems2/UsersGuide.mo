@@ -1915,7 +1915,7 @@ email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
      die Produktion von Morgen; F&ouml;rderkennzeichen: 02PH2060) is
      highly appreciated.</li>
 <li> In 2007 - 2010, the library development was partially funded by BMBF within the
-     <a href=\"http://www.itea2.org/public/project_leaflets/EUROSYSLIB_profile_oct-07.pdf\">ITEA2 EUROSYSLIB</a>
+     <a href=\"https://itea3.org/project/result/download/5521/EUROSYSLIB%20Project%20Leaflet.pdf\">ITEA2 EUROSYSLIB</a>
       project. </li>
 </ul>
 </html>"));
