@@ -6,7 +6,8 @@ package ZerosAndPoles "Package of examples to demonstrate the usage of the Zeros
   annotation (Documentation(info="<html>
 <p>
 This package contains example function calls to demonstrate the
-usage of the functions operating with the ZerosAndPoles record.
+usage of the functions operating with the
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles\">ZerosAndPoles</a> record.
 </p>
 </html>"));
 end ZerosAndPoles;

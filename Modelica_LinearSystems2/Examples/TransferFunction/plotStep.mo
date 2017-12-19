@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
-function plotStep "Step plot example"
+function plotStep "Example plotting step response"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.TransferFunction;
@@ -14,7 +14,8 @@ algorithm
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-Computes the impulse response of the system tf =1/s^2 + s + 1.
+This example computes and plots the step response of the system
+<i>tf&nbsp;=&nbsp;1/s^2&nbsp;+&nbsp;s&nbsp;+&nbsp;1</i>.
 </p>
 </html>"));
 end plotStep;

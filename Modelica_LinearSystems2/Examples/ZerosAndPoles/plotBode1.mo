@@ -1,12 +1,10 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 function plotBode1
-  "Construct a ZerosAndPoles system and plot the Bode diagram with automatic determination of the frequency range to plot"
+  "Example for construction of a ZerosAndPoles system and plot of the Bode diagram"
   extends Modelica.Icons.Function;
 
-  import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Complex;
 
   input Modelica.SIunits.Frequency f_cut=100 "PT1 with cut-off frequency f_cut";
   output Boolean ok;
@@ -19,5 +17,11 @@ algorithm
 
   ok := true;
 
-  annotation (__Dymola_interactive=true);
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
+<p>
+This example shows how to construct a zeros and poles system and to plot the Bode diagram
+with automatic determination of the frequency range to plot.
+</p>
+</html>
+"));
 end plotBode1;

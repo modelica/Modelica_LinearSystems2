@@ -5,7 +5,6 @@ function plotPolesAndZeros
 
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Complex;
 
 protected
   TransferFunction s = TransferFunction.s();
@@ -14,9 +13,14 @@ protected
 algorithm
   Modelica_LinearSystems2.ZerosAndPoles.Plot.polesAndZeros(
     zp=zp,
- defaultDiagram = Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
-   heading="Poles and zeros of " + String(tf)),
-   device=Modelica_LinearSystems2.Utilities.Plot.Records.Device(xTopLeft=50, yTopLeft=30));
+    defaultDiagram = Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
+      heading="Poles and zeros of " + String(tf)),
+      device=Modelica_LinearSystems2.Utilities.Plot.Records.Device(xTopLeft=50, yTopLeft=30));
 
-  annotation(__Dymola_interactive=true);
+  annotation(__Dymola_interactive=true, Documentation(info="<html>
+<p>
+This example shows how to plot a pole-zero-map of a transfer function in ZerosAndPoles representation given internally.
+</p>
+</html>
+"));
 end plotPolesAndZeros;

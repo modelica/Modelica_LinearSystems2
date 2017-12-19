@@ -58,7 +58,8 @@ algorithm
     __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
-Computes and plots the step response of a state space system.
+In this example, the <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.stepResponse\">step response</a>
+of a state space system is computed and plotted.
 </p>
 </html>"));
 end analysisStepResponse;

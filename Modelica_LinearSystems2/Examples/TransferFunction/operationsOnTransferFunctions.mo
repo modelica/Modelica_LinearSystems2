@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
 function operationsOnTransferFunctions
-  "Demonstrate the usage of the functions of Modelica_LinearSystems2.TransferFunction"
+  "Example demonstrating the usage of the functions of Modelica_LinearSystems2.TransferFunction"
   extends Modelica.Icons.Function;
 
   import Modelica.Utilities.Streams.print;
@@ -65,4 +65,10 @@ algorithm
   print("denominator degree of tf1 = " + String(
     TransferFunction.Analysis.denominatorDegree(tf1)));
   ok := true;
+  annotation (Documentation(info="<html>
+<p>
+This example shows how to apply various functions from a 
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction\">transfer function</a> portfolio.
+</p>
+</html>"));
 end operationsOnTransferFunctions;

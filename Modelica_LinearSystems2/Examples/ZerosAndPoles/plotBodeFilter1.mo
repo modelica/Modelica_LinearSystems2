@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
-function plotBodeFilter1 "Compute filter and plot frequency response of filter"
+function plotBodeFilter1 "Example for computation of filter and plot frequency response of filter"
   extends Modelica.Icons.Function;
 
   import Modelica;
@@ -20,5 +20,11 @@ algorithm
   Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(tf_filter);
   ok := true;
 
-  annotation (__Dymola_interactive=true);
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
+<p>
+This example shows how to construct a ZerosAndPoles transfer function description of a filter
+and to plot frequency response of such a filter.
+</p>
+</html>
+"));
 end plotBodeFilter1;

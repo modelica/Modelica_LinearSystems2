@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Examples.DiscreteTransferFunction;
-function plotBode "Bode plot of a DiscreteTransferFunction objekt"
+function plotBode
+  "Example for construction of a discrete transfer function and plot of the Bode diagram"
   extends Modelica.Icons.Function;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
 
@@ -14,5 +15,11 @@ algorithm
   dtf.method := method;
   DiscreteTransferFunction.Plot.bode(dtf);
 
-  annotation (__Dymola_interactive=true);
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
+<p>
+This example shows how to construct a discrete transfer function and to plot the Bode diagram
+with automatic determination of the frequency range to plot.
+</p>
+</html>
+"));
 end plotBode;

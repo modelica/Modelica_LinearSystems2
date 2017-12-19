@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 function conversionToStateSpace
-  "Transform a transfer function from zeros and poles representation into a StateSpace description"
+  "Example for transformation of a transfer function from zeros and poles representation into a StateSpace description"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;
@@ -23,4 +23,19 @@ algorithm
 
   ok := true;
 
+  annotation (Documentation(info="<html>
+<p>
+This example shows how to transform a transfer function from zeros and poles representation
+<code>zpi</code> into a state-space representation by either using the explicit conversion
+<p>
+<blockquote><pre>
+ZerosAndPoles.Conversion.toStateSpace(zpi);
+</pre></blockquote>
+<p>
+or the short conversion with overloadig
+</p>
+<blockquote><pre>
+StateSpace ss2=StateSpace(zpi);
+</pre></blockquote>
+</html>"));
 end conversionToStateSpace;

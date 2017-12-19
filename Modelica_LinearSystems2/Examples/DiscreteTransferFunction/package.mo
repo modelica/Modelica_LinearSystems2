@@ -6,7 +6,8 @@ package DiscreteTransferFunction "Package of examples to demonstrate the usage o
   annotation (Documentation(info="<html>
 <p>
 This package contains example function calls to demonstrate the
-usage of the functions operating with the DiscreteTransferFunction record.
+usage of the functions operating with the 
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteTransferFunction\">DiscreteTransferFunction</a> record.
 </p>
 </html>"));
 end DiscreteTransferFunction;

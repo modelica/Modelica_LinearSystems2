@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
-function plotRamp "Plot ramp response"
+function plotRamp "Example plotting ramp response"
   extends Modelica.Icons.Function;
 
   input Modelica_LinearSystems2.StateSpace ss=
@@ -14,7 +14,7 @@ algorithm
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-Computes the ramp response of the system
+This example computes the ramp response of the system
 StateSpace <i>ss = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>.
 </p>
 </html>"));

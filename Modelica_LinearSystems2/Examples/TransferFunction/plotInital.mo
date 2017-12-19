@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
-function plotInital "Initial condition plot example"
+function plotInital "Example plotting initial condition response"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.TransferFunction;
@@ -14,5 +14,11 @@ algorithm
   annotation (
     __Dymola_interactive=true,
     Documentation(info="<html>
-</html>"));
+<p>
+This example computes the initial condition response of the of the system
+<i>tf&nbsp;=&nbsp;1/s^2&nbsp;+&nbsp;s&nbsp;+&nbsp;1</i>
+to the initial condition <i>y0=y0, dt=0.1, tSpan=10</i>.
+</p>
+</html>
+"));
 end plotInital;

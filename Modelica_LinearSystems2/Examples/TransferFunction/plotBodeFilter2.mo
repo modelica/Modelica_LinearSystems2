@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
 function plotBodeFilter2
-  "Show low pass filters of all filter types in one diagram"
+  "Example showing low-pass filters of all filter types"
   extends Modelica.Icons.Function;
 
   import Modelica;
@@ -59,5 +59,11 @@ algorithm
 
   ok := true;
 
-  annotation (__Dymola_interactive=true);
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
+<p>
+This example constructs transfer function descriptions of various <b>low-pass filters</b>
+and plots correspondent frequency responses.
+</p>
+</html>
+"));
 end plotBodeFilter2;

@@ -19,12 +19,17 @@ algorithm
     defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
       heading="Poles and zeros of " + String(tf1)));
 
-                       /*
+  /*
   Modelica_LinearSystems2.TransferFunction.Plot.polesAndZeros(
     tf=tf2,
     defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
       heading="Poles and zeros of " + String(tf2)),
     device=Modelica_LinearSystems2.Utilities.Plot.Records.Device(xTopLeft=50, yTopLeft=30));
-*/
-  annotation(__Dymola_interactive=true);
+  */
+  annotation(__Dymola_interactive=true, Documentation(info="<html>
+<p>
+This example shows how to plot a pole-zero-map of a transfer function given internally.
+</p>
+</html>
+"));
 end plotPolesAndZeros;

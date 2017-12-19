@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.DiscreteStateSpace;
 function importFromModel
-  "This example demonstrates how to generate a linear discrete state space system from a (nonlinear) Modelica moodel"
+  "Example generating a discrete state space system from a model"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.DiscreteStateSpace;
@@ -16,5 +16,11 @@ function importFromModel
     T_linearize=T_linearize);
 algorithm
 
-annotation (__Dymola_interactive=true);
+annotation (__Dymola_interactive=true, Documentation(info="<html>
+<p>
+This example shows how to generate a linear discrete state space system
+by linearization of a (nonlinear) Modelica model.
+</p>
+</html>
+"));
 end importFromModel;

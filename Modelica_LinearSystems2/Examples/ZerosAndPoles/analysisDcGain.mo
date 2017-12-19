@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
-encapsulated function analysisDcGain "Compute steady state gain"
+encapsulated function analysisDcGain
+  "Example for computation of steady state gain of a zeros and poles representation"
   extends Modelica.Icons.Function;
 
   import Modelica;
@@ -41,4 +42,12 @@ algorithm
   print("k3 = " + String(k) + ", finite3 = " + String(finite));
 
   ok := true;
+  annotation (Documentation(info="<html>
+<p>
+This example shows how to calculate the
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.dcGain\">steady state gain <b>K</b></a>
+of a zeros and poles representation given internally.
+</p>
+</html>
+"));
 end analysisDcGain;

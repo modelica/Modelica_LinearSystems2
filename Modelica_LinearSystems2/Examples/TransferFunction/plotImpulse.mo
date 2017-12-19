@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
-function plotImpulse "Impulse plot example"
+function plotImpulse "Example plotting impulse response"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.TransferFunction;
@@ -16,7 +16,8 @@ algorithm
     __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
-Computes the impulse response of the system tf =1/s^2 + s + 1.
+This example computes the impulse response of the system
+<i>tf&nbsp;=&nbsp;1/s^2&nbsp;+&nbsp;s&nbsp;+&nbsp;1</i>.
 </p>
 </html>"));
 end plotImpulse;

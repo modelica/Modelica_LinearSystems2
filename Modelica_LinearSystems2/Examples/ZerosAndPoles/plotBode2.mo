@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
-function plotBode2 "Bode plot of PT2 transfer function with zero damping"
+function plotBode2 "Example for a Bode plot of PT2 transfer function with zero damping"
   extends Modelica.Icons.Function;
 
   import Complex;
@@ -22,5 +22,10 @@ algorithm
 
   ok := true;
 
-  annotation (__Dymola_interactive=true);
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
+<p>
+This example shows how to construct a PT2 system with zero damping and to plot the Bode diagram.
+</p>
+</html>
+"));
 end plotBode2;

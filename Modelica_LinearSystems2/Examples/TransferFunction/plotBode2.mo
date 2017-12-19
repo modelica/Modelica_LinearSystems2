@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
 function plotBode2
-  "Construct 2 transfer functions and plot the Bode diagram with automatic determination of the frequency range to plot"
+  "Example for construction of two transfer functions and plot of the Bode diagram"
   extends Modelica.Icons.Function;
 
   import Modelica.Utilities.Streams.print;
@@ -25,5 +25,10 @@ algorithm
     f_max=30);
   ok := true;
 
-  annotation (__Dymola_interactive=true);
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
+<p>
+This example shows how to construct a transfer function and to plot the correspondent Bode diagram.
+</p>
+</html>
+"));
 end plotBode2;

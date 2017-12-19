@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.DiscreteStateSpace;
-function plotBodeSISO "Bode plot of a discrete state space system"
+function plotBodeSISO "Example to plot Bode diagram of a discrete state space system"
   extends Modelica.Icons.Function;
 
   import Modelica;
@@ -34,7 +34,7 @@ algorithm
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-This example demonstrates the construnction of a zeros-and-poles-transfer-function from 
+This example demonstrates the construnction of a zeros-and-poles transfer function from 
 a SISO state space representation and plots the Bode diagrams with automatic determination 
 of the frequency range to plot.
 </p>

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.DiscreteStateSpace;
 function analysisTimeResponse
-  "Compute time response of a discrete state space system"
+  "Example to compute time response of a discrete state space system"
   extends Modelica.Icons.Function;
 
   import Modelica;

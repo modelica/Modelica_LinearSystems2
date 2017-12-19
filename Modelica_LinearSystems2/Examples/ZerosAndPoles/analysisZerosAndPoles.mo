@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 encapsulated function analysisZerosAndPoles
-  "Compute zeros and poles of a ZerosAndPoles transfer function"
+  "Example for computation of zeros and poles of a zeros and poles representation"
   extends Modelica.Icons.Function;
 
   import Modelica;
@@ -42,4 +42,11 @@ algorithm
   printComplexVector("\ndenominatorZeros2", denominatorZeros2);
 
   ok := true;
+  annotation (Documentation(info="<html>
+<p>
+This example shows how to calculate the
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zeros and poles</a>
+of a ZerosAndPoles transfer function given internally.
+</p>
+</html>"));
 end analysisZerosAndPoles;

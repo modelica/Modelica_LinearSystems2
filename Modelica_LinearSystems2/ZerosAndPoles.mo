@@ -1922,14 +1922,14 @@ of a zeros-and-poles transfer function.
   encapsulated function filter
       "Generate a ZerosAndPoles transfer function from a filter description"
 
-      import Modelica;
-      import Modelica.Utilities.Streams;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Utilities.Types;
-      import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica;
+    import Modelica.Utilities.Streams;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.Utilities.Types;
+    import Modelica_LinearSystems2.ZerosAndPoles;
 
-      input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-      input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass/BandPass)";
+    input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+    input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass/BandPass)";
     input Integer order(min=1) = 2 "Order of filter";
     input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
         "Cut-off frequency (default is w_cut = 1 rad/s)";
@@ -1978,8 +1978,7 @@ of a zeros-and-poles transfer function.
     Integer n_num=n_num1 + 2*n_num2;
     Integer n_den=n_den1 + 2*n_den2;
     Real pi=Modelica.Constants.pi;
-    Boolean evenOrder=mod(order, 2) == 0
-        "True, if even filter order, otherwise uneven";
+    Boolean evenOrder=mod(order, 2) == 0 "True, if even filter order, otherwise uneven";
 
     Modelica.SIunits.Frequency f0 = if filterType == Types.FilterType.BandPass or
                                        filterType == Types.FilterType.BandStop then
@@ -2163,34 +2162,34 @@ of a zeros-and-poles transfer function.
 
     /* Add gain ======================================================================= */
     if filterType == Types.FilterType.LowPass then
-       /* A low pass filter does not have numerator polynomials and all coefficients
-        of the denominator polynomial are guaranteed to be non-zero. It is then
-        easy to compute the gain:
-           1/(p + a)         -> a/(p + a)        , since g(0) = 1; k = a
-           1/(p^2 + a*p + b) -> b/(p^2 + a*p + b), since g(0) = 1; k = b
-     */
-       k := 1.0;
-       for i in 1:n_den1 loop
-         k :=k*filter.d1[i];
-       end for;
-       for i in 1:n_den2 loop
-         k :=k*filter.d2[i, 2];
-       end for;
-       filter.k := gain*k;
+      /* A low pass filter does not have numerator polynomials and all coefficients
+       of the denominator polynomial are guaranteed to be non-zero. It is then
+       easy to compute the gain:
+          1/(p + a)         -> a/(p + a)        , since g(0) = 1; k = a
+          1/(p^2 + a*p + b) -> b/(p^2 + a*p + b), since g(0) = 1; k = b
+    */
+      k := 1.0;
+      for i in 1:n_den1 loop
+        k :=k*filter.d1[i];
+      end for;
+      for i in 1:n_den2 loop
+        k :=k*filter.d2[i, 2];
+      end for;
+      filter.k := gain*k;
 
-     elseif filterType == Types.FilterType.HighPass or
-            filterType == Types.FilterType.BandStop then
-       /* A high pass filter and a band stop filter have g(s->infinity) = 1
-        and therefore filter.k = 1 is required, in ZerosAndPoles formulation
-     */
-       filter.k := gain;
+    elseif filterType == Types.FilterType.HighPass or
+           filterType == Types.FilterType.BandStop then
+      /* A high pass filter and a band stop filter have g(s->infinity) = 1
+       and therefore filter.k = 1 is required, in ZerosAndPoles formulation
+    */
+      filter.k := gain;
 
     elseif filterType == Types.FilterType.BandPass then
-       /* The gain due to the w-trasnformation must be added */
-       filter.k := filter.k*gain*w_cut^(2*n_den2-n_num1);
+      /* The gain due to the w-trasnformation must be added */
+      filter.k := filter.k*gain*w_cut^(2*n_den2-n_num1);
 
     else
-       Streams.error("analogFilter (= " + String(analogFilter) + ") is not supported");
+      Streams.error("analogFilter (= " + String(analogFilter) + ") is not supported");
     end if;
 
     annotation (Documentation(info="<html>

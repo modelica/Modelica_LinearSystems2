@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
-function analysisDcGain "Example to compute dcGain of a state space system"
+function analysisDcGain "Compute steady state gain of a state space system"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2;
@@ -53,7 +53,9 @@ algorithm
     __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
-This example shows how to calculate the dc-gain of a state space system.
+This example shows how to calculate the
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.dcGain\">steady state gain <b>K</b></a>
+of an input state space system <code>ssi</code> and of two other state space system given internally.
 </p>
 </html>"));
 end analysisDcGain;

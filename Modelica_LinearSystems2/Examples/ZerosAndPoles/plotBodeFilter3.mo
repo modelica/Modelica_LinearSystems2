@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
-function plotBodeFilter3 "Show high pass filters of all filter types"
+function plotBodeFilter3 "Example showing high-pass filters of all filter types"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.ZerosAndPoles;
@@ -62,5 +62,11 @@ algorithm
 
   ok := true;
 
-  annotation (__Dymola_interactive=true);
+  annotation (__Dymola_interactive=true, Documentation(info="<html>
+<p>
+This example constructs ZerosAndPoles transfer function descriptions of various <b>high-pass filters</b>
+and plots correspondent frequency responses.
+</p>
+</html>
+"));
 end plotBodeFilter3;
