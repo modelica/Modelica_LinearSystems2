@@ -1567,7 +1567,7 @@ algorithm
     import Modelica_LinearSystems2.ZerosAndPoles;
     extends Modelica.Icons.Package;
 
-  encapsulated function polesAndZeros
+    encapsulated function polesAndZeros
       "Plot poles and/or the zeros of a transfer function"
 
       import Modelica;
@@ -1577,15 +1577,15 @@ algorithm
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
-    input TransferFunction tf "Linear system in transfer function form";
-    input Boolean poles=true "= true, to plot the poles of tf" annotation(choices(checkBox=true));
-    input Boolean zeros=true "= true, to plot the zeros of tf" annotation(choices(checkBox=true));
+      input TransferFunction tf "Linear system in transfer function form";
+      input Boolean poles=true "= true, to plot the poles of tf" annotation(choices(checkBox=true));
+      input Boolean zeros=true "= true, to plot the zeros of tf" annotation(choices(checkBox=true));
 
-    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
-      defaultDiagram = Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+        defaultDiagram = Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
 
-  algorithm
-    StateSpace.Plot.polesAndZeros(StateSpace(tf), poles, zeros, defaultDiagram=defaultDiagram, device=device);
+    algorithm
+      StateSpace.Plot.polesAndZeros(StateSpace(tf), poles, zeros, defaultDiagram=defaultDiagram, device=device);
 
     annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -1596,7 +1596,6 @@ TransferFunction.Plot.<b>polesAndZeros</b>(
   tf,
   poles=true,
   zeros=true,
-  plot=true,
   defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</a>(),
   device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>());
 </pre></blockquote>
@@ -1632,7 +1631,7 @@ and results in
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/PolesAndZerosTF.png\">
 </blockquote>
 </html>"));
-  end polesAndZeros;
+    end polesAndZeros;
 
     encapsulated function bode "Plot transfer function as bode plot"
       import Modelica;
@@ -1797,7 +1796,7 @@ This function plots the bode-diagram of a transfer function.
 </html>"));
     end bode;
 
-  encapsulated function timeResponse
+    encapsulated function timeResponse
       "Plot the time response of a system represented by a transfer function. The response type is selectable"
 
       import Modelica;
@@ -1806,44 +1805,44 @@ This function plots the bode-diagram of a transfer function.
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
       import Modelica_LinearSystems2.Utilities.Plot;
 
-    input Modelica_LinearSystems2.TransferFunction tf;
-    input Real dt=0 "Sample time [s]";
-    input Real tSpan=0 "Simulation time span [s]";
+      input Modelica_LinearSystems2.TransferFunction tf;
+      input Real dt=0 "Sample time [s]";
+      input Real tSpan=0 "Simulation time span [s]";
 
       input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
-    input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
-      TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
+      input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
+        TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
 
-    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
-      defaultDiagram=
-      Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
-      "Time response of  tf = " + String(tf)));
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+        defaultDiagram=
+        Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
+        "Time response of  tf = " + String(tf)));
 
     protected
-    Plot.Records.Curve curve;
-    Plot.Records.Diagram diagram2;
-    Real y[:,1,1] "Output response";
-    Real t[:] "Time vector: (number of samples)";
+      Plot.Records.Curve curve;
+      Plot.Records.Diagram diagram2;
+      Real y[:,1,1] "Output response";
+      Real t[:] "Time vector: (number of samples)";
 
-  algorithm
-    (y,t) := TransferFunction.Analysis.timeResponse(
-          tf,
-          dt,
-          tSpan,
-          response,
-          x0);
+    algorithm
+      (y,t) := TransferFunction.Analysis.timeResponse(
+            tf,
+            dt,
+            tSpan,
+            response,
+            x0);
 
-    curve := Plot.Records.Curve(
-          x=t,
-          y=y[:, 1, 1],
-          legend="y",
-          autoLine=true);
-    diagram2 := defaultDiagram;
-    diagram2.curve := {curve};
+      curve := Plot.Records.Curve(
+            x=t,
+            y=y[:, 1, 1],
+            legend="y",
+            autoLine=true);
+      diagram2 := defaultDiagram;
+      diagram2.curve := {curve};
 
-    Plot.diagram(diagram2, device);
+      Plot.diagram(diagram2, device);
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>timeResponse</b>(tf);
@@ -1888,9 +1887,9 @@ This function plots the time response of a transfer function. The character of t
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>
 </p>
 </html>"));
-  end timeResponse;
+    end timeResponse;
 
-  encapsulated function impulse "Impulse response plot"
+    encapsulated function impulse "Impulse response plot"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
@@ -1898,31 +1897,31 @@ This function plots the time response of a transfer function. The character of t
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
-    input Modelica_LinearSystems2.TransferFunction tf "transfer function";
-    input Real dt=0 "Sample time [s]";
-    input Real tSpan=0 "Simulation time span [s]";
+      input Modelica_LinearSystems2.TransferFunction tf "transfer function";
+      input Real dt=0 "Sample time [s]";
+      input Real tSpan=0 "Simulation time span [s]";
 
-    input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
-      TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
+      input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
+        TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
 
-    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
-      defaultDiagram=
-      Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response of  tf = "
-        + String(tf)));
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+        defaultDiagram=
+        Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Impulse response of  tf = "
+          + String(tf)));
 
     protected
       Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse "Type of time response";
-  algorithm
-    Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
-      tf=tf,
-      dt=dt,
-      tSpan=tSpan,
-      response=response,
-      x0=x0,
-      defaultDiagram=defaultDiagram,
-      device=device);
+    algorithm
+      Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
+        tf=tf,
+        dt=dt,
+        tSpan=tSpan,
+        response=response,
+        x0=x0,
+        defaultDiagram=defaultDiagram,
+        device=device);
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>impulse</b>(tf)
@@ -1963,9 +1962,9 @@ This function plots the impulse response of a transfer function. It is based on 
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>
 </p>
 </html>"));
-  end impulse;
+    end impulse;
 
-  encapsulated function step "Step response plot"
+    encapsulated function step "Step response plot"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
@@ -1973,29 +1972,29 @@ This function plots the impulse response of a transfer function. It is based on 
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
-    input Modelica_LinearSystems2.TransferFunction tf;
-    input Real dt=0 "Sample time [s]";
-    input Real tSpan=0 "Simulation time span [s]";
+      input Modelica_LinearSystems2.TransferFunction tf;
+      input Real dt=0 "Sample time [s]";
+      input Real tSpan=0 "Simulation time span [s]";
 
       input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
-    input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
+      input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
         TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
 
-    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-          Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Step response of  tf = "
-           + String(tf)));
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+        defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
+          heading="Step response of tf = " + String(tf)));
 
-  algorithm
-    Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
-      tf=tf,
-      dt=dt,
-      tSpan=tSpan,
-      response=response,
-      x0=x0,
-      defaultDiagram=defaultDiagram,
-      device=device);
+    algorithm
+      Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
+        tf=tf,
+        dt=dt,
+        tSpan=tSpan,
+        response=response,
+        x0=x0,
+        defaultDiagram=defaultDiagram,
+        device=device);
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>step</b>(tf)
@@ -2036,9 +2035,9 @@ This function plots the step response of a transfer function. It is based on <a 
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>
 </p>
 </html>"));
-  end step;
+    end step;
 
-  encapsulated function ramp "Ramp response plot"
+    encapsulated function ramp "Ramp response plot"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
@@ -2046,31 +2045,29 @@ This function plots the step response of a transfer function. It is based on <a 
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
-    input Modelica_LinearSystems2.TransferFunction tf;
-    input Real dt=0 "Sample time [s]";
-    input Real tSpan=0 "Simulation time span [s]";
+      input Modelica_LinearSystems2.TransferFunction tf;
+      input Real dt=0 "Sample time [s]";
+      input Real tSpan=0 "Simulation time span [s]";
 
       input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp "type of time response";
-    input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
-        TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
+      input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
+          TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
 
-    extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-          Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Ramp response of  tf = "
-           + String(tf)));
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+        defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
+          heading="Ramp response of tf = " + String(tf)));
 
-  algorithm
-    Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
-      tf=tf,
-      dt=dt,
-      tSpan=tSpan,
-      response=response,
-      x0=x0,
-      defaultDiagram=defaultDiagram,
-      device=device);
+    algorithm
+      Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
+        tf=tf,
+        dt=dt,
+        tSpan=tSpan,
+        response=response,
+        x0=x0,
+        defaultDiagram=defaultDiagram,
+        device=device);
 
-  equation
-
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>ramp</b>(tf)
@@ -2111,9 +2108,9 @@ This function plots the ramp response of a transfer function. It is based on <a 
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.initialResponse\">initialResponse</a>
 </p>
 </html>"));
-  end ramp;
+    end ramp;
 
-  encapsulated function initialResponse "Initial condition response plot"
+    encapsulated function initialResponse "Initial condition response plot"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
@@ -2143,17 +2140,17 @@ This function plots the ramp response of a transfer function. It is based on <a 
             fill(0, nx),
             ss.C,
             vector(y0)) "Initial state vector (for initial condition plot)";
-  algorithm
-    Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
-      tf=tf,
-      dt=dt,
-      tSpan=tSpan,
-      response=response,
-      x0=x0,
-      defaultDiagram=defaultDiagram,
-      device=device);
+    algorithm
+      Modelica_LinearSystems2.TransferFunction.Plot.timeResponse(
+        tf=tf,
+        dt=dt,
+        tSpan=tSpan,
+        response=response,
+        x0=x0,
+        defaultDiagram=defaultDiagram,
+        device=device);
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>initialResponse</b>(tf)
@@ -2195,7 +2192,7 @@ This function plots the initial response, i.e. the zeros input response of a tra
 <a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Plot.ramp\">ramp</a>
 </p>
 </html>"));
-  end initialResponse;
+    end initialResponse;
 
   end Plot;
 
@@ -2203,6 +2200,7 @@ This function plots the initial response, i.e. the zeros input response of a tra
     "Package of functions for conversion of TransferFunction data record"
     import Modelica;
     extends Modelica.Icons.Package;
+
     encapsulated function toZerosAndPoles
       "Convert a TransferFunction into a ZerosAndPoles object"
       import Modelica;
@@ -2225,6 +2223,7 @@ This function plots the initial response, i.e. the zeros input response of a tra
     algorithm
       (z,p,k) := TransferFunction.Analysis.zerosAndPoles(tf);
       zp := ZerosAndPoles(z, p, k);
+
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -2266,33 +2265,32 @@ and are used as inputs the ZerosAndPoles constructor.
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica.Math.Vectors;
 
-     input Modelica_LinearSystems2.TransferFunction tf
+      input Modelica_LinearSystems2.TransferFunction tf
         "Transfer function of a system";
-     output Modelica_LinearSystems2.StateSpace ss(
-       redeclare Real A[TransferFunction.Analysis.denominatorDegree(tf),TransferFunction.Analysis.denominatorDegree(tf)],
-       redeclare Real B[TransferFunction.Analysis.denominatorDegree(tf),1],
-       redeclare Real C[1,TransferFunction.Analysis.denominatorDegree(tf)],
-       redeclare Real D[1,1]) "Transfer function in StateSpace form";
+      output Modelica_LinearSystems2.StateSpace ss(
+        redeclare Real A[TransferFunction.Analysis.denominatorDegree(tf),TransferFunction.Analysis.denominatorDegree(tf)],
+        redeclare Real B[TransferFunction.Analysis.denominatorDegree(tf),1],
+        redeclare Real C[1,TransferFunction.Analysis.denominatorDegree(tf)],
+        redeclare Real D[1,1]) "Transfer function in StateSpace form";
 
     protected
-     Integer na=TransferFunction.Analysis.denominatorDegree(tf) + 1;
-     Integer nb=TransferFunction.Analysis.numeratorDegree(tf) + 1;
-     Integer nx=na - 1;
-     Real a[na]=Vectors.reverse(tf.d) "Reverse element order of tf.a";
-     Real b[na]=vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
-     Real d=b[na]/a[na];
+      Integer na=TransferFunction.Analysis.denominatorDegree(tf) + 1;
+      Integer nb=TransferFunction.Analysis.numeratorDegree(tf) + 1;
+      Integer nx=na - 1;
+      Real a[na]=Vectors.reverse(tf.d) "Reverse element order of tf.a";
+      Real b[na]=vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
+      Real d=b[na]/a[na];
     algorithm
-     if nx == 0 then
-       ss.A := fill(0, 0, nx);
-       ss.B := fill(0, 0, 1);
-       ss.C := fill(0, 1, 0);
-     else
-       ss.A[1:nx - 1, 1:nx] := [zeros(nx - 1, 1),identity(nx - 1)];
-       ss.A[nx, 1:nx] := -a[1:na - 1]/a[na];
-       ss.B := [zeros(nx - 1, 1); 1/a[na]];
-       ss.C := {b[1:nx] - d*a[1:nx]};
-
-    end if;
+      if nx == 0 then
+        ss.A := fill(0, 0, nx);
+        ss.B := fill(0, 0, 1);
+        ss.C := fill(0, 1, 0);
+      else
+        ss.A[1:nx - 1, 1:nx] := [zeros(nx - 1, 1),identity(nx - 1)];
+        ss.A[nx, 1:nx] := -a[1:na - 1]/a[na];
+        ss.B := [zeros(nx - 1, 1); 1/a[na]];
+        ss.C := {b[1:nx] - d*a[1:nx]};
+      end if;
 
       ss.D := [d];
 
@@ -2421,39 +2419,39 @@ Converts a matrix of transfer functions denoted as rational polynomial function 
       output Real ABCD[size(tf.d,1),size(tf.d,1)];
 
     protected
-     Integer na=TransferFunction.Analysis.denominatorDegree(tf) + 1;
-     Integer nb=TransferFunction.Analysis.numeratorDegree(tf) + 1;
-     Integer nx=na - 1;
-     Real A[nx,nx];
-     Real B[nx,1];
-     Real C[1,nx];
-     Real D[1,1];
-     Real a[na]=Vectors.reverse(tf.d) "Reverse element order of tf.a";
-     Real b[na]=vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
-     Real d=b[na]/a[na];
+      Integer na=TransferFunction.Analysis.denominatorDegree(tf) + 1;
+      Integer nb=TransferFunction.Analysis.numeratorDegree(tf) + 1;
+      Integer nx=na - 1;
+      Real A[nx,nx];
+      Real B[nx,1];
+      Real C[1,nx];
+      Real D[1,1];
+      Real a[na]=Vectors.reverse(tf.d) "Reverse element order of tf.a";
+      Real b[na]=vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
+      Real d=b[na]/a[na];
     algorithm
-     if nx == 0 then
-       A := fill(
-           0,
-           0,
-           nx);
-       B := fill(
-           0,
-           0,
-           1);
-       C := fill(
-           0,
-           1,
-           0);
-     else
-       A[1:nx - 1, 1:nx] := [zeros(nx - 1, 1),identity(nx - 1)];
-       A[nx, 1:nx] := -a[1:na - 1]/a[na];
-       B := [zeros(nx - 1, 1); 1/a[na]];
-       C := {b[1:nx] - d*a[1:nx]};
-    end if;
+      if nx == 0 then
+        A := fill(
+            0,
+            0,
+            nx);
+        B := fill(
+            0,
+            0,
+            1);
+        C := fill(
+            0,
+            1,
+            0);
+      else
+        A[1:nx - 1, 1:nx] := [zeros(nx - 1, 1),identity(nx - 1)];
+        A[nx, 1:nx] := -a[1:na - 1]/a[na];
+        B := [zeros(nx - 1, 1); 1/a[na]];
+        C := {b[1:nx] - d*a[1:nx]};
+      end if;
       D := [d];
       ABCD := [A,B;C,D];
-     annotation (Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (A, B, C, D) = TransferFunction.Conversion.toStateSpace<b>toStateSpace</b>(tf)
@@ -2523,37 +2521,38 @@ is defined slightly differently.
     import Modelica;
     extends Modelica.Icons.Package;
 
-  encapsulated function fromFile
+    encapsulated function fromFile
       "Generate a TransferFunction data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
-    import Modelica.Utilities.Streams;
-    import Modelica_LinearSystems2.TransferFunction;
-    import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica.Utilities.Streams;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Math.Polynomial;
 
-    input String fileName="tf.mat" "Name of the transfer function data file"   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+      input String fileName="tf.mat" "Name of the transfer function data file"
+        annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="transfer function data file")));
-    input String numName="n" "Name of the numenator of the transfer function";
-    input String denName="d" "Name of the denominator of the transfer function";
+      input String numName="n" "Name of the numenator of the transfer function";
+      input String denName="d" "Name of the denominator of the transfer function";
 
     protected
-    Integer numSize[2] = Streams.readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
-    Integer denSize[2] = Streams.readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
+      Integer numSize[2] = Streams.readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
+      Integer denSize[2] = Streams.readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
 
-    Real num[numSize[1],numSize[2]]=
-      Streams.readRealMatrix(fileName, numName, numSize[1], numSize[2])
-      "Numenator coefficients";
-    Real den[denSize[1],denSize[2]]=
-      Streams.readRealMatrix(fileName, denName, denSize[1], denSize[2])
-      "Denominator coefficients";
-    Integer ns2=numSize[2] annotation(__Dymola_allowForSize=true);
-    Integer ds2=denSize[2] annotation(__Dymola_allowForSize=true);
+      Real num[numSize[1],numSize[2]]=
+        Streams.readRealMatrix(fileName, numName, numSize[1], numSize[2])
+        "Numenator coefficients";
+      Real den[denSize[1],denSize[2]]=
+        Streams.readRealMatrix(fileName, denName, denSize[1], denSize[2])
+        "Denominator coefficients";
+      Integer ns2=numSize[2] annotation(__Dymola_allowForSize=true);
+      Integer ds2=denSize[2] annotation(__Dymola_allowForSize=true);
     public
-   output TransferFunction tf(n=fill(0,ns2),d=fill(0,ds2)) "transfer function";
+      output TransferFunction tf(n=fill(0,ns2),d=fill(0,ds2)) "transfer function";
 
-  algorithm
-    tf.n := vector(num);
-    tf.d := vector(den);
-    tf.uName := numName;
-    tf.yName := denName;
+    algorithm
+      tf.n := vector(num);
+      tf.d := vector(den);
+      tf.uName := numName;
+      tf.yName := denName;
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
@@ -2573,55 +2572,54 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
 //  tf = (s^2 + 2*s + 3)/(4*s^2 + 5*s + 6)
 </pre></blockquote>
 </html>"));
-  end fromFile;
+    end fromFile;
 
-  function fromModel
-    "Generate a TransferFunction data record from a state space representation resulted from linearization of a model"
+    function fromModel
+      "Generate a TransferFunction data record from a state space representation resulted from linearization of a model"
 
-    import Modelica;
-    import Modelica.Utilities.Streams;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.TransferFunction;
-    import Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension;
+      import Modelica;
+      import Modelica.Utilities.Streams;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension;
 
-    input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
-    input Real T_linearize = 0
-        "point in time of simulation to linearize the model";
-    input String fileName = "dslin" "Name of the result file";
+      input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
+      input Real T_linearize = 0 "Point in time of simulation to linearize the model";
+      input String fileName = "dslin" "Name of the result file";
 
     protected
-    String fileName2 = fileName + ".mat";
-    Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
-    Boolean OK2 = importInitial("dsfinal.txt");
-    Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize+1);
-    Integer xuy[3] = ReadSystemDimension(fileName2, "ABCD");
-    Integer nx = xuy[1];
-    Integer nu = xuy[2];
-    Integer ny = xuy[3];
-    Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-    String xuyName[nx + nu + ny] = readStringMatrix(fileName2, "xuyName", nx + nu + ny);
+      String fileName2 = fileName + ".mat";
+      Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
+      Boolean OK2 = importInitial("dsfinal.txt");
+      Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize+1);
+      Integer xuy[3] = ReadSystemDimension(fileName2, "ABCD");
+      Integer nx = xuy[1];
+      Integer nu = xuy[2];
+      Integer ny = xuy[3];
+      Real ABCD[nx + ny,nx + nu] = Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+      String xuyName[nx + nu + ny] = readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
-    StateSpace result(
-      redeclare Real A[nx,nx],
-      redeclare Real B[nx,nu],
-      redeclare Real C[ny,nx],
-      redeclare Real D[ny,nu]) "Model linearized at initial point";
+      StateSpace result(
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,nu],
+        redeclare Real C[ny,nx],
+        redeclare Real D[ny,nu]) "Model linearized at initial point";
     public
-    output TransferFunction tf[:,:];
+      output TransferFunction tf[:,:];
 
-  algorithm
-    result.A := ABCD[1:nx, 1:nx];
-    result.B := ABCD[1:nx, nx + 1:nx + nu];
-    result.C := ABCD[nx + 1:nx + ny, 1:nx];
-    result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-    result.uNames := xuyName[nx + 1:nx + nu];
-    result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
-    result.xNames := xuyName[1:nx];
+    algorithm
+      result.A := ABCD[1:nx, 1:nx];
+      result.B := ABCD[1:nx, nx + 1:nx + nu];
+      result.C := ABCD[nx + 1:nx + ny, 1:nx];
+      result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+      result.uNames := xuyName[nx + 1:nx + nu];
+      result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
+      result.xNames := xuyName[1:nx];
 
-    tf := Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunctionMIMO(result);
+      tf := Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunctionMIMO(result);
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 tf = TransferFunction.Import.<b>fromModel</b>(modelName, T_linearize, fileName)
@@ -2651,7 +2649,7 @@ followed by a conversion from sate space to transfer function representation.
           (-0.1*s^3 - 0.160918*s^2 - 0.21842*s)/(s^4 + 0.09*s^3 + 9.13717*s^2 - 32.0637*s + 58.78)]
 </pre></blockquote>
 </html>"));
-  end fromModel;
+    end fromModel;
 
   end Import;
 
@@ -2682,7 +2680,7 @@ followed by a conversion from sate space to transfer function representation.
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-    input TransferFunction tf;
+      input TransferFunction tf;
 
       output Boolean controllableAndObservable;
     protected
