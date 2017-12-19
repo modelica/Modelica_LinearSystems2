@@ -7432,13 +7432,15 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
         annotation (choices(checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
-          defaultDiagram=if poles and zeros then
-            Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros()
-             else if poles then
-            Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
-            heading="Eigenvalues (x)") else
-            Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
-            heading="Invariant zeros (o)"));
+          defaultDiagram=
+            if poles and zeros then
+              Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros()
+            else if poles then
+              Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
+                heading="Eigenvalues (x)")
+            else
+              Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
+                heading="Invariant zeros (o)"));
     protected
       Integer nx=size(ss.A, 1);
       Real EigReal[:, 2];
@@ -7497,25 +7499,25 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
       Plot.diagram(diagram2, device);
 
       if print then
-         if poles then
-            eig :=fill(Complex(0), size(EigReal, 1));
-            for i in 1:size(eig,1) loop
-               eig[i].re :=EigReal[i, 1];
-               eig[i].im :=EigReal[i, 2];
-            end for;
+        if poles then
+          eig :=fill(Complex(0), size(EigReal, 1));
+          for i in 1:size(eig,1) loop
+            eig[i].re :=EigReal[i, 1];
+            eig[i].im :=EigReal[i, 2];
+          end for;
           Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.printHTML(
             eig, heading="Eigenvalues", name="eigenvalue");
-         end if;
+        end if;
 
-         if zeros then
-            invZeros :=fill(Complex(0), size(InvZerosReal, 1));
-            for i in 1:size(invZeros,1) loop
-               invZeros[i].re :=InvZerosReal[i, 1];
-               invZeros[i].im :=InvZerosReal[i, 2];
-            end for;
+        if zeros then
+          invZeros :=fill(Complex(0), size(InvZerosReal, 1));
+          for i in 1:size(invZeros,1) loop
+            invZeros[i].re :=InvZerosReal[i, 1];
+            invZeros[i].im :=InvZerosReal[i, 2];
+          end for;
           Modelica_LinearSystems2.Math.ComplexAdvanced.Vectors.printHTML(
             invZeros, heading="Invariant zeros", name="invariant zero");
-         end if;
+        end if;
       end if;
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
@@ -7527,7 +7529,7 @@ StateSpace.Plot.<b>polesAndZeros</b>(
   ss,
   poles=true,
   zeros=true,
-  plot=true,
+  print=true,
   defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros</a>(),
   device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>());
 </pre></blockquote>
@@ -7538,6 +7540,8 @@ This function plots a pole-zero-map of the poles and transmission zeros of a sta
 The poles are the eigenvalues of the system matrix (eigenvalues(ss.A)). The Boolean inputs
 \"poles\" and \"zeros\" define what to plot. If Boolean input \"plot = true\", the pole-zero-map
 is plotted. If false, only the diagram is generated and returned as output argument.
+When the Boolean input print=true, then the results of the analysis are additionally printed
+in the textual format.
 The records \"defaultDiagram\" and \"device\" allow to set various layout options and the
 size and location of the diagram on the screen.
 </p>
