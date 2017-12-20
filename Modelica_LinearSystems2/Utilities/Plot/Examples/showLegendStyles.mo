@@ -34,7 +34,7 @@ algorithm
       Records.Diagram(
         curve=curves,
         heading="LegendLocation.Below",
-        legendLocation=Types.LegendLocation.Below)}, 
+        legendLocation=Types.LegendLocation.Below)},
     Records.Device(
       xTopLeft=0,
       yTopLeft=0,

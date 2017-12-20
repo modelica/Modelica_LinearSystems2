@@ -70,7 +70,7 @@ This function plots the following diagram (with default input arguments):
 </p>
 
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showSinesInVectorDiagram.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showSinesInVectorDiagrams.png\">
 </blockquote>
 </html>"));
 end showSinesInVectorDiagrams;

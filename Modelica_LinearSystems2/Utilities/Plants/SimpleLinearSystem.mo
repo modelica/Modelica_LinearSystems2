@@ -17,4 +17,8 @@ equation
       points={{11,0},{110,0}},
       color={0,0,127},
       smooth=Smooth.None));
+  annotation (Documentation(info="<html>
+<p>A simple linear SISO model of test system with zeros and poles.</p>
+<!--placeholder-->
+</html>"));
 end SimpleLinearSystem;

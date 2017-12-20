@@ -101,7 +101,7 @@ for possible usage of this function:
 </p>
 
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showSinesInVectorDiagram.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showSinesInVectorDiagrams.png\">
 </blockquote>
 </html>"));
 end diagramVector;

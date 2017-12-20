@@ -31,4 +31,9 @@ equation
       points={{9,30},{30,30},{30,2},{110,2},{110,5}},
       color={0,0,127},
       smooth=Smooth.None));
+  annotation (Documentation(info="<html>
+<p>A simple model of MIMO test system with two inputs, two outputs, zeros and poles.</p>
+<!--placeholder-->
+</html>
+"));
 end SimpleMIMOSystem;

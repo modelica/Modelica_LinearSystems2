@@ -26,6 +26,6 @@ Several curves can be displayed in one diagram.
 A typical example is shown in the next figure:
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showSinesInVectorDiagram.png\"></p>
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showSinesInVectorDiagrams.png\"></p>
 </html>"));
 end Plot;

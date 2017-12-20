@@ -116,7 +116,9 @@ der(d<b>x</b>) = <b>A</b>*d<b>x</b> + <b>B</b>*d<b>u</b> + <b>f</b>0
      d<b>y</b> = <b>C</b>*d<b>x</b> + <b>D</b>*d<b>u</b>
 </pre></blockquote>
 <p>
-This function returns the matrices <b>A</b>, <b>B</b>, <b>C</b>, <b>D</b> and assumes that the linearization point is a steady-state point of the simulation (i.e., <b>f</b>(<b>x</b>0,<b>u</b>0) = 0). Additionally, the full Modelica names of all inputs, outputs and states shall be returned if possible (default is to return empty name strings).
+This function returns the state-space representation of the linearized system assuming that
+the linearization point is a steady-state point of the simulation
+(i.e., <b>f</b>(<b>x</b>0,&nbsp;<b>u</b>0)&nbsp;=&nbsp;0).
 </p>
 </html>"));
 end linearize2;

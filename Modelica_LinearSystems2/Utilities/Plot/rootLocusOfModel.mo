@@ -87,6 +87,10 @@ is performed between the given minimum and maximum value.
 
 <h4>Example</h4>
 <p>
+Execute function <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.rootLocusOfDrive\">Examples.rootLocusOfDrive</a>
+that is defined to analyse an example mechanical model from the Modelica standard library:
+</p>
+<p>
 Calling the function
 </p>
 <blockquote><pre>
@@ -95,10 +99,10 @@ Utilities.Plot.<b>rootLocusOfModel</b>(
   modelParam={
     Modelica_LinearSystems2.Records.ParameterVariation(
       Name=&quot;Jload&quot;,
-      grid=Modelica_LinearSystems2.Types.Grid.Logarithmic
+      grid=Modelica_LinearSystems2.Types.Grid.Equidistant
       Min=1,
       Max=6,
-      nPoints=101)});
+      nPoints=30)});
 </pre></blockquote>
 <p>
 yields the following diagram (the menu on the right lower part is displayed when moving
