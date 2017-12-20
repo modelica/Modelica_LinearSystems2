@@ -13175,18 +13175,18 @@ StateSpace.Plot.<b>bodeMIMO</b>(
 This record defines a linear time invariant differential
 equation system in state space form:
 </p>
-<pre>
-   <b>der</b>(x) = A * x + B * u
-       y  = C * x + D * u
-</pre>
+<blockquote><pre>
+der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
+    <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>
+</pre></blockquote>
 <p>
 with
 </p>
 <ul>
-<li> u ... the input vector,</li>
-<li> y ... the output vector,</li>
-<li> x ... the state vector,</li>
-<li> A, B, C, D - matrices of appropriate dimensions.</li>
+<li> <b>u</b> ... the input vector,</li>
+<li> <b>y</b> ... the output vector,</li>
+<li> <b>x</b> ... the state vector,</li>
+<li> <b>A</b>, <b>B</b>, <b>C</b>, <b>D</b> - matrices of appropriate dimensions.</li>
 </ul>
 </html>"),
     Icon(
