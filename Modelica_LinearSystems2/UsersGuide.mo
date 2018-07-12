@@ -1216,6 +1216,8 @@ Bug fixes performed in this version:
 </h4>
 
 <ul>
+<li> Non-standardized, tool specific annotation &quot;Interval&quot; replaced by
+     standard equivalent annotation &quot;Interval&quot; (3 times)</li>
 <li> ...</li>
 </ul>
 </html>"));
