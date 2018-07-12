@@ -59,7 +59,7 @@ algorithm
   elseif nParam == 1 then
     // Exactly one parameter defined
     assert(modelParam[1].grid == Grid.Equidistant or modelParam[1].grid == Grid.Logarithmic,
-      "One parameter defined, but grid is not defined as Equidistant or Logarithmic");
+      "Only one parameter defined => its grid must be defined either Equidistant or Logarithmic");
     np := modelParam[1].nPoints;
     index_p_var := 1;
     OK := translateModel(modelName);
