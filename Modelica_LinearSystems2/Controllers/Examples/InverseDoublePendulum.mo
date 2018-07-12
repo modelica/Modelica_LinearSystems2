@@ -71,7 +71,7 @@ equation
   annotation (
     experiment(
       StopTime=40,
-      __Dymola_NumberOfIntervals=2000,
+      Interval=2000,
       Tolerance=1e-005),
     Documentation(info="<html>
 <p>
