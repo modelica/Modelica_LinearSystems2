@@ -649,8 +649,8 @@ encapsulated function bodeSISO
         "Maximum frequency value, if autoRange = false";
 
   input Boolean magnitude=true "= true, to plot the magnitude of dtf"
-                                                                     annotation(choices(__Dymola_checkBox=true));
-  input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
+    annotation(choices(checkBox=true));
+  input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
 
   extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
         Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());

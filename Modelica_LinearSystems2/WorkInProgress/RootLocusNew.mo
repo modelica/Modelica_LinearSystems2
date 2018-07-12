@@ -11,7 +11,7 @@ package RootLocusNew
       annotation (Dialog);
     input Boolean linearizeAtInitial=true
       "= true, if linearization at inital time; otherwise simulate until t_linearize"
-       annotation (choices(__Dymola_checkBox=true));
+       annotation (choices(checkBox=true));
     input Modelica.SIunits.Time t_linearize= 0
       "Simulate until t_linearize and then linearize, if linearizeAtInitial == false" annotation(Dialog(enable=not linearizeAtInitial));
     input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
