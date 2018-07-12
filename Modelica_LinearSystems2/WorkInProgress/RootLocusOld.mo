@@ -16,7 +16,7 @@ package RootLocusOld
   /*
   input Modelica.Mechanics.MultiBody.Interfaces.partialColorMap colorMap=
       Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.jet
-    "Color map function for parameter variations" annotation(__Dymola_choicesAllMatching=true);
+    "Color map function for parameter variations" annotation(choicesAllMatching=true);
 */
 
     input
