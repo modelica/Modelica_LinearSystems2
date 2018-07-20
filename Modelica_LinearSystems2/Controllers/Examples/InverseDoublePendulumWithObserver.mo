@@ -94,7 +94,7 @@ equation
             lineColor={255,0,0})}),
     experiment(
       StopTime=60,
-      Interval=2000,
+      __Dymola_NumberOfIntervals=2000,
       Tolerance=1e-005),
     Documentation(info="<html>
 <p>
