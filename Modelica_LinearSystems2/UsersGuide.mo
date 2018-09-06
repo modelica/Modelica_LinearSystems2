@@ -1189,25 +1189,31 @@ This library is based on the following references:
 <p>This version requires the <b>Modelica 3.2.2</b> Library.
 It is <b>backward compatible</b> to the previous version 2.3.4.</p>
 
+
 <h4>
 Improvements in this version:
 </h4>
 
 <ul>
 <li>Improved documentation of lot of classes/functions.</li>
-<li>Renamed functions to plot FFT, see <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot\">Utilities.Plot.plotFFT...</a>.</li>
+<li>Renamed functions to plot FFT, see
+    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot\">Utilities.Plot.plotFFT...</a>.</li>
 <li>Renamed package Controller into <a href=\"modelica://Modelica_LinearSystems2.Controllers\">Controllers</a>.</li>
-<li>Using a <a href=\"modelica://Modelica.ComplexMath\">ComplexMath</a> library from 
-the Modelica standard library for all operations on complex numbers. A conversion script exists.
-See also <a href=\"Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers.FunctionsAndOperators\">Functions and operators</a> in Getting started.
-The original package Modelica_LinearSystems2.Math.Complex has been renamed to 
-<a href=\"modelica://Modelica_LinearSystems2.Math.ComplexAdvanced\">Modelica_LinearSystems2.Math.ComplexAdvanced</a>
-in order to clearly distinguish from the package <a href=\"modelica://Modelica.ComplexMath\">Modelica.ComplexMath</a>
-and the operator <a href=\"modelica://Complex\">Complex</a>.</li>
+<li>Using a <a href=\"modelica://Modelica.ComplexMath\">ComplexMath</a> library from
+    the Modelica standard library for all operations on complex numbers.
+    A conversion script exists. See also
+    <a href=\"Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers.FunctionsAndOperators\">Functions and operators</a>
+    in Getting started.
+    The original package Modelica_LinearSystems2.Math.Complex has been renamed to
+    <a href=\"modelica://Modelica_LinearSystems2.Math.ComplexAdvanced\">Modelica_LinearSystems2.Math.ComplexAdvanced</a>
+    in order to clearly distinguish from the package
+    <a href=\"modelica://Modelica.ComplexMath\">Modelica.ComplexMath</a>
+    and the operator <a href=\"modelica://Complex\">Complex</a>.</li>
 <li>Deleted obsolete classes to read and write matrices on a file
-(<code>readMatrixOnFileSize</code>, <code>readMatrixInternal</code> and <code>readMatrixGain</code>). Instead, corresponding functions from
-<a href=\"modelica://Modelica.Utilities.Streams\">Modelica.Utilities.Streams</a> are used.
-A conversion script exists to perform the conversion automatically.
+    (<code>readMatrixOnFileSize</code>, <code>readMatrixInternal</code>
+    and <code>readMatrixGain</code>). Instead, corresponding functions from
+    <a href=\"modelica://Modelica.Utilities.Streams\">Modelica.Utilities.Streams</a> are used.
+    A conversion script exists to perform the conversion automatically.
 </ul>
 
 
@@ -1216,10 +1222,10 @@ Bug fixes performed in this version:
 </h4>
 
 <ul>
-<li> Non-standardized, tool specific annotations with prefix &quot;__Dymola_&quot; replaced by
-     standard equivalent annotations.
-     In particular: &quot;choicesAllMatching&quot; and &quot;checkBox&quot;.</li>
-<li> ...</li>
+<li>Non-standardized, tool specific annotations with prefix &quot;__Dymola_&quot; replaced by
+    standard equivalent annotations.
+    In particular: &quot;choicesAllMatching&quot; and &quot;checkBox&quot;.</li>
+<li>...</li>
 </ul>
 </html>"));
     end Version_2_3_5_DV;
