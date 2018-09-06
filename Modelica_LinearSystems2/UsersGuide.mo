@@ -1213,7 +1213,7 @@ Improvements in this version:
     (<code>readMatrixOnFileSize</code>, <code>readMatrixInternal</code>
     and <code>readMatrixGain</code>). Instead, corresponding functions from
     <a href=\"modelica://Modelica.Utilities.Streams\">Modelica.Utilities.Streams</a> are used.
-    A conversion script exists to perform the conversion automatically.
+    A conversion script exists to perform the conversion automatically.</li>
 </ul>
 
 
