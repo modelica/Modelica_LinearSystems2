@@ -1216,8 +1216,9 @@ Bug fixes performed in this version:
 </h4>
 
 <ul>
-<li> Non-standardized, tool specific annotation &quot;Interval&quot; replaced by
-     standard equivalent annotation &quot;Interval&quot; (3 times)</li>
+<li> Non-standardized, tool specific annotations with prefix &quot;__Dymola_&quot; replaced by
+     standard equivalent annotations.
+     In particular: &quot;choicesAllMatching&quot; and &quot;checkBox&quot;.</li>
 <li> ...</li>
 </ul>
 </html>"));
