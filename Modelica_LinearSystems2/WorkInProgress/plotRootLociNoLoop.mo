@@ -4,6 +4,7 @@ function plotRootLociNoLoop
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.WorkInProgress.RootLocusOld.Types.MarkerStyles;
+  import Simulator = DymolaCommands.SimulatorAPI;
 
   input String modelName="Modelica.Mechanics.Rotational.Examples.First"
     "Name of the Modelica model"
@@ -80,9 +81,9 @@ algorithm
   color := [linspace(markerColorMin[1],markerColorMax[1],nVarMin),linspace(markerColorMin[2],markerColorMax[2],nVarMin),linspace(markerColorMin[3],markerColorMax[3],nVarMin)];
 
   parValues:=linspace(modelParams[1].parMin,modelParams[1].parMax,nVarMin);
-  ok := translateModel(modelName);
+  ok := Simulator.translateModel(modelName);
   assert(ok, "Translation of model " + modelName + " failed.");
-  ok:=simulateMultiExtendedModel(
+  ok := Simulator.simulateMultiExtendedModel(
     problem=modelName,
     startTime=0,
     stopTime=0,

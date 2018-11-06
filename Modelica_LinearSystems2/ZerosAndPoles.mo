@@ -4247,6 +4247,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension;
+      import Simulator = DymolaCommands.SimulatorAPI;
 
       input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
       input Real T_linearize = 0
@@ -4255,12 +4256,12 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
     protected
       String fileName2 = fileName + ".mat";
-      Boolean OK1 = simulateModel(
+      Boolean OK1 = Simulator.simulateModel(
             problem=modelName,
             startTime=0,
             stopTime=T_linearize);
-      Boolean OK2 = importInitial("dsfinal.txt");
-      Boolean OK3 = linearizeModel(
+      Boolean OK2 = Simulator.importInitial("dsfinal.txt");
+      Boolean OK3 = Simulator.linearizeModel(
             problem=modelName,
             resultFile=fileName,
             startTime=T_linearize,

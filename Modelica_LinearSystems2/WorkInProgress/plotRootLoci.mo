@@ -4,6 +4,7 @@ function plotRootLoci
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.WorkInProgress.RootLocusOld.Types.MarkerStyles;
+  import Simulator = DymolaCommands.SimulatorAPI;
 
   input String modelName="Modelica.Mechanics.Rotational.Examples.First"
     "Name of the Modelica model"
@@ -74,9 +75,9 @@ algorithm
 
   if not simulate then // and simulationOptions.t_linearize==0
     // Linearization of all parameter variants at once
-    ok := translateModel(modelName);
+    ok := Simulator.translateModel(modelName);
     assert(ok, "Translation of model " + modelName + " failed.");
-    ok:=simulateMultiExtendedModel(
+    ok := Simulator.simulateMultiExtendedModel(
       problem=modelName,
       startTime=0,
       stopTime=0,
@@ -93,7 +94,7 @@ algorithm
       fileName2 := fileName+String(i);
       Modelica.Utilities.Streams.print("  ...linearizing "+modelName2);
 
-      ok := simulateModel(
+      ok := Simulator.simulateModel(
         problem=modelName2,
         startTime=0,
         stopTime=simulationOptions.t_linearize,
@@ -102,8 +103,8 @@ algorithm
         outputInterval=simulationOptions.outputInterval,
         tolerance = simulationOptions.tolerance,
         fixedstepsize = simulationOptions.fixedStepSize);
-      ok := importInitial("dsfinal.txt");
-      ok := linearizeModel(
+      ok := Simulator.importInitial("dsfinal.txt");
+      ok := Simulator.linearizeModel(
         problem=modelName2,
         resultFile=fileName2,
         startTime=simulationOptions.t_linearize,

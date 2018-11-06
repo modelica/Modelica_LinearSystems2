@@ -47,22 +47,31 @@ algorithm
 
   // Plot real and imaginary part of eigenvalues
   if removePrevious then
-    ok := removePlots();
-    id := createPlot(id= 1,
-      position=position,
-      leftTitleType = 2,
-      leftTitle = "Im",
-      bottomTitleType = 2,
-      bottomTitle = "Re",
-      autoerase= false,
-      grid=grid,
-      heading=heading,
-      legend=useLegend,
-      erase= false,
-      legendLocation = 2,
-      legendHorizontal = false);
+    ok := DymolaCommands.Plot.removePlots();
+    id := DymolaCommands.Plot.createPlot(id=1,
+                    position=position,
+                    y={""},
+                    heading=heading,
+                    erase=false,
+                    autoscale=true,
+                    autoerase=false,
+                    grid=grid,
+                    legend=useLegend,
+                    legendLocation=2,
+                    legendHorizontal=false,
+                    legends={""},
+                    leftTitleType = 2,
+                    leftTitle = "Im",
+                    bottomTitleType = 2,
+                    bottomTitle = "Re",
+                    colors=fill({-1, -1, -1}, 1),
+                    patterns={LinePattern.Solid},
+                    markers={MarkerStyle.None},
+                    thicknesses={0.25},
+                    axes={1},
+                    displayUnits={""});
   end if;
-  ok := plotArray(
+  ok := DymolaCommands.Plot.plotArray(
     x= eigenvalues[:, 1],
     y= eigenvalues[:, 2],
     legend=legend,
@@ -71,7 +80,7 @@ algorithm
     marker = markerStyle2,
     erase=false);
 
-//   removePlots();
+//   DymolaCommands.Plot.removePlots();
 // function createPlot "Create plot window"
 //   input Integer id := 0 "Window id";
 //   input Integer position[4] "Window Position";
