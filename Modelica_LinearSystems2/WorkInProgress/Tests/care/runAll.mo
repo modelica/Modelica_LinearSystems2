@@ -36,9 +36,8 @@ algorithm
     functions2[i] := h+functions2[i] +"(\""+outputFile+"\" )";
     Modelica.Utilities.Streams.print(functions2[i],careMos);
   end for;
-    ok := RunScript(careMos);
+    ok := DymolaCommands.SimulatorAPI.RunScript(careMos);
 
   numberOfFunctions := n;
 
-  annotation(__Dymola_interactive=true);
 end runAll;

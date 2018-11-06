@@ -58,10 +58,9 @@ algorithm
     end if;
     end if;
   end for;
-  ok := RunScript(designMos);
+  ok := DymolaCommands.SimulatorAPI.RunScript(designMos);
 //ok := true;
 
   numberOfFunctions := n;
 
-  annotation(__Dymola_interactive=true);
 end runAll;
