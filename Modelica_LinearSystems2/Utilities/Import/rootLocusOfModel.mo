@@ -5,14 +5,14 @@ function rootLocusOfModel
 
   import Modelica.Utilities.Streams;
   import Modelica_LinearSystems2.Utilities.Types.Grid;
+  import Simulator = DymolaCommands.SimulatorAPI;
 
   input String modelName "Name of the Modelica model"
     annotation (Dialog(__Dymola_translatedModel));
   input Modelica_LinearSystems2.Records.ParameterVariation modelParam[:]
     "Model parameter to be varied (exactly one) and values for other parameters";
-  input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization
-    simulationSetup=
-      Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
+  input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
+    Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
     "Simulation options" annotation (Dialog(enable=not linearizeAtInitial));
   input Boolean reorder=false
     "True, if eigen values shall be reordered so that they are closest to the previous ones";
@@ -62,7 +62,7 @@ algorithm
       "Only one parameter defined => its grid must be defined either Equidistant or Logarithmic");
     np := modelParam[1].nPoints;
     index_p_var := 1;
-    OK := translateModel(modelName);
+    OK := Simulator.translateModel(modelName);
 
   else
     // More as one parameter defined; find the parameter to be varied
@@ -90,7 +90,7 @@ algorithm
     np := modelParam[index_p_var].nPoints;
 
     // Translate model and set the new parameter values
-    OK := translateModel(modelName);
+    OK := Simulator.translateModel(modelName);
     assert(OK, "Translation of model " + modelName + " failed.");
     for i in 1:nParam loop
       if i <> index_p_var then
@@ -154,7 +154,7 @@ algorithm
   is := 1:np;
   if simulationSetup.linearizeAtInitial then
     // Linearization of all parameter variants at once at the initial point
-    OK := simulateMultiExtendedModel(
+    OK := Simulator.simulateMultiExtendedModel(
       problem=modelName,
       startTime=0,
       stopTime=0,

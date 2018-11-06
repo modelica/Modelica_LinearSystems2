@@ -505,6 +505,7 @@ in a least squares sense.
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica.Utilities.Strings;
     import Complex;
+    import DymolaCommands.Plot.plotArray;
 
     input Polynomial p "Polynomial to be plotted";
     input Integer nPoints(min=2) = 200 "Number of points";

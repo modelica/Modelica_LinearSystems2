@@ -3509,7 +3509,7 @@ This function calculates the zeros, poles and gain of the corresponding transfer
       import Modelica_LinearSystems2.StateSpace;
 
       input StateSpace ss "State space system";
-      output Complex eigvalues[size(ss.A, 1)] =
+      output Complex eigvalues[size(ss.A, 1)]=
         Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(ss.A)
         "Eigen values of the system";
     algorithm
@@ -9690,6 +9690,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
       import Modelica;
       import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2.StateSpace;
+      import Simulator = DymolaCommands.SimulatorAPI;
 
       input String modelName "Name of the model"
        annotation(Dialog(__Dymola_translatedModel(translate=true)));
@@ -9701,13 +9702,13 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
     protected
       String fileName2 = fileName + ".mat"
         "Name of the result file with extension";
-      Boolean OK1 = simulateModel(
+      Boolean OK1 = Simulator.simulateModel(
               problem=modelName,
               startTime=0,
               stopTime=T_linearize,
               method=method);
-      Boolean OK2 = importInitial("dsfinal.txt");
-      Boolean OK3 = linearizeModel(
+      Boolean OK2 = Simulator.importInitial("dsfinal.txt");
+      Boolean OK3 = Simulator.linearizeModel(
               problem=modelName,
               resultFile=fileName,
               startTime=T_linearize,

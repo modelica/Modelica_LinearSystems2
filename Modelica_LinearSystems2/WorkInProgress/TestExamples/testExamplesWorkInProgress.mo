@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.TestExamples;
 function testExamplesWorkInProgress "Test all examples from package WorkInProgress"
+  import DymolaCommands.SimulatorAPI.simulateModel;
 
 algorithm
   simulateModel("Modelica_LinearSystems2.WorkInProgress.Controller.Examples.TestComponents");

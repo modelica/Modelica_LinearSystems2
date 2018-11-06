@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.TestExamples;
 function testExamplesControllers "Test all examples from package Controllers"
+  import DymolaCommands.SimulatorAPI.simulateModel;
 
   output Boolean ok "True, if all OK";
 algorithm

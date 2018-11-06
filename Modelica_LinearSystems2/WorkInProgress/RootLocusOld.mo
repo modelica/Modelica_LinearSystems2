@@ -19,17 +19,14 @@ package RootLocusOld
     "Color map function for parameter variations" annotation(choicesAllMatching=true);
 */
 
-    input
-      Modelica_LinearSystems2.WorkInProgress.RootLocusOld.ParameterVariation
-                                                             modelParam[:]
+    input Modelica_LinearSystems2.WorkInProgress.RootLocusOld.ParameterVariation modelParam[:]
       "Model parameter to be varied";
 
     input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
         Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
       "Simulation options it t_linearize > 0";
 
-    input
-      Modelica_LinearSystems2.WorkInProgress.RootLocusOld.RootLocusDiagramOld     diagram
+    input Modelica_LinearSystems2.WorkInProgress.RootLocusOld.RootLocusDiagramOld diagram
       "Diagram properties of the root locus";
 
   protected
@@ -61,25 +58,42 @@ package RootLocusOld
                  diagram.yTopLeft,
                  diagram.diagramWidth,
                  diagram.heightRatio*diagram.diagramWidth}*mmToPixel;
-    id:= createPlot(id=-1,
+    id := DymolaCommands.Plot.createPlot(id=-1,
                     position=integer(position),
-                    erase=true,
+                    y={""},
+                    heading=heading,
+                    erase=false,
                     autoscale=true,
                     autoerase=false,
-                    subPlot=1,
-                    heading=heading,
                     grid=diagram.grid,
+                    subPlot=1,
                     logX=diagram.logX,
                     logY=diagram.logY,
-                    bottomTitle=diagram.xLabel,
-                    leftTitle=diagram.yLabel,
                     legend=true,
+                    legendLocation=Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation.Right,
                     legendHorizontal=false,
-                    legendLocation=Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation.Right);
+                    legends={""},
+                    leftTitle=diagram.yLabel,
+                    bottomTitle=diagram.xLabel,
+                    colors=fill({-1, -1, -1}, 1),
+                    patterns={LinePattern.Solid},
+                    markers={MarkerStyle.None},
+                    thicknesses={0.25},
+                    axes={1},
+                    displayUnits={""});
+  //   id:= createPlot(id=-1,
+  //                   erase=true,
+  //                   autoscale=true,
+  //                   autoerase=false,
+  //                   heading=heading,
+  //                   grid=diagram.grid,
+  //                   legend=true,
+  //                   legendHorizontal=false,
+  //                   legendLocation=Modelica_LinearSystems2.Utilities.Plot.Types.LegendLocation.Right);
 
     // Initialize computation
     dp := (modelParam[1].Max-modelParam[1].Min)/(nVar-1);
-    ok:=translateModel(modelName);
+    ok := DymolaCommands.SimulatorAPI.translateModel(modelName);
     Modelica.Utilities.Files.removeFile("dsin.mat");
 
     // Loop over the selected parameter range
@@ -96,7 +110,8 @@ package RootLocusOld
       eigenValues :=Modelica.Math.Matrices.eigenValues(A);
 
       // Plot root loci
-      ok :=plotArray(eigenValues[:,1],
+      ok := DymolaCommands.Plot.plotArray(
+                     eigenValues[:,1],
                      eigenValues[:,2],
                      legend=if i==1 or i==nVar or mod(i,nVar/10) == 0 then String(parValue,significantDigits=3) else "",
                      color=integer(color[i, :]),
@@ -240,6 +255,7 @@ over the load inertia <b>Jload</b>:
   function linearize2
     "Linearize a model after simulation up to a given time and return only the A matrix"
     import Modelica.Utilities.Streams;
+    import Simulator = DymolaCommands.SimulatorAPI;
 
     input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
     input Modelica.SIunits.Time t_linearize= 0
@@ -254,12 +270,12 @@ over the load inertia <b>Jload</b>:
 
     // Simulate until t_linearize and then linearize at this time instant
     Boolean OK1 = if t_linearize <= 0.0 then true else
-                     simulateModel(problem=modelName, startTime=0, stopTime=t_linearize,
+                     Simulator.simulateModel(problem=modelName, startTime=0, stopTime=t_linearize,
                                    method=simulationSetup.method,
                                    tolerance=simulationSetup.tolerance,
                                    fixedstepsize=simulationSetup.fixedStepSize);
-    Boolean OK2 = if t_linearize <= 0.0 then true else importInitial("dsfinal.txt");
-    Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
+    Boolean OK2 = if t_linearize <= 0.0 then true else Simulator.importInitial("dsfinal.txt");
+    Boolean OK3 = Simulator.linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
 
     // Read linear system from file
     Integer ABCDsizes[2]=Streams.readMatrixSize(fileName2, "ABCD");
@@ -350,22 +366,31 @@ within a model.
 
     // Plot real and imaginary part of eigenvalues
     if removePrevious then
-      ok := removePlots();
-      createPlot(id= 1,
-        position=position,
-        leftTitleType = 2,
-        leftTitle = "Im",
-        bottomTitleType = 2,
-        bottomTitle = "Re",
-        autoerase= false,
-        grid=grid,
-        heading=heading,
-        legend=useLegend,
-        erase= false,
-        legendLocation = 2,
-        legendHorizontal = false);
+      ok := DymolaCommands.Plot.removePlots();
+      DymolaCommands.Plot.createPlot(id=1,
+                      position=position,
+                      y={""},
+                      heading=heading,
+                      erase=false,
+                      autoscale=true,
+                      autoerase=false,
+                      grid=grid,
+                      legend=useLegend,
+                      legendLocation=2,
+                      legendHorizontal=false,
+                      legends={""},
+                      leftTitleType = 2,
+                      leftTitle = "Im",
+                      bottomTitleType = 2,
+                      bottomTitle = "Re",
+                      colors=fill({-1, -1, -1}, 1),
+                      patterns={LinePattern.Solid},
+                      markers={MarkerStyle.None},
+                      thicknesses={0.25},
+                      axes={1},
+                      displayUnits={""});
     end if;
-    plotArray(
+    DymolaCommands.Plot.plotArray(
       x= eigenvalues[:, 1],
       y= eigenvalues[:, 2],
       legend=legend,
@@ -373,7 +398,7 @@ within a model.
       pattern = LinePattern.None,
       marker = markerStyle2);
 
-  //   removePlots();
+  //   DymolaCommands.Plot.removePlots();
   // function createPlot "Create plot window"
   //   input Integer id := 0 "Window id";
   //   input Integer position[4] "Window Position";

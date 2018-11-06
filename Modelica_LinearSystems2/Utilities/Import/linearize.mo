@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Utilities.Import;
 function linearize "Linearize a model after simulation up to a given time"
 
   import Modelica.Utilities.Streams;
+  import Simulator = DymolaCommands.SimulatorAPI;
 
   input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
   input Modelica.SIunits.Time t_linearize= 0
@@ -12,9 +13,9 @@ protected
   String fileName2 = fileName+".mat";
 
   // Simulate until t_linearize and then linearize at this time instant
-  Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=t_linearize);
-  Boolean OK2 = importInitial("dsfinal.txt");
-  Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
+  Boolean OK1 = Simulator.simulateModel(problem=modelName, startTime=0, stopTime=t_linearize);
+  Boolean OK2 = Simulator.importInitial("dsfinal.txt");
+  Boolean OK3 = Simulator.linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
 
   // Read linear system from file
   Integer xuy[3] = Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension(fileName2, "ABCD");
@@ -25,7 +26,7 @@ protected
   String xuyName[nx + nu + ny] = readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
   // Model is already translated. Reset to the default initial conditions
-  Boolean OK4 = translateModel(problem=modelName);
+  Boolean OK4 = Simulator.translateModel(problem=modelName);
 public
   output Real A[nx,nx] =  ABCD[1:nx, 1:nx] "A-matrix";
   output Real B[nx,nu] =  ABCD[1:nx, nx + 1:nx + nu] "B-matrix";

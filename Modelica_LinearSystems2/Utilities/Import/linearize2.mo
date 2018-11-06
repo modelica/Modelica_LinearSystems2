@@ -4,6 +4,7 @@ function linearize2
   extends Modelica.Icons.Function;
   import Modelica.Utilities.Streams;
   import Modelica.Utilities.Streams.print;
+  import Simulator = DymolaCommands.SimulatorAPI;
 
   input String modelName "Name of the Modelica model"
     annotation (Dialog(__Dymola_translatedModel));
@@ -22,7 +23,7 @@ protected
     input Modelica_LinearSystems2.Records.SetParameter modelParam[:];
     output Boolean OK;
   algorithm
-    OK := translateModel(modelName);
+    OK := Simulator.translateModel(modelName);
     assert(OK, "Translation of model " + modelName + " failed.");
     for i in 1:size(modelParam, 1) loop
       OK := SetVariable(modelParam[i].Name, modelParam[i].Value);
@@ -37,7 +38,7 @@ protected
 
   // Simulate until t_linearize and then linearize at this time instant
   Boolean OK2 = if simulationSetup.linearizeAtInitial then true else
-    simulateModel(
+    Simulator.simulateModel(
       problem=modelName,
       startTime=simulationSetup.t_start,
       stopTime=simulationSetup.t_linearize,
@@ -45,15 +46,15 @@ protected
       tolerance=simulationSetup.tolerance,
       fixedstepsize=simulationSetup.fixedStepSize);
   Boolean OK3 = if simulationSetup.linearizeAtInitial then true else
-    importInitial("dsfinal.txt");
-  Boolean OK4 = linearizeModel(
+    Simulator.importInitial("dsfinal.txt");
+  Boolean OK4 = Simulator.linearizeModel(
       problem=modelName,
       resultFile=fileName,
       startTime=simulationSetup.t_linearize,
       stopTime=simulationSetup.t_linearize);
 
   // Model is already translated. Reset to the default initial conditions
-  Boolean OK5 = translateModel(problem=modelName);
+  Boolean OK5 = Simulator.translateModel(problem=modelName);
 public
   output Modelica_LinearSystems2.StateSpace ss=
     Modelica_LinearSystems2.StateSpace.Internal.read_dslin(fileName)

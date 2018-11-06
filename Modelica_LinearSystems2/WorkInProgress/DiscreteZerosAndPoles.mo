@@ -1304,6 +1304,7 @@ processing.
     import ZerosAndPoles =
         Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
     import Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension;
+    import Simulator = DymolaCommands.SimulatorAPI;
 
     input String modelName "Name of the Modelica model";
     input Real T_linearize=0
@@ -1312,12 +1313,12 @@ processing.
 
     protected
     String fileName2=fileName + ".mat";
-    Boolean OK1=simulateModel(
+    Boolean OK1=Simulator.simulateModel(
           problem=modelName,
           startTime=0,
           stopTime=T_linearize);
-    Boolean OK2=importInitial("dsfinal.txt");
-    Boolean OK3=linearizeModel(
+    Boolean OK2=Simulator.importInitial("dsfinal.txt");
+    Boolean OK3=Simulator.linearizeModel(
           problem=modelName,
           resultFile=fileName,
           startTime=T_linearize,

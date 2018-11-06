@@ -1287,7 +1287,7 @@ encapsulated package Analysis
     import Modelica_LinearSystems2.DiscreteStateSpace;
 
     input DiscreteStateSpace dss "Discrete state space system";
-    output Complex eigvalues[size(dss.A, 1)] =
+    output Complex eigvalues[size(dss.A, 1)]=
       Modelica_LinearSystems2.Math.ComplexAdvanced.eigenValues(dss.A)
       "Eigenvalues of the system";
   algorithm
@@ -3508,6 +3508,7 @@ The file must contain
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.DiscreteStateSpace;
+      import Simulator = DymolaCommands.SimulatorAPI;
 
       input String modelName "Name of the Modelica model"
         annotation (Dialog(__Dymola_translatedModel(translate=true)));
@@ -3519,12 +3520,12 @@ The file must contain
 
     protected
       String fileName2=fileName + ".mat";
-      Boolean OK1=simulateModel(
+      Boolean OK1=Simulator.simulateModel(
       problem=modelName,
       startTime=0,
       stopTime=T_linearize);
-      Boolean OK2=importInitial("dsfinal.txt");
-      Boolean OK3=linearizeModel(
+      Boolean OK2=Simulator.importInitial("dsfinal.txt");
+      Boolean OK3=Simulator.linearizeModel(
       problem=modelName,
       resultFile=fileName,
       startTime=T_linearize,

@@ -1496,10 +1496,11 @@ with
     import Modelica_LinearSystems2.StateSpace;
     import Modelica_LinearSystems2.DiscreteStateSpace;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
+    import Simulator = DymolaCommands.SimulatorAPI;
 
     input String modelName "Name of the Modelica model"  annotation(Dialog(__Dymola_translatedModel(translate=true)));
     input Real T_linearize = 0
-        "point in time of simulation to linearize the model";
+        "Point in time of simulation to linearize the model";
     input String fileName = "dslin" "Name of the result file";
     input Modelica.SIunits.Time Ts = 1 "Sample time";
     input Modelica_LinearSystems2.Utilities.Types.Method method=
@@ -1507,9 +1508,9 @@ with
 
     protected
     String fileName2 = fileName + ".mat";
-    Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
-    Boolean OK2 = importInitial("dsfinal.txt");
-    Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
+    Boolean OK1 = Simulator.simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
+    Boolean OK2 = Simulator.importInitial("dsfinal.txt");
+    Boolean OK3 = Simulator.linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
     Integer xuy[3] = Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension(fileName2, "ABCD");
     Integer nx = xuy[1];
     Integer nu = xuy[2];

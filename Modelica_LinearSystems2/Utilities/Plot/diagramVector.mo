@@ -48,41 +48,49 @@ algorithm
       position[4] := height[i];
     end if;
 
-    id:= createPlot(id=id,
+    id:= DymolaCommands.Plot.createPlot(id=id,
                     position=position,
+                    y={""},
+                    heading=diagram[i].heading,
                     erase=true,
                     autoscale=true,
                     autoerase=false,
-                    subPlot=i,
-                    heading=diagram[i].heading,
                     grid=diagram[i].grid,
-                    logX=diagram[i].logX,
-                    logY=diagram[i].logY,
-                    bottomTitle=diagram[i].xLabel,
-                    leftTitle=diagram[i].yLabel,
-                    color=device.autoLineColor,
                     legend=diagram[i].legend,
+                    legendLocation=Integer(diagram[i].legendLocation),
                     legendHorizontal=diagram[i].legendHorizontal,
                     legendFrame=diagram[i].legendFrame,
-                    legendLocation=Integer(diagram[i].legendLocation));
+                    logX=diagram[i].logX,
+                    logY=diagram[i].logY,
+                    legends={""},
+                    subPlot=i,
+                    leftTitle=diagram[i].yLabel,
+                    bottomTitle=diagram[i].xLabel,
+                    colors=fill({-1, -1, -1}, 1),
+                    patterns={LinePattern.Solid},
+                    markers={MarkerStyle.None},
+                    thicknesses={0.25},
+                    axes={1},
+                    displayUnits={""});
 
     for j in 1:size(diagram[i].curve,1) loop
       if diagram[i].curve[j].autoLine then
-        OK :=plotArray(diagram[i].curve[j].x,
-                       diagram[i].curve[j].y,
-                       legend=diagram[i].curve[j].legend,
-                       id=id,
-                       erase=false);
+        OK := DymolaCommands.Plot.plotArray(
+          diagram[i].curve[j].x,
+          diagram[i].curve[j].y,
+          legend = diagram[i].curve[j].legend,
+          id = id,
+          erase = false);
       else
-        OK :=plotArray(diagram[i].curve[j].x,
-                       diagram[i].curve[j].y,
-                       legend=diagram[i].curve[j].legend,
-                       color=diagram[i].curve[j].lineColor,
-                       pattern=Internal.convertToDymolaPattern(diagram[i].curve[j].linePattern),
-                       marker=Internal.convertToDymolaMarker(diagram[i].curve[j].lineSymbol),
-                       thickness=diagram[i].curve[j].lineThickness,
-                       id=id,
-                       erase=false);
+        OK := DymolaCommands.Plot.plotArray(diagram[i].curve[j].x,
+          diagram[i].curve[j].y,
+          legend = diagram[i].curve[j].legend,
+          color = diagram[i].curve[j].lineColor,
+          pattern = Internal.convertToDymolaPattern(diagram[i].curve[j].linePattern),
+          marker = Internal.convertToDymolaMarker(diagram[i].curve[j].lineSymbol),
+          thickness = diagram[i].curve[j].lineThickness,
+          id = id,
+          erase = false);
       end if;
     end for;
   end for;

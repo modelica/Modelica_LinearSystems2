@@ -35,27 +35,34 @@ algorithm
                device.diagramWidth,
                diagram.heightRatio*device.diagramWidth}*mmToPixel;
 
-  id:= createPlot(id=-1,
+  id:= DymolaCommands.Plot.createPlot(id=-1,
                   position=integer(position),
+                  y={""},
+                  heading=diagram.heading,
                   erase=true,
                   autoscale=true,
                   autoerase=false,
-                  subPlot=1,
-                  heading=diagram.heading,
                   grid=diagram.grid,
-                  logX=diagram.logX,
-                  logY=diagram.logY,
-                  bottomTitle=diagram.xLabel,
-                  leftTitle=diagram.yLabel,
-                  color=device.autoLineColor,
                   legend=diagram.legend,
+                  legendLocation=Integer(diagram.legendLocation),
                   legendHorizontal=diagram.legendHorizontal,
                   legendFrame=diagram.legendFrame,
-                  legendLocation=Integer(diagram.legendLocation));
+                  logX=diagram.logX,
+                  logY=diagram.logY,
+                  legends={""},
+                  subPlot=1,
+                  leftTitle=diagram.yLabel,
+                  bottomTitle=diagram.xLabel,
+                  colors=fill({-1, -1, -1}, 1),
+                  patterns={LinePattern.Solid},
+                  markers={MarkerStyle.None},
+                  thicknesses={0.5},
+                  axes={1},
+                  displayUnits={""});
 
   // Plot parameterized curve
   if nProperties == 0 then
-    plotParametricCurves(
+    DymolaCommands.Plot.plotParametricCurves(
                   x=diagram.X,
                   y=diagram.Y,
                   s=diagram.s,
@@ -64,18 +71,23 @@ algorithm
                   sName=diagram.sName,
                   legends=diagram.legends,
                   id = id,
-                  labelWithS=diagram.labelWithS);
+                  labelWithS=diagram.labelWithS,
+                  colors=fill({-1, -1, -1}, size(diagram.Y, 1)),
+                  patterns=fill(LinePattern.Solid, size(diagram.Y, 1)),
+                  markers=fill(MarkerStyle.None, size(diagram.Y, 1)),
+                  thicknesses=fill(0.25, size(diagram.Y, 1)),
+                  axes=fill(1, size(diagram.Y, 1)));
   else
     for i in 1:nBranches loop
       k := i;
-      j :=mod(k, nProperties) + 1
+      j := mod(k, nProperties) + 1
       "if k is replaced by i, Dymola gives an error about assignment of Real to Integer";
       colors[i,:]    :=diagram.curveProperties[j].lineColor;
       patterns[i]    :=diagram.curveProperties[j].linePattern;
       symbols[i]     :=diagram.curveProperties[j].lineSymbol;
       thicknesses[i] :=diagram.curveProperties[j].lineThickness;
     end for;
-    plotParametricCurves(
+    DymolaCommands.Plot.plotParametricCurves(
       x=diagram.X,
       y=diagram.Y,
       s=diagram.s,
@@ -88,7 +100,8 @@ algorithm
       colors=colors,
       patterns=Internal.convertToDymolaPattern(patterns),
       markers=Internal.convertToDymolaMarker(symbols),
-      thicknesses=thicknesses);
+      thicknesses=thicknesses,
+      axes=fill(1, size(diagram.Y, 1)));
   end if;
 
 /*
