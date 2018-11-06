@@ -36,7 +36,7 @@ algorithm
   end for;
   ss.C[1, 1:ll] := fill(1, ll);
 
-  tf := StateSpace.Conversion.toTransferFunction(ss, 1e-4);
+  tf[1,1] := StateSpace.Conversion.toTransferFunction(ss, 1e-4);
   for i1 in 1:size(ss.C, 1) loop
     for i2 in 1:size(ss.B, 2) loop
       Modelica.Utilities.Streams.print("TransferFunction[" + String(i1) + ","
@@ -46,5 +46,4 @@ algorithm
 
   tf1 := tf[1, 1];
   ok := true;
-  annotation(__Dymola_interactive=true);
 end conversioToTransferFunction_bench;
