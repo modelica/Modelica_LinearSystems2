@@ -617,7 +617,8 @@ The outputs y and x are calculated from the system equations of the discrete sta
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
             x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
-    annotation(__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>impulseResponse</b>(dtf, tSpan, x0)
@@ -683,7 +684,8 @@ The outputs y and x of the discrete state space systrem are calculated for each 
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
             x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>stepResponse</b>(dtf, tSpan, x0)
@@ -750,7 +752,8 @@ The outputs y and x of the discrete state space systrem are calculated for each 
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
             x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>rampResponse</b>(dtf, tSpan, x0)
@@ -819,7 +822,8 @@ The outputs y and x of the discrete state space systrem are calculated for each 
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial,
             x0=x0);
 
-    annotation(__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
  <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>initialResponse</b>(x0, dtf, tSpan)
@@ -1565,7 +1569,8 @@ with
     //     end for;
     //   end for;
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 </html>"));
   end fromModel;
 

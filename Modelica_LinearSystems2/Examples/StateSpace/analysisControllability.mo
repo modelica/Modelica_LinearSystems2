@@ -67,7 +67,6 @@ algorithm
   ok := true;
 
   annotation (
-    __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
 This example shows the usage of function 

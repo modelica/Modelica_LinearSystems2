@@ -3,5 +3,4 @@ model DiscretizationInitialState
   extends Modelica_LinearSystems2.Controllers.Examples.Discretization1(
     sampleClock(initType=Modelica_LinearSystems2.Controllers.Types.Init.InitialState));
 
-  annotation (__Dymola_interactive=true);
 end DiscretizationInitialState;

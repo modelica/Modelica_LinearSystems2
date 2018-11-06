@@ -16,7 +16,8 @@ function importFromModel
     T_linearize=T_linearize);
 algorithm
 
-annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This example shows how to generate a linear discrete state space system
 by linearization of a (nonlinear) Modelica model.

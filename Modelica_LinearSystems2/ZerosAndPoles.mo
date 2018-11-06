@@ -918,7 +918,8 @@ algorithm
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
           x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
-  annotation(__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = ZerosAndPoles.Analysis.<b>impulseResponse</b>(zp, dt, tSpan)
@@ -979,7 +980,8 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.I
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
           x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
-  annotation(__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = ZerosAndPoles.Analysis.<b>stepResponse</b>(zp, dt, tSpan)
@@ -1041,7 +1043,8 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.S
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
           x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
-  annotation(__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = ZerosAndPoles.Analysis.<b>rampResponse</b>(zp, dt, tSpan)
@@ -1106,7 +1109,8 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.R
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial,
           x0=x0);
 
-  annotation(__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = ZerosAndPoles.Analysis.<b>initialResponse</b>(zp, dt, tSpan, x0)
@@ -4298,7 +4302,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
       zp := StateSpace.Conversion.toZerosAndPolesMIMO(result);
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = ZerosAndPoles.Import.<b>fromModel</b>(modelName, T_linearize, fileName)

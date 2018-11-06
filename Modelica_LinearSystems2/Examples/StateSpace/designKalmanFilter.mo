@@ -19,7 +19,8 @@ function designKalmanFilter "Example for Kalman filter design"
 algorithm
   (L,kss) := StateSpace.Design.kalmanFilter(ss, Q, R);
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This example demonstrates the computatrion of a Kalman filter by calling function 
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Design.kalmanFilter\">StateSpace.Design.kalmanFilter</a>.

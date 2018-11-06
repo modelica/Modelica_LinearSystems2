@@ -20,4 +20,6 @@ algorithm
   simulateModel("Modelica_LinearSystems2.WorkInProgress.Tests.Examples.SimpleStateSpaceSystem");
 
   Modelica.Utilities.Streams.print("testExamplesWorkInProgress done!");
+  annotation (
+    __Dymola_interactive=true);
 end testExamplesWorkInProgress;

@@ -38,8 +38,8 @@ algorithm
     end for;
   end for;
   ok := true;
+
   annotation (
-    __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
 This example demonstrates the conversion of a MIMO zeros-and-poles system into a state space system.

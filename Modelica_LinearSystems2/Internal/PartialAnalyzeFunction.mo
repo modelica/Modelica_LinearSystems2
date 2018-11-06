@@ -13,5 +13,4 @@ partial function PartialAnalyzeFunction
 protected
   Modelica_LinearSystems2.StateSpace ssLin=
        Modelica_LinearSystems2.Utilities.Import.linearize2(modelName, modelParam, simulationSetup);
-annotation(__Dymola_interactive=true);
 end PartialAnalyzeFunction;

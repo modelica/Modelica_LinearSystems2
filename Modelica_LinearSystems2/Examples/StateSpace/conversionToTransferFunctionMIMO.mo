@@ -39,7 +39,9 @@ algorithm
     end for;
   end for;
   ok := true;
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+
+  annotation (
+    Documentation(info="<html>
 <p>
 This example demonstrates the conversion from a state space representation of a system into a MIMO transfer function. 
 </p>

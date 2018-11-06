@@ -535,7 +535,8 @@ x are calculated for each time step t=k*dt.
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
           x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
 
-    annotation(__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = TransferFunction.Analysis.<b>timeResponse</b>(tf, dt, tSpan, responseType, x0)
@@ -599,7 +600,8 @@ and x are calculated for each time step t=k*dt.
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
           x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
 
-    annotation(__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = TransferFunction.Analysis.<b>stepResponse</b>(tf, dt, tSpan, x0)
@@ -666,7 +668,8 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
           x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
 
-    annotation(__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = TransferFunction.Analysis.<b>rampResponse</b>(tf, dt, tSpan, x0)
@@ -736,7 +739,8 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial,
           x0=x0);
 
-    annotation(__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = TransferFunction.Analysis.<b>initialResponse</b>(tf, dt, tSpan, x0)
@@ -2620,7 +2624,8 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
 
       tf := Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunctionMIMO(result);
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 tf = TransferFunction.Import.<b>fromModel</b>(modelName, T_linearize, fileName)

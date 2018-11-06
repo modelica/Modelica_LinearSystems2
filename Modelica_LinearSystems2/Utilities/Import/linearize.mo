@@ -39,7 +39,7 @@ public
   output String stateNames[nx] =  xuyName[1:nx] "Modelica names of states";
 algorithm
 
-   annotation (__Dymola_interactive=true, Documentation(info="<html>
+   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (A,B,C,D,inputNames,outputNames,stateNames) = Utilities.Import.linearize(

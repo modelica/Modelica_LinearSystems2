@@ -31,7 +31,9 @@ algorithm
   Modelica.Utilities.Streams.print("StateSpace = " + String(ss)+"\n");
   Modelica.Utilities.Streams.print("TransferFunction = " + String(tf));
   ok := true;
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+
+  annotation (
+    Documentation(info="<html>
 <p>
 This example demonstrates the conversion of a SISO transfer function  system into a state space system.
 </p>
