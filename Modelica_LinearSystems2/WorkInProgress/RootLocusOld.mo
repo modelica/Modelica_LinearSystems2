@@ -287,7 +287,8 @@ over the load inertia <b>Jload</b>:
     output Real A[nx,nx] =  ABCD[1:nx, 1:nx] "A-matrix";
   algorithm
 
-     annotation (__Dymola_interactive=true, Documentation(info="<html>
+     annotation (
+       Documentation(info="<html>
 <p>
 This function is identical to function
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Import.linearize\">linearize</a>

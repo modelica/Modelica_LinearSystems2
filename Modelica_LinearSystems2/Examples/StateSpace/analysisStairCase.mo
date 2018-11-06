@@ -65,7 +65,6 @@ algorithm
   ok := true;
 
   annotation (
-    __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
 This example shows the usage of the staircase algorithm to transform a state space system in staircase form to analyze controllability.

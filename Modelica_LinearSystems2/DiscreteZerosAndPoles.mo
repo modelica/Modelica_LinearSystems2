@@ -983,7 +983,8 @@ Starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
           x0=zeros(DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)));
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x)=DiscreteZerosAndPoles.Analysis.<b>impulseResponse</b>(dzp, tSpan, x0)
@@ -1061,7 +1062,8 @@ DiscreteZerosAndPoles.Analysis.timeResponse(dzp, tSpan, response=Types.TimeRespo
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
           x0=zeros(DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)));
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x)=DiscreteZerosAndPoles.Analysis.<b>stepResponse</b>(dzp, tSpan, x0)
@@ -1137,7 +1139,8 @@ DiscreteZerosAndPoles.Analysis.timeResponse(dzp, tSpan, response=Types.TimeRespo
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
           x0=zeros(DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)));
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x)=DiscreteZerosAndPoles.Analysis.<b>rampResponse</b>(ss, tSpan, x0)
@@ -1214,7 +1217,8 @@ DiscreteZerosAndPoles.Analysis.timeResponse(dzp, tSpan, response=Types.TimeRespo
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial,
           x0=x0);
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x)=DiscreteZerosAndPoles.Analysis.<b>initialResponse</b>(zp, tSpan, x0)
@@ -2627,7 +2631,8 @@ The variable k is the real gain in both cases.
   //       end for;
   //     end for;
 
-   annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dzp = DiscreteZerosAndPoles.Import.<b>fromModel</b>(

@@ -33,7 +33,8 @@ algorithm
   Modelica.Utilities.Streams.print("ZerosAndPoles-TransferFunction = " + String(zp));
   ok := true;
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This example demonstrates the conversion of a SISO zeros-and-poles system into a state space system.
 </p>

@@ -181,7 +181,8 @@ algorithm
   // Read all matrices from file, compute eigenvalues and store them in output arrays
   (Re,Im) := Modelica_LinearSystems2.Internal.eigenValuesFromLinearization(is, nx, nu, ny, reorder);
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (Re,Im,s,paramName,paramUnit) = Utilities.Import.rootLocusOfModel(

@@ -2924,7 +2924,8 @@ starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
             x0=zeros(size(sc.A, 1)));
 
-      annotation (__Dymola_interactive=true,Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = StateSpace.Analysis.<b>impulseResponse</b>(ss, dt, tSpan)
@@ -3002,7 +3003,8 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Impu
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
             x0=zeros(size(sc.A, 1)));
 
-      annotation (__Dymola_interactive=true,Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = StateSpace.Analysis.<b>stepResponse</b>(ss, dt, tSpan)
@@ -3081,7 +3083,8 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Step
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
             x0=zeros(size(sc.A, 1)));
 
-      annotation (__Dymola_interactive=true,Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = StateSpace.Analysis.<b>rampResponse</b>(ss, dt, tSpan)
@@ -3164,7 +3167,8 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Ramp
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial,
             x0=x0);
 
-      annotation (__Dymola_interactive=true,Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = StateSpace.Analysis.<b>initialResponse</b>(ss, dt, tSpan, x0)
@@ -9721,7 +9725,8 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
 
     algorithm
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ss = StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)
@@ -12689,7 +12694,8 @@ k = ---------- * ----------------------
       result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
       result.xNames := xuyName[1:nx];
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ss = StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)

@@ -78,7 +78,6 @@ package RootLocusNew
                           lineThickness=diagram.lineThickness)}),
         device=device);
 
-    annotation (__Dymola_interactive=true);
   end rootLocusOfModel2;
 
   record Cases "Case information"

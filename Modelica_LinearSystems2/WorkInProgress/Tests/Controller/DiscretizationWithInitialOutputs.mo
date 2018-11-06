@@ -11,5 +11,4 @@ model DiscretizationWithInitialOutputs
     stepExact(y_start=y_start),
     rampExact(y_start=y_start));
 
-  annotation (__Dymola_interactive=true);
 end DiscretizationWithInitialOutputs;

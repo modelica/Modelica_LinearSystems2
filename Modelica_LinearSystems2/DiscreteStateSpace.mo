@@ -1497,7 +1497,8 @@ are calculated for each time step t=k*dss.Ts.
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
           x0=zeros(size(dss.A, 1)));
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>impulseResponse</b>(dss)
@@ -1581,7 +1582,8 @@ the &quot;ImpulseExact&quot; conversion from continuous system to discrete syste
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
           x0=zeros(size(dss.A, 1)));
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>stepResponse</b>(dss)
@@ -1668,7 +1670,8 @@ the &quot;StepExact&quot; conversion from continuous system to discrete system.
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
           x0=zeros(size(dss.A, 1)));
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>rampResponse</b>(dss)
@@ -1759,7 +1762,8 @@ requires the &quot;RampExact&quot; conversion from continuous system to discrete
           response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial,
           x0=x0);
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
       (y) = DiscreteStateSpace.Analysis.<b>initialResponse</b>(x0, dss)
@@ -3566,8 +3570,8 @@ The file must contain
         Ts=Ts,
         method=method);
 
-      annotation (__Dymola_interactive=true, Documentation(info=
-                                                   "<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dss = DiscreteStateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName, Ts, method)

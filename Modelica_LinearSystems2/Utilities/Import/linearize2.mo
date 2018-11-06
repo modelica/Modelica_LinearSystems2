@@ -61,7 +61,8 @@ public
     "Linearized system as StateSpace object";
 algorithm
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ss = Utilities.Import.linearize2(

@@ -14,7 +14,8 @@ algorithm
     Modelica_LinearSystems2.Utilities.Import.linearize(
     "Modelica_LinearSystems2.Utilities.Plants.DoublePendulum",
     1.0);
-  annotation(__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (A,B,C,D,inputNames,outputNames,stateNames) = Utilities.Import.Examples.linearizeDoublePendulum()
