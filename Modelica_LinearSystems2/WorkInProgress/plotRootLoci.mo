@@ -3,7 +3,6 @@ function plotRootLoci
   "Plot root loci of nonlinear Modelica model by linearizing the model for variations of one model parameter"
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.WorkInProgress.RootLocusOld.Types.MarkerStyles;
   import Simulator = DymolaCommands.SimulatorAPI;
 
   input String modelName="Modelica.Mechanics.Rotational.Examples.First"
@@ -43,7 +42,7 @@ function plotRootLoci
   input Boolean grid = true "Use grid"
     annotation (Dialog(group="Plot settings", __Dymola_compact=true, __Dymola_descriptionLabel = true),
       choices(checkBox=true));
-  input MarkerStyles markerStyle=MarkerStyles.Square "Style of marker"
+  input MarkerStyle markerStyle=MarkerStyle.Square "Style of marker"
     annotation (Dialog(group="Plot settings"));
   input Integer markerColorMin[3]={0,0,255}
     "Color of marker for minimum parameter value"
@@ -138,7 +137,8 @@ algorithm
     end if;
   end for;
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 plotRootLoci(modelName, modelParams, simulationOptions, position, useLegend, grid, markerStyle, markerColorMin, markerColorMax)
