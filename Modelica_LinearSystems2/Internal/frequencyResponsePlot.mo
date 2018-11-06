@@ -80,7 +80,8 @@ algorithm
     Plot.diagram(diagram2[1], device);
   end if;
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ZerosAndPoles.Plot.<b>bode</b>(zp)

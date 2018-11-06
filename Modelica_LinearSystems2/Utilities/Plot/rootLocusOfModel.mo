@@ -70,7 +70,8 @@ algorithm
                         lineThickness=diagram.lineThickness)}),
       device=device);
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Plot.<b>rootLocusOfModel</b>(modelName, modelParam, simulationSetup, diagram, device)

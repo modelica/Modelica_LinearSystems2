@@ -17,7 +17,8 @@ algorithm
       heading="Poles and zeros of " + String(tf)),
       device=Modelica_LinearSystems2.Utilities.Plot.Records.Device(xTopLeft=50, yTopLeft=30));
 
-  annotation(__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This example shows how to plot a pole-zero-map of a transfer function in ZerosAndPoles representation given internally.
 </p>

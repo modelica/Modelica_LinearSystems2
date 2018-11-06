@@ -127,5 +127,4 @@ algorithm
 
   Modelica.Utilities.Streams.print("\n OK !!!! ");
 
-  annotation(__Dymola_interactive=true);
 end Operations;

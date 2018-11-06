@@ -47,5 +47,4 @@ algorithm
     iy);
   ok := true;
 
-  annotation (__Dymola_interactive=true);
 end plotBodeSISODiscrete;

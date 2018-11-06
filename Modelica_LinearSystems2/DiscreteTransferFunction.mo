@@ -1053,7 +1053,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
         Plot.diagram(diagram2[1], device);
       end if;
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (Documentation(info="<html>
 </html>"));
     end bode;
 
@@ -1116,7 +1116,9 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       diagram2.curve := {curve};
 
       Plot.diagram(diagram2, device);
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+
+      annotation (
+        Documentation(info="<html>
 </html>"));
     end timeResponse;
 
@@ -1150,7 +1152,8 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
           defaultDiagram=defaultDiagram,
           device=device);
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 </html>"));
     end impulse;
 
@@ -1184,9 +1187,8 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
         defaultDiagram=defaultDiagram,
         device=device);
 
-    equation
-
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 </html>"));
     end step;
 
@@ -1220,7 +1222,8 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 </html>"));
     end ramp;
 
@@ -1260,7 +1263,8 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
             defaultDiagram=defaultDiagram,
             device=device);
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 </html>"));
     end initialResponse;
 

@@ -7,5 +7,4 @@ algorithm
      "Modelica_LinearSystems2.WorkInProgress.Tests.Examples.SimpleDrive_SISO");
   ok := true;
 
-  annotation(__Dymola_interactive=true);
 end fullAnalysis1;

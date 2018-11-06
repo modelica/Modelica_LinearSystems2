@@ -15,5 +15,4 @@ algorithm
   end for;
   ok := true;
 
-  annotation(__Dymola_interactive=true);
 end fullAnalysisForNamesOnFile;

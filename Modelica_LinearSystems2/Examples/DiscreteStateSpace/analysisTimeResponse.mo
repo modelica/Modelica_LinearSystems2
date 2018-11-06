@@ -48,7 +48,6 @@ algorithm
       yLabel="y1, y2"));
 
   annotation (
-    __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
 Computes the time response of the system

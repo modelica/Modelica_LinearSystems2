@@ -24,7 +24,6 @@ algorithm
       yLabel="[N.m]"));
 
   annotation (
-    __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
 This function plots the following diagram (with default input arguments):

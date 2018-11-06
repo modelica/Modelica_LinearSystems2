@@ -7,5 +7,4 @@ algorithm
   Modelica_LinearSystems2.WorkInProgress.TestExamples.testExamplesUtilitiesPlot();
   Modelica_LinearSystems2.WorkInProgress.TestExamples.testExamplesUtilitiesImport();
   //  Modelica_LinearSystems2.WorkInProgress.TestExamples.testExamplesWorkInProgress();
-  annotation(__Dymola_interactive=true);
 end testExamplesAllFunctions;

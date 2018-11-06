@@ -26,7 +26,8 @@ package ModelAnalysis
     extends Modelica_LinearSystems2.Internal.PartialAnalyzeFunction;
   algorithm
     Modelica_LinearSystems2.StateSpace.Plot.polesAndZeros(ssLin, zeros=false, print=true);
-    annotation(__Dymola_interactive=true, Icon(graphics={
+    annotation (
+      Icon(graphics={
             Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={255,127,0},
@@ -44,7 +45,8 @@ package ModelAnalysis
     extends Modelica_LinearSystems2.Internal.PartialAnalyzeFunction;
   algorithm
     Modelica_LinearSystems2.StateSpace.Plot.polesAndZeros(ssLin, print=true);
-    annotation(__Dymola_interactive=true, Icon(graphics={
+    annotation (
+      Icon(graphics={
             Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={255,127,0},
@@ -63,7 +65,8 @@ package ModelAnalysis
       "= true, to plot dB over w [rad/s] otherwise magnitude over f [Hz]" annotation(choices(checkBox=true));
   algorithm
     Modelica_LinearSystems2.StateSpace.Plot.bodeMIMO(ssLin,Hz=not dB_w, dB=dB_w);
-    annotation(__Dymola_interactive=true, Icon(graphics={
+    annotation (
+      Icon(graphics={
             Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={255,127,0},
@@ -81,9 +84,11 @@ package ModelAnalysis
     input Boolean dB_w = false
       "= true, to plot Bode as dB over w [rad/s] otherwise magnitude over f [Hz]" annotation(choices(checkBox=true));
   algorithm
-     Modelica_LinearSystems2.StateSpace.Analysis.analysis(ssLin,
-        analyseOptions=Modelica_LinearSystems2.Internal.AnalyseOptions(dB_w=dB_w));
-    annotation(__Dymola_interactive=true, Icon(graphics={
+     Modelica_LinearSystems2.StateSpace.Analysis.analysis(
+       ssLin,
+       analyseOptions=Modelica_LinearSystems2.Internal.AnalyseOptions(dB_w=dB_w));
+    annotation (
+      Icon(graphics={
             Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={255,127,0},

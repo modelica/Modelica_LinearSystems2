@@ -77,7 +77,6 @@ algorithm
 
   print("\nok!");
   annotation (
-    __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
 This example demonstrates how to use pole placement function assignPolesMI to

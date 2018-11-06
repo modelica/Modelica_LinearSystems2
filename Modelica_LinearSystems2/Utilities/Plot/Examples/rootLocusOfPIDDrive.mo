@@ -6,8 +6,7 @@ function rootLocusOfPIDDrive
 algorithm
   Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel(
     "Modelica.Blocks.Examples.PID_Controller",
-    {
-      Modelica_LinearSystems2.Records.ParameterVariation(
+    { Modelica_LinearSystems2.Records.ParameterVariation(
         Name="PI.k",
         Value=100,
         Min=0,
@@ -20,8 +19,7 @@ algorithm
         Min=1e-3,
         Max=10)});
 
-  annotation(
-    __Dymola_interactive=true,
+  annotation (
     Documentation(info="<html>
 <p>
 This function plots the root locus of model

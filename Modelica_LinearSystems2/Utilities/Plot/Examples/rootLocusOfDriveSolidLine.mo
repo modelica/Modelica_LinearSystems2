@@ -20,8 +20,7 @@ algorithm
       linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.Solid,
       lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.None));
 
-  annotation(
-    __Dymola_interactive=true,
+  annotation (
     Documentation(info="<html>
 <p>
 This function plots the root locus of model

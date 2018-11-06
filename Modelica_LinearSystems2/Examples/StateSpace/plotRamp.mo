@@ -12,7 +12,8 @@ function plotRamp "Example plotting ramp response"
 algorithm
   Modelica_LinearSystems2.StateSpace.Plot.ramp(ss=ss);
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This example computes the ramp response of the system
 StateSpace <i>ss = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>.

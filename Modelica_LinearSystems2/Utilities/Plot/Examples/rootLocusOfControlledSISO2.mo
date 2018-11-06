@@ -13,8 +13,7 @@ algorithm
         Min=0,
         Max=10)});
 
-  annotation(
-    __Dymola_interactive=true,
+  annotation (
     Documentation(info="<html>
 <p>
 This function plots the root locus of model

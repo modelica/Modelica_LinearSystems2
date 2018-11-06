@@ -63,8 +63,7 @@ algorithm
       yTopLeft=0,
       diagramWidth=100));
 
-  annotation(
-    __Dymola_interactive=true,
+  annotation (
     Documentation(info="<html>
 <p>
 This function plots the following diagram (with default input arguments):

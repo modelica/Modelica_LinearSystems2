@@ -13,13 +13,11 @@ protected
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact "Discretization method";
   TransferFunction tf=TransferFunction({1}, {1,0,1});
   Modelica_LinearSystems2.DiscreteTransferFunction dtf=
-                               Modelica_LinearSystems2.DiscreteTransferFunction(
-                                                        tf,Ts,method);
+    Modelica_LinearSystems2.DiscreteTransferFunction(tf,Ts,method);
 
 algorithm
   Modelica_LinearSystems2.TransferFunction.Plot.bode(tf);
   Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction.Plot.bode(dtf);
   ok := true;
 
-  annotation (__Dymola_interactive=true);
 end plotBodeDiscrete;

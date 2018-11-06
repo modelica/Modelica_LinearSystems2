@@ -19,7 +19,8 @@ algorithm
   Modelica_LinearSystems2.Utilities.Plot.diagramMatrix(
     fill(Records.Diagram(curve=curves), 5, 3), Records.Device(diagramWidth=80));
 
-  annotation(__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This function plots a following set of diagrams using a matrix layout (with default input arguments):
 </p>

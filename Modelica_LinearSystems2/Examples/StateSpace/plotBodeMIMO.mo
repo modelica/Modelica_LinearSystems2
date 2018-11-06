@@ -33,7 +33,8 @@ algorithm
   Modelica_LinearSystems2.StateSpace.Plot.bodeMIMO(ss,onFile=true);
   ok := true;
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This example demonstrates the construnction of a zeros-and-poles-transfer-function-matrix 
 from a MIMO state space representation and plots the Bode diagrams with automatic 

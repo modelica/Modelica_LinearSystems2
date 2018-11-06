@@ -87,7 +87,8 @@ algorithm
     end if;
   end for;
 
-  annotation (__Dymola_interactive = true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This function plots a set of 2-dimensional curves in a diagram.
 For an overview, see the documentation of package

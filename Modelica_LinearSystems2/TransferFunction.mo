@@ -447,7 +447,6 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
 
       end printSystem;
 
-      annotation (__Dymola_interactive=true);
     end analysis;
 
    encapsulated function timeResponse
@@ -1591,7 +1590,8 @@ algorithm
     algorithm
       StateSpace.Plot.polesAndZeros(StateSpace(tf), poles, zeros, defaultDiagram=defaultDiagram, device=device);
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>polesAndZeros</b>(tf);
@@ -1760,7 +1760,8 @@ and results in
         Plot.diagram(diagram2[1], device);
       end if;
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>bode</b>(tf)
@@ -1846,7 +1847,8 @@ This function plots the bode-diagram of a transfer function.
 
       Plot.diagram(diagram2, device);
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>timeResponse</b>(tf);
@@ -1925,7 +1927,8 @@ This function plots the time response of a transfer function. The character of t
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>impulse</b>(tf)
@@ -1998,7 +2001,8 @@ This function plots the impulse response of a transfer function. It is based on 
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>step</b>(tf)
@@ -2071,7 +2075,8 @@ This function plots the step response of a transfer function. It is based on <a 
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>ramp</b>(tf)
@@ -2154,7 +2159,8 @@ This function plots the ramp response of a transfer function. It is based on <a 
         defaultDiagram=defaultDiagram,
         device=device);
 
-      annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (
+        Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 TransferFunction.Plot.<b>initialResponse</b>(tf)

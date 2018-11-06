@@ -196,5 +196,4 @@ algorithm
 
   Modelica.Utilities.Streams.print("ok = "+String(ok));
 
-  annotation(__Dymola_interactive=true);
 end Conversions;

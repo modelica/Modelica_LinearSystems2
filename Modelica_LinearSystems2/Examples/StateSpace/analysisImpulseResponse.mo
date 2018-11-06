@@ -51,7 +51,6 @@ algorithm
       yLabel="y1, y2")});
 
   annotation (
-    __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
 In this example, the <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.impulseResponse\">impulse response</a>

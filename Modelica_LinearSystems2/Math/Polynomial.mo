@@ -109,7 +109,6 @@ operator record Polynomial "Record defining the data for a polynomial"
     algorithm
       Polynomial.plot(p);
       ok := true;
-      annotation (__Dymola_interactive=true);
     end plotPolynomial;
   end Examples;
 
@@ -591,7 +590,8 @@ in a least squares sense.
 
   equation
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <p>
 Plots the given polynomial. If default arguments are used, as in:
 </p>
@@ -904,7 +904,9 @@ a vector of Complex elements.
     end mult;
   end Internal;
 
-  annotation (defaultComponentName="polynomial", Documentation(info="<html>
+  annotation (
+    defaultComponentName="polynomial",
+    Documentation(info="<html>
 <p>
 This record defines a polynomial, e.g., y = 2*x^2 + 3*x + 1. The general form is:
 </p>

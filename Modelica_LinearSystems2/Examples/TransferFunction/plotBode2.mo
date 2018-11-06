@@ -25,7 +25,8 @@ algorithm
     f_max=30);
   ok := true;
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This example shows how to construct a transfer function and to plot the correspondent Bode diagram.
 </p>

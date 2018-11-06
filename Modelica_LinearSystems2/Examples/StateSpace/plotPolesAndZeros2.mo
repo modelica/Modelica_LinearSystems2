@@ -14,7 +14,8 @@ protected
 algorithm
   StateSpace.Plot.polesAndZeros(ss,print=true);
   ok := true;
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This example demonstrates the conversion of a zeros-and-poles system into a state space system.
 Running this function the following output will be printed containing the input zeroes and poles

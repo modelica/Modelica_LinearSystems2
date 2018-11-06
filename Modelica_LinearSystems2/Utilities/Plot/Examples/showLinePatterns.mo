@@ -57,7 +57,6 @@ algorithm
       heading="Line patterns"));
 
   annotation (
-    __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
 This function demonstrates the supported line patters defined via enumeration

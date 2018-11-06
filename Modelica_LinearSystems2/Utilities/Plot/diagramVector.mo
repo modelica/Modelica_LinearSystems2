@@ -95,7 +95,8 @@ algorithm
     end for;
   end for;
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This function plots a set of 2-dimensional curves in a set of diagrams
 using a vector layout. For an overview, see the documentation of package

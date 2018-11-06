@@ -13,7 +13,6 @@ algorithm
     tSpan=10);
 
   annotation (
-    __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
 This example computes the impulse response of the system

@@ -31,8 +31,7 @@ algorithm
       labelWithS=true,
       legend=true));
 
-  annotation(
-    __Dymola_interactive=true,
+  annotation (
     Documentation(info="<html>
 <p>
 This function plots the following parameterized cuves diagram using function

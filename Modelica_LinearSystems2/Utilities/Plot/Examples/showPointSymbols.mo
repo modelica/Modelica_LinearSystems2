@@ -91,8 +91,7 @@ algorithm
           legend="Dot")},
       heading="PointSymbols / lineSymbols"));
 
-  annotation(
-    __Dymola_interactive=true,
+  annotation (
     Documentation(info="<html>
 <p>
 This function demonstrates the supported point symbols defined via enumeration

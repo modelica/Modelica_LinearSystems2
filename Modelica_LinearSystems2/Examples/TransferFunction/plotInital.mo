@@ -12,7 +12,6 @@ algorithm
   Modelica_LinearSystems2.TransferFunction.Plot.initialResponse(tf=tf, y0=y0, dt=0.1, tSpan=10);
 
   annotation (
-    __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
 This example computes the initial condition response of the of the system

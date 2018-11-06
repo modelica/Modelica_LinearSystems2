@@ -41,7 +41,6 @@ algorithm
       xLabel="time [s]")});
 
   annotation (
-    __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
 Computes and plots the initial response of a state space system by given initial values.

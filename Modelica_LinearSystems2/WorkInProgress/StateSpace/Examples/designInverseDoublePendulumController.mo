@@ -112,7 +112,8 @@ algorithm
 //StateSpace.Analysis.analysis(ss_pa,fileName="inverseDoublePendulumControlled.html");
 
   print("\nok!");
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This example demonstrates how to design pole placement controller to balance
 an inverted double pendulum. For controller design a linearized model

@@ -22,8 +22,7 @@ algorithm
     diagram = Modelica_LinearSystems2.Utilities.Plot.Records.ParametrizedCurves(
       X=X, Y=Y, s=s));
 
-  annotation(
-    __Dymola_interactive=true,
+  annotation (
     Documentation(info="<html>
 <p>
 This function plots the following parameterized cuves diagram (with default input arguments;

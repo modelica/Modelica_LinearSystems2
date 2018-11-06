@@ -2389,7 +2389,7 @@ algorithm
     defaultDiagram=defaultDiagram,
     device=device);
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>bodeSISO</b>(dss)
@@ -2548,7 +2548,8 @@ algorithm
     end if;
   end for;
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>timeResponse</b>(dss);
@@ -2636,7 +2637,8 @@ end timeResponse;
       defaultDiagram=defaultDiagram,
       device=device);
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>impulse</b>(dss);
@@ -2721,7 +2723,8 @@ This function plots the impulse responses of a state space system for each syste
       defaultDiagram=defaultDiagram,
       device=device);
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>step</b>(dss);
@@ -2805,7 +2808,8 @@ This function plots the discrete step responses of a state space system for each
       defaultDiagram=defaultDiagram,
       device=device);
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>ramp</b>(ss);
@@ -2883,7 +2887,8 @@ algorithm
     defaultDiagram=defaultDiagram,
     device=device);
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 DiscreteStateSpace.Plot.<b>initialResponse</b>(ss);

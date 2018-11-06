@@ -15,7 +15,8 @@ algorithm
   Modelica_LinearSystems2.TransferFunction.Plot.bode(tf);
   ok := true;
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This example shows how to construct a transfer function and to plot the Bode diagram
 with automatic determination of the frequency range to plot.

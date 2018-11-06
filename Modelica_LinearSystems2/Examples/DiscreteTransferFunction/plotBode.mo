@@ -15,7 +15,8 @@ algorithm
   dtf.method := method;
   DiscreteTransferFunction.Plot.bode(dtf);
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    Documentation(info="<html>
 <p>
 This example shows how to construct a discrete transfer function and to plot the Bode diagram
 with automatic determination of the frequency range to plot.

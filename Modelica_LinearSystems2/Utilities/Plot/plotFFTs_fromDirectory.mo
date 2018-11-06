@@ -52,7 +52,8 @@ algorithm
     print("No file for a FFT plot found in directory " + directory);
   end if;
 
-  annotation(__Dymola_interactive=true, Documentation(revisions="<html>
+  annotation (
+    Documentation(revisions="<html>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Date</th> <th align=\"left\">Description</th></tr>
 
