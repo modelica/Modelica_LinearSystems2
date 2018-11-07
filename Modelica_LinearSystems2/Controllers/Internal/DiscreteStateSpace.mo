@@ -6,7 +6,7 @@ model DiscreteStateSpace
   import Modelica_LinearSystems2.Controllers.Types;
   import Modelica.Math.Matrices;
 
-  parameter Modelica_LinearSystems2.StateSpace system(
+  parameter Modelica_LinearSystems2.StateSpace system = Modelica_LinearSystems2.StateSpace(
     A=fill(0, 0, 0),
     B=fill(0, 0, 1),
     C=fill(0, 1, 0),
