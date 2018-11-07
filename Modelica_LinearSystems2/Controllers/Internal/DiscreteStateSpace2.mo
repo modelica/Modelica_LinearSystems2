@@ -6,7 +6,7 @@ model DiscreteStateSpace2
   import Modelica_LinearSystems2.Controllers.Types;
   import Modelica.Math.Matrices;
 
-  parameter Real ABCD[:,:] "Continuous linear time-invariant system"
+  parameter Real ABCD[:,:](start=fill(1,2,2)) "Continuous linear time-invariant system"
     annotation(HideResult=true);
 
 protected
@@ -54,7 +54,7 @@ public
     "State vector of continuous system at sample times" annotation(HideResult=true);
 
 protected
-  outer SampleClock sampleClock "Global options"                       annotation(HideResult=true);
+  outer SampleClock sampleClock "Global options" annotation(HideResult=true);
   parameter Modelica_LinearSystems2.DiscreteStateSpace discreteSystem=
     Modelica_LinearSystems2.DiscreteStateSpace(
       A, B, C, D,
