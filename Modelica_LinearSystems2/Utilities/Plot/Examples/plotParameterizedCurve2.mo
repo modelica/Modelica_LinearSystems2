@@ -25,10 +25,19 @@ algorithm
       s=s,
       xName="x",
       heading="Two circles as parameterized curves",
+      legends={"circle1","circle2"},
+      labelWithS=true,
+      curveProperties={
+        Modelica_LinearSystems2.Utilities.Plot.Records.CurveProperties(
+          lineColor={0,127,0},
+          linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.DashDot,
+          lineThickness=0.5),
+        Modelica_LinearSystems2.Utilities.Plot.Records.CurveProperties(
+          lineColor={170,85,255},
+          linePattern=Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern.Solid,
+          lineSymbol=Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol.Cross)},
       xLabel="x(s)",
       yLabel="y(s)",
-      legends={"circle1", "circle2"},
-      labelWithS=true,
       legend=true));
 
   annotation (
