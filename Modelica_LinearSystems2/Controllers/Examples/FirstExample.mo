@@ -14,7 +14,7 @@ model FirstExample "First example to demonstrate representative block"
   Modelica_LinearSystems2.Controllers.StateSpace stateSpace(
     x_start={0.1,0},
     initType=Modelica_LinearSystems2.Controllers.Types.InitWithGlobalDefault.InitialState,
-    system(
+    system=Modelica_LinearSystems2.StateSpace(
       A=[0,1; -w*w,-2*w*D],
       B=[0; w*w],
       C=[1,0],
