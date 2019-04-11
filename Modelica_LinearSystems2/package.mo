@@ -88,23 +88,22 @@ Modelica Standard Library.
   <td colspan=\"1\" rowspan=\"2\" style=\"vertical-align: middle;\">
     <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dlr_logo.png\">
   </td>
-  <td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2019, DLR Institute of System Dynamics and Control</b></td>
+  <td style=\"vertical-align: top;\"><b>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</b></td>
 </tr>
 <tr>
-  <td style=\"vertical-align: top;\"><b>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</b></td>
+  <td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2019, DLR Institute of System Dynamics and Control</b></td>
 </tr>
 </table>
 
 <p>
-<em>This Modelica package is <u>free</u> software and
+<em>
+This Modelica package is <u>free</u> software and
 the use is completely at <u>your own risk</u>;
 it can be redistributed and/or modified under the terms of the
 3-Clause BSD license, see the license conditions (including the
 disclaimer of warranty) in the
-<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ModelicaLicense2\">User's Guide</a>
-or at
-<a href=\"https://modelica.org/licenses/modelica-3-clause-bsd\">
-https://modelica.org/licenses/modelica-3-clause-bsd</a>.</em>
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.The3clauseBSDLicense\">User's Guide</a>.
+</em>
 </p>
 
 <p>

@@ -499,7 +499,7 @@ purposes), in order that other Modelica tools can provide the same functionality
 </html>"));
   end Requirements;
 
-  class ModelicaLicense2 "Modelica License 2"
+  class The3clauseBSDLicense "3-clause BSD License"
     extends Modelica.Icons.Information;
 
     annotation (Documentation(info="<html>
@@ -810,7 +810,7 @@ a selling fee for a (in this case physical) copy. However, mere
 printing and shipping costs may be recovered.</p>
 </html>"));
 
-  end ModelicaLicense2;
+  end The3clauseBSDLicense;
 
   class Literature "References"
     extends Modelica.Icons.References;
@@ -1576,8 +1576,8 @@ the library and has the following content:
 <li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Requirements\">Requirements</a>
     scetches the requirements on a Modelica tool, in order that this library
     can be utilized.</li>
-<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ModelicaLicense2\">Modelica License 2</a>
-    is the legal license text und which this library is submitted.</li>
+<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.The3clauseBSDLicense\">3-clause BSD License</a>
+    is the legal license text under which this library is submitted.</li>
 <li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Literature\">References</a>
     provides references that have been used to design and implement this
     library.</li>
