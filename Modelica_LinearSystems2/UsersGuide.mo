@@ -507,10 +507,10 @@ purposes), in order that other Modelica tools can provide the same functionality
 subdirectories, especially all files that build package \"Modelica_LinearSystems2\" and all
 files in \"Modelica_LinearSystems2/Resources/\" and \"Modelica_LinearSystems2/help/\"
 are licensed by <b><u>DLR</u></b> under the
-<b><u>Modelica License 2</u></b>.</p>
+<b><u>3-Clause BSD License</u></b>.</p>
 
 <p style=\"margin-left: 40px;\"><b>Licensor:</b><br>
-<a href=\"http://www.dlr.de/rm\">Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)</a><br>
+<a href=\"https://www.dlr.de/sr/en\">Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)</a><br>
 Institut f&uuml;r Systemdynamik und Regelungstechnik<br>
 Postfach 1116<br>
 D-82230 Wessling<br>
@@ -518,10 +518,9 @@ Germany<br>
 email: Martin.Otter@dlr.de
 </p>
 
-<p style=\"margin-left: 40px;\"><b>Copyright notices of the files:</b><br>
-Copyright
-<br>&copy; 2005-2012, DLR Institut f&uuml;r Robotik und Mechatronik.
-<br>&copy; 2012, DLR Institut f&uuml;r Systemdynamik und Regelungstechnik.
+<p style=\"margin-left: 40px;\"><b>Copyright notices of the files:</b>
+<br>&copy; 2005-2012, DLR Institute of Robotics and Mechatronics
+<br>&copy; 2012-2019, DLR Institute of System Dynamics and Control.
 </p>
 
 
