@@ -630,7 +630,23 @@ Improvements in this version:
 </h4>
 
 <ul>
-<li>Updated to Modelica 3.2.3</li>
+<li> Updated to be compatible with Modelica 3.2.3</li>
+<li> Dymola-specific parameter annotations start with prefix &quot;__Dymola_&quot;</li>
+<li> Git-issue <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/13\">#13</a>:
+     Package Types moved into
+     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Types\">Utilities</a>
+     package</li>
+<li> Deleted obsolete package Examples.Utilities</li>
+</ul>
+
+
+<h4>
+Bug fixes performed in this version:
+</h4>
+
+<ul>
+<li> Fixed Git-issue <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/44\">#44</a>:
+     Incorrect Bode plot for MIMO systems</li>
 </ul>
 </html>"));
     end Version_2_3_5;
