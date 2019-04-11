@@ -857,7 +857,7 @@ This library is based on the following references:
 
   package ReleaseNotes "Release notes"
     class Version_2_3_5 "Version 2.3.5 (March 20, 2019)"
-	extends Modelica.Icons.ReleaseNotes;
+	    extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
 <p>This version requires the <b>Modelica 3.2.3</b> Library.
