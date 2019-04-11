@@ -15,9 +15,10 @@ partial model TwoDOFinverseModelController
   replaceable Controller.Interfaces.PartialSISO controller
     constrainedby Controller.Interfaces.PartialSISO
     annotation (Placement(transformation(extent={{10,-30},{30,-10}})));
-  replaceable Controller.Templates.Internal.Plant_SISO plant(l=l,
-    additionalMeasurableOutputs=additionalMeasurableOutputs) constrainedby
-    Templates.Internal.PlantTemplate_SISO
+  replaceable Controller.Templates.Internal.Plant_SISO plant(
+    l=l,
+    additionalMeasurableOutputs=additionalMeasurableOutputs)
+    constrainedby Templates.Internal.PlantTemplate_SISO
     annotation (Placement(transformation(extent={{70,-30},{90,-10}})));
   Modelica.Blocks.Math.InverseBlockConstraints inverseModel
     annotation (Placement(transformation(extent={{-58,6},{-4,34}})));
@@ -26,7 +27,7 @@ partial model TwoDOFinverseModelController
     constrainedby Templates.Internal.PlantTemplate_SISO
     annotation (Placement(transformation(extent={{-20,10},{-40,30}})));
 equation
-  connect(controller.u, feedback[1].y)  annotation (Line(
+  connect(controller.u, feedback[1].y) annotation (Line(
       points={{8,-20},{-1,-20}},
       color={0,0,127},
       smooth=Smooth.None));

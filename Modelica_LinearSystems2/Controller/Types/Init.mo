@@ -9,6 +9,3 @@ type Init = enumeration(
   "Enumeration defining initialization of a block"
     annotation (Evaluate=true, Documentation(info="<html>
 </html>"));
-
-
-
