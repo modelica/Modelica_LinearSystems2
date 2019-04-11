@@ -113,8 +113,8 @@ Copyright &copy; Hubertus Tummescheit and Department of Automatic Control, Lund 
 <p>
 <i>This Modelica function is <b>free</b> software; it can be redistributed and/or modified
 under the terms of the <b>Modelica license</b>, see the license conditions
-and the accompanying <b>disclaimer</b> in
-<a href=\"modelica://Modelica.UsersGuide.ModelicaLicense2\">ModelicaLicense2</a>.</i>
+and the accompanying <b>disclaimer</b> in the
+<a href=\"https://modelica.org/licenses/modelica-3-clause-bsd\">BSD 3-Clause License</a>.</i>
 </p>
 </html>"));
 end random;
