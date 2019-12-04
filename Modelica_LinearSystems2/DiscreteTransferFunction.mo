@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2;
 operator record DiscreteTransferFunction
   "Discrete transfer function description of a single input, single output system (data + operations)"
+  extends Modelica.Icons.Record;
 
   import Modelica_LinearSystems2.Math.Polynomial;
   import Modelica_LinearSystems2;
