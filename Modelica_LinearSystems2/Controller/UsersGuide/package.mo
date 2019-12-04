@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Controller;
 package UsersGuide "Controllers Tutorial"
-
+    extends Modelica.Icons.Information;
 
   annotation (
    DocumentationClass=true,
