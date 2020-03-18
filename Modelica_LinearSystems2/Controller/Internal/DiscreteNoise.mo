@@ -8,7 +8,7 @@ block DiscreteNoise "Uniform distributed noise for discrete blocks"
     "Integer[3] defining random sequence; required element range: 0..255";
   parameter Integer sampleFactor(min=1)=1
     "Noise sample time = sampleClock.sampleTime*sampleFactor";
-  final parameter Modelica.SIunits.Time Ts = sampleClock.sampleTime*sampleFactor
+  final parameter Modelica.Units.SI.Time Ts=sampleClock.sampleTime*sampleFactor
     "Sample time";
   Modelica.Blocks.Interfaces.RealOutput y
     "Noise output signal in the range [y_min .. y_max]"

@@ -3,7 +3,8 @@ model Interpolator "Demonstrate usage of Interpolator"
   extends Modelica.Icons.Example;
   import Modelica_LinearSystems2;
 
-  Modelica.Blocks.Sources.Sine sine(freqHz=2,
+  Modelica.Blocks.Sources.Sine sine(
+    f=2,
     offset=0.1,
     startTime=0.1)
     annotation (Placement(transformation(extent={{-80,0},{-60,20}})));

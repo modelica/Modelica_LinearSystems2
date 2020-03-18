@@ -1,22 +1,22 @@
 within Modelica_LinearSystems2.Controller.Examples.Components;
 model InverseDoublePendulum "Inverse double pendulum"
 
-  parameter Modelica.SIunits.Mass m_trolley=1 "Mass of trolley";
-  parameter Modelica.SIunits.Mass m_load=1 "Mass of load on 2nd arm";
-  parameter Modelica.SIunits.Length length=1
+  parameter Modelica.Units.SI.Mass m_trolley=1 "Mass of trolley";
+  parameter Modelica.Units.SI.Mass m_load=1 "Mass of load on 2nd arm";
+  parameter Modelica.Units.SI.Length length=1
     "Total length of double pendulum (i.e. length of each arm = length/2)";
-  parameter Modelica.SIunits.Angle phi1_start=90.0/180*pi
+  parameter Modelica.Units.SI.Angle phi1_start=90.0/180*pi
     "Initial rotation angle of 1st arm relative to trolley";
-  parameter Modelica.SIunits.Angle phi2_start=0
+  parameter Modelica.Units.SI.Angle phi2_start=0
     "Initial rotation angle of 2nd arm relative to 1st arm";
-  parameter Modelica.SIunits.AngularVelocity w1_start=0.0
+  parameter Modelica.Units.SI.AngularVelocity w1_start=0.0
     "Initial angular velocity of 1st arm relative to trolley";
-  parameter Modelica.SIunits.AngularVelocity w2_start=0.0
+  parameter Modelica.Units.SI.AngularVelocity w2_start=0.0
     "Initial angular velocity of 2nd arm relative to 1st arm";
 
-  parameter Modelica.SIunits.Position s_start=0.0
+  parameter Modelica.Units.SI.Position s_start=0.0
     "Initial position of trolley relative to world";
-  parameter Modelica.SIunits.Velocity v_start=0.0
+  parameter Modelica.Units.SI.Velocity v_start=0.0
     "Initial velocity of trolley relative to world";
 
   parameter Boolean cartDisturbance=false

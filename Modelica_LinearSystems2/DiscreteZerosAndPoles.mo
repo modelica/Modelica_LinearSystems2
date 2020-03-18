@@ -14,8 +14,8 @@ operator record DiscreteZerosAndPoles
   Real d2[:,2] "[p,p^0] coefficients of 2nd order denominator polynomials"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
 
-  Modelica.SIunits.Time Ts "Sample time"
-    annotation(Dialog(group="Data used to construct discrete from continuous system"));
+  Modelica.Units.SI.Time Ts "Sample time" annotation (Dialog(group=
+          "Data used to construct discrete from continuous system"));
 
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
@@ -39,7 +39,7 @@ operator record DiscreteZerosAndPoles
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
       input Real r "Value of Real variable";
-      input Modelica.SIunits.Time Ts=0 "Sample time";
+      input Modelica.Units.SI.Time Ts=0 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
@@ -92,8 +92,8 @@ Therefore, the record is defined by
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
     input ZerosAndPoles zp "continuous zeros and poles transfer function";
-    input Modelica.SIunits.Time Ts "Sample time"
-         annotation(Dialog(group="Data used to construct discrete from continuous system"));
+      input Modelica.Units.SI.Time Ts "Sample time" annotation (Dialog(group=
+              "Data used to construct discrete from continuous system"));
 
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
@@ -157,7 +157,7 @@ discrete zeros-and-poles transfer function is derived from DiscreteStateSpace by
     input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
     input Real k=1.0 "Constant multiplied with transfer function";
-    input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
     input String uName="" "input name";
     input String yName="" "output name";
@@ -286,7 +286,7 @@ is defined as
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real k=1.0 "Multiplicative factor of transfer function"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-      input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
@@ -793,7 +793,7 @@ end '==';
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
-    input Modelica.SIunits.Time Ts=0;
+    input Modelica.Units.SI.Time Ts=0;
     output DiscreteZerosAndPoles dzp(
       redeclare Real n1[1],
       redeclare Real n2[0,2],
@@ -1390,7 +1390,7 @@ numerator polynomial N(z) and the denominator polynomial D(q).
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
-      import SI = Modelica.SIunits;
+      import      Modelica.Units.SI;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles function to be plotted";
@@ -1422,7 +1422,7 @@ numerator polynomial N(z) and the denominator polynomial D(q).
     SI.AngularVelocity w[nPoints];
     Complex z[nPoints];
     SI.Frequency f[nPoints];
-    SI.Conversions.NonSIunits.Angle_deg phi[nPoints];
+      Modelica.Units.NonSI.Angle_deg phi[nPoints];
     Real A[nPoints];
     Boolean OK;
     Complex c;
@@ -2500,7 +2500,7 @@ second column respectively. The variable k is the real gain in both cases.
       input Real T_linearize=0
         "point in time of simulation to linearize the model";
       input String fileName="dslin" "Name of the result file";
-      input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
     protected

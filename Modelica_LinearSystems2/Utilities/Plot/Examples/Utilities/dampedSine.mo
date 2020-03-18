@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples.Utilities;
 function dampedSine "Return a damped sine chracteristic"
-   input Modelica.SIunits.Frequency freqHz "Frequency of sine wave";
-   input Modelica.SIunits.Damping damping "Damping coefficient of sine wave";
+  input Modelica.Units.SI.Frequency freqHz "Frequency of sine wave";
+  input Modelica.Units.SI.Damping damping "Damping coefficient of sine wave";
    input Integer nPeriod=5 "Number of periods to show";
    input Integer nPoints(min=2)=500 "Number of points";
    output Real x[nPoints];

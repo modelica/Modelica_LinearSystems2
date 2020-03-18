@@ -13,7 +13,7 @@ function Operations
   import Modelica_LinearSystems2.Math.Complex;
 
   input Boolean doPlot=true;
-  input Modelica.SIunits.Time Ts=0.1;
+  input Modelica.Units.SI.Time Ts=0.1;
 
 protected
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact;

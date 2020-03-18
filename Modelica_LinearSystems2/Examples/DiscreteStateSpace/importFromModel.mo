@@ -6,8 +6,8 @@ function importFromModel
   import Modelica_LinearSystems2.DiscreteStateSpace;
 
   input String modelName="Modelica_LinearSystems2.Utilities.Plants.DoublePendulum";
-  input Modelica.SIunits.Time Ts=0.01;
-  input Modelica.SIunits.Time T_linearize=0
+  input Modelica.Units.SI.Time Ts=0.01;
+  input Modelica.Units.SI.Time T_linearize=0
     "Point in time of simulation to linearize the model";
 
   output DiscreteStateSpace dss=DiscreteStateSpace.Import.fromModel(

@@ -4,17 +4,17 @@ model DoublePendulum2 "Crane trolley system"
   extends Modelica_LinearSystems2.Controller.Templates.Internal.PlantTemplate(
                                   n=6, l=6);
   constant Real pi=Modelica.Constants.pi;
-  parameter Modelica.SIunits.Mass m_trolley = 1000 "Mass of trolley";
-  parameter Modelica.SIunits.Mass m_load = 4000 "Mass of load on 2nd arm";
-  parameter Modelica.SIunits.Length length = 10
+  parameter Modelica.Units.SI.Mass m_trolley=1000 "Mass of trolley";
+  parameter Modelica.Units.SI.Mass m_load=4000 "Mass of load on 2nd arm";
+  parameter Modelica.Units.SI.Length length=10
     "Total length of double pendulum (i.e. length of each arm = length/2)";
-  parameter Modelica.SIunits.Angle phi1_start = -40.0/180*pi
+  parameter Modelica.Units.SI.Angle phi1_start=-40.0/180*pi
     "Initial rotation angle of 1st arm relative to trolley";
-  parameter Modelica.SIunits.Angle phi2_start = -70.0/180*pi
+  parameter Modelica.Units.SI.Angle phi2_start=-70.0/180*pi
     "Initial rotation angle of 2nd arm relative to 1st arm";
-  parameter Modelica.SIunits.AngularVelocity w1_start = 0.0
+  parameter Modelica.Units.SI.AngularVelocity w1_start=0.0
     "Initial angular velocity of 1st arm";
-  parameter Modelica.SIunits.AngularVelocity w2_start = 0.0
+  parameter Modelica.Units.SI.AngularVelocity w2_start=0.0
     "Initial angular velocity of 2nd arm";
 
   Modelica_LinearSystems2.Utilities.Plants.DoublePendulum

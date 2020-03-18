@@ -9,8 +9,8 @@ record DiscreteTransferFunction
   Real n[:] "Coefficients of numerator polynomial (in descending order)" annotation(Dialog(group="y = n*{s^m, ... , s, 1} / (d*{s^r, ... , s, 1}) * u"));
   Real d[:] "Coefficients of denominator polynomial (in descending order)" annotation(Dialog(group="y = n*{s^m, ... , s, 1} / (d*{s^r, ... , s, 1}) * u"));
 
-  Modelica.SIunits.Time Ts "Sample time"
-       annotation(Dialog(group="Data used to construct discrete from continuous system"));
+  Modelica.Units.SI.Time Ts "Sample time" annotation (Dialog(group=
+          "Data used to construct discrete from continuous system"));
 
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
@@ -34,7 +34,7 @@ record DiscreteTransferFunction
       import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
 
       input Real r "Value of Real variable";
-      input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
@@ -61,7 +61,7 @@ record DiscreteTransferFunction
       input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
-      input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
@@ -119,7 +119,7 @@ follow each other as above. An error occurs if this is not the case.
 
            input Real n[:] "Coefficients of numerator polynomial";
            input Real d[:] "Coefficients of denominator polynomial";
-           input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
            input String uName = "" "input name";
@@ -150,7 +150,7 @@ follow each other as above. An error occurs if this is not the case.
 
       input Polynomial n "Numerator polynomial";
       input Polynomial d "Denominator polynomial";
-      input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
@@ -169,8 +169,8 @@ follow each other as above. An error occurs if this is not the case.
       import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
       input TransferFunction tf "continuous transfer function";
-      input Modelica.SIunits.Time Ts "Sample time"
-           annotation(Dialog(group="Data used to construct discrete from continuous system"));
+      input Modelica.Units.SI.Time Ts "Sample time" annotation (Dialog(group=
+              "Data used to construct discrete from continuous system"));
 
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
@@ -270,7 +270,7 @@ encapsulated function bode "Plot transfer function as bode plot"
       import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
-      import SI = Modelica.SIunits;
+      import      Modelica.Units.SI;
 
   input DiscreteTransferFunction dtf "DiscreteTransfer function to be plotted";
   input Integer nPoints(min=2) = 200 "Number of points";
@@ -294,7 +294,7 @@ encapsulated function bode "Plot transfer function as bode plot"
   SI.AngularVelocity w[nPoints];
   Complex z[nPoints];
   SI.Frequency f[nPoints];
-  SI.Conversions.NonSIunits.Angle_deg phi[nPoints];
+      Modelica.Units.NonSI.Angle_deg phi[nPoints];
   Real A[nPoints];
   Boolean OK;
   Complex c;

@@ -14,8 +14,8 @@ record DiscreteZerosAndPoles
   Real d2[:,2] "[p,p^0] coefficients of 2nd order denominator polynomials"
       annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
 
-    Modelica.SIunits.Time Ts "Sample time"
-       annotation(Dialog(group="Data used to construct discrete from continuous system"));
+  Modelica.Units.SI.Time Ts "Sample time" annotation (Dialog(group=
+          "Data used to construct discrete from continuous system"));
 
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
@@ -37,7 +37,7 @@ record DiscreteZerosAndPoles
       import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
 
       input Real r "Value of Real variable";
-      input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
@@ -71,7 +71,7 @@ record DiscreteZerosAndPoles
     input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
     input Real k=1.0 "Constant multiplied with transfer function";
-    input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
     input String uName="" "input name";
     input String yName="" "output name";
@@ -187,7 +187,7 @@ follow each other as above. An error occurs if this is not the case.
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real k=1.0 "Multiplicative factor of transfer function"
            annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
-      input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";

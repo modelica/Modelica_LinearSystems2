@@ -8,7 +8,7 @@ encapsulated function toPolarForm
   input Real Zeros[:,2]
     "Zeros as Real matrix (first column: real, second column imaginary values)";
   output Real A[size(Zeros,1)] "Amplitudes of Zeros";
-  output Modelica.SIunits.Angle phi[size(Zeros,1)] "Angles of zeros";
+  output Modelica.Units.SI.Angle phi[size(Zeros, 1)] "Angles of zeros";
   output Boolean oneZeroAmplitude
     "=true: at least one element of Zeros has zero amplitude";
 protected

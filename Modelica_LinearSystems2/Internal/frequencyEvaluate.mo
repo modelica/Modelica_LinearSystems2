@@ -14,7 +14,7 @@ encapsulated function frequencyEvaluate
   input Real re "Real value of complex number";
   input Real im "Imaginary value of complex number";
   output Real A "Amplitude of complex value";
-  output Modelica.SIunits.Angle phi "Angle of complex value";
+  output Modelica.Units.SI.Angle phi "Angle of complex value";
   output Integer info
     "= 0/1/2 success/infinity(A is a large value)/indefinite (A=0/0; A=0 returned)";
 protected
@@ -25,8 +25,8 @@ protected
   Real n_A2[size(Zeros,1)];
   Real d_A[ size(Poles,1)];
   Real d_A2[size(Poles,1)];
-  Modelica.SIunits.Angle n_phi[size(Zeros,1)];
-  Modelica.SIunits.Angle d_phi[size(Poles,1)];
+  Modelica.Units.SI.Angle n_phi[size(Zeros, 1)];
+  Modelica.Units.SI.Angle d_phi[size(Poles, 1)];
   Boolean n_zero=false;
   Boolean d_zero=false;
 algorithm

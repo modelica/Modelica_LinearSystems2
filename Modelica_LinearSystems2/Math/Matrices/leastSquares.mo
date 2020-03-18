@@ -13,7 +13,7 @@ protected
   Real xx[max(size(A, 1), size(A, 2))];
 algorithm
   if min(size(A)) > 0 then
-    (xx,info,rank) := Modelica.Math.Matrices.LAPACK.dgelsx_vec(
+    (xx,info,rank) :=ObsoleteModelica4.Math.Matrices.LAPACK.dgelsx_vec(
       A,
       b,
       100*Modelica.Constants.eps);

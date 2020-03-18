@@ -7,3 +7,12 @@ convertClear();
 // Change references to classes that are removed from Modelica_LinearSystems2 or are obsolete
 convertClass("Modelica_LinearSystems2.Types",
              "Modelica_LinearSystems2.Utilities.Types")
+// Convert from Modelica_LinearSystems2 2.2 to Modelica_LinearSystems2 XXX
+
+// clear
+convertClear();
+
+
+// Change references to classes that are removed from Modelica_LinearSystems2 or are obsolete
+convertClass("Modelica_LinearSystems2.Types",
+             "Modelica_LinearSystems2.Utilities.Types")

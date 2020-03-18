@@ -9,7 +9,7 @@ model KF_outer "Discrete State Space block"
   import Modelica_LinearSystems2.StateSpace;
 
   parameter StateSpace ss "Continuous linear system model";
-  parameter Modelica.SIunits.Time sampleTime=0.5
+  parameter Modelica.Units.SI.Time sampleTime=0.5
     "Base sample time for discrete blocks";
   parameter DiscreteStateSpace dss=DiscreteStateSpace(ss,sampleTime,method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact)
     "Discrete linear system model";

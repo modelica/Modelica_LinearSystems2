@@ -8,8 +8,8 @@ operator record DiscreteStateSpace
   Real C[:,size(A, 1)]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
   Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
-  Modelica.SIunits.Time Ts=1 "Sample time"
-       annotation(Dialog(group="Data used to construct discrete from continuous system"));
+  Modelica.Units.SI.Time Ts=1 "Sample time" annotation (Dialog(group=
+          "Data used to construct discrete from continuous system"));
   Real B2[size(B, 1),size(B, 2)]=fill(0,size(B,1),size(B,2))
     "Reconstruct continuous state"
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
@@ -42,7 +42,7 @@ operator record DiscreteStateSpace
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
       input Real r "Value of Real variable";
-      input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       output DiscreteStateSpace dss(
         redeclare Real A[0,0],
@@ -109,8 +109,8 @@ respectively.
       input Real D[size(C, 1),size(B, 2)]
                                       annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
-      input Modelica.SIunits.Time Ts=1 "Sample time"
-       annotation(Dialog(group="Data used to construct discrete from continuous system"));
+      input Modelica.Units.SI.Time Ts=1 "Sample time" annotation (Dialog(group=
+              "Data used to construct discrete from continuous system"));
       input Real B2[:,:]=zeros(size(B, 1), size(B, 2));
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization methodDiscretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
       output DiscreteStateSpace result(
@@ -199,7 +199,7 @@ public
 
       input Modelica_LinearSystems2.StateSpace ss
         "Continuous linear state space system";
-      input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       output Modelica_LinearSystems2.DiscreteStateSpace dss(
         redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
@@ -409,7 +409,7 @@ public
       input Real B[size(A, 1),:] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
       input Real C[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
       input Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-      input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
     //  input Modelica_LinearSystems2.Types method=Modelica_LinearSystems2.Types.Method.Trapezoidal
       output Modelica_LinearSystems2.DiscreteStateSpace dss(
@@ -2302,9 +2302,9 @@ encapsulated function bodeSISO
   input Integer nPoints(min=2) = 200 "Number of points";
   input Boolean autoRange=true
         "True, if abszissa range is automatically determined";
-  input Modelica.SIunits.Frequency f_min=0.1
+      input Modelica.Units.SI.Frequency f_min=0.1
         "Minimum frequency value, if autoRange = false";
-  input Modelica.SIunits.Frequency f_max=10
+      input Modelica.Units.SI.Frequency f_max=10
         "Maximum frequency value, if autoRange = false";
 
   input Boolean magnitude=true "= true, to plot the magnitude of dtf"
@@ -3487,10 +3487,10 @@ The file must contain
 
       input String modelName "Name of the Modelica model"
         annotation (Dialog(__Dymola_translatedModel(translate=true)));
-      input Modelica.SIunits.Time T_linearize=0
+      input Modelica.Units.SI.Time T_linearize=0
         "point in time of simulation to linearize the model";
       input String fileName="dslin" "Name of the result file";
-      input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
     protected

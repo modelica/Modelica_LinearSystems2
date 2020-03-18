@@ -12,7 +12,7 @@ model SRKF_inner "Discrete State Space block"
       B=[1],
       C=[1],
       D=[1]) "Discrete linear system model";
-  parameter Modelica.SIunits.Time sampleTime=0.5
+  parameter Modelica.Units.SI.Time sampleTime=0.5
     "Base sample time for discrete blocks";
   parameter Real wB[size(dss.B, 1),size(dss.B, 2)]=ones(size(dss.B, 1),size(dss.B, 2))
     "Weighting matrix of the input noise covariance matrix of the previous instant";

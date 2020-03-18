@@ -14,12 +14,12 @@ block PID "PID-controller in additive description form"
     "Type of PID representation";
 
   parameter Real k(min=0) = 1 "Gain of controller" annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants));
-  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small, start=0.5)
-    "Time constant of Integrator block"
-    annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants));
-  parameter Modelica.SIunits.Time Td(min=0, start=0.1)
-    "Time constant of Derivative block"
-    annotation(Dialog(enable=pidRep==Types.PID_representation.timeConstants));
+  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small, start=0.5)
+    "Time constant of Integrator block" annotation (Dialog(enable=pidRep ==
+          Types.PID_representation.timeConstants));
+  parameter Modelica.Units.SI.Time Td(min=0, start=0.1)
+    "Time constant of Derivative block" annotation (Dialog(enable=pidRep ==
+          Types.PID_representation.timeConstants));
   parameter Real Nd(min=Modelica.Constants.small) = 10
     "The higher Nd, the more ideal the derivative block";
 

@@ -866,9 +866,9 @@ end 'max';
     import Modelica_LinearSystems2.Math.Complex;
 
     input Complex c "Complex number";
-    input Modelica.SIunits.Angle phi0=0
+    input Modelica.Units.SI.Angle phi0=0
       "phase angle phi shall be in the range: -pi < phi-phi0 < pi";
-    output Modelica.SIunits.Angle phi "= phase angle of c";
+    output Modelica.Units.SI.Angle phi "= phase angle of c";
 
   algorithm
     phi := Modelica.Math.atan3(
@@ -1079,7 +1079,7 @@ inputs and the number of outputs must be identical.
     import Modelica_LinearSystems2.Math;
     import Modelica_LinearSystems2.Math.Complex;
     input Complex c "Complex number";
-    output Modelica.SIunits.Frequency f "Frequency of c (= c.im in Hz)";
+    output Modelica.Units.SI.Frequency f "Frequency of c (= c.im in Hz)";
     output Real damping "Damping of c (= c.re/c.im)";
 
   protected

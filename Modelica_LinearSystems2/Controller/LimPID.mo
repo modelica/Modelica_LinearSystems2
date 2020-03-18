@@ -14,15 +14,16 @@ block LimPID
   parameter Modelica.Blocks.Types.SimpleController controllerType=Modelica.Blocks.Types.SimpleController.PID
     "Type of controller";
   parameter Real k(min=0) = 1 "Gain of controller" annotation(Dialog(enable=pidRepresentation==Types.PID_representation.timeConstants));
-  parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small, start=0.5)
-    "Time constant of Integrator block"
-      annotation(Dialog(enable=pidRepresentation==Types.PID_representation.timeConstants and
-                                      (controllerType==SimpleController.PI or
-                              controllerType==SimpleController.PID)));
-  parameter Modelica.SIunits.Time Td(min=0, start=0.1)
-    "Time constant of Derivative block"
-      annotation(Dialog(enable=pidRepresentation==Types.PID_representation.timeConstants and (controllerType==SimpleController.PD or
-                                controllerType==SimpleController.PID)));
+  parameter Modelica.Units.SI.Time Ti(min=Modelica.Constants.small, start=0.5)
+    "Time constant of Integrator block" annotation (Dialog(enable=
+          pidRepresentation == Types.PID_representation.timeConstants and (
+          controllerType == SimpleController.PI or controllerType ==
+          SimpleController.PID)));
+  parameter Modelica.Units.SI.Time Td(min=0, start=0.1)
+    "Time constant of Derivative block" annotation (Dialog(enable=
+          pidRepresentation == Types.PID_representation.timeConstants and (
+          controllerType == SimpleController.PD or controllerType ==
+          SimpleController.PID)));
   parameter Real kp=1 "P part parameter of gain representation" annotation(Dialog(enable=pidRepresentation==Types.PID_representation.gains));
   parameter Real ki=1 "I part parameter of gain representation" annotation(Dialog(enable=pidRepresentation==Types.PID_representation.gains and   (controllerType==SimpleController.PI or  controllerType==SimpleController.PID)));
   parameter Real kd=1 "D part parameter of gain representation" annotation(Dialog(enable=pidRepresentation==Types.PID_representation.gains and (controllerType==SimpleController.PD or controllerType==SimpleController.PID)));
@@ -134,12 +135,8 @@ public
                                             with_I
     annotation (Placement(transformation(extent={{40,-80},{20,-60}}, rotation=
            0)));
-  Modelica.Blocks.Nonlinear.Limiter limiter(
-    uMax=yMax,
-    uMin=yMin,
-    limitsAtInit=limitsAtInit)
-    annotation (Placement(transformation(extent={{70,-10},{90,10}}, rotation=
-            0)));
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=yMax, uMin=yMin) annotation (
+      Placement(transformation(extent={{70,-10},{90,10}}, rotation=0)));
   UnitDelay unitDelay(blockType=blockType) if with_I
     annotation (Placement(transformation(extent={{70,-80},{50,-60}})));
 

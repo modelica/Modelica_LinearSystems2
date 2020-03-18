@@ -1906,14 +1906,14 @@ of a zeros-and-poles transfer function.
       input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
       input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass/BandPass)";
     input Integer order(min=1) = 2 "Order of filter";
-    input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
+      input Modelica.Units.SI.Frequency f_cut=1/(2*Modelica.Constants.pi)
         "Cut-off frequency (default is w_cut = 1 rad/s)";
     input Real gain=1.0
         "Gain (= amplitude of frequency response at zero frequency)";
     input Real A_ripple(unit="dB") = 0.5
         "Pass band ripple (only for Chebyshev filter)";
     input Boolean normalized=true "True, if amplitude at f_cut = -3db*gain";
-    input Modelica.SIunits.Frequency f_min=0
+      input Modelica.Units.SI.Frequency f_min=0
         "Band of normalized band pass/stop filter is f_min (-3db*gain) .. f_cut (-3db*gain)";
 
    /*
@@ -1956,12 +1956,14 @@ of a zeros-and-poles transfer function.
     Boolean evenOrder=mod(order, 2) == 0
         "True, if even filter order, otherwise uneven";
 
-    Modelica.SIunits.Frequency f0 = if filterType == Types.FilterType.BandPass or
-                                       filterType == Types.FilterType.BandStop then
-                                                     sqrt(f_min*f_cut) else f_cut;
-    Modelica.SIunits.AngularVelocity w_cut=2*pi*f0 "Cut-off angular frequency";
-    constant Modelica.SIunits.AngularVelocity wOne = 1.0 "Just to make unit handling correct";
-    Modelica.SIunits.AngularVelocity w_band = wOne*(f_cut - f_min) / f0;
+      Modelica.Units.SI.Frequency f0=if filterType == Types.FilterType.BandPass
+           or filterType == Types.FilterType.BandStop then sqrt(f_min*f_cut)
+           else f_cut;
+      Modelica.Units.SI.AngularVelocity w_cut=2*pi*f0
+        "Cut-off angular frequency";
+      constant Modelica.Units.SI.AngularVelocity wOne=1.0
+        "Just to make unit handling correct";
+      Modelica.Units.SI.AngularVelocity w_band=wOne*(f_cut - f_min)/f0;
     Real w_cut2 "= w_cut*w_cut";
     Real alpha=1.0 "Frequency correction factor";
     Real alpha2 "= alpha*alpha";
@@ -2390,7 +2392,7 @@ and results in
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Internal;
-      import SI = Modelica.SIunits;
+      import      Modelica.Units.SI;
       import Modelica_LinearSystems2.Utilities.Plot;
 
     input ZerosAndPoles zp "ZerosAndPoles transfer function to be plotted";
@@ -2431,7 +2433,7 @@ and results in
     protected
     SI.AngularVelocity w[nPoints];
     SI.Frequency f[nPoints];
-    SI.Conversions.NonSIunits.Angle_deg phi[nPoints];
+      Modelica.Units.NonSI.Angle_deg phi[nPoints];
     Real A[nPoints];
     Real fAp[nPoints,if onFile then 3 else 0];
     Boolean OK;
@@ -4347,7 +4349,7 @@ followed by a conversion from sate space to transfer function representation.
 
       input Real a "Coefficient of p^1";
       input Real b "Coefficient of p^0";
-      input Modelica.SIunits.AngularVelocity w "Bandwidth angular frequency";
+      input Modelica.Units.SI.AngularVelocity w "Bandwidth angular frequency";
       output Real alpha "Alpha factor to build up band pass";
 
     protected
@@ -5903,7 +5905,7 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
       input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
       input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
     input Integer order(min=1) = 2 "Order of filter";
-    input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
+      input Modelica.Units.SI.Frequency f_cut=1/(2*Modelica.Constants.pi)
         "Cut-off frequency (default is w_cut = 1 rad/s)";
     input Real gain=1.0
         "Gain (= amplitude of frequency response at zero frequency)";
@@ -5933,7 +5935,7 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
     Real pi=Modelica.Constants.pi;
     Boolean evenOrder=mod(order, 2) == 0
         "True, if even filter order, otherwise uneven";
-    Modelica.SIunits.AngularVelocity w_cut=2*pi*f_cut
+      Modelica.Units.SI.AngularVelocity w_cut=2*pi*f_cut
         "Cut-off angular frequency";
     Real w_cut2 "= w_cut*w_cut";
     Real alpha=1.0 "Frequency correction factor";
@@ -6367,8 +6369,8 @@ int found=0;
       input Real poly1[:];
       input Real poly2[:,2];
       output Boolean w_found=false;
-      output Modelica.SIunits.AngularVelocity w_min;
-      output Modelica.SIunits.AngularVelocity w_max;
+      output Modelica.Units.SI.AngularVelocity w_min;
+      output Modelica.Units.SI.AngularVelocity w_max;
     protected
       Integer order=size(poly1, 1) + 2*size(poly2, 1);
       Integer n_real=numberOfRealZeros(poly1, poly2);
@@ -6410,10 +6412,10 @@ int found=0;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
       input ZerosAndPoles tf "ZerosAndPoles transfer function";
-      output Modelica.SIunits.AngularVelocity w_min;
-      output Modelica.SIunits.AngularVelocity w_max;
+      output Modelica.Units.SI.AngularVelocity w_min;
+      output Modelica.Units.SI.AngularVelocity w_max;
     protected
-      Real phi_min=Modelica.SIunits.Conversions.from_deg(3);
+      Real phi_min=Modelica.Units.Conversions.from_deg(3);
       Real real_min=1.0e-4;
       Real pi=Modelica.Constants.pi;
       Complex numZeros[:];

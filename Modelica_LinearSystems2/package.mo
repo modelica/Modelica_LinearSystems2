@@ -9,21 +9,16 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.3.5) - Analy
 
 annotation (
   preferredView="info",
-  uses(Modelica(version="3.2.3")),
-  version="2.3.5",
+  uses(Modelica(version="4.0.0")),
+  version="2.4.0",
   versionBuild=2,
   versionDate="2019-03-20",
   dateModified = "2019-04-11 13:00:00Z",
   revisionId="$Id::                                       $",
   conversion(
-    noneFromVersion="2.0",
-    noneFromVersion="2.1",
-    noneFromVersion="2.2",
-    noneFromVersion="2.3",
-    noneFromVersion="2.3.1",
-    noneFromVersion="2.3.2",
-    noneFromVersion="2.3.3",
-    from(version="2.3.4", script="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/ConvertLinearSystems2_from_2.3.4.mos")),
+    from(version={"2.0", "2.1", "2.2", "2.3", "2.3.1", "2.3.2", "2.3.2", "2.3.3", "2.3.4"}, 
+      script="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/ConvertLinearSystems2_from_2.3.4.mos", to="2.3.5"), 
+    from(version="2.3.5", script="ConvertFromModelica_LinearSystems2_2.3.5.mos")),
   Documentation(info="<html>
 <p>
 Library <b>Modelica_LinearSystems2</b> is a Modelica package

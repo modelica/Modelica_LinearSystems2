@@ -4,10 +4,11 @@ record SimulationOptionsForLinearization
   Boolean linearizeAtInitial=true
     "= true, if linearization at inital time; otherwise simulate until t_linearize"
      annotation (choices(checkBox=true));
-  Modelica.SIunits.Time t_start=0.0 "Start time of simulation" annotation(Dialog);
-  Modelica.SIunits.Time t_linearize=0.0
+  Modelica.Units.SI.Time t_start=0.0 "Start time of simulation"
+    annotation (Dialog);
+  Modelica.Units.SI.Time t_linearize=0.0
     "Simulate from t_start until t_linearize and then linearize, if linearizeAtInitial=false"
-                            annotation(Dialog(enable=not linearizeAtInitial));
+    annotation (Dialog(enable=not linearizeAtInitial));
 
   String method="Dassl" "Integration method, if linearizeAtInitial=false" annotation(Dialog(enable=not linearizeAtInitial),
       choices(
