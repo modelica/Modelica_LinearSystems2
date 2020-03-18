@@ -18,7 +18,7 @@ algorithm
      + "] has more columns as rows.
 This is not allowed when calling Modelica.Matrices.QR(A).");
   if ncol > 0 then
-    (Q,tau,p) :=ObsoleteModelica4.Math.Matrices.LAPACK.dgeqpf(A);
+    (Q,tau,p) :=Modelica.Math.Matrices.LAPACK.dgeqp3(A);
 
   // determine R
     R := zeros(ncol, ncol);
