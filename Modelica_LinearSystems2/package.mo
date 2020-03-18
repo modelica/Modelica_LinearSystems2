@@ -16,8 +16,8 @@ annotation (
   dateModified = "2019-04-11 13:00:00Z",
   revisionId="$Id::                                       $",
   conversion(
-    from(version={"2.0", "2.1", "2.2", "2.3", "2.3.1", "2.3.2", "2.3.2", "2.3.3", "2.3.4"}, 
-      script="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/ConvertLinearSystems2_from_2.3.4.mos", to="2.3.5"), 
+    from(version={"2.0", "2.1", "2.2", "2.3", "2.3.1", "2.3.2", "2.3.2", "2.3.3", "2.3.4"},
+      script="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/ConvertLinearSystems2_from_2.3.4.mos", to="2.3.5"),
     from(version="2.3.5", script="ConvertFromModelica_LinearSystems2_2.3.5.mos")),
   Documentation(info="<html>
 <p>

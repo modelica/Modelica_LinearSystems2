@@ -10,7 +10,7 @@ model EKF "Extended Kalman filter"
       initType = Modelica_LinearSystems2.Controller.Types.Init.InitialState);
 
   replaceable function ekfFunction =
-            Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy
+      Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemDummy
             constrainedby
     Modelica_LinearSystems2.DiscreteStateSpace.Internal.ekfSystemBase(redeclare input Real x[4])
     "Function to calculate xk, yk, Ak, Ck"

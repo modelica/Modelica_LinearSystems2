@@ -33,8 +33,8 @@ algorithm
   // Determine f_min2, f_max2 (auto or manual)
   if autoRange then
     (w_min,w_max) := Internal.frequencyRangeBode(numZeros, denZeros);
-    f_min2 := SI.Conversions.to_Hz(w_min);
-    f_max2 := SI.Conversions.to_Hz(w_max);
+    f_min2 := Modelica.Units.Conversions.to_Hz(w_min);
+    f_max2 := Modelica.Units.Conversions.to_Hz(w_max);
   else
     f_min2 := f_min;
     f_max2 := f_max;

@@ -2466,14 +2466,14 @@ and results in
     // Compute magnitude/phase at the frequency points
     phi_old := 0.0;
     for i in 1:nPoints loop
-      w[i] := SI.Conversions.from_Hz(f[i]);
+      w[i] := Modelica.Units.Conversions.from_Hz(f[i]);
       c := ZerosAndPoles.Analysis.evaluate(
         zp,
         Complex(0, w[i]),
         1e-10);
       A[i] := Complex.'abs'(c);
       phi_old := Complex.arg(c, phi_old);
-      phi[i] := SI.Conversions.to_deg(phi_old);
+      phi[i] := Modelica.Units.Conversions.to_deg(phi_old);
 
       // Convert to other units, if required
       if not Hz then

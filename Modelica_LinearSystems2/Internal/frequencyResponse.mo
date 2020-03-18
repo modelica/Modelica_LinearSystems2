@@ -39,9 +39,9 @@ algorithm
   // Compute magnitude and phase at the frequency points
   phi_old := 0.0;
   for i in 1:nPoints loop
-    w[i] := SI.Conversions.from_Hz(f[i]);
+    w[i] := Modelica.Units.Conversions.from_Hz(f[i]);
     (A[i], phi_old, info) := Internal.frequencyEvaluate(gain, Zeros, Poles, 0, w[i]);
-    phi[i] := SI.Conversions.to_deg(phi_old);
+    phi[i] := Modelica.Units.Conversions.to_deg(phi_old);
 
     // Convert to other units, if required
     if not Hz then
