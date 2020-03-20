@@ -11,7 +11,6 @@ annotation (
   preferredView="info",
   uses(Modelica(version="4.0.0")),
   version="2.4.0",
-  versionBuild=2,
   versionDate="2019-03-20",
   dateModified = "2019-04-11 13:00:00Z",
   revisionId="$Id::                                       $",
