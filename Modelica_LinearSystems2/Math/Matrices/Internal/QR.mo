@@ -16,7 +16,8 @@ protected
 algorithm
   assert(nrow >= ncol, "\nInput matrix A[" + String(nrow) + "," + String(ncol)
      + "] has more columns as rows.
-This is not allowed when calling Modelica.Matrices.QR(A).");
+This is not allowed when calling Modelica.Math.Matrices.QR(A).");
+
   if ncol > 0 then
     (Q,tau,p) :=Modelica.Math.Matrices.LAPACK.dgeqp3(A);
 
