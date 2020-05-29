@@ -10,7 +10,7 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.3.5) - Analy
 annotation (
   preferredView="info",
   uses(Modelica(version="4.0.0")),
-  version="2.4.0",
+  version="2.3.6 Development",
   versionDate="2019-03-20",
   dateModified = "2019-04-11 13:00:00Z",
   revisionId="$Id::                                       $",
