@@ -10,8 +10,7 @@ function plotBodeFilter2 "Show low pass filters of all filter types"
   input Modelica.Units.SI.Frequency f_cut=1 "Cut-off frequency";
   input Real A_ripple(unit="dB") = 3
     "Pass band ripple for Chebyshev filter (otherwise not used)";
-  input Modelica.Units.SI.Frequency f_min(min=0) = 0.1
-    "Minimum frequency value";
+  input Modelica.Units.SI.Frequency f_min(min=0) = 0.1 "Minimum frequency value";
   input Modelica.Units.SI.Frequency f_max(min=0) = 10 "Maximum frequency value";
   output Boolean ok;
 protected
