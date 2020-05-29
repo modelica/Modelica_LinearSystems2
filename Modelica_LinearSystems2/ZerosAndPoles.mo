@@ -6215,9 +6215,7 @@ is set.
     external "C" m = findMatrixName(
             filename,
             matName,
-            "NoClass");
-
-      annotation (Include="#include <matrixop.h>
+            "NoClass") annotation (Include="#include <matrixop.h>
 #include <matrixop.c>
 
 

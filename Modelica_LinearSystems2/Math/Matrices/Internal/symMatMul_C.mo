@@ -20,7 +20,7 @@ protected
   Integer ldb=max(1,a2);
   String addi=if add then "A" else "N";
 
- external "FORTRAN 77" c_symMatMul(A, B, M, addi, a1, a2, lda, ldb);
+ external "FORTRAN 77" c_symMatMul(A, B, M, addi, a1, a2, lda, ldb)
   annotation (Include="
 #include<f2c.h>
 #include <stdio.h>
@@ -120,8 +120,8 @@ int c_symMatMul_(doublereal *a, doublereal *b, doublereal *c, char *addi, intege
    free(cutri);
 //   fclose(fileptr);
   return 0;
-}", Library={"lapack"},
-    Documentation(revisions="<html>
+}", Library={"lapack"});
+  annotation (Documentation(revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>

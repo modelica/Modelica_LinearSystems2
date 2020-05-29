@@ -24,7 +24,7 @@ protected
   Integer lda=max(1,n) "First dimension of A";
   Integer ldb=max(1,m) "First dimension of B";
 
- external "FORTRAN 77" c_solve2rSym(A, X, trian, uplo, m, n, lda, ldb, info);
+ external "FORTRAN 77" c_solve2rSym(A, X, trian, uplo, m, n, lda, ldb, info)
   annotation (Include="
   #include<f2c.h>
 extern  int dtrsm_(char *, char *, char *, char *, integer *, integer *, doublereal *, doublereal *, integer *, doublereal *, integer *);
@@ -92,8 +92,8 @@ int c_solve2rSym_(doublereal *a, doublereal *b, char *trian, char *uplo, integer
    free(aa);
 //   fclose(fileptr);
   return 0;
-}", Library={"lapack"},
-    Documentation(revisions="<html>
+}", Library={"lapack"});
+  annotation(Documentation(revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
