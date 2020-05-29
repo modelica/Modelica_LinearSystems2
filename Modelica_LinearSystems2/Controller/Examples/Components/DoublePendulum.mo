@@ -1,13 +1,13 @@
 within Modelica_LinearSystems2.Controller.Examples.Components;
 model DoublePendulum "crane trolley system"
 
-  parameter Modelica.Units.SI.Mass m_trolley=5;
-  parameter Modelica.Units.SI.Mass m_load=20;
-  parameter Modelica.Units.SI.Length length=2;
-  parameter Modelica.Units.SI.Angle phi1_start=-80.0/180*pi;
-  parameter Modelica.Units.SI.Angle phi2_start=10;
-  parameter Modelica.Units.SI.AngularVelocity w1_start=0.0;
-  parameter Modelica.Units.SI.AngularVelocity w2_start=0.0;
+  parameter Modelica.Units.SI.Mass m_trolley = 5;
+  parameter Modelica.Units.SI.Mass m_load = 20;
+  parameter Modelica.Units.SI.Length length = 2;
+  parameter Modelica.Units.SI.Angle phi1_start = -80.0/180*pi;
+  parameter Modelica.Units.SI.Angle phi2_start = 10;
+  parameter Modelica.Units.SI.AngularVelocity w1_start = 0.0;
+  parameter Modelica.Units.SI.AngularVelocity w2_start = 0.0;
 
   constant Real pi = Modelica.Constants.pi;
 

@@ -825,7 +825,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
-      import      Modelica.Units.SI;
+      import Modelica.Units.SI;
 
       input DiscreteTransferFunction dtf
         "DiscreteTransfer function to be plotted";

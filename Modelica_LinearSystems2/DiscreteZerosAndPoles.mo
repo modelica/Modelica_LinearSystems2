@@ -1390,7 +1390,7 @@ numerator polynomial N(z) and the denominator polynomial D(q).
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
-      import      Modelica.Units.SI;
+      import Modelica.Units.SI;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles function to be plotted";

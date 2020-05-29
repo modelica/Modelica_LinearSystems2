@@ -4,7 +4,7 @@ encapsulated function frequencyResponse
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.Internal;
-    import      Modelica.Units.SI;
+    import Modelica.Units.SI;
 
   input Real gain "Gain of transfer function";
   input Real Zeros[:,2]

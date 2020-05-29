@@ -47,8 +47,8 @@ algorithm
 
   // Use largest range
   if n_num == 0 and n_den == 0 then
-    w_min :=Modelica.Units.Conversions.from_Hz(0.1);
-    w_max :=Modelica.Units.Conversions.from_Hz(1);
+    w_min := Modelica.Units.Conversions.from_Hz(0.1);
+    w_max := Modelica.Units.Conversions.from_Hz(1);
   elseif n_num == 0 then
     w_min := w_min2;
     w_max := w_max2;

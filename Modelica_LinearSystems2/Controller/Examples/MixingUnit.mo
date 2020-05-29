@@ -17,7 +17,7 @@ model MixingUnit
     redeclare Controller.PI controller(k=10, T=10,
       initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState));
 
-  import      Modelica.Units.SI;
+  import Modelica.Units.SI;
   parameter Real x10 = 0.42
     "Initial value of state x1 (related concentration of substance A in tank)";
   parameter Real x10_inv = 0.6 "Initial value of state x1 of inverted model";
