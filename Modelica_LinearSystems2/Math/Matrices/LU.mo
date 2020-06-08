@@ -10,8 +10,7 @@ function LU "LU decomposition of square or rectangular matrix"
 
 algorithm
   if min(size(A)) > 0 then
-    (LU,pivots,info) := Modelica.Math.Matrices.LAPACK.dgetrf(A)
-    annotation (Library="Lapack");
+    (LU,pivots,info) := Modelica.Math.Matrices.LAPACK.dgetrf(A);
   else
     LU := fill(
       0,

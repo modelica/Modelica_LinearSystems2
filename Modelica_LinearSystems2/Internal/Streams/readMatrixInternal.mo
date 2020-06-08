@@ -10,8 +10,7 @@ external "C" Modelica_LinearSystem2_readMatrixInternal(
     matrixName,
     A,
     m,
-    n);
-  annotation (Include="
+    n) annotation (Include="
 
 #include <matrixop.h>
 #include <ModelicaUtilities.h>
@@ -30,7 +29,8 @@ void Modelica_LinearSystem2_readMatrixInternal(const char *filename, const char 
     }
   }
   return;
-}", Documentation(info="<html>
+}");
+ annotation(Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>readMatrixInternal(fileName, matrixName, m, n)</pre></blockquote>
 

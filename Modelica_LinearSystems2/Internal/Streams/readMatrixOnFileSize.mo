@@ -6,8 +6,7 @@ function readMatrixOnFileSize "Read size of matrix matrixName from file"
 external "C" readMatrixSizeEx(
     fileName,
     matrixName,
-    dim);
-  annotation (Include="
+    dim) annotation (Include="
 
 #include <matrixop.h>
 
