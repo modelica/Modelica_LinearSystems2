@@ -61,9 +61,9 @@ record DiscreteStateSpace
     function fromStateSpace
       "Transform a continuous into a discrete linear state space system"
       import Modelica;
+      import Modelica.Math.Matrices.LU_solve2;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Utilities.Types.Method;
-      import Modelica_LinearSystems2.Math.Matrices.LU_solve2;
 
       input Modelica_LinearSystems2.StateSpace sc
         "Continuous linear state space system";
@@ -245,9 +245,9 @@ respectively.
     encapsulated function fromMatrices2
       "Transform a continuous into a discrete linear state space system"
       import Modelica;
+      import Modelica.Math.Matrices.LU_solve2;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Utilities.Types.Method;
-      import Modelica_LinearSystems2.Math.Matrices.LU_solve2;
 
       input Real A[:,size(A, 1)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
       input Real B[size(A, 1),:] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));

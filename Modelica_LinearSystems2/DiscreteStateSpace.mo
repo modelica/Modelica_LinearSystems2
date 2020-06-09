@@ -193,9 +193,9 @@ public
     function fromStateSpace
       "Generate a DiscreteStateSpace data record from a continuous state space system "
       import Modelica;
+      import Modelica.Math.Matrices.LU_solve2;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Utilities.Types.Method;
-      import Modelica_LinearSystems2.Math.Matrices.LU_solve2;
 
       input Modelica_LinearSystems2.StateSpace ss
         "Continuous linear state space system";
@@ -401,9 +401,9 @@ public
     encapsulated function fromMatrices2
       "Generate a DiscreteStateSpace data record from matrices of a continuous state space system"
       import Modelica;
+      import Modelica.Math.Matrices.LU_solve2;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Utilities.Types.Method;
-      import Modelica_LinearSystems2.Math.Matrices.LU_solve2;
 
       input Real A[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
       input Real B[size(A, 1),:] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
