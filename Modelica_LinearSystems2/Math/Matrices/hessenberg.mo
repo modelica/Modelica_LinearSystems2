@@ -16,7 +16,9 @@ protected
 algorithm
   (H, V, tau) := Matrices.toUpperHessenberg(A, 1, size(A, 1));
    U := Matrices.LAPACK.dorghr(V,1,size(A, 1),tau);
-  annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.hessenberg instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
      H = Matrices.<b>hessenberg</b>(A);

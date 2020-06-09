@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function dsylvester
   "Solution of discrete-time Sylvester equation A*X*B + sgn*X = C"
+  import Modelica.Math.Matrices.hessenberg;
   import Modelica_LinearSystems2.Math.Matrices;
 
   input Real A[:,size(A, 1)] "Square matrix A in A*X*B + sgn*X = C";
@@ -54,7 +55,7 @@ algorithm
         F := C*Z;
       end if;
     else
-      (H,U) := Matrices.hessenberg(A);
+      (H,U) := hessenberg(A);
       if BTisSchur then
         S := B;
         Z := identity(m);
