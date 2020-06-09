@@ -3,7 +3,7 @@ function householderSimilarityTransformation
   "Calculate the similarity transformation S*A*S of matrix A with symmetric householder matrix S = I - 2u*u'"
 
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Vectors;
+  import Modelica.Math.Vectors.length;
 
   input Real A[:,size(A, 1)] "Square matrix A";
   input Real u[size(A, 1)] "Householder vector";
@@ -11,7 +11,7 @@ function householderSimilarityTransformation
 
 protected
   Integer na=size(A, 1);
-  Real S[:,:]=-2*matrix(u)*transpose(matrix(u))/(Vectors.length(u)*Vectors.length(u))
+  Real S[:,:]=-2*matrix(u)*transpose(matrix(u))/(length(u)*length(u))
     "Symmetric matrix";
   Integer i;
 algorithm

@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function householderReflexion
   "Reflect each of the vectors ai of matrix  A=[a1, a2, ..., an] on a plane with orthogonal vector u"
-  import Modelica_LinearSystems2.Math.Vectors;
+  import Modelica.Math.Vectors.length;
 
   input Real A[:,:] "Rectangular matrix";
   input Real u[size(A, 1)] "Householder vector";
@@ -11,7 +11,7 @@ function householderReflexion
 protected
   Integer n=size(A, 2);
   Real h;
-  Real lu=Vectors.length(u)*Vectors.length(u);
+  Real lu=length(u)*length(u);
 
 algorithm
   for i in 1:n loop
