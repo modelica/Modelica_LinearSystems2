@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function sylvester
   "Solution of continuous-time Sylvester equation A*X + X*B = C"
+  import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices;
 
   input Real A[:,:] "Matrix A";
@@ -27,13 +28,13 @@ algorithm
       S := A;
       U := identity(n);
     else
-      (S,U) := Matrices.rsf2(A);
+      (S,U) := MatricesMSL.realSchur(A);
     end if;
     if bIsSchur then
       T := B;
       V := identity(m);
     else
-      (T,V) := Matrices.rsf2(B);
+      (T,V) := MatricesMSL.realSchur(B);
     end if;
 
     Chat := if aIsSchur and bIsSchur then C else if aIsSchur then C*V else if

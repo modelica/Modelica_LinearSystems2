@@ -45,7 +45,9 @@ algorithm
     end if;
   end if;
 
-  annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.realSchur instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (T, Z, alphaReal, alphaImag) = Matrices.<b>rsf2</b>(A)

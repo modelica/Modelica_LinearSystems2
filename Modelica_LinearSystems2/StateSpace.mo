@@ -6284,11 +6284,11 @@ represented by a StateSpace record.
     encapsulated function assignPolesMI
       "Pole assignment design algorithm for multi input systems"
 
+      import Modelica;
+      //  import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica;
-      //  import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Matrices;
 
@@ -6378,7 +6378,7 @@ represented by a StateSpace record.
       end for;
 
       // put matrix ss.A to real Schur form A <- QAQ' and compute B <- QB
-      (A_rsf,Z,alphaReal,alphaImag) := Matrices.rsf2(ss.A);
+      (A_rsf,Z,alphaReal,alphaImag) := Modelica.Math.Matrices.realSchur(ss.A);
       ZT := transpose(Z);
 
       // reorder real Schur form according to alpha

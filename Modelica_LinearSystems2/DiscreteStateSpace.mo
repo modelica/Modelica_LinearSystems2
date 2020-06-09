@@ -1799,11 +1799,11 @@ end Analysis;
   encapsulated function assignPolesMI
       "Pole assignment design algorithm for multi input systems"
 
+      import Modelica;
+  //  import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica;
-  //  import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Matrices;
 
@@ -1893,7 +1893,7 @@ end Analysis;
     end for;
 
     // put matrix dss.A to real Schur form A <- QAQ' and compute B <- QB
-    (A_rsf,Z,alphaReal,alphaImag) := Matrices.rsf2(dss.A);
+    (A_rsf,Z,alphaReal,alphaImag) := Modelica.Math.Matrices.realSchur(dss.A);
     ZT := transpose(Z);
 
     // reorder real Schur form according to alpha

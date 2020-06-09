@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function dsylvester
   "Solution of discrete-time Sylvester equation A*X*B + sgn*X = C"
-  import Modelica.Math.Matrices.hessenberg;
+  import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices;
 
   input Real A[:,size(A, 1)] "Square matrix A in A*X*B + sgn*X = C";
@@ -11,7 +11,7 @@ function dsylvester
   input Boolean AisHess=false "True if A has already Hessenberg form";
   input Boolean BTisSchur=false "True if B' has already real Schur form";
   input Integer sgn=1 "Specifies the sign in A*X*B + sgn*X = C";
-  input Real eps=Modelica.Math.Matrices.norm(A, 1)*10*Modelica.Constants.eps
+  input Real eps=MatricesMSL.norm(A, 1)*10*Modelica.Constants.eps
     "Tolerance";
 
 protected
@@ -50,18 +50,18 @@ algorithm
         Z := identity(m);
         F := C;
       else
-        (S,Z) := Matrices.rsf2(transpose(B));
+        (S,Z) := MatricesMSL.realSchur(transpose(B));
         S := transpose(S);
         F := C*Z;
       end if;
     else
-      (H,U) := hessenberg(A);
+      (H,U) := MatricesMSL.hessenberg(A);
       if BTisSchur then
         S := B;
         Z := identity(m);
         F := transpose(U)*C;
       else
-        (S,Z) := Matrices.rsf2(transpose(B));
+        (S,Z) := MatricesMSL.realSchur(transpose(B));
         S := transpose(S);
         F := transpose(U)*C*Z;
       end if;
@@ -77,7 +77,7 @@ algorithm
         for i in 1:n loop
           R22[i, i] := R22[i, i] + sgn;
         end for;
-        X[:, k] := Modelica.Math.Matrices.solve(R22, w); // solve one column in X for one real eigenvalue
+        X[:, k] := MatricesMSL.solve(R22, w); // solve one column in X for one real eigenvalue
         k := k - 1;
       else // pair of complex eigenvalues, i.e. 2x2 Schur bump
         g := F[:, k-1] - H*X[:, k + 1:m]*S[k+1 :m,k-1];
@@ -87,7 +87,7 @@ algorithm
           R11[i, i] := R11[i, i] + sgn;
           R22[i, i] := R22[i, i] + sgn;
         end for;
-        y := Modelica.Math.Matrices.solve([R11,S[k,  k-1]*H; S[k-1, k]*H,R22], cat(1, g, w));// solve two columns in X for one conjugated complex pole pair
+        y := MatricesMSL.solve([R11,S[k,  k-1]*H; S[k-1, k]*H,R22], cat(1, g, w));// solve two columns in X for one conjugated complex pole pair
         X[:, k-1] := y[1:n];
         X[:, k] := y[n + 1:2*n];
         k := k - 2;

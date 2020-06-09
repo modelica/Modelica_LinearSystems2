@@ -28,7 +28,7 @@ public
 
 algorithm
   if n > 1 then
-    (H_RSF,Z,alphaReal,alphaImag) := Matrices.rsf2(H);
+    (H_RSF,Z,alphaReal,alphaImag) := Modelica.Math.Matrices.realSchur(H);
     (H_RSF,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSF(
       true,
       H_RSF,
