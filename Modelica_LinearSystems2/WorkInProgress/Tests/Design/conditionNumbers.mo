@@ -47,7 +47,7 @@ algorithm
                                                 X, 3);
   cInf := Modelica.Math.Vectors.norm(c, Modelica.Constants.inf);
   norm2K := Modelica.Math.Matrices.norm(K);
-  normFroK := Matrices.norm(K, 3);
+  normFroK := Modelica.Math.Matrices.norm(K, 3);
   kappaFroYT := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber(
                                                  YT, 3);
   kappa2X_B := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.norm(

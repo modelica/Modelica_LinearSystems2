@@ -21,9 +21,8 @@ protected
                2.300e-02,   3.230e-01,   1.020e-01,   8.300e-02];
   Real G[4,4]=B*transpose(B);
   Real H[8,8]=[A,-G; -Q,-transpose(A)];
-  Real condH=Modelica.Math.Matrices.conditionNumber(
-                                               H);
-  Real normH=Matrices.norm(H, 2);
+  Real condH=Modelica.Math.Matrices.conditionNumber(H);
+  Real normH=Modelica.Math.Matrices.norm(H, 2);
   Real condX1;
   Real normX1;
   Real condX2;
@@ -62,11 +61,11 @@ algorithm
   resX2 := Modelica.Math.Matrices.norm(X2-X3)/Modelica.Math.Matrices.norm(X3);
 
   condX1 := Modelica.Math.Matrices.conditionNumber(X1);
-  normX1 := Matrices.norm(X1, 2);
+  normX1 := Modelica.Math.Matrices.norm(X1, 2);
   condX2 := Modelica.Math.Matrices.conditionNumber(X2);
-  normX2 := Matrices.norm(X2, 2);
+  normX2 := Modelica.Math.Matrices.norm(X2, 2);
   condX3 := Modelica.Math.Matrices.conditionNumber(X3);
-  normX3 := Matrices.norm(X3, 2);
+  normX3 := Modelica.Math.Matrices.norm(X3, 2);
 
   Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement",outputFile);
   Modelica.Utilities.Streams.print(Matrices.printMatrix(X1, 16, "X1"),outputFile);

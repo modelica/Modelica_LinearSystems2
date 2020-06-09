@@ -61,7 +61,7 @@ algorithm
   G := B*transpose(B);
   H := [A,-G; -Q,-transpose(A)];
   condH := Modelica.Math.Matrices.conditionNumber(H);
-  normH := Matrices.norm(H, 2);
+  normH := Modelica.Math.Matrices.norm(H, 2);
   X1 := Matrices.care(A, B, R, Q, false);
   X2 := Matrices.care(A, B, R, Q, true);
   X3 := [1.4082559065178322e+000,     2.6676190896796159e+000,    -6.5821877192134037e-001,     1.0403124013014682e+000,    -2.4213305071508348e-001,     6.3973908750417130e-001,    -1.3823693339063511e-001,     4.4314597806254619e-001,    -9.4550040089693782e-002,     3.2016958489789538e-001,    -7.2001791061836087e-002,     2.3193432570454367e-001,    -5.9138156142420961e-002,     1.6238522686498319e-001,    -5.1533381176332015e-002,     1.0345269956755773e-001,    -4.7208569311630019e-002,     5.0403617291428171e-002,    -4.5235212708863534e-002;
@@ -95,11 +95,11 @@ algorithm
   deltaQ3 := Modelica.Math.Matrices.norm(Q-Qr3)/Modelica.Math.Matrices.norm(Q);
 
   condX1 := Modelica.Math.Matrices.conditionNumber(X1);
-  normX1 := Matrices.norm(X1, 2);
+  normX1 := Modelica.Math.Matrices.norm(X1, 2);
   condX2 := Modelica.Math.Matrices.conditionNumber(X2);
-  normX2 := Matrices.norm(X2, 2);
+  normX2 := Modelica.Math.Matrices.norm(X2, 2);
   condX3 := Modelica.Math.Matrices.conditionNumber(X3);
-  normX3 := Matrices.norm(X3, 2);
+  normX3 := Modelica.Math.Matrices.norm(X3, 2);
 
   Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement",outputFile);
   Modelica.Utilities.Streams.print(Matrices.printMatrix(X1, 16, "X1"),outputFile);
