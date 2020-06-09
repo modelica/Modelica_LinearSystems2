@@ -3792,7 +3792,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
               ny,
               nu);
       else
-        (X,rank) := Modelica_LinearSystems2.Math.Matrices.leastSquares2(ss.A,
+        (X,rank) := Modelica.Math.Matrices.leastSquares2(ss.A,
           ss.B);
         // Determine whether A*X-B=0 is not fulfilled (since no unique solution)
         if rank < nx then
