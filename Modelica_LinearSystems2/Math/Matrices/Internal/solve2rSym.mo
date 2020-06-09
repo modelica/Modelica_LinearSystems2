@@ -18,7 +18,7 @@ protected
 
 algorithm
   if not isTriangular then
-    H := Matrices.cholesky(AA);
+    H := Modelica.Math.Matrices.cholesky(AA);
   else
     H := AA;
   end if;

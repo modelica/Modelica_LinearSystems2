@@ -20,7 +20,7 @@ protected
 
 algorithm
   if not isCholesky then
-    H := Matrices.cholesky(AA, upper);
+    H := Modelica.Math.Matrices.cholesky(AA, upper);
   else
     H := AA;
   end if;
