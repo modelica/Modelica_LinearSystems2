@@ -14,7 +14,7 @@ protected
   Real tau[max(0,size(A, 1) - 1)] "Scalar factors of the elementary reflectors";
 
 algorithm
-  (H, V, tau) := Matrices.toUpperHessenberg(A, 1, size(A, 1));
+  (H, V, tau) := Modelica.Math.Matrices.Utilities.toUpperHessenberg(A, 1, size(A, 1));
    U := Matrices.LAPACK.dorghr(V,1,size(A, 1),tau);
   annotation (
     obsolete = "Obsolete function - use Modelica.Math.Matrices.hessenberg instead",

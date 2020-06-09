@@ -10344,7 +10344,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
           bh1 := Vectors.householderReflexion_e1(bh1, u);
           ch1 := Vectors.householderReflexion(ch1, u);
 
-          (Ah1,V,tau) := Matrices.toUpperHessenberg(
+          (Ah1,V,tau) := Modelica.Math.Matrices.Utilities.toUpperHessenberg(
                 Ah1,
                 1,
                 nx);

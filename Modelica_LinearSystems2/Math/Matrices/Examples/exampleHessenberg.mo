@@ -30,7 +30,7 @@ algorithm
       H,
       6,
       "Hl");
-  (H,V,tau) := Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg(
+  (H,V,tau) := Modelica.Math.Matrices.Utilities.toUpperHessenberg(
       M,
       1,
       size(M, 1));
