@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.care;
 function care15 "Example 15  from Benner benchmarks"
   extends Modelica.Icons.Function;
+  import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices;
   input String outputFile = "";
 
@@ -60,8 +61,8 @@ algorithm
   Q := 10*transpose(C)*C;
   G := B*transpose(B);
   H := [A,-G; -Q,-transpose(A)];
-  condH := Modelica.Math.Matrices.conditionNumber(H);
-  normH := Modelica.Math.Matrices.norm(H, 2);
+  condH := MatricesMSL.conditionNumber(H);
+  normH := MatricesMSL.norm(H, 2);
   X1 := Matrices.care(A, B, R, Q, false);
   X2 := Matrices.care(A, B, R, Q, true);
   X3 := [1.4082559065178322e+000,     2.6676190896796159e+000,    -6.5821877192134037e-001,     1.0403124013014682e+000,    -2.4213305071508348e-001,     6.3973908750417130e-001,    -1.3823693339063511e-001,     4.4314597806254619e-001,    -9.4550040089693782e-002,     3.2016958489789538e-001,    -7.2001791061836087e-002,     2.3193432570454367e-001,    -5.9138156142420961e-002,     1.6238522686498319e-001,    -5.1533381176332015e-002,     1.0345269956755773e-001,    -4.7208569311630019e-002,     5.0403617291428171e-002,    -4.5235212708863534e-002;
@@ -84,22 +85,22 @@ algorithm
   5.0403617291428171e-002,     5.6964417726470790e-002,     5.3049082276127958e-002,     1.1756218375543964e-001,     5.8932527297423709e-002,     1.8637984242782429e-001,     6.9549098839562368e-002,     2.7048358127354011e-001,     8.8235259193352858e-002,     3.8276339101187495e-001,     1.2297639316465223e-001,     5.5113731416796430e-001,     1.9659310944162223e-001,     8.5152714962394327e-001,     4.0057331379729610e-001,     1.5927818788684029e+000,     1.6273066883781486e+000,     7.6495166131912367e+000,    -2.6676190896796150e+000;
  -4.5235212708863534e-002,    -5.0403617291430391e-002,    -4.7208569311627174e-002,    -1.0345269956755715e-001,    -5.1533381176330897e-002,    -1.6238522686498102e-001,    -5.9138156142419532e-002,    -2.3193432570454176e-001,    -7.2001791061837433e-002,    -3.2016958489789654e-001,    -9.4550040089693546e-002,    -4.4314597806254674e-001,    -1.3823693339063431e-001,    -6.3973908750416852e-001,    -2.4213305071508179e-001,    -1.0403124013014655e+000,    -6.5821877192133904e-001,    -2.6676190896796150e+000,     1.4082559065178297e+000];
 
-  ku1:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X1);
-  ku2:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X2);
-  ku3:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X3);
+  ku1:=Matrices.Internal.k_care_u(A, Q, G, X1);
+  ku2:=Matrices.Internal.k_care_u(A, Q, G, X2);
+  ku3:=Matrices.Internal.k_care_u(A, Q, G, X3);
   Qr1 := X1*G*X1-transpose(A)*X1-X1*A;
   Qr2 := X2*G*X2-transpose(A)*X2-X2*A;
   Qr3 := X3*G*X3-transpose(A)*X3-X3*A;
-  deltaQ1 := Modelica.Math.Matrices.norm(Q-Qr1)/Modelica.Math.Matrices.norm(Q);
-  deltaQ2 := Modelica.Math.Matrices.norm(Q-Qr2)/Modelica.Math.Matrices.norm(Q);
-  deltaQ3 := Modelica.Math.Matrices.norm(Q-Qr3)/Modelica.Math.Matrices.norm(Q);
+  deltaQ1 := MatricesMSL.norm(Q-Qr1)/MatricesMSL.norm(Q);
+  deltaQ2 := MatricesMSL.norm(Q-Qr2)/MatricesMSL.norm(Q);
+  deltaQ3 := MatricesMSL.norm(Q-Qr3)/MatricesMSL.norm(Q);
 
-  condX1 := Modelica.Math.Matrices.conditionNumber(X1);
-  normX1 := Modelica.Math.Matrices.norm(X1, 2);
-  condX2 := Modelica.Math.Matrices.conditionNumber(X2);
-  normX2 := Modelica.Math.Matrices.norm(X2, 2);
-  condX3 := Modelica.Math.Matrices.conditionNumber(X3);
-  normX3 := Modelica.Math.Matrices.norm(X3, 2);
+  condX1 := MatricesMSL.conditionNumber(X1);
+  normX1 := MatricesMSL.norm(X1, 2);
+  condX2 := MatricesMSL.conditionNumber(X2);
+  normX2 := MatricesMSL.norm(X2, 2);
+  condX3 := MatricesMSL.conditionNumber(X3);
+  normX3 := MatricesMSL.norm(X3, 2);
 
   Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement",outputFile);
   Modelica.Utilities.Streams.print(Matrices.printMatrix(X1, 16, "X1"),outputFile);

@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.care;
 function care13 "Example 13  from Benner benchmarks"
   extends Modelica.Icons.Function;
+  import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices;
   input String outputFile = "";
 
@@ -22,8 +23,8 @@ protected
   Real deltaQ2;
   Real deltaQ3;
   Real H[8,8]=[A,-G; -Q,-transpose(A)];
-  Real condH=Modelica.Math.Matrices.conditionNumber(H);
-  Real normH=Modelica.Math.Matrices.norm(H, 2);
+  Real condH=MatricesMSL.conditionNumber(H);
+  Real normH=MatricesMSL.norm(H, 2);
   Real condX1;
   Real normX1;
   Real condX2;
@@ -40,25 +41,25 @@ public
                        9.9999999994873053e-007,   8.6123471821676468e-007,   1.8035961902063092e-007,   4.6187574179129038e-008];
   output Real ku1;
   output Real ku2;
-  output Real ku3=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X3);
+  output Real ku3=Matrices.Internal.k_care_u(A, Q, G, X3);
 algorithm
   X1:=Matrices.care(A, B, R, Q, false);
   X2:=Matrices.care(A, B, R, Q, true);
-  ku1:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X1);
-  ku2:=Modelica_LinearSystems2.Math.Matrices.Internal.k_care_u(A, Q, G, X2);
+  ku1:=Matrices.Internal.k_care_u(A, Q, G, X1);
+  ku2:=Matrices.Internal.k_care_u(A, Q, G, X2);
   Qr1 := X1*G*X1-transpose(A)*X1-X1*A;
   Qr2 := X2*G*X2-transpose(A)*X2-X2*A;
   Qr3 := X3*G*X3-transpose(A)*X3-X3*A;
-  deltaQ1 := Modelica.Math.Matrices.norm(Q-Qr1)/Modelica.Math.Matrices.norm(Q);
-  deltaQ2 := Modelica.Math.Matrices.norm(Q-Qr2)/Modelica.Math.Matrices.norm(Q);
-  deltaQ3 := Modelica.Math.Matrices.norm(Q-Qr3)/Modelica.Math.Matrices.norm(Q);
+  deltaQ1 := MatricesMSL.norm(Q-Qr1)/MatricesMSL.norm(Q);
+  deltaQ2 := MatricesMSL.norm(Q-Qr2)/MatricesMSL.norm(Q);
+  deltaQ3 := MatricesMSL.norm(Q-Qr3)/MatricesMSL.norm(Q);
 
-  condX1 := Modelica.Math.Matrices.conditionNumber(X1);
-  normX1 := Modelica.Math.Matrices.norm(X1, 2);
-  condX2 := Modelica.Math.Matrices.conditionNumber(X2);
-  normX2 := Modelica.Math.Matrices.norm(X2, 2);
-  condX3 := Modelica.Math.Matrices.conditionNumber(X3);
-  normX3 := Modelica.Math.Matrices.norm(X3, 2);
+  condX1 := MatricesMSL.conditionNumber(X1);
+  normX1 := MatricesMSL.norm(X1, 2);
+  condX2 := MatricesMSL.conditionNumber(X2);
+  normX2 := MatricesMSL.norm(X2, 2);
+  condX3 := MatricesMSL.conditionNumber(X3);
+  normX3 := MatricesMSL.norm(X3, 2);
 
   Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement",outputFile);
   Modelica.Utilities.Streams.print(Matrices.printMatrix(X1, 16, "X1"),outputFile);
