@@ -2,5 +2,3 @@
 convertElement("Modelica_LinearSystems2.Utilities.Plants.DoublePendulum","world.mue","world.mu");
 convertModifiers("Modelica_LinearSystems2.Utilities.Plants.DoublePendulumInverse",{"torque.torqueDiameter"},{"torque.connectionLineDiameter=%torque.torqueDiameter%"});
 convertElement("Modelica_LinearSystems2.Utilities.Plants.DoublePendulumInverse","world.mue","world.mu");
-convertElement("Modelica_LinearSystems2.WorkInProgress.Controller.Examples.limIntegrator","sine.freqHz","sine.f");
-convertElement("Modelica_LinearSystems2.WorkInProgress.Tests.temp.testModel","sine.freqHz","sine.f");
