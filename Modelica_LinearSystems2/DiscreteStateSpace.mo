@@ -232,7 +232,7 @@ public
             /*  der_x = A*x + B*u
              x = pre(x) + Ts*der_x
      */
-        (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := Modelica.Math.Matrices.LU(identity(nx) -
           Ts*ss.A);
         dss.B2 := LU_solve2(
               LU,
@@ -250,7 +250,7 @@ public
             /*  der_x = A*x + B*u
              x = pre_x + (Ts/2)*(pre_der_x + der_x);
      */
-        (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := Modelica.Math.Matrices.LU(identity(nx) -
           (Ts/2)*ss.A);
         dss.B2 := LU_solve2(
               LU,
@@ -442,7 +442,7 @@ public
             /*  der_x = A*x + B*u
              x = pre(x) + Ts*der_x
      */
-        (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := Modelica.Math.Matrices.LU(identity(nx) -
           Ts*A);
         dss.B2 := LU_solve2(
               LU,
@@ -460,7 +460,7 @@ public
             /*  der_x = A*x + B*u
              x = pre_x + (Ts/2)*(pre_der_x + der_x);
      */
-        (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := Modelica.Math.Matrices.LU(identity(nx) -
           (Ts/2)*A);
         dss.B2 := LU_solve2(
               LU,

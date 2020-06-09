@@ -19,10 +19,10 @@ record DiscreteStateSpace
     import Modelica_LinearSystems2;
   function fromDiscreteTransferFunction =
       Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
-                                                                                                      annotation (Documentation(info="<html> </html>"));
+    annotation (Documentation(info="<html> </html>"));
   function fromDiscreteZerosAndPoles =
       Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace
-                                                                                                      annotation (Documentation(info="<html> </html>"));
+    annotation (Documentation(info="<html> </html>"));
     function fromMatrices "Default constructor for a DiscreteStateSpace record"
       import Modelica;
       import Modelica_LinearSystems2;
@@ -100,7 +100,7 @@ record DiscreteStateSpace
             /*  der_x = A*x + B*u
              x = pre(x) + Ts*der_x
      */
-        (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := Modelica.Math.Matrices.LU(identity(nx) -
           Ts*sc.A);
         sd.B2 := LU_solve2(
               LU,
@@ -118,7 +118,7 @@ record DiscreteStateSpace
             /*  der_x = A*x + B*u
              x = pre_x + (Ts/2)*(pre_der_x + der_x);
      */
-        (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := Modelica.Math.Matrices.LU(identity(nx) -
           (Ts/2)*sc.A);
         sd.B2 := LU_solve2(
               LU,
@@ -286,7 +286,7 @@ respectively.
             /*  der_x = A*x + B*u
              x = pre(x) + Ts*der_x
      */
-        (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := Modelica.Math.Matrices.LU(identity(nx) -
           Ts*A);
         sd.B2 := LU_solve2(
               LU,
@@ -304,7 +304,7 @@ respectively.
             /*  der_x = A*x + B*u
              x = pre_x + (Ts/2)*(pre_der_x + der_x);
      */
-        (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := Modelica.Math.Matrices.LU(identity(nx) -
           (Ts/2)*A);
         sd.B2 := LU_solve2(
               LU,

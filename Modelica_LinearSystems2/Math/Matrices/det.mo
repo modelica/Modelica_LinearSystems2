@@ -10,7 +10,7 @@ protected
 
 algorithm
   if size(LU, 1) > 0 then
-    (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(A);
+    (LU,pivots) := Modelica.Math.Matrices.LU(A);
     result := product(LU[i, i] for i in 1:size(A, 1))*product(if pivots[i] == i then
             1 else -1 for i in 1:size(pivots, 1));
   else
