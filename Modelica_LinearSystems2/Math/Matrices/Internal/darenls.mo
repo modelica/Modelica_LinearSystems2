@@ -41,7 +41,7 @@ algorithm
     Xk := X0;
     while (not stop and k<10) loop
       k := k + 1;
-      Hk := solve2(R+BT*Xk*B,BT);
+      Hk := Modelica.Math.Matrices.solve2(R+BT*Xk*B,BT);
       Ak := A-B*Hk*Xk*A;
 
       Rk:=AT*Xk*A - Xk + Q - AT*Xk*B*Hk*Xk*A;
@@ -58,7 +58,7 @@ algorithm
 
     end while;
     X := Xk;
-    r := Matrices.Internal.frobeniusNorm(AT*X*A - X +Q - AT*X*B*solve2(R+BT*X*B,BT)*X*A);
+    r := Matrices.Internal.frobeniusNorm(AT*X*A - X +Q - AT*X*B*Modelica.Math.Matrices.solve2(R+BT*X*B,BT)*X*A);
   else
     X := fill(0, 0, 0);
     r := 0;

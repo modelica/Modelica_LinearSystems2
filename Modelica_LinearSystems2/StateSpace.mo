@@ -7022,14 +7022,14 @@ The algebraic Riccati equation is solved by using the Schur algorithm
                 ss.B,
                 R,
                 Q);
-          K := Math.Matrices.solve2(R, transpose(ss.B)*S);
+          K := Modelica.Math.Matrices.solve2(R, transpose(ss.B)*S);
         else
           (S,ev) := Math.Matrices.dare(
                 ss.A,
                 ss.B,
                 R,
                 Q);
-          K := Math.Matrices.solve2(R + transpose(ss.B)*S*ss.B, transpose(ss.B)
+          K := Modelica.Math.Matrices.solve2(R + transpose(ss.B)*S*ss.B, transpose(ss.B)
             *S*ss.A);
         end if;
 
@@ -7203,14 +7203,14 @@ The eigenvalues of the closed loop system <b>A</b> - <b>B</b>*<b>K</b> are compu
                 ss.B,
                 R,
                 Q);
-          Kc := Math.Matrices.solve2(R, transpose(ss.B)*Sc);
+          Kc := Modelica.Math.Matrices.solve2(R, transpose(ss.B)*Sc);
         else
           (Sc,) := Math.Matrices.dare(
                 ss.A,
                 ss.B,
                 R,
                 Q);
-          Kc := Math.Matrices.solve2(R + transpose(ss.B)*Sc*ss.B, transpose(ss.B)
+          Kc := Modelica.Math.Matrices.solve2(R + transpose(ss.B)*Sc*ss.B, transpose(ss.B)
             *Sc*ss.A);
         end if;
 
@@ -7222,14 +7222,14 @@ The eigenvalues of the closed loop system <b>A</b> - <b>B</b>*<b>K</b> are compu
                 rss.B,
                 V,
                 W);
-          Kf := transpose(Math.Matrices.solve2(V, ss.C*Sf));
+          Kf := transpose(Modelica.Math.Matrices.solve2(V, ss.C*Sf));
         else
           (Sf,) := Math.Matrices.dare(
                 rss.A,
                 rss.B,
                 V,
                 W);
-          Kf := transpose(Math.Matrices.solve2(V + rss.C*Sf*rss.B, rss.C*Sf*rss.A));
+          Kf := transpose(Modelica.Math.Matrices.solve2(V + rss.C*Sf*rss.B, rss.C*Sf*rss.A));
         end if;
 
       else
