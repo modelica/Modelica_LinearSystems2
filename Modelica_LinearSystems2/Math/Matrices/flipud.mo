@@ -6,4 +6,6 @@ function flipud "Flip the columns of a matrix in up/down direction"
   output Real Aflip[size(A, 1),size(A, 2)]=A[{i for i in size(A,1):-1:1},:]
     "Flipped matrix";
 algorithm
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.flipUpDown instead");
 end flipud;
