@@ -136,7 +136,7 @@ algorithm
   S := fill(Complex(0), nx, size(B, 2)*(nx - numberOfComplexPairs));
 
    if numberOfComplexPairs > 0 and 2*rankB - nx > 0 then
-     Srr := Matrices.nullspace([U1Tr; U1Tr*A]);
+     Srr := Modelica.Math.Matrices.nullSpace([U1Tr; U1Tr*A]);
    else
      Srr := fill(0, nx, 0);
    end if;
