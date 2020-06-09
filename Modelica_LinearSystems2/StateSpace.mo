@@ -2295,7 +2295,7 @@ ss;
 
           // Determine frequency and number of corresponding eigenvalue
           (w1,d1) := Complex.frequency(cev[maxIndex1]);
-          iw1 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex1, evIndex);
+          iw1 := Modelica.Math.Vectors.find(maxIndex1, evIndex);
           if iw1 <= nReal then
             number1 := String(iw1);
           else
@@ -2304,7 +2304,7 @@ ss;
 
           if two then
             (w2,d2) := Complex.frequency(cev[maxIndex2]);
-            iw2 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex2, evIndex);
+            iw2 := Modelica.Math.Vectors.find(maxIndex2, evIndex);
             if iw2 <= nReal then
               number2 := String(iw2);
             else
@@ -5769,7 +5769,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
 
           // Determine frequency and number of corresponding eigenvalue
           (w1,d1) := Complex.frequency(cev[maxIndex1]);
-          iw1 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex1, evIndex);
+          iw1 := Modelica.Math.Vectors.find(maxIndex1, evIndex);
           if iw1 <= nReal then
             number1 := String(iw1);
           else
@@ -5778,7 +5778,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
 
           if two then
             (w2,d2) := Complex.frequency(cev[maxIndex2]);
-            iw2 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex2, evIndex);
+            iw2 := Modelica.Math.Vectors.find(maxIndex2, evIndex);
             if iw2 <= nReal then
               number2 := String(iw2);
             else
