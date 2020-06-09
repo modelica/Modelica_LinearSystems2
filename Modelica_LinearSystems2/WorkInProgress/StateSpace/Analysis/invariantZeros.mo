@@ -3,6 +3,7 @@ encapsulated function invariantZeros
   "Compute invariant zeros of linear state space system"
 
   import Modelica;
+  import Modelica.Math.Matrices.flipLeftRight;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Complex;
@@ -52,8 +53,8 @@ algorithm
     if n == 0 then
       Zeros := fill(Complex(0), 0);
     else
-      (,R,,V2) := Matrices.QR(Matrices.fliplr(transpose([Cr,Dr])));
-      Vf := Matrices.fliplr(V2);
+      (,R,,V2) := Matrices.QR(flipLeftRight(transpose([Cr,Dr])));
+      Vf := flipLeftRight(V2);
       AfBf := [Ar,Br]*Vf;
       Af := AfBf[:, 1:size(Ar, 2)];
       Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];

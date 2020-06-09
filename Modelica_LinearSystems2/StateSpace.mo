@@ -3593,6 +3593,7 @@ i.e. v1 = |      |,   v2 = |       |
       "Compute invariant zeros of linear state space system"
 
       import Modelica;
+      import Modelica.Math.Matrices.flipLeftRight;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Matrices;
@@ -3649,8 +3650,8 @@ i.e. v1 = |      |,   v2 = |       |
         if n == 0 then
           Zeros := fill(Complex(0), 0);
         else
-          (,R,,V2) := Matrices.QR(Matrices.fliplr(transpose([Cr, Dr])));
-          Vf := Matrices.fliplr(V2);
+          (,R,,V2) := Matrices.QR(flipLeftRight(transpose([Cr, Dr])));
+          Vf := flipLeftRight(V2);
           AfBf := [Ar, Br]*Vf;
           Af := AfBf[:, 1:size(Ar, 2)];
           Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
@@ -10667,6 +10668,7 @@ to separate the uncontrollable poles from the controllable poles.
     encapsulated function invariantZerosWithRealMatrix
       "Compute invariant zeros of linear state space system (system given by A,B,C,D matrices)"
       import Modelica;
+      import Modelica.Math.Matrices.flipLeftRight;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Matrices;
@@ -10724,8 +10726,8 @@ to separate the uncontrollable poles from the controllable poles.
         if n == 0 then
            InvariantZeros := fill(0.0,0,2);
         else
-          (,R,,V2) := Matrices.QR(Matrices.fliplr(transpose([Cr, Dr])));
-          Vf := Matrices.fliplr(V2);
+          (,R,,V2) := Matrices.QR(flipLeftRight(transpose([Cr, Dr])));
+          Vf := flipLeftRight(V2);
           AfBf := [Ar, Br]*Vf;
           Af := AfBf[:, 1:size(Ar, 2)];
           Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
@@ -12336,6 +12338,7 @@ k = ---------- * ----------------------
       "Algorithm to compress the generalized system matrix [A, B; C, D] to calculate the invariant zeros of a system"
 
       import Modelica;
+      import Modelica.Math.Matrices.flipLeftRight;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Math.Matrices;
@@ -12430,8 +12433,8 @@ k = ---------- * ----------------------
             Cu := CC[sigma + 1:end, :];
             Co := CC[1:sigma, :];
 
-            (V,R,tau,V2) := Matrices.QR(Matrices.fliplr(transpose(Cu)));
-            Vf := Matrices.fliplr(V2);
+            (V,R,tau,V2) := Matrices.QR(flipLeftRight(transpose(Cu)));
+            Vf := flipLeftRight(V2);
 
             rankR := 0;
             //  !!!! rank determination
