@@ -1,10 +1,10 @@
 within Modelica_LinearSystems2.Internal;
 function to_Hz "Obsolete class: Convert from rad/s to Hz"
-  extends Modelica.SIunits.Conversions.ConversionIcon;
+  extends Modelica.Units.Icons.Conversion;
   extends Modelica.Icons.ObsoleteModel;
 
-  input Modelica.SIunits.AngularVelocity w "angular velocity";
-  output Modelica.SIunits.Frequency f "frequency";
+  input Modelica.Units.SI.AngularVelocity w "angular velocity";
+  output Modelica.Units.SI.Frequency f "frequency";
 algorithm
   f := w/(2*Modelica.Constants.pi);
   annotation (Icon(graphics={Text(

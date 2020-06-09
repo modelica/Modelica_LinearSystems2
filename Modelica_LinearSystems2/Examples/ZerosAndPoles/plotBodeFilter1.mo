@@ -8,7 +8,7 @@ function plotBodeFilter1 "Compute filter and plot frequency response of filter"
 
   input Utilities.Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
   input Integer order=2;
-  input Modelica.SIunits.Frequency f_cut=10;
+  input Modelica.Units.SI.Frequency f_cut=10;
   output Boolean ok;
 protected
   ZerosAndPoles tf_filter=ZerosAndPoles.Design.filter(

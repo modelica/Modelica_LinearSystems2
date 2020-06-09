@@ -9,7 +9,7 @@ model limIntegrator "linIntegrator"
     withDelay=true,
     initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState)
     annotation (Placement(transformation(extent={{0,0},{20,20}})));
-  Modelica.Blocks.Sources.Sine sine(freqHz=1, amplitude=5)
+  Modelica.Blocks.Sources.Sine sine(f=1, amplitude=5)
     annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
   Modelica.Blocks.Sources.Pulse pulse(
     period=0.25,

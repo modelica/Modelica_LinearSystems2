@@ -14,7 +14,7 @@ function Conversions
 
   input Boolean doPlot=true;
   input String modelName="Modelica_LinearSystems2.Utilities.Plants.DoublePendulum";
-  input Modelica.SIunits.Time Ts=0.1;
+  input Modelica.Units.SI.Time Ts=0.1;
 
 protected
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact;

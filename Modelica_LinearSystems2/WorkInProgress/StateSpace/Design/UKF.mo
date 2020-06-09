@@ -19,7 +19,7 @@ function UKF "Unscented Kalman filter design function"
   input Real alpha=0.1 "Spread of sigma points";
   input Real beta=2 "Characteristic of the distribution of x";
   input Real kappa=0 "Kurtosis scaling of sigma point distribution";
-  input Modelica.SIunits.Time Ts "Sample time";
+  input Modelica.Units.SI.Time Ts "Sample time";
 
   output Real x_est[size(xpre,1)] "Estimated state vector";
   output Real y_est[size(y,1)] "Estimated output";

@@ -5,7 +5,7 @@ package Linearization
     Modelica.Blocks.Continuous.FirstOrder firstOrder(k=k, T=T)
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     parameter Real k=1 "Gain";
-    parameter Modelica.SIunits.Time T=1 "Time Constant";
+    parameter Modelica.Units.SI.Time T=1 "Time Constant";
   equation
     connect(firstOrder.u, u) annotation (Line(
         points={{-12,0},{-120,0}},

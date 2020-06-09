@@ -5,7 +5,7 @@ model SimpleControlledDrive
 
   parameter Real kp = 10 "Gain of P position controller";
   parameter Real kv = 9 "Gain of PI speed controller";
-  parameter Modelica.SIunits.Time Tv = 0.05
+  parameter Modelica.Units.SI.Time Tv = 0.05
     "Time constant of PI speed controller";
   parameter Types.BlockTypeWithGlobalDefault blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption
     "Type of block";

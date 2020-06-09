@@ -12,8 +12,8 @@ model Motor "A basic model of an electrical dc motor."
         transformation(extent={{-60,30},{-40,50}}, rotation=0)));
   Modelica.Electrical.Analog.Basic.Inductor La(L=0.05) annotation (Placement(
         transformation(extent={{-20,30},{0,50}}, rotation=0)));
-  Modelica.Electrical.Analog.Basic.EMF emf annotation (Placement(transformation(
-          extent={{0,-10},{20,10}}, rotation=0)));
+  Modelica.Electrical.Analog.Basic.RotationalEMF emf annotation (Placement(
+        transformation(extent={{0,-10},{20,10}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealInput i_ref annotation (Placement(
         transformation(extent={{-108,-10},{-90,10}}, rotation=0)));
   Modelica.Mechanics.Rotational.Components.Inertia Jm(J=0.001) annotation (

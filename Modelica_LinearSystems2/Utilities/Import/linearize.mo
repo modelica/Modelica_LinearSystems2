@@ -1,8 +1,8 @@
 within Modelica_LinearSystems2.Utilities.Import;
 function linearize "Linearize a model after simulation up to a given time"
   input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
-  input Modelica.SIunits.Time t_linearize= 0
-    "Simulate until T_linearize and then linearize" annotation(Dialog);
+  input Modelica.Units.SI.Time t_linearize=0
+    "Simulate until T_linearize and then linearize" annotation (Dialog);
 
 protected
   String fileName="dslin";

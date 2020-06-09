@@ -4,18 +4,18 @@ encapsulated function frequencyResponsePlot "Bode plot given f,A,phi values"
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.Internal;
     import Modelica_LinearSystems2.Utilities.Plot;
-    import SI = Modelica.SIunits;
+    import      Modelica.Units.SI;
 
   input Real f[:] "Frequency vector (either in Hz or rad/s)";
   input Real a[size(f,1)]
     "Absolute value/magnitude vector (either without unit or in dB)";
-  input SI.Conversions.NonSIunits.Angle_deg phi[size(f,1)] "Angles in degree";
+  input Modelica.Units.NonSI.Angle_deg phi[size(f, 1)] "Angles in degree";
 
   input Boolean autoRange=true
     "= true, if abszissa range is automatically determined";
-  input Modelica.SIunits.Frequency f_min=0.1
+  input Modelica.Units.SI.Frequency f_min=0.1
     "Minimum frequency value, if autoRange = false";
-  input Modelica.SIunits.Frequency f_max=10
+  input Modelica.Units.SI.Frequency f_max=10
     "Maximum frequency value, if autoRange = false";
 
   input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));

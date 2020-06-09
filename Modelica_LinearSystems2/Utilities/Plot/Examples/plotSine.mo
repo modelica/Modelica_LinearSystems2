@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function plotSine "Plot a sine function in one diagram"
-   input Modelica.SIunits.Frequency freqHz = 2 "Frequency of sine wave";
-   input Modelica.SIunits.Damping damping = 0.8
+  input Modelica.Units.SI.Frequency freqHz=2 "Frequency of sine wave";
+  input Modelica.Units.SI.Damping damping=0.8
     "Damping coefficient of sine wave";
 protected
    Integer nX = 500;

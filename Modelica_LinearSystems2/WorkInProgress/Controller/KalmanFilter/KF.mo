@@ -8,7 +8,7 @@ model KF "Discrete State Space block"
   import Modelica_LinearSystems2.StateSpace;
 
   parameter StateSpace ss "Continuous linear system model";
-  parameter Modelica.SIunits.Time sampleTime=0.5
+  parameter Modelica.Units.SI.Time sampleTime=0.5
     "Base sample time for discrete blocks";
   parameter Real Q[size(dss.B, 2),size(dss.B, 2)]=identity(size(dss.B, 2))
     "Input or process noise covariance matrix of the previous instant";

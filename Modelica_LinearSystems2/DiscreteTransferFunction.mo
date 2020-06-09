@@ -9,8 +9,8 @@ operator record DiscreteTransferFunction
   Real n[:] "Coefficients of numerator polynomial (in descending order)" annotation(Dialog(group="y = n*{z^m, ... , z, 1} / (d*{z^r, ... , z, 1}) * u"));
   Real d[:] "Coefficients of denominator polynomial (in descending order)" annotation(Dialog(group="y = n*{z^m, ... , z, 1} / (d*{z^r, ... , z, 1}) * u"));
 
-  Modelica.SIunits.Time Ts "Sample time"
-       annotation(Dialog(group="Data used to construct discrete from continuous system"));
+  Modelica.Units.SI.Time Ts "Sample time" annotation (Dialog(group=
+          "Data used to construct discrete from continuous system"));
 
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
@@ -34,7 +34,7 @@ operator record DiscreteTransferFunction
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
       input Real r "Value of Real variable";
-      input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
@@ -61,7 +61,7 @@ operator record DiscreteTransferFunction
       input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
-      input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
@@ -93,7 +93,7 @@ operator record DiscreteTransferFunction
 
       input Real n[:] "Coefficients of numerator polynomial";
       input Real d[:] "Coefficients of denominator polynomial";
-      input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
       input String uName = "" "Input name";
@@ -122,7 +122,7 @@ operator record DiscreteTransferFunction
 
       input Polynomial n "Numerator polynomial";
       input Polynomial d "Denominator polynomial";
-      input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
@@ -141,8 +141,8 @@ operator record DiscreteTransferFunction
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
       input TransferFunction tf "continuous transfer function";
-      input Modelica.SIunits.Time Ts "Sample time"
-           annotation(Dialog(group="Data used to construct discrete from continuous system"));
+      input Modelica.Units.SI.Time Ts "Sample time" annotation (Dialog(group=
+              "Data used to construct discrete from continuous system"));
 
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
@@ -402,7 +402,7 @@ encapsulated function z "Generate the discrete transfer function z"
     import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
-  input Modelica.SIunits.Time Ts=0;
+    input Modelica.Units.SI.Time Ts=0;
   output DiscreteTransferFunction dtf(n={1,0}, d={1},Ts=Ts) "z";
 algorithm
 
@@ -825,7 +825,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
-      import SI = Modelica.SIunits;
+      import Modelica.Units.SI;
 
       input DiscreteTransferFunction dtf
         "DiscreteTransfer function to be plotted";
@@ -854,7 +854,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       SI.AngularVelocity w[nPoints];
       Complex z[nPoints];
       SI.Frequency f[nPoints];
-      SI.Conversions.NonSIunits.Angle_deg phi[nPoints];
+      Modelica.Units.NonSI.Angle_deg phi[nPoints];
       Real A[nPoints];
       Boolean OK;
       Complex c;
@@ -900,7 +900,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       // Compute magnitude/phase at the frequency points
       phi_old := 0.0;
       for i in 1:nPoints loop
-        w[i] := SI.Conversions.from_Hz(f[i]);
+        w[i] := Modelica.Units.Conversions.from_Hz(f[i]);
         z[i] := Complex.exp(Complex(0,w[i]*dtf.Ts));
         c := TransferFunction.Analysis.evaluate(
               tf,
@@ -908,7 +908,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
               1e-10);
         A[i] := Complex.'abs'(c);
         phi_old := Complex.arg(c, phi_old);
-        phi[i] := SI.Conversions.to_deg(phi_old);
+        phi[i] := Modelica.Units.Conversions.to_deg(phi_old);
 
         // Convert to other units, if required
         if not Hz then
@@ -1412,7 +1412,7 @@ with
     input Real T_linearize=0
         "point in time of simulation to linearize the model";
     input String fileName="dslin" "Name of the result file";
-    input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
     protected
