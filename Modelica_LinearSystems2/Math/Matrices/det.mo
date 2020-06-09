@@ -16,7 +16,9 @@ algorithm
   else
     result := -1e100;
   end if;
-  annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.det instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Matrices.<b>det</b>(A);
