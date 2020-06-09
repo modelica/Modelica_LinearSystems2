@@ -1,3 +1,7 @@
 # Set default behaviour, in case users don't have core.autocrlf set.
 * -text
 *.mo eol=native
+
+# list of files that git archive should ignore
+.gitattributes export-ignore
+.gitignore export-ignore
