@@ -18,7 +18,9 @@ no or infinitely many solutions (A is singular).");
   else
     x := fill(0, 0);
   end if;
-  annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.solve instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Matrices.<b>solve</b>(A,b);
