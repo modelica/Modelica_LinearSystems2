@@ -20,4 +20,7 @@ algorithm
         i :=i + 1;
      end if;
   end while;
+
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Vectors.find instead");
 end find;
