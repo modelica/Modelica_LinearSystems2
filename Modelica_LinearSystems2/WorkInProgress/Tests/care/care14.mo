@@ -24,7 +24,7 @@ protected
   Real deltaQ2;
   Real deltaQ3;
   Real H[8,8]=[A,-G; -Q,-transpose(A)];
-  Real condH=Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+  Real condH=Modelica.Math.Matrices.conditionNumber(
                                                H);
   Real normH=Matrices.norm(H, 2);
   Real condX1;
@@ -58,11 +58,11 @@ algorithm
   deltaQ2 := Modelica.Math.Matrices.norm(Q-Qr2)/Modelica.Math.Matrices.norm(Q);
   deltaQ3 := Modelica.Math.Matrices.norm(Q-Qr3)/Modelica.Math.Matrices.norm(Q);
 
-  condX1 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(X1);
+  condX1 := Modelica.Math.Matrices.conditionNumber(X1);
   normX1 := Matrices.norm(X1, 2);
-  condX2 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(X2);
+  condX2 := Modelica.Math.Matrices.conditionNumber(X2);
   normX2 := Matrices.norm(X2, 2);
-  condX3 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(X3);
+  condX3 := Modelica.Math.Matrices.conditionNumber(X3);
   normX3 := Matrices.norm(X3, 2);
 
   Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement",outputFile);

@@ -10,7 +10,7 @@ protected
   Real Q[2,2]=[9,6; 6,4];
   Real G[2,2]=[1, -1; -1, 1] "B*inv(R)*transpose(B)";
   Real H[4,4]=[A,-G; -Q,-transpose(A)];
-  Real condH=Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+  Real condH=Modelica.Math.Matrices.conditionNumber(
                                                H);
   Real normH=Matrices.norm(H, 2);
   Real condX1;
@@ -53,13 +53,13 @@ algorithm
   Modelica.Utilities.Streams.print("Exact solution X3");
   Matrices.printMatrix(X3, 16, "X3");
 
-  condX1 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+  condX1 := Modelica.Math.Matrices.conditionNumber(
                                               X1);
   normX1 := Matrices.norm(X1, 2);
-  condX2 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+  condX2 := Modelica.Math.Matrices.conditionNumber(
                                               X2);
   normX2 := Matrices.norm(X2, 2);
-  condX3 := Modelica_LinearSystems2.Math.Matrices.conditionNumber(
+  condX3 := Modelica.Math.Matrices.conditionNumber(
                                            X3);
   normX3 := Matrices.norm(X3, 2);
   Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement",outputFile);
