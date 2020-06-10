@@ -193,7 +193,7 @@ public
     function fromStateSpace
       "Generate a DiscreteStateSpace data record from a continuous state space system "
       import Modelica;
-      import Modelica.Math.Matrices.LU_solve2;
+      import MatricesMSL = Modelica.Math.Matrices;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Utilities.Types.Method;
 
@@ -232,13 +232,13 @@ public
             /*  der_x = A*x + B*u
              x = pre(x) + Ts*der_x
      */
-        (LU,pivots) := Modelica.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := MatricesMSL.LU(identity(nx) -
           Ts*ss.A);
-        dss.B2 := LU_solve2(
+        dss.B2 := MatricesMSL.LU_solve2(
               LU,
               pivots,
               Ts*ss.B);
-        dss.A := LU_solve2(
+        dss.A := MatricesMSL.LU_solve2(
               LU,
               pivots,
               identity(nx));
@@ -250,13 +250,13 @@ public
             /*  der_x = A*x + B*u
              x = pre_x + (Ts/2)*(pre_der_x + der_x);
      */
-        (LU,pivots) := Modelica.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := MatricesMSL.LU(identity(nx) -
           (Ts/2)*ss.A);
-        dss.B2 := LU_solve2(
+        dss.B2 := MatricesMSL.LU_solve2(
               LU,
               pivots,
               (Ts/2)*ss.B);
-        dss.A := LU_solve2(
+        dss.A := MatricesMSL.LU_solve2(
               LU,
               pivots,
               identity(nx) + (Ts/2)*ss.A);
@@ -268,7 +268,7 @@ public
            /* x = phi*pre(x) + gamma*pre(u);
        y = C*x + D*u
     */
-        (dss.A,dss.B) := Modelica.Math.Matrices.integralExp(
+        (dss.A,dss.B) := MatricesMSL.integralExp(
               ss.A,
               ss.B,
               Ts);
@@ -287,7 +287,7 @@ public
       x = z + gamma1/Ts*u
 
     */
-        (dss.A,dss.B,dss.B2) := Modelica.Math.Matrices.integralExpT(
+        (dss.A,dss.B,dss.B2) := MatricesMSL.integralExpT(
               ss.A,
               ss.B,
               Ts);
@@ -303,7 +303,7 @@ public
       Limitations: The infinite impulses at t = kT is ignored in the mapping
     */
 
-        dss.A := Modelica.Math.Matrices.exp(ss.A, Ts);
+        dss.A := MatricesMSL.exp(ss.A, Ts);
         dss.B := dss.A*ss.B;
         dss.C := ss.C;
         dss.D := ss.C*ss.B;
@@ -401,7 +401,7 @@ public
     encapsulated function fromMatrices2
       "Generate a DiscreteStateSpace data record from matrices of a continuous state space system"
       import Modelica;
-      import Modelica.Math.Matrices.LU_solve2;
+      import MatricesMSL = Modelica.Math.Matrices;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Utilities.Types.Method;
 
@@ -442,13 +442,13 @@ public
             /*  der_x = A*x + B*u
              x = pre(x) + Ts*der_x
      */
-        (LU,pivots) := Modelica.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := MatricesMSL.LU(identity(nx) -
           Ts*A);
-        dss.B2 := LU_solve2(
+        dss.B2 := MatricesMSL.LU_solve2(
               LU,
               pivots,
               Ts*B);
-        dss.A := LU_solve2(
+        dss.A := MatricesMSL.LU_solve2(
               LU,
               pivots,
               identity(nx));
@@ -460,13 +460,13 @@ public
             /*  der_x = A*x + B*u
              x = pre_x + (Ts/2)*(pre_der_x + der_x);
      */
-        (LU,pivots) := Modelica.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := MatricesMSL.LU(identity(nx) -
           (Ts/2)*A);
-        dss.B2 := LU_solve2(
+        dss.B2 := MatricesMSL.LU_solve2(
               LU,
               pivots,
               (Ts/2)*B);
-        dss.A := LU_solve2(
+        dss.A := MatricesMSL.LU_solve2(
               LU,
               pivots,
               identity(nx) + (Ts/2)*A);
@@ -478,7 +478,7 @@ public
            /* x = phi*pre(x) + gamma*pre(u);
        y = C*x + D*u
     */
-        (dss.A,dss.B) := Modelica.Math.Matrices.integralExp(
+        (dss.A,dss.B) := MatricesMSL.integralExp(
               A,
               B,
               Ts);
@@ -497,7 +497,7 @@ public
       x = z + gamma1/Ts*u
 
     */
-        (dss.A,dss.B,dss.B2) := Modelica.Math.Matrices.integralExpT(
+        (dss.A,dss.B,dss.B2) := MatricesMSL.integralExpT(
               A,
               B,
               Ts);
@@ -513,7 +513,7 @@ public
       Limitations: The infinite impulses at t = kT is ignored in the mapping
     */
 
-        dss.A := Modelica.Math.Matrices.exp(A, Ts);
+        dss.A := MatricesMSL.exp(A, Ts);
         dss.B := dss.A*B;
         dss.C := C;
         dss.D := C*B;

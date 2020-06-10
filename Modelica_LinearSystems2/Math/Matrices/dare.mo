@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function dare "Solution of discrete-time algebraic Riccati equations"
+  import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.Math.Complex;
 
@@ -11,7 +12,7 @@ function dare "Solution of discrete-time algebraic Riccati equations"
 
 protected
   Integer n=size(A, 1);
-  Real G[size(A, 1),size(A, 1)]=B*Modelica.Math.Matrices.solve2(R, transpose(B));
+  Real G[size(A, 1),size(A, 1)]=B*MatricesMSL.solve2(R, transpose(B));
   Real AT[:,:]=transpose(A);
   Real LU[n,n];
   Integer p[n];
@@ -20,7 +21,7 @@ protected
   Real H12[n,n];
   Real H21[n,n];
   Real H22[n,n];
-//  Real invAT[:,:]=transpose(Modelica.Math.Matrices.inv(A));
+//  Real invAT[:,:]=transpose(MatricesMSL.inv(A));
 //  Real H[:,:]=[A + G*invAT*Q,-G*invAT; -invAT*Q,invAT];
   Real H_RSF[2*n,2*n];
   Real Z[size(H, 1),size(H, 2)];
@@ -40,11 +41,11 @@ public
   output Complex ev[size(A, 1)] "Eigenvalues of the closed loop system";
 
 algorithm
-  (LU,p) := Modelica.Math.Matrices.LU(AT);
-  H21 := Modelica.Math.Matrices.LU_solve2(LU,p,-Q);
-  H22 := Modelica.Math.Matrices.LU_solve2(LU,p,identity(n));
-  (LU,p) := Modelica.Math.Matrices.LU(A);
-  H12 := Modelica.Math.Matrices.LU_solve2(LU,p,-G);
+  (LU,p) := MatricesMSL.LU(AT);
+  H21 := MatricesMSL.LU_solve2(LU,p,-Q);
+  H22 := MatricesMSL.LU_solve2(LU,p,identity(n));
+  (LU,p) := MatricesMSL.LU(A);
+  H12 := MatricesMSL.LU_solve2(LU,p,-G);
   H12 := transpose(H12);
   H11 := A - H12*Q;
   H := [H11, H12; H21, H22];
