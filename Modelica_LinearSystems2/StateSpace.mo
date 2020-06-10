@@ -3593,7 +3593,7 @@ i.e. v1 = |      |,   v2 = |       |
       "Compute invariant zeros of linear state space system"
 
       import Modelica;
-      import Modelica.Math.Matrices.flipLeftRight;
+      import MatricesMSL = Modelica.Math.Matrices;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Matrices;
@@ -3650,8 +3650,8 @@ i.e. v1 = |      |,   v2 = |       |
         if n == 0 then
           Zeros := fill(Complex(0), 0);
         else
-          (,R,,V2) := Matrices.QR(flipLeftRight(transpose([Cr, Dr])));
-          Vf := flipLeftRight(V2);
+          (,R,,V2) := Matrices.QR(MatricesMSL.flipLeftRight(transpose([Cr, Dr])));
+          Vf := MatricesMSL.flipLeftRight(V2);
           AfBf := [Ar, Br]*Vf;
           Af := AfBf[:, 1:size(Ar, 2)];
           Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
@@ -3677,7 +3677,7 @@ i.e. v1 = |      |,   v2 = |       |
                 assumed that zero is at infinity (i.e. it is ignored)
           */
           j := 0;
-          zerosMax := 1.0e4*Modelica.Math.Matrices.norm([Af, Bf], p=1);
+          zerosMax := 1.0e4*MatricesMSL.norm([Af, Bf], p=1);
           for i in 1:size(beta, 1) loop
              absZero := Modelica_LinearSystems2.Math.Complex.'abs'(Complex(alphaReal[i], alphaImag[i]));
              if absZero <= beta[i]*zerosMax then
@@ -10668,7 +10668,7 @@ to separate the uncontrollable poles from the controllable poles.
     encapsulated function invariantZerosWithRealMatrix
       "Compute invariant zeros of linear state space system (system given by A,B,C,D matrices)"
       import Modelica;
-      import Modelica.Math.Matrices.flipLeftRight;
+      import MatricesMSL = Modelica.Math.Matrices;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Matrices;
@@ -10726,8 +10726,8 @@ to separate the uncontrollable poles from the controllable poles.
         if n == 0 then
            InvariantZeros := fill(0.0,0,2);
         else
-          (,R,,V2) := Matrices.QR(flipLeftRight(transpose([Cr, Dr])));
-          Vf := flipLeftRight(V2);
+          (,R,,V2) := Matrices.QR(MatricesMSL.flipLeftRight(transpose([Cr, Dr])));
+          Vf := MatricesMSL.flipLeftRight(V2);
           AfBf := [Ar, Br]*Vf;
           Af := AfBf[:, 1:size(Ar, 2)];
           Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
@@ -10751,7 +10751,7 @@ to separate the uncontrollable poles from the controllable poles.
                 assumed that zero is at infinity (i.e. it is ignored)
           */
           j := 0;
-          zerosMax := 1.0e4*Modelica.Math.Matrices.norm([Af, Bf], p=1);
+          zerosMax := 1.0e4*MatricesMSL.norm([Af, Bf], p=1);
           absZero := Modelica_LinearSystems2.StateSpace.Internal.absComplexVector(alphaReal, alphaImag);
           for i in 1:size(beta, 1) loop
              if absZero[i] <= beta[i]*zerosMax then
@@ -12338,7 +12338,7 @@ k = ---------- * ----------------------
       "Algorithm to compress the generalized system matrix [A, B; C, D] to calculate the invariant zeros of a system"
 
       import Modelica;
-      import Modelica.Math.Matrices.flipLeftRight;
+      import MatricesMSL = Modelica.Math.Matrices;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Math.Matrices;
@@ -12389,9 +12389,9 @@ k = ---------- * ----------------------
       Boolean stop1 "reduction finished";
       Boolean stop2 "system has no zeros";
       Integer rankR;
-      // Real normA=Modelica.Math.Matrices.norm(A=A, p=1);
+      // Real normA=MatricesMSL.norm(A=A, p=1);
       // Real eps=normA*1e-12;
-      Real normABCD=Modelica.Math.Matrices.norm([A, B; C, D], p=1);
+      Real normABCD=MatricesMSL.norm([A, B; C, D], p=1);
       Real eps=normABCD*Modelica.Constants.eps*1000;
     algorithm
       if nx > 0 then
@@ -12420,7 +12420,7 @@ k = ---------- * ----------------------
             end if;
           end for;
 
-          //rankR:=Modelica.Math.Matrices.rank(R);
+          //rankR:=MatricesMSL.rank(R);
 
           DD := R[1:rankR, :];
 
@@ -12433,8 +12433,8 @@ k = ---------- * ----------------------
             Cu := CC[sigma + 1:end, :];
             Co := CC[1:sigma, :];
 
-            (V,R,tau,V2) := Matrices.QR(flipLeftRight(transpose(Cu)));
-            Vf := flipLeftRight(V2);
+            (V,R,tau,V2) := Matrices.QR(MatricesMSL.flipLeftRight(transpose(Cu)));
+            Vf := MatricesMSL.flipLeftRight(V2);
 
             rankR := 0;
             //  !!!! rank determination
@@ -12443,7 +12443,7 @@ k = ---------- * ----------------------
                 rankR := rankR + 1;
               end if;
             end for;
-            //rankR:=Modelica.Math.Matrices.rank(R);
+            //rankR:=MatricesMSL.rank(R);
 
             rho := rankR;
             stop1 := rho == 0;
