@@ -5,8 +5,8 @@ partial block PartialDiscreteSISO_equality
 
   parameter Integer sampleFactor(min=1)=1
     "Sample factor (Ts = sampleFactor * sampleClock.sampleTime)";
-  final parameter Modelica.SIunits.Time Ts = sampleClock.sampleTime*sampleFactor
-    "Sample time" annotation(HideResult=false);
+  final parameter Modelica.Units.SI.Time Ts = sampleClock.sampleTime*sampleFactor
+    "Sample time" annotation (HideResult=false);
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block"
      annotation(Placement(transformation(extent={{-140,-20},{-100,20}})));

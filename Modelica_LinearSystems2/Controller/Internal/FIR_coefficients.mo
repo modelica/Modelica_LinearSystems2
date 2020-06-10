@@ -8,8 +8,9 @@ function FIR_coefficients "Calculates the FIR-filter coefficient vector"
   input Integer L(min=2) = 2 "Length of mean value filter" annotation(Dialog(enable=specType==FIRspec.MeanValue));
   input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter" annotation (Dialog(enable=specType == FIRspec.Window));
   input Integer order(min=1) = 2 "Order of filter" annotation(Dialog(enable=specType==FIRspec.Window));
-  input Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency" annotation(Dialog(enable=specType==FIRspec.Window));
-  input Modelica.SIunits.Time Ts(min=0) "Sampling time";
+  input Modelica.Units.SI.Frequency f_cut=1 "Cut-off frequency"
+    annotation (Dialog(enable=specType == FIRspec.Window));
+  input Modelica.Units.SI.Time Ts(min=0) "Sampling time";
   input Types.Window window=Modelica_LinearSystems2.Controller.Types.Window.Rectangle
     "Type of window" annotation(Dialog(enable=specType==FIRspec.Window));
   input Real beta=2.12 "Beta-Parameter for Kaiser-window"

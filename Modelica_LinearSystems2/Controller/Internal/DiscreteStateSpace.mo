@@ -36,8 +36,8 @@ model DiscreteStateSpace
   parameter Boolean withDelay = false
     "True, if a unit delay should be considered";
 
-  final parameter Modelica.SIunits.Time Ts=sampleClock.sampleTime*sampleFactor
-    "Sample time" annotation(HideResult=false);
+  final parameter Modelica.Units.SI.Time Ts=sampleClock.sampleTime*sampleFactor
+    "Sample time" annotation (HideResult=false);
   final parameter Integer nx=size(system.A, 1) "Number of states"  annotation(HideResult=true);
   final parameter Integer nu=size(system.B, 2) "Number of inputs"  annotation(HideResult=true);
   final parameter Integer ny=size(system.C, 1) "Number of outputs"  annotation(HideResult=true);

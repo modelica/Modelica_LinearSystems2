@@ -6,7 +6,7 @@ block PI "Proportional-Integral controller (continuous or discrete block)"
       ABCD=[0,1/T; k,k]));
 
   parameter Real k=1 "Gain";
-  parameter Modelica.SIunits.Time T(min=Modelica.Constants.eps)=1
+  parameter Modelica.Units.SI.Time T(min=Modelica.Constants.eps) = 1
     "Time Constant (T>0 required)";
   parameter Real x_start=0 "Initial or guess value of state"  annotation(Dialog(tab="Advanced options"));
 parameter Real y_start=0 "Initial value of output"  annotation(Dialog(tab="Advanced options"));

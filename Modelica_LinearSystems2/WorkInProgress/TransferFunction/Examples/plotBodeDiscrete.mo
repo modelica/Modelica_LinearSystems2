@@ -9,7 +9,7 @@ function plotBodeDiscrete
 
   output Boolean ok;
 protected
-  Modelica.SIunits.Time Ts = 0.1 "Sample time";
+  Modelica.Units.SI.Time Ts=0.1 "Sample time";
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact "Discretization method";
   TransferFunction tf=TransferFunction({1}, {1,0,1});
   Modelica_LinearSystems2.DiscreteTransferFunction dtf=

@@ -45,8 +45,7 @@ public
     sampleFactor=sampleFactor,
     withDelay=false)
     annotation (Placement(transformation(extent={{10,-10},{30,10}})));
-  Modelica.Blocks.Nonlinear.VariableLimiter variableLimiter(limitsAtInit=
-        limitsAtInit)
+  Modelica.Blocks.Nonlinear.VariableLimiter variableLimiter
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Modelica.Blocks.Math.Add addSat(k1=+1, k2=-1)
     annotation (Evaluate=true, Placement(transformation(

@@ -1445,7 +1445,7 @@ of a transfer function.
       input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
       input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
       input Integer order(min=1) = 2 "Order of filter";
-      input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
+      input Modelica.Units.SI.Frequency f_cut=1/(2*Modelica.Constants.pi)
         "Cut-off frequency (default is w_cut = 1 rad/s)";
       input Real gain=1.0
         "Gain (= amplitude of frequency response at zero frequency)";
@@ -1616,7 +1616,7 @@ and results in
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
-      import SI = Modelica.SIunits;
+      import      Modelica.Units.SI;
 
       input TransferFunction tf "Transfer function to be plotted";
       input Integer nPoints(min=2) = 200 "Number of points";
@@ -1642,7 +1642,7 @@ and results in
     protected
       SI.AngularVelocity w[nPoints];
       SI.Frequency f[nPoints];
-      SI.Conversions.NonSIunits.Angle_deg phi[nPoints];
+      Modelica.Units.NonSI.Angle_deg phi[nPoints];
       Real A[nPoints];
       Boolean OK;
       Complex c;
@@ -1673,14 +1673,14 @@ and results in
       // Compute magnitude/phase at the frequency points
       phi_old := 0.0;
       for i in 1:nPoints loop
-        w[i] := SI.Conversions.from_Hz(f[i]);
+        w[i] := Modelica.Units.Conversions.from_Hz(f[i]);
         c := TransferFunction.Analysis.evaluate(
               tf,
               Complex(0, w[i]),
               1e-10);
         A[i] := Complex.'abs'(c);
         phi_old := Complex.arg(c, phi_old);
-        phi[i] := SI.Conversions.to_deg(phi_old);
+        phi[i] := Modelica.Units.Conversions.to_deg(phi_old);
 
         // Convert to other units, if required
         if not Hz then

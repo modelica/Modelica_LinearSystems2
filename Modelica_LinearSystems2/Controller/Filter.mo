@@ -6,7 +6,7 @@ block Filter
   parameter Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
   parameter Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
   parameter Integer order(min=1) = 2 "Order of filter";
-  parameter Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency";
+  parameter Modelica.Units.SI.Frequency f_cut=1 "Cut-off frequency";
   parameter Real gain=1.0
     "Gain (= amplitude of frequency response at zero frequency)";
   parameter Boolean normalized=true

@@ -40,8 +40,8 @@ public
   parameter Boolean withDelay = false
     "True, if a unit delay should be considered";
 
-  final parameter Modelica.SIunits.Time Ts=sampleClock.sampleTime*sampleFactor
-    "Sample time" annotation(HideResult=false);
+  final parameter Modelica.Units.SI.Time Ts=sampleClock.sampleTime*sampleFactor
+    "Sample time" annotation (HideResult=false);
 
   Modelica.Blocks.Interfaces.RealInput u[nu]
     "Continuous or discrete input signals of block"

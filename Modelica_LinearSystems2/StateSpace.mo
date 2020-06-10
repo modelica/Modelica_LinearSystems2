@@ -7576,9 +7576,9 @@ and results in
       input Integer nPoints(min=2) = 200 "Number of points";
       input Boolean autoRange=true
         "= true, if abszissa range is automatically determined";
-      input Modelica.SIunits.Frequency f_min=0.1
+      input Modelica.Units.SI.Frequency f_min=0.1
         "Minimum frequency value, if autoRange = false";
-      input Modelica.SIunits.Frequency f_max=10
+      input Modelica.Units.SI.Frequency f_max=10
         "Maximum frequency value, if autoRange = false";
 
       input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
@@ -7734,14 +7734,14 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
           true,
           size(ss.C, 1),
           size(ss.B, 2)) "True, if abszissa range is automatically determined";
-      input Modelica.SIunits.Frequency f_min[:, :] = fill(
-          0.1,
-          size(ss.C, 1),
-          size(ss.B, 2)) "Minimum frequency value, if autoRange = false";
-      input Modelica.SIunits.Frequency f_max[:, :] = fill(
-          10,
-          size(ss.C, 1),
-          size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
+      input Modelica.Units.SI.Frequency f_min[:,:]=fill(
+              0.1,
+              size(ss.C, 1),
+              size(ss.B, 2)) "Minimum frequency value, if autoRange = false";
+      input Modelica.Units.SI.Frequency f_max[:,:]=fill(
+              10,
+              size(ss.C, 1),
+              size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
 
       input Boolean magnitude = true "= true, to plot magnitude" annotation(choices(checkBox=true));
       input Boolean phase = true "= true, to plot phase" annotation(choices(checkBox=true));
@@ -7915,8 +7915,8 @@ StateSpace.Plot.<b>bodeMIMO</b>(
       import Modelica_LinearSystems2.Utilities.Plot;
 
       input StateSpace ss "State space system";
-      input Modelica.SIunits.Time dt=0 "Sample time";
-      input Modelica.SIunits.Time tSpan=0 "Simulation time span";
+      input Modelica.Units.SI.Time dt=0 "Sample time";
+      input Modelica.Units.SI.Time tSpan=0 "Simulation time span";
 
       input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
 
@@ -8050,8 +8050,8 @@ This function plots the time response of a state space system. The character of 
       import Modelica_LinearSystems2.Utilities.Plot;
 
       input StateSpace ss "State space system";
-      input Modelica.SIunits.Time dt=0 "Sample time";
-      input Modelica.SIunits.Time tSpan=0 "Simulation time span";
+      input Modelica.Units.SI.Time dt=0 "Sample time";
+      input Modelica.Units.SI.Time tSpan=0 "Simulation time span";
       input Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
 
       input Boolean subPlots=true
@@ -8132,8 +8132,8 @@ for each system corresponding to the transition matrix. It is based on <a href=\
       import Modelica_LinearSystems2.Utilities.Plot;
 
       input StateSpace ss "State space system";
-      input Modelica.SIunits.Time dt=0 "Sample time";
-      input Modelica.SIunits.Time tSpan=0 "Simulation time span";
+      input Modelica.Units.SI.Time dt=0 "Sample time";
+      input Modelica.Units.SI.Time tSpan=0 "Simulation time span";
       input Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
 
       input Boolean subPlots=true
@@ -8211,8 +8211,8 @@ This function plots the step responses of a state space system for each system c
       import Modelica_LinearSystems2.Utilities.Plot;
 
       input StateSpace ss "State space system";
-      input Modelica.SIunits.Time dt=0 "Sample time";
-      input Modelica.SIunits.Time tSpan=0 "Simulation time span";
+      input Modelica.Units.SI.Time dt=0 "Sample time";
+      input Modelica.Units.SI.Time tSpan=0 "Simulation time span";
       input Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
 
       input Boolean subPlots=true
@@ -8289,8 +8289,8 @@ This function plots the ramp responses of a state space system for each system c
       import Modelica_LinearSystems2.Utilities.Plot;
 
       input StateSpace ss "State space system";
-      input Modelica.SIunits.Time dt=0 "Sample time";
-      input Modelica.SIunits.Time tSpan=0 "Simulation time span";
+      input Modelica.Units.SI.Time dt=0 "Sample time";
+      input Modelica.Units.SI.Time tSpan=0 "Simulation time span";
       input Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
 
       input Boolean subPlots=true
@@ -12979,9 +12979,9 @@ and results in
       input Integer nPoints(min=2) = 200 "Number of points";
       input Boolean autoRange=true
         "True, if abszissa range is automatically determined";
-      input Modelica.SIunits.Frequency f_min=0.1
+      input Modelica.Units.SI.Frequency f_min=0.1
         "Minimum frequency value, if autoRange = false";
-      input Modelica.SIunits.Frequency f_max=10
+      input Modelica.Units.SI.Frequency f_max=10
         "Maximum frequency value, if autoRange = false";
 
       input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
@@ -13122,14 +13122,14 @@ vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
           true,
           size(ss.C, 1),
           size(ss.B, 2)) "True, if abszissa range is automatically determined";
-      input Modelica.SIunits.Frequency f_min[:, :]=fill(
-          0.1,
-          size(ss.C, 1),
-          size(ss.B, 2)) "Minimum frequency value, if autoRange = false";
-      input Modelica.SIunits.Frequency f_max[:, :]=fill(
-          10,
-          size(ss.C, 1),
-          size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
+      input Modelica.Units.SI.Frequency f_min[:,:]=fill(
+              0.1,
+              size(ss.C, 1),
+              size(ss.B, 2)) "Minimum frequency value, if autoRange = false";
+      input Modelica.Units.SI.Frequency f_max[:,:]=fill(
+              10,
+              size(ss.C, 1),
+              size(ss.B, 2)) "Maximum frequency value, if autoRange = false";
 
       input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
       input Boolean phase=true "= true, to plot phase" annotation(choices(checkBox=true));

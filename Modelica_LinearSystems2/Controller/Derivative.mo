@@ -8,7 +8,7 @@ block Derivative "Approximate derivative (continuous or discrete block)"
       ABCD=[-1/T,1/T; -k/T,k/T]));
 
   parameter Real k=1 "Gain";
-  parameter Modelica.SIunits.Time T(min=Modelica.Constants.eps) = 0.01
+  parameter Modelica.Units.SI.Time T(min=Modelica.Constants.eps) = 0.01
     "Time Constant (T>0 required; T=0 is ideal derivative block)";
   parameter Real x_start=0 "Initial or guess value of state"  annotation(Dialog(tab="Advanced options"));
   parameter Real y_start=0 "Initial or guess value of output"  annotation(Dialog(tab="Advanced options"));

@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Examples;
 block SimpleDrive_SISO
-  parameter Modelica.SIunits.Radius r=0.5 "Radius of load";
-  parameter Modelica.SIunits.Mass m=80 "Mass of load";
+  parameter Modelica.Units.SI.Radius r=0.5 "Radius of load";
+  parameter Modelica.Units.SI.Mass m=80 "Mass of load";
   Motor motor annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=0)));
   Modelica.Mechanics.Rotational.Components.IdealGear gearbox(ratio=100,

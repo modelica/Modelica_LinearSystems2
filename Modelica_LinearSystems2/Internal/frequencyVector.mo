@@ -4,15 +4,17 @@ function frequencyVector "Determine frequency vector for Bode plot"
   import Modelica_LinearSystems2.Math.Complex;
   import LinearSystems = Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Internal;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
 
   input Integer nPoints(min=2) = 200 "Number of points";
   input Boolean autoRange=true
     "True, if abszissa range is automatically determined";
-  input Modelica.SIunits.Frequency f_min(min=0) = 0.1
-    "Minimum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
-  input Modelica.SIunits.Frequency f_max(min=0) = 10
-    "Maximum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
+  input Modelica.Units.SI.Frequency f_min(min=0) = 0.1
+    "Minimum frequency value, if autoRange = false"
+    annotation (Dialog(enable=not autoRange));
+  input Modelica.Units.SI.Frequency f_max(min=0) = 10
+    "Maximum frequency value, if autoRange = false"
+    annotation (Dialog(enable=not autoRange));
   input Complex numZeros[:]=fill(Complex(0), 0) "Zeros of numerator"
                                                                     annotation(Dialog(enable=autoRange));
   input Complex denZeros[:]=fill(Complex(0), 0) "Zeros of denominator"
@@ -31,8 +33,8 @@ algorithm
   // Determine f_min2, f_max2 (auto or manual)
   if autoRange then
     (w_min,w_max) := Internal.frequencyRangeBode(numZeros, denZeros);
-    f_min2 := SI.Conversions.to_Hz(w_min);
-    f_max2 := SI.Conversions.to_Hz(w_max);
+    f_min2 := Modelica.Units.Conversions.to_Hz(w_min);
+    f_max2 := Modelica.Units.Conversions.to_Hz(w_max);
   else
     f_min2 := f_min;
     f_max2 := f_max;

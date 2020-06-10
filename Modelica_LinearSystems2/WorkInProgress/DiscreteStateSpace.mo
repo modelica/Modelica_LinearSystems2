@@ -8,8 +8,8 @@ record DiscreteStateSpace
   Real C[:,size(A, 1)]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
   Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
-  Modelica.SIunits.Time Ts=1 "Sample time"
-       annotation(Dialog(group="Data used to construct discrete from continuous system"));
+  Modelica.Units.SI.Time Ts=1 "Sample time" annotation (Dialog(group=
+          "Data used to construct discrete from continuous system"));
   Real B2[size(B, 1),size(B, 2)]=fill(0,size(B,1),size(B,2))
     "Reconstruct continuous state"
        annotation(Dialog(group="Data used to construct discrete from continuous system"));
@@ -18,9 +18,11 @@ record DiscreteStateSpace
   encapsulated operator 'constructor'
     import Modelica_LinearSystems2;
   function fromDiscreteTransferFunction =
-      Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace                annotation (Documentation(info="<html> </html>"));
+      Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
+                                                                                                      annotation (Documentation(info="<html> </html>"));
   function fromDiscreteZerosAndPoles =
-      Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace                   annotation (Documentation(info="<html> </html>"));
+      Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace
+                                                                                                      annotation (Documentation(info="<html> </html>"));
     function fromMatrices "Default constructor for a DiscreteStateSpace record"
       import Modelica;
       import Modelica_LinearSystems2;
@@ -35,8 +37,8 @@ record DiscreteStateSpace
       input Real D[size(C, 1),size(B, 2)]
                                       annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
-      input Modelica.SIunits.Time Ts=1 "Sample time"
-       annotation(Dialog(group="Data used to construct discrete from continuous system"));
+      input Modelica.Units.SI.Time Ts=1 "Sample time" annotation (Dialog(group=
+              "Data used to construct discrete from continuous system"));
       input Real B2[:,:]=zeros(size(B, 1), size(B, 2));
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization methodDiscretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
       output DiscreteStateSpace result(
@@ -65,7 +67,7 @@ record DiscreteStateSpace
 
       input Modelica_LinearSystems2.StateSpace sc
         "Continuous linear state space system";
-      input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       output Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace sd(
         redeclare Real A[size(sc.A, 1),size(sc.A, 2)],
@@ -188,7 +190,7 @@ record DiscreteStateSpace
       import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
         input Real r "Value of Real variable";
-        input Modelica.SIunits.Time Ts=1 "Sample time";
+      input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
         output DiscreteStateSpace dss(
       redeclare Real A[0,0],
@@ -251,7 +253,7 @@ respectively.
       input Real B[size(A, 1),:] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
       input Real C[:,size(A, 1)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
       input Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
     //  input Modelica_LinearSystems2.Types method=Modelica_LinearSystems2.Types.Method.Trapezoidal
       output Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace sd(
@@ -642,9 +644,9 @@ encapsulated function bodeSISO
   input Integer nPoints(min=2) = 200 "Number of points";
   input Boolean autoRange=true
         "True, if abszissa range is automatically determined";
-  input Modelica.SIunits.Frequency f_min=0.1
+      input Modelica.Units.SI.Frequency f_min=0.1
         "Minimum frequency value, if autoRange = false";
-  input Modelica.SIunits.Frequency f_max=10
+      input Modelica.Units.SI.Frequency f_max=10
         "Maximum frequency value, if autoRange = false";
 
   input Boolean magnitude=true "= true, to plot the magnitude of dtf"
@@ -1010,7 +1012,7 @@ partial function ekfSystemBase "Base class of ekf-system functions"
      input Real x[:] "Estimated vector at instant k";
      input Real u[:] "Input at instant k";
      input Real u2[size(u,1)] "Input at instant k";
-     input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
      input Integer ny "Number of outputs";
 
      output Real x_new[size(x, 1)] "Modeled mean";
@@ -1142,7 +1144,7 @@ partial function predictBase "Base class of prediction-function"
   input Real alpha=1 "Spread of sigma points";
   input Real beta=2 "Characteristic of the distribution of x";
   input Real kappa=0 "Kurtosis scaling of sigma point distribution";
-  input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
 
   output Real mu[size(xpre, 1)] "Predicted mean";
   output Real Pk[size(xpre, 1),size(xpre, 1)] "Transformed covariance matrix";
@@ -1256,7 +1258,7 @@ partial function updateBase "Bass class of update-function"
   input Real alpha=1 "Spread of sigma points";
   input Real beta=2 "Characteristic of the distribution of x";
   input Real kappa=0 "Kurtosis scaling of sigma point distribution";
-  input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
 
   output Real mu[size(R, 1)] "Predicted mean";
   output Real Ryy[size(R, 1),size(R, 1)] "Transformed covariance matrix";
@@ -1327,7 +1329,7 @@ function estimateBase "Base class of estimation function"
   input Real P[size(xm, 1),size(xm, 1)] "Covariance matrix";
   input Real Ryy[size(y, 1),size(Ryy, 1)] "Transformed covariance matrix";
   input Real Rxy[size(xm, 1),size(y, 1)] "Transformed cross covariance matrix";
-  input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
 
   output Real K[size(xm, 1),size(y, 1)] "Filter gain";
   output Real Pu[size(xm, 1),size(xm, 1)] "Updated State covariance matrix";
@@ -1565,7 +1567,7 @@ partial function predictBase_sr "Base class of prediction function"
   input Real alpha=1 "Spread of sigma points";
   input Real beta=2 "Characteristic of the distribution of x";
   input Real kappa=0 "Kurtosis scaling of sigma point distribution";
-  input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
 
   output Real mu[size(xpre, 1)] "Predicted mean";
   output Real CfP[size(xpre, 1),size(xpre, 1)] "Transformed covariance matrix";
@@ -1605,7 +1607,7 @@ partial function updateBase_sr "Bass class of update_sr-function"
   input Real alpha=1 "Spread of sigma points";
   input Real beta=2 "Characteristic of the distribution of x";
   input Real kappa=0 "Kurtosis scaling of sigma point distribution";
-  input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
 
   output Real mu[size(CfR, 1)] "Predicted mean";
   output Real Syy[size(CfR, 1),size(CfR, 1)] "Transformed covariance matrix";
@@ -1648,7 +1650,7 @@ function estimateBase_sr "Base class of estimation function"
         "Cholesky factor of covariance matrix";
   input Real Syy[size(y, 1),size(Syy, 1)] "Transformed covariance matrix";
   input Real Rxy[size(xm, 1),size(y, 1)] "Transformed cross covariance matrix";
-  input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
 
   output Real K[size(xm, 1),size(y, 1)] "Filter gain";
   output Real CfPu[size(xm, 1),size(xm, 1)]
@@ -2054,7 +2056,7 @@ end sr_ukfEstimate_2;
         "Weighted covariance matrix of the associated process noise (F*Q*F')";
     input Real R[size(y,1),size(y,1)] = identity(size(y,1))
         "Covariance matrix of the measurement noise";
-    input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
 
     output Real x_est[size(xpre,1)] "Estimated state vector";
     output Real y_est[size(y,1)] "Estimated output";
@@ -2128,7 +2130,7 @@ i.e., in the case of linear systems the system matrix <b>A</b> and the output ma
         "Weighted covariance matrix of the associated process noise (F*Q*F')";
     input Real R[size(y,1),size(y,1)] = identity(size(y,1))
         "Covariance matrix of the measurement noise";
-    input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
 
     output Real x_est[size(xpre,1)] "Estimated state vector";
     output Real y_est[size(y,1)] "Estimated output";
@@ -2208,7 +2210,7 @@ i.e., in the case of linear systems the system matrix <b>A</b> and the output ma
     input Real alpha=0.1 "Spread of sigma points";
     input Real beta=2 "Characteristic of the distribution of x";
     input Real kappa=0 "Kurtosis scaling of sigma point distribution";
-    input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
 
     output Real x_est[size(xpre,1)] "Estimated state vector";
     output Real y_est[size(y,1)] "Estimated output";
@@ -2289,7 +2291,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteSta
     input Real alpha=0.1 "Spread of sigma points";
     input Real beta=2 "Characteristic of the distribution of x";
     input Real kappa=0 "Kurtosis scaling of sigma point distribution";
-    input Modelica.SIunits.Time Ts "Sample time";
+      input Modelica.Units.SI.Time Ts "Sample time";
 
     output Real x_est[size(xpre,1)] "Estimated state vector";
     output Real y_est[size(y,1)] "Estimated output";

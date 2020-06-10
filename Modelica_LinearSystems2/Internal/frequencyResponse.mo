@@ -4,7 +4,7 @@ encapsulated function frequencyResponse
     import Modelica;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.Internal;
-    import SI = Modelica.SIunits;
+    import Modelica.Units.SI;
 
   input Real gain "Gain of transfer function";
   input Real Zeros[:,2]
@@ -26,7 +26,7 @@ encapsulated function frequencyResponse
     "= true, to compute abszissa values for logarithmic scale"                       annotation(choices(checkBox=true));
   output Real f[nPoints] "Frequency vector (either in Hz or rad/s)";
   output Real A[nPoints] "Amplitude (either without unit or in dB)";
-  output SI.Conversions.NonSIunits.Angle_deg phi[nPoints] "Angles in degree";
+  output Modelica.Units.NonSI.Angle_deg phi[nPoints] "Angles in degree";
 protected
   SI.AngularVelocity w[nPoints];
   SI.Angle phi_old;
@@ -39,9 +39,9 @@ algorithm
   // Compute magnitude and phase at the frequency points
   phi_old := 0.0;
   for i in 1:nPoints loop
-    w[i] := SI.Conversions.from_Hz(f[i]);
+    w[i] := Modelica.Units.Conversions.from_Hz(f[i]);
     (A[i], phi_old, info) := Internal.frequencyEvaluate(gain, Zeros, Poles, 0, w[i]);
-    phi[i] := SI.Conversions.to_deg(phi_old);
+    phi[i] := Modelica.Units.Conversions.to_deg(phi_old);
 
     // Convert to other units, if required
     if not Hz then

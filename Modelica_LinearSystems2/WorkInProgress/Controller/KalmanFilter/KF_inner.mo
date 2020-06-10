@@ -8,7 +8,7 @@ model KF_inner "Discrete State Space block"
 
   parameter DiscreteStateSpace dss=DiscreteStateSpace(A=[1],B=[1],C=[1],D=[1])
     "Discrete linear system model";
-  parameter Modelica.SIunits.Time sampleTime=0.5
+  parameter Modelica.Units.SI.Time sampleTime=0.5
     "Base sample time for discrete blocks";
   parameter Real wB[size(dss.B, 1),size(dss.B, 2)]=ones(size(dss.B, 1),size(dss.B, 2))
     "Wheighting matrix for input noise covariance matrix of the previous instant";

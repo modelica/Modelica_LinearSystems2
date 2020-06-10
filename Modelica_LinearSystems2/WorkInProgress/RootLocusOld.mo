@@ -10,8 +10,8 @@ package RootLocusOld
     input String modelName "Name of the Modelica model"
       annotation(Dialog(__Dymola_translatedModel(caption="Model to be linearized for the root locus")));
 
-    input Modelica.SIunits.Time t_linearize= 0
-      "Simulate until t_linearize and then linearize" annotation(Dialog);
+    input Modelica.Units.SI.Time t_linearize=0
+      "Simulate until t_linearize and then linearize" annotation (Dialog);
 
   /*
   input Modelica.Mechanics.MultiBody.Interfaces.partialColorMap colorMap=
@@ -240,8 +240,8 @@ over the load inertia <b>Jload</b>:
   function linearize2
     "Linearize a model after simulation up to a given time and return only the A matrix"
     input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
-    input Modelica.SIunits.Time t_linearize= 0
-      "Simulate until t_linearize and then linearize" annotation(Dialog);
+    input Modelica.Units.SI.Time t_linearize=0
+      "Simulate until t_linearize and then linearize" annotation (Dialog);
     input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
         Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
       "Simulation options it t_linearize > 0" annotation(Dialog);

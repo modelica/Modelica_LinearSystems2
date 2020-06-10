@@ -15,7 +15,7 @@ function analysisEigenvalues
     C=[1,1],
     D=[0]);
 
-  input Modelica.SIunits.Time Ts=0.1 "Sample time";
+  input Modelica.Units.SI.Time Ts=0.1 "Sample time";
   input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact "Discretization method";
 protected
   DiscreteStateSpace dss = DiscreteStateSpace(

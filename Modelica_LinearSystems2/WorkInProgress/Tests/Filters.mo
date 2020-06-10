@@ -9,18 +9,18 @@ package Filters
 
     input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
     input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
-     input Modelica.SIunits.Frequency f_cut=1/(2*Modelica.Constants.pi)
+    input Modelica.Units.SI.Frequency f_cut=1/(2*Modelica.Constants.pi)
       "Cut-off frequency";
      input Real A_ripple(unit="dB") = 0.5
       "Pass band ripple for Chebyshev filter (otherwise not used)";
-     input Modelica.SIunits.Frequency f_min=0
+    input Modelica.Units.SI.Frequency f_min=0
       "Band of pass band filter is f_min (-3db) .. f_cut (-3db)";
      input Boolean normalized=true
       "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
   protected
     function getAmplitude "Compute amplitude at f_cut and return it as string"
       input ZP zp;
-      input Modelica.SIunits.Frequency f_cut;
+      input Modelica.Units.SI.Frequency f_cut;
       output String str;
     protected
       Complex c;
@@ -147,10 +147,10 @@ package Filters
     import ZP = Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica_LinearSystems2.Utilities.Types;
     input Modelica_LinearSystems2.Utilities.Types.FilterType filterType "Type of filter (LowPass/HighPass)";
-    input Modelica.SIunits.Frequency f_cut=3 "Cut-off frequency";
+    input Modelica.Units.SI.Frequency f_cut=3 "Cut-off frequency";
     input Real A_ripple(unit="dB") = 0.5
       "Pass band ripple for Chebyshev filter (otherwise not used)";
-    input Modelica.SIunits.Frequency f_min=0
+    input Modelica.Units.SI.Frequency f_min=0
       "Band of pass band filter is f_min (-3db) .. f_cut (-3db)";
     input Boolean normalized=true
       "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";
@@ -166,10 +166,10 @@ package Filters
   function plotFilter3
     import ZP = Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica_LinearSystems2.Utilities.Types;
-    input Modelica.SIunits.Frequency f_cut=3 "Cut-off frequency";
+    input Modelica.Units.SI.Frequency f_cut=3 "Cut-off frequency";
     input Real A_ripple(unit="dB") = 0.5
       "Pass band ripple for Chebyshev filter (otherwise not used)";
-    input Modelica.SIunits.Frequency f_min=2
+    input Modelica.Units.SI.Frequency f_min=2
       "Band of pass band filter is f_min (-3db) .. f_cut (-3db)";
     input Boolean normalized=true
       "True, if amplitude at f_cut decreases/increases 3 db (for low/high pass filter), otherwise unmodified filter";

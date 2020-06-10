@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Controller.Examples.Components;
 model MixingUnit1 "Stirred tank reactor"
-  import SI = Modelica.SIunits;
+  import Modelica.Units.SI;
 // stirred tank reactor // stirrer vessel reactor
 
   parameter Real c0(unit="mol/l") = 0.848 "Nominal concentration"; // Should be Modelica.SIunits.Concentration in [mol/m^3]

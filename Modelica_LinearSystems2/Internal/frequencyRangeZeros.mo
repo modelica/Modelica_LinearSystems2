@@ -3,15 +3,15 @@ function frequencyRangeZeros
   "Determine min. and max. frequencies for a vector of zeros (numerator or denominator zeros)"
   import Modelica;
   import Modelica.Math;
-  import SI = Modelica.SIunits;
+  import      Modelica.Units.SI;
   import Modelica_LinearSystems2.Math.Complex;
 
   input Complex z[:] "Vector of zeros";
   input SI.Angle phi_min(min=10*Modelica.Constants.eps)=
-    Modelica.SIunits.Conversions.from_deg(5) "Minimum phase angle";
+    Modelica.Units.Conversions.from_deg(5) "Minimum phase angle";
   input Real real_min(min=0) = 1.e-4 "|r| < real_min are treated as |real_min|";
-  output Modelica.SIunits.AngularVelocity w_min "Minimum frequency";
-  output Modelica.SIunits.AngularVelocity w_max "Maximum frequency";
+  output Modelica.Units.SI.AngularVelocity w_min "Minimum frequency";
+  output Modelica.Units.SI.AngularVelocity w_max "Maximum frequency";
   output Boolean useFullRange = true;
 protected
   Integer nz=size(z, 1);
@@ -81,8 +81,8 @@ algorithm
 
   if first then
      useFullRange := false;
-     w_min :=Modelica.SIunits.Conversions.from_Hz(0.1);
-     w_max :=Modelica.SIunits.Conversions.from_Hz(1);
+     w_min :=Modelica.Units.Conversions.from_Hz(0.1);
+     w_max :=Modelica.Units.Conversions.from_Hz(1);
   end if;
 
   annotation (Documentation(info="<html>

@@ -18,7 +18,7 @@ block MatrixGain
   parameter Real K[:,:]=[1] "Matrix  gain" annotation(Dialog(enable = not matrixOnFile));
 
 protected
-  parameter Integer mn[2]=if matrixOnFile then 
+  parameter Integer mn[2]=if matrixOnFile then
     Modelica.Utilities.Streams.readMatrixSize(fileName, matrixName) else size(K);
   parameter Integer m=mn[1];
   parameter Integer n=mn[2];
