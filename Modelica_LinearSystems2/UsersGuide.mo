@@ -618,6 +618,41 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
+    class Version_2_4_0 "Version 2.4.0 (June 17, 2020)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>This version requires the <b>Modelica 4.0.0</b> Library.
+It is <b>backward compatible</b> to the previous version 2.3.5.</p>
+
+<h4>
+Improvements in this version:
+</h4>
+
+<ul>
+<li> Updated to be compatible with Modelica 4.0.0</li>
+<li> Functions for vectors and matrices manipulations from
+     <a href=\"modelica://Modelica.Math\">Modelica.Math</a>
+     used prior to functions from
+     <a href=\"modelica://Modelica_LinearSystems2.Math.Vectors\">Vectors</a> and
+     <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices\">Matrices</a>
+     where possible.
+     Concerning functions are marked obsolete.
+     See Git-issue
+     <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/74\">#74</a>.</li>
+</ul>
+
+
+<h4>
+Bug fixes performed in this version:
+</h4>
+
+<ul>
+<li> &hellip;</li>
+</ul>
+</html>"));
+    end Version_2_4_0;
+
     class Version_2_3_5 "Version 2.3.5 (March 20, 2019)"
       extends Modelica.Icons.ReleaseNotes;
 
