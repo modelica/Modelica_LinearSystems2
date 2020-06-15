@@ -531,7 +531,7 @@ email: Martin.Otter@dlr.de
 <p>
 Copyright 
 <br>&copy; 2005-2012, DLR Institute of Robotics and Mechatronics
-<br>&copy; 2012-2019, DLR Institute of System Dynamics and Control.
+<br>&copy; 2012-2020, DLR Institute of System Dynamics and Control.
 <br>All rights reserved.
 </p>
 <p>
@@ -618,6 +618,32 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
+    class Version_2_4_0 "Version 2.4.0 (June 17, 2020)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>This version requires the <b>Modelica 4.0.0</b> Library.
+It is <b>backward compatible</b> to the previous version 2.3.5.</p>
+
+<h4>
+Improvements in this version:
+</h4>
+
+<ul>
+<li> Updated to be compatible with Modelica 4.0.0</li>
+<li> Functions for vectors&apos; and matrices&apos; manipulations from
+     <a href=\"modelica://Modelica.Math\">Modelica.Math</a>
+     used prior to own functions from
+     <a href=\"modelica://Modelica_LinearSystems2.Math.Vectors\">Vectors</a> and
+     <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices\">Matrices</a>
+     where possible.
+     Concerning functions are marked obsolete.
+     See Git-issue
+     <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/74\">#74</a>.</li>
+</ul>
+</html>"));
+    end Version_2_4_0;
+
     class Version_2_3_5 "Version 2.3.5 (March 20, 2019)"
       extends Modelica.Icons.ReleaseNotes;
 
