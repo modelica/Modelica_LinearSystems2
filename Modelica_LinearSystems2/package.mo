@@ -10,7 +10,7 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.4.0-dev) - A
 annotation (
   preferredView="info",
   uses(Modelica(version="4.0.0")),
-  version="2.4.0-dev",
+  version="2.4.0",
   versionDate="2020-06-10",
   dateModified = "2020-06-10 13:00:00Z",
   revisionId="$Id::                                       $",
