@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function hessenberg "Transform a matrix to upper Hessenberg form"
-  import Modelica;
-  import Modelica_LinearSystems2.Math.Matrices;
+
+  import MatricesMSL = Modelica.Math.Matrices;
 
   input Real A[:,:] "Square matrix A";
 
@@ -14,8 +14,8 @@ protected
   Real tau[max(0,size(A, 1) - 1)] "Scalar factors of the elementary reflectors";
 
 algorithm
-  (H, V, tau) := Modelica.Math.Matrices.Utilities.toUpperHessenberg(A, 1, size(A, 1));
-   U := Matrices.LAPACK.dorghr(V,1,size(A, 1),tau);
+  (H, V, tau) := MatricesMSL.Utilities.toUpperHessenberg(A, 1, size(A, 1));
+   U := MatricesMSL.LAPACK.dorghr(V,1,size(A, 1),tau);
   annotation (
     obsolete = "Obsolete function - use Modelica.Math.Matrices.hessenberg instead",
     Documentation(info="<html>

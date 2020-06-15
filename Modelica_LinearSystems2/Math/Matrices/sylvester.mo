@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Math.Matrices;
 function sylvester
   "Solution of continuous-time Sylvester equation A*X + X*B = C"
   import MatricesMSL = Modelica.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Matrices;
 
   input Real A[:,:] "Matrix A";
   input Real B[:,:] "Matrix B";
@@ -39,7 +38,7 @@ algorithm
 
     Chat := if aIsSchur and bIsSchur then C else if aIsSchur then C*V else if
       bIsSchur then transpose(U)*C else transpose(U)*C*V;
-    (X,scale,info) := Matrices.LAPACK.dtrsyl(S, T, Chat);
+    (X,scale,info) := MatricesMSL.LAPACK.dtrsyl(S, T, Chat);
     assert(info == 0, "Solving of Sylvester equation with Matrices.sylvester was not successfull.\n
                     The value of info is " + String(info) + ", but should be zero. A value unequal to zero means:\n
             < 0: if INFO = -i, the i-th argument had an illegal value\n
