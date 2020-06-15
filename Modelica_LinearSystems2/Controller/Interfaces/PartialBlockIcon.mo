@@ -4,6 +4,7 @@ partial block PartialBlockIcon
   extends Modelica.Icons.ObsoleteModel;
 
   annotation (
+    obsolete = "Obsolete function - use Modelica_LinearSystems2.Controller.Icons.PartialBlockIcon instead",
     Documentation(info="<html>
 <p>This model is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.Controller.Icons.PartialBlockIcon\">PartialBlockIcon</a> instead.</p>
 </html>"),
