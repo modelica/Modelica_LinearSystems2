@@ -3,6 +3,7 @@ encapsulated function reduceRosenbrock
   "Algorithm to compress the generalized system matrix [A, B; C, D] to calculate the invariant zeros of a system"
 
   import Modelica;
+  import Modelica.Math.Matrices.flipLeftRight;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
@@ -96,8 +97,8 @@ algorithm
         Cu := CC[sigma + 1:end, :];
         Co := CC[1:sigma, :];
 
-        (V,R,tau,V2) := Matrices.QR( Matrices.fliplr(transpose(Cu)));
-         Vf:=Matrices.fliplr(V2);
+        (V,R,tau,V2) := Matrices.QR( flipLeftRight(transpose(Cu)));
+         Vf:=flipLeftRight(V2);
 
          rankR := 0;
 //  !!!! rank determination

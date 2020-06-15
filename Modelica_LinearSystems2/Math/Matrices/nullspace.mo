@@ -32,7 +32,9 @@ algorithm
   Z := V[:,rank + 1:size(A,2)];// nullspace computation
   nullity := size(A,2) - rank;// nullity
 
-annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.nullSpace instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
            Z = Matrices.<b>nullspace</b>(A);

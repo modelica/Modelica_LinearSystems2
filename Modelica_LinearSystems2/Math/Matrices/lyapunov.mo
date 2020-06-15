@@ -1,11 +1,12 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function lyapunov
   "Solution of continuous-time Lyapunov equation X*A + A'*X = C"
+  import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices;
 
   input Real A[:,size(A, 1)];
   input Real C[size(A, 1),size(A, 2)];
-  input Real eps=Modelica.Math.Matrices.norm(A,1)*10*Modelica.Constants.eps;
+  input Real eps=MatricesMSL.norm(A,1)*10*Modelica.Constants.eps;
 
 protected
   Integer n=size(A, 1);
@@ -38,7 +39,7 @@ algorithm
       R22[i1, i1] := R[i1, i1] + R[n, n];
     end for;
     if abs(R[n, n - 1]) < eps then
-      X[:, n] := Matrices.solve(R22, C2[:, n]);
+      X[:, n] := MatricesMSL.solve(R22, C2[:, n]);
       k := n - 1;
     else
       R11 := R;
@@ -53,7 +54,7 @@ algorithm
 // solve 2nx2n equation for 2x2 Schur bump with Kronecker product and vec operator approach
       R2 := [R11,R12; R21,R22];
       c := cat(1, C2[:, n - 1], C2[:, n]);
-      x := Matrices.solve(R2, c);
+      x := MatricesMSL.solve(R2, c);
       X[:, n - 1] := x[1:n];
       X[:, n] := x[n + 1:2*n];
       k := n - 2;
@@ -68,8 +69,8 @@ algorithm
       end for;
       if abs(R[k, k - 1]) < eps then
         //real eigenvalue
-//        X[:, k] := Matrices.solve(R22, C2[:, k] - vector(X[:, k + 1:n]*transpose(matrix(R[k, k + 1:n]))));
-        X[:, k] := Matrices.solve(R22, C2[:, k] - vector(X[:, k + 1:n]*matrix(R[k, k + 1:n])));
+//        X[:, k] := MatricesMSL.solve(R22, C2[:, k] - vector(X[:, k + 1:n]*transpose(matrix(R[k, k + 1:n]))));
+        X[:, k] := MatricesMSL.solve(R22, C2[:, k] - vector(X[:, k + 1:n]*matrix(R[k, k + 1:n])));
         k := k - 1;
       else
        // conjugated complex eigenvalues
@@ -84,7 +85,7 @@ algorithm
         R2 := [R11,R12; R21,R22];
         CC := C2[:,k-1:k] - X[:,k+1:n]*transpose(R[k-1:k,k+1:n]);
         c := cat(1, CC[:, 1], CC[:, 2]);
-        x := Matrices.solve(R2, c);
+        x := MatricesMSL.solve(R2, c);
         X[:, k - 1] := x[1:n];
         X[:, k] := x[n + 1:2*n];
 
@@ -98,7 +99,7 @@ algorithm
       for i1 in 1:n loop
         R22[i1, i1] := R[i1, i1] + R[1, 1];
       end for;
-      X[:, 1] := Matrices.solve(R22, C2[:, 1] - vector(X[:, 2:n]*matrix(R[1, 2:n])));
+      X[:, 1] := MatricesMSL.solve(R22, C2[:, 1] - vector(X[:, 2:n]*matrix(R[1, 2:n])));
     end if;
 
 // transform X corresponding to the original form

@@ -2295,7 +2295,7 @@ ss;
 
           // Determine frequency and number of corresponding eigenvalue
           (w1,d1) := Complex.frequency(cev[maxIndex1]);
-          iw1 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex1, evIndex);
+          iw1 := Modelica.Math.Vectors.find(maxIndex1, evIndex);
           if iw1 <= nReal then
             number1 := String(iw1);
           else
@@ -2304,7 +2304,7 @@ ss;
 
           if two then
             (w2,d2) := Complex.frequency(cev[maxIndex2]);
-            iw2 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex2, evIndex);
+            iw2 := Modelica.Math.Vectors.find(maxIndex2, evIndex);
             if iw2 <= nReal then
               number2 := String(iw2);
             else
@@ -3593,6 +3593,7 @@ i.e. v1 = |      |,   v2 = |       |
       "Compute invariant zeros of linear state space system"
 
       import Modelica;
+      import MatricesMSL = Modelica.Math.Matrices;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Matrices;
@@ -3649,8 +3650,8 @@ i.e. v1 = |      |,   v2 = |       |
         if n == 0 then
           Zeros := fill(Complex(0), 0);
         else
-          (,R,,V2) := Matrices.QR(Matrices.fliplr(transpose([Cr, Dr])));
-          Vf := Matrices.fliplr(V2);
+          (,R,,V2) := Matrices.QR(MatricesMSL.flipLeftRight(transpose([Cr, Dr])));
+          Vf := MatricesMSL.flipLeftRight(V2);
           AfBf := [Ar, Br]*Vf;
           Af := AfBf[:, 1:size(Ar, 2)];
           Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
@@ -3676,7 +3677,7 @@ i.e. v1 = |      |,   v2 = |       |
                 assumed that zero is at infinity (i.e. it is ignored)
           */
           j := 0;
-          zerosMax := 1.0e4*Modelica.Math.Matrices.norm([Af, Bf], p=1);
+          zerosMax := 1.0e4*MatricesMSL.norm([Af, Bf], p=1);
           for i in 1:size(beta, 1) loop
              absZero := Modelica_LinearSystems2.Math.Complex.'abs'(Complex(alphaReal[i], alphaImag[i]));
              if absZero <= beta[i]*zerosMax then
@@ -3791,7 +3792,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
               ny,
               nu);
       else
-        (X,rank) := Modelica_LinearSystems2.Math.Matrices.leastSquares2(ss.A,
+        (X,rank) := Modelica.Math.Matrices.leastSquares2(ss.A,
           ss.B);
         // Determine whether A*X-B=0 is not fulfilled (since no unique solution)
         if rank < nx then
@@ -5769,7 +5770,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
 
           // Determine frequency and number of corresponding eigenvalue
           (w1,d1) := Complex.frequency(cev[maxIndex1]);
-          iw1 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex1, evIndex);
+          iw1 := Modelica.Math.Vectors.find(maxIndex1, evIndex);
           if iw1 <= nReal then
             number1 := String(iw1);
           else
@@ -5778,7 +5779,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
 
           if two then
             (w2,d2) := Complex.frequency(cev[maxIndex2]);
-            iw2 := Modelica_LinearSystems2.Math.Vectors.find(maxIndex2, evIndex);
+            iw2 := Modelica.Math.Vectors.find(maxIndex2, evIndex);
             if iw2 <= nReal then
               number2 := String(iw2);
             else
@@ -6283,11 +6284,11 @@ represented by a StateSpace record.
     encapsulated function assignPolesMI
       "Pole assignment design algorithm for multi input systems"
 
+      import Modelica;
+      //  import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica;
-      //  import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Matrices;
 
@@ -6377,7 +6378,7 @@ represented by a StateSpace record.
       end for;
 
       // put matrix ss.A to real Schur form A <- QAQ' and compute B <- QB
-      (A_rsf,Z,alphaReal,alphaImag) := Matrices.rsf2(ss.A);
+      (A_rsf,Z,alphaReal,alphaImag) := Modelica.Math.Matrices.realSchur(ss.A);
       ZT := transpose(Z);
 
       // reorder real Schur form according to alpha
@@ -7021,14 +7022,14 @@ The algebraic Riccati equation is solved by using the Schur algorithm
                 ss.B,
                 R,
                 Q);
-          K := Math.Matrices.solve2(R, transpose(ss.B)*S);
+          K := Modelica.Math.Matrices.solve2(R, transpose(ss.B)*S);
         else
           (S,ev) := Math.Matrices.dare(
                 ss.A,
                 ss.B,
                 R,
                 Q);
-          K := Math.Matrices.solve2(R + transpose(ss.B)*S*ss.B, transpose(ss.B)
+          K := Modelica.Math.Matrices.solve2(R + transpose(ss.B)*S*ss.B, transpose(ss.B)
             *S*ss.A);
         end if;
 
@@ -7202,14 +7203,14 @@ The eigenvalues of the closed loop system <b>A</b> - <b>B</b>*<b>K</b> are compu
                 ss.B,
                 R,
                 Q);
-          Kc := Math.Matrices.solve2(R, transpose(ss.B)*Sc);
+          Kc := Modelica.Math.Matrices.solve2(R, transpose(ss.B)*Sc);
         else
           (Sc,) := Math.Matrices.dare(
                 ss.A,
                 ss.B,
                 R,
                 Q);
-          Kc := Math.Matrices.solve2(R + transpose(ss.B)*Sc*ss.B, transpose(ss.B)
+          Kc := Modelica.Math.Matrices.solve2(R + transpose(ss.B)*Sc*ss.B, transpose(ss.B)
             *Sc*ss.A);
         end if;
 
@@ -7221,14 +7222,14 @@ The eigenvalues of the closed loop system <b>A</b> - <b>B</b>*<b>K</b> are compu
                 rss.B,
                 V,
                 W);
-          Kf := transpose(Math.Matrices.solve2(V, ss.C*Sf));
+          Kf := transpose(Modelica.Math.Matrices.solve2(V, ss.C*Sf));
         else
           (Sf,) := Math.Matrices.dare(
                 rss.A,
                 rss.B,
                 V,
                 W);
-          Kf := transpose(Math.Matrices.solve2(V + rss.C*Sf*rss.B, rss.C*Sf*rss.A));
+          Kf := transpose(Modelica.Math.Matrices.solve2(V + rss.C*Sf*rss.B, rss.C*Sf*rss.A));
         end if;
 
       else
@@ -10343,7 +10344,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
           bh1 := Vectors.householderReflexion_e1(bh1, u);
           ch1 := Vectors.householderReflexion(ch1, u);
 
-          (Ah1,V,tau) := Matrices.toUpperHessenberg(
+          (Ah1,V,tau) := Modelica.Math.Matrices.Utilities.toUpperHessenberg(
                 Ah1,
                 1,
                 nx);
@@ -10667,6 +10668,7 @@ to separate the uncontrollable poles from the controllable poles.
     encapsulated function invariantZerosWithRealMatrix
       "Compute invariant zeros of linear state space system (system given by A,B,C,D matrices)"
       import Modelica;
+      import MatricesMSL = Modelica.Math.Matrices;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Matrices;
@@ -10724,8 +10726,8 @@ to separate the uncontrollable poles from the controllable poles.
         if n == 0 then
            InvariantZeros := fill(0.0,0,2);
         else
-          (,R,,V2) := Matrices.QR(Matrices.fliplr(transpose([Cr, Dr])));
-          Vf := Matrices.fliplr(V2);
+          (,R,,V2) := Matrices.QR(MatricesMSL.flipLeftRight(transpose([Cr, Dr])));
+          Vf := MatricesMSL.flipLeftRight(V2);
           AfBf := [Ar, Br]*Vf;
           Af := AfBf[:, 1:size(Ar, 2)];
           Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
@@ -10749,7 +10751,7 @@ to separate the uncontrollable poles from the controllable poles.
                 assumed that zero is at infinity (i.e. it is ignored)
           */
           j := 0;
-          zerosMax := 1.0e4*Modelica.Math.Matrices.norm([Af, Bf], p=1);
+          zerosMax := 1.0e4*MatricesMSL.norm([Af, Bf], p=1);
           absZero := Modelica_LinearSystems2.StateSpace.Internal.absComplexVector(alphaReal, alphaImag);
           for i in 1:size(beta, 1) loop
              if absZero[i] <= beta[i]*zerosMax then
@@ -12336,6 +12338,7 @@ k = ---------- * ----------------------
       "Algorithm to compress the generalized system matrix [A, B; C, D] to calculate the invariant zeros of a system"
 
       import Modelica;
+      import MatricesMSL = Modelica.Math.Matrices;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Math.Matrices;
@@ -12386,9 +12389,9 @@ k = ---------- * ----------------------
       Boolean stop1 "reduction finished";
       Boolean stop2 "system has no zeros";
       Integer rankR;
-      // Real normA=Modelica.Math.Matrices.norm(A=A, p=1);
+      // Real normA=MatricesMSL.norm(A=A, p=1);
       // Real eps=normA*1e-12;
-      Real normABCD=Modelica.Math.Matrices.norm([A, B; C, D], p=1);
+      Real normABCD=MatricesMSL.norm([A, B; C, D], p=1);
       Real eps=normABCD*Modelica.Constants.eps*1000;
     algorithm
       if nx > 0 then
@@ -12417,7 +12420,7 @@ k = ---------- * ----------------------
             end if;
           end for;
 
-          //rankR:=Modelica.Math.Matrices.rank(R);
+          //rankR:=MatricesMSL.rank(R);
 
           DD := R[1:rankR, :];
 
@@ -12430,8 +12433,8 @@ k = ---------- * ----------------------
             Cu := CC[sigma + 1:end, :];
             Co := CC[1:sigma, :];
 
-            (V,R,tau,V2) := Matrices.QR(Matrices.fliplr(transpose(Cu)));
-            Vf := Matrices.fliplr(V2);
+            (V,R,tau,V2) := Matrices.QR(MatricesMSL.flipLeftRight(transpose(Cu)));
+            Vf := MatricesMSL.flipLeftRight(V2);
 
             rankR := 0;
             //  !!!! rank determination
@@ -12440,7 +12443,7 @@ k = ---------- * ----------------------
                 rankR := rankR + 1;
               end if;
             end for;
-            //rankR:=Modelica.Math.Matrices.rank(R);
+            //rankR:=MatricesMSL.rank(R);
 
             rho := rankR;
             stop1 := rho == 0;

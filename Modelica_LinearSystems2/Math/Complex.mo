@@ -353,7 +353,7 @@ possible.
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica_LinearSystems2.Math.Vectors.length\">Vectors.length</a>
+<a href=\"modelica://Modelica.Math.Vectors.length\">Modelica.Math.Vectors.length</a>
 </p>
 </html>"));
   end normalize;

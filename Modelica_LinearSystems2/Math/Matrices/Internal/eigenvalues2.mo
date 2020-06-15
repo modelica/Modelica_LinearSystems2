@@ -29,8 +29,7 @@ protected
   Integer lwork;
 
 algorithm
-  (H,V,tau) := Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg(
-                                        A,1,n);
+  (H,V,tau) := Modelica.Math.Matrices.Utilities.toUpperHessenberg(A,1,n);
   Q := LAPACK.dorghr(V, 1, n, tau);
 
  lwork := Internal.dhseqr_workdim(H);

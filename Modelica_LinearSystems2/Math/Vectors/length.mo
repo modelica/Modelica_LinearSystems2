@@ -7,7 +7,9 @@ function length
 
 algorithm
   result := sqrt(v*v);
-  annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Vectors.length instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Vectors.<b>length</b>(v);

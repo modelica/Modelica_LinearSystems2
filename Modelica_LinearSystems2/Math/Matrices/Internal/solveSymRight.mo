@@ -3,9 +3,8 @@ function solveSymRight
   "Solve real system of linear equations X*A=B in X where A is symmetrix positive definite"
 
   extends Modelica.Icons.Function;
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import MatricesMSL = Modelica.Math.Matrices;
+
   input Real A[:,size(A, 1)] "Matrix A of X*A = B";
   input Real B[:,:] "Matrix B of X*op(A) = B";
   input Boolean isCholesky=false
@@ -20,13 +19,13 @@ protected
 
 algorithm
   if not isCholesky then
-    H := Matrices.cholesky(AA, upper);
+    H := MatricesMSL.cholesky(AA, upper);
   else
     H := AA;
   end if;
   H := symmetric(H);
-  X := LAPACK.dtrsm(H, X, 1, true, true, false, false);
-  X := LAPACK.dtrsm(H, X, 1, true, false, false, false);
+  X := MatricesMSL.LAPACK.dtrsm(H, X, 1, true, true, false, false);
+  X := MatricesMSL.LAPACK.dtrsm(H, X, 1, true, false, false, false);
 
   annotation (Documentation(info="<html>
 This function solves the equation

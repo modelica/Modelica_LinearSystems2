@@ -3,6 +3,7 @@ encapsulated function invariantZeros
   "Compute invariant zeros of linear state space system"
 
   import Modelica;
+  import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Complex;
@@ -38,8 +39,8 @@ protected
   Real beta[:];
   Integer info;
   Real beta_small=100*Modelica.Constants.eps;
-  Real normB=max(Modelica.Math.Matrices.norm(ss.B, p=1),beta_small);
-  Real normA=max(Modelica.Math.Matrices.norm(ss.A, p=1),beta_small);
+  Real normB=max(MatricesMSL.norm(ss.B, p=1),beta_small);
+  Real normA=max(MatricesMSL.norm(ss.A, p=1),beta_small);
 
 algorithm
   if min(size(ss.B)) == 0 or min(size(ss.C)) == 0 then
@@ -52,8 +53,8 @@ algorithm
     if n == 0 then
       Zeros := fill(Complex(0), 0);
     else
-      (,R,,V2) := Matrices.QR(Matrices.fliplr(transpose([Cr,Dr])));
-      Vf := Matrices.fliplr(V2);
+      (,R,,V2) := Matrices.QR(MatricesMSL.flipLeftRight(transpose([Cr,Dr])));
+      Vf := MatricesMSL.flipLeftRight(V2);
       AfBf := [Ar,Br]*Vf;
       Af := AfBf[:, 1:size(Ar, 2)];
       Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
@@ -62,8 +63,8 @@ algorithm
       assert(info == 0, "Failed to compute invariant zeros with function invariantZeros(..)");
 
       Zeros := fill(Complex(0), size(beta, 1));
-      normB:=max(Modelica.Math.Matrices.norm(Bf), beta_small);
-      normA:=max(Modelica.Math.Matrices.norm(Af, p=1), beta_small);
+      normB:=max(MatricesMSL.norm(Bf), beta_small);
+      normA:=max(MatricesMSL.norm(Af, p=1), beta_small);
 
 // If beta[i] is zero, then zero i is infinite.
       for i in 1:size(beta, 1) loop

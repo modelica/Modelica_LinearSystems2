@@ -90,7 +90,7 @@ Complex.Vectors.print("p",p);
     true);
 
   // Pre filter calculation
-  M_pa := -Modelica.Math.Matrices.inv([1,0,0,0,0,0]*Matrices.solve2(ss_pa.A,
+  M_pa := -Modelica.Math.Matrices.inv([1,0,0,0,0,0]*Modelica.Math.Matrices.solve2(ss_pa.A,
     ss_pa.B));
   print("Gain for pre filtering:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(

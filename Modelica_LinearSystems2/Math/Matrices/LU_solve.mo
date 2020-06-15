@@ -23,7 +23,9 @@ is singular, i.e., no unique solution exists.");
   else
     x := fill(0, 0);
   end if;
-  annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LU_solve instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Matrices.<b>LU_solve</b>(LU, pivots, b);

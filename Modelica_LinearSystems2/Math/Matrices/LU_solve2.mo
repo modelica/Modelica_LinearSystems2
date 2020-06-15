@@ -25,7 +25,9 @@ is singular, i.e., no unique solution exists.");
       size(B, 1),
       size(B, 2));
   end if;
-  annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LU_solve2 instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Matrices.<b>LU_solve2</b>(LU, pivots, B);

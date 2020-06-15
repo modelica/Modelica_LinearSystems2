@@ -3,7 +3,6 @@ function findLocal_tk
   "Find a local minimizer tk to define the length of the step tk*Nk in carenls or darenls"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.Math.Polynomial;
   import Modelica_LinearSystems2.Math.Complex;
 
@@ -24,9 +23,9 @@ protected
 
 algorithm
 //  Vk := Nk*G*Nk;
-  alpha_k := Matrices.trace(Rk*Rk);
-  beta_k := Matrices.trace(Rk*Vk);
-  gamma_k := Matrices.trace(Vk*Vk);
+  alpha_k := Modelica.Math.Matrices.trace(Rk*Rk);
+  beta_k := Modelica.Math.Matrices.trace(Rk*Vk);
+  gamma_k := Modelica.Math.Matrices.trace(Vk*Vk);
 
   if gamma_k > Modelica.Constants.eps then
     p := Polynomial.roots(Polynomial({4*gamma_k,6*beta_k,2*(alpha_k - 2*beta_k),

@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.Controller.KalmanFilter;
 model SRKF_inner2 "Discrete State Space block"
 
   import Modelica;
+  import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.DiscreteStateSpace;
   import Modelica_LinearSystems2.Math.Matrices.triangle;
@@ -15,18 +16,18 @@ model SRKF_inner2 "Discrete State Space block"
     "Base sample time for discrete blocks";
   parameter Real Q[size(dss.A, 1),size(dss.A, 1)]=identity(size(dss.A, 1))
     "Input or process noise covariance matrix of the previous instant";
-  final parameter Real Cq[size(dss.A, 1),size(dss.A, 1)]=Matrices.cholesky(Q,false)
+  final parameter Real Cq[size(dss.A, 1),size(dss.A, 1)]=MatricesMSL.cholesky(Q,false)
     "Input or process noise covariance matrix of the previous instant";
   parameter Real R[size(dss.C, 1),size(dss.C, 1)]=identity(size(dss.C, 1))
     "Output or measurement noise covariance matrix of the previous instant";
-  final parameter Real Cr[size(dss.C, 1),size(dss.C, 1)]=Matrices.cholesky(R,false)
+  final parameter Real Cr[size(dss.C, 1),size(dss.C, 1)]=MatricesMSL.cholesky(R,false)
     "Output or measurement noise covariance matrix of the previous instant";
   parameter Real P0[size(dss.A, 1),size(dss.A, 1)]=10*identity(size(dss.A, 1))
     "Initial state covariance matrix of the previous instant";
   parameter Real x_init[size(dss.A, 1)]=fill(0, size(dss.A, 1));
 
 public
-  Real S[size(dss.A, 1),size(dss.A, 1)](start=Matrices.cholesky(P0,false))
+  Real S[size(dss.A, 1),size(dss.A, 1)](start=MatricesMSL.cholesky(P0,false))
     "State covariance matrix of the previous instant";
   Real K[size(dss.A, 1),size(dss.C, 1)] "Kalman filter gain matrix";
 //  Real K1[size(dss.A, 1),size(dss.C, 1)] "Kalman filter gain matrix";
@@ -48,7 +49,7 @@ public
   Real z[size(dss.A, 1)];
 
 initial equation
-  S=Matrices.cholesky(P0,false);
+  S=MatricesMSL.cholesky(P0,false);
   x_est=x_init;
 
 equation

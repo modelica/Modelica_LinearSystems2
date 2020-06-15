@@ -19,10 +19,10 @@ record DiscreteStateSpace
     import Modelica_LinearSystems2;
   function fromDiscreteTransferFunction =
       Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
-                                                                                                      annotation (Documentation(info="<html> </html>"));
+    annotation (Documentation(info="<html> </html>"));
   function fromDiscreteZerosAndPoles =
       Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace
-                                                                                                      annotation (Documentation(info="<html> </html>"));
+    annotation (Documentation(info="<html> </html>"));
     function fromMatrices "Default constructor for a DiscreteStateSpace record"
       import Modelica;
       import Modelica_LinearSystems2;
@@ -61,9 +61,9 @@ record DiscreteStateSpace
     function fromStateSpace
       "Transform a continuous into a discrete linear state space system"
       import Modelica;
+      import MatricesMSL = Modelica.Math.Matrices;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Utilities.Types.Method;
-      import Modelica_LinearSystems2.Math.Matrices.LU_solve2;
 
       input Modelica_LinearSystems2.StateSpace sc
         "Continuous linear state space system";
@@ -100,13 +100,13 @@ record DiscreteStateSpace
             /*  der_x = A*x + B*u
              x = pre(x) + Ts*der_x
      */
-        (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := MatricesMSL.LU(identity(nx) -
           Ts*sc.A);
-        sd.B2 := LU_solve2(
+        sd.B2 := MatricesMSL.LU_solve2(
               LU,
               pivots,
               Ts*sc.B);
-        sd.A := LU_solve2(
+        sd.A := MatricesMSL.LU_solve2(
               LU,
               pivots,
               identity(nx));
@@ -118,13 +118,13 @@ record DiscreteStateSpace
             /*  der_x = A*x + B*u
              x = pre_x + (Ts/2)*(pre_der_x + der_x);
      */
-        (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := MatricesMSL.LU(identity(nx) -
           (Ts/2)*sc.A);
-        sd.B2 := LU_solve2(
+        sd.B2 := MatricesMSL.LU_solve2(
               LU,
               pivots,
               (Ts/2)*sc.B);
-        sd.A := LU_solve2(
+        sd.A := MatricesMSL.LU_solve2(
               LU,
               pivots,
               identity(nx) + (Ts/2)*sc.A);
@@ -136,7 +136,7 @@ record DiscreteStateSpace
            /* x = phi*pre(x) + gamma*pre(u);
        y = C*x + D*u
     */
-        (sd.A,sd.B) := Modelica.Math.Matrices.integralExp(
+        (sd.A,sd.B) := MatricesMSL.integralExp(
               sc.A,
               sc.B,
               Ts);
@@ -155,7 +155,7 @@ record DiscreteStateSpace
       x = z + gamma1/Ts*u
 
     */
-        (sd.A,sd.B,sd.B2) := Modelica.Math.Matrices.integralExpT(
+        (sd.A,sd.B,sd.B2) := MatricesMSL.integralExpT(
               sc.A,
               sc.B,
               Ts);
@@ -171,7 +171,7 @@ record DiscreteStateSpace
       Limitations: The infinite impulses at t = kT is ignored in the mapping
     */
 
-        sd.A := Modelica.Math.Matrices.exp(sc.A, Ts);
+        sd.A := MatricesMSL.exp(sc.A, Ts);
         sd.B := sd.A*sc.B;
         sd.C := sc.C;
         sd.D := sc.C*sc.B;
@@ -245,9 +245,9 @@ respectively.
     encapsulated function fromMatrices2
       "Transform a continuous into a discrete linear state space system"
       import Modelica;
+      import MatricesMSL = Modelica.Math.Matrices;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Utilities.Types.Method;
-      import Modelica_LinearSystems2.Math.Matrices.LU_solve2;
 
       input Real A[:,size(A, 1)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
       input Real B[size(A, 1),:] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
@@ -286,13 +286,13 @@ respectively.
             /*  der_x = A*x + B*u
              x = pre(x) + Ts*der_x
      */
-        (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := MatricesMSL.LU(identity(nx) -
           Ts*A);
-        sd.B2 := LU_solve2(
+        sd.B2 := MatricesMSL.LU_solve2(
               LU,
               pivots,
               Ts*B);
-        sd.A := LU_solve2(
+        sd.A := MatricesMSL.LU_solve2(
               LU,
               pivots,
               identity(nx));
@@ -304,13 +304,13 @@ respectively.
             /*  der_x = A*x + B*u
              x = pre_x + (Ts/2)*(pre_der_x + der_x);
      */
-        (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(identity(nx) -
+        (LU,pivots) := MatricesMSL.LU(identity(nx) -
           (Ts/2)*A);
-        sd.B2 := LU_solve2(
+        sd.B2 := MatricesMSL.LU_solve2(
               LU,
               pivots,
               (Ts/2)*B);
-        sd.A := LU_solve2(
+        sd.A := MatricesMSL.LU_solve2(
               LU,
               pivots,
               identity(nx) + (Ts/2)*A);
@@ -322,7 +322,7 @@ respectively.
            /* x = phi*pre(x) + gamma*pre(u);
        y = C*x + D*u
     */
-        (sd.A,sd.B) := Modelica.Math.Matrices.integralExp(
+        (sd.A,sd.B) := MatricesMSL.integralExp(
               A,
               B,
               Ts);
@@ -341,7 +341,7 @@ respectively.
       x = z + gamma1/Ts*u
 
     */
-        (sd.A,sd.B,sd.B2) := Modelica.Math.Matrices.integralExpT(
+        (sd.A,sd.B,sd.B2) := MatricesMSL.integralExpT(
               A,
               B,
               Ts);
@@ -357,7 +357,7 @@ respectively.
       Limitations: The infinite impulses at t = kT is ignored in the mapping
     */
 
-        sd.A := Modelica.Math.Matrices.exp(A, Ts);
+        sd.A := MatricesMSL.exp(A, Ts);
         sd.B := sd.A*B;
         sd.C := C;
         sd.D := C*B;

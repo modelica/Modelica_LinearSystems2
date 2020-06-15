@@ -38,7 +38,9 @@ algorithm
       end for;
     end for;
   end if;
-  annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.cholesky instead",
+    Documentation(info="<html>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>

@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Controller.KalmanFilter;
 model UKF_SR "Unscented Kalman filter"
   import Modelica;
+  import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Matrices;
 
@@ -26,9 +27,9 @@ model UKF_SR "Unscented Kalman filter"
   final parameter Real Q2[size(x_est_init,1),size(x_est_init,1)]=G*Q*transpose(G)
     "Appropriately weighted process noise covariance matrix";
   parameter Real R[:,size(R,1)] "Covariance matrix of the measurement noise";
-  final parameter Real CfQ[nx,nx] =  Matrices.cholesky(Q2,false)
+  final parameter Real CfQ[nx,nx] = MatricesMSL.cholesky(Q2,false)
     "Left Cholesky factor of the weighted noise covariance Matrix G*Q*G'";
-  final parameter Real CfR[ny,ny] =  Matrices.cholesky(R,false)
+  final parameter Real CfR[ny,ny] = MatricesMSL.cholesky(R,false)
     "Confidence of measurements - large values low confidence | acts like coefficient of PT1-Filter";
 
   parameter Real P_init[:,:] = identity(size(x_est_init,1))
@@ -59,7 +60,7 @@ protected
     "Global options";
 initial equation
   x_est = x_est_init;
-  CfP =  Matrices.cholesky(P_init,false);
+  CfP = MatricesMSL.cholesky(P_init,false);
 equation
 //  when sample(Ts, Ts) then
   when {sampleTrigger} then

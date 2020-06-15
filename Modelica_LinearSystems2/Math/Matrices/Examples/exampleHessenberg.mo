@@ -30,7 +30,7 @@ algorithm
       H,
       6,
       "Hl");
-  (H,V,tau) := Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg(
+  (H,V,tau) := Modelica.Math.Matrices.Utilities.toUpperHessenberg(
       M,
       1,
       size(M, 1));
@@ -55,7 +55,7 @@ algorithm
       Q*H*transpose(Q),
       6,
       "Q*H*Q'");
-  H := Modelica_LinearSystems2.Math.Matrices.hessenberg(M);
+  H := Modelica.Math.Matrices.hessenberg(M);
   Math.Matrices.printMatrix(
       H,
       6,

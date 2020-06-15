@@ -17,4 +17,6 @@ algorithm
     end for;
   end if;
   result := r;
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.trace instead");
 end trace;

@@ -20,7 +20,9 @@ algorithm
     info := 0;
   end if;
 
-  annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LU instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (LU, pivots)       = Matrices.<b>LU</b>(A);

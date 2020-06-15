@@ -10,13 +10,15 @@ protected
 
 algorithm
   if size(LU, 1) > 0 then
-    (LU,pivots) := Modelica_LinearSystems2.Math.Matrices.LU(A);
+    (LU,pivots) := Modelica.Math.Matrices.LU(A);
     result := product(LU[i, i] for i in 1:size(A, 1))*product(if pivots[i] == i then
             1 else -1 for i in 1:size(pivots, 1));
   else
     result := -1e100;
   end if;
-  annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.det instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 Matrices.<b>det</b>(A);

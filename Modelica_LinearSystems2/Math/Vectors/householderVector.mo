@@ -3,6 +3,7 @@ function householderVector
   "Calculate a normalized householder vector to reflect vector a onto vector b"
 
   import Modelica.Math.Vectors.norm;
+  import Modelica.Math.Vectors.length;
 
   input Real a[:] "Real vector to be reflected";
   input Real b[size(a, 1)] "Real vector b vector a is mapped onto";

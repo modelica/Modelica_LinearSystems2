@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function designCraneController
   "Design pole assignment and LQ controller for an overhead crane"
   import Modelica.Utilities.Streams.print;
+  import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
@@ -73,7 +74,7 @@ print("\nXXXXXXXXXXX:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_lq", p);
 
 // Pre filter calculation
-  M_lq := -Modelica.Math.Matrices.inv([1,0,0,0]*Matrices.solve2(ss_lq.A, ss_lq.B));
+  M_lq := -MatricesMSL.inv([1,0,0,0]*MatricesMSL.solve2(ss_lq.A, ss_lq.B));
   print("Gain for pre filtering:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     M_lq,
@@ -105,7 +106,7 @@ print("\nXXXXXXXXXXX:\n");
     true);
 
 // Pre filter calculation
-  M_pa := -Modelica.Math.Matrices.inv([1,0,0,0]*Matrices.solve2(ss_pa.A, ss_pa.B));
+  M_pa := -MatricesMSL.inv([1,0,0,0]*MatricesMSL.solve2(ss_pa.A, ss_pa.B));
   print("Gain for pre filtering:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     M_pa,

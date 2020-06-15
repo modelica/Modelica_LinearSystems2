@@ -18,6 +18,7 @@ algorithm
   assert(info == 0, "Solving an overdetermined or underdetermined linear system of
 equations with function \"Matrices.leastSquares2\" failed.");
   annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.leastSquares2 instead",
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>

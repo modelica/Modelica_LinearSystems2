@@ -26,7 +26,10 @@ result := max(s)/min(s);
     end if;
     end if;
 
-  annotation (Documentation(info="<html>
+
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.conditionNumber instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 r = Matrices.<b>conditionNumber</b>(A);
