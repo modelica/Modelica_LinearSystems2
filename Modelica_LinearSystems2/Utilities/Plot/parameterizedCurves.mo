@@ -129,7 +129,7 @@ Execute function <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Exa
 that is defined as parameterized sine and cosine-functions:
 </p>
 <blockquote><pre>
-s = linspace(0, Modelica.SIunits.Conversions.from_deg(300), 100);
+s = linspace(0, Modelica.Units.Conversions.from_deg(300), 100);
 <b>for</b> i <b>in</b> 1:nPoints <b>loop</b>
   X[1, i] := cos(s[i]);
   Y[1, i] := sin(s[i]);

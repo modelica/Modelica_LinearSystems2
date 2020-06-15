@@ -2594,7 +2594,7 @@ transfer function representation.
 <blockquote><pre>
   String modelName = &quot;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&quot;;
   Real T_linearize = 5;
-  Modelica.SIunits.Time Ts=0.01;
+  Modelica.Units.SI.Time Ts=0.01;
 
 <b>algorithm</b>
   dzp = Modelica_LinearSystems2.DiscreteZerosAndPoles.Import.fromModel(modelName=modelName, T_linearize=T_linearize, Ts=Ts);

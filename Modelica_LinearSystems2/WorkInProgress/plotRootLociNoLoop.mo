@@ -38,7 +38,7 @@ function plotRootLociNoLoop
 //   input Real p_min = 1 "Minimum value of modelParameter";
 //   input Real p_max = 6 "Maximum value of modelParameter";
 
-//   input Modelica.SIunits.Time T_linearize=0
+//   input Modelica.Units.SI.Time T_linearize=0
 //     "Simulate until T_linearize and then linearize the model"
 //     annotation (Dialog(group="Simulation setup"));
 //   input String method="Dassl" "Integration method"
