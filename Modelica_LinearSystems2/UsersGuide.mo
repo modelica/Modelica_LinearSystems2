@@ -631,24 +631,15 @@ Improvements in this version:
 
 <ul>
 <li> Updated to be compatible with Modelica 4.0.0</li>
-<li> Functions for vectors and matrices manipulations from
+<li> Functions for vectors&apos; and matrices&apos; manipulations from
      <a href=\"modelica://Modelica.Math\">Modelica.Math</a>
-     used prior to functions from
+     used prior to own functions from
      <a href=\"modelica://Modelica_LinearSystems2.Math.Vectors\">Vectors</a> and
      <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices\">Matrices</a>
      where possible.
      Concerning functions are marked obsolete.
      See Git-issue
      <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/74\">#74</a>.</li>
-</ul>
-
-
-<h4>
-Bug fixes performed in this version:
-</h4>
-
-<ul>
-<li> &hellip;</li>
 </ul>
 </html>"));
     end Version_2_4_0;
