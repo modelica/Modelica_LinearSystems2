@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Math.Matrices.Internal;
 function hohoTrafoUpperHess
   "Compute the similarity (Householder-) transformation S*A*S of matrix A with householder matrix S = I - 2u*u' to compute an upper Hessenberg form"
 
-  import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Math.Vectors.length;
 
   input Real A[:,size(A, 1)];
@@ -12,8 +11,7 @@ function hohoTrafoUpperHess
 
 protected
   Integer na=size(A, 1);
-  Real S[:,:]=-2*matrix(u)*transpose(matrix(u))/(length(u)*
-      length(u));                                            //S=u*u'/u'*u
+  Real S[:,:]=-2*matrix(u)*transpose(matrix(u))/(length(u)*length(u)); //S=u*u'/u'*u
   Integer i;
 
   Real P[na - r,na - r];

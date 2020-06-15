@@ -11,8 +11,7 @@ function hohoTrafoLowerHess
 
 protected
   Integer na=size(A, 1);
-  Real S[:,:]=-2*matrix(u)*transpose(matrix(u))/(length(u)*
-      length(u));                                            //S=u*u'/u'*u
+  Real S[:,:]=-2*matrix(u)*transpose(matrix(u))/(length(u)*length(u)); //S=u*u'/u'*u
   Integer i;
 
   Real P[na - r,na - r];
