@@ -69,7 +69,7 @@ algorithm
   end if;
 
   /*
-  f_min := Modelica.SIunits.Conversions.to_Hz(w_min);
-  f_max := Modelica.SIunits.Conversions.to_Hz(w_max);
+  f_min := Modelica.Units.Conversions.to_Hz(w_min);
+  f_max := Modelica.Units.Conversions.to_Hz(w_max);
   */
 end frequencyRangeBode;

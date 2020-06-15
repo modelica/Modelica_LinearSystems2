@@ -2242,7 +2242,7 @@ is set.
 <blockquote><pre>
    Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping;
    Integer order=2;
-   Modelica.SIunits.Frequency f_cut=10;
+   Modelica.Units.SI.Frequency f_cut=10;
 
    ZerosAndPoles zp_filter;
 
@@ -6167,7 +6167,7 @@ is set.
 <blockquote><pre>
   Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping;
   Integer order=2;
-  Modelica.SIunits.Frequency f_cut=10;
+  Modelica.Units.SI.Frequency f_cut=10;
 
   ZerosAndPoles zp_filter;
 

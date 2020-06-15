@@ -59,8 +59,8 @@ algorithm
         k2 := z_re/tan_max2;
         w_max1 := sqrt(k2^2 + z_abs2) - k2;
         /*
-        phi1 :=Modelica.SIunits.Conversions.to_deg(Modelica.Math.atan((w_max1 + z[i].im)/z_re));
-        phi2 :=Modelica.SIunits.Conversions.to_deg(Modelica.Math.atan((w_max1 - z[i].im)/z_re));
+        phi1 :=Modelica.Units.Conversions.to_deg(Modelica.Math.atan((w_max1 + z[i].im)/z_re));
+        phi2 :=Modelica.Units.Conversions.to_deg(Modelica.Math.atan((w_max1 - z[i].im)/z_re));
         Modelica.Utilities.Streams.print("phi1, phi2, 180-sum = " + String(phi1) + ", " + String(phi2)+", " +String(180-phi1-phi2));
         */
       else

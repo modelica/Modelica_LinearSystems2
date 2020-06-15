@@ -3,7 +3,7 @@ model MixingUnit1 "Stirred tank reactor"
   import Modelica.Units.SI;
 // stirred tank reactor // stirrer vessel reactor
 
-  parameter Real c0(unit="mol/l") = 0.848 "Nominal concentration"; // Should be Modelica.SIunits.Concentration in [mol/m^3]
+  parameter Real c0(unit="mol/l") = 0.848 "Nominal concentration"; // Should be Modelica.Units.SI.Concentration in [mol/m^3]
   parameter SI.Temperature T0 = 308.5 "Nominal temperature";
   parameter Real a1 = 0.2674 "Matrix A: Coefficient of element [1,1]";
   parameter Real a21 = 1.815 "Matrix A: Coefficient of element [2,1]";

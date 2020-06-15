@@ -1516,7 +1516,7 @@ if normalized = <b>false</b> is set.
 <blockquote><pre>
   Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Types.AnalogFilter.CriticalDamping;
   Integer order=2;
-  Modelica.SIunits.Frequency f_cut=10;
+  Modelica.Units.SI.Frequency f_cut=10;
 
   TransferFunction tf_filter;
 

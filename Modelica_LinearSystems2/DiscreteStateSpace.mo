@@ -370,7 +370,7 @@ The applied discretization method is selected by the user from
   import Modelica_LinearSystems2.StateSpace;
 
   StateSpace ss=StateSpace(A = [1], B = [1], C = [1], D = [0]);
-  Modelica.SIunits.Time Ts=0.1;
+  Modelica.Units.SI.Time Ts=0.1;
   Modelica_LinearSystems2.Types.Method method=Modelica_LinearSystems2.Types.Method.Trapezoidal;
 
 public
