@@ -2541,11 +2541,11 @@ second column respectively. The variable k is the real gain in both cases.
       ss.uNames := xuyName[nx + 1:nx + nu];
       ss.yNames := xuyName[nx + nu + 1:nx + nu + ny];
       ss.xNames := xuyName[1:nx];
-    
+
       dss := DiscreteStateSpace(ss, Ts=Ts, method=method);
-    
+
       dzp := DiscreteStateSpace.Conversion.toDiscreteZerosAndPolesMIMO(dss);
-    
+
     //   for ic in 1:ny loop
     //     for ib in 1:nu loop
     //       dss_siso := DiscreteStateSpace(
@@ -2560,7 +2560,7 @@ second column respectively. The variable k is the real gain in both cases.
     //         dss_siso);
     //     end for;
     //   end for;
-    
+
     //
     // //    zp := StateSpace.Conversion.toZerosAndPolesMIMO(result);
     //     for i in 1:ny loop
@@ -2568,7 +2568,7 @@ second column respectively. The variable k is the real gain in both cases.
     //         dzp[i,j] := DiscreteZerosAndPoles(zp=zp[i,j], Ts=Ts, method=method);
     //       end for;
     //     end for;
-    
+
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -2777,7 +2777,7 @@ int found=0;
       Integer n2_2=if n2 > 0 then 2 else 0 "second dimension of n2-matrix";
       Integer d1_2=if d1 > 0 then 1 else 0 "second dimension of d1-matrix";
       Integer d2_2=if d2 > 0 then 2 else 0 "second dimension of d2-matrix";
-      
+
       Real k=scalar(readMatrix(
             fileName,
             "k",
@@ -2812,7 +2812,7 @@ int found=0;
       dzp.d1 := if d1 > 0 then d1Vector else fill(0, 0);
       dzp.d2 := if d2 > 0 then d2Matrix else fill(0, 0, 2);
       dzp.Ts := scalar(Ts);
-    
+
     end fromFile_pc;
 
     encapsulated function fromFile_zp
@@ -2861,7 +2861,7 @@ int found=0;
             pSize,
             p_2) "poles in rows of real parts and imaginary parts";
       Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);
-      
+
       Complex zeros[:]=if zSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
           zerosMatrix[:, 1], zerosMatrix[:, z_2]) else fill(Complex(0), 0);
       Complex poles[:]=if pSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
