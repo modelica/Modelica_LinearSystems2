@@ -30,7 +30,7 @@ record SimulationOptionsForLinearization
         choice="Cerk45" "Cerk45"));
   Real tolerance=1e-4 "Relative error tolerance, if linearizeAtInitial=false" annotation(Dialog(enable=not linearizeAtInitial));
   Real fixedStepSize=0.001
-    "Step size for fixed step integrators, if linearizeAtInitial=false"                        annotation(Dialog(enable=not linearizeAtInitial));
+    "Step size for fixed step integrators, if linearizeAtInitial=false" annotation(Dialog(enable=not linearizeAtInitial));
 
   annotation (Icon(graphics={
         Rectangle(

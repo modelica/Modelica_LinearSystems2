@@ -61,10 +61,10 @@ model DoublePendulum "Multibody model of crane trolley"
     get_angles=true,
     animation=false)
     annotation (Placement(transformation(extent={{20,-30},{40,-10}})));
-  inner Modelica.Mechanics.MultiBody.World world(animateWorld=false,
-      animateGravity=false)
-                        annotation (Placement(transformation(extent={{-130,0},{-110,
-            20}},     rotation=0)));
+  inner Modelica.Mechanics.MultiBody.World world(
+    animateWorld=false,
+    animateGravity=false)
+    annotation (Placement(transformation(extent={{-130,0},{-110,20}}, rotation=0)));
   Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(useAxisFlange=true,
     s(fixed=true, start=s_start),
     v(fixed=true, start=v_start))
@@ -74,13 +74,12 @@ model DoublePendulum "Multibody model of crane trolley"
     useAxisFlange=true,
     phi(fixed=true, start=phi1_start),
     w(fixed=true, start=w1_start))
-                               annotation (Placement(transformation(extent={{-40,0},
-            {-20,20}},      rotation=0)));
+    annotation (Placement(transformation(extent={{-40,0},{-20,20}}, rotation=0)));
   Modelica.Mechanics.MultiBody.Joints.Revolute revolute2(
     phi(fixed=true, start=phi2_start),
     w(fixed=true, start=w2_start),
     cylinderDiameter=3*world.defaultJointWidth,
-    cylinderColor={0,0,200})                             annotation (Placement(transformation(extent={{20,0},{
+    cylinderColor={0,0,200}) annotation (Placement(transformation(extent={{20,0},{
             40,20}}, rotation=0)));
   Modelica.Mechanics.MultiBody.Parts.BodyShape bodyShape(
     shapeType="box",
@@ -129,14 +128,11 @@ model DoublePendulum "Multibody model of crane trolley"
     annotation (Placement(transformation(extent={{98,-82},{110,-70}})));
 equation
   connect(damperRot1D.flange_b, revolute1.axis)
-                                     annotation (Line(points={{-20,30},{-20,30},
-          {-20,22},{-20,20},{-30,20}},
-                                  color={0,0,0}));
+    annotation (Line(points={{-20,30},{-20,30},{-20,22},{-20,20},{-30,20}}, color={0,0,0}));
   connect(revolute1.support, damperRot1D.flange_a)
-                                        annotation (Line(points={{-36,20},{-36,20},
-          {-40,20},{-40,30}},              color={0,0,0}));
+    annotation (Line(points={{-36,20},{-36,20},{-40,20},{-40,30}}, color={0,0,0}));
   connect(bodyShape.frame_b, revolute1.frame_a)
-                                          annotation (Line(
+    annotation (Line(
       points={{-50,10},{-40,10}},
       color={95,95,95},
       thickness=0.5,
@@ -146,12 +142,12 @@ equation
       color={0,127,0},
       smooth=Smooth.None));
   connect(damperTrans1D.flange_a, prismatic.support)
-                                               annotation (Line(
+    annotation (Line(
       points={{-100,-20},{-100,4},{-94,4}},
       color={0,127,0},
       smooth=Smooth.None));
   connect(damperTrans1D.flange_b, prismatic.axis)
-                                            annotation (Line(
+    annotation (Line(
       points={{-80,-20},{-80,4},{-82,4}},
       color={0,127,0},
       smooth=Smooth.None));
@@ -189,7 +185,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(const1.y, add1.u2)
-                           annotation (Line(
+    annotation (Line(
       points={{110.6,-76},{114,-76},{114,-66},{118,-66}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -221,19 +217,19 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   connect(bodyCylinder.frame_a, revolute1.frame_b)
-                                             annotation (Line(
+    annotation (Line(
       points={{-10,10},{-20,10}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(relativeSensorAng1.frame_a, revolute1.frame_a)
-                                                   annotation (Line(
+    annotation (Line(
       points={{-40,-20},{-44,-20},{-44,10},{-40,10}},
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
   connect(relativeSensorAng1.frame_b, revolute1.frame_b)
-                                                   annotation (Line(
+    annotation (Line(
       points={{-20,-20},{-16,-20},{-16,10},{-20,10}},
       color={95,95,95},
       thickness=0.5,

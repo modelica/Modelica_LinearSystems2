@@ -24,14 +24,14 @@ partial block PartialSISO_equality
     "True, if continuous block, otherwise discrete block";
   parameter Integer sampleFactor(min=1)=1
     "Sample factor for sample time (Ts = sampleFactor * sampleClock.sampleTime)"
-     annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous,
+    annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous,
      group="Discrete block parameters"));
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block"
-     annotation(Placement(transformation(extent={{-140,-20},{-100,20}})));
+    annotation(Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput y
     "Continuous or discrete output signal of block"
-     annotation(Placement(transformation(extent={{100,-10},{120,10}})));
+    annotation(Placement(transformation(extent={{100,-10},{120,10}})));
 
 protected
   outer SampleClock sampleClock "Global options";

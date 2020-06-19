@@ -1625,7 +1625,7 @@ and results in
       input SI.Frequency f_min(min=0) = 0.1
         "Minimum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
       input SI.Frequency f_max(min=0) = 10
-        "Maximum frequency value, if autoRange = false"                                                  annotation(Dialog(enable=not autoRange));
+        "Maximum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
 
       input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
       input Boolean phase=true "= true, to plot phase" annotation(choices(checkBox=true));
@@ -2505,7 +2505,7 @@ is defined slightly differently.
 
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
-    input String fileName="tf.mat" "Name of the transfer function data file"   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+    input String fileName="tf.mat" "Name of the transfer function data file" annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="transfer function data file")));
     input String numName="n" "Name of the numenator of the transfer function";
     input String denName="d" "Name of the denominator of the transfer function";
@@ -2643,7 +2643,7 @@ followed by a conversion from sate space to transfer function representation.
       "Read the number n of coefficients written in a [n,1]-matrix"
       input String fileName="tf.mat" "Name of the transfer function data file";
       input String polyName="n"
-        "Name of the polynominal (numenator or denominator) coefficients of the transfer function"          annotation(Dialog);
+        "Name of the polynominal (numenator or denominator) coefficients of the transfer function" annotation(Dialog);
       output Integer result;
     protected
       Integer polySize[2]=readMatrixSize(fileName, polyName);

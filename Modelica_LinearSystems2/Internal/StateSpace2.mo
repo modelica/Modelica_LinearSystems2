@@ -9,9 +9,9 @@ record StateSpace2
   Real C[:,size(A, 1)]  annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
   Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
 
-//   String uNames[size(B, 2)]=fill("", size(B, 2))  annotation(Dialog(group="Signal names"));
+//   String uNames[size(B, 2)]=fill("", size(B, 2)) annotation(Dialog(group="Signal names"));
 //   String yNames[size(C, 1)]=fill("", size(C, 1)) annotation(Dialog(group="Signal names"));
-//   String xNames[size(A, 1)]=fill("", size(A, 1))  annotation(Dialog(group="Signal names"));
+//   String xNames[size(A, 1)]=fill("", size(A, 1)) annotation(Dialog(group="Signal names"));
 
 encapsulated operator 'constructor'
     "Default constructors for a StateSpace record"
@@ -321,17 +321,16 @@ encapsulated package Import
 
   encapsulated function fromFile "Read a StateSpace data record from mat-file"
 
-      import Modelica;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Internal.StateSpace2;
-      import Modelica_LinearSystems2;
+    import Modelica;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.Internal.StateSpace2;
+    import Modelica_LinearSystems2;
 
-    input String fileName="dslin.mat"
-        "Name of the state space system data file"     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                        caption="state space system data file")));
-    input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
+    input String fileName="dslin.mat" "Name of the state space system data file"
+      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)", caption="state space system data file")));
+    input String matrixName="ABCD" "Name of the state space system matrix" annotation(Dialog);
     protected
-    Integer xuy[3]=Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName)  annotation(__Dymola_allowForSize=true);
+    Integer xuy[3]=Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
     Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
     Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
     Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);

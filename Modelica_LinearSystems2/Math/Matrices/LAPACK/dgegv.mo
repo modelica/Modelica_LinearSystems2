@@ -34,7 +34,7 @@ protected
     1,
     work,
     size(work, 1),
-    info)   annotation (Library="lapack");
+    info) annotation (Library="lapack");
   annotation (Documentation(info="<html>
 <pre>
 Lapack documentation:

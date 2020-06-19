@@ -16,19 +16,17 @@ block TransferFunction
   parameter Real x_start[nx]=zeros(nx) "Initial or guess values of states"
     annotation(Dialog(tab="Advanced options"));
   parameter Real y_start=0
-    "Initial value of output (derivatives of y are zero upto nx-1-th derivative)"  annotation(Dialog(tab="Advanced options"));
+    "Initial value of output (derivatives of y are zero upto nx-1-th derivative)" annotation(Dialog(tab="Advanced options"));
   final parameter Integer nx=size(system.d, 1) - 1 "Number of states x";
   Modelica.Blocks.Interfaces.RealOutput x[nx]
     "State of continuous transfer function";
 
 protected
 parameter Boolean withDelay=false;
-  parameter Integer na=size(system.d, 1)
-                         annotation(HideResult=true);
-  parameter Integer nb=size(system.n, 1)
-                         annotation(HideResult=true);
-  Real a[na]=system.d "Reverse element order of system.denominator"                       annotation(HideResult=true);
-  Real b[nb]=system.n    annotation(HideResult=true);
+  parameter Integer na=size(system.d, 1) annotation(HideResult=true);
+  parameter Integer nb=size(system.n, 1) annotation(HideResult=true);
+  Real a[na]=system.d "Reverse element order of system.denominator" annotation(HideResult=true);
+  Real b[nb]=system.n annotation(HideResult=true);
   Real bb[:]=vector([zeros(max(0, na - nb), 1); b]);
   Real d=bb[1]/a[1];
   Real a_end=if a[end] > 100*Modelica.Constants.eps*sqrt(a*a) then a[end] else 1.0;

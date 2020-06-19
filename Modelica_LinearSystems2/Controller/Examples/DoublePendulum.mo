@@ -27,7 +27,7 @@ model DoublePendulum "Crane trolley controlled by a state feedback controller"
     width=50,
     startTime=5,
     period=10)
-              annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
+    annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   FirstOrder firstOrder(T=0.25)
     annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 equation

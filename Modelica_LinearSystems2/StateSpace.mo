@@ -7599,7 +7599,7 @@ and results in
       input Boolean onFile=false
         "= true, if frequency response is stored on file as matrix [f,a,phi]" annotation(choices(checkBox=true));
       input String fileName="frequencyResponse.mat"
-        "If onFile=true, file on which the frequency response will be stored"  annotation(Dialog(enable=onFile));
+        "If onFile=true, file on which the frequency response will be stored" annotation(Dialog(enable=onFile));
       input String matrixName=if Hz and not dB then "fHz_a_phiDeg" elseif
                                  Hz and dB then "fHz_adB_phiDeg" elseif
                                  not Hz and dB then "f_adB_phiDeg" else "f_a_phiDeg"
@@ -13004,7 +13004,7 @@ and results in
       input Boolean onFile=false
         "= true, if frequency response is stored on file as matrix [f,A,phi]" annotation(choices(checkBox=true));
       input String fileName="frequencyResponse.mat"
-        "If onFile=true, file on which the frequency response will be stored"  annotation(Dialog(enable=onFile));
+        "If onFile=true, file on which the frequency response will be stored" annotation(Dialog(enable=onFile));
       input String matrixName=if Hz and not dB then "fHz_A_phiDeg" elseif
                                  Hz and dB then "fHz_AdB_phiDeg" elseif
                                  not Hz and dB then "f_AdB_phiDeg" else "f_A_phiDeg"

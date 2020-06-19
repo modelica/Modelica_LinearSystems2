@@ -14,7 +14,7 @@ record DiscreteTransferFunction
 
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
-  String uName="u" "Name of input signal"    annotation(Dialog(group="Signal names"));
+  String uName="u" "Name of input signal" annotation(Dialog(group="Signal names"));
   String yName="y" "Name of output signal"  annotation(Dialog(group="Signal names"));
 
 /* If the numerator polynomial has no coefficients, the transfer function
@@ -280,7 +280,7 @@ encapsulated function bode "Plot transfer function as bode plot"
         "Minimum frequency value, if autoRange = false"
                                                     annotation(Dialog(enable=not autoRange));
   input SI.Frequency f_max(min=0) = 10
-        "Maximum frequency value, if autoRange = false"                                              annotation(Dialog(enable=not autoRange));
+        "Maximum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
 
   input Boolean magnitude=true "= true, to plot the magnitude of tf"
                                                                     annotation(choices(__Dymola_checkBox=true));

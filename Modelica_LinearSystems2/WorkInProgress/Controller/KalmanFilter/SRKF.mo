@@ -44,7 +44,7 @@ public
     Q=Q,
     R=R,
     P0=P0,
-    x_init=x_init)             annotation (Placement(transformation(extent={{-40,-30},{20,30}})));
+    x_init=x_init) annotation (Placement(transformation(extent={{-40,-30},{20,30}})));
 equation
 
   connect(kf_int.x_est, x_est) annotation (Line(

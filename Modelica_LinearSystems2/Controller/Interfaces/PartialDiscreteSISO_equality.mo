@@ -9,13 +9,13 @@ partial block PartialDiscreteSISO_equality
     "Sample time" annotation (HideResult=false);
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block"
-     annotation(Placement(transformation(extent={{-140,-20},{-100,20}})));
+    annotation(Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput y
     "Continuous or discrete output signal of block"
-     annotation(Placement(transformation(extent={{100,-10},{120,10}})));
+    annotation(Placement(transformation(extent={{100,-10},{120,10}})));
 
 protected
-  outer SampleClock sampleClock "Global options"                      annotation(HideResult=true);
+  outer SampleClock sampleClock "Global options" annotation(HideResult=true);
 
  // Derived quantities
   discrete Real u_sampled "Sampled continuous input signal u";

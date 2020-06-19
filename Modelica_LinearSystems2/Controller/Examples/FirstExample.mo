@@ -10,7 +10,7 @@ model FirstExample "First example to demonstrate representative block"
   Modelica.Blocks.Sources.Step step(
     startTime=0.5,
     height=1.2,
-    offset=0.2)                      annotation (
+    offset=0.2) annotation (
       Placement(transformation(extent={{-80,0},{-60,20}})));
   Modelica_LinearSystems2.Controller.StateSpace stateSpace(
     x_start={0.1,0},
@@ -21,7 +21,7 @@ model FirstExample "First example to demonstrate representative block"
       C=[1,0],
       D=[0]),
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption)
-      annotation(Placement(transformation(extent={{-20,40},{0,60}})));
+    annotation(Placement(transformation(extent={{-20,40},{0,60}})));
 
   TransferFunction transferFunction(
     system(n={1,2}, d={1,2,3}),
@@ -43,7 +43,7 @@ model FirstExample "First example to demonstrate representative block"
     blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous)
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
 equation
-  connect(step.y, stateSpace.u[1])      annotation (Line(
+  connect(step.y, stateSpace.u[1]) annotation (Line(
       points={{-59,10},{-40,10},{-40,50},{-22,50}},
       color={0,0,127},
       smooth=Smooth.None));

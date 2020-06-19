@@ -11,7 +11,7 @@ function testPoleAssignment "Function to assess algorithms for pole assignment"
   import Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData;
   import Modelica_LinearSystems2.StateSpace;
 
-  input DesignData data=Design.data_Chow_Kokotovic()                               annotation(Dialog);
+  input DesignData data=Design.data_Chow_Kokotovic() annotation(Dialog);
   input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.KNV
     "method for pole assignment";
   input Boolean isSI=true;

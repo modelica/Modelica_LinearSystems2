@@ -42,7 +42,7 @@ public
     P0=P0,
     x_init=x_init,
     dss=dss,
-    wB=wB)   annotation (Placement(transformation(extent={{-38,-32},{22,28}})));
+    wB=wB) annotation (Placement(transformation(extent={{-38,-32},{22,28}})));
 equation
 
   connect(kf_int.x_est, x_est) annotation (Line(

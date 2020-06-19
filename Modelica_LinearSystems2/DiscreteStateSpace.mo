@@ -8,15 +8,15 @@ operator record DiscreteStateSpace
   Real C[:,size(A, 1)]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
   Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
-  Modelica.Units.SI.Time Ts=1 "Sample time" annotation (Dialog(group=
-          "Data used to construct discrete from continuous system"));
+  Modelica.Units.SI.Time Ts=1 "Sample time"
+    annotation (Dialog(group="Data used to construct discrete from continuous system"));
   Real B2[size(B, 1),size(B, 2)]=fill(0,size(B,1),size(B,2))
     "Reconstruct continuous state"
-       annotation(Dialog(group="Data used to construct discrete from continuous system"));
+    annotation(Dialog(group="Data used to construct discrete from continuous system"));
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
 //      String yNames[size(C, 1)]=fill("", size(C, 1)) "Names of the output signals" annotation(Dialog(group="Signal names"));
-//      String xNames[size(A, 1)]=fill("", size(A, 1)) "Names of the states"  annotation(Dialog(group="Signal names"));
+//      String xNames[size(A, 1)]=fill("", size(A, 1)) "Names of the states" annotation(Dialog(group="Signal names"));
 //      String uNames[size(B, 2)]=fill("", size(B, 2)) "Names of the input signals" annotation(Dialog(group="Signal names"));
 
   encapsulated operator 'constructor'
@@ -27,12 +27,12 @@ operator record DiscreteStateSpace
     function fromDiscreteTransferFunction =
       Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace
       "Generate a DiscreteStateSpace data record from a discrete transfer function"
-    annotation (Documentation(info="<html> </html>"));
+      annotation (Documentation(info="<html> </html>"));
 
     function fromDiscreteZerosAndPoles =
       Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteStateSpace
       "Generate a DiscreteStateSpace data record from a discrete zeros-and-poles description"
-    annotation (Documentation(info="<html> </html>"));
+      annotation (Documentation(info="<html> </html>"));
 
     encapsulated function fromReal
       "Generate a DiscreteStateSpace data record from a real value"
@@ -101,13 +101,13 @@ respectively.
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
       input Real A[:,size(A, 1)]
-                              annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+        annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
       input Real B[size(A, 1),:]
-                              annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+        annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
       input Real C[:,size(A, 1)]
-                              annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+        annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
       input Real D[size(C, 1),size(B, 2)]
-                                      annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+        annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
       input Modelica.Units.SI.Time Ts=1 "Sample time" annotation (Dialog(group=
               "Data used to construct discrete from continuous system"));
@@ -581,14 +581,13 @@ encapsulated operator '-'
   import Modelica;
 
   function subtract
-      "Subtraction of two state space systems connected in parallel (= inputs are the same, outputs of the two systems are subtracted)"
+    "Subtraction of two state space systems connected in parallel (= inputs are the same, outputs of the two systems are subtracted)"
 
-      import Modelica;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
 
     input DiscreteStateSpace dss1 "State space system 1";
-    input DiscreteStateSpace dss2
-        "State Space system 2 is subtracted from system 1";
+    input DiscreteStateSpace dss2 "State Space system 2 is subtracted from system 1";
     output DiscreteStateSpace result(
       redeclare Real A[size(dss1.A, 1) + size(dss2.A, 1),size(dss1.A, 2) + size(dss2.A, 2)],
       redeclare Real B[size(dss1.B, 1) + size(dss2.B, 1),size(dss1.B, 2)],
@@ -596,7 +595,7 @@ encapsulated operator '-'
       redeclare Real D[size(dss1.D, 1),size(dss1.D, 2)],
       redeclare Real B2[size(dss1.B2, 1) + size(dss2.B2, 1),size(dss1.B2, 2)])
         "= dss1 - dss2";
-    protected
+  protected
     Integer nx1=size(dss1.A, 1);
     Integer nx2=size(dss2.A, 1);
   algorithm
@@ -608,7 +607,7 @@ encapsulated operator '-'
     result.D := dss1.D - dss2.D;
     result.Ts := dss1.Ts;
     result.method := dss1.method;
-      annotation (Documentation(info="<html>
+    annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote>
 <pre>
@@ -650,9 +649,9 @@ dss3 := dss1 - dss2;
   end subtract;
 
   function negate
-      "Unary minus (discrete state space system where the output is multiplied by a gain of -1)"
-      import Modelica;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+    "Unary minus (discrete state space system where the output is multiplied by a gain of -1)"
+    import Modelica;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
 
     input DiscreteStateSpace dss;
     output DiscreteStateSpace result(
@@ -1248,21 +1247,21 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
   end initialResponse;
 
 encapsulated package Analysis
-    "Package of functions to analyse discrete state space system represented by a DiscreteStateSpace record"
-    import Modelica;
+  "Package of functions to analyse discrete state space system represented by a DiscreteStateSpace record"
+  import Modelica;
   extends Modelica.Icons.Package;
 
   encapsulated function eigenValues
       "Calculate the eigenvalues of a linear discrete state space system and write them in a complex vector"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.DiscreteStateSpace;
+    import Modelica_LinearSystems2.Math.Complex;
 
     input DiscreteStateSpace dss "Discrete state space system";
     output Complex eigvalues[size(dss.A, 1)]=Complex.eigenValues(dss.A)
-        "Eigenvalues of the system";
+      "Eigenvalues of the system";
   algorithm
 
     annotation (Documentation(info="<html>
@@ -2308,18 +2307,18 @@ encapsulated function bodeSISO
         "Maximum frequency value, if autoRange = false";
 
   input Boolean magnitude=true "= true, to plot the magnitude of dtf"
-                                                                     annotation(choices(checkBox=true));
+    annotation(choices(checkBox=true));
   input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
 
   extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
         Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
 
   input Boolean Hz=true
-        "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)"
-                                                                         annotation(choices(checkBox=true));
+    "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)"
+    annotation(choices(checkBox=true));
   input Boolean dB=false
-        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
-                                                                            annotation(choices(checkBox=true),Dialog(enable=magnitude));
+    "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
+    annotation(choices(checkBox=true),Dialog(enable=magnitude));
     protected
   Modelica_LinearSystems2.DiscreteZerosAndPoles dzp
         "Zeros and poles Transfer functions to be plotted";
@@ -2433,11 +2432,12 @@ encapsulated function timeResponse
   input Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
 
   input Boolean subPlots=true
-        "True, if all subsystem time responses are plotted in one window with subplots"
-                                                                                     annotation(choices(checkBox=true));
+    "True, if all subsystem time responses are plotted in one window with subplots"
+    annotation(choices(checkBox=true));
 
-  extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
-        heading="Time response"));
+  extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
+    defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
+      heading="Time response"));
 
     protected
   Plot.Records.Curve curve;
@@ -2579,11 +2579,12 @@ end timeResponse;
     input Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
 
     input Boolean subPlots=true
-        "True, if all subsystem time responses are plotted in one window with subplots"
-                                                                                     annotation(choices(checkBox=true));
+      "True, if all subsystem time responses are plotted in one window with subplots"
+      annotation(choices(checkBox=true));
 
-    extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
-           heading="Impulse response"));
+    extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
+      defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
+        heading="Impulse response"));
 
     protected
       Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse "type of time response";
@@ -2661,8 +2662,8 @@ This function plots the impulse responses of a state space system for each syste
     input Real tSpan=0 "Simulation time span [s]";
 
     input Boolean subPlots=true
-        "True, if all subsystem time responses are plotted in one window with subplots"
-                                                                                     annotation(choices(checkBox=true));
+      "True, if all subsystem time responses are plotted in one window with subplots"
+      annotation(choices(checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
            heading="Step response"));
@@ -2746,8 +2747,8 @@ This function plots the discrete step responses of a state space system for each
     input Real tSpan=0 "Simulation time span [s]";
 
     input Boolean subPlots=true
-        "True, if all subsystem time responses are plotted in one window with subplots"
-                                                                                     annotation(choices(checkBox=true));
+      "True, if all subsystem time responses are plotted in one window with subplots"
+      annotation(choices(checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
            heading="Ramp response"));
@@ -2827,8 +2828,8 @@ encapsulated function initialResponse
   input Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
 
   input Boolean subPlots=true
-        "True, if all subsystem time responses are plotted in one window with subplots"
-                                                                                     annotation(choices(checkBox=true));
+    "True, if all subsystem time responses are plotted in one window with subplots"
+    annotation(choices(checkBox=true));
 
   extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
         heading="Initial response"));
@@ -3376,9 +3377,9 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
       import Modelica_LinearSystems2;
 
     input String fileName="dslin.mat"
-        "Name of the state space system data file"     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+        "Name of the state space system data file" annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="state space system data file")));
-    input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
+    input String matrixName="ABCD" "Name of the state space system matrix" annotation(Dialog);
     protected
     Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
     Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);

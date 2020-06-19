@@ -19,7 +19,7 @@ external "FORTRAN 77" dgetrs(
     pivots,
     X,
     size(B, 1),
-    info)                 annotation (Library="lapack");
+    info) annotation (Library="lapack");
   annotation (Documentation(info="Lapack documentation:
 
    Purpose

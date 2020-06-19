@@ -46,8 +46,7 @@ model MixingUnit
     height=c_high_start - c_start,
     offset=c_start,
     startTime=25)
-    annotation (Placement(transformation(extent={{-120,10},{-100,30}},
-          rotation=0)));
+    annotation (Placement(transformation(extent={{-120,10},{-100,30}}, rotation=0)));
   inner Controller.SampleClock sampleClock
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
 equation

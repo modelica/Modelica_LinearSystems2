@@ -11,7 +11,7 @@ block LimIntegrator
   parameter Boolean withDelay=false
     "True, if the output is delayed by one sample period (only if discrete)";
 
-  parameter Real y_start=0 "Initial or guess value of output (=state)"                                                               annotation(Dialog(tab="Advanced options"));
+  parameter Real y_start=0 "Initial or guess value of output (=state)" annotation(Dialog(tab="Advanced options"));
 
   parameter Boolean limitsAtInit=true
     "= false, if limits are ignored during initializiation (i.e., y=u)";
@@ -19,23 +19,17 @@ block LimIntegrator
 public
   Modelica.Blocks.Interfaces.RealInput limit1
     "Connector of Real input signal used as maximum of input u"
-                              annotation (Placement(transformation(extent={{-140,60},
-            {-100,100}},          rotation=0)));
+    annotation (Placement(transformation(extent={{-140,60},{-100,100}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealInput limit2
     "Connector of Real input signal used as minimum of input u"
-                              annotation (Placement(transformation(extent={{-140,
-            -100},{-100,-60}},      rotation=0)));
-
+    annotation (Placement(transformation(extent={{-140,-100},{-100,-60}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signals of block"
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-          rotation=0)));
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput y
     "Continuous or discrete output signals of block"
-    annotation (Placement(transformation(extent={{100,-10},{120,10}}, rotation=
-            0)));
-  Modelica_LinearSystems2.WorkInProgress.Controller.Integrator
-                                                integrator(
+    annotation (Placement(transformation(extent={{100,-10},{120,10}}, rotation=0)));
+  Modelica_LinearSystems2.WorkInProgress.Controller.Integrator integrator(
     k=k,
     blockType=blockType,
     methodType=methodType,
@@ -61,7 +55,7 @@ public
       sampleFactor=sampleFactor)
     annotation (Placement(transformation(extent={{-80,-78},{-60,-58}})));
   Modelica_LinearSystems2.Controller.Sampler sampler3(sampleFactor=sampleFactor,
-      blockType=blockType)                            annotation (Placement(
+      blockType=blockType) annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,

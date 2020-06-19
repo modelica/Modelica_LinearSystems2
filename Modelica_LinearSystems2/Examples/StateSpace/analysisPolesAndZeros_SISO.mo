@@ -8,7 +8,7 @@ function analysisPolesAndZeros_SISO
 
   input String fileName="NoName" "file where matrix [A, B; C, D] is stored" annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file"),enable = systemOnFile));
-  input String matrixName="ABCD" "Name of the state space system matrix"   annotation(Dialog(group="system data definition",enable = systemOnFile));
+  input String matrixName="ABCD" "Name of the state space system matrix" annotation(Dialog(group="system data definition",enable = systemOnFile));
 
   input Real A[:,:]=[-1.0,0.0,0.0; 0.0,-2.0,0.0; 0.0,0.0,-3.0] annotation(Dialog(group="system matrices",enable = not systemOnFile));
   input Real B[:,:]=[1.0; 1.0; 0.0] annotation(Dialog(group="system matrices",enable = not systemOnFile));

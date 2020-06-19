@@ -43,7 +43,7 @@ equation
       points={{-32.5,0},{-28,0}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(samplerOut.y, observer.y)         annotation (Line(
+  connect(samplerOut.y, observer.y) annotation (Line(
       points={{74.5,-46},{62,-46}},
       color={0,0,127},
       smooth=Smooth.None));

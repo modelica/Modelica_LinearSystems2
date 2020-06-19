@@ -17,11 +17,11 @@ model DiscreteStateSpace
     "Type of discretization" annotation(Evaluate=true, HideResult=true);
   final parameter Types.Method method=convertToMethod(methodType, sampleClock.methodType)
     "Discretization method (explicitEuler/implicitEuler/trapezoidal/stepExact/rampExact)"
-     annotation(Evaluate=true);
+    annotation(Evaluate=true);
 
   parameter Integer sampleFactor(min=1) = 1
     "Factor so that sample time = sampleClock.sampleTime * sampleFactor"
-     annotation(HideResult=true);
+    annotation(HideResult=true);
 
   parameter Types.Init init = Modelica_LinearSystems2.Controller.Types.Init.SteadyState
     "Type of initialization (No init/SteadyState/InitialState/InitialOutput)"
@@ -44,32 +44,32 @@ model DiscreteStateSpace
 
   Modelica.Blocks.Interfaces.RealInput u[nu]
     "Continuous or discrete input signals of block"
-    annotation (                          HideResult=true, Placement(transformation(
+    annotation (HideResult=true, Placement(transformation(
           extent={{-140,-20},{-100,20}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput y[ny](start=y_start)
-    "Discrete output signals of block" annotation (                        HideResult=true,
+    "Discrete output signals of block" annotation (HideResult=true,
       Placement(transformation(extent={{100,-10},{120,10}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput x[nx](start=x_start)
-    "State vector of continuous system at sample times"   annotation(HideResult=true);
+    "State vector of continuous system at sample times" annotation(HideResult=true);
 
 protected
-  outer SampleClock sampleClock "Global options"                       annotation(HideResult=true);
+  outer SampleClock sampleClock "Global options" annotation(HideResult=true);
   parameter Modelica_LinearSystems2.DiscreteStateSpace discreteSystem=
       Modelica_LinearSystems2.DiscreteStateSpace(
       system,
       Ts,
       method);
 
- discrete Real xd[nx](start=x_start)
+  discrete Real xd[nx](start=x_start)
     "State vector of discrete system (pre(xd) = x - B2*u)";
   discrete Real new_xd[nx](start=x_start) "Next valued of xd"
-                        annotation(HideResult=true);
+    annotation(HideResult=true);
 
 // Derived quantities
   discrete Real u_sampled[nu] "Sampled continuous input signal u";
   discrete Real pre_u_sampled[nu] "Sampled continuous input signal u";
-  discrete Real y_sampled[ny] "Sampled continuous output"        annotation(HideResult=true);
-  discrete Real x_sampled[nx] "Sampled continuous state"        annotation(HideResult=true);
+  discrete Real y_sampled[ny] "Sampled continuous output" annotation(HideResult=true);
+  discrete Real x_sampled[nx] "Sampled continuous state" annotation(HideResult=true);
   Integer ticks
     "Actual number of base samples starting from the last sample time instant" annotation(HideResult=true);
   Boolean sampleTrigger "Triggers next sample time" annotation(HideResult=true);

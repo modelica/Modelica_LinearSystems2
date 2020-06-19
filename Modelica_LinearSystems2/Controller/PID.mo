@@ -44,8 +44,7 @@ block PID "PID-controller in additive description form"
   Sampler sampler(blockType=blockType)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   Modelica.Blocks.Math.Gain P(k=1)
-                     annotation (Placement(transformation(extent={{-30,30},{-10,
-            50}},     rotation=0)));
+    annotation (Placement(transformation(extent={{-30,30},{-10,50}}, rotation=0)));
   Derivative D(
     k= if pidRep==Types.PID_representation.timeConstants then Td else kd/kp,
     blockType=blockType,
@@ -69,11 +68,9 @@ block PID "PID-controller in additive description form"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
   Modelica.Blocks.Math.Add3 addPID
-                          annotation (Evaluate=true, Placement(transformation(
-          extent={{10,-10},{30,10}},rotation=0)));
+    annotation (Evaluate=true, Placement(transformation(extent={{10,-10},{30,10}},rotation=0)));
   Modelica.Blocks.Math.Gain gainPID(k=if pidRep==Types.PID_representation.timeConstants then k else kp)
-                                annotation (Placement(transformation(extent={{50,-10},
-            {70,10}},          rotation=0)));
+    annotation (Placement(transformation(extent={{50,-10},{70,10}}, rotation=0)));
 
 initial equation
   if init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput then

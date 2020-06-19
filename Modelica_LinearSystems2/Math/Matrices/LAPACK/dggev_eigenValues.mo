@@ -36,7 +36,7 @@ external "Fortran 77" dggev(
     1,
     work,
     lwork,
-    info)         annotation(Library = {"lapack"});
+    info) annotation(Library = {"lapack"});
   annotation (Documentation(info="Lapack documentation:
 
    Purpose

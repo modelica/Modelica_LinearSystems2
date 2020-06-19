@@ -7,7 +7,7 @@ model TestComponents "test all Controller blocks"
   Modelica.Blocks.Sources.Step step(
     startTime=0.5,
     height=1.2,
-    offset=0.2)                      annotation (extent=[-80,40; -60,60],
+    offset=0.2) annotation (extent=[-80,40; -60,60],
       Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica_LinearSystems2.Controller.StateSpace stateSpace(
     x_start={0.1,0},
@@ -72,7 +72,7 @@ model TestComponents "test all Controller blocks"
   Modelica_LinearSystems2.Controller.Noise noise(y_min=0, y_max=1)
     annotation (Placement(transformation(extent={{-20,-250},{0,-230}})));
 equation
-  connect(step.y, stateSpace.u[1])      annotation (Line(
+  connect(step.y, stateSpace.u[1]) annotation (Line(
       points={{-59,0},{-40,0},{-40,230},{-22,230}},
       color={0,0,127},
       smooth=Smooth.None));

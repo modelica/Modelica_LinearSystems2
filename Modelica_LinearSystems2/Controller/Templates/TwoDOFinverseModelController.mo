@@ -35,19 +35,19 @@ equation
       points={{80,-31},{80,-50},{-10,-50},{-10,-28}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(plant_inv.y, inverseModel.u2)             annotation (Line(
+  connect(plant_inv.y, inverseModel.u2) annotation (Line(
       points={{-41,20},{-52.6,20}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(plant_inv.u, inverseModel.y2)             annotation (Line(
+  connect(plant_inv.u, inverseModel.y2) annotation (Line(
       points={{-18,20},{-8.05,20}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(feedback.u1, plant_inv.ym)  annotation (Line(
+  connect(feedback.u1, plant_inv.ym) annotation (Line(
       points={{-18,-20},{-30,-20},{-30,9}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(filter.y, inverseModel.u1)            annotation (Line(
+  connect(filter.y, inverseModel.u1) annotation (Line(
       points={{-69,20},{-60.7,20}},
       color={0,0,127},
       smooth=Smooth.None));

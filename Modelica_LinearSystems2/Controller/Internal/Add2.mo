@@ -7,7 +7,7 @@ model Add2 "Output the sum of the two real inputs (graphics can be changed)"
   parameter Integer n(min=1)=1 "Number of inputs = number of outputs";
 
   Modelica.Blocks.Interfaces.RealInput u1[n]
-                                          annotation (Placement(transformation(
+    annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={0,80})));

@@ -4,15 +4,15 @@ operator record DiscreteZerosAndPoles
   extends Modelica.Icons.Record;
 
   Real k=1.0 "Multiplicative factor of transfer function"
-      annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+    annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
   Real n1[:] "[p^0] coefficients of 1st order numerator polynomials"
-      annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+    annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
   Real n2[:,2] "[p,p^0] coefficients of 2nd order numerator polynomials"
-      annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+    annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
   Real d1[:] "[p^0] coefficients of 1st order denominator polynomials"
-      annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+    annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
   Real d2[:,2] "[p,p^0] coefficients of 2nd order denominator polynomials"
-      annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+    annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
 
   Modelica.Units.SI.Time Ts "Sample time" annotation (Dialog(group=
           "Data used to construct discrete from continuous system"));
@@ -24,8 +24,8 @@ operator record DiscreteZerosAndPoles
    least one coefficient, such as {1}
 */
 
-  String uName="u" "Name of input signal"    annotation(Dialog(group="Signal names"));
-  String yName="y" "Name of output signal"  annotation(Dialog(group="Signal names"));
+  String uName="u" "Name of input signal" annotation(Dialog(group="Signal names"));
+  String yName="y" "Name of output signal" annotation(Dialog(group="Signal names"));
 
   encapsulated operator 'constructor'
     "Collection of operators to construct a DiscreteZerosAndPoles data record"
@@ -268,24 +268,23 @@ is defined as
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
-      input Real n1[:]=fill(0, 0)
-        "[p^0] coefficients of 1st order numerator polynomials"
-           annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+      input Real n1[:]=fill(0, 0) "[p^0] coefficients of 1st order numerator polynomials"
+        annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real n2[:,2]=fill(
               0,
               0,
               2) "[p,p^0] coefficients of 2nd order numerator polynomials"
-           annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+        annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real d1[:]=fill(0, 0)
         "[p^0] coefficients of 1st order denominator polynomials"
-           annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+        annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real d2[:,2]=fill(
               0,
               0,
               2) "[p,p^0] coefficients of 2nd order denominator polynomials"
-           annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+        annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Real k=1.0 "Multiplicative factor of transfer function"
-           annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
+        annotation(Dialog(group="y = k*(product(p+n1[i]) * product(p^2+n2[i,1]*p+n2[i,2])) / (product(p+d1[i])*product(p^2+d2[i,1]*p+d2[i,2])) *u"));
       input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
@@ -1393,18 +1392,16 @@ numerator polynomial N(z) and the denominator polynomial D(q).
       import Modelica.Units.SI;
 
     input DiscreteZerosAndPoles dzp
-        "DiscreteZerosAndPoles function to be plotted";
+      "DiscreteZerosAndPoles function to be plotted";
     input Integer nPoints(min=2) = 200 "Number of points";
-    input Boolean autoRange=true
-        "True, if abszissa range is automatically determined";
-    input SI.Frequency f_min(min=0) = 0.1
-        "Minimum frequency value, if autoRange = false"
-                                                      annotation(Dialog(enable=not autoRange));
-    input SI.Frequency f_max(min=0) = 10
-        "Maximum frequency value, if autoRange = false"                                                annotation(Dialog(enable=not autoRange));
+    input Boolean autoRange=true "True, if abszissa range is automatically determined";
+    input SI.Frequency f_min(min=0) = 0.1 "Minimum frequency value, if autoRange = false"
+      annotation(Dialog(enable=not autoRange));
+    input SI.Frequency f_max(min=0) = 10 "Maximum frequency value, if autoRange = false"
+      annotation(Dialog(enable=not autoRange));
 
     input Boolean magnitude=true "= true, to plot the magnitude of dzp"
-                                                                       annotation(choices(checkBox=true));
+      annotation(choices(checkBox=true));
     input Boolean phase=true "= true, to plot the pase of dzp" annotation(choices(checkBox=true));
 
     extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
@@ -1412,11 +1409,11 @@ numerator polynomial N(z) and the denominator polynomial D(q).
            + String(dzp)));
 
     input Boolean Hz=true
-        "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)"
-                                                                           annotation(choices(checkBox=true));
+      "= true, to plot abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)"
+      annotation(choices(checkBox=true));
     input Boolean dB=false
-        "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
-                                                                              annotation(choices(checkBox=true),Dialog(enable=magnitude));
+      "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))"
+      annotation(choices(checkBox=true),Dialog(enable=magnitude));
 
     protected
     SI.AngularVelocity w[nPoints];
@@ -2441,9 +2438,8 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
       import Modelica;
       import Modelica_LinearSystems2.DataDir;
 
-      input String fileName=DataDir + "dzp.mat"
-        "Name of the discrete zeros and poles data file"        annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                        caption="state space system data file")));
+      input String fileName=DataDir + "dzp.mat" "Name of the discrete zeros and poles data file"
+        annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)", caption="state space system data file")));
 
     protected
       Integer n1n2d1d2[4]=if ZerosAndPoles.Internal.checkRepresentation(
@@ -2496,7 +2492,7 @@ second column respectively. The variable k is the real gain in both cases.
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
-      input String modelName "Name of the Modelica model"  annotation(Dialog(__Dymola_translatedModel(translate=true)));
+      input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
       input Real T_linearize=0
         "point in time of simulation to linearize the model";
       input String fileName="dslin" "Name of the result file";
@@ -2760,8 +2756,7 @@ int found=0;
       import Modelica;
 
     input String fileName="pc.mat" "Name of the zeros and poles data file"
-                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="state space system data file")));
+      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)", caption="state space system data file")));
 
     protected
     Integer n1n2d1d2[4]=ZerosAndPoles.Internal.numberOfRealZerosAndPoles_pc(fileName);
@@ -2836,8 +2831,7 @@ int found=0;
       import Modelica_LinearSystems2.Math.Complex;
 
     input String fileName="dzp.mat" "Name of the zeros and poles data file"
-                                                     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="state space system data file")));
+      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)", caption="state space system data file")));
     protected
     Integer n1n2d1d2[4]=
         ZerosAndPoles.Internal.numberOfRealZerosAndPoles_zp(fileName);

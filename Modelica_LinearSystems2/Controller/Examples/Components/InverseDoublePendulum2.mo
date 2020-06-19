@@ -72,27 +72,27 @@ equation
       points={{-19,-60},{-8,-60}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(inverseDoublePendulum.s, multiplex6.u1[1])   annotation (Line(
+  connect(inverseDoublePendulum.s, multiplex6.u1[1]) annotation (Line(
       points={{-19,10},{-0.1,10},{-0.1,8.5},{18.8,8.5}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(multiplex6.u2[1], inverseDoublePendulum.v)   annotation (Line(
+  connect(multiplex6.u2[1], inverseDoublePendulum.v) annotation (Line(
       points={{18.8,5.1},{0,5.1},{0,6},{-19,6}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(multiplex6.u3[1], inverseDoublePendulum.phi)   annotation (Line(
+  connect(multiplex6.u3[1], inverseDoublePendulum.phi) annotation (Line(
       points={{18.8,1.7},{0,1.7},{0,2},{-19,2}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(multiplex6.u4[1], inverseDoublePendulum.w)   annotation (Line(
+  connect(multiplex6.u4[1], inverseDoublePendulum.w) annotation (Line(
       points={{18.8,-1.7},{0,-1.7},{0,-2},{-19,-2}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(multiplex6.u5[1], inverseDoublePendulum.phi1)   annotation (Line(
+  connect(multiplex6.u5[1], inverseDoublePendulum.phi1) annotation (Line(
       points={{18.8,-5.1},{0,-5.1},{0,-6},{-19,-6}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(multiplex6.u6[1], inverseDoublePendulum.w1)   annotation (Line(
+  connect(multiplex6.u6[1], inverseDoublePendulum.w1) annotation (Line(
       points={{18.8,-8.5},{0,-8.5},{0,-10},{-19,-10}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -100,7 +100,7 @@ equation
       points={{-1.65327e-015,-69},{-1.65327e-015,-90},{0,-90},{0,-110}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(multiplex6.y, y)   annotation (Line(
+  connect(multiplex6.y, y) annotation (Line(
       points={{41,0},{110,0}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -116,7 +116,7 @@ equation
       points={{-120,0},{-42,0}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(add.u2, multiplex6.y)   annotation (Line(
+  connect(add.u2, multiplex6.y) annotation (Line(
       points={{1.46958e-015,-52},{1.46958e-015,-40},{50,-40},{50,0},{41,0}},
       color={0,0,127},
       smooth=Smooth.None));

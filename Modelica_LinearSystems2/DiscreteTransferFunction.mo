@@ -14,8 +14,8 @@ operator record DiscreteTransferFunction
 
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
-  String uName="u" "Name of input signal"    annotation(Dialog(group="Signal names"));
-  String yName="y" "Name of output signal"  annotation(Dialog(group="Signal names"));
+  String uName="u" "Name of input signal" annotation(Dialog(group="Signal names"));
+  String yName="y" "Name of output signal" annotation(Dialog(group="Signal names"));
 
 /* If the numerator polynomial has no coefficients, the transfer function
    is zero. The denominator polynomial must always have at
@@ -838,7 +838,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
         "Maximum frequency value, if autoRange = false" annotation(Dialog(enable=not autoRange));
 
       input Boolean magnitude=true "= true, to plot the magnitude of tf"
-                                                                        annotation(choices(checkBox=true));
+        annotation(choices(checkBox=true));
       input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
@@ -1212,8 +1212,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
             dtf.method,
             uName=dtf.uName,
             yName=dtf.yName);
-      annotation (Documentation(info=
-                                 "<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dzp = DiscreteTransferFunction.Conversion.<b>toDiscreteZerosAndPoles</b>(tf)
@@ -1360,7 +1359,7 @@ with
 
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
-      input String fileName="dtf.mat" "Name of the transfer function data file"   annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+      input String fileName="dtf.mat" "Name of the transfer function data file" annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                           caption="transfer function data file")));
       input String numName="n" "Name of the numenator of the transfer function";
       input String denName="d"
@@ -1408,7 +1407,7 @@ with
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-    input String modelName "Name of the Modelica model"  annotation(Dialog(__Dymola_translatedModel(translate=true)));
+    input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
     input Real T_linearize=0
         "point in time of simulation to linearize the model";
     input String fileName="dslin" "Name of the result file";

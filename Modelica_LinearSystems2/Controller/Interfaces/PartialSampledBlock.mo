@@ -25,7 +25,7 @@ partial block PartialSampledBlock
     "True, if continuous block, otherwise discrete block";
   parameter Types.MethodWithGlobalDefault methodType=Types.MethodWithGlobalDefault.UseSampleClockOption
     "Type of discretization if discrete block"
-     annotation(Evaluate=true, HideResult=true,Dialog(tab="Advanced options",group="Discrete block parameters",
+    annotation(Evaluate=true, HideResult=true,Dialog(tab="Advanced options",group="Discrete block parameters",
                 enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
 
   final parameter Types.Init init=Modelica_LinearSystems2.Controller.Internal.convertToInit(initType,sampleClock.initType)
@@ -33,7 +33,7 @@ partial block PartialSampledBlock
 
   parameter Integer sampleFactor(min=1)=1
     "Sample factor (Ts = sampleFactor * sampleClock.sampleTime)"
-     annotation(Dialog(tab="Advanced options",group="Discrete block parameters",
+    annotation(Dialog(tab="Advanced options",group="Discrete block parameters",
                 enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
 
   parameter Types.InitWithGlobalDefault initType=Types.InitWithGlobalDefault.UseSampleClockOption

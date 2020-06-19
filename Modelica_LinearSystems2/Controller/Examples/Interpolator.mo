@@ -39,7 +39,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(sampler.y, interpolator2.u)
-                                     annotation (Line(
+    annotation (Line(
       points={{-19,10},{-2,10}},
       color={0,0,127},
       smooth=Smooth.None));

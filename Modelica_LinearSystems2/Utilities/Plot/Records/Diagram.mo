@@ -4,7 +4,7 @@ record Diagram
   extends Modelica.Icons.Record;
 
   Modelica_LinearSystems2.Utilities.Plot.Records.Curve curve[:]
-    "Properties of the curves in one diagram of the figure"    annotation(Dialog);
+    "Properties of the curves in one diagram of the figure" annotation(Dialog);
 
   String heading="" "Heading displayed above diagram" annotation(Dialog);
   Real heightRatio = 0.45 "Height of diagram = heightRatio*diagramWidth" annotation(Dialog);

@@ -17,13 +17,13 @@ model SeriesConnection "Series connection of two PT1 blocks"
   Modelica.Blocks.Sources.Step step(
     height=1.2,
     offset=0.2,
-    startTime=0.1)                   annotation (
+    startTime=0.1) annotation (
       Placement(transformation(extent={{-70,-10},{-50,10}})));
 
   FirstOrder S1(T=T1)
-            annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
+    annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   FirstOrder S2(T=T2)
-            annotation (Placement(transformation(extent={{10,-10},{30,10}})));
+    annotation (Placement(transformation(extent={{10,-10},{30,10}})));
   ZerosAndPoles S12(system=
         Modelica_LinearSystems2.ZerosAndPoles.'constructor'.fromZerosAndPoles(p=
         {Modelica_LinearSystems2.Math.Complex(re=-1/T1, im=0),
@@ -33,11 +33,11 @@ model SeriesConnection "Series connection of two PT1 blocks"
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
 
 equation
-  connect(step.y, S1.u)            annotation (Line(
+  connect(step.y, S1.u) annotation (Line(
       points={{-49,0},{-32,0}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(S1.y, S2.u)                       annotation (Line(
+  connect(S1.y, S2.u) annotation (Line(
       points={{-9,0},{8,0}},
       color={0,0,127},
       smooth=Smooth.None));

@@ -43,7 +43,7 @@ external "Fortran 77" dhgeqz(
     1,
     work,
     lwork,
-    info)         annotation(Library = {"lapack"});
+    info) annotation(Library = {"lapack"});
 
   annotation (Documentation(info="Lapack documentation:
 

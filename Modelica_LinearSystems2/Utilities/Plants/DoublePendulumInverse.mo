@@ -69,7 +69,7 @@ model DoublePendulumInverse "Multibody model of inverse crane trolley"
         -1,0})
     annotation (Placement(transformation(extent={{-110,30},{-130,50}})));
 equation
-  connect(distrubanceForceCart.f,dist)  annotation (Line(
+  connect(distrubanceForceCart.f,dist) annotation (Line(
       points={{-80,92},{-80,120}},
       color={0,0,127},
       smooth=Smooth.None));

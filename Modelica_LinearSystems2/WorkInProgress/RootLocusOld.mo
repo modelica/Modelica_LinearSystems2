@@ -209,15 +209,15 @@ over the load inertia <b>Jload</b>:
     extends Modelica.Icons.Record;
 
     String heading=""
-      "Heading displayed above diagram (if empty, default heading)"                 annotation(Dialog);
+      "Heading displayed above diagram (if empty, default heading)" annotation(Dialog);
     Real heightRatio = 0.8 "Height of diagram = heightRatio*diagramWidth" annotation(Dialog);
     Boolean grid=true "True, if grid is shown" annotation(Dialog,  choices(__Dymola_checkBox=true));
 
     /* group "Axes" (Axes properties) */
     String xLabel="Real part of eigenvalues"
-      "String displayed at horizontal axis"                                        annotation(Dialog(group="Axes"));
+      "String displayed at horizontal axis" annotation(Dialog(group="Axes"));
     String yLabel="Imaginary part of eigenvalues"
-      "String displayed at vertical axis"                                             annotation(Dialog(group="Axes"));
+      "String displayed at vertical axis" annotation(Dialog(group="Axes"));
     Boolean logX = false "True, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
     Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
     Boolean uniformScaling = false
@@ -233,7 +233,7 @@ over the load inertia <b>Jload</b>:
     Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm diagramWidth=140
       "Width of diagram" annotation(Dialog);
     Modelica_LinearSystems2.Utilities.Plot.Types.ImageResolution_dpi windowResolution=96
-      "[dpi] Image resolution in window if applicable (e.g. unscaled window)"   annotation(Dialog);
+      "[dpi] Image resolution in window if applicable (e.g. unscaled window)" annotation(Dialog);
 
   end RootLocusDiagramOld;
 

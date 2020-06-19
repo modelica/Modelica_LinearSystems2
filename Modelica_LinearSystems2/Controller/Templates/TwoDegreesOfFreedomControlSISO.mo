@@ -28,7 +28,7 @@ partial model TwoDegreesOfFreedomControlSISO
     additionalMeasurableOutputs=additionalMeasurableOutputs) constrainedby Modelica_LinearSystems2.Controller.Templates.Internal.PlantTemplate_SISO
     annotation (Placement(transformation(extent={{-20,10},{-40,30}})));
 equation
-  connect(controller.u, feedback[1].y)  annotation (Line(
+  connect(controller.u, feedback[1].y) annotation (Line(
       points={{8,-20},{-1,-20}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -36,19 +36,19 @@ equation
       points={{80,-31},{80,-50},{-10,-50},{-10,-28}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(plant2.y, forwardControlModel.u2)         annotation (Line(
+  connect(plant2.y, forwardControlModel.u2) annotation (Line(
       points={{-41,20},{-52.6,20}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(plant2.u, forwardControlModel.y2)         annotation (Line(
+  connect(plant2.u, forwardControlModel.y2) annotation (Line(
       points={{-18,20},{-8.05,20}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(feedback.u1, plant2.ym)     annotation (Line(
+  connect(feedback.u1, plant2.ym) annotation (Line(
       points={{-18,-20},{-30,-20},{-30,9}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(filter.y, forwardControlModel.u1)     annotation (Line(
+  connect(filter.y, forwardControlModel.u1) annotation (Line(
       points={{-69,20},{-60.7,20}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -57,7 +57,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.u1[1], forwardControlModel.y1)
-                                      annotation (Line(
+    annotation (Line(
       points={{50,-12},{50,20},{-2.65,20}},
       color={0,0,127},
       smooth=Smooth.None));
