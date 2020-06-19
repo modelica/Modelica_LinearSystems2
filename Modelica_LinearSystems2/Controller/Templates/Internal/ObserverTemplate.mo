@@ -43,13 +43,13 @@ public
     "Dimension of vector of measured output (y)";
   parameter Real x_start[size(plantModelSystem2.A,1)]=zeros(size(plantModelSystem2.A,1))
     "Initial or guess values of states" annotation(Dialog(tab="Advanced options"));
-//  parameter Real y_start[size(plantModelSystem2.C,1)]=zeros(size(plantModelSystem2.C,1)) "Initial values of outputs (remaining states are in steady state if possible)"    annotation 6;
+//  parameter Real y_start[size(plantModelSystem2.C,1)]=zeros(size(plantModelSystem2.C,1)) "Initial values of outputs (remaining states are in steady state if possible)" annotation 6;
  //    initType= if init==Types.Init.InitialState then Types.Init.InitialState else  Types.Init.NoInit
 // y_start-plantModelSystem2.C*L2*observerStateSpace.y_start
 
   Modelica.Blocks.Interfaces.RealInput u[size(plantModelSystem2.B, 2)]
     annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
-  Modelica.Blocks.Interfaces.RealInput y[nout]           annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
+  Modelica.Blocks.Interfaces.RealInput y[nout] annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
   Modelica.Blocks.Interfaces.RealOutput x_estimated[size(observerStateSpace.system.A,1)]
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Routing.Multiplex2 multiplex2_1(n1=size(plantModelSystem2.B,2), n2=nout)

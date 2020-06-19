@@ -13,9 +13,7 @@ model DoublePendulum "crane trolley system"
 
   inner Modelica.Mechanics.MultiBody.World world(animateWorld=false,
       animateGravity=false)
-                        annotation (Placement(transformation(extent={{-140,-80},
-            {-120,-60}},
-                      rotation=0)));
+    annotation (Placement(transformation(extent={{-140,-80},{-120,-60}}, rotation=0)));
   Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(useAxisFlange=true)
     annotation (Placement(transformation(extent={{-96,0},{-76,20}})));
   Modelica.Mechanics.Translational.Components.Damper damper1(d=0)
@@ -23,8 +21,7 @@ model DoublePendulum "crane trolley system"
   Modelica.Mechanics.MultiBody.Joints.Revolute rev(n={0,0,1},useAxisFlange=true,
     phi(fixed=true, start=phi1_start),
     w(fixed=true, start=w1_start))
-                               annotation (Placement(transformation(extent={{-30,0},
-            {-10,20}},      rotation=0)));
+    annotation (Placement(transformation(extent={{-30,0},{-10,20}}, rotation=0)));
   Modelica.Mechanics.Rotational.Components.Damper damper(d=0)
     annotation (Placement(transformation(extent={{-22,40},{-2,60}},rotation=0)));
   Modelica.Mechanics.MultiBody.Parts.Body body(
@@ -70,7 +67,7 @@ model DoublePendulum "crane trolley system"
     phi(fixed=true, start=phi2_start),
     w(fixed=true, start=w2_start),
     cylinderDiameter=3*world.defaultJointWidth,
-    cylinderColor={0,0,200})                             annotation (Placement(transformation(extent={{24,0},{
+    cylinderColor={0,0,200}) annotation (Placement(transformation(extent={{24,0},{
             44,20}}, rotation=0)));
   Modelica.Mechanics.MultiBody.Sensors.RelativeAngles relativeAngles1
     annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
@@ -101,7 +98,7 @@ model DoublePendulum "crane trolley system"
     annotation (Placement(transformation(extent={{52,0},{72,20}})));
 equation
   connect(damper.flange_b, rev.axis) annotation (Line(points={{-2,50},{0,50},{0,
-          24},{0,20},{-20,20}},   color={0,0,0}));
+          24},{0,20},{-20,20}}, color={0,0,0}));
   connect(rev.support, damper.flange_a) annotation (Line(points={{-26,20},{-26,
           26},{-36,26},{-36,50},{-22,50}}, color={0,0,0}));
   connect(bodyShape.frame_b, rev.frame_a) annotation (Line(
@@ -230,7 +227,7 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   connect(const1.y, add1.u2)
-                           annotation (Line(
+    annotation (Line(
       points={{78.6,-56},{82,-56},{82,-46},{86,-46}},
       color={0,0,127},
       smooth=Smooth.None));

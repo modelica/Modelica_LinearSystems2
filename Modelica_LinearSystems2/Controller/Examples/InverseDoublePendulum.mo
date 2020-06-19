@@ -29,7 +29,7 @@ model InverseDoublePendulum "Controlled inverse double pendulum"
     period=20,
     width=50,
     amplitude=10)
-              annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
   Components.AccelerationLimiter accelerationLimiter(
     v_limit=20,
     velocityLimitation=false,
@@ -42,7 +42,7 @@ model InverseDoublePendulum "Controlled inverse double pendulum"
     y_min=-0.05,
     y_max=0.05,
     sampleFactor=50)
-             annotation (Placement(transformation(extent={{0,60},{20,80}})));
+    annotation (Placement(transformation(extent={{0,60},{20,80}})));
 
   Noise noise1(
     y_min=-0.5,

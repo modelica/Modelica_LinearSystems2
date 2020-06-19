@@ -7,15 +7,15 @@ record ParameterVariation
 
   Real Value=0 "Value of parameter" annotation (Dialog(group="if grid = OneValue"));
   Real Min=-1e100 "Minimum value of parameter"
-                                 annotation(Dialog(group="if grid = Equidistant or Logarithmic"));
+    annotation(Dialog(group="if grid = Equidistant or Logarithmic"));
   Real Max=1e100 "Maximum value of parameter"
-                                 annotation(Dialog(group="if grid = Equidistant or Logarithmic"));
+    annotation(Dialog(group="if grid = Equidistant or Logarithmic"));
   Integer nPoints(min=2) = 11
-    "Number of parameter values in the range Min .. Max"    annotation(Dialog(group="if grid = Equidistant or Logarithmic"));
+    "Number of parameter values in the range Min .. Max" annotation(Dialog(group="if grid = Equidistant or Logarithmic"));
 
   annotation (
      Dialog(__Dymola_importDsin(button="select"
-          "select the model parameters to be included in this table",                                   onlyStart=true,
+          "select the model parameters to be included in this table", onlyStart=true,
     fields(Name=initialName,
            Value=initialValue.value,
            Min=initialValue.minimum,

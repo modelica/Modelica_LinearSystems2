@@ -11,7 +11,7 @@ partial block PartialDiscreteBlock
 
   parameter Integer sampleFactor(min=1) = 1
     "Sample factor (Ts = sampleFactor * sampleClock.sampleTime)"
-     annotation(HideResult=true);
+    annotation(HideResult=true);
   final parameter Modelica.Units.SI.Time Ts=sampleClock.sampleTime*sampleFactor
     "Sample time" annotation (HideResult=false);
 protected

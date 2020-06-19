@@ -6,9 +6,9 @@ function transformationToIrreducibleForm
   import Modelica_LinearSystems2.StateSpace;
 
   input String fileName=DataDir + "abcd_siso2.mat"
-    "file where matrix [A, B; C, D] is stored"                              annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+    "file where matrix [A, B; C, D] is stored" annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file"),enable = systemOnFile));
-  input String matrixName="ABCD" "Name of the state space system matrix"   annotation(Dialog(group="system data definition",enable = systemOnFile));
+  input String matrixName="ABCD" "Name of the state space system matrix" annotation(Dialog(group="system data definition",enable = systemOnFile));
 
   input Real A[:,:]=fill(
       0,

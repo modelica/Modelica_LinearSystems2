@@ -3,7 +3,7 @@ block Add2
   "Output the sum of the two inputs (inputs are on the left and below)"
 
   input Modelica.Blocks.Interfaces.RealInput u1
-                                annotation (Placement(transformation(
+    annotation (Placement(transformation(
       extent={{-100,-20},{-60,20}}, rotation=0)));
   input Modelica.Blocks.Interfaces.RealInput u2
     annotation (Placement(transformation(
@@ -11,7 +11,7 @@ block Add2
     extent={{-20,-20},{20,20}},
     rotation=90)));
   output Modelica.Blocks.Interfaces.RealOutput y
-                                 annotation (Placement(transformation(
+    annotation (Placement(transformation(
       extent={{80,-10},{100,10}}, rotation=0)));
 
 equation

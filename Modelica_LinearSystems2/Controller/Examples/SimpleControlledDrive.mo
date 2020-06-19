@@ -43,8 +43,7 @@ model SimpleControlledDrive
     annotation (
       Placement(transformation(extent={{-44,20},{-24,40}})));
   Modelica.Blocks.Math.Feedback feedback1
-                                         annotation (Placement(transformation(extent={{-20,20},
-            {0,40}})));
+    annotation (Placement(transformation(extent={{-20,20},{0,40}})));
   Modelica.Blocks.Math.Feedback feedback2 annotation (Placement(transformation(extent={{36,20},
             {56,40}})));
   Modelica.Blocks.Math.Gain gain(k=kp) annotation (
@@ -78,12 +77,12 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(sampler3.y, feedback1.u1)
-                                   annotation (Line(
+    annotation (Line(
       points={{-23,30},{-18,30}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(feedback1.y, gain.u)
-                              annotation (Line(
+    annotation (Line(
       points={{-1,30},{8,30}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -112,7 +111,7 @@ equation
       color={0,0,0},
       smooth=Smooth.None));
   connect(sampler1.y, feedback1.u2)
-                                   annotation (Line(
+    annotation (Line(
       points={{-10,11},{-10,22}},
       color={0,0,127},
       smooth=Smooth.None));

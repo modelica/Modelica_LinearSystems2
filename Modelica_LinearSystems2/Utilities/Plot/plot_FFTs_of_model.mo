@@ -5,7 +5,7 @@ function plot_FFTs_of_model
   import Modelica_LinearSystems2.Utilities.Plot.Internal;
 
   input String modelName
-    "Model that was used to generate FFT data (FFT result files are stored in directory <modelName>)"    annotation(Dialog(__Dymola_translatedModel=true));
+    "Model that was used to generate FFT data (FFT result files are stored in directory <modelName>)" annotation(Dialog(__Dymola_translatedModel=true));
   input Boolean logX = false "= trrue, if logarithmic scale of x-axis" annotation(choices(checkBox=true));
 protected
   String directory = Internal.getLastName(modelName);

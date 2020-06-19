@@ -12,7 +12,7 @@ protected
   Integer lda=max(1,n);
   Real work[2*n];
 
-external "Fortran 77" dlansy2(norm, uplo, n, A, lda, work, anorm)   annotation (Include="
+external "Fortran 77" dlansy2(norm, uplo, n, A, lda, work, anorm) annotation (Include="
   #include<f2c.h>
    #include <stdio.h>
 

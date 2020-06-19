@@ -19,10 +19,10 @@ protected
   Integer ticks
     "Actual number of base samples starting from the last sample time instant" annotation(HideResult=true);
   Integer seedState[3] "State of seed"
-                       annotation(HideResult=true);
+    annotation(HideResult=true);
   Boolean sampleTrigger "Triggers next sample time" annotation(HideResult=true);
   discrete Real noise "Noise in the range 0..1"
-                                       annotation(HideResult=true);
+    annotation(HideResult=true);
   discrete Real y_sampled "Sampled output" annotation(HideResult=true);
 equation
   if sampleClock.blockType == Types.BlockType.Continuous then

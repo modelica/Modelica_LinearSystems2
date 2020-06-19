@@ -25,15 +25,14 @@ model Discretization2
     startTime=0.1,
     period=1,
     width=sampleClock.sampleTime*100)
-             annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
+    annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
   Modelica.Blocks.Sources.Step step1(
     startTime=0.1,
     height=1,
-    offset=0)                        annotation (
-      Placement(transformation(extent={{-80,10},{-60,30}})));
+    offset=0) annotation (Placement(transformation(extent={{-80,10},{-60,30}})));
 
 equation
-  connect(pulse.y, impulseExact.u)  annotation (Line(
+  connect(pulse.y, impulseExact.u) annotation (Line(
       points={{-59,-20},{-2,-20}},
       color={0,0,127},
       smooth=Smooth.None));

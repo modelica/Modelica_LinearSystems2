@@ -23,7 +23,7 @@ encapsulated function frequencyResponse
   input Boolean dB=false
     "= true, to compute magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Dialog(enable=magnitude));
   input Boolean logX=true
-    "= true, to compute abszissa values for logarithmic scale"                       annotation(choices(checkBox=true));
+    "= true, to compute abszissa values for logarithmic scale" annotation(choices(checkBox=true));
   output Real f[nPoints] "Frequency vector (either in Hz or rad/s)";
   output Real A[nPoints] "Amplitude (either without unit or in dB)";
   output Modelica.Units.NonSI.Angle_deg phi[nPoints] "Angles in degree";

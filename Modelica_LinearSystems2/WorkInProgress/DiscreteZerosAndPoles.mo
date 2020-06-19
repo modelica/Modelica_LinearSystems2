@@ -24,7 +24,7 @@ record DiscreteZerosAndPoles
    least one coefficient, such as {1}
 */
 
-  String uName="u" "Name of input signal"    annotation(Dialog(group="Signal names"));
+  String uName="u" "Name of input signal" annotation(Dialog(group="Signal names"));
   String yName="y" "Name of output signal"  annotation(Dialog(group="Signal names"));
 
   encapsulated operator 'constructor' "Generate a ZerosAndPoles object"
@@ -1395,7 +1395,7 @@ Generate a matrix of ZerosAndPoles data records by linearization of a model defi
       import Modelica_LinearSystems2.DataDir;
 
       input String fileName=DataDir + "zp.mat"
-        "Name of the zeros and poles data file"        annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+        "Name of the zeros and poles data file" annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="state space system data file")));
 
     protected

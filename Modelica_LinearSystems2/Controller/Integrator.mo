@@ -11,7 +11,7 @@ block Integrator
     "True, if the output is delayed by one sample period (only if discrete)";
 
   parameter Real y_start=0 "Initial or guess value of output (=state)"
-                                                               annotation(Dialog(tab="Advanced options"));
+    annotation(Dialog(tab="Advanced options"));
 equation
   if continuous then
     der(y) = k*u;

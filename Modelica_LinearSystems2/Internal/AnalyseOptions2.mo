@@ -2,8 +2,8 @@ within Modelica_LinearSystems2.Internal;
 record AnalyseOptions2
   "Defines the characteristics of the eigenvalues to be print or to be plot"
   extends Modelica.Icons.Record;
-  Boolean plotEigenValues=true "Plot eigenvalues"     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
-  Boolean plotInvariantZeros=true "Plot invariant zeros"    annotation(Dialog(group="Analyse options"),choices(checkBox=true));
+  Boolean plotEigenValues=true "Plot eigenvalues" annotation(Dialog(group="Analyse options"),choices(checkBox=true));
+  Boolean plotInvariantZeros=true "Plot invariant zeros" annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean plotStepResponse=true "Plot step respones. Only for SISO system"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean plotFrequencyResponse=true "Plot bode diagram. Only for SISO system"

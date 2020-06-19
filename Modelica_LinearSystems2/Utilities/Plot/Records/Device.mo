@@ -11,7 +11,7 @@ record Device "Properties of a device"
   Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm diagramWidth=140
     "Width of diagram" annotation(Dialog);
   Modelica_LinearSystems2.Utilities.Plot.Types.ImageResolution_dpi windowResolution=96
-    "[dpi] Image resolution in window if applicable (e.g. unscaled window)"   annotation(Dialog);
+    "[dpi] Image resolution in window if applicable (e.g. unscaled window)" annotation(Dialog);
 
   Boolean autoLineColor = true
     "If automatic line properties: distinguish curves by color otherwise by line style"

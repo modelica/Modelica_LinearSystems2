@@ -11,11 +11,11 @@ block DiscreteDAconverter
 protected
   parameter Real quantization=if bits > 0 then ((y_max - y_min)/2^bits) else 0;
   discrete Real y_bound "Bounded output"
-                                annotation(HideResult=true);
+    annotation(HideResult=true);
   discrete Real y_sampled "Sampled output"
-                                  annotation(HideResult=true);
+    annotation(HideResult=true);
   discrete Real y_delaySampled
-    "Sampled output with a delay of one sample period"                            annotation(HideResult=true);
+    "Sampled output with a delay of one sample period" annotation(HideResult=true);
 equation
   when {initial(),sampleTrigger} then
      u_sampled = u;

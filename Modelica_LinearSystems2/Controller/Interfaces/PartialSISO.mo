@@ -4,10 +4,10 @@ partial block PartialSISO
   extends PartialSampledBlock;
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block"
-     annotation(Placement(transformation(extent={{-140,-20},{-100,20}})));
+    annotation(Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput y
     "Continuous or discrete output signal of block"
-     annotation(Placement(transformation(extent={{100,-10},{120,10}})));
+    annotation(Placement(transformation(extent={{100,-10},{120,10}})));
 
 protected
   Internal.DiscreteStateSpace discretePart(

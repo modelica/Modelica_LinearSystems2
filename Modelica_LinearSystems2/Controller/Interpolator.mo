@@ -24,19 +24,19 @@ block Interpolator
     "True, if continuous block, otherwise discrete block";
   parameter Integer inputSampleFactor(min=1)=1
     "Input sample time = inputSampleFactor * sampleClock.sampleTime"
-     annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
+    annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   parameter Integer outputSampleFactor(min=1)=1
     "<html>Output sample time = outputSampleFactor * sampleClock.sampleTime<br>(inputSampleFactor must be an integer multiple of outputSampleFactor)</html>"
-     annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
+    annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   parameter Boolean meanValueFilter = true
     "= true and discrete block, linearly interpolated signal is filtered by mean value filter"
     annotation(choices(checkBox=true));
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block"
-     annotation(Placement(transformation(extent={{-140,-20},{-100,20}})));
+    annotation(Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput y
     "Continuous or discrete output signal of block"
-     annotation(Placement(transformation(extent={{100,-10},{120,10}})));
+    annotation(Placement(transformation(extent={{100,-10},{120,10}})));
 
 protected
   outer SampleClock sampleClock "Global options";
@@ -47,7 +47,7 @@ protected
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Internal.DiscreteFIR discreteFIR(sampleFactor=outputSampleFactor, a=fill(1/
         div(inputSampleFactor, outputSampleFactor), div(inputSampleFactor,
-        outputSampleFactor))) if                           not continuous and meanValueFilter
+        outputSampleFactor))) if not continuous and meanValueFilter
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Modelica.Blocks.Interfaces.RealOutput y_aux if not continuous and not meanValueFilter
     "Dummy port, if no filtering desired"

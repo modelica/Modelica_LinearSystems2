@@ -9,9 +9,9 @@ record StateSpace2
   Real C[:,size(A, 1)]  annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
   Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
 
-//   String uNames[size(B, 2)]=fill("", size(B, 2))  annotation(Dialog(group="Signal names"));
+//   String uNames[size(B, 2)]=fill("", size(B, 2)) annotation(Dialog(group="Signal names"));
 //   String yNames[size(C, 1)]=fill("", size(C, 1)) annotation(Dialog(group="Signal names"));
-//   String xNames[size(A, 1)]=fill("", size(A, 1))  annotation(Dialog(group="Signal names"));
+//   String xNames[size(A, 1)]=fill("", size(A, 1)) annotation(Dialog(group="Signal names"));
 
 encapsulated operator 'constructor'
     "Default constructors for a StateSpace record"
@@ -319,9 +319,9 @@ encapsulated package Import
       import Modelica_LinearSystems2;
 
     input String fileName="dslin.mat"
-        "Name of the state space system data file"     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+        "Name of the state space system data file" annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="state space system data file")));
-    input String matrixName="ABCD" "Name of the state space system matrix"    annotation(Dialog);
+    input String matrixName="ABCD" "Name of the state space system matrix" annotation(Dialog);
     protected
     input Integer xuy[3]=Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName);
     input Integer nx=xuy[1];
