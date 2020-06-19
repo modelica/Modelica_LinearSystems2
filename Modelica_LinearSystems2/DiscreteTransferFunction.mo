@@ -188,7 +188,6 @@ operator record DiscreteTransferFunction
       result.n := r*dtf.n;
     end 'r*dtf';
 
-
     annotation (Documentation(info="<html>
 <p>This package contains operators for multiplication of discrete fransfer function records. </p>
 </html>"));
@@ -266,7 +265,6 @@ operator record DiscreteTransferFunction
       result := DiscreteTransferFunction(r*dtf.d,dtf.n,Ts=dtf.Ts, method=dtf.method);
     end 'r/dtf';
 
-
     annotation (Documentation(info="<html>
 <p>This package contains operators for division of discrete fransfer function records. </p>
 </html>"));
@@ -312,101 +310,101 @@ operator record DiscreteTransferFunction
 
   encapsulated operator function '^'
     "Integer power of DiscreteTransferFunction (dtf1^k)"
-     import Modelica_LinearSystems2.Math.Polynomial;
-     import Modelica_LinearSystems2.DiscreteTransferFunction;
-     import Modelica_LinearSystems2.TransferFunction;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.DiscreteTransferFunction;
+    import Modelica_LinearSystems2.TransferFunction;
 
-     input DiscreteTransferFunction dtf "Transfer function";
-     input Integer k(min=0) = 1 "Integer exponent";
-     output DiscreteTransferFunction result;
+    input DiscreteTransferFunction dtf "Transfer function";
+    input Integer k(min=0) = 1 "Integer exponent";
+    output DiscreteTransferFunction result;
 
   protected
     TransferFunction tf=(Polynomial(dtf.n)^k)/(Polynomial(dtf.d)^k);
 
   algorithm
-       result := DiscreteTransferFunction(n=tf.n, d=tf.d, Ts=dtf.Ts, method=dtf.method);
+    result := DiscreteTransferFunction(n=tf.n, d=tf.d, Ts=dtf.Ts, method=dtf.method);
   end '^';
 
   encapsulated operator function '=='
     "Check whether two discrete transfer functions are identical"
 
-     import Modelica;
-     import Modelica_LinearSystems2.Math.Polynomial;
-     import Modelica_LinearSystems2.DiscreteTransferFunction;
+    import Modelica;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-     input DiscreteTransferFunction dtf1 "Transfer function system 1";
-     input DiscreteTransferFunction dtf2 "Transfer function system 1";
-     input Real eps(min=0) = 0
+    input DiscreteTransferFunction dtf1 "Transfer function system 1";
+    input DiscreteTransferFunction dtf2 "Transfer function system 1";
+    input Real eps(min=0) = 0
       "Two coefficients c1 and c2 of the two transfer functions are identical if abs(c1-c2) <= eps";
 
-     output Boolean result "= dtf1 == dtf2";
+    output Boolean result "= dtf1 == dtf2";
   algorithm
     result := (Polynomial(dtf1.n) == Polynomial(dtf2.n)) and (Polynomial(dtf1.d) == Polynomial(dtf2.d) and abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps);
   end '==';
 
-    encapsulated operator function 'String'
+  encapsulated operator function 'String'
     "Transform DiscreteTransferFunction into a String representation"
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-      input DiscreteTransferFunction dtf
+    input DiscreteTransferFunction dtf
       "Discrete transfer function to be transformed in a String representation";
-      input Integer significantDigits=6
+    input Integer significantDigits=6
       "Number of significant digits that are shown";
-      input String name="z" "Independent variable name used for printing";
-      output String z="";
+    input String name="z" "Independent variable name used for printing";
+    output String z="";
   protected
-      Integer n_num=size(dtf.n, 1) - 1;
-      Integer n_den=size(dtf.d, 1) - 1;
-      Boolean numParenthesis;
-    algorithm
-      if n_num == -1 then
-        z := "0";
-      else
-        numParenthesis := n_num > 0 and not (n_den == 0 and dtf.d[1] == 1);
-        if numParenthesis then
-          z := "(";
+    Integer n_num=size(dtf.n, 1) - 1;
+    Integer n_den=size(dtf.d, 1) - 1;
+    Boolean numParenthesis;
+  algorithm
+    if n_num == -1 then
+      z := "0";
+    else
+      numParenthesis := n_num > 0 and not (n_den == 0 and dtf.d[1] == 1);
+      if numParenthesis then
+        z := "(";
+      end if;
+      z := z + String(
+        Polynomial(dtf.n),
+        significantDigits,
+        name);
+
+      if numParenthesis then
+        z := z + ")";
+      end if;
+      if n_den > 0 or dtf.d[1] <> 1 then
+        if n_den > 0 then
+          z := z + "/(";
+        else
+          z := z + "/";
         end if;
+
         z := z + String(
-          Polynomial(dtf.n),
+          Polynomial(dtf.d),
           significantDigits,
           name);
 
-        if numParenthesis then
+        if n_den > 0 then
           z := z + ")";
         end if;
-        if n_den > 0 or dtf.d[1] <> 1 then
-          if n_den > 0 then
-            z := z + "/(";
-          else
-            z := z + "/";
-          end if;
-
-          z := z + String(
-            Polynomial(dtf.d),
-            significantDigits,
-            name);
-
-          if n_den > 0 then
-            z := z + ")";
-          end if;
-        end if;
       end if;
-      z := z + "\n\n Ts = " + String(dtf.Ts) + "\n method =" +
-        Modelica_LinearSystems2.Internal.methodString(dtf.method);
+    end if;
+    z := z + "\n\n Ts = " + String(dtf.Ts) + "\n method =" +
+      Modelica_LinearSystems2.Internal.methodString(dtf.method);
 
-    end 'String';
+  end 'String';
 
-encapsulated function z "Generate the discrete transfer function z"
+  encapsulated function z "Generate the discrete transfer function z"
     import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
     input Modelica.Units.SI.Time Ts=0;
-  output DiscreteTransferFunction dtf(n={1,0}, d={1},Ts=Ts) "z";
-algorithm
+    output DiscreteTransferFunction dtf(n={1,0}, d={1},Ts=Ts) "z";
+  algorithm
 
-  annotation (Documentation(info="<html>
+    annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 z = DiscreteTransferFunction.<b>z</b>()
@@ -420,7 +418,7 @@ Generate the complex variable z=exp(T*s) as a DiscreteTransferFunction. It can b
 DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
 </pre></blockquote>
 </html>"));
-end z;
+  end z;
 
   encapsulated package Analysis
     "Package of functions to analyse discrete transfer function represented by a DiscreteTransferFunction record"
@@ -459,7 +457,7 @@ end z;
         response=response,
         x0=x0);
 
-          annotation (Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>timeResponse</b>(dtf, tSpan, responseType, x0)
@@ -530,7 +528,7 @@ The outputs y and x are calculated from the system equations of the discrete sta
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
             x0=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf)));
 
-    annotation(__Dymola_interactive=true, Documentation(info="<html>
+      annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>impulseResponse</b>(dtf, tSpan, x0)
@@ -732,7 +730,7 @@ The outputs y and x of the discrete state space systrem are calculated for each 
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial,
             x0=x0);
 
-    annotation(__Dymola_interactive=true, Documentation(info="<html>
+      annotation(__Dymola_interactive=true, Documentation(info="<html>
  <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = DiscreteTransferFunction.Analysis.<b>initialResponse</b>(x0, dtf, tSpan)
@@ -779,7 +777,7 @@ The outputs y and x of the discrete state space systrem are calculated for each 
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
       input DiscreteTransferFunction dtf
-        "discrete transfer function of a system";
+        "Discrete transfer function of a system";
       output Integer result;
 
     algorithm
@@ -1074,9 +1072,9 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       input DiscreteTransferFunction dtf;
       input Real tSpan=0 "Simulation time span [s]";
 
-      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Step response of  dtf = "
-             + String(dtf)));
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+        defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
+          heading="Step response of  dtf = " + String(dtf)));
 
     protected
       Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
@@ -1092,8 +1090,6 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
         x0=x0,
         defaultDiagram=defaultDiagram,
         device=device);
-
-    equation
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 </html>"));
@@ -1111,9 +1107,9 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       input DiscreteTransferFunction dtf;
       input Real tSpan=0 "Simulation time span [s]";
 
-      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Ramp response of  dtf = "
-             + String(dtf)));
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+        defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
+          heading="Ramp response of  dtf = " + String(dtf)));
 
     protected
       Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp "type of time response";
@@ -1121,7 +1117,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
           DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
         "Initial state vector";
     algorithm
-     Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
+      Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
         dtf=dtf,
         tSpan=tSpan,
         response=response,
@@ -1148,9 +1144,9 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "type of time response";
       input Real y0 "Initial output (for initial condition plot)";
 
-      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading="Initial response of  dtf = "
-             + String(dtf) + "  with y0 = " + String(y0)));
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
+        defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
+          heading="Initial response of  dtf = " + String(dtf) + " with y0 = " + String(y0)));
 
     protected
       Modelica_LinearSystems2.DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(dtf);
@@ -1191,11 +1187,11 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
       input DiscreteTransferFunction dtf "transfer function of a system";
       output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp(
-    redeclare Real n1[DiscreteZerosAndPoles.Internal.numberOfRealZeros2(dtf)],
-    redeclare Real n2[integer((size(dtf.n, 1) - 1 -
+        redeclare Real n1[DiscreteZerosAndPoles.Internal.numberOfRealZeros2(dtf)],
+        redeclare Real n2[integer((size(dtf.n, 1) - 1 -
       DiscreteZerosAndPoles.Internal.numberOfRealZeros2(dtf))/2),2],
-    redeclare Real d1[DiscreteZerosAndPoles.Internal.numberOfRealPoles(dtf)],
-    redeclare Real d2[integer((size(dtf.d, 1) - 1 -
+        redeclare Real d1[DiscreteZerosAndPoles.Internal.numberOfRealPoles(dtf)],
+        redeclare Real d2[integer((size(dtf.d, 1) - 1 -
       DiscreteZerosAndPoles.Internal.numberOfRealPoles(dtf))/2),2]);
     protected
       TransferFunction tf=TransferFunction(n=dtf.n, d=dtf.d);
@@ -1255,45 +1251,45 @@ DiscreteZerosAndPoles constructor.
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica.Math.Vectors;
 
-     input DiscreteTransferFunction dtf
+      input DiscreteTransferFunction dtf
         "discrete transfer function of a system";
-          output DiscreteStateSpace dss(
-            redeclare Real A[DiscreteTransferFunction.Analysis.denominatorDegree(dtf),DiscreteTransferFunction.Analysis.denominatorDegree(dtf)],
-            redeclare Real B[DiscreteTransferFunction.Analysis.denominatorDegree(dtf),1],
-            redeclare Real B2[DiscreteTransferFunction.Analysis.denominatorDegree(dtf),1],
-            redeclare Real C[1,DiscreteTransferFunction.Analysis.denominatorDegree(dtf)],
-            redeclare Real D[1,1]) "Discrete state space record";
+      output DiscreteStateSpace dss(
+        redeclare Real A[DiscreteTransferFunction.Analysis.denominatorDegree(dtf),DiscreteTransferFunction.Analysis.denominatorDegree(dtf)],
+        redeclare Real B[DiscreteTransferFunction.Analysis.denominatorDegree(dtf),1],
+        redeclare Real B2[DiscreteTransferFunction.Analysis.denominatorDegree(dtf),1],
+        redeclare Real C[1,DiscreteTransferFunction.Analysis.denominatorDegree(dtf)],
+        redeclare Real D[1,1]) "Discrete state space record";
 
     protected
-     Integer na=DiscreteTransferFunction.Analysis.denominatorDegree(dtf) + 1;
-     Integer nb=size(dtf.n,1);//numerator degree
-     Integer nx=na - 1;
-     TransferFunction tf=TransferFunction(n=dtf.n, d=dtf.d);
-     Real a[na]=Vectors.reverse(tf.d) "Reverse element order of tf.a";
-     Real b[na];//=vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
-     Real d;//=b[na]/a[na];
+      Integer na=DiscreteTransferFunction.Analysis.denominatorDegree(dtf) + 1;
+      Integer nb=size(dtf.n,1);//numerator degree
+      Integer nx=na - 1;
+      TransferFunction tf=TransferFunction(n=dtf.n, d=dtf.d);
+      Real a[na]=Vectors.reverse(tf.d) "Reverse element order of tf.a";
+      Real b[na];//=vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
+      Real d;//=b[na]/a[na];
     algorithm
-     assert(nb<=na,"DiscreteTransferFunction\n" +String(dtf) +"\nis acausal and cannot be transformed to DiscreteStaeSpace in function \"Conversion.toDiscreteStateSpace()\"");
-     b := vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
-     d := b[na]/a[na];
-     if nx == 0 then
-       dss.A := fill(0, 0, nx);
-       dss.B := fill(0, 0, 1);
-       dss.B2 := fill(0, 0, 1);
-       dss.C := fill(0, 1, 0);
-     else
-       dss.A[1:nx - 1, 1:nx] := [zeros(nx - 1, 1),identity(nx - 1)];
-       dss.A[nx, 1:nx] := -a[1:na - 1]/a[na];
-       dss.B := [zeros(nx - 1, 1); 1/a[na]];
-       dss.B2 := fill(0,nx,1);
-       dss.C := {b[1:nx] - d*a[1:nx]};
+      assert(nb<=na,"DiscreteTransferFunction\n" +String(dtf) +"\nis acausal and cannot be transformed to DiscreteStaeSpace in function \"Conversion.toDiscreteStateSpace()\"");
+      b := vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
+      d := b[na]/a[na];
+      if nx == 0 then
+        dss.A := fill(0, 0, nx);
+        dss.B := fill(0, 0, 1);
+        dss.B2 := fill(0, 0, 1);
+        dss.C := fill(0, 1, 0);
+      else
+        dss.A[1:nx - 1, 1:nx] := [zeros(nx - 1, 1),identity(nx - 1)];
+        dss.A[nx, 1:nx] := -a[1:na - 1]/a[na];
+        dss.B := [zeros(nx - 1, 1); 1/a[na]];
+        dss.B2 := fill(0,nx,1);
+        dss.C := {b[1:nx] - d*a[1:nx]};
+      end if;
 
-    end if;
       dss.D := [d];
       dss.Ts := dtf.Ts;
       dss.method := dtf.method;
 
-     annotation (Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 dss = DiscreteTransferFunction.Conversion<b>toDiscreteStateSpace</b>(dtf)
@@ -1384,7 +1380,7 @@ with
       Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);
 
     public
-     output DiscreteTransferFunction dtf(n=fill(0,ns2),d=fill(0,ds2))
+      output DiscreteTransferFunction dtf(n=fill(0,ns2),d=fill(0,ds2))
         "Discrete transfer function";
 
     algorithm
@@ -1394,11 +1390,11 @@ with
       dtf.yName := denName;
       dtf.Ts := scalar(Ts);
 
-        annotation (Documentation(info="<html>
+      annotation (Documentation(info="<html>
 </html>"));
     end fromFile;
 
-  function fromModel
+    function fromModel
       "Generate a DiscreteTransferFunction record array from a state space representation resulted from linearization of a model"
 
       import Modelica;
@@ -1407,76 +1403,75 @@ with
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
-    input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
-    input Real T_linearize=0
-        "point in time of simulation to linearize the model";
-    input String fileName="dslin" "Name of the result file";
+      input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
+      input Real T_linearize=0 "Point in time of simulation to linearize the model";
+      input String fileName="dslin" "Name of the result file";
       input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
     protected
-    String fileName2=fileName + ".mat";
-    Boolean OK1=simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
-    Boolean OK2=importInitial("dsfinal.txt");
-    Boolean OK3=linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
-    Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
-    Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
-    Integer nx=integer(nxMat[1, 1]);
-    Integer nu=ABCDsizes[2] - nx;
-    Integer ny=ABCDsizes[1] - nx;
-    Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-    String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
+      String fileName2=fileName + ".mat";
+      Boolean OK1=simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
+      Boolean OK2=importInitial("dsfinal.txt");
+      Boolean OK3=linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
+      Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
+      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+      Integer nx=integer(nxMat[1, 1]);
+      Integer nu=ABCDsizes[2] - nx;
+      Integer ny=ABCDsizes[1] - nx;
+      Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+      String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
-    StateSpace ss(
-      redeclare Real A[nx,nx],
-      redeclare Real B[nx,nu],
-      redeclare Real C[ny,nx],
-      redeclare Real D[ny,nu]) "= model linearized at initial point";
-    DiscreteStateSpace dss(
-      redeclare Real A[nx,nx],
-      redeclare Real B[nx,nu],
-      redeclare Real C[ny,nx],
-      redeclare Real D[ny,nu],
-      redeclare Real B2[nx,nu]) "= model linearized at initial point";
-    DiscreteStateSpace dss_siso(
-      redeclare Real A[nx,nx],
-      redeclare Real B[nx,1],
-      redeclare Real C[1,nx],
-      redeclare Real D[1,1],
-      redeclare Real B2[nx,1]) "= model linearized at initial point";
+      StateSpace ss(
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,nu],
+        redeclare Real C[ny,nx],
+        redeclare Real D[ny,nu]) "= model linearized at initial point";
+      DiscreteStateSpace dss(
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,nu],
+        redeclare Real C[ny,nx],
+        redeclare Real D[ny,nu],
+        redeclare Real B2[nx,nu]) "= model linearized at initial point";
+      DiscreteStateSpace dss_siso(
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,1],
+        redeclare Real C[1,nx],
+        redeclare Real D[1,1],
+        redeclare Real B2[nx,1]) "= model linearized at initial point";
 
     public
-    output DiscreteTransferFunction dtf[:,:];
+      output DiscreteTransferFunction dtf[:,:];
 
-  algorithm
-    ss.A := ABCD[1:nx, 1:nx];
-    ss.B := ABCD[1:nx, nx + 1:nx + nu];
-    ss.C := ABCD[nx + 1:nx + ny, 1:nx];
-    ss.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-    ss.uNames := xuyName[nx + 1:nx + nu];
-    ss.yNames := xuyName[nx + nu + 1:nx + nu + ny];
-    ss.xNames := xuyName[1:nx];
+    algorithm
+      ss.A := ABCD[1:nx, 1:nx];
+      ss.B := ABCD[1:nx, nx + 1:nx + nu];
+      ss.C := ABCD[nx + 1:nx + ny, 1:nx];
+      ss.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+      ss.uNames := xuyName[nx + 1:nx + nu];
+      ss.yNames := xuyName[nx + nu + 1:nx + nu + ny];
+      ss.xNames := xuyName[1:nx];
 
-    dss := DiscreteStateSpace(ss, Ts=Ts, method=method);
-    dtf := DiscreteStateSpace.Conversion.toDiscreteTransferFunctionMIMO(dss);
+      dss := DiscreteStateSpace(ss, Ts=Ts, method=method);
+      dtf := DiscreteStateSpace.Conversion.toDiscreteTransferFunctionMIMO(dss);
 
-    //   for ic in 1:ny loop
-    //     for ib in 1:nu loop
-    //       dss_siso := DiscreteStateSpace(
-    //         A=dss.A,
-    //         B=matrix(dss.B[:, ib]),
-    //         C=transpose(matrix(dss.C[ic, :])),
-    //         D=matrix(dss.D[ic, ib]),
-    //         B2=matrix(dss.B2[:, ib]),
-    //         Ts=dss.Ts,
-    //         method=dss.method);
-    //         dtf[ic, ib] := DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss_siso);
-    //     end for;
-    //   end for;
+      //   for ic in 1:ny loop
+      //     for ib in 1:nu loop
+      //       dss_siso := DiscreteStateSpace(
+      //         A=dss.A,
+      //         B=matrix(dss.B[:, ib]),
+      //         C=transpose(matrix(dss.C[ic, :])),
+      //         D=matrix(dss.D[ic, ib]),
+      //         B2=matrix(dss.B2[:, ib]),
+      //         Ts=dss.Ts,
+      //         method=dss.method);
+      //         dtf[ic, ib] := DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss_siso);
+      //     end for;
+      //   end for;
 
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+      annotation (__Dymola_interactive=true, Documentation(info="<html>
 </html>"));
-  end fromModel;
+    end fromModel;
 
   end Import;
 
