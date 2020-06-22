@@ -49,14 +49,14 @@ algorithm
     w_max := w_max1;
   else
     if useFullRange1 and useFullRange2 then
-       w_min := min(w_min1, w_min2);
-       w_max := max(w_max1, w_max2);
+      w_min := min(w_min1, w_min2);
+      w_max := max(w_max1, w_max2);
     elseif useFullRange1 then
-       w_min :=w_min1;
-       w_max :=w_max1;
+      w_min :=w_min1;
+      w_max :=w_max1;
     else
-       w_min :=w_min2;
-       w_max :=w_max2;
+      w_min :=w_min2;
+      w_max :=w_max2;
     end if;
   end if;
 end frequencyRangeBode2;

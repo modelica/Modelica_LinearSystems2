@@ -80,9 +80,9 @@ algorithm
   end for;
 
   if first then
-     useFullRange := false;
-     w_min :=Modelica.Units.Conversions.from_Hz(0.1);
-     w_max :=Modelica.Units.Conversions.from_Hz(1);
+    useFullRange := false;
+    w_min :=Modelica.Units.Conversions.from_Hz(0.1);
+    w_max :=Modelica.Units.Conversions.from_Hz(1);
   end if;
 
   annotation (Documentation(info="<html>

@@ -1,10 +1,10 @@
 within Modelica_LinearSystems2.Internal;
 encapsulated function frequencyResponsePlot "Bode plot given f,A,phi values"
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Internal;
-    import Modelica_LinearSystems2.Utilities.Plot;
-    import      Modelica.Units.SI;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Internal;
+  import Modelica_LinearSystems2.Utilities.Plot;
+  import Modelica.Units.SI;
 
   input Real f[:] "Frequency vector (either in Hz or rad/s)";
   input Real a[size(f,1)]

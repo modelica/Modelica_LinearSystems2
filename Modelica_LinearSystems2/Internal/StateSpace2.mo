@@ -5,54 +5,54 @@ record StateSpace2
   extends Modelica.Icons.Record;
 
   Real A[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real B[size(A, 1),:]  annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real C[:,size(A, 1)]  annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+  Real B[size(A, 1),:] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+  Real C[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
   Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
 
 //   String uNames[size(B, 2)]=fill("", size(B, 2)) annotation(Dialog(group="Signal names"));
 //   String yNames[size(C, 1)]=fill("", size(C, 1)) annotation(Dialog(group="Signal names"));
 //   String xNames[size(A, 1)]=fill("", size(A, 1)) annotation(Dialog(group="Signal names"));
 
-encapsulated operator 'constructor'
+  encapsulated operator 'constructor'
     "Default constructors for a StateSpace record"
-  extends Modelica.Icons.Package;
+    extends Modelica.Icons.Package;
     import Modelica;
     import Modelica_LinearSystems2;
 
-  function fromABCDMatrices "Default constructor for a StateSpace record"
+    function fromABCDMatrices "Default constructor for a StateSpace record"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Internal.StateSpace2;
 
-    input Real A[:,size(A, 1)];
-    input Real B[size(A, 1),:];
-    input Real C[:,size(A, 1)];
-    input Real D[size(C, 1),size(B, 2)];
+      input Real A[:,size(A, 1)];
+      input Real B[size(A, 1),:];
+      input Real C[:,size(A, 1)];
+      input Real D[size(C, 1),size(B, 2)];
 
       //     input String uNames[size(B, 2)]=fill("", size(B, 2));
       //     input String yNames[size(C, 1)]=fill("", size(C, 1));
       //     input String xNames[size(A, 2)]=fill("", size(A, 2));
 
-     output StateSpace2 result(
-      redeclare Real A[size(A, 1),size(A, 2)],
-      redeclare Real B[size(B, 1),size(B, 2)],
-      redeclare Real C[size(C, 1),size(C, 2)],
-      redeclare Real D[size(D, 1),size(D, 2)]);
+      output StateSpace2 result(
+        redeclare Real A[size(A, 1),size(A, 2)],
+        redeclare Real B[size(B, 1),size(B, 2)],
+        redeclare Real C[size(C, 1),size(C, 2)],
+        redeclare Real D[size(D, 1),size(D, 2)]);
 
       //       redeclare String uNames[size(B, 2)],
       //       redeclare String yNames[size(C, 1)],
       //       redeclare String xNames[size(A, 2)]);
 
-  algorithm
-    result.A := A;
-    result.B := B;
-    result.C := C;
-    result.D := D;
-      //      result.uNames := uNames;
-      //      result.yNames := yNames;
-      //      result.xNames := xNames;
+    algorithm
+      result.A := A;
+      result.B := B;
+      result.C := C;
+      result.D := D;
+        //      result.uNames := uNames;
+        //      result.yNames := yNames;
+        //      result.xNames := xNames;
 
-    annotation (Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ss = 'constructor'.<b>fromABCDMatrices</b>(A, B, C, D)
@@ -87,23 +87,23 @@ public
   // ss.D = [0]
 </pre></blockquote>
 </html>"));
-  end fromABCDMatrices;
+    end fromABCDMatrices;
 
-  function fromReal "Generate a StateSpace data record from a Real value"
+    function fromReal "Generate a StateSpace data record from a Real value"
 
       import Modelica;
       import Modelica_LinearSystems2.Internal.StateSpace2;
 
-    input Real r "Value of Real variable";
-    output StateSpace2 ss(
-      redeclare Real A[0,0],
-      redeclare Real B[0,1],
-      redeclare Real C[1,0],
-      redeclare Real D[1,1]) "= r";
+      input Real r "Value of Real variable";
+      output StateSpace2 ss(
+        redeclare Real A[0,0],
+        redeclare Real B[0,1],
+        redeclare Real C[1,0],
+        redeclare Real D[1,1]) "= r";
 
-  algorithm
-    ss.D[1, 1] := r;
-    annotation (Documentation(info="<html>
+    algorithm
+      ss.D[1, 1] := r;
+      annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 ss = 'constructor'.<b>fromReal</b>(r)
@@ -126,7 +126,7 @@ ss.C = fill(0,1,0);
 ss.D = [r];
 </pre></blockquote>
 </html>"));
-  end fromReal;
+    end fromReal;
 
 // algorithm
 //            // this is the constructor algorithm
@@ -136,45 +136,45 @@ ss.D = [r];
 //   result.D := D;
 //   //end constructor;
 
-  function fromTransferFunction =
-    Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace
-      "Generate a StateSpace data record from a transfer function";
-  function fromZerosAndPoles =
-    Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace
-      "Generate a StateSpace data record from a zeros-and-poles system";
+    function fromTransferFunction =
+      Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace
+        "Generate a StateSpace data record from a transfer function";
+    function fromZerosAndPoles =
+      Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace
+        "Generate a StateSpace data record from a zeros-and-poles system";
 
     annotation (Documentation(info="<html>
 This package contains the default constructors for StateSpace record.
 </html>"));
-end 'constructor';
+  end 'constructor';
 
-encapsulated operator '-'
+  encapsulated operator '-'
     "Contains operators for subtraction of state space systems"
-  extends Modelica.Icons.Package;
+    extends Modelica.Icons.Package;
     import Modelica;
 
-  function subtract
+    function subtract
       "Subtraction of two state space systems connected in parallel (= inputs are the same, outputs of the two systems are subtracted)"
 
       import Modelica;
       import Modelica_LinearSystems2.Internal.StateSpace2;
 
-    input StateSpace2 ss1 "State space system 1";
-    input StateSpace2 ss2 "State Space system 2 is subtracted from system 1";
-    output StateSpace2 result(
-      redeclare Real A[size(ss1.A, 1) + size(ss2.A, 1),size(ss1.A, 2) + size(
-        ss2.A, 2)],
-      redeclare Real B[size(ss1.B, 1) + size(ss2.B, 1),size(ss1.B, 2)],
-      redeclare Real C[size(ss1.C, 1),size(ss1.C, 2) + size(ss2.C, 2)],
-      redeclare Real D[size(ss1.D, 1),size(ss1.D, 2)]) "= ss1 - ss2";
+      input StateSpace2 ss1 "State space system 1";
+      input StateSpace2 ss2 "State Space system 2 is subtracted from system 1";
+      output StateSpace2 result(
+        redeclare Real A[size(ss1.A, 1) + size(ss2.A, 1),size(ss1.A, 2) + size(
+          ss2.A, 2)],
+        redeclare Real B[size(ss1.B, 1) + size(ss2.B, 1),size(ss1.B, 2)],
+        redeclare Real C[size(ss1.C, 1),size(ss1.C, 2) + size(ss2.C, 2)],
+        redeclare Real D[size(ss1.D, 1),size(ss1.D, 2)]) "= ss1 - ss2";
     protected
-    Integer nx1=size(ss1.A, 1);
-    Integer nx2=size(ss2.A, 1);
-  algorithm
-    result.A := [ss1.A,zeros(nx1, nx2); zeros(nx2, nx1),ss2.A];
-    result.B := [ss1.B; ss2.B];
-    result.C := [ss1.C,-ss2.C];
-    result.D := ss1.D - ss2.D;
+      Integer nx1=size(ss1.A, 1);
+      Integer nx2=size(ss2.A, 1);
+    algorithm
+      result.A := [ss1.A,zeros(nx1, nx2); zeros(nx2, nx1),ss2.A];
+      result.B := [ss1.B; ss2.B];
+      result.C := [ss1.C,-ss2.C];
+      result.D := ss1.D - ss2.D;
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -211,34 +211,34 @@ ss3 := ss1 - ss2;
 // ss.D = [0],
 </pre></blockquote>
 </html>"));
-  end subtract;
+    end subtract;
 
-  function negate
+    function negate
       "Unary minus (state space system where the output is multiplied by a gain of -1)"
       import Modelica;
       import StateSpace = Modelica_LinearSystems2.Internal.StateSpace2;
 
-    input StateSpace ss;
-    output StateSpace result(
-      redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
-      redeclare Real B[size(ss.B, 1),size(ss.B, 2)],
-      redeclare Real C[size(ss.C, 1),size(ss.C, 2)],
-      redeclare Real D[size(ss.D, 1),size(ss.D, 2)]) "= -ss";
-  algorithm
-    result.A := ss.A;
-    result.B := ss.B;
-    result.C := -ss.C;
-    result.D := -ss.D;
-  end negate;
+      input StateSpace ss;
+      output StateSpace result(
+        redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
+        redeclare Real B[size(ss.B, 1),size(ss.B, 2)],
+        redeclare Real C[size(ss.C, 1),size(ss.C, 2)],
+        redeclare Real D[size(ss.D, 1),size(ss.D, 2)]) "= -ss";
+    algorithm
+      result.A := ss.A;
+      result.B := ss.B;
+      result.C := -ss.C;
+      result.D := -ss.D;
+    end negate;
     annotation (Documentation(info="<html>
 <h4>Description</h4>
 <p>
 This package contains the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.subtract#info\">'subtract'</a> and the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.subtract#info\">'-'</a> operator for StateSpace records.
 </p>
 </html>"));
-end '-';
+  end '-';
 
-encapsulated operator function '+'
+  encapsulated operator function '+'
     "Parallel connection of two state space systems (= inputs are the same, outputs of the two systems are added)"
     import StateSpace = Modelica_LinearSystems2.Internal.StateSpace2;
 
@@ -253,17 +253,14 @@ encapsulated operator function '+'
   protected
     Integer nx1=size(ss1.A, 1);
     Integer nx2=size(ss2.A, 1);
-algorithm
+  algorithm
     result.A := [ss1.A,zeros(nx1, nx2); zeros(nx2, nx1),ss2.A];
     result.B := [ss1.B; ss2.B];
     result.C := [ss1.C,ss2.C];
     result.D := ss1.D + ss2.D;
-  //end '+';
-//  end add;
+  end '+';
 
-end '+';
-
-encapsulated operator function '*'
+  encapsulated operator function '*'
     "Series connection of two state space systems"
     import StateSpace = Modelica_LinearSystems2.Internal.StateSpace2;
 
@@ -279,16 +276,14 @@ encapsulated operator function '*'
   protected
     Integer nx1=size(ss1.A, 1);
     Integer nx2=size(ss2.A, 1);
-algorithm
+  algorithm
     result.A := [ss1.A,ss1.B*ss2.C; zeros(nx2, nx1),ss2.A];
     result.B := [ss1.B*ss2.D; ss2.B];
     result.C := [ss1.C,ss1.D*ss2.C];
     result.D := ss1.D*ss2.D;
-//  end multiply;
+  end '*';
 
-end '*';
-
-encapsulated operator function '=='
+  encapsulated operator function '=='
     "Check whether two linear systems have identical matrices"
     import Modelica.Math.Matrices.isEqual;
     import StateSpace = Modelica_LinearSystems2.Internal.StateSpace2;
@@ -298,7 +293,7 @@ encapsulated operator function '=='
     input Real eps(min=0) = 0
       "Two elements e1 and e2 of the two systems are identical if abs(e1-e2) <= eps";
     output Boolean same "=true, if the two systems are identical";
-algorithm
+  algorithm
     same := isEqual(
           ss1.A,
           ss2.A,
@@ -312,50 +307,50 @@ algorithm
           ss1.D,
           ss2.D,
           eps);
-end '==';
+  end '==';
 
-encapsulated package Import
+  encapsulated package Import
     "Utilitiy functions to import StaeSpace representations"
-  extends Modelica.Icons.Package;
+    extends Modelica.Icons.Package;
     import Modelica;
 
-  encapsulated function fromFile "Read a StateSpace data record from mat-file"
+    encapsulated function fromFile "Read a StateSpace data record from mat-file"
 
-    import Modelica;
-    import Modelica_LinearSystems2.StateSpace;
-    import Modelica_LinearSystems2.Internal.StateSpace2;
-    import Modelica_LinearSystems2;
+      import Modelica;
+      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Internal.StateSpace2;
+      import Modelica_LinearSystems2;
 
-    input String fileName="dslin.mat" "Name of the state space system data file"
-      annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)", caption="state space system data file")));
-    input String matrixName="ABCD" "Name of the state space system matrix" annotation(Dialog);
+      input String fileName="dslin.mat" "Name of the state space system data file"
+        annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)", caption="state space system data file")));
+      input String matrixName="ABCD" "Name of the state space system matrix" annotation(Dialog);
     protected
-    Integer xuy[3]=Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
-    Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
-    Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
-    Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
+      Integer xuy[3]=Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+      Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
+      Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
+      Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
 
     public
-    output StateSpace2 result(
-      redeclare Real A[nx,nx],
-      redeclare Real B[nx,nu],
-      redeclare Real C[ny,nx],
-      redeclare Real D[ny,nu]) "= model linearized at initial point";
+      output StateSpace2 result(
+        redeclare Real A[nx,nx],
+        redeclare Real B[nx,nu],
+        redeclare Real C[ny,nx],
+        redeclare Real D[ny,nu]) "= model linearized at initial point";
 
     protected
-    Real ABCD[nx + ny,nx + nu]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
-          fileName,
-          matrixName,
-          nx + ny,
-          nx + nu);
+      Real ABCD[nx + ny,nx + nu]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
+            fileName,
+            matrixName,
+            nx + ny,
+            nx + nu);
 
-  algorithm
-    result.A := ABCD[1:nx, 1:nx];
-    result.B := ABCD[1:nx, nx + 1:nx + nu];
-    result.C := ABCD[nx + 1:nx + ny, 1:nx];
-    result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-    Modelica.Utilities.Streams.print("StateSpace record loaded from file: \""
-       + Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+    algorithm
+      result.A := ABCD[1:nx, 1:nx];
+      result.B := ABCD[1:nx, nx + 1:nx + nu];
+      result.C := ABCD[nx + 1:nx + ny, 1:nx];
+      result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+      Modelica.Utilities.Streams.print("StateSpace record loaded from file: \""
+         + Modelica.Utilities.Files.fullPathName(fileName) + "\"");
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
@@ -378,14 +373,14 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
       D=[0])
 </pre></blockquote>
 </html>"));
-  end fromFile;
+    end fromFile;
 
     annotation (Documentation(info="<html>
 </html>"));
 
-end Import;
+  end Import;
 
-    annotation (
+  annotation (
     defaultComponentName="stateSpace",
     Documentation(info="<html>
 <p>

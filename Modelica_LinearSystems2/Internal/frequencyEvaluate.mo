@@ -36,50 +36,50 @@ algorithm
   // Compute values of zeros and poles at s=re+j*im
   // z(s) = s - (a+j*b); z(re+j*im) = re-a + j(im-b)
   if nn > 0 then
-     (n_A, n_phi, n_zero) :=Internal.toPolarForm([fill(re,nn)-Zeros[:, 1],fill(im,nn)-Zeros[:, 2]]);
+    (n_A, n_phi, n_zero) :=Internal.toPolarForm([fill(re,nn)-Zeros[:, 1],fill(im,nn)-Zeros[:, 2]]);
   end if;
   (d_A, d_phi, d_zero) :=Internal.toPolarForm([fill(re,nd)-Poles[:, 1],fill(im,nd)-Poles[:, 2]]);
 
   // Handle zeros in numerator
   if n_zero then
-     A := 0;
-     phi := 0;
-     info :=if d_zero then 2 else 0;
-     return;
+    A := 0;
+    phi := 0;
+    info :=if d_zero then 2 else 0;
+    return;
   end if;
 
-   // Compute angle of fraction
-   phi :=0;
-   for i in 1:nn loop
-      phi := phi + n_phi[i] - d_phi[i];
-   end for;
+  // Compute angle of fraction
+  phi :=0;
+  for i in 1:nn loop
+    phi := phi + n_phi[i] - d_phi[i];
+  end for;
 
-   for i in nn+1:nd loop
-      phi := phi - d_phi[i];
-   end for;
+  for i in nn+1:nd loop
+    phi := phi - d_phi[i];
+  end for;
 
-   // Compute absolute value (avoid overflow)
-   if d_zero then
-      info :=1;
-      A :=Modelica.Constants.inf;
-   else
-      info :=0;
-      n_A2 :=Modelica.Math.Vectors.sort(n_A, ascending=false);
-      d_A2 :=Modelica.Math.Vectors.sort(d_A, ascending=false);
-      A := 1;
-      for i in 1:nn loop
-         A :=A*(n_A2[i]/d_A2[i]);
-      end for;
-      for i in nn+1:nd loop
-         A :=A/d_A2[i];
-      end for;
-   end if;
+  // Compute absolute value (avoid overflow)
+  if d_zero then
+    info :=1;
+    A :=Modelica.Constants.inf;
+  else
+    info :=0;
+    n_A2 :=Modelica.Math.Vectors.sort(n_A, ascending=false);
+    d_A2 :=Modelica.Math.Vectors.sort(d_A, ascending=false);
+    A := 1;
+    for i in 1:nn loop
+      A :=A*(n_A2[i]/d_A2[i]);
+    end for;
+    for i in nn+1:nd loop
+      A :=A/d_A2[i];
+    end for;
+  end if;
 
   // Take gain into account
   if info == 0 then
-     A :=gain*A;
+    A :=gain*A;
   elseif info == 1 then
-     A :=if gain >= 0 then A else -A;
+    A :=if gain >= 0 then A else -A;
   end if;
 
   annotation (Documentation(info="<html>

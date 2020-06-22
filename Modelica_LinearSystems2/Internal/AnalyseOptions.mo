@@ -9,7 +9,7 @@ record AnalyseOptions
   Boolean plotFrequencyResponse=true "Plot bode diagram"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean printSystem=true "Write system into the report (if not too large)"
-  annotation(Dialog(group="Analyse options"),choices(checkBox=true));
+    annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean printEigenValues=true "Write eigenvalues into the report"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean printEigenValueProperties=true "Write eigenvalues with properties"
@@ -28,6 +28,6 @@ record AnalyseOptions
   String headingFrequencyResponse="Frequency response";
   Boolean dB_w = false
     "= true, to plot Bode with dB over w [rad/s] otherwise magnitude over f [Hz]"
-  annotation(Dialog(group="Analyse options"),choices(checkBox=true));
+    annotation(Dialog(group="Analyse options"),choices(checkBox=true));
 
 end AnalyseOptions;

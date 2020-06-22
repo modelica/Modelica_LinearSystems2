@@ -35,7 +35,7 @@ protected
     output Real p
       "Value on real axis > 0.0, so that poles and zeros on the axis have a minimumDistance to it";
     /* Most systems have no or only a few unstable poles or zeros.
-    Searching for a suitable p is therefore fastest when searching 
+    Searching for a suitable p is therefore fastest when searching
     only in the unstable region, that is p > 0.0
     */
   protected
@@ -92,9 +92,9 @@ protected
 algorithm
   assert(size(B,2)==1 and size(C,1)==1, "System is not a SISO system");
   if size(A,1) == 0 then
-     // no states
-     gain :=D[1, 1];
-     return;
+    // no states
+    gain :=D[1, 1];
+    return;
   end if;
 
   // Determine real value r that is far enough away from all zeros and poles
@@ -104,14 +104,14 @@ algorithm
   // compute kr1 = G1(r)
   (kr1,phi) :=Internal.frequencyEvaluate(1,Zeros,Poles,r,0);
   if abs(phi) > 1 then
-     kr1 :=-kr1;
+    kr1 :=-kr1;
   end if;
 
   // With G2(s) = C*inv(sI-A)*B + D
   // compute kr2 = G2(r)
   A2 :=-A;
   for i in 1:size(A, 1) loop
-     A2[i, i] := A2[i, i] + r;
+    A2[i, i] := A2[i, i] + r;
   end for;
   kr2 :=vector(C)*Modelica.Math.Matrices.solve(A2, vector(B)) + scalar(D);
 

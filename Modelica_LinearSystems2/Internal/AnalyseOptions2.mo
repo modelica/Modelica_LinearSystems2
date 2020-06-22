@@ -9,7 +9,7 @@ record AnalyseOptions2
   Boolean plotFrequencyResponse=true "Plot bode diagram. Only for SISO system"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean printSystem=true "Write system into the report (if not too large)"
-  annotation(Dialog(group="Analyse options"),choices(checkBox=true));
+    annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean printEigenValues=true "Write eigenvalues into the report"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean printInvariantZeros=true "Write invariant zreos into the report"
@@ -30,6 +30,6 @@ record AnalyseOptions2
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean dB_w = false
     "= true, to plot Bode with dB over w [rad/s] otherwise magnitude over f [Hz]"
-  annotation(Dialog(group="Analyse options"),choices(checkBox=true));
+    annotation(Dialog(group="Analyse options"),choices(checkBox=true));
 
 end AnalyseOptions2;
