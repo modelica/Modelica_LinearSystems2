@@ -27,7 +27,7 @@ Please note that the library is known to work with Dymola only.
 
 ## Release candidate
 
-[Modelica_LinearSystems2 v2.4.0-beta.1 (2020-06-15)](../../releases/tag/v2.4.0-beta.1)
+[Modelica_LinearSystems2 v2.4.0-rc.1 (2020-06-22)](../../releases/tag/v2.4.0-rc.1)
 
 ## Older releases
 
