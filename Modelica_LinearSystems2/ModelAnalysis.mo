@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2;
 package ModelAnalysis
   "Package of functions to perform analysis on Modelica models (nonlinear models are linearized)"
+  extends Modelica.Icons.ExamplesPackage;
+
   function Linearize
     "Linearize a model and return the linearized model as StateSpace object"
     extends Modelica_LinearSystems2.Internal.PartialAnalyzeFunction;
@@ -20,7 +22,7 @@ package ModelAnalysis
             lineColor={255,127,0},
             textString="L")}));
   end Linearize;
-  extends Modelica.Icons.ExamplesPackage;
+
   function Poles "Linearize a model and plot the poles of the linearized model"
     extends Modelica_LinearSystems2.Internal.PartialAnalyzeFunction;
   algorithm
@@ -34,8 +36,7 @@ package ModelAnalysis
           Text(
             extent={{-80,80},{80,-80}},
             lineColor={255,127,0},
-            textString=
-                 "P")}));
+            textString="P")}));
   end Poles;
 
   function PolesAndZeros
