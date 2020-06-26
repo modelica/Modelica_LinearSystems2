@@ -41,22 +41,22 @@ algorithm
 
   // Compute vector of frequency points
   if logX then
-     if f_min2 <= 0 then
-        // Change minimum frequency point
-        f_min2b :=f_min2;
-        f_min2  :=f_max2/10^5;
-        assert(false,"Minimum frequency changed from " + String(f_min2b) +
-               " to " + String(f_min2) + " because log(0) is not defined",
-               AssertionLevel.warning);
-     end if;
-     f_log := linspace(
-       Modelica.Math.log10(f_min2),
-       Modelica.Math.log10(f_max2),
-       nPoints);
-     for i in 1:nPoints loop
-       f[i] := 10^f_log[i];
-     end for;
+    if f_min2 <= 0 then
+      // Change minimum frequency point
+      f_min2b :=f_min2;
+      f_min2  :=f_max2/10^5;
+      assert(false,"Minimum frequency changed from " + String(f_min2b) +
+             " to " + String(f_min2) + " because log(0) is not defined",
+             AssertionLevel.warning);
+    end if;
+    f_log := linspace(
+      Modelica.Math.log10(f_min2),
+      Modelica.Math.log10(f_max2),
+      nPoints);
+    for i in 1:nPoints loop
+      f[i] := 10^f_log[i];
+    end for;
   else
-     f :=linspace(f_min,f_max,nPoints);
+    f :=linspace(f_min,f_max,nPoints);
   end if;
 end frequencyVector2;

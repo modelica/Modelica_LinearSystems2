@@ -1,10 +1,10 @@
 within Modelica_LinearSystems2.Internal;
 encapsulated function frequencyResponse
   "Compute frequency response based on zeros and poles"
-    import Modelica;
-    import Modelica_LinearSystems2;
-    import Modelica_LinearSystems2.Internal;
-    import Modelica.Units.SI;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Internal;
+  import Modelica.Units.SI;
 
   input Real gain "Gain of transfer function";
   input Real Zeros[:,2]
@@ -48,11 +48,11 @@ algorithm
        f[i] := w[i];
     end if;
     if dB then
-       if A[i] <> 0 then
-          A[i] := 20*log10(A[i]);
-       else
-          A[i] := -6000 "= 20*log10(1e-300)";
-       end if;
+      if A[i] <> 0 then
+        A[i] := 20*log10(A[i]);
+      else
+        A[i] := -6000 "= 20*log10(1e-300)";
+      end if;
     end if;
   end for;
 

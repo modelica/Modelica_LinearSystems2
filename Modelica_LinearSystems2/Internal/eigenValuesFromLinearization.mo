@@ -33,59 +33,59 @@ protected
 algorithm
   // Read all matrices from file, compute eigenvalues and store in output arrays
   for i in 1:np loop
-     // Read matrix A from file i
-     fileName2 := fileName+String(i)+".mat";
-     ABCD :=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-     A :=ABCD[1:nx, 1:nx];
+    // Read matrix A from file i
+    fileName2 := fileName+String(i)+".mat";
+    ABCD :=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+    A :=ABCD[1:nx, 1:nx];
 
-     // Compute eigen values of A
-     (Re_i, Im_i, info) := Modelica.Math.Matrices.LAPACK.dgeev_eigenValues(A);
-      assert(info == 0, "Calculating the eigen values with function LAPACK function dgeev_eigenValues\n"+
-                        "failed, since the numerical algorithm did not converge.");
+    // Compute eigen values of A
+    (Re_i, Im_i, info) := Modelica.Math.Matrices.LAPACK.dgeev_eigenValues(A);
+     assert(info == 0, "Calculating the eigen values with function LAPACK function dgeev_eigenValues\n"+
+                       "failed, since the numerical algorithm did not converge.");
 
-     // Delete linearization file
-     Modelica.Utilities.Files.removeFile(fileName2);
+    // Delete linearization file
+    Modelica.Utilities.Files.removeFile(fileName2);
 
-     // Copy eigen values to result arrays
-     if not reorder or i == 1 then
-        Re[:,i] :=Re_i;
-        Im[:,i] :=Im_i;
-     else
-        compare :=fill(true, nx);
-        Re_old :=Re[:, i - 1];
-        Im_old :=Im[:, i - 1];
+    // Copy eigen values to result arrays
+    if not reorder or i == 1 then
+      Re[:,i] :=Re_i;
+      Im[:,i] :=Im_i;
+    else
+      compare :=fill(true, nx);
+      Re_old :=Re[:, i - 1];
+      Im_old :=Im[:, i - 1];
 
-        /* Determine difference from new to old eigenvalues. 
-           The eigen values are inspected in the order from the smallest
-           to the largest difference
-        */
-        diff :=(Re_i - Re_old).^2 + (Im_i - Im_old).^2;
-        (,idiff) :=Modelica.Math.Vectors.sort(diff);
+      /* Determine difference from new to old eigenvalues.
+         The eigen values are inspected in the order from the smallest
+         to the largest difference
+      */
+      diff :=(Re_i - Re_old).^2 + (Im_i - Im_old).^2;
+      (,idiff) :=Modelica.Math.Vectors.sort(diff);
 
-        for j in idiff loop
-           // Find first the right order of the pure real eigen values
-           // Compute squared distance of eigen value j to previous eigen values
-           diff :=(Re_i[j]*Ones - Re_old).^2 + (Im_i[j]*Ones - Im_old).^2;
+      for j in idiff loop
+        // Find first the right order of the pure real eigen values
+        // Compute squared distance of eigen value j to previous eigen values
+        diff :=(Re_i[j]*Ones - Re_old).^2 + (Im_i[j]*Ones - Im_old).^2;
 
-           // Determine index of minimum
-           first :=true;
-           for k in 1:nx loop
-              if compare[k] then
-                 if first then
-                    first :=false;
-                    r :=k;
-                 elseif diff[k] < diff[r] then
-                    r :=k;
-                 end if;
-              end if;
-           end for;
-
-           // Copy eigen value
-           Re[r,i] :=Re_i[j];
-           Im[r,i] :=Im_i[j];
-           compare[r] :=false;
+        // Determine index of minimum
+        first :=true;
+        for k in 1:nx loop
+          if compare[k] then
+            if first then
+              first :=false;
+              r :=k;
+            elseif diff[k] < diff[r] then
+              r :=k;
+            end if;
+          end if;
         end for;
-     end if;
+
+        // Copy eigen value
+        Re[r,i] :=Re_i[j];
+        Im[r,i] :=Im_i[j];
+        compare[r] :=false;
+      end for;
+    end if;
   end for;
 
   annotation (__Dymola_translate=true);

@@ -19,7 +19,7 @@ protected
   Integer jc;
   Complex complexVector[size(EigenvalueVector, 1)];
 algorithm
-nRealEigenvalues:=numberOfRealZeros(complexVector);
+  nRealEigenvalues:=numberOfRealZeros(complexVector);
 
   i := 1;
   jr := 1;
@@ -44,7 +44,7 @@ nRealEigenvalues:=numberOfRealZeros(complexVector);
          +
         "and the real parts of these two complex numbers should be identical\n"
          + "since conjugate complex pairs required.");
-       assert(abs(EigenvalueVector[i].ev.im + EigenvalueVector[i+1].ev.im) < max(Modelica.Constants.eps,
+      assert(abs(EigenvalueVector[i].ev.im + EigenvalueVector[i+1].ev.im) < max(Modelica.Constants.eps,
         abs(EigenvalueVector[i+1].ev.im)*100*Modelica.Constants.eps),
         "No conjugate complex pair (checked the imaginary parts)\n" + "  " +
         name + "[" + String(i) + "] = " + String(EigenvalueVector[i].ev) + "\n" +
@@ -53,7 +53,7 @@ nRealEigenvalues:=numberOfRealZeros(complexVector);
         "and the imaginary parts of these two complex numbers should be identical\n"
          + "with opposite sign, since a conjugate complex pair is required.");
 
-        // Store the zero with the positive imaginary part
+      // Store the zero with the positive imaginary part
 
       if EigenvalueVector[i].ev.im >= 0 then
         reorderedEigenvalues[jc] := EigenvalueVector[i];
