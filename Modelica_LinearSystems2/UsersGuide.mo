@@ -618,7 +618,7 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_2_4_0 "Version 2.4.0-rc.1 (June 22, 2020)"
+    class Version_2_4_0 "Version 2.4.0 (June 26, 2020)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
