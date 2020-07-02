@@ -3,7 +3,7 @@ function frequencyVector2
   "Determine frequency vector for Bode plot (using Real matrices for zeros and poles)"
   import Modelica;
   import Modelica_LinearSystems2.Internal;
-  import      Modelica.Units.SI;
+  import Modelica.Units.SI;
 
   input Real Zeros[:,2]
     "Zeros as Real matrix (first column: real, second column imaginary values)";

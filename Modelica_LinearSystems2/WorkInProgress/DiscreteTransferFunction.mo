@@ -9,13 +9,13 @@ record DiscreteTransferFunction
   Real n[:] "Coefficients of numerator polynomial (in descending order)" annotation(Dialog(group="y = n*{s^m, ... , s, 1} / (d*{s^r, ... , s, 1}) * u"));
   Real d[:] "Coefficients of denominator polynomial (in descending order)" annotation(Dialog(group="y = n*{s^m, ... , s, 1} / (d*{s^r, ... , s, 1}) * u"));
 
-  Modelica.Units.SI.Time Ts "Sample time" annotation (Dialog(group=
-          "Data used to construct discrete from continuous system"));
+  Modelica.Units.SI.Time Ts "Sample time"
+    annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
 
   String uName="u" "Name of input signal" annotation(Dialog(group="Signal names"));
-  String yName="y" "Name of output signal"  annotation(Dialog(group="Signal names"));
+  String yName="y" "Name of output signal" annotation(Dialog(group="Signal names"));
 
 /* If the numerator polynomial has no coefficients, the transfer function
    is zero. The denominator polynomial must always have at
@@ -111,35 +111,34 @@ follow each other as above. An error occurs if this is not the case.
 </html>"));
     end fromZerosAndPoles;
 
-      encapsulated function fromArrays
+    encapsulated function fromArrays
       "Generate a DiscreteTransferFunction data record from numerator and denominator array"
       import Modelica;
       import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
       import Modelica_LinearSystems2;
 
-           input Real n[:] "Coefficients of numerator polynomial";
-           input Real d[:] "Coefficients of denominator polynomial";
+      input Real n[:] "Coefficients of numerator polynomial";
+      input Real d[:] "Coefficients of denominator polynomial";
       input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
-           input String uName = "" "input name";
-           input String yName = "" "output name";
+      input String uName = "" "input name";
+      input String yName = "" "output name";
 
-           output DiscreteTransferFunction dtf(redeclare Real n[size(n, 1)], redeclare Real
-               d[                                                                             size(d, 1)])
+      output DiscreteTransferFunction dtf(redeclare Real n[size(n, 1)], redeclare Real d[size(d, 1)])
         "Transfer function";
 
-      algorithm
-                 //this is the constructor algorithm
-           assert(size(d, 1) > 0, "Input denominator d must have at least one element, however\n"
-              + "d is an empty vector");
-           dtf.n := n;
-           dtf.d := d;
-           dtf.Ts := Ts;
-           dtf.method := method;
-           dtf.uName := uName;
-           dtf.yName := yName;
-      end fromArrays;
+    algorithm
+      //this is the constructor algorithm
+      assert(size(d, 1) > 0, "Input denominator d must have at least one element, however\n"
+         + "d is an empty vector");
+      dtf.n := n;
+      dtf.d := d;
+      dtf.Ts := Ts;
+      dtf.method := method;
+      dtf.uName := uName;
+      dtf.yName := yName;
+    end fromArrays;
 
     function fromPolynomials
       "Generate a DiscreteTransferFunction data record from a numerator and denominator polynomial"
@@ -270,7 +269,7 @@ encapsulated function bode "Plot transfer function as bode plot"
       import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
-      import      Modelica.Units.SI;
+      import Modelica.Units.SI;
 
   input DiscreteTransferFunction dtf "DiscreteTransfer function to be plotted";
   input Integer nPoints(min=2) = 200 "Number of points";
