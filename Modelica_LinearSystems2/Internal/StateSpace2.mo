@@ -128,13 +128,13 @@ ss.D = [r];
 </html>"));
     end fromReal;
 
-// algorithm
-//            // this is the constructor algorithm
-//   result.A := A;
-//   result.B := B;
-//   result.C := C;
-//   result.D := D;
-//   //end constructor;
+    // algorithm
+    //            // this is the constructor algorithm
+    //   result.A := A;
+    //   result.B := B;
+    //   result.C := C;
+    //   result.D := D;
+    //   //end constructor;
 
     function fromTransferFunction =
       Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace
@@ -338,7 +338,7 @@ This package contains the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.sub
         redeclare Real D[ny,nu]) "= model linearized at initial point";
 
     protected
-      Real ABCD[nx + ny,nx + nu]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
+      Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
             fileName,
             matrixName,
             nx + ny,

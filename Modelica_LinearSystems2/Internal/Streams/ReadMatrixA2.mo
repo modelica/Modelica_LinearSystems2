@@ -15,7 +15,7 @@ protected
   Integer nu=ABCDsizes[2] - nx;
   Integer ny=ABCDsizes[1] - nx;
   Real ABCD[nx + ny,nx + nu]=
-      Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
+      Modelica.Utilities.Streams.readRealMatrix(
       fileName,
       matrixName,
       nx + ny,

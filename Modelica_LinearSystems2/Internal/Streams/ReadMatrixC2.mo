@@ -13,7 +13,7 @@ protected
       matrixName);
 
   Real ABCD[nx + ny,ABCDsizes[2]]=
-      Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
+      Modelica.Utilities.Streams.readRealMatrix(
       fileName,
       matrixName,
       nx + ny,

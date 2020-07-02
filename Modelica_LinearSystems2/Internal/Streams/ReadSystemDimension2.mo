@@ -11,7 +11,7 @@ function ReadSystemDimension2
   output Integer xuy[3];
 
 protected
-  Real sizeA[1,1]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
+  Real sizeA[1,1]=Modelica.Utilities.Streams.readRealMatrix(
       fileName,
       "nx",
       1,

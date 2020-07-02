@@ -1798,7 +1798,7 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
       "Pole assignment design algorithm for multi input systems"
 
       import Modelica;
-  //  import Modelica.Utilities.Streams.print;
+      //  import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.DiscreteStateSpace;
@@ -3398,12 +3398,12 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
         redeclare Real D[ny,nu]) "= model linearized at initial point";
 
     protected
-      Real ABCD[nx + ny,nx + nu]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
+      Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
           fileName,
           matrixName,
           nx + ny,
           nx + nu);
-      Real B2[nx,nu]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
+      Real B2[nx,nu]=Modelica.Utilities.Streams.readRealMatrix(
           fileName,
           "B2",
           nx,
