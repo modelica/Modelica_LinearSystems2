@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function designInversePendulumController
   "Design pole assignment for an inverse pedulum"
 
-  import Modelica.Utilities.Streams.print;
+  import Modelica.Utilities.Streams;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
@@ -27,7 +27,7 @@ protected
   Modelica_LinearSystems2.StateSpace ss_pa=ss;
 
 algorithm
-  print("The linearized state space system is determined to:\n" +String(ss));
+  Streams.print("The linearized state space system is determined to:\n" +String(ss));
 
 //####### POLE ASSIGNMENT ##########
 
@@ -35,14 +35,14 @@ algorithm
   (K_pa,,p) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, pa);
   ss_pa.A := ss.A - ss.B*K_pa;
 
-  print("The feedback matrix of the pole assignment controller is:\n" +
+  Streams.print("The feedback matrix of the pole assignment controller is:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     K_pa,
     6,
     "K_pa"));
-  print("eigenvalues of the closed loop system are:\n");
+  Streams.print("eigenvalues of the closed loop system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
-  writeMatrix(
+  Streams.writeRealMatrix(
    fileName,
     "K_pa",
     K_pa,
@@ -50,18 +50,18 @@ algorithm
 
 // Pre filter calculation
   M_pa := -Modelica.Math.Matrices.inv([1,0,0,0]*Modelica.Math.Matrices.solve2(ss_pa.A, ss_pa.B));
-  print("Gain for pre filtering:\n" +
+  Streams.print("Gain for pre filtering:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     M_pa,
     6,
     "M_pa"));
-  writeMatrix(
+  Streams.writeRealMatrix(
    fileName,
     "M_pa",
     M_pa,
     true);
 
-  print("\nok!");
+  Streams.print("\nok!");
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>

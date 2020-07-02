@@ -7663,7 +7663,7 @@ and results in
       if onFile then
          fap :=[f,a,phi];
          Modelica.Utilities.Files.removeFile(fileName);
-         success:=writeMatrix(fileName,matrixName,fap,append=false);
+         success:=Modelica.Utilities.Streams.writeRealMatrix(fileName,matrixName,fap,append=false);
          if success then
             Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
                      Modelica.Utilities.Files.fullPathName(fileName) + "\"");

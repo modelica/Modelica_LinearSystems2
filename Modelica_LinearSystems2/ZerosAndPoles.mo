@@ -1916,7 +1916,7 @@ of a zeros-and-poles transfer function.
       input Modelica.Units.SI.Frequency f_min=0
         "Band of normalized band pass/stop filter is f_min (-3db*gain) .. f_cut (-3db*gain)";
 
-   /*
+      /*
                                | size(n1,1)   | size(n2,1)       | size(d1,1)   | size(d2,1)
     ---------------------------+--------------+------------------+--------------+-------------------
     CriticalDamping - LowPass  |      0       |      0           |    order     |     0
@@ -2386,8 +2386,6 @@ and results in
     encapsulated function bode
       "Plot ZerosAndPoles transfer function as bode plot"
       import Modelica;
-      import Modelica.Utilities.Streams.print;
-      import Modelica.Utilities.Strings;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Math.Complex;
@@ -2518,7 +2516,7 @@ and results in
       end if;
 
       if not Hz then
-         diagram2[i].xLabel:="Angular frequency [rad/s]";
+        diagram2[i].xLabel:="Angular frequency [rad/s]";
       end if;
 
       if magnitude and phase then
@@ -2528,13 +2526,13 @@ and results in
       end if;
 
       if onFile then
-         fAp :=[f,A,phi];
-         Modelica.Utilities.Files.removeFile(fileName);
-         success:=writeMatrix(fileName,matrixName,fAp,append=false);
-         if success then
-            Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
-                     Modelica.Utilities.Files.fullPathName(fileName) + "\"");
-         end if;
+        fAp :=[f,A,phi];
+        Modelica.Utilities.Files.removeFile(fileName);
+        success:=Modelica.Utilities.Streams.writeRealMatrix(fileName,matrixName,fAp,append=false);
+        if success then
+          Modelica.Utilities.Streams.print("... Frequency response stored on file \"" +
+                    Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+        end if;
       end if;
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>

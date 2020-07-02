@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function designInverseDoublePendulumController
   "Design pole assignment for an inverse double pedulum"
 
-  import Modelica.Utilities.Streams.print;
+  import Modelica.Utilities.Streams;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
@@ -45,29 +45,30 @@ protected
   Modelica_LinearSystems2.StateSpace ssPlant=Modelica_LinearSystems2.StateSpace(A=ss.A, B=ss.B,C=[1,0,0,0,0,0;0,0,1,0,0,0;0,0,0,0,1,0],D=zeros(3,size(ss.B,2)));
 
 algorithm
- ss.C:=identity(6);
-print("The linearized state space system is determined to:\n" + String(ss));
+  ss.C:=identity(6);
+  Streams.print("The linearized state space system is determined to:\n" + String(ss));
   Modelica_LinearSystems2.Math.Matrices.printMatrix(ss.C,6,"C");
- Modelica_LinearSystems2.Math.Matrices.printMatrix(ss.D,6,"D");
+  Modelica_LinearSystems2.Math.Matrices.printMatrix(ss.D,6,"D");
 
-StateSpace.Analysis.analysis(ssPlant,fileName="inverseDoublePendulum.html");
+  StateSpace.Analysis.analysis(ssPlant,fileName="inverseDoublePendulum.html");
 
-isControllable := StateSpace.Analysis.isControllable(ssPlant);
+  isControllable := StateSpace.Analysis.isControllable(ssPlant);
 
   if isControllable then
-      Modelica.Utilities.Streams.print("ssPlant is controllable");
-    else
-      Modelica.Utilities.Streams.print("ssPlant is not controllable");
-    end if;
-isObservable := StateSpace.Analysis.isObservable(ssPlant);
+    Streams.print("ssPlant is controllable");
+  else
+    Streams.print("ssPlant is not controllable");
+  end if;
+
+  isObservable := StateSpace.Analysis.isObservable(ssPlant);
   if isObservable then
-      Modelica.Utilities.Streams.print("ssPlant is observable");
+      Streams.print("ssPlant is observable");
     else
-      Modelica.Utilities.Streams.print("ssPlant is not observable");
+      Streams.print("ssPlant is not observable");
     end if;
 
- print("The eigenvalues are:\n");
-Complex.Vectors.print("p",p);
+  Streams.print("The eigenvalues are:\n");
+  Complex.Vectors.print("p",p);
 
   //####### POLE ASSIGNMENT ##########
 
@@ -75,15 +76,15 @@ Complex.Vectors.print("p",p);
   (K_pa,,p) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, pa);
   ss_pa.A := ss.A - ss.B*K_pa;
 
-  print("The feedback matrix of the pole assignment controller is:\n" +
+  Streams.print("The feedback matrix of the pole assignment controller is:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     K_pa,
     6,
     "K_pa"));
-  print("eigenvalues of the closed loop system are:\n");
+  Streams.print("eigenvalues of the closed loop system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
 
-  writeMatrix(
+  Streams.writeRealMatrix(
     fileName,
     "K_pa",
     K_pa,
@@ -92,12 +93,12 @@ Complex.Vectors.print("p",p);
   // Pre filter calculation
   M_pa := -Modelica.Math.Matrices.inv([1,0,0,0,0,0]*Modelica.Math.Matrices.solve2(ss_pa.A,
     ss_pa.B));
-  print("Gain for pre filtering:\n" +
+  Streams.print("Gain for pre filtering:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     M_pa,
     6,
     "M_pa"));
-  writeMatrix(
+  Streams.writeRealMatrix(
     fileName,
     "M_pa",
     M_pa,
@@ -106,18 +107,18 @@ Complex.Vectors.print("p",p);
 //   K_ob := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss_ob, pob);
 //   K_ob := transpose(K_ob);
 //
-//   writeMatrix(
+//   Streams.writeRealMatrix(
 //     fileName,
 //     "nx",
 //     [size(ssPlant.A,1)],
 //     true);
-//  writeMatrix(
+//  Streams.writeRealMatrix(
 //     fileName,
 //     "stateSpace",
 //     [ssPlant.A,ssPlant.B; ssPlant.C,ssPlant.D],
 //     true);
 //
-//   writeMatrix(
+//   Streams.writeRealMatrix(
 //     fileName,
 //     "K_ob",
 //     K_ob,
@@ -125,7 +126,7 @@ Complex.Vectors.print("p",p);
 
 //StateSpace.Analysis.analysis(ss_pa,fileName="inverseDoublePendulumControlled.html");
 
-  print("\nok!");
+  Streams.print("\nok!");
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This example demonstrates how to design pole placement controller to balance

@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function designCraneController
   "Design pole assignment and LQ controller for an overhead crane"
-  import Modelica.Utilities.Streams.print;
+  import Modelica.Utilities.Streams;
   import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Complex;
@@ -37,13 +37,13 @@ protected
   Modelica_LinearSystems2.StateSpace ss_pa=ss;
 
 algorithm
-  print("The linearized state space system is determined to:\n" + String(ss));
+  Streams.print("The linearized state space system is determined to:\n" + String(ss));
 
 // ####### LQ CONTROLLER #######
 
 // eigenvalues of open loop system
   p := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
-  print("eigenvalues of the open loop system are:\n");
+  Streams.print("eigenvalues of the open loop system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev", p);
 
 // Calculate feesback matrix of a lq controller (Riccati) with weighting matrices Q and R
@@ -55,32 +55,32 @@ algorithm
     Q,
     R);
 
-print("\nXXXXXXXXXXX:\n");
+  Streams.print("\nXXXXXXXXXXX:\n");
 
   ss_lq.A := ss.A - ss.B*K_lq;
-  print("The feedback matrix of the lq controller is:\n" +
+  Streams.print("The feedback matrix of the lq controller is:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     K_lq,
     6,
     "K_lq"));
-  writeMatrix(
+  Streams.writeRealMatrix(
     DataDir + "craneController_small.mat",
     "K_lq",
     K_lq);
 
 // eigenvalues of closed loop system
   p := Modelica_LinearSystems2.Math.Complex.eigenValues(ss_lq.A);
-  print("eigenvalues of the closed loop system are:\n");
+  Streams.print("eigenvalues of the closed loop system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_lq", p);
 
 // Pre filter calculation
   M_lq := -MatricesMSL.inv([1,0,0,0]*MatricesMSL.solve2(ss_lq.A, ss_lq.B));
-  print("Gain for pre filtering:\n" +
+  Streams.print("Gain for pre filtering:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     M_lq,
     6,
     "M_lq"));
-  writeMatrix(
+  Streams.writeRealMatrix(
     DataDir + "craneController_small.mat",
     "M_lq",
     M_lq,
@@ -91,15 +91,15 @@ print("\nXXXXXXXXXXX:\n");
 // feedback matrix of a pole assignment controller with assigned eigenvalues pa
   (K_pa,,p) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, pa);
   ss_pa.A := ss.A - ss.B*K_pa;
-  print("The feedback matrix of the pole assignment controller is:\n" +
+  Streams.print("The feedback matrix of the pole assignment controller is:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     K_pa,
     6,
     "K_pa"));
-  print("eigenvalues of the closed loop system are:\n");
+  Streams.print("eigenvalues of the closed loop system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
 
-  writeMatrix(
+  Streams.writeRealMatrix(
     DataDir + "craneController_small.mat",
     "K_pa",
     K_pa,
@@ -107,18 +107,18 @@ print("\nXXXXXXXXXXX:\n");
 
 // Pre filter calculation
   M_pa := -MatricesMSL.inv([1,0,0,0]*MatricesMSL.solve2(ss_pa.A, ss_pa.B));
-  print("Gain for pre filtering:\n" +
+  Streams.print("Gain for pre filtering:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     M_pa,
     6,
     "M_pa"));
-  writeMatrix(
+  Streams.writeRealMatrix(
     DataDir + "craneController_small.mat",
     "M_pa",
     M_pa,
     true);
 
-  print("\nok!");
+  Streams.print("\nok!");
 annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This example demonstrates how to design a lq-controller or a pole placement controller
