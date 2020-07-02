@@ -21,20 +21,17 @@ block ObserverTemplate
   parameter Real L[:,:]=[1] "Observer feedback matrix" annotation(Dialog(enable = not matrixOnFile));
 
 protected
-  parameter Integer mn[2]=if  matrixOnFile then readMatrixSize(fileName, observerMatrixName) else size(L);
+  parameter Integer mn[2]=if matrixOnFile then readMatrixSize(fileName, observerMatrixName) else size(L);
   parameter Integer m=mn[1];
   parameter Integer n=mn[2];
 
   parameter Real L2[:,:]=if matrixOnFile then
-      Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain(
-      fileName,
-      observerMatrixName,
-      m,
-      n) else L;
+    Modelica.Utilities.Streams.readRealMatrix(fileName, observerMatrixName, m, n) else L;
   parameter Modelica_LinearSystems2.Internal.StateSpace2 plantModelSystem2=
     if matrixOnFile then Modelica_LinearSystems2.Internal.StateSpace2.Import.fromFile(
     fileName, systemName) else plantModelSystem;
   parameter Real C[:,:]=plantModelSystem2.C;
+
 public
   parameter Boolean withDelay = Modelica_LinearSystems2.Math.Matrices.Internal.haveZeroRow(observerStateSpace.system.A)
     "True, if a unit delay should be considered";
