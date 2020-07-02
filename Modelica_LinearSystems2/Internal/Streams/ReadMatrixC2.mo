@@ -8,9 +8,8 @@ function ReadMatrixC2 "Read the output matrix of a state space system"
   input Integer nx "System order";
   input Integer ny "number of outputs";
 protected
-  Integer ABCDsizes[2]=
-      Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize(fileName,
-      matrixName);
+  Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(
+    fileName, matrixName);
 
   Real ABCD[nx + ny,ABCDsizes[2]]=
       Modelica.Utilities.Streams.readRealMatrix(

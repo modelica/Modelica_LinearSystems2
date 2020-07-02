@@ -9,9 +9,8 @@ function ReadMatrixB2 "Read the input matrix of a state space system"
   input Integer nu "number of inputs";
 
 protected
-  Integer ABCDsizes[2]=
-      Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize(fileName,
-      matrixName);
+  Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(
+    fileName, matrixName);
 
   Real ABCD[ABCDsizes[1],nx + nu]=
       Modelica.Utilities.Streams.readRealMatrix(

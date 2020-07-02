@@ -8,9 +8,8 @@ function ReadMatrixA2 "Read the state matrix of a state space system"
   input Integer nx "System order";
 
 protected
-  Integer ABCDsizes[2]=
-      Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize(fileName,
-      matrixName);
+  Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(
+    fileName, matrixName);
 
   Integer nu=ABCDsizes[2] - nx;
   Integer ny=ABCDsizes[1] - nx;
