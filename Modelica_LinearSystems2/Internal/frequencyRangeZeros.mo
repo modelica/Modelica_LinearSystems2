@@ -3,7 +3,7 @@ function frequencyRangeZeros
   "Determine min. and max. frequencies for a vector of zeros (numerator or denominator zeros)"
   import Modelica;
   import Modelica.Math;
-  import      Modelica.Units.SI;
+  import Modelica.Units.SI;
   import Modelica_LinearSystems2.Math.Complex;
 
   input Complex z[:] "Vector of zeros";

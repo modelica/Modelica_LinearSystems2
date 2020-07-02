@@ -2581,7 +2581,7 @@ This function plots the bode-diagram of a transfer function.
       "Plot the time response of a system represented by a transfer function. The response type is selectable"
       import Modelica;
       import Modelica_LinearSystems2;
-  //    import Modelica_LinearSystems2.StateSpace;
+      // import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 

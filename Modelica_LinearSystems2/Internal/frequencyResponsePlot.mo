@@ -71,7 +71,7 @@ algorithm
   end if;
 
   if not Hz then
-     diagram2[i].xLabel:="Angular frequency [rad/s]";
+    diagram2[i].xLabel:="Angular frequency [rad/s]";
   end if;
 
   if magnitude and phase then
