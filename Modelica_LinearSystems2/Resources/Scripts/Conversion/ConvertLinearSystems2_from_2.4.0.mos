@@ -1,0 +1,11 @@
+// Convert from Modelica_LinearSystems2 2.4.Y to Modelica_LinearSystems2 XXX
+
+// clear
+convertClear();
+
+convertClass("Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize",
+              "Modelica.Utilities.Streams.readMatrixSize");
+convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
+	            "Modelica_LinearSystems2.Internal.Streams.readMatrixInternal"},
+              "Modelica.Utilities.Streams.readRealMatrix");
+//convertElement(" "," "," ");
