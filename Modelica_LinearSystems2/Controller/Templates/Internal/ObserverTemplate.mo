@@ -15,20 +15,21 @@ block ObserverTemplate
   parameter String systemName="stateSpace" "Name of state space system" annotation(Dialog(enable = matrixOnFile));
   parameter String observerMatrixName="L" "Name of matrix" annotation(Dialog(enable = matrixOnFile));
 
-  parameter Modelica_LinearSystems2.Internal.StateSpace2 plantModelSystem=
-    Modelica_LinearSystems2.Internal.StateSpace2(A=[0],B=[1],C=[1],D=[0])
+  parameter StateSpace2 plantModelSystem=StateSpace2(A=[0],B=[1],C=[1],D=[0])
     "Plant state space system" annotation(Dialog(enable = not matrixOnFile));
   parameter Real L[:,:]=[1] "Observer feedback matrix" annotation(Dialog(enable = not matrixOnFile));
 
 protected
-  parameter Integer mn[2]=if matrixOnFile then readMatrixSize(fileName, observerMatrixName) else size(L);
+  parameter Integer mn[2]=if matrixOnFile then
+    Modelica.Utilities.Streams.readMatrixSize(fileName, observerMatrixName) else
+    size(L);
   parameter Integer m=mn[1];
   parameter Integer n=mn[2];
 
   parameter Real L2[:,:]=if matrixOnFile then
     Modelica.Utilities.Streams.readRealMatrix(fileName, observerMatrixName, m, n) else L;
-  parameter Modelica_LinearSystems2.Internal.StateSpace2 plantModelSystem2=
-    if matrixOnFile then Modelica_LinearSystems2.Internal.StateSpace2.Import.fromFile(
+  parameter StateSpace2 plantModelSystem2=
+    if matrixOnFile then StateSpace2.Import.fromFile(
     fileName, systemName) else plantModelSystem;
   parameter Real C[:,:]=plantModelSystem2.C;
 

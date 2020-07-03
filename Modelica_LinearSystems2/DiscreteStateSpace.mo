@@ -3408,7 +3408,7 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
           "B2",
           nx,
           nu);
-      Real Ts[1,1]=readMatrix(
+      Real Ts[1,1]=Modelica.Utilities.Streams.readRealMatrix(
           fileName,
           "Ts",
           1,
@@ -3510,24 +3510,25 @@ The file must contain
       startTime=T_linearize,
       stopTime=T_linearize + 3*Ts);
 
-      Real nxMat[1,1]=readMatrix(
-      fileName2,
-      "nx",
-      1,
-      1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+      Real nxMat[1,1]=Modelica.Utilities.Streams.readRealMatrix(
+        fileName2,
+        "nx",
+        1,
+        1);
+      Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(
+        fileName2, "ABCD");
       Integer nx=integer(nxMat[1, 1]);
       Integer nu=ABCDsizes[2] - nx;
       Integer ny=ABCDsizes[1] - nx;
-      Real ABCD[nx + ny,nx + nu]=readMatrix(
-      fileName2,
-      "ABCD",
-      nx + ny,
-      nx + nu);
+      Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
+        fileName2,
+        "ABCD",
+        nx + ny,
+        nx + nu);
       String xuyName[nx + nu + ny]=readStringMatrix(
-      fileName2,
-      "xuyName",
-      nx + nu + ny);
+        fileName2,
+        "xuyName",
+        nx + nu + ny);
 
       StateSpace ss(
         redeclare Real A[nx,nx],

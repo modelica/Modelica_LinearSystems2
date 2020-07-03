@@ -8,8 +8,10 @@ function plot_FFT_fromFile
           caption="Open file of FFT result data")));
   input Boolean logX = false "= true, if logarithmic scale of x-axis" annotation(choices(checkBox=true));
 protected
-   Integer dims[2] = readMatrixSize(fileName,"FFT");
-   Real fA[:,:] = readMatrix(fileName, "FFT", dims[1], dims[2]);
+   Integer dims[2] = Modelica.Utilities.Streams.readMatrixSize(
+     fileName,"FFT");
+   Real fA[:,:] = Modelica.Utilities.Streams.readRealMatrix(
+     fileName, "FFT", dims[1], dims[2]);
 algorithm
   Plot.diagram(Plot.Records.Diagram(curve={Plot.Records.Curve(x=if logX then fA[4:size(fA,1),1] else fA[:,1], y=if logX then fA[4:size(fA,1),2] else fA[:,2])},
                                     heading="Result of FFT calculation (" + fileName+")",

@@ -2491,6 +2491,7 @@ is defined slightly differently.
     encapsulated function fromFile
       "Generate a TransferFunction data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
 
+      import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
       input String fileName="tf.mat" "Name of the transfer function data file" annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
@@ -2499,15 +2500,15 @@ is defined slightly differently.
       input String denName="d" "Name of the denominator of the transfer function";
 
     protected
-      Integer numSize[2]=readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
-      Integer denSize[2]=readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
+      Integer numSize[2]=Streams.readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
+      Integer denSize[2]=Streams.readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
 
-      Real num[numSize[1],numSize[2]]=readMatrix(
+      Real num[numSize[1],numSize[2]]=Streams.readRealMatrix(
             fileName,
             numName,
             numSize[1],
             numSize[2]) "numenator coefficients";
-      Real den[denSize[1],denSize[2]]=readMatrix(
+      Real den[denSize[1],denSize[2]]=Streams.readRealMatrix(
             fileName,
             denName,
             denSize[1],
@@ -2561,12 +2562,12 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
       Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
       Boolean OK2 = importInitial("dsfinal.txt");
       Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize+1);
-      Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+      Real nxMat[1,1]=Modelica.Utilities.Streams.readRealMatrix(fileName2, "nx", 1, 1);
+      Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(fileName2, "ABCD");
       Integer nx=integer(nxMat[1, 1]);
       Integer nu=ABCDsizes[2] - nx;
       Integer ny=ABCDsizes[1] - nx;
-      Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+      Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
       String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
       StateSpace result(
@@ -2629,12 +2630,14 @@ followed by a conversion from sate space to transfer function representation.
 
     encapsulated function readLength
       "Read the number n of coefficients written in a [n,1]-matrix"
+      import Modelica;
+
       input String fileName="tf.mat" "Name of the transfer function data file";
       input String polyName="n"
         "Name of the polynominal (numenator or denominator) coefficients of the transfer function" annotation(Dialog);
       output Integer result;
     protected
-      Integer polySize[2]=readMatrixSize(fileName, polyName);
+      Integer polySize[2]=Modelica.Utilities.Streams.readMatrixSize(fileName, polyName);
 
     algorithm
       result := polySize[2];

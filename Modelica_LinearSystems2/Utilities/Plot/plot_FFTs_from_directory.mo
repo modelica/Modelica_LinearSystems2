@@ -39,8 +39,8 @@ algorithm
   // Plot the files
   for i in 1:nFFT loop
      file := directory + "/" + fft_filesSorted[i];
-     dims := DymolaCommands.MatrixIO.readMatrixSize(file,"FFT");
-     fA   := DymolaCommands.MatrixIO.readMatrix(file, "FFT", dims[1], dims[2]);
+     dims := Modelica.Utilities.Streams.readMatrixSize(file, "FFT");
+     fA   := Modelica.Utilities.Streams.readRealMatrix(file, "FFT", dims[1], dims[2]);
 
      ix :=ix + increment;
      iy :=iy + increment;

@@ -2493,7 +2493,7 @@ second column respectively. The variable k is the real gain in both cases.
 
       input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
       input Real T_linearize=0
-        "point in time of simulation to linearize the model";
+        "Point in time of simulation to linearize the model";
       input String fileName="dslin" "Name of the result file";
       input Modelica.Units.SI.Time Ts=1 "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
@@ -2503,12 +2503,15 @@ second column respectively. The variable k is the real gain in both cases.
       Boolean OK1=simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
       Boolean OK2=importInitial("dsfinal.txt");
       Boolean OK3=linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
-      Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+      Real nxMat[1,1]=Modelica.Utilities.Streams.readRealMatrix(
+        fileName2, "nx", 1, 1);
+      Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(
+        fileName2, "ABCD");
       Integer nx=integer(nxMat[1, 1]);
       Integer nu=ABCDsizes[2] - nx;
       Integer ny=ABCDsizes[1] - nx;
-      Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+      Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
+        fileName2, "ABCD", nx + ny, nx + nu);
       String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
       StateSpace ss(
@@ -2748,6 +2751,8 @@ int found=0;
 
     encapsulated function fromFile_pc
       "Generate a DiscreteZerosAndPoles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
+
+      import Modelica.Utilities.Streams.readRealMatrix;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
@@ -2778,32 +2783,32 @@ int found=0;
       Integer d1_2=if d1 > 0 then 1 else 0 "second dimension of d1-matrix";
       Integer d2_2=if d2 > 0 then 2 else 0 "second dimension of d2-matrix";
 
-      Real k=scalar(readMatrix(
+      Real k=scalar(readRealMatrix(
             fileName,
             "k",
             1,
             1));
-      Real n1Vector[n1]=vector(readMatrix(
+      Real n1Vector[n1]=vector(readRealMatrix(
             fileName,
             "n1",
             n1,
             n1_2)) "coefficients of first order numenator polynomials";
-      Real n2Matrix[n2,n2_2]=readMatrix(
+      Real n2Matrix[n2,n2_2]=readRealMatrix(
             fileName,
             "n2",
             n2,
             n2_2) "coefficients of second order denominator polynomials";
-      Real d1Vector[d1]=vector(readMatrix(
+      Real d1Vector[d1]=vector(readRealMatrix(
             fileName,
             "d1",
             d2,
             d1_2)) "coefficients of first order denominator polynomials";
-      Real d2Matrix[d2,d2_2]=readMatrix(
+      Real d2Matrix[d2,d2_2]=readRealMatrix(
             fileName,
             "d2",
             d2,
             d2_2) "coefficients of second order numenator polynomials";
-      Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);
+      Real Ts[1,1]=readRealMatrix(fileName, "Ts", 1, 1);
 
     algorithm
       dzp.k := k;
@@ -2818,6 +2823,7 @@ int found=0;
     encapsulated function fromFile_zp
       "Generate a DiscreteZerosAndPoles data record by reading poles and zeros from a file (default file name is zp.mat)"
 
+      import Modelica.Utilities.Streams.readRealMatrix;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
@@ -2845,22 +2851,22 @@ int found=0;
       Integer z_2=if zSize > 0 then 2 else 0 "second dimension of zeros-matrix";
       Integer p_2=if pSize > 0 then 2 else 0 "second dimension of poles-matrix";
 
-      Real k=scalar(readMatrix(
+      Real k=scalar(readRealMatrix(
             fileName,
             "k",
             1,
             1));
-      Real zerosMatrix[zSize,z_2]=readMatrix(
+      Real zerosMatrix[zSize,z_2]=readRealMatrix(
             fileName,
             "z",
             zSize,
             z_2) "zeros in rows of real parts and imaginary parts";
-      Real polesMatrix[pSize,p_2]=readMatrix(
+      Real polesMatrix[pSize,p_2]=readRealMatrix(
             fileName,
             "p",
             pSize,
             p_2) "poles in rows of real parts and imaginary parts";
-      Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);
+      Real Ts[1,1]=readRealMatrix(fileName, "Ts", 1, 1);
 
       Complex zeros[:]=if zSize > 0 then ZerosAndPoles.Internal.fromRealAndImag(
           zerosMatrix[:, 1], zerosMatrix[:, z_2]) else fill(Complex(0), 0);

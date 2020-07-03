@@ -35,7 +35,8 @@ algorithm
   for i in 1:np loop
     // Read matrix A from file i
     fileName2 := fileName+String(i)+".mat";
-    ABCD :=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+    ABCD :=Modelica.Utilities.Streams.readRealMatrix(
+      fileName2, "ABCD", nx + ny, nx + nu);
     A :=ABCD[1:nx, 1:nx];
 
     // Compute eigen values of A

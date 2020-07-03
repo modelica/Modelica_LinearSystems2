@@ -9675,7 +9675,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
       import Modelica_LinearSystems2.StateSpace;
 
       input String modelName "Name of the model"
-       annotation(Dialog(__Dymola_translatedModel(translate=true)));
+        annotation(Dialog(__Dymola_translatedModel(translate=true)));
       input Real T_linearize=0
         "Simulate until T_linearize and then linearize the model";
       input String fileName="dslin" "Name of the result file";
@@ -9697,16 +9697,16 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
               stopTime=T_linearize + 1,
               method=method);
 
-      Real nxMat[1, 1]=readMatrix(
+      Real nxMat[1, 1]=Modelica.Utilities.Streams.readRealMatrix(
               fileName2,
               "nx",
               1,
               1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+      Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(fileName2, "ABCD");
       Integer nx=integer(nxMat[1, 1]);
       Integer nu=ABCDsizes[2] - nx;
       Integer ny=ABCDsizes[1] - nx;
-      Real ABCD[nx + ny, nx + nu]=readMatrix(
+      Real ABCD[nx + ny, nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
               fileName2,
               "ABCD",
               nx + ny,
@@ -11654,6 +11654,7 @@ The uncontrollable poles are checked to to stable.
 
     encapsulated function readLength_nu
       "Read the number of inputs nu of a state space system from a file"
+      import Modelica.Utilities.Streams;
 
       input String fileName="ss_siso.mat"
         "Name of the state space system data file" annotation (Dialog(
@@ -11664,12 +11665,12 @@ The uncontrollable poles are checked to to stable.
 
       output Integer nu;
     protected
-      Real nxMat[1, 1]=readMatrix(
+      Real nxMat[1, 1]=Streams.readRealMatrix(
               fileName,
               "nx",
               1,
               1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName, matrixName);
+      Integer ABCDsizes[2]=Streams.readMatrixSize(fileName, matrixName);
       Integer nx=integer(nxMat[1, 1]);
 
     algorithm
@@ -11678,6 +11679,7 @@ The uncontrollable poles are checked to to stable.
 
     encapsulated function readLength_nx
       "Read the order nx of a state space system from a file"
+      import Modelica.Utilities.Streams.readRealMatrix;
 
       input String fileName="ss_siso.mat"
         "Name of the state space system data file" annotation (Dialog(
@@ -11685,7 +11687,7 @@ The uncontrollable poles are checked to to stable.
                 "state space system data file")));
       output Integer nx;
     protected
-      Real nxMat[1, 1]=readMatrix(
+      Real nxMat[1, 1]=readRealMatrix(
               fileName,
               "nx",
               1,
@@ -11696,6 +11698,7 @@ The uncontrollable poles are checked to to stable.
 
     encapsulated function readLength_ny
       "Read the number of outputs ny of a state space system from a file"
+      import Modelica.Utilities.Streams;
 
       input String fileName="ss_siso.mat"
         "Name of the state space system data file" annotation (Dialog(
@@ -11706,12 +11709,12 @@ The uncontrollable poles are checked to to stable.
 
       output Integer ny;
     protected
-      Real nxMat[1, 1]=readMatrix(
+      Real nxMat[1, 1]=Streams.readRealMatrix(
               fileName,
               "nx",
               1,
               1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName, matrixName);
+      Integer ABCDsizes[2]=Streams.readMatrixSize(fileName, matrixName);
       Integer nx=integer(nxMat[1, 1]);
 
     algorithm
@@ -11864,7 +11867,8 @@ The uncontrollable poles are checked to to stable.
 
     encapsulated function readSystemDimension
       "Read the order nx of state matrix and the numbers nu and ny of inputs and outputs"
-      import Modelica_LinearSystems2;
+      import Modelica.Utilities.Streams;
+
       input String fileName="stateSpace.mat"
         "File containing the matrix matrixName, e.g. A.mat, dsin.txt"
         annotation (Dialog(loadSelector(filter=
@@ -11875,13 +11879,13 @@ The uncontrollable poles are checked to to stable.
       output Integer xuy[3];
 
     protected
-      Real sizeA[1, 1]=readMatrix(
+      Real sizeA[1, 1]=Streams.readRealMatrix(
               fileName,
               "nx",
               1,
               1);
 
-      Integer ABCDsizes[2]=readMatrixSize(fileName, matrixName);
+      Integer ABCDsizes[2]=Streams.readMatrixSize(fileName, matrixName);
 
     algorithm
       xuy[1] := integer(sizeA[1, 1]);
@@ -12726,16 +12730,16 @@ k = ---------- * ----------------------
     protected
       String fileName2=fileName + ".mat"
         "Name of the result file with extension";
-      Real nxMat[1, 1]=readMatrix(
+      Real nxMat[1, 1]=Modelica.Utilities.Streams.readRealMatrix(
               fileName2,
               "nx",
               1,
               1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+      Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(fileName2, "ABCD");
       Integer nx=integer(nxMat[1, 1]);
       Integer nu=ABCDsizes[2] - nx;
       Integer ny=ABCDsizes[1] - nx;
-      Real ABCD[nx + ny, nx + nu]=readMatrix(
+      Real ABCD[nx + ny, nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
               fileName2,
               "ABCD",
               nx + ny,

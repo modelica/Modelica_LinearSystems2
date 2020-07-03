@@ -21,21 +21,21 @@ function testPoleAssignment2
   input Boolean deleteExistingOutputfile=true;
 
 protected
-  Integer nm[2]=readMatrixSize(dataFile, "B")
+  Integer nm[2]=Modelica.Utilities.Streams.readMatrixSize(dataFile, "B")
     "Read system order and number of inputs";
-  Integer nmk[2]=readMatrixSize(dataFile, "K") "Read dimensions of K";
-  Real A[:,:]=readMatrix(dataFile, "A", nm[1], nm[1]) "Read system matrix A";
-  Real B[:,:]=readMatrix(dataFile, "B", nm[1], nm[2]) "Read system matrix B";
+  Integer nmk[2]=Modelica.Utilities.Streams.readMatrixSize(dataFile, "K") "Read dimensions of K";
+  Real A[:,:]=Modelica.Utilities.Streams.readRealMatrix(dataFile, "A", nm[1], nm[1]) "Read system matrix A";
+  Real B[:,:]=Modelica.Utilities.Streams.readRealMatrix(dataFile, "B", nm[1], nm[2]) "Read system matrix B";
   Complex j=Modelica_LinearSystems2.Math.Complex.j();
-  Real assignedPolesR[1,:]=readMatrix(dataFile, "assignedPoles", 1, nm[1])
+  Real assignedPolesR[1,:]=Modelica.Utilities.Streams.readRealMatrix(dataFile, "assignedPoles", 1, nm[1])
     "Read real part of assigned poles";
-  Real assignedPolesI[1,:]=readMatrix(dataFile, "assignedPolesIm", 1, nm[1])
+  Real assignedPolesI[1,:]=Modelica.Utilities.Streams.readRealMatrix(dataFile, "assignedPolesIm", 1, nm[1])
     "Read imaginary part of assigned poles";
   Complex assignedPoles[:]=Complex(1)*assignedPolesR[1, :] + j*assignedPolesI[1, :]
     "Complex assigned poles";
 
   Boolean isKprovided=min(nmk) > 0;
-  Real Ki[:,:]=if isKprovided then readMatrix(dataFile, "K", nm[2], nm[1]) else fill(0, 0, 0);
+  Real Ki[:,:]=if isKprovided then Modelica.Utilities.Streams.readRealMatrix(dataFile, "K", nm[2], nm[1]) else fill(0, 0, 0);
 //  Integer n=size(A, 1);
   Real S[nm[1],nm[1]] "closed loop system matrix A-BK";
   StateSpace ss=Modelica_LinearSystems2.StateSpace(A=A, B=B, C=zeros(1, nm[1]), D=zeros(1, size(B, 2)));
