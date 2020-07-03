@@ -11876,7 +11876,7 @@ The uncontrollable poles are checked to to stable.
                 "State space system data file")));
       input String matrixName="ABCD"
         "Name of the generalized state space system matrix";
-      output Integer xuy[3];
+      output Integer xuy[3] "Order of matrixName; size of u; size of y";
 
     protected
       Real sizeA[1, 1]=Streams.readRealMatrix(
