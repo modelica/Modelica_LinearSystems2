@@ -7,18 +7,12 @@ function ReadMatrixA "Read the state matrix of a state space system"
     "Name of the generalized state space system matrix";
 
 protected
-  Real sizeA[1,1]=Modelica.Utilities.Streams.readRealMatrix(
-      fileName,
-      "nx",
-      1,
-      1);
-  Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(
+  Integer xuy[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(
     fileName, matrixName);
-  Integer nx=integer(sizeA[1, 1]);
-
-  Integer nu=ABCDsizes[2] - nx;
-  Integer ny=ABCDsizes[1] - nx;
-  Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
+  Integer nx = xuy[1];
+  Integer nu = xuy[2];
+  Integer ny = xuy[3];
+  Real ABCD[nx + ny,nx + nu] = Modelica.Utilities.Streams.readRealMatrix(
       fileName,
       matrixName,
       nx + ny,
