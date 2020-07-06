@@ -3,13 +3,13 @@ operator record StateSpace
   "Continuous state space description of a linear, time invariant differential equation system (data + operations)"
   extends Modelica.Icons.Record;
 
-  Real A[:, size(A, 1)]
+  Real A[:, size(A, 1)] "Matrix A"
     annotation (Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real B[size(A, 1), :]
+  Real B[size(A, 1), :] "Matrix B"
     annotation (Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real C[:, size(A, 1)]
+  Real C[:, size(A, 1)] "Matrix C"
     annotation (Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real D[size(C, 1), size(B, 2)]
+  Real D[size(C, 1), size(B, 2)] "Matrix D"
     annotation (Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
 
   String yNames[size(C, 1)]=fill("", size(C, 1)) "Names of the output signals"
