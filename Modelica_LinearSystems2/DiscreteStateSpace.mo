@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2;
 operator record DiscreteStateSpace
   "Discrete state space description of a linear, time invariant difference equation system (data + operations)"
-  extends Modelica.Icons.Record;
 
   Real A[:,size(A, 1)]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
   Real B[size(A, 1),:]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
