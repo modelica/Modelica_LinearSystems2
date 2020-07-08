@@ -2,27 +2,27 @@ within Modelica_LinearSystems2.WorkInProgress.Internal;
 record SimulationOptions "Options for simulation setup"
   Real startTime=0 "Start time of simulation" annotation (Dialog(
       group="Simulation Interval",
-      label="Start time",
-      absoluteWidth=15));
+      __Dymola_label="Start time",
+      __Dymola_absoluteWidth=15));
   Real stopTime=1 "Simulation stop time" annotation (Dialog(
       group="Simulation Interval",
-      label="Stop time",
-      absoluteWidth=15));
+      __Dymola_label="Stop time",
+      __Dymola_absoluteWidth=15));
   Real outputInterval=0 "Distance between output points (if > 0)" annotation (
       Dialog(
       group="Output",
-      label="Interval length",
-      absoluteWidth=15));
+      __Dymola_label="Interval length",
+      __Dymola_absoluteWidth=15));
   Integer numberOfIntervals=500
     "Number of intervals for output (if > 0 and Interval length == 0)"
     annotation (Dialog(
       group="Output",
-      label="Number of intervals",
-      absoluteWidth=15));
+      __Dymola_label="Number of intervals",
+      __Dymola_absoluteWidth=15));
   String method "Integration method to be used" annotation(Dialog(
       group="Integration",
-      label="Algorithm",
-      absoluteWidth=15),
+      __Dymola_label="Algorithm",
+      __Dymola_absoluteWidth=15),
       choices(
         choice="Lsodar" "Lsodar",
         choice="Dassl" "Dassl",
@@ -43,13 +43,13 @@ record SimulationOptions "Options for simulation setup"
   Real tolerance=1e-3 "Relative error tolerance" annotation (
       Dialog(
       group="Integration",
-      label="Tolerance",
-      absoluteWidth=15));
+      __Dymola_label="Tolerance",
+      __Dymola_absoluteWidth=15));
   Real fixedStepSize=0 "Step size for fixed step integrators" annotation (
       Dialog(
       group="Integration",
-      label="Fixed integrator step",
-      absoluteWidth=15));
+      __Dymola_label="Fixed integrator step",
+      __Dymola_absoluteWidth=15));
   annotation (__Dymola_Protection(
       hideFromBrowser=false,
       allowDuplicate=true,
