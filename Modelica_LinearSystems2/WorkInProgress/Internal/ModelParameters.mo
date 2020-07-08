@@ -3,7 +3,7 @@ record ModelParameters
   "Model parameters to be selected after translation of a model"
   String parName="" "Name of parameter" annotation (Dialog);
   Real parValue=1 "Value of parameter" annotation (Dialog(
-      absoluteWidth=20));
+      __Dymola_absoluteWidth=20));
   Real parMin = 1 "Minimum value of parameter" annotation (Dialog);
   Real parMax = 6 "Maximum value of parameter" annotation (Dialog);
   Integer nVar(min=2) = 10 "Number of variations parameter (min=2)" annotation (Dialog);
