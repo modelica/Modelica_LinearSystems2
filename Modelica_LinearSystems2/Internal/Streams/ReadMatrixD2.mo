@@ -11,7 +11,7 @@ function ReadMatrixD2 "Read the feed forward matrix of a state space system"
 
 protected
   Real ABCD[nx + ny,nx + nu]=
-      Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
+      Modelica.Utilities.Streams.readRealMatrix(
       fileName,
       matrixName,
       nx + ny,

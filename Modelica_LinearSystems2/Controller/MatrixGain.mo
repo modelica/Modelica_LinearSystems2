@@ -11,8 +11,11 @@ block MatrixGain
     "True, if matrix should be read from file";
   parameter String fileName=Modelica_LinearSystems2.DataDir + "k.mat"
     "Name of the matrix data file"
-    annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="matrix data file"),enable = matrixOnFile));
+    annotation(Dialog(
+        loadSelector(
+          filter="MAT files (*.mat);; All files (*.*)",
+          caption="matrix data file"),
+        enable = matrixOnFile));
   parameter String matrixName="K" "Name of the matrix" annotation(Dialog(enable = matrixOnFile));
 
   parameter Real K[:,:]=[1] "Matrix  gain" annotation(Dialog(enable = not matrixOnFile));
@@ -23,11 +26,7 @@ protected
   parameter Integer m=mn[1];
   parameter Integer n=mn[2];
   parameter Real K2[:,:]=if matrixOnFile then
-      Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain(
-      fileName,
-      matrixName,
-      m,
-      n) else K;
+    Modelica.Utilities.Streams.readRealMatrix(fileName, matrixName, m, n) else K;
 
 equation
   y = K2*u;

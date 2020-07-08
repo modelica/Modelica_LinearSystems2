@@ -18,4 +18,7 @@ void readMatrixSizeEx(const char *file, const char *matname, int* dim)
   dim[1]=ms.data[1];
   return;
 }");
+
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Utilities.Streams.readMatrixSize instead");
 end readMatrixOnFileSize;

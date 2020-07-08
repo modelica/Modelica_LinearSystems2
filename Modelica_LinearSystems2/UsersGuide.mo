@@ -618,6 +618,25 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
+    class Version_2_4_1 "Version 2.4.1-dev (???, 2020)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>This version requires the <b>Modelica 4.0.0</b> Library.
+It is <b>backward compatible</b> to the previous version 2.4.0.</p>
+
+<h4>
+Improvements in this version:
+</h4>
+
+<ul>
+<li> Utilize ModelicaIO functions for matrix I/O, see issue
+     <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
+     Concerning functions are marked obsolete.</li>
+</ul>
+</html>"));
+    end Version_2_4_1;
+
     class Version_2_4_0 "Version 2.4.0 (June 26, 2020)"
       extends Modelica.Icons.ReleaseNotes;
 

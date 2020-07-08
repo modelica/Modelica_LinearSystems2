@@ -10,15 +10,14 @@ function ReadSystemDimension
   output Integer xuy[3];
 
 protected
-  Real sizeA[1,1]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
+  Real sizeA[1,1]=Modelica.Utilities.Streams.readRealMatrix(
       fileName,
       "nx",
       1,
       1);
 
-  Integer ABCDsizes[2]=
-      Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize(fileName,
-      matrixName);
+  Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(
+    fileName, matrixName);
 
 algorithm
   xuy[1] := integer(sizeA[1, 1]);

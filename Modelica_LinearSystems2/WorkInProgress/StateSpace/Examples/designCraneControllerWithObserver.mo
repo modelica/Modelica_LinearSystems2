@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function designCraneControllerWithObserver
   "Design pole assignment controller and observer for an overhead crane"
-  import Modelica.Utilities.Streams.print;
+  import Modelica.Utilities.Streams;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Complex;
@@ -36,11 +36,11 @@ protected
   Modelica_LinearSystems2.StateSpace ssPlant=StateSpace(A=ss.A, B=ss.B,C=[1,0,0,0;0,1,0,0], D=[0;0]);
 
 algorithm
-  print("The linearized state space system is determined to:\n" + String(ssPlant));
+  Streams.print("The linearized state space system is determined to:\n" + String(ssPlant));
 
  // eigenvalues of open loop system
   p := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
-  print("eigenvalues of the open loop system are:\n");
+  Streams.print("eigenvalues of the open loop system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev", p);
 
 //####### POLE ASSIGNMENT ##########
@@ -48,15 +48,15 @@ algorithm
 // feedback matrix of a pole assignment controller with assigned eigenvalues pa
   (K_pa,,p) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, pa);
   ss_pa.A := ss.A - ss.B*K_pa;
-  print("The feedback matrix of the pole assignment controller is:\n" +
+  Streams.print("The feedback matrix of the pole assignment controller is:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     K_pa,
     6,
     "K_pa"));
-  print("eigenvalues of the closed loop system are:\n");
+  Streams.print("eigenvalues of the closed loop system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
 
-  writeMatrix(
+  Streams.writeRealMatrix(
     fileName,
     "K_pa",
     K_pa,
@@ -64,12 +64,12 @@ algorithm
 
 // Pre filter calculation
   M_pa := -Modelica.Math.Matrices.inv([1,0,0,0]*Modelica.Math.Matrices.solve2(ss_pa.A, ss_pa.B));
-  print("Gain for pre filtering:\n" +
+  Streams.print("Gain for pre filtering:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     M_pa,
     6,
     "M_pa"));
-  writeMatrix(
+  Streams.writeRealMatrix(
     fileName,
     "M_pa",
     M_pa,
@@ -79,33 +79,33 @@ algorithm
   (K_ob,,p) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss_ob, pob);
   K_ob := transpose(K_ob);
 
-  writeMatrix(
+  Streams.writeRealMatrix(
     fileName,
     "stateSpace",
     [ssPlant.A,ssPlant.B; ssPlant.C,ssPlant.D],
     true);
 // write matrix dimension nx
-  writeMatrix(
+  Streams.writeRealMatrix(
     fileName,
     "nx",
     [size(ssPlant.A,1)],
     true);
-  print("The feedback matrix of the observer system is:\n" +
+  Streams.print("The feedback matrix of the observer system is:\n" +
     Modelica_LinearSystems2.Math.Matrices.printMatrix(
     K_ob,
     6,
     "K_ob"));
   ss_ob.A := ss.A - K_ob*ssPlant.C;
 
-  print("eigenvalues of the observer system are:\n");
+  Streams.print("eigenvalues of the observer system are:\n");
   Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pob", pob);
-  writeMatrix(
+  Streams.writeRealMatrix(
     fileName,
     "K_ob",
     K_ob,
     true);
 
-  print("\nok!");
+  Streams.print("\nok!");
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This example demonstrates how to use pole placement function assignPolesMI to

@@ -336,7 +336,7 @@ encapsulated package Import
       redeclare Real D[ny,nu]) "= model linearized at initial point";
 
     protected
-    Real ABCD[nx + ny,nx + nu]=Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(
+    Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
           fileName,
           matrixName,
           nx + ny,

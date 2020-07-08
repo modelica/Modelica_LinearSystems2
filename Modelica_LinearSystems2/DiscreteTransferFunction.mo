@@ -1353,8 +1353,10 @@ with
     encapsulated function fromFile
       "Generate a DiscreteTransferFunction data record by reading numenator coefficients and denominator coefficients from a file (default file name is tf.mat)"
 
+      import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
+
       input String fileName="dtf.mat" "Name of the transfer function data file" annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                           caption="transfer function data file")));
       input String numName="n" "Name of the numenator of the transfer function";
@@ -1362,22 +1364,22 @@ with
         "Name of the denominator of the transfer function";
 
     protected
-      Integer numSize[2]=readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
-      Integer denSize[2]=readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
+      Integer numSize[2]=Streams.readMatrixSize(fileName, numName) annotation(__Dymola_allowForSize=true);
+      Integer denSize[2]=Streams.readMatrixSize(fileName, denName) annotation(__Dymola_allowForSize=true);
 
-      Real num[numSize[1],numSize[2]]=readMatrix(
+      Real num[numSize[1],numSize[2]]=Streams.readRealMatrix(
             fileName,
             numName,
             numSize[1],
-            numSize[2]) "numenator coefficients";
-      Real den[denSize[1],denSize[2]]=readMatrix(
+            numSize[2]) "Numenator coefficients";
+      Real den[denSize[1],denSize[2]]=Streams.readRealMatrix(
             fileName,
             denName,
             denSize[1],
-            denSize[2]) "denominator coefficients";
+            denSize[2]) "Denominator coefficients";
       Integer ns2=numSize[2] annotation(__Dymola_allowForSize=true);
       Integer ds2=denSize[2] annotation(__Dymola_allowForSize=true);
-      Real Ts[1,1]=readMatrix(fileName, "Ts", 1, 1);
+      Real Ts[1,1]=Streams.readRealMatrix(fileName, "Ts", 1, 1);
 
     public
       output DiscreteTransferFunction dtf(n=fill(0,ns2),d=fill(0,ds2))
@@ -1414,12 +1416,15 @@ with
       Boolean OK1=simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
       Boolean OK2=importInitial("dsfinal.txt");
       Boolean OK3=linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
-      Real nxMat[1,1]=readMatrix(fileName2, "nx", 1, 1);
-      Integer ABCDsizes[2]=readMatrixSize(fileName2, "ABCD");
+      Real nxMat[1,1]=Modelica.Utilities.Streams.readRealMatrix(
+        fileName2, "nx", 1, 1);
+      Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(
+        fileName2, "ABCD");
       Integer nx=integer(nxMat[1, 1]);
       Integer nu=ABCDsizes[2] - nx;
       Integer ny=ABCDsizes[1] - nx;
-      Real ABCD[nx + ny,nx + nu]=readMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+      Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
+        fileName2, "ABCD", nx + ny, nx + nu);
       String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
       StateSpace ss(

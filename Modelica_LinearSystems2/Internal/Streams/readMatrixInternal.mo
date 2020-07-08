@@ -30,7 +30,9 @@ void Modelica_LinearSystem2_readMatrixInternal(const char *filename, const char 
   }
   return;
 }");
- annotation(Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Utilities.Streams.readRealMatrix instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>readMatrixInternal(fileName, matrixName, m, n)</pre></blockquote>
 

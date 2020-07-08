@@ -15,6 +15,8 @@ public
   output Real K[m,n];
 
 algorithm
-  K := Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(fileName, matrixName, m, n);
+  K := Modelica.Utilities.Streams.readRealMatrix(fileName, matrixName, m, n);
 
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Utilities.Streams.readRealMatrix instead");
 end readMatrixGain;
