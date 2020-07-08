@@ -14,11 +14,11 @@ protected
   Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
 
   // Read linear system from file
-  Real nxMat[1,1]=Modelica.Utilities.Streams.readRealMatrix(fileName2, "nx", 1, 1);
-  Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(fileName2, "ABCD");
-  Integer nx=integer(nxMat[1, 1]);
-  Integer nu=ABCDsizes[2] - nx;
-  Integer ny=ABCDsizes[1] - nx;
+  Integer xuy[3] = StateSpace.Internal.readSystemDimension(
+    fileName2, "ABCD");
+  Integer nx = xuy[1];
+  Integer nu = xuy[2];
+  Integer ny = xuy[3];
   Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
   String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
