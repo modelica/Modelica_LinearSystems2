@@ -155,42 +155,43 @@ operator record DiscreteTransferFunction
     end fromTransferFunction;
   end 'constructor';
 
-  encapsulated operator '*'
-    "Contains operators for multiplication of discrete transfer functions"
+  encapsulated operator '+'
+    "Contains operators for addition of discrete transfer functions"
     import Modelica;
 
-    function 'dtf*dtf' "Multiply two discrete transfer functions (dtf1 * dtf2)"
+    function 'dtf+dtf'
+      "Parallel connection of two discrete transfer functions (= inputs are the same, outputs of the two systems are added)"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
       input DiscreteTransferFunction dtf1 "Transfer function system 1";
-      input DiscreteTransferFunction dtf2 "Transfer function system 1";
+      input DiscreteTransferFunction dtf2 "Transfer function system 2";
       output DiscreteTransferFunction result;
 
     algorithm
-      assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"+\".");
-      result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.n),Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
-    end 'dtf*dtf';
+      assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps,
+        "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"+\".");
+      result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.d) + Polynomial(dtf2.n)*Polynomial(dtf1.d), Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
+    end 'dtf+dtf';
 
-    function 'r*dtf'
-      "Multiply a real number with a DiscreteTransferFunctions (r * dtf2)"
+    function 'dtf+r' "Add a real number to a DiscreteTransferFunction"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
+      input DiscreteTransferFunction dtf "Transfer function system";
       input Real r "Real number";
-      input DiscreteTransferFunction dtf "Transfer function system 1";
-      output DiscreteTransferFunction result=dtf;
-
+      output DiscreteTransferFunction result;
+    protected
+      DiscreteTransferFunction dtfr=DiscreteTransferFunction(r, Ts=dtf.Ts, method=dtf.method);
     algorithm
-      result.n := r*dtf.n;
-    end 'r*dtf';
-
+      result := dtf+dtfr;
+    end 'dtf+r';
     annotation (Documentation(info="<html>
-<p>This package contains operators for multiplication of discrete fransfer function records. </p>
+<p>This package contains operators for addition of discrete fransfer function records. </p>
 </html>"));
-  end '*';
+  end '+';
 
   encapsulated operator '-'
     "Contains operators for subtraction of discrete transfer functions"
@@ -230,6 +231,43 @@ operator record DiscreteTransferFunction
 </html>"));
   end '-';
 
+  encapsulated operator '*'
+    "Contains operators for multiplication of discrete transfer functions"
+    import Modelica;
+
+    function 'dtf*dtf' "Multiply two discrete transfer functions (dtf1 * dtf2)"
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+
+      input DiscreteTransferFunction dtf1 "Transfer function system 1";
+      input DiscreteTransferFunction dtf2 "Transfer function system 1";
+      output DiscreteTransferFunction result;
+
+    algorithm
+      assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps, "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"+\".");
+      result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.n),Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
+    end 'dtf*dtf';
+
+    function 'r*dtf'
+      "Multiply a real number with a DiscreteTransferFunctions (r * dtf2)"
+      import Modelica;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica_LinearSystems2.DiscreteTransferFunction;
+
+      input Real r "Real number";
+      input DiscreteTransferFunction dtf "Transfer function system 1";
+      output DiscreteTransferFunction result=dtf;
+
+    algorithm
+      result.n := r*dtf.n;
+    end 'r*dtf';
+
+    annotation (Documentation(info="<html>
+<p>This package contains operators for multiplication of discrete fransfer function records. </p>
+</html>"));
+  end '*';
+
   encapsulated operator '/'
     "Contains operators for division of discrete transfer functions"
     import Modelica;
@@ -268,44 +306,6 @@ operator record DiscreteTransferFunction
 <p>This package contains operators for division of discrete fransfer function records. </p>
 </html>"));
   end '/';
-
-  encapsulated operator '+'
-    "Contains operators for addition of discrete transfer functions"
-    import Modelica;
-
-    function 'dtf+dtf'
-      "Parallel connection of two discrete transfer functions (= inputs are the same, outputs of the two systems are added)"
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-
-      input DiscreteTransferFunction dtf1 "Transfer function system 1";
-      input DiscreteTransferFunction dtf2 "Transfer function system 2";
-      output DiscreteTransferFunction result;
-
-    algorithm
-      assert(abs(dtf1.Ts - dtf2.Ts) <= Modelica.Constants.eps,
-        "Two discrete transfer function systems must have the same sample time Ts for subtraction with \"+\".");
-      result := DiscreteTransferFunction(Polynomial(dtf1.n)*Polynomial(dtf2.d) + Polynomial(dtf2.n)*Polynomial(dtf1.d), Polynomial(dtf1.d)*Polynomial(dtf2.d), Ts=dtf1.Ts, method=dtf1.method);
-    end 'dtf+dtf';
-
-    function 'dtf+r' "Add a real number to a DiscreteTransferFunction"
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-
-      input DiscreteTransferFunction dtf "Transfer function system";
-      input Real r "Real number";
-      output DiscreteTransferFunction result;
-    protected
-      DiscreteTransferFunction dtfr=DiscreteTransferFunction(r, Ts=dtf.Ts, method=dtf.method);
-    algorithm
-      result := dtf+dtfr;
-    end 'dtf+r';
-    annotation (Documentation(info="<html>
-<p>This package contains operators for addition of discrete fransfer function records. </p>
-</html>"));
-  end '+';
 
   encapsulated operator function '^'
     "Integer power of DiscreteTransferFunction (dtf1^k)"
