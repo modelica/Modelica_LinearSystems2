@@ -514,53 +514,6 @@ which is equal to
 </html>"));
   end '*';
 
-  encapsulated operator function '/'
-    "Divide two discrete transfer functions in zeros and poles representation (dzp1 / dzp2)"
-    import Modelica;
-    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-
-    input DiscreteZerosAndPoles dzp1;
-    input DiscreteZerosAndPoles dzp2;
-
-    output DiscreteZerosAndPoles result "= dzp1/dzp2";
-
-  protected
-    Boolean dzp1IsReal=DiscreteZerosAndPoles.Internal.isReal(dzp1);
-    Boolean dzp2IsReal=DiscreteZerosAndPoles.Internal.isReal(dzp2);
-
-  algorithm
-    assert(abs(dzp2.k) > 100*Modelica.Constants.small, "dzp2 in operator \"Modelica_LinearSystems2.TransferFunction.'/'()\" may not be zero");
-  //   if max({size(dzp1.n1, 1),size(dzp1.n2, 1),size(dzp1.d1, 1),size(dzp1.d2, 1)}) >0 and
-  //     max({size(dzp2.n1, 1),size(dzp2.n2, 1),size(dzp2.d1, 1),size(dzp2.d2, 1)}) > 0 then
-    if not dzp1IsReal and not dzp2IsReal then
-        assert(abs(dzp1.Ts - dzp2.Ts) <= Modelica.Constants.eps, "Two discrete zeros-and-poles systems must have the same sample time Ts for division with \"/\".");
-    end if;
-    result.Ts := if dzp1IsReal then dzp2.Ts else dzp1.Ts;
-    result.method := if dzp1IsReal then dzp2.method else dzp1.method;
-
-    if dzp1 == DiscreteZerosAndPoles(0) then
-      result := DiscreteZerosAndPoles(0);
-    else
-      result.n1 := cat(
-        1,
-        dzp1.n1,
-        dzp2.d1);
-      result.n2 := cat(
-        1,
-        dzp1.n2,
-        dzp2.d2);
-      result.d1 := cat(
-        1,
-        dzp1.d1,
-        dzp2.n1);
-      result.d2 := cat(
-        1,
-        dzp1.d2,
-        dzp2.n2);
-      result.k := dzp1.k/dzp2.k;
-    end if;
-  end '/';
-
   encapsulated operator function '+'
     "Addition of to discrete transfer functions dzp1 + dzp2, i.e. parallel connection of two transfer functions (= inputs are the same, outputs of the two systems are added)"
 
@@ -658,6 +611,53 @@ which is equal to
     end if;
 
   end '+';
+
+  encapsulated operator function '/'
+    "Divide two discrete transfer functions in zeros and poles representation (dzp1 / dzp2)"
+    import Modelica;
+    import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+
+    input DiscreteZerosAndPoles dzp1;
+    input DiscreteZerosAndPoles dzp2;
+
+    output DiscreteZerosAndPoles result "= dzp1/dzp2";
+
+  protected
+    Boolean dzp1IsReal=DiscreteZerosAndPoles.Internal.isReal(dzp1);
+    Boolean dzp2IsReal=DiscreteZerosAndPoles.Internal.isReal(dzp2);
+
+  algorithm
+    assert(abs(dzp2.k) > 100*Modelica.Constants.small, "dzp2 in operator \"Modelica_LinearSystems2.TransferFunction.'/'()\" may not be zero");
+  //   if max({size(dzp1.n1, 1),size(dzp1.n2, 1),size(dzp1.d1, 1),size(dzp1.d2, 1)}) >0 and
+  //     max({size(dzp2.n1, 1),size(dzp2.n2, 1),size(dzp2.d1, 1),size(dzp2.d2, 1)}) > 0 then
+    if not dzp1IsReal and not dzp2IsReal then
+        assert(abs(dzp1.Ts - dzp2.Ts) <= Modelica.Constants.eps, "Two discrete zeros-and-poles systems must have the same sample time Ts for division with \"/\".");
+    end if;
+    result.Ts := if dzp1IsReal then dzp2.Ts else dzp1.Ts;
+    result.method := if dzp1IsReal then dzp2.method else dzp1.method;
+
+    if dzp1 == DiscreteZerosAndPoles(0) then
+      result := DiscreteZerosAndPoles(0);
+    else
+      result.n1 := cat(
+        1,
+        dzp1.n1,
+        dzp2.d1);
+      result.n2 := cat(
+        1,
+        dzp1.n2,
+        dzp2.d2);
+      result.d1 := cat(
+        1,
+        dzp1.d1,
+        dzp2.n1);
+      result.d2 := cat(
+        1,
+        dzp1.d2,
+        dzp2.n2);
+      result.k := dzp1.k/dzp2.k;
+    end if;
+  end '/';
 
   encapsulated operator function '^'
     "Integer power of DiscreteZerosAndPoles (dzp^k)"
