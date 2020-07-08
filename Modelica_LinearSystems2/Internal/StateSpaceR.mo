@@ -2,8 +2,6 @@ within Modelica_LinearSystems2.Internal;
 operator record StateSpaceR
   "Continuous state space description of a linear, time invariant differential equation system (data + operations)"
 
-  extends Modelica.Icons.Record;
-
   Real A[:,:]   annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
   Real B[size(A, 1),:]  annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
   Real C[:,size(A, 1)]  annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));

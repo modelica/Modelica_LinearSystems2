@@ -15,7 +15,6 @@ record StateSpace2
 
   encapsulated operator 'constructor'
     "Default constructors for a StateSpace record"
-    extends Modelica.Icons.Package;
     import Modelica;
     import Modelica_LinearSystems2;
 
@@ -150,7 +149,6 @@ This package contains the default constructors for StateSpace record.
 
   encapsulated operator '-'
     "Contains operators for subtraction of state space systems"
-    extends Modelica.Icons.Package;
     import Modelica;
 
     function subtract
