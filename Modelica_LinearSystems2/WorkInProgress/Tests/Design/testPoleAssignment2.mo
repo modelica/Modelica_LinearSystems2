@@ -26,7 +26,7 @@ protected
   Integer nmk[2]=Modelica.Utilities.Streams.readMatrixSize(dataFile, "K") "Read dimensions of K";
   Real A[:,:]=Modelica.Utilities.Streams.readRealMatrix(dataFile, "A", nm[1], nm[1]) "Read system matrix A";
   Real B[:,:]=Modelica.Utilities.Streams.readRealMatrix(dataFile, "B", nm[1], nm[2]) "Read system matrix B";
-  Complex j=Modelica_LinearSystems2.Math.Complex.j();
+  Complex j = Modelica.ComplexMath.j;
   Real assignedPolesR[1,:]=Modelica.Utilities.Streams.readRealMatrix(dataFile, "assignedPoles", 1, nm[1])
     "Read real part of assigned poles";
   Real assignedPolesI[1,:]=Modelica.Utilities.Streams.readRealMatrix(dataFile, "assignedPolesIm", 1, nm[1])

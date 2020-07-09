@@ -829,7 +829,7 @@ ss;
 
     protected
       StateSpace ssBalanced = StateSpace.Transformation.toBalancedForm(ss);
-      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex j=Modelica.ComplexMath.j;
       Eigenvalue ev[size(ss.A, 1)];
       Integer nx=size(ss.A, 1);
       Integer window=0;
@@ -3335,7 +3335,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
       Boolean issiso=StateSpace.Internal.isSISO(ss);
       TransferFunction tf=if issiso then
           StateSpace.Conversion.toTransferFunction(ss) else TransferFunction(1);
-      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex j=Modelica.ComplexMath.j;
       Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
       Real abs_den=Complex.'abs'(den);
     algorithm
@@ -4304,7 +4304,7 @@ der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
 
     protected
       StateSpace ssBalanced = StateSpace.Transformation.toBalancedForm(ss);
-      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex j=Modelica.ComplexMath.j;
       Eigenvalue ev[size(ss.A, 1)];
       Integer nx=size(ss.A, 1);
       Integer window=0;
@@ -10168,22 +10168,10 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       import Modelica_LinearSystems2.Internal;
 
       input StateSpace ss=Modelica_LinearSystems2.StateSpace(
-              A=fill(
-                0,
-                0,
-                0),
-              B=fill(
-                0,
-                0,
-                0),
-              C=fill(
-                0,
-                0,
-                0),
-              D=fill(
-                0,
-                0,
-                0)) "State space system";
+              A=fill(0, 0, 0),
+              B=fill(0, 0, 0),
+              C=fill(0, 0, 0),
+              D=fill(0, 0, 0)) "State space system";
       input Eigenvalue evin[:]
         "Eigenvalues or a pairs of conjugated complex pair";
       output Eigenvalue ev[size(ss.A, 1)];
@@ -10212,7 +10200,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       Integer indexMin;
       Real indexVector[:];
       Integer vv[:];
-      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex j=Modelica.ComplexMath.j;
 
     algorithm
       for i in 1:nx loop
@@ -11246,7 +11234,7 @@ stabilizability the <b>H</b>22 has to be stable.
       Real dPoles[:, 2] "controllable poles";
       Real ndPoles[:, 2] "uncontrollable poles";
       Real poles[size(ss.A, 1), 2] "controllable and uncontrollable poles";
-      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex j=Modelica.ComplexMath.j;
 
     algorithm
       (dPoles,ndPoles,poles) := StateSpace.Internal.controllablePoles(sst);
@@ -11448,7 +11436,7 @@ stabilizability the <b>H</b>22 has to be stable.
       Real cPoles[:, 2] "controllable poles";
       Real ncPoles[:, 2] "uncontrollable poles";
       Real poles[size(ss.A, 1), 2] "controllable and uncontrollable poles";
-      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex j=Modelica.ComplexMath.j;
 
     algorithm
       (cPoles,ncPoles,poles) := StateSpace.Internal.controllablePoles(ss);

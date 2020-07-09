@@ -33,7 +33,7 @@ protected
 
   Integer info;
   Integer evSize;
-  Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  Complex j = Modelica.ComplexMath.j;
 
 public
   output Real X[size(A, 1),size(A, 2)]

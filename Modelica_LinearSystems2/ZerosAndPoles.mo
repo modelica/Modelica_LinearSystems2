@@ -1218,7 +1218,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       input Real den_min(min=0)=0 "|denominator(p)| is limited by den_min";
       output Complex y "= zp(p)";
     protected
-      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex j = Modelica.ComplexMath.j;
       Complex num;
       Complex den;
       Real abs_den;
@@ -1280,7 +1280,7 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
 
 <h4>Example</h4>
 <blockquote><pre>
-  Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  Complex j = Modelica.ComplexMath.j;
   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
 
@@ -1344,7 +1344,7 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
       Complex den_zeros2[:]=fill(Complex(0, 0), integer((n_den - np_real)/2));
       Integer n;
       Integer jj;
-      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex j = Modelica.ComplexMath.j;
 
     algorithm
       (num_zeros1,num_zeros2) := ZerosAndPoles.Internal.roots(
@@ -7029,7 +7029,7 @@ function. The solver function is a direct mapping of the Algol 60 procedure
       Real b;
       Integer j1;
       Integer j2;
-      Complex j = Modelica_LinearSystems2.Math.Complex.j();
+      Complex j = Modelica.ComplexMath.j;
 
     algorithm
       assert(np1 <= n_real, "Size of poly1 = " + String(np1) + " > n_real " +

@@ -11,7 +11,7 @@ encapsulated function analysisDcGain "Compute steady state gain"
 
   output Boolean ok;
 protected
-  Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  Complex j = Modelica.ComplexMath.j;
   Complex numeratorZeros1[1]={-1+0*j};
   Complex denominatorZeros1[3]={1+0*j,2+3*j,2-3*j};
   Complex numeratorZeros3[4]={-1+j,-1-j,1+0*j,1+0*j};
@@ -23,8 +23,9 @@ protected
   ZerosAndPoles zp2=ZerosAndPoles(
     z=numeratorZeros3,
     p=denominatorZeros3);
-  ZerosAndPoles zp3=ZerosAndPoles.Internal.baseFilter(Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Bessel,
-                              order=5);
+  ZerosAndPoles zp3=ZerosAndPoles.Internal.baseFilter(
+    Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Bessel,
+    order=5);
   Real k;
   Boolean finite;
 algorithm

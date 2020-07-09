@@ -21,7 +21,7 @@ function designCraneController
   output Real M_lq[:,:] "pre filter LQ controller";
   output Real M_pa[:,:] "pre filter pole assignment controller";
 protected
-  input Complex j=Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j = Modelica.ComplexMath.j;
 
 protected
   Real Q[:,:];

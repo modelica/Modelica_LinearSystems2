@@ -857,7 +857,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       output Complex result "= tf(s)";
 
     protected
-      Complex j = Modelica_LinearSystems2.Math.Complex.j();
+      Complex j = Modelica.ComplexMath.j;
       Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
       Real abs_den=Complex.'abs'(den);
     algorithm
@@ -877,11 +877,11 @@ The transfer function G(s)=N(s)/D(s) is evaluated by calculating the numerator p
 
 <h4>Example</h4>
 <blockquote><pre>
-   Complex j = Modelica_LinearSystems2.Math.Complex.j();
-   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
-   Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
+  Complex j = Modelica.ComplexMath.j;
+  TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
+  Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
 
-   Complex result;
+  Complex result;
 
 <b>algorithm</b>
   result := Modelica_LinearSystems2.TransferFunction.Analysis.evaluate(tf, j+1);
