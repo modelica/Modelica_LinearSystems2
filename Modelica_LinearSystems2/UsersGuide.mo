@@ -622,17 +622,50 @@ This library is based on the following references:
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
-<p>This version requires the <b>Modelica 4.0.0</b> Library.
-It is <b>backward compatible</b> to the previous version 2.4.0.</p>
+<p>
+This version requires the <b>Modelica 4.0.0</b> Library.
+It is <b>backward compatible</b> to the previous version 2.4.0.
+</p>
 
 <h4>
-Improvements in this version:
+Improvements in this version
 </h4>
 
 <ul>
 <li> Utilize ModelicaIO functions for matrix I/O, see issue
      <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
      Concerning functions are marked obsolete.</li>
+</ul>
+
+<h4>
+Obsolete classes
+</h4>
+<p>
+The following classes were marked obsolete and will be removed from
+the Library in the future.
+</p>
+
+<ul>
+<li> Modelica_LinearSystems2.Math.Matrices.cholesky</li>
+<li> Modelica_LinearSystems2.Math.Matrices.conditionNumber</li>
+<li> Modelica_LinearSystems2.Math.Matrices.det</li>
+<li> Modelica_LinearSystems2.Math.Matrices.fliplr</li>
+<li> Modelica_LinearSystems2.Math.Matrices.flipud</li>
+<li> Modelica_LinearSystems2.Math.Matrices.hessenberg</li>
+<li> Modelica_LinearSystems2.Math.Matrices.leastSquares2</li>
+<li> Modelica_LinearSystems2.Math.Matrices.LU</li>
+<li> Modelica_LinearSystems2.Math.Matrices.LU_solve</li>
+<li> Modelica_LinearSystems2.Math.Matrices.LU_solve2</li>
+<li> Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg</li>
+<li> Modelica_LinearSystems2.Math.Matrices.norm</li>
+<li> Modelica_LinearSystems2.Math.Matrices.nullspace</li>
+<li> Modelica_LinearSystems2.Math.Matrices.rsf2</li>
+<li> Modelica_LinearSystems2.Math.Matrices.solve</li>
+<li> Modelica_LinearSystems2.Math.Matrices.solve2</li>
+<li> Modelica_LinearSystems2.Math.Matrices.trace</li>
+<li> Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain</li>
+<li> Modelica_LinearSystems2.Math.Vectors.find</li>
+<li> Modelica_LinearSystems2.Math.Vectors.length</li>
 </ul>
 </html>"));
     end Version_2_4_1;
