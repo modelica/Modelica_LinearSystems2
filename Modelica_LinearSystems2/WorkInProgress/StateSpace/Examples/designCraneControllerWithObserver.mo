@@ -19,7 +19,7 @@ function designCraneControllerWithObserver
     "file name for results";
 
 protected
- input Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j = Modelica.ComplexMath.j;
 public
   output Real K_ob[:,:] "feedback matrix pole assignment controller";
   output Real K_pa[:,:] "feedback matrix pole assignment controller";

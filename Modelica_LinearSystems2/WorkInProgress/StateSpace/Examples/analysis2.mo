@@ -52,12 +52,8 @@ protected
   Real eigvec[4,4] "eigen values of the system";
   Real eigvecRe[4,4]=fill(0, 4, 4) "eigen values of the system";
   Real eigvecIm[4,4]=fill(0, 4, 4) "eigen values of the system";
-  Complex eigval[4]=fill(Complex(0), 4)
-  annotation (Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is
-to design pole assignment controllers for state space systems with multiple input.
-</html>"));
-  Complex j= Modelica_LinearSystems2.Math.Complex.j();
+  Complex eigval[4]=fill(Complex(0), 4);
+  Complex j = Modelica.ComplexMath.j;
   Complex Tp[2,2]=sqrt(0.5)*[1+0*j, -j; 1+0*j, j];
   Integer i;
 
@@ -116,7 +112,9 @@ algorithm
         heading="Initial response modal states"),subPlots=false);
 
   ok := true;
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    __Dymola_interactive=true,
+    Documentation(info="<html>
 This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</b> which is
 to check whether a system is controllable or not.
 </html>"));

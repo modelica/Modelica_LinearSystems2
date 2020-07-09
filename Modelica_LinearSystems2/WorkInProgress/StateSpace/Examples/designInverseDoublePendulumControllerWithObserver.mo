@@ -12,22 +12,22 @@ function designInverseDoublePendulumControllerWithObserver
     "name of the model to linearize";
 
 //input Complex pa[6]={-1+0*j, -1+0*j, -6-0.2*j,-6+0.2*j,-6-0.2*j,-6+0.2*j}     "assigned poles";
-input Complex pa[6]={Complex(-1,0), Complex(-1,0), Complex(-12,-0.2),Complex(-12,0.2),Complex(-15,-0),Complex(-15,0)}
+  input Complex pa[6]={Complex(-1,0), Complex(-1,0), Complex(-12,-0.2),Complex(-12,0.2),Complex(-15,-0),Complex(-15,0)}
     "assigned poles";
   input Complex pob[6]=cat(1,fill(-15+0*j,4),fill(-20+0*j,2))
     "assigned observer poles";
 
- input String fileName=DataDir + "inverseDoublePendulumControllerO.mat"
+  input String fileName=DataDir + "inverseDoublePendulumControllerO.mat"
     "file name for results";
 
   input Boolean makeAnalysis=false;
 
- output Real K_pa[:,:] "feedback matrix pole assignment controller";
- output Real M_pa[:,:] "pre filter LQ controller";
- output Real K_ob[:,:] "feedback matrix pole assignment controller";
+  output Real K_pa[:,:] "feedback matrix pole assignment controller";
+  output Real M_pa[:,:] "pre filter LQ controller";
+  output Real K_ob[:,:] "feedback matrix pole assignment controller";
 
 protected
- input Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  Complex j = Modelica.ComplexMath.j;
 protected
  Real Q[:,:];
  Real R[:,:];
