@@ -858,7 +858,7 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
       output Complex result "= tf(s)";
 
     protected
-      Complex j = ComplexMath.j;
+      Complex j = Modelica.ComplexMath.j;
       Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
       Real abs_den=ComplexMath.abs(den);
     algorithm
