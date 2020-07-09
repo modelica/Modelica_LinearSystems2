@@ -55,7 +55,7 @@ algorithm
 
 <h4>Description</h4>
 <p>
-Function <b>rsf2</b> (real Schur form) calculates the real Schur form af
+Function <b>rsf2</b> (real Schur form) calculates the real Schur form of
 a real square matrix <b>A</b>, i.e.
 </p>
 <blockquote>
