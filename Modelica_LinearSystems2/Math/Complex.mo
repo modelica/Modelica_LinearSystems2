@@ -759,7 +759,9 @@ This package contains operators for subtraction of complex numbers.
     output Complex c "= sqrt(-1)";
   algorithm
     c := Complex(0,1);
-    annotation(Inline=true);
+    annotation (
+      obsolete = "Obsolete function - use constant Modelica.ComplexMath.j instead",
+      Inline=true);
   end j;
 
   encapsulated function 'abs' "Absolute value of complex number"
@@ -769,7 +771,9 @@ This package contains operators for subtraction of complex numbers.
     output Real result "= abs(c)";
   algorithm
     result := (c.re^2 + c.im^2)^0.5; //changed from sqrt
-    annotation(Inline=true);
+    annotation (
+      obsolete = "Obsolete function - use Modelica.ComplexMath.abs instead",
+      Inline=true);
   end 'abs';
 
   encapsulated function 'sqrt' "Square root of complex number"
@@ -781,7 +785,9 @@ This package contains operators for subtraction of complex numbers.
   algorithm
     c2 := Complex(sqrt(Complex.'abs'(c1))*Math.cos(Complex.arg(c1)/2), sqrt(
       Complex.'abs'(c1))*Math.sin(Complex.arg(c1)/2));
-    annotation(Inline=true);
+    annotation (
+      obsolete = "Obsolete function - use Modelica.ComplexMath.sqrt instead",
+      Inline=true);
   end 'sqrt';
 
 encapsulated function 'max' "Return maximum element of complex vector"
@@ -820,7 +826,9 @@ end 'max';
     output Complex c2 "= exp(c1)";
   algorithm
      c2 := Complex(Math.exp(c1.re)*Math.cos(c1.im), Math.exp(c1.re)*Math.sin(c1.im));
-    annotation(Inline=true);
+    annotation (
+      obsolete = "Obsolete function - use Modelica.ComplexMath.exp instead",
+      Inline=true);
   end exp;
 
   encapsulated function log "Logarithm of complex number"
@@ -832,7 +840,9 @@ end 'max';
     output Complex c2 "= log(c1)";
   algorithm
     c2 := Complex(Modelica.Math.log(Complex.'abs'(c1)), Complex.arg(c1));
-    annotation(Inline=true);
+    annotation (
+      obsolete = "Obsolete function - use Modelica.ComplexMath.log instead",
+      Inline=true);
   end log;
 
   encapsulated function sin "Sine of complex number"
@@ -846,7 +856,9 @@ end 'max';
      c2 := (Complex.exp(Complex(-c1.im, +c1.re)) - Complex.exp(Complex(+c1.im, -c1.re)))/
       Complex(0, 2);
 
-    annotation(Inline=true);
+    annotation (
+      obsolete = "Obsolete function - use Modelica.ComplexMath.sin instead",
+      Inline=true);
   end sin;
 
   encapsulated function cos "Cosine of complex number"
@@ -857,7 +869,9 @@ end 'max';
 
   algorithm
    c2 := (Complex.exp(Complex(-c1.im, +c1.re)) + Complex.exp(Complex(+c1.im, -c1.re)))/2;
-    annotation(Inline=true);
+    annotation (
+      obsolete = "Obsolete function - use Modelica.ComplexMath.cos instead",
+      Inline=true);
   end cos;
 
   encapsulated function arg "Phase angle of complex number"
@@ -875,7 +889,9 @@ end 'max';
         c.im,
         c.re,
         phi0);
-    annotation (Documentation(info="<html>
+    annotation (
+      obsolete = "Obsolete function - use Modelica.ComplexMath.arg instead",
+      Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
    Complex.<b>arg</b>(c);
@@ -904,7 +920,9 @@ phase angle phi of the Complex number c in the range
     output Complex c2 "= c1.re - j*c1.im";
   algorithm
     c2 := Complex(c1.re, -c1.im);
-    annotation(Inline=true);
+    annotation (
+      obsolete = "Obsolete function - use Modelica.ComplexMath.conj instead",
+      Inline=true);
   end conj;
 
   encapsulated function real "Real part of complex number"
@@ -914,7 +932,9 @@ phase angle phi of the Complex number c in the range
     output Real r "= c.re ";
   algorithm
     r := c.re;
-    annotation(Inline=true);
+    annotation (
+      obsolete = "Obsolete function - use Modelica.ComplexMath.real instead",
+      Inline=true);
   end real;
 
   encapsulated function imag "Imaginary part of complex number"
@@ -924,7 +944,9 @@ phase angle phi of the Complex number c in the range
     output Real r "= c.im ";
   algorithm
     r := c.im;
-    annotation(Inline=true);
+    annotation (
+      obsolete = "Obsolete function - use Modelica.ComplexMath.imag instead",
+      Inline=true);
   end imag;
 
   encapsulated function eigenValues

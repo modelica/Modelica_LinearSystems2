@@ -646,6 +646,17 @@ the Library in the future.
 </p>
 
 <ul>
+<li> Modelica_LinearSystems2.Math.Complex.j</li>
+<li> Modelica_LinearSystems2.Math.Complex.'abs'</li>
+<li> Modelica_LinearSystems2.Math.Complex.'sqrt'</li>
+<li> Modelica_LinearSystems2.Math.Complex.exp</li>
+<li> Modelica_LinearSystems2.Math.Complex.log</li>
+<li> Modelica_LinearSystems2.Math.Complex.sin</li>
+<li> Modelica_LinearSystems2.Math.Complex.cos</li>
+<li> Modelica_LinearSystems2.Math.Complex.arg</li>
+<li> Modelica_LinearSystems2.Math.Complex.conj</li>
+<li> Modelica_LinearSystems2.Math.Complex.real</li>
+<li> Modelica_LinearSystems2.Math.Complex.imag</li>
 <li> Modelica_LinearSystems2.Math.Matrices.cholesky</li>
 <li> Modelica_LinearSystems2.Math.Matrices.conditionNumber</li>
 <li> Modelica_LinearSystems2.Math.Matrices.det</li>
@@ -666,6 +677,8 @@ the Library in the future.
 <li> Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain</li>
 <li> Modelica_LinearSystems2.Math.Vectors.find</li>
 <li> Modelica_LinearSystems2.Math.Vectors.length</li>
+<li> Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</li>
+<li> Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</li>
 </ul>
 </html>"));
     end Version_2_4_1;
