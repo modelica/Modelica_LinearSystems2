@@ -1255,10 +1255,10 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
       input DiscreteStateSpace dss "Discrete state space system";
-      output Complex eigvalues[size(dss.A, 1)]=Complex.eigenValues(dss.A)
+      output Complex eigvalues[size(dss.A, 1)]=Modelica_LinearSystems2.Math.Complex.eigenValues(dss.A)
         "Eigenvalues of the system";
     algorithm
 
@@ -1797,9 +1797,9 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
       "Pole assignment design algorithm for multi input systems"
 
       import Modelica;
+      import Complex;
       //  import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Matrices;
@@ -1936,7 +1936,7 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
 
       // reorder gamma and A_rsf
       (gammaReordered,rpg) := Modelica_LinearSystems2.Internal.reorderZeros(gamma);
-      gammaReordered := Complex.Vectors.reverse(gammaReordered);
+      gammaReordered := Modelica_LinearSystems2.Math.Complex.Vectors.reverse(gammaReordered);
       nccg := div(size(gammaReordered, 1) - rpg, 2);
       ncc := min(nccA, nccg);
       rp := min(rpA, rpg);
@@ -2141,7 +2141,7 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
       end for;
 
       S := dss.A - dss.B*K;
-      po := Complex.eigenValues(S);
+      po := Modelica_LinearSystems2.Math.Complex.eigenValues(S);
 
       if calculateEigenvectors then
     //     X := fill(Complex(0), n, n);
@@ -2157,7 +2157,7 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
     //       end for;
     //     end for;
     //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X1");
-        X := Complex.eigenVectors(S);
+        X := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
     //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X2");
 
       end if;
@@ -2911,10 +2911,11 @@ This function plots the initial responses of a discrete state space system for t
       "Generate a discrete zeros-and-poles representation from a discrete SISO state space representation"
 
       import Modelica;
+      import Modelica.ComplexMath;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
@@ -2943,7 +2944,7 @@ This function plots the initial responses of a discrete state space system for t
       if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
           Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
-        poles := Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
+        poles := Modelica_LinearSystems2.Math.Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
         zeros := StateSpace.Internal.invariantZeros2(ssm);
         cpoles := fill(Complex(0),size(poles,1));
         czeros := fill(Complex(0),size(zeros,1));
@@ -2961,16 +2962,16 @@ This function plots the initial responses of a discrete state space system for t
             Ts=dss.Ts, method=dss.method);
     // set frequency to a complex value which is whether pole nor zero
         for i in 1:size(poles,1) loop
-          cpoles[i] := if Complex.'abs'(poles[i])>0 then Complex.log(poles[i])/dss.Ts else Complex(-100);
+          cpoles[i] := if ComplexMath.abs(poles[i])>0 then ComplexMath.log(poles[i])/dss.Ts else Complex(-100);
         end for;
         for i in 1:size(zeros,1) loop
-          czeros[i] := if Complex.'abs'(zeros[i])>0 then Complex.log(zeros[i])/dss.Ts else Complex(-100);
+          czeros[i] := if ComplexMath.abs(zeros[i])>0 then ComplexMath.log(zeros[i])/dss.Ts else Complex(-100);
         end for;
 
          v := sum(cat(1, czeros[:].re,  cpoles[:].re))/max(size(czeros,1)+size(cpoles,1),1) + 13/19;
     //     v := sum(cat(1, zeros[:].re,  poles[:].re))/max(size(zeros,1)+size(poles,1),1);
         frequency := Complex(v)*17/19;
-        cfrequency := Complex.exp(frequency*dss.Ts);
+        cfrequency := ComplexMath.exp(frequency*dss.Ts);
     //    cfrequency := frequency;
 
         Gq := DiscreteZerosAndPoles.Analysis.evaluate(dzp, cfrequency);
@@ -3068,7 +3069,6 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 
       import Modelica;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
@@ -3618,8 +3618,9 @@ ss.B2  = [0.000437113227802044;
     function timeResponseSamples
       "Estimate reasonable discretisation sample time and simulation time span for time response plot"
       import Modelica;
+      import Modelica.ComplexMath;
+      import Complex;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input Modelica_LinearSystems2.DiscreteStateSpace dss;
       output Real tSpan "Time span";
@@ -3632,7 +3633,7 @@ ss.B2  = [0.000437113227802044;
     algorithm
       eig := Modelica_LinearSystems2.DiscreteStateSpace.Analysis.eigenValues(dss);
       for i in 1:size(dss.A, 1) loop
-        eig[i] := if Complex.'abs'(eig[i])>1e-10 then Complex.log(eig[i])/dss.Ts else Complex(-100);
+        eig[i] := if ComplexMath.abs(eig[i])>1e-10 then ComplexMath.log(eig[i])/dss.Ts else Complex(-100);
       end for;
 
       //eig := Complex.log(eig)/dss.Ts;
@@ -3743,8 +3744,8 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
       "Algorithm to assign p (p = 1 or 2) eigenvalues"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Math.Vectors;
 
       input Real F[:,size(F, 1)] "system matrix of order p=1 or p=2";
@@ -3790,7 +3791,7 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
           "\nThe assigned pole pair given in function DiscreteStateSpace.Internal.assignOneOrTwoPoles() must be conjungated complex. However, the poles are\npole1 = "
            + String(gamma[1]) + "\npole2 = " + String(gamma[2]) +
           ". \nTry\npole1 = " + String(gamma[1]) + "\npole2 = " + String(
-          Complex.conj(gamma[1])) + "\ninstead");
+          Modelica.ComplexMath.conj(gamma[1])) + "\ninstead");
       end if;
 
       if not Modelica.Math.Matrices.isEqual(
@@ -3888,7 +3889,7 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
           Modelica.Utilities.Streams.print("\n A subsystem (F, G) in DiscreteStateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
         That is, "   + String(F[1, 1]) + " remains and " + String(gamma[1].re) + " cannot be realized");
         else
-          system_ev := Complex.eigenValues(F);
+          system_ev := Modelica_LinearSystems2.Math.Complex.eigenValues(F);
           Modelica.Utilities.Streams.print("\n A subsystem (F, G) in DiscreteStateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
         That is, "   + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then " + " else
                   " - ") + String(system_ev[1].im) + "j and " + String(system_ev[2].re)
