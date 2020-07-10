@@ -4,7 +4,6 @@ function frequencyRangeZeros
   import Modelica;
   import Modelica.Math;
   import Modelica.Units.SI;
-  import Modelica_LinearSystems2.Math.Complex;
 
   input Complex z[:] "Vector of zeros";
   input SI.Angle phi_min(min=10*Modelica.Constants.eps)=

@@ -38,14 +38,14 @@ operator record TransferFunction
     encapsulated function fromZerosAndPoles
       "Generate a TransferFunction data record from a set of zeros and poles"
 
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Complex;
 
-      input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex z[:]=fill(Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
-      input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex p[:]=fill(Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
       input String uName="" "input name";
@@ -846,8 +846,9 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       "Evaluate a transfer function for a given (Complex) value of s"
 
       import Modelica;
+      import Modelica.ComplexMath;
+      import Complex;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
 
@@ -857,9 +858,9 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       output Complex result "= tf(s)";
 
     protected
-      Complex j = Modelica.ComplexMath.j;
+      Complex j = ComplexMath.j;
       Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
-      Real abs_den=Complex.'abs'(den);
+      Real abs_den=ComplexMath.abs(den);
     algorithm
       den := if abs_den >= den_min then den else -abs_den+0*j;
       result := Polynomial.evaluateComplex(Polynomial(tf.n), s)/den;
@@ -898,7 +899,7 @@ The transfer function G(s)=N(s)/D(s) is evaluated by calculating the numerator p
     encapsulated function zerosAndPoles
       "Calculate zeros and poles of a transfer function"
       import Modelica;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
 
@@ -968,10 +969,10 @@ public
       "Calculate the eigenvalues of a linear transfer function system and write them in a complex vector"
     //encapsulated function eigenValues
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input TransferFunction tf "transfer function of a system";
       output Complex eigval[:] "eigen values of the system";
@@ -1014,10 +1015,10 @@ Calculate the eigenvalues of the corresponding state space representation of a t
     encapsulated function eigenVectors
       "Calculate the right eigenvectors of the state space system corresponding to a transfer function and write them columnwise in a matrix. Optionally, the eigenvalues are computed"
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica.Math.Matrices.LAPACK;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input TransferFunction tf "transfer function of a system";
       input Boolean onlyEigenvectors=true;
@@ -1070,9 +1071,9 @@ i.e. v1 = |                 |,   v2 = |                   |
       "Compute invariant zeros of linear transfer function"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
 
       input TransferFunction tf "transfer function of a system";
@@ -1612,10 +1613,11 @@ and results in
     encapsulated function bode "Plot transfer function as bode plot"
       import Modelica;
       import Modelica.Utilities.Strings;
+      import Modelica.ComplexMath;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
       import Modelica.Units.SI;
 
@@ -1679,8 +1681,8 @@ and results in
               tf,
               Complex(0, w[i]),
               1e-10);
-        A[i] := Complex.'abs'(c);
-        phi_old := Complex.arg(c, phi_old);
+        A[i] := ComplexMath.abs(c);
+        phi_old := ComplexMath.arg(c, phi_old);
         phi[i] := Modelica.Units.Conversions.to_deg(phi_old);
 
         // Convert to other units, if required
@@ -2182,7 +2184,7 @@ This function plots the initial response, i.e. the zeros input response of a tra
       import Modelica;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
       input TransferFunction tf "Transfer function of a system";
       output ZerosAndPoles zp(

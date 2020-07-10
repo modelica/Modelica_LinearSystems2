@@ -3320,8 +3320,9 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
       "Evaluate the corresponding transfer function at a given (complex) value of s"
 
       import Modelica;
+      import Modelica.ComplexMath;
+      import Complex;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.StateSpace;
@@ -3335,9 +3336,9 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
       Boolean issiso=StateSpace.Internal.isSISO(ss);
       TransferFunction tf=if issiso then
           StateSpace.Conversion.toTransferFunction(ss) else TransferFunction(1);
-      Complex j=Modelica.ComplexMath.j;
+      Complex j=ComplexMath.j;
       Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
-      Real abs_den=Complex.'abs'(den);
+      Real abs_den=ComplexMath.abs(den);
     algorithm
       assert(issiso, "System must be SISO but is " + String(size(ss.B, 2)) +
         "-by-" + String(size(ss.C, 1)) + " system");
@@ -3480,14 +3481,14 @@ This function calculates the zeros, poles and gain of the corresponding transfer
     encapsulated function eigenValues
       "Calculate the eigenvalues of a linear state space system and write them in a complex vector"
 
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
-      input StateSpace ss "state space system";
-      output Complex eigvalues[size(ss.A, 1)]=Complex.eigenValues(ss.A)
-        "eigen values of the system";
+      input StateSpace ss "State space system";
+      output Complex eigvalues[size(ss.A, 1)]=
+        Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A)
+        "Eigen values of the system";
     algorithm
 
       annotation (Documentation(info="<html>
@@ -3523,7 +3524,7 @@ Calculate the eigenvalues of a state space system, i.e. the eigenvalues of the s
       import Modelica;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica.Math.Matrices.LAPACK;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
       input StateSpace ss "state space system";
       input Boolean onlyEigenvectors=true;
@@ -7399,9 +7400,9 @@ Finally, the output sslqg represents the estimated system with <b>y</b>(t), the 
     encapsulated function polesAndZeros
       "Plot poles (i.e. eigenvalues) and/or invariant zeros of a state space system"
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
 
       input StateSpace ss "Linear system in state space form"
@@ -9367,10 +9368,9 @@ which is based on the <code>balance</code> function from EISPACK.
       "Calculate a minimal controllable and observable block Hessenberg realization of a given SISO state-space representation "
 
       // test of SISO has to be added
+      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica;
 
       input StateSpace ss "State space system";
       input Real tol=1e-10
@@ -9789,8 +9789,8 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       "Algorithm to assign p (p = 1 or 2) eigenvalues"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Math.Vectors;
 
       input Real F[:, size(F, 1)] "System matrix of order p=1 or p=2";
@@ -9838,7 +9838,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
           "\nThe assigned pole pair given in function StateSpace.Internal.assignOneOrTwoPoles() must be conjungated complex. However, the poles are\npole1 = "
            + String(gamma[1]) + "\npole2 = " + String(gamma[2]) +
           ". \nTry\npole1 = " + String(gamma[1]) + "\npole2 = " + String(
-          Complex.conj(gamma[1])) + "\ninstead");
+          Modelica.ComplexMath.conj(gamma[1])) + "\ninstead");
       end if;
 
       if not Modelica.Math.Matrices.isEqual(
@@ -9947,7 +9947,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       That is, " + String(F[1, 1]) + " remains and " + String(gamma[1].re) +
             " cannot be realized");
         else
-          system_ev := Complex.eigenValues(F);
+          system_ev := Modelica_LinearSystems2.Math.Complex.eigenValues(F);
           Modelica.Utilities.Streams.print("\n A subsystem (F, G) in StateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
       That is, " + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then
             " + " else " - ") + String(system_ev[1].im) + "j and " + String(
@@ -9968,8 +9968,8 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       "Algorithm to assign p (p = 1 or 2) eigenvalues"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Math.Vectors;
 
       input Real F[:, size(F, 1)] "System matrix of order p=1 or p=2";
@@ -10015,7 +10015,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
           "\nThe assigned pole pair given in function StateSpace.Internal.assignOneOrTwoPoles() must be conjungated complex. However, the poles are\npole1 = "
            + String(gamma[1]) + "\npole2 = " + String(gamma[2]) +
           ". \nTry\npole1 = " + String(gamma[1]) + "\npole2 = " + String(
-          Complex.conj(gamma[1])) + "\ninstead");
+          Modelica.ComplexMath.conj(gamma[1])) + "\ninstead");
       end if;
 
       if not Modelica.Math.Matrices.isEqual(
@@ -10163,10 +10163,11 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
     function characterizeEigenvalue
       "Check stability, stabilizability, controllability, observability nad detectability of the single poles"
 
+      import Modelica.ComplexMath;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Internal.Eigenvalue;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Internal;
 
       input StateSpace ss=Modelica_LinearSystems2.StateSpace(
@@ -10237,7 +10238,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
         absVector := fill(1e50, nx);
         for ii in 1:nx loop
           if not odummy[ii].imag then
-            absVector[ii] := Complex.'abs'(ev[i].ev - odummy[ii].ev);
+            absVector[ii] := Modelica.ComplexMath.abs(ev[i].ev - odummy[ii].ev);
           end if;
         end for;
         (absVector,indices) := Modelica.Math.Vectors.sort(absVector);
@@ -10250,7 +10251,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
         absVector := fill(1e50, nx);
         for ii in 1:nx loop
           if not cdummy[ii].imag then
-            absVector[ii] := Complex.'abs'(ev[i].ev - cdummy[ii].ev);
+            absVector[ii] := Modelica.ComplexMath.abs(ev[i].ev - cdummy[ii].ev);
           end if;
         end for;
         (absVector,indices) := Modelica.Math.Vectors.sort(absVector);
@@ -10276,7 +10277,6 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Math.Matrices;
       import Modelica_LinearSystems2.Math.Vectors;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input StateSpace ss "State space system";
 
@@ -10366,8 +10366,8 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
     encapsulated function complexPoles
       "Generate a zeros-and-poles representation from state space representation"
 
+      import Complex;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.StateSpace;
 
@@ -10450,8 +10450,8 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
     encapsulated function complexZeros
       "Calculate the zeros of the related transfer function"
 
+      import Complex;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
 
       input StateSpace ss "State space system";
@@ -10574,9 +10574,9 @@ to separate the uncontrollable poles from the controllable poles.
     function damping "Frequencies and damping of state space system"
       extends Modelica.Icons.Function;
 
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input StateSpace ss "State space system";
       output Complex eigenvalues[size(ss.A, 1)];
@@ -10590,7 +10590,8 @@ to separate the uncontrollable poles from the controllable poles.
     algorithm
       eigenvalues := StateSpace.Analysis.eigenValues(ss);
       for i in 1:n loop
-        (frequency[i],damp[i]) := Complex.frequency(eigenvalues[i]);
+        (frequency[i],damp[i]) :=
+          Modelica_LinearSystems2.Math.Complex.frequency(eigenvalues[i]);
         frequency[i] := 2*pi*frequency[i];
       end for;
 
@@ -10600,7 +10601,6 @@ to separate the uncontrollable poles from the controllable poles.
       "Calculate the controllable and observable part of a state space system"
 
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2;
 
       input StateSpace ss;
@@ -10829,8 +10829,8 @@ of the complex zero i.
     encapsulated function invariantZeros2
       "Compute invariant zeros of linear SISO state space system with a generalized system matrix [A, B, C, D] which is of upper Hessenberg form"
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Math.Matrices;
       import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
@@ -10929,8 +10929,10 @@ have to be treated like p*q SISO systems where p is the number of putputs and q 
     encapsulated function invariantZerosHessenberg
       "Fast version to calculate the system zeros of a SISO system with D=[0] and A has upper Hessenberg form, delivered by StateSpace.reduceSystem"
       import Modelica;
+      import Modelica.ComplexMath;
+      import Complex;
+      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
       input StateSpace ss "Linear system in state space form";
@@ -10973,10 +10975,10 @@ This condition is however not fulfilled because the number of outputs is ny = "
           Ah[:, k - 1] := ss.A[:, k - 1] - ss.A[k, k - 1]/ss.B[k, 1]*ss.B[:, 1];
 
           //    Zeros := Complex.eigenValues(Ah[1:k - 1, 1:k - 1]);
-          Zeros := Complex.Internal.eigenValues_dhseqr(Ah[1:k - 1, 1:k - 1]);
+          Zeros := Modelica_LinearSystems2.Math.Complex.Internal.eigenValues_dhseqr(Ah[1:k - 1, 1:k - 1]);
 
           for i in 1:k - 1 loop
-            if Complex.'abs'(Zeros[i]) < Modelica.Math.Matrices.norm(Ah[1:k - 1,
+            if ComplexMath.abs(Zeros[i]) < Modelica.Math.Matrices.norm(Ah[1:k - 1,
                 1:k - 1], p=1)*1e-12 then
               Zeros[i] := Complex(0);
             end if;
@@ -11149,9 +11151,9 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
       "To check whether a SISO system is detectable"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input StateSpace ss "State space system";
       output Boolean detectable;
@@ -11172,7 +11174,7 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
 
       detectable := true;
       if size(ss.A, 1) > ssm.r then
-        evd := Complex.eigenValues(ssm.A[ssm.r + 1:size(ss.A, 1), ssm.r + 1:
+        evd := Modelica_LinearSystems2.Math.Complex.eigenValues(ssm.A[ssm.r + 1:size(ss.A, 1), ssm.r + 1:
           size(ss.A, 1)]);
         for i1 in 1:size(evd, 1) loop
           detectable := detectable and evd[i1].re < 0;
@@ -11221,9 +11223,9 @@ stabilizability the <b>H</b>22 has to be stable.
       "Check whether a MIMO system is detectable"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input StateSpace ss "State space system";
 
@@ -11359,9 +11361,9 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
       "To check whether a SISO system is stabliziable"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input StateSpace ss "State space system";
       output Boolean stabilizable;
@@ -11382,7 +11384,7 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
       stabilizable := true;
 
       if size(ss.A, 1) > ssm.r then
-        evd := Complex.eigenValues(ssm.A[ssm.r + 1:size(ss.A, 1), ssm.r + 1:
+        evd := Modelica_LinearSystems2.Math.Complex.eigenValues(ssm.A[ssm.r + 1:size(ss.A, 1), ssm.r + 1:
           size(ss.A, 1)]);
         for i1 in 1:size(evd, 1) loop
           stabilizable := stabilizable and evd[i1].re < 0;
@@ -11425,9 +11427,9 @@ stabilizability the <b>H</b>22 has to be stable.
       "To check whether a MIMO system is stabliziable"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input StateSpace ss "State space system";
 
@@ -11483,8 +11485,8 @@ The uncontrollable poles are checked to to stable.
       "Calculate the number poles and of zeros of the related transfer function"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Math.Matrices.LAPACK;
@@ -11609,10 +11611,10 @@ The uncontrollable poles are checked to to stable.
       "Generate poles and zeros from state space representation"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Internal.PolesAndZeros;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Internal;
 
       input StateSpace ss "State space system";
@@ -11626,7 +11628,7 @@ The uncontrollable poles are checked to to stable.
         redeclare Real z_im[size(StateSpace.Analysis.invariantZeros(ssm), 1)]);
 
     protected
-      Complex poles[:]=Complex.eigenValues(ssm.A);
+      Complex poles[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ssm.A);
       Complex zeros[:]=StateSpace.Analysis.invariantZeros(ssm);
 
     algorithm
@@ -12057,7 +12059,6 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Math.Vectors;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input StateSpace ss "State space system";
 
@@ -12516,7 +12517,6 @@ k = ---------- * ----------------------
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Math.Matrices;
       import Modelica_LinearSystems2.Math.Vectors;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input StateSpace ss "State space system";
       input Real tol=1e-10
@@ -12609,7 +12609,6 @@ k = ---------- * ----------------------
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Math.Matrices;
       import Modelica_LinearSystems2.Math.Vectors;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input StateSpace ss "State space system";
 
@@ -12790,9 +12789,9 @@ ss = StateSpace.Import.<b>fromModel</b>(modelName, T_linearize, fileName)
     encapsulated function polesAndZeros_Old
       "Plot poles (i.e. eigenvalues) and/or invariant zeros of a state space system (previous version of polesAndZeros that is kept, just in case)"
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
 
       input StateSpace ss "Linear system in state space form"
