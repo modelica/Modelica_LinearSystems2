@@ -50,22 +50,25 @@ operator record DiscreteTransferFunction
       "Generate a DiscreteStateSpace data record from a set of zeros and poles"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Complex;
 
-      input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex z[:]=fill(Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
-      input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex p[:]=fill(Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
       input Modelica.Units.SI.Time Ts "Sample time";
-      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=
+        Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal
+        "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
-      output DiscreteTransferFunction dtf(redeclare Real n[size(z, 1)+1], redeclare Real
-               d[                                                                          size(p, 1)+1])
+      output DiscreteTransferFunction dtf(
+        redeclare Real n[size(z, 1)+1],
+        redeclare Real d[size(p, 1)+1])
         "TransferFunction built by ZerosAndPoles object";
 
     protected
@@ -816,11 +819,12 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
     encapsulated function bode "Plot discrete transfer function as bode plot"
       import Modelica;
       import Modelica.Utilities.Strings;
+      import Modelica.ComplexMath;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
       import Modelica.Units.SI;
 
@@ -838,8 +842,8 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
         annotation(choices(checkBox=true));
       input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
 
-      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot: "
+      extends Internal.PartialPlotFunction(defaultDiagram=
+            Internal.DefaultDiagramBodePlot(heading="Bode plot: "
              + String(dtf)));
 
       input Boolean Hz=true
@@ -883,7 +887,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
       denZeros := fill(Complex(0),size(denZerosZ,1));
       for i in 1:size(denZerosZ,1) loop
-        denZeros[i] := Complex.log(denZerosZ[i])/dtf.Ts;
+        denZeros[i] := ComplexMath.log(denZerosZ[i])/dtf.Ts;
       end for;
 
       f := Internal.frequencyVector(
@@ -898,13 +902,13 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       phi_old := 0.0;
       for i in 1:nPoints loop
         w[i] := Modelica.Units.Conversions.from_Hz(f[i]);
-        z[i] := Complex.exp(Complex(0,w[i]*dtf.Ts));
+        z[i] := ComplexMath.exp(Complex(0,w[i]*dtf.Ts));
         c := TransferFunction.Analysis.evaluate(
               tf,
               z[i],
               1e-10);
-        A[i] := Complex.'abs'(c);
-        phi_old := Complex.arg(c, phi_old);
+        A[i] := ComplexMath.abs(c);
+        phi_old := ComplexMath.arg(c, phi_old);
         phi[i] := Modelica.Units.Conversions.to_deg(phi_old);
 
         // Convert to other units, if required
@@ -1178,11 +1182,11 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
     encapsulated function toDiscreteZerosAndPoles
       "Generate a DiscreteZerosAndPoles object from a DiscreteTransferFunction object"
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input DiscreteTransferFunction dtf "transfer function of a system";
       output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp(

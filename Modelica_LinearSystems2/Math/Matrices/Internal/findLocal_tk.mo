@@ -3,8 +3,9 @@ function findLocal_tk
   "Find a local minimizer tk to define the length of the step tk*Nk in carenls or darenls"
   extends Modelica.Icons.Function;
 
+  import Modelica.ComplexMath;
+  import Complex;
   import Modelica_LinearSystems2.Math.Polynomial;
-  import Modelica_LinearSystems2.Math.Complex;
 
   input Real Rk[:,size(Rk, 2)];
   input Real Vk[size(Rk, 1),size(Rk, 2)];
@@ -32,9 +33,9 @@ algorithm
       -2*alpha_k}));
     h := false;
     for i1 in 1:3 loop
-      if (abs(Complex.imag(p[i1])) < Modelica.Constants.eps) then
-        if (abs(Complex.real(p[i1]) - 1) <= 1) then
-          tk := Complex.real(p[i1]);
+      if (abs(ComplexMath.imag(p[i1])) < Modelica.Constants.eps) then
+        if (abs(ComplexMath.real(p[i1]) - 1) <= 1) then
+          tk := ComplexMath.real(p[i1]);
           h := true;
         end if;
       end if;

@@ -145,15 +145,15 @@ discrete zeros-and-poles transfer function is derived from DiscreteStateSpace by
       "Generate a DiscreteZerosAndPoles data record from a set of zeros and poles"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica.Utilities.Streams.print;
 
-      input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex z[:]=fill(Complex(0), 0)
           "Zeros (Complex vector of numerator zeros)";
-      input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex p[:]=fill(Complex(0), 0)
           "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
         input Modelica.Units.SI.Time Ts "Sample time";
@@ -325,7 +325,7 @@ dzp = 4 * -----------------
 is defined as
 </p>
 <blockquote><pre>
-  <b>import</b> Modelica_LinearSystems2.Math.Complex;
+  <b>import</b> Complex;
   <b>import</b> Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
   dzp = DiscreteZerosAndPoles(n1={0.1},n2=fill(0,0,2), d1={1,-0.1}, d2=fill(0,0,2), k=4);
@@ -345,9 +345,9 @@ which is equal to
 
     function subtract "Subtract two DiscreteZerosAndPoles (dzp1 - dzp2)"
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input DiscreteZerosAndPoles dzp1;
       input DiscreteZerosAndPoles dzp2;
@@ -518,9 +518,9 @@ which is equal to
     "Addition of to discrete transfer functions dzp1 + dzp2, i.e. parallel connection of two transfer functions (= inputs are the same, outputs of the two systems are added)"
 
     import Modelica;
+    import Complex;
     import Modelica_LinearSystems2.DiscreteZerosAndPoles;
     import Modelica_LinearSystems2.Math.Polynomial;
-    import Modelica_LinearSystems2.Math.Complex;
 
     input DiscreteZerosAndPoles dzp1;
     input DiscreteZerosAndPoles dzp2;
@@ -1292,10 +1292,10 @@ order polynomials of the DiscreteZeroAndPoles numerator.
     encapsulated function evaluate
       "Evaluate a DiscreteZerosAndPoles transfer function at a given value of q"
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles transfer function of a system";
@@ -1327,7 +1327,7 @@ order polynomials of the DiscreteZeroAndPoles numerator.
       end for;
 
       // Build value of transfer function
-      abs_den := Complex.'abs'(den);
+      abs_den := Modelica.ComplexMath.abs(den);
       den := if abs_den >= den_min then den else -abs_den+0*j;
       y := num/den;
       annotation (Documentation(info="<html>
@@ -1382,11 +1382,12 @@ numerator polynomial N(z) and the denominator polynomial D(q).
       "Plot discrete zeros a-and-poles transfer function as bode plot"
       import Modelica;
       import Modelica.Utilities.Strings;
+      import Modelica.ComplexMath;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.Utilities.Plot;
       import Modelica.Units.SI;
 
@@ -1445,7 +1446,7 @@ numerator polynomial N(z) and the denominator polynomial D(q).
       numZeros := fill(Complex(0),0);
       denZeros := fill(Complex(0),size(denZerosZ,1));
       for i in 1:size(denZerosZ,1) loop
-        denZeros[i] := Complex.log(denZerosZ[i])/dzp.Ts;
+        denZeros[i] := ComplexMath.log(denZerosZ[i])/dzp.Ts;
       end for;
 
       f := Internal.frequencyVector(
@@ -1460,13 +1461,13 @@ numerator polynomial N(z) and the denominator polynomial D(q).
       phi_old := 0.0;
       for i in 1:nPoints loop
         w[i] := Modelica.Units.Conversions.from_Hz(f[i]);
-        z[i] := Complex.exp(Complex(0,w[i]*dzp.Ts));
+        z[i] := ComplexMath.exp(Complex(0,w[i]*dzp.Ts));
         c := ZerosAndPoles.Analysis.evaluate(
               zp,
               z[i],
               1e-10);
-        A[i] := Complex.'abs'(c);
-        phi_old := Complex.arg(c, phi_old);
+        A[i] := ComplexMath.abs(c);
+        phi_old := ComplexMath.arg(c, phi_old);
         phi[i] := Modelica.Units.Conversions.to_deg(phi_old);
 
         // Convert to other units, if required
@@ -1979,12 +1980,12 @@ This function plots the initial response, i.e. the zeros input response of a zer
       "Generate a DiscreteTransferFunction object from a DiscreteZerosAndPoles object"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles transfer function of a system";
@@ -2045,7 +2046,6 @@ from a DiscreteZerosAndPoles record representated by first and second order nume
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Math.Vectors;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
@@ -2432,7 +2432,6 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica;
       import Modelica_LinearSystems2.DataDir;
 
@@ -2737,7 +2736,7 @@ int found=0;
     function fromRealAndImag
       "Generate a complex vector from a real part vector and imaginary part vector "
 
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
       input Real real[:];
       input Real imag[size(real, 1)];
@@ -2756,7 +2755,6 @@ int found=0;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica;
 
       input String fileName="pc.mat" "Name of the zeros and poles data file"
@@ -2824,10 +2822,10 @@ int found=0;
       "Generate a DiscreteZerosAndPoles data record by reading poles and zeros from a file (default file name is zp.mat)"
 
       import Modelica.Utilities.Streams.readRealMatrix;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
 
       input String fileName="dzp.mat" "Name of the zeros and poles data file"
         annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)", caption="state space system data file")));

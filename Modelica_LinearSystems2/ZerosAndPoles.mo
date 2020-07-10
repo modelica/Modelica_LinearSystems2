@@ -164,7 +164,7 @@ zp = 4 * -------------------------------------
 with j=sqrt(-1), is defined as
 </p>
 <blockquote><pre>
-  <b>import</b> Modelica_LinearSystems2.Math.Complex;
+  <b>import</b> Complex;
   <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
 
   zp = ZerosAndPoles(z = {Complex(-1,0)},
@@ -6517,7 +6517,7 @@ int found=0;
       import Modelica.Utilities.Streams.readRealMatrix;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
       input String fileName="zp.mat" "Name of the zeros and poles data file"
         annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",

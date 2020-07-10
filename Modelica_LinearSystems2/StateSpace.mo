@@ -6189,11 +6189,13 @@ represented by a StateSpace record.
       "Pole placement for single input systems using Ackermann's formula."
 
       import Modelica;
+      import Modelica.ComplexMath;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
 
       input StateSpace ss "State space system";
-      input Modelica_LinearSystems2.Math.Complex p[size(ss.A, 1)]
+      input Complex p[size(ss.A, 1)]
         "Vector of desired poles";
       output Real k[size(ss.A, 1)] "Feedback gain matrix";
 
@@ -6202,10 +6204,10 @@ represented by a StateSpace record.
       Modelica_LinearSystems2.Math.Polynomial poly;
       Real Y[size(ss.A, 1), size(ss.A, 2)];
       Real X[:, :];
-      Modelica_LinearSystems2.Math.Complex p_actual[size(p, 1)];
-      Modelica_LinearSystems2.Math.Complex p_sorted[size(p, 1)];
+      Complex p_actual[size(p, 1)];
+      Complex p_sorted[size(p, 1)];
       Real poleError;
-      Modelica_LinearSystems2.Math.Complex smaller;
+      Complex smaller;
     algorithm
       assert(size(ss.B, 2) == 1, "System must be SI but has " + String(size(ss.B,
         2)) + " inputs");
@@ -6226,8 +6228,8 @@ represented by a StateSpace record.
       p_sorted := p;
       for i1 in 1:size(p_sorted, 1) loop
         for i2 in (1 + i1):size(p_sorted, 1) loop
-          if Modelica_LinearSystems2.Math.Complex.'abs'(p_sorted[i1]) >
-              Modelica_LinearSystems2.Math.Complex.'abs'(p_sorted[i2]) then
+          if ComplexMath.abs(p_sorted[i1]) >
+              ComplexMath.abs(p_sorted[i2]) then
             smaller := p_sorted[i2];
             p_sorted[i2] := p_sorted[i1];
             p_sorted[i1] := smaller;
@@ -6240,8 +6242,8 @@ represented by a StateSpace record.
       // sort actual eigenvalues
       for i1 in 1:size(p_actual, 1) loop
         for i2 in (1 + i1):size(p_actual, 1) loop
-          if Modelica_LinearSystems2.Math.Complex.'abs'(p_actual[i1]) >
-              Modelica_LinearSystems2.Math.Complex.'abs'(p_actual[i2]) then
+          if ComplexMath.abs(p_actual[i1]) >
+              ComplexMath.abs(p_actual[i2]) then
             smaller := p_actual[i2];
             p_actual[i2] := p_actual[i1];
             p_actual[i1] := smaller;
@@ -6251,9 +6253,9 @@ represented by a StateSpace record.
 
       // check for poles that have an error of more than 10%
       for i in 1:size(p_sorted, 1) loop
-        if (Modelica_LinearSystems2.Math.Complex.'abs'(p_sorted[i]) <> 0) then
-          poleError := Modelica_LinearSystems2.Math.Complex.'abs'((p_sorted[i]
-             - p_actual[i]))/Modelica_LinearSystems2.Math.Complex.'abs'(
+        if (ComplexMath.abs(p_sorted[i]) <> 0) then
+          poleError := ComplexMath.abs((p_sorted[i]
+             - p_actual[i]))/ComplexMath.abs(
             p_sorted[i]);
 
           if poleError > 0.1 then
@@ -6285,9 +6287,8 @@ represented by a StateSpace record.
       "Pole assignment design algorithm for multi input systems"
 
       import Modelica;
-      //  import Modelica.Utilities.Streams.print;
+      import Complex;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Matrices;
@@ -6425,7 +6426,7 @@ represented by a StateSpace record.
       // reorder gamma and A_rsf
       (gammaReordered,rpg) := Modelica_LinearSystems2.Internal.reorderZeros(
         gamma);
-      gammaReordered := Complex.Vectors.reverse(gammaReordered);
+      gammaReordered := Modelica.ComplexMath.Vectors.reverse(gammaReordered);
       nccg := div(size(gammaReordered, 1) - rpg, 2);
       ncc := min(nccA, nccg);
       rp := min(rpA, rpg);
@@ -6650,7 +6651,7 @@ represented by a StateSpace record.
       end for;
 
       S := ss.A - ss.B*K;
-      po := Complex.eigenValues(S);
+      po := Modelica_LinearSystems2.Math.Complex.eigenValues(S);
 
       if calculateEigenvectors then
         //     X := fill(Complex(0), n, n);
@@ -6666,7 +6667,7 @@ represented by a StateSpace record.
         //       end for;
         //     end for;
         //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X1");
-        X := Complex.eigenVectors(S);
+        X := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
         //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X2");
 
       end if;
@@ -6789,7 +6790,6 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
     end assignPolesMI;
 
     function kalmanFilter "Design of a Kalman estimator matrix"
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.StateSpace;
 
       input StateSpace ss "Time-continuous system in state space form";
@@ -8660,7 +8660,6 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
       import Modelica.Utilities.Streams.print;
       import Modelica;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.StateSpace;
 

@@ -5,11 +5,11 @@ function conversionFromZerosAndPoles
 
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
 
 protected
   input ZerosAndPoles zp= ZerosAndPoles({2+0*j}, {1+0*j,2+3*j,2-3*j}, 4);
-  input Complex j = Complex.j();
+  input Complex j = Modelica.ComplexMath.j;
   StateSpace ss=StateSpace(zp);
 public
   output Boolean ok "Standard output";

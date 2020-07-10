@@ -77,7 +77,7 @@ Example:
 can be expressed as
 </p>
 <pre>
-   <b>import</b> Modelica_LinearSystems2.Math.Complex;
+   <b>import</b> Complex;
    <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
 
    j = Complex.j();
