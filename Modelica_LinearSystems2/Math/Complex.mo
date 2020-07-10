@@ -16,7 +16,7 @@ operator record Complex "Record defining a Complex number"
 
       output Boolean ok;
     protected
-      Complex j = Complex.j();
+      Complex j = Modelica.ComplexMath.j;
       Complex c1=2+3*j;
       Complex c2=3+4*j;
       Complex c3;
@@ -536,9 +536,10 @@ This package provides functions operating on vectors of complex numbers.
     import Modelica_LinearSystems2;
 
     function print "Print matrix"
-      import Modelica_LinearSystems2.StateSpace;
       import Modelica.Utilities.Strings;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Modelica.ComplexMath;
+      import Complex;
+      import Modelica_LinearSystems2.StateSpace;
 
       input Complex M[:,:];
       input Integer significantDigits=6
@@ -560,11 +561,11 @@ This package provides functions operating on vectors of complex numbers.
         for i in 1:r loop
           s := s + space;
           for j in 1:c loop
-            if Complex.'abs'(M[i, j]) >= 0 then
+            if ComplexMath.abs(M[i, j]) >= 0 then
               s := s + " ";
             end if;
             s := s + String(M[i, j], significantDigits=significantDigits) +
-              Strings.repeat(significantDigits + 8 - Strings.length(String(Complex.'abs'(M[i,j]))));
+              Strings.repeat(significantDigits + 8 - Strings.length(String(ComplexMath.abs(M[i,j]))));
 
           end for;
           s := s + "\n";
@@ -574,7 +575,8 @@ This package provides functions operating on vectors of complex numbers.
     end print;
 
     encapsulated function matMatMul "Multiply two complex matrices"
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
+      import Modelica_LinearSystems2;
 
       input Complex m1[:,:] "Complex matrix 1";
       input Complex m2[size(m1, 2),:] "Complex matrix 2";
@@ -593,7 +595,7 @@ This package provides functions operating on vectors of complex numbers.
 
      for l1 in 1:size(m1,1) loop
        for l2 in 1:size(m2,2) loop
-         m3[l1,l2] := Complex.Vectors.multiply(m1[l1,:],m2[:,l2]);
+         m3[l1,l2] := Modelica_LinearSystems2.Math.Complex.Vectors.multiply(m1[l1,:],m2[:,l2]);
        end for;
        end for;
 
@@ -601,9 +603,8 @@ This package provides functions operating on vectors of complex numbers.
 
     encapsulated function matVecMul
       "Multiply a complex matrices with a complex vector"
-      import Modelica_LinearSystems2.Math.Complex;
-    //  import Re = Modelica_LinearSystems2.Math.Complex.real;
-    //  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+      import Complex;
+      import Modelica_LinearSystems2;
 
       input Complex m[:,:] "Complex matrix";
       input Complex vi[size(m, 2)] "Complex vector";
@@ -627,7 +628,7 @@ This package provides functions operating on vectors of complex numbers.
     //    end for;  //l1
 
     for l1 in 1:size(m, 1) loop
-      vo[l1] := Complex.Vectors.multiply(m[l1,:],vi);
+      vo[l1] := Modelica_LinearSystems2.Math.Complex.Vectors.multiply(m[l1,:],vi);
     end for;
 
     end matVecMul;
@@ -1157,7 +1158,7 @@ inputs and the number of outputs must be identical.
       input Complex C[:,:];
       output Complex CT[size(C, 2),size(C, 1)];
     protected
-      Complex j=Complex.j();
+      Complex j=Modelica.ComplexMath.j;
       Integer l1;
       Integer l2;
     algorithm
