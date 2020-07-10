@@ -3336,7 +3336,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
       Boolean issiso=StateSpace.Internal.isSISO(ss);
       TransferFunction tf=if issiso then
           StateSpace.Conversion.toTransferFunction(ss) else TransferFunction(1);
-      Complex j=Modelica.ComplexMath.j;
+      Complex j=ComplexMath.j;
       Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
       Real abs_den=ComplexMath.abs(den);
     algorithm
