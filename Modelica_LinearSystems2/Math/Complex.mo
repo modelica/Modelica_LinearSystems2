@@ -38,7 +38,7 @@ operator record Complex "Record defining a Complex number"
 
     function print "Print vector"
       import Modelica.Utilities.Streams.print;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
       input String name="" "Name of complex vector";
       input Complex c[:] "Complex vector to be printed";
