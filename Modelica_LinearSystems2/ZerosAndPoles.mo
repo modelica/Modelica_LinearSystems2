@@ -1427,7 +1427,7 @@ public
       assert(ZerosAndPoles.Analysis.denominatorDegree(zp) >
         ZerosAndPoles.Analysis.numeratorDegree(zp),
         " Denominator polynominal of transfer function in function\"ZerosAndPoles.Analysis.eigenValues\"has to be of higher order than numerator polynomial");
-      eigval := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+      eigval := Modelica_LinearSystems2.ComplexMathAdds.eigenValues(ss.A);
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -7304,7 +7304,7 @@ Example:
 with j=sqrt(-1), is defined as
 </p>
 <pre>
-   <b>import</b> Modelica_LinearSystems2.Math.Complex;
+   <b>import</b> Complex;
    <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
 
    zp = ZerosAndPoles(z = {Complex(-1,0)},
