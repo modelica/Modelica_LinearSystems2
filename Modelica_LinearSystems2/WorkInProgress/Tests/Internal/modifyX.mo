@@ -3,9 +3,9 @@ function modifyX
   "Contains a C sub routine of robust pole assignment to modify the eigenvector matrix X according to Kautsky algorithm"
 
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Complex;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
 
   input Complex X[:,size(X,1)] "Complex eigenvector matrix";
   input Complex S[size(X,1),:] "Complex eigenvector matrix";

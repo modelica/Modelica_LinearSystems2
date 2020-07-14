@@ -3,17 +3,11 @@ function assignPolesSI_rq
   "RQ implementation of a recursiv single-input pole assignment problem"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Complex;
-  import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
-  import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
-  import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
-  import Modelica.Utilities.Streams.print;
+  import Modelica_LinearSystems2.ComplexMathAdds;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
 
   input StateSpace ss;
   input Complex gamma[size(ss.A, 1)];
@@ -69,7 +63,7 @@ algorithm
 
     (R,Q) := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_RQ(
                            H);
-    H := matMul(Q, R);
+    H := ComplexMathAdds.Matrices.matMatMul(Q, R);
 
     for i in 1:nx loop
       H[i, i] := H[i, i] + gamma[1];
@@ -116,9 +110,9 @@ algorithm
             Qn[ii+i-2, iii+i-2] := Qi[ii, iii];
           end for;
         end for;
-        Q := matMul(Qn,Q);
+        Q := ComplexMathAdds.Matrices.matMatMul(Qn,Q);
       else
-        Q := matMul(Qi,Q);
+        Q := ComplexMathAdds.Matrices.matMatMul(Qi,Q);
       end if;
 
       rho := rho*Ri[nx + 2 - i, nx + 2 - i];
@@ -128,6 +122,6 @@ algorithm
     K := (rho.re/alpha/beta)*K*P;
     end if;
     S := ss.A-ss.B*K;
-    po :=  Complex.eigenValues(S);
-    Complex.Vectors.print("ev",ev);
+    po :=  ComplexMathAdds.eigenValues(S);
+    ComplexMathAdds.Vectors.print("ev",ev);
 end assignPolesSI_rq;

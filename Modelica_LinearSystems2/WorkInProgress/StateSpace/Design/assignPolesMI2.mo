@@ -4,8 +4,10 @@ encapsulated function assignPolesMI2
 
   import Modelica;
   import Modelica.Utilities.Streams.print;
+  import MatricesMSL = Modelica.Math.Matrices;
+  import Complex;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.Math.Matrices;
@@ -18,7 +20,7 @@ encapsulated function assignPolesMI2
     "Boolean parameter to display the order of the eigenvalues";
   input Real alpha=-1e10
     "maximum admissible value for real parts(continuous) or for moduli (discrete) of the eigenvalues of A which will not be modified by the eigenvalue assignment algorithm";
-  input Real tolerance=Modelica.Math.Matrices.norm(ss.A, 1)*1e-12
+  input Real tolerance=MatricesMSL.norm(ss.A, 1)*1e-12
     "The tolerance to be used in determining the controllability of (A,B)";
   output Real K[size(ss.B, 2),size(ss.A, 1)]
     "State feedback matrix assigning the desired poles";
@@ -65,7 +67,7 @@ protected
   Real alphaImag[size(ss.A, 1)]
     "Imaginary part of eigenvalue=(alphaReal+i*alphaImag";
 
-  Complex pi[:]=Complex.eigenValues(ss.A);
+  Complex pi[:]=ComplexMathAdds.eigenValues(ss.A);
 
   Boolean complex_assignedPoles=false
     "True, if there is at least one conjugated comples pole pair in the set of the assigned poles";
@@ -97,7 +99,7 @@ algorithm
       po[i].re := alphaReal[i];
       po[i].im := alphaImag[i];
     end for;
-    Complex.Vectors.print("The eigenvalues of the open loop system are sorted to\n eigenvalues", pi);
+    ComplexMathAdds.Vectors.print("The eigenvalues of the open loop system are sorted to\n eigenvalues", pi);
   else
     assert(size(gamma, 1) <= size(ss.A, 1), "At most n (order of ss) eigenvalues can be assigned");
 
@@ -115,7 +117,7 @@ algorithm
   end for;
 
   // put matrix ss.A to real Schur form A <- QAQ' and compute B <- QB
-  (A_rsf,Z,alphaReal,alphaImag) := Modelica.Math.Matrices.realSchur(ss.A);
+  (A_rsf,Z,alphaReal,alphaImag) := MatricesMSL.realSchur(ss.A);
   ZT := transpose(Z);
 
   // determine number of poles not to be assigned according to alpha
@@ -154,7 +156,7 @@ algorithm
 
     Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal,6,"alphaReal");
     Modelica_LinearSystems2.Math.Vectors.printVector(alphaImag,6,"alphaImag");
-   Modelica_LinearSystems2.Math.Complex.Vectors.print("gammaReordered1",gammaReordered);
+   ComplexMathAdds.Vectors.print("gammaReordered1",gammaReordered);
 
   // Reorder gammaReordered according to alpha
     ii := 1;
@@ -190,12 +192,12 @@ algorithm
    while counter<=n loop
     if markA[n + nfp + 1 - counter] == 2 or markg[n + nfp + 1 - counter] == 2 then
 
-//#############################
-Modelica_LinearSystems2.Math.Complex.Vectors.print("g2",gammaReordered[n + nfp - counter:n + nfp + 1 - counter]);
-Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal[n + nfp - counter:n + nfp + 1 - counter],6,"ar2");
-ev:=Modelica_LinearSystems2.Math.Complex.eigenValues( A_rsf[n - 1:n, n - 1:n]);
-Modelica_LinearSystems2.Math.Complex.Vectors.print("ev2",ev);
-//#############################
+      //#############################
+      ComplexMathAdds.Vectors.print("g2",gammaReordered[n + nfp - counter:n + nfp + 1 - counter]);
+      Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal[n + nfp - counter:n + nfp + 1 - counter],6,"ar2");
+      ev:=ComplexMathAdds.eigenValues( A_rsf[n - 1:n, n - 1:n]);
+      ComplexMathAdds.Vectors.print("ev2",ev);
+      //#############################
 
       Ks2 := StateSpace.Internal.assignOneOrTwoPoles(
         A_rsf[n - 1:n, n - 1:n],
@@ -232,11 +234,11 @@ Modelica_LinearSystems2.Math.Complex.Vectors.print("ev2",ev);
 //       gammaReordered[counter + 1] := gammaReordered[n];
       counter := counter + 2;
     else
-//#############################
-print("g1 = "+String(gammaReordered[n + nfp + 1 - counter]));
-print("ar1 = "+String(alphaReal[n + nfp + 1 - counter]));
-print("ev1 = "+String(A_rsf[n,n])+"\n");
-//#############################
+      //#############################
+      print("g1 = "+String(gammaReordered[n + nfp + 1 - counter]));
+      print("ar1 = "+String(alphaReal[n + nfp + 1 - counter]));
+      print("ev1 = "+String(A_rsf[n,n])+"\n");
+      //#############################
 
       Ks1 := StateSpace.Internal.assignOneOrTwoPoles(
         matrix(A_rsf[n, n]),
@@ -274,8 +276,8 @@ print("ev1 = "+String(A_rsf[n,n])+"\n");
     end while;
 
   S := ss.A - ss.B*K;
-  po := Complex.eigenValues(S);
-   X := Complex.eigenVectors(S);
+  po := ComplexMathAdds.eigenValues(S);
+   X := ComplexMathAdds.eigenVectors(S);
 
 //    X := fill(Complex(0),n,n);
 //    for i in 1:n loop

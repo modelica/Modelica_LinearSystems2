@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function zgesvd "Determine singular values of a complex matrix"
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.Math.Matrices;
+  import Complex;
 
   input Complex A[:,:] "Square or rectangular matrix";
   output Real sigma[min(size(A, 1), size(A, 2))] "singular values";
