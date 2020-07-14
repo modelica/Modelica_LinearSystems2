@@ -4,7 +4,6 @@ function designCraneControllerWithObserver
   import Modelica.Utilities.Streams;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
 
   input String modelName="Modelica_Controller.Examples.Components.Pendulum_small"
@@ -30,7 +29,7 @@ protected
   Modelica_LinearSystems2.StateSpace ss=
   Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName);
 
-  Complex p[:];//=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+  Complex p[:];//=Modelica_LinearSystems2.ComplexMathAdds.eigenValues(ss.A);
   Modelica_LinearSystems2.StateSpace ss_pa=ss;
   Modelica_LinearSystems2.StateSpace ss_ob=StateSpace(A=transpose(ss.A), B=[1,0;0,1;0,0;0,0], C=transpose(ss.B), D=[0,0]);
   Modelica_LinearSystems2.StateSpace ssPlant=StateSpace(A=ss.A, B=ss.B,C=[1,0,0,0;0,1,0,0], D=[0;0]);
@@ -39,9 +38,9 @@ algorithm
   Streams.print("The linearized state space system is determined to:\n" + String(ssPlant));
 
  // eigenvalues of open loop system
-  p := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+  p := Modelica_LinearSystems2.ComplexMathAdds.eigenValues(ss.A);
   Streams.print("eigenvalues of the open loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev", p);
+  Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("ev", p);
 
 //####### POLE ASSIGNMENT ##########
 
@@ -54,7 +53,7 @@ algorithm
     6,
     "K_pa"));
   Streams.print("eigenvalues of the closed loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
+  Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("ev_pa", p);
 
   Streams.writeRealMatrix(
     fileName,
@@ -98,7 +97,7 @@ algorithm
   ss_ob.A := ss.A - K_ob*ssPlant.C;
 
   Streams.print("eigenvalues of the observer system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pob", pob);
+  Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("ev_pob", pob);
   Streams.writeRealMatrix(
     fileName,
     "K_ob",

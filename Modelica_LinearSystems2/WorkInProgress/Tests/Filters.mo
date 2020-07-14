@@ -5,10 +5,10 @@ package Filters
     import Modelica_LinearSystems2.Utilities.Types;
     import Modelica.Utilities.Streams.print;
     import Modelica.Constants.pi;
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
 
-    input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-    input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
+    input Types.AnalogFilter analogFilter "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+    input Types.FilterType filterType=Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
     input Modelica.Units.SI.Frequency f_cut=1/(2*Modelica.Constants.pi)
       "Cut-off frequency";
      input Real A_ripple(unit="dB") = 0.5
@@ -28,7 +28,7 @@ package Filters
       constant Real machEps = 100*Modelica.Constants.eps;
     algorithm
       c := ZP.Analysis.evaluate(zp, Complex(0,2*pi*f_cut));
-      A :=Complex.'abs'(c);
+      A :=Modelica.ComplexMath.abs(c);
       str :="amplitude(f=" + String(f_cut) + ") = ";
       if Modelica_LinearSystems2.Math.isEqual(A, 10^(-3/20), machEps) then
          str := str + "-3db";
@@ -40,16 +40,16 @@ package Filters
     end getAmplitude;
 
      function getFilterName "Return the filter name as string"
-      input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter;
+      input Types.AnalogFilter analogFilter;
         output String str;
      algorithm
-      if analogFilter == Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping then
+      if analogFilter == Types.AnalogFilter.CriticalDamping then
            str :="CriticalDamping";
-      elseif analogFilter == Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Bessel then
+      elseif analogFilter == Types.AnalogFilter.Bessel then
            str :="Bessel";
-      elseif analogFilter == Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Butterworth then
+      elseif analogFilter == Types.AnalogFilter.Butterworth then
            str :="Butterworth";
-      elseif analogFilter == Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Chebyshev then
+      elseif analogFilter == Types.AnalogFilter.Chebyshev then
            str :="Chebyshev";
         else
            str :="unknown";
@@ -187,7 +187,7 @@ package Filters
     import Modelica_LinearSystems2.Utilities.Types;
     import ZP = Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica.Utilities.Streams.print;
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
     input String outputFile = "";
   protected
     constant Real machEps = 100*Modelica.Constants.eps;
@@ -235,7 +235,7 @@ package Filters
       Real A;
     algorithm
       c := ZP.Analysis.evaluate(zp, Complex(0,1.0));
-      A :=Complex.'abs'(c);
+      A := Modelica.ComplexMath.abs(c);
 
       if Modelica_LinearSystems2.Math.isEqual(A, 10^(-3/20), machEps) then
          str :="amplitude(w=1) = -3db";

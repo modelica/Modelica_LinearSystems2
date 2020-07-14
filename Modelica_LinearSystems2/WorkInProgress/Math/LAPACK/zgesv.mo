@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function zgesv "Solve complex system of linear equations A*X=B"
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.Math.Matrices;
+  import Complex;
+  //import Modelica_LinearSystems2.Math.Matrices;
 
   input Complex A[:,size(A, 1)];
   input Complex B[size(A, 1),:];

@@ -51,14 +51,14 @@ record DiscreteTransferFunction
       "Generate a discrete transfer function from a set of zeros and poles"
 
       import Modelica;
+      import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Complex;
 
-      input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex z[:]=fill(Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
-      input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+      input Complex p[:]=fill(Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
       input Modelica.Units.SI.Time Ts "Sample time";
@@ -66,7 +66,7 @@ record DiscreteTransferFunction
       input String uName="" "input name";
       input String yName="" "output name";
       output DiscreteTransferFunction dtf(redeclare Real n[size(z, 1)+1], redeclare Real
-               d[                                                                          size(p, 1)+1])
+               d[size(p, 1)+1])
         "TransferFunction built by ZerosAndPoles object";
 
     protected
@@ -95,7 +95,7 @@ Example:
 can be expressed as
 </p>
 <pre>
-   <b>import</b> Modelica_LinearSystems2.Math.Complex;
+   <b>import</b> Complex;
    <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
 
    j = Complex.j();
@@ -261,15 +261,16 @@ end z;
 encapsulated package Plot "Functions to plot state space system responses"
 
 encapsulated function bode "Plot transfer function as bode plot"
-      import Modelica;
-      import Modelica.Utilities.Strings;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica_LinearSystems2.Utilities.Plot;
-      import Modelica.Units.SI;
+  import Modelica;
+  import Modelica.Utilities.Strings;
+  import Modelica.ComplexMath;
+  import Complex;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Internal;
+  import Modelica_LinearSystems2.TransferFunction;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+  import Modelica_LinearSystems2.Utilities.Plot;
+  import Modelica.Units.SI;
 
   input DiscreteTransferFunction dtf "DiscreteTransfer function to be plotted";
   input Integer nPoints(min=2) = 200 "Number of points";
@@ -325,7 +326,7 @@ algorithm
 
   denZeros := fill(Complex(0),size(denZerosZ,1));
   for i in 1:size(denZerosZ,1) loop
-    denZeros[i] := Complex.log(denZerosZ[i])/dtf.Ts;
+    denZeros[i] := ComplexMath.log(denZerosZ[i])/dtf.Ts;
   end for;
 
   f := Internal.frequencyVector(
@@ -340,13 +341,13 @@ algorithm
   phi_old := 0.0;
   for i in 1:nPoints loop
     w[i] := Modelica.Units.Conversions.from_Hz(f[i]);
-    z[i] := Complex.exp(Complex(0,w[i]*dtf.Ts));
+    z[i] := ComplexMath.exp(Complex(0,w[i]*dtf.Ts));
     c := TransferFunction.Analysis.evaluate(
           tf,
           z[i],
           1e-10);
-    A[i] := Complex.'abs'(c);
-    phi_old := Complex.arg(c, phi_old);
+    A[i] := ComplexMath.abs(c);
+    phi_old := ComplexMath.arg(c, phi_old);
     phi[i] := Modelica.Units.Conversions.to_deg(phi_old);
 
   end for;
@@ -466,11 +467,11 @@ encapsulated package Conversion
 encapsulated function toDiscreteZerosAndPoles
   "Generate a DiscreteZerosAndPoles object from a DiscreteTransferFunction object"
   import Modelica;
+  import Complex;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
   import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
   import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.Math.Complex;
 
   input DiscreteTransferFunction dtf "transfer function of a system";
   output DiscreteZerosAndPoles dzp(
