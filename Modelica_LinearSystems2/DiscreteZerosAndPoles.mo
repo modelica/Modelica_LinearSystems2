@@ -152,12 +152,12 @@ discrete zeros-and-poles transfer function is derived from DiscreteStateSpace by
       import Modelica.Utilities.Streams.print;
 
       input Complex z[:]=fill(Complex(0), 0)
-          "Zeros (Complex vector of numerator zeros)";
+        "Zeros (Complex vector of numerator zeros)";
       input Complex p[:]=fill(Complex(0), 0)
-          "Poles (Complex vector of denominator zeros)";
+        "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
-        input Modelica.Units.SI.Time Ts "Sample time";
-        input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
+      input Modelica.Units.SI.Time Ts "Sample time";
+      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
       input String uName="" "input name";
       input String yName="" "output name";
       output DiscreteZerosAndPoles dzp(
@@ -242,7 +242,7 @@ dzp = 4* -----------------
 is defined as
 </p>
 <blockquote><pre>
-  <b>import</b> Modelica_LinearSystems2.Math.Complex;
+  <b>import</b> Complex;
   <b>import</b> Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
   dzp = DiscreteZerosAndPoles(
@@ -1381,7 +1381,6 @@ numerator polynomial N(z) and the denominator polynomial D(q).
     encapsulated function bode
       "Plot discrete zeros a-and-poles transfer function as bode plot"
       import Modelica;
-      import Modelica.Utilities.Strings;
       import Modelica.ComplexMath;
       import Complex;
       import Modelica_LinearSystems2;
@@ -2943,7 +2942,7 @@ Example:
 with j = Complex.j(); is defined as
 </p>
 <pre>
-   <b>import</b> Modelica_LinearSystems2.Math.Complex;
+   <b>import</b> Complex;
    <b>import</b> Modelica_LinearSystems2.DiscreteZerosAndPoles;
    j = Complex.j();
 
