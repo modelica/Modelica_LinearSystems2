@@ -1252,13 +1252,12 @@ Input <b>sample</b> is the number of samples. Sample time is the sample time of 
     encapsulated function eigenValues
       "Calculate the eigenvalues of a linear discrete state space system and write them in a complex vector"
 
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Complex;
 
       input DiscreteStateSpace dss "Discrete state space system";
-      output Complex eigvalues[size(dss.A, 1)]=Modelica_LinearSystems2.Math.Complex.eigenValues(dss.A)
+      output Complex eigvalues[size(dss.A, 1)]=Modelica_LinearSystems2.ComplexMathAdds.eigenValues(dss.A)
         "Eigenvalues of the system";
     algorithm
 
@@ -1798,10 +1797,9 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
 
       import Modelica;
       import Complex;
-      //  import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ComplexMathAdds;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Matrices;
 
       input DiscreteStateSpace dss "state space system";
@@ -1936,7 +1934,7 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
 
       // reorder gamma and A_rsf
       (gammaReordered,rpg) := Modelica_LinearSystems2.Internal.reorderZeros(gamma);
-      gammaReordered := Modelica_LinearSystems2.Math.Complex.Vectors.reverse(gammaReordered);
+      gammaReordered := Modelica.ComplexMath.Vectors.reverse(gammaReordered);
       nccg := div(size(gammaReordered, 1) - rpg, 2);
       ncc := min(nccA, nccg);
       rp := min(rpA, rpg);
@@ -2141,7 +2139,7 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
       end for;
 
       S := dss.A - dss.B*K;
-      po := Modelica_LinearSystems2.Math.Complex.eigenValues(S);
+      po := ComplexMathAdds.eigenValues(S);
 
       if calculateEigenvectors then
     //     X := fill(Complex(0), n, n);
@@ -2156,9 +2154,9 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
     //         X[ii, i] := Xj[ii, 1];
     //       end for;
     //     end for;
-    //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X1");
-        X := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
-    //      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X2");
+    //      ComplexMathAdds.Matrices.print(X,6,"X1");
+        X := ComplexMathAdds.eigenVectors(S);
+    //      ComplexMathAdds.Matrices.print(X,6,"X2");
 
       end if;
 
@@ -2944,7 +2942,7 @@ This function plots the initial responses of a discrete state space system for t
       if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
           Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
-        poles := Modelica_LinearSystems2.Math.Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
+        poles := Modelica_LinearSystems2.ComplexMathAdds.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
         zeros := StateSpace.Internal.invariantZeros2(ssm);
         cpoles := fill(Complex(0),size(poles,1));
         czeros := fill(Complex(0),size(zeros,1));
@@ -3625,7 +3623,7 @@ ss.B2  = [0.000437113227802044;
       input Modelica_LinearSystems2.DiscreteStateSpace dss;
       output Real tSpan "Time span";
     protected
-      Modelica_LinearSystems2.Math.Complex eig[size(dss.A, 1)];
+      Complex eig[size(dss.A, 1)];
       Real realp[size(dss.A, 1)];
       Real sorted[size(dss.A, 1)];
       Real indices[size(dss.A, 1)];
@@ -3889,7 +3887,7 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
           Modelica.Utilities.Streams.print("\n A subsystem (F, G) in DiscreteStateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
         That is, "   + String(F[1, 1]) + " remains and " + String(gamma[1].re) + " cannot be realized");
         else
-          system_ev := Modelica_LinearSystems2.Math.Complex.eigenValues(F);
+          system_ev := Modelica_LinearSystems2.ComplexMathAdds.eigenValues(F);
           Modelica.Utilities.Streams.print("\n A subsystem (F, G) in DiscreteStateSpace.Internal.assignOneOrTwoPoles() is not controllable, since G is equal to zero matrix. Therefore, K is set to zero matrix and the eigenvalues are retained.\n
         That is, "   + String(system_ev[1].re) + (if abs(system_ev[1].im) > 0 then " + " else
                   " - ") + String(system_ev[1].im) + "j and " + String(system_ev[2].re)
