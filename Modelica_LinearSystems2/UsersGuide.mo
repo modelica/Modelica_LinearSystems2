@@ -8,10 +8,7 @@ package UsersGuide "User's Guide"
     class ComplexNumbers "Complex numbers"
       extends Modelica.Icons.Information;
 
-      class FunctionsAndOperators "Functions and operators"
-        extends Modelica.Icons.Information;
-
-        annotation (Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <p>
 Within the Modelica_LinearSystems2 Library the operator record <b>Complex</b>
 is widely used. This record was introduced together with Modelica Standard
@@ -39,18 +36,21 @@ Complex j  = Modelica.ComplexMath.j; // same as Complex(0,1);
 Complex c1 = 1 + 3*j;    // = Complex.'+'(Complex(1), Complex.'*'(Complex(3),j));
 Complex c2 = 1 - 5*j;
 Complex c3 = c1 + c2;
+Complex c4 = c1 * c2;
 </pre></blockquote>
 <p>
 and
 </p>
 <blockquote><pre>
 Modelica.Utilities.Streams.print(&quot;c3 = &quot; + String(c3));
+Modelica.Utilities.Streams.print(&quot;c4 = &quot; + String(c4));
 </pre></blockquote>
 <p>
 results in
 </p>
 <blockquote><pre>
 c3 = 2 - 2j
+c4 = 16 - 2*j
 </pre></blockquote>
 <p>
 For details see
@@ -63,106 +63,6 @@ operations on complex numbers can be found in
 functions, especially those concerning vectors and matrices of complex
 numbers, are collected in
 <a href=\"Modelica_LinearSystems2.ComplexMathAdds\">ComplexMathAdds</a>.
-</html>"));
-      end FunctionsAndOperators;
-      annotation (Documentation(info="<html>
-<p>
-<b>Complex</b> numbers are defined via record Modelica_LinearSystems2.Math.Complex.
-Basically, the record consists of the real and imaginary part of a
-complex number and functions stored in the record that operate
-on Complex numbers. A screenshot of the record and its content
-is given in the next figure:
-</p>
-<blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Complex.png\">
-</blockquote>
-<p>
-Switch to an interactive Modelica environment
-(e.g., Dymola command window)
-and type in the following commands:
-</p>
-
-<blockquote><pre>
-import Modelica_LinearSystems2.Math.Complex;
-</pre></blockquote>
-
-<p>
-This import statement defines a convenient abbreviation, so that
-in the following, we have only to type \"Complex\" and no longer
-\"Modelica_LinearSystems2.Complex\".<br>
-Since the Modelica language has been extended to support the concept of operator overloading,
-the definition of record Complex allows to write the following commands:
-</p>
-
-<blockquote><pre>
-import Modelica_LinearSystems2.Math.Complex;
-
-j  = Complex.j();
-c1 = 1 + 3*j;
-c2 = 1 - 5*j;
-c3 = c1 + c2;
-</pre></blockquote>
-
-<p>
-The original generation of complex numbers by using the record-constructor and calling
-operation functions is still possible and described at <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers.FunctionsAndOperators\">Functions and operators</a>
-</p>
-<p>
-The overloading concept also includes the build in function 'String', i.e. typing
-</p>
-<blockquote><pre>
-import Modelica_LinearSystems2.Math.Complex;
-
-j  = Complex.j();
-c1 = 1 + 3*j;
-Modelica.Utilities.Streams.print(\"c1 = \"+String(c1));
-</pre></blockquote>
-<p>
-results in
-</p>
-<blockquote><pre>
-c1 = 1 + 3j
-</pre></blockquote>
-
-<p>
-Besides the basic operations, the most important specific
-functions for Complex numbers are also available, e.g.,
-exp(), sin() or conj() to compute
-</p>
-<blockquote><pre>
-exp(z)  = exp(Re(z)*(cos(Im(z)) + j sin(Im(z)))
-sin(z)  = 1/(2j)*(exp(zj) - exp(-zj))
-conj(z) = Re(z) - jIm(z)
-</pre></blockquote>
-<p>
-respectively.
-</p>
-<p>
-Function arg() returns the phase angle of the Complex number.
-The phase angle is not unique. Via the optional second argument phi0,
-the desired range can be defined, such that
-</p>
-
-<blockquote><pre>
--pi &lt; arg(c,phi0) - phi0 &lt; pi.
-</pre></blockquote>
-
-<p>
-For example:
-</p>
-
-<blockquote><pre>
-Complex.arg( 1+j*0.5, 4*pi );  // = 4*pi+pi/4 = 13.351...
-</pre></blockquote>
-<p>
-Note that the operators 'abs'(), 'sqrt'(), and 'max'() in this version of Modelica_LinearSystems2 are not supported by the overloading operator concept yet. Therefore, the original way of function calling, e.g.
-</p>
-<blockquote><pre>
-a = Complex.'abs'(3 + j*4)
-</pre></blockquote>
-<p>
-has to be applied.
-</p>
 </html>"));
     end ComplexNumbers;
 
