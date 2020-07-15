@@ -1564,7 +1564,7 @@ Example:
 with j=sqrt(-1), is defined as
 </p>
 <pre>
-   <b>import</b> Modelica_LinearSystems2.Math.Complex;
+   <b>import</b> Complex;
    <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
 
    zp = ZerosAndPoles(z = {Complex(-1,0)},
