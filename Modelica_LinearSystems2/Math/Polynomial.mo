@@ -752,7 +752,7 @@ Horner's method is used for polynomial evaluation.
   encapsulated function roots
     "Determine zeros of polynomial, i.e., points x with p(x)=0"
     import Complex;
-    import Modelica_LinearSystems2.Math.Complex.Vectors;
+    import Modelica_LinearSystems2.ComplexMathAdds.Vectors;
     import Modelica_LinearSystems2.Math.Polynomial;
 
     input Polynomial p "Polynomial";

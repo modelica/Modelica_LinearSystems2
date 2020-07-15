@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function designAssignPolesMIMO "Example for pole placing"
   extends Modelica.Icons.Function;
-  import Complex;
 
   output Real K[:,:] "Gain vector";
   output Real S[:,:];
@@ -20,9 +19,9 @@ protected
 
 algorithm
   (K, S, newPoles) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, p);
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
-  newPoles := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A-ss.B*K);
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("newPoles", newPoles);
+  Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("newPoles", newPoles);
+  newPoles := Modelica_LinearSystems2.ComplexMathAdds.eigenValues(ss.A-ss.B*K);
+  Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("newPoles", newPoles);
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>

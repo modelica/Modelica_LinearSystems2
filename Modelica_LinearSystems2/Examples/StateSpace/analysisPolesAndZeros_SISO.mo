@@ -4,7 +4,6 @@ function analysisPolesAndZeros_SISO
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;
-  import Complex;
 
   input String fileName="NoName" "file where matrix [A, B; C, D] is stored" annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file"),enable = systemOnFile));
@@ -33,7 +32,7 @@ protected
   Complex zeros[:];
 
 algorithm
-  poles := Modelica_LinearSystems2.Math.Complex.eigenValues(ssm.A);
+  poles := Modelica_LinearSystems2.ComplexMathAdds.eigenValues(ssm.A);
 
   for i in 1:size(poles, 1) loop
     Modelica.Utilities.Streams.print("pole_" + String(i) + " = " + String(poles[i]));

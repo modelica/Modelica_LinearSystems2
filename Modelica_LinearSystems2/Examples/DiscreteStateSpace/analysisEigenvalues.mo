@@ -3,12 +3,9 @@ function analysisEigenvalues
   "Example to compute the eigenvalues of a discrete state space system"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica.Utilities.Streams.print;
-  import Complex;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.DiscreteStateSpace;
-  import Modelica_LinearSystems2.Math.Complex.Vectors;
+  import Modelica_LinearSystems2.ComplexMathAdds.Vectors;
 
   input StateSpace ss = StateSpace(
     A=[-1,1; -1,-1],
