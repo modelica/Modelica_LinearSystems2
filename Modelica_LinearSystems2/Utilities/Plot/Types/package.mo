@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 package Types "Package of type definitions used for the plotting functions"
-  extends Modelica.Icons.Package;
+  extends Modelica.Icons.TypesPackage;
 
 
   annotation (

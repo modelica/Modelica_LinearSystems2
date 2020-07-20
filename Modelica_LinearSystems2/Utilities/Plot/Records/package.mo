@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 package Records "Package of library records"
-  extends Modelica.Icons.Package;
+  extends Modelica.Icons.RecordsPackage;
 
 
   annotation (
