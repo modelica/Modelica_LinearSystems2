@@ -3,11 +3,9 @@ function analysisEigenvalues
   "Example to compute the eigenvalues of a discrete state space system"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica.Utilities.Streams.print;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.ComplexMathAdds.Vectors;
 
   input StateSpace ss = StateSpace(
     A=[-1,1; -1,-1],
@@ -27,14 +25,14 @@ protected
   Complex evContinuous[:] = StateSpace.Analysis.eigenValues(ss);
 
    //alternative calculation
-  Complex ev1=Complex.exp(evContinuous[1]*Ts);
-  Complex ev2=Complex.exp(evContinuous[2]*Ts);
+  Complex ev1=Modelica.ComplexMath.exp(evContinuous[1]*Ts);
+  Complex ev2=Modelica.ComplexMath.exp(evContinuous[2]*Ts);
   Complex evDiscrete2[2]={ev1,ev2};
 
 algorithm
-  Complex.Vectors.print("evDiscrete", evDiscrete);
-  Complex.Vectors.print("evDiscrete2", evDiscrete2);
-  Complex.Vectors.print("evContiuous", evContinuous);
+  Vectors.print("evDiscrete", evDiscrete);
+  Vectors.print("evDiscrete2", evDiscrete2);
+  Vectors.print("evContiuous", evContinuous);
 
   annotation (Documentation(info="<html>
 <p>
