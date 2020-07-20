@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.Tests.Design;
 function data_Laub "Example for pole assignment"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData;
 
   input Integer n=10 annotation(Dialog);
@@ -15,10 +15,8 @@ function data_Laub "Example for pole assignment"
 
 protected
   Real A[n,n]=diagonal(array(-(n-i) for i in 1:n));
-
   Real B[n,m];
-
- Complex pp[:]=array(Complex(-i-10) for i in 2:2:2*n);
+  Complex pp[:]=array(Complex(-i-10) for i in 2:2:2*n);
 
 algorithm
   for i in 1:n-1 loop

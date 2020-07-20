@@ -1,8 +1,10 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.Matrices;
 function C_rank "Rank of a complex matrix (computed with singular values)"
-  import Modelica_LinearSystems2;
   extends Modelica.Icons.Function;
-  input Modelica_LinearSystems2.Math.Complex A[:,:] "Matrix";
+  import Complex;
+  import Modelica_LinearSystems2;
+
+  input Complex A[:,:] "Matrix";
   input Real eps=0
     "If eps > 0, the singular values are checked against eps; otherwise eps=max(size(A))*norm(A)*Modelica.Constants.eps is used";
   output Integer result "Rank of matrix A";

@@ -4,9 +4,9 @@ encapsulated function analysisDcGain "Compute steady state gain"
 
   import Modelica;
   import Modelica.Utilities.Streams.print;
+  import Complex;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Utilities.Types;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.ZerosAndPoles;
 
   output Boolean ok;

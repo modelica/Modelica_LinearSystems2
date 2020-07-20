@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 function numberOfRealZeros
   "Determine the number of elements of a Complex vector where the imaginary part is zero"
-  import Modelica_LinearSystems2.Math.Complex;
 
   input Complex complexVector[:] "Complex vector";
   output Integer result "Number of elements of v with v.im = 0";

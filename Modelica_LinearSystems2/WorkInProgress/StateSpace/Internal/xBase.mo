@@ -1,9 +1,9 @@
 within Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal;
 function xBase "Compute the eigenvector bases according to Kautsky algorithm"
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Complex;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
 
   input Real A[:,size(A,1)] "Real square system matrix";
   input Real B[size(A,1),:] "Real input matrix";

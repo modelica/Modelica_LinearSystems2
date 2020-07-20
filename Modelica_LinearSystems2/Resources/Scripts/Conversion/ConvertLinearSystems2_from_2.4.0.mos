@@ -9,3 +9,75 @@ convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
 	            "Modelica_LinearSystems2.Internal.Streams.readMatrixInternal"},
               "Modelica.Utilities.Streams.readRealMatrix");
 //convertElement(" "," "," ");
+
+// Use "buld-in" Complex record instead of Modelica_LinearSystems2.Math.Complex
+convertClass("Modelica_LinearSystems2.Math.Complex",
+             "Complex");
+convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.print",
+             "Modelica_LinearSystems2.ComplexMathAdds.Vectors.print");
+convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.printHTML",
+             "Modelica_LinearSystems2.ComplexMathAdds.Vectors.printHTML");
+convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.length",
+             "Modelica.ComplexMath.Vectors.length");
+convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.norm",
+             "Modelica.ComplexMath.Vectors.norm");
+convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.normalize",
+             "Modelica.ComplexMath.Vectors.normalize");
+convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.sortComplex",
+             "Modelica.ComplexMath.Vectors.sort");
+convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.multiply",
+             "Modelica_LinearSystems2.ComplexMathAdds.Vectors.multiply");
+convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.reverse",
+             "Modelica.ComplexMath.Vectors.reverse");
+convertClass("Modelica_LinearSystems2.Math.Complex.Matrices.print",
+             "Modelica_LinearSystems2.ComplexMathAdds.Matrices.print");
+convertClass("Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul",
+             "Modelica_LinearSystems2.ComplexMathAdds.Matrices.matMatMul");
+convertClass("Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul",
+             "Modelica_LinearSystems2.ComplexMathAdds.Matrices.matVecMul");
+convertClass("Modelica_LinearSystems2.Math.Complex.'constructor'",
+             "Complex.'constructor'");
+convertClass("Modelica_LinearSystems2.Math.Complex.'-'.negate",
+             "Complex.'-'.negate");
+convertClass("Modelica_LinearSystems2.Math.Complex.'-'.subtract",
+             "Complex.'-'.subtract");
+convertClass("Modelica_LinearSystems2.Math.Complex.'+'",
+             "Complex.'+'");
+convertClass("Modelica_LinearSystems2.Math.Complex.'*'",
+             "Complex.'*'.multiply");
+convertClass("Modelica_LinearSystems2.Math.Complex.'/'",
+             "Complex.'/'");
+convertClass("Modelica_LinearSystems2.Math.Complex.'=='",
+             "Complex.'=='");
+convertClass("Modelica_LinearSystems2.Math.Complex.'String'",
+             "Complex.'String'");
+convertClass("Modelica_LinearSystems2.Math.Complex.j",
+             "Modelica.ComplexMath.j");
+convertClass("Modelica_LinearSystems2.Math.Complex.'abs'",
+             "Modelica.ComplexMath.abs");
+convertClass("Modelica_LinearSystems2.Math.Complex.'sqrt'",
+             "Modelica.ComplexMath.sqrt");
+convertClass("Modelica_LinearSystems2.Math.Complex.'max'",
+             "Modelica_LinearSystems2.ComplexMathAdds.maxElement");
+convertClass("Modelica_LinearSystems2.Math.Complex.exp",
+             "Modelica.ComplexMath.exp");
+convertClass("Modelica_LinearSystems2.Math.Complex.log",
+             "Modelica.ComplexMath.log");
+convertClass("Modelica_LinearSystems2.Math.Complex.sin",
+             "Modelica.ComplexMath.sin");
+convertClass("Modelica_LinearSystems2.Math.Complex.cos",
+             "Modelica.ComplexMath.cos");
+convertClass("Modelica_LinearSystems2.Math.Complex.arg",
+             "Modelica.ComplexMath.arg");
+convertClass("Modelica_LinearSystems2.Math.Complex.conj",
+             "Modelica.ComplexMath.conj");
+convertClass("Modelica_LinearSystems2.Math.Complex.real",
+             "Modelica.ComplexMath.real");
+convertClass("Modelica_LinearSystems2.Math.Complex.imag",
+             "Modelica.ComplexMath.imag");
+convertClass("Modelica_LinearSystems2.Math.Complex.eigenValues",
+             "Modelica_LinearSystems2.ComplexMathAdds.eigenValues");
+convertClass("Modelica_LinearSystems2.Math.Complex.eigenVectors",
+             "Modelica_LinearSystems2.ComplexMathAdds.eigenVectors");
+convertClass("Modelica_LinearSystems2.Math.Complex.frequency",
+             "Modelica_LinearSystems2.ComplexMathAdds.frequency");

@@ -3,8 +3,9 @@ function designInverseDoublePendulumControllerWithObserver
   "Design pole assignment for an inverse double pedulum"
 
   import Modelica.Utilities.Streams;
+  import MatricesMSL = Modelica.Math.Matrices;
+  import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.StateSpace;
 //  input String modelName="Modelica_Controller.Examples.Components.InverseDoublePendulum"  "name of the model to linearize";
@@ -37,7 +38,7 @@ protected
   // Determine linear System from Modelica_Controller.Examples.Components.InverseDoublePendulum.mo
  Modelica_LinearSystems2.StateSpace ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName);
 
- Complex p[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+ Complex p[:]=ComplexMathAdds.eigenValues(ss.A);
  Modelica_LinearSystems2.StateSpace ss_pa=ss;
 // Modelica_LinearSystems2.StateSpace ss_ob=StateSpace(A=transpose(ss.A), B=transpose([1,0,0,0,0,0;0,0,1,0,0,0]), C=transpose(ss.B), D=fill(0,size(ss.B,2),2));
 // Modelica_LinearSystems2.StateSpace ssPlant=Modelica_LinearSystems2.StateSpace(A=ss.A, B=ss.B,C=[1,0,0,0,0,0;0,0,1,0,0,0],D=zeros(2,size(ss.B,2)));
@@ -53,8 +54,8 @@ protected
 algorithm
   ss.C:=identity(6);
   Streams.print("The linearized state space system is determined to:\n" + String(ss));
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(ss.C,6,"C");
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(ss.D,6,"D");
+  Matrices.printMatrix(ss.C,6,"C");
+  Matrices.printMatrix(ss.D,6,"D");
 
   if makeAnalysis then
     StateSpace.Analysis.analysis(ssPlant,fileName="inverseDoublePendulum.html");
@@ -76,7 +77,7 @@ algorithm
   end if;
 
   Streams.print("The eigenvalues are:\n");
-  Complex.Vectors.print("p",p);
+  Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("p",p);
 
   //####### POLE ASSIGNMENT ##########
 
@@ -85,12 +86,12 @@ algorithm
   ss_pa.A := ss.A - ss.B*K_pa;
 
   Streams.print("The feedback matrix of the pole assignment controller is:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    Matrices.printMatrix(
     K_pa,
     6,
     "K_pa"));
   Streams.print("eigenvalues of the closed loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
+  ComplexMathAdds.Vectors.print("ev_pa", p);
 
   Streams.writeRealMatrix(
     fileName,
@@ -99,10 +100,10 @@ algorithm
     true);
 
   // Pre filter calculation
-  M_pa := -Modelica.Math.Matrices.inv([1,0,0,0,0,0]*Modelica.Math.Matrices.solve2(ss_pa.A,
+  M_pa := -MatricesMSL.inv([1,0,0,0,0,0]*MatricesMSL.solve2(ss_pa.A,
     ss_pa.B));
   Streams.print("Gain for pre filtering:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    Matrices.printMatrix(
     M_pa,
     6,
     "M_pa"));

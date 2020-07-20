@@ -5,8 +5,8 @@ encapsulated function analysisZerosAndPoles
 
   import Modelica;
   import Modelica.Utilities.Streams.print;
+  import Complex;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.Internal.printComplexVector;
 
