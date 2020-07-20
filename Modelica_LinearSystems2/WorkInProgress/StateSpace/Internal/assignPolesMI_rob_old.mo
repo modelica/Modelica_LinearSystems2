@@ -2,16 +2,13 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal;
 function assignPolesMI_rob_old
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
+  import Modelica.ComplexMath;
+  import Modelica_LinearSystems2.ComplexMathAdds;
+  import Modelica_LinearSystems2.ComplexMathAdds.Internal.C_transpose;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Complex;
-  import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
-  import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
-  import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
   import Modelica.Utilities.Streams.print;
 
   input Real A[:,size(A, 1)] "system matrix";
@@ -66,7 +63,7 @@ protected
   Integer maxSteps=3;
 
   Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob_old.subSpace
-    subS[                                                                         size(gamma,1)];
+    subS[size(gamma,1)];
 
   Complex a;
   Complex MM[:,:];
@@ -83,8 +80,8 @@ algorithm
   gammaSorted := gammaSorted2;
   numberOfComplexPairs := integer((nx - numberOfRealEigenvalues)/2);
   for i in numberOfRealEigenvalues + 1:numberOfRealEigenvalues + numberOfComplexPairs loop
-    gammaSorted[i] := if Im(gammaSorted2[2*i-numberOfRealEigenvalues-1]) > 0 then gammaSorted2[2*i-numberOfRealEigenvalues-1] else Complex.conj(gammaSorted2[2*i-numberOfRealEigenvalues-1]);
-    gammaSorted[i + numberOfComplexPairs] := Complex.conj(gammaSorted[i]);
+    gammaSorted[i] := if Im(gammaSorted2[2*i-numberOfRealEigenvalues-1]) > 0 then gammaSorted2[2*i-numberOfRealEigenvalues-1] else ComplexMath.conj(gammaSorted2[2*i-numberOfRealEigenvalues-1]);
+    gammaSorted[i + numberOfComplexPairs] := ComplexMath.conj(gammaSorted[i]);
   end for;
 
   for i in 1:nx loop
@@ -124,7 +121,7 @@ algorithm
    Z := fill(Complex(0), size(B, 2), rankB);
    for l1 in 1:rankB loop
      for l2 in 1:size(B, 2) loop
-//       Z[l1, l2] := Complex.conj(R[l2, l1])/sigmaB[l2];
+//       Z[l1, l2] := ComplexMath.conj(R[l2, l1])/sigmaB[l2];
        Z[l1, l2] := Complex((Vr[l2, l1])/sigmaB[l2]);
      end for;
    end for;
@@ -140,7 +137,7 @@ algorithm
   condX2 := eps + 1;
 
   if numberOfComplexPairs > 0 then
-//      (sigmaM,Qu,Ru) := Matrices.C_singularValues([U1T;  matMul(U1T,Complex(1)*A)]);
+//      (sigmaM,Qu,Ru) := Matrices.C_singularValues([U1T;  ComplexMathAdds.Matrices.matMatMul(U1T,Complex(1)*A)]);
 //       rank_ := 0;
 //          i := size(sigmaM,1);
 //        while i > 0 loop
@@ -154,7 +151,7 @@ algorithm
 //      Sr := Ru[:,rank_+1:nx];
 
      Sr :=  Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace(
-                                 [U1T;  matMul(U1T,Complex(1)*A)]);
+                                 [U1T;  ComplexMathAdds.Matrices.matMatMul(U1T,Complex(1)*A)]);
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(Sr),6,"ReSr");
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(Sr),6,"ImSr");
   else
@@ -169,7 +166,7 @@ algorithm
       AC[l2, l2] := AC[l2, l2] + gammaSorted[l1];
     end for;
 
-    C := matMul(U1T, AC);
+    C := ComplexMathAdds.Matrices.matMatMul(U1T, AC);
 
     Cc := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace(
                                [C; C_transpose(Sr)]);
@@ -215,12 +212,12 @@ algorithm
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(subS[l1].S),6,"ResubS[l1].S");
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(subS[l1].S),6,"ImsubS[l1].S");
 
-// MM := matMul(C,Complex.conj(Matrices.C_nullspace(Cc)));
+// MM := ComplexMathAdds.Matrices.matMatMul(C,ComplexMath.conj(Matrices.C_nullspace(Cc)));
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(MM),6,"ReMM");
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(MM),6,"ImMM");
 
-// MM := matMul(C,Sr);
-// //MM := matMul(C_transpose(Sr),Cc);
+// MM := ComplexMathAdds.Matrices.matMatMul(C,Sr);
+// //MM := ComplexMathAdds.Matrices.matMatMul(C_transpose(Sr),Cc);
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(MM),6,"ReMM");
 // Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(MM),6,"ImMM");
 end for;
@@ -232,7 +229,7 @@ if not IniX then
     for l2 in 1:size(subS[l1].S, 2) loop
       y := X[:, l1] + X[:, l1] + subS[l1].S[:, l2];
     end for;
-    y := y/Complex.Vectors.norm(y);
+    y := y/ComplexMath.Vectors.norm(y);
     for l2 in 1:nx loop
       X[l2, l1] := y[l2];
     end for;
@@ -240,7 +237,7 @@ if not IniX then
   for l1 in 1:numberOfComplexPairs loop
     for l2 in 1:nx loop
       X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
-        Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+        ComplexMath.conj(X[l2, numberOfRealEigenvalues + l1]);
     end for;
   end for;
 
@@ -253,7 +250,7 @@ if not IniX then
    for l1 in 1:numberOfComplexPairs loop
      for l2 in 1:nx loop
        X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
-         Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+         ComplexMath.conj(X[l2, numberOfRealEigenvalues + l1]);
      end for;
    end for;
 end if;
@@ -280,14 +277,13 @@ end if;
         end for;
       end if;
 
-      QX := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_QR2(
-                                                        Xj);
+      QX := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_QR2(Xj);
       ST := C_transpose(subS[l1].S);
-      y := matVecMul(ST, QX[:, nx]);
-      norm_y := Complex.Vectors.norm(y);
-      y := matVecMul(subS[l1].S, y)/norm_y;
+      y := ComplexMathAdds.Matrices.matVecMul(ST, QX[:, nx]);
+      norm_y := ComplexMath.Vectors.norm(y);
+      y := ComplexMathAdds.Matrices.matVecMul(subS[l1].S, y)/norm_y;
 
-//        if l1 > numberOfRealEigenvalues and Complex.'abs'(Complex.Vectors.multiply(y,Complex.conj(y)))>0.9 then
+//        if l1 > numberOfRealEigenvalues and ComplexMath.abs(ComplexMathAdds.Vectors.multiply(y,ComplexMath.conj(y)))>0.9 then
 //          idx := 1 + rem(k, size(subS[l1].S, 2) - size(Sr, 2));
 //          print(" k = "+String(k)+", l1 = "+String(l1)+", idx = " + String(idx));
 //          y := (y + subS[l1].S[:, idx])/sqrt(2);
@@ -299,21 +295,19 @@ end if;
 
       if l1 > numberOfRealEigenvalues then
         for l2 in 1:nx loop
-          X[l2, l1 + numberOfComplexPairs] := Complex.conj(y[l2]);
+          X[l2, l1 + numberOfComplexPairs] := ComplexMath.conj(y[l2]);
         end for;
       end if;
 
         end for;
-condX2 := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber(
-                                           X);
+condX2 := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber(X);
 
 //print("\ncondX2 = "+String(condX2));
   end while;
 
   XC := C_transpose(X);
-  XC2 := C_transpose(matMul(X, Lambda));
-  M := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2(
-                                                      XC, XC2);
+  XC2 := C_transpose(ComplexMathAdds.Matrices.matMatMul(X, Lambda));
+  M := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2(XC, XC2);
   M := C_transpose(M);
 
   for l2 in 1:nx loop
@@ -322,20 +316,21 @@ condX2 := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.condition
     end for;
   end for;
 
-  KC := matMul(Z, matMul(C_transpose(U0), M));
+  KC := ComplexMathAdds.Matrices.matMatMul(Z, ComplexMathAdds.Matrices.matMatMul(C_transpose(U0), M));
   K := -Re(KC);
   evX := X;
 
-  ev := Complex.eigenValues(A - B*K);
-//    Complex.Vectors.print("gammaSorted", gammaSorted);
-//    Complex.Vectors.print("ev", ev);
+  ev := Modelica_LinearSystems2.ComplexMathAdds.eigenValues(A - B*K);
+//    ComplexMathAdds.Vectors.print("gammaSorted", gammaSorted);
+//    ComplexMathAdds.Vectors.print("ev", ev);
 
 public
   encapsulated record subSpace
     import Modelica;
+    import Complex;
     import Modelica_LinearSystems2;
     extends Modelica.Icons.Record;
-    Modelica_LinearSystems2.Math.Complex S[:,:];
+    Complex S[:,:];
   end subSpace;
 
 end assignPolesMI_rob_old;
