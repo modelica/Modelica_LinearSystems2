@@ -11,6 +11,7 @@ StateSpace2
 PartialPlotFunction
 PartialPlotFunctionMIMO
 PartialAnalyzeFunction
+partialReadStateSpaceMatrix
 defaultColumnLabels
 defaultImpulseResponseHeadings
 defaultInitialResponseHeadings
