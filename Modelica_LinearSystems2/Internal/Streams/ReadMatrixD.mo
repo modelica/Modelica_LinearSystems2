@@ -1,25 +1,41 @@
 within Modelica_LinearSystems2.Internal.Streams;
 function ReadMatrixD "Read the feed forward matrix of a state space system"
-  input String fileName=DataDir + "abcd.mat"
-    annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                      caption="state space system data file")));
-  input String matrixName="ABCD"
-    "Name of the generalized state space system matrix";
-
-protected
-  Integer xuy[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(
-    fileName, matrixName);
-  Integer nx = xuy[1];
-  Integer nu = xuy[2];
-  Integer ny = xuy[3];
-  Real ABCD[nx + ny,nx + nu] = Modelica.Utilities.Streams.readRealMatrix(
-      fileName,
-      matrixName,
-      nx + ny,
-      nx + nu);
+  extends partialReadStateSpaceMatrix;
+  extends Modelica.Icons.Function;
 
 public
-  output Real D[ny,nu]=ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+  output Real D[ny,nu] = matrixABCD[nx + 1:nx + ny, nx + 1:nx + nu];
 algorithm
 
+  annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+D = Streams.<strong>ReadMatrixD</strong>(fileName, matrixName);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Opens the given MATLAB MAT file and reads the matrix&nbsp;D of
+a&nbsp;state space system from this file.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+// Generate dslin.mat of the double pendulum example first
+Modelica_LinearSystems2.Utilities.Import.linearize(
+  \"Modelica_LinearSystems2.Utilities.Plants.DoublePendulum\", 1.0);
+
+// Read D matrix of the linearized system
+ReadMatrixD(dslin.mat, \"ABCD\")
+//  = 
+// [0.0;
+// 0.0;
+// 0.0;
+// 0.0;
+// 0.0;
+// 0.0;
+// 0.0;
+// 0.0]
+</pre></blockquote>
+</html>"));
 end ReadMatrixD;
