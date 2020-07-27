@@ -50,5 +50,20 @@ package LinearSystems2TestConversion3
       Complex.Matrices.matVecMul(cm, cv);
     end complexNumerics;
   end Math;
+
+  package Types
+
+    model Issue13 "Conversion test concerning github issue #13"
+      import Modelica_LinearSystems2.Types;
+      parameter Modelica_LinearSystems2.Types.Grid grid = Modelica_LinearSystems2.Types.Grid.Equidistant;
+      parameter Types.AnalogFilter analogFilter = Modelica_LinearSystems2.Types.AnalogFilter.Chebyshev;
+      parameter Modelica_LinearSystems2.Types.FilterType filterType = Types.FilterType.HighPass;
+      parameter Modelica_LinearSystems2.Types.Method method = Modelica_LinearSystems2.Types.Method.Trapezoidal;
+      parameter Modelica_LinearSystems2.Types.StaircaseMethod staircaseMethod = Modelica_LinearSystems2.Types.StaircaseMethod.QR;
+      parameter Types.TimeResponse timeResponse = Types.TimeResponse.Impulse;
+      parameter Modelica_LinearSystems2.Types.Window window = Modelica_LinearSystems2.Types.Window.Bartlett;
+
+    end Issue13;
+  end Types;
   annotation (uses(Modelica_LinearSystems2(version="2.4.0")));
 end LinearSystems2TestConversion3;
