@@ -455,13 +455,13 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_2_4_1 "Version 2.4.1-dev (???, 2020)"
+    class Version_3_0_0 "Version 3.0.0-dev (???, 2020)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
 <p>
-This version requires the <b>Modelica 4.0.0</b> Library.
-It is <b>backward compatible</b> to the previous version 2.4.0.
+This version requires the <strong>Modelica 4.0.0</strong> Library.
+It is <strong>not</strong> backward compatible to the previous version 2.4.0.
 </p>
 
 <h4>
@@ -520,7 +520,7 @@ The following classes were obsolete and removed from the Library.
      instead</li>
 </ul>
 </html>"));
-    end Version_2_4_1;
+    end Version_3_0_0;
 
     class Version_2_4_0 "Version 2.4.0 (June 26, 2020)"
       extends Modelica.Icons.ReleaseNotes;
