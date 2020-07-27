@@ -1,4 +1,4 @@
-// Convert from Modelica_LinearSystems2 2.4.Y to Modelica_LinearSystems2 XXX
+// Convert from Modelica_LinearSystems2 2.4.Y to Modelica_LinearSystems2 3.0.0
 
 // clear
 convertClear();
@@ -11,8 +11,8 @@ convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
 //convertElement(" "," "," ");
 
 // Use "buld-in" Complex record instead of Modelica_LinearSystems2.Math.Complex
-convertClass("Modelica_LinearSystems2.Math.Complex",
-             "Complex");
+//convertClass("Modelica_LinearSystems2.Math.Complex",
+//             "Complex");
 convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.print",
              "Modelica_LinearSystems2.ComplexMathAdds.Vectors.print");
 convertClass("Modelica_LinearSystems2.Math.Complex.Vectors.printHTML",
