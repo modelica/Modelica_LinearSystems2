@@ -50,6 +50,15 @@ package LinearSystems2TestConversion3
       Complex.Matrices.matVecMul(cm, cv);
     end complexNumerics;
 
+    function readMatrixGainTest
+
+    protected
+      Real K0[1,1] = Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain(m=1,n=1);
+      Real K1[1,1] = Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain("filename.mat",m=1,n=1);
+      Real K2[1,1] = Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain(matrixName="testK",m=1,n=1);
+    algorithm
+    end readMatrixGainTest;
+
     function callAllLAPACK "Call all functions from Modelica_LinearSystems2.Math.Matrices.LAPACK"
       // Modelica_LinearSystems2.Math.Matrices.LAPACK.dgecon
       input Real LU_of_A[:,:] = [1, 2, 3; 3, 4, 5; 3, 2, 3] "LU factroization of a real matrix A";
@@ -243,5 +252,18 @@ package LinearSystems2TestConversion3
 
     end Issue13;
   end Types;
+
+  package Streams
+
+    function readSystemDimensionTest
+
+    protected
+      Integer xuy[3] = Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension();
+      Integer xuy2[3] = Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2();
+      Integer xuy3[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension();
+    algorithm
+
+    end readSystemDimensionTest;
+  end Streams;
   annotation (uses(Modelica_LinearSystems2(version="2.4.0")));
 end LinearSystems2TestConversion3;

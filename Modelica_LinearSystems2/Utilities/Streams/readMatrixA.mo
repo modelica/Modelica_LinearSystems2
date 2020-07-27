@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Utilities.Streams;
-function ReadMatrixA "Read the state matrix of a state space system"
+function readMatrixA "Read the state matrix of a state space system"
   extends Internal.partialReadStateSpaceMatrix;
   extends Modelica.Icons.Function;
 
@@ -36,4 +36,4 @@ ReadMatrixA(dslin.mat, \"ABCD\")
 // 0.0, 0.0, -7.229008278422499, 1.3904525205542553, 3.4263760991964918, -1.0645822524481547]
 </pre></blockquote>
 </html>"));
-end ReadMatrixA;
+end readMatrixA;
