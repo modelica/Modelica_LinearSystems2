@@ -1,6 +1,6 @@
-within Modelica_LinearSystems2.Internal.Streams;
+within Modelica_LinearSystems2.Utilities.Streams;
 function ReadMatrixB "Read the input matrix of a state space system"
-  extends partialReadStateSpaceMatrix;
+  extends Internal.partialReadStateSpaceMatrix;
   extends Modelica.Icons.Function;
 
 public

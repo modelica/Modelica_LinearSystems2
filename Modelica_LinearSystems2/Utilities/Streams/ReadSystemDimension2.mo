@@ -1,7 +1,8 @@
-within Modelica_LinearSystems2.Internal.Streams;
-function ReadSystemDimension
+within Modelica_LinearSystems2.Utilities.Streams;
+function ReadSystemDimension2
   "Read the order nx of state matrix and the numbers nu and ny of inputs and outputs"
   import Modelica_LinearSystems2.StateSpace;
+  import Modelica_LinearSystems2.Utilities.Streams;
   input String fileName=DataDir + "ss_siso.mat"
                               annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
@@ -24,4 +25,4 @@ algorithm
   xuy[2] := ABCDsizes[2] - xuy[1];
   xuy[3] := ABCDsizes[1] - xuy[1];
 
-end ReadSystemDimension;
+end ReadSystemDimension2;
