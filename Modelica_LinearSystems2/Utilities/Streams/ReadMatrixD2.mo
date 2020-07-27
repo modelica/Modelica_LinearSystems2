@@ -1,25 +1,24 @@
-within Modelica_LinearSystems2.Internal.Streams;
-function ReadMatrixC2 "Read the output matrix of a state space system"
+within Modelica_LinearSystems2.Utilities.Streams;
+function ReadMatrixD2 "Read the feed forward matrix of a state space system"
   input String fileName=DataDir + "abcd.mat"
                               annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
   input String matrixName="ABCD"
     "Name of the generalized state space system matrix";
   input Integer nx "System order";
+  input Integer nu "number of inputs";
   input Integer ny "number of outputs";
-protected
-  Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(
-    fileName, matrixName);
 
-  Real ABCD[nx + ny,ABCDsizes[2]]=
+protected
+  Real ABCD[nx + ny,nx + nu]=
       Modelica.Utilities.Streams.readRealMatrix(
       fileName,
       matrixName,
       nx + ny,
-      ABCDsizes[2]);
+      nx + nu);
 
 public
-  output Real C[ny,nx]=ABCD[nx + 1:nx + ny, 1:nx];
+  output Real D[ny,nu]=ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
 algorithm
 
-end ReadMatrixC2;
+end ReadMatrixD2;
