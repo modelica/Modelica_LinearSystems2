@@ -610,7 +610,7 @@ in the future.
      instead</li>
 </ul>
 </html>"));
-    end Version_2_4_1;
+    end Version_3_0_0;
 
     class Version_2_4_0 "Version 2.4.0 (June 26, 2020)"
       extends Modelica.Icons.ReleaseNotes;
