@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Internal.Streams;
+within Modelica_LinearSystems2.Utilities.Streams;
 function stateSpaceString_html
   "Print state space representation in one string in HTML format"
 
@@ -45,7 +45,7 @@ algorithm
   stringMaxLength := max(size(ss.xNames, 1), min(size(ss.yNames, 1),
     11));
 //, size(ss.uNames,1)));
-                                                               //, max(size(ss.yNames), size(ss.uNames))
+//, max(size(ss.yNames), size(ss.uNames))
 
   if nx == 0 and sizeD == 0 then
     s := name + ".A = []<br>  " + name + ".B = []<br>   " + name + ".C = [] <br>   " + name + ".D = []";
