@@ -8,6 +8,10 @@ convertClass("Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize",
 convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
               "Modelica_LinearSystems2.Internal.Streams.readMatrixInternal"},
               "Modelica.Utilities.Streams.readRealMatrix");
+convertClass({"Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension",
+              "Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2",
+              "Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension"},
+             "Modelica_LinearSystems2.Utilities.Streams.readSystemDimension");
 //convertElement(" "," "," ");
 
 // Use "buld-in" Complex record instead of Modelica_LinearSystems2.Math.Complex

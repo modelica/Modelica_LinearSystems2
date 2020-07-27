@@ -49,6 +49,15 @@ package LinearSystems2TestConversion3
       Complex.Matrices.matMatMul(cm, cm);
       Complex.Matrices.matVecMul(cm, cv);
     end complexNumerics;
+
+    function readMatrixGainTest
+
+    protected
+      Real K0[1,1] = Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain(m=1,n=1);
+      Real K1[1,1] = Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain("filename.mat",m=1,n=1);
+      Real K2[1,1] = Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain(matrixName="testK",m=1,n=1);
+    algorithm
+    end readMatrixGainTest;
   end Math;
 
   package Types
@@ -65,5 +74,18 @@ package LinearSystems2TestConversion3
 
     end Issue13;
   end Types;
+
+  package Streams
+
+    function readSystemDimensionTest
+
+    protected
+      Integer xuy[3] = Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension();
+      Integer xuy2[3] = Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2();
+      Integer xuy3[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension();
+    algorithm
+
+    end readSystemDimensionTest;
+  end Streams;
   annotation (uses(Modelica_LinearSystems2(version="2.4.0")));
 end LinearSystems2TestConversion3;
