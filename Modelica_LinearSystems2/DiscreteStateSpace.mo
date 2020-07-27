@@ -3363,8 +3363,9 @@ with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.Disc
       "Read a DiscreteStateSpace data record from mat-file"
 
       import Modelica;
+      import Modelica.Utilities.Streams.readRealMatrix;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Utilities.Streams.readSystemDimension;
       import Modelica_LinearSystems2;
 
       input String fileName="dslin.mat"
@@ -3372,7 +3373,7 @@ with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.Disc
                           caption="state space system data file")));
       input String matrixName="ABCD" "Name of the state space system matrix" annotation(Dialog);
     protected
-      Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+      Integer xuy[3]=readSystemDimension(fileName, matrixName) annotation (__Dymola_allowForSize=true);
       Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
       Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
       Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
@@ -3386,17 +3387,17 @@ with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.Disc
         redeclare Real D[ny,nu]) "State space description of model read from file";
 
     protected
-      Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
+      Real ABCD[nx + ny,nx + nu]=readRealMatrix(
           fileName,
           matrixName,
           nx + ny,
           nx + nu);
-      Real B2[nx,nu]=Modelica.Utilities.Streams.readRealMatrix(
+      Real B2[nx,nu]=readRealMatrix(
           fileName,
           "B2",
           nx,
           nu);
-      Real Ts[1,1]=Modelica.Utilities.Streams.readRealMatrix(
+      Real Ts[1,1]=readRealMatrix(
           fileName,
           "Ts",
           1,
@@ -3500,8 +3501,7 @@ The file must contain
       startTime=T_linearize,
       stopTime=T_linearize + 3*Ts);
 
-      Integer xuy[3] = StateSpace.Internal.readSystemDimension(
-        fileName2, "ABCD");
+      Integer xuy[3]=Modelica_LinearSystems2.Utilities.Streams.readSystemDimension(fileName2, "ABCD");
       Integer nx = xuy[1];
       Integer nu = xuy[2];
       Integer ny = xuy[3];
