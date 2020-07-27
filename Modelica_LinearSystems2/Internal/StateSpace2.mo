@@ -318,14 +318,14 @@ operator for StateSpace records.
     encapsulated function fromFile "Read a StateSpace data record from mat-file"
 
       import Modelica;
-      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2.Utilities.Streams;
       import Modelica_LinearSystems2.Internal.StateSpace2;
 
       input String fileName="dslin.mat" "Name of the state space system data file"
         annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)", caption="state space system data file")));
       input String matrixName="ABCD" "Name of the state space system matrix" annotation(Dialog);
     protected
-      Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+      Integer xuy[3]=Streams.readSystemDimension(fileName, matrixName) annotation (__Dymola_allowForSize=true);
       Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
       Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
       Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
