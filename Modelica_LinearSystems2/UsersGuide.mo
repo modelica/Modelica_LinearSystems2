@@ -519,6 +519,15 @@ The following classes were obsolete and removed from the Library.
      <a href=\"modelica://Modelica_LinearSystems2.Types\">Modelica_LinearSystems2.Types</a>
      instead</li>
 </ul>
+
+<h4>
+Non-backward compatible changes
+</h4>
+
+<ul>
+<li> Move Modelica_LinearSystems2.Internal.Streams into 
+     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams\">LinearSystems2.Utilities.Streams</a>
+     </li>
 </html>"));
     end Version_3_0_0;
 
