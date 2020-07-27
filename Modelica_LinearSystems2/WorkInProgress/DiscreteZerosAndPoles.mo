@@ -1292,6 +1292,7 @@ processing.
   end Conversion;
 
   encapsulated package Import
+    import Modelica_LinearSystems2;
 
   function fromModel
     "Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model"
@@ -1318,8 +1319,8 @@ processing.
           resultFile=fileName,
           startTime=T_linearize,
           stopTime=T_linearize + 1);
-    Integer xuy[3] = StateSpace.Internal.readSystemDimension(
-      fileName2, "ABCD");
+    Integer xuy[3]=Modelica_LinearSystems2.Utilities.Streams.readSystemDimension(
+          fileName2, "ABCD");
     Integer nx = xuy[1];
     Integer nu = xuy[2];
     Integer ny = xuy[3];

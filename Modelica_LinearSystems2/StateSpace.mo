@@ -9596,6 +9596,7 @@ subsystem.D = ss.D[outputIndex, inputIndex];
 
   encapsulated package Import
     "Package of functions to generate a StateSpace data record from imported data"
+    import Modelica_LinearSystems2;
     extends Modelica.Icons.Package;
     import Modelica;
 
@@ -9603,7 +9604,7 @@ subsystem.D = ss.D[outputIndex, inputIndex];
       "Read a StateSpace data record from mat-file"
 
       import Modelica;
-      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.Utilities.Streams;
       import Modelica_LinearSystems2.StateSpace;
 
       input String fileName="dslin.mat"
@@ -9614,7 +9615,8 @@ subsystem.D = ss.D[outputIndex, inputIndex];
         "Name of the state space system matrix (default is \"ABCD\") in the fileName"
         annotation (Dialog);
     protected
-      Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+      Integer xuy[3]=Streams.readSystemDimension(
+        fileName, matrixName) annotation (__Dymola_allowForSize=true);
       Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
       Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
       Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
@@ -9695,8 +9697,8 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
               stopTime=T_linearize + 1,
               method=method);
 
-      Integer xuy[3] = StateSpace.Internal.readSystemDimension(
-        fileName2, "ABCD");
+      Integer xuy[3]=Modelica_LinearSystems2.Utilities.Streams.readSystemDimension(
+              fileName2, "ABCD");
       Integer nx = xuy[1];
       Integer nu = xuy[2];
       Integer ny = xuy[3];
@@ -11638,7 +11640,7 @@ The uncontrollable poles are checked to to stable.
 
     encapsulated function readLength_nu
       "Read the number of inputs nu of a state space system from a file"
-      import Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension;
+      import Modelica_LinearSystems2.Utilities.Streams.readSystemDimension;
 
       input String fileName="ss_siso.mat"
         "Name of the state space system data file" annotation (Dialog(
@@ -11676,7 +11678,7 @@ The uncontrollable poles are checked to to stable.
 
     encapsulated function readLength_ny
       "Read the number of outputs ny of a state space system from a file"
-      import Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension;
+      import Modelica_LinearSystems2.Utilities.Streams.readSystemDimension;
 
       input String fileName="ss_siso.mat"
         "Name of the state space system data file" annotation (Dialog(
@@ -11836,35 +11838,6 @@ The uncontrollable poles are checked to to stable.
             D=ss.D);
 
     end reducedCtrSystem2;
-
-    encapsulated function readSystemDimension
-      "Read the order nx of state matrix and the numbers nu and ny of inputs and outputs"
-      import Modelica.Utilities.Streams;
-
-      input String fileName="stateSpace.mat"
-        "File containing the matrix matrixName, e.g. A.mat, dsin.txt"
-        annotation (Dialog(loadSelector(filter=
-                "MAT files (*.mat);; All files (*.*)", caption=
-                "State space system data file")));
-      input String matrixName="ABCD"
-        "Name of the generalized state space system matrix";
-      output Integer xuy[3] "Order of matrixName; size of u; size of y";
-
-    protected
-      Real sizeA[1, 1]=Streams.readRealMatrix(
-              fileName,
-              "nx",
-              1,
-              1);
-
-      Integer ABCDsizes[2]=Streams.readMatrixSize(fileName, matrixName);
-
-    algorithm
-      xuy[1] := integer(sizeA[1, 1]);
-      xuy[2] := ABCDsizes[2] - xuy[1];
-      xuy[3] := ABCDsizes[1] - xuy[1];
-
-    end readSystemDimension;
 
     encapsulated function scaleFactor1
       "Return scale factor for first order block"
@@ -12697,9 +12670,8 @@ k = ---------- * ----------------------
       input String fileName="dslin" "Name of the result file";
 
     protected
-      String fileName2=fileName + ".mat"
-        "Name of the result file with extension";
-      Integer xuy[3] = StateSpace.Internal.readSystemDimension(
+      String fileName2=fileName + ".mat" "Name of the result file with extension";
+      Integer xuy[3]=Modelica_LinearSystems2.Utilities.Streams.readSystemDimension(
         fileName2, "ABCD");
       Integer nx = xuy[1];
       Integer nu = xuy[2];

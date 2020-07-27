@@ -260,7 +260,7 @@ over the load inertia <b>Jload</b>:
     Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
 
     // Read linear system from file
-    Integer xuy[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(
+    Integer xuy[3]=Modelica_LinearSystems2.Utilities.Streams.readSystemDimension(
       fileName2, "ABCD");
     Integer nx = xuy[1];
     Integer nu = xuy[2];

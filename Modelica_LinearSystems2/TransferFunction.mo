@@ -2563,12 +2563,13 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
       Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
       Boolean OK2 = importInitial("dsfinal.txt");
       Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize+1);
-      Integer xuy[3] = StateSpace.Internal.readSystemDimension(
+      Integer xuy[3]=Modelica_LinearSystems2.Utilities.Streams.readSystemDimension(
         fileName2, "ABCD");
       Integer nx = xuy[1];
       Integer nu = xuy[2];
       Integer ny = xuy[3];
-      Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
+      Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
+        fileName2, "ABCD", nx + ny, nx + nu);
       String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
       StateSpace result(

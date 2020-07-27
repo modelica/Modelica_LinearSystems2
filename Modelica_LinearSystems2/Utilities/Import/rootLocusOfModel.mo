@@ -169,7 +169,7 @@ algorithm
 
   // Determine array dimensions of the first linearization point
   fileName2 := fileName + String(is[1]) + ".mat";
-  xuy :=StateSpace.Internal.readSystemDimension(fileName2, "ABCD");
+  xuy :=Streams.readSystemDimension(fileName2, "ABCD");
   nx :=xuy[1];
   nu :=xuy[2];
   ny :=xuy[3];
