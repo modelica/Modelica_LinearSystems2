@@ -6,7 +6,7 @@ convertClear();
 convertClass("Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize",
               "Modelica.Utilities.Streams.readMatrixSize");
 convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
-	            "Modelica_LinearSystems2.Internal.Streams.readMatrixInternal"},
+              "Modelica_LinearSystems2.Internal.Streams.readMatrixInternal"},
               "Modelica.Utilities.Streams.readRealMatrix");
 //convertElement(" "," "," ");
 
@@ -81,3 +81,21 @@ convertClass("Modelica_LinearSystems2.Math.Complex.eigenVectors",
              "Modelica_LinearSystems2.ComplexMathAdds.eigenVectors");
 convertClass("Modelica_LinearSystems2.Math.Complex.frequency",
              "Modelica_LinearSystems2.ComplexMathAdds.frequency");
+
+// Change references to classes that are removed from Modelica_LinearSystems2 or are obsolete
+convertClass({"Modelica_LinearSystems2.Types",
+              "Modelica_LinearSystems2.Types.Grid",
+              "Modelica_LinearSystems2.Types.AnalogFilter",
+              "Modelica_LinearSystems2.Types.FilterType",
+              "Modelica_LinearSystems2.Types.Method",
+              "Modelica_LinearSystems2.Types.StaircaseMethod",
+              "Modelica_LinearSystems2.Types.TimeResponse",
+              "Modelica_LinearSystems2.Types.Window"},
+             {"Modelica_LinearSystems2.Utilities.Types",
+              "Modelica_LinearSystems2.Utilities.Types.Grid",
+              "Modelica_LinearSystems2.Utilities.Types.AnalogFilter",
+              "Modelica_LinearSystems2.Utilities.Types.FilterType",
+              "Modelica_LinearSystems2.Utilities.Types.Method",
+              "Modelica_LinearSystems2.Utilities.Types.StaircaseMethod",
+              "Modelica_LinearSystems2.Utilities.Types.TimeResponse",
+              "Modelica_LinearSystems2.Utilities.Types.Window"});

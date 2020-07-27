@@ -478,8 +478,7 @@ Improvements in this version
 Obsolete classes
 </h4>
 <p>
-The following classes were marked obsolete and will be removed from
-the Library in the future.
+The following classes were obsolete and removed from the Library.
 </p>
 
 <ul>
@@ -516,6 +515,9 @@ the Library in the future.
 <li> Modelica_LinearSystems2.Math.Vectors.length</li>
 <li> Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</li>
 <li> Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</li>
+<li> Modelica_LinearSystems2.Types &ndash; use types from
+     <a href=\"modelica://Modelica_LinearSystems2.Types\">Modelica_LinearSystems2.Types</a>
+     instead</li>
 </ul>
 </html>"));
     end Version_2_4_1;
