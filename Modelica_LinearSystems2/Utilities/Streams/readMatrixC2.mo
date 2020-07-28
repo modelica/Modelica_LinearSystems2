@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Utilities.Streams;
-function ReadMatrixC2 "Read the output matrix of a state space system"
+function readMatrixC2 "Read the output matrix of a state space system"
   input String fileName=DataDir + "abcd.mat"
                               annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
@@ -22,4 +22,4 @@ public
   output Real C[ny,nx]=ABCD[nx + 1:nx + ny, 1:nx];
 algorithm
 
-end ReadMatrixC2;
+end readMatrixC2;

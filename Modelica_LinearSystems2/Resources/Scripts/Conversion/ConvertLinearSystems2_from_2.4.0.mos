@@ -3,6 +3,7 @@
 // clear
 convertClear();
 
+// Move Modelica_LinearSystems2.Internal.Streams into Modelica_LinearSystems2.Utilities.Streams
 convertClass("Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize",
               "Modelica.Utilities.Streams.readMatrixSize");
 convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
@@ -12,8 +13,26 @@ convertClass({"Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension",
               "Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2",
               "Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension"},
              "Modelica_LinearSystems2.Utilities.Streams.readSystemDimension");
-convertClass("Modelica_LinearSystems2.Internal.Streams",
-             "LinearSystems2.Utilities.Streams");
+convertClass({"Modelica_LinearSystems2.Internal.Streams.AnalyseOptions",
+              "Modelica_LinearSystems2.Internal.Streams.ReadMatrixA",
+              "Modelica_LinearSystems2.Internal.Streams.ReadMatrixA2",
+              "Modelica_LinearSystems2.Internal.Streams.ReadMatrixB",
+              "Modelica_LinearSystems2.Internal.Streams.ReadMatrixB2",
+              "Modelica_LinearSystems2.Internal.Streams.ReadMatrixC",
+              "Modelica_LinearSystems2.Internal.Streams.ReadMatrixC2",
+              "Modelica_LinearSystems2.Internal.Streams.ReadMatrixD",
+              "Modelica_LinearSystems2.Internal.Streams.ReadMatrixD2",
+              "Modelica_LinearSystems2.Internal.Streams.stateSpaceString_html"},
+             {"Modelica_LinearSystems2.Utilities.Streams.AnalyseOptions",
+              "Modelica_LinearSystems2.Utilities.Streams.readMatrixA",
+              "Modelica_LinearSystems2.Utilities.Streams.readMatrixA2",
+              "Modelica_LinearSystems2.Utilities.Streams.readMatrixB",
+              "Modelica_LinearSystems2.Utilities.Streams.readMatrixB2",
+              "Modelica_LinearSystems2.Utilities.Streams.readMatrixC",
+              "Modelica_LinearSystems2.Utilities.Streams.readMatrixC2",
+              "Modelica_LinearSystems2.Utilities.Streams.readMatrixD",
+              "Modelica_LinearSystems2.Utilities.Streams.readMatrixD2",
+              "Modelica_LinearSystems2.Utilities.Streams.stateSpaceString_html"});
 //convertElement(" "," "," ");
 
 // Use "buld-in" Complex record instead of Modelica_LinearSystems2.Math.Complex
