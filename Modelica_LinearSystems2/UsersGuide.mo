@@ -455,13 +455,13 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_3_0_0 "Version 3.0.0-dev (???, 2020)"
+    class Version_2_5_0 "Version 2.5.0-dev (???, 2020)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
 <p>
 This version requires the <strong>Modelica 4.0.0</strong> Library.
-It is <strong>not</strong> backward compatible to the previous version 2.4.0.
+It is backward compatible to the previous version 2.4.0.
 </p>
 
 <h4>
@@ -475,24 +475,32 @@ Improvements in this version
 </ul>
 
 <h4>
+Obsolete operator record Modelica_LinearSystems2.Math.Complex
+</h4>
+<p>
+The functionality of this record is given by the top-level operator
+record <a href=\"modelica://Complex\">Complex</a> now and
+most of the functions can be found in the library 
+<a href=\"modelica://Modelica.ComplexMath\">Modelica.ComplexMath</a>.
+The remaining functions contained in this record where moved into
+<a href=\"modelica://Modelica_LinearSystems2.ComplexMathAdds\">ComplexMathAdds</a>.
+</p>
+<p>
+This operator record itself is obsolete and will be removed from the Library
+in the future. See also 
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">UsersGuide.GettingStarted.ComplexNumbers</a>.
+</p>
+
+
+<h4>
 Obsolete classes
 </h4>
 <p>
-The following classes were obsolete and removed from the Library.
+The following classes are obsolete and will be removed from the Library
+in the future.
 </p>
 
 <ul>
-<li> Modelica_LinearSystems2.Math.Complex.j</li>
-<li> Modelica_LinearSystems2.Math.Complex.'abs'</li>
-<li> Modelica_LinearSystems2.Math.Complex.'sqrt'</li>
-<li> Modelica_LinearSystems2.Math.Complex.exp</li>
-<li> Modelica_LinearSystems2.Math.Complex.log</li>
-<li> Modelica_LinearSystems2.Math.Complex.sin</li>
-<li> Modelica_LinearSystems2.Math.Complex.cos</li>
-<li> Modelica_LinearSystems2.Math.Complex.arg</li>
-<li> Modelica_LinearSystems2.Math.Complex.conj</li>
-<li> Modelica_LinearSystems2.Math.Complex.real</li>
-<li> Modelica_LinearSystems2.Math.Complex.imag</li>
 <li> Modelica_LinearSystems2.Math.Matrices.cholesky</li>
 <li> Modelica_LinearSystems2.Math.Matrices.conditionNumber</li>
 <li> Modelica_LinearSystems2.Math.Matrices.det</li>
@@ -520,7 +528,7 @@ The following classes were obsolete and removed from the Library.
      instead</li>
 </ul>
 </html>"));
-    end Version_3_0_0;
+    end Version_2_5_0;
 
     class Version_2_4_0 "Version 2.4.0 (June 26, 2020)"
       extends Modelica.Icons.ReleaseNotes;

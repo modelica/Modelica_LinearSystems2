@@ -1,5 +1,5 @@
 within ;
-package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 3.0.0-dev) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
+package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.5.0-dev) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
 
   extends Modelica.Icons.Package;
 
@@ -10,7 +10,7 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 3.0.0-dev) - A
 annotation (
   preferredView="info",
   uses(Modelica(version="4.0.0")),
-  version="3.0.0-dev",
+  version="2.5.0-dev",
   versionDate="2020-06-26",
   dateModified = "2020-06-26 14:00:00Z",
   revisionId="$Id::                                       $",
