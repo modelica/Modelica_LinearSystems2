@@ -1,5 +1,5 @@
 within ;
-package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.5.0-dev) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
+package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 3.0.0-dev) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
 
   extends Modelica.Icons.Package;
 
@@ -12,19 +12,24 @@ annotation (
   preferredView="info",
   uses(
     Modelica(version="4.0.0"),
-    DymolaCommands(version="1.11")),
-  version="2.5.0-dev",
-  versionDate="2021-10-29",
-  dateModified = "2021-10-28 14:00:00Z",
-  revisionId="$F​ormat:%h %ci$",
+    DymolaCommands(version="1.17")),
+  version="3.0.0-dev",
+  versionDate="2024-06-21",
+  dateModified = "2024-03-26 14:00:00Z",
+  revisionId="$Format:%h %ci$",
   conversion(
-    from(version={"2.0", "2.1", "2.2", "2.3", "2.3.1", "2.3.2", "2.3.2", "2.3.3", "2.3.4"},
-      script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.3.4.mos", to="2.3.5"),
-    from(version="2.3.5",
+    from(
+      version={"2.0", "2.1", "2.2", "2.3", "2.3.1", "2.3.2", "2.3.2", "2.3.3", "2.3.4"},
+      to="2.3.5",
+      script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.3.4.mos"),
+    from(
+      version="2.3.5",
       script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.3.5.mos"),
-    from(version={"2.4.0", "2.4.1"},
+    from(
+      version={"2.4.0", "2.4.1"},
       script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.4.0.mos")),
-  Documentation(info="<html>
+  Documentation(
+    info="<html>
 <p>
 Library <strong>Modelica_LinearSystems2</strong> is a Modelica package
 providing different representations of linear, time invariant differential and
@@ -94,7 +99,7 @@ Modelica Standard Library.
   <td style=\"vertical-align: top;\"><strong>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</strong></td>
 </tr>
 <tr>
-  <td style=\"vertical-align: top;\"><strong>Copyright &copy; 2012-2021, DLR Institute of System Dynamics and Control</strong></td>
+  <td style=\"vertical-align: top;\"><strong>Copyright &copy; 2012-2024, DLR Institute of System Dynamics and Control</strong></td>
 </tr>
 </table>
 
