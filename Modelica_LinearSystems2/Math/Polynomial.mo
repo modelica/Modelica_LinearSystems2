@@ -101,12 +101,12 @@ operator record Polynomial "Record defining the data for a polynomial"
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math;
       import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
       output Boolean ok;
 
     protected
-      Complex j=Modelica_LinearSystems2.Math.Complex.j();
+      Complex j=Modelica.ComplexMath.j;
       Complex c[:]={-2 + 0*j,Complex(0),2 + 0*j,7 + j,7 - j};
       Polynomial p=Polynomial(c);
     algorithm
@@ -145,7 +145,7 @@ operator record Polynomial "Record defining the data for a polynomial"
       import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica.Utilities.Streams;
-      import Modelica_LinearSystems2.Math.Complex;
+      import Complex;
 
       input Complex roots[:]
         "Zeros of polynomial (must be real or conjugate complex pairs)";
@@ -507,7 +507,7 @@ in a least squares sense.
     import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica.Utilities.Strings;
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
 
     input Polynomial p "Polynomial to be plotted";
     input Integer nPoints(min=2) = 200 "Number of points";
@@ -688,7 +688,7 @@ Horner's method is used for polynomial evaluation.
 
   encapsulated function evaluateComplex
     "Evaluate a Polynomial at a given (Complex) abszissa value"
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
     import Modelica_LinearSystems2.Math.Polynomial;
 
     input Polynomial p "Polynomial to be evaluated";
@@ -751,8 +751,9 @@ Horner's method is used for polynomial evaluation.
 
   encapsulated function roots
     "Determine zeros of polynomial, i.e., points x with p(x)=0"
+    import Complex;
+    import Modelica_LinearSystems2.ComplexMathAdds.Vectors;
     import Modelica_LinearSystems2.Math.Polynomial;
-    import Modelica_LinearSystems2.Math.Complex;
 
     input Polynomial p "Polynomial";
     input Boolean printRoots=false "True, if roots shall be pretty printed";
@@ -763,7 +764,7 @@ Horner's method is used for polynomial evaluation.
     result := Polynomial.rootsOfNonZeroHighestCoefficientPolynomial(p,
       Polynomial.numberOfRoots(p));
     if printRoots then
-      Complex.Vectors.print("", result);
+      Vectors.print("", result);
     end if;
     annotation (Documentation(info="<html>
 <p>
@@ -801,10 +802,11 @@ a vector of Complex elements.
 
   encapsulated function rootsOfNonZeroHighestCoefficientPolynomial
     "Determine zeros of polynomial where highest coefficient of polynomial is not zero"
+    import Modelica;
     import Modelica_LinearSystems2.Math.Matrices;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.Math.Polynomial;
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
 
     input Polynomial p "Polynomial";
     input Integer numberOfRoots "Number of roots of polynomial";
@@ -816,7 +818,7 @@ a vector of Complex elements.
     Integer n=numberOfRoots;
     Real A[n, n] "Companion matrix";
     Real ev[n, 2] "Eigen values";
-    Complex j=Modelica_LinearSystems2.Math.Complex.j();
+    Complex j=Modelica.ComplexMath.j;
   algorithm
     assert(numberOfRoots >= 0 and numberOfRoots < nc,
       "Argument numberOfRoots (= " + String(numberOfRoots) +

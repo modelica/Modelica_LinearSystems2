@@ -57,18 +57,18 @@ record DiscreteZerosAndPoles
     end fromReal;
 
   encapsulated function fromZerosAndPoles
-      "Generate a ZerosAndPoles transfer function from a set of zeros and poles"
+    "Generate a ZerosAndPoles transfer function from a set of zeros and poles"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica.Utilities.Streams.print;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.Internal;
+    import Complex;
+    import Modelica.Utilities.Streams.print;
 
-    input Complex z[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+    input Complex z[:]=fill(Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
-    input Complex p[:]=fill(Modelica_LinearSystems2.Math.Complex(0), 0)
+    input Complex p[:]=fill(Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
     input Real k=1.0 "Constant multiplied with transfer function";
       input Modelica.Units.SI.Time Ts=1 "Sample time";
@@ -143,7 +143,7 @@ Example:
 with j=sqrt(-1), is defined as
 </p>
 <pre>
-   <b>import</b> Modelica_LinearSystems2.Math.Complex;
+   <b>import</b> Complex;
    <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
 
    zp = ZerosAndPoles(z = {Complex(-1,0)},
@@ -212,11 +212,11 @@ follow each other as above. An error occurs if this is not the case.
 
 encapsulated operator '-'
   function subtract "Subtract two TransferFunctions (zp1 - zp2)"
-      import Modelica;
-      import ZerosAndPoles =
-        Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    import ZerosAndPoles =
+      Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Complex;
 
     input ZerosAndPoles zp1;
     input ZerosAndPoles zp2;
@@ -327,7 +327,7 @@ end '-';
     import ZerosAndPoles =
       Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
     import Modelica_LinearSystems2.Math.Polynomial;
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
 
     input ZerosAndPoles zp1;
     input ZerosAndPoles zp2;
@@ -683,13 +683,13 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
   function toDiscreteTransferFunction
       "Generate a DiscreteTransferFunction object from a DiscreteZerosAndPoles object"
 
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.Math.Complex;
+    import Modelica;
+    import Complex;
+    import Modelica_LinearSystems2.Math.Polynomial;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.Internal;
 
     input DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles transfer function of a system";
@@ -745,15 +745,14 @@ from a ZerosAndPoles record representated by first and second order numerator an
   end toDiscreteTransferFunction;
 
   function toStateSpace
-      "Transform a ZerosAndPoles object into a StateSpace object"
+    "Transform a ZerosAndPoles object into a StateSpace object"
    //encapsulated function fromZerosAndPoles
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Vectors;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
+    import Modelica;
+    import Modelica_LinearSystems2;
+    import Modelica_LinearSystems2.ZerosAndPoles;
+    import Modelica_LinearSystems2.Math.Vectors;
+    import Modelica_LinearSystems2.StateSpace;
+    import Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
 
     input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
     output StateSpace ss(
@@ -1384,10 +1383,9 @@ Generate a matrix of ZerosAndPoles data records by linearization of a model defi
     encapsulated function fromFile
       "Generate a ZerosAndPoles record by reading the polynomial coefficients or zeros and poles from a file"
       //import ZerosAndPoles = Modelica_LinearSystems2.WorkInProgress.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Complex;
       import Modelica;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.DataDir;
 
       input String fileName=DataDir + "zp.mat"
@@ -1564,7 +1562,7 @@ Example:
 with j=sqrt(-1), is defined as
 </p>
 <pre>
-   <b>import</b> Modelica_LinearSystems2.Math.Complex;
+   <b>import</b> Complex;
    <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
 
    zp = ZerosAndPoles(z = {Complex(-1,0)},

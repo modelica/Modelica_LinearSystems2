@@ -2,8 +2,9 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function designStateSpaceController
   "Demonstration of controller design for a state space system"
   import Modelica.Utilities.Streams.print;
+  import Modelica.ComplexMath;
+  import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
@@ -33,7 +34,7 @@ algorithm
 //####### POLE ASSIGNMENT ##########
 // return the Schur form representation
   (,,po) := StateSpace.Design.assignPolesMI2(ss,assignedPoles,size(assignedPoles,1),true);
-  Complex.Vectors.print("poSchur", po);
+  ComplexMathAdds.Vectors.print("poSchur", po);
   StateSpace.Analysis.analysis(ss,fileName="openloopSystem.html");
 
 // feedback matrix of a pole assignment controller with assigned eigenvalues pa
@@ -43,13 +44,13 @@ algorithm
   print("The feedback matrix of the pole assignment controller is:\n" +
     Matrices.printMatrix(K_pa, 6, "K_pa"));
   print("eigenvalues of the closed loop system are:\n");
-  Complex.Vectors.print("ev_pa", po);
+  ComplexMathAdds.Vectors.print("ev_pa", po);
 // Pre filter calculation
 //   M_pa := -Modelica.Math.Matrices.inv([1,0,0,0;0,0,1,0]*Matrices.solve2(ss_pa.A, ss_pa.B));
 //   print("Gain for pre filtering:\n" +
 //     Matrices.printMatrix(M_pa, 6, "M_pa"));
 
-  assignedPoles := Complex.Vectors.reverse(assignedPoles);
+  assignedPoles := ComplexMath.Vectors.reverse(assignedPoles);
   assignedPoles[3]:=Complex(-1);
   assignedPoles[4]:=Complex(-2);
 // feedback matrix of a pole assignment controller with assigned eigenvalues pa
@@ -59,7 +60,7 @@ algorithm
   print("The feedback matrix of the pole assignment controller is:\n" +
     Matrices.printMatrix(K_pa, 6, "K_pa"));
   print("eigenvalues of the closed loop system are:\n");
-  Complex.Vectors.print("ev_pa", po);
+  ComplexMathAdds.Vectors.print("ev_pa", po);
 // Pre filter calculation
 //   M_pa := -Modelica.Math.Matrices.inv([1,0,0,0;0,0,1,0]*Matrices.solve2(ss_pa.A, ss_pa.B));
 //   print("Gain for pre filtering:\n" +

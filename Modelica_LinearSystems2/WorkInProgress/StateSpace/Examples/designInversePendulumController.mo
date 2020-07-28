@@ -3,8 +3,9 @@ function designInversePendulumController
   "Design pole assignment for an inverse pedulum"
 
   import Modelica.Utilities.Streams;
+  import MatricesMSL = Modelica.Math.Matrices;
+  import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
 
   input String modelName="Modelica_Controller.Examples.Components.InversePendulum_small"
@@ -14,7 +15,7 @@ function designInversePendulumController
   input String fileName=DataDir + "inversePendulumController_small.mat"
     "File name for results";
 protected
-   input Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j = Modelica.ComplexMath.j;
 public
   output Real K_pa[:,:] "feedback matrix pole assignment controller";
   output Real M_pa[:,:] "pre filter LQ controller";
@@ -22,7 +23,7 @@ public
 protected
   Modelica_LinearSystems2.StateSpace ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName);
 
-  Complex p[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+  Complex p[:]=ComplexMathAdds.eigenValues(ss.A);
 
   Modelica_LinearSystems2.StateSpace ss_pa=ss;
 
@@ -36,12 +37,12 @@ algorithm
   ss_pa.A := ss.A - ss.B*K_pa;
 
   Streams.print("The feedback matrix of the pole assignment controller is:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    Matrices.printMatrix(
     K_pa,
     6,
     "K_pa"));
   Streams.print("eigenvalues of the closed loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
+  ComplexMathAdds.Vectors.print("ev_pa", p);
   Streams.writeRealMatrix(
    fileName,
     "K_pa",
@@ -49,9 +50,9 @@ algorithm
     true);
 
 // Pre filter calculation
-  M_pa := -Modelica.Math.Matrices.inv([1,0,0,0]*Modelica.Math.Matrices.solve2(ss_pa.A, ss_pa.B));
+  M_pa := -MatricesMSL.inv([1,0,0,0]*MatricesMSL.solve2(ss_pa.A, ss_pa.B));
   Streams.print("Gain for pre filtering:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    Matrices.printMatrix(
     M_pa,
     6,
     "M_pa"));

@@ -6,7 +6,6 @@ function plotBode1
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.Math.Complex;
 
   input Modelica.Units.SI.Frequency f_cut=100
     "PT1 with cut-off frequency f_cut";

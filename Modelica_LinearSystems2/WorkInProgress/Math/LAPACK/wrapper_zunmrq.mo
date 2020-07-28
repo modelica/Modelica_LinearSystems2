@@ -1,6 +1,5 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function wrapper_zunmrq "Wrapper for lapack function zunmrq"
-  import Modelica_LinearSystems2.Math.Complex;
 
   input Real RQ_real[ :, :] "Square or rectangular matrix";
   input Real RQ_imag[size(RQ_real,1), size(RQ_real,2)]

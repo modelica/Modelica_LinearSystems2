@@ -3,7 +3,7 @@ function invariantZeros
   "Example to compute the invariant zeros of a state space system"
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
 
   input Integer n=20;
   input Integer ll=7;

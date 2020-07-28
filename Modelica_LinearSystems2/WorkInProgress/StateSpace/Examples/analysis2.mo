@@ -2,9 +2,8 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function analysis2 "Example to check controllability of a state space system"
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
 
   input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
       A=[-6.0,0,2,-13.0; -9.0,-12.0,-3.25,19.25; 0,0,1,34.0; 0,0,-34.0,-31.0]/6,
@@ -52,12 +51,8 @@ protected
   Real eigvec[4,4] "eigen values of the system";
   Real eigvecRe[4,4]=fill(0, 4, 4) "eigen values of the system";
   Real eigvecIm[4,4]=fill(0, 4, 4) "eigen values of the system";
-  Complex eigval[4]=fill(Complex(0), 4)
-  annotation (Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Design.assignPolesMI</b> which is
-to design pole assignment controllers for state space systems with multiple input.
-</html>"));
-  Complex j= Modelica_LinearSystems2.Math.Complex.j();
+  Complex eigval[4]=fill(Complex(0), 4);
+  Complex j = Modelica.ComplexMath.j;
   Complex Tp[2,2]=sqrt(0.5)*[1+0*j, -j; 1+0*j, j];
   Integer i;
 
@@ -68,7 +63,7 @@ algorithm
   ok := false;
   StateSpace.Analysis.analysis(ss, fileName="analysis.html", analyseOptions=analyseOptions, description="Description of the system");
   (eigvec,eigval) := Modelica_LinearSystems2.StateSpace.Analysis.eigenVectors(ss, false);
-  Complex.Vectors.print("eval",eigval);
+  Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("eval",eigval);
   Modelica_LinearSystems2.Math.Matrices.printMatrix(eigvec, 6, "leftEigenVectors");
 
   i := 1;
@@ -116,7 +111,9 @@ algorithm
         heading="Initial response modal states"),subPlots=false);
 
   ok := true;
-  annotation (__Dymola_interactive=true, Documentation(info="<html>
+  annotation (
+    __Dymola_interactive=true,
+    Documentation(info="<html>
 This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</b> which is
 to check whether a system is controllable or not.
 </html>"));
