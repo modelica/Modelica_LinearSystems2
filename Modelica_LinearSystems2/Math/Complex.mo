@@ -23,6 +23,7 @@ shall be replaced by
 </pre></blockquote>
 <p>
 in your models.
-This new import can even be removed completely in most cases.
+Such a&nbsp;new import can even be removed completely in most cases
+due to the build-in-like functionality of the operator record Complex.
 </p>
 </html>"));
