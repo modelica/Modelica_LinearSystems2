@@ -543,32 +543,56 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_2_5_0 "Version 2.5.0-dev (???, 2020)"
+    class Version_3_0_0 "Version 3.0.0-dev (June 21, 2024)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
 <p>
 This version requires the <strong>Modelica 4.0.0</strong> Library.
-There is a&nbsp;limited backward compatibility to the previous version 2.4.1.
+It is <strong>not</strong> backward compatible to previous versions 2.X.Y od the Library.
+</p>
+
+<p>
+A tested conversion script is provided to transform functions and blocks
+of previous versions 2.X.Y to this new version.
+Obsolete classes that could not be automatically converted to alternative
+implementations have been moved to library ObsoleteLinearSystems2.</li>
 </p>
 
 <h4>
-Obsolete operator record Modelica_LinearSystems2.Math.Complex
+Improvements in this version
 </h4>
+
+<ul>
+<li> &hellip;</li>
+</ul>
+
+<h4>
+Non-backward compatible changes
+</h4>
+
+
+<h5>
+Operator record Modelica_LinearSystems2.Math.Complex
+</h5>
 <p>
 The functionality of this record is given by the top-level operator
 record <a href=\"modelica://Complex\">Complex</a> now and
 most of the functions can be found in the library 
 <a href=\"modelica://Modelica.ComplexMath\">Modelica.ComplexMath</a>.
-The remaining functions contained in this record where moved into
+The remaining functions contained in this record were moved into
 <a href=\"modelica://Modelica_LinearSystems2.ComplexMathAdds\">ComplexMathAdds</a>.
 </p>
 <p>
 Therefore, the record <code>Modelica_LinearSystems2.Math.Complex</code>
-was marked obsolete and shall not be used anymore.
-The provided conversion script ensures proper transformation
+was removed. The provided conversion script ensures proper transformation
 of the record and its functions.
-The record will be removed from the Library in the future.
+</p>
+<p>
+The only exception is the <strong>imaginary unit function</strong>
+<code>Modelica_LinearSystems2.Math.Complex.j()</code> which is migrated to
+ObsoleteLinearSystems2. It is documented in ObsoleteLinearSystems2 how to
+manually change to proper <code>Modelica.ComplexMath.j</code>.
 </p>
 <p>
 See also 
@@ -578,14 +602,47 @@ for some details and
 for inheritance.
 </p>
 
-<h4>
-Obsolete classes
-</h4>
+
+<h5>
+Moved classes
+</h5>
 <p>
-The following classes are obsolete and will be removed from the Library
-in the future. A&nbsp;conversion script is provided to facilitate
+The following classes were relocated within the Library. A&nbsp;conversion script is provided to facilitate
 the conversion.
 </p>
+
+<ul>
+  <li>
+    Modelica_LinearSystems2.StateSpace.Internal.<strong>readSystemDimension</strong> to
+    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams.readSystemDimension\">Utilities.Streams.readSystemDimension</a>
+  </li>
+  <li>
+    Package Modelica_LinearSystems2.Internal.<strong>Streams</strong> to
+    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams\">Utilities.Streams</a>;
+    and all functions start with a&nbsp;lower case letter now.
+  </li>
+  <li>
+    Package Modelica_LinearSystems2.<strong>Types</strong> to
+    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Types\">Utilities.Types</a>
+    instead.
+  </li>
+</ul>
+
+
+<h5>
+Removed deprecated classes
+</h5>
+<p>
+The following classes were removed from the Library. A&nbsp;conversion script is provided to facilitate
+the conversion.
+</p>
+
+<ul>
+  <li>
+    Operator record Modelica_LinearSystems2.Math.Complex, see also
+    <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">UsersGuide.GettingStarted.ComplexNumbers</a>
+  </li>
+</ul>
 
 <ul>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgecon</li>
@@ -605,14 +662,42 @@ the conversion.
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dormhr</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dormqr</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dpotrf</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrevc</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrsen</li>
-  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrsyl</li>
-  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dpotrf</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrsm</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrsyl</li>
+</ul>
+
+<ul>
+<li> Modelica_LinearSystems2.Math.Matrices.cholesky</li>
+<li> Modelica_LinearSystems2.Math.Matrices.conditionNumber</li>
+<li> Modelica_LinearSystems2.Math.Matrices.det</li>
+<li> Modelica_LinearSystems2.Math.Matrices.fliplr</li>
+<li> Modelica_LinearSystems2.Math.Matrices.flipud</li>
+<li> Modelica_LinearSystems2.Math.Matrices.hessenberg</li>
+<li> Modelica_LinearSystems2.Math.Matrices.leastSquares2</li>
+<li> Modelica_LinearSystems2.Math.Matrices.LU</li>
+<li> Modelica_LinearSystems2.Math.Matrices.LU_solve</li>
+<li> Modelica_LinearSystems2.Math.Matrices.LU_solve2</li>
+<li> Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg</li>
+<li> Modelica_LinearSystems2.Math.Matrices.norm</li>
+<li> Modelica_LinearSystems2.Math.Matrices.nullspace</li>
+<li> Modelica_LinearSystems2.Math.Matrices.rsf2</li>
+<li> Modelica_LinearSystems2.Math.Matrices.solve</li>
+<li> Modelica_LinearSystems2.Math.Matrices.solve2</li>
+<li> Modelica_LinearSystems2.Math.Matrices.trace</li>
+<li> Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain</li>
+<li> Modelica_LinearSystems2.Math.Vectors.find</li>
+<li> Modelica_LinearSystems2.Math.Vectors.length</li>
+<li> Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</li>
+<li> Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</li>
+<li> Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension</li>
+<li> Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2</li>
+<li> Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension</li>
 </ul>
 </html>"));
-    end Version_2_5_0;
+    end Version_3_0_0;
 
     class Version_2_4_1 "Version 2.4.1 (October 29, 2021)"
       extends Modelica.Icons.ReleaseNotes;
@@ -644,13 +729,23 @@ Improvements in this version
        </li>
 </ul>
 
+<h5>
+Improvements in build.2 (2021-11-16)
+</h5>
+
+<ul>
+  <li>
+    Bug fix: Remove buggy initialization of matrix ABCD in 
+    <a href=\"modelica://Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace2\">DiscreteStateSpace2</a>.
+  </li>
+</ul>
 
 <h4>
 Obsolete classes
 </h4>
 <p>
-The following classes are obsolete and will be removed from the Library
-in the future.
+The following classes were marked obsolete and will be removed from
+the Library in the future.
 </p>
 
 <ul>
@@ -682,7 +777,6 @@ in the future.
 </ul>
 </html>"));
     end Version_2_4_1;
-
 
     class Version_2_4_0 "Version 2.4.0 (June 26, 2020)"
       extends Modelica.Icons.ReleaseNotes;
