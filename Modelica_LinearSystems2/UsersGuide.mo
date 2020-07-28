@@ -575,6 +575,24 @@ Improvements in this version
 </ul>
 
 <h4>
+Obsolete operator record Modelica_LinearSystems2.Math.Complex
+</h4>
+<p>
+The functionality of this record is given by the top-level operator
+record <a href=\"modelica://Complex\">Complex</a> now and
+most of the functions can be found in the library 
+<a href=\"modelica://Modelica.ComplexMath\">Modelica.ComplexMath</a>.
+The remaining functions contained in this record where moved into
+<a href=\"modelica://Modelica_LinearSystems2.ComplexMathAdds\">ComplexMathAdds</a>.
+</p>
+<p>
+This operator record itself is obsolete and will be removed from the Library
+in the future. See also 
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">UsersGuide.GettingStarted.ComplexNumbers</a>.
+</p>
+
+
+<h4>
 Obsolete classes
 </h4>
 <p>
@@ -610,7 +628,7 @@ in the future.
      instead</li>
 </ul>
 </html>"));
-    end Version_3_0_0;
+    end Version_2_5_0;
 
     class Version_2_4_0 "Version 2.4.0 (June 26, 2020)"
       extends Modelica.Icons.ReleaseNotes;
