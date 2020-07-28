@@ -487,9 +487,18 @@ The remaining functions contained in this record where moved into
 <a href=\"modelica://Modelica_LinearSystems2.ComplexMathAdds\">ComplexMathAdds</a>.
 </p>
 <p>
-This operator record itself is obsolete and will be removed from the Library
-in the future. See also 
-<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">UsersGuide.GettingStarted.ComplexNumbers</a>.
+Therefore, the record <code>Modelica_LinearSystems2.Math.Complex</code>
+was marked obsolete and shall not be used anymore.
+The provided conversion script ensures proper transformation
+of the record and its functions.
+The record will be removed from the Library in the future.
+</p>
+<p>
+See also 
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">UsersGuide.GettingStarted.ComplexNumbers</a>
+for some details and
+<a href=\"modelica://Modelica_LinearSystems2.Math.Complex\">Modelica_LinearSystems2.Math.Complex</a>
+for inheritance.
 </p>
 
 
@@ -525,7 +534,7 @@ in the future.
 <li> Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</li>
 <li> Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</li>
 <li> Modelica_LinearSystems2.Types &ndash; use types from
-     <a href=\"modelica://Modelica_LinearSystems2.Types\">Modelica_LinearSystems2.Types</a>
+     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Types\">Modelica_LinearSystems2.Utilities.Types</a>
      instead</li>
 </ul>
 </html>"));
