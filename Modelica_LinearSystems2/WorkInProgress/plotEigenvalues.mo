@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress;
 function plotEigenvalues
   "Calculate eigenvalues of matrix A and plot root locus"
-  import Modelica_LinearSystems2.WorkInProgress.RootLocusOld.Types.MarkerStyles;
 
   input Real A[:,size(A, 1)] = [2,1,1;1,1,1;1,2,2] "Square matrix";
   input Boolean removePrevious=true
@@ -17,7 +16,7 @@ function plotEigenvalues
     annotation (Dialog(group="Plot settings", enable=useLegend));
   input Boolean grid = false "Add grid"
     annotation (Dialog(group="Plot settings"));
-  input MarkerStyles markerStyle=MarkerStyles.Cross "Style of marker"
+  input MarkerStyle markerStyle=MarkerStyle.Cross "Style of marker"
     annotation (Dialog(group="Plot settings"));
   input Integer markerColor[3]={0,0,255} "Color of marker"
     annotation(Dialog(group="Plot settings", colorSelector=true));
@@ -28,15 +27,6 @@ function plotEigenvalues
 //  output Real evIm[size(A, 1)];
 protected
   Integer id;
-  Integer markerStyle2=
-    if markerStyle==MarkerStyles.Cross then MarkerStyle.Cross else
-    if markerStyle==MarkerStyles.Circle then MarkerStyle.Circle else
-    if markerStyle==MarkerStyles.Square then MarkerStyle.Square else
-    if markerStyle==MarkerStyles.FilledSquare then MarkerStyle.FilledSquare else
-    if markerStyle==MarkerStyles.TriangleDown then MarkerStyle.TriangleDown else
-    if markerStyle==MarkerStyles.TriangleUp then MarkerStyle.TriangleUp else
-    if markerStyle==MarkerStyles.Diamond then MarkerStyle.Diamond else MarkerStyle.Circle;
-//    if markerStyle==MarkerStyles.FilledCircle then MarkerStyle.FilledCircle else
   Boolean ok "True, if all calls are ok";
 
 algorithm
@@ -68,7 +58,7 @@ algorithm
     legend=legend,
     color=markerColor,
     pattern = LinePattern.None,
-    marker = markerStyle2,
+    marker = markerStyle,
     erase=false);
 
 //   removePlots();
