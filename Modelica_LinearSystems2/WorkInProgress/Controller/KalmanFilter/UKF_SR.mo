@@ -7,16 +7,18 @@ model UKF_SR "Unscented Kalman filter"
 
   import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Design;
 
-  extends Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock(final
-      initType = Modelica_LinearSystems2.Controller.Types.Init.InitialState);
+  extends Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock(
+    final initType = Modelica_LinearSystems2.Controller.Types.Init.InitialState);
 
- replaceable function F_function =
-      Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy constrainedby
-    Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase(redeclare input Real x[4])
+  replaceable function F_function =
+    Modelica_LinearSystems2.DiscreteStateSpace.Internal.fSigmaDummy
+    constrainedby Modelica_LinearSystems2.DiscreteStateSpace.Internal.fBase(
+      redeclare input Real x[4])
     "Function F() in x_k+1 = F(x_k, u_k, Ts)" annotation(choicesAllMatching);
   replaceable function H_function =
-      Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy constrainedby
-    Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase(redeclare input Real x[4])
+    Modelica_LinearSystems2.DiscreteStateSpace.Internal.hSigmaDummy
+    constrainedby Modelica_LinearSystems2.DiscreteStateSpace.Internal.hBase(
+      redeclare input Real x[4])
     "Function H() in y_k = H(x_k, u_k, Ts)" annotation(choicesAllMatching);
 
   parameter Real x_est_init[:]={0,0,0,0} "Initial value for state estimation";
