@@ -3,7 +3,6 @@ function plotRootLociNoLoop
   "Plot root loci of nonlinear Modelica model by linearizing the model for variations of one model parameter"
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.WorkInProgress.RootLocusOld.Types.MarkerStyles;
 
   input String modelName="Modelica.Mechanics.Rotational.Examples.First"
     "Name of the Modelica model"
@@ -54,7 +53,7 @@ function plotRootLociNoLoop
     annotation (Dialog(group="Plot settings"));
   input Boolean grid = true "Add grid"
     annotation (Dialog(group="Plot settings"));
-  input MarkerStyles markerStyle=MarkerStyles.Square "Style of marker"
+  input MarkerStyle markerStyle=MarkerStyle.Square "Style of marker"
     annotation (Dialog(group="Plot settings"));
   input Integer markerColorMin[3]={0,0,255}
     "Color of marker for minimum parameter value"

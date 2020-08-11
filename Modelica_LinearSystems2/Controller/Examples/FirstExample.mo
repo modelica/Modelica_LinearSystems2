@@ -15,14 +15,13 @@ model FirstExample "First example to demonstrate representative block"
   Modelica_LinearSystems2.Controller.StateSpace stateSpace(
     x_start={0.1,0},
     initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState,
-    system(
+    system=Modelica_LinearSystems2.StateSpace(
       A=[0,1; -w*w,-2*w*D],
       B=[0; w*w],
       C=[1,0],
       D=[0]),
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption)
     annotation(Placement(transformation(extent={{-20,40},{0,60}})));
-
   TransferFunction transferFunction(
     system(n={1,2}, d={1,2,3}),
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption)
@@ -30,10 +29,7 @@ model FirstExample "First example to demonstrate representative block"
   ZerosAndPoles zerosAndPoles(
     system(
       n1={1},
-      n2=fill(
-          0,
-          0,
-          2),
+      n2=fill(0, 0, 2),
       d1=fill(0, 0),
       d2=[1,1; 1,1]),
     blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption)
