@@ -7521,8 +7521,8 @@ StateSpace.Plot.<b>polesAndZeros</b>(
 <p>
 This function plots a pole-zero-map of the poles and transmission zeros of a state space system.
 The poles are the eigenvalues of the system matrix (eigenvalues(ss.A)). The Boolean inputs
-\"poles\" and \"zeros\" define what to plot. If Boolean input \"plot = true\", the pole-zero-map
-is plotted. If false, only the diagram is generated and returned as output argument.
+\"poles\" and \"zeros\" define what to plot. If Boolean input &quot;print&nbsp;=&nbsp;true&quot;,
+the results of the analysis are additionally printed in the textual format.
 The records \"defaultDiagram\" and \"device\" allow to set various layout options and the
 size and location of the diagram on the screen.
 </p>
