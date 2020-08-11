@@ -67,9 +67,9 @@ equation
     Documentation(info="<html>
 <p>
 This example demonstrates the usage of the control structure template
-<i>Modelica_Controller.Templates.TwoDOFinverseModelController2</i> to
-control a system by using of an inverse system model in the forward path.
-The controlled system is a mixing unit described in [1].
+<a href=\"modelica://Modelica_LinearSystems2.Controller.Templates.TwoDOFinverseModelController\">Templates.TwoDOFinverseModelController</a>
+to control a&nbsp;system by using of an inverse system model in the forward path.
+The controlled system is a&nbsp;mixing unit described in&nbsp;[1].
 See also model of
 <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Components.MixingUnit1\">MixingUnit1</a>
 for more details.
