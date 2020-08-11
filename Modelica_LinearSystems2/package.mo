@@ -65,10 +65,12 @@ For an introduction, have especially a look at:
      summarizes the changes of new versions of this package.</li>
 <li> <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Contact\">Contact</a>
      gives the contact information for this library.</li>
-<li> In an interactive environment, it is useful to run first the script
+<li> In an interactive environment, it is useful to run the script
      &quot;_abbreviations.mos&quot; in directory
-     &quot;Modelica_LinearSystems2/Resources/Scripts&quot;
-     in order to set useful abbreviations: ss, tf, zp, poly, Complex, Plot, s, p, j.</li>
+     &quot;Modelica_LinearSystems2/Resources/Scripts&quot; first,
+     in order to set useful abbreviations for e.g. ss, tf, zp, poly, j, etc.
+     It is not necessary to import the package Complex since it is handled as
+     a&nbsp;build-in complex number type within Dymola.</li>
 </ul>
 
 <p>
