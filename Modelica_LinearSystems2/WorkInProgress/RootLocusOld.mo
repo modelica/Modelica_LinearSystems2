@@ -4,7 +4,6 @@ package RootLocusOld
     "Plot root locus of nonlinear Modelica model by linearizing the model for variations of one model parameter"
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.StateSpace;
-    import DymolaCommands.Plot;
 
     input String modelName "Name of the Modelica model"
       annotation(Dialog(__Dymola_translatedModel(caption="Model to be linearized for the root locus")));
@@ -59,7 +58,7 @@ package RootLocusOld
                  diagram.yTopLeft,
                  diagram.diagramWidth,
                  diagram.heightRatio*diagram.diagramWidth}*mmToPixel;
-    id:= Plot.createPlot(id=-1,
+    id:= DymolaCommands.Plot.createPlot(id=-1,
                     position=integer(position),
                     erase=true,
                     autoscale=true,
@@ -77,7 +76,7 @@ package RootLocusOld
 
     // Initialize computation
     dp := (modelParam[1].Max-modelParam[1].Min)/(nVar-1);
-    ok:=translateModel(modelName);
+    ok:=DymolaCommands.SimulatorAPI.translateModel(modelName);
     Modelica.Utilities.Files.removeFile("dsin.mat");
 
     // Loop over the selected parameter range
@@ -94,7 +93,7 @@ package RootLocusOld
       eigenValues :=Modelica.Math.Matrices.eigenValues(A);
 
       // Plot root loci
-      ok :=Plot.plotArray(eigenValues[:,1],
+      ok := DymolaCommands.Plot.plotArray(eigenValues[:,1],
                      eigenValues[:,2],
                      legend=if i==1 or i==nVar or mod(i,nVar/10) == 0 then String(parValue,significantDigits=3) else "",
                      color=integer(color[i, :]),

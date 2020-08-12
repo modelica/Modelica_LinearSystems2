@@ -25,7 +25,7 @@ protected
   String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
 
   // Model is already translated. Reset to the default initial conditions
-  Boolean OK4 = translateModel(problem=modelName);
+  Boolean OK4 = Simulator.translateModel(problem=modelName);
 public
   output Real A[nx,nx] =  ABCD[1:nx, 1:nx] "A-matrix";
   output Real B[nx,nu] =  ABCD[1:nx, nx + 1:nx + nu] "B-matrix";
