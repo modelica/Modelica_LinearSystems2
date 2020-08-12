@@ -76,7 +76,7 @@ algorithm
     // Linearization of all parameter variants at once
     ok := Simulator.translateModel(modelName);
     assert(ok, "Translation of model " + modelName + " failed.");
-    ok:=simulateMultiExtendedModel(
+    ok := Simulator.simulateMultiExtendedModel(
       problem=modelName,
       startTime=0,
       stopTime=0,
