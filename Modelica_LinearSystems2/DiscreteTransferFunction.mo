@@ -1399,6 +1399,7 @@ with
       "Generate a DiscreteTransferFunction record array from a state space representation resulted from linearization of a model"
 
       import Modelica;
+      import DymolaCommands;
       import Simulator = DymolaCommands.SimulatorAPI;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -1423,7 +1424,8 @@ with
       Integer ny = xuy[3];
       Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
         fileName2, "ABCD", nx + ny, nx + nu);
-      String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
+      String xuyName[nx + nu + ny]=DymolaCommands.MatrixIO.readStringMatrix(
+        fileName2, "xuyName", nx + nu + ny);
 
       StateSpace ss(
         redeclare Real A[nx,nx],

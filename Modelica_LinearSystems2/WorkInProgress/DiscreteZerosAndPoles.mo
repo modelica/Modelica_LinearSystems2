@@ -1298,6 +1298,7 @@ processing.
     "Generate a ZerosAndPoles record array from a state space representation resulted from linearization of a model"
 
     import Modelica;
+    import DymolaCommands;
     import Simulator = DymolaCommands.SimulatorAPI;
     import Modelica_LinearSystems2.StateSpace;
     import ZerosAndPoles =
@@ -1330,7 +1331,7 @@ processing.
           "ABCD",
           nx + ny,
           nx + nu);
-    String xuyName[nx + nu + ny]=readStringMatrix(
+    String xuyName[nx + nu + ny]=DymolaCommands.MatrixIO.readStringMatrix(
           fileName2,
           "xuyName",
           nx + nu + ny);

@@ -3484,6 +3484,7 @@ The file must contain
       "Generate a DiscreteStateSpace data record by linearization of a modelica model"
 
       import Modelica;
+      import DymolaCommands;
       import Simulator = DymolaCommands.SimulatorAPI;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -3521,7 +3522,7 @@ The file must contain
         "ABCD",
         nx + ny,
         nx + nu);
-      String xuyName[nx + nu + ny]=readStringMatrix(
+      String xuyName[nx + nu + ny]=DymolaCommands.MatrixIO.readStringMatrix(
         fileName2,
         "xuyName",
         nx + nu + ny);

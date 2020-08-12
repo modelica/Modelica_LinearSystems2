@@ -21,8 +21,10 @@ protected
   Integer nx = xuy[1];
   Integer nu = xuy[2];
   Integer ny = xuy[3];
-  Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-  String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
+  Real ABCD[nx + ny,nx + nu] = Modelica.Utilities.Streams.readRealMatrix(
+    fileName2, "ABCD", nx + ny, nx + nu);
+  String xuyName[nx + nu + ny] = DymolaCommands.MatrixIO.readStringMatrix(
+    fileName2, "xuyName", nx + nu + ny);
 
   // Model is already translated. Reset to the default initial conditions
   Boolean OK4 = Simulator.translateModel(problem=modelName);

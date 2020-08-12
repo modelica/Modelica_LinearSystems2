@@ -4219,6 +4219,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
       "Generate a ZerosAndPoles data record from a state space representation resulted from linearization of a model"
 
       import Modelica;
+      import DymolaCommands;
       import Simulator = DymolaCommands.SimulatorAPI;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
@@ -4250,7 +4251,7 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
             "ABCD",
             nx + ny,
             nx + nu);
-      String xuyName[nx + nu + ny]=readStringMatrix(
+      String xuyName[nx + nu + ny]=DymolaCommands.MatrixIO.readStringMatrix(
             fileName2,
             "xuyName",
             nx + nu + ny);

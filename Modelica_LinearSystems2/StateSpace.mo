@@ -9673,6 +9673,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
       "Generate a StateSpace data record by linearization of a model"
 
       import Modelica;
+      import DymolaCommands;
       import Simulator = DymolaCommands.SimulatorAPI;
       import Modelica_LinearSystems2.StateSpace;
 
@@ -9709,7 +9710,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
               "ABCD",
               nx + ny,
               nx + nu);
-      String xuyName[nx + nu + ny]=readStringMatrix(
+      String xuyName[nx + nu + ny]=DymolaCommands.MatrixIO.readStringMatrix(
               fileName2,
               "xuyName",
               nx + nu + ny);
@@ -12709,6 +12710,7 @@ k = ---------- * ----------------------
     function read_dslin "Read a StateSpace data record from mat-file"
 
       import Modelica;
+      import DymolaCommands;
       import Modelica_LinearSystems2.StateSpace;
 
       input String fileName="dslin" "Name of the result file";
@@ -12726,7 +12728,7 @@ k = ---------- * ----------------------
               "ABCD",
               nx + ny,
               nx + nu);
-      String xuyName[nx + nu + ny]=readStringMatrix(
+      String xuyName[nx + nu + ny]=DymolaCommands.MatrixIO.readStringMatrix(
               fileName2,
               "xuyName",
               nx + nu + ny);

@@ -2547,6 +2547,7 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
       "Generate a TransferFunction data record from a state space representation resulted from linearization of a model"
 
       import Modelica;
+      import DymolaCommands;
       import Simulator = DymolaCommands.SimulatorAPI;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -2567,8 +2568,10 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
       Integer nx = xuy[1];
       Integer nu = xuy[2];
       Integer ny = xuy[3];
-      Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(fileName2, "ABCD", nx + ny, nx + nu);
-      String xuyName[nx + nu + ny]=readStringMatrix(fileName2, "xuyName", nx + nu + ny);
+      Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
+        fileName2, "ABCD", nx + ny, nx + nu);
+      String xuyName[nx + nu + ny]=DymolaCommands.MatrixIO.readStringMatrix(
+        fileName2, "xuyName", nx + nu + ny);
 
       StateSpace result(
         redeclare Real A[nx,nx],
