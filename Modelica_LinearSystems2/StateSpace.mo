@@ -9673,6 +9673,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
       "Generate a StateSpace data record by linearization of a model"
 
       import Modelica;
+      import Simulator = DymolaCommands.SimulatorAPI;
       import Modelica_LinearSystems2.StateSpace;
 
       input String modelName "Name of the model"
@@ -9683,15 +9684,15 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
       input String method="Dassl" "Integration method";
 
     protected
-      String fileName2=fileName + ".mat"
+      String fileName2 = fileName + ".mat"
         "Name of the result file with extension";
-      Boolean OK1=simulateModel(
+      Boolean OK1 = Simulator.simulateModel(
               problem=modelName,
               startTime=0,
               stopTime=T_linearize,
               method=method);
-      Boolean OK2=importInitial("dsfinal.txt");
-      Boolean OK3=linearizeModel(
+      Boolean OK2 = Simulator.importInitial("dsfinal.txt");
+      Boolean OK3 = Simulator.linearizeModel(
               problem=modelName,
               resultFile=fileName,
               startTime=T_linearize,

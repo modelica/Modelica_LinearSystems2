@@ -237,6 +237,8 @@ over the load inertia <b>Jload</b>:
 
   function linearize2
     "Linearize a model after simulation up to a given time and return only the A matrix"
+    import Simulator = DymolaCommands.SimulatorAPI;
+
     input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
     input Modelica.Units.SI.Time t_linearize=0
       "Simulate until t_linearize and then linearize" annotation (Dialog);
@@ -250,12 +252,12 @@ over the load inertia <b>Jload</b>:
 
     // Simulate until t_linearize and then linearize at this time instant
     Boolean OK1 = if t_linearize <= 0.0 then true else
-                     simulateModel(problem=modelName, startTime=0, stopTime=t_linearize,
+                     Simulator.simulateModel(problem=modelName, startTime=0, stopTime=t_linearize,
                                    method=simulationSetup.method,
                                    tolerance=simulationSetup.tolerance,
                                    fixedstepsize=simulationSetup.fixedStepSize);
-    Boolean OK2 = if t_linearize <= 0.0 then true else importInitial("dsfinal.txt");
-    Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
+    Boolean OK2 = if t_linearize <= 0.0 then true else Simulator.importInitial("dsfinal.txt");
+    Boolean OK3 = Simulator.linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
 
     // Read linear system from file
     Integer xuy[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(

@@ -1399,6 +1399,7 @@ with
       "Generate a DiscreteTransferFunction record array from a state space representation resulted from linearization of a model"
 
       import Modelica;
+      import Simulator = DymolaCommands.SimulatorAPI;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.DiscreteStateSpace;
@@ -1411,10 +1412,10 @@ with
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
     protected
-      String fileName2=fileName + ".mat";
-      Boolean OK1=simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
-      Boolean OK2=importInitial("dsfinal.txt");
-      Boolean OK3=linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
+      String fileName2 = fileName + ".mat";
+      Boolean OK1 = Simulator.simulateModel(problem=modelName, startTime=0, stopTime=T_linearize);
+      Boolean OK2 = Simulator.importInitial("dsfinal.txt");
+      Boolean OK3 = Simulator.linearizeModel(problem=modelName, resultFile=fileName, startTime=T_linearize, stopTime=T_linearize + 1);
       Integer xuy[3] = StateSpace.Internal.readSystemDimension(
         fileName2, "ABCD");
       Integer nx = xuy[1];

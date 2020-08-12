@@ -90,23 +90,6 @@ algorithm
       thicknesses=thicknesses);
   end if;
 
-/*
-function plotParametricCurves "plot parametric curves"
-  input Real x[:, size(s, 1)] "x(s) vectors";
-  input Real y[size(x, 1), size(s, 1)] "y(s) vectors";
-  input Real s[:] "s values";
-  input String xName := "" "The name of the x variable";
-  input String yName := "" "The name of the y variable";
-  input String sName := "" "The name of the s parameter";
-  input String legends[:] "Legends describing plotted data";
-  input Integer id := 0 "Identity of window (0-means last)";
-  input Integer colors[size(y, 1), 3] "Line colors";
-  input Integer patterns[size(y, 1)] "Line patterns, e.g., LinePattern.Solid";
-  input Integer markers[size(y, 1)] "Line markers, e.g., MarkerStyle.Cross";
-  input Real thicknesses[size(y, 1)] "Line thicknesses";
-  input Boolean labelWithS := false "if true, output values of s along the curve";
-*/
-
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>

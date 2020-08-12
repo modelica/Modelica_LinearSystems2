@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Import;
 function linearize "Linearize a model after simulation up to a given time"
+  import Simulator = DymolaCommands.SimulatorAPI;
+
   input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
   input Modelica.Units.SI.Time t_linearize=0
     "Simulate until T_linearize and then linearize" annotation (Dialog);
@@ -9,9 +11,9 @@ protected
   String fileName2=fileName+".mat";
 
   // Simulate until t_linearize and then linearize at this time instant
-  Boolean OK1 = simulateModel(problem=modelName, startTime=0, stopTime=t_linearize);
-  Boolean OK2 = importInitial("dsfinal.txt");
-  Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
+  Boolean OK1 = Simulator.simulateModel(problem=modelName, startTime=0, stopTime=t_linearize);
+  Boolean OK2 = Simulator.importInitial("dsfinal.txt");
+  Boolean OK3 = Simulator.linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
 
   // Read linear system from file
   Integer xuy[3] = StateSpace.Internal.readSystemDimension(
