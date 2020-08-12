@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress;
 function plotEigenvalues
   "Calculate eigenvalues of matrix A and plot root locus"
+  import DymolaCommands.Plot;
 
   input Real A[:,size(A, 1)] = [2,1,1;1,1,1;1,2,2] "Square matrix";
   input Boolean removePrevious=true
@@ -37,8 +38,8 @@ algorithm
 
   // Plot real and imaginary part of eigenvalues
   if removePrevious then
-    ok := removePlots();
-    id := createPlot(id= 1,
+    ok := Plot.removePlots();
+    id := Plot.createPlot(id= 1,
       position=position,
       leftTitleType = 2,
       leftTitle = "Im",
@@ -52,7 +53,7 @@ algorithm
       legendLocation = 2,
       legendHorizontal = false);
   end if;
-  ok := plotArray(
+  ok := Plot.plotArray(
     x= eigenvalues[:, 1],
     y= eigenvalues[:, 2],
     legend=legend,
