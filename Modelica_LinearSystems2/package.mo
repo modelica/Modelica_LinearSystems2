@@ -9,7 +9,9 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.4.0) - Analy
 
 annotation (
   preferredView="info",
-  uses(Modelica(version="4.0.0")),
+  uses(
+    Modelica(version="4.0.0"),
+    DymolaCommands(version="1.8")),
   version="2.4.0",
   versionDate="2020-06-26",
   dateModified = "2020-06-26 14:00:00Z",

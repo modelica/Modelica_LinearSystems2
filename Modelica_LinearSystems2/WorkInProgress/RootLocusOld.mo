@@ -58,7 +58,7 @@ package RootLocusOld
                  diagram.yTopLeft,
                  diagram.diagramWidth,
                  diagram.heightRatio*diagram.diagramWidth}*mmToPixel;
-    id:= createPlot(id=-1,
+    id:= DymolaCommands.Plot.createPlot(id=-1,
                     position=integer(position),
                     erase=true,
                     autoscale=true,
@@ -76,7 +76,7 @@ package RootLocusOld
 
     // Initialize computation
     dp := (modelParam[1].Max-modelParam[1].Min)/(nVar-1);
-    ok:=translateModel(modelName);
+    ok:=DymolaCommands.SimulatorAPI.translateModel(modelName);
     Modelica.Utilities.Files.removeFile("dsin.mat");
 
     // Loop over the selected parameter range
@@ -93,7 +93,7 @@ package RootLocusOld
       eigenValues :=Modelica.Math.Matrices.eigenValues(A);
 
       // Plot root loci
-      ok :=plotArray(eigenValues[:,1],
+      ok := DymolaCommands.Plot.plotArray(eigenValues[:,1],
                      eigenValues[:,2],
                      legend=if i==1 or i==nVar or mod(i,nVar/10) == 0 then String(parValue,significantDigits=3) else "",
                      color=integer(color[i, :]),
@@ -236,6 +236,8 @@ over the load inertia <b>Jload</b>:
 
   function linearize2
     "Linearize a model after simulation up to a given time and return only the A matrix"
+    import Simulator = DymolaCommands.SimulatorAPI;
+
     input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
     input Modelica.Units.SI.Time t_linearize=0
       "Simulate until t_linearize and then linearize" annotation (Dialog);
@@ -249,12 +251,12 @@ over the load inertia <b>Jload</b>:
 
     // Simulate until t_linearize and then linearize at this time instant
     Boolean OK1 = if t_linearize <= 0.0 then true else
-                     simulateModel(problem=modelName, startTime=0, stopTime=t_linearize,
+                     Simulator.simulateModel(problem=modelName, startTime=0, stopTime=t_linearize,
                                    method=simulationSetup.method,
                                    tolerance=simulationSetup.tolerance,
                                    fixedstepsize=simulationSetup.fixedStepSize);
-    Boolean OK2 = if t_linearize <= 0.0 then true else importInitial("dsfinal.txt");
-    Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
+    Boolean OK2 = if t_linearize <= 0.0 then true else Simulator.importInitial("dsfinal.txt");
+    Boolean OK3 = Simulator.linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
 
     // Read linear system from file
     Integer xuy[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(
@@ -278,6 +280,7 @@ but returns only the A-matrix.
 
   function plotEigenvalues
     "Calculate eigenvalues of matrix A and plot root locus"
+    import DymolaCommands.Plot;
 
     input Real A[:,size(A, 1)] = [2,1,1;1,1,1;1,2,2] "Square matrix";
     input Boolean removePrevious=true
@@ -313,8 +316,8 @@ but returns only the A-matrix.
 
     // Plot real and imaginary part of eigenvalues
     if removePrevious then
-      ok := removePlots();
-      createPlot(id= 1,
+      ok := Plot.removePlots();
+      Plot.createPlot(id= 1,
         position=position,
         leftTitleType = 2,
         leftTitle = "Im",
@@ -328,7 +331,7 @@ but returns only the A-matrix.
         legendLocation = 2,
         legendHorizontal = false);
     end if;
-    plotArray(
+    Plot.plotArray(
       x= eigenvalues[:, 1],
       y= eigenvalues[:, 2],
       legend=legend,

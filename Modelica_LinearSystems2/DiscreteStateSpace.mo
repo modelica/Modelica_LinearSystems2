@@ -3484,6 +3484,8 @@ The file must contain
       "Generate a DiscreteStateSpace data record by linearization of a modelica model"
 
       import Modelica;
+      import DymolaCommands;
+      import Simulator = DymolaCommands.SimulatorAPI;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.DiscreteStateSpace;
@@ -3497,13 +3499,13 @@ The file must contain
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
 
     protected
-      String fileName2=fileName + ".mat";
-      Boolean OK1=simulateModel(
+      String fileName2 = fileName + ".mat";
+      Boolean OK1 = Simulator.simulateModel(
       problem=modelName,
       startTime=0,
       stopTime=T_linearize);
-      Boolean OK2=importInitial("dsfinal.txt");
-      Boolean OK3=linearizeModel(
+      Boolean OK2 = Simulator.importInitial("dsfinal.txt");
+      Boolean OK3 = Simulator.linearizeModel(
       problem=modelName,
       resultFile=fileName,
       startTime=T_linearize,
@@ -3520,7 +3522,7 @@ The file must contain
         "ABCD",
         nx + ny,
         nx + nu);
-      String xuyName[nx + nu + ny]=readStringMatrix(
+      String xuyName[nx + nu + ny]=DymolaCommands.MatrixIO.readStringMatrix(
         fileName2,
         "xuyName",
         nx + nu + ny);
