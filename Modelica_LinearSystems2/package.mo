@@ -9,7 +9,9 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.5.0-dev) - A
 
 annotation (
   preferredView="info",
-  uses(Modelica(version="4.0.0")),
+  uses(
+    Modelica(version="4.0.0"),
+    DymolaCommands(version="1.8")),
   version="2.5.0-dev",
   versionDate="2020-06-26",
   dateModified = "2020-06-26 14:00:00Z",

@@ -505,6 +505,7 @@ in a least squares sense.
   encapsulated function plot "Plot polynomial y=p(x)"
 
     import Modelica;
+    import DymolaCommands.Plot;
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica.Utilities.Strings;
     import Complex;
@@ -576,20 +577,14 @@ in a least squares sense.
     if autoLabel then
       yLabel2 := String(p);
       if Strings.length(yLabel2) >= 100 then
-        yLabel2 := Strings.substring(
-            yLabel2,
-            1,
-            96) + " ...";
+        yLabel2 := Strings.substring(yLabel2, 1, 96) + " ...";
       end if;
     else
       yLabel2 := yLabel;
     end if;
 
     // Plot Polynomial
-    OK := plotArray(
-        x,
-        y,
-        legend=yLabel2);
+    OK := Plot.plotArray(x, y, legend=yLabel2);
 
   equation
 
