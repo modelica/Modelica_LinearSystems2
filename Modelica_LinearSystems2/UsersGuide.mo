@@ -1384,10 +1384,10 @@ on the Modelica LinearSystems library.
 <h4>Main Authors</h4>
 <blockquote>
 Martin Otter, Marcus Baur, and Jakub Tobolar<br>
-Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)<br>
+Deutsches Zentrum f&uuml;r Luft- und Raumfahrt (DLR)<br>
 DLR Institut f&uuml;r Systemdynamik und Regelungstechnik<br>
-Postfach 1116<br>
-D-82230 Wessling<br>
+M&uuml;nchener Straﬂe 20<br>
+D-82234 Wessling<br>
 Germany<br>
 email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
 </blockquote>
