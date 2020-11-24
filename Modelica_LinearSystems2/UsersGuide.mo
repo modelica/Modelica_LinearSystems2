@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2;
+﻿within Modelica_LinearSystems2;
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
 
@@ -509,13 +509,14 @@ files in \"Modelica_LinearSystems2/Resources/\" and \"Modelica_LinearSystems2/he
 are licensed by <b><u>DLR</u></b> under the
 <b><u>3-Clause BSD License</u></b>.</p>
 
-<p style=\"margin-left: 40px;\"><b>Licensor:</b><br>
-<a href=\"https://www.dlr.de/sr/en\">Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)</a><br>
-Institut f&uuml;r Systemdynamik und Regelungstechnik<br>
-Postfach 1116<br>
-D-82230 Wessling<br>
+<h4>Licensor</h4>
+<p>
+<a href=\"https://www.dlr.de/sr/en\">Deutsches Zentrum f&uuml;r Luft- und Raumfahrt (DLR)</a><br>
+Institut f&uuml;r Systemdynamik und Regelungstechnik (SR)<br>
+M&uuml;nchener Straße 20<br>
+D-82234 We&szlig;ling<br>
 Germany<br>
-email: Martin.Otter@dlr.de
+email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
 </p>
 
 <!--
@@ -1383,11 +1384,11 @@ on the Modelica LinearSystems library.
     annotation (Documentation(info="<html>
 <h4>Main Authors</h4>
 <blockquote>
-Martin Otter, Marcus Baur, and Jakub Tobolar<br>
+Martin Otter, Marcus Baur and Jakub Tobolar<br>
 Deutsches Zentrum f&uuml;r Luft- und Raumfahrt (DLR)<br>
-DLR Institut f&uuml;r Systemdynamik und Regelungstechnik<br>
-M&uuml;nchener Stra�e 20<br>
-D-82234 Wessling<br>
+Institut f&uuml;r Systemdynamik und Regelungstechnik (SR)<br>
+M&uuml;nchener Straße 20<br>
+D-82234 We&szlig;ling<br>
 Germany<br>
 email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
 </blockquote>

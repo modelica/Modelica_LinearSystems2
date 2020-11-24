@@ -1,18 +1,20 @@
-within Modelica_LinearSystems2.Controller.UsersGuide;
+﻿within Modelica_LinearSystems2.Controller.UsersGuide;
 class Contact "Contact"
   extends Modelica.Icons.Contact;
     annotation (Documentation(info="<html>
-<dl>
-<dt><b>Main Authors:</b></dt>
-<dd>Martin Otter and Marcus Baur<br>
-    Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)<br>
-    Institut f&uuml;r Robotik und Mechatronik<br>
-    Postfach 1116<br>
-    D-82230 Wessling<br>
-    Germany<br>
-    email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a><br></dd>
-</dl>
-<p><b>Acknowledgements:</b></p>
+<h4>Main Authors</h4>
+<blockquote>
+Martin Otter and Marcus Baur<br>
+Deutsches Zentrum f&uuml;r Luft- und Raumfahrt (DLR)<br>
+Institut f&uuml;r Systemdynamik und Regelungstechnik (SR)<br>
+M&uuml;nchener Straße 20<br>
+D-82234 We&szlig;ling<br>
+Germany<br>
+email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
+</blockquote>
+
+
+<h4>Acknowledgements</h4>
 <ul>
 <li> The first version of the Controller library was the library
      \"Sampled\" of Nico Walther as a result of his master thesis
