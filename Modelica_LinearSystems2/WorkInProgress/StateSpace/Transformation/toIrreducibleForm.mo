@@ -3,10 +3,10 @@ function toIrreducibleForm
   "Calculate a minimal controllable and observable block Hessenberg realization of a given SISO state-space representation "
 
  // test of SISO has to be added
+  import Modelica;
+  import Complex;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica;
   import Modelica_LinearSystems2.WorkInProgress;
 
   input StateSpace ss "State space system";

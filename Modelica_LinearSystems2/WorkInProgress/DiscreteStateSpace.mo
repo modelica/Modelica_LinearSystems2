@@ -485,15 +485,15 @@ algorithm
 end toDiscreteTransferFunction;
 
 encapsulated function toDiscreteZerosAndPoles
-      "Generate a discrete zeros-and-poles representation from a discrete SISO state space representation"
+  "Generate a discrete zeros-and-poles representation from a discrete SISO state space representation"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+  import Modelica;
+  import Modelica.ComplexMath;
+  import Complex;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.StateSpace;
+  import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
   input DiscreteStateSpace dss "StateSpace object";
   output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
@@ -520,7 +520,7 @@ algorithm
   if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
       Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
-    poles := Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
+    poles := Modelica_LinearSystems2.ComplexMathAdds.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
     zeros := StateSpace.Internal.invariantZeros2(ssm);
     cpoles := fill(Complex(0),size(poles,1));
     czeros := fill(Complex(0),size(zeros,1));
@@ -539,16 +539,16 @@ algorithm
         Ts=dss.Ts, method=dss.method);
 // set frequency to a complex value which is whether pole nor zero
     for i in 1:size(poles,1) loop
-      cpoles[i] := Complex.log(poles[i])/dss.Ts;
+      cpoles[i] := ComplexMath.log(poles[i])/dss.Ts;
     end for;
     for i in 1:size(zeros,1) loop
-      czeros[i] := Complex.log(zeros[i])/dss.Ts;
+      czeros[i] := ComplexMath.log(zeros[i])/dss.Ts;
     end for;
 
      v := sum(cat(1, czeros[:].re,  cpoles[:].re))/max(size(czeros,1)+size(cpoles,1),1) + 13/19;
 //     v := sum(cat(1, zeros[:].re,  poles[:].re))/max(size(zeros,1)+size(poles,1),1);
     frequency := Complex(v)*17/19;
-    cfrequency := Complex.exp(frequency*dss.Ts);
+    cfrequency := ComplexMath.exp(frequency*dss.Ts);
 //    cfrequency := frequency;
 
     Gq := DiscreteZerosAndPoles.Analysis.evaluate(dzp, cfrequency);

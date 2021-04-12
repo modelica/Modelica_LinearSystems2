@@ -4,7 +4,6 @@ function toZerosAndPolesMIMO
 
   import Modelica;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.WorkInProgress;

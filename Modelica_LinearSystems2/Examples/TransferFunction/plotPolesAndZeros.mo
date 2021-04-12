@@ -6,11 +6,11 @@ function plotPolesAndZeros
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
 
 protected
   TransferFunction s = TransferFunction.s();
-  Complex j = Complex.j();
+  Complex j = Modelica.ComplexMath.j;
   TransferFunction tf1 = (s-2)*(s+4)/( (s+1)*(s+3)*TransferFunction({-0.5+2*j, -0.5-2*j}));
   TransferFunction tf2 = (s^3 + 4*s + 1)/(s^4 + 2*s^3 + 3*s^2 + 4*s);
 

@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 function plotBode2 "Bode plot of PT2 transfer function with zero damping"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;

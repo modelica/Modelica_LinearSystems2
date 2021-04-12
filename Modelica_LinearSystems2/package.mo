@@ -1,5 +1,5 @@
 within ;
-package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.4.0) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
+package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.5.0-dev) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
 
   extends Modelica.Icons.Package;
 
@@ -12,7 +12,7 @@ annotation (
   uses(
     Modelica(version="4.0.0"),
     DymolaCommands(version="1.8")),
-  version="2.4.0",
+  version="2.5.0-dev",
   versionDate="2020-06-26",
   dateModified = "2020-06-26 14:00:00Z",
   revisionId="$Id::                                       $",
@@ -20,7 +20,9 @@ annotation (
     from(version={"2.0", "2.1", "2.2", "2.3", "2.3.1", "2.3.2", "2.3.2", "2.3.3", "2.3.4"},
       script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.3.4.mos", to="2.3.5"),
     from(version="2.3.5",
-      script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.3.5.mos")),
+      script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.3.5.mos"),
+    from(version="2.4.0",
+      script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.4.0.mos")),
   Documentation(info="<html>
 <p>
 Library <b>Modelica_LinearSystems2</b> is a Modelica package
@@ -65,10 +67,12 @@ For an introduction, have especially a look at:
      summarizes the changes of new versions of this package.</li>
 <li> <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Contact\">Contact</a>
      gives the contact information for this library.</li>
-<li> In an interactive environment, it is useful to run first the script
+<li> In an interactive environment, it is useful to run the script
      &quot;_abbreviations.mos&quot; in directory
-     &quot;Modelica_LinearSystems2/Resources/Scripts&quot;
-     in order to set useful abbreviations: ss, tf, zp, poly, Complex, Plot, s, p, j.</li>
+     &quot;Modelica_LinearSystems2/Resources/Scripts&quot; first,
+     in order to set useful abbreviations for e.g. ss, tf, zp, poly, j, etc.
+     It is not necessary to import the package Complex since it is handled as
+     a&nbsp;build-in complex number type within Dymola.</li>
 </ul>
 
 <p>

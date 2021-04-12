@@ -5,7 +5,7 @@ function analysisInvariantZeros
 
   import Modelica;
   import Modelica.Utilities.Streams.print;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
@@ -17,7 +17,7 @@ function analysisInvariantZeros
   input Real k=1.0 "Constant multiplied with transfer function";
 
 protected
-  input Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j=Modelica.ComplexMath.j;
 
   ZerosAndPoles zp = ZerosAndPoles(
     z=z,

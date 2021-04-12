@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 function reorderEigenvalue
   "Extract real and conjugate complex elements from a complex vector as part of a record Eigenvalue"
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Internal.Eigenvalue;
   input Eigenvalue EigenvalueVector[:]
     "Zeros of a polynomial with real coefficients, e.g., eigen values of a real matrix";

@@ -4,8 +4,9 @@ encapsulated function assignPolesMI
 
   import Modelica;
   import Modelica.Utilities.Streams.print;
+  import Complex;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.Math.Matrices;
@@ -142,7 +143,7 @@ algorithm
 
   // reorder gamma and A_rsf
   (gammaReordered,rpg) := Modelica_LinearSystems2.Internal.reorderZeros(gamma);
-  gammaReordered := Complex.Vectors.reverse(gammaReordered);
+  gammaReordered := Modelica.ComplexMath.Vectors.reverse(gammaReordered);
   nccg := div(size(gammaReordered, 1) - rpg, 2);
   ncc := min(nccA, nccg);
   rp := min(rpA, rpg);
@@ -235,9 +236,9 @@ Modelica.Utilities.Streams.print("1x1 Ann = "+String(A_rsf[n,n])+"\n ap = "+Stri
 
 //###############################################################
 
-Modelica.Utilities.Streams.print("2x2, compl system, real ass Ann = "+Matrices.printMatrix(A_rsf[n-1:n,n-1:n])+"\n ap = ");
+  Modelica.Utilities.Streams.print("2x2, compl system, real ass Ann = "+Matrices.printMatrix(A_rsf[n-1:n,n-1:n])+"\n ap = ");
 
-Complex.Vectors.print("as",gammaReordered[ng - rp - 2*i + 1:ng - rp - 2*(i - 1)]);
+  ComplexMathAdds.Vectors.print("as",gammaReordered[ng - rp - 2*i + 1:ng - rp - 2*(i - 1)]);
 
 //###############################################################
 
@@ -372,7 +373,7 @@ Modelica.Utilities.Streams.print("2x2, 2 compl system, complex ass Ann = "+Matri
   end for;
 
   S := ss.A - ss.B*K;
-  po := Complex.eigenValues(S);
+  po := ComplexMathAdds.eigenValues(S);
 
   if calculateEigenvectors then
 //     X := fill(Complex(0), n, n);
@@ -387,9 +388,9 @@ Modelica.Utilities.Streams.print("2x2, 2 compl system, complex ass Ann = "+Matri
 //         X[ii, i] := Xj[ii, 1];
 //       end for;
 //     end for;
-//      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X1");
-    X := Complex.eigenVectors(S);
-//      Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X2");
+//      ComplexMathAdds.Matrices.print(X,6,"X1");
+    X := ComplexMathAdds.eigenVectors(S);
+//      ComplexMathAdds.Matrices.print(X,6,"X2");
 
   end if;
 

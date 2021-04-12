@@ -2,10 +2,8 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal;
 function modifyX_old
   "Contains a C sub routine of robust pole assignment to modify the eigenvector matrix X according to Kautsky algorithm"
 
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
 
   input Complex X[:,size(X,1)] "Complex eigenvector matrix";
   input Complex S[size(X,1),:] "Complex eigenvector matrix";
@@ -17,12 +15,12 @@ function modifyX_old
   output Complex Xm[size(X, 1),size(X, 2)];
 
 protected
-   Complex j=Modelica_LinearSystems2.Math.Complex.j();
-   Integer n=size(X,1);
-   Real X_real[n,n]=Re(X) "Eigenvector matrix, real part";
-   Real X_imag[n,n]=Im(X) "Eigenvector matrix, imaginary part";
-   Real S_real[n,m*(n-ncp)]=Re(S) "Eigenvector bases, real part";
-   Real S_imag[n,m*(n-ncp)]=Im(S) "Eigenvector bases, imaginary part";
+  Complex j = Modelica.ComplexMath.j;
+  Integer n=size(X,1);
+  Real X_real[n,n]=Re(X) "Eigenvector matrix, real part";
+  Real X_imag[n,n]=Im(X) "Eigenvector matrix, imaginary part";
+  Real S_real[n,m*(n-ncp)]=Re(S) "Eigenvector bases, real part";
+  Real S_imag[n,m*(n-ncp)]=Im(S) "Eigenvector bases, imaginary part";
 
   Real Xm_real[n,n];
   Real Xm_imag[n,n];

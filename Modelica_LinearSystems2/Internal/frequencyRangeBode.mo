@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 function frequencyRangeBode "Determine min. and max. frequencies for Bode plot"
   import Modelica;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Internal;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica.Utilities.Streams;

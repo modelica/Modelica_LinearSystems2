@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 record PolesAndZeros
   "Record containing poles and zeros of a system in two real vectors containing the real parts and the imaginary parts respctively"
-  import Modelica_LinearSystems2.Math.Complex;
+  //import Complex;
   extends Modelica.Icons.Record;
 
   Real p_real[:];
@@ -13,7 +13,7 @@ record PolesAndZeros
   Integer norz_z "number of real zeros of z";
   encapsulated function constructor "Default constructor for poles and zeros"
     import Modelica;
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
     import PolesAndZeros2 = Modelica_LinearSystems2.Internal.PolesAndZeros;
     import Modelica_LinearSystems2.Internal;
 

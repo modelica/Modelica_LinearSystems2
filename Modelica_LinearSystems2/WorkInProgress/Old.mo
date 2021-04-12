@@ -4,19 +4,19 @@ package Old
 
   encapsulated function ZerosAndPolesEvaluate
     "Evaluate a ZerosAndPoles transfer function at a given value of p"
-    import Modelica.Utilities.Streams.print;
     import Modelica;
+    import Modelica.Utilities.Streams.print;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.ZerosAndPoles;
     import Modelica_LinearSystems2.ZerosAndPoles.Internal;
-    import Modelica_LinearSystems2.Math.Complex;
+    import Complex;
 
     input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
     input Complex p=Complex(0) "Complex value p where zp is evaluated";
     input Real den_min(min=0)=0 "|denominator(p)| is limited by den_min";
     output Complex y "= zp(p)";
   protected
-    Complex j=Modelica_LinearSystems2.Math.Complex.j();
+    Complex j = Modelica.ComplexMath.j;
     Complex num;
     Complex den;
     Real abs_den;
@@ -42,7 +42,7 @@ package Old
     end for;
 
     // Build value of transfer function
-    abs_den := Complex.'abs'(den);
+    abs_den := Modelica.ComplexMath.abs(den);
     den := if abs_den >= den_min then den else (if den.re >= 0 then den_min else -
       den_min) + 0*j;
     print("... evaluate 3: num = "+ String(num) + ", den = "+String(den));
@@ -71,7 +71,7 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
 
 <h4>Example</h4>
 <blockquote><pre>
-  Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  Complex j = Modelica.ComplexMath.j;
   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
 
@@ -104,10 +104,7 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
 
   function analysisInvariantZeros
     "Example to compute the invariant zeros of a state space system"
-    import Modelica;
     import Modelica.Utilities.Streams.print;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.TransferFunction;
     import Modelica_LinearSystems2.StateSpace;
     import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -118,7 +115,7 @@ Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function 
     input Real k=1.0 "Constant multiplied with transfer function";
 
   protected
-    input Complex j=Modelica_LinearSystems2.Math.Complex.j();
+    input Complex j = Modelica.ComplexMath.j;
 
     ZerosAndPoles zp=ZerosAndPoles(
         z=z,
@@ -150,10 +147,7 @@ This example shows the computation of the poles and zeros of state space system.
 
   function analysisZerosAndPoles
     "Example to compute the invariant zeros of a state space system"
-    import Modelica;
     import Modelica.Utilities.Streams.print;
-    import Modelica_LinearSystems2.Math.Complex;
-    import Modelica_LinearSystems2.TransferFunction;
     import Modelica_LinearSystems2.StateSpace;
     import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -164,7 +158,7 @@ This example shows the computation of the poles and zeros of state space system.
     input Real k=1.0 "Constant multiplied with transfer function";
 
   protected
-    input Complex j=Modelica_LinearSystems2.Math.Complex.j();
+    input Complex j = Modelica.ComplexMath.j;
 
     ZerosAndPoles zp=ZerosAndPoles(
         z=z,

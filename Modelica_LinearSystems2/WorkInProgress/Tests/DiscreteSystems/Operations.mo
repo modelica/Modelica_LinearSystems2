@@ -5,12 +5,11 @@ function Operations
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.TransferFunction;
+//  import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.DiscreteStateSpace;
   import Modelica_LinearSystems2.DiscreteZerosAndPoles;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
   import Modelica.Math.Vectors;
-  import Modelica_LinearSystems2.Math.Complex;
 
   input Boolean doPlot=true;
   input Modelica.Units.SI.Time Ts=0.1;

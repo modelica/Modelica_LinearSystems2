@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices;
 encapsulated function conditionNumber
   "Calculate the condition number norm(A)*norm(inv(A))"
   extends Modelica.Icons.Function;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
   import Modelica_LinearSystems2;
   import Modelica;
 

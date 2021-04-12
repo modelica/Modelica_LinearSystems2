@@ -1,8 +1,8 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.LAPACK;
 function zungqr
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
 
-  input Modelica_LinearSystems2.Math.Complex QR[:,:]
+  input Complex QR[:,:]
     "Square or rectangular matrix";
   input Complex tau[:] "elementary reflectors";
   output Complex Q[size(QR, 1),size(QR, 2)] "matrix Q";

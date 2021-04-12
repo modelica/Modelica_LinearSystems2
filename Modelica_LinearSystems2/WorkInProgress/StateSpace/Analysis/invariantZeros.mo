@@ -4,9 +4,9 @@ encapsulated function invariantZeros
 
   import Modelica;
   import MatricesMSL = Modelica.Math.Matrices;
+  import Complex;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices.LAPACK;
   import Modelica_LinearSystems2.WorkInProgress;

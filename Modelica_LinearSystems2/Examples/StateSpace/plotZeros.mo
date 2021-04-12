@@ -2,11 +2,8 @@ within Modelica_LinearSystems2.Examples.StateSpace;
 function plotZeros "Case studies of systems with zeros"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Complex;
 
 protected
   parameter Real sampleT=0.001;
@@ -30,7 +27,7 @@ protected
 algorithm
   Modelica.Utilities.Streams.print(String(ss));
   Modelica.Utilities.Streams.print(String(tf));
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("Invariant zeros", invZeros);
+  Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("Invariant zeros", invZeros);
 
   invZero1 := invZeros[1];
   invMat := Modelica.Math.Matrices.inv([invZero1.re*identity(size(ss.A, 1)) -

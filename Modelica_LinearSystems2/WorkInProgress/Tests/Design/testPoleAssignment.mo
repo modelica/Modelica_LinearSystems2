@@ -2,9 +2,10 @@ within Modelica_LinearSystems2.WorkInProgress.Tests.Design;
 function testPoleAssignment "Function to assess algorithms for pole assignment"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Complex;
+  import Modelica_LinearSystems2.ComplexMathAdds;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.WorkInProgress.Tests.Design;
   import Modelica.Utilities.Streams.print;
@@ -55,7 +56,7 @@ algorithm
      (K,X) := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob(
                                                                             data.A, data.B, data.assignedPoles);
      S := data.A - data.B*K;
-     calcPoles := Complex.eigenValues(S);
+     calcPoles := ComplexMathAdds.eigenValues(S);
      if isKprovided then
        gap := Modelica.Math.Matrices.norm(K - Ki);
      end if;
@@ -73,8 +74,8 @@ algorithm
   (kappa2,kappaF,,cInf,nu2,nuF,zeta,Jalpha,dlambda) := conditionNumbers(K, X, data.assignedPoles, calcPoles);
 
   Matrices.printMatrix(K, 6, "K");
-  Complex.Vectors.print("assignedPoles", data.assignedPoles);
-  Complex.Vectors.print("calcPoles", calcPoles);
+  ComplexMathAdds.Vectors.print("assignedPoles", data.assignedPoles);
+  ComplexMathAdds.Vectors.print("calcPoles", calcPoles);
   Matrices.printMatrix(Re(X), 6, "ReX");
   Matrices.printMatrix(Im(X), 6, "ImX");
   print("kappa2 " + String(kappa2));

@@ -3,11 +3,10 @@ function plotPolesAndZeros2 "Plot and print poles and zeros"
   extends Modelica.Icons.Function;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.Math.Complex;
 
   output Boolean ok "Standard output";
 protected
-  Complex j = Complex.j();
+  Complex j = Modelica.ComplexMath.j;
   ZerosAndPoles zp= ZerosAndPoles({  -1+0*j, -2-1*j,     -2+1*j,     -3+0*j,   -4+0*j},
                                   {-1.5+0*j, -2.5-1.5*j, -2.5+1.5*j, -3.5+0*j, -4.5+0*j});
   StateSpace ss=StateSpace(zp);

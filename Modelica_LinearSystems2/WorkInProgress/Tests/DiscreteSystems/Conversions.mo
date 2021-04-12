@@ -10,7 +10,6 @@ function Conversions
   import Modelica_LinearSystems2.DiscreteZerosAndPoles;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
   import Modelica.Math.Vectors;
-  import Modelica_LinearSystems2.Math.Complex;
 
   input Boolean doPlot=true;
   input String modelName="Modelica_LinearSystems2.Utilities.Plants.DoublePendulum";

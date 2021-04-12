@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.Matrices;
 function C_QR2
   "QR decomposition of a rectangular complex matrix without column pivoting (A = Q*R)"
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
 
   input Complex A[:,:] "Rectangular matrix with size(A,1) >= size(A,2)";
   output Complex Q[size(A, 1),size(A, 1)]

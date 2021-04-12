@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Internal;
 function complexMatrices "Some case studies to complex matrices"
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2;
+  import Complex;
 
   input Integer n=200;
   output Boolean ok;

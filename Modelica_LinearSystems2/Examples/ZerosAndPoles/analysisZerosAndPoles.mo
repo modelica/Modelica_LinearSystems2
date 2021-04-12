@@ -5,14 +5,14 @@ encapsulated function analysisZerosAndPoles
 
   import Modelica;
   import Modelica.Utilities.Streams.print;
+  import Complex;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.Internal.printComplexVector;
 
   output Boolean ok;
 protected
-  Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  Complex j = Modelica.ComplexMath.j;
   Complex numeratorZeros1[1]={-1+0*j};
   Complex denominatorZeros1[3]={1+0*j,2+3*j,2-3*j};
   Complex numeratorZeros3[4]={-1+j,-1-j,1+0*j,1+0*j};

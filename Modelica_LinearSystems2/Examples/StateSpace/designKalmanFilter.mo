@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Examples.StateSpace;
 function designKalmanFilter "Example for Kalman filter design"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.TransferFunction;
 

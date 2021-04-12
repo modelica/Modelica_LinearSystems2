@@ -3,8 +3,6 @@ function toZerosAndPoles
   "Generate a zeros-and-poles representation from a SISO state space representation"
 
   import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.WorkInProgress;
@@ -35,7 +33,7 @@ algorithm
   if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
       Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
-    poles := Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
+    poles := Modelica_LinearSystems2.ComplexMathAdds.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
 
    zeros := WorkInProgress.StateSpace.Analysis.invariantZeros(ssm);
 
