@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2;
+﻿within Modelica_LinearSystems2;
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
 
@@ -350,7 +350,7 @@ are licensed by <b><u>DLR</u></b> under the
 <p>
 <a href=\"https://www.dlr.de/sr/en\">Deutsches Zentrum f&uuml;r Luft- und Raumfahrt (DLR)</a><br>
 Institut f&uuml;r Systemdynamik und Regelungstechnik (SR)<br>
-M&uuml;nchener Stra�e 20<br>
+M&uuml;nchener Straße 20<br>
 D-82234 We&szlig;ling<br>
 Germany<br>
 email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>

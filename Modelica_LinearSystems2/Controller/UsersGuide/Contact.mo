@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controller.UsersGuide;
+﻿within Modelica_LinearSystems2.Controller.UsersGuide;
 class Contact "Contact"
   extends Modelica.Icons.Contact;
     annotation (Documentation(info="<html>
