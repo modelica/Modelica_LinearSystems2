@@ -7,7 +7,7 @@ class Contact "Contact"
 Martin Otter and Marcus Baur<br>
 Deutsches Zentrum f&uuml;r Luft- und Raumfahrt (DLR)<br>
 Institut f&uuml;r Systemdynamik und Regelungstechnik (SR)<br>
-M&uuml;nchener Straße 20<br>
+M&uuml;nchener Stra&szlig;e 20<br>
 D-82234 We&szlig;ling<br>
 Germany<br>
 email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
