@@ -851,7 +851,27 @@ a vector of Complex elements.
       dy := p.c[j]*(n - j) + x*dy;
     end for;
     dy := dy*dx;
+    annotation(derivative(order=2)=Polynomial.evaluate_dder);
   end evaluate_der;
+
+  encapsulated function evaluate_dder "Evaluate 2nd derivative of polynomial at a given abszissa value"
+    import Modelica_LinearSystems2.Math.Polynomial;
+
+    input Polynomial p "Polynomial";
+    input Real x "Abszissa value";
+    input Real dx "Derivative of abszissa value, der(x)";
+    input Real ddx "Second derivative of abszissa value, der(dx)";
+    output Real ddy "Second derivative value of polynomial at x";
+  protected
+    Integer n=size(p.c, 1);
+  algorithm
+    ddy := p.c[1]*(n - 1)*(n - 2);
+    for j in 2:n - 2 loop
+      ddy := p.c[j]*(n - j)*(n - 1 - j) + x*ddy;
+    end for;
+    ddy := ddy*ddx;
+
+  end evaluate_dder;
 
   encapsulated function integralValue_der
     "Evaluate derivative of integral of polynomial p(x) from x_low to x_high, assuming only x_high as time-dependent (Leibniz rule)"
