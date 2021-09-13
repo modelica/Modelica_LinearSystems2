@@ -11,11 +11,11 @@ annotation (
   preferredView="info",
   uses(
     Modelica(version="4.0.0"),
-    DymolaCommands(version="1.8")),
+    DymolaCommands(version="1.11")),
   version="2.5.0-dev",
   versionDate="2020-06-26",
   dateModified = "2020-06-26 14:00:00Z",
-  revisionId="$Id::                                       $",
+  revisionId="$F​ormat:%h %ci$",
   conversion(
     from(version={"2.0", "2.1", "2.2", "2.3", "2.3.1", "2.3.2", "2.3.2", "2.3.3", "2.3.4"},
       script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.3.4.mos", to="2.3.5"),
