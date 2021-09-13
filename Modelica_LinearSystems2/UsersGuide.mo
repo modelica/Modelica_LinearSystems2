@@ -671,7 +671,7 @@ the Library in the future.
 <li> Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</li>
 <li> Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</li>
 <li> Modelica_LinearSystems2.Types &ndash; use types from
-     <a href=\\\"modelica://Modelica_LinearSystems2.Utilities.Types\\\">Modelica_LinearSystems2.Utilities.Types</a>
+     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Types\">Modelica_LinearSystems2.Utilities.Types</a>
      instead</li>
 </ul>
 </html>"));
