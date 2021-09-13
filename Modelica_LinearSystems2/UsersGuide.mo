@@ -462,7 +462,7 @@ This library is based on the following references:
       annotation (Documentation(info="<html>
 <p>
 This version requires the <strong>Modelica 4.0.0</strong> Library.
-It is backward compatible to the previous version 2.4.0.
+There is a&nbsp;limited backward compatibility to the previous version 2.4.1.
 </p>
 
 <h4>
