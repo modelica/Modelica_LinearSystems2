@@ -456,7 +456,7 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_2_5_0 "Version 2.5.0-dev (???, 2020)"
+    class Version_2_4_1 "Version 2.4.1 (September 13, 2020)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
@@ -472,35 +472,9 @@ Improvements in this version
 <ul>
 <li> Utilize ModelicaIO functions for matrix I/O, see issue
      <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
-     Concerning functions are marked obsolete.</li>
+     Concerning functions are marked obsolete, see below.</li>
+<li> About <a href=\"modelica://Modelica_LinearSystems2/Resources/Documentation/Version-2.4.1/ResolvedGitHubIssues.html\">20</a> issues (including pull requests) have been addressed for this release.</li>
 </ul>
-
-<h4>
-Obsolete operator record Modelica_LinearSystems2.Math.Complex
-</h4>
-<p>
-The functionality of this record is given by the top-level operator
-record <a href=\"modelica://Complex\">Complex</a> now and
-most of the functions can be found in the library 
-<a href=\"modelica://Modelica.ComplexMath\">Modelica.ComplexMath</a>.
-The remaining functions contained in this record where moved into
-<a href=\"modelica://Modelica_LinearSystems2.ComplexMathAdds\">ComplexMathAdds</a>.
-</p>
-<p>
-Therefore, the record <code>Modelica_LinearSystems2.Math.Complex</code>
-was marked obsolete and shall not be used anymore.
-The provided conversion script ensures proper transformation
-of the record and its functions.
-The record will be removed from the Library in the future.
-</p>
-<p>
-See also 
-<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">UsersGuide.GettingStarted.ComplexNumbers</a>
-for some details and
-<a href=\"modelica://Modelica_LinearSystems2.Math.Complex\">Modelica_LinearSystems2.Math.Complex</a>
-for inheritance.
-</p>
-
 
 <h4>
 Obsolete classes
@@ -531,14 +505,9 @@ in the future.
 <li> Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain</li>
 <li> Modelica_LinearSystems2.Math.Vectors.find</li>
 <li> Modelica_LinearSystems2.Math.Vectors.length</li>
-<li> Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</li>
-<li> Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</li>
-<li> Modelica_LinearSystems2.Types &ndash; use types from
-     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Types\">Modelica_LinearSystems2.Utilities.Types</a>
-     instead</li>
 </ul>
 </html>"));
-    end Version_2_5_0;
+    end Version_2_4_1;
 
     class Version_2_4_0 "Version 2.4.0 (June 26, 2020)"
       extends Modelica.Icons.ReleaseNotes;
