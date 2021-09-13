@@ -619,7 +619,7 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_2_4_1 "Version 2.4.1-dev (???, 2020)"
+    class Version_2_4_1 "Version 2.4.1 (September 13, 2020)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
@@ -635,7 +635,8 @@ Improvements in this version
 <ul>
 <li> Utilize ModelicaIO functions for matrix I/O, see issue
      <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
-     Concerning functions are marked obsolete.</li>
+     Concerning functions are marked obsolete, see below.</li>
+<li> About <a href=\"modelica://Modelica_LinearSystems2/Resources/Documentation/Version-2.4.1/ResolvedGitHubIssues.html\">20</a> issues (including pull requests) have been addressed for this release.</li>
 </ul>
 
 <h4>
