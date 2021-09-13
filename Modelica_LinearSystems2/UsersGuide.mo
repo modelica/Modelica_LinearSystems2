@@ -466,16 +466,6 @@ It is backward compatible to the previous version 2.4.0.
 </p>
 
 <h4>
-Improvements in this version
-</h4>
-
-<ul>
-<li> Utilize ModelicaIO functions for matrix I/O, see issue
-     <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
-     Concerning functions are marked obsolete.</li>
-</ul>
-
-<h4>
 Obsolete operator record Modelica_LinearSystems2.Math.Complex
 </h4>
 <p>
@@ -500,6 +490,28 @@ for some details and
 <a href=\"modelica://Modelica_LinearSystems2.Math.Complex\">Modelica_LinearSystems2.Math.Complex</a>
 for inheritance.
 </p>
+</html>"));
+    end Version_2_5_0;
+
+    class Version_2_4_1 "Version 2.4.1 (September 13, 2020)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>
+This version requires the <strong>Modelica 4.0.0</strong> Library.
+It is backward compatible to the previous version 2.4.0.
+</p>
+
+<h4>
+Improvements in this version
+</h4>
+
+<ul>
+<li> Utilize ModelicaIO functions for matrix I/O, see issue
+     <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
+     Concerning functions are marked obsolete, see below.</li>
+<li> About <a href=\"modelica://Modelica_LinearSystems2/Resources/Documentation/Version-2.4.1/ResolvedGitHubIssues.html\">20</a> issues (including pull requests) have been addressed for this release.</li>
+</ul>
 
 
 <h4>
@@ -538,7 +550,8 @@ in the future.
      instead</li>
 </ul>
 </html>"));
-    end Version_2_5_0;
+    end Version_2_4_1;
+
 
     class Version_2_4_0 "Version 2.4.0 (June 26, 2020)"
       extends Modelica.Icons.ReleaseNotes;
