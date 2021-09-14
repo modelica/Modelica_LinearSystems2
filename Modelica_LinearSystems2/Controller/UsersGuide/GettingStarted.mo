@@ -46,9 +46,9 @@ drive with a P-PI cascade controller is demonstrated in example
 A screen shot of the diagram layer is shown in the next figure:
 </p>
 
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Sampled1.png\">
-</p>
+</div>
 
 <p>
 Every block has a continuous input and a continuous output.
@@ -58,13 +58,13 @@ the PI controller in the above example has the following
 parameter menus:
 </p>
 
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Sampled2.png\">
-</p>
+</div>
 
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Sampled3.png\">
-</p>
+</div>
 
 <p>
 By setting, e.g., parameters blockType to &quot;Discrete&quot; and
