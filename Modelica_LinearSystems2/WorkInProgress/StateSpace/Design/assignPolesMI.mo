@@ -424,7 +424,7 @@ of [1] the eigenvalues <i>evr</i> to be retained are chosen as
 </p>
 <blockquote><pre>
 evr = {s in C: Re(s) &lt; -alpha, alpha &gt; =0}
-</pre> </blockquote>
+</pre></blockquote>
 <p>
 but other specification are conceivable of course.<br>
 </p>
@@ -434,7 +434,7 @@ Let
 </p>
 <blockquote><pre>
 <b>G</b> = [<b>G</b>1;<b>G</b>2] = <b>Q</b>*<b>B</b>
-</pre> </blockquote>
+</pre></blockquote>
 <p>
 with an appropriate partition according to <b>F</b>2. (<b>F</b>2, <b>G</b>2) has to be
 controllable.

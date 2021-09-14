@@ -58,16 +58,15 @@ result = ZerosAndPoles.Analysis.<b>evaluate</b>(zp, p, den_min=0)
 <p>
 Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function at a given (complex) value of p and returns the value G(p)=N(p)/D(p). The optional argument den_min with default 0 is used to guard against a division by zero.
 </p>
-<pre>
-  <b>if</b> |(D(p))| >= den_min <b>then</b>
-     G(p) = N(p) / D(p);
-  <b>elseif</b> D(p).re >= 0.0 <b>then</b>
-     G(p) = N(p) / den_min
-  <b>else</b>
-     G(p) = -N(p) / den_min
-  <b>end if</b>;
-</p>
-</pre>
+<blockquote><pre>
+<b>if</b> |(D(p))| >= den_min <b>then</b>
+   G(p) = N(p) / D(p);
+<b>elseif</b> D(p).re >= 0.0 <b>then</b>
+   G(p) = N(p) / den_min
+<b>else</b>
+   G(p) = -N(p) / den_min
+<b>end if</b>;
+</pre></blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
