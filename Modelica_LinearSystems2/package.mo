@@ -91,7 +91,7 @@ Modelica Standard Library.
   <td style=\"vertical-align: top;\"><b>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</b></td>
 </tr>
 <tr>
-  <td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2020, DLR Institute of System Dynamics and Control</b></td>
+  <td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2021, DLR Institute of System Dynamics and Control</b></td>
 </tr>
 </table>
 
