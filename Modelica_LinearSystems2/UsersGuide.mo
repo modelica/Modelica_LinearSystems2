@@ -335,95 +335,114 @@ functions are provided that operate on the
 corresponding data structure. Currently, the following
 linear system representations are available:
 </p>
-<table border=1 cellspacing=0 cellpadding=2>
-  <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.StateSpace\">StateSpace</a></td>
-      <td>Multi input, multi output, linear differential equation systems in state space form:
-<pre>
-    <b>der</b>(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
-        <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>
-
-</pre>
-      </td>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <caption align=\"bottom\">Various linear system representations</caption>
+  <tr>
+    <th>Representation</th>
+    <th>Description</th>
   </tr>
-  <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.TransferFunction\">TransferFunction</a></td>
-      <td>Single input, single output, transfer functions defined via a numerator
-          and a denominator polynomial n(s) and d(s) respectively:
-<pre>
-        n(s)                                2*s+3
-   y = ------ * u,  for example:   y = ----------------- * u
-        d(s)                            4*s^2 + 5*s + 6
+  <tr>
+    <td> record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.StateSpace\">StateSpace</a></td>
+    <td> Multi input, multi output, linear differential equation systems in state space form:
+<blockquote><pre>
+<strong>der</strong>(<strong>x</strong>) = <strong>A</strong> * <strong>x</strong> + <strong>B</strong> * <strong>u</strong>
+    <strong>y</strong>  = <strong>C</strong> * <strong>x</strong> + <strong>D</strong> * <strong>u</strong>
 
-</pre>
-      </td>
+</pre></blockquote>
+    </td>
   </tr>
-  <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles\">ZerosAndPoles</a></td>
-      <td> Single input, single output, transfer function defined via the products of
+  <tr>
+    <td> record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.TransferFunction\">TransferFunction</a></td>
+    <td> Single input, single output, transfer functions defined via a&nbsp;numerator
+         and a&nbsp;denominator polynomial n(s) and d(s) respectively:
+<blockquote><pre>
+     n(s)                                2*s+3
+y = ------ * u,  for example:   y = ----------------- * u
+     d(s)                            4*s^2 + 5*s + 6
+
+</pre></blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td> record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles\">ZerosAndPoles</a></td>
+    <td> Single input, single output, transfer function defined via the products of
            its zeros z and poles p, respectively;
-<pre>
-         product(s - z[i])
-  y = k*------------------- * u
-         product(s - p[i])
+<blockquote><pre>
+       product(s - z[i])
+y = k*------------------- * u
+       product(s - p[i])
 
-</pre>
+</pre></blockquote>
 
-A description with zeros and poles is problematic: For example,
-a small change in the imaginary part of a conjugate complex pole pair,
-leads no longer to a transfer function with real coefficients.
-If the same zero or pole is present twice or more, then a diagonal state space
+A&nbsp;description with zeros and poles is problematic: For example,
+a&nbsp;small change in the imaginary part of a&nbsp;conjugate complex pole pair,
+leads no longer to a&nbsp;transfer function with real coefficients.
+If the same zero or pole is present twice or more, then a&nbsp;diagonal state space
 form is no longer possible. This means that the structure is
 very sensitive if zeros or poles are close together.
 For this and other reasons, internally, this data structure
 stores the zeros and poles as first and second order
 polynomials with real coefficients:
-<pre>
-         product(s+n1[i]) * product(s^2+n2[i,1]*s+n2[i,2])
-  y = k*---------------------------------------------------
-         product(s+d1[i]) * product(s^2+d2[i,1]*s+d2[i,2])
+<blockquote><pre>
+       product(s+n1[i]) * product(s^2+n2[i,1]*s+n2[i,2])
+y = k*---------------------------------------------------
+       product(s+d1[i]) * product(s^2+d2[i,1]*s+d2[i,2])
 
-</pre></td>
+</pre></blockquote>
+    </td>
   </tr>
-  <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace\">DiscreteStateSpace</a></td>
-      <td> Multi input, multi output, linear difference equation system
+  <tr>
+    <td> record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace\">DiscreteStateSpace</a></td>
+    <td> Multi input, multi output, linear difference equation system
           in state space form:
-<pre>
-     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
-     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
+<blockquote><pre>
+<strong>x</strong>(Ts*(k+1)) = <strong>A</strong> * <strong>x</strong>(Ts*k) + <strong>B</strong> * <strong>u</strong>(Ts*k)
+<strong>y</strong>(Ts*k)     = <strong>C</strong> * <strong>x</strong>(Ts*k) + <strong>D</strong> * <strong>u</strong>(Ts*k)
+<strong>x</strong>_continuous(Ts*k) = <strong>x</strong>(Ts*k) + <strong>B2</strong> * <strong>u</strong>(Ts*k)
 
-</pre>
-with <b>Ts</b> the sample time and <b>k</b>
+</pre></blockquote>
+with <code>Ts</code> the sample time and <code>k</code>
 the index of the actual sample instance (k=0,1,2,3,...).
-<b>x</b>(t) is the discrete state vector and <b>x</b>_continuous(t)
+<strong>x</strong>(t) is the discrete state vector and <strong>x</strong>_continuous(t)
 is the state vector of the continuous system from which the
-discrete block has been derived by a state transformation,
-in order to remove dependencies of past values of <b>u</b>.<br>
-      </td>
+discrete block has been derived by a&nbsp;state transformation,
+in order to remove dependencies of past values of <strong>u</strong>.<br>
+    </td>
   </tr>
+<!--
+  <tr>
+    <td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles\">DiscreteZerosAndPoles</a></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.DiscreteTransferFunction\">DiscreteTransferFunction</a></td>
+    <td></td>
+  </tr>
+-->
 </table>
 
 <p>
 It is planned to add linear system descriptions such as
-DiscreteTransferFunction,
 DiscreteFactorized, FrequencyResponse, and DiscreteFrequencyResponse,
 in the future. Furthermore, several useful functions are not yet
 available in the records above. They will also be added in the future.
 </p>
 
 <p>
-Below, a typical session in the command window is shown:
+Below, a&nbsp;typical session in the command window is shown:
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction1.png\">
-</blockquote>
+</div>
 
 <p>
-The last command (plotBode) results in the following frequency response:
+The last command (<code>plotBode</code>) results in the following frequency response:
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction2.png\">
-</blockquote>
+</div>
 
 <p>
 Note, the interesting frequency range is automatically determined
@@ -432,34 +451,35 @@ poles and zeros).
 </p>
 
 <p>
-Transfer function tf3 can be transformed into a state
+Transfer function <code>tf3</code> can be transformed into a&nbsp;state
 space description with command
-ss=StateSpace(tf3) and an poles-and-zeros plot and print out is then available via StateSpace.Plot.polesAndZeros(ss)
+<code>ss&nbsp;= StateSpace(tf3)</code> and a&nbsp;poles-and-zeros plot and
+print out is then available via <code>StateSpace.Plot.polesAndZeros(ss)</code>.
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction4.png\">
-</blockquote>
+</div>
 
 <p>
 resulting in:
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction3.png\">
-</blockquote>
+</div>
 
 <p>
 It is also possible to linearize any Modelica model at
 the start time (after initialization has been performed).
 This is especially useful if the model is initialized in
 steady state. For example, the command
-StateSpace.Import.fromModel(\"xxx\") results in:
+<code>StateSpace.Import.fromModel(&quot;xxx&quot;)</code> results in:
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction5.png\">
-</blockquote>
+</div>
 
 <p>
 Also several
@@ -468,18 +488,18 @@ are provided in. Typical frequency responses of implemented filters
 are shown in the next figure:
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4Filters.png\">
-</blockquote>
+</div>
 
 <p>
 The step responses of the same low pass filters are shown in the next figure,
-starting from a steady state initial filter with initial input = 0.2:
+starting from a&nbsp;steady state initial filter with initial input equal to&nbsp;0.2:
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4FiltersStepResponse.png\">
-</blockquote>
+</div>
 </html>"));
     end LinearSystemDataStructures;
 
