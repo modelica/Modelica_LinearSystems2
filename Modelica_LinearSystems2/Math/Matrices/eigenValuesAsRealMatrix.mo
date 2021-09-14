@@ -47,8 +47,7 @@ to improve the computation. For details see the
   eval := Matrices.eigenValuesAsRealMatrix(A);  // eval = [ 8.0  , 0;
                                                 //         -0.618, 0;
                                                 //          1.618, 0];
-</pre>
-</blockquote>
+</pre></blockquote>
 <p>
 i.e., matrix A has the 3 real eigenvalues 8.0, -0.618, 1.618.
 </p>

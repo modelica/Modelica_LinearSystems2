@@ -122,7 +122,7 @@ algorithm
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = StateSpace.Conversion.<b>toZerosAndPoles</b>(ss)
-</pre> </blockquote>
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
