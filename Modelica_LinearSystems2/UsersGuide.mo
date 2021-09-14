@@ -235,53 +235,89 @@ has to be applied.
       annotation (Documentation(info="<html>
 <p>
 Polynomials with real coefficients are defined via record
-Modelica_LinearSystems2.Math.Polynomial. Read first the previous section about
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial\">Modelica_LinearSystems2.Math.Polynomial</a>.
+Read first the previous section about
 Complex numbers to understand how records, functions in records and the coming
 operator overloading technique works. The Polynomial record is equivalent to
-the Complex record. A screenshot is shown in the next figure:
+the Complex record. A&nbsp;screenshot is shown in the next figure:
 </p>
-<blockquote>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial1.png\"/> </p>
-</blockquote>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial1.png\"/>
+</div>
 <p>
-A Polynomial is constructed by the command Polynomial(coefficientVector), where
+A&nbsp;Polynomial is constructed by the command <code>Polynomial(coefficientVector)</code>, where
 the input argument provides the polynomial coefficients in descending order.
-In the following figure, a typical session in the command window is shown
-(try it, e.g., in Dymolas command window):
+In the following figure, a&nbsp;typical session in the command window is shown
+(try it, e.g., in Dymola command window):
 </p>
-<blockquote>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial2.png\"/> </p>
-</blockquote>
+
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial
+ = true
+
+x = Polynomial.x()
+p1 = -6*x^2 + 4*x -3
+p1
+// -6*x^2 + 4*x - 3
+String(p1)
+//  = \"-6*x^2 + 4*x - 3\"
+
+int_p = Polynomial.integral(p1)
+String(int_p)
+//  = \"-2*x^3 + 2*x^2 - 3*x0\"
+
+p2 = 3*p1
+p3 = p2+p1
+p3
+// -24*x^2 + 16*x - 12
+
+r = Polynomial.roots(p3, printRoots=true)
+//  =
+//    0.333333 + 0.62361*j
+//    0.333333 - 0.62361*j
+
+der_p = Polynomial.derivative(p1)
+String(der_p)
+//  = \"-12*x + 4\"
+
+Polynomial.evaluate(der_p, 1)
+//  = -8.0
+</pre></blockquote>
+
 <p>
 After defining the import statement to get Polynomial as an abbreviation for
-Modelica_LinearSystems2.Polynomial, the coefficients are given as vector input
-to \"Polynomial()\". Via the operator-'String' function (called by String(p))
-Polynomial p is pretty printed. Besides all elementary operations, such as
-operator '+', '*', functions to compute the integral or the derivative are provide.
-With function \"evaluate(..)\" the Polynomial is evaluated for a given value x.
-With function \"roots\", the roots of the Polynomial are evaluated and are returned
-as a Vector of Complex numbers. If the optional second input argument printRoots
+Modelica_LinearSystems2.Math.Polynomial, the coefficients are given as vector input
+to <code>Polynomial()</code>. Via the operator-'String' function (called by <code>String(p)</code>)
+polynomial <code>p</code> is pretty printed. Besides all elementary operations, such as
+operator <code>'+'</code> or <code>'*'</code>, functions to compute the integral or
+the derivative are provided.
+With function <code>evaluate(..)</code> the Polynomial is evaluated for a&nbsp;given
+value&nbsp;<var>x</var>.
+With function <code>roots</code>, the roots of the Polynomial are evaluated and are returned
+as a&nbsp;vector of complex numbers. If the optional second input argument <code>printRoots</code>
 is set to true, the roots are at once also nicely printed.
 </p>
 <p>
-With function \"fitting\", a polynomial can be determined that approximates given
-table values. Finally with function \"plot\", the interesting range of x is
+With function <code>fitting()</code>, a&nbsp;polynomial can be determined that
+approximates given table values.
+Finally with function <code>plot()</code>, the interesting range of&nbsp;<var>x</var> is
 automatically determined (via calculating the roots of the polynomial and of its
-derivative) and plotted. A typical plot is shown in the next figure:
+derivative) and plotted. A&nbsp;typical plot is shown in the next figure:
 </p>
-<blockquote>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial3.png\"/> </p>
-</blockquote>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial3.png\"/>
+</div>
 <p>
-Several other examples of Polynomial are available in Polynomial.Examples.
+Several other examples of Polynomial are available in
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.Examples\">Polynomial.Examples</a>.
 In Dymola, select the function with the right mouse button and click \"Ok\" on
 the resulting menu which provides the possibility to define all the input arguments.
 Since the Examples function do not have any input arguments, only the \"Ok\"
 button is present:
 </p>
-<blockquote>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial4.png\"/> </p>
-</blockquote>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial4.png\"/>
+</div>
 </html>"));
     end Polynomials;
 
