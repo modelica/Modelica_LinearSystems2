@@ -1357,8 +1357,7 @@ of the system corresponding state space system
 <blockquote><pre>
 der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
     <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
-</pre>
-</blockquote>
+</pre></blockquote>
 <p>
 of a transfer function.
 </p>
