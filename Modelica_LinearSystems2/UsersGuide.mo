@@ -253,7 +253,7 @@ In the following figure, a&nbsp;typical session in the command window is shown
 
 <blockquote><pre>
 <strong>import</strong> Modelica_LinearSystems2.Math.Polynomial
- = true
+// = true
 
 x = Polynomial.x()
 p1 = -6*x^2 + 4*x -3
@@ -432,12 +432,36 @@ available in the records above. They will also be added in the future.
 Below, a&nbsp;typical session in the command window is shown:
 </p>
 
-<div>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction1.png\">
-</div>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.TransferFunction
+//  = true
+<strong>import</strong> Modelica_LinearSystems2.ZerosAndPoles
+//  = true
+
+s = TransferFunction.s()
+p = ZerosAndPoles.p()
+
+tf1 = (s + 2)/(2*s^2 + 3*s +4)
+String(tf1)
+//  = \"(s + 2)/(2*s^2 + 3*s + 4)\"
+
+zp1 = 4*(p + 1)/((p - 1)*(p^2 - 4*p + 13))
+String(zp1)
+//  = \"4*(p + 1) / ( (p - 1)*(p^2 - 4*p + 13) )\"
+
+tf2 = ZerosAndPoles.Conversion.toTransferFunction(zp1)
+tf2
+// (4*s + 4)/(s^3 - 5*s^2 + 17*s - 13)
+
+tf3 = tf1*tf2
+tf3
+// (4*s^2 + 12*s + 8)/(2*s^5 - 7*s^4 + 23*s^3 + 5*s^2 + 29*s - 52)
+
+TransferFunction.Plot.bode(tf3)
+</pre></blockquote>
 
 <p>
-The last command (<code>plotBode</code>) results in the following frequency response:
+The last command (<code>Plot.bode</code>) results in the following frequency response:
 </p>
 
 <div>
@@ -457,9 +481,13 @@ space description with command
 print out is then available via <code>StateSpace.Plot.polesAndZeros(ss)</code>.
 </p>
 
-<div>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction4.png\">
-</div>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.StateSpace
+//  = true
+
+ss = StateSpace(tf3)
+StateSpace.Plot.polesAndZeros(ss)
+</pre></blockquote>
 
 <p>
 resulting in:
@@ -477,9 +505,13 @@ steady state. For example, the command
 <code>StateSpace.Import.fromModel(&quot;xxx&quot;)</code> results in:
 </p>
 
-<div>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction5.png\">
-</div>
+
+<blockquote><pre>
+ss2 = StateSpace.Import.fromModel(\"Modelica.Mechanics.Rotational.Examples.First\")
+ev = StateSpace.Analysis.eigenValues(ss2)
+ev
+// {-0.0595186 + 76.3757*j, -0.0595186 - 76.3757*j, -0.714296, 3.0963e-17}
+</pre></blockquote>
 
 <p>
 Also several
