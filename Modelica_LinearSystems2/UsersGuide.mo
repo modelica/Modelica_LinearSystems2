@@ -250,15 +250,46 @@ the input argument provides the polynomial coefficients in descending order.
 In the following figure, a&nbsp;typical session in the command window is shown
 (try it, e.g., in Dymola command window):
 </p>
-<blockquote>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial2.png\"/> </p>
-</blockquote>
+
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial
+ = true
+
+x = Polynomial.x()
+p1 = -6*x^2 + 4*x -3
+p1
+// -6*x^2 + 4*x - 3
+String(p1)
+//  = \"-6*x^2 + 4*x - 3\"
+
+int_p = Polynomial.integral(p1)
+String(int_p)
+//  = \"-2*x^3 + 2*x^2 - 3*x0\"
+
+p2 = 3*p1
+p3 = p2+p1
+p3
+// -24*x^2 + 16*x - 12
+
+r = Polynomial.roots(p3, printRoots=true)
+//  =
+//    0.333333 + 0.62361*j
+//    0.333333 - 0.62361*j
+
+der_p = Polynomial.derivative(p1)
+String(der_p)
+//  = \"-12*x + 4\"
+
+Polynomial.evaluate(der_p, 1)
+//  = -8.0
+</pre></blockquote>
+
 <p>
 After defining the import statement to get Polynomial as an abbreviation for
 Modelica_LinearSystems2.Math.Polynomial, the coefficients are given as vector input
 to <code>Polynomial()</code>. Via the operator-'String' function (called by <code>String(p)</code>)
 polynomial <code>p</code> is pretty printed. Besides all elementary operations, such as
-operator <code>'+'</code>, <code>'*'</code>, functions to compute the integral or
+operator <code>'+'</code> or <code>'*'</code>, functions to compute the integral or
 the derivative are provided.
 With function <code>evaluate(..)</code> the Polynomial is evaluated for a&nbsp;given
 value&nbsp;<var>x</var>.
