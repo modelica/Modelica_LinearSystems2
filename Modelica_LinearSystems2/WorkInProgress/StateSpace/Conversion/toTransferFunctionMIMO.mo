@@ -34,12 +34,15 @@ algorithm
 <h4>Description</h4>
 <p>
 Computes a matrix of TransferFunction records
+</p>
 <blockquote><pre>
-           n_i(s)     b0_i + b1_i*s + ... + bn_i*s^n
-   tf_i = -------- = --------------------------------
-           d_i(s)     a0_i + a1_i*s + ... + an_i*s^n
- </pre></blockquote>
+        n_i(s)     b0_i + b1_i*s + ... + bn_i*s^n
+tf_i = -------- = --------------------------------
+        d_i(s)     a0_i + a1_i*s + ... + an_i*s^n
+</pre></blockquote>
+<p>
 with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
+</p>
 
 
 <h4>Example</h4>
@@ -50,12 +53,15 @@ with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.Stat
 <h4>Description</h4>
 <p>
 Computes a matrix of TransferFunction records
+</p>
 <blockquote><pre>
-           n(s)     b0 + b1*s + ... + bn*s^n
-   tf = -------- = --------------------------
-           d(s)     a0 + a1*s + ... + an*s^n
- </pre></blockquote>
+      n(s)     b0 + b1*s + ... + bn*s^n
+tf = ------ = --------------------------
+      d(s)     a0 + a1*s + ... + an*s^n
+</pre></blockquote>
+<p>
 with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
+</p>
 
 
 <h4>Example</h4>

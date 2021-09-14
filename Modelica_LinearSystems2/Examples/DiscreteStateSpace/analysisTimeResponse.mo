@@ -50,7 +50,7 @@ algorithm
   annotation (Documentation(info="<html>
 <p>
 Computes the time response of the system
-<p/>
+</p>
 <blockquote><pre>
 dss = DiscreteStateSpace(
         A=[0.99005, 0.00985;
