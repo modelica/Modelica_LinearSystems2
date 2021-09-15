@@ -25,7 +25,7 @@ partial block NotWorkingYetBlock
           smooth=Smooth.None)}),
                       Documentation(info="<html>
 <p>
-This icon is designed for a <b>block</b>
+This icon is designed for a <strong>block</strong>
 </p>
 </html>"));
 

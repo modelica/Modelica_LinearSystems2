@@ -14,7 +14,7 @@ partial block DeveloperOnlyBlock
           textString="D")}),
                       Documentation(info="<html>
 <p>
-This icon is designed for a <b>block</b>
+This icon is designed for a <strong>block</strong>
 </p>
 </html>"));
 

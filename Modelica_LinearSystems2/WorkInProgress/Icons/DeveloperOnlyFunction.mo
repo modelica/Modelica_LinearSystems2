@@ -19,7 +19,7 @@ partial function DeveloperOnlyFunction
           lineThickness=0.5,
           textString="D")}), Documentation(info="<html>
 <p>
-This icon is designed for a <b>function</b>
+This icon is designed for a <strong>function</strong>
 </p>
 </html>"));
 

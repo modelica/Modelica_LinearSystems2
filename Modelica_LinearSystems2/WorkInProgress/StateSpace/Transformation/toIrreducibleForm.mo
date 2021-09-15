@@ -40,7 +40,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-tss = StateSpace.Transformation.<b>toIrreducibleForm</b>(ss)
+tss = StateSpace.Transformation.<strong>toIrreducibleForm</strong>(ss)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -62,7 +62,7 @@ This function is called to compute transfer functions of state space representat
     C = [1,  0,  0],
     D = [0]);
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   tss:=Modelica_LinearSystems2.StateSpace.Transformation.toIrreducibleForm(ss);
 //  tss=StateSpace(
       A=[-0.5],
@@ -74,7 +74,7 @@ This function is called to compute transfer functions of state space representat
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
-<dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
+<dd> <strong>Numerically stable algorithm for transfer function matrix evaluation</strong>.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 

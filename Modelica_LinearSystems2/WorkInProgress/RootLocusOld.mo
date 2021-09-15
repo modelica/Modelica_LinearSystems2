@@ -107,7 +107,7 @@ package RootLocusOld
     annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Plot.<b>rootLocus</b>(modelName, t_linearize, modelParam, simulationSetup, diagram)
+Plot.<strong>rootLocus</strong>(modelName, t_linearize, modelParam, simulationSetup, diagram)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -123,7 +123,7 @@ The parameter is varied equidistantly from minimum to maximum value.
 Calling the function
 </p>
 <blockquote><pre>
-Utilities.Plot.<b>rootLocus</b>(
+Utilities.Plot.<strong>rootLocus</strong>(
   modelName = \"Modelica.Mechanics.Rotational.Examples.First\",
   t_linearize = 0,
   modelParam={
@@ -193,7 +193,7 @@ yields following diagram
 <p>
 This function plots the root locus of model
 <a href=\"modelica://Modelica.Mechanics.Rotational.Examples.First\">Rotational.Examples.First</a>
-over the load inertia <b>Jload</b>:
+over the load inertia <strong>Jload</strong>:
 </p>
 
 <blockquote>

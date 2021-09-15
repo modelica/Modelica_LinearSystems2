@@ -38,37 +38,37 @@ linear equality and linear inequality constraints.
 The problem to be solved is mathematically formulated as:
 </p>
 <pre>
-   min |<b>A</b>*<b>x</b> - <b>b</b>|^2
-   subject to   <b>E</b>*<b>x</b>  = <b>f</b>;
-                <b>G</b>*<b>x</b> >= <b>h</b>;
+   min |<strong>A</strong>*<strong>x</strong> - <strong>b</strong>|^2
+   subject to   <strong>E</strong>*<strong>x</strong>  = <strong>f</strong>;
+                <strong>G</strong>*<strong>x</strong> >= <strong>h</strong>;
 </pre>
 <p>
 Note, that the inequality relation is treated element wise.
 Remarks:
 </p>
 <ul>
-<li> If there are infinitely many solutions for <b>x</b> (because
-     <b>A</b> does not have full rank), the solution <b>x</b> with the
+<li> If there are infinitely many solutions for <strong>x</strong> (because
+     <strong>A</strong> does not have full rank), the solution <strong>x</strong> with the
      smallest norm is selected that minimizes the problem above.</li>
 <li> If the equality constraints cannot be satisfied, a
      generalized inverse solution is computed such that the
-     residual vector length <b>f</b>-<b>E</b>*<b>x</b> is
+     residual vector length <strong>f</strong>-<strong>E</strong>*<strong>x</strong> is
      minimized.</li>
-<li> The number of rows of matrices <b>A</b>, <b>E</b>, and/or <b>G</b>
+<li> The number of rows of matrices <strong>A</strong>, <strong>E</strong>, and/or <strong>G</strong>
      are arbitrary.
      Especially, these matrices may have zero rows.</li>
 </ul>
 <p>
-As input argument <b>W</b> the assembled matrices have to be
+As input argument <strong>W</strong> the assembled matrices have to be
 given:
 </p>
 <pre>
-         | <b>E  f</b> |
-    <b>W</b> =  | <b>A  b</b> |
-         | <b>G  h</b> |
+         | <strong>E  f</strong> |
+    <strong>W</strong> =  | <strong>A  b</strong> |
+         | <strong>G  h</strong> |
 </pre>
 <p>
-With output argument <b>mode</b> the type of solution is
+With output argument <strong>mode</strong> the type of solution is
 characterized:
 </p>
 <pre>
@@ -85,7 +85,7 @@ characterized:
 </pre>
 
 
-<p><b>Copyright &copy; 2004-2012, DLR Institute of Robotics and Mechatronics </b></p>
+<p><strong>Copyright &copy; 2004-2012, DLR Institute of Robotics and Mechatronics </strong></p>
 
 <p>
 The Fortran interface of DLSEI is defined as:
@@ -415,7 +415,7 @@ The Fortran interface of DLSEI is defined as:
    920501  Reformatted the REFERENCES section.  (WRB)
 </pre>
 </html>", revisions="<html>
-<p><b>Release Notes:</b></p>
+<p><strong>Release Notes:</strong></p>
 <ul>
 <li><em>Sept. 3, 2004</em>
        Martin Otter (DLR): implemented
