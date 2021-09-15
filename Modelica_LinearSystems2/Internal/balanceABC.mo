@@ -63,9 +63,9 @@ algorithm
 
 <h4>Syntax</h4>
 <blockquote><pre>
-(scale,As,Bs,Cs) = Matrices.<b>balanceABC</b>(A,B,C);
-(scale,As,Bs)    = Matrices.<b>balanceABC</b>(A,B);
-(scale,As,,Cs)   = Matrices.<b>balanceABC</b>(A,C=C);
+(scale,As,Bs,Cs) = Matrices.<strong>balanceABC</strong>(A,B,C);
+(scale,As,Bs)    = Matrices.<strong>balanceABC</strong>(A,B);
+(scale,As,,Cs)   = Matrices.<strong>balanceABC</strong>(A,C=C);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -132,7 +132,7 @@ The algorithm is taken from
 </p>
 <dl>
 <dt>H. D. Joos, G. Grbel:
-<dd><b>RAsP'91 Regulator Analysis and Synthesis Programs</b><br>
+<dd><strong>RAsP'91 Regulator Analysis and Synthesis Programs</strong><br>
     DLR - Control Systems Group 1991
 </dl>
 <p>
