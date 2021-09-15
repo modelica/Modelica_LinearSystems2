@@ -29,7 +29,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.<b>toTransferFunction</b>(zp)  </td> </tr>
+<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.<strong>toTransferFunction</strong>(zp)  </td> </tr>
 </table>
 <h4>Description</h4>
 <p>
@@ -48,7 +48,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
    Modelica_LinearSystems2.ZerosAndPoles zp = 1/(p + 3)/(p + 1)
 
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   tf:=Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction(zp);
 //  tf = 1/( s^2 + 4*s + 3 )
 </pre></blockquote>

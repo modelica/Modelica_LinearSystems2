@@ -81,7 +81,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-zp = StateSpace.Conversion.<b>toZerosAndPoles</b>(ss)
+zp = StateSpace.Conversion.<strong>toZerosAndPoles</strong>(ss)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -110,7 +110,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
     C = [1.0,1.0,1.0],
     D = [0.0]);
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
 //                s + 1.5
 //   zp = 2 -----------------
@@ -120,7 +120,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
-<dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
+<dd> <strong>Numerically stable algorithm for transfer function matrix evaluation</strong>.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 </html>",revisions="<html>
