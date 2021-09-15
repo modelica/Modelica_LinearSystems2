@@ -15,7 +15,7 @@ algorithm
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 Computes the ramp response of the system
-StateSpace <i>ss = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>.
+StateSpace <em>ss = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</em>.
 </p>
 </html>"));
 end plotRamp;

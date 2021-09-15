@@ -18,7 +18,7 @@ equation
   annotation (
     Documentation(info="<html>
 <p>
-This block computes output <b>y</b> as <i>sum</i> of the
+This block computes output <b>y</b> as <em>sum</em> of the
 inputs <b>u1</b> and <b>u2</b>:
 </p>
 <pre>

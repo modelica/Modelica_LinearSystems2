@@ -141,7 +141,7 @@ which is based on the <code>balance</code> function from EISPACK.
 </html>",
         revisions="<html>
 <ul>
-<li><i>Sept. 14, 2014</i>
+<li><em>Sept. 14, 2014</em>
        by Martin Otter: Implemented.
 </li>
 </ul>

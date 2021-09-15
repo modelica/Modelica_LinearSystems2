@@ -116,7 +116,7 @@ This function solves the equation
 where matrix <b>A</b> with symmetric positiv definite matrix. The calculation is rather efficient since symmetrie and decomposition of positive definite matrices is exploited.
 <p>
 Due to symmetrie, Matrix <b>A</b> is uniquely defined by a triangle, i.e. the upper or the lower triangular matrix. It is assumed, that the input to describe <b>A</b> is either a Cholesky factor or
-part of matrix <b>A</b> itself. This is defined by the user with the boolean inputs <i>isCholesky</i> and <i>upper</i> which is true when <b>A</b> is already Cholesky factor and when <b>A</b> is upper triangular respectively.
+part of matrix <b>A</b> itself. This is defined by the user with the boolean inputs <em>isCholesky</em> and <em>upper</em> which is true when <b>A</b> is already Cholesky factor and when <b>A</b> is upper triangular respectively.
 <p>
 Considering the Cholesky decomposition
 <blockquote><pre>
@@ -130,9 +130,9 @@ with lower triangular matrix <b>L</b> the equation above could be rewritten as
   <b>X</b>*<b>L</b>*<b>L</b> = <b>B</b>
 
 </pre></blockquote>
-which is solved with BLAS function <i>dtrmm</i> applied to a upper triangular matrix and subsequently to a lower triangular matrix.
+which is solved with BLAS function <em>dtrmm</em> applied to a upper triangular matrix and subsequently to a lower triangular matrix.
 <p>
-In contrast to function <i>solveSymRight</i> this function is implemented in C-code
+In contrast to function <em>solveSymRight</em> this function is implemented in C-code
 </p>
 </html>"));
 

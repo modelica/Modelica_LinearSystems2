@@ -19,7 +19,7 @@ equation
   annotation (
     Documentation(info="<html>
 <p>
-This blocks computes output <b>y</b> as <i>difference</i> of the
+This blocks computes output <b>y</b> as <em>difference</em> of the
 commanded input <b>u1</b> and the feedback
 input <b>u2</b>:
 </p>

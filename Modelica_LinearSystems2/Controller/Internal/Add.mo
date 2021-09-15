@@ -30,7 +30,7 @@ equation
           textString="%name")}),
     Documentation(info="<html>
 <p>
-This blocks computes output <b>y</b> as <i>sum</i> of the
+This blocks computes output <b>y</b> as <em>sum</em> of the
 two input signals <b>u1</b> and <b>u2</b>:
 </p>
 <pre>

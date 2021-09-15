@@ -417,7 +417,7 @@ The Fortran interface of DLSEI is defined as:
 </html>", revisions="<html>
 <p><b>Release Notes:</b></p>
 <ul>
-<li><i>Sept. 3, 2004</i>
+<li><em>Sept. 3, 2004</em>
        Martin Otter (DLR): implemented
 </li>
 </ul>

@@ -35,7 +35,7 @@ equation
 <p>
 This block is similar to Modelica.Blocks.Math.MatrixGain. Additionally
 this block offers to load the matrix from a MATLAB-file. It
-computes output vector <b>y</b> as <i>product</i> of the
+computes output vector <b>y</b> as <em>product</em> of the
 gain matrix <b>K</b> with the input signal vector <b>u</b>:
 </p>
 <pre>
