@@ -29,7 +29,7 @@ algorithm
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunctionMIMO</b>(ss)  </td> </tr>
+<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> StateSpace.Conversion.<strong>toTransferFunctionMIMO</strong>(ss)  </td> </tr>
 </table>
 <h4>Description</h4>
 <p>
@@ -48,7 +48,7 @@ with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.Stat
 <h4>Example</h4>
 <h4>Syntax</h4>
 <table>
-<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunctionMIMO</b>(ss)  </td> </tr>
+<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<strong>toTransferFunctionMIMO</strong>(ss)  </td> </tr>
 </table>
 <h4>Description</h4>
 <p>
@@ -78,7 +78,7 @@ with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.Stat
       D = [1.0, 0.0;
            0.0, 1.0]);
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
 
 // zp = [(s^2 + 5*s + 7)/(s^2 + 5*s + 6), 1/(s + 2);

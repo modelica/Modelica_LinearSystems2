@@ -95,8 +95,8 @@ Example:
 can be expressed as
 </p>
 <pre>
-   <b>import</b> Complex;
-   <b>import</b> Modelica_LinearSystems2.ZerosAndPoles;
+   <strong>import</strong> Complex;
+   <strong>import</strong> Modelica_LinearSystems2.ZerosAndPoles;
 
    j = Complex.j();
    zp = ZerosAndPoles({2+3*j}, {2-3*j});
@@ -245,7 +245,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-z = DiscreteTransferFunction.<b>s</b>()
+z = DiscreteTransferFunction.<strong>s</strong>()
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -391,9 +391,9 @@ algorithm
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-TransferFunction.Plot.<b>plotBode</b>(dtf)
+TransferFunction.Plot.<strong>plotBode</strong>(dtf)
    or
-TransferFunction.Plot.<b>plotBode</b>(dtf, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+TransferFunction.Plot.<strong>plotBode</strong>(dtf, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -406,7 +406,7 @@ This function plots the bode-diagram of a transfer function.
   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
   Modelica_LinearSystems2.TransferFunction tf =(s^2 + 5*s + 7)/(s^2 + 5*s + 6);
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   Modelica_LinearSystems2.TransferFunction.Plot.plotBode(tf)
 //  gives:
 </pre></blockquote>
@@ -436,11 +436,11 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <table>
-<tr> <td align=right>  result </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<b>denominatorDegree</b>(dtf)  </td> </tr>
+<tr> <td align=right>  result </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<strong>denominatorDegree</strong>(dtf)  </td> </tr>
 </table>
 <h4>Description</h4>
 <p>
-Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of a discrete transfer function.
+Function Analysis.<strong>denominatorDegree</strong> calculates the degree of the denominator polynomial of a discrete transfer function.
 
 </p>
 
@@ -451,7 +451,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
    Real dDegree;
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   dDegree := TransferFunction.Analysis.denominatorDegree(dtf);
 //  dDegree = 2
 </pre></blockquote>
@@ -492,7 +492,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <table>
-<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.<b>toDiscreteZerosAndPoles</b>(tf)  </td> </tr>
+<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.<strong>toDiscreteZerosAndPoles</strong>(tf)  </td> </tr>
 </table>
 
 <h4>Description</h4>
@@ -514,7 +514,7 @@ of a discrete transfer function representated by numerator and denominator polyn
   DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
   Modelica_LinearSystems2.TransferFunction tf = 1/(z^2 + 3*z +2)
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   dzp:=Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles(dtf);
 //  zp = 1/( (z + 1)*(z + 2) )
 </pre></blockquote>
@@ -567,7 +567,7 @@ end if;
  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <table>
-<tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.toStateSpace<b>toDiscreteStateSpace</b>(dtf)  </td> </tr>
+<tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.toStateSpace<strong>toDiscreteStateSpace</strong>(dtf)  </td> </tr>
 </table>
 
 <h4>Description</h4>
@@ -586,30 +586,30 @@ y = -------------------------------------- *u
 is transformed into:
 </p>
 <blockquote><pre>
-<b>der</b>(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>;
-    <b>y</b>  = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>;
+<strong>der</strong>(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</strong>*<strong>u</strong>;
+    <strong>y</strong>  = <strong>C</strong>*<strong>x</strong> + <strong>D</strong>*<strong>u</strong>;
    with
-           <b>A</b> = [   0  ,    1  ,    0  ,    0;
+           <strong>A</strong> = [   0  ,    1  ,    0  ,    0;
                    0  ,    0  ,    1  ,    0:
                    0  ,    0  ,    0  ,    1;
                 -a0/a4, -a1/a4, -a2/a4, -a3/a4];
-            <b>B</b> = [  0;
+            <strong>B</strong> = [  0;
                   0;
                   0;
                  1/a4];
-           <b>C</b> = [b0-b4*a0/a4, b1-b4*a1/a4, b2-b4*a2/a4, b3-b4*a3/a4];
-           <b>D</b> = [b4/a4];
+           <strong>C</strong> = [b0-b4*a0/a4, b1-b4*a1/a4, b2-b4*a2/a4, b3-b4*a3/a4];
+           <strong>D</strong> = [b4/a4];
 </pre></blockquote>
 <p>
 If the numerator polynomial is 1, then the state vector
-<b>x</b> is built up of the y(k) (the privious y) and of all the nx-1 predecessor
+<strong>x</strong> is built up of the y(k) (the privious y) and of all the nx-1 predecessor
 (nx is the dimension of the state vector):
 </p>
 <blockquote><pre>
-   <b>x</b>(k+1) = {y(k-n+1), y(k-n+2), ..., y(k)};
+   <strong>x</strong>(k+1) = {y(k-n+1), y(k-n+2), ..., y(k)};
 </pre></blockquote>
 <p>
-Note, the state vector <b>x</b> of Modelica.Blocks.Continuous.TransferFunction
+Note, the state vector <strong>x</strong> of Modelica.Blocks.Continuous.TransferFunction
 is defined slightly differently.
 </p>
 
@@ -618,7 +618,7 @@ is defined slightly differently.
   TransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
   Modelica_LinearSystems2.DiscreteTransferFunction dtf=(z+1)/(z^3 + z^2 + z +1);
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   dss := Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace(dtf);
 // dss.A = [0, 1, 0; 0, 0, 1; -1, -1, -1],
 // dss.B = [0; 0; 1],

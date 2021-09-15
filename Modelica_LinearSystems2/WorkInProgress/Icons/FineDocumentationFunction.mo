@@ -11,7 +11,7 @@ partial function FineDocumentationFunction
           lineColor={128,255,0},
           pattern=LinePattern.Dash)}), Documentation(info="<html>
 <p>
-This icon is designed for a <b>function</b>
+This icon is designed for a <strong>function</strong>
 </p>
 </html>"));
 
