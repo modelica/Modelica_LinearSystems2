@@ -72,65 +72,65 @@ algorithm
  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Ldd = Matrices.<b>choleskyDownDate</b>(L, v);
-Ldd = Matrices.<b>choleskyDownDate</b>(L, v, true);
+Ldd = Matrices.<strong>choleskyDownDate</strong>(L, v);
+Ldd = Matrices.<strong>choleskyDownDate</strong>(L, v, true);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 This function computes the rank-1-downdated
-Cholesky factorization <b>Ldd</b>, with
+Cholesky factorization <strong>Ldd</strong>, with
 </p>
 <blockquote>
-  <b>Add</b> = <b>Ldd</b>*<b>Ldd</b><sup>T</sup> =
-  <b>A</b> -  <b>v</b>*<b>v</b><sup>T</sup> =
-  <b>L</b>*<b>L</b><sup>T</sup> -  <b>v</b>*<b>v</b><sup>T</sup>
+  <strong>Add</strong> = <strong>Ldd</strong>*<strong>Ldd</strong><sup>T</sup> =
+  <strong>A</strong> -  <strong>v</strong>*<strong>v</strong><sup>T</sup> =
+  <strong>L</strong>*<strong>L</strong><sup>T</sup> -  <strong>v</strong>*<strong>v</strong><sup>T</sup>
 </blockquote>
 <p>
-from the input <b>L</b>, i.e. the left (lower) Cholesky factor of the
-original matrix <b>A</b>. The algortihm is taken from [1].
+from the input <strong>L</strong>, i.e. the left (lower) Cholesky factor of the
+original matrix <strong>A</strong>. The algortihm is taken from [1].
 </p>
 <p>
-Matrix <b>Ldd</b> is calculated by
+Matrix <strong>Ldd</strong> is calculated by
 </p>
 <blockquote>
-  [<b>v</b>, <b>Ldd</b>]<sup>T</sup> = <b>H</b> *[<b>0</b>, <b>L</b>]<sup>T</sup>
+  [<strong>v</strong>, <strong>Ldd</strong>]<sup>T</sup> = <strong>H</strong> *[<strong>0</strong>, <strong>L</strong>]<sup>T</sup>
 </blockquote>
 <p>
-with orthogonal Matrix <b>H</b> such that
+with orthogonal Matrix <strong>H</strong> such that
 </p>
 <blockquote>
-  <b>v</b>*<b>v</b><sup>T</sup> + <b>Ldd</b>*<b>Ldd</b><sup>T</sup> =
-  [<b>v</b>, <b>Ldd</b>] * [<b>v</b>, <b>Ldd</b>]<sup>T</sup> =
-  [<b>0</b>, <b>L</b>]*<b>H</b><sup>T</sup> *<b>H</b>*[<b>0</b>, <b>L</b>]<sup>T</sup> =
-  [<b>0</b>, <b>L</b>]*[<b>0</b>, <b>L</b>]<sup>T</sup> = <b>L</b>*<b>L</b><sup>T</sup> = <b>A</b>,
+  <strong>v</strong>*<strong>v</strong><sup>T</sup> + <strong>Ldd</strong>*<strong>Ldd</strong><sup>T</sup> =
+  [<strong>v</strong>, <strong>Ldd</strong>] * [<strong>v</strong>, <strong>Ldd</strong>]<sup>T</sup> =
+  [<strong>0</strong>, <strong>L</strong>]*<strong>H</strong><sup>T</sup> *<strong>H</strong>*[<strong>0</strong>, <strong>L</strong>]<sup>T</sup> =
+  [<strong>0</strong>, <strong>L</strong>]*[<strong>0</strong>, <strong>L</strong>]<sup>T</sup> = <strong>L</strong>*<strong>L</strong><sup>T</sup> = <strong>A</strong>,
 </blockquote>
 <p>
 i.e., by orthogonal transformation
 </p>
 <blockquote>
-  <b>H</b> = <b>H</b>_1*...*<b>H</b>_n.
+  <strong>H</strong> = <strong>H</strong>_1*...*<strong>H</strong>_n.
 </blockquote>
 <p>
-The matrices <b>H</b>_i are Givens matrices computed such that
+The matrices <strong>H</strong>_i are Givens matrices computed such that
 </p>
 <blockquote>
-  <b>H</b>_1*<b>H</b>_2*...*<b>H</b>_n*[z, <b>a</b><sup>T</sup>]<sup>T</sup> = [1, 0, ..., 0]<sup>T</sup>,
+  <strong>H</strong>_1*<strong>H</strong>_2*...*<strong>H</strong>_n*[z, <strong>a</strong><sup>T</sup>]<sup>T</sup> = [1, 0, ..., 0]<sup>T</sup>,
 </blockquote>
 <p>
-with <b>a</b> is the solution of
+with <strong>a</strong> is the solution of
 </p>
 <blockquote>
-  <b>L</b>*<b>a</b> = <b>v</b>
+  <strong>L</strong>*<strong>a</strong> = <strong>v</strong>
 </blockquote>
 <p>
 and
 </p>
 <blockquote>
-  z = ||<b>a</b>||.
+  z = ||<strong>a</strong>||.
 </blockquote>
 <p>
-The following sequence illustrate the principle of calculating the <b>H</b>_i, starting with <b>H</b>_n
+The following sequence illustrate the principle of calculating the <strong>H</strong>_i, starting with <strong>H</strong>_n
 </p>
 <blockquote><pre>
 |z|       |z|       |z|       |z|
@@ -140,18 +140,18 @@ The following sequence illustrate the principle of calculating the <b>H</b>_i, s
 </pre></blockquote>
 <p>
 Note, that the z and a are different in each column.
-It is shown in [1] that this algorithm results in the modified Cholesky factor <b>Ldd</b>.
+It is shown in [1] that this algorithm results in the modified Cholesky factor <strong>Ldd</strong>.
 </p>
 <p>
-With the boolean input \"upper\" the user specifies whether the matrix <b>L</b> is lower
+With the boolean input \"upper\" the user specifies whether the matrix <strong>L</strong> is lower
 or upper triangular matrix (left or right Cholesky factor).
-If \"upper==true\", the output <b>Ldd</b> is also upper triangular. Default is \"upper==false\".
+If \"upper==true\", the output <strong>Ldd</strong> is also upper triangular. Default is \"upper==false\".
 </p>
 
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Dongarra J. J., Bunch J. R., Moler G. B., Stewart G.W. (1987):</dt>
-<dd> <b>LINPACK Users' Guide</b>.
+<dd> <strong>LINPACK Users' Guide</strong>.
      Society for Industrial Mathematics.<br>&nbsp;</dd>
 </dl>
 </html>", revisions="<html>

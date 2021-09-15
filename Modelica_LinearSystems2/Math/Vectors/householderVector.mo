@@ -22,30 +22,30 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Vectors.<b>householderVector</b>(a,b);
+Vectors.<strong>householderVector</strong>(a,b);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 The function call \"<code>householderVector(a, b)</code>\" returns the normalized Householder vector
-<b>u</b> for Householder reflection of input vector <b>a</b> onto vector <b>b</b>, i.e. Householder vector <b>u</b> is the normal
-vector of the reflection plane. Algebraically, the reflection is performed by transformation matrix <b>Q</b>
+<strong>u</strong> for Householder reflection of input vector <strong>a</strong> onto vector <strong>b</strong>, i.e. Householder vector <strong>u</strong> is the normal
+vector of the reflection plane. Algebraically, the reflection is performed by transformation matrix <strong>Q</strong>
 </p>
 <blockquote>
-  <b>Q</b> = <b>I</b> - 2*<b>u</b>*<b>u</b>',
+  <strong>Q</strong> = <strong>I</strong> - 2*<strong>u</strong>*<strong>u</strong>',
 </blockquote>
 <p>
-i.e., vector <b>a</b> is mapped to
+i.e., vector <strong>a</strong> is mapped to
 </p>
 <blockquote>
-  <b>a</b> -> <b>Q</b>*<b>a</b>=c*<b>b</b>
+  <strong>a</strong> -> <strong>Q</strong>*<strong>a</strong>=c*<strong>b</strong>
 </blockquote>
 <p>
-with scalar c, |c| = ||<b>a</b>|| / ||<b>b</b>||. <b>Q</b>*<b>a</b> is the reflection of <b>a</b> about the hyperplane orthogonal to <b>u</b>.
-<b>Q</b> is an orthogonal matrix, i.e.
+with scalar c, |c| = ||<strong>a</strong>|| / ||<strong>b</strong>||. <strong>Q</strong>*<strong>a</strong> is the reflection of <strong>a</strong> about the hyperplane orthogonal to <strong>u</strong>.
+<strong>Q</strong> is an orthogonal matrix, i.e.
 </p>
 <blockquote>
-<b>Q</b> = inv(<b>Q</b>) = <b>Q</b>'.
+<strong>Q</strong> = inv(<strong>Q</strong>) = <strong>Q</strong>'.
 </blockquote>
 
 <h4>Example</h4>
@@ -53,7 +53,7 @@ with scalar c, |c| = ||<b>a</b>|| / ||<b>b</b>||. <b>Q</b>*<b>a</b> is the refle
   a = {2, -4, -2, -1};
   b = {1, 0, 0, 0};
 
-  u = <b>householderVector</b>(a,b);
+  u = <strong>householderVector</strong>(a,b);
     // {0.837, -0.478, -0.239, -0.119}
     // Computation (identity(4) - 2*matrix(u)*transpose(matrix(u)))*a results in
     // {-5, 0, 0, 0} = -5*b

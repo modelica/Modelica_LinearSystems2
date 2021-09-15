@@ -30,38 +30,38 @@ is singular, i.e., no unique solution exists.");
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Matrices.<b>LU_solve2</b>(LU, pivots, B);
+Matrices.<strong>LU_solve2</strong>(LU, pivots, B);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 This function call returns the
-solution <b>x</b> of the linear systems of equations
+solution <strong>x</strong> of the linear systems of equations
 </p>
 <blockquote>
 <p>
-<b>P</b>*<b>L</b>*<b>U</b>*<b>X</b> = <b>B</b>;
+<strong>P</strong>*<strong>L</strong>*<strong>U</strong>*<strong>X</strong> = <strong>B</strong>;
 </p>
 </blockquote>
 <p>
-where <b>P</b> is a permutation matrix (implicitely
+where <strong>P</strong> is a permutation matrix (implicitely
 defined by vector <code>pivots</code>),
-<b>L</b> is a lower triangular matrix with unit
+<strong>L</strong> is a lower triangular matrix with unit
 diagonal elements (lower trapezoidal if m &gt; n), and
-<b>U</b> is an upper triangular matrix (upper trapezoidal if m &lt; n).
+<strong>U</strong> is an upper triangular matrix (upper trapezoidal if m &lt; n).
 The matrices of this decomposition are computed with function
 <a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a> that
 returns arguments <code>LU</code> and <code>pivots</code>
 used as input arguments of <code>Matrices.LU_solve</code>.
 With <code>Matrices.LU</code> and <code>Matrices.LU_solve</code>
 it is possible to efficiently solve linear systems
-with different right hand side <b>matrices</b>. If a linear system of equations with
+with different right hand side <strong>matrices</strong>. If a linear system of equations with
 just one right hand side matrix shall be solved, it is
 more convenient to just use the function
 <a href=\"modelica://Modelica.Math.Matrices.solve2\">Matrices.solve2</a>.
 </p>
 <p>
-If a unique solution <b>X</b> does not exist (since the
+If a unique solution <strong>X</strong> does not exist (since the
 LU decomposition is singular), an exception is raised.
 </p>
 <p>
@@ -88,7 +88,7 @@ matrix A was interchanged with row pivots[i].
   Integer pivots[3];
   Real    X1[3,2];
   Real    X2[3,2];
-<b>algorithm</b>
+<strong>algorithm</strong>
   (LU, pivots) := Matrices.LU(A);
   X1 := Matrices.LU_solve2(LU, pivots, B1);  /* X1 = [3, 6;
                                                       2, 4;

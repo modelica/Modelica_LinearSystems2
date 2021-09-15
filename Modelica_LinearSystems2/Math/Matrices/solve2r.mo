@@ -59,18 +59,18 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-X = Matrices.<b>solve2r</b>(A,B);
-X = Matrices.<b>solve2r</b>(A, B, transA=false, isTriangular=false);
+X = Matrices.<strong>solve2r</strong>(A,B);
+X = Matrices.<strong>solve2r</strong>(A, B, transA=false, isTriangular=false);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 This function call returns the
-solution <b>X</b> of the linear system of equations
+solution <strong>X</strong> of the linear system of equations
 </p>
 <blockquote>
 <p>
-<b>X</b>*op<b>(A)</b> = <b>B</b>
+<strong>X</strong>*op<strong>(A)</strong> = <strong>B</strong>
 </p>
 </blockquote>
 <p>
@@ -78,13 +78,13 @@ with
 </p>
 <blockquote>
 <p>
-op<b>(A)</b> = transpose(<b>(A)</b>)  if   transA==true
-op<b>(A)</b> = <b>(A)</b>  if   transA==false
+op<strong>(A)</strong> = transpose(<strong>(A)</strong>)  if   transA==true
+op<strong>(A)</strong> = <strong>(A)</strong>  if   transA==false
 </p>
 </blockquote>
 <p>
-If matrix <b>(A)</b> is already lower triangular, the factorization is avoided if input \"isTriangular\" is set true.
-If a unique solution <b>X</b> does not exist (since <b>A</b> is singular),
+If matrix <strong>(A)</strong> is already lower triangular, the factorization is avoided if input \"isTriangular\" is set true.
+If a unique solution <strong>X</strong> does not exist (since <strong>A</strong> is singular),
 an exception is raised.
 </p>
 
@@ -103,7 +103,7 @@ i.e., by Gaussian elemination with partial pivoting.
   Real B[2,3]  = [10, 22, 12;
                   20, 44, 24];
   Real X[2,3];
-<b>algorithm</b>
+<strong>algorithm</strong>
   X := Matrices.solve2r(A, B);  /* X = [-34.0, 17.2, 2.4;
                                         -68.0, 34.4, 4.8] */
 </pre></blockquote>

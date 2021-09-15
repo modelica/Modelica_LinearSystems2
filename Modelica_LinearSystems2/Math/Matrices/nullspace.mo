@@ -37,42 +37,42 @@ algorithm
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-           Z = Matrices.<b>nullspace</b>(A);
-(Z, nullity) = Matrices.<b>nullspace</b>(A);
+           Z = Matrices.<strong>nullspace</strong>(A);
+(Z, nullity) = Matrices.<strong>nullspace</strong>(A);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-This function calculates an orthonormal basis <b>Z</b>=[<b>z</b>_1, <b>z</b>_2, ...]
-of the nullspace of a matrix <b>A</b>, i.e. <b>A</b>*<b>z</b>_i=0.
-The nullspace is obtained by svd method. That is, matrix <b>A</b> is decomposed
-into the matrices <b>S</b>, <b>U</b>, <b>V</b>:
+This function calculates an orthonormal basis <strong>Z</strong>=[<strong>z</strong>_1, <strong>z</strong>_2, ...]
+of the nullspace of a matrix <strong>A</strong>, i.e. <strong>A</strong>*<strong>z</strong>_i=0.
+The nullspace is obtained by svd method. That is, matrix <strong>A</strong> is decomposed
+into the matrices <strong>S</strong>, <strong>U</strong>, <strong>V</strong>:
 </p>
 <blockquote>
-  <b>A</b> = <b>U</b><b>S</b><b>V</b><sup>T</sup>
+  <strong>A</strong> = <strong>U</strong><strong>S</strong><strong>V</strong><sup>T</sup>
 </blockquote>
 <p>
-with the orthonormal matrices <b>U</b> and <b>V</b> and the matrix <b>S</b> with
+with the orthonormal matrices <strong>U</strong> and <strong>V</strong> and the matrix <strong>S</strong> with
 </p>
 <blockquote>
-  <b>S</b> = [<b>S</b>1, <b>0</b>]
-  <b>S</b>1 = [diag(s); <b>0</b>]
+  <strong>S</strong> = [<strong>S</strong>1, <strong>0</strong>]
+  <strong>S</strong>1 = [diag(s); <strong>0</strong>]
 </blockquote>
 <p>
-with the singular values <b>s</b>={s1, s2, ..., sr} of <b>A</b> and r=rank(<b>A</b>).
-Note, that <b>S</b> has the same size as <b>A</b>. Since <b>U</b> and <b>V</b> are
+with the singular values <strong>s</strong>={s1, s2, ..., sr} of <strong>A</strong> and r=rank(<strong>A</strong>).
+Note, that <strong>S</strong> has the same size as <strong>A</strong>. Since <strong>U</strong> and <strong>V</strong> are
 orthonormal, we may write
 </p>
 <blockquote>
-  <b>U</b><sup>T</sup>*<b>A</b>*<b>V</b> = [<b>S</b>1, <b>0</b>].
+  <strong>U</strong><sup>T</sup>*<strong>A</strong>*<strong>V</strong> = [<strong>S</strong>1, <strong>0</strong>].
 </blockquote>
 <p>
-Matrix <b>S</b>1 obviously has full column rank and therefore, the left n-r rows
-(n is the number of columns of <b>A</b> or <b>S</b>) of matrix <b>V</b> span
-a nullspace of <b>A</b>.
+Matrix <strong>S</strong>1 obviously has full column rank and therefore, the left n-r rows
+(n is the number of columns of <strong>A</strong> or <strong>S</strong>) of matrix <strong>V</strong> span
+a nullspace of <strong>A</strong>.
 </p>
 <p>
-The nullity of matrix <b>A</b> is the dimension of the nullspace of <b>A</b>.
+The nullity of matrix <strong>A</strong> is the dimension of the nullspace of <strong>A</strong>.
 In view of the above, it becomes clear that nullity holds
 </p>
 <blockquote><pre>
@@ -82,8 +82,8 @@ nullity = n - r
 with
 </p>
 <blockquote>
-n = number of columns of matrix <b>A</b> and <br>
-r = rank(<b>A</b>).
+n = number of columns of matrix <strong>A</strong> and <br>
+r = rank(<strong>A</strong>).
 </blockquote>
 
 <h4>Example</h4>

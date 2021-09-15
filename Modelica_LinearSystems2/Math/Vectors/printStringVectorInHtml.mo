@@ -54,7 +54,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Vectors.<b>printStringVectorInHtml</b>(s, name, fileName, printIndices);
+Vectors.<strong>printStringVectorInHtml</strong>(s, name, fileName, printIndices);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -67,7 +67,7 @@ Optionally, row indices are printed as well.
 <h4>Example</h4>
 <blockquote><pre>
 s = {\"w\", \"3\", \"alpha\"};
-<b>printStringVectorInHtml</b>(s, \"myVec\", \"log.html\", true);
+<strong>printStringVectorInHtml</strong>(s, \"myVec\", \"log.html\", true);
 </pre></blockquote>
 <p>
 saves following HTML code in the file <em>log.html</em>:

@@ -22,7 +22,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Matrices.<b>householderReflection</b>(A,u);
+Matrices.<strong>householderReflection</strong>(A,u);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -30,16 +30,16 @@ Matrices.<b>householderReflection</b>(A,u);
 This function computes the Housholder reflection (transformation)
 </p>
 <blockquote>
-<b>Ar</b> = <b>Q</b>*<b>A</b>
+<strong>Ar</strong> = <strong>Q</strong>*<strong>A</strong>
 </blockquote>
 <p>
 with
 </p>
 <blockquote>
-<b>Q</b> = <b>I</b> -2*<b>u</b>*<b>u</b>'/(<b>u</b>'*<b>u</b>)
+<strong>Q</strong> = <strong>I</strong> -2*<strong>u</strong>*<strong>u</strong>'/(<strong>u</strong>'*<strong>u</strong>)
 </blockquote>
 <p>
-where <b>u</b>*<b>u</b> is housholder vector, i.e. the normal vector of the reflection plane.
+where <strong>u</strong>*<strong>u</strong> is housholder vector, i.e. the normal vector of the reflection plane.
 </p>
 <p>
 Householder reflection is widely used in numerical linear algebra, e.g. to perform QR decompositions.
