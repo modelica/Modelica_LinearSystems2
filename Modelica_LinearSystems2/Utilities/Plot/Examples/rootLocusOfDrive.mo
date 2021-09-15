@@ -12,7 +12,7 @@ algorithm
 <p>
 This function plots the root locus of model
 <a href=\"modelica://Modelica.Mechanics.Rotational.Examples.First\">Rotational.Examples.First</a>
-over the load inertia <b>Jload</b> (the menu on the right lower part is displayed when moving
+over the load inertia <strong>Jload</strong> (the menu on the right lower part is displayed when moving
 the cursor on one curve point; then all points belonging to the same parameter value are
 marked with a red square):
 </p>

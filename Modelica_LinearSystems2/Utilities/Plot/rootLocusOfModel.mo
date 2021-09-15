@@ -71,7 +71,7 @@ algorithm
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Plot.<b>rootLocusOfModel</b>(modelName, modelParam, simulationSetup, diagram, device)
+Plot.<strong>rootLocusOfModel</strong>(modelName, modelParam, simulationSetup, diagram, device)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -88,7 +88,7 @@ is performed between the given minimum and maximum value.
 Calling the function
 </p>
 <blockquote><pre>
-Utilities.Plot.<b>rootLocusOfModel</b>(
+Utilities.Plot.<strong>rootLocusOfModel</strong>(
   modelName = \"Modelica.Mechanics.Rotational.Examples.First\",
   modelParam={
     Modelica_LinearSystems2.Records.ParameterVariation(
