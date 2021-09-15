@@ -409,7 +409,7 @@ operator record DiscreteTransferFunction
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-z = DiscreteTransferFunction.<b>z</b>()
+z = DiscreteTransferFunction.<strong>z</strong>()
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -462,12 +462,12 @@ DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(y, t, x) = DiscreteTransferFunction.Analysis.<b>timeResponse</b>(dtf, tSpan, responseType, x0)
+(y, t, x) = DiscreteTransferFunction.Analysis.<strong>timeResponse</strong>(dtf, tSpan, responseType, x0)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-First, the discrete transfer function representation is transformed into a discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e.
+First, the discrete transfer function representation is transformed into a discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse and the time response of the state space system is calculated. The type of the time response is defined by the input <strong>responseType</strong>, i.e.
 </p>
 <blockquote><pre>
 Impulse \"Impulse response\",
@@ -492,7 +492,7 @@ The outputs y and x are calculated from the system equations of the discrete sta
   Real t[5];
   Real x[5,1,1]
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   dtf.Ts:=0.1;
   (y,t,x):=Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.timeResponse(dtf,tSpan,response,x0);
 //  y[:,1,1] = {0.00237529691211404, 0.0116282350020595, 0.0293927396867651, 0.0546913271597482, 0.0865678034508828}
@@ -533,13 +533,13 @@ The outputs y and x are calculated from the system equations of the discrete sta
       annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(y, t, x) = DiscreteTransferFunction.Analysis.<b>impulseResponse</b>(dtf, tSpan, x0)
+(y, t, x) = DiscreteTransferFunction.Analysis.<strong>impulseResponse</strong>(dtf, tSpan, x0)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 First, the discrete transfer function representation is transformed into discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse
-and the impulse response of the discrete state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
+and the impulse response of the discrete state space system is calculated. The type of the time response is defined by the input <strong>responseType</strong>, i.e. in this case
 </p>
 <blockquote><pre>
 Impulse \"Impulse response\",
@@ -560,7 +560,7 @@ The outputs y and x of the discrete state space systrem are calculated for each 
   Real t[5];
   Real x[5,1,1]
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   dtf.Ts:=0.1;
   (y,t,x):=Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.impulseResponse(dtf,tSpan,response,x0);
 //  y[:,1,1] = {0.00237529691211404, 0.00925293808994548, 0.0177645046847056, 0.0252985874729831, 0.0318764762911345}
@@ -599,13 +599,13 @@ The outputs y and x of the discrete state space systrem are calculated for each 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(y, t, x) = DiscreteTransferFunction.Analysis.<b>stepResponse</b>(dtf, tSpan, x0)
+(y, t, x) = DiscreteTransferFunction.Analysis.<strong>stepResponse</strong>(dtf, tSpan, x0)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 First, the discrete transfer function representation is transformed into discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse
-and the step response of the discrete state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
+and the step response of the discrete state space system is calculated. The type of the time response is defined by the input <strong>responseType</strong>, i.e. in this case
 </p>
 <blockquote><pre>
 Step \"Step response\",
@@ -626,7 +626,7 @@ The outputs y and x of the discrete state space systrem are calculated for each 
   Real t[5];
   Real x[5,1,1]
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   dtf.Ts:=0.1;
   (y,t,x):=Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.stepResponse(dtf,tSpan,response,x0);
 //  y[:,1,1] = {0.00237529691211404, 0.0116282350020595, 0.0293927396867651, 0.0546913271597482, 0.0865678034508828}
@@ -666,13 +666,13 @@ The outputs y and x of the discrete state space systrem are calculated for each 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(y, t, x) = DiscreteTransferFunction.Analysis.<b>rampResponse</b>(dtf, tSpan, x0)
+(y, t, x) = DiscreteTransferFunction.Analysis.<strong>rampResponse</strong>(dtf, tSpan, x0)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 First, the discrete transfer function representation is transformed into discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse
-and the ramp response of the discrete state space system is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
+and the ramp response of the discrete state space system is calculated. The type of the time response is defined by the input <strong>responseType</strong>, i.e. in this case
 </p>
 <blockquote><pre>
 Ramp \"Ramp response\",
@@ -693,7 +693,7 @@ The outputs y and x of the discrete state space systrem are calculated for each 
   Real t[5];
   Real x[5,1,1]
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   dtf.Ts:=0.1;
   (y,t,x):=Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.rampResponse(dtf,tSpan,response,x0);
 //  y[:,1,1] = {0.0, 0.000237529691211404, 0.00140035319141736, 0.00433962716009387, 0.00980875987606869}
@@ -735,13 +735,13 @@ The outputs y and x of the discrete state space systrem are calculated for each 
       annotation(__Dymola_interactive=true, Documentation(info="<html>
  <h4>Syntax</h4>
 <blockquote><pre>
-(y, t, x) = DiscreteTransferFunction.Analysis.<b>initialResponse</b>(x0, dtf, tSpan)
+(y, t, x) = DiscreteTransferFunction.Analysis.<strong>initialResponse</strong>(x0, dtf, tSpan)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 First, the discrete transfer function representation is transformed into discrete state space representation which is given to DiscreteStateSpace.Analysis.timeResponse
-and the initial response of the discrete state space system for initial state x0 is calculated. The type of the time response is defined by the input <b>responseType</b>, i.e. in this case
+and the initial response of the discrete state space system for initial state x0 is calculated. The type of the time response is defined by the input <strong>responseType</strong>, i.e. in this case
 </p>
 <blockquote><pre>
 Initial \"Initial response\",
@@ -762,7 +762,7 @@ The outputs y and x of the discrete state space systrem are calculated for each 
   Real t[5];
   Real x[5,1,1]
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   dtf.Ts:=0.1;
   (y,t,x):=Modelica_LinearSystems2.DiscreteTransferFunction.Analysis.initialResponse(x0,dtf,tSpan,response,x0);
 //  y[:,1,1] = {0.0187315575967189, 0.0271552102903869, 0.0345205091861731, 0.0408580313775029, 0.0462052138701078}
@@ -787,12 +787,12 @@ The outputs y and x of the discrete state space systrem are calculated for each 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-result = DiscreteTransferFunction.Analysis.<b>denominatorDegree</b>(dtf)
+result = DiscreteTransferFunction.Analysis.<strong>denominatorDegree</strong>(dtf)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function Analysis.<b>denominatorDegree</b> calculates the degree of the denominator polynomial of a discrete transfer function.
+Function Analysis.<strong>denominatorDegree</strong> calculates the degree of the denominator polynomial of a discrete transfer function.
 </p>
 
 <h4>Example</h4>
@@ -802,7 +802,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
 
   Real dDegree;
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   dDegree := DiscreteTransferFunction.Analysis.denominatorDegree(dtf);
 //  dDegree = 2
 </pre></blockquote>
@@ -1214,7 +1214,7 @@ Function Analysis.<b>denominatorDegree</b> calculates the degree of the denomina
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-dzp = DiscreteTransferFunction.Conversion.<b>toDiscreteZerosAndPoles</b>(tf)
+dzp = DiscreteTransferFunction.Conversion.<strong>toDiscreteZerosAndPoles</strong>(tf)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -1238,7 +1238,7 @@ DiscreteZerosAndPoles constructor.
   Modelica_LinearSystems2.DiscreteTransferFunction dtf = 1/(z^2 + 3*z + 2)
 
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   dzp = Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteZerosAndPoles(dtf);
 //  dzp = 1/( (z + 1)*(z + 2) )
 </pre></blockquote>
@@ -1295,7 +1295,7 @@ DiscreteZerosAndPoles constructor.
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-dss = DiscreteTransferFunction.Conversion<b>toDiscreteStateSpace</b>(dtf)
+dss = DiscreteTransferFunction.Conversion<strong>toDiscreteStateSpace</strong>(dtf)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -1314,20 +1314,20 @@ y = -------------------------------------- * u
 is transformed into:
 </p>
 <blockquote><pre>
-<b>x</b>_k+1 = <b>A</b>*<b>x</b>_k + <b>B</b>*<b>u</b>_k;
- <b>y</b>_k  = <b>C</b>*<b>x</b>_k + <b>D</b>*<b>u</b>_k;
+<strong>x</strong>_k+1 = <strong>A</strong>*<strong>x</strong>_k + <strong>B</strong>*<strong>u</strong>_k;
+ <strong>y</strong>_k  = <strong>C</strong>*<strong>x</strong>_k + <strong>D</strong>*<strong>u</strong>_k;
 with
-  <b>A</b> = [   0  ,    1  ,    0  ,    0;
+  <strong>A</strong> = [   0  ,    1  ,    0  ,    0;
           0  ,    0  ,    1  ,    0:
           0  ,    0  ,    0  ,    1;
        -a0/a4, -a1/a4, -a2/a4, -a3/a4];
 
-  <b>B</b> = [  0;
+  <strong>B</strong> = [  0;
          0;
          0;
         1/a4];
-  <b>C</b> = [b0-b4*a0/a4, b1-b4*a1/a4, b2-b4*a2/a4, b3-b4*a3/a4];
-  <b>D</b> = [b4/a4];
+  <strong>C</strong> = [b0-b4*a0/a4, b1-b4*a1/a4, b2-b4*a2/a4, b3-b4*a3/a4];
+  <strong>D</strong> = [b4/a4];
 </pre></blockquote>
 
 <h4>Example</h4>
@@ -1335,7 +1335,7 @@ with
   DiscreteTransferFunction z = Modelica_LinearSystems2.DiscreteTransferFunction.z();
   Modelica_LinearSystems2.DiscreteTransferFunction dtf=(z+1)/(z^3 + z^2 + z + 1);
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   dss := Modelica_LinearSystems2.DiscreteTransferFunction.Conversion.toDiscreteStateSpace(dtf);
 // ss.A = [0, 1, 0; 0, 0, 1; -1, -1, -1],
 // ss.B = [0; 0; 1],
