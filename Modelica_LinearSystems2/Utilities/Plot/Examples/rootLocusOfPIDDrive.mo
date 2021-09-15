@@ -17,7 +17,7 @@ algorithm
 <p>
 This function plots the root locus of model
 <a href=\"modelica://Modelica.Blocks.Examples.PID_Controller\">Modelica.Blocks.Examples.PID_Controller</a>
-over the time constant <b>Ti</b> of the PID controller with a logaritmic gridding in Ti and a fixed
+over the time constant <strong>Ti</strong> of the PID controller with a logaritmic gridding in Ti and a fixed
 value k=100 of the PID gain k (the menu on the right lower part is displayed when moving
 the cursor on one curve point; then all points belonging to the same parameter value are
 marked with a red square):

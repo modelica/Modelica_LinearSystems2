@@ -93,7 +93,7 @@ algorithm
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Plot.<b>parameterizedCurves</b>(diagram, device)
+Plot.<strong>parameterizedCurves</strong>(diagram, device)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -114,12 +114,12 @@ that is defined as parameterized sine and cosine-functions:
 </p>
 <blockquote><pre>
 s = linspace(0, Modelica.Units.Conversions.from_deg(300), 100);
-<b>for</b> i <b>in</b> 1:nPoints <b>loop</b>
+<strong>for</strong> i <strong>in</strong> 1:nPoints <strong>loop</strong>
   X[1, i] := cos(s[i]);
   Y[1, i] := sin(s[i]);
   X[2, i] := X[1, i] - 0.5;
   Y[2, i] := Y[1, i];
-<b>end for</b>;
+<strong>end for</strong>;
 Plot.parameterizedCurves(diagram=
   Plot.Records.ParametrizedCurves(
     X=X,

@@ -16,7 +16,7 @@ algorithm
 <p>
 This function plots the root locus of model
 <a href=\"modelica://Modelica.Mechanics.Rotational.Examples.First\">Rotational.Examples.First</a>
-over the load inertia <b>Jload</b>:
+over the load inertia <strong>Jload</strong>:
 </p>
 
 <blockquote>
