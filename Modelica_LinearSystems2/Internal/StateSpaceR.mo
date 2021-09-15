@@ -35,7 +35,7 @@ operator record StateSpaceR
 This record defines a linear time invariant differential
 equation system in state space form:
 </p>
-<pre>    <b>der</b>(x) = A * x + B * u
+<pre>    <strong>der</strong>(x) = A * x + B * u
         y  = C * x + D * u
 </pre>
 <p>
