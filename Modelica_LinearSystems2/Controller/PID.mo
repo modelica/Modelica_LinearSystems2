@@ -153,13 +153,13 @@ block LimPID.
 
 <p>
 The PID block can be initialized in different
-ways controlled by parameter <b>initType</b>. The possible
+ways controlled by parameter <strong>initType</strong>. The possible
 values of initType are defined in
 <a href=\"modelica://Modelica.Blocks.Types.InitPID\">Modelica.Blocks.Types.InitPID</a>.
 This type is identical to
 <a href=\"modelica://Modelica.Blocks.Types.Init\">Types.Init</a>,
 with the only exception that the additional option
-<b>DoNotUse_InitialIntegratorState</b> is added for
+<strong>DoNotUse_InitialIntegratorState</strong> is added for
 backward compatibility reasons (= integrator is initialized with
 InitialState whereas differential part is initialized with
 NoInit which was the initialization in version 2.2 of the Modelica
@@ -172,48 +172,48 @@ blocks inside the PID controller are initialized according to the following tabl
 </p>
 
 <table border=1 cellspacing=0 cellpadding=2>
-  <tr><td valign=\"top\"><b>initType</b></td>
-      <td valign=\"top\"><b>I.initType</b></td>
-      <td valign=\"top\"><b>D.initType</b></td></tr>
+  <tr><td valign=\"top\"><strong>initType</strong></td>
+      <td valign=\"top\"><strong>I.initType</strong></td>
+      <td valign=\"top\"><strong>D.initType</strong></td></tr>
 
-  <tr><td valign=\"top\"><b>NoInit</b></td>
+  <tr><td valign=\"top\"><strong>NoInit</strong></td>
       <td valign=\"top\">NoInit</td>
       <td valign=\"top\">NoInit</td></tr>
 
-  <tr><td valign=\"top\"><b>SteadyState</b></td>
+  <tr><td valign=\"top\"><strong>SteadyState</strong></td>
       <td valign=\"top\">SteadyState</td>
       <td valign=\"top\">SteadyState</td></tr>
 
-  <tr><td valign=\"top\"><b>InitialState</b></td>
+  <tr><td valign=\"top\"><strong>InitialState</strong></td>
       <td valign=\"top\">InitialState</td>
       <td valign=\"top\">InitialState</td></tr>
 
-  <tr><td valign=\"top\"><b>InitialOutput</b><br>
+  <tr><td valign=\"top\"><strong>InitialOutput</strong><br>
           and initial equation: y = y_start</td>
       <td valign=\"top\">NoInit</td>
       <td valign=\"top\">SteadyState</td></tr>
 
-  <tr><td valign=\"top\"><b>DoNotUse_InitialIntegratorState</b></td>
+  <tr><td valign=\"top\"><strong>DoNotUse_InitialIntegratorState</strong></td>
       <td valign=\"top\">InitialState</td>
       <td valign=\"top\">NoInit</td></tr>
 </table>
 
 <p>
 In many cases, the most useful initial condition is
-<b>SteadyState</b> because initial transients are then no longer
+<strong>SteadyState</strong> because initial transients are then no longer
 present. If initType = InitPID.SteadyState, then in some
 cases difficulties might occur. The reason is the
 equation of the integrator:
 </p>
 
 <pre>
-   <b>der</b>(y) = k*u;
+   <strong>der</strong>(y) = k*u;
 </pre>
 
 <p>
 The steady state equation &quot;der(x)=0&quot; leads to the condition that the input u to the
 integrator is zero. If the input u is already (directly or indirectly) defined
-by another initial condition, then the initialization problem is <b>singular</b>
+by another initial condition, then the initialization problem is <strong>singular</strong>
 (has none or infinitely many solutions). This situation occurs often
 for mechanical systems, where, e.g., u = desiredSpeed - measuredSpeed and
 since speed is both a state and a derivative, it is natural to

@@ -62,15 +62,15 @@ equation
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
 <p>
-This blocks computes output <b>y</b> as <em>sum</em> of the
-two input signals <b>u1</b> and <b>u2</b>:
+This blocks computes output <strong>y</strong> as <em>sum</em> of the
+two input signals <strong>u1</strong> and <strong>u2</strong>:
 </p>
 <pre>
-    <b>y</b> = <b>u1</b> + <b>u2</b>;
+    <strong>y</strong> = <strong>u1</strong> + <strong>u2</strong>;
 </pre>
 <p>
 The second input can be obtained either from left side of block or from bottom.
-The corresponding connectors are <b>u2</b> or <b>u2b</b>, respectively.
+The corresponding connectors are <strong>u2</strong> or <strong>u2b</strong>, respectively.
 </p>
 </html>"));
 end Add2;

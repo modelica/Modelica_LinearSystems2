@@ -56,7 +56,7 @@ The block can be continuous or discrete (with continuous parameterization).
 <p>
 If you would like to be able to change easily between different
 transfer functions (FirstOrder, SecondOrder, ... ) by changing
-parameters, use the general model class <b>TransferFunction</b>
+parameters, use the general model class <strong>TransferFunction</strong>
 instead and model a second order SISO system with parameters<br>
 n = {k}, d = {1/w^2, 2*D/w, 1}.
 </p>
