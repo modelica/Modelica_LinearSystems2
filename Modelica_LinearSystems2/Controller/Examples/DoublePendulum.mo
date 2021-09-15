@@ -61,7 +61,7 @@ Examples.StateSpace.designCraneController</a>.
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] F&ouml;llinger O.:</dt>
-<dd> <b>Regelungstechnik</b>.
+<dd> <strong>Regelungstechnik</strong>.
      H&uuml;thig-Verlag.<br>&nbsp;</dd>
 </dl>
 </html>"));

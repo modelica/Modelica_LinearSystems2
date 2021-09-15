@@ -37,14 +37,14 @@ equation
           textString="%sampleFactor")}),
     Documentation(info="<html>
 <p>
-If <b>discrete</b> block, the output y is sampled and is the value
+If <strong>discrete</strong> block, the output y is sampled and is the value
 of the sampled input signal u at the previous sample instant, where
 sample time = sampleClock.sampleTime * sampleFactor and
 sampleClock.sampleTime is defined globally in the outer component
 sampleClock and sampleFactor is an Integer parameter of component UnitDelay.
 </p>
 <p>
-If <b>continuous</b> block, the output y is identical to the input u.
+If <strong>continuous</strong> block, the output y is identical to the input u.
 </p>
 </html>"));
 end UnitDelay;

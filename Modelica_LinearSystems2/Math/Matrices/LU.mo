@@ -25,8 +25,8 @@ algorithm
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(LU, pivots)       = Matrices.<b>LU</b>(A);
-(LU, pivots, info) = Matrices.<b>LU</b>(A);
+(LU, pivots)       = Matrices.<strong>LU</strong>(A);
+(LU, pivots, info) = Matrices.<strong>LU</strong>(A);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -36,23 +36,23 @@ LU decomposition of a \"Real[m,n]\" matrix A, i.e.,
 </p>
 <blockquote>
 <p>
-<b>P</b>*<b>L</b>*<b>U</b> = <b>A</b>
+<strong>P</strong>*<strong>L</strong>*<strong>U</strong> = <strong>A</strong>
 </p>
 </blockquote>
 <p>
-where <b>P</b> is a permutation matrix (implicitely
+where <strong>P</strong> is a permutation matrix (implicitely
 defined by vector <code>pivots</code>),
-<b>L</b> is a lower triangular matrix with unit
+<strong>L</strong> is a lower triangular matrix with unit
 diagonal elements (lower trapezoidal if m &gt; n), and
-<b>U</b> is an upper triangular matrix (upper trapezoidal if m &lt; n).
-Matrices <b>L</b> and <b>U</b> are stored in the returned
-matrix <code>LU</code> (the diagonal of <b>L</b> is not stored).
+<strong>U</strong> is an upper triangular matrix (upper trapezoidal if m &lt; n).
+Matrices <strong>L</strong> and <strong>U</strong> are stored in the returned
+matrix <code>LU</code> (the diagonal of <strong>L</strong> is not stored).
 With the companion function
 <a href=\"modelica://Modelica.Math.Matrices.LU_solve\">Matrices.LU_solve</a>,
 this decomposition can be used to solve
-linear systems (<b>P</b>*<b>L</b>*<b>U</b>)*<b>x</b> = <b>b</b> with different right
-hand side vectors <b>b</b>. If a linear system of equations with
-just one right hand side vector <b>b</b> shall be solved, it is
+linear systems (<strong>P</strong>*<strong>L</strong>*<strong>U</strong>)*<strong>x</strong> = <strong>b</strong> with different right
+hand side vectors <strong>b</strong>. If a linear system of equations with
+just one right hand side vector <strong>b</strong> shall be solved, it is
 more convenient to just use the function
 <a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>.
 </p>
@@ -90,7 +90,7 @@ matrix A was interchanged with row pivots[i].
   Integer pivots[3];
   Real    x1[3];
   Real    x2[3];
-<b>algorithm</b>
+<strong>algorithm</strong>
   (LU, pivots) := Matrices.LU(A);
   x1 := Matrices.LU_solve(LU, pivots, b1);  // x1 = {3,2,1}
   x2 := Matrices.LU_solve(LU, pivots, b2);  // x2 = {1,0,2}

@@ -108,17 +108,17 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-X = Matrices.<b>dsylvester</b>(A, B, C);
+X = Matrices.<strong>dsylvester</strong>(A, B, C);
    or
-X = Matrices.<b>dsylvester</b>(A, B, C, AisHess, BTisSchur, sgn, eps);
+X = Matrices.<strong>dsylvester</strong>(A, B, C, AisHess, BTisSchur, sgn, eps);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function <b>dsylvester</b> computes the solution <b>X</b> of the discrete-time Sylvester equation
+Function <strong>dsylvester</strong> computes the solution <strong>X</strong> of the discrete-time Sylvester equation
 </p>
 <blockquote>
-  <b>A</b>*<b>X</b>*<b>B</b> + sgn*<b>X</b> = <b>C</b>.
+  <strong>A</strong>*<strong>X</strong>*<strong>B</strong> + sgn*<strong>X</strong> = <strong>C</strong>.
 </blockquote>
 <p>
 where sgn = 1 or sgn = -1. The algorithm applies the Hessenberg-Schur
@@ -126,35 +126,35 @@ method proposed by Golub et al [1]. For sgn = -1, the discrete Sylvester
 equation is also known as Stein equation:
 </p>
 <blockquote>
-  <b>A</b>*<b>X</b>*<b>B</b> - <b>X</b> + <b>Q</b> = <b>0</b>.
+  <strong>A</strong>*<strong>X</strong>*<strong>B</strong> - <strong>X</strong> + <strong>Q</strong> = <strong>0</strong>.
 </blockquote>
 <p>
 In a nutshell, the problem is reduced to the corresponding problem
 </p>
 <blockquote>
-  <b>H</b>*<b>Y</b>*<b>S</b>' + sgn*<b>Y</b> = <b>F</b>.
+  <strong>H</strong>*<strong>Y</strong>*<strong>S</strong>' + sgn*<strong>Y</strong> = <strong>F</strong>.
 </blockquote>
 <p>
-with <b>H</b>=<b>U</b>'*<b>A</b>*<b>U</b> is the Hessenberg form
-of <b>A</b> and <b>S</b>=<b>V</b>'*<b>B</b>'*<b>V</b> is the real Schur
-form of <b>B</b>', <b>F</b>=<b>U</b>'*<b>C</b>*<b>V</b> and
-<b>Y</b>=<b>U</b>*<b>X</b>*<b>V</b>' are appropriate transformations
-of <b>C</b> and <b>X</b>. This problem is solved sequently by exploiting
-the specific forms of <b>S</b> and <b>H</b>.
+with <strong>H</strong>=<strong>U</strong>'*<strong>A</strong>*<strong>U</strong> is the Hessenberg form
+of <strong>A</strong> and <strong>S</strong>=<strong>V</strong>'*<strong>B</strong>'*<strong>V</strong> is the real Schur
+form of <strong>B</strong>', <strong>F</strong>=<strong>U</strong>'*<strong>C</strong>*<strong>V</strong> and
+<strong>Y</strong>=<strong>U</strong>*<strong>X</strong>*<strong>V</strong>' are appropriate transformations
+of <strong>C</strong> and <strong>X</strong>. This problem is solved sequently by exploiting
+the specific forms of <strong>S</strong> and <strong>H</strong>.
 Finally, the solution of the the original problem is recovered as
-<b>X</b>=<b>U</b>'*<b>Y</b>*<b>V</b>.
+<strong>X</strong>=<strong>U</strong>'*<strong>Y</strong>*<strong>V</strong>.
 </p>
 <p>
 The boolean inputs \"AisHess\" and \"BTisSchur\" indicate to omit one
 or both of the transformation to Hessenberg form or Schur form, respectively,
-in the case that <b>A</b> and/or <b>B</b> have already Hessenberg form
+in the case that <strong>A</strong> and/or <strong>B</strong> have already Hessenberg form
 or Schur, respectively.
 </p>
 
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Golub, G.H., Nash, S. and Van Loan, C.F. (1979):</dt>
-<dd> <b>A Hessenberg-Schur method for the problem AX + XB = C</b>.
+<dd> <strong>A Hessenberg-Schur method for the problem AX + XB = C</strong>.
      IEEE Transaction on Automatic Control, AC-24, no. 6, pp. 909-913.<br>&nbsp;</dd>
 </dl>
 

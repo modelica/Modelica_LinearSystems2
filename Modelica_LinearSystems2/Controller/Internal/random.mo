@@ -23,7 +23,7 @@ algorithm
   annotation (
     Documentation(info="<html>
 <p>
-<i>Random</i> generates a sequence of uniform distributed
+<em>Random</em> generates a sequence of uniform distributed
 pseudo-random numbers. The algorithm is a variant of the
 multiplicative congruential algorithm, known as the
 Wichmann-Hill generator:
@@ -111,10 +111,10 @@ techniques used below is given in:
 Copyright &copy; Hubertus Tummescheit and Department of Automatic Control, Lund University, Sweden.
 </p>
 <p>
-<i>This Modelica function is <b>free</b> software; it can be redistributed and/or modified
-under the terms of the <b>Modelica license</b>, see the license conditions
-and the accompanying <b>disclaimer</b> in the
-<a href=\"https://modelica.org/licenses/modelica-3-clause-bsd\">BSD 3-Clause License</a>.</i>
+<em>This Modelica function is <strong>free</strong> software; it can be redistributed and/or modified
+under the terms of the <strong>Modelica license</strong>, see the license conditions
+and the accompanying <strong>disclaimer</strong> in the
+<a href=\"https://modelica.org/licenses/modelica-3-clause-bsd\">BSD 3-Clause License</a>.</em>
 </p>
 </html>"));
 end random;

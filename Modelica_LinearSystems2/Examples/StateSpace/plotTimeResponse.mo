@@ -18,7 +18,7 @@ algorithm
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 Computes the impulse response of the system
-StateSpace <i>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>.
+StateSpace <em>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</em>.
 </p>
 </html>"));
 end plotTimeResponse;
