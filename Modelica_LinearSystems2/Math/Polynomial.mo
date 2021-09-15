@@ -55,9 +55,10 @@ operator record Polynomial "Record defining the data for a polynomial"
       print("  Integral of polynomial  : " + String(int_p));
       print("  Derivative of polynomial: " + String(der_p));
 
-      print(
-        "Compute derivatives and integral directly and via polynomials above (for p(x=2)):");
       x := 2;
+      print(
+        "Compute derivatives and integral directly and via polynomials" +
+        " above (for p(x=" + String(x) + ")):");
       int_val1 := Polynomial.integralValue(p, x);
       int_val2 := Polynomial.evaluate(int_p, x);
       print("      integralValue(p,x) = " + String(int_val1) +
@@ -67,10 +68,7 @@ operator record Polynomial "Record defining the data for a polynomial"
       der_val2 := Polynomial.evaluate(der_p, x);
       print("    derivativeValue(p,x) = " + String(der_val1) +
         ", evaluate(derivative(p),x) = " + String(der_val2));
-      der_val3 := Polynomial.derivativeValue(
-            p,
-            x,
-            2);
+      der_val3 := Polynomial.derivativeValue(p, x, 2);
       der_val4 := Polynomial.evaluate(Polynomial.derivative(der_p), x);
       print("  derivativeValue(p,x,2) = " + String(der_val3) +
         ", evaluate(derivative(derivative(p)),x) = " + String(der_val4));
