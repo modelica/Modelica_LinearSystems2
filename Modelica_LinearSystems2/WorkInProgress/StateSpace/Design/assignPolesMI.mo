@@ -420,7 +420,7 @@ reduced to an ordered real Schur form by separating its spectrum in two parts
 <p>
 in such a way, that <b>F</b>1 contains the eigenvalues that will be
 retained and <b>F</b>3 contains the eigenvalues going to be modified. On the suggestion
-of [1] the eigenvalues <i>evr</i> to be retained are chosen as
+of [1] the eigenvalues <em>evr</em> to be retained are chosen as
 </p>
 <blockquote><pre>
 evr = {s in C: Re(s) &lt; -alpha, alpha &gt; =0}

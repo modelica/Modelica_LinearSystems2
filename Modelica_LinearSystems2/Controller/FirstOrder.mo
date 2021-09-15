@@ -82,7 +82,7 @@ initial equation
     Documentation(info="<html>
 <p>
 This blocks defines the transfer function between the input u and
-the output y as <i>first order</i> system:
+the output y as <em>first order</em> system:
 </p>
 <pre>             k
      y = --------- * u

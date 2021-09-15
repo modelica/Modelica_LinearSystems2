@@ -43,7 +43,7 @@ initial equation
     Documentation(info="<html>
 <p>
 This blocks defines the transfer function between the input u and
-the output y as <i>second order</i> system:
+the output y as <em>second order</em> system:
 </p>
 <pre>
                          k

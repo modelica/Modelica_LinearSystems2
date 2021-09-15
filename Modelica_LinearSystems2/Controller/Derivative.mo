@@ -45,7 +45,7 @@ initial equation
     Documentation(info="<html>
 <p>
 This blocks defines the transfer function between the input u and
-the output y as <i>approximative derivative (DT1)</i>:
+the output y as <em>approximative derivative (DT1)</em>:
 </p>
 <pre>
              k * s

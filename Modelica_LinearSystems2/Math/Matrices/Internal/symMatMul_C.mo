@@ -177,7 +177,7 @@ Note, that only the upper trinagle is calculated. The complete solution could be
 <b>X</b> := symmetric(<b>X</b>)
 </pre></blockquote>
 
-In contrast to function <i>symMatMul</i> this function is implemented in C-code
+In contrast to function <em>symMatMul</em> this function is implemented in C-code
 </html>"));
 
 end symMatMul_C;

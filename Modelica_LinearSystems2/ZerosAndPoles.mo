@@ -4735,8 +4735,8 @@ using the following rules:
 </p>
 
 <table border=1 cellspacing=0 cellpadding=2>
-<tr><td><i>Desired filter</i></td>
-    <td><i>Transformation</i></td>
+<tr><td><em>Desired filter</em></td>
+    <td><em>Transformation</em></td>
     </tr>
 
 <tr><td> High pass filter </td>
@@ -5739,7 +5739,7 @@ For more details see also
 
       annotation (Documentation(info="<html>
 <p>
-The transfer function H(p) of a <i>n</i> 'th order Bessel filter is given by
+The transfer function H(p) of a <em>n</em> 'th order Bessel filter is given by
 </p>
 <blockquote><pre>
         Bn(0)

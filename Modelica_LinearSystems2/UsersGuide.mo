@@ -511,25 +511,25 @@ This library is based on the following references:
     <tr>
       <td valign=\"top\">[Astroem1997]</td>
       <td valign=\"top\">K.J. Astr&ouml;m and B. Wittenmark,
-        <i>Computer Controlled Systems: Theory and Design</i>,
+        <em>Computer Controlled Systems: Theory and Design</em>,
         Prentice Hall, 3rd edition, ISBN 978-0133148992, 1997.</td>
     </tr>
     <tr>
       <td valign=\"top\">[Datta2004]</td>
       <td valign=\"top\">B.N. Datta,
-        <i>Numerical Methods for Linear Control Systems</i>,
+        <em>Numerical Methods for Linear Control Systems</em>,
         Elsevier Academic Press, ISBN:978-0122035906, 2004.</td>
     </tr>
     <tr>
       <td valign=\"top\">[Golub1996]</td>
       <td valign=\"top\">G.H. Golub and C.F. Van Loan,
-        <i>Matrix Computations</i>,
+        <em>Matrix Computations</em>,
         Johns Hopkins University Press, 3rd edition, ISBN 978-0801854149, 1996.</td>
     </tr>
     <tr>
       <td valign=\"top\">[Tietze2002]</td>
       <td valign=\"top\">U. Tietze and C. Schenk,
-        <i>Halbleiter-Schaltungstechnik</i>,
+        <em>Halbleiter-Schaltungstechnik</em>,
         Springer Verlag, 12. Auflage, ISBN 978-3540428497, 2002.</td>
     </tr>
     <tr>
