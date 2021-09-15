@@ -114,6 +114,88 @@ operator record Polynomial "Record defining the data for a polynomial"
       ok := true;
       annotation (__Dymola_interactive=true);
     end plotPolynomial;
+
+    model OneMassTranslational
+      extends Modelica.Icons.Example;
+
+      PositionByPolynomial positionByPolynomial(useSupport=false,
+        c3=30) annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
+      Modelica.Mechanics.Translational.Components.Mass mass1(m=1) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+      Modelica.Mechanics.Translational.Components.Mass mass2(
+        m=1,
+        stateSelect=StateSelect.always,
+        s(fixed=true, start=0.1),
+        v(fixed=true)) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+      Modelica.Mechanics.Translational.Components.SpringDamper springDamper(c=5, d=0.1) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+      Modelica.Mechanics.Translational.Sensors.PositionSensor positionSensor annotation (Placement(transformation(extent={{50,-10},{70,10}})));
+    equation
+      connect(mass1.flange_a, positionByPolynomial.flange) annotation (Line(points={{-40,0},{-50,0}}, color={0,127,0}));
+      connect(mass1.flange_b, springDamper.flange_a) annotation (Line(points={{-20,0},{-10,0}}, color={0,127,0}));
+      connect(springDamper.flange_b,mass2. flange_a) annotation (Line(points={{10,0},{20,0}}, color={0,127,0}));
+      connect(mass2.flange_b, positionSensor.flange) annotation (Line(points={{40,0},{50,0}}, color={0,127,0}));
+      connect(positionSensor.s, positionByPolynomial.u) annotation (Line(points={{71,0},{80,0},{80,-30},{-80,-30},{-80,0},{-72,0}},
+                                                                                                                              color={0,0,127}));
+      annotation (
+        Icon(coordinateSystem(preserveAspectRatio=false)),
+        Diagram(coordinateSystem(preserveAspectRatio=false), graphics={Text(
+              extent={{-80,60},{80,40}},
+              textColor={28,108,200},
+              textString="Note: positionByPolynomial.c3 must be less then 1/mass2.s.start^2")}),
+        experiment(StopTime=10, __Dymola_Algorithm="Dassl"));
+    end OneMassTranslational;
+
+    model PositionByPolynomial "Distance between flanges given by polynomial"
+      //extends Modelica.Mechanics.Translational.Interfaces.PartialCompliantWithRelativeStates;
+      extends Modelica.Mechanics.Translational.Interfaces.PartialElementaryOneFlangeAndSupport2;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Modelica.Units.SI;
+
+      parameter Real c3(start=1) "Coefficient c3 of cubic polynomial";
+
+      Modelica.Blocks.Interfaces.RealInput u "Polynomial's variable" annotation (Placement(transformation(
+            extent={{-20,-20},{20,20}},
+            origin={-120,0})));
+
+    protected
+      SI.Velocity v_rel(final fixed=false, start=0) "Relative velocity (= der(s))";
+      Polynomial p1 = Polynomial({c3,0,0,0}) "Cubic polynomial";
+
+    equation
+      s = Polynomial.evaluate(p1, u);
+      v_rel = der(s);
+
+      annotation (
+        Icon(coordinateSystem(preserveAspectRatio=false),
+          graphics={
+            Rectangle(
+              extent={{0,20},{100,-20}},
+              lineColor={0,127,0},
+              fillColor={160,215,160},
+              fillPattern=FillPattern.Solid),
+            Line(points={{11,32},{70,32}}, color={0,127,0}),
+            Line(points={{40,52},{40,32}}, color={0,127,0}),
+            Line(points={{10,-32},{70,-32}}, color={0,127,0}),
+            Line(points={{40,-72},{40,-80},{0,-80},{0,-100}}, color={0,127,0}),
+            Line(points={{-50,60},{-50,-60}}, color={192,192,192}),
+            Line(points={{-90,0},{-10,0}}, color={192,192,192}),
+            Line(
+              points={{-88,-52},{-84,-30},{-72,-6},{-50,0},{-28,6},{-16,30},{-12,52}},
+              color={0,0,127},
+              smooth=Smooth.Bezier),
+            Text(
+              extent={{-150,100},{150,60}},
+              textColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{-150,-41},{150,-71}},
+              fillColor={110,221,110},
+              fillPattern=FillPattern.Solid,
+              textColor={0,0,0},
+              textString="c3=%c3"),
+            Line(points={{40,-32},{40,-38}},
+                                           color={0,127,0})}),
+        Diagram(coordinateSystem(preserveAspectRatio=false)));
+    end PositionByPolynomial;
   end Examples;
 
   encapsulated operator 'constructor'
