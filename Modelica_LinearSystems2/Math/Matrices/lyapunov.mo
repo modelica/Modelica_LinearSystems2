@@ -113,10 +113,10 @@ algorithm
 
   annotation (Documentation(info="<html>
 <p>
-Function <b>laypunov</b> computes the solution <b>X</b> of the continuous-time Lyapunov equation
+Function <strong>laypunov</strong> computes the solution <strong>X</strong> of the continuous-time Lyapunov equation
 </p>
 <blockquote><pre>
-<b>X</b><b>A</b> + <b>A</b>'*<b>X</b> = <b>C</b>.
+<strong>X</strong><strong>A</strong> + <strong>A</strong>'*<strong>X</strong> = <strong>C</strong>.
 </pre></blockquote>
 <p>
 using the Schur method for Lyapunov equations proposed by Bartels and Stewart [1].
@@ -125,7 +125,7 @@ using the Schur method for Lyapunov equations proposed by Bartels and Stewart [1
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Bartels, R.H. and Stewart G.W. (1972):</dt>
-<dd> <b>Algorithm 432: Solution of the matrix equation AX + XB = C</b>.
+<dd> <strong>Algorithm 432: Solution of the matrix equation AX + XB = C</strong>.
      Comm. ACM., Vol. 15, pp. 820-826.<br>&nbsp;</dd>
 </dl>
 </html>", revisions="<html>

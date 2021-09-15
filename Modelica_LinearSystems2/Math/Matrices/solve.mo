@@ -23,19 +23,19 @@ no or infinitely many solutions (A is singular).");
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Matrices.<b>solve</b>(A,b);
+Matrices.<strong>solve</strong>(A,b);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 This function call returns the
-solution <b>x</b> of the linear system of equations
+solution <strong>x</strong> of the linear system of equations
 </p>
 <blockquote>
-<b>A</b>*<b>x</b> = <b>b</b>
+<strong>A</strong>*<strong>x</strong> = <strong>b</strong>
 </blockquote>
 <p>
-If a unique solution <b>x</b> does not exist (since <b>A</b> is singular),
+If a unique solution <strong>x</strong> does not exist (since <strong>A</strong> is singular),
 an exception is raised.
 </p>
 
@@ -52,7 +52,7 @@ i.e., by Gaussian elemination with partial pivoting.
                  2,1,4];
   Real b[3] = {10,22,12};
   Real x[3];
-<b>algorithm</b>
+<strong>algorithm</strong>
   x := Matrices.solve(A,b);  // x = {3,2,1}
 </pre></blockquote>
 

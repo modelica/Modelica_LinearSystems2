@@ -21,7 +21,7 @@ algorithm
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Matrices.<b>det</b>(A);
+Matrices.<strong>det</strong>(A);
 </pre></blockquote>
 
 <h4>Description</h4>

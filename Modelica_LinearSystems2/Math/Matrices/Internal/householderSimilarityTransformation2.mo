@@ -27,21 +27,21 @@ algorithm
     r + 1:na, r + 1:na]] else S*A*S;
 
   annotation (Documentation(info="<html>
-It is assumed, that the input vector <b>u</b> is a Housholder vector of the shape
+It is assumed, that the input vector <strong>u</strong> is a Housholder vector of the shape
 <blockquote><pre>
-<b>u</b> = (u1, u2, ..., ur,0, ..., 0)
+<strong>u</strong> = (u1, u2, ..., ur,0, ..., 0)
 </pre></blockquote>
 where r is an integer input. From
 <blockquote><pre>
-<b>S</b> = <b>I</b> - 2*<b>u</b>*<b>u</b>'/<b>u</b>'*<b>u</b> = [<b>P</b>, <b>0</b>; <b>0</b>, <b>I</b>]
+<strong>S</strong> = <strong>I</strong> - 2*<strong>u</strong>*<strong>u</strong>'/<strong>u</strong>'*<strong>u</strong> = [<strong>P</strong>, <strong>0</strong>; <strong>0</strong>, <strong>I</strong>]
 </pre></blockquote>
 with
 <blockquote><pre>
-dim(<b>P</b>) = r x r,   dim(<b>I</b>) = n-r x n-r
+dim(<strong>P</strong>) = r x r,   dim(<strong>I</strong>) = n-r x n-r
 </pre></blockquote>
 results
 <blockquote><pre>
-<b>S</b>*<b>A</b>*<b>S</b> = [<b>P</b>*<b>A</b>11*<b>P</b>, <b>P</b>*<b>A</b>12; <b>A</b>21*<b>P</b>, <b>A</b>22]
+<strong>S</strong>*<strong>A</strong>*<strong>S</strong> = [<strong>P</strong>*<strong>A</strong>11*<strong>P</strong>, <strong>P</strong>*<strong>A</strong>12; <strong>A</strong>21*<strong>P</strong>, <strong>A</strong>22]
 </pre></blockquote>
 </html>"));
 end householderSimilarityTransformation2;

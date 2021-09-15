@@ -22,7 +22,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Matrices.<b>householderSimilarityTransformation</b>(A,u);
+Matrices.<strong>householderSimilarityTransformation</strong>(A,u);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -30,13 +30,13 @@ Matrices.<b>householderSimilarityTransformation</b>(A,u);
 This function computes the Housholder similarity transformation
 </p>
 <blockquote>
-  <b>As</b> = <b>S</b>*<b>A</b>*<b>S</b>
+  <strong>As</strong> = <strong>S</strong>*<strong>A</strong>*<strong>S</strong>
 </blockquote>
 <p>
 with
 </p>
 <blockquote>
-  <b>S</b> = <b>I</b> -2*<b>u</b>*<b>u</b>'/(<b>u</b>'*<b>u</b>).
+  <strong>S</strong> = <strong>I</strong> -2*<strong>u</strong>*<strong>u</strong>'/(<strong>u</strong>'*<strong>u</strong>).
 </blockquote>
 <p>
 This transformation is widely used for transforming non-symmetric matrices to a Hessenberg form.
