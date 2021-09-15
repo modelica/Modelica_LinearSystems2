@@ -6,7 +6,7 @@ package UsersGuide "Controllers Tutorial"
    DocumentationClass=true,
    Documentation(info="<html>
 <p>
-Package <b>Controller</b> provides blocks
+Package <strong>Controller</strong> provides blocks
 to conveniently model and simulate sampled data systems where it is
 convenient to quickly switch between a continuous and a discrete
 block representation.

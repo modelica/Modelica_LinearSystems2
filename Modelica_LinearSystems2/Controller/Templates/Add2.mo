@@ -18,11 +18,11 @@ equation
   annotation (
     Documentation(info="<html>
 <p>
-This block computes output <b>y</b> as <em>sum</em> of the
-inputs <b>u1</b> and <b>u2</b>:
+This block computes output <strong>y</strong> as <em>sum</em> of the
+inputs <strong>u1</strong> and <strong>u2</strong>:
 </p>
 <pre>
-    <b>y</b> = <b>u1</b> + <b>u2</b>;
+    <strong>y</strong> = <strong>u1</strong> + <strong>u2</strong>;
 </pre>
 </html>"), Icon(coordinateSystem(
     preserveAspectRatio=true,

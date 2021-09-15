@@ -85,7 +85,7 @@ selection yields the following simulation result.
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] F&ouml;llinger O. (1998):</dt>
-<dd> <b>Nichtlineare Regelungen I</b>.
+<dd> <strong>Nichtlineare Regelungen I</strong>.
      8th Edition, Oldenbourg Verlag M&uuml;nchen.<br>&nbsp;</dd>
 </dl>
 </html>"),

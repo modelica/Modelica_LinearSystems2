@@ -64,7 +64,7 @@ introducing numerical problems.
 <p>
 If you would like to be able to change easily between different
 transfer functions (FirstOrder, SecondOrder, ... ) by changing
-parameters, use the general model class <b>TransferFunction</b>
+parameters, use the general model class <strong>TransferFunction</strong>
 instead and model a DT1 system with parameters<br>
 n = {k,0}, d = {T,1}.
 </p>

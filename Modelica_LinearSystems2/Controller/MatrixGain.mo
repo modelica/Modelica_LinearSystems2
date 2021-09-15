@@ -35,17 +35,17 @@ equation
 <p>
 This block is similar to Modelica.Blocks.Math.MatrixGain. Additionally
 this block offers to load the matrix from a MATLAB-file. It
-computes output vector <b>y</b> as <em>product</em> of the
-gain matrix <b>K</b> with the input signal vector <b>u</b>:
+computes output vector <strong>y</strong> as <em>product</em> of the
+gain matrix <strong>K</strong> with the input signal vector <strong>u</strong>:
 </p>
 <pre>
-    <b>y</b> = <b>K</b> * <b>u</b>;
+    <strong>y</strong> = <strong>K</strong> * <strong>u</strong>;
 </pre>
 <p>
 Example:
 </p>
 <pre>
-   parameter: <b>K</b> = [0.12 2; 3 1.5]
+   parameter: <strong>K</strong> = [0.12 2; 3 1.5]
 
    results in the following equations:
 
