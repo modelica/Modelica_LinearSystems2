@@ -258,14 +258,20 @@ whereby the evaluation is done by the record
                 color={0,0,127},
                 smooth=Smooth.Bezier)}), Documentation(info="<html>
 <p>
-Evaluate a&nbsp;cubic polynomial in time domain.
-The output vector&nbsp;<code>y</code> is composed as follows. 
+Evaluate a&nbsp;cubic polynomial <var>p</var>(&nbsp;<var>u</var>(<var>t</var>)&nbsp;)
+and its derivatives in time domain. The output
+vector&nbsp;<code>y</code> is composed as follows. 
 </p>
 <blockquote><pre>
-y[1] = c[1] * u^3 + c[2] * u^2 + c[3] * u + c[4]
-y[2] = der(y[1])
-y[3] = der(y[2])
-c[i] := coefficients[i]
+y[1] = c[1] * u(t)^3 + c[2] * u(t)^2 + c[3] * u(t) + c[4],
+y[2] = der(y[1]),
+y[3] = der(y[2]),
+</pre></blockquote>
+<p>
+with
+</p>
+<blockquote><pre>
+c[i] := coefficients[i].
 </pre></blockquote>
 </html>"));
       end EvalPolynomial3;
