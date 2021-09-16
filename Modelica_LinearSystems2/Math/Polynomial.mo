@@ -116,84 +116,156 @@ operator record Polynomial "Record defining the data for a polynomial"
     model OneMassTranslational
       extends Modelica.Icons.Example;
 
-      PositionByPolynomial positionByPolynomial(useSupport=false,
-        c3=30) annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
-      Modelica.Mechanics.Translational.Components.Mass mass1(m=1) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+      Utilities.MoveByPolynomial positionByPolynomial(useSupport=false, c3=30) annotation (Placement(transformation(extent={{-70,10},{-50,30}})));
+      Modelica.Mechanics.Translational.Components.Mass mass1(m=1) annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
       Modelica.Mechanics.Translational.Components.Mass mass2(
         m=1,
         stateSelect=StateSelect.always,
         s(fixed=true, start=0.1),
-        v(fixed=true)) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-      Modelica.Mechanics.Translational.Components.SpringDamper springDamper(c=5, d=0.1) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      Modelica.Mechanics.Translational.Sensors.PositionSensor positionSensor annotation (Placement(transformation(extent={{50,-10},{70,10}})));
+        v(fixed=true)) annotation (Placement(transformation(extent={{20,10},{40,30}})));
+      Modelica.Mechanics.Translational.Components.SpringDamper springDamper(c=5, d=0.1) annotation (Placement(transformation(extent={{-10,10},{10,30}})));
+      Modelica.Mechanics.Translational.Sensors.PositionSensor positionSensor2 annotation (Placement(transformation(extent={{50,10},{70,30}})));
+      Utilities.EvalPolynomial3 evalPolynomial3_1(coefficients={positionByPolynomial.c3,0,0,0}) annotation (Placement(transformation(extent={{-60,-90},{-40,-70}})));
+      Modelica.Mechanics.Translational.Sensors.PositionSensor positionSensor1 annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
+      Modelica.Mechanics.Translational.Sensors.SpeedSensor speedSensor annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+      Modelica.Mechanics.Translational.Sensors.AccSensor accSensor annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
+      Modelica.Blocks.Math.Add add[3](each k2=-1) annotation (Placement(transformation(extent={{40,-80},{60,-60}})));
     equation
-      connect(mass1.flange_a, positionByPolynomial.flange) annotation (Line(points={{-40,0},{-50,0}}, color={0,127,0}));
-      connect(mass1.flange_b, springDamper.flange_a) annotation (Line(points={{-20,0},{-10,0}}, color={0,127,0}));
-      connect(springDamper.flange_b,mass2. flange_a) annotation (Line(points={{10,0},{20,0}}, color={0,127,0}));
-      connect(mass2.flange_b, positionSensor.flange) annotation (Line(points={{40,0},{50,0}}, color={0,127,0}));
-      connect(positionSensor.s, positionByPolynomial.u) annotation (Line(points={{71,0},{80,0},{80,-30},{-80,-30},{-80,0},{-72,0}},
-                                                                                                                              color={0,0,127}));
+      connect(mass1.flange_a, positionByPolynomial.flange) annotation (Line(points={{-40,20},{-50,20}},
+                                                                                                      color={0,127,0}));
+      connect(mass1.flange_b, springDamper.flange_a) annotation (Line(points={{-20,20},{-10,20}},
+                                                                                                color={0,127,0}));
+      connect(springDamper.flange_b,mass2. flange_a) annotation (Line(points={{10,20},{20,20}},
+                                                                                              color={0,127,0}));
+      connect(mass2.flange_b, positionSensor2.flange) annotation (Line(points={{40,20},{50,20}}, color={0,127,0}));
+      connect(positionSensor2.s, positionByPolynomial.u) annotation (Line(points={{71,20},{80,20},{80,-10},{-80,-10},{-80,20},{-72,20}}, color={0,0,127}));
+      connect(positionSensor2.s, evalPolynomial3_1.u) annotation (Line(points={{71,20},{80,20},{80,-10},{-80,-10},{-80,-80},{-62,-80}}, color={0,0,127}));
+      connect(mass1.flange_b, positionSensor1.flange) annotation (Line(points={{-20,20},{-16,20},{-16,-20},{-10,-20}}, color={0,127,0}));
+      connect(mass1.flange_b, speedSensor.flange) annotation (Line(points={{-20,20},{-16,20},{-16,-40},{-10,-40}}, color={0,127,0}));
+      connect(mass1.flange_b, accSensor.flange) annotation (Line(points={{-20,20},{-16,20},{-16,-60},{-10,-60}}, color={0,127,0}));
+      connect(evalPolynomial3_1.y, add.u2) annotation (Line(points={{-39,-80},{20,-80},{20,-76},{38,-76}}, color={0,0,127}));
+      connect(positionSensor1.s, add[1].u1) annotation (Line(points={{11,-20},{22,-20},{22,-64},{38,-64}}, color={0,0,127}));
+      connect(speedSensor.v, add[2].u1) annotation (Line(points={{11,-40},{20,-40},{20,-64},{38,-64}}, color={0,0,127}));
+      connect(accSensor.a, add[3].u1) annotation (Line(points={{11,-60},{18,-60},{18,-64},{38,-64}}, color={0,0,127}));
       annotation (
         Icon(coordinateSystem(preserveAspectRatio=false)),
         Diagram(coordinateSystem(preserveAspectRatio=false), graphics={Text(
-              extent={{-80,60},{80,40}},
+              extent={{-80,64},{80,44}},
               textColor={28,108,200},
-              textString="Note: positionByPolynomial.c3 must be less then 1/mass2.s.start^2")}),
+              textString="Note: positionByPolynomial.c3 must be less then 1/mass2.s.start^2"),
+            Line(
+              points={{-40,50},{-54,32}},
+              color={28,108,200},
+              arrow={Arrow.None,Arrow.Open}),
+            Line(
+              points={{58,50},{34,30}},
+              color={28,108,200},
+              arrow={Arrow.None,Arrow.Open})}),
         experiment(StopTime=10, __Dymola_Algorithm="Dassl"));
     end OneMassTranslational;
 
-    model PositionByPolynomial "Distance between flanges given by polynomial"
-      //extends Modelica.Mechanics.Translational.Interfaces.PartialCompliantWithRelativeStates;
-      extends Modelica.Mechanics.Translational.Interfaces.PartialElementaryOneFlangeAndSupport2;
-      import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica.Units.SI;
+    package Utilities "Utility classes for polynomial examples"
+      extends Modelica.Icons.UtilitiesPackage;
 
-      parameter Real c3(start=1) "Coefficient c3 of cubic polynomial";
+      model MoveByPolynomial "Forced movement of a flange according to a given cubic polynomial"
+        //extends Modelica.Mechanics.Translational.Interfaces.PartialCompliantWithRelativeStates;
+        extends Modelica.Mechanics.Translational.Interfaces.PartialElementaryOneFlangeAndSupport2;
+        import Modelica_LinearSystems2.Math.Polynomial;
+        import Modelica.Units.SI;
 
-      Modelica.Blocks.Interfaces.RealInput u "Polynomial's variable" annotation (Placement(transformation(
-            extent={{-20,-20},{20,20}},
-            origin={-120,0})));
+        parameter Real c3(start=1) "Coefficient c3 of cubic polynomial";
 
-    protected
-      SI.Velocity v_rel(final fixed=false, start=0) "Relative velocity (= der(s))";
-      Polynomial p1 = Polynomial({c3,0,0,0}) "Cubic polynomial";
+        Modelica.Blocks.Interfaces.RealInput u "Polynomial's variable" annotation (Placement(transformation(
+              extent={{-20,-20},{20,20}},
+              origin={-120,0})));
 
-    equation
-      s = Polynomial.evaluate(p1, u);
-      v_rel = der(s);
+      protected
+        Polynomial p1 = Polynomial({c3,0,0,0}) "Cubic polynomial";
 
-      annotation (
-        Icon(coordinateSystem(preserveAspectRatio=false),
-          graphics={
-            Rectangle(
-              extent={{0,20},{100,-20}},
-              lineColor={0,127,0},
-              fillColor={160,215,160},
-              fillPattern=FillPattern.Solid),
-            Line(points={{11,32},{70,32}}, color={0,127,0}),
-            Line(points={{40,52},{40,32}}, color={0,127,0}),
-            Line(points={{10,-32},{70,-32}}, color={0,127,0}),
-            Line(points={{40,-72},{40,-80},{0,-80},{0,-100}}, color={0,127,0}),
-            Line(points={{-50,60},{-50,-60}}, color={192,192,192}),
-            Line(points={{-90,0},{-10,0}}, color={192,192,192}),
-            Line(
-              points={{-88,-52},{-84,-30},{-72,-6},{-50,0},{-28,6},{-16,30},{-12,52}},
-              color={0,0,127},
-              smooth=Smooth.Bezier),
-            Text(
-              extent={{-150,100},{150,60}},
-              textColor={0,0,255},
-              textString="%name"),
-            Text(
-              extent={{-150,-41},{150,-71}},
-              fillColor={110,221,110},
-              fillPattern=FillPattern.Solid,
-              textColor={0,0,0},
-              textString="c3=%c3"),
-            Line(points={{40,-32},{40,-38}},
-                                           color={0,127,0})}),
-        Diagram(coordinateSystem(preserveAspectRatio=false)));
-    end PositionByPolynomial;
+      equation
+        s = Polynomial.evaluate(p1, u);
+
+        annotation (
+          Icon(coordinateSystem(preserveAspectRatio=false),
+            graphics={
+              Rectangle(
+                extent={{0,20},{100,-20}},
+                lineColor={0,127,0},
+                fillColor={160,215,160},
+                fillPattern=FillPattern.Solid),
+              Line(points={{11,32},{70,32}}, color={0,127,0}),
+              Line(points={{40,52},{40,32}}, color={0,127,0}),
+              Line(points={{10,-32},{70,-32}}, color={0,127,0}),
+              Line(points={{40,-72},{40,-80},{0,-80},{0,-100}}, color={0,127,0}),
+              Line(points={{-50,60},{-50,-60}}, color={192,192,192}),
+              Line(points={{-90,0},{-10,0}}, color={192,192,192}),
+              Line(
+                points={{-88,-52},{-84,-30},{-72,-6},{-50,0},{-28,6},{-16,30},{-12,52}},
+                color={0,0,127},
+                smooth=Smooth.Bezier),
+              Text(
+                extent={{-150,100},{150,60}},
+                textColor={0,0,255},
+                textString="%name"),
+              Text(
+                extent={{-150,-41},{150,-71}},
+                fillColor={110,221,110},
+                fillPattern=FillPattern.Solid,
+                textColor={0,0,0},
+                textString="c3=%c3"),
+              Line(points={{40,-32},{40,-38}},
+                                             color={0,127,0})}),
+          Diagram(coordinateSystem(preserveAspectRatio=false)),
+          Documentation(info="<html>
+<p>
+The <code>flange</code> is <strong>forced</strong> to move
+relative to the <code>support</code> connector with a&nbsp;predefined motion
+according to the input signal&nbsp;<code>u</code> as follows.
+</p>
+<blockquote><pre>
+position of flange:     s = c3 * u^3
+velocity of flange:     v = c3 * 3 * u^2
+acceleration of flange: a = c3 * 6 * u
+</pre></blockquote>
+<p>
+whereby the evaluation is done by the record
+<a href=\"Modelica_LinearSystems2.Math.Polynomial\">Polynomial</a>.
+</p>
+</html>"));
+      end MoveByPolynomial;
+
+      model EvalPolynomial3 "Evaluate cubic polynomial in time domain"
+        extends Modelica.Blocks.Interfaces.SIMO(final nout=3);
+        import Modelica_LinearSystems2.Math.Polynomial;
+
+        parameter Real coefficients[4] = {1,0,0,0} "Coefficient c3 of cubic polynomial";
+      protected
+        Polynomial p1 = Polynomial(coefficients) "Cubic polynomial";
+        Polynomial der_p1 = Polynomial.derivative(p1);
+        Real du "Derivative 1st of u";
+
+      equation
+        du = der(u);
+        y[1] = Polynomial.evaluate(p1, u);
+        y[2] = Polynomial.evaluate(der_p1, u) * du;
+        y[3] = Polynomial.evaluate(Polynomial.derivative(der_p1), u) * du * du
+             + Polynomial.evaluate(der_p1, u) * der(du);
+        annotation (Icon(graphics={
+              Line(points={{0,80},{0,-80}},     color={192,192,192}),
+              Line(points={{-80,0},{80,0}},  color={192,192,192}),
+              Line(
+                points={{-60,-80},{-50,-20},{-30,4},{0,0},{30,-4},{50,20},{60,80}},
+                color={0,0,127},
+                smooth=Smooth.Bezier)}));
+      end EvalPolynomial3;
+      annotation (Documentation(info="<html>
+<p>
+This library contains different utility components
+for examples involving Polynomial record. Usually, there is no need to
+use models in this library directly.
+</p>
+</html>"));
+    end Utilities;
   end Examples;
 
   encapsulated operator 'constructor'
@@ -729,7 +801,28 @@ of the polynomial is used as generated by Polynomial.'String'(..).
     for j in 2:n loop
       y := p.c[j] + x*y;
     end for;
-    annotation (derivative(zeroDerivative=p) = Polynomial.evaluate_der);
+    annotation (derivative(zeroDerivative=p) = Polynomial.evaluate_der, Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+y = Polynomial.<strong>evaluate</strong>(p, x);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Evaluate a&nbsp;polynomial&nbsp;<code>p</code> at a&nbsp;given
+(Real) abszissa value&nbsp;<code>x</code>.
+For this function, functions for the first and second derivatives
+are provided, so that the function can be seamlessly used in e.g.
+mechanical models.
+<!-- , cf. example . -->
+</p>
+
+<h4>See also</h4>
+<p>
+<a href=\"Modelica_LinearSystems2.Math.Polynomial.evaluate_der\">Polynomial.evaluate_der</a>,
+<a href=\"Modelica_LinearSystems2.Math.Polynomial.evaluate_dder\">Polynomial.evaluate_dder</a>.
+</p>
+</html>"));
   end evaluate;
 
   encapsulated function evaluateMatrix
@@ -932,7 +1025,17 @@ a vector of Complex elements.
       dy := p.c[j]*(n - j) + x*dy;
     end for;
     dy := dy*dx;
-    annotation(derivative(order=2)=Polynomial.evaluate_dder);
+    annotation(derivative(order=2)=Polynomial.evaluate_dder, Documentation(info="<html>
+<p>
+This function is the <em>first time derivative</em> of the function
+<a href=\"Modelica_LinearSystems2.Math.Polynomial.evaluate\">Polynomial.evaluate</a>.
+</p>
+
+<h4>See also</h4>
+<p>
+<a href=\"Modelica_LinearSystems2.Math.Polynomial.evaluate_dder\">Polynomial.evaluate_dder</a>
+</p>
+</html>"));
   end evaluate_der;
 
   encapsulated function evaluate_dder "Evaluate 2nd derivative of polynomial at a given abszissa value"
@@ -945,13 +1048,32 @@ a vector of Complex elements.
     output Real ddy "Second derivative value of polynomial at x";
   protected
     Integer n=size(p.c, 1);
+    Real dy "Derivative value of polynomial at x";
+
   algorithm
+    dy := p.c[1]*(n - 1);
+    for j in 2:n - 1 loop
+      dy := p.c[j]*(n - j) + x*dy;
+    end for;
+
     ddy := p.c[1]*(n - 1)*(n - 2);
     for j in 2:n - 2 loop
-      ddy := p.c[j]*(n - j)*(n - 1 - j) + x*ddy;
+      ddy := p.c[j]*(n - j)*(n - j - 1) + x*ddy;
     end for;
-    ddy := ddy*ddx;
 
+    ddy := ddy*dx*dx + dy*ddx;
+
+    annotation (Documentation(info="<html>
+<p>
+This function is the <em>second time derivative</em> of the function
+<a href=\"Modelica_LinearSystems2.Math.Polynomial.evaluate\">Polynomial.evaluate</a>.
+</p>
+
+<h4>See also</h4>
+<p>
+<a href=\"Modelica_LinearSystems2.Math.Polynomial.evaluate_der\">Polynomial.evaluate_der</a>
+</p>
+</html>"));
   end evaluate_dder;
 
   encapsulated function integralValue_der
