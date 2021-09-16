@@ -113,7 +113,7 @@ operator record Polynomial "Record defining the data for a polynomial"
       annotation (__Dymola_interactive=true);
     end plotPolynomial;
 
-    model OneMassTranslational
+    model MoveMassByPolynomial "Demonstrate meaning of polynom's derivatives"
       extends Modelica.Icons.Example;
 
       Utilities.MoveByPolynomial positionByPolynomial(useSupport=false, c3=30) annotation (Placement(transformation(extent={{-70,10},{-50,30}})));
@@ -162,7 +162,7 @@ operator record Polynomial "Record defining the data for a polynomial"
               color={28,108,200},
               arrow={Arrow.None,Arrow.Open})}),
         experiment(StopTime=10, __Dymola_Algorithm="Dassl"));
-    end OneMassTranslational;
+    end MoveMassByPolynomial;
 
     package Utilities "Utility classes for polynomial examples"
       extends Modelica.Icons.UtilitiesPackage;
