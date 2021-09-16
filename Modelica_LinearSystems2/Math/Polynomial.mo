@@ -238,7 +238,7 @@ whereby the evaluation is done by the record
         extends Modelica.Blocks.Interfaces.SIMO(final nout=3);
         import Modelica_LinearSystems2.Math.Polynomial;
 
-        parameter Real coefficients[4] = {1,0,0,0} "Coefficient c3 of cubic polynomial";
+        parameter Real coefficients[4] = {1,0,0,0} "Coefficients of cubic polynomial";
       protected
         Polynomial p1 = Polynomial(coefficients) "Cubic polynomial";
         Polynomial der_p1 = Polynomial.derivative(p1);
@@ -256,7 +256,18 @@ whereby the evaluation is done by the record
               Line(
                 points={{-60,-80},{-50,-20},{-30,4},{0,0},{30,-4},{50,20},{60,80}},
                 color={0,0,127},
-                smooth=Smooth.Bezier)}));
+                smooth=Smooth.Bezier)}), Documentation(info="<html>
+<p>
+Evaluate a&nbsp;cubic polynomial in time domain.
+The output vector&nbsp;<code>y</code> is composed as follows. 
+</p>
+<blockquote><pre>
+y[1] = c[1] * u^3 + c[2] * u^2 + c[3] * u + c[4]
+y[2] = der(y[1])
+y[3] = der(y[2])
+c[i] := coefficients[i]
+</pre></blockquote>
+</html>"));
       end EvalPolynomial3;
       annotation (Documentation(info="<html>
 <p>
