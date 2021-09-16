@@ -125,7 +125,7 @@ operator record Polynomial "Record defining the data for a polynomial"
         v(fixed=true)) annotation (Placement(transformation(extent={{20,10},{40,30}})));
       Modelica.Mechanics.Translational.Components.SpringDamper springDamper(c=5, d=0.1) annotation (Placement(transformation(extent={{-10,10},{10,30}})));
       Modelica.Mechanics.Translational.Sensors.PositionSensor positionSensor2 annotation (Placement(transformation(extent={{50,10},{70,30}})));
-      Utilities.EvalPolynomial3 evalPolynomial3_1(coefficients={positionByPolynomial.c3,0,0,0}) annotation (Placement(transformation(extent={{-60,-90},{-40,-70}})));
+      Utilities.EvalPolynomial3 evalPolynomial3(coefficients={positionByPolynomial.c3,0,0,0}) annotation (Placement(transformation(extent={{-60,-90},{-40,-70}})));
       Modelica.Mechanics.Translational.Sensors.PositionSensor positionSensor1 annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
       Modelica.Mechanics.Translational.Sensors.SpeedSensor speedSensor annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
       Modelica.Mechanics.Translational.Sensors.AccSensor accSensor annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
@@ -139,15 +139,16 @@ operator record Polynomial "Record defining the data for a polynomial"
                                                                                               color={0,127,0}));
       connect(mass2.flange_b, positionSensor2.flange) annotation (Line(points={{40,20},{50,20}}, color={0,127,0}));
       connect(positionSensor2.s, positionByPolynomial.u) annotation (Line(points={{71,20},{80,20},{80,-10},{-80,-10},{-80,20},{-72,20}}, color={0,0,127}));
-      connect(positionSensor2.s, evalPolynomial3_1.u) annotation (Line(points={{71,20},{80,20},{80,-10},{-80,-10},{-80,-80},{-62,-80}}, color={0,0,127}));
+      connect(positionSensor2.s, evalPolynomial3.u) annotation (Line(points={{71,20},{80,20},{80,-10},{-80,-10},{-80,-80},{-62,-80}}, color={0,0,127}));
       connect(mass1.flange_b, positionSensor1.flange) annotation (Line(points={{-20,20},{-16,20},{-16,-20},{-10,-20}}, color={0,127,0}));
       connect(mass1.flange_b, speedSensor.flange) annotation (Line(points={{-20,20},{-16,20},{-16,-40},{-10,-40}}, color={0,127,0}));
       connect(mass1.flange_b, accSensor.flange) annotation (Line(points={{-20,20},{-16,20},{-16,-60},{-10,-60}}, color={0,127,0}));
-      connect(evalPolynomial3_1.y, add.u2) annotation (Line(points={{-39,-80},{20,-80},{20,-76},{38,-76}}, color={0,0,127}));
+      connect(evalPolynomial3.y, add.u2) annotation (Line(points={{-39,-80},{20,-80},{20,-76},{38,-76}}, color={0,0,127}));
       connect(positionSensor1.s, add[1].u1) annotation (Line(points={{11,-20},{22,-20},{22,-64},{38,-64}}, color={0,0,127}));
       connect(speedSensor.v, add[2].u1) annotation (Line(points={{11,-40},{20,-40},{20,-64},{38,-64}}, color={0,0,127}));
       connect(accSensor.a, add[3].u1) annotation (Line(points={{11,-60},{18,-60},{18,-64},{38,-64}}, color={0,0,127}));
       annotation (
+        experiment(StopTime=10),
         Icon(coordinateSystem(preserveAspectRatio=false)),
         Diagram(coordinateSystem(preserveAspectRatio=false), graphics={Text(
               extent={{-80,64},{80,44}},
@@ -161,7 +162,27 @@ operator record Polynomial "Record defining the data for a polynomial"
               points={{58,50},{34,30}},
               color={28,108,200},
               arrow={Arrow.None,Arrow.Open})}),
-        experiment(StopTime=10, __Dymola_Algorithm="Dassl"));
+        Documentation(info="<html>
+<p>
+The motion of the <code>mass1</code> is forced depending on the motion
+of <code>mass2</code>. The dependency is given by a&nbsp;cubic polynomial.
+</p>
+<p>
+This example demonstrates the meaning of the function evaluating
+the 2nd derivative of a&nbsp;polynomial with respect to time.
+Without this function, the DAE index reduction of the mechanical
+system would fail since <code>positionByPolynomial.s</code>, which prescribes
+the motion of <code>mass1</code>, needs to be differentiated twice.
+</p>
+<p>
+In order to check proper differentiation, the block <code>evalPolynomial3</code>
+is provided which only evaluates a&nbsp;cubic polynomial of the same
+coefficients like <code>positionByPolynomial</code>.
+The signal differences given by <code>add</code> block shall, thus, be zero
+(see simulation results of <code>add[1].y</code>, <code>add[2].y</code>
+and <code>add[3].y</code>).
+</p>
+</html>"));
     end MoveMassByPolynomial;
 
     package Utilities "Utility classes for polynomial examples"
