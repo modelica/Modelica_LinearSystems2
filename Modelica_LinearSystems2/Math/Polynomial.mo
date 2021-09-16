@@ -1095,9 +1095,9 @@ This function is the <em>first time derivative</em> of the function
 
   encapsulated package Internal
     "Internal library of record Polynomial (should not be directly used by user)"
+    extends Modelica.Icons.InternalPackage;
     import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
-    extends Modelica.Icons.Package;
 
     encapsulated function evaluate_dder "Evaluate 2nd derivative of polynomial at a given abszissa value"
       import Modelica_LinearSystems2.Math.Polynomial;
