@@ -1053,9 +1053,6 @@ Polynomial.evaluate(p1, 1);
 <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Polynomial.evaluateComplex</a>.
 </p>
 </html>"));
-    annotation (
-      derivative(zeroDerivative=p) = Polynomial.evaluate_der,
-      Documentation(info="<html>
   end evaluate;
 
   encapsulated function evaluateMatrix
