@@ -319,6 +319,21 @@ use models in this library directly.
       output Polynomial p(redeclare Real c[size(c, 1)]) "Polynomial";
     algorithm
       p.c := c;
+      annotation (Documentation(info="<html>
+<p>
+This function constructs a&nbsp;polynomial from given coefficients.
+</p>
+
+<h4>
+Example:
+</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+Polynomial( {1/4, 8, 0, 0, 2} );
+// 0.25*x^4 + 8*x^3 + 2
+</pre></blockquote>
+</html>"));
     end fromVector;
 
     function fromReal "Generate a Polynomial data record from a real value"
@@ -329,6 +344,22 @@ use models in this library directly.
       output Polynomial p(redeclare Real c[1]);
     algorithm
       p.c := {r};
+      annotation (Documentation(info="<html>
+<p>
+This function constructs a&nbsp;polynomial from a&nbsp;real value.
+</p>
+
+<h4>
+Example:
+</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+p1 = Polynomial(4);
+p1;
+// 4
+</pre></blockquote>
+</html>"));
     end fromReal;
 
     function fromZeros "Generate a Polynomial data record from given zeros"
@@ -388,34 +419,42 @@ use models in this library directly.
       end while;
       annotation (Documentation(info="<html>
 <p>
-This function constructs a polynomial from given zeros
-(also called roots). The zeros are defined as a vector
+This function constructs a&nbsp;polynomial from given zeros
+(also called roots). The zeros are defined as a&nbsp;vector
 of Complex numbers. Since only polynomials with real coefficients are supported,
 complex zeros must be defined as conjugate complex pairs.
 It is required that complex conjugate pairs must directly
 follow each other. An error occurs if this is not the case.
-Example:
 </p>
+
+<h4>
+Example:
+</h4>
 <p>
 The polynomial
 </p>
-<pre>
- y = (s - 1)*(s - (2+3j))*(s - (2-3j))
-</pre>
+<blockquote>
+<var>y</var> = (<var>s</var> - 1) * ( <var>s</var> - (2+3j) ) * (<var>s</var> - (2-3j))
+</blockquote>
 <p>
 with j=sqrt(-1), is defined as
 </p>
-<pre>
-  p = Polynomial.fromZeros( {Complex(1),
-                             Complex(2,  3),
-                             Complex(2, -3)} );
-      // = x^3 - 5*x^2 + 17*x - 13
-</pre>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial
+Polynomial( {Complex(1),
+             Complex(2,  3),
+             Complex(2, -3)} );
+// x^3 - 5*x^2 + 17*x - 13
+</pre></blockquote>
 </html>"));
     end fromZeros;
 
     annotation (Documentation(info="<html>
-<p>This package contains the default constructors for a data record of polynomial. </p>
+<p>
+This package contains the default constructors for a&nbsp;data
+record of polynomial. Usually, the functions shall not be accessed
+directly.
+</p>
 </html>"));
   end 'constructor';
 
@@ -1165,15 +1204,30 @@ This function is the <em>second time derivative</em> of the function
 
   annotation (defaultComponentName="polynomial", Documentation(info="<html>
 <p>
-This record defines a polynomial, e.g., y = 2*x^2 + 3*x + 1. The general form is:
+This record defines a polynomial, e.g.,
+<var>y</var>&nbsp;=&nbsp;2*<var>x</var><sup>2</sup>&nbsp;+ 3*<var>x</var>&nbsp;+&nbsp;1.
+The general form is:
 </p>
 <pre>
    y = c[1]*x^n + c[2]*x^(n-1) + ... + c[n]*x + c[n+1];
 </pre>
 <p>
-In the record, the coefficients c[i] are stored. Usually, the record is not directly accessed. Instead, a polynomial is generated with the functions provided in the record such as Polynomial.base(..),
-Polynomial.fitting(..).
+In the record, the coefficients <code>c[i]</code> are stored. Usually,
+the record is not directly accessed. Instead, a&nbsp;polynomial is
+generated with the functions provided in the record, see 
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.'constructor'\">Polynomial.&apos;constructor&apos;</a>.
+Also
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.fitting\">Polynomial.fitting(..)</a>
+can be helpful.
 Several functions are provided that operate on polynomials.
+</p>
+
+<h4>
+See also
+</h4>
+<p>
+Introduction of the Polynomials in
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.Polynomials\">Getting started</a>.
 </p>
 </html>"));
 end Polynomial;
