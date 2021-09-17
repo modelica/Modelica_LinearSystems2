@@ -101,7 +101,7 @@ String(p1)
 
 int_p = Polynomial.integral(p1)
 String(int_p)
-//  = \"-2*x^3 + 2*x^2 - 3*x0\"
+//  = \"-2*x^3 + 2*x^2 - 3*x\"
 
 p2 = 3*p1
 p3 = p2+p1
