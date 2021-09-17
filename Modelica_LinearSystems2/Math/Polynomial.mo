@@ -129,6 +129,21 @@ operator record Polynomial "Record defining the data for a polynomial"
       output Polynomial p(redeclare Real c[size(c, 1)]) "Polynomial";
     algorithm
       p.c := c;
+      annotation (Documentation(info="<html>
+<p>
+This function constructs a&nbsp;polynomial from given coefficients.
+</p>
+
+<h4>
+Example:
+</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+Polynomial( {1/4, 8, 0, 0, 2} );
+// 0.25*x^4 + 8*x^3 + 2
+</pre></blockquote>
+</html>"));
     end fromVector;
 
     function fromReal "Generate a Polynomial data record from a real value"
@@ -139,6 +154,22 @@ operator record Polynomial "Record defining the data for a polynomial"
       output Polynomial p(redeclare Real c[1]);
     algorithm
       p.c := {r};
+      annotation (Documentation(info="<html>
+<p>
+This function constructs a&nbsp;polynomial from a&nbsp;real value.
+</p>
+
+<h4>
+Example:
+</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+p1 = Polynomial(4);
+p1;
+// 4
+</pre></blockquote>
+</html>"));
     end fromReal;
 
     function fromZeros "Generate a Polynomial data record from given zeros"
@@ -198,34 +229,42 @@ operator record Polynomial "Record defining the data for a polynomial"
       end while;
       annotation (Documentation(info="<html>
 <p>
-This function constructs a polynomial from given zeros
-(also called roots). The zeros are defined as a vector
+This function constructs a&nbsp;polynomial from given zeros
+(also called roots). The zeros are defined as a&nbsp;vector
 of Complex numbers. Since only polynomials with real coefficients are supported,
 complex zeros must be defined as conjugate complex pairs.
 It is required that complex conjugate pairs must directly
 follow each other. An error occurs if this is not the case.
-Example:
 </p>
+
+<h4>
+Example:
+</h4>
 <p>
 The polynomial
 </p>
-<pre>
- y = (s - 1)*(s - (2+3j))*(s - (2-3j))
-</pre>
+<blockquote>
+<var>y</var> = (<var>s</var> - 1) * ( <var>s</var> - (2+3j) ) * (<var>s</var> - (2-3j))
+</blockquote>
 <p>
 with j=sqrt(-1), is defined as
 </p>
-<pre>
-  p = Polynomial.fromZeros( {Complex(1),
-                             Complex(2,  3),
-                             Complex(2, -3)} );
-      // = x^3 - 5*x^2 + 17*x - 13
-</pre>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial
+Polynomial( {Complex(1),
+             Complex(2,  3),
+             Complex(2, -3)} );
+// x^3 - 5*x^2 + 17*x - 13
+</pre></blockquote>
 </html>"));
     end fromZeros;
 
     annotation (Documentation(info="<html>
-<p>This package contains the default constructors for a data record of polynomial. </p>
+<p>
+This package contains the default constructors for a&nbsp;data
+record of polynomial. Usually, the functions shall not be accessed
+directly.
+</p>
 </html>"));
   end 'constructor';
 
@@ -377,7 +416,6 @@ This package contains operators for subtraction of Polynomial data records.
   encapsulated operator function 'String'
     "Transform Polynomial into a String representation"
     import Modelica_LinearSystems2.Math.Polynomial;
-    import Modelica_LinearSystems2;
     import Modelica;
 
     input Polynomial p
@@ -440,10 +478,33 @@ This package contains operators for subtraction of Polynomial data records.
     output Polynomial p(redeclare Real c[2]) "Polynomial";
   algorithm
     p.c := {1,0};
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+p = Polynomial.<strong>x</strong>();
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This function constructs a&nbsp;base polynomial.
+</p>
+
+<h4>
+Example:
+</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+x = Polynomial.x();      // Generate a base polynomial
+p1 = -6*x^2 + 4*x -3;
+p1;
+// -6*x^2 + 4*x - 3
+</pre></blockquote>
+</html>"));
   end x;
 
   encapsulated function fitting
-    "Computes a Polynomial that fits a set of data points in a least-squares sense"
+    "Compute a Polynomial that fits a set of data points in a least-squares sense"
     import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
 
@@ -466,10 +527,18 @@ This package contains operators for subtraction of Polynomial data records.
     // Solve least squares problem
     p.c := Modelica.Math.Matrices.leastSquares(V, y);
     annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+p = Polynomial.<strong>fitting</strong>(x, y, order);
+</pre></blockquote>
+
+<h4>Description</h4>
 <p>
-Polynomial.fitting(x,y,order) computes a Polynomial
-y=p(x) of degree &quot;order&quot; that fits the data &quot;p(x[i]) - y[i]&quot;
-in a least squares sense.
+This function computes a&nbsp;Polynomial <var>y</var>&nbsp;=&nbsp;<var>p</var>(<var>x</var>)
+of degree &quot;order&quot; that fits the data
+<var>p</var>(<var>x</var><sub><var>i</var></sub>)&nbsp;-&nbsp;<var>y</var><sub><var>i</var></sub>
+for <var>i</var>&nbsp;=&nbsp;1,&nbsp;..&nbsp;<var>n</var><sub><var>x</var></sub>
+in a&nbsp;least squares sense.
 </p>
 </html>"));
   end fitting;
@@ -482,6 +551,17 @@ in a least squares sense.
 
   algorithm
     result := size(p.c, 1) - 1;
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+result = Polynomial.<strong>degree</strong>(p);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This function computes the order of a&nbsp;Polynomial <var>p</var>.
+</p>
+</html>"));
   end degree;
 
   encapsulated function degree2 "Return degree of polynomial"
@@ -500,6 +580,30 @@ in a least squares sense.
         break;
       end if;
     end for;
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+result = Polynomial.<strong>degree2</strong>(p);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+This function computes the order of a&nbsp;Polynomial <var>p</var>.
+</p>
+
+<h4>
+Example:
+</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+p = Polynomial({0,0,2,1});
+// 2*x + 1
+
+Polynomial.degree2(p)
+//  = 1
+</pre></blockquote>
+</html>"));
   end degree2;
 
   encapsulated function plot "Plot polynomial y=p(x)"
@@ -588,24 +692,37 @@ in a least squares sense.
 
   equation
 
-    annotation (__Dymola_interactive=true, Documentation(info="<html>
+    annotation (
+      __Dymola_interactive=true,
+      Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+Polynomial.<strong>plot</strong>(
+  p, nPoints, autoLabel, xLabel, yLabel, autoRange, x_min, x_max);
+</pre></blockquote>
+
+<h4>Description</h4>
 <p>
-Plots the given polynomial. If default arguments are used, as in:
+Plot the given polynomial. If default arguments are used, as in:
 </p>
-<pre>
-    Polynomial p = Polynomial({1,2,3});
-    Polynomial.plotPolynomial(p);
-</pre>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+p = Polynomial({1,2,3});
+Polynomial.plot(p);
+</pre></blockquote>
 <p>
-then the abszissa range is determined in such a way that all
-roots (i.e., p(x)=0) and all extrema (i.e, pd=derivative(p), pd(x)=0)
+then the abszissa range is determined in such a&nbsp;way that all
+roots (i.e., <var>p</var>(<var>x</var>)&nbsp;=&nbsp;0) and all
+extrema (i.e, <var>dp</var>(<var>x</var>)&nbsp;= &part;<var>p</var>/&part;<var>x</var>&nbsp;=&nbsp;0)
 are in the plotted range. As default legend, the String representation
-of the polynomial is used as generated by Polynomial.'String'(..).
+of the polynomial is used as generated by operator-&apos;String&apos;
+function (called by <code>String(p)</code>).
 </p>
 </html>"));
   end plot;
 
-  encapsulated function derivative "Derivative of Polynomial"
+  encapsulated function derivative "Derivative of polynomial"
     import Modelica_LinearSystems2.Math.Polynomial;
 
     input Polynomial p;
@@ -617,9 +734,38 @@ of the polynomial is used as generated by Polynomial.'String'(..).
     for j in 1:n - 1 loop
       der_p.c[j] := p.c[j]*(n - j);
     end for;
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+der_p = Polynomial.<strong>derivative</strong>(p);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Define a&nbsp;polynomial <code>der_p</code> being a&nbsp;first partial derivative of
+the polynomial&nbsp;<code>p</code>.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+x = Polynomial.x();
+p1 = -6*x^2 + 4*x -3;
+
+der_p = Polynomial.derivative(p1);
+// -12*x + 4
+</pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.integral\">Polynomial.integral</a>,
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.derivativeValue\">Polynomial.derivativeValue</a>.
+</p>
+</html>"));
   end derivative;
 
-  encapsulated function integral "Indefinite integral of Polynomial"
+  encapsulated function integral "Indefinite integral of polynomial"
     import Modelica_LinearSystems2.Math.Polynomial;
 
     input Polynomial p "Polynomial";
@@ -632,10 +778,38 @@ of the polynomial is used as generated by Polynomial.'String'(..).
       integral_p.c[j] := p.c[j]/(n - j);
     end for;
     integral_p.c[n] := 0;
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+integral_p = Polynomial.<strong>integral</strong>(p);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Define a&nbsp;polynomial <code>integral_p</code> being an indefinite integral of
+the polynomial&nbsp;<code>p</code>.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+x = Polynomial.x();
+p1 = -6*x^2 + 4*x -3;
+
+int_p = Polynomial.integral(p1);
+// -2*x^3 + 2*x^2 - 3*x
+</pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.derivative\">Polynomial.derivative</a>.
+</p>
+</html>"));
   end integral;
 
   encapsulated function evaluate
-    "Evaluate a Polynomial at a given (Real) abszissa value"
+    "Evaluate a polynomial at a given Real abszissa value"
     import Modelica_LinearSystems2.Math.Polynomial;
 
     input Polynomial p "Polynomial to be evaluated";
@@ -649,11 +823,40 @@ of the polynomial is used as generated by Polynomial.'String'(..).
     for j in 2:n loop
       y := p.c[j] + x*y;
     end for;
-    annotation (derivative(zeroDerivative=p) = Polynomial.evaluate_der);
+    annotation (derivative(zeroDerivative=p) = Polynomial.evaluate_der, Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+y = Polynomial.<strong>evaluate</strong>(p, x);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Evaluate a&nbsp;polynomial&nbsp;<code>p</code> at a&nbsp;given
+<em>Real</em> abszissa value&nbsp;<code>x</code>.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+x = Polynomial.x();
+p1 = -6*x^2 + 4*x -3;
+
+Polynomial.evaluate(p1, 1);
+// = -5.0
+</pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.derivativeValue\">Polynomial.derivativeValue</a>,
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.integralValue\">Polynomial.integralValue</a>,
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Polynomial.evaluateComplex</a>.
+</p>
+</html>"));
   end evaluate;
 
   encapsulated function evaluateMatrix
-    "Evaluate a Polynomial with a matrix argument"
+    "Evaluate a polynomial with a matrix argument"
     import Modelica_LinearSystems2.Math.Polynomial;
 
     input Polynomial p "Polynomial to be evaluated";
@@ -668,21 +871,30 @@ of the polynomial is used as generated by Polynomial.'String'(..).
       Y := X*Y + diagonal(p.c[j]*ones(size(X, 1)));
     end for;
     annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+Y = Polynomial.<strong>evaluateMatrix</strong>(p, X);
+</pre></blockquote>
+
+<h4>Description</h4>
 <p>
-Evaluates the given polynomial <em>p</em> of order <em>n</em> with its coefficients c[i] so that
+Evaluates the given polynomial <var>p</var> of order <var>n</var> with its coefficients
+<var>c</var><sub><var>i</var></sub> so that
 </p>
-<pre>
-    <strong>Y</strong> = p.c[1]*<strong>X</strong>^n + p.c[2]*<strong>X</strong>^(n-1) + ... + p.c[n]*<strong>X</strong> + p.c[n+1]*<strong>I</strong>
-</pre>
+<blockquote><pre>
+<strong>Y</strong> = p.c[1]*<strong>X</strong>^n + p.c[2]*<strong>X</strong>^(n-1) + ... + p.c[n]*<strong>X</strong> + p.c[n+1]*<strong>I</strong>
+</pre></blockquote>
+
+<h4>Note</h4>
 <p>
-Note that the matrix <strong>X</strong> must be square.
+The matrix <strong>X</strong> must be square.
 Horner's method is used for polynomial evaluation.
 </p>
 </html>"));
   end evaluateMatrix;
 
   encapsulated function evaluateComplex
-    "Evaluate a Polynomial at a given (Complex) abszissa value"
+    "Evaluate a polynomial at a given Complex abszissa value"
     import Complex;
     import Modelica_LinearSystems2.Math.Polynomial;
 
@@ -697,10 +909,38 @@ Horner's method is used for polynomial evaluation.
     for j in 2:n loop
       y := Complex(p.c[j], 0) + x*y;
     end for;
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+y = Polynomial.<strong>evaluateComplex</strong>(p, x);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Evaluate a&nbsp;polynomial&nbsp;<code>p</code> at a&nbsp;given
+<em>Complex</em> abszissa value&nbsp;<code>x</code>.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+x = Polynomial.x();
+p1 = -6*x^2 + 4*x -3;
+
+Polynomial.evaluateComplex(p1, Complex(2, 3));
+// 35 - 60*j
+</pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluate\">Polynomial.evaluate</a>.
+</p>
+</html>"));
   end evaluateComplex;
 
   encapsulated function derivativeValue
-    "Integral of polynomial p(x) from x_low to x_high"
+    "Evaluate an i-the derivative of polynomial at a given Real abszissa value"
     import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica.Utilities.Streams.print;
 
@@ -721,10 +961,39 @@ Horner's method is used for polynomial evaluation.
         der_y := p.c[j]*product(n - j + 1 - k for k in 1:i) + x*der_y;
       end for;
     end if;
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+der_y = Polynomial.<strong>derivativeValue</strong>(p, x, i);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Evaluate an <code>i</code>-th derivative of a&nbsp;polynomial&nbsp;<code>p</code>
+at a&nbsp;given <em>Real</em> abszissa value&nbsp;<code>x</code>.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+x = Polynomial.x();
+p1 = -6*x^2 + 4*x -3;
+
+Polynomial.derivativeValue(p1, 1, 2);
+// = -12.0
+</pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluate\">Polynomial.evaluate</a>,
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.integralValue\">Polynomial.integralValue</a>.
+</p>
+</html>"));
   end derivativeValue;
 
   encapsulated function integralValue
-    "Integral of polynomial p(x) from x_low to x_high"
+    "Evaluate integral of polynomial from x_low to x_high"
     import Modelica_LinearSystems2.Math.Polynomial;
 
     input Polynomial p "Polynomial to be integrated";
@@ -741,7 +1010,40 @@ Horner's method is used for polynomial evaluation.
       y_low := x_low*(p.c[j]/(n - j + 1) + y_low);
     end for;
     integral := integral - y_low;
-    annotation (derivative(zeroDerivative=p) = Polynomial.integralValue_der);
+    annotation (
+      derivative(zeroDerivative=p) = Polynomial.integralValue_der,
+      Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+integral = Polynomial.<strong>integralValue</strong>(p, x_high, x_low);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Calculate value of integral of a&nbsp;polynomial&nbsp;<code>p</code>
+at a&nbsp;given range between&nbsp;<code>x_low</code> and&nbsp;<code>x_high</code>.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+x = Polynomial.x();
+p1 = -6*x^2 + 4*x -3;
+
+Polynomial.integralValue(p1, 2);
+// = -14.0
+
+Polynomial.integralValue(p1, 2, -2);
+// = -44.0
+</pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluate\">Polynomial.evaluate</a>,
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.derivativeValue\">Polynomial.derivativeValue</a>.
+</p>
+</html>"));
   end integralValue;
 
   encapsulated function roots
@@ -762,9 +1064,39 @@ Horner's method is used for polynomial evaluation.
       Vectors.print("", result);
     end if;
     annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+result = Polynomial.<strong>roots</strong>(p, printRoots);
+</pre></blockquote>
+
+<h4>Description</h4>
 <p>
-The roots of the given polynomial are determined and are returned as
-a vector of Complex elements.
+The roots of the given polynomial&nbsp;<code>p</code> are determined
+and are returned as a&nbsp;vector of Complex elements.
+If the optional argument <code>printRoots</code>
+is set to true, the roots are also printed at once.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+x = Polynomial.x();
+p1 = -6*x^2 + 4*x -3;
+
+Polynomial.roots(p1);
+// {0.333333 + 0.62361*j, 0.333333 - 0.62361*j}
+
+Polynomial.roots(p1, true);
+//  =
+//    0.333333 + 0.62361*j
+//    0.333333 - 0.62361*j
+// {0.333333 + 0.62361*j, 0.333333 - 0.62361*j}
+</pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.numberOfRoots\">Polynomial.numberOfRoots</a>.
 </p>
 </html>"));
   end roots;
@@ -793,6 +1125,34 @@ a vector of Complex elements.
         end if;
       end while;
     end if;
+    annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+result = Polynomial.<strong>numberOfRoots</strong>(p);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Calculate number of roots of a&nbsp;polynomial&nbsp;<code>p</code>.
+</p>
+
+<h4>Example</h4>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
+
+x = Polynomial.x();
+p1 = -6*x^2 + 4*x -3;
+
+Polynomial.numberOfRoots(p1);
+// = 2
+</pre></blockquote>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.roots\">Polynomial.roots</a>.
+</p>
+</html>
+"));
   end numberOfRoots;
 
   encapsulated function rootsOfNonZeroHighestCoefficientPolynomial
@@ -869,7 +1229,7 @@ a vector of Complex elements.
   end integralValue_der;
 
   encapsulated package Internal
-    "Internal library of record Polynomial (should not be directly used by user)"
+    "Internal utility functions of record Polynomial that should not be directly utilized by the user"
     extends Modelica.Icons.InternalPackage;
     import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
@@ -902,15 +1262,30 @@ a vector of Complex elements.
 
   annotation (defaultComponentName="polynomial", Documentation(info="<html>
 <p>
-This record defines a polynomial, e.g., y = 2*x^2 + 3*x + 1. The general form is:
+This record defines a polynomial, e.g.,
+<var>y</var>&nbsp;=&nbsp;2*<var>x</var><sup>2</sup>&nbsp;+ 3*<var>x</var>&nbsp;+&nbsp;1.
+The general form is:
 </p>
 <pre>
    y = c[1]*x^n + c[2]*x^(n-1) + ... + c[n]*x + c[n+1];
 </pre>
 <p>
-In the record, the coefficients c[i] are stored. Usually, the record is not directly accessed. Instead, a polynomial is generated with the functions provided in the record such as Polynomial.base(..),
-Polynomial.fitting(..).
+In the record, the coefficients <code>c[i]</code> are stored. Usually,
+the record is not directly accessed. Instead, a&nbsp;polynomial is
+generated with the functions provided in the record, see 
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.'constructor'\">Polynomial.&apos;constructor&apos;</a>.
+Also
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.fitting\">Polynomial.fitting(..)</a>
+can be helpful.
 Several functions are provided that operate on polynomials.
+</p>
+
+<h4>
+See also
+</h4>
+<p>
+Introduction of the Polynomials in
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.Polynomials\">Getting started</a> section.
 </p>
 </html>"));
 end Polynomial;
