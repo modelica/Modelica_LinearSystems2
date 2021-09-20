@@ -43,9 +43,9 @@ The default is &quot;eps = 0&quot;. Another useful value is, e.g.,
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Vectors.isEqual\">Vectors.isEqual</a>,
-<a href=\"modelica://Modelica.Math.Matrices.isEqual\">Matrices.isEqual</a>,
-<a href=\"modelica://Modelica.Utilities.Strings.isEqual\">Strings.isEqual</a>
+<a href=\"modelica://Modelica.Math.Vectors.isEqual\">Modelica.Math.Vectors.isEqual</a>,
+<a href=\"modelica://Modelica.Math.Matrices.isEqual\">Modelica.Math.Matrices.isEqual</a>,
+<a href=\"modelica://Modelica.Utilities.Strings.isEqual\">Modelica.Utilities.Strings.isEqual</a>
 </p>
 </html>"));
 end isEqual;
