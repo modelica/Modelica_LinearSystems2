@@ -58,8 +58,7 @@ results in:
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">Matrices.rcond</a>
 </p>
-</html></html>",
-          revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>
