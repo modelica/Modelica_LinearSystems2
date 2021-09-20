@@ -31,14 +31,14 @@ computed by a LU decomposition.
 Usually, this function should never be used, because
 there are nearly always better numerical algorithms
 as by computing the determinant. E.g., use function
-<a href=\"modelica://Modelica.Math.Matrices.rank\">Matrices.rank</a>
+<a href=\"modelica://Modelica.Math.Matrices.rank\">Modelica.Math.Matrices.rank</a>
 to compute the rank of a matrix.
 </p>
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.rank\">Matrices.rank</a>,
-<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>
+<a href=\"modelica://Modelica.Math.Matrices.rank\">Modelica.Math.Matrices.rank</a>,
+<a href=\"modelica://Modelica.Math.Matrices.solve\">Modelica.Math.Matrices.solve</a>
 </p>
 </html>"));
 end det;

@@ -34,7 +34,7 @@ The Hessenberg form of a matrix is computed by repeated Householder
 similarity transformation. The elementary reflectors and the corresponding
 scalar factors are provided by function \"Utilities.toUpperHessenberg()\".
 The transformation matrix <strong>U</strong> is then computed by
-<a href=\"modelica://Modelica.Math.Matrices.LAPACK.dorghr\">LAPACK.dorghr</a>.
+<a href=\"modelica://Modelica.Math.Matrices.LAPACK.dorghr\">Modelica.Math.Matrices.LAPACK.dorghr</a>.
 </p>
 
 <h4>Example</h4>
@@ -64,7 +64,7 @@ The transformation matrix <strong>U</strong> is then computed by
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.Utilities.toUpperHessenberg\">Matrices.Utilities.toUpperHessenberg</a>
+<a href=\"modelica://Modelica.Math.Matrices.Utilities.toUpperHessenberg\">Modelica.Math.Matrices.Utilities.toUpperHessenberg</a>
 </p>
 </html>",
         revisions="<html>

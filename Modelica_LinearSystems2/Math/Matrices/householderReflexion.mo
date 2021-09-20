@@ -67,7 +67,7 @@ Householder reflection is widely used in numerical linear algebra, e.g. to perfo
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.Utilities.householderSimilarityTransformation\">Matrices.housholderSimilarityTransformation</a>
+<a href=\"modelica://Modelica.Math.Matrices.Utilities.householderSimilarityTransformation\">Modelica.Math.Matrices.Utilities.housholderSimilarityTransformation</a>
 </p>
 </html>"));
 end householderReflexion;

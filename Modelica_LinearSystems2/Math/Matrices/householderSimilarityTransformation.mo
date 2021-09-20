@@ -65,7 +65,7 @@ This transformation is widely used for transforming non-symmetric matrices to a 
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.Utilities.householderReflection\">Matrices.housholderReflection</a>
+<a href=\"modelica://Modelica.Math.Matrices.Utilities.householderReflection\">Modelica.Math.Matrices.Utilities.housholderReflection</a>
 </p>
 </html>"));
 end householderSimilarityTransformation;

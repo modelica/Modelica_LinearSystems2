@@ -105,7 +105,7 @@ r = rank(<strong>A</strong>).
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
+<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Modelica.Math.Matrices.singularValues</a>
 </p>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
