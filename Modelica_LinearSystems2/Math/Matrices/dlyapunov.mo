@@ -76,12 +76,20 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+X = Matrices.<strong>dlaypunov</strong>(A, C);
+   or
+X = Matrices.<strong>dlaypunov</strong>(A, C, eps);
+</pre></blockquote>
+
+<h4>Description</h4>
 <p>
 Function <strong>laypunov</strong> computes the solution <strong>X</strong> of the continuous-time
 Lyapunov equation
 </p>
 <blockquote><pre>
-<strong>X</strong><strong>A</strong> + <strong>A</strong>'*<strong>X</strong> = <strong>C</strong>.
+<strong>X</strong><strong>A</strong> + <strong>A</strong>'*<strong>X</strong> = <strong>C</strong>
 </pre></blockquote>
 <p>
 using the Schur method for Lyapunov equations proposed by Bartels and Stewart [1].
