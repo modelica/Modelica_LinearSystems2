@@ -143,9 +143,9 @@ where Q1 consists of the first \"rank\" columns of Q.
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.leastSquares\">Matrices.leastSquares</a>
+<a href=\"modelica://Modelica.Math.Matrices.leastSquares\">Modelica.Math.Matrices.leastSquares</a>
 (same as leastSquares2, but with a right hand side vector),
-<a href=\"modelica://Modelica.Math.Matrices.solve2\">Matrices.solve2</a>
+<a href=\"modelica://Modelica.Math.Matrices.solve2\">Modelica.Math.Matrices.solve2</a>
 (for square, regular matrices A)
 </p>
 </html>"));

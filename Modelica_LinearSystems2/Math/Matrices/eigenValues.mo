@@ -10,7 +10,7 @@ function eigenValues
 
   output Real leftEigenvectors[size(A,1), size(A,2)]
     "Real-valued eigenvector matrix";
- output Real rightEigenvectors[size(A,1), size(A,2)]
+  output Real rightEigenvectors[size(A,1), size(A,2)]
     "Real-valued eigenvector matrix";
 
 protected
@@ -50,7 +50,7 @@ has an imaginary part, then eigenvalues[i+1,:] is the conjugate complex
 eigenvalue and eigenvectors[:,i] is the real and eigenvectors[:,i+1] is the
 imaginary part of the eigenvector of the i-th eigenvalue.
 With function
-<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a>,
+<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Modelica.Math.Matrices.eigenValueMatrix</a>,
 a real block diagonal matrix is constructed from the eigenvalues
 such that
 </p>
@@ -81,8 +81,8 @@ i.e., matrix <strong>A</strong> has the 3 real eigenvalues -0.618, 8, 1.618.
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a>,
-<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
+<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Modelica.Math.Matrices.eigenValueMatrix</a>,
+<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Modelica.Math.Matrices.singularValues</a>
 </p>
 </html>"));
 end eigenValues;
