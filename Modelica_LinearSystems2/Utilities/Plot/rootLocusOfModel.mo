@@ -103,6 +103,6 @@ yields the following diagram (the menu on the right lower part is displayed when
 the cursor on one curve point; then all points belonging to the same parameter value are
 marked with a red square):
 </p>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/RootLocusOfModel.png\"/></p>
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfDrive.png\"/></p>
 </html>"));
 end rootLocusOfModel;

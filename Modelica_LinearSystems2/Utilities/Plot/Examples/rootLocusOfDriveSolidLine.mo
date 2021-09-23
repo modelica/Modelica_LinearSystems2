@@ -20,7 +20,7 @@ over the load inertia <strong>Jload</strong>:
 </p>
 
 <blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfDrive.png\">
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfDriveSolidLine.png\">
 </blockquote>
 </html>"));
 end rootLocusOfDriveSolidLine;
