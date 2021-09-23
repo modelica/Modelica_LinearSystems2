@@ -9,9 +9,9 @@ This package provides functions to plot curves in two dimensions. Here is a shor
 
 <p>
 A figure consists of a <strong>set of diagrams</strong>. Different functions are provided
-to either plot one diagram (Plot.diagram) to plot several diagrams under each other
-(Plot.vectorDiagrams) or to plot several diagrams in matrix layout
-(Plot.matrixDiagrams).
+to either plot one diagram (<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.diagram\">Plot.diagram</a>) to plot several diagrams under each other
+(<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.diagramVector\">Plot.diagramVector</a>) or to plot several diagrams in matrix layout
+(<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.diagramMatrix\">Plot.diagramMatrix</a>).
 </p>
 
 <p>

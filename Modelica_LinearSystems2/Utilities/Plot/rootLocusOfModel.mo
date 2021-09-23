@@ -33,14 +33,14 @@ algorithm
     modelParam,
     simulationSetup,
     reorder);
-  if paramUnit == "" or paramUnit == " " then
+  if Modelica.Utilities.Strings.isEmpty(paramUnit) then
      pName :=paramName;
   else
      pName :=paramName + " [" + paramUnit + "]";
   end if;
 
   // Plot the data
-  if diagram.heading == "" then
+  if Modelica.Utilities.Strings.isEmpty(diagram.heading) then
      heading :="Root locus of " + modelName + " over " + pName;
   else
      heading :=diagram.heading;

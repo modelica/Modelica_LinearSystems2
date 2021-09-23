@@ -101,6 +101,7 @@ algorithm
   // Parameter that is varied
   paramName := modelParam[index_p_var].Name;
   paramUnit := "";
+  Modelica.Utilities.Streams.print("Perform parameter variation of " + paramName);
 
   // Check min/max values
   Min := modelParam[index_p_var].Min;
@@ -155,16 +156,19 @@ algorithm
       problem=modelName,
       startTime=0,
       stopTime=0,
-      initialNames={paramName,"linearize:"},
+      initialNames={paramName, "linearize:"},
       initialValues=[s, is],
       finalNames=fill("", 0),
       method=simulationSetup.method,
       tolerance=simulationSetup.tolerance,
       fixedstepsize=simulationSetup.fixedStepSize);
-    assert(OK,
-      "Linearization with function simulateMultiExtendedModel failed\n(maybe some parameter values are not meaningful?).");
+      // Disable the following assert since OK is always 'false' for initialNames[2]="linearize:".
+      // This setting of initialNames[2] is, in turn, necessary to get file dslin1.mat
+      // which is needed to read linear system sizes: nx, nu and ny below.
+      // assert(OK,
+      //       "Linearization with function simulateMultiExtendedModel failed (maybe some parameter values are not meaningful?).");
   else
-    // Simulate always until t_lineare and only then linearize
+    // Simulate always until t_linearize and only then linearize
     Modelica.Utilities.Streams.error("Option not yet implemented");
   end if;
 
