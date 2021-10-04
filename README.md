@@ -21,11 +21,20 @@ Furthermore, in sublibrary Controller about 20 input/output blocks of linear sys
 
 ## Current release
 
-We plan to release the v2.4.1. by end of October 2021. The alpha and beta releases of that version will be available in the [Releases](../../releases).
-
 [Modelica_LinearSystems2 v2.4.0 (2020-06-26)](../../releases/tag/v2.4.0)
 
 Please note that the library is known to work with Dymola only.
+
+### Release schedule v2.4.1
+
+We plan to release the v2.4.1. by end of October 2021.
+
+| Version | Date | Comment |
+|---| ---| ---|
+| [Alpha](../../releases/tag/v2.4.1-alpha)  |  2021-09-13 | First drop of the library |
+| [Beta 1](../../releases/tag/v2.4.1-beta1) |  2021-10-04 |  |
+| Beta 2 |  2021-10-15 | Release-ready version |
+| Final  |  2021-10-29 | Release |
 
 ## Older releases
 
