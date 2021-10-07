@@ -595,10 +595,20 @@ Improvements in this version
 </h4>
 
 <ul>
-<li> Utilize ModelicaIO functions for matrix I/O, see issue
-     <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
-     Concerning functions are marked obsolete, see below.</li>
-<li> About <a href=\"modelica://Modelica_LinearSystems2/Resources/Documentation/Version-2.4.1/ResolvedGitHubIssues.html\">20</a> issues (including pull requests) have been addressed for this release.</li>
+  <li> Utilize ModelicaIO functions for matrix I/O, see issue
+       <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
+       Concerning functions are marked obsolete, see below.
+       </li>
+  <li> Use functions from DymolaCommands library instead of Dymola's build-in functions,
+       see issue <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/66\">#66</a>.
+       </li>
+  <li> Disable an assert causing function crash in
+       <a href=\"modelica://Modelica_LinearSystems2.Utilities.Import.rootLocusOfModel\">Utilities.Import.rootLocusOfModel</a>,
+       see issue <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/130\">#130</a>.
+       </li>
+  <li> Over <a href=\"modelica://Modelica_LinearSystems2/Resources/Documentation/Version-2.4.1/ResolvedGitHubIssues.html\">20</a>
+       issues (including pull requests) have been addressed for this release.
+       </li>
 </ul>
 
 
