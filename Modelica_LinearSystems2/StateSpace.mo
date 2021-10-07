@@ -11842,6 +11842,7 @@ The uncontrollable poles are checked to to stable.
     encapsulated function readSystemDimension
       "Read the order nx of state matrix and the numbers nu and ny of inputs and outputs"
       import Modelica.Utilities.Streams;
+      import Modelica.Utilities.Files;
 
       input String fileName="stateSpace.mat"
         "File containing the matrix matrixName, e.g. A.mat, dsin.txt"
@@ -11853,13 +11854,11 @@ The uncontrollable poles are checked to to stable.
       output Integer xuy[3] "Order of matrixName; size of u; size of y";
 
     protected
-      Real sizeA[1, 1]=Streams.readRealMatrix(
-              fileName,
-              "nx",
-              1,
-              1);
+      Real sizeA[1, 1]=
+        if Files.exist(fileName) then Streams.readRealMatrix(fileName, "nx", 1, 1) else [0];
+      Integer ABCDsizes[2]=
+        if Files.exist(fileName) then Streams.readMatrixSize(fileName, matrixName) else {0,0};
 
-      Integer ABCDsizes[2]=Streams.readMatrixSize(fileName, matrixName);
 
     algorithm
       xuy[1] := integer(sizeA[1, 1]);

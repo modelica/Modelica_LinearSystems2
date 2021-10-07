@@ -1,5 +1,5 @@
 ﻿within ;
-package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.4.1-alpha) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
+package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.4.1-beta1) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
 
   extends Modelica.Icons.Package;
 
@@ -12,9 +12,9 @@ annotation (
   uses(
     Modelica(version="4.0.0"),
     DymolaCommands(version="1.11")),
-  version="2.4.1-alpha",
+  version="2.4.1-beta1",
   versionDate="2021-10-29",
-  dateModified = "2021-09-13 14:00:00Z",
+  dateModified = "2021-10-04 14:00:00Z",
   revisionId="$F​ormat:%h %ci$",
   conversion(
     from(version={"2.0", "2.1", "2.2", "2.3", "2.3.1", "2.3.2", "2.3.2", "2.3.3", "2.3.4"},
@@ -93,7 +93,7 @@ Modelica Standard Library.
   <td style=\"vertical-align: top;\"><b>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</b></td>
 </tr>
 <tr>
-  <td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2020, DLR Institute of System Dynamics and Control</b></td>
+  <td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2021, DLR Institute of System Dynamics and Control</b></td>
 </tr>
 </table>
 
