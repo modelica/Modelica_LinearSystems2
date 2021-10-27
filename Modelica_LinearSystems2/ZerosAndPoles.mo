@@ -2228,13 +2228,11 @@ shown in the next figure:
 All filters are available in <b>normalized</b> (default) and non-normalized form.
 In the normalized form, the amplitude of the filter transfer function
 at the cutoff frequency is 3 dB. Note, when comparing the filters
-of this function with other software systems, the setting of \"normalized\"
+of this function with other software systems, the setting of &quot;normalized&quot;
 has to be selected appropriately. For example, the signal processing
 toolbox of Matlab provides the filters in non-normalized form and
 therefore a comparison makes only sense, if normalized = <b>false</b>
 is set.
-
-
 </p>
 
 <h4>Example</h4>
@@ -2349,9 +2347,9 @@ ZerosAndPoles.Plot.<b>polesAndZeros</b>(
 <p>
 This function plots a pole-zero-map of the poles and zeros of a transfer function
 in ZerosAndPoles format. The Boolean inputs
-\"poles\" and \"zeros\" define what to plot. If Boolean input \"plot = true\", the pole-zero-map
+&quot;poles&quot; and &quot;zeros&quot; define what to plot. If Boolean input &quot;plot = true&quot;, the pole-zero-map
 is plotted. If false, only the diagram is generated and returned as output argument.
-The records \"defaultDiagram\" and \"device\" allow to set various layout options and the
+The records &quot;defaultDiagram&quot; and &quot;device&quot; allow to set various layout options and the
 size and location of the diagram on the screen.
 </p>
 
@@ -4476,11 +4474,11 @@ followed by a conversion from sate space to transfer function representation.
         annotation (Documentation(info="<html>
 
 <p>
-This function determines the solution of <b>one non-linear algebraic equation</b> \"y=f(u)\"
-in <b>one unknown</b> \"u\" in a reliable way. It is one of the best numerical
+This function determines the solution of <b>one non-linear algebraic equation</b> &quot;y=f(u)&quot;
+in <b>one unknown</b> &quot;u&quot; in a reliable way. It is one of the best numerical
 algorithms for this purpose. As input, the nonlinear function f(u)
 has to be given, as well as an interval u_min, u_max that
-contains the solution, i.e., \"f(u_min)\" and \"f(u_max)\" must
+contains the solution, i.e., &quot;f(u_min)&quot; and &quot;f(u_max)&quot; must
 have a different sign. If possible, a smaller interval is computed by
 inverse quadratic interpolation (interpolating with a quadratic polynomial
 through the last 3 points and computing the zero). If this fails,
@@ -4489,7 +4487,7 @@ The inverse quadratic interpolation method has superlinear convergence.
 This is roughly the same convergence rate as a globally convergent Newton
 method, but without the need to compute derivatives of the non-linear
 function. The solver function is a direct mapping of the Algol 60 procedure
-\"zero\" to Modelica, from:
+&quot;zero&quot; to Modelica, from:
 </p>
 
 <dl>
@@ -4507,7 +4505,7 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
       annotation (Documentation(info="<html>
 <p>
-A band pass with bandwidth \"w\" is determined from a low pass
+A band pass with bandwidth &quot;w&quot; is determined from a low pass
 </p>
 
 <blockquote><pre>
@@ -4536,7 +4534,7 @@ This results in the following derivation:
 <p>
 This 4th order transfer function shall be split in to two transfer functions of order 2 each
 for numerical reasons. With the following formulation, the fourth order
-polynomial can be represented (with the unknowns \"c\" and \"alpha\"):
+polynomial can be represented (with the unknowns &quot;c&quot; and &quot;alpha&quot;):
 </p>
 
 <blockquote><pre>
@@ -4559,7 +4557,7 @@ Comparison of coefficients:
 </pre></blockquote>
 
 <p>
-Therefore the last equation has to be solved for \"z\" (basically, this means to compute
+Therefore the last equation has to be solved for &quot;z&quot; (basically, this means to compute
 a real zero of a fourth order polynomal):
 </p>
 
@@ -4571,7 +4569,7 @@ a real zero of a fourth order polynomal):
 </pre></blockquote>
 
 <p>
-This function computes the solution of this equation and returns \"alpha = z^2\" and \"c\";
+This function computes the solution of this equation and returns &quot;alpha = z^2&quot; and &quot;c&quot;;
 </p>
 </html>"));
     end bandPassAlpha;
@@ -4742,21 +4740,21 @@ using the following rules:
     </tr>
 
 <tr><td> High pass filter </td>
-    <td> replace \"p\" by \"1/p\" </td>
+    <td> replace &quot;p&quot; by &quot;1/p&quot; </td>
     </tr>
 
 <tr><td> Band pass filter </td>
-    <td> replace \"p\" by \"(p + 1/p)/w_band\"<br>
+    <td> replace &quot;p&quot; by &quot;(p + 1/p)/w_band&quot;<br>
          (w_band = (f_max - f_min)/sqrt(f_min*f_max))</td>
     </tr>
 
 <tr><td> Stop pass filter  </td>
-    <td> replace \"p\" by \"w_band/(p + 1/p)\"<br>
+    <td> replace &quot;p&quot; by &quot;w_band/(p + 1/p)&quot;<br>
          (w_band = (f_max - f_min)/sqrt(f_min*f_max))</td>
     </tr>
 
 <tr><td> Filter with cut-off angular frequency w_cut </td>
-    <td> replace \"p\" by \"p/w_cut\" </td>
+    <td> replace &quot;p&quot; by &quot;p/w_cut&quot;</td>
     </tr>
 </table>
 <p>
@@ -5868,7 +5866,7 @@ b2_k = 1/(beta_k^2 + gamma_k^2) b1_k = -2*beta_k/(beta_k^2 + gamma_k^2)
       annotation (Documentation(info="<html>
 <p>
 The function output is true if the system is given in zeros and poles representation.
-Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1, n2, d1\" and \"d2\" respectively.
+Therefore, it is assumend that the used array names are &quot;z&quot; and &quot;p&quot; or &quot;n1, n2, d1&quot; and &quot;d2&quot; respectively.
 </p>
 </html>"));
     end checkRepresentation;
@@ -6138,7 +6136,7 @@ shown in the next figure:
 All filters are available in <b>normalized</b> (default) and non-normalized form.
 In the normalized form, the amplitude of the filter transfer function
 at the cutoff frequency is 1/sqrt(2) (= 3 dB). Note, when comparing the filters
-of this function with other software systems, the setting of \"normalized\"
+of this function with other software systems, the setting of &quot;normalized&quot;
 has to be selected appropriately. For example, the signal processing
 toolbox of Matlab provides the filters in non-normalized form and
 therefore a comparison makes only sense, if normalized = <b>false</b>
@@ -6824,11 +6822,11 @@ int found=0;
         annotation (Documentation(info="<html>
 
 <p>
-This function determines the solution of <b>one non-linear algebraic equation</b> \"y=f(u)\"
-in <b>one unknown</b> \"u\" in a reliable way. It is one of the best numerical
+This function determines the solution of <b>one non-linear algebraic equation</b> &quot;y=f(u)&quot;
+in <b>one unknown</b> &quot;u&quot; in a reliable way. It is one of the best numerical
 algorithms for this purpose. As input, the nonlinear function f(u)
 has to be given, as well as an interval u_min, u_max that
-contains the solution, i.e., \"f(u_min)\" and \"f(u_max)\" must
+contains the solution, i.e., &quot;f(u_min)&quot; and &quot;f(u_max)&quot; must
 have a different sign. If possible, a smaller interval is computed by
 inverse quadratic interpolation (interpolating with a quadratic polynomial
 through the last 3 points and computing the zero). If this fails,
@@ -6837,7 +6835,7 @@ The inverse quadratic interpolation method has superlinear convergence.
 This is roughly the same convergence rate as a globally convergent Newton
 method, but without the need to compute derivatives of the non-linear
 function. The solver function is a direct mapping of the Algol 60 procedure
-\"zero\" to Modelica, from:
+&quot;zero&quot; to Modelica, from:
 </p>
 
 <dl>

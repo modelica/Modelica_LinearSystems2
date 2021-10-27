@@ -479,7 +479,7 @@ be used to endorse or promote products derived from this software without specif
 prior written permission.
 </p>
 <p>
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY
 EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
 OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
 IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
@@ -711,7 +711,7 @@ Bug fixes performed in this version:
 <li> Minor issues correct so that Dymola 2017 Beta.1 checkes successfully with pedantic flag:<br>
      import statements corrected<br>
      wrong Diagram annotations changed to Dialog annotations<br>
-     non-standard annotation \"translateModel\" changed to \"__Dymola_translateModel\"
+     non-standard annotation &quot;translateModel&quot; changed to &quot;__Dymola_translateModel&quot;
 </li>
 </ul>
 </html>"));
@@ -853,7 +853,7 @@ Bug fixes performed in version 2.3.2 Build 2 (April 17, 2015):
 
 <li> ModelAnalysis.FullAnalysis<br>
      If the system is too large (> 50 states, inputs, or outputs), then the
-     system is not printed to the output (previously, the tool \"hangs\" if printing a
+     system is not printed to the output (previously, the tool &quot;hangs&quot; if printing a
      too large system).</li>
 
 <li> ModelAnalysis.FullAnalysis<br>
@@ -904,24 +904,24 @@ Improvements and bug fixes performed in version 2.3.1 Build 1 (Oct. 1, 2013):
      Modelica models.
      The if-clauses have been removed.</li>
 
-<li> Wrong annotation \"preferedView\" replaced by correct
+<li> Wrong annotation &quot;preferedView&quot; replaced by correct
      \"preferredView\" annotation. (3 times)</li>
 
-<li> Non-standardized annotation \"Hide\" replaced by standardized
+<li> Non-standardized annotation &quot;Hide&quot; replaced by standardized
      annotation \"HideResult\" (77 times)</li>
 
-<li> Non-standardized annotation \"__Dymola_checkBox\" replaced by standardized
+<li> Non-standardized annotation &quot;__Dymola_checkBox&quot; replaced by standardized
      annotation \"checkBox\" (53 times)</li>
 
-<li> Non-standardized annotation \"NumberOfIntervals\" replaced by
-     tool specific annotation \"__Dymola_NumberOfIntervals\" (3 times)</li>
+<li> Non-standardized annotation &quot;NumberOfIntervals&quot; replaced by
+     tool specific annotation &quot;__Dymola_NumberOfIntervals&quot; (3 times)</li>
 
-<li> Non-standardized annotation \"Commands\" replaced by
-     tool specific annotation \"__Dymola_Commands\" (3 times)</li>
+<li> Non-standardized annotation &quot;Commands&quot; replaced by
+     tool specific annotation &quot;__Dymola_Commands&quot; (3 times)</li>
 
-<li> Obsolete Dymola specific annotation \"__Dymola_treeView\" removed (3 times)</li>
+<li> Obsolete Dymola specific annotation &quot;__Dymola_treeView&quot; removed (3 times)</li>
 
-<li> Old \"extend\" annotation code that has been present at a few places, has been removed.</li>
+<li> Old &quot;extend&quot; annotation code that has been present at a few places, has been removed.</li>
 </ul>
 
 </html>"));
@@ -968,11 +968,11 @@ For <b>versionBuild=4</b> (March 25, 2013), several bug fixes have been performe
 <ul>
 <li> Several issues with limiting cases (no states and/or no inputs and/or no outputs) have been fixed for the
      analysis functions (#1050, #1051, #1052).</li>
-<li> Some wrong Modelica constructs regarding the \"operator\" language keyword have been fixed
+<li> Some wrong Modelica constructs regarding the &quot;operator&quot; language keyword have been fixed
      (#908, #909). </li>
-<li> Improved and corrected the algorithm to compute invariant zeros, so that large zeros are treated as \"infinite\"
-     (and are therefore removed). Hereby also corrected an error that set infinite zeros to \"zero\" (and not
-     to \"infinite\"), resulting in a wrong system description.
+<li> Improved and corrected the algorithm to compute invariant zeros, so that large zeros are treated as &quot;infinite&quot;
+     (and are therefore removed). Hereby also corrected an error that set infinite zeros to &quot;zero&quot; (and not
+     to &quot;infinite&quot;), resulting in a wrong system description.
      As a result the conversion from a StateSpace to a ZerosAndPoles
      object is corrected/improved, in case large zeros are present.</li>
 <li> Improved efficiency of some analysis functions so that unnecessary translations of
@@ -1041,7 +1041,7 @@ New functions/blocks:
 
 <ul>
 <li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.sylvester\">sylvester</a>
-     to solve Sylvester equations \"<b>A</b>*<b>X</b> + <b>X</b>*<b>B</b> = <b>C</b>\"
+     to solve Sylvester equations &quot;<b>A</b>*<b>X</b> + <b>X</b>*<b>B</b> = <b>C</b>&quot;
      using a Schur method.</li>
 
 <li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a>
@@ -1118,7 +1118,7 @@ have these names in the records). Most important improvements with respect to ve
 <li>      The Design package contains functions for controller design, i.e. pole assignment, LQ controller, Kalman Filter, and LQG controller.</li>
 <li>      Since the design of optimal controllers is based on the solution of algebraic Riccati equation, a solver for those equations is provided in Math.Matrices. Also an algorithm to solve Lyapunov equations has been added.</li>
 <li>      The package Sampled was renamed to Controller. All blocks are now available in a discrete representation,
-          especially also the \"Filter\" block (was only available in a continuous representation in 0.95)</li>
+          especially also the &quot;Filter&quot; block (was only available in a continuous representation in 0.95)</li>
 <li>      The Controller package contains a sub package Template which provides standard controller structures (e.g. a state-feedback-control-structure and a two degree of freedom controller template with an inverse system model in the feed forward loop) with replaceable components.</li>
 <li>      The besselFilter coefficients have been recalculated with high precision calculation up to order 41.</li>
 <li>      LimPID, comprising P, PI, PD, and PID controller with limited output, anti-windup compensation and input weighting (setpoint and measured value) added.</li>
@@ -1215,8 +1215,8 @@ performed:
      have been de-vectorized (more convenient for the user in the
      standard case. Modelica allows now easy vectorization of
      blocks).</li>
-<li> The previous parameter \"method\" was split into \"blockType\" (continuous/discrete)
-     and \"methodType\" (discretization method). It is therefore
+<li> The previous parameter &quot;method&quot; was split into &quot;blockType&quot; (continuous/discrete)
+     and &quot;methodType&quot; (discretization method). It is therefore
      easier to switch between a continuous and a discrete representation because
      one does not have to remember which discretization method was used
      previously when switching from a continuous to a discrete representation.</li>
@@ -1227,7 +1227,7 @@ performed:
      much more convenient to define the sampling setting and
      switch between different representations.</li>
 <li> In every component, the Integer parameter sampleFactor is present that
-     defines the sampling time of this component as a \"sampleFactor\"
+     defines the sampling time of this component as a &quot;sampleFactor&quot;
      multiple of the base sample time defined in sampleClock.
      This allows a more easier definition of standard multi-rate
      systems (in the previous version, in every component the actual

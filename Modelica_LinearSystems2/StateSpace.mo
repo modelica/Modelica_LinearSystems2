@@ -3858,7 +3858,7 @@ Interpretations of matrix <b>K</b>:
 <p>
 If <b>A</b> is singular (e.g. due to a zero eigenvalue), then a unique inverse
 of <b>A</b> does not exist. If there are non-unique solutions of the
-equation \"<b>A</b>*<b>X</b>=<b>B</b>\", the one with the smallest norm
+equation &quot;<b>A</b>*<b>X</b>=<b>B</b>&quot;, the one with the smallest norm
 in <b>X</b> is used to compute <b>K</b>. If no solution of this equation exists,
 <b>K</b> cannot be computed. In this case, output argument
 <b>finite</b> = <b>false</b> and all elements of
@@ -7520,9 +7520,9 @@ StateSpace.Plot.<b>polesAndZeros</b>(
 <p>
 This function plots a pole-zero-map of the poles and transmission zeros of a state space system.
 The poles are the eigenvalues of the system matrix (eigenvalues(ss.A)). The Boolean inputs
-\"poles\" and \"zeros\" define what to plot. If Boolean input &quot;print&nbsp;=&nbsp;true&quot;,
+&quot;poles&quot; and &quot;zeros&quot; define what to plot. If Boolean input &quot;print&nbsp;=&nbsp;true&quot;,
 the results of the analysis are additionally printed in the textual format.
-The records \"defaultDiagram\" and \"device\" allow to set various layout options and the
+The records &quot;defaultDiagram&quot; and &quot;device&quot; allow to set various layout options and the
 size and location of the diagram on the screen.
 </p>
 
@@ -12896,9 +12896,9 @@ StateSpace.Plot.<b>polesAndZeros</b>(
 <p>
 This function plots a pole-zero-map of the poles and transmission zeros of a state space system.
 The poles are the eigenvalues of the system matrix (eigenvalues(ss.A)). The Boolean inputs
-\"poles\" and \"zeros\" define what to plot. If Boolean input \"plot = true\", the pole-zero-map
+&quot;poles&quot; and &quot;zeros&quot; define what to plot. If Boolean input &quot;plot = true&quot;, the pole-zero-map
 is plotted. If false, only the diagram is generated and returned as output argument.
-The records \"defaultDiagram\" and \"device\" allow to set various layout options and the
+The records &quot;defaultDiagram&quot; and &quot;device&quot; allow to set various layout options and the
 size and location of the diagram on the screen.
 </p>
 
