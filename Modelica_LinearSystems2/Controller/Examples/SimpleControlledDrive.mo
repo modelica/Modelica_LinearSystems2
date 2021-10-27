@@ -156,7 +156,7 @@ P-PI cascade controller. Simulate for 3 s and plot
 <p>
 The standard setting in component sampleClock models a continuous controller.
 This means that all 3 samplers are just dummy components containing the
-equation \"y=u\" and that the PI component in the controller is a continuous
+equation &quot;y=u&quot; and that the PI component in the controller is a continuous
 PI controller.
 </p>
 <p>

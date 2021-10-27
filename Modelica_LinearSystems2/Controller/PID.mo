@@ -211,7 +211,7 @@ equation of the integrator:
 </pre>
 
 <p>
-The steady state equation \"der(x)=0\" leads to the condition that the input u to the
+The steady state equation &quot;der(x)=0&quot; leads to the condition that the input u to the
 integrator is zero. If the input u is already (directly or indirectly) defined
 by another initial condition, then the initialization problem is <b>singular</b>
 (has none or infinitely many solutions). This situation occurs often
