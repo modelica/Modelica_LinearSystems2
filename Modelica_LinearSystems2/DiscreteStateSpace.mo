@@ -1490,7 +1490,7 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
 <p>
 Note that an appropriate impulse response of a discrete system that is comparable
 to the impulse response of the corresponding continuous system requires
-the \"ImpulseExact\" conversion from continuous system to discrete system.
+the &quot;ImpulseExact&quot; conversion from continuous system to discrete system.
 </p>
 
 <h4>Example</h4>
@@ -1577,7 +1577,7 @@ DiscreteStateSpace.Analysis.timeResponse(response=Types.TimeResponse.Step, dss, 
 <p>
 Note that an appropriate step response of a discrete system that is comparable
 to the step response of the corresponding continuous system requires
-the \"StepExact\" conversion from continuous system to discrete system.
+the &quot;StepExact&quot; conversion from continuous system to discrete system.
 </p>
 
 <h4>Example</h4>
@@ -1663,7 +1663,7 @@ DiscreteStateSpace.Analysis.timeResponse(response=Types.TimeResponse.Ramp, dss, 
 </pre></blockquote>
 <p>
 Note that an appropriate ramp response of a discrete system that is comparable to the ramp response of the corresponding continuous system
-requires the \"RampExact\" conversion from continuous system to discrete system.
+requires the &quot;RampExact&quot; conversion from continuous system to discrete system.
 </p>
 
 <h4>Example</h4>
@@ -3455,10 +3455,10 @@ with (for more details see <a href=\"modelica://Modelica_LinearSystems2.Discrete
 The file must contain
 </p>
 <ul>
-<li> the Real matrix [A, B; C, D]  with name \"matrixName\",</li>
-<li> the Integer matrix \"nx[1,1]\" defining the number of states (that is the number of rows of the square matrix A),</li>
+<li> the Real matrix [A, B; C, D]  with name &quot;matrixName&quot;,</li>
+<li> the Integer matrix &quot;nx[1,1]&quot; defining the number of states (that is the number of rows of the square matrix A),</li>
 <li> the Real matrix B2 that has the same dimensions as B,</li>
-<li> the Real matrix \"Ts[1,1]\" defining the sample time in [s] with which the continuous-time system was discretized to arrive at this discrete system</li>
+<li> the Real matrix &quot;Ts[1,1]&quot; defining the sample time in [s] with which the continuous-time system was discretized to arrive at this discrete system</li>
 </ul>
 
 <h4>Example</h4>

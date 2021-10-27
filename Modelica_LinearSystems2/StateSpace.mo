@@ -3858,7 +3858,7 @@ Interpretations of matrix <strong>K</strong>:
 <p>
 If <strong>A</strong> is singular (e.g. due to a zero eigenvalue), then a unique inverse
 of <strong>A</strong> does not exist. If there are non-unique solutions of the
-equation \"<strong>A</strong>*<strong>X</strong>=<strong>B</strong>\", the one with the smallest norm
+equation &quot;<strong>A</strong>*<strong>X</strong>=<strong>B</strong>&quot;, the one with the smallest norm
 in <strong>X</strong> is used to compute <strong>K</strong>. If no solution of this equation exists,
 <strong>K</strong> cannot be computed. In this case, output argument
 <strong>finite</strong> = <strong>false</strong> and all elements of
@@ -7520,9 +7520,9 @@ StateSpace.Plot.<strong>polesAndZeros</strong>(
 <p>
 This function plots a pole-zero-map of the poles and transmission zeros of a state space system.
 The poles are the eigenvalues of the system matrix (eigenvalues(ss.A)). The Boolean inputs
-\"poles\" and \"zeros\" define what to plot. If Boolean input &quot;print&nbsp;=&nbsp;true&quot;,
+&quot;poles&quot; and &quot;zeros&quot; define what to plot. If Boolean input &quot;print&nbsp;=&nbsp;true&quot;,
 the results of the analysis are additionally printed in the textual format.
-The records \"defaultDiagram\" and \"device\" allow to set various layout options and the
+The records &quot;defaultDiagram&quot; and &quot;device&quot; allow to set various layout options and the
 size and location of the diagram on the screen.
 </p>
 
@@ -12896,9 +12896,9 @@ StateSpace.Plot.<strong>polesAndZeros</strong>(
 <p>
 This function plots a pole-zero-map of the poles and transmission zeros of a state space system.
 The poles are the eigenvalues of the system matrix (eigenvalues(ss.A)). The Boolean inputs
-\"poles\" and \"zeros\" define what to plot. If Boolean input \"plot = true\", the pole-zero-map
+&quot;poles&quot; and &quot;zeros&quot; define what to plot. If Boolean input &quot;plot = true&quot;, the pole-zero-map
 is plotted. If false, only the diagram is generated and returned as output argument.
-The records \"defaultDiagram\" and \"device\" allow to set various layout options and the
+The records &quot;defaultDiagram&quot; and &quot;device&quot; allow to set various layout options and the
 size and location of the diagram on the screen.
 </p>
 

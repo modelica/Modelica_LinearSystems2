@@ -1579,9 +1579,9 @@ TransferFunction.Plot.<strong>polesAndZeros</strong>(
 <h4>Description</h4>
 <p>
 This function plots a pole-zero-map of the poles and zeros of a transfer function.
-The Boolean inputs \"poles\" and \"zeros\" define what to plot. If Boolean input
-\"plot = true\", the pole-zero-map is plotted. If false, only the diagram is generated
-and returned as output argument. The records \"defaultDiagram\" and \"device\" allow
+The Boolean inputs &quot;poles&quot; and &quot;zeros&quot; define what to plot. If Boolean input
+&quot;plot = true&quot;, the pole-zero-map is plotted. If false, only the diagram is generated
+and returned as output argument. The records &quot;defaultDiagram&quot; and &quot;device&quot; allow
 to set various layout options and the size and location of the diagram on the screen.
 </p>
 
