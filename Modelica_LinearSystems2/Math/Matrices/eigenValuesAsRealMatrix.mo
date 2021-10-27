@@ -31,7 +31,7 @@ eigenvalues = Matrices.<b>eigenValuesAsRealMatrix</b>(A);
 <h4>Description</h4>
 <p>
 This function call returns the eigenvalues of a square matrix
-<b>A</b>. The first column of \"eigenvalues\" contains the real and the
+<b>A</b>. The first column of &quot;eigenvalues&quot; contains the real and the
 second column contains the imaginary part of the eigenvalues.
 Before calculating the eigenvalues, matrix A is permuted and scaled (balanced)
 to improve the computation. For details see the
