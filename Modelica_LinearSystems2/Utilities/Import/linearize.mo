@@ -43,8 +43,8 @@ algorithm
    annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>This function initializes a Modelica model and then simulates the model with its default experiment options until time instant \"t_linearize\". If t_linearize=0, no simulation takes place (only initialization). At the simulation stop time, the model is linearized in such a form that </p>
 <p><ul>
-<li>all top-level signals with prefix \"input\" are treated as inputs <b>u</b>(t) of the model ,</li>
-<li>all top-level signals with prefix \"output\" are treated as outputs <b>y</b>(t) of the model,</li>
+<li>all top-level signals with prefix &quot;input&quot; are treated as inputs <b>u</b>(t) of the model ,</li>
+<li>all top-level signals with prefix &quot;output&quot; are treated as outputs <b>y</b>(t) of the model,</li>
 <li>all variables that appear differentiated and that are selected as states at this time instant are treated as states <b>x</b> of the model.</li>
 </ul></p>
 <p>Formally, the non-linear hybrid differential-algebraic equation system is therefore treated as the following ordinary equation system at time instant t_linearize: </p>

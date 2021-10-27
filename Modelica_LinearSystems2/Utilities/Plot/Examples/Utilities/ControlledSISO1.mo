@@ -44,7 +44,7 @@ Utility model in order to demonstrate the plotting of a root locus:
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/ControlledSISO1a.png\"/></p>
 
 <p>
-This model consists of a linear, time invariant single-input, single-output plant \"zerosAndPoles\"
+This model consists of a linear, time invariant single-input, single-output plant &quot;zerosAndPoles&quot;
 that is controlled by a P-Controller with a constant gain k. The pole/zero pattern of the plant
 is shown in the next figure:
 </p>
