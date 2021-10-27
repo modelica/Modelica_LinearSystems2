@@ -42,7 +42,7 @@ Multiplying the coefficients with a window damps the coefficients at the beginni
 the end.
 </p>
 <p>
-The function outputs a L-point vector for a given kind of window. The parameter \"beta\" is
+The function outputs a L-point vector for a given kind of window. The parameter &quot;beta&quot; is
 only needed by the Kaiser window. The types of windows are:
 </p>
 <OL>

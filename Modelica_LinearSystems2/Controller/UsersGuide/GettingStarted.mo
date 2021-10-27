@@ -67,8 +67,8 @@ parameter menus:
 </p>
 
 <p>
-By setting, e.g., parameters blockType to \"Discrete\" and
-sampleFactor to 10 in the \"Advanced\" menu, results
+By setting, e.g., parameters blockType to &quot;Discrete&quot; and
+sampleFactor to 10 in the &quot;Advanced&quot; menu, results
 in a block where the input and the output of the block
 is sampled by a sampling time that is 10 times slower
 as the base sample time of the global sampleClock component.
