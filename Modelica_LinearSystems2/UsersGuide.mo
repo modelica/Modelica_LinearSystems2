@@ -111,9 +111,9 @@ derivative) and plotted. A typical plot is shown in the next figure:
 </blockquote>
 <p>
 Several other examples of Polynomial are available in Polynomial.Examples.
-In Dymola, select the function with the right mouse button and click \"Ok\" on
+In Dymola, select the function with the right mouse button and click &quot;Ok&quot; on
 the resulting menu which provides the possibility to define all the input arguments.
-Since the Examples function do not have any input arguments, only the \"Ok\"
+Since the Examples function do not have any input arguments, only the &quot;Ok&quot;
 button is present:
 </p>
 <blockquote>
@@ -833,13 +833,13 @@ Improvements and bug fixes performed in version 2.3.1 Build 1 (Oct. 1, 2013):
      The if-clauses have been removed.</li>
 
 <li> Wrong annotation &quot;preferedView&quot; replaced by correct
-     \"preferredView\" annotation. (3 times)</li>
+     &quot;preferredView&quot; annotation. (3 times)</li>
 
 <li> Non-standardized annotation &quot;Hide&quot; replaced by standardized
-     annotation \"HideResult\" (77 times)</li>
+     annotation &quot;HideResult&quot; (77 times)</li>
 
 <li> Non-standardized annotation &quot;__Dymola_checkBox&quot; replaced by standardized
-     annotation \"checkBox\" (53 times)</li>
+     annotation &quot;checkBox&quot; (53 times)</li>
 
 <li> Non-standardized annotation &quot;NumberOfIntervals&quot; replaced by
      tool specific annotation &quot;__Dymola_NumberOfIntervals&quot; (3 times)</li>

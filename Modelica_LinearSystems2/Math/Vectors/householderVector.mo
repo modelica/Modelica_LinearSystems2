@@ -27,7 +27,7 @@ Vectors.<strong>householderVector</strong>(a,b);
 
 <h4>Description</h4>
 <p>
-The function call \"<code>householderVector(a, b)</code>\" returns the normalized Householder vector
+The function call &quot;<code>householderVector(a, b)</code>&quot; returns the normalized Householder vector
 <strong>u</strong> for Householder reflection of input vector <strong>a</strong> onto vector <strong>b</strong>, i.e. Householder vector <strong>u</strong> is the normal
 vector of the reflection plane. Algebraically, the reflection is performed by transformation matrix <strong>Q</strong>
 </p>

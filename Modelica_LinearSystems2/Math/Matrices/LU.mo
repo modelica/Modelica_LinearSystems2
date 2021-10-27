@@ -32,7 +32,7 @@ algorithm
 <h4>Description</h4>
 <p>
 This function call returns the
-LU decomposition of a \"Real[m,n]\" matrix A, i.e.,
+LU decomposition of a &quot;Real[m,n]&quot; matrix A, i.e.,
 </p>
 <blockquote>
 <p>

@@ -1507,7 +1507,7 @@ The corresponding step responses of these high pass filters are shown in the nex
 All filters are available in <strong>normalized</strong> (default) and non-normalized form.
 In the normalized form, the amplitude of the filter transfer function at the cutoff
 frequency is 1/sqrt(2) (= 3 dB). Note, when comparing the filters of this function
-with other software systems, the setting of \"normalized\" has to be selected
+with other software systems, the setting of &quot;normalized&quot; has to be selected
 appropriately. For example, the signal processing toolbox of Matlab provides
 the filters in non-normalized form and therefore a comparison makes only sense,
 if normalized = <strong>false</strong> is set.
@@ -2535,8 +2535,6 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
 
 <h4>Example</h4>
 <blockquote><pre>
-
-
 <strong>algorithm</strong>
   tf:=Modelica_LinearSystems2.TransferFunction.Import.fromFile(\"tf.mat\", \"n\", \"d\");
 //  tf = (s^2 + 2*s + 3)/(4*s^2 + 5*s + 6)
