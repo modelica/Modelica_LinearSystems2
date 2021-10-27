@@ -65,7 +65,7 @@ size(B,1) &le; size(A,2) &le; size(A,1) + size(B,1)
 
 <h4>Note</h4>
 <p>
-The solution is computed with the LAPACK function \"dgglse\"
+The solution is computed with the LAPACK function &quot;dgglse&quot;
 using the generalized RQ factorization under the assumptions that
 B has full row rank (= size(B,1)) and the matrix [A;B] has
 full column rank (= size(A,2)). In this case, the problem

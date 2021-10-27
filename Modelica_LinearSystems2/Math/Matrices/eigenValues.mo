@@ -42,7 +42,7 @@ end if;
 <p>
 This function call returns the eigenvalues and
 optionally the (right) eigenvectors of a square matrix
-<strong>A</strong>. The first column of \"eigenvalues\" contains the real and the
+<strong>A</strong>. The first column of &quot;eigenvalues&quot; contains the real and the
 second column contains the imaginary part of the eigenvalues.
 If the i-th eigenvalue has no imaginary part, then eigenvectors[:,i] is
 the corresponding real eigenvector. If the i-th eigenvalue
@@ -58,7 +58,7 @@ such that
 A = eigenvectors * eigenValueMatrix(eigenvalues) * inv(eigenvectors),
 </pre></blockquote>
 <p>
-provided the eigenvector matrix \"eigenvectors\" can be inverted
+provided the eigenvector matrix &quot;eigenvectors&quot; can be inverted
 (an inversion is possible, if all eigenvalues are different
 and no eigenvalue is zero).
 </p>

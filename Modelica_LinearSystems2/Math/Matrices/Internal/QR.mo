@@ -88,8 +88,8 @@ of <strong>R</strong> (which is the same row-rank as <strong>A</strong>). Furthe
 where <strong>R</strong><sub>1</sub> is a regular, upper triangular matrix.
 </p>
 <p>
-Note, the solution is computed with the LAPACK functions \"dgeqpf\"
-and \"dorgqr\", i.e., by Housholder transformations with
+Note, the solution is computed with the LAPACK functions &quot;dgeqpf&quot;
+and &quot;dorgqr&quot;, i.e., by Housholder transformations with
 column pivoting. If <strong>Q</strong> is not needed, the function may be
 called as: <code>(,R,p) = QR(A)</code>.
 </p>

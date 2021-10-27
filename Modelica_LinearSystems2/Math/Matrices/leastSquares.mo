@@ -19,7 +19,7 @@ x = Matrices.<strong>leastSquares</strong>(A,b);
 <h4>Description</h4>
 <p>
 A linear system of equations A*x = b has no solutions or infinitely
-many solutions if A is not square. Function \"leastSquares\" returns
+many solutions if A is not square. Function &quot;leastSquares&quot; returns
 a solution in a least squarse sense:
 </p>
 <pre>
@@ -31,7 +31,7 @@ a solution in a least squarse sense:
 
 <h4>Note</h4>
 <p>
-The solution is computed with the LAPACK function \"dgelsx\",
+The solution is computed with the LAPACK function &quot;dgelsx&quot;,
 i.e., QR or LQ factorization of A with column pivoting.
 If A does not have full rank,
 the solution is not unique and from the infinitely many solutions

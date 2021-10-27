@@ -85,8 +85,8 @@ where <strong>R</strong><sub>1</sub> is a regular, upper triangular matrix.
 
 <h4>Note</h4>
 <p>
-The solution is computed with the LAPACK functions \"dgeqp3\"
-and \"dorgqr\", i.e., by Housholder transformations with
+The solution is computed with the LAPACK functions &quot;dgeqp3&quot;
+and &quot;dorgqr&quot;, i.e., by Housholder transformations with
 column pivoting. If <strong>Q</strong> is not needed, the function may be
 called as: <code>(,R,p) = QR(A)</code>.
 </p>

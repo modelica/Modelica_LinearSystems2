@@ -39,15 +39,15 @@ Matrices.<strong>norm</strong>(A, p=2);
 
 <h4>Description</h4>
 <p>
-The function call \"<code>Matrices.norm(A)</code>\" returns the
+The function call &quot;<code>Matrices.norm(A)</code>&quot; returns the
 2-norm of matrix A, i.e., the largest singular value of A.<br>
-The function call \"<code>Matrices.norm(A, p)</code>\" returns the
+The function call &quot;<code>Matrices.norm(A, p)</code>&quot; returns the
 p-norm of matrix A. The only allowed values for p are
 </p>
 <ul>
-<li> \"p=1\": the largest column sum of A</li>
-<li> \"p=2\": the largest singular value of A</li>
-<li> \"p=Modelica.Constants.inf\": the largest row sum of A</li>
+<li> &quot;p=1&quot;: the largest column sum of A</li>
+<li> &quot;p=2&quot;: the largest singular value of A</li>
+<li> &quot;p=Modelica.Constants.inf&quot;: the largest row sum of A</li>
 </ul>
 <p>
 Note, for any matrices A1, A2 the following inequality holds:

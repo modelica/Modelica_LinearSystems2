@@ -145,7 +145,7 @@ Finally, the solution of the the original problem is recovered as
 <strong>X</strong>=<strong>U</strong>'*<strong>Y</strong>*<strong>V</strong>.
 </p>
 <p>
-The boolean inputs \"AisHess\" and \"BTisSchur\" indicate to omit one
+The boolean inputs &quot;AisHess&quot; and &quot;BTisSchur&quot; indicate to omit one
 or both of the transformation to Hessenberg form or Schur form, respectively,
 in the case that <strong>A</strong> and/or <strong>B</strong> have already Hessenberg form
 or Schur, respectively.
