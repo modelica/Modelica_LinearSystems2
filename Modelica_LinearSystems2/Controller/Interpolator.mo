@@ -156,7 +156,7 @@ Note, the inputSampleFactor must be an integer multiple of the outputSampleFacto
 <p>
 This block is demonstrated with example
 <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Examples.Interpolator</a>
-leading to the following result when filtering a sine-signal with \"continuous\" (interpolator1.y), \"discrete, unfiltered\" (interpolator2.y) and \"discrete, filtered\" (interpolator3.y) Interpolator:
+leading to the following result when filtering a sine-signal with &quot;continuous&quot; (interpolator1.y), &quot;discrete, unfiltered&quot; (interpolator2.y) and &quot;discrete, filtered&quot; (interpolator3.y) Interpolator:
 </p>
 
 <p>

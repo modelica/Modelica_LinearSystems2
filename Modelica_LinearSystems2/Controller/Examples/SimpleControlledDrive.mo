@@ -160,7 +160,7 @@ equation \"y=u\" and that the PI component in the controller is a continuous
 PI controller.
 </p>
 <p>
-Change sampleClock.blockType to \"Discrete\" block. By this global setting,
+Change sampleClock.blockType to &quot;Discrete&quot; block. By this global setting,
 the 3 sampler blocks and the PI speed controller are transformed into
 a discrete representation. The base sample time is defined in
 component sampleClock (= 0.02 s). Every discrete component samples
