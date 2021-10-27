@@ -1435,8 +1435,6 @@ Reads and loads a zeros-and-poles transfer function from a mat-file <tt>fileName
 
 <h4>Example</h4>
 <blockquote><pre>
-
-
 <b>algorithm</b>
   zp:=Modelica_LinearSystems2.ZerosAndPoles.Import.fromFile(\"zp.mat\", \"n\", \"d\");
 //  zp = (p^2 + 2*p + 3)/(p + 2)/(p^2 + 2*p + 2)

@@ -2415,10 +2415,10 @@ can be implemented as:
      <b>end when</b>;
 </pre>
 <p>
-Since no \"next value\" operator is available in Modelica, an
+Since no &quot;next value&quot; operator is available in Modelica, an
 auxiliary variable new_x stores the value of x for the
 next sampling instant. The relationship between new_x and x
-is defined via equation \"x = <b>pre</b>(new_x)\".
+is defined via equation &quot;x = <b>pre</b>(new_x)&quot;.
 </p>
 <p>
 The body of the when-clause is active during initialization and at the
