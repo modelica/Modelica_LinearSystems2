@@ -44,7 +44,7 @@ Utility model in order to demonstrate the plotting of a root locus:
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/ControlledSISO1a.png\"/></p>
 
 <p>
-This model consists of a linear, time invariant single-input, single-output plant \"zerosAndPoles\"
+This model consists of a linear, time invariant single-input, single-output plant &quot;zerosAndPoles&quot;
 </p>
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/ControlledSISO2c.png\"/></p>
 <p>
