@@ -14,8 +14,8 @@ annotation (
     Modelica(version="4.0.0"),
     DymolaCommands(version="1.11")),
   version="2.5.0-dev",
-  versionDate="2020-06-26",
-  dateModified = "2020-06-26 14:00:00Z",
+  versionDate="2021-10-29",
+  dateModified = "2021-10-28 14:00:00Z",
   revisionId="$F​ormat:%h %ci$",
   conversion(
     from(version={"2.0", "2.1", "2.2", "2.3", "2.3.1", "2.3.2", "2.3.2", "2.3.3", "2.3.4"},
@@ -94,7 +94,7 @@ Modelica Standard Library.
   <td style=\"vertical-align: top;\"><strong>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</strong></td>
 </tr>
 <tr>
-  <td style=\"vertical-align: top;\"><strong>Copyright &copy; 2012-2020, DLR Institute of System Dynamics and Control</strong></td>
+  <td style=\"vertical-align: top;\"><strong>Copyright &copy; 2012-2021, DLR Institute of System Dynamics and Control</strong></td>
 </tr>
 </table>
 
