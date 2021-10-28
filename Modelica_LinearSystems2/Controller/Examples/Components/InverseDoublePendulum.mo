@@ -273,18 +273,15 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   connect(relativeAngularVelocity.w_rel[3], w) annotation (Line(
-      points={{-20,-60.3333},{-20,-72},{80,-72},{80,-30},{140,-30},{140,-20},{
-          160,-20}},
+      points={{-20,-61.6667},{-20,-72},{80,-72},{80,-30},{140,-30},{140,-20},{160,-20}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(relativeVelocity.v_rel[1], v) annotation (Line(
-      points={{-90,-31.6667},{-108,-31.6667},{-108,-34},{-122,-34},{-122,60},{
-          160,60}},
+      points={{-90,-30.3333},{-108,-30.3333},{-108,-34},{-122,-34},{-122,60},{160,60}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(relativePosition.r_rel[1], s) annotation (Line(
-      points={{-90,-61.6667},{-108,-61.6667},{-108,-58},{-124,-58},{-124,100},{
-          160,100}},
+      points={{-90,-60.3333},{-108,-60.3333},{-108,-58},{-124,-58},{-124,100},{160,100}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.y, phi) annotation (Line(
@@ -296,8 +293,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(add.u1, relativeAngles.angles[3]) annotation (Line(
-      points={{118,14},{114,14},{114,-20},{60,-20},{60,-36},{-20,-36},{-20,
-          -30.3333}},
+      points={{118,14},{114,14},{114,-20},{60,-20},{60,-36},{-20,-36},{-20,-31.6667}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(relativeAngles1.frame_a, revolute2.frame_a) annotation (Line(
@@ -327,7 +323,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(add1.u1, relativeAngles1.angles[3]) annotation (Line(
-      points={{118,-54},{70,-54},{70,-34},{34,-34},{34,-30.3333}},
+      points={{118,-54},{70,-54},{70,-34},{34,-34},{34,-31.6667}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(add1.y, phi1) annotation (Line(
@@ -335,7 +331,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(relativeAngularVelocity1.w_rel[3], w1) annotation (Line(
-      points={{34,-64.3333},{34,-100},{160,-100}},
+      points={{34,-65.6667},{34,-100},{160,-100}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(bodyCylinder.frame_b, revolute2.frame_a) annotation (Line(
@@ -367,11 +363,11 @@ equation
       color={0,127,0},
       smooth=Smooth.None));
   connect(dist2, torque.torque[3]) annotation (Line(
-      points={{80,120},{80,90},{44,90},{44,83.3333}},
+      points={{80,120},{80,90},{44,90},{44,80.6667}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(const2.y, torque.torque[1:2]) annotation (Line(
-      points={{21,80},{34,80},{34,86},{44,86},{44,80.6667}},
+      points={{21,80},{34,80},{34,86},{44,86},{44,82}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(torque.frame_a, revolute2.frame_a) annotation (Line(
@@ -402,10 +398,17 @@ equation
   annotation (
     Documentation(info="<html>
 <p>
-Model of a simple inverted double pendulum system. The mdel is the same as in Modelica_Controller.Examples.Components.DoublePendulum but with different initial values because the initial values are used as a working point for linearization.<br>
-The physical Model is used in Modelica_LinearSystems2.Examples.StateSpace.inverseDoublePendulumController where it is being
-linearized an used as a base for linear controller design. The results are used to control the crane system
+Model of a&nbsp;simple inverted double pendulum system.
+The initial values are used as a&nbsp;working point for linearization.
+<!-- The following text was commented by Tobolar (DLR) since the example
+cited is still in WorkInProgress (see also documentation source of
+other examples of double pendulum):
+The physical Model is used, e.g., in
+Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples.designInverseDoublePendulumController
+where it is linearized and used as a&nbsp;base for linear controller design.
+The results are used to control the crane system
 in Modelica_Controller.Examples.InverseDoublePendulum.mo
+-->
 </p>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,

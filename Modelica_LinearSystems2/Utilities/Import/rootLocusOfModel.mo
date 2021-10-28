@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Import;
 function rootLocusOfModel
   "Return the root locus of one parameter (= eigen values of the model that is linearized for every parameter value)"
+  import Simulator = DymolaCommands.SimulatorAPI;
   import Modelica_LinearSystems2.Utilities.Types.Grid;
   input String modelName "Name of the Modelica model"
     annotation (Dialog(__Dymola_translatedModel));
@@ -58,7 +59,7 @@ algorithm
       "One parameter defined, but grid is not defined as Equidistant or Logarithmic");
     np := modelParam[1].nPoints;
     index_p_var := 1;
-    OK := translateModel(modelName);
+    OK := Simulator.translateModel(modelName);
 
   else
     // More as one parameter defined; find the parameter to be varied
@@ -86,7 +87,7 @@ algorithm
     np := modelParam[index_p_var].nPoints;
 
     // Translate model and set the new parameter values
-    OK := translateModel(modelName);
+    OK := Simulator.translateModel(modelName);
     assert(OK, "Translation of model " + modelName + " failed.");
     for i in 1:nParam loop
       if i <> index_p_var then
@@ -100,6 +101,7 @@ algorithm
   // Parameter that is varied
   paramName := modelParam[index_p_var].Name;
   paramUnit := "";
+  Modelica.Utilities.Streams.print("Perform parameter variation of " + paramName);
 
   // Check min/max values
   Min := modelParam[index_p_var].Min;
@@ -150,20 +152,23 @@ algorithm
   is := 1:np;
   if simulationSetup.linearizeAtInitial then
     // Linearization of all parameter variants at once at the initial point
-    OK := simulateMultiExtendedModel(
+    OK := Simulator.simulateMultiExtendedModel(
       problem=modelName,
       startTime=0,
       stopTime=0,
-      initialNames={paramName,"linearize:"},
+      initialNames={paramName, "linearize:"},
       initialValues=[s, is],
       finalNames=fill("", 0),
       method=simulationSetup.method,
       tolerance=simulationSetup.tolerance,
       fixedstepsize=simulationSetup.fixedStepSize);
-    assert(OK,
-      "Linearization with function simulateMultiExtendedModel failed\n(maybe some parameter values are not meaningful?).");
+      // Disable the following assert since OK is always 'false' for initialNames[2]="linearize:".
+      // This setting of initialNames[2] is, in turn, necessary to get file dslin1.mat
+      // which is needed to read linear system sizes: nx, nu and ny below.
+      // assert(OK,
+      //       "Linearization with function simulateMultiExtendedModel failed (maybe some parameter values are not meaningful?).");
   else
-    // Simulate always until t_lineare and only then linearize
+    // Simulate always until t_linearize and only then linearize
     Modelica.Utilities.Streams.error("Option not yet implemented");
   end if;
 

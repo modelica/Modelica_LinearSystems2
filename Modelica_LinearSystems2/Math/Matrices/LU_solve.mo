@@ -28,27 +28,27 @@ is singular, i.e., no unique solution exists.");
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Matrices.<b>LU_solve</b>(LU, pivots, b);
+Matrices.<strong>LU_solve</strong>(LU, pivots, b);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 This function call returns the
-solution <b>x</b> of the linear systems of equations
+solution <strong>x</strong> of the linear systems of equations
 </p>
 <blockquote>
 <p>
-<b>P</b>*<b>L</b>*<b>U</b>*<b>x</b> = <b>b</b>;
+<strong>P</strong>*<strong>L</strong>*<strong>U</strong>*<strong>x</strong> = <strong>b</strong>;
 </p>
 </blockquote>
 <p>
-where <b>P</b> is a permutation matrix (implicitely
+where <strong>P</strong> is a permutation matrix (implicitely
 defined by vector <code>pivots</code>),
-<b>L</b> is a lower triangular matrix with unit
+<strong>L</strong> is a lower triangular matrix with unit
 diagonal elements (lower trapezoidal if m &gt; n), and
-<b>U</b> is an upper triangular matrix (upper trapezoidal if m &lt; n).
+<strong>U</strong> is an upper triangular matrix (upper trapezoidal if m &lt; n).
 The matrices of this decomposition are computed with function
-<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a> that
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Modelica.Math.Matrices.LU</a> that
 returns arguments <code>LU</code> and <code>pivots</code>
 used as input arguments of <code>Matrices.LU_solve</code>.
 With <code>Matrices.LU</code> and <code>Matrices.LU_solve</code>
@@ -56,10 +56,10 @@ it is possible to efficiently solve linear systems
 with different right hand side vectors. If a linear system of equations with
 just one right hand side vector shall be solved, it is
 more convenient to just use the function
-<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>.
+<a href=\"modelica://Modelica.Math.Matrices.solve\">Modelica.Math.Matrices.solve</a>.
 </p>
 <p>
-If a unique solution <b>x</b> does not exist (since the
+If a unique solution <strong>x</strong> does not exist (since the
 LU decomposition is singular), an exception is raised.
 </p>
 <p>
@@ -82,7 +82,7 @@ matrix A was interchanged with row pivots[i].
   Integer pivots[3];
   Real    x1[3];
   Real    x2[3];
-<b>algorithm</b>
+<strong>algorithm</strong>
   (LU, pivots) := Matrices.LU(A);
   x1 := Matrices.LU_solve(LU, pivots, b1);  // x1 = {3,2,1}
   x2 := Matrices.LU_solve(LU, pivots, b2);  // x2 = {1,0,2}
@@ -90,8 +90,8 @@ matrix A was interchanged with row pivots[i].
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
-<a href=\"modelica://Modelica.Math.Matrices.solve\">Matrices.solve</a>
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Modelica.Math.Matrices.LU</a>,
+<a href=\"modelica://Modelica.Math.Matrices.solve\">Modelica.Math.Matrices.solve</a>
 </p>
 </html>"));
 end LU_solve;

@@ -122,7 +122,7 @@ algorithm
 annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This example demonstrates how to design a lq-controller or a pole placement controller
-respectively. Compared with example <b>craneController</b>, the plant is smaller to
+respectively. Compared with example <strong>craneController</strong>, the plant is smaller to
 achieve suitable dynamics for animation.
 The feedback matrices and a simple pre filter for tracking are save to MATLAB files
 which can be used in ModelicaController library.
@@ -135,7 +135,7 @@ The linear model is used as a base for control design
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] F&ouml;llinger O.:</dt>
-<dd> <b>Regelungstechnik</b>.
+<dd> <strong>Regelungstechnik</strong>.
      H&uuml;thig-Verlag.<br>&nbsp;</dd>
 </dl>
 </html>"),    Documentation(info="<html>

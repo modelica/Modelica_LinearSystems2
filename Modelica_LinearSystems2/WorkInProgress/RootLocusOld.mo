@@ -4,8 +4,6 @@ package RootLocusOld
     "Plot root locus of nonlinear Modelica model by linearizing the model for variations of one model parameter"
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.StateSpace;
-    import
-      Modelica_LinearSystems2.WorkInProgress.RootLocusOld.Types.MarkerStyles;
 
     input String modelName "Name of the Modelica model"
       annotation(Dialog(__Dymola_translatedModel(caption="Model to be linearized for the root locus")));
@@ -16,12 +14,11 @@ package RootLocusOld
   /*
   input Modelica.Mechanics.MultiBody.Interfaces.partialColorMap colorMap=
       Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.jet
-    "Color map function for parameter variations" annotation(__Dymola_choicesAllMatching=true);
+    "Color map function for parameter variations" annotation(choicesAllMatching=true);
 */
 
     input
-      Modelica_LinearSystems2.WorkInProgress.RootLocusOld.ParameterVariation
-                                                             modelParam[:]
+      Modelica_LinearSystems2.WorkInProgress.RootLocusOld.ParameterVariation modelParam[:]
       "Model parameter to be varied";
 
     input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
@@ -29,7 +26,7 @@ package RootLocusOld
       "Simulation options it t_linearize > 0";
 
     input
-      Modelica_LinearSystems2.WorkInProgress.RootLocusOld.RootLocusDiagramOld     diagram
+      Modelica_LinearSystems2.WorkInProgress.RootLocusOld.RootLocusDiagramOld diagram
       "Diagram properties of the root locus";
 
   protected
@@ -61,7 +58,7 @@ package RootLocusOld
                  diagram.yTopLeft,
                  diagram.diagramWidth,
                  diagram.heightRatio*diagram.diagramWidth}*mmToPixel;
-    id:= createPlot(id=-1,
+    id:= DymolaCommands.Plot.createPlot(id=-1,
                     position=integer(position),
                     erase=true,
                     autoscale=true,
@@ -79,7 +76,7 @@ package RootLocusOld
 
     // Initialize computation
     dp := (modelParam[1].Max-modelParam[1].Min)/(nVar-1);
-    ok:=translateModel(modelName);
+    ok:=DymolaCommands.SimulatorAPI.translateModel(modelName);
     Modelica.Utilities.Files.removeFile("dsin.mat");
 
     // Loop over the selected parameter range
@@ -96,7 +93,7 @@ package RootLocusOld
       eigenValues :=Modelica.Math.Matrices.eigenValues(A);
 
       // Plot root loci
-      ok :=plotArray(eigenValues[:,1],
+      ok := DymolaCommands.Plot.plotArray(eigenValues[:,1],
                      eigenValues[:,2],
                      legend=if i==1 or i==nVar or mod(i,nVar/10) == 0 then String(parValue,significantDigits=3) else "",
                      color=integer(color[i, :]),
@@ -110,7 +107,7 @@ package RootLocusOld
     annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Plot.<b>rootLocus</b>(modelName, t_linearize, modelParam, simulationSetup, diagram)
+Plot.<strong>rootLocus</strong>(modelName, t_linearize, modelParam, simulationSetup, diagram)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -126,7 +123,7 @@ The parameter is varied equidistantly from minimum to maximum value.
 Calling the function
 </p>
 <blockquote><pre>
-Utilities.Plot.<b>rootLocus</b>(
+Utilities.Plot.<strong>rootLocus</strong>(
   modelName = \"Modelica.Mechanics.Rotational.Examples.First\",
   t_linearize = 0,
   modelParam={
@@ -196,7 +193,7 @@ yields following diagram
 <p>
 This function plots the root locus of model
 <a href=\"modelica://Modelica.Mechanics.Rotational.Examples.First\">Rotational.Examples.First</a>
-over the load inertia <b>Jload</b>:
+over the load inertia <strong>Jload</strong>:
 </p>
 
 <blockquote>
@@ -211,18 +208,18 @@ over the load inertia <b>Jload</b>:
     String heading=""
       "Heading displayed above diagram (if empty, default heading)" annotation(Dialog);
     Real heightRatio = 0.8 "Height of diagram = heightRatio*diagramWidth" annotation(Dialog);
-    Boolean grid=true "True, if grid is shown" annotation(Dialog,  choices(__Dymola_checkBox=true));
+    Boolean grid=true "True, if grid is shown" annotation(Dialog,  choices(checkBox=true));
 
     /* group "Axes" (Axes properties) */
     String xLabel="Real part of eigenvalues"
       "String displayed at horizontal axis" annotation(Dialog(group="Axes"));
     String yLabel="Imaginary part of eigenvalues"
       "String displayed at vertical axis" annotation(Dialog(group="Axes"));
-    Boolean logX = false "True, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
-    Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
+    Boolean logX = false "True, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(checkBox=true));
+    Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(checkBox=true));
     Boolean uniformScaling = false
       "True, if same vertical and horizontal axis increment"
-        annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
+        annotation(Dialog(group="Axes"),choices(checkBox=true));
 
     Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm xTopLeft=0
       "Horizontal position of top left figure corner if applicable (e.g. window)"
@@ -239,6 +236,8 @@ over the load inertia <b>Jload</b>:
 
   function linearize2
     "Linearize a model after simulation up to a given time and return only the A matrix"
+    import Simulator = DymolaCommands.SimulatorAPI;
+
     input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
     input Modelica.Units.SI.Time t_linearize=0
       "Simulate until t_linearize and then linearize" annotation (Dialog);
@@ -252,12 +251,12 @@ over the load inertia <b>Jload</b>:
 
     // Simulate until t_linearize and then linearize at this time instant
     Boolean OK1 = if t_linearize <= 0.0 then true else
-                     simulateModel(problem=modelName, startTime=0, stopTime=t_linearize,
+                     Simulator.simulateModel(problem=modelName, startTime=0, stopTime=t_linearize,
                                    method=simulationSetup.method,
                                    tolerance=simulationSetup.tolerance,
                                    fixedstepsize=simulationSetup.fixedStepSize);
-    Boolean OK2 = if t_linearize <= 0.0 then true else importInitial("dsfinal.txt");
-    Boolean OK3 = linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
+    Boolean OK2 = if t_linearize <= 0.0 then true else Simulator.importInitial("dsfinal.txt");
+    Boolean OK3 = Simulator.linearizeModel(problem=modelName, resultFile=fileName, startTime=t_linearize, stopTime=t_linearize);
 
     // Read linear system from file
     Integer xuy[3]=Modelica_LinearSystems2.Utilities.Streams.readSystemDimension(
@@ -279,32 +278,9 @@ but returns only the A-matrix.
 </html>"));
   end linearize2;
 
-  package Types "Package of type definitions"
-    extends Modelica.Icons.Package;
-
-    type MarkerStyles = enumeration(
-        Cross "Cross",
-        Circle "Circle",
-        FilledCircle "FilledCircle",
-        Square "Square",
-        FilledSquare "FilledSquare",
-        TriangleDown "TriangleDown",
-        TriangleUp "TriangleUp",
-        Diamond "Diamond") "Style of marker of plotted curve";
-    annotation (
-      Documentation(info="<html>
-<p>
-This package contains type definitions used in the library. Generally,
-the enumeration type is used to assign a unique choice of parameter
-within a model.
-</p>
-</html>"));
-  end Types;
-
   function plotEigenvalues
     "Calculate eigenvalues of matrix A and plot root locus"
-    import
-      Modelica_LinearSystems2.WorkInProgress.RootLocusOld.Types.MarkerStyles;
+    import DymolaCommands.Plot;
 
     input Real A[:,size(A, 1)] = [2,1,1;1,1,1;1,2,2] "Square matrix";
     input Boolean removePrevious=true
@@ -320,7 +296,7 @@ within a model.
       annotation (Dialog(group="Plot settings", enable=useLegend));
     input Boolean grid = false "Add grid"
       annotation (Dialog(group="Plot settings"));
-    input MarkerStyles markerStyle=MarkerStyles.Cross "Style of marker"
+    input MarkerStyle markerStyle=MarkerStyle.Cross "Style of marker"
       annotation (Dialog(group="Plot settings"));
     input Integer markerColor[3]={0,0,255} "Color of marker"
       annotation(Dialog(group="Plot settings", colorSelector=true));
@@ -330,15 +306,6 @@ within a model.
   //  output Real evRe[size(A, 1)];
   //  output Real evIm[size(A, 1)];
   protected
-    Integer markerStyle2=
-      if markerStyle==MarkerStyles.Cross then MarkerStyle.Cross else
-      if markerStyle==MarkerStyles.Circle then MarkerStyle.Circle else
-      if markerStyle==MarkerStyles.Square then MarkerStyle.Square else
-      if markerStyle==MarkerStyles.FilledSquare then MarkerStyle.FilledSquare else
-      if markerStyle==MarkerStyles.TriangleDown then MarkerStyle.TriangleDown else
-      if markerStyle==MarkerStyles.TriangleUp then MarkerStyle.TriangleUp else
-      if markerStyle==MarkerStyles.Diamond then MarkerStyle.Diamond else MarkerStyle.Circle;
-  //    if markerStyle==MarkerStyles.FilledCircle then MarkerStyle.FilledCircle else
     Boolean ok "True, if all calls are ok";
 
   algorithm
@@ -349,8 +316,8 @@ within a model.
 
     // Plot real and imaginary part of eigenvalues
     if removePrevious then
-      ok := removePlots();
-      createPlot(id= 1,
+      ok := Plot.removePlots();
+      Plot.createPlot(id= 1,
         position=position,
         leftTitleType = 2,
         leftTitle = "Im",
@@ -364,51 +331,13 @@ within a model.
         legendLocation = 2,
         legendHorizontal = false);
     end if;
-    plotArray(
+    Plot.plotArray(
       x= eigenvalues[:, 1],
       y= eigenvalues[:, 2],
       legend=legend,
       color=markerColor,
       pattern = LinePattern.None,
-      marker = markerStyle2);
-
-  //   removePlots();
-  // function createPlot "Create plot window"
-  //   input Integer id := 0 "Window id";
-  //   input Integer position[4] "Window Position";
-  //   input String x := "time" "Independent variable";
-  //   input String y[:] "Variables";
-  //   input String heading := "" "Plot heading";
-  //   input Real range[4] := {0.0, 1.0, 0.0, 1.0} "Range";
-  //   input Boolean erase := true "Start with a fresh window";
-  //   input Boolean autoscale := true "Autoscaling of y-axis";
-  //   input Boolean autoerase := true "Erase previous when replotting";
-  //   input Boolean autoreplot := true "Replot after simulation";
-  //   input Boolean description := false "Include description in label";
-  //   input Boolean grid := false "Add grid";
-  //   input Boolean color := true "Deprecated. Replaced by colors, patterns, markers, and thicknesses.";
-  //   input Boolean online := false "Online plotting";
-  //   input Boolean legend := true "Variable legend";
-  //   input Real timeWindow := 0.0 "Time window for online plotting";
-  //   input String filename := "" "Result file to read data from";
-  //   input Integer legendLocation := 1 "Where to place legend (1 above, 2 right, 3 below, 4-7 inside)";
-  //   input Boolean legendHorizontal := true "Horizontal legend";
-  //   input Boolean legendFrame := false "Draw frame around legend";
-  //   input Boolean suppressMarker := false "Deprecated. Replaced by colors, patterns, markers, and thicknesses.";
-  //   input Boolean logX := false "Logarithmic X scale";
-  //   input Boolean logY := false "Logarithmic Y scale";
-  //   input String legends[size(y, 1)] "Legends";
-  //   input Integer subPlot := 1 "Sub plot number";
-  //   input Boolean uniformScaling := false "Same vertical and horizontal axis increment";
-  //   input Integer leftTitleType := 0 "Type of left axis title (0=none, 1=description, 2=custom)";
-  //   input String leftTitle := "" "Custom left axis title";
-  //   input Integer bottomTitleType := 0 "Type of bottom axis title (0=none, 1=description, 2=custom)";
-  //   input String bottomTitle := "" "Custom bottom axis title";
-  //   input Integer colors[size(y, 1), 3] "Line colors";
-  //   input Integer patterns[size(y, 1)] "Line patterns, e.g., LinePattern.Solid";
-  //   input Integer markers[size(y, 1)] "Line markers, e.g., MarkerStyle.Cross";
-  //   input Real thicknesses[size(y, 1)] "Line thicknesses";
-  //   output Integer _window;
+      marker = markerStyle);
 
     annotation (__Dymola_interactive=true);
   end plotEigenvalues;

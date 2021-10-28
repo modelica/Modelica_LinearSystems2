@@ -69,7 +69,7 @@ algorithm
   print("\nok!");
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-This example demonstrates how to design a lq-controller or a pole placement controller respectively. Compared with example <b>craneController</b>,
+This example demonstrates how to design a lq-controller or a pole placement controller respectively. Compared with example <strong>craneController</strong>,
 the plant is smaller to achieve suitable dynamics for animation.
 The feedback matrices and a simple pre filter for tracking are save to MATLAB files which can be used in
 ModelicaController library.
@@ -81,7 +81,7 @@ It is also shown how to linearize a model of a crane trolley system [1]. The lin
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] F&ouml;llinger O.:</dt>
-<dd> <b>Regelungstechnik</b>.
+<dd> <strong>Regelungstechnik</strong>.
      H&uuml;thig-Verlag.<br>&nbsp;</dd>
 </dl>
 

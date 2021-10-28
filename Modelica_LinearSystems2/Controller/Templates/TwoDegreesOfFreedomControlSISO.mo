@@ -74,7 +74,7 @@ The functionality of such control system structures is described in [1].
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Looye, G. et al. (2005):</dt>
-<dd> <b>Nonlinear Inverse Models for Control</b>.
+<dd> <strong>Nonlinear Inverse Models for Control</strong>.
     In Proceedings of Modelica Conference 2005, pp. 267-279.<br>&nbsp;</dd>
 </dl>
 </html>"));

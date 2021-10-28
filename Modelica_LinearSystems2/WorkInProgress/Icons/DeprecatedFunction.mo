@@ -10,7 +10,7 @@ partial function DeprecatedFunction "Icon for a function which is deprecated"
           lineColor={255,0,0},
           pattern=LinePattern.Dash)}), Documentation(info="<html>
 <p>
-This icon is designed for a <b>function</b>
+This icon is designed for a <strong>function</strong>
 </p>
 </html>"));
 

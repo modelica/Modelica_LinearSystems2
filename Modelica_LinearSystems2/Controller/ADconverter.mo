@@ -47,7 +47,7 @@ else
           textString="%sampleFactor")}),
     Documentation(info="<html>
 <p>
-If <b>discrete</b> block, the output y is sampled according to sample time
+If <strong>discrete</strong> block, the output y is sampled according to sample time
 sampleClock.sampleTime * sampleFactor, where sampleClock.sampleTime
 is defined globally in the outer component sampleClock and
 sampleFactor is an Integer parameter of component Sampler.
@@ -59,7 +59,7 @@ provided precision of the AD converter defined via parameter bits
 (e.g. bits = 12 is the precision of simple AD converters).
 </p>
 <p>
-If <b>continuous</b> block, the output y is identical to the input u,
+If <strong>continuous</strong> block, the output y is identical to the input u,
 but is limited by y_min and y_max.
 </p>
 </html>"));

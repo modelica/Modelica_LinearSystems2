@@ -32,7 +32,8 @@ algorithm
     legendHorizontal=false,
     legendLocation=Types.LegendLocation.Above),Records.Diagram(
     curve=curves,
-    heading="LegendLocation.Right",
+    heading="LegendLocation.Right, legendHorizontal=false",
+    legendHorizontal=false,
     legendLocation=Types.LegendLocation.Right),Records.Diagram(
     curve=curves,
     heading="LegendLocation.Below",

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 function diagram "Plot one diagram"
-  import Modelica_LinearSystems2.Utilities.Plot.Types;
+  //import Modelica_LinearSystems2.Utilities.Plot.Types;
   import Modelica_LinearSystems2.Utilities.Plot.Internal;
 
   input Modelica_LinearSystems2.Utilities.Plot.Records.Diagram diagram
@@ -21,23 +21,24 @@ algorithm
                device.diagramWidth,
                diagram.heightRatio*device.diagramWidth}*mmToPixel;
 
-  id:= createPlot(id=-1,
-                  position=integer(position),
-                  erase=true,
-                  autoscale=true,
-                  autoerase=false,
-                  subPlot=1,
-                  heading=diagram.heading,
-                  grid=diagram.grid,
-                  logX=diagram.logX,
-                  logY=diagram.logY,
-                  bottomTitle=diagram.xLabel,
-                  leftTitle=diagram.yLabel,
-                  color=device.autoLineColor,
-                  legend=diagram.legend,
-                  legendHorizontal=diagram.legendHorizontal,
-                  legendFrame=diagram.legendFrame,
-                  legendLocation=Integer(diagram.legendLocation));
+  id:= DymolaCommands.Plot.createPlot(
+    id=-1,
+    position=integer(position),
+    erase=true,
+    autoscale=true,
+    autoerase=false,
+    subPlot=1,
+    heading=diagram.heading,
+    grid=diagram.grid,
+    logX=diagram.logX,
+    logY=diagram.logY,
+    bottomTitle=diagram.xLabel,
+    leftTitle=diagram.yLabel,
+    color=device.autoLineColor,
+    legend=diagram.legend,
+    legendHorizontal=diagram.legendHorizontal,
+    legendFrame=diagram.legendFrame,
+    legendLocation=Integer(diagram.legendLocation));
 
   for i in 1:nCurves loop
     /*
@@ -58,13 +59,14 @@ algorithm
     */
 
     if diagram.curve[i].autoLine then
-      OK :=plotArray(diagram.curve[i].x,
-                     diagram.curve[i].y,
-                     legend=diagram.curve[i].legend,
-                     id=id,
-                     erase=false);
+      OK := DymolaCommands.Plot.plotArray(
+        diagram.curve[i].x,
+        diagram.curve[i].y,
+        legend=diagram.curve[i].legend,
+        id=id,
+        erase=false);
     else
-      OK := plotArray(
+      OK := DymolaCommands.Plot.plotArray(
         diagram.curve[i].x,
         diagram.curve[i].y,
         legend=diagram.curve[i].legend,

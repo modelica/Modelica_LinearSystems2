@@ -35,8 +35,8 @@ algorithm
   annotation ( Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Matrices.<b>norm</b>(A);
-Matrices.<b>norm</b>(A, p=2);
+Matrices.<strong>norm</strong>(A);
+Matrices.<strong>norm</strong>(A, p=2);
 </pre></blockquote>
 <h4>Description</h4>
 <p>
@@ -53,13 +53,13 @@ p-norm of matrix A. The only allowed values for p are</p>
 Note, for any matrices A1, A2 the following inequality holds:
 </p>
 <blockquote><pre>
-Matrices.<b>norm</b>(A1+A2,p) &le; Matrices.<b>norm</b>(A1,p) + Matrices.<b>norm</b>(A2,p)
+Matrices.<strong>norm</strong>(A1+A2,p) &le; Matrices.<strong>norm</strong>(A1,p) + Matrices.<strong>norm</strong>(A2,p)
 </pre></blockquote>
 <p>
 Note, for any matrix A and vector v the following inequality holds:
 </p>
 <blockquote><pre>
-Vectors.<b>norm</b>(A*v,p) &le; Matrices.<b>norm</b>(A,p)*Vectors.<b>norm</b>(A,p)
+Vectors.<strong>norm</strong>(A*v,p) &le; Matrices.<strong>norm</strong>(A,p)*Vectors.<strong>norm</strong>(A,p)
 </pre></blockquote>
 </html>"));
 end norm;

@@ -3,16 +3,18 @@ function convertToDymolaPattern
   "Convert from pattern type of Modelica_LinearSystems2 to Dymola pattern"
   import Pattern = Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern;
 
-  input Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern pattern
+  input Pattern pattern
     "Enumeration value of line pattern used in Modelica_LinearSystems2";
   output LinePattern result
     "Enumeration value of line pattern used in Dymola";
 algorithm
-  result := if pattern == Pattern.None then LinePattern.None else if pattern ==
-    Pattern.Solid then LinePattern.Solid else if pattern == Pattern.Dash
-     then LinePattern.Dash else if pattern == Pattern.Dot then LinePattern.Dot
-     else if pattern == Pattern.DashDot then LinePattern.DashDot else if
-    pattern == Pattern.DashDotDot then LinePattern.DashDotDot else
+  result :=
+    if pattern == Pattern.None       then LinePattern.None else
+    if pattern == Pattern.Solid      then LinePattern.Solid else
+    if pattern == Pattern.Dash       then LinePattern.Dash else
+    if pattern == Pattern.Dot        then LinePattern.Dot else
+    if pattern == Pattern.DashDot    then LinePattern.DashDot else
+    if pattern == Pattern.DashDotDot then LinePattern.DashDotDot else
     LinePattern.Solid;
 
   annotation (Inline=true, Documentation(info="<html>

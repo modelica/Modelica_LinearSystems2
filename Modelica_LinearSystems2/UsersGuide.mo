@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2;
+﻿within Modelica_LinearSystems2;
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
 
@@ -10,7 +10,7 @@ package UsersGuide "User's Guide"
 
       annotation (Documentation(info="<html>
 <p>
-Within the Modelica_LinearSystems2 Library the operator record <b>Complex</b>
+Within the Modelica_LinearSystems2 Library the operator record <strong>Complex</strong>
 is widely used. This record was introduced together with Modelica Standard
 Library&nbsp;3.2 as a&nbsp;top-level record outside of the Modelica Library.
 Introducing this record, a&nbsp;complex number, e.g. c&nbsp;=&nbsp;1&nbsp;+&nbsp;2j,
@@ -72,53 +72,89 @@ numbers, are collected in
       annotation (Documentation(info="<html>
 <p>
 Polynomials with real coefficients are defined via record
-Modelica_LinearSystems2.Math.Polynomial. Read first the previous section about
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial\">Modelica_LinearSystems2.Math.Polynomial</a>.
+Read first the previous section about
 Complex numbers to understand how records, functions in records and the coming
 operator overloading technique works. The Polynomial record is equivalent to
-the Complex record. A screenshot is shown in the next figure:
+the Complex record. A&nbsp;screenshot is shown in the next figure:
 </p>
-<blockquote>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial1.png\"/> </p>
-</blockquote>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial1.png\"/>
+</div>
 <p>
-A Polynomial is constructed by the command Polynomial(coefficientVector), where
+A&nbsp;Polynomial is constructed by the command <code>Polynomial(coefficientVector)</code>, where
 the input argument provides the polynomial coefficients in descending order.
-In the following figure, a typical session in the command window is shown
-(try it, e.g., in Dymolas command window):
+In the following figure, a&nbsp;typical session in the command window is shown
+(try it, e.g., in Dymola command window):
 </p>
-<blockquote>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial2.png\"/> </p>
-</blockquote>
+
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.Math.Polynomial
+// = true
+
+x = Polynomial.x()
+p1 = -6*x^2 + 4*x -3
+p1
+// -6*x^2 + 4*x - 3
+String(p1)
+//  = \"-6*x^2 + 4*x - 3\"
+
+int_p = Polynomial.integral(p1)
+String(int_p)
+//  = \"-2*x^3 + 2*x^2 - 3*x\"
+
+p2 = 3*p1
+p3 = p2+p1
+p3
+// -24*x^2 + 16*x - 12
+
+r = Polynomial.roots(p3, printRoots=true)
+//  =
+//    0.333333 + 0.62361*j
+//    0.333333 - 0.62361*j
+
+der_p = Polynomial.derivative(p1)
+String(der_p)
+//  = \"-12*x + 4\"
+
+Polynomial.evaluate(der_p, 1)
+//  = -8.0
+</pre></blockquote>
+
 <p>
 After defining the import statement to get Polynomial as an abbreviation for
-Modelica_LinearSystems2.Polynomial, the coefficients are given as vector input
-to \"Polynomial()\". Via the operator-'String' function (called by String(p))
-Polynomial p is pretty printed. Besides all elementary operations, such as
-operator '+', '*', functions to compute the integral or the derivative are provide.
-With function \"evaluate(..)\" the Polynomial is evaluated for a given value x.
-With function \"roots\", the roots of the Polynomial are evaluated and are returned
-as a Vector of Complex numbers. If the optional second input argument printRoots
+Modelica_LinearSystems2.Math.Polynomial, the coefficients are given as vector input
+to <code>Polynomial()</code>. Via the operator-'String' function (called by <code>String(p)</code>)
+polynomial <code>p</code> is pretty printed. Besides all elementary operations, such as
+operator <code>'+'</code> or <code>'*'</code>, functions to compute the integral or
+the derivative are provided.
+With function <code>evaluate(..)</code> the Polynomial is evaluated for a&nbsp;given
+value&nbsp;<var>x</var>.
+With function <code>roots</code>, the roots of the Polynomial are evaluated and are returned
+as a&nbsp;vector of complex numbers. If the optional second input argument <code>printRoots</code>
 is set to true, the roots are at once also nicely printed.
 </p>
 <p>
-With function \"fitting\", a polynomial can be determined that approximates given
-table values. Finally with function \"plot\", the interesting range of x is
+With function <code>fitting()</code>, a&nbsp;polynomial can be determined that
+approximates given table values.
+Finally with function <code>plot()</code>, the interesting range of&nbsp;<var>x</var> is
 automatically determined (via calculating the roots of the polynomial and of its
-derivative) and plotted. A typical plot is shown in the next figure:
+derivative) and plotted. A&nbsp;typical plot is shown in the next figure:
 </p>
-<blockquote>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial3.png\"/> </p>
-</blockquote>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial3.png\"/>
+</div>
 <p>
-Several other examples of Polynomial are available in Polynomial.Examples.
+Several other examples of Polynomial are available in
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.Examples\">Polynomial.Examples</a>.
 In Dymola, select the function with the right mouse button and click \"Ok\" on
 the resulting menu which provides the possibility to define all the input arguments.
 Since the Examples function do not have any input arguments, only the \"Ok\"
 button is present:
 </p>
-<blockquote>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial4.png\"/> </p>
-</blockquote>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial4.png\"/>
+</div>
 </html>"));
     end Polynomials;
 
@@ -136,95 +172,138 @@ functions are provided that operate on the
 corresponding data structure. Currently, the following
 linear system representations are available:
 </p>
-<table border=1 cellspacing=0 cellpadding=2>
-  <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.StateSpace\">StateSpace</a></td>
-      <td>Multi input, multi output, linear differential equation systems in state space form:
-<pre>
-    <b>der</b>(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
-        <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>
-
-</pre>
-      </td>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <caption align=\"bottom\">Various linear system representations</caption>
+  <tr>
+    <th>Representation</th>
+    <th>Description</th>
   </tr>
-  <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.TransferFunction\">TransferFunction</a></td>
-      <td>Single input, single output, transfer functions defined via a numerator
-          and a denominator polynomial n(s) and d(s) respectively:
-<pre>
-        n(s)                                2*s+3
-   y = ------ * u,  for example:   y = ----------------- * u
-        d(s)                            4*s^2 + 5*s + 6
+  <tr>
+    <td> record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.StateSpace\">StateSpace</a></td>
+    <td> Multi input, multi output, linear differential equation systems in state space form:
+<blockquote><pre>
+<strong>der</strong>(<strong>x</strong>) = <strong>A</strong> * <strong>x</strong> + <strong>B</strong> * <strong>u</strong>
+    <strong>y</strong>  = <strong>C</strong> * <strong>x</strong> + <strong>D</strong> * <strong>u</strong>
 
-</pre>
-      </td>
+</pre></blockquote>
+    </td>
   </tr>
-  <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles\">ZerosAndPoles</a></td>
-      <td> Single input, single output, transfer function defined via the products of
+  <tr>
+    <td> record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.TransferFunction\">TransferFunction</a></td>
+    <td> Single input, single output, transfer functions defined via a&nbsp;numerator
+         and a&nbsp;denominator polynomial n(s) and d(s) respectively:
+<blockquote><pre>
+     n(s)                                2*s+3
+y = ------ * u,  for example:   y = ----------------- * u
+     d(s)                            4*s^2 + 5*s + 6
+
+</pre></blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td> record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles\">ZerosAndPoles</a></td>
+    <td> Single input, single output, transfer function defined via the products of
            its zeros z and poles p, respectively;
-<pre>
-         product(s - z[i])
-  y = k*------------------- * u
-         product(s - p[i])
+<blockquote><pre>
+       product(s - z[i])
+y = k*------------------- * u
+       product(s - p[i])
 
-</pre>
+</pre></blockquote>
 
-A description with zeros and poles is problematic: For example,
-a small change in the imaginary part of a conjugate complex pole pair,
-leads no longer to a transfer function with real coefficients.
-If the same zero or pole is present twice or more, then a diagonal state space
+A&nbsp;description with zeros and poles is problematic: For example,
+a&nbsp;small change in the imaginary part of a&nbsp;conjugate complex pole pair,
+leads no longer to a&nbsp;transfer function with real coefficients.
+If the same zero or pole is present twice or more, then a&nbsp;diagonal state space
 form is no longer possible. This means that the structure is
 very sensitive if zeros or poles are close together.
 For this and other reasons, internally, this data structure
 stores the zeros and poles as first and second order
 polynomials with real coefficients:
-<pre>
-         product(s+n1[i]) * product(s^2+n2[i,1]*s+n2[i,2])
-  y = k*---------------------------------------------------
-         product(s+d1[i]) * product(s^2+d2[i,1]*s+d2[i,2])
+<blockquote><pre>
+       product(s+n1[i]) * product(s^2+n2[i,1]*s+n2[i,2])
+y = k*---------------------------------------------------
+       product(s+d1[i]) * product(s^2+d2[i,1]*s+d2[i,2])
 
-</pre></td>
+</pre></blockquote>
+    </td>
   </tr>
-  <tr><td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace\">DiscreteStateSpace</a></td>
-      <td> Multi input, multi output, linear difference equation system
+  <tr>
+    <td> record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace\">DiscreteStateSpace</a></td>
+    <td> Multi input, multi output, linear difference equation system
           in state space form:
-<pre>
-     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
-     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
+<blockquote><pre>
+<strong>x</strong>(Ts*(k+1)) = <strong>A</strong> * <strong>x</strong>(Ts*k) + <strong>B</strong> * <strong>u</strong>(Ts*k)
+<strong>y</strong>(Ts*k)     = <strong>C</strong> * <strong>x</strong>(Ts*k) + <strong>D</strong> * <strong>u</strong>(Ts*k)
+<strong>x</strong>_continuous(Ts*k) = <strong>x</strong>(Ts*k) + <strong>B2</strong> * <strong>u</strong>(Ts*k)
 
-</pre>
-with <b>Ts</b> the sample time and <b>k</b>
+</pre></blockquote>
+with <code>Ts</code> the sample time and <code>k</code>
 the index of the actual sample instance (k=0,1,2,3,...).
-<b>x</b>(t) is the discrete state vector and <b>x</b>_continuous(t)
+<strong>x</strong>(t) is the discrete state vector and <strong>x</strong>_continuous(t)
 is the state vector of the continuous system from which the
-discrete block has been derived by a state transformation,
-in order to remove dependencies of past values of <b>u</b>.<br>
-      </td>
+discrete block has been derived by a&nbsp;state transformation,
+in order to remove dependencies of past values of <strong>u</strong>.<br>
+    </td>
   </tr>
+<!--
+  <tr>
+    <td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles\">DiscreteZerosAndPoles</a></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>record&nbsp;<a href=\"modelica://Modelica_LinearSystems2.DiscreteTransferFunction\">DiscreteTransferFunction</a></td>
+    <td></td>
+  </tr>
+-->
 </table>
 
 <p>
 It is planned to add linear system descriptions such as
-DiscreteTransferFunction,
 DiscreteFactorized, FrequencyResponse, and DiscreteFrequencyResponse,
 in the future. Furthermore, several useful functions are not yet
 available in the records above. They will also be added in the future.
 </p>
 
 <p>
-Below, a typical session in the command window is shown:
+Below, a&nbsp;typical session in the command window is shown:
 </p>
 
-<blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction1.png\">
-</blockquote>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.TransferFunction
+//  = true
+<strong>import</strong> Modelica_LinearSystems2.ZerosAndPoles
+//  = true
+
+s = TransferFunction.s()
+p = ZerosAndPoles.p()
+
+tf1 = (s + 2)/(2*s^2 + 3*s +4)
+String(tf1)
+//  = \"(s + 2)/(2*s^2 + 3*s + 4)\"
+
+zp1 = 4*(p + 1)/((p - 1)*(p^2 - 4*p + 13))
+String(zp1)
+//  = \"4*(p + 1) / ( (p - 1)*(p^2 - 4*p + 13) )\"
+
+tf2 = ZerosAndPoles.Conversion.toTransferFunction(zp1)
+tf2
+// (4*s + 4)/(s^3 - 5*s^2 + 17*s - 13)
+
+tf3 = tf1*tf2
+tf3
+// (4*s^2 + 12*s + 8)/(2*s^5 - 7*s^4 + 23*s^3 + 5*s^2 + 29*s - 52)
+
+TransferFunction.Plot.bode(tf3)
+</pre></blockquote>
 
 <p>
-The last command (plotBode) results in the following frequency response:
+The last command (<code>Plot.bode</code>) results in the following frequency response:
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction2.png\">
-</blockquote>
+</div>
 
 <p>
 Note, the interesting frequency range is automatically determined
@@ -233,34 +312,43 @@ poles and zeros).
 </p>
 
 <p>
-Transfer function tf3 can be transformed into a state
+Transfer function <code>tf3</code> can be transformed into a&nbsp;state
 space description with command
-ss=StateSpace(tf3) and an poles-and-zeros plot and print out is then available via StateSpace.Plot.polesAndZeros(ss)
+<code>ss&nbsp;= StateSpace(tf3)</code> and a&nbsp;poles-and-zeros plot and
+print out is then available via <code>StateSpace.Plot.polesAndZeros(ss)</code>.
 </p>
 
-<blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction4.png\">
-</blockquote>
+<blockquote><pre>
+<strong>import</strong> Modelica_LinearSystems2.StateSpace
+//  = true
+
+ss = StateSpace(tf3)
+StateSpace.Plot.polesAndZeros(ss)
+</pre></blockquote>
 
 <p>
 resulting in:
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction3.png\">
-</blockquote>
+</div>
 
 <p>
 It is also possible to linearize any Modelica model at
 the start time (after initialization has been performed).
 This is especially useful if the model is initialized in
 steady state. For example, the command
-StateSpace.Import.fromModel(\"xxx\") results in:
+<code>StateSpace.Import.fromModel(&quot;xxx&quot;)</code> results in:
 </p>
 
-<blockquote>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/TransferFunction5.png\">
-</blockquote>
+
+<blockquote><pre>
+ss2 = StateSpace.Import.fromModel(\"Modelica.Mechanics.Rotational.Examples.First\")
+ev = StateSpace.Analysis.eigenValues(ss2)
+ev
+// {-0.0595186 + 76.3757*j, -0.0595186 - 76.3757*j, -0.714296, 3.0963e-17}
+</pre></blockquote>
 
 <p>
 Also several
@@ -269,18 +357,18 @@ are provided in. Typical frequency responses of implemented filters
 are shown in the next figure:
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4Filters.png\">
-</blockquote>
+</div>
 
 <p>
 The step responses of the same low pass filters are shown in the next figure,
-starting from a steady state initial filter with initial input = 0.2:
+starting from a&nbsp;steady state initial filter with initial input equal to&nbsp;0.2:
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4FiltersStepResponse.png\">
-</blockquote>
+</div>
 </html>"));
     end LinearSystemDataStructures;
 
@@ -343,16 +431,17 @@ purposes), in order that other Modelica tools can provide the same functionality
 <p>All files in this directory (Modelica_LinearSystems2) and in all
 subdirectories, especially all files that build package \"Modelica_LinearSystems2\" and all
 files in \"Modelica_LinearSystems2/Resources/\" and \"Modelica_LinearSystems2/help/\"
-are licensed by <b><u>DLR</u></b> under the
-<b><u>3-Clause BSD License</u></b>.</p>
+are licensed by <strong><u>DLR</u></strong> under the
+<strong><u>3-Clause BSD License</u></strong>.</p>
 
-<p style=\"margin-left: 40px;\"><b>Licensor:</b><br>
-<a href=\"https://www.dlr.de/sr/en\">Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)</a><br>
-Institut f&uuml;r Systemdynamik und Regelungstechnik<br>
-Postfach 1116<br>
-D-82230 Wessling<br>
+<h4>Licensor</h4>
+<p>
+<a href=\"https://www.dlr.de/sr/en\">Deutsches Zentrum f&uuml;r Luft- und Raumfahrt (DLR)</a><br>
+Institut f&uuml;r Systemdynamik und Regelungstechnik (SR)<br>
+M&uuml;nchener Straße 20<br>
+D-82234 We&szlig;ling<br>
 Germany<br>
-email: Martin.Otter@dlr.de
+email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
 </p>
 
 <!--
@@ -422,25 +511,25 @@ This library is based on the following references:
     <tr>
       <td valign=\"top\">[Astroem1997]</td>
       <td valign=\"top\">K.J. Astr&ouml;m and B. Wittenmark,
-        <i>Computer Controlled Systems: Theory and Design</i>,
+        <em>Computer Controlled Systems: Theory and Design</em>,
         Prentice Hall, 3rd edition, ISBN 978-0133148992, 1997.</td>
     </tr>
     <tr>
       <td valign=\"top\">[Datta2004]</td>
       <td valign=\"top\">B.N. Datta,
-        <i>Numerical Methods for Linear Control Systems</i>,
+        <em>Numerical Methods for Linear Control Systems</em>,
         Elsevier Academic Press, ISBN:978-0122035906, 2004.</td>
     </tr>
     <tr>
       <td valign=\"top\">[Golub1996]</td>
       <td valign=\"top\">G.H. Golub and C.F. Van Loan,
-        <i>Matrix Computations</i>,
+        <em>Matrix Computations</em>,
         Johns Hopkins University Press, 3rd edition, ISBN 978-0801854149, 1996.</td>
     </tr>
     <tr>
       <td valign=\"top\">[Tietze2002]</td>
       <td valign=\"top\">U. Tietze and C. Schenk,
-        <i>Halbleiter-Schaltungstechnik</i>,
+        <em>Halbleiter-Schaltungstechnik</em>,
         Springer Verlag, 12. Auflage, ISBN 978-3540428497, 2002.</td>
     </tr>
     <tr>
@@ -540,18 +629,8 @@ The following classes were obsolete and removed from the Library.
       annotation (Documentation(info="<html>
 <p>
 This version requires the <strong>Modelica 4.0.0</strong> Library.
-It is backward compatible to the previous version 2.4.0.
+There is a&nbsp;limited backward compatibility to the previous version 2.4.1.
 </p>
-
-<h4>
-Improvements in this version
-</h4>
-
-<ul>
-<li> Utilize ModelicaIO functions for matrix I/O, see issue
-     <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
-     Concerning functions are marked obsolete.</li>
-</ul>
 
 <h4>
 Obsolete operator record Modelica_LinearSystems2.Math.Complex
@@ -578,6 +657,38 @@ for some details and
 <a href=\"modelica://Modelica_LinearSystems2.Math.Complex\">Modelica_LinearSystems2.Math.Complex</a>
 for inheritance.
 </p>
+</html>"));
+    end Version_2_5_0;
+
+    class Version_2_4_1 "Version 2.4.1 (October 29, 2021)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>
+This version requires the <strong>Modelica 4.0.0</strong> Library.
+It is backward compatible to the previous version 2.4.0.
+</p>
+
+<h4>
+Improvements in this version
+</h4>
+
+<ul>
+  <li> Utilize ModelicaIO functions for matrix I/O, see issue
+       <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
+       Concerning functions are marked obsolete, see below.
+       </li>
+  <li> Use functions from DymolaCommands library instead of Dymola's build-in functions,
+       see issue <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/66\">#66</a>.
+       </li>
+  <li> Disable an assert causing function crash in
+       <a href=\"modelica://Modelica_LinearSystems2.Utilities.Import.rootLocusOfModel\">Utilities.Import.rootLocusOfModel</a>,
+       see issue <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/130\">#130</a>.
+       </li>
+  <li> Over <a href=\"modelica://Modelica_LinearSystems2/Resources/Documentation/Version-2.4.1/ResolvedGitHubIssues.html\">20</a>
+       issues (including pull requests) have been addressed for this release.
+       </li>
+</ul>
 
 
 <h4>
@@ -616,14 +727,15 @@ in the future.
      instead</li>
 </ul>
 </html>"));
-    end Version_2_5_0;
+    end Version_2_4_1;
+
 
     class Version_2_4_0 "Version 2.4.0 (June 26, 2020)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
-<p>This version requires the <b>Modelica 4.0.0</b> Library.
-It is <b>backward compatible</b> to the previous version 2.3.5.</p>
+<p>This version requires the <strong>Modelica 4.0.0</strong> Library.
+It is <strong>backward compatible</strong> to the previous version 2.3.5.</p>
 
 <h4>
 Improvements in this version:
@@ -648,8 +760,8 @@ Improvements in this version:
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
-<p>This version requires the <b>Modelica 3.2.3</b> Library.
-It is <b>backward compatible</b> to the previous version 2.3.4.</p>
+<p>This version requires the <strong>Modelica 3.2.3</strong> Library.
+It is <strong>backward compatible</strong> to the previous version 2.3.4.</p>
 
 <h4>
 Improvements in this version:
@@ -681,8 +793,8 @@ Bug fixes performed in this version:
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
-<p>This version requires the <b>Modelica 3.2.2</b> Library.
-It is <b>backward compatible</b> to the previous version 2.3.3.</p>
+<p>This version requires the <strong>Modelica 3.2.2</strong> Library.
+It is <strong>backward compatible</strong> to the previous version 2.3.3.</p>
 
 <h4>
 Improvements in this version:
@@ -727,30 +839,30 @@ Bug fixes performed in this version:
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
-<p>This version requires the <b>Modelica 3.2.1</b> Library.
-It is <b>backward compatible</b> to the previous version 2.3.2</p>
+<p>This version requires the <strong>Modelica 3.2.1</strong> Library.
+It is <strong>backward compatible</strong> to the previous version 2.3.2</p>
 
 <h4>
 Improvements performed in version 2.3.3 Build 1 (Sept. 8, 2015):
 </h4>
 
 <ul>
-<li> New function StateSpace.Transformation.<b>toBalancedForm</b><br>
+<li> New function StateSpace.Transformation.<strong>toBalancedForm</strong><br>
      Performs a similarity transformation to a balanced form of the
      linear system. The goal is to find state so that further numerical computations
      on the system are more reliable.</li>
 
 <li> Improved functions<br>
-     &nbsp;&nbsp;&nbsp;<b>ModelAnalysis.Poles</b><br>
-     &nbsp;&nbsp;&nbsp;<b>ModelAnalysis.Zeros</b><br>
-     &nbsp;&nbsp;&nbsp;StateSpace.<b>Plot.polesAndZeros</b><br>
+     &nbsp;&nbsp;&nbsp;<strong>ModelAnalysis.Poles</strong><br>
+     &nbsp;&nbsp;&nbsp;<strong>ModelAnalysis.Zeros</strong><br>
+     &nbsp;&nbsp;&nbsp;StateSpace.<strong>Plot.polesAndZeros</strong><br>
      System is now balanced, before eigenvalues and transmission zeros are computed
      (to improve numerics for systems with largely varying zeros and poles).<br>
      By default, the poles/zeros are also printed to the output window (and not only plotted)</li>
 
 <li> Improved functions<br>
-     &nbsp;&nbsp;&nbsp;StateSpace.<b>Plot.bodeSISO</b><br>
-     &nbsp;&nbsp;&nbsp;StateSpace.<b>Plot.bodeMIMO</b><br>
+     &nbsp;&nbsp;&nbsp;StateSpace.<strong>Plot.bodeSISO</strong><br>
+     &nbsp;&nbsp;&nbsp;StateSpace.<strong>Plot.bodeMIMO</strong><br>
      System is now balanced, before bode plot is computed
      (to improve numerics for systems with largely varying zeros and poles).<br>
      The computation of the bode plot is now 1-2 orders of magnitudes faster
@@ -774,9 +886,9 @@ Bug fixes performed in version 2.3.3 Build 1 (Sept. 8, 2015):
 </h4>
 
 <ul>
-<li> StateSpace.<b>Plot.bodeSISO</b><br>
-     StateSpace.<b>Plot.bodeMIMO</b><br>
-     ZerosAndPoles.<b>Plot.bode</b><br>
+<li> StateSpace.<strong>Plot.bodeSISO</strong><br>
+     StateSpace.<strong>Plot.bodeMIMO</strong><br>
+     ZerosAndPoles.<strong>Plot.bode</strong><br>
      Defining logX=false, still computed the frequency vector in logarithmic scale
      (and f_min=0 gave an error). This has been fixed.<br>
      If a system had many zeros and poles with large absolute values,
@@ -810,8 +922,8 @@ Bug fixes performed in version 2.3.3 Build 1 (Sept. 8, 2015):
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
-<p>This version requires the <b>Modelica 3.2.1</b> Library.
-It is is <b>backward compatible</b> to the previous version 2.3.1</p>
+<p>This version requires the <strong>Modelica 3.2.1</strong> Library.
+It is is <strong>backward compatible</strong> to the previous version 2.3.1</p>
 
 
 <h4>
@@ -878,8 +990,8 @@ Bug fixes performed in version 2.3.2 Build 2 (April 17, 2015):
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
-<p>This version requires the <b>Modelica 3.2.1</b> Library.
-It is is <b>backward compatible</b> to the previous version 2.3.</p>
+<p>This version requires the <strong>Modelica 3.2.1</strong> Library.
+It is is <strong>backward compatible</strong> to the previous version 2.3.</p>
 
 
 <h4>
@@ -938,7 +1050,7 @@ Improvements and bug fixes performed in version 2.3.1 Build 1 (Oct. 1, 2013):
 
       annotation (Documentation(info="<html>
 <p>
-This release is <b>backward compatible</b> to the previous version 2.2.
+This release is <strong>backward compatible</strong> to the previous version 2.2.
 It contains the following main improvements (and several minor ones):
 </p>
 
@@ -968,7 +1080,7 @@ It contains the following main improvements (and several minor ones):
 </ul>
 
 <p>
-For <b>versionBuild=4</b> (March 25, 2013), several bug fixes have been performed. In particular:
+For <strong>versionBuild=4</strong> (March 25, 2013), several bug fixes have been performed. In particular:
 </p>
 
 <ul>
@@ -1005,7 +1117,7 @@ For <b>versionBuild=4</b> (March 25, 2013), several bug fixes have been performe
 
       annotation (Documentation(info="<html>
 <p>
-This release is <b>backward compatible</b> to the previous version 2.1.
+This release is <strong>backward compatible</strong> to the previous version 2.1.
 It contains the following improvements:
 </p>
 
@@ -1037,7 +1149,7 @@ New functions/records:
 
       annotation (Documentation(info="<html>
 <p>
-This release is <b>backward compatible</b> to the previous version 2.0.
+This release is <strong>backward compatible</strong> to the previous version 2.0.
 It contains the following improvements:
 </p>
 
@@ -1047,7 +1159,7 @@ New functions/blocks:
 
 <ul>
 <li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.sylvester\">sylvester</a>
-     to solve Sylvester equations \"<b>A</b>*<b>X</b> + <b>X</b>*<b>B</b> = <b>C</b>\"
+     to solve Sylvester equations \"<strong>A</strong>*<strong>X</strong> + <strong>X</strong>*<strong>B</strong> = <strong>C</strong>\"
      using a Schur method.</li>
 
 <li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a>
@@ -1164,7 +1276,7 @@ The following new components have been added:
 </p>
 
 <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.StateSpace.</b></td></tr>
+  <tr><td colspan=\"2\"><strong>Modelica_LinearSystems2.StateSpace.</strong></td></tr>
   <tr><td valign=\"top\"> plotBodeMIMO </td>
       <td valign=\"top\"> Plot bode plot of all transfer functions of a state space system.</td>
   </tr>
@@ -1174,19 +1286,19 @@ The following new components have been added:
                         of a state space system.</td>
   </tr>
 
-  <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.StateSpace.Examples.</b></td></tr>
+  <tr><td colspan=\"2\"><strong>Modelica_LinearSystems2.StateSpace.Examples.</strong></td></tr>
   <tr><td valign=\"top\"> bodePlotMIMO<br>
                         bodePlotSISO </td>
       <td valign=\"top\"> Demonstrate the new Bode plot possibilities.</td>
   </tr>
 
-  <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.TransferFunction.</b></td></tr>
+  <tr><td colspan=\"2\"><strong>Modelica_LinearSystems2.TransferFunction.</strong></td></tr>
   <tr><td valign=\"top\"> fromStateSpaceSISO<br>
                         fromStateSpaceMIMO </td>
       <td valign=\"top\"> Generate transfer functions of a state space system.</td>
   </tr>
 
-  <tr><td colspan=\"2\"><b>Modelica_LinearSystems2.ZerosAndPoles.</b></td></tr>
+  <tr><td colspan=\"2\"><strong>Modelica_LinearSystems2.ZerosAndPoles.</strong></td></tr>
   <tr><td valign=\"top\"> fromStateSpaceSISO<br>
                         fromStateSpaceMIMO </td>
       <td valign=\"top\"> Generate ZerosAndPoles from a state space system.</td>
@@ -1241,11 +1353,11 @@ performed:
      sampling options might be added, e.g., via user definable
      trigger signals.</li>
 <li> The previous Filter sublibrary was replaced by two components
-     <b>Filter</b> and <b>FilterFIR</b> that model IIR and FIR filter.
+     <strong>Filter</strong> and <strong>FilterFIR</strong> that model IIR and FIR filter.
      There are now more options for IIR filters (additional Bessel
      filter + normalized/non-normalized filters).</li>
 <li> The previous NoiseGenerators sublibrary was replaced by
-     component <b>Noise</b>. In most applications only this Noise
+     component <strong>Noise</strong>. In most applications only this Noise
      component is needed in sampled data systems and not the other
      variants in the previous NoiseGenerator library. It is then
      easier for a user to just select this component and not
@@ -1265,10 +1377,10 @@ performed:
      initialized. In the new version, all when-clauses are active during
      initialization and they are evaluated again at the next sample time:
      <pre>
-     <b>when</b> {<b>initial</b>(), <b>sample</b>(Ts,Ts)} <b>then</b>
+     <strong>when</strong> {<strong>initial</strong>(), <strong>sample</strong>(Ts,Ts)} <strong>then</strong>
          // active during initialization and at time = Ts, 2*Ts, 3*Ts, ...
        ...
-     <b>end when</b>;
+     <strong>end when</strong>;
      </pre>
      Furthermore, parameter startTime was removed (= first sample time of
      when-clause after the initialization) since this is nearly never needed
@@ -1331,11 +1443,11 @@ on the Modelica LinearSystems library.
     annotation (Documentation(info="<html>
 <h4>Main Authors</h4>
 <blockquote>
-Martin Otter, Marcus Baur, and Jakub Tobolar<br>
-Deutsches Zentrum f&uuml;r Luft und Raumfahrt e.V. (DLR)<br>
-DLR Institut f&uuml;r Systemdynamik und Regelungstechnik<br>
-Postfach 1116<br>
-D-82230 Wessling<br>
+Martin Otter, Marcus Baur and Jakub Tobolar<br>
+Deutsches Zentrum f&uuml;r Luft- und Raumfahrt (DLR)<br>
+Institut f&uuml;r Systemdynamik und Regelungstechnik (SR)<br>
+M&uuml;nchener Stra&szlig;e 20<br>
+D-82234 We&szlig;ling<br>
 Germany<br>
 email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
 </blockquote>
@@ -1378,7 +1490,7 @@ email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
   end Contact;
   annotation (DocumentationClass=true, Documentation(info="<html>
 <p>
-Library <b>Modelica_LinearSystems2</b> is a Modelica package
+Library <strong>Modelica_LinearSystems2</strong> is a Modelica package
 providing different representations of linear, time invariant differential and
 difference equation systems, as well as typical operations on these
 system descriptions. Additionally, data structures and operations for
@@ -1387,7 +1499,7 @@ above, but are, of course, also useful for other purposes.
 </p>
 
 <p>
-This package contains the <b>user's guide</b> for
+This package contains the <strong>user's guide</strong> for
 the library and has the following content:
 </p>
 <ol>

@@ -24,7 +24,7 @@ partial function NotWorkingYetFunction
           thickness=0.5,
           smooth=Smooth.None)}), Documentation(info="<html>
 <p>
-This icon is designed for a <b>function</b>
+This icon is designed for a <strong>function</strong>
 </p>
 </html>"));
 

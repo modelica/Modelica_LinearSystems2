@@ -6,14 +6,14 @@ model DiscreteStateSpace2
   import Modelica_LinearSystems2.Controller.Types;
   import Modelica.Math.Matrices;
 
-  parameter Real ABCD[:,:] "Continuous linear time-invariant system"
+  parameter Real ABCD[:,:](start=fill(1,2,2)) "Continuous linear time-invariant system"
     annotation(HideResult=true);
 
 protected
-      parameter Real A[:,:] = ABCD[1:end-1,1:end-1];
-      parameter Real B[:,:] = ABCD[1:end-1,end:end];
-      parameter Real C[:,:] = ABCD[end:end,1:end-1];
-      parameter Real D[:,:] = matrix(ABCD[end,end]);
+  parameter Real A[:,:] = ABCD[1:end-1,1:end-1];
+  parameter Real B[:,:] = ABCD[1:end-1,end:end];
+  parameter Real C[:,:] = ABCD[end:end,1:end-1];
+  parameter Real D[:,:] = matrix(ABCD[end,end]);
 public
   final parameter Integer nx=size(A, 1) "Number of states"  annotation(HideResult=true);
   final parameter Integer nu=size(B, 2) "Number of inputs"  annotation(HideResult=true);
@@ -92,13 +92,13 @@ equation
     u_sampled = u;
     pre_u_sampled = pre(u_sampled);
     if withDelay then
-       new_xd = discreteSystem.B*pre_u_sampled + discreteSystem.A*xd;
-       y_sampled = discreteSystem.C*xd + discreteSystem.D*pre_u_sampled;
-       x_sampled = xd + discreteSystem.B2*pre_u_sampled;
+      new_xd = discreteSystem.B*pre_u_sampled + discreteSystem.A*xd;
+      y_sampled = discreteSystem.C*xd + discreteSystem.D*pre_u_sampled;
+      x_sampled = xd + discreteSystem.B2*pre_u_sampled;
     else
-       new_xd = discreteSystem.B*u_sampled + discreteSystem.A*xd;
-       y_sampled = discreteSystem.C*xd + discreteSystem.D*u_sampled;
-       x_sampled = xd + discreteSystem.B2*u_sampled;
+      new_xd = discreteSystem.B*u_sampled + discreteSystem.A*xd;
+      y_sampled = discreteSystem.C*xd + discreteSystem.D*u_sampled;
+      x_sampled = xd + discreteSystem.B2*u_sampled;
     end if;
     xd = pre(new_xd);
   end when;
@@ -129,10 +129,10 @@ initial equation
     end if;
 
   elseif init == Types.Init.InitialOutput and nx>0 then
-     y=y_start;
-     xd[ny+1:nx]=[zeros(nx-ny,ny),identity(nx-ny)]*Modelica.Math.Matrices.solve(identity(nx)-discreteSystem.A,discreteSystem.B*u);
+    y=y_start;
+    xd[ny+1:nx]=[zeros(nx-ny,ny),identity(nx-ny)]*Modelica.Math.Matrices.solve(identity(nx)-discreteSystem.A,discreteSystem.B*u);
 
-//      xd = Modelica.Math.Matrices.equalityLeastSquares(identity(nx)-discreteSystem.A, -discreteSystem.B*u, discreteSystem.C, y_start - discreteSystem.D*u);
+//     xd = Modelica.Math.Matrices.equalityLeastSquares(identity(nx)-discreteSystem.A, -discreteSystem.B*u, discreteSystem.C, y_start - discreteSystem.D*u);
 
   end if;
   annotation (

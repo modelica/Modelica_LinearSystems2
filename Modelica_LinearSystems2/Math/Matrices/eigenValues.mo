@@ -10,7 +10,7 @@ function eigenValues
 
   output Real leftEigenvectors[size(A,1), size(A,2)]
     "Real-valued eigenvector matrix";
- output Real rightEigenvectors[size(A,1), size(A,2)]
+  output Real rightEigenvectors[size(A,1), size(A,2)]
     "Real-valued eigenvector matrix";
 
 protected
@@ -34,15 +34,15 @@ end if;
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-                eigenvalues = Matrices.<b>eigenValues</b>(A);
-(eigenvalues, eigenvectors) = Matrices.<b>eigenValues</b>(A);
+                eigenvalues = Matrices.<strong>eigenValues</strong>(A);
+(eigenvalues, eigenvectors) = Matrices.<strong>eigenValues</strong>(A);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 This function call returns the eigenvalues and
 optionally the (right) eigenvectors of a square matrix
-<b>A</b>. The first column of \"eigenvalues\" contains the real and the
+<strong>A</strong>. The first column of \"eigenvalues\" contains the real and the
 second column contains the imaginary part of the eigenvalues.
 If the i-th eigenvalue has no imaginary part, then eigenvectors[:,i] is
 the corresponding real eigenvector. If the i-th eigenvalue
@@ -50,7 +50,7 @@ has an imaginary part, then eigenvalues[i+1,:] is the conjugate complex
 eigenvalue and eigenvectors[:,i] is the real and eigenvectors[:,i+1] is the
 imaginary part of the eigenvector of the i-th eigenvalue.
 With function
-<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a>,
+<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Modelica.Math.Matrices.eigenValueMatrix</a>,
 a real block diagonal matrix is constructed from the eigenvalues
 such that
 </p>
@@ -70,19 +70,19 @@ and no eigenvalue is zero).
                  2,1,4];
   Real eval;
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   eval := Matrices.eigenValues(A);  // eval = [-0.618, 0;
                                     //          8.0  , 0;
                                     //          1.618, 0];
 </pre></blockquote>
 <p>
-i.e., matrix <b>A</b> has the 3 real eigenvalues -0.618, 8, 1.618.
+i.e., matrix <strong>A</strong> has the 3 real eigenvalues -0.618, 8, 1.618.
 </p>
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Matrices.eigenValueMatrix</a>,
-<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Matrices.singularValues</a>
+<a href=\"modelica://Modelica.Math.Matrices.eigenValueMatrix\">Modelica.Math.Matrices.eigenValueMatrix</a>,
+<a href=\"modelica://Modelica.Math.Matrices.singularValues\">Modelica.Math.Matrices.singularValues</a>
 </p>
 </html>"));
 end eigenValues;

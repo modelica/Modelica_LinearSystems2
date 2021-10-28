@@ -47,7 +47,7 @@ initial equation
     Documentation(info="<html>
 <p>
 This blocks defines the transfer function between the input u and
-the output y as <i>integrator</i>:
+the output y as <em>integrator</em>:
 </p>
 <pre>
           k

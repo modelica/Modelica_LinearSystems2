@@ -1,9 +1,9 @@
 within Modelica_LinearSystems2.WorkInProgress;
 function plotRootLoci
   "Plot root loci of nonlinear Modelica model by linearizing the model for variations of one model parameter"
+  import Simulator = DymolaCommands.SimulatorAPI;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.WorkInProgress.RootLocusOld.Types.MarkerStyles;
 
   input String modelName="Modelica.Mechanics.Rotational.Examples.First"
     "Name of the Modelica model"
@@ -11,7 +11,7 @@ function plotRootLoci
   input Boolean simulate = false
     "Linearize model after simulation (time-consuming!), otherwise linearization of all parameter variants at once"
     annotation (Dialog(__Dymola_compact=false),
-      choices(__Dymola_checkBox=true));
+      choices(checkBox=true));
 
   input Modelica_LinearSystems2.WorkInProgress.Internal.ModelParameters modelParams[:]=
     {Modelica_LinearSystems2.WorkInProgress.Internal.ModelParameters(
@@ -38,11 +38,11 @@ function plotRootLoci
     annotation (Dialog(group="Plot settings"));
   input Boolean useLegend = true "Use legend"
     annotation (Dialog(group="Plot settings", __Dymola_compact=true, __Dymola_descriptionLabel = true),
-      choices(__Dymola_checkBox=true));
+      choices(checkBox=true));
   input Boolean grid = true "Use grid"
     annotation (Dialog(group="Plot settings", __Dymola_compact=true, __Dymola_descriptionLabel = true),
-      choices(__Dymola_checkBox=true));
-  input MarkerStyles markerStyle=MarkerStyles.Square "Style of marker"
+      choices(checkBox=true));
+  input MarkerStyle markerStyle=MarkerStyle.Square "Style of marker"
     annotation (Dialog(group="Plot settings"));
   input Integer markerColorMin[3]={0,0,255}
     "Color of marker for minimum parameter value"
@@ -53,7 +53,7 @@ function plotRootLoci
 
   input Boolean deleteResult = false "Delete result files of linearization"
     annotation (Dialog(__Dymola_compact=false),
-      choices(__Dymola_checkBox=true));
+      choices(checkBox=true));
 protected
   String fileName="dslin" "Name of the result file";
   String fileName2=fileName+".mat" "Name of the result file with extension";
@@ -74,9 +74,9 @@ algorithm
 
   if not simulate then // and simulationOptions.t_linearize==0
     // Linearization of all parameter variants at once
-    ok := translateModel(modelName);
+    ok := Simulator.translateModel(modelName);
     assert(ok, "Translation of model " + modelName + " failed.");
-    ok:=simulateMultiExtendedModel(
+    ok := Simulator.simulateMultiExtendedModel(
       problem=modelName,
       startTime=0,
       stopTime=0,
@@ -93,7 +93,7 @@ algorithm
       fileName2 := fileName+String(i);
       Modelica.Utilities.Streams.print("  ...linearizing "+modelName2);
 
-      ok := simulateModel(
+      ok := Simulator.simulateModel(
         problem=modelName2,
         startTime=0,
         stopTime=simulationOptions.t_linearize,
@@ -102,8 +102,8 @@ algorithm
         outputInterval=simulationOptions.outputInterval,
         tolerance = simulationOptions.tolerance,
         fixedstepsize = simulationOptions.fixedStepSize);
-      ok := importInitial("dsfinal.txt");
-      ok := linearizeModel(
+      ok := Simulator.importInitial("dsfinal.txt");
+      ok := Simulator.linearizeModel(
         problem=modelName2,
         resultFile=fileName2,
         startTime=simulationOptions.t_linearize,

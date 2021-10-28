@@ -78,7 +78,7 @@ equation
       color={0,127,0},
       smooth=Smooth.None));
   connect(dist2,torque. torque[3]) annotation (Line(
-      points={{80,120},{80,90},{24,90},{24,87.3333}},
+      points={{80,120},{80,90},{24,90},{24,84.6667}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(torque.frame_a, revolute2.frame_a) annotation (Line(
@@ -87,7 +87,7 @@ equation
       thickness=0.5,
       smooth=Smooth.None));
   connect(constZero.y, torque.torque[1]) annotation (Line(
-      points={{1,90},{24.5,90},{24.5,84.6667},{24,84.6667}},
+      points={{1,90},{24.5,90},{24.5,87.3333},{24,87.3333}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(constZero.y, torque.torque[2]) annotation (Line(
@@ -114,8 +114,15 @@ equation
       color={95,95,95},
       thickness=0.5,
       smooth=Smooth.None));
-  annotation ( Documentation(info="<html>
-<p>Multibody model of a simple inverted double pendulum system. This physical model is used in various models and functions of the library e.g. for linearization or as a base for linear controller design. The mdel is the same as in Modelica_Controller.Examples.Components.DoublePendulum but with different initial values because the initial values are used as a working point for linearization.</p>
-</html>"), Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-150,
-            -100},{150,100}})));
+  annotation (
+    Documentation(info="<html>
+<p>
+Multibody model of a&nbsp;simple inverted double pendulum system.
+This physical model is used in various models and functions of the
+library, e.g. for linearization or as a&nbsp;base for linear
+controller design.
+The initial values are used as a&nbsp;working point for linearization.
+</p>
+</html>"),
+    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{150,100}})));
 end DoublePendulumInverse;

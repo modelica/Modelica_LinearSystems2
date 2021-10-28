@@ -6,7 +6,9 @@ function runAll
 
   input String dataSpecifier = "data_";
   input String fileSpecifier = "Design";
-  input String directoryName= classDirectory()+ "../" + "Data";
+  input String directoryName = Modelica.Utilities.Files.loadResource(
+    "modelica://Modelica_LinearSystems2/WorkInProgress/Tests/Data/")
+    annotation(Dialog);
   input String outputFile = fileSpecifier+".txt";
   input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.KNV
     "method for pole assignment";

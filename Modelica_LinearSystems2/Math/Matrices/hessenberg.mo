@@ -21,20 +21,20 @@ algorithm
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-     H = Matrices.<b>hessenberg</b>(A);
-(H, U) = Matrices.<b>hessenberg</b>(A);
+     H = Matrices.<strong>hessenberg</strong>(A);
+(H, U) = Matrices.<strong>hessenberg</strong>(A);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function <b>hessenberg</b> computes the Hessenberg matrix <b>H</b>
-of matrix <b>A</b> as well as the orthogonal transformation matrix
-<b>U</b> that holds <b>H</b> = <b>U</b>'*<b>A</b>*<b>U</b>.
+Function <strong>hessenberg</strong> computes the Hessenberg matrix <strong>H</strong>
+of matrix <strong>A</strong> as well as the orthogonal transformation matrix
+<strong>U</strong> that holds <strong>H</strong> = <strong>U</strong>'*<strong>A</strong>*<strong>U</strong>.
 The Hessenberg form of a matrix is computed by repeated Householder
 similarity transformation. The elementary reflectors and the corresponding
 scalar factors are provided by function \"Utilities.toUpperHessenberg()\".
-The transformation matrix <b>U</b> is then computed by
-<a href=\"modelica://Modelica.Math.Matrices.LAPACK.dorghr\">LAPACK.dorghr</a>.
+The transformation matrix <strong>U</strong> is then computed by
+<a href=\"modelica://Modelica.Math.Matrices.LAPACK.dorghr\">Modelica.Math.Matrices.LAPACK.dorghr</a>.
 </p>
 
 <h4>Example</h4>
@@ -64,7 +64,7 @@ The transformation matrix <b>U</b> is then computed by
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.Utilities.toUpperHessenberg\">Matrices.Utilities.toUpperHessenberg</a>
+<a href=\"modelica://Modelica.Math.Matrices.Utilities.toUpperHessenberg\">Modelica.Math.Matrices.Utilities.toUpperHessenberg</a>
 </p>
 </html>",
         revisions="<html>

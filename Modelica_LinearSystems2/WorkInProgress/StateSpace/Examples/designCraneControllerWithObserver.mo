@@ -124,7 +124,7 @@ The linear model is then used as a base for controller design.
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Varga A. (1981):</dt>
-<dd> <b>A Schur method for pole assignment</b>.
+<dd> <strong>A Schur method for pole assignment</strong>.
      IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
 </dl>
 </html>"),    Documentation(info="<html>

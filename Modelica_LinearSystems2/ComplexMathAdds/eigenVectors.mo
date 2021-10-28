@@ -51,11 +51,11 @@ algorithm
   annotation (Documentation(info="<html>
   <h4>Syntax</h4>
   <table>
-  <tr> <td align=right>  (eigenvectors, eigenvalues) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<b>eigenVectors</b>(ss, onlyEigenvectors)  </td> </tr>
+  <tr> <td align=right>  (eigenvectors, eigenvalues) </td><td align=center> =  </td>  <td> StateSpace.Analysis.<strong>eigenVectors</strong>(ss, onlyEigenvectors)  </td> </tr>
   </table>
   <h4>Description</h4>
   <p>
-  Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of a state space system. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <b>ss.A</b>. Just like in <a href=\"modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
+  Calculate the eigenvectors and optionally (onlyEigenvectors=false) the eigenvalues of a state space system. The output <tt>eigenvectors</tt> is a matrix with the same dimension as matrix <strong>ss.A</strong>. Just like in <a href=\"modelica://Modelica.Math.Matrices.eigenValues\">Modelica.Math.Matrices.eigenValues</a>, if the i-th eigenvalue has an imaginary part, then <tt>eigenvectors</tt>[:,i] is the real and <tt>eigenvectors</tt>[:,i+1] is the imaginary part of the eigenvector of the i-th eigenvalue.<br>
   The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
 
 
@@ -72,7 +72,7 @@ algorithm
      Real eigenvectors[2,2];
      Complex eigenvalues[2];
 
-  <b>algorithm</b>
+  <strong>algorithm</strong>
     (eigenvectors, eigenvalues) = Modelica_LinearSystems2.StateSpace.Analysis.eigenVectors(ss, true);
   // eigenvectors = [0.707, 0; 0, 0.707]
   // eigenvalues = {-1 + 1j, -1 - 1j}

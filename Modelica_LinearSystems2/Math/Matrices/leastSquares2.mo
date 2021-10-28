@@ -22,7 +22,7 @@ equations with function \"Matrices.leastSquares2\" failed.");
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-X = Matrices.<b>leastSquares2</b>(A,B);
+X = Matrices.<strong>leastSquares2</strong>(A,B);
 </pre></blockquote>
 
 
@@ -36,24 +36,24 @@ square sense (A may be rank deficient):
 </pre>
 
 <p>
-Several different cases can be distinguished (note, <b>rank</b> is an
+Several different cases can be distinguished (note, <strong>rank</strong> is an
 output argument of this function):
 </p>
 
 <p>
-<b>size(A,1) = size(A,2)</b>
+<strong>size(A,1) = size(A,2)</strong>
 </p>
 
 <p> A solution is returned for a regular, as well as a singular matrix A:
 </p>
 
 <ul>
-<li> <b>rank</b> = size(A,1):<br>
-     A is <b>regular</b> and the returned solution X fulfills the equation
+<li> <strong>rank</strong> = size(A,1):<br>
+     A is <strong>regular</strong> and the returned solution X fulfills the equation
      A*X = B uniquely.</li>
 
-<li> <b>rank</b> &lt; size(A,1):<br>
-     A is <b>singular</b> and no unique solution for equation A*X = B exists.
+<li> <strong>rank</strong> &lt; size(A,1):<br>
+     A is <strong>singular</strong> and no unique solution for equation A*X = B exists.
      <ul>
      <li>  If an infinite number of solutions exists, the one is selected that fulfills
            the equation and at the same time has the minimum norm |x| for all solution
@@ -64,7 +64,7 @@ output argument of this function):
 </ul>
 
 <p>
-<b>size(A,1) &gt; size(A,2):</b>
+<strong>size(A,1) &gt; size(A,2):</strong>
 </p>
 
 <p>
@@ -77,16 +77,16 @@ minimum norm |X| is selected. This gives a unique solution that minimizes both
 </p>
 
 <p>
-<b>size(A,1) &lt; size(A,2):</b>
+<strong>size(A,1) &lt; size(A,2):</strong>
 </p>
 
 <ul>
-<li> <b>rank</b> = size(A,1):<br>
+<li> <strong>rank</strong> = size(A,1):<br>
      There are an infinite number of solutions that fulfill the equation A*X = B.
      From this infinite number, the unique solution is selected that minimizes |X|.
      </li>
 
-<li> <b>rank</b> &lt; size(A,1):<br>
+<li> <strong>rank</strong> &lt; size(A,1):<br>
      There is either no solution of equation A*X = B, or there are again an infinite
      number of solutions. The unique solution X is returned that minimizes
       both |A*X - B| and |X|.</li>
@@ -112,7 +112,7 @@ The function first computes a QR factorization with column pivoting:
 
 <p>
 with R11 defined as the largest leading submatrix whose estimated
-condition number is less than 1/rcond.  The order of R11, <b>rank</b>,
+condition number is less than 1/rcond.  The order of R11, <strong>rank</strong>,
 is the effective rank of A.
 </p>
 
@@ -143,9 +143,9 @@ where Q1 consists of the first \"rank\" columns of Q.
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.leastSquares\">Matrices.leastSquares</a>
+<a href=\"modelica://Modelica.Math.Matrices.leastSquares\">Modelica.Math.Matrices.leastSquares</a>
 (same as leastSquares2, but with a right hand side vector),
-<a href=\"modelica://Modelica.Math.Matrices.solve2\">Matrices.solve2</a>
+<a href=\"modelica://Modelica.Math.Matrices.solve2\">Modelica.Math.Matrices.solve2</a>
 (for square, regular matrices A)
 </p>
 </html>"));

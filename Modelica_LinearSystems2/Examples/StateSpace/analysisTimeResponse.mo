@@ -71,9 +71,9 @@ algorithm
     Documentation(info="<html>
 <p>
 Computes the time response of the system
-StateSpace <i>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i>,
-sampled at <i>Ts=0.01</i> with inititial state <i>x0=[0;0]</i>
-subject to the system input <i>u = ones(samples,2)</i>, (<i>samples</i> is set to 30).
+StateSpace <em>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</em>,
+sampled at <em>Ts=0.01</em> with inititial state <em>x0=[0;0]</em>
+subject to the system input <em>u = ones(samples,2)</em>, (<em>samples</em> is set to 30).
 </p>
 </html>"));
 end analysisTimeResponse;

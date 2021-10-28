@@ -40,9 +40,9 @@ algorithm
 annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-           Z = Matrices.<b>nullspace</b>(A);
+           Z = Matrices.<strong>nullspace</strong>(A);
                  or
-(Z, nullity) = Matrices.<b>nullspace</b>(A);
+(Z, nullity) = Matrices.<strong>nullspace</strong>(A);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -53,20 +53,20 @@ This function calculates a orthonormal basis Z=[z_1, z_2, ...] of the nullspace 
 The nullspace is obtained by svd method. That is, matrix A is dcomposed into the matrices S, U, V:
 </p>
 <blockquote><pre>
-<b>A</b> = <b>U</b><b>S</b><b>V</b><sup><big>H</big></sup>
+<strong>A</strong> = <strong>U</strong><strong>S</strong><strong>V</strong><sup><big>H</big></sup>
 </pre></blockquote>
 <p>
 with the orthonormal matrices U and V and the matrix S with
 </p>
 <blockquote><pre>
-<b>S</b> = [<b>S</b>1, <b>0</b>]
-<b>S</b>1 = [diag(s); <b>0</b>]
+<strong>S</strong> = [<strong>S</strong>1, <strong>0</strong>]
+<strong>S</strong>1 = [diag(s); <strong>0</strong>]
 </pre></blockquote>
 <p>
 with the singular values s={s1, s2, ..., sr} of A and r=rank(A). Note, that S has the same size as A. Since, U and V are orthonormal, we may write
 </p>
 <blockquote><pre>
- <b>U</b><sup><big>H</big></sup>*A*V = [<b>S</b>1, <b>0</b>].
+ <strong>U</strong><sup><big>H</big></sup>*A*V = [<strong>S</strong>1, <strong>0</strong>].
 </pre></blockquote>
 <p>
 Matrix S1 obviously has full column rank and therefore, the left n-r rows (n is the number of columns of A or S) of matrix V span a nullspace of A.

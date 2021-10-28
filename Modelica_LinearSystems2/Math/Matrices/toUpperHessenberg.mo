@@ -49,15 +49,15 @@ algorithm
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-                H = Matrices.<b>toUpperHessenberg</b>(A);
-(H, V, tau, info) = Matrices.<b>toUpperHessenberg</b>(A,ilo, ihi);
+                H = Matrices.<strong>toUpperHessenberg</strong>(A);
+(H, V, tau, info) = Matrices.<strong>toUpperHessenberg</strong>(A,ilo, ihi);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function <b>toUpperHessenberg</b> computes a upper Hessenberg form <b>H</b>
-of a matrix <b>A</b> by orthogonal similarity transformation:
-<b>Q</b>' * <b>A</b> * <b>Q</b> = <b>H</b>. It calls LAPACK function DGEHRD.
+Function <strong>toUpperHessenberg</strong> computes a upper Hessenberg form <strong>H</strong>
+of a matrix <strong>A</strong> by orthogonal similarity transformation:
+<strong>Q</strong>' * <strong>A</strong> * <strong>Q</strong> = <strong>H</strong>. It calls LAPACK function DGEHRD.
 See <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.LAPACK.dgehrd\">Matrices.LAPACK.dgehrd</a>
 for more information about the additional outputs V, tau, info and
 inputs ilo, ihi for more information.

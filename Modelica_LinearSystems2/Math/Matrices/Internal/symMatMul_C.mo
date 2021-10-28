@@ -135,22 +135,22 @@ int c_symMatMul_(doublereal *a, doublereal *b, doublereal *c, char *addi, intege
   </tr>
 </table>
 </html>",        info="<html>
-This function is used to efficiently calculate the matrix <b>X</b> from equation
+This function is used to efficiently calculate the matrix <strong>X</strong> from equation
 <blockquote><pre>
            T
-  <b>X</b> = <b>A</b>*<b>B</b>*<b>A</b> + <b>C</b>.
+  <strong>X</strong> = <strong>A</strong>*<strong>B</strong>*<strong>A</strong> + <strong>C</strong>.
 
 </pre></blockquote>
-with <b>B</b> and <b>C</b> are symmetric matrices. They hold<blockquote><pre>
+with <strong>B</strong> and <strong>C</strong> are symmetric matrices. They hold<blockquote><pre>
 
-   <b>B</b> = <b>B</b>u + <b>B</b>l   and    <b>C</b> = <b>C</b>u + <b>C</b>l,
+   <strong>B</strong> = <strong>B</strong>u + <strong>B</strong>l   and    <strong>C</strong> = <strong>C</strong>u + <strong>C</strong>l,
 
 </pre></blockquote>
 
-where <b>B</b>u and <b>C</b>u with
+where <strong>B</strong>u and <strong>C</strong>u with
 <blockquote><pre>
          T               T
-  <b>B</b>u = <b>B</b>l   and   <b>C</b>u = <b>C</b>l
+  <strong>B</strong>u = <strong>B</strong>l   and   <strong>C</strong>u = <strong>C</strong>l
 
 </pre></blockquote>
 are upper triangular matrices. Furthermore, the matrices are defined such that
@@ -163,21 +163,21 @@ i.e.,
 
 </pre></blockquote>
 and cu,ij respectively.<br>
-Finally, <b>X</b> is given by the sum of a upper triangular matrix and its transposes
+Finally, <strong>X</strong> is given by the sum of a upper triangular matrix and its transposes
 <blockquote><pre>
                  T                   T         T                 T              T     T        T
-  <b>X</b> = <b>A</b>*(<b>B</b>u+<b>B</b>l)*<b>A</b> + (<b>C</b>u+<b>C</b>l) =  <b>A</b>*<b>B</b>u*<b>A</b> + <b>A</b>*<b>B</b>l*<b>A</b> + (<b>C</b>u+<b>C</b>l) = <b>A</b>*<b>B</b>u*<b>A</b> + <b>C</b>u + (<b>A</b>*<b>B</b>u*<b>A</b> + <b>C</b>u) =  <b>E</b> + <b>E</b>
+  <strong>X</strong> = <strong>A</strong>*(<strong>B</strong>u+<strong>B</strong>l)*<strong>A</strong> + (<strong>C</strong>u+<strong>C</strong>l) =  <strong>A</strong>*<strong>B</strong>u*<strong>A</strong> + <strong>A</strong>*<strong>B</strong>l*<strong>A</strong> + (<strong>C</strong>u+<strong>C</strong>l) = <strong>A</strong>*<strong>B</strong>u*<strong>A</strong> + <strong>C</strong>u + (<strong>A</strong>*<strong>B</strong>u*<strong>A</strong> + <strong>C</strong>u) =  <strong>E</strong> + <strong>E</strong>
 
 </pre></blockquote>
 
-Since, <b>X</b> also has to be symmetric, only the upper triangle of <b>X</b> is computed by calculatiing the upper triangle of matrix <b>E</b> and adding the upper trinagle of <b>E</b>'.<br>
-The calculation employs the BLAS functions <b>dtrmm</b> and <b>dgemm</b>.<br><br>
+Since, <strong>X</strong> also has to be symmetric, only the upper triangle of <strong>X</strong> is computed by calculatiing the upper triangle of matrix <strong>E</strong> and adding the upper trinagle of <strong>E</strong>'.<br>
+The calculation employs the BLAS functions <strong>dtrmm</strong> and <strong>dgemm</strong>.<br><br>
 Note, that only the upper trinagle is calculated. The complete solution could be achieved by the command
 <blockquote><pre>
-<b>X</b> := symmetric(<b>X</b>)
+<strong>X</strong> := symmetric(<strong>X</strong>)
 </pre></blockquote>
 
-In contrast to function <i>symMatMul</i> this function is implemented in C-code
+In contrast to function <em>symMatMul</em> this function is implemented in C-code
 </html>"));
 
 end symMatMul_C;

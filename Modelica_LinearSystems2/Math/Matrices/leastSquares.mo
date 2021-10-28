@@ -14,7 +14,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-x = Matrices.<b>leastSquares</b>(A,b);
+x = Matrices.<strong>leastSquares</strong>(A,b);
 </pre></blockquote>
 <h4>Description</h4>
 <p>

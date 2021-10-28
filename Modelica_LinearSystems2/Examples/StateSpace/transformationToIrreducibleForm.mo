@@ -47,7 +47,7 @@ algorithm
   ok := true;
   annotation (Documentation(info="<html>
 <p>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.reduceSystem</b> which compute
+This example shows the usage of <strong>function Modelica_LinearSystems2.StateSpace.reduceSystem</strong> which compute
 a controllable and observable state space realization of a given state space realization.
 </p>
 </html>"));

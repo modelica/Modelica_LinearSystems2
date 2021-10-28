@@ -16,8 +16,7 @@ function transformation
 protected
   Boolean systemOnFile=fileName <> "NoName";
   StateSpace ss=if systemOnFile then Modelica_LinearSystems2.StateSpace.Import.fromFile(
-                                                          fileName, matrixName) else
-            StateSpace(
+    fileName, matrixName) else StateSpace(
       A=A,
       B=B,
       C=C,
@@ -83,7 +82,7 @@ algorithm
   ok := true;
 
   annotation (Documentation(info="<html>
-</p>
+<p>
 Example to demonstrate the transformation of a state space representation to Jordan- observabilitiy- and controllability canonical form
 </p>
 </html>"));

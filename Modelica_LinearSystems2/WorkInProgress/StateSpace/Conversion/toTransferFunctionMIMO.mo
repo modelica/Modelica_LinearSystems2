@@ -29,33 +29,39 @@ algorithm
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunctionMIMO</b>(ss)  </td> </tr>
+<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> StateSpace.Conversion.<strong>toTransferFunctionMIMO</strong>(ss)  </td> </tr>
 </table>
 <h4>Description</h4>
 <p>
 Computes a matrix of TransferFunction records
+</p>
 <blockquote><pre>
-           n_i(s)     b0_i + b1_i*s + ... + bn_i*s^n
-   tf_i = -------- = --------------------------------
-           d_i(s)     a0_i + a1_i*s + ... + an_i*s^n
- </pre></blockquote>
+        n_i(s)     b0_i + b1_i*s + ... + bn_i*s^n
+tf_i = -------- = --------------------------------
+        d_i(s)     a0_i + a1_i*s + ... + an_i*s^n
+</pre></blockquote>
+<p>
 with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
+</p>
 
 
 <h4>Example</h4>
 <h4>Syntax</h4>
 <table>
-<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<b>toTransferFunctionMIMO</b>(ss)  </td> </tr>
+<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<strong>toTransferFunctionMIMO</strong>(ss)  </td> </tr>
 </table>
 <h4>Description</h4>
 <p>
 Computes a matrix of TransferFunction records
+</p>
 <blockquote><pre>
-           n(s)     b0 + b1*s + ... + bn*s^n
-   tf = -------- = --------------------------
-           d(s)     a0 + a1*s + ... + an*s^n
- </pre></blockquote>
+      n(s)     b0 + b1*s + ... + bn*s^n
+tf = ------ = --------------------------
+      d(s)     a0 + a1*s + ... + an*s^n
+</pre></blockquote>
+<p>
 with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
+</p>
 
 
 <h4>Example</h4>
@@ -72,7 +78,7 @@ with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.Stat
       D = [1.0, 0.0;
            0.0, 1.0]);
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
 
 // zp = [(s^2 + 5*s + 7)/(s^2 + 5*s + 6), 1/(s + 2);

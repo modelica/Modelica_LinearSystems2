@@ -22,7 +22,7 @@ algorithm
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-tf = StateSpace.Conversion.<b>toTransferFunction</b>(ss)
+tf = StateSpace.Conversion.<strong>toTransferFunction</strong>(ss)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -50,7 +50,7 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
     C = [1.0,1.0,1.0],
     D = [0.0]);
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   tf:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
 //             2*s + 3
 //   tf =  -----------------

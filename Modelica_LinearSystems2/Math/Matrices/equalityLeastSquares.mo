@@ -40,17 +40,17 @@ with function \"Matrices.equalityLeastSquares\" failed.");
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-x = Matrices.<b>equalityLeastSquares</b>(A,a,B,b);
+x = Matrices.<strong>equalityLeastSquares</strong>(A,a,B,b);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 This function returns the
-solution <b>x</b> of the linear equality-constrained least squares problem:
+solution <strong>x</strong> of the linear equality-constrained least squares problem:
 </p>
 <blockquote>
 <p>
-min|<b>A</b>*<b>x</b> - <b>a</b>|^2 over <b>x</b>, subject to <b>B</b>*<b>x</b> = <b>b</b>
+min|<strong>A</strong>*<strong>x</strong> - <strong>a</strong>|^2 over <strong>x</strong>, subject to <strong>B</strong>*<strong>x</strong> = <strong>b</strong>
 </p>
 </blockquote>
 

@@ -50,7 +50,7 @@ algorithm
   annotation (Documentation(info="<html>
 <p>
 Computes the time response of the system
-<p/>
+</p>
 <blockquote><pre>
 dss = DiscreteStateSpace(
         A=[0.99005, 0.00985;
@@ -64,8 +64,8 @@ dss = DiscreteStateSpace(
         method=Modelica_LinearSystems2.Types.Method.StepExact),
 </pre></blockquote>
 <p>
-sampled at <i>Ts=0.01</i> with inititial state <i>x0=[0;0]</i>
-subject to the system input <i>u = ones(300,2)</i> (which results with Ts=0.01 in 3 sec).
+sampled at <em>Ts=0.01</em> with inititial state <em>x0=[0;0]</em>
+subject to the system input <em>u = ones(300,2)</em> (which results with Ts=0.01 in 3 sec).
 </p>
 </html>"), __Dymola_interactive=true);
 end analysisTimeResponse;

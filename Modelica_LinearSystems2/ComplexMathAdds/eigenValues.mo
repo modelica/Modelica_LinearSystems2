@@ -34,21 +34,21 @@ algorithm
 Computes the invariant zeros of a system in state space form:
 </p>
 <pre>
-   der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>
-        <b>y</b> = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>
+   der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</strong>*<strong>u</strong>
+        <strong>y</strong> = <strong>C</strong>*<strong>x</strong> + <strong>D</strong>*<strong>u</strong>
 </pre>
 <p>
 The invariant zeros of this system are defined as the variables
 z that make the following matrix singular:
 </p>
 <pre>
-    | <b>A</b> <b>B</b> |     | <b>I</b> <b>0</b> |
+    | <strong>A</strong> <strong>B</strong> |     | <strong>I</strong> <strong>0</strong> |
     |     | - z*|     |
-    | <b>C</b> <b>D</b> |     | <b>0</b> <b>0</b> |
+    | <strong>C</strong> <strong>D</strong> |     | <strong>0</strong> <strong>0</strong> |
 </pre>
 <p>
-where <b>I</b> is the identity matrix of the same size as <b>A</b>
-and <b>0</b> are zero matrices of appropriate dimensions.
+where <strong>I</strong> is the identity matrix of the same size as <strong>A</strong>
+and <strong>0</strong> are zero matrices of appropriate dimensions.
 </p>
 <p>
 Currently, there is the restriction that the number of

@@ -11,7 +11,7 @@ algorithm
 <p>
 This function plots the root locus of model
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.Utilities.ControlledSISO2\">Plot.Examples.Utilities.ControlledSISO2</a>
-over the controller gain <b>k</b> with an equidistant gridding in k (the menu on the right lower part is displayed when moving
+over the controller gain <strong>k</strong> with an equidistant gridding in k (the menu on the right lower part is displayed when moving
 the cursor on one curve point; then all points belonging to the same parameter value are
 marked with a red square):
 </p>

@@ -33,14 +33,14 @@ algorithm
     modelParam,
     simulationSetup,
     reorder);
-  if paramUnit == "" or paramUnit == " " then
+  if Modelica.Utilities.Strings.isEmpty(paramUnit) then
      pName :=paramName;
   else
      pName :=paramName + " [" + paramUnit + "]";
   end if;
 
   // Plot the data
-  if diagram.heading == "" then
+  if Modelica.Utilities.Strings.isEmpty(diagram.heading) then
      heading :="Root locus of " + modelName + " over " + pName;
   else
      heading :=diagram.heading;
@@ -71,7 +71,7 @@ algorithm
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Plot.<b>rootLocusOfModel</b>(modelName, modelParam, simulationSetup, diagram, device)
+Plot.<strong>rootLocusOfModel</strong>(modelName, modelParam, simulationSetup, diagram, device)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -88,7 +88,7 @@ is performed between the given minimum and maximum value.
 Calling the function
 </p>
 <blockquote><pre>
-Utilities.Plot.<b>rootLocusOfModel</b>(
+Utilities.Plot.<strong>rootLocusOfModel</strong>(
   modelName = \"Modelica.Mechanics.Rotational.Examples.First\",
   modelParam={
     Modelica_LinearSystems2.Records.ParameterVariation(
@@ -103,6 +103,6 @@ yields the following diagram (the menu on the right lower part is displayed when
 the cursor on one curve point; then all points belonging to the same parameter value are
 marked with a red square):
 </p>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/RootLocusOfModel.png\"/></p>
+<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfDrive.png\"/></p>
 </html>"));
 end rootLocusOfModel;

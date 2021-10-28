@@ -11,7 +11,7 @@ partial block DeprecatedBlock "Icon for a block which is deprecated"
           pattern=LinePattern.Dash)}),
                       Documentation(info="<html>
 <p>
-This icon is designed for a <b>block</b>
+This icon is designed for a <strong>block</strong>
 </p>
 </html>"));
 

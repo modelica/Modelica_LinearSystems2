@@ -15,11 +15,11 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-     Matrices.<b>numberOfRealZeros</b>(complexVector);
+Matrices.<strong>numberOfRealZeros</strong>(complexVector);
 </pre></blockquote>
 <h4>Description</h4>
 <p>
-Function <b>numberOfRealZeros</b>(..) determines the number of
+Function <strong>numberOfRealZeros</strong>(..) determines the number of
 elements of vector &quot;complexVector&quot; with vanishing imaginary part,
 i.e., complexVector[i].im = 0.
 </p>

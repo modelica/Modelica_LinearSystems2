@@ -26,21 +26,21 @@ no or infinitely many solutions (A is singular).");
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Matrices.<b>solve2</b>(A,b);
+Matrices.<strong>solve2</strong>(A,b);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 This function call returns the
-solution <b>X</b> of the linear system of equations
+solution <strong>X</strong> of the linear system of equations
 </p>
 <blockquote>
 <p>
-<b>A</b>*<b>X</b> = <b>B</b>
+<strong>A</strong>*<strong>X</strong> = <strong>B</strong>
 </p>
 </blockquote>
 <p>
-If a unique solution <b>X</b> does not exist (since <b>A</b> is singular),
+If a unique solution <strong>X</strong> does not exist (since <strong>A</strong> is singular),
 an exception is raised.
 </p>
 
@@ -59,7 +59,7 @@ i.e., by Gaussian elemination with partial pivoting.
                  22, 44;
                  12, 24];
   Real X[3,2];
-<b>algorithm</b>
+<strong>algorithm</strong>
   (LU, pivots) := Matrices.LU(A);
   X := Matrices.solve2(A, B1);  /* X = [3, 6;
                                         2, 4;
@@ -68,8 +68,8 @@ i.e., by Gaussian elemination with partial pivoting.
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.LU\">Matrices.LU</a>,
-<a href=\"modelica://Modelica.Math.Matrices.LU_solve2\">Matrices.LU_solve2</a>
+<a href=\"modelica://Modelica.Math.Matrices.LU\">Modelica.Math.Matrices.LU</a>,
+<a href=\"modelica://Modelica.Math.Matrices.LU_solve2\">Modelica.Math.Matrices.LU_solve2</a>
 </p>
 </html>"));
 end solve2;

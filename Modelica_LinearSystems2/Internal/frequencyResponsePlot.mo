@@ -83,9 +83,9 @@ algorithm
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-ZerosAndPoles.Plot.<b>bode</b>(zp)
+ZerosAndPoles.Plot.<strong>bode</strong>(zp)
    or
-ZerosAndPoles.Plot.<b>bode</b>(
+ZerosAndPoles.Plot.<strong>bode</strong>(
   zp,
   nPoints,
   autoRange,
@@ -107,7 +107,7 @@ This function plots the bode-diagram of a transfer function.
   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
   Modelica_LinearSystems2.ZerosAndPoles zp =(p^2 + 5*p + 7)/(p + 2)/(p + 3);
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(zp)
 //  gives:
 </pre></blockquote>

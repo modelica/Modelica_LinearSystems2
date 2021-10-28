@@ -175,7 +175,20 @@ equation
           fillPattern=FillPattern.Solid,
           textString="if secondAngle=false")}),
     Documentation(info="<html>
-<p>Model of a simple inverted double pendulum system using Modelica_Controller.Examples.Components.InverseDoublePendulum. The physical Model is used in Modelica_LinearSystems2.Examples.StateSpace.inverseDoublePendulumController where it is being linearized an used as a base for linear controller design. The results are used to control the crane system in Modelica_Controller.Examples.InverseDoublePendulum.mo </p>
+<p>
+Model of a&nbsp;simple inverted double pendulum system using
+<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Components.InverseDoublePendulum\">InverseDoublePendulum</a>.
+
+<!-- The following text was commented by Tobolar (DLR) since the example
+cited is still in WorkInProgress (see also documentation source of
+other examples of double pendulum):
+The physical Model is used in
+Modelica_LinearSystems2.Examples.StateSpace.inverseDoublePendulumController
+where it is being linearized an used as a base for linear controller design.
+-->
+It is used, e.g., to control the crane system in
+<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.InverseDoublePendulumWithObserver\">Controller.Examples.InverseDoublePendulumWithObserver</a>.
+</p>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={

@@ -43,7 +43,7 @@ initial equation
     Documentation(info="<html>
 <p>
 This blocks defines the transfer function between the input u and
-the output y as <i>second order</i> system:
+the output y as <em>second order</em> system:
 </p>
 <pre>
                          k
@@ -56,7 +56,7 @@ The block can be continuous or discrete (with continuous parameterization).
 <p>
 If you would like to be able to change easily between different
 transfer functions (FirstOrder, SecondOrder, ... ) by changing
-parameters, use the general model class <b>TransferFunction</b>
+parameters, use the general model class <strong>TransferFunction</strong>
 instead and model a second order SISO system with parameters<br>
 n = {k}, d = {1/w^2, 2*D/w, 1}.
 </p>

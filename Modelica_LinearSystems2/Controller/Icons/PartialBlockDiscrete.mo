@@ -21,6 +21,6 @@ partial block PartialBlockDiscrete "Icon for a discrete block"
           borderPattern=BorderPattern.Raised,
           pattern=LinePattern.None,
           lineColor={0,0,0})}), Documentation(info="<html>
-<p>This partial class is intended to design a <i>default icon for a discrete block</i>.</p>
+<p>This partial class is intended to design a <em>default icon for a discrete block</em>.</p>
 </html>"));
 end PartialBlockDiscrete;

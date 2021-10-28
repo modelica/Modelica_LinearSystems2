@@ -145,7 +145,7 @@ This block decreases the sampling time from the sampling time of the input signa
 (= inputSampleFactor*sampleClock.sampleTime) to the
 sampling time of the output signal
 (= outputSampleFactor*sampleClock.sampleTime).
-This is performed by <b>linear interpolation</b> between the current and the last
+This is performed by <strong>linear interpolation</strong> between the current and the last
 sample leading to a delay of one input sampling period.
 Optionally, the resulting signal is filtered with a mean value FIR-filter,
 in order to remove undesired frequencies introduced by the linear

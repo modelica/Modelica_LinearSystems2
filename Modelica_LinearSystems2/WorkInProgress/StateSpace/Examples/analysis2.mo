@@ -114,7 +114,7 @@ algorithm
   annotation (
     __Dymola_interactive=true,
     Documentation(info="<html>
-This example shows the usage of <b>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</b> which is
+This example shows the usage of <strong>function Modelica_LinearSystems2.StateSpace.Analysis.isControllable</strong> which is
 to check whether a system is controllable or not.
 </html>"));
 end analysis2;

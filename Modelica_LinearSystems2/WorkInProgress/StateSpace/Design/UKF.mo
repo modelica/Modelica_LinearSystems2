@@ -107,12 +107,12 @@ algorithm
 </html>", info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(x_est, y_est, P, K) = DiscreteStateSpace.Design.<b>UKF</b>(x_pre, u_pre, y, P_pre, Q, R, alpha, beta, kappa, Ts)
+(x_est, y_est, P, K) = DiscreteStateSpace.Design.<strong>UKF</strong>(x_pre, u_pre, y, P_pre, Q, R, alpha, beta, kappa, Ts)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function <b>UKF</b> computes one recursion of the Unscented Kalman filter. Unscented Kalman filters are similar to Extended Kalman filters
+Function <strong>UKF</strong> computes one recursion of the Unscented Kalman filter. Unscented Kalman filters are similar to Extended Kalman filters
 but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
@@ -123,7 +123,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteSta
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1]</dt>
-<dd> <b>http://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter</b>.
+<dd> <strong>http://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter</strong>.
     <br>&nbsp;</dd>
 </dl>
 
