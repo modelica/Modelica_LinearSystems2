@@ -21,7 +21,7 @@ Furthermore, in sublibrary Controller about 20 input/output blocks of linear sys
 
 ## Current release
 
-[Modelica_LinearSystems2 v2.4.0 (2020-06-26)](../../releases/tag/v2.4.0)
+[Modelica_LinearSystems2 v2.4.1 (2021-10-29)](../../releases/tag/v2.4.1)
 
 Please note that the library is known to work with Dymola only.
 
