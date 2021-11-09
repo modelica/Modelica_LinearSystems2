@@ -544,7 +544,7 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_2_4_1 "Version 2.4.1 (September 13, 2020)"
+    class Version_2_4_1 "Version 2.4.1 (October 29, 2021)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
