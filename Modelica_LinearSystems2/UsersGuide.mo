@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2;
+﻿within Modelica_LinearSystems2;
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
 
@@ -350,7 +350,7 @@ are licensed by <b><u>DLR</u></b> under the
 <p>
 <a href=\"https://www.dlr.de/sr/en\">Deutsches Zentrum f&uuml;r Luft- und Raumfahrt (DLR)</a><br>
 Institut f&uuml;r Systemdynamik und Regelungstechnik (SR)<br>
-M&uuml;nchener Stra�e 20<br>
+M&uuml;nchener Straße 20<br>
 D-82234 We&szlig;ling<br>
 Germany<br>
 email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
@@ -462,18 +462,8 @@ This library is based on the following references:
       annotation (Documentation(info="<html>
 <p>
 This version requires the <strong>Modelica 4.0.0</strong> Library.
-It is backward compatible to the previous version 2.4.0.
+There is a&nbsp;limited backward compatibility to the previous version 2.4.1.
 </p>
-
-<h4>
-Improvements in this version
-</h4>
-
-<ul>
-<li> Utilize ModelicaIO functions for matrix I/O, see issue
-     <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
-     Concerning functions are marked obsolete.</li>
-</ul>
 
 <h4>
 Obsolete operator record Modelica_LinearSystems2.Math.Complex
@@ -500,6 +490,38 @@ for some details and
 <a href=\"modelica://Modelica_LinearSystems2.Math.Complex\">Modelica_LinearSystems2.Math.Complex</a>
 for inheritance.
 </p>
+</html>"));
+    end Version_2_5_0;
+
+    class Version_2_4_1 "Version 2.4.1 (October 29, 2021)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>
+<p>
+This version requires the <strong>Modelica 4.0.0</strong> Library.
+It is backward compatible to the previous version 2.4.0.
+</p>
+
+<h4>
+Improvements in this version
+</h4>
+
+<ul>
+  <li> Utilize ModelicaIO functions for matrix I/O, see issue
+       <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
+       Concerning functions are marked obsolete, see below.
+       </li>
+  <li> Use functions from DymolaCommands library instead of Dymola's build-in functions,
+       see issue <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/66\">#66</a>.
+       </li>
+  <li> Disable an assert causing function crash in
+       <a href=\"modelica://Modelica_LinearSystems2.Utilities.Import.rootLocusOfModel\">Utilities.Import.rootLocusOfModel</a>,
+       see issue <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/130\">#130</a>.
+       </li>
+  <li> Over <a href=\"modelica://Modelica_LinearSystems2/Resources/Documentation/Version-2.4.1/ResolvedGitHubIssues.html\">20</a>
+       issues (including pull requests) have been addressed for this release.
+       </li>
+</ul>
 
 
 <h4>
@@ -538,7 +560,8 @@ in the future.
      instead</li>
 </ul>
 </html>"));
-    end Version_2_5_0;
+    end Version_2_4_1;
+
 
     class Version_2_4_0 "Version 2.4.0 (June 26, 2020)"
       extends Modelica.Icons.ReleaseNotes;
