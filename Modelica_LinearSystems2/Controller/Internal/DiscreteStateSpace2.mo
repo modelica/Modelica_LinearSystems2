@@ -6,7 +6,7 @@ model DiscreteStateSpace2
   import Modelica_LinearSystems2.Controller.Types;
   import Modelica.Math.Matrices;
 
-  parameter Real ABCD[:,:](start=fill(1,2,2)) "Continuous linear time-invariant system"
+  parameter Real ABCD[:,:] "Continuous linear time-invariant system"
     annotation(HideResult=true);
 
 protected
