@@ -737,6 +737,17 @@ Improvements in this version
        </li>
 </ul>
 
+<h5>
+Improvements in build.2 (2021-11-16)
+</h5>
+
+<ul>
+  <li>
+    Bug fix: Remove buggy initialization of matrix ABCD in 
+    <a href=\"modelica://Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace2\">DiscreteStateSpace2</a>.
+  </li>
+</ul>
+
 <h4>
 Obsolete classes
 </h4>
