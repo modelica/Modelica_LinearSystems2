@@ -2,11 +2,8 @@ within Modelica_LinearSystems2.Examples.StateSpace;
 function plotZeros "Case studies of systems with zeros"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Complex;
 
 protected
   parameter Real sampleT=0.001;
@@ -30,7 +27,7 @@ protected
 algorithm
   Modelica.Utilities.Streams.print(String(ss));
   Modelica.Utilities.Streams.print(String(tf));
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("Invariant zeros", invZeros);
+  Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("Invariant zeros", invZeros);
 
   invZero1 := invZeros[1];
   invMat := Modelica.Math.Matrices.inv([invZero1.re*identity(size(ss.A, 1)) -
@@ -127,7 +124,7 @@ algorithm
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 Computes the initial condition response of the system
-StateSpace <i>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</i> to the initial condition <i>x0=[1;1]</i>.
+StateSpace <em>sc = StateSpace(A=[-1,1;0,-2],B=[1, 0;0, 1],C=[1,0; 0,1],D=[0, 0; 0, 0])</em> to the initial condition <em>x0=[1;1]</em>.
 </p>
 
 <p>

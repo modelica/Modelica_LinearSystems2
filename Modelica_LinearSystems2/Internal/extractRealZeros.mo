@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 function extractRealZeros
   "Extract real and conjugate complex elements from a complex vector"
-  import Modelica_LinearSystems2.Math.Complex;
 
   input Complex complexVector[:]
     "Zeros of a polynomial with real coefficients, e.g., eigen values of a real matrix";
@@ -60,8 +59,8 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-                realZeros = Matrices.<b>extractRealZeros</b>(complexVector, numberOfRealRoots);
-(realZeros, complexZeros) = Matrices.<b>extractRealZeros</b>(
+                realZeros = Matrices.<strong>extractRealZeros</strong>(complexVector, numberOfRealRoots);
+(realZeros, complexZeros) = Matrices.<strong>extractRealZeros</strong>(
                               complexVector,
                               numberOfRealRoots,
                               name=&quot;complexVector&quot;);

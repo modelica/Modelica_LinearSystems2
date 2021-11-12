@@ -1,10 +1,11 @@
 ﻿within ;
-package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.4.1) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
+package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.5.0-dev) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
 
   extends Modelica.Icons.Package;
 
-  constant String DataDir=classDirectory() +  "Resources/Data/"
-  "Absolute path to directory containing utilitiy files for this package";
+  constant String DataDir = Modelica.Utilities.Files.loadResource(
+    "modelica://Modelica_LinearSystems2/Resources/Data/")
+    "Absolute path to directory containing utilitiy files for this package";
 
 
 annotation (
@@ -12,7 +13,7 @@ annotation (
   uses(
     Modelica(version="4.0.0"),
     DymolaCommands(version="1.11")),
-  version="2.4.1",
+  version="2.5.0-dev",
   versionDate="2021-10-29",
   dateModified = "2021-10-28 14:00:00Z",
   revisionId="$F​ormat:%h %ci$",
@@ -25,7 +26,7 @@ annotation (
       script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.4.0.mos")),
   Documentation(info="<html>
 <p>
-Library <b>Modelica_LinearSystems2</b> is a Modelica package
+Library <strong>Modelica_LinearSystems2</strong> is a Modelica package
 providing different representations of linear, time invariant differential and
 difference equation systems. For example, record
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace\">StateSpace</a>
@@ -33,8 +34,8 @@ defines a linear time invariant differential
 equation system in state space form:
 </p>
 <blockquote><pre>
-der(<b>x</b>) = <b>A</b> * <b>x</b> + <b>B</b> * <b>u</b>
-    <b>y</b>  = <b>C</b> * <b>x</b> + <b>D</b> * <b>u</b>
+der(<strong>x</strong>) = <strong>A</strong> * <strong>x</strong> + <strong>B</strong> * <strong>u</strong>
+    <strong>y</strong>  = <strong>C</strong> * <strong>x</strong> + <strong>D</strong> * <strong>u</strong>
 </pre></blockquote>
 <p>
 Operators are overloaded to work conveniently with these system descriptions in an
@@ -67,10 +68,12 @@ For an introduction, have especially a look at:
      summarizes the changes of new versions of this package.</li>
 <li> <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Contact\">Contact</a>
      gives the contact information for this library.</li>
-<li> In an interactive environment, it is useful to run first the script
+<li> In an interactive environment, it is useful to run the script
      &quot;_abbreviations.mos&quot; in directory
-     &quot;Modelica_LinearSystems2/Resources/Scripts&quot;
-     in order to set useful abbreviations: ss, tf, zp, poly, Complex, Plot, s, p, j.</li>
+     &quot;Modelica_LinearSystems2/Resources/Scripts&quot; first,
+     in order to set useful abbreviations for e.g. ss, tf, zp, poly, j, etc.
+     It is not necessary to import the package Complex since it is handled as
+     a&nbsp;build-in complex number type within Dymola.</li>
 </ul>
 
 <p>
@@ -88,10 +91,10 @@ Modelica Standard Library.
   <td colspan=\"1\" rowspan=\"2\" style=\"vertical-align: middle;\">
     <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dlr_logo.png\">
   </td>
-  <td style=\"vertical-align: top;\"><b>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</b></td>
+  <td style=\"vertical-align: top;\"><strong>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</strong></td>
 </tr>
 <tr>
-  <td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2021, DLR Institute of System Dynamics and Control</b></td>
+  <td style=\"vertical-align: top;\"><strong>Copyright &copy; 2012-2021, DLR Institute of System Dynamics and Control</strong></td>
 </tr>
 </table>
 

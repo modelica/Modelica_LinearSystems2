@@ -53,10 +53,10 @@ algorithm
 
   annotation (Documentation(info="<html>
 <p>
-This function computes the solution <b>X</b> of the continuous-time Sylvester equation
+This function computes the solution <strong>X</strong> of the continuous-time Sylvester equation
 </p>
 <blockquote><pre>
-<b>A</b>*<b>X</b> + <b>X</b>*<b>B</b> = <b>C</b>
+<strong>A</strong>*<strong>X</strong> + <strong>X</strong>*<strong>B</strong> = <strong>C</strong>
 </pre></blockquote>
 <p>
 using the Schur method for Sylvester equations proposed by Bartels and Stewart [1].
@@ -65,7 +65,7 @@ using the Schur method for Sylvester equations proposed by Bartels and Stewart [
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Bartels, R.H. and Stewart G.W. (1972):</dt>
-<dd> <b>Algorithm 432: Solution of the matrix equation AX + XB = C</b>.
+<dd> <strong>Algorithm 432: Solution of the matrix equation AX + XB = C</strong>.
      Comm. ACM., Vol. 15, pp. 820-826.<br>&nbsp;</dd>
 </dl>
 </html>", revisions="<html>

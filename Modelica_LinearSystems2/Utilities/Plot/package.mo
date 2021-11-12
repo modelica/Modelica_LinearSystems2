@@ -8,16 +8,16 @@ This package provides functions to plot curves in two dimensions. Here is a shor
 </p>
 
 <p>
-A figure consists of a <b>set of diagrams</b>. Different functions are provided
-to either plot one diagram (Plot.diagram) to plot several diagrams under each other
-(Plot.vectorDiagrams) or to plot several diagrams in matrix layout
-(Plot.matrixDiagrams).
+A figure consists of a <strong>set of diagrams</strong>. Different functions are provided
+to either plot one diagram (<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.diagram\">Plot.diagram</a>) to plot several diagrams under each other
+(<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.diagramVector\">Plot.diagramVector</a>) or to plot several diagrams in matrix layout
+(<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.diagramMatrix\">Plot.diagramMatrix</a>).
 </p>
 
 <p>
-Every diagram can have a set of <b>curves</b>. Every diagram has the same
-width, defined by <b>diagramWidth</b>. The height of a diagram is defined
-by variable <b>heightRatio</b>
+Every diagram can have a set of <strong>curves</strong>. Every diagram has the same
+width, defined by <strong>diagramWidth</strong>. The height of a diagram is defined
+by variable <strong>heightRatio</strong>
 (diagram height in row j = diagram[j].heightRatio*diagramWidth).
 Several curves can be displayed in one diagram.
 </p>

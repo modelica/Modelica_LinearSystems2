@@ -3,11 +3,10 @@ function toTransferFunction
   "Generate a TransferFunction object from a ZerosAndPoles object"
   //encapsulated function fromZerosAndPoles
   import Modelica;
+  import Complex;
   import Modelica_LinearSystems2.Math.Polynomial;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.Internal;
-  import Modelica_LinearSystems2.Math.Complex;
 
   input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
   output TransferFunction tf(redeclare Real n[2*size(zp.n2,1)+size(zp.n1,1)+1], redeclare Real
@@ -30,7 +29,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.<b>toTransferFunction</b>(zp)  </td> </tr>
+<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.<strong>toTransferFunction</strong>(zp)  </td> </tr>
 </table>
 <h4>Description</h4>
 <p>
@@ -49,7 +48,7 @@ from a ZerosAndPoles record representated by first and second order numerator an
    Modelica_LinearSystems2.ZerosAndPoles zp = 1/(p + 3)/(p + 1)
 
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   tf:=Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction(zp);
 //  tf = 1/( s^2 + 4*s + 3 )
 </pre></blockquote>

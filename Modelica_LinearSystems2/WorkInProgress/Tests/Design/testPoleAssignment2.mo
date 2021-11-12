@@ -3,9 +3,10 @@ function testPoleAssignment2
   "Function to assess algorithms for pole assignment"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Complex;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Complex;
+  import Modelica_LinearSystems2.ComplexMathAdds;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.WorkInProgress.Tests.Design;
   import Modelica.Utilities.Streams.print;
@@ -26,7 +27,7 @@ protected
   Integer nmk[2]=Modelica.Utilities.Streams.readMatrixSize(dataFile, "K") "Read dimensions of K";
   Real A[:,:]=Modelica.Utilities.Streams.readRealMatrix(dataFile, "A", nm[1], nm[1]) "Read system matrix A";
   Real B[:,:]=Modelica.Utilities.Streams.readRealMatrix(dataFile, "B", nm[1], nm[2]) "Read system matrix B";
-  Complex j=Modelica_LinearSystems2.Math.Complex.j();
+  Complex j = Modelica.ComplexMath.j;
   Real assignedPolesR[1,:]=Modelica.Utilities.Streams.readRealMatrix(dataFile, "assignedPoles", 1, nm[1])
     "Read real part of assigned poles";
   Real assignedPolesI[1,:]=Modelica.Utilities.Streams.readRealMatrix(dataFile, "assignedPolesIm", 1, nm[1])
@@ -66,7 +67,7 @@ algorithm
 //    K := transpose(matrix(k));
     ss.A := ss.A - ss.B*K;
     S := ss.A;
-    (X,calcPoles) := Modelica_LinearSystems2.Math.Complex.eigenVectors(S);
+    (X,calcPoles) := ComplexMathAdds.eigenVectors(S);
 //    X := Complex(1)*Xre;
   else// end isSI
 
@@ -75,7 +76,7 @@ algorithm
       (K,X) := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob(
                                                                              A, B, assignedPoles);
       S := A - B*K;
-      calcPoles := Complex.eigenValues(S);
+      calcPoles := ComplexMathAdds.eigenValues(S);
       if isKprovided then
         gap := Modelica.Math.Matrices.norm(K - Ki);
       end if;
@@ -106,8 +107,8 @@ algorithm
   end if;
   print("n = "+String(nm[1])+",  m = "+ String(nm[2])+"\n",outputFile);
   print(Matrices.printMatrix(K, 6, "K"),outputFile);
-  Complex.Vectors.print("assignedPoles", assignedPoles,outputFile);
-  Complex.Vectors.print("calcPoles", calcPoles,outputFile);
+  ComplexMathAdds.Vectors.print("assignedPoles", assignedPoles,outputFile);
+  ComplexMathAdds.Vectors.print("calcPoles", calcPoles,outputFile);
 //   Matrices.printMatrix(Re(X), 6, "ReX");
 //   Matrices.printMatrix(Im(X), 6, "ImX");
   print("kappa2 " + String(kappa2),outputFile);

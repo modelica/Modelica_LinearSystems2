@@ -24,14 +24,14 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-        r = Matrices.<b>rcond</b>(A);
-(r, info) = Matrices.<b>rcond</b>(A, false);
+        r = Matrices.<strong>rcond</strong>(A);
+(r, info) = Matrices.<strong>rcond</strong>(A, false);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 This function estimates the reciprocal of the condition number
-(norm(<b>A</b>) * norm(inv(<b>A</b>))) of a general real matrix <b>A</b>,
+(norm(<strong>A</strong>) * norm(inv(<strong>A</strong>))) of a general real matrix <strong>A</strong>,
 in either the 1-norm or the infinity-norm, using the LAPACK function DGECON.
 </p>
 

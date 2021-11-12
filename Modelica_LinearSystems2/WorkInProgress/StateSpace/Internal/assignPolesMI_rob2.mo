@@ -3,16 +3,13 @@ function assignPolesMI_rob2
   "Modified KNV algorithm. Works like MATLAB's place.m"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
+  import Modelica.ComplexMath;
+  import Modelica_LinearSystems2.ComplexMathAdds;
+  import Modelica_LinearSystems2.ComplexMathAdds.Internal.C_transpose;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Complex;
-  import matMul = Modelica_LinearSystems2.Math.Complex.Matrices.matMatMul;
-  import Modelica_LinearSystems2.Math.Complex.Matrices.matVecMul;
-  import Modelica_LinearSystems2.Math.Complex.Internal.C_transpose;
-  import Re = Modelica_LinearSystems2.Math.Complex.real;
-  import Im = Modelica_LinearSystems2.Math.Complex.imag;
+  import Re = Modelica.ComplexMath.real;
+  import Im = Modelica.ComplexMath.imag;
   import Modelica.Utilities.Streams.print;
 
   input Real A[:,size(A, 1)] "system matrix";
@@ -98,9 +95,9 @@ algorithm
   for i in numberOfRealEigenvalues + 1:numberOfRealEigenvalues +
       numberOfComplexPairs loop
     gammaSorted[i] := if Im(gammaSorted2[2*i - numberOfRealEigenvalues - 1]) > 0 then
-            gammaSorted2[2*i - numberOfRealEigenvalues - 1] else Complex.conj(
+            gammaSorted2[2*i - numberOfRealEigenvalues - 1] else ComplexMath.conj(
       gammaSorted2[2*i - numberOfRealEigenvalues - 1]);
-    gammaSorted[i + numberOfComplexPairs] := Complex.conj(gammaSorted[i]);
+    gammaSorted[i + numberOfComplexPairs] := ComplexMath.conj(gammaSorted[i]);
   end for;
 
   for i in 1:nx loop
@@ -149,7 +146,7 @@ algorithm
        AC[l2, l2] := Complex(-A[l2, l2]) + gammaSorted[l1];
      end for;
 
-     C := matMul(U1T, AC);
+     C := ComplexMathAdds.Matrices.matMatMul(U1T, AC);
 
      S2 := if l1 > numberOfRealEigenvalues and 2*rankB - nx > 0 then [Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace(
                                                                                            [C; C_transpose(Sr)]),Sr] else Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_nullspace(
@@ -171,7 +168,7 @@ algorithm
 // //      y := X[:, l1] + X[:, l1] + subS[l1].S[:, l2];
 //       y := X[:, l1] + X[:, l1] + S[:, rankB*(l1-1)+l2];
 //     end for;
-//     y := y/Complex.Vectors.norm(y);
+//     y := y/ComplexMath.Vectors.norm(y);
 //     for l2 in 1:nx loop
 //       X[l2, l1] := y[l2];
 //     end for;
@@ -192,7 +189,7 @@ algorithm
     for l1 in 1:numberOfComplexPairs loop
       for l2 in 1:nx loop
         X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
-          Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+          ComplexMath.conj(X[l2, numberOfRealEigenvalues + l1]);
       end for;
     end for;
   end if;
@@ -206,7 +203,7 @@ algorithm
     for l1 in 1:numberOfComplexPairs loop
       for l2 in 1:nx loop
         X[l2, numberOfRealEigenvalues + numberOfComplexPairs + l1] :=
-          Complex.conj(X[l2, numberOfRealEigenvalues + l1]);
+          ComplexMath.conj(X[l2, numberOfRealEigenvalues + l1]);
       end for;
     end for;
   end if;
@@ -241,13 +238,13 @@ algorithm
                                                         Xjj);
 
        ST := C_transpose(S[:, rankB*(l1 - 1) + 1:rankB*l1]);
-       y := matVecMul(ST, QX[:, nx]);
+       y := ComplexMathAdds.Matrices.matVecMul(ST, QX[:, nx]);
 
-       norm_y := Complex.Vectors.norm(y);
-       y := matVecMul(S[:, rankB*(l1 - 1) + 1:rankB*l1], y)/norm_y;
+       norm_y := ComplexMath.Vectors.norm(y);
+       y := ComplexMathAdds.Matrices.matVecMul(S[:, rankB*(l1 - 1) + 1:rankB*l1], y)/norm_y;
 
-       if l1 > numberOfRealEigenvalues and Complex.'abs'(
-           Complex.Vectors.multiply(y, Complex.conj(y))) > 0.9 then
+       if l1 > numberOfRealEigenvalues and ComplexMath.abs(
+           ComplexMathAdds.Vectors.multiply(y, ComplexMath.conj(y))) > 0.9 then
          idx := 1 + rem(k, rankB - size(Sr, 2));
          y := (y + S[:, (l1 - 1)*rankB + idx])/sqrt(2);
        end if;
@@ -258,20 +255,18 @@ algorithm
 
        if l1 > numberOfRealEigenvalues then
          for l2 in 1:nx loop
-           X[l2, l1 + numberOfComplexPairs] := Complex.conj(y[l2]);
+           X[l2, l1 + numberOfComplexPairs] := ComplexMath.conj(y[l2]);
          end for;
        end if;
      end for;
-     condX2 := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber(
-                                                X);
+     condX2 := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.conditionNumber(X);
    end while;
    end if;//rankB>1
 
 // Computation of the feedback matrix K
    XC := C_transpose(X);
-   XC2 := C_transpose(matMul(X, Lambda));
-   MM := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2(
-                                                        XC, XC2);
+   XC2 := C_transpose(ComplexMathAdds.Matrices.matMatMul(X, Lambda));
+   MM := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2(XC, XC2);
    M := Re(MM);
    M := transpose(M);
 
@@ -302,13 +297,13 @@ algorithm
          X[numberOfRealEigenvalues+2*i-1,numberOfRealEigenvalues+2*i] := Complex(0,-0.5);
          X[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i-1] := Complex(0.5);
    end for;
-         Modelica_LinearSystems2.Math.Complex.Matrices.print(X,6,"X");
+         ComplexMathAdds.Matrices.print(X,6,"X");
          Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M");
          MM := Complex(1)*M;
-         XX := matMul(MM,X);
+         XX := ComplexMathAdds.Matrices.matMatMul(MM,X);
          XX := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2(
                                                               X, XX);
-         Modelica_LinearSystems2.Math.Complex.Matrices.print(XX,6,"XX");
+         ComplexMathAdds.Matrices.print(XX,6,"XX");
          M:=M-A;
          Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M-A");
 

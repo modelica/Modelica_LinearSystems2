@@ -4,7 +4,7 @@ function sortEigenvalue
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Internal.Eigenvalue;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Modelica.ComplexMath;
 
   input Eigenvalue ev[:] "Vector to be sorted";
   input Boolean ascending = true
@@ -49,9 +49,9 @@ algorithm
           end if;
         else
           if ascending then
-            swap := Complex.'abs'(sorted_ev[k1].ev) > Complex.'abs'(sorted_ev[k2].ev);
+            swap := ComplexMath.abs(sorted_ev[k1].ev) > ComplexMath.abs(sorted_ev[k2].ev);
           else
-            swap := Complex.'abs'(sorted_ev[k1].ev) < Complex.'abs'(sorted_ev[k2].ev);
+            swap := ComplexMath.abs(sorted_ev[k1].ev) < ComplexMath.abs(sorted_ev[k2].ev);
           end if;
         end if;
       else
@@ -83,9 +83,9 @@ algorithm
             end if;
           else
             if ascending then
-              swap := Complex.'abs'(sorted_ev[k1].ev) > Complex.'abs'(sorted_ev[k2].ev);
+              swap := ComplexMath.abs(sorted_ev[k1].ev) > ComplexMath.abs(sorted_ev[k2].ev);
             else
-              swap := Complex.'abs'(sorted_ev[k1].ev) < Complex.'abs'(sorted_ev[k2].ev);
+              swap := ComplexMath.abs(sorted_ev[k1].ev) < ComplexMath.abs(sorted_ev[k2].ev);
             end if;
           end if;
         else
@@ -99,14 +99,14 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-           sorted_v = Vectors.<b>sort</b>(v);
-(sorted_v, indices) = Vectors.<b>sort</b>(v, ascending=true);
+           sorted_v = Vectors.<strong>sort</strong>(v);
+(sorted_v, indices) = Vectors.<strong>sort</strong>(v, ascending=true);
 </pre></blockquote>
 <h4>Description</h4>
 <p>
-Function <b>sort</b>(..) sorts a Real vector v
+Function <strong>sort</strong>(..) sorts a Real vector v
 in ascending order and returns the result in sorted_v.
-If the optional argument &quot;ascending&quot; is <b>false</b>, the vector
+If the optional argument &quot;ascending&quot; is <strong>false</strong>, the vector
 is sorted in descending order. In the optional second
 output argument the indices of the sorted vector with respect
 to the original vector are given, such that sorted_v = v[indices].

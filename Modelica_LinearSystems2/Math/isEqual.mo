@@ -13,17 +13,17 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-result = <b>isEqual</b>(r1, r2);
-result = <b>isEqual</b>(r1, r2, eps=0.0);
+result = <strong>isEqual</strong>(r1, r2);
+result = <strong>isEqual</strong>(r1, r2, eps=0.0);
 </pre></blockquote>
 
 <h4>Description</h4>
 
 <p>
-The function call &quot;<code>isEqual(r1, r2)</code>&quot; returns <b>true</b>,
+The function call &quot;<code>isEqual(r1, r2)</code>&quot; returns <strong>true</strong>,
 if the two Real numbers r1 and r2 are the same up to a given precision eps.
 (result = abs(r1-r2) &le; eps). Otherwise the function
-returns <b>false</b>. With the optional third argument <b>eps</b>
+returns <strong>false</strong>. With the optional third argument <strong>eps</strong>
 the range can be defined, in which two Real numbers are treated as identical.
 The default is &quot;eps = 0&quot;. Another useful value is, e.g.,
 &quot;eps = 10*Modelica.Constants.eps&quot;.
@@ -35,17 +35,17 @@ The default is &quot;eps = 0&quot;. Another useful value is, e.g.,
   Real r2 = 3;
   Real r3 = 3.0001;
   Boolean result;
-<b>algorithm</b>
-  result := isEqual(r1,r2);          // = <b>true</b>
-  result := isEqual(r1,r3);          // = <b>false</b>
-  result := isEqual(r1,r3, eps=0.1); // = <b>true</b>
+<strong>algorithm</strong>
+  result := isEqual(r1,r2);          // = <strong>true</strong>
+  result := isEqual(r1,r3);          // = <strong>false</strong>
+  result := isEqual(r1,r3, eps=0.1); // = <strong>true</strong>
 </pre></blockquote>
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Vectors.isEqual\">Vectors.isEqual</a>,
-<a href=\"modelica://Modelica.Math.Matrices.isEqual\">Matrices.isEqual</a>,
-<a href=\"modelica://Modelica.Utilities.Strings.isEqual\">Strings.isEqual</a>
+<a href=\"modelica://Modelica.Math.Vectors.isEqual\">Modelica.Math.Vectors.isEqual</a>,
+<a href=\"modelica://Modelica.Math.Matrices.isEqual\">Modelica.Math.Matrices.isEqual</a>,
+<a href=\"modelica://Modelica.Utilities.Strings.isEqual\">Modelica.Utilities.Strings.isEqual</a>
 </p>
 </html>"));
 end isEqual;

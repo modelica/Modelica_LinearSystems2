@@ -9,6 +9,7 @@ DiscreteZerosAndPoles
 DiscreteTransferFunction
 Controller
 Math
+ComplexMathAdds
 Utilities
 Internal
 Types

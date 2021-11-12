@@ -3,10 +3,10 @@ class GettingStarted "Getting started"
 
   annotation (Documentation(info="<html>
 <p>
-The <b>Controller</b> package provides input/output blocks where every
-block is available in a <b>continuous</b> and a <b>discrete</b> (sampled)
-representation. A block is defined via its <b>continuous
-parameterization</b>. By specifying a discretization method and
+The <strong>Controller</strong> package provides input/output blocks where every
+block is available in a <strong>continuous</strong> and a <strong>discrete</strong> (sampled)
+representation. A block is defined via its <strong>continuous
+parameterization</strong>. By specifying a discretization method and
 a sample time, the discrete representation is automatically
 derived from the continuous form.
 </p>
@@ -26,7 +26,7 @@ converter, noise, computing delay, etc.
 <p>
 The defaults of the most
 important options, such as block type (Continuous/Discrete)
-or base sample time for <b>all blocks</b> are set in the
+or base sample time for <strong>all blocks</strong> are set in the
 global SampleClock component (via inner/outer).
 As a result, it is, e.g., easy to switch quickly
 between a continuous and a discrete representation of all
@@ -46,9 +46,9 @@ drive with a P-PI cascade controller is demonstrated in example
 A screen shot of the diagram layer is shown in the next figure:
 </p>
 
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Sampled1.png\">
-</p>
+</div>
 
 <p>
 Every block has a continuous input and a continuous output.
@@ -58,13 +58,13 @@ the PI controller in the above example has the following
 parameter menus:
 </p>
 
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Sampled2.png\">
-</p>
+</div>
 
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Sampled3.png\">
-</p>
+</div>
 
 <p>
 By setting, e.g., parameters blockType to \"Discrete\" and

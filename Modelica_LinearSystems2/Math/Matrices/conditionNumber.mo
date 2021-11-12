@@ -32,15 +32,15 @@ result := max(s)/min(s);
     Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-r = Matrices.<b>conditionNumber</b>(A);
+r = Matrices.<strong>conditionNumber</strong>(A);
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
 This function calculates the the condition number
-(norm(<b>A</b>) * norm(inv(<b>A</b>))) of a general real matrix <b>A</b>,
+(norm(<strong>A</strong>) * norm(inv(<strong>A</strong>))) of a general real matrix <strong>A</strong>,
 in either the 1-norm, 2-norm or the infinity-norm. In the case of 2-norm
-the result is the ratio of the largest to the smallest singular value to <b>A</b>.
+the result is the ratio of the largest to the smallest singular value to <strong>A</strong>.
 </p>
 
 <h4>Example</h4>
@@ -58,8 +58,7 @@ results in:
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">Matrices.rcond</a>
 </p>
-</html></html>",
-          revisions="<html>
+</html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Date</th>

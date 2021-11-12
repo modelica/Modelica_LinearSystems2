@@ -14,7 +14,7 @@ package RootLocusOld
   /*
   input Modelica.Mechanics.MultiBody.Interfaces.partialColorMap colorMap=
       Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.jet
-    "Color map function for parameter variations" annotation(__Dymola_choicesAllMatching=true);
+    "Color map function for parameter variations" annotation(choicesAllMatching=true);
 */
 
     input
@@ -107,7 +107,7 @@ package RootLocusOld
     annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Plot.<b>rootLocus</b>(modelName, t_linearize, modelParam, simulationSetup, diagram)
+Plot.<strong>rootLocus</strong>(modelName, t_linearize, modelParam, simulationSetup, diagram)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -123,7 +123,7 @@ The parameter is varied equidistantly from minimum to maximum value.
 Calling the function
 </p>
 <blockquote><pre>
-Utilities.Plot.<b>rootLocus</b>(
+Utilities.Plot.<strong>rootLocus</strong>(
   modelName = \"Modelica.Mechanics.Rotational.Examples.First\",
   t_linearize = 0,
   modelParam={
@@ -193,7 +193,7 @@ yields following diagram
 <p>
 This function plots the root locus of model
 <a href=\"modelica://Modelica.Mechanics.Rotational.Examples.First\">Rotational.Examples.First</a>
-over the load inertia <b>Jload</b>:
+over the load inertia <strong>Jload</strong>:
 </p>
 
 <blockquote>
@@ -208,18 +208,18 @@ over the load inertia <b>Jload</b>:
     String heading=""
       "Heading displayed above diagram (if empty, default heading)" annotation(Dialog);
     Real heightRatio = 0.8 "Height of diagram = heightRatio*diagramWidth" annotation(Dialog);
-    Boolean grid=true "True, if grid is shown" annotation(Dialog,  choices(__Dymola_checkBox=true));
+    Boolean grid=true "True, if grid is shown" annotation(Dialog,  choices(checkBox=true));
 
     /* group "Axes" (Axes properties) */
     String xLabel="Real part of eigenvalues"
       "String displayed at horizontal axis" annotation(Dialog(group="Axes"));
     String yLabel="Imaginary part of eigenvalues"
       "String displayed at vertical axis" annotation(Dialog(group="Axes"));
-    Boolean logX = false "True, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
-    Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
+    Boolean logX = false "True, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(checkBox=true));
+    Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(checkBox=true));
     Boolean uniformScaling = false
       "True, if same vertical and horizontal axis increment"
-        annotation(Dialog(group="Axes"),choices(__Dymola_checkBox=true));
+        annotation(Dialog(group="Axes"),choices(checkBox=true));
 
     Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm xTopLeft=0
       "Horizontal position of top left figure corner if applicable (e.g. window)"

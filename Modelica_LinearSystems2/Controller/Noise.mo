@@ -89,7 +89,7 @@ connect(y,discretePart.y);
           textString="%sampleFactor")}),
     Documentation(info="<html>
 <p>
-If <b>discrete</b> block, the output y is sampled according to sample time
+If <strong>discrete</strong> block, the output y is sampled according to sample time
 sampleClock.sampleTime * sampleFactor, where sampleClock.sampleTime
 is defined globally in the outer component sampleClock and
 sampleFactor is an Integer parameter of component Noise.
@@ -97,19 +97,19 @@ At every sample time, a random output signal y in the range y_min .. y_max
 is generated, where y_min and y_max are parameters. A typical
 noise signal is shown in the next figure:
 </p>
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controllers/Noise_typicalSignal.png\">
-</p>
+</div>
 <p>
-The Integer[3] parameter vector <b>firstSeed</b> is used to initialize the
+The Integer[3] parameter vector <strong>firstSeed</strong> is used to initialize the
 basic random number generator. The 3 elements of firstSeed need
 to be in the range [0, 255]. The use of the same seed vector
 will lead to the same sequence of numbers when these are computed serially.
 This is usually not desired. Therefore, for every usage of block
-<b>Noise</b> a different firstSeed should be defined.
+<strong>Noise</strong> a different firstSeed should be defined.
 </p>
 <p>
-If <b>continuous</b> block, the output y = 0.0, i.e., no noise signal
+If <strong>continuous</strong> block, the output y = 0.0, i.e., no noise signal
 is generated. The reason is that the noise can only reasonably be
 used in a simulation if it is a discrete signal, i.e., changes
 its value only at sample instants. Since a continous block is usually

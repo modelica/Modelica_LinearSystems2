@@ -1,8 +1,5 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Internal;
 function multiplyRealMatrices3cCall "Some case studies to complex matrices"
-  import Modelica_LinearSystems2.Math.Complex;
-  import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2;
 
   input Integer n=50;
   input Integer nr=20;

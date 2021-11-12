@@ -54,7 +54,7 @@ record StateSpace2
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-ss = 'constructor'.<b>fromABCDMatrices</b>(A, B, C, D)
+ss = 'constructor'.<strong>fromABCDMatrices</strong>(A, B, C, D)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -78,7 +78,7 @@ ss.D = D;
 public
   StateSpace ss;
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   ss := 'constructor'.fromABCDMatrices(A, B, C, D);
   // ss.A = [1]
   // ss.B = [1]
@@ -105,7 +105,7 @@ public
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-ss = 'constructor'.<b>fromReal</b>(r)
+ss = 'constructor'.<strong>fromReal</strong>(r)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -176,7 +176,7 @@ This package contains the default constructors for StateSpace record.
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-ss = Modelica_LinearSystems2.StateSpace.'-'.<b>subtract</b>(ss1, ss2)
+ss = Modelica_LinearSystems2.StateSpace.'-'.<strong>subtract</strong>(ss1, ss2)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -201,7 +201,7 @@ ss3 := ss1 - ss2;
 
   StateSpace ss3;
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   ss3 := ss1 - ss2;
 // ss.A = [-1, 0, 0, 0; 0, -2, 0, 0; 0, 0, -3, 0; 0, 0, 0, -4],
 // ss.B = [1; 2; 3; 4],
@@ -353,7 +353,7 @@ This package contains the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.sub
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <table>
-<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> StateSpace.Import.<b>fromFile</b>(fileName, matrixName)  </td> </tr>
+<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> StateSpace.Import.<strong>fromFile</strong>(fileName, matrixName)  </td> </tr>
 </table>
 <h4>Description</h4>
 <p>
@@ -362,7 +362,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
 <h4>Example</h4>
 <blockquote><pre>
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   ss:=Modelica_LinearSystems2.StateSpace.Import.fromFile(&quot;stateSpace.mat&quot;, &quot;ABCD&quot;);
 //  ss=StateSpace(
       A=[-1, 0, 0; 0, -2, 0; 0, 0, -3],
@@ -385,7 +385,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
 This record defines a linear time invariant differential
 equation system in state space form:
 </p>
-<pre>    <b>der</b>(x) = A * x + B * u
+<pre>    <strong>der</strong>(x) = A * x + B * u
         y  = C * x + D * u
 </pre>
 <p>

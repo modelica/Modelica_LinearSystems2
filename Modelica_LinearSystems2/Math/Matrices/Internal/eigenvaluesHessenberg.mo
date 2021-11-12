@@ -30,8 +30,8 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
-This function uses DHSEQR Lapack-routine to calculate the eigenvalues of an upper Hessenberg form <b>H</b>.
-Therefore, <b>H</b> is reduced to Schur form <b>T</b>. The eigenvalues are obtained from the diagonal of <b>T</b>.
+This function uses DHSEQR Lapack-routine to calculate the eigenvalues of an upper Hessenberg form <strong>H</strong>.
+Therefore, <strong>H</strong> is reduced to Schur form <strong>T</strong>. The eigenvalues are obtained from the diagonal of <strong>T</strong>.
 
 <p>
 See Modelica_LinearSystems2.Math.Matrices.LAPACK.dhseqr for details

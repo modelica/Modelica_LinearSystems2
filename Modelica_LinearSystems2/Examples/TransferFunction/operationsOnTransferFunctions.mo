@@ -4,14 +4,13 @@ function operationsOnTransferFunctions
   extends Modelica.Icons.Function;
 
   import Modelica.Utilities.Streams.print;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
 
   output Boolean ok;
 
 protected
-  Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  Complex j = Modelica.ComplexMath.j;
   TransferFunction tf1=TransferFunction(n={1,2}, d={2,3,4});
   TransferFunction tf2=TransferFunction(3.4);
   ZerosAndPoles zp1=ZerosAndPoles({-1+0*j},{1+0*j,2+3*j,2-3*j},  k=4);

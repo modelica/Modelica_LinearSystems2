@@ -1,9 +1,9 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices;
 function norm "Returns the norm of a matrix"
   extends Modelica.Icons.Function;
+  import Modelica.ComplexMath;
+  import Complex;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math;
-  import Modelica_LinearSystems2.Math.Complex;
 
   input Complex A[:, :] "Input matrix";
   input Real p(min=1) = 2
@@ -14,20 +14,19 @@ algorithm
   if p == 1 then
     // column sum norm
     for i in 1:size(A, 2) loop
-      result := max(result, sum(Complex.'abs'(A[:, i])));
+      result := max(result, sum(ComplexMath.abs(A[:, i])));
 
     end for;
   elseif p == 2 then
     // largest singular value
-    result := max(Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues(
-                                                 A));
+    result := max(Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_singularValues(A));
   elseif p==3 then
     // Frobenius norm
-    result := Complex.Internal.frobeniusNorm(A);
+    result := Modelica_LinearSystems2.ComplexMathAdds.Internal.frobeniusNorm(A);
   elseif p == Modelica.Constants.inf then
     // row sum norm
     for i in 1:size(A, 1) loop
-      result := max(result, sum(Complex.'abs'(A[i, :])));
+      result := max(result, sum(ComplexMath.abs(A[i, :])));
     end for;
   else
     assert(false, "Optional argument \"p\" of function \"norm\" must be
@@ -36,8 +35,8 @@ algorithm
   annotation ( Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Matrices.<b>norm</b>(A);
-Matrices.<b>norm</b>(A, p=2);
+Matrices.<strong>norm</strong>(A);
+Matrices.<strong>norm</strong>(A, p=2);
 </pre></blockquote>
 <h4>Description</h4>
 <p>
@@ -54,13 +53,13 @@ p-norm of matrix A. The only allowed values for p are</p>
 Note, for any matrices A1, A2 the following inequality holds:
 </p>
 <blockquote><pre>
-Matrices.<b>norm</b>(A1+A2,p) &le; Matrices.<b>norm</b>(A1,p) + Matrices.<b>norm</b>(A2,p)
+Matrices.<strong>norm</strong>(A1+A2,p) &le; Matrices.<strong>norm</strong>(A1,p) + Matrices.<strong>norm</strong>(A2,p)
 </pre></blockquote>
 <p>
 Note, for any matrix A and vector v the following inequality holds:
 </p>
 <blockquote><pre>
-Vectors.<b>norm</b>(A*v,p) &le; Matrices.<b>norm</b>(A,p)*Vectors.<b>norm</b>(A,p)
+Vectors.<strong>norm</strong>(A*v,p) &le; Matrices.<strong>norm</strong>(A,p)*Vectors.<strong>norm</strong>(A,p)
 </pre></blockquote>
 </html>"));
 end norm;

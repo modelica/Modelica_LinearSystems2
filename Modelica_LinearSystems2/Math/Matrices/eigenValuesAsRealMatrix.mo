@@ -26,12 +26,12 @@ numerical algorithm does not converge.");
   annotation (Documentation(info="<HTML>
 <h4>Syntax</h4>
 <blockquote><pre>
-eigenvalues = Matrices.<b>eigenValuesAsRealMatrix</b>(A);
+eigenvalues = Matrices.<strong>eigenValuesAsRealMatrix</strong>(A);
 </pre></blockquote>
 <h4>Description</h4>
 <p>
 This function call returns the eigenvalues of a square matrix
-<b>A</b>. The first column of \"eigenvalues\" contains the real and the
+<strong>A</strong>. The first column of \"eigenvalues\" contains the real and the
 second column contains the imaginary part of the eigenvalues.
 Before calculating the eigenvalues, matrix A is permuted and scaled (balanced)
 to improve the computation. For details see the
@@ -43,12 +43,11 @@ to improve the computation. For details see the
                  3,4,5;
                  2,1,4];
   Real eval[3,2];
-<b>algorithm</b>
+<strong>algorithm</strong>
   eval := Matrices.eigenValuesAsRealMatrix(A);  // eval = [ 8.0  , 0;
                                                 //         -0.618, 0;
                                                 //          1.618, 0];
-</pre>
-</blockquote>
+</pre></blockquote>
 <p>
 i.e., matrix A has the 3 real eigenvalues 8.0, -0.618, 1.618.
 </p>

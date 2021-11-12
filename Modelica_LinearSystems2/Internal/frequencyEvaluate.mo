@@ -85,33 +85,33 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-result = ZerosAndPoles.Analysis.<b>evaluate</b>(zp, p, den_min=0)
+result = ZerosAndPoles.Analysis.<strong>evaluate</strong>(zp, p, den_min=0)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function Analysis.<b>evaluate</b> evaluates the ZerosAndPoles transfer function at a given (complex) value of p and returns the value G(p)=N(p)/D(p). The optional argument den_min with default 0 is used to guard against a division by zero.
+Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer function at a given (complex) value of p and returns the value G(p)=N(p)/D(p). The optional argument den_min with default 0 is used to guard against a division by zero.
 </p>
 <pre>
-  <b>if</b> |(D(p))| >= den_min <b>then</b>
+  <strong>if</strong> |(D(p))| >= den_min <strong>then</strong>
      G(p) = N(p) / D(p);
-  <b>elseif</b> D(p).re >= 0.0 <b>then</b>
+  <strong>elseif</strong> D(p).re >= 0.0 <strong>then</strong>
      G(p) = N(p) / den_min
-  <b>else</b>
+  <strong>else</strong>
      G(p) = -N(p) / den_min
-  <b>end if</b>;
+  <strong>end if</strong>;
 </p>
 </pre>
 
 <h4>Example</h4>
 <blockquote><pre>
-  Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  Complex j = Modelica.ComplexMath.j;
   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
 
   Complex result;
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   result := Modelica_LinearSystems2.ZerosAndPoles.Analysis.evaluate(zp, j+1);
 //  result = 0.538462 - 0.307692j
 </pre></blockquote>

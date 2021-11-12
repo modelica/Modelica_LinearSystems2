@@ -4,7 +4,7 @@ function designCraneController
   import Modelica.Utilities.Streams;
   import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
@@ -21,7 +21,7 @@ function designCraneController
   output Real M_lq[:,:] "pre filter LQ controller";
   output Real M_pa[:,:] "pre filter pole assignment controller";
 protected
-  input Complex j=Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j = Modelica.ComplexMath.j;
 
 protected
   Real Q[:,:];
@@ -32,7 +32,7 @@ protected
       Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName);
 //Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(A= [0,1,0,0;0,0,39.24,0;0,0,0,1;0,0,-4.904,0], B=[0;1e-3;0;-1e-4], C=[1,0,1,0], D=[0]);
 
-  Complex p[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+  Complex p[:]=ComplexMathAdds.eigenValues(ss.A);
   Modelica_LinearSystems2.StateSpace ss_lq=ss;
   Modelica_LinearSystems2.StateSpace ss_pa=ss;
 
@@ -42,9 +42,9 @@ algorithm
 // ####### LQ CONTROLLER #######
 
 // eigenvalues of open loop system
-  p := Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+  p := ComplexMathAdds.eigenValues(ss.A);
   Streams.print("eigenvalues of the open loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev", p);
+  ComplexMathAdds.Vectors.print("ev", p);
 
 // Calculate feesback matrix of a lq controller (Riccati) with weighting matrices Q and R
   Q := [1,0,300,1000; 0,100,0,3000; 0,0,1000,0; 0,10,0,1];
@@ -69,9 +69,9 @@ algorithm
     K_lq);
 
 // eigenvalues of closed loop system
-  p := Modelica_LinearSystems2.Math.Complex.eigenValues(ss_lq.A);
+  p := ComplexMathAdds.eigenValues(ss_lq.A);
   Streams.print("eigenvalues of the closed loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_lq", p);
+  ComplexMathAdds.Vectors.print("ev_lq", p);
 
 // Pre filter calculation
   M_lq := -MatricesMSL.inv([1,0,0,0]*MatricesMSL.solve2(ss_lq.A, ss_lq.B));
@@ -97,7 +97,7 @@ algorithm
     6,
     "K_pa"));
   Streams.print("eigenvalues of the closed loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
+  ComplexMathAdds.Vectors.print("ev_pa", p);
 
   Streams.writeRealMatrix(
     DataDir + "craneController_small.mat",
@@ -122,7 +122,7 @@ algorithm
 annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This example demonstrates how to design a lq-controller or a pole placement controller
-respectively. Compared with example <b>craneController</b>, the plant is smaller to
+respectively. Compared with example <strong>craneController</strong>, the plant is smaller to
 achieve suitable dynamics for animation.
 The feedback matrices and a simple pre filter for tracking are save to MATLAB files
 which can be used in ModelicaController library.
@@ -135,7 +135,7 @@ The linear model is used as a base for control design
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] F&ouml;llinger O.:</dt>
-<dd> <b>Regelungstechnik</b>.
+<dd> <strong>Regelungstechnik</strong>.
      H&uuml;thig-Verlag.<br>&nbsp;</dd>
 </dl>
 </html>"),    Documentation(info="<html>

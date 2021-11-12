@@ -35,7 +35,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-s = Vectors.<b>printVector</b>(v,significantDigits,name);
+s = Vectors.<strong>printVector</strong>(v,significantDigits,name);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -46,7 +46,7 @@ This function returns string <code>s</code> containing vector of real numbers <c
 <h4>Example</h4>
 <blockquote><pre>
 v = {2,0,-342.1};
-<b>printVector</b>(v, 6, \"myVec\");
+<strong>printVector</strong>(v, 6, \"myVec\");
 //  = \"
 // myVec = 
 //          2          

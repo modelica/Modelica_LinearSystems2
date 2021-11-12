@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 function reorderZeros
   "Extract real and conjugate complex elements from a complex vector"
-  import Modelica_LinearSystems2.Math.Complex;
 
   input Complex complexVector[:]
     "Zeros of a polynomial with real coefficients, e.g., eigen values of a real matrix";
@@ -63,13 +62,13 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-               reorderedZero = Internal.<b>reorderZeros</b>(complexVector);
-(reorderedZeros, nRealZeros) = Internal.<b>reorderZeros</b>(complexVector,
+               reorderedZero = Internal.<strong>reorderZeros</strong>(complexVector);
+(reorderedZeros, nRealZeros) = Internal.<strong>reorderZeros</strong>(complexVector,
                                                      name=&quot;complexVector&quot;);
 </pre></blockquote>
 <h4>Description</h4>
 <p>
-Function <b>reorderZeros</b>(..) reorders the zeros from the
+Function <strong>reorderZeros</strong>(..) reorders the zeros from the
 Complex vector &quot;complexVector&quot; such that the returned Complex vector
 reorderedZeros contains first all real Zeros and afterwards the conjugate
 complex zero pairs. It is required that all elements

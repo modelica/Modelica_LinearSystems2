@@ -3,33 +3,32 @@ function designInverseDoublePendulumController
   "Design pole assignment for an inverse double pedulum"
 
   import Modelica.Utilities.Streams;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.StateSpace;
 
 // input String modelName="Modelica_Controller.Examples.Components.InverseDoublePendulum"   "name of the model to linearize";
- input String modelName="Modelica_LinearSystems2.Controller.Examples.Components.InverseDoublePendulum"
+  input String modelName="Modelica_LinearSystems2.Controller.Examples.Components.InverseDoublePendulum"
     "name of the model to linearize";
 
 //   input Complex pa[6]={Complex(-2), -2+0*j, -6-0.2*j,-6+0.2*j,-6-0.2*j,-6+0.2*j}
 //      "assigned poles";
 
-input Complex pa[6]={Complex(-2,0), Complex(-2,0), Complex(-15,-0.2),Complex(-15,0.2),Complex(-20,-0),Complex(-20,0)}
+  input Complex pa[6]={Complex(-2,0), Complex(-2,0), Complex(-15,-0.2),Complex(-15,0.2),Complex(-20,-0),Complex(-20,0)}
     "assigned poles";
 
 //  input Complex pob[6]=fill(-10+0*j,6) "assigned observer poles";
 
- input String fileName=DataDir + "inverseDoublePendulumController.mat"
+  input String fileName=DataDir + "inverseDoublePendulumController.mat"
     "file name for results";
 
- output Real K_pa[:,:] "feedback matrix pole assignment controller";
- output Real M_pa[:,:] "pre filter LQ controller";
+  output Real K_pa[:,:] "feedback matrix pole assignment controller";
+  output Real M_pa[:,:] "pre filter LQ controller";
 
 // output Real K_ob[:,:] "feedback matrix pole assignment controller";
 
 protected
- input Complex j = Modelica_LinearSystems2.Math.Complex.j();
+  input Complex j = Modelica.ComplexMath.j;
 protected
  Real Q[:,:];
  Real R[:,:];
@@ -39,7 +38,7 @@ protected
   // Determine linear System from Modelica_Controller.Examples.Components.InverseDoublePendulum.mo
  Modelica_LinearSystems2.StateSpace ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName);
 
- Complex p[:]=Modelica_LinearSystems2.Math.Complex.eigenValues(ss.A);
+ Complex p[:]=ComplexMathAdds.eigenValues(ss.A);
  Modelica_LinearSystems2.StateSpace ss_pa=ss;
 //  Modelica_LinearSystems2.StateSpace ss_ob=StateSpace(A=transpose(ss.A), B=transpose([1,0,0,0,0,0;0,0,1,0,0,0;0,0,0,0,1,0]), C=transpose(ss.B), D=fill(0,size(ss.B,2),3));
   Modelica_LinearSystems2.StateSpace ssPlant=Modelica_LinearSystems2.StateSpace(A=ss.A, B=ss.B,C=[1,0,0,0,0,0;0,0,1,0,0,0;0,0,0,0,1,0],D=zeros(3,size(ss.B,2)));
@@ -68,7 +67,7 @@ algorithm
     end if;
 
   Streams.print("The eigenvalues are:\n");
-  Complex.Vectors.print("p",p);
+  Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("p",p);
 
   //####### POLE ASSIGNMENT ##########
 
@@ -82,7 +81,7 @@ algorithm
     6,
     "K_pa"));
   Streams.print("eigenvalues of the closed loop system are:\n");
-  Modelica_LinearSystems2.Math.Complex.Vectors.print("ev_pa", p);
+  ComplexMathAdds.Vectors.print("ev_pa", p);
 
   Streams.writeRealMatrix(
     fileName,

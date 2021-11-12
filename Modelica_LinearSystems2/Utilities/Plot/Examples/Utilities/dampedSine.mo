@@ -18,7 +18,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(x,y) = Plot.Examples.Utilities.<b>dampedSine</b>(freqHz, damping, nPeriod=5, nPoints=500);
+(x,y) = Plot.Examples.Utilities.<strong>dampedSine</strong>(freqHz, damping, nPeriod=5, nPoints=500);
 </pre></blockquote>
 
 <h4>Description</h4>

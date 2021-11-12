@@ -1,8 +1,10 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Internal;
 function getMoFiles "Returns a vector of files with *.mo"
   extends Modelica.Icons.Function;
-  input String specifier="data";
-  input String directoryName = classDirectory()+ "../" + specifier annotation(Dialog);
+  input String specifier="Data";
+  input String directoryName = Modelica.Utilities.Files.loadResource(
+    "modelica://Modelica_LinearSystems2/WorkInProgress/Tests/" + specifier)
+    annotation(Dialog);
   output String moFiles[:];
   output Integer nrMat;
 protected

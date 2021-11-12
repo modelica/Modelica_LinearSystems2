@@ -4,7 +4,6 @@ function frequencyRangeZeros
   import Modelica;
   import Modelica.Math;
   import Modelica.Units.SI;
-  import Modelica_LinearSystems2.Math.Complex;
 
   input Complex z[:] "Vector of zeros";
   input SI.Angle phi_min(min=10*Modelica.Constants.eps)=
@@ -90,7 +89,7 @@ algorithm
 This function estimates a useful frequency range for the
 Bode plot of a vector of zeros (numerator or denominator zeros).
 This frequency range is estimated such that the phase angle
-of <b>one</b> zero is in the range:
+of <strong>one</strong> zero is in the range:
 </p>
 <blockquote><pre>
 phi_min/n_zeros &le; |phase angle| &le; pi/2 - phi_min/n_zeros

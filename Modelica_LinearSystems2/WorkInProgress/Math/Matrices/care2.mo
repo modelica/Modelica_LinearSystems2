@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.Math.Matrices;
 function care2
   "Solution of continuous-time algebraic Riccati equations with diagonal matrix R"
   import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
 
   input Real A[:,size(A, 1)];
   input Real B[size(A, 1),:];
@@ -92,67 +92,67 @@ algorithm
 
   annotation (Documentation(info="<html>
 <p>
-Function <b>care</b> computes the solution <b>X</b> of the continuous-time algebraic Riccati equation
+Function <strong>care</strong> computes the solution <strong>X</strong> of the continuous-time algebraic Riccati equation
 </p>
 <blockquote><pre>
-<b>Q</b> + <b>A</b>'*<b>X</b> + <b>X</b>*<b>A</b> - <b>X</b>*<b>G</b>*<b>X</b> = <b>0</b>
+<strong>Q</strong> + <strong>A</strong>'*<strong>X</strong> + <strong>X</strong>*<strong>A</strong> - <strong>X</strong>*<strong>G</strong>*<strong>X</strong> = <strong>0</strong>
 </pre></blockquote>
 <p>
 with
 </p>
 <blockquote><pre>
-<b>G</b> = <b>B</b>*<b>R</b><sup>-1</sup>*<b>B</b>'
+<strong>G</strong> = <strong>B</strong>*<strong>R</strong><sup>-1</sup>*<strong>B</strong>'
 </pre></blockquote>
 <p>
 using the Schur vector approach proposed by Laub [1].
 </p>
 <p>
-It is assumed that <b>Q</b> is symmetric and positve semidefinite and <b>R</b> is symmetric, nonsingular and positive definite,
-(<b>A</b>,<b>B</b>) is stabilizable and (<b>A</b>,<b>Q</b>) is detectable.
-<b>The assumptions are not checked in this function!</b>
+It is assumed that <strong>Q</strong> is symmetric and positve semidefinite and <strong>R</strong> is symmetric, nonsingular and positive definite,
+(<strong>A</strong>,<strong>B</strong>) is stabilizable and (<strong>A</strong>,<strong>Q</strong>) is detectable.
+<strong>The assumptions are not checked in this function!</strong>
 </p>
 <p>
 The assumptions guarantee that Hamiltonian matrix
 </p>
 <blockquote><pre>
-<b>H</b> = [<b>A</b>, -<b>G</b>; -<b>Q</b>, -<b>A</b>']
+<strong>H</strong> = [<strong>A</strong>, -<strong>G</strong>; -<strong>Q</strong>, -<strong>A</strong>']
 </pre></blockquote>
 <p>
 has no pure imaginary eigenvalue and can be put
 to an ordered real Schur form
 </p>
 <blockquote><pre>
-<b>U</b>'*<b>H</b>*<b>U</b> = <b>S</b> = [<b>S</b>11, <b>S</b>12; <b>0</b>, <b>S</b>22]
+<strong>U</strong>'*<strong>H</strong>*<strong>U</strong> = <strong>S</strong> = [<strong>S</strong>11, <strong>S</strong>12; <strong>0</strong>, <strong>S</strong>22]
 </pre></blockquote>
 <p>
-with orthogonal similarity transformation <b>U</b>. <b>S</b> is ordered in such a way,
-that <b>S11</b> contains the n stable eigenvalues of the closed loop system with system matrix
+with orthogonal similarity transformation <strong>U</strong>. <strong>S</strong> is ordered in such a way,
+that <strong>S11</strong> contains the n stable eigenvalues of the closed loop system with system matrix
 </p>
 <blockquote><pre>
-<b>A</b> - <b>B</b>*<b>R</b><sup>-1</sup>*<b>B</b>'*<b>X</b>
+<strong>A</strong> - <strong>B</strong>*<strong>R</strong><sup>-1</sup>*<strong>B</strong>'*<strong>X</strong>
 </pre></blockquote>
 <p>
-If <b>U</b> is partitioned to
+If <strong>U</strong> is partitioned to
 </p>
 <blockquote><pre>
-<b>U</b> = [<b>U</b>11, <b>U</b>12; <b>U</b>21, <b>U</b>22]
+<strong>U</strong> = [<strong>U</strong>11, <strong>U</strong>12; <strong>U</strong>21, <strong>U</strong>22]
 </pre></blockquote>
 <p>
-with dimenstions according to <b>S</b>, the solution <b>X</b> can be calculated by
+with dimenstions according to <strong>S</strong>, the solution <strong>X</strong> can be calculated by
 </p>
 <blockquote><pre>
-<b>X</b>*<b>U</b>11 = <b>U</b>21.
+<strong>X</strong>*<strong>U</strong>11 = <strong>U</strong>21.
 </pre></blockquote>
 <p>
-The algorithm uses LAPACK routines dgehrd (to compute the upper Hessenberg matrix of <b>H</b>), dorghr (to calculate the orthogonal
-matrix from the elementary reflectors as returned from dgehrd), dhseqr (to put transformed <b>H</b> to Schur form and to calculate the eigenvalues
-of the closed loop system) and dtrsen (to compute the ordered real Schur form and matrix <b>U</b>).
+The algorithm uses LAPACK routines dgehrd (to compute the upper Hessenberg matrix of <strong>H</strong>), dorghr (to calculate the orthogonal
+matrix from the elementary reflectors as returned from dgehrd), dhseqr (to put transformed <strong>H</strong> to Schur form and to calculate the eigenvalues
+of the closed loop system) and dtrsen (to compute the ordered real Schur form and matrix <strong>U</strong>).
 </p>
 
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Laub A.J. (1979):</dt>
-<dd> <b>A Schur Method for Solving Algebraic Riccati equations</b>.
+<dd> <strong>A Schur Method for Solving Algebraic Riccati equations</strong>.
      IEEE Trans. Auto. Contr., AC-24, pp. 913-921.<br>&nbsp;</dd>
 </dl>
 

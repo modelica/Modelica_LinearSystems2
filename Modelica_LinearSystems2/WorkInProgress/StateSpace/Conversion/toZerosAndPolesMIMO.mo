@@ -4,7 +4,6 @@ function toZerosAndPolesMIMO
 
   import Modelica;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.WorkInProgress;
@@ -37,8 +36,8 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-zp = StateSpace.Conversion.<b>toZerosAndPolesMIMO</b>(ss)
-</pre> </blockquote>
+zp = StateSpace.Conversion.<strong>toZerosAndPolesMIMO</strong>(ss)
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -67,7 +66,7 @@ of a system from state space representation, i.e. isolating the uncontrollable a
     D = [1.0, 0.0;
          0.0, 1.0]);
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
 
 // zp = [(s^2 + 5*s + 7)/( (s + 2)*(s + 3) ), 1/(s + 2);
@@ -91,7 +90,7 @@ i.e.
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
-<dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
+<dd> <strong>Numerically stable algorithm for transfer function matrix evaluation</strong>.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 

@@ -206,9 +206,9 @@ record DiscreteStateSpace
         annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-dss = 'constructor'.<b>fromReal</b>(r)
+dss = 'constructor'.<strong>fromReal</strong>(r)
    or
-dss = 'constructor'.<b>fromReal</b>(r, Ts, method)
+dss = 'constructor'.<strong>fromReal</strong>(r, Ts, method)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -230,7 +230,7 @@ dss.D = [r];
 dss.B2 = fill(0,0,1);
 </pre></blockquote>
 <p>
-The default values of sample time <b>Ts</b> and discretization method <b>method</b> are
+The default values of sample time <strong>Ts</strong> and discretization method <strong>method</strong> are
 </p>
 <blockquote><pre>
     Ts = 1
@@ -402,12 +402,12 @@ respectively.
 <p>
 Computes the time response of a system in discrete state space form:
 </p>
-<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
-     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
+<pre>     <strong>x</strong>(Ts*(k+1)) = <strong>A</strong> * <strong>x</strong>(Ts*k) + <strong>B</strong> * <strong>u</strong>(Ts*k)
+     <strong>y</strong>(Ts*k)     = <strong>C</strong> * <strong>x</strong>(Ts*k) + <strong>D</strong> * <strong>u</strong>(Ts*k)
+     <strong>x</strong>_continuous(Ts*k) = <strong>x</strong>(Ts*k) + <strong>B2</strong> * <strong>u</strong>(Ts*k)
 </pre>
 <p>
-Note that the system input <b>u</b> must be sampled with the discrete system sample time Ts.
+Note that the system input <strong>u</strong> must be sampled with the discrete system sample time Ts.
 </p>
 </html>"));
   end timeResponse;
@@ -442,12 +442,12 @@ Note that the system input <b>u</b> must be sampled with the discrete system sam
 <p>
 Computes the initial response of a system in discrete state space form:
 </p>
-<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k)
-     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k)
+<pre>     <strong>x</strong>(Ts*(k+1)) = <strong>A</strong> * <strong>x</strong>(Ts*k)
+     <strong>y</strong>(Ts*k)     = <strong>C</strong> * <strong>x</strong>(Ts*k)
+     <strong>x</strong>_continuous(Ts*k) = <strong>x</strong>(Ts*k)
 </pre>
 <p>
-Note that the system input <b>u</b> is equal to zero.
+Note that the system input <strong>u</strong> is equal to zero.
 </p>
 </html>"));
   end initialResponse;
@@ -485,15 +485,15 @@ algorithm
 end toDiscreteTransferFunction;
 
 encapsulated function toDiscreteZerosAndPoles
-      "Generate a discrete zeros-and-poles representation from a discrete SISO state space representation"
+  "Generate a discrete zeros-and-poles representation from a discrete SISO state space representation"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Math.Complex;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+  import Modelica;
+  import Modelica.ComplexMath;
+  import Complex;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.StateSpace;
+  import Modelica_LinearSystems2.DiscreteZerosAndPoles;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
   input DiscreteStateSpace dss "StateSpace object";
   output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
@@ -520,7 +520,7 @@ algorithm
   if Modelica.Math.Vectors.length(ssm.B[:, 1]) > 0 and
       Modelica.Math.Vectors.length(ssm.C[1, :]) > 0 then
 
-    poles := Complex.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
+    poles := Modelica_LinearSystems2.ComplexMathAdds.Internal.eigenValues_dhseqr(ssm.A);//ssm.A is of upper Hessenberg form
     zeros := StateSpace.Internal.invariantZeros2(ssm);
     cpoles := fill(Complex(0),size(poles,1));
     czeros := fill(Complex(0),size(zeros,1));
@@ -539,16 +539,16 @@ algorithm
         Ts=dss.Ts, method=dss.method);
 // set frequency to a complex value which is whether pole nor zero
     for i in 1:size(poles,1) loop
-      cpoles[i] := Complex.log(poles[i])/dss.Ts;
+      cpoles[i] := ComplexMath.log(poles[i])/dss.Ts;
     end for;
     for i in 1:size(zeros,1) loop
-      czeros[i] := Complex.log(zeros[i])/dss.Ts;
+      czeros[i] := ComplexMath.log(zeros[i])/dss.Ts;
     end for;
 
      v := sum(cat(1, czeros[:].re,  cpoles[:].re))/max(size(czeros,1)+size(cpoles,1),1) + 13/19;
 //     v := sum(cat(1, zeros[:].re,  poles[:].re))/max(size(zeros,1)+size(poles,1),1);
     frequency := Complex(v)*17/19;
-    cfrequency := Complex.exp(frequency*dss.Ts);
+    cfrequency := ComplexMath.exp(frequency*dss.Ts);
 //    cfrequency := frequency;
 
     Gq := DiscreteZerosAndPoles.Analysis.evaluate(dzp, cfrequency);
@@ -579,7 +579,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-dzp = DiscreteStateSpace.Conversion.<b>toDiscreteZerosAndPoles</b>(dss)
+dzp = DiscreteStateSpace.Conversion.<strong>toDiscreteZerosAndPoles</strong>(dss)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -610,7 +610,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
     C = [1.0,1.0,1.0],
     D = [0.0]);
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
 //                s + 1.5
 //   zp = 2 -----------------
@@ -620,7 +620,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
-<dd> <b>Numerically stable algorithm for transfer function matrix evaluation</b>.
+<dd> <strong>Numerically stable algorithm for transfer function matrix evaluation</strong>.
      Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
 </dl>
 
@@ -650,8 +650,8 @@ encapsulated function bodeSISO
         "Maximum frequency value, if autoRange = false";
 
   input Boolean magnitude=true "= true, to plot the magnitude of dtf"
-                                                                     annotation(choices(__Dymola_checkBox=true));
-  input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(__Dymola_checkBox=true));
+    annotation(choices(checkBox=true));
+  input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
 
   extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
         Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
@@ -695,9 +695,9 @@ algorithm
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-StateSpace.Plot.<b>plotBodeSISO</b>(ss)
+StateSpace.Plot.<strong>plotBodeSISO</strong>(ss)
    or
-StateSpace.Plot.<b>plotBodeSISO</b>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+StateSpace.Plot.<strong>plotBodeSISO</strong>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -707,7 +707,7 @@ Plots the bode-diagram of a transfer function.
 
 <h4>Description</h4>
 <p>
-Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corresponding to the behavior of the state space system from iu'th element of the input vector <b>u</b> to the iy'th element of the output vector <b>y</b>.
+Function <strong>plotBodeSISO</strong> plots a bode-diagram of the transfer function corresponding to the behavior of the state space system from iu'th element of the input vector <strong>u</strong> to the iy'th element of the output vector <strong>y</strong>.
 </p>
 
 <h4>Example</h4>
@@ -721,7 +721,7 @@ Function <b>plotBodeSISO</b> plots a bode-diagram of the transfer function corre
   Integer iu=1;
   Integer iy=1;
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   Modelica_LinearSystems2.StateSpace.Plot.plotBodeSISO(ss, iu, iy)
 //  gives:
 </pre></blockquote>
@@ -2093,24 +2093,24 @@ end sr_ukfEstimate_2;
 </html>",   info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(x_est, y_est, M, K) = DiscreteStateSpace.Design.<b>EKF</b>(x_pre, u_pre, y, M_pre, Q, R, Ts)
+(x_est, y_est, M, K) = DiscreteStateSpace.Design.<strong>EKF</strong>(x_pre, u_pre, y, M_pre, Q, R, Ts)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function <b>EKF</b> computes one recursion of the Kalman filter or the extended Kalman filter equations respectively, i.e updating
+Function <strong>EKF</strong> computes one recursion of the Kalman filter or the extended Kalman filter equations respectively, i.e updating
 the Riccati difference equation and the Kalman filter gain and correction of the predicted state.
 </p>
 <p>
-The system functions are defined in function ekfFunction(), which is to provide by the user. Matrices <b>A</b>_k and <b>C</b>_k are the
-Jacobians F_x and H_x of the system equations <b>f</b> and <b>h</b>
+The system functions are defined in function ekfFunction(), which is to provide by the user. Matrices <strong>A</strong>_k and <strong>C</strong>_k are the
+Jacobians F_x and H_x of the system equations <strong>f</strong> and <strong>h</strong>
 </p>
 <blockquote><pre>
 x_k = f(x_k-1, u_k-1)
 y_k = h(x_k, u_k)
 </pre></blockquote>
 <p>
-i.e., in the case of linear systems the system matrix <b>A</b> and the output matrix <b>C</b>.
+i.e., in the case of linear systems the system matrix <strong>A</strong> and the output matrix <strong>C</strong>.
 </p>
 </html>"));
   end EKF;
@@ -2165,24 +2165,24 @@ i.e., in the case of linear systems the system matrix <b>A</b> and the output ma
 </html>",   info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(x_est, y_est, M, K) = DiscreteStateSpace.Design.<b>EKF</b>(x_pre, u_pre, y, M_pre, Q, R, Ts)
+(x_est, y_est, M, K) = DiscreteStateSpace.Design.<strong>EKF</strong>(x_pre, u_pre, y, M_pre, Q, R, Ts)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function <b>EKF</b> computes one recursion of the Kalman filter or the extended Kalman filter equations respectively, i.e updating
+Function <strong>EKF</strong> computes one recursion of the Kalman filter or the extended Kalman filter equations respectively, i.e updating
 the Riccati difference equation and the Kalman filter gain and correction of the predicted state.
 </p>
 <p>
-The system functions are defined in function ekfFunction(), which is to provide by the user. Matrices <b>A</b>_k and <b>C</b>_k are the
-Jacobians F_x and H_x of the system equations <b>f</b> and <b>h</b>
+The system functions are defined in function ekfFunction(), which is to provide by the user. Matrices <strong>A</strong>_k and <strong>C</strong>_k are the
+Jacobians F_x and H_x of the system equations <strong>f</strong> and <strong>h</strong>
 </p>
 <blockquote><pre>
 x_k = f(x_k-1, u_k-1)
 y_k = h(x_k, u_k)
 </pre></blockquote>
 <p>
-i.e., in the case of linear systems the system matrix <b>A</b> and the output matrix <b>C</b>.
+i.e., in the case of linear systems the system matrix <strong>A</strong> and the output matrix <strong>C</strong>.
 </p>
 </html>"));
   end EKF_Bsp;
@@ -2247,12 +2247,12 @@ i.e., in the case of linear systems the system matrix <b>A</b> and the output ma
 </html>",   info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(x_est, y_est, P, K) = DiscreteStateSpace.Design.<b>UKF</b>(x_pre, u_pre, y, P_pre, Q, R, alpha, beta, kappa, Ts)
+(x_est, y_est, P, K) = DiscreteStateSpace.Design.<strong>UKF</strong>(x_pre, u_pre, y, P_pre, Q, R, alpha, beta, kappa, Ts)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function <b>UKF</b> computes one recursion of the Unscented Kalman filter. Unscented Kalman filters are similar to Extended Kalman filters
+Function <strong>UKF</strong> computes one recursion of the Unscented Kalman filter. Unscented Kalman filters are similar to Extended Kalman filters
 but using statistical linearization where extended Kalman filter apply the user-provided derivation of the system equation. Instead of explicit derivation
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
@@ -2263,7 +2263,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteSta
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1]:</dt>
-<dd> <b>http://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter</b>.
+<dd> <strong>http://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter</strong>.
     <br>&nbsp;</dd>
 </dl>
 
@@ -2331,12 +2331,12 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteSta
 </html>",   info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(x_est, y_est, CfP, K) = DiscreteStateSpace.Design.<b>UKF_SR</b>(x_pre, u_pre, y, CfP_pre, QCf, CfR, alpha, beta, kappa, Ts)
+(x_est, y_est, CfP, K) = DiscreteStateSpace.Design.<strong>UKF_SR</strong>(x_pre, u_pre, y, CfP_pre, QCf, CfR, alpha, beta, kappa, Ts)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Function <b>UKF_SR</b> computes one recursion of the Square Root Unscented Kalman filter (SR-UKF). SR-UKF follow the same princible as UKF but using Cholesky factors (square roots)
+Function <strong>UKF_SR</strong> computes one recursion of the Square Root Unscented Kalman filter (SR-UKF). SR-UKF follow the same princible as UKF but using Cholesky factors (square roots)
 of the positive definite matrices. This means less computational effort and higher reliablitiy.
 </p>
 <p>
@@ -2350,7 +2350,7 @@ See also <a href=\"Modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteSta
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1]</dt>
-<dd> <b>http://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter</b>.
+<dd> <strong>http://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter</strong>.
     <br>&nbsp;</dd>
 </dl>
 </html>"));
@@ -2363,33 +2363,33 @@ end Design;
 This record defines a linear time invariant difference
 equation system in state space form:
 </p>
-<pre>     <b>x</b>(Ts*(k+1)) = <b>A</b> * <b>x</b>(Ts*k) + <b>B</b> * <b>u</b>(Ts*k)
-     <b>y</b>(Ts*k)     = <b>C</b> * <b>x</b>(Ts*k) + <b>D</b> * <b>u</b>(Ts*k)
-     <b>x</b>_continuous(Ts*k) = <b>x</b>(Ts*k) + <b>B2</b> * <b>u</b>(Ts*k)
+<pre>     <strong>x</strong>(Ts*(k+1)) = <strong>A</strong> * <strong>x</strong>(Ts*k) + <strong>B</strong> * <strong>u</strong>(Ts*k)
+     <strong>y</strong>(Ts*k)     = <strong>C</strong> * <strong>x</strong>(Ts*k) + <strong>D</strong> * <strong>u</strong>(Ts*k)
+     <strong>x</strong>_continuous(Ts*k) = <strong>x</strong>(Ts*k) + <strong>B2</strong> * <strong>u</strong>(Ts*k)
 </pre>
 <p>
 with
 </p>
 <ul>
-<li> <b>Ts</b> - the sample time</li>
-<li> <b>k</b> - the index of the actual sample instance (k=0,1,2,3,...)</li>
-<li> <b>t</b> - the time</li>
-<li> <b>u</b>(t) - the input vector,</li>
-<li> <b>y</b>(t) - the output vector,</li>
-<li> <b>x</b>(t) - the discrete state vector (x(t=Ts*0) is the initial state),</li>
-<li> <b>x</b>_continuous(t) - the state vector of the continuous system
+<li> <strong>Ts</strong> - the sample time</li>
+<li> <strong>k</strong> - the index of the actual sample instance (k=0,1,2,3,...)</li>
+<li> <strong>t</strong> - the time</li>
+<li> <strong>u</strong>(t) - the input vector,</li>
+<li> <strong>y</strong>(t) - the output vector,</li>
+<li> <strong>x</strong>(t) - the discrete state vector (x(t=Ts*0) is the initial state),</li>
+<li> <strong>x</strong>_continuous(t) - the state vector of the continuous system
      from which the discrete block has been derived (details see below),</li>
-<li> <b>A,B,C,D,B2</b> - matrices of appropriate dimensions.</li>
+<li> <strong>A,B,C,D,B2</strong> - matrices of appropriate dimensions.</li>
 </ul>
 <p>
 A discrete system is usually derived by discretization from a
 continuous block, e.g., by function
 LinearSystems.DiscreteStateSpace.fromStateSpace.
 If the discretization method, e.g., the trapezoidal method,
-accesses <b>actual and past</b> values of the input <b>u</b>
-(e.g. <b>u</b>(Ts*k), <b>u</b>(Ts*(k-1), <b>u</b>(Ts*(k-2))),
+accesses <strong>actual and past</strong> values of the input <strong>u</strong>
+(e.g. <strong>u</strong>(Ts*k), <strong>u</strong>(Ts*(k-1), <strong>u</strong>(Ts*(k-2))),
 a state transformation is needed to get the difference equation
-above where only the actual value <b>u</b>(Ts*k) is accessed.
+above where only the actual value <strong>u</strong>(Ts*k) is accessed.
 </p>
 <p>
 If the original continuous state vector should be computed
@@ -2397,9 +2397,9 @@ from the sampled data system above, the matrices of this
 transformation have to be known. For simplicity and efficiency,
 here only the specific transformation used by function
 LinearSystems.DiscreteStateSpace.fromStateSpace is stored in
-the data record of the discrete system via matrix <b>B2</b>.
+the data record of the discrete system via matrix <strong>B2</strong>.
 Therefore, the state vector of the underlying continuous
-system can be calculated by adding the term <b>B2</b>*<b>u</b> to the
+system can be calculated by adding the term <strong>B2</strong>*<strong>u</strong> to the
 state vector of the discretized system.
 </p>
 <p>
@@ -2407,41 +2407,41 @@ In Modelica notation, the difference equation above
 can be implemented as:
 </p>
 <pre>
-     <b>when</b> {<b>initial</b>(), <b>sample</b>(Ts,Ts)} <b>then</b>
+     <strong>when</strong> {<strong>initial</strong>(), <strong>sample</strong>(Ts,Ts)} <strong>then</strong>
         new_x = A * x + B * u;
             y = C * x + D * u;
-            x = <b>pre</b>(new_x);
+            x = <strong>pre</strong>(new_x);
         x_continuous = x + B2 * u;
-     <b>end when</b>;
+     <strong>end when</strong>;
 </pre>
 <p>
 Since no \"next value\" operator is available in Modelica, an
 auxiliary variable new_x stores the value of x for the
 next sampling instant. The relationship between new_x and x
-is defined via equation \"x = <b>pre</b>(new_x)\".
+is defined via equation \"x = <strong>pre</strong>(new_x)\".
 </p>
 <p>
 The body of the when-clause is active during initialization and at the
 next sample instant t=Ts. Note, the when-equation is not
-active after the initialization at t=0 (due to <b>sample</b>(Ts,Ts)),
+active after the initialization at t=0 (due to <strong>sample</strong>(Ts,Ts)),
 since the state x of the initialization has to be used also at t=0.
 </p>
 <p>
-In library Blocks.<b>Controller</b> additional equations are
+In library Blocks.<strong>Controller</strong> additional equations are
 added for the initialization to uniquely compute the
 initial vector x:
 </p>
 <pre>
-  <b>initial equation</b>
-     <b>if</b> init == InitialState <b>then</b>
+  <strong>initial equation</strong>
+     <strong>if</strong> init == InitialState <strong>then</strong>
         x = x_start;
-     <b>elseif</b> init == SteadyState <b>then</b>
+     <strong>elseif</strong> init == SteadyState <strong>then</strong>
         x = new_x;
-     <b>end if</b>;
+     <strong>end if</strong>;
 </pre>
 <p>
 Optionally, x is set to a given start vector x_start.
-As <b>default initialization</b>, the equation \"x = new_x\" is
+As <strong>default initialization</strong>, the equation \"x = new_x\" is
 added that defines steady state initialization for the
 discrete system. As a consequence, the output y(Ts*k), k=0,1,2,..,
 remains constant after this initialization,

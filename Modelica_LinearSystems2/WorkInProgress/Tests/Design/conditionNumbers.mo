@@ -3,7 +3,9 @@ function conditionNumbers
   "Calculate several condition numbers to evaluate a pole assignment method"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Complex;
+  import Complex;
+  import Modelica_LinearSystems2.ComplexMathAdds;
+  import Modelica.ComplexMath;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Utilities.Streams.print;
 
@@ -32,12 +34,12 @@ protected
   Complex sortedCalcPoles[size(X,1)];
 
 algorithm
-  sortedAssignedPoles := Complex.Vectors.sortComplex(assignedPoles);
-  sortedCalcPoles := Complex.Vectors.sortComplex(calcPoles);
-  dl := Complex.Vectors.norm(sortedAssignedPoles-sortedCalcPoles)/max(1,Complex.Vectors.norm(sortedAssignedPoles));
+  sortedAssignedPoles := ComplexMath.Vectors.sort(assignedPoles);
+  sortedCalcPoles := ComplexMath.Vectors.sort(calcPoles);
+  dl := ComplexMath.Vectors.norm(sortedAssignedPoles-sortedCalcPoles)/max(1,ComplexMath.Vectors.norm(sortedAssignedPoles));
   YT := Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices.inv(X);
   for l1 in 1:n loop
-    c[l1] := Complex.Vectors.norm(YT[l1, :])*Complex.Vectors.norm(X[:,l1])/Complex.'abs'(Complex.Vectors.multiply(YT[l1,:],X[:,l1]));
+    c[l1] := ComplexMath.Vectors.norm(YT[l1, :])*ComplexMath.Vectors.norm(X[:,l1])/ComplexMath.abs(ComplexMathAdds.Vectors.multiply(YT[l1,:],X[:,l1]));
   end for;
   //performance indices
   // condition number kappa_2(X) = ||X||_2 * ||inv(X)||_2

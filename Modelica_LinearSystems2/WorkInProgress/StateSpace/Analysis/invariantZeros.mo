@@ -4,9 +4,9 @@ encapsulated function invariantZeros
 
   import Modelica;
   import MatricesMSL = Modelica.Math.Matrices;
+  import Complex;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Complex;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices.LAPACK;
   import Modelica_LinearSystems2.WorkInProgress;
@@ -82,7 +82,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-zeros = StateSpace.Analysis.<b>invariantZeros</b>(ss)
+zeros = StateSpace.Analysis.<strong>invariantZeros</strong>(ss)
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -90,23 +90,23 @@ zeros = StateSpace.Analysis.<b>invariantZeros</b>(ss)
 Computes the invariant zeros of a system in state space form:
 </p>
 <blockquote><pre>
-der(<b>x</b>) = <b>A</b>*<b>x</b> + <b>B</b>*<b>u</b>
-    <b>y</b> = <b>C</b>*<b>x</b> + <b>D</b>*<b>u</b>
+der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</strong>*<strong>u</strong>
+    <strong>y</strong> = <strong>C</strong>*<strong>x</strong> + <strong>D</strong>*<strong>u</strong>
 </pre></blockquote>
 <p>
 The invariant zeros of this system are defined as the variables
 s  that make the Rosenbrock matrix of the system
 </p>
 <blockquote><pre>
-| s<b>I-A</b>   <b>-B</b> |
+| s<strong>I-A</strong>   <strong>-B</strong> |
 |           |
-| <b>C</b>       <b>D</b> |
+| <strong>C</strong>       <strong>D</strong> |
 </pre></blockquote>
 <p>
 singular.
 </p>
 <p>
-This function applies the algorithm described in [1] where the system (<b>A</b>, <b>B</b>, <b>C</b>, <b>D</b>) is reduced to a new system (<b>A</b>r, <b>B</b>r <b>C</b>r, <b>D</b>r) with the same zeros and with <b>D</b>r of full rank.
+This function applies the algorithm described in [1] where the system (<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>) is reduced to a new system (<strong>A</strong>r, <strong>B</strong>r <strong>C</strong>r, <strong>D</strong>r) with the same zeros and with <strong>D</strong>r of full rank.
 </p>
 
 <h4>Example</h4>
@@ -119,7 +119,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
 
   Complex zeros[:];
 
-<b>algorithm</b>
+<strong>algorithm</strong>
   zeros := Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros(ss);
 // zeros = {1, 0}
 </pre></blockquote>
@@ -127,7 +127,7 @@ This function applies the algorithm described in [1] where the system (<b>A</b>,
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Emami-Naeini, A. and Van Dooren, P. (1982):</dt>
-<dd> <b>Computation of Zeros of Linear Multivariable Systems</b>.
+<dd> <strong>Computation of Zeros of Linear Multivariable Systems</strong>.
      Automatica, 18, pp. 415-430.<br>&nbsp;</dd>
 </dl>
 </html>",revisions="<html>
