@@ -13,8 +13,9 @@ annotation (
     Modelica(version="4.0.0"),
     DymolaCommands(version="1.11")),
   version="2.4.1",
+  versionBuild=2,
   versionDate="2021-10-29",
-  dateModified = "2021-10-28 14:00:00Z",
+  dateModified = "2021-11-16 14:00:00Z",
   revisionId="$F​ormat:%h %ci$",
   conversion(
     from(version={"2.0", "2.1", "2.2", "2.3", "2.3.1", "2.3.2", "2.3.2", "2.3.3", "2.3.4"},
