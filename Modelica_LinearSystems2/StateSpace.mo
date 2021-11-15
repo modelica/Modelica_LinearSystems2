@@ -9201,7 +9201,6 @@ Matrix T has to be invertible, i.e. the system has to be controllable. The trans
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
       input StateSpace ss "State space system";
       output StateSpace tss(
@@ -9215,7 +9214,7 @@ Matrix T has to be invertible, i.e. the system has to be controllable. The trans
         "Matrix of the right eigenvectors of the matrix ss.A";
 
     algorithm
-      (,,,V,) := LAPACK.dgeev(ss.A);
+      (,,,V,) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev(ss.A);
 
       tss := StateSpace.Transformation.toSimilarForm(
             ss,
@@ -10648,7 +10647,6 @@ to separate the uncontrollable poles from the controllable poles.
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Matrices;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
       import Complex;
 
       input Real A[:,size(A,1)] "A-matrix of linear state space system";
