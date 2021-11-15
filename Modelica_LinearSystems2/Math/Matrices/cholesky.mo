@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function cholesky
   "Compute the Cholesky factorization of a symmetric positive definte matrix"
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
   input Real A[:,size(A, 1)];
   input Boolean upper=true "True if the upper triangle of A is provided";
 
@@ -14,7 +13,7 @@ protected
 
 algorithm
   if size(A, 1) > 0 then
-    (H, info) := LAPACK.dpotrf(A, upper);
+    (H, info) := Modelica.Math.Matrices.LAPACK.dpotrf(A, upper);
   else
     H := fill(0,0,0);
     info := 0;

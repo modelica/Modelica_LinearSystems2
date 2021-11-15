@@ -1939,7 +1939,7 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
       ncc := min(nccA, nccg);
       rp := min(rpA, rpg);
       if nccA > 0 then
-        (A_rsf[nfp + 1:n, nfp + 1:n],Q2) := Matrices.LAPACK.dtrsen(
+        (A_rsf[nfp + 1:n, nfp + 1:n],Q2) := Modelica.Math.Matrices.LAPACK.dtrsen(
             "E",
             "V",
             rselectA,
@@ -1979,7 +1979,7 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
           select := fill(false, n - counter + 1);
           select[n - counter + 1] := true;
 
-          (A_rsf[counter:n, counter:n],Q1) := Matrices.LAPACK.dtrsen(
+          (A_rsf[counter:n, counter:n],Q1) := Modelica.Math.Matrices.LAPACK.dtrsen(
             "E",
             "V",
             select,
@@ -2030,7 +2030,7 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
           select := fill(false, n - counter + 1);
           select[n - counter:n - counter + 1] := {true,true};
 
-          (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+          (A_rsf[counter:n, counter:n],Q2) := Modelica.Math.Matrices.LAPACK.dtrsen(
             "E",
             "V",
             select,
@@ -2078,7 +2078,7 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
           select := fill(false, n - counter + 1);
           select[n - counter:n - counter + 1] := {true,true};
 
-          (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+          (A_rsf[counter:n, counter:n],Q2) := Modelica.Math.Matrices.LAPACK.dtrsen(
             "E",
             "V",
             select,
@@ -2124,7 +2124,7 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
         select := fill(false, n - counter + 1);
         select[n - counter:n - counter + 1] := {true,true};
 
-        (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+        (A_rsf[counter:n, counter:n],Q2) := Modelica.Math.Matrices.LAPACK.dtrsen(
           "E",
           "V",
           select,

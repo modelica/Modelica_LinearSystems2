@@ -3,7 +3,6 @@ function eigenvalues2 "Compute eigenvalues and unnormalized eigenvectors"
 
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices.Internal;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
   input Real A[:,size(A, 1)];
 
@@ -30,12 +29,12 @@ protected
 
 algorithm
   (H,V,tau) := Modelica.Math.Matrices.Utilities.toUpperHessenberg(A,1,n);
-  Q := LAPACK.dorghr(V, 1, n, tau);
+  Q := Modelica.Math.Matrices.LAPACK.dorghr(V, 1, n, tau);
 
  lwork := Internal.dhseqr_workdim(H);
 
   if size(H, 1) > 0 then
-   (alphaReal,alphaImag,info,Ho,Zo) := LAPACK.dhseqr(H, lwork, false, "V", Q);
+   (alphaReal,alphaImag,info,Ho,Zo) := Matrices.LAPACK.dhseqr(H, lwork, false, "V", Q);
   else
     alphaReal := fill(0, size(H, 1));
     alphaImag := fill(0, size(H, 1));
@@ -43,7 +42,7 @@ algorithm
     Ho := fill(0, size(H, 1), size(H, 2));
   end if;
 
-  (lEigenVectors,rEigenVectors) := LAPACK.dtrevc(Ho, "B", "B", Zo);
+  (lEigenVectors,rEigenVectors) := Modelica.Math.Matrices.LAPACK.dtrevc(Ho, "B", "B", Zo);
 
   annotation (Documentation(info="<html>
 </html>"));

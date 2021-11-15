@@ -2,8 +2,6 @@ within Modelica_LinearSystems2.Math.Matrices.Internal;
 function reorderRSFd
   "Reorders a real Schur factorization for poleAssignmentMI design for discrete systems"
 
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-
   input Real T[:,:] "upper quasi-triangular matrix in Schur canonical form";
   input Real Q[:,size(T, 2)] "matrix of Schur vectors";
   input Real alphaReal[size(T, 1)]
@@ -29,7 +27,7 @@ algorithm
     end if;
   end for;
 
-  (To,Qo,wr,wi) := LAPACK.dtrsen(
+  (To,Qo,wr,wi) := Modelica.Math.Matrices.LAPACK.dtrsen(
       "E",
       "V",
       select,

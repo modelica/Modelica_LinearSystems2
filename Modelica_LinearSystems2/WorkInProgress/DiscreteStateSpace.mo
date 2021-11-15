@@ -914,12 +914,12 @@ end kfStepState;
 
 function kfStepMatrices2
       "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
-extends Modelica.Icons.Function;
+  extends Modelica.Icons.Function;
 
       import Modelica;
+      import Modelica.Math.Matrices.LAPACK;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
       import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
 input Real A[:,size(A, 1)] "Transition matrix of the discrete system";
@@ -960,7 +960,7 @@ algorithm
 //PCT:=P*transpose(C) "Matrix P*C'";
 //M:=DiscreteStateSpace.Internal.symMatMul(C, P, R, true)     "Upper triangle of measurement prediction covariance C*P*C' + R";
 (UMutri,info) := LAPACK.dpotrf(M, true);// Calculate the Cholesky factorization U*U' of M
-assert(info == 0, "Calculating a Cholesky decomposition with function \"Lapack.dpotrf\" failed in function \"kfStep\".");
+assert(info == 0, "Calculating a Cholesky decomposition with function \"LAPACK.dpotrf\" failed in function \"kfStep\".");
 for l1 in 2:ny loop
   for l2 in 1:l1 - 1 loop
     UMutri[l1, l2] := 0.0;
@@ -1064,12 +1064,11 @@ function ukfPredict "Prediction step in ukf"
       import Modelica_LinearSystems2;
       import Modelica.Math.Matrices.LU_solve;
       import Modelica.Math.Matrices.solve;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.predictBase;
 
 algorithm
-   (CFP,info) := LAPACK.dpotrf(a*Ppre, false);// declare CFP as lower trangular instead of additional transposing -> P has to be full
+   (CFP,info) := Modelica.Math.Matrices.LAPACK.dpotrf(a*Ppre, false);// declare CFP as lower trangular instead of additional transposing -> P has to be full
    assert(info == 0, "Cholesky factor was not computed successfully in ukfSigmaPoints");
 
  // Compute sigma points
@@ -1172,14 +1171,13 @@ function ukfUpdate "Update step in ukf"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
       import Modelica_LinearSystems2.Math.Matrices;
 
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.updateBase;
 
 algorithm
-  (CFP,info) := LAPACK.dpotrf(a*Ppre, false);// declare P as lower trangular instead of additional transposing -> P has to be full
+  (CFP,info) := Modelica.Math.Matrices.LAPACK.dpotrf(a*Ppre, false);// declare P as lower trangular instead of additional transposing -> P has to be full
   assert(info == 0, "Cholesky factor was not computed successfully in ukfSigmaPoints");
 //CFP := Matrices.cholesky(a*P,false);
 // Compute sigma points
@@ -1346,7 +1344,6 @@ function ukfPredict_sr "Prediction step in square root ukf"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
       import Modelica_LinearSystems2.Math.Matrices;
 
   extends
@@ -1424,7 +1421,6 @@ function ukfUpdate_sr "Update step in square root ukf"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
       import Modelica_LinearSystems2.Math.Matrices;
 
   extends
@@ -1513,9 +1509,9 @@ function ukfEstimate_sr
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.estimateBase_sr;
 
       import Modelica;
+      import Modelica.Math.Matrices.LAPACK;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Matrices;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
   output Real xmu[size(xm, 1)] "Updated state mean";
 
@@ -1959,10 +1955,10 @@ function sr_ukfEstimate_2
   extends Modelica.Icons.Function;
 
       import Modelica;
+      import Modelica.Math.Matrices.LAPACK;
       import Modelica_LinearSystems2;
 //  import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.Math.Matrices;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
   input Real y[:] "Measured output vector";
   input Real xm[:] "Predicted state mean";

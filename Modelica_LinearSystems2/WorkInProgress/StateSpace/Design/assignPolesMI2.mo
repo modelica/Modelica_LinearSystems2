@@ -86,7 +86,7 @@ protected
 algorithm
   if giveEigenvalues then
     (,,alphaReal,alphaImag,info) :=
-      Modelica_LinearSystems2.Math.Matrices.LAPACK.dgees(ss.A);
+      MatricesMSL.LAPACK.dgees(ss.A);
     assert(info == 0, "The output info of LAPACK.dgees should be zero, else if\n
      info < 0:  if info = -i, the i-th argument of dgees had an illegal value\n
      info > 0:  if INFO = i, and i is
@@ -210,7 +210,7 @@ algorithm
       select := fill(false, n - counter + 1);
       select[n - counter:n - counter + 1] := {true,true};
 
-      (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+      (A_rsf[counter:n, counter:n],Q2) := MatricesMSL.LAPACK.dtrsen(
         "E",
         "V",
         select,
@@ -251,7 +251,7 @@ algorithm
       select := fill(false, n - counter + 1);
       select[n - counter + 1] := true;
 
-      (A_rsf[counter:n, counter:n],Q1) := Matrices.LAPACK.dtrsen(
+      (A_rsf[counter:n, counter:n],Q1) := MatricesMSL.LAPACK.dtrsen(
         "E",
         "V",
         select,

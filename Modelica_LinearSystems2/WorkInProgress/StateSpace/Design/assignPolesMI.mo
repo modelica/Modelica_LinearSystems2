@@ -148,7 +148,7 @@ algorithm
   ncc := min(nccA, nccg);
   rp := min(rpA, rpg);
   if nccA > 0 then
-    (A_rsf[nfp + 1:n, nfp + 1:n],Q2) := Matrices.LAPACK.dtrsen(
+    (A_rsf[nfp + 1:n, nfp + 1:n],Q2) := Modelica.Math.Matrices.LAPACK.dtrsen(
         "E",
         "V",
         rselectA,
@@ -194,7 +194,7 @@ Modelica.Utilities.Streams.print("1x1 Ann = "+String(A_rsf[n,n])+"\n ap = "+Stri
       select := fill(false, n - counter + 1);
       select[n - counter + 1] := true;
 
-      (A_rsf[counter:n, counter:n],Q1) := Matrices.LAPACK.dtrsen(
+      (A_rsf[counter:n, counter:n],Q1) := Modelica.Math.Matrices.LAPACK.dtrsen(
         "E",
         "V",
         select,
@@ -253,7 +253,7 @@ Modelica.Utilities.Streams.print("1x1 Ann = "+String(A_rsf[n,n])+"\n ap = "+Stri
       select := fill(false, n - counter + 1);
       select[n - counter:n - counter + 1] := {true,true};
 
-      (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+      (A_rsf[counter:n, counter:n],Q2) := Modelica.Math.Matrices.LAPACK.dtrsen(
         "E",
         "V",
         select,
@@ -307,7 +307,7 @@ Modelica.Utilities.Streams.print("2x2, 2 real system, complex ass Ann = "+Matric
       select := fill(false, n - counter + 1);
       select[n - counter:n - counter + 1] := {true,true};
 
-      (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+      (A_rsf[counter:n, counter:n],Q2) := Modelica.Math.Matrices.LAPACK.dtrsen(
         "E",
         "V",
         select,
@@ -358,7 +358,7 @@ Modelica.Utilities.Streams.print("2x2, 2 compl system, complex ass Ann = "+Matri
     select := fill(false, n - counter + 1);
     select[n - counter:n - counter + 1] := {true,true};
 
-    (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+    (A_rsf[counter:n, counter:n],Q2) := Modelica.Math.Matrices.LAPACK.dtrsen(
       "E",
       "V",
       select,

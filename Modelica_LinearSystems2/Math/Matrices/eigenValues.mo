@@ -19,12 +19,13 @@ protected
 algorithm
 if size(A,1) > 0 then
   if onlyEigenvalues then
-      (eigenvalues[:, 1],eigenvalues[:, 2],info) :=
-        Modelica.Math.Matrices.LAPACK.dgeev_eigenValues(A);
-     rightEigenvectors :=zeros(size(A, 1), size(A, 1));
-     leftEigenvectors :=zeros(size(A, 1), size(A, 1));
+    (eigenvalues[:, 1],eigenvalues[:, 2],info) :=
+      Modelica.Math.Matrices.LAPACK.dgeev_eigenValues(A);
+    rightEigenvectors :=zeros(size(A, 1), size(A, 1));
+    leftEigenvectors :=zeros(size(A, 1), size(A, 1));
   else
-      (eigenvalues[:, 1],eigenvalues[:, 2],leftEigenvectors,rightEigenvectors,,info) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeevx(A);
+    (eigenvalues[:, 1],eigenvalues[:, 2],leftEigenvectors,rightEigenvectors,,info) :=
+      Modelica.Math.Matrices.LAPACK.dgeevx(A);
   end if;
   assert(info == 0, "Calculating the eigenvalues with function
 \"Matrices.eigenvalues\" is not possible, since the

@@ -20,7 +20,7 @@ algorithm
 This is not allowed when calling Modelica.Matrices.QR(A).");
   if ncol > 0 then
 
-    (Q,p,tau) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqp3(A, lwork);
+    (Q,p,tau) := Modelica.Math.Matrices.LAPACK.dgeqp3(A, lwork);
 
   // determine R
     R := zeros(ncol, ncol);
