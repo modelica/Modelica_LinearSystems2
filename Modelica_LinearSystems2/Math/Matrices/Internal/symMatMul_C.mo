@@ -5,7 +5,6 @@ function symMatMul_C
   extends Modelica.Icons.Function;
   import Modelica;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
   input Real A[:,:];
   input Real B[size(A, 2),size(A, 2)];
