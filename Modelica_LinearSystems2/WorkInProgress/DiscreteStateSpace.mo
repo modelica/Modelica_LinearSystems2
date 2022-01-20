@@ -740,13 +740,13 @@ encapsulated package Internal
     import Modelica_LinearSystems2;
 function kfStepMatrices
       "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
-extends Modelica.Icons.Function;
+  extends Modelica.Icons.Function;
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
 input Real A[:,size(A, 1)] "Transition matrix of the discrete system";
 input Real B[size(A, 1),:] "Input matrix of the discrete system";
@@ -914,13 +914,13 @@ end kfStepState;
 
 function kfStepMatrices2
       "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
-extends Modelica.Icons.Function;
+  extends Modelica.Icons.Function;
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-      import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
+  import Modelica;
+  import Modelica.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math;
+  import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
 input Real A[:,size(A, 1)] "Transition matrix of the discrete system";
 input Real B[size(A, 1),:] "Input matrix of the discrete system";
@@ -960,7 +960,7 @@ algorithm
 //PCT:=P*transpose(C) "Matrix P*C'";
 //M:=DiscreteStateSpace.Internal.symMatMul(C, P, R, true)     "Upper triangle of measurement prediction covariance C*P*C' + R";
 (UMutri,info) := LAPACK.dpotrf(M, true);// Calculate the Cholesky factorization U*U' of M
-assert(info == 0, "Calculating a Cholesky decomposition with function \"Lapack.dpotrf\" failed in function \"kfStep\".");
+assert(info == 0, "Calculating a Cholesky decomposition with function \"LAPACK.dpotrf\" failed in function \"kfStep\".");
 for l1 in 2:ny loop
   for l2 in 1:l1 - 1 loop
     UMutri[l1, l2] := 0.0;
@@ -1061,15 +1061,14 @@ partial function ekfSystemBase2 "Base class of ekf-system functions"
 end ekfSystemBase2;
 
 function ukfPredict "Prediction step in ukf"
-      import Modelica_LinearSystems2;
-      import Modelica.Math.Matrices.LU_solve;
-      import Modelica.Math.Matrices.solve;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2;
+  import Modelica.Math.Matrices.LU_solve;
+  import Modelica.Math.Matrices.solve;
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.predictBase;
 
 algorithm
-   (CFP,info) := LAPACK.dpotrf(a*Ppre, false);// declare CFP as lower trangular instead of additional transposing -> P has to be full
+   (CFP,info) := Modelica.Math.Matrices.LAPACK.dpotrf(a*Ppre, false);// declare CFP as lower trangular instead of additional transposing -> P has to be full
    assert(info == 0, "Cholesky factor was not computed successfully in ukfSigmaPoints");
 
  // Compute sigma points
@@ -1169,17 +1168,16 @@ end predictBase;
 function ukfUpdate "Update step in ukf"
   extends Modelica.Icons.Function;
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-      import Modelica_LinearSystems2.Math.Matrices;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices;
 
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.updateBase;
 
 algorithm
-  (CFP,info) := LAPACK.dpotrf(a*Ppre, false);// declare P as lower trangular instead of additional transposing -> P has to be full
+  (CFP,info) := Modelica.Math.Matrices.LAPACK.dpotrf(a*Ppre, false);// declare P as lower trangular instead of additional transposing -> P has to be full
   assert(info == 0, "Cholesky factor was not computed successfully in ukfSigmaPoints");
 //CFP := Matrices.cholesky(a*P,false);
 // Compute sigma points
@@ -1343,11 +1341,10 @@ end estimateBase;
 function ukfPredict_sr "Prediction step in square root ukf"
   extends Modelica.Icons.Function;
       import Modelica.Math.Matrices.solve;
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-      import Modelica_LinearSystems2.Math.Matrices;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices;
 
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.predictBase_sr;
@@ -1421,11 +1418,10 @@ end ukfPredict_sr;
 function ukfUpdate_sr "Update step in square root ukf"
   extends Modelica.Icons.Function;
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-      import Modelica_LinearSystems2.Math.Matrices;
+  import Modelica;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Math.Matrices;
 
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.updateBase_sr;
@@ -1512,10 +1508,10 @@ function ukfEstimate_sr
   extends
         Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.estimateBase_sr;
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Matrices;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica;
+  import Modelica.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math.Matrices;
 
   output Real xmu[size(xm, 1)] "Updated state mean";
 
@@ -1763,11 +1759,12 @@ function kfStepMatrices
       "One step, i.e. prediction and update of a kalman filter iteration for discrete systems"
   extends Modelica.Icons.Function;
 
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-      import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica;
+  import MatricesMSL = Modelica.Math.Matrices;
+  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Math;
+  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
 
   input Real A[:,size(A, 1)] "Transition matrix of the discrete system";
   input Real B[size(A, 1),:] "Input matrix of the discrete system";
@@ -1806,11 +1803,11 @@ function kfStepMatrices
   Integer info;
 
 algorithm
-PCT:=P*transpose(C) "Matrix P*C'";
-M:=Math.Matrices.Internal.symMatMul(     C, P, R, true)
-        "Upper triangle of measurement prediction covariance C*P*C' + R";
+  PCT:=P*transpose(C) "Matrix P*C'";
+  M:=Math.Matrices.Internal.symMatMul(C, P, R, true)
+    "Upper triangle of measurement prediction covariance C*P*C' + R";
   mnorm := LAPACK.dlansy(M, "1", true);
-  (UMutri,info) := LAPACK.dpotrf(M, true);// Calculate the Cholesky factorization U*U' of M
+  (UMutri,info) := MatricesMSL.LAPACK.dpotrf(M, true);// Calculate the Cholesky factorization U*U' of M
   assert(info == 0, "Calculating a Cholesky decomposition with function \"Lapack.dpotrf\" failed in function \"kfMatrices\".");
   (mrcond,info) := LAPACK.dpocon(UMutri, mnorm, true);
   assert(info == 0, "Calculating the reciprocal condition number with function \"Lapack.dpocon\" failed in function \"kfMatrices\".");
@@ -1823,8 +1820,8 @@ M:=Math.Matrices.Internal.symMatMul(     C, P, R, true)
   end for;
 
   //K from K*M = P*C' with K*U'*U = P*C', U is Cholesky factor
-  K := LAPACK.dtrsm(UMutri, K, alpha, true, true, false, false);
-  K := LAPACK.dtrsm(UMutri, K, alpha, true, true, true, false);
+  K := MatricesMSL.LAPACK.dtrsm(UMutri, K, alpha, true, true, false, false);
+  K := MatricesMSL.LAPACK.dtrsm(UMutri, K, alpha, true, true, true, false);
 
 // Calculate upper triangle of symmetric P-K*C*P
   for l1 in 1:nx loop
