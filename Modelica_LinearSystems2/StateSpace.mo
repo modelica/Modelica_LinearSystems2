@@ -3597,7 +3597,6 @@ i.e. v1 = |      |,   v2 = |       |
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Matrices;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
       import Complex;
 
       input StateSpace ss "Linear system in state space form";
@@ -3656,7 +3655,7 @@ i.e. v1 = |      |,   v2 = |       |
           Af := AfBf[:, 1:size(Ar, 2)];
           Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
 
-          (alphaReal,alphaImag,beta,,,info) := LAPACK.dggev(
+          (alphaReal,alphaImag,beta,,,info) := MatricesMSL.LAPACK.dggev(
                 Af,
                 Bf,
                 n);
@@ -3767,8 +3766,6 @@ This function applies the algorithm described in [1] where the system (<strong>A
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Math.Matrices;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
       input StateSpace ss "Linear system in state space form";
 
@@ -6284,6 +6281,7 @@ represented by a StateSpace record.
       "Pole assignment design algorithm for multi input systems"
 
       import Modelica;
+      import Modelica.Math.Matrices.LAPACK;
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -6428,7 +6426,7 @@ represented by a StateSpace record.
       ncc := min(nccA, nccg);
       rp := min(rpA, rpg);
       if nccA > 0 then
-        (A_rsf[nfp + 1:n, nfp + 1:n],Q2) := Matrices.LAPACK.dtrsen(
+        (A_rsf[nfp + 1:n, nfp + 1:n],Q2) := LAPACK.dtrsen(
               "E",
               "V",
               rselectA,
@@ -6471,7 +6469,7 @@ represented by a StateSpace record.
         select := fill(false, n - counter + 1);
         select[n - counter + 1] := true;
 
-        (A_rsf[counter:n, counter:n],Q1) := Matrices.LAPACK.dtrsen(
+        (A_rsf[counter:n, counter:n],Q1) := LAPACK.dtrsen(
               "E",
               "V",
               select,
@@ -6530,7 +6528,7 @@ represented by a StateSpace record.
           select := fill(false, n - counter + 1);
           select[n - counter:n - counter + 1] := {true,true};
 
-          (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+          (A_rsf[counter:n, counter:n],Q2) := LAPACK.dtrsen(
                 "E",
                 "V",
                 select,
@@ -6583,7 +6581,7 @@ represented by a StateSpace record.
           select := fill(false, n - counter + 1);
           select[n - counter:n - counter + 1] := {true,true};
 
-          (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+          (A_rsf[counter:n, counter:n],Q2) := LAPACK.dtrsen(
                 "E",
                 "V",
                 select,
@@ -6632,7 +6630,7 @@ represented by a StateSpace record.
         select := fill(false, n - counter + 1);
         select[n - counter:n - counter + 1] := {true,true};
 
-        (A_rsf[counter:n, counter:n],Q2) := Matrices.LAPACK.dtrsen(
+        (A_rsf[counter:n, counter:n],Q2) := LAPACK.dtrsen(
               "E",
               "V",
               select,
@@ -8875,7 +8873,6 @@ i.e.
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica.Math.Matrices;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
       input StateSpace ss "State space system";
       input Real T[size(ss.A, 2), size(ss.A, 1)]=identity(size(ss.A, 1))
@@ -8897,9 +8894,9 @@ i.e.
         tss.C := ss.C*T;
         tss.D := ss.D;
       else
-        tss.A := transpose(LAPACK.dgesvx(T, transpose(T*ss.A)));
+        tss.A := transpose(Matrices.LAPACK.dgesvx(T, transpose(T*ss.A)));
         tss.B := T*ss.B;
-        tss.C := transpose(LAPACK.dgesvx(T, transpose(ss.C)));
+        tss.C := transpose(Matrices.LAPACK.dgesvx(T, transpose(ss.C)));
         tss.D := ss.D;
       end if;
       annotation (Documentation(info="<html>
@@ -10655,7 +10652,6 @@ to separate the uncontrollable poles from the controllable poles.
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Matrices;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
       import Complex;
 
       input Real A[:,size(A,1)] "A-matrix of linear state space system";
@@ -10716,7 +10712,7 @@ to separate the uncontrollable poles from the controllable poles.
           Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
 
           (alphaReal,alphaImag,beta,info) :=
-             Modelica_LinearSystems2.Math.Matrices.LAPACK.dggev_eigenValues(Af,Bf);
+             Matrices.LAPACK.dggev_eigenValues(Af,Bf);
           assert(info == 0,
             "Failed to compute invariant zeros with function invariantZerosWithRealMatrix(..)");
 
