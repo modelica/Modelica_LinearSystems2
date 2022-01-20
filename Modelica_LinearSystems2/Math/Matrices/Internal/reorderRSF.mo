@@ -2,8 +2,6 @@ within Modelica_LinearSystems2.Math.Matrices.Internal;
 function reorderRSF
   "Reorders a real Schur factorization according to a given pattern of the eigenvalues"
 
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-
   input Boolean iscontinuous;
   input Real T[:,:];
   input Real Q[:,size(T, 2)];
@@ -36,7 +34,7 @@ algorithm
     end for;
   end if;
 
-  (To,Qo,wr,wi) := LAPACK.dtrsen(
+  (To,Qo,wr,wi) := Modelica.Math.Matrices.LAPACK.dtrsen(
       "E",
       "V",
       select,

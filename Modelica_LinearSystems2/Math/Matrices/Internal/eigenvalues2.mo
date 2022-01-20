@@ -30,7 +30,7 @@ protected
 
 algorithm
   (H,V,tau) := Modelica.Math.Matrices.Utilities.toUpperHessenberg(A,1,n);
-  Q := LAPACK.dorghr(V, 1, n, tau);
+  Q := Modelica.Math.Matrices.LAPACK.dorghr(V, 1, n, tau);
 
  lwork := Internal.dhseqr_workdim(H);
 
@@ -43,7 +43,7 @@ algorithm
     Ho := fill(0, size(H, 1), size(H, 2));
   end if;
 
-  (lEigenVectors,rEigenVectors) := LAPACK.dtrevc(Ho, "B", "B", Zo);
+  (lEigenVectors,rEigenVectors) := Modelica.Math.Matrices.LAPACK.dtrevc(Ho, "B", "B", Zo);
 
   annotation (Documentation(info="<html>
 </html>"));
