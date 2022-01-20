@@ -5,7 +5,8 @@ function solve2r
   extends Modelica.Icons.Function;
   import Modelica;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+  import Modelica.Math.Matrices.LAPACK;
+
   input Real A[:,size(A,1)] "Matrix A of X*op(A) = B";
   input Real B[:,size(A,1)] "Matrix B of X*op(A) = B";
   input Boolean transA=false "True if op(A)=A', false if op(A)=A";
@@ -25,7 +26,7 @@ protected
 
 algorithm
   if not isTriangular then
-    (LU,k,info) := Modelica.Math.Matrices.LAPACK.dgetrf(A);
+    (LU,k,info) := LAPACK.dgetrf(A);
     assert(info == 0, "LU factoriztion failed in \"solve2r\"");
   else
     LU := A;

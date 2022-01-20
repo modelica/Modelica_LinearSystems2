@@ -14,8 +14,8 @@ protected
 algorithm
   if min(size(A)) > 0 then
     (LU,,info) := Modelica.Math.Matrices.LAPACK.dgetrf(A);
-    anorm := Modelica_LinearSystems2.Math.Matrices.LAPACK.dlange(A,normspec);
-    (rcond,info) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgecon(LU,inf,anorm);
+    anorm := Modelica.Math.Matrices.LAPACK.dlange(A,normspec);
+    (rcond,info) := Modelica.Math.Matrices.LAPACK.dgecon(LU,inf,anorm);
   else
     rcond := Modelica.Constants.inf;
     info := 0;

@@ -33,7 +33,7 @@ algorithm
 // similarity transformation:  Q' * A * Q = Aout. Q can be computed from
 // Aout and tau (dorghr)
 
-    (Aout,tau,info1) := LAPACK.dgehrd(
+    (Aout,tau,info1) := Modelica.Math.Matrices.LAPACK.dgehrd(
       A,
       1,
       n);
@@ -41,7 +41,7 @@ algorithm
       "'th argument of LAPACK.dgehrd had an illegal value");
 // dorghr to compute Q
 
-    (Q,info1) := LAPACK.dorghr(
+    (Q,info1) := Modelica.Math.Matrices.LAPACK.dorghr(
       Aout,
       1,
       n,

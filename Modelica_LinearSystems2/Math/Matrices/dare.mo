@@ -66,10 +66,10 @@ algorithm
   Z21 := Z[n + 1:2*n, 1:n];
   if size(Z11, 1) > 0 then
 //  X := transpose(Matrices.solve2(transpose(Z11), transpose(Z21)));
-    (X,info) := Matrices.LAPACK.dgesvx(Z11, transpose(Z21));//function does not need to transpose Z11 as solve2 does
+    (X,info) := Modelica.Math.Matrices.LAPACK.dgesvx(Z11, transpose(Z21));//function does not need to transpose Z11 as solve2 does
     X := transpose(X);
     assert(info == 0, "Solving a linear system of equations with function
-\"Matrices.LAPACK.dgesvx\" is not possible, because the system has either
+\"LAPACK.dgesvx\" is not possible, because the system has either
 no or infinitely many solutions (input A is singular).");
 
     if refine then

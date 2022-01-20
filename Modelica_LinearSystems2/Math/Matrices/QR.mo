@@ -19,7 +19,7 @@ protected
 algorithm
   if minrowcol > 0 then
 
-    (Q,tau) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqrf(A, lwork);
+    (Q,tau) := Modelica.Math.Matrices.LAPACK.dgeqrf(A, lwork);
 
   // determine R
     R := zeros(minrowcol, ncol);

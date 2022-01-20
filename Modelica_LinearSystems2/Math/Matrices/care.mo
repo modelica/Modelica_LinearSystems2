@@ -44,11 +44,11 @@ algorithm
     Z21 := Z[n + 1:2*n, 1:n];
     if size(Z11, 1) > 0 then
 //  X := transpose(Matrices.solve2(transpose(Z11), transpose(Z21)));
-      (X,info) := Matrices.LAPACK.dgesvx(Z11, transpose(Z21));
+      (X,info) := Modelica.Math.Matrices.LAPACK.dgesvx(Z11, transpose(Z21));
       //this function does not need to transpose Z11 as solve2 does
       X := transpose(X);
       assert(info == 0,
-        "Solving a linear system of equations with function \"Matrices.LAPACK.dgesvx\" is not possible, because the system has either no or infinitely many solutions (input A is singular).");
+        "Solving a linear system of equations with function \"LAPACK.dgesvx\" is not possible, because the system has either no or infinitely many solutions (input A is singular).");
       if refine then
         X := Matrices.Internal.carenls(A, B, R, Q, X);
       end if;

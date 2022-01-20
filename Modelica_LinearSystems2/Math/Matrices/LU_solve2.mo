@@ -15,7 +15,7 @@ algorithm
 is singular, i.e., no unique solution exists.");
   end for;
   if size(LU, 1) > 0 then
-    X := LAPACK.dgetrs(
+    X := Modelica.Math.Matrices.LAPACK.dgetrs(
       LU,
       pivots,
       B);

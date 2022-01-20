@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Math.Matrices;
 function toUpperHessenberg
   "Transform a real general matrix A to upper Hessenberg form H by an orthogonal similarity transformation:  Q' * A * Q = H"
   import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
   input Real A[:,size(A, 1)] "Square matrix A";
   input Integer ilo=1
@@ -24,7 +23,7 @@ protected
 
 algorithm
   if n>0 then
-  (Aout,tau,info) := LAPACK.dgehrd(
+  (Aout,tau,info) := Modelica.Math.Matrices.LAPACK.dgehrd(
     A,
     ilo,
     ihi);
@@ -58,7 +57,7 @@ algorithm
 Function <strong>toUpperHessenberg</strong> computes a upper Hessenberg form <strong>H</strong>
 of a matrix <strong>A</strong> by orthogonal similarity transformation:
 <strong>Q</strong>' * <strong>A</strong> * <strong>Q</strong> = <strong>H</strong>. It calls LAPACK function DGEHRD.
-See <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.LAPACK.dgehrd\">Matrices.LAPACK.dgehrd</a>
+See <a href=\"Modelica://Modelica.Math.Matrices.LAPACK.dgehrd\">Modelica.Math.Matrices.LAPACK.dgehrd</a>
 for more information about the additional outputs V, tau, info and
 inputs ilo, ihi for more information.
 </p>
