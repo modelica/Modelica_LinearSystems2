@@ -3,9 +3,7 @@ function plotBodeMIMO
   "Constructs zeros-and-poles-transfers from state space representation and plots the Bode diagrams with automatic determination of the frequency range to plot "
   extends Modelica.Icons.Function;
 
-  import Modelica;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.TransferFunction;
 
   input Boolean systemOnFile=false
     "True, if state space system is defined on file"
