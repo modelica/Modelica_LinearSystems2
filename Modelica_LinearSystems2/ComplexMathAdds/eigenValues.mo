@@ -20,7 +20,7 @@ algorithm
   if size(A, 1) > 0 then
      (alphaReal,alphaImag,,,,info) := Modelica.Math.Matrices.LAPACK.dgeevx(A);
      assert(info == 0,
-       "Failed to compute eigenvalues with function eigenValues_dgeevx(..)");
+       "Failed to compute eigenvalues with function eigenValues(..)");
 
      for i in 1:nx loop
        eigval[i].re := alphaReal[i];

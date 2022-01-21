@@ -4,6 +4,7 @@ encapsulated function assignPolesMI
 
   import Modelica;
   import Modelica.Utilities.Streams.print;
+  import MatricesMSL = Modelica.Math.Matrices;
   import Complex;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.ComplexMathAdds;
@@ -18,7 +19,7 @@ encapsulated function assignPolesMI
 //  input Integer np=size(gamma, 1) "number of given eigenvalues to assign";
   input Real alpha=-1e10
     "maximum admissible value for real parts(continuous) or for moduli (discrete) of the eigenvalues of A which will not be modified by the eigenvalue assignment algorithm";
-  input Real tolerance=Modelica.Math.Matrices.norm(ss.A, 1)*1e-12
+  input Real tolerance=MatricesMSL.norm(ss.A, 1)*1e-12
     "The tolerance to be used in determining the controllability of (A,B)";
   input Boolean calculateEigenvectors=false
     "Calculate the eigenvectors X of the closed loop system when true";
@@ -97,7 +98,7 @@ algorithm
   end for;
 
   // put matrix ss.A to real Schur form A <- QAQ' and compute B <- QB
-  (A_rsf,Z,alphaReal,alphaImag) := Modelica.Math.Matrices.realSchur(ss.A);
+  (A_rsf,Z,alphaReal,alphaImag) := MatricesMSL.realSchur(ss.A);
   ZT := transpose(Z);
 
   // reorder real Schur form according to alpha
@@ -148,7 +149,7 @@ algorithm
   ncc := min(nccA, nccg);
   rp := min(rpA, rpg);
   if nccA > 0 then
-    (A_rsf[nfp + 1:n, nfp + 1:n],Q2) := Modelica.Math.Matrices.LAPACK.dtrsen(
+    (A_rsf[nfp + 1:n, nfp + 1:n],Q2) := MatricesMSL.LAPACK.dtrsen(
         "E",
         "V",
         rselectA,
@@ -194,7 +195,7 @@ Modelica.Utilities.Streams.print("1x1 Ann = "+String(A_rsf[n,n])+"\n ap = "+Stri
       select := fill(false, n - counter + 1);
       select[n - counter + 1] := true;
 
-      (A_rsf[counter:n, counter:n],Q1) := Modelica.Math.Matrices.LAPACK.dtrsen(
+      (A_rsf[counter:n, counter:n],Q1) := MatricesMSL.LAPACK.dtrsen(
         "E",
         "V",
         select,
@@ -253,7 +254,7 @@ Modelica.Utilities.Streams.print("1x1 Ann = "+String(A_rsf[n,n])+"\n ap = "+Stri
       select := fill(false, n - counter + 1);
       select[n - counter:n - counter + 1] := {true,true};
 
-      (A_rsf[counter:n, counter:n],Q2) := Modelica.Math.Matrices.LAPACK.dtrsen(
+      (A_rsf[counter:n, counter:n],Q2) := MatricesMSL.LAPACK.dtrsen(
         "E",
         "V",
         select,
@@ -307,7 +308,7 @@ Modelica.Utilities.Streams.print("2x2, 2 real system, complex ass Ann = "+Matric
       select := fill(false, n - counter + 1);
       select[n - counter:n - counter + 1] := {true,true};
 
-      (A_rsf[counter:n, counter:n],Q2) := Modelica.Math.Matrices.LAPACK.dtrsen(
+      (A_rsf[counter:n, counter:n],Q2) := MatricesMSL.LAPACK.dtrsen(
         "E",
         "V",
         select,
@@ -358,7 +359,7 @@ Modelica.Utilities.Streams.print("2x2, 2 compl system, complex ass Ann = "+Matri
     select := fill(false, n - counter + 1);
     select[n - counter:n - counter + 1] := {true,true};
 
-    (A_rsf[counter:n, counter:n],Q2) := Modelica.Math.Matrices.LAPACK.dtrsen(
+    (A_rsf[counter:n, counter:n],Q2) := MatricesMSL.LAPACK.dtrsen(
       "E",
       "V",
       select,
