@@ -1,11 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function symMatMul_C
   "Calculate the upper triangle of A*B*A'+a*C with B and C symmetric"
-
   extends Modelica.Icons.Function;
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
   input Real A[:,:];
   input Real B[size(A, 2),size(A, 2)];

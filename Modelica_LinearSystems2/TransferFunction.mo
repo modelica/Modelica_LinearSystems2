@@ -1018,7 +1018,6 @@ Calculate the eigenvalues of the corresponding state space representation of a t
       import Complex;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
-      import Modelica.Math.Matrices.LAPACK;
 
       input TransferFunction tf "transfer function of a system";
       input Boolean onlyEigenvectors=true;
