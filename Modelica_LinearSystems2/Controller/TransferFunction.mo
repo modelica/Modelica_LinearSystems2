@@ -1,8 +1,6 @@
 within Modelica_LinearSystems2.Controller;
 block TransferFunction
   "Continuous or discrete, single input single output transfer function"
-  import Modelica_LinearSystems2.Math.Polynomial;
-  import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2;
 
