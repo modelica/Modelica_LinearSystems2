@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Internal.Streams;
 function stateSpaceString_html
   "Print state space representation in one string in HTML format"
-  import Modelica;
+
   import Modelica_LinearSystems2.StateSpace;
   import Modelica.Utilities.Strings;
 

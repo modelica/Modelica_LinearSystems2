@@ -4,7 +4,6 @@ encapsulated function frequencyEvaluate
   import Modelica;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Internal;
-  import Modelica.Utilities.Streams.print;
 
   input Real gain "Gain of transfer function";
   input Real Zeros[:,2]

@@ -2,8 +2,6 @@ within Modelica_LinearSystems2.Examples.StateSpace;
 function analysisTimeResponse "Compute time response of a state space system"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
   input Modelica_LinearSystems2.StateSpace sc=Modelica_LinearSystems2.StateSpace(

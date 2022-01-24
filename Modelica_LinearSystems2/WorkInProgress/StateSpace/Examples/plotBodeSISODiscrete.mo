@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function plotBodeSISODiscrete
   "Plots the Bode diagram of continuous state space system and the corresponding discrete state space system and  with automatic determination of the frequency range to plot "
 
-  import Modelica;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
   import Modelica_LinearSystems2.TransferFunction;

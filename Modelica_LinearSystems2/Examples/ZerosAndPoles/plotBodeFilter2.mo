@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 function plotBodeFilter2 "Show low pass filters of all filter types"
   extends Modelica.Icons.Function;
 
-  import Modelica;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import AF = Modelica_LinearSystems2.Utilities.Types.AnalogFilter;
 
