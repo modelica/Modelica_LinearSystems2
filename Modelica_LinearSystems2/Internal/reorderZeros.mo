@@ -84,8 +84,7 @@ The function returns the vector element reordered, as well as
 the number of real zeros (nRealZeros).
 <h4>Example</h4>
 <blockquote><pre>
-
-  // c = {0; 1+2*j; 1-2*j; 2; -3; -1-j; -1+j};
+  // c = {0, 1+2*j, 1-2*j, 2, -3, -1-1*j, -1+1*j};
     Real complexZeros[:] = fill(Complex(0), integer((size(c,1)-n)/2));
   algorithm
   (reorderedZeros, nRealZeros) := reorderZeros(c);
