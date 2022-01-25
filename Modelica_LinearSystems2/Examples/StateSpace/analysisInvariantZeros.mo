@@ -3,10 +3,8 @@ function analysisInvariantZeros
   "Example to compute the invariant zeros of a state space system"
   extends Modelica.Icons.Function;
 
-  import Modelica;
   import Modelica.Utilities.Streams.print;
   import Complex;
-  import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
 

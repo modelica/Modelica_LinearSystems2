@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Controller;
 block ZerosAndPoles
   "Continuous or discretized, single input single output block described by a ZerosAndPoles object"
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Utilities.Types;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.Controller.Internal;
 

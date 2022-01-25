@@ -3,7 +3,6 @@ function plotBodeSISO
   "Constructs a zeros-and-poles transfer function from state space representation and plots the Bode diagram with automatic determination of the frequency range to plot "
   extends Modelica.Icons.Function;
 
-  import Modelica;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.TransferFunction;
 
