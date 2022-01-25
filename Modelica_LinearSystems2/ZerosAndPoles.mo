@@ -1207,7 +1207,6 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
 
       import Modelica;
       import Modelica.Utilities.Streams.print;
-      import Modelica.ComplexMath.j;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Complex;

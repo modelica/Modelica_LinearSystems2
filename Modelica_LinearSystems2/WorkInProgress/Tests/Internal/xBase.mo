@@ -4,7 +4,6 @@ function xBase "Compute the eigenvector bases according to Kautsky algorithm"
   import Complex;
   import Re = Modelica.ComplexMath.real;
   import Im = Modelica.ComplexMath.imag;
-  import Modelica.ComplexMath.j;
 
   input Real A[:,size(A,1)] "Real square system matrix";
   input Real B[size(A,1),:] "Real input matrix";

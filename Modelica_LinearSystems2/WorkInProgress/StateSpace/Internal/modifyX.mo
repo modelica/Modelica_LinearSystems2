@@ -4,7 +4,6 @@ function modifyX
 
   import Re = Modelica.ComplexMath.real;
   import Im = Modelica.ComplexMath.imag;
-  import Modelica.ComplexMath.j;
 
   input Complex X[:,size(X,1)] "Complex eigenvector matrix";
   input Complex S[size(X,1),:] "Complex eigenvector matrix";
