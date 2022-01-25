@@ -75,7 +75,7 @@ algorithm
   <strong>algorithm</strong>
     (eigenvectors, eigenvalues) = Modelica_LinearSystems2.StateSpace.Analysis.eigenVectors(ss, true);
   // eigenvectors = [0.707, 0; 0, 0.707]
-  // eigenvalues = {-1 + 1j, -1 - 1j}
+  // eigenvalues = {-1 + 1*j, -1 - 1*j}
 
             |0.707 |         | 0.707 |
   i.e. v1 = |      |,   v2 = |       |

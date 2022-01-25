@@ -1354,7 +1354,7 @@ numerator polynomial N(z) and the denominator polynomial D(q).
 
 <strong>algorithm</strong>
   result := Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.evaluate(dzp, j+1);
-//  result = 0.538462 - 0.307692j
+//  result = 0.538462 - 0.307692*j
 </pre></blockquote>
 
 <h4>See also</h4>

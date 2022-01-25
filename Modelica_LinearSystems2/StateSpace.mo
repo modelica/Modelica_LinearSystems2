@@ -3370,7 +3370,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s), whi
 
 <strong>algorithm</strong>
   result := Modelica_LinearSystems2.StateSpace.Analysis.evaluate(ss, s);
-//  result = 0.4 - 0.2j
+//  result = 0.4 - 0.2*j
 </pre></blockquote>
 
 <h4>See also</h4>
@@ -3514,7 +3514,7 @@ Calculate the eigenvalues of a state space system, i.e. the eigenvalues of the s
 
 <strong>algorithm</strong>
   eigenvalues = Modelica_LinearSystems2.StateSpace.Analysis.eigenValues(ss);
-// eigenvalues = {-1 + 1j, -1 - 1j}
+// eigenvalues = {-1 + 1*j, -1 - 1*j}
 </pre></blockquote>
 </html>"));
     end eigenValues;
@@ -3580,7 +3580,7 @@ The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
 <strong>algorithm</strong>
   (eigenvectors, eigenvalues) = Modelica_LinearSystems2.StateSpace.Analysis.eigenVectors(ss, true);
 // eigenvectors = [0.707, 0; 0, 0.707]
-// eigenvalues = {-1 + 1j, -1 - 1j}
+// eigenvalues = {-1 + 1*j, -1 - 1*j}
 
           |0.707 |         | 0.707 |
 i.e. v1 = |      |,   v2 = |       |
