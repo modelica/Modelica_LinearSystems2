@@ -4,6 +4,7 @@ function eigenVectors
   extends Modelica.Icons.Function;
 
   import Modelica.Math.Matrices.LAPACK;
+  import Modelica.ComplexMath.j;
 
   input Real A[:,size(A, 1)] "real square matrix";
   output Complex eigvec[size(A, 1),size(A, 2)] "eigen values of the system";
@@ -16,7 +17,6 @@ protected
   Real eigvalIm[size(A, 1)]=fill(0, size(A, 1));
   Integer n=size(A, 1);
   Integer i;
-  Complex j=Modelica.ComplexMath.j;
 algorithm
   if size(A, 1) > 0 then
 

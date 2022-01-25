@@ -846,7 +846,7 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
       "Evaluate a transfer function for a given (Complex) value of s"
 
       import Modelica;
-      import Modelica.ComplexMath;
+      import Modelica.ComplexMath.j;
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Polynomial;
@@ -858,9 +858,8 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
       output Complex result "= tf(s)";
 
     protected
-      Complex j = ComplexMath.j;
       Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
-      Real abs_den=ComplexMath.abs(den);
+      Real abs_den=Modelica.ComplexMath.abs(den);
     algorithm
       den := if abs_den >= den_min then den else -abs_den+0*j;
       result := Polynomial.evaluateComplex(Polynomial(tf.n), s)/den;
@@ -878,7 +877,7 @@ The transfer function G(s)=N(s)/D(s) is evaluated by calculating the numerator p
 
 <h4>Example</h4>
 <blockquote><pre>
-  Complex j = Modelica.ComplexMath.j;
+  import Modelica.ComplexMath.j;
   TransferFunction s = Modelica_LinearSystems2.TransferFunction.s();
   Modelica_LinearSystems2.TransferFunction tf=(s+1)/(s^2+s+1);
 

@@ -5,7 +5,6 @@ function matMatMul "Multiply two complex matrices"
   input Complex m1[:,:] "Complex matrix 1";
   input Complex m2[size(m1, 2),:] "Complex matrix 2";
   output Complex m3[size(m1, 1),size(m2, 2)] "= m1*m2";
-//   Complex j=Modelica.ComplexMath.j;
 //   Real m1Re[size(m1,1),size(m1,2)]=Re(m1);
 //   Real m1Im[size(m1,1),size(m1,2)]=Im(m1);
 //   Real m2Re[size(m2,1),size(m2,2)]=Re(m2);

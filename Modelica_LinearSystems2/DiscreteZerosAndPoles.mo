@@ -1291,7 +1291,9 @@ order polynomials of the DiscreteZeroAndPoles numerator.
 
     encapsulated function evaluate
       "Evaluate a DiscreteZerosAndPoles transfer function at a given value of q"
+
       import Modelica;
+      import Modelica.ComplexMath.j;
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
@@ -1303,7 +1305,6 @@ order polynomials of the DiscreteZeroAndPoles numerator.
       input Real den_min=0 "|denominator(p)| is limited by den_min";
       output Complex y "= zp(p)";
     protected
-      Complex j = Modelica.ComplexMath.j;
       Complex num;
       Complex den;
       Real abs_den;
@@ -1346,7 +1347,7 @@ numerator polynomial N(z) and the denominator polynomial D(q).
 
 <h4>Example</h4>
 <blockquote><pre>
-  Complex j = Modelica.ComplexMath.j;
+  import Modelica.ComplexMath.j;
   DiscreteZerosAndPoles q = Modelica_LinearSystems2.DiscreteZerosAndPoles.q();
   Modelica_LinearSystems2.DiscreteZerosAndPoles dzp=(q+1)/(q^2+q+1);
 
