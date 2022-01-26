@@ -885,7 +885,7 @@ The transfer function G(s)=N(s)/D(s) is evaluated by calculating the numerator p
 
 <strong>algorithm</strong>
   result := Modelica_LinearSystems2.TransferFunction.Analysis.evaluate(tf, j+1);
-//  result = 0.538462 - 0.307692j
+//  result = 0.538462 - 0.307692*j
 </pre></blockquote>
 
 <h4>See also</h4>
@@ -958,7 +958,7 @@ public
 <strong>algorithm</strong>
   (z,p,k)=Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles(tf);
 //  z = {-1}
-//  p = {-0.5 + 0.866025j, -0.5 - 0.866025j}
+//  p = {-0.5 + 0.866025*j, -0.5 - 0.866025*j}
 //  k = 1
 </pre></blockquote>
 </html>"));
@@ -1056,7 +1056,7 @@ The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
   (eigenvectors, eigenvalues) = Modelica_LinearSystems2.TransferFunction.Analysis.eigenVectors(tf, true);
 // eigenvectors = [(-0.4082), (-0.4082);
                     0.8165, 0]
-// eigenvalues = {-1 + 1j, -1 - 1j}
+// eigenvalues = {-1 + 1*j, -1 - 1*j}
 
           |-0.4082 -i0.4082 |         | -0.4082 + i0.4082 |
 i.e. v1 = |                 |,   v2 = |                   |
