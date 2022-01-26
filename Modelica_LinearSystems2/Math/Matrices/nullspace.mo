@@ -82,25 +82,27 @@ nullity = n - r
 with
 </p>
 <blockquote>
-n = number of columns of matrix <strong>A</strong> and <br>
-r = rank(<strong>A</strong>).
+n &hellip; number of columns of matrix <strong>A</strong> and <br>
+r &hellip; rank(<strong>A</strong>).
 </blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
-  A = [1, 2,  3, 1;
-       3, 4,  5, 2;
-      -1, 2, -3, 3];
-  (Z, nullity) = nullspace(A);
+A = [1, 2,  3, 1;
+     3, 4,  5, 2;
+    -1, 2, -3, 3];
+(Z, nullity) = nullspace(A);
+</pre></blockquote>
+<p>
+results in:
+</p>
+<blockquote><pre>
+Z=[0.1715;
+  -0.686;
+   0.1715;
+   0.686]
 
-  results in:
-
-  Z=[0.1715;
-    -0.686;
-     0.1715;
-     0.686]
-
-  nullity = 1
+nullity = 1
 </pre></blockquote>
 
 <h4>See also</h4>

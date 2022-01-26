@@ -60,11 +60,11 @@ Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer
 </p>
 <blockquote><pre>
 <strong>if</strong> |(D(p))| >= den_min <strong>then</strong>
-   G(p) = N(p) / D(p);
+  G(p) = N(p) / D(p);
 <strong>elseif</strong> D(p).re >= 0.0 <strong>then</strong>
-   G(p) = N(p) / den_min
+  G(p) = N(p) / den_min;
 <strong>else</strong>
-   G(p) = -N(p) / den_min
+  G(p) = -N(p) / den_min;
 <strong>end if</strong>;
 </pre></blockquote>
 

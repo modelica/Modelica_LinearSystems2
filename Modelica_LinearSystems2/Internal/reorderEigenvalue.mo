@@ -91,16 +91,16 @@ The optional input argument
 <p>
 The function returns the vector element reordered, as well as
 the number of real zeros (nRealZeros).
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
-
   // c = {0; 1+2j; 1-2j; 2; -3; -1-j; -1+j};
-    Real complexZeros[:] = fill(Complex(0), integer((size(c,1)-n)/2));
-  algorithm
+  Real complexZeros[:] = fill(Complex(0), integer((size(c,1)-n)/2));
+<strong>algorithm</strong>
   (reorderedZeros, nRealZeros) := reorderZeros(c);
-      -> reorderedZeros = {0, 2, (-3), 1+2j, 1-2j, -1+j, -1-j}
-         nRealZeros     = 3
-
+  // reorderedZeros = {0, 2, (-3), 1+2j, 1-2j, -1+j, -1-j}
+  // nRealZeros     = 3
 </pre></blockquote>
 </html>"));
 end reorderEigenvalue;

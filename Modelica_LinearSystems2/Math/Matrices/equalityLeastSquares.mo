@@ -49,9 +49,7 @@ This function returns the
 solution <strong>x</strong> of the linear equality-constrained least squares problem:
 </p>
 <blockquote>
-<p>
 min|<strong>A</strong>*<strong>x</strong> - <strong>a</strong>|^2 over <strong>x</strong>, subject to <strong>B</strong>*<strong>x</strong> = <strong>b</strong>
-</p>
 </blockquote>
 
 <p>

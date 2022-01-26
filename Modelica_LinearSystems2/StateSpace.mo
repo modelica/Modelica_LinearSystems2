@@ -9333,19 +9333,17 @@ are multiples of 2 which means that this function does not introduce round-off e
 
 <h4>Example</h4>
 
-<blockquote>
-<pre>import Modelica.Math.Matrices.norm;
+<blockquote><pre>
+<strong>import</strong> Modelica.Math.Matrices.norm;
 ss = Modelica_LinearSystems2.StateSpace(A=[1, -10,  1000; 0.01,  0,  10; 0.005,  -0.01,  10],
                                         B=[100, 10; 1,0; -0.003, 1],
                                         C=[-0.5, 1, 100],
                                         D=[0,0]);
 sb = Modelica_LinearSystems2.StateSpace.Transformation.toBalancedForm(ss);
 
--> Results in:
-norm(ss.A) = 1000.15, norm(ss.B) = 100.504, norm(ss.C) = 100.006
-norm(sb.A) = 10.8738, norm(sb.B) = 16.0136, norm(sb.C) = 10.2011
-</pre>
-</blockquote>
+// norm(ss.A) = 1000.15, norm(ss.B) = 100.504, norm(ss.C) = 100.006
+// norm(sb.A) = 10.8738, norm(sb.B) = 16.0136, norm(sb.C) = 10.2011
+</pre></blockquote>
 
 <p>
 The algorithm is taken from

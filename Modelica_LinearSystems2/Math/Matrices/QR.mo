@@ -43,6 +43,7 @@ algorithm
 <blockquote><pre>
 (Q,R,p) = Matrices.<strong>QR</strong>(A);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 This function returns the QR decomposition of
@@ -50,9 +51,7 @@ a rectangular matrix <strong>A</strong> (the number of columns of <strong>A</str
 must be less than or equal to the number of rows):
 </p>
 <blockquote>
-<p>
 <strong>Q</strong>*<strong>R</strong> = <strong>A</strong>[:,<strong>p</strong>]
-</p>
 </blockquote>
 <p>
 where <strong>Q</strong> is a rectangular matrix that has orthonormal columns and
@@ -76,12 +75,10 @@ This allows to, e.g., estimate the row-rank
 of <strong>R</strong> (which is the same row-rank as <strong>A</strong>). Furthermore,
 <strong>R</strong> can be partitioned in two parts
 </p>
-<blockquote>
-<pre>
-   <strong>A</strong>[:,<strong>p</strong>] = <strong>Q</strong> * [<strong>R</strong><sub>1</sub>, <strong>R</strong><sub>2</sub>;
-                 <strong>0</strong>,  <strong>0</strong>]
-</pre>
-</blockquote>
+<blockquote><pre>
+<strong>A</strong>[:,<strong>p</strong>] = <strong>Q</strong> * [<strong>R</strong><sub>1</sub>, <strong>R</strong><sub>2</sub>;
+              <strong>0</strong>,  <strong>0</strong>]
+</pre></blockquote>
 <p>
 where <strong>R</strong><sub>1</sub> is a regular, upper triangular matrix.
 </p>
