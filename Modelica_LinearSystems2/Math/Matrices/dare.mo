@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function dare "Solution of discrete-time algebraic Riccati equations"
   import MatricesMSL = Modelica.Math.Matrices;
+  import Modelica.ComplexMath.j;
   import Modelica_LinearSystems2.Math.Matrices;
   import Complex;
 
@@ -33,7 +34,6 @@ protected
 
   Integer info;
   Integer evSize;
-  Complex j = Modelica.ComplexMath.j;
 
 public
   output Real X[size(A, 1),size(A, 2)]

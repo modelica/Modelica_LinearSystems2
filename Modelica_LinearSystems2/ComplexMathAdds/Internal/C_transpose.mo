@@ -1,11 +1,11 @@
 within Modelica_LinearSystems2.ComplexMathAdds.Internal;
 function C_transpose "Computes the transposed matrix of a complex matrix"
   extends Modelica.Icons.Function;
+  import Modelica.ComplexMath.j;
 
   input Complex C[:,:];
   output Complex CT[size(C, 2),size(C, 1)];
 protected
-  Complex j=Modelica.ComplexMath.j;
   Integer l1;
   Integer l2;
 algorithm

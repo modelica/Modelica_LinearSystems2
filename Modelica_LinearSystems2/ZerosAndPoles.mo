@@ -1204,8 +1204,9 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
 
     encapsulated function evaluate
       "Evaluate a ZerosAndPoles transfer function at a given value of p"
-      import Modelica.Utilities.Streams.print;
+
       import Modelica;
+      import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Complex;
@@ -1215,7 +1216,6 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
       input Real den_min(min=0)=0 "|denominator(p)| is limited by den_min";
       output Complex y "= zp(p)";
     protected
-      Complex j = Modelica.ComplexMath.j;
       Complex num;
       Complex den;
       Real abs_den;
@@ -1277,7 +1277,7 @@ Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer
 
 <h4>Example</h4>
 <blockquote><pre>
-  Complex j = Modelica.ComplexMath.j;
+  import Modelica.ComplexMath.j;
   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
 
@@ -1311,6 +1311,7 @@ Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer
     encapsulated function zerosAndPoles
       "Calculate zeros and poles of a ZerosAndPoles transfer function"
       import Modelica;
+      import Modelica.ComplexMath.j;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Complex;
@@ -1341,7 +1342,6 @@ Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer
       Complex den_zeros2[:]=fill(Complex(0, 0), integer((n_den - np_real)/2));
       Integer n;
       Integer jj;
-      Complex j = Modelica.ComplexMath.j;
 
     algorithm
       (num_zeros1,num_zeros2) := ZerosAndPoles.Internal.roots(
@@ -6992,6 +6992,7 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
     function roots "Determine zeros of factorized polynomial"
       import Modelica;
+      import Modelica.ComplexMath.j;
       import Complex;
 
       input Real poly1[:] "[p^0] coefficients of first order polynomials";
@@ -7010,7 +7011,6 @@ function. The solver function is a direct mapping of the Algol 60 procedure
       Real b;
       Integer j1;
       Integer j2;
-      Complex j = Modelica.ComplexMath.j;
 
     algorithm
       assert(np1 <= n_real, "Size of poly1 = " + String(np1) + " > n_real " +
