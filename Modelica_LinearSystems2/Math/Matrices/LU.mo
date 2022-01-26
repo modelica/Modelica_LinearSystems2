@@ -35,9 +35,7 @@ This function call returns the
 LU decomposition of a \"Real[m,n]\" matrix A, i.e.,
 </p>
 <blockquote>
-<p>
 <strong>P</strong>*<strong>L</strong>*<strong>U</strong> = <strong>A</strong>
-</p>
 </blockquote>
 <p>
 where <strong>P</strong> is a permutation matrix (implicitely

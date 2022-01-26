@@ -74,7 +74,7 @@ ss.D = D;
   Real C[1,1] = [1];
   Real D[1,1] = [0];
 
-public
+<strong>public</strong>
   StateSpace ss;
 
 <strong>algorithm</strong>
@@ -361,8 +361,6 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
 
 <h4>Example</h4>
 <blockquote><pre>
-
-
 <strong>algorithm</strong>
   ss:=Modelica_LinearSystems2.StateSpace.Import.fromFile(\"stateSpace.mat\", \"ABCD\");
 //  ss=StateSpace(
@@ -370,11 +368,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
       B=[1; 1; 0],
       C=[1, 1, 1],
       D=[0])
-
-
 </pre></blockquote>
-
-
 </html>"));
   end fromFile;
 

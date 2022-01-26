@@ -127,7 +127,9 @@ algorithm
   end for;
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
-<blockquote><pre>plotRootLoci(modelName, modelParams, simulationOptions, position, useLegend, grid, markerStyle, markerColorMin, markerColorMax)</pre></blockquote>
+<blockquote><pre>
+plotRootLoci(modelName, modelParams, simulationOptions, position, useLegend, grid, markerStyle, markerColorMin, markerColorMax)
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>Calling this function with default setup the following root loci plot will be generated.</p>

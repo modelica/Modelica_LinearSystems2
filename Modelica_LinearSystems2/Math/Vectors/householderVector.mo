@@ -50,13 +50,13 @@ with scalar c, |c| = ||<strong>a</strong>|| / ||<strong>b</strong>||. <strong>Q<
 
 <h4>Example</h4>
 <blockquote><pre>
-  a = {2, -4, -2, -1};
-  b = {1, 0, 0, 0};
+a = {2, -4, -2, -1};
+b = {1, 0, 0, 0};
 
-  u = <strong>householderVector</strong>(a,b);
-    // {0.837, -0.478, -0.239, -0.119}
-    // Computation (identity(4) - 2*matrix(u)*transpose(matrix(u)))*a results in
-    // {-5, 0, 0, 0} = -5*b
+u = <strong>householderVector</strong>(a,b);
+// {0.837, -0.478, -0.239, -0.119}
+// Computation (identity(4) - 2*matrix(u)*transpose(matrix(u)))*a results in
+// {-5, 0, 0, 0} = -5*b
 </pre></blockquote>
 </html>"));
 end householderVector;
