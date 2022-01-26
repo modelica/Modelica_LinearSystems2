@@ -85,15 +85,15 @@ complex zero pair in matrix &quot;complexZeros[:]&quot;.
 
 <h4>Example</h4>
 <blockquote><pre>
-  // c = {0; 1+2j; 1-2j; 2; -3; -1-j; -1+j};
+  // c = {0, 1+2*j, 1-2*j, 2, -3, -1-1*j, -1+1*j};
   Integer n = numberOfRealZeros(c);
   Real realZeros[n];
   Real complexZeros[:] = fill(Complex(0), integer((size(c,1)-n)/2));
 <strong>algorithm</strong>
   (realZeros, complexZeros) := extractRealZeros(c, n);
-           -> realZeros    = {0, 2, (-3)};
-              complexZeros = { 1+2j,
-                              -1+j}
+   // realZeros    = {0, 2, (-3)};
+   // complexZeros = { 1+2*j,
+                      -1+1*j}
 </pre></blockquote>
 </html>"));
 end extractRealZeros;

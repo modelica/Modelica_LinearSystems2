@@ -78,7 +78,7 @@ Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer
 
 <strong>algorithm</strong>
   result := Modelica_LinearSystems2.ZerosAndPoles.Analysis.evaluate(zp, j+1);
-//  result = 0.538462 - 0.307692j
+//  result = 0.538462 - 0.307692*j
 </pre></blockquote>
 
 <h4>See also</h4>

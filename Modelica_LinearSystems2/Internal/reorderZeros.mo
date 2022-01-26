@@ -87,11 +87,11 @@ the number of real zeros (nRealZeros).
 
 <h4>Example</h4>
 <blockquote><pre>
-  // c = {0; 1+2j; 1-2j; 2; -3; -1-j; -1+j};
+  // c = {0, 1+2*j, 1-2*j, 2, -3, -1-1*j, -1+1*j};
   Real complexZeros[:] = fill(Complex(0), integer((size(c,1)-n)/2));
 <strong>algorithm</strong>
   (reorderedZeros, nRealZeros) := reorderZeros(c);
-  // reorderedZeros = {0, 2, (-3), 1+2j, 1-2j, -1+j, -1-j}
+  // reorderedZeros = {0, 2, (-3), 1+2*j, 1-2*j, -1+1*j, -1-1*j}
   // nRealZeros     = 3
 </pre></blockquote>
 </html>"));
