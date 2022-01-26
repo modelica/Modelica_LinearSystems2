@@ -34,7 +34,9 @@ void Modelica_LinearSystem2_readMatrixInternal(const char *filename, const char 
     obsolete = "Obsolete function - use Modelica.Utilities.Streams.readRealMatrix instead",
     Documentation(info="<html>
 <h4>Syntax</h4>
-<blockquote><pre>readMatrixInternal(fileName, matrixName, m, n)</pre></blockquote>
+<blockquote><pre>
+readMatrixInternal(fileName, matrixName, m, n);
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>Read matrix <code>matrixName</code> from file <code>fileName</code>. The matrix saved in file must be of dimension [m,n].</p>
