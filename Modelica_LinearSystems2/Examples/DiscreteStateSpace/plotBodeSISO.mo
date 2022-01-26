@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Examples.DiscreteStateSpace;
 function plotBodeSISO "Bode plot of a discrete state space system"
   extends Modelica.Icons.Function;
 
-  import Modelica;
   import Modelica_LinearSystems2.DiscreteStateSpace;
   input DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
     A=[0.995166584721977,0.0950040833529266,0.0,0.0,0.0,0.0; -0.0950040833529266,

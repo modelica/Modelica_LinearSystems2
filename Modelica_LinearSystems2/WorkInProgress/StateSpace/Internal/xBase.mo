@@ -16,7 +16,6 @@ function xBase "Compute the eigenvector bases according to Kautsky algorithm"
   output Integer rankB;
 
 protected
-  Complex j = Modelica.ComplexMath.j;
   Integer n=size(A,1);
   Integer m=size(B,2);
 

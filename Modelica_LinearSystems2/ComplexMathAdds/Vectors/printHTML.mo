@@ -107,7 +107,7 @@ algorithm
 
   // Print heading
   // Following doesn't work in Dymola
-  //Streams.print("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">", tempFile);
+  //print("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">", tempFile);
   print("<html>", tempFile);
   print("<style type=\"text/css\">", tempFile);
   print("* { font-size: 10pt; font-family: Arial,sans-serif; }", tempFile);

@@ -37,9 +37,7 @@ This function call returns the
 solution <strong>x</strong> of the linear systems of equations
 </p>
 <blockquote>
-<p>
 <strong>P</strong>*<strong>L</strong>*<strong>U</strong>*<strong>x</strong> = <strong>b</strong>;
-</p>
 </blockquote>
 <p>
 where <strong>P</strong> is a permutation matrix (implicitely

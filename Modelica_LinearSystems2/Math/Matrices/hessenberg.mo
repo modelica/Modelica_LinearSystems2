@@ -39,27 +39,31 @@ The transformation matrix <strong>U</strong> is then computed by
 
 <h4>Example</h4>
 <blockquote><pre>
-  A  = [1, 2,  3;
-        6, 5,  4;
-        1, 0,  0];
+A  = [1, 2,  3;
+      6, 5,  4;
+      1, 0,  0];
 
-  (H, U) = hessenberg(A);
+(H, U) = hessenberg(A);
+</pre></blockquote>
+<p>
+results in:
+</p>
+<blockquote><pre>
+H = [1.0,  -2.466,  2.630;
+    -6.083, 5.514, -3.081;
+     0.0,   0.919, -0.514]
 
-  results in:
-
-  H = [1.0,  -2.466,  2.630;
-      -6.083, 5.514, -3.081;
-       0.0,   0.919, -0.514]
-
-  U = [1.0,    0.0,      0.0;
-       0.0,   -0.9864,  -0.1644;
-       0.0,   -0.1644,   0.9864]
-
-  and therefore,
-
-  u*H*transpose(U) = [1.0, 2.0, 3.0;
-                      6.0, 5.0, 4.0;
-                      1.0, 0.0, 0.0]
+U = [1.0,    0.0,      0.0;
+     0.0,   -0.9864,  -0.1644;
+     0.0,   -0.1644,   0.9864]
+</pre></blockquote>
+<p>
+and therefore,
+</p>
+<blockquote><pre>
+u*H*transpose(U) = [1.0, 2.0, 3.0;
+                    6.0, 5.0, 4.0;
+                    1.0, 0.0, 0.0]
 </pre></blockquote>
 
 <h4>See also</h4>

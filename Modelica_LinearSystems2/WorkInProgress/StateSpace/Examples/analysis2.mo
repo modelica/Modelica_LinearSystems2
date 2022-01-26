@@ -4,6 +4,7 @@ function analysis2 "Example to check controllability of a state space system"
   import Modelica_LinearSystems2.StateSpace;
   import Re = Modelica.ComplexMath.real;
   import Im = Modelica.ComplexMath.imag;
+  import Modelica.ComplexMath.j;
 
   input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
       A=[-6.0,0,2,-13.0; -9.0,-12.0,-3.25,19.25; 0,0,1,34.0; 0,0,-34.0,-31.0]/6,
@@ -52,7 +53,6 @@ protected
   Real eigvecRe[4,4]=fill(0, 4, 4) "eigen values of the system";
   Real eigvecIm[4,4]=fill(0, 4, 4) "eigen values of the system";
   Complex eigval[4]=fill(Complex(0), 4);
-  Complex j = Modelica.ComplexMath.j;
   Complex Tp[2,2]=sqrt(0.5)*[1+0*j, -j; 1+0*j, j];
   Integer i;
 

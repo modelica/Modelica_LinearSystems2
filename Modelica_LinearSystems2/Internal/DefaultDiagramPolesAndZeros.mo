@@ -1,7 +1,5 @@
 within Modelica_LinearSystems2.Internal;
 record DefaultDiagramPolesAndZeros "Default diagram for polesAndZeros plot"
-  import Modelica;
-
   extends Modelica.Icons.Record;
   extends Modelica_LinearSystems2.Utilities.Plot.Records.DefaultDiagram(
                       heading="Eigenvalues (x) and invariant zeros (o)",

@@ -27,19 +27,27 @@ algorithm
     r + 1:na, r + 1:na]] else S*A*S;
 
   annotation (Documentation(info="<html>
-It is assumed, that the input vector <strong>u</strong> is a Housholder vector of the shape
+<p>
+It is assumed that the input vector <strong>u</strong> is a Housholder vector of the shape
+</p>
 <blockquote><pre>
 <strong>u</strong> = (u1, u2, ..., ur,0, ..., 0)
 </pre></blockquote>
+<p>
 where r is an integer input. From
+</p>
 <blockquote><pre>
 <strong>S</strong> = <strong>I</strong> - 2*<strong>u</strong>*<strong>u</strong>'/<strong>u</strong>'*<strong>u</strong> = [<strong>P</strong>, <strong>0</strong>; <strong>0</strong>, <strong>I</strong>]
 </pre></blockquote>
+<p>
 with
+</p>
 <blockquote><pre>
 dim(<strong>P</strong>) = r x r,   dim(<strong>I</strong>) = n-r x n-r
 </pre></blockquote>
+<p>
 results
+</p>
 <blockquote><pre>
 <strong>S</strong>*<strong>A</strong>*<strong>S</strong> = [<strong>P</strong>*<strong>A</strong>11*<strong>P</strong>, <strong>P</strong>*<strong>A</strong>12; <strong>A</strong>21*<strong>P</strong>, <strong>A</strong>22]
 </pre></blockquote>

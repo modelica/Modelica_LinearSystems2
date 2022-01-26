@@ -2,10 +2,10 @@ within Modelica_LinearSystems2.ComplexMathAdds.Examples;
 function addTwoComplexNumbers "Show how to add 2 complex number"
   extends Modelica.Icons.Function;
   import Modelica.Utilities.Streams;
+  import Modelica.ComplexMath.j;
 
   output Boolean ok;
 protected
-  Complex j = Modelica.ComplexMath.j;
   Complex c1=2+3*j;
   Complex c2=3+4*j;
   Complex c3;

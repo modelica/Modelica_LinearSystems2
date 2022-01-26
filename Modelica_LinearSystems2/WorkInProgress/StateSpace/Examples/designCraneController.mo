@@ -3,6 +3,7 @@ function designCraneController
   "Design pole assignment and LQ controller for an overhead crane"
   import Modelica.Utilities.Streams;
   import MatricesMSL = Modelica.Math.Matrices;
+  import Modelica.ComplexMath.j;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2.Math.Matrices;
@@ -20,8 +21,6 @@ function designCraneController
   output Real K_pa[:,:] "feedback matrix pole assignment controller";
   output Real M_lq[:,:] "pre filter LQ controller";
   output Real M_pa[:,:] "pre filter pole assignment controller";
-protected
-  input Complex j = Modelica.ComplexMath.j;
 
 protected
   Real Q[:,:];

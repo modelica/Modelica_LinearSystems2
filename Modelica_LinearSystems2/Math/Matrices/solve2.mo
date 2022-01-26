@@ -35,9 +35,7 @@ This function call returns the
 solution <strong>X</strong> of the linear system of equations
 </p>
 <blockquote>
-<p>
 <strong>A</strong>*<strong>X</strong> = <strong>B</strong>
-</p>
 </blockquote>
 <p>
 If a unique solution <strong>X</strong> does not exist (since <strong>A</strong> is singular),

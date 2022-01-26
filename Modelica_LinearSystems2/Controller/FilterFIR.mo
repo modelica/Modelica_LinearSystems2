@@ -1,7 +1,5 @@
 within Modelica_LinearSystems2.Controller;
 block FilterFIR "Discrete finite impulse response low or high pass filter"
-  import Modelica_LinearSystems2.Controller.Types.FIRspec;
-  import Modelica_LinearSystems2.Controller.Types.BlockType;
   extends Interfaces.PartialSISO_equality;
   parameter Modelica_LinearSystems2.Controller.Types.FIRspec specType=Modelica_LinearSystems2.Controller.Types.FIRspec.MeanValue
     "Specification type of FIR filter" annotation(Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous));
@@ -31,7 +29,7 @@ protected
       a);
   Internal.DiscreteFIR discretePart(
     sampleFactor=sampleFactor,
-    a=a2) if  not continuous "FIR realization";
+    a=a2)  if not continuous "FIR realization";
 equation
 
   if continuous then

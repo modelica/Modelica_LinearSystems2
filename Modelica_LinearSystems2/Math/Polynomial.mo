@@ -96,6 +96,8 @@ operator record Polynomial "Record defining the data for a polynomial"
 
     function plotPolynomial
       "Demonstrate plotting of polynomial with automatic range and legend determination"
+
+      import Modelica.ComplexMath.j;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math;
       import Modelica_LinearSystems2.Math.Polynomial;
@@ -104,7 +106,6 @@ operator record Polynomial "Record defining the data for a polynomial"
       output Boolean ok;
 
     protected
-      Complex j=Modelica.ComplexMath.j;
       Complex c[:]={-2 + 0*j,Complex(0),2 + 0*j,7 + j,7 - j};
       Polynomial p=Polynomial(c);
     algorithm
@@ -1358,6 +1359,7 @@ Polynomial.numberOfRoots(p1);
   encapsulated function rootsOfNonZeroHighestCoefficientPolynomial
     "Determine zeros of polynomial where highest coefficient of polynomial is not zero"
     import Modelica;
+    import Modelica.ComplexMath.j;
     import Modelica_LinearSystems2.Math.Matrices;
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.Math.Polynomial;
@@ -1373,7 +1375,7 @@ Polynomial.numberOfRoots(p1);
     Integer n=numberOfRoots;
     Real A[n, n] "Companion matrix";
     Real ev[n, 2] "Eigen values";
-    Complex j=Modelica.ComplexMath.j;
+
   algorithm
     assert(numberOfRoots >= 0 and numberOfRoots < nc,
       "Argument numberOfRoots (= " + String(numberOfRoots) +

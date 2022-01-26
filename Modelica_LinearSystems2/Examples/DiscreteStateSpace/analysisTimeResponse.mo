@@ -3,8 +3,6 @@ function analysisTimeResponse
   "Compute time response of a discrete state space system"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.DiscreteStateSpace;
 
   input Real u[:,2]=ones(300, 2);

@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.ComplexMathAdds;
 package Internal "Package of internal functions operating on complex number (for advanced users only)"
   extends Modelica.Icons.InternalPackage;
-  import Modelica;
 
   annotation (Documentation(info="<html>
 <p>

@@ -1,11 +1,8 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function solve2rSym_C
   "Solve real system of linear equations X*A=B where A is symmetrix positive definite"
-
   extends Modelica.Icons.Function;
-  import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
   input Real A[:,size(A, 1)] "Matrix A of X*A = B";
   input Real B[:,:] "Matrix B of X*op(A) = B";
   input Boolean isTriangular=false "True if the A is already lower triangular";

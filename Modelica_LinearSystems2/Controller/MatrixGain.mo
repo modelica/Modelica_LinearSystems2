@@ -33,26 +33,30 @@ equation
   annotation (
     Documentation(info="<html>
 <p>
-This block is similar to Modelica.Blocks.Math.MatrixGain. Additionally
-this block offers to load the matrix from a MATLAB-file. It
-computes output vector <strong>y</strong> as <em>product</em> of the
-gain matrix <strong>K</strong> with the input signal vector <strong>u</strong>:
+This block is similar to
+<a href=\"modelica://Modelica.Blocks.Math.MatrixGain\">Modelica.Blocks.Math.MatrixGain</a>.
+Additionally this block offers to load the matrix from a&nbsp;MATLAB-file.
+It computes output vector&nbsp;<strong>y</strong> as <em>product</em> of the
+gain matrix&nbsp;<strong>K</strong> with the input signal vector&nbsp;<strong>u</strong>:
 </p>
-<pre>
-    <strong>y</strong> = <strong>K</strong> * <strong>u</strong>;
-</pre>
+<blockquote><pre>
+<strong>y</strong> = <strong>K</strong> * <strong>u</strong>;
+</pre></blockquote>
+
+<h4>Example</h4>
+<blockquote><pre>
+parameter: <strong>K</strong> = [0.12 2; 3 1.5]
+</pre></blockquote>
+
 <p>
-Example:
+results in the following equations:
 </p>
-<pre>
-   parameter: <strong>K</strong> = [0.12 2; 3 1.5]
 
-   results in the following equations:
-
-     | y[1] |     | 0.12  2.00 |   | u[1] |
-     |      |  =  |            | * |      |
-     | y[2] |     | 3.00  1.50 |   | u[2] |
-</pre>
+<blockquote><pre>
+| y[1] |     | 0.12  2.00 |   | u[1] |
+|      |  =  |            | * |      |
+| y[2] |     | 3.00  1.50 |   | u[2] |
+</pre></blockquote>
 </html>"), Icon(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},

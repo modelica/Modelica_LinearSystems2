@@ -3,8 +3,6 @@ function conversionToTransferFunctionMIMO
   "Compute a transfer function matrix of a MIMO system from state space representation"
   extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.StateSpace;
 
@@ -24,11 +22,11 @@ function conversionToTransferFunctionMIMO
   output Boolean ok;
 
 protected
-  Modelica_LinearSystems2.StateSpace ss=if systemOnFile then
-    Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName, matrixName) else
-    Modelica_LinearSystems2.StateSpace(A=A, B=B, C=C, D=D);
+  StateSpace ss=if systemOnFile then
+    StateSpace.Import.fromFile(fileName, matrixName) else
+    StateSpace(A=A, B=B, C=C, D=D);
 
-  Modelica_LinearSystems2.TransferFunction tf[:,:];
+  TransferFunction tf[:,:];
 
 algorithm
   tf := StateSpace.Conversion.toTransferFunctionMIMO(ss);

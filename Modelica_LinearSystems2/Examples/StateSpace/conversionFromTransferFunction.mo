@@ -7,8 +7,8 @@ function conversionFromTransferFunction
   import Modelica_LinearSystems2.TransferFunction;
 
 protected
-  input TransferFunction tf=(s+1)/(s^3 + s^2 + s +1);
-  input TransferFunction s = TransferFunction.s();
+  TransferFunction s = TransferFunction.s();
+  TransferFunction tf=(s+1)/(s^3 + s^2 + s +1);
   StateSpace ss=StateSpace(tf);
 public
   output Boolean ok "Standard output";

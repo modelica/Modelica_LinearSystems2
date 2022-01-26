@@ -45,13 +45,10 @@ the result is the ratio of the largest to the smallest singular value to <strong
 
 <h4>Example</h4>
 <blockquote><pre>
-  A = [1, 2
-       2, 1];
-  r = conditionNumber(A);
-
-results in:
-
-  r = 3.0
+A = [1, 2;
+     2, 1];
+r = conditionNumber(A);
+// r = 3.0
 </pre></blockquote>
 
 <h4>See also</h4>

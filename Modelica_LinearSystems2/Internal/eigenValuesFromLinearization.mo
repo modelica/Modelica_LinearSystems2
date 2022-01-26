@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 function eigenValuesFromLinearization
   "Return eigen values from a set of linearization data (assumes files dslinX.mat in current directory)"
-  import Modelica.Utilities.Streams.print;
+
   input Real is[:] "File indices X of the dslinX.mat files";
   input Integer nx "Number of states";
   input Integer nu "Number of inputs";

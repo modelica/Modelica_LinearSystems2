@@ -1,10 +1,8 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function solve2r
   "Solve real system of linear equations X*op(A)=B with a B matrix (Gaussian elemination with partial pivoting)"
-
   extends Modelica.Icons.Function;
-  import Modelica;
-  import Modelica_LinearSystems2;
+
   import Modelica_LinearSystems2.Math.Matrices.LAPACK;
   input Real A[:,size(A,1)] "Matrix A of X*op(A) = B";
   input Real B[:,size(A,1)] "Matrix B of X*op(A) = B";
@@ -69,18 +67,14 @@ This function call returns the
 solution <strong>X</strong> of the linear system of equations
 </p>
 <blockquote>
-<p>
 <strong>X</strong>*op<strong>(A)</strong> = <strong>B</strong>
-</p>
 </blockquote>
 <p>
 with
 </p>
 <blockquote>
-<p>
-op<strong>(A)</strong> = transpose(<strong>(A)</strong>)  if   transA==true
+op<strong>(A)</strong> = transpose(<strong>(A)</strong>)  if   transA==true<br>
 op<strong>(A)</strong> = <strong>(A)</strong>  if   transA==false
-</p>
 </blockquote>
 <p>
 If matrix <strong>(A)</strong> is already lower triangular, the factorization is avoided if input \"isTriangular\" is set true.

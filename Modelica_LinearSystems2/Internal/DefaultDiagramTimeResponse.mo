@@ -1,7 +1,5 @@
 within Modelica_LinearSystems2.Internal;
 record DefaultDiagramTimeResponse "Default diagram for a time response plot"
-  import Modelica;
-
   extends Modelica.Icons.Record;
   extends Modelica_LinearSystems2.Utilities.Plot.Records.DefaultDiagram(
                       heading="time response",

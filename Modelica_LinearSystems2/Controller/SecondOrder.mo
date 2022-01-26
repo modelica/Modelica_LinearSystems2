@@ -45,11 +45,11 @@ initial equation
 This blocks defines the transfer function between the input u and
 the output y as <em>second order</em> system:
 </p>
-<pre>
-                         k
-     y = --------------------------------- * u
-          ( s / w )^2 + 2*D*( s / w ) + 1
-</pre>
+<blockquote><pre>
+                    k
+y = --------------------------------- * u
+     ( s / w )^2 + 2*D*( s / w ) + 1
+</pre></blockquote>
 <p>
 The block can be continuous or discrete (with continuous parameterization).
 </p>
@@ -60,14 +60,21 @@ parameters, use the general model class <strong>TransferFunction</strong>
 instead and model a second order SISO system with parameters<br>
 n = {k}, d = {1/w^2, 2*D/w, 1}.
 </p>
-<pre>
-Example:
-   parameter: k =  0.3,  w = 0.5,  D = 0.4
-   results in:
-                  0.3
-      y = ------------------- * u
-          4.0 s^2 + 1.6 s + 1
-</pre>
+
+<h4>Example</h4>
+<blockquote><pre>
+parameter: k =  0.3,  w = 0.5,  D = 0.4
+</pre></blockquote>
+
+<p>
+results in
+</p>
+
+<blockquote><pre>
+            0.3
+y = ------------------- * u
+    4.0 s^2 + 1.6 s + 1
+</pre></blockquote>
 </html>"), Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

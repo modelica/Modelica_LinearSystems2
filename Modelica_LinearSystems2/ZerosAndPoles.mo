@@ -552,7 +552,6 @@ This function constructs a ZerosAndPoles record zp from first and second order p
     "Check whether two zeros and poles descriptions are identical"
     import Modelica;
     import Modelica.Math;
-    import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.ZerosAndPoles;
 
     input ZerosAndPoles zp1 "Zeros-and-poles data record 1";
@@ -659,7 +658,6 @@ This function constructs a ZerosAndPoles record zp from first and second order p
 
   encapsulated function p "Generate the transfer function p"
     import Modelica;
-    import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.ZerosAndPoles;
 
     output ZerosAndPoles zp(
@@ -699,7 +697,6 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Internal.AnalyseOptions;
       import Modelica_LinearSystems2.Internal.AnalyseOptions2;
-      import Modelica_LinearSystems2.Internal.Eigenvalue;
 
       input ZerosAndPoles zp(uName="u", yName="y")
         "Transfer function of a system";
@@ -823,9 +820,9 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;     // Input/Output declarations of time response functions
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
+      input TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
 
-      input Real x0[Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)]=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp))
+      input Real x0[ZerosAndPoles.Analysis.denominatorDegree(zp)]=zeros(ZerosAndPoles.Analysis.denominatorDegree(zp))
         "Initial state vector";
 
     protected
@@ -886,12 +883,12 @@ algorithm
       extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;
 
     algorithm
-      (y,t,x_continuous) :=Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
+      (y,t,x_continuous) :=ZerosAndPoles.Analysis.timeResponse(
             zp=zp,
             dt=dt,
             tSpan=tSpan,
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
-            x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
+            x0=zeros(ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
       annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -942,17 +939,17 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.I
 
       import Modelica;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.ZerosAndPoles;
       // Input/Output declarations of time response functions:
       extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;
 
     algorithm
-      (y,t,x_continuous) :=Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
+      (y,t,x_continuous) :=ZerosAndPoles.Analysis.timeResponse(
             zp=zp,
             dt=dt,
             tSpan=tSpan,
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
-            x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
+            x0=zeros(ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
       annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -1003,18 +1000,18 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.S
 
       import Modelica;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.TransferFunction;
+      import Modelica_LinearSystems2.ZerosAndPoles;
 
       // Input/Output declarations of time response functions:
       extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;
 
     algorithm
-      (y,t,x_continuous) :=Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
+      (y,t,x_continuous) :=ZerosAndPoles.Analysis.timeResponse(
             zp=zp,
             dt=dt,
             tSpan=tSpan,
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
-            x0=zeros(Modelica_LinearSystems2.ZerosAndPoles.Analysis.denominatorDegree(zp)));
+            x0=zeros(ZerosAndPoles.Analysis.denominatorDegree(zp)));
 
       annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -1074,7 +1071,7 @@ ZerosAndPoles.Analysis.timeResponse(zp, dt, tSpan, response=Types.TimeResponse.R
       extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;
 
     algorithm
-      (y,t,x_continuous) :=Modelica_LinearSystems2.ZerosAndPoles.Analysis.timeResponse(
+      (y,t,x_continuous) := ZerosAndPoles.Analysis.timeResponse(
             zp=zp,
             dt=dt,
             tSpan=tSpan,
@@ -1207,8 +1204,9 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
 
     encapsulated function evaluate
       "Evaluate a ZerosAndPoles transfer function at a given value of p"
-      import Modelica.Utilities.Streams.print;
+
       import Modelica;
+      import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Complex;
@@ -1218,7 +1216,6 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
       input Real den_min(min=0)=0 "|denominator(p)| is limited by den_min";
       output Complex y "= zp(p)";
     protected
-      Complex j = Modelica.ComplexMath.j;
       Complex num;
       Complex den;
       Real abs_den;
@@ -1280,7 +1277,7 @@ Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer
 
 <h4>Example</h4>
 <blockquote><pre>
-  Complex j = Modelica.ComplexMath.j;
+  import Modelica.ComplexMath.j;
   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
 
@@ -1288,7 +1285,7 @@ Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer
 
 <strong>algorithm</strong>
   result := Modelica_LinearSystems2.ZerosAndPoles.Analysis.evaluate(zp, j+1);
-//  result = 0.538462 - 0.307692j
+//  result = 0.538462 - 0.307692*j
 </pre></blockquote>
 
 <h4>See also</h4>
@@ -1314,6 +1311,7 @@ Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer
     encapsulated function zerosAndPoles
       "Calculate zeros and poles of a ZerosAndPoles transfer function"
       import Modelica;
+      import Modelica.ComplexMath.j;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Complex;
@@ -1344,7 +1342,6 @@ Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer
       Complex den_zeros2[:]=fill(Complex(0, 0), integer((n_den - np_real)/2));
       Integer n;
       Integer jj;
-      Complex j = Modelica.ComplexMath.j;
 
     algorithm
       (num_zeros1,num_zeros2) := ZerosAndPoles.Internal.roots(
@@ -1405,7 +1402,7 @@ public
 <strong>algorithm</strong>
   (z,p,k)=Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles(zp);
 //  z = {-1}
-//  p = {-0.5 + 0.866025j, -0.5 - 0.866025j}
+//  p = {-0.5 + 0.866025*j, -0.5 - 0.866025*j}
 //  k = 1
 </pre></blockquote>
 </html>"));
@@ -1498,7 +1495,7 @@ The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
   (eigenvectors, eigenvalues) = Modelica_LinearSystems2.ZerosAndPoles.Analysis.eigenVectors(zp, true);
 // eigenvectors = [(-0.4082), (-0.4082);
                     0.8165, 0]
-// eigenvalues = {-1 + 1j, -1 - 1j}
+// eigenvalues = {-1 + 1*j, -1 - 1*j}
 
           |-0.4082 -i0.4082 |         | -0.4082 + i0.4082 |
 i.e. v1 = |                 |,   v2 = |                   |
@@ -1566,7 +1563,6 @@ Computes the invariant zeros of the corresponding state space representation of 
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica.Utilities.Streams.print;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function of a system";
       output Real k "Steady state gain";
@@ -2233,8 +2229,6 @@ has to be selected appropriately. For example, the signal processing
 toolbox of Matlab provides the filters in non-normalized form and
 therefore a comparison makes only sense, if normalized = <strong>false</strong>
 is set.
-
-
 </p>
 
 <h4>Example</h4>
@@ -2385,12 +2379,11 @@ and results in
     encapsulated function bode
       "Plot ZerosAndPoles transfer function as bode plot"
       import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica.Units.SI;
       import Modelica.ComplexMath;
       import Complex;
-      import Modelica_LinearSystems2.Internal;
-      import Modelica.Units.SI;
+      import Modelica_LinearSystems2;
+      import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Plot;
 
       input ZerosAndPoles zp "ZerosAndPoles transfer function to be plotted";
@@ -2452,7 +2445,7 @@ and results in
         numZeros := fill(Complex(0), 0);
         denZeros := fill(Complex(0), 0);
       end if;
-      f := Internal.frequencyVector(
+      f := Modelica_LinearSystems2.Internal.frequencyVector(
         nPoints,
         autoRange,
         f_min,
@@ -2751,7 +2744,7 @@ This function plots the impulse response of a zeros-and-poles transfer function.
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
-      input Modelica_LinearSystems2.ZerosAndPoles zp;
+      input ZerosAndPoles zp;
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
@@ -2764,7 +2757,7 @@ This function plots the impulse response of a zeros-and-poles transfer function.
           heading="Step response of  zp = " + String(zp)));
 
     algorithm
-      Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse(
+      ZerosAndPoles.Plot.timeResponse(
         zp=zp,
         dt=dt,
         tSpan=tSpan,
@@ -2824,7 +2817,7 @@ This function plots the step response of a zeros-and-poles transfer function. It
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
-      input Modelica_LinearSystems2.ZerosAndPoles zp;
+      input ZerosAndPoles zp;
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
@@ -2837,7 +2830,7 @@ This function plots the step response of a zeros-and-poles transfer function. It
           heading="Ramp response of  zp = " + String(zp)));
 
     algorithm
-      Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse(
+      ZerosAndPoles.Plot.timeResponse(
         zp=zp,
         dt=dt,
         tSpan=tSpan,
@@ -2897,7 +2890,7 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
-      input Modelica_LinearSystems2.ZerosAndPoles zp;
+      input ZerosAndPoles zp;
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
@@ -2918,7 +2911,7 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
           vector(y0)) "Initial state vector (for initial condition plot)";
     algorithm
 
-      Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse(
+      ZerosAndPoles.Plot.timeResponse(
             zp=zp,
             dt=dt,
             tSpan=tSpan,
@@ -4784,7 +4777,7 @@ For more details see also
       "Return coefficients of normalized low pass Bessel filter (= gain at cut-off frequency 1 rad/s is decreased 3dB"
 
       import Modelica.Utilities.Streams;
-      import Modelica_LinearSystems2;
+
       input Integer order "Order of filter in the range 1..41";
       output Real c1[mod(order, 2)]
         "[p] coefficients of Bessel denominator polynomials (a*p + 1)";
@@ -6243,7 +6236,6 @@ int found=0;
 
     function firstOrderToString
       "Transform vector of coefficients of first order polynomials to a string representation"
-      import Modelica_LinearSystems2.Math.Vectors;
       import Modelica_LinearSystems2.Math;
 
       input Real c[:] = fill(0.0,0)
@@ -6874,7 +6866,6 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
     encapsulated function numberOfRealZeros "Calculate number of real zeros"
       import Modelica;
-      import Modelica_LinearSystems2.ZerosAndPoles;
 
       input Real poly1[:];
       input Real poly2[:,2];
@@ -7002,6 +6993,7 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
     function roots "Determine zeros of factorized polynomial"
       import Modelica;
+      import Modelica.ComplexMath.j;
       import Complex;
 
       input Real poly1[:] "[p^0] coefficients of first order polynomials";
@@ -7020,7 +7012,6 @@ function. The solver function is a direct mapping of the Algol 60 procedure
       Real b;
       Integer j1;
       Integer j2;
-      Complex j = Modelica.ComplexMath.j;
 
     algorithm
       assert(np1 <= n_real, "Size of poly1 = " + String(np1) + " > n_real " +
@@ -7116,7 +7107,6 @@ function. The solver function is a direct mapping of the Algol 60 procedure
 
     function secondOrderToString
       "Transform vector of coefficients of second order polynomials to a string representation"
-      import Modelica_LinearSystems2.Math.Matrices;
       import Modelica_LinearSystems2.Math;
 
       input Real c[:,2]=fill(0.0,0,2)

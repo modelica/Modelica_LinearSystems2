@@ -4,6 +4,7 @@ function designInverseDoublePendulumControllerWithObserver
 
   import Modelica.Utilities.Streams;
   import MatricesMSL = Modelica.Math.Matrices;
+  import Modelica.ComplexMath.j;
   import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Matrices;
@@ -27,8 +28,6 @@ function designInverseDoublePendulumControllerWithObserver
   output Real M_pa[:,:] "pre filter LQ controller";
   output Real K_ob[:,:] "feedback matrix pole assignment controller";
 
-protected
-  Complex j = Modelica.ComplexMath.j;
 protected
  Real Q[:,:];
  Real R[:,:];

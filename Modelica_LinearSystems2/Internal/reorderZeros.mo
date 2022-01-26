@@ -66,6 +66,7 @@ algorithm
 (reorderedZeros, nRealZeros) = Internal.<strong>reorderZeros</strong>(complexVector,
                                                      name=&quot;complexVector&quot;);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function <strong>reorderZeros</strong>(..) reorders the zeros from the
@@ -82,16 +83,16 @@ The optional input argument
 <p>
 The function returns the vector element reordered, as well as
 the number of real zeros (nRealZeros).
+</p>
+
 <h4>Example</h4>
 <blockquote><pre>
-
-  // c = {0; 1+2j; 1-2j; 2; -3; -1-j; -1+j};
-    Real complexZeros[:] = fill(Complex(0), integer((size(c,1)-n)/2));
-  algorithm
+  // c = {0, 1+2*j, 1-2*j, 2, -3, -1-1*j, -1+1*j};
+  Real complexZeros[:] = fill(Complex(0), integer((size(c,1)-n)/2));
+<strong>algorithm</strong>
   (reorderedZeros, nRealZeros) := reorderZeros(c);
-      -> reorderedZeros = {0, 2, (-3), 1+2j, 1-2j, -1+j, -1-j}
-         nRealZeros     = 3
-
+  // reorderedZeros = {0, 2, (-3), 1+2*j, 1-2*j, -1+1*j, -1-1*j}
+  // nRealZeros     = 3
 </pre></blockquote>
 </html>"));
 end reorderZeros;

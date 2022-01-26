@@ -6,7 +6,7 @@ model DiscreteStateSpace2
   import Modelica_LinearSystems2.Controller.Types;
   import Modelica.Math.Matrices;
 
-  parameter Real ABCD[:,:](start=fill(1,2,2)) "Continuous linear time-invariant system"
+  parameter Real ABCD[:,:] "Continuous linear time-invariant system"
     annotation(HideResult=true);
 
 protected
@@ -130,9 +130,9 @@ initial equation
 
   elseif init == Types.Init.InitialOutput and nx>0 then
     y=y_start;
-    xd[ny+1:nx]=[zeros(nx-ny,ny),identity(nx-ny)]*Modelica.Math.Matrices.solve(identity(nx)-discreteSystem.A,discreteSystem.B*u);
+    xd[ny+1:nx]=[zeros(nx-ny,ny),identity(nx-ny)]*Matrices.solve(identity(nx)-discreteSystem.A,discreteSystem.B*u);
 
-//     xd = Modelica.Math.Matrices.equalityLeastSquares(identity(nx)-discreteSystem.A, -discreteSystem.B*u, discreteSystem.C, y_start - discreteSystem.D*u);
+//     xd = Matrices.equalityLeastSquares(identity(nx)-discreteSystem.A, -discreteSystem.B*u, discreteSystem.C, y_start - discreteSystem.D*u);
 
   end if;
   annotation (

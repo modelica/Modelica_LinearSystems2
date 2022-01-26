@@ -5,7 +5,6 @@ function matVecMul "Multiply a complex matrices with a complex vector"
   input Complex m[:,:] "Complex matrix";
   input Complex vi[size(m, 2)] "Complex vector";
   output Complex vo[size(m, 1)] "= m*vi";
-//   Complex j=Modelica.ComplexMath.j;
 //   Real Rem[size(m, 1),size(m, 2)]=Re(m);
 //   Real Imm[size(m, 1),size(m, 2)]=Im(m);
 //   Real Revi[size(vi, 1)]=Re(vi);

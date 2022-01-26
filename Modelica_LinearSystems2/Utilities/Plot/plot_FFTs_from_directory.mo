@@ -2,7 +2,6 @@
 function plot_FFTs_from_directory
   "Plot amplitudes of FFT results (from result files in existing directory)"
   import Modelica.Utilities.Internal.FileSystem;
-  import Modelica.Utilities.Streams.print;
   import Modelica.Utilities.Strings;
   import Modelica_LinearSystems2.Utilities.Plot;
   input String directory

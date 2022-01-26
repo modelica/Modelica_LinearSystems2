@@ -1,7 +1,5 @@
 within Modelica_LinearSystems2.Internal;
 record DefaultDiagramBodePlot "Default diagram for Bode plot"
-  import Modelica;
-
   extends Modelica.Icons.Record;
   extends Modelica_LinearSystems2.Utilities.Plot.Records.DefaultDiagram(
                       heading="Bode-Diagram",
