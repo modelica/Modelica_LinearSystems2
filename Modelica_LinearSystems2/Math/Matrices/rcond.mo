@@ -37,13 +37,10 @@ in either the 1-norm or the infinity-norm, using the LAPACK function DGECON.
 
 <h4>Example</h4>
 <blockquote><pre>
-  A = [1, 2
-       2, 1];
-  r = rcond(A);
-
-  results in:
-
-  r = 0.3333
+A = [1, 2;
+     2, 1];
+r = rcond(A);
+// r = 0.3333
 </pre></blockquote>
 
 <h4>See also</h4>

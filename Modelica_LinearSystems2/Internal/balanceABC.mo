@@ -106,8 +106,8 @@ so that the transformed system is better suited for numerical algorithms.
 
 <h4>Example</h4>
 
-<blockquote>
-<pre>import Modelica.Math.Matrices;
+<blockquote><pre>
+<strong>import</strong> Modelica.Math.Matrices;
 
 A = [1, -10,  1000; 0.01,  0,  10; 0.005,  -0.01,  10];
 B = [100, 10; 1,0; -0.003, 1];
@@ -119,13 +119,11 @@ Diff = [Matrices.inv(T)*A*T, Matrices.inv(T)*B;
         C*T, zeros(1,2)] - [As, Bs; Cs, zeros(1,2)];
 err  = Matrices.norm(Diff);
 
--> Results in:
-scale = {16, 1, 0.0625}
-norm(A)  = 1000.15, norm(B)  = 100.504, norm(C)  = 100.006
-norm(As) = 10.8738, norm(Bs) = 16.0136, norm(Cs) = 10.2011
-err = 0
-</pre>
-</blockquote>
+// scale = {16, 1, 0.0625}
+// norm(A)  = 1000.15, norm(B)  = 100.504, norm(C)  = 100.006
+// norm(As) = 10.8738, norm(Bs) = 16.0136, norm(Cs) = 10.2011
+// err = 0
+</pre></blockquote>
 
 <p>
 The algorithm is taken from

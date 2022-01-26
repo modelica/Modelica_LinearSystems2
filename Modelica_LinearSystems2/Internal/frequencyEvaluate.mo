@@ -104,7 +104,7 @@ Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer
 
 <h4>Example</h4>
 <blockquote><pre>
-  Complex j = Modelica.ComplexMath.j;
+  import Modelica.ComplexMath.j;
   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
   Modelica_LinearSystems2.ZerosAndPoles zp=(p+1)/(p^2+p+1);
 
@@ -112,7 +112,7 @@ Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer
 
 <strong>algorithm</strong>
   result := Modelica_LinearSystems2.ZerosAndPoles.Analysis.evaluate(zp, j+1);
-//  result = 0.538462 - 0.307692j
+//  result = 0.538462 - 0.307692*j
 </pre></blockquote>
 
 <h4>See also</h4>

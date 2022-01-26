@@ -131,49 +131,79 @@ int c_symMatMul_(doublereal *a, doublereal *b, doublereal *c, char *addi, intege
   </tr>
 </table>
 </html>",        info="<html>
-This function is used to efficiently calculate the matrix <strong>X</strong> from equation
+<p>
+This function is used to efficiently calculate the matrix <strong>X</strong>
+from equation
+</p>
+
 <blockquote><pre>
-           T
-  <strong>X</strong> = <strong>A</strong>*<strong>B</strong>*<strong>A</strong> + <strong>C</strong>.
-
-</pre></blockquote>
-with <strong>B</strong> and <strong>C</strong> are symmetric matrices. They hold<blockquote><pre>
-
-   <strong>B</strong> = <strong>B</strong>u + <strong>B</strong>l   and    <strong>C</strong> = <strong>C</strong>u + <strong>C</strong>l,
-
+         T
+<strong>X</strong> = <strong>A</strong>*<strong>B</strong>*<strong>A</strong> + <strong>C</strong>,
 </pre></blockquote>
 
-where <strong>B</strong>u and <strong>C</strong>u with
+<p>
+with&nbsp;<strong>B</strong> and&nbsp;<strong>C</strong> being symmetric matrices.
+They hold
+</p>
+
 <blockquote><pre>
-         T               T
-  <strong>B</strong>u = <strong>B</strong>l   and   <strong>C</strong>u = <strong>C</strong>l
-
+<strong>B</strong> = <strong>B</strong>u + <strong>B</strong>l   and    <strong>C</strong> = <strong>C</strong>u + <strong>C</strong>l,
 </pre></blockquote>
+
+<p>
+where&nbsp;<strong>B</strong>u and&nbsp;<strong>C</strong>u with
+</p>
+
+<blockquote><pre>
+       T               T
+<strong>B</strong>u = <strong>B</strong>l   and   <strong>C</strong>u = <strong>C</strong>l
+</pre></blockquote>
+
+<p>
 are upper triangular matrices. Furthermore, the matrices are defined such that
-
 i.e.,
-<blockquote><pre>
-          | bij/2  for i = j
-  bu,ij = |
-          | bij   else
+</p>
 
-</pre></blockquote>
-and cu,ij respectively.<br>
-Finally, <strong>X</strong> is given by the sum of a upper triangular matrix and its transposes
 <blockquote><pre>
-                 T                   T         T                 T              T     T        T
-  <strong>X</strong> = <strong>A</strong>*(<strong>B</strong>u+<strong>B</strong>l)*<strong>A</strong> + (<strong>C</strong>u+<strong>C</strong>l) =  <strong>A</strong>*<strong>B</strong>u*<strong>A</strong> + <strong>A</strong>*<strong>B</strong>l*<strong>A</strong> + (<strong>C</strong>u+<strong>C</strong>l) = <strong>A</strong>*<strong>B</strong>u*<strong>A</strong> + <strong>C</strong>u + (<strong>A</strong>*<strong>B</strong>u*<strong>A</strong> + <strong>C</strong>u) =  <strong>E</strong> + <strong>E</strong>
-
+        | bij/2  for i = j
+bu,ij = |
+        | bij   else
 </pre></blockquote>
 
-Since, <strong>X</strong> also has to be symmetric, only the upper triangle of <strong>X</strong> is computed by calculatiing the upper triangle of matrix <strong>E</strong> and adding the upper trinagle of <strong>E</strong>'.<br>
-The calculation employs the BLAS functions <strong>dtrmm</strong> and <strong>dgemm</strong>.<br><br>
-Note, that only the upper trinagle is calculated. The complete solution could be achieved by the command
+<p>
+and cu,ij respectively.
+</p>
+<p>
+Finally, <strong>X</strong> is given by the sum of a upper triangular matrix
+and its transposes
+</p>
+
+<blockquote><pre>
+               T                   T         T                 T              T     T        T
+<strong>X</strong> = <strong>A</strong>*(<strong>B</strong>u+<strong>B</strong>l)*<strong>A</strong> + (<strong>C</strong>u+<strong>C</strong>l) =  <strong>A</strong>*<strong>B</strong>u*<strong>A</strong> + <strong>A</strong>*<strong>B</strong>l*<strong>A</strong> + (<strong>C</strong>u+<strong>C</strong>l) = <strong>A</strong>*<strong>B</strong>u*<strong>A</strong> + <strong>C</strong>u + (<strong>A</strong>*<strong>B</strong>u*<strong>A</strong> + <strong>C</strong>u) =  <strong>E</strong> + <strong>E</strong>
+</pre></blockquote>
+
+<p>
+Since, <strong>X</strong> also has to be symmetric, only the upper triangle
+of&nbsp;<strong>X</strong> is computed by calculatiing the upper triangle
+of matrix <strong>E</strong> and adding the upper trinagle of&nbsp;<strong>E</strong>'.
+</p>
+<p>
+The calculation employs the BLAS functions <strong>dtrmm</strong> and
+<strong>dgemm</strong>.<br><br>
+Note, that only the upper trinagle is calculated. The complete solution could
+be achieved by the command
+</p>
+
 <blockquote><pre>
 <strong>X</strong> := symmetric(<strong>X</strong>)
 </pre></blockquote>
 
-In contrast to function <em>symMatMul</em> this function is implemented in C-code
+<p>
+In contrast to function
+<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.Internal.symMatMul\">symMatMul</a>
+this function is implemented in C-code.
+</p>
 </html>"));
 
 end symMatMul_C;

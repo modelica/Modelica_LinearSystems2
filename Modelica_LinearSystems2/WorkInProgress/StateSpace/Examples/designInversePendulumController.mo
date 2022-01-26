@@ -4,6 +4,7 @@ function designInversePendulumController
 
   import Modelica.Utilities.Streams;
   import MatricesMSL = Modelica.Math.Matrices;
+  import Modelica.ComplexMath.j;
   import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Matrices;
@@ -14,8 +15,7 @@ function designInversePendulumController
 
   input String fileName=DataDir + "inversePendulumController_small.mat"
     "File name for results";
-protected
-  input Complex j = Modelica.ComplexMath.j;
+
 public
   output Real K_pa[:,:] "feedback matrix pole assignment controller";
   output Real M_pa[:,:] "pre filter LQ controller";

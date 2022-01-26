@@ -66,18 +66,14 @@ This function call returns the
 solution <strong>X</strong> of the linear system of equations
 </p>
 <blockquote>
-<p>
 <strong>X</strong>*op<strong>(A)</strong> = <strong>B</strong>
-</p>
 </blockquote>
 <p>
 with
 </p>
 <blockquote>
-<p>
-op<strong>(A)</strong> = transpose(<strong>(A)</strong>)  if   transA==true
+op<strong>(A)</strong> = transpose(<strong>(A)</strong>)  if   transA==true<br>
 op<strong>(A)</strong> = <strong>(A)</strong>  if   transA==false
-</p>
 </blockquote>
 <p>
 If matrix <strong>(A)</strong> is already lower triangular, the factorization is avoided if input \"isTriangular\" is set true.

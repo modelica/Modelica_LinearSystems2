@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function designInverseDoublePendulumController
   "Design pole assignment for an inverse double pedulum"
 
+  import Modelica.ComplexMath.j;
   import Modelica.Utilities.Streams;
   import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2.Math.Matrices;
@@ -27,8 +28,6 @@ function designInverseDoublePendulumController
 
 // output Real K_ob[:,:] "feedback matrix pole assignment controller";
 
-protected
-  input Complex j = Modelica.ComplexMath.j;
 protected
  Real Q[:,:];
  Real R[:,:];

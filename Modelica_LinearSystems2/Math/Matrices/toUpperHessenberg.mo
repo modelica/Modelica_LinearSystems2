@@ -63,17 +63,19 @@ inputs ilo, ihi for more information.
 
 <h4>Example</h4>
 <blockquote><pre>
-  A  = [1, 2,  3;
-        6, 5,  4;
-        1, 0,  0];
+A  = [1, 2,  3;
+      6, 5,  4;
+      1, 0,  0];
 
-  H = toUpperHessenberg(A);
-
-  results in:
-
-  H = [1.0,  -2.466,  2.630;
-      -6.083, 5.514, -3.081;
-       0.0,   0.919, -0.514]
+H = toUpperHessenberg(A);
+</pre></blockquote>
+<p>
+results in:
+</p>
+<blockquote><pre>
+H = [1.0,  -2.466,  2.630;
+    -6.083, 5.514, -3.081;
+     0.0,   0.919, -0.514]
 </pre></blockquote>
 </html>"));
 end toUpperHessenberg;

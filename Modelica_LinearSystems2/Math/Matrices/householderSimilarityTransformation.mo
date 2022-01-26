@@ -45,22 +45,21 @@ This transformation is widely used for transforming non-symmetric matrices to a 
 <h4>Example</h4>
 <blockquote><pre>
 // First step of Hessenberg decomposition
-  import   Modelica.Math.Vectors.Utilities;
+Real A[4,4] = [1,2,3,4;
+               3,4,5,6;
+               9,8,7,6;
+               1,2,0,0];
+Real Ar[4,4];
+Real u[4]={0,0,0,0};
 
-  Real A[4,4] = [1,2,3,4;
-                 3,4,5,6;
-                 9,8,7,6;
-                 1,2,0,0];
-  Real Ar[4,4];
-  Real u[4]={0,0,0,0};
+u[2:4] = Modelica_LinearSystems2.Math.Vectors.householderVector(A[2:4,1],{1,0,0});
+// u= = {0, 0.8107, 0.5819, 0.0647}
 
-  u[2:4]=Utilities.householderVector(A[2:4,1],{1,0,0});
-  // u= = {0, 0.8107, 0.5819, 0.0647}
-  Ar=householderSimilarityTransformation(A,u);
- //  Ar = [1.0,     -3.8787,    -1.2193,    3.531;
-          -9.5394, 11.3407,      6.4336,   -5.9243;
-           0.0,     3.1307,      0.7525,   -3.3670;
-           0.0,     0.8021,     -1.1656,   -1.0932]
+Ar = householderSimilarityTransformation(A,u);
+//  Ar = [1.0,     -3.8787,    -1.2193,    3.531;
+        -9.5394, 11.3407,      6.4336,   -5.9243;
+         0.0,     3.1307,      0.7525,   -3.3670;
+         0.0,     0.8021,     -1.1656,   -1.0932]
 </pre></blockquote>
 
 <h4>See also</h4>

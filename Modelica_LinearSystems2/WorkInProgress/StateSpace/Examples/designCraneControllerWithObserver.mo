@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.WorkInProgress.StateSpace.Examples;
 function designCraneControllerWithObserver
   "Design pole assignment controller and observer for an overhead crane"
   import Modelica.Utilities.Streams;
+  import Modelica.ComplexMath.j;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
@@ -17,8 +18,6 @@ function designCraneControllerWithObserver
  input String fileName=DataDir + "craneController_small.mat"
     "file name for results";
 
-protected
-  input Complex j = Modelica.ComplexMath.j;
 public
   output Real K_ob[:,:] "feedback matrix pole assignment controller";
   output Real K_pa[:,:] "feedback matrix pole assignment controller";

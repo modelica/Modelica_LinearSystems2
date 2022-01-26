@@ -38,6 +38,7 @@ algorithm
 Matrices.<strong>norm</strong>(A);
 Matrices.<strong>norm</strong>(A, p=2);
 </pre></blockquote>
+
 <h4>Description</h4>
 <p>
 The function call \"<code>Matrices.norm(A)</code>\" returns the

@@ -787,6 +787,7 @@ ss;
 
       import Modelica;
       import Modelica.Utilities.Strings;
+      import Modelica.ComplexMath.j;
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -829,7 +830,6 @@ ss;
 
     protected
       StateSpace ssBalanced = StateSpace.Transformation.toBalancedForm(ss);
-      Complex j=Modelica.ComplexMath.j;
       Eigenvalue ev[size(ss.A, 1)];
       Integer nx=size(ss.A, 1);
       Integer window=0;
@@ -3321,6 +3321,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
 
       import Modelica;
       import Modelica.ComplexMath;
+      import Modelica.ComplexMath.j;
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Polynomial;
@@ -3336,7 +3337,6 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
       Boolean issiso=StateSpace.Internal.isSISO(ss);
       TransferFunction tf=if issiso then
           StateSpace.Conversion.toTransferFunction(ss) else TransferFunction(1);
-      Complex j=ComplexMath.j;
       Complex den=Polynomial.evaluateComplex(Polynomial(tf.d), s);
       Real abs_den=ComplexMath.abs(den);
     algorithm
@@ -3370,7 +3370,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s), whi
 
 <strong>algorithm</strong>
   result := Modelica_LinearSystems2.StateSpace.Analysis.evaluate(ss, s);
-//  result = 0.4 - 0.2j
+//  result = 0.4 - 0.2*j
 </pre></blockquote>
 
 <h4>See also</h4>
@@ -3514,7 +3514,7 @@ Calculate the eigenvalues of a state space system, i.e. the eigenvalues of the s
 
 <strong>algorithm</strong>
   eigenvalues = Modelica_LinearSystems2.StateSpace.Analysis.eigenValues(ss);
-// eigenvalues = {-1 + 1j, -1 - 1j}
+// eigenvalues = {-1 + 1*j, -1 - 1*j}
 </pre></blockquote>
 </html>"));
     end eigenValues;
@@ -3580,7 +3580,7 @@ The eigenvalues are returned as a complex vector <tt>eigenvalues</tt>.
 <strong>algorithm</strong>
   (eigenvectors, eigenvalues) = Modelica_LinearSystems2.StateSpace.Analysis.eigenVectors(ss, true);
 // eigenvectors = [0.707, 0; 0, 0.707]
-// eigenvalues = {-1 + 1j, -1 - 1j}
+// eigenvalues = {-1 + 1*j, -1 - 1*j}
 
           |0.707 |         | 0.707 |
 i.e. v1 = |      |,   v2 = |       |
@@ -4256,6 +4256,7 @@ der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</str
 
       import Modelica;
       import Modelica.Utilities.Strings;
+      import Modelica.ComplexMath.j;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Internal.Eigenvalue;
@@ -4298,7 +4299,6 @@ der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</str
 
     protected
       StateSpace ssBalanced = StateSpace.Transformation.toBalancedForm(ss);
-      Complex j=Modelica.ComplexMath.j;
       Eigenvalue ev[size(ss.A, 1)];
       Integer nx=size(ss.A, 1);
       Integer window=0;
@@ -9326,19 +9326,17 @@ are multiples of 2 which means that this function does not introduce round-off e
 
 <h4>Example</h4>
 
-<blockquote>
-<pre>import Modelica.Math.Matrices.norm;
+<blockquote><pre>
+<strong>import</strong> Modelica.Math.Matrices.norm;
 ss = Modelica_LinearSystems2.StateSpace(A=[1, -10,  1000; 0.01,  0,  10; 0.005,  -0.01,  10],
                                         B=[100, 10; 1,0; -0.003, 1],
                                         C=[-0.5, 1, 100],
                                         D=[0,0]);
 sb = Modelica_LinearSystems2.StateSpace.Transformation.toBalancedForm(ss);
 
--> Results in:
-norm(ss.A) = 1000.15, norm(ss.B) = 100.504, norm(ss.C) = 100.006
-norm(sb.A) = 10.8738, norm(sb.B) = 16.0136, norm(sb.C) = 10.2011
-</pre>
-</blockquote>
+// norm(ss.A) = 1000.15, norm(ss.B) = 100.504, norm(ss.C) = 100.006
+// norm(sb.A) = 10.8738, norm(sb.B) = 16.0136, norm(sb.C) = 10.2011
+</pre></blockquote>
 
 <p>
 The algorithm is taken from
@@ -10154,6 +10152,7 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       "Check stability, stabilizability, controllability, observability nad detectability of the single poles"
 
       import Modelica.ComplexMath;
+      import Modelica.ComplexMath.j;
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -10193,7 +10192,6 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
       Integer indexMin;
       Real indexVector[:];
       Integer vv[:];
-      Complex j=Modelica.ComplexMath.j;
 
     algorithm
       for i in 1:nx loop
@@ -11210,6 +11208,7 @@ stabilizability the <strong>H</strong>22 has to be stable.
       "Check whether a MIMO system is detectable"
 
       import Modelica;
+      import Modelica.ComplexMath.j;
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -11225,7 +11224,6 @@ stabilizability the <strong>H</strong>22 has to be stable.
       Real dPoles[:, 2] "controllable poles";
       Real ndPoles[:, 2] "uncontrollable poles";
       Real poles[size(ss.A, 1), 2] "controllable and uncontrollable poles";
-      Complex j=Modelica.ComplexMath.j;
 
     algorithm
       (dPoles,ndPoles,poles) := StateSpace.Internal.controllablePoles(sst);
@@ -11414,6 +11412,7 @@ stabilizability the <strong>H</strong>22 has to be stable.
       "To check whether a MIMO system is stabliziable"
 
       import Modelica;
+      import Modelica.ComplexMath.j;
       import Complex;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -11427,7 +11426,6 @@ stabilizability the <strong>H</strong>22 has to be stable.
       Real cPoles[:, 2] "controllable poles";
       Real ncPoles[:, 2] "uncontrollable poles";
       Real poles[size(ss.A, 1), 2] "controllable and uncontrollable poles";
-      Complex j=Modelica.ComplexMath.j;
 
     algorithm
       (cPoles,ncPoles,poles) := StateSpace.Internal.controllablePoles(ss);

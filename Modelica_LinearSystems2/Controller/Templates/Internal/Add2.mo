@@ -19,23 +19,26 @@ equation
   annotation (
     Documentation(info="<html>
 <p>
-This blocks computes output <strong>y</strong> as <em>difference</em> of the
-commanded input <strong>u1</strong> and the feedback
-input <strong>u2</strong>:
+This blocks computes output&nbsp;<strong>y</strong> as <em>difference</em>
+of the commanded input&nbsp;<strong>u1</strong> and the feedback
+input&nbsp;<strong>u2</strong>:
 </p>
-<pre>
-    <strong>y</strong> = <strong>u1</strong> - <strong>u2</strong>;
-</pre>
+<blockquote><pre>
+<strong>y</strong> = <strong>u1</strong> - <strong>u2</strong>;
+</pre></blockquote>
+
+<h4>Example</h4>
+<blockquote><pre>
+parameter:   n = 2
+</pre></blockquote>
+
 <p>
-Example:
+results in the following equation
 </p>
-<pre>
-     parameter:   n = 2
 
-  results in the following equations:
-
-     y = u1 - u2
-</pre>
+<blockquote><pre>
+y = u1 - u2
+</pre></blockquote>
 </html>"), Icon(coordinateSystem(
     preserveAspectRatio=true,
     extent={{-100,-100},{100,100}},
