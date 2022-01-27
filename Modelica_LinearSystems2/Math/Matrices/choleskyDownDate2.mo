@@ -40,7 +40,7 @@ algorithm
         if Ldd[i, i] < 1e-12 then
           info := -1;
         end if;
-        (a[i:n], Ldd[i:n, i]) := LAPACK.drot(a[i:n], Ldd[i:n, i], cvec[i], svec[i]);
+          (a[i:n], Ldd[i:n, i]) := LAPACK.drot(a[i:n], Ldd[i:n, i], cvec[i], svec[i]);
         if Ldd[i, i] < 0 then
           Ldd[i:n, i] := -Ldd[i:n, i];
         end if;
