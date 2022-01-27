@@ -1884,7 +1884,6 @@ function kfStepMatrices2
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math;
-      import Modelica_LinearSystems2.Math.Matrices.LAPACK;
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
   input Real A[:,size(A, 1)] "Transition matrix of the discrete system";
