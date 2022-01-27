@@ -412,9 +412,8 @@ are described in the following sections:
 
     annotation (Documentation(info="<html>
 <p>
-This library is implemented with Modelica 3.1 (especially the
-operator overloading features are utilized) and requires the
-<a href=\"http://www.netlib.org/clapack/CLAPACK-3.1.1-VisualStudio.zip\">LAPACK 3.1.1</a> object library.
+This library is implemented with Modelica 4.0.0 (especially the
+operator overloading features are utilized).
 Furthermore, linearization and plotting is implemented
 with Dymola API calls. It is planned to move these tool specific calls to the
 <a href=\"modelica://ModelicaServices\">ModelicaServices</a> package
