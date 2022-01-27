@@ -24,7 +24,9 @@ protected
 
 external "Fortran 77" dtrsm(side, uplo, transA, diag, m, n, alpha, A, lda, X, ldb) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="Lapack documentation:
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dtrsm instead",
+    Documentation(info="Lapack documentation:
 
    Purpose
    =======

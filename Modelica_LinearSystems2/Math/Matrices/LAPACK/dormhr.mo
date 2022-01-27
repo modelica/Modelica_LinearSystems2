@@ -39,7 +39,9 @@ external "Fortran 77" dormhr(
     lwork,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="Lapack documentation:
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dormhr instead",
+    Documentation(info="Lapack documentation:
 
    Purpose
    =======

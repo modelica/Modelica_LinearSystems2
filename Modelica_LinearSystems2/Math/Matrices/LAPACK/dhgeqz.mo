@@ -45,7 +45,9 @@ external "Fortran 77" dhgeqz(
     lwork,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="Lapack documentation:
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dhgeqz instead",
+    Documentation(info="Lapack documentation:
 
    Purpose
    =======

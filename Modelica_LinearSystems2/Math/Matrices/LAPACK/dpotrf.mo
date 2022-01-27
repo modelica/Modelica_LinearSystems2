@@ -15,6 +15,7 @@ protected
   external "FORTRAN 77" dpotrf(uplo, n, Acholesky, lda, info) annotation (Library="Lapack");
 
   annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dpotrf instead",
     Documentation(info="Lapack documentation:
 
    Purpose
