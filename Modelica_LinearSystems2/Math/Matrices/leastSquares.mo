@@ -22,20 +22,11 @@ A linear system of equations A*x = b has no solutions or infinitely
 many solutions if A is not square. Function \"leastSquares\" returns
 a solution in a least squarse sense:
 </p>
-<pre>
-  size(A,1) &gt; size(A,2):  returns x such that |A*x - b|^2 is a minimum
-  size(A,1) = size(A,2):  returns x such that A*x = b
-  size(A,1) &lt; size(A,2):  returns x such that |x|^2 is a minimum for all
-                          vectors x that fulfill A*x = b
-</pre>
-
-<h4>Note</h4>
-<p>
-The solution is computed with the LAPACK function \"dgelsx\",
-i.e., QR or LQ factorization of A with column pivoting.
-If A does not have full rank,
-the solution is not unique and from the infinitely many solutions
-the one is selected that minimizes both |x|^2 and |A*x - b|^2.
-</p>
+<blockquote><pre>
+size(A,1) &gt; size(A,2):  returns x such that |A*x - b|^2 is a minimum
+size(A,1) = size(A,2):  returns x such that A*x = b
+size(A,1) &lt; size(A,2):  returns x such that |x|^2 is a minimum for all
+                        vectors x that fulfill A*x = b
+</pre></blockquote>
 </html>"));
 end leastSquares;
