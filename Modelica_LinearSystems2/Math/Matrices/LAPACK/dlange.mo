@@ -22,7 +22,9 @@ int dlange2_(char *norm, integer *m, integer *n, doublereal *a, integer *lda, do
   *anorm=dlange_(norm, m, n, a, lda, work);
   return 0;
 }", Library={"lapack"});
-annotation ( Documentation(info="Lapack documentation:
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dlange instead",
+    Documentation(info="Lapack documentation:
 
    Purpose
    =======

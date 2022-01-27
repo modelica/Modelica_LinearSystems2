@@ -54,7 +54,9 @@ int c_inter_dgees_(char *jobvs, char *sort, integer *n, doublereal *a, integer *
   return 0;
   }", Library={"lapack"});
 
-  annotation (Documentation(info="Lapack documentation:
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dgees instead",
+    Documentation(info="Lapack documentation:
 
    Purpose
    =======

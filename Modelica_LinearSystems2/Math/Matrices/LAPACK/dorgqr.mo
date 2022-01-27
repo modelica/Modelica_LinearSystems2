@@ -26,7 +26,9 @@ external "Fortran 77" dorgqr(
     lwork,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="Lapack documentation:
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dorgqr instead",
+    Documentation(info="Lapack documentation:
 
    Purpose
    =======

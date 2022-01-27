@@ -19,7 +19,9 @@ protected
 
 external "Fortran 77" dtrsyl(trana, tranb, isgn, m, n, A, m, B, n, X, m, scale, info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="Lapack documentation:
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dtrsyl instead",
+    Documentation(info="Lapack documentation:
 
    Purpose
    =======
