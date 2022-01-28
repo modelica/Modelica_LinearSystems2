@@ -577,6 +577,39 @@ for some details and
 <a href=\"modelica://Modelica_LinearSystems2.Math.Complex\">Modelica_LinearSystems2.Math.Complex</a>
 for inheritance.
 </p>
+
+<h4>
+Obsolete classes
+</h4>
+<p>
+The following classes are obsolete and will be removed from the Library
+in the future. A&nbsp;conversion script is provided to facilitate
+the conversion.
+</p>
+
+<ul>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgecon</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgees</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev_eigenValues</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeevx</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgehrd</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgesdd</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgesvd</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgesvx</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dggev</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dggevx</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dhgeqz</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dlange</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dorghr</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dormhr</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dormqr</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrevc</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrsen</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrsyl</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dpotrf</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrsm</li>
+</ul>
 </html>"));
     end Version_2_5_0;
 
