@@ -22,7 +22,7 @@ annotation (
       script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.3.4.mos", to="2.3.5"),
     from(version="2.3.5",
       script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.3.5.mos"),
-    from(version="2.4.0",
+    from(version={"2.4.0", "2.4.1"},
       script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.4.0.mos")),
   Documentation(info="<html>
 <p>
