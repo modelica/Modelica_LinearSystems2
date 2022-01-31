@@ -785,7 +785,7 @@ algorithm
 //PCT:=P*transpose(C) "Matrix P*C'";
 //M:=DiscreteStateSpace.Internal.symMatMul(C, P, R, true)     "Upper triangle of measurement prediction covariance C*P*C' + R";
 mnorm := LAPACK.dlansy(M, "1", true);
-(UMutri,info) := LAPACK.dpotrf(M, true);// Calculate the Cholesky factorization U*U' of M
+(UMutri,info) := Modelica.Math.Matrices.LAPACK.dpotrf(M, true); // Calculate the Cholesky factorization U*U' of M
 assert(info == 0, "Calculating a Cholesky decomposition with function \"Lapack.dpotrf\" failed in function \"kfMatrices\".");
 (mrcond, info) := LAPACK.dpocon(UMutri, mnorm, true);
 assert(info == 0, "Calculating the reciprocal condition number with function \"Lapack.dpocon\" failed in function \"kfMatrices\".");
@@ -798,8 +798,8 @@ for l1 in 2:ny loop
 end for;
 
       //K from K*M = P*C' with K*U'*U = P*C', U is Cholesky factor
-K := LAPACK.dtrsm(UMutri, K, alpha, true, true, false, false);
-K := LAPACK.dtrsm(UMutri, K, alpha, true, true, true, false);
+K := Modelica.Math.Matrices.LAPACK.dtrsm(UMutri, K, alpha, true, true, false, false);
+K := Modelica.Math.Matrices.LAPACK.dtrsm(UMutri, K, alpha, true, true, true, false);
 
 // Calculate upper triangle of symmetric P-K*C*P
 for l1 in 1:nx loop
