@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Math.Matrices;
 function solve2r
   "Solve real system of linear equations X*op(A)=B with a B matrix (Gaussian elemination with partial pivoting)"
   extends Modelica.Icons.Function;
+  import Modelica.Math.Matrices.LAPACK;
 
   input Real A[:,size(A,1)] "Matrix A of X*op(A) = B";
   input Real B[:,size(A,1)] "Matrix B of X*op(A) = B";
@@ -41,8 +42,7 @@ algorithm
     X := LAPACK.dtrsm(LU, X, 1, true, true, true, false);
   else
     X := LAPACK.dtrsm(LU, X, 1, true, true, false, false);
-    X := LAPACK.dtrsm(LU, X, 1, true, false, false,
-      true);
+    X := LAPACK.dtrsm(LU, X, 1, true, false, false, true);
     for i in n:-1:1 loop
       j := k[i];
       if (j <> i) then
