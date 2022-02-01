@@ -8,18 +8,17 @@ function QR
   output Real R[min(size(A, 1), size(A, 2)),size(A, 2)]
     "Square upper triangular matrix";
 
-  output Real tau[min(size(A, 1), size(A, 2))];
-  output Real Q2[size(A,1),size(A, 1)];
+  output Real tau[min(size(A, 1), size(A, 2))] "Scalar factors of the elementary reflectors";
+  output Real Q2[size(A,1),size(A, 1)] "Orthogonal matrix defined as the product of elementary reflectors";
 protected
   Integer nrow=size(A, 1);
   Integer ncol=size(A, 2);
   Integer minrowcol=min(nrow, ncol);
-  Integer lwork=3*max(1,max(nrow,ncol));//Internal.dgeqrf_workdim(A);
 
 algorithm
   if minrowcol > 0 then
 
-    (Q,tau) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqrf(A, lwork);
+    (Q,tau) := Modelica.Math.Matrices.LAPACK.dgeqrf(A);
 
   // determine R
     R := zeros(minrowcol, ncol);
@@ -41,7 +40,7 @@ algorithm
   annotation ( Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-(Q,R,p) = Matrices.<strong>QR</strong>(A);
+(Q, R, tau, Q2) = Matrices.<strong>QR</strong>(A);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -51,13 +50,13 @@ a rectangular matrix <strong>A</strong> (the number of columns of <strong>A</str
 must be less than or equal to the number of rows):
 </p>
 <blockquote>
-<strong>Q</strong>*<strong>R</strong> = <strong>A</strong>[:,<strong>p</strong>]
+<strong>Q</strong> * <strong>R</strong> = <strong>A</strong>
 </blockquote>
 <p>
 where <strong>Q</strong> is a rectangular matrix that has orthonormal columns and
 has the same size as A (<strong>Q</strong><sup>T</sup><strong>Q</strong>=<strong>I</strong>),
-<strong>R</strong> is a square, upper triangular matrix and <strong>p</strong> is a permutation
-vector. Matrix <strong>R</strong> has the following important properties:
+<strong>R</strong> is a square, upper triangular matrix.
+Matrix <strong>R</strong> has the following important properties:
 </p>
 <ul>
 <li> The absolute value of a diagonal element of <strong>R</strong> is the largest
@@ -76,28 +75,29 @@ of <strong>R</strong> (which is the same row-rank as <strong>A</strong>). Furthe
 <strong>R</strong> can be partitioned in two parts
 </p>
 <blockquote><pre>
-<strong>A</strong>[:,<strong>p</strong>] = <strong>Q</strong> * [<strong>R</strong><sub>1</sub>, <strong>R</strong><sub>2</sub>;
-              <strong>0</strong>,  <strong>0</strong>]
+<strong>A</strong> = <strong>Q</strong> * [<strong>R</strong><sub>1</sub>, <strong>R</strong><sub>2</sub>;
+          <strong>0</strong>,  <strong>0</strong>]
 </pre></blockquote>
 <p>
 where <strong>R</strong><sub>1</sub> is a regular, upper triangular matrix.
 </p>
 <p>
-Note, the solution is computed with the LAPACK functions \"dgeqp3\"
-and \"dorgqr\", i.e., by Housholder transformations with
-column pivoting. If <strong>Q</strong> is not needed, the function may be
-called as: <code>(,R,p) = QR(A)</code>.
+Note, the solution is computed with the LAPACK function \"dgeqrf\",
+i.e., by a&nbsp;QR factorization without column pivoting.
+If <strong>Q</strong> is not needed, the function may be
+called as: <code>(,R) = QR(A)</code>.
 </p>
 <h4>Example</h4>
 <blockquote><pre>
-  Real A[3,3] = [1,2,3;
-                 3,4,5;
-                 2,1,4];
+  Real A[3,3] = [1, 2, 3;
+                 3, 4, 5;
+                 2, 1, 4];
   Real R[3,3];
 <strong>algorithm</strong>
-  (,R) := Matrices.QR(A);  // R = [-7.07.., -4.24.., -3.67..;
-                                    0     , -1.73.., -0.23..;
-                                    0     ,  0     ,  0.65..];
+  (,R) := Matrices.QR(A);
+  // R = [-3.74.., -4.27.., -6.94..;
+           0.0   , -1.64.., -0.17..;
+           0.0   ,  0.0   , -1.29..]
 </pre></blockquote>
 </html>"));
 end QR;
