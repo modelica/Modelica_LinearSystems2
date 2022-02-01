@@ -9215,7 +9215,7 @@ Matrix T has to be invertible, i.e. the system has to be controllable. The trans
         "Matrix of the right eigenvectors of the matrix ss.A";
 
     algorithm
-      (,,,V,) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev(ss.A);
+      (,,V,) := Modelica.Math.Matrices.LAPACK.dgeev(ss.A);
 
       tss := StateSpace.Transformation.toSimilarForm(
             ss,
