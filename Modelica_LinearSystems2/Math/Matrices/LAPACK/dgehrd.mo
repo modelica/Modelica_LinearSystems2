@@ -29,7 +29,9 @@ external "Fortran 77" dgehrd(
     lwork,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="Lapack documentation:
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dgehrd instead",
+    Documentation(info="Lapack documentation:
 
    Purpose
    =======

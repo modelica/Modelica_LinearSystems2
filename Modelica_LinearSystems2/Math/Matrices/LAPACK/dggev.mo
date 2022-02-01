@@ -40,7 +40,9 @@ external "Fortran 77" dggev(
     work,
     lwork,
     info) annotation(Library = {"lapack"});
-  annotation (Documentation(info="Lapack documentation:
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dggev instead",
+    Documentation(info="Lapack documentation:
 
    Purpose
    =======

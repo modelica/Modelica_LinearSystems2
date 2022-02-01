@@ -47,7 +47,9 @@ external "Fortran 77" dtrsen(
     liwork,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="Lapack documentation:
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dtrsen instead",
+    Documentation(info="Lapack documentation:
 
    Purpose
    =======

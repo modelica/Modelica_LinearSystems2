@@ -31,7 +31,9 @@ external "Fortran 77" dgeev(
     size(work, 1),
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="Lapack documentation:
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dgeev_eigenValues instead",
+    Documentation(info="Lapack documentation:
 
    Purpose
    =======

@@ -36,7 +36,9 @@ external "Fortran 77" dtrevc(
     work,
     info) annotation(Library = {"lapack"});
 
-  annotation (Documentation(info="Lapack documentation:
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dtrevc instead",
+    Documentation(info="Lapack documentation:
 
    Purpose
    =======

@@ -50,7 +50,9 @@ external "FORTRAN 77" dgesvx(
     work,
     iwork,
     info) annotation (Library="lapack");
-  annotation (Documentation(info="Lapack documentation (April 2012):
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dgesvx instead",
+    Documentation(info="Lapack documentation (April 2012):
 
    Purpose:
    ========
