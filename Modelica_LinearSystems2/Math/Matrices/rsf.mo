@@ -31,19 +31,12 @@ algorithm
 // similarity transformation:  Q' * A * Q = Aout. Q can be computed from
 // Aout and tau (dorghr)
 
-    (Aout,tau,info1) := LAPACK.dgehrd(
-      A,
-      1,
-      n);
+    (Aout,tau,info1) := LAPACK.dgehrd(A, 1, n);
     assert(info1 == 0, "The " + String(-info1) +
       "'th argument of LAPACK.dgehrd had an illegal value");
 // dorghr to compute Q
 
-    (Q,info1) := LAPACK.dorghr(
-      Aout,
-      1,
-      n,
-      tau);
+    (Q,info1) := LAPACK.dorghr(Aout, 1, n, tau);
     assert(info1 == 0, "The " + String(-info1) +
       "'th argument of LAPACK.dorghr had an illegal value");
 
@@ -55,11 +48,7 @@ algorithm
 // the Schur form T of H that is also the Schur form of A as well as the matrix
 // Z containing the Schur vectors to get A = Q*H*Q' = (Z)*T*(Z)'
 
-    (alphaReal,alphaImag,info2,T,Z) := LAPACK.dhseqr(
-      H,
-      false,
-      "V",
-      Q);
+    (alphaReal,alphaImag,info2,T,Z) := LAPACK.dhseqr(H, false, "V", Q);
     assert(info2 == 0, "The output info of LAPACK.dhseqr should be zero, else if\n
      info < 0:  if info = -i, the i-th argument of LAPACK.dhseqr had an illegal value\n
      info > 0:  if INFO = i, LAPACK.dhseqr failed to compute all of the
@@ -73,10 +62,7 @@ algorithm
       alphaReal := {1};
       alphaImag := {0};
     else
-      Z := fill(
-        1,
-        0,
-        0);
+      Z := fill(1, 0, 0);
       alphaReal := fill(1, 0);
       alphaImag := fill(0, 0);
     end if;

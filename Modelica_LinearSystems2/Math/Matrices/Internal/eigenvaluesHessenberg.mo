@@ -12,10 +12,7 @@ protected
   Integer n=size(H, 1);
   Integer ilo=1;
   Integer ihi=n;
-  Real Z[n,n]=fill(
-        0,
-        n,
-        n);
+  Real Z[n,n]=fill(0, n, n);
 
 algorithm
   if size(H, 1) > 0 then
