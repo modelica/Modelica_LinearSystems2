@@ -1,14 +1,12 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function rsf "Computes the real Schur form (RSF) of a square matrix"
   import Modelica.Math.Matrices.LAPACK;
-  import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Matrices.Internal;
+
   input Real A[:,size(A, 1)];
 
 protected
   Integer n=size(A, 1);
   Integer i;
-  Integer lwork;
   Real tau[max(0, size(A, 1) - 1)];
 
   Real Aout[size(A, 1),size(A, 2)];
@@ -57,10 +55,8 @@ algorithm
 // the Schur form T of H that is also the Schur form of A as well as the matrix
 // Z containing the Schur vectors to get A = Q*H*Q' = (Z)*T*(Z)'
 
-    lwork := max(Internal.dhseqr_workdim(H), 1);
-    (alphaReal,alphaImag,info2,T,Z) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dhseqr(
+    (alphaReal,alphaImag,info2,T,Z) := LAPACK.dhseqr(
       H,
-      lwork,
       false,
       "V",
       Q);

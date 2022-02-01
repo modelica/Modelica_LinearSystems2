@@ -1,8 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function eigenvalues2 "Compute eigenvalues and unnormalized eigenvectors"
 
-  import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Matrices.Internal;
+  import Modelica.Math.Matrices.LAPACK;
 
   input Real A[:,size(A, 1)];
 
@@ -11,9 +10,9 @@ function eigenvalues2 "Compute eigenvalues and unnormalized eigenvectors"
   output Real alphaImag[size(A, 1)]
     "Imaginary part of alpha (eigenvalue=(alphaReal+i*alphaImag))";
   output Real lEigenVectors[size(A, 1),size(A, 1)]
-    "left eigenvectors of matrix A";
+    "Left eigenvectors of matrix A";
   output Real rEigenVectors[size(A, 1),size(A, 1)]
-    "right eigenvectors of matrix A";
+    "Right eigenvectors of matrix A";
   output Integer info=0;
 protected
   Integer n=size(A, 1);
@@ -25,16 +24,12 @@ protected
   Real Zo[:,:];
   Real Ho[:,:];
 
-  Integer lwork;
-
 algorithm
   (H,V,tau) := Modelica.Math.Matrices.Utilities.toUpperHessenberg(A,1,n);
-  Q := Modelica.Math.Matrices.LAPACK.dorghr(V, 1, n, tau);
-
- lwork := Internal.dhseqr_workdim(H);
+  Q := LAPACK.dorghr(V, 1, n, tau);
 
   if size(H, 1) > 0 then
-   (alphaReal,alphaImag,info,Ho,Zo) := Matrices.LAPACK.dhseqr(H, lwork, false, "V", Q);
+   (alphaReal,alphaImag,info,Ho,Zo) := LAPACK.dhseqr(H, false, "V", Q);
   else
     alphaReal := fill(0, size(H, 1));
     alphaImag := fill(0, size(H, 1));
@@ -42,7 +37,7 @@ algorithm
     Ho := fill(0, size(H, 1), size(H, 2));
   end if;
 
-  (lEigenVectors,rEigenVectors) := Modelica.Math.Matrices.LAPACK.dtrevc(Ho, "B", "B", Zo);
+  (lEigenVectors,rEigenVectors) := LAPACK.dtrevc(Ho, "B", "B", Zo);
 
   annotation (Documentation(info="<html>
 </html>"));

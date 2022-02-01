@@ -1,10 +1,8 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function eigenvaluesHessenberg
   "Compute eigenvalues of an upper Hessenberg form matrix"
-  import Modelica_LinearSystems2.Math.Matrices.Internal;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-  input Real H[:,size(H, 1)];
 
+  input Real H[:,size(H, 1)];
   output Real alphaReal[size(H, 1)]
     "Real part of alpha (eigenvalue=(alphaReal+i*alphaImag))";
   output Real alphaImag[size(H, 1)]
@@ -14,8 +12,6 @@ protected
   Integer n=size(H, 1);
   Integer ilo=1;
   Integer ihi=n;
-  Integer lwork=Internal.dhseqr_workdim(H);
-  Real work[lwork];
   Real Z[n,n]=fill(
         0,
         n,
@@ -23,7 +19,7 @@ protected
 
 algorithm
   if size(H, 1) > 0 then
-    (alphaReal,alphaImag,info) := LAPACK.dhseqr(H, lwork);
+    (alphaReal,alphaImag,info) := Modelica.Math.Matrices.LAPACK.dhseqr(H);
   else
     alphaReal := fill(0, size(H, 1));
     alphaImag := fill(0, size(H, 1));
