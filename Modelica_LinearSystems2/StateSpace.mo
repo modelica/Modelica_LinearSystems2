@@ -3529,9 +3529,9 @@ Calculate the eigenvalues of a state space system, i.e. the eigenvalues of the s
       input StateSpace ss "state space system";
       input Boolean onlyEigenvectors=true;
       output Real eigvec[size(ss.A, 1), size(ss.A, 2)]
-        "eigen values of the system";
+        "Eigenvectors of the system";
       output Complex eigval[size(ss.A, 1)]=fill(Complex(0), size(ss.A, 1))
-        "eigen values of the system";
+        "Eigenvalues of the system";
     protected
       Integer info;
       Real eigvalRe[size(ss.A, 1)]=fill(0, size(ss.A, 1));

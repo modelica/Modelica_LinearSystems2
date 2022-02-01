@@ -6,9 +6,9 @@ function eigenVectors
   import Modelica.ComplexMath.j;
 
   input Real A[:,size(A, 1)] "real square matrix";
-  output Complex eigvec[size(A, 1),size(A, 2)] "eigen values of the system";
+  output Complex eigvec[size(A, 1),size(A, 2)] "Eigenvectors of the system";
   output Complex eigval[size(A, 1)]=fill(Complex(0), size(A, 1))
-    "eigen values of the system";
+    "Eigenvalues of the system";
 protected
   Integer info;
   Real eigvecRe[size(A, 1),size(A, 2)];
