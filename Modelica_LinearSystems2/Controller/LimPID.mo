@@ -156,7 +156,6 @@ equation
       color={0,0,127},
       thickness=0.5,
       smooth=Smooth.None));
-
   connect(sampler_s.u, u_s) annotation (Line(
       points={{-102,0},{-120,0}},
       color={0,0,127},
@@ -200,8 +199,7 @@ equation
   connect(gainPID.y, addSat.u2) annotation (Line(points={{61,0},{65,0},{65,-20},
           {74,-20},{74,-28}}, color={0,0,127}));
   connect(gainPID.y, limiter.u)
-    annotation (Line(points={{61,0},{72,0},{68,0}},
-                                             color={0,0,127}));
+    annotation (Line(points={{61,0},{72,0},{68,0}}, color={0,0,127}));
   connect(gainPID.u, addPID.y) annotation (Line(
       points={{38,0},{31,0}},
       color={0,0,127},
@@ -226,11 +224,13 @@ equation
       points={{49,-70},{42,-70}},
       color={0,0,127},
       smooth=Smooth.None));
+
   annotation (
     defaultComponentName="PID",
     Icon(coordinateSystem(
         preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}}), graphics={
+        extent={{-100,-100},{100,100}}),
+      graphics={
         Line(points={{-80,78},{-80,-90}}, color={192,192,192}),
         Polygon(
           points={{-80,90},{-88,68},{-72,68},{-80,90}},
@@ -243,8 +243,7 @@ equation
           lineColor={192,192,192},
           fillColor={192,192,192},
           fillPattern=FillPattern.Solid),
-        Line(points={{-80,-80},{-80,50},{-73,-20},{30,60},{80,60}}, color={0,0,
-              127}),
+        Line(points={{-80,-80},{-80,50},{-73,-20},{30,60},{80,60}}, color={0,0,127}),
         Text(
           extent={{-35,-22},{79,-60}},
           lineColor={192,192,192},

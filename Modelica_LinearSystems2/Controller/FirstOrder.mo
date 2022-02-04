@@ -19,18 +19,19 @@ equation
   connect(y,discretePart.x[1]);
 initial equation
   if continuous then
-     if init == Types.Init.InitialState or init == Types.Init.InitialOutput then
-        y = y_start;
-     elseif init == Types.Init.SteadyState then
-        der(y) = 0;
-     end if;
+    if init == Types.Init.InitialState or init == Types.Init.InitialOutput then
+      y = y_start;
+    elseif init == Types.Init.SteadyState then
+      der(y) = 0;
+    end if;
   end if;
   annotation (
-  defaultComponentName="firstOrder",
+    defaultComponentName="firstOrder",
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Line(points={{-80,80},{-80,-88}}, color={192,192,192}),
         Polygon(
           points={{-80,92},{-88,70},{-72,70},{-80,90},{-80,92}},
@@ -66,7 +67,8 @@ initial equation
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Text(
           extent={{-48,52},{50,8}},
           lineColor={0,0,0},

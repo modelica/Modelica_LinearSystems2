@@ -1,8 +1,9 @@
 within Modelica_LinearSystems2.Controller;
 block Filter
   "Continuous or discretized analog low or high pass IIR-filter (CriticalDamping/Bessel/Butterworth/Chebyshev)"
-  import Modelica_LinearSystems2.Utilities.Types;
   extends ZerosAndPoles(final system=system3);
+  import Modelica_LinearSystems2.Utilities.Types;
+
   parameter Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
   parameter Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
   parameter Integer order(min=1) = 2 "Order of filter";
@@ -15,8 +16,8 @@ block Filter
     "Pass band ripple for Chebyshev filter (otherwise not used)" annotation(Dialog(enable=analogFilter == Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Chebyshev));
 
 protected
-  parameter Modelica_LinearSystems2.ZerosAndPoles.Internal.ZerosAndPoles
-    system2 = Modelica_LinearSystems2.ZerosAndPoles.Internal.filter(
+  parameter Modelica_LinearSystems2.ZerosAndPoles.Internal.ZerosAndPoles system2 =
+    Modelica_LinearSystems2.ZerosAndPoles.Internal.filter(
       analogFilter=analogFilter,
       filterType=filterType,
       order=order,
@@ -37,7 +38,8 @@ protected
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Rectangle(
           extent={{-96,96},{96,-96}},
           lineColor={230,230,255},
@@ -84,5 +86,4 @@ For details of the filter characteristics, see
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>.
 </p>
 </html>"));
-
 end Filter;

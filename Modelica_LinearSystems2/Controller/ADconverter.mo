@@ -6,22 +6,25 @@ block ADconverter "Analog to digital converter (including sampler)"
   extends Interfaces.PartialSISO_equality;
 
 protected
-  Internal.DiscreteADconverter discretePart(y_max=y_max, y_min=y_min, bits=bits,
-      sampleFactor=sampleFactor) if
-          not continuous "AD converter";
+  Internal.DiscreteADconverter discretePart(
+    y_max=y_max,
+    y_min=y_min,
+    bits=bits,
+    sampleFactor=sampleFactor) if not continuous "AD converter";
 
 equation
-   if continuous then
-      y = if u > y_max then y_max else if u < y_min then y_min else u;
-else
+  if continuous then
+    y = if u > y_max then y_max else if u < y_min then y_min else u;
+  else
     connect(u, discretePart.u);
     connect(y, discretePart.y);
-   end if;
-   annotation (
+  end if;
+  annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Line(points={{-100,-100},{100,100}}, color={0,0,127}),
         Text(
           extent={{-94,60},{-30,20}},
@@ -45,7 +48,8 @@ else
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="%sampleFactor")}),
-    Documentation(info="<html>
+    Documentation(
+      info="<html>
 <p>
 If <strong>discrete</strong> block, the output y is sampled according to sample time
 sampleClock.sampleTime * sampleFactor, where sampleClock.sampleTime

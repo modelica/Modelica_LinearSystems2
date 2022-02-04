@@ -7,7 +7,7 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
   parameter Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter" annotation (Dialog(group="FIR filter design", enable=blockType <> Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType == Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
   parameter Integer order(min=1) = 2 "Order of filter" annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
   parameter Modelica.Units.SI.Frequency f_cut=1 "Cut-off frequency" annotation (
-     Dialog(group="FIR filter design", enable=blockType <>
+      Dialog(group="FIR filter design", enable=blockType <>
           Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and
           specType == Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
   parameter Types.Window window=Modelica_LinearSystems2.Controller.Types.Window.Rectangle
@@ -18,28 +18,31 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
 
 protected
   parameter Real a2[:]=Internal.FIR_coefficients(
-      specType,
-      L,
-      filterType,
-      order,
-      f_cut,
-      sampleClock.sampleTime*sampleFactor,
-      window,
-      beta,
-      a);
+    specType,
+    L,
+    filterType,
+    order,
+    f_cut,
+    sampleClock.sampleTime*sampleFactor,
+    window,
+    beta,
+    a);
   Internal.DiscreteFIR discretePart(
     sampleFactor=sampleFactor,
     a=a2)  if not continuous "FIR realization";
-equation
 
+equation
   if continuous then
     y = u;
   end if;
-connect(u,discretePart.u);
-connect(y,discretePart.y);
+  connect(u,discretePart.u);
+  connect(y,discretePart.y);
 
-  annotation (defaultComponentName="filter",Icon(coordinateSystem(
-          preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
+  annotation (
+    defaultComponentName="filter",
+    Icon(coordinateSystem(
+          preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+      graphics={
         Polygon(
           points={{-82,88},{-90,66},{-74,66},{-82,86},{-82,88}},
           lineColor={192,192,192},

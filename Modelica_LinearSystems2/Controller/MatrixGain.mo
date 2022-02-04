@@ -57,11 +57,14 @@ results in the following equations:
 |      |  =  |            | * |      |
 | y[2] |     | 3.00  1.50 |   | u[2] |
 </pre></blockquote>
-</html>"), Icon(coordinateSystem(
+</html>"),
+  Icon(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={Text(
-          extent={{-88,-62},{92,58}},
-          lineColor={160,160,164},
-          textString="*[kij]")}));
+        grid={2,2}),
+    graphics={
+    	Text(
+        extent={{-88,-62},{92,58}},
+        lineColor={160,160,164},
+        textString="*[kij]")}));
 end MatrixGain;

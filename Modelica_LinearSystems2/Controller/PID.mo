@@ -78,7 +78,6 @@ initial equation
   end if;
 
 equation
-
   connect(P.y, addPID.u1) annotation (Line(
       points={{-9,40},{0,40},{0,8},{8,8}},
       color={0,0,127},
@@ -119,7 +118,8 @@ equation
     defaultComponentName="pID",
     Icon(coordinateSystem(
         preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}}), graphics={
+        extent={{-100,-100},{100,100}}),
+      graphics={
         Line(points={{-80,78},{-80,-90}}, color={192,192,192}),
         Polygon(
           points={{-80,90},{-88,68},{-72,68},{-80,90}},
@@ -132,8 +132,7 @@ equation
           lineColor={192,192,192},
           fillColor={192,192,192},
           fillPattern=FillPattern.Solid),
-        Line(points={{-80,-80},{-80,50},{-73,-20},{30,60},{80,60}}, color={0,0,
-              127}),
+        Line(points={{-80,-80},{-80,50},{-73,-20},{30,60},{80,60}}, color={0,0,127}),
         Text(
           extent={{-46,-21},{80,-60}},
           lineColor={192,192,192},

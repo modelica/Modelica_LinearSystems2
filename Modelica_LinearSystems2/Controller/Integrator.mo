@@ -15,7 +15,6 @@ block Integrator
 equation
   if continuous then
     der(y) = k*u;
-
   end if;
   connect(y, discretePart.y[1]);
 initial equation
@@ -46,10 +45,12 @@ For this reason, option \"initType = SteadyState\" is ignored for
 a continuous integrator block and
 interpreted as \"initType = InitialState\".
 </p>
-</html>"), Icon(coordinateSystem(
+</html>"),
+    Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Line(points={{-80,78},{-80,-90}}, color={192,192,192}),
         Polygon(
           points={{-80,90},{-88,68},{-72,68},{-80,90}},
@@ -80,7 +81,8 @@ interpreted as \"initType = InitialState\".
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Rectangle(extent={{-60,60},{60,-60}}, lineColor={0,0,127}),
         Line(points={{-100,0},{-60,0}}, color={0,0,127}),
         Line(points={{60,0},{100,0}}, color={0,0,127}),

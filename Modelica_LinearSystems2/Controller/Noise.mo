@@ -2,15 +2,14 @@ within Modelica_LinearSystems2.Controller;
 block Noise
   "Block that generates a uniform distributed noise output signal at sample instants if discrete and y=0 if continuous"
   extends Icons.PartialBlockIcon(cont=continuous);
+
   parameter Real y_min "Lower limit of noise band (if not continuous)"
-  annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
+    annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   parameter Real y_max "Upper limit of noise band (if not continuous)"
-  annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
-  parameter Integer firstSeed[3](
-    each min=0,
-    each max=255) = {23,87,187}
+    annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
+  parameter Integer firstSeed[3](each min=0, each max=255) = {23,87,187}
     "Integer[3] defining random sequence; required element range: 0..255 (if not continuous)"
-  annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
+    annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   parameter Types.BlockTypeWithGlobalDefault blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption
     "Type of block"
     annotation (
@@ -31,9 +30,9 @@ block Noise
     "True, if continuous block, otherwise discrete block";
   parameter Integer sampleFactor(min=1) = 1
     "Sample factor for sample time (Ts = sampleFactor * sampleClock.sampleTime) if not continuous"
-     annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
+    annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous));
   Modelica.Blocks.Interfaces.RealOutput y "Discrete output signal of block"
-     annotation(Placement(transformation(extent={{100,-10},{120,10}})));
+    annotation(Placement(transformation(extent={{100,-10},{120,10}})));
 
 protected
   outer SampleClock sampleClock "Global options";
@@ -46,13 +45,14 @@ equation
   if continuous then
     y = 0.0;
   end if;
-connect(y,discretePart.y);
+  connect(y,discretePart.y);
 
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Polygon(
           points={{-81,90},{-89,68},{-73,68},{-81,90}},
           lineColor={192,192,192},

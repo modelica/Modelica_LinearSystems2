@@ -14,8 +14,7 @@ block StateSpace "Continuous or discrete state space system block"
     "Initial values of outputs (remaining states are in steady state if possible)" annotation(Dialog(tab="Advanced options"));
   Modelica.Blocks.Interfaces.RealInput u[size(system.B, 2)]
     "Continuous or discrete input signals of block"
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-          rotation=0)));
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput y[size(system.C, 1)]
     "Continuous or discrete output signals of block"
     annotation (Placement(transformation(extent={{100,-10},{120,10}}, rotation=0)));
@@ -41,7 +40,6 @@ equation
   if continuous then
     der(x) = system.A*x + system.B*u;
     y = system.C*x + system.D*u;
-
   end if;
 
   connect(u, discretePart.u);
@@ -65,7 +63,8 @@ initial equation
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Text(
           extent={{0,0},{-100,100}},
           lineColor={0,0,127},
@@ -91,7 +90,8 @@ initial equation
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Rectangle(extent={{-60,60},{60,-60}}),
         Text(
           extent={{-56,40},{60,0}},
