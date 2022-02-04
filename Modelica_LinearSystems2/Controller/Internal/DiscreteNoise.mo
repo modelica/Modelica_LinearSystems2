@@ -26,19 +26,19 @@ protected
   discrete Real y_sampled "Sampled output" annotation(HideResult=true);
 equation
   if sampleClock.blockType == Types.BlockType.Continuous then
-     // no sampling in sampleClock
-     sampleTrigger = sample(Ts, Ts);
-     ticks = 0;
+    // no sampling in sampleClock
+    sampleTrigger = sample(Ts, Ts);
+    ticks = 0;
   else
-     when sampleClock.sampleTrigger then
-        ticks = if pre(ticks) < sampleFactor then pre(ticks) + 1 else 1;
-     end when;
-     sampleTrigger = sampleClock.sampleTrigger and ticks >= sampleFactor;
+    when sampleClock.sampleTrigger then
+      ticks = if pre(ticks) < sampleFactor then pre(ticks) + 1 else 1;
+    end when;
+    sampleTrigger = sampleClock.sampleTrigger and ticks >= sampleFactor;
   end if;
 
   when {initial(), sampleTrigger} then
-     (noise,seedState) = random(pre(seedState));
-      y_sampled = y_min + (y_max - y_min)*noise;
+    (noise,seedState) = random(pre(seedState));
+    y_sampled = y_min + (y_max - y_min)*noise;
   end when;
   y = y_sampled;
 
@@ -47,12 +47,14 @@ initial equation
   pre(seedState) = firstSeed;
   annotation (
     Documentation(info="<html>
-</html>"), Icon(graphics={
+</html>"),
+    Icon(
+      graphics={
         Line(
           points={{-84,76},{-84,-92}},
           color={175,175,175},
           smooth=Smooth.None),
-                   Line(
+        Line(
           points={{86,-84},{-94,-84}},
           color={175,175,175},
           smooth=Smooth.None),

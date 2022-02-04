@@ -7,7 +7,7 @@ protected
   annotation (
     Icon(
       coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
-        graphics={
+      graphics={
         Rectangle(
           visible=not cont,
           extent={{-100,100},{100,-100}},
@@ -22,10 +22,12 @@ protected
           fillPattern=FillPattern.Solid,
           borderPattern=BorderPattern.Raised,
           pattern=LinePattern.None,
-          lineColor={0,0,0}),           Text(
-        extent={{-150,150},{150,110}},
-        textString="%name",
-        lineColor={0,0,255})}),  Documentation(info="<html>
+          lineColor={0,0,0}),
+        Text(
+          extent={{-150,150},{150,110}},
+          textString="%name",
+          lineColor={0,0,255})}),
+    Documentation(info="<html>
 <p>This partial class is intended to design a <em>default icon for a discrete or continuous block</em>. The background color of this icon depends on the boolean parameter <code>cont</code>.</p>
 </html>"));
 

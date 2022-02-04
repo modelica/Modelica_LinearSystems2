@@ -8,13 +8,14 @@ initial equation
   pre(u_sampled) = 0.0;
 equation
   when {initial(), sampleTrigger} then
-     u_sampled = u;
-     y_sampled = pre(u_sampled);
+    u_sampled = u;
+    y_sampled = pre(u_sampled);
   end when;
   y = y_sampled;
   annotation (
     Documentation(info="<html>
-</html>"), Icon(graphics={
+</html>"),
+    Icon(graphics={
         Line(
           points={{-100,0},{-36,0}},
           color={0,0,127},
@@ -27,7 +28,7 @@ equation
           points={{-36,0},{28,36}},
           color={0,0,127},
           smooth=Smooth.None),
-                   Ellipse(
+        Ellipse(
           extent={{-26,-10},{-46,10}},
           lineColor={0,0,127},
           fillColor={255,255,255},
@@ -37,7 +38,8 @@ equation
           lineColor={0,0,127},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),
-    Diagram(graphics={
+    Diagram(
+      graphics={
         Line(
           points={{-100,0},{-36,0}},
           color={0,0,127},
@@ -50,7 +52,7 @@ equation
           points={{-36,0},{28,36}},
           color={0,0,127},
           smooth=Smooth.None),
-                   Ellipse(
+        Ellipse(
           extent={{-26,-10},{-46,10}},
           lineColor={0,0,127},
           fillColor={255,255,255},

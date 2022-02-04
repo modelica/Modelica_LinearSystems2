@@ -10,17 +10,19 @@ partial block PartialBlockDiscrete "Icon for a discrete block"
           fillPattern=FillPattern.Solid,
           borderPattern=BorderPattern.Raised,
           pattern=LinePattern.None,
-          lineColor={0,0,0}),           Text(
-        extent={{-150,150},{150,110}},
-        textString="%name",
-        lineColor={0,0,255}),
+          lineColor={0,0,0}),
+        Text(
+          extent={{-150,150},{150,110}},
+          textString="%name",
+          lineColor={0,0,255}),
         Rectangle(
           extent={{-100,100},{100,-100}},
           fillColor={230,230,255},
           fillPattern=FillPattern.Solid,
           borderPattern=BorderPattern.Raised,
           pattern=LinePattern.None,
-          lineColor={0,0,0})}), Documentation(info="<html>
+          lineColor={0,0,0})}),
+    Documentation(info="<html>
 <p>This partial class is intended to design a <em>default icon for a discrete block</em>.</p>
 </html>"));
 end PartialBlockDiscrete;

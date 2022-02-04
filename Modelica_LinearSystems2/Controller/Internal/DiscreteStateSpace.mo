@@ -55,10 +55,10 @@ model DiscreteStateSpace
 protected
   outer SampleClock sampleClock "Global options" annotation(HideResult=true);
   parameter Modelica_LinearSystems2.DiscreteStateSpace discreteSystem=
-      Modelica_LinearSystems2.DiscreteStateSpace(
-      system,
-      Ts,
-      method);
+    Modelica_LinearSystems2.DiscreteStateSpace(
+    system,
+    Ts,
+    method);
 
   discrete Real xd[nx](start=x_start)
     "State vector of discrete system (pre(xd) = x - B2*u)";
@@ -89,15 +89,15 @@ equation
   when {initial(),sampleTrigger} then
     u_sampled = u;
     pre_u_sampled = pre(u_sampled);
-if withDelay then
-    new_xd = discreteSystem.B*pre_u_sampled + discreteSystem.A*xd;
-    y_sampled = discreteSystem.C*xd + discreteSystem.D*pre_u_sampled;
-    x_sampled = xd + discreteSystem.B2*pre_u_sampled;
-else
-    new_xd = discreteSystem.B*u_sampled + discreteSystem.A*xd;
-    y_sampled = discreteSystem.C*xd + discreteSystem.D*u_sampled;
-    x_sampled = xd + discreteSystem.B2*u_sampled;
-end if;
+    if withDelay then
+      new_xd = discreteSystem.B*pre_u_sampled + discreteSystem.A*xd;
+      y_sampled = discreteSystem.C*xd + discreteSystem.D*pre_u_sampled;
+      x_sampled = xd + discreteSystem.B2*pre_u_sampled;
+    else
+      new_xd = discreteSystem.B*u_sampled + discreteSystem.A*xd;
+      y_sampled = discreteSystem.C*xd + discreteSystem.D*u_sampled;
+      x_sampled = xd + discreteSystem.B2*u_sampled;
+    end if;
     xd = pre(new_xd);
   end when;
 
