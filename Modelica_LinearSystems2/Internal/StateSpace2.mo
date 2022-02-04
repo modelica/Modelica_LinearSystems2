@@ -317,13 +317,12 @@ This package contains the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.sub
       import Modelica;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Internal.StateSpace2;
-      import Modelica_LinearSystems2;
 
       input String fileName="dslin.mat" "Name of the state space system data file"
         annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)", caption="state space system data file")));
       input String matrixName="ABCD" "Name of the state space system matrix" annotation(Dialog);
     protected
-      Integer xuy[3]=Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
+      Integer xuy[3]=StateSpace.Internal.readSystemDimension(fileName, matrixName) annotation(__Dymola_allowForSize=true);
       Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
       Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
       Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
@@ -333,7 +332,7 @@ This package contains the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.sub
         redeclare Real A[nx,nx],
         redeclare Real B[nx,nu],
         redeclare Real C[ny,nx],
-        redeclare Real D[ny,nu]) "= model linearized at initial point";
+        redeclare Real D[ny,nu]) "Model read from file";
 
     protected
       Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
