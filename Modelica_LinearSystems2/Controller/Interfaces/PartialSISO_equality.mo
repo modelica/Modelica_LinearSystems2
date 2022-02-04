@@ -25,7 +25,7 @@ partial block PartialSISO_equality
   parameter Integer sampleFactor(min=1)=1
     "Sample factor for sample time (Ts = sampleFactor * sampleClock.sampleTime)"
     annotation (Dialog(enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous,
-     group="Discrete block parameters"));
+      group="Discrete block parameters"));
   Modelica.Blocks.Interfaces.RealInput u
     "Continuous or discrete input signal of block"
     annotation(Placement(transformation(extent={{-140,-20},{-100,20}})));

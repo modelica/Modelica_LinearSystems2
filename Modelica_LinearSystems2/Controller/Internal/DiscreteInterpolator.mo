@@ -29,19 +29,19 @@ equation
          "),\nbut this is not the case");
 
   when sampleClock.sampleTrigger then
-      outputTicks = if pre(outputTicks) < outputSampleFactor then pre(outputTicks) + 1 else 1;
+    outputTicks = if pre(outputTicks) < outputSampleFactor then pre(outputTicks) + 1 else 1;
   end when;
   outputSampleTrigger = sampleClock.sampleTrigger and outputTicks >= outputSampleFactor;
 
   when outputSampleTrigger then
-     ticks = if pre(ticks) < inputOutputSampleFactor then pre(ticks) + 1 else 1;
-     sampleIn = ticks == 1;
-     y = if ticks == 1 then (u - pre(u))/inputOutputSampleFactor + pre(u) else
-                             pre(pre_u) + ticks/inputOutputSampleFactor*(pre(u) - pre(pre_u));
+    ticks = if pre(ticks) < inputOutputSampleFactor then pre(ticks) + 1 else 1;
+    sampleIn = ticks == 1;
+    y = if ticks == 1 then (u - pre(u))/inputOutputSampleFactor + pre(u) else
+                            pre(pre_u) + ticks/inputOutputSampleFactor*(pre(u) - pre(pre_u));
   end when;
 
   when {initial(), sampleIn} then
-      pre_u = pre(u);
+    pre_u = pre(u);
   end when;
 
 initial equation

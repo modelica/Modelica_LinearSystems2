@@ -9,12 +9,12 @@ protected
   discrete Real y_sampled "Sampled output" annotation(HideResult=true);
 equation
   when {initial(), sampleTrigger} then
-     u_sampled = u;
-     x[1] = pre(u);
-     sum[1] = a[2]*x[1];
-     x[2:n] = pre(x[1:n - 1]);
-     sum[2:n] = a[3:n + 1]*diagonal(x[2:n]) + sum[1:n - 1];
-     y_sampled = a[1]*u + sum[n];
+    u_sampled = u;
+    x[1] = pre(u);
+    sum[1] = a[2]*x[1];
+    x[2:n] = pre(x[1:n - 1]);
+    sum[2:n] = a[3:n + 1]*diagonal(x[2:n]) + sum[1:n - 1];
+    y_sampled = a[1]*u + sum[n];
   end when;
   y = y_sampled;
 initial equation

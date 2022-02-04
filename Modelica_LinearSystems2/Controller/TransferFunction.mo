@@ -20,7 +20,7 @@ block TransferFunction
     "State of continuous transfer function";
 
 protected
-parameter Boolean withDelay=false;
+  parameter Boolean withDelay=false;
   parameter Integer na=size(system.d, 1) annotation(HideResult=true);
   parameter Integer nb=size(system.n, 1) annotation(HideResult=true);
   Real a[na]=system.d "Reverse element order of system.denominator" annotation(HideResult=true);
@@ -29,8 +29,10 @@ parameter Boolean withDelay=false;
   Real d=bb[1]/a[1];
   Real a_end=if a[end] > 100*Modelica.Constants.eps*sqrt(a*a) then a[end] else 1.0;
   Real x_scaled[size(x, 1)];//=x*a_end "Scaled vector x";
+
 equation
-x_scaled =x*a_end;
+  x_scaled =x*a_end;
+
   if continuous then
     if nx == 0 then
       y = d*u;
@@ -52,7 +54,6 @@ initial equation
       y = y_start;
 //      der(x_scaled[1:nx-1]) = zeros(nx -1);
       der(x_scaled[1:nx-(if nx>1 then 2 else 1)]) = zeros(nx -( if nx>1 then 2 else 1));
-
     end if;
   end if;
 
@@ -61,7 +62,8 @@ initial equation
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Text(
           extent={{-90,10},{90,90}},
           lineColor={0,0,127},
@@ -80,7 +82,8 @@ initial equation
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Line(points={{-100,0},{-60,0}}, color={0,0,255}),
         Rectangle(extent={{-60,60},{60,-60}}, lineColor={0,0,255}),
         Line(points={{40,0},{-40,0}}, color={0,0,0}),

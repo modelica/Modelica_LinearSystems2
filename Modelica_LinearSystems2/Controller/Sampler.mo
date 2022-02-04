@@ -8,7 +8,7 @@ protected
     "Discrete sampler";
 equation
   if continuous then
-     y = u;
+    y = u;
   else
     connect(u,discretePart.u);
     connect(y,discretePart.y);
@@ -17,7 +17,8 @@ equation
    Icon(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Ellipse(
           extent={{45,-10},{25,10}},
           lineColor={0,0,127},
@@ -40,7 +41,8 @@ equation
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Line(points={{-100,0},{-60,0}}),
         Line(points={{60,0},{100,0}}),
         Ellipse(

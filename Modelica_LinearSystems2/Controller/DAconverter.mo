@@ -12,8 +12,7 @@ protected
     y_min=y_min,
     bits=bits,
     unitDelay=unitDelay,
-    sampleFactor=sampleFactor) if
-          not continuous "AD converter";
+    sampleFactor=sampleFactor) if not continuous "AD converter";
 equation
   if continuous then
     y = if u > y_max then y_max else if u < y_min then y_min else u;
@@ -21,8 +20,9 @@ equation
     connect(u, discretePart.u);
     connect(y, discretePart.y);
   end if;
-  annotation (Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-            -100},{100,100}}), graphics={
+  annotation (
+    Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,100}}),
+      graphics={
         Line(points={{-100,-100},{100,100}}, color={0,0,127}),
         Text(
           extent={{-94,60},{-30,20}},

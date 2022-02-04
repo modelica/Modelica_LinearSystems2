@@ -29,7 +29,7 @@ protected
   Real w[order2 + 1];
   Real k;
 algorithm
- assert(f_cut<=1/(2*Ts),"The cut-off frequency f_cut may not be greater than half the sample frequency (Nyquist frequency), i.e. f_cut <= " + String(1/(2*Ts)) + " but is "+String(f_cut));
+  assert(f_cut<=1/(2*Ts),"The cut-off frequency f_cut may not be greater than half the sample frequency (Nyquist frequency), i.e. f_cut <= " + String(1/(2*Ts)) + " but is "+String(f_cut));
   if specType == FIRspec.MeanValue then
     a := fill(1/L, L);
   elseif specType == FIRspec.Window then

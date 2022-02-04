@@ -8,23 +8,24 @@ protected
           not continuous "Discrete unit delay";
 equation
   if continuous then
-     y = u;
-
+    y = u;
   end if;
-   connect(u, discretePart.u);
-    connect(y, discretePart.y);
+
+  connect(u, discretePart.u);
+  connect(y, discretePart.y);
 
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Text(
           extent={{-92,26},{88,92}},
           lineColor={0,0,127},
           textString="1"),
         Line(points={{-70,20},{68,20}},
-                                      color={0,0,127}),
+          color={0,0,127}),
         Text(
           extent={{-86,22},{88,-62}},
           lineColor={0,0,127},

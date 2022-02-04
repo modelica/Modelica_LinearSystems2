@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Controller;
 block PI "Proportional-Integral controller (continuous or discrete block)"
-  extends Interfaces.PartialSISO2(discretePart(
+  extends Interfaces.PartialSISO2(
+    discretePart(
       x_start={x_start},
       y_start={y_start},
       ABCD=[0,1/T; k,k]));
@@ -9,7 +10,7 @@ block PI "Proportional-Integral controller (continuous or discrete block)"
   parameter Modelica.Units.SI.Time T(min=Modelica.Constants.eps) = 1
     "Time Constant (T>0 required)";
   parameter Real x_start=0 "Initial or guess value of state"  annotation(Dialog(tab="Advanced options"));
-parameter Real y_start=0 "Initial value of output"  annotation(Dialog(tab="Advanced options"));
+  parameter Real y_start=0 "Initial value of output"  annotation(Dialog(tab="Advanced options"));
   Modelica.Blocks.Interfaces.RealOutput x(start=x_start) "State of block";
 equation
   connect(y, discretePart.y[1]);
@@ -23,14 +24,14 @@ equation
 initial equation
   if continuous then
     if init == Types.Init.SteadyState then
-    der(x) = 0;
-  elseif init == Types.Init.InitialState then
-    x = x_start;
-  elseif init == Types.Init.InitialOutput then
-    y = y_start;
+      der(x) = 0;
+    elseif init == Types.Init.InitialState then
+      x = x_start;
+    elseif init == Types.Init.InitialOutput then
+      y = y_start;
+    end if;
   end if;
-  end if;
-   annotation (
+  annotation (
     Documentation(info="<html>
 <p>
 This blocks defines the transfer function between the input u and
@@ -52,10 +53,12 @@ For this reason, option \"initType = SteadyState\" is ignored for
 a continuous PI block and
 interpreted as \"initType = InitialState\".
 </p>
-</html>"), Icon(coordinateSystem(
+</html>"),
+    Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Line(points={{-80,78},{-80,-90}}, color={192,192,192}),
         Polygon(
           points={{-80,90},{-88,68},{-72,68},{-80,90}},
@@ -90,7 +93,8 @@ interpreted as \"initType = InitialState\".
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Rectangle(extent={{-60,60},{60,-60}}, lineColor={0,0,127}),
         Line(points={{-100,0},{-60,0}}, color={0,0,127}),
         Line(points={{60,0},{100,0}}, color={0,0,127}),

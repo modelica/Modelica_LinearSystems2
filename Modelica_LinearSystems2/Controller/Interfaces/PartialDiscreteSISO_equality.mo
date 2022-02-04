@@ -25,14 +25,14 @@ protected
 
 equation
   if sampleClock.blockType == Types.BlockType.Continuous then
-     // no sampling in sampleClock
-     sampleTrigger = sample(Ts, Ts);
-     ticks = 0;
+    // no sampling in sampleClock
+    sampleTrigger = sample(Ts, Ts);
+    ticks = 0;
   else
-     when sampleClock.sampleTrigger then
-        ticks = if pre(ticks) < sampleFactor then pre(ticks) + 1 else 1;
-     end when;
-     sampleTrigger = sampleClock.sampleTrigger and ticks >= sampleFactor;
+    when sampleClock.sampleTrigger then
+      ticks = if pre(ticks) < sampleFactor then pre(ticks) + 1 else 1;
+    end when;
+    sampleTrigger = sampleClock.sampleTrigger and ticks >= sampleFactor;
   end if;
 
 initial equation

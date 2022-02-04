@@ -1,7 +1,8 @@
 within Modelica_LinearSystems2.Controller;
 block Derivative "Approximate derivative (continuous or discrete block)"
 
-  extends Interfaces.PartialSISO2(discretePart(
+  extends Interfaces.PartialSISO2(
+    discretePart(
       y(start={y_start}),
       x_start={x_start},
       y_start={y_start},
@@ -19,30 +20,30 @@ protected
     "True, if k is considered to be zero";
 equation
   if continuous then
-     der(x) = if zeroGain then 0 else (u - x)/T;
-          y = if zeroGain then 0 else (k/T)*(u - x);
-else
-
-connect(x,discretePart.x[1]);
-connect(y,discretePart.y[1]);
+    der(x) = if zeroGain then 0 else (u - x)/T;
+         y = if zeroGain then 0 else (k/T)*(u - x);
+  else
+    connect(x,discretePart.x[1]);
+    connect(y,discretePart.y[1]);
   end if;
 
 initial equation
   if continuous then
-     if init == Types.Init.InitialState or zeroGain then
-        x = x_start;
-     elseif init == Types.Init.SteadyState then
-        der(x) = 0;
-  elseif init == Types.Init.InitialOutput then
-    if zeroGain then
-       x = u;
-    else
-       y = y_start;
+    if init == Types.Init.InitialState or zeroGain then
+      x = x_start;
+    elseif init == Types.Init.SteadyState then
+      der(x) = 0;
+    elseif init == Types.Init.InitialOutput then
+      if zeroGain then
+        x = u;
+      else
+        y = y_start;
+      end if;
     end if;
-     end if;
   end if;
-   annotation (
-    Documentation(info="<html>
+  annotation (
+    Documentation(
+      info="<html>
 <p>
 This blocks defines the transfer function between the input u and
 the output y as <em>approximative derivative (DT1)</em>:
@@ -68,10 +69,12 @@ parameters, use the general model class <strong>TransferFunction</strong>
 instead and model a DT1 system with parameters<br>
 n = {k,0}, d = {T,1}.
 </p>
-</html>"), Icon(coordinateSystem(
+</html>"),
+    Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Line(points={{-80,78},{-80,-90}}, color={192,192,192}),
         Polygon(
           points={{-80,90},{-88,68},{-72,68},{-80,90}},
@@ -105,7 +108,8 @@ n = {k,0}, d = {T,1}.
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Rectangle(extent={{-60,60},{60,-60}}, lineColor={0,0,127}),
         Line(points={{-100,0},{-60,0}}, color={0,0,127}),
         Line(points={{60,0},{100,0}}, color={0,0,127}),

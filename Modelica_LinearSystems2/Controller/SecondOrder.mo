@@ -75,10 +75,12 @@ results in
 y = ------------------- * u
     4.0 s^2 + 1.6 s + 1
 </pre></blockquote>
-</html>"), Icon(coordinateSystem(
+</html>"),
+    Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Line(points={{-80,78},{-80,-90}}, color={192,192,192}),
         Polygon(
           points={{-80,90},{-88,68},{-72,68},{-80,88},{-80,90}},
@@ -113,7 +115,8 @@ y = ------------------- * u
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Rectangle(extent={{-60,60},{60,-60}}),
         Text(
           extent={{-60,60},{60,14}},

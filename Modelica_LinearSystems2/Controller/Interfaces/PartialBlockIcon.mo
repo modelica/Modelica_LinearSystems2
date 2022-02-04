@@ -8,7 +8,8 @@ partial block PartialBlockIcon
     Documentation(info="<html>
 <p>This model is obsolete. Use <a href=\"Modelica://Modelica_LinearSystems2.Controller.Icons.PartialBlockIcon\">PartialBlockIcon</a> instead.</p>
 </html>"),
-    Icon(graphics={
+    Icon(
+      graphics={
         Rectangle(
           visible=cont,
           extent={{-100,100},{100,-100}},
@@ -16,8 +17,9 @@ partial block PartialBlockIcon
           fillPattern=FillPattern.Solid,
           borderPattern=BorderPattern.Raised,
           pattern=LinePattern.None,
-          lineColor={0,0,0}),           Text(
-        extent={{-150,150},{150,110}},
-        textString="%name",
-        lineColor={0,0,255})}));
+          lineColor={0,0,0}),
+        Text(
+          extent={{-150,150},{150,110}},
+          textString="%name",
+          lineColor={0,0,255})}));
 end PartialBlockIcon;

@@ -42,20 +42,21 @@ protected
   outer SampleClock sampleClock "Global options";
 
   Internal.DiscreteInterpolator discreteInterpolator(
-     outputSampleFactor = outputSampleFactor,
-     inputSampleFactor = inputSampleFactor) if  not continuous
+    outputSampleFactor = outputSampleFactor,
+    inputSampleFactor = inputSampleFactor) if  not continuous
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-  Internal.DiscreteFIR discreteFIR(sampleFactor=outputSampleFactor, a=fill(1/
-        div(inputSampleFactor, outputSampleFactor), div(inputSampleFactor,
-        outputSampleFactor))) if not continuous and meanValueFilter
+  Internal.DiscreteFIR discreteFIR(
+    sampleFactor=outputSampleFactor,
+    a=fill(1/div(inputSampleFactor, outputSampleFactor),
+    div(inputSampleFactor, outputSampleFactor))) if not continuous and meanValueFilter
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Modelica.Blocks.Interfaces.RealOutput y_aux if not continuous and not meanValueFilter
     "Dummy port, if no filtering desired"
     annotation (Placement(transformation(extent={{26,20},{46,40}})));
 equation
-   if continuous then
-      y = u;
-   end if;
+  if continuous then
+    y = u;
+  end if;
 
   connect(discreteInterpolator.u, u) annotation (Line(
       points={{-42,0},{-120,0}},
@@ -81,7 +82,8 @@ equation
     Icon(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics={
+        grid={2,2}),
+      graphics={
         Line(points={{-30,78},{-30,-46}}, color={192,192,192}),
         Polygon(
           points={{-30,92},{-38,70},{-22,70},{-30,90},{-30,92}},

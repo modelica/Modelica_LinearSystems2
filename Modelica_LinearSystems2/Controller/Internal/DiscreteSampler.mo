@@ -4,7 +4,7 @@ block DiscreteSampler "Sample the input signal"
 
 equation
   when {initial(), sampleTrigger} then
-      u_sampled = u;
+    u_sampled = u;
   end when;
 
   y = u_sampled;
@@ -23,7 +23,7 @@ equation
           points={{-36,0},{28,36}},
           color={0,0,127},
           smooth=Smooth.None),
-                   Ellipse(
+        Ellipse(
           extent={{-26, -10},{-46, 10}},
           lineColor={0,0,127},
           fillColor={255,255,255},
@@ -46,7 +46,7 @@ equation
           points={{-36,0},{28,36}},
           color={0,0,127},
           smooth=Smooth.None),
-                   Ellipse(
+        Ellipse(
           extent={{-26,-10},{-46,10}},
           lineColor={0,0,127},
           fillColor={255,255,255},

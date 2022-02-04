@@ -19,9 +19,9 @@ block SampleClock
     annotation(HideResult=true);
 equation
   if blockType == Types.BlockType.Continuous then
-     sampleTrigger = false;
+    sampleTrigger = false;
   else
-     sampleTrigger = sample(sampleTime, sampleTime);
+    sampleTrigger = sample(sampleTime, sampleTime);
   end if;
   annotation (
     defaultComponentName="sampleClock",
@@ -29,8 +29,8 @@ equation
     missingInnerMessage="A \"sampleClock\" component is not defined. A default
 sampleClock with blockType = Continuous will be used. If this is not desired,
 drag Modelica_LinearSystems2.Controller.SampleClock into the top level of your model.",
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}}), graphics={
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+      graphics={
         Ellipse(
           extent={{-100,100},{100,-100}},
           lineColor={0,0,0},
