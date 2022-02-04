@@ -13,7 +13,7 @@ protected
   Integer info;
   Real XX[max(size(A,1),size(A,2)), size(B,2)];
 algorithm
-  (XX,info,rank) := LAPACK.dgelsx(A, B, rcond);
+  (XX,info,rank) := Modelica.Math.Matrices.LAPACK.dgelsy(A, B, rcond);
   X := XX[1:size(A,2), :];
   assert(info == 0, "Solving an overdetermined or underdetermined linear system of
 equations with function \"Matrices.leastSquares2\" failed.");

@@ -23,6 +23,7 @@ protected
                               rcond, rank, work, lwork, info) annotation (Library="Lapack");
 
   annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.LAPACK.dgelsy instead",
     Documentation(info="Lapack documentation:
 
    Purpose

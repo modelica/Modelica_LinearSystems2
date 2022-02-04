@@ -3,13 +3,12 @@ function eigenVectors
   "Calculate the rigth eigenvectors of a linear state space system and write them columnwise in a matrix."
   extends Modelica.Icons.Function;
 
-  import Modelica.Math.Matrices.LAPACK;
   import Modelica.ComplexMath.j;
 
   input Real A[:,size(A, 1)] "real square matrix";
-  output Complex eigvec[size(A, 1),size(A, 2)] "eigen values of the system";
+  output Complex eigvec[size(A, 1),size(A, 2)] "Eigenvectors of the system";
   output Complex eigval[size(A, 1)]=fill(Complex(0), size(A, 1))
-    "eigen values of the system";
+    "Eigenvalues of the system";
 protected
   Integer info;
   Real eigvecRe[size(A, 1),size(A, 2)];
@@ -20,7 +19,7 @@ protected
 algorithm
   if size(A, 1) > 0 then
 
-    (eigvalRe,eigvalIm,eigvecRe,info) := LAPACK.dgeev(A);
+    (eigvalRe,eigvalIm,eigvecRe,info) := Modelica.Math.Matrices.LAPACK.dgeev(A);
     for i in 1:size(A, 1) loop
       eigval[i].re := eigvalRe[i];
       eigval[i].im := eigvalIm[i];

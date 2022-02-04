@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Math.Matrices;
 function generalizedEigenvaluesTriangular
   "Compute invariant zeros of linear state space system with a generalized system matrix [A, B, C, D] which is of upper Hessenberg form"
 
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
   input Real A[:,size(A, 1)];
   input Real B[size(A, 1),size(A, 1)];
   output Real alphaReal[size(A, 1)]
@@ -13,7 +12,7 @@ function generalizedEigenvaluesTriangular
   output Integer info;
 
 algorithm
-  (alphaReal,alphaImag,beta,info) := LAPACK.dhgeqz(A, B);
+  (alphaReal,alphaImag,beta,info) := Modelica.Math.Matrices.LAPACK.dhgeqz(A, B);
   assert(info == 0, "Failed to compute eigenvalues with function dhgeqz(..)");
   annotation (Documentation(info="This function is an interface to LAPACK routine DHGEQZ to calculate invariant
 zeros of systems with generalized system matrices of upper Hessenberg form.

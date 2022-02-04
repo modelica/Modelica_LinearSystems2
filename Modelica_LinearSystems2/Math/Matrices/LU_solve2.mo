@@ -15,15 +15,12 @@ algorithm
 is singular, i.e., no unique solution exists.");
   end for;
   if size(LU, 1) > 0 then
-    X := LAPACK.dgetrs(
+    X := Modelica.Math.Matrices.LAPACK.dgetrs(
       LU,
       pivots,
       B);
   else
-    X := fill(
-      0,
-      size(B, 1),
-      size(B, 2));
+    X := fill(0, size(B, 1), size(B, 2));
   end if;
   annotation (
     obsolete = "Obsolete function - use Modelica.Math.Matrices.LU_solve2 instead",

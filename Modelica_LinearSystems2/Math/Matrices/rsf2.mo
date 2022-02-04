@@ -3,7 +3,6 @@ function rsf2
   "Computes the real Schur form (RSF) of a square matrix but uses lapack.dgees"
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices.Internal;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
   input Real A[:,size(A, 1)];
 
@@ -20,7 +19,7 @@ protected
 
 algorithm
   if size(A, 1) > 1 then
-    (S, QZ, alphaReal, alphaImag, info) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgees(A);
+    (S, QZ, alphaReal, alphaImag, info) := Modelica.Math.Matrices.LAPACK.dgees(A);
      assert(info == 0, "The output info of LAPACK.dgees should be zero, else if\n
      info < 0:  if info = -i, the i-th argument of dgees had an illegal value\n
      info > 0:  if INFO = i, and i is

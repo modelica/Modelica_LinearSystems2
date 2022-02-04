@@ -17,7 +17,7 @@ algorithm
          Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeevx_eigenValues(A);
     else
       (eigenvalues[:, 1],eigenvalues[:, 2],info) :=
-         Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev_eigenValues(A);
+         Modelica.Math.Matrices.LAPACK.dgeev_eigenValues(A);
     end if;
     assert(info == 0, "Calculating the eigen values with function
 \"eigenvaluesAsRealMatrix\" is not possible, since the

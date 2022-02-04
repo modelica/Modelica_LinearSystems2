@@ -8,7 +8,6 @@ encapsulated function invariantZeros
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
   import Modelica_LinearSystems2.WorkInProgress;
 
   input StateSpace ss "Linear system in state space form";
@@ -59,7 +58,7 @@ algorithm
       Af := AfBf[:, 1:size(Ar, 2)];
       Bf := Vf[1:size(Ar, 1), 1:size(Ar, 2)];
 
-      (alphaReal,alphaImag,beta,,,info) := LAPACK.dggev(Af, Bf, n);
+      (alphaReal,alphaImag,beta,,,info) := MatricesMSL.LAPACK.dggev(Af, Bf, n);
       assert(info == 0, "Failed to compute invariant zeros with function invariantZeros(..)");
 
       Zeros := fill(Complex(0), size(beta, 1));

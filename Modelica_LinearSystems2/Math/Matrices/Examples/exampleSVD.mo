@@ -4,7 +4,7 @@ function exampleSVD
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.Math.Vectors;
   input String fileName=DataDir + "m.mat"
-                              annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+    annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="matrix file")));
 
 protected
@@ -16,7 +16,7 @@ protected
   Integer info;
 algorithm
 
-  (sigma1,U1,VT1):=Matrices.LAPACK.dgesvd(M);
+  (sigma1,U1,VT1):=Modelica.Math.Matrices.LAPACK.dgesvd(M);
 
   Matrices.printMatrix(U1, 6, "U1");
   Matrices.printMatrix(VT1, 6, "VT1");

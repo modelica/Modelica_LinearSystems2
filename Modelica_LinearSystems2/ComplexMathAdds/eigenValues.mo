@@ -3,8 +3,6 @@ function eigenValues
   "Compute eingenvalues of a matrix A, using lapack routine dgeevx"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Matrices.LAPACK;
-
   input Real A[:,size(A, 1)] "Real matrix";
   output Complex eigval[size(A, 1)]
     "Finite, invariant zeros of ss; size(Zeros,1) <= size(ss.A,1)";
@@ -20,9 +18,9 @@ protected
 algorithm
  // Compute eigenvalues
   if size(A, 1) > 0 then
-     (alphaReal,alphaImag,,,,info) := LAPACK.dgeevx(A);
+     (alphaReal,alphaImag,,,,info) := Modelica.Math.Matrices.LAPACK.dgeevx(A);
      assert(info == 0,
-       "Failed to compute eigenvalues with function eigenValues_dgeevx(..)");
+       "Failed to compute eigenvalues with function eigenValues(..)");
 
      for i in 1:nx loop
        eigval[i].re := alphaReal[i];

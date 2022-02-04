@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function QR2
-  "QR decomposition of a square matrix with column pivoting (A(:,p) = Q*R). Uses dgeqpf instead of dgeqp3"
+  "QR decomposition of a square matrix with column pivoting (A(:,p) = Q*R)"
 
   input Real A[:,:] "Rectangular matrix with size(A,1) >= size(A,2)";
   output Real Q[size(A, 1),size(A, 2)]
@@ -20,7 +20,7 @@ algorithm
 This is not allowed when calling Modelica.Matrices.QR(A).");
   if ncol > 0 then
 
-    (Q,p,tau) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqp3(A, lwork);
+    (Q,tau,p) := Modelica.Math.Matrices.LAPACK.dgeqp3(A, lwork);
 
   // determine R
     R := zeros(ncol, ncol);
