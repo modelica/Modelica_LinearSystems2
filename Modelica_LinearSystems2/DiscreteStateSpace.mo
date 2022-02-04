@@ -3906,4 +3906,123 @@ Note that the system input <strong>u</strong> must be sampled with the discrete 
     end assignOneOrTwoPoles;
   end Internal;
 
+  annotation (Documentation(info="<html>
+<p>
+This record defines a&nbsp;linear time invariant difference
+equation system in state space form:
+</p>
+
+<blockquote><pre>
+<strong>x</strong>(Ts*(k+1))        = <strong>A</strong> * <strong>x</strong>(Ts*k) + <strong>B</strong> * <strong>u</strong>(Ts*k)
+<strong>y</strong>(Ts*k)            = <strong>C</strong> * <strong>x</strong>(Ts*k) + <strong>D</strong> * <strong>u</strong>(Ts*k)
+<strong>x</strong>_continuous(Ts*k) =     <strong>x</strong>(Ts*k) + <strong>B2</strong> * <strong>u</strong>(Ts*k)
+</pre></blockquote>
+
+<p>
+with
+</p>
+<ul>
+  <li>
+    Ts &ndash; the sample time
+  </li>
+  <li>
+    k &ndash; the index of the current sample instance (k=0,1,2,3,...)
+  </li>
+  <li>
+    t &ndash; the time
+  </li>
+  <li>
+    <strong>u</strong>(t) &ndash; the input vector,
+  </li>
+  <li>
+    <strong>y</strong>(t) &ndash; the output vector,
+  </li>
+  <li>
+    <strong>x</strong>(t) &ndash; the discrete state vector (x(t=Ts*0) is the initial state),
+  </li>
+  <li>
+    <strong>x</strong>_continuous(t) &ndash; the state vector of the continuous system
+    from which the discrete block has been derived (details see below),
+  </li>
+  <li>
+    <strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>,
+    <strong>B2</strong> &ndash; matrices of appropriate dimensions.
+  </li>
+</ul>
+<p>
+A&nbsp;discrete system is usually derived by discretization
+from a&nbsp;continuous block, e.g., by function
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">fromStateSpace</a>.
+If the discretization method, e.g., the trapezoidal method, accesses
+<strong>current and past</strong> values of the input <strong>u</strong>
+(e.g. <strong>u</strong>(Ts*k), <strong>u</strong>(Ts*(k-1), <strong>u</strong>(Ts*(k-2))),
+a&nbsp;state transformation is needed to get the difference equation
+above where only the current value <strong>u</strong>(Ts*k) is accessed.
+</p>
+<p>
+If the original continuous state vector should be computed
+from the sampled data system above, the matrices of this
+transformation have to be known. For simplicity and efficiency,
+here only the specific transformation used by function
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">fromStateSpace</a>.
+is stored in the data record of the discrete system via
+matrix&nbsp;<strong>B2</strong>.
+Therefore, the state vector of the underlying continuous
+system can be calculated by adding the term
+<strong>B2</strong>&nbsp;*&nbsp;<strong>u</strong> to the
+state vector of the discretized system.
+</p>
+<p>
+In Modelica notation, the difference equation above
+can be implemented as:
+</p>
+
+<blockquote><pre>
+<strong>when</strong> {<strong>initial</strong>(), <strong>sample</strong>(Ts,Ts)} <strong>then</strong>
+   new_x = A * x + B * u;
+       y = C * x + D * u;
+       x = <strong>pre</strong>(new_x);
+   x_continuous = x + B2 * u;
+<strong>end when</strong>;
+</pre></blockquote>
+
+<p>
+Since no \"next value\" operator is available in Modelica, an
+auxiliary variable <code>new_x</code> stores the value of&nbsp;<code>x</code>
+for the next sampling instant.
+The relationship between <code>new_x</code> and&nbsp;<code>x</code>
+is defined via equation
+<code>x&nbsp;= <strong>pre</strong>(new_x)</code>.
+</p>
+<p>
+The body of the when-clause is active during initialization and at the
+next sample instant t&nbsp;=&nbsp;Ts. Note, the when-equation is not
+active after the initialization at t&nbsp;=&nbsp;0 (due to <strong>sample</strong>(Ts,Ts)),
+since the state&nbsp;<code>x</code> of the initialization has to be used
+also at t&nbsp;=&nbsp;0.
+</p>
+<p>
+In package <a href=\"modelica://Modelica_LinearSystems2.Controller\">Controller</a>,
+additional equations are added for the initialization to uniquely compute the
+initial vector&nbsp;<code>x</code>, e.g.:
+</p>
+
+<blockquote><pre>
+<strong>initial equation</strong>
+   <strong>if</strong> init == InitialState <strong>then</strong>
+      x = x_start;
+   <strong>elseif</strong> init == SteadyState <strong>then</strong>
+      x = new_x;
+   <strong>end if</strong>;
+</pre></blockquote>
+
+<p>
+Optionally, <code>x</code> is set to a&nbsp;given start vector <code>x_start</code>.
+As <strong>default initialization</strong>, the equation <code>x&nbsp;= new_x</code>
+is added that defines steady state initialization for the
+discrete system. As a&nbsp;consequence, the output <strong>y</strong>(Ts*k),
+k&nbsp;=&nbsp;0, 1, 2, .., remains constant after this initialization,
+provided the input vector <strong>u</strong>(Ts*k) remains constant.
+</p>
+</html>"));
 end DiscreteStateSpace;
