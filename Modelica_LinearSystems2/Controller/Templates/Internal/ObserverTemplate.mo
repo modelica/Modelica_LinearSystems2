@@ -55,7 +55,7 @@ public
   Controller.StateSpace observerStateSpace(
     x_start= x_start,
     initType=Types.InitWithGlobalDefault.NoInit,
-    system(
+    system=Modelica_LinearSystems2.StateSpace(
       A=plantModelSystem2.A - L2*plantModelSystem2.C,
       B=[plantModelSystem2.B,L2],
       C=identity(size(plantModelSystem2.A, 1)),
