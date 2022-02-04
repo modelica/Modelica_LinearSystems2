@@ -7,7 +7,6 @@ LinearSystems2Tests
 DiscreteZerosAndPoles
 DiscreteTransferFunction
 DiscreteStateSpace
-StateSpace2
 Controller
 Icons
 Optimizer
