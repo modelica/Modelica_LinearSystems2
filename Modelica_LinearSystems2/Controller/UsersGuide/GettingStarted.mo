@@ -1,7 +1,10 @@
 within Modelica_LinearSystems2.Controller.UsersGuide;
 class GettingStarted "Getting started"
+  extends Modelica.Icons.Information;
 
-  annotation (Documentation(info="<html>
+  annotation (
+    Documentation(
+      info="<html>
 <p>
 The <strong>Controller</strong> package provides input/output blocks where every
 block is available in a <strong>continuous</strong> and a <strong>discrete</strong> (sampled)
