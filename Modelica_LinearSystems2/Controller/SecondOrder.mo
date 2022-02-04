@@ -100,17 +100,15 @@ y = ------------------- * u
               127}),
         Text(
           extent={{-42,-28},{92,-68}},
-          lineColor={192,192,192},
+          textColor={192,192,192},
           textString="PT2"),
         Text(
           extent={{-150,-150},{150,-110}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="w=%w"),
         Text(
           extent={{-78,92},{98,60}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
@@ -120,11 +118,11 @@ y = ------------------- * u
         Rectangle(extent={{-60,60},{60,-60}}),
         Text(
           extent={{-60,60},{60,14}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="k"),
         Text(
           extent={{-60,8},{-32,-20}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="s"),
         Line(points={{-100,0},{-60,0}}),
         Line(points={{60,0},{100,0}}),
@@ -132,31 +130,31 @@ y = ------------------- * u
         Line(points={{-54,-20},{-38,-20}}, color={0,0,0}),
         Text(
           extent={{-52,-26},{-36,-48}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="w"),
         Line(points={{-50,2},{-56,-8},{-56,-28},{-52,-46}}, color={0,0,0}),
         Line(points={{-40,2},{-34,-10},{-34,-30},{-38,-46}}, color={0,0,0}),
         Text(
           extent={{-34,8},{-22,-10}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="2"),
         Text(
           extent={{-34,-6},{6,-36}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="+2D"),
         Text(
           extent={{2,8},{30,-20}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="s"),
         Line(points={{8,-20},{24,-20}}, color={0,0,0}),
         Text(
           extent={{10,-26},{26,-48}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="w"),
         Line(points={{12,2},{6,-8},{6,-28},{10,-46}}, color={0,0,0}),
         Line(points={{22,2},{28,-10},{28,-30},{24,-46}}, color={0,0,0}),
         Text(
           extent={{30,2},{58,-42}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="+1")}));
 end SecondOrder;

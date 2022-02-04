@@ -67,25 +67,23 @@ initial equation
       graphics={
         Text(
           extent={{0,0},{-100,100}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="A"),
         Text(
           extent={{100,0},{0,100}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="B"),
         Text(
           extent={{-100,0},{0,-100}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="C"),
         Text(
           extent={{0,0},{100,-100}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="D"),
         Text(
           extent={{-96,18},{100,-16}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
@@ -95,11 +93,11 @@ initial equation
         Rectangle(extent={{-60,60},{60,-60}}),
         Text(
           extent={{-56,40},{60,0}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="x=Ax+Bu"),
         Text(
           extent={{-60,0},{60,-40}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString=" y=Cx+Du"),
         Line(points={{-100,0},{-60,0}}),
         Line(points={{60,0},{100,0}})}),

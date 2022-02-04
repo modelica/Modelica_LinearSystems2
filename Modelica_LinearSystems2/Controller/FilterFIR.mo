@@ -57,7 +57,7 @@ equation
         Line(points={{-92,-82},{80,-82}}, color={192,192,192}),
         Text(
           extent={{-14,32},{92,-10}},
-          lineColor={192,192,192},
+          textColor={192,192,192},
           textString="FIR"),
         Rectangle(
           extent={{-82,-82},{-16,4}},
@@ -75,8 +75,6 @@ equation
               127}),
         Text(
           extent={{-80,90},{100,60}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%sampleFactor")}));
 end FilterFIR;

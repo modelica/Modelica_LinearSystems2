@@ -95,24 +95,25 @@ equation
             -100},{100,100}}), graphics={
         Text(
           extent={{-138,46},{-78,30}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="(control input)"),
         Text(
           extent={{-140,-72},{-80,-88}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="(measured output)"),
         Text(
           extent={{90,28},{150,12}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="(estimated state)"),
         Text(
           extent={{-60,-20},{60,-70}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="der(x) = (A-LC)x + Bu + Ly"),
         Text(
           extent={{-50,-52},{-28,-64}},
-          lineColor={0,0,255},
-          textString="y = x")}),             Icon(graphics={
+          textColor={0,0,255},
+          textString="y = x")}),
+    Icon(graphics={
         Polygon(
           points={{-78,92},{-86,70},{-70,70},{-78,92}},
           lineColor={192,192,192},
@@ -137,26 +138,26 @@ equation
           smooth=Smooth.None),
         Text(
           extent={{-48,4},{-24,-18}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           textString="x"),
         Text(
           extent={{-46,10},{-24,-10}},
-          lineColor={255,0,0},
+          textColor={255,0,0},
           textString="^"),
         Text(
           extent={{-76,-30},{76,-76}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="state estimation"),
         Text(
           extent={{-58,58},{-34,36}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="x"),
         Text(
           extent={{-128,94},{-108,76}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="u"),
         Text(
           extent={{-128,-28},{-108,-46}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="y")}));
 end ObserverTemplate;

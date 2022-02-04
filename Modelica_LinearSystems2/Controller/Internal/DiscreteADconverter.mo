@@ -30,10 +30,10 @@ equation
           smooth=Smooth.None),
         Text(
           extent={{-90,90},{-10,10}},
-          lineColor={95,95,95},
+          textColor={95,95,95},
           textString="A"),
         Text(
           extent={{10,-10},{90,-90}},
-          lineColor={95,95,95},
+          textColor={95,95,95},
           textString="D")}));
 end DiscreteADconverter;

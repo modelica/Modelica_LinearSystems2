@@ -66,18 +66,16 @@ initial equation
       graphics={
         Text(
           extent={{-90,10},{90,90}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="n(s)"),
         Line(points={{-80,0},{80,0}}, color={0,0,127}),
         Text(
           extent={{-90,-10},{90,-90}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="d(s)"),
         Text(
           extent={{-96,-106},{100,-140}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
@@ -89,11 +87,11 @@ initial equation
         Line(points={{40,0},{-40,0}}, color={0,0,0}),
         Text(
           extent={{-55,55},{55,5}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="n(s)"),
         Text(
           extent={{-55,-5},{55,-55}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="d(s)"),
         Line(points={{60,0},{100,0}}, color={0,0,255})}),
     Documentation(info="<html>
