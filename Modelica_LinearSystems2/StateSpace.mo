@@ -8950,7 +8950,7 @@ if inverted=true. Matrix T has to be invertible. The transformed system has the 
     end toSimilarForm;
 
     encapsulated function toObservabilityForm
-      "Perform the similarity transformation to the obervabillity canonical form"
+      "Perform the similarity transformation to the obervability canonical form"
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
