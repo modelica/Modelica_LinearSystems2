@@ -73,22 +73,20 @@ interpreted as \"initType = InitialState\".
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-150,-150},{150,-110}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="k=%k"),
         Line(points={{-80,-80},{-80,-20},{60,80}}, color={0,0,127}),
         Text(
           extent={{-40,-14},{72,-68}},
-          lineColor={192,192,192},
+          textColor={192,192,192},
           textString="PI"),
         Text(
           extent={{-150,-188},{150,-148}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="T=%T"),
         Text(
           extent={{-90,90},{86,58}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
@@ -100,15 +98,15 @@ interpreted as \"initType = InitialState\".
         Line(points={{60,0},{100,0}}, color={0,0,127}),
         Text(
           extent={{-70,24},{-26,-18}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="k"),
         Text(
           extent={{-34,48},{58,0}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="T s + 1"),
         Text(
           extent={{-32,-8},{50,-40}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="T s"),
         Line(points={{-26,0},{52,0}}, color={0,0,0})}));
 end PI;

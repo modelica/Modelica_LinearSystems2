@@ -34,9 +34,7 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-90,-60},{90,-90}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,

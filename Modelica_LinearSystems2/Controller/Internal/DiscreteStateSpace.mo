@@ -149,11 +149,11 @@ initial equation
         Rectangle(extent={{-60,60},{60,-60}}),
         Text(
           extent={{-56,40},{60,0}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="x=Ax+Bu"),
         Text(
           extent={{-60,0},{60,-40}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString=" y=Cx+Du"),
         Line(points={{-100,0},{-60,0}}),
         Line(points={{60,0},{100,0}})}),

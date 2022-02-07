@@ -64,6 +64,6 @@ initial equation
           smooth=Smooth.None),
         Text(
           extent={{-20,60},{80,30}},
-          lineColor={95,95,95},
+          textColor={95,95,95},
           textString="FIR")}));
 end DiscreteFIR;

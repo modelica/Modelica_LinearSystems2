@@ -246,13 +246,11 @@ equation
         Line(points={{-80,-80},{-80,50},{-73,-20},{30,60},{80,60}}, color={0,0,127}),
         Text(
           extent={{-35,-22},{79,-60}},
-          lineColor={192,192,192},
+          textColor={192,192,192},
           textString="PID"),
         Text(
           extent={{-85,93},{91,61}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%sampleFactor")}),
     Documentation(info="<html>
 <p>

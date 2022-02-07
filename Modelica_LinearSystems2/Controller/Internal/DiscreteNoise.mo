@@ -91,10 +91,10 @@ initial equation
           smooth=Smooth.None),
         Text(
           extent={{-50,90},{50,60}},
-          lineColor={95,95,95},
+          textColor={95,95,95},
           textString="noise"),
         Text(
           extent={{-130,-100},{130,-130}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="[%y_min .. %y_max]")}));
 end DiscreteNoise;

@@ -75,17 +75,15 @@ equation
         Line(points={{-89,62},{85,62}}, color={255,0,0}),
         Text(
           extent={{-195,76},{-78,50}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="%y_max"),
         Text(
           extent={{-195,-38},{-78,-64}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="%y_min"),
         Text(
           extent={{-88,-62},{88,-94}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%sampleFactor")}),
     Documentation(info="<html>
 <p>

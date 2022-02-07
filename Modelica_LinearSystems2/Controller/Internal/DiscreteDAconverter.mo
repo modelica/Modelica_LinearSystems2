@@ -41,14 +41,14 @@ equation
           smooth=Smooth.None),
         Text(
           extent={{-90,90},{-10,10}},
-          lineColor={95,95,95},
+          textColor={95,95,95},
           textString="D"),
         Text(
           extent={{10,-10},{90,-90}},
-          lineColor={95,95,95},
+          textColor={95,95,95},
           textString="A"),
         Text(
           extent={{-100,-100},{100,-130}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="bits=%bits")}));
 end DiscreteDAconverter;

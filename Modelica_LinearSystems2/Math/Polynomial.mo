@@ -231,12 +231,10 @@ and <code>add[3].y</code>).
                 textString="%name"),
               Text(
                 extent={{-150,-41},{150,-71}},
-                fillColor={110,221,110},
-                fillPattern=FillPattern.Solid,
                 textColor={0,0,0},
                 textString="c3=%c3"),
               Line(points={{40,-32},{40,-38}},
-                                             color={0,127,0})}),
+                color={0,127,0})}),
           Diagram(coordinateSystem(preserveAspectRatio=false)),
           Documentation(info="<html>
 <p>

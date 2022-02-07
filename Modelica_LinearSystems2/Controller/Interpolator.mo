@@ -133,13 +133,11 @@ equation
         Text(
           visible=meanValueFilter,
           extent={{-28,94},{96,66}},
-          lineColor={95,95,95},
+          textColor={95,95,95},
           textString="filtered"),
         Text(
           extent={{-98,-56},{98,-90}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%inputSampleFactor | %outputSampleFactor")}),
     Documentation(info="<html>
 <p>

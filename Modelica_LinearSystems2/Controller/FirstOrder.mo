@@ -46,13 +46,11 @@ initial equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-22,0},{88,-62}},
-          lineColor={192,192,192},
+          textColor={192,192,192},
           textString="PT1"),
         Text(
           extent={{-98,-106},{98,-146}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="T=%T"),
         Line(points={{-80,-78},{-70,-43.11},{-60,-17.58},{-50,1.0913},{-40,
               14.75},{-30,24.75},{-20,32.06},{-10,37.41},{0,41.33},{10,44.19},{
@@ -60,9 +58,7 @@ initial equation
               80,51.12}}, color={0,0,127}),
         Text(
           extent={{-78,92},{98,60}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
@@ -71,11 +67,11 @@ initial equation
       graphics={
         Text(
           extent={{-48,52},{50,8}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="k"),
         Text(
           extent={{-54,-6},{56,-56}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="T s + 1"),
         Line(points={{-50,0},{50,0}}, color={0,0,0}),
         Rectangle(extent={{-60,60},{60,-60}}, lineColor={0,0,127}),
