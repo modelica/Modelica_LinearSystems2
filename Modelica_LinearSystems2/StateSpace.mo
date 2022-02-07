@@ -2,13 +2,13 @@ within Modelica_LinearSystems2;
 operator record StateSpace
   "Continuous state space description of a linear, time invariant differential equation system (data + operations)"
 
-  Real A[:, size(A, 1)] "Matrix A"
+  Real A[:, size(A, 1)] "State matrix"
     annotation (Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real B[size(A, 1), :] "Matrix B"
+  Real B[size(A, 1), :] "Input matrix"
     annotation (Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real C[:, size(A, 1)] "Matrix C"
+  Real C[:, size(A, 1)] "Output matrix"
     annotation (Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real D[size(C, 1), size(B, 2)] "Matrix D"
+  Real D[size(C, 1), size(B, 2)] "Feedforward matrix"
     annotation (Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
 
   String yNames[size(C, 1)]=fill("", size(C, 1)) "Names of the output signals"
@@ -34,7 +34,7 @@ operator record StateSpace
       input Real B[size(A, 1), :]=fill(
               0.0,
               size(A, 1),
-              0) "Control matrix";
+              0) "Input matrix";
       input Real C[:, size(A, 1)]=fill(
               0.0,
               0,
@@ -42,7 +42,7 @@ operator record StateSpace
       input Real D[size(C, 1), size(B, 2)]=fill(
               0.0,
               0,
-              0) "Feed-forward matrix";
+              0) "Feedforward matrix";
 
       input String uNames[size(B, 2)]=fill("", size(B, 2)) "Names of the input signals";
       input String yNames[size(C, 1)]=fill("", size(C, 1)) "Names of the output signals";
@@ -10648,10 +10648,10 @@ to separate the uncontrollable poles from the controllable poles.
       import Modelica_LinearSystems2.Math.Matrices;
       import Complex;
 
-      input Real A[:,size(A,1)] "A-matrix of linear state space system";
-      input Real B[size(A,1),:] "B-matrix of linear state space system";
-      input Real C[:,size(A,1)] "C-matrix of linear state space system";
-      input Real D[size(C,1),size(B,2)] "D-matrix of linear state space system";
+      input Real A[:,size(A,1)] "State matrix of linear state space system";
+      input Real B[size(A,1),:] "Input matrix of linear state space system";
+      input Real C[:,size(A,1)] "Output matrix of linear state space system";
+      input Real D[size(C,1),size(B,2)] "Feedforward matrix of linear state space system";
 
       output Real InvariantZeros[:,2]
         "Finite, invariant zeros of linear state space system; size(Zeros,1) <= size(A,1); Zeros[:,1]: Real part, Zeros[:,2]: Imaginary part";
