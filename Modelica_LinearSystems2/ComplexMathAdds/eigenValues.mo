@@ -3,7 +3,7 @@ function eigenValues
   "Compute eingenvalues of a matrix A, using lapack routine dgeevx"
   extends Modelica.Icons.Function;
 
-  input Real A[:,size(A, 1)] "Real matrix";
+  input Real A[:,size(A, 1)] "Real square matrix";
   output Complex eigval[size(A, 1)]
     "Finite, invariant zeros of ss; size(Zeros,1) <= size(ss.A,1)";
 

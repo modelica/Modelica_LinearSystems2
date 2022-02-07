@@ -4,10 +4,10 @@ record StateSpace2
 
   extends Modelica.Icons.Record;
 
-  Real A[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real B[size(A, 1),:] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real C[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-  Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+  Real A[:,size(A, 1)] "State matrix" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+  Real B[size(A, 1),:] "Input matrix" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+  Real C[:,size(A, 1)] "Output matrix" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+  Real D[size(C, 1),size(B, 2)] "Feedforward matrix" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
 
 //   String uNames[size(B, 2)]=fill("", size(B, 2)) annotation(Dialog(group="Signal names"));
 //   String yNames[size(C, 1)]=fill("", size(C, 1)) annotation(Dialog(group="Signal names"));
@@ -23,10 +23,10 @@ record StateSpace2
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Internal.StateSpace2;
 
-      input Real A[:,size(A, 1)];
-      input Real B[size(A, 1),:];
-      input Real C[:,size(A, 1)];
-      input Real D[size(C, 1),size(B, 2)];
+      input Real A[:,size(A, 1)] "Square state matrix";
+      input Real B[size(A, 1),:] "Input matrix";
+      input Real C[:,size(A, 1)] "Output matrix";
+      input Real D[size(C, 1),size(B, 2)] "Feedforward matrix";
 
       //     input String uNames[size(B, 2)]=fill("", size(B, 2));
       //     input String yNames[size(C, 1)]=fill("", size(C, 1));
@@ -36,7 +36,7 @@ record StateSpace2
         redeclare Real A[size(A, 1),size(A, 2)],
         redeclare Real B[size(B, 1),size(B, 2)],
         redeclare Real C[size(C, 1),size(C, 2)],
-        redeclare Real D[size(D, 1),size(D, 2)]);
+        redeclare Real D[size(D, 1),size(D, 2)]) "State space record";
 
       //       redeclare String uNames[size(B, 2)],
       //       redeclare String yNames[size(C, 1)],

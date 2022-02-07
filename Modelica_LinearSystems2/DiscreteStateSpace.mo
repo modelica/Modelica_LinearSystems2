@@ -2,10 +2,10 @@ within Modelica_LinearSystems2;
 operator record DiscreteStateSpace
   "Discrete state space description of a linear, time invariant difference equation system (data + operations)"
 
-  Real A[:,size(A, 1)]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-  Real B[size(A, 1),:]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-  Real C[:,size(A, 1)]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-  Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+  Real A[:,size(A, 1)] "State matrix"   annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+  Real B[size(A, 1),:] "Input matrix" annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+  Real C[:,size(A, 1)] "Output matrix" annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+  Real D[size(C, 1),size(B, 2)] "Feedforward matrix" annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
   Modelica.Units.SI.Time Ts=1 "Sample time"
     annotation (Dialog(group="Data used to construct discrete from continuous system"));
@@ -99,18 +99,18 @@ respectively.
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
-      input Real A[:,size(A, 1)]
+      input Real A[:,size(A, 1)] "State matrix"
         annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Real B[size(A, 1),:]
+      input Real B[size(A, 1),:] "Input matrix"
         annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Real C[:,size(A, 1)]
+      input Real C[:,size(A, 1)] "Output matrix"
         annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Real D[size(C, 1),size(B, 2)]
+      input Real D[size(C, 1),size(B, 2)] "Feedforward matrix"
         annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
       input Modelica.Units.SI.Time Ts=1 "Sample time" annotation (Dialog(group=
               "Data used to construct discrete from continuous system"));
-      input Real B2[:,:]=zeros(size(B, 1), size(B, 2));
+      input Real B2[:,:]=zeros(size(B, 1), size(B, 2)) "Reconstruct continuous state";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization methodDiscretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
       output DiscreteStateSpace result(
         redeclare Real A[size(A, 1),size(A, 2)],
@@ -404,10 +404,10 @@ public
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Utilities.Types.Method;
 
-      input Real A[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-      input Real B[size(A, 1),:] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-      input Real C[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-      input Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+      input Real A[:,size(A, 1)] "Matrix A of continuous state space system" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+      input Real B[size(A, 1),:] "Matrix B of continuous state space system" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+      input Real C[:,size(A, 1)] "Matrix C of continuous state space system" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+      input Real D[size(C, 1),size(B, 2)] "Matrix D of continuous state space system" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
       input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
     //  input Modelica_LinearSystems2.Types method=Modelica_LinearSystems2.Types.Method.Trapezoidal
