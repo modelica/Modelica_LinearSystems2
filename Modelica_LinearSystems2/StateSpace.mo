@@ -8383,7 +8383,7 @@ This function plots the initial responses of a state space system for the initia
       //protected
       //  input Boolean cancel=true "false to hinder cancellation";// is not fully realized
     public
-      output ZerosAndPoles zp;
+      output ZerosAndPoles zp "Zeros-and-poles description of system";
 
     protected
       StateSpace ssm=if size(ss.A, 1) > 0 then
@@ -8588,7 +8588,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
       input Real tol=1e-10
         "Tolerance of reduction procedure, default tol = 1e-10";
 
-      output TransferFunction tf;
+      output TransferFunction tf "Transfer function description of system";
 
     protected
       ZerosAndPoles zp;
@@ -8662,7 +8662,7 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
       input Real tol=1e-10
         "Tolerance of reduction procedure, default tol = 1e-10";
 
-      output ZerosAndPoles zp[size(ss.C, 1), size(ss.B, 2)];
+      output ZerosAndPoles zp[size(ss.C, 1), size(ss.B, 2)] "Matrix of zeros-and-poles objects";
 
     protected
       StateSpace ss_siso(
@@ -9615,7 +9615,7 @@ subsystem.D = ss.D[outputIndex, inputIndex];
         redeclare Real A[nx, nx],
         redeclare Real B[nx, nu],
         redeclare Real C[ny, nx],
-        redeclare Real D[ny, nu]) "Outputs model read from file";
+        redeclare Real D[ny, nu]) "State space description of model read from file";
 
     protected
       Real ABCD[nx + ny, nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
@@ -9707,7 +9707,7 @@ Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file
         redeclare Real A[nx, nx],
         redeclare Real B[nx, nu],
         redeclare Real C[ny, nx],
-        redeclare Real D[ny, nu]) "= model linearized at initial point";
+        redeclare Real D[ny, nu]) "State space description of model linearized at initial point";
 
     algorithm
       result.A := ABCD[1:nx, 1:nx];
