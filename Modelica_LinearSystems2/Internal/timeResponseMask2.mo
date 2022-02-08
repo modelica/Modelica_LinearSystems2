@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 partial function timeResponseMask2
   "Declares the common structure for the set of response functions"
-  input StateSpace sc;
+  input StateSpace sc "State space system";
   input Real dt=0 "Sample time [s]";
   input Real tSpan=0 "Simulation time span [s]";
 

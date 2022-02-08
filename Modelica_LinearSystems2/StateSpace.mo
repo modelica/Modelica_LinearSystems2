@@ -797,7 +797,7 @@ ss;
       import Modelica_LinearSystems2.Utilities.Plot;
       import DymolaCommands;
 
-      input StateSpace ss;
+      input StateSpace ss "State space system";
 
       input Internal.AnalyseOptions analyseOptions=
           Modelica_LinearSystems2.Internal.AnalyseOptions(
@@ -2706,7 +2706,7 @@ listed in the last column might be not the most relevant one.
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
-      input TimeResponse response=TimeResponse.Step;
+      input TimeResponse response=TimeResponse.Step "Type of time response";
       extends Modelica_LinearSystems2.Internal.timeResponseMask2(redeclare Real
           y[:, size(sc.C, 1), if response == TimeResponse.Initial then 1 else
           size(sc.B, 2)], redeclare Real x_continuous[:, size(sc.A, 1), if
@@ -3213,8 +3213,8 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Init
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input Modelica_LinearSystems2.StateSpace ss;
-      output Integer result;
+      input Modelica_LinearSystems2.StateSpace ss "State space system";
+      output Integer result "Degree of numerator polynomial";
 
     protected
       Modelica_LinearSystems2.TransferFunction tf=if StateSpace.Internal.isSISO(
@@ -3269,8 +3269,8 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input Modelica_LinearSystems2.StateSpace ss;
-      output Integer result;
+      input Modelica_LinearSystems2.StateSpace ss "State space system";
+      output Integer result "Degree of denominator polynomial";
     protected
       Modelica_LinearSystems2.TransferFunction tf=if StateSpace.Internal.isSISO(
           ss) then StateSpace.Conversion.toTransferFunction(ss) else
@@ -3328,9 +3328,9 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.StateSpace;
 
-      input StateSpace ss;
+      input StateSpace ss "State space system";
       input Complex s "Value of s where tf shall be evaluated";
-      input Real den_min=0 "|denominator(s)| is limited by den_min";
+      input Real den_min=0 "Minimum value of |denominator(s)| is limited by den_min";
       output Complex result "= tf(s)";
 
     protected
@@ -3402,7 +3402,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s), whi
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.StateSpace;
 
-      input StateSpace ss;
+      input StateSpace ss "State space system";
 
       output Complex z[:] "Zeros (Complex vector of numerator zeros)";
       output Complex p[:] "Poles (Complex vector of denominator zeros)";
@@ -3526,8 +3526,8 @@ Calculate the eigenvalues of a state space system, i.e. the eigenvalues of the s
       import Modelica.Math.Matrices.LAPACK;
       import Complex;
 
-      input StateSpace ss "state space system";
-      input Boolean onlyEigenvectors=true;
+      input StateSpace ss "State space system";
+      input Boolean onlyEigenvectors=true "= true, if only eigenvectors needed";
       output Real eigvec[size(ss.A, 1), size(ss.A, 2)]
         "Eigenvectors of the system";
       output Complex eigval[size(ss.A, 1)]=fill(Complex(0), size(ss.A, 1))
@@ -3870,10 +3870,11 @@ in <strong>X</strong> is used to compute <strong>K</strong>. If no solution of t
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
 
-      input StateSpace ss;
-      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
+      input StateSpace ss "State space system";
+      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD
+        "Staircase algorithm method";
 
-      output Boolean controllable;
+      output Boolean controllable "= true, if system is controllable";
     algorithm
 
       controllable := if StateSpace.Internal.isSISO(ss) then
@@ -3946,10 +3947,11 @@ Since controllability is dual to observability of the dual system (A', C', B', D
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
 
-      input StateSpace ss;
-      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
+      input StateSpace ss "State space system";
+      input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD
+        "Staircase algorithm method";
 
-      output Boolean observable;
+      output Boolean observable "= true, if system is observable";
     algorithm
 
       observable := if StateSpace.Internal.isSISO(ss) then
@@ -4006,9 +4008,9 @@ The boolean input <strong>method</strong> defines for multi output systems the m
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
 
-      input StateSpace ss;
+      input StateSpace ss "State space system";
 
-      output Boolean stabilizable;
+      output Boolean stabilizable "= true, if system is stabilizable";
 
     algorithm
       if StateSpace.Internal.isSISO(ss) then
@@ -4070,9 +4072,9 @@ Then, the uncontrollable poles are checked to be stable, i.e. to have negative r
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
 
-      input StateSpace ss;
+      input StateSpace ss "State space system";
 
-      output Boolean detectable;
+      output Boolean detectable "= true, if system is detectable";
 
     algorithm
       if StateSpace.Internal.isSISO(ss) then
@@ -4133,8 +4135,8 @@ Then, the unobservable poles are checked to be stable, i.e. to have negative rea
 
       import Modelica_LinearSystems2.StateSpace;
 
-      input StateSpace ss;
-      output Real cm[size(ss.B, 1), size(ss.A, 2)*size(ss.B, 2)];
+      input StateSpace ss "State space system";
+      output Real cm[size(ss.B, 1), size(ss.A, 2)*size(ss.B, 2)] "Controllability matrix";
 
     algorithm
       if size(ss.A, 2) == 0 then
@@ -4195,8 +4197,8 @@ der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</str
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
 
-      input StateSpace ss;
-      output Real om[size(ss.A, 1)*size(ss.C, 1), size(ss.C, 2)];
+      input StateSpace ss "State space system";
+      output Real om[size(ss.A, 1)*size(ss.C, 1), size(ss.C, 2)] "Observability matrix";
 
     algorithm
       if size(ss.A, 1) == 0 then
@@ -4266,7 +4268,7 @@ der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</str
       import Modelica_LinearSystems2.Utilities.Plot;
       import DymolaCommands;
 
-      input StateSpace ss;
+      input StateSpace ss "State space system";
 
       input Internal.AnalyseOptions analyseOptions=
           Modelica_LinearSystems2.Internal.AnalyseOptions(
@@ -6301,13 +6303,13 @@ represented by a StateSpace record.
       output Real K[size(ss.B, 2), size(ss.A, 1)]
         "State feedback matrix assigning the desired poles";
       output Real S[:, :] "Closed loop System matrix";
-      output Complex po[size(ss.A, 1)] "poles of the closed loop system";
+      output Complex po[size(ss.A, 1)] "Poles of the closed loop system";
       output Integer nfp
-        "number of eigenvalues that are not modified with respect to alpha";
-      output Integer nap "number of assigned eigenvalues";
-      output Integer nup "number of uncontrollable eigenvalues";
+        "Number of eigenvalues that are not modified with respect to alpha";
+      output Integer nap "Number of assigned eigenvalues";
+      output Integer nup "Number of uncontrollable eigenvalues";
       output Complex X[size(ss.A, 1), size(ss.A, 1)]
-        "eigenvectors of the closed loop system";
+        "Eigenvectors of the closed loop system";
 
     protected
       Real A_rsf[size(ss.A, 1), size(ss.A, 2)];
@@ -6799,7 +6801,7 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
         redeclare Real B[size(ss.B, 1), size(ss.B, 2) + size(ss.C, 1)],
         redeclare Real C[size(ss.A, 1), size(ss.A, 2)],
         redeclare Real D[size(ss.A, 1), size(ss.B, 2) + size(ss.C, 1)])
-        "kalman system";
+        "Kalman system";
 
     protected
       Real AR[:, :]=transpose(ss.A);
@@ -7005,7 +7007,7 @@ The algebraic Riccati equation is solved by using the Schur algorithm
       output Real S[size(ss.A, 1), size(ss.A, 1)]
         "solution of the Riccati equation";
 
-      output Complex ev[:];
+      output Complex ev[:] "Eigenvalues of the closed loop system";
 
     algorithm
       if min(size(ss.A, 1), size(ss.A, 2)) > 0 then
@@ -8884,7 +8886,7 @@ i.e.
         redeclare Real A[size(ss.A, 1), size(ss.A, 2)],
         redeclare Real B[size(ss.B, 1), size(ss.B, 2)],
         redeclare Real C[size(ss.C, 1), size(ss.C, 2)],
-        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]);
+        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]) "Transformed state space system";
 
     algorithm
       if inverted then
@@ -8961,7 +8963,7 @@ if inverted=true. Matrix T has to be invertible. The transformed system has the 
         redeclare Real A[size(ss.A, 1), size(ss.A, 2)],
         redeclare Real B[size(ss.B, 1), size(ss.B, 2)],
         redeclare Real C[size(ss.C, 1), size(ss.C, 2)],
-        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]);
+        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]) "Transformed state space system";
 
     protected
       Real V[size(ss.A, 1), size(ss.A, 1)]
@@ -9087,7 +9089,7 @@ The transformed system has the same eigenvalues.
         redeclare Real A[size(ss.A, 1), size(ss.A, 2)],
         redeclare Real B[size(ss.B, 1), size(ss.B, 2)],
         redeclare Real C[size(ss.C, 1), size(ss.C, 2)],
-        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]);
+        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]) "Transformed state space system";
 
     protected
       Real V[size(ss.A, 1), size(ss.A, 1)]
@@ -9208,7 +9210,7 @@ Matrix T has to be invertible, i.e. the system has to be controllable. The trans
         redeclare Real A[size(ss.A, 1), size(ss.A, 2)],
         redeclare Real B[size(ss.B, 1), size(ss.B, 2)],
         redeclare Real C[size(ss.C, 1), size(ss.C, 2)],
-        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]);
+        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]) "Transformed state space system";
 
     protected
       Real V[size(ss.A, 1), size(ss.A, 1)]
@@ -9276,7 +9278,7 @@ Matrix T has to be diagonalizable, i.e. the algebraic and geometric multipliciti
         redeclare Real A[size(ss.A, 1), size(ss.A, 2)],
         redeclare Real B[size(ss.B, 1), size(ss.B, 2)],
         redeclare Real C[size(ss.C, 1), size(ss.C, 2)],
-        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]) "Balanced ss";
+        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]) "Balanced state space system";
     algorithm
       (,ssBalanced.A, ssBalanced.B, ssBalanced.C) :=
         Modelica_LinearSystems2.Internal.balanceABC(
@@ -9383,7 +9385,7 @@ which is based on the <code>balance</code> function from EISPACK.
         redeclare Real A[rankQ2, rankQ2],
         redeclare Real B[rankQ2, size(ss.B, 2)],
         redeclare Real C[size(ss.C, 1), rankQ2],
-        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]);
+        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]) "Transformed state space system";
     algorithm
       ssm3 := StateSpace(
             A=transpose(ssm2.A[nx2 - rankQ2 + 1:nx2, nx2 - rankQ2 + 1:nx2]),
@@ -9460,7 +9462,7 @@ This function is called to compute transfer functions of state space representat
         redeclare Real A[size(ss.A, 1), size(ss.A, 2)],
         redeclare Real B[size(ss.B, 1), size(ss.B, 2)],
         redeclare Real C[size(ss.C, 1), size(ss.C, 2)],
-        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]);
+        redeclare Real D[size(ss.D, 1), size(ss.D, 2)]) "Transformed state space system";
 
     algorithm
       if method == Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD then
