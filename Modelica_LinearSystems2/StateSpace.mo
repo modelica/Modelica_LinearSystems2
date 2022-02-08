@@ -9421,7 +9421,7 @@ This function is called to compute transfer functions of state space representat
 //  tss=StateSpace(
       A=[-0.5],
       B=[-sqrt(0.5)],
-      C=[-1/sqrt(0.5)1],
+      C=[-1/sqrt(0.5)],
       D=[0])
 </pre></blockquote>
 
