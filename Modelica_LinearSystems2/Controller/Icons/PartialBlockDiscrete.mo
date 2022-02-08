@@ -14,7 +14,7 @@ partial block PartialBlockDiscrete "Icon for a discrete block"
         Text(
           extent={{-150,150},{150,110}},
           textString="%name",
-          lineColor={0,0,255}),
+          textColor={0,0,255}),
         Rectangle(
           extent={{-100,100},{100,-100}},
           fillColor={230,230,255},

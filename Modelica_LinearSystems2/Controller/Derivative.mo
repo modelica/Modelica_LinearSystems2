@@ -89,7 +89,7 @@ n = {k,0}, d = {T,1}.
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-150,-150},{150,-110}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="k=%k"),
         Line(points={{-80,-80},{-80,60},{-70,17.95},{-60,-11.46},{-50,-32.05},{
               -40,-46.45},{-30,-56.53},{-20,-63.58},{-10,-68.51},{0,-71.96},{10,
@@ -97,13 +97,11 @@ n = {k,0}, d = {T,1}.
             color={0,0,127}),
         Text(
           extent={{-58,-18},{94,24}},
-          lineColor={192,192,192},
+          textColor={192,192,192},
           textString="DT1"),
         Text(
           extent={{-76,86},{98,54}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
@@ -115,11 +113,11 @@ n = {k,0}, d = {T,1}.
         Line(points={{60,0},{100,0}}, color={0,0,127}),
         Text(
           extent={{-54,52},{50,10}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="k s"),
         Text(
           extent={{-54,-6},{52,-52}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="T s + 1"),
         Line(points={{-50,0},{50,0}}, color={0,0,0})}));
 end Derivative;

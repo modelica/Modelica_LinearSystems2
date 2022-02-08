@@ -27,7 +27,7 @@ equation
         Line(points={{0,100},{0,22}}, color={0,0,127}),
         Text(
           extent={{-150,-60},{150,-100}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name")}),
     Documentation(info="<html>
 <p>

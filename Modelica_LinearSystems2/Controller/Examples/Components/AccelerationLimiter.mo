@@ -139,20 +139,20 @@ equation
   annotation ( Icon(graphics={
         Text(
           extent={{-38,-36},{92,-80}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="acceleration"),
         Text(
           visible=velocityLimitation,
           extent={{8,18},{90,-10}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="velocity"),
         Text(
           extent={{-88,86},{82,26}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="input with limited"),
         Text(
           visible=velocityLimitation,
           extent={{-106,-14},{-28,-38}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="and")}), Diagram(graphics));
 end AccelerationLimiter;

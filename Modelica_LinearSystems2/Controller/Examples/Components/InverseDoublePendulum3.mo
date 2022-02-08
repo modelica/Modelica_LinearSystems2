@@ -164,15 +164,11 @@ equation
           pattern=LinePattern.Dash),
         Text(
           extent={{32,-16},{78,-22}},
-          lineColor={0,128,0},
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid,
+          textColor={0,128,0},
           textString="if secondAngle=true"),
         Text(
           extent={{32,-56},{80,-62}},
-          lineColor={255,0,0},
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid,
+          textColor={255,0,0},
           textString="if secondAngle=false")}),
     Documentation(info="<html>
 <p>

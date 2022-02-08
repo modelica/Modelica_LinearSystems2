@@ -41,7 +41,7 @@ drag Modelica_LinearSystems2.Controller.SampleClock into the top level of your m
         Line(points={{-35,0},{30,35}}, color={0,0,0}),
         Text(
           extent={{-150,-110},{150,-140}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="%sampleTime s"),
         Ellipse(
           extent={{-25,-10},{-45,10}},
@@ -50,19 +50,17 @@ drag Modelica_LinearSystems2.Controller.SampleClock into the top level of your m
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-150,-20},{150,-50}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="Continuous",
           visible=blockType==Modelica_LinearSystems2.Controller.Types.BlockType.Continuous),
         Text(
           extent={{-150,-20},{150,-50}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="Discrete",
           visible=blockType==Modelica_LinearSystems2.Controller.Types.BlockType.Discrete),
         Text(
           extent={{-150,140},{150,100}},
-          lineColor={0,0,255},
-          fillColor={169,199,255},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,255},
           textString="%name"),
         Ellipse(
           extent={{45,-10},{25,10}},

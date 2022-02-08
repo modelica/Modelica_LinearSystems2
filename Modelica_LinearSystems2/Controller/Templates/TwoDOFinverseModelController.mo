@@ -63,10 +63,11 @@ equation
       points={{59,-20},{68,-20}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-            {100,100}}),       graphics={Text(
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
+      graphics={
+      	Text(
           extent={{-58,42},{-2,36}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="inverted system")}),    Documentation(info="<html>
 <p>
 Template of a controller with two structural degrees of freedom and an inverse plant model in forward path.

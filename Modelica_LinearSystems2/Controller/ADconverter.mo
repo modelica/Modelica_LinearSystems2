@@ -28,7 +28,7 @@ equation
         Line(points={{-100,-100},{100,100}}, color={0,0,127}),
         Text(
           extent={{-94,60},{-30,20}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="A"),
         Line(
           points={{-28,28},{24,-24}},
@@ -40,13 +40,11 @@ equation
           smooth=Smooth.None),
         Text(
           extent={{26,-10},{90,-50}},
-          lineColor={0,0,127},
+          textColor={0,0,127},
           textString="D"),
         Text(
           extent={{-100,94},{100,64}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%sampleFactor")}),
     Documentation(
       info="<html>

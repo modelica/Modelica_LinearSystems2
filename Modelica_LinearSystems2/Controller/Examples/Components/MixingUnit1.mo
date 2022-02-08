@@ -51,9 +51,7 @@ equation
         Line(points={{-100,100},{-100,-100},{100,-100},{100,100}}, color={0,0,0}),
         Text(
           extent={{-144,148},{148,100}},
-          lineColor={0,0,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,255},
           textString="%name"),
         Line(points={{0,-50},{0,-100}}, color={0,0,0}),
         Ellipse(
@@ -72,15 +70,15 @@ equation
         Line(points={{-60,-78},{-60,-120}}, color={0,0,0}),
         Text(
           extent={{-186,68},{-100,30}},
-          lineColor={95,95,95},
+          textColor={95,95,95},
           textString="T_c"),
         Text(
           extent={{100,50},{142,12}},
-          lineColor={95,95,95},
+          textColor={95,95,95},
           textString="c"),
         Text(
           extent={{8,-100},{50,-138}},
-          lineColor={95,95,95},
+          textColor={95,95,95},
           textString="T")}),
     Diagram(graphics={
         Rectangle(
@@ -154,15 +152,11 @@ equation
           smooth=Smooth.None),
         Text(
           extent={{20,94},{40,74}},
-          lineColor={0,0,0},
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="A"),
         Text(
           extent={{36,68},{86,56}},
-          lineColor={0,0,0},
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="c0, T0"),
         Rectangle(extent={{-70,40},{70,-60}}, lineColor={0,0,0})}),
     Documentation(info="<html>

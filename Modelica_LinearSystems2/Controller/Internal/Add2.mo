@@ -56,7 +56,7 @@ equation
           color={0,0,127}),
         Text(
           extent={{-150,-20},{150,-60}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="%name"),
         Ellipse(
           extent={{-20,20},{20,-20}},

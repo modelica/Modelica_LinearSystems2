@@ -65,6 +65,6 @@ results in the following equations:
     graphics={
     	Text(
         extent={{-88,-62},{92,58}},
-        lineColor={160,160,164},
+        textColor={160,160,164},
         textString="*[kij]")}));
 end MatrixGain;

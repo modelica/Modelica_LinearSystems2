@@ -9,12 +9,14 @@ algorithm
   f := w/(2*Modelica.Constants.pi);
   annotation (
     obsolete = "Obsolete function - use Modelica.Units.Conversions.to_Hz instead",
-    Icon(graphics={Text(
+    Icon(graphics={
+        Text(
           extent={{-20,100},{-100,20}},
-          lineColor={0,0,0},
-          textString="rad/s"), Text(
+          textColor={0,0,0},
+          textString="rad/s"),
+        Text(
           extent={{100,-20},{20,-100}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="Hz")}), Documentation(info="<html>
 <p>This model is obsolete. Use <a href=\"Modelica://Modelica.Units.Conversions.to_Hz\">Modelica.Units.Conversions.to_Hz</a> instead.</p>
 </html>"));

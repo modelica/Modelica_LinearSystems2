@@ -54,7 +54,7 @@ y = u1 - u2
         Text(
           extent={{-150,94},{150,44}},
           textString="%name",
-          lineColor={0,0,255})}),
+          textColor={0,0,255})}),
     Diagram(coordinateSystem(
     preserveAspectRatio=true,
     extent={{-100,-100},{100,100}},
