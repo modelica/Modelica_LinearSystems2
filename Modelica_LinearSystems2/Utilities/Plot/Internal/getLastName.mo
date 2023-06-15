@@ -1,4 +1,4 @@
-﻿within Modelica_LinearSystems2.Utilities.Plot.Internal;
+within Modelica_LinearSystems2.Utilities.Plot.Internal;
 function getLastName "Get last name of a Modelica path name"
    import Modelica.Utilities.Strings;
    input String path;
