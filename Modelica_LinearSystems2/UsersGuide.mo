@@ -1,4 +1,4 @@
-﻿within Modelica_LinearSystems2;
+within Modelica_LinearSystems2;
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
 

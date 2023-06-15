@@ -1,4 +1,4 @@
-﻿within Modelica_LinearSystems2.Utilities.Plot;
+within Modelica_LinearSystems2.Utilities.Plot;
 function plot_FFTs_of_model
   "Plot amplitudes of FFT results (from result files of translated model)"
   import Modelica.Utilities.Streams.print;
