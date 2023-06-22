@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 partial function timeResponseMask_discrete
   "Declares the common structure for the set of response functions"
-  input DiscreteStateSpace dss;
+  input DiscreteStateSpace dss "Discrete state space system";
   input Real tSpan=0 "Simulation time span [s]";
 
   replaceable output Real y[:,size(dss.C, 1),size(dss.B, 2)]

@@ -1,9 +1,9 @@
 within Modelica_LinearSystems2.Utilities.Import.Examples;
 function linearizeDoublePendulum "Linearize double pendulum"
-  output Real A[:,:] "A-matrix";
-  output Real B[:,:] "B-matrix";
-  output Real C[:,:] "C-matrix";
-  output Real D[:,:] "D-matrix";
+  output Real A[:,:] "State matrix";
+  output Real B[:,:] "Input matrix";
+  output Real C[:,:] "Output matrix";
+  output Real D[:,:] "Feedforward matrix";
   output String inputNames[:] "Modelica names of inputs";
   output String outputNames[:] "Modelica names of outputs";
   output String stateNames[:] "Modelica names of states";

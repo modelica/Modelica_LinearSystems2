@@ -2,10 +2,10 @@ within Modelica_LinearSystems2;
 operator record DiscreteStateSpace
   "Discrete state space description of a linear, time invariant difference equation system (data + operations)"
 
-  Real A[:,size(A, 1)]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-  Real B[size(A, 1),:]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-  Real C[:,size(A, 1)]  annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-  Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+  Real A[:,size(A, 1)] "State matrix"   annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+  Real B[size(A, 1),:] "Input matrix" annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+  Real C[:,size(A, 1)] "Output matrix" annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
+  Real D[size(C, 1),size(B, 2)] "Feedforward matrix" annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
   Modelica.Units.SI.Time Ts=1 "Sample time"
     annotation (Dialog(group="Data used to construct discrete from continuous system"));
@@ -99,18 +99,18 @@ respectively.
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
-      input Real A[:,size(A, 1)]
+      input Real A[:,size(A, 1)] "State matrix"
         annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Real B[size(A, 1),:]
+      input Real B[size(A, 1),:] "Input matrix"
         annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Real C[:,size(A, 1)]
+      input Real C[:,size(A, 1)] "Output matrix"
         annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
-      input Real D[size(C, 1),size(B, 2)]
+      input Real D[size(C, 1),size(B, 2)] "Feedforward matrix"
         annotation(Dialog(group="new_x = A*x + B*u;  y = C*x + D*u;  x_cont = x + B2*u"));
 
       input Modelica.Units.SI.Time Ts=1 "Sample time" annotation (Dialog(group=
               "Data used to construct discrete from continuous system"));
-      input Real B2[:,:]=zeros(size(B, 1), size(B, 2));
+      input Real B2[:,:]=zeros(size(B, 1), size(B, 2)) "Reconstruct continuous state";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization methodDiscretization method" annotation (Dialog(group="Data used to construct discrete from continuous system"));
       output DiscreteStateSpace result(
         redeclare Real A[size(A, 1),size(A, 2)],
@@ -404,10 +404,10 @@ public
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Utilities.Types.Method;
 
-      input Real A[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-      input Real B[size(A, 1),:] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-      input Real C[:,size(A, 1)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
-      input Real D[size(C, 1),size(B, 2)] annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+      input Real A[:,size(A, 1)] "Matrix A of continuous state space system" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+      input Real B[size(A, 1),:] "Matrix B of continuous state space system" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+      input Real C[:,size(A, 1)] "Matrix C of continuous state space system" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
+      input Real D[size(C, 1),size(B, 2)] "Matrix D of continuous state space system" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
       input Modelica.Units.SI.Time Ts "Sample time";
       input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
     //  input Modelica_LinearSystems2.Types method=Modelica_LinearSystems2.Types.Method.Trapezoidal
@@ -1307,7 +1307,7 @@ The eigenvalues <strong>ev</strong>_d of the discrete system are related to the 
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
-      input TimeResponse response=TimeResponse.Step;
+      input TimeResponse response=TimeResponse.Step "Type of time response";
       extends Modelica_LinearSystems2.Internal.timeResponseMask_discrete(
         redeclare Real y[:,size(dss.C, 1),if response == TimeResponse.Initial then 1 else
         size(dss.B, 2)],
@@ -1803,27 +1803,27 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.Math.Matrices;
 
-      input DiscreteStateSpace dss "state space system";
+      input DiscreteStateSpace dss "State space system";
 
       input Complex gamma[:]=fill(Complex(0), 0) "Designed Poles";
     //  input Integer np=size(gamma, 1) "number of given eigenvalues to assign";
       input Real alpha=exp(-1e10)
-          "maximum admissible value for the moduli of the eigenvalues of A which will not be modified by the eigenvalue assignment algorithm";
+          "Maximum admissible value for the moduli of the eigenvalues of A which will not be modified by the eigenvalue assignment algorithm";
       input Real tolerance=Modelica.Math.Matrices.norm(dss.A, 1)*1e-12
-          "The tolerance to be used in determining the controllability of (A,B)";
+          "Tolerance to be used in determining the controllability of (A,B)";
       input Boolean calculateEigenvectors=false
           "Calculate the eigenvectors X of the closed loop system when true";
 
       output Real K[size(dss.B, 2),size(dss.A, 1)]
           "State feedback matrix assigning the desired poles";
       output Real S[:,:] "Closed loop System matrix";
-      output Complex po[size(dss.A, 1)] "poles of the closed loop system";
+      output Complex po[size(dss.A, 1)] "Poles of the closed loop system";
       output Integer nfp
-          "number of eigenvalues that are not modified with respect to alpha";
-      output Integer nap "number of assigned eigenvalues";
-      output Integer nup "number of uncontrollable eigenvalues";
+          "Number of eigenvalues that are not modified with respect to alpha";
+      output Integer nap "Number of assigned eigenvalues";
+      output Integer nup "Number of uncontrollable eigenvalues";
       output Complex X[size(dss.A, 1),size(dss.A, 1)]
-          "eigenvectors of the closed loop system";
+          "Eigenvectors of the closed loop system";
 
     protected
       Real A_rsf[size(dss.A, 1),size(dss.A, 2)];
@@ -2918,8 +2918,8 @@ This function plots the initial responses of a discrete state space system for t
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
-      input DiscreteStateSpace dss "StateSpace object";
-      output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
+      input DiscreteStateSpace dss "Discrete state space system";
+      output Modelica_LinearSystems2.DiscreteZerosAndPoles dzp "Discrete zeros-and-poles description of system";
 
     protected
       StateSpace ss=StateSpace(A=dss.A, B=dss.B, C=dss.C, D=dss.D);
@@ -3071,9 +3071,9 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteStateSpace;
 
-      input DiscreteStateSpace dss "DiscreteStateSpace object";
+      input DiscreteStateSpace dss "Discrete state space object";
 
-      output DiscreteZerosAndPoles dzp[size(dss.C, 1),size(dss.B, 2)];
+      output DiscreteZerosAndPoles dzp[size(dss.C, 1),size(dss.B, 2)] "Matrix of discrete zeros-and-poles objects";
 
     protected
       DiscreteStateSpace dss_siso(
@@ -3192,9 +3192,9 @@ of a system from discrete state space representation, i.e. isolating the uncontr
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
-      input DiscreteStateSpace dss "DiscreteStateSpace object";
+      input DiscreteStateSpace dss "Discrete state space system";
 
-      output DiscreteTransferFunction dtf "DiscreteTransferFunction object";
+      output DiscreteTransferFunction dtf "Discrete transfer function description of system";
 
     protected
       DiscreteZerosAndPoles dzp=DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles(dss);
@@ -3270,7 +3270,7 @@ discrete state space system into a discrete zeros and poles representation first
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
 
-      input DiscreteStateSpace dss "DiscreteStateSpace object";
+      input DiscreteStateSpace dss "Discrete state space object";
 
       output DiscreteTransferFunction dtf[size(dss.C, 1),size(dss.B, 2)]
             "Matrix of discrete transfer function objects";
@@ -3393,7 +3393,7 @@ with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.Disc
         redeclare Real B[nx,nu],
         redeclare Real B2[nx,nu],
         redeclare Real C[ny,nx],
-        redeclare Real D[ny,nu]) "= model linearized at initial point";
+        redeclare Real D[ny,nu]) "State space description of model read from file";
 
     protected
       Real ABCD[nx + ny,nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
@@ -3530,14 +3530,14 @@ The file must contain
         redeclare Real A[nx,nx],
         redeclare Real B[nx,nu],
         redeclare Real C[ny,nx],
-        redeclare Real D[ny,nu]) "= model linearized at initial point";
+        redeclare Real D[ny,nu]) "System model linearized at initial point";
     public
       output DiscreteStateSpace result(
         redeclare Real A[nx,nx],
         redeclare Real B[nx,nu],
         redeclare Real B2[nx,nu],
         redeclare Real C[ny,nx],
-        redeclare Real D[ny,nu]) "= discrete model linearized at initial point";
+        redeclare Real D[ny,nu]) "State space description of model linearized at initial point";
 
     algorithm
       ss.A := ABCD[1:nx, 1:nx];
