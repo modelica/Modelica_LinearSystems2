@@ -40,7 +40,9 @@ This is not allowed when calling Modelica.Math.Matrices.QR(A).");
       0,
       0);
   end if;
-  annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica_LinearSystems2.Math.Matrices.Internal.QR2 instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (Q,R,p) = Matrices.<strong>QR</strong>(A);
