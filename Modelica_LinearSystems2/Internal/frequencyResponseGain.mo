@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 encapsulated function frequencyResponseGain
-  "Compute the gain of a frequency response (system must be a SISO system)"
+  "Compute gain of a frequency response (system must be a SISO system)"
   import Modelica;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
@@ -121,66 +121,13 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-zp = StateSpace.Conversion.<strong>toZerosAndPoles</strong>(ss)
+<strong>frequencyResponseGain</strong>(A, B, C, D, Zeros, Poles)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Computes a ZerosAndPoles record
+Compute the gain of a&nbsp;frequency response based on zeros and poles.
+The system must be a&nbsp;SISO system, i.e. size(D,&nbsp;1)&nbsp;= size(D,&nbsp;2)&nbsp;=&nbsp;1.
 </p>
-<blockquote><pre>
-          product(s + n1[i]) * product(s^2 + n2[i,1]*s + n2[i,2])
-zp = k * ---------------------------------------------------------
-          product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
-</pre></blockquote>
-<p>
-of a system from state space representation using the transformation algorithm described in [1].
-The uncontrollable and unobservable parts are isolated and the eigenvalues and invariant zeros of the controllable and observable sub system are calculated.
-</p>
-
-<h4>Example</h4>
-<blockquote><pre>
-  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-    A = [-1.0, 0.0, 0.0;
-          0.0,-2.0, 0.0;
-          0.0, 0.0,-3.0],
-    B = [1.0;
-         1.0;
-         0.0],
-    C = [1.0,1.0,1.0],
-    D = [0.0]);
-
-<strong>algorithm</strong>
-  zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
-//                s + 1.5
-//   zp = 2 -----------------
-             (s + 1)*(s + 2)
-</pre></blockquote>
-
-<h4><a name=\"References\">References</a></h4>
-<dl>
-<dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
-<dd> <strong>Numerically stable algorithm for transfer function matrix evaluation</strong>.
-     Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
-</dl>
-</html>",
-      revisions="<html>
-<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
-  <tr>
-    <th>Date</th>
-    <th>Author</th>
-    <th>Comment</th>
-  </tr>
-  <tr>
-    <td valign=\"top\">2011-07-31</td>
-    <td valign=\"top\">Marcus Baur, DLR-RM</td>
-    <td valign=\"top\">Improved frequency calculation</td>
-  </tr>
-  <tr>
-    <td valign=\"top\">2010-05-31</td>
-    <td valign=\"top\">Marcus Baur, DLR-RM</td>
-    <td valign=\"top\">Realization</td>
-  </tr>
-</table>
 </html>"));
 end frequencyResponseGain;
