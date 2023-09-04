@@ -11,7 +11,9 @@ protected
   Integer rank;
 algorithm
   (x,rank) :=Modelica.Math.Matrices.leastSquares(A,b);
-  annotation (Documentation(info="<html>
+  annotation (
+    obsolete = "Obsolete function - use Modelica.Math.Matrices.leastSquares instead",
+    Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 x = Matrices.<strong>leastSquares</strong>(A,b);

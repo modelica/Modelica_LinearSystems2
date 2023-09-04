@@ -10,6 +10,7 @@ function equalityLeastSquares
 
 protected
   Integer info;
+  Integer rank;
 algorithm
   if Modelica.Math.Matrices.rank(cat(
       1,
@@ -28,7 +29,7 @@ with function \"Matrices.equalityLeastSquares\" failed.");
     if size(A, 2) == 0 then
       x := fill(0, 0);
     else
-      x := Modelica_LinearSystems2.Math.Matrices.leastSquares(cat(
+      (x,rank) := Modelica.Math.Matrices.leastSquares(cat(
         1,
         A,
         B), cat(
