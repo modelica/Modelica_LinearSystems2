@@ -3,7 +3,6 @@ function importFromModel
   "Generate a linear state space system from a (nonlinear) Modelica model"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
 
   input String modelName="Modelica_LinearSystems2.Utilities.Plants.DoublePendulum";

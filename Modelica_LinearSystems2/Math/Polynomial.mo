@@ -1356,10 +1356,8 @@ Polynomial.numberOfRoots(p1);
 
   encapsulated function rootsOfNonZeroHighestCoefficientPolynomial
     "Determine zeros of polynomial where highest coefficient of polynomial is not zero"
-    import Modelica;
     import Modelica.ComplexMath.j;
     import Modelica_LinearSystems2.Math.Matrices;
-    import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.Math.Polynomial;
     import Complex;
 

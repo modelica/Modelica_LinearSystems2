@@ -3,7 +3,6 @@ block ObserverTemplate
   "Template of a Luenberger observer for state space systems"
   extends Interfaces.PartialSampledBlock;
 
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Internal.StateSpace2;
 
   parameter Boolean matrixOnFile=false

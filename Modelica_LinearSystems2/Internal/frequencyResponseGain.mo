@@ -2,10 +2,7 @@ within Modelica_LinearSystems2.Internal;
 encapsulated function frequencyResponseGain
   "Compute gain of a frequency response (system must be a SISO system)"
   import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Internal;
-  import Modelica.Utilities.Streams.print;
 
   input Real A[:,size(A,1)] "A-matrix of linear state space system";
   input Real B[size(A,1),:] "B-matrix of linear state space system";

@@ -4,7 +4,6 @@ function plotBodeSISO
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.TransferFunction;
 
   input Boolean systemOnFile=false
     "True, if state space system is defined on file";
