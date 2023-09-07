@@ -4,10 +4,7 @@ function plotPolesAndZeros
   extends Modelica.Icons.Function;
 
   import Modelica.ComplexMath.j;
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.ZerosAndPoles;
-  import Complex;
 
 protected
   TransferFunction s = TransferFunction.s();

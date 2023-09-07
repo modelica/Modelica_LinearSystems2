@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Utilities.Import;
 function linearize2
   "Linearize a model at the start time, or optionally after simulation up to a given time instant, and return it as StateSpace object"
-  import Modelica.Utilities.Streams.print;
   import Simulator = DymolaCommands.SimulatorAPI;
 
   input String modelName "Name of the Modelica model"

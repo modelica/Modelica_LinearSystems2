@@ -1,6 +1,5 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function printMatrix "Print matrix"
-  import Modelica_LinearSystems2.StateSpace;
   import Modelica.Utilities.Strings;
 
   input Real M[:,:];

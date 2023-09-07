@@ -18,7 +18,6 @@ record Eigenvalue
   encapsulated function constructor "Default constructor for eigenvalue"
     import Modelica;
     import Complex;
-    import Modelica_LinearSystems2.Internal;
     import Modelica_LinearSystems2.Internal.Eigenvalue;
 
     input Complex ev_in=Complex(0);

@@ -1,6 +1,5 @@
 within Modelica_LinearSystems2.Math.Vectors;
 function printVector "Print vector"
-  import Modelica_LinearSystems2.StateSpace;
   import Modelica.Utilities.Strings;
 
   input Real v[:] "Vector of real numbers to be printed";

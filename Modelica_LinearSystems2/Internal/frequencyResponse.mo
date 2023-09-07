@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Internal;
 encapsulated function frequencyResponse
   "Compute frequency response based on zeros and poles"
   import Modelica;
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Internal;
   import Modelica.Units.SI;
 

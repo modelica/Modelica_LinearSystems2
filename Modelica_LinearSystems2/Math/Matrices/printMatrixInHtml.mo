@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function printMatrixInHtml
   "Print a matrix in html format on file (without html/body heading)"
-  import Modelica.Utilities.Strings;
   import Modelica.Utilities.Streams.print;
 
   input Real M[:,:] "Real matrix";

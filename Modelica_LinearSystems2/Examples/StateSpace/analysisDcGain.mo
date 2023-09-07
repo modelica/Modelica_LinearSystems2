@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Examples.StateSpace;
 function analysisDcGain "Example to compute dcGain of a state space system"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Utilities.Streams.print;

@@ -3,7 +3,6 @@ function plotBode1
   "Construct a ZerosAndPoles system and plot the Bode diagram with automatic determination of the frequency range to plot"
   extends Modelica.Icons.Function;
 
-  import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
 

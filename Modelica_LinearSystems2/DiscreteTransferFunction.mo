@@ -818,10 +818,8 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
 
     encapsulated function bode "Plot discrete transfer function as bode plot"
       import Modelica;
-      import Modelica.Utilities.Strings;
       import Modelica.ComplexMath;
       import Complex;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
