@@ -692,7 +692,6 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
       "Make a system analysis based on the poles and zeros of the system"
 
       import Modelica;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Internal.AnalyseOptions;
@@ -701,7 +700,7 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
       input ZerosAndPoles zp(uName="u", yName="y")
         "Transfer function of a system";
 
-      input AnalyseOptions2 analyseOptions2 = Modelica_LinearSystems2.Internal.AnalyseOptions2(
+      input AnalyseOptions2 analyseOptions2 = AnalyseOptions2(
                printControllability=false,
                printObservability=false);
 
@@ -765,7 +764,6 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
         import Modelica;
         import Modelica.Utilities.Streams.print;
         import Modelica_LinearSystems2.ZerosAndPoles;
-        import Modelica_LinearSystems2;
 
         input ZerosAndPoles zp "transfer function to analyze";
         input String fileName="systemAnalysis.html"
@@ -813,14 +811,13 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
     encapsulated function timeResponse
       "Calculate the time response of a zeros-and-poles transfer function"
 
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       extends Modelica_LinearSystems2.Internal.timeResponseMask2_zp;     // Input/Output declarations of time response functions
-      input TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
+      input TimeResponse response = TimeResponse.Step;
 
       input Real x0[ZerosAndPoles.Analysis.denominatorDegree(zp)]=zeros(ZerosAndPoles.Analysis.denominatorDegree(zp))
         "Initial state vector";
@@ -1205,8 +1202,6 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
     encapsulated function evaluate
       "Evaluate a ZerosAndPoles transfer function at a given value of p"
 
-      import Modelica;
-      import Modelica.Utilities.Streams.print;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Complex;
@@ -1452,7 +1447,6 @@ Calculate the eigenvalues of the corresponding state space representation of a z
 
     encapsulated function eigenVectors
       "Calculate the rigth eigenvectors of the corresponding state space system of a zeros-and-poles transfer function and write them columnwise in a matrix"
-      import Modelica;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Complex;
@@ -1507,8 +1501,6 @@ i.e. v1 = |                 |,   v2 = |                   |
     encapsulated function invariantZeros
       "Compute invariant zeros of zeros-and-poles transfer function"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Complex;
 
@@ -1560,7 +1552,6 @@ Computes the invariant zeros of the corresponding state space representation of 
     encapsulated function dcGain
       "Return steady state gain k (for a stable system: k = value of y at infinite time for a step input)"
 
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -1776,8 +1767,6 @@ The transfer function is detectable if all unstable poles are observable.
     encapsulated function controllabilityMatrix
       "Calculate the controllability matrix [B, A*B, ..., A^(n-1)*B] of a zp-transfer-function"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -1830,8 +1819,6 @@ of a zeros and poles transfer function.
 
     encapsulated function observabilityMatrix
       "Calculate the observability matrix of zp-transfer-function"
-      import Modelica;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -1898,8 +1885,8 @@ of a zeros-and-poles transfer function.
       import Modelica_LinearSystems2.Utilities.Types;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
-      input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-      input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass/BandPass)";
+      input Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+      input Types.FilterType filterType=Types.FilterType.LowPass "Type of filter (LowPass/HighPass/BandPass)";
       input Integer order(min=1) = 2 "Order of filter";
       input Modelica.Units.SI.Frequency f_cut=1/(2*Modelica.Constants.pi)
         "Cut-off frequency (default is w_cut = 1 rad/s)";
@@ -2424,7 +2411,7 @@ and results in
     protected
       SI.AngularVelocity w[nPoints];
       SI.Frequency f[nPoints];
-        Modelica.Units.NonSI.Angle_deg phi[nPoints];
+      Modelica.Units.NonSI.Angle_deg phi[nPoints];
       Real A[nPoints];
       Real fAp[nPoints,if onFile then 3 else 0];
       Boolean OK;
@@ -2570,19 +2557,16 @@ This function plots the bode-diagram of a transfer function.
 
     encapsulated function timeResponse
       "Plot the time response of a system represented by a transfer function. The response type is selectable"
-      import Modelica;
       import Modelica_LinearSystems2;
-      // import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
-
       import Modelica_LinearSystems2.Utilities.Plot;
 
-      input Modelica_LinearSystems2.ZerosAndPoles zp;
+      input ZerosAndPoles zp;
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
+      input TimeResponse response = TimeResponse.Step "type of time response";
       input Real x0[ZerosAndPoles.Analysis.denominatorDegree(zp)]=zeros(
         ZerosAndPoles.Analysis.denominatorDegree(zp)) "Initial state vector";
 
@@ -2662,13 +2646,11 @@ This function plots the time response of a transfer function. The character of t
     end timeResponse;
 
     encapsulated function impulse "Impulse response plot"
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
+      import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
-
-      input Modelica_LinearSystems2.ZerosAndPoles zp
+      input ZerosAndPoles zp
         "zeros-and-poles transfer function";
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
@@ -2681,9 +2663,9 @@ This function plots the time response of a transfer function. The character of t
           heading="Impulse response of  zp = " + String(zp)));
 
     protected
-      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse "type of time response";
+      TimeResponse response = TimeResponse.Impulse "type of time response";
     algorithm
-      Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse(
+      ZerosAndPoles.Plot.timeResponse(
         zp=zp,
         dt=dt,
         tSpan=tSpan,
@@ -2737,18 +2719,15 @@ This function plots the impulse response of a zeros-and-poles transfer function.
     end impulse;
 
     encapsulated function step "Step response plot"
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
 
       input ZerosAndPoles zp;
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
+      input TimeResponse response = TimeResponse.Step "type of time response";
       input Real x0[ZerosAndPoles.Analysis.denominatorDegree(zp)]=zeros(
         ZerosAndPoles.Analysis.denominatorDegree(zp)) "Initial state vector";
 
@@ -2810,18 +2789,15 @@ This function plots the step response of a zeros-and-poles transfer function. It
     end step;
 
     encapsulated function ramp "Ramp response plot"
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
 
       input ZerosAndPoles zp;
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp "type of time response";
+      input TimeResponse response = TimeResponse.Ramp "type of time response";
       input Real x0[ZerosAndPoles.Analysis.denominatorDegree(zp)]=zeros(
         ZerosAndPoles.Analysis.denominatorDegree(zp)) "Initial state vector";
 
@@ -2888,13 +2864,11 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
-
       input ZerosAndPoles zp;
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "type of time response";
+      input TimeResponse response = TimeResponse.Initial "type of time response";
       input Real y0 "Initial output (for initial condition plot)";
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
@@ -2974,7 +2948,6 @@ This function plots the initial response, i.e. the zeros input response of a zer
     function toTransferFunction
       "Generate a TransferFunction data record from a ZerosAndPoles data record"
       //encapsulated function fromZerosAndPoles
-      import Modelica;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.ZerosAndPoles;
@@ -3033,8 +3006,6 @@ from a ZerosAndPoles record representated by first and second order numerator an
     encapsulated function toTransferFunctionMIMO
       "Generate a transfer function matrix  from zeros-and-poles transfer function matrix"
 
-      import Modelica;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.TransferFunction;
 
@@ -4575,11 +4546,10 @@ This function computes the solution of this equation and returns \"alpha = z^2\"
       import Modelica;
       import Modelica.Math;
       import Modelica.Utilities.Streams;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Utilities.Types;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
-      input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+      input Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
       input Integer order(min=1) = 2 "Order of filter";
       input Real A_ripple(unit="dB") = 0.5
         "Pass band ripple (only for Chebyshev filter)";
@@ -5871,14 +5841,13 @@ Therefore, it is assumend that the used array names are \"z\" and \"p\" or \"n1,
 
       import Modelica;
       import Modelica.Utilities.Streams;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Utilities.Types;
       import Modelica_LinearSystems2.ZerosAndPoles;
 
       import MMath = Modelica.Math;
 
-      input Modelica_LinearSystems2.Utilities.Types.AnalogFilter analogFilter=Modelica_LinearSystems2.Utilities.Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
-      input Modelica_LinearSystems2.Utilities.Types.FilterType filterType=Modelica_LinearSystems2.Utilities.Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
+      input Types.AnalogFilter analogFilter=Types.AnalogFilter.CriticalDamping "Analog filter characteristics (CriticalDamping/Bessel/Butterworth/Chebyshev)";
+      input Types.FilterType filterType=Types.FilterType.LowPass "Type of filter (LowPass/HighPass)";
       input Integer order(min=1) = 2 "Order of filter";
       input Modelica.Units.SI.Frequency f_cut=1/(2*Modelica.Constants.pi)
         "Cut-off frequency (default is w_cut = 1 rad/s)";
@@ -6853,7 +6822,6 @@ function. The solver function is a direct mapping of the Algol 60 procedure
     end normalizationFactor;
 
     function numberOfRealPoles "Calculate number of real poles"
-      import Modelica;
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
@@ -6883,7 +6851,6 @@ function. The solver function is a direct mapping of the Algol 60 procedure
     end numberOfRealZeros;
 
     function numberOfRealZeros2 "Calculate number of real zeros"
-      import Modelica;
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;

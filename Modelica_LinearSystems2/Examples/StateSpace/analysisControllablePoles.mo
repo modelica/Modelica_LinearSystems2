@@ -3,7 +3,6 @@ function analysisControllablePoles
   "Example to check controllability of a state space system and print the controllable poles"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Utilities.Streams.print;
@@ -36,10 +35,10 @@ algorithm
   (cPoles,ncPoles) := StateSpace.Internal.controllablePoles(ss);
   if size(ncPoles, 1) == 0 then
     print("\nThe system is controllable\nThe poles are" +
-      Modelica_LinearSystems2.Math.Matrices.printMatrix(cPoles,6,""));
+      Matrices.printMatrix(cPoles,6,""));
   else
     print("\nThe system is not controllable\nThe uncontrollable poles are" +
-      Modelica_LinearSystems2.Math.Matrices.printMatrix(ncPoles,6,""));
+      Matrices.printMatrix(ncPoles,6,""));
   end if;
 
   ok := true;

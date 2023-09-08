@@ -3,9 +3,7 @@ function analysisStairCase
   "Example to check controllability of a state space system"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Utilities.Streams.print;
 
   input Boolean systemOnFile=false
@@ -43,12 +41,12 @@ algorithm
   ss3.C := ssR.C;
   ss3.D := ssR.D;
   if isControllable then
-    Modelica.Utilities.Streams.print("pair (A, B) is controllable");
+    print("pair (A, B) is controllable");
   else
-    Modelica.Utilities.Streams.print("pair (A, B) is not controllable");
+    print("pair (A, B) is not controllable");
   end if;
 
-  Modelica.Utilities.Streams.print("Transformed system is"+String(ss3));
+  print("Transformed system is"+String(ss3));
 
   (isObservable,ssR) := StateSpace.Internal.staircaseSVD(ss2);
   ss3.A := ssR.A;
@@ -56,11 +54,11 @@ algorithm
   ss3.C := ssR.C;
   ss3.D := ssR.D;
   if isObservable then
-    Modelica.Utilities.Streams.print("pair (A, C) is observable");
+    print("pair (A, C) is observable");
   else
-    Modelica.Utilities.Streams.print("pair (A, C) is not observable");
+    print("pair (A, C) is not observable");
   end if;
-  Modelica.Utilities.Streams.print("\nTransformed dual system is:\n"+String(ss3));
+  print("\nTransformed dual system is:\n"+String(ss3));
 
   ok := true;
 

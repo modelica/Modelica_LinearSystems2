@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Math.Matrices.Internal;
 encapsulated function readMatrixGain "Read a matrix from mat-file"
 
   import Modelica;
-  import Modelica_LinearSystems2;
 
   input String fileName="matrixGain.mat" "Name of the matrix data file"
     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",

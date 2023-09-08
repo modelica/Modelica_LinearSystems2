@@ -1,16 +1,15 @@
 within Modelica_LinearSystems2.Controller;
 block ZerosAndPoles
   "Continuous or discretized, single input single output block described by a ZerosAndPoles object"
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.Controller.Internal;
 
   extends Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2(
       discretePart(
       x_start=x_start,
       y_start={y_start},
-      ABCD=ZerosAndPoles.Conversion.toMatrices(system)));
-  parameter ZerosAndPoles system "Data defining the ZerosAndPoles object";
+      ABCD=Modelica_LinearSystems2.ZerosAndPoles.Conversion.toMatrices(system)));
+
+  parameter Modelica_LinearSystems2.ZerosAndPoles system "Data defining the ZerosAndPoles object";
   final parameter Integer nx=size(system.d1,1) + 2*size(system.d2,1)
     "Number of states";
   parameter Real x_start[nx] = zeros(nx) "Initial or guess values of states"

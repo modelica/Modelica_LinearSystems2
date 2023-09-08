@@ -4,7 +4,6 @@ function conversionToZerosAndPolesSISO
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.ZerosAndPoles;
 
   input Boolean systemOnFile=false
     "True, if state space system is defined on file"
@@ -23,8 +22,8 @@ function conversionToZerosAndPolesSISO
 
 protected
   StateSpace ss = if systemOnFile then
-    Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName, matrixName) else
-    Modelica_LinearSystems2.StateSpace(A=A, B=B, C=C, D=D);
+    StateSpace.Import.fromFile(fileName, matrixName) else
+    StateSpace(A=A, B=B, C=C, D=D);
   Modelica_LinearSystems2.ZerosAndPoles zp;
 
 algorithm

@@ -16,7 +16,7 @@ protected
     analogFilter=analogFilter);
 
 algorithm
-  Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(tf_filter);
+  ZerosAndPoles.Plot.bode(tf_filter);
   ok := true;
 
   annotation (__Dymola_interactive=true);

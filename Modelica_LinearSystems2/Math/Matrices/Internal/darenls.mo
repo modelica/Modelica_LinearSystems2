@@ -4,15 +4,13 @@ function darenls
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Polynomial;
 
   input Real A[:,size(A, 1)];
   input Real B[size(A, 1),:];
   input Real R[size(B, 2),size(B, 2)]=identity(size(B, 2));
   input Real Q[size(A, 1),size(A, 2)]=identity(size(A, 1));
   input Real X0[size(A, 1),size(A, 2)];
-  input Real eps=Modelica_LinearSystems2.Math.Matrices.Internal.frobeniusNorm(
-                                        A)*1e-9;
+  input Real eps=Matrices.Internal.frobeniusNorm(A)*1e-9;
 
   output Real X[size(X0, 1),size(X0, 2)];
   output Real r;
@@ -46,11 +44,11 @@ algorithm
       Rk:=AT*Xk*A - Xk + Q - AT*Xk*B*Hk*Xk*A;
 
       Nk := Matrices.dlyapunov(Ak, -Rk);
-//  Modelica_LinearSystems2.Math.Matrices.printMatrix(Nk,6,"Nk");
+//  Matrices.printMatrix(Nk,6,"Nk");
 
       Sk := B*Hk;
       Vk :=transpose(Ak)*Nk*Sk*Nk*Ak;
-//   Modelica_LinearSystems2.Math.Matrices.printMatrix(Vk,6,"Vk");
+//   Matrices.printMatrix(Vk,6,"Vk");
       tk := Matrices.Internal.findLocal_tk(Rk, Vk);
       stop := eps > Matrices.Internal.frobeniusNorm(tk*Nk)/Matrices.Internal.frobeniusNorm(Xk);
       Xk := Xk + tk*Nk;

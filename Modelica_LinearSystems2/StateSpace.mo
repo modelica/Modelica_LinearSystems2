@@ -1394,7 +1394,6 @@ ss;
       encapsulated function printHead1
         "Print the heading of document for characteristics in html format on file"
         import Modelica;
-        import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
         import Modelica_LinearSystems2.StateSpace;
@@ -1499,7 +1498,6 @@ ss;
       encapsulated function printHead2a
         "Print the heading of document for eigenvalues in html format on file"
         import Modelica;
-        import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
         import Modelica_LinearSystems2.StateSpace;
@@ -1570,7 +1568,6 @@ ss;
       encapsulated function printHead2b
         "Print the heading of document for conjugated complex pairs in html format on file"
         import Modelica;
-        import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
 
@@ -1631,7 +1628,6 @@ ss;
       encapsulated function printHead3
         "Print the heading of document for description in html format on file"
         import Modelica;
-        import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
 
@@ -1788,7 +1784,6 @@ ss;
       encapsulated function printTab1
         "Print the table with real eigenvalues in html format on file"
         import Modelica;
-        import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
         import Modelica_LinearSystems2.Internal.Eigenvalue;
@@ -2381,7 +2376,6 @@ ss;
         import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
-        import Modelica_LinearSystems2.Internal.Eigenvalue;
         import Complex;
 
         input Complex systemZeros[:];
@@ -2703,7 +2697,6 @@ listed in the last column might be not the most relevant one.
 
       import Modelica;
       import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       input TimeResponse response=TimeResponse.Step "Type of time response";
@@ -2888,7 +2881,6 @@ starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated
     encapsulated function impulseResponse
       "Calculate the impulse time response of a state space system"
 
-      import Modelica;
       import Modelica_LinearSystems2;
 
       // Input/Output declarations of time response functions:
@@ -2966,7 +2958,6 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Impu
     encapsulated function stepResponse
       "Calculate the step time response of a state space system"
 
-      import Modelica;
       import Modelica_LinearSystems2;
 
       // Input/Output declarations of time response functions:
@@ -3045,7 +3036,6 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Step
     encapsulated function rampResponse
       "Calculate the ramp time response of a state space system"
 
-      import Modelica;
       import Modelica_LinearSystems2;
 
       // Input/Output declarations of time response functions:
@@ -3124,7 +3114,6 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Ramp
     encapsulated function initialResponse
       "Calculate the time response of a state space system for given initial condition and zero inputs"
 
-      import Modelica;
       import Modelica_LinearSystems2;
 
       input Real x0[:]=fill(0, 0) "Initial state vector";
@@ -3207,17 +3196,14 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Init
 
     encapsulated function numeratorDegree
       "Return numerator degree of the corresponding transfer function"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input Modelica_LinearSystems2.StateSpace ss "State space system";
+      input StateSpace ss "State space system";
       output Integer result "Degree of numerator polynomial";
 
     protected
-      Modelica_LinearSystems2.TransferFunction tf=if StateSpace.Internal.isSISO(
+      TransferFunction tf=if StateSpace.Internal.isSISO(
           ss) then StateSpace.Conversion.toTransferFunction(ss) else
           TransferFunction(1);
 
@@ -3263,16 +3249,13 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
 
     encapsulated function denominatorDegree
       "Return denominator degree of the corresponding transfer function"
-      import Modelica;
-      import Modelica_LinearSystems2;
-      import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input Modelica_LinearSystems2.StateSpace ss "State space system";
+      input StateSpace ss "State space system";
       output Integer result "Degree of denominator polynomial";
     protected
-      Modelica_LinearSystems2.TransferFunction tf=if StateSpace.Internal.isSISO(
+      TransferFunction tf=if StateSpace.Internal.isSISO(
           ss) then StateSpace.Conversion.toTransferFunction(ss) else
           TransferFunction(1);
 
@@ -3319,11 +3302,9 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
     encapsulated function evaluate
       "Evaluate the corresponding transfer function at a given (complex) value of s"
 
-      import Modelica;
       import Modelica.ComplexMath;
       import Modelica.ComplexMath.j;
       import Complex;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.StateSpace;
@@ -3396,7 +3377,6 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s), whi
 
     encapsulated function zerosAndPoles
       "Calculate zeros and poles of the TransferFunction corresponding to a state space representation"
-      import Modelica;
       import Complex;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
@@ -4865,7 +4845,6 @@ der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</str
       encapsulated function printHead1
         "Print the heading of document for characteristics in html format on file"
         import Modelica;
-        import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
         import Modelica_LinearSystems2.StateSpace;
@@ -4970,7 +4949,6 @@ der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</str
       encapsulated function printHead2a
         "Print the heading of document for eigenvalues in html format on file"
         import Modelica;
-        import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
         import Modelica_LinearSystems2.StateSpace;
@@ -5041,7 +5019,6 @@ der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</str
       encapsulated function printHead2b
         "Print the heading of document for conjugated complex pairs in html format on file"
         import Modelica;
-        import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
 
@@ -5102,7 +5079,6 @@ der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</str
       encapsulated function printHead3
         "Print the heading of document for description in html format on file"
         import Modelica;
-        import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
 
@@ -5259,7 +5235,6 @@ der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</str
       encapsulated function printTab1
         "Print the table with real eigenvalues in html format on file"
         import Modelica;
-        import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
         import Modelica_LinearSystems2.Internal.Eigenvalue;
@@ -5852,7 +5827,6 @@ der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</str
         import Modelica.Utilities.Strings;
         import Modelica_LinearSystems2;
         import Modelica.Utilities.Streams.print;
-        import Modelica_LinearSystems2.Internal.Eigenvalue;
         import Complex;
 
         input Complex systemZeros[:];
@@ -7918,7 +7892,7 @@ StateSpace.Plot.<strong>bodeMIMO</strong>(
       input Modelica.Units.SI.Time dt=0 "Sample time";
       input Modelica.Units.SI.Time tSpan=0 "Simulation time span";
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
+      input TimeResponse response = TimeResponse.Step;
 
       input Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
 
@@ -8047,8 +8021,6 @@ This function plots the time response of a state space system. The character of 
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
-
       input StateSpace ss "State space system";
       input Modelica.Units.SI.Time dt=0 "Sample time";
       input Modelica.Units.SI.Time tSpan=0 "Simulation time span";
@@ -8064,10 +8036,10 @@ This function plots the time response of a state space system. The character of 
              "Impulse response"));
 
     protected
-      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse "type of time response";
+      TimeResponse response = TimeResponse.Impulse "type of time response";
     algorithm
 
-      Modelica_LinearSystems2.StateSpace.Plot.timeResponse(
+      StateSpace.Plot.timeResponse(
             ss=ss,
             dt=dt,
             tSpan=tSpan,
@@ -8129,8 +8101,6 @@ for each system corresponding to the transition matrix. It is based on <a href=\
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
-
       input StateSpace ss "State space system";
       input Modelica.Units.SI.Time dt=0 "Sample time";
       input Modelica.Units.SI.Time tSpan=0 "Simulation time span";
@@ -8145,10 +8115,10 @@ for each system corresponding to the transition matrix. It is based on <a href=\
             Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
              "Step response"));
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
+      input TimeResponse response = TimeResponse.Step "type of time response";
 
     algorithm
-      Modelica_LinearSystems2.StateSpace.Plot.timeResponse(
+      StateSpace.Plot.timeResponse(
             ss=ss,
             dt=dt,
             tSpan=tSpan,
@@ -8208,8 +8178,6 @@ This function plots the step responses of a state space system for each system c
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
-
       input StateSpace ss "State space system";
       input Modelica.Units.SI.Time dt=0 "Sample time";
       input Modelica.Units.SI.Time tSpan=0 "Simulation time span";
@@ -8224,10 +8192,10 @@ This function plots the step responses of a state space system for each system c
             Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
              "Ramp response"));
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp "type of time response";
+      input TimeResponse response = TimeResponse.Ramp "type of time response";
 
     algorithm
-      Modelica_LinearSystems2.StateSpace.Plot.timeResponse(
+      StateSpace.Plot.timeResponse(
             ss=ss,
             dt=dt,
             tSpan=tSpan,
@@ -8286,8 +8254,6 @@ This function plots the ramp responses of a state space system for each system c
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
-
       input StateSpace ss "State space system";
       input Modelica.Units.SI.Time dt=0 "Sample time";
       input Modelica.Units.SI.Time tSpan=0 "Simulation time span";
@@ -8302,10 +8268,10 @@ This function plots the ramp responses of a state space system for each system c
             Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(heading=
              "Initial response"));
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "type of time response";
+      input TimeResponse response = TimeResponse.Initial "type of time response";
     algorithm
 
-      Modelica_LinearSystems2.StateSpace.Plot.timeResponse(
+      StateSpace.Plot.timeResponse(
             ss=ss,
             dt=dt,
             tSpan=tSpan,
@@ -8370,7 +8336,6 @@ This function plots the initial responses of a state space system for the initia
 
     encapsulated function toZerosAndPoles
       "Generate a zeros-and-poles representation from a SISO state space representation"
-      import Modelica.Utilities.Streams.print;
 
       import Modelica;
       import Complex;
@@ -8654,9 +8619,7 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
 
     encapsulated function toZerosAndPolesMIMO
       "Generate a zeros-and-poles representation from a MIMO state space representation"
-      import Modelica.Utilities.Streams.print;
       import Modelica;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.StateSpace;
 
@@ -8954,9 +8917,7 @@ if inverted=true. Matrix T has to be invertible. The transformed system has the 
     encapsulated function toObservabilityForm
       "Perform the similarity transformation to the obervability canonical form"
       import Modelica;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Internal.Streams;
 
       input StateSpace ss "State space system";
       output StateSpace tss(
@@ -8974,7 +8935,7 @@ if inverted=true. Matrix T has to be invertible. The transformed system has the 
     algorithm
       assert(size(ss.C, 1) == 1 and size(ss.B, 2) == 1,
         "Calculation of controllable form fails for systems with more than 1 inputs or outputs");
-      assert(Modelica_LinearSystems2.StateSpace.Analysis.isObservable(ss),
+      assert(StateSpace.Analysis.isObservable(ss),
         "transformation ist not realizable since the system ist not obersvable");
 
       V[:, 1] := Modelica.Math.Matrices.solve(
@@ -9080,9 +9041,7 @@ The transformed system has the same eigenvalues.
     encapsulated function toControllabilityForm
       "Perform the similarity transformation to the controllability canonical form"
       import Modelica;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
-      import Modelica_LinearSystems2.Internal.Streams;
 
       input StateSpace ss "State space system";
       output StateSpace tss(
@@ -9100,7 +9059,7 @@ The transformed system has the same eigenvalues.
     algorithm
       assert(size(ss.C, 1) == 1 and size(ss.B, 2) == 1,
         "Calculation of controllable form fails for systems with more than 1 inputs or outputs");
-      assert(Modelica_LinearSystems2.StateSpace.Analysis.isControllable(ss),
+      assert(StateSpace.Analysis.isControllable(ss),
         "transformation ist not realizable since the system ist not controllable");
 
       V[1, :] := Modelica.Math.Matrices.solve(transpose(
@@ -12308,8 +12267,6 @@ k = ---------- * ----------------------
       import Modelica_LinearSystems2.Math.Matrices;
       import Modelica_LinearSystems2.Math.Vectors;
 
-      import Modelica.Utilities.Streams.print;
-
       input Real A[:, :];
       input Real B[:, :];
       input Real C[:, :];
@@ -12496,7 +12453,6 @@ k = ---------- * ----------------------
 
     encapsulated function reducedCtrSystem
       "Calculate the controllable part of a SISO system"
-      import Modelica.Utilities.Streams.print;
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
@@ -12980,12 +12936,12 @@ and results in
     algorithm
       // Check that system has inputs and outputs
       if size(ss.B, 2) == 0 then
-        Modelica.Utilities.Streams.print(
+        print(
           "\n... Not possible to plot transfer function because system has no inputs."
            + "\n... Call of Plot.bodeSISO is ignored.\n");
         return;
       elseif size(ss.C, 1) == 0 then
-        Modelica.Utilities.Streams.print(
+        print(
           "\n... Not possible to plot transfer function because system has no outputs."
            + "\n... Call of Plot.bodeSISO is ignored.\n");
         return;
@@ -13116,11 +13072,11 @@ vector <strong>u</strong> to the iy'th element of the output vector <strong>y</s
     algorithm
       // Check that system has inputs and outputs
       if size(ss.B, 2) == 0 then
-        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no inputs."
+        print("\n... Not possible to plot transfer function because system has no inputs."
            + "\n... Call of Plot.bodeMIMO is ignored.\n");
         return;
       elseif size(ss.C, 1) == 0 then
-        Modelica.Utilities.Streams.print("\n... Not possible to plot transfer function because system has no outputs."
+        print("\n... Not possible to plot transfer function because system has no outputs."
            + "\n... Call of Plot.bodeMIMO is ignored.\n");
         return;
       end if;

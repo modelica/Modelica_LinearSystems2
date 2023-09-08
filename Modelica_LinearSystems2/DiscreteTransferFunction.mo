@@ -400,7 +400,6 @@ operator record DiscreteTransferFunction
 
   encapsulated function z "Generate the discrete transfer function z"
     import Modelica;
-    import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica_LinearSystems2.DiscreteTransferFunction;
     input Modelica.Units.SI.Time Ts=0;
     output DiscreteTransferFunction dtf(n={1,0}, d={1},Ts=Ts) "z";
@@ -430,14 +429,13 @@ DiscreteTransferFunction dtf = z/(3*z^2 + 2*z +2)
     encapsulated function timeResponse
       "Calculate the time response of a discrete transfer function"
 
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       extends Modelica_LinearSystems2.Internal.timeResponseMask_tf_discrete;// Input/Output declarations of discrete time response functions
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
+      input TimeResponse response = TimeResponse.Step;
       input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
         "Initial state vector";
 
@@ -774,8 +772,6 @@ The outputs y and x of the discrete state space systrem are calculated for each 
 
     encapsulated function denominatorDegree
       "Return denominator degree of a discrete transfer function"
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
 
       input DiscreteTransferFunction dtf
@@ -967,18 +963,17 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
 
     encapsulated function timeResponse
       "Plot the time response of a system represented by a discrete transfer function. The response type is selectable"
-      import Modelica;
+
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
-
       import Modelica_LinearSystems2.Utilities.Plot;
 
       input Modelica_LinearSystems2.DiscreteTransferFunction dtf;
     //  input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "Type of time response";
+      input TimeResponse response = TimeResponse.Step "Type of time response";
       input Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
           DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
         "Initial state vector";
@@ -1030,10 +1025,9 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
 
     encapsulated function impulse
       "Impulse response plot of a discrete transfer function"
-      import Modelica;
+
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.Utilities.Plot;
 
       input DiscreteTransferFunction dtf "zeros-and-poles transfer function";
       input Real tSpan=0 "Simulation time span [s]";
@@ -1050,7 +1044,7 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
         "Initial state vector";
     algorithm
       // set sample time
-      Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
+      DiscreteTransferFunction.Plot.timeResponse(
           dtf=dtf,
           tSpan=tSpan,
           response=response,
@@ -1064,11 +1058,10 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
 
     encapsulated function step
       "Step response plot of a discrete transfer function"
-      import Modelica;
+
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
-      import Modelica_LinearSystems2.Utilities.Plot;
 
       input DiscreteTransferFunction dtf;
       input Real tSpan=0 "Simulation time span [s]";
@@ -1078,7 +1071,7 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
           heading="Step response of  dtf = " + String(dtf)));
 
     protected
-      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
+      TimeResponse response = TimeResponse.Step "type of time response";
       Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
           DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
         "Initial state vector";
@@ -1103,8 +1096,6 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
-
       input DiscreteTransferFunction dtf;
       input Real tSpan=0 "Simulation time span [s]";
 
@@ -1113,12 +1104,12 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
           heading="Ramp response of  dtf = " + String(dtf)));
 
     protected
-      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp "type of time response";
+      TimeResponse response = TimeResponse.Ramp "type of time response";
       Real x0[DiscreteTransferFunction.Analysis.denominatorDegree(dtf)]=zeros(
           DiscreteTransferFunction.Analysis.denominatorDegree(dtf))
         "Initial state vector";
     algorithm
-      Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
+      DiscreteTransferFunction.Plot.timeResponse(
         dtf=dtf,
         tSpan=tSpan,
         response=response,
@@ -1137,12 +1128,10 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
       import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
-
-      input Modelica_LinearSystems2.DiscreteTransferFunction dtf;
+      input DiscreteTransferFunction dtf;
       input Real tSpan=0 "Simulation time span [s]";
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "type of time response";
+      input TimeResponse response = TimeResponse.Initial "type of time response";
       input Real y0 "Initial output (for initial condition plot)";
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
@@ -1158,7 +1147,7 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
           dss.C,
           vector(y0)) "Initial state vector (for initial condition plot)";
     algorithm
-      Modelica_LinearSystems2.DiscreteTransferFunction.Plot.timeResponse(
+      DiscreteTransferFunction.Plot.timeResponse(
             dtf=dtf,
             tSpan=tSpan,
             response=response,
@@ -1356,7 +1345,6 @@ with
 
       import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.Math.Polynomial;
 
       input String fileName="dtf.mat" "Name of the transfer function data file" annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                           caption="transfer function data file")));

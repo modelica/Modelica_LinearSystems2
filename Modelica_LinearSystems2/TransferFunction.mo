@@ -39,7 +39,6 @@ operator record TransferFunction
       "Generate a TransferFunction data record from a set of zeros and poles"
 
       import Complex;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
 
@@ -120,7 +119,7 @@ follow each other as above. An error occurs if this is not the case.
 
     function fromPolynomials
       "Generate a TransferFunction data record from a numerator and denominator polynomial"
-      import Modelica;
+
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
 
@@ -279,7 +278,7 @@ follow each other as above. An error occurs if this is not the case.
   end 'String';
 
   encapsulated function s "Generate the transfer function s"
-    import Modelica_LinearSystems2.Math.Polynomial;
+
     import Modelica_LinearSystems2.TransferFunction;
 
     output TransferFunction tf(n={1,0}, d={1}) "s";
@@ -315,19 +314,17 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
       "Make a system analysis based on the poles and zeros of the system"
 
       import Modelica;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Internal.AnalyseOptions;
       import Modelica_LinearSystems2.Internal.AnalyseOptions2;
-      import Modelica_LinearSystems2.Internal.Eigenvalue;
 
       input TransferFunction tf(uName="u", yName="y")
         "transfer function of a system";
 
-      input AnalyseOptions2 analyseOptions2=
-          Modelica_LinearSystems2.Internal.AnalyseOptions2(printControllability=
-           false, printObservability=false);
+      input AnalyseOptions2 analyseOptions2 = AnalyseOptions2(
+        printControllability=false,
+        printObservability=false);
 
       input String fileName="eigenvalues.html"
         "Name of html-file that contains eigenvalue table";
@@ -341,8 +338,7 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
 
       input StateSpace ss=StateSpace(tf);
 
-      Modelica_LinearSystems2.Internal.AnalyseOptions analyseOptions=
-          AnalyseOptions(
+      AnalyseOptions analyseOptions = AnalyseOptions(
               plotEigenValues=analyseOptions2.plotEigenValues,
               plotInvariantZeros=analyseOptions2.plotInvariantZeros,
               plotStepResponse=analyseOptions2.plotStepResponse,
@@ -367,12 +363,12 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
       Modelica.Utilities.Files.removeFile(fileName);
       Modelica.Utilities.Files.removeFile(dummyFileName);
       if analyseOptions.printSystem and size(ss.A,1) <= 50 then
-        Modelica_LinearSystems2.TransferFunction.Analysis.analysis.printSystem(
+        TransferFunction.Analysis.analysis.printSystem(
             tf,
             fileName,
             systemName,
             description);
-        Modelica_LinearSystems2.TransferFunction.Analysis.analysis.printSystem(
+        TransferFunction.Analysis.analysis.printSystem(
             tf,
             dummyFileName,
             systemName,
@@ -395,7 +391,6 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
         import Modelica;
         import Modelica.Utilities.Streams.print;
         import Modelica_LinearSystems2.TransferFunction;
-        import Modelica_LinearSystems2;
 
         input TransferFunction tf "transfer function to analyze";
         input String fileName="systemAnalysis.html"
@@ -428,7 +423,6 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
     encapsulated function timeResponse
       "Calculate the time response of a transfer function"
 
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
@@ -495,7 +489,6 @@ x are calculated for each time step t=k*dt.
 
     encapsulated function impulseResponse "Calculate the impulse time response"
 
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.TransferFunction;
 
@@ -503,12 +496,12 @@ x are calculated for each time step t=k*dt.
       extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
 
     algorithm
-      (y,t,x_continuous) :=Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
+      (y,t,x_continuous) :=TransferFunction.Analysis.timeResponse(
             tf=tf,
             dt=dt,
             tSpan=tSpan,
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse,
-            x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
+            x0=zeros(TransferFunction.Analysis.denominatorDegree(tf)));
 
       annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -567,12 +560,12 @@ and x are calculated for each time step t=k*dt.
       extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
 
     algorithm
-      (y,t,x_continuous) :=Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
+      (y,t,x_continuous) :=TransferFunction.Analysis.timeResponse(
             tf=tf,
             dt=dt,
             tSpan=tSpan,
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step,
-            x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
+            x0=zeros(TransferFunction.Analysis.denominatorDegree(tf)));
 
       annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -634,12 +627,12 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
       extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
 
     algorithm
-      (y,t,x_continuous) :=Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
+      (y,t,x_continuous) :=TransferFunction.Analysis.timeResponse(
             tf=tf,
             dt=dt,
             tSpan=tSpan,
             response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp,
-            x0=zeros(Modelica_LinearSystems2.TransferFunction.Analysis.denominatorDegree(tf)));
+            x0=zeros(TransferFunction.Analysis.denominatorDegree(tf)));
 
       annotation(__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
@@ -704,7 +697,7 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
       extends Modelica_LinearSystems2.Internal.timeResponseMask2_tf;
 
     algorithm
-      (y,t,x_continuous) :=Modelica_LinearSystems2.TransferFunction.Analysis.timeResponse(
+      (y,t,x_continuous) :=TransferFunction.Analysis.timeResponse(
             tf=tf,
             dt=dt,
             tSpan=tSpan,
@@ -763,8 +756,7 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
     end initialResponse;
 
     encapsulated function numeratorDegree "Return numerator degree"
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Polynomial;
+
       import Modelica_LinearSystems2.TransferFunction;
 
       input TransferFunction tf "transfer function of a system";
@@ -803,8 +795,7 @@ Function Analysis.<strong>numeratorDegree</strong> calculates the degree of the 
     end numeratorDegree;
 
     encapsulated function denominatorDegree "Return denominator degree"
-      import Modelica;
-      import Modelica_LinearSystems2.Math.Polynomial;
+
       import Modelica_LinearSystems2.TransferFunction;
 
       input TransferFunction tf "transfer function of a system";
@@ -848,7 +839,6 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
       import Modelica;
       import Modelica.ComplexMath.j;
       import Complex;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
 
@@ -897,7 +887,6 @@ The transfer function G(s)=N(s)/D(s) is evaluated by calculating the numerator p
 
     encapsulated function zerosAndPoles
       "Calculate zeros and poles of a transfer function"
-      import Modelica;
       import Complex;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
@@ -967,9 +956,8 @@ public
     function eigenValues
       "Calculate the eigenvalues of a linear transfer function system and write them in a complex vector"
     //encapsulated function eigenValues
-      import Modelica;
+
       import Complex;
-      import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.StateSpace;
 
@@ -1013,7 +1001,6 @@ Calculate the eigenvalues of the corresponding state space representation of a t
 
     encapsulated function eigenVectors
       "Calculate the right eigenvectors of the state space system corresponding to a transfer function and write them columnwise in a matrix. Optionally, the eigenvalues are computed"
-      import Modelica;
       import Complex;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
@@ -1068,10 +1055,8 @@ i.e. v1 = |                 |,   v2 = |                   |
     encapsulated function invariantZeros
       "Compute invariant zeros of linear transfer function"
 
-      import Modelica;
       import Complex;
       import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
 
       input TransferFunction tf "transfer function of a system";
@@ -1111,7 +1096,6 @@ Computes the invariant zeros of the corresponding state space representation of 
     encapsulated function dcGain
       "Return steady state gain k (for a stable system: k = value of y at infinite time for a step input)"
 
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
@@ -1322,9 +1306,6 @@ The transfer function is detectable if all unstable poles are observable.
 
     encapsulated function controllabilityMatrix
       "Calculate the controllability matrix [B, A*B, ..., A^(n-1)*B] of a transfer function"
-
-      import Modelica;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
@@ -1376,8 +1357,6 @@ of a transfer function.
 
     encapsulated function observabilityMatrix
       "Calculate the observability matrix of a transfer function"
-      import Modelica;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
@@ -1609,10 +1588,8 @@ and results in
 
     encapsulated function bode "Plot transfer function as bode plot"
       import Modelica;
-      import Modelica.Utilities.Strings;
       import Modelica.ComplexMath;
       import Complex;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.Utilities.Plot;
@@ -1630,8 +1607,8 @@ and results in
       input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
       input Boolean phase=true "= true, to plot phase" annotation(choices(checkBox=true));
 
-      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
-            Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot: "
+      extends Internal.PartialPlotFunction(defaultDiagram=
+            Internal.DefaultDiagramBodePlot(heading="Bode plot: "
              + String(tf)));
 
       input Boolean Hz=true
@@ -2491,7 +2468,7 @@ is defined slightly differently.
 
       import Modelica.Utilities.Streams;
       import Modelica_LinearSystems2.TransferFunction;
-      import Modelica_LinearSystems2.Math.Polynomial;
+
       input String fileName="tf.mat" "Name of the transfer function data file" annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                         caption="transfer function data file")));
       input String numName="n" "Name of the numenator of the transfer function";

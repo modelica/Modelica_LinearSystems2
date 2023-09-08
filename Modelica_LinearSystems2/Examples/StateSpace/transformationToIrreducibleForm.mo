@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Examples.StateSpace;
 function transformationToIrreducibleForm
   "Example to compute the minimal state space realization of a given SISO state space realization"
   extends Modelica.Icons.Function;
-  import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.StateSpace;
 
   input String fileName=DataDir + "abcd_siso2.mat"
@@ -32,14 +31,13 @@ function transformationToIrreducibleForm
 protected
   Boolean systemOnFile=fileName <> "NoName";
   StateSpace ss=if systemOnFile then
-      Modelica_LinearSystems2.StateSpace.Import.fromFile(  fileName) else
+      Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName) else
       Modelica_LinearSystems2.StateSpace(
       A=A,
       B=B,
       C=C,
       D=D);
-  StateSpace sso=Modelica_LinearSystems2.StateSpace.Transformation.toIrreducibleForm(
-                                                                 ss);
+  StateSpace sso=Modelica_LinearSystems2.StateSpace.Transformation.toIrreducibleForm(ss);
 
 algorithm
   Modelica.Utilities.Streams.print("original system:\n" + String(ss));

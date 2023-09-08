@@ -3,9 +3,7 @@ function analysisControllability
   "Example to check controllability of a state space system"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.Utilities.Types.StaircaseMethod;
 
@@ -29,7 +27,7 @@ function analysisControllability
 
 protected
   StateSpace ss = if systemOnFile then
-    Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName) else ssi;
+    StateSpace.Import.fromFile(fileName) else ssi;
   StaircaseMethod method;
   Boolean isControllable;
   Boolean isSISO=StateSpace.Internal.isSISO(ss);
@@ -42,25 +40,25 @@ algorithm
 
   if isSISO then
     if isControllable then
-      Modelica.Utilities.Streams.print("pair (A, B) is controllable");
+      print("pair (A, B) is controllable");
     else
-      Modelica.Utilities.Streams.print("pair (A, B) is not controllable");
+      print("pair (A, B) is not controllable");
     end if;
   else
     if isControllable then
-      Modelica.Utilities.Streams.print(
+      print(
         "pair (A, B) is controllable by QR factorzation");
     else
-      Modelica.Utilities.Streams.print(
+      print(
         "pair (A, B) is not controllable by QR factorzation");
     end if;
 
     method := StaircaseMethod.SVD;
     isControllable := StateSpace.Analysis.isControllable(ss, method);
     if isControllable then
-      Modelica.Utilities.Streams.print("pair (A, B) is controllable by SVD");
+      print("pair (A, B) is controllable by SVD");
     else
-      Modelica.Utilities.Streams.print("pair (A, B) is not controllable by SVD");
+      print("pair (A, B) is not controllable by SVD");
     end if;
   end if;
 

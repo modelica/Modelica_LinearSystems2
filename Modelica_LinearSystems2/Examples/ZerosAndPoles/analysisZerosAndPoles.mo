@@ -7,7 +7,6 @@ encapsulated function analysisZerosAndPoles
   import Modelica.Utilities.Streams.print;
   import Modelica.ComplexMath.j;
   import Complex;
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.Internal.printComplexVector;
 
@@ -31,9 +30,9 @@ protected
 algorithm
   (numeratorZeros2,denominatorZeros2,k) := ZerosAndPoles.Analysis.zerosAndPoles(zp);
 
-  Modelica.Utilities.Streams.print("ZerosAndPoles-TransferFunction1 = " +
+  print("ZerosAndPoles-TransferFunction1 = " +
     String(zp));
-  Modelica.Utilities.Streams.print("ZerosAndPoles-TransferFunction2 = " +
+  print("ZerosAndPoles-TransferFunction2 = " +
     String(zp2));
   printComplexVector("numeratorZeros1", numeratorZeros1);
   printComplexVector("\nnumeratorZeros2", numeratorZeros2);
