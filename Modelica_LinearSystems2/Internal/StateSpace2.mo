@@ -308,7 +308,7 @@ This package contains the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.sub
   end '==';
 
   encapsulated package Import
-    "Utilitiy functions to import StaeSpace representations"
+    "Utility functions to import state space representations"
     extends Modelica.Icons.Package;
     import Modelica;
 

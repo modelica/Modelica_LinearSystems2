@@ -1272,7 +1272,7 @@ DiscreteZerosAndPoles constructor.
       Real b[na];//=vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
       Real d;//=b[na]/a[na];
     algorithm
-      assert(nb<=na,"DiscreteTransferFunction\n" +String(dtf) +"\nis acausal and cannot be transformed to DiscreteStaeSpace in function \"Conversion.toDiscreteStateSpace()\"");
+      assert(nb<=na,"DiscreteTransferFunction\n" +String(dtf) +"\nis acausal and cannot be transformed to DiscreteStateSpace in function \"Conversion.toDiscreteStateSpace()\"");
       b := vector([Vectors.reverse(tf.n); zeros(na - nb, 1)]);
       d := b[na]/a[na];
       if nx == 0 then
