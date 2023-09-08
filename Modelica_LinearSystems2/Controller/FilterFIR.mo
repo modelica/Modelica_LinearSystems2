@@ -13,7 +13,7 @@ block FilterFIR "Discrete finite impulse response low or high pass filter"
   parameter Types.Window window=Modelica_LinearSystems2.Controller.Types.Window.Rectangle
     "Type of window" annotation(Dialog(group="FIR filter design",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window));
   parameter Real beta=2.12 "Beta-Parameter for Kaiser-window"
-    annotation(Dialog(group="FIR filter design",enable=blockType<>BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window and window==Modelica_LinearSystems2.Controller.Types.Window.Kaiser));
+    annotation(Dialog(group="FIR filter design",enable=blockType<>Types.BlockTypeWithGlobalDefault.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Window and window==Modelica_LinearSystems2.Controller.Types.Window.Kaiser));
   parameter Real a[:]={1,1} "FIR filter coefficients" annotation(Dialog(group="FIR filter defined by coefficient vector",enable=blockType<>Modelica_LinearSystems2.Controller.Types.BlockType.Continuous and specType==Modelica_LinearSystems2.Controller.Types.FIRspec.Coefficients));
 
 protected
