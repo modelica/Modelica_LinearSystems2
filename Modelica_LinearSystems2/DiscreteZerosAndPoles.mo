@@ -149,7 +149,6 @@ discrete zeros-and-poles transfer function is derived from DiscreteStateSpace by
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.Internal;
-      import Modelica.Utilities.Streams.print;
 
       input Complex z[:]=fill(Complex(0), 0)
         "Zeros (Complex vector of numerator zeros)";
@@ -715,7 +714,6 @@ which is equal to
     import Modelica_LinearSystems2;
     import Modelica_LinearSystems2.DiscreteZerosAndPoles;
     import Modelica_LinearSystems2.ZerosAndPoles;
-    import Modelica_LinearSystems2.Utilities.Types.Method;
 
     input DiscreteZerosAndPoles dzp
       "DiscreteZerosAndPoles transfer function to be transformed in a String representation";
@@ -824,14 +822,13 @@ DiscreteZerosAndPoles dzp = q/(q^2 + q + 1)/(q + 1)
     encapsulated function timeResponse
       "Calculate the time response of a discrete zeros-and-poles transfer function"
 
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
       extends Modelica_LinearSystems2.Internal.timeResponseMask_zp_discrete;  // Input/Output declarations of discrete time response functions
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
+      input TimeResponse response = TimeResponse.Step;
       input Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
         "Initial state vector";
 
@@ -1384,7 +1381,6 @@ numerator polynomial N(z) and the denominator polynomial D(q).
       import Modelica;
       import Modelica.ComplexMath;
       import Complex;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.Internal;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
@@ -1404,8 +1400,8 @@ numerator polynomial N(z) and the denominator polynomial D(q).
         annotation(choices(checkBox=true));
       input Boolean phase=true "= true, to plot the pase of dzp" annotation(choices(checkBox=true));
 
-      extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
-        defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(
+      extends Internal.PartialPlotFunction(
+        defaultDiagram=Internal.DefaultDiagramBodePlot(
           heading="Bode plot: " + String(dzp)));
 
       input Boolean Hz=true
@@ -1564,17 +1560,17 @@ This function plots the bode-diagram of a DiscreteZerosAndPoles transfer functio
 
     encapsulated function timeResponse
       "Plot the time response of a system represented by a discrete zeros-and-poles transfer function. The response type is selectable"
-      import Modelica;
+
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
       import Modelica_LinearSystems2.Utilities.Plot;
 
-      input Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
+      input DiscreteZerosAndPoles dzp;
     //  input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "Type of time response";
+      input TimeResponse response = TimeResponse.Step "Type of time response";
       input Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
         DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
         "Initial state vector";
@@ -1675,7 +1671,6 @@ i.e. Impulse, Step, Ramp, or Initial.
       import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
-      import Modelica_LinearSystems2.Utilities.Plot;
 
       input DiscreteZerosAndPoles dzp "zeros-and-poles transfer function";
       input Real tSpan=0 "Simulation time span [s]";
@@ -1692,7 +1687,7 @@ i.e. Impulse, Step, Ramp, or Initial.
 
     algorithm
     // set sample time
-      Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.timeResponse(
+      DiscreteZerosAndPoles.Plot.timeResponse(
         dzp=dzp,
         tSpan=tSpan,
         response=response,
@@ -1745,12 +1740,10 @@ This function plots the impulse response of a discrete zeros-and-poles transfer 
 
     encapsulated function step
       "Step response plot of a discrete zeros-and-poles transfer function"
-      import Modelica;
+
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
 
       input DiscreteZerosAndPoles dzp;
       input Real tSpan=0 "Simulation time span [s]";
@@ -1760,7 +1753,7 @@ This function plots the impulse response of a discrete zeros-and-poles transfer 
           heading="Step response of  dzp = "+ String(dzp)));
 
     protected
-      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
+      TimeResponse response = TimeResponse.Step "Type of time response";
       Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
         DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
         "Initial state vector";
@@ -1818,12 +1811,9 @@ This function plots the step response of a transfer function. It is based on <a 
 
     encapsulated function ramp
       "Ramp response plot of a discrete zeros-and-poles transfer function"
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
 
       input DiscreteZerosAndPoles dzp;
       input Real tSpan=0 "Simulation time span [s]";
@@ -1833,13 +1823,13 @@ This function plots the step response of a transfer function. It is based on <a 
           heading="Ramp response of  dzp = " + String(dzp)));
 
     protected
-      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp "type of time response";
+      TimeResponse response = TimeResponse.Ramp "Type of time response";
 
       Real x0[DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp)]=zeros(
         DiscreteZerosAndPoles.Analysis.denominatorDegree(dzp))
         "Initial state vector";
     algorithm
-      Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.timeResponse(
+      DiscreteZerosAndPoles.Plot.timeResponse(
         dzp=dzp,
         tSpan=tSpan,
         response=response,
@@ -1896,12 +1886,10 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
 
-      import Modelica_LinearSystems2.Utilities.Plot;
-
-      input Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;
+      input DiscreteZerosAndPoles dzp;
       input Real tSpan=0 "Simulation time span [s]";
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "type of time response";
+      input TimeResponse response = TimeResponse.Initial "type of time response";
       input Real y0 "Initial output (for initial condition plot)";
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
@@ -1917,7 +1905,7 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
           dss.C,
           vector(y0)) "Initial state vector (for initial condition plot)";
     algorithm
-      Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.timeResponse(
+      DiscreteZerosAndPoles.Plot.timeResponse(
             dzp=dzp,
             tSpan=tSpan,
             response=response,
@@ -1979,15 +1967,11 @@ This function plots the initial response, i.e. the zeros input response of a zer
     function toDiscreteTransferFunction
       "Generate a DiscreteTransferFunction object from a DiscreteZerosAndPoles object"
 
-      import Modelica;
       import Complex;
       import Modelica_LinearSystems2.Math.Polynomial;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
-      import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica_LinearSystems2.ZerosAndPoles;
-      import Modelica_LinearSystems2.Internal;
 
-      input DiscreteZerosAndPoles dzp
+      input Modelica_LinearSystems2.DiscreteZerosAndPoles dzp
         "DiscreteZerosAndPoles transfer function of a system";
       output Modelica_LinearSystems2.DiscreteTransferFunction dtf;
 
@@ -2633,9 +2617,8 @@ transfer function representation.
     extends Modelica.Icons.Package;
 
     function numberOfRealZeros2 "Calculate number of real zeros"
-      import Modelica;
+
       import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
 
       input Modelica_LinearSystems2.DiscreteTransferFunction dtf
@@ -2645,9 +2628,8 @@ transfer function representation.
     end numberOfRealZeros2;
 
     function numberOfRealPoles "Calculate number of real poles"
-      import Modelica;
+
       import Modelica_LinearSystems2.Internal;
-      import Modelica_LinearSystems2.DiscreteTransferFunction;
       import Modelica_LinearSystems2.Math.Polynomial;
 
       input Modelica_LinearSystems2.DiscreteTransferFunction dtf
@@ -2752,7 +2734,6 @@ int found=0;
       "Generate a DiscreteZerosAndPoles data record by reading the polynomial coefficients from a file (default file name is pc.mat)"
 
       import Modelica.Utilities.Streams.readRealMatrix;
-      import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.DiscreteZerosAndPoles;
       import Modelica;

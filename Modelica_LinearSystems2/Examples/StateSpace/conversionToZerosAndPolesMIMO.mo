@@ -3,7 +3,6 @@ function conversionToZerosAndPolesMIMO
   "Example to compute a zeros-and-poles representation of a MIMO system from state space representation"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.StateSpace;
 
   input Boolean systemOnFile=false
@@ -22,15 +21,15 @@ function conversionToZerosAndPolesMIMO
   output Boolean ok;
 
 protected
-  Modelica_LinearSystems2.StateSpace ss = if systemOnFile then
-    Modelica_LinearSystems2.StateSpace.Import.fromFile( fileName, matrixName) else
-    Modelica_LinearSystems2.StateSpace(A=A, B=B, C=C, D=D);
+  StateSpace ss = if systemOnFile then
+    StateSpace.Import.fromFile( fileName, matrixName) else
+    StateSpace(A=A, B=B, C=C, D=D);
 
 protected
   Modelica_LinearSystems2.ZerosAndPoles zp[:,:];
 
 algorithm
-  zp := Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPolesMIMO(ss);
+  zp := StateSpace.Conversion.toZerosAndPolesMIMO(ss);
   for i1 in 1:size(ss.C, 1) loop
     for i2 in 1:size(ss.B, 2) loop
       Modelica.Utilities.Streams.print("ZerosAndPoles-TransferFunction[" + String(i1) + "," +

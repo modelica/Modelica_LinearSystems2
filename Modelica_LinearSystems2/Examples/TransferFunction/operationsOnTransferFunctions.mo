@@ -21,7 +21,7 @@ protected
   TransferFunction tf5=ZerosAndPoles.Conversion.toTransferFunction(zp2);
 
   TransferFunction tf5a=TransferFunction({1}, {1,1});
-  TransferFunction tf6=Modelica_LinearSystems2.TransferFunction.s();
+  TransferFunction tf6=TransferFunction.s();
   TransferFunction tf7=-tf1;
   TransferFunction tf8=tf1 + tf4;
 

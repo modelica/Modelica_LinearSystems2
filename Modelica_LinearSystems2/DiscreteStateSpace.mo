@@ -199,7 +199,7 @@ public
       input Modelica_LinearSystems2.StateSpace ss
         "Continuous linear state space system";
       input Modelica.Units.SI.Time Ts "Sample time";
-      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
+      input Method method = Method.Trapezoidal "Discretization method";
       output Modelica_LinearSystems2.DiscreteStateSpace dss(
         redeclare Real A[size(ss.A, 1),size(ss.A, 2)],
         redeclare Real B[size(ss.B, 1),size(ss.B, 2)],
@@ -409,7 +409,7 @@ public
       input Real C[:,size(A, 1)] "Matrix C of continuous state space system" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
       input Real D[size(C, 1),size(B, 2)] "Matrix D of continuous state space system" annotation(Dialog(group="der(x) = A*x + B*u;  y = C*x + D*u"));
       input Modelica.Units.SI.Time Ts "Sample time";
-      input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal "Discretization method";
+      input Method method = Method.Trapezoidal "Discretization method";
     //  input Modelica_LinearSystems2.Types method=Modelica_LinearSystems2.Types.Method.Trapezoidal
       output Modelica_LinearSystems2.DiscreteStateSpace dss(
         redeclare Real A[size(A, 1),size(A, 2)],
@@ -1302,7 +1302,6 @@ The eigenvalues <strong>ev</strong>_d of the discrete system are related to the 
     encapsulated function timeResponse
       "Calculate the time response of a discrete state space system"
 
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
@@ -1358,7 +1357,7 @@ The eigenvalues <strong>ev</strong>_d of the discrete system are related to the 
 
       if response == TimeResponse.Initial then
         (y[:, :, 1],x_discrete[:, :, 1]) :=
-          Modelica_LinearSystems2.DiscreteStateSpace.Internal.initialResponse1(
+          DiscreteStateSpace.Internal.initialResponse1(
           dss,
           x0,
           samples);
@@ -2416,7 +2415,6 @@ vector <strong>u</strong> to the iy'th element of the output vector <strong>y</s
     encapsulated function timeResponse
       "Plot the time response of a discrete state space system. The response type is selectable"
 
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
@@ -2457,7 +2455,7 @@ vector <strong>u</strong> to the iy'th element of the output vector <strong>y</s
       Integer loops=if response == TimeResponse.Initial then 1 else size(dss.B,2);
 
     algorithm
-      (y,t,x) := Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse(
+      (y,t,x) := DiscreteStateSpace.Analysis.timeResponse(
         dss=dss,
         tSpan=tSpan,
         response=response,
@@ -2566,11 +2564,9 @@ This function plots the time response of a discrete state space system. The char
     encapsulated function impulse
       "Impulse response plot of a discrete state space system"
 
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
-      import Modelica_LinearSystems2.Utilities.Plot;
 
       input DiscreteStateSpace dss;
       input Real tSpan=0 "Simulation time span [s]";
@@ -2585,7 +2581,7 @@ This function plots the time response of a discrete state space system. The char
           heading="Impulse response"));
 
     protected
-      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Impulse
+      TimeResponse response = TimeResponse.Impulse
         "Type of time response";
       Real tSpanVar;
 
@@ -2597,7 +2593,7 @@ This function plots the time response of a discrete state space system. The char
         tSpanVar := tSpan;
       end if;
 
-      Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse(
+      DiscreteStateSpace.Plot.timeResponse(
         dss=dss,
         tSpan=tSpanVar,
         response=response,
@@ -2651,11 +2647,9 @@ This function plots the impulse responses of a state space system for each syste
     encapsulated function step
       "Step response plot of a discrete state space system"
 
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
-      import Modelica_LinearSystems2.Utilities.Plot;
 
       input DiscreteStateSpace dss;
       input Real tSpan=0 "Simulation time span [s]";
@@ -2668,7 +2662,7 @@ This function plots the impulse responses of a state space system for each syste
              heading="Step response"));
 
     protected
-      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step
+      TimeResponse response = TimeResponse.Step
         "Type of time response";
 
       Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
@@ -2683,7 +2677,7 @@ This function plots the impulse responses of a state space system for each syste
         tSpanVar := tSpan;
       end if;
 
-      Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse(
+      DiscreteStateSpace.Plot.timeResponse(
         dss=dss,
         tSpan=tSpanVar,
         response=response,
@@ -2737,11 +2731,9 @@ This function plots the discrete step responses of a state space system for each
     encapsulated function ramp
       "Ramp response plot of a discrete state space system"
 
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
-      import Modelica_LinearSystems2.Utilities.Plot;
 
       input DiscreteStateSpace dss;
       input Real tSpan=0 "Simulation time span [s]";
@@ -2754,7 +2746,7 @@ This function plots the discrete step responses of a state space system for each
         defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
           heading="Ramp response"));
     protected
-      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Ramp "type of time response";
+      TimeResponse response = TimeResponse.Ramp "type of time response";
 
       Real x0[size(dss.A, 1)]=zeros(size(dss.A, 1)) "Initial state vector";
 
@@ -2817,12 +2809,9 @@ This function plots the ramp responses of a discrete state space system for each
 
     encapsulated function initialResponse
       "Initial condition response plot of a discrete state space system"
-      import Modelica;
       import Modelica_LinearSystems2;
       import Modelica_LinearSystems2.DiscreteStateSpace;
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
-
-      import Modelica_LinearSystems2.Utilities.Plot;
 
       input DiscreteStateSpace dss;
       input Real tSpan=0 "Simulation time span [s]";
@@ -2832,10 +2821,11 @@ This function plots the ramp responses of a discrete state space system for each
         "True, if all subsystem time responses are plotted in one window with subplots"
         annotation(choices(checkBox=true));
 
-      extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
-            heading="Initial response"));
+      extends Modelica_LinearSystems2.Internal.PartialPlotFunctionMIMO(
+        defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
+          heading="Initial response"));
     protected
-      Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "type of time response";
+      TimeResponse response = TimeResponse.Initial "type of time response";
 
       Real tSpanVar;
 
@@ -2846,7 +2836,7 @@ This function plots the ramp responses of a discrete state space system for each
       else
         tSpanVar := tSpan;
       end if;
-      Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse(
+      DiscreteStateSpace.Plot.timeResponse(
         dss=dss,
         tSpan=tSpanVar,
         response=response,

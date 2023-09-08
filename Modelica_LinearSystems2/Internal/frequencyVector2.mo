@@ -11,10 +11,10 @@ function frequencyVector2
   input Integer nPoints(min=2) = 200 "Number of points";
   input Boolean autoRange=true
     "True, if abszissa range is automatically determined";
-  input Modelica.Units.SI.Frequency f_min(min=0) = 0.1
+  input SI.Frequency f_min(min=0) = 0.1
     "Minimum frequency value, if autoRange = false"
     annotation (Dialog(enable=not autoRange));
-  input Modelica.Units.SI.Frequency f_max(min=0) = 10
+  input SI.Frequency f_max(min=0) = 10
     "Maximum frequency value, if autoRange = false"
     annotation (Dialog(enable=not autoRange));
   input Boolean logX=true

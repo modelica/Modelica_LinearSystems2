@@ -1,14 +1,13 @@
 within Modelica_LinearSystems2.Controller;
 block TransferFunction
   "Continuous or discrete, single input single output transfer function"
-  import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2;
+  import Modelica_LinearSystems2.Controller.Types.Init;
 
   extends Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2(
       discretePart(
       x_start=x_start,
       y_start={y_start},
-      ABCD=TransferFunction.Conversion.toMatrices(system)));
+      ABCD=Modelica_LinearSystems2.TransferFunction.Conversion.toMatrices(system)));
 
   parameter Modelica_LinearSystems2.TransferFunction system "Transfer function";
   parameter Real x_start[nx]=zeros(nx) "Initial or guess values of states"
@@ -46,11 +45,11 @@ equation
   connect(x, discretePart.x);
 initial equation
   if continuous and nx>0 then
-    if init ==Modelica_LinearSystems2.Controller.Types.Init.SteadyState then
+    if init == Init.SteadyState then
       der(x_scaled) = zeros(nx);
-    elseif init ==Modelica_LinearSystems2.Controller.Types.Init.InitialState then
+    elseif init == Init.InitialState then
       x_scaled = x_start*a_end;
-    elseif init ==Modelica_LinearSystems2.Controller.Types.Init.InitialOutput then
+    elseif init == Init.InitialOutput then
       y = y_start;
 //      der(x_scaled[1:nx-1]) = zeros(nx -1);
       der(x_scaled[1:nx-(if nx>1 then 2 else 1)]) = zeros(nx -( if nx>1 then 2 else 1));

@@ -1,8 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 encapsulated function frequencyResponsePlot "Bode plot given f,A,phi values"
   import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Internal;
   import Modelica_LinearSystems2.Utilities.Plot;
   import Modelica.Units.SI;
 
@@ -13,9 +11,9 @@ encapsulated function frequencyResponsePlot "Bode plot given f,A,phi values"
 
   input Boolean autoRange=true
     "= true, if abszissa range is automatically determined";
-  input Modelica.Units.SI.Frequency f_min=0.1
+  input SI.Frequency f_min=0.1
     "Minimum frequency value, if autoRange = false";
-  input Modelica.Units.SI.Frequency f_max=10
+  input SI.Frequency f_max=10
     "Maximum frequency value, if autoRange = false";
 
   input Boolean magnitude=true "= true, to plot magnitude" annotation(choices(checkBox=true));
@@ -27,7 +25,7 @@ encapsulated function frequencyResponsePlot "Bode plot given f,A,phi values"
     "= true, to plot magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Dialog(enable=magnitude));
 
   input Plot.Records.Diagram diagram "Diagram layout" annotation(Dialog);
-  input Plot.Records.Device device=Modelica_LinearSystems2.Utilities.Plot.Records.Device()
+  input Plot.Records.Device device=Plot.Records.Device()
     "Properties of device where figure is shown" annotation(Dialog);
 protected
   Boolean OK;

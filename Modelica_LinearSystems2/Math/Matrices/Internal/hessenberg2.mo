@@ -36,11 +36,11 @@ algorithm
       zeros(ll));
 
     Ht := if s == "u" then
-      Modelica_LinearSystems2.Math.Matrices.Internal.hohoTrafoUpperHess(
+      Matrices.Internal.hohoTrafoUpperHess(
       Ht,
       u,
       ll) else
-      Modelica_LinearSystems2.Math.Matrices.Internal.hohoTrafoLowerHess(
+      Matrices.Internal.hohoTrafoLowerHess(
       Ht,
       u,
       ll);
