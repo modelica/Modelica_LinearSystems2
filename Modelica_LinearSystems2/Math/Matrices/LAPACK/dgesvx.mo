@@ -13,7 +13,7 @@ function dgesvx
 
 protected
   String transA= if transposed then "T" else "N";
-  String equed; // Is output since FACT = 'N', i.e. first parameter = 'N'
+  String equed = " "; // Is output since FACT = 'N', i.e. first parameter = 'N'
   Integer n=size(A, 1);
   Integer nrhs=size(B, 2);
   Real Awork[n,n]=A;
