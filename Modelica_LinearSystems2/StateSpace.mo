@@ -161,7 +161,7 @@ ss = StateSpace.&apos;constructor&apos;.<strong>fromTransferFunction</strong>(tf
 <p>
 This function constructs a StateSpace record ss from a transfer function tf.
 For the simplicity of implementation, this function directly extends from
-<a href=\"Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace\">TransferFunction.Conversion.toStateSpace</a>.
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Conversion.toStateSpace\">TransferFunction.Conversion.toStateSpace</a>.
 </p>
 </html>"));
 
@@ -180,7 +180,7 @@ ss = StateSpace.&apos;constructor&apos;.<strong>fromZerosAndPoles</strong>(zp)
 <p>
 This function constructs a StateSpace record ss from a zeros-poles-gain system zp.
 For the simplicity of implementation, this function directly extends from
-<a href=\"Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace\">ZerosAndPoles.Conversion.toStateSpace</a>.
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStateSpace\">ZerosAndPoles.Conversion.toStateSpace</a>.
 </p>
 </html>"));
 

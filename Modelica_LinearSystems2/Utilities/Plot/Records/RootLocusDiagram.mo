@@ -41,7 +41,7 @@ record RootLocusDiagram "Properties of a root locus diagram"
 <p>
 With this record the properties of a root locus diagram can be defined, as needed by
 function
-<a href=\"Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel\">Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel</a>.
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel\">Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel</a>.
 </p>
 </html>"));
 end RootLocusDiagram;
