@@ -59,10 +59,10 @@ For details see
 <p>
 Besides the basic arithmetics given in Complex record, further mathematical
 operations on complex numbers can be found in
-<a href=\"Modelica.ComplexMath\">Modelica.ComplexMath</a>. Some advanced
+<a href=\"modelica://Modelica.ComplexMath\">Modelica.ComplexMath</a>. Some advanced
 functions, especially those concerning vectors and matrices of complex
 numbers, are collected in
-<a href=\"Modelica_LinearSystems2.ComplexMathAdds\">ComplexMathAdds</a>.
+<a href=\"modelica://Modelica_LinearSystems2.ComplexMathAdds\">ComplexMathAdds</a>.
 </html>"));
     end ComplexNumbers;
 

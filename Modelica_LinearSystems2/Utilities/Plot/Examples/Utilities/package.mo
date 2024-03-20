@@ -6,7 +6,7 @@ package Utilities "Package of utility functions (usually not of interest for the
   annotation (Documentation(info="<html>
 <p>
 This package contains auxiliary functions used for demonstration of plot functions
-in package <a href=\"Modelica_LinearSystems2.Utilities.Plot.Examples\">Examples</a>.
+in package <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples\">Examples</a>.
 </p>
 </html>"));
 end Utilities;

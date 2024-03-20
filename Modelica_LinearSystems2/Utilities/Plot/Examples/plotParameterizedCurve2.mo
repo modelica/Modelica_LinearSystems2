@@ -42,7 +42,7 @@ algorithm
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function plots the following parameterized cuves diagram using function
-<a href=\"Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves\">parameterizedCurves</a>
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves\">parameterizedCurves</a>
 </p>
 
 <p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotParameterizedCurve2.png\"/></p>

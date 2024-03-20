@@ -47,7 +47,7 @@ record ParametrizedCurves
 <p>
 With this record the properties of a set of parameterized curves can be defined, as needed by
 function
-<a href=\"Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves\">Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves</a>
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves\">Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves</a>
 </p>
 </html>"));
 end ParametrizedCurves;

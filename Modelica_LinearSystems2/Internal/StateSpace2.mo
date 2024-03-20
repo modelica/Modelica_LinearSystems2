@@ -231,7 +231,10 @@ ss3 := ss1 - ss2;
     annotation (Documentation(info="<html>
 <h4>Description</h4>
 <p>
-This package contains the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.subtract#info\">'subtract'</a> and the <a href=\"//Modelica_LinearSystems2.StateSpace.'-'.subtract#info\">'-'</a> operator for StateSpace records.
+This package contains the
+<a href=\"modelica://Modelica_LinearSystems2.Internal.StateSpace2.'-'.subtract\">subtract</a>
+and the <a href=\"modelica://Modelica_LinearSystems2.Internal.StateSpace2.'-'.negate\">negate</a>
+operator for StateSpace records.
 </p>
 </html>"));
   end '-';

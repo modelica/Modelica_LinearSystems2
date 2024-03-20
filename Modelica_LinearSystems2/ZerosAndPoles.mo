@@ -191,7 +191,7 @@ zp = ZerosAndPoles&apos;constructor&apos;.<strong>fromTransferFunction</strong>(
 <p>
 This function constructs a ZerosAndPoles record zp from a transfer function tf.
 For the simplicity of implementation, this function directly extends from
-<a href=\"Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles\">TransferFunction.Conversion.toZerosAndPoles</a>.
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Conversion.toZerosAndPoles\">TransferFunction.Conversion.toZerosAndPoles</a>.
 </p>
 </html>"));
 

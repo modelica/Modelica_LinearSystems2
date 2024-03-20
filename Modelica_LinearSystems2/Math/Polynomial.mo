@@ -249,7 +249,7 @@ acceleration of flange: a = c3 * 6 * u
 </pre></blockquote>
 <p>
 whereby the evaluation is done by the record
-<a href=\"Modelica_LinearSystems2.Math.Polynomial\">Polynomial</a>.
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial\">Polynomial</a>.
 </p>
 </html>"));
       end MoveByPolynomial;
@@ -1417,12 +1417,12 @@ Polynomial.numberOfRoots(p1);
       Documentation(info="<html>
 <p>
 This function is the <em>first time derivative</em> of the function
-<a href=\"Modelica_LinearSystems2.Math.Polynomial.evaluate\">Polynomial.evaluate</a>.
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluate\">Polynomial.evaluate</a>.
 </p>
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica_LinearSystems2.Math.Polynomial.evaluate_dder\">Polynomial.evaluate_dder</a>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.Internal.evaluate_dder\">Internal.evaluate_dder</a>
 </p>
 </html>"));
   end evaluate_der;
@@ -1475,12 +1475,12 @@ This function is the <em>first time derivative</em> of the function
       annotation (Documentation(info="<html>
 <p>
 This function is the <em>second time derivative</em> of the function
-<a href=\"Modelica_LinearSystems2.Math.Polynomial.evaluate\">Polynomial.evaluate</a>.
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluate\">Polynomial.evaluate</a>.
 </p>
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica_LinearSystems2.Math.Polynomial.evaluate_der\">Polynomial.evaluate_der</a>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluate_der\">Polynomial.evaluate_der</a>
 </p>
 </html>"));
     end evaluate_dder;
