@@ -821,12 +821,12 @@ ss;
       input String systemName=""
         "Name of system (used as heading in html file)";
       input String description="" "Description of system (used in html file)";
-    protected
-      String dummyFileName="dummy" + fileName;
-    public
+
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
           defaultDiagram=
             Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros());
+
+      output String filePath "Full path name of report file";
 
     protected
       StateSpace ssBalanced = StateSpace.Transformation.toBalancedForm(ss);
@@ -861,11 +861,13 @@ ss;
       Plot.Records.Diagram diagram2;
       Boolean instableZeros=false;
 
+      String tmpFileName "File to print temporary output";
       String filePathOnly "NOT USED: Path to fileName";
       String fileNameOnly "Name of fileName without extension and path";
-      String fileExtOnly "Extension of fileName";
-      String fileNameImg "General name (without extension) of file for a plot";
-      String fileNameImg2="none" "Current name of file for a plot";
+      String fileExtOnly "NOT USED: Extension of fileName";
+      String filePathNoExt "Full path name (without extension) of report file";
+      String fileNameImg="none" "Current name of file for a plot";
+      String filePathImg "Full path name of file for a plot";
 
       Internal.AnalyseOptions analyseOptions2=analyseOptions;
     algorithm
@@ -875,9 +877,14 @@ ss;
       //   Modelica_LinearSystems2.StateSpace.Analysis.analysis(Modelica_LinearSystems2.StateSpace(A=[2, 1.43, 12, 3; 1, 1, 1, 43; 1, 3, 2, 2; 1, 1, 4.2, 1.2], B=[1, 2; 2.2, 3; 3, 1; 4, 0], C=[25, 1.4, 6.3, 1; 0.3, 8, 5, 1; 1, 3, 2, 2], D=[6, 4; 4, 2; 6, 5], yNames={"y1_test","y2_te","y3_"}, xNames={"xx1","x2","xxx3","xx4"}, uNames={"u1_test","u2_test"}));
       // ---------------------------------------------------------------------------------------------------
 
+      filePath := Modelica.Utilities.Files.fullPathName(fileName);
       (filePathOnly,fileNameOnly,fileExtOnly) :=
-        Modelica.Utilities.Files.splitPathName(fileName);
-      fileNameImg := fileNameOnly;
+        Modelica.Utilities.Files.splitPathName(filePath);
+      filePathNoExt := filePathOnly + "/" + fileNameOnly;
+      if not Modelica.Utilities.Files.exist(filePathOnly) then
+        Modelica.Utilities.Files.createDirectory(filePathOnly);
+      end if;
+      tmpFileName := filePathNoExt+ ".tmp";
 
       // If system has no inputs and outputs, modify analyze options that do not make sense
       if size(ss.B, 2) == 0 or size(ss.C, 1) == 0 then
@@ -955,24 +962,24 @@ ss;
 
       // Analysis file
       // -------------
-      Modelica.Utilities.Files.removeFile(fileName);
-      Modelica.Utilities.Files.removeFile(dummyFileName);
+      Modelica.Utilities.Files.removeFile(filePath);
+      Modelica.Utilities.Files.removeFile(tmpFileName);
 
       // Text should be printed into new file in HTML environment
       // --------------------------------------------------------
-      StateSpace.Analysis.analysis.printHTMLbasics(fileName, true);
-      StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
+      StateSpace.Analysis.analysis.printHTMLbasics(filePath, true);
+      StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, true);
 
       if analyseOptions2.printSystem then
         printSystem(
               ss,
-              fileName,
+              filePath,
               systemName,
               description);
 
         printSystem(
               ss,
-              dummyFileName,
+              tmpFileName,
               systemName,
               description);
       end if;
@@ -984,7 +991,7 @@ ss;
             isStabilizable,
             isObservable,
             isDetectable,
-            fileName,
+            filePath,
             analyseOptions=analyseOptions2);
       printHead1(
             ss,
@@ -993,36 +1000,42 @@ ss;
             isStabilizable,
             isObservable,
             isDetectable,
-            dummyFileName,
+            tmpFileName,
             analyseOptions=analyseOptions2);
-      StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
+      StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, false);
 
-      Modelica.Utilities.Streams.readFile(dummyFileName);
+      Modelica.Utilities.Streams.readFile(tmpFileName);
 
       // Plot step response
       // ------------------
       if analyseOptions2.plotStepResponse then
-        Modelica.Utilities.Files.removeFile(dummyFileName);
+        Modelica.Utilities.Files.removeFile(tmpFileName);
         print(
           "<html>\n<body>\n<p>\n<strong>Step responses</strong>\n</p>\n</body>\n</html>",
-          dummyFileName);
-        Modelica.Utilities.Streams.readFile(dummyFileName);
+          tmpFileName);
+        Modelica.Utilities.Streams.readFile(tmpFileName);
         StateSpace.Plot.step(ss=ssBalanced);
-        fileNameImg2 := fileNameImg + "Step.png";
-        DymolaCommands.Plot.ExportPlotAsImage(fileName=fileNameImg2, id=-1, includeInLog=false);
-        print("<p>\n<img src=\"" + fileNameImg2 + "\">\n</p>", fileName);
+
+        print(
+          "\n<p>\n<strong>Step responses</strong>\n</p>",
+          filePath);
+        fileNameImg := fileNameOnly + "_StepResponse.png";
+        filePathImg := filePathOnly + "/" + fileNameImg;
+        DymolaCommands.Plot.ExportPlotAsImage(fileName=filePathImg, id=-1, includeInLog=false);
+        print("<p>\n<img src=\"" + fileNameImg + "\">\n</p>", filePath);
       end if;
 
       // Plot Bode plots
       if analyseOptions2.plotFrequencyResponse then
-        Modelica.Utilities.Files.removeFile(dummyFileName);
+        Modelica.Utilities.Files.removeFile(tmpFileName);
         print("<html>\n<body>\n<p>\n<strong>Bode plots</strong>\n</p>\n</body>\n</html>",
-          dummyFileName);
-        Modelica.Utilities.Streams.readFile(dummyFileName);
+          tmpFileName);
+        Modelica.Utilities.Streams.readFile(tmpFileName);
         StateSpace.Plot.bodeMIMO(ss=ss, Hz=not analyseOptions.dB_w, dB=analyseOptions.dB_w);
-        //     fileNameImg2 := fileNameImg + "BodeMIMO1.png";
+        //     fileNameImg := fileNameOnly + "_BodeMIMO1.png";
+        //     filePathImg := filePathOnly + "/" + fileNameImg
         //     ExportPlotAsImage(
-        //       fileName=fileNameImg2,
+        //       fileName=filePathImg,
         //       id=-1,
         //       includeInLog=false);
       end if;
@@ -1050,7 +1063,7 @@ ss;
 
       if analyseOptions2.printEigenValues then
         printHead2a(
-              fileName,
+              filePath,
               analyseOptions=analyseOptions2,
               printTable=(nReal > 0));
         if nReal > 0 then
@@ -1061,14 +1074,14 @@ ss;
                 levec,
                 nReal,
                 xNames2,
-                fileName,
+                filePath,
                 analyseOptions=analyseOptions2);
         end if;
 
-        Modelica.Utilities.Files.removeFile(dummyFileName);
-        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
+        Modelica.Utilities.Files.removeFile(tmpFileName);
+        StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, true);
         printHead2a(
-              dummyFileName,
+              tmpFileName,
               analyseOptions=analyseOptions2,
               printTable=(nReal > 0));
         if nReal > 0 then
@@ -1079,14 +1092,14 @@ ss;
                 levec,
                 nReal,
                 xNames2,
-                dummyFileName,
+                tmpFileName,
                 analyseOptions=analyseOptions2);
         end if;
-        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
-        Modelica.Utilities.Streams.readFile(dummyFileName);
+        StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, false);
+        Modelica.Utilities.Streams.readFile(tmpFileName);
 
         printHead2b(
-              fileName,
+              filePath,
               analyseOptions=analyseOptions2,
               printTable=(nReal < nx));
         if nReal < nx then
@@ -1097,14 +1110,14 @@ ss;
                 levec,
                 nReal,
                 xNames2,
-                fileName,
+                filePath,
                 analyseOptions=analyseOptions2);
         end if;
 
-        Modelica.Utilities.Files.removeFile(dummyFileName);
-        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
+        Modelica.Utilities.Files.removeFile(tmpFileName);
+        StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, true);
         printHead2b(
-              dummyFileName,
+              tmpFileName,
               analyseOptions=analyseOptions2,
               printTable=(nReal < nx));
         if nReal < nx then
@@ -1115,11 +1128,11 @@ ss;
                 levec,
                 nReal,
                 xNames2,
-                dummyFileName,
+                tmpFileName,
                 analyseOptions=analyseOptions2);
         end if;
-        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
-        Modelica.Utilities.Streams.readFile(dummyFileName);
+        StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, false);
+        Modelica.Utilities.Streams.readFile(tmpFileName);
 
        // Plot eigenvalues and invariant zeros
        if analyseOptions2.plotEigenValues or
@@ -1154,7 +1167,7 @@ ss;
         end if;
 
         if analyseOptions2.printEigenValueProperties then
-          printHead3(fileName);
+          printHead3(filePath);
           printTab3(
                 evSorted,
                 evecComplex,
@@ -1162,11 +1175,11 @@ ss;
                 cev,
                 nReal,
                 xNames2,
-                fileName);
+                filePath);
 
-          Modelica.Utilities.Files.removeFile(dummyFileName);
-          StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
-          printHead3(dummyFileName);
+          Modelica.Utilities.Files.removeFile(tmpFileName);
+          StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, true);
+          printHead3(tmpFileName);
           printTab3(
                 evSorted,
                 evecComplex,
@@ -1174,9 +1187,9 @@ ss;
                 cev,
                 nReal,
                 xNames2,
-                dummyFileName);
-          StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
-          Modelica.Utilities.Streams.readFile(dummyFileName);
+                tmpFileName);
+          StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, false);
+          Modelica.Utilities.Streams.readFile(tmpFileName);
 
         end if;
       end if;
@@ -1187,23 +1200,23 @@ ss;
       nReal := Modelica_LinearSystems2.Internal.numberOfRealZeros(zerosSorted);
 
       if analyseOptions2.printInvariantZeros then
-        printHead4(fileName, printTable=(size(systemZeros, 1) > 0));
+        printHead4(filePath, printTable=(size(systemZeros, 1) > 0));
         if size(systemZeros, 1) > 0 then
           Modelica_LinearSystems2.StateSpace.Analysis.analysis.printTab4(
                 zerosSorted,
                 zerosIndex,
                 nReal,
-                fileName);
+                filePath);
         end if;
 
-        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, true);
-        printHead4(dummyFileName, printTable=(size(systemZeros, 1) > 0));
+        StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, true);
+        printHead4(tmpFileName, printTable=(size(systemZeros, 1) > 0));
         if size(systemZeros, 1) > 0 then
           printTab4(
                 zerosSorted,
                 zerosIndex,
                 nReal,
-                dummyFileName);
+                tmpFileName);
         end if;
         k := 0;
         for i in 1:size(systemZeros, 1) loop
@@ -1213,22 +1226,19 @@ ss;
         end for;
         if k > 0 then
           print("<p>\n<strong>Note, that the system has " + String(k) +
-            " zeros in the right complex half-plane.</strong>\n</p>", fileName);
+            " zeros in the right complex half-plane.</strong>\n</p>", filePath);
           print("<p>\n<strong>Note, that the system has " + String(k) +
-            " zeros in the right complex half-plane.</strong>\n</p>", dummyFileName);
+            " zeros in the right complex half-plane.</strong>\n</p>", tmpFileName);
         end if;
-        StateSpace.Analysis.analysis.printHTMLbasics(dummyFileName, false);
+        StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, false);
 
       end if;
-      Modelica.Utilities.Streams.readFile(dummyFileName);
-      Modelica.Utilities.Files.removeFile(dummyFileName);
-
-      print("\n\nAnalysis results have been written to file \"" +
-        Modelica.Utilities.Files.fullPathName(fileName) + "\"");
+      Modelica.Utilities.Streams.readFile(tmpFileName);
+      Modelica.Utilities.Files.removeFile(tmpFileName);
 
       // Last print of HTML environment
       // --------------------------------------------------------
-      StateSpace.Analysis.analysis.printHTMLbasics(fileName, false);
+      StateSpace.Analysis.analysis.printHTMLbasics(filePath, false);
 
       // SUB FUNCTIONS
 
@@ -2453,9 +2463,9 @@ ss;
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-Modelica_LinearSystems2.StateSpace.Analysis.<strong>analysis</strong>(ss);
+filePath = Modelica_LinearSystems2.StateSpace.Analysis.<strong>analysis</strong>(ss);
    or
-Modelica_LinearSystems2.StateSpace.Analysis.<strong>analysis</strong>(
+filePath = Modelica_LinearSystems2.StateSpace.Analysis.<strong>analysis</strong>(
   ss,
   analyseOptions=<a href=\"modelica://Modelica_LinearSystems2.Internal.AnalyseOptions\">analyseOptions</a>,
   fileName,
@@ -2562,9 +2572,14 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
   String description=\"System to demonstrate the usage of Modelica_LinearSystems2.StateSpace.Analysis.analysis()\"
 
 <strong>algorithm</strong>
-  Modelica_LinearSystems2.StateSpace.Analysis.analysis(ss, fileName=fileName, systemName=systemName, description=description)
-//  gives:
+  Modelica_LinearSystems2.StateSpace.Analysis.analysis(
+    ss, fileName=fileName, systemName=systemName, description=description)
+
+// = \"C:/working/directory/path/analysis.html\"
 </pre></blockquote>
+<p>
+The resulting report file <code>analysis.html</code> summarizes the following system information.
+</p>
 
 <h4>System report</h4>
 <p>
@@ -2597,13 +2612,16 @@ System to demonstrate the usage of Modelica_LinearSystems2.StateSpace.Analysis.a
 </p>
 
 <h5>Characteristics</h5>
-<p>The system
-<br> is
-not stable
+<p>
+The system
+</p>
+<p> is 
+<strong>not</strong> stable
 <br>but it is controllable
-<br> and therefore it is stabilizable
-<br> The system is not observable
-<br> but it is detectable
+<br> and therefore it is stabilizable.
+<br> The system is  observable
+<br> and therefore it is detectable.
+<br>
 </p>
 
 <p>
@@ -2612,69 +2630,220 @@ not stable
 <strong>Real eigenvalues</strong>
 </p>
 <table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin: 20px 0 20px 20px\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
-<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td><td> eigenvalue </td> <td> T [s] </td>  <td> characteristics </td><td> contribution to states</td></tr>
-<tr>
- <td style=\"text-align:center\">       1 </td> <td style=\"text-align:left\"> &nbsp;   -4.9874e+001 </td> <td style=\"text-align:left\"> &nbsp;    0.0201 </td> <td style=\"text-align:left\"> &nbsp; stable, controllable, observable  </td> <td style=\"text-align:left\"> &nbsp;  z[1] contributes to x3 with 54.6 %<br>&nbsp;  z[1] contributes to x5 with 37 % </td> </tr>
-<tr>
- <td style=\"text-align:center\">       2 </td> <td style=\"text-align:left\"> &nbsp;   -3.0000e+000 </td> <td style=\"text-align:left\"> &nbsp;    0.3333 </td> <td style=\"text-align:left\"> &nbsp; stable, controllable, not observable  </td> <td style=\"text-align:left\"> &nbsp;  z[2] contributes to x1 with 100 %<br> </td> </tr>
-<tr>
- <td style=\"text-align:center\">       3 </td> <td style=\"text-align:left\"> &nbsp;    2.9891e+000 </td> <td style=\"text-align:left\"> &nbsp;    0.3346 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[3] contributes to x2 with 51.9 %<br>&nbsp;  z[3] contributes to x1 with 23.9 % </td> </tr>
-<tr>
- <td style=\"text-align:center\">       4 </td> <td style=\"text-align:left\"> &nbsp;    5.5825e+001 </td> <td style=\"text-align:left\"> &nbsp;    0.0179 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[4] contributes to x3 with 48.4 %<br>&nbsp;  z[4] contributes to x5 with 32.5 % </td> </tr>
+  <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">
+    <th> number </th>
+    <th> eigenvalue </th>
+    <th> T [s] </th>
+    <th> characteristics </th>
+    <th> contribution to states</th>
+  </tr>
+  <tr style=\"background-color:white\">
+    <td style=\"text-align:center\">       1 </td>
+    <td style=\"text-align:left\"> &nbsp;    -4.9874e+01 </td>
+    <td style=\"text-align:left\"> &nbsp;    0.0201 </td>
+    <td style=\"text-align:left\"> &nbsp; stable, controllable, observable  </td>
+    <td style=\"text-align:left\"> &nbsp;  z[1] contributes to x3 with 54.6 %<br>&nbsp;  z[1] contributes to x5 with 37 % </td>
+  </tr>
+  <tr style=\"background-color:white\">
+    <td style=\"text-align:center\">       2 </td>
+    <td style=\"text-align:left\"> &nbsp;    -3.0000e+00 </td>
+    <td style=\"text-align:left\"> &nbsp;    0.3333 </td>
+    <td style=\"text-align:left\"> &nbsp; stable, controllable, not observable  </td>
+    <td style=\"text-align:left\"> &nbsp;  z[2] contributes to x1 with 100 %<br> </td>
+  </tr>
+  <tr style=\"background-color:white\">
+    <td style=\"text-align:center\">       3 </td>
+    <td style=\"text-align:left\"> &nbsp;     2.9891e+00 </td>
+    <td style=\"text-align:left\"> &nbsp;    0.3346 </td>
+    <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td>
+    <td style=\"text-align:left\"> &nbsp;  z[3] contributes to x2 with 51.9 %<br>&nbsp;  z[3] contributes to x1 with 23.9 % </td>
+  </tr>
+  <tr style=\"background-color:white\">
+    <td style=\"text-align:center\">       4 </td>
+    <td style=\"text-align:left\"> &nbsp;     5.5825e+01 </td>
+    <td style=\"text-align:left\"> &nbsp;    0.0179 </td>
+    <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td>
+    <td style=\"text-align:left\"> &nbsp;  z[4] contributes to x3 with 48.4 %<br>&nbsp;  z[4] contributes to x5 with 32.5 % </td>
+  </tr>
 </table>
 
 <p>
 <strong>Conjugated complex pairs of eigenvalues</strong>
 </p>
 <table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin: 20px 0 20px 20px\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
-<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> eigenvalue </td><td> freq. [Hz] </td> <td> damping </td><td> characteristics </td>  <td> contribution to states</td></tr>
-<tr>
- <td style=\"text-align:left\">     5/6 </td> <td style=\"text-align:left\"> &nbsp;    1.0299e+000 &plusmn;  6.5528e+000j </td> <td style=\"text-align:left\"> &nbsp;    1.0557 </td> <td style=\"text-align:left\"> &nbsp;   -0.1553 </td> <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td> <td style=\"text-align:left\"> &nbsp;  z[    5/6] contribute to x6 with 35.9 %<br>&nbsp;  z[    5/6] contribute to x2 with 20.6 % </td> </tr>
+<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">
+  <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">
+    <th> number </th>
+    <th> eigenvalue </th>
+    <th> freq. [Hz] </th>
+    <th> damping </th>
+    <th> characteristics </th>
+    <th> contribution to states</th>
+  </tr>
+  <tr style=\"background-color:white\">
+    <td style=\"text-align:left\">     5/6 </td>
+    <td style=\"text-align:left\"> &nbsp;     1.0299e+00 &plusmn;   6.5528e+00j </td>
+    <td style=\"text-align:left\"> &nbsp;    1.0557 </td>
+    <td style=\"text-align:left\"> &nbsp;   -0.1553 </td>
+    <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td>
+    <td style=\"text-align:left\"> &nbsp;  z[5/6] contribute to x6 with 35.9 %<br>&nbsp;  z[5/6] contribute to x2 with 20.6 % </td>
+  </tr>
 </table>
 
 <p>
-In the table above, the column <strong>contribution to states</strong> lists for each eigenvalue the states
-to which thecorresponding modal state contributes most. This information is based on the
-two largest absolute values of the corresponding right eigenvector (if the second large value
-is less than 5&nbsp;% of the largest contribution, it is not shown).
+In the tables above, the column <strong>contribution to states</strong> lists for
+each eigenvalue the states to which the corresponding modal state z[i] contributes
+most. This information is based on the two largest absolute values of the
+corresponding right eigenvector (if the second large value is less than 5&nbsp;%
+of the largest contribution, it is not shown). Note the <strong>right eigenvector</strong>
+v<sub>j</sub> and the <strong>left eigenvector</strong> u<sub>j</sub> of A satisfy
+the following relationships with regards to <strong>eigenvalue</strong> &lambda;<sub>j</sub>,
+state vector x and modal state vector z (u<sub>j</sub><sup>H</sup> denotes the
+conjugate transpose of u<sub>j</sub>):
 </p>
-
+<table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <td width=\"50\"></td>
+    <td>
+      A * v<sub>j</sub> = &lambda;<sub>j</sub> * v<sub>j</sub>; &nbsp;&nbsp;&nbsp;&nbsp;
+      u<sub>j</sub><sup>H</sup> * A = &lambda;<sub>j</sub> * u<sub>j</sub><sup>H</sup>; &nbsp;&nbsp;&nbsp;&nbsp;
+      x = V * z; &nbsp;&nbsp;&nbsp;&nbsp; V = [v<sub>1</sub>, v<sub>2</sub>, ...]
+    </td>
+  </tr>
+</table>
 <p>
 In the next table, for each state in the column <strong>correlation to modal states</strong>, the modal
 states which contribute most to the corresponding state are summarized, i.e. the state is mostly composed of these modal states
 This information is based on the two largest absolute values of row i of the
-eigenvector matrix that is associated with eigenvalue i (if the second large value
-is less than 5&nbsp;% of the largest contribution, it is not shown). This only holds
-if the modal states are in the same order of magnitude. Otherwise, the modal states
-listed in the last column might be not the most relevant one.
+eigenvector matrix that is associated with eigenvalue i (if the second large
+value is less than 5&nbsp;% of the largest contribution, it is not shown).
+This only holds if the modal states z[i] are in the same order of magnitude.
+Otherwise, the listed modal states might be not the most relevant ones.
 </p>
+
 <table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin: 20px 0 20px 20px\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
-<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> state </td> <td> composition </td> <td> eigenvalue #</td> <td> freq. [Hz] </td> <td> damping </td> <td> T [s] </td></tr>
-<tr>
- <td style=\"text-align:left\"> &nbsp; x1 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  42.5% by z[2] <br> &nbsp;  is composed of  35.4% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 2<br> &nbsp; 5/6 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    1.0557 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp;    0.0201<br> &nbsp; --- </td> </tr>
-<tr>
- <td style=\"text-align:left\"> &nbsp; x2 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  44.2% by z[3] <br> &nbsp;  is composed of  43.7% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 3<br> &nbsp; 5/6 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    1.0557 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp;    0.3333<br> &nbsp; --- </td> </tr>
-<tr>
- <td style=\"text-align:left\"> &nbsp; x3 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  36.9% by z[1] <br> &nbsp;  is composed of  36.3% by z[4] </td> <td style=\"text-align:center\"> &nbsp; 1<br> &nbsp; 4 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp;    0.3346<br> &nbsp;    0.0179 </td> </tr>
-<tr>
- <td style=\"text-align:left\"> &nbsp; x4 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  88.9% by z[5/6] <br> &nbsp;  is composed of   9.8% by z[4] </td> <td style=\"text-align:center\"> &nbsp; 5/6<br> &nbsp; 4 </td> <td style=\"text-align:center\"> &nbsp;    1.0557<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp;   -0.1553<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp;    0.0179 </td> </tr>
-<tr>
- <td style=\"text-align:left\"> &nbsp; x5 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  45.3% by z[1] <br> &nbsp;  is composed of  44.1% by z[4] </td> <td style=\"text-align:center\"> &nbsp; 1<br> &nbsp; 4 </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; ---<br> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp;    0.0000<br> &nbsp;    0.0179 </td> </tr>
-<tr>
- <td style=\"text-align:left\"> &nbsp; x6 </td> <td style=\"text-align:left\"> &nbsp;  is composed of  95.7% by z[5/6] </td> <td style=\"text-align:center\"> &nbsp; 5/6          </td> <td style=\"text-align:center\"> &nbsp;    1.0557          </td> <td style=\"text-align:center\"> &nbsp;   -0.1553 </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
+<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">
+  <th> state </th>
+  <th> correlation to modal states </th>
+  <th> eigenvalue # </th>
+  <th> freq. [Hz] </th>
+  <th> damping </th>
+  <th> T [s] </th>
+</tr>
+<tr style=\"background-color:white\">
+  <td rowspan=2 style=\"text-align:left\"> &nbsp; x1 </td>
+  <td style=\"text-align:left\"> &nbsp; is composed of  42.5% by z[2]</td>
+  <td style=\"text-align:center\"> &nbsp; 2</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp;    0.0201
+</tr>
+<tr style=\"background-color:white\">
+  <td style=\"text-align:left\"> &nbsp; is composed of  35.4% by z[5/6]</td>
+  <td style=\"text-align:center\"> &nbsp; 5/6</td>
+  <td style=\"text-align:center\"> &nbsp;    1.0557</td>
+  <td style=\"text-align:center\"> &nbsp;   -0.1553</td>
+  <td style=\"text-align:center\"> &nbsp; --- </td>
+</tr>
+<tr style=\"background-color:white\">
+  <td rowspan=2 style=\"text-align:left\"> &nbsp; x2 </td>
+  <td style=\"text-align:left\"> &nbsp; is composed of  44.2% by z[3]</td>
+  <td style=\"text-align:center\"> &nbsp; 3</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp;    0.3333
+</tr>
+<tr style=\"background-color:white\">
+  <td style=\"text-align:left\"> &nbsp; is composed of  43.7% by z[5/6]</td>
+  <td style=\"text-align:center\"> &nbsp; 5/6</td>
+  <td style=\"text-align:center\"> &nbsp;    1.0557</td>
+  <td style=\"text-align:center\"> &nbsp;   -0.1553</td>
+  <td style=\"text-align:center\"> &nbsp; --- </td>
+</tr>
+<tr style=\"background-color:white\">
+  <td rowspan=2 style=\"text-align:left\"> &nbsp; x3 </td>
+  <td style=\"text-align:left\"> &nbsp; is composed of  36.9% by z[1]</td>
+  <td style=\"text-align:center\"> &nbsp; 1</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp;    0.3346
+</tr>
+<tr style=\"background-color:white\">
+  <td style=\"text-align:left\"> &nbsp; is composed of  36.3% by z[4]</td>
+  <td style=\"text-align:center\"> &nbsp; 4</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp;    0.0179
+<tr style=\"background-color:white\">
+  <td rowspan=2 style=\"text-align:left\"> &nbsp; x4 </td>
+  <td style=\"text-align:left\"> &nbsp; is composed of  88.9% by z[5/6]</td>
+  <td style=\"text-align:center\"> &nbsp; 5/6</td>
+  <td style=\"text-align:center\"> &nbsp;    1.0557</td>
+  <td style=\"text-align:center\"> &nbsp;   -0.1553</td>
+  <td style=\"text-align:center\"> &nbsp; --- </td>
+</tr>
+<tr style=\"background-color:white\">
+  <td style=\"text-align:left\"> &nbsp; is composed of   9.8% by z[4]</td>
+  <td style=\"text-align:center\"> &nbsp; 4</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp;    0.0179
+<tr style=\"background-color:white\">
+  <td rowspan=2 style=\"text-align:left\"> &nbsp; x5 </td>
+  <td style=\"text-align:left\"> &nbsp; is composed of  45.3% by z[1]</td>
+  <td style=\"text-align:center\"> &nbsp; 1</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp;    0.0000
+</tr>
+<tr style=\"background-color:white\">
+  <td style=\"text-align:left\"> &nbsp; is composed of  44.1% by z[4]</td>
+  <td style=\"text-align:center\"> &nbsp; 4</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp; ---</td>
+  <td style=\"text-align:center\"> &nbsp;    0.0179
+<tr style=\"background-color:white\">
+  <td style=\"text-align:left\"> &nbsp; x6 </td>
+  <td style=\"text-align:left\"> &nbsp; is composed of  95.7% by z[5/6]</td>
+  <td style=\"text-align:center\"> &nbsp; 5/6</td>
+  <td style=\"text-align:center\"> &nbsp;    1.0557</td>
+  <td style=\"text-align:center\"> &nbsp;   -0.1553</td>
+  <td style=\"text-align:center\"> &nbsp; --- </td>
+</tr>
 </table>
 
 <p>
 <strong>Invariant zeros</strong>
 </p>
 <table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin: 20px 0 20px 20px\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
-<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\"><td> number </td> <td> invariant zero </td><td> Time constant [s] </td> <td> freq. [Hz] </td> <td> damping </td></tr>
-<tr>
- <td style=\"text-align:left\"> &nbsp;       1 </td> <td> &nbsp;   -5.4983e+001 </td> <td> &nbsp;    0.0182 </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
-<tr>
- <td style=\"text-align:left\"> &nbsp;       2 </td> <td> &nbsp;   -3.0000e+000 </td> <td> &nbsp;    0.3333 </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:center\"> &nbsp; --- </td> </tr>
-<tr>
- <td style=\"text-align:left\"> &nbsp;     3/4 </td> <td style=\"text-align:left\"> &nbsp;    3.2417e+000 &plusmn;  5.6548e+000j </td> <td style=\"text-align:center\"> &nbsp; --- </td> <td style=\"text-align:left\"> &nbsp;    1.0374 </td> <td style=\"text-align:left\"> &nbsp;   -0.4973 </td> </tr>
+  <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">
+    <th> number </th>
+    <th> invariant zero </th>
+    <th> Time constant [s] </th>
+    <th> freq. [Hz] </th>
+    <th> damping </th>
+  </tr>
+  <tr style=\"background-color:white\">
+    <td style=\"text-align:left\"> &nbsp;       1 </td>
+    <td> &nbsp;    -5.4983e+01 </td>
+    <td> &nbsp;    0.0182 </td>
+    <td style=\"text-align:center\"> &nbsp; --- </td>
+    <td style=\"text-align:center\"> &nbsp; --- </td>
+  </tr>
+  <tr style=\"background-color:white\">
+    <td style=\"text-align:left\"> &nbsp;       2 </td>
+    <td> &nbsp;    -3.0000e+00 </td>
+    <td> &nbsp;    0.3333 </td>
+    <td style=\"text-align:center\"> &nbsp; --- </td>
+    <td style=\"text-align:center\"> &nbsp; --- </td>
+  </tr>
+  <tr style=\"background-color:white\">
+    <td style=\"text-align:left\"> &nbsp;     3/4 </td>
+    <td style=\"text-align:left\"> &nbsp;     3.2417e+00 &plusmn;   5.6548e+00j </td>
+    <td style=\"text-align:center\"> &nbsp; --- </td>
+    <td style=\"text-align:left\"> &nbsp;    1.0374 </td>
+    <td style=\"text-align:left\"> &nbsp;   -0.4973 </td>
+  </tr>
 </table>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
