@@ -82,9 +82,12 @@ package ModelAnalysis
     extends Modelica_LinearSystems2.Internal.PartialAnalyzeFunction;
     input Boolean dB_w = false
       "= true, to plot Bode as dB over w [rad/s] otherwise magnitude over f [Hz]" annotation(choices(checkBox=true));
+    output String filePath "Full path name of report file";
+
   algorithm
-     Modelica_LinearSystems2.StateSpace.Analysis.analysis(ssLin,
-        analyseOptions=Modelica_LinearSystems2.Internal.AnalyseOptions(dB_w=dB_w));
+     filePath := Modelica_LinearSystems2.StateSpace.Analysis.analysis(
+       ssLin,
+       analyseOptions=Modelica_LinearSystems2.Internal.AnalyseOptions(dB_w=dB_w));
     annotation(__Dymola_interactive=true, Icon(graphics={
             Ellipse(
             extent={{-100,100},{100,-100}},
