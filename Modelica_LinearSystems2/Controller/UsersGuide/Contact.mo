@@ -34,8 +34,8 @@ email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
      die Produktion von Morgen; F&ouml;rderkennzeichen: 02PH2060) is
      highly appreciated.</li>
 <li> The library development was partially funded by the
-     <a href=\"http://www.itea2.org/public/project_leaflets/EUROSYSLIB_profile_oct-07.pdf\">ITEA2 EUROSYSLIB</a>
-      project. </li>
+     ITEA <a href=\\\"https://itea4.org/project/eurosyslib.html\\\">EUROSYSLIB</a>
+     research project.</li>
 </ul>
 </html>"));
 end Contact;
