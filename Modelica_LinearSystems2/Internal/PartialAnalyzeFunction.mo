@@ -8,7 +8,7 @@ partial function PartialAnalyzeFunction
     "Values of model parameters used for linearization";
   input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
     Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
-    "Simulation options" annotation(Dialog(enable=not linearizeAtInitial));
+    "Simulation options";
 
 protected
   Modelica_LinearSystems2.StateSpace ssLin=

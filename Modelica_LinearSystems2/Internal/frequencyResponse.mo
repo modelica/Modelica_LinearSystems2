@@ -21,7 +21,7 @@ encapsulated function frequencyResponse
   input Boolean Hz=true
     "= true, to compute abszissa in [Hz], otherwise in [rad/s] (= 2*pi*Hz)" annotation(choices(checkBox=true));
   input Boolean dB=false
-    "= true, to compute magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true),Dialog(enable=magnitude));
+    "= true, to compute magnitude in [], otherwise in [dB] (=20*log10(value))" annotation(choices(checkBox=true));
   input Boolean logX=true
     "= true, to compute abszissa values for logarithmic scale" annotation(choices(checkBox=true));
   output Real f[nPoints] "Frequency vector (either in Hz or rad/s)";

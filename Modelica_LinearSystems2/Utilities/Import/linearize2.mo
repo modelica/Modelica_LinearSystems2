@@ -12,7 +12,7 @@ function linearize2
   input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization
     simulationSetup=
       Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
-    "Simulation options" annotation (Dialog(enable=not linearizeAtInitial));
+    "Simulation options";
 protected
   String fileName="dslin";
 
