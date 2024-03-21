@@ -10,7 +10,7 @@ function rootLocusOfModel
   input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization
     simulationSetup=
       Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
-    "Simulation options" annotation (Dialog(enable=not linearizeAtInitial));
+    "Simulation options";
   input Boolean reorder=false
     "True, if eigen values shall be reordered so that they are closest to the previous ones";
   output Real Re[:, :]

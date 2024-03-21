@@ -20,7 +20,6 @@ equation
           fillColor={235,235,235},
           fillPattern=FillPattern.Solid),
         Line(
-          visible=fromLeft,
           points={{-100,0},{-20,0}},
           color={0,0,127}),
         Line(points={{20,0},{100,0}}, color={0,0,127}),

@@ -11,7 +11,6 @@ partial block PartialBlockIcon
     Icon(
       graphics={
         Rectangle(
-          visible=cont,
           extent={{-100,100},{100,-100}},
           fillColor={230,230,255},
           fillPattern=FillPattern.Solid,

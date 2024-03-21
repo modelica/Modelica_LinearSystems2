@@ -6,7 +6,7 @@ function rootLocusOfModel
     "Model parameter to be varied (exactly one) and values for other parameters";
   input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
       Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
-    "Simulation options" annotation(Dialog(enable=not linearizeAtInitial));
+    "Simulation options";
   input Modelica_LinearSystems2.Utilities.Plot.Records.RootLocusDiagram diagram=
     Modelica_LinearSystems2.Utilities.Plot.Records.RootLocusDiagram() annotation(Dialog);
   input Modelica_LinearSystems2.Utilities.Plot.Records.Device device=
