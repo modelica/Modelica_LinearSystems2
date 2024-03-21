@@ -64,7 +64,7 @@ Ar = householderSimilarityTransformation(A,u);
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica.Math.Matrices.Utilities.householderReflection\">Modelica.Math.Matrices.Utilities.housholderReflection</a>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.householderReflexion\">householderReflexion</a>
 </p>
 </html>"));
 end householderSimilarityTransformation;
