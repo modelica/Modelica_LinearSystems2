@@ -152,26 +152,15 @@ block LimPID.
 The PID block can be initialized in different
 ways controlled by parameter <strong>initType</strong>. The possible
 values of initType are defined in
-<a href=\"modelica://Modelica.Blocks.Types.InitPID\">Modelica.Blocks.Types.InitPID</a>.
-This type is identical to
-<a href=\"modelica://Modelica.Blocks.Types.Init\">Types.Init</a>,
-with the only exception that the additional option
-<strong>DoNotUse_InitialIntegratorState</strong> is added for
-backward compatibility reasons (= integrator is initialized with
-InitialState whereas differential part is initialized with
-NoInit which was the initialization in version 2.2 of the Modelica
-standard library).
-</p>
-
-<p>
+<a href=\"modelica://Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault\">InitWithGlobalDefault</a>.
 Based on the setting of initType, the integrator (I) and derivative (D)
 blocks inside the PID controller are initialized according to the following table:
 </p>
 
 <table border=1 cellspacing=0 cellpadding=2>
-  <tr><td valign=\"top\"><strong>initType</strong></td>
-      <td valign=\"top\"><strong>I.initType</strong></td>
-      <td valign=\"top\"><strong>D.initType</strong></td></tr>
+  <tr><th>initType</th>
+      <th>I.initType</th>
+      <th>D.initType</th></tr>
 
   <tr><td valign=\"top\"><strong>NoInit</strong></td>
       <td valign=\"top\">NoInit</td>
@@ -190,15 +179,15 @@ blocks inside the PID controller are initialized according to the following tabl
       <td valign=\"top\">NoInit</td>
       <td valign=\"top\">SteadyState</td></tr>
 
-  <tr><td valign=\"top\"><strong>DoNotUse_InitialIntegratorState</strong></td>
-      <td valign=\"top\">InitialState</td>
+  <tr><td valign=\"top\"><strong>UseSampleClockOption</strong></td>
+      <td valign=\"top\">NoInit</td>
       <td valign=\"top\">NoInit</td></tr>
 </table>
 
 <p>
 In many cases, the most useful initial condition is
 <strong>SteadyState</strong> because initial transients are then no longer
-present. If initType = InitPID.SteadyState, then in some
+present. If initType = InitWithGlobalDefault.SteadyState, then in some
 cases difficulties might occur. The reason is the
 equation of the integrator:
 </p>
