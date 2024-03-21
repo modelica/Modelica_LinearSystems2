@@ -697,7 +697,7 @@ algorithm
 <blockquote><pre>
 StateSpace.Plot.<strong>plotBodeSISO</strong>(ss)
    or
-StateSpace.Plot.<strong>plotBodeSISO</strong>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+StateSpace.Plot.<strong>plotBodeSISO</strong>(ss, iu, iy, nPoints, autoRange, f_min, f_max, magnitude=true, phase=true, defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(), device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -2253,7 +2253,7 @@ but using statistical linearization where extended Kalman filter apply the user-
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
 <p>
-See also <a href=\"Modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to solve the mathematically identical problem.
+See also <a href=\"modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to solve the mathematically identical problem.
 </p>
 
 <h4><a name=\"References\">References</a></h4>
@@ -2340,7 +2340,7 @@ Unscented Kalman filters are similar to Extended Kalman filters but using statis
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
 <p>
-See also <a href=\"Modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Design.UKF\">UKF</a>, where the standard method (without Cholesky factorization) to calculate UKF is applied.
+See also <a href=\"modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Design.UKF\">UKF</a>, where the standard method (without Cholesky factorization) to calculate UKF is applied.
 </p>
 
 <h4><a name=\"References\">References</a></h4>

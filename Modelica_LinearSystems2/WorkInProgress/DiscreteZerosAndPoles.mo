@@ -665,7 +665,7 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.numeratorDegree\">DiscreteZerosAndPoles.Analysis.numeratorDegree</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Analysis.numeratorDegree\">DiscreteZerosAndPoles.Analysis.numeratorDegree</a>
 </p>
 </html>"));
   end denominatorDegree;
@@ -725,7 +725,7 @@ Computes a TransferFunction record
    tf = -------- = --------------------------
            d(s)     a0 + a1*s + ... + an*s^n
  </pre></blockquote>
-from a ZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the TransferFunction constructor.
+from a ZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the TransferFunction constructor.
 
 
 <h4>Example</h4>
@@ -1360,7 +1360,7 @@ processing.
 </table>
 <h4>Description</h4>
 <p>
-Generate a matrix of ZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conversion from sate space to transfer function representation.
+Generate a matrix of ZerosAndPoles data records by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The system is genrated by using <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a> followed by a conversion from sate space to transfer function representation.
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -1528,7 +1528,7 @@ into a product of first and second order polynomials.
 The data structure is especially useful in applications where first and
 second order polynomials are naturally occurring, e.g., as
 for <strong>filters</strong>. In fact, via function
-<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>, a
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">ZerosAndPoles.Design.filter</a>, a
 ZeroAndPole transfer function is generated from
 <strong>low</strong> and <strong>high pass</strong> analog filters
 (<strong>CriticalDamping</strong>, <strong>Bessel</strong>, <strong>Butterworth</strong>, <strong>Chebyshev</strong>).

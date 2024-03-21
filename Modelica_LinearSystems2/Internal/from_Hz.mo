@@ -19,6 +19,6 @@ algorithm
           extent={{100,-20},{20,-100}},
           textColor={0,0,0},
           textString="rad/s")}), Documentation(info="<html>
-<p>This model is obsolete. Use <a href=\"Modelica://Modelica.Units.Conversions.from_Hz\">Modelica.Units.Conversions.from_Hz</a> instead.</p>
+<p>This model is obsolete. Use <a href=\"modelica://Modelica.Units.Conversions.from_Hz\">Modelica.Units.Conversions.from_Hz</a> instead.</p>
 </html>"));
 end from_Hz;
