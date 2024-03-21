@@ -3242,7 +3242,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
 <h4>See also</h4>
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.denominatorDegree\">StateSpace.Analysis.denominatorDegree</a>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.denominatorDegree\">StateSpace.Analysis.denominatorDegree</a>
 </p>
 </html>"));
     end numeratorDegree;
@@ -3293,8 +3293,8 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s) with
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.numeratorDegree\">StateSpace.Analysis.numeratorDegree</a>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.numeratorDegree\">StateSpace.Analysis.numeratorDegree</a>
 </p>
 </html>"));
     end denominatorDegree;
@@ -3357,7 +3357,7 @@ The state space system is converted to the transfer function G(s)=N(s)/D(s), whi
 <h4>See also</h4>
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluateComplex\">Math.Polynomial.evaluateComplex</a>
 </p>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -3453,7 +3453,7 @@ This function calculates the zeros, poles and gain of the corresponding transfer
 <h4>See also</h4>
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">StateSpace.Conversion.toTransferFunction</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">TransferFunction.Analysis.zerosAndPoles</a>
+<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">TransferFunction.Analysis.zerosAndPoles</a>
 </p>
 </html>"));
     end zerosAndPoles;
@@ -7052,7 +7052,7 @@ or the discrete-time algebraic Riccati equation (DARE)
 </pre>
 </blockquote>
 <p>
-for <strong>X</strong> using the Schur vector approach. See <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.care\">care</a> and <a href=\"Modelica://Modelica_LinearSystems2.Math.Matrices.dare\">dare</a> respectively for more details.
+for <strong>X</strong> using the Schur vector approach. See <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.care\">care</a> and <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.dare\">dare</a> respectively for more details.
 </p>
 <p>
 The gain matrix <strong>K</strong> of the continuous-time case is calculated from
@@ -7250,7 +7250,7 @@ E[<strong>v</strong>(t)*<strong>v</strong>'(tau)] = <strong>V</strong>*delta(t-t
 E[s] denotes the expected value of a signal s.
 </p>
 <p>
-The LQG approach combines the deterministic <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Design.lqr\">LQR</a> approach and <a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Design.kalmanFilter\">Kalman filter</a> principle to estimate stochastically disturbed systems, such that input <strong>u</strong>(t) is given by
+The LQG approach combines the deterministic <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Design.lqr\">LQR</a> approach and <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Design.kalmanFilter\">Kalman filter</a> principle to estimate stochastically disturbed systems, such that input <strong>u</strong>(t) is given by
 </p>
 <blockquote><pre>
 <strong>u</strong>(t) = -<strong>K</strong>c<strong>x</strong>^(t)
@@ -7657,8 +7657,8 @@ StateSpace.Plot.<strong>bodeSISO</strong>(
   f_max,
   magnitude=true,
   phase=true,
-  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -7844,8 +7844,8 @@ StateSpace.Plot.<strong>bodeMIMO</strong>(
   magnitude,
   phase,
   tol,
-  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>(),
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>(),
   Hz,
   dB,
   onFile,
@@ -8580,7 +8580,7 @@ tf = ------ = --------------------------
       d(s)     a0 + a1*s + ... + an*s^n
 </pre></blockquote>
 <p>
-The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles\">StateSpace.Conversion.toZerosAndPoles</a> to convert the state space system into a zeros and poles representation first and after that <a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction\">ZerosAndPoles.Conversion.toTransferFunction</a> to generate the transfer function.
+The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles\">StateSpace.Conversion.toZerosAndPoles</a> to convert the state space system into a zeros and poles representation first and after that <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toTransferFunction\">ZerosAndPoles.Conversion.toTransferFunction</a> to generate the transfer function.
 </p>
 
 <h4>Example</h4>
@@ -9020,7 +9020,7 @@ The transformed system has the same eigenvalues.
 <h4>See also</h4>
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toControllabilityForm\">toControllabilityForm</a>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toControllabilityForm\">toControllabilityForm</a>
 </p>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -9140,7 +9140,7 @@ Matrix T has to be invertible, i.e. the system has to be controllable. The trans
 <h4>See also</h4>
 <p>
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toSimilarForm\">toSimilarForm</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Transformation.toObservabilityForm\">toObservabilityForm</a>
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Transformation.toObservabilityForm\">toObservabilityForm</a>
 </p>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -12991,8 +12991,8 @@ StateSpace.Plot.<strong>bodeSISO</strong>(
   f_max,
   magnitude=true,
   phase=true,
-  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -13126,8 +13126,8 @@ StateSpace.Plot.<strong>bodeMIMO</strong>(
   f_max,
   magnitude=true,
   phase=true,
-  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Example</h4>

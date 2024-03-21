@@ -56,7 +56,7 @@ algorithm
 Function <strong>toUpperHessenberg</strong> computes a upper Hessenberg form <strong>H</strong>
 of a matrix <strong>A</strong> by orthogonal similarity transformation:
 <strong>Q</strong>' * <strong>A</strong> * <strong>Q</strong> = <strong>H</strong>. It calls LAPACK function DGEHRD.
-See <a href=\"Modelica://Modelica.Math.Matrices.LAPACK.dgehrd\">LAPACK.dgehrd</a>
+See <a href=\"modelica://Modelica.Math.Matrices.LAPACK.dgehrd\">LAPACK.dgehrd</a>
 for more information about the additional outputs V, tau, info and
 inputs ilo, ihi for more information.
 </p>

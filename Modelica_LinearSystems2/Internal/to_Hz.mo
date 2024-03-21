@@ -18,6 +18,6 @@ algorithm
           extent={{100,-20},{20,-100}},
           textColor={0,0,0},
           textString="Hz")}), Documentation(info="<html>
-<p>This model is obsolete. Use <a href=\"Modelica://Modelica.Units.Conversions.to_Hz\">Modelica.Units.Conversions.to_Hz</a> instead.</p>
+<p>This model is obsolete. Use <a href=\"modelica://Modelica.Units.Conversions.to_Hz\">Modelica.Units.Conversions.to_Hz</a> instead.</p>
 </html>"));
 end to_Hz;

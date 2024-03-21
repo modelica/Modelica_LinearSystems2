@@ -161,7 +161,7 @@ method = Modelica_LinearSystems2.Types.Method.Trapezoidal
 </pre></blockquote>
 <p>
 respectively. See also
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>
 where the inputs are the matrices of a continuous system which is to convert to discrete state space.
 </p>
 
@@ -392,7 +392,7 @@ public
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromMatrices2\">fromMatrices2</a>
 </p>
 </html>"));
     end fromStateSpace;
@@ -542,7 +542,7 @@ der(<strong>x</strong>(t)) = <strong>A</strong> * <strong>x</strong>(t) + <stron
 </pre></blockquote>
 <p>
 The function is similar to
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">fromStateSpace</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.'constructor'.fromStateSpace\">fromStateSpace</a>
 but the inputs are restricted to the matrices, the sample time and the discretization method.
 </p>
 
@@ -1518,8 +1518,8 @@ the \"ImpulseExact\" conversion from continuous system to discrete system.
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.impulseResponse\">StateSpace.Analysis.impulseResponse</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.impulseResponse\">StateSpace.Analysis.impulseResponse</a>
 </p>
 </html>"));
     end impulseResponse;
@@ -1605,8 +1605,8 @@ the \"StepExact\" conversion from continuous system to discrete system.
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.stepResponse\">StateSpace.Analysis.stepResponse</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.stepResponse\">StateSpace.Analysis.stepResponse</a>
 </p>
 </html>"));
     end stepResponse;
@@ -1692,8 +1692,8 @@ requires the \"RampExact\" conversion from continuous system to discrete system.
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.rampResponse\">StateSpace.Analysis.rampResponse</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.rampResponse\">StateSpace.Analysis.rampResponse</a>
 </p>
 </html>"));
     end rampResponse;
@@ -1778,8 +1778,8 @@ DiscreteStateSpace.Analysis.timeResponse(dss, tSpan, response=Types.TimeResponse
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.StateSpace.Analysis.initialResponse\">StateSpace.Analysis.initialResponse</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Analysis.timeResponse\">DiscreteStateSpace.Analysis.timeResponse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.initialResponse\">StateSpace.Analysis.initialResponse</a>
 </p>
 </html>"));
     end initialResponse;
@@ -2369,8 +2369,8 @@ DiscreteStateSpace.Plot.<strong>bodeSISO</strong>(
   f_max,
   magnitude=true,
   phase=true,
-  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -2523,8 +2523,8 @@ DiscreteStateSpace.Plot.<strong>timeResponse</strong>(
   tSpan,
   response,
   x0,
-  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -2553,10 +2553,10 @@ This function plots the time response of a discrete state space system. The char
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>,
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>
 </p>
 </html>"));
     end timeResponse;
@@ -2610,13 +2610,13 @@ DiscreteStateSpace.Plot.<strong>impulse</strong>(
   dss,
   tSpan,
   x0,
-  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-This function plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>.
+This function plots the impulse responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2637,9 +2637,9 @@ This function plots the impulse responses of a state space system for each syste
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>,
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>
 </p>
 </html>"));
     end impulse;
@@ -2694,13 +2694,13 @@ DiscreteStateSpace.Plot.<strong>step</strong>(
   dss,
   tSpan,
   x0,
-  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-This function plots the discrete step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>.
+This function plots the discrete step responses of a state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2721,9 +2721,9 @@ This function plots the discrete step responses of a state space system for each
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>,
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>
 </p>
 </html>"));
     end step;
@@ -2777,16 +2777,16 @@ DiscreteStateSpace.Plot.<strong>ramp</strong>(
   dss,
   tSpan,
   x0,
-  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-This function plots the ramp responses of a discrete state space system for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a> and
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>.
+This function plots the ramp responses of a discrete state space system for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>. See also
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a> and
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.initialResponse\">initialResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2853,13 +2853,13 @@ DiscreteStateSpace.Plot.<strong>initialResponse</strong>(
   dss,
   tSpan,
   x0,
-  defaultDiagram=<a href=\"Modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-This function plots the initial responses of a discrete state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>.
+This function plots the initial responses of a discrete state space system for the initial state vector x0 for each system corresponding to the transition matrix. It is based on <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.timeResponse\">timeResponse</a>.
 </p>
 
 <h4>Example</h4>
@@ -2882,9 +2882,9 @@ This function plots the initial responses of a discrete state space system for t
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp\">ramp</a>
 </p>
 </html>"));
     end initialResponse;
@@ -3206,8 +3206,8 @@ Computes a DiscreteTransferFunction record
            d(z)     a0 + a1*z + ... + an*z^n
  </pre></blockquote>
 
-The algorithm uses <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles\">toDiscreteZerosAndPoles</a> to convert the
-discrete state space system into a discrete zeros and poles representation first and after that <a href=\"Modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction\">DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction</a> to generate the transfer function.
+The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles\">toDiscreteZerosAndPoles</a> to convert the
+discrete state space system into a discrete zeros and poles representation first and after that <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction\">DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction</a> to generate the transfer function.
 
 
 
@@ -3291,7 +3291,7 @@ Computes a matrix of DiscreteTransferFunction records
   dtf = -------- = --------------------------
            d(z)     a0 + a1*z + ... + an*z^n
  </pre></blockquote>
-with repetitive application of <a href=\"Modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteTransferFunction\">Conversion.toDiscreteTransferFunction</a>
+with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteTransferFunction\">Conversion.toDiscreteTransferFunction</a>
 
 
 <h4>Example</h4>

@@ -2529,7 +2529,7 @@ ZerosAndPoles.Plot.<strong>bode</strong>(
   magnitude=true,
   phase=true,
   defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot\">Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>() )
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -2637,10 +2637,10 @@ This function plots the time response of a transfer function. The character of t
 
 <h4>See also</h4>
 <p>
-<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>,
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse\">impulse</a>,
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.step\">step</a>,
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp\">ramp</a>,
-<a href=\"Modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>
+<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Plot.initialResponse\">initialResponse</a>
 </p>
 </html>"));
     end timeResponse;
@@ -2686,7 +2686,7 @@ ZerosAndPoles.Plot.<strong>impulse</strong>(
   x0,
   columnLabels,
   defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -2757,7 +2757,7 @@ ZerosAndPoles.Plot.<strong>step</strong>(
   x0,
   columnLabels,
   defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -2827,7 +2827,7 @@ ZerosAndPoles.Plot.<strong>ramp</strong>(
   x0,
   columnLabels,
   defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -2906,7 +2906,7 @@ ZerosAndPoles.Plot.<strong>initialResponse</strong>(
   y0,
   columnLabels,
   defaultDiagram=<a href=\"modelica://Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros\">Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse</a>(),
-  device=<a href=\"Modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
+  device=<a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Records.Device\">Modelica_LinearSystems2.Utilities.Plot.Records.Device</a>())
 </pre></blockquote>
 
 <h4>Description</h4>

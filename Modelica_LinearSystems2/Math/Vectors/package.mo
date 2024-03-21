@@ -7,7 +7,7 @@ package Vectors "Package of functions operating on vectors"
     Documentation(info="<html>
 <p>
 This package provides functions operating on vectors, see also
-<a href=\"Modelica://Modelica.Math.Vectors\">Vectors</a>.
+<a href=\"modelica://Modelica.Math.Vectors\">Vectors</a>.
 </p>
 </html>"));
 end Vectors;
