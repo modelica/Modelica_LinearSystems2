@@ -35,7 +35,7 @@ This function call returns the eigenvalues of a square matrix
 second column contains the imaginary part of the eigenvalues.
 Before calculating the eigenvalues, matrix A is permuted and scaled (balanced)
 to improve the computation. For details see the
-<a href=\"http://www.netlib.org/lapack/lug/node94.html\">lapack documentation</a>.
+<a href=\"https://www.netlib.org/lapack/lug/node94.html\">lapack documentation</a>.
 </p>
 <h4>Example</h4>
 <blockquote><pre>
