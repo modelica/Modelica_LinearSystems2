@@ -54,7 +54,7 @@ c4 = 16 - 2*j
 </pre></blockquote>
 <p>
 For details see
-<a href=\"https://www.modelica.org/documents/ModelicaSpec34.pdf\">Modelica Language Specification version 3.4</a>, Chapter 14.
+<a href=\"https://modelica.org/documents/ModelicaSpec34.pdf\">Modelica Language Specification version 3.4</a>, Chapter 14.
 </p>
 <p>
 Besides the basic arithmetics given in Complex record, further mathematical
@@ -492,7 +492,7 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 ---
 <p>
 The above is the license, and is the standard
-<a href=\"https://opensource.org/licenses/BSD-3-Clause\">3-clause BSD-license</a>
+<a href=\"https://opensource.org/license/BSD-3-Clause\">3-clause BSD-license</a>
 with DLR Institute of System Dynamics and Control as copyright holder.
 </p>
 </html>"));
