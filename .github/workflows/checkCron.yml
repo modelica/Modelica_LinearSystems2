@@ -1,0 +1,85 @@
+name: Cron
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 3 21 * *"
+
+jobs:
+  html_documentation_link_checks:
+    timeout-minutes: 5
+    if: github.repository_owner == 'dzimmer'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 5
+      - name: Setup python environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install python packages
+        run: pip install --user futures
+      - name: Check links
+        timeout-minutes: 3
+        run: python ./.CI/check_html.py checkLinks ./
+  spelling_checks:
+    timeout-minutes: 5
+    if: github.repository_owner == 'dzimmer'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 5
+      - name: Setup python environment
+        uses: actions/setup-python@v2
+        with:
+       nd   python-version: 3.8
+      - name: Install python packages
+        run:  pip install --user codespell
+      - name: Check for spelling errors
+        run: |
+          printf "[codespell]\nenable-colors=\n" >> .codespellrc
+          codespell -L Bu,nin ./Modelica_LinearSystems2/StateSpace.mo
+          codespell -L addD,Nd ./Modelica_LinearSystems2/Controller/LimPID.mo
+          codespell -L Nd ./Modelica_LinearSystems2/Controller/PID.mo
+          codespell -L nin ./Modelica_LinearSystems2/Controller/MatrixGain.mo
+          codespell -L Bu ./Modelica_LinearSystems2/Controller/StateSpace.mo
+          codespell -L Bu ./Modelica_LinearSystems2/Controller/Internal/DiscreteStateSpace.mo
+          codespell -L Bu ./Modelica_LinearSystems2/Controller/Internal/DiscreteStateSpace2.mo
+          codespell -L nin ./Modelica_LinearSystems2/Controller/Templates/SimpleObserverStateSpaceControl.mo
+          codespell -L nin ./Modelica_LinearSystems2/Controller/Templates/SimpleStateSpaceControl.mo
+          codespell -L nin ./Modelica_LinearSystems2/Controller/Templates/SimpleStateSpaceControl.mo
+          codespell -L Bu ./Modelica_LinearSystems2/Controller/Templates/Internal/ObserverTemplate.mo
+          codespell -L nd ./Modelica_LinearSystems2/Internal/complexFraction.mo
+          codespell -L nd ./Modelica_LinearSystems2/Internal/frequencyEvaluate.mo
+          codespell -L nin ./Modelica_LinearSystems2/Utilities/Plants/SimpleMIMOSystem.mo
+          codespell -L trian ./Modelica_LinearSystems2/Math/matrices/Internal/solve2rSym_C.mo
+          codespell -L trian ./Modelica_LinearSystems2/Math/matrices/Internal/solveSymRight_C.mo
+          codespell -L Bu ./Modelica_LinearSystems2/Math/matrices/Internal/symMatMul.mo
+          codespell -L Bu ./Modelica_LinearSystems2/Math/matrices/Internal/symMatMul_C.mo
+          codespell -L Numer ./Modelica_LinearSystems2/Math/matrices/generalizedEigenvaluesTriangular.mo
+          codespell -L TRe ./Modelica_LinearSystems2/WorkInProgress/StateSpace/Examples/analysis2.mo
+          codespell -L fro ./Modelica_LinearSystems2/WorkInProgress/StateSpace/Internal/wrapper_calcK.mo
+          codespell -L fro ./Modelica_LinearSystems2/WorkInProgress/StateSpace/Internal/wrapper_modifyX.mo
+          codespell -L fro ./Modelica_LinearSystems2/WorkInProgress/StateSpace/Internal/wrapper_modifyX.mo
+          codespell -L fro ./Modelica_LinearSystems2/WorkInProgress/StateSpace/Internal/wrapper_modifyX_old.mo
+          codespell -L fro ./Modelica_LinearSystems2/WorkInProgress/StateSpace/Internal/wrapper_modifyX_old.mo
+          codespell -L fro ./Modelica_LinearSystems2/WorkInProgress/StateSpace/Internal/wrapper_xBase.mo
+          codespell -L fro ./Modelica_LinearSystems2/WorkInProgress/Tests/Internal/wrapper_modifyX.mo
+          codespell -L fro ./Modelica_LinearSystems2/WorkInProgress/Tests/Internal/wrapper_modifyX.mo
+          codespell -L fro ./Modelica_LinearSystems2/WorkInProgress/Tests/Internal/wrapper_xBase.mo
+          codespell --skip ./.CI,./.github,./.git,*.png,*.mos -L nin,nd
+          # -L bu,trian,nin,nd,addd,numer --skip ./WorkInProgress
+  clean_workflow_runs:
+    timeout-minutes: 5
+    if: github.repository_owner == 'dzimmer'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete workflow runs
+        uses: dmvict/clean-workflow-runs@v1
+        with:
+          run_conclusions: skipped,success
+          save_period: 60
+          save_min_runs_number: 6
+          dry: false
