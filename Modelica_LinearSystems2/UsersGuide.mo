@@ -57,7 +57,7 @@ For details see
 <a href=\"https://modelica.org/documents/ModelicaSpec34.pdf\">Modelica Language Specification version 3.4</a>, Chapter 14.
 </p>
 <p>
-Besides the basic arithmetics given in Complex record, further mathematical
+Besides the basic arithmetic given in Complex record, further mathematical
 operations on complex numbers can be found in
 <a href=\"modelica://Modelica.ComplexMath\">Modelica.ComplexMath</a>. Some advanced
 functions, especially those concerning vectors and matrices of complex
@@ -382,7 +382,7 @@ are described in the following sections:
 <ol>
 <li> Section <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">Complex numbers</a>
      introduces the Modelica_LinearSystems2.Math.Complex record that provides a
-     data struture for Complex numbers and arrays and also the most
+     data structure for Complex numbers and arrays and also the most
      important (scalar) operations on them. Read this section first,
      because the structuring of records as well as operator overloading
      is explained that is also the basis for the other parts of the
@@ -632,7 +632,7 @@ Improvements in this version
        <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/34\">#34</a>.
        Concerning functions are marked obsolete, see below.
        </li>
-  <li> Use functions from DymolaCommands library instead of Dymola's build-in functions,
+  <li> Use functions from DymolaCommands library instead of Dymola's built-in functions,
        see issue <a href=\"https://github.com/modelica/Modelica_LinearSystems2/issues/66\">#66</a>.
        </li>
   <li> Disable an assert causing function crash in
@@ -769,7 +769,7 @@ Improvements in this version:
 
 <li> Improved documentation of DiscreteStateSpace.Import.fromFile</li>
 
-<li> HTML formatting of tables improved (left justifed instead of right justified, margins above and below)</li>
+<li> HTML formatting of tables improved (left justified instead of right justified, margins above and below)</li>
 </ul>
 
 
@@ -780,7 +780,7 @@ Bug fixes performed in this version:
 <ul>
 <li> FilterFIR: Removed if-condition of a parameter declaration (not possible to disable a parameter declaration in Modelica)</li>
 <li> Removed wrong C++ comment in Modelica_LinearSystems2.Internal.Streams.readMatrixInternal.</li>
-<li> Minor issues correct so that Dymola 2017 Beta.1 checkes successfully with pedantic flag:<br>
+<li> Minor issues correct so that Dymola 2017 Beta.1 checks successfully with pedantic flag:<br>
      import statements corrected<br>
      wrong Diagram annotations changed to Dialog annotations<br>
      non-standard annotation \"translateModel\" changed to \"__Dymola_translateModel\"
@@ -1013,7 +1013,7 @@ It contains the following main improvements (and several minor ones):
      that contains several functions to linearize
      a model and perform a selected linear analysis operation, like
      plotting of poles, zeros or transfer functions.
-     This allows a user to conveniently utilize the analyis
+     This allows a user to conveniently utilize the analysis
      functions by basically only providing the name of a
      Modelica model.<br></li>
 <li> New plot functions in package \"Modelica_LinearSystems2.Utilities.Plot\"
@@ -1143,8 +1143,8 @@ Other improvements:
 <li> The instance name is now displayed above the icon of every Controller block.</li>
 <li> The sample factor is now displayed in the icon of every Controller block.</li>
 <li> Access to resources (e.g. image files) has been changed from file names to URIs.</li>
-<li> The sequence of pole shifting in poleAssignmentMI has beeen changed.</li>
-<li> Bode diagrams of state space systems are now based on numerical more reliable zeros and poles representation istead of on transfer functions.</li>
+<li> The sequence of pole shifting in poleAssignmentMI has been changed.</li>
+<li> Bode diagrams of state space systems are now based on numerical more reliable zeros and poles representation instead of on transfer functions.</li>
 </ul>
 
 <p>
@@ -1341,7 +1341,7 @@ performed:
      in a practical application and therefore this parameter could be
      removed (and no longer confuses users).</li>
 <li> The continuous representations of all blocks are implemented such that
-     as much struture as possible is preserved in order that index reduction
+     as much structure as possible is preserved in order that index reduction
      is possible. For example, if a transfer function has more poles as
      zeros, then the output of the block might be differentiated n times
      (n = number of poles - number of zeros) without introducing derivatives
@@ -1367,7 +1367,7 @@ performed:
      block (all equations and variables from the discrete representation
      are removed during translation).</li>
 <li> Previously, for all simple blocks (such as FirstOrder) the different
-     discrete representations have been specifially derived and implemented.
+     discrete representations have been specifically derived and implemented.
      In the new version, all blocks are first transformed to
      state space form with a function call and then the
      discrete state space system block is used for the discrete
@@ -1461,7 +1461,7 @@ the library and has the following content:
     contains an introduction to the most important features and how
     to use them at hand of examples.</li>
 <li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Requirements\">Requirements</a>
-    scetches the requirements on a Modelica tool, in order that this library
+    sketches the requirements on a Modelica tool, in order that this library
     can be utilized.</li>
 <li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.The3clauseBSDLicense\">3-clause BSD License</a>
     is the legal license text under which this library is submitted.</li>

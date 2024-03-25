@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.Records;
 record SimulationOptionsForLinearization
   "Options to define the simulation setup used for linearization"
   Boolean linearizeAtInitial=true
-    "= true, if linearization at inital time; otherwise simulate until t_linearize"
+    "= true, if linearization at initial time; otherwise simulate until t_linearize"
      annotation (choices(checkBox=true));
   Modelica.Units.SI.Time t_start=0.0 "Start time of simulation"
     annotation (Dialog);

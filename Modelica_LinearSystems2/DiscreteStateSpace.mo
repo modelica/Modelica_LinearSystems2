@@ -1646,7 +1646,7 @@ the \"StepExact\" conversion from continuous system to discrete system.
 <h4>Description</h4>
 <p>
 Function <strong>rampResponse</strong> calculates the time response
-of a discrete state space system for ramp imput u = t. Starting at
+of a discrete state space system for ramp input u = t. Starting at
 <strong>x</strong>(t=0)=<strong>0</strong> and <strong>y</strong>(t=0)=<strong>C</strong>*<strong>x</strong>0 + <strong>D</strong>*<strong>u</strong>0,
 the outputs <strong>y</strong> and <strong>x</strong> are calculated for each time step t=k*dss.Ts.
 The function call
@@ -2223,13 +2223,13 @@ matrix
 </pre></blockquote>
 <p>
 with only the eigenvalues of <strong>F</strong>2 are modified. This approach to modify
-separated eigenvalues is used to sequentially shift one real eigenvalue ore two
+separated eigenvalues is used to sequentially shift one real eigenvalue or two
 complex conjugated eigenvalues stepwise until all assigned eigenvalues are placed.
 Therefore, at each step i always the (two) lower right eigenvalue(s) are modified by an
 appropriate feedback matrix <strong>K</strong>i. The matrix <strong>F</strong> - <strong>G</strong>*<strong>K</strong>i remains
 in real Schur form. The assigned eigenvalue(s) is (are) then moved to another diagonal
 position of the real Schur form using reordering techniques <strong>F</strong>
-&lt; -- <strong>Q</strong>i*<strong>F</strong>*<strong>Q</strong>i'  and a new block is transferred to the
+&larr; <strong>Q</strong>i*<strong>F</strong>*<strong>Q</strong>i'  and a new block is transferred to the
 lower right diagonal position. The transformations are accumulated in <strong>Q</strong>i
 and are also applicated to the matrices
 </p>
@@ -2305,7 +2305,7 @@ the norm of each <strong>K</strong>i is minimized [1].
 
       input Boolean magnitude=true "= true, to plot the magnitude of dtf"
         annotation(choices(checkBox=true));
-      input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
+      input Boolean phase=true "= true, to plot the phase of tf" annotation(choices(checkBox=true));
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
             Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());

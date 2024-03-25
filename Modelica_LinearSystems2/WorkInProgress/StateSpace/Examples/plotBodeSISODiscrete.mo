@@ -18,7 +18,7 @@ function plotBodeSISODiscrete
   input Modelica.Units.SI.Time Ts=0.1 "Sample time";
   input Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact "Discretization method";
 
-  input Integer iu=1 "index of inout";
+  input Integer iu=1 "index of input";
   input Integer iy=1 "index of output";
   output Boolean ok;
 

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function cholesky
-  "Compute the Cholesky factorization of a symmetric positive definte matrix"
+  "Compute the Cholesky factorization of a symmetric positive definite matrix"
   input Real A[:,size(A, 1)];
   input Boolean upper=true "True if the upper triangle of A is provided";
 

@@ -107,7 +107,7 @@ with
 using the Schur vector approach proposed by Laub [1].
 </p>
 <p>
-It is assumed that <strong>Q</strong> is symmetric and positve semidefinite and <strong>R</strong> is symmetric, nonsingular and positive definite,
+It is assumed that <strong>Q</strong> is symmetric and positive semidefinite and <strong>R</strong> is symmetric, nonsingular and positive definite,
 (<strong>A</strong>,<strong>B</strong>) is stabilizable and (<strong>A</strong>,<strong>Q</strong>) is detectable.
 <strong>The assumptions are not checked in this function!</strong>
 </p>
@@ -138,7 +138,7 @@ If <strong>U</strong> is partitioned to
 <strong>U</strong> = [<strong>U</strong>11, <strong>U</strong>12; <strong>U</strong>21, <strong>U</strong>22]
 </pre></blockquote>
 <p>
-with dimenstions according to <strong>S</strong>, the solution <strong>X</strong> can be calculated by
+with dimensions according to <strong>S</strong>, the solution <strong>X</strong> can be calculated by
 </p>
 <blockquote><pre>
 <strong>X</strong>*<strong>U</strong>11 = <strong>U</strong>21.

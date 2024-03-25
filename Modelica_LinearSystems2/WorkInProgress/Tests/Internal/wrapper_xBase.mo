@@ -211,7 +211,7 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
      ac[i].i= 0.0;
    }
 
-//begin decompostion of B
+//begin decomposition of B
    workdsvd = (doublereal *) malloc((max(3*nm+max(mm,nn),5*min(mm,nn)-4)+1)*sizeof(doublereal));
    dgesvd_(all, all, n, m, b, n, sigmaB, uB, n, vBt, m, workdsvd,  &lworkdsvd, &info);
    lworkdsvd=(int)(workdsvd[0]);
@@ -251,7 +251,7 @@ int c_inter_xBase_(doublereal *a, doublereal *b, integer *n, integer *m, doubler
        u1T[ii*rows_u1T+i].r = uB[(i+rrankB)*nn+ii];
        u1T[ii*rows_u1T+i].i = 0.0;
      }
-//end decompostion of B
+//end decomposition of B
 
 fprintf(fileptr,\"uB= \\n\");
 for(i=0;i<nn;i++)

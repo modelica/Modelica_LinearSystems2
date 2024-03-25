@@ -47,6 +47,6 @@ with
 <li> x - the state vector</li>
 <li> A,B,C,D - matrices of appropriate dimensions</li>
 </ul>
-Compared to record StateSpace StateSpaceR cantains an additional Integer value r
+Compared to record StateSpace StateSpaceR contains an additional Integer value r
 </html>"));
 end StateSpaceR;

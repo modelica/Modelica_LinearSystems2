@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Math.Complex.Matrices;
 function inv
-  "Inverse of a comlex matrix (try to avoid, use function solve(..) instead)"
+  "Inverse of a complex matrix (try to avoid, use function solve(..) instead)"
   extends Modelica.Icons.Function;
 
   import Complex;

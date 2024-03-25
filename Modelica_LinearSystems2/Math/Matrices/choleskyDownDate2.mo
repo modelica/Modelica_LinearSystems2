@@ -88,7 +88,7 @@ Cholesky factorization <strong>Ldd</strong>, with
 </blockquote>
 <p>
 from the input <strong>L</strong>, i.e. the left (lower) Cholesky factor of the
-original matrix <strong>A</strong>. The algortihm is taken from [1].
+original matrix <strong>A</strong>. The algorithm is taken from [1].
 </p>
 <p>
 Matrix <strong>Ldd</strong> is calculated by

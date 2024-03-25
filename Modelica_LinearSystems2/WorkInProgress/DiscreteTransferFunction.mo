@@ -284,7 +284,7 @@ encapsulated function bode "Plot transfer function as bode plot"
 
   input Boolean magnitude=true "= true, to plot the magnitude of tf"
     annotation(choices(checkBox=true));
-  input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
+  input Boolean phase=true "= true, to plot the phase of tf" annotation(choices(checkBox=true));
 
   extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
         Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(heading="Bode plot of  dtf = "
@@ -505,7 +505,7 @@ zp = k * ---------------------------------------------------------
           product(z + d1[i]) * product(z^2 + d2[i,1]*z + d2[i,2])
 </pre></blockquote>
 <p>
-of a discrete transfer function representated by numerator and denominator polynomial. The poles and zeros and the gain <tt>k</tt> are computed by
+of a discrete transfer function represented by numerator and denominator polynomial. The poles and zeros and the gain <tt>k</tt> are computed by
 (<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs the DiscreteZerosAndPoles constructor.
 </p>
 
@@ -602,7 +602,7 @@ is transformed into:
 </pre></blockquote>
 <p>
 If the numerator polynomial is 1, then the state vector
-<strong>x</strong> is built up of the y(k) (the privious y) and of all the nx-1 predecessor
+<strong>x</strong> is built up of the y(k) (the previous y) and of all the nx-1 predecessor
 (nx is the dimension of the state vector):
 </p>
 <blockquote><pre>

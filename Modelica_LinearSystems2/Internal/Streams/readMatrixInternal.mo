@@ -3,7 +3,7 @@ function readMatrixInternal "Read matrix matrixName[m,n] from file"
   input String fileName "File name";
   input String matrixName "Matrix name";
   input Integer m "Number of rows";
-  input Integer n "Number of coloumns";
+  input Integer n "Number of columns";
   output Real A[m,n] "Matrix to read";
 external "C" Modelica_LinearSystem2_readMatrixInternal(
     fileName,

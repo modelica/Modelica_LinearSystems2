@@ -165,7 +165,7 @@ Model of idealized stirred tank reactor from [1], p. 280. In the stirred tank th
 a continuous intake of substance A which reacts with a catalyzer and brakes down into
 other substances.
 Since the content of the tank reactor is stired continuously, it can be supposed
-a homogenous distribution of all substances within the tank.
+a homogeneous distribution of all substances within the tank.
 Therefore, the tank reactor system can be described by means of concentrated
 parameters.
 </p>

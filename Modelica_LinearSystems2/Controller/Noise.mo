@@ -110,14 +110,14 @@ This is usually not desired. Therefore, for every usage of block
 If <strong>continuous</strong> block, the output y = 0.0, i.e., no noise signal
 is generated. The reason is that the noise can only reasonably be
 used in a simulation if it is a discrete signal, i.e., changes
-its value only at sample instants. Since a continous block is usually
+its value only at sample instants. Since a continuous block is usually
 used to speed up the simulation, the noise should also be turned
 off because it will otherwise significantly limit the
 maximum step size of the integrator.<br>&nbsp;
 </p>
 <p>
 This noise generator is based on a function that generates
-a random real number uniformely in the semi-open range [0.0, 1.0).
+a random real number uniformly in the semi-open range [0.0, 1.0).
 The function uses the standard Wichmann-Hill generator,
 combining three pure multiplicative congruential generators of
 modulus 30269, 30307 and 30323. Its period (how many numbers it

@@ -14,7 +14,7 @@ block LimIntegrator
   parameter Real y_start=0 "Initial or guess value of output (=state)" annotation(Dialog(tab="Advanced options"));
 
   parameter Boolean limitsAtInit=true
-    "= false, if limits are ignored during initializiation (i.e., y=u)";
+    "= false, if limits are ignored during initialization (i.e., y=u)";
 
 public
   Modelica.Blocks.Interfaces.RealInput limit1
@@ -174,7 +174,7 @@ the output y as <em>integrator</em>:
 The block can be continuous or discrete (with continuous parameterization).
 </p>
 <p>
-It is not possible to initalize a continuous integrator in steady state.
+It is not possible to initialize a continuous integrator in steady state.
 For this reason, option \"initType = SteadyState\" is ignored for
 a continuous integrator block and
 interpreted as \"initType = InitialState\".

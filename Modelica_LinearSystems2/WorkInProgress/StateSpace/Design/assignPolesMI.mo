@@ -458,7 +458,7 @@ matrix
 </pre></blockquote>
 <p>
 with only the eigenvalues of <strong>F</strong>2 are modified. This approach to modify
-separated eigenvalues is used to sequentially shift one real eigenvalue ore two
+separated eigenvalues is used to sequentially shift one real eigenvalue or two
 complex conjugated eigenvalues stepwise until all assigned eigenvalues are placed.
 Therefore, at each step i always the (two) lower right eigenvalue(s) are modified by an
 appropriate feedback matrix <strong>K</strong>i. The matrix <strong>F</strong> - <strong>G</strong>*<strong>K</strong>i remains in real Schur form. The

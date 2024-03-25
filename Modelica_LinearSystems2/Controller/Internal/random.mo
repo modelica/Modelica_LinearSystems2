@@ -11,7 +11,7 @@ algorithm
   seedOut[2] := rem((172*seedIn[2]), 30307);
   seedOut[3] := rem((170*seedIn[3]), 30323);
 
-  // zero is a poor seed, therfore substitute 1;
+  // zero is a poor seed, therefore substitute 1;
   for i in 1:3 loop
     if seedOut[i] == 0 then
       seedOut[i] := 1;

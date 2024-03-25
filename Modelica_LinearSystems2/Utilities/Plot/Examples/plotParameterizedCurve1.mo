@@ -23,7 +23,7 @@ algorithm
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-This function plots the following parameterized cuves diagram (with default input arguments;
+This function plots the following diagram of parameterized curves (with default input arguments;
 the menu on the right part is displayed when moving
 the cursor on one curve point; then all points belonging to the same path parameter value are
 marked with a red square):

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 function methodString
-  "Return a sting with the name of the discretization method"
+  "Return a string with the name of the discretization method"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Utilities.Types.Method;

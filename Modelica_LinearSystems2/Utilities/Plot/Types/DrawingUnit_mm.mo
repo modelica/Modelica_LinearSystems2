@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Utilities.Plot.Types;
-type DrawingUnit_mm "Drawing unit specifing the nominal size in [mm]"
+type DrawingUnit_mm "Drawing unit specifying the nominal size in [mm]"
    extends Modelica.Icons.TypeReal(final quantity="Length", final unit="mm");
   annotation (Documentation(info="<html>
 <p>

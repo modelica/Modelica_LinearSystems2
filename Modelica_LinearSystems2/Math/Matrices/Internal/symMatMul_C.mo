@@ -186,12 +186,12 @@ and its transposes
 <p>
 Since, <strong>X</strong> also has to be symmetric, only the upper triangle
 of&nbsp;<strong>X</strong> is computed by calculatiing the upper triangle
-of matrix <strong>E</strong> and adding the upper trinagle of&nbsp;<strong>E</strong>'.
+of matrix <strong>E</strong> and adding the upper triangle of&nbsp;<strong>E</strong>'.
 </p>
 <p>
 The calculation employs the BLAS functions <strong>dtrmm</strong> and
 <strong>dgemm</strong>.<br><br>
-Note, that only the upper trinagle is calculated. The complete solution could
+Note, that only the upper triangle is calculated. The complete solution could
 be achieved by the command
 </p>
 

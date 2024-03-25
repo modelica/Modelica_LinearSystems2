@@ -42,11 +42,11 @@ protected
 // Modelica_LinearSystems2.StateSpace ss_ob=StateSpace(A=transpose(ss.A), B=transpose([1,0,0,0,0,0;0,0,1,0,0,0]), C=transpose(ss.B), D=fill(0,size(ss.B,2),2));
 // Modelica_LinearSystems2.StateSpace ssPlant=Modelica_LinearSystems2.StateSpace(A=ss.A, B=ss.B,C=[1,0,0,0,0,0;0,0,1,0,0,0],D=zeros(2,size(ss.B,2)));
 
-// Observer with 3 meassurements
+// Observer with 3 measurements
 //   Modelica_LinearSystems2.StateSpace ss_ob=StateSpace(A=transpose(ss.A), B=transpose([1,0,0,0,0,0;0,0,1,0,0,0;0,0,0,0,1,0]), C=transpose(ss.B), D=fill(0,size(ss.B,2),3));
 //   Modelica_LinearSystems2.StateSpace ssPlant=Modelica_LinearSystems2.StateSpace(A=ss.A, B=ss.B,C=[1,0,0,0,0,0;0,0,1,0,0,0;0,0,0,0,1,0],D=zeros(3,size(ss.B,2)));
 
-// Observer with 2 meassurements
+// Observer with 2 measurements
   Modelica_LinearSystems2.StateSpace ss_ob=StateSpace(A=transpose(ss.A), B=transpose([1,0,0,0,0,0;0,0,1,0,0,0]), C=transpose(ss.B), D=fill(0,size(ss.B,2),2));
   Modelica_LinearSystems2.StateSpace ssPlant=Modelica_LinearSystems2.StateSpace(A=ss.A, B=ss.B,C=[1,0,0,0,0,0;0,0,1,0,0,0],D=zeros(2,size(ss.B,2)), yNames={"s","phi1"}, xNames=ss.xNames, uNames=ss.uNames);
 

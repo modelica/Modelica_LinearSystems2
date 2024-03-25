@@ -113,7 +113,7 @@ This function solves the equation
 </pre></blockquote>
 
 <p>
-where matrix&nbsp;<strong>A</strong> with symmetric positiv definite matrix.
+where matrix&nbsp;<strong>A</strong> with symmetric positive definite matrix.
 The calculation is rather efficient since symmetrie and decomposition
 of positive definite matrices is exploited.
 </p>

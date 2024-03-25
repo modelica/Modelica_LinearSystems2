@@ -106,7 +106,7 @@ algorithm
   X := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.modifyX(
                                                             X,S,rankB,numberOfComplexPairs,maxSteps,IniX);// X modification, search optimal closed loop eigenvectors
   K := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.calcK(
-                                                         A,U0,Z,gammaSorted,X,numberOfRealEigenvalues);// calcualte feedbackmatrix K
+                                                         A,U0,Z,gammaSorted,X,numberOfRealEigenvalues);// calculate feedbackmatrix K
 
 //    for i in 1:nx loop
 //      Lambda[i, i] := gammaSorted[i];

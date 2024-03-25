@@ -5,7 +5,7 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 2.5.0-dev) - A
 
   constant String DataDir = Modelica.Utilities.Files.loadResource(
     "modelica://Modelica_LinearSystems2/Resources/Data/")
-    "Absolute path to directory containing utilitiy files for this package";
+    "Absolute path to directory containing utility files for this package";
 
 
 annotation (
@@ -73,7 +73,7 @@ For an introduction, have especially a look at:
      &quot;Modelica_LinearSystems2/Resources/Scripts&quot; first,
      in order to set useful abbreviations for e.g. ss, tf, zp, poly, j, etc.
      It is not necessary to import the package Complex since it is handled as
-     a&nbsp;build-in complex number type within Dymola.</li>
+     a&nbsp;built-in complex number type within Dymola.</li>
 </ul>
 
 <p>

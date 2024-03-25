@@ -4,7 +4,7 @@ record AnalyseOptions2
   extends Modelica.Icons.Record;
   Boolean plotEigenValues=true "Plot eigenvalues" annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean plotInvariantZeros=true "Plot invariant zeros" annotation(Dialog(group="Analyse options"),choices(checkBox=true));
-  Boolean plotStepResponse=true "Plot step respones. Only for SISO system"
+  Boolean plotStepResponse=true "Plot step response (only for SISO system)"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean plotFrequencyResponse=true "Plot bode diagram. Only for SISO system"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));

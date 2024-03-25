@@ -278,7 +278,7 @@ ss = StateSpace.&apos;-&apos;.<strong>negate</strong>(ss1)
 <h4>Description</h4>
 <p>
 This operator function negates the state space system, i.e. the output ss
-is the negation ot the state space input ss1.
+is the negation of the state space input ss1.
 </p>
 <p>
 The operator is used by writing just the following command:
@@ -768,7 +768,7 @@ same := ss1 == ss2;
 
     annotation (Documentation(info="<html>
 <p>
-Returns a pretty formated string representing the input state space ss.
+Returns a pretty formatted string representing the input state space ss.
 The operator is used by writing just the following command:
 </p>
 <blockquote><pre>
@@ -2559,7 +2559,7 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
 
   String fileName=\"analysis.html\";
   String systemName=\"Demonstration System\";
-  String description=\"System to demonstrate the usage of Modelica_LinearSystems2.StateSpace.Analysis.anlysis()\"
+  String description=\"System to demonstrate the usage of Modelica_LinearSystems2.StateSpace.Analysis.analysis()\"
 
 <strong>algorithm</strong>
   Modelica_LinearSystems2.StateSpace.Analysis.analysis(ss, fileName=fileName, systemName=systemName, description=description)
@@ -2641,7 +2641,7 @@ is less than 5&nbsp;% of the largest contribution, it is not shown).
 
 <p>
 In the next table, for each state in the column <strong>correlation to modal states</strong>, the modal
-states which contribute most to the coresponding state are summarized, i.e. the state is mostly composed of these modal states
+states which contribute most to the corresponding state are summarized, i.e. the state is mostly composed of these modal states
 This information is based on the two largest absolute values of row i of the
 eigenvector matrix that is associated with eigenvalue i (if the second large value
 is less than 5&nbsp;% of the largest contribution, it is not shown). This only holds
@@ -2902,7 +2902,7 @@ starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated
 
 <h4>Description</h4>
 <p>
-This function calculates the time response of a state space system for impulse imput. The state space system is transformed to a appropriate discrete state space system and, starting at <strong>x</strong>(t=0)=<strong>0</strong> and <strong>y</strong>(t=0)=<strong>C</strong>*<strong>x</strong>0 + <strong>D</strong>*<strong>u</strong>0, the outputs <strong>y</strong> and <strong>x</strong> are calculated for each time step t=k*dt.
+This function calculates the time response of a state space system for impulse input. The state space system is transformed to a appropriate discrete state space system and, starting at <strong>x</strong>(t=0)=<strong>0</strong> and <strong>y</strong>(t=0)=<strong>C</strong>*<strong>x</strong>0 + <strong>D</strong>*<strong>u</strong>0, the outputs <strong>y</strong> and <strong>x</strong> are calculated for each time step t=k*dt.
 </p>
 <blockquote><pre>
 StateSpace.Analysis.impulseResponse(ss, dt, tSpan)
@@ -3057,7 +3057,7 @@ StateSpace.Analysis.timeResponse(ss, dt, tSpan, response=Types.TimeResponse.Step
 
 <h4>Description</h4>
 <p>
-Function <strong>rampResponse</strong> calculates the time response of a state space system for ramp imput u = t.
+Function <strong>rampResponse</strong> calculates the time response of a state space system for ramp input u = t.
 The state space system is transformed to a appropriate discrete state space system and, starting at <strong>x</strong>(t=0)=<strong>0</strong> and <strong>y</strong>(t=0)=<strong>C</strong>*<strong>x</strong>0 + <strong>D</strong>*<strong>u</strong>0, the outputs <strong>y</strong> and <strong>x</strong> are calculated for each time step t=k*dt.
 </p>
 <blockquote><pre>
@@ -3500,7 +3500,7 @@ Calculate the eigenvalues of a state space system, i.e. the eigenvalues of the s
     end eigenValues;
 
     encapsulated function eigenVectors
-      "Calculate the rigth eigenvectors of a linear state space system and write them columnwise in a matrix. Optionally, the eigenvalues are computed"
+      "Calculate the right eigenvectors of a linear state space system and write them columnwise in a matrix. Optionally, the eigenvalues are computed"
       import Modelica;
       import Modelica_LinearSystems2.StateSpace;
       import Modelica.Math.Matrices.LAPACK;
@@ -6010,7 +6010,7 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
 
   String fileName=\"analysis.html\";
   String systemName=\"Demonstration System\";
-  String description=\"System to demonstrate the usage of Modelica_LinearSystems2.StateSpace.Analysis.anlysis()\"
+  String description=\"System to demonstrate the usage of Modelica_LinearSystems2.StateSpace.Analysis.analysis()\"
 
 <strong>algorithm</strong>
   Modelica_LinearSystems2.StateSpace.Analysis.analysis(ss, fileName=fileName, systemName=systemName, description=description)
@@ -6092,7 +6092,7 @@ is less than 5&nbsp;% of the largest contribution, it is not shown).
 
 <p>
 In the next table, for each state in the column <strong>correlation to modal states</strong>, the modal
-states which contribute most to the coresponding state are summarized, i.e. the state is mostly composed of these modal states
+states which contribute most to the corresponding state are summarized, i.e. the state is mostly composed of these modal states
 This information is based on the two largest absolute values of row i of the
 eigenvector matrix that is associated with eigenvalue i (if the second large value
 is less than 5&nbsp;% of the largest contribution, it is not shown). This only holds
@@ -6703,7 +6703,7 @@ matrix
 </pre></blockquote>
 <p>
 with only the eigenvalues of <strong>F</strong>2 are modified. This approach to modify
-separated eigenvalues is used to sequentially shift one real eigenvalue ore two
+separated eigenvalues is used to sequentially shift one real eigenvalue or two
 complex conjugated eigenvalues stepwise until all assigned eigenvalues are placed.
 Therefore, at each step i always the (two) lower right eigenvalue(s) are modified by an
 appropriate feedback matrix <strong>K</strong>i. The matrix <strong>F</strong> - <strong>G</strong>*<strong>K</strong>i remains in real Schur form. The
@@ -6871,7 +6871,7 @@ y^ = [C] x^ + [D 0] | |
                     |y|
 </pre></blockquote>
 <p>
-Since the controller approach was made to provide the estimated states, the representation of the ooutput kss is such that
+Since the controller approach was made to provide the estimated states, the representation of the output kss is such that
 </p>
 <blockquote><pre>
 y^ = x^
@@ -8936,7 +8936,7 @@ if inverted=true. Matrix T has to be invertible. The transformed system has the 
       assert(size(ss.C, 1) == 1 and size(ss.B, 2) == 1,
         "Calculation of controllable form fails for systems with more than 1 inputs or outputs");
       assert(StateSpace.Analysis.isObservable(ss),
-        "transformation ist not realizable since the system ist not obersvable");
+        "transformation is not realizable since the system is not obersvable");
 
       V[:, 1] := Modelica.Math.Matrices.solve(
         StateSpace.Analysis.observabilityMatrix(ss), vector([fill(
@@ -9060,7 +9060,7 @@ The transformed system has the same eigenvalues.
       assert(size(ss.C, 1) == 1 and size(ss.B, 2) == 1,
         "Calculation of controllable form fails for systems with more than 1 inputs or outputs");
       assert(StateSpace.Analysis.isControllable(ss),
-        "transformation ist not realizable since the system ist not controllable");
+        "transformation is not realizable since the system is not controllable");
 
       V[1, :] := Modelica.Math.Matrices.solve(transpose(
         StateSpace.Analysis.controllabilityMatrix(ss)), vector([fill(
@@ -10852,7 +10852,7 @@ and <strong>0</strong> are zero matrices of appropriate dimensions.
 </p>
 <p>
 Unlike to function StateSpace.Analysis.invariantZeros for general systems, it is
-assumned in StateSpace.Analysis.invariantZeros that the generalized system matrix
+assumed in StateSpace.Analysis.invariantZeros that the generalized system matrix
 [<strong>A</strong>, <strong>B</strong>; <strong>C</strong>, <strong>D</strong>] has upper Hessenberg form. Especially for SISO system this is
 achieved when <strong>A</strong> is of upper Hessenberg form and [1, n] matrix <strong>C</strong> is of form
 <strong>C</strong> = k*[0, 0, ..., 0, 1].
@@ -10860,7 +10860,7 @@ achieved when <strong>A</strong> is of upper Hessenberg form and [1, n] matrix <
 The function uses the LAPACK routine DHGEQZ. Look at <strong>Modelica_LinearSystems2.Math.Matrices.LAPACK.dhgeqz</strong> for details.
 <p>
 The advantage of this function in comparison to the general invariantZeros function
-is the lower computatioal effort bacause systems with arbitrary system functions are first transformed
+is the lower computational effort because systems with arbitrary system functions are first transformed
 into an upper Hessenberg form system.
 <p>
 This function is used in fromStateSpace transformation functions which use Hessenberg form systems anyway.
@@ -11132,7 +11132,7 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
 This function checks whether a SISO state space system is detectable or not.
 </p>
 <p>
-A system is detectable for the continuous-time case if all of the unobservable eigenvalues have neagtive real part
+A system is detectable for the continuous-time case if all of the unobservable eigenvalues have negative real part
 or for the discrete-time case if all of the unobservable eigenvalues are in the complex unit circle respectively.
 Hence, a oberservable system is always detectable of course.
 </p>
@@ -11142,7 +11142,7 @@ a system is detectable if the pair (<strong>A</strong>', <strong>C</strong>') is
 are applied to the dual pair (<strong>A</strong>', <strong>C</strong>') of the system:
 </p>
 <p>
-To check stabilizability (see Modelica_LinearSystems2.StateSpace.Analysis.isStabilizable) , ths system is transformed to to upper controller Hessenberg form
+To check stabilizability (see Modelica_LinearSystems2.StateSpace.Analysis.isStabilizable) , the system is transformed to upper controller Hessenberg form
 </p>
 <blockquote><pre>
               | *   *   ...   ...    * |               | * |
@@ -11342,12 +11342,12 @@ the variable \"method\" in \"Modelica_LinearSystems2.StateSpace.Internal.isContr
 This function checks whether a SISO state space system is stabilizable or not.
 </p>
 <p>
-A system is stabilizable for the continuous-time case if all of the uncontrollable eigenvalues have neagtive real part
+A system is stabilizable for the continuous-time case if all of the uncontrollable eigenvalues have negative real part
 or for the discrete-time case if all of the uncontrollable eigenvalues are in the complex unit circle respectively.
 Hence, a controllable system is always stabilizable of course.
 </p>
 <p>
-To check stabilizability, ths system is transformed to to upper controller Hessenberg form
+To check stabilizability, the system is transformed to upper controller Hessenberg form
 </p>
 <blockquote><pre>
               | *   *   ...   ...    * |               | * |
@@ -11406,7 +11406,7 @@ stabilizability the <strong>H</strong>22 has to be stable.
       annotation (Documentation(info="<html>
 This function checks whether a MIMO state space system is stabilizable or not.
 <p>
-A system is stabilizable for the continuous-time case if all of the uncontrollable eigenvalues have neagtive real part
+A system is stabilizable for the continuous-time case if all of the uncontrollable eigenvalues have negative real part
 or for the discrete-time case if all of the uncontrollable eigenvalues are in the complex unit circle respectively.
 Hence, a controllable system is always stabilizable of course.
 <p>
@@ -12084,7 +12084,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
           B := Pi*B;
           P := Pi*P;
 
-          // P could be ambigious according to the sign
+          // P could be ambiguous according to the sign
           if transpose(P)*B[:, 1]*ss.B[:, 1] < 0 then
             Pi := -Pi;
             P := -P;
@@ -12110,7 +12110,7 @@ numerically reliable the rank of a matrix, this algorithm should only be used to
             P := Pi*P;
             A := Pi*A*transpose(Pi);
 
-            //new implenmentation advisable because of many zeros in Pi
+            //new implementation advisable because of many zeros in Pi
             //    C := C*transpose(Pi);
             rankS := 0;
             if size(sigma, 1) > 1 then
@@ -12200,7 +12200,7 @@ This function computes an triangular matrix from an upper Hessenberg matrix by s
 <strong>A</strong> -> <strong>QA</strong> = <strong>T</strong>
 </pre></blockquote>
 <p>
-It is assumend that the original matrix has upper hessenberg form.
+It is assumed that the original matrix has upper hessenberg form.
 Additionally the vector b is transformed in the same way
 </p>
 <blockquote><pre>
