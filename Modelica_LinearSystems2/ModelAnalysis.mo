@@ -11,7 +11,9 @@ package ModelAnalysis
       "Linearized system as StateSpace object";
   algorithm
 
-    annotation(__Dymola_interactive=true, Icon(graphics={
+    annotation(
+      __Dymola_interactive=true,
+      Icon(graphics={
             Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={255,127,0},
@@ -19,7 +21,7 @@ package ModelAnalysis
             fillPattern=FillPattern.Solid),
           Text(
             extent={{-80,80},{80,-80}},
-            lineColor={255,127,0},
+            textColor={255,127,0},
             textString="L")}));
   end Linearize;
 
@@ -35,7 +37,7 @@ package ModelAnalysis
             fillPattern=FillPattern.Solid),
           Text(
             extent={{-80,80},{80,-80}},
-            lineColor={255,127,0},
+            textColor={255,127,0},
             textString="P")}));
   end Poles;
 
@@ -52,7 +54,7 @@ package ModelAnalysis
             fillPattern=FillPattern.Solid),
           Text(
             extent={{-80,80},{80,-80}},
-            lineColor={255,127,0},
+            textColor={255,127,0},
             textString="PZ")}));
   end PolesAndZeros;
 
@@ -71,7 +73,7 @@ package ModelAnalysis
             fillPattern=FillPattern.Solid),
           Text(
             extent={{-80,80},{80,-80}},
-            lineColor={255,127,0},
+            textColor={255,127,0},
             textString="TF")}));
   end TransferFunctions;
 
@@ -91,7 +93,7 @@ package ModelAnalysis
             fillPattern=FillPattern.Solid),
           Text(
             extent={{-80,80},{80,-80}},
-            lineColor={255,127,0},
+            textColor={255,127,0},
             textString="A")}));
   end FullAnalysis;
 
@@ -105,6 +107,6 @@ package ModelAnalysis
             fillPattern=FillPattern.Solid),
           Text(
             extent={{-80,80},{80,-80}},
-            lineColor={255,127,0},
-          textString="RL")}));
+            textColor={255,127,0},
+            textString="RL")}));
 end ModelAnalysis;
