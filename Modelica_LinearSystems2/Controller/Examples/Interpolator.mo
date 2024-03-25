@@ -64,7 +64,7 @@ sample rates. In this example, a sampled sine-signal is interpolated in differen
      (= green curve in the figure below) where Ts is the sample time of 1 ms.</li>
 
 <li> This \"sine\" signal is interpolated with \"interpolator1\" which has
-     a \"continous\" blockType. In this case, the interpolator just passes the input
+     a \"continuous\" blockType. In this case, the interpolator just passes the input
      signal (y = u) and therefore the signal is identical to the sine signal
      (therefore the blue and the red curve are the same).</li>
 

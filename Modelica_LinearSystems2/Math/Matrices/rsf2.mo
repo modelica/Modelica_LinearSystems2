@@ -69,7 +69,7 @@ are the elements of the diagonal.
 </p>
 <p>
 The calculation is performed stepwise using lapack.dgees, i.e. using the internal
-mehtods of balacing and scaling of dgees.
+methods of balancing and scaling of dgees.
 </p>
 
 <h4>Example</h4>

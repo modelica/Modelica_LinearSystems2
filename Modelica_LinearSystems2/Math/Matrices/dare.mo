@@ -91,7 +91,7 @@ algebraic Riccati equation
 using the Schur vector approach proposed by Laub [1].
 </p>
 <p>
-It is assumed that <strong>Q</strong> is symmetric and positve semidefinite and <strong>R</strong>
+It is assumed that <strong>Q</strong> is symmetric and positive semidefinite and <strong>R</strong>
 is symmetric, nonsingular and positive definite, (<strong>A</strong>,<strong>B</strong>) is stabilizable
 and (<strong>A</strong>,<strong>Q</strong>) is detectable.
 <strong>The assumptions are not checked in this function</strong>

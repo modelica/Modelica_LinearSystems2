@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.DiscreteTransferFunction;
-function plotBode "Bode plot of a DiscreteTransferFunction objekt"
+function plotBode "Bode plot of a DiscreteTransferFunction object"
   extends Modelica.Icons.Function;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
 

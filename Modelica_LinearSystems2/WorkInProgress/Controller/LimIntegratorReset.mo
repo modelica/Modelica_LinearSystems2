@@ -21,7 +21,7 @@ block LimIntegratorReset
     "Type of initialization (1: no init, 2: steady state, 3/4: initial output)"
     annotation(Evaluate=true, Dialog(group="Initialization"));
   parameter Boolean limitsAtInit=true
-    "= false, if limits are ignored during initializiation (i.e., der(y)=k*u)"
+    "= false, if limits are ignored during initialization (i.e., der(y)=k*u)"
     annotation(Evaluate=true, Dialog(group="Initialization"));
   parameter Real y_start=0
     "Initial or guess value of output (must be in the limits lowerLimit .. upperLimit)"

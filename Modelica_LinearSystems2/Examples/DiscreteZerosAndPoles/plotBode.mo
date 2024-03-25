@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.DiscreteZerosAndPoles;
-function plotBode "Bode plot of a DiscreteZerosAndPoles objekt"
+function plotBode "Bode plot of a DiscreteZerosAndPoles object"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.DiscreteZerosAndPoles;

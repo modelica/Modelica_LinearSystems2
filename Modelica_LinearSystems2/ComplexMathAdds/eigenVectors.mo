@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.ComplexMathAdds;
 function eigenVectors
-  "Calculate the rigth eigenvectors of a linear state space system and write them columnwise in a matrix."
+  "Calculate the right eigenvectors of a linear state space system and write them columnwise in a matrix."
   extends Modelica.Icons.Function;
 
   import Modelica.ComplexMath.j;

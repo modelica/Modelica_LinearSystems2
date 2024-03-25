@@ -40,7 +40,7 @@ solution <strong>x</strong> of the linear systems of equations
 <strong>P</strong>*<strong>L</strong>*<strong>U</strong>*<strong>x</strong> = <strong>b</strong>;
 </blockquote>
 <p>
-where <strong>P</strong> is a permutation matrix (implicitely
+where <strong>P</strong> is a permutation matrix (implicitly
 defined by vector <code>pivots</code>),
 <strong>L</strong> is a lower triangular matrix with unit
 diagonal elements (lower trapezoidal if m &gt; n), and

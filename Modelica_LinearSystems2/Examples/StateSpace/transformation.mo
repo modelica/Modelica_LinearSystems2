@@ -51,7 +51,7 @@ algorithm
                                                      ss);
   ssc := Modelica_LinearSystems2.StateSpace.Transformation.toControllabilityForm(
                                                     ss);
-  Modelica.Utilities.Streams.print("\n\noriginal sate space system:\n");
+  Modelica.Utilities.Streams.print("\n\noriginal state space system:\n");
   Modelica.Utilities.Streams.print(String(
     ss,
     6,

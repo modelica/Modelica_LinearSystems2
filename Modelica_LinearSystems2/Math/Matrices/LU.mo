@@ -38,7 +38,7 @@ LU decomposition of a \"Real[m,n]\" matrix A, i.e.,
 <strong>P</strong>*<strong>L</strong>*<strong>U</strong> = <strong>A</strong>
 </blockquote>
 <p>
-where <strong>P</strong> is a permutation matrix (implicitely
+where <strong>P</strong> is a permutation matrix (implicitly
 defined by vector <code>pivots</code>),
 <strong>L</strong> is a lower triangular matrix with unit
 diagonal elements (lower trapezoidal if m &gt; n), and

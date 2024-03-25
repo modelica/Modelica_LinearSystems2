@@ -15,7 +15,7 @@ function plotBodeSISO
   input Real C[:,size(A, 1)]=[0.0,1.0,1.0; 1.0,1.0,1.0];
   input Real D[size(C, 1),size(B, 2)]=[1.0,0.0; 0.0,1.0];
 
-  input Integer iu=1 "Index of inout";
+  input Integer iu=1 "Index of input";
   input Integer iy=1 "Index of output";
   output Boolean ok;
 

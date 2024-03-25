@@ -834,7 +834,7 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
 
       input Boolean magnitude=true "= true, to plot the magnitude of tf"
         annotation(choices(checkBox=true));
-      input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
+      input Boolean phase=true "= true, to plot the phase of tf" annotation(choices(checkBox=true));
 
       extends Internal.PartialPlotFunction(defaultDiagram=
             Internal.DefaultDiagramBodePlot(heading="Bode plot: "
@@ -1213,7 +1213,7 @@ dzp = k * ---------------------------------------------------------
            product(q + d1[i]) * product(q^2 + d2[i,1]*q + d2[i,2])
 </pre></blockquote>
 <p>
-of a discrete transfer function representated by numerator and denominator
+of a discrete transfer function represented by numerator and denominator
 polynomial. The poles and zeros and the gain <tt>k</tt> are computed from
 the DiscreteTransferFunction-input and are used as inputs the
 DiscreteZerosAndPoles constructor.

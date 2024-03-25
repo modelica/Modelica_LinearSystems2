@@ -52,7 +52,7 @@ algorithm
   else//isSI
 
     if method == Tests.Types.AssignPolesMethod.KNV then
-// extented robust KNV-algortihm according to MATLAB's place-function
+// extended robust KNV-algortihm according to MATLAB's place-function
      (K,X) := Modelica_LinearSystems2.WorkInProgress.StateSpace.Internal.assignPolesMI_rob(
                                                                             data.A, data.B, data.assignedPoles);
      S := data.A - data.B*K;

@@ -651,7 +651,7 @@ encapsulated function bodeSISO
 
   input Boolean magnitude=true "= true, to plot the magnitude of dtf"
     annotation(choices(checkBox=true));
-  input Boolean phase=true "= true, to plot the pase of tf" annotation(choices(checkBox=true));
+  input Boolean phase=true "= true, to plot the phase of tf" annotation(choices(checkBox=true));
 
   extends Modelica_LinearSystems2.Internal.PartialPlotFunction(defaultDiagram=
         Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot());
@@ -2253,7 +2253,7 @@ but using statistical linearization where extended Kalman filter apply the user-
 linear regression between spcifically chosen sample points (sigma points). See [1] for more information.
 </p>
 <p>
-See also <a href=\"modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definte matrices is applied to solve the mathematically identical problem.
+See also <a href=\"modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Design.UKF_SR\">UKF_SR</a>, where the square root method to deal with positive definite matrices is applied to solve the mathematically identical problem.
 </p>
 
 <h4><a name=\"References\">References</a></h4>
@@ -2283,7 +2283,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteSta
     input Real CfQ[size(xpre,1),size(xpre,1)] = identity(size(xpre,1))
         "Left Cholesky factor of the weighted covariance matrix of the associated process noise (F*Q*F')";
     input Real CfR[size(y,1),size(y,1)] = identity(size(y,1))
-        "Left Cholesky faktor of the covariance matrix of the measurement noise";
+        "Left Cholesky factor of the covariance matrix of the measurement noise";
     input Real alpha=0.1 "Spread of sigma points";
     input Real beta=2 "Characteristic of the distribution of x";
     input Real kappa=0 "Kurtosis scaling of sigma point distribution";
@@ -2332,7 +2332,7 @@ See also <a href=\"modelica://Modelica_LinearSystems2.WorkInProgress.DiscreteSta
 
 <h4>Description</h4>
 <p>
-Function <strong>UKF_SR</strong> computes one recursion of the Square Root Unscented Kalman filter (SR-UKF). SR-UKF follow the same princible as UKF but using Cholesky factors (square roots)
+Function <strong>UKF_SR</strong> computes one recursion of the Square Root Unscented Kalman filter (SR-UKF). SR-UKF follow the same principle as UKF but using Cholesky factors (square roots)
 of the positive definite matrices. This means less computational effort and higher reliablitiy.
 </p>
 <p>

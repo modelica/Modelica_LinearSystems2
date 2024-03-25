@@ -394,7 +394,7 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
 
         input TransferFunction tf "transfer function to analyze";
         input String fileName="systemAnalysis.html"
-          "File on which the transfer fucntion is written in html format";
+          "File on which the transfer function is written in html format";
         input String systemName="Transfer Function" "name of the system";
         input String description="" "Description of system (used in html file)";
         input String format=".3g" "Format of numbers (e.g. \"20.8e\")";
@@ -643,7 +643,7 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
 <h4>Description</h4>
 <p>
 Function <strong>rampResponse</strong> calculates the time response of a transfer
-function for ramp imput u = t. The state space system is transformed
+function for ramp input u = t. The state space system is transformed
 to a appropriate discrete state space system and, starting at
 <strong>x</strong>(t=0)=<strong>0</strong> and <strong>y</strong>(t=0)=<strong>C</strong>*<strong>x</strong>0 + <strong>D</strong>*<strong>u</strong>0,
 the outputs <strong>y</strong> and <strong>x</strong> are calculated for each time step t=k*dt.
@@ -2191,7 +2191,7 @@ zp = k * ---------------------------------------------------------
           product(s + d1[i]) * product(s^2 + d2[i,1]*s + d2[i,2])
 </pre></blockquote>
 <p>
-of a transfer function representated by numerator and denominator polynomial.
+of a transfer function represented by numerator and denominator polynomial.
 The poles and zeros and the gain <tt>k</tt> are computed
 (<a href=\"modelica://Modelica_LinearSystems2.TransferFunction.Analysis.zerosAndPoles\">zerosAndPoles</a>)
 and are used as inputs the ZerosAndPoles constructor.
@@ -2577,9 +2577,9 @@ tf = TransferFunction.Import.<strong>fromModel</strong>(modelName, T_linearize, 
 <h4>Description</h4>
 <p>Generate a matrix of TransferFunction data records by linearization of a model
 defined by modelName. The linearization is performed at time T_linearize of
-the simulation. The system is genrated by using
+the simulation. The system is generated using
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a>
-followed by a conversion from sate space to transfer function representation.
+followed by a conversion from state space to transfer function representation.
 </p>
 
 <h4>Example</h4>

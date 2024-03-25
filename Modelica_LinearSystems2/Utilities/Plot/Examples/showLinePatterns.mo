@@ -50,7 +50,7 @@ algorithm
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-This function demonstrates the supported line patters defined via enumeration
+This function demonstrates the supported line patterns defined via enumeration
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern\">Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern</a>:
 </p>
 

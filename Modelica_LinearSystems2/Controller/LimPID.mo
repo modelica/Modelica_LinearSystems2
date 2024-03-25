@@ -42,7 +42,7 @@ block LimPID
     annotation(Dialog(enable=controllerType==SimpleController.PD or
                              controllerType==SimpleController.PID));
   parameter Boolean limitsAtInit=true
-    "= false, if limits are ignored during initializiation"
+    "= false, if limits are ignored during initialization"
     annotation(Evaluate=true, Dialog(group="Initialization",
                 enable=controllerType==SimpleController.PI or
                        controllerType==SimpleController.PID));

@@ -3,7 +3,7 @@ package Controller "Package of continuous and discrete input/output blocks"
   extends Modelica.Icons.Package;
 
   constant String DataDir=Modelica_LinearSystems2.DataDir
-    "Absolute path to directory containing utilitiy files for this package, such as images";
+    "Absolute path to directory containing utility files for this package, such as images";
 
 
   annotation (

@@ -3,7 +3,7 @@ function dgelqf "Compute LQ factorization of a real matrix A=L*Q"
 
   input Real A[:,:];
   output Real Aout[size(A, 1),size(A, 2)]=A
-    "The lower triangle contains the m-min(m,n) lower trapezoidal matrix L, the elelments above contain the elementary reflectors";
+    "The lower triangle contains the m-min(m,n) lower trapezoidal matrix L, the elements above contain the elementary reflectors";
   output Real tau[min(size(A, 1), size(A, 2))]
     "Scalar factors of the elementary reflectors";
   output Integer info;

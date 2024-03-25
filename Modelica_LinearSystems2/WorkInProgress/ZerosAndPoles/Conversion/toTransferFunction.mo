@@ -39,7 +39,7 @@ Computes a TransferFunction record
    tf = -------- = --------------------------
            d(s)     a0 + a1*s + ... + an*s^n
  </pre></blockquote>
-from a ZerosAndPoles record representated by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the TransferFunction constructor.
+from a ZerosAndPoles record represented by first and second order numerator and denominator polynomials. The poles and zeros and the gain <tt>k</tt> are computed (<a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Analysis.zerosAndPoles\">zerosAndPoles</a>) and are used as inputs in the TransferFunction constructor.
 
 
 <h4>Example</h4>

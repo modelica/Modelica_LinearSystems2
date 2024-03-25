@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function analysisPolesAndZerosSISO
-  "Compute poles and invariant zeros of a SISO state space system by transformation to a minmal system"
+  "Compute poles and invariant zeros of a SISO state space system by transformation to a minimal system"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;

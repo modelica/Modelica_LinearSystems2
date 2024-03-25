@@ -4,7 +4,7 @@ record AnalyseOptions
   extends Modelica.Icons.Record;
   Boolean plotEigenValues=true "Plot eigenvalues" annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean plotInvariantZeros=true "Plot invariant zeros" annotation(Dialog(group="Analyse options"),choices(checkBox=true));
-  Boolean plotStepResponse=true "Plot step respones"
+  Boolean plotStepResponse=true "Plot step response"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
   Boolean plotFrequencyResponse=true "Plot bode diagram"
     annotation(Dialog(group="Analyse options"),choices(checkBox=true));
