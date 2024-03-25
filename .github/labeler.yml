@@ -1,0 +1,66 @@
+# Labeler attributes
+#   all: all changed files must match the list
+#   any: any of changed files match the list
+
+CI:
+- any: ['.CI/**/*']
+- any: ['.github/**/*']
+
+L: DiscreteStateSpace:
+- any: ['Modelica_LinearSystems2/DiscreteStateSpace.mo']
+
+L: DiscreteTransferFunction:
+- any: ['Modelica_LinearSystems2/DiscreteTransferFunction.mo']
+
+L: DiscreteZerosAndPoles:
+- any: ['Modelica_LinearSystems2/DiscreteZerosAndPoles.mo']
+
+L: StateSpace:
+- any: ['Modelica_LinearSystems2/StateSpace.mo']
+
+L: TransferFunction:
+- any: ['Modelica_LinearSystems2/TransferFunction.mo']
+
+L: ZerosAndPoles:
+- any: ['Modelica_LinearSystems2/ZerosAndPoles.mo']
+
+L: Controllers:
+- any: ['Modelica_LinearSystems2/Controller/**/*.mo']
+- any: ['Modelica_LinearSystems2/Controllers/**/*.mo']
+
+L: ComplexMathAdds:
+- any: ['Modelica_LinearSystems2/ComplexMathAdds/**/*.mo']
+
+L: Examples:
+- all: ['Modelica_LinearSystems2/Examples/**/*.mo']
+
+L: Internal:
+- any: ['Modelica_LinearSystems2/Internal/**/*.mo']
+
+L: Math:
+- any: ['Modelica_LinearSystems2/Math/**/*.mo']
+  all: ['!Modelica_LinearSystems2/Math/Complex.mo']
+  all: ['!Modelica_LinearSystems2/Math/Polynomial.mo']
+
+L: Math.Complex:
+- all: ['Modelica_LinearSystems2/Math/Complex.mo']
+
+L: Math.Polynomial:
+- all: ['Modelica_LinearSystems2/Math/Polynomial.mo']
+
+L: Records:
+- any: ['Modelica_LinearSystems2/Records/**/*.mo']
+
+L: Resources:
+- all: ['Modelica_LinearSystems2/Resources/**/*']
+
+L: Types:
+- any: ['Modelica_LinearSystems2/Types/**/*.mo']
+
+L: UsersGuide:
+- all: ['Modelica_LinearSystems2/UsersGuide.mo']
+
+L: Utilities:
+- any: ['Modelica_LinearSystems2/Utilities/**/*.mo']
+
+
