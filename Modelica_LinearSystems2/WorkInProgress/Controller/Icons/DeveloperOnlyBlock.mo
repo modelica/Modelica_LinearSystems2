@@ -9,8 +9,7 @@ partial block DeveloperOnlyBlock
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid), Text(
           extent={{-100,100},{100,-100}},
-          lineColor={255,0,0},
-          lineThickness=0.5,
+          textColor={255,0,0},
           textString="D")}),
                       Documentation(info="<html>
 <p>

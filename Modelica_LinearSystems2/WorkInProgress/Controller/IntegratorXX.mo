@@ -100,18 +100,16 @@ interpreted as \"initType = InitialState\".
           fillPattern=FillPattern.Solid),
         Text(
           extent={{0,-10},{60,-70}},
-          lineColor={192,192,192},
+          textColor={192,192,192},
           textString="I"),
         Text(
           extent={{-150,-150},{150,-110}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="k=%k"),
         Line(points={{-80,-80},{80,80}}, color={0,0,127}),
         Text(
           extent={{-94,78},{88,46}},
-          lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="%sampleFactor")}),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
@@ -122,11 +120,11 @@ interpreted as \"initType = InitialState\".
         Line(points={{60,0},{100,0}}, color={0,0,127}),
         Text(
           extent={{-36,60},{32,2}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="k"),
         Text(
           extent={{-32,0},{36,-58}},
-          lineColor={0,0,0},
+          textColor={0,0,0},
           textString="s"),
         Line(points={{-46,0},{46,0}}, color={0,0,0})}));
 end IntegratorXX;

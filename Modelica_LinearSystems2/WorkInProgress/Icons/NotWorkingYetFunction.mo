@@ -7,7 +7,7 @@ partial function NotWorkingYetFunction
         Text(
           extent={{-140,162},{136,102}},
           textString="%name",
-          lineColor={0,0,255}),
+          textColor={0,0,255}),
         Ellipse(
           extent={{-100,100},{100,-100}},
           lineColor={255,0,0},
