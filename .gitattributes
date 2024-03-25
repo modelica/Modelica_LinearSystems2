@@ -3,6 +3,8 @@
 *.mo eol=native
 
 # list of files that git archive should ignore
+.CI export-ignore
 .gitattributes export-ignore
+.github export-ignore
 .gitignore export-ignore
 LinearSystems2TestConversion3.mo export-ignore
