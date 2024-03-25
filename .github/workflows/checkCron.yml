@@ -8,7 +8,7 @@ on:
 jobs:
   html_documentation_link_checks:
     timeout-minutes: 5
-    if: github.repository_owner == 'dzimmer'
+    if: github.repository_owner == 'modelica'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,7 +25,7 @@ jobs:
         run: python ./.CI/check_html.py checkLinks ./
   spelling_checks:
     timeout-minutes: 5
-    if: github.repository_owner == 'dzimmer'
+    if: github.repository_owner == 'modelica'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -69,11 +69,11 @@ jobs:
           codespell -L fro ./Modelica_LinearSystems2/WorkInProgress/Tests/Internal/wrapper_modifyX.mo
           codespell -L fro ./Modelica_LinearSystems2/WorkInProgress/Tests/Internal/wrapper_modifyX.mo
           codespell -L fro ./Modelica_LinearSystems2/WorkInProgress/Tests/Internal/wrapper_xBase.mo
-          codespell --skip ./.CI,./.github,./.git,*.png,*.mos -L nin,nd
+          # codespell --skip ./.CI,./.github,./.git,*.png,*.mos -L nin,nd
           # -L bu,trian,nin,nd,addd,numer --skip ./WorkInProgress
   clean_workflow_runs:
     timeout-minutes: 5
-    if: github.repository_owner == 'dzimmer'
+    if: github.repository_owner == 'modelica'
     runs-on: ubuntu-latest
     steps:
       - name: Delete workflow runs
