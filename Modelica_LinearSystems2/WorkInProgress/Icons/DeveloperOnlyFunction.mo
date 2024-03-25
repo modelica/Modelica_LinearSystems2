@@ -7,7 +7,7 @@ partial function DeveloperOnlyFunction
         Text(
           extent={{-140,162},{136,102}},
           textString="%name",
-          lineColor={0,0,255}),
+          textColor={0,0,255}),
         Ellipse(
           extent={{-100,100},{100,-100}},
           lineColor={255,0,0},
@@ -15,8 +15,7 @@ partial function DeveloperOnlyFunction
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-100,100},{100,-100}},
-          lineColor={255,0,0},
-          lineThickness=0.5,
+          textColor={255,0,0},
           textString="D")}), Documentation(info="<html>
 <p>
 This icon is designed for a <strong>function</strong>

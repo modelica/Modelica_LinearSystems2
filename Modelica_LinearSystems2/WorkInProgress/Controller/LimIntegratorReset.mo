@@ -76,7 +76,7 @@ equation
           fillPattern=FillPattern.Solid),
         Text(
           extent={{6,-10},{66,-70}},
-          lineColor={192,192,192},
+          textColor={192,192,192},
           textString="I"),
         Polygon(
           points={{96,-80},{74,-72},{74,-88},{96,-80}},

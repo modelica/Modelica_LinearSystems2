@@ -72,7 +72,7 @@ equation
   annotation ( Icon(graphics={
         Text(
           extent={{52,30},{114,-26}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="x"),
         Line(
           points={{76,18},{84,28},{92,18}},
@@ -84,31 +84,27 @@ equation
           smooth=Smooth.None),
         Text(
           extent={{-24,-42},{38,-98}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="y"),
         Text(
           extent={{-118,82},{-56,26}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="u"),
         Text(
           extent={{-118,-18},{-56,-74}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="y"),
         Text(
           extent={{-106,-54},{-20,-84}},
-          lineColor={0,0,255},
+          textColor={0,0,255},
           textString="m"),
         Text(
           extent={{-78,46},{68,-16}},
-          lineColor={0,0,0},
-          fillColor={0,255,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="UKF"),
         Text(
           extent={{-42,-6},{28,-42}},
-          lineColor={0,0,0},
-          fillColor={0,255,0},
-          fillPattern=FillPattern.Solid,
+          textColor={0,0,0},
           textString="(SR)")}),
     Documentation(revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">

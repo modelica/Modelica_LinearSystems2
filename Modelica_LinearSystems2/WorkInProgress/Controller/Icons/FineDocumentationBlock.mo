@@ -6,7 +6,7 @@ partial block FineDocumentationBlock
             -100},{100,100}}), graphics={Text(
           extent={{-140,162},{136,102}},
           textString="%name",
-          lineColor={0,0,255}), Rectangle(
+          textColor={0,0,255}), Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={128,255,0},
           pattern=LinePattern.Dash)}),
