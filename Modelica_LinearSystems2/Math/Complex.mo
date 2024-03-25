@@ -24,6 +24,6 @@ shall be replaced by
 <p>
 in your models.
 Such a&nbsp;new import can even be removed completely in most cases
-due to the build-in-like functionality of the operator record Complex.
+due to the built-in-like functionality of the operator record Complex.
 </p>
 </html>"));

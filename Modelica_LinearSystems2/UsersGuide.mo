@@ -543,7 +543,7 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_2_5_0 "Version 2.5.0-dev (???, 2020)"
+    class Version_2_5_0 "Version 2.5.0 (April 30, 2024)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>
@@ -560,7 +560,7 @@ The functionality of this record is given by the top-level operator
 record <a href=\"modelica://Complex\">Complex</a> now and
 most of the functions can be found in the library 
 <a href=\"modelica://Modelica.ComplexMath\">Modelica.ComplexMath</a>.
-The remaining functions contained in this record where moved into
+The remaining functions contained in this record were moved into
 <a href=\"modelica://Modelica_LinearSystems2.ComplexMathAdds\">ComplexMathAdds</a>.
 </p>
 <p>
