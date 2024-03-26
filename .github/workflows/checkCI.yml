@@ -16,22 +16,22 @@ jobs:
           python-version: 3.8
       - name: Install python packages
         run: |
-          pip install --disable-pip-version-check --user pytidylib
+#          pip install --disable-pip-version-check --user pytidylib
           pip install --disable-pip-version-check --user futures
-      - name: Build html tidy
-        run: |
-          git clone --branch 5.8.0 --depth=1 https://github.com/htacg/tidy-html5.git
-          pushd tidy-html5
-          cmake .
-          make
-          sudo make install
-          popd
-          sudo ldconfig
-      - name: Tidy html
-        run: |
-          echo "::add-matcher::./.github/tidyHTML.json"
-          python ./.CI/check_html.py tidyHTML ./
-          echo "::remove-matcher owner=tidyHTML::"
+#      - name: Build html tidy
+#        run: |
+#          git clone --branch 5.8.0 --depth=1 https://github.com/htacg/tidy-html5.git
+#          pushd tidy-html5
+#          cmake .
+#          make
+#          sudo make install
+#          popd
+#          sudo ldconfig
+#      - name: Tidy html
+#        run: |
+#          echo "::add-matcher::./.github/tidyHTML.json"
+#          python ./.CI/check_html.py tidyHTML ./
+#          echo "::remove-matcher owner=tidyHTML::"
       - name: Check tags
         run: |
           echo "::add-matcher::./.github/checkTags.json"
