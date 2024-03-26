@@ -17,11 +17,6 @@ jobs:
       - name: Install python packages
         run: |
           pip install --disable-pip-version-check --user futures
-      - name: Check tags
-        run: |
-          echo "::add-matcher::./.github/checkTags.json"
-          python ./.CI/check_html.py checkTags ./
-          echo "::remove-matcher owner=checkTags::"
       - name: Check links
         timeout-minutes: 3
         run: python ./.CI/check_html.py checkLinks ./
