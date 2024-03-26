@@ -32,9 +32,9 @@ Complex.'+'(c1,&nbsp;c2). In other words, an operation like
 c3&nbsp;=&nbsp;c1&nbsp;+&nbsp;c2 can now be realized by
 </p>
 <blockquote><pre>
-import Modelica.ComplexMath.j; // same as constant Complex j = Complex(0,1);
-Complex c1 = 1 + 3*j;    // = Complex.'+'(Complex(1), Complex.'*'(Complex(3),j));
-Complex c2 = 1 - 5*j;
+<strong>import</strong> Modelica.ComplexMath.j; // same as constant Complex j = Complex(0,1);
+Complex c1 = 1 + 3*j;         // = Complex.'+'(Complex(1), Complex.'*'(Complex(3),j));
+Complex c2 = Complex(1, -5);  // equivalent to definition of c1
 Complex c3 = c1 + c2;
 Complex c4 = c1 * c2;
 </pre></blockquote>
