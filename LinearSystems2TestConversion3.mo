@@ -48,6 +48,7 @@ package LinearSystems2TestConversion3
       Modelica_LinearSystems2.Math.Complex.Matrices.print(cm);
       Complex.Matrices.matMatMul(cm, cm);
       Complex.Matrices.matVecMul(cm, cv);
+      Modelica_LinearSystems2.Math.Complex.Internal.C_transpose(cm);
     end complexNumerics;
 
     function readMatrixGainTest
