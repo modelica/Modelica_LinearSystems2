@@ -6,7 +6,7 @@ function readMatrixC2 "Read the output matrix of a state space system"
   input String matrixName="ABCD"
     "Name of the generalized state space system matrix";
   input Integer nx "System order";
-  input Integer ny "number of outputs";
+  input Integer ny "Number of outputs";
 protected
   Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(
     fileName, matrixName);
