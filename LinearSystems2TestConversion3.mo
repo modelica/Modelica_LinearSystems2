@@ -265,6 +265,49 @@ package LinearSystems2TestConversion3
     algorithm
 
     end readSystemDimensionTest;
+
+    function readMatrixXTest
+
+    protected
+      String fileName = "NoName";
+      String mName = "ABCD";
+      Integer nx = 2;
+      Integer nu = 1;
+      Integer ny = 1;
+
+      Real dim[nx] = Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize(fileName, mName);
+      Real AA[nx,nx] = Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(fileName, mName, nx, nx);
+
+      Real A[nx,nx] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixA();
+      Real A2[nx,nx] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixA2(nx=nx);
+      Real B[nx,nu] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixB();
+      Real B2[nx,nu] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixB2(nx=nx, nu=nu);
+      Real C[ny,nx] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixC();
+      Real C2[ny,nx] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixC2(nx=nx, ny=ny);
+      Real D[ny,nu] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixD();
+      Real D2[ny,nu] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixD2(nx=nx, nu=nu, ny=ny);
+    algorithm
+
+      annotation();
+    end readMatrixXTest;
+
+    function otherClassesTest
+
+    protected
+      Modelica_LinearSystems2.Internal.Streams.AnalyseOptions ao;
+      Modelica_LinearSystems2.StateSpace ssi = Modelica_LinearSystems2.StateSpace(
+        A=[1,1;3,0],
+        B=[1;1],
+        C=[1,0],
+        D=[0],
+        xNames={"x1","x2"},
+        uNames={"u1"}, yNames={"y1"});
+
+      String s = Modelica_LinearSystems2.Internal.Streams.stateSpaceString_html(ssi);
+    algorithm
+
+      annotation();
+    end otherClassesTest;
   end Streams;
   annotation (uses(Modelica_LinearSystems2(version="2.4.0")));
 end LinearSystems2TestConversion3;
