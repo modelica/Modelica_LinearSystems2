@@ -6,7 +6,7 @@ function readMatrixB2 "Read the input matrix of a state space system"
   input String matrixName="ABCD"
     "Name of the generalized state space system matrix";
   input Integer nx "System order";
-  input Integer nu "number of inputs";
+  input Integer nu "Number of inputs";
 
 protected
   Integer ABCDsizes[2]=Modelica.Utilities.Streams.readMatrixSize(

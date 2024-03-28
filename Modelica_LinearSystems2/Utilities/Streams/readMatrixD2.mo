@@ -6,8 +6,8 @@ function readMatrixD2 "Read the feed forward matrix of a state space system"
   input String matrixName="ABCD"
     "Name of the generalized state space system matrix";
   input Integer nx "System order";
-  input Integer nu "number of inputs";
-  input Integer ny "number of outputs";
+  input Integer nu "Number of inputs";
+  input Integer ny "Number of outputs";
 
 protected
   Real ABCD[nx + ny,nx + nu]=
