@@ -10,7 +10,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-D = Streams.<strong>ReadMatrixD</strong>(fileName, matrixName);
+D = Streams.<strong>readMatrixD</strong>(fileName, matrixName);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -26,7 +26,7 @@ Modelica_LinearSystems2.Utilities.Import.linearize(
   \"Modelica_LinearSystems2.Utilities.Plants.DoublePendulum\", 1.0);
 
 // Read D matrix of the linearized system
-ReadMatrixD(dslin.mat, \"ABCD\")
+readMatrixD(dslin.mat, \"ABCD\")
 //  = 
 // [0.0;
 // 0.0;
