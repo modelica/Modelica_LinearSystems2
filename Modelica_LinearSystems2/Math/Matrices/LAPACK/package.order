@@ -1,11 +1,6 @@
-dgeev
 dgeevx_eigenValues
 dgegv
-dgeqp3
-dgeqrf
-dgetrs
 dggev_eigenValues
-dhseqr
 dlansy
 dorgqr_x
 dgemm
