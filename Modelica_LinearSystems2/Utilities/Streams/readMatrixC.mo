@@ -10,7 +10,7 @@ algorithm
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-C = Streams.<strong>ReadMatrixC</strong>(fileName, matrixName);
+C = Streams.<strong>readMatrixC</strong>(fileName, matrixName);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -26,7 +26,7 @@ Modelica_LinearSystems2.Utilities.Import.linearize(
   \"Modelica_LinearSystems2.Utilities.Plants.DoublePendulum\", 1.0);
 
 // Read C matrix of the linearized system
-ReadMatrixC(dslin.mat, \"ABCD\")
+readMatrixC(dslin.mat, \"ABCD\")
 //  = 
 // [0.9999999999670585, 0.0, 0.0, 0.0, 0.0, 0.0;
 // 0.0, 1.0000000001008236, 0.0, 0.0, 0.0, 0.0;
