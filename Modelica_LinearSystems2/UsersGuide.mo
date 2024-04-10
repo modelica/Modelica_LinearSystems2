@@ -633,7 +633,8 @@ the conversion.
 Removed deprecated classes
 </h5>
 <p>
-The following classes were removed from the Library. A&nbsp;conversion script is provided to facilitate
+The following classes were removed from the Library because their counterparts exist
+in the Modelica Standard Library. A&nbsp;conversion script is provided to facilitate
 the conversion.
 </p>
 
