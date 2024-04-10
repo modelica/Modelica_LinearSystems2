@@ -141,8 +141,54 @@ convertClass({"Modelica_LinearSystems2.Math.Complex.Internal.eigenValues_dhseqr"
               "Modelica_LinearSystems2.ComplexMathAdds.Internal.C_transpose",
               "Modelica_LinearSystems2.ComplexMathAdds.Internal.frobeniusNorm"});
 
+// Matrices
+// Use Vectors functions - use functions from Modelica.Math.Vectors
+//
+convertClass({"Modelica_LinearSystems2.Math.Vectors.find",
+              "Modelica_LinearSystems2.Math.Vectors.length"},
+             {"Modelica.Math.Vectors.find",
+              "Modelica.Math.Vectors.length"});
+
+// Matrices
+// Use Matrices functions - use functions from Modelica.Math.Matrices
+//
+convertClass({"Modelica_LinearSystems2.Math.Matrices.cholesky",
+              "Modelica_LinearSystems2.Math.Matrices.conditionNumber",
+              "Modelica_LinearSystems2.Math.Matrices.det",
+              "Modelica_LinearSystems2.Math.Matrices.fliplr",
+              "Modelica_LinearSystems2.Math.Matrices.flipud",
+              "Modelica_LinearSystems2.Math.Matrices.hessenberg",
+              "Modelica_LinearSystems2.Math.Matrices.leastSquares2",
+              "Modelica_LinearSystems2.Math.Matrices.LU",
+              "Modelica_LinearSystems2.Math.Matrices.LU_solve",
+              "Modelica_LinearSystems2.Math.Matrices.LU_solve2",
+              "Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg",
+              "Modelica_LinearSystems2.Math.Matrices.norm",
+              "Modelica_LinearSystems2.Math.Matrices.nullspace",
+              "Modelica_LinearSystems2.Math.Matrices.rsf2",
+              "Modelica_LinearSystems2.Math.Matrices.solve",
+              "Modelica_LinearSystems2.Math.Matrices.solve2",
+              "Modelica_LinearSystems2.Math.Matrices.trace"},
+             {"Modelica.Math.Matrices.cholesky",
+              "Modelica.Math.Matrices.conditionNumber",
+              "Modelica.Math.Matrices.det",
+              "Modelica.Math.Matrices.flipLeftRight",
+              "Modelica.Math.Matrices.flipUpDown",
+              "Modelica.Math.Matrices.hessenberg",
+              "Modelica.Math.Matrices.leastSquares2",
+              "Modelica.Math.Matrices.LU",
+              "Modelica.Math.Matrices.LU_solve",
+              "Modelica.Math.Matrices.LU_solve2",
+              "Modelica.Math.Matrices.Utilities.toUpperHessenberg",
+              "Modelica.Math.Matrices.norm",
+              "Modelica.Math.Matrices.nullSpace",
+              "Modelica.Math.Matrices.realSchur",
+              "Modelica.Math.Matrices.solve",
+              "Modelica.Math.Matrices.solve2",
+              "Modelica.Math.Matrices.trace"});
+
 // LAPACK
-// Convert LAPACK functions
+// Convert LAPACK functions - use functions from Modelica.Math.Matrices.LAPACK
 //
 convertClass({"Modelica_LinearSystems2.Math.Matrices.LAPACK.dgecon",
               "Modelica_LinearSystems2.Math.Matrices.LAPACK.dgees",

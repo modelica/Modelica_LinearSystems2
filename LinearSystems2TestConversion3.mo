@@ -238,6 +238,72 @@ package LinearSystems2TestConversion3
       (invA,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrtri(A, upper);
     end callAllLAPACK;
 
+    function callVectors
+      output Integer index;
+      output Real length;
+
+    protected
+      Integer v[3] = {1, 2, 3};
+      Integer e1 = 2;
+
+    algorithm
+      index := Modelica_LinearSystems2.Math.Vectors.find(e1,v);
+      length := Modelica_LinearSystems2.Math.Vectors.length(v);
+
+    end callVectors;
+
+    function callMatrices
+      output Real r;
+      output Real det;
+      output Real n "p-norm of matrix A";
+      output Real x[size(b1, 1)] "Vector x such that A*x = b1";
+      output Real t "Trace of A";
+      output Real HC[size(A, 1),size(A, 2)];
+      output Real HH[size(A, 1),size(A, 2)] "Upper Hessenberg form";
+      output Real H[size(A, 1),size(A, 2)];
+      output Real U[size(A, 1),size(A, 2)];
+      output Real Aflip[size(A, 1), size(A, 2)];
+      output Real Afud[size(A, 1), size(A, 2)];
+      output Real X2[size(A, 2), size(B, 2)];
+      output Real LU[size(A, 1),size(A, 2)];
+      output Integer pivots[3]; //min(size(A, 1), size(A, 2))];
+      output Real x1[size(A, 1)];
+      output Real X1[size(B, 1), size(B, 2)];
+      output Real X[size(B, 1),size(B, 2)] "Matrix X such that A*X = B";
+      output Real Z[size(A, 2), :] "Orthonormal nullspace of matrix A";
+      output Real S[size(A, 1), size(A, 2)] "Real Schur form of A";
+
+    protected
+      Real A[3,3] = [1, 0,  0; 6, 5,  0; 1, -2,  2] "Square matrix";
+      Real SA[size(A, 1),size(A, 2)] = A*transpose(A);
+      Real B[size(A, 1),1] = [1;0;1];
+      Real b1[size(A, 1)] = {7,13,10};
+
+      Real QZ[size(A, 1),size(A, 2)];
+      Real alphaReal[size(A, 1)] "Real part of eigenvalue=alphaReal+i*alphaImag";
+      Real alphaImag[size(A, 1)] "Imaginary part of eigenvalue=(alphaReal+i*alphaImag";
+
+    algorithm
+      HC := Modelica_LinearSystems2.Math.Matrices.cholesky(SA, true);
+      r := Modelica_LinearSystems2.Math.Matrices.conditionNumber(A);
+      det := Modelica_LinearSystems2.Math.Matrices.det(A);
+      Aflip := Modelica_LinearSystems2.Math.Matrices.fliplr(A);
+      Afud := Modelica_LinearSystems2.Math.Matrices.flipud(A);
+      (H, U) := Modelica_LinearSystems2.Math.Matrices.hessenberg(A);
+      X2 := Modelica_LinearSystems2.Math.Matrices.leastSquares2(A,B);
+      (LU, pivots) := Modelica_LinearSystems2.Math.Matrices.LU(A);
+      x1 := Modelica_LinearSystems2.Math.Matrices.LU_solve(LU, pivots, b1);
+      X1 := Modelica_LinearSystems2.Math.Matrices.LU_solve2(LU, pivots, B);
+      HH := Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg(A);
+      n := Modelica_LinearSystems2.Math.Matrices.norm(A);
+      Z := Modelica_LinearSystems2.Math.Matrices.nullspace(A);
+      (S, QZ, alphaReal, alphaImag) := Modelica_LinearSystems2.Math.Matrices.rsf2(A);
+      x := Modelica_LinearSystems2.Math.Matrices.solve(A, b1);
+      X := Modelica_LinearSystems2.Math.Matrices.solve2(A, B);
+      t := Modelica_LinearSystems2.Math.Matrices.trace(A);
+
+    end callMatrices;
+
     package Polynomials
 
       function polynomialDegree
@@ -304,7 +370,7 @@ package LinearSystems2TestConversion3
       Real D2[ny,nu] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixD2(nx=nx, nu=nu, ny=ny);
     algorithm
 
-      annotation();
+      annotation ();
     end readMatrixXTest;
 
     function otherClassesTest
@@ -322,7 +388,7 @@ package LinearSystems2TestConversion3
       String s = Modelica_LinearSystems2.Internal.Streams.stateSpaceString_html(ssi);
     algorithm
 
-      annotation();
+      annotation ();
     end otherClassesTest;
   end Streams;
   annotation (uses(Modelica_LinearSystems2(version="2.4.0")));
