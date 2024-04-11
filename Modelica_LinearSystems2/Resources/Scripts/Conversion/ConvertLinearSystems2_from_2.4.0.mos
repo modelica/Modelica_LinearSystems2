@@ -13,10 +13,13 @@ convertClass("Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize",
 convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
               "Modelica_LinearSystems2.Internal.Streams.readMatrixInternal"},
               "Modelica.Utilities.Streams.readRealMatrix");
+convertElement("Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
+               {"m","n"},{"nrow","ncol"});
 convertClass({"Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension",
               "Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2",
               "Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension"},
              "Modelica_LinearSystems2.Utilities.Streams.readSystemDimension");
+
 convertClass({"Modelica_LinearSystems2.Internal.Streams.AnalyseOptions",
               "Modelica_LinearSystems2.Internal.Streams.ReadMatrixA",
               "Modelica_LinearSystems2.Internal.Streams.ReadMatrixA2",
