@@ -257,6 +257,8 @@ package LinearSystems2TestConversion3
       output Real det;
       output Real n "p-norm of matrix A";
       output Real x[size(b1, 1)] "Vector x such that A*x = b1";
+      output Real xr[size(A, 2)]
+        "Vector x such that min|A*x-b|^2 if size(A,1) >= size(A,2) or min|x|^2 and A*x=b, if size(A,1) < size(A,2)";
       output Real t "Trace of A";
       output Real HC[size(A, 1),size(A, 2)];
       output Real HH[size(A, 1),size(A, 2)] "Upper Hessenberg form";
@@ -290,6 +292,7 @@ package LinearSystems2TestConversion3
       Aflip := Modelica_LinearSystems2.Math.Matrices.fliplr(A);
       Afud := Modelica_LinearSystems2.Math.Matrices.flipud(A);
       (H, U) := Modelica_LinearSystems2.Math.Matrices.hessenberg(A);
+      xr := Modelica_LinearSystems2.Math.Matrices.leastSquares(A,b1);
       X2 := Modelica_LinearSystems2.Math.Matrices.leastSquares2(A,B);
       (LU, pivots) := Modelica_LinearSystems2.Math.Matrices.LU(A);
       x1 := Modelica_LinearSystems2.Math.Matrices.LU_solve(LU, pivots, b1);
@@ -370,7 +373,7 @@ package LinearSystems2TestConversion3
       Real D2[ny,nu] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixD2(nx=nx, nu=nu, ny=ny);
     algorithm
 
-      annotation ();
+      annotation();
     end readMatrixXTest;
 
     function otherClassesTest
@@ -388,7 +391,7 @@ package LinearSystems2TestConversion3
       String s = Modelica_LinearSystems2.Internal.Streams.stateSpaceString_html(ssi);
     algorithm
 
-      annotation ();
+      annotation();
     end otherClassesTest;
   end Streams;
   annotation (uses(Modelica_LinearSystems2(version="2.4.0")));
