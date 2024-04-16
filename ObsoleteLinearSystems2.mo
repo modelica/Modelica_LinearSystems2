@@ -14,7 +14,7 @@ package ObsoleteLinearSystems2
         output Complex c = Modelica.ComplexMath.j "= sqrt(-1)";
 
         annotation(
-          obsolete = "Obsolete function. See documentation for how to migrate imaginary unit j.",
+          obsolete = "Obsolete function. See function documentation for how to migrate imaginary unit j.",
           Inline=true,
           Documentation(info="<html>
 <p>
@@ -309,7 +309,7 @@ provided by <a href=\"https://www.netlib.org/\">Netlib Repository</a>.
     package Matrices "Package of functions operating on matrices"
       extends Modelica.Icons.Package;
 
-      function leastSquares "Solve overdetermined or underdetermined real system of linear equations A*x=b in a least squares sense (A may be rank deficient)"
+      function leastSquares "Obsolete: Solve overdetermined or underdetermined real system of linear equations A*x=b in a least squares sense (A may be rank deficient)"
         extends Modelica.Icons.Function;
         input Real A[:,:] "Matrix A";
         input Real b[size(A, 1)] "Vector b";
@@ -323,22 +323,11 @@ provided by <a href=\"https://www.netlib.org/\">Netlib Repository</a>.
         annotation (
           obsolete = "Deprecated function - use Modelica.Math.Matrices.leastSquares instead",
           Documentation(info="<html>
-<h4>Syntax</h4>
-<blockquote><pre>
-x = Matrices.<strong>leastSquares</strong>(A,b);
-</pre></blockquote>
-<h4>Description</h4>
 <p>
-A linear system of equations A*x = b has no solutions or infinitely
-many solutions if A is not square. Function \"leastSquares\" returns
-a solution in a least squarse sense:
+This function is obsolete. Use
+<a href=\"modelica://Modelica.Math.Matrices.leastSquares\">Modelica.Math.Matrices.leastSquares</a>
+instead.
 </p>
-<blockquote><pre>
-size(A,1) &gt; size(A,2):  returns x such that |A*x - b|^2 is a minimum
-size(A,1) = size(A,2):  returns x such that A*x = b
-size(A,1) &lt; size(A,2):  returns x such that |x|^2 is a minimum for all
-                        vectors x that fulfill A*x = b
-</pre></blockquote>
 </html>"));
       end leastSquares;
     end Matrices;
