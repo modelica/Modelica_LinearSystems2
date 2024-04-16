@@ -238,11 +238,13 @@ convertClass({"Modelica_LinearSystems2.Math.Matrices.LAPACK.dgecon",
               "Modelica.Math.Matrices.LAPACK.dtrsyl"});
 
 convertClass({"Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev",
+              "Modelica_LinearSystems2.Math.Matrices.LAPACK.dgegv",
               "Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqp3",
               "Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqrf",
               "Modelica_LinearSystems2.Math.Matrices.LAPACK.dgetrs",
               "Modelica_LinearSystems2.Math.Matrices.LAPACK.dhseqr"},
              {"ObsoleteLinearSystems2.Math.LAPACK.dgeev",
+              "ObsoleteLinearSystems2.Math.LAPACK.dgegv",
               "ObsoleteLinearSystems2.Math.LAPACK.dgeqp3",
               "ObsoleteLinearSystems2.Math.LAPACK.dgeqrf",
               "ObsoleteLinearSystems2.Math.LAPACK.dgetrs",
