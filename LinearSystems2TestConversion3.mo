@@ -237,6 +237,22 @@ package LinearSystems2TestConversion3
       (Aout,tau,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgelqf(A);
       (invA,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrtri(A, upper);
     end callAllLAPACK;
+
+    package Polynomials
+
+      function polynomialDegree
+        output Integer degree;
+        output Integer degree2;
+      protected
+        Modelica_LinearSystems2.Math.Polynomial p = Modelica_LinearSystems2.Math.Polynomial({0,0,4,0,1});
+      algorithm
+        degree := Modelica_LinearSystems2.Math.Polynomial.degree(p);
+        // shall be = 2
+        degree2 := Modelica_LinearSystems2.Math.Polynomial.degree2(p);
+        // shall be = 2
+
+      end polynomialDegree;
+    end Polynomials;
   end Math;
 
   package Types

@@ -737,27 +737,6 @@ in a&nbsp;least squares sense.
 
     input Polynomial p;
     output Integer result "Degree of polynomial p";
-
-  algorithm
-    result := size(p.c, 1) - 1;
-    annotation (Documentation(info="<html>
-<h4>Syntax</h4>
-<blockquote><pre>
-result = Polynomial.<strong>degree</strong>(p);
-</pre></blockquote>
-
-<h4>Description</h4>
-<p>
-This function computes the order of a&nbsp;Polynomial <var>p</var>.
-</p>
-</html>"));
-  end degree;
-
-  encapsulated function degree2 "Return degree of polynomial"
-    import Modelica_LinearSystems2.Math.Polynomial;
-
-    input Polynomial p;
-    output Integer result "Degree of polynomial p";
   protected
     Integer s;
   algorithm
@@ -772,7 +751,7 @@ This function computes the order of a&nbsp;Polynomial <var>p</var>.
     annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-result = Polynomial.<strong>degree2</strong>(p);
+result = Polynomial.<strong>degree</strong>(p);
 </pre></blockquote>
 
 <h4>Description</h4>
@@ -786,14 +765,14 @@ Example:
 <blockquote><pre>
 <strong>import</strong> Modelica_LinearSystems2.Math.Polynomial;
 
-p = Polynomial({0,0,2,1});
+Polynomial p = Polynomial({0,0,2,1});
 // 2*x + 1
 
-Polynomial.degree2(p)
+Polynomial.degree(p)
 //  = 1
 </pre></blockquote>
 </html>"));
-  end degree2;
+  end degree;
 
   encapsulated function plot "Plot polynomial y=p(x)"
 

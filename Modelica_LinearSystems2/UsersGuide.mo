@@ -630,6 +630,23 @@ the conversion.
 
 
 <h5>
+Removed classes
+</h5>
+<p>
+The following classes were removed from the Library. A&nbsp;conversion script is provided to facilitate
+the conversion.
+</p>
+
+<ul>
+  <li>
+    Math.Polynomial.degree2: use
+    <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.degree\">Math.Polynomial.degree</a>
+    instead.
+  </li>
+</ul>
+
+
+<h5>
 Removed deprecated classes
 </h5>
 <p>
