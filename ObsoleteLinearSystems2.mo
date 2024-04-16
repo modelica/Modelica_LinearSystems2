@@ -94,7 +94,9 @@ Complex c1 = Complex(2, 3);
           size(work, 1),
           info) annotation(Library = {"lapack"});
 
-        annotation (Documentation(info="<html>
+        annotation (
+          obsolete = "Deprecated function - use Modelica.Math.Matrices.LAPACK.dgeev instead",
+          Documentation(info="<html>
 <p>
 This function is obsolete. Use
 <a href=\"modelica://Modelica.Math.Matrices.LAPACK.dgeev\">Modelica.Math.Matrices.LAPACK.dgeev</a>
@@ -136,7 +138,9 @@ Standard Library and must be removed or resolved in another way.
           lwork2,
           info) annotation(Library = {"lapack"});
 
-        annotation (Documentation(info="<html>
+        annotation (
+          obsolete = "Deprecated function - use Modelica.Math.Matrices.LAPACK.dgeqp3 instead",
+          Documentation(info="<html>
 <p>
 This function is obsolete. Use
 <a href=\"modelica://Modelica.Math.Matrices.LAPACK.dgeqp3\">Modelica.Math.Matrices.LAPACK.dgeqp3</a>
@@ -197,7 +201,9 @@ could be replaced with
           lwork2,
           info) annotation(Library = {"lapack"});
 
-        annotation (Documentation(info="<html>
+        annotation (
+          obsolete = "Deprecated function - use Modelica.Math.Matrices.LAPACK.dgeqrf instead",
+          Documentation(info="<html>
 <p>
 This function is obsolete. Use
 <a href=\"modelica://Modelica.Math.Matrices.LAPACK.dgeqrf\">Modelica.Math.Matrices.LAPACK.dgeqrf</a>
@@ -231,7 +237,9 @@ Standard Library and must be removed or resolved in another way.
           X,
           size(B, 1),
           info) annotation (Library="lapack");
-        annotation (Documentation(info="<html>
+        annotation (
+          obsolete = "Deprecated function - use Modelica.Math.Matrices.LAPACK.dgetrs instead",
+          Documentation(info="<html>
 <p>
 This function is obsolete. Use
 <a href=\"modelica://Modelica.Math.Matrices.LAPACK.dgetrs\">Modelica.Math.Matrices.LAPACK.dgetrs</a>
@@ -284,7 +292,9 @@ Standard Library. It must be added or resolved in another way.
           lw,
           info) annotation(Library = {"lapack"});
 
-        annotation (Documentation(info="<html>
+        annotation (
+          obsolete = "Deprecated function - use Modelica.Math.Matrices.LAPACK.dhseqr instead",
+          Documentation(info="<html>
 <p>
 This function is obsolete. Use
 <a href=\"modelica://Modelica.Math.Matrices.LAPACK.dhseqr\">Modelica.Math.Matrices.LAPACK.dhseqr</a>
