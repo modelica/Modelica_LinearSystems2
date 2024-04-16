@@ -199,3 +199,8 @@ convertClass({"Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev",
               "ObsoleteLinearSystems2.Math.LAPACK.dgeqrf",
               "ObsoleteLinearSystems2.Math.LAPACK.dgetrs",
               "ObsoleteLinearSystems2.Math.LAPACK.dhseqr"});
+
+// Polynomial
+//
+convertClass("Modelica_LinearSystems2.Math.Polynomial.degree2",
+             "Modelica_LinearSystems2.Math.Polynomial.degree");
