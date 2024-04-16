@@ -29,7 +29,7 @@ algorithm
     <td valign=\"top\">
      Initial version implemented by
      Martin R. Kuhn and Martin Otter 
-     (<a href=\"http://www.dlr.de/rmc/sr/en\">DLR Institute of System Dynamics and Control</a>)<br>  
+     (<a href=\"https://www.dlr.de/sr/en/\">DLR Institute of System Dynamics and Control</a>)<br>  
      The research leading to these results has received funding from the European Union’s Seventh
      Framework Programme (FP7/2007-2016) for the Clean Sky Joint Technology Initiative under
      grant agreement no. CSJU-GAM-SGO-2008-001.</td></tr>
