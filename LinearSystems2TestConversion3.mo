@@ -343,10 +343,12 @@ package LinearSystems2TestConversion3
 
     function readSystemDimensionTest
 
-    protected
-      Integer xuy[3] = Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension();
-      Integer xuy2[3] = Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2();
-      Integer xuy3[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension();
+      output Integer xuy[3] = Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension(
+        Modelica_LinearSystems2.DataDir + "abcd_siso.mat");
+      output Integer xuy2[3] = Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2(
+        Modelica_LinearSystems2.DataDir + "abcd_siso.mat");
+      output Integer xuy3[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(
+        Modelica_LinearSystems2.DataDir + "abcd_siso.mat");
     algorithm
 
     end readSystemDimensionTest;
