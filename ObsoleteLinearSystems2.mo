@@ -8,8 +8,8 @@ package ObsoleteLinearSystems2
     operator record Complex "Record defining a Complex number"
 
       encapsulated function j "Obsolete imaginary unit function"
-        import .Modelica;
-        import .Complex;
+        import Modelica;
+        import Complex;
 
         output Complex c = Modelica.ComplexMath.j "= sqrt(-1)";
 
