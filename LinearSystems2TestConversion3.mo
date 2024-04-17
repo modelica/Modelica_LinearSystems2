@@ -203,24 +203,34 @@ package LinearSystems2TestConversion3
       (alphaReal,alphaImag,lEigenVectors,rEigenVectors,AS,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeevx(A);
       (alphaReal,alphaImag,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeevx_eigenValues(A);
       (alphaReal,alphaImag,beta,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgegv(A, B);
+      //
       (Aout,tau,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgehrd( A, ilo, ihi);
+      (Aout,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dorghr( A, ilo, ihi, tau);
+      (Cout,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dormhr( C, A, tau, side, trans, ilo, ihi);
+      //
+      (Aout,tau,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgelqf(A);
+      (Q,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dorglq(Aout, tau);
+      //
       (Aout,jpvt,tau,info,work) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqp3(A, lwork1);
+      //
       (Aout,tau,info,work) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqrf(A, lwork1);
+      (Qout,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr(Q, tau);
+      //
       (sigma,U,VT,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgesdd(A);
       (sigma,U,VT,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgesvd(A);
       (X,info,rcond) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgesvx( A, B, transposed);
-      X :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgetrs( LU, pivots, B);
+
+      //(LU, pivots, info) := Modelica.Math.Matrices.LAPACK.dgetrf(A);
+      X :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgetrs(LU, pivots, B);
       (alphaReal,alphaImag,beta,lEigenVectors,rEigenVectors,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dggev( A, B, nA);
       (alphaReal,alphaImag,beta,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dggev_eigenValues(A, B);
       (alphaReal,alphaImag,beta,lEigenVectors,rEigenVectors,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dggevx(A, B);
       (alphaReal,alphaImag,beta,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dhgeqz(A, B);
       (alphaReal,alphaImag,info,Ho,Zo,work) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dhseqr( H, lwork, eigenValuesOnly, compz, Z);
-      (Aout,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dorghr( A, ilo, ihi, tau);
-      (Q,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dorglq(A, tau);
-      (Qout,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr(Q, tau);
       (Aout,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dorgqr_x(Q, tau);
-      (Cout,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dormhr( C, A, tau, side, trans, ilo, ihi);
+
       (Cout,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dormqr( C, A, tau, side, trans);
+      (T, Z, alphaReal, alphaImag) :=Modelica_LinearSystems2.Math.Matrices.rsf(A);
       (lEigenVectors,rEigenVectors,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrevc( T, side, howmny, Q);
       (To,Qo,wr,wi,m,s,sep,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrsen( job, compq, select, T, Q);
       (X,scale,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrsyl( A, B, C, tranA, tranB, isgn);
@@ -234,7 +244,7 @@ package LinearSystems2TestConversion3
       (xr,yr) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.drot( x, y, c, s, incx, incy);
       (X,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dposv( A, B, upper);
       (rcond,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dpocon( cholA, anorm, upper);
-      (Aout,tau,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dgelqf(A);
+
       (invA,info) :=Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrtri(A, upper);
     end callAllLAPACK;
 
