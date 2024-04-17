@@ -354,25 +354,29 @@ package LinearSystems2TestConversion3
     end readSystemDimensionTest;
 
     function readMatrixXTest
+      import Modelica_LinearSystems2.Internal.Streams;
 
+      input String fileName = Modelica_LinearSystems2.DataDir + "abcd.mat";
+      input String mName = "ABCD";
+
+      output Integer dim[2] = Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize(fileName, mName);
+      output Real A[:,:] = Streams.ReadMatrixA(fileName, mName);
+      output Real B[:,:] = Streams.ReadMatrixB(fileName, mName);
+      output Real C[:,:] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixC(fileName, mName);
+      output Real D[:,:] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixD(fileName, mName);
     protected
-      String fileName = "NoName";
-      String mName = "ABCD";
-      Integer nx = 2;
-      Integer nu = 1;
-      Integer ny = 1;
+      Integer xuy[3] = Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension(
+        fileName, mName);
+      Integer nx = xuy[1];
+      Integer nu = xuy[2];
+      Integer ny = xuy[3];
 
-      Real dim[nx] = Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize(fileName, mName);
-      Real AA[nx,nx] = Modelica_LinearSystems2.Internal.Streams.readMatrixInternal(fileName, mName, nx, nx);
-
-      Real A[nx,nx] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixA();
-      Real A2[nx,nx] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixA2(nx=nx);
-      Real B[nx,nu] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixB();
-      Real B2[nx,nu] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixB2(nx=nx, nu=nu);
-      Real C[ny,nx] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixC();
-      Real C2[ny,nx] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixC2(nx=nx, ny=ny);
-      Real D[ny,nu] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixD();
-      Real D2[ny,nu] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixD2(nx=nx, nu=nu, ny=ny);
+      Real A2[nx,nx] = Streams.ReadMatrixA2(fileName, mName, nx=nx);
+      Real B2[nx,nu] = Streams.ReadMatrixB2(fileName, mName, nx=nx, nu=nu);
+      Real C2[ny,nx] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixC2(
+        fileName, mName, nx=nx, ny=ny);
+      Real D2[ny,nu] = Modelica_LinearSystems2.Internal.Streams.ReadMatrixD2(
+        fileName, mName, nx=nx, nu=nu, ny=ny);
     algorithm
 
       annotation();
