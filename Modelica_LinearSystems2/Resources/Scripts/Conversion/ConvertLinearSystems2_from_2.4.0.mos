@@ -13,10 +13,15 @@ convertClass("Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize",
 convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
               "Modelica_LinearSystems2.Internal.Streams.readMatrixInternal"},
               "Modelica.Utilities.Streams.readRealMatrix");
+convertElement("Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
+               {"m","n"},{"nrow","ncol"});
 convertClass({"Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension",
               "Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2",
               "Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension"},
              "Modelica_LinearSystems2.Utilities.Streams.readSystemDimension");
+
+convertClass("Modelica_LinearSystems2.Internal.Streams",
+             "Modelica_LinearSystems2.Utilities.Streams");
 convertClass({"Modelica_LinearSystems2.Internal.Streams.AnalyseOptions",
               "Modelica_LinearSystems2.Internal.Streams.ReadMatrixA",
               "Modelica_LinearSystems2.Internal.Streams.ReadMatrixA2",
@@ -41,6 +46,8 @@ convertClass({"Modelica_LinearSystems2.Internal.Streams.AnalyseOptions",
 // Types
 // Move Modelica_LinearSystems2.Types into Modelica_LinearSystems2.Utilities.Types
 //
+convertClass("Modelica_LinearSystems2.Types",
+             "Modelica_LinearSystems2.Utilities.Types");
 convertClass({"Modelica_LinearSystems2.Types.Grid",
               "Modelica_LinearSystems2.Types.AnalogFilter",
               "Modelica_LinearSystems2.Types.FilterType",
