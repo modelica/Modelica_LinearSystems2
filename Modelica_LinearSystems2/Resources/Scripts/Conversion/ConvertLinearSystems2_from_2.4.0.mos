@@ -20,6 +20,8 @@ convertClass({"Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension",
               "Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension"},
              "Modelica_LinearSystems2.Utilities.Streams.readSystemDimension");
 
+convertClass("Modelica_LinearSystems2.Internal.Streams",
+             "Modelica_LinearSystems2.Utilities.Streams");
 convertClass({"Modelica_LinearSystems2.Internal.Streams.AnalyseOptions",
               "Modelica_LinearSystems2.Internal.Streams.ReadMatrixA",
               "Modelica_LinearSystems2.Internal.Streams.ReadMatrixA2",
