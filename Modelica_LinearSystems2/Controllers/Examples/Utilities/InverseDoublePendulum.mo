@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controllers.Examples.Components;
+within Modelica_LinearSystems2.Controllers.Examples.Utilities;
 model InverseDoublePendulum "Inverse double pendulum"
 
   parameter Modelica.Units.SI.Mass m_trolley = 1 "Mass of trolley";

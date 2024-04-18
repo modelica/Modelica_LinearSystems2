@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controllers.Examples.Components;
+within Modelica_LinearSystems2.Controllers.Examples.Utilities;
 model DoublePendulum2 "Crane trolley system"
 
   extends Modelica_LinearSystems2.Controllers.Templates.Internal.PlantTemplate(

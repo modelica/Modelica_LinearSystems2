@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Controllers.Examples;
-package Components "Package of components of the systems used for demonstration purposes"
+package Utilities "Utility classes for examples of controllers"
   extends Modelica.Icons.UtilitiesPackage;
 
 
@@ -9,4 +9,4 @@ package Components "Package of components of the systems used for demonstration 
 This package contains auxiliary models designed to build up test models for controllers.
 </p>
 </html>"));
-end Components;
+end Utilities;

@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controllers.Examples.Components;
+within Modelica_LinearSystems2.Controllers.Examples.Utilities;
 model MixingUnit
   "Stirred tank reactor as controller plant with standard interfaces"
   extends Templates.Internal.PlantTemplate_SISO;
@@ -97,7 +97,7 @@ equation
         Line(points={{80,-78},{80,-120}}, color={0,0,0})}),
       Documentation(
         info="<html>
-<p>Model of idealized stirred tank reactor, see <a href=\"modelica://Modelica_LinearSystems2.Controllers.Examples.Components.MixingUnit1\">MixingUnit1</a>
+<p>Model of idealized stirred tank reactor, see <a href=\"modelica://Modelica_LinearSystems2.Controllers.Examples.Utilities.MixingUnit1\">MixingUnit1</a>
 for more details.
 It is intended for replacement of a plant instance in general model of controller.
 </p>

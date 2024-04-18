@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.Controllers.Examples;
 model InverseDoublePendulum "Controlled inverse double pendulum"
   extends Modelica.Icons.Example;
   extends Controllers.Templates.SimpleStateSpaceControl(
-    redeclare Controllers.Examples.Components.InverseDoublePendulum2 plant(
+    redeclare Utilities.InverseDoublePendulum2 plant(
       additionalMeasurableOutputs=true,
       m_trolley=1,
       n=6,
@@ -30,7 +30,7 @@ model InverseDoublePendulum "Controlled inverse double pendulum"
     width=50,
     amplitude=10)
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Components.AccelerationLimiter accelerationLimiter(
+  Utilities.AccelerationLimiter accelerationLimiter(
     v_limit=20,
     velocityLimitation=false,
     withDelay2=false,
@@ -61,11 +61,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(noise1.y, plant.dist) annotation (Line(
-      points={{21,40},{86,40},{86,12}},
+      points={{21,40},{84,40},{84,12}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(noise.y, plant.dist2) annotation (Line(
-      points={{21,70},{94,70},{94,12}},
+      points={{21,70},{96,70},{96,12}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (

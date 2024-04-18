@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controllers.Examples.Components;
+within Modelica_LinearSystems2.Controllers.Examples.Utilities;
 model InverseDoublePendulum3 "Inverted double pendulum"
   extends Modelica_LinearSystems2.Controllers.Templates.Internal.PlantTemplate(
     n=6,
@@ -39,7 +39,7 @@ model InverseDoublePendulum3 "Inverted double pendulum"
   Real dist5_phi2=0;
   Real dist6_w2=0;
 
-  Components.InverseDoublePendulum inverseDoublePendulum(
+  Utilities.InverseDoublePendulum inverseDoublePendulum(
     m_trolley=m_trolley,
     m_load=m_load,
     length=length,
@@ -173,7 +173,7 @@ equation
     Documentation(info="<html>
 <p>
 Model of a&nbsp;simple inverted double pendulum system using
-<a href=\"modelica://Modelica_LinearSystems2.Controllers.Examples.Components.InverseDoublePendulum\">InverseDoublePendulum</a>.
+<a href=\"modelica://Modelica_LinearSystems2.Controllers.Examples.Utilities.InverseDoublePendulum\">InverseDoublePendulum</a>.
 
 <!-- The following text was commented by Tobolar (DLR) since the example
 cited is still in WorkInProgress (see also documentation source of

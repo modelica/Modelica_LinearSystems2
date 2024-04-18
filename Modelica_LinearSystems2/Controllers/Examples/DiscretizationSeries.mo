@@ -10,24 +10,24 @@ model DiscretizationSeries
   parameter Modelica.Units.SI.Time T1=0.2 "Time constant of first PT1 block";
   parameter Modelica.Units.SI.Time T2=0.15 "Time constant of second PT1 block";
 
-  Components.SeriesConnection continuous(
+  Utilities.SeriesConnection continuous(
     T1=T1,
     T2=T2,
     blockType=Modelica_LinearSystems2.Controllers.Types.BlockType.Continuous)
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
-  Components.SeriesConnection trapezoidal(
+  Utilities.SeriesConnection trapezoidal(
     T1=T1,
     T2=T2,
     blockType=Modelica_LinearSystems2.Controllers.Types.BlockType.Discrete,
     methodType=Modelica_LinearSystems2.Utilities.Types.Method.Trapezoidal,
     sampleTime=sampleTime) annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
-  Components.SeriesConnection rampExact(
+  Utilities.SeriesConnection rampExact(
     T1=T1,
     T2=T2,
     blockType=Modelica_LinearSystems2.Controllers.Types.BlockType.Discrete,
     methodType=Modelica_LinearSystems2.Utilities.Types.Method.RampExact,
     sampleTime=sampleTime) annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
-  Components.SeriesConnection stepExact(
+  Utilities.SeriesConnection stepExact(
     T1=T1,
     T2=T2,
     blockType=Modelica_LinearSystems2.Controllers.Types.BlockType.Discrete,
