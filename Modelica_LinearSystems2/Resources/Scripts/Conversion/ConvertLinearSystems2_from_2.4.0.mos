@@ -257,6 +257,11 @@ convertClass({"Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev",
               "ObsoleteLinearSystems2.Math.LAPACK.dgetrs",
               "ObsoleteLinearSystems2.Math.LAPACK.dhseqr"});
 
+convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.dgeqrf_workdim",
+              "Modelica_LinearSystems2.Math.Matrices.Internal.dhseqr_workdim"},
+             {"ObsoleteLinearSystems2.Math.Internal.dgeqrf_workdim",
+              "ObsoleteLinearSystems2.Math.Internal.dhseqr_workdim"});
+
 // Polynomial
 //
 convertClass("Modelica_LinearSystems2.Math.Polynomial.degree2",
