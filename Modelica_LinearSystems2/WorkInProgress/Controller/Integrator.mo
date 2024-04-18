@@ -2,8 +2,8 @@ within Modelica_LinearSystems2.WorkInProgress.Controller;
 block Integrator
   "Output the integral of the input signal (continuous or discrete block)"
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Controller.Types;
-  extends Modelica_LinearSystems2.Controller.Interfaces.PartialSISO2(y(start=y_start), discretePart(
+  import Modelica_LinearSystems2.Controllers.Types;
+  extends Modelica_LinearSystems2.Controllers.Interfaces.PartialSISO2(y(start=y_start), discretePart(
       withDelay=withDelay,
       x_start={y_start},
       y_start={y_start},

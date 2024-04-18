@@ -760,7 +760,7 @@ Improvements in build.2 (2021-11-16)
 <ul>
   <li>
     Bug fix: Remove buggy initialization of matrix ABCD in 
-    <a href=\"modelica://Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace2\">DiscreteStateSpace2</a>.
+    <a href=\"modelica://Modelica_LinearSystems2.Controllers.Internal.DiscreteStateSpace2\">DiscreteStateSpace2</a>.
   </li>
 </ul>
 
@@ -1018,10 +1018,10 @@ Bug fixes performed in version 2.3.2 Build 1 (Sept. 11, 2014):
      When computing the gain of the ZerosAndPoles object, a better
      algorithm is used (the previous one could give bad results if there
      are large zeros or poles with positive Re-values).</li>
-<li> Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock,<br>
-     Modelica_LinearSystems2.Controller.Interfaces.PartialDiscreteBlock,<br>
-     Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace,<br>
-     Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace2:<br>
+<li> Modelica_LinearSystems2.Controllers.Interfaces.PartialSampledBlock,<br>
+     Modelica_LinearSystems2.Controllers.Interfaces.PartialDiscreteBlock,<br>
+     Modelica_LinearSystems2.Controllers.Internal.DiscreteStateSpace,<br>
+     Modelica_LinearSystems2.Controllers.Internal.DiscreteStateSpace2:<br>
      Enumeration1/Enumeration2 errors corrected (issued as warning
      due to stricter checking by Dymola 2015 FD01).</li>
 <li> Some Enumeration/Integer errors corrected (issued as warning
@@ -1073,10 +1073,10 @@ Improvements and bug fixes performed in version 2.3.1 Build 1 (Oct. 1, 2013):
 <ul>
 <li> Uses annotation changed to Modelica 3.2.1. </li>
 
-<li> Modelica_LinearSystems2.Controller.Internal.DiscreteFIR:<br>
-     Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace<br>
-     Modelica_LinearSystems2.Controller.Internal.DiscreteStateSpace2<br>
-     Modelica_LinearSystems2.Controller.Internal.DiscreteInterpolator:<br>
+<li> Modelica_LinearSystems2.Controllers.Internal.DiscreteFIR:<br>
+     Modelica_LinearSystems2.Controllers.Internal.DiscreteStateSpace<br>
+     Modelica_LinearSystems2.Controllers.Internal.DiscreteStateSpace2<br>
+     Modelica_LinearSystems2.Controllers.Internal.DiscreteInterpolator:<br>
      According to the improved/corrected rules for initialization in
      Modelica Specification 3.2 rev. 2, the initialization in these models
      were overconstrained. Removed the (consistently) overconstrained
@@ -1086,10 +1086,10 @@ Improvements and bug fixes performed in version 2.3.1 Build 1 (Oct. 1, 2013):
      If the system had only real eigen values and poles/zeros should be plotted,
      then this plot was not generated. This has been fixed.</li>
 
-<li> Modelica_LinearSystems2.Controller.Interfaces.PartialSampledBlock,<br>
-     Modelica_LinearSystems2.Controller.Interfaces.PartialSISO_equality,<br>
-     Modelica_LinearSystems2.Controller.Noise,<br>
-     Modelica_LinearSystems2.Controller.Interpolator:<br>
+<li> Modelica_LinearSystems2.Controllers.Interfaces.PartialSampledBlock,<br>
+     Modelica_LinearSystems2.Controllers.Interfaces.PartialSISO_equality,<br>
+     Modelica_LinearSystems2.Controllers.Noise,<br>
+     Modelica_LinearSystems2.Controllers.Interpolator:<br>
      Parameters have been defined conditionally leading to not strict
      Modelica models.
      The if-clauses have been removed.</li>
@@ -1243,15 +1243,15 @@ New functions/blocks:
      to calculate the condition number and the reciprocal condition number of a
      matrix respectively.</li>
 
-<li> Block <a href=\"modelica://Modelica_LinearSystems2.Controller.Interpolator\">Controller.Interpolator</a>
+<li> Block <a href=\"modelica://Modelica_LinearSystems2.Controllers.Interpolator\">Controller.Interpolator</a>
      to increase the sampling frequency with linear interpolation and optional mean-value filtering.</li>
 
 <li> Blocks have been added to Controller.Examples to demonstrate the discretization methods
-     (<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Discretization1\">Discretization1</a>,
-      <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Discretization2\">Discretization2</a>,
-      <a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Discretization1\">DiscretizationSeries</a>)
+     (<a href=\"modelica://Modelica_LinearSystems2.Controllers.Examples.Discretization1\">Discretization1</a>,
+      <a href=\"modelica://Modelica_LinearSystems2.Controllers.Examples.Discretization2\">Discretization2</a>,
+      <a href=\"modelica://Modelica_LinearSystems2.Controllers.Examples.Discretization1\">DiscretizationSeries</a>)
      and the new Interpolator block
-     (<a href=\"modelica://Modelica_LinearSystems2.Controller.Examples.Interpolator\">Interpolator</a>).</li>
+     (<a href=\"modelica://Modelica_LinearSystems2.Controllers.Examples.Interpolator\">Interpolator</a>).</li>
 </ul>
 
 <p>
@@ -1279,7 +1279,7 @@ Bug fixes:
 <li> Staircase algorithm to reduce a system to controller Hessenberg form.</li>
 <li> Computation of controllable/uncontrollable poles.</li>
 </ul></li>
-<li> The design of FIR filters in block <a href=\"modelica://Modelica_LinearSystems2.Controller.FilterFIR\">Controller.FilterFIR</a> was
+<li> The design of FIR filters in block <a href=\"modelica://Modelica_LinearSystems2.Controllers.FilterFIR\">Controller.FilterFIR</a> was
 disabled. It is now enabled and the previously wrong design of highpass filters with odd order
 was corrected, by increasing the order by one in this case.</li>
 </ul>
@@ -1465,7 +1465,7 @@ performed:
      (n = number of poles - number of zeros) without introducing derivatives
      in the inputs. A detailed explanation is given at the end of the info
      layer of component
-     <a href=\"modelica://Modelica_LinearSystems2.Controller.ZerosAndPoles\">ZerosAndPoles</a>.
+     <a href=\"modelica://Modelica_LinearSystems2.Controllers.ZerosAndPoles\">ZerosAndPoles</a>.
      Previously, transfer functions and especially filters did not have this
      feature. Therefore, it was not possible to use the filters of the previous
      Sampled library as pre-filters in an inverse model. This is now

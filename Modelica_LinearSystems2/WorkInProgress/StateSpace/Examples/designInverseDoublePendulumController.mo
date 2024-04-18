@@ -9,7 +9,7 @@ function designInverseDoublePendulumController
   import Modelica_LinearSystems2.StateSpace;
 
 // input String modelName="Modelica_Controller.Examples.Components.InverseDoublePendulum"   "name of the model to linearize";
-  input String modelName="Modelica_LinearSystems2.Controller.Examples.Components.InverseDoublePendulum"
+  input String modelName="Modelica_LinearSystems2.Controllers.Examples.Components.InverseDoublePendulum"
     "name of the model to linearize";
 
 //   input Complex pa[6]={Complex(-2), -2+0*j, -6-0.2*j,-6+0.2*j,-6-0.2*j,-6+0.2*j}
