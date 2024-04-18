@@ -577,6 +577,63 @@ instead.
 </html>"));
       end leastSquares;
     end Matrices;
+
+    package Internal "Package of internal functions operating on matrices (for advanced users only)"
+      extends Modelica.Icons.InternalPackage;
+
+
+      function dhseqr_workdim "Calculate the optimal size of the WORK array in dhseqr"
+        import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+        input Real H[:,:];
+
+        output Integer lwork;
+        output Integer info;
+
+      protected
+        Real work[:];
+
+      algorithm
+        if min(size(H, 1), size(H, 2)) > 0 then
+          (,,info,,,work) := ObsoleteLinearSystems2.Math.LAPACK.dhseqr(H, -1);
+          lwork := integer(work[1]);
+        else
+          lwork := 1;
+        end if;
+
+        annotation (
+          obsolete = "Deprecated function - see ObsoleteLinearSystems2.Math.LAPACK.dhseqr for alternatives");
+      end dhseqr_workdim;
+
+      function dgeqrf_workdim "Calculate the optimal size of the WORK array in dgeqrf"
+        import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+        input Real A[:,:];
+
+        output Integer lwork;
+        output Integer info;
+
+      protected
+        Real work[max(1,size(A,1))];
+
+      algorithm
+        (,,info,work) := ObsoleteLinearSystems2.Math.LAPACK.dgeqrf(A, -1);
+        lwork := integer(work[1]);
+
+        annotation (
+          obsolete = "Deprecated function - see ObsoleteLinearSystems2.Math.LAPACK.dgeqrf for alternatives");
+      end dgeqrf_workdim;
+      annotation (Documentation(info="<html>
+<p>
+Generally, the functions in this package should not be used by the user.
+</p>
+<p>
+This package contains functions which cannot be used in an arbitrary
+way and require particular knowledge.
+Therefore, only advanced users should deal with contained classes.
+</p>
+</html>"));
+    end Internal;
   end Math;
 
   annotation (
