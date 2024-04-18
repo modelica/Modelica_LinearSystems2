@@ -410,5 +410,399 @@ package LinearSystems2TestConversion3
       annotation();
     end otherClassesTest;
   end Streams;
-  annotation (uses(Modelica_LinearSystems2(version="2.4.0")));
+
+  package Controllers
+    extends Modelica.Icons.ExamplesPackage;
+
+    model FirstExample
+      extends Modelica.Icons.Example;
+
+      import Modelica_LinearSystems2;
+
+      parameter Modelica.Units.SI.AngularFrequency w=10
+        "Undamped natural frequency";
+      parameter Real D=0.1 "Damping ratio";
+
+      Modelica.Blocks.Sources.Step step(
+        startTime=0.5,
+        height=1.2,
+        offset=0.2) annotation (
+          Placement(transformation(extent={{-80,0},{-60,20}})));
+      Modelica_LinearSystems2.Controller.StateSpace stateSpace(
+        x_start={0.1,0},
+        initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState,
+        system=Modelica_LinearSystems2.StateSpace(
+          A=[0,1; -w*w,-2*w*D],
+          B=[0; w*w],
+          C=[1,0],
+          D=[0]),
+        blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption)
+        annotation(Placement(transformation(extent={{-20,40},{0,60}})));
+      Modelica_LinearSystems2.Controller.TransferFunction transferFunction(system(n={1,2}, d={1,2,3}), blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption) annotation (Placement(transformation(extent={{-20,0},{0,20}})));
+      Modelica_LinearSystems2.Controller.ZerosAndPoles zerosAndPoles(system(
+          n1={1},
+          n2=fill(0, 0, 2),
+          d1=fill(0, 0),
+          d2=[1,1; 1,1]), blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption) annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
+      inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(sampleTime=0.1, blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous) annotation (Placement(transformation(extent={{60,60},{80,80}})));
+    equation
+      connect(step.y, stateSpace.u[1]) annotation (Line(
+          points={{-59,10},{-40,10},{-40,50},{-22,50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(transferFunction.u, step.y) annotation (Line(
+          points={{-22,10},{-59,10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(zerosAndPoles.u, step.y) annotation (Line(
+          points={{-22,-30},{-40,-30},{-40,10},{-59,10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (    experiment(StopTime=5));
+    end FirstExample;
+
+    model Discretization1
+      extends Modelica.Icons.Example;
+
+      import Modelica_LinearSystems2.Controller;
+
+      parameter Real w=20 "Angular frequency";
+      parameter Real D=0.1 "Damping";
+
+      Controller.SecondOrder continuous(w=w, D=D)
+        annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
+      inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(sampleTime=
+            0.01)
+        annotation (Placement(transformation(extent={{60,60},{80,80}})));
+      Modelica.Blocks.Sources.Step step(
+        height=1.2,
+        offset=0.2,
+        startTime=0.1) annotation (
+          Placement(transformation(extent={{-80,40},{-60,60}})));
+      Modelica_LinearSystems2.Controller.SecondOrder explicitEuler(
+        w=w,
+        D=D,
+        blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+        methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ExplicitEuler)
+        annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
+
+      Modelica_LinearSystems2.Controller.SecondOrder implicitEuler(
+        w=w,
+        D=D,
+        blockType=Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+        methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ImplicitEuler)
+        annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
+
+      Modelica_LinearSystems2.Controller.SecondOrder trapezoid(
+        w=w,
+        D=D,
+        blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+        methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.Trapezoidal)
+        annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
+
+      Controller.SecondOrder impulseExact(
+        w=w,
+        D=D,
+        blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+        methodType=Controller.Types.MethodWithGlobalDefault.ImpulseExact)
+        annotation (Placement(transformation(extent={{20,20},{40,40}})));
+
+      Modelica_LinearSystems2.Controller.SecondOrder stepExact(
+        w=w,
+        D=D,
+        blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+        methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact)
+        annotation (Placement(transformation(extent={{20,-20},{40,0}})));
+
+      Modelica_LinearSystems2.Controller.SecondOrder rampExact(
+        w=w,
+        D=D,
+        blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+        methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.RampExact)
+        annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
+
+    equation
+      connect(step.y, continuous.u) annotation (Line(
+          points={{-59,50},{-42,50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(step.y, explicitEuler.u) annotation (Line(
+          points={{-59,50},{-52,50},{-52,10},{-42,10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(step.y, implicitEuler.u) annotation (Line(
+          points={{-59,50},{-52,50},{-52,-30},{-42,-30}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(step.y, trapezoid.u) annotation (Line(
+          points={{-59,50},{-52,50},{-52,-70},{-42,-70}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(step.y, impulseExact.u) annotation (Line(
+          points={{-59,50},{-52,50},{-52,80},{0,80},{0,30},{18,30}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(step.y, stepExact.u) annotation (Line(
+          points={{-59,50},{-52,50},{-52,80},{0,80},{0,-10},{18,-10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(step.y, rampExact.u) annotation (Line(
+          points={{-59,50},{-52,50},{-52,80},{0,80},{0,-50},{18,-50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (
+        experiment(Tolerance=1e-006),
+        Documentation(info=""));
+    end Discretization1;
+
+    model Discretization2
+      extends Modelica.Icons.Example;
+
+      import Modelica_LinearSystems2.Controller;
+      import Modelica_LinearSystems2.Controller.SecondOrder;
+
+      parameter Real w=20 "Angular frequency";
+      parameter Real D=0.1 "Damping";
+
+      inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(
+        sampleTime=0.01)
+        annotation (Placement(transformation(extent={{60,60},{80,80}})));
+
+      SecondOrder impulseExact(
+        D=D,
+        blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+        methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ImpulseExact,
+        w=w)
+        annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
+
+      SecondOrder continuous(D=D, w=w)
+        annotation (Placement(transformation(extent={{0,10},{20,30}})));
+      Controller.Derivative derivative(T=1e-8) annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
+      Modelica.Blocks.Sources.Pulse pulse(
+        startTime=0.1,
+        period=1,
+        width=sampleClock.sampleTime*100)
+        annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
+      Modelica.Blocks.Sources.Step step1(
+        startTime=0.1,
+        height=1,
+        offset=0) annotation (Placement(transformation(extent={{-80,10},{-60,30}})));
+
+    equation
+      connect(pulse.y, impulseExact.u) annotation (Line(
+          points={{-59,-20},{-2,-20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(continuous.u, derivative.y) annotation (Line(
+          points={{-2,20},{-19,20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(step1.y, derivative.u) annotation (Line(
+          points={{-59,20},{-42,20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (
+        experiment(Tolerance=1e-006),
+        Documentation(info=""));
+    end Discretization2;
+
+    model InverseDoublePendulumWithObserver
+      extends Modelica.Icons.Example;
+
+      extends Modelica_LinearSystems2.Controller.Templates.SimpleObserverStateSpaceControl(
+        redeclare Modelica_LinearSystems2.Controller.Examples.Components.InverseDoublePendulum3 plant(
+          additionalMeasurableOutputs=true,
+          m_trolley=1,
+          n=6,
+          phi2_start=0,
+          length=1,
+          cartDisturbance=true,
+          bodyDisturbance=true,
+          l=2,
+          secondAngle=false,
+          m_load=1,
+          phi1_start=1.5707963267949),
+        preFilter(
+          matrixName="M_pa",
+          fileName=Modelica_LinearSystems2.Controller.DataDir + "inverseDoublePendulumController.mat",
+          matrixOnFile=true),
+        feedbackMatrix(
+          matrixOnFile=true,
+          matrixName="K_pa",
+          fileName=Modelica_LinearSystems2.Controller.DataDir + "inverseDoublePendulumController.mat"),
+        sampleClock(sampleTime=0.002, blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous),
+        observer(
+          systemName="stateSpace",
+          matrixOnFile=true,
+          initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState,
+          methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.StepExact,
+          x_start={0,0,0,0,0,0},
+          observerMatrixName="K_ob2",
+          blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption,
+          withDelay=true,
+          fileName=Modelica_LinearSystems2.Controller.DataDir + "inverseDoublePendulumControllerO.mat"));
+
+      Modelica.Blocks.Sources.Pulse pulse(
+        offset=0,
+        startTime=1,
+        width=50,
+        period=30,
+        amplitude=5)
+        annotation (Placement(transformation(extent={{-140,-10},{-120,10}})));
+      Modelica_LinearSystems2.Controller.Examples.Components.AccelerationLimiter accelerationLimiter(
+        v_limit=20,
+        velocityLimitation=false,
+        withDelay2=false,
+        a_limit=1) annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+      Modelica_LinearSystems2.Controller.Noise noise(
+        firstSeed={43,123,162},
+        blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+        y_min=-0.005,
+        y_max=0.005,
+        sampleFactor=200) annotation (Placement(transformation(extent={{130,40},{110,60}})));
+      Modelica_LinearSystems2.Controller.Noise noise1(
+        sampleFactor=100,
+        blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+        y_min=-0.025,
+        y_max=0.025) annotation (Placement(transformation(extent={{50,40},{70,60}})));
+
+    initial equation
+      //feedback.y = {0.0};
+      // plant.u = {0.0};
+
+    equation
+      connect(pulse.y, accelerationLimiter.u) annotation (Line(
+          points={{-119,0},{-112,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(noise1.y, plant.dist) annotation (Line(
+          points={{71,50},{85.2,50},{85.2,5.6}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(noise.y, plant.dist2) annotation (Line(
+          points={{109,50},{95.4,50},{95.4,5.6}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(preFilter.u[1], accelerationLimiter.s) annotation (Line(
+          points={{-72,0},{-80,0},{-80,6},{-89,6}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (
+        Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,-100},{140,
+                100}}), graphics={Text(
+              extent={{44,76},{134,64}},
+              lineColor={0,0,0},
+              textString="disturbance"), Rectangle(extent={{-76,28},{108,-60}},
+                lineColor={255,0,0})}),
+        experiment(
+          StopTime=60,
+          __Dymola_NumberOfIntervals=2000,
+          Tolerance=1e-005),
+        Documentation(info=""));
+    end InverseDoublePendulumWithObserver;
+
+    model MixingUnit
+      extends Modelica.Icons.Example;
+
+      extends Modelica_LinearSystems2.Controller.Templates.TwoDOFinverseModelController(
+        redeclare Modelica_LinearSystems2.Controller.Examples.Components.MixingUnit plant_inv(mixingUnit(
+            c(start=c_start, fixed=true),
+            T_c(start=T_c_start, fixed=true),
+            T(start=T_start, fixed=true))),
+        redeclare Modelica_LinearSystems2.Controller.Examples.Components.MixingUnit plant(mixingUnit(c(start=c_start, fixed=true), T(start=T_start, fixed=true))),
+        filter(
+          order=3,
+          normalized=false,
+          f_cut=freq,
+          initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.NoInit),
+        redeclare Modelica_LinearSystems2.Controller.PI controller(
+          k=10,
+          T=10,
+          initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState));
+
+      import Modelica.Units.SI;
+      parameter Real x10 = 0.42
+        "Initial value of state x1 (related concentration of substance A in tank)";
+      parameter Real x10_inv = 0.6 "Initial value of state x1 of inverted model";
+      parameter Real x20 = 0.01
+        "Initial value of state x2 (related temperature in tank)";
+      parameter Real u0 = -0.0224
+        "Initial related temperature of cooling medium [-]";
+      parameter SI.Frequency freq = 1/300 "Critical frequency of filter";
+
+      final parameter Real c0 = 0.848
+        "Nominal concentration of substance A on intake";
+      final parameter SI.Temperature T0 = 308.5
+        "Nominal temperature of substance A on intake";
+      final parameter Real c_start(unit="mol/l") = c0*(1-x10)
+        "Initial concentration of substance A in tank";
+      final parameter Real c_inv_start(unit="mol/l") = c0*(1-x10_inv)
+        "Initial concentration of substance A in tank";
+      final parameter SI.Temperature T_start = T0*(1+x20)
+        "Initial temperature in tank";
+      final parameter Real c_high_start(unit="mol/l") = c0*(1-0.72)
+        "Concentration change height";
+      final parameter SI.Temperature T_c_start = T0*(1+u0)
+        "Initial temperature of cooling medium";
+
+      Modelica.Blocks.Sources.Step step1(
+        height=c_high_start - c_start,
+        offset=c_start,
+        startTime=25)
+        annotation (Placement(transformation(extent={{-120,10},{-100,30}}, rotation=0)));
+      inner Modelica_LinearSystems2.Controller.SampleClock sampleClock annotation (Placement(transformation(extent={{80,80},{100,100}})));
+    equation
+      connect(step1.y, filter.u) annotation (Line(
+          points={{-99,20},{-92,20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (
+        experiment(StopTime=500),
+        __Dymola_Commands(
+          file="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/MixingUnit_plot.mos"
+            "Plot Results",
+          file(
+            ensureSimulated=true,
+            partOfCheck=true)=
+            "modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/MixingUnit_plot.mos"
+            "Simulate and Plot Results"),
+        Documentation(info=""),
+        Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-100},{120,
+                100}}), graphics));
+    end MixingUnit;
+
+    model ExamplesUtilities
+      extends Modelica.Icons.Example;
+
+      import Modelica_LinearSystems2.Controller;
+      import Modelica_LinearSystems2.Controller.Examples.Components;
+      import Modelica_LinearSystems2.Controller.Examples.Components.DoublePendulum2;
+
+      Modelica_LinearSystems2.Controller.Examples.Components.AccelerationLimiter accelerationLimiter annotation (Placement(transformation(extent={{-50,80},{-30,100}})));
+      Controller.Examples.Components.DoublePendulum doublePendulum annotation (Placement(transformation(extent={{59,78},{89,98}})));
+      DoublePendulum2 doublePendulum2 annotation (Placement(transformation(extent={{60,0},{80,20}})));
+      Components.InverseDoublePendulum inverseDoublePendulum annotation (Placement(transformation(extent={{60,40},{80,60}})));
+      Modelica_LinearSystems2.Controller.Examples.Components.InverseDoublePendulum2 inverseDoublePendulum2 annotation (Placement(transformation(extent={{60,-40},{80,-20}})));
+      Controller.Examples.Components.InverseDoublePendulum3 inverseDoublePendulum3 annotation (Placement(transformation(extent={{60,-80},{80,-60}})));
+      Modelica_LinearSystems2.Controller.Examples.Components.MixingUnit mixingUnit annotation (Placement(transformation(extent={{-50,0},{-30,20}})));
+      Modelica_LinearSystems2.Controller.Examples.Components.MixingUnit1 mixingUnit1 annotation (Placement(transformation(extent={{-50,-42},{-30,-22}})));
+      Components.SeriesConnection seriesConnection annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));
+      Modelica_LinearSystems2.Controller.Examples.Components.TwoPoint twoPoint annotation (Placement(transformation(extent={{-50,40},{-30,60}})));
+      Modelica.Blocks.Sources.Constant const(k=0.1) annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
+      Modelica.Blocks.Sources.Constant const1(k=0.1) annotation (Placement(transformation(extent={{0,60},{20,80}})));
+      Modelica.Blocks.Sources.Constant const2(k=0.1) annotation (Placement(transformation(extent={{0,-20},{20,0}})));
+    equation
+      connect(const.y, accelerationLimiter.u) annotation (Line(points={{-79,30},{-70,30},{-70,90},{-52,90}}, color={0,0,127}));
+      connect(const.y, twoPoint.u) annotation (Line(points={{-79,30},{-70,30},{-70,50},{-52,50}}, color={0,0,127}));
+      connect(const.y, mixingUnit.u) annotation (Line(points={{-79,30},{-70,30},{-70,10},{-52,10}}, color={0,0,127}));
+      connect(const.y, mixingUnit1.T_c) annotation (Line(points={{-79,30},{-70,30},{-70,-32},{-52,-32}}, color={0,0,127}));
+      connect(const1.y, doublePendulum.u) annotation (Line(points={{21,70},{40.5,70},{40.5,88},{57,88}}, color={0,0,127}));
+      connect(const1.y, inverseDoublePendulum.u) annotation (Line(points={{21,70},{40,70},{40,50},{58,50}}, color={0,0,127}));
+      connect(const2.y, doublePendulum2.u[1]) annotation (Line(points={{21,-10},{40,-10},{40,10},{58,10}}, color={0,0,127}));
+      connect(const2.y, inverseDoublePendulum2.u[1]) annotation (Line(points={{21,-10},{40,-10},{40,-30},{58,-30}}, color={0,0,127}));
+      connect(const2.y, inverseDoublePendulum3.u[1]) annotation (Line(points={{21,-10},{40,-10},{40,-70},{58,-70}}, color={0,0,127}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
+    end ExamplesUtilities;
+  end Controllers;
+  annotation (uses(Modelica_LinearSystems2(version="2.4.0"), Modelica(version="4.0.0")));
 end LinearSystems2TestConversion3;
