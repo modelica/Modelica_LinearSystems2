@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controllers.Examples.Components;
+within Modelica_LinearSystems2.Controllers.Examples.Utilities;
 model SeriesConnection "Series connection of two PT1 blocks"
   extends Modelica.Blocks.Icons.Block;
   parameter Types.BlockType blockType=Modelica_LinearSystems2.Controllers.Types.BlockType.Continuous

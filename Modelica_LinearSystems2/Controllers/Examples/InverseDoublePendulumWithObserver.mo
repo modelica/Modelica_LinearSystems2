@@ -3,7 +3,7 @@ model InverseDoublePendulumWithObserver
   "Example of controlled inverse double pendulum"
   extends Modelica.Icons.Example;
   extends Templates.SimpleObserverStateSpaceControl(
-    redeclare Components.InverseDoublePendulum3 plant(
+    redeclare Utilities.InverseDoublePendulum3 plant(
       additionalMeasurableOutputs=true,
       m_trolley=1,
       n=6,
@@ -42,7 +42,7 @@ model InverseDoublePendulumWithObserver
     period=30,
     amplitude=5)
     annotation (Placement(transformation(extent={{-140,-10},{-120,10}})));
-  Components.AccelerationLimiter accelerationLimiter(
+  Utilities.AccelerationLimiter accelerationLimiter(
     v_limit=20,
     velocityLimitation=false,
     withDelay2=false,

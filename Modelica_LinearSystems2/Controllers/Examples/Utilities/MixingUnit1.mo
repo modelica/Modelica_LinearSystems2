@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controllers.Examples.Components;
+within Modelica_LinearSystems2.Controllers.Examples.Utilities;
 model MixingUnit1 "Stirred tank reactor"
   import Modelica.Units.SI;
 // stirred tank reactor // stirrer vessel reactor
