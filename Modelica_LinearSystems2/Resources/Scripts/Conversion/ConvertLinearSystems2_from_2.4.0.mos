@@ -148,6 +148,13 @@ convertClass({"Modelica_LinearSystems2.Math.Complex.Internal.eigenValues_dhseqr"
               "Modelica_LinearSystems2.ComplexMathAdds.Internal.C_transpose",
               "Modelica_LinearSystems2.ComplexMathAdds.Internal.frobeniusNorm"});
 
+// Controllers
+// -----------
+convertClass("Modelica_LinearSystems2.Controller",
+             "Modelica_LinearSystems2.Controllers");
+convertClass("Modelica_LinearSystems2.Controller.Examples.Components",
+             "Modelica_LinearSystems2.Controllers.Examples.Utilities");
+
 // Matrices
 // Use Vectors functions - use functions from Modelica.Math.Vectors
 //
