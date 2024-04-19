@@ -15,16 +15,16 @@ partial model TwoDOFinverseModelController
   replaceable Controllers.Interfaces.PartialSISO controller
     constrainedby Controllers.Interfaces.PartialSISO
     annotation (Placement(transformation(extent={{10,-30},{30,-10}})));
-  replaceable Controllers.Templates.Internal.Plant_SISO plant(
+  replaceable Plant_SISO plant(
     l=l,
     additionalMeasurableOutputs=additionalMeasurableOutputs)
-    constrainedby Templates.Internal.PlantTemplate_SISO
+    constrainedby Templates.PlantTemplate_SISO
     annotation (Placement(transformation(extent={{70,-30},{90,-10}})));
   Modelica.Blocks.Math.InverseBlockConstraints inverseModel
     annotation (Placement(transformation(extent={{-58,6},{-4,34}})));
-  replaceable Internal.Plant_SISO plant_inv(l=l,
+  replaceable Plant_SISO plant_inv(l=l,
     additionalMeasurableOutputs=additionalMeasurableOutputs)
-    constrainedby Templates.Internal.PlantTemplate_SISO
+    constrainedby Templates.PlantTemplate_SISO
     annotation (Placement(transformation(extent={{-20,10},{-40,30}})));
 equation
   connect(controller.u, feedback[1].y) annotation (Line(
@@ -63,12 +63,14 @@ equation
       points={{59,-20},{68,-20}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
+  annotation (
+    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
       graphics={
       	Text(
           extent={{-58,42},{-2,36}},
           textColor={0,0,0},
-          textString="inverted system")}),    Documentation(info="<html>
+          textString="inverted system")}),
+    Documentation(info="<html>
 <p>
 Template of a controller with two structural degrees of freedom and an inverse plant model in forward path.
 The functionality of such control system structures is described in [1].
