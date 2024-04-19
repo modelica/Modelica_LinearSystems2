@@ -155,6 +155,24 @@ convertClass("Modelica_LinearSystems2.Controller",
 convertClass("Modelica_LinearSystems2.Controller.Examples.Components",
              "Modelica_LinearSystems2.Controllers.Examples.Utilities");
 
+convertClass({"Modelica_LinearSystems2.Controller.Templates.Internal.Add2",
+              "Modelica_LinearSystems2.Controller.Templates.Internal.Plant_SISO"},
+             {"Modelica_LinearSystems2.Controllers.Templates.Add2",
+              "Modelica_LinearSystems2.Controllers.Templates.Plant_SISO"});
+
+convertModifiers("Modelica_LinearSystems2.Controller.Templates.PartialPlantSISO",
+                  fill("",0), {"ym[1]","additionalMeasurableOutputs=true","l=1"});
+convertElement("Modelica_LinearSystems2.Controller.Templates.PartialPlantSISO",
+               {"ym"},{"ym[1]"});
+convertClass({"Modelica_LinearSystems2.Controller.Templates.Internal.PartialPlantSISO",
+              "Modelica_LinearSystems2.Controller.Templates.Internal.PlantTemplate_SISO",
+              "Modelica_LinearSystems2.Controller.Templates.PlantTemplate_SISO"},
+             "Modelica_LinearSystems2.Controllers.Templates.PartialPlantSISO");
+convertClass({"Modelica_LinearSystems2.Controller.Templates.Internal.PartialPlantMIMO",
+              "Modelica_LinearSystems2.Controller.Templates.Internal.PlantTemplate",
+              "Modelica_LinearSystems2.Controller.Templates.PlantTemplate"},
+             "Modelica_LinearSystems2.Controllers.Templates.PartialPlantMIMO");
+
 // Matrices
 // Use Vectors functions - use functions from Modelica.Math.Vectors
 //
