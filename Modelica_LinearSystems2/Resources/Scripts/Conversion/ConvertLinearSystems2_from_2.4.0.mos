@@ -175,6 +175,9 @@ convertClass({"Modelica_LinearSystems2.Controller.Templates.Internal.PartialPlan
               "Modelica_LinearSystems2.Controller.Templates.PlantTemplate"},
              "Modelica_LinearSystems2.Controllers.BaseClasses.PartialPlantMIMO");
 
+convertClass("Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon",
+             "Modelica_LinearSystems2.Controllers.Icons.PartialBlockIcon")
+
 // Matrices
 // Use Vectors functions - use functions from Modelica.Math.Vectors
 //
