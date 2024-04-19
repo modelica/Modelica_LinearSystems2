@@ -8,9 +8,9 @@ partial model SimpleObserverStateSpaceControl
     annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
   Modelica.Blocks.Math.Feedback feedback[feedbackMatrix.nout]
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-  replaceable PlantTemplate plant(
+  replaceable PartialPlantMIMO plant(
     n=feedbackMatrix.nin,
-    m=feedbackMatrix.nout) constrainedby PlantTemplate
+    m=feedbackMatrix.nout) constrainedby PartialPlantMIMO
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
   Sampler samplerPreFilter[feedbackMatrix.nout]
     annotation (Placement(transformation(extent={{-43,-5},{-33,5}})));
