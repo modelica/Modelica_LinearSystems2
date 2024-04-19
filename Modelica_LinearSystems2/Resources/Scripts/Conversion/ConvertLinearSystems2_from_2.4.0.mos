@@ -163,7 +163,7 @@ convertClass({"Modelica_LinearSystems2.Controller.Templates.Internal.Add2",
               "Modelica_LinearSystems2.Controllers.BaseClasses.Plant_SISO"});
 
 convertModifiers("Modelica_LinearSystems2.Controller.Templates.PartialPlantSISO",
-                  fill("",0), {"ym[1]","additionalMeasurableOutputs=true","l=1"});
+                  fill("",0), {"additionalMeasurableOutputs=true","l=1"});
 convertElement("Modelica_LinearSystems2.Controller.Templates.PartialPlantSISO",
                {"ym"},{"ym[1]"});
 convertClass({"Modelica_LinearSystems2.Controller.Templates.Internal.PartialPlantSISO",
