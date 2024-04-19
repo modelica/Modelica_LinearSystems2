@@ -18,16 +18,19 @@ equation
   annotation (
     Documentation(info="<html>
 <p>
-This block computes output <strong>y</strong> as <em>sum</em> of the
+This block computes output&nbsp;<strong>y</strong> as <em>sum</em> of the
 inputs <strong>u1</strong> and <strong>u2</strong>:
 </p>
-<pre>
-    <strong>y</strong> = <strong>u1</strong> + <strong>u2</strong>;
-</pre>
-</html>"), Icon(coordinateSystem(
-    preserveAspectRatio=true,
-    extent={{-100,-100},{100,100}},
-    grid={2,2}), graphics={
+<blockquote><pre>
+<strong>y</strong> = <strong>u1</strong> + <strong>u2</strong>;
+</pre></blockquote>
+</html>"),
+    Icon(
+      coordinateSystem(
+        preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}},
+        grid={2,2}),
+      graphics={
         Ellipse(
           extent={{-20,20},{20,-20}},
           lineColor={0,0,127},
@@ -40,10 +43,12 @@ inputs <strong>u1</strong> and <strong>u2</strong>:
           extent={{-150,94},{150,44}},
           textString="%name",
           textColor={0,0,255})}),
-    Diagram(coordinateSystem(
-    preserveAspectRatio=true,
-    extent={{-100,-100},{100,100}},
-    grid={2,2}), graphics={
+    Diagram(
+      coordinateSystem(
+        preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}},
+        grid={2,2}),
+      graphics={
         Ellipse(
           extent={{-20,20},{20,-20}},
           pattern=LinePattern.Solid,
