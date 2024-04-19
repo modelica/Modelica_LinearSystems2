@@ -758,15 +758,6 @@ package LinearSystems2TestConversion3
           smooth=Smooth.None));
       annotation (
         experiment(StopTime=500),
-        __Dymola_Commands(
-          file="modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/MixingUnit_plot.mos"
-            "Plot Results",
-          file(
-            ensureSimulated=true,
-            partOfCheck=true)=
-            "modelica://Modelica_LinearSystems2/Resources/Scripts/Dymola/Controllers/Examples/MixingUnit_plot.mos"
-            "Simulate and Plot Results"),
-        Documentation(info=""),
         Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-120,-100},{120,
                 100}}), graphics));
     end MixingUnit;
@@ -803,6 +794,104 @@ package LinearSystems2TestConversion3
       connect(const2.y, inverseDoublePendulum3.u[1]) annotation (Line(points={{21,-10},{40,-10},{40,-70},{58,-70}}, color={0,0,127}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
     end ExamplesUtilities;
+
+    package Templates
+      model DoublePendulum "Crane trolley controlled by a state feedback controller"
+        extends Modelica.Icons.Example;
+        extends Modelica_LinearSystems2.Controller.Templates.SimpleStateSpaceControl
+                                                 (
+          redeclare Modelica_LinearSystems2.Controller.Examples.Components.DoublePendulum2 plant(
+            additionalMeasurableOutputs=true,
+            m_trolley=5,
+            m_load=20,
+            length=2,
+            n=6,
+            l=6,
+            phi1_start=-0.69813170079773,
+            phi2_start=-0.34906585039887),
+          preFilter(
+            matrixName="M_pa",
+            fileName=Modelica_LinearSystems2.DataDir + "doublePendulumController.mat",
+            matrixOnFile=true),
+          feedbackMatrix(
+            matrixOnFile=true,
+            matrixName="K_pa",
+            fileName=Modelica_LinearSystems2.DataDir + "doublePendulumController.mat"),
+          sampleClock(sampleTime=0.01, blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Continuous));
+
+        Modelica.Blocks.Sources.Pulse pulse(
+          offset=0,
+          amplitude=3,
+          width=50,
+          startTime=5,
+          period=10)
+          annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
+        Modelica_LinearSystems2.Controller.FirstOrder firstOrder(T=0.25) annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
+      equation
+        connect(firstOrder.u, pulse.y) annotation (Line(
+            points={{-72,0},{-76,0},{-76,0},{-79,0}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(firstOrder.y, preFilter.u[1]) annotation (Line(
+            points={{-49,0},{-46,0},{-46,0},{-42,0}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (
+          experiment(
+            StopTime=40,
+            __Dymola_NumberOfIntervals=2000,
+            Tolerance=1e-005));
+      end DoublePendulum;
+
+      model PartialPlantMIMOExtend
+        extends Modelica_LinearSystems2.Controller.Templates.PartialPlantMIMO(
+          l=1,
+          additionalMeasurableOutputs=true,
+          m=1,
+          n=1);
+        Modelica.Blocks.Math.Gain gain(k=1) annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+      equation
+        connect(u[1], gain.u) annotation (Line(points={{-120,0},{-62,0}}, color={0,0,127}));
+        connect(gain.y, y[1]) annotation (Line(points={{-39,0},{110,0}}, color={0,0,127}));
+        connect(gain.y, ym[1]) annotation (Line(points={{-39,0},{0,0},{0,-110}}, color={0,0,127}));
+      end PartialPlantMIMOExtend;
+
+      model PartialPlantSISOExtend
+        extends Modelica_LinearSystems2.Controller.Templates.PartialPlantSISO;
+        Modelica.Blocks.Math.Gain gain(k=1) annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+      equation
+        connect(u, gain.u) annotation (Line(points={{-120,0},{-92,0},{-92,0},{-62,0}}, color={0,0,127}));
+        connect(gain.y, y) annotation (Line(points={{-39,0},{34,0},{34,0},{110,0}}, color={0,0,127}));
+        connect(gain.y, ym) annotation (Line(points={{-39,0},{0,0},{0,-110}}, color={0,0,127}));
+      end PartialPlantSISOExtend;
+
+      model PlantTemplate_SISOExtend
+        extends Modelica_LinearSystems2.Controller.Templates.PlantTemplate_SISO(l=2, additionalMeasurableOutputs=true);
+        Modelica.Blocks.Math.Gain gain(k=1) annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+        Modelica.Blocks.Sources.Constant const(k=0) annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
+      equation
+        connect(u, gain.u) annotation (Line(points={{-120,0},{-62,0}}, color={0,0,127}));
+        connect(gain.y, y) annotation (Line(points={{-39,0},{110,0}}, color={0,0,127}));
+        connect(gain.y, ym[1]) annotation (Line(points={{-39,0},{0,0},{0,-112.5}},
+                                                                                 color={0,0,127}));
+        connect(const.y, ym[2]) annotation (Line(points={{-39,-50},{-2,-50},{-2,-102},{0,-102},{0,-107.5}}, color={0,0,127}));
+      end PlantTemplate_SISOExtend;
+
+      model PlantTemplate_SISOIntantiate
+        replaceable Modelica_LinearSystems2.Controller.Templates.PlantTemplate_SISO plantTemplate_SISO(additionalMeasurableOutputs=true, l=2) annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
+        replaceable Modelica_LinearSystems2.Controller.Templates.PartialPlantSISO plant annotation (Placement(transformation(extent={{-20,20},{0,40}})));
+        Modelica.Blocks.Sources.Constant const(k=0) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+        Modelica.Blocks.Math.Gain gain(k=1) annotation (Placement(transformation(extent={{40,0},{60,20}})));
+        Modelica.Blocks.Routing.Multiplex2 multiplex2 annotation (Placement(transformation(extent={{40,-70},{60,-50}})));
+      equation
+        connect(const.y, plantTemplate_SISO.u) annotation (Line(points={{-59,0},{-40,0},{-40,-30},{-22,-30}}, color={0,0,127}));
+        connect(const.y, plant.u) annotation (Line(points={{-59,0},{-40,0},{-40,30},{-22,30}}, color={0,0,127}));
+        connect(plant.ym, gain.u) annotation (Line(points={{-10,19},{-10,10},{38,10}}, color={0,0,127}));
+        connect(plantTemplate_SISO.ym[1], multiplex2.u1[1]) annotation (Line(points={{-10,-41.25},{-10,-54},{38,-54}}, color={0,0,127}));
+        connect(plantTemplate_SISO.ym[2], multiplex2.u2[1]) annotation (Line(points={{-10,-40.75},{-10,-66},{38,-66}}, color={0,0,127}));
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
+      end PlantTemplate_SISOIntantiate;
+    end Templates;
   end Controllers;
   annotation (uses(Modelica_LinearSystems2(version="2.4.0"), Modelica(version="4.0.0")));
 end LinearSystems2TestConversion3;
