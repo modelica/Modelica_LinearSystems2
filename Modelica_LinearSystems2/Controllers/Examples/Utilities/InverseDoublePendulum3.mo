@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Controllers.Examples.Utilities;
 model InverseDoublePendulum3 "Inverted double pendulum"
-  extends Modelica_LinearSystems2.Controllers.Templates.Internal.PlantTemplate(
+  extends Modelica_LinearSystems2.Controllers.Templates.PlantTemplate(
     n=6,
     m=1,
     l=if secondAngle then 3 else 2);
