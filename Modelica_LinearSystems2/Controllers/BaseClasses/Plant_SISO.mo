@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controllers.Templates;
+within Modelica_LinearSystems2.Controllers.BaseClasses;
 model Plant_SISO "SISO dummy plant model which can be used in templates"
   extends PartialPlantSISO;
 equation

@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.Controllers.Examples;
 model MixingUnit
   "Example of system control with inverse model in a controller with two degrees of freedom"
   extends Modelica.Icons.Example;
-  extends Templates.TwoDOFinverseModelController(
+  extends BaseClasses.TwoDOFinverseModelController(
     redeclare Utilities.MixingUnit plant_inv(
       mixingUnit(
         c(start=c_start, fixed=true),
@@ -72,7 +72,7 @@ equation
     Documentation(info="<html>
 <p>
 This example demonstrates the usage of the control structure template
-<a href=\"modelica://Modelica_LinearSystems2.Controllers.Templates.TwoDOFinverseModelController\">Templates.TwoDOFinverseModelController</a>
+<a href=\"modelica://Modelica_LinearSystems2.Controllers.BaseClasses.TwoDOFinverseModelController\">BaseClasses.TwoDOFinverseModelController</a>
 to control a&nbsp;system by using of an inverse system model in the forward path.
 The controlled system is a&nbsp;mixing unit described in&nbsp;[1].
 See also model of

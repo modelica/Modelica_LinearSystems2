@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controllers.Templates;
+within Modelica_LinearSystems2.Controllers.BaseClasses;
 partial model TwoDegreesOfFreedomControlSISO
   "Template for a controller with two structural degrees of freedom and an inverse plant model in forward path"
   parameter Boolean additionalMeasurableOutputs = true
@@ -18,14 +18,14 @@ partial model TwoDegreesOfFreedomControlSISO
   replaceable Plant_SISO
     plant(
     l=l,
-    additionalMeasurableOutputs=additionalMeasurableOutputs) constrainedby Templates.PartialPlantSISO
+    additionalMeasurableOutputs=additionalMeasurableOutputs) constrainedby BaseClasses.PartialPlantSISO
     annotation (Placement(transformation(extent={{70,-30},{90,-10}})));
   Modelica.Blocks.Math.InverseBlockConstraints forwardControlModel
     annotation (Placement(transformation(extent={{-58,6},{-4,34}})));
   replaceable Plant_SISO
     plant2(
     l=l,
-    additionalMeasurableOutputs=additionalMeasurableOutputs) constrainedby Templates.PartialPlantSISO
+    additionalMeasurableOutputs=additionalMeasurableOutputs) constrainedby BaseClasses.PartialPlantSISO
     annotation (Placement(transformation(extent={{-20,10},{-40,30}})));
 equation
   connect(controller.u, feedback[1].y) annotation (Line(

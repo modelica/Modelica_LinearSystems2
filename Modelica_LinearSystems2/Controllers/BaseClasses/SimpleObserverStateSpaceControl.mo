@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controllers.Templates;
+within Modelica_LinearSystems2.Controllers.BaseClasses;
 partial model SimpleObserverStateSpaceControl
   "Template for a simple state feedback controller with observer and optional pre-filter"
 
@@ -20,8 +20,7 @@ partial model SimpleObserverStateSpaceControl
     annotation (Placement(transformation(extent={{85,-51},{75,-41}})));
   inner SampleClock sampleClock
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
-  Modelica_LinearSystems2.Controllers.Templates.Internal.ObserverTemplate
-    observer
+  Modelica_LinearSystems2.Controllers.BaseClasses.Internal.ObserverTemplate observer
     annotation (Placement(transformation(extent={{60,-50},{40,-30}})));
 equation
   connect(feedback.y, plant.u) annotation (Line(

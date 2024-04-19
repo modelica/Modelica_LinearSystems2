@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Controllers.Examples;
 model InverseDoublePendulum "Controlled inverse double pendulum"
   extends Modelica.Icons.Example;
-  extends Controllers.Templates.SimpleStateSpaceControl(
+  extends BaseClasses.SimpleStateSpaceControl(
     redeclare Utilities.InverseDoublePendulum2 plant(
       additionalMeasurableOutputs=true,
       m_trolley=1,

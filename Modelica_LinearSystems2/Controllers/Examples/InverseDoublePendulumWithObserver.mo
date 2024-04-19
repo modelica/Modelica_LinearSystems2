@@ -2,7 +2,7 @@ within Modelica_LinearSystems2.Controllers.Examples;
 model InverseDoublePendulumWithObserver
   "Example of controlled inverse double pendulum"
   extends Modelica.Icons.Example;
-  extends Templates.SimpleObserverStateSpaceControl(
+  extends BaseClasses.SimpleObserverStateSpaceControl(
     redeclare Utilities.InverseDoublePendulum3 plant(
       additionalMeasurableOutputs=true,
       m_trolley=1,
