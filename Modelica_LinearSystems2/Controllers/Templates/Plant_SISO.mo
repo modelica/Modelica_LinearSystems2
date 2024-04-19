@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Controllers.Templates;
 model Plant_SISO "SISO dummy plant model which can be used in templates"
-  extends PlantTemplate_SISO;
+  extends PartialPlantSISO;
 equation
   connect(u, ym[1]) annotation (Line(
       points={{-120,0},{0,0},{0,-110}},

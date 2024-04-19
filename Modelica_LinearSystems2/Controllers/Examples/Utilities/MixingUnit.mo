@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Controllers.Examples.Utilities;
 model MixingUnit
   "Stirred tank reactor as controller plant with standard interfaces"
-  extends Templates.PlantTemplate_SISO;
+  extends Templates.PartialPlantSISO;
   import Modelica.Units.SI;
 
   parameter Real c0(unit="mol/l") = 0.848 "Nominal concentration"; // Should be Modelica.Units.SI.Concentration in [mol/m^3]
