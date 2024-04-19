@@ -1,7 +1,6 @@
-within Modelica_LinearSystems2.Controllers.Templates;
+within Modelica_LinearSystems2.Controllers.BaseClasses;
 package Internal "Package of internal utilities of controller templates (for advanced users only)"
   extends Modelica.Icons.InternalPackage;
-
 
   annotation (
     Documentation(info="<html>

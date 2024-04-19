@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Controllers.Examples;
 model DoublePendulum "Crane trolley controlled by a state feedback controller"
   extends Modelica.Icons.Example;
-  extends Templates.SimpleStateSpaceControl(
+  extends BaseClasses.SimpleStateSpaceControl(
     redeclare Utilities.DoublePendulum2 plant(
       additionalMeasurableOutputs=true,
       m_trolley=5,

@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controllers.Templates.Internal;
+within Modelica_LinearSystems2.Controllers.BaseClasses.Internal;
 block ObserverTemplate
   "Template of a Luenberger observer for state space systems"
   extends Interfaces.PartialSampledBlock;

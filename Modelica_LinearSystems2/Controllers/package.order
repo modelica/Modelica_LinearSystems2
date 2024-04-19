@@ -20,9 +20,9 @@ DAconverter
 Interpolator
 MatrixGain
 Noise
-Icons
+BaseClasses
 Interfaces
-Templates
+Icons
 Types
 Internal
 DataDir

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Controllers.Examples.Utilities;
 model InverseDoublePendulum2 "Inverted double pendulum"
-  extends Modelica_LinearSystems2.Controllers.Templates.PartialPlantMIMO(
+  extends Modelica_LinearSystems2.Controllers.BaseClasses.PartialPlantMIMO(
     n=6,
     l=6);
 

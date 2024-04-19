@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controllers.Templates;
+within Modelica_LinearSystems2.Controllers.BaseClasses;
 block Add2 "Output the sum of the two inputs"
 
   input Modelica.Blocks.Interfaces.RealInput u1

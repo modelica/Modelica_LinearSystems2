@@ -1,4 +1,4 @@
-within Modelica_LinearSystems2.Controllers.Templates;
+within Modelica_LinearSystems2.Controllers.BaseClasses;
 partial model SimpleStateSpaceControl
   "Template for a simple state feedback controller with an optional pre-filter"
 
@@ -8,9 +8,9 @@ partial model SimpleStateSpaceControl
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Blocks.Math.Feedback feedback[feedbackMatrix.nout]
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-  replaceable
-    Modelica_LinearSystems2.Controllers.Templates.PartialPlantMIMO
-    plant(n=feedbackMatrix.nin, m=feedbackMatrix.nout) constrainedby Modelica_LinearSystems2.Controllers.Templates.PartialPlantMIMO
+  replaceable Modelica_LinearSystems2.Controllers.BaseClasses.PartialPlantMIMO plant(
+    n=feedbackMatrix.nin,
+    m=feedbackMatrix.nout) constrainedby Modelica_LinearSystems2.Controllers.BaseClasses.PartialPlantMIMO
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
   Sampler samplerPreFilter[feedbackMatrix.nout]
     annotation (Placement(transformation(extent={{-15,-5},{-5,5}})));
