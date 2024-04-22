@@ -20,6 +20,7 @@ DAconverter
 Interpolator
 MatrixGain
 Noise
+Observer
 BaseClasses
 Interfaces
 Icons

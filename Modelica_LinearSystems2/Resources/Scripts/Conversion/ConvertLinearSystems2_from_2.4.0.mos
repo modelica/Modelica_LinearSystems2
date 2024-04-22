@@ -158,9 +158,11 @@ convertClass("Modelica_LinearSystems2.Controller.Templates",
              "Modelica_LinearSystems2.Controllers.BaseClasses");
 
 convertClass({"Modelica_LinearSystems2.Controller.Templates.Internal.Add2",
-              "Modelica_LinearSystems2.Controller.Templates.Internal.Plant_SISO"},
+              "Modelica_LinearSystems2.Controller.Templates.Internal.Plant_SISO",
+              "Modelica_LinearSystems2.Controller.Templates.Internal.ObserverTemplate"},
              {"Modelica_LinearSystems2.Controllers.BaseClasses.Add2",
-              "Modelica_LinearSystems2.Controllers.BaseClasses.Plant_SISO"});
+              "Modelica_LinearSystems2.Controllers.BaseClasses.Plant_SISO",
+              "Modelica_LinearSystems2.Controllers.Observer"});
 
 convertModifiers("Modelica_LinearSystems2.Controller.Templates.PartialPlantSISO",
                   fill("",0), {"additionalMeasurableOutputs=true","l=1"});
