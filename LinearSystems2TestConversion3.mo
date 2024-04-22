@@ -892,6 +892,16 @@ package LinearSystems2TestConversion3
         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
       end PlantTemplate_SISOIntantiate;
     end Templates;
+
+    model DoublePendulum
+      Modelica_LinearSystems2.Controller.Examples.Components.DoublePendulum doublePendulum annotation (Placement(transformation(extent={{1,20},{31,40}})));
+      Modelica_LinearSystems2.Controller.Examples.Components.InverseDoublePendulum inverseDoublePendulum annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
+      Modelica.Blocks.Sources.Constant const(k=0.1) annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+    equation
+      connect(const.y, doublePendulum.u) annotation (Line(points={{-39,0},{-20,0},{-20,30},{-1,30}}, color={0,0,127}));
+      connect(const.y, inverseDoublePendulum.u) annotation (Line(points={{-39,0},{-20,0},{-20,-30},{-2,-30}}, color={0,0,127}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
+    end DoublePendulum;
   end Controllers;
   annotation (uses(Modelica_LinearSystems2(version="2.4.0"), Modelica(version="4.0.0")));
 end LinearSystems2TestConversion3;
