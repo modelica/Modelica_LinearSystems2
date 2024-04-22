@@ -13,6 +13,9 @@ convertClass("Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize",
 convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
               "Modelica_LinearSystems2.Internal.Streams.readMatrixInternal"},
               "Modelica.Utilities.Streams.readRealMatrix");
+//convertModifiers("Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
+//                 {"fileName=\"matrixGain.mat\"", "matrixName=\"K\"", "m=1", "n=1"},
+//                 {"fileName=%fileName%", "matrixName=%matrixName%", "nrow=%m%", "ncol=%n%"}, true);
 convertElement("Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain",
                {"m","n"},{"nrow","ncol"});
 convertClass({"Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension",
@@ -179,6 +182,11 @@ convertClass({"Modelica_LinearSystems2.Controller.Templates.Internal.PartialPlan
 
 convertClass("Modelica_LinearSystems2.Controller.Interfaces.PartialBlockIcon",
              "Modelica_LinearSystems2.Controllers.Icons.PartialBlockIcon")
+
+convertClass("Modelica_LinearSystems2.Controller.Examples.Components.DoublePendulum",
+             "ObsoleteLinearSystems2.Controller.Examples.Components.DoublePendulum")
+convertClass("Modelica_LinearSystems2.Controller.Examples.Components.InverseDoublePendulum",
+             "ObsoleteLinearSystems2.Controller.Examples.Components.InverseDoublePendulum")
 
 // Matrices
 // Use Vectors functions - use functions from Modelica.Math.Vectors
