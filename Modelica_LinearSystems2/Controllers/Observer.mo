@@ -1,6 +1,5 @@
-within Modelica_LinearSystems2.Controllers.BaseClasses.Internal;
-block ObserverTemplate
-  "Template of a Luenberger observer for state space systems"
+within Modelica_LinearSystems2.Controllers;
+block Observer "Luenberger observer for state space systems"
   extends Interfaces.PartialSampledBlock;
 
   import Modelica_LinearSystems2.Internal.StateSpace2;
@@ -159,4 +158,4 @@ equation
           extent={{-128,-28},{-108,-46}},
           textColor={0,0,255},
           textString="y")}));
-end ObserverTemplate;
+end Observer;
