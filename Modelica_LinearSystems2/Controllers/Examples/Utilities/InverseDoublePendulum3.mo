@@ -39,7 +39,7 @@ model InverseDoublePendulum3 "Inverted double pendulum"
   Real dist5_phi2=0;
   Real dist6_w2=0;
 
-  Utilities.InverseDoublePendulum inverseDoublePendulum(
+  Modelica_LinearSystems2.Utilities.Plants.DoublePendulumInverse inverseDoublePendulum(
     m_trolley=m_trolley,
     m_load=m_load,
     length=length,
@@ -126,11 +126,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(dist, inverseDoublePendulum.dist) annotation (Line(
-      points={{-60,80},{-60,40},{-56,40},{-56,12}},
+      points={{-60,80},{-60,40},{-56,40},{-56,12.2}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(dist2, inverseDoublePendulum.dist2) annotation (Line(
-      points={{60,80},{60,40},{-44,40},{-44,12}},
+      points={{60,80},{60,40},{-44,40},{-44,12.2}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(multiplex2.u1[1], inverseDoublePendulum.s) annotation (Line(
