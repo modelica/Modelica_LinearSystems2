@@ -555,27 +555,6 @@ provided by <a href=\"https://www.netlib.org/\">Netlib Repository</a>.
     package Matrices "Package of functions operating on matrices"
       extends Modelica.Icons.Package;
 
-      function leastSquares "Obsolete: Solve overdetermined or underdetermined real system of linear equations A*x=b in a least squares sense (A may be rank deficient)"
-        extends Modelica.Icons.Function;
-        input Real A[:,:] "Matrix A";
-        input Real b[size(A, 1)] "Vector b";
-        output Real x[size(A, 2)]
-          "Vector x such that min|A*x-b|^2 if size(A,1) >= size(A,2) or min|x|^2 and A*x=b, if size(A,1) < size(A,2)";
-
-      protected
-        Integer rank;
-      algorithm
-        (x,rank) :=Modelica.Math.Matrices.leastSquares(A,b);
-        annotation (
-          obsolete = "Deprecated function - use Modelica.Math.Matrices.leastSquares instead",
-          Documentation(info="<html>
-<p>
-This function is obsolete. Use
-<a href=\"modelica://Modelica.Math.Matrices.leastSquares\">Modelica.Math.Matrices.leastSquares</a>
-instead.
-</p>
-</html>"));
-      end leastSquares;
     end Matrices;
 
     package Vectors "Package of functions operating on vectors"

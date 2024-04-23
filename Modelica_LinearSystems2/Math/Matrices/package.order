@@ -14,7 +14,6 @@ fromFile
 generalizedEigenvaluesTriangular
 householderReflexion
 householderSimilarityTransformation
-leastSquares
 lyapunov
 LQ
 orthogonalQ
