@@ -60,6 +60,30 @@ package LinearSystems2TestConversion3
     algorithm
     end readMatrixGainTest;
 
+    function printVectorTest
+      output Boolean identical "= true, if strings are identical";
+    protected
+      String s2 = Modelica_LinearSystems2.Math.Vectors.printVector( {3,33,7}, 2, "vec");
+      String s3 = Modelica_LinearSystems2.Math.Vectors.printVector( v={3,33,7}, significantDigits=2);
+      String sm = Modelica.Math.Vectors.toString({3, 33, 7}, "vec", 2);
+    algorithm
+      identical := Modelica.Utilities.Strings.isEqual(s2, sm);
+
+    end printVectorTest;
+
+    function printMatrixTest
+      output Boolean identical "= true, if strings are identical";
+    protected
+      Real A[4,3] = [1, 0,  0; 6, 5,  0; 1, -2,  2; 0, 4,  44];
+
+      String m2 = Modelica_LinearSystems2.Math.Matrices.printMatrix(A, 2, "mtx");
+      String m3 = Modelica_LinearSystems2.Math.Matrices.printMatrix(M=A, significantDigits=3);
+      String mm = Modelica.Math.Matrices.toString(A, "mtx", 2);
+    algorithm
+      identical := Modelica.Utilities.Strings.isEqual(m2, mm);
+
+    end printMatrixTest;
+
     function callAllLAPACK "Call all functions from Modelica_LinearSystems2.Math.Matrices.LAPACK"
       // Modelica_LinearSystems2.Math.Matrices.LAPACK.dgecon
       input Real LU_of_A[:,:] = [1, 2, 3; 3, 4, 5; 3, 2, 3] "LU factroization of a real matrix A";
@@ -269,6 +293,7 @@ package LinearSystems2TestConversion3
       output Real x[size(b1, 1)] "Vector x such that A*x = b1";
       output Real xr[size(A, 2)]
         "Vector x such that min|A*x-b|^2 if size(A,1) >= size(A,2) or min|x|^2 and A*x=b, if size(A,1) < size(A,2)";
+      output Real xls[size(Als, 1)] "State vector";
       output Real t "Trace of A";
       output Real HC[size(A, 1),size(A, 2)];
       output Real HH[size(A, 1),size(A, 2)] "Upper Hessenberg form";
@@ -284,6 +309,7 @@ package LinearSystems2TestConversion3
       output Real X[size(B, 1),size(B, 2)] "Matrix X such that A*X = B";
       output Real Z[size(A, 2), :] "Orthonormal nullspace of matrix A";
       output Real S[size(A, 1), size(A, 2)] "Real Schur form of A";
+      output Real rcond "Reciprocal condition number of A";
 
     protected
       Real A[3,3] = [1, 0,  0; 6, 5,  0; 1, -2,  2] "Square matrix";
@@ -295,6 +321,14 @@ package LinearSystems2TestConversion3
       Real alphaReal[size(A, 1)] "Real part of eigenvalue=alphaReal+i*alphaImag";
       Real alphaImag[size(A, 1)] "Imaginary part of eigenvalue=(alphaReal+i*alphaImag";
 
+      Real Als[:,:] = [-1.0, 0.0, 0.0; 0.0, -2.0, 0.0; 0.0, 0.0, -3.0];
+      Real Bls[:,:] = [1.0; 1.0; 0.0];
+      Real Cls[:,:] = [1.0, 1.0, 1.0];
+      Real Dls[:,:] = [0.0];
+      Integer nx = size(Als,2);
+      Integer nu = size(Bls,2);
+      Integer ny = size(Cls,2);
+
     algorithm
       HC := Modelica_LinearSystems2.Math.Matrices.cholesky(SA, true);
       r := Modelica_LinearSystems2.Math.Matrices.conditionNumber(A);
@@ -304,6 +338,8 @@ package LinearSystems2TestConversion3
       (H, U) := Modelica_LinearSystems2.Math.Matrices.hessenberg(A);
       xr := Modelica_LinearSystems2.Math.Matrices.leastSquares(A,b1);
       X2 := Modelica_LinearSystems2.Math.Matrices.leastSquares2(A,B);
+      xls := Modelica_LinearSystems2.Math.Matrices.equalityLeastSquares(
+        Als, -Bls*fill(1,nu), Cls, Dls*fill(1,nu));
       (LU, pivots) := Modelica_LinearSystems2.Math.Matrices.LU(A);
       x1 := Modelica_LinearSystems2.Math.Matrices.LU_solve(LU, pivots, b1);
       X1 := Modelica_LinearSystems2.Math.Matrices.LU_solve2(LU, pivots, B);
@@ -311,6 +347,7 @@ package LinearSystems2TestConversion3
       n := Modelica_LinearSystems2.Math.Matrices.norm(A);
       Z := Modelica_LinearSystems2.Math.Matrices.nullspace(A);
       (S, QZ, alphaReal, alphaImag) := Modelica_LinearSystems2.Math.Matrices.rsf2(A);
+      rcond := Modelica_LinearSystems2.Math.Matrices.rcond(A);
       x := Modelica_LinearSystems2.Math.Matrices.solve(A, b1);
       X := Modelica_LinearSystems2.Math.Matrices.solve2(A, B);
       t := Modelica_LinearSystems2.Math.Matrices.trace(A);
