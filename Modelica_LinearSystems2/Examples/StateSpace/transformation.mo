@@ -56,10 +56,10 @@ algorithm
     ss,
     6,
     "ss"));
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(
+  Modelica.Math.Matrices.toString(
     ctrb,
-    6,
-    "controllability matrix");
+    "controllability matrix",
+    6);
 
   Modelica.Utilities.Streams.print("\n\nJordan form:\n");
   Modelica.Utilities.Streams.print(String(

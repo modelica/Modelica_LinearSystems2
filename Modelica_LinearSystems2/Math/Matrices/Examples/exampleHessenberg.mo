@@ -1,7 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.Examples;
 function exampleHessenberg
   "Example for the transformation of a matrix to upper Hessenberg form"
-  import Modelica_LinearSystems2.Math.Matrices;
+
   input String fileName=DataDir + "m.mat"
     "Name of file where the matrix is saved"
     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
@@ -17,45 +17,21 @@ protected
   Integer info;
 algorithm
   H := Modelica_LinearSystems2.Math.Matrices.Internal.hessenberg2(M);
-  Matrices.printMatrix(
-      M,
-      6,
-      "M");
-  Math.Matrices.printMatrix(
-      H,
-      6,
-      "Hu");
+  Modelica.Math.Matrices.toString(M, "M", 6);
+  Modelica.Math.Matrices.toString(H, "Hu", 6);
+
   H := Modelica_LinearSystems2.Math.Matrices.Internal.hessenberg2(M, "l");
-  Math.Matrices.printMatrix(
-      H,
-      6,
-      "Hl");
-  (H,V,tau) := Modelica.Math.Matrices.Utilities.toUpperHessenberg(
-      M,
-      1,
-      size(M, 1));
-  Math.Matrices.printMatrix(
-      H,
-      6,
-      "H_dgehrd");
-  Math.Matrices.printMatrix(
-      V,
-      6,
-      "V_dgehrd");
+  Modelica.Math.Matrices.toString(H, "Hl", 6);
+
+  (H,V,tau) := Modelica.Math.Matrices.Utilities.toUpperHessenberg(M, 1, size(M, 1));
+  Modelica.Math.Matrices.toString(H, "H_dgehrd", 6);
+  Modelica.Math.Matrices.toString(V, "V_dgehrd", 6);
   Modelica.Math.Vectors.toString(tau, "tau", 6);
-  Q := Modelica_LinearSystems2.Math.Matrices.orthogonalQ(
-      V,
-      tau,
-      1,
-      size(V, 1));
-  Math.Matrices.printMatrix(
-      Q*H*transpose(Q),
-      6,
-      "Q*H*Q'");
+
+  Q := Modelica_LinearSystems2.Math.Matrices.orthogonalQ(V, tau, 1, size(V, 1));
+  Modelica.Math.Matrices.toString(Q*H*transpose(Q), "Q*H*Q'", 6);
+
   H := Modelica.Math.Matrices.hessenberg(M);
-  Math.Matrices.printMatrix(
-      H,
-      6,
-      "H_hess_lapack");
+  Modelica.Math.Matrices.toString(H, "H_hess_lapack", 6);
 
 end exampleHessenberg;

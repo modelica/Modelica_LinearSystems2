@@ -5,7 +5,7 @@ function designCraneControllerWithObserver
   import Modelica.ComplexMath.j;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Matrices;
+//  import Modelica_LinearSystems2.Math.Matrices;
 
   input String modelName="Modelica_Controller.Examples.Components.Pendulum_small"
     "name of the model to linearize";
@@ -47,10 +47,10 @@ algorithm
   (K_pa,,p) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, pa);
   ss_pa.A := ss.A - ss.B*K_pa;
   Streams.print("The feedback matrix of the pole assignment controller is:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    Modelica.Math.Matrices.toString(
     K_pa,
-    6,
-    "K_pa"));
+    "K_pa",
+    6));
   Streams.print("eigenvalues of the closed loop system are:\n");
   Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("ev_pa", p);
 
@@ -63,10 +63,10 @@ algorithm
 // Pre filter calculation
   M_pa := -Modelica.Math.Matrices.inv([1,0,0,0]*Modelica.Math.Matrices.solve2(ss_pa.A, ss_pa.B));
   Streams.print("Gain for pre filtering:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    Modelica.Math.Matrices.toString(
     M_pa,
-    6,
-    "M_pa"));
+    "M_pa",
+    6));
   Streams.writeRealMatrix(
     fileName,
     "M_pa",
@@ -89,10 +89,10 @@ algorithm
     [size(ssPlant.A,1)],
     true);
   Streams.print("The feedback matrix of the observer system is:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    Modelica.Math.Matrices.toString(
     K_ob,
-    6,
-    "K_ob"));
+    "K_ob",
+    6));
   ss_ob.A := ss.A - K_ob*ssPlant.C;
 
   Streams.print("eigenvalues of the observer system are:\n");

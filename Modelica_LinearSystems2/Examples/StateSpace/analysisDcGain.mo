@@ -2,8 +2,8 @@ within Modelica_LinearSystems2.Examples.StateSpace;
 function analysisDcGain "Example to compute dcGain of a state space system"
   extends Modelica.Icons.Function;
 
+  import Modelica.Math.Matrices;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Utilities.Streams.print;
 
   input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
@@ -38,13 +38,13 @@ protected
 algorithm
   ok := false;
   (K1, finite) :=StateSpace.Analysis.dcGain(ssi);
-  print(Matrices.printMatrix(K1, name="K1") + "\nfinite1 = " + String(finite));
+  print(Matrices.toString(K1, name="K1") + "\nfinite1 = " + String(finite));
 
   (K2, finite) :=StateSpace.Analysis.dcGain(ss2);
-  print(Matrices.printMatrix(K2, name="K2") + "\nfinite2 = " + String(finite) + " \n");
+  print(Matrices.toString(K2, name="K2") + "\nfinite2 = " + String(finite) + " \n");
 
   (K3, finite) :=StateSpace.Analysis.dcGain(ss3);
-  print(Matrices.printMatrix(K3, name="K3") + "\nfinite3 = " + String(finite) + "\n");
+  print(Matrices.toString(K3, name="K3") + "\nfinite3 = " + String(finite) + "\n");
 
   ok := true;
 

@@ -237,7 +237,7 @@ Modelica.Utilities.Streams.print("1x1 Ann = "+String(A_rsf[n,n])+"\n ap = "+Stri
 
 //###############################################################
 
-  Modelica.Utilities.Streams.print("2x2, compl system, real ass Ann = "+Matrices.printMatrix(A_rsf[n-1:n,n-1:n])+"\n ap = ");
+  Modelica.Utilities.Streams.print("2x2, compl system, real ass Ann = "+MatricesMSL.toString(A_rsf[n-1:n,n-1:n])+"\n ap = ");
 
   ComplexMathAdds.Vectors.print("as",gammaReordered[ng - rp - 2*i + 1:ng - rp - 2*(i - 1)]);
 
@@ -294,7 +294,7 @@ Modelica.Utilities.Streams.print("1x1 Ann = "+String(A_rsf[n,n])+"\n ap = "+Stri
       gammaReordered[iii - 1] := h;
 
 //###############################################################
-Modelica.Utilities.Streams.print("2x2, 2 real system, complex ass Ann = "+Matrices.printMatrix(A_rsf[n-1:n,n-1:n])+"\n ap = "+String(h));
+Modelica.Utilities.Streams.print("2x2, 2 real system, complex ass Ann = "+MatricesMSL.toString(A_rsf[n-1:n,n-1:n])+"\n ap = "+String(h));
 //###############################################################
 
       Ks2 := Internal.assignOneOrTwoPoles(
@@ -346,7 +346,7 @@ Modelica.Utilities.Streams.print("2x2, 2 real system, complex ass Ann = "+Matric
     gammaReordered[iii - 1] := h;
 
     //###############################################################
-Modelica.Utilities.Streams.print("2x2, 2 compl system, complex ass Ann = "+Matrices.printMatrix(A_rsf[n-1:n,n-1:n])+"\n ap = "+String(h));
+Modelica.Utilities.Streams.print("2x2, 2 compl system, complex ass Ann = "+MatricesMSL.toString(A_rsf[n-1:n,n-1:n])+"\n ap = "+String(h));
 //###############################################################
 
     Ks2 := Internal.assignOneOrTwoPoles(

@@ -17,7 +17,6 @@ householderSimilarityTransformation
 lyapunov
 LQ
 orthogonalQ
-printMatrix
 printMatrixInHtml
 QR
 rcond

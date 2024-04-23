@@ -64,7 +64,7 @@ algorithm
   StateSpace.Analysis.analysis(ss, fileName="analysis.html", analyseOptions=analyseOptions, description="Description of the system");
   (eigvec,eigval) := Modelica_LinearSystems2.StateSpace.Analysis.eigenVectors(ss, false);
   Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("eval",eigval);
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(eigvec, 6, "leftEigenVectors");
+  Modelica.Math.Matrices.toString(eigvec, "leftEigenVectors", 6);
 
   i := 1;
   while i <= 4 loop
@@ -97,13 +97,13 @@ algorithm
   ssModal.D := ss.D;
   z0 := x0;//Modelica.Math.Matrices.solve(VsRe,x0);
 
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(ceigvec), 6, "cevRe");
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(ceigvec), 6, "cevIm");
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(T), 6, "TRe");
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(T), 6, "TIm");
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(Re(Vs), 6, "VsRe");
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(Im(Vs), 6, "VsIm");
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(Lambda, 6, "Lam");
+  Modelica.Math.Matrices.toString(Re(ceigvec), "cevRe", 6);
+  Modelica.Math.Matrices.toString(Im(ceigvec), "cevIm", 6);
+  Modelica.Math.Matrices.toString(Re(T), "TRe", 6);
+  Modelica.Math.Matrices.toString(Im(T), "TIm", 6);
+  Modelica.Math.Matrices.toString(Re(Vs), "VsRe", 6);
+  Modelica.Math.Matrices.toString(Im(Vs), "VsIm", 6);
+  Modelica.Math.Matrices.toString(Lambda, "Lam", 6);
 
   Modelica_LinearSystems2.StateSpace.Plot.initialResponse(ss=ss, tSpan=4, x0=x0, defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramTimeResponse(
         heading="Initial response system states"),subPlots=false);

@@ -4,7 +4,6 @@ function analysisControllablePoles
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Utilities.Streams.print;
 
   input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
@@ -35,10 +34,10 @@ algorithm
   (cPoles,ncPoles) := StateSpace.Internal.controllablePoles(ss);
   if size(ncPoles, 1) == 0 then
     print("\nThe system is controllable\nThe poles are" +
-      Matrices.printMatrix(cPoles,6,""));
+      Modelica.Math.Matrices.toString(cPoles,"",6));
   else
     print("\nThe system is not controllable\nThe uncontrollable poles are" +
-      Matrices.printMatrix(ncPoles,6,""));
+      Modelica.Math.Matrices.toString(ncPoles,"",6));
   end if;
 
   ok := true;

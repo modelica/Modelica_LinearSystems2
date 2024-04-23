@@ -555,6 +555,63 @@ provided by <a href=\"https://www.netlib.org/\">Netlib Repository</a>.
     package Matrices "Package of functions operating on matrices"
       extends Modelica.Icons.Package;
 
+      function printMatrix "Print matrix"
+        import Modelica.Utilities.Strings;
+
+        input Real M[:,:];
+        input Integer significantDigits=6
+          "Number of significant digits that are shown";
+        input String name="M" "Independent variable name used for printing";
+        output String s="";
+      protected
+        String blanks=Strings.repeat(significantDigits);
+        String space=Strings.repeat(8);
+        String space2=Strings.repeat(3);
+        Integer r=size(M, 1);
+        Integer c=size(M, 2);
+
+      algorithm
+        if r == 0 or c == 0 then
+          s := name + " = []";
+        else
+          s := "\n" + name + " = \n";
+          for i in 1:r loop
+            s := s + space;
+            for j in 1:c loop
+              if M[i, j] >= 0 then
+                s := s + " ";
+              end if;
+              s := s + String(M[i, j], significantDigits=significantDigits) +
+                Strings.repeat(significantDigits + 8 - Strings.length(String(abs(M[i,j]))));
+
+            end for;
+            s := s + "\n";
+          end for;
+
+        end if;
+        annotation (
+          obsolete = "Deprecated function - use Modelica.Math.Matrices.toString instead",
+          Documentation(info="<html>
+<p>
+This function is obsolete. Use
+<a href=\"modelica://Modelica.Math.Matrices.toString\">Modelica.Math.Matrices.toString</a>
+instead.
+</p>
+<p>
+Note: the inputs two and three (<code>significantDigits</code> and <code>name</code>) are
+interchanged in Modelica.Math.Matrices.toString. Consequently, a call like
+</p>
+<blockquote><pre>
+ObsoleteLinearSystems2.Math.Matrices.printMatrix([3], 2, \"vec\");
+</pre></blockquote>
+<p>
+shall be replaced with
+</p>
+<blockquote><pre>
+Modelica.Math.Matrices.toString([3], \"vec\", 2);
+</pre></blockquote>
+</html>"));
+      end printMatrix;
     end Matrices;
 
     package Vectors "Package of functions operating on vectors"
@@ -602,7 +659,7 @@ instead.
 </p>
 <p>
 Note: the inputs two and three (<code>significantDigits</code> and <code>name</code>) are
-interchanged in Modelica.Utilities.Strings.isEqual. Consequently, a call like
+interchanged in Modelica.Math.Vectors.toString. Consequently, a call like
 </p>
 <blockquote><pre>
 ObsoleteLinearSystems2.Math.Vectors.printVector({3,33,7}, 2, \"vec\");

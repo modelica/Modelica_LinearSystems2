@@ -4,7 +4,6 @@ function kalmanStep2
 
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace;
 
   output Real P_out[:,:];
@@ -39,9 +38,9 @@ protected
 algorithm
   (K, P_out, R_out) := Modelica_LinearSystems2.WorkInProgress.DiscreteStateSpace.Internal.kfStepMatrices(A, B, C, P, Q, R);
 
-//  Matrices.printMatrix(K,6,"K");
-//  Matrices.printMatrix(P_out,6,"P");
-  Matrices.printMatrix(R_out,6,"R");
+//  Modelica.Math.Matrices.toString(K,"K",6);
+//  Modelica.Math.Matrices.toString(P_out,"P",6);
+  Modelica.Math.Matrices.toString(R_out,"R",6);
 
   x_est := dss.A*x_init - K*(dss.C*x_init - y);
 //  Modelica_LinearSystems2.Math.Vectors.printVector(x_est,6,"x_est");
@@ -56,7 +55,7 @@ algorithm
     y);
 // Modelica_LinearSystems2.Math.Vectors.printVector(x_est,6,"x_est");
 
-//  Matrices.printMatrix(K,6,"K");
-//  Matrices.printMatrix(P_out,6,"P");
-  Matrices.printMatrix(R_out,6,"R");
+//  Modelica.Math.Matrices.toString(K,"K",6);
+//  Modelica.Math.Matrices.toString(P_out,"P",6);
+  Modelica.Math.Matrices.toString(R_out,"R",6);
 end kalmanStep2;

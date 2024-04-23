@@ -7,7 +7,6 @@ function designInverseDoublePendulumControllerWithObserver
   import Modelica.ComplexMath.j;
   import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.StateSpace;
 //  input String modelName="Modelica_Controller.Examples.Components.InverseDoublePendulum"  "name of the model to linearize";
   input String modelName="Modelica_LinearSystems2.Controllers.Examples.Components.InverseDoublePendulum"
@@ -53,8 +52,8 @@ protected
 algorithm
   ss.C:=identity(6);
   Streams.print("The linearized state space system is determined to:\n" + String(ss));
-  Matrices.printMatrix(ss.C,6,"C");
-  Matrices.printMatrix(ss.D,6,"D");
+  MatricesMSL.toString(ss.C,"C",6);
+  MatricesMSL.toString(ss.D,"D",6);
 
   if makeAnalysis then
     StateSpace.Analysis.analysis(ssPlant,fileName="inverseDoublePendulum.html");
@@ -85,10 +84,10 @@ algorithm
   ss_pa.A := ss.A - ss.B*K_pa;
 
   Streams.print("The feedback matrix of the pole assignment controller is:\n" +
-    Matrices.printMatrix(
+    MatricesMSL.toString(
     K_pa,
-    6,
-    "K_pa"));
+    "K_pa",
+    6));
   Streams.print("eigenvalues of the closed loop system are:\n");
   ComplexMathAdds.Vectors.print("ev_pa", p);
 
@@ -102,10 +101,10 @@ algorithm
   M_pa := -MatricesMSL.inv([1,0,0,0,0,0]*MatricesMSL.solve2(ss_pa.A,
     ss_pa.B));
   Streams.print("Gain for pre filtering:\n" +
-    Matrices.printMatrix(
+    MatricesMSL.toString(
     M_pa,
-    6,
-    "M_pa"));
+    "M_pa",
+    6));
   Streams.writeRealMatrix(
     fileName,
     "M_pa",

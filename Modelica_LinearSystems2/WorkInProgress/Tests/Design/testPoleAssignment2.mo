@@ -8,14 +8,11 @@ function testPoleAssignment2
   import Re = Modelica.ComplexMath.real;
   import Im = Modelica.ComplexMath.imag;
   import Modelica.ComplexMath.j;
-  import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica_LinearSystems2.WorkInProgress.Tests.Design;
   import Modelica.Utilities.Streams.print;
-  import Modelica_LinearSystems2.WorkInProgress.Tests.Internal.DesignData;
   import Modelica_LinearSystems2.StateSpace;
 
   input String dataFile=TestDataDir + "data_Byers6.mat" annotation(Dialog(group="system data definition",loadSelector(filter="MAT files (*.mat);; All files (*.*)",
-                     caption="state space system data file"),enable = systemOnFile));
+                     caption="state space system data file")));
   input Types.AssignPolesMethod method=Tests.Types.AssignPolesMethod.KNV
     "method for pole assignment";
   input Boolean isSI=true;
@@ -106,11 +103,11 @@ algorithm
     print("---- Using MI-algorithm ----\n",outputFile);
   end if;
   print("n = "+String(nm[1])+",  m = "+ String(nm[2])+"\n",outputFile);
-  print(Matrices.printMatrix(K, 6, "K"),outputFile);
+  print(Modelica.Math.Matrices.toString(K, "K", 6),outputFile);
   ComplexMathAdds.Vectors.print("assignedPoles", assignedPoles,outputFile);
   ComplexMathAdds.Vectors.print("calcPoles", calcPoles,outputFile);
-//   Matrices.printMatrix(Re(X), 6, "ReX");
-//   Matrices.printMatrix(Im(X), 6, "ImX");
+//   Modelica.Math.Matrices.toString(Re(X), "ReX", 6);
+//   Modelica.Math.Matrices.toString(Im(X), "ImX", 6);
   print("kappa2 " + String(kappa2),outputFile);
   print("kappaF " + String(kappaF),outputFile);
   print("zeta " + String(zeta),outputFile);
