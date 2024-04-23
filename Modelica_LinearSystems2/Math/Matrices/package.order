@@ -19,7 +19,6 @@ LQ
 orthogonalQ
 printMatrixInHtml
 QR
-rcond
 rsf
 solve2r
 sylvester
