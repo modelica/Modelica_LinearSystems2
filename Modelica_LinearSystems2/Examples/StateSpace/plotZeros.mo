@@ -34,10 +34,7 @@ algorithm
     ss.A,invZero1.im*identity(size(ss.A, 1)); -invZero1.im*identity(size(ss.A,
     1)),invZero1.re*identity(size(ss.A, 1)) - ss.A]);
   x0 := vector(2*(invMat[1:size(ss.A, 1), 1:size(ss.A, 1)])*ss.B);
-  Modelica_LinearSystems2.Math.Vectors.printVector(
-    x0,
-    6,
-    "x0");
+  Modelica.Math.Vectors.toString(x0, "x0", 6);
 
   u[:, 1] := 2*exp(invZero1.re*t).*vector(cos(t));
   (y,x) := Modelica_LinearSystems2.DiscreteStateSpace.timeResponse(

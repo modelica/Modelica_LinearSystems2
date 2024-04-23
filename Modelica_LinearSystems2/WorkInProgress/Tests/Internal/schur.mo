@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.WorkInProgress.Tests.Internal;
 encapsulated function schur
   "Pole assignment design algorithm for multi input systems"
-
   import Modelica;
   import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2;
@@ -19,7 +18,7 @@ encapsulated function schur
 algorithm
   (T,Z,alphaReal,alphaImag) := MatricesMSL.realSchur(A);
   Matrices.printMatrix(T,6,"T1");
-  Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal,6,"ar1");
+  Modelica.Math.Vectors.toString(alphaReal, "ar1", 6);
 
 // reorder real Schur form according to alpha
    (T,Z,alphaReal,alphaImag) := Matrices.Internal.reorderRSFc(
@@ -29,5 +28,5 @@ algorithm
        alphaImag,
        alpha);
   Matrices.printMatrix(T,6,"T2");
-  Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal,6,"ar1");
+  Modelica.Math.Vectors.toString(alphaReal, "ar1", 6);
 end schur;

@@ -48,7 +48,7 @@ algorithm
   Matrices.printMatrix(R_out,6,"R");
 
   x_est := dss.A*x_init - K*(dss.C*x_init - y);
-  Modelica_LinearSystems2.Math.Vectors.printVector(x_est,6,"x_est");
+  Modelica.Math.Vectors.toString(x_est, "x_est", 6);
 
  (x_est,K,P_out) :=DiscreteStateSpace.Internal.kfStepState(
     dss,
@@ -58,7 +58,7 @@ algorithm
     x_init,
     u,
     y);
- Modelica_LinearSystems2.Math.Vectors.printVector(x_est,6,"x_est");
+  Modelica.Math.Vectors.toString(x_est, "x_est", 6);
 
   Matrices.printMatrix(K,6,"K");
   Matrices.printMatrix(P_out,6,"P");

@@ -578,6 +578,66 @@ instead.
       end leastSquares;
     end Matrices;
 
+    package Vectors "Package of functions operating on vectors"
+      extends Modelica.Icons.Package;
+
+      function printVector "Print vector"
+        import Modelica.Utilities.Strings;
+
+        input Real v[:] "Vector of real numbers to be printed";
+        input Integer significantDigits=6
+          "Number of significant digits that are shown";
+        input String name="v" "Independent variable name used for printing";
+        output String s="" "String containing v";
+      protected
+        String blanks=Strings.repeat(significantDigits);
+        String space=Strings.repeat(8);
+        String space2=Strings.repeat(3);
+        Integer r=size(v, 1);
+
+      algorithm
+        if r == 0 then
+          s := name + " = []";
+        else
+          s := "\n" + name + " = \n";
+          for i in 1:r loop
+            s := s + space;
+
+            if v[i] >= 0 then
+              s := s + " ";
+            end if;
+            s := s + String(v[i], significantDigits=significantDigits) +
+              Strings.repeat(significantDigits + 8 - Strings.length(String(abs(v[i]))));
+
+            s := s + "\n";
+          end for;
+
+        end if;
+        annotation (
+          obsolete = "Deprecated function - use Modelica.Math.Vectors.toString instead",
+          Documentation(info="<html>
+<p>
+This function is obsolete. Use
+<a href=\"modelica://Modelica.Math.Vectors.toString\">Modelica.Math.Vectors.toString</a>
+instead.
+</p>
+<p>
+Note: the inputs two and three (<code>significantDigits</code> and <code>name</code>) are
+interchanged in Modelica.Utilities.Strings.isEqual. Consequently, a call like
+</p>
+<blockquote><pre>
+ObsoleteLinearSystems2.Math.Vectors.printVector({3,33,7}, 2, \"vec\");
+</pre></blockquote>
+<p>
+shall be replaced with
+</p>
+<blockquote><pre>
+Modelica.Math.Vectors.toString({3,33,7}, \"vec\", 2);
+</pre></blockquote>
+</html>"));
+      end printVector;
+    end Vectors;
+
     package Internal "Package of internal functions operating on matrices (for advanced users only)"
       extends Modelica.Icons.InternalPackage;
 
