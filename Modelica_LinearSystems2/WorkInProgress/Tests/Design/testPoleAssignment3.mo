@@ -90,7 +90,7 @@ algorithm
   if isKprovided then
     print("gap " + String(gap));
   end if;
-  print("Jalpha = "+Modelica_LinearSystems2.Math.Vectors.printVector(Jalpha));
+  print("Jalpha = " + Modelica.Math.Vectors.toString(Jalpha));
 
   annotation (Documentation(info="<html>
 <p>

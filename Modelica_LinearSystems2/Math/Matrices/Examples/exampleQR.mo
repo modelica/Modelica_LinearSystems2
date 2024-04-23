@@ -37,7 +37,7 @@ algorithm
   Matrices.printMatrix(M,6,"M");
   Matrices.printMatrix(Q,6,"Q");
   Matrices.printMatrix(R,6,"R");
-  Vectors.printVector(p,6,"p");
+  Modelica.Math.Vectors.toString(p, "p", 6);
   Matrices.printMatrix(QR,6,"QR");
   Matrices.printMatrix(QR2,6,"QR2");
   Matrices.printMatrix(M*P,6,"M*P");

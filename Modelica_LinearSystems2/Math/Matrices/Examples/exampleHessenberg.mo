@@ -42,10 +42,7 @@ algorithm
       V,
       6,
       "V_dgehrd");
-  Math.Vectors.printVector(
-      tau,
-      6,
-      "tau");
+  Modelica.Math.Vectors.toString(tau, "tau", 6);
   Q := Modelica_LinearSystems2.Math.Matrices.orthogonalQ(
       V,
       tau,

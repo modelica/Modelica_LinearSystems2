@@ -188,13 +188,21 @@ convertClass("Modelica_LinearSystems2.Controller.Examples.Components.DoublePendu
 convertClass("Modelica_LinearSystems2.Controller.Examples.Components.InverseDoublePendulum",
              "ObsoleteLinearSystems2.Controller.Examples.Components.InverseDoublePendulum")
 
-// Matrices
+// Vectors
 // Use Vectors functions - use functions from Modelica.Math.Vectors
 //
 convertClass({"Modelica_LinearSystems2.Math.Vectors.find",
               "Modelica_LinearSystems2.Math.Vectors.length"},
              {"Modelica.Math.Vectors.find",
               "Modelica.Math.Vectors.length"});
+convertClass("Modelica_LinearSystems2.Math.Vectors.printVector",
+             "ObsoleteLinearSystems2.Math.Vectors.printVector");
+// The following doesn't work (test in Dymola 2024x)
+// convertClass("Modelica_LinearSystems2.Math.Vectors.printVector",
+//              "Modelica.Math.Vectors.toString");
+// convertModifiers("Modelica_LinearSystems2.Math.Vectors.printVector",
+//                  {"v={1}", "significantDigits=6", "name=2"},
+//                  {"v=%v%", "name=%name%", "significantDigits=%significantDigits%"}, true);
 
 // Matrices
 // Use Matrices functions - use functions from Modelica.Math.Matrices

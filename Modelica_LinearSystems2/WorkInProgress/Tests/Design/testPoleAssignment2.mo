@@ -121,7 +121,7 @@ algorithm
   if isKprovided then
     print("gap " + String(gap),outputFile);
   end if;
-  print("Jalpha = " + Modelica_LinearSystems2.Math.Vectors.printVector(Jalpha),outputFile);
+  print("Jalpha = " + Modelica.Math.Vectors.toString(Jalpha), outputFile);
   print("\nMLS2 & $"+ String(kappa2)+"$ & $"+ String(zeta)+"$ & $"+ String(cInf)+"$ & $"+ String(nu2)+"$ & $"+ String(dlambda)+"$\\   \\hline",outputFile);
 
   annotation (Documentation(info="<html>

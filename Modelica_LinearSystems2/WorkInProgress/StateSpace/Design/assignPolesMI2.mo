@@ -154,8 +154,8 @@ algorithm
    ZT := transpose(Z)*ZT;
    B_rsf := ZT*ss.B;
 
-    Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal,6,"alphaReal");
-    Modelica_LinearSystems2.Math.Vectors.printVector(alphaImag,6,"alphaImag");
+   Modelica.Math.Vectors.toString(alphaReal, "alphaReal", 6);
+   Modelica.Math.Vectors.toString(alphaImag, "alphaImag", 6);
    ComplexMathAdds.Vectors.print("gammaReordered1",gammaReordered);
 
   // Reorder gammaReordered according to alpha
@@ -194,7 +194,8 @@ algorithm
 
       //#############################
       ComplexMathAdds.Vectors.print("g2",gammaReordered[n + nfp - counter:n + nfp + 1 - counter]);
-      Modelica_LinearSystems2.Math.Vectors.printVector(alphaReal[n + nfp - counter:n + nfp + 1 - counter],6,"ar2");
+        Modelica.Math.Vectors.toString(
+          alphaReal[n + nfp - counter:n + nfp + 1 - counter], "ar2", 6);
       ev:=ComplexMathAdds.eigenValues( A_rsf[n - 1:n, n - 1:n]);
       ComplexMathAdds.Vectors.print("ev2",ev);
       //#############################
