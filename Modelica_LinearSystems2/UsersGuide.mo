@@ -562,9 +562,12 @@ implementations have been moved to library ObsoleteLinearSystems2.</li>
 <h4>
 Improvements in this version
 </h4>
-
 <ul>
-<li> &hellip;</li>
+  <li>
+    <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.degree\">Polynomial.degree</a>:
+    fix wrong calculation of polynomial degree&nbsp;<var>n</var> for zero polynomial coefficients 
+    <code>c[1]</code> to <code>c[m]</code>, <var>m</var>&nbsp;&lt&nbsp;<var>n</var>.
+  </li>
 </ul>
 
 <h4>
@@ -580,7 +583,7 @@ The functionality of this record is given by the top-level operator
 record <a href=\"modelica://Complex\">Complex</a> now and
 most of the functions can be found in the library 
 <a href=\"modelica://Modelica.ComplexMath\">Modelica.ComplexMath</a>.
-The remaining functions contained in this record were moved into
+The remaining functions contained in this record previously were moved into
 <a href=\"modelica://Modelica_LinearSystems2.ComplexMathAdds\">ComplexMathAdds</a>.
 </p>
 <p>
@@ -607,11 +610,29 @@ for inheritance.
 Moved classes
 </h5>
 <p>
-The following classes were relocated within the Library. A&nbsp;conversion script is provided to facilitate
-the conversion.
+The following classes were relocated and/or renamed within the Library.
+A&nbsp;conversion script is provided to facilitate the conversion.
 </p>
 
 <ul>
+  <li>
+    Package Modelica_LinearSystems2.<strong>Controller</strong> renamed to
+    <a href=\"modelica://Modelica_LinearSystems2.Controllers\">Controllers</a>.
+    <ul>
+      <li>
+        Modelica_LinearSystems2.Controller.Examples.<strong>Components</strong> renamed to
+        <a href=\"modelica://Modelica_LinearSystems2.Controllers.Examples.Utilities\">Controllers.Examples.Utilities</a>.
+      </li>
+      <li>
+        Modelica_LinearSystems2.Controller.<strong>Templates</strong> renamed to
+        <a href=\"modelica://Modelica_LinearSystems2.Controllers.BaseClasses\">Controllers.BaseClasses</a>.
+      </li>
+      <li>
+        Modelica_LinearSystems2.Controller.Templates.Internal.<strong>ObserverTemplate</strong> moved to
+        <a href=\"modelica://Modelica_LinearSystems2.Controllers.Observer\">Controllers.Observer</a>.
+      </li>
+    </ul>
+  </li>
   <li>
     Modelica_LinearSystems2.StateSpace.Internal.<strong>readSystemDimension</strong> to
     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams.readSystemDimension\">Utilities.Streams.readSystemDimension</a>
@@ -619,7 +640,7 @@ the conversion.
   <li>
     Package Modelica_LinearSystems2.Internal.<strong>Streams</strong> to
     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams\">Utilities.Streams</a>;
-    and all functions start with a&nbsp;lower case letter now.
+    and all functions&apos; names start with a&nbsp;lower cas.
   </li>
   <li>
     Package Modelica_LinearSystems2.<strong>Types</strong> to
@@ -639,8 +660,63 @@ the conversion.
 
 <ul>
   <li>
-    Math.Polynomial.degree2: use
-    <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.degree\">Math.Polynomial.degree</a>
+    Modelica_LinearSystems2.Controller.Examples.Components.<strong>DoublePendulum</strong>: use
+    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plants.DoublePendulum\">Plants.DoublePendulum</a>
+    instead.
+  </li>
+  <li>
+    Modelica_LinearSystems2.Controller.Examples.Components.<strong>InverseDoublePendulum</strong>: use
+    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plants.DoublePendulumInverse\">Plants.DoublePendulumInverse</a>
+    instead.
+  </li>
+  <li>
+    Modelica_LinearSystems2.Controller.Templates.Internal.<strong>PartialPlantSISO</strong>: use
+    <a href=\"modelica://Modelica_LinearSystems2.Controllers.BaseClasses.PartialPlantSISO\">Controllers.BaseClasses.PartialPlantSISO</a>
+    instead.
+  </li>
+  <li>
+    Modelica_LinearSystems2.Controller.Templates.Internal.<strong>PlantTemplate_SISO</strong>: use
+    <a href=\"modelica://Modelica_LinearSystems2.Controllers.BaseClasses.PartialPlantSISO\">Controllers.BaseClasses.PartialPlantSISO</a>
+    instead.
+  </li>
+  <li>
+    Modelica_LinearSystems2.Controller.Templates.Internal.<strong>PartialPlantMIMO</strong>: use
+    <a href=\"modelica://Modelica_LinearSystems2.Controllers.BaseClasses.PartialPlantMIMO\">Controllers.BaseClasses.PartialPlantMIMO</a>
+    instead.
+  </li>
+  <li>
+    Modelica_LinearSystems2.Controller.Templates.Internal.<strong>PlantTemplate</strong>: use
+    <a href=\"modelica://Modelica_LinearSystems2.Controllers.BaseClasses.PartialPlantMIMO\">Controllers.BaseClasses.PartialPlantMIMO</a>
+    instead.
+  </li>
+  <li>
+    Modelica_LinearSystems2.Controller.Templates.<strong>PlantTemplate_SISO</strong>: use
+    <a href=\"modelica://Modelica_LinearSystems2.Controllers.BaseClasses.PartialPlantSISO\">Controllers.BaseClasses.PartialPlantSISO</a>
+    instead.
+  </li>
+  <li>
+    Modelica_LinearSystems2.Controller.Templates.<strong>PlantTemplate</strong>: use
+    <a href=\"modelica://Modelica_LinearSystems2.Controllers.BaseClasses.PartialPlantMIMO\">Controllers.BaseClasses.PartialPlantMIMO</a>
+    instead.
+  </li>
+  <li>
+    Modelica_LinearSystems2.Controller.Interfaces.<strong>PartialBlockIcon</strong>: use
+    <a href=\"modelica://Modelica_LinearSystems2.Controllers.Icons.PartialBlockIcon\">Controllers.Icons.PartialBlockIcon</a>
+    instead.
+  </li>
+  <li>
+    Modelica_LinearSystems2.Internal.Streams.<strong>ReadSystemDimension</strong>: use
+    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams.readSystemDimension\">Utilities.Streams.readSystemDimension</a>
+    instead.
+  </li>
+  <li>
+    Modelica_LinearSystems2.Internal.Streams.<strong>ReadSystemDimension2</strong>: use
+    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams.readSystemDimension\">Utilities.Streams.readSystemDimension</a>
+    instead.
+  </li>
+  <li>
+    Modelica_LinearSystems2.Math.Polynomial.<strong>degree2</strong>: use
+    <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.degree\">Polynomial.degree</a>
     instead.
   </li>
 </ul>
@@ -687,43 +763,48 @@ the conversion.
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dtrsyl</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgegv</li>
-  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqp3</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqrf</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgetrs</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dhseqr</li>
 </ul>
 
 <ul>
-<li> Modelica_LinearSystems2.Math.Matrices.cholesky</li>
-<li> Modelica_LinearSystems2.Math.Matrices.conditionNumber</li>
-<li> Modelica_LinearSystems2.Math.Matrices.det</li>
-<li> Modelica_LinearSystems2.Math.Matrices.fliplr</li>
-<li> Modelica_LinearSystems2.Math.Matrices.flipud</li>
-<li> Modelica_LinearSystems2.Math.Matrices.hessenberg</li>
-<li> Modelica_LinearSystems2.Math.Matrices.leastSquares/li>,
-<li> Modelica_LinearSystems2.Math.Matrices.leastSquares2</li>
-<li> Modelica_LinearSystems2.Math.Matrices.equalityLeastSquares</li>
-<li> Modelica_LinearSystems2.Math.Matrices.LU</li>
-<li> Modelica_LinearSystems2.Math.Matrices.LU_solve</li>
-<li> Modelica_LinearSystems2.Math.Matrices.LU_solve2</li>
-<li> Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg</li>
-<li> Modelica_LinearSystems2.Math.Matrices.norm</li>
-<li> Modelica_LinearSystems2.Math.Matrices.nullspace</li>
-<li> Modelica_LinearSystems2.Math.Matrices.printMatrix</li>
-<li> Modelica_LinearSystems2.Math.Matrices.rcond</li>
-<li> Modelica_LinearSystems2.Math.Matrices.rsf2</li>
-<li> Modelica_LinearSystems2.Math.Matrices.solve</li>
-<li> Modelica_LinearSystems2.Math.Matrices.solve2</li>
-<li> Modelica_LinearSystems2.Math.Matrices.trace</li>
-<li> Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain</li>
-<li> Modelica_LinearSystems2.Math.Vectors.find</li>
-<li> Modelica_LinearSystems2.Math.Vectors.length</li>
-<li> Modelica_LinearSystems2.Math.Vectors.printVector</li>
-<li> Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</li>
-<li> Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</li>
-<li> Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension</li>
-<li> Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension2</li>
-<li> Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.cholesky</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.conditionNumber</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.det</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.fliplr</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.flipud</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.hessenberg</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.leastSquares</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.leastSquares2</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.equalityLeastSquares</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LU</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LU_solve</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LU_solve2</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.norm</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.nullspace</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.printMatrix</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.rcond</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.rsf2</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.solve</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.solve2</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.trace</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.Internal.dgeqrf_workdim</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.Internal.dhseqr_workdim</li>
+</ul>
+
+<ul>
+  <li> Modelica_LinearSystems2.Math.Vectors.find</li>
+  <li> Modelica_LinearSystems2.Math.Vectors.length</li>
+  <li> Modelica_LinearSystems2.Math.Vectors.printVector</li>
+</ul>
+
+<ul>
+  <li> Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</li>
+  <li> Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</li>
+  <li> Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension</li>
 </ul>
 </html>"));
     end Version_3_0_0;
