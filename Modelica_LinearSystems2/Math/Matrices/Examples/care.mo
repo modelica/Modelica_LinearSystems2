@@ -16,9 +16,9 @@ public
 
 algorithm
    Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement");
-   Matrices.printMatrix(X1, 16, "X1");
+   Modelica.Math.Matrices.toString(X1, "X1", 16);
    Modelica.Utilities.Streams.print("Solution X2 with subsequent Newton refinement");
-   Matrices.printMatrix(X2, 16, "X2");
+   Modelica.Math.Matrices.toString(X2, "X2", 16);
    Modelica.Utilities.Streams.print("Exact solution X3");
-   Matrices.printMatrix(X3, 16, "X3");
+   Modelica.Math.Matrices.toString(X3, "X3", 16);
 end care;

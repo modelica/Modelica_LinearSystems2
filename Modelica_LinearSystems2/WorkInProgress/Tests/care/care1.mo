@@ -54,11 +54,11 @@ algorithm
   condX3 := MatricesMSL.conditionNumber(X3);
   normX3 := MatricesMSL.norm(X3, 2);
   Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement",outputFile);
-  Modelica.Utilities.Streams.print(Matrices.printMatrix(X1, 16, "X1"),outputFile);
+  Modelica.Utilities.Streams.print(MatricesMSL.toString(X1, "X1", 16),outputFile);
   Modelica.Utilities.Streams.print("Solution X2 with subsequent Newton refinement",outputFile);
-  Modelica.Utilities.Streams.print(Matrices.printMatrix(X2, 16, "X2"),outputFile);
+  Modelica.Utilities.Streams.print(MatricesMSL.toString(X2, "X2", 16),outputFile);
   Modelica.Utilities.Streams.print("Exact solution X3",outputFile);
-  Modelica.Utilities.Streams.print(Matrices.printMatrix(X3, 16, "X3"),outputFile);
+  Modelica.Utilities.Streams.print(MatricesMSL.toString(X3, "X3", 16),outputFile);
 
   Modelica.Utilities.Streams.print("Residum of solution X1: resX1 = "+String(resX1),outputFile);
   Modelica.Utilities.Streams.print("Residum of solution X2: resX2 = "+String(resX2),outputFile);

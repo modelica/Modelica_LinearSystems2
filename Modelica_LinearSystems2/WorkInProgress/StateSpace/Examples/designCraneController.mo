@@ -6,7 +6,6 @@ function designCraneController
   import Modelica.ComplexMath.j;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.ComplexMathAdds;
-  import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.ZerosAndPoles;
 
@@ -58,10 +57,10 @@ algorithm
 
   ss_lq.A := ss.A - ss.B*K_lq;
   Streams.print("The feedback matrix of the lq controller is:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    MatricesMSL.toString(
     K_lq,
-    6,
-    "K_lq"));
+    "K_lq",
+    6));
   Streams.writeRealMatrix(
     DataDir + "craneController_small.mat",
     "K_lq",
@@ -75,10 +74,10 @@ algorithm
 // Pre filter calculation
   M_lq := -MatricesMSL.inv([1,0,0,0]*MatricesMSL.solve2(ss_lq.A, ss_lq.B));
   Streams.print("Gain for pre filtering:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    MatricesMSL.toString(
     M_lq,
-    6,
-    "M_lq"));
+    "M_lq",
+    6));
   Streams.writeRealMatrix(
     DataDir + "craneController_small.mat",
     "M_lq",
@@ -91,10 +90,10 @@ algorithm
   (K_pa,,p) := Modelica_LinearSystems2.StateSpace.Design.assignPolesMI(ss, pa);
   ss_pa.A := ss.A - ss.B*K_pa;
   Streams.print("The feedback matrix of the pole assignment controller is:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    MatricesMSL.toString(
     K_pa,
-    6,
-    "K_pa"));
+    "K_pa",
+    6));
   Streams.print("eigenvalues of the closed loop system are:\n");
   ComplexMathAdds.Vectors.print("ev_pa", p);
 
@@ -107,10 +106,10 @@ algorithm
 // Pre filter calculation
   M_pa := -MatricesMSL.inv([1,0,0,0]*MatricesMSL.solve2(ss_pa.A, ss_pa.B));
   Streams.print("Gain for pre filtering:\n" +
-    Modelica_LinearSystems2.Math.Matrices.printMatrix(
+    MatricesMSL.toString(
     M_pa,
-    6,
-    "M_pa"));
+    "M_pa",
+    6));
   Streams.writeRealMatrix(
     DataDir + "craneController_small.mat",
     "M_pa",

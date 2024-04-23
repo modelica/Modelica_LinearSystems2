@@ -73,11 +73,11 @@ algorithm
   // calculate condition numbers
   (kappa2,kappaF,,cInf,nu2,nuF,zeta,Jalpha,dlambda) := conditionNumbers(K, X, data.assignedPoles, calcPoles);
 
-  Matrices.printMatrix(K, 6, "K");
+  Modelica.Math.Matrices.toString(K, "K", 6);
   ComplexMathAdds.Vectors.print("assignedPoles", data.assignedPoles);
   ComplexMathAdds.Vectors.print("calcPoles", calcPoles);
-  Matrices.printMatrix(Re(X), 6, "ReX");
-  Matrices.printMatrix(Im(X), 6, "ImX");
+  Modelica.Math.Matrices.toString(Re(X), "ReX", 6);
+  Modelica.Math.Matrices.toString(Im(X), "ImX", 6);
   print("kappa2 " + String(kappa2));
   print("kappaF " + String(kappaF));
   print("zeta " + String(zeta));

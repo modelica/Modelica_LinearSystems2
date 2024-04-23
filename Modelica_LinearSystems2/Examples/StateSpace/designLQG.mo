@@ -38,8 +38,8 @@ protected
 algorithm
   (Kc, Kf, sslgq) := StateSpace.Design.lqg(ss, Q, R, V, W);
 
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(Kc,6,"Kc");
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(Kf,6,"Kf");
+  Modelica.Math.Matrices.toString(Kc,"Kc",6);
+  Modelica.Math.Matrices.toString(Kf,"Kf",6);
   Modelica.Utilities.Streams.print(String(sslgq));
   ok := true;
 

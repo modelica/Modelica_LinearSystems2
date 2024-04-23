@@ -1,13 +1,13 @@
 within Modelica_LinearSystems2.Math.Matrices.Examples;
 function exampleQR
   "Example for the usage of QR2-function, QR factorization with columns pivoting"
-  import Modelica_LinearSystems2.Math.Matrices;
+
   input String fileName=DataDir + "m.mat"
                               annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="matrix file")));
   input String matrixName="A" "Name of the matrix";
 protected
-  Real M[:,:]=Matrices.fromFile(fileName, matrixName);
+  Real M[:,:]=Modelica_LinearSystems2.Math.Matrices.fromFile(fileName, matrixName);
   Real tau[min(size(M, 1), size(M, 2))];
   Integer p[min(size(M, 1), size(M, 2))];
   Real Q[size(M, 1),size(M, 2)];
@@ -34,24 +34,24 @@ algorithm
   end for;
   Modelica.Utilities.Streams.print(
     "Show results of QR2 - QR factorization with pivoting:\n-----------------------------------------------------");
-  Matrices.printMatrix(M,6,"M");
-  Matrices.printMatrix(Q,6,"Q");
-  Matrices.printMatrix(R,6,"R");
+  Modelica.Math.Matrices.toString(M,"M",6);
+  Modelica.Math.Matrices.toString(Q,"Q",6);
+  Modelica.Math.Matrices.toString(R,"R",6);
   Modelica.Math.Vectors.toString(p, "p", 6);
-  Matrices.printMatrix(QR,6,"QR");
-  Matrices.printMatrix(QR2,6,"QR2");
-  Matrices.printMatrix(M*P,6,"M*P");
-  Matrices.printMatrix(M2,6,"M2");
+  Modelica.Math.Matrices.toString(QR,"QR",6);
+  Modelica.Math.Matrices.toString(QR2,"QR2",6);
+  Modelica.Math.Matrices.toString(M*P,"M*P",6);
+  Modelica.Math.Matrices.toString(M2,"M2",6);
   QR2 := QR*transpose(P);
-  Matrices.printMatrix(QR2,6,"QR2");
+  Modelica.Math.Matrices.toString(QR2,"QR2",6);
 
   Modelica.Utilities.Streams.print(
     "Show results of QR factorization without pivoting:\n-----------------------------------------------------");
   (Q,R,tau,QR2) := Modelica_LinearSystems2.Math.Matrices.QR(M);
   QR := Q*R;
-  Matrices.printMatrix(Q,6,"Q");
-  Matrices.printMatrix(R,6,"R");
-  Matrices.printMatrix(QR,6,"QR");
-  Matrices.printMatrix(QR2,6,"QR2");
+  Modelica.Math.Matrices.toString(Q,"Q",6);
+  Modelica.Math.Matrices.toString(R,"R",6);
+  Modelica.Math.Matrices.toString(QR,"QR",6);
+  Modelica.Math.Matrices.toString(QR2,"QR2",6);
 
 end exampleQR;

@@ -31,7 +31,7 @@ protected
 algorithm
   K := StateSpace.Design.lqr(ss, Q, R);
 
-  Modelica_LinearSystems2.Math.Matrices.printMatrix(K, 6, "K");
+  Modelica.Math.Matrices.toString(K, "K", 6);
 
   ok := true;
 

@@ -243,6 +243,8 @@ convertClass({"Modelica_LinearSystems2.Math.Matrices.cholesky",
               "Modelica.Math.Matrices.solve",
               "Modelica.Math.Matrices.solve2",
               "Modelica.Math.Matrices.trace"});
+convertClass("Modelica_LinearSystems2.Math.Matrices.printMatrix",
+             "ObsoleteLinearSystems2.Math.Matrices.printMatrix");
 
 // LAPACK
 // Convert LAPACK functions - use functions from Modelica.Math.Matrices.LAPACK

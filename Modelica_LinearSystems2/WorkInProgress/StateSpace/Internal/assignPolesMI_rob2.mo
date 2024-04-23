@@ -7,7 +7,6 @@ function assignPolesMI_rob2
   import Modelica_LinearSystems2.ComplexMathAdds;
   import Modelica_LinearSystems2.ComplexMathAdds.Internal.C_transpose;
   import Modelica_LinearSystems2.StateSpace;
-  import Modelica_LinearSystems2.Math.Matrices;
   import Re = Modelica.ComplexMath.real;
   import Im = Modelica.ComplexMath.imag;
   import Modelica.Utilities.Streams.print;
@@ -298,14 +297,14 @@ algorithm
          X[numberOfRealEigenvalues+2*i,numberOfRealEigenvalues+2*i-1] := Complex(0.5);
    end for;
          ComplexMathAdds.Matrices.print(X,6,"X");
-         Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M");
+         Modelica.Math.Matrices.toString(M,"M",6);
          MM := Complex(1)*M;
          XX := ComplexMathAdds.Matrices.matMatMul(MM,X);
          XX := Modelica_LinearSystems2.WorkInProgress.Math.Matrices.C_solve2(
                                                               X, XX);
          ComplexMathAdds.Matrices.print(XX,6,"XX");
          M:=M-A;
-         Modelica_LinearSystems2.Math.Matrices.printMatrix(M,6,"M-A");
+         Modelica.Math.Matrices.toString(M,"M-A",6);
 
    end if;
 
