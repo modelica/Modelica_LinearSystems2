@@ -700,13 +700,17 @@ the conversion.
 <li> Modelica_LinearSystems2.Math.Matrices.fliplr</li>
 <li> Modelica_LinearSystems2.Math.Matrices.flipud</li>
 <li> Modelica_LinearSystems2.Math.Matrices.hessenberg</li>
+<li> Modelica_LinearSystems2.Math.Matrices.leastSquares/li>,
 <li> Modelica_LinearSystems2.Math.Matrices.leastSquares2</li>
+<li> Modelica_LinearSystems2.Math.Matrices.equalityLeastSquares</li>
 <li> Modelica_LinearSystems2.Math.Matrices.LU</li>
 <li> Modelica_LinearSystems2.Math.Matrices.LU_solve</li>
 <li> Modelica_LinearSystems2.Math.Matrices.LU_solve2</li>
 <li> Modelica_LinearSystems2.Math.Matrices.toUpperHessenberg</li>
 <li> Modelica_LinearSystems2.Math.Matrices.norm</li>
 <li> Modelica_LinearSystems2.Math.Matrices.nullspace</li>
+<li> Modelica_LinearSystems2.Math.Matrices.printMatrix</li>
+<li> Modelica_LinearSystems2.Math.Matrices.rcond</li>
 <li> Modelica_LinearSystems2.Math.Matrices.rsf2</li>
 <li> Modelica_LinearSystems2.Math.Matrices.solve</li>
 <li> Modelica_LinearSystems2.Math.Matrices.solve2</li>
@@ -714,6 +718,7 @@ the conversion.
 <li> Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain</li>
 <li> Modelica_LinearSystems2.Math.Vectors.find</li>
 <li> Modelica_LinearSystems2.Math.Vectors.length</li>
+<li> Modelica_LinearSystems2.Math.Vectors.printVector</li>
 <li> Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</li>
 <li> Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</li>
 <li> Modelica_LinearSystems2.Internal.Streams.ReadSystemDimension</li>
