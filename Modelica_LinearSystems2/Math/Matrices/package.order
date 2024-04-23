@@ -9,7 +9,6 @@ dlyapunov
 dsylvester
 eigenValues
 eigenValuesAsRealMatrix
-equalityLeastSquares
 fromFile
 generalizedEigenvaluesTriangular
 householderReflexion
