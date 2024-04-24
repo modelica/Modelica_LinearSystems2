@@ -310,6 +310,10 @@ package LinearSystems2TestConversion3
       output Real Z[size(A, 2), :] "Orthonormal nullspace of matrix A";
       output Real S[size(A, 1), size(A, 2)] "Real Schur form of A";
       output Real rcond "Reciprocal condition number of A";
+      output Real Q[size(A, 1),size(A, 2)]
+        "Rectangular matrix with orthonormal columns such that Q*R=A[:,p]";
+      output Real R[size(A, 2),size(A, 2)] "Square upper triangular matrix";
+      output Integer p[size(A, 2)] "Column permutation vector";
 
     protected
       Real A[3,3] = [1, 0,  0; 6, 5,  0; 1, -2,  2] "Square matrix";
@@ -351,8 +355,32 @@ package LinearSystems2TestConversion3
       x := Modelica_LinearSystems2.Math.Matrices.solve(A, b1);
       X := Modelica_LinearSystems2.Math.Matrices.solve2(A, B);
       t := Modelica_LinearSystems2.Math.Matrices.trace(A);
+      (Q, R, p) := Modelica_LinearSystems2.Math.Matrices.Internal.QR(A);
+      (Q, R, p) := Modelica_LinearSystems2.Math.Matrices.Internal.QR2(A);
 
     end callMatrices;
+
+    function checkQR
+      input Real A[3,3] = [1,2,3;
+                     3,4,5;
+                     2,1,4];
+    //   output Real Q[size(A, 1),size(A, 2)] = fill(0.0, size(A, 1),size(A, 2))
+    //     "Rectangular matrix with orthonormal columns such that Q*R=A[:,p]";
+    //   output Real R[size(A, 2),size(A, 2)] "Square upper triangular matrix";
+    //   output Integer p[size(A, 2)] = fill(0,size(A, 2)) "Column permutation vector";
+
+    algorithm
+      Modelica.Utilities.Streams.print("---------- LS2...QR");
+      Modelica_LinearSystems2.Math.Matrices.QR(A);
+      Modelica.Utilities.Streams.print("---------- MSL...QR, WITHOUT pivoting");
+      Modelica.Math.Matrices.QR(A, false);
+      Modelica.Utilities.Streams.print("---------- LS2...Internal.QR");
+      Modelica_LinearSystems2.Math.Matrices.Internal.QR(A);
+      Modelica.Utilities.Streams.print("---------- LS...Internal.QR2");
+      Modelica_LinearSystems2.Math.Matrices.Internal.QR2(A);
+      Modelica.Utilities.Streams.print("---------- MSL...QR, pivoting");
+      Modelica.Math.Matrices.QR(A);
+    end checkQR;
 
     package Polynomials
 
@@ -369,6 +397,7 @@ package LinearSystems2TestConversion3
 
       end polynomialDegree;
     end Polynomials;
+
   end Math;
 
   package Types
