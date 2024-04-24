@@ -796,15 +796,17 @@ the conversion.
 </ul>
 
 <ul>
-  <li> Modelica_LinearSystems2.Math.Vectors.find</li>
-  <li> Modelica_LinearSystems2.Math.Vectors.length</li>
-  <li> Modelica_LinearSystems2.Math.Vectors.printVector</li>
+  <li>Modelica_LinearSystems2.Math.Vectors.find</li>
+  <li>Modelica_LinearSystems2.Math.Vectors.length</li>
+  <li>Modelica_LinearSystems2.Math.Vectors.printVector</li>
 </ul>
 
 <ul>
-  <li> Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</li>
-  <li> Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</li>
-  <li> Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension</li>
+  <li>Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension</li>
+  <li>Modelica_LinearSystems2.Internal.Streams.readMatrixInternal</li>
+  <li>Modelica_LinearSystems2.Internal.Streams.readMatrixOnFileSize</li>
+  <li>Modelica_LinearSystems2.Internal.from_Hz</li>
+  <li>Modelica_LinearSystems2.Internal.to_Hz</li>
 </ul>
 </html>"));
     end Version_3_0_0;
