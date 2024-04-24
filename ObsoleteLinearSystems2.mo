@@ -612,6 +612,90 @@ Modelica.Math.Matrices.toString([3], \"vec\", 2);
 </pre></blockquote>
 </html>"));
       end printMatrix;
+
+      package Internal
+        extends Modelica.Icons.InternalPackage;
+
+        function QR2 "QR decomposition of a square matrix with column pivoting (A(:,p) = Q*R)"
+
+          input Real A[:,:] "Rectangular matrix with size(A,1) >= size(A,2)";
+          output Real Q[size(A, 1),size(A, 2)]
+            "Rectangular matrix with orthonormal columns such that Q*R=A[:,p]";
+          output Real R[size(A, 2),size(A, 2)] "Square upper triangular matrix";
+          output Integer p[size(A, 2)] "Column permutation vector";
+          output Real tau[min(size(A, 1), size(A, 2))];
+
+        protected
+          Integer nrow=size(A, 1);
+          Integer ncol=size(A, 2);
+          Integer lwork=Internal.dgeqp3_workdim(A);
+
+        algorithm
+          assert(nrow >= ncol, "\nInput matrix A[" + String(nrow) + "," + String(ncol)
+             + "] has more columns as rows.
+This is not allowed when calling Modelica.Matrices.QR(A).");
+          if ncol > 0 then
+
+            (Q,tau,p) := Modelica.Math.Matrices.LAPACK.dgeqp3(A, lwork);
+
+          // determine R
+            R := zeros(ncol, ncol);
+            for i in 1:ncol loop
+              for j in i:ncol loop
+                R[i, j] := Q[i, j];
+              end for;
+            end for;
+
+            Q := Modelica.Math.Matrices.LAPACK.dorgqr(Q, tau);
+          else
+            Q := fill(
+              1,
+              size(A, 1),
+              0);
+            R := fill(
+              0,
+              0,
+              0);
+          end if;
+          annotation (
+            obsolete = "Deprecated function - use Modelica.Math.Matrices.QR instead",
+            Documentation(info="<html>
+<p>
+This function is obsolete. Use
+<a href=\"modelica://Modelica.Math.Matrices.QR\">Modelica.Math.Matrices.QR</a>
+instead.
+</p>
+<p>
+Note: output <code>tau</code> is missing in the function from the Modelica
+Standard Library and must be removed or resolved in another way.
+</p>
+</html>"));
+        end QR2;
+
+        function dgeqp3_workdim "Calculate the optimal size of the WORK array in dgeqp3"
+          import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
+          input Real A[:,:];
+
+          output Integer lwork;
+          output Integer info;
+
+        protected
+          Real work[:];
+
+        algorithm
+          (,,,info,work) := LAPACK.dgeqp3(A, -1);
+          lwork := integer(work[1]);
+
+          annotation (
+            obsolete = "Deprecated function.",
+            Documentation(info="<html>
+<p>
+This function is deprecated without a&nbsp;substitute function.
+</p>
+</html>"));
+        end dgeqp3_workdim;
+      end Internal;
     end Matrices;
 
     package Vectors "Package of functions operating on vectors"
@@ -1564,7 +1648,8 @@ instead.
     revisionId="$Format:%h %ci$",
     uses(
       Modelica(version="4.0.0"),
-      Complex(version="4.0.0")),
+      Complex(version="4.0.0"),
+      Modelica_LinearSystems2(version="3.0.0-dev")),
     Documentation(info="<html>
 <p>
 This package contains functions and blocks from the Modelica_LinearSystems2 Library

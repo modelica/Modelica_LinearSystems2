@@ -23,8 +23,9 @@ protected
   Integer info;
 algorithm
 
-  (Q,R,p,tau) := Modelica_LinearSystems2.Math.Matrices.Internal.QR2(
-                              M);
+  Modelica.Utilities.Streams.print(
+    "Show results of QR from MSL - QR factorization with pivoting:\n-----------------------------------------------------");
+  (Q,R,p) := Modelica.Math.Matrices.QR(M, true);
   QR := Q*R;
   for i in 1:size(M, 2) loop
     P[p[i], i] := 1;
@@ -32,8 +33,6 @@ algorithm
     QR2[:, i] := QR[:, p[i]];
 
   end for;
-  Modelica.Utilities.Streams.print(
-    "Show results of QR2 - QR factorization with pivoting:\n-----------------------------------------------------");
   Modelica.Math.Matrices.toString(M,"M",6);
   Modelica.Math.Matrices.toString(Q,"Q",6);
   Modelica.Math.Matrices.toString(R,"R",6);
@@ -42,6 +41,17 @@ algorithm
   Modelica.Math.Matrices.toString(QR2,"QR2",6);
   Modelica.Math.Matrices.toString(M*P,"M*P",6);
   Modelica.Math.Matrices.toString(M2,"M2",6);
+  QR2 := QR*transpose(P);
+  Modelica.Math.Matrices.toString(QR2,"QR2",6);
+
+  Modelica.Utilities.Streams.print(
+    "Show results of QR from MSL - QR factorization without pivoting:\n-----------------------------------------------------");
+  (Q,R,p) := Modelica.Math.Matrices.QR(M, false);
+  QR := Q*R;
+  Modelica.Math.Matrices.toString(Q,"Q",6);
+  Modelica.Math.Matrices.toString(R,"R",6);
+  Modelica.Math.Matrices.toString(QR,"QR",6);
+  Modelica.Math.Matrices.toString(QR2,"QR2",6);
   QR2 := QR*transpose(P);
   Modelica.Math.Matrices.toString(QR2,"QR2",6);
 
