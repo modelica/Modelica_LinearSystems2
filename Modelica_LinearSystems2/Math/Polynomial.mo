@@ -280,7 +280,7 @@ whereby the evaluation is done by the record
 <p>
 Evaluate a&nbsp;cubic polynomial <var>p</var>(&nbsp;<var>u</var>(<var>t</var>)&nbsp;)
 and its derivatives in time domain. The output
-vector&nbsp;<code>y</code> is composed as follows. 
+vector&nbsp;<code>y</code> is composed as follows.
 </p>
 <blockquote><pre>
 y[1] = c[1] * u(t)^3 + c[2] * u(t)^2 + c[3] * u(t) + c[4],
@@ -992,7 +992,7 @@ int_p = Polynomial.integral(p1);
       y := p.c[j] + x*y;
     end for;
     annotation (
-      derivative(zeroDerivative=p) = Polynomial.evaluate_der,
+      derivative(zeroDerivative=p) = Polynomial.Internal.evaluate_der,
       Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -1189,7 +1189,7 @@ Polynomial.derivativeValue(p1, 1, 2);
     end for;
     integral := integral - y_low;
     annotation (
-      derivative(zeroDerivative=p) = Polynomial.integralValue_der,
+      derivative(zeroDerivative=p) = Polynomial.Internal.integralValue_der,
       Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
@@ -1373,25 +1373,33 @@ Polynomial.numberOfRoots(p1);
     end if;
   end rootsOfNonZeroHighestCoefficientPolynomial;
 
-  encapsulated function evaluate_der
-    "Evaluate derivative of polynomial at a given abszissa value"
+  encapsulated package Internal
+    "Internal utility functions of record Polynomial that should not be directly utilized by the user"
+    extends Modelica.Icons.InternalPackage;
+    import Modelica;
     import Modelica_LinearSystems2.Math.Polynomial;
 
-    input Polynomial p "Polynomial";
-    input Real x "Abszissa value";
-    input Real dx "Derivative of abszissa value, der(x)";
-    output Real dy "Derivative value of polynomial at x";
-  protected
-    Integer n=size(p.c, 1);
-  algorithm
-    dy := p.c[1]*(n - 1);
-    for j in 2:n - 1 loop
-      dy := p.c[j]*(n - j) + x*dy;
-    end for;
-    dy := dy*dx;
-    annotation (
-      derivative(order=2)=Polynomial.Internal.evaluate_dder,
-      Documentation(info="<html>
+    encapsulated function evaluate_der
+      "Evaluate derivative of polynomial at a given abszissa value"
+      import Modelica_LinearSystems2.Math.Polynomial;
+
+      input Polynomial p "Polynomial";
+      input Real x "Abszissa value";
+      input Real dx "Derivative of abszissa value, der(x)";
+      output Real dy "Derivative value of polynomial at x";
+    protected
+      Integer n=size(p.c, 1);
+
+    algorithm
+      dy := p.c[1]*(n - 1);
+      for j in 2:n - 1 loop
+        dy := p.c[j]*(n - j) + x*dy;
+      end for;
+      dy := dy*dx;
+
+      annotation (
+        derivative(order=2)=Polynomial.Internal.evaluate_dder,
+        Documentation(info="<html>
 <p>
 This function is the <em>first time derivative</em> of the function
 <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluate\">Polynomial.evaluate</a>.
@@ -1402,27 +1410,7 @@ This function is the <em>first time derivative</em> of the function
 <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.Internal.evaluate_dder\">Internal.evaluate_dder</a>
 </p>
 </html>"));
-  end evaluate_der;
-
-  encapsulated function integralValue_der
-    "Evaluate derivative of integral of polynomial p(x) from x_low to x_high, assuming only x_high as time-dependent (Leibniz rule)"
-    import Modelica_LinearSystems2.Math.Polynomial;
-
-    input Polynomial p "Polynomial";
-    input Real x_high "High integrand value";
-    input Real x_low=0 "Low integrand value, default 0";
-    input Real dx_high "High integrand value";
-    input Real dx_low=0 "Low integrand value, default 0";
-    output Real dintegral=0.0 "Integral of polynomial p from u_low to u_high";
-  algorithm
-    dintegral := Polynomial.evaluate(p, x_high)*dx_high;
-  end integralValue_der;
-
-  encapsulated package Internal
-    "Internal utility functions of record Polynomial that should not be directly utilized by the user"
-    extends Modelica.Icons.InternalPackage;
-    import Modelica;
-    import Modelica_LinearSystems2.Math.Polynomial;
+    end evaluate_der;
 
     encapsulated function evaluate_dder "Evaluate 2nd derivative of polynomial at a given abszissa value"
       import Modelica_LinearSystems2.Math.Polynomial;
@@ -1457,10 +1445,24 @@ This function is the <em>second time derivative</em> of the function
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.evaluate_der\">Polynomial.evaluate_der</a>
+<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.Internal.evaluate_der\">Internal.evaluate_der</a>
 </p>
 </html>"));
     end evaluate_dder;
+
+    encapsulated function integralValue_der
+      "Evaluate derivative of integral of polynomial p(x) from x_low to x_high, assuming only x_high as time-dependent (Leibniz rule)"
+      import Modelica_LinearSystems2.Math.Polynomial;
+
+      input Polynomial p "Polynomial";
+      input Real x_high "High integrand value";
+      input Real x_low=0 "Low integrand value, default 0";
+      input Real dx_high "High integrand value";
+      input Real dx_low=0 "Low integrand value, default 0";
+      output Real dintegral=0.0 "Integral of polynomial p from u_low to u_high";
+    algorithm
+      dintegral := Polynomial.evaluate(p, x_high)*dx_high;
+    end integralValue_der;
 
     function mult
       "Multiply two polynomials (polynomials are defined by vectors)"
@@ -1500,7 +1502,7 @@ The general form is:
 <p>
 In the record, the coefficients <code>c[i]</code> are stored. Usually,
 the record is not directly accessed. Instead, a&nbsp;polynomial is
-generated with the functions provided in the record, see 
+generated with the functions provided in the record, see
 <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.'constructor'\">Polynomial.&apos;constructor&apos;</a>.
 Also
 <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.fitting\">Polynomial.fitting(..)</a>
