@@ -6,10 +6,9 @@ analysisControllablePoles
 analysisTimeResponse
 analysisInitialResponse
 analysisImpulseResponse
-analysisStepResponse
-analysisPolesAndZerosSISO
 analysisInvariantZeros
-analysisPolesAndZeros_SISO
+analysisPolesAndZerosSISO
+analysisStepResponse
 analysisStairCase
 conversionFromTransferFunction
 conversionFromZerosAndPoles
