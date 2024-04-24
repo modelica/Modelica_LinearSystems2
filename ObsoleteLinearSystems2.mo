@@ -387,7 +387,7 @@ Note: regarding the function from the Modelica Standard Library
 <p>
 <ul>
   <li>
-    outputs <code>jpvt</code> and <code>tau</code> are interconverted,
+    outputs <code>jpvt</code> and <code>tau</code> are interchanged,
   </li>
   <li>
     output <code>work</code> is missing.
@@ -673,7 +673,6 @@ Standard Library and must be removed or resolved in another way.
         end QR2;
 
         function dgeqp3_workdim "Calculate the optimal size of the WORK array in dgeqp3"
-          import Modelica_LinearSystems2.Math.Matrices.LAPACK;
 
           input Real A[:,:];
 

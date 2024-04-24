@@ -742,6 +742,7 @@ the conversion.
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeevx</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgehrd</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgelsx</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqp3</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgesdd</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgesvd</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgesvx</li>
