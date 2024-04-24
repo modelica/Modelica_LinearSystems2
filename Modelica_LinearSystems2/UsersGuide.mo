@@ -791,8 +791,11 @@ the conversion.
   <li>Modelica_LinearSystems2.Math.Matrices.solve2</li>
   <li>Modelica_LinearSystems2.Math.Matrices.trace</li>
   <li>Modelica_LinearSystems2.Math.Matrices.Internal.readMatrixGain</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.Internal.dgeqp3_workdim</li>
   <li>Modelica_LinearSystems2.Math.Matrices.Internal.dgeqrf_workdim</li>
   <li>Modelica_LinearSystems2.Math.Matrices.Internal.dhseqr_workdim</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.Internal.QR</li>
+  <li>Modelica_LinearSystems2.Math.Matrices.Internal.QR2</li>
 </ul>
 
 <ul>
