@@ -192,12 +192,14 @@ convertClass("Modelica_LinearSystems2.Controller.Examples.Components.InverseDoub
 // Use Vectors functions - use functions from Modelica.Math.Vectors
 //
 convertClass({"Modelica_LinearSystems2.Math.Vectors.find",
-              "Modelica_LinearSystems2.Math.Vectors.length"},
+              "Modelica_LinearSystems2.Math.Vectors.length",
+              "Modelica_LinearSystems2.Math.Vectors.printVector"},
              {"Modelica.Math.Vectors.find",
-              "Modelica.Math.Vectors.length"});
-convertClass("Modelica_LinearSystems2.Math.Vectors.printVector",
-             "ObsoleteLinearSystems2.Math.Vectors.printVector");
-// The following doesn't work (test in Dymola 2024x)
+              "Modelica.Math.Vectors.length",
+              "ObsoleteLinearSystems2.Math.Vectors.printVector"});
+
+// The following conversion doesn't work (test in Dymola 2024x) as expected,
+// therefore, ObsoleteLinearSystems2.Math.Vectors.printVector is used as a workaround.
 // convertClass("Modelica_LinearSystems2.Math.Vectors.printVector",
 //              "Modelica.Math.Vectors.toString");
 // convertModifiers("Modelica_LinearSystems2.Math.Vectors.printVector",
