@@ -331,5 +331,9 @@ convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.dgeqp3_workdim",
 
 // Polynomial
 //
-convertClass("Modelica_LinearSystems2.Math.Polynomial.degree2",
-             "Modelica_LinearSystems2.Math.Polynomial.degree");
+convertClass({"Modelica_LinearSystems2.Math.Polynomial.degree2",
+              "Modelica_LinearSystems2.Math.Polynomial.evaluate_der",
+              "Modelica_LinearSystems2.Math.Polynomial.integralValue_der"},
+             {"Modelica_LinearSystems2.Math.Polynomial.degree",
+              "Modelica_LinearSystems2.Math.Polynomial.Internal.evaluate_der",
+              "Modelica_LinearSystems2.Math.Polynomial.Internal.integralValue_der"});

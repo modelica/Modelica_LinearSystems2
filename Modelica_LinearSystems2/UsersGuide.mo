@@ -632,18 +632,25 @@ A&nbsp;conversion script is provided to facilitate the conversion.
     </ul>
   </li>
   <li>
-    Modelica_LinearSystems2.StateSpace.Internal.<strong>readSystemDimension</strong> to
-    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams.readSystemDimension\">Utilities.Streams.readSystemDimension</a>
-  </li>
-  <li>
-    Package Modelica_LinearSystems2.Internal.<strong>Streams</strong> to
+    Package Modelica_LinearSystems2.Internal.<strong>Streams</strong> moved to
     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams\">Utilities.Streams</a>;
     and all functions&apos; names start with a&nbsp;lower cas.
   </li>
   <li>
-    Package Modelica_LinearSystems2.<strong>Types</strong> to
-    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Types\">Utilities.Types</a>
-    instead.
+    Package Modelica_LinearSystems2.<strong>Types</strong> moved to
+    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Types\">Utilities.Types</a>.
+  </li>
+  <li>
+    Modelica_LinearSystems2.StateSpace.Internal.<strong>readSystemDimension</strong> moved to
+    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams.readSystemDimension\">Utilities.Streams.readSystemDimension</a>
+  </li>
+  <li>
+    Modelica_LinearSystems2.Math.Polynomial.<strong>evaluate_der</strong> moved to
+    <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.Internal.evaluate_der\">Polynomial.Internal.evaluate_der</a>.
+  </li>
+  <li>
+    Modelica_LinearSystems2.Math.Polynomial.<strong>integralValue_der</strong> moved to
+    <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.Internal.evaluate_der\">Polynomial.Internal.integralValue_der</a>.
   </li>
 </ul>
 
