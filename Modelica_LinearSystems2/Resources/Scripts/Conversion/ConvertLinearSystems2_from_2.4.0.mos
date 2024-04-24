@@ -74,8 +74,8 @@ convertClass({"Modelica_LinearSystems2.Types.Grid",
 // Complex
 // Use "built-in" Complex record instead of Modelica_LinearSystems2.Math.Complex
 //
-//convertClass("Modelica_LinearSystems2.Math.Complex",
-//             "Complex");
+convertClass("Modelica_LinearSystems2.Math.Complex",
+             "Complex");
 convertClass("Modelica_LinearSystems2.Math.Complex.j",
              "ObsoleteLinearSystems2.Math.Complex.j");
 
