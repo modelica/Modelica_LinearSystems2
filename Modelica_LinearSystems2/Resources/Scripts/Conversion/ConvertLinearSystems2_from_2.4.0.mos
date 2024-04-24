@@ -318,12 +318,16 @@ convertClass({"Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeev",
               "ObsoleteLinearSystems2.Math.LAPACK.dgetrs",
               "ObsoleteLinearSystems2.Math.LAPACK.dhseqr"});
 
-convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.dgeqrf_workdim",
+convertClass({"Modelica_LinearSystems2.Math.Matrices.Internal.dgeqp3_workdim",
+              "Modelica_LinearSystems2.Math.Matrices.Internal.dgeqrf_workdim",
               "Modelica_LinearSystems2.Math.Matrices.Internal.dhseqr_workdim",
-              "Modelica_LinearSystems2.Math.Matrices.Internal.QR"},
-             {"ObsoleteLinearSystems2.Math.Internal.dgeqrf_workdim",
+              "Modelica_LinearSystems2.Math.Matrices.Internal.QR",
+              "Modelica_LinearSystems2.Math.Matrices.Internal.QR2"},
+             {"ObsoleteLinearSystems2.Math.Matrices.Internal.dgeqp3_workdim",
+              "ObsoleteLinearSystems2.Math.Internal.dgeqrf_workdim",
               "ObsoleteLinearSystems2.Math.Internal.dhseqr_workdim",
-              "Modelica.Math.Matrices.QR"});
+              "Modelica.Math.Matrices.QR",
+              "ObsoleteLinearSystems2.Math.Matrices.Internal.QR2"});
 
 // Polynomial
 //

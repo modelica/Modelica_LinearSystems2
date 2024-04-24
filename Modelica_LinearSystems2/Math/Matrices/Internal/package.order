@@ -1,6 +1,5 @@
 carenls
 darenls
-dgeqp3_workdim
 eigenvalues2
 eigenvaluesHessenberg
 findLocal_tk
@@ -11,7 +10,6 @@ hohoTrafoUpperHess
 householderSimilarityTransformation2
 multiplyWithOrthogonalQ_hr
 multiplyWithOrthogonalQ_qr
-QR2
 reorderRSF
 reorderRSFc
 reorderRSFd
