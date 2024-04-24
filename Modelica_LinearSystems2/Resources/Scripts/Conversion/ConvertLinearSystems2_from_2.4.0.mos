@@ -5,6 +5,11 @@ convertClear();
 
 //convertElement(" "," "," ");
 
+convertClass({"Modelica_LinearSystems2.Internal.from_Hz",
+              "Modelica_LinearSystems2.Internal.to_Hz"},
+             {"Modelica.SIunits.Conversions.from_Hz",
+              "Modelica.SIunits.Conversions.to_Hz"})
+
 // Streams
 // Move Modelica_LinearSystems2.Internal.Streams into Modelica_LinearSystems2.Utilities.Streams
 //
