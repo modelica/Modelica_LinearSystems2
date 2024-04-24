@@ -381,8 +381,8 @@ are described in the following sections:
 </p>
 <ol>
 <li> Section <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">Complex numbers</a>
-     introduces the Modelica_LinearSystems2.Math.Complex record that provides a
-     data structure for Complex numbers and arrays and also the most
+     introduces the Complex record that provides a&nbsp;data structure
+     for Complex numbers and arrays and also the most
      important (scalar) operations on them. Read this section first,
      because the structuring of records as well as operator overloading
      is explained that is also the basis for the other parts of the
@@ -566,7 +566,8 @@ Improvements in this version
   <li>
     <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.degree\">Polynomial.degree</a>:
     fix wrong calculation of polynomial degree&nbsp;<var>n</var> for zero polynomial coefficients 
-    <code>c[1]</code> to <code>c[m]</code>, <var>m</var>&nbsp;&lt&nbsp;<var>n</var>.
+    <code>c[1]</code> to <code>c[m]</code> and non-zero <code>c[m+1]</code>, with
+    <code>m&nbsp;&lt&nbsp;length(c)</code>.
   </li>
 </ul>
 
@@ -576,7 +577,7 @@ Non-backward compatible changes
 
 
 <h5>
-Operator record Modelica_LinearSystems2.Math.Complex
+Deprecated operator record Modelica_LinearSystems2.Math.Complex
 </h5>
 <p>
 The functionality of this record is given by the top-level operator
@@ -599,10 +600,7 @@ manually change to proper <code>Modelica.ComplexMath.j</code>.
 </p>
 <p>
 See also 
-<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">UsersGuide.GettingStarted.ComplexNumbers</a>
-for some details and
-<a href=\"modelica://Modelica_LinearSystems2.Math.Complex\">Modelica_LinearSystems2.Math.Complex</a>
-for inheritance.
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">UsersGuide.GettingStarted.ComplexNumbers</a>.
 </p>
 
 
@@ -733,8 +731,7 @@ the conversion.
 
 <ul>
   <li>
-    Operator record Modelica_LinearSystems2.Math.Complex, see also
-    <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">UsersGuide.GettingStarted.ComplexNumbers</a>
+    Operator record Modelica_LinearSystems2.Math.Complex, see above.
   </li>
 </ul>
 
