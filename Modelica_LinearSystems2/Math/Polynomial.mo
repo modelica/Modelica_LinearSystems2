@@ -1236,7 +1236,7 @@ Polynomial.integralValue(p1, 2, -2);
       "Roots of polynomial";
 
   algorithm
-    result := Polynomial.rootsOfNonZeroHighestCoefficientPolynomial(p,
+    result := Polynomial.Internal.rootsOfNonZeroHighestCoefficientPolynomial(p,
       Polynomial.numberOfRoots(p));
     if printRoots then
       Vectors.print("", result);
@@ -1332,46 +1332,6 @@ Polynomial.numberOfRoots(p1);
 </html>
 "));
   end numberOfRoots;
-
-  encapsulated function rootsOfNonZeroHighestCoefficientPolynomial
-    "Determine zeros of polynomial where highest coefficient of polynomial is not zero"
-    import Modelica.ComplexMath.j;
-    import Modelica_LinearSystems2.Math.Matrices;
-    import Modelica_LinearSystems2.Math.Polynomial;
-    import Complex;
-
-    input Polynomial p "Polynomial";
-    input Integer numberOfRoots "Number of roots of polynomial";
-    output Complex result[:]=fill(Complex(0, 0), numberOfRoots)
-      "Roots of polynomial";
-  protected
-    Integer nc=size(p.c, 1);
-    Integer i_start=nc - numberOfRoots;
-    Integer n=numberOfRoots;
-    Real A[n, n] "Companion matrix";
-    Real ev[n, 2] "Eigen values";
-
-  algorithm
-    assert(numberOfRoots >= 0 and numberOfRoots < nc,
-      "Argument numberOfRoots (= " + String(numberOfRoots) +
-      ") is not in the range\n" + "0 <= numberOfRoots <= " + String(nc - 1));
-    assert(p.c[i_start] <> 0, "p.c[" + String(i_start) +
-      "] = 0. Probably wrong argument numberOfRoots (=" + String(numberOfRoots)
-       + ")");
-
-    if numberOfRoots > 0 then
-      // companion matrix
-      A[1, :] := -p.c[i_start + 1:nc]/p.c[i_start];
-      A[2:n, :] := [identity(n - 1), zeros(n - 1)];
-
-      // roots are eigenvalues of companion matrix
-      //    ev := Matrices.eigenValues(A);
-      (ev[:, 1],ev[:, 2]) := Matrices.Internal.eigenvaluesHessenberg(A);
-      for i in 1:n loop
-        result[i] := ev[i, 1] + j*ev[i, 2];
-      end for;
-    end if;
-  end rootsOfNonZeroHighestCoefficientPolynomial;
 
   encapsulated package Internal
     "Internal utility functions of record Polynomial that should not be directly utilized by the user"
@@ -1488,6 +1448,46 @@ This function is the <em>second time derivative</em> of the function
         p3[n3_max - n3 + k] := ck;
       end for;
     end mult;
+
+    encapsulated function rootsOfNonZeroHighestCoefficientPolynomial
+      "Determine zeros of polynomial where highest coefficient of polynomial is not zero"
+      import Modelica.ComplexMath.j;
+      import Modelica_LinearSystems2.Math.Matrices;
+      import Modelica_LinearSystems2.Math.Polynomial;
+      import Complex;
+  
+      input Polynomial p "Polynomial";
+      input Integer numberOfRoots "Number of roots of polynomial";
+      output Complex result[:]=fill(Complex(0, 0), numberOfRoots)
+        "Roots of polynomial";
+    protected
+      Integer nc=size(p.c, 1);
+      Integer i_start=nc - numberOfRoots;
+      Integer n=numberOfRoots;
+      Real A[n, n] "Companion matrix";
+      Real ev[n, 2] "Eigen values";
+  
+    algorithm
+      assert(numberOfRoots >= 0 and numberOfRoots < nc,
+        "Argument numberOfRoots (= " + String(numberOfRoots) +
+        ") is not in the range\n" + "0 <= numberOfRoots <= " + String(nc - 1));
+      assert(p.c[i_start] <> 0, "p.c[" + String(i_start) +
+        "] = 0. Probably wrong argument numberOfRoots (=" + String(numberOfRoots)
+         + ")");
+  
+      if numberOfRoots > 0 then
+        // companion matrix
+        A[1, :] := -p.c[i_start + 1:nc]/p.c[i_start];
+        A[2:n, :] := [identity(n - 1), zeros(n - 1)];
+  
+        // roots are eigenvalues of companion matrix
+        //    ev := Matrices.eigenValues(A);
+        (ev[:, 1],ev[:, 2]) := Matrices.Internal.eigenvaluesHessenberg(A);
+        for i in 1:n loop
+          result[i] := ev[i, 1] + j*ev[i, 2];
+        end for;
+      end if;
+    end rootsOfNonZeroHighestCoefficientPolynomial;
   end Internal;
 
   annotation (defaultComponentName="polynomial", Documentation(info="<html>

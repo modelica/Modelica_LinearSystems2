@@ -652,6 +652,10 @@ A&nbsp;conversion script is provided to facilitate the conversion.
     Modelica_LinearSystems2.Math.Polynomial.<strong>integralValue_der</strong> moved to
     <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.Internal.evaluate_der\">Polynomial.Internal.integralValue_der</a>.
   </li>
+  <li>
+    Modelica_LinearSystems2.Math.Polynomial.<strong>rootsOfNonZeroHighestCoefficientPolynomial</strong> moved to
+    <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.Internal.rootsOfNonZeroHighestCoefficientPolynomial\">Polynomial.Internal.rootsOfNonZeroHighestCoefficientPolynomial</a>.
+  </li>
 </ul>
 
 
