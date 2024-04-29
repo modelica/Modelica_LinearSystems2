@@ -10891,11 +10891,11 @@ der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</str
 The invariant zeros of this system are defined as the variables
 s  that make the Rosenbrock matrix of the system
 </p>
-<pre>
-    | s<strong>I-A</strong>   <strong>-B</strong> |
-    |           |
-    | <strong>C</strong>       <strong>D</strong> |
-</pre>
+<blockquote><pre>
+| s<strong>I</strong>-<strong>A</strong>   -<strong>B</strong> |
+|           |
+|  <strong>C</strong> <strong> </strong>    <strong>D</strong> |
+</pre></blockquote>
 <p>
 singular.
 </p>
@@ -11882,10 +11882,7 @@ The uncontrollable poles are checked to to stable.
 
       if nx > 1 then
 
-        u := Vectors.householderVector(bh1, cat(
-              1,
-              fill(0, nx - 1),
-              {1}));
+        u := Vectors.householderVector(bh1, cat(1, fill(0, nx - 1), {1}));
 
         Ah1 := Matrices.householderSimilarityTransformation(Ah1, u);
 
@@ -11902,10 +11899,9 @@ The uncontrollable poles are checked to to stable.
 
             u := cat(
                   1,
-                  Vectors.householderVector(Ah1[1:ll - 1, ll], cat(
-                    1,
-                    fill(0, ll - 2),
-                    {1})),
+                  Vectors.householderVector(
+                    Ah1[1:ll - 1, ll],
+                    cat(1, fill(0, ll - 2), {1})),
                   fill(0, nx - ll + 1));
             Ah1 := Matrices.householderSimilarityTransformation(Ah1, u);
             ch1 := Vectors.householderReflexion(ch1, u);
@@ -12134,8 +12130,11 @@ The uncontrollable poles are checked to to stable.
       end if;
 
       annotation (Documentation(info="<html>
-This algorithm usues QR factorization to generate staircase form i.e. block upper Hessenberg form of the pair (A,B). Due to the well known problem to determine
-numerically reliable the rank of a matrix, this algorithm should only be used to well conditioned systems. The best way for rank decision would be singular value decomposition, that is used in staicasSVD.
+This algorithm usues QR factorization to generate staircase form i.e. block upper
+Hessenberg form of the pair (A,B). Due to the well known problem to determine
+numerically reliable the rank of a matrix, this algorithm should only be used
+to well conditioned systems. The best way for rank decision would be singular
+value decomposition, that is used in staicasSVD.
 </html>"));
     end staircaseQR;
 
@@ -12410,18 +12409,18 @@ k = ---------- * ----------------------
       import Modelica_LinearSystems2.Math.Matrices;
       import Modelica_LinearSystems2.Math.Vectors;
 
-      input Real A[:, :];
-      input Real B[:, :];
-      input Real C[:, :];
-      input Real D[:, :];
+      input Real A[:, :] "State matrix";
+      input Real B[:, :] "Input matrix";
+      input Real C[:, :] "Output matrix";
+      input Real D[:, :] "Feedforward matrix";
 
       output Real Ar[:, :];
       output Real Br[:, :];
       output Real Cr[:, :];
       output Real Dr[:, :];
-      output Integer n "= dimension of Ar: Ar[n,n]";
-      output Integer m "= second dimension of Br: Br{n,m]";
-      output Integer p "= first dimension of Cr: Cr[p,n]";
+      output Integer n "Dimension of Ar: Ar[n,n]";
+      output Integer m "Second dimension of Br: Br{n,m]";
+      output Integer p "First dimension of Cr: Cr[p,n]";
 
     protected
       Real A2[:, :];
@@ -12494,7 +12493,7 @@ k = ---------- * ----------------------
           stop1 := size(CC, 1) == rankR;
 
           if not stop1 then
-            Cu := CC[sigma + 1:end, :];
+            Cu := CC[sigma+1:end, :];
             Co := CC[1:sigma, :];
 
             (V,R,tau,V2) := Matrices.QR(MatricesMSL.flipLeftRight(transpose(Cu)));
@@ -12552,22 +12551,10 @@ k = ---------- * ----------------------
           n := 0;
           p := 0;
           m := 0;
-          Ar := fill(
-                0,
-                0,
-                0);
-          Br := fill(
-                0,
-                0,
-                0);
-          Cr := fill(
-                0,
-                0,
-                0);
-          Dr := fill(
-                0,
-                0,
-                0);
+          Ar := fill(0, 0, 0);
+          Br := fill(0, 0, 0);
+          Cr := fill(0, 0, 0);
+          Dr := fill(0, 0, 0);
         end if;
 
       else
@@ -12580,18 +12567,15 @@ k = ---------- * ----------------------
         D2 := D;
       end if;
 
-      annotation (Documentation(info="<html>
-
+      annotation (
+        Documentation(info="<html>
 <h4><a name=\"References\">References</a></h4>
 <dl>
 <dt>&nbsp;[1] Emami-Naeini, A. and Van Dooren, P. (1982):</dt>
 <dd> <strong>Computation of Zeros of Linear Multivariable Systems</strong>.
      Automatica, 18, pp. 415-430.<br>&nbsp;</dd>
 </dl>
-</html>
-
-
-"));
+</html>"));
     end reduceRosenbrock;
 
     encapsulated function reducedCtrSystem
@@ -12642,10 +12626,7 @@ k = ---------- * ----------------------
         r := 1;
         if nx > 1 then
 
-          u := Vectors.householderVector(bh1, cat(
-                1,
-                fill(0, nx - 1),
-                {1}));
+          u := Vectors.householderVector(bh1, cat(1, fill(0, nx - 1), {1}));
 
           Ah1 := Matrices.householderSimilarityTransformation(Ah1, u);
           bh1 := Vectors.householderReflexion_en(bh1, u);
@@ -12657,10 +12638,9 @@ k = ---------- * ----------------------
           while r <= nx - 1 and maxa > normA*tol loop
             u := cat(
                   1,
-                  Vectors.householderVector(Ah1[1:ll - 1, ll], cat(
-                    1,
-                    fill(0, ll - 2),
-                    {1})),
+                  Vectors.householderVector(
+                    Ah1[1:ll - 1, ll],
+                    cat(1, fill(0, ll - 2), {1})),
                   fill(0, nx - ll + 1));
 
             Ah1 := Matrices.Internal.hohoTrafoLowerHess(
@@ -12732,10 +12712,7 @@ k = ---------- * ----------------------
         r := 1;
         if nx > 1 then
 
-          u := Vectors.householderVector(bh1, cat(
-                1,
-                fill(0, nx - 1),
-                {1}));
+          u := Vectors.householderVector(bh1, cat(1, fill(0, nx - 1), {1}));
 
           Ah1 := Matrices.householderSimilarityTransformation(Ah1, u);
           bh1 := Vectors.householderReflexion_en(bh1, u);
@@ -12748,16 +12725,12 @@ k = ---------- * ----------------------
           while r <= nx - 1 and maxa > nx*normA*1e-5 loop
             u := cat(
                   1,
-                  Vectors.householderVector(Ah1[1:ll - 1, ll], cat(
-                    1,
-                    fill(0, ll - 2),
-                    {1})),
+                  Vectors.householderVector(
+                    Ah1[1:ll - 1, ll],
+                    cat(1, fill(0, ll - 2), {1})),
                   fill(0, nx - ll + 1));
 
-            Ah1 := Matrices.Internal.hohoTrafoLowerHess(
-                  Ah1,
-                  u,
-                  r);
+            Ah1 := Matrices.Internal.hohoTrafoLowerHess(Ah1, u, r);
 
             ch1 := Vectors.householderReflexion(ch1, u);
             ll := ll - 1;
@@ -13303,18 +13276,18 @@ StateSpace.Plot.<strong>bodeMIMO</strong>(
 This record defines a linear time invariant differential
 equation system in state space form:
 </p>
-<pre>
-   <strong>der</strong>(x) = A * x + B * u
-       y  = C * x + D * u
-</pre>
+<blockquote><pre>
+<strong>der</strong>(x) = A * x + B * u
+    y  = C * x + D * u
+</pre></blockquote>
 <p>
 with
 </p>
 <ul>
-<li> u ... the input vector,</li>
-<li> y ... the output vector,</li>
-<li> x ... the state vector,</li>
-<li> A, B, C, D - matrices of appropriate dimensions.</li>
+  <li> u ... the input vector,</li>
+  <li> y ... the output vector,</li>
+  <li> x ... the state vector,</li>
+  <li> A, B, C, D - matrices of appropriate dimensions.</li>
 </ul>
 </html>"));
 end StateSpace;
