@@ -46,7 +46,10 @@ model InverseDoublePendulum2 "Inverted double pendulum"
     w1_start=w1_start,
     w2_start=w2_start,
     cartDisturbance=cartDisturbance,
-    bodyDisturbance=bodyDisturbance) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+    bodyDisturbance=bodyDisturbance,
+    bodyCylinder(diameter=0.03, density=1000),
+    bodyCylinder1(diameter=0.03, density=1000),
+    const(k=-0.5*Modelica.Constants.pi)) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Blocks.Routing.Multiplex6 multiplex6
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Modelica.Blocks.Interfaces.RealInput dist if cartDisturbance
