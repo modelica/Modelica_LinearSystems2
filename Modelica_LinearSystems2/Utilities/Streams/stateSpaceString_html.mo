@@ -42,8 +42,7 @@ algorithm
     Modelica.Utilities.Streams.print("namesExist == false");
   end if;
 
-  stringMaxLength := max(size(ss.xNames, 1), min(size(ss.yNames, 1),
-    11));
+  stringMaxLength := max(size(ss.xNames, 1), min(size(ss.yNames, 1), 11));
 //, size(ss.uNames,1)));
 //, max(size(ss.yNames), size(ss.uNames))
 
@@ -198,7 +197,7 @@ algorithm
     end for;
     s := s + "<br>";
 
-    for i in 1:nu loop
+    for i in 1:ny loop
 //Vertical
 //Two alternatives when printing state names
       if namesExist == false then
