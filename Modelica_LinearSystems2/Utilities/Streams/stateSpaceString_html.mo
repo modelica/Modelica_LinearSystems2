@@ -279,4 +279,16 @@ algorithm
 
   end if;
 
+  annotation (Documentation(info="<html>
+<h4>Syntax</h4>
+<blockquote><pre>
+s = Streams.<strong>stateSpaceString_html</strong>(ss, significantDigits, name);
+</pre></blockquote>
+
+<h4>Description</h4>
+<p>
+Returns a&nbsp;string in the HTML format collecting matrices of a&nbsp;state space
+representation <code>ss</code>.
+</p>
+</html>"));
 end stateSpaceString_html;

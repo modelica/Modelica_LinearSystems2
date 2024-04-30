@@ -46,6 +46,12 @@ record ParameterVariation
         Line(
           points={{60,68},{100,40},{60,12}},
           color={0,0,0},
-          smooth=Smooth.None)}));
+          smooth=Smooth.None)}),
+    Documentation(info="<html>
+<p>
+Set a&nbsp;name of whatever parameter and values needed for parameter variation.
+The record can be vectorized to set more parameters and values at once.
+</p>
+</html>"));
 
 end ParameterVariation;

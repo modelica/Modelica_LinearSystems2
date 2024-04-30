@@ -25,7 +25,7 @@ Modelica_LinearSystems2.Utilities.Import.linearize(
   \"Modelica_LinearSystems2.Utilities.Plants.DoublePendulum\", 1.0);
 
 // Read B matrix of the linearized system
-readMatrixB(dslin.mat, \"ABCD\")
+readMatrixB(\"dslin.mat\", \"ABCD\")
 //  = 
 // [0.0;
 //  0.13297862810901506;

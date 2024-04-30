@@ -24,6 +24,12 @@ record SetParameter "Set value of one parameter from a translated model"
           color={0,0,0},
           smooth=Smooth.None,
           origin={-40,-10},
-          rotation=90)}));
+          rotation=90)}),
+    Documentation(info="<html>
+<p>
+Set a&nbsp;name of whatever parameter and its value. The record can be vectorized to
+set more parameters and values at once.
+</p>
+</html>"));
 
 end SetParameter;
