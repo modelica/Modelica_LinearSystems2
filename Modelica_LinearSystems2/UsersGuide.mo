@@ -569,6 +569,10 @@ Improvements in this version
     <code>c[1]</code> to <code>c[m]</code> and non-zero <code>c[m+1]</code>, with
     <code>m&nbsp;&lt&nbsp;length(c)</code>.
   </li>
+  <li>
+    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams.stateSpaceString_html\">Streams.stateSpaceString_html</a>:
+    bug fix: print state space matrix&nbsp;<code>C</code> of proper size.
+  </li>
 </ul>
 
 <h4>
