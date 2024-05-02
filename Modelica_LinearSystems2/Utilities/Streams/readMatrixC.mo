@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Utilities.Streams;
 function readMatrixC "Read the output matrix of a state space system"
   extends Internal.partialReadStateSpaceMatrix;
-  extends Modelica.Icons.Function;
 
 public
   output Real C[ny,nx] = matrixABCD[nx + 1:nx + ny, 1:nx];

@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Utilities.Streams;
 function readMatrixD "Read the feed forward matrix of a state space system"
   extends Internal.partialReadStateSpaceMatrix;
-  extends Modelica.Icons.Function;
 
 public
   output Real D[ny,nu] = matrixABCD[nx + 1:nx + ny, nx + 1:nx + nu];
