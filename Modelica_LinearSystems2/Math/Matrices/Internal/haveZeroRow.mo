@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function haveZeroRow
   "Boolean output is true if at least one matrix row is zero vector"
+  extends Modelica.Icons.Function;
 
   input Real A[:,:]=fill(
         0,

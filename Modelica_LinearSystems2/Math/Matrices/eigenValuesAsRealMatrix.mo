@@ -1,8 +1,8 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function eigenValuesAsRealMatrix
   "Return eigenvalues for a real, nonsymmetric matrix in a Real representation (computation with optional balancing)"
-
   extends Modelica.Icons.Function;
+
   input Real A[:, size(A, 1)] "Matrix";
   input Boolean balance=true
     "=true, if A is balanced (pre-scaled) before computation of the eigen values";

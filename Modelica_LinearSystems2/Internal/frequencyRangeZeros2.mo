@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Internal;
 function frequencyRangeZeros2
   "Determine min. and max. frequencies for a vector of zeros (numerator or denominator zeros; provided as Real matrix)"
+  extends Modelica.Icons.Function;
+
   import Modelica.Math;
   import Modelica.Units.SI;
 

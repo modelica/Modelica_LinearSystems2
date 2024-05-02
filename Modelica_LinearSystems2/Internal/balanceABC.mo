@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Internal;
 function balanceABC "Return a balanced form of a system [A,B;C,0] to improve its condition by a state transformation (this function is provided in the trunk version
   of MSL and will be removed once Modelica_LinearSystems2 is based on the next MSL version)"
   extends Modelica.Icons.Function;
+
   input Real A[:, size(A, 1)] "System matrix A";
   input Real B[size(A,1),:] = fill(0.0, size(A,1),0)
     "System matrix B (need not be present)";

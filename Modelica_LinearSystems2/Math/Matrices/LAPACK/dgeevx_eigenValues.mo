@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dgeevx_eigenValues
   "Compute the eigenvalues of matrix A, using lapack routine dgeevx (with balancing)"
+  extends Modelica.Icons.Function;
 
   input Real A[:,size(A, 1)];
   output Real alphaReal[size(A, 1)]

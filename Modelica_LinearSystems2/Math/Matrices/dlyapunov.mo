@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function dlyapunov
   "Solution of continuous-time Lyapunov equation A'X*A - X = C"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica.Math.Matrices.solve;
 

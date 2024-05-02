@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 function rootLocusOfModel
   "Compute and plot the root locus of one parameter of a model (= eigen values of the model that is linearized for every parameter value)"
+  extends Modelica.Icons.Function;
+
   input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));
   input Modelica_LinearSystems2.Records.ParameterVariation modelParam[:]
     "Model parameter to be varied (exactly one) and values for other parameters";

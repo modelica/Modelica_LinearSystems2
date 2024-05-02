@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.Examples;
 function exampleHessenberg
   "Example for the transformation of a matrix to upper Hessenberg form"
+  extends Modelica.Icons.Function;
 
   input String fileName=DataDir + "m.mat"
     "Name of file where the matrix is saved"

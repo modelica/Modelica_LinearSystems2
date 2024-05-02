@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 partial function partialReadStateSpaceMatrix "Read the ABCD matrix of the state space form of a system from MAT file"
   extends Modelica.Icons.Function;
+
   import Modelica.Utilities.Streams.readRealMatrix;
 
   input String fileName = "dslin.mat" "File where matrixName data is stored"

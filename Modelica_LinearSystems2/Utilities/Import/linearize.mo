@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Import;
 function linearize "Linearize a model after simulation up to a given time"
+  extends Modelica.Icons.Function;
+
   import Simulator = DymolaCommands.SimulatorAPI;
 
   input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel));

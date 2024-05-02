@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Controllers.Internal;
 function scaleFactor1 "Return scale factor for first order block"
+  extends Modelica.Icons.Function;
 
   input Real n "(s+n)/(s+d)";
   input Real d "(s+n)/(s+d)";

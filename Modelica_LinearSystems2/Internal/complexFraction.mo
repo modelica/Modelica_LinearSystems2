@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Internal;
 function complexFraction
   "Return z = n[1]*n[2]*...n[end]/(d[1]*d[2]*....*d[end])"
+  extends Modelica.Icons.Function;
+
   input Complex n[:];
   input Complex d[:];
   output Complex z "= n[1]*n[2]*...n[end]/(d[1]*d[2]*....*d[end])";

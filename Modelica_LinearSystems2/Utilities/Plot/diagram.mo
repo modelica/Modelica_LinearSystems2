@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 function diagram "Plot one diagram"
   //import Modelica_LinearSystems2.Utilities.Plot.Types;
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.Utilities.Plot.Internal;
 
   input Modelica_LinearSystems2.Utilities.Plot.Records.Diagram diagram

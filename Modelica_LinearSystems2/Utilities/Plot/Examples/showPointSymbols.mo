@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function showPointSymbols "Show the available point symbols"
+  extends Modelica.Icons.Function;
+
 protected
   Real y1[:]=0:0.2:1.0;
   Real x1[:]=0.01*ones(size(y1, 1));

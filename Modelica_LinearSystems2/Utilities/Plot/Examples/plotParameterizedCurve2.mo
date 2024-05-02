@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function plotParameterizedCurve2 "Plot two circles as parameterized curve"
+  extends Modelica.Icons.Function;
+
   import Modelica.Units.Conversions.from_deg;
   import Modelica.Math.sin;
   import Modelica.Math.cos;

@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dlansy "Norm of a symmetric matrix"
+  extends Modelica.Icons.Function;
 
   input Real A[:,:] "Real symmetric matrix A";
   input String norm="1" "Specifies the norm, i.e. 1, I, F, M";

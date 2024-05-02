@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function householderReflexion
   "Reflect each of the vectors ai of matrix  A=[a1, a2, ..., an] on a plane with orthogonal vector u"
+  extends Modelica.Icons.Function;
+
   import Modelica.Math.Vectors.length;
 
   input Real A[:,:] "Rectangular matrix";

@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function reorderRSF
   "Reorders a real Schur factorization according to a given pattern of the eigenvalues"
+  extends Modelica.Icons.Function;
 
   input Boolean iscontinuous;
   input Real T[:,:];

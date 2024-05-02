@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dpocon
   "Estimates the reciprocal of the condition number (1-norm) of a real symmetric matrix A using the Cholesky factor"
+  extends Modelica.Icons.Function;
 
   input Real cholA[:,size(cholA,1)] "Cholesky factor of matrix A";
   input Real anorm "Norm of A";

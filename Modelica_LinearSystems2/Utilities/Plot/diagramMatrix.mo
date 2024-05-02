@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 function diagramMatrix "Plot several diagrams in matrix layout"
+  extends Modelica.Icons.Function;
+
   input Modelica_LinearSystems2.Utilities.Plot.Records.Diagram diagram[:,:]
     "Properties of a set of diagrams (matrix layout)"
     annotation(Dialog);

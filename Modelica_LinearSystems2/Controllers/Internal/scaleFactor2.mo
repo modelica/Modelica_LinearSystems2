@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Controllers.Internal;
 function scaleFactor2 "Return scale factor for second order block"
+  extends Modelica.Icons.Function;
 
   input Real n1 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";
   input Real n2 "(s^2 + n1*s + n2)/(s^2 + d1*s + d2)";

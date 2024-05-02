@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function householderSimilarityTransformation
   "Calculate the similarity transformation S*A*S of matrix A with symmetric householder matrix S = I - 2u*u'"
+  extends Modelica.Icons.Function;
 
   import Modelica.Math.Vectors.length;
 

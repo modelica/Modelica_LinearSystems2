@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 function printComplexVector "Print elements of vector of complex numbers"
+  extends Modelica.Icons.Function;
+
   import Modelica.Utilities.Streams.print;
 
   input String name "Name of vector c";

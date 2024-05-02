@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function eigenValues
   "Compute eigenvalues and eigenvectors for a real, nonsymmetric matrix (matrix is balanced before eigenvalues are computed)"
-
   extends Modelica.Icons.Function;
 
   input Real A[:, size(A, 1)] "Matrix";

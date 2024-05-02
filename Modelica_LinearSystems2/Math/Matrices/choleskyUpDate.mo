@@ -1,7 +1,9 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function choleskyUpDate
   "Compute the cholesky factor Lu according to Au=Lu'*Lu=A + v*v' with A=L'*L"
+  extends Modelica.Icons.Function;
   import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
   input Real L[:,size(L, 1)] "Cholesky factor";
   input Real v[size(L,1)] "Real vector A+v*v'";
   input Boolean upper=false

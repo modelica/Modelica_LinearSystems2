@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Internal;
 function frequencyRangeBode2
   "Determine min. and max. frequencies for Bode plot (Zeros and Poles as Real matrix)"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.Internal;
 
   input Real Zeros[:,2]

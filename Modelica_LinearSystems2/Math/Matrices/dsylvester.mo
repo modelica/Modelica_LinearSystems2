@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function dsylvester
   "Solution of discrete-time Sylvester equation A*X*B + sgn*X = C"
+  extends Modelica.Icons.Function;
+
   import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices;
 

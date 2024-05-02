@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function sylvester
   "Solution of continuous-time Sylvester equation A*X + X*B = C"
+  extends Modelica.Icons.Function;
+
   import MatricesMSL = Modelica.Math.Matrices;
 
   input Real A[:,:] "Matrix A";

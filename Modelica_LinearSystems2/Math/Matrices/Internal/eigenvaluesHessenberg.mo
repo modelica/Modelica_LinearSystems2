@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function eigenvaluesHessenberg
   "Compute eigenvalues of an upper Hessenberg form matrix"
+  extends Modelica.Icons.Function;
 
   input Real H[:,size(H, 1)];
   output Real alphaReal[size(H, 1)]

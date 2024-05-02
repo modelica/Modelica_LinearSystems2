@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Vectors;
 function householderReflexion_e1
   "Reflect vector a to the unity vector e_1={1,0,...,0}"
+  extends Modelica.Icons.Function;
 
   input Real a[:];
   input Real u[size(a, 1)] "householder vector";

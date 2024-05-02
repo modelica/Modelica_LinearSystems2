@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function triangle "Return the upper/lower triangular part of a square matrix"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.Math.Matrices;
 
   input Real A[:,size(A, 1)] "Square matrix";

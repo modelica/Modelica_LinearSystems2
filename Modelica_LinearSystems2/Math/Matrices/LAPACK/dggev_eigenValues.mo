@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dggev_eigenValues
   "Compute only generalized eigenvalues for a (A,B) system"
+  extends Modelica.Icons.Function;
 
   input Real A[:,size(A, 1)];
   input Real B[size(A, 1),size(A, 1)];

@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Vectors;
 function householderVector
   "Calculate a normalized householder vector to reflect vector a onto vector b"
+  extends Modelica.Icons.Function;
 
   import Modelica.Math.Vectors.norm;
   import Modelica.Math.Vectors.length;

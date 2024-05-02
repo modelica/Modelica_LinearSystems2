@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Controllers.Internal;
 function convertToInit "Convert InitWithGlobalDefault to Init"
+  extends Modelica.Icons.Function;
   import Modelica_LinearSystems2.Controllers.Types;
+
   input Types.InitWithGlobalDefault globalInit;
   input Types.Init sampleInit;
   output Types.Init Init;

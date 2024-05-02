@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Math.Vectors;
 function printStringVectorInHtml
   "Print a string vector in html format on file (without html/body heading)"
+  extends Modelica.Icons.Function;
+
   import Modelica.Utilities.Streams.print;
 
   input String s[:] "String vector";

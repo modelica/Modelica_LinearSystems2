@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 function defaultStepResponseHeadings
   "Compute default headings for step response plot"
+  extends Modelica.Icons.Function;
 
   input Integer sizeB2;
   input Integer sizeC1;

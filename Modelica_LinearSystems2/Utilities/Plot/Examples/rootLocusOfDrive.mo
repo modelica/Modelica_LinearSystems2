@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function rootLocusOfDrive "Plot the root locus of a drive with varying load"
+  extends Modelica.Icons.Function;
+
 algorithm
   Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel(
     "Modelica.Mechanics.Rotational.Examples.First",

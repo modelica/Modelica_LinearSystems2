@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Internal;
 encapsulated function frequencyResponseGain
   "Compute gain of a frequency response (system must be a SISO system)"
+  extends Modelica.Icons.Function;
+
   import Modelica;
   import Modelica_LinearSystems2.Internal;
 
@@ -24,6 +26,8 @@ protected
 
   function getReOutsidePolesZeros
     "Get p on the real axis so that there is a minimum distance to all poles and zeros"
+    extends Modelica.Icons.Function;
+
     input Real Zeros[:,2]
       "Zeros of ss as Real matrix (first column: real, second column imaginary values)";
     input Real Poles[:,2]

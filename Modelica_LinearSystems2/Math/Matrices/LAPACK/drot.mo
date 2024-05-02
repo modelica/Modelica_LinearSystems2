@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function drot "Applies a plane rotation"
+  extends Modelica.Icons.Function;
 
   input Real x[:];
   input Real y[size(x,1)];

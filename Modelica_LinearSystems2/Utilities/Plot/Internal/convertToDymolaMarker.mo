@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Utilities.Plot.Internal;
 function convertToDymolaMarker
   "Convert from marker type of Modelica_LinearSystems2 to Dymola marker"
+  extends Modelica.Icons.Function;
+
   import Symbol = Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol;
 
   input Symbol symbol

@@ -1,18 +1,21 @@
 within Modelica_LinearSystems2.Utilities.Plot.Internal;
 function getLastName "Get last name of a Modelica path name"
-   import Modelica.Utilities.Strings;
-   input String path;
-   output String tail "= last part of path (after the last '.'";
+  extends Modelica.Icons.Function;
+
+  import Modelica.Utilities.Strings;
+
+  input String path;
+  output String tail "= last part of path (after the last '.'";
 protected
-   Integer startIndex;
-   Integer endIndex;
+  Integer startIndex;
+  Integer endIndex;
 algorithm
-   startIndex :=Strings.findLast(path, ".");
-   if startIndex == 0 or startIndex >= Strings.length(path) then
-      tail := path;
-   else
-      tail := Strings.substring(path, startIndex+1, Strings.length(path));
-   end if;
+  startIndex :=Strings.findLast(path, ".");
+  if startIndex == 0 or startIndex >= Strings.length(path) then
+    tail := path;
+  else
+    tail := Strings.substring(path, startIndex+1, Strings.length(path));
+  end if;
   annotation (Documentation(revisions="<html>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Date</th> <th align=\"left\">Description</th></tr>

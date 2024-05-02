@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dtrmm
   "Blas algorithm to perform B := alpha*op( A )*B, or   B := alpha*B*op( A ) with triangular matrix A"
+  extends Modelica.Icons.Function;
 
   input Real A[:,:] "Input matrix A";
   input Real B[:,:] "Input matrix B";

@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Utilities.Plot.Internal;
 function convertToDymolaPattern
   "Convert from pattern type of Modelica_LinearSystems2 to Dymola pattern"
+  extends Modelica.Icons.Function;
+
   import Pattern = Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern;
 
   input Pattern pattern

@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function fromFile "Read matrix from a matlab file"
+  extends Modelica.Icons.Function;
+
   import Modelica.Utilities.Streams;
 
   input String fileName=DataDir + "m.mat"

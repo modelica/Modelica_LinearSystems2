@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 partial function PartialPlotFunction "Interface of a plot function"
+  extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Utilities.Plot;
 

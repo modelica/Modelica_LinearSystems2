@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Controllers.Internal;
 function FIR_coefficients "Calculates the FIR-filter coefficient vector"
+  extends Modelica.Icons.Function;
   import Modelica_LinearSystems2.Utilities.Types.FilterType;
   import Modelica_LinearSystems2.Controllers.Types.FIRspec;
 

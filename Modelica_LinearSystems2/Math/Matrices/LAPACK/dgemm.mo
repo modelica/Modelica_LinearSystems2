@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dgemm
   "Blas algorithm to perform C:=a*op(A)*op(B) + b*C (a,b scalars, ABC matrices)"
+  extends Modelica.Icons.Function;
 
   input Real A[:,:] "Input matrix A";
   input Real B[:,:] "Input matrix B";

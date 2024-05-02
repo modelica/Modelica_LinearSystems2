@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function drotg "Construct Givens plane rotation"
+  extends Modelica.Icons.Function;
 
   input Real a;
   input Real b;

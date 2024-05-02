@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function multiplyWithOrthogonalQ_hr
   "Overwrites the general real M-by-N matrix C with Q * C or C * Q or Q' * C or C * Q', depending on inputs trans and side"
+  extends Modelica.Icons.Function;
 
   input Real C[:,:];
   input Real A[:,:];
