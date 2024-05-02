@@ -1455,7 +1455,7 @@ This function is the <em>second time derivative</em> of the function
       import Modelica_LinearSystems2.Math.Matrices;
       import Modelica_LinearSystems2.Math.Polynomial;
       import Complex;
-  
+
       input Polynomial p "Polynomial";
       input Integer numberOfRoots "Number of roots of polynomial";
       output Complex result[:]=fill(Complex(0, 0), numberOfRoots)
@@ -1466,7 +1466,7 @@ This function is the <em>second time derivative</em> of the function
       Integer n=numberOfRoots;
       Real A[n, n] "Companion matrix";
       Real ev[n, 2] "Eigen values";
-  
+
     algorithm
       assert(numberOfRoots >= 0 and numberOfRoots < nc,
         "Argument numberOfRoots (= " + String(numberOfRoots) +
@@ -1474,12 +1474,12 @@ This function is the <em>second time derivative</em> of the function
       assert(p.c[i_start] <> 0, "p.c[" + String(i_start) +
         "] = 0. Probably wrong argument numberOfRoots (=" + String(numberOfRoots)
          + ")");
-  
+
       if numberOfRoots > 0 then
         // companion matrix
         A[1, :] := -p.c[i_start + 1:nc]/p.c[i_start];
         A[2:n, :] := [identity(n - 1), zeros(n - 1)];
-  
+
         // roots are eigenvalues of companion matrix
         //    ev := Matrices.eigenValues(A);
         (ev[:, 1],ev[:, 2]) := Matrices.Internal.eigenvaluesHessenberg(A);
