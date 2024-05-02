@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function designAssignPolesSISO "Example for pole placing using Ackermann's method"
   extends Modelica.Icons.Function;
-  import Complex;
 
   output Real k[2] "Gain vector";
 
@@ -11,9 +10,7 @@ function designAssignPolesSISO "Example for pole placing using Ackermann's metho
     C=[1,0; 0,1],
     D=[0; 0]);
 protected
-  Complex p[2]={
-    Complex(-3,0),
-    Complex(-4,0)};
+  Complex p[2]={Complex(-3,0), Complex(-4,0)};
 algorithm
   k := Modelica_LinearSystems2.StateSpace.Design.assignPolesSI(sc, p);
 

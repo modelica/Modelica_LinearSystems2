@@ -29,7 +29,6 @@ protected
 
     import Modelica.Utilities.Strings;
     import Modelica.Utilities.Streams.print;
-    import Complex;
 
     input Complex systemZeros[:];
     input Integer nReal;

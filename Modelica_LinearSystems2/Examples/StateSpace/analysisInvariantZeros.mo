@@ -5,7 +5,6 @@ function analysisInvariantZeros
 
   import Modelica.Utilities.Streams.print;
   import Modelica.ComplexMath.j;
-  import Complex;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
 
