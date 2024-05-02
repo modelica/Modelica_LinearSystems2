@@ -1,9 +1,12 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 function plot_FFTs_from_directory
   "Plot amplitudes of FFT results (from result files in existing directory)"
+  extends Modelica.Icons.Function;
+
   import Modelica.Utilities.Internal.FileSystem;
   import Modelica.Utilities.Strings;
   import Modelica_LinearSystems2.Utilities.Plot;
+
   input String directory
     "Existing directory in which result data is present";
   input Boolean logX = false "= trrue, if logarithmic scale of x-axis" annotation(choices(checkBox=true));

@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function plotTwoSineDifferentStyles
   "Plot two sine functions in one diagram with different styles"
+  extends Modelica.Icons.Function;
+
   input Modelica.Units.SI.Frequency freqHz1=2 "Frequency of sine wave 1";
   input Modelica.Units.SI.Frequency freqHz2=3 "Frequency of sine wave 2";
   input Modelica.Units.SI.Damping damping1=0.8

@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.ComplexMathAdds.Internal;
 function eigenValues_dhseqr
   "Compute eingenvalues of a upper Hessenberg matrix using lapack routine DHSEQR"
+  extends Modelica.Icons.Function;
 
   import
     Modelica_LinearSystems2.Math.Matrices.Internal.eigenvaluesHessenberg;

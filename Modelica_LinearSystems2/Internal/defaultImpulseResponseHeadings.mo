@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 function defaultImpulseResponseHeadings
   "Compute default headings for impulse response plot"
+  extends Modelica.Icons.Function;
 
   input Integer sizeB2;
   input Integer sizeC1;

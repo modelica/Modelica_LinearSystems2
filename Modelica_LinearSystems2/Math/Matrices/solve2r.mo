@@ -2,6 +2,7 @@ within Modelica_LinearSystems2.Math.Matrices;
 function solve2r
   "Solve real system of linear equations X*op(A)=B with a B matrix (Gaussian elemination with partial pivoting)"
   extends Modelica.Icons.Function;
+
   import Modelica.Math.Matrices.LAPACK;
 
   input Real A[:,size(A,1)] "Matrix A of X*op(A) = B";

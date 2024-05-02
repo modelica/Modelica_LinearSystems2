@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function reorderRSFd
   "Reorders a real Schur factorization for poleAssignmentMI design for discrete systems"
+  extends Modelica.Icons.Function;
 
   input Real T[:,:] "upper quasi-triangular matrix in Schur canonical form";
   input Real Q[:,size(T, 2)] "matrix of Schur vectors";

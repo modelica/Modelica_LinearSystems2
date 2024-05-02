@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 function parameterizedCurves
   "Plot parametrized curve with one or more branches"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Utilities.Plot.Internal;
 

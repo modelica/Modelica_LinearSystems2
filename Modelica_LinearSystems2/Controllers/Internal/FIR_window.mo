@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Controllers.Internal;
 function FIR_window "Calculation of n-point weighting window for FIR filter"
+  extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Controllers.Types.Window;
   input Integer L "Number of Points";

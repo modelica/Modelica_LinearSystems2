@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function hessenberg2
   "Compute an upper Hessenberg matrix by repeatedly applicated householder similarity transformation"
+  extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.Math.Vectors;

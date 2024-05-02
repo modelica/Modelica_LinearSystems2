@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function lyapunov
   "Solution of continuous-time Lyapunov equation X*A + A'*X = C"
+  extends Modelica.Icons.Function;
+
   import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices;
 

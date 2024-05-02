@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 function defaultColumnLabels "Compute default column labels for plot"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.StateSpace;
 
   input Integer sizeC1;

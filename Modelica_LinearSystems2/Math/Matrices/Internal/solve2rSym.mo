@@ -1,8 +1,8 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function solve2rSym
   "Solve real system of linear equations X*A=B in X where A is symmetrix positive definite"
-
   extends Modelica.Icons.Function;
+
   import MatricesMSL = Modelica.Math.Matrices;
 
   input Real A[:,size(A, 1)] "Matrix A of X*A = B";

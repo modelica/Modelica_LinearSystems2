@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dgelqf "Compute LQ factorization of a real matrix A=L*Q"
+  extends Modelica.Icons.Function;
 
   input Real A[:,:];
   output Real Aout[size(A, 1),size(A, 2)]=A

@@ -1,7 +1,10 @@
 within Modelica_LinearSystems2.Utilities.Plot;
 function plot_FFT_fromFile
   "Plot amplitudes of FFT results (from result file)"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.Utilities.Plot;
+
   input String fileName "File where FFT data is stored"
     annotation (Dialog(
       loadSelector(filter="MATLAB MAT-files (*.mat)",

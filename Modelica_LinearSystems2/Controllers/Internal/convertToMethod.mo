@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Controllers.Internal;
 function convertToMethod "Convert MethodWithGlobalDefault to Method"
+  extends Modelica.Icons.Function;
   import Modelica_LinearSystems2.Controllers.Types;
+
   input Types.MethodWithGlobalDefault globalMethod;
   input Types.Method sampleMethod;
   output Types.Method method;

@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Controllers.Internal;
 function random "Pseudo random number generator"
+  extends Modelica.Icons.Function;
 
   input Integer seedIn[3]
     "Integer vector defining random number sequence, e.g., {23,87,187}";

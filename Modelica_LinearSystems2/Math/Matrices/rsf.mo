@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function rsf "Computes the real Schur form (RSF) of a square matrix"
+  extends Modelica.Icons.Function;
+
   import Modelica.Math.Matrices.LAPACK;
 
   input Real A[:,size(A, 1)];

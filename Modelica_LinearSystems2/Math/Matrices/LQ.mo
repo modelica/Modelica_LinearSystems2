@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function LQ
   "LQ decomposition of a rectangular matrix without column pivoting (A = L*Q)"
+  extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Math.Matrices;
 

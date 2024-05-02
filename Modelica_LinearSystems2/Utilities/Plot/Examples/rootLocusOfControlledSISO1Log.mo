@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function rootLocusOfControlledSISO1Log "Root locus of a SISO system over controller gain k with logarithmic gridding"
+  extends Modelica.Icons.Function;
+
 
 algorithm
   Modelica_LinearSystems2.Utilities.Plot.rootLocusOfModel(

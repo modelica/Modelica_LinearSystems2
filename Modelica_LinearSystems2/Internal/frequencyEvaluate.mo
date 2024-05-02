@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Internal;
 encapsulated function frequencyEvaluate
   "Evaluate a SISO transfer function defined by Zeros and Poles matrices at a given complex value re + j*im"
+  extends Modelica.Icons.Function;
+
   import Modelica;
   import Modelica_LinearSystems2.Internal;
 

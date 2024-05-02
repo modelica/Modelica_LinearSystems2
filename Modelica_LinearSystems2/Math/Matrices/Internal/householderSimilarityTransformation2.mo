@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function householderSimilarityTransformation2
   "Calculate the similarity transformation SAS of matrix A with householder matrix S = I - 2u*u'/(u'*u) to compute a lower Hessenberg form"
+  extends Modelica.Icons.Function;
 
   import Modelica.Math.Vectors.length;
 

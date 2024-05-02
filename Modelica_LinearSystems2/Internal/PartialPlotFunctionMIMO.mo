@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 partial function PartialPlotFunctionMIMO
   "Interface of a plot function for MIMO systems"
+  extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.Utilities.Plot;
 

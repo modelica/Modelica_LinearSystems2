@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Streams;
 function readSystemDimension "Read the order nx of state matrix and the numbers nu and ny of inputs and outputs"
+  extends Modelica.Icons.Function;
+
   import Modelica.Utilities.Streams;
 
   input String fileName = "stateSpace.mat"

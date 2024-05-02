@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.Examples;
 function exampleSVD
   "Example for the usage of dgesdd and dgesvd lapack routines"
+  extends Modelica.Icons.Function;
 
   input String fileName=DataDir + "m.mat"
     annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",

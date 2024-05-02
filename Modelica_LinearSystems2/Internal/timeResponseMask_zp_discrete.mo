@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Internal;
 partial function timeResponseMask_zp_discrete
   "Declares the common structure for the set of discrete response functions"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2;
 
   input Modelica_LinearSystems2.DiscreteZerosAndPoles dzp;

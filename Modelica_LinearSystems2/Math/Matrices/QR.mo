@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function QR
   "QR decomposition of a rectangular matrix without column pivoting (A = Q*R). Return the full square Q-matrix"
+  extends Modelica.Icons.Function;
 
   input Real A[:,:] "Rectangular matrix with size(A,1) >= size(A,2)";
   output Real Q[size(A, 1),size(A, 2)]

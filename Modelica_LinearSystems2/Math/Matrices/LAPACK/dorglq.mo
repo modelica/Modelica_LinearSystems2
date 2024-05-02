@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dorglq
   "Generate a matrix Q with orthonormal rows which is defined as the product of elementary reflectors, as returned by DGELQF"
+  extends Modelica.Icons.Function;
 
   input Real A[:,:] "Orthogonal matrix of elementary reflectors";
   input Real tau[:] "Scalar factors of the elementary reflectors";

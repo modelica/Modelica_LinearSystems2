@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function showLegendStyles
   "Show several vector-diagram plots that demonstrate the various legend options"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.Utilities.Plot.Records;
   import Modelica_LinearSystems2.Utilities.Plot.Types;
 

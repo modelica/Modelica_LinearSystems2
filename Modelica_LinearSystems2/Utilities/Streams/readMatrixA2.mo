@@ -1,7 +1,9 @@
 within Modelica_LinearSystems2.Utilities.Streams;
 function readMatrixA2 "Read the state matrix of a state space system"
+  extends Modelica.Icons.Function;
+
   input String fileName=DataDir + "abcd.mat"
-                              annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+    annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="state space system data file")));
   input String matrixName="ABCD"
     "Name of the generalized state space system matrix";

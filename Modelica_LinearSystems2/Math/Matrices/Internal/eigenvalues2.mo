@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Math.Matrices.Internal;
 function eigenvalues2 "Compute eigenvalues and unnormalized eigenvectors"
+  extends Modelica.Icons.Function;
 
   import Modelica.Math.Matrices.LAPACK;
 

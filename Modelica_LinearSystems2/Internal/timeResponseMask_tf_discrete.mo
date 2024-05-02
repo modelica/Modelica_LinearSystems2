@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Internal;
 partial function timeResponseMask_tf_discrete
   "Declares the common structure for the set of discrete response functions"
+  extends Modelica.Icons.Function;
+
   input Modelica_LinearSystems2.DiscreteTransferFunction dtf;
   input Real tSpan=0 "Simulation time span [s]";
 

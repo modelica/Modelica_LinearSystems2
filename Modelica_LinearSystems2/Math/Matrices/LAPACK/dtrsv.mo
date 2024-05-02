@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dtrsv
   "Solve one of the matrix equations  op( A )*x = B where A is upper or lower triangular matrix. BLAS routine"
+  extends Modelica.Icons.Function;
 
   input Real A[:,:] "Input matrix A";
   input Real b[size(A,2)] "Input vector b";

@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function dare "Solution of discrete-time algebraic Riccati equations"
+  extends Modelica.Icons.Function;
+
   import MatricesMSL = Modelica.Math.Matrices;
   import Modelica.ComplexMath.j;
   import Modelica_LinearSystems2.Math.Matrices;

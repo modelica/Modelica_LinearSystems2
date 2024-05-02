@@ -1,9 +1,10 @@
 within Modelica_LinearSystems2.Math.Matrices.Examples;
 function exampleQR
   "Example for the usage of QR2-function, QR factorization with columns pivoting"
+  extends Modelica.Icons.Function;
 
   input String fileName=DataDir + "m.mat"
-                              annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
+    annotation(Dialog(loadSelector(filter="MAT files (*.mat);; All files (*.*)",
                       caption="matrix file")));
   input String matrixName="A" "Name of the matrix";
 protected

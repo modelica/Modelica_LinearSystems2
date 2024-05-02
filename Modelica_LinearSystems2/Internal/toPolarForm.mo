@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Internal;
 encapsulated function toPolarForm
   "Transform a vector of complex values defined as a real Zeros matrix to polar form"
+  extends Modelica.Icons.Function;
+
   import Modelica;
   import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.Internal;

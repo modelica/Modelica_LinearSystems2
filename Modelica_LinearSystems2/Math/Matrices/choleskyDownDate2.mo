@@ -1,7 +1,10 @@
 within Modelica_LinearSystems2.Math.Matrices;
 function choleskyDownDate2
   "Compute the cholesky factor Ld according to Ad=Ld'*Ld=A - v*v' with A=L'*L"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.Math.Matrices.LAPACK;
+
   input Real L[:,size(L, 1)] "Cholesky factor";
   input Real v[size(L, 1)] "Real vector A+v*v'";
   input Boolean upper=false "True if the upper triangle of A is provided";

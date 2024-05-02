@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 function frequencyRangeBode "Determine min. and max. frequencies for Bode plot"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.Internal;
 
   input Complex numZeros[:] "Zeros of numerator";

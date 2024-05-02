@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples;
 function showLinePatterns "Show the available line patterns"
+  extends Modelica.Icons.Function;
+
 protected
   Real x1[:]={0,1};
   Real y1[:]=x1;

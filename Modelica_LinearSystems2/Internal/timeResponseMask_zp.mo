@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Internal;
 partial function timeResponseMask_zp
   "Declares the common structure for the set of response functions for a zeros and poles transfer function"
+  extends Modelica.Icons.Function;
+
   input ZerosAndPoles zp;
   input Real dt=0 "Sample time [s]";
   input Real tSpan=0 "Simulation time span [s]";

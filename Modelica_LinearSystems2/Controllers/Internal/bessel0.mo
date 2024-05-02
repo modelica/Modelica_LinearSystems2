@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Controllers.Internal;
 function bessel0
   "Polynomial approximation of the zeroth order modified Bessel function"
+  extends Modelica.Icons.Function;
 
   input Real x;
   output Real y;

@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Internal;
 partial function timeResponseMask2_tf
   "Declares the common structure for the set of response functions"
+  extends Modelica.Icons.Function;
+
   input Modelica_LinearSystems2.TransferFunction tf;
   input Real dt=0 "Sample time [s]";
   input Real tSpan=0 "Simulation time span [s]";

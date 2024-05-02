@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 function timeResponseSamples
   "Estimate reasonable discretisation sample time and simulation time span for time response plot"
+  extends Modelica.Icons.Function;
 
   input Modelica_LinearSystems2.StateSpace sc;
   output Real dt "Sample time";

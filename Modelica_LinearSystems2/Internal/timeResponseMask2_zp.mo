@@ -1,6 +1,8 @@
 within Modelica_LinearSystems2.Internal;
 partial function timeResponseMask2_zp
   "Declares the common structure for the set of response functions"
+  extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2;
 
   input Modelica_LinearSystems2.ZerosAndPoles zp;

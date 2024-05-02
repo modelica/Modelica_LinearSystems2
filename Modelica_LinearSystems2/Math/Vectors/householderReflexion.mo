@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Vectors;
 function householderReflexion
   "Reflect vector a on a plane with orthogonal vector u"
+  extends Modelica.Icons.Function;
 
   input Real a[:];
   input Real u[size(a, 1)] "Householder vector";

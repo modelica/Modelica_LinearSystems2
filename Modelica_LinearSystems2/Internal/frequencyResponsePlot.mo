@@ -1,5 +1,7 @@
 within Modelica_LinearSystems2.Internal;
 encapsulated function frequencyResponsePlot "Bode plot given f,A,phi values"
+  extends Modelica.Icons.Function;
+
   import Modelica;
   import Modelica_LinearSystems2.Utilities.Plot;
   import Modelica.Units.SI;

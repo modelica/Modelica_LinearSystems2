@@ -1,6 +1,7 @@
 within Modelica_LinearSystems2.Math.Matrices.LAPACK;
 function dorgqr_x
   "Generates a real orthogonal matrix Q which is defined as the product of elementary reflectors, as returned by DGEQRF"
+  extends Modelica.Icons.Function;
 
   input Real Q[:,:] "Orthogonal matrix as a result of elementary reflectors";
   input Real tau[:] "scalar factors of the elementary reflectors";

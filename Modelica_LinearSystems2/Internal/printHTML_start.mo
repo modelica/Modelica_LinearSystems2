@@ -1,5 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 function printHTML_start "Print start of html file"
+  extends Modelica.Icons.Function;
 
   import Modelica.Utilities.Streams.print;
 
