@@ -673,14 +673,14 @@ the conversion.
 
 <ul>
   <li>
-    Modelica_LinearSystems2.Controller.Examples.Components.<strong>DoublePendulum</strong>: use
+    Modelica_LinearSystems2.Controller.Examples.Components.<strong>DoublePendulum</strong>:
     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plants.DoublePendulum\">Plants.DoublePendulum</a>
-    instead.
+    can be used instead. Make sure of using your parameter values since the two models differ in some parameters.
   </li>
   <li>
-    Modelica_LinearSystems2.Controller.Examples.Components.<strong>InverseDoublePendulum</strong>: use
+    Modelica_LinearSystems2.Controller.Examples.Components.<strong>InverseDoublePendulum</strong>:
     <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plants.DoublePendulumInverse\">Plants.DoublePendulumInverse</a>
-    instead.
+    can be used instead. Make sure of using your parameter values since the two models differ in some parameters.
   </li>
   <li>
     Modelica_LinearSystems2.Controller.Templates.Internal.<strong>PartialPlantSISO</strong>: use
@@ -779,9 +779,6 @@ the conversion.
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgeqrf</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dgetrs</li>
   <li>Modelica_LinearSystems2.Math.Matrices.LAPACK.dhseqr</li>
-</ul>
-
-<ul>
   <li>Modelica_LinearSystems2.Math.Matrices.cholesky</li>
   <li>Modelica_LinearSystems2.Math.Matrices.conditionNumber</li>
   <li>Modelica_LinearSystems2.Math.Matrices.det</li>
