@@ -31,11 +31,11 @@ annotation (
   Documentation(
     info="<html>
 <p>
-Library <strong>Modelica_LinearSystems2</strong> is a Modelica package
+Library <strong>Modelica_LinearSystems2</strong> is a&nbsp;Modelica package
 providing different representations of linear, time invariant differential and
 difference equation systems. For example, record
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace\">StateSpace</a>
-defines a linear time invariant differential
+defines a&nbsp;linear time invariant differential
 equation system in state space form:
 </p>
 <blockquote><pre>
@@ -45,25 +45,25 @@ der(<strong>x</strong>) = <strong>A</strong> * <strong>x</strong> + <strong>B</s
 <p>
 Operators are overloaded to work conveniently with these system descriptions in an
 interactive environment, e.g. to multiply transfer functions or to operate on complex numbers.
-About 180 functions are provided to operate
+About 230 functions are provided to operate
 on these data structures, e.g. to compute eigenvalues, zeros, step responses,
 to design pole-placement and LQG controllers, to plot step responses, frequency responses,
 eigenvalues, to convert between different description forms, or to
-generate a linear system description by linearization of a Modelica model.
+generate a&nbsp;linear system description by linearization of a&nbsp;Modelica model.
 </p>
 
 <p>
 Furthermore, in subpackage
-<a href=\"modelica://Modelica_LinearSystems2.Controller\">Controller</a>
+<a href=\"modelica://Modelica_LinearSystems2.Controllers\">Controllers</a>
 about 20 input/output blocks of linear systems are provided that are
-based on the different representation forms, e.g. PID, StateSpace, Filter blocks.
-A unique feature of these blocks is that it is very convenient to quickly switch
-between a continuous and a discrete block representation. Also, templates are provided
+based on the different representation forms, e.g. PID, StateSpace or Filter blocks.
+A&nbsp;unique feature of these blocks is that it is very convenient to quickly switch
+between a&nbsp;continuous and a&nbsp;discrete block representation. Also, templates are provided
 to quickly built-up standard controller structures.
 </p>
 
 <p>
-For an introduction, have especially a look at:
+For an introduction, have especially a&nbsp;look at:
 </p>
 <ul>
 <li> <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted\">Getting started</a>
@@ -78,44 +78,24 @@ For an introduction, have especially a look at:
      &quot;Modelica_LinearSystems2/Resources/Scripts&quot; first,
      in order to set useful abbreviations for e.g. ss, tf, zp, poly, j, etc.
      It is not necessary to import the package Complex since it is handled as
-     a&nbsp;built-in complex number type within Dymola.</li>
+     a&nbsp;built-in complex number type within Dymola.
+     See also 
+     <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">ComplexNumbers</a>
+     in the <a href=\"modelica://Modelica_LinearSystems2.UsersGuide\">User's Guide</a>.</li>
 </ul>
 
 <p>
-It is planned to include this library in a future version of the
+It is planned to include this library in a&nbsp;future version of the
 Modelica Standard Library.
 </p>
 
-
 <p>
-<strong>Licensed by DLR under the 3-Clause BSD License</strong><br>
-</p>
-
-<table border=\"0\" cellpadding=\"2\" cellspacing=\"2\">
-<tr>
-  <td colspan=\"1\" rowspan=\"2\" style=\"vertical-align: middle;\">
-    <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dlr_logo.png\">
-  </td>
-  <td style=\"vertical-align: top;\"><strong>Copyright &copy; 2005-2012, DLR Institute of Robotics and Mechatronics</strong></td>
-</tr>
-<tr>
-  <td style=\"vertical-align: top;\"><strong>Copyright &copy; 2012-2024, DLR Institute of System Dynamics and Control</strong></td>
-</tr>
-</table>
-
-<p>
-<em>
-This Modelica package is <u>free</u> software and
-the use is completely at <u>your own risk</u>;
-it can be redistributed and/or modified under the terms of the
-3-Clause BSD license, see the license conditions (including the
-disclaimer of warranty) in the
-<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.The3clauseBSDLicense\">User's Guide</a>.
-</em>
+For <strong>copyright</strong> and BSD 3-clause <strong>license</strong>, see
+<a href=\"modelica://Modelica_LinearSystems2.UsersGuide.The3clauseBSDLicense\">Copyright and License agreement</a>.
 </p>
 
 <p>
-<strong>Modelica&reg;</strong> is a registered trademark of the Modelica Association.
+<strong>Modelica&reg;</strong> is a&nbsp;registered trademark of the Modelica Association.
 </p>
 </html>"));
 end Modelica_LinearSystems2;
