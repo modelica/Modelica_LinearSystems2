@@ -86,7 +86,7 @@ equation
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,-100},{140,100}}),
       graphics={
-      	Text(
+        Text(
           extent={{44,76},{134,64}},
           textColor={0,0,0},
           textString="disturbance"),

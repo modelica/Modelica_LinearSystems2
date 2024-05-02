@@ -35,7 +35,7 @@ equation
 </html>"),
     Icon(
       graphics={
-      	Line(
+        Line(
           points={{-100,-100},{100,100}},
           color={95,95,95},
           smooth=Smooth.None),
