@@ -63,7 +63,7 @@ results in the following equations:
         extent={{-100,-100},{100,100}},
         grid={2,2}),
     graphics={
-    	Text(
+      Text(
         extent={{-88,-62},{92,58}},
         textColor={160,160,164},
         textString="*[kij]")}));

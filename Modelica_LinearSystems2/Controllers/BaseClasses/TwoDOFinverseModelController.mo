@@ -66,7 +66,7 @@ equation
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
       graphics={
-      	Text(
+        Text(
           extent={{-58,42},{-2,36}},
           textColor={0,0,0},
           textString="inverted system")}),
