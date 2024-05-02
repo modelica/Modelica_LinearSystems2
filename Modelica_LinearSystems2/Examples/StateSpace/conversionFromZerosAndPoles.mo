@@ -6,7 +6,6 @@ function conversionFromZerosAndPoles
   import Modelica.ComplexMath.j;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Complex;
 
 protected
   input ZerosAndPoles zp= ZerosAndPoles({2+0*j}, {1+0*j,2+3*j,2-3*j}, 4);

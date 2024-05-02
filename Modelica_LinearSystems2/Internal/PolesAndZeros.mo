@@ -1,7 +1,6 @@
 within Modelica_LinearSystems2.Internal;
 record PolesAndZeros
   "Record containing poles and zeros of a system in two real vectors containing the real parts and the imaginary parts respctively"
-  //import Complex;
   extends Modelica.Icons.Record;
 
   Real p_real[:];

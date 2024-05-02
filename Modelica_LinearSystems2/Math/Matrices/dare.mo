@@ -5,7 +5,6 @@ function dare "Solution of discrete-time algebraic Riccati equations"
   import MatricesMSL = Modelica.Math.Matrices;
   import Modelica.ComplexMath.j;
   import Modelica_LinearSystems2.Math.Matrices;
-  import Complex;
 
   input Real A[:,size(A, 1)];
   input Real B[size(A, 1),:];

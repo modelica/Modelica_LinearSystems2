@@ -4,7 +4,6 @@ function findLocal_tk
   extends Modelica.Icons.Function;
 
   import Modelica.ComplexMath;
-  import Complex;
   import Modelica_LinearSystems2.Math.Polynomial;
 
   input Real Rk[:,size(Rk, 2)];
