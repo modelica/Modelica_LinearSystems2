@@ -456,7 +456,7 @@ email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
 <p>
 Copyright 
 <br>&copy; 2005-2012, DLR Institute of Robotics and Mechatronics
-<br>&copy; 2012-2020, DLR Institute of System Dynamics and Control.
+<br>&copy; 2012-2024, DLR Institute of System Dynamics and Control.
 <br>All rights reserved.
 </p>
 <p>
@@ -543,7 +543,7 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_3_0_0 "Version 3.0.0-dev (June 21, 2024)"
+    class Version_3_0_0 "Version 3.0.0 (June 21, 2024)"
       extends Modelica.Icons.ReleaseNotes;
 
       annotation (Documentation(info="<html>

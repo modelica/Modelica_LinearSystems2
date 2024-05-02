@@ -1629,12 +1629,12 @@ instead.
     preferredView="info",
     version="3.0.0",
     versionDate="2024-06-21",
-    dateModified = "2024-03-26 10:00:00Z",
+    dateModified = "2024-05-02 14:00:00Z",
     revisionId="$Format:%h %ci$",
     uses(
       Modelica(version="4.0.0"),
       Complex(version="4.0.0"),
-      Modelica_LinearSystems2(version="3.0.0-dev")),
+      Modelica_LinearSystems2(version="3.0.0")),
     Documentation(info="<html>
 <p>
 This package contains functions and blocks from the Modelica_LinearSystems2 Library
