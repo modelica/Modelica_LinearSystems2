@@ -564,14 +564,32 @@ Improvements in this version
 </h4>
 <ul>
   <li>
+    <a href=\"modelica://Modelica_LinearSystems2.ModelAnalysis.FullAnalysis\">FullAnalysis</a>
+    and 
+    <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.analysis\">StateSpace.Analysis.analysis</a>
+    return the full path name of report file on output.
+  </li>
+  <li>
+    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams.stateSpaceString_html\">Streams.stateSpaceString_html</a>:
+    bug fix: print state space matrix&nbsp;<code>C</code> of proper size.
+  </li>
+  <li>
     <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.degree\">Polynomial.degree</a>:
     fix wrong calculation of polynomial degree&nbsp;<var>n</var> for zero polynomial coefficients 
     <code>c[1]</code> to <code>c[m]</code> and non-zero <code>c[m+1]</code>, with
     <code>m&nbsp;&lt&nbsp;length(c)</code>.
   </li>
   <li>
-    <a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams.stateSpaceString_html\">Streams.stateSpaceString_html</a>:
-    bug fix: print state space matrix&nbsp;<code>C</code> of proper size.
+    Add second second time derivative of polynomial
+    (<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.Internal.evaluate_dder\">evaluate_dder</a>),
+    see also example 
+    (<a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.Examples.MoveMassByPolynomial\">MoveMassByPolynomial</a>),
+  </li>
+  <li>
+    Instantiate imaginary unit&nbsp;j of complex numbers only by <code>import Modelica.ComplexMath.j;</code>
+  </li>
+  <li>
+    Documentation and fixed broken links.
   </li>
 </ul>
 
