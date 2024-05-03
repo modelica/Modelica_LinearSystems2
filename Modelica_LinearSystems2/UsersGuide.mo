@@ -549,7 +549,7 @@ This library is based on the following references:
       annotation (Documentation(info="<html>
 <p>
 This version requires the <strong>Modelica 4.0.0</strong> Library.
-It is <strong>not</strong> backward compatible to previous versions 2.X.Y od the Library.
+It is <strong>not backward compatible</strong> to previous versions 2.X.Y od the Library.
 </p>
 
 <p>
@@ -557,6 +557,11 @@ A tested conversion script is provided to transform functions and blocks
 of previous versions 2.X.Y to this new version.
 Obsolete classes that could not be automatically converted to alternative
 implementations have been moved to library ObsoleteLinearSystems2.</li>
+</p>
+
+<p>
+For list of <strong>all resolved issues</strong>, refer to
+<a href=\"modelica://Modelica_LinearSystems2/Resources/Documentation/Version-3.0.0/ResolvedGitHubIssues.html\">ResolvedGitHubIssues.html</a>.
 </p>
 
 <h4>
