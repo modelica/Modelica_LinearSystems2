@@ -3,7 +3,6 @@ function frequencyVector2
   "Determine frequency vector for Bode plot (using Real matrices for zeros and poles)"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Internal;
   import Modelica.Units.SI;
 
   input Real Zeros[:,2]

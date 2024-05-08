@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.Internal;
 function frequencyVector "Determine frequency vector for Bode plot"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Internal;
   import Modelica.Units.SI;
 
   input Integer nPoints(min=2) = 200 "Number of points";

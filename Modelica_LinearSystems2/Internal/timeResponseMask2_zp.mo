@@ -3,8 +3,6 @@ partial function timeResponseMask2_zp
   "Declares the common structure for the set of response functions"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2;
-
   input Modelica_LinearSystems2.ZerosAndPoles zp;
   input Real dt=0 "Sample time [s]";
   input Real tSpan=0 "Simulation time span [s]";

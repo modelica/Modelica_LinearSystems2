@@ -4,7 +4,6 @@ function lyapunov
   extends Modelica.Icons.Function;
 
   import MatricesMSL = Modelica.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Matrices;
 
   input Real A[:,size(A, 1)];
   input Real C[size(A, 1),size(A, 2)];
@@ -31,7 +30,7 @@ public
 
 algorithm
   if n > 1 then
-    (R,U) := Matrices.rsf(transpose(A));
+    (R,U) := Modelica_LinearSystems2.Math.Matrices.rsf(transpose(A));
     C2 := transpose(U)*C*U;
     X := zeros(n, n);
 

@@ -3,12 +3,11 @@ function dlyapunov
   "Solution of continuous-time Lyapunov equation A'X*A - X = C"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Matrices;
-  import Modelica.Math.Matrices.solve;
+  import MatricesMSL = Modelica.Math.Matrices;
 
   input Real A[:,size(A, 1)];
   input Real C[size(A, 1),size(A, 2)];
-  input Real eps=Modelica.Math.Matrices.norm(A,1)*10*Modelica.Constants.eps;
+  input Real eps=MatricesMSL.norm(A,1)*10*Modelica.Constants.eps;
 
 protected
   Integer n=size(A, 1);
@@ -33,7 +32,7 @@ algorithm
 //    Y := zeros(n,n);
     k := n;
   if n > 1 then
-    (R,U) := Matrices.rsf(transpose(A));
+    (R,U) := Modelica_LinearSystems2.Math.Matrices.rsf(transpose(A));
     C2 := transpose(U)*C*U;
 
   while k > 0 loop
@@ -46,8 +45,8 @@ algorithm
       for i in 1:n loop
         R22[i,i] := R22[i,i]-1.0;
       end for;
-//      Y[:,k] := solve(R22,bk);
-      X[:,k] := solve(R22,bk);
+//      Y[:,k] := MatricesMSL.solve(R22,bk);
+      X[:,k] := MatricesMSL.solve(R22,bk);
       k:=k-1;
    else
 //       bk1:=C2[:,k-1]-R*Y[:,k+1:n]*R[k-1,k+1:n];
@@ -58,7 +57,7 @@ algorithm
          R11[i,i] := R11[i,i] -1.0;
          R22[i,i] := R22[i,i] -1.0;
        end for;
-       yk :=solve([R11,  R[k-1,k]*R; R[k,k-1]*R,  R22], cat(1,bk1,bk));
+       yk := MatricesMSL.solve([R11,  R[k-1,k]*R; R[k,k-1]*R,  R22], cat(1,bk1,bk));
 //       Y[:,k-1]:=yk[1:n];
 //       Y[:,k]:=yk[n + 1:2*n];
        X[:,k-1]:=yk[1:n];
