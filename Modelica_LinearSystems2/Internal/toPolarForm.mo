@@ -4,12 +4,10 @@ encapsulated function toPolarForm
   extends Modelica.Icons.Function;
 
   import Modelica;
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Internal;
 
   input Real Zeros[:,2]
     "Zeros as Real matrix (first column: real, second column imaginary values)";
-  output Real A[size(Zeros,1)] "Amplitudes of Zeros";
+  output Real A[size(Zeros,1)] "Amplitudes of zeros";
   output Modelica.Units.SI.Angle phi[size(Zeros, 1)] "Angles of zeros";
   output Boolean oneZeroAmplitude
     "=true: at least one element of Zeros has zero amplitude";

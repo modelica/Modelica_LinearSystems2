@@ -4,7 +4,6 @@ function dsylvester
   extends Modelica.Icons.Function;
 
   import MatricesMSL = Modelica.Math.Matrices;
-  import Modelica_LinearSystems2.Math.Matrices;
 
   input Real A[:,size(A, 1)] "Square matrix A in A*X*B + sgn*X = C";
   input Real B[:,size(B, 1)] "Square matrix B in A*X*B + sgn*X = C";

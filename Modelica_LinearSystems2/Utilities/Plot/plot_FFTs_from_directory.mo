@@ -36,7 +36,7 @@ algorithm
   end for;
 
   // Sort the files
-  fft_filesSorted := Modelica.Utilities.Strings.sort(fft_files[1:nFFT]);
+  fft_filesSorted := Strings.sort(fft_files[1:nFFT]);
 
   // Plot the files
   for i in 1:nFFT loop

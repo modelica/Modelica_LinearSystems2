@@ -3,9 +3,6 @@ function plot_FFTs_of_model
   "Plot amplitudes of FFT results (from result files of translated model)"
   extends Modelica.Icons.Function;
 
-  import Modelica.Utilities.Streams.print;
-  import Modelica_LinearSystems2.Utilities.Plot.Internal;
-
   input String modelName
     "Model that was used to generate FFT data (FFT result files are stored in directory <modelName>)" annotation(Dialog(__Dymola_translatedModel=true));
   input Boolean logX = false "= trrue, if logarithmic scale of x-axis" annotation(choices(checkBox=true));
@@ -15,7 +12,8 @@ protected
 algorithm
   // Check if directory exists
   if not Modelica.Utilities.Files.exist(directory) then
-    print("... Do not find FFT result files, because no directory : " +
+    Modelica.Utilities.Streams.print(
+      "... Do not find FFT result files, because no directory : " +
       Modelica.Utilities.Files.fullPathName(directory));
     return;
   end if;

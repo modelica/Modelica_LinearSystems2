@@ -3,8 +3,6 @@ function LQ
   "LQ decomposition of a rectangular matrix without column pivoting (A = L*Q)"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2.Math.Matrices;
-
   input Real A[:,:] "Rectangular matrix";
   output Real L[size(A, 1),size(A,1)]
     "Rectangular matrix containing the lower triangular matrix";
