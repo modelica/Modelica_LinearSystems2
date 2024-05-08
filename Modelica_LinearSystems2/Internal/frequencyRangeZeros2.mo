@@ -11,8 +11,8 @@ function frequencyRangeZeros2
   input SI.Angle phi_min(min=10*Modelica.Constants.eps)=
     Modelica.Units.Conversions.from_deg(5) "Minimum phase angle";
   input Real real_min(min=0) = 1.e-4 "|r| < real_min are treated as |real_min|";
-  output Modelica.Units.SI.AngularVelocity w_min "Minimum frequency";
-  output Modelica.Units.SI.AngularVelocity w_max "Maximum frequency";
+  output SI.AngularVelocity w_min "Minimum frequency";
+  output SI.AngularVelocity w_max "Maximum frequency";
   output Boolean useFullRange = true;
 protected
   Integer nz=size(Zeros, 1);
