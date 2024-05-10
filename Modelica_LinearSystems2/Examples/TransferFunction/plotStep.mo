@@ -7,10 +7,7 @@ function plotStep "Step plot example"
   input TransferFunction tf=TransferFunction({1}, {1,1,1});
 
 algorithm
-  Modelica_LinearSystems2.TransferFunction.Plot.step(
-    tf=tf,
-    dt=0.1,
-    tSpan=10);
+  TransferFunction.Plot.step(tf, 0.1, 10);
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>

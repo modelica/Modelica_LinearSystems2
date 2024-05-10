@@ -7,10 +7,7 @@ function plotImpulse "Impulse plot example"
   input TransferFunction tf=TransferFunction(n={1}, d={1,1,1});
 
 algorithm
-  Modelica_LinearSystems2.TransferFunction.Plot.impulse(
-    tf=tf,
-    dt=0.1,
-    tSpan=10);
+  TransferFunction.Plot.impulse(tf, 0.1, 10);
 
   annotation (
     __Dymola_interactive=true,
