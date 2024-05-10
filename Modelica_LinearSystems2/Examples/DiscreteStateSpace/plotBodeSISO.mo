@@ -3,7 +3,7 @@ function plotBodeSISO "Bode plot of a discrete state space system"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.DiscreteStateSpace;
-  input DiscreteStateSpace dss=Modelica_LinearSystems2.DiscreteStateSpace(
+  input DiscreteStateSpace dss = DiscreteStateSpace(
     A=[0.995166584721977,0.0950040833529266,0.0,0.0,0.0,0.0; -0.0950040833529266,
        0.90016250136905,0.0,0.0,0.0,0.0; 0.00676921321653657,0.00700084602310958,
        0.98598654522888,0.0901824307998049,0.0,0.0; 0.128272800176598,0.135042013393134,
@@ -28,7 +28,7 @@ algorithm
   assert(iy <= size(dss.C, 1) and iy > 0, "index for output is " + String(iy) + " which is not in [1, "
      + String(size(dss.C, 1)) + "].");
 
-  Modelica_LinearSystems2.DiscreteStateSpace.Plot.bodeSISO(dss, iu,  iy);
+  DiscreteStateSpace.Plot.bodeSISO(dss, iu,  iy);
   ok := true;
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
