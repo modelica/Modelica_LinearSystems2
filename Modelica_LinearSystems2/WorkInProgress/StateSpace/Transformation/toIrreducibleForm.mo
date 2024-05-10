@@ -12,7 +12,7 @@ function toIrreducibleForm
   input StateSpace ss "State space system";
 
 protected
-  Modelica_LinearSystems2.Internal.StateSpaceR ssm1 = WorkInProgress.StateSpace.Internal.reducedCtrSystem(ss);
+  Modelica_LinearSystems2.Internal.StateSpaceR ssm1 = StateSpace.Internal.reducedCtrSystem(ss, 2e-10);
   Integer nx=size(ss.A, 1);
   Integer rankQ=ssm1.r;
   StateSpace ss2=StateSpace(
@@ -22,7 +22,7 @@ protected
         D=ssm1.D);
   Integer nx2=ssm1.r;
   Modelica_LinearSystems2.Internal.StateSpaceR ssm2=
-      WorkInProgress.StateSpace.Internal.reducedCtrSystem(ss2);
+      StateSpace.Internal.reducedCtrSystem(ss2, 2e-10);
   Integer rankQ2=ssm2.r;
 public
   output StateSpace ssm3(
