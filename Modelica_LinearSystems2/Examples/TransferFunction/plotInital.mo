@@ -9,7 +9,7 @@ function plotInital "Initial condition plot example"
 protected
   Real y0=1 "Initial state vector";
 algorithm
-  Modelica_LinearSystems2.TransferFunction.Plot.initialResponse(tf=tf, y0=y0, dt=0.1, tSpan=10);
+  TransferFunction.Plot.initialResponse(tf=tf, y0=y0, dt=0.1, tSpan=10);
 
   annotation (
     __Dymola_interactive=true,

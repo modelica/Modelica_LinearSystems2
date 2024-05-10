@@ -12,13 +12,13 @@ protected
   TransferFunction tf2 = (s^3 + 4*s + 1)/(s^4 + 2*s^3 + 3*s^2 + 4*s);
 
 algorithm
-  Modelica_LinearSystems2.TransferFunction.Plot.polesAndZeros(
+  TransferFunction.Plot.polesAndZeros(
     tf=tf1,
     defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
       heading="Poles and zeros of " + String(tf1)));
 
 /*
-  Modelica_LinearSystems2.TransferFunction.Plot.polesAndZeros(
+  TransferFunction.Plot.polesAndZeros(
     tf=tf2,
     defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
       heading="Poles and zeros of " + String(tf2)),

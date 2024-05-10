@@ -36,22 +36,22 @@ protected
     f_cut=f_cut,
     A_ripple=A_ripple);
 algorithm
-  Modelica_LinearSystems2.TransferFunction.Plot.bode(
+  TransferFunction.Plot.bode(
     tf1,
     autoRange=false,
     f_min=f_min,
     f_max=f_max);
-  Modelica_LinearSystems2.TransferFunction.Plot.bode(
+  TransferFunction.Plot.bode(
     tf2,
     autoRange=false,
     f_min=f_min,
     f_max=f_max);
-  Modelica_LinearSystems2.TransferFunction.Plot.bode(
+  TransferFunction.Plot.bode(
     tf3,
     autoRange=false,
     f_min=f_min,
     f_max=f_max);
-  Modelica_LinearSystems2.TransferFunction.Plot.bode(
+  TransferFunction.Plot.bode(
     tf4,
     autoRange=false,
     f_min=f_min,
