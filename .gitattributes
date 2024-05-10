@@ -7,6 +7,7 @@
 .gitattributes export-ignore
 .github export-ignore
 .gitignore export-ignore
-LinearSystems2TestConversion3.mo export-ignore
 Modelica_LinearSystems2/Resources/Documentation/Generate-ReleaseNotes.py export-ignore
 Modelica_LinearSystems2/Resources/Documentation/MLS2-ReleaseNotes-Template.html export-ignore
+LinearSystems2Test export-ignore
+LinearSystems2TestConversion3.mo export-ignore
