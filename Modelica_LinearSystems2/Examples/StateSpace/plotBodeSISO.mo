@@ -20,13 +20,9 @@ function plotBodeSISO
   output Boolean ok;
 
 protected
-  StateSpace ss=if systemOnFile then Modelica_LinearSystems2.StateSpace.Import.fromFile(
-      fileName) else
-      StateSpace(
-      A=A,
-      B=B,
-      C=C,
-      D=D);
+  StateSpace ss = if systemOnFile then
+    StateSpace.Import.fromFile(fileName) else
+    StateSpace(A=A, B=B, C=C, D=D);
 
 algorithm
   assert(iu <= size(ss.B, 2) and iu > 0, "index for input is " + String(iu) +
@@ -34,10 +30,7 @@ algorithm
   assert(iy <= size(ss.C, 1) and iy > 0, "index for output is " + String(iy) +
     " which is not in [1, " + String(size(ss.C, 1)) + "].");
 
-  Modelica_LinearSystems2.StateSpace.Plot.bodeSISO(
-    ss,
-    iu,
-    iy);
+  StateSpace.Plot.bodeSISO(ss, iu, iy);
   ok := true;
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>

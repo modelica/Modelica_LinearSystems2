@@ -3,9 +3,10 @@ function analysisStepResponse "Step response example"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;
+  import Modelica_LinearSystems2.Utilities.Plot;
 
 protected
-  Modelica_LinearSystems2.StateSpace sc=Modelica_LinearSystems2.StateSpace(
+  StateSpace sc=StateSpace(
     A=[-1,1; 0,-2],
     B=[1,0; 0,1],
     C=[1,0; 0,1],
@@ -21,35 +22,23 @@ public
 
 algorithm
   (y,t,x_continuous) :=
-    Modelica_LinearSystems2.StateSpace.Analysis.stepResponse(
+    StateSpace.Analysis.stepResponse(
       sc=sc,
       dt=0.1,
       tSpan=5);
 
-  Modelica_LinearSystems2.Utilities.Plot.diagramVector({
-    Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
+  Plot.diagramVector({
+    Plot.Records.Diagram(
       curve={
-        Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-          x=t,
-          y=y[:,1,1],
-          legend="y1"),
-        Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-          x=t,
-          y=y[:,2,1],
-          legend="y2")},
+        Plot.Records.Curve(x=t, y=y[:,1,1], legend="y1"),
+        Plot.Records.Curve(x=t, y=y[:,2,1], legend="y2")},
       heading="Step response to u1",
       xLabel="time [s]",
       yLabel="y1, y2"),
-    Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
+    Plot.Records.Diagram(
       curve={
-        Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-          x=t,
-          y=y[:,1,2],
-          legend="y1"),
-        Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-          x=t,
-          y=y[:,2,2],
-          legend="y2")},
+        Plot.Records.Curve(x=t, y=y[:,1,2], legend="y1"),
+        Plot.Records.Curve(x=t, y=y[:,2,2], legend="y2")},
       heading="Step response to u2",
       xLabel="time [s]",
       yLabel="y1, y2")});

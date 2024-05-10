@@ -2,9 +2,11 @@ within Modelica_LinearSystems2.Examples.StateSpace;
 function analysisTimeResponse "Compute time response of a state space system"
   extends Modelica.Icons.Function;
 
+  import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
+  import Modelica_LinearSystems2.Utilities.Plot;
 
-  input Modelica_LinearSystems2.StateSpace sc=Modelica_LinearSystems2.StateSpace(
+  input StateSpace sc=StateSpace(
     A=[-1,1; 0,-2],
     B=[1,0; 0,1],
     C=[1,0; 0,1],
@@ -31,39 +33,27 @@ algorithm
   //   u,
   //   x0);
 
-  (y,t,x) := Modelica_LinearSystems2.StateSpace.Analysis.timeResponse(response,sc,dt, span);
+  (y,t,x) := StateSpace.Analysis.timeResponse(response,sc,dt, span);
 
-  // Modelica_LinearSystems2.Utilities.Plot.diagram(
-  //   Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
-  //   curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-  //     x=t,
-  //     y=y[:, 1, 1],
-  //     legend="y1"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-  //     x=t,
-  //     y=y[:, 2, 2],
-  //     legend="y2")},
-  //   heading="Step response to synchronous step of u1 and u2",
-  //   xLabel="time [s]",
-  //   yLabel="y1, y2"));
+  // Plot.diagram(
+  //   Plot.Records.Diagram(
+  //     curve={
+  //       Plot.Records.Curve(x=t, y=y[:, 1, 1], legend="y1"),
+  //       Plot.Records.Curve(x=t, y=y[:, 2, 2], legend="y2")},
+  //     heading="Step response to synchronous step of u1 and u2",
+  //     xLabel="time [s]",
+  //     yLabel="y1, y2"));
 
-  Modelica_LinearSystems2.Utilities.Plot.diagram(
-    Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
-    curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-      x=t,
-      y=y[:, 1, 1],
-      legend="y1_1"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-      x=t,
-      y=y[:, 1, 2],
-      legend="y1_2"), Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-      x=t,
-      y=y[:, 2, 1],
-      legend="y2_1"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-      x=t,
-      y=y[:, 2, 2],
-      legend="y2_2")},
-    heading="Step response to synchronous step of u1 and u2",
-    xLabel="time [s]",
-    yLabel="y1, y2"));
+  Plot.diagram(
+    Plot.Records.Diagram(
+      curve={
+        Plot.Records.Curve(x=t, y=y[:, 1, 1], legend="y1_1"),
+        Plot.Records.Curve(x=t, y=y[:, 1, 2], legend="y1_2"),
+        Plot.Records.Curve(x=t, y=y[:, 2, 1], legend="y2_1"),
+        Plot.Records.Curve(x=t, y=y[:, 2, 2], legend="y2_2")},
+      heading="Step response to synchronous step of u1 and u2",
+      xLabel="time [s]",
+      yLabel="y1, y2"));
   annotation (
     __Dymola_interactive=true,
     Documentation(info="<html>

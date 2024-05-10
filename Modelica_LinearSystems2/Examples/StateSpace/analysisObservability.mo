@@ -6,7 +6,7 @@ function analysisObservability
   import Modelica_LinearSystems2.StateSpace;
   import Modelica.Utilities.Streams.print;
 
-  input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
+  input StateSpace ssi = StateSpace(
     A=[1,2,3,4,5,6; 5,6,7,8,9,4; 0,2,3,0,78,6; 1,1,2,2,3,3; 10,13,34,0,0,1; 0,0,0,2,0,1],
     B=[1,0; 2,0; 0,1; 0,2; 0,0; 0,1],
     C=[1,0,1,0,1,0; 0,1,0,0,0,0],
@@ -24,9 +24,7 @@ function analysisObservability
   output Boolean ok;
 
 protected
-  StateSpace ss = if systemOnFile then
-    Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName) else ssi;
-
+  StateSpace ss = if systemOnFile then StateSpace.Import.fromFile(fileName) else ssi;
   Boolean isObservable;
   Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method;
   Boolean isSISO=StateSpace.Internal.isSISO(ss);

@@ -4,7 +4,7 @@ function designLQR "Example for LQR controller design"
 
   import Modelica_LinearSystems2.StateSpace;
 
-  input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
+  input StateSpace ssi = StateSpace(
       A=[0, 1, 0, 0; 0, 0, 39.2, 0; 0, 0, 0, 1; 0, 0, 49, 0],
       B=[0; 1; 0; 1],
       C=[1, 0, 0, 0],
@@ -22,8 +22,7 @@ function designLQR "Example for LQR controller design"
   output Boolean ok;
 
 protected
-  StateSpace ss=if systemOnFile then
-    Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName) else ssi;
+  StateSpace ss=if systemOnFile then StateSpace.Import.fromFile(fileName) else ssi;
   Real Q[:,:]=identity(4) " state weighting matrix";
   Real R[:,:]=identity(1) " input weighting matrix";
   Real K[size(ss.B, 2),size(ss.A, 1)] "Controller feedback gain matrix";

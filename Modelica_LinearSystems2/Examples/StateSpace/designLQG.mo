@@ -4,7 +4,7 @@ function designLQG "Example for LQG controller design"
 
   import Modelica_LinearSystems2.StateSpace;
 
-  input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
+  input StateSpace ssi=StateSpace(
       A=[-0.02, 0.005, 2.4,  -32; -0.14,  0.44,  -1.3,  -30; 0,  0.018,  -1.6,  1.2; 0, 0, 1, 0],
       B=[0.14,  -0.12; 0.36, -8.6; 0.35, 0.009; 0, 0],
       C=[0, 1, 0, 0; 0, 0, 0, 57.3],
@@ -21,8 +21,7 @@ function designLQG "Example for LQG controller design"
   output Boolean ok;
 
 protected
-  StateSpace ss=if systemOnFile then
-    Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName) else ssi;
+  StateSpace ss=if systemOnFile then StateSpace.Import.fromFile(fileName) else ssi;
   Real Q[:,:] = transpose(ss.C)*ss.C "State weighting matrix";
   Real R[:,:] = identity(2) "Input weighting matrix";
   Real V[:,:] = identity(2) "Covariance output noise matrix";

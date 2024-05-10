@@ -6,7 +6,7 @@ function analysisControllablePoles
   import Modelica_LinearSystems2.StateSpace;
   import Modelica.Utilities.Streams.print;
 
-  input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
+  input StateSpace ssi=StateSpace(
     A=[1,0,0,0,0,0; 1,0,0,0,0,0; 0,2,3,0,78,6; 1,1,2,2,3,3; 10,13,34,0,0,1; 0,
        0,0,2,0,0],
     B=[0,0; 0,0; 0,0; 0,0; 1,0; 0,0],
@@ -25,8 +25,7 @@ function analysisControllablePoles
   output Boolean ok;
 
 protected
-  StateSpace ss = if systemOnFile then
-    Modelica_LinearSystems2.StateSpace.Import.fromFile(fileName) else ssi;
+  StateSpace ss = if systemOnFile then StateSpace.Import.fromFile(fileName) else ssi;
   Real cPoles[:,2] "controllable poles";
   Real ncPoles[:,2] "uncontrollable poles";
 
