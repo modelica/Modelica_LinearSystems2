@@ -4,6 +4,7 @@ function analysisTimeResponse
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Utilities.Plot;
 
   input Real u[:,2]=ones(300, 2);
 protected
@@ -30,17 +31,11 @@ algorithm
   t := 0:dss.Ts:(samples*dss.Ts - dss.Ts);
   (y,x) := DiscreteStateSpace.timeResponse(dss, u, x0);
 
-  Modelica_LinearSystems2.Utilities.Plot.diagram(
-    Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
+  Plot.diagram(
+    Plot.Records.Diagram(
       curve={
-        Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-          x=t,
-          y=y[:,1],
-          legend="y1"),
-        Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-          x=t,
-          y=y[:,2],
-          legend="y2")},
+        Plot.Records.Curve(x=t, y=y[:,1], legend="y1"),
+        Plot.Records.Curve(x=t, y=y[:,2], legend="y2")},
       heading="Step response to synchronous step of u1 and u2",
       xLabel="time [s]",
       yLabel="y1, y2"));
