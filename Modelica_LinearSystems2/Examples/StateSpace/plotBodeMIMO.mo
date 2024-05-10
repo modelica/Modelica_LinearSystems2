@@ -20,15 +20,12 @@ function plotBodeMIMO
   output Boolean ok;
 
 protected
-  StateSpace ss=if systemOnFile then
-      Modelica_LinearSystems2.StateSpace.Import.fromFile( fileName) else StateSpace(
-      A=A,
-      B=B,
-      C=C,
-      D=D);
+  StateSpace ss = if systemOnFile then
+    StateSpace.Import.fromFile(fileName) else
+    StateSpace(A=A, B=B, C=C, D=D);
 
 algorithm
-  Modelica_LinearSystems2.StateSpace.Plot.bodeMIMO(ss,onFile=true);
+  StateSpace.Plot.bodeMIMO(ss, onFile=true);
   ok := true;
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>

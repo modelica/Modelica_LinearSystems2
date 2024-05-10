@@ -24,7 +24,7 @@ protected
   Complex Zeros[:];
   Boolean ok;
 algorithm
-  Zeros := Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros(ss);
+  Zeros := StateSpace.Analysis.invariantZeros(ss);
 
   if size(Zeros, 1) == 0 then
     print("\nSystem\n  "+String(zp)+"\nhas no invariant zeros\n");

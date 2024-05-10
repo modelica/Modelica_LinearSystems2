@@ -4,12 +4,14 @@ function plotZeros "Case studies of systems with zeros"
 
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.StateSpace;
+  import Modelica_LinearSystems2.DiscreteStateSpace;
+  import Modelica_LinearSystems2.Utilities.Plot;
 
 protected
   parameter Real sampleT=0.001;
   TransferFunction tf=TransferFunction({1,-0.1,1.0025}, {1,3,3,1});
   StateSpace ss=StateSpace(tf);
-  Complex invZeros[:]=Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros( ss);
+  Complex invZeros[:] = StateSpace.Analysis.invariantZeros( ss);
   Complex invZero1;
   Real invMat[2*size(ss.A, 1),2*size(ss.A, 1)];
   Real t[:]=0:sampleT:20 "Time vector: (number of samples)";
@@ -21,7 +23,8 @@ protected
   Real x0[size(ss.A, 1)]=zeros(size(ss.A, 1)) "Initial state vector";
   Real x[size(t,1),size(ss.A,1)];
   Real Ts=sampleT;
-  Modelica_LinearSystems2.DiscreteStateSpace sd=Modelica_LinearSystems2.DiscreteStateSpace(ss, Ts, method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact);
+  DiscreteStateSpace sd = DiscreteStateSpace(
+    ss, Ts, method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact);
   Boolean ok;
 
 algorithm
@@ -30,91 +33,57 @@ algorithm
   Modelica_LinearSystems2.ComplexMathAdds.Vectors.print("Invariant zeros", invZeros);
 
   invZero1 := invZeros[1];
-  invMat := Modelica.Math.Matrices.inv([invZero1.re*identity(size(ss.A, 1)) -
-    ss.A,invZero1.im*identity(size(ss.A, 1)); -invZero1.im*identity(size(ss.A,
-    1)),invZero1.re*identity(size(ss.A, 1)) - ss.A]);
+  invMat := Modelica.Math.Matrices.inv([
+    invZero1.re*identity(size(ss.A,1)) - ss.A, invZero1.im*identity(size(ss.A,1));
+    -invZero1.im*identity(size(ss.A,1)), invZero1.re*identity(size(ss.A,1)) - ss.A]);
   x0 := vector(2*(invMat[1:size(ss.A, 1), 1:size(ss.A, 1)])*ss.B);
   Modelica.Math.Vectors.toString(x0, "x0", 6);
 
   u[:, 1] := 2*exp(invZero1.re*t).*vector(cos(t));
-  (y,x) := Modelica_LinearSystems2.DiscreteStateSpace.timeResponse(
-    sd,
-    u,
-    x0);
+  (y,x) := DiscreteStateSpace.timeResponse(sd, u, x0);
 
-    Modelica_LinearSystems2.Utilities.Plot.diagram(
-        Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
-                  curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                           x=t,
-                           y=y[:,1],
-                           legend="y"),
-                         Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                           x=t,
-                           y=u[:,1],
-                           legend="u")},
-                  heading="y and u",
-                  xLabel="t [s]",
-                  yLabel="y and u"));
+  Plot.diagram(
+    Plot.Records.Diagram(
+      curve={
+        Plot.Records.Curve(x=t, y=y[:,1], legend="y"),
+        Plot.Records.Curve(x=t, y=u[:,1], legend="u")},
+      heading="y and u",
+      xLabel="t [s]",
+      yLabel="y and u"));
 
- Modelica_LinearSystems2.Utilities.Plot.diagram(
-       Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
-                 curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                          x=t,
-                          y=x[:,1],
-                          legend="x1"),
-                        Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                          x=t,
-                          y=x[:,2],
-                          legend="x2"),
-                        Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                          x=t,
-                          y=x[:,3],
-                          legend="x3")},
-                 heading="x",
-                 xLabel="t [s]",
-                 yLabel="x"));
+  Plot.diagram(
+    Plot.Records.Diagram(
+      curve={
+        Plot.Records.Curve(x=t, y=x[:,1], legend="x1"),
+        Plot.Records.Curve(x=t, y=x[:,2], legend="x2"),
+        Plot.Records.Curve(x=t, y=x[:,3], legend="x3")},
+      heading="x",
+      xLabel="t [s]",
+      yLabel="x"));
 
   u[:, 1] := 2*exp(invZero1.re*t).*vector(cos(2*t));
+  y := DiscreteStateSpace.timeResponse(sd, u, x0);
 
-  y := Modelica_LinearSystems2.DiscreteStateSpace.timeResponse(
-    sd,
-    u,
-    x0);
+  Plot.diagram(
+    Plot.Records.Diagram(
+      curve={
+        Plot.Records.Curve(x=t, y=y[:,1], legend="y"),
+        Plot.Records.Curve(x=t, y=u[:,1], legend="u")},
+      heading="y and u",
+      xLabel="t [s]",
+      yLabel="y, u"));
 
-  Modelica_LinearSystems2.Utilities.Plot.diagram(
-       Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
-                 curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                          x=t,
-                          y=y[:,1],
-                          legend="y"),
-                        Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                          x=t,
-                          y=u[:,1],
-                          legend="u")},
-                 heading="y and u",
-                 xLabel="t [s]",
-                 yLabel="y, u"));
+  u[:, 1] := 2*exp(invZero1.re*t).*vector(cos(0.5*t));
+  y := DiscreteStateSpace.timeResponse(sd, u, x0);
 
- u[:, 1] := 2*exp(invZero1.re*t).*vector(cos(0.5*t));
-
-  y := Modelica_LinearSystems2.DiscreteStateSpace.timeResponse(
-    sd,
-    u,
-    x0);
-
-   Modelica_LinearSystems2.Utilities.Plot.diagram(
-       Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
-                 curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                          x=t,
-                          y=y[:,1],
-                          legend="y"),
-                        Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-                          x=t,
-                          y=u[:,1],
-                          legend="u")},
-                 heading="y and u",
-                 xLabel="t [s]",
-                 yLabel="y, u"));
+  Plot.diagram(
+    Plot.Records.Diagram(
+      curve={
+        Plot.Records.Curve(x=t, y=y[:,1], legend="y"),
+        Plot.Records.Curve(x=t, y=u[:,1], legend="u")},
+      heading="y and u",
+      xLabel="t [s]",
+      yLabel="y, u"));
 
   ok := true;
 

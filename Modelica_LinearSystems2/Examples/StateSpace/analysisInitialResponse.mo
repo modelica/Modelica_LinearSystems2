@@ -1,10 +1,12 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function analysisInitialResponse "Initial response example"
   extends Modelica.Icons.Function;
+
   import Modelica_LinearSystems2.StateSpace;
+  import Modelica_LinearSystems2.Utilities.Plot;
 
 protected
-  Modelica_LinearSystems2.StateSpace sc=Modelica_LinearSystems2.StateSpace(
+  StateSpace sc=StateSpace(
     A=[-1,1; 0,-2],
     B=[1,0; 0,1],
     C=[1,0; 0,1],
@@ -20,20 +22,20 @@ public
     "Output response: (number of samples) x (number of outputs) x 1";
 
 algorithm
-  (y,t,x_continuous) := Modelica_LinearSystems2.StateSpace.Analysis.initialResponse(x0=x0,sc=sc,dt=0.1,tSpan=5);
+  (y,t,x_continuous) := StateSpace.Analysis.initialResponse(x0=x0,sc=sc,dt=0.1,tSpan=5);
 
-  Modelica_LinearSystems2.Utilities.Plot.diagramVector({
-    Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
+  Plot.diagramVector({
+    Plot.Records.Diagram(
       curve={
-        Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
+        Plot.Records.Curve(
           x=t,
           y=y[:,1,1],
           legend="y1")},
       heading="Initial response y1",
       xLabel="time [s]"),
-    Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
+    Plot.Records.Diagram(
       curve={
-        Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
+        Plot.Records.Curve(
           x=t,
           y=y[:,2,1],
           legend="y2")},

@@ -6,7 +6,7 @@ function analysisDcGain "Example to compute dcGain of a state space system"
   import Modelica_LinearSystems2.StateSpace;
   import Modelica.Utilities.Streams.print;
 
-  input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
+  input StateSpace ssi = StateSpace(
     A=[1,0,0,0,0,0; 1,4,0,2,0,-1; 0,2,3,0,78,6; 1,1,2,2,3,3; 10,13,34,0,0,1; 3,
        0,0,2,0,0],
     B=[0,0; 0,0; 0,0; 0,0; 1,0; 0,0],
@@ -20,7 +20,7 @@ protected
   Real K1[size(ssi.C,1), size(ssi.B,2)];
 
   Real K2[2,1];
-  StateSpace ss2=Modelica_LinearSystems2.StateSpace(
+  StateSpace ss2 = StateSpace(
     A=[0,0;
        0,1],
     B=[0;-2],
@@ -28,7 +28,7 @@ protected
     D=[0;0]);
 
   Real K3[2,1];
-  StateSpace ss3=Modelica_LinearSystems2.StateSpace(
+  StateSpace ss3 = StateSpace(
     A=[0,0;
        0,1],
     B=[5;-2],

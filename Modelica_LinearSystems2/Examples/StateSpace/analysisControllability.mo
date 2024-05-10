@@ -7,7 +7,7 @@ function analysisControllability
   import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.Utilities.Types.StaircaseMethod;
 
-  input StateSpace ssi=Modelica_LinearSystems2.StateSpace(
+  input StateSpace ssi=StateSpace(
     A=[1,0,0,0,0,0; 1,0,0,0,0,0; 0,2,3,0,78,6; 1,1,2,2,3,3; 10,13,34,0,0,1; 0,
        0,0,2,0,0],
     B=[0,0; 0,0; 0,0; 0,0; 1,0; 0,0],
