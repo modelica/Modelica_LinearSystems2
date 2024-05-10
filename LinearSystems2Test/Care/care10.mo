@@ -1,9 +1,12 @@
-within Modelica_LinearSystems2.WorkInProgress.Tests.care;
+within LinearSystems2Test.Care;
 function care10 "Example 10  from Benner benchmarks"
   extends Modelica.Icons.Function;
   import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices;
+  import Modelica.Utilities.Streams.print;
+
   input String outputFile = "";
+  output Boolean ok;
 
 protected
   Real eps=1e-7;
@@ -42,6 +45,12 @@ public
   output Real ku3;
 
 algorithm
+  ok := false;
+  print("--  Test of " + getInstanceName() + " --");
+  if not Modelica.Utilities.Strings.isEmpty(outputFile) then
+    print("--  Test of " + getInstanceName() + " --", outputFile);
+  end if;
+
   X1:=Matrices.care(A, B, R, Q, false);
   X2:=Matrices.care(A, B, R, Q, true);
   X3:=[x11, x12; x12, x11];
@@ -64,27 +73,29 @@ algorithm
   normX2 := MatricesMSL.norm(X2, 2);
   condX3 := MatricesMSL.conditionNumber(X3);
   normX3 := MatricesMSL.norm(X3, 2);
-  Modelica.Utilities.Streams.print("Solution X1 without subsequent Newton refinement",outputFile);
-  Modelica.Utilities.Streams.print(MatricesMSL.toString(X1, "X1", 16),outputFile);
-  Modelica.Utilities.Streams.print("Solution X2 with subsequent Newton refinement",outputFile);
-  Modelica.Utilities.Streams.print(MatricesMSL.toString(X2, "X2", 16),outputFile);
-  Modelica.Utilities.Streams.print("Exact solution X3",outputFile);
-  Modelica.Utilities.Streams.print(MatricesMSL.toString(X3, "X3", 16),outputFile);
-  Modelica.Utilities.Streams.print("Residum of solution X1: resX1 = "+String(resX1),outputFile);
-  Modelica.Utilities.Streams.print("Residum of solution X2: resX2 = "+String(resX2),outputFile);
+  print("Solution X1 without subsequent Newton refinement", outputFile);
+  print(MatricesMSL.toString(X1, "X1", 16), outputFile);
+  print("Solution X2 with subsequent Newton refinement", outputFile);
+  print(MatricesMSL.toString(X2, "X2", 16), outputFile);
+  print("Exact solution X3", outputFile);
+  print(MatricesMSL.toString(X3, "X3", 16), outputFile);
+  print("Residum of solution X1: resX1 = "+String(resX1), outputFile);
+  print("Residum of solution X2: resX2 = "+String(resX2), outputFile);
 
-  Modelica.Utilities.Streams.print("\n normH = " + String(normH),outputFile);
-  Modelica.Utilities.Streams.print("\n condH = " + String(condH),outputFile);
-  Modelica.Utilities.Streams.print("\n normX1 = " + String(normX1),outputFile);
-  Modelica.Utilities.Streams.print("\n condX1 = " + String(condX1),outputFile);
-  Modelica.Utilities.Streams.print("\n ku1 = " + String(ku1),outputFile);
-  Modelica.Utilities.Streams.print("\n normX2 = " + String(normX2),outputFile);
-  Modelica.Utilities.Streams.print("\n condX2 = " + String(condX2),outputFile);
-  Modelica.Utilities.Streams.print("\n ku2 = " + String(ku2),outputFile);
-  Modelica.Utilities.Streams.print("\n normX3 = " + String(normX3),outputFile);
-  Modelica.Utilities.Streams.print("\n condX3 = " + String(condX3),outputFile);
-  Modelica.Utilities.Streams.print("\n ku3 = " + String(ku3),outputFile);
-  Modelica.Utilities.Streams.print("\n deltaQ1 = " + String(deltaQ1),outputFile);
-  Modelica.Utilities.Streams.print("\n deltaQ2 = " + String(deltaQ2),outputFile);
-  Modelica.Utilities.Streams.print("\n deltaQ3 = " + String(deltaQ3),outputFile);
+  print("\n normH = " + String(normH), outputFile);
+  print("\n condH = " + String(condH), outputFile);
+  print("\n normX1 = " + String(normX1), outputFile);
+  print("\n condX1 = " + String(condX1), outputFile);
+  print("\n ku1 = " + String(ku1), outputFile);
+  print("\n normX2 = " + String(normX2), outputFile);
+  print("\n condX2 = " + String(condX2), outputFile);
+  print("\n ku2 = " + String(ku2), outputFile);
+  print("\n normX3 = " + String(normX3), outputFile);
+  print("\n condX3 = " + String(condX3), outputFile);
+  print("\n ku3 = " + String(ku3), outputFile);
+  print("\n deltaQ1 = " + String(deltaQ1), outputFile);
+  print("\n deltaQ2 = " + String(deltaQ2), outputFile);
+  print("\n deltaQ3 = " + String(deltaQ3), outputFile);
+
+  ok := true;
 end care10;

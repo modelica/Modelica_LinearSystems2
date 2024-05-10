@@ -95,9 +95,9 @@ algorithm
   print("--- Test functions of Modelica_LinearSystems2.Examples.DiscreteZerosAndPoles");
   Modelica_LinearSystems2.Examples.DiscreteZerosAndPoles.plotBode();
 
-//   print("--- Test functions of LinearSystems2Test library");
-//   print("--- Test functions of LinearSystems2Test library", logFile);
-//   result := ModelicaTest.Math.ScalarFunctions(logFile);
+  print("--- Test functions of LinearSystems2Test library");
+  print("--- Test functions of LinearSystems2Test library", logFile);
+  result := LinearSystems2Test.Care.runAll(logFile);
   print("--- Test functions run done");
 
   ok := true;
