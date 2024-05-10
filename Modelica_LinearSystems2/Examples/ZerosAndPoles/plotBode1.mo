@@ -14,7 +14,7 @@ protected
   TransferFunction tf=TransferFunction(n={w}, d={1,w});
   ZerosAndPoles zp=ZerosAndPoles(tf);
 algorithm
-  Modelica_LinearSystems2.ZerosAndPoles.Plot.bode(zp);
+  ZerosAndPoles.Plot.bode(zp);
 
   ok := true;
 

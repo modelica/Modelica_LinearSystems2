@@ -11,7 +11,7 @@ protected
   TransferFunction tf = (s^3 + 4*s + 1)/(s^4 + 2*s^3 + 3*s^2 + 4*s);
   ZerosAndPoles zp = ZerosAndPoles(tf);
 algorithm
-  Modelica_LinearSystems2.ZerosAndPoles.Plot.polesAndZeros(
+  ZerosAndPoles.Plot.polesAndZeros(
     zp=zp,
  defaultDiagram = Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
    heading="Poles and zeros of " + String(tf)),
