@@ -23,8 +23,8 @@ function plotRootLociNoLoop
           parMin=initialValue.minimum,
           parMax=initialValue.maximum,
           parUnit=initialValue.unit))));
-  input Modelica_LinearSystems2.WorkInProgress.Internal.LinearizationOptions simulationOptions=
-    Modelica_LinearSystems2.WorkInProgress.Internal.LinearizationOptions(
+  input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationOptions=
+    Modelica_LinearSystems2.Records.SimulationOptionsForLinearization(
     method="Dassl",
     tolerance=0.0001)
     annotation (Dialog(__Dymola_label="Simulation setup"));

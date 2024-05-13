@@ -8,11 +8,6 @@ function plotRootLoci
   input String modelName="Modelica.Mechanics.Rotational.Examples.First"
     "Name of the Modelica model"
     annotation(Dialog(__Dymola_translatedModel));
-  input Boolean simulate = false
-    "Linearize model after simulation (time-consuming!), otherwise linearization of all parameter variants at once"
-    annotation (Dialog(__Dymola_compact=false),
-      choices(checkBox=true));
-
   input Modelica_LinearSystems2.WorkInProgress.Internal.ModelParameters modelParams[:]=
     {Modelica_LinearSystems2.WorkInProgress.Internal.ModelParameters(
     parName="Jload",
@@ -28,8 +23,8 @@ function plotRootLoci
           parMin=initialValue.minimum,
           parMax=initialValue.maximum,
           parUnit=initialValue.unit))));
-  input Modelica_LinearSystems2.WorkInProgress.Internal.LinearizationOptions simulationOptions=
-    Modelica_LinearSystems2.WorkInProgress.Internal.LinearizationOptions(
+  input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationOptions=
+    Modelica_LinearSystems2.Records.SimulationOptionsForLinearization(
     method="Dassl",
     tolerance=0.0001)
     annotation (Dialog(__Dymola_label="Simulation setup"));
@@ -72,7 +67,7 @@ algorithm
   parValues:=linspace(modelParams[1].parMin,modelParams[1].parMax,nVarMin);
   color := [linspace(markerColorMin[1],markerColorMax[1],nVarMin),linspace(markerColorMin[2],markerColorMax[2],nVarMin),linspace(markerColorMin[3],markerColorMax[3],nVarMin)];
 
-  if not simulate then // and simulationOptions.t_linearize==0
+  if simulationOptions.linearizeAtInitial then // and simulationOptions.t_linearize==0
     // Linearization of all parameter variants at once
     ok := Simulator.translateModel(modelName);
     assert(ok, "Translation of model " + modelName + " failed.");
@@ -95,11 +90,11 @@ algorithm
 
       ok := Simulator.simulateModel(
         problem=modelName2,
-        startTime=0,
+        startTime=simulationOptions.t_start,
         stopTime=simulationOptions.t_linearize,
         method=method,
-        numberOfIntervals=simulationOptions.numberOfIntervals,
-        outputInterval=simulationOptions.outputInterval,
+        numberOfIntervals=0,
+        outputInterval=0.0,
         tolerance = simulationOptions.tolerance,
         fixedstepsize = simulationOptions.fixedStepSize);
       ok := Simulator.importInitial("dsfinal.txt");
