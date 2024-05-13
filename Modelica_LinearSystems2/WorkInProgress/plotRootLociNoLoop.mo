@@ -8,12 +8,12 @@ function plotRootLociNoLoop
   input String modelName="Modelica.Mechanics.Rotational.Examples.First"
     "Name of the Modelica model"
     annotation(Dialog(__Dymola_translatedModel));
-  input Modelica_LinearSystems2.WorkInProgress.Internal.ModelParameters modelParams[:]=
-    {Modelica_LinearSystems2.WorkInProgress.Internal.ModelParameters(
-    parName="Jload",
-    parMin=1,
-    parMax=6,
-    nVar=10)}
+  input Modelica_LinearSystems2.Records.ParameterVariation modelParams[:]=
+    {Modelica_LinearSystems2.Records.ParameterVariation(
+    Name="Jload",
+    Min=1,
+    Max=6,
+    nPoints=10)}
     annotation (Dialog(__Dymola_label="Model parameters", __Dymola_importDsin(
         button="Select model parameter" "Select parameters to be optimized",
         onlyStart=true,
@@ -69,24 +69,24 @@ protected
   Real dp "Step of parameter equidistand grid";
   Real parValue "Value of parameter in a loop";
   Real parValues[:] "Vector of all parameter values";
-  Integer nVarMin = max(modelParams[1].nVar,2)
+  Integer nVarMin = max(modelParams[1].nPoints,2)
     "Minimum number of variations (at least 2 are necessary)";
   String method = simulationOptions.method "Integration method";
 
   StateSpace sSpace=StateSpace.Import.fromModel(modelName, 0, fileName, method);
   Real color[nVarMin,3] "Color of markers in a loop";
 algorithm
-  dp := (modelParams[1].parMax-modelParams[1].parMin)/(nVarMin-1);
+  dp := (modelParams[1].Max-modelParams[1].Min)/(nVarMin-1);
   color := [linspace(markerColorMin[1],markerColorMax[1],nVarMin),linspace(markerColorMin[2],markerColorMax[2],nVarMin),linspace(markerColorMin[3],markerColorMax[3],nVarMin)];
 
-  parValues:=linspace(modelParams[1].parMin,modelParams[1].parMax,nVarMin);
+  parValues:=linspace(modelParams[1].Min,modelParams[1].Max,nVarMin);
   ok := Simulator.translateModel(modelName);
   assert(ok, "Translation of model " + modelName + " failed.");
   ok := Simulator.simulateMultiExtendedModel(
     problem=modelName,
     startTime=0,
     stopTime=0,
-    initialNames={modelParams[1].parName,"linearize:"},
+    initialNames={modelParams[1].Name,"linearize:"},
     initialValues=transpose({parValues,linspace(1,nVarMin,nVarMin)}),
     finalNames=fill("",0),
     method=method,
@@ -118,7 +118,7 @@ algorithm
       sSpace.A,
       if i == 1 then true else false,
       position,
-      "Root loci of " + modelName + "; parVar: " + modelParams[1].parName,
+      "Root loci of " + modelName + "; parVar: " + modelParams[1].Name,
       useLegend,
       String(parValues[i]),
       grid,
