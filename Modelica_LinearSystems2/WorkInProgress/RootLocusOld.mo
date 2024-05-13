@@ -18,7 +18,7 @@ package RootLocusOld
 */
 
     input
-      Modelica_LinearSystems2.WorkInProgress.RootLocusOld.ParameterVariation modelParam[:]
+      Modelica_LinearSystems2.Records.ParameterVariation modelParam[:]
       "Model parameter to be varied";
 
     input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization simulationSetup=
@@ -26,18 +26,21 @@ package RootLocusOld
       "Simulation options it t_linearize > 0";
 
     input
-      Modelica_LinearSystems2.WorkInProgress.RootLocusOld.RootLocusDiagramOld diagram
+      Modelica_LinearSystems2.Utilities.Plot.Records.RootLocusDiagram diagram
       "Diagram properties of the root locus";
+    input Modelica_LinearSystems2.Utilities.Plot.Records.Device device=
+      Modelica_LinearSystems2.Utilities.Plot.Records.Device()
+      "Properties of device where figure is shown" annotation(Dialog);
 
   protected
     Boolean ok "True, if call is ok";
     Real dp "Step of parameter equidistand grid";
     Real parValue "Value of parameter in a loop";
-    Integer nVar = max(modelParam[1].nVar,2)
+    Integer nVar = max(modelParam[1].nPoints,2)
       "Number of parameter variations (at least 2 are necessary)";
     Real color[nVar,3] = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.jet(nVar)
       "Color of markers in a loop";
-    Real mmToPixel= diagram.windowResolution/25.4;
+    Real mmToPixel= device.windowResolution/25.4;
     Real position[4];
     Real A[:,:] "System matrix of linearization";
     Real eigenValues[:,2] "Eigen values of A";
@@ -54,10 +57,10 @@ package RootLocusOld
     end if;
 
     // Create diagram
-    position := {diagram.xTopLeft,
-                 diagram.yTopLeft,
-                 diagram.diagramWidth,
-                 diagram.heightRatio*diagram.diagramWidth}*mmToPixel;
+    position := {device.xTopLeft,
+                 device.yTopLeft,
+                 device.diagramWidth,
+                 diagram.heightRatio*device.diagramWidth}*mmToPixel;
     id:= DymolaCommands.Plot.createPlot(id=-1,
                     position=integer(position),
                     erase=true,
@@ -143,54 +146,15 @@ yields following diagram
 </html>"));
   end rootLocus;
 
-  record ParameterVariation
-    "Define variation of one parameter in a given range and optionally select the parameter from a translated model"
-    String Name "Name of parameter" annotation (Dialog);
-    Real Min "Minimum value of parameter" annotation (Dialog);
-    Real Max "Maximum value of parameter" annotation (Dialog);
-    Integer nVar(min=2) = 10 "Number of parameter variations (min=2)" annotation (Dialog);
-    String Unit="" "Unit of parameter" annotation (Dialog);
-    annotation (
-    Dialog(__Dymola_importDsin(onlyStart=true,
-      fields(Name=initialName,
-             Min=initialValue.minimum,
-             Max=initialValue.maximum,
-             Unit=initialValue.unit))),
-    Icon(graphics={
-          Rectangle(
-            extent={{-100,-30},{100,-90}},
-            lineColor={0,0,0},
-            fillColor={175,175,175},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-100,-30},{-100,44}},
-            color={0,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{100,-32},{100,44}},
-            color={0,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{-100,40},{100,40}},
-            color={0,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{-60,68},{-100,40},{-60,12}},
-            color={0,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{60,68},{100,40},{60,12}},
-            color={0,0,0},
-            smooth=Smooth.None)}));
-  end ParameterVariation;
-
   function rootLocusOfDriveOld
     "Plot the root locus of a drive with varying load"
   algorithm
     Modelica_LinearSystems2.WorkInProgress.RootLocusOld.rootLocus(
-       "Modelica.Mechanics.Rotational.Examples.First",
-       modelParam={Modelica_LinearSystems2.WorkInProgress.RootLocusOld.ParameterVariation(
-                                                                      Name="Jload", Min=1, Max=20, nVar=30, Unit="kg.m2")});
+      "Modelica.Mechanics.Rotational.Examples.First",
+      modelParam={
+        Modelica_LinearSystems2.Records.ParameterVariation(Name="Jload", Min=1, Max=20, nPoints=30)},
+      diagram=Modelica_LinearSystems2.Utilities.Plot.Records.RootLocusDiagram(
+        heading="Root loci of simple drive train"));
       annotation(__Dymola_interactive=true, Documentation(info="<html>
 <p>
 This function plots the root locus of model
@@ -203,38 +167,6 @@ over the load inertia <strong>Jload</strong>:
 </div>
 </html>"));
   end rootLocusOfDriveOld;
-
-  record RootLocusDiagramOld "Properties of a root locus diagram"
-    extends Modelica.Icons.Record;
-
-    String heading=""
-      "Heading displayed above diagram (if empty, default heading)" annotation(Dialog);
-    Real heightRatio = 0.8 "Height of diagram = heightRatio*diagramWidth" annotation(Dialog);
-    Boolean grid=true "True, if grid is shown" annotation(Dialog,  choices(checkBox=true));
-
-    /* group "Axes" (Axes properties) */
-    String xLabel="Real part of eigenvalues"
-      "String displayed at horizontal axis" annotation(Dialog(group="Axes"));
-    String yLabel="Imaginary part of eigenvalues"
-      "String displayed at vertical axis" annotation(Dialog(group="Axes"));
-    Boolean logX = false "True, if logarithmic scale of x-axis" annotation(Dialog(group="Axes"),choices(checkBox=true));
-    Boolean logY = false "True, if logarithmic scale of y-axis" annotation(Dialog(group="Axes"),choices(checkBox=true));
-    Boolean uniformScaling = false
-      "True, if same vertical and horizontal axis increment"
-        annotation(Dialog(group="Axes"),choices(checkBox=true));
-
-    Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm xTopLeft=0
-      "Horizontal position of top left figure corner if applicable (e.g. window)"
-      annotation(Dialog);
-    Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm yTopLeft=0
-      "Vertical position of top left figure corner if applicable (e.g. window)"
-      annotation(Dialog);
-    Modelica_LinearSystems2.Utilities.Plot.Types.DrawingUnit_mm diagramWidth=140
-      "Width of diagram" annotation(Dialog);
-    Modelica_LinearSystems2.Utilities.Plot.Types.ImageResolution_dpi windowResolution=96
-      "[dpi] Image resolution in window if applicable (e.g. unscaled window)" annotation(Dialog);
-
-  end RootLocusDiagramOld;
 
   function linearize2
     "Linearize a model after simulation up to a given time and return only the A matrix"
@@ -280,67 +212,4 @@ but returns only the A-matrix.
 </html>"));
   end linearize2;
 
-  function plotEigenvalues
-    "Calculate eigenvalues of matrix A and plot root locus"
-    import DymolaCommands.Plot;
-
-    input Real A[:,size(A, 1)] = [2,1,1;1,1,1;1,2,2] "Square matrix";
-    input Boolean removePrevious=true
-      "True, if all previous plots should be deleted"
-      annotation (Dialog(group="Plot settings"));
-    input Integer position[4]={5, 5, 600, 450} "Window Position"
-      annotation (Dialog(group="Plot settings"));
-    input String heading="Root locii" "Heading of plot"
-      annotation (Dialog(group="Plot settings"));
-    input Boolean useLegend = true "Use legend"
-      annotation (Dialog(group="Plot settings"));
-    input String legend="Eigenvalues" "Legend of plot"
-      annotation (Dialog(group="Plot settings", enable=useLegend));
-    input Boolean grid = false "Add grid"
-      annotation (Dialog(group="Plot settings"));
-    input MarkerStyle markerStyle=MarkerStyle.Cross "Style of marker"
-      annotation (Dialog(group="Plot settings"));
-    input Integer markerColor[3]={0,0,255} "Color of marker"
-      annotation(Dialog(group="Plot settings", colorSelector=true));
-
-    output Real eigenvalues[size(A, 1), 2]
-      "Eigenvalues of matrix A (Re: first column, Im: second column)";
-  //  output Real evRe[size(A, 1)];
-  //  output Real evIm[size(A, 1)];
-  protected
-    Boolean ok "True, if all calls are ok";
-
-  algorithm
-    // Calculate eigenvalues of input matrix A
-    eigenvalues :=Modelica.Math.Matrices.eigenValues(A);
-  //  evRe[:] :=eigenvalues[:, 1];
-  //  evIm[:] :=eigenvalues[:, 2];
-
-    // Plot real and imaginary part of eigenvalues
-    if removePrevious then
-      ok := Plot.removePlots();
-      Plot.createPlot(id= 1,
-        position=position,
-        leftTitleType = 2,
-        leftTitle = "Im",
-        bottomTitleType = 2,
-        bottomTitle = "Re",
-        autoerase= false,
-        grid=grid,
-        heading=heading,
-        legend=useLegend,
-        erase= false,
-        legendLocation = 2,
-        legendHorizontal = false);
-    end if;
-    Plot.plotArray(
-      x= eigenvalues[:, 1],
-      y= eigenvalues[:, 2],
-      legend=legend,
-      color=markerColor,
-      pattern = LinePattern.None,
-      marker = markerStyle);
-
-    annotation (__Dymola_interactive=true);
-  end plotEigenvalues;
 end RootLocusOld;
