@@ -1,16 +1,11 @@
 within Modelica_LinearSystems2.WorkInProgress.StateSpace.Conversion;
 function toTransferFunctionMIMO
   "Generate a transfer function of a MIMO system from state space representation"
-  import Modelica_LinearSystems2;
 
-  import Modelica;
-  import Modelica_LinearSystems2.TransferFunction;
-  import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
-  import Modelica_LinearSystems2.WorkInProgress;
-  input StateSpace ss "StateSpace object";
 
-  output TransferFunction tf[size(ss.C, 1),size(ss.B, 2)]
+  input Modelica_LinearSystems2.StateSpace ss "StateSpace object";
+  output Modelica_LinearSystems2.TransferFunction tf[size(ss.C, 1),size(ss.B, 2)]
     "Matrix of transfer function objects";
 
 protected
@@ -22,7 +17,7 @@ algorithm
   zp := Modelica_LinearSystems2.WorkInProgress.StateSpace.Conversion.toZerosAndPolesMIMO(ss);
   for i1 in 1:m loop
     for i2 in 1:p loop
-      tf[i2, i1] := Modelica_LinearSystems2.WorkInProgress.ZerosAndPoles.Conversion.toTransferFunction(zp[i2, i1]);
+      tf[i2, i1] := ZerosAndPoles.Conversion.toTransferFunction(zp[i2, i1]);
     end for;
   end for;
 
