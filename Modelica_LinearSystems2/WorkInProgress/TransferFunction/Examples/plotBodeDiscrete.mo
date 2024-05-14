@@ -2,7 +2,6 @@ within Modelica_LinearSystems2.WorkInProgress.TransferFunction.Examples;
 function plotBodeDiscrete
   "Plot the Bode diagram of the continuous and the discrete transfer functions with automatic determination of the frequency range to plot"
 
-  import Modelica.Utilities.Streams.print;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
 
@@ -14,8 +13,8 @@ protected
   DiscreteTransferFunction dtf=DiscreteTransferFunction(tf,Ts,method);
 
 algorithm
-  Modelica_LinearSystems2.TransferFunction.Plot.bode(tf);
-  Modelica_LinearSystems2.WorkInProgress.DiscreteTransferFunction.Plot.bode(dtf);
+  TransferFunction.Plot.bode(tf);
+  DiscreteTransferFunction.Plot.bode(dtf);
   ok := true;
 
   annotation (__Dymola_interactive=true);
