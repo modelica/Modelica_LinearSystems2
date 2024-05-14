@@ -39,8 +39,7 @@ p::Internal:
 
 p::Math:
 - any: ['Modelica_LinearSystems2/Math/**/*.mo']
-  all: ['!Modelica_LinearSystems2/Math/Complex.mo']
-  all: ['!Modelica_LinearSystems2/Math/Polynomial.mo']
+  all: ['!Modelica_LinearSystems2/Math/Complex.mo', '!Modelica_LinearSystems2/Math/Polynomial.mo']
 
 p::Math.Complex:
 - all: ['Modelica_LinearSystems2/Math/Complex.mo']
