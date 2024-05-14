@@ -1,18 +1,21 @@
-within Modelica_LinearSystems2.WorkInProgress.Tests.DiscreteSystems;
-function Operations
+within LinearSystems2Test.DiscreteSystems;
+function operations
+  extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
 //  import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.DiscreteStateSpace;
   import Modelica_LinearSystems2.DiscreteZerosAndPoles;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
+  import Modelica_LinearSystems2.Utilities.Plot;
   import Modelica.Math.Vectors;
+  import Modelica.Utilities.Streams.print;
 
+  input String outputFile = "";
   input Boolean doPlot=true;
   input Modelica.Units.SI.Time Ts=0.1;
+  output Boolean ok;
 
 protected
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact;
@@ -46,16 +49,21 @@ protected
   Real y2[:];
   Real t[:];
   Real delta;
-  Boolean ok=true;
 
 algorithm
+  ok := false;
+  print("--  Test of " + getInstanceName() + " --");
+  if not Modelica.Utilities.Strings.isEmpty(outputFile) then
+    print("--  Test of " + getInstanceName() + " --", outputFile);
+  end if;
+
   if doPlot then
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss2, tSpan=tSpan);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp2, tSpan=tSpan);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.step(dtf2, tSpan=tSpan);
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss3, tSpan=tSpan);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp3, tSpan=tSpan);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.step(dtf3, tSpan=tSpan);
+    DiscreteStateSpace.Plot.step(dss2, tSpan=tSpan);
+    DiscreteZerosAndPoles.Plot.step(dzp2, tSpan=tSpan);
+    DiscreteTransferFunction.Plot.step(dtf2, tSpan=tSpan);
+    DiscreteStateSpace.Plot.step(dss3, tSpan=tSpan);
+    DiscreteZerosAndPoles.Plot.step(dzp3, tSpan=tSpan);
+    DiscreteTransferFunction.Plot.step(dtf3, tSpan=tSpan);
   end if;
 
 // ###############  '+'  #################
@@ -94,16 +102,11 @@ algorithm
   ok := delta < 1e-4;
 //  assert(ok, "dzp3 or dtf3 failed");
 
-  Modelica_LinearSystems2.Utilities.Plot.diagram(
-    Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(
-        curve={Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-          x=t,
-          y=y0,
-          legend="y0"),
-      Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-          x=t,
-          y=y1,
-          legend="y1")}));
+  Plot.diagram(
+    Plot.Records.Diagram(
+      curve={
+        Plot.Records.Curve(x=t, y=y0, legend="y0"),
+        Plot.Records.Curve(x=t, y=y1, legend="y1")}));
 // ###############  '/'  #################
   (y,t) := DiscreteZerosAndPoles.Analysis.stepResponse(dzp=dzp4, tSpan=6);
   y0 := y[:, 1, 1];
@@ -115,17 +118,13 @@ algorithm
   ok := delta < 1e-4;
 //  assert(ok, "dzp4 or dtf4 failed");
 
-  Modelica_LinearSystems2.Utilities.Plot.diagram(
-    Modelica_LinearSystems2.Utilities.Plot.Records.Diagram(curve={
-    Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-    x=t,
-    y=y0,
-    legend="y0"),Modelica_LinearSystems2.Utilities.Plot.Records.Curve(
-    x=t,
-    y=y1,
-    legend="y1")}));
+  Plot.diagram(
+    Plot.Records.Diagram(
+      curve={
+        Plot.Records.Curve(x=t, y=y0, legend="y0"),
+        Plot.Records.Curve(x=t, y=y1, legend="y1")}));
 
-  Modelica.Utilities.Streams.print("\n OK !!!! ");
+  ok := true;
 
   annotation(__Dymola_interactive=true);
-end Operations;
+end operations;
