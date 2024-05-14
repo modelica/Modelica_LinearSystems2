@@ -32,7 +32,10 @@ record SimulationOptionsForLinearization
   Real fixedStepSize=0.001
     "Step size for fixed step integrators, if linearizeAtInitial=false" annotation(Dialog(enable=not linearizeAtInitial));
 
-  annotation (Icon(graphics={
+  annotation (
+    Dialog(
+      __Dymola_label="Simulation setup"),
+    Icon(graphics={
         Rectangle(
           extent={{-100,20},{-72,-20}},
           lineColor={0,0,0},

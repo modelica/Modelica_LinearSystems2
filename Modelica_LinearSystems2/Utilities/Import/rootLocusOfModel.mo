@@ -5,13 +5,12 @@ function rootLocusOfModel
 
   import Simulator = DymolaCommands.SimulatorAPI;
   import Modelica_LinearSystems2.Utilities.Types.Grid;
-  input String modelName "Name of the Modelica model"
-    annotation (Dialog(__Dymola_translatedModel));
+
+  input String modelName "Name of the Modelica model" annotation (Dialog(__Dymola_translatedModel));
   input Modelica_LinearSystems2.Records.ParameterVariation modelParam[:]
     "Model parameter to be varied (exactly one) and values for other parameters";
   input Modelica_LinearSystems2.Records.SimulationOptionsForLinearization
-    simulationSetup=
-      Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
+    simulationSetup = Modelica_LinearSystems2.Records.SimulationOptionsForLinearization()
     "Simulation options";
   input Boolean reorder=false
     "True, if eigen values shall be reordered so that they are closest to the previous ones";
@@ -64,7 +63,7 @@ algorithm
     OK := Simulator.translateModel(modelName);
 
   else
-    // More as one parameter defined; find the parameter to be varied
+    // More then one parameter defined; find the parameter to be varied
     index_p_var := 0;
     for i in 1:nParam loop
       if modelParam[i].grid == Grid.OneValue then
