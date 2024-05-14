@@ -14,7 +14,7 @@ public
   output ZerosAndPoles zp;
 
 protected
-  StateSpace ssm= if size(ss.A,1)>0 then WorkInProgress.StateSpace.Transformation.toIrreducibleForm(ss) else StateSpace(ss.D[1,1]);
+  StateSpace ssm= if size(ss.A,1)>0 then StateSpace.Transformation.toIrreducibleForm(ss, 2e-10) else StateSpace(ss.D[1,1]);
   Complex poles[:];
   Complex zeros[:];
 
