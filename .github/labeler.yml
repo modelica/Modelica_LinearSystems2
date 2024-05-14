@@ -6,61 +6,61 @@ CI:
 - any: ['.CI/**/*']
 - any: ['.github/**/*']
 
-L: DiscreteStateSpace:
+p::DiscreteStateSpace:
 - any: ['Modelica_LinearSystems2/DiscreteStateSpace.mo']
 
-L: DiscreteTransferFunction:
+p::DiscreteTransferFunction:
 - any: ['Modelica_LinearSystems2/DiscreteTransferFunction.mo']
 
-L: DiscreteZerosAndPoles:
+p::DiscreteZerosAndPoles:
 - any: ['Modelica_LinearSystems2/DiscreteZerosAndPoles.mo']
 
-L: StateSpace:
+p::StateSpace:
 - any: ['Modelica_LinearSystems2/StateSpace.mo']
 
-L: TransferFunction:
+p::TransferFunction:
 - any: ['Modelica_LinearSystems2/TransferFunction.mo']
 
-L: ZerosAndPoles:
+p::ZerosAndPoles:
 - any: ['Modelica_LinearSystems2/ZerosAndPoles.mo']
 
-L: Controllers:
+p::Controllers:
 - any: ['Modelica_LinearSystems2/Controller/**/*.mo']
 - any: ['Modelica_LinearSystems2/Controllers/**/*.mo']
 
-L: ComplexMathAdds:
+p::ComplexMathAdds:
 - any: ['Modelica_LinearSystems2/ComplexMathAdds/**/*.mo']
 
-L: Examples:
+p::Examples:
 - all: ['Modelica_LinearSystems2/Examples/**/*.mo']
 
-L: Internal:
+p::Internal:
 - any: ['Modelica_LinearSystems2/Internal/**/*.mo']
 
-L: Math:
+p::Math:
 - any: ['Modelica_LinearSystems2/Math/**/*.mo']
   all: ['!Modelica_LinearSystems2/Math/Complex.mo']
   all: ['!Modelica_LinearSystems2/Math/Polynomial.mo']
 
-L: Math.Complex:
+p::Math.Complex:
 - all: ['Modelica_LinearSystems2/Math/Complex.mo']
 
-L: Math.Polynomial:
+p::Math.Polynomial:
 - all: ['Modelica_LinearSystems2/Math/Polynomial.mo']
 
-L: Records:
+p::Records:
 - any: ['Modelica_LinearSystems2/Records/**/*.mo']
 
-L: Resources:
+p::Resources:
 - all: ['Modelica_LinearSystems2/Resources/**/*']
 
-L: Types:
+p::Types:
 - any: ['Modelica_LinearSystems2/Types/**/*.mo']
 
-L: UsersGuide:
+p::UsersGuide:
 - all: ['Modelica_LinearSystems2/UsersGuide.mo']
 
-L: Utilities:
+p::Utilities:
 - any: ['Modelica_LinearSystems2/Utilities/**/*.mo']
 
 
