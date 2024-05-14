@@ -1,8 +1,7 @@
-within Modelica_LinearSystems2.WorkInProgress.Tests.DiscreteSystems;
-function Conversions
+within LinearSystems2Test.DiscreteSystems;
+function conversions
+  extends Modelica.Icons.Function;
 
-  import Modelica;
-  import Modelica_LinearSystems2;
   import Modelica_LinearSystems2.StateSpace;
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.TransferFunction;
@@ -10,10 +9,13 @@ function Conversions
   import Modelica_LinearSystems2.DiscreteZerosAndPoles;
   import Modelica_LinearSystems2.DiscreteTransferFunction;
   import Modelica.Math.Vectors;
+  import Modelica.Utilities.Streams.print;
 
+  input String outputFile = "";
   input Boolean doPlot=true;
   input String modelName="Modelica_LinearSystems2.Utilities.Plants.DoublePendulum";
   input Modelica.Units.SI.Time Ts=0.1;
+  output Boolean ok;
 
 protected
   Modelica_LinearSystems2.Utilities.Types.Method method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact;
@@ -35,9 +37,9 @@ protected
   DiscreteTransferFunction dtf3=DiscreteStateSpace.Conversion.toDiscreteTransferFunction(dss2);
   DiscreteStateSpace dss3=DiscreteStateSpace(dtf2);
 
-  DiscreteStateSpace dss4=Modelica_LinearSystems2.DiscreteStateSpace.Import.fromModel(modelName=modelName,Ts=Ts);
-  DiscreteZerosAndPoles dzp4[6,1]=Modelica_LinearSystems2.DiscreteZerosAndPoles.Import.fromModel(modelName=modelName,Ts=Ts);
-  DiscreteTransferFunction dtf4[6,1]=Modelica_LinearSystems2.DiscreteTransferFunction.Import.fromModel(modelName=modelName,Ts=Ts);
+  DiscreteStateSpace dss4=DiscreteStateSpace.Import.fromModel(modelName=modelName,Ts=Ts);
+  DiscreteZerosAndPoles dzp4[:,:]=DiscreteZerosAndPoles.Import.fromModel(modelName=modelName,Ts=Ts);
+  DiscreteTransferFunction dtf4[:,:]=DiscreteTransferFunction.Import.fromModel(modelName=modelName,Ts=Ts);
 
   Real tSpan=10;
   Real y[:,1,1];
@@ -45,37 +47,42 @@ protected
   Real y1[:];
   Real y2[:];
   Real delta;
-  Boolean ok=true;
 
 algorithm
-  if doPlot then
-    Modelica_LinearSystems2.ZerosAndPoles.Plot.step(zp1);
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss1);
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss2);
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss3);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp1);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp2);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp3);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.step(dtf1);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.step(dtf2);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.step(dtf3);
-    Modelica_LinearSystems2.ZerosAndPoles.Plot.ramp(zp1);
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp(dss1);
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp(dss2);
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.ramp(dss3);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp(dzp1);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp(dzp2);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp(dzp3);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.ramp(dtf1);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.ramp(dtf2);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.ramp(dtf3);
-
-//    Modelica_LinearSystems2.DiscreteStateSpace.Plot.step(dss4);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.step(dzp4[1,1]);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.step(dtf4[1,1]);
+  ok := false;
+  print("--  Test of " + getInstanceName() + " --");
+  if not Modelica.Utilities.Strings.isEmpty(outputFile) then
+    print("--  Test of " + getInstanceName() + " --", outputFile);
   end if;
 
-// ###############   step - sesponses  #################
+  if doPlot then
+    ZerosAndPoles.Plot.step(zp1);
+    DiscreteStateSpace.Plot.step(dss1);
+    DiscreteStateSpace.Plot.step(dss2);
+    DiscreteStateSpace.Plot.step(dss3);
+    DiscreteZerosAndPoles.Plot.step(dzp1);
+    DiscreteZerosAndPoles.Plot.step(dzp2);
+    DiscreteZerosAndPoles.Plot.step(dzp3);
+    DiscreteTransferFunction.Plot.step(dtf1);
+    DiscreteTransferFunction.Plot.step(dtf2);
+    DiscreteTransferFunction.Plot.step(dtf3);
+    ZerosAndPoles.Plot.ramp(zp1);
+    DiscreteStateSpace.Plot.ramp(dss1);
+    DiscreteStateSpace.Plot.ramp(dss2);
+    DiscreteStateSpace.Plot.ramp(dss3);
+    DiscreteZerosAndPoles.Plot.ramp(dzp1);
+    DiscreteZerosAndPoles.Plot.ramp(dzp2);
+    DiscreteZerosAndPoles.Plot.ramp(dzp3);
+    DiscreteTransferFunction.Plot.ramp(dtf1);
+    DiscreteTransferFunction.Plot.ramp(dtf2);
+    DiscreteTransferFunction.Plot.ramp(dtf3);
+
+//    DiscreteStateSpace.Plot.step(dss4);
+//    DiscreteZerosAndPoles.Plot.step(dzp4[1,1]);
+//    DiscreteTransferFunction.Plot.step(dtf4[1,1]);
+  end if;
+
+// ###############   step - responses  #################
   y := DiscreteZerosAndPoles.Analysis.stepResponse(dzp=dzp1, tSpan=tSpan);
   y0 := y[:,1,1];
   y := DiscreteZerosAndPoles.Analysis.stepResponse(dzp=dzp2, tSpan=tSpan);
@@ -178,23 +185,23 @@ algorithm
   assert(ok, "dzp1 or dtf1 failed");
 
   if doPlot then
-    Modelica_LinearSystems2.ZerosAndPoles.Plot.impulse(zp1);
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse(dss1);
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse(dss2);
-    Modelica_LinearSystems2.DiscreteStateSpace.Plot.impulse(dss3);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.impulse(dzp1);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.impulse(dzp2);
-    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.impulse(dzp3);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.impulse(dtf1);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.impulse(dtf2);
-    Modelica_LinearSystems2.DiscreteTransferFunction.Plot.impulse(dtf3);
+    ZerosAndPoles.Plot.impulse(zp1);
+    DiscreteStateSpace.Plot.impulse(dss1);
+    DiscreteStateSpace.Plot.impulse(dss2);
+    DiscreteStateSpace.Plot.impulse(dss3);
+    DiscreteZerosAndPoles.Plot.impulse(dzp1);
+    DiscreteZerosAndPoles.Plot.impulse(dzp2);
+    DiscreteZerosAndPoles.Plot.impulse(dzp3);
+    DiscreteTransferFunction.Plot.impulse(dtf1);
+    DiscreteTransferFunction.Plot.impulse(dtf2);
+    DiscreteTransferFunction.Plot.impulse(dtf3);
   end if;
 
   DiscreteStateSpace.Plot.bodeSISO(dss2);
   DiscreteZerosAndPoles.Plot.bode(dzp2);
   DiscreteTransferFunction.Plot.bode(dtf2);
 
-  Modelica.Utilities.Streams.print("ok = "+String(ok));
+  ok := true;
 
   annotation(__Dymola_interactive=true);
-end Conversions;
+end conversions;

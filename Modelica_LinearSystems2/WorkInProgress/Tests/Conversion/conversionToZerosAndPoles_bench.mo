@@ -12,14 +12,8 @@ function conversionToZerosAndPoles_bench
 
 protected
   Real A[n,n];
-  Real B[n,1]=fill(
-      1,
-      n,
-      1);
-  Real C[1,n]=fill(
-      0,
-      1,
-      n);
+  Real B[n,1]=fill(1, n, 1);
+  Real C[1,n]=fill(0, 1, n);
   Real D[1,1]=[0];
 
   StateSpace ss=StateSpace(

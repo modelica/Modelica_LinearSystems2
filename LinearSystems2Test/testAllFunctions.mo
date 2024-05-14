@@ -98,6 +98,11 @@ algorithm
   print("--- Test functions of LinearSystems2Test library");
   print("--- Test functions of LinearSystems2Test library", logFile);
   result := LinearSystems2Test.Care.runAll(logFile);
+
+  print("--- Test functions of LinearSystems2Test.DiscreteSystems");
+  result := LinearSystems2Test.DiscreteSystems.conversions(logFile);
+  result := LinearSystems2Test.DiscreteSystems.operations(logFile);
+
   print("--- Test functions run done");
 
   ok := true;
