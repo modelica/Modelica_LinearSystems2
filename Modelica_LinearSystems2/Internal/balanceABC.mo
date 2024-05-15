@@ -60,8 +60,7 @@ algorithm
       end if;
     end for;
   end while;
-  annotation (Documentation(info="<HTML><
-
+  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
 (scale,As,Bs,Cs) = Matrices.<strong>balanceABC</strong>(A,B,C);
@@ -72,36 +71,77 @@ algorithm
 <h4>Description</h4>
 
 <p>
-This function returns a vector scale, such that with T=diagonal(scale) system matrix S_scale
+This function returns a&nbsp;vector <strong>scale</strong>, such that with
+<strong>T</strong>&nbsp;=&nbsp;diagonal(<strong>scale</strong>) system matrix <strong>S_scale</strong>
 </p>
-
-<pre>             |inv(T)*A*T, inv(T)*B|
-   S_scale = |                    |
-             |       C*T,     0   |
-</pre>
-
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> inv(<strong>T</strong>)*<strong>A</strong>*<strong>T</strong> </td>
+      <td>   </td>
+      <td style=\"text-align:center;\"> inv(<strong>T</strong>)*<strong>B</strong> </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td> <strong>S_scale</strong> = </td>
+      <td> | </td>
+      <td>   </td>
+      <td> &ensp;  </td>
+      <td>   </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>C</strong>*<strong>T</strong> </td>
+      <td>   </td>
+      <td style=\"text-align:center;\"> <strong>0</strong> </td>
+      <td> | </td>
+    </tr>
+  </table>
+</blockquote>
 <p>
-has a better condition as system matrix S
+has a better condition then system matrix&nbsp;<strong>S</strong>
 </p>
-
-<pre>       |A, B|
-   S = |    |
-       |C, 0|
-</pre>
-that is, conditionNumber(S_scale) &le; conditionNumber(S). The elements of vector scale
-are multiples of 2 which means that this function does not introduce round-off errors.
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td>   </td>
+      <td> | <strong>A</strong> &ensp; </td>
+      <td style=\"text-align:right;\"> <strong>B</strong> | </td>
+    </tr>
+    <tr>
+      <td> <strong>S</strong> = </td>
+      <td> | </td>
+      <td style=\"text-align:right;\"> | </td>
+    </tr>
+    <tr>
+      <td>   </td>
+      <td> | <strong>C</strong> </td>
+      <td style=\"text-align:right;\"> <strong>0</strong> |</td>
+    </tr>
+  </table>
+</blockquote>
+<p>
+that is, conditionNumber(<strong>S_scale</strong>)&nbsp;&le;&nbsp;conditionNumber(<strong>S</strong>).
+The elements of vector <strong>scale</strong> are multiples of&nbsp;2 which means that this function
+does not introduce round-off errors.
 </p>
 
 <p>
 Balancing a linear dynamic system in state space form
 </p>
 
-<pre>  der(x) = A*x + B*u
-      y  = C*x + D*u
-</pre>
+<blockquote><pre>
+der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</strong>*<strong>u</strong>
+    <strong>y</strong>  = <strong>C</strong>*<strong>x</strong> + <strong>D</strong>*<strong>u</strong>
+</pre></blockquote>
 
 <p>
-means to find a state transformation x_new = T*x = diagonal(scale)*x
+means to find a state transformation
+<strong>x_new</strong>&nbsp;= <strong>T</strong>*<strong>x</strong>&nbsp;= diagonal(<strong>scale</strong>)*<strong>x</strong>
 so that the transformed system is better suited for numerical algorithms.
 </p>
 

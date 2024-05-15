@@ -413,11 +413,34 @@ modifies the eigenvalues sequentially and also allows partial eigenvalue assignm
 At the beginning of the algorithm, the feedback matrix <strong>K</strong> is set to zero (<strong>K</strong> = <strong>0</strong>) and the matrix <strong>A</strong> is
 reduced to an ordered real Schur form by separating its spectrum in two parts
 </p>
-<blockquote><pre>
-             | <strong>F</strong>1  <strong>F</strong>3|
-<strong>F</strong> = <strong>Q</strong>*<strong>A</strong>*<strong>Q</strong>' = |       |
-             | <strong>0</strong>   <strong>F</strong>2|
-</pre></blockquote>
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>F</strong>1 </td>
+      <td> &ensp; </td>
+      <td style=\"text-align:center;\"> <strong>F</strong>3 </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td> <strong>F</strong> = <strong>Q</strong>*<strong>A</strong>*<strong>Q</strong>' = </td>
+      <td> | </td>
+      <td>   </td>
+      <td>   </td>
+      <td>   </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>0</strong> </td>
+      <td>   </td>
+      <td style=\"text-align:center;\"> <strong>F</strong>2 </td>
+      <td> | </td>
+    </tr>
+  </table>
+</blockquote>
 <p>
 in such a way, that <strong>F</strong>1 contains the eigenvalues that will be
 retained and <strong>F</strong>3 contains the eigenvalues going to be modified. On the suggestion
@@ -433,9 +456,9 @@ but other specification are conceivable of course.<br>
 <p>
 Let
 </p>
-<blockquote><pre>
+<blockquote>
 <strong>G</strong> = [<strong>G</strong>1;<strong>G</strong>2] = <strong>Q</strong>*<strong>B</strong>
-</pre></blockquote>
+</blockquote>
 <p>
 with an appropriate partition according to <strong>F</strong>2. (<strong>F</strong>2, <strong>G</strong>2) has to be
 controllable.
@@ -444,18 +467,39 @@ controllable.
 <p>
 If the feedback matrix <strong>K</strong> is taken in a form
 </p>
-<blockquote><pre>
-<strong>K</strong> = [0, <strong>K</strong>2]
-</pre></blockquote>
+
+<blockquote>
+<strong>K</strong> = [<strong>0</strong>, <strong>K</strong>2]
+</blockquote>
 <p>
 the special structure of <strong>F</strong> and <strong>K</strong> results in a closed loop state
 matrix
 </p>
-<blockquote><pre>
-          |<strong>F</strong>1 <strong>F</strong>3 - <strong>G</strong>1*<strong>K</strong>2|
-<strong>F</strong> - <strong>G</strong>*<strong>K</strong> = |             |
-          |0  <strong>F</strong>2 - <strong>G</strong>2*<strong>K</strong>2|
-</pre></blockquote>
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td>   </td>
+      <td> |  </td>
+      <td style=\"text-align:center;\"> <strong>F</strong>1 </td>
+      <td> &ensp; </td>
+      <td style=\"text-align:right;\"> <strong>F</strong>3 &minus; <strong>G</strong>1*<strong>K</strong>2 | </td>
+    </tr>
+    <tr>
+      <td> <strong>F</strong> &minus; <strong>G</strong>*<strong>K</strong> = </td>
+      <td> | </td>
+      <td>   </td>
+      <td>   </td>
+      <td style=\"text-align:right;\"> | </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>0</strong> </td>
+      <td>   </td>
+      <td style=\"text-align:right;\"> <strong>F</strong>2 &minus; <strong>G</strong>2*<strong>K</strong>2 | </td>
+    </tr>
+  </table>
+</blockquote>
 <p>
 with only the eigenvalues of <strong>F</strong>2 are modified. This approach to modify
 separated eigenvalues is used to sequentially shift one real eigenvalue or two
