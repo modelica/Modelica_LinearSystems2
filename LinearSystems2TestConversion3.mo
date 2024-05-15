@@ -314,6 +314,10 @@ package LinearSystems2TestConversion3
         "Rectangular matrix with orthonormal columns such that Q*R=A[:,p]";
       output Real R[size(A, 2),size(A, 2)] "Square upper triangular matrix";
       output Integer p[size(A, 2)] "Column permutation vector";
+      output Real To[size(S, 1),size(S, 2)] "Reordered Schur form";
+      output Real Qo[size(S, 1),size(S, 2)] "Reordered Schur vectors";
+      output Real wr[size(S, 2)] "Reordered eigenvalues, real part";
+      output Real wi[size(S, 2)] "Reordered eigenvalues, imaginary part";
 
     protected
       Real A[3,3] = [1, 0,  0; 6, 5,  0; 1, -2,  2] "Square matrix";
@@ -323,7 +327,8 @@ package LinearSystems2TestConversion3
 
       Real QZ[size(A, 1),size(A, 2)];
       Real alphaReal[size(A, 1)] "Real part of eigenvalue=alphaReal+i*alphaImag";
-      Real alphaImag[size(A, 1)] "Imaginary part of eigenvalue=(alphaReal+i*alphaImag";
+      Real alphaImag[size(A, 1)] "Imaginary part of eigenvalue=alphaReal+i*alphaImag";
+      Real alpha=-1e10 "Maximum admissible value for real parts of the eigenvalues of A which will not be modified by the eigenvalue assignment algorithm";
 
       Real Als[:,:] = [-1.0, 0.0, 0.0; 0.0, -2.0, 0.0; 0.0, 0.0, -3.0];
       Real Bls[:,:] = [1.0; 1.0; 0.0];
@@ -351,6 +356,8 @@ package LinearSystems2TestConversion3
       n := Modelica_LinearSystems2.Math.Matrices.norm(A);
       Z := Modelica_LinearSystems2.Math.Matrices.nullspace(A);
       (S, QZ, alphaReal, alphaImag) := Modelica_LinearSystems2.Math.Matrices.rsf2(A);
+      (S, QZ, alphaReal, alphaImag) := Modelica_LinearSystems2.Math.Matrices.Internal.reorderRSF2(
+          S, identity(size(S, 1)), alphaReal, alphaImag, alpha);
       rcond := Modelica_LinearSystems2.Math.Matrices.rcond(A);
       x := Modelica_LinearSystems2.Math.Matrices.solve(A, b1);
       X := Modelica_LinearSystems2.Math.Matrices.solve2(A, B);
