@@ -3854,19 +3854,39 @@ Computes the invariant zeros of a system in state space form:
 </p>
 <blockquote><pre>
 der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</strong>*<strong>u</strong>
-     <strong>y</strong> = <strong>C</strong>*<strong>x</strong> + <strong>D</strong>*<strong>u</strong>
+    <strong>y</strong>  = <strong>C</strong>*<strong>x</strong> + <strong>D</strong>*<strong>u</strong>
 </pre></blockquote>
 <p>
-The invariant zeros of this system are defined as the variables
-s  that make the Rosenbrock matrix of the system
+The invariant zeros of this system are defined as the variables&nbsp;<var>s</var>
+that make the Rosenbrock matrix of the system
 </p>
-<pre>
-    | s<strong>I-A</strong>   <strong>-B</strong> |
-    |           |
-    | <strong>C</strong>       <strong>D</strong> |
-</pre>
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <var>s</var><strong>I&minus;A</strong> </td>
+      <td> &ensp; </td>
+      <td style=\"text-align:center;\"> &minus;<strong>B</strong> </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td> | </td>
+      <td>   </td>
+      <td>   </td>
+      <td>   </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>C</strong> </td>
+      <td>   </td>
+      <td style=\"text-align:center;\"> <strong>D</strong> </td>
+      <td> | </td>
+    </tr>
+  </table>
+</blockquote>
 <p>
-singular.
+singular, whereby <strong>I</strong> is the identity matrix of the same size as <strong>A</strong>.
 </p>
 <p>
 This function applies the algorithm described in [1] where the system (<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>) is reduced to a new system (<strong>A</strong>r, <strong>B</strong>r <strong>C</strong>r, <strong>D</strong>r) with the same zeros and with <strong>D</strong>r of full rank.
@@ -4040,18 +4060,65 @@ controllable = StateSpace.Analysis.<strong>isControllable</strong>(ss, method)
 <p>
 Function StateSpace.Analysis.<strong>isControllable</strong> checks the controllability of a state space system. Therefore, the system is transformed into staircase form, i.e. the system matrix <strong>H</strong> of the transformed system has block upper Hessenberg form:
 </p>
-<blockquote><pre>
-     | H11    H12     H13    ...     H1k |
-     | H21    H22     H23    ...     H2k |
- <strong>H</strong> = |  0     H32     ...    ...     ... |
-     | ...    ...     ...    ...     ... |
-     |  0     ...      0    Hk,k-1   Hkk |
-</pre></blockquote>
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> &ensp; <strong>H</strong>11 &ensp; </td>
+      <td style=\"text-align:center;\"> &ensp; <strong>H</strong>12 &ensp; </td>
+      <td style=\"text-align:center;\"> &ensp; <strong>H</strong>13 &ensp; </td>
+      <td style=\"text-align:center;\"> &ensp; &ctdot; &ensp; </td>
+      <td style=\"text-align:center;\"> &ensp; <strong>H</strong>1k &ensp; </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>H</strong>21 </td>
+      <td style=\"text-align:center;\"> <strong>H</strong>22 </td>
+      <td style=\"text-align:center;\"> <strong>H</strong>23 </td>
+      <td style=\"text-align:center;\"> &ctdot; </td>
+      <td style=\"text-align:center;\"> <strong>H</strong>2k </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> 0 </td>
+      <td style=\"text-align:center;\"> <strong>H</strong>32 </td>
+      <td style=\"text-align:center;\"> <strong>H</strong>33 </td>
+      <td style=\"text-align:center;\"> &ctdot; </td>
+      <td style=\"text-align:center;\"> <strong>H</strong>3k </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td> <strong>H</strong> = </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> &vellip; </td>
+      <td style=\"text-align:center;\"> &dtdot; </td>
+      <td style=\"text-align:center;\"> &dtdot; </td>
+      <td style=\"text-align:center;\"> &dtdot; </td>
+      <td style=\"text-align:center;\"> &vellip; </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> 0 </td>
+      <td style=\"text-align:center;\"> &ctdot; </td>
+      <td style=\"text-align:center;\"> 0 </td>
+      <td style=\"text-align:center;\"> <strong>H</strong>k,k-1 </td>
+      <td style=\"text-align:center;\"> <strong>H</strong>kk </td>
+      <td> | </td>
+    </tr>
+  </table>
+</blockquote>
 <p>
 where, if <strong>H</strong>k,k-1 has full rank, indicating whether the system is controllable or not.
 </p>
 <p>
-For single input systems the staircase form is a usual upper Hessenberg form, i.e. th blocks are of dimension one.<br>
+For single input systems the staircase form is a usual upper Hessenberg form, i.e. the blocks are of dimension one.<br>
 The boolean input <strong>method</strong> defines for multi output systems the method to generate the staircase form of the system, whereas Types.StaircaseMethod.QR and Types.StaircaseMethod.SVD denotes QR-factorization and singular value decomposition respectively. Since staircase algorithm contains rank decisions QR-factorization should be restricted to well conditioned systems of lower order (&lt;5). Default is SVD.
 </p>
 <p>
@@ -4066,7 +4133,7 @@ Since controllability is dual to observability of the dual system (A', C', B', D
     C=[0,1,0],
     D=[0]);
 
-  Types.Method method=Modelica_LinearSystems2.Types.StaircaseMethod.SVD
+  Types.Method method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
 
   Boolean controllable;
 
@@ -6829,11 +6896,35 @@ modifies the eigenvalues sequentially and also allows partial eigenvalue assignm
 At the beginning of the algorithm, the feedback matrix <strong>K</strong> is set to zero (<strong>K</strong> = <strong>0</strong>) and the matrix <strong>A</strong> is
 reduced to an ordered real Schur form by separating its spectrum in two parts
 </p>
-<blockquote><pre>
-             | <strong>F</strong>1  <strong>F</strong>3|
-<strong>F</strong> = <strong>Q</strong>*<strong>A</strong>*<strong>Q</strong>' = |       |
-             | <strong>0</strong>   <strong>F</strong>2|
-</pre></blockquote>
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>F</strong>1 </td>
+      <td> &ensp; </td>
+      <td style=\"text-align:center;\"> <strong>F</strong>3 </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td> <strong>F</strong> = <strong>Q</strong>*<strong>A</strong>*<strong>Q</strong>' = </td>
+      <td> | </td>
+      <td>   </td>
+      <td>   </td>
+      <td>   </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>0</strong> </td>
+      <td>   </td>
+      <td style=\"text-align:center;\"> <strong>F</strong>2 </td>
+      <td> | </td>
+    </tr>
+  </table>
+</blockquote>
+
 <p>
 in such a way, that <strong>F</strong>1 contains the eigenvalues that will be
 retained and <strong>F</strong>3 contains the eigenvalues going to be modified. On the suggestion
@@ -6841,16 +6932,16 @@ of [1] the eigenvalues <em>evr</em> to be retained are chosen as
 </p>
 <blockquote><pre>
 evr = {s in C: Re(s) &lt; -alpha, alpha &gt;= 0}
-</pre> </blockquote>
+</pre></blockquote>
 <p>
 but other specification are conceivable of course.
 </p>
 <p>
 Let
 </p>
-<blockquote><pre>
+<blockquote>
 <strong>G</strong> = [<strong>G</strong>1;<strong>G</strong>2] = <strong>Q</strong>*<strong>B</strong>
-</pre> </blockquote>
+</blockquote>
 <p>
 with an appropriate partition according to <strong>F</strong>2. (<strong>F</strong>2, <strong>G</strong>2) has to be
 controllable.
@@ -6858,18 +6949,38 @@ controllable.
 <p>
 If the feedback matrix <strong>K</strong> is taken in a form
 </p>
-<blockquote><pre>
-<strong>K</strong> = [0, <strong>K</strong>2]
-</pre></blockquote>
+<blockquote>
+<strong>K</strong> = [<strong>0</strong>, <strong>K</strong>2]
+</blockquote>
 <p>
 the special structure of <strong>F</strong> and <strong>K</strong> results in a closed loop state
 matrix
 </p>
-<blockquote><pre>
-          |<strong>F</strong>1 <strong>F</strong>3 - <strong>G</strong>1*<strong>K</strong>2|
-<strong>F</strong> - <strong>G</strong>*<strong>K</strong> = |             |
-          |0  <strong>F</strong>2 - <strong>G</strong>2*<strong>K</strong>2|
-</pre></blockquote>
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td>   </td>
+      <td> |  </td>
+      <td style=\"text-align:center;\"> <strong>F</strong>1 </td>
+      <td> &ensp; </td>
+      <td style=\"text-align:right;\"> <strong>F</strong>3 &minus; <strong>G</strong>1*<strong>K</strong>2 | </td>
+    </tr>
+    <tr>
+      <td> <strong>F</strong> &minus; <strong>G</strong>*<strong>K</strong> = </td>
+      <td> | </td>
+      <td>   </td>
+      <td>   </td>
+      <td style=\"text-align:right;\"> | </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>0</strong> </td>
+      <td>   </td>
+      <td style=\"text-align:right;\"> <strong>F</strong>2 &minus; <strong>G</strong>2*<strong>K</strong>2 | </td>
+    </tr>
+  </table>
+</blockquote>
 <p>
 with only the eigenvalues of <strong>F</strong>2 are modified. This approach to modify
 separated eigenvalues is used to sequentially shift one real eigenvalue or two
@@ -7416,16 +7527,16 @@ and positive covariance matrix <strong>V</strong>
 E[<strong>v</strong>(t)*<strong>v</strong>'(tau)] = <strong>V</strong>*delta(t-tau).
 </pre></blockquote>
 <p>
-E[s] denotes the expected value of a signal s.
+E[s] denotes the expected value of a&nbsp;signal&nbsp;s.
 </p>
 <p>
 The LQG approach combines the deterministic <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Design.lqr\">LQR</a> approach and <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Design.kalmanFilter\">Kalman filter</a> principle to estimate stochastically disturbed systems, such that input <strong>u</strong>(t) is given by
 </p>
 <blockquote><pre>
-<strong>u</strong>(t) = -<strong>K</strong>c<strong>x</strong>^(t)
+<strong>u</strong>(t) = -<strong>K</strong>c<strong>x&#770;</strong>(t)
 </pre></blockquote>
 <p>
-where <strong>K</strong>c is a lqr feedback matrix and x^(t) the reconstructed state vector estimated by a Kalman filter.
+where <strong>K</strong>c is a lqr feedback matrix and <strong>x&#770;</strong>(t) the reconstructed state vector estimated by a Kalman filter.
 </p>
 <p>
 Since, the considered problem is stochastic, the objective function to minimize is an expected value
@@ -7451,7 +7562,7 @@ where <strong>X</strong>c satisfying the continuous-time algebraic Riccati equat
 <strong>Q</strong> + <strong>A</strong>'*<strong>X</strong>c + <strong>X</strong>c*<strong>A</strong> - <strong>X</strong>c*<strong>B</strong>*<strong>R</strong><sup>-1</sup>*<strong>B</strong>'*<strong>X</strong>c = <strong>0</strong>.
 </pre></blockquote>
 <p>
-The matrix <strong>K</strong>f of the filter problem to generate the estimated state vector <strong>x</strong>^(t) is given by
+The matrix <strong>K</strong>f of the filter problem to generate the estimated state vector <strong>x&#770;</strong>(t) is given by
 </p>
 <blockquote><pre>
 <strong>K</strong>f = <strong>X</strong>f*<strong>C</strong>T*<strong>V</strong>-1,
@@ -7463,30 +7574,95 @@ where <strong>X</strong>f is satisfying the continuous-time algebraic Riccati eq
 <strong>W</strong> + <strong>A</strong>*<strong>X</strong>f + <strong>X</strong>f*<strong>A</strong>' - <strong>X</strong>f*<strong>C</strong>'*<strong>V</strong><sup>-1</sup>*<strong>C</strong>*<strong>X</strong>f = <strong>0</strong>.
 </pre></blockquote>
 <p>
-The vector <strong>x</strong>^(t) satisfies the differential equation
+The vector <strong>x&#770;</strong>(t) satisfies the differential equation
 </p>
 <blockquote><pre>
-.
-<strong>x</strong>^(t) = (<strong>A</strong> - <strong>K</strong>f<strong>C</strong>)<strong>x</strong>^(t) + (<strong>B</strong> - <strong>K</strong>f<strong>D</strong>)<strong>u</strong>(t) + <strong>K</strong>f<strong>y</strong>(t)
+<strong>x&#770;&#775;</strong>(t) = (<strong>A</strong> - <strong>K</strong>f<strong>C</strong>)<strong>x&#770;</strong>(t) + (<strong>B</strong> - <strong>K</strong>f<strong>D</strong>)<strong>u</strong>(t) + <strong>K</strong>f<strong>y</strong>(t)
 </pre></blockquote>
 <p>
-Combining the equation state feedback and state estimation, the state vector <strong>x</strong>(t) and the estimated state vector <strong>x</strong>^(t) are given by
+Combining the equation state feedback and state estimation, the state vector <strong>x</strong>(t) and the estimated state vector <strong>x&#770;</strong>(t) are given by
 </p>
-<blockquote><pre>
- .
-|<strong>x</strong> |   | <strong>A</strong>         -<strong>B</strong><strong>K</strong>c      |  |<strong>x</strong> |   | <strong>I</strong>   <strong>0</strong> |  | <strong>w</strong> |
-|  | = |                     |  |  | + |       |  |   |
-|<strong>x</strong>^|   | <strong>K</strong>f<strong>C</strong>   <strong>A</strong> - <strong>B</strong><strong>K</strong>c - <strong>K</strong>f<strong>C</strong> |  |<strong>x</strong>^|   | <strong>0</strong>  <strong>K</strong>f |  | <strong>v</strong> |.
-</pre></blockquote>
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td> | </td>
+      <td> <strong>x&#775;</strong> </td>
+      <td> | </td>
+      <td>  </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>A</strong> </td>
+      <td> &ensp;  </td>
+      <td style=\"text-align:center;\"> &minus;<strong>B</strong><strong>K</strong>c </td>
+      <td> | </td>
+      <td> &ensp; </td>
+      <td> | </td>
+      <td> <strong>x</strong> </td>
+      <td> | </td>
+      <td>   </td>
+      <td> | <strong>I</strong> &ensp; </td>
+      <td style=\"text-align:right;\"> <strong>0</strong> | </td>
+      <td> &ensp; </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>w</strong> </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td> | </td>
+      <td> <strong>x</strong> </td>
+      <td> | </td>
+      <td> &ensp; = &ensp; </td>
+      <td> | </td>
+      <td>   </td>
+      <td>   </td>
+      <td>   </td>
+      <td> | </td>
+      <td>   </td>
+      <td> | </td>
+      <td>   </td>
+      <td> | </td>
+      <td> &ensp; &plus; &ensp; </td>
+      <td> | </td>
+      <td style=\"text-align:right;\"> | </td>
+      <td>   </td>
+      <td> | </td>
+      <td>   </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td> | </td>
+      <td> <strong>x&#770;&#775;</strong> </td>
+      <td> | </td>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>K</strong>f<strong>C</strong> </td>
+      <td>   </td>
+      <td style=\"text-align:center;\">
+        <strong>A</strong> &minus; <strong>B</strong><strong>K</strong>c &minus; <strong>K</strong>f<strong>C</strong>
+      </td>
+      <td> | </td>
+      <td>   </td>
+      <td> | </td>
+      <td> <strong>x&#770;</strong> </td>
+      <td> | </td>
+      <td>   </td>
+      <td> | <strong>0</strong> </td>
+      <td style=\"text-align:right;\"> <strong>K</strong>f | </td>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>v</strong> </td>
+      <td> | .</td>
+    </tr>
+  </table>
+</blockquote>
+
 <p>
 Finally, the output sslqg represents the estimated system with <strong>y</strong>(t), the output of the real system, as the input
 </p>
-<blockquote><pre>
-.
-<strong>x</strong>^ = [<strong>A</strong> - <strong>K</strong>f<strong>C</strong> - <strong>B</strong><strong>K</strong>c + <strong>K</strong>f<strong>D</strong><strong>K</strong>c]*<strong>x</strong>^ + <strong>K</strong>f*<strong>y</strong>
-
-<strong>y</strong>^ = [<strong>C</strong> - <strong>D</strong><strong>K</strong>c] <strong>x</strong>^
-</pre></blockquote>
+<blockquote>
+<strong>x&#770;&#775;</strong> = [<strong>A</strong> - <strong>K</strong>f<strong>C</strong> - <strong>B</strong><strong>K</strong>c + <strong>K</strong>f<strong>D</strong><strong>K</strong>c]*<strong>x&#770;</strong> + <strong>K</strong>f*<strong>y</strong>
+<br>
+<strong>y&#770;</strong> = [<strong>C</strong> - <strong>D</strong><strong>K</strong>c] <strong>x&#770;</strong>
+</blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -9043,18 +9219,18 @@ tss = StateSpace.Transformation.<strong>toSimilarForm</strong>(ss, T, inverted)
 This function calculates a similar state space system, i.e.
 </p>
 <blockquote><pre>
-der(z) = T*A*inv(T)*z + T*B*u
-     y = C*T*z + D*u
+der(<strong>z</strong>) = <strong>T</strong>*<strong>A</strong>*inv(<strong>T</strong>)*<strong>z</strong> + <strong>T</strong>*<strong>B</strong>*<strong>u</strong>
+    <strong>y</strong>  = <strong>C</strong>*<strong>T</strong>*<strong>z</strong> + <strong>D</strong>*<strong>u</strong>
 </pre></blockquote>
 <p>
 if inverted==false and
 </p>
 <blockquote><pre>
-der(z) = inv(T)*A*T*z + inv(T)*B*u
-     y = C*inv(T)*z + D*u
+der(<strong>z</strong>) = inv(<strong>T</strong>)*<strong>A</strong>*<strong>T</strong>*<strong>z</strong> + inv(<strong>T</strong>)*<strong>B</strong>*<strong>u</strong>
+    <strong>y</strong>  = <strong>C</strong>*inv(<strong>T</strong>)*<strong>z</strong> + <strong>D</strong>*<strong>u</strong>
 </pre></blockquote>
 <p>
-if inverted=true. Matrix T has to be invertible. The transformed system has the same eigenvalues.
+if inverted=true. Matrix <strong>T</strong> has to be invertible. The transformed system has the same eigenvalues.
 </p>
 
 <h4>Example</h4>
@@ -9108,19 +9284,13 @@ if inverted=true. Matrix T has to be invertible. The transformed system has the 
         "transformation is not realizable since the system is not obersvable");
 
       V[:, 1] := Modelica.Math.Matrices.solve(
-        StateSpace.Analysis.observabilityMatrix(ss), vector([fill(
-            0,
-            1,
-            nx - 1), 1]));
+        StateSpace.Analysis.observabilityMatrix(ss), vector([fill(0, 1, nx-1), 1]));
 
       for i in 2:nx loop
         V[:, i] := ss.A*V[:, i - 1];
       end for;
 
-      tss := StateSpace.Transformation.toSimilarForm(
-            ss,
-            V,
-            inverted=true);
+      tss := StateSpace.Transformation.toSimilarForm(ss, V, inverted=true);
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
@@ -9134,14 +9304,14 @@ This function computes the observability form of a SISO state space system, i.e.
 </p>
 <blockquote><pre>
 tss:
-der(z) = inv(T)*A*T*z + inv(T)*B*u
-     y = C*inv(T)*z + D*u
+der(<strong>z</strong>) = inv(<strong>T</strong>)*<strong>A</strong>*<strong>T</strong>*<strong>z</strong> + inv(<strong>T</strong>)*<strong>B</strong>*<strong>u</strong>
+    <strong>y</strong>  = <strong>C</strong>*inv(<strong>T</strong>)*<strong>z</strong> + <strong>D</strong>*<strong>u</strong>
 </pre></blockquote>
 <p>
 with
 </p>
 <blockquote><pre>
-T = [C; C*A; ...; C*A^(n-1)]
+<strong>T</strong> = [<strong>C</strong>; <strong>C</strong>*<strong>A</strong>; ...; <strong>C</strong>*<strong>A</strong>^(n-1)]
 </pre></blockquote>
 <p>
 is the observability matrix of the original state space system.
@@ -9158,14 +9328,14 @@ the canonical observability form is
 <blockquote><pre>
     | 0   0   ...   0   -a0   |        | b0   - a0*bn   |
     | 1   0   ...   0   -a1   |        | b1   - a1*bn   |
-A = | 0   1   ...   0   -a2   |,   B = |     ...        |
+<strong>A</strong> = | 0   1   ...   0   -a2   |,   <strong>B</strong> = |     ...        |
     |... ...  ...  ...  -a3   |        | bn-2 - an-2*bn |
     | 0  ...  ...   1   -an-1 |        | bn-1 - an-1*bn |
 
-C = [0, 0, ..., 1],                D = [bn]
+<strong>C</strong> = [0, 0, ..., 1],                <strong>D</strong> = [bn]
 </pre></blockquote>
 <p>
-Matrix <code>T</code> has to be invertible, i.e. the system has to be observable.
+Matrix <strong>T</strong> has to be invertible, i.e. the system has to be observable.
 The transformed system has the same eigenvalues.
 </p>
 
@@ -9255,14 +9425,14 @@ This function computes the controllability form of a SISO state space system, i.
 </p>
 <blockquote><pre>
 tss:
-der(z) = T*A*inv(T)*z + T*B*u
-     y = C*T*z + D*u
+der(<strong>z</strong>) = <strong>T</strong>*<strong>A</strong>*inv(<strong>T</strong>)*<strong>z</strong> + <strong>T</strong>*<strong>B</strong>*<strong>u</strong>
+    <strong>y</strong>  = <strong>C</strong>*<strong>T</strong>*<strong>z</strong> + <strong>D</strong>*<strong>u</strong>
 </pre></blockquote>
 <p>
 with
 </p>
 <blockquote><pre>
-T = [B, A*B,..., A^(n-1)*B]
+<strong>T</strong> = [<strong>B</strong>, <strong>A</strong>*<strong>B</strong>,..., <strong>A</strong>^(n-1)*<strong>B</strong>]
 </pre></blockquote>
 <p>
 is the observability matrix of the original state space system.
@@ -9279,23 +9449,23 @@ the canonical observability form is
 <blockquote><pre>
     | 0   1   0   ...   0     0   |                        | 0 |
     |  0     0     0    0     0   |                        | 0 |
-A = | ...   ...   ...  ...   ...  |,                   B = |...|
+<strong>A</strong> = | ...   ...   ...  ...   ...  |,                   <strong>B</strong> = |...|
     |  0     0     0    0     0   |                        | 0 |
     | -a0   -a1   -a2  ...  -an-1 |                        | 1 |
 
-C = [ b0 - bn*a0, b1 - bn*a1, ..., bn-1 - bn*an-1],    D = [bn]
+<strong>C</strong> = [ b0 - bn*a0, b1 - bn*a1, ..., bn-1 - bn*an-1],    <strong>D</strong> = [bn]
 </pre></blockquote>
 <p>
-Matrix T has to be invertible, i.e. the system has to be controllable. The transformed system has the same eigenvalues.
+Matrix <strong>T</strong> has to be invertible, i.e. the system has to be controllable. The transformed system has the same eigenvalues.
 </p>
 
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
-      A=[-1, 1; 1, -2],
-      B=[1; 0],
-      C=[1, 1],
-      D=[2]);
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+    A=[-1, 1; 1, -2],
+    B=[1; 0],
+    C=[1, 1],
+    D=[2]);
 
 <strong>algorithm</strong>
   tss:=Modelica_LinearSystems2.StateSpace.Transformation.toControllabilityForm(ss);
@@ -9364,11 +9534,13 @@ This function computes the diagonal form of a SISO state space system, i.e.
 </p>
 <blockquote><pre>
 tss:
-der(z) = inv(T)*A*T*z + inv(T)*B*u
-     y = C*inv(T)*z + D*u
+der(<strong>z</strong>) = inv(<strong>T</strong>)*<strong>A</strong>*<strong>T</strong>*<strong>z</strong> + inv(<strong>T</strong>)*<strong>B</strong>*<strong>u</strong>
+    <strong>y</strong>  = <strong>C</strong>*inv(<strong>T</strong>)*<strong>z</strong> + <strong>D</strong>*<strong>u</strong>
 </pre></blockquote>
 <p>
-Matrix T has to be diagonalizable, i.e. the algebraic and geometric multiplicities of an eigenvalue must coincide. The diagonal entries of the new system matrix tss.<strong>A</strong> are the eigenvalues off the systemmatrix ss.<strong>A</strong>.
+Matrix <strong>T</strong> has to be diagonalizable, i.e. the algebraic and geometric multiplicities
+of an eigenvalue must coincide. The diagonal entries of the new system matrix tss.<strong>A</strong>
+are the eigenvalues off the systemmatrix ss.<strong>A</strong>.
 </p>
 
 <h4>Example</h4>
@@ -9426,31 +9598,84 @@ ssBalanced = StateSpace.Transformation.<strong>toBalancedForm</strong>(ss);
 <h4>Description</h4>
 
 <p>
-Balancing a linear dynamic system in state space form ss means to find a
-state transformation x_new = T*x = diagonal(scale)*x
+Balancing a&nbsp;linear dynamic system in state space form ss means to find a&nbsp;state
+transformation <strong>x_new</strong>&nbsp;= <strong>T</strong>*<strong>x</strong>&nbsp;= diagonal(scale)*<strong>x</strong>
 so that the transformed system is better suited for numerical algorithms.
 In more detail:
 </p>
 
 <p>
-This function performs a similarity transformation with T=diagonal(scale) such that S_scale
+This function performs a&nbsp;similarity transformation with <strong>T</strong>=diagonal(scale)
+such that <strong>S_scale</strong>
 </p>
 
-<pre>             |inv(T)*ss.A*T, inv(T)*ss.B|
-   S_scale = |                          |
-             |       ss.C*T,     0      |
-</pre>
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> inv(<strong>T</strong>)*<strong>A</strong>*<strong>T</strong> </td>
+      <td>   </td>
+      <td style=\"text-align:center;\"> inv(<strong>T</strong>)*<strong>B</strong> </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td> <strong>S_scale</strong> = </td>
+      <td> | </td>
+      <td>   </td>
+      <td>   </td>
+      <td>   </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td>   </td>
+      <td> | </td>
+      <td style=\"text-align:center;\">  <strong>C</strong>*<strong>T</strong> </td>
+      <td>   </td>
+      <td style=\"text-align:center;\"> <strong>0</strong> </td>
+      <td> | </td>
+    </tr>
+  </table>
+</blockquote>
 
 <p>
-has a better condition as system matrix S
+has a&nbsp;better condition then the system matrix&nbsp;<strong>S</strong>
 </p>
 
-<pre>       |ss.A, ss.B|
-   S = |          |
-       |ss.C, 0   |
-</pre>
-that is, conditionNumber(S_scale) &le; conditionNumber(S). The elements of vector scale
-are multiples of 2 which means that this function does not introduce round-off errors.
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td> </td>
+      <td>
+        | <strong>A</strong> &ensp;
+      </td>
+      <td style=\"text-align:right;\">
+        <strong>B</strong> |
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>S</strong> =
+      </td>
+      <td> | </td>
+      <td style=\"text-align:right;\"> | </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>
+        | <strong>C</strong>
+      </td>
+      <td style=\"text-align:right;\">
+        <strong>0</strong> |
+      </td>
+    </tr>
+  </table>
+</blockquote>
+
+<p>
+that is, conditionNumber(<strong>S_scale</strong>) &le; conditionNumber(<strong>S</strong>).
+The elements of vector scale are multiples of&nbsp;2 which means that this function does not
+introduce round-off errors.
 </p>
 
 
@@ -10888,16 +11113,36 @@ der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</str
      <strong>y</strong> = <strong>C</strong>*<strong>x</strong> + <strong>D</strong>*<strong>u</strong>
 </pre></blockquote>
 <p>
-The invariant zeros of this system are defined as the variables
-s  that make the Rosenbrock matrix of the system
+The invariant zeros of this system are defined as the variables&nbsp;<var>s</var>
+that make the Rosenbrock matrix of the system
 </p>
-<blockquote><pre>
-| s<strong>I</strong>-<strong>A</strong>   -<strong>B</strong> |
-|           |
-|  <strong>C</strong> <strong> </strong>    <strong>D</strong> |
-</pre></blockquote>
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <var>s</var><strong>I&minus;A</strong> </td>
+      <td> &ensp; </td>
+      <td style=\"text-align:center;\"> &minus;<strong>B</strong> </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td> | </td>
+      <td>   </td>
+      <td>   </td>
+      <td>   </td>
+      <td> | </td>
+    </tr>
+    <tr>
+      <td> | </td>
+      <td style=\"text-align:center;\"> <strong>C</strong> </td>
+      <td>   </td>
+      <td style=\"text-align:center;\"> <strong>D</strong> </td>
+      <td> | </td>
+    </tr>
+  </table>
+</blockquote>
 <p>
-singular.
+singular, whereby <strong>I</strong> is the identity matrix of the same size as <strong>A</strong>
 </p>
 <p>
 This function applies the algorithm described in [1] where the system (<strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>) is reduced to a new system (<strong>A</strong>r, <strong>B</strong>r <strong>C</strong>r, <strong>D</strong>r) with the same zeros and with <strong>D</strong>r of full rank.
@@ -11004,31 +11249,51 @@ This condition is however not fulfilled");
 <p>
 Computes the invariant zeros of a system in state space form:
 </p>
-<pre>
-   der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</strong>*<strong>u</strong>
-        <strong>y</strong> = <strong>C</strong>*<strong>x</strong> + <strong>D</strong>*<strong>u</strong>
-</pre>
+<blockquote><pre>
+der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</strong>*<strong>u</strong>
+    <strong>y</strong>  = <strong>C</strong>*<strong>x</strong> + <strong>D</strong>*<strong>u</strong>
+</pre></blockquote>
 <p>
 The invariant zeros of this system are defined as the variables
 z that make the following matrix singular:
 </p>
-<pre>
-    | <strong>A</strong> <strong>B</strong> |     | <strong>I</strong> <strong>0</strong> |
-    |     | - z*|     |
-    | <strong>C</strong> <strong>D</strong> |     | <strong>0</strong> <strong>0</strong> |
-</pre>
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td> | <strong>A</strong> &ensp; </td>
+      <td style=\"text-align:right;\"> <strong>B</strong> | </td>
+      <td>   </td>
+      <td> | <strong>I</strong> &ensp; </td>
+      <td style=\"text-align:right;\"> <strong>0</strong> | </td>
+    </tr>
+    <tr>
+      <td> | </td>
+      <td style=\"text-align:right;\"> | </td>
+      <td style=\"text-align:center;\"> &ensp;&minus;&ensp; z* </td>
+      <td> | </td>
+      <td style=\"text-align:right;\"> | </td>
+    </tr>
+    <tr>
+      <td> | <strong>C</strong> </td>
+      <td style=\"text-align:right;\"> <strong>D</strong> | </td>
+      <td>   </td>
+      <td> | <strong>0</strong>  </td>
+      <td style=\"text-align:right;\"> <strong>0</strong> | </td>
+    </tr>
+  </table>
+</blockquote>
 <p>
 where <strong>I</strong> is the identity matrix of the same size as <strong>A</strong>
 and <strong>0</strong> are zero matrices of appropriate dimensions.
 </p>
 <p>
-Unlike to function StateSpace.Analysis.invariantZeros for general systems, it is
-assumed in StateSpace.Analysis.invariantZeros that the generalized system matrix
+Unlike to function
+<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Analysis.invariantZeros\">StateSpace.Analysis.invariantZeros</a>
+for general systems, it is assumed in StateSpace.Analysis.invariantZeros that the generalized system matrix
 [<strong>A</strong>, <strong>B</strong>; <strong>C</strong>, <strong>D</strong>] has upper Hessenberg form. Especially for SISO system this is
 achieved when <strong>A</strong> is of upper Hessenberg form and [1, n] matrix <strong>C</strong> is of form
 <strong>C</strong> = k*[0, 0, ..., 0, 1].
-<p>
-The function uses the LAPACK routine DHGEQZ. Look at <strong>Modelica_LinearSystems2.Math.Matrices.LAPACK.dhgeqz</strong> for details.
+</p>
 <p>
 The advantage of this function in comparison to the general invariantZeros function
 is the lower computational effort because systems with arbitrary system functions are first transformed
@@ -11111,19 +11376,39 @@ This condition is however not fulfilled because the number of outputs is ny = "
 <p>
 Computes the invariant zeros of a system in state space form:
 </p>
-<pre>
-   der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</strong>*<strong>u</strong>
-        <strong>y</strong> = <strong>C</strong>*<strong>x</strong> + <strong>D</strong>*<strong>u</strong>
-</pre>
+<blockquote><pre>
+der(<strong>x</strong>) = <strong>A</strong>*<strong>x</strong> + <strong>B</strong>*<strong>u</strong>
+    <strong>y</strong>  = <strong>C</strong>*<strong>x</strong> + <strong>D</strong>*<strong>u</strong>
+</pre></blockquote>
 <p>
 The invariant zeros of this system are defined as the variables
 z that make the following matrix singular:
 </p>
-<pre>
-    | <strong>A</strong> <strong>B</strong> |     | <strong>I</strong> <strong>0</strong> |
-    |     | - z*|     |
-    | <strong>C</strong> <strong>D</strong> |     | <strong>0</strong> <strong>0</strong> |
-</pre>
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td> | <strong>A</strong> &ensp; </td>
+      <td style=\"text-align:right;\"> <strong>B</strong> | </td>
+      <td>   </td>
+      <td> | <strong>I</strong> &ensp; </td>
+      <td style=\"text-align:right;\"> <strong>0</strong> | </td>
+    </tr>
+    <tr>
+      <td> | </td>
+      <td style=\"text-align:right;\"> | </td>
+      <td style=\"text-align:center;\"> &ensp;&minus;&ensp; z* </td>
+      <td> | </td>
+      <td style=\"text-align:right;\"> | </td>
+    </tr>
+    <tr>
+      <td> | <strong>C</strong> </td>
+      <td style=\"text-align:right;\"> <strong>D</strong> | </td>
+      <td>   </td>
+      <td> | <strong>0</strong>  </td>
+      <td style=\"text-align:right;\"> <strong>0</strong> | </td>
+    </tr>
+  </table>
+</blockquote>
 <p>
 where <strong>I</strong> is the identity matrix of the same size as <strong>A</strong>
 and <strong>0</strong> are zero matrices of appropriate dimensions.
@@ -11224,14 +11509,12 @@ it is transformed to lower controller Hessenberg form
 </blockquote>
 Note, that
 <blockquote><pre>
-                   n-1                        n-1
-rank(<strong>b</strong>, <strong>A</strong>*<strong>b</strong>, ..., <strong>A</strong>  *<strong>b</strong>) = rank(<strong>q</strong>, <strong>H</strong>*<strong>q</strong>, ..., <strong>H  </strong>*<strong>q</strong>)
+rank(<strong>b</strong>, <strong>A</strong>*<strong>b</strong>, ..., <strong>A</strong><sup>n-1</sup>*<strong>b</strong>) = rank(<strong>q</strong>, <strong>H</strong>*<strong>q</strong>, ..., <strong>H</strong><sup>n-1</sup>*<strong>q</strong>)
 </pre>
 </blockquote>
 and that
 <blockquote><pre>
-                 n-1
- (<strong>q</strong>, <strong>H</strong>*<strong>q</strong>, ..., <strong>H</strong>  *<strong>q</strong>)
+(<strong>q</strong>, <strong>H</strong>*<strong>q</strong>, ..., <strong>H</strong><sup>n-1</sup>*<strong>q</strong>)
 </pre>
 </blockquote>
 is a lower triangular matrix and has full rank if and only if none of the elements in the diagonal is zero. That is, that neither qn or hi,i+1,   i = 1,..., n-1   may be zero.
@@ -11315,13 +11598,84 @@ are applied to the dual pair (<strong>A</strong>', <strong>C</strong>') of the s
 <p>
 To check stabilizability (see Modelica_LinearSystems2.StateSpace.Analysis.isStabilizable) , the system is transformed to upper controller Hessenberg form
 </p>
-<blockquote><pre>
-              | *   *   ...   ...    * |               | * |
-              | *   *   ...   ...    * |               | 0 |
-<strong>Q</strong>*<strong>A</strong>*<strong>Q</strong> ' = <strong>H</strong> = | 0   *   ...   ...    * |,    <strong>Q</strong>*<strong>b</strong> = <strong>q</strong> = | . |,   <strong>c</strong>*<strong>Q</strong> = ( *, ..., * )
-              | .   .    .     .     . |               | . |
-              | 0  ...   0     *     * |               | 0 |
-</pre>
+<blockquote>
+  <table style=\"border:0\">
+    <tr>
+      <td>  </td>
+      <td> | * </td>
+      <td style=\"text-align:center;\"> * </td>
+      <td style=\"text-align:center;\"> &ctdot; </td>
+      <td style=\"text-align:center;\"> &ctdot; </td>
+      <td> * | </td>
+      <td>  </td>
+      <td>  </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> * </td>
+      <td> | </td>
+      <td>  </td>
+      <td>  </td>
+    </tr>
+    <tr>
+      <td>  </td>
+      <td> | * </td>
+      <td style=\"text-align:center;\"> * </td>
+      <td style=\"text-align:center;\"> &ctdot; </td>
+      <td style=\"text-align:center;\"> &ctdot; </td>
+      <td> * | </td>
+      <td>  </td>
+      <td>  </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> 0 </td>
+      <td> | </td>
+      <td>  </td>
+      <td>  </td>
+    </tr>
+    <tr>
+      <td> <strong>Q</strong>*<strong>A</strong>*<strong>Q</strong> ' = <strong>H</strong> = </td>
+      <td> | 0 &ensp; </td>
+      <td style=\"text-align:center;\"> &ensp; * &ensp; </td>
+      <td style=\"text-align:center;\"> &ensp; &ctdot; &ensp; </td>
+      <td style=\"text-align:center;\"> &ensp; &ctdot; &ensp; </td>
+      <td> * |, </td>
+      <td> &emsp; </td>
+      <td> <strong>Q</strong>*<strong>b</strong> = <strong>q</strong> = </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> &vellip; </td>
+      <td> |, </td>
+      <td> &emsp; </td>
+      <td> <strong>c</strong>*<strong>Q</strong> = ( *, &ctdot;, * ) </td>
+    </tr>
+    <tr>
+      <td>  </td>
+      <td> | &vellip; </td>
+      <td style=\"text-align:center;\"> &dtdot; </td>
+      <td style=\"text-align:center;\"> &dtdot; </td>
+      <td style=\"text-align:center;\"> &dtdot; </td>
+      <td> &vellip; | </td>
+      <td>  </td>
+      <td>  </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> &vellip; </td>
+      <td> | </td>
+      <td>  </td>
+      <td>  </td>
+    </tr>
+    <tr>
+      <td>  </td>
+      <td> | 0 </td>
+      <td style=\"text-align:center;\"> &ctdot; </td>
+      <td style=\"text-align:center;\"> 0 </td>
+      <td style=\"text-align:center;\"> * </td>
+      <td> * | </td>
+      <td>  </td>
+      <td>  </td>
+      <td> | </td>
+      <td style=\"text-align:center;\"> 0 </td>
+      <td> | </td>
+      <td>  </td>
+      <td>  </td>
+    </tr>
+  </table>
 </blockquote>
 <p>
 The system can be partitioned to
