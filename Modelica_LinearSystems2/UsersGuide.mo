@@ -142,7 +142,7 @@ automatically determined (via calculating the roots of the polynomial and of its
 derivative) and plotted. A&nbsp;typical plot is shown in the next figure:
 </p>
 <div>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial3.png\"/>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial2.png\"/>
 </div>
 <p>
 Several other examples of Polynomial are available in
@@ -153,7 +153,7 @@ Since the Examples function do not have any input arguments, only the \"Ok\"
 button is present:
 </p>
 <div>
-<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial4.png\"/>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Polynomial3.png\"/>
 </div>
 </html>"));
     end Polynomials;
