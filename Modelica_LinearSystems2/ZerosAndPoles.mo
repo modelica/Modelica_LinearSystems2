@@ -4701,27 +4701,32 @@ using the following rules:
 </p>
 
 <table border=1 cellspacing=0 cellpadding=2>
-<tr><td><em>Desired filter</em></td>
-    <td><em>Transformation</em></td>
-    </tr>
-
-<tr><td> High pass filter </td>
+  <tr>
+    <th>Desired filter</th>
+    <th>Transformation</th>
+  </tr>
+  <tr>
+    <td> High pass filter </td>
     <td> replace \"p\" by \"1/p\" </td>
-    </tr>
-
-<tr><td> Band pass filter </td>
-    <td> replace \"p\" by \"(p + 1/p)/w_band\"<br>
-         (w_band = (f_max - f_min)/sqrt(f_min*f_max))</td>
-    </tr>
-
-<tr><td> Stop pass filter  </td>
-    <td> replace \"p\" by \"w_band/(p + 1/p)\"<br>
-         (w_band = (f_max - f_min)/sqrt(f_min*f_max))</td>
-    </tr>
-
-<tr><td> Filter with cut-off angular frequency w_cut </td>
+  </tr>
+  <tr>
+    <td> Band pass filter </td>
+    <td>
+      replace \"p\" by \"(p + 1/p)/w_band\"<br>
+      (w_band = (f_max - f_min)/sqrt(f_min*f_max))
+    </td>
+  </tr>
+  <tr>
+    <td> Stop pass filter  </td>
+    <td>
+      replace \"p\" by \"w_band/(p + 1/p)\"<br>
+      (w_band = (f_max - f_min)/sqrt(f_min*f_max))
+    </td>
+  </tr>
+  <tr>
+    <td> Filter with cut-off angular frequency w_cut </td>
     <td> replace \"p\" by \"p/w_cut\" </td>
-    </tr>
+  </tr>
 </table>
 <p>
 For more details see also

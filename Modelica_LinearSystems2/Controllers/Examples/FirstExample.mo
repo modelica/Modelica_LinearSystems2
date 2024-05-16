@@ -51,5 +51,13 @@ equation
       points={{-22,-30},{-40,-30},{-40,10},{-59,10}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (    experiment(StopTime=5));
+  annotation (
+    experiment(StopTime=5),
+    Documentation(info="<html>
+<p>
+Step response of different control blocks. Simulate for 5&nbsp;s and plot responses of
+the three block representing various systems:
+<code>stateSpace.y[1]</code> <code>transferFunction.y</code> and <code>zerosAndPoles.y</code>.
+</p>
+</html>"));
 end FirstExample;
