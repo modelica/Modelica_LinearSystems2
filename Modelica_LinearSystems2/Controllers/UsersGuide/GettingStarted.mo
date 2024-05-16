@@ -64,7 +64,9 @@ parameter menus:
 <div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Sampled2.png\">
 </div>
-
+<p>
+&nbsp;
+</p>
 <div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/UsersGuide/Sampled3.png\">
 </div>
