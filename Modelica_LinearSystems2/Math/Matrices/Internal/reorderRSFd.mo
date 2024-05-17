@@ -49,5 +49,6 @@ for <em>discrete</em> systems.
 or
 <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.Internal.reorderRSFc\">reorderRSFc</a>
 (for continuous systems).
+</p>
 </html>"));
 end reorderRSFd;

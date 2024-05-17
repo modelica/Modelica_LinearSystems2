@@ -68,11 +68,9 @@ operator record StateSpace
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<blockquote>
-<pre>
+<blockquote><pre>
 ss = StateSpace.&apos;constructor&apos;.<strong>fromABCDMatrices</strong>(A, B, C, D)
-</pre>
-</blockquote>
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -121,11 +119,9 @@ public
       ss.D[1, 1] := r;
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<blockquote>
-<pre>
+<blockquote><pre>
 ss = StateSpace.&apos;constructor&apos;.<strong>fromReal</strong>(r)
-</pre>
-</blockquote>
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -151,11 +147,9 @@ ss.D = [r];
       "Generate a StateSpace data record from a transfer function" annotation (
         Documentation(info="<html>
 <h4>Syntax</h4>
-<blockquote>
-<pre>
+<blockquote><pre>
 ss = StateSpace.&apos;constructor&apos;.<strong>fromTransferFunction</strong>(tf)
-</pre>
-</blockquote>
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -170,11 +164,9 @@ For the simplicity of implementation, this function directly extends from
       "Generate a StateSpace data record from a zeros-and-poles system"
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<blockquote>
-<pre>
+<blockquote><pre>
 ss = StateSpace.&apos;constructor&apos;.<strong>fromZerosAndPoles</strong>(zp)
-</pre>
-</blockquote>
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -185,7 +177,9 @@ For the simplicity of implementation, this function directly extends from
 </html>"));
 
     annotation (Documentation(info="<html>
-<p>This package contains the default constructors for a data record of state space system. </p>
+<p>
+This package contains the default constructors for a data record of state space system.
+</p>
 </html>"));
   end 'constructor';
 
@@ -233,7 +227,7 @@ The operator is used by writing just the following command:
 </p>
 <blockquote><pre>
 ss3 := ss1 - ss2;
-</pre> </blockquote>
+</pre></blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -285,7 +279,7 @@ The operator is used by writing just the following command:
 </p>
 <blockquote><pre>
 ss := -ss1;
-</pre> </blockquote>
+</pre></blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -348,7 +342,7 @@ The operator is used by writing just the following command:
 </p>
 <blockquote><pre>
 ss3 := ss1 + ss2;
-</pre> </blockquote>
+</pre></blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -410,7 +404,7 @@ The operator is used by writing just the following command:
 </p>
 <blockquote><pre>
 result := ss1 * ss2;
-</pre> </blockquote>
+</pre></blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -2542,7 +2536,10 @@ i.e. the states of a similar system, with
 der(<strong>z</strong>) = <strong>V</strong><sup>-1</sup><strong>AVz</strong> + <strong>V</strong><sup>-1</sup><strong>B</strong><strong>u</strong>
 </pre></blockquote>
 <p>
-where the system matrix <strong>V</strong><sup>-1</sup><strong>AV</strong> is the real Jordan form. For single real eigenvectors the system is decoupled, i.e. the solution of the modal states are denoted by
+where the system matrix <strong>V</strong><sup>-1</sup><strong>AV</strong> is the real
+Jordan form. For single real eigenvectors the system is decoupled, i.e. the solution
+of the modal states are denoted by
+</p>
 <blockquote><pre>
 z<sub>i</sub> = exp(s<sub>i</sub> t)*z<sub>0i</sub>
 </pre></blockquote>
@@ -2736,7 +2733,7 @@ Otherwise, the listed modal states might be not the most relevant ones.
   <td style=\"text-align:center\"> &nbsp; 2</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
-  <td style=\"text-align:center\"> &nbsp;    0.0201
+  <td style=\"text-align:center\"> &nbsp;    0.0201</td>
 </tr>
 <tr style=\"background-color:white\">
   <td style=\"text-align:left\"> &nbsp; is composed of  35.4% by z[5/6]</td>
@@ -2751,7 +2748,7 @@ Otherwise, the listed modal states might be not the most relevant ones.
   <td style=\"text-align:center\"> &nbsp; 3</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
-  <td style=\"text-align:center\"> &nbsp;    0.3333
+  <td style=\"text-align:center\"> &nbsp;    0.3333</td>
 </tr>
 <tr style=\"background-color:white\">
   <td style=\"text-align:left\"> &nbsp; is composed of  43.7% by z[5/6]</td>
@@ -2766,14 +2763,14 @@ Otherwise, the listed modal states might be not the most relevant ones.
   <td style=\"text-align:center\"> &nbsp; 1</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
-  <td style=\"text-align:center\"> &nbsp;    0.3346
+  <td style=\"text-align:center\"> &nbsp;    0.3346</td>
 </tr>
 <tr style=\"background-color:white\">
   <td style=\"text-align:left\"> &nbsp; is composed of  36.3% by z[4]</td>
   <td style=\"text-align:center\"> &nbsp; 4</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
-  <td style=\"text-align:center\"> &nbsp;    0.0179
+  <td style=\"text-align:center\"> &nbsp;    0.0179</td>
 <tr style=\"background-color:white\">
   <td rowspan=2 style=\"text-align:left\"> &nbsp; x4 </td>
   <td style=\"text-align:left\"> &nbsp; is composed of  88.9% by z[5/6]</td>
@@ -2787,21 +2784,21 @@ Otherwise, the listed modal states might be not the most relevant ones.
   <td style=\"text-align:center\"> &nbsp; 4</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
-  <td style=\"text-align:center\"> &nbsp;    0.0179
+  <td style=\"text-align:center\"> &nbsp;    0.0179</td>
 <tr style=\"background-color:white\">
   <td rowspan=2 style=\"text-align:left\"> &nbsp; x5 </td>
   <td style=\"text-align:left\"> &nbsp; is composed of  45.3% by z[1]</td>
   <td style=\"text-align:center\"> &nbsp; 1</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
-  <td style=\"text-align:center\"> &nbsp;    0.0000
+  <td style=\"text-align:center\"> &nbsp;    0.0000</td>
 </tr>
 <tr style=\"background-color:white\">
   <td style=\"text-align:left\"> &nbsp; is composed of  44.1% by z[4]</td>
   <td style=\"text-align:center\"> &nbsp; 4</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
-  <td style=\"text-align:center\"> &nbsp;    0.0179
+  <td style=\"text-align:center\"> &nbsp;    0.0179</td>
 <tr style=\"background-color:white\">
   <td style=\"text-align:left\"> &nbsp; x6 </td>
   <td style=\"text-align:left\"> &nbsp; is composed of  95.7% by z[5/6]</td>
@@ -2993,7 +2990,7 @@ Otherwise, the listed modal states might be not the most relevant ones.
 <h4>Syntax</h4>
 <blockquote><pre>
 (y, t, x) = StateSpace.Analysis.<strong>timeResponse</strong>(ss, dt, tSpan, responseType, x0)
-</pre> </blockquote>
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -3011,7 +3008,8 @@ starting at x(t=0)=x0 and y(t=0)=C*x0 + D*u0, the outputs y and x are calculated
 </p>
 
 <h4>Example</h4>
-<blockquote><pre>  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+<blockquote><pre>
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
     A=[-1],
     B=[1],
     C=[2],
@@ -3909,9 +3907,13 @@ This function applies the algorithm described in [1] where the system (<strong>A
 
 <h4><a name=\"References\">References</a></h4>
 <dl>
-<dt>&nbsp;[1] Emami-Naeini, A. and Van Dooren, P. (1982):</dt>
-<dd> <strong>Computation of Zeros of Linear Multivariable Systems</strong>.
-     Automatica, 18, pp. 415-430.<br>&nbsp;</dd>
+  <dt>
+    &nbsp;[1] Emami-Naeini, A. and Van Dooren, P. (1982):
+  </dt>
+  <dd>
+    <strong>Computation of Zeros of Linear Multivariable Systems</strong>.
+    Automatica, 18, pp. 415-430.<br>&nbsp;
+  </dd>
 </dl>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -6220,6 +6222,7 @@ der(<strong>z</strong>) = <strong>V</strong><sup>-1</sup><strong>AVz</strong> + 
 </pre></blockquote>
 <p>
 where the system matrix <strong>V</strong><sup>-1</sup><strong>AV</strong> is the real Jordan form. For single real eigenvectors the system is decoupled, i.e. the solution of the modal states are denoted by
+</p>
 <blockquote><pre>
 z<sub>i</sub> = exp(s<sub>i</sub> t)*z<sub>0i</sub>
 </pre></blockquote>
@@ -7019,9 +7022,13 @@ The eigenvalue(s) to be assigned at  each step is (are) chosen such that the nor
 
 <h4><a name=\"References\">References</a></h4>
 <dl>
-<dt>&nbsp;[1] Varga A. (1981):</dt>
-<dd> <strong>A Schur method for pole assignment</strong>.
-     IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;</dd>
+  <dt>
+    &nbsp;[1] Varga A. (1981):
+  </dt>
+  <dd>
+    <strong>A Schur method for pole assignment</strong>.
+    IEEE Trans. Autom. Control, Vol. AC-26, pp. 517-519.<br>&nbsp;
+  </dd>
 </dl>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -7108,8 +7115,8 @@ As input it uses the plant input and output.
 <p>
 Noise affects the plant states via q(t)
 </p>
-<blockquote>d
-x/dt = Ax + Bu + q(t)
+<blockquote>
+dx/dt = Ax + Bu + q(t)
 </blockquote>
 <p>
 The plant output is affected by r(t)
@@ -7329,8 +7336,7 @@ or the discrete-time algebraic Riccati equation (DARE)
 </p>
 <blockquote><pre>
 <strong>X</strong> - <strong>A</strong>'*<strong>X</strong>*<strong>A</strong> + <strong>A</strong>'*<strong>X</strong>*<strong>B</strong>*(<strong>R</strong> + <strong>B</strong>'*<strong>X</strong>*<strong>B</strong>)<sup>-1</sup>*<strong>B</strong>'*<strong>X</strong>*<strong>A</strong> - <strong>Q</strong> = <strong>0</strong>
-</pre>
-</blockquote>
+</pre></blockquote>
 <p>
 for <strong>X</strong> using the Schur vector approach. See <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.care\">care</a> and <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.dare\">dare</a> respectively for more details.
 </p>
@@ -8825,7 +8831,7 @@ This function plots the initial responses of a state space system for the initia
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = StateSpace.Conversion.<strong>toZerosAndPoles</strong>(ss)
-</pre> </blockquote>
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -8862,9 +8868,13 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 
 <h4><a name=\"References\">References</a></h4>
 <dl>
-<dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
-<dd> <strong>Numerically stable algorithm for transfer function matrix evaluation</strong>.
-     Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
+  <dt>
+    &nbsp;[1] Varga, A and Sima, V. (1981):
+  </dt>
+  <dd>
+    <strong>Numerically stable algorithm for transfer function matrix evaluation</strong>.
+    Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;
+  </dd>
 </dl>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -8913,7 +8923,7 @@ The uncontrollable and unobservable parts are isolated and the eigenvalues and i
 <h4>Syntax</h4>
 <blockquote><pre>
 tf = StateSpace.Conversion.<strong>toTransferFunction</strong>(ss)
-</pre> </blockquote>
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -8999,7 +9009,7 @@ The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conve
 <h4>Syntax</h4>
 <blockquote><pre>
 zp = StateSpace.Conversion.<strong>toZerosAndPolesMIMO</strong>(ss)
-</pre> </blockquote>
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -9051,9 +9061,13 @@ i.e.
 
 <h4><a name=\"References\">References</a></h4>
 <dl>
-<dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
-<dd> <strong>Numerically stable algorithm for transfer function matrix evaluation</strong>.
-     Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
+  <dt>
+    &nbsp;[1] Varga, A and Sima, V. (1981):
+  </dt>
+  <dd>
+    <strong>Numerically stable algorithm for transfer function matrix evaluation</strong>.
+    Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;
+  </dd>
 </dl>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -9697,9 +9711,13 @@ sb = Modelica_LinearSystems2.StateSpace.Transformation.toBalancedForm(ss);
 The algorithm is taken from
 </p>
 <dl>
-<dt>H. D. Joos, G. Gr&uuml;bel:
-<dd><strong>RASP'91 Regulator Analysis and Synthesis Programs</strong><br>
+  <dt>
+    H. D. Joos, G. Gr&uuml;bel:
+  </dt>
+  <dd>
+    <strong>RASP'91 Regulator Analysis and Synthesis Programs</strong><br>
     DLR - Control Systems Group 1991
+  </dd>
 </dl>
 <p>
 which is based on the <code>balance</code> function from EISPACK.
@@ -9782,9 +9800,13 @@ This function is called to compute transfer functions of state space representat
 
 <h4><a name=\"References\">References</a></h4>
 <dl>
-<dt>&nbsp;[1] Varga, A and Sima, V. (1981):</dt>
-<dd> <strong>Numerically stable algorithm for transfer function matrix evaluation</strong>.
-     Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;</dd>
+  <dt>
+    &nbsp;[1] Varga, A and Sima, V. (1981):
+  </dt>
+  <dd>
+    <strong>Numerically stable algorithm for transfer function matrix evaluation</strong>.
+    Int. J. Control, Vol. 33, No. 6, pp. 1123-1133.<br>&nbsp;
+  </dd>
 </dl>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -11170,9 +11192,13 @@ of the complex zero i.
 
 <h4><a name=\"References\">References</a></h4>
 <dl>
-<dt>&nbsp;[1] Emami-Naeini, A. and Van Dooren, P. (1982):</dt>
-<dd> <strong>Computation of Zeros of Linear Multivariable Systems</strong>.
-     Automatica, 18, pp. 415-430.<br>&nbsp;</dd>
+  <dt>
+    &nbsp;[1] Emami-Naeini, A. and Van Dooren, P. (1982):
+  </dt>
+  <dd>
+    <strong>Computation of Zeros of Linear Multivariable Systems</strong>.
+    Automatica, 18, pp. 415-430.<br>&nbsp;
+  </dd>
 </dl>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -11298,6 +11324,7 @@ achieved when <strong>A</strong> is of upper Hessenberg form and [1, n] matrix <
 The advantage of this function in comparison to the general invariantZeros function
 is the lower computational effort because systems with arbitrary system functions are first transformed
 into an upper Hessenberg form system.
+</p>
 <p>
 This function is used in fromStateSpace transformation functions which use Hessenberg form systems anyway.
 </p>
@@ -11505,18 +11532,15 @@ it is transformed to lower controller Hessenberg form
                | *   ...   ...   *   * |               | 0 |
                | *   ...   ...   *   * |               | * |
 
-</pre>
-</blockquote>
+</pre></blockquote>
 Note, that
 <blockquote><pre>
 rank(<strong>b</strong>, <strong>A</strong>*<strong>b</strong>, ..., <strong>A</strong><sup>n-1</sup>*<strong>b</strong>) = rank(<strong>q</strong>, <strong>H</strong>*<strong>q</strong>, ..., <strong>H</strong><sup>n-1</sup>*<strong>q</strong>)
-</pre>
-</blockquote>
+</pre></blockquote>
 and that
 <blockquote><pre>
 (<strong>q</strong>, <strong>H</strong>*<strong>q</strong>, ..., <strong>H</strong><sup>n-1</sup>*<strong>q</strong>)
-</pre>
-</blockquote>
+</pre></blockquote>
 is a lower triangular matrix and has full rank if and only if none of the elements in the diagonal is zero. That is, that neither qn or hi,i+1,   i = 1,..., n-1   may be zero.
 </html>"));
     end isControllableSISO;
@@ -11729,14 +11753,18 @@ stabilizability the <strong>H</strong>22 has to be stable.
       end if;
 
       annotation (Documentation(info="<html>
+<p>
 This function checks whether a MIMO state space system is detectable or not.
+</p>
 <p>
 A system is detectable for the continuous-time case if all of the unobservable eigenvalues have negative real part
 or for the discrete-time case if all of the unobservable eigenvalues are in the complex unit circle respectively.
 Hence, a observable system is always detectable of course.
+</p>
 <p>
 To check detectability, staircase algorithm is used to separate the observable subspace from the unobservable subspace.
 The unobservable poles are checked to be stable.
+</p>
 </html>"));
     end isDetectableMIMO;
 
@@ -11929,14 +11957,18 @@ stabilizability the <strong>H</strong>22 has to be stable.
       end if;
 
       annotation (Documentation(info="<html>
+<p>
 This function checks whether a MIMO state space system is stabilizable or not.
+</p>
 <p>
 A system is stabilizable for the continuous-time case if all of the uncontrollable eigenvalues have negative real part
 or for the discrete-time case if all of the uncontrollable eigenvalues are in the complex unit circle respectively.
 Hence, a controllable system is always stabilizable of course.
+</p>
 <p>
 To check stabilizability, staircase algorithm is used to separate the controllable subspace from the uncontrollable subspace.
 The uncontrollable poles are checked to to stable.
+</p>
 </html>"));
     end isStabilizableMIMO;
 
@@ -12925,9 +12957,13 @@ k = ---------- * ----------------------
         Documentation(info="<html>
 <h4><a name=\"References\">References</a></h4>
 <dl>
-<dt>&nbsp;[1] Emami-Naeini, A. and Van Dooren, P. (1982):</dt>
-<dd> <strong>Computation of Zeros of Linear Multivariable Systems</strong>.
-     Automatica, 18, pp. 415-430.<br>&nbsp;</dd>
+  <dt>
+    &nbsp;[1] Emami-Naeini, A. and Van Dooren, P. (1982):
+  </dt>
+  <dd>
+    <strong>Computation of Zeros of Linear Multivariable Systems</strong>.
+    Automatica, 18, pp. 415-430.<br>&nbsp;
+  </dd>
 </dl>
 </html>"));
     end reduceRosenbrock;
@@ -13152,7 +13188,10 @@ ss = StateSpace.Import.<strong>fromModel</strong>(modelName, T_linearize, fileNa
 </pre></blockquote>
 
 <h4>Description</h4>
-<p>Generate a StateSpace data record by linearization of a model defined by modelName. The linearization is performed at time T_linearize of the simulation. The result of linearization is transformed into a StateSpace record.
+<p>
+Generate a StateSpace data record by linearization of a model defined by modelName.
+The linearization is performed at time T_linearize of the simulation. The result of
+linearization is transformed into a StateSpace record.
 </p>
 
 <h4>Example</h4>

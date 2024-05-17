@@ -63,6 +63,7 @@ operations on complex numbers can be found in
 functions, especially those concerning vectors and matrices of complex
 numbers, are collected in
 <a href=\"modelica://Modelica_LinearSystems2.ComplexMathAdds\">ComplexMathAdds</a>.
+</p>
 </html>"));
     end ComplexNumbers;
 
@@ -427,11 +428,13 @@ purposes), in order that other Modelica tools can provide the same functionality
     extends Modelica.Icons.Information;
 
     annotation (Documentation(info="<html>
-<p>All files in this directory (Modelica_LinearSystems2) and in all
+<p>
+All files in this directory (Modelica_LinearSystems2) and in all
 subdirectories, especially all files that build package \"Modelica_LinearSystems2\" and all
 files in \"Modelica_LinearSystems2/Resources/\" and \"Modelica_LinearSystems2/help/\"
 are licensed by <strong><u>DLR</u></strong> under the
-<strong><u>3-Clause BSD License</u></strong>.</p>
+<strong><u>3-Clause BSD License</u></strong>.
+</p>
 
 <h4>Licensor</h4>
 <p>
@@ -556,7 +559,7 @@ It is <strong>not backward compatible</strong> to previous versions 2.X.Y od the
 A tested conversion script is provided to transform functions and blocks
 of previous versions 2.X.Y to this new version.
 Obsolete classes that could not be automatically converted to alternative
-implementations have been moved to library ObsoleteLinearSystems2.</li>
+implementations have been moved to library ObsoleteLinearSystems2.
 </p>
 
 <p>

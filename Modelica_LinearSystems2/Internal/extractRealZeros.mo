@@ -83,6 +83,7 @@ call of Internal.numberOfRealZeros(). The optional input argument
 The function returns the real elements of complexVector in
 vector &quot;realZeros&quot; and the real and imaginary part of a conjugate
 complex zero pair in matrix &quot;complexZeros[:]&quot;.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>

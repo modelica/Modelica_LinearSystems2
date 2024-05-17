@@ -130,12 +130,10 @@ respectively.
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<blockquote>
-<pre>
+<blockquote><pre>
 dss = 'constructor'.<strong>fromMatrices</strong>(A, B, C, D)
 dss = 'constructor'.<strong>fromMatrices</strong>(A, B, C, D, Ts, B2, method)
-</pre>
-</blockquote>
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -608,11 +606,9 @@ public
       result.method := dss1.method;
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<blockquote>
-<pre>
+<blockquote><pre>
 dss = DiscreteStateSpace.'-'.<strong>subtract</strong>(dss1, dss2)
-</pre>
-</blockquote>
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -2214,7 +2210,7 @@ of [1] the eigenvalues <em>evr</em> to be retained are chosen as
 </p>
 <blockquote><pre>
 evr = {s in C: Re(s) &lt; -alpha, alpha &gt;=0}
-</pre> </blockquote>
+</pre></blockquote>
 <p>
 but other specification are conceivable of course.
 </p>
@@ -3242,16 +3238,16 @@ of a system from discrete state space representation, i.e. isolating the uncontr
 <h4>Description</h4>
 <p>
 Computes a DiscreteTransferFunction record
+</p>
 <blockquote><pre>
            n(z)     b0 + b1*z + ... + bn*z^n
   dtf = -------- = --------------------------
            d(z)     a0 + a1*z + ... + an*z^n
- </pre></blockquote>
-
+</pre></blockquote>
+<p>
 The algorithm uses <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteZerosAndPoles\">toDiscreteZerosAndPoles</a> to convert the
 discrete state space system into a discrete zeros and poles representation first and after that <a href=\"modelica://Modelica_LinearSystems2.DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction\">DiscreteZerosAndPoles.Conversion.toDiscreteTransferFunction</a> to generate the transfer function.
-
-
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -3328,13 +3324,15 @@ discrete state space system into a discrete zeros and poles representation first
 <h4>Description</h4>
 <p>
 Computes a matrix of DiscreteTransferFunction records
+</p>
 <blockquote><pre>
-           n(z)     b0 + b1*z + ... + bn*z^n
-  dtf = -------- = --------------------------
-           d(z)     a0 + a1*z + ... + an*z^n
- </pre></blockquote>
+         n(z)     b0 + b1*z + ... + bn*z^n
+dtf = -------- = --------------------------
+         d(z)     a0 + a1*z + ... + an*z^n
+</pre></blockquote>
+<p>
 with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.DiscreteStateSpace.Conversion.toDiscreteTransferFunction\">Conversion.toDiscreteTransferFunction</a>
-
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
