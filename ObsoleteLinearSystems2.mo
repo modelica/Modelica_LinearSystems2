@@ -384,7 +384,7 @@ instead.
 </p>
 <p>
 Note: regarding the function from the Modelica Standard Library 
-<p>
+</p>
 <ul>
   <li>
     outputs <code>jpvt</code> and <code>tau</code> are interchanged,

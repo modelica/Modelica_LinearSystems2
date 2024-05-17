@@ -360,10 +360,10 @@ operator for StateSpace records.
 <h4>Description</h4>
 <p>
 Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file must contain the matrix [A, B; C, D] named matrixName and the integer nx representing the order of the system, i.e. the number of rows of the square matrix A.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-
 <strong>algorithm</strong>
   ss:=Modelica_LinearSystems2.StateSpace.Import.fromFile(&quot;stateSpace.mat&quot;, &quot;ABCD&quot;);
 //  ss=StateSpace(

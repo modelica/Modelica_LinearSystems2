@@ -2451,12 +2451,10 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
 Reads and loads a discrete zeros-and-poles transfer function from a mat-file <tt>fileName</tt>. The file must contain the sample time Ts and either the set of variables n1, n2, d1, d2, and k with
 the associated first and second order polynomials or the variables p, z, and k with the poles and zeros, written in two column arrays with real and imaginary in the first and
 second column respectively. The variable k is the real gain in both cases.
-
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-
-
 <strong>algorithm</strong>
   dzp:=Modelica_LinearSystems2.DiscreteZerosAndPoles.Import.fromFile(DataDir + "    /dzp.mat " );
 //  zp = (q^2 + 2*q + 3)/(q + 2)/(q^2 + 2*q + 2)

@@ -1207,6 +1207,7 @@ dzp = DiscreteTransferFunction.Conversion.<strong>toDiscreteZerosAndPoles</stron
 <h4>Description</h4>
 <p>
 Computes a DiscreteZerosAndPoles record
+</p>
 <blockquote><pre>
            product(q + n1[i]) * product(q^2 + n2[i,1]*q + n2[i,2])
 dzp = k * ---------------------------------------------------------

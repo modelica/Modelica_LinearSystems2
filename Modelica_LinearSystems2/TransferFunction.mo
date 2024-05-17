@@ -1078,6 +1078,7 @@ zeros = TransferFunction.Analysis.<strong>invariantZeros</strong>(tf)
 <h4>Description</h4>
 <p>
 Computes the invariant zeros of the corresponding state space representation of a transfer function. The output is a complex vector containing the eigenvalues. Note, that the conversion of the transfer function does not result in a minimal state space system. Therefore, also zeros equal to unobservable or uncontrollable eigenvalues will be computed.
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -1327,6 +1328,7 @@ Q = TransferFunction.Analysis.<strong>controllabilityMatrix</strong>(tf, method)
 <h4>Description</h4>
 <p>
 Calculate the controllability matrix
+</p>
 <blockquote><pre>
 <strong>Q</strong> = [<strong>B</strong>, <strong>A</strong>*<strong>B</strong>, ..., <strong>A</strong>^(n-1)*<strong>B</strong>]
 </pre></blockquote>
@@ -2507,11 +2509,10 @@ is defined slightly differently.
 <h4>Description</h4>
 <p>
 Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file must contain the names of the vector with the polynomial coefficients of numerator and denominator
+</p>
 
 <h4>Example</h4>
 <blockquote><pre>
-
-
 <strong>algorithm</strong>
   tf:=Modelica_LinearSystems2.TransferFunction.Import.fromFile(\"tf.mat\", \"n\", \"d\");
 //  tf = (s^2 + 2*s + 3)/(4*s^2 + 5*s + 6)
@@ -2575,7 +2576,8 @@ tf = TransferFunction.Import.<strong>fromModel</strong>(modelName, T_linearize, 
 </pre></blockquote>
 
 <h4>Description</h4>
-<p>Generate a matrix of TransferFunction data records by linearization of a model
+<p>
+Generate a matrix of TransferFunction data records by linearization of a model
 defined by modelName. The linearization is performed at time T_linearize of
 the simulation. The system is generated using
 <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Import.fromFile\">StateSpace.Import.fromFile</a>

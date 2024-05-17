@@ -835,7 +835,11 @@ ZerosAndPoles zp = p/(p^2 + p + 1)/(p + 1)
 </pre></blockquote>
 
 <h4>Description</h4>
-<p>First, the ZerosAndPoles record is transformed into state space representation which is given to StateSpace.Analysis.timeResponse to calculate the time response of the state space system. The type of the time response is defined by the input <strong>responseType</strong>, i.e.
+<p>
+First, the ZerosAndPoles record is transformed into state space representation which is
+given to StateSpace.Analysis.timeResponse to calculate the time response of the state space
+system. The type of the time response is defined by the input <strong>responseType</strong>,
+i.e.
 </p>
 <blockquote><pre>
 Impulse &quot;Impulse response&quot;,
@@ -1259,16 +1263,15 @@ result = ZerosAndPoles.Analysis.<strong>evaluate</strong>(zp, p, den_min=0)
 <p>
 Function Analysis.<strong>evaluate</strong> evaluates the ZerosAndPoles transfer function at a given (complex) value of p and returns the value G(p)=N(p)/D(p). The optional argument den_min with default 0 is used to guard against a division by zero.
 </p>
-<pre>
-  <strong>if</strong> |(D(p))| >= den_min <strong>then</strong>
-     G(p) = N(p) / D(p);
-  <strong>elseif</strong> D(p).re >= 0.0 <strong>then</strong>
-     G(p) = N(p) / den_min
-  <strong>else</strong>
-     G(p) = -N(p) / den_min
-  <strong>end if</strong>;
-</p>
-</pre>
+<blockquote><pre>
+<strong>if</strong> |(D(p))| >= den_min <strong>then</strong>
+   G(p) = N(p) / D(p);
+<strong>elseif</strong> D(p).re >= 0.0 <strong>then</strong>
+   G(p) = N(p) / den_min
+<strong>else</strong>
+   G(p) = -N(p) / den_min
+<strong>end if</strong>;
+</pre></blockquote>
 
 <h4>Example</h4>
 <blockquote><pre>
@@ -2161,7 +2164,6 @@ zp = <strong>filter</strong>(analogFilter, filterType, order, f_cut, gain, A_rip
 </pre></blockquote>
 
 <h4>Description</h4>
-
 <p>
 This function constructs a ZerosAndPoles transfer function
 description of low and high pass filters. For more details see also
@@ -5768,6 +5770,7 @@ numbers.
 <h4>Calculation of normalized Bessel filter coefficients</h4>
 <p>
 Equation
+</p>
 <blockquote><pre>
 abs(H(j*w0)) = abs(Bn(0)/Bn(j*w0)) = 10^(-3/20)
 </pre></blockquote>
@@ -5807,6 +5810,7 @@ b2_k*p^2 + b1_k*p + 1,   k = 1,... div(n,2)
 </pre></blockquote>
 <p>
 results from
+</p>
 <blockquote><pre>
 a = -1/alpha
 </pre></blockquote>
