@@ -72,18 +72,27 @@ If t_linearize=0, no simulation takes place (only initialization).
 At the simulation stop time, the model is linearized in such a form that
 </p>
 <ul>
-<li>all top-level signals with prefix \"input\" are treated as inputs <strong>u</strong>(t) of the model ,</li>
-<li>all top-level signals with prefix \"output\" are treated as outputs <strong>y</strong>(t) of the model,</li>
-<li>all variables that appear differentiated and that are selected as states at this time instant are treated as states <strong>x</strong> of the model.</li>
+  <li>
+    all top-level signals with prefix \"input\" are treated as inputs <strong>u</strong>(t)
+    of the model,
+  </li>
+  <li>
+    all top-level signals with prefix \"output\" are treated as outputs <strong>y</strong>(t)
+    of the model,
+  </li>
+  <li>
+    all variables that appear differentiated and that are selected as states at this time
+    instant are treated as states <strong>x</strong> of the model.
+  </li>
 </ul>
+
 <p>
-Formally, the non-linear hybrid differential-algebraic equation system is
-therefore treated as the following ordinary equation system at time
-instant t_linearize:
+Formally, the non-linear hybrid differential-algebraic equation system is therefore treated
+as the following ordinary equation system at time instant t_linearize:
 </p>
 <blockquote><pre>
 der(<strong>x</strong>) = <strong>f</strong>(<strong>x</strong>,<strong>u</strong>)
-    <strong>y</strong> = <strong>g</strong>(<strong>x</strong>,<strong>u</strong>)
+    <strong>y</strong>  = <strong>g</strong>(<strong>x</strong>,<strong>u</strong>) 
 </pre></blockquote>
 <p>
 Taylor series expansion (linearization) of this model around the simulation stop time t_linearize:
@@ -93,25 +102,37 @@ Taylor series expansion (linearization) of this model around the simulation stop
 <strong>y</strong>0 = <strong>y</strong>(t_linearize)
 <strong>x</strong>0 = <strong>x</strong>(t_linearize)
 </pre></blockquote>
-<p>and neglecting higher order terms results in the following system: </p>
+<p>
+and neglecting higher order terms results in the following system:
+</p>
 <blockquote><pre>
-der(<strong>x</strong>0+d<strong>x</strong>) = <strong>f</strong>(<strong>x</strong>0,<strong>u</strong>0) + der(<strong>f</strong>,<strong>x</strong>)*d<strong>x</strong> + der(<strong>f</strong>,<strong>u</strong>)*d<strong>u</strong>
-    <strong>y</strong>0 + d<strong>y</strong> = <strong>g</strong>(<strong>x</strong>0,<strong>u</strong>0) + der(<strong>g</strong>,<strong>x</strong>)*d<strong>x</strong> + der(<strong>g</strong>,<strong>u</strong>)*d<strong>u</strong>
+der(<strong>x</strong>0 + d<strong>x</strong>) = <strong>f</strong>(<strong>x</strong>0,<strong>u</strong>0) + der(<strong>f</strong>,<strong>x</strong>)*d<strong>x</strong> + der(<strong>f</strong>,<strong>u</strong>)*d<strong>u</strong>
+    <strong>y</strong>0 + d<strong>y</strong>  = <strong>g</strong>(<strong>x</strong>0,<strong>u</strong>0) + der(<strong>g</strong>,<strong>x</strong>)*d<strong>x</strong> + der(<strong>g</strong>,<strong>u</strong>)*d<strong>u</strong>
 </pre></blockquote>
-<p>where der(<strong>f</strong>,<strong>x</strong>) is the partial derivative of <strong>f</strong> with respect to <strong>x</strong>, and the partial derivatives are computed at the linearization point t_linearize. Re-ordering of terms gives (note <strong>der</strong>(<strong>x</strong>0) = <strong>0</strong>): </p>
+<p>
+where der(<strong>f</strong>,<strong>x</strong>) is the partial derivative
+of&nbsp;<strong>f</strong> with respect to&nbsp;<strong>x</strong>, and the partial
+derivatives are computed at the linearization point t_linearize. Re-ordering of terms
+gives (note <strong>der</strong>(<strong>x</strong>0)&nbsp;=&nbsp;<strong>0</strong>):
+</p>
 <blockquote><pre>
 der(d<strong>x</strong>) = der(<strong>f</strong>,<strong>x</strong>)*d<strong>x</strong> + der(<strong>f</strong>,<strong>u</strong>)*d<strong>u</strong> + <strong>f</strong>(<strong>x</strong>0,<strong>u</strong>0)
-    d<strong>y</strong> = der(<strong>g</strong>,<strong>x</strong>)*d<strong>x</strong> + der(<strong>g</strong>,<strong>u</strong>)*d<strong>u</strong> + (<strong>g</strong>(<strong>x</strong>0,<strong>u</strong>0) - <strong>y</strong>0)
+    d<strong>y</strong>  = der(<strong>g</strong>,<strong>x</strong>)*d<strong>x</strong> + der(<strong>g</strong>,<strong>u</strong>)*d<strong>u</strong> + (<strong>g</strong>(<strong>x</strong>0,<strong>u</strong>0) - <strong>y</strong>0)
 </pre></blockquote>
 <p>
 or
 </p>
 <blockquote><pre>
 der(d<strong>x</strong>) = <strong>A</strong>*d<strong>x</strong> + <strong>B</strong>*d<strong>u</strong> + <strong>f</strong>0
-    d<strong>y</strong> = <strong>C</strong>*d<strong>x</strong> + <strong>D</strong>*d<strong>u</strong>
+    d<strong>y</strong>  = <strong>C</strong>*d<strong>x</strong> + <strong>D</strong>*d<strong>u</strong>
 </pre></blockquote>
 <p>
-This function returns the matrices <strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong> and assumes that the linearization point is a steady-state point of the simulation (i.e., <strong>f</strong>(<strong>x</strong>0,<strong>u</strong>0) = 0). Additionally, the full Modelica names of all inputs, outputs and states shall be returned if possible (default is to return empty name strings).
+This function returns the matrices&nbsp;<strong>A</strong>, <strong>B</strong>,
+<strong>C</strong>, <strong>D</strong> and assumes that the linearization point is
+a&nbsp;steady-state point of the simulation (i.e.,
+<strong>f</strong>(<strong>x</strong>0,<strong>u</strong>0)&nbsp;=&nbsp;0).
+Additionally, the full Modelica names of all inputs, outputs and states shall be
+returned if possible (default is to return empty name strings).
 </p>
 </html>"));
 end linearize2;
