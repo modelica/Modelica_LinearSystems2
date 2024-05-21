@@ -2668,7 +2668,6 @@ The system
 <strong>Conjugated complex pairs of eigenvalues</strong>
 </p>
 <table style=\"font-size:10pt; font-family:Arial; border-collapse:collapse; margin: 20px 0 20px 20px\" cellpadding=\"3\" border=\"1\" cellspacing=\"0\">
-<tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">
   <tr style=\"background-color:rgb(230, 230, 230); text-align:center;\">
     <th> number </th>
     <th> eigenvalue </th>
