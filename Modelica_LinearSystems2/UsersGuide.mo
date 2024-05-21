@@ -1474,7 +1474,7 @@ to the new restrictions of the Modelica Language Version 3.0.
 The following new components have been added:
 </p>
 
-<table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\" style=\"border-collapse:collapse;\">
   <tr><td colspan=\"2\"><strong>Modelica_LinearSystems2.StateSpace.</strong></td></tr>
   <tr><td valign=\"top\"> plotBodeMIMO </td>
       <td valign=\"top\"> Plot bode plot of all transfer functions of a state space system.</td>

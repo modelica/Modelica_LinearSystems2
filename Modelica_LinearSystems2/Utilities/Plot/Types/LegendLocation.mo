@@ -12,7 +12,7 @@ type LegendLocation = enumeration(
 Enumeration to define the legend location. Possible values:
 </p>
 
-<table border=1 cellspacing=0 cellpadding=2>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><th><strong>Types.LegendLocation.</strong></th><th><strong>Meaning</strong></th></tr>
 <tr><td valign=\"top\">Above</td>
     <td valign=\"top\">Above diagram</td></tr>

@@ -4702,7 +4702,7 @@ of the filter transfer function:
 using the following rules:
 </p>
 
-<table border=1 cellspacing=0 cellpadding=2>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
     <th>Desired filter</th>
     <th>Transformation</th>

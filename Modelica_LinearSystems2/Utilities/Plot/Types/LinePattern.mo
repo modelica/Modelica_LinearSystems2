@@ -11,7 +11,7 @@ Enumeration to define the line pattern, that is the line style how the
 defined points are connected together by a polyline. Possible values:
 </p>
 
-<table border=1 cellspacing=0 cellpadding=2>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><th><strong>Types.LinePattern.</strong></th><th><strong>Meaning</strong></th></tr>
 <tr><td valign=\"top\">None</td>
     <td valign=\"top\">Points are not connected</td></tr>
