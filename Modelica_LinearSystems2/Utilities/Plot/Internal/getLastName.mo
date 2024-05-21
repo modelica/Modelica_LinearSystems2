@@ -17,7 +17,7 @@ algorithm
     tail := Strings.substring(path, startIndex+1, Strings.length(path));
   end if;
   annotation (Documentation(revisions="<html>
-<table border=1 cellspacing=0 cellpadding=2>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><th>Date</th> <th align=\"left\">Description</th></tr>
 
 <tr><td valign=\"top\"> Nov. 29, 2015 </td>

@@ -13,7 +13,7 @@ type PointSymbol = enumeration(
 Enumeration to define the style of the symbol to mark a point in a diagram. Possible values:
 </p>
 
-<table border=1 cellspacing=0 cellpadding=2>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><th><strong>Types.PointSymbol.</strong></th><th><strong>Meaning</strong></th></tr>
 <tr><td valign=\"top\">None</td>
     <td valign=\"top\">No symbol (point is not explicitly marked)</td></tr>

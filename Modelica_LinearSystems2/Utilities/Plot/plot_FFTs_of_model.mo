@@ -22,7 +22,7 @@ algorithm
   plot_FFTs_from_directory(directory=directory, logX=logX);
 
   annotation(__Dymola_interactive=true, Documentation(revisions="<html>
-<table border=1 cellspacing=0 cellpadding=2>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><th>Date</th> <th align=\"left\">Description</th></tr>
 
 <tr><td valign=\"top\"> Nov. 29, 2015 </td>

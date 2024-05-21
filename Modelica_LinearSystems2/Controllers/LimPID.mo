@@ -332,7 +332,7 @@ Based on the setting of initType, the integrator (I) and derivative (D)
 blocks inside the PID controller are initialized according to the following table:
 </p>
 
-<table border=1 cellspacing=0 cellpadding=2>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr><th>initType</th>
       <th>I.initType</th>
       <th>D.initType</th></tr>

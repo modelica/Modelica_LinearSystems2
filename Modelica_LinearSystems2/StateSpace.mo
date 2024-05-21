@@ -2679,7 +2679,7 @@ The system
   </tr>
   <tr style=\"background-color:white\">
     <td style=\"text-align:left\">     5/6 </td>
-    <td style=\"text-align:left\"> &nbsp;     1.0299e+00 &plusmn;   6.5528e+00j </td>
+    <td style=\"text-align:left\"> &nbsp;    1.0299e+00 &plusmn; 6.5528e+00j </td>
     <td style=\"text-align:left\"> &nbsp;    1.0557 </td>
     <td style=\"text-align:left\"> &nbsp;   -0.1553 </td>
     <td style=\"text-align:left\"> &nbsp; not stable, stabilizable, detectable  </td>
@@ -2728,7 +2728,7 @@ Otherwise, the listed modal states might be not the most relevant ones.
   <th> T [s] </th>
 </tr>
 <tr style=\"background-color:white\">
-  <td rowspan=2 style=\"text-align:left\"> &nbsp; x1 </td>
+  <td rowspan=\"2\" style=\"text-align:left\"> &nbsp; x1 </td>
   <td style=\"text-align:left\"> &nbsp; is composed of  42.5% by z[2]</td>
   <td style=\"text-align:center\"> &nbsp; 2</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
@@ -2743,7 +2743,7 @@ Otherwise, the listed modal states might be not the most relevant ones.
   <td style=\"text-align:center\"> &nbsp; --- </td>
 </tr>
 <tr style=\"background-color:white\">
-  <td rowspan=2 style=\"text-align:left\"> &nbsp; x2 </td>
+  <td rowspan=\"2\" style=\"text-align:left\"> &nbsp; x2 </td>
   <td style=\"text-align:left\"> &nbsp; is composed of  44.2% by z[3]</td>
   <td style=\"text-align:center\"> &nbsp; 3</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
@@ -2758,7 +2758,7 @@ Otherwise, the listed modal states might be not the most relevant ones.
   <td style=\"text-align:center\"> &nbsp; --- </td>
 </tr>
 <tr style=\"background-color:white\">
-  <td rowspan=2 style=\"text-align:left\"> &nbsp; x3 </td>
+  <td rowspan=\"2\" style=\"text-align:left\"> &nbsp; x3 </td>
   <td style=\"text-align:left\"> &nbsp; is composed of  36.9% by z[1]</td>
   <td style=\"text-align:center\"> &nbsp; 1</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
@@ -2772,7 +2772,7 @@ Otherwise, the listed modal states might be not the most relevant ones.
   <td style=\"text-align:center\"> &nbsp; ---</td>
   <td style=\"text-align:center\"> &nbsp;    0.0179</td>
 <tr style=\"background-color:white\">
-  <td rowspan=2 style=\"text-align:left\"> &nbsp; x4 </td>
+  <td rowspan=\"2\" style=\"text-align:left\"> &nbsp; x4 </td>
   <td style=\"text-align:left\"> &nbsp; is composed of  88.9% by z[5/6]</td>
   <td style=\"text-align:center\"> &nbsp; 5/6</td>
   <td style=\"text-align:center\"> &nbsp;    1.0557</td>
@@ -2786,7 +2786,7 @@ Otherwise, the listed modal states might be not the most relevant ones.
   <td style=\"text-align:center\"> &nbsp; ---</td>
   <td style=\"text-align:center\"> &nbsp;    0.0179</td>
 <tr style=\"background-color:white\">
-  <td rowspan=2 style=\"text-align:left\"> &nbsp; x5 </td>
+  <td rowspan=\"2\" style=\"text-align:left\"> &nbsp; x5 </td>
   <td style=\"text-align:left\"> &nbsp; is composed of  45.3% by z[1]</td>
   <td style=\"text-align:center\"> &nbsp; 1</td>
   <td style=\"text-align:center\"> &nbsp; ---</td>
