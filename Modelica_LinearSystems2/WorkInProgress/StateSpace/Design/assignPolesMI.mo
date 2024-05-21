@@ -397,9 +397,9 @@ Modelica.Utilities.Streams.print("2x2, 2 compl system, complex ass Ann = "+Matri
 
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  (K, S, po, nfp, nap, nup) </td><td align=center> =  </td>  <td> StateSpace.Design.<strong>assignPolesMI</strong>(ss, gamma, np, tol, calculateEigenvectors)  </td> </tr>
-</table>
+<blockquote><pre>
+(K, S, po, nfp, nap, nup, X) = StateSpace.Design.<strong>assignPolesMI</strong>(ss, gamma, alpha, tolerance, calculateEigenvectors)
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>

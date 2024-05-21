@@ -354,9 +354,10 @@ operator for StateSpace records.
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  ss </td><td align=center> =  </td>  <td> StateSpace.Import.<strong>fromFile</strong>(fileName, matrixName)  </td> </tr>
-</table>
+<blockquote><pre>
+ss = StateSpace.Import.<strong>fromFile</strong>(fileName, matrixName)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Reads and loads a state space system from a mat-file <tt>fileName</tt>. The file must contain the matrix [A, B; C, D] named matrixName and the integer nx representing the order of the system, i.e. the number of rows of the square matrix A.
