@@ -2580,7 +2580,7 @@ The resulting report file <code>analysis.html</code> summarizes the following sy
 
 <h4>System report</h4>
 <p>
-The system <strong>Demonstation System</strong>
+The system <strong>Demonstration System</strong>
 </p>
 <blockquote><pre>
 der(<strong>x</strong>) = <strong>A</strong> * <strong>x</strong> + <strong>B</strong> * <strong>u</strong>
@@ -6257,7 +6257,7 @@ On the other hand, the composition of xi is indicated by the elements |v<sub>i,j
 
 <h4>System report</h4>
 <p>
-The system <strong>Demonstation System</strong>
+The system <strong>Demonstration System</strong>
 </p>
 <blockquote><pre>
 der(<strong>x</strong>) = <strong>A</strong> * <strong>x</strong> + <strong>B</strong> * <strong>u</strong>
@@ -6614,7 +6614,7 @@ represented by a StateSpace record.
          + String(nap) + " assigned eigenvalues");
 
       // second reorder (reorderRSF3) according to conjugated complex pairs in A and p
-      // count numbre of conjugated complex pole pairs = max(number_ccpp(eig(A), number_ccpp(gamma))
+      // count number of conjugated complex pole pairs = max(number_ccpp(eig(A), number_ccpp(gamma))
       nccA := 0;
       //mark the real poles of original system
       rselectA := fill(true, nap);
