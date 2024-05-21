@@ -208,5 +208,6 @@ of the continuous controller are compared.
         Text(
           extent={{-12,-91},{53,-97}},
           textColor={255,0,0},
-          textString="plant (flexible drive)")}));
+          textString="plant (flexible drive)"),
+        Rectangle(extent={{-48,50},{96,-16}}, lineColor={255,0,0})}));
 end SimpleControlledDrive;
