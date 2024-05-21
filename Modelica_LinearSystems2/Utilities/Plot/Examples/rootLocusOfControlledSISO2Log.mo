@@ -19,7 +19,9 @@ over the controller gain <strong>k</strong> with a logarithmic gridding in k (th
 marked with a red square):
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfControlledSISO2Log.png\"/></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfControlledSISO2Log.png\"/>
+</div>
 
 <p>
 Compare this plot with the equidistant gridding in k in example

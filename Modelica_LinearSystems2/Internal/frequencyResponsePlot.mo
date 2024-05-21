@@ -112,10 +112,10 @@ This function plots the bode-diagram of a transfer function.
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
-</blockquote>
+</div>
 </html>"));
 end frequencyResponsePlot;

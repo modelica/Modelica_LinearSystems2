@@ -88,6 +88,8 @@ This function demonstrates the supported point symbols defined via enumeration
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol\">Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol</a>:
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showPointSymbols.png\"></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showPointSymbols.png\">
+</div>
 </html>"));
 end showPointSymbols;

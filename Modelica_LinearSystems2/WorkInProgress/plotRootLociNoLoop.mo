@@ -133,6 +133,8 @@ plotRootLoci(modelName, modelParams, simulationOptions, position, useLegend, gri
 
 <h4>Description</h4>
 <p>Calling this function with default setup the following root loci plot will be generated.</p>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rootLociiDefaultSetup.png\"/></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rootLociiDefaultSetup.png\"/>
+</div>
 </html>"));
 end plotRootLociNoLoop;

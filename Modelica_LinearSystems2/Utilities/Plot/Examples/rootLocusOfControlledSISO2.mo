@@ -20,7 +20,9 @@ the cursor on one curve point; then all points belonging to the same parameter v
 marked with a red square):
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfControlledSISO2.png\"/></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfControlledSISO2.png\"/>
+</div>
 
 <p>
 Compare this plot with the logarithmic gridding in k in example

@@ -56,6 +56,8 @@ This function demonstrates the supported line patterns defined via enumeration
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern\">Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern</a>:
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showLinePatterns.png\"></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showLinePatterns.png\">
+</div>
 </html>"));
 end showLinePatterns;

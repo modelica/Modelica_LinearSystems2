@@ -31,8 +31,8 @@ drive with a P-PI cascade controller is demonstrated in example
 <a href=\"modelica://Modelica_LinearSystems2.Controllers.Examples.SimpleControlledDrive\">SimpleControlledDrive</a>.
 </p>
 
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controllers/Examples/SimpleControlledDrive_Layout.png\">
-</p>
+</div>
 </html>"));
 end Controllers;

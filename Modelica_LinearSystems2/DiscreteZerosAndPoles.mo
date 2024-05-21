@@ -1550,11 +1550,11 @@ This function plots the bode-diagram of a DiscreteZerosAndPoles transfer functio
 //  gives:
 </pre></blockquote>
 
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dBbodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/dBodePhase.png\">
-</p>
+</div>
 </html>"));
     end bode;
 
@@ -1652,9 +1652,9 @@ i.e. Impulse, Step, Ramp, or Initial.
 //  gives:
 </pre></blockquote>
 
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/DiscreteZerosAndPoles/timeResponseDZP.png\">
-</p>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -1725,9 +1725,9 @@ This function plots the impulse response of a discrete zeros-and-poles transfer 
 //  gives:
 </pre></blockquote>
 
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/DiscreteZerosAndPoles/impulseResponseDZP.png\">
-</p>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -1796,9 +1796,9 @@ This function plots the step response of a transfer function. It is based on <a 
   // gives:
 </pre></blockquote>
 
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/DiscreteZerosAndPoles/stepResponseDZP.png\">
-</p>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -1866,9 +1866,9 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
   Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.ramp(dzp)
   //  gives:
 </pre></blockquote>
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/DiscreteZerosAndPoles/rampResponseDZP.png\">
-</p>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -1943,9 +1943,9 @@ This function plots the initial response, i.e. the zeros input response of a zer
   // gives:
 </pre></blockquote>
 
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/DiscreteZerosAndPoles/initialResponseDZP.png\">
-</p>
+</div>
 
 <h4>See also</h4>
 <p>

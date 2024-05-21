@@ -137,7 +137,9 @@ Utilities.Plot.<strong>rootLocus</strong>(
 <p>
 yields following diagram
 </p>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rootLociiDefaultSetup.png\"/></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/rootLociiDefaultSetup.png\"/>
+</div>
 </html>"));
   end rootLocus;
 
@@ -196,9 +198,9 @@ This function plots the root locus of model
 over the load inertia <strong>Jload</strong>:
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfDrive.png\">
-</blockquote>
+</div>
 </html>"));
   end rootLocusOfDriveOld;
 

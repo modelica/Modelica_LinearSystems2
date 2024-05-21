@@ -1459,12 +1459,16 @@ Typical frequency responses for the four supported
 low pass filter types are shown in the next figure (this figure was generated
 with function <a href=\"modelica://Modelica_LinearSystems2.Examples.TransferFunction.plotBodeFilter2\">Examples.TransferFunction.plotBodeFilter2</a>):
 </p>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4Filters.png\"/> </p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4Filters.png\"/>
+</div>
 <p>
 The step responses of the same low pass filters are shown in the next figure,
 starting from a steady state initial filter with initial input = 0.2:
 </p>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4FiltersStepResponse.png\"/> </p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4FiltersStepResponse.png\"/>
+</div>
 <p>
 Obviously, the frequency responses give a somewhat wrong impression of the filter
 characteristics: Although Butterworth and Chebyshev filters have a significantly
@@ -1477,11 +1481,15 @@ a non-linear inverse model realizable.
 Typical frequency responses for the four supported high pass filter types are shown
 in the next figure:
 </p>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4Filters.png\"/> </p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4Filters.png\"/>
+</div>
 <p>
 The corresponding step responses of these high pass filters are shown in the next figure:
 </p>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4FiltersStepResponse.png\"/> </p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4FiltersStepResponse.png\"/>
+</div>
 <p>
 All filters are available in <strong>normalized</strong> (default) and non-normalized form.
 In the normalized form, the amplitude of the filter transfer function at the cutoff
@@ -1582,9 +1590,9 @@ Modelica_LinearSystems2.TransferFunction.Plot.polesAndZeros(
 <p>
 and results in
 </p>
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/PolesAndZerosTF.png\">
-</blockquote>
+</div>
 </html>"));
     end polesAndZeros;
 
@@ -1745,11 +1753,11 @@ This function plots the bode-diagram of a transfer function.
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
-</blockquote>
+</div>
 </html>"));
     end bode;
 
@@ -1831,9 +1839,9 @@ This function plots the time response of a transfer function. The character of t
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/timeResponseTF.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -1906,9 +1914,9 @@ This function plots the impulse response of a transfer function. It is based on 
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/impulseResponseTF.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -1979,9 +1987,9 @@ This function plots the step response of a transfer function. It is based on <a 
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/stepResponseTF.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -2052,9 +2060,9 @@ This function plots the ramp response of a transfer function. It is based on <a 
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/rampResponseTF.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -2136,9 +2144,9 @@ This function plots the initial response, i.e. the zeros input response of a tra
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/TransferFunction/initialResponseTF.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>

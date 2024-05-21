@@ -29,10 +29,9 @@ This function plots the following diagram of parameterized curves (with default 
 the menu on the right part is displayed when moving
 the cursor on one curve point; then all points belonging to the same path parameter value are
 marked with a red square):
-
 </p>
-
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotParameterizedCurve1.png\"/></p>
-
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotParameterizedCurve1.png\"/>
+</div>
 </html>"));
 end plotParameterizedCurve1;

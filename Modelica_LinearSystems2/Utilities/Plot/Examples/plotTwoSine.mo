@@ -38,6 +38,8 @@ algorithm
 This function plots the following diagram (with default input arguments):
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotTwoSine.png\"></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotTwoSine.png\">
+</div>
 </html>"));
 end plotTwoSine;

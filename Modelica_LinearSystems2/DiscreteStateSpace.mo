@@ -2441,12 +2441,11 @@ vector <strong>u</strong> to the iy'th element of the output vector <strong>y</s
   Modelica_LinearSystems2.DiscreteStateSpace.Plot.plotBodeSISO(dss, iu, iy)
 //  gives:
 </pre></blockquote>
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagDis.png\">
-</p>
-<p>
+<br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhaseDis.png\">
-</p>
+</div>
 </html>"));
     end bodeSISO;
 

@@ -48,5 +48,7 @@ Enumeration to define the style of the symbol to mark a point in a diagram. Poss
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.showPointSymbols\">Example</a>:
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showPointSymbols.png\"></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showPointSymbols.png\">
+</div>
 </html>"));
