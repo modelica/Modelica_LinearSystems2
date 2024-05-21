@@ -585,7 +585,7 @@ Improvements in this version
     <a href=\"modelica://Modelica_LinearSystems2.Math.Polynomial.degree\">Polynomial.degree</a>:
     fix wrong calculation of polynomial degree&nbsp;<var>n</var> for zero polynomial coefficients 
     <code>c[1]</code> to <code>c[m]</code> and non-zero <code>c[m+1]</code>, with
-    <code>m&nbsp;&lt&nbsp;length(c)</code>.
+    <code>m&nbsp;&lt;&nbsp;length(c)</code>.
   </li>
   <li>
     Add second second time derivative of polynomial
