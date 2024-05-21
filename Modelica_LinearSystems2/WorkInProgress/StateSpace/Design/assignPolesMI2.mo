@@ -299,9 +299,9 @@ end if;
 
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  (K, S, po, nfp, nap, nup) </td><td align=center> =  </td>  <td> StateSpace.Design.<strong>assignPolesMI</strong>(ss, gamma, np, alpha, tol)  </td> </tr>
-</table>
+<blockquote><pre>
+(K, S, po, nfp, nap, nup) = StateSpace.Design.<strong>assignPolesMI</strong>(ss, gamma, np, alpha, tol)
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>

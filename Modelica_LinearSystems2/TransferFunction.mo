@@ -2503,9 +2503,10 @@ is defined slightly differently.
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> TransferFunction.Import.<strong>fromFile</strong>(fileName, numName, denName)  </td> </tr>
-</table>
+<blockquote><pre>
+tf = TransferFunction.Import.<strong>fromFile</strong>(fileName, numName, denName)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file must contain the names of the vector with the polynomial coefficients of numerator and denominator

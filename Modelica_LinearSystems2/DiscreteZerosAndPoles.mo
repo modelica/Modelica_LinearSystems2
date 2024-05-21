@@ -2443,9 +2443,10 @@ See <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Conversion.toStat
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteZerosAndPoles.Import.<strong>fromFile</strong>(fileName)  </td> </tr>
-</table>
+<blockquote><pre>
+dzp = DiscreteZerosAndPoles.Import.<strong>fromFile</strong>(fileName)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Reads and loads a discrete zeros-and-poles transfer function from a mat-file <tt>fileName</tt>. The file must contain the sample time Ts and either the set of variables n1, n2, d1, d2, and k with
@@ -2456,7 +2457,7 @@ second column respectively. The variable k is the real gain in both cases.
 <h4>Example</h4>
 <blockquote><pre>
 <strong>algorithm</strong>
-  dzp:=Modelica_LinearSystems2.DiscreteZerosAndPoles.Import.fromFile(DataDir + "    /dzp.mat " );
+  dzp:=Modelica_LinearSystems2.DiscreteZerosAndPoles.Import.fromFile(DataDir + \"/dzp.mat\");
 //  zp = (q^2 + 2*q + 3)/(q + 2)/(q^2 + 2*q + 2)
 </pre></blockquote>
 </html>"));

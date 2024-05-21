@@ -28,9 +28,10 @@ algorithm
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> StateSpace.Conversion.<strong>toTransferFunctionMIMO</strong>(ss)  </td> </tr>
-</table>
+<blockquote><pre>
+tf = StateSpace.Conversion.<strong>toTransferFunctionMIMO</strong>(ss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Computes a matrix of TransferFunction records
@@ -44,39 +45,19 @@ tf_i = -------- = --------------------------------
 with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
 </p>
 
-
-<h4>Example</h4>
-<h4>Syntax</h4>
-<table>
-<tr> <td align=right>  zp </td><td align=center> =  </td>  <td> StateSpace.Conversion.<strong>toTransferFunctionMIMO</strong>(ss)  </td> </tr>
-</table>
-<h4>Description</h4>
-<p>
-Computes a matrix of TransferFunction records
-</p>
-<blockquote><pre>
-      n(s)     b0 + b1*s + ... + bn*s^n
-tf = ------ = --------------------------
-      d(s)     a0 + a1*s + ... + an*s^n
-</pre></blockquote>
-<p>
-with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.StateSpace.Conversion.toTransferFunction\">Conversion.toTransferFunction</a>
-</p>
-
-
 <h4>Example</h4>
 <blockquote><pre>
-   Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
+  Modelica_LinearSystems2.StateSpace ss=Modelica_LinearSystems2.StateSpace(
     A = [-1.0, 0.0, 0.0;
           0.0,-2.0, 0.0;
           0.0, 0.0,-3.0],
-      B = [0.0, 1.0;
-           1.0, 1.0;
-          -1.0, 0.0],
-      C = [0.0, 1.0, 1.0;
-           1.0, 1.0, 1.0],
-      D = [1.0, 0.0;
-           0.0, 1.0]);
+    B = [0.0, 1.0;
+         1.0, 1.0;
+        -1.0, 0.0],
+    C = [0.0, 1.0, 1.0;
+         1.0, 1.0, 1.0],
+    D = [1.0, 0.0;
+         0.0, 1.0]);
 
 <strong>algorithm</strong>
   zp:=Modelica_LinearSystems2.StateSpace.Conversion.toZerosAndPoles(ss);
@@ -85,7 +66,7 @@ with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.Stat
          1/(s^2 + 5*s + 6), (1*s^2 + 5*s + 5)/(s^2 + 3*s + 2)]
 </pre></blockquote>
 i.e.
- <blockquote><pre>
+<blockquote><pre>
            |                                                   |
            |    (s^2+5*s+7)                    1               |
            | -----------------               -----             |

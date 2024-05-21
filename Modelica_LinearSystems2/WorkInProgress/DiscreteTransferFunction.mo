@@ -435,9 +435,10 @@ algorithm
   result := size(dtf.d,1)-1;
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  result </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Analysis.<strong>denominatorDegree</strong>(dtf)  </td> </tr>
-</table>
+<blockquote><pre>
+result = DiscreteTransferFunction.Analysis.<strong>denominatorDegree</strong>(dtf)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Function Analysis.<strong>denominatorDegree</strong> calculates the degree of the denominator polynomial of a discrete transfer function.
@@ -491,9 +492,9 @@ algorithm
   dzp := DiscreteZerosAndPoles(z, p, k, dtf.Ts, dtf.method, uName=dtf.uName, yName=dtf.yName);
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  dzp </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.<strong>toDiscreteZerosAndPoles</strong>(tf)  </td> </tr>
-</table>
+<blockquote><pre>
+dzp = DiscreteTransferFunction.Conversion.<strong>toDiscreteZerosAndPoles</strong>(tf)
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>
@@ -566,9 +567,9 @@ end if;
 
  annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteTransferFunction.Conversion.toStateSpace<strong>toDiscreteStateSpace</strong>(dtf)  </td> </tr>
-</table>
+<blockquote><pre>
+dss = DiscreteTransferFunction.Conversion.toStateSpace<strong>toDiscreteStateSpace</strong>(dtf)
+</pre></blockquote>
 
 <h4>Description</h4>
 <p>

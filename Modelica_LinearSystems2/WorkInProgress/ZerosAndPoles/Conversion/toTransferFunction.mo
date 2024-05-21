@@ -28,9 +28,10 @@ algorithm
   tf.yName := zp.yName;
   annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  tf </td><td align=center> =  </td>  <td> ZerosAndPoles.Conversion.<strong>toTransferFunction</strong>(zp)  </td> </tr>
-</table>
+<blockquote><pre>
+tf = ZerosAndPoles.Conversion.<strong>toTransferFunction</strong>(zp)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Computes a TransferFunction record

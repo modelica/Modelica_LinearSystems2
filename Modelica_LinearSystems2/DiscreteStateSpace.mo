@@ -3232,9 +3232,10 @@ of a system from discrete state space representation, i.e. isolating the uncontr
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  dtf </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<strong>toDiscreteTransferFunction</strong>(dss)  </td> </tr>
-</table>
+<blockquote><pre>
+dtf = DiscreteStateSpace.Conversion.<strong>toDiscreteTransferFunction</strong>(dss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Computes a DiscreteTransferFunction record
@@ -3318,9 +3319,10 @@ discrete state space system into a discrete zeros and poles representation first
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  dtf </td><td align=center> =  </td>  <td> DiscreteStateSpace.Conversion.<strong>toDiscreteTransferFunctionMIMO</strong>(dss)  </td> </tr>
-</table>
+<blockquote><pre>
+dtf = DiscreteStateSpace.Conversion.<strong>toDiscreteTransferFunctionMIMO</strong>(dss)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Computes a matrix of DiscreteTransferFunction records
@@ -3455,9 +3457,10 @@ with repetitive application of <a href=\"modelica://Modelica_LinearSystems2.Disc
 
       annotation (Documentation(info="<html>
 <h4>Syntax</h4>
-<table>
-<tr> <td align=right>  dss </td><td align=center> =  </td>  <td> DiscreteStateSpace.Import.<strong>fromFile</strong>(fileName, matrixName)  </td> </tr>
-</table>
+<blockquote><pre>
+dss = DiscreteStateSpace.Import.<strong>fromFile</strong>(fileName, matrixName)
+</pre></blockquote>
+
 <h4>Description</h4>
 <p>
 Reads and loads a discrete state space system from a mat-file <tt>fileName</tt>. The discrete System on the file must be described as:
