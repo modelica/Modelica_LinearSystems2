@@ -42,7 +42,7 @@ drag Modelica_LinearSystems2.Controllers.SampleClock into the top level of your 
         Text(
           extent={{-150,-110},{150,-140}},
           textColor={0,0,0},
-          textString="%sampleTime s"),
+          textString="%sampleTime"),
         Ellipse(
           extent={{-25,-10},{-45,10}},
           lineColor={0,0,0},
