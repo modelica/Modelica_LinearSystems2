@@ -48,8 +48,8 @@ algorithm
 This function plots the following diagram (with default input arguments):
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotTwoSineDifferentStyles.png\">
-</blockquote>
+</div>
 </html>"));
 end plotTwoSineDifferentStyles;

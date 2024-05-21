@@ -85,7 +85,9 @@ selection yields the following simulation result.
 </p>
 
 <h4>Simulation results </h4>
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controllers/Examples/MixingUnit_results.png\"/> </p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controllers/Examples/MixingUnit_results.png\"/>
+</div>
 
 <h4><a name=\"References\">References</a></h4>
 <dl>

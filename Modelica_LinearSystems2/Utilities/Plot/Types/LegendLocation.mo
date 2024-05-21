@@ -40,5 +40,7 @@ Enumeration to define the legend location. Possible values:
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.showLegendStyles\">Example</a>:
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showLegendStyles.png\"></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showLegendStyles.png\">
+</div>
 </html>"));

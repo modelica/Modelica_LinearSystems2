@@ -29,7 +29,8 @@ using a matrix layout. For an overview, see the documentation of package
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.showMatrixDiagrams\">Example</a>:
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showMatrixDiagrams.png\"></p>
-
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showMatrixDiagrams.png\">
+</div>
 </html>"));
 end diagramMatrix;

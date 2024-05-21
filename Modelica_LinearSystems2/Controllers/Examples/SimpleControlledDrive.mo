@@ -147,12 +147,12 @@ This example demonstrates the control of a simple model
 of a flexible drive system with a continuous or discrete
 P-PI cascade controller. Simulate for 3 s and plot
 </p>
-<pre>
-  ramp.y          (reference angle of loadInertia)
-  loadInertia.phi (angle of loadInertia)
-  loadInertia.w   (speed of loadInertia)
-  torque.tau      (motor torque)
-</pre>
+<blockquote><pre>
+ramp.y          (reference angle of loadInertia)
+loadInertia.phi (angle of loadInertia)
+loadInertia.w   (speed of loadInertia)
+torque.tau      (motor torque)
+</pre></blockquote>
 <p>
 The standard setting in component sampleClock models a continuous controller.
 This means that all 3 samplers are just dummy components containing the
@@ -192,9 +192,9 @@ selection plots the simulation result of either continuous or discrete controlle
 In the following figure the simulation results of the discrete and
 of the continuous controller are compared.
 </p>
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Controllers/Examples/SimpleControlledDrive_Plot1.png\">
-</p>
+</div>
 </html>"),
     Diagram(graphics={
         Text(

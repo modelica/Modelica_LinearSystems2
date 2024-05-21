@@ -42,6 +42,8 @@ of the sine wave.
 With the default options and freqHz=2 Hz and damping=0.8, the following curve is generated:
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/dampedSine.png\"/></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/dampedSine.png\"/>
+</div>
 </html>"));
 end dampedSine;

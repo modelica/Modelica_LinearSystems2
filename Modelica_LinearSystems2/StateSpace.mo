@@ -7879,9 +7879,9 @@ is defined as
 and results in
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/polesAndZerosSS.png\"/>
-</blockquote>
+</div>
 </html>"));
     end polesAndZeros;
 
@@ -8033,11 +8033,11 @@ vector <strong>u</strong> to the iy'th element of the output vector <strong>y</s
    Modelica_LinearSystems2.StateSpace.Plot.plotBodeSISO(ss, iu, iy)
 //  gives:
 </pre></blockquote>
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
-</p>
+</div>
 </html>"));
     end bodeSISO;
 
@@ -8215,16 +8215,16 @@ StateSpace.Plot.<strong>bodeMIMO</strong>(
    Modelica_LinearSystems2.StateSpace.Plot.plotBodeMIMO(ss)
 //  gives:
 </pre></blockquote>
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
-</p>
-<p>
+</div>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude2.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase2.png\">
-</p>
+</div>
 </html>"));
     end bodeMIMO;
 
@@ -8350,9 +8350,9 @@ This function plots the time response of a state space system. The character of 
   Modelica_LinearSystems2.StateSpace.Plot.timeResponse(ss, response=response)
 // gives:
 </pre></blockquote>
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/timeResponseSS.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -8431,9 +8431,9 @@ for each system corresponding to the transition matrix. It is based on <a href=\
 // gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/impulseResponseSS.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -8508,9 +8508,9 @@ This function plots the step responses of a state space system for each system c
   Modelica_LinearSystems2.StateSpace.Plot.step(ss, tSpan=3)
 // gives:
 </pre></blockquote>
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/stepResponseSS.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -8585,9 +8585,9 @@ This function plots the ramp responses of a state space system for each system c
   Modelica_LinearSystems2.StateSpace.Plot.ramp(ss)
 // gives:
 </pre></blockquote>
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/rampResponseSS.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -8664,9 +8664,9 @@ This function plots the initial responses of a state space system for the initia
 // gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/initialResponseSS.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -13384,9 +13384,9 @@ is defined as
 and results in
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/StateSpace/polesAndZerosSS.png\"/>
-</blockquote>
+</div>
 </html>"));
     end polesAndZeros_Old;
 
@@ -13524,11 +13524,11 @@ vector <strong>u</strong> to the iy'th element of the output vector <strong>y</s
    Modelica_LinearSystems2.StateSpace.Plot.plotBodeSISO(ss, iu, iy)
 //  gives:
 </pre></blockquote>
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
-</p>
+</div>
 </html>"));
     end bodeSISO_Old;
 
@@ -13649,16 +13649,16 @@ StateSpace.Plot.<strong>bodeMIMO</strong>(
    Modelica_LinearSystems2.StateSpace.Plot.plotBodeMIMO(ss)
 //  gives:
 </pre></blockquote>
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
-</p>
-<p>
+</div>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude2.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase2.png\">
-</p>
+</div>
 </html>"));
     end bodeMIMO_old;
   end Internal;

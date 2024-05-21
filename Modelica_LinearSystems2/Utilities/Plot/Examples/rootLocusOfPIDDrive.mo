@@ -28,6 +28,8 @@ the cursor on one curve point; then all points belonging to the same parameter v
 marked with a red square):
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfPIDDrive.png\"/></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfPIDDrive.png\"/>
+</div>
 </html>"));
 end rootLocusOfPIDDrive;

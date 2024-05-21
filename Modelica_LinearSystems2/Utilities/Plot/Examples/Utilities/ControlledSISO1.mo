@@ -41,7 +41,9 @@ equation
 Utility model in order to demonstrate the plotting of a root locus:
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/ControlledSISO1a.png\"/></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/ControlledSISO1a.png\"/>
+</div>
 
 <p>
 This model consists of a linear, time invariant single-input, single-output plant \"zerosAndPoles\"
@@ -49,6 +51,8 @@ that is controlled by a P-Controller with a constant gain k. The pole/zero patte
 is shown in the next figure:
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/ControlledSISO1b.png\"/></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/ControlledSISO1b.png\"/>
+</div>
 </html>"));
 end ControlledSISO1;

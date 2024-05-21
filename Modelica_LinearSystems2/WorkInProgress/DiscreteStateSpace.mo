@@ -726,11 +726,11 @@ Function <strong>plotBodeSISO</strong> plots a bode-diagram of the transfer func
 //  gives:
 </pre></blockquote>
 
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
-</p>
+</div>
 </html>"));
 end bodeSISO;
 

@@ -36,5 +36,7 @@ defined points are connected together by a polyline. Possible values:
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.Examples.showLinePatterns\">Example</a>:
 </p>
 
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showLinePatterns.png\"></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/showLinePatterns.png\">
+</div>
 </html>"));

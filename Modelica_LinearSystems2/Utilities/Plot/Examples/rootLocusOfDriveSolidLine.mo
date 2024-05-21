@@ -21,8 +21,8 @@ This function plots the root locus of model
 over the load inertia <strong>Jload</strong>:
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfDriveSolidLine.png\">
-</blockquote>
+</div>
 </html>"));
 end rootLocusOfDriveSolidLine;

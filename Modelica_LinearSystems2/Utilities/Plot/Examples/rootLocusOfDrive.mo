@@ -25,8 +25,8 @@ the cursor on one curve point; then all points belonging to the same parameter v
 marked with a red square):
 </p>
 
-<p>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/rootLocusOfDrive.png\"/>
-</p>
+</div>
 </html>"));
 end rootLocusOfDrive;

@@ -46,7 +46,8 @@ algorithm
 This function plots the following diagram of parameterized curves using function
 <a href=\"modelica://Modelica_LinearSystems2.Utilities.Plot.parameterizedCurves\">parameterizedCurves</a>
 </p>
-
-<p><img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotParameterizedCurve2.png\"/></p>
+<div>
+<img src=\"modelica://Modelica_LinearSystems2/Resources/Images/Utilities/plotParameterizedCurve2.png\"/>
+</div>
 </html>"));
 end plotParameterizedCurve2;

@@ -2174,16 +2174,16 @@ Typical frequency responses for the 4 supported low pass filter types
 are shown in the next figure (this figure was generated with function
 <a href=\"modelica://Modelica_LinearSystems2.Examples.ZerosAndPoles.plotBodeFilter2\">Examples.ZerosAndPoles.plotBodeFilter2</a>):
 </p>
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4Filters.png\">
-</p>
+</div>
 <p>
 The step responses of the same low pass filters are shown in the next figure,
 starting from a steady state initial filter with initial input = 0.2:
 </p>
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4FiltersStepResponse.png\">
-</p>
+</div>
 <p>
 Obviously, the frequency responses give a somewhat wrong impression
 of the filter characteristics: Although Butterworth and Chebyshev
@@ -2199,16 +2199,16 @@ realizable.
 Typical frequency responses for the 4 supported high pass filter types
 are shown in the next figure:
 </p>
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4Filters.png\">
-</p>
+</div>
 <p>
 The corresponding step responses of these high pass filters are
 shown in the next figure:
 </p>
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4FiltersStepResponse.png\">
-</p>
+</div>
 <p>
 All filters are available in <strong>normalized</strong> (default) and non-normalized form.
 In the normalized form, the amplitude of the filter transfer function
@@ -2359,9 +2359,9 @@ defines a transfer functions as:
 and results in
 </p>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/polesAndZerosZP.png\">
-</blockquote>
+</div>
 </html>"));
     end polesAndZeros;
 
@@ -2549,11 +2549,11 @@ This function plots the bode-diagram of a transfer function.
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodeMagnitude.png\">
 <br>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/bodePhase.png\">
-</blockquote>
+</div>
 </html>"));
     end bode;
 
@@ -2633,9 +2633,9 @@ This function plots the time response of a transfer function. The character of t
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/timeResponseZP.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -2707,9 +2707,9 @@ This function plots the impulse response of a zeros-and-poles transfer function.
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/impulseResponseZP.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -2777,9 +2777,9 @@ This function plots the step response of a zeros-and-poles transfer function. It
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/stepResponseZP.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -2847,9 +2847,9 @@ This function plots the ramp response of a zeros-and-poles transfer function. It
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/rampResponseZP.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -2927,9 +2927,9 @@ This function plots the initial response, i.e. the zeros input response of a zer
 //  gives:
 </pre></blockquote>
 
-<blockquote>
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/ZerosAndPoles/initialResponseZP.png\">
-</blockquote>
+</div>
 
 <h4>See also</h4>
 <p>
@@ -6070,16 +6070,16 @@ Typical frequency responses for the four supported low pass filter types
 are shown in the next figure (this figure was generated with function
 <a href=\"modelica://Modelica_LinearSystems2.Examples.ZerosAndPoles.plotBodeFilter2\">Examples.ZerosAndPoles.plotBodeFilter2</a>):
 </p>
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4Filters.png\">
-</p>
+</div>
 <p>
 The step responses of the same low pass filters are shown in the next figure,
 starting from a steady state initial filter with initial input = 0.2:
 </p>
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/LowPassOrder4FiltersStepResponse.png\">
-</p>
+</div>
 <p>
 Obviously, the frequency responses give a somewhat wrong impression
 of the filter characteristics: Although Butterworth and Chebyshev
@@ -6096,16 +6096,16 @@ Typical frequency responses for the four supported high pass filter types
 are shown in the next figure (generated with function
 <a href=\"modelica://Modelica_LinearSystems2.Examples.ZerosAndPoles.plotBodeFilter3\">Examples.ZerosAndPoles.plotBodeFilter3</a>):
 </p>
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4Filters.png\">
-</p>
+</div>
 <p>
 The corresponding step responses of these high pass filters are
 shown in the next figure:
 </p>
-<p align=\"center\">
+<div>
 <img src=\"modelica://Modelica_LinearSystems2/Resources/Images/HighPassOrder4FiltersStepResponse.png\">
-</p>
+</div>
 <p>
 All filters are available in <strong>normalized</strong> (default) and non-normalized form.
 In the normalized form, the amplitude of the filter transfer function
