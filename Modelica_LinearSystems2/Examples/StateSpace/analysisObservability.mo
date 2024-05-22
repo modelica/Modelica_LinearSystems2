@@ -43,10 +43,10 @@ algorithm
   else
     if isObservable then
       print(
-        "pair (A, B) is observable checked by QR factorzation");
+        "pair (A, B) is observable checked by QR factorization");
     else
       print(
-        "pair (A, B) is not observable checked by QR factorzation");
+        "pair (A, B) is not observable checked by QR factorization");
     end if;
 
     method :=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
