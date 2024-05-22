@@ -47,10 +47,10 @@ algorithm
   else
     if isControllable then
       print(
-        "pair (A, B) is controllable by QR factorzation");
+        "pair (A, B) is controllable by QR factorization");
     else
       print(
-        "pair (A, B) is not controllable by QR factorzation");
+        "pair (A, B) is not controllable by QR factorization");
     end if;
 
     method := StaircaseMethod.SVD;
