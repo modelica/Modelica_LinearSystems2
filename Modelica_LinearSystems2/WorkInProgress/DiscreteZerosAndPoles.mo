@@ -673,12 +673,6 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
 
   end Analysis;
 
-  encapsulated package Design
-  end Design;
-
-  encapsulated package Plot
-  end Plot;
-
   encapsulated package Conversion
 
   function toDiscreteTransferFunction
