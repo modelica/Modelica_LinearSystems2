@@ -25,9 +25,8 @@ algorithm
       eigval[i].im := eigvalIm[i];
     end for;
 
-    assert(info == 0, "Calculating the eigen values with function
-  \"StateSpace.Analysis.eigenVectors\" is not possible, since the
-  numerical algorithm does not converge.");
+    assert(info == 0, "Calculating the eigen values is not possible"
+      + " since the numerical algorithm does not converge.");
 
     i := 1;
     while i <= n loop
