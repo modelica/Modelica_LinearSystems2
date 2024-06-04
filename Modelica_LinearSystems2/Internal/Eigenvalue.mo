@@ -32,7 +32,7 @@ record Eigenvalue
   protected
     Boolean isStable = ev_in.re<0;
     Boolean isImag = abs(ev_in.im)>Modelica.Constants.eps;
-    Real abs_ev = (ev_in.re^2+ev_in.im^2)^0.5;
+    Real abs_ev = sqrt(ev_in.re^2+ev_in.im^2);
 
   algorithm
     ev.ev := ev_in;

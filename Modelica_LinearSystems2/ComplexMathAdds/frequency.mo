@@ -7,7 +7,7 @@ function frequency "Frequency and damping of conjugated complex pole pair"
   output Real damping "Damping of c (= c.re/c.im)";
 
 protected
-  Real abs_ev=(c.re^2 + c.im^2)^0.5;
+  Real abs_ev = sqrt(c.re^2 + c.im^2);
 algorithm
   f := if abs(c.im) > 10*Modelica.Constants.eps then abs_ev/(2*Modelica.Constants.pi) else 0;
   damping := if abs(c.im) > 10*Modelica.Constants.eps then
