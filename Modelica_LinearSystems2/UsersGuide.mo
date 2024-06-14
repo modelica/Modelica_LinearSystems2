@@ -1361,12 +1361,12 @@ New functions/blocks:
      to solve Sylvester equations \"<strong>A</strong>*<strong>X</strong> + <strong>X</strong>*<strong>B</strong> = <strong>C</strong>\"
      using a Schur method.</li>
 
-<li> Function  <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.nullspace\">nullspace</a>
+<li> Function  nullspace
      to calculate the orthogonal nullspace and the dimension (nullity) of
      the nullspace of a matrix.</li>
 
-<li> Functions <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.conditionNumber\">conditionNumber</a>
-     and <a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rcond\">rcond</a>
+<li> Functions conditionNumber
+     and rcond
      to calculate the condition number and the reciprocal condition number of a
      matrix respectively.</li>
 

@@ -2618,7 +2618,7 @@ ZerosAndPoles.Plot.<strong>timeResponse</strong>(
 <h4>Description</h4>
 <p>
 This function plots the time response of a transfer function. The character of the time response if defined by the input
-<a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial.
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Types.TimeResponse\">response</a>, i.e. Impulse, Step, Ramp, or Initial.
 </p>
 
 <h4>Example</h4>
@@ -2626,7 +2626,7 @@ This function plots the time response of a transfer function. The character of t
   ZerosAndPoles p = Modelica_LinearSystems2.ZerosAndPoles.p();
   Modelica_LinearSystems2.ZerosAndPoles zp =(p + 1)/(p^2 + 5*p + 12);
 
-  Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+  Types.TimeResponse response = Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
 
 <strong>algorithm</strong>
   Modelica_LinearSystems2.ZerosAndPoles.Plot.timeResponse(zp, dt=0.02, tSpan=3, response=response)

@@ -125,7 +125,7 @@ the real Schur from.
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica_LinearSystems2.Math.Matrices.rsf2\">Math.Matrices.rsf2</a>
+<a href=\"modelica://Modelica.Math.Matrices.realSchur\">Modelica.Math.Matrices.realSchur</a>
 </p>
 </html>"));
 end rsf;

@@ -25,14 +25,14 @@ This <em>partial</em> function opens the given MATLAB MAT file and
 reads the given matrix of a&nbsp;state space system from this file.
 This function has no outputs, beining considered as
 a&nbsp;&quot;partial&quot; function to be further extended.
-Especially, operations on the protected <code>matrixABCD</code>
+In particular, operations on the protected <code>matrixABCD</code>
 can be done in an extending function.
 </p>
 
 
 <h4>See also</h4>
 <p>
-<a href=\"modelica://Modelica_LinearSystems2.StateSpace.Internal.readSystemDimension\">readSystemDimension</a>
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Streams.readSystemDimension\">readSystemDimension</a>
 </p>
 </html>"));
 end partialReadStateSpaceMatrix;

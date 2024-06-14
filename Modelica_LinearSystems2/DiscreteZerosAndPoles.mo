@@ -1635,7 +1635,7 @@ DiscreteZerosAndPoles.Plot.<strong>timeResponse</strong>(
 <p>
 This function plots the time response of a discrete zeros and poles transfer
 function. The character of the time response if defined by the input
-<a href=\"modelica://Modelica_LinearSystems2.Types.TimeResponse\">response</a>,
+<a href=\"modelica://Modelica_LinearSystems2.Utilities.Types.TimeResponse\">response</a>,
 i.e. Impulse, Step, Ramp, or Initial.
 </p>
 
@@ -1645,7 +1645,7 @@ i.e. Impulse, Step, Ramp, or Initial.
   DiscreteZerosAndPoles dzp=(q^2 - 1.5*q + 0.6)/( (q - 0.8)*(q - 0.75) )
   dzp.Ts = 0.1;
 
-  Types.TimeResponse response=Modelica_LinearSystems2.Types.TimeResponse.Step;
+  Types.TimeResponse response = Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step;
 
 <strong>algorithm</strong>
    Modelica_LinearSystems2.DiscreteZerosAndPoles.Plot.timeResponse(dzp, tSpan=3, response=response)

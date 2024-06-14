@@ -4035,7 +4035,7 @@ since the state&nbsp;<code>x</code> of the initialization has to be used
 also at t&nbsp;=&nbsp;0.
 </p>
 <p>
-In package <a href=\"modelica://Modelica_LinearSystems2.Controller\">Controller</a>,
+In package <a href=\"modelica://Modelica_LinearSystems2.Controllers\">Controllers</a>,
 additional equations are added for the initialization to uniquely compute the
 initial vector&nbsp;<code>x</code>, e.g.:
 </p>
