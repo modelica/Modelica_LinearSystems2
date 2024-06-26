@@ -15,8 +15,8 @@ annotation (
     Modelica(version="4.0.0"),
     DymolaCommands(version="1.17")),
   version="3.0.0",
-  versionDate="2024-06-21",
-  dateModified = "2024-05-22 14:00:00Z",
+  versionDate="2024-06-26",
+  dateModified = "2024-06-26 14:00:00Z",
   revisionId="$Format:%h %ci$",
   conversion(
     from(
