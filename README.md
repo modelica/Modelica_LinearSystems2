@@ -1,5 +1,7 @@
 # Modelica_LinearSystems2
 
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/modelica/Modelica_LinearSystems2?label=last%20release&sort=semver&style=flat-square)
+
 Free library providing different representations of linear, time invariant differential and difference equation systems, as well as typical operations on these system descriptions.
 Additionally, data structures and operations for Complex numbers and for Polynomials are provided. These are utilized above, but are, of course, also useful for other purposes.
 
@@ -19,9 +21,7 @@ Furthermore, in sublibrary Controller about 20 input/output blocks of linear sys
 
 *Note, the library is not backwards compatible to the previous beta version 0.95, called "Modelica_LinearSystems", which was shipped with previous versions of Dymola. Since the differences are too large, no conversion scripts are provided, but different library names are used.*
 
-## Current release
-
-[Modelica_LinearSystems2 v2.4.1+build.2 (2021-11-16)](../../releases/tag/v2.4.1+build.2)
+## Limitations
 
 Please note that the library is known to work with Dymola only.
 
