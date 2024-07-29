@@ -5,7 +5,6 @@ model SRKF_inner "Discrete State Space block"
   import MatricesMSL = Modelica.Math.Matrices;
   import Modelica_LinearSystems2.Math.Matrices;
   import Modelica_LinearSystems2.DiscreteStateSpace;
-  import ControlDesign.Internal.Slicot;
   import Modelica_LinearSystems2.Math.Matrices.triangle;
 
   parameter DiscreteStateSpace dss=DiscreteStateSpace(
@@ -40,14 +39,11 @@ public
 
   discrete Modelica.Blocks.Interfaces.RealOutput x_est[size(dss.A, 1)]
     "Current estmated state vector"
-    annotation (extent=[100, -10; 120, 10], Placement(transformation(extent={{100,
-            -10},{120,10}})));
+    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput y[size(dss.C, 1)] "measured output"
-    annotation (extent=[-140, -20; -100, 20], Placement(transformation(extent={{-140,
-            -80},{-100,-40}}), iconTransformation(extent={{-140,-80},{-100,-40}})));
+    annotation (Placement(transformation(extent={{-140,-80},{-100,-40}}), iconTransformation(extent={{-140,-80},{-100,-40}})));
   Modelica.Blocks.Interfaces.RealInput u[size(dss.B, 2)] "Current input"
-    annotation (extent=[-140, -20; -100, 20], Placement(transformation(extent={{-140,40},
-            {-100,80}})));
+    annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
 
   Real z[size(dss.A, 1)];
 
