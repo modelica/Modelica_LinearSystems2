@@ -17,9 +17,9 @@ function plotBodeSISO "Bode plot of a discrete state space system"
     D=[0.0],
     Ts=0.1,
     B2=[0.0; 0.0; 0.0; 0.0; 0.0; 0.0],
-    method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact);
-  input Integer iu=1 "index of input";
-  input Integer iy=1 "index of output";
+    method=Modelica_LinearSystems2.Utilities.Types.Method.StepExact) "Discrete state space form";
+  input Integer iu=1 "Index of input";
+  input Integer iy=1 "Index of output";
   output Boolean ok;
 
 algorithm
@@ -33,7 +33,7 @@ algorithm
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-This example demonstrates the construnction of a zeros-and-poles-transfer-function from 
+This example demonstrates the construnction of a&nbsp;discrete state-space form from 
 a SISO state space representation and plots the Bode diagrams with automatic determination 
 of the frequency range to plot.
 </p>

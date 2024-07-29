@@ -11,7 +11,7 @@ algorithm
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-Computes the impulse response of the system tf =1/s^2 + s + 1.
+Computes the step response of the system tf =1/s^2 + s + 1.
 </p>
 </html>"));
 end plotStep;

@@ -14,5 +14,8 @@ algorithm
   annotation (
     __Dymola_interactive=true,
     Documentation(info="<html>
+<p>
+Computes the response of system tf =1/s^2 + s + 1 to an initial condition without input.
+</p>
 </html>"));
 end plotInital;
