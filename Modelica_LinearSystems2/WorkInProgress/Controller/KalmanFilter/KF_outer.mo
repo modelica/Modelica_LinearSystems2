@@ -4,7 +4,6 @@ model KF_outer "Discrete State Space block"
 
   import Modelica;
   import Modelica_LinearSystems2.DiscreteStateSpace;
-  import Modelica_LinearSystems2.WorkInProgress.MPC;
   import Modelica_LinearSystems2.WorkInProgress.Optimizer;
   import Modelica_LinearSystems2.StateSpace;
 

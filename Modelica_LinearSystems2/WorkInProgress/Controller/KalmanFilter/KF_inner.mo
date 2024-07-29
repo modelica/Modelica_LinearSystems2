@@ -3,7 +3,6 @@ model KF_inner "Discrete State Space block"
 
   import Modelica;
   import Modelica_LinearSystems2.DiscreteStateSpace;
-  import Modelica_LinearSystems2.WorkInProgress.MPC;
   import Modelica_LinearSystems2.WorkInProgress.Optimizer;
 
   parameter DiscreteStateSpace dss=DiscreteStateSpace(A=[1],B=[1],C=[1],D=[1])
