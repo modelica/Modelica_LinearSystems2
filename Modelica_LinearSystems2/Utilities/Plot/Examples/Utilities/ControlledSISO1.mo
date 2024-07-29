@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Utilities.Plot.Examples.Utilities;
-model ControlledSISO1
+model ControlledSISO1 "Controlled SISO system"
   extends Modelica.Blocks.Interfaces.SISO;
   parameter Real k=1;
 
