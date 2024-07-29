@@ -2085,7 +2085,7 @@ This function plots the ramp response of a transfer function. It is based on <a 
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Initial "Type of time response";
       input Real y0 "Initial output (for initial condition plot)";
 
       extends Modelica_LinearSystems2.Internal.PartialPlotFunction(
