@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
 function plotBodeFilter2
-  "Show low pass filters of all filter types in one diagram"
+  "Show low pass filters of all filter types and plot their Bode diagrams"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.TransferFunction;
@@ -10,8 +10,7 @@ function plotBodeFilter2
   input Modelica.Units.SI.Frequency f_cut=1 "Cut-off frequency";
   input Real A_ripple(unit="dB") = 3
     "Pass band ripple for Chebyshev filter (otherwise not used)";
-  input Modelica.Units.SI.Frequency f_min(min=0) = 0.1
-    "Minimum frequency value";
+  input Modelica.Units.SI.Frequency f_min(min=0) = 0.1 "Minimum frequency value";
   input Modelica.Units.SI.Frequency f_max(min=0) = 10 "Maximum frequency value";
   output Boolean ok;
 protected
