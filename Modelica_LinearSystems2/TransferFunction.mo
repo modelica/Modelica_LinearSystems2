@@ -26,8 +26,8 @@ operator record TransferFunction
       import Modelica_LinearSystems2.TransferFunction;
 
       input Real r "Value of Real variable";
-      input String uName="" "input name";
-      input String yName="" "output name";
+      input String uName="" "Input name";
+      input String yName="" "Output name";
       output TransferFunction tf(n={r}, d={1});
 
     algorithm
@@ -47,8 +47,8 @@ operator record TransferFunction
       input Complex p[:]=fill(Complex(0), 0)
         "Poles (Complex vector of denominator zeros)";
       input Real k=1.0 "Constant multiplied with transfer function";
-      input String uName="" "input name";
-      input String yName="" "output name";
+      input String uName="" "Input name";
+      input String yName="" "Output name";
       output TransferFunction tf(redeclare Real n[size(z, 1)+1], redeclare Real d[size(p, 1)+1])
         "TransferFunction built by ZerosAndPoles object";
 
@@ -99,8 +99,8 @@ follow each other as above. An error occurs if this is not the case.
 
       input Real n[:] "Coefficients of numerator polynomial";
       input Real d[:] "Coefficients of denominator polynomial";
-      input String uName = "" "input name";
-      input String yName = "" "output name";
+      input String uName = "" "Input name";
+      input String yName = "" "Output name";
 
       output TransferFunction tf(
         redeclare Real n[size(n, 1)],
@@ -125,8 +125,8 @@ follow each other as above. An error occurs if this is not the case.
 
       input Polynomial n "Numerator polynomial";
       input Polynomial d "Denominator polynomial";
-      input String uName="" "input name";
-      input String yName="" "output name";
+      input String uName="" "Input name";
+      input String yName="" "Output name";
       output TransferFunction tf(n=n.c, d=d.c,uName=uName, yName=yName);
 
     algorithm
@@ -320,7 +320,7 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
       import Modelica_LinearSystems2.Internal.AnalyseOptions2;
 
       input TransferFunction tf(uName="u", yName="y")
-        "transfer function of a system";
+        "Transfer function of a system";
 
       input AnalyseOptions2 analyseOptions2 = AnalyseOptions2(
         printControllability=false,
@@ -392,10 +392,10 @@ TransferFunction tf = s/(3*s^2 + 2*s +2)
         import Modelica.Utilities.Streams.print;
         import Modelica_LinearSystems2.TransferFunction;
 
-        input TransferFunction tf "transfer function to analyze";
+        input TransferFunction tf "Transfer function to analyze";
         input String fileName="systemAnalysis.html"
           "File on which the transfer function is written in html format";
-        input String systemName="Transfer Function" "name of the system";
+        input String systemName="Transfer Function" "Name of the system";
         input String description="" "Description of system (used in html file)";
         input String format=".3g" "Format of numbers (e.g. \"20.8e\")";
       protected
@@ -759,7 +759,7 @@ TransferFunction.Analysis.timeResponse(tf, dt, tSpan, response=Types.TimeRespons
 
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
       output Integer result;
 
     algorithm
@@ -798,7 +798,7 @@ Function Analysis.<strong>numeratorDegree</strong> calculates the degree of the 
 
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
       output Integer result;
 
     algorithm
@@ -842,7 +842,7 @@ Function Analysis.<strong>denominatorDegree</strong> calculates the degree of th
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
       input Complex s "Value of s where tf shall be evaluated";
       input Real den_min=0 "|denominator(s)| is limited by den_min";
       output Complex result "= tf(s)";
@@ -891,7 +891,7 @@ The transfer function G(s)=N(s)/D(s) is evaluated by calculating the numerator p
       import Modelica_LinearSystems2.Math.Polynomial;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
 
       output Complex z[:]=Polynomial.roots(Polynomial(tf.n))
         "Zeros (Complex vector of numerator zeros)";
@@ -961,8 +961,8 @@ public
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.StateSpace;
 
-      input TransferFunction tf "transfer function of a system";
-      output Complex eigval[:] "eigen values of the system";
+      input TransferFunction tf "Transfer function of a system";
+      output Complex eigval[:] "Eigen values of the system";
 
     protected
       StateSpace ss=StateSpace(tf);
@@ -1005,10 +1005,10 @@ Calculate the eigenvalues of the corresponding state space representation of a t
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
       input Boolean onlyEigenvectors=true;
-      output Real eigvec[:,:] "eigen values of the system";
-      output Complex eigval[:] "eigen values of the system";
+      output Real eigvec[:,:] "Eigen values of the system";
+      output Complex eigval[:] "Eigen values of the system";
     protected
       StateSpace ss=StateSpace(tf);
 
@@ -1059,9 +1059,9 @@ i.e. v1 = |                 |,   v2 = |                   |
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica_LinearSystems2.StateSpace;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
 
-      output Complex Zeros[:] "invariant zeros";
+      output Complex Zeros[:] "Invariant zeros";
 
     protected
       StateSpace ss=StateSpace(tf);
@@ -1140,7 +1140,7 @@ In this case, the output argument <strong>finite</strong> = <strong>false</stron
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
       input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
 
       output Boolean controllable;
@@ -1184,7 +1184,7 @@ Function TransferFunction.Analysis.<strong>isControllable</strong> checks the co
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
       input Modelica_LinearSystems2.Utilities.Types.StaircaseMethod method=Modelica_LinearSystems2.Utilities.Types.StaircaseMethod.SVD;
       output Boolean observable;
     protected
@@ -1227,7 +1227,7 @@ Function TransferFunction.Analysis.<strong>isObservable</strong> checks the obse
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
 
       output Boolean stabilizable;
     protected
@@ -1269,7 +1269,7 @@ The transfer function is stabilizable if all unstable poles are controllable.
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
 
       output Boolean detectable;
 
@@ -1310,7 +1310,7 @@ The transfer function is detectable if all unstable poles are observable.
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
       output Real om[:,:];
 
     protected
@@ -1362,7 +1362,7 @@ of a transfer function.
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf "transfer function of a system";
+      input TransferFunction tf "Transfer function of a system";
       output Real om[:,:];
 
     protected
@@ -1770,11 +1770,11 @@ This function plots the bode-diagram of a transfer function.
       import Modelica_LinearSystems2.Utilities.Types.TimeResponse;
       import Modelica_LinearSystems2.Utilities.Plot;
 
-      input Modelica_LinearSystems2.TransferFunction tf;
+      input Modelica_LinearSystems2.TransferFunction tf "Transfer function of a system";
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
-      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "type of time response";
+      input Modelica_LinearSystems2.Utilities.Types.TimeResponse response=Modelica_LinearSystems2.Utilities.Types.TimeResponse.Step "Type of time response";
       input Real x0[TransferFunction.Analysis.denominatorDegree(tf)]=zeros(
         TransferFunction.Analysis.denominatorDegree(tf)) "Initial state vector";
 
@@ -1861,7 +1861,7 @@ This function plots the time response of a transfer function. The character of t
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
-      input Modelica_LinearSystems2.TransferFunction tf "transfer function";
+      input Modelica_LinearSystems2.TransferFunction tf "Transfer function";
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
@@ -1935,7 +1935,7 @@ This function plots the impulse response of a transfer function. It is based on 
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
-      input Modelica_LinearSystems2.TransferFunction tf;
+      input Modelica_LinearSystems2.TransferFunction tf "Transfer function of a system";
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
@@ -2008,7 +2008,7 @@ This function plots the step response of a transfer function. It is based on <a 
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
-      input Modelica_LinearSystems2.TransferFunction tf;
+      input Modelica_LinearSystems2.TransferFunction tf "Transfer function of a system";
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
@@ -2081,7 +2081,7 @@ This function plots the ramp response of a transfer function. It is based on <a 
 
       import Modelica_LinearSystems2.Utilities.Plot;
 
-      input Modelica_LinearSystems2.TransferFunction tf;
+      input Modelica_LinearSystems2.TransferFunction tf "Transfer function of a system";
       input Real dt=0 "Sample time [s]";
       input Real tSpan=0 "Simulation time span [s]";
 
@@ -2226,8 +2226,7 @@ and are used as inputs the ZerosAndPoles constructor.
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica.Math.Vectors;
 
-      input Modelica_LinearSystems2.TransferFunction tf
-        "Transfer function of a system";
+      input Modelica_LinearSystems2.TransferFunction tf "Transfer function of a system";
       output Modelica_LinearSystems2.StateSpace ss(
         redeclare Real A[TransferFunction.Analysis.denominatorDegree(tf),TransferFunction.Analysis.denominatorDegree(tf)],
         redeclare Real B[TransferFunction.Analysis.denominatorDegree(tf),1],
@@ -2327,7 +2326,7 @@ is defined slightly differently.
       import Modelica_LinearSystems2.ZerosAndPoles;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf[:,:] "transfer function of a system";
+      input TransferFunction tf[:,:] "Transfer function of a system";
 
       output ZerosAndPoles zp[size(tf, 1),size(tf, 2)];
 
@@ -2374,8 +2373,7 @@ Converts a matrix of transfer functions denoted as rational polynomial function 
       import Modelica_LinearSystems2.TransferFunction;
       import Modelica.Math.Vectors;
 
-      input Modelica_LinearSystems2.TransferFunction tf
-        "Transfer function of a system";
+      input Modelica_LinearSystems2.TransferFunction tf "Transfer function of a system";
 
       output Real ABCD[size(tf.d,1),size(tf.d,1)];
 
@@ -2540,8 +2538,7 @@ Reads and loads a transfer function from a mat-file <tt>fileName</tt>. The file 
       import Modelica_LinearSystems2.TransferFunction;
 
       input String modelName "Name of the Modelica model" annotation(Dialog(__Dymola_translatedModel(translate=true)));
-      input Real T_linearize=0
-        "Point in time of simulation to linearize the model";
+      input Real T_linearize=0 "Point in time of simulation to linearize the model";
       input String fileName="dslin" "Name of the result file";
 
     protected
@@ -2640,7 +2637,7 @@ followed by a conversion from state space to transfer function representation.
       import Modelica_LinearSystems2.StateSpace;
       import Modelica_LinearSystems2.TransferFunction;
 
-      input TransferFunction tf;
+      input TransferFunction tf "Transfer function of a system";
 
       output Boolean controllableAndObservable;
     protected
