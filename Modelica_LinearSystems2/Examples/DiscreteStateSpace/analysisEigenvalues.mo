@@ -18,7 +18,7 @@ function analysisEigenvalues
 protected
   DiscreteStateSpace dss = DiscreteStateSpace(
     ss,
-    Ts=0.1,
+    Ts=Ts,
     method=method);
 
   Complex evDiscrete[:] = DiscreteStateSpace.Analysis.eigenValues(dss);
