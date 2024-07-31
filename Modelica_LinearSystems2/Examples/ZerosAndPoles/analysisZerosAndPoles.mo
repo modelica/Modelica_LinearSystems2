@@ -1,6 +1,5 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
-encapsulated function analysisZerosAndPoles
-  "Compute zeros and poles of a ZerosAndPoles transfer function"
+encapsulated function analysisZerosAndPoles "Compute zeros and poles of a ZerosAndPoles transfer function"
   extends Modelica.Icons.Function;
 
   import Modelica;
@@ -14,31 +13,29 @@ encapsulated function analysisZerosAndPoles
 protected
   Complex numeratorZeros1[1]={-1+0*j};
   Complex denominatorZeros1[3]={1+0*j,2+3*j,2-3*j};
-  Complex numeratorZeros3[4]={-1+j,-1-j,1+0*j,1+0*j};
-  Complex denominatorZeros3[6]={1+0*j,2+0*j,2+3*j,2-3*j,3+4*j,3-4*j};
+  Complex numeratorZeros2[4]={-1+j,-1-j,1+0*j,1+0*j};
+  Complex denominatorZeros2[6]={1+0*j,2+0*j,2+3*j,2-3*j,3+4*j,3-4*j};
 
-  ZerosAndPoles zp = ZerosAndPoles(
+  ZerosAndPoles zp1 = ZerosAndPoles(
     z=numeratorZeros1,
     p=denominatorZeros1);
   ZerosAndPoles zp2 = ZerosAndPoles(
-    z=numeratorZeros3,
-    p=denominatorZeros3);
-  Complex numeratorZeros2[:];
-  Complex denominatorZeros2[:];
+    z=numeratorZeros2,
+    p=denominatorZeros2);
+  Complex zeros1[:] "Vector of zeros";
+  Complex poles1[:] "Vector of poles";
   Real k;
 
 algorithm
-  (numeratorZeros2,denominatorZeros2,k) := ZerosAndPoles.Analysis.zerosAndPoles(zp);
+  (zeros1,poles1,k) := ZerosAndPoles.Analysis.zerosAndPoles(zp1);
 
-  print("ZerosAndPoles-TransferFunction1 = " +
-    String(zp));
-  print("ZerosAndPoles-TransferFunction2 = " +
-    String(zp2));
+  print("ZerosAndPoles transfer function zp1 = " + String(zp1));
+  print("ZerosAndPoles transfer function zp2 = " + String(zp2));
   printComplexVector("numeratorZeros1", numeratorZeros1);
-  printComplexVector("\nnumeratorZeros2", numeratorZeros2);
+  printComplexVector("\nzeros1", zeros1);
 
   printComplexVector("\ndenominatorZeros1", denominatorZeros1);
-  printComplexVector("\ndenominatorZeros2", denominatorZeros2);
+  printComplexVector("\npoles1", poles1);
 
   ok := true;
 end analysisZerosAndPoles;
