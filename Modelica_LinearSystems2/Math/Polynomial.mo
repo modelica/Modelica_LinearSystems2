@@ -604,8 +604,8 @@ This package contains operators for subtraction of Polynomial data records.
 
   encapsulated operator function 'String'
     "Transform Polynomial into a String representation"
-    import Modelica_LinearSystems2.Math.Polynomial;
     import Modelica;
+    import Modelica_LinearSystems2.Math.Polynomial;
 
     input Polynomial p
       "Polynomial to be transformed in a String representation";
@@ -624,12 +624,23 @@ This package contains operators for subtraction of Polynomial data records.
     if n == 0 then
       s := "0";
     else
+      if Modelica.Utilities.Strings.isEmpty(name) then
+        v := "?";
+      else
+        v := name;
+      end if;
+
       for i in 1:n loop
-        if p.c[i] <> 0 or i == n then
-          power := n - i;
-          ci := p.c[i];
+        ci := p.c[i];
+        power := n - i;
+
+        if ci <> 0 then
           if first then
             first := false;
+            if abs(ci + 1) <= Modelica.Constants.eps then
+              s := "-";
+              ci := abs(ci);
+            end if;
           else
             if ci > 0 then
               s := s + " + ";
@@ -646,16 +657,17 @@ This package contains operators for subtraction of Polynomial data records.
           if outputCoefficient and power >= 1 then
             s := s + "*";
           end if;
-          if name == "" then
-            v := "?";
-          else
-            v := name;
-          end if;
+
           if power >= 2 then
             s := s + v + "^" + String(power);
           elseif power == 1 then
             s := s + v;
           end if;
+
+        elseif power == 0 and Modelica.Utilities.Strings.isEmpty(s) then
+          // The last one coefficient of power=0 and the output string is still empty
+          // => write the coefficient anyway
+          s := String(ci, significantDigits=significantDigits);
         end if;
       end for;
     end if;
