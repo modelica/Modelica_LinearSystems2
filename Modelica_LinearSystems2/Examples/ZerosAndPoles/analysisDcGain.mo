@@ -13,15 +13,15 @@ encapsulated function analysisDcGain "Compute steady state gain"
 protected
   Complex numeratorZeros1[1]={-1+0*j};
   Complex denominatorZeros1[3]={1+0*j,2+3*j,2-3*j};
-  Complex numeratorZeros3[4]={-1+j,-1-j,1+0*j,1+0*j};
-  Complex denominatorZeros3[6]={1+0*j,2+0*j,2+3*j,2-3*j,3+4*j,3-4*j};
+  Complex numeratorZeros2[4]={-1+j,-1-j,1+0*j,1+0*j};
+  Complex denominatorZeros2[6]={1+0*j,2+0*j,2+3*j,2-3*j,3+4*j,3-4*j};
 
-  ZerosAndPoles zp=ZerosAndPoles(
+  ZerosAndPoles zp1=ZerosAndPoles(
     z=numeratorZeros1,
     p=denominatorZeros1);
   ZerosAndPoles zp2=ZerosAndPoles(
-    z=numeratorZeros3,
-    p=denominatorZeros3);
+    z=numeratorZeros2,
+    p=denominatorZeros2);
   ZerosAndPoles zp3=ZerosAndPoles.Internal.baseFilter(
     Modelica_LinearSystems2.Utilities.Types.AnalogFilter.Bessel,
     order=5);
@@ -30,7 +30,7 @@ protected
 algorithm
   ok := false;
 
-  (k, finite) := ZerosAndPoles.Analysis.dcGain(zp);
+  (k, finite) := ZerosAndPoles.Analysis.dcGain(zp1);
   print("k1 = " + String(k) + ", finite1 = " + String(finite));
 
   (k, finite) := ZerosAndPoles.Analysis.dcGain(zp2);
