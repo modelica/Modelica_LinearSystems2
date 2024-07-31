@@ -12,7 +12,10 @@ algorithm
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-Computes the impulse response of the system tf =1/s^2 + s + 1.
+Computes the impulse response of the system
 </p>
+<blockquote>
+tf = 1 / (<var>s</var><sup>2</sup> + s + 1).
+</blockquote>
 </html>"));
 end plotStep;
