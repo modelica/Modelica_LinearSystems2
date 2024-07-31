@@ -1,6 +1,5 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
-function plotPolesAndZeros
-  "Example for plotting poles and zeros of two transfer functions"
+function plotPolesAndZeros "Plot poles and zeros of two transfer functions"
   extends Modelica.Icons.Function;
 
   import Modelica.ComplexMath.j;
@@ -17,12 +16,12 @@ algorithm
     defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
       heading="Poles and zeros of " + String(tf1)));
 
-/*
   TransferFunction.Plot.polesAndZeros(
     tf=tf2,
     defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramPolesAndZeros(
       heading="Poles and zeros of " + String(tf2)),
-    device=Modelica_LinearSystems2.Utilities.Plot.Records.Device(xTopLeft=50, yTopLeft=30));
-*/
+    device=Modelica_LinearSystems2.Utilities.Plot.Records.Device(
+      xTopLeft=50,
+      yTopLeft=30));
   annotation(__Dymola_interactive=true);
 end plotPolesAndZeros;
