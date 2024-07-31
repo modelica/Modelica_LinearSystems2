@@ -1,0 +1,74 @@
+within LinearSystems2Test;
+function testPolynomial "Various calls of polynomial record"
+  import Modelica_LinearSystems2.Math.Polynomial;
+
+  input String outputFile = "" "File to write test results";
+
+protected
+  Polynomial p01 = Polynomial({ 1, 4, 5});
+  Polynomial p02 = Polynomial({ 5, 4, 1});
+  Polynomial p03 = Polynomial({-5, 1,-1});
+  Polynomial p04 = Polynomial({ 1, 0, 5});
+  Polynomial p05 = Polynomial({ 0, 4, 5});
+  Polynomial p06 = Polynomial({ 4,-1, 0});
+  Polynomial p07 = Polynomial({-1, 0, 0});
+  Polynomial p08 = Polynomial({ 0, 4, 0});
+  Polynomial p09 = Polynomial({ 0,-1, 0});
+  Polynomial p10 = Polynomial({ 0, 0, 1});
+  Polynomial p11 = Polynomial({ 0, 0,-1});
+  Polynomial p12 = Polynomial({ 0, 0, 0});
+  Polynomial p13 = Polynomial({-0, 0,-0});
+  Polynomial p14 = Polynomial({ 0, 4e-12, 0});
+  Polynomial p15 = Polynomial({ 3});
+  Polynomial p16 = Polynomial({ 0});
+  Polynomial p17 = Polynomial({-3});
+  Polynomial p18 = Polynomial({-0});
+  Polynomial p19 = Polynomial({0, 1.12345678901e-8, 0});
+  Polynomial p20 = Polynomial({-1e-8});
+  Polynomial p21 = Polynomial({ Modelica.Constants.eps});
+  Polynomial p22 = Polynomial({ Modelica.Constants.eps/2});
+  Polynomial p23 = Polynomial({-Modelica.Constants.eps});
+  Polynomial p24 = Polynomial({-Modelica.Constants.eps/2});
+  Polynomial p25 = Polynomial({-5, 4, 7,-1});
+  Polynomial p26 = Polynomial({ 1, 0, 0, 5});
+  Polynomial p27 = Polynomial({ 0, 0, 4, 5});
+  Polynomial p28 = Polynomial({-1, 0,-1, 0});
+  Polynomial p30 = Polynomial({ 0, 4, 0, 0});
+  Polynomial p31 = Polynomial({ 0,-4, 0, 0});
+  Polynomial p32 = Polynomial({ 0, 0, 0, 1});
+  Polynomial p33 = Polynomial({ 0, 0, 0,-1});
+algorithm
+  Modelica.Utilities.Streams.print("p01 { 1, 4, 5} : " + String(p01), outputFile);
+  Modelica.Utilities.Streams.print("p02 { 5, 4, 1} : " + String(p02), outputFile);
+  Modelica.Utilities.Streams.print("p03 {-5, 1,-1} : " + String(p03), outputFile);
+  Modelica.Utilities.Streams.print("p04 { 1, 0, 5} : " + String(p04), outputFile);
+  Modelica.Utilities.Streams.print("p05 { 0, 4, 5} : " + String(p05), outputFile);
+  Modelica.Utilities.Streams.print("p06 { 4,-1, 0} : " + String(p06), outputFile);
+  Modelica.Utilities.Streams.print("p07 {-1, 0, 0} : " + String(p07), outputFile);
+  Modelica.Utilities.Streams.print("p08 { 0, 4, 0} : " + String(p08), outputFile);
+  Modelica.Utilities.Streams.print("p09 { 0,-1, 0} : " + String(p09), outputFile);
+  Modelica.Utilities.Streams.print("p10 { 0, 0, 1} : " + String(p10), outputFile);
+  Modelica.Utilities.Streams.print("p11 { 0, 0,-1} : " + String(p11), outputFile);
+  Modelica.Utilities.Streams.print("p12 { 0, 0, 0} : " + String(p12), outputFile);
+  Modelica.Utilities.Streams.print("p13 {-0, 0,-0} : " + String(p13), outputFile);
+  Modelica.Utilities.Streams.print("p14 { 0, 4e-12, 0}: " + String(p14), outputFile);
+  Modelica.Utilities.Streams.print("p15 { 3} : " + String(p15), outputFile);
+  Modelica.Utilities.Streams.print("p16 { 0} : " + String(p16), outputFile);
+  Modelica.Utilities.Streams.print("p17 {-3} : " + String(p17), outputFile);
+  Modelica.Utilities.Streams.print("p18 {-0} : " + String(p18), outputFile);
+  Modelica.Utilities.Streams.print("p19 {0, 1.12345678901e-8, 0}: " + String(p19), outputFile);
+  Modelica.Utilities.Streams.print("p20 {-1e-8} : " + String(p20), outputFile);
+  Modelica.Utilities.Streams.print("p21 { Modelica.Constants.eps}  : " + String(p21), outputFile);
+  Modelica.Utilities.Streams.print("p22 { Modelica.Constants.eps/2}: " + String(p22), outputFile);
+  Modelica.Utilities.Streams.print("p23 {-Modelica.Constants.eps}  : " + String(p23), outputFile);
+  Modelica.Utilities.Streams.print("p24 {-Modelica.Constants.eps/2}: " + String(p24), outputFile);
+  Modelica.Utilities.Streams.print("p25 {-5, 4, 7,-1}: " + String(p25), outputFile);
+  Modelica.Utilities.Streams.print("p26 { 1, 0, 0, 5}: " + String(p26), outputFile);
+  Modelica.Utilities.Streams.print("p27 { 0, 0, 4, 5}: " + String(p27), outputFile);
+  Modelica.Utilities.Streams.print("p28 {-1, 0,-1, 0}: " + String(p28), outputFile);
+  Modelica.Utilities.Streams.print("p30 { 0, 4, 0, 0}: " + String(p30), outputFile);
+  Modelica.Utilities.Streams.print("p31 { 0,-4, 0, 0}: " + String(p31), outputFile);
+  Modelica.Utilities.Streams.print("p32 { 0, 0, 0, 1}: " + String(p32), outputFile);
+  Modelica.Utilities.Streams.print("p33 { 0, 0, 0,-1}: " + String(p33), outputFile);
+
+end testPolynomial;

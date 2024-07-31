@@ -97,6 +97,10 @@ algorithm
 
   print("--- Test functions of LinearSystems2Test library");
   print("--- Test functions of LinearSystems2Test library", logFile);
+  print("--- Test functions of LinearSystems2Test.testPolynomial");
+  result := LinearSystems2Test.testPolynomial(logFile);
+
+  print("--- Test functions of LinearSystems2Test.Care");
   result := LinearSystems2Test.Care.runAll(logFile);
 
   print("--- Test functions of LinearSystems2Test.DiscreteSystems");
