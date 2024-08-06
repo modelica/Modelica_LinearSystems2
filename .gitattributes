@@ -1,6 +1,22 @@
-# Set default behaviour, in case users don't have core.autocrlf set.
+# Do not change the line endings by default
 * -text
-*.mo eol=native
+
+# Explicitly declare text files we want to always be normalized and converted
+# to native line endings on checkout.
+*.c text
+*.csv text
+*.h text
+*.htm* text
+*.md text
+*.mo text
+*.mos text
+*.order text
+*.py text
+*.txt text
+*.yml text
+.gitattributes text
+.gitignore text
+LICENSE text
 
 # list of files that git archive should ignore
 .CI export-ignore
