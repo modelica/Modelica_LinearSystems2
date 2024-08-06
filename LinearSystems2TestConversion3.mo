@@ -761,12 +761,15 @@ package LinearSystems2TestConversion3
           color={0,0,127},
           smooth=Smooth.None));
       annotation (
-        Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,-100},{140,
-                100}}), graphics={Text(
+        Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,-100},{140,100}}),
+          graphics={
+            Text(
               extent={{44,76},{134,64}},
-              lineColor={0,0,0},
-              textString="disturbance"), Rectangle(extent={{-76,28},{108,-60}},
-                lineColor={255,0,0})}),
+              textColor={0,0,0},
+              textString="disturbance"),
+            Rectangle(
+              extent={{-76,28},{108,-60}},
+              lineColor={255,0,0})}),
         experiment(
           StopTime=60,
           __Dymola_NumberOfIntervals=2000,
