@@ -11,3 +11,5 @@ Modelica_LinearSystems2/Resources/Documentation/Generate-ReleaseNotes.py export-
 Modelica_LinearSystems2/Resources/Documentation/MLS2-ReleaseNotes-Template.html export-ignore
 LinearSystems2Test export-ignore
 LinearSystems2TestConversion3.mo export-ignore
+
+*.mo linguist-language=Modelica
