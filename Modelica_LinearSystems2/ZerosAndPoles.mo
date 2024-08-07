@@ -567,7 +567,7 @@ This function constructs a ZerosAndPoles record zp from first and second order p
 
   encapsulated operator function 'String'
     "Transform zeros and poles description into a String representation"
-    import Modelica;
+    import Modelica.Utilities.Strings;
     import Modelica_LinearSystems2.ZerosAndPoles;
 
     input ZerosAndPoles zp
@@ -582,10 +582,11 @@ This function constructs a ZerosAndPoles record zp from first and second order p
     Real gain=1.0;
     Integer num_order=size(zp.n1, 1) + 2*size(zp.n2, 1);
     Integer den_order=size(zp.d1, 1) + 2*size(zp.d2, 1);
-    String sn1;
-    String sn2;
-    String sd1;
-    String sd2;
+    String sn1 "String of the first order nominator";
+    String sn2 "String of the second order nominator";
+    String sd1 "String of the first order denominator";
+    String sd2 "String of the second order denominator";
+    String sden "Full string of denominator";
     Real kn1;
     Real kn2;
     Real kd1;
@@ -608,51 +609,49 @@ This function constructs a ZerosAndPoles record zp from first and second order p
     else
       gain :=zp.k;
     end if;
-    // Modelica.Utilities.Streams.print("gain = "+String(gain));
 
     // construct string for gain
     if gain <> 1.0 or gain == 1.0 and num_order == 0 then
       s := String(gain);
     end if;
-    // Modelica.Utilities.Streams.print("s= "+s);
 
     // construct string for numerator
-    if sn1 <> "" then
-      if s == "" then
-        s :=sn1;
+    if not Strings.isEmpty(sn1) then
+      if Strings.isEmpty(s) then
+        s := sn1;
       else
         s := s + "*" + sn1;
       end if;
     end if;
-    if sn2 <> "" then
-      if s == "" then
-        s :=sn2;
+    if not Strings.isEmpty(sn2) then
+      if Strings.isEmpty(s) then
+        s := sn2;
       else
         s := s + "*" + sn2;
       end if;
     end if;
 
     // construct string for denominator
+    sden := "";
     if den_order <> 0 then
-      s := s + " / ";
-      if den_order > 1 then
-        s := s + " ( ";
+      if not Strings.isEmpty(sd1) then
+        sden := sd1;
       end if;
 
-      if sd1 <> "" then
-        s := s + sd1;
-      end if;
-
-      if sd2 <> "" then
-        if sd1 <> "" then
-          s := s + "*";
+      if not Strings.isEmpty(sd2) then
+        if Strings.isEmpty(sden) then
+          sden := sd2;
+        else
+          sden := sden + "*" + sd2;
         end if;
-        s := s + sd2;
       end if;
 
-      if den_order > 1 then
-        s := s + " )";
+      if Strings.count(sden, "(") > 1 then
+        sden := "( " + sden + " )";
       end if;
+
+      s := s + " / " + sden;
+
     end if;
   end 'String';
 
