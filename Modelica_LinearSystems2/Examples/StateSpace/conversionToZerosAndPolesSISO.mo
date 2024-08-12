@@ -34,7 +34,8 @@ algorithm
 
   annotation (__Dymola_interactive=true, Documentation(info="<html>
 <p>
-This example demonstrates the conversion of a SISO zeros-and-poles system into a state space system.
+This example demonstrates the conversion of a&nbsp;state space representation of a&nbsp;SISO system 
+into a&nbsp;zeros and poles representation.
 </p>
 </html>"));
 end conversionToZerosAndPolesSISO;

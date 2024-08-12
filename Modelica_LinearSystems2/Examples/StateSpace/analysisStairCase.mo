@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function analysisStairCase
-  "Example to check controllability of a state space system"
+  "Example to check controllability of a state space system in staircase form"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function conversionFromTransferFunction
-  "Transform a TransferFunction into a StateSpace description"
+  "Transform a transfer function into a state space description"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;

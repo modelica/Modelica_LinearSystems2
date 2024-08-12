@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function conversionFromZerosAndPoles
-  "Transform a TransferFunction into a StateSpace description"
+  "Transform a zeros and poles description into a state space description"
   extends Modelica.Icons.Function;
 
   import Modelica.ComplexMath.j;
