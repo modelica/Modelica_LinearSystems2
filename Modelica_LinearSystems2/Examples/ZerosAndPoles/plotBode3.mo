@@ -1,17 +1,15 @@
 within Modelica_LinearSystems2.Examples.ZerosAndPoles;
 function plotBode3
-  "Construct a ZerosAndPoles system and plot the Bode diagram with automatic determination of the frequency range to plot"
+  "Construct three zeros and poles systems and plot the Bode diagram"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.ZerosAndPoles;
   import Modelica_LinearSystems2.TransferFunction;
   import Modelica_LinearSystems2.Math.Polynomial;
 
-  input Modelica.Units.SI.Frequency f_cut_num=100
-    "Cut-off frequency of numerator PT2 and PT1";
+  input Modelica.Units.SI.Frequency f_cut_num=100 "Cut-off frequency of numerator PT2 and PT1";
   input Real D_num=0.1 "Damping of numerator PT2";
-  input Modelica.Units.SI.Frequency f_cut_den=10
-    "Cut-off frequency of denominator PT2 and PT1";
+  input Modelica.Units.SI.Frequency f_cut_den=10 "Cut-off frequency of denominator PT2 and PT1";
   input Real D_den=0.1 "Damping of denominator PT2";
   input Real k=1 "Gain";
   output Boolean ok;
@@ -19,15 +17,15 @@ protected
   Modelica.Units.SI.AngularVelocity w1=2*Modelica.Constants.pi*f_cut_num;
   Modelica.Units.SI.AngularVelocity w2=2*Modelica.Constants.pi*f_cut_den;
 
-  Polynomial pn1=Polynomial(k/w1^3*{1,w1});
-  Polynomial pn2=Polynomial({1,2*D_num*w1,w1*w1});
-  Polynomial pn3=pn1*pn2;
-  Polynomial pd1=Polynomial({1,w2});
-  Polynomial pd2=Polynomial({1,2*D_den*w2,w2*w2});
-  Polynomial pd3=pd1*pd2;
+  Polynomial p1=Polynomial(k/w1^3*{1,w1});
+  Polynomial p2=Polynomial({1,2*D_num*w1,w1*w1});
+  Polynomial pn1=p1*p2;
+  Polynomial p3=Polynomial({1,w2});
+  Polynomial p4=Polynomial({1,2*D_den*w2,w2*w2});
+  Polynomial pd2=p3*p4;
 
-  TransferFunction tf1=TransferFunction(n=pn3, d=Polynomial({1}));
-  TransferFunction tf2=TransferFunction(n=Polynomial({k*w2^3}), d=pd3);
+  TransferFunction tf1=TransferFunction(n=pn1, d=Polynomial({1}));
+  TransferFunction tf2=TransferFunction(n=Polynomial({k*w2^3}), d=pd2);
   TransferFunction tf3=tf1*tf2;
 
   ZerosAndPoles zp1=ZerosAndPoles(tf1);
