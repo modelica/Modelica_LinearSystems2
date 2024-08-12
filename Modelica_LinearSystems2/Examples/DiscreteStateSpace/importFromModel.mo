@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.DiscreteStateSpace;
 function importFromModel
-  "This example demonstrates how to generate a linear discrete state space system from a (nonlinear) Modelica moodel"
+  "Generate a linear discrete state space system from a (nonlinear) Modelica model"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.DiscreteStateSpace;
@@ -16,5 +16,14 @@ function importFromModel
     T_linearize=T_linearize);
 algorithm
 
-annotation (__Dymola_interactive=true);
+  annotation (
+    __Dymola_interactive=true,
+    Documentation(info="<html>
+<p>
+This example demonstrates how to generate a&nbsp;linear discrete state space system from
+a&nbsp;(nonlinear) Modelica model
+<a href=\"modelica:/Modelica_LinearSystems2.Utilities.Plants.DoublePendulum\">DoublePendulum</a>
+by its linearization.
+</p>
+</html>"));
 end importFromModel;

@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.DiscreteStateSpace;
 function analysisEigenvalues
-  "Example to compute the eigenvalues of a discrete state space system"
+  "Compute the eigenvalues of a discrete state space system"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;
@@ -36,7 +36,8 @@ algorithm
 
   annotation (Documentation(info="<html>
 <p>
-This example shows the computation of the poles and zeros of state space system.
+This example computes a&nbsp;discrete state space system from a&nbsp;continuous state space system.
+Consequently, the eigenvalues of both systems are computed and printed.
 </p>
 </html>"));
 end analysisEigenvalues;
