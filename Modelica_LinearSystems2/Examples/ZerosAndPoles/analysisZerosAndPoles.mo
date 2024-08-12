@@ -22,20 +22,32 @@ protected
   ZerosAndPoles zp2 = ZerosAndPoles(
     z=numeratorZeros2,
     p=denominatorZeros2);
-  Complex zeros1[:] "Vector of zeros";
-  Complex poles1[:] "Vector of poles";
+  Complex zeros[:] "Vector of zeros";
+  Complex poles[:] "Vector of poles";
   Real k;
 
 algorithm
-  (zeros1,poles1,k) := ZerosAndPoles.Analysis.zerosAndPoles(zp1);
+  (zeros,poles,k) := ZerosAndPoles.Analysis.zerosAndPoles(zp1);
+  print("Zeros and poles transfer function zp1 = " + String(zp1));
+  printComplexVector("\nnumerator zeros for zp1", numeratorZeros1);
+  printComplexVector("zeros of zp1", zeros);
+  printComplexVector("\ndenominator zeros for zp1", denominatorZeros1);
+  printComplexVector("poles of zp1", poles);
 
-  print("ZerosAndPoles transfer function zp1 = " + String(zp1));
-  print("ZerosAndPoles transfer function zp2 = " + String(zp2));
-  printComplexVector("numeratorZeros1", numeratorZeros1);
-  printComplexVector("\nzeros1", zeros1);
-
-  printComplexVector("\ndenominatorZeros1", denominatorZeros1);
-  printComplexVector("\npoles1", poles1);
+  (zeros,poles,k) := ZerosAndPoles.Analysis.zerosAndPoles(zp2);
+  print("\nZeros and poles transfer function zp2 = " + String(zp2));
+  printComplexVector("\nnumerator zeros for zp2", numeratorZeros2);
+  printComplexVector("zeros of zp2", zeros);
+  printComplexVector("\ndenominator zeros for zp2", denominatorZeros2);
+  printComplexVector("poles of zp2", poles);
 
   ok := true;
+  annotation (
+    Documentation(info="<html>
+<p>
+Construct two zeros and poles transfer functions from complex vectors of numerator and
+denominator zeros. Consequently, compute the zeros and poles of the functions and compare
+them with the creating complex vectors.
+</p>
+</html>"));
 end analysisZerosAndPoles;
