@@ -43,22 +43,34 @@ algorithm
     tf1,
     autoRange=false,
     f_min=f_min,
-    f_max=f_max);
+    f_max=f_max,
+    defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(
+      heading="Bode plot: " + String(tf1) + ", critical damping filter",
+      heightRatio=0.5));
   ZerosAndPoles.Plot.bode(
     tf2,
     autoRange=false,
     f_min=f_min,
-    f_max=f_max);
+    f_max=f_max,
+    defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(
+      heading="Bode plot: " + String(tf2) + ", Bessel filter",
+      heightRatio=0.5));
   ZerosAndPoles.Plot.bode(
     tf3,
     autoRange=false,
     f_min=f_min,
-    f_max=f_max);
+    f_max=f_max,
+    defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(
+      heading="Bode plot: " + String(tf3) + ", Butterworth filter",
+      heightRatio=0.5));
   ZerosAndPoles.Plot.bode(
     tf4,
     autoRange=false,
     f_min=f_min,
-    f_max=f_max);
+    f_max=f_max,
+    defaultDiagram=Modelica_LinearSystems2.Internal.DefaultDiagramBodePlot(
+      heading="Bode plot: " + String(tf4) + ", Chebyshev filter",
+      heightRatio=0.5));
 
   ok := true;
 
