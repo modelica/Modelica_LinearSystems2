@@ -1,5 +1,5 @@
 within Modelica_LinearSystems2.Examples.TransferFunction;
-function plotStep "Step plot example"
+function plotStep "Plot step response"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.TransferFunction;
