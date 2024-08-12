@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function conversionToZerosAndPolesMIMO
-  "Example to compute a zeros-and-poles representation of a MIMO system from state space representation"
+  "Compute a zeros-and-poles description of a MIMO system from state space description"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;
@@ -41,7 +41,8 @@ algorithm
     __Dymola_interactive=true,
     Documentation(info="<html>
 <p>
-This example demonstrates the conversion of a MIMO zeros-and-poles system into a state space system.
+This example demonstrates the conversion of a&nbsp;state space representation of a&nbsp;MIMO system 
+into a&nbsp;zeros and poles representation.
 </p>
 </html>"));
 end conversionToZerosAndPolesMIMO;
