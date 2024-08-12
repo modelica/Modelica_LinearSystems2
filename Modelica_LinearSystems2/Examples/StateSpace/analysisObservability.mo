@@ -1,6 +1,6 @@
 within Modelica_LinearSystems2.Examples.StateSpace;
 function analysisObservability
-  "Example to check controllability of a state space system"
+  "Example to check observability of a state space system"
   extends Modelica.Icons.Function;
 
   import Modelica_LinearSystems2.StateSpace;

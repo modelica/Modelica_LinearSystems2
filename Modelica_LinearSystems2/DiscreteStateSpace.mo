@@ -3513,7 +3513,7 @@ The file must contain
     end fromFile;
 
     function fromModel
-      "Generate a DiscreteStateSpace data record by linearization of a modelica model"
+      "Generate a DiscreteStateSpace data record by linearization of a Modelica model"
 
       import Modelica;
       import DymolaCommands;
