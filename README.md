@@ -19,7 +19,7 @@ About 180 functions are provided to operate on these data structures, e.g., to c
 
 Furthermore, in sublibrary Controller about 20 input/output blocks of linear systems are provided that are based on the different representation forms, e.g., PID, StateSpace, Filter blocks. A unique feature of these blocks is that it is very convenient to quickly switch between a continuous and a discrete block representation. Also, templates are provide to quickly built-up standard controller structures.
 
-*Note, the library is not backwards compatible to the previous beta version 0.95, called "Modelica_LinearSystems", which was shipped with previous versions of Dymola. Since the differences are too large, no conversion scripts are provided, but different library names are used.*
+*Note, the library is not backwards compatible to the previous beta version 0.95, called "Modelica_LinearSystems", which was shipped with versions prior to Dymola 7, released in 2008. Since the differences are too large, no conversion scripts are provided, but different library names are used.*
 
 ## Limitations
 
