@@ -10114,16 +10114,15 @@ Generate a StateSpace data record by linearization of a model defined by modelNa
 <strong>algorithm</strong>
   ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName, T_linearize);
 
-// ss.A = [ 0.0,   1.0,    0.0,            0.0,      0.0,     0.0;
-            0.0,   0.0,          -2.26,    0.08,     1.95,   -0.45;
-            0.0,   0.0,           0.0,            1.0,      0.0,     0.0;
-            0.0,   0.0,          -3.09,   -1.38,     7.70,   -3.01;
-            0.0,   0.0,           0.0,            0.0,      0.0,     1.0;
-            0.0,   0.0,          -6.47,    1.637,   -2.90,    1.29],
-
-// ss.B=[0.0; 0.13; 0.0; -0.014; 0.0; -0.1],
-// ss.C=identity(6),
-// ss.D=[0; 0; 0; 0; 0; 0]
+// ss.A = [ 0.0,  1.0,    0.0  ,   0.0      0.0     0.0  ;
+//          0.0,  0.0,    3.715,  -1.299   -3.374   0.116;
+//          0.0,  0.0,    0.0  ,   1.0      0.0     0.0  ;
+//          0.0,  0.0,  -12.738,   2.064  -23.625   4.437;
+//          0.0,  0.0,    0.0  ,   0.0      0.0     1.0  ;
+//          0.0,  0.0,   26.720,   4.435   36.990  -6.370 ],
+// ss.B = [ 0,  0.157,  0, -0.167,  0,  0.285 ],
+// ss.C = identity(6),
+// ss.D = [ 0; 0; 0; 0; 0; 0 ]
 </pre></blockquote>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
