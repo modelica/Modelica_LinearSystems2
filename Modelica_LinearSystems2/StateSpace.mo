@@ -871,6 +871,12 @@ ss;
       //   Modelica_LinearSystems2.StateSpace.Analysis.analysis(Modelica_LinearSystems2.StateSpace(A=[2, 1.43, 12, 3; 1, 1, 1, 43; 1, 3, 2, 2; 1, 1, 4.2, 1.2], B=[1, 2; 2.2, 3; 3, 1; 4, 0], C=[25, 1.4, 6.3, 1; 0.3, 8, 5, 1; 1, 3, 2, 2], D=[6, 4; 4, 2; 6, 5], yNames={"y1_test","y2_te","y3_"}, xNames={"xx1","x2","xxx3","xx4"}, uNames={"u1_test","u2_test"}));
       // ---------------------------------------------------------------------------------------------------
 
+      if nx < 1 then
+        filePath := "";
+        print("The system has no continuous states. No analysis performed.");
+        return;
+      end if;
+
       filePath := Modelica.Utilities.Files.fullPathName(fileName);
       (filePathOnly,fileNameOnly,fileExtOnly) :=
         Modelica.Utilities.Files.splitPathName(filePath);
@@ -13154,15 +13160,8 @@ k = ---------- * ----------------------
       Integer nx = xuy[1];
       Integer nu = xuy[2];
       Integer ny = xuy[3];
-      Real ABCD[nx + ny, nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
-              fileName2,
-              "ABCD",
-              nx + ny,
-              nx + nu);
-      String xuyName[nx + nu + ny]=DymolaCommands.MatrixIO.readStringMatrix(
-              fileName2,
-              "xuyName",
-              nx + nu + ny);
+      Real ABCD[nx + ny, nx + nu];
+      String xuyName[nx + nu + ny];
     public
       output StateSpace result(
         redeclare Real A[nx, nx],
@@ -13171,12 +13170,19 @@ k = ---------- * ----------------------
         redeclare Real D[ny, nu]) "Outputs model linearized at initial point";
 
     algorithm
+      if nx > 0 or (nu > 0 and ny > 0) then
+        ABCD := Modelica.Utilities.Streams.readRealMatrix(fileName2, "ABCD", nx+ny, nx+nu);
+      end if;
+      if nx > 0 or nu > 0 or ny > 0 then
+        xuyName := DymolaCommands.MatrixIO.readStringMatrix(fileName2, "xuyName", nx+nu+ny);
+      end if;
+
       result.A := ABCD[1:nx, 1:nx];
-      result.B := ABCD[1:nx, nx + 1:nx + nu];
-      result.C := ABCD[nx + 1:nx + ny, 1:nx];
-      result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
-      result.uNames := xuyName[nx + 1:nx + nu];
-      result.yNames := xuyName[nx + nu + 1:nx + nu + ny];
+      result.B := ABCD[1:nx, nx+1:nx+nu];
+      result.C := ABCD[nx+1:nx+ny, 1:nx];
+      result.D := ABCD[nx+1:nx+ny, nx+1:nx+nu];
+      result.uNames := xuyName[nx+1:nx+nu];
+      result.yNames := xuyName[nx+nu+1:nx+nu+ny];
       result.xNames := xuyName[1:nx];
 
       annotation (__Dymola_interactive=true, Documentation(info="<html>
