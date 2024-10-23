@@ -13183,35 +13183,17 @@ k = ---------- * ----------------------
       annotation (__Dymola_interactive=true, Documentation(info="<html>
 <h4>Syntax</h4>
 <blockquote><pre>
-ss = StateSpace.Import.<strong>fromModel</strong>(modelName, T_linearize, fileName)
+result = StateSpace.Internal.<strong>read_dslin</strong>(fileName)
 </pre></blockquote>
 
 <h4>Description</h4>
 <p>
-Generate a StateSpace data record by linearization of a model defined by modelName.
-The linearization is performed at time T_linearize of the simulation. The result of
-linearization is transformed into a StateSpace record.
+Return a&nbsp;state space data record read from matrix &quot;ABCD&quot; in the input
+mat-file <code>fileName</code>. 
+The <code>fileName</code> can be generated e.g. by linearization of a&nbsp;model.
+Just empty state space matrices are returned when the system has no states, i.e. 
+the size of matrix&nbsp;A in <code>fileName</code> is zero.
 </p>
-
-<h4>Example</h4>
-<blockquote><pre>
-  String modelName = &quot;Modelica_LinearSystems2.Utilities.Plants.DoublePendulum&quot;;
-  Real T_linearize = 5;
-
-<strong>algorithm</strong>
-  ss = Modelica_LinearSystems2.StateSpace.Import.fromModel(modelName, T_linearize);
-
-// ss.A = [ 0.0,   1.0,    0.0,            0.0,      0.0,     0.0;
-            0.0,   0.0,          -2.26,    0.08,     1.95,   -0.45;
-            0.0,   0.0,           0.0,            1.0,      0.0,     0.0;
-            0.0,   0.0,          -3.09,   -1.38,     7.70,   -3.01;
-            0.0,   0.0,           0.0,            0.0,      0.0,     1.0;
-            0.0,   0.0,          -6.47,    1.637,   -2.90,    1.29],
-
-// ss.B=[0.0; 0.13; 0.0; -0.014; 0.0; -0.1],
-// ss.C=identity(6),
-// ss.D=[0; 0; 0; 0; 0; 0]
-</pre></blockquote>
 </html>"));
     end read_dslin;
 
