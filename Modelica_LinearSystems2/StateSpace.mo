@@ -9977,8 +9977,7 @@ subsystem.D = ss.D[outputIndex, inputIndex];
       "Read a StateSpace data record from mat-file"
 
       import Modelica;
-      import Modelica_LinearSystems2.Utilities.Streams;
-      import Modelica_LinearSystems2.StateSpace;
+      import Modelica_LinearSystems2;
 
       input String fileName="dslin.mat"
         "Name of the state space system data file" annotation (Dialog(
@@ -9988,31 +9987,30 @@ subsystem.D = ss.D[outputIndex, inputIndex];
         "Name of the state space system matrix (default is \"ABCD\") in the fileName"
         annotation (Dialog);
     protected
-      Integer xuy[3]=Streams.readSystemDimension(
+      Integer xuy[3]=Modelica_LinearSystems2.Utilities.Streams.readSystemDimension(
         fileName, matrixName) annotation (__Dymola_allowForSize=true);
       Integer nx=xuy[1] annotation(__Dymola_allowForSize=true);
       Integer nu=xuy[2] annotation(__Dymola_allowForSize=true);
       Integer ny=xuy[3] annotation(__Dymola_allowForSize=true);
+      Real ABCD[nx + ny, nx + nu];
 
     public
-      output StateSpace result(
+      output Modelica_LinearSystems2.StateSpace result(
         redeclare Real A[nx, nx],
         redeclare Real B[nx, nu],
         redeclare Real C[ny, nx],
         redeclare Real D[ny, nu]) "State space description of model read from file";
 
-    protected
-      Real ABCD[nx + ny, nx + nu]=Modelica.Utilities.Streams.readRealMatrix(
-        fileName,
-        matrixName,
-        nx + ny,
-        nx + nu);
-
     algorithm
+      if nx > 0 or (nu > 0 and ny > 0) then
+        ABCD := Modelica.Utilities.Streams.readRealMatrix(fileName, matrixName, nx+ny, nx+nu);
+      end if;
+
       result.A := ABCD[1:nx, 1:nx];
-      result.B := ABCD[1:nx, nx + 1:nx + nu];
-      result.C := ABCD[nx + 1:nx + ny, 1:nx];
-      result.D := ABCD[nx + 1:nx + ny, nx + 1:nx + nu];
+      result.B := ABCD[1:nx, nx+1:nx+nu];
+      result.C := ABCD[nx+1:nx+ny, 1:nx];
+      result.D := ABCD[nx+1:nx+ny, nx+1:nx+nu];
+
       Modelica.Utilities.Streams.print(
         "State space record loaded from file: \"" + Modelica.Utilities.Files.fullPathName(fileName) + "\"");
 
