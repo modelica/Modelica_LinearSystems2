@@ -842,6 +842,7 @@ ss;
       Real abs_evec[nx];
       String xNames2[nx];
       String heading="Eigenvalues" "Eigen values of system";
+      String message = "" "Optional message to be printed";
       Eigenvalue evSorted[size(ss.A, 1)];
       Integer evIndex[size(ss.A, 1)];
       Complex zerosSorted[:];
@@ -871,12 +872,6 @@ ss;
       //   Modelica_LinearSystems2.StateSpace.Analysis.analysis(Modelica_LinearSystems2.StateSpace(A=[2, 1.43, 12, 3; 1, 1, 1, 43; 1, 3, 2, 2; 1, 1, 4.2, 1.2], B=[1, 2; 2.2, 3; 3, 1; 4, 0], C=[25, 1.4, 6.3, 1; 0.3, 8, 5, 1; 1, 3, 2, 2], D=[6, 4; 4, 2; 6, 5], yNames={"y1_test","y2_te","y3_"}, xNames={"xx1","x2","xxx3","xx4"}, uNames={"u1_test","u2_test"}));
       // ---------------------------------------------------------------------------------------------------
 
-      if nx < 1 then
-        filePath := "";
-        print("The system has no continuous states. No analysis performed.");
-        return;
-      end if;
-
       filePath := Modelica.Utilities.Files.fullPathName(fileName);
       (filePathOnly,fileNameOnly,fileExtOnly) :=
         Modelica.Utilities.Files.splitPathName(filePath);
@@ -896,22 +891,62 @@ ss;
 
       // If system has no states, modify analyze options that do not make sense
       if nx < 1 then
-         analyseOptions2.plotEigenValues          :=false;
-         analyseOptions2.plotInvariantZeros       :=false;
-         analyseOptions2.printEigenValues         :=false;
-         analyseOptions2.printEigenValueProperties:=false;
-         analyseOptions2.printInvariantZeros      :=false;
+        analyseOptions2.plotEigenValues          :=false;
+        analyseOptions2.plotInvariantZeros       :=false;
+        analyseOptions2.printEigenValues         :=false;
+        analyseOptions2.printEigenValueProperties:=false;
+        analyseOptions2.printInvariantZeros      :=false;
+
+        analyseOptions2.printSystem := true;
+        message := "<strong>Note:</strong> the system has no continuous states. No further analyses performed!\n</p>\n<p>";
+
+    //     analyseOptions2.plotStepResponse :=false;
+    //     analyseOptions2.plotFrequencyResponse :=false;
+    //     analyseOptions2.printControllability :=false;
+    //     analyseOptions2.printObservability :=false;
       end if;
 
       // If system is too large, do not print A,B,C,D matrices
       if nx > 50 or size(ss.B, 2) > 50 or size(ss.C, 1) > 50 then
-         analyseOptions2.printSystem:=false;
+        analyseOptions2.printSystem:=false;
+      end if;
+
+      // Analysis file
+      // -------------
+      Modelica.Utilities.Files.removeFile(filePath);
+      Modelica.Utilities.Files.removeFile(tmpFileName);
+
+      // Text should be printed into new file in HTML environment
+      // --------------------------------------------------------
+      StateSpace.Analysis.analysis.printHTMLbasics(filePath, true);
+      StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, true);
+
+      if analyseOptions2.printSystem then
+        printSystem(
+              ss,
+              filePath,
+              systemName,
+              description + message);
+
+        printSystem(
+              ss,
+              tmpFileName,
+              systemName,
+              description + message);
+      end if;
+
+      if nx < 1 then
+        // No states defined. Print final html and stop analyses.
+        StateSpace.Analysis.analysis.printHTMLbasics(filePath, false);
+        StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, false);
+        Modelica.Utilities.Streams.readFile(tmpFileName);
+        Modelica.Utilities.Files.removeFile(tmpFileName);
+        return;
       end if;
 
       // Get eigenvalues
       // ---------------
-      (eval,levec,revec) := Modelica_LinearSystems2.Math.Matrices.eigenValues(
-        ss.A);
+      (eval,levec,revec) := Modelica_LinearSystems2.Math.Matrices.eigenValues(ss.A);
 
       for i in 1:nx loop
         cev[i].re := eval[i, 1];
@@ -923,12 +958,14 @@ ss;
 
       // Build x names
       // -------------
-      if size(ss.xNames, 1) <> nx or nx > 1 and ss.xNames[1]=="" then
-        for i in 1:nx loop
-          xNames2[i] := "x[" + String(i) + "]";
-        end for;
-      else
-        xNames2 := ss.xNames;
+      if nx > 0 then
+        if size(ss.xNames, 1) <> nx or nx > 1 and ss.xNames[1]=="" then
+          for i in 1:nx loop
+            xNames2[i] := "x[" + String(i) + "]";
+          end for;
+        else
+          xNames2 := ss.xNames;
+        end if;
       end if;
 
       // Whole system checks
@@ -959,30 +996,6 @@ ss;
 
       // Sort eigen values according to smallest imaginary value and restore the original order
       evSorted := Modelica_LinearSystems2.Internal.sortEigenvalue(ev);
-
-      // Analysis file
-      // -------------
-      Modelica.Utilities.Files.removeFile(filePath);
-      Modelica.Utilities.Files.removeFile(tmpFileName);
-
-      // Text should be printed into new file in HTML environment
-      // --------------------------------------------------------
-      StateSpace.Analysis.analysis.printHTMLbasics(filePath, true);
-      StateSpace.Analysis.analysis.printHTMLbasics(tmpFileName, true);
-
-      if analyseOptions2.printSystem then
-        printSystem(
-              ss,
-              filePath,
-              systemName,
-              description);
-
-        printSystem(
-              ss,
-              tmpFileName,
-              systemName,
-              description);
-      end if;
 
       printHead1(
             ss,
