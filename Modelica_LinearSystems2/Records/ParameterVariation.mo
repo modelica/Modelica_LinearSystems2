@@ -14,17 +14,18 @@ record ParameterVariation
     "Number of parameter values in the range Min .. Max" annotation(Dialog(group="if grid = Equidistant or Logarithmic"));
 
   annotation (
-     Dialog(
-       __Dymola_label="Model parameters",
-       __Dymola_importDsin(
-         button="Select" "Select the model parameters to be included in this table",
-         onlyStart=true,
-    fields(Name=initialName,
-           Value=initialValue.value,
-           Min=initialValue.minimum,
-           Max=initialValue.maximum,
-           Unit=initialValue.unit))),
-  Icon(graphics={
+    Dialog(
+      __Dymola_label="Model parameters",
+      __Dymola_importDsin(
+        button="Select" "Select the model parameters to be included in this table",
+        onlyStart=true,
+        fields(
+          Name=initialName,
+          Value=initialValue.value,
+          Min=initialValue.minimum,
+          Max=initialValue.maximum,
+          Unit=initialValue.unit))),
+    Icon(graphics={
         Rectangle(
           extent={{-100,-30},{100,-90}},
           lineColor={0,0,0},
