@@ -4,11 +4,14 @@ record SetParameter "Set value of one parameter from a translated model"
   String Name "Name of parameter" annotation (Dialog);
   Real Value "Value of parameter" annotation (Dialog);
 
-  annotation (Dialog(__Dymola_importDsin(button="select"
-          "Select the model parameters to be included in this table",
-                                            onlyStart=true,
-    fields(Name=initialName,
-           Value=initialValue.value))),
+  annotation (
+    Dialog(
+      __Dymola_importDsin(
+        button="select" "Select the model parameters to be included in this table",
+        onlyStart=true,
+        fields(
+          Name=initialName,
+          Value=initialValue.value))),
   Icon(graphics={
         Rectangle(
           extent={{-100,-30},{100,-90}},
