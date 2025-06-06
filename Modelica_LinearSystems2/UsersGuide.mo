@@ -546,6 +546,12 @@ This library is based on the following references:
   end Literature;
 
   package ReleaseNotes "Release notes"
+    class Version_3_0_1 "Version 3.0.1 (June 6, 2025)"
+      extends Modelica.Icons.ReleaseNotes;
+
+      annotation (Documentation(info="<html>Uses Modelica Standard Library 4.1.0. Should be backward compatible with the previous version, as there are no other changes.</html>"));
+    end Version_3_0_1;
+
     class Version_3_0_0 "Version 3.0.0 (June 21, 2024)"
       extends Modelica.Icons.ReleaseNotes;
 
