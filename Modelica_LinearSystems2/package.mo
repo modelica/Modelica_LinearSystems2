@@ -1,5 +1,5 @@
 within ;
-package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 3.0.0) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
+package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 3.0.1) - Analysis, Synthesis and Modeling of Continuous and Discrete Linear Systems"
 
   extends Modelica.Icons.Package;
 
@@ -12,11 +12,11 @@ annotation (
   preferredView="info",
   uses(
     Complex(version="4.0.0"),
-    Modelica(version="4.0.0"),
-    DymolaCommands(version="1.17")),
-  version="3.0.0",
-  versionDate="2024-06-26",
-  dateModified = "2024-06-26 14:00:00Z",
+    Modelica(version="4.1.0"),
+    DymolaCommands(version="1.21")),
+  version="3.0.1",
+  versionDate="2025-06-06",
+  dateModified = "2025-06-06 15:44:03Z",
   revisionId="$Format:%h %ci$",
   conversion(
     from(
