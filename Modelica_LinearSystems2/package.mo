@@ -29,7 +29,8 @@ annotation (
       script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.3.5.mos"),
     from(
       version={"2.4.0", "2.4.1"},
-      script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.4.0.mos")),
+      script="modelica://Modelica_LinearSystems2/Resources/Scripts/Conversion/ConvertLinearSystems2_from_2.4.0.mos"),
+    noneFromVersion="3.0.0"),
   Documentation(
     info="<html>
 <p>
