@@ -459,7 +459,8 @@ email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</a>
 <p>
 Copyright 
 <br>&copy; 2005-2012, DLR Institute of Robotics and Mechatronics
-<br>&copy; 2012-2025, DLR Institute of System Dynamics and Control.
+<br>&copy; 2012-2024, DLR Institute of System Dynamics and Control
+<br>&copy; since 2025, DLR Institute of Vehicle Concepts
 <br>All rights reserved.
 </p>
 <p>
