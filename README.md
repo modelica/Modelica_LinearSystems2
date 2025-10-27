@@ -35,7 +35,7 @@ This Modelica package is free software and the use is completely at your own ris
 it can be redistributed and/or modified under the terms of the [3-Clause BSD License](https://github.com/modelica/ModelicaStandardLibrary/blob/master/LICENSE).
 
 ## Development and contribution
-The devolopment is organised by [Martin Otter](http://www.robotic.dlr.de/Martin.Otter).
+The development is organised by [Martin Otter](http://www.robotic.dlr.de/Martin.Otter).
 
 You may report any issues by using the [Issue Tracker](../../issues).
 
