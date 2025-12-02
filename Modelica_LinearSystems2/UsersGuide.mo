@@ -307,8 +307,8 @@ The last command (<code>Plot.bode</code>) results in the following frequency res
 </div>
 
 <p>
-Note, the interesting frequency range is automatically determined
-(it can be fairly good deduced from the phase information of
+Note, the frequency range of interest is automatically determined
+(it can be fairly well deduced from the phase information of
 poles and zeros).
 </p>
 
@@ -343,7 +343,6 @@ steady state. For example, the command
 <code>StateSpace.Import.fromModel(&quot;xxx&quot;)</code> results in:
 </p>
 
-
 <blockquote><pre>
 ss2 = StateSpace.Import.fromModel(\"Modelica.Mechanics.Rotational.Examples.First\")
 ev = StateSpace.Analysis.eigenValues(ss2)
@@ -354,8 +353,8 @@ ev
 <p>
 Also several
 <a href=\"modelica://Modelica_LinearSystems2.ZerosAndPoles.Design.filter\">filters</a>
-are provided in. Typical frequency responses of implemented filters
-are shown in the next figure:
+are provided. Typical frequency responses of implemented filters are shown
+in the next figure:
 </p>
 
 <div>
@@ -375,35 +374,40 @@ starting from a&nbsp;steady state initial filter with initial input equal to&nbs
 
     annotation (Documentation(info="<html>
 <p>
-In this section, a first introduction to the Modelica_LinearSystems2
-library is given at hand of several examples.
-The library consists of four main parts that
-are described in the following sections:
+In this section, a&nbsp;first introduction to the Modelica_LinearSystems2
+library is given by means of several examples.
+The library consists of three main parts that are described in the
+following sections:
 </p>
 <ol>
-<li> Section <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">Complex numbers</a>
-     introduces the Complex record that provides a&nbsp;data structure
-     for Complex numbers and arrays and also the most
-     important (scalar) operations on them. Read this section first,
-     because the structuring of records as well as operator overloading
-     is explained that is also the basis for the other parts of the
-     library.</li>
+  <li>
+    Section <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.ComplexNumbers\">Complex numbers</a>
+    introduces the Complex record that provides a&nbsp;data structure
+    for Complex numbers and arrays and also the most
+    important (scalar) operations on them. Read this section first,
+    because the structuring of records as well as operator overloading
+    is explained that is also the basis for the other parts of the
+    library.
+  </li>
 
-<li> Section <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.Polynomials\">Polynomials</a>
-     describes the Modelica_LinearSystems2.Math.Polynomials record that
-     provides a data structure for Polynomials with real coefficients
-     and operations such as evaluation, fitting, integration.
-     The Complex and Polynomial data structures are basic
-     building blocks for the other parts of the library.</li>
+  <li>
+    Section <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.Polynomials\">Polynomials</a>
+    describes the Modelica_LinearSystems2.Math.Polynomials record that
+    provides a data structure for Polynomials with real coefficients
+    and operations such as evaluation, fitting, integration.
+    The Complex and Polynomial data structures are basic
+    building blocks for the other parts of the library.
+  </li>
 
-<li> <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.LinearSystemDataStructures\">Linear system data structures</a>
-     are records on the top level of Modelica_LinearSystems2 that define
-     data structures for different representations of
-     linear, time invariant, continuous and discrete systems,
-     e.g., record StateSpace. Furthermore, operations are provided
-     on these data structures, e.g., to connect linear systems together
-     or plot a frequency response.</li>
-
+  <li>
+    <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted.LinearSystemDataStructures\">Linear system data structures</a>
+    are records on the top level of Modelica_LinearSystems2 that define
+    data structures for different representations of
+    linear, time invariant, continuous and discrete systems,
+    e.g., record StateSpace. Furthermore, operations are provided
+    on these data structures, e.g., to connect linear systems together
+    or plot a frequency response.
+  </li>
 </ol>
 </html>"));
   end GettingStarted;
@@ -552,7 +556,7 @@ This library is based on the following references:
       annotation (Documentation(info="<html>
 <p>
 This version requires the <strong>Modelica 4.0.0</strong> Library.
-It is <strong>not backward compatible</strong> to previous versions 2.X.Y od the Library.
+It is <strong>not backward compatible</strong> to previous versions 2.X.Y of the Library.
 </p>
 
 <p>
@@ -1702,22 +1706,34 @@ This package contains the <strong>user's guide</strong> for
 the library and has the following content:
 </p>
 <ol>
-<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted\">Getting started</a>
+  <li>
+    <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.GettingStarted\">Getting started</a>
     contains an introduction to the most important features and how
-    to use them at hand of examples.</li>
-<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Requirements\">Requirements</a>
+    to use them by means of examples.
+  </li>
+  <li>
+    <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Requirements\">Requirements</a>
     sketches the requirements on a Modelica tool, in order that this library
-    can be utilized.</li>
-<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.The3clauseBSDLicense\">3-clause BSD License</a>
-    is the legal license text under which this library is submitted.</li>
-<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Literature\">References</a>
+    can be utilized.
+  </li>
+  <li>
+    <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.The3clauseBSDLicense\">3-clause BSD License</a>
+    is the legal license text under which this library is submitted.
+  </li>
+  <li>
+    <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Literature\">References</a>
     provides references that have been used to design and implement this
-    library.</li>
-<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ReleaseNotes\">Release Notes</a>
-    summarizes the differences between different versions of this library.</li>
-<li><a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Contact\">Contact</a>
+    library.
+  </li>
+  <li>
+    <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.ReleaseNotes\">Release Notes</a>
+    summarizes the differences between different versions of this library.
+  </li>
+  <li>
+    <a href=\"modelica://Modelica_LinearSystems2.UsersGuide.Contact\">Contact</a>
     provides information about the author of the library as well as
-    acknowledgments.</li>
+    acknowledgments.
+  </li>
 </ol>
 </html>"));
 end UsersGuide;
