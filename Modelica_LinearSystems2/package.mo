@@ -11,9 +11,9 @@ package Modelica_LinearSystems2 "Modelica_LinearSystems2 (version 3.0.0) - Analy
 annotation (
   preferredView="info",
   uses(
-    Complex(version="4.0.0"),
-    Modelica(version="4.0.0"),
-    DymolaCommands(version="1.17")),
+    Complex(version="4.1.0"),
+    Modelica(version="4.1.0"),
+    DymolaCommands(version="1.20")),
   version="3.0.0",
   versionDate="2024-06-26",
   dateModified = "2024-06-26 14:00:00Z",
