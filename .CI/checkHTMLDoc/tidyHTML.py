@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-Copyright (C) 2020-2024, Modelica Association and contributors
+Copyright (C) 2020-2026, Modelica Association and contributors
 All rights reserved.
 
 Check Modelica HTML documentation with HTML Tidy
