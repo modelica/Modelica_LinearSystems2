@@ -7,11 +7,12 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v6
         with:
           fetch-depth: 5
       - name: Setup python environment
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.8
       - name: Install python packages
@@ -24,7 +25,8 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v6
         with:
           fetch-depth: 5
       - name: Get moparser
@@ -38,15 +40,17 @@ jobs:
           echo "::add-matcher::./.github/moparser.json"
           ModelicaSyntaxChecker/Linux64/moparser -v 3.6 -r Modelica_LinearSystems2 LinearSystems2Test LinearSystems2TestConversion3.mo ObsoleteLinearSystems2.mo
           echo "::remove-matcher owner=moparser::"
+
   deprecation_checks:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v6
         with:
           fetch-depth: 5
       - name: Setup python environment
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.8
       - name: Check deprecated Text.lineColor annotation
