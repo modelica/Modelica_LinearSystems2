@@ -31,9 +31,11 @@ The function is used to calculate the Kaiser-window via <em>calcWindow</em>.
 
 <h4><a name=\"References\">References</a></h4>
 <dl>
-<dt>[1] H. W. Press, S.A. Teukolsky, W. Vetterling:
-<dd><strong>Numerical Reciepes in C: The Art of Scientific Computing</strong><br>
-       Cambridge UP, 1988
+  <dt>[1] H. W. Press, S.A. Teukolsky, W. Vetterling:</dt>
+  <dd>
+    <strong>Numerical Reciepes in C: The Art of Scientific Computing</strong><br>
+    Cambridge UP, 1988
+  </dd>
 </dl>
 </html>", revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">

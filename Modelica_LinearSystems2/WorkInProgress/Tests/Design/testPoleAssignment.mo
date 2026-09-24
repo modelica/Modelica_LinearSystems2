@@ -93,12 +93,17 @@ algorithm
   annotation (Documentation(info="<html>
 <p>
 Computes the gain vector k for the state space system
+</p>
 <pre>
 ss = StateSpace(A=[-1,1;0,-2],B=[0, 1],C=[1,0; 0, 1],D=[0; 0])
 </pre>
+<p>
 such that for the state feedback
+</p>
 <pre>u = -k*y = -k*x</pre> the closed-loop
+<p>
 poles are placed at
+</p>
 <pre>p = {-3,-4}.</pre>
 </html>"));
 end testPoleAssignment;

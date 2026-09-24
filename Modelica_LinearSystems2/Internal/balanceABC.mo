@@ -170,9 +170,11 @@ err  = Matrices.norm(Diff);
 The algorithm is taken from
 </p>
 <dl>
-<dt>H. D. Joos, G. Grbel:
-<dd><strong>RAsP'91 Regulator Analysis and Synthesis Programs</strong><br>
+  <dt>H. D. Joos, G. Grbel:</dt>
+  <dd>
+    <strong>RAsP'91 Regulator Analysis and Synthesis Programs</strong><br>
     DLR - Control Systems Group 1991
+  </dd>
 </dl>
 <p>
 which is based on the <code>balance</code> function from EISPACK.
@@ -180,9 +182,7 @@ which is based on the <code>balance</code> function from EISPACK.
 </html>",
         revisions="<html>
 <ul>
-<li><em>Sept. 14, 2014</em>
-       by Martin Otter: Implemented.
-</li>
+  <li><em>Sept. 14, 2014</em> by Martin Otter: Implemented.</li>
 </ul>
 </html>"));
 end balanceABC;

@@ -124,5 +124,6 @@ algorithm
   annotation (Documentation(info="<html>
 <p>
 Computes the feedback gain K for the state space system according to assigned close loop poles
+</p>
 </html>"));
 end testPoleAssignment2;
