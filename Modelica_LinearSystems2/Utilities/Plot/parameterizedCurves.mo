@@ -3,13 +3,11 @@ function parameterizedCurves
   "Plot parametrized curve with one or more branches"
   extends Modelica.Icons.Function;
 
-  import Modelica_LinearSystems2;
-  import Modelica_LinearSystems2.Utilities.Plot.Internal;
+  import Modelica_LinearSystems2.Utilities.Plot;
 
-  input Modelica_LinearSystems2.Utilities.Plot.Records.ParametrizedCurves diagram
+  input Plot.Records.ParametrizedCurves diagram
     "Parametrized curve data points" annotation(Dialog);
-  input Modelica_LinearSystems2.Utilities.Plot.Records.Device device=
-    Modelica_LinearSystems2.Utilities.Plot.Records.Device()
+  input Plot.Records.Device device = Modelica_LinearSystems2.Utilities.Plot.Records.Device()
     "Properties of device where figure is shown" annotation(Dialog);
 
 protected
@@ -23,10 +21,8 @@ protected
   Integer nProperties=size(diagram.curveProperties,1);
   Integer nBranches=size(diagram.X,1);
   Integer colors[nBranches,3] "Line colors";
-  Modelica_LinearSystems2.Utilities.Plot.Types.LinePattern patterns[nBranches]
-    "Line patterns";
-  Modelica_LinearSystems2.Utilities.Plot.Types.PointSymbol symbols[nBranches]
-    "Line symbols";
+  Plot.Types.LinePattern patterns[nBranches] "Line patterns";
+  Plot.Types.PointSymbol symbols[nBranches] "Line symbols";
   Real thicknesses[nBranches] "Line thicknesses";
 algorithm
   // Create diagram
@@ -69,12 +65,12 @@ algorithm
   else
     for i in 1:nBranches loop
       k := i;
-      j :=mod(k, nProperties) + 1
+      j := mod(k, nProperties) + 1
         "if k is replaced by i, Dymola gives an error about assignment of Real to Integer";
-      colors[i,:]    :=diagram.curveProperties[j].lineColor;
-      patterns[i]    :=diagram.curveProperties[j].linePattern;
-      symbols[i]     :=diagram.curveProperties[j].lineSymbol;
-      thicknesses[i] :=diagram.curveProperties[j].lineThickness;
+      colors[i,:]    := diagram.curveProperties[j].lineColor;
+      patterns[i]    := diagram.curveProperties[j].linePattern;
+      symbols[i]     := diagram.curveProperties[j].lineSymbol;
+      thicknesses[i] := diagram.curveProperties[j].lineThickness;
     end for;
     DymolaCommands.Plot.plotParametricCurves(
       x=diagram.X,
@@ -87,8 +83,8 @@ algorithm
       id=id,
       labelWithS=diagram.labelWithS,
       colors=colors,
-      patterns=Internal.convertToDymolaPattern(patterns),
-      markers=Internal.convertToDymolaMarker(symbols),
+      patterns=Plot.Internal.convertToDymolaPattern(patterns),
+      markers=Plot.Internal.convertToDymolaMarker(symbols),
       thicknesses=thicknesses);
   end if;
 
